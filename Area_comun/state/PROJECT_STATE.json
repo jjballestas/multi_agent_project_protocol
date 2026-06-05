@@ -199,8 +199,8 @@
                          {
                              "id":  "TASK-0021",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Soft-checks higiene de mailbox (abierta por Claude; no bloquea v0.6.0)"
+                             "status":  "done",
+                             "title":  "Soft-checks de higiene de mailbox (SPEC-0021) - aceptada por Claude"
                          }
                      ],
     "open_questions":  [
@@ -214,6 +214,7 @@
                   "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos."
               ],
     "next_actions":  [
+                         "TASK-0021 en revision: Claude revisa soft-checks de higiene mailbox contra SPEC-0021.",
                          "v0.6.0 PUBLICADA (robustez operacional): TASK-0016..0020 done; CI completo + scan neutralidad, harness tolerantes a runtime, upgrade asistido (estado eliminado, paridad verificada por Codex), DECISION-0006/0007. Backlog: TASK-0021 (higiene mailbox, ready).",
                          "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.6.0 PUBLICADA. Fase P2 (adopcion/expansion) activa.",
                          "DECISION-0006 (robustez operacional) aceptada: CI completo + scan neutralidad, harness tolerantes a runtime (skip con aviso) y upgrade asistido entre versiones. Target v0.6.0 (aditivo/MINOR).",

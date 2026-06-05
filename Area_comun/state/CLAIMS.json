@@ -4,6 +4,42 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-review-task0021-claude",
+                       "task_id":  "TASK-0021",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/tasks/TASK-0021-codex-mailbox-hygiene-softchecks.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Ratificacion (arquitecto) de TASK-0021 contra SPEC-0021: golden cases verificados en .py por Claude (resolved/fyi warn, legitimate/legacy sin warn, sin regresion); paridad .ps1 atestiguada por Codex/CI. Liberado al dejar 0021 done."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0021-codex",
+                       "task_id":  "TASK-0021",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/validate_collaboration_state.py",
+                                     "scripts/validate_collaboration_state.ps1",
+                                     "examples/mailbox_hygiene_cases/",
+                                     "Area_comun/tasks/TASK-0021-codex-mailbox-hygiene-softchecks.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0021-codex-to-claude-1.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0021 en in_review con soft-checks mailbox, golden cases y handoff."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-release-v060-claude",
                        "task_id":  "TASK-0019",
                        "owner":  "Claude",
@@ -21,7 +57,7 @@
                        "started_at":  "2026-06-05",
                        "updated_at":  "2026-06-05",
                        "expires_at":  "2026-06-06",
-                       "notes":  "Cierre de release v0.6.0: ratifica 0019 (review-fix de Codex aceptado) y 0020 (DECISION-0007), CHANGELOG [Unreleased]->0.6.0, bump protocol_version, tag v0.6.0."
+                       "notes":  "Cierre de release v0.6.0: ratifica 0019 (review-fix de Codex aceptado) y 0020 (DECISION-0007), CHANGELOG [Unreleased]-\u003e0.6.0, bump protocol_version, tag v0.6.0."
                    },
                    {
                        "claim_id":  "CLAIM-20260605-TASK-0019-codex-review-fix-finalize",

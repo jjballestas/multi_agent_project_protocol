@@ -202,6 +202,17 @@ def is_compact_mailbox_message(content: str) -> bool:
     return any(has_markdown_field(content, field) for field in compact_fields)
 
 
+def get_markdown_field(content: str, field: str) -> str | None:
+    match = re.search(rf"^\s*{re.escape(field)}\s*:\s*(.*?)\s*$", content, flags=re.MULTILINE)
+    if not match:
+        return None
+    return match.group(1).strip().strip("\"'")
+
+
+def is_false_value(value: str | None) -> bool:
+    return isinstance(value, str) and value.strip().lower() == "false"
+
+
 def references_existing_work(content: str) -> bool:
     reference_patterns = (
         r"\bTASK-\d{4}\b",
@@ -513,6 +524,20 @@ def validate_mailbox(root: Path, validation: Validation) -> None:
         return
     for message_path in open_mailbox_dir.glob("MSG-*.md"):
         content = message_path.read_text(encoding="utf-8-sig")
+        message_status = (get_markdown_field(content, "status") or "").lower()
+        message_type = (get_markdown_field(content, "type") or "").upper()
+        requires_response = get_markdown_field(content, "requires_response")
+
+        if message_status in {"answered", "archived"}:
+            validation.warn(
+                "Mailbox message is resolved but still in open/; archive to answered/: "
+                f"{message_path.name}"
+            )
+        if message_type in {"ACK", "FYI"} and is_false_value(requires_response):
+            validation.warn(
+                "Mailbox message does not require response; consider archiving: "
+                f"{message_path.name}"
+            )
         if re.search(r"requires_response:\s*true", content):
             if not re.search(r"response_owner:\s*\S+", content):
                 validation.fail(

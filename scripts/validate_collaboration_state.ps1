@@ -211,6 +211,19 @@ function Test-CompactMailboxMessage {
     return $false
 }
 
+function Get-MarkdownField {
+    param(
+        [string]$Content,
+        [string]$Field
+    )
+    $pattern = "(?m)^\s*$([regex]::Escape($Field))\s*:\s*(.*?)\s*$"
+    $match = [regex]::Match($Content, $pattern)
+    if (-not $match.Success) {
+        return $null
+    }
+    return $match.Groups[1].Value.Trim().Trim("`"'")
+}
+
 function Test-ReferencesExistingWork {
     param([string]$Content)
     foreach ($pattern in @("\bTASK-\d{4}\b", "\bDECISION-\d{4}\b", "\bSPEC-\d{4}\b", "Area_comun/", "scripts/", "examples/", "README")) {
@@ -643,6 +656,18 @@ $openMailboxDir = Join-Path $resolvedRoot "Area_comun/mailbox/open"
 if (Test-Path -LiteralPath $openMailboxDir) {
     Get-ChildItem -LiteralPath $openMailboxDir -Filter "MSG-*.md" | ForEach-Object {
         $content = Get-Content -Raw -LiteralPath $_.FullName
+        $messageStatus = (Get-MarkdownField -Content $content -Field "status")
+        if ($messageStatus) { $messageStatus = $messageStatus.ToLower() }
+        $messageType = (Get-MarkdownField -Content $content -Field "type")
+        if ($messageType) { $messageType = $messageType.ToUpper() }
+        $requiresResponse = Get-MarkdownField -Content $content -Field "requires_response"
+
+        if ($messageStatus -in @("answered", "archived")) {
+            Warn "Mailbox message is resolved but still in open/; archive to answered/: $($_.Name)"
+        }
+        if (($messageType -in @("ACK", "FYI")) -and $requiresResponse -and $requiresResponse.ToLower() -eq "false") {
+            Warn "Mailbox message does not require response; consider archiving: $($_.Name)"
+        }
         if ($content -match 'requires_response:\s*true') {
             if ($content -notmatch 'response_owner:\s*\S+') {
                 Fail "Mailbox message requires response but has no response_owner: $($_.Name)"
