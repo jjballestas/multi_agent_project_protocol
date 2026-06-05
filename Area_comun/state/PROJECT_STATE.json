@@ -73,7 +73,8 @@
                       "DECISION-0004-sdd-pipeline-y-cierre",
                       "DECISION-0005-comunicacion-compacta-token-efficient",
                       "DECISION-0006-robustez-operacional",
-                      "DECISION-0007-claim-before-shared-draft"
+                      "DECISION-0007-claim-before-shared-draft",
+                      "DECISION-0008-eficiencia-de-tokens"
                   ],
     "active_tasks":  [
                          {
@@ -201,6 +202,12 @@
                              "owner":  "Codex",
                              "status":  "done",
                              "title":  "Soft-checks de higiene de mailbox (SPEC-0021) - aceptada por Claude"
+                         },
+                         {
+                             "id":  "TASK-0022",
+                             "owner":  "Claude",
+                             "status":  "ready",
+                             "title":  "Disenar eficiencia de tokens + baseline (DECISION-0008, target v0.7.0)"
                          }
                      ],
     "open_questions":  [

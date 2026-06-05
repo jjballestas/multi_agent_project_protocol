@@ -4,6 +4,23 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-decision0008-token-efficiency-claude",
+                       "task_id":  "TASK-0022",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/decisions/DECISION-0008-eficiencia-de-tokens.md",
+                                     "Area_comun/tasks/TASK-0022-claude-token-efficiency-diseno.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Gobernanza: DECISION-0008 (eficiencia de tokens medida) + TASK-0022 (diseno). No implementa scripts de medicion/poda (lane de Codex; specs las emite TASK-0022). Liberado al dejar 0022 ready."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-review-task0021-claude",
                        "task_id":  "TASK-0021",
                        "owner":  "Claude",
