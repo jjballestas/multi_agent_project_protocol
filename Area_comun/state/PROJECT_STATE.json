@@ -114,8 +114,8 @@
                          {
                              "id":  "TASK-0030",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Runtime M1: apply_turn + gate + commit/revert (SPEC-0029) - determinista, golden repo-fixture"
+                             "status":  "done",
+                             "title":  "Runtime M1: apply_turn + gate + commit/revert (SPEC-0029) - ACEPTADA por Claude (golden repo-fixture 4/4)"
                          },
                          {
                              "id":  "TASK-0031",
@@ -136,8 +136,8 @@
               ],
     "next_actions":  [
                          "v0.7.0 PUBLICADA: cierra el track de eficiencia de tokens (DECISION-0008: medidor 0023 + poda 0024 + frontmatter minimo 0025; cold-start -75%) e incluye, aditivo/off-by-default, el runtime M0 (0027) y claims por fila (0028).",
-                         "Codex: cola = TASK-0030 (runtime M1 apply+gate, SPEC-0029) -> TASK-0031 (runtime M1 loop, SPEC-0030). Deterministas (replay), golden sobre repo-fixture.",
-                         "Claude: revisar 0030/0031 al hand-off; derivar specs/tasks de runtime M2 tras aceptar M1. Proxima poda archiva la ventana reciente done."
+                         "TASK-0030 ACEPTADA (runtime M1 apply+gate+vcs). Codex: siguiente TASK-0031 (AgentAdapter + replay + loop --run, SPEC-0030) sobre HEAD.",
+                         "Claude: revisar 0031 al hand-off; tras aceptar M1 completo, derivar specs/tasks de runtime M2. Proxima poda archiva la ventana reciente done."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-05",

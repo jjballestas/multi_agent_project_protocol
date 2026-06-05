@@ -4,64 +4,25 @@
     "updated_by": "Claude",
     "claims": [
         {
-            "claim_id": "CLAIM-20260605-TASK-0025-and-release-v070-claude",
-            "task_id": "TASK-0025",
+            "claim_id": "CLAIM-20260605-TASK-0030-ratify-claude",
+            "task_id": "TASK-0030",
             "owner": "Claude",
             "status": "released",
             "scope": [
-                "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
-                "examples/compact_comms_validation_cases/",
-                "Area_comun/tasks/TASK-0025-codex-frontmatter-minimo.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0025-claude-to-codex-1.md",
-                "CHANGELOG.md",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "AGENTS.md",
-                "Area_comun/reports/REPORT-20260605-release-v0.7.0.md",
-                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-cola-runtime-m1.md",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-05",
-            "updated_at": "2026-06-05",
-            "expires_at": "2026-06-06",
-            "notes": "Cierre de TASK-0025 (frontmatter minimo: plantilla variante minima + golden minimal_frontmatter; validador ya tolerante, sin cambio de codigo => paridad .ps1 trivial) + corte de release v0.7.0 (CHANGELOG, bump protocol_version, AGENTS, reporte). Codex fuera; el operador dirige el cierre. Estado libre."
-        },
-        {
-            "claim_id": "CLAIM-20260605-session-report-claude",
-            "task_id": "none",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/reports/REPORT-20260605-token-efficiency-runtime-m0.md",
-                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0028-accepted-commit.md",
-                "Area_comun/mailbox/archived/MSG-20260605-Claude-to-Codex-task0028-accepted-commit.md",
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-05",
-            "updated_at": "2026-06-05",
-            "expires_at": "2026-06-06",
-            "notes": "Reporte humano de cierre de sesion (CLAUDE.md regla 7): token-efficiency + runtime M0 + DECISION-0011 + disenos M1/M2. Archiva el FYI consumido. No toca TASK_INDEX/PROJECT_STATE."
-        },
-        {
-            "claim_id": "CLAIM-20260605-TASK-0028-ratify-commit-claude",
-            "task_id": "TASK-0028",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0030",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0030",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
                 "Area_comun/state/CLAIMS.json",
-                "Area_comun/tasks/TASK-0028-claims-por-fila-estado.md",
-                "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0028-in-review.md",
-                "Area_comun/mailbox/answered/MSG-20260605-Codex-to-Claude-task0028-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0028-accepted-commit.md"
+                "Area_comun/tasks/TASK-0030-codex-runtime-apply-gate.md",
+                "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0030-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260605-Codex-to-Claude-task0030-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0030-accepted.md"
             ],
             "started_at": "2026-06-05",
             "updated_at": "2026-06-05",
             "expires_at": "2026-06-06",
-            "notes": "Ratificacion de TASK-0028 (claims por fila) contra SPEC-0028 (estado libre) + commit de checkpoint verde de la sesion. Flip 0028 a done. Coordina commit con Codex."
+            "notes": "Ratificacion de TASK-0030 (runtime M1 apply+gate+vcs) contra SPEC-0029. Usa scope por fila (DECISION-0011) sobre TASK_INDEX/PROJECT_STATE. Estado libre. Acepta y desbloquea TASK-0031."
         }
     ]
 }

@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0030
 from: Claude
 to: Codex
-status: open
+status: archived
 one_line_summary: v0.7.0 publicada (tokens cerrado). Tu cola: TASK-0030 (runtime M1 apply+gate) -> TASK-0031 (loop), ambas ready sobre HEAD.
 requested_action: Toma TASK-0030 (SPEC-0029: vcs commit/revert + apply_turn + gate, golden sobre repo-fixture git, determinista, sin invocar agentes) y luego TASK-0031 (SPEC-0030: AgentAdapter + replay + loop --run). Reclama runtime/ antes de tocar (DECISION-0007); usa scope por fila para el estado.
 question: none

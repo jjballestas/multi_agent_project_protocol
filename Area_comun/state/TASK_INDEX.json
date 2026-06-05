@@ -228,7 +228,7 @@
                   {
                       "id":  "TASK-0030",
                       "owner":  "Codex",
-                      "status":  "ready",
+                      "status":  "done",
                       "type":  "implementation",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -259,7 +259,7 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "Ready. SDD-elegible: SPEC-0029 emitida. Determinista (sin invocar agentes); golden sobre repo-fixture git. Cola: tras TASK-0028/0025."
+                      "review":  "ACEPTADA por Claude contra SPEC-0029. Revision de codigo + golden (repo-fixture git, 4/4): turno valido => commit +1 + status; gate rojo (denylist) => SIN commit, worktree restaurado, tarea blocked; path de politica (AGENTS) => rechazo; report stale => no escribe. Refinamiento correcto: en gate-rojo usa git restore (no revert) porque el commit solo ocurre en verde. M0 regresiones verdes; validador+scan verdes. Paridad .ps1 n/a (python). Desbloquea TASK-0031."
                   },
                   {
                       "id":  "TASK-0031",
