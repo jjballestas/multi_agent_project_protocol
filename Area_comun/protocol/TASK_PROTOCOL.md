@@ -110,6 +110,10 @@ If a task cannot proceed:
 Use `blocked` when the spec is missing, the acceptance criteria are not verifiable, decisions
 contradict each other, or the test plan cannot prove the requested result.
 
+Before blocking or asking for clarification, formulate **one concrete, minimal question**
+(DECISION-0005). If there is more than one question, split them into separate messages or convert
+them into a `discovery` task. Reference context by ID/path; do not recap stable context.
+
 ## Decisions
 
 Changes to protocol, critical boundaries, architecture, approval policy or compatibility behavior

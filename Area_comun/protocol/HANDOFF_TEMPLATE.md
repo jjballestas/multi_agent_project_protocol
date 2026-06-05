@@ -2,6 +2,10 @@
 
 Save as `Area_comun/handoffs/HANDOFF-<TASKID>-<from>-to-<to>-<n>.md`.
 
+Compact (DECISION-0005): short summary, exact paths, referenced decisions/specs, validations run,
+residual risks and a single `requested_action`. Reference artifacts by ID/path; **do not copy long
+content that already lives in files** — link it instead.
+
 ```markdown
 ---
 handoff_id: HANDOFF-TASK-XXXX-<from>-to-<to>-01

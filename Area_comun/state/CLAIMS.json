@@ -4,6 +4,34 @@
     "updated_by":  "Claude",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-decision0005-compactcomms-claude",
+                       "task_id":  "TASK-0014",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/decisions/DECISION-0005-comunicacion-compacta-token-efficient.md",
+                                     "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
+                                     "Area_comun/protocol/COMMUNICATION_PROTOCOL.md",
+                                     "Area_comun/protocol/HANDOFF_TEMPLATE.md",
+                                     "Area_comun/protocol/TASK_PROTOCOL.md",
+                                     "Area_comun/protocol/TASK_TEMPLATE.md",
+                                     "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md",
+                                     "Area_comun/specs/SPEC-0014-compact-comms-validator.md",
+                                     "Area_comun/specs/SPEC-0015-compact-comms-example.md",
+                                     "Area_comun/tasks/TASK-0014-codex-compact-comms-validator.md",
+                                     "Area_comun/tasks/TASK-0015-codex-compact-comms-example.md",
+                                     "Area_comun/handoffs/HANDOFF-DECISION-0005-claude-to-codex-1.md",
+                                     "CHANGELOG.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Gobernanza+docs DECISION-0005 (comunicacion compacta): decision, MAILBOX_MESSAGE_TEMPLATE, updates de protocolo, specs y backlog TASK-0014/0015. El codigo del validador es TASK-0014 (Codex)."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-release-v040-claude",
                        "task_id":  "TASK-0012",
                        "owner":  "Claude",

@@ -68,6 +68,12 @@ For lightweight tasks:
 - `question_to_resolve`:
 - `closure_criterion`:
 
+## communication_budget
+- expected_messages:
+- required_handoffs:
+- escalation_owner:
+- compact_refs:
+
 ## definition_of_done
 - [ ] Specific verifiable condition.
 - [ ] Acceptance criteria satisfied.

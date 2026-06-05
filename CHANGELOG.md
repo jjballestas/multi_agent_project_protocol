@@ -13,9 +13,23 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
-## [Unreleased]
+## [Unreleased] — target v0.5.0 (compact communication)
 
-_No changes yet._
+### Added
+- **Compact, token-efficient communication policy**
+  ([DECISION-0005](Area_comun/decisions/DECISION-0005-comunicacion-compacta-token-efficient.md)):
+  reference canonical artifacts by ID/path, one intention (and one question) per message, send
+  deltas, close the loop with standard codes (`ACK`/`FYI`/`OK`/`REVIEW`/`CHANGES`/`BLOCKED`/`DONE`/
+  `DECISION_REQUIRED`/`HUMAN_REQUIRED`), move long content to artifacts/specs/reports/decisions.
+- New `Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md` (compact mailbox fields) and a
+  "Compact / token-efficient communication" section in `COMMUNICATION_PROTOCOL.md`.
+- `HANDOFF_TEMPLATE.md` (compact note), `TASK_PROTOCOL.md` (one concrete question before blocking),
+  `TASK_TEMPLATE.md` (`communication_budget`), `HUMAN_REPORT_TEMPLATE.md` (communication status).
+
+### Pending (for v0.5.0)
+- TASK-0014 (Codex): soft mailbox validations (`open`+`requires_response`⇒`requested_action`+`question`),
+  additive, `.py`↔`.ps1` parity, no length checks, historical messages exempt.
+- TASK-0015 (Codex): `examples/compact_communication_case`.
 
 ## [0.4.0] — 2026-06-05
 

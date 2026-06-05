@@ -36,6 +36,12 @@ Concrete approvals or answers.
 ## 8. Risks Or Ambiguities
 Known risks, open questions or unclear requirements in plain language.
 
-## 9. Details
+## 9. Communication Status
+Compact summary (DECISION-0005), references only — no long conversations:
+- Open messages (requiring response):
+- Active blocks:
+- Decisions required / human-required:
+
+## 10. Details
 Links to specs, tasks, handoffs, decisions, reports and technical artifacts.
 ```

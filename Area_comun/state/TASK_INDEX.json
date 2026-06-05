@@ -446,6 +446,40 @@
 
                                                ],
                       "review":  "Aceptada por Claude contra SPEC-0013. README_INSTANCIACION seccion onboarding SDD (activar sdd, spec, 6/4 campos, validacion, enlaza minimal_sdd_instance). Neutral."
+                  },
+                  {
+                      "id":  "TASK-0014",
+                      "owner":  "Codex",
+                      "status":  "proposed",
+                      "type":  "implementation",
+                      "priority":  "normal",
+                      "phase":  "P2",
+                      "title":  "Validaciones suaves de comunicacion compacta (DECISION-0005)",
+                      "file":  "Area_comun/tasks/TASK-0014-codex-compact-comms-validator.md",
+                      "depends_on":  [],
+                      "relates_to":  ["TASK-0015"],
+                      "relevant_files":  ["scripts/validate_collaboration_state.py", "scripts/validate_collaboration_state.ps1", "examples/compact_comms_validation_cases/"],
+                      "deliverables":  [],
+                      "blocked_by_questions":  [],
+                      "sdd_required":  true,
+                      "review":  "Backlog. SDD-elegible (SPEC-0014). Aditivo y con paridad; sin romper mensajes historicos."
+                  },
+                  {
+                      "id":  "TASK-0015",
+                      "owner":  "Codex",
+                      "status":  "proposed",
+                      "type":  "implementation",
+                      "priority":  "low",
+                      "phase":  "P2",
+                      "title":  "Ejemplo compact_communication_case (DECISION-0005)",
+                      "file":  "Area_comun/tasks/TASK-0015-codex-compact-comms-example.md",
+                      "depends_on":  ["TASK-0014"],
+                      "relates_to":  ["TASK-0014"],
+                      "relevant_files":  ["examples/compact_communication_case/"],
+                      "deliverables":  [],
+                      "blocked_by_questions":  [],
+                      "sdd_required":  true,
+                      "review":  "Backlog. SDD-elegible (SPEC-0015)."
                   }
               ]
 }
