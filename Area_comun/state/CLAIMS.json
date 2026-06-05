@@ -1,6 +1,26 @@
-{
-  "schema_version": "1.0",
-  "updated_at": "2026-06-05",
-  "updated_by": "Claude",
-  "claims": []
+﻿{
+    "schema_version":  "1.0",
+    "updated_at":  "2026-06-05",
+    "updated_by":  "Codex",
+    "claims":  [
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0002-codex",
+                       "task_id":  "TASK-0002",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/",
+                                     ".github/workflows/",
+                                     "Area_comun/tasks/TASK-0002-codex-cross-platform-validator-ci.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0002 en in_review."
+                   }
+               ]
 }

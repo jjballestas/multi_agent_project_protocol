@@ -1,7 +1,7 @@
----
+﻿---
 id: TASK-0002
 owner: Codex
-status: ready
+status: in_review
 priority: high
 created_at: 2026-06-05
 updated_at: 2026-06-05
@@ -10,7 +10,7 @@ relates_to: [TASK-0001]
 phase: P0
 ---
 
-# TASK-0002 — Validador multiplataforma (Python) + workflow de CI
+# TASK-0002 - Validador multiplataforma (Python) + workflow de CI
 
 ## objetivo
 Dar al protocolo un **validador multiplataforma** (hoy solo existe el de PowerShell, atado a
@@ -36,12 +36,12 @@ en cualquier SO.
 - Handoff a Claude para revision cruzada.
 
 ## definition_of_done
-- [ ] El validador Python da el MISMO veredicto que el .ps1 sobre `examples/minimal_instance`
+- [x] El validador Python da el MISMO veredicto que el .ps1 sobre `examples/minimal_instance`
       (OK) y detecta los mismos fallos en casos negativos.
-- [ ] CI corre el validador en push/PR y queda verde.
-- [ ] Sin dependencias pesadas (stdlib si es posible); multiplataforma.
-- [ ] Mantiene neutralidad de dominio; sin secretos.
-- [ ] Reclamar en `CLAIMS.json` (scope `scripts/`, `.github/`) antes de editar; handoff autocontenido.
+- [x] CI corre el validador en push/PR y queda verde.
+- [x] Sin dependencias pesadas (stdlib si es posible); multiplataforma.
+- [x] Mantiene neutralidad de dominio; sin secretos.
+- [x] Reclamar en `CLAIMS.json` (scope `scripts/`, `.github/`) antes de editar; handoff autocontenido.
 
 ## riesgos
 - Divergencia de logica entre .ps1 y .py: documentar la paridad y, si se desea, deprecar uno.
@@ -49,3 +49,9 @@ en cualquier SO.
 ## preguntas_abiertas
 - ¿Mantener ambos validadores (.ps1 + .py) o deprecar el .ps1? Proponer en el handoff; decision
   del operador/Claude.
+
+## notas_de_ejecucion
+- 2026-06-05 Codex implementa `scripts/validate_collaboration_state.py` con stdlib, agrega
+  `.github/workflows/validate.yml`, valida raiz y ejemplo con PowerShell/Python, y prueba casos
+  negativos temporales.
+

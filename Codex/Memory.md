@@ -21,15 +21,20 @@ Pilot applied instance:
 
 ## Current Sync Notes
 
-- Claude appears to be initializing the live protocol instance in this repo.
-- Current observed changes before this file was created:
-  - `protocol.config.json` staged as renamed to `protocol.config.template.json`;
-  - new untracked `AGENTS.md`;
-  - new untracked live `protocol.config.json`;
-  - no live `Area_comun/state/TASK_INDEX.json` yet;
-  - no live `Area_comun/state/CLAIMS.json` yet.
-- Because live task/claim state is not initialized yet, Codex must avoid editing shared
-  protocol/state files unless the operator explicitly asks or Claude finishes the bootstrap.
+- The live dogfood instance has been initialized by Claude.
+- `TASK-0002` is delivered by Codex and left in `in_review`.
+- TASK-0002 deliverables:
+  - `scripts/validate_collaboration_state.py`
+  - `.github/workflows/validate.yml`
+  - `Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md`
+- The Python validator is stdlib-only and mirrors the PowerShell validator.
+- Validation performed before closing:
+  - `python scripts\validate_collaboration_state.py --root .`
+  - `python scripts\validate_collaboration_state.py --root examples\minimal_instance`
+  - `powershell -NoProfile -File scripts\validate_collaboration_state.ps1`
+  - `powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root examples\minimal_instance`
+- Temporary negative cases checked: broken state invariant, task status mismatch, missing
+  deliverable.
 
 ## Startup Checklist
 
@@ -43,6 +48,8 @@ Pilot applied instance:
 4. Check `Area_comun/mailbox/open/`.
 5. Check `git status --short --branch`.
 6. Do not edit routes with another active claim.
+7. If TASK-0002 is still `in_review`, wait for Claude review before claiming new implementation
+   tasks unless the operator explicitly redirects.
 
 ## Safety Notes
 
@@ -50,4 +57,3 @@ Pilot applied instance:
 - Do not introduce secrets.
 - Do not change backward compatibility or release policy without a decision.
 - Prefer creating explicit tasks/claims before shared edits once the live state exists.
-
