@@ -1,59 +1,68 @@
-﻿{
-    "project":  "multi_agent_project_protocol",
-    "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version":  "0.1.0",
-    "phase":  {
-                  "id":  "P0",
-                  "name":  "Enriquecimiento del protocolo",
-                  "goal":  "Mejorar el protocolo (validador multiplataforma, CI, versionado/CHANGELOG, scaffolding, mas ejemplos y documentacion) manteniendo neutralidad de dominio.",
-                  "exit_criteria":  [
-                                        "Roadmap/backlog de enriquecimiento priorizado (TASK-0001)",
-                                        "Validador disponible multiplataforma + CI que valida en cada push/PR",
-                                        "Politica de versionado (SemVer) + CHANGELOG",
-                                        "v0.2.0 publicada"
-                                    ]
-              },
-    "status":  "active",
-    "agents":  {
-                   "architect":  "Claude",
-                   "implementer":  "Codex",
-                   "human_owner":  "operador humano"
-               },
-    "source_of_truth":  "AGENTS.md",
-    "domain_critical_boundaries":  "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
-    "released_versions":  [
-                              "v0.1.0"
-                          ],
-    "decisions":  [
-
-                  ],
-    "active_tasks":  [
-                         {
-                             "id":  "TASK-0001",
-                             "owner":  "Claude",
-                             "status":  "ready",
-                             "title":  "Roadmap y backlog de enriquecimiento del protocolo v0.2.0"
-                         },
-                         {
-                             "id":  "TASK-0002",
-                             "owner":  "Codex",
-                             "status":  "in_review",
-                             "title":  "Validador multiplataforma (Python) + workflow de CI"
-                         }
-                     ],
-    "open_questions":  [
-
-                       ],
-    "risks":  [
-                  "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision.",
-                  "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
-              ],
-    "next_actions":  [
-                         "Claude: revisar TASK-0002 (Python validator + CI).",
-                         "Claude: continuar TASK-0001 roadmap/backlog v0.2.0.",
-                         "Codex: esperar review o cambios antes de reclamar nueva tarea."
-                     ],
-    "created_at":  "2026-06-05",
-    "updated_at":  "2026-06-05",
-    "updated_by":  "Codex"
+{
+  "project": "multi_agent_project_protocol",
+  "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
+  "version": "0.1.0",
+  "phase": {
+    "id": "P0",
+    "name": "Enriquecimiento del protocolo",
+    "goal": "Mejorar el protocolo (validador multiplataforma, CI, versionado/CHANGELOG, scaffolding, mas ejemplos y documentacion) manteniendo neutralidad de dominio.",
+    "exit_criteria": [
+      "Roadmap/backlog de enriquecimiento priorizado (TASK-0001)",
+      "Validador disponible multiplataforma + CI que valida en cada push/PR",
+      "Politica de versionado (SemVer) + CHANGELOG",
+      "v0.2.0 publicada"
+    ]
+  },
+  "status": "active",
+  "agents": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "source_of_truth": "AGENTS.md",
+  "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
+  "released_versions": [
+    "v0.1.0"
+  ],
+  "decisions": [],
+  "active_tasks": [
+    {
+      "id": "TASK-0001",
+      "owner": "Claude",
+      "status": "done",
+      "title": "Roadmap y backlog de enriquecimiento v0.2.0"
+    },
+    {
+      "id": "TASK-0002",
+      "owner": "Codex",
+      "status": "done",
+      "title": "Validador multiplataforma (Python) + CI"
+    },
+    {
+      "id": "TASK-0003",
+      "owner": "Claude",
+      "status": "proposed",
+      "title": "Politica de versionado (SemVer) + CHANGELOG"
+    },
+    {
+      "id": "TASK-0004",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Script de scaffolding para instanciar"
+    }
+  ],
+  "open_questions": [],
+  "risks": [
+    "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision.",
+    "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
+  ],
+  "next_actions": [
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.1.0 publicado; fase P0.",
+    "Hecho: dogfooding del repo, TASK-0001 (roadmap, done), TASK-0002 (validador Python + CI, done).",
+    "Proximo backlog priorizado: TASK-0003 (Claude, SemVer+CHANGELOG) y TASK-0004 (Codex, scaffolding). Paralelizables.",
+    "Candidatos futuros v0.2.0 en Area_comun/artifacts/ROADMAP-v0.2.0.md."
+  ],
+  "created_at": "2026-06-05",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude"
 }

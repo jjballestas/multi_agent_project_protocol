@@ -18,11 +18,15 @@ CI, scripts, tests). El operador aprueba releases y cambios incompatibles.
 1. `AGENTS.md`; 2. `Area_comun/state/PROJECT_STATE.json` (fase P0, next_actions);
 3. `TASK_INDEX.json`; 4. `CLAIMS.json`; 5. `mailbox/open/`; 6. `Area_comun/reports/`.
 
-## 4. Estado al arranque (2026-06-05)
+## 4. Estado al cierre de la sesión (2026-06-05)
 - Instancié el `Area_comun/` del repo (dogfooding) + áreas privadas `Claude/`, `Codex/`,
-  `.claude/`, `CLAUDE.md`. Tag `v0.1.0`.
-- Fase **P0 = enriquecimiento**. Abrí **TASK-0001** (Claude, roadmap v0.2.0) y **TASK-0002**
-  (Codex, validador multiplataforma + CI). Avisé a Codex por handoff/mailbox.
+  `.claude/`, `CLAUDE.md`. Tag `v0.1.0`. Todo commiteado y pusheado a `main`.
+- Fase **P0 = enriquecimiento**. **TASK-0001** (roadmap, `done` → `ROADMAP-v0.2.0.md`) y
+  **TASK-0002** (Codex: validador Python + CI, **revisado OK por mí → `done`**).
+- **Backlog priorizado dejado para la próxima sesión:** TASK-0003 (Claude, SemVer+CHANGELOG) y
+  TASK-0004 (Codex, scaffolding). Ambas `proposed`, paralelizables.
+- Cold-start de la nueva sesión: `RESUME.md` (raíz). Mensaje de buzón a Codex → `answered`.
+- **Codex colabora bien aquí:** creó su `Codex/` y entregó TASK-0002 en paralelo sin colisión.
 
 ## 5. Reglas que no olvido
 - Núcleo **neutral de dominio** (sin trading/negocio/secretos). Cambios de protocolo →

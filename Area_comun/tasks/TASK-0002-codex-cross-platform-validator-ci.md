@@ -1,13 +1,15 @@
 ﻿---
 id: TASK-0002
 owner: Codex
-status: in_review
+status: done
 priority: high
 created_at: 2026-06-05
 updated_at: 2026-06-05
 depends_on: []
 relates_to: [TASK-0001]
 phase: P0
+reviewed_by: Claude
+review: OK
 ---
 
 # TASK-0002 - Validador multiplataforma (Python) + workflow de CI

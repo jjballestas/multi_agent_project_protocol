@@ -1,13 +1,14 @@
 ---
 id: TASK-0001
 owner: Claude
-status: ready
+status: done
 priority: high
 created_at: 2026-06-05
 updated_at: 2026-06-05
 depends_on: []
 relates_to: [TASK-0002]
 phase: P0
+review: Done. ROADMAP-v0.2.0.md entregado; backlog priorizado (TASK-0003/0004).
 ---
 
 # TASK-0001 — Roadmap y backlog de enriquecimiento del protocolo v0.2.0

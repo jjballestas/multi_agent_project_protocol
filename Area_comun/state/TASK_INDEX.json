@@ -1,88 +1,126 @@
-﻿{
-    "schema_version":  "1.0",
-    "updated_at":  "2026-06-05",
-    "updated_by":  "Codex",
-    "legend":  {
-                   "status":  [
-                                  "proposed",
-                                  "ready",
-                                  "claimed",
-                                  "in_progress",
-                                  "in_review",
-                                  "done",
-                                  "blocked",
-                                  "cancelled"
-                              ],
-                   "owner":  [
-                                 "Claude",
-                                 "Codex",
-                                 "operador humano"
-                             ],
-                   "priority":  [
-                                    "low",
-                                    "normal",
-                                    "high",
-                                    "critical"
-                                ],
-                   "phase":  [
-                                 "P0 = enriquecimiento del protocolo"
-                             ]
-               },
-    "tasks":  [
-                  {
-                      "id":  "TASK-0001",
-                      "owner":  "Claude",
-                      "status":  "ready",
-                      "priority":  "high",
-                      "phase":  "P0",
-                      "title":  "Roadmap y backlog de enriquecimiento del protocolo v0.2.0",
-                      "file":  "Area_comun/tasks/TASK-0001-claude-roadmap-enriquecimiento.md",
-                      "depends_on":  [
-
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0002"
-                                     ],
-                      "relevant_files":  [
-                                             "Area_comun/",
-                                             "AGENTS.md"
-                                         ],
-                      "deliverables":  [
-                                           "Area_comun/artifacts/ROADMAP-v0.2.0.md",
-                                           "Area_comun/state/TASK_INDEX.json (poblado)"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ]
-                  },
-                  {
-                      "id":  "TASK-0002",
-                      "owner":  "Codex",
-                      "status":  "in_review",
-                      "priority":  "high",
-                      "phase":  "P0",
-                      "title":  "Validador multiplataforma (Python) equivalente al de PowerShell + workflow de CI",
-                      "file":  "Area_comun/tasks/TASK-0002-codex-cross-platform-validator-ci.md",
-                      "depends_on":  [
-
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0001"
-                                     ],
-                      "relevant_files":  [
-                                             "scripts/",
-                                             ".github/workflows/",
-                                             "examples/minimal_instance/"
-                                         ],
-                      "deliverables":  [
-                                           "scripts/validate_collaboration_state.py",
-                                           ".github/workflows/validate.yml",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "review":  "Entregado por Codex para revision de Claude. Python validator stdlib + CI workflow; positive parity and temporary negative checks passed."
-                  }
-              ]
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude",
+  "legend": {
+    "status": [
+      "proposed",
+      "ready",
+      "claimed",
+      "in_progress",
+      "in_review",
+      "done",
+      "blocked",
+      "cancelled"
+    ],
+    "owner": [
+      "Claude",
+      "Codex",
+      "operador humano"
+    ],
+    "priority": [
+      "low",
+      "normal",
+      "high",
+      "critical"
+    ],
+    "phase": [
+      "P0 = enriquecimiento del protocolo"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "TASK-0001",
+      "owner": "Claude",
+      "status": "done",
+      "priority": "high",
+      "phase": "P0",
+      "title": "Roadmap y backlog de enriquecimiento del protocolo v0.2.0",
+      "file": "Area_comun/tasks/TASK-0001-claude-roadmap-enriquecimiento.md",
+      "depends_on": [],
+      "relates_to": [
+        "TASK-0002"
+      ],
+      "relevant_files": [
+        "Area_comun/",
+        "AGENTS.md"
+      ],
+      "deliverables": [
+        "Area_comun/artifacts/ROADMAP-v0.2.0.md",
+        "Area_comun/state/TASK_INDEX.json"
+      ],
+      "blocked_by_questions": [],
+      "review": "Done por Claude: ROADMAP-v0.2.0.md + backlog priorizado (TASK-0003/0004)."
+    },
+    {
+      "id": "TASK-0002",
+      "owner": "Codex",
+      "status": "done",
+      "priority": "high",
+      "phase": "P0",
+      "title": "Validador multiplataforma (Python) equivalente al de PowerShell + workflow de CI",
+      "file": "Area_comun/tasks/TASK-0002-codex-cross-platform-validator-ci.md",
+      "depends_on": [],
+      "relates_to": [
+        "TASK-0001"
+      ],
+      "relevant_files": [
+        "scripts/",
+        ".github/workflows/",
+        "examples/minimal_instance/"
+      ],
+      "deliverables": [
+        "scripts/validate_collaboration_state.py",
+        ".github/workflows/validate.yml",
+        "Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md"
+      ],
+      "blocked_by_questions": [],
+      "review": "OK (aceptada por Claude). Paridad .py<->.ps1 verificada (4 comandos OK); CI correcto. Ver HANDOFF-TASK-0002-claude-to-codex-2. Acuerdo: mantener ambos validadores hasta v0.2.0."
+    },
+    {
+      "id": "TASK-0003",
+      "owner": "Claude",
+      "status": "proposed",
+      "priority": "high",
+      "phase": "P0",
+      "title": "Politica de versionado (SemVer) + CHANGELOG",
+      "file": "Area_comun/tasks/TASK-0003-claude-versioning-changelog.md",
+      "depends_on": [],
+      "relates_to": [
+        "TASK-0001",
+        "TASK-0002"
+      ],
+      "relevant_files": [
+        "CHANGELOG.md",
+        "Area_comun/decisions/"
+      ],
+      "deliverables": [
+        "CHANGELOG.md",
+        "Area_comun/decisions/DECISION-0001-versionado.md"
+      ],
+      "blocked_by_questions": []
+    },
+    {
+      "id": "TASK-0004",
+      "owner": "Codex",
+      "status": "proposed",
+      "priority": "normal",
+      "phase": "P0",
+      "title": "Script de scaffolding para instanciar un proyecto nuevo",
+      "file": "Area_comun/tasks/TASK-0004-codex-scaffolding-script.md",
+      "depends_on": [],
+      "relates_to": [
+        "TASK-0001"
+      ],
+      "relevant_files": [
+        "scripts/",
+        "README_INSTANCIACION.md"
+      ],
+      "deliverables": [
+        "scripts/new_instance.py",
+        "Area_comun/handoffs/HANDOFF-TASK-0004-codex-to-claude-1.md"
+      ],
+      "blocked_by_questions": []
+    }
+  ]
 }
