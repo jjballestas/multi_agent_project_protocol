@@ -49,8 +49,12 @@ DECISION-0003 y **publiqué v0.3.0**, cerrando la fase P1 (arquitectura de perfi
 ## 7. Things To Watch
 - **Neutralidad del core** en cada nuevo perfil/ejemplo (revisión de frontera del arquitecto).
 - **Paridad `.py`↔`.ps1`** del validador en futuros cambios (mantener golden cases).
-- No pude ejecutar el validador PowerShell en esta sesión (política del entorno); la paridad se
-  verificó por lectura del código y Codex la verificó con su harness.
+- ~~No pude ejecutar el validador PowerShell en esta sesión~~ **(actualizado 2026-06-05):** con
+  ejecución temporal de sesión (`-ExecutionPolicy Bypass`, autorizada por el operador humano) se
+  verificó la **paridad real `.py`↔`.ps1`**: exit codes y texto de mensajes idénticos en root,
+  las 3 instancias y los 6 golden cases. La habilitación **persistente** de PowerShell queda
+  pendiente de que el operador humano añada la regla de permiso (el agente no puede auto-modificar
+  `settings.json`).
 
 ## 8. Details
 - `CHANGELOG.md` (sección `[0.3.0]`)
