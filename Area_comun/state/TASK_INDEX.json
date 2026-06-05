@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude",
+  "legend": {
+    "status": ["proposed", "ready", "claimed", "in_progress", "in_review", "done", "blocked", "cancelled"],
+    "owner": ["Claude", "Codex", "operador humano"],
+    "priority": ["low", "normal", "high", "critical"],
+    "phase": ["P0 = enriquecimiento del protocolo"]
+  },
+  "tasks": [
+    {
+      "id": "TASK-0001",
+      "owner": "Claude",
+      "status": "ready",
+      "priority": "high",
+      "phase": "P0",
+      "title": "Roadmap y backlog de enriquecimiento del protocolo v0.2.0",
+      "file": "Area_comun/tasks/TASK-0001-claude-roadmap-enriquecimiento.md",
+      "depends_on": [],
+      "relates_to": ["TASK-0002"],
+      "relevant_files": ["Area_comun/", "AGENTS.md"],
+      "deliverables": ["Area_comun/artifacts/ROADMAP-v0.2.0.md", "Area_comun/state/TASK_INDEX.json (poblado)"],
+      "blocked_by_questions": []
+    },
+    {
+      "id": "TASK-0002",
+      "owner": "Codex",
+      "status": "ready",
+      "priority": "high",
+      "phase": "P0",
+      "title": "Validador multiplataforma (Python) equivalente al de PowerShell + workflow de CI",
+      "file": "Area_comun/tasks/TASK-0002-codex-cross-platform-validator-ci.md",
+      "depends_on": [],
+      "relates_to": ["TASK-0001"],
+      "relevant_files": ["scripts/", ".github/workflows/", "examples/minimal_instance/"],
+      "deliverables": ["scripts/validate_collaboration_state.py", ".github/workflows/validate.yml", "Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md"],
+      "blocked_by_questions": []
+    }
+  ]
+}

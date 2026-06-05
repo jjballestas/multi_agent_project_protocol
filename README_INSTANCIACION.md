@@ -9,6 +9,7 @@ handoffs y validacion de estado. El dominio de cada proyecto se declara en la in
 1. Copia el contenido de `protocol_template/` a la raiz del nuevo repo.
 2. Copia estos archivos master para crear los archivos vivos de la instancia:
    - `AGENTS.template.md` -> `AGENTS.md`
+   - `protocol.config.template.json` -> `protocol.config.json`
    - `Area_comun/README.template.md` -> `Area_comun/README.md`
    - `Area_comun/state/PROJECT_STATE.template.json` -> `Area_comun/state/PROJECT_STATE.json`
    - `Area_comun/state/TASK_INDEX.template.json` -> `Area_comun/state/TASK_INDEX.json`
@@ -75,7 +76,12 @@ powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root examp
 
 ## 7. Convencion de archivos template
 
-En la raiz de `protocol_template/`, los archivos con sufijo `.template.*` son los unicos masters
-para contenido que debe rellenarse por proyecto. Los archivos canonicos sin sufijo (`AGENTS.md`,
-`PROJECT_STATE.json`, etc.) solo viven dentro de instancias reales, como
-`examples/minimal_instance/`, para evitar drift entre dos fuentes equivalentes.
+Los archivos con sufijo `.template.*` son los unicos masters para contenido que se rellena por
+proyecto. Para un proyecto NUEVO, los canonicos sin sufijo (`AGENTS.md`, `protocol.config.json`,
+`PROJECT_STATE.json`, etc.) se crean en la instancia, no se mantienen como copia duplicada de la
+plantilla.
+
+**Excepcion — dogfooding de este repo:** `multi_agent_project_protocol` aplica su propio
+protocolo a su desarrollo, por lo que aqui SI conviven los `.template.*` (masters publicados) con
+los canonicos vivos (la instancia de este repo) y `examples/minimal_instance/` (instancia de
+ejemplo). No es drift: cada par tiene un proposito distinto (master publicado vs estado vivo).

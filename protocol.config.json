@@ -1,20 +1,19 @@
 {
   "schema_version": "1.0",
-  "project_name": "{{PROJECT_NAME}}",
+  "project_name": "multi_agent_project_protocol",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
-    "architect": "{{AGENT_ARCHITECT}}",
-    "implementer": "{{AGENT_IMPLEMENTER}}",
-    "human_owner": "{{HUMAN_OWNER}}"
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
   },
-  "quality_gates": ["{{QUALITY_GATES}}"],
-  "human_approval_points": ["{{HUMAN_APPROVAL_POINTS}}"],
+  "quality_gates": ["validador_verde", "neutralidad_de_dominio"],
+  "human_approval_points": ["cambios_incompatibles_de_protocolo", "publicacion_de_version_mayor"],
   "state_invariants": [
     {
       "path": "status",
       "equals": "active",
-      "description": "Template example invariant. Replace or remove in each project."
+      "description": "El proyecto del protocolo debe permanecer activo."
     }
   ]
 }
-
