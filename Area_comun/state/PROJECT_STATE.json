@@ -1,7 +1,7 @@
 {
   "project": "multi_agent_project_protocol",
   "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "phase": {
     "id": "P2",
     "name": "Adopcion y expansion",
@@ -55,7 +55,8 @@
     "v0.1.0",
     "v0.2.0",
     "v0.3.0",
-    "v0.4.0"
+    "v0.4.0",
+    "v0.5.0"
   ],
   "decisions": [
     "DECISION-0001-versionado",
@@ -152,8 +153,8 @@
     {
       "id": "TASK-0015",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Ejemplo compact_communication_case (DECISION-0005, target v0.5.0)"
+      "status": "done",
+      "title": "Ejemplo compact_communication_case (DECISION-0005) - aceptada"
     }
   ],
   "open_questions": [],
@@ -162,11 +163,10 @@
     "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
   ],
   "next_actions": [
-    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.4.0 PUBLICADA; subfase P2.SDD CERRADA. Fase P2 (adopcion/expansion) activa.",
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.5.0 PUBLICADA. Fase P2 (adopcion/expansion) activa, sin tareas en curso.",
     "SDD completo y publicado (TASK-0008..0013 done): gate previo a implementacion, config-gated (sdd.enabled, off por defecto), validadores con paridad, ejemplo minimal_sdd_instance.",
-    "DECISION-0005 (comunicacion compacta) ACEPTADA + docs/templates incorporados (MAILBOX_MESSAGE_TEMPLATE, COMMUNICATION_PROTOCOL, HANDOFF/TASK_PROTOCOL/TASK_TEMPLATE/HUMAN_REPORT). Pendiente codigo: TASK-0014 (validador soft-checks) y TASK-0015 (ejemplo), Codex, SDD-elegibles.",
-    "Al cerrar TASK-0014/0015: publicar v0.5.0 (MINOR). Ver HANDOFF-DECISION-0005-claude-to-codex-1.",
-    "P2 backlog abierto: adopcion en instancias reales (bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs.",
+    "v0.5.0 PUBLICADA: comunicacion compacta token-efficient (DECISION-0005 + TASK-0014 validador soft-checks + TASK-0015 ejemplo). TASK-0001..0015 todas done.",
+    "P2 backlog abierto (sin tareas activas): adopcion en instancias reales (bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs. Crear tareas (con SDD) cuando surja necesidad.",
     "Mantener: cada cambio aditivo y neutral; releases MINOR sin aprobacion humana, MAJOR/v1.0.0 con aprobacion (DECISION-0001)."
   ],
   "created_at": "2026-06-05",

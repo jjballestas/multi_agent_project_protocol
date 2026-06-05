@@ -13,23 +13,36 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
-## [Unreleased] — target v0.5.0 (compact communication)
+## [Unreleased]
+
+_No changes yet._
+
+## [0.5.0] — 2026-06-05
+
+Compact, token-efficient agent communication: reference canonical artifacts instead of
+reconstructing context in long conversations. **MINOR** release — additive, neutral, no length
+limits, historical messages and handoffs remain valid.
 
 ### Added
-- **Compact, token-efficient communication policy**
+- **Compact communication policy**
   ([DECISION-0005](Area_comun/decisions/DECISION-0005-comunicacion-compacta-token-efficient.md)):
-  reference canonical artifacts by ID/path, one intention (and one question) per message, send
-  deltas, close the loop with standard codes (`ACK`/`FYI`/`OK`/`REVIEW`/`CHANGES`/`BLOCKED`/`DONE`/
-  `DECISION_REQUIRED`/`HUMAN_REQUIRED`), move long content to artifacts/specs/reports/decisions.
-- New `Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md` (compact mailbox fields) and a
-  "Compact / token-efficient communication" section in `COMMUNICATION_PROTOCOL.md`.
+  reference by ID/path, one intention (and one question) per message, send deltas, close the loop
+  with standard codes (`ACK`/`FYI`/`OK`/`REVIEW`/`CHANGES`/`BLOCKED`/`DONE`/`DECISION_REQUIRED`/
+  `HUMAN_REQUIRED`), move long content to artifacts/specs/reports/decisions.
+- New `Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md` and a "Compact / token-efficient
+  communication" section in `COMMUNICATION_PROTOCOL.md`.
 - `HANDOFF_TEMPLATE.md` (compact note), `TASK_PROTOCOL.md` (one concrete question before blocking),
   `TASK_TEMPLATE.md` (`communication_budget`), `HUMAN_REPORT_TEMPLATE.md` (communication status).
+- **Soft mailbox validations** (TASK-0014) in `validate_collaboration_state.py`/`.ps1`:
+  `open`+`requires_response:true` ⇒ `requested_action` and `question` (ERROR); missing `context_refs`
+  when referencing existing work (WARNING). Additive, `.py`↔`.ps1` parity, **no length checks**,
+  historical/legacy messages exempt. Golden cases in `examples/compact_comms_validation_cases/`.
+- **Reference instance** `examples/compact_communication_case/` (TASK-0015): compact mailbox
+  (REVIEW→OK) + compact handoff, validates green.
 
-### Pending (for v0.5.0)
-- TASK-0014 (Codex): soft mailbox validations (`open`+`requires_response`⇒`requested_action`+`question`),
-  additive, `.py`↔`.ps1` parity, no length checks, historical messages exempt.
-- TASK-0015 (Codex): `examples/compact_communication_case`.
+### Notes
+- MINOR per DECISION-0001 §4 (additive). Hardening (length limits, mandatory codes everywhere) would
+  be MAJOR (out of scope). Validators green on root + all examples + SDD and compact-comms golden cases.
 
 ## [0.4.0] — 2026-06-05
 
@@ -136,7 +149,8 @@ Initial extraction and bootstrap of the reusable, domain-neutral multi-agent pro
 - Reference instance `examples/minimal_instance/` (validates green).
 - PowerShell validator `scripts/validate_collaboration_state.ps1`.
 
-[Unreleased]: https://example.invalid/compare/v0.4.0...HEAD
+[Unreleased]: https://example.invalid/compare/v0.5.0...HEAD
+[0.5.0]: https://example.invalid/compare/v0.4.0...v0.5.0
 [0.4.0]: https://example.invalid/compare/v0.3.0...v0.4.0
 [0.3.0]: https://example.invalid/compare/v0.2.0...v0.3.0
 [0.2.0]: https://example.invalid/compare/v0.1.0...v0.2.0

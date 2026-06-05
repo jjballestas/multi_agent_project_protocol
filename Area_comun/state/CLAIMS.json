@@ -4,6 +4,44 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-release-v050-claude",
+                       "task_id":  "TASK-0015",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "AGENTS.md",
+                                     "protocol.config.json",
+                                     "Area_comun/tasks/TASK-0015-codex-compact-comms-example.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0015-claude-to-codex-1.md",
+                                     "Area_comun/reports/REPORT-20260605-release-v0.5.0.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Cierre de TASK-0015 y publicacion de v0.5.0 (comunicacion compacta)."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0015-codex",
+                       "task_id":  "TASK-0015",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "examples/compact_communication_case/",
+                                     "Area_comun/tasks/TASK-0015-codex-compact-comms-example.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0015-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0015 en in_review con compact_communication_case y handoff."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-review-task0014-claude",
                        "task_id":  "TASK-0014",
                        "owner":  "Claude",

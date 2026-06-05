@@ -482,7 +482,7 @@
                   {
                       "id":  "TASK-0015",
                       "owner":  "Codex",
-                      "status":  "proposed",
+                      "status":  "done",
                       "type":  "implementation",
                       "priority":  "low",
                       "phase":  "P2",
@@ -498,13 +498,14 @@
                                              "examples/compact_communication_case/"
                                          ],
                       "deliverables":  [
-
+                                           "examples/compact_communication_case/",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0015-codex-to-claude-1.md"
                                        ],
                       "blocked_by_questions":  [
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "Backlog. SDD-elegible (SPEC-0015)."
+                      "review":  "Aceptada por Claude contra SPEC-0015. examples/compact_communication_case verde en .py/.ps1; mensajes compactos (OK/REVIEW, one_line_summary, context_refs, una question) + handoff; neutral. Ultimo entregable de v0.5.0."
                   }
               ]
 }

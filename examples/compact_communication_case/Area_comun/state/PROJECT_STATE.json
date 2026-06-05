@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "project": "compact_communication_case",
+  "description": "Neutral compact communication example.",
+  "status": "active",
+  "phase": {
+    "id": "EXAMPLE",
+    "name": "Example phase",
+    "goal": "Demonstrate compact communication.",
+    "exit_criteria": ["validator passes"]
+  },
+  "agents": {
+    "architect": "architect_agent",
+    "implementer": "implementer_agent",
+    "human_owner": "human_owner"
+  },
+  "source_of_truth": "AGENTS.md",
+  "decisions": [],
+  "active_tasks": [
+    {
+      "id": "TASK-0001",
+      "owner": "implementer_agent",
+      "status": "in_review",
+      "title": "Demonstrate compact communication"
+    }
+  ],
+  "open_questions": [],
+  "risks": [],
+  "next_actions": [],
+  "created_at": "2026-06-05",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer_agent"
+}

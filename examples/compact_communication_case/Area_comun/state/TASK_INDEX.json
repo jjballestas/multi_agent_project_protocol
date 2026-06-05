@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer_agent",
+  "tasks": [
+    {
+      "id": "TASK-0001",
+      "owner": "implementer_agent",
+      "status": "in_review",
+      "priority": "normal",
+      "phase": "EXAMPLE",
+      "title": "Demonstrate compact communication",
+      "file": "Area_comun/tasks/TASK-0001-compact-communication.md",
+      "depends_on": [],
+      "relates_to": [],
+      "relevant_files": ["Area_comun/mailbox/", "Area_comun/handoffs/"],
+      "deliverables": ["Area_comun/handoffs/HANDOFF-TASK-0001-implementer-to-architect-1.md"],
+      "blocked_by_questions": []
+    }
+  ]
+}

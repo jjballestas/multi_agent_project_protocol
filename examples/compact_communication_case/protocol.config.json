@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.5.0",
+  "project_name": "compact_communication_case",
+  "source_of_truth": "AGENTS.md",
+  "agent_roles": {
+    "architect": "architect_agent",
+    "implementer": "implementer_agent",
+    "human_owner": "human_owner"
+  },
+  "quality_gates": ["validator_green"],
+  "human_approval_points": ["critical_boundary_change"],
+  "state_invariants": [
+    {
+      "path": "status",
+      "equals": "active",
+      "description": "The example project must remain active."
+    }
+  ]
+}
