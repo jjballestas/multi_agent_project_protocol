@@ -1,7 +1,7 @@
 ---
 id: TASK-0022
 owner: Claude
-status: ready
+status: done
 type: analysis
 priority: normal
 created_at: 2026-06-05
@@ -37,4 +37,9 @@ closure_criterion: Specs publicadas y baseline capturado; tareas de implementaci
   obligatoria; solo se omiten opcionales vacíos.
 
 ## notas_de_ejecucion
-- (a completar por Claude al ejecutar) rutas de specs y diseño.
+- Diseño: `Area_comun/artifacts/DISENO-eficiencia-de-tokens.md` (metodología + baseline + 3 contratos).
+- **Baseline medido (2026-06-05, div 4):** cold-start 29.169 tok (CLAIMS 11.233 + TASK_INDEX 10.842 =
+  75%); CLAIMS 100% `released`; TASK_INDEX 95% `done`; frontmatter mailbox 65% relleno (ratio 1,9).
+- Specs: `SPEC-0023` (medidor), `SPEC-0024` (poda, mayor impacto), `SPEC-0025` (frontmatter mínimo).
+- TASK-0023/0024/0025 (Codex) creadas `ready`. Orden: 0023 → 0024 → 0025. Cada una reporta delta medido.
+- Validador verde tras los cambios.

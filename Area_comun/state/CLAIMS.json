@@ -4,6 +4,29 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-TASK-0022-exec-claude",
+                       "task_id":  "TASK-0022",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/artifacts/DISENO-eficiencia-de-tokens.md",
+                                     "Area_comun/specs/SPEC-0023-medidor-context-cost.md",
+                                     "Area_comun/specs/SPEC-0024-poda-estado-historico.md",
+                                     "Area_comun/specs/SPEC-0025-frontmatter-minimo.md",
+                                     "Area_comun/tasks/TASK-0022-claude-token-efficiency-diseno.md",
+                                     "Area_comun/tasks/TASK-0023-codex-medidor-context-cost.md",
+                                     "Area_comun/tasks/TASK-0024-codex-poda-estado-historico.md",
+                                     "Area_comun/tasks/TASK-0025-codex-frontmatter-minimo.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Ejecucion de TASK-0022: DISENO-eficiencia-de-tokens + SPEC-0023/0024/0025 + baseline. Promueve TASK-0023/0024/0025 (Codex, ready). Liberado al dejar 0022 done."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-decision0008-token-efficiency-claude",
                        "task_id":  "TASK-0022",
                        "owner":  "Claude",

@@ -711,7 +711,7 @@
                   {
                       "id":  "TASK-0022",
                       "owner":  "Claude",
-                      "status":  "ready",
+                      "status":  "done",
                       "type":  "analysis",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -735,7 +735,105 @@
                       "blocked_by_questions":  [
 
                                                ],
-                      "review":  "Ready. Ejecuta DECISION-0008: diseno + specs + baseline que desbloquean tareas de implementacion para Codex (medidor measure_context_cost, poda a historico, frontmatter minimo)."
+                      "review":  "Done por Claude. DISENO-eficiencia-de-tokens.md (baseline medido: cold-start 29.169 tok, CLAIMS 100% released, TASK_INDEX 95% done, frontmatter 65% relleno) + SPEC-0023/0024/0025 (ready). Promueve TASK-0023/0024/0025. Validador verde."
+                  },
+                  {
+                      "id":  "TASK-0023",
+                      "owner":  "Codex",
+                      "status":  "ready",
+                      "type":  "implementation",
+                      "priority":  "high",
+                      "phase":  "P2",
+                      "title":  "Medidor measure_context_cost (gate antes/despues) (DECISION-0008 §1/§4, target v0.7.0)",
+                      "spec_id":  "Area_comun/specs/SPEC-0023-medidor-context-cost.md",
+                      "file":  "Area_comun/tasks/TASK-0023-codex-medidor-context-cost.md",
+                      "depends_on":  [
+
+                                     ],
+                      "relates_to":  [
+                                         "TASK-0024",
+                                         "TASK-0025"
+                                     ],
+                      "relevant_files":  [
+                                             "scripts/measure_context_cost.py",
+                                             "scripts/measure_context_cost.ps1",
+                                             "protocol.config.template.json"
+                                         ],
+                      "deliverables":  [
+                                           "scripts/measure_context_cost.py",
+                                           "scripts/measure_context_cost.ps1",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0023-codex-to-claude-1.md"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
+                      "sdd_required":  true,
+                      "review":  "Ready. SDD-elegible: SPEC-0023 emitida. Primero del lote v0.7.0 (sin medidor no hay before/after)."
+                  },
+                  {
+                      "id":  "TASK-0024",
+                      "owner":  "Codex",
+                      "status":  "ready",
+                      "type":  "implementation",
+                      "priority":  "high",
+                      "phase":  "P2",
+                      "title":  "Poda de estado a historico (CLAIMS/TASK_INDEX _ARCHIVE) - mayor impacto (DECISION-0008 §2, target v0.7.0)",
+                      "spec_id":  "Area_comun/specs/SPEC-0024-poda-estado-historico.md",
+                      "file":  "Area_comun/tasks/TASK-0024-codex-poda-estado-historico.md",
+                      "depends_on":  [
+                                         "TASK-0023"
+                                     ],
+                      "relates_to":  [
+                                         "TASK-0025"
+                                     ],
+                      "relevant_files":  [
+                                             "Area_comun/state/CLAIMS_ARCHIVE.json",
+                                             "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                                             "scripts/validate_collaboration_state.py",
+                                             "scripts/validate_collaboration_state.ps1",
+                                             "AGENTS.md"
+                                         ],
+                      "deliverables":  [
+                                           "Area_comun/state/CLAIMS_ARCHIVE.json",
+                                           "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0024-codex-to-claude-1.md"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
+                      "sdd_required":  true,
+                      "review":  "Ready. SDD-elegible: SPEC-0024 emitida. Mayor ahorro (~-74% cold-start medido). Sin perdida (archivar != borrar)."
+                  },
+                  {
+                      "id":  "TASK-0025",
+                      "owner":  "Codex",
+                      "status":  "ready",
+                      "type":  "implementation",
+                      "priority":  "normal",
+                      "phase":  "P2",
+                      "title":  "Frontmatter de mailbox minimo, compatible hacia atras (DECISION-0008 §3, target v0.7.0)",
+                      "spec_id":  "Area_comun/specs/SPEC-0025-frontmatter-minimo.md",
+                      "file":  "Area_comun/tasks/TASK-0025-codex-frontmatter-minimo.md",
+                      "depends_on":  [
+                                         "TASK-0023"
+                                     ],
+                      "relates_to":  [
+                                         "TASK-0024"
+                                     ],
+                      "relevant_files":  [
+                                             "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
+                                             "scripts/validate_collaboration_state.py",
+                                             "scripts/validate_collaboration_state.ps1"
+                                         ],
+                      "deliverables":  [
+                                           "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0025-codex-to-claude-1.md"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
+                      "sdd_required":  true,
+                      "review":  "Ready. SDD-elegible: SPEC-0025 emitida. Aditivo y back-compat (legacy sigue valido)."
                   }
               ]
 }
