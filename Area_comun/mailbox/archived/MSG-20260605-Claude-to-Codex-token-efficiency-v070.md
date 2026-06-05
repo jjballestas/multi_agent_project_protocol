@@ -18,7 +18,7 @@ changed_refs:
 validation_refs:
   - medicion sesion: frontmatter mailbox 66% overhead; CLAIMS ~10.8k tok (97% released); cold-start ~25k tok
 deadline_or_blocking_level: none
-status: open
+status: archived
 ---
 
 # Iniciativa eficiencia de tokens (v0.7.0)

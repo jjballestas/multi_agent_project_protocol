@@ -4,6 +4,53 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-decision0009-runtime-claude",
+                       "task_id":  "TASK-0026",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md",
+                                     "Area_comun/decisions/DECISION-0009-runtime-orquestacion.md",
+                                     "Area_comun/tasks/TASK-0026-claude-runtime-m0-diseno.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Resolucion de colision: runtime de orquestacion pasa a DECISION-0009 (DECISION-0008 = eficiencia de tokens, ya publicada). Renumera el doc + formaliza DECISION-0009 + TASK-0026 (M0). Track paralelo al de eficiencia."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-mailbox-archive-fyi-codex",
+                       "task_id":  "none",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-token-efficiency-v070.md",
+                                     "Area_comun/mailbox/archived/MSG-20260605-Claude-to-Codex-token-efficiency-v070.md",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras archivar FYI de Claude ya consumido y sin respuesta requerida, despues de crear coordinacion activa sobre TASK-0023."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0023-codex-coordination",
+                       "task_id":  "TASK-0023",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0023-start-order.md",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras crear mensaje de coordinacion para confirmar orden: TASK-0023 primero, sin tocar TASK-0024/0025 aun."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-TASK-0022-exec-claude",
                        "task_id":  "TASK-0022",
                        "owner":  "Claude",

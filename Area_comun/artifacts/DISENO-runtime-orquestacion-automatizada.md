@@ -2,7 +2,7 @@
 
 > **Origen:** propuesta del **human owner** (entregada vía agente externo) para abrir la fase de
 > automatización. **No es todavía una decisión adoptada.** Antes de implementar, un agente debe:
-> (1) registrar `DECISION-0008` con aprobación humana (cambia el *modelo operativo*: hoy la
+> (1) registrar `DECISION-0009` con aprobación humana (cambia el *modelo operativo*: hoy la
 > coordinación es manual sobre ficheros; esto la vuelve autónoma), (2) crear un claim sobre las
 > rutas afectadas (DECISION-0007), (3) derivar las SPEC y TASK de la §7.
 >
@@ -169,11 +169,11 @@ class AgentAdapter(Protocol):
 
 > Pensado para trocearse en tareas pequeñas de un solo owner, con SDD activado.
 
-**DECISION-0008 — Adoptar runtime de orquestación automatizada (requiere aprobación humana).**
+**DECISION-0009 — Adoptar runtime de orquestación automatizada (requiere aprobación humana).**
 Fija: capa `runtime/` opt-in y off-by-default; ficheros como fuente de verdad; 1 turno = 1 commit;
 gates humanos como paradas duras; interfaz de adapter vendor-neutral. Por cambiar el modelo
 operativo, se trata como **MAJOR** candidato (o MINOR si se acepta que, al estar off-by-default, es
-aditivo) — **decisión del human owner en la propia DECISION-0008**.
+aditivo) — **decisión del human owner en la propia DECISION-0009**.
 
 | Hito | Tarea (owner) | Entregable | DoD |
 |---|---|---|---|
@@ -192,7 +192,7 @@ mailbox) → M3 (gates + observabilidad) → piloto con métricas.
 ## 8. Versionado y neutralidad
 
 - Si se publica **off-by-default**, es aditivo ⇒ candidato **v0.7.0 (MINOR)**, pero por cambiar el
-  modo de operar se **recomienda aprobación humana** igualmente (DECISION-0008).
+  modo de operar se **recomienda aprobación humana** igualmente (DECISION-0009).
 - Endurecer (auto-aplicar sin gate humano, quitar dry-run, escribir estado sin contrato de turno)
   sería **MAJOR**.
 - Ningún fichero de `runtime/` puede introducir términos de dominio en la superficie neutral (§1.1

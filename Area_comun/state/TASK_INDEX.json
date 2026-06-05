@@ -836,6 +836,35 @@
                                                ],
                       "sdd_required":  true,
                       "review":  "Ready. SDD-elegible: SPEC-0025 emitida. Aditivo y back-compat (legacy sigue valido)."
+                  },
+                  {
+                      "id":  "TASK-0026",
+                      "owner":  "Claude",
+                      "status":  "ready",
+                      "type":  "analysis",
+                      "priority":  "normal",
+                      "phase":  "P2",
+                      "title":  "Runtime M0: contrato de turno (turn_schema) + router determinista (DECISION-0009, target v0.8.0)",
+                      "file":  "Area_comun/tasks/TASK-0026-claude-runtime-m0-diseno.md",
+                      "depends_on":  [
+
+                                     ],
+                      "relates_to":  [
+
+                                     ],
+                      "relevant_files":  [
+                                             "Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md",
+                                             "Area_comun/specs/",
+                                             "runtime/"
+                                         ],
+                      "deliverables":  [
+                                           "Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md",
+                                           "runtime/turn_schema.json"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
+                      "review":  "Ready. Track runtime (DECISION-0009), paralelo al de eficiencia de tokens. M0: base del orquestador. Desbloquea implementacion de Codex (skeleton/adapters)."
                   }
               ]
 }
