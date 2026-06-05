@@ -1,7 +1,7 @@
 ﻿{
     "project":  "multi_agent_project_protocol",
     "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version":  "0.5.0",
+    "version":  "0.6.0",
     "phase":  {
                   "id":  "P2",
                   "name":  "Adopcion y expansion",
@@ -63,7 +63,8 @@
                               "v0.2.0",
                               "v0.3.0",
                               "v0.4.0",
-                              "v0.5.0"
+                              "v0.5.0",
+                              "v0.6.0"
                           ],
     "decisions":  [
                       "DECISION-0001-versionado",
@@ -187,13 +188,13 @@
                              "id":  "TASK-0019",
                              "owner":  "Claude",
                              "status":  "in_review",
-                             "title":  "Migracion/upgrade asistida entre versiones (SPEC-0019, target v0.6.0) - en revision; .py verificado, paridad .ps1 pendiente"
+                             "title":  "Migracion/upgrade asistida entre versiones (SPEC-0019, target v0.6.0) - paridad verificada, pendiente ratificacion Claude"
                          },
                          {
                              "id":  "TASK-0020",
                              "owner":  "Codex",
-                             "status":  "in_review",
-                             "title":  "Regla claim antes de borrador compartido (DECISION-0007) - en revision"
+                             "status":  "done",
+                             "title":  "Regla claim antes de borrador compartido (DECISION-0007) - ratificada por Claude"
                          },
                          {
                              "id":  "TASK-0021",
@@ -213,8 +214,8 @@
                   "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos."
               ],
     "next_actions":  [
-                         "TASK-0020 en revision: Claude revisa regla DECISION-0007 claim-before-shared-draft; si acepta, cerrar como parte de v0.6.0 aditiva.",
-                         "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.5.0 PUBLICADA. Fase P2 (adopcion/expansion) activa.",
+                         "v0.6.0 PUBLICADA (robustez operacional): TASK-0016..0020 done; CI completo + scan neutralidad, harness tolerantes a runtime, upgrade asistido (estado eliminado, paridad verificada por Codex), DECISION-0006/0007. Backlog: TASK-0021 (higiene mailbox, ready).",
+                         "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.6.0 PUBLICADA. Fase P2 (adopcion/expansion) activa.",
                          "DECISION-0006 (robustez operacional) aceptada: CI completo + scan neutralidad, harness tolerantes a runtime (skip con aviso) y upgrade asistido entre versiones. Target v0.6.0 (aditivo/MINOR).",
                          "TASK-0016 (Claude, analysis) DONE: DISENO-robustez-operacional.md + SPEC-0017/0018/0019 (ready). Define conjuntos neutral/adoptable. TASK-0017/0018/0019 promovidas a READY (Codex), orden sugerido 0018 -\u003e 0017 -\u003e 0019.",
                          "PROXIMO: Codex reclama e implementa TASK-0018/0017/0019 contra sus specs (SDD). Al cerrarlas, publicar v0.6.0 (MINOR, mover Unreleased en CHANGELOG + tag) con revision cruzada del arquitecto.",

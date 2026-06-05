@@ -59,7 +59,7 @@ def adoptable_globs(master: Path) -> list[str]:
 
 
 def collect_files(root: Path, globs: list[str]) -> set[str]:
-    """Rutas relativas (posix) de los archivos del master que matchean los globs adoptables."""
+    """Rutas relativas (posix) de los archivos que matchean los globs adoptables."""
     found: set[str] = set()
     for pattern in globs:
         for path in root.glob(pattern):
@@ -82,7 +82,9 @@ def classify(master: Path, instance: Path, rel_files: set[str]) -> list[tuple[st
     for rel in sorted(rel_files):
         m = master / rel
         i = instance / rel
-        if not i.exists():
+        if not m.exists() and i.exists():
+            rows.append((rel, "eliminado"))
+        elif not i.exists():
             rows.append((rel, "nuevo"))
         elif normalized(m) != normalized(i):
             rows.append((rel, "cambiado"))
@@ -92,13 +94,14 @@ def classify(master: Path, instance: Path, rel_files: set[str]) -> list[tuple[st
 
 
 def render_report(master_v: str, instance_v: str, rows: list[tuple[str, str]]) -> str:
-    counts = {"nuevo": 0, "cambiado": 0, "igual": 0}
+    counts = {"nuevo": 0, "cambiado": 0, "igual": 0, "eliminado": 0}
     for _, status in rows:
         counts[status] = counts.get(status, 0) + 1
     action = {
         "nuevo": "anadir a la instancia (decision de adopcion)",
         "cambiado": "revisar delta y decidir adopcion",
         "igual": "sin accion",
+        "eliminado": "revisar remocion del master y decidir retirada",
     }
     lines = [
         "# Reporte de adopcion asistida",
@@ -106,7 +109,8 @@ def render_report(master_v: str, instance_v: str, rows: list[tuple[str, str]]) -
         f"- Version de la instancia: `{instance_v}`",
         f"- Version del master: `{master_v}`",
         f"- Conjunto adoptable: {len(rows)} archivos "
-        f"(nuevo={counts['nuevo']}, cambiado={counts['cambiado']}, igual={counts['igual']})",
+        f"(nuevo={counts['nuevo']}, cambiado={counts['cambiado']}, "
+        f"igual={counts['igual']}, eliminado={counts['eliminado']})",
         "",
         "> La herramienta informa; la instancia adopta por decision (DECISION-0001). No se modifico nada.",
         "",
@@ -117,7 +121,7 @@ def render_report(master_v: str, instance_v: str, rows: list[tuple[str, str]]) -
         if status == "igual":
             continue
         lines.append(f"| `{rel}` | {status} | {action[status]} |")
-    if counts["nuevo"] == 0 and counts["cambiado"] == 0:
+    if counts["nuevo"] == 0 and counts["cambiado"] == 0 and counts["eliminado"] == 0:
         lines.append("| (ninguno) | igual | la instancia esta al dia |")
     return "\n".join(lines) + "\n"
 
@@ -140,7 +144,8 @@ def main(argv: list[str] | None = None) -> int:
 
     master_v = read_protocol_version(master)
     instance_v = read_protocol_version(instance)
-    rel_files = collect_files(master, adoptable_globs(master))
+    globs = adoptable_globs(master)
+    rel_files = collect_files(master, globs) | collect_files(instance, globs)
     rows = classify(master, instance, rel_files)
     report = render_report(master_v, instance_v, rows)
 

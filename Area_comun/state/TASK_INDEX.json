@@ -572,7 +572,7 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0017. Verificacion independiente (.py): scan repo exit 0 (25 archivos neutrales reales escaneados, no vacuo); fixtures clean=0/domain_term=1 con hallazgo correcto; CI cubre los 9 pasos (validate.py x2, validate.ps1 x2, harness SDD/compacto/neutralidad, scan .py/.ps1) => honra AGENTS.md §5. Paridad .ps1 atestiguada por Codex + CI (no ejecutada por Claude: deny-rule PowerShell). NOTA menor no bloqueante: profiles/PROFILE_TEMPLATE/** queda eclipsado por exempt profiles/** (no se escanea); afinar en follow-up."
+                      "review":  "ACEPTADA por Claude contra SPEC-0017. Verificacion independiente (.py): scan repo exit 0 (25 archivos neutrales reales escaneados, no vacuo); fixtures clean=0/domain_term=1 con hallazgo correcto; CI cubre los 9 pasos (validate.py x2, validate.ps1 x2, harness SDD/compacto/neutralidad, scan .py/.ps1) =\u003e honra AGENTS.md §5. Paridad .ps1 atestiguada por Codex + CI (no ejecutada por Claude: deny-rule PowerShell). NOTA menor no bloqueante: profiles/PROFILE_TEMPLATE/** queda eclipsado por exempt profiles/** (no se escanea); afinar en follow-up."
                   },
                   {
                       "id":  "TASK-0018",
@@ -603,12 +603,12 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0018. Revision de codigo: Resolve-Runtime con fallback (python/py -3/python3; pwsh/powershell), SKIPPED(WARNING) por runtime ausente, paridad solo si ambos, exit 1 solo por logica o sin runtime, RESUMEN siempre; mismo patron en harness compacto y neutralidad. Desviacion JUSTIFICADA y documentada: powershell.exe 5.1 no acepta --version => usa PSVersionTable (conserva politica pwsh->powershell). Matriz de pruebas de Codex (PATH solo-py/solo-ps/vacio) completa. No ejecutada por Claude (deny-rule PowerShell); cubierta por CI de TASK-0017."
+                      "review":  "ACEPTADA por Claude contra SPEC-0018. Revision de codigo: Resolve-Runtime con fallback (python/py -3/python3; pwsh/powershell), SKIPPED(WARNING) por runtime ausente, paridad solo si ambos, exit 1 solo por logica o sin runtime, RESUMEN siempre; mismo patron en harness compacto y neutralidad. Desviacion JUSTIFICADA y documentada: powershell.exe 5.1 no acepta --version =\u003e usa PSVersionTable (conserva politica pwsh-\u003epowershell). Matriz de pruebas de Codex (PATH solo-py/solo-ps/vacio) completa. No ejecutada por Claude (deny-rule PowerShell); cubierta por CI de TASK-0017."
                   },
                   {
                       "id":  "TASK-0019",
                       "owner":  "Claude",
-                      "status":  "in_review",
+                      "status":  "done",
                       "type":  "implementation",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -630,18 +630,19 @@
                                            "scripts/upgrade_instance.py",
                                            "scripts/upgrade_instance.ps1",
                                            "examples/upgrade_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0019-claude-to-codex-1.md"
+                                           "Area_comun/handoffs/HANDOFF-TASK-0019-claude-to-codex-1.md",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0019-codex-to-claude-review-fix.md"
                                        ],
                       "blocked_by_questions":  [
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "En revision (implementacion por Claude, reasignada por operador humano). upgrade_instance.py VERIFICADO: outdated [a.md cambiado, b.md nuevo], current [al dia], instancia read-only intacta. upgrade_instance.ps1 espejo escrito; PARIDAD .py/.ps1 PENDIENTE de corrida PowerShell (bloqueada en esta sesion por deny-rule del entorno). Fixtures en examples/upgrade_cases/."
+                      "review":  "ACEPTADA por Claude contra SPEC-0019 (implementacion Claude + review-fix Codex). Codex anadio estado 'eliminado' (faltaba para cumplir SPEC-0019), corrigio stdout/-Report del .ps1 y verifico paridad .py/.ps1 (outdated/current) en su entorno PowerShell. Re-verificacion .py por Claude: outdated => a.md cambiado/b.md nuevo/legacy.md eliminado; current => al dia; instancia read-only intacta. Ultimo entregable funcional de v0.6.0."
                   },
                   {
                       "id":  "TASK-0020",
                       "owner":  "Codex",
-                      "status":  "in_review",
+                      "status":  "done",
                       "type":  "documentation",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -671,7 +672,7 @@
                       "blocked_by_questions":  [
 
                                                ],
-                      "review":  "In review. Codex formalizo regla claim-before-shared-draft solicitada por operador humano; ver HANDOFF-TASK-0020-codex-to-claude-1."
+                      "review":  "RATIFICADA por Claude (arquitecto). DECISION-0007 claim-before-shared-draft: neutral de dominio, coherente con DECISION-0005/0006, aditiva (no rompe historicas). Regla propagada a AGENTS.md/templates/TASK_PROTOCOL/COMMUNICATION_PROTOCOL para arranque en frio. Parte de v0.6.0."
                   },
                   {
                       "id":  "TASK-0021",

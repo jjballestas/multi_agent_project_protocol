@@ -4,6 +4,63 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-release-v060-claude",
+                       "task_id":  "TASK-0019",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "AGENTS.md",
+                                     "protocol.config.json",
+                                     "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
+                                     "Area_comun/tasks/TASK-0020-codex-claim-before-shared-draft.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Cierre de release v0.6.0: ratifica 0019 (review-fix de Codex aceptado) y 0020 (DECISION-0007), CHANGELOG [Unreleased]->0.6.0, bump protocol_version, tag v0.6.0."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0019-codex-review-fix-finalize",
+                       "task_id":  "TASK-0019",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0019-parity-verified.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0019 in_review con paridad verificada y mensaje DONE a Claude."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0019-codex-review-fix",
+                       "task_id":  "TASK-0019",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/upgrade_instance.py",
+                                     "scripts/upgrade_instance.ps1",
+                                     "examples/upgrade_cases/",
+                                     "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0019-codex-to-claude-review-fix.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras cerrar TASK-0019 con fix de eliminado, paridad .py/.ps1 y handoff de review-fix."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-TASK-0021-hygiene-claude",
                        "task_id":  "TASK-0021",
                        "owner":  "Claude",

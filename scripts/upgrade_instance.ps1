@@ -118,34 +118,37 @@ else {
 $masterV = Get-ProtocolVersion $masterFull
 $instanceV = Get-ProtocolVersion $instanceFull
 $globs = Get-AdoptableGlobs $masterFull
-$relFiles = Get-AdoptableRelFiles $masterFull $globs
+$relFiles = @((Get-AdoptableRelFiles $masterFull $globs) + (Get-AdoptableRelFiles $instanceFull $globs)) | Sort-Object -Unique
 
 # --- Clasificacion ---
 $rows = @()
 foreach ($rel in ($relFiles | Sort-Object)) {
     $m = Join-Path $masterFull ($rel -replace '/', [System.IO.Path]::DirectorySeparatorChar)
     $i = Join-Path $instanceFull ($rel -replace '/', [System.IO.Path]::DirectorySeparatorChar)
-    if (-not (Test-Path $i)) { $status = "nuevo" }
+    if ((-not (Test-Path $m)) -and (Test-Path $i)) { $status = "eliminado" }
+    elseif (-not (Test-Path $i)) { $status = "nuevo" }
     elseif ((Get-Normalized $m) -ne (Get-Normalized $i)) { $status = "cambiado" }
     else { $status = "igual" }
     $rows += [pscustomobject]@{ Rel = $rel; Status = $status }
 }
 
 # --- Render (identico a render_report de upgrade_instance.py) ---
-$nuevo = ($rows | Where-Object { $_.Status -eq "nuevo" }).Count
-$cambiado = ($rows | Where-Object { $_.Status -eq "cambiado" }).Count
-$igual = ($rows | Where-Object { $_.Status -eq "igual" }).Count
+$nuevo = @($rows | Where-Object { $_.Status -eq "nuevo" }).Count
+$cambiado = @($rows | Where-Object { $_.Status -eq "cambiado" }).Count
+$igual = @($rows | Where-Object { $_.Status -eq "igual" }).Count
+$eliminado = @($rows | Where-Object { $_.Status -eq "eliminado" }).Count
 $action = @{
-    "nuevo"    = "anadir a la instancia (decision de adopcion)"
-    "cambiado" = "revisar delta y decidir adopcion"
-    "igual"    = "sin accion"
+    "nuevo"     = "anadir a la instancia (decision de adopcion)"
+    "cambiado"  = "revisar delta y decidir adopcion"
+    "igual"     = "sin accion"
+    "eliminado" = "revisar remocion del master y decidir retirada"
 }
 $lines = New-Object System.Collections.Generic.List[string]
 $lines.Add("# Reporte de adopcion asistida")
 $lines.Add("")
 $lines.Add("- Version de la instancia: ``$instanceV``")
 $lines.Add("- Version del master: ``$masterV``")
-$lines.Add("- Conjunto adoptable: $($rows.Count) archivos (nuevo=$nuevo, cambiado=$cambiado, igual=$igual)")
+$lines.Add("- Conjunto adoptable: $($rows.Count) archivos (nuevo=$nuevo, cambiado=$cambiado, igual=$igual, eliminado=$eliminado)")
 $lines.Add("")
 $lines.Add("> La herramienta informa; la instancia adopta por decision (DECISION-0001). No se modifico nada.")
 $lines.Add("")
@@ -155,16 +158,16 @@ foreach ($r in $rows) {
     if ($r.Status -eq "igual") { continue }
     $lines.Add("| ``$($r.Rel)`` | $($r.Status) | $($action[$r.Status]) |")
 }
-if ($nuevo -eq 0 -and $cambiado -eq 0) {
+if ($nuevo -eq 0 -and $cambiado -eq 0 -and $eliminado -eq 0) {
     $lines.Add("| (ninguno) | igual | la instancia esta al dia |")
 }
-$report = ($lines -join "`n") + "`n"
+$reportBody = ($lines -join "`n") + "`n"
 
 if ($Report) {
-    [System.IO.File]::WriteAllText($Report, $report)
+    [System.IO.File]::WriteAllText($Report, $reportBody)
     Write-Host "OK: reporte escrito en $Report"
 }
 else {
-    [System.Console]::Out.Write($report)
+    [System.Console]::Out.Write($reportBody)
 }
 exit 0

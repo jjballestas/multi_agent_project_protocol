@@ -17,6 +17,46 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.6.0] — 2026-06-05
+
+Operational robustness: the protocol's own quality gates now run in CI, validation harnesses no
+longer fail just because a runtime is missing, and instances get assisted version-adoption tooling.
+**MINOR** release — additive, domain-neutral, no breaking changes. Closes the audit findings
+(weak Python portability, incomplete CI, manual adoption/migration).
+
+### Added
+- **Operational robustness decision**
+  ([DECISION-0006](Area_comun/decisions/DECISION-0006-robustez-operacional.md), TASK-0016): design
+  (`Area_comun/artifacts/DISENO-robustez-operacional.md`) + specs SPEC-0017/0018/0019; defines the
+  *neutral surface* and *adoptable set* reused by the scan and upgrade tools.
+- **Complete CI** (TASK-0017): `.github/workflows/validate.yml` now also runs the PowerShell
+  validator (dogfood + minimal), the SDD/compact/neutrality harnesses and the domain-neutrality
+  scan — every gate promised in `AGENTS.md` §5 actually runs.
+- **Domain-neutrality scan** `scripts/scan_domain_neutrality.py`/`.ps1` (TASK-0017): configurable via
+  a `domain_neutrality` block in `protocol.config(.template).json` (denylist + scan/exempt globs,
+  word-boundary match); `enabled:false`/absent ⇒ no-op. Golden cases in
+  `examples/neutrality_scan_cases/`, `.py`↔`.ps1` parity.
+- **Runtime-tolerant harnesses** (TASK-0018, DECISION-0006 §1): `run_sdd_cases.ps1` and
+  `run_compact_comms_cases.ps1` resolve runtimes with fallback (`python`/`py -3`/`python3`,
+  `pwsh`/`powershell`), mark the absent half `SKIPPED (WARNING)`, check parity only when both run,
+  fail only on logic or no runtime, and always print a summary.
+- **Assisted version upgrade** `scripts/upgrade_instance.py`/`.ps1` (TASK-0019, DECISION-0006 §4):
+  read-only adoption report of deltas (`nuevo`/`cambiado`/`igual`/`eliminado`) between an instance
+  and the master; does **not** modify the instance (adoption stays a per-instance decision,
+  DECISION-0001). Fixtures in `examples/upgrade_cases/`, `.py`↔`.ps1` parity.
+- **Claim-before-shared-draft rule**
+  ([DECISION-0007](Area_comun/decisions/DECISION-0007-claim-before-shared-draft.md), TASK-0020):
+  an agent must hold an active claim before creating/editing any draft on shared paths; unclaimed
+  work is not overwritten — ask via one concrete mailbox question. Propagated to `AGENTS.md`,
+  templates and protocol docs.
+
+### Notes
+- MINOR per DECISION-0001 §4 (additive, neutral). Hardening (require both runtimes, WARNING→build
+  error, auto-apply upgrades) would be MAJOR (out of scope).
+- Validator and domain-neutrality scan green (Python) on root; `.ps1` halves and CI verified by
+  Codex/CI (PowerShell run blocked in the architect session by an environment deny-rule).
+- Backlog opened, not in this release: TASK-0021 (mailbox-hygiene soft-checks).
+
 ## [0.5.0] — 2026-06-05
 
 Compact, token-efficient agent communication: reference canonical artifacts instead of
@@ -149,7 +189,8 @@ Initial extraction and bootstrap of the reusable, domain-neutral multi-agent pro
 - Reference instance `examples/minimal_instance/` (validates green).
 - PowerShell validator `scripts/validate_collaboration_state.ps1`.
 
-[Unreleased]: https://example.invalid/compare/v0.5.0...HEAD
+[Unreleased]: https://example.invalid/compare/v0.6.0...HEAD
+[0.6.0]: https://example.invalid/compare/v0.5.0...v0.6.0
 [0.5.0]: https://example.invalid/compare/v0.4.0...v0.5.0
 [0.4.0]: https://example.invalid/compare/v0.3.0...v0.4.0
 [0.3.0]: https://example.invalid/compare/v0.2.0...v0.3.0

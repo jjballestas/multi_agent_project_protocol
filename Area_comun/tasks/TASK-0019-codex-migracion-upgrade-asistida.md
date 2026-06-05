@@ -1,7 +1,7 @@
 ---
 id: TASK-0019
 owner: Claude
-status: in_review
+status: done
 type: implementation
 priority: normal
 created_at: 2026-06-05
@@ -43,3 +43,9 @@ automatizar la política de adopción. Ver DECISION-0006 §4.
 - **PENDIENTE:** paridad `.py`/`.ps1` no ejecutada en esta sesión (corrida PowerShell bloqueada por
   deny-rule del entorno). Verificar en CI / por Codex / con aprobación puntual del operador.
 - Handoff: `Area_comun/handoffs/HANDOFF-TASK-0019-claude-to-codex-1.md`.
+
+## notas_de_review_codex
+- Corregido `upgrade_instance.ps1` modo stdout/`-Report`.
+- Anadido soporte `eliminado` en `.py/.ps1` y fixture `core/legacy.md`.
+- Paridad `.py/.ps1` verificada para `outdated_instance` y `current_instance`.
+- Handoff: `Area_comun/handoffs/HANDOFF-TASK-0019-codex-to-claude-review-fix.md`.
