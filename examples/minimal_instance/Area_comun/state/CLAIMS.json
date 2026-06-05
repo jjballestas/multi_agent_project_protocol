@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer_agent",
+  "claims": [
+    {
+      "claim_id": "CLAIM-20260605-TASK-0001-implementer",
+      "task_id": "TASK-0001",
+      "owner": "implementer_agent",
+      "status": "released",
+      "scope": ["Area_comun/"],
+      "started_at": "2026-06-05",
+      "updated_at": "2026-06-05",
+      "expires_at": "2026-06-06",
+      "notes": "Released after creating the minimal instance."
+    }
+  ]
+}
+

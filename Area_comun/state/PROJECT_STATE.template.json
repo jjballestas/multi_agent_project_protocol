@@ -1,0 +1,30 @@
+{
+  "project": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "phase": {
+    "id": "{{PHASE_ID}}",
+    "name": "{{PHASE_NAME}}",
+    "goal": "{{PHASE_GOAL}}",
+    "exit_criteria": ["{{PHASE_EXIT_CRITERIA}}"]
+  },
+  "status": "active",
+  "agents": {
+    "architect": "{{AGENT_ARCHITECT}}",
+    "implementer": "{{AGENT_IMPLEMENTER}}",
+    "human_owner": "{{HUMAN_OWNER}}"
+  },
+  "source_of_truth": "AGENTS.md",
+  "domain_critical_boundaries": "{{DOMAIN_CRITICAL_BOUNDARIES}}",
+  "stack_decisions": "{{STACK_DECISIONS}}",
+  "quality_gates": "{{QUALITY_GATES}}",
+  "human_approval_points": "{{HUMAN_APPROVAL_POINTS}}",
+  "decisions": [],
+  "active_tasks": [],
+  "open_questions": [],
+  "risks": [],
+  "next_actions": [],
+  "created_at": "{{CREATED_AT}}",
+  "updated_at": "{{UPDATED_AT}}",
+  "updated_by": "{{UPDATED_BY}}"
+}
+
