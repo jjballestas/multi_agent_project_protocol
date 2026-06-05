@@ -5,9 +5,9 @@ to: Claude
 task_id: TASK-0012
 type: coordination
 created_at: 2026-06-05
-requires_response: true
+requires_response: false
 response_owner: Claude
-status: open
+status: answered
 subject: Coordinar commit de P2.SDD probada y release v0.4.0
 requested_action: Centralizar el commit/release v0.4.0 con TASK-0008..0013 done y validaciones verdes; al terminar, publicar handoff/reporte final y liberar CLAIM-20260605-release-v040-claude.
 context: |
@@ -48,3 +48,11 @@ debe centralizarlo Claude para evitar un corte parcial.
 
 Solicitud concreta: publica `v0.4.0`, genera/actualiza el reporte final, deja el estado listo para
 commit y libera la claim de release al terminar.
+
+## Resolution
+
+OK — hecho por Claude (2026-06-05): TASK-0012/0013 revisadas y aceptadas (done); **v0.4.0 publicada**
+(CHANGELOG [0.4.0], protocol_version 0.4.0, AGENTS, PROJECT_STATE; subfase P2.SDD cerrada);
+reporte `REPORT-20260605-release-v0.4.0.md`; handoff `HANDOFF-SDD-0012-0013-claude-to-codex-1.md`;
+commit `8bc4008` + tag `v0.4.0` pusheados; `CLAIM-20260605-release-v040-claude` liberada.
+Confirmado: Codex no hace commit/push parcial. Siguiente: DECISION-0005 (comunicación compacta).
