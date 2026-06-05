@@ -1,28 +1,26 @@
 {
   "project": "multi_agent_project_protocol",
   "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "phase": {
-    "id": "P1",
-    "name": "Arquitectura de perfiles profesionales",
-    "goal": "Llevar el protocolo a core/profiles/examples: publicar el primer perfil (dotnet_enterprise) y dar soporte de perfiles en estado y validador, manteniendo el core neutral. Target v0.3.0.",
+    "id": "P2",
+    "name": "Adopcion y expansion",
+    "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
     "exit_criteria": [
-      "Perfil dotnet_enterprise publicado (TASK-0006)",
-      "adopted_profiles en estado + validador con conciencia de perfiles, aditivo (TASK-0007)",
-      "Instancia de prueba core + perfil valida en verde",
-      "Core sigue neutral (barrido limpio); v0.3.0 publicada"
+      "Backlog de adopcion/expansion definido cuando surja",
+      "Core sigue neutral en cada cambio"
     ],
     "previous_phase": {
-      "id": "P0",
-      "name": "Enriquecimiento del protocolo",
+      "id": "P1",
+      "name": "Arquitectura de perfiles profesionales",
       "status": "completed",
-      "closed_with": "v0.2.0",
+      "closed_with": "v0.3.0",
       "exit_criteria_met": [
-        "Roadmap/backlog priorizado (TASK-0001)",
-        "Validador multiplataforma + CI (TASK-0002)",
-        "Politica de versionado (SemVer) + CHANGELOG + protocol_version (TASK-0003)",
-        "Script de scaffolding (TASK-0004)",
-        "v0.2.0 publicada"
+        "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
+        "Perfil dotnet_enterprise publicado (TASK-0006)",
+        "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
+        "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
+        "v0.3.0 publicada"
       ]
     }
   },
@@ -36,11 +34,13 @@
   "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
   "released_versions": [
     "v0.1.0",
-    "v0.2.0"
+    "v0.2.0",
+    "v0.3.0"
   ],
   "decisions": [
     "DECISION-0001-versionado",
-    "DECISION-0002-core-perfiles-profesionales"
+    "DECISION-0002-core-perfiles-profesionales",
+    "DECISION-0003-adopted-profiles-contract"
   ],
   "active_tasks": [
     {
@@ -76,13 +76,13 @@
     {
       "id": "TASK-0006",
       "owner": "Codex",
-      "status": "ready",
+      "status": "done",
       "title": "Perfil dotnet_enterprise (basado en entorno_open_cloude) (P1)"
     },
     {
       "id": "TASK-0007",
       "owner": "Codex",
-      "status": "ready",
+      "status": "done",
       "title": "Soporte de perfiles en estado y validador (P1)"
     }
   ],
@@ -92,11 +92,11 @@
     "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
   ],
   "next_actions": [
-    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.2.0 PUBLICADA (tag v0.2.0); fase P1 (perfiles).",
-    "P0 cerrada: TASK-0001/0002/0003/0004 done. P1 abierta: arquitectura de perfiles (TASK-0005 done).",
-    "READY para Codex: TASK-0006 (perfil dotnet_enterprise) y TASK-0007 (adopted_profiles + validador). Ver HANDOFF-TASK-0005-claude-to-codex-1. TASK-0006/0007 sin claim de Claude: son de Codex.",
-    "Al cerrar P1 (TASK-0006/0007 done + instancia core+perfil verde): publicar v0.3.0 (MINOR, mover Unreleased en CHANGELOG + tag).",
-    "Decision abierta no bloqueante: forma de declarar adopted_profiles (campo y/o decision); se cierra con TASK-0007."
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.3.0 PUBLICADA; fase P2 (adopcion y expansion).",
+    "P0 (v0.2.0) y P1 (v0.3.0) cerradas. TASK-0001..0007 todas done. DECISION-0001/0002/0003 aceptadas.",
+    "Protocolo entregado: core neutral + versionado + scaffolding + perfiles (dotnet_enterprise) + validadores con adopted_profiles.",
+    "P2 backlog (abierto, sin tareas activas): adopcion en instancias reales (p.ej. bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs. Crear tareas cuando surja necesidad concreta.",
+    "Mantener: cada cambio aditivo y neutral; releases MINOR sin aprobacion humana, MAJOR/v1.0.0 con aprobacion (DECISION-0001)."
   ],
   "created_at": "2026-06-05",
   "updated_at": "2026-06-05",

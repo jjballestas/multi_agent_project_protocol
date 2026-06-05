@@ -1,0 +1,37 @@
+{
+  "project": "remote_reference_warning",
+  "description": "Golden validation fixture for adopted_profiles: remote_reference_warning.",
+  "phase": {
+    "id": "P1",
+    "name": "Profile validation",
+    "goal": "Exercise adopted_profiles validator behavior.",
+    "exit_criteria": ["Initial protocol instance is valid."]
+  },
+  "status": "active",
+  "agents": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "source_of_truth": "AGENTS.md",
+  "domain_critical_boundaries": "No secrets committed. Project-specific critical boundaries must be recorded here.",
+  "stack_decisions": "No stack-specific decisions declared yet. Record decisions in Area_comun/decisions/.",
+  "quality_gates": "Run the collaboration state validator before handoff or review.",
+  "human_approval_points": "Critical boundary changes and release decisions require human owner approval.",
+  "adopted_profiles": [
+    {
+      "profile_id": "remote_profile",
+      "profile_version": "0.1.0",
+      "adopted_at": "2026-06-05",
+      "decision_ref": "Area_comun/decisions/DECISION-0001-adopt-remote-profile.md"
+    }
+  ],
+  "decisions": [],
+  "active_tasks": [],
+  "open_questions": [],
+  "risks": [],
+  "next_actions": [],
+  "created_at": "2026-06-05",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude"
+}

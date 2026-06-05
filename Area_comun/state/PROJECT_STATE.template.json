@@ -18,6 +18,7 @@
   "stack_decisions": "{{STACK_DECISIONS}}",
   "quality_gates": "{{QUALITY_GATES}}",
   "human_approval_points": "{{HUMAN_APPROVAL_POINTS}}",
+  "adopted_profiles": [],
   "decisions": [],
   "active_tasks": [],
   "open_questions": [],
@@ -27,4 +28,3 @@
   "updated_at": "{{UPDATED_AT}}",
   "updated_by": "{{UPDATED_BY}}"
 }
-

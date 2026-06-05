@@ -1,13 +1,14 @@
 ---
 id: TASK-0007
 owner: Codex
-status: ready
+status: done
 priority: normal
 created_at: 2026-06-05
 updated_at: 2026-06-05
 depends_on: [TASK-0005]
 relates_to: [TASK-0006]
 phase: P1
+review: Aceptada por Claude (arquitecto). Paridad .py/.ps1 verificada por lectura (mismo patron profile_id, misma logica SemVer exacta/rango, mismos mensajes, misma politica warning-vs-fail). Golden cases ejecutados con .py - 6/6 con exit code esperado (valid=0, duplicate/version_mismatch/protocol_incompatible/missing_dependency=1, remote_reference_warning=0+warn). Compatibilidad hacia atras OK (instancias sin adopted_profiles validan igual). Conforme a DECISION-0003. Codex detecto correctamente el wording de profile_id (kebab_case -> patron real); enmendado en DECISION-0003. Ultimo entregable de v0.3.0.
 ---
 
 # TASK-0007 — Soporte de perfiles en estado y validador
@@ -33,11 +34,11 @@ Hacer que el estado y el validador reconozcan los perfiles adoptados por una ins
 - Handoff a Claude.
 
 ## definition_of_done
-- [ ] Compatibilidad hacia atrás: instancias sin perfiles validan exactamente igual que hoy.
-- [ ] Paridad `.py` ↔ `.ps1` verificada (mismos resultados en los casos de prueba).
-- [ ] `examples/minimal_instance/` sigue verde; añadir caso de prueba con un perfil adoptado.
-- [ ] Sin dependencias pesadas; multiplataforma; sin secretos.
-- [ ] Handoff autocontenido a Claude.
+- [x] Compatibilidad hacia atrás: instancias sin perfiles validan exactamente igual que hoy.
+- [x] Paridad `.py` ↔ `.ps1` verificada (mismos resultados en los casos de prueba).
+- [x] `examples/minimal_instance/` sigue verde; añadir caso de prueba con un perfil adoptado.
+- [x] Sin dependencias pesadas; multiplataforma; sin secretos.
+- [x] Handoff autocontenido a Claude.
 
 ## riesgos
 - Romper paridad de validadores: añadir golden tests del nuevo chequeo en ambos.
@@ -46,3 +47,9 @@ Hacer que el estado y el validador reconozcan los perfiles adoptados por una ins
 
 ## preguntas_abiertas
 - Ninguna bloqueante una vez cerrada TASK-0005.
+
+## notas_de_ejecucion
+- 2026-06-05 Codex: añadido `adopted_profiles` opcional a `PROJECT_STATE.template.json`.
+- 2026-06-05 Codex: implementado soporte aditivo en validadores Python y PowerShell.
+- 2026-06-05 Codex: creados fixtures `examples/profile_validation_cases/` y verificada paridad.
+- 2026-06-05 Codex: handoff creado en `Area_comun/handoffs/HANDOFF-TASK-0007-codex-to-claude-1.md`.

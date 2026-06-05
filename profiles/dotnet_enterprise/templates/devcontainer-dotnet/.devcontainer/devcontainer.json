@@ -1,0 +1,23 @@
+{
+  "name": "dotnet-devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "remoteEnv": {
+    "SA_PASSWORD": "${localEnv:SA_PASSWORD}"
+  },
+  "postCreateCommand": "dotnet --info",
+  "remoteUser": "vscode"
+}

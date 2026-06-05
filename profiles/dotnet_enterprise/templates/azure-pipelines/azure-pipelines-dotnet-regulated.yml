@@ -1,0 +1,90 @@
+trigger:
+- main
+- release/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  artifactName: '$(Build.Repository.Name)-$(Build.BuildNumber)'
+
+stages:
+
+- stage: Build
+  displayName: 'Build y validación'
+  jobs:
+  - job: BuildJob
+    displayName: 'Restaurar, compilar y testear'
+    steps:
+
+    - task: UseDotNet@2
+      displayName: 'Instalar .NET 8'
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+
+    - script: dotnet restore
+      displayName: 'Restaurar dependencias'
+
+    - script: dotnet build --configuration $(buildConfiguration) --no-restore
+      displayName: 'Compilar'
+
+    - script: dotnet test --configuration $(buildConfiguration) --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      displayName: 'Ejecutar tests'
+
+    - script: dotnet format --verify-no-changes
+      displayName: 'Análisis estático — formato'
+      continueOnError: false
+
+- stage: Security
+  displayName: 'Análisis de seguridad'
+  dependsOn: Build
+  jobs:
+  - job: SecurityJob
+    displayName: 'Escaneo de secretos y dependencias'
+    steps:
+
+    - script: |
+        curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+        gitleaks detect --source . --verbose
+      displayName: 'Escaneo de secretos (Gitleaks)'
+
+    - script: dotnet list package --vulnerable --include-transitive
+      displayName: 'Verificar dependencias vulnerables'
+      continueOnError: true
+
+- stage: Package
+  displayName: 'Empaquetar artefacto'
+  dependsOn: Security
+  jobs:
+  - job: PackageJob
+    displayName: 'Publicar y empaquetar'
+    steps:
+
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+
+    - script: dotnet restore
+      displayName: 'Restaurar dependencias'
+
+    - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish --no-restore
+      displayName: 'Publicar aplicación'
+
+    - task: ArchiveFiles@2
+      displayName: 'Empaquetar en ZIP'
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publicar artefacto en Azure DevOps'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

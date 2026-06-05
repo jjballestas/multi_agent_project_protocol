@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.2.0",
+  "project_name": "valid_local_profile",
+  "source_of_truth": "AGENTS.md",
+  "agent_roles": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "quality_gates": ["Run the collaboration state validator before handoff or review."],
+  "human_approval_points": ["Critical boundary changes and release decisions require human owner approval."],
+  "state_invariants": [
+    {
+      "path": "status",
+      "equals": "active",
+      "description": "Template example invariant. Replace or remove in each project."
+    }
+  ]
+}
+

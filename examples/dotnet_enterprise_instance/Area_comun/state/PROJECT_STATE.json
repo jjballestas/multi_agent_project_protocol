@@ -1,0 +1,40 @@
+{
+  "project": "dotnet_enterprise_instance",
+  "description": "Controlled example instance for TASK-0006: core plus dotnet_enterprise profile.",
+  "phase": {
+    "id": "P1",
+    "name": "Profile adoption",
+    "goal": "Demonstrate a valid instance that adopts dotnet_enterprise.",
+    "exit_criteria": ["Initial protocol instance is valid."]
+  },
+  "status": "active",
+  "agents": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "source_of_truth": "AGENTS.md",
+  "domain_critical_boundaries": "No secrets committed. dotnet_enterprise profile boundaries apply when adopted.",
+  "stack_decisions": "Adopts the optional dotnet_enterprise profile for .NET enterprise practices.",
+  "quality_gates": "Collaboration state validator green; dotnet_enterprise profile gates apply where relevant.",
+  "human_approval_points": "Profile adoption and security boundary changes require human owner approval.",
+  "adopted_profiles": [
+    {
+      "profile_id": "dotnet_enterprise",
+      "profile_version": "0.1.0",
+      "adopted_at": "2026-06-05",
+      "decision_ref": "Area_comun/decisions/DECISION-0001-adopt-dotnet-enterprise.md"
+    }
+  ],
+  "decisions": [
+    "Area_comun/decisions/DECISION-0001-adopt-dotnet-enterprise.md"
+  ],
+  "active_tasks": [],
+  "open_questions": [],
+  "risks": [],
+  "next_actions": [],
+  "created_at": "2026-06-05",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude"
+}
+

@@ -17,6 +17,9 @@ from typing import Any
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
 REVIEWED_TASK_STATUSES = {"in_review", "done"}
+PROFILE_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 class Validation:
@@ -71,6 +74,63 @@ def as_list(value: Any) -> list[Any]:
     return [value]
 
 
+def parse_semver(version: Any) -> tuple[int, int, int] | None:
+    if not isinstance(version, str):
+        return None
+    match = SEMVER_PATTERN.match(version)
+    if not match:
+        return None
+    return tuple(int(part) for part in match.groups())
+
+
+def compare_semver(left: tuple[int, int, int], right: tuple[int, int, int]) -> int:
+    if left == right:
+        return 0
+    return -1 if left < right else 1
+
+
+def satisfies_version_comparator(
+    protocol_version: tuple[int, int, int], operator: str, required_version: tuple[int, int, int]
+) -> bool:
+    comparison = compare_semver(protocol_version, required_version)
+    if operator == "==":
+        return comparison == 0
+    if operator == ">=":
+        return comparison >= 0
+    if operator == ">":
+        return comparison > 0
+    if operator == "<=":
+        return comparison <= 0
+    if operator == "<":
+        return comparison < 0
+    return False
+
+
+def protocol_version_satisfies(
+    protocol_version: Any, requirement: Any
+) -> tuple[bool, bool]:
+    """Return (satisfies, parseable) for exact SemVer and simple comparator ranges."""
+    parsed_protocol = parse_semver(protocol_version)
+    if parsed_protocol is None or not isinstance(requirement, str) or not requirement.strip():
+        return (False, False)
+
+    requirement = requirement.strip()
+    if SEMVER_PATTERN.match(requirement):
+        return (parsed_protocol == parse_semver(requirement), True)
+
+    for token in requirement.split():
+        match = re.match(r"^(>=|<=|>|<|==)(\d+\.\d+\.\d+)$", token)
+        if not match:
+            return (False, False)
+        operator, version = match.groups()
+        parsed_required = parse_semver(version)
+        if parsed_required is None or not satisfies_version_comparator(
+            parsed_protocol, operator, parsed_required
+        ):
+            return (False, True)
+    return (True, True)
+
+
 def validate_state_invariants(
     state: dict[str, Any] | None,
     config: dict[str, Any] | None,
@@ -94,6 +154,103 @@ def validate_state_invariants(
             )
         if invariant.get("required") is True and actual is None:
             validation.fail(f"State invariant failed at '{path}': value is required")
+
+
+def validate_adopted_profiles(
+    root: Path,
+    state: dict[str, Any] | None,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not state or "adopted_profiles" not in state:
+        return
+
+    adopted_profiles = state.get("adopted_profiles")
+    if adopted_profiles in (None, []):
+        return
+    if not isinstance(adopted_profiles, list):
+        validation.fail("adopted_profiles must be an array")
+        return
+
+    profile_ids: set[str] = set()
+    adopted_by_id: dict[str, dict[str, Any]] = {}
+
+    for index, profile in enumerate(adopted_profiles):
+        label = f"adopted_profiles[{index}]"
+        if not isinstance(profile, dict):
+            validation.fail(f"{label} must be an object")
+            continue
+
+        profile_id = profile.get("profile_id")
+        profile_version = profile.get("profile_version")
+        adopted_at = profile.get("adopted_at")
+
+        if not isinstance(profile_id, str) or not profile_id:
+            validation.fail(f"{label} missing profile_id")
+        elif not PROFILE_ID_PATTERN.match(profile_id):
+            validation.fail(f"{label} profile_id has invalid format: {profile_id}")
+        elif profile_id in profile_ids:
+            validation.fail(f"Duplicate adopted profile: {profile_id}")
+        else:
+            profile_ids.add(profile_id)
+            adopted_by_id[profile_id] = profile
+
+        if not isinstance(profile_version, str) or parse_semver(profile_version) is None:
+            validation.fail(f"{label} profile_version must be SemVer MAJOR.MINOR.PATCH")
+        if not isinstance(adopted_at, str) or not DATE_PATTERN.match(adopted_at):
+            validation.fail(f"{label} adopted_at must be YYYY-MM-DD")
+
+        decision_ref = profile.get("decision_ref")
+        if isinstance(decision_ref, str) and decision_ref:
+            if not (root / decision_ref).exists():
+                validation.warn(f"{label} decision_ref not found: {decision_ref}")
+
+    for profile_id, profile in adopted_by_id.items():
+        profile_root = root / "profiles" / profile_id
+        manifest_path = profile_root / "profile.manifest.json"
+        if not manifest_path.exists():
+            validation.warn(
+                f"Adopted profile '{profile_id}' is not locally verifiable: "
+                f"missing profiles/{profile_id}/profile.manifest.json"
+            )
+            continue
+
+        manifest = read_json_file(manifest_path, validation)
+        if not isinstance(manifest, dict):
+            continue
+
+        if manifest.get("profile_id") != profile_id:
+            validation.fail(
+                f"Adopted profile '{profile_id}' manifest profile_id mismatch: "
+                f"'{manifest.get('profile_id')}'"
+            )
+        if manifest.get("profile_version") != profile.get("profile_version"):
+            validation.fail(
+                f"Adopted profile '{profile_id}' version mismatch: "
+                f"state='{profile.get('profile_version')}' "
+                f"manifest='{manifest.get('profile_version')}'"
+            )
+
+        requirement = manifest.get("requires_protocol_version")
+        satisfies, parseable = protocol_version_satisfies(
+            config.get("protocol_version") if config else None, requirement
+        )
+        if not parseable:
+            validation.warn(
+                f"Adopted profile '{profile_id}' has unsupported "
+                f"requires_protocol_version: {requirement}"
+            )
+        elif not satisfies:
+            validation.fail(
+                f"Adopted profile '{profile_id}' requires protocol version "
+                f"'{requirement}', found '{config.get('protocol_version') if config else None}'"
+            )
+
+        for dependency in as_list(manifest.get("depends_on_profiles")):
+            if dependency and dependency not in adopted_by_id:
+                validation.fail(
+                    f"Adopted profile '{profile_id}' depends on missing profile '{dependency}'"
+                )
 
 
 def validate_tasks(root: Path, index: dict[str, Any] | None, validation: Validation) -> None:
@@ -247,6 +404,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     claims = read_json_file(root / "Area_comun" / "state" / "CLAIMS.json", validation)
 
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
+    validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
     validate_mailbox(root, validation)
     validate_reports(root, validation)
@@ -280,4 +438,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

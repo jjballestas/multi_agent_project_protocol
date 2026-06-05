@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "dotnet_enterprise",
+  "profile_version": "0.1.0",
+  "title": "Dotnet Enterprise",
+  "description": "Professional profile for regulated .NET enterprise application work with ADRs, branching, secure AI use, Azure DevOps pipelines, Dev Containers, Docker-based local development and SQL Server development governance.",
+  "requires_protocol_version": ">=0.2.0 <1.0.0",
+  "stack": [
+    ".NET 8",
+    "SQL Server",
+    "Azure DevOps",
+    "Docker",
+    "Dev Containers",
+    "VS Code",
+    "Git"
+  ],
+  "provides": {
+    "docs": [
+      "docs/SOURCE_MAP.md",
+      "docs/Guia_Metodologica.md",
+      "docs/ONBOARDING.md",
+      "docs/arquitectura/arquitectura-general.md",
+      "docs/contenedores/estrategia-docker-desarrollo.md",
+      "docs/decisiones/adr-001-diseno-base-entorno.md",
+      "docs/gobierno/estrategia-branching.md",
+      "docs/gobierno/modelo-artefactos.md",
+      "docs/gobierno/sql-server-gobernanza.md",
+      "docs/gobierno/versionado-plantillas.md",
+      "docs/pipelines/pipeline-base.md",
+      "docs/seguridad/gestion-secretos-desarrollo.md",
+      "docs/seguridad/reglas-uso-ia.md",
+      "docs/seguridad/seguridad-red-contenedores.md"
+    ],
+    "templates": [
+      "templates/azure-pipelines/",
+      "templates/db-bootstrap-dotnet/",
+      "templates/devcontainer-dotnet/",
+      "templates/docker-sqlserver/",
+      "templates/repo-structure/"
+    ],
+    "prompts": [
+      "prompts/prompt-maestro-Desarrollo_DotNet.md"
+    ]
+  },
+  "adds_boundaries": [
+    "No production secrets, real customer data or sensitive infrastructure access may be exposed to AI agents.",
+    "SQL Server credentials must stay in local ignored files, protected pipeline variables or an approved vault; only .env.example placeholders may be committed.",
+    "Docker is limited to development usage unless the adopting project records an explicit decision.",
+    "Stack-specific .NET, SQL Server, Azure DevOps and Docker rules remain inside this profile or the adopting project instance, never in the neutral core."
+  ],
+  "adds_quality_gates": [
+    "Run unit tests for .NET projects before handoff.",
+    "Run dependency and secret scanning in the pipeline for release branches.",
+    "Validate Dev Container and database bootstrap templates when they are adopted or changed.",
+    "Record ADRs for architecture-impacting changes."
+  ],
+  "adds_human_approval_points": [
+    "Production infrastructure changes",
+    "Security boundary changes",
+    "Release pipeline policy changes",
+    "Exceptions to secret-management rules"
+  ],
+  "depends_on_profiles": [],
+  "maintainer": "Codex",
+  "neutrality_note": "Nothing in this profile leaks domain/stack terms into the protocol core or its *.template.* masters."
+}

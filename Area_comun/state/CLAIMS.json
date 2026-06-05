@@ -4,6 +4,83 @@
     "updated_by":  "Claude",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-release-v030-claude",
+                       "task_id":  "TASK-0007",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "AGENTS.md",
+                                     "protocol.config.json",
+                                     "Area_comun/decisions/DECISION-0003-adopted-profiles-contract.md",
+                                     "Area_comun/tasks/TASK-0007-codex-profiles-state-validator.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Revision/cierre de TASK-0007 (aceptada), enmienda de wording de DECISION-0003 y publicacion de v0.3.0."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0007-codex",
+                       "task_id":  "TASK-0007",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/validate_collaboration_state.py",
+                                     "scripts/validate_collaboration_state.ps1",
+                                     "Area_comun/state/PROJECT_STATE.template.json",
+                                     "examples/dotnet_enterprise_instance/",
+                                     "examples/profile_validation_cases/",
+                                     "Area_comun/tasks/TASK-0007-codex-profiles-state-validator.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0007-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0007 en in_review con validadores, fixtures de paridad y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-review-task0006-decision0003-claude",
+                       "task_id":  "TASK-0006",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/decisions/DECISION-0003-adopted-profiles-contract.md",
+                                     "Area_comun/tasks/TASK-0006-codex-profile-dotnet-enterprise.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0006-claude-to-codex-1.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Revision/cierre de TASK-0006 (aceptada) y borrador DECISION-0003 (contrato adopted_profiles) como input de TASK-0007."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0006-codex",
+                       "task_id":  "TASK-0006",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "profiles/dotnet_enterprise/",
+                                     "examples/dotnet_enterprise_instance/",
+                                     "Area_comun/tasks/TASK-0006-codex-profile-dotnet-enterprise.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0006-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0006 en in_review con perfil, ejemplo controlado y handoff."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-release-v020-claude",
                        "task_id":  "TASK-0004",
                        "owner":  "Claude",

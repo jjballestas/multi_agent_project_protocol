@@ -157,7 +157,7 @@
     {
       "id": "TASK-0006",
       "owner": "Codex",
-      "status": "ready",
+      "status": "done",
       "priority": "normal",
       "phase": "P1",
       "title": "Perfil profesional dotnet_enterprise (basado en entorno_open_cloude)",
@@ -176,12 +176,13 @@
         "profiles/dotnet_enterprise/README.md",
         "Area_comun/handoffs/HANDOFF-TASK-0006-codex-to-claude-1.md"
       ],
-      "blocked_by_questions": []
+      "blocked_by_questions": [],
+      "review": "Aceptada por Claude. Frontera de neutralidad OK (core limpio), manifest conforme al contrato, sin secretos, ejemplo dotnet_enterprise_instance verde. Ver HANDOFF-TASK-0006-claude-to-codex-1; adopted_profiles se formaliza en DECISION-0003 (draft)."
     },
     {
       "id": "TASK-0007",
       "owner": "Codex",
-      "status": "ready",
+      "status": "done",
       "priority": "normal",
       "phase": "P1",
       "title": "Soporte de perfiles en estado y validador (adopted_profiles + manifest)",
@@ -194,14 +195,18 @@
       ],
       "relevant_files": [
         "scripts/",
-        "Area_comun/state/PROJECT_STATE.template.json"
+        "Area_comun/state/PROJECT_STATE.template.json",
+        "examples/profile_validation_cases/",
+        "examples/dotnet_enterprise_instance/"
       ],
       "deliverables": [
         "scripts/validate_collaboration_state.py",
         "scripts/validate_collaboration_state.ps1",
+        "examples/profile_validation_cases/",
         "Area_comun/handoffs/HANDOFF-TASK-0007-codex-to-claude-1.md"
       ],
-      "blocked_by_questions": []
+      "blocked_by_questions": [],
+      "review": "Aceptada por Claude. Paridad .py/.ps1 (lectura) + 6/6 golden cases con exit esperado; compatibilidad hacia atras OK; conforme a DECISION-0003. Ultimo entregable de v0.3.0."
     }
   ]
 }

@@ -60,6 +60,178 @@ function Get-ValueByPath {
     return $current
 }
 
+function Test-SemVer {
+    param([object]$Version)
+    return ($Version -is [string] -and $Version -match '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$')
+}
+
+function ConvertTo-SemVer {
+    param([string]$Version)
+    if (-not (Test-SemVer $Version)) {
+        return $null
+    }
+    return [version]$Version
+}
+
+function Test-VersionComparator {
+    param(
+        [version]$ProtocolVersion,
+        [string]$Operator,
+        [version]$RequiredVersion
+    )
+    $comparison = $ProtocolVersion.CompareTo($RequiredVersion)
+    switch ($Operator) {
+        "==" { return $comparison -eq 0 }
+        ">=" { return $comparison -ge 0 }
+        ">"  { return $comparison -gt 0 }
+        "<=" { return $comparison -le 0 }
+        "<"  { return $comparison -lt 0 }
+        default { return $false }
+    }
+}
+
+function Test-ProtocolVersionSatisfies {
+    param(
+        [object]$ProtocolVersion,
+        [object]$Requirement
+    )
+    $parsedProtocol = $null
+    if ($ProtocolVersion -is [string]) {
+        $parsedProtocol = ConvertTo-SemVer $ProtocolVersion
+    }
+    if ($null -eq $parsedProtocol -or -not ($Requirement -is [string]) -or -not $Requirement.Trim()) {
+        return @{ Satisfies = $false; Parseable = $false }
+    }
+
+    $requirementText = $Requirement.Trim()
+    if (Test-SemVer $requirementText) {
+        $parsedRequired = ConvertTo-SemVer $requirementText
+        return @{
+            Satisfies = ($parsedProtocol.CompareTo($parsedRequired) -eq 0)
+            Parseable = $true
+        }
+    }
+
+    foreach ($token in $requirementText.Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)) {
+        if ($token -notmatch '^(>=|<=|>|<|==)(\d+\.\d+\.\d+)$') {
+            return @{ Satisfies = $false; Parseable = $false }
+        }
+        $operator = $Matches[1]
+        $requiredVersion = ConvertTo-SemVer $Matches[2]
+        if ($null -eq $requiredVersion -or -not (Test-VersionComparator -ProtocolVersion $parsedProtocol -Operator $operator -RequiredVersion $requiredVersion)) {
+            return @{ Satisfies = $false; Parseable = $true }
+        }
+    }
+
+    return @{ Satisfies = $true; Parseable = $true }
+}
+
+function Validate-AdoptedProfiles {
+    param(
+        [string]$Root,
+        [object]$State,
+        [object]$Config
+    )
+    if (-not $State -or -not ($State.PSObject.Properties.Name -contains "adopted_profiles")) {
+        return
+    }
+
+    $adoptedProfilesValue = $State.adopted_profiles
+    if ($null -eq $adoptedProfilesValue) {
+        return
+    }
+    $adoptedProfiles = @($adoptedProfilesValue)
+    if ($adoptedProfiles.Count -eq 0) {
+        return
+    }
+    if ($adoptedProfilesValue -isnot [array]) {
+        # ConvertFrom-Json can collapse one-item arrays in older PowerShell hosts; allow objects here.
+        if ($adoptedProfilesValue -isnot [pscustomobject]) {
+            Fail "adopted_profiles must be an array"
+            return
+        }
+    }
+
+    $profileIds = @{}
+    $adoptedById = @{}
+    for ($i = 0; $i -lt $adoptedProfiles.Count; $i++) {
+        $profile = $adoptedProfiles[$i]
+        $label = "adopted_profiles[$i]"
+        if ($profile -isnot [pscustomobject]) {
+            Fail "$label must be an object"
+            continue
+        }
+
+        $profileId = $profile.profile_id
+        $profileVersion = $profile.profile_version
+        $adoptedAt = $profile.adopted_at
+
+        if (-not ($profileId -is [string]) -or -not $profileId) {
+            Fail "$label missing profile_id"
+        } elseif ($profileId -notmatch '^[a-z0-9][a-z0-9_-]*$') {
+            Fail "$label profile_id has invalid format: $profileId"
+        } elseif ($profileIds.ContainsKey($profileId)) {
+            Fail "Duplicate adopted profile: $profileId"
+        } else {
+            $profileIds[$profileId] = $true
+            $adoptedById[$profileId] = $profile
+        }
+
+        if (-not (Test-SemVer $profileVersion)) {
+            Fail "$label profile_version must be SemVer MAJOR.MINOR.PATCH"
+        }
+        if (-not ($adoptedAt -is [string]) -or $adoptedAt -notmatch '^\d{4}-\d{2}-\d{2}$') {
+            Fail "$label adopted_at must be YYYY-MM-DD"
+        }
+
+        $decisionRef = $profile.decision_ref
+        if ($decisionRef -is [string] -and $decisionRef) {
+            $decisionPath = Join-Path $Root $decisionRef
+            if (-not (Test-Path -LiteralPath $decisionPath)) {
+                Warn "$label decision_ref not found: $decisionRef"
+            }
+        }
+    }
+
+    foreach ($profileId in $adoptedById.Keys) {
+        $profile = $adoptedById[$profileId]
+        $manifestPath = Join-Path $Root "profiles/$profileId/profile.manifest.json"
+        if (-not (Test-Path -LiteralPath $manifestPath)) {
+            Warn "Adopted profile '$profileId' is not locally verifiable: missing profiles/$profileId/profile.manifest.json"
+            continue
+        }
+
+        $manifest = Read-JsonFile $manifestPath
+        if (-not $manifest) {
+            continue
+        }
+
+        if ($manifest.profile_id -ne $profileId) {
+            Fail "Adopted profile '$profileId' manifest profile_id mismatch: '$($manifest.profile_id)'"
+        }
+        if ($manifest.profile_version -ne $profile.profile_version) {
+            Fail "Adopted profile '$profileId' version mismatch: state='$($profile.profile_version)' manifest='$($manifest.profile_version)'"
+        }
+
+        $protocolVersion = $null
+        if ($Config) {
+            $protocolVersion = $Config.protocol_version
+        }
+        $compatibility = Test-ProtocolVersionSatisfies -ProtocolVersion $protocolVersion -Requirement $manifest.requires_protocol_version
+        if (-not $compatibility.Parseable) {
+            Warn "Adopted profile '$profileId' has unsupported requires_protocol_version: $($manifest.requires_protocol_version)"
+        } elseif (-not $compatibility.Satisfies) {
+            Fail "Adopted profile '$profileId' requires protocol version '$($manifest.requires_protocol_version)', found '$protocolVersion'"
+        }
+
+        foreach ($dependency in @($manifest.depends_on_profiles)) {
+            if ($dependency -and -not $adoptedById.ContainsKey($dependency)) {
+                Fail "Adopted profile '$profileId' depends on missing profile '$dependency'"
+            }
+        }
+    }
+}
+
 $script:Errors = [System.Collections.Generic.List[string]]::new()
 $script:Warnings = [System.Collections.Generic.List[string]]::new()
 
@@ -102,6 +274,8 @@ if ($state -and $config -and $config.state_invariants) {
         }
     }
 }
+
+Validate-AdoptedProfiles -Root $resolvedRoot -State $state -Config $config
 
 if ($index -and $index.tasks) {
     foreach ($task in @($index.tasks)) {
@@ -231,4 +405,3 @@ if ($Errors.Count -gt 0) {
 }
 
 Write-Host "OK: collaboration state is valid."
-

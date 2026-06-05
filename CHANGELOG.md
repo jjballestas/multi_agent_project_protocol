@@ -13,7 +13,15 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
-## [Unreleased] — target v0.3.0 (profiles)
+## [Unreleased]
+
+_No changes yet._
+
+## [0.3.0] — 2026-06-05
+
+Professional profiles: the protocol becomes layered (core / profiles / examples) and can be
+composed with optional, stack-specific profiles — the core stays domain-neutral. **MINOR** release
+(backward-compatible, additive).
 
 ### Added
 - **Core / profiles / examples architecture**
@@ -21,12 +29,27 @@ for what counts as MAJOR / MINOR / PATCH here.
   the `profiles/` layer with `profiles/README.md`, a neutral `PROFILE_TEMPLATE/`
   (`profile.manifest.template.json` + README + `docs/`/`templates/`/`prompts/`), the
   `profile.manifest` contract, and `Area_comun/artifacts/ARQUITECTURA-core-profiles.md`.
-  This is an **additive (MINOR)** capability — the core stays domain-neutral.
+- **First professional profile** `profiles/dotnet_enterprise/` (TASK-0006): ADRs, branching,
+  artifact model, SQL Server governance, template versioning, secure AI use, secret handling,
+  container-network security, Azure DevOps pipelines, Dev Container / Docker SQL Server / DB
+  bootstrap templates, onboarding and a .NET master prompt — all packaged as an **optional**
+  extension with a `profile.manifest.json`. Source traceability in `docs/SOURCE_MAP.md`; secrets
+  sanitized to placeholders.
+- **`adopted_profiles` contract**
+  ([DECISION-0003](Area_comun/decisions/DECISION-0003-adopted-profiles-contract.md)) and
+  **profile-aware validators** (TASK-0007): optional `adopted_profiles` in
+  `PROJECT_STATE.template.json` and additive checks in both `validate_collaboration_state.py` and
+  `.ps1` (schema, id/version match against the manifest, `requires_protocol_version` compatibility,
+  dependencies, duplicates) with `.py` ↔ `.ps1` parity and golden cases in
+  `examples/profile_validation_cases/`.
+- Reference instance `examples/dotnet_enterprise_instance/` (core + `dotnet_enterprise`, validates
+  green, declares `adopted_profiles` + an instance adoption decision).
 
-### Pending
-- TASK-0006 (Codex): `profiles/dotnet_enterprise/` built from the enterprise .NET practices.
-- TASK-0007 (Codex): optional `adopted_profiles` in state + profile-aware validator (additive,
-  `.py` ↔ `.ps1` parity).
+### Notes
+- MINOR release per DECISION-0001 §4 (additive, no human approval required). Instances **without**
+  `adopted_profiles` validate exactly as before (backward compatible).
+- Validators green on root, `examples/minimal_instance/`, `examples/generated_minimal_instance/`,
+  `examples/dotnet_enterprise_instance/` and all `examples/profile_validation_cases/`.
 
 ## [0.2.0] — 2026-06-05
 
@@ -65,6 +88,7 @@ Initial extraction and bootstrap of the reusable, domain-neutral multi-agent pro
 - Reference instance `examples/minimal_instance/` (validates green).
 - PowerShell validator `scripts/validate_collaboration_state.ps1`.
 
-[Unreleased]: https://example.invalid/compare/v0.2.0...HEAD
+[Unreleased]: https://example.invalid/compare/v0.3.0...HEAD
+[0.3.0]: https://example.invalid/compare/v0.2.0...v0.3.0
 [0.2.0]: https://example.invalid/compare/v0.1.0...v0.2.0
 [0.1.0]: https://example.invalid/releases/tag/v0.1.0

@@ -8,7 +8,7 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-05 · Maintainer: Claude (architect) + human owner. Released version: v0.2.0.
+> Last updated: 2026-06-05 · Maintainer: Claude (architect) + human owner. Released version: v0.3.0.
 
 ## 0. How to Start
 
@@ -34,15 +34,18 @@ First applied instance (pilot): `bot_spot_ai_strategy_pack` (trading bot, separa
 
 ## 2. Current Phase and Scope
 
-- Phase id: `P1`
-- Phase name: `Professional profiles architecture`
-- Phase goal: evolve the protocol into core/profiles/examples — ship the first profile
-  (`dotnet_enterprise`) and add profile awareness to state and validator, additively, while
-  keeping the core strictly domain-neutral. Target `v0.3.0`.
+- Phase id: `P2`
+- Phase name: `Adoption and expansion`
+- Phase goal: help real instances adopt the protocol and its profiles, add more profiles/examples
+  and docs as needed, and maintain the core — all additively and keeping the core domain-neutral.
+  No active breaking work.
+- Previous phase `P1` (Professional profiles architecture) closed with the **v0.3.0** release:
+  core/profiles/examples layering (DECISION-0002), the `dotnet_enterprise` profile, and the
+  `adopted_profiles` contract + profile-aware validators (DECISION-0003).
 - Previous phase `P0` (Protocol enrichment) closed with the **v0.2.0** release (cross-platform
   validator + CI, SemVer/CHANGELOG/`protocol_version`, scaffolding script).
 
-In scope: profiles layer, profile manifest, profile-aware validation, more examples, docs, versioning.
+In scope: instance adoption support, new profiles/examples, docs, maintenance, versioning.
 Out of scope: any business/domain logic in the core (the core stays neutral; stack-specific
 content lives only under `profiles/`).
 

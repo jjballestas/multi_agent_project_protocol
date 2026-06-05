@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "test_profile",
+  "profile_version": "0.1.0",
+  "title": "Test Profile",
+  "description": "Minimal local profile fixture.",
+  "requires_protocol_version": ">=0.2.0 <1.0.0",
+  "stack": [],
+  "provides": {
+    "docs": [],
+    "templates": [],
+    "prompts": []
+  },
+  "adds_boundaries": [],
+  "adds_quality_gates": [],
+  "adds_human_approval_points": [],
+  "depends_on_profiles": [],
+  "maintainer": "Codex",
+  "neutrality_note": "Fixture profile for validator tests only."
+}
