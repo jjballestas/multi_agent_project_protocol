@@ -1,7 +1,7 @@
 ---
 id: TASK-0008
 owner: Claude
-status: ready
+status: done
 type: analysis
 priority: high
 created_at: 2026-06-05
@@ -9,6 +9,7 @@ updated_at: 2026-06-05
 depends_on: []
 relates_to: [TASK-0009, TASK-0010, TASK-0011, TASK-0012, TASK-0013]
 phase: P2
+review: Done por Claude (arquitecto). Entregado Area_comun/artifacts/DISENO-SDD.md (contratos de campos, cambios a templates, comportamiento del validador config-gated + exencion pre-SDD, esquema sdd, indice de specs) y las specs concretas SPEC-0009..0013 en Area_comun/specs/. spec_id fijado en TASK-0009..0013 (ahora SDD-elegibles). Pregunta abierta resuelta: una spec por tarea + matriz de trazabilidad. Validadores .py/.ps1 verdes. Desbloquea a Codex (HANDOFF-TASK-0008-claude-to-codex-2).
 ---
 
 # TASK-0008 — Diseñar SDD + pipeline + criterios de cierre

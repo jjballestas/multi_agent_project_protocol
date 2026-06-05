@@ -6,17 +6,26 @@ Save as `Area_comun/handoffs/HANDOFF-<TASKID>-<from>-to-<to>-<n>.md`.
 ---
 handoff_id: HANDOFF-TASK-XXXX-<from>-to-<to>-01
 task_id: TASK-XXXX
+spec_id: Area_comun/specs/SPEC-XXXX-short-name.md | none
 from: {{AGENT_ARCHITECT}} | {{AGENT_IMPLEMENTER}} | {{HUMAN_OWNER}}
 to: {{AGENT_ARCHITECT}} | {{AGENT_IMPLEMENTER}} | {{HUMAN_OWNER}}
 date: YYYY-MM-DD
 status: for_review | for_implementation | for_decision | blocked
 requires_response: no
+response_owner: {{AGENT_ARCHITECT}} | {{AGENT_IMPLEMENTER}} | {{HUMAN_OWNER}} | none
+acceptance_criteria_verified: yes | no | partial
+tests_run:
+  - command or verification
+spec_deviations:
+  - none
+decisions_referenced:
+  - DECISION-XXXX
 ---
 
 # Handoff: <title>
 
 ## 1. Minimal Context
-What this is and what problem it solves.
+What this is, what problem it solves and which spec governed the work.
 
 ## 2. What Was Done
 Files created or changed and why.
@@ -24,19 +33,29 @@ Files created or changed and why.
 ## 3. What Was Not Done
 Explicit limits of the work.
 
-## 4. How To Verify
-Commands, files to inspect and acceptance criteria.
+## 4. Acceptance Criteria Verified
+Map each acceptance criterion to evidence.
 
-## 5. Requested Action
+| Criterion | Evidence | Status |
+|-----------|----------|--------|
+| <criterion> | <file, command, output, review note> | met | partial | not met |
+
+## 5. Tests Run
+Commands, fixtures or manual checks from the `test_plan`, with results.
+
+## 6. Spec Deviations
+Any deviation from `spec_id`, why it happened and whether a decision or follow-up task is needed.
+Use `none` when there are no deviations.
+
+## 7. Requested Action
 Exactly what the receiver should do.
 
-## 6. Risks and Assumptions
+## 8. Risks and Assumptions
 Known residual risks and assumptions.
 
-## 7. Open Questions / BLOCKED
+## 9. Open Questions / BLOCKED
 Concrete pending questions.
 
-## 8. Pointers
-Task, decisions and deliverables.
+## 10. Pointers
+Task, spec, decisions and deliverables.
 ```
-

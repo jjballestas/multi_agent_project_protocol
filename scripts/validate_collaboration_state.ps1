@@ -5,6 +5,12 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+$script:ImplementableTaskTypes = @("implementation", "refactor", "integration", "migration", "security", "release")
+$script:LightweightTaskTypes = @("discovery", "analysis", "review", "documentation", "triage")
+$script:ImplementableSddStatuses = @("ready", "claimed", "in_progress", "in_review", "done")
+$script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
+$script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
+
 function Fail {
     param([string]$Message)
     $script:Errors.Add($Message) | Out-Null
@@ -39,6 +45,152 @@ function Get-TaskStatusFromMarkdown {
         return $match.Matches[0].Groups[1].Value
     }
     return $null
+}
+
+function ConvertFrom-FrontmatterValue {
+    param([string]$Value)
+    $text = $Value.Trim()
+    if (-not $text) { return "" }
+    if ($text -eq "true") { return $true }
+    if ($text -eq "false") { return $false }
+    if ($text.StartsWith("[") -and $text.EndsWith("]")) {
+        $inner = $text.Substring(1, $text.Length - 2).Trim()
+        if (-not $inner) { return @() }
+        return @($inner.Split(",") | ForEach-Object { $_.Trim().Trim("`"'") })
+    }
+    return $text.Trim("`"'")
+}
+
+function ConvertFrom-TaskMarkdown {
+    param([string]$Path)
+    $metadata = @{
+        Frontmatter = @{}
+        Sections = @{}
+    }
+    if (-not (Test-Path -LiteralPath $Path)) {
+        return $metadata
+    }
+
+    $lines = @(Get-Content -LiteralPath $Path)
+    $bodyStart = 0
+    if ($lines.Count -gt 0 -and $lines[0].Trim() -eq "---") {
+        for ($i = 1; $i -lt $lines.Count; $i++) {
+            $line = $lines[$i]
+            if ($line.Trim() -eq "---") {
+                $bodyStart = $i + 1
+                break
+            }
+            if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$') {
+                $metadata.Frontmatter[$Matches[1]] = ConvertFrom-FrontmatterValue $Matches[2]
+            }
+        }
+    }
+
+    $currentSection = $null
+    $sectionLines = [System.Collections.Generic.List[string]]::new()
+    for ($i = $bodyStart; $i -lt $lines.Count; $i++) {
+        $line = $lines[$i]
+        if ($line -match '^#{2,6}\s+(.+?)\s*$') {
+            if ($currentSection) {
+                $metadata.Sections[$currentSection] = @($sectionLines)
+            }
+            $currentSection = $Matches[1].Trim().ToLower() -replace '\s+', '_'
+            $sectionLines = [System.Collections.Generic.List[string]]::new()
+            continue
+        }
+        if ($currentSection) {
+            $sectionLines.Add($line) | Out-Null
+        }
+    }
+    if ($currentSection) {
+        $metadata.Sections[$currentSection] = @($sectionLines)
+    }
+    return $metadata
+}
+
+function Get-TaskField {
+    param(
+        [object]$Task,
+        [hashtable]$ParsedMarkdown,
+        [string]$Field
+    )
+    if ($ParsedMarkdown.Frontmatter.ContainsKey($Field)) {
+        return $ParsedMarkdown.Frontmatter[$Field]
+    }
+    if ($Task.PSObject.Properties.Name -contains $Field) {
+        return $Task.$Field
+    }
+    if ($ParsedMarkdown.Sections.ContainsKey($Field)) {
+        return @($ParsedMarkdown.Sections[$Field] | Where-Object { $_.Trim() })
+    }
+    return $null
+}
+
+function Test-SddValue {
+    param([object]$Value)
+    if ($null -eq $Value) { return $false }
+    if ($Value -is [string]) {
+        return ($Value.Trim() -and $Value.Trim().ToLower() -ne "none")
+    }
+    if ($Value -is [array]) {
+        foreach ($item in $Value) {
+            if (Test-SddValue $item) { return $true }
+        }
+        return $false
+    }
+    return $true
+}
+
+function Test-Truthy {
+    param([object]$Value)
+    if ($Value -is [bool]) { return $Value }
+    if ($Value -is [string]) { return $Value.Trim().ToLower() -eq "true" }
+    return [bool]$Value
+}
+
+function Test-PreSddTask {
+    param(
+        [object]$Task,
+        [hashtable]$ParsedMarkdown,
+        [string]$AdoptedAt
+    )
+    if (Test-Truthy (Get-TaskField -Task $Task -ParsedMarkdown $ParsedMarkdown -Field "sdd_exempt")) {
+        return $true
+    }
+    $taskType = Get-TaskField -Task $Task -ParsedMarkdown $ParsedMarkdown -Field "type"
+    if (-not (Test-SddValue $taskType)) {
+        return $true
+    }
+    $createdAt = Get-TaskField -Task $Task -ParsedMarkdown $ParsedMarkdown -Field "created_at"
+    if ($createdAt -is [string] -and $createdAt -match '^\d{4}-\d{2}-\d{2}$' -and $createdAt -lt $AdoptedAt) {
+        return $true
+    }
+    return $false
+}
+
+function Test-SpecIdExists {
+    param(
+        [string]$Root,
+        [object]$SpecId
+    )
+    if (-not ($SpecId -is [string]) -or -not $SpecId.Trim()) {
+        return $false
+    }
+    $specText = $SpecId.Trim()
+    $candidates = [System.Collections.Generic.List[string]]::new()
+    $candidates.Add((Join-Path $Root $specText)) | Out-Null
+    if ($specText -notmatch '[\\/]') {
+        $candidates.Add((Join-Path $Root "Area_comun/specs/$specText")) | Out-Null
+        if (-not $specText.EndsWith(".md")) {
+            $candidates.Add((Join-Path $Root "Area_comun/specs/$specText.md")) | Out-Null
+        }
+    }
+    foreach ($candidate in $candidates) {
+        if (Test-Path -LiteralPath $candidate) {
+            return $true
+        }
+    }
+    return $false
 }
 
 function Get-ValueByPath {
@@ -232,6 +384,85 @@ function Validate-AdoptedProfiles {
     }
 }
 
+function Validate-Sdd {
+    param(
+        [string]$Root,
+        [object]$Index,
+        [object]$Config
+    )
+    if (-not $Index -or -not $Config) {
+        return
+    }
+    if (-not ($Config.PSObject.Properties.Name -contains "sdd") -or -not $Config.sdd.enabled) {
+        return
+    }
+
+    $enforcement = $Config.sdd.enforcement
+    if (-not $enforcement) {
+        $enforcement = "new_implementable_tasks"
+    }
+    if ($enforcement -ne "new_implementable_tasks") {
+        Fail "Unsupported sdd.enforcement: $enforcement"
+        return
+    }
+
+    $adoptedAt = $Config.sdd.adopted_at
+    if (-not $adoptedAt) {
+        $adoptedAt = "2026-06-05"
+    }
+    if (-not ($adoptedAt -is [string]) -or $adoptedAt -notmatch '^\d{4}-\d{2}-\d{2}$') {
+        Fail "Invalid sdd.adopted_at: $adoptedAt"
+        return
+    }
+
+    foreach ($task in @($Index.tasks)) {
+        $taskFile = $task.file
+        if (-not $taskFile) {
+            $taskFile = $task.task_file
+        }
+        if (-not $taskFile) {
+            continue
+        }
+
+        $taskPath = Join-Path $Root $taskFile
+        $parsed = ConvertFrom-TaskMarkdown $taskPath
+        if (Test-PreSddTask -Task $task -ParsedMarkdown $parsed -AdoptedAt $adoptedAt) {
+            continue
+        }
+
+        $taskType = [string](Get-TaskField -Task $task -ParsedMarkdown $parsed -Field "type")
+        $taskType = $taskType.Trim()
+        $taskStatus = [string]$task.status
+        $taskStatus = $taskStatus.Trim()
+
+        if ($script:ImplementableTaskTypes -contains $taskType) {
+            if ($script:ImplementableSddStatuses -notcontains $taskStatus) {
+                continue
+            }
+            foreach ($field in $script:FullSddFields) {
+                if (-not (Test-SddValue (Get-TaskField -Task $task -ParsedMarkdown $parsed -Field $field))) {
+                    Fail "Task $($task.id) missing SDD field: $field"
+                }
+            }
+            $specId = Get-TaskField -Task $task -ParsedMarkdown $parsed -Field "spec_id"
+            if ((Test-SddValue $specId) -and -not (Test-SpecIdExists -Root $Root -SpecId $specId)) {
+                Fail "Task $($task.id) spec_id not found: $specId"
+            }
+        } elseif ($script:LightweightTaskTypes -contains $taskType) {
+            if ($taskStatus -eq "proposed") {
+                continue
+            }
+            foreach ($field in $script:LightweightSddFields) {
+                if (-not (Test-SddValue (Get-TaskField -Task $task -ParsedMarkdown $parsed -Field $field))) {
+                    Warn "Task $($task.id) missing lightweight SDD field: $field"
+                }
+            }
+        } else {
+            Warn "Task $($task.id) has unrecognized type: $taskType"
+        }
+    }
+}
+
 $script:Errors = [System.Collections.Generic.List[string]]::new()
 $script:Warnings = [System.Collections.Generic.List[string]]::new()
 
@@ -314,6 +545,8 @@ if ($index -and $index.tasks) {
         }
     }
 }
+
+Validate-Sdd -Root $resolvedRoot -Index $index -Config $config
 
 $mailboxRoot = Join-Path $resolvedRoot "Area_comun/mailbox"
 foreach ($mailboxState in @("open", "answered", "archived")) {

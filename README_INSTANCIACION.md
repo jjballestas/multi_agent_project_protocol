@@ -78,7 +78,58 @@ Para comprobar que no quedan placeholders sin resolver:
 rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
 ```
 
-## 3. Crear un proyecto nuevo manualmente
+## 3. Arrancar un proyecto con SDD
+
+SDD es opcional y esta apagado por defecto. Para iniciar una instancia con SDD activado:
+
+1. Crea la instancia con el script o de forma manual.
+2. Activa el bloque `sdd` en `protocol.config.json`:
+
+```json
+{
+  "sdd": {
+    "enabled": true,
+    "enforcement": "new_implementable_tasks",
+    "adopted_at": "2026-06-05"
+  }
+}
+```
+
+3. Crea una spec en `Area_comun/specs/` usando `Area_comun/specs/SPEC_TEMPLATE.md`.
+4. Declara la tarea implementable con estos seis campos:
+   - `spec_id`
+   - `execution_pipeline`
+   - `acceptance_criteria`
+   - `linked_decisions`
+   - `test_plan`
+   - `closure_criteria`
+5. Verifica que `spec_id` apunta a un archivo existente dentro de la instancia.
+6. Ejecuta ambos validadores antes del handoff.
+
+Ejemplo minimo de tarea implementable con SDD:
+
+```yaml
+---
+id: TASK-0001
+owner: Codex
+status: ready
+type: implementation
+spec_id: Area_comun/specs/SPEC-0001-example.md
+execution_pipeline: [Create artifact, Run validator]
+acceptance_criteria: [Artifact exists, Validator passes]
+linked_decisions: [DECISION-0001]
+test_plan: [python validator, powershell validator]
+closure_criteria: [Handoff created, Review requested]
+---
+```
+
+Para tareas de `discovery`, `analysis`, `review`, `documentation` o `triage`, usa los cuatro
+campos minimos: `objective`, `expected_output`, `question_to_resolve` y `closure_criterion`.
+
+La instancia `examples/minimal_sdd_instance/` muestra el caso minimo completo: `sdd.enabled:true`,
+una spec resoluble y una tarea `implementation` conforme a SDD.
+
+## 4. Crear un proyecto nuevo manualmente
 
 1. Copia el contenido de `protocol_template/` a la raiz del nuevo repo.
 2. Copia estos archivos master para crear los archivos vivos de la instancia:
@@ -98,7 +149,7 @@ rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
    que sigue la instancia (p.ej. `0.1.0`); ver `CHANGELOG.md` y
    `Area_comun/decisions/DECISION-0001-versionado.md`.
 
-## 4. Archivos a completar primero
+## 5. Archivos a completar primero
 
 1. `AGENTS.md`: contrato superior del proyecto.
 2. `Area_comun/state/PROJECT_STATE.json`: fase inicial, objetivo, agentes, decisiones y riesgos.
@@ -106,7 +157,7 @@ rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
 4. `Area_comun/state/TASK_INDEX.json`: backlog inicial.
 5. `Area_comun/tasks/TASK-0001-*.md`: primera tarea ejecutable.
 
-## 5. Generar backlog inicial
+## 6. Generar backlog inicial
 
 1. Crea tareas pequenas, verificables y con un solo owner.
 2. Cada tarea debe tener objetivo, entradas, archivos relevantes, entregables, DoD, riesgos y
@@ -115,7 +166,7 @@ rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
 4. Si una tarea depende de una decision, enlaza `Area_comun/decisions/DECISION-XXXX-*.md`.
 5. Si hay una ambiguedad bloqueante, usa status `blocked` y una pregunta concreta.
 
-## 6. Reclamar tareas
+## 7. Reclamar tareas
 
 1. Lee `AGENTS.md`, `Area_comun/README.md`, `TASK_PROTOCOL.md`, `PROJECT_STATE.json`,
    `TASK_INDEX.json`, `CLAIMS.json`, `mailbox/open/` y el archivo de tarea.
@@ -124,7 +175,7 @@ rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
 4. Crea o actualiza una entrada en `Area_comun/state/CLAIMS.json` con scope explicito.
 5. Al cerrar, libera el claim con `status: released`.
 
-## 7. Cerrar una fase
+## 8. Cerrar una fase
 
 1. Todas las tareas de salida de fase deben estar `done` o tener bloqueo aceptado.
 2. Debe existir handoff autocontenido para lo que otro agente deba revisar.
@@ -143,7 +194,7 @@ funcionar:
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1
 ```
 
-## 8. Validar una instancia minima de ejemplo
+## 9. Validar una instancia minima de ejemplo
 
 Desde la raiz de esta plantilla:
 
@@ -151,7 +202,14 @@ Desde la raiz de esta plantilla:
 powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root examples\minimal_instance
 ```
 
-## 9. Convencion de archivos template
+Para validar el ejemplo con SDD activado:
+
+```powershell
+python scripts\validate_collaboration_state.py --root examples\minimal_sdd_instance
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root examples\minimal_sdd_instance
+```
+
+## 10. Convencion de archivos template
 
 Los archivos con sufijo `.template.*` son los unicos masters para contenido que se rellena por
 proyecto. Para un proyecto NUEVO, los canonicos sin sufijo (`AGENTS.md`, `protocol.config.json`,

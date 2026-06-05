@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer",
+  "tasks": [
+    {
+      "id": "TASK-VALID",
+      "owner": "implementer",
+      "status": "in_progress",
+      "priority": "normal",
+      "phase": "TEST",
+      "title": "Valid SDD task",
+      "file": "Area_comun/tasks/TASK-VALID.md",
+      "depends_on": [],
+      "relates_to": [],
+      "relevant_files": [],
+      "deliverables": [],
+      "blocked_by_questions": []
+    }
+  ]
+}

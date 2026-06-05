@@ -10,6 +10,11 @@
   },
   "quality_gates": ["{{QUALITY_GATES}}"],
   "human_approval_points": ["{{HUMAN_APPROVAL_POINTS}}"],
+  "sdd": {
+    "enabled": false,
+    "enforcement": "new_implementable_tasks",
+    "adopted_at": "2026-06-05"
+  },
   "state_invariants": [
     {
       "path": "status",
@@ -18,4 +23,3 @@
     }
   ]
 }
-

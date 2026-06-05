@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.4.0",
+  "project_name": "lightweight_warnings",
+  "source_of_truth": "AGENTS.md",
+  "agent_roles": {
+    "architect": "architect",
+    "implementer": "implementer",
+    "human_owner": "human"
+  },
+  "quality_gates": ["validator_green"],
+  "human_approval_points": ["boundary_change"],
+  "sdd": {
+    "enabled": true,
+    "enforcement": "new_implementable_tasks",
+    "adopted_at": "2026-06-05"
+  },
+  "state_invariants": [
+    { "path": "status", "equals": "active" }
+  ]
+}

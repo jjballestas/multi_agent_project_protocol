@@ -14,22 +14,28 @@ What was accomplished.
 ## 2. What Was Done
 Plain-language summary.
 
-## 3. Decisions
-Short list of decisions and practical consequences.
+## 3. SDD Summary
+- Specs created or modified:
+- Tasks implemented against specs:
+- Acceptance criteria satisfied:
+- Test plans executed:
+- Spec deviations:
 
-## 4. Current Project State
+## 4. Decisions
+Short list of linked decisions and practical consequences.
+
+## 5. Current Project State
 Where the project stands now.
 
-## 5. Next Steps
+## 6. Next Steps
 The next actions in order.
 
-## 6. What We Need From The Human Owner
+## 7. What We Need From The Human Owner
 Concrete approvals or answers.
 
-## 7. Things To Watch
-Known risks in plain language.
+## 8. Risks Or Ambiguities
+Known risks, open questions or unclear requirements in plain language.
 
-## 8. Details
-Links to technical artifacts.
+## 9. Details
+Links to specs, tasks, handoffs, decisions, reports and technical artifacts.
 ```
-

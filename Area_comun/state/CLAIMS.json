@@ -4,6 +4,166 @@
     "updated_by":  "Claude",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-release-v040-claude",
+                       "task_id":  "TASK-0012",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "AGENTS.md",
+                                     "protocol.config.json",
+                                     "Area_comun/tasks/TASK-0012-codex-example-minimal-sdd.md",
+                                     "Area_comun/tasks/TASK-0013-codex-doc-sdd-onboarding.md",
+                                     "Area_comun/handoffs/HANDOFF-SDD-0012-0013-claude-to-codex-1.md",
+                                     "Area_comun/reports/REPORT-20260605-release-v0.4.0.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Cierre de TASK-0012/0013 y publicacion de v0.4.0 (SDD)."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0012-codex",
+                       "task_id":  "TASK-0012",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "examples/minimal_sdd_instance/",
+                                     "Area_comun/tasks/TASK-0012-codex-example-minimal-sdd.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0012-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0012 en in_review con minimal_sdd_instance y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0013-codex",
+                       "task_id":  "TASK-0013",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "README_INSTANCIACION.md",
+                                     "Area_comun/tasks/TASK-0013-codex-doc-sdd-onboarding.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0013-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0013 en in_review con documentacion SDD y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-review-sdd-0009-0011-claude",
+                       "task_id":  "TASK-0011",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/tasks/TASK-0009-codex-sdd-templates.md",
+                                     "Area_comun/tasks/TASK-0010-codex-specs-folder.md",
+                                     "Area_comun/tasks/TASK-0011-codex-validator-sdd.md",
+                                     "Area_comun/handoffs/HANDOFF-SDD-0009-0011-claude-to-codex-1.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Revision cruzada y cierre de TASK-0009/0010/0011 contra sus specs. Edicion de TASK_INDEX.json limitada a esas filas."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0011-codex",
+                       "task_id":  "TASK-0011",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/validate_collaboration_state.py",
+                                     "scripts/validate_collaboration_state.ps1",
+                                     "protocol.config.template.json",
+                                     "examples/sdd_validation_cases/",
+                                     "Area_comun/tasks/TASK-0011-codex-validator-sdd.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0011-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0011 en in_review con modo SDD config-gated, golden cases y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0009-codex",
+                       "task_id":  "TASK-0009",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/protocol/TASK_PROTOCOL.md",
+                                     "Area_comun/protocol/TASK_TEMPLATE.md",
+                                     "Area_comun/protocol/HANDOFF_TEMPLATE.md",
+                                     "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md",
+                                     "Area_comun/tasks/TASK-0009-codex-sdd-templates.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0009-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0009 en in_review con plantillas de protocolo actualizadas y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0010-codex",
+                       "task_id":  "TASK-0010",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/specs/SPEC_TEMPLATE.md",
+                                     "Area_comun/specs/PROJECT_BRIEF_TEMPLATE.md",
+                                     "Area_comun/specs/REQUIREMENTS_TEMPLATE.md",
+                                     "Area_comun/specs/ACCEPTANCE_CRITERIA_TEMPLATE.md",
+                                     "Area_comun/specs/TEST_PLAN_TEMPLATE.md",
+                                     "Area_comun/specs/TRACEABILITY_MATRIX_TEMPLATE.md",
+                                     "Area_comun/tasks/TASK-0010-codex-specs-folder.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0010-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0010 en in_review con plantillas specs reutilizables y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0008-claude",
+                       "task_id":  "TASK-0008",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/artifacts/DISENO-SDD.md",
+                                     "Area_comun/specs/",
+                                     "Area_comun/tasks/TASK-0008-claude-sdd-design.md",
+                                     "Area_comun/tasks/TASK-0009-codex-sdd-templates.md",
+                                     "Area_comun/tasks/TASK-0010-codex-specs-folder.md",
+                                     "Area_comun/tasks/TASK-0011-codex-validator-sdd.md",
+                                     "Area_comun/tasks/TASK-0012-codex-example-minimal-sdd.md",
+                                     "Area_comun/tasks/TASK-0013-codex-doc-sdd-onboarding.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0008-claude-to-codex-2.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Ejecucion de TASK-0008: diseno SDD + specs (spec_id) que desbloquean TASK-0009..0013. Edito esos task files solo para fijar spec_id + campos SDD (provistos por el diseno)."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-decision0004-sdd-claude",
                        "task_id":  "TASK-0008",
                        "owner":  "Claude",

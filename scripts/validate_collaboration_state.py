@@ -17,6 +17,30 @@ from typing import Any
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
 REVIEWED_TASK_STATUSES = {"in_review", "done"}
+IMPLEMENTABLE_TASK_TYPES = {
+    "implementation",
+    "refactor",
+    "integration",
+    "migration",
+    "security",
+    "release",
+}
+LIGHTWEIGHT_TASK_TYPES = {"discovery", "analysis", "review", "documentation", "triage"}
+IMPLEMENTABLE_SDD_STATUSES = {"ready", "claimed", "in_progress", "in_review", "done"}
+FULL_SDD_FIELDS = [
+    "spec_id",
+    "execution_pipeline",
+    "acceptance_criteria",
+    "linked_decisions",
+    "test_plan",
+    "closure_criteria",
+]
+LIGHTWEIGHT_SDD_FIELDS = [
+    "objective",
+    "expected_output",
+    "question_to_resolve",
+    "closure_criterion",
+]
 PROFILE_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -54,6 +78,112 @@ def get_task_status_from_markdown(path: Path) -> str | None:
         if match:
             return match.group(1)
     return None
+
+
+def parse_frontmatter_value(value: str) -> Any:
+    value = value.strip()
+    if not value:
+        return ""
+    lowered = value.lower()
+    if lowered == "true":
+        return True
+    if lowered == "false":
+        return False
+    if value.startswith("[") and value.endswith("]"):
+        inner = value[1:-1].strip()
+        if not inner:
+            return []
+        return [part.strip().strip("\"'") for part in inner.split(",")]
+    return value.strip("\"'")
+
+
+def parse_task_markdown(path: Path) -> dict[str, Any]:
+    metadata: dict[str, Any] = {"frontmatter": {}, "sections": {}}
+    if not path.exists():
+        return metadata
+
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    body_start = 0
+    if lines and lines[0].strip() == "---":
+        for index, line in enumerate(lines[1:], start=1):
+            if line.strip() == "---":
+                body_start = index + 1
+                break
+            match = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$", line)
+            if match:
+                key, value = match.groups()
+                metadata["frontmatter"][key] = parse_frontmatter_value(value)
+
+    current_section: str | None = None
+    section_lines: list[str] = []
+    for line in lines[body_start:]:
+        heading = re.match(r"^#{2,6}\s+(.+?)\s*$", line)
+        if heading:
+            if current_section:
+                metadata["sections"][current_section] = section_lines
+            current_section = heading.group(1).strip().lower().replace(" ", "_")
+            section_lines = []
+            continue
+        if current_section:
+            section_lines.append(line)
+    if current_section:
+        metadata["sections"][current_section] = section_lines
+    return metadata
+
+
+def get_task_field(task: dict[str, Any], parsed_markdown: dict[str, Any], field: str) -> Any | None:
+    frontmatter = parsed_markdown.get("frontmatter", {})
+    if isinstance(frontmatter, dict) and field in frontmatter:
+        return frontmatter[field]
+    if field in task:
+        return task[field]
+    sections = parsed_markdown.get("sections", {})
+    if isinstance(sections, dict) and field in sections:
+        section_lines = [line.strip() for line in sections[field] if line.strip()]
+        return section_lines
+    return None
+
+
+def has_sdd_value(value: Any) -> bool:
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip()) and value.strip().lower() != "none"
+    if isinstance(value, list):
+        return any(has_sdd_value(item) for item in value)
+    return True
+
+
+def is_truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() == "true"
+    return bool(value)
+
+
+def is_presdd_task(task: dict[str, Any], parsed_markdown: dict[str, Any], adopted_at: str) -> bool:
+    if is_truthy(get_task_field(task, parsed_markdown, "sdd_exempt")):
+        return True
+    task_type = get_task_field(task, parsed_markdown, "type")
+    if not has_sdd_value(task_type):
+        return True
+    created_at = get_task_field(task, parsed_markdown, "created_at")
+    if isinstance(created_at, str) and DATE_PATTERN.match(created_at) and created_at < adopted_at:
+        return True
+    return False
+
+
+def spec_id_exists(root: Path, spec_id: Any) -> bool:
+    if not isinstance(spec_id, str) or not spec_id.strip():
+        return False
+    spec_text = spec_id.strip()
+    candidates = [root / spec_text]
+    if "/" not in spec_text and "\\" not in spec_text:
+        candidates.append(root / "Area_comun" / "specs" / spec_text)
+        if not spec_text.endswith(".md"):
+            candidates.append(root / "Area_comun" / "specs" / f"{spec_text}.md")
+    return any(candidate.exists() for candidate in candidates)
 
 
 def get_value_by_path(obj: Any, dotted_path: str) -> Any | None:
@@ -286,6 +416,62 @@ def validate_tasks(root: Path, index: dict[str, Any] | None, validation: Validat
                     validation.fail(f"Task {task_id} deliverable missing: {deliverable}")
 
 
+def validate_sdd(
+    root: Path,
+    index: dict[str, Any] | None,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not index or not config:
+        return
+    sdd_config = config.get("sdd")
+    if not isinstance(sdd_config, dict) or sdd_config.get("enabled") is not True:
+        return
+
+    enforcement = sdd_config.get("enforcement") or "new_implementable_tasks"
+    if enforcement != "new_implementable_tasks":
+        validation.fail(f"Unsupported sdd.enforcement: {enforcement}")
+        return
+    adopted_at = sdd_config.get("adopted_at") or "2026-06-05"
+    if not isinstance(adopted_at, str) or not DATE_PATTERN.match(adopted_at):
+        validation.fail(f"Invalid sdd.adopted_at: {adopted_at}")
+        return
+
+    for task in as_list(index.get("tasks")):
+        if not isinstance(task, dict):
+            continue
+        task_id = task.get("id", "<unknown>")
+        task_file = task.get("file") or task.get("task_file")
+        if not task_file:
+            continue
+        task_path = root / str(task_file)
+        parsed = parse_task_markdown(task_path)
+
+        if is_presdd_task(task, parsed, adopted_at):
+            continue
+
+        task_type = str(get_task_field(task, parsed, "type")).strip()
+        task_status = str(task.get("status", "")).strip()
+
+        if task_type in IMPLEMENTABLE_TASK_TYPES:
+            if task_status not in IMPLEMENTABLE_SDD_STATUSES:
+                continue
+            for field in FULL_SDD_FIELDS:
+                if not has_sdd_value(get_task_field(task, parsed, field)):
+                    validation.fail(f"Task {task_id} missing SDD field: {field}")
+            spec_id = get_task_field(task, parsed, "spec_id")
+            if has_sdd_value(spec_id) and not spec_id_exists(root, spec_id):
+                validation.fail(f"Task {task_id} spec_id not found: {spec_id}")
+        elif task_type in LIGHTWEIGHT_TASK_TYPES:
+            if task_status == "proposed":
+                continue
+            for field in LIGHTWEIGHT_SDD_FIELDS:
+                if not has_sdd_value(get_task_field(task, parsed, field)):
+                    validation.warn(f"Task {task_id} missing lightweight SDD field: {field}")
+        else:
+            validation.warn(f"Task {task_id} has unrecognized type: {task_type}")
+
+
 def validate_mailbox(root: Path, validation: Validation) -> None:
     mailbox_root = root / "Area_comun" / "mailbox"
     for state in ("open", "answered", "archived"):
@@ -406,6 +592,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
     validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
+    validate_sdd(root, index if isinstance(index, dict) else None, config, validation)
     validate_mailbox(root, validation)
     validate_reports(root, validation)
     validate_claims(claims if isinstance(claims, dict) else None, validation)

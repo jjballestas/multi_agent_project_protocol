@@ -17,6 +17,40 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.4.0] — 2026-06-05
+
+Spec-Driven Development (SDD): clarity before execution. Implementable tasks must declare a spec,
+execution pipeline, acceptance criteria, linked decisions, test plan and closure criteria before
+they can start. **MINOR** release — additive, config-gated (off by default), no retroactive
+migration of historical tasks.
+
+### Added
+- **SDD policy** ([DECISION-0004](Area_comun/decisions/DECISION-0004-sdd-pipeline-y-cierre.md),
+  TASK-0008): the six SDD fields (`spec_id`, `execution_pipeline`, `acceptance_criteria`,
+  `linked_decisions`, `test_plan`, `closure_criteria`) for implementable task types and four
+  lightweight fields for discovery/analysis/review/documentation/triage; ambiguity ⇒ ask, never
+  invent steps; design + rollout specs in `Area_comun/artifacts/DISENO-SDD.md` and
+  `Area_comun/specs/SPEC-0009..0013`.
+- **Protocol templates updated for SDD** (TASK-0009): `TASK_PROTOCOL.md` (SDD gate +
+  clarity-before-execution + task `type`), `TASK_TEMPLATE.md`, `HANDOFF_TEMPLATE.md` (criteria +
+  tests + spec deviations), `HUMAN_REPORT_TEMPLATE.md`.
+- **Reusable spec templates** in `Area_comun/specs/` (TASK-0010): `SPEC_TEMPLATE`,
+  `PROJECT_BRIEF_TEMPLATE`, `REQUIREMENTS_TEMPLATE`, `ACCEPTANCE_CRITERIA_TEMPLATE`,
+  `TEST_PLAN_TEMPLATE`, `TRACEABILITY_MATRIX_TEMPLATE`.
+- **Profile-aware → SDD-aware validators** (TASK-0011): config-gated SDD checks in
+  `validate_collaboration_state.py`/`.ps1` (block `sdd` in `protocol.config.template.json`,
+  default `enabled:false`), pre-SDD exemption, ERROR/WARNING rules, golden cases in
+  `examples/sdd_validation_cases/` with `.py`↔`.ps1` parity.
+- **Reference instance** `examples/minimal_sdd_instance/` (TASK-0012, `sdd.enabled:true`, validates
+  green) and **SDD onboarding** section in `README_INSTANCIACION.md` (TASK-0013).
+
+### Notes
+- MINOR per DECISION-0001 §4 (additive, config-gated). `enabled:false`/absent ⇒ validators behave
+  exactly as before. Retroactive enforcement to all tasks would be MAJOR (out of scope); TASK-0001..0007
+  remain pre-SDD with no migration.
+- Validators green on root and all examples (`minimal_instance`, `generated_minimal_instance`,
+  `dotnet_enterprise_instance`, `minimal_sdd_instance`) plus SDD and profile golden cases.
+
 ## [0.3.0] — 2026-06-05
 
 Professional profiles: the protocol becomes layered (core / profiles / examples) and can be
@@ -88,7 +122,8 @@ Initial extraction and bootstrap of the reusable, domain-neutral multi-agent pro
 - Reference instance `examples/minimal_instance/` (validates green).
 - PowerShell validator `scripts/validate_collaboration_state.ps1`.
 
-[Unreleased]: https://example.invalid/compare/v0.3.0...HEAD
+[Unreleased]: https://example.invalid/compare/v0.4.0...HEAD
+[0.4.0]: https://example.invalid/compare/v0.3.0...v0.4.0
 [0.3.0]: https://example.invalid/compare/v0.2.0...v0.3.0
 [0.2.0]: https://example.invalid/compare/v0.1.0...v0.2.0
 [0.1.0]: https://example.invalid/releases/tag/v0.1.0

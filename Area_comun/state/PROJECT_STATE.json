@@ -1,7 +1,7 @@
 {
   "project": "multi_agent_project_protocol",
   "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "phase": {
     "id": "P2",
     "name": "Adopcion y expansion",
@@ -9,8 +9,19 @@
     "subphase": {
       "id": "P2.SDD",
       "name": "Formalizacion SDD (Spec-Driven Development)",
-      "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Se publica aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
-      "backlog": ["TASK-0008", "TASK-0009", "TASK-0010", "TASK-0011", "TASK-0012", "TASK-0013"]
+      "status": "completed",
+      "closed_with": "v0.4.0",
+      "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+      "backlog": ["TASK-0008", "TASK-0009", "TASK-0010", "TASK-0011", "TASK-0012", "TASK-0013"],
+      "exit_criteria_met": [
+        "DECISION-0004 + diseno + specs (TASK-0008)",
+        "Plantillas de protocolo SDD (TASK-0009)",
+        "specs/ + plantillas reutilizables (TASK-0010)",
+        "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
+        "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
+        "Onboarding SDD documentado (TASK-0013)",
+        "v0.4.0 publicada"
+      ]
     },
     "exit_criteria": [
       "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
@@ -43,7 +54,8 @@
   "released_versions": [
     "v0.1.0",
     "v0.2.0",
-    "v0.3.0"
+    "v0.3.0",
+    "v0.4.0"
   ],
   "decisions": [
     "DECISION-0001-versionado",
@@ -97,38 +109,38 @@
     {
       "id": "TASK-0008",
       "owner": "Claude",
-      "status": "ready",
-      "title": "Disenar SDD + pipeline + criterios de cierre (P2.SDD, analysis)"
+      "status": "done",
+      "title": "Disenar SDD + pipeline + criterios de cierre (P2.SDD, analysis) - DISENO-SDD.md + specs"
     },
     {
       "id": "TASK-0009",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Actualizar templates para SDD (P2.SDD, implementation; bloqueada hasta TASK-0008)"
+      "status": "done",
+      "title": "Actualizar templates para SDD (P2.SDD, implementation) - aceptada"
     },
     {
       "id": "TASK-0010",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Crear specs/ + plantillas SDD (P2.SDD, implementation; bloqueada hasta TASK-0008)"
+      "status": "done",
+      "title": "Crear specs/ + plantillas SDD (P2.SDD, implementation) - aceptada"
     },
     {
       "id": "TASK-0011",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Validadores en modo SDD, config-gated y aditivo (P2.SDD, implementation; bloqueada hasta TASK-0008/0010)"
+      "status": "done",
+      "title": "Validadores en modo SDD, config-gated y aditivo (P2.SDD, implementation) - aceptada"
     },
     {
       "id": "TASK-0012",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Example minimal_sdd_instance (P2.SDD, implementation; bloqueada hasta TASK-0010/0011)"
+      "status": "done",
+      "title": "Example minimal_sdd_instance (P2.SDD, implementation) - aceptada"
     },
     {
       "id": "TASK-0013",
       "owner": "Codex",
-      "status": "proposed",
-      "title": "Documentar inicio de proyecto con SDD (P2.SDD, documentation)"
+      "status": "done",
+      "title": "Documentar inicio de proyecto con SDD (P2.SDD, documentation) - aceptada"
     }
   ],
   "open_questions": [],
@@ -137,11 +149,10 @@
     "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
   ],
   "next_actions": [
-    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.3.0 PUBLICADA; fase P2, subfase P2.SDD abierta.",
-    "DECISION-0004 (SDD) aceptada: spec + pipeline + criterios de cierre ANTES de implementar; ante ambiguedad, preguntar (no inventar).",
-    "SIGUIENTE TRABAJO = formalizar SDD antes de cualquier nueva implementacion. Empezar por TASK-0008 (Claude, ready, analysis): produce las specs para TASK-0009..0012.",
-    "TASK-0009..0013 quedan proposed: las implementables NO pueden pasar a ready/claimed/in_progress sin sus 6 campos SDD (los entrega TASK-0008). Ver HANDOFF-TASK-0008-claude-to-codex-1.",
-    "Capa SDD se publica como v0.4.0 (MINOR, aditivo, config-gated). Exigirla retroactivamente seria MAJOR (fuera de alcance). Sin migracion de TASK-0001..0007 (pre-SDD).",
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.4.0 PUBLICADA; subfase P2.SDD CERRADA. Fase P2 (adopcion/expansion) activa.",
+    "SDD completo y publicado (TASK-0008..0013 done): gate previo a implementacion, config-gated (sdd.enabled, off por defecto), validadores con paridad, ejemplo minimal_sdd_instance.",
+    "SIGUIENTE: ejecutar DECISION-0005 (comunicacion compacta token-efficient) - pedido del owner, gate 'tras SDD' ya cumplido. Spec en memoria pending-decision-0005-compact-comms.",
+    "P2 backlog abierto: adopcion en instancias reales (bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs.",
     "Mantener: cada cambio aditivo y neutral; releases MINOR sin aprobacion humana, MAJOR/v1.0.0 con aprobacion (DECISION-0001)."
   ],
   "created_at": "2026-06-05",

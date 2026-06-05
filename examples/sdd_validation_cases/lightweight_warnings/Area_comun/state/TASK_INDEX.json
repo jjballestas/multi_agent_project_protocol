@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer",
+  "tasks": [
+    {
+      "id": "TASK-DISCOVERY",
+      "owner": "architect",
+      "status": "ready",
+      "priority": "normal",
+      "phase": "TEST",
+      "title": "Discovery without minimum fields",
+      "file": "Area_comun/tasks/TASK-DISCOVERY.md",
+      "depends_on": [],
+      "relates_to": [],
+      "relevant_files": [],
+      "deliverables": [],
+      "blocked_by_questions": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "implementer",
+  "tasks": [
+    { "id": "TASK-MISSING-SPEC", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing spec", "file": "Area_comun/tasks/TASK-MISSING-SPEC.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-MISSING-PIPELINE", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing pipeline", "file": "Area_comun/tasks/TASK-MISSING-PIPELINE.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-MISSING-ACCEPTANCE", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing acceptance", "file": "Area_comun/tasks/TASK-MISSING-ACCEPTANCE.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-MISSING-DECISIONS", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing decisions", "file": "Area_comun/tasks/TASK-MISSING-DECISIONS.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-MISSING-TESTS", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing tests", "file": "Area_comun/tasks/TASK-MISSING-TESTS.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-MISSING-CLOSURE", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Missing closure", "file": "Area_comun/tasks/TASK-MISSING-CLOSURE.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] },
+    { "id": "TASK-BAD-SPEC", "owner": "implementer", "status": "ready", "priority": "normal", "phase": "TEST", "title": "Bad spec", "file": "Area_comun/tasks/TASK-BAD-SPEC.md", "depends_on": [], "relates_to": [], "relevant_files": [], "deliverables": [], "blocked_by_questions": [] }
+  ]
+}
