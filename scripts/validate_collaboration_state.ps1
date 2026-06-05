@@ -193,6 +193,34 @@ function Test-SpecIdExists {
     return $false
 }
 
+function Test-MarkdownField {
+    param(
+        [string]$Content,
+        [string]$Field
+    )
+    return ($Content -match "(?m)^\s*$([regex]::Escape($Field))\s*:\s*\S+")
+}
+
+function Test-CompactMailboxMessage {
+    param([string]$Content)
+    foreach ($field in @("one_line_summary", "question", "context_refs", "changed_refs", "validation_refs", "deadline_or_blocking_level")) {
+        if (Test-MarkdownField -Content $Content -Field $field) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Test-ReferencesExistingWork {
+    param([string]$Content)
+    foreach ($pattern in @("\bTASK-\d{4}\b", "\bDECISION-\d{4}\b", "\bSPEC-\d{4}\b", "Area_comun/", "scripts/", "examples/", "README")) {
+        if ($Content -match $pattern) {
+            return $true
+        }
+    }
+    return $false
+}
+
 function Get-ValueByPath {
     param(
         [object]$Object,
@@ -622,6 +650,12 @@ if (Test-Path -LiteralPath $openMailboxDir) {
             if ($content -notmatch 'requested_action') {
                 Fail "Mailbox message requires response but has no requested_action: $($_.Name)"
             }
+            if ((Test-CompactMailboxMessage -Content $content) -and -not (Test-MarkdownField -Content $content -Field "question")) {
+                Fail "Compact mailbox message requires response but has no question: $($_.Name)"
+            }
+        }
+        if ((Test-CompactMailboxMessage -Content $content) -and (Test-ReferencesExistingWork -Content $content) -and -not (Test-MarkdownField -Content $content -Field "context_refs")) {
+            Warn "Compact mailbox message references existing work but has no context_refs: $($_.Name)"
         }
     }
 }

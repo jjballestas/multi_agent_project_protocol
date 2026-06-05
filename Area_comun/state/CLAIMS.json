@@ -1,8 +1,43 @@
 ﻿{
     "schema_version":  "1.0",
     "updated_at":  "2026-06-05",
-    "updated_by":  "Claude",
+    "updated_by":  "Codex",
     "claims":  [
+                   {
+                       "claim_id":  "CLAIM-20260605-review-task0014-claude",
+                       "task_id":  "TASK-0014",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/tasks/TASK-0014-codex-compact-comms-validator.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0014-claude-to-codex-1.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Revision/cierre de TASK-0014 (validador compacto). Edicion de TASK_INDEX limitada a su fila."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0014-codex",
+                       "task_id":  "TASK-0014",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/validate_collaboration_state.py",
+                                     "scripts/validate_collaboration_state.ps1",
+                                     "examples/compact_comms_validation_cases/",
+                                     "Area_comun/tasks/TASK-0014-codex-compact-comms-validator.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0014-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0014 en in_review con validadores compactos, golden cases y handoff."
+                   },
                    {
                        "claim_id":  "CLAIM-20260605-decision0005-compactcomms-claude",
                        "task_id":  "TASK-0014",

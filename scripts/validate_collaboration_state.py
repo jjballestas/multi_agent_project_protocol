@@ -186,6 +186,35 @@ def spec_id_exists(root: Path, spec_id: Any) -> bool:
     return any(candidate.exists() for candidate in candidates)
 
 
+def has_markdown_field(content: str, field: str) -> bool:
+    return bool(re.search(rf"^\s*{re.escape(field)}\s*:\s*\S+", content, flags=re.MULTILINE))
+
+
+def is_compact_mailbox_message(content: str) -> bool:
+    compact_fields = (
+        "one_line_summary",
+        "question",
+        "context_refs",
+        "changed_refs",
+        "validation_refs",
+        "deadline_or_blocking_level",
+    )
+    return any(has_markdown_field(content, field) for field in compact_fields)
+
+
+def references_existing_work(content: str) -> bool:
+    reference_patterns = (
+        r"\bTASK-\d{4}\b",
+        r"\bDECISION-\d{4}\b",
+        r"\bSPEC-\d{4}\b",
+        r"Area_comun/",
+        r"scripts/",
+        r"examples/",
+        r"README",
+    )
+    return any(re.search(pattern, content) for pattern in reference_patterns)
+
+
 def get_value_by_path(obj: Any, dotted_path: str) -> Any | None:
     current = obj
     for part in dotted_path.split("."):
@@ -495,6 +524,20 @@ def validate_mailbox(root: Path, validation: Validation) -> None:
                     "Mailbox message requires response but has no requested_action: "
                     f"{message_path.name}"
                 )
+            if is_compact_mailbox_message(content) and not has_markdown_field(content, "question"):
+                validation.fail(
+                    "Compact mailbox message requires response but has no question: "
+                    f"{message_path.name}"
+                )
+        if (
+            is_compact_mailbox_message(content)
+            and references_existing_work(content)
+            and not has_markdown_field(content, "context_refs")
+        ):
+            validation.warn(
+                "Compact mailbox message references existing work but has no context_refs: "
+                f"{message_path.name}"
+            )
 
 
 def validate_reports(root: Path, validation: Validation) -> None:

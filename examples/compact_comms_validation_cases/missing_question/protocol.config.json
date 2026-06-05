@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.5.0",
+  "project_name": "missing_question",
+  "source_of_truth": "AGENTS.md",
+  "agent_roles": {
+    "architect": "architect",
+    "implementer": "implementer",
+    "human_owner": "human"
+  },
+  "quality_gates": ["validator_green"],
+  "human_approval_points": ["boundary_change"],
+  "state_invariants": [
+    { "path": "status", "equals": "active" }
+  ]
+}

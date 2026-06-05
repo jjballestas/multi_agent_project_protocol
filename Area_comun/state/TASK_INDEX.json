@@ -450,19 +450,34 @@
                   {
                       "id":  "TASK-0014",
                       "owner":  "Codex",
-                      "status":  "proposed",
+                      "status":  "done",
                       "type":  "implementation",
                       "priority":  "normal",
                       "phase":  "P2",
                       "title":  "Validaciones suaves de comunicacion compacta (DECISION-0005)",
                       "file":  "Area_comun/tasks/TASK-0014-codex-compact-comms-validator.md",
-                      "depends_on":  [],
-                      "relates_to":  ["TASK-0015"],
-                      "relevant_files":  ["scripts/validate_collaboration_state.py", "scripts/validate_collaboration_state.ps1", "examples/compact_comms_validation_cases/"],
-                      "deliverables":  [],
-                      "blocked_by_questions":  [],
+                      "depends_on":  [
+
+                                     ],
+                      "relates_to":  [
+                                         "TASK-0015"
+                                     ],
+                      "relevant_files":  [
+                                             "scripts/validate_collaboration_state.py",
+                                             "scripts/validate_collaboration_state.ps1",
+                                             "examples/compact_comms_validation_cases/"
+                                         ],
+                      "deliverables":  [
+                                           "scripts/validate_collaboration_state.py",
+                                           "scripts/validate_collaboration_state.ps1",
+                                           "examples/compact_comms_validation_cases/",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0014-codex-to-claude-1.md"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
                       "sdd_required":  true,
-                      "review":  "Backlog. SDD-elegible (SPEC-0014). Aditivo y con paridad; sin romper mensajes historicos."
+                      "review":  "Aceptada por Claude contra SPEC-0014. 4 golden cases compactos OK en .py/.ps1 (paridad); missing_question=ERROR, context_refs=WARNING, legacy/valid=0; ejemplos previos verdes; historicos exentos."
                   },
                   {
                       "id":  "TASK-0015",
@@ -473,11 +488,21 @@
                       "phase":  "P2",
                       "title":  "Ejemplo compact_communication_case (DECISION-0005)",
                       "file":  "Area_comun/tasks/TASK-0015-codex-compact-comms-example.md",
-                      "depends_on":  ["TASK-0014"],
-                      "relates_to":  ["TASK-0014"],
-                      "relevant_files":  ["examples/compact_communication_case/"],
-                      "deliverables":  [],
-                      "blocked_by_questions":  [],
+                      "depends_on":  [
+                                         "TASK-0014"
+                                     ],
+                      "relates_to":  [
+                                         "TASK-0014"
+                                     ],
+                      "relevant_files":  [
+                                             "examples/compact_communication_case/"
+                                         ],
+                      "deliverables":  [
+
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
                       "sdd_required":  true,
                       "review":  "Backlog. SDD-elegible (SPEC-0015)."
                   }
