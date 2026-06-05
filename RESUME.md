@@ -1,49 +1,99 @@
-# RESUME.md — Cómo retomar este proyecto (multi_agent_project_protocol)
+# RESUME.md - Como retomar este proyecto
 
-> Para abrir una sesión nueva en frío y seguir enriqueciendo el protocolo. Fuente de verdad del
-> estado: `Area_comun/state/`. Este repo **se gestiona a sí mismo** (dogfooding).
+> Cold start para `multi_agent_project_protocol`. Fuente de verdad: `AGENTS.md` y
+> `Area_comun/state/`. Este repo se gestiona a si mismo con su propio protocolo.
 
-## 1. Posicionarse y validar
-```
+## 1. Foto Actual
+
+- Fecha de esta memoria: 2026-06-05.
+- Rama: `main`.
+- Version publicada: `v0.5.0`.
+- Ultimo commit observado: `a74639b release(v0.5.0): comunicacion compacta token-efficient entre agentes`.
+- Tag publicado: `v0.5.0`.
+- Estado del arbol al actualizar esta memoria: limpio antes de editar `RESUME.md`.
+- Claims activas: ninguna.
+- Mailbox abierto: solo `.gitkeep`.
+- Tareas: `TASK-0001..TASK-0015` estan `done`.
+- Decisiones aceptadas/publicadas: `DECISION-0001..DECISION-0005`.
+
+## 2. Validar Al Entrar
+
+```powershell
 cd d:\Agentes\multi_agent_project_protocol
-git checkout main && git pull
-python scripts/validate_collaboration_state.py --root .              # debe dar OK
-python scripts/validate_collaboration_state.py --root examples/minimal_instance
+git checkout main
+git pull
+git status --short --branch
+python scripts\validate_collaboration_state.py --root .
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root .
 ```
-(También existe el validador PowerShell equivalente: `scripts/validate_collaboration_state.ps1`.)
 
-## 2. Leer en este orden (cold start, AGENTS.md §0)
-1. `AGENTS.md` (+ `CLAUDE.md` para reglas de Claude).
+Validaciones de regresion recomendadas:
+
+```powershell
+python scripts\validate_collaboration_state.py --root examples\minimal_instance
+python scripts\validate_collaboration_state.py --root examples\generated_minimal_instance
+python scripts\validate_collaboration_state.py --root examples\dotnet_enterprise_instance
+python scripts\validate_collaboration_state.py --root examples\minimal_sdd_instance
+python scripts\validate_collaboration_state.py --root examples\compact_communication_case
+powershell -NoProfile -ExecutionPolicy Bypass -File examples\sdd_validation_cases\run_sdd_cases.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File examples\compact_comms_validation_cases\run_compact_comms_cases.ps1
+```
+
+## 3. Leer En Este Orden
+
+1. `AGENTS.md`.
 2. `Area_comun/README.md`.
-3. `Area_comun/protocol/TASK_PROTOCOL.md` y `COMMUNICATION_PROTOCOL.md`.
-4. `Area_comun/state/PROJECT_STATE.json` → **`next_actions`**.
-5. `Area_comun/state/TASK_INDEX.json` y `CLAIMS.json`.
-6. `Area_comun/mailbox/open/` (mensajes pendientes).
-7. La tarea concreta en `Area_comun/tasks/`.
+3. `Area_comun/protocol/TASK_PROTOCOL.md`.
+4. `Area_comun/protocol/COMMUNICATION_PROTOCOL.md`.
+5. `Area_comun/state/PROJECT_STATE.json` (`next_actions` manda).
+6. `Area_comun/state/TASK_INDEX.json`.
+7. `Area_comun/state/CLAIMS.json`.
+8. `Area_comun/mailbox/open/`.
+9. La tarea concreta en `Area_comun/tasks/`.
 
-Atajo: `Claude/MEMORY.md` (mío) y `Codex/Memory.md` (de Codex) tienen el contexto condensado.
+## 4. Releases Cerrados
 
-## 3. Dónde quedó (a 2026-06-05)
-- Versión publicada: **v0.1.0** (tag). Fase **P0 = enriquecimiento** hacia v0.2.0.
-- **Hecho:** dogfooding del repo (Área común viva, áreas privadas, `.claude/`), y **TASK-0002**
-  (validador Python multiplataforma + CI) **done**. **TASK-0001** (roadmap) **done** →
-  `Area_comun/artifacts/ROADMAP-v0.2.0.md`.
-- **Backlog priorizado listo para trabajar (próximo):**
-  1. **TASK-0003** (Claude) — Política SemVer + `CHANGELOG.md`.
-  2. **TASK-0004** (Codex) — Script de scaffolding `new_instance`.
-  - Candidatos futuros en el ROADMAP: más ejemplos, README principal, golden tests de paridad,
-    plantillas PR/issue, guía de adopción upstream→instancia.
+- `v0.1.0`: extraccion/bootstrap inicial del protocolo.
+- `v0.2.0`: versionado, CHANGELOG, validador Python, CI, scaffolding.
+- `v0.3.0`: arquitectura core/profiles/examples, perfil `dotnet_enterprise`, `adopted_profiles`.
+- `v0.4.0`: SDD config-gated (DECISION-0004), specs, validadores SDD, `minimal_sdd_instance`.
+- `v0.5.0`: comunicacion compacta token-efficient (DECISION-0005), soft-checks de mailbox,
+  `MAILBOX_MESSAGE_TEMPLATE`, golden cases compactos y `compact_communication_case`.
 
-## 4. Reglas que no cambian
-- **Núcleo neutral de dominio** (sin trading/negocio/secretos). Cambios de protocolo o
-  compatibilidad → `Area_comun/decisions/` + (releases mayores) aprobación humana.
-- `.template.*` = masters publicados; los canónicos vivos son la instancia dogfooding de ESTE repo.
-- Codex corre en paralelo: revisa `TASK_INDEX/CLAIMS/mailbox` antes de crear/editar; respeta claims.
+## 5. Estado Funcional
 
-## 5. Relación con el otro repo
-La instancia piloto de trading vive en `bot_spot_ai_strategy_pack` (repo aparte, en pausa). El
-protocolo **no se propaga** a las instancias automáticamente: cada una lo adopta por decisión.
+- Fase activa: `P2 = adopcion y expansion`.
+- Subfase `P2.SDD`: cerrada con `v0.4.0`.
+- Capa de comunicacion compacta: publicada con `v0.5.0`.
+- No hay tareas activas ni bloqueos registrados.
+- Backlog abierto conceptual: adopcion en instancias reales, mas perfiles/ejemplos/docs.
 
-## 6. Para arrancar la nueva sesión
-Sugerencia: reclama **TASK-0003** (Claude) y/o pásale **TASK-0004** a Codex (paralelizables,
-tocan archivos distintos). O define con el operador el orden del ROADMAP v0.2.0.
+## 6. Reglas Vigentes
+
+- Core neutral de dominio: no meter negocio/trading/secretos en el nucleo.
+- Cambios incompatibles requieren decision en `Area_comun/decisions/` y aprobacion humana.
+- Tareas implementables nuevas siguen SDD: `spec_id`, `execution_pipeline`,
+  `acceptance_criteria`, `linked_decisions`, `test_plan`, `closure_criteria`.
+- Comunicacion compacta: usar `MAILBOX_MESSAGE_TEMPLATE.md`, una intencion por mensaje y una sola
+  `question` si `requires_response:true`.
+- Antes de editar: leer `TASK_INDEX.json`, `CLAIMS.json`, `mailbox/open/` y reclamar scope.
+- No hacer commits parciales de release si Claude/orquestador tiene claim de release activa.
+
+## 7. Proximos Pasos Probables
+
+- Ratificacion humana pendiente de `v0.5.0` y, si aplica, releases/decisiones previas.
+- Definir el siguiente backlog P2 con SDD:
+  - adopcion del protocolo en `bot_spot_ai_strategy_pack`;
+  - mas perfiles profesionales;
+  - mas ejemplos de referencia;
+  - documentacion de adopcion y migracion de instancias.
+
+## 8. Archivos Clave Recientes
+
+- `Area_comun/reports/REPORT-20260605-release-v0.5.0.md`
+- `Area_comun/decisions/DECISION-0005-comunicacion-compacta-token-efficient.md`
+- `Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md`
+- `examples/compact_communication_case/`
+- `examples/compact_comms_validation_cases/`
+- `examples/minimal_sdd_instance/`
+- `examples/sdd_validation_cases/`
