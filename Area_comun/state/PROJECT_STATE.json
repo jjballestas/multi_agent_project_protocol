@@ -6,7 +6,15 @@
     "id": "P2",
     "name": "Adopcion y expansion",
     "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
+    "subphase": {
+      "id": "P2.SDD",
+      "name": "Formalizacion SDD (Spec-Driven Development)",
+      "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Se publica aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+      "backlog": ["TASK-0008", "TASK-0009", "TASK-0010", "TASK-0011", "TASK-0012", "TASK-0013"]
+    },
     "exit_criteria": [
+      "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
+      "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
       "Backlog de adopcion/expansion definido cuando surja",
       "Core sigue neutral en cada cambio"
     ],
@@ -40,7 +48,8 @@
   "decisions": [
     "DECISION-0001-versionado",
     "DECISION-0002-core-perfiles-profesionales",
-    "DECISION-0003-adopted-profiles-contract"
+    "DECISION-0003-adopted-profiles-contract",
+    "DECISION-0004-sdd-pipeline-y-cierre"
   ],
   "active_tasks": [
     {
@@ -84,6 +93,42 @@
       "owner": "Codex",
       "status": "done",
       "title": "Soporte de perfiles en estado y validador (P1)"
+    },
+    {
+      "id": "TASK-0008",
+      "owner": "Claude",
+      "status": "ready",
+      "title": "Disenar SDD + pipeline + criterios de cierre (P2.SDD, analysis)"
+    },
+    {
+      "id": "TASK-0009",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Actualizar templates para SDD (P2.SDD, implementation; bloqueada hasta TASK-0008)"
+    },
+    {
+      "id": "TASK-0010",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Crear specs/ + plantillas SDD (P2.SDD, implementation; bloqueada hasta TASK-0008)"
+    },
+    {
+      "id": "TASK-0011",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Validadores en modo SDD, config-gated y aditivo (P2.SDD, implementation; bloqueada hasta TASK-0008/0010)"
+    },
+    {
+      "id": "TASK-0012",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Example minimal_sdd_instance (P2.SDD, implementation; bloqueada hasta TASK-0010/0011)"
+    },
+    {
+      "id": "TASK-0013",
+      "owner": "Codex",
+      "status": "proposed",
+      "title": "Documentar inicio de proyecto con SDD (P2.SDD, documentation)"
     }
   ],
   "open_questions": [],
@@ -92,10 +137,11 @@
     "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
   ],
   "next_actions": [
-    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.3.0 PUBLICADA; fase P2 (adopcion y expansion).",
-    "P0 (v0.2.0) y P1 (v0.3.0) cerradas. TASK-0001..0007 todas done. DECISION-0001/0002/0003 aceptadas.",
-    "Protocolo entregado: core neutral + versionado + scaffolding + perfiles (dotnet_enterprise) + validadores con adopted_profiles.",
-    "P2 backlog (abierto, sin tareas activas): adopcion en instancias reales (p.ej. bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs. Crear tareas cuando surja necesidad concreta.",
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.3.0 PUBLICADA; fase P2, subfase P2.SDD abierta.",
+    "DECISION-0004 (SDD) aceptada: spec + pipeline + criterios de cierre ANTES de implementar; ante ambiguedad, preguntar (no inventar).",
+    "SIGUIENTE TRABAJO = formalizar SDD antes de cualquier nueva implementacion. Empezar por TASK-0008 (Claude, ready, analysis): produce las specs para TASK-0009..0012.",
+    "TASK-0009..0013 quedan proposed: las implementables NO pueden pasar a ready/claimed/in_progress sin sus 6 campos SDD (los entrega TASK-0008). Ver HANDOFF-TASK-0008-claude-to-codex-1.",
+    "Capa SDD se publica como v0.4.0 (MINOR, aditivo, config-gated). Exigirla retroactivamente seria MAJOR (fuera de alcance). Sin migracion de TASK-0001..0007 (pre-SDD).",
     "Mantener: cada cambio aditivo y neutral; releases MINOR sin aprobacion humana, MAJOR/v1.0.0 con aprobacion (DECISION-0001)."
   ],
   "created_at": "2026-06-05",

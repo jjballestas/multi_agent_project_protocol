@@ -4,6 +4,29 @@
     "updated_by":  "Claude",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-decision0004-sdd-claude",
+                       "task_id":  "TASK-0008",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/decisions/DECISION-0004-sdd-pipeline-y-cierre.md",
+                                     "Area_comun/tasks/TASK-0008-claude-sdd-design.md",
+                                     "Area_comun/tasks/TASK-0009-codex-sdd-templates.md",
+                                     "Area_comun/tasks/TASK-0010-codex-specs-folder.md",
+                                     "Area_comun/tasks/TASK-0011-codex-validator-sdd.md",
+                                     "Area_comun/tasks/TASK-0012-codex-example-minimal-sdd.md",
+                                     "Area_comun/tasks/TASK-0013-codex-doc-sdd-onboarding.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0008-claude-to-codex-1.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Gobernanza: DECISION-0004 (SDD + pipeline + cierre) y backlog TASK-0008..0013. No implementa specs/validador (eso es el backlog)."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-release-v030-claude",
                        "task_id":  "TASK-0007",
                        "owner":  "Claude",

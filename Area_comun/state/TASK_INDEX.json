@@ -26,8 +26,14 @@
     ],
     "phase": [
       "P0 = enriquecimiento del protocolo",
-      "P1 = arquitectura core/perfiles profesionales (target v0.3.0)"
-    ]
+      "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
+      "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
+    ],
+    "type": [
+      "implementation", "refactor", "integration", "migration", "security", "release",
+      "discovery", "analysis", "review", "documentation", "triage"
+    ],
+    "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
   },
   "tasks": [
     {
@@ -207,6 +213,104 @@
       ],
       "blocked_by_questions": [],
       "review": "Aceptada por Claude. Paridad .py/.ps1 (lectura) + 6/6 golden cases con exit esperado; compatibilidad hacia atras OK; conforme a DECISION-0003. Ultimo entregable de v0.3.0."
+    },
+    {
+      "id": "TASK-0008",
+      "owner": "Claude",
+      "status": "ready",
+      "type": "analysis",
+      "priority": "high",
+      "phase": "P2",
+      "title": "Disenar SDD + pipeline + criterios de cierre",
+      "file": "Area_comun/tasks/TASK-0008-claude-sdd-design.md",
+      "depends_on": [],
+      "relates_to": ["TASK-0009", "TASK-0010", "TASK-0011", "TASK-0012", "TASK-0013"],
+      "relevant_files": ["Area_comun/decisions/DECISION-0004-sdd-pipeline-y-cierre.md", "Area_comun/artifacts/", "Area_comun/specs/"],
+      "deliverables": ["Area_comun/artifacts/DISENO-SDD.md"],
+      "blocked_by_questions": []
+    },
+    {
+      "id": "TASK-0009",
+      "owner": "Codex",
+      "status": "proposed",
+      "type": "implementation",
+      "priority": "high",
+      "phase": "P2",
+      "title": "Actualizar templates de tareas/handoffs/reportes para SDD",
+      "file": "Area_comun/tasks/TASK-0009-codex-sdd-templates.md",
+      "depends_on": ["TASK-0008"],
+      "relates_to": ["TASK-0010", "TASK-0011"],
+      "relevant_files": ["Area_comun/protocol/TASK_PROTOCOL.md", "Area_comun/protocol/TASK_TEMPLATE.md", "Area_comun/protocol/HANDOFF_TEMPLATE.md", "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md"],
+      "deliverables": [],
+      "blocked_by_questions": [],
+      "sdd_required": true,
+      "review": "Bloqueada para ready hasta TASK-0008 (faltan spec_id/execution_pipeline/acceptance_criteria/test_plan/closure_criteria) - DECISION-0004."
+    },
+    {
+      "id": "TASK-0010",
+      "owner": "Codex",
+      "status": "proposed",
+      "type": "implementation",
+      "priority": "high",
+      "phase": "P2",
+      "title": "Crear carpeta specs/ y plantillas SDD",
+      "file": "Area_comun/tasks/TASK-0010-codex-specs-folder.md",
+      "depends_on": ["TASK-0008"],
+      "relates_to": ["TASK-0009", "TASK-0011", "TASK-0012"],
+      "relevant_files": ["Area_comun/specs/"],
+      "deliverables": ["Area_comun/specs/SPEC_TEMPLATE.md", "Area_comun/specs/PROJECT_BRIEF_TEMPLATE.md", "Area_comun/specs/TEST_PLAN_TEMPLATE.md", "Area_comun/specs/TRACEABILITY_MATRIX_TEMPLATE.md"],
+      "blocked_by_questions": [],
+      "sdd_required": true,
+      "review": "Bloqueada para ready hasta TASK-0008 - DECISION-0004."
+    },
+    {
+      "id": "TASK-0011",
+      "owner": "Codex",
+      "status": "proposed",
+      "type": "implementation",
+      "priority": "high",
+      "phase": "P2",
+      "title": "Actualizar validadores para modo SDD (config-gated, aditivo)",
+      "file": "Area_comun/tasks/TASK-0011-codex-validator-sdd.md",
+      "depends_on": ["TASK-0008", "TASK-0010"],
+      "relates_to": ["TASK-0009", "TASK-0012"],
+      "relevant_files": ["scripts/validate_collaboration_state.py", "scripts/validate_collaboration_state.ps1", "protocol.config.template.json"],
+      "deliverables": [],
+      "blocked_by_questions": [],
+      "sdd_required": true,
+      "review": "Bloqueada para ready hasta TASK-0008 - DECISION-0004."
+    },
+    {
+      "id": "TASK-0012",
+      "owner": "Codex",
+      "status": "proposed",
+      "type": "implementation",
+      "priority": "normal",
+      "phase": "P2",
+      "title": "Crear example minimal_sdd_instance",
+      "file": "Area_comun/tasks/TASK-0012-codex-example-minimal-sdd.md",
+      "depends_on": ["TASK-0010", "TASK-0011"],
+      "relates_to": ["TASK-0009"],
+      "relevant_files": ["examples/minimal_sdd_instance/"],
+      "deliverables": [],
+      "blocked_by_questions": [],
+      "sdd_required": true,
+      "review": "Bloqueada para ready hasta TASK-0008 - DECISION-0004."
+    },
+    {
+      "id": "TASK-0013",
+      "owner": "Codex",
+      "status": "proposed",
+      "type": "documentation",
+      "priority": "normal",
+      "phase": "P2",
+      "title": "Documentar como iniciar un proyecto con SDD",
+      "file": "Area_comun/tasks/TASK-0013-codex-doc-sdd-onboarding.md",
+      "depends_on": ["TASK-0009", "TASK-0010"],
+      "relates_to": ["TASK-0012"],
+      "relevant_files": ["README_INSTANCIACION.md"],
+      "deliverables": [],
+      "blocked_by_questions": []
     }
   ]
 }
