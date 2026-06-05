@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: normal
-status: open
+status: archived
 ---
 
 # Colision de ID resuelta: runtime = DECISION-0009

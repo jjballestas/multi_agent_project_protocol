@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - not_run: coordinacion only
 deadline_or_blocking_level: normal
-status: open
+status: answered
 ---
 
 # Orden de arranque v0.7.0

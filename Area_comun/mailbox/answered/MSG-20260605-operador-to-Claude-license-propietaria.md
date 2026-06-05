@@ -40,3 +40,9 @@ Pendiente de gobernanza (lane del arquitecto):
 
 No tomo claim ni edito estado yo (canal de operador humano; ademas hay claim activo de Claude sobre el
 track de runtime). Adopcion/formalizacion = decision del arquitecto + operador. Una sola pregunta arriba.
+
+## Resolucion del operador (2026-06-05)
+**Repo = PRIVADO.** El operador decide pasar el repositorio a privado (licencia propietaria, no
+escaparate publico). Queda pendiente para el arquitecto: (1) DECISION de licenciamiento que enlace
+`/LICENSE`, (2) claim sobre `/LICENSE` + `README*`, (3) reconciliar el wording "reusable template" del
+README con ARR. La pregunta del frontmatter queda respondida: **privado**.

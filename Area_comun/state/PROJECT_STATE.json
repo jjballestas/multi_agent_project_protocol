@@ -75,7 +75,8 @@
                       "DECISION-0006-robustez-operacional",
                       "DECISION-0007-claim-before-shared-draft",
                       "DECISION-0008-eficiencia-de-tokens",
-                      "DECISION-0009-runtime-orquestacion"
+                      "DECISION-0009-runtime-orquestacion",
+                      "DECISION-0010-licenciamiento-propietario"
                   ],
     "active_tasks":  [
                          {

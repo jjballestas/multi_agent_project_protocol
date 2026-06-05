@@ -1,6 +1,13 @@
-# Multi-agent project protocol template
+# Multi-agent project protocol
 
-Reusable, domain-neutral project protocol for multi-agent software work.
+> **Proprietary — All Rights Reserved.** © 2026 John Jairo Ballestas Payares. See
+> [`LICENSE`](LICENSE) and
+> [`DECISION-0010`](Area_comun/decisions/DECISION-0010-licenciamiento-propietario.md). No license or
+> rights are granted; viewing this repository does not permit use, copying, modification or
+> redistribution. Any use requires a separate written agreement with the Owner.
+
+A domain-neutral project protocol for multi-agent software work. The `.template.*` masters and the
+instantiation flow below are for the **Owner's authorized use**, not for public reuse.
 
 Start with `README_INSTANCIACION.md`, then fill:
 

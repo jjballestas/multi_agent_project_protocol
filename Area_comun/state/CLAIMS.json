@@ -4,6 +4,41 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-decision0010-licensing-claude",
+                       "task_id":  "none",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "LICENSE",
+                                     "README.md",
+                                     "README_INSTANCIACION.md",
+                                     "Area_comun/decisions/DECISION-0010-licenciamiento-propietario.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Gobernanza de licenciamiento (peticion del operador): DECISION-0010 ARR enlaza /LICENSE; reconciliar README* (quitar framing reusable/template incompatible con ARR). Repo puesto en PRIVADO. Sin datos personales sensibles versionados."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-mailbox-task0023-coordination-close-codex",
+                       "task_id":  "TASK-0023",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0023-start-order.md",
+                                     "Area_comun/mailbox/answered/MSG-20260605-Codex-to-Claude-task0023-start-order.md",
+                                     "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-decision-id-renumber.md",
+                                     "Area_comun/mailbox/archived/MSG-20260605-Claude-to-Codex-decision-id-renumber.md",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras cerrar coordinacion TASK-0023: Claude confirmo orden en MSG decision-id-renumber; aviso sin respuesta requerida archivado."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-decision0009-runtime-claude",
                        "task_id":  "TASK-0026",
                        "owner":  "Claude",

@@ -1,5 +1,10 @@
 # Guia de instanciacion del protocolo multiagente
 
+> **Propietario — All Rights Reserved.** Ver [`LICENSE`](LICENSE) y
+> [`DECISION-0010`](Area_comun/decisions/DECISION-0010-licenciamiento-propietario.md). La
+> instanciacion descrita aqui es para **uso autorizado del titular**; no es una invitacion a copiar
+> o reutilizar el protocolo.
+
 Esta carpeta empaqueta una metodologia generica para coordinar proyectos de software con
 varios agentes. El protocolo define como se trabaja: tareas, claims, mailbox, decisiones,
 handoffs y validacion de estado. El dominio de cada proyecto se declara en la instancia.
