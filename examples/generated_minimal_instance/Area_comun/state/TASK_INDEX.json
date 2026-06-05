@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude",
+  "legend": {
+    "status": ["proposed", "ready", "claimed", "in_progress", "in_review", "done", "blocked", "cancelled"],
+    "owner": ["Claude", "Codex", "operador humano"],
+    "priority": ["low", "normal", "high", "critical"],
+    "phase": ["P0"]
+  },
+  "tasks": []
+}
+

@@ -1,8 +1,82 @@
 ﻿{
     "schema_version":  "1.0",
     "updated_at":  "2026-06-05",
-    "updated_by":  "Codex",
+    "updated_by":  "Claude",
     "claims":  [
+                   {
+                       "claim_id":  "CLAIM-20260605-release-v020-claude",
+                       "task_id":  "TASK-0004",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "AGENTS.md",
+                                     "protocol.config.json",
+                                     "Area_comun/tasks/TASK-0004-codex-scaffolding-script.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Revision/cierre de TASK-0004 (aceptada) y publicacion de v0.2.0. Edicion de TASK_INDEX.json limitada a filas TASK-0004/0006/0007."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0005-claude",
+                       "task_id":  "TASK-0005",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "profiles/",
+                                     "Area_comun/artifacts/ARQUITECTURA-core-profiles.md",
+                                     "Area_comun/tasks/TASK-0005-claude-core-profiles-architecture.md",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Arquitectura core/profiles/examples. Edicion de TASK_INDEX.json limitada a la fila TASK-0005 (no se listan rutas en claim activo de Codex/TASK-0004); no se toca README_INSTANCIACION.md (claim activo de Codex)."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0004-codex",
+                       "task_id":  "TASK-0004",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/",
+                                     "README_INSTANCIACION.md",
+                                     "examples/generated_minimal_instance/",
+                                     "Area_comun/tasks/TASK-0004-codex-scaffolding-script.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0004-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0004 en in_review con script, documentacion, ejemplo generado y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0003-claude",
+                       "task_id":  "TASK-0003",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "CHANGELOG.md",
+                                     "Area_comun/decisions/",
+                                     "protocol.config.json",
+                                     "protocol.config.template.json",
+                                     "Area_comun/tasks/TASK-0003-claude-versioning-changelog.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras cerrar TASK-0003 (done) y dejar DECISION-0001/0002 + backlog P1. Handoff a Codex creado."
+                   },
                    {
                        "claim_id":  "CLAIM-20260605-TASK-0002-codex",
                        "task_id":  "TASK-0002",

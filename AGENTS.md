@@ -8,7 +8,7 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-05 · Maintainer: Claude (architect) + human owner. Released version: v0.1.0.
+> Last updated: 2026-06-05 · Maintainer: Claude (architect) + human owner. Released version: v0.2.0.
 
 ## 0. How to Start
 
@@ -34,13 +34,17 @@ First applied instance (pilot): `bot_spot_ai_strategy_pack` (trading bot, separa
 
 ## 2. Current Phase and Scope
 
-- Phase id: `P0`
-- Phase name: `Protocol enrichment`
-- Phase goal: improve the protocol (cross-platform validator, CI, versioning/CHANGELOG,
-  scaffolding, more examples and docs) while keeping strict domain neutrality.
+- Phase id: `P1`
+- Phase name: `Professional profiles architecture`
+- Phase goal: evolve the protocol into core/profiles/examples — ship the first profile
+  (`dotnet_enterprise`) and add profile awareness to state and validator, additively, while
+  keeping the core strictly domain-neutral. Target `v0.3.0`.
+- Previous phase `P0` (Protocol enrichment) closed with the **v0.2.0** release (cross-platform
+  validator + CI, SemVer/CHANGELOG/`protocol_version`, scaffolding script).
 
-In scope: protocol improvements, tooling, documentation, examples, versioning.
-Out of scope: any business/domain logic in the core (the core stays neutral).
+In scope: profiles layer, profile manifest, profile-aware validation, more examples, docs, versioning.
+Out of scope: any business/domain logic in the core (the core stays neutral; stack-specific
+content lives only under `profiles/`).
 
 ## 3. Agent Roles
 

@@ -4,7 +4,81 @@ Esta carpeta empaqueta una metodologia generica para coordinar proyectos de soft
 varios agentes. El protocolo define como se trabaja: tareas, claims, mailbox, decisiones,
 handoffs y validacion de estado. El dominio de cada proyecto se declara en la instancia.
 
-## 1. Crear un proyecto nuevo
+## 1. Crear un proyecto nuevo con script
+
+Desde la raiz de `multi_agent_project_protocol`, genera una instancia nueva con:
+
+```powershell
+python scripts\new_instance.py `
+  --source-template . `
+  --target D:\Agentes\mi_nuevo_proyecto `
+  --project-name mi_nuevo_proyecto `
+  --project-goal "Objetivo operativo del proyecto." `
+  --project-description "Descripcion breve del proyecto." `
+  --architect Claude `
+  --implementer Codex `
+  --human-owner "operador humano" `
+  --phase-id P0 `
+  --phase-name "Bootstrap" `
+  --phase-goal "Dejar una instancia inicial valida."
+```
+
+El script usa solo Python stdlib, copia los masters `*.template.*` a sus archivos canonicos,
+crea la estructura necesaria de `Area_comun/` y sustituye todos los placeholders `{{...}}`.
+Si queda un placeholder sin resolver, falla. Si el `--target` existe y no esta vacio, falla salvo
+que se pase `--force`.
+
+Parametros minimos obligatorios:
+
+- `--source-template`
+- `--target`
+- `--project-name`
+- `--project-goal`
+- `--project-description`
+- `--architect`
+- `--implementer`
+- `--human-owner`
+- `--phase-id`
+- `--phase-name`
+- `--phase-goal`
+
+Parametros utiles opcionales:
+
+- `--protocol-version`: declara la version del protocolo que sigue la instancia. Si se omite, el
+  script toma la version del `protocol.config.json` o `PROJECT_STATE.json` del template fuente.
+- `--domain-critical-boundaries`: fronteras duras del proyecto.
+- `--stack-decisions`: decisiones de stack iniciales.
+- `--quality-gates`: gates de calidad iniciales.
+- `--human-approval-points`: puntos de aprobacion humana.
+- `--in-scope` / `--out-of-scope`: alcance inicial.
+- `--phase-exit-criteria`: criterio inicial de salida de fase.
+- `--force`: permite regenerar un target no vacio.
+
+La instancia generada deja `TASK_INDEX.json` vacio pero valido. La primera tarea real se crea
+despues copiando `Area_comun/protocol/TASK_TEMPLATE.md` dentro de `Area_comun/tasks/` y
+registrandola en `Area_comun/state/TASK_INDEX.json`.
+
+## 2. Validar la instancia generada
+
+Valida la nueva instancia desde la raiz de este repo:
+
+```powershell
+python scripts\validate_collaboration_state.py --root D:\Agentes\mi_nuevo_proyecto
+```
+
+Tambien puedes usar el validador PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root D:\Agentes\mi_nuevo_proyecto
+```
+
+Para comprobar que no quedan placeholders sin resolver:
+
+```powershell
+rg "\{\{[A-Z0-9_]+\}\}" D:\Agentes\mi_nuevo_proyecto
+```
+
+## 3. Crear un proyecto nuevo manualmente
 
 1. Copia el contenido de `protocol_template/` a la raiz del nuevo repo.
 2. Copia estos archivos master para crear los archivos vivos de la instancia:
@@ -20,8 +94,11 @@ handoffs y validacion de estado. El dominio de cada proyecto se declara en la in
 6. Declara puntos de aprobacion humana en `{{HUMAN_APPROVAL_POINTS}}`.
 7. Ajusta `protocol.config.json` con `project_name`, `agent_roles`, `quality_gates` y
    `state_invariants`.
+8. Declara `protocol_version` (placeholder `{{PROTOCOL_VERSION}}`) con la version del protocolo
+   que sigue la instancia (p.ej. `0.1.0`); ver `CHANGELOG.md` y
+   `Area_comun/decisions/DECISION-0001-versionado.md`.
 
-## 2. Archivos a completar primero
+## 4. Archivos a completar primero
 
 1. `AGENTS.md`: contrato superior del proyecto.
 2. `Area_comun/state/PROJECT_STATE.json`: fase inicial, objetivo, agentes, decisiones y riesgos.
@@ -29,7 +106,7 @@ handoffs y validacion de estado. El dominio de cada proyecto se declara en la in
 4. `Area_comun/state/TASK_INDEX.json`: backlog inicial.
 5. `Area_comun/tasks/TASK-0001-*.md`: primera tarea ejecutable.
 
-## 3. Generar backlog inicial
+## 5. Generar backlog inicial
 
 1. Crea tareas pequenas, verificables y con un solo owner.
 2. Cada tarea debe tener objetivo, entradas, archivos relevantes, entregables, DoD, riesgos y
@@ -38,7 +115,7 @@ handoffs y validacion de estado. El dominio de cada proyecto se declara en la in
 4. Si una tarea depende de una decision, enlaza `Area_comun/decisions/DECISION-XXXX-*.md`.
 5. Si hay una ambiguedad bloqueante, usa status `blocked` y una pregunta concreta.
 
-## 4. Reclamar tareas
+## 6. Reclamar tareas
 
 1. Lee `AGENTS.md`, `Area_comun/README.md`, `TASK_PROTOCOL.md`, `PROJECT_STATE.json`,
    `TASK_INDEX.json`, `CLAIMS.json`, `mailbox/open/` y el archivo de tarea.
@@ -47,7 +124,7 @@ handoffs y validacion de estado. El dominio de cada proyecto se declara en la in
 4. Crea o actualiza una entrada en `Area_comun/state/CLAIMS.json` con scope explicito.
 5. Al cerrar, libera el claim con `status: released`.
 
-## 5. Cerrar una fase
+## 7. Cerrar una fase
 
 1. Todas las tareas de salida de fase deben estar `done` o tener bloqueo aceptado.
 2. Debe existir handoff autocontenido para lo que otro agente deba revisar.
@@ -66,7 +143,7 @@ funcionar:
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1
 ```
 
-## 6. Validar una instancia minima de ejemplo
+## 8. Validar una instancia minima de ejemplo
 
 Desde la raiz de esta plantilla:
 
@@ -74,7 +151,7 @@ Desde la raiz de esta plantilla:
 powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root examples\minimal_instance
 ```
 
-## 7. Convencion de archivos template
+## 9. Convencion de archivos template
 
 Los archivos con sufijo `.template.*` son los unicos masters para contenido que se rellena por
 proyecto. Para un proyecto NUEVO, los canonicos sin sufijo (`AGENTS.md`, `protocol.config.json`,

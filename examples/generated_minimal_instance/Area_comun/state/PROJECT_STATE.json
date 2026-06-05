@@ -1,0 +1,30 @@
+{
+  "project": "generated_minimal_instance",
+  "description": "Temporary generated instance used to verify TASK-0004 scaffolding.",
+  "phase": {
+    "id": "P0",
+    "name": "Initial setup",
+    "goal": "Create a valid initial protocol state.",
+    "exit_criteria": ["Initial protocol instance is valid."]
+  },
+  "status": "active",
+  "agents": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "source_of_truth": "AGENTS.md",
+  "domain_critical_boundaries": "No secrets committed. Project-specific critical boundaries must be recorded here.",
+  "stack_decisions": "No stack-specific decisions declared yet. Record decisions in Area_comun/decisions/.",
+  "quality_gates": "Run the collaboration state validator before handoff or review.",
+  "human_approval_points": "Critical boundary changes and release decisions require human owner approval.",
+  "decisions": [],
+  "active_tasks": [],
+  "open_questions": [],
+  "risks": [],
+  "next_actions": [],
+  "created_at": "2026-06-05",
+  "updated_at": "2026-06-05",
+  "updated_by": "Claude"
+}
+

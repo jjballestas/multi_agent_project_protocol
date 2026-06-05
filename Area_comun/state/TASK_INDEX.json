@@ -25,7 +25,8 @@
       "critical"
     ],
     "phase": [
-      "P0 = enriquecimiento del protocolo"
+      "P0 = enriquecimiento del protocolo",
+      "P1 = arquitectura core/perfiles profesionales (target v0.3.0)"
     ]
   },
   "tasks": [
@@ -80,7 +81,7 @@
     {
       "id": "TASK-0003",
       "owner": "Claude",
-      "status": "proposed",
+      "status": "done",
       "priority": "high",
       "phase": "P0",
       "title": "Politica de versionado (SemVer) + CHANGELOG",
@@ -98,12 +99,13 @@
         "CHANGELOG.md",
         "Area_comun/decisions/DECISION-0001-versionado.md"
       ],
-      "blocked_by_questions": []
+      "blocked_by_questions": [],
+      "review": "Done por Claude. SemVer con ejemplos + protocol_version + procedimiento de release; aprobacion humana de MAJOR. Handoff a Codex por impacto en TASK-0004."
     },
     {
       "id": "TASK-0004",
       "owner": "Codex",
-      "status": "proposed",
+      "status": "done",
       "priority": "normal",
       "phase": "P0",
       "title": "Script de scaffolding para instanciar un proyecto nuevo",
@@ -119,6 +121,85 @@
       "deliverables": [
         "scripts/new_instance.py",
         "Area_comun/handoffs/HANDOFF-TASK-0004-codex-to-claude-1.md"
+      ],
+      "blocked_by_questions": [],
+      "review": "Aceptada por Claude. Verificacion independiente: validador verde en examples/generated_minimal_instance, sin placeholders. Ultimo entregable de v0.2.0."
+    },
+    {
+      "id": "TASK-0005",
+      "owner": "Claude",
+      "status": "done",
+      "priority": "high",
+      "phase": "P1",
+      "title": "Arquitectura core/profiles/examples del protocolo",
+      "file": "Area_comun/tasks/TASK-0005-claude-core-profiles-architecture.md",
+      "depends_on": [],
+      "relates_to": [
+        "TASK-0003",
+        "TASK-0006",
+        "TASK-0007"
+      ],
+      "relevant_files": [
+        "profiles/",
+        "examples/",
+        "Area_comun/decisions/DECISION-0002-core-perfiles-profesionales.md",
+        "README.md",
+        "README_INSTANCIACION.md"
+      ],
+      "deliverables": [
+        "profiles/README.md",
+        "profiles/PROFILE_TEMPLATE/profile.manifest.template.json",
+        "Area_comun/artifacts/ARQUITECTURA-core-profiles.md"
+      ],
+      "blocked_by_questions": [],
+      "review": "Done por Claude. Estructura profiles/ + PROFILE_TEMPLATE + ARQUITECTURA-core-profiles.md. Contrato profile.manifest definido. Desbloquea TASK-0006/0007 (HANDOFF-TASK-0005-claude-to-codex-1)."
+    },
+    {
+      "id": "TASK-0006",
+      "owner": "Codex",
+      "status": "ready",
+      "priority": "normal",
+      "phase": "P1",
+      "title": "Perfil profesional dotnet_enterprise (basado en entorno_open_cloude)",
+      "file": "Area_comun/tasks/TASK-0006-codex-profile-dotnet-enterprise.md",
+      "depends_on": [
+        "TASK-0005"
+      ],
+      "relates_to": [
+        "TASK-0007"
+      ],
+      "relevant_files": [
+        "profiles/dotnet_enterprise/"
+      ],
+      "deliverables": [
+        "profiles/dotnet_enterprise/profile.manifest.json",
+        "profiles/dotnet_enterprise/README.md",
+        "Area_comun/handoffs/HANDOFF-TASK-0006-codex-to-claude-1.md"
+      ],
+      "blocked_by_questions": []
+    },
+    {
+      "id": "TASK-0007",
+      "owner": "Codex",
+      "status": "ready",
+      "priority": "normal",
+      "phase": "P1",
+      "title": "Soporte de perfiles en estado y validador (adopted_profiles + manifest)",
+      "file": "Area_comun/tasks/TASK-0007-codex-profiles-state-validator.md",
+      "depends_on": [
+        "TASK-0005"
+      ],
+      "relates_to": [
+        "TASK-0006"
+      ],
+      "relevant_files": [
+        "scripts/",
+        "Area_comun/state/PROJECT_STATE.template.json"
+      ],
+      "deliverables": [
+        "scripts/validate_collaboration_state.py",
+        "scripts/validate_collaboration_state.ps1",
+        "Area_comun/handoffs/HANDOFF-TASK-0007-codex-to-claude-1.md"
       ],
       "blocked_by_questions": []
     }

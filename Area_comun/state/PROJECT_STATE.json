@@ -1,17 +1,30 @@
 {
   "project": "multi_agent_project_protocol",
   "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "phase": {
-    "id": "P0",
-    "name": "Enriquecimiento del protocolo",
-    "goal": "Mejorar el protocolo (validador multiplataforma, CI, versionado/CHANGELOG, scaffolding, mas ejemplos y documentacion) manteniendo neutralidad de dominio.",
+    "id": "P1",
+    "name": "Arquitectura de perfiles profesionales",
+    "goal": "Llevar el protocolo a core/profiles/examples: publicar el primer perfil (dotnet_enterprise) y dar soporte de perfiles en estado y validador, manteniendo el core neutral. Target v0.3.0.",
     "exit_criteria": [
-      "Roadmap/backlog de enriquecimiento priorizado (TASK-0001)",
-      "Validador disponible multiplataforma + CI que valida en cada push/PR",
-      "Politica de versionado (SemVer) + CHANGELOG",
-      "v0.2.0 publicada"
-    ]
+      "Perfil dotnet_enterprise publicado (TASK-0006)",
+      "adopted_profiles en estado + validador con conciencia de perfiles, aditivo (TASK-0007)",
+      "Instancia de prueba core + perfil valida en verde",
+      "Core sigue neutral (barrido limpio); v0.3.0 publicada"
+    ],
+    "previous_phase": {
+      "id": "P0",
+      "name": "Enriquecimiento del protocolo",
+      "status": "completed",
+      "closed_with": "v0.2.0",
+      "exit_criteria_met": [
+        "Roadmap/backlog priorizado (TASK-0001)",
+        "Validador multiplataforma + CI (TASK-0002)",
+        "Politica de versionado (SemVer) + CHANGELOG + protocol_version (TASK-0003)",
+        "Script de scaffolding (TASK-0004)",
+        "v0.2.0 publicada"
+      ]
+    }
   },
   "status": "active",
   "agents": {
@@ -22,9 +35,13 @@
   "source_of_truth": "AGENTS.md",
   "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
   "released_versions": [
-    "v0.1.0"
+    "v0.1.0",
+    "v0.2.0"
   ],
-  "decisions": [],
+  "decisions": [
+    "DECISION-0001-versionado",
+    "DECISION-0002-core-perfiles-profesionales"
+  ],
   "active_tasks": [
     {
       "id": "TASK-0001",
@@ -41,14 +58,32 @@
     {
       "id": "TASK-0003",
       "owner": "Claude",
-      "status": "proposed",
+      "status": "done",
       "title": "Politica de versionado (SemVer) + CHANGELOG"
     },
     {
       "id": "TASK-0004",
       "owner": "Codex",
-      "status": "proposed",
+      "status": "done",
       "title": "Script de scaffolding para instanciar"
+    },
+    {
+      "id": "TASK-0005",
+      "owner": "Claude",
+      "status": "done",
+      "title": "Arquitectura core/profiles/examples (P1, target v0.3.0)"
+    },
+    {
+      "id": "TASK-0006",
+      "owner": "Codex",
+      "status": "ready",
+      "title": "Perfil dotnet_enterprise (basado en entorno_open_cloude) (P1)"
+    },
+    {
+      "id": "TASK-0007",
+      "owner": "Codex",
+      "status": "ready",
+      "title": "Soporte de perfiles en estado y validador (P1)"
     }
   ],
   "open_questions": [],
@@ -57,10 +92,11 @@
     "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision)."
   ],
   "next_actions": [
-    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.1.0 publicado; fase P0.",
-    "Hecho: dogfooding del repo, TASK-0001 (roadmap, done), TASK-0002 (validador Python + CI, done).",
-    "Proximo backlog priorizado: TASK-0003 (Claude, SemVer+CHANGELOG) y TASK-0004 (Codex, scaffolding). Paralelizables.",
-    "Candidatos futuros v0.2.0 en Area_comun/artifacts/ROADMAP-v0.2.0.md."
+    "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.2.0 PUBLICADA (tag v0.2.0); fase P1 (perfiles).",
+    "P0 cerrada: TASK-0001/0002/0003/0004 done. P1 abierta: arquitectura de perfiles (TASK-0005 done).",
+    "READY para Codex: TASK-0006 (perfil dotnet_enterprise) y TASK-0007 (adopted_profiles + validador). Ver HANDOFF-TASK-0005-claude-to-codex-1. TASK-0006/0007 sin claim de Claude: son de Codex.",
+    "Al cerrar P1 (TASK-0006/0007 done + instancia core+perfil verde): publicar v0.3.0 (MINOR, mover Unreleased en CHANGELOG + tag).",
+    "Decision abierta no bloqueante: forma de declarar adopted_profiles (campo y/o decision); se cierra con TASK-0007."
   ],
   "created_at": "2026-06-05",
   "updated_at": "2026-06-05",

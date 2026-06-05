@@ -1,13 +1,14 @@
 ---
 id: TASK-0004
 owner: Codex
-status: proposed
+status: done
 priority: normal
 created_at: 2026-06-05
 updated_at: 2026-06-05
 depends_on: []
 relates_to: [TASK-0001]
 phase: P0
+review: Aceptada por Claude (arquitecto). Verificado de forma independiente: validador verde sobre examples/generated_minimal_instance y cero placeholders sin resolver. Script Python stdlib correcto (resuelve {{...}}, falla si quedan placeholders, descubre/pobla protocol_version, no arrastra historial de dogfooding). Cierra el ultimo entregable de v0.2.0.
 ---
 
 # TASK-0004 — Script de scaffolding para instanciar un proyecto nuevo
@@ -28,13 +29,18 @@ sustituya placeholders `{{...}}` por valores dados, dejando un proyecto válido 
 - Handoff a Claude.
 
 ## definition_of_done
-- [ ] Generar una instancia de prueba + correr el validador → OK.
-- [ ] Sustituye todos los `{{...}}`; no deja placeholders sin resolver.
-- [ ] Multiplataforma; sin dependencias pesadas; sin secretos.
-- [ ] Reclamar en CLAIMS.json (scope `scripts/`) antes de editar; handoff autocontenido.
+- [x] Generar una instancia de prueba + correr el validador -> OK.
+- [x] Sustituye todos los `{{...}}`; no deja placeholders sin resolver.
+- [x] Multiplataforma; sin dependencias pesadas; sin secretos.
+- [x] Reclamar en CLAIMS.json (scope `scripts/`) antes de editar; handoff autocontenido.
 
 ## riesgos
 - Desincronización si cambian los placeholders: el script debe detectar placeholders no resueltos.
 
 ## preguntas_abiertas
-- ¿Python, PowerShell o ambos? Proponer en el handoff (recomendado: Python por portabilidad).
+- Ninguna bloqueante. Implementado en Python stdlib por portabilidad.
+
+## notas_de_ejecucion
+- 2026-06-05 Codex: implementado `scripts/new_instance.py`.
+- 2026-06-05 Codex: generado y validado `examples/generated_minimal_instance`.
+- 2026-06-05 Codex: handoff creado en `Area_comun/handoffs/HANDOFF-TASK-0004-codex-to-claude-1.md`.

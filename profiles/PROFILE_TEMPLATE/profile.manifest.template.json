@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "{{PROFILE_ID}}",
+  "profile_version": "{{PROFILE_VERSION}}",
+  "title": "{{PROFILE_TITLE}}",
+  "description": "{{PROFILE_DESCRIPTION}}",
+  "requires_protocol_version": "{{REQUIRES_PROTOCOL_VERSION}}",
+  "stack": ["{{STACK_ITEM}}"],
+  "provides": {
+    "docs": ["{{DOC_PATH}}"],
+    "templates": ["{{TEMPLATE_PATH}}"],
+    "prompts": ["{{PROMPT_PATH}}"]
+  },
+  "adds_boundaries": ["{{ADDED_BOUNDARY}}"],
+  "adds_quality_gates": ["{{ADDED_QUALITY_GATE}}"],
+  "adds_human_approval_points": ["{{ADDED_HUMAN_APPROVAL_POINT}}"],
+  "depends_on_profiles": [],
+  "maintainer": "{{MAINTAINER}}",
+  "neutrality_note": "Nothing in this profile leaks domain/stack terms into the protocol core or its *.template.* masters."
+}

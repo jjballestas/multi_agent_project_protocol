@@ -12,7 +12,7 @@ dominio al núcleo.
 | Orden | Tarea | Owner | Estado | Valor |
 |-------|-------|-------|--------|-------|
 | 1 | **TASK-0002** Validador multiplataforma (Python) + CI | Codex | ✅ done | Portabilidad + verificación automática |
-| 2 | **TASK-0003** Política de versionado (SemVer) + `CHANGELOG.md` | Claude | proposed | Releases trazables |
+| 2 | **TASK-0003** Política de versionado (SemVer) + `CHANGELOG.md` | Claude | ✅ done | Releases trazables (DECISION-0001 + protocol_version) |
 | 3 | **TASK-0004** Script de scaffolding `new-instance` (instanciar sin copiar a mano) | Codex | proposed | Adopción más fácil |
 
 ## Candidatos futuros (aún no formalizados como tareas)
@@ -30,6 +30,20 @@ dominio al núcleo.
 - Scaffolding probado: crear una instancia nueva y validarla en verde.
 - Núcleo sigue neutral de dominio (barrido limpio).
 - Tag `v0.2.0` publicado.
+
+## Post-v0.2.0 → v0.3.0: perfiles profesionales (fase P1)
+
+Formalizado en [DECISION-0002](../decisions/DECISION-0002-core-perfiles-profesionales.md): el
+protocolo se estructura en **core neutral / profiles / examples**. Introducir perfiles es un
+cambio **MINOR** (aditivo), por DECISION-0001. Backlog:
+
+| Orden | Tarea | Owner | Estado | Valor |
+|-------|-------|-------|--------|-------|
+| 4 | **TASK-0005** Arquitectura core/profiles/examples (estructura `profiles/`, `profile.manifest`, plantilla) | Claude | proposed | Habilita perfiles sin tocar el core |
+| 5 | **TASK-0006** Perfil `dotnet_enterprise` (desde `entorno_open_cloude`: ADRs, branching, seguridad, pipelines Azure DevOps, Dev Containers, SQL Server) | Codex | proposed | Reutiliza prácticas pro como extensión opcional |
+| 6 | **TASK-0007** `adopted_profiles` en estado + soporte en validador (aditivo, paridad `.py`↔`.ps1`) | Codex | proposed | Trazabilidad y verificación de perfiles |
+
+Restricción dura: el **core permanece neutral**; lo específico de stack vive solo en `profiles/`.
 
 ## Decisión pendiente (de TASK-0002)
 ¿Mantener ambos validadores (`.ps1` + `.py`) o deprecar el `.ps1`? **Recomendación:** mantener

@@ -1,5 +1,6 @@
 {
   "schema_version": "1.0",
+  "protocol_version": "0.1.0",
   "project_name": "example_project",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
