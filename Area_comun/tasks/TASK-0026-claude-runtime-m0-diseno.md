@@ -1,7 +1,7 @@
 ---
 id: TASK-0026
 owner: Claude
-status: ready
+status: done
 type: analysis
 priority: normal
 created_at: 2026-06-05
@@ -34,5 +34,11 @@ closure_criterion: Specs publicadas (SDD-elegibles para las tareas de implementa
   por turno (validador) detrás.
 
 ## notas_de_ejecucion
-- (a completar por Claude al ejecutar) rutas de specs y turn_schema.
-- Diseño base ya existe: `Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md` §3–§4.
+- Entregado: `runtime/turn_schema.json` (contrato de turno, draft-07 estricto), `runtime/README.md`,
+  `SPEC-0026` (contrato de turno), `SPEC-0027` (router determinista), golden en
+  `examples/runtime_turn_cases/` (valid_in_review, valid_human_required, invalid_missing_required,
+  invalid_human_gate).
+- **Verificado:** `jsonschema` valida los 4 golden exactamente como se espera (válidos OK; inválidos
+  rechazados por `required` y por el `allOf` del gate humano). Esquema = JSON válido.
+- Desbloquea **TASK-0027** (Codex, impl: skeleton + `--plan` dry-run + validador de turno + router).
+- Diseño base: `Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md` §3–§4.

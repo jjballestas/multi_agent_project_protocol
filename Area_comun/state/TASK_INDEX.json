@@ -840,7 +840,7 @@
                   {
                       "id":  "TASK-0026",
                       "owner":  "Claude",
-                      "status":  "ready",
+                      "status":  "done",
                       "type":  "analysis",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -858,13 +858,50 @@
                                              "runtime/"
                                          ],
                       "deliverables":  [
-                                           "Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md",
-                                           "runtime/turn_schema.json"
+                                           "runtime/turn_schema.json",
+                                           "runtime/README.md",
+                                           "Area_comun/specs/SPEC-0026-contrato-de-turno.md",
+                                           "Area_comun/specs/SPEC-0027-router-determinista.md",
+                                           "examples/runtime_turn_cases/"
                                        ],
                       "blocked_by_questions":  [
 
                                                ],
-                      "review":  "Ready. Track runtime (DECISION-0009), paralelo al de eficiencia de tokens. M0: base del orquestador. Desbloquea implementacion de Codex (skeleton/adapters)."
+                      "review":  "Done por Claude. runtime/turn_schema.json (contrato de turno draft-07 estricto) + SPEC-0026 (turno) + SPEC-0027 (router) + golden runtime_turn_cases. VERIFICADO: jsonschema valida los 4 golden como se espera (validos OK; invalidos rechazados por required y por el allOf del gate humano). Desbloquea TASK-0027 (Codex, impl)."
+                  },
+                  {
+                      "id":  "TASK-0027",
+                      "owner":  "Codex",
+                      "status":  "ready",
+                      "type":  "implementation",
+                      "priority":  "normal",
+                      "phase":  "P2",
+                      "title":  "Runtime M0 (impl): skeleton + --plan dry-run + validador de turno + router (DECISION-0009, target v0.8.0)",
+                      "spec_id":  "Area_comun/specs/SPEC-0026-contrato-de-turno.md",
+                      "file":  "Area_comun/tasks/TASK-0027-codex-runtime-skeleton-plan.md",
+                      "depends_on":  [
+                                         "TASK-0026"
+                                     ],
+                      "relates_to":  [
+
+                                     ],
+                      "relevant_files":  [
+                                             "runtime/orchestrator.py",
+                                             "runtime/router.py",
+                                             "runtime/turn_validate.py",
+                                             "protocol.config.template.json"
+                                         ],
+                      "deliverables":  [
+                                           "runtime/orchestrator.py",
+                                           "runtime/router.py",
+                                           "runtime/turn_validate.py",
+                                           "Area_comun/handoffs/HANDOFF-TASK-0027-codex-to-claude-1.md"
+                                       ],
+                      "blocked_by_questions":  [
+
+                                               ],
+                      "sdd_required":  true,
+                      "review":  "Ready. SDD-elegible: SPEC-0026/0027 emitidas. Dry-run primero (--plan no muta). Implementa contra SPEC-0026 (turno) y SPEC-0027 (router)."
                   }
               ]
 }

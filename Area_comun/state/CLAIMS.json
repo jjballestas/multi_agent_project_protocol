@@ -4,6 +4,51 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-TASK-0023-codex",
+                       "task_id":  "TASK-0023",
+                       "owner":  "Codex",
+                       "status":  "active",
+                       "scope":  [
+                                     "scripts/measure_context_cost.py",
+                                     "scripts/measure_context_cost.ps1",
+                                     "protocol.config.json",
+                                     "protocol.config.template.json",
+                                     "examples/context_cost_cases/",
+                                     "Area_comun/tasks/TASK-0023-codex-medidor-context-cost.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0023-codex-to-claude-1.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0023-in-review.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Implementacion TASK-0023: medidor measure_context_cost .py/.ps1, config token_cost, golden cases, handoff y coordinacion con Claude. No toca runtime/ ni SPEC-0026/0027."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0026-exec-claude",
+                       "task_id":  "TASK-0026",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "runtime/turn_schema.json",
+                                     "runtime/README.md",
+                                     "examples/runtime_turn_cases/",
+                                     "Area_comun/specs/SPEC-0026-contrato-de-turno.md",
+                                     "Area_comun/specs/SPEC-0027-router-determinista.md",
+                                     "Area_comun/tasks/TASK-0026-claude-runtime-m0-diseno.md",
+                                     "Area_comun/tasks/TASK-0027-codex-runtime-skeleton-plan.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Ejecucion TASK-0026 (runtime M0): contrato de turno (turn_schema) + router + golden. Crea runtime/ y SPEC-0026/0027. Track runtime DECISION-0009, paralelo a tokens (Codex/TASK-0023)."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-decision0010-licensing-claude",
                        "task_id":  "none",
                        "owner":  "Claude",

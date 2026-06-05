@@ -1,0 +1,26 @@
+{
+  "turn_id": "RUN-20260605-0001-t3",
+  "task_id": "TASK-0023",
+  "agent": "Codex",
+  "outcome": "in_review",
+  "summary": "Implementado measure_context_cost .py/.ps1 con golden y --json; paridad verificada.",
+  "changed_paths": [
+    "scripts/measure_context_cost.py",
+    "scripts/measure_context_cost.ps1",
+    "examples/context_cost_cases/",
+    "Area_comun/handoffs/HANDOFF-TASK-0023-codex-to-claude-1.md"
+  ],
+  "transitions": {
+    "task_status": { "from": "in_progress", "to": "in_review" },
+    "claims": [
+      { "op": "release", "claim_id": "CLAIM-20260605-TASK-0023-codex", "scope": ["scripts/measure_context_cost.py"] }
+    ],
+    "mailbox": [
+      { "op": "send", "message_id": "MSG-20260605-Codex-to-Claude-task0023-done", "to": "Claude" }
+    ],
+    "handoff": "Area_comun/handoffs/HANDOFF-TASK-0023-codex-to-claude-1.md"
+  },
+  "commit_message": "feat(P2): TASK-0023 medidor measure_context_cost (.py/.ps1, golden, --json)",
+  "gate": { "human_required": false },
+  "next_hint": "Claude revisa TASK-0023 contra SPEC-0023"
+}

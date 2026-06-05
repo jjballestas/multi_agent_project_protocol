@@ -1,0 +1,10 @@
+{
+  "turn_id": "RUN-20260605-0002-t1",
+  "task_id": "TASK-0024",
+  "agent": "Codex",
+  "outcome": "human_required",
+  "summary": "La poda de estado afecta la visibilidad del historico; requiere decision del operador.",
+  "changed_paths": [],
+  "commit_message": "chore(P2): TASK-0024 pausa por gate humano (poda de estado)",
+  "gate": { "human_required": true, "reason": "Confirmar ventana de retencion antes de mover released/done a ARCHIVE." }
+}

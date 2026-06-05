@@ -1,0 +1,8 @@
+{
+  "turn_id": "RUN-20260605-0003-t1",
+  "task_id": "TASK-0023",
+  "agent": "Codex",
+  "outcome": "in_review",
+  "summary": "Falta commit_message (required) => report invalido.",
+  "changed_paths": ["scripts/measure_context_cost.py"]
+}

@@ -232,8 +232,14 @@
                          {
                              "id":  "TASK-0026",
                              "owner":  "Claude",
+                             "status":  "done",
+                             "title":  "Runtime M0: contrato de turno + router (DECISION-0009) - turn_schema + SPEC-0026/0027 + golden verificados"
+                         },
+                         {
+                             "id":  "TASK-0027",
+                             "owner":  "Codex",
                              "status":  "ready",
-                             "title":  "Runtime M0: contrato de turno + router (DECISION-0009, track paralelo, target v0.8.0)"
+                             "title":  "Runtime M0 impl: skeleton + --plan + validador de turno + router (DECISION-0009, target v0.8.0)"
                          }
                      ],
     "open_questions":  [
