@@ -76,152 +76,15 @@
                       "DECISION-0007-claim-before-shared-draft",
                       "DECISION-0008-eficiencia-de-tokens",
                       "DECISION-0009-runtime-orquestacion",
-                      "DECISION-0010-licenciamiento-propietario"
+                      "DECISION-0010-licenciamiento-propietario",
+                      "DECISION-0011-claims-por-fila-estado"
                   ],
     "active_tasks":  [
                          {
-                             "id":  "TASK-0001",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Roadmap y backlog de enriquecimiento v0.2.0"
-                         },
-                         {
-                             "id":  "TASK-0002",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Validador multiplataforma (Python) + CI"
-                         },
-                         {
-                             "id":  "TASK-0003",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Politica de versionado (SemVer) + CHANGELOG"
-                         },
-                         {
-                             "id":  "TASK-0004",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Script de scaffolding para instanciar"
-                         },
-                         {
-                             "id":  "TASK-0005",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Arquitectura core/profiles/examples (P1, target v0.3.0)"
-                         },
-                         {
-                             "id":  "TASK-0006",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Perfil dotnet_enterprise (basado en entorno_open_cloude) (P1)"
-                         },
-                         {
-                             "id":  "TASK-0007",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Soporte de perfiles en estado y validador (P1)"
-                         },
-                         {
-                             "id":  "TASK-0008",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Disenar SDD + pipeline + criterios de cierre (P2.SDD, analysis) - DISENO-SDD.md + specs"
-                         },
-                         {
-                             "id":  "TASK-0009",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Actualizar templates para SDD (P2.SDD, implementation) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0010",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Crear specs/ + plantillas SDD (P2.SDD, implementation) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0011",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Validadores en modo SDD, config-gated y aditivo (P2.SDD, implementation) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0012",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Example minimal_sdd_instance (P2.SDD, implementation) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0013",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Documentar inicio de proyecto con SDD (P2.SDD, documentation) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0014",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Validaciones suaves de comunicacion compacta (DECISION-0005, target v0.5.0) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0015",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Ejemplo compact_communication_case (DECISION-0005) - aceptada"
-                         },
-                         {
-                             "id":  "TASK-0016",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Disenar robustez operacional + specs (DECISION-0006, analysis) - DISENO + SPEC-0017/0018/0019"
-                         },
-                         {
-                             "id":  "TASK-0017",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "CI completo + scan de neutralidad de dominio (SPEC-0017, target v0.6.0) - aceptada por Claude"
-                         },
-                         {
-                             "id":  "TASK-0018",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Harness tolerantes a runtime - skip con aviso (SPEC-0018, target v0.6.0) - aceptada por Claude"
-                         },
-                         {
-                             "id":  "TASK-0019",
-                             "owner":  "Claude",
-                             "status":  "in_review",
-                             "title":  "Migracion/upgrade asistida entre versiones (SPEC-0019, target v0.6.0) - paridad verificada, pendiente ratificacion Claude"
-                         },
-                         {
-                             "id":  "TASK-0020",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Regla claim antes de borrador compartido (DECISION-0007) - ratificada por Claude"
-                         },
-                         {
-                             "id":  "TASK-0021",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Soft-checks de higiene de mailbox (SPEC-0021) - aceptada por Claude"
-                         },
-                         {
-                             "id":  "TASK-0022",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Disenar eficiencia de tokens + baseline (DECISION-0008) - DISENO + SPEC-0023/0024/0025"
-                         },
-                         {
-                             "id":  "TASK-0023",
-                             "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Medidor measure_context_cost (DECISION-0008, target v0.7.0)"
-                         },
-                         {
                              "id":  "TASK-0024",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Poda de estado a historico - mayor impacto (DECISION-0008, target v0.7.0)"
+                             "status":  "done",
+                             "title":  "Poda de estado a historico - mayor impacto (DECISION-0008, target v0.7.0) - ACEPTADA por Claude (cold-start -75%)"
                          },
                          {
                              "id":  "TASK-0025",
@@ -230,16 +93,34 @@
                              "title":  "Frontmatter de mailbox minimo (DECISION-0008, target v0.7.0)"
                          },
                          {
-                             "id":  "TASK-0026",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Runtime M0: contrato de turno + router (DECISION-0009) - turn_schema + SPEC-0026/0027 + golden verificados"
-                         },
-                         {
                              "id":  "TASK-0027",
                              "owner":  "Codex",
+                             "status":  "done",
+                             "title":  "Runtime M0 impl: skeleton + --plan + validador de turno + router (DECISION-0009, target v0.8.0) - ACEPTADA por Claude"
+                         },
+                         {
+                             "id":  "TASK-0028",
+                             "owner":  "Codex",
+                             "status":  "done",
+                             "title":  "Claims por fila para ledgers de estado (DECISION-0011) - ACEPTADA por Claude (cuello de botella resuelto)"
+                         },
+                         {
+                             "id":  "TASK-0029",
+                             "owner":  "Claude",
+                             "status":  "done",
+                             "title":  "Runtime M1 (diseno): apply + gate/commit/revert + adapter replay (DECISION-0009) - DISENO + SPEC-0029/0030"
+                         },
+                         {
+                             "id":  "TASK-0030",
+                             "owner":  "Codex",
                              "status":  "ready",
-                             "title":  "Runtime M0 impl: skeleton + --plan + validador de turno + router (DECISION-0009, target v0.8.0)"
+                             "title":  "Runtime M1: apply_turn + gate + commit/revert (SPEC-0029) - determinista, golden repo-fixture"
+                         },
+                         {
+                             "id":  "TASK-0031",
+                             "owner":  "Codex",
+                             "status":  "ready",
+                             "title":  "Runtime M1: AgentAdapter + replay + loop --run (SPEC-0030) - depende de TASK-0030; LLM real = M2"
                          }
                      ],
     "open_questions":  [
@@ -253,16 +134,11 @@
                   "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos."
               ],
     "next_actions":  [
-                         "TASK-0021 en revision: Claude revisa soft-checks de higiene mailbox contra SPEC-0021.",
-                         "v0.6.0 PUBLICADA (robustez operacional): TASK-0016..0020 done; CI completo + scan neutralidad, harness tolerantes a runtime, upgrade asistido (estado eliminado, paridad verificada por Codex), DECISION-0006/0007. Backlog: TASK-0021 (higiene mailbox, ready).",
-                         "NUEVA SESION: leer RESUME.md (raiz) y AGENTS.md. Estado: v0.6.0 PUBLICADA. Fase P2 (adopcion/expansion) activa.",
-                         "DECISION-0006 (robustez operacional) aceptada: CI completo + scan neutralidad, harness tolerantes a runtime (skip con aviso) y upgrade asistido entre versiones. Target v0.6.0 (aditivo/MINOR).",
-                         "TASK-0016 (Claude, analysis) DONE: DISENO-robustez-operacional.md + SPEC-0017/0018/0019 (ready). Define conjuntos neutral/adoptable. TASK-0017/0018/0019 promovidas a READY (Codex), orden sugerido 0018 -\u003e 0017 -\u003e 0019.",
-                         "PROXIMO: Codex reclama e implementa TASK-0018/0017/0019 contra sus specs (SDD). Al cerrarlas, publicar v0.6.0 (MINOR, mover Unreleased en CHANGELOG + tag) con revision cruzada del arquitecto.",
-                         "SDD + comunicacion compacta publicados (TASK-0001..0015 done). Mantener cada cambio aditivo y neutral; releases MINOR sin aprobacion humana, MAJOR/v1.0.0 con aprobacion (DECISION-0001).",
-                         "Pendiente paralelo: adopcion en instancias reales (bot_spot_ai_strategy_pack), mas perfiles/ejemplos, docs."
+                         "Codex: cola = TASK-0025 (frontmatter minimo) -> TASK-0030 (runtime M1 apply+gate) -> TASK-0031 (runtime M1 loop). TASK-0028 ACEPTADA (cuello de botella resuelto).",
+                         "Claude: M1/M2 disenados (SPEC-0029/0030 + DISENO-runtime-m2). Disponible para revisar 0025/0030/0031 al hand-off; specs/tasks de M2 se derivan tras aceptar M1.",
+                         "Checkpoint de sesion commiteado (verde: validador+scan+golden). Ventana reciente done (0024/0027/0028/0029) se archivara en la proxima poda."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-05",
-    "updated_by":  "Codex"
+    "updated_by":  "Claude"
 }

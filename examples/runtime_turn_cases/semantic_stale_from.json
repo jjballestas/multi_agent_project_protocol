@@ -1,0 +1,19 @@
+{
+  "turn_id": "RUN-20260605-SEM-0003",
+  "task_id": "TASK-0099",
+  "agent": "Codex",
+  "outcome": "in_review",
+  "summary": "Invalid semantic turn report with a stale task status transition.",
+  "changed_paths": [
+    "runtime/router.py"
+  ],
+  "transitions": {
+    "task_status": { "from": "ready", "to": "in_review" },
+    "claims": [],
+    "mailbox": [],
+    "handoff": null
+  },
+  "commit_message": "feat(runtime): invalid stale transition fixture",
+  "gate": { "human_required": false },
+  "next_hint": null
+}

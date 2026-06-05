@@ -44,6 +44,12 @@ LIGHTWEIGHT_SDD_FIELDS = [
 PROFILE_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+TASK_ROW_SELECTOR_PATTERN = re.compile(r"^TASK-\d{4}$")
+PROJECT_STATE_SELECTOR_PATTERN = re.compile(r"^(active_tasks/TASK-\d{4}|[A-Za-z_][A-Za-z0-9_]*)$")
+ROW_SCOPED_LEDGER_SELECTORS = {
+    "Area_comun/state/TASK_INDEX.json": TASK_ROW_SELECTOR_PATTERN,
+    "Area_comun/state/PROJECT_STATE.json": PROJECT_STATE_SELECTOR_PATTERN,
+}
 
 
 class Validation:
@@ -242,6 +248,72 @@ def as_list(value: Any) -> list[Any]:
     if isinstance(value, list):
         return value
     return [value]
+
+
+def normalize_scope_path(path: str) -> str:
+    return path.replace("\\", "/").strip()
+
+
+def split_scope(scope: str) -> tuple[str, str | None]:
+    path, separator, selector = normalize_scope_path(scope).partition("#")
+    if not separator:
+        return path, None
+    return path, selector
+
+
+def validate_claim_scope_selector(scope: str, validation: Validation, claim_id: str | None) -> None:
+    path, selector = split_scope(scope)
+    if selector is None:
+        return
+    if not path or not selector:
+        validation.fail(f"Claim {claim_id} has malformed scoped path: {scope}")
+        return
+    pattern = ROW_SCOPED_LEDGER_SELECTORS.get(path)
+    if pattern is None:
+        validation.fail(f"Claim {claim_id} uses row selector on unsupported path: {scope}")
+        return
+    if not pattern.match(selector):
+        validation.fail(f"Claim {claim_id} has invalid row selector: {scope}")
+
+
+def scope_entries_overlap(left_scope: str, right_scope: str) -> bool:
+    left_path, left_selector = split_scope(left_scope)
+    right_path, right_selector = split_scope(right_scope)
+    if left_path != right_path:
+        return False
+    if left_path in ROW_SCOPED_LEDGER_SELECTORS:
+        return left_selector is None or right_selector is None or left_selector == right_selector
+    return left_selector == right_selector
+
+
+def merge_by_array_field(
+    hot: dict[str, Any] | None,
+    archive: dict[str, Any] | None,
+    field: str,
+    id_field: str,
+    label: str,
+    validation: Validation,
+) -> dict[str, Any] | None:
+    if not hot:
+        return hot
+    merged = dict(hot)
+    entries: list[Any] = []
+    seen: set[str] = set()
+    for source_name, source in (("hot", hot), ("archive", archive or {})):
+        for entry in as_list(source.get(field) if isinstance(source, dict) else None):
+            if not isinstance(entry, dict):
+                entries.append(entry)
+                continue
+            entry_id = str(entry.get(id_field) or "")
+            if entry_id:
+                if entry_id in seen:
+                    validation.fail(f"Duplicate {label} across hot/archive: {entry_id}")
+                seen.add(entry_id)
+            item = dict(entry)
+            item.setdefault("_state_source", source_name)
+            entries.append(item)
+    merged[field] = entries
+    return merged
 
 
 def parse_semver(version: Any) -> tuple[int, int, int] | None:
@@ -592,6 +664,9 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
             validation.fail(f"Claim without owner: {claim_id}")
         if claim.get("status") not in VALID_CLAIM_STATUSES:
             validation.fail(f"Claim {claim_id} has invalid status '{claim.get('status')}'")
+        for scope in as_list(claim.get("scope")):
+            if scope:
+                validate_claim_scope_selector(str(scope), validation, claim_id)
 
     active_claims = [claim for claim in claim_entries if claim.get("status") == "active"]
     for left_index, left in enumerate(active_claims):
@@ -602,22 +677,22 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
                 for right_scope in as_list(right.get("scope")):
                     if not left_scope or not right_scope:
                         continue
-                    left_scope = str(left_scope)
-                    right_scope = str(right_scope)
+                    left_scope = normalize_scope_path(str(left_scope))
+                    right_scope = normalize_scope_path(str(right_scope))
                     if (
-                        left_scope == "Area_comun/state/CLAIMS.json"
-                        or right_scope == "Area_comun/state/CLAIMS.json"
+                        split_scope(left_scope)[0] == "Area_comun/state/CLAIMS.json"
+                        or split_scope(right_scope)[0] == "Area_comun/state/CLAIMS.json"
                     ):
                         continue
-                    if left_scope.startswith("Area_comun/mailbox/") or right_scope.startswith(
+                    if split_scope(left_scope)[0].startswith("Area_comun/mailbox/") or split_scope(right_scope)[0].startswith(
                         "Area_comun/mailbox/"
                     ):
                         continue
-                    if left_scope == right_scope:
+                    if scope_entries_overlap(left_scope, right_scope):
                         validation.fail(
                             "Overlapping active claims: "
                             f"{left.get('claim_id')} and {right.get('claim_id')} "
-                            f"both scope '{left_scope}'"
+                            f"both scope '{left_scope}' / '{right_scope}'"
                         )
 
 
@@ -653,9 +728,28 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     else:
         validation.warn(f"Missing protocol config: {config_path}. No state invariants will be enforced.")
 
-    state = read_json_file(root / "Area_comun" / "state" / "PROJECT_STATE.json", validation)
-    index = read_json_file(root / "Area_comun" / "state" / "TASK_INDEX.json", validation)
-    claims = read_json_file(root / "Area_comun" / "state" / "CLAIMS.json", validation)
+    state_dir = root / "Area_comun" / "state"
+    state = read_json_file(state_dir / "PROJECT_STATE.json", validation)
+    index_hot = read_json_file(state_dir / "TASK_INDEX.json", validation)
+    claims_hot = read_json_file(state_dir / "CLAIMS.json", validation)
+    index_archive = read_json_file(state_dir / "TASK_INDEX_ARCHIVE.json", validation) if (state_dir / "TASK_INDEX_ARCHIVE.json").exists() else None
+    claims_archive = read_json_file(state_dir / "CLAIMS_ARCHIVE.json", validation) if (state_dir / "CLAIMS_ARCHIVE.json").exists() else None
+    index = merge_by_array_field(
+        index_hot if isinstance(index_hot, dict) else None,
+        index_archive if isinstance(index_archive, dict) else None,
+        "tasks",
+        "id",
+        "task",
+        validation,
+    )
+    claims = merge_by_array_field(
+        claims_hot if isinstance(claims_hot, dict) else None,
+        claims_archive if isinstance(claims_archive, dict) else None,
+        "claims",
+        "claim_id",
+        "claim",
+        validation,
+    )
 
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
     validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)

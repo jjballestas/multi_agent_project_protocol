@@ -10,6 +10,22 @@
   },
   "quality_gates": ["{{QUALITY_GATES}}"],
   "human_approval_points": ["{{HUMAN_APPROVAL_POINTS}}"],
+  "token_cost": {
+    "chars_per_token": 4,
+    "coldstart_globs": [
+      "AGENTS.md",
+      "Area_comun/README.md",
+      "Area_comun/protocol/TASK_PROTOCOL.md",
+      "Area_comun/state/PROJECT_STATE.json",
+      "Area_comun/state/TASK_INDEX.json",
+      "Area_comun/state/CLAIMS.json"
+    ],
+    "budget": null
+  },
+  "runtime": {
+    "enabled": false,
+    "entrypoint": "runtime/orchestrator.py"
+  },
   "domain_neutrality": {
     "enabled": true,
     "denylist": [],
@@ -21,6 +37,7 @@
       "Area_comun/protocol/*.md",
       "Area_comun/specs/*_TEMPLATE.md",
       "profiles/PROFILE_TEMPLATE/**",
+      "runtime/**",
       "scripts/*.py",
       "scripts/*.ps1"
     ],

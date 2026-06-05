@@ -21,10 +21,13 @@ An agent entering cold can operate by reading only:
    - `Area_comun/state/PROJECT_STATE.json`
    - `Area_comun/state/TASK_INDEX.json`
    - `Area_comun/state/CLAIMS.json`
+   - `Area_comun/state/*_ARCHIVE.json` only when historical entries are needed.
    - `Area_comun/mailbox/open/`
    - the concrete file in `Area_comun/tasks/`.
 
 Never assume another agent knows your context. Every task and handoff must be self-contained.
+The hot state files are intentionally pruned for cold-start efficiency; validators read hot state
+plus archives to preserve full traceability.
 
 ## 1. Project Goal
 

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "tasks": [
+    {
+      "id": "TASK-1",
+      "owner": "Codex",
+      "status": "done",
+      "type": "implementation",
+      "priority": "normal",
+      "phase": "P2",
+      "title": "Fixture done task",
+      "file": "Area_comun/tasks/TASK-1.md",
+      "depends_on": [],
+      "relates_to": [],
+      "relevant_files": [],
+      "deliverables": [],
+      "blocked_by_questions": [],
+      "review": "fixture"
+    },
+    {
+      "id": "TASK-2",
+      "owner": "Claude",
+      "status": "ready",
+      "type": "analysis",
+      "priority": "normal",
+      "phase": "P2",
+      "title": "Fixture ready task",
+      "file": "Area_comun/tasks/TASK-2.md",
+      "depends_on": [],
+      "relates_to": [],
+      "relevant_files": [],
+      "deliverables": [],
+      "blocked_by_questions": [],
+      "review": "fixture"
+    }
+  ]
+}

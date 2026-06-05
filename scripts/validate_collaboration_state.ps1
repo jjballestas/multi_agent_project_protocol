@@ -10,6 +10,10 @@ $script:LightweightTaskTypes = @("discovery", "analysis", "review", "documentati
 $script:ImplementableSddStatuses = @("ready", "claimed", "in_progress", "in_review", "done")
 $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
+$script:RowScopedLedgerSelectors = @{
+    "Area_comun/state/TASK_INDEX.json" = "^TASK-\d{4}$"
+    "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/TASK-\d{4}|[A-Za-z_][A-Za-z0-9_]*)$"
+}
 
 function Fail {
     param([string]$Message)
@@ -33,6 +37,85 @@ function Read-JsonFile {
         Fail "Invalid JSON: $Path :: $($_.Exception.Message)"
         return $null
     }
+}
+
+function Merge-ByArrayField {
+    param(
+        [object]$Hot,
+        [object]$Archive,
+        [string]$Field,
+        [string]$IdField,
+        [string]$Label
+    )
+    if (-not $Hot) { return $Hot }
+    $entries = [System.Collections.Generic.List[object]]::new()
+    $seen = @{}
+    foreach ($source in @(
+        @{ Name = "hot"; Data = $Hot },
+        @{ Name = "archive"; Data = $Archive }
+    )) {
+        if (-not $source.Data -or -not $source.Data.$Field) { continue }
+        foreach ($entry in @($source.Data.$Field)) {
+            if ($entry.PSObject.Properties.Name -contains $IdField) {
+                $entryId = [string]$entry.$IdField
+                if ($entryId) {
+                    if ($seen.ContainsKey($entryId)) {
+                        Fail "Duplicate $Label across hot/archive: $entryId"
+                    }
+                    $seen[$entryId] = $true
+                }
+            }
+            $entries.Add($entry) | Out-Null
+        }
+    }
+    $Hot.$Field = @($entries)
+    return $Hot
+}
+
+function Normalize-ScopePath {
+    param([string]$Scope)
+    return $Scope.Replace("\", "/").Trim()
+}
+
+function Split-Scope {
+    param([string]$Scope)
+    $normalized = Normalize-ScopePath $Scope
+    $index = $normalized.IndexOf("#")
+    if ($index -lt 0) {
+        return [pscustomobject]@{ Path = $normalized; Selector = $null }
+    }
+    return [pscustomobject]@{
+        Path = $normalized.Substring(0, $index)
+        Selector = $normalized.Substring($index + 1)
+    }
+}
+
+function Test-ClaimScopeSelector {
+    param([string]$Scope, [string]$ClaimId)
+    $parts = Split-Scope $Scope
+    if ($null -eq $parts.Selector) { return }
+    if (-not $parts.Path -or -not $parts.Selector) {
+        Fail "Claim $ClaimId has malformed scoped path: $Scope"
+        return
+    }
+    if (-not $script:RowScopedLedgerSelectors.ContainsKey($parts.Path)) {
+        Fail "Claim $ClaimId uses row selector on unsupported path: $Scope"
+        return
+    }
+    if ($parts.Selector -notmatch $script:RowScopedLedgerSelectors[$parts.Path]) {
+        Fail "Claim $ClaimId has invalid row selector: $Scope"
+    }
+}
+
+function Test-ScopeEntriesOverlap {
+    param([string]$LeftScope, [string]$RightScope)
+    $left = Split-Scope $LeftScope
+    $right = Split-Scope $RightScope
+    if ($left.Path -ne $right.Path) { return $false }
+    if ($script:RowScopedLedgerSelectors.ContainsKey($left.Path)) {
+        return ($null -eq $left.Selector) -or ($null -eq $right.Selector) -or ($left.Selector -eq $right.Selector)
+    }
+    return $left.Selector -eq $right.Selector
 }
 
 function Get-TaskStatusFromMarkdown {
@@ -519,13 +602,22 @@ if (Test-Path -LiteralPath $ConfigPath) {
     Warn "Missing protocol config: $ConfigPath. No state invariants will be enforced."
 }
 
-$statePath = Join-Path $resolvedRoot "Area_comun/state/PROJECT_STATE.json"
-$indexPath = Join-Path $resolvedRoot "Area_comun/state/TASK_INDEX.json"
-$claimsPath = Join-Path $resolvedRoot "Area_comun/state/CLAIMS.json"
+$stateDir = Join-Path $resolvedRoot "Area_comun/state"
+$statePath = Join-Path $stateDir "PROJECT_STATE.json"
+$indexPath = Join-Path $stateDir "TASK_INDEX.json"
+$claimsPath = Join-Path $stateDir "CLAIMS.json"
+$indexArchivePath = Join-Path $stateDir "TASK_INDEX_ARCHIVE.json"
+$claimsArchivePath = Join-Path $stateDir "CLAIMS_ARCHIVE.json"
 
 $state = Read-JsonFile $statePath
-$index = Read-JsonFile $indexPath
-$claims = Read-JsonFile $claimsPath
+$indexHot = Read-JsonFile $indexPath
+$claimsHot = Read-JsonFile $claimsPath
+$indexArchive = $null
+$claimsArchive = $null
+if (Test-Path -LiteralPath $indexArchivePath) { $indexArchive = Read-JsonFile $indexArchivePath }
+if (Test-Path -LiteralPath $claimsArchivePath) { $claimsArchive = Read-JsonFile $claimsArchivePath }
+$index = Merge-ByArrayField -Hot $indexHot -Archive $indexArchive -Field "tasks" -IdField "id" -Label "task"
+$claims = Merge-ByArrayField -Hot $claimsHot -Archive $claimsArchive -Field "claims" -IdField "claim_id" -Label "claim"
 
 if ($state -and $config -and $config.state_invariants) {
     foreach ($invariant in @($config.state_invariants)) {
@@ -615,6 +707,9 @@ if ($claims -and $claims.claims) {
         if ($claim.status -notin @("active", "released", "blocked")) {
             Fail "Claim $($claim.claim_id) has invalid status '$($claim.status)'"
         }
+        foreach ($scope in @($claim.scope)) {
+            if ($scope) { Test-ClaimScopeSelector -Scope ([string]$scope) -ClaimId ([string]$claim.claim_id) }
+        }
     }
 
     $activeClaims = @($claims.claims | Where-Object { $_.status -eq "active" })
@@ -626,10 +721,12 @@ if ($claims -and $claims.claims) {
             foreach ($leftScope in @($left.scope)) {
                 foreach ($rightScope in @($right.scope)) {
                     if (-not $leftScope -or -not $rightScope) { continue }
-                    if ($leftScope -eq "Area_comun/state/CLAIMS.json" -or $rightScope -eq "Area_comun/state/CLAIMS.json") { continue }
-                    if ($leftScope -like "Area_comun/mailbox/*" -or $rightScope -like "Area_comun/mailbox/*") { continue }
-                    if ($leftScope -eq $rightScope) {
-                        Fail "Overlapping active claims: $($left.claim_id) and $($right.claim_id) both scope '$leftScope'"
+                    $leftParts = Split-Scope ([string]$leftScope)
+                    $rightParts = Split-Scope ([string]$rightScope)
+                    if ($leftParts.Path -eq "Area_comun/state/CLAIMS.json" -or $rightParts.Path -eq "Area_comun/state/CLAIMS.json") { continue }
+                    if ($leftParts.Path -like "Area_comun/mailbox/*" -or $rightParts.Path -like "Area_comun/mailbox/*") { continue }
+                    if (Test-ScopeEntriesOverlap -LeftScope ([string]$leftScope) -RightScope ([string]$rightScope)) {
+                        Fail "Overlapping active claims: $($left.claim_id) and $($right.claim_id) both scope '$leftScope' / '$rightScope'"
                     }
                 }
             }

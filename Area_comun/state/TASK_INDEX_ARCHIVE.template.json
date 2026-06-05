@@ -1,0 +1,12 @@
+﻿{
+    "schema_version":  "1.0",
+    "updated_at":  "{{DATE}}",
+    "updated_by":  "{{AGENT}}",
+    "archive_policy":  "Done tasks moved from TASK_INDEX.json; no data deleted.",
+    "legend":  {
+
+               },
+    "tasks":  [
+
+              ]
+}

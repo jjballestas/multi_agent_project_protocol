@@ -12,6 +12,8 @@ Source of truth: `AGENTS.md`.
 6. Domain-specific boundaries belong to the project instance, not to this generic protocol.
 7. Clarity comes before execution: specification, pipeline, acceptance criteria and test plan must
    be explicit before implementation starts.
+8. Hot state files are optimized for active work; historical `done` tasks and `released` claims may
+   live in `Area_comun/state/*_ARCHIVE.json`. Validators must read hot state plus archives.
 
 ## Lifecycle
 

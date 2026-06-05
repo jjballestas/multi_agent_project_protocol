@@ -12,3 +12,7 @@ Casos para validar `runtime/turn_schema.json` (draft-07). Resultado esperado por
 Chequeos **semánticos** (no de esquema, los hace el orquestador en TASK-0027): `changed_paths ⊆ claim`
 (write-allowlist), `task_status.from` == estado actual (anti-carrera). Sus golden se añaden con el
 orquestador.
+
+Runners:
+- `python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py`
+- `python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py`

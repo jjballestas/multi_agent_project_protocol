@@ -19,7 +19,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: none
-status: open
+status: archived
 ---
 
 # Claude ejecuta TASK-0026 (runtime M0)

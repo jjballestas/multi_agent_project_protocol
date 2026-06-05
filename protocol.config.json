@@ -10,6 +10,22 @@
   },
   "quality_gates": ["validador_verde", "neutralidad_de_dominio"],
   "human_approval_points": ["cambios_incompatibles_de_protocolo", "publicacion_de_version_mayor"],
+  "token_cost": {
+    "chars_per_token": 4,
+    "coldstart_globs": [
+      "AGENTS.md",
+      "Area_comun/README.md",
+      "Area_comun/protocol/TASK_PROTOCOL.md",
+      "Area_comun/state/PROJECT_STATE.json",
+      "Area_comun/state/TASK_INDEX.json",
+      "Area_comun/state/CLAIMS.json"
+    ],
+    "budget": 30000
+  },
+  "runtime": {
+    "enabled": false,
+    "entrypoint": "runtime/orchestrator.py"
+  },
   "domain_neutrality": {
     "enabled": true,
     "denylist": ["trading", "spot", "binance", "backtest", "estrategia de trading"],
@@ -21,6 +37,7 @@
       "Area_comun/protocol/*.md",
       "Area_comun/specs/*_TEMPLATE.md",
       "profiles/PROFILE_TEMPLATE/**",
+      "runtime/**",
       "scripts/*.py",
       "scripts/*.ps1"
     ],
