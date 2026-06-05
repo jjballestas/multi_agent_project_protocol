@@ -30,6 +30,7 @@ Shared, auditable state for `multi_agent_project_protocol` (the protocol dogfood
 ## Minimum Rules
 
 - Check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/` before editing.
+- Create/update an active claim before creating or editing any shared file, including drafts.
 - Do not edit another owner's active claim.
 - Record blocking ambiguity as `blocked` with one concrete question.
 - Keep the protocol core **domain-neutral**; protocol/compatibility changes need a decision.

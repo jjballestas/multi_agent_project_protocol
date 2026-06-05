@@ -10,6 +10,33 @@
   },
   "quality_gates": ["validador_verde", "neutralidad_de_dominio"],
   "human_approval_points": ["cambios_incompatibles_de_protocolo", "publicacion_de_version_mayor"],
+  "domain_neutrality": {
+    "enabled": true,
+    "denylist": ["trading", "spot", "binance", "backtest", "estrategia de trading"],
+    "scan_globs": [
+      "AGENTS.template.md",
+      "Area_comun/README.template.md",
+      "protocol.config.template.json",
+      "Area_comun/state/*.template.json",
+      "Area_comun/protocol/*.md",
+      "Area_comun/specs/*_TEMPLATE.md",
+      "profiles/PROFILE_TEMPLATE/**",
+      "scripts/*.py",
+      "scripts/*.ps1"
+    ],
+    "exempt_globs": [
+      "profiles/**",
+      "examples/**",
+      "Claude/**",
+      "Codex/**",
+      "Area_comun/decisions/**",
+      "Area_comun/tasks/**",
+      "Area_comun/handoffs/**",
+      "Area_comun/reports/**",
+      "Area_comun/artifacts/**",
+      "Area_comun/mailbox/**"
+    ]
+  },
   "state_invariants": [
     {
       "path": "status",

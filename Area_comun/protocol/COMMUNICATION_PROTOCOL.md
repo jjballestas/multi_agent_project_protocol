@@ -35,6 +35,15 @@ Claims contain:
 
 An agent creates or updates its claim before editing shared files.
 
+### Claim before shared draft
+
+No agent may create, edit or leave a draft in a shared route without an active claim that lists the
+route in `scope`. "Draft" includes new files, partial implementations, temporary fixtures and
+scripts that remain in the workspace.
+
+If unclaimed work is found in a shared route, do not overwrite it. Send one mailbox message with a
+single ownership question and reference the exact path.
+
 ## Mailbox
 
 Messages are stored at:

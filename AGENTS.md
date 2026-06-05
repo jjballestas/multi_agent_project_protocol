@@ -89,6 +89,8 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
 - Small, verifiable, single-owner tasks.
 - Shared work in `Area_comun/`; private drafts in `Claude/` and `Codex/`.
 - Before editing, check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/`.
+- Before creating or editing any file in a shared route, create/update an active claim that lists
+  that route in `scope`; this includes new drafts and temporary files that remain in the workspace.
 - Do not edit routes covered by another owner's active claim.
 - Ambiguity becomes `blocked` plus one concrete question.
 - Any protocol or boundary change requires a recorded decision.

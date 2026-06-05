@@ -99,6 +99,18 @@ be treated as implementable by the architect and should use full SDD.
 7. On completion, create deliverables, create a handoff, set task to `in_review`, and release
    the claim.
 
+### Claim Before Shared Draft
+
+An agent must create or update an active claim **before** creating, editing or leaving any draft in
+a shared route. This includes new files, partial drafts, temporary scripts/fixtures that remain in
+the workspace, and shared state edits.
+
+Private drafts may live in the agent private area without a task claim only when that route is not
+covered by another owner's active claim.
+
+If an agent discovers unclaimed work in a shared route, it must not overwrite it. It opens one
+mailbox message with one concrete ownership question, then waits or works outside that route.
+
 ## Blocking Work
 
 If a task cannot proceed:

@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.5.0",
+  "project_name": "upgrade_case_outdated",
+  "source_of_truth": "AGENTS.md"
+}

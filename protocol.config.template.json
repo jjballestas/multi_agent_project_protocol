@@ -10,6 +10,33 @@
   },
   "quality_gates": ["{{QUALITY_GATES}}"],
   "human_approval_points": ["{{HUMAN_APPROVAL_POINTS}}"],
+  "domain_neutrality": {
+    "enabled": true,
+    "denylist": [],
+    "scan_globs": [
+      "AGENTS.template.md",
+      "Area_comun/README.template.md",
+      "protocol.config.template.json",
+      "Area_comun/state/*.template.json",
+      "Area_comun/protocol/*.md",
+      "Area_comun/specs/*_TEMPLATE.md",
+      "profiles/PROFILE_TEMPLATE/**",
+      "scripts/*.py",
+      "scripts/*.ps1"
+    ],
+    "exempt_globs": [
+      "profiles/**",
+      "examples/**",
+      "Claude/**",
+      "Codex/**",
+      "Area_comun/decisions/**",
+      "Area_comun/tasks/**",
+      "Area_comun/handoffs/**",
+      "Area_comun/reports/**",
+      "Area_comun/artifacts/**",
+      "Area_comun/mailbox/**"
+    ]
+  },
   "sdd": {
     "enabled": false,
     "enforcement": "new_implementable_tasks",

@@ -101,6 +101,8 @@ The task status must match in two places:
 - Shared work lives in `Area_comun/`.
 - Private drafts reside in each agent private folder if the project uses them.
 - Before editing, check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/`.
+- Before creating or editing any file in a shared route, create/update an active claim that lists
+  that route in `scope`; this includes new drafts and temporary files that remain in the workspace.
 - If a route is covered by another owner active claim, do not edit it.
 - Ambiguity becomes `blocked` plus one concrete question.
 - Any protocol or critical-boundary change requires a recorded decision.

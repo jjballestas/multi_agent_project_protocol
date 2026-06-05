@@ -4,6 +4,144 @@
     "updated_by":  "Codex",
     "claims":  [
                    {
+                       "claim_id":  "CLAIM-20260605-TASK-0021-hygiene-claude",
+                       "task_id":  "TASK-0021",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/specs/SPEC-0021-mailbox-hygiene-softchecks.md",
+                                     "Area_comun/tasks/TASK-0021-codex-mailbox-hygiene-softchecks.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Apertura (arquitecto) de TASK-0021 + SPEC-0021 (soft-checks higiene de mailbox). Distinto del claim de coordinacion commit/push de Codex (mismo task_id por etiquetado, released). Liberado al dejar la tarea ready."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0021-commit-push-coordination-codex",
+                       "task_id":  "TASK-0021",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-commit-push-coordination.md",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras crear mensaje de coordinacion commit/push para Claude; Codex no hizo commit ni push."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0020-codex",
+                       "task_id":  "TASK-0020",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "AGENTS.md",
+                                     "AGENTS.template.md",
+                                     "Area_comun/README.template.md",
+                                     "Area_comun/protocol/TASK_PROTOCOL.md",
+                                     "Area_comun/protocol/COMMUNICATION_PROTOCOL.md",
+                                     "Area_comun/decisions/DECISION-0007-claim-before-shared-draft.md",
+                                     "Area_comun/tasks/TASK-0020-codex-claim-before-shared-draft.md",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0020-codex-to-claude-1.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/README.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0020 en in_review con DECISION-0007, protocolos actualizados y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0019-claude",
+                       "task_id":  "TASK-0019",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "scripts/upgrade_instance.py",
+                                     "scripts/upgrade_instance.ps1",
+                                     "examples/upgrade_cases/",
+                                     "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0019-claude-to-codex-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Implementacion de TASK-0019 (reasignada a Claude por operador humano; Codex cedio via mailbox). upgrade_instance.py verificado; .ps1 espejo escrito con paridad PENDIENTE de corrida PowerShell (deny-rule del entorno). Liberado tras dejar TASK-0019 en in_review."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0017-codex",
+                       "task_id":  "TASK-0017",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     ".github/workflows/validate.yml",
+                                     "scripts/scan_domain_neutrality.py",
+                                     "scripts/scan_domain_neutrality.ps1",
+                                     "protocol.config.json",
+                                     "protocol.config.template.json",
+                                     "examples/neutrality_scan_cases/",
+                                     "Area_comun/tasks/TASK-0017-codex-ci-completo-scan-neutralidad.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0017-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0017 en in_review con CI completo, scan de neutralidad .py/.ps1, golden cases y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-TASK-0018-codex",
+                       "task_id":  "TASK-0018",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "examples/sdd_validation_cases/run_sdd_cases.ps1",
+                                     "examples/compact_comms_validation_cases/run_compact_comms_cases.ps1",
+                                     "Area_comun/tasks/TASK-0018-codex-harness-tolerante-runtime.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/handoffs/HANDOFF-TASK-0018-codex-to-claude-1.md"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Liberado tras dejar TASK-0018 en in_review con harness tolerantes a runtime, simulaciones de runtime ausente y handoff."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260605-decision0006-robustez-claude",
+                       "task_id":  "TASK-0016",
+                       "owner":  "Claude",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/decisions/DECISION-0006-robustez-operacional.md",
+                                     "Area_comun/artifacts/DISENO-robustez-operacional.md",
+                                     "Area_comun/specs/SPEC-0017-ci-completo-scan-neutralidad.md",
+                                     "Area_comun/specs/SPEC-0018-harness-tolerante-runtime.md",
+                                     "Area_comun/specs/SPEC-0019-upgrade-asistido.md",
+                                     "Area_comun/tasks/TASK-0016-claude-robustez-operacional-diseno.md",
+                                     "Area_comun/tasks/TASK-0017-codex-ci-completo-scan-neutralidad.md",
+                                     "Area_comun/tasks/TASK-0018-codex-harness-tolerante-runtime.md",
+                                     "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/state/CLAIMS.json"
+                                 ],
+                       "started_at":  "2026-06-05",
+                       "updated_at":  "2026-06-05",
+                       "expires_at":  "2026-06-06",
+                       "notes":  "Gobernanza + diseno: DECISION-0006 + TASK-0016 ejecutada (DISENO-robustez-operacional.md + SPEC-0017/0018/0019). TASK-0017/0018/0019 quedan ready para Codex. No implementa CI/scripts (backlog de Codex)."
+                   },
+                   {
                        "claim_id":  "CLAIM-20260605-release-v050-claude",
                        "task_id":  "TASK-0015",
                        "owner":  "Claude",

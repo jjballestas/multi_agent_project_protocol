@@ -22,3 +22,29 @@ jobs:
       - name: Validate minimal example instance
         run: python scripts/validate_collaboration_state.py --root examples/minimal_instance
 
+      - name: Validate repository dogfood instance with PowerShell
+        shell: pwsh
+        run: ./scripts/validate_collaboration_state.ps1 -Root .
+
+      - name: Validate minimal example instance with PowerShell
+        shell: pwsh
+        run: ./scripts/validate_collaboration_state.ps1 -Root examples/minimal_instance
+
+      - name: Run SDD validation cases
+        shell: pwsh
+        run: ./examples/sdd_validation_cases/run_sdd_cases.ps1
+
+      - name: Run compact communication validation cases
+        shell: pwsh
+        run: ./examples/compact_comms_validation_cases/run_compact_comms_cases.ps1
+
+      - name: Run neutrality scan validation cases
+        shell: pwsh
+        run: ./examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1
+
+      - name: Scan domain neutrality
+        run: python scripts/scan_domain_neutrality.py --root .
+
+      - name: Scan domain neutrality with PowerShell
+        shell: pwsh
+        run: ./scripts/scan_domain_neutrality.ps1 -Root .
