@@ -1,7 +1,7 @@
 ﻿{
     "project":  "multi_agent_project_protocol",
     "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version":  "0.6.0",
+    "version":  "0.7.0",
     "phase":  {
                   "id":  "P2",
                   "name":  "Adopcion y expansion",
@@ -64,7 +64,8 @@
                               "v0.3.0",
                               "v0.4.0",
                               "v0.5.0",
-                              "v0.6.0"
+                              "v0.6.0",
+                              "v0.7.0"
                           ],
     "decisions":  [
                       "DECISION-0001-versionado",
@@ -89,8 +90,8 @@
                          {
                              "id":  "TASK-0025",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Frontmatter de mailbox minimo (DECISION-0008, target v0.7.0)"
+                             "status":  "done",
+                             "title":  "Frontmatter de mailbox minimo (DECISION-0008) - ACEPTADA por Claude (-61% frontmatter); cierra track de tokens / v0.7.0"
                          },
                          {
                              "id":  "TASK-0027",
@@ -134,9 +135,9 @@
                   "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos."
               ],
     "next_actions":  [
-                         "Codex: cola = TASK-0025 (frontmatter minimo) -> TASK-0030 (runtime M1 apply+gate) -> TASK-0031 (runtime M1 loop). TASK-0028 ACEPTADA (cuello de botella resuelto).",
-                         "Claude: M1/M2 disenados (SPEC-0029/0030 + DISENO-runtime-m2). Disponible para revisar 0025/0030/0031 al hand-off; specs/tasks de M2 se derivan tras aceptar M1.",
-                         "Checkpoint de sesion commiteado (verde: validador+scan+golden). Ventana reciente done (0024/0027/0028/0029) se archivara en la proxima poda."
+                         "v0.7.0 PUBLICADA: cierra el track de eficiencia de tokens (DECISION-0008: medidor 0023 + poda 0024 + frontmatter minimo 0025; cold-start -75%) e incluye, aditivo/off-by-default, el runtime M0 (0027) y claims por fila (0028).",
+                         "Codex: cola = TASK-0030 (runtime M1 apply+gate, SPEC-0029) -> TASK-0031 (runtime M1 loop, SPEC-0030). Deterministas (replay), golden sobre repo-fixture.",
+                         "Claude: revisar 0030/0031 al hand-off; derivar specs/tasks de runtime M2 tras aceptar M1. Proxima poda archiva la ventana reciente done."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-05",

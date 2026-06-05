@@ -17,6 +17,40 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.7.0] — 2026-06-05
+
+Token-efficiency release: the protocol now **measures** its own context cost and trims the biggest
+sources of cold-start bloat, cutting cold-start ~**75%** (≈37k → ≈9k proxy tokens) with no loss of
+traceability. Also lands, **additively and off-by-default**, the runtime control-plane foundation (M0)
+and a row-scoped state-claim model that lets two agents work in parallel without serializing on the
+shared state files. **MINOR** — additive, domain-neutral, back-compatible.
+
+### Added
+- **Token-efficiency decision + design** ([DECISION-0008](Area_comun/decisions/DECISION-0008-eficiencia-de-tokens.md),
+  TASK-0022): `Area_comun/artifacts/DISENO-eficiencia-de-tokens.md` + SPEC-0023/0024/0025 with a measured baseline.
+- **Context-cost meter** `scripts/measure_context_cost.py`/`.ps1` (TASK-0023, SPEC-0023): deterministic
+  chars/token proxy over cold-start globs + state dead-weight + mailbox frontmatter overhead; `--json`
+  and `--budget` (warning); configurable `token_cost` block in `protocol.config(.template).json`;
+  read-only. Golden `examples/context_cost_cases/`.
+- **State pruning to history** (TASK-0024, SPEC-0024): `Area_comun/state/CLAIMS_ARCHIVE.json` /
+  `TASK_INDEX_ARCHIVE.json` (+ templates); the validator reads **hot ∪ archive** (cross-ref duplicate
+  detection). Cold-start **37 391 → ≈9k tokens (-75%)**; nothing deleted (archive ≠ delete).
+- **Minimal mailbox frontmatter** (TASK-0025, SPEC-0025): a minimal variant + omission rule in
+  `MAILBOX_MESSAGE_TEMPLATE.md`; the validator already tolerates omitted optional fields (back-compat).
+  Golden `examples/compact_comms_validation_cases/minimal_frontmatter/` (-61% frontmatter chars on the example).
+- **Runtime control-plane M0** ([DECISION-0009](Area_comun/decisions/DECISION-0009-runtime-orquestacion.md),
+  TASK-0026/0027): `runtime/turn_schema.json` (strict turn contract), deterministic router, turn
+  validator (schema + write-allowlist + race detection) and `orchestrator --plan` dry-run;
+  `runtime.enabled:false` by default (`runtime/**` added to the neutrality scan). Golden
+  `examples/runtime_turn_cases/`, `examples/runtime_router_cases/`.
+- **Row-scoped state claims** ([DECISION-0011](Area_comun/decisions/DECISION-0011-claims-por-fila-estado.md),
+  TASK-0028, SPEC-0028): claim scopes may target `TASK_INDEX.json#TASK-XXXX` /
+  `PROJECT_STATE.json#active_tasks/TASK-XXXX`; same-row conflicts still caught, distinct rows no longer
+  collide. Bare paths keep whole-file semantics (back-compat). Golden `examples/row_scoped_claim_cases/`.
+- **Runtime M1/M2 design** (TASK-0029): `DISENO-runtime-m1.md` + SPEC-0029/0030 (apply+gate+commit/revert,
+  adapter interface + replay loop) and `DISENO-runtime-m2.md` (real adapters + autonomous loop) — design
+  only; implementation tracked as TASK-0030/0031 and later.
+
 ## [0.6.0] — 2026-06-05
 
 Operational robustness: the protocol's own quality gates now run in CI, validation harnesses no

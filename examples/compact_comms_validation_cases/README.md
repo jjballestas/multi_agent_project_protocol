@@ -8,6 +8,7 @@ Golden cases for DECISION-0005 soft checks.
 | `missing_question` | 1 | Compact open message with `requires_response:true` but no `question`. |
 | `legacy_exempt` | 0 | Legacy open message with `requested_action` but no compact fields. |
 | `missing_context_refs_warning` | 0 | Compact message references existing work without `context_refs`, producing a warning. |
+| `minimal_frontmatter` | 0 | Minimal-frontmatter FYI (SPEC-0025): only the obligatory set, optional fields omitted; valid with no error. |
 
 Run:
 

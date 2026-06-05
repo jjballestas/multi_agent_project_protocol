@@ -8,7 +8,8 @@ $cases = @(
     @{ Name = "valid_compact"; Exit = 0 },
     @{ Name = "missing_question"; Exit = 1 },
     @{ Name = "legacy_exempt"; Exit = 0 },
-    @{ Name = "missing_context_refs_warning"; Exit = 0 }
+    @{ Name = "missing_context_refs_warning"; Exit = 0 },
+    @{ Name = "minimal_frontmatter"; Exit = 0 }
 )
 
 $pythonValidator = Join-Path $RepoRoot "scripts/validate_collaboration_state.py"

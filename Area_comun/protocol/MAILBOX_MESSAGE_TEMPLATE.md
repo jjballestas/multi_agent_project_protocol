@@ -35,6 +35,36 @@ status: open | answered | archived
 artifact/handoff/report and link it here.>
 ```
 
+## Minimal frontmatter (SPEC-0025, DECISION-0008 §3)
+
+To cut frontmatter overhead, emit only the **obligatory set** and **omit** any optional field that
+would be `none` / empty / a default. Omitted fields are assumed at their default; the validator does
+not require them (back-compat: the full frontmatter above stays valid).
+
+- **Obligatory always:** `message_id`, `type`, `task_id`, `from`, `to`, `status`, `one_line_summary`.
+- **Obligatory only if `requires_response: true`:** `response_owner`, `requested_action`, `question`.
+- **Omit when `none`/empty/false-by-default:** `requires_response` (⇒ false), `response_owner`,
+  `subject`, `requested_action`, `question`, `context_refs`, `changed_refs`, `validation_refs`,
+  `deadline_or_blocking_level`.
+
+Minimal FYI example (no response needed):
+
+```markdown
+---
+message_id: MSG-YYYYMMDD-<from>-to-<to>-<slug>
+type: FYI
+task_id: TASK-XXXX | none
+from: {{AGENT_ARCHITECT}}
+to: {{AGENT_IMPLEMENTER}}
+status: open
+one_line_summary: <one line, the delta>
+---
+
+# <subject>
+
+<Body: only the delta.>
+```
+
 ## Rules (DECISION-0005)
 - One intention per message; if `requires_response: true`, exactly one `question`.
 - Use `context_refs` instead of repeating context from AGENTS/PROJECT_STATE/TASK_INDEX/decisions/specs/tasks/handoffs.
