@@ -1,6 +1,6 @@
 {
     "schema_version": "1.0",
-    "updated_at": "2026-06-06",
+    "updated_at": "2026-06-07",
     "updated_by": "Codex",
     "legend": {
         "status": [
@@ -174,6 +174,44 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (105/105 incl. turn schema 5/5 + semantic 5/5) + validador/encoding/neutralidad py. Verificado: schema_version=1.1.0 se anade como METADATA del documento JSON Schema (confirmado: NO esta en properties ni en required) => NO afecta la validacion de los reportes de turno; cambio aditivo puro. SCHEMA_VERSIONING.md documenta la politica (PATCH no contractual; MINOR aditivo/relajacion; MAJOR quitar-renombrar-requerir-endurecer-cambiar-semantica) segun consumidores reales (turn_validate/apply/adapters/golden) + justifica Fases 1-4=MINOR coherente con DECISION-0001. Neutralidad limpia. Release ATOMICO aplicado por Codex. Cubre el criterio 17 de SPEC-0038. CON A.7 LA CAPA A QUEDA COMPLETA (A.1/A.2/A.3/A.4/A.5/A.6/A.7); test plan global 15.3-15.5 cubierto. Flip por arquitecto; reporte al operador para decidir siguiente paso."
+        },
+        {
+            "id": "TASK-0054",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 5.1 (guardrails, SPEC-0040): anti-inyeccion de handoffs/inputs/tool-output + taint/provenance. runtime/guardrails.py (classify_provenance/scan_injection deny-by-default domain-neutral/contain_untrusted) + cableado aditivo en turn_validate (efecto de seguridad sostenido solo sobre contenido untrusted => rechazado; inyeccion => contenida como dato + security.handoff_injection_contained) + golden examples/runtime_guardrail_cases/. Invariante rector: ninguna decision de seguridad se deriva de contenido controlado por el actor. Aditivo, fallback N=2 intacto.",
+            "spec_id": "Area_comun/specs/SPEC-0040-fase5-guardrails.md",
+            "file": "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0046",
+                "TASK-0049"
+            ],
+            "relates_to": [
+                "TASK-0044",
+                "TASK-0048"
+            ],
+            "relevant_files": [
+                "runtime/guardrails.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_guardrail_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/guardrails.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_guardrail_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07: arranca Fase 5 (guardrails, OK del operador). Primera de 3 rebanadas (5.1 anti-inyeccion -> 5.2 tool-policy -> 5.3 firma del envelope). Aditiva, deny-by-default, fallback N=2 byte-equivalente; sin DECISION nueva (autorizada por DECISION-0015 + OK operador). Codex sin auto-disparo: lo empuja el operador. Release atomico (DECISION-0018)."
         }
     ]
 }

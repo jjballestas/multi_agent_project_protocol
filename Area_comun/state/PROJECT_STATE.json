@@ -108,6 +108,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Runtime commit robusto vs pre-commit hook de poda (SPEC-0037) - ACEPTADA por Claude (ratificacion adversarial): commit_turn --no-verify solo en runtime + auto-poda post-run (commit separado) + atomicidad commit-fail; runtime_loop 8/8 con hook instalado. Resuelve el deadlock hallado en la corrida real (TASK-0040)."
+        },
+        {
+            "id": "TASK-0054",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Fase 5.1 (guardrails, SPEC-0040): anti-inyeccion de handoffs/inputs/tool-output + taint/provenance. Invariante rector: ninguna decision de seguridad (capacidad/scope/autor/escalado) se deriva de contenido controlado por el actor; todo desde registry/estado/config. runtime/guardrails.py + cableado aditivo en turn_validate (inyeccion contenida como dato + security.handoff_injection_contained) + golden runtime_guardrail_cases. Aditivo, deny-by-default, fallback N=2 intacto. Encolada a Codex 2026-06-07 (arranca Fase 5, OK operador)."
         }
     ],
     "open_questions": [],
@@ -156,9 +162,10 @@
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "PENDIENTES GATEADOS OPERADOR: release v0.10.0 (acumula DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A completa); Fase 5 guardrails (gateada); Fase B writer-vivo del estado de protocolo (gateada); wrapper LLM real (claude CLI) tras el invoker subproceso; o detener el programa N-agente.",
         "ANALISIS DEL COMPORTAMIENTO SEMI-AUTOMATICO (pedido por el operador): generado como reporte humano en Area_comun/reports/REPORT-20260606-comportamiento-semi-automatico.md + sugerencias extraidas como artefacto formal en Area_comun/artifacts/SUGERENCIAS-autonomia-semi-automatica-20260606.md. Observaciones en memoria semi-auto-collaboration-pattern.",
-        "v0.10.0 PUBLICADA (aprobada por el operador): empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A completa. protocol_version 0.10.0; CHANGELOG [0.10.0]; tag v0.10.0; reporte humano REPORT-20260606-release-v0.10.0.md. MINOR aditivo, neutral, fallback N=2 byte-equivalente, runtime gated/off-by-default en templates. Suite runtime 105/105 + gates verdes. Codex avisado por mailbox."
+        "v0.10.0 PUBLICADA (aprobada por el operador): empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A completa. protocol_version 0.10.0; CHANGELOG [0.10.0]; tag v0.10.0; reporte humano REPORT-20260606-release-v0.10.0.md. MINOR aditivo, neutral, fallback N=2 byte-equivalente, runtime gated/off-by-default en templates. Suite runtime 105/105 + gates verdes. Codex avisado por mailbox.",
+        "FASE 5 ARRANCADA (decision del operador 2026-06-07): siguiente paso post-v0.10.0 = Fase 5 (Guardrails y permisos). Claude (arquitecto) especifico SPEC-0040 (descomposicion de Fase 5 en 3 rebanadas: 5.1 anti-inyeccion -> 5.2 tool-policy deny-by-default -> 5.3 firma del envelope) y encolo la primera: TASK-0054 (5.1, ready, Codex, high). Invariante rector: ninguna decision de seguridad (capacidad/scope/autor/escalado) se deriva de contenido controlado por el actor (handoff/task_input/tool_output); todo desde registry/estado/config. Generaliza el principio de A.6 (autor-de-record). Aditivo, deny-by-default, fallback N=2 byte-equivalente, SIN DECISION nueva (autorizada por DECISION-0015 + OK operador). Fase B (SPEC-0039) y Fase 6/7 siguen gateadas. Codex sin auto-disparo (lo empuja el operador); release atomico esperado (DECISION-0018)."
     ],
     "created_at": "2026-06-05",
-    "updated_at": "2026-06-06",
+    "updated_at": "2026-06-07",
     "updated_by": "Codex"
 }
