@@ -1,7 +1,7 @@
 ---
 id: TASK-0036
 owner: Codex
-status: proposed
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-06
@@ -20,10 +20,13 @@ closure_criteria: [LLMAdapter + invoker pluggable + RecordedInvoker + limites + 
 # TASK-0036 - Adapter LLM real (un turno, limites, replay comparativo, SIN autonomia)
 
 > `implementation` -> SDD; implementar contra [SPEC-0035](../specs/SPEC-0035-adapter-llm-real.md) bajo
-> DECISION-0009. **M2 hito 2.** Estado `proposed`: implica invocar un agente LLM REAL que escribe/commitea
-> via el motor M1. **Bloqueado a confirmacion del operador** de: (a) mecanismo de invocacion (Claude Agent
-> SDK / Codex CLI / otro), (b) gate humano para la primera corrida real sobre el repo vivo (DECISION-0009).
-> Hasta esa confirmacion NO pasa a ready.
+> DECISION-0009. **M2 hito 2.** Estado `ready` (operador confirmo 2026-06-06). Las dos confirmaciones que
+> bloqueaban quedan FIJADAS:
+> - (a) **Mecanismo de invocacion = subproceso generico vendor-neutral** (invoker base parametrizable;
+>   Claude SDK / Codex CLI son configuraciones de ese invoker, no el base). Mantiene el core neutral.
+> - (b) **Primera corrida real sobre el repo vivo = aprobacion puntual del operador "cuando Claude avise".**
+>   Implementa el adapter completo + RecordedInvoker + golden (sin red). NO disparar la corrida real: queda
+>   pendiente del OK del operador. CI nunca usa el invoker real.
 
 ## Resumen
 `LLMAdapter(AgentAdapter)` que construye el prompt desde el ContextPack e invoca al agente real via un
@@ -37,11 +40,13 @@ sobre el mismo fixture (mismo commit/transicion) => prueba que el adapter real e
 - `runtime/orchestrator.py` (anadir `--adapter llm`, gateado)
 - `examples/llm_adapter_cases/`
 
-## Coordinacion / preguntas abiertas (para Codex + operador)
-- Mecanismo de invocacion real: Claude Agent SDK vs Codex CLI vs interfaz generica de subproceso. (Para
-  CI no importa: RecordedInvoker.)
-- Estrategia de grabacion del transcript para el replay comparativo (formato del RecordedInvoker).
-- Confirmar el gate humano de la primera corrida real (no en CI; corrida explicita aprobada).
+## Coordinacion / decisiones (resueltas por el operador 2026-06-06)
+- RESUELTO: mecanismo de invocacion real = **subproceso generico vendor-neutral** (invoker base
+  parametrizable; SDK/CLI son configuraciones suyas). El replay sigue como invoker de respaldo.
+- RESUELTO: gate humano de la primera corrida real = **aprobacion puntual del operador "cuando Claude
+  avise"** (no en CI; corrida explicita; Codex no la dispara).
+- ABIERTA (decision de implementacion de Codex): formato exacto del transcript que reproduce el
+  `RecordedInvoker` para el replay comparativo. Proponer en el handoff; mantener determinista y sin red.
 
 ## Dogfood
 Aplica liveness (senal por turno) + handoff-release (libera claim al pasar a in_review, commitea WIP

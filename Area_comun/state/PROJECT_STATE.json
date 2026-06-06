@@ -96,6 +96,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Gate mailbox status<->carpeta + fix prune (status al mover) (SPEC-0034) - ACEPTADA por Claude (ratificacion adversarial: bug plantado falla el gate; cerrado de raiz + blindado en CI)"
+        },
+        {
+            "id": "TASK-0036",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Adapter LLM real (M2 hito 2, SPEC-0035): LLMAdapter con invoker subproceso generico vendor-neutral + RecordedInvoker + limites M1/budget + replay comparativo + --adapter llm --once, SIN autonomia. Decisiones del operador fijadas; encolada a Codex; 1ra corrida real gateada a OK del operador."
         }
     ],
     "open_questions": [],
@@ -117,7 +123,8 @@
         "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
         "TASK-0034 ACEPTADA y DONE: poda sistematica (DECISION-0014). Poda REAL aplicada: cold-start 20701 -> 8565 tokens (-59%, bajo el suelo); prune_state --check/--apply + hook bloqueante + CI hard-fail. DEFECTO documentado: prune no normaliza status al mover mailbox (41 mismatches) -> enrutado a TASK-0035.",
         "TASK-0035 ACEPTADA y DONE (ratificacion adversarial): gate mailbox status<->carpeta (hard-fail en validador py/ps1 + CI) + fix de raiz en prune_state (normaliza status al mover). Verificado: bug plantado => validador exit 1; prune no reintroduce mismatches; golden 5/5; repo 0 mismatches. El bug del mailbox que el operador detecto queda CERRADO DE RAIZ + BLINDADO; no puede recurrir.",
-        "Siguiente: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia); Claude deriva la spec. Nota arquitectura: N-agent readiness deprioritizado hasta post-M2 (Area_comun/artifacts/ANALISIS-n-agent-readiness.md). LECCION clave: comprobar CLAIMS antes de tocar rutas compartidas (Claude colisiono con la poda por no chequear)."
+        "Siguiente: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia); Claude deriva la spec. Nota arquitectura: N-agent readiness deprioritizado hasta post-M2 (Area_comun/artifacts/ANALISIS-n-agent-readiness.md). LECCION clave: comprobar CLAIMS antes de tocar rutas compartidas (Claude colisiono con la poda por no chequear).",
+        "M2 hito 2 EN MARCHA: SPEC-0035 + TASK-0036 (adapter LLM real) pasadas a READY por Claude tras confirmacion del operador (2026-06-06, DECISION-0009): (1) invoker real = SUBPROCESO GENERICO vendor-neutral (Claude SDK / Codex CLI como configuraciones del invoker, no como base => core neutral); (2) primera corrida real sobre el repo vivo = APROBACION PUNTUAL DEL OPERADOR cuando Claude avise (Codex implementa adapter + RecordedInvoker + golden sin red; NO dispara la corrida real; CI nunca usa invoker real). TASK-0036 encolada a Codex via mailbox. Pendiente: Codex reclama e implementa; el formato del transcript del RecordedInvoker queda como decision de implementacion (proponer en handoff)."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-06",

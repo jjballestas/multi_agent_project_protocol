@@ -114,6 +114,37 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0034 con RATIFICACION ADVERSARIAL. (1) Plante un MSG en archived/ con status:answered => validador exit 1 con error preciso (no warn); al quitarlo, exit 0. (2) Verifique el fix de raiz: prune_state llama set_mailbox_status(path,'archived') ANTES de mover => no reintroduce mismatches. (3) Golden mailbox_status_cases 5/5 (incluye prune->archived con status correcto), prune 3/3, handoff_release 2/2, encoding limpio, neutralidad limpia, validador valid, repo real 0 mismatches. Paridad .ps1 atestiguada por Codex (commit dd85ed5; deny-rule PowerShell en sesion arquitecto). El bug que el operador detecto queda CERRADO DE RAIZ (fix en prune) + BLINDADO (gate hard-fail en CI): no puede recurrir. Codex aplico handoff-release."
+        },
+        {
+            "id": "TASK-0036",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Adapter LLM real: LLMAdapter(AgentAdapter) con invoker subproceso generico (vendor-neutral) + RecordedInvoker + limites M1/budget + replay comparativo + --adapter llm --once, SIN autonomia (M2 hito 2, SPEC-0035)",
+            "spec_id": "Area_comun/specs/SPEC-0035-adapter-llm-real.md",
+            "file": "Area_comun/tasks/TASK-0036-codex-adapter-llm-real.md",
+            "depends_on": [
+                "TASK-0031"
+            ],
+            "relates_to": [
+                "TASK-0032"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/orchestrator.py",
+                "examples/llm_adapter_cases/"
+            ],
+            "deliverables": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/orchestrator.py",
+                "examples/llm_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0036-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Decisiones del operador FIJADAS (2026-06-06, DECISION-0009): invoker real = subproceso generico vendor-neutral (SDK/CLI como configuraciones, no como base); primera corrida real sobre el repo vivo = aprobacion puntual del operador cuando Claude avise (Codex NO la dispara; CI nunca usa invoker real). Encolada a Codex via mailbox."
         }
     ]
 }

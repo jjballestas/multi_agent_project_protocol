@@ -2,7 +2,7 @@
 spec_id: SPEC-0035-adapter-llm-real
 task_id: TASK-0036
 type: implementation
-status: proposed
+status: ready
 linked_decisions: [DECISION-0009, DECISION-0001]
 created_at: 2026-06-06
 author: Claude
@@ -10,9 +10,17 @@ author: Claude
 
 # SPEC-0035 - Adapter LLM real (un turno real, con limites, replay comparativo, SIN autonomia)
 
-> Estado: PROPOSED. Es M2 hito 2. Implica invocar un agente LLM REAL que escribe/commitea en el repo
-> via el motor M1 -> tiene implicaciones de seguridad y necesita confirmacion del operador (mecanismo de
-> invocacion + gate de primera corrida real, DECISION-0009). No pasa a ready hasta esa confirmacion.
+> Estado: READY (confirmada por el operador 2026-06-06). Es M2 hito 2. Implica invocar un agente LLM REAL
+> que escribe/commitea en el repo via el motor M1 -> tiene implicaciones de seguridad. Las dos confirmaciones
+> que exigia DECISION-0009 quedan fijadas (ver "Decisiones del operador" abajo).
+>
+> ## Decisiones del operador (2026-06-06, DECISION-0009)
+> 1. **Mecanismo de invocacion real = subproceso generico vendor-neutral.** El invoker base lanza un
+>    comando/subproceso parametrizable; Claude Agent SDK y Codex CLI son configuraciones de ese mismo
+>    invoker, NO el invoker base. Mantiene el core neutral de dominio (sin acoplar a un vendor).
+> 2. **Gate de la primera corrida real sobre el repo vivo = aprobacion puntual del operador "cuando Claude
+>    avise".** Codex implementa el adapter completo + RecordedInvoker + golden (sin red, sin API). La primera
+>    corrida con el invoker REAL queda explicitamente pendiente del OK del operador; Codex NO la dispara.
 
 ## Contexto
 Runtime M2 (DECISION-0009). M1 cerro el loop de forma determinista con un replay adapter. Hito 2:
