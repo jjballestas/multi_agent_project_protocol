@@ -22,6 +22,15 @@
     ],
     "budget": 30000
   },
+  "maintenance": {
+    "enabled": true,
+    "cold_start_tokens_hard": 20000,
+    "done_ratio_hard": 85,
+    "released_ratio_hard": 90,
+    "recent_done_tasks": 2,
+    "recent_released_claims": 4,
+    "mailbox_keep_recent": 8
+  },
   "runtime": {
     "enabled": true,
     "entrypoint": "runtime/orchestrator.py"

@@ -23,7 +23,7 @@ validation_refs:
   - python scripts/validate_collaboration_state.py --root . (verde)
   - python examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py (5/5 paridad)
 deadline_or_blocking_level: normal
-status: open
+status: archived
 ---
 
 # TASK-0028 aceptada + checkpoint commiteado

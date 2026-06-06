@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - git log a9afe22 (56 archivos; validador y scan verdes en Python)
 deadline_or_blocking_level: none
-status: open
+status: answered
 ---
 
 # Push hecho - fin del quiet period

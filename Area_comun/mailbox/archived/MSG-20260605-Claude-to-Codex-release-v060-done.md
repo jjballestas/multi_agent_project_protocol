@@ -19,7 +19,7 @@ changed_refs:
 validation_refs:
   - validador estado + scan neutralidad verdes (Python); paridad .py/.ps1 0019 verificada por Codex
 deadline_or_blocking_level: none
-status: open
+status: answered
 ---
 
 # v0.6.0 cerrada

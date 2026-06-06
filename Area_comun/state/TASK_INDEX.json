@@ -1,416 +1,157 @@
 {
-    "schema_version":  "1.0",
-    "updated_at":  "2026-06-06",
-    "updated_by":  "Claude",
-    "legend":  {
-                   "status":  [
-                                  "proposed",
-                                  "ready",
-                                  "claimed",
-                                  "in_progress",
-                                  "in_review",
-                                  "done",
-                                  "blocked",
-                                  "cancelled"
-                              ],
-                   "owner":  [
-                                 "Claude",
-                                 "Codex",
-                                 "operador humano"
-                             ],
-                   "priority":  [
-                                    "low",
-                                    "normal",
-                                    "high",
-                                    "critical"
-                                ],
-                   "phase":  [
-                                 "P0 = enriquecimiento del protocolo",
-                                 "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
-                                 "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
-                             ],
-                   "type":  [
-                                "implementation",
-                                "refactor",
-                                "integration",
-                                "migration",
-                                "security",
-                                "release",
-                                "discovery",
-                                "analysis",
-                                "review",
-                                "documentation",
-                                "triage"
-                            ],
-                   "sdd_note":  "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
-               },
-    "tasks":  [
-                  {
-                      "id":  "TASK-0024",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "high",
-                      "phase":  "P2",
-                      "title":  "Poda de estado a historico (CLAIMS/TASK_INDEX _ARCHIVE) - mayor impacto (DECISION-0008 sec2, target v0.7.0)",
-                      "spec_id":  "Area_comun/specs/SPEC-0024-poda-estado-historico.md",
-                      "file":  "Area_comun/tasks/TASK-0024-codex-poda-estado-historico.md",
-                      "depends_on":  [
-                                         "TASK-0023"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0025"
-                                     ],
-                      "relevant_files":  [
-                                             "Area_comun/state/CLAIMS_ARCHIVE.json",
-                                             "Area_comun/state/CLAIMS_ARCHIVE.template.json",
-                                             "Area_comun/state/TASK_INDEX_ARCHIVE.json",
-                                             "Area_comun/state/TASK_INDEX_ARCHIVE.template.json",
-                                             "scripts/validate_collaboration_state.py",
-                                             "scripts/validate_collaboration_state.ps1",
-                                             "AGENTS.md",
-                                             "Area_comun/protocol/TASK_PROTOCOL.md"
-                                         ],
-                      "deliverables":  [
-                                           "Area_comun/state/CLAIMS_ARCHIVE.json",
-                                           "Area_comun/state/CLAIMS_ARCHIVE.template.json",
-                                           "Area_comun/state/TASK_INDEX_ARCHIVE.json",
-                                           "Area_comun/state/TASK_INDEX_ARCHIVE.template.json",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0024-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0024. Verificacion independiente (.py): caliente solo no-done (+ventana reciente permitida por la spec); 24 done + 47 released en *_ARCHIVE, nada borrado; union hot+archive con deteccion de duplicados (test de inconsistencia provocada OK); cold-start 37391 -> ~9.2k tok (-75%), dentro de budget. Paridad .ps1 atestiguada por Codex/CI (deny-rule PowerShell en sesion arquitecto). Cierra el mayor ahorro del track de tokens (DECISION-0008)."
-                  },
-                  {
-                      "id":  "TASK-0025",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "high",
-                      "phase":  "P2",
-                      "title":  "Frontmatter de mailbox minimo, compatible hacia atras (DECISION-0008 sec3, target v0.7.0)",
-                      "spec_id":  "Area_comun/specs/SPEC-0025-frontmatter-minimo.md",
-                      "file":  "Area_comun/tasks/TASK-0025-codex-frontmatter-minimo.md",
-                      "depends_on":  [
-                                         "TASK-0023"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0024"
-                                     ],
-                      "relevant_files":  [
-                                             "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
-                                             "scripts/validate_collaboration_state.py",
-                                             "scripts/validate_collaboration_state.ps1"
-                                         ],
-                      "deliverables":  [
-                                           "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
-                                           "examples/compact_comms_validation_cases/minimal_frontmatter/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0025-claude-to-codex-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA (Claude, por direccion del operador; Codex fuera). Variante minima en MAILBOX_MESSAGE_TEMPLATE + golden minimal_frontmatter (exit 0); validador ya tolerante (sin cambio de codigo => paridad .ps1 trivial). Casos compactos verdes (missing_question=1, resto 0); scan 0; delta frontmatter -61% chars (210 vs 532). Cierra el track de eficiencia de tokens (DECISION-0008)."
-                  },
-                  {
-                      "id":  "TASK-0027",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "high",
-                      "phase":  "P2",
-                      "title":  "Runtime M0 (impl): skeleton + --plan dry-run + validador de turno + router (DECISION-0009, target v0.8.0)",
-                      "spec_id":  "Area_comun/specs/SPEC-0026-contrato-de-turno.md",
-                      "file":  "Area_comun/tasks/TASK-0027-codex-runtime-skeleton-plan.md",
-                      "depends_on":  [
-                                         "TASK-0026"
-                                     ],
-                      "relates_to":  [
-
-                                     ],
-                      "relevant_files":  [
-                                             "runtime/orchestrator.py",
-                                             "runtime/router.py",
-                                             "runtime/context.py",
-                                             "runtime/turn_validate.py",
-                                             "protocol.config.json",
-                                             "protocol.config.template.json"
-                                         ],
-                      "deliverables":  [
-                                           "runtime/orchestrator.py",
-                                           "runtime/router.py",
-                                           "runtime/context.py",
-                                           "runtime/turn_validate.py",
-                                           "protocol.config.json",
-                                           "protocol.config.template.json",
-                                           "examples/runtime_router_cases/",
-                                           "examples/runtime_turn_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0027-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0026/0027. Verificacion read-only: 12/12 golden (4 schema + 3 semanticos write-allowlist/anti-carrera no vacuos + 5 router por ramas con determinismo first==second); --plan read-only y determinista; runtime.enabled:false + runtime/** neutral (scan verde). Flip a done aplicado por Claude tras liberarse el estado. Cierra runtime M0 (DECISION-0009)."
-                  },
-                  {
-                      "id":  "TASK-0028",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "high",
-                      "phase":  "P2",
-                      "title":  "Claims por fila para ledgers de estado (TASK_INDEX/PROJECT_STATE) (DECISION-0011)",
-                      "spec_id":  "Area_comun/specs/SPEC-0028-claims-por-fila.md",
-                      "file":  "Area_comun/tasks/TASK-0028-claims-por-fila-estado.md",
-                      "depends_on":  [
-                                         "TASK-0027"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0024"
-                                     ],
-                      "relevant_files":  [
-                                             "scripts/validate_collaboration_state.py",
-                                             "scripts/validate_collaboration_state.ps1",
-                                             "examples/row_scoped_claim_cases/",
-                                             "runtime/context.py",
-                                             "runtime/turn_validate.py"
-                                         ],
-                      "deliverables":  [
-                                           "scripts/validate_collaboration_state.py",
-                                           "scripts/validate_collaboration_state.ps1",
-                                           "examples/row_scoped_claim_cases/",
-                                           "runtime/context.py",
-                                           "runtime/turn_validate.py",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0028-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0028. Parser ruta#selector + solape por fila TASK_INDEX/PROJECT_STATE (filas distintas no chocan, misma fila si, ruta desnuda=archivo completo, selector mal formado falla); turn_validate alineado a allowlist por fila; context lee hot+archive. Golden 5/5 con PARIDAD .ps1; runtime M0 verde; regresion verde en todos los ejemplos. Resuelve el cuello de botella de coordinacion (DECISION-0011)."
-                  },
-                  {
-                      "id":  "TASK-0029",
-                      "owner":  "Claude",
-                      "status":  "done",
-                      "type":  "analysis",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Runtime M1 (diseno): apply_turn + gate/commit/revert + interfaz adapter + replay loop (DECISION-0009)",
-                      "file":  "Area_comun/tasks/TASK-0029-claude-runtime-m1-diseno.md",
-                      "depends_on":  [
-                                         "TASK-0027"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0030",
-                                         "TASK-0031"
-                                     ],
-                      "relevant_files":  [
-                                             "Area_comun/artifacts/DISENO-runtime-m1.md",
-                                             "Area_comun/specs/SPEC-0029-turn-apply-gate.md",
-                                             "Area_comun/specs/SPEC-0030-adapter-replay-loop.md"
-                                         ],
-                      "deliverables":  [
-                                           "Area_comun/artifacts/DISENO-runtime-m1.md",
-                                           "Area_comun/specs/SPEC-0029-turn-apply-gate.md",
-                                           "Area_comun/specs/SPEC-0030-adapter-replay-loop.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "review":  "Done por Claude. DISENO-runtime-m1 + SPEC-0029 (apply+gate+vcs) + SPEC-0030 (adapter+replay+--run). Refina limite: agente real = M2; M1 determinista via replay. Promueve TASK-0030/0031. Bajo DECISION-0009 (sin nueva decision)."
-                  },
-                  {
-                      "id":  "TASK-0030",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Runtime M1: apply_turn + gate + commit/revert (DECISION-0009, target v0.8.0)",
-                      "spec_id":  "Area_comun/specs/SPEC-0029-turn-apply-gate.md",
-                      "file":  "Area_comun/tasks/TASK-0030-codex-runtime-apply-gate.md",
-                      "depends_on":  [
-                                         "TASK-0029"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0028",
-                                         "TASK-0031"
-                                     ],
-                      "relevant_files":  [
-                                             "runtime/vcs.py",
-                                             "runtime/apply.py",
-                                             "runtime/gate.py",
-                                             "examples/runtime_apply_cases/"
-                                         ],
-                      "deliverables":  [
-                                           "runtime/vcs.py",
-                                           "runtime/apply.py",
-                                           "runtime/gate.py",
-                                           "examples/runtime_apply_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0030-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0029. Revision de codigo + golden (repo-fixture git, 4/4): turno valido => commit +1 + status; gate rojo (denylist) => SIN commit, worktree restaurado, tarea blocked; path de politica (AGENTS) => rechazo; report stale => no escribe. Refinamiento correcto: en gate-rojo usa git restore (no revert) porque el commit solo ocurre en verde. M0 regresiones verdes; validador+scan verdes. Paridad .ps1 n/a (python). Desbloquea TASK-0031."
-                  },
-                  {
-                      "id":  "TASK-0031",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Runtime M1: AgentAdapter + replay adapter + loop --run (DECISION-0009, target v0.8.0)",
-                      "spec_id":  "Area_comun/specs/SPEC-0030-adapter-replay-loop.md",
-                      "file":  "Area_comun/tasks/TASK-0031-codex-runtime-adapter-loop.md",
-                      "depends_on":  [
-                                         "TASK-0030"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0029"
-                                     ],
-                      "relevant_files":  [
-                                             "runtime/adapters/base.py",
-                                             "runtime/adapters/replay.py",
-                                             "runtime/runlog.py",
-                                             "runtime/orchestrator.py",
-                                             "examples/runtime_loop_cases/"
-                                         ],
-                      "deliverables":  [
-                                           "runtime/adapters/base.py",
-                                           "runtime/adapters/replay.py",
-                                           "runtime/runlog.py",
-                                           "runtime/orchestrator.py",
-                                           "examples/runtime_loop_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0031-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0030. Revision read-only + golden 5/5 (runtime_loop_cases): --run --once => 1 turno + 1 commit + RUN-fixture-once.jsonl exacto; secuencia determinista con --max-iter N que corta en N; human_required => parada dura sin commit (worktree intacto); --plan sin regresion (read-only, enruta a review); runtime.enabled:false => --run aborta. Interfaz AgentAdapter (Protocol) vendor-neutral: cambiar replay->real (M2) no toca el loop. run-id inyectable (--run-id) + default determinista RUN-<sha256> (coordinado por mailbox antes de implementar). Regresiones M0/M1 verdes (apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. Cierra runtime M1 (DECISION-0009). Paridad .ps1 n/a (python). Reuso correcto de apply_gate_and_commit de TASK-0030."
-                  },
-                  {
-                      "id":  "TASK-0032",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Runtime M2 (hito 1): observabilidad - metricas + budget + run-log enriquecido + trazas (DECISION-0009)",
-                      "spec_id":  "Area_comun/specs/SPEC-0031-runtime-observability.md",
-                      "file":  "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
-                      "depends_on":  [
-                                         "TASK-0031"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0029"
-                                     ],
-                      "relevant_files":  [
-                                             "runtime/runlog.py",
-                                             "runtime/budget.py",
-                                             "runtime/metrics.py",
-                                             "runtime/orchestrator.py",
-                                             "examples/runtime_observability_cases/"
-                                         ],
-                      "deliverables":  [
-                                           "runtime/runlog.py",
-                                           "runtime/budget.py",
-                                           "runtime/metrics.py",
-                                           "runtime/orchestrator.py",
-                                           "examples/runtime_observability_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0031. Revision read-only + golden 5/5 (runtime_observability_cases) + regresiones verdes (loop 5/5, apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. budget.py (techo iter/coste), metrics.py (summarize post-hoc, tolera cost null), runlog.turn_entry enriquecido (trace/changed_paths/cost/duration_ms/collision_avoided; basico de 0030 = subconjunto), orchestrator --budget-tokens/--clock-fixed/summary. Determinismo via reloj inyectado (golden excluye duration_ms). Cierra M2 hito 1 (observabilidad). Notas de proceso: Codex dejo el claim activo en in_review y libero sin commitear (handoff-release pendiente, ver DECISION-0013/TASK-0033); deliverables commiteados por Claude al cerrar."
-                  },
-                  {
-                      "id":  "TASK-0033",
-                      "owner":  "Codex",
-                      "status":  "done",
-                      "type":  "implementation",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Gate de visibilidad y encoding: scan_encoding (ASCII canal + mojibake) + check handoff-release + liveness docs (DECISION-0012/0013/0006)",
-                      "spec_id":  "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
-                      "file":  "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
-                      "depends_on":  [
-                                         "TASK-0032"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0017",
-                                         "TASK-0018",
-                                         "TASK-0021"
-                                     ],
-                      "relevant_files":  [
-                                             "scripts/scan_encoding.py",
-                                             "scripts/scan_encoding.ps1",
-                                             "scripts/validate_collaboration_state.py",
-                                             "examples/encoding_gate_cases/",
-                                             "AGENTS.md"
-                                         ],
-                      "deliverables":  [
-                                           "scripts/scan_encoding.py",
-                                           "scripts/scan_encoding.ps1",
-                                           "scripts/validate_collaboration_state.py",
-                                           "scripts/validate_collaboration_state.ps1",
-                                           "examples/encoding_gate_cases/",
-                                           "AGENTS.md",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0032. Verificacion: scan_encoding limpio (exit 0; legacy mojibake TASK-0017/0018/0021 corregido), golden encoding_gate 3/3 + handoff_release 2/2, check handoff-release en validador (.py/.ps1), docs liveness/handoff-release en AGENTS.md 7 + TASK_PROTOCOL, CI actualizado; regresiones runtime verdes (apply 4/4, loop 5/5, obs 5/5); validador valid; scan neutralidad limpio. DOGFOOD CORRECTO: Codex aplico handoff-release (libero claim en in_review) + commiteo WIP antes de soltar + status consistente. Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013)."
-                  },
-                  {
-                      "id":  "TASK-0034",
-                      "owner":  "Codex",
-                      "status":  "ready",
-                      "type":  "implementation",
-                      "priority":  "normal",
-                      "phase":  "P2",
-                      "title":  "Poda sistematica por umbral medido: prune_state --check/--apply + hook bloqueante + CI hard-fail (DECISION-0014)",
-                      "spec_id":  "Area_comun/specs/SPEC-0033-poda-sistematica.md",
-                      "file":  "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
-                      "depends_on":  [
-                                         "TASK-0033"
-                                     ],
-                      "relates_to":  [
-                                         "TASK-0023",
-                                         "TASK-0024"
-                                     ],
-                      "relevant_files":  [
-                                             "scripts/prune_state.py",
-                                             "scripts/prune_state.ps1",
-                                             "protocol.config.json",
-                                             "examples/prune_state_cases/"
-                                         ],
-                      "deliverables":  [
-                                           "scripts/prune_state.py",
-                                           "scripts/prune_state.ps1",
-                                           "protocol.config.json",
-                                           "protocol.config.template.json",
-                                           "examples/prune_state_cases/",
-                                           "Area_comun/handoffs/HANDOFF-TASK-0034-codex-to-claude-1.md"
-                                       ],
-                      "blocked_by_questions":  [
-
-                                               ],
-                      "sdd_required":  true,
-                      "review":  "Ready. SDD-elegible: SPEC-0033 emitida. Nucleo decidido por el operador (umbral medido); implementacion convergida con Codex. Corre la poda real al cerrar (cold-start ~19.5k -> objetivo ~9-10k). Depende de TASK-0033."
-                  }
-              ]
+    "schema_version": "1.0",
+    "updated_at": "2026-06-06",
+    "updated_by": "Codex",
+    "legend": {
+        "status": [
+            "proposed",
+            "ready",
+            "claimed",
+            "in_progress",
+            "in_review",
+            "done",
+            "blocked",
+            "cancelled"
+        ],
+        "owner": [
+            "Claude",
+            "Codex",
+            "operador humano"
+        ],
+        "priority": [
+            "low",
+            "normal",
+            "high",
+            "critical"
+        ],
+        "phase": [
+            "P0 = enriquecimiento del protocolo",
+            "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
+            "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
+        ],
+        "type": [
+            "implementation",
+            "refactor",
+            "integration",
+            "migration",
+            "security",
+            "release",
+            "discovery",
+            "analysis",
+            "review",
+            "documentation",
+            "triage"
+        ],
+        "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
+    },
+    "tasks": [
+        {
+            "id": "TASK-0032",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Runtime M2 (hito 1): observabilidad - metricas + budget + run-log enriquecido + trazas (DECISION-0009)",
+            "spec_id": "Area_comun/specs/SPEC-0031-runtime-observability.md",
+            "file": "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+            "depends_on": [
+                "TASK-0031"
+            ],
+            "relates_to": [
+                "TASK-0029"
+            ],
+            "relevant_files": [
+                "runtime/runlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_observability_cases/"
+            ],
+            "deliverables": [
+                "runtime/runlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_observability_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0031. Revision read-only + golden 5/5 (runtime_observability_cases) + regresiones verdes (loop 5/5, apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. budget.py (techo iter/coste), metrics.py (summarize post-hoc, tolera cost null), runlog.turn_entry enriquecido (trace/changed_paths/cost/duration_ms/collision_avoided; basico de 0030 = subconjunto), orchestrator --budget-tokens/--clock-fixed/summary. Determinismo via reloj inyectado (golden excluye duration_ms). Cierra M2 hito 1 (observabilidad). Notas de proceso: Codex dejo el claim activo en in_review y libero sin commitear (handoff-release pendiente, ver DECISION-0013/TASK-0033); deliverables commiteados por Claude al cerrar."
+        },
+        {
+            "id": "TASK-0033",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Gate de visibilidad y encoding: scan_encoding (ASCII canal + mojibake) + check handoff-release + liveness docs (DECISION-0012/0013/0006)",
+            "spec_id": "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
+            "file": "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+            "depends_on": [
+                "TASK-0032"
+            ],
+            "relates_to": [
+                "TASK-0017",
+                "TASK-0018",
+                "TASK-0021"
+            ],
+            "relevant_files": [
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "examples/encoding_gate_cases/",
+                "AGENTS.md"
+            ],
+            "deliverables": [
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/encoding_gate_cases/",
+                "AGENTS.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0032. Verificacion: scan_encoding limpio (exit 0; legacy mojibake TASK-0017/0018/0021 corregido), golden encoding_gate 3/3 + handoff_release 2/2, check handoff-release en validador (.py/.ps1), docs liveness/handoff-release en AGENTS.md 7 + TASK_PROTOCOL, CI actualizado; regresiones runtime verdes (apply 4/4, loop 5/5, obs 5/5); validador valid; scan neutralidad limpio. DOGFOOD CORRECTO: Codex aplico handoff-release (libero claim en in_review) + commiteo WIP antes de soltar + status consistente. Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013)."
+        },
+        {
+            "id": "TASK-0034",
+            "owner": "Codex",
+            "status": "in_progress",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Poda sistematica por umbral medido: prune_state --check/--apply + hook bloqueante + CI hard-fail (DECISION-0014)",
+            "spec_id": "Area_comun/specs/SPEC-0033-poda-sistematica.md",
+            "file": "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
+            "depends_on": [
+                "TASK-0033"
+            ],
+            "relates_to": [
+                "TASK-0023",
+                "TASK-0024"
+            ],
+            "relevant_files": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "protocol.config.json",
+                "examples/prune_state_cases/"
+            ],
+            "deliverables": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/prune_state_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0034-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "In progress por Codex. Implementa SPEC-0033: prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real al cierre."
+        }
+    ]
 }

@@ -1,174 +1,130 @@
 {
-    "project":  "multi_agent_project_protocol",
-    "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version":  "0.8.0",
-    "phase":  {
-                  "id":  "P2",
-                  "name":  "Adopcion y expansion",
-                  "goal":  "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
-                  "subphase":  {
-                                   "id":  "P2.SDD",
-                                   "name":  "Formalizacion SDD (Spec-Driven Development)",
-                                   "status":  "completed",
-                                   "closed_with":  "v0.4.0",
-                                   "goal":  "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
-                                   "backlog":  [
-                                                   "TASK-0008",
-                                                   "TASK-0009",
-                                                   "TASK-0010",
-                                                   "TASK-0011",
-                                                   "TASK-0012",
-                                                   "TASK-0013"
-                                               ],
-                                   "exit_criteria_met":  [
-                                                             "DECISION-0004 + diseno + specs (TASK-0008)",
-                                                             "Plantillas de protocolo SDD (TASK-0009)",
-                                                             "specs/ + plantillas reutilizables (TASK-0010)",
-                                                             "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
-                                                             "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
-                                                             "Onboarding SDD documentado (TASK-0013)",
-                                                             "v0.4.0 publicada"
-                                                         ]
-                               },
-                  "exit_criteria":  [
-                                        "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
-                                        "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
-                                        "Backlog de adopcion/expansion definido cuando surja",
-                                        "Core sigue neutral en cada cambio"
-                                    ],
-                  "previous_phase":  {
-                                         "id":  "P1",
-                                         "name":  "Arquitectura de perfiles profesionales",
-                                         "status":  "completed",
-                                         "closed_with":  "v0.3.0",
-                                         "exit_criteria_met":  [
-                                                                   "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
-                                                                   "Perfil dotnet_enterprise publicado (TASK-0006)",
-                                                                   "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
-                                                                   "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
-                                                                   "v0.3.0 publicada"
-                                                               ]
-                                     }
-              },
-    "status":  "active",
-    "agents":  {
-                   "architect":  "Claude",
-                   "implementer":  "Codex",
-                   "human_owner":  "operador humano"
-               },
-    "source_of_truth":  "AGENTS.md",
-    "domain_critical_boundaries":  "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
-    "released_versions":  [
-                              "v0.1.0",
-                              "v0.2.0",
-                              "v0.3.0",
-                              "v0.4.0",
-                              "v0.5.0",
-                              "v0.6.0",
-                              "v0.7.0",
-                              "v0.8.0"
-                          ],
-    "decisions":  [
-                      "DECISION-0001-versionado",
-                      "DECISION-0002-core-perfiles-profesionales",
-                      "DECISION-0003-adopted-profiles-contract",
-                      "DECISION-0004-sdd-pipeline-y-cierre",
-                      "DECISION-0005-comunicacion-compacta-token-efficient",
-                      "DECISION-0006-robustez-operacional",
-                      "DECISION-0007-claim-before-shared-draft",
-                      "DECISION-0008-eficiencia-de-tokens",
-                      "DECISION-0009-runtime-orquestacion",
-                      "DECISION-0010-licenciamiento-propietario",
-                      "DECISION-0011-claims-por-fila-estado",
-                      "DECISION-0012-ascii-canal-entre-agentes",
-                      "DECISION-0013-liveness-y-visibilidad",
-                      "DECISION-0014-poda-sistematica"
-                  ],
-    "active_tasks":  [
-                         {
-                             "id":  "TASK-0024",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Poda de estado a historico - mayor impacto (DECISION-0008, target v0.7.0) - ACEPTADA por Claude (cold-start -75%)"
-                         },
-                         {
-                             "id":  "TASK-0025",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Frontmatter de mailbox minimo (DECISION-0008) - ACEPTADA por Claude (-61% frontmatter); cierra track de tokens / v0.7.0"
-                         },
-                         {
-                             "id":  "TASK-0027",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Runtime M0 impl: skeleton + --plan + validador de turno + router (DECISION-0009, target v0.8.0) - ACEPTADA por Claude"
-                         },
-                         {
-                             "id":  "TASK-0028",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Claims por fila para ledgers de estado (DECISION-0011) - ACEPTADA por Claude (cuello de botella resuelto)"
-                         },
-                         {
-                             "id":  "TASK-0029",
-                             "owner":  "Claude",
-                             "status":  "done",
-                             "title":  "Runtime M1 (diseno): apply + gate/commit/revert + adapter replay (DECISION-0009) - DISENO + SPEC-0029/0030"
-                         },
-                         {
-                             "id":  "TASK-0030",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Runtime M1: apply_turn + gate + commit/revert (SPEC-0029) - ACEPTADA por Claude (golden repo-fixture 4/4)"
-                         },
-                         {
-                             "id":  "TASK-0031",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Runtime M1: AgentAdapter + replay + loop --run (SPEC-0030) - ACEPTADA por Claude (golden loop 5/5); cierra M1"
-                         },
-                         {
-                             "id":  "TASK-0032",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Runtime M2 hito 1: observabilidad - metricas + budget + run-log enriquecido + trazas (SPEC-0031) - ACEPTADA por Claude (golden obs 5/5); cierra hito 1"
-                         },
-                         {
-                             "id":  "TASK-0033",
-                             "owner":  "Codex",
-                             "status":  "done",
-                             "title":  "Gate de visibilidad y encoding: scan_encoding + handoff-release + liveness docs (DECISION-0012/0013) - ACEPTADA por Claude (gate verde, dogfood OK)"
-                         },
-                         {
-                             "id":  "TASK-0034",
-                             "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Poda sistematica por umbral medido: prune_state + hook bloqueante + CI hard-fail (DECISION-0014, SPEC-0033) - ready para Codex"
-                         }
-                     ],
-    "open_questions":  [
-
-                       ],
-    "risks":  [
-                  "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
-                  "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
-                  "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
-                  "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
-                  "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
-                  "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
-              ],
-    "next_actions":  [
-                         "v0.7.0 PUBLICADA: cierra el track de eficiencia de tokens (DECISION-0008: medidor 0023 + poda 0024 + frontmatter minimo 0025; cold-start -75%) e incluye, aditivo/off-by-default, el runtime M0 (0027) y claims por fila (0028).",
-                         "TASK-0031 ACEPTADA: runtime M1 COMPLETO (apply+gate+vcs de 0030 + AgentAdapter/replay/loop --run/run-log de 0031). Loop determinista off-by-default cerrado; golden loop 5/5 + regresiones verdes.",
-                         "v0.8.0 PUBLICADA (runtime M1 completo: apply+gate+vcs + adapter/replay/loop --run, aditivo/off-by-default). Reporte humano en Area_comun/reports/REPORT-20260606-release-v0.8.0.md.",
-                         "runtime.enabled:true ACTIVADO en la instancia viva (aprobado por el human owner 2026-06-06, DECISION-0009 Activacion). Template sigue OFF. Habilita --run con replay (M1); adapters LLM reales + loop autonomo = M2 (gateados).",
-                         "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
-                         "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
-                         "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
-                         "MANTENIMIENTO: DECISION-0014 ACEPTADA (poda sistematica por umbral medido). TASK-0034 READY (prune_state --check/--apply + hook bloqueante + CI hard-fail, SPEC-0033). Cold-start hoy ~19.5k (borde del hard-fail 20k); 0034 corre la poda real (objetivo ~9-10k).",
-                         "Siguiente: (a) Codex implementa TASK-0034 (poda sistematica); (b) hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia), Claude deriva la spec."
-                     ],
-    "created_at":  "2026-06-05",
-    "updated_at":  "2026-06-06",
-    "updated_by":  "Claude"
+    "project": "multi_agent_project_protocol",
+    "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
+    "version": "0.8.0",
+    "phase": {
+        "id": "P2",
+        "name": "Adopcion y expansion",
+        "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
+        "subphase": {
+            "id": "P2.SDD",
+            "name": "Formalizacion SDD (Spec-Driven Development)",
+            "status": "completed",
+            "closed_with": "v0.4.0",
+            "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+            "backlog": [
+                "TASK-0008",
+                "TASK-0009",
+                "TASK-0010",
+                "TASK-0011",
+                "TASK-0012",
+                "TASK-0013"
+            ],
+            "exit_criteria_met": [
+                "DECISION-0004 + diseno + specs (TASK-0008)",
+                "Plantillas de protocolo SDD (TASK-0009)",
+                "specs/ + plantillas reutilizables (TASK-0010)",
+                "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
+                "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
+                "Onboarding SDD documentado (TASK-0013)",
+                "v0.4.0 publicada"
+            ]
+        },
+        "exit_criteria": [
+            "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
+            "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
+            "Backlog de adopcion/expansion definido cuando surja",
+            "Core sigue neutral en cada cambio"
+        ],
+        "previous_phase": {
+            "id": "P1",
+            "name": "Arquitectura de perfiles profesionales",
+            "status": "completed",
+            "closed_with": "v0.3.0",
+            "exit_criteria_met": [
+                "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
+                "Perfil dotnet_enterprise publicado (TASK-0006)",
+                "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
+                "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
+                "v0.3.0 publicada"
+            ]
+        }
+    },
+    "status": "active",
+    "agents": {
+        "architect": "Claude",
+        "implementer": "Codex",
+        "human_owner": "operador humano"
+    },
+    "source_of_truth": "AGENTS.md",
+    "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
+    "released_versions": [
+        "v0.1.0",
+        "v0.2.0",
+        "v0.3.0",
+        "v0.4.0",
+        "v0.5.0",
+        "v0.6.0",
+        "v0.7.0",
+        "v0.8.0"
+    ],
+    "decisions": [
+        "DECISION-0001-versionado",
+        "DECISION-0002-core-perfiles-profesionales",
+        "DECISION-0003-adopted-profiles-contract",
+        "DECISION-0004-sdd-pipeline-y-cierre",
+        "DECISION-0005-comunicacion-compacta-token-efficient",
+        "DECISION-0006-robustez-operacional",
+        "DECISION-0007-claim-before-shared-draft",
+        "DECISION-0008-eficiencia-de-tokens",
+        "DECISION-0009-runtime-orquestacion",
+        "DECISION-0010-licenciamiento-propietario",
+        "DECISION-0011-claims-por-fila-estado",
+        "DECISION-0012-ascii-canal-entre-agentes",
+        "DECISION-0013-liveness-y-visibilidad",
+        "DECISION-0014-poda-sistematica"
+    ],
+    "active_tasks": [
+        {
+            "id": "TASK-0032",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Runtime M2 hito 1: observabilidad - metricas + budget + run-log enriquecido + trazas (SPEC-0031) - ACEPTADA por Claude (golden obs 5/5); cierra hito 1"
+        },
+        {
+            "id": "TASK-0033",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Gate de visibilidad y encoding: scan_encoding + handoff-release + liveness docs (DECISION-0012/0013) - ACEPTADA por Claude (gate verde, dogfood OK)"
+        },
+        {
+            "id": "TASK-0034",
+            "owner": "Codex",
+            "status": "in_progress",
+            "title": "Poda sistematica por umbral medido: prune_state + hook bloqueante + CI hard-fail (DECISION-0014, SPEC-0033) - in progress Codex"
+        }
+    ],
+    "open_questions": [],
+    "risks": [
+        "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+        "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+        "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
+        "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
+        "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
+        "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
+    ],
+    "next_actions": [
+        "v0.7.0 PUBLICADA: cierra el track de eficiencia de tokens (DECISION-0008: medidor 0023 + poda 0024 + frontmatter minimo 0025; cold-start -75%) e incluye, aditivo/off-by-default, el runtime M0 (0027) y claims por fila (0028).",
+        "TASK-0031 ACEPTADA: runtime M1 COMPLETO (apply+gate+vcs de 0030 + AgentAdapter/replay/loop --run/run-log de 0031). Loop determinista off-by-default cerrado; golden loop 5/5 + regresiones verdes.",
+        "v0.8.0 PUBLICADA (runtime M1 completo: apply+gate+vcs + adapter/replay/loop --run, aditivo/off-by-default). Reporte humano en Area_comun/reports/REPORT-20260606-release-v0.8.0.md.",
+        "runtime.enabled:true ACTIVADO en la instancia viva (aprobado por el human owner 2026-06-06, DECISION-0009 Activacion). Template sigue OFF. Habilita --run con replay (M1); adapters LLM reales + loop autonomo = M2 (gateados).",
+        "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
+        "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
+        "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
+        "MANTENIMIENTO: DECISION-0014 ACEPTADA (poda sistematica por umbral medido). TASK-0034 IN_PROGRESS por Codex (prune_state --check/--apply + hook bloqueante + CI hard-fail, SPEC-0033). Cold-start hoy ~19.5k (borde del hard-fail 20k); 0034 corre la poda real (objetivo ~9-10k).",
+        "Siguiente: (a) Codex implementa TASK-0034 (poda sistematica); (b) hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia), Claude deriva la spec."
+    ],
+    "created_at": "2026-06-05",
+    "updated_at": "2026-06-06",
+    "updated_by": "Codex"
 }

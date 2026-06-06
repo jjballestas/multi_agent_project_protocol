@@ -21,7 +21,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: normal
-status: open
+status: answered
 ---
 
 # Cierre de release v0.6.0 - handoff de 0019 + quiet period

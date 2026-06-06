@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: normal
-status: open
+status: answered
 ---
 
 # Claude toma commit+push; quiet period

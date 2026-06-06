@@ -1156,6 +1156,397 @@
             "updated_at": "2026-06-05",
             "expires_at": "2026-06-06",
             "notes": "Ratificacion de TASK-0028 (claims por fila) contra SPEC-0028 (estado libre) + commit de checkpoint verde de la sesion. Flip 0028 a done. Coordina commit con Codex."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0033-close-claude",
+            "task_id": "TASK-0033",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/TASK_INDEX.json#TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-done.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre de TASK-0033 (flip a done, verde) + registro de TASK-0034 + DECISION-0014 en estado + cola/done. Estado libre tras handoff-release de Codex."
+        },
+        {
+            "claim_id": "CLAIM-20260606-poda-diseno-fyi-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-poda-sistematica-diseno.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-poda-sistematica-diseno.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: respuesta FYI a Claude sobre disparadores de poda sistematica movida a mailbox/answered. No reclama diseno ni task nueva."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0033-codex",
+            "task_id": "TASK-0033",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/CLAIMS.template.json",
+                "Area_comun/state/PROJECT_STATE.template.json",
+                "Area_comun/state/TASK_INDEX.template.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.template.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.template.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0017-codex-ci-completo-scan-neutralidad.md",
+                "Area_comun/tasks/TASK-0018-codex-harness-tolerante-runtime.md",
+                "Area_comun/tasks/TASK-0021-codex-mailbox-hygiene-softchecks.md",
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/encoding_gate_cases/",
+                "examples/handoff_release_cases/",
+                "AGENTS.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con TASK-0033 en in_review. Entregado scan_encoding py/ps1, handoff-release validator, docs liveness, CI, golden y limpieza legacy."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0033-blocked-coord-codex",
+            "task_id": "TASK-0033",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-cola.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0033-cola.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: mensajes de Claude respondidos/movidos a answered y bloqueo notificado en MSG-20260606-Codex-to-Claude-task0033-claim-blocked. No reclama implementacion."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0032-close-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0032",
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-cola.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre de TASK-0032 (flip a done tras claim liberado por Codex) + registro de TASK-0033 en indice/estado + registro DECISION-0012/0013 + cola TASK-0033. Commiteo los deliverables de Codex (sin active claim) y mi estado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-liveness-gate-formalize-claude",
+            "task_id": "TASK-0033",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/decisions/DECISION-0013-liveness-y-visibilidad.md",
+                "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-accepted.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Formalizar regla de liveness/handoff-release/visibilidad (DECISION-0013) + gate (SPEC-0032/TASK-0033). Archivos nuevos; NO toco runtime/ ni filas de TASK-0032 (claim activo de Codex). Registro de TASK-0033 en el indice y flip de TASK-0032 quedan para cuando Codex libere su claim y commitee su WIP."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0032-progress-ack-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-progress.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Coordinacion con Codex en TASK-0032 in_progress: reconozco avance (budget/metrics/orchestrator/runlog), confirmo lo que falta (golden + handoff) y pido senal de progreso para visibilidad. No toco runtime/ (bajo claim de Codex)."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0032-coord-fixes-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-cola.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-coord-fixes.md",
+                "Area_comun/decisions/DECISION-0012-ascii-canal-entre-agentes.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Coordinacion de fallos de Codex en TASK-0032: corrijo el encoding (mojibake) de mi mensaje de cola (no esta bajo claim de Codex) y notifico el resto (updated_by sin bumpear, ACK redundante). NO toco rutas bajo el claim activo de Codex."
+        },
+        {
+            "claim_id": "CLAIM-20260606-m2-observability-design-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/specs/SPEC-0031-runtime-observability.md",
+                "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-cola.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Diseno M2 hito 1 (OBSERVABILIDAD, direccion del operador): SPEC-0031 + TASK-0032 (metricas + budget + run-log enriquecido + trazas). Bajo DECISION-0009, aditivo/off-by-default. Promueve TASK-0032 ready para Codex."
+        },
+        {
+            "claim_id": "CLAIM-20260606-runtime-enable-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "protocol.config.json",
+                "Area_comun/decisions/DECISION-0009-runtime-orquestacion.md",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#risks",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-runtime-enabled.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Activacion runtime.enabled:true en la instancia VIVA (aprobada por el human owner 2026-06-06, DECISION-0009). Template queda OFF. Alcance: habilita --run con replay (M1); adapters LLM reales y piloto autonomo siguen gateados (M2/MAJOR)."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v080-done-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v080-done.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "FYI/DONE terminal a Codex: v0.8.0 publicada+pusheada; rutas de version libres; siguiente = derivar M2. Sin respuesta requerida; ruta mailbox exenta de solape (DECISION-0011)."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v080-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "AGENTS.md",
+                "Area_comun/state/PROJECT_STATE.json#version",
+                "Area_comun/state/PROJECT_STATE.json#released_versions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/reports/REPORT-20260606-release-v0.8.0.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v080.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Release v0.8.0 (runtime M1 completo: apply+gate+vcs 0030 + adapter/replay/loop 0031). MINOR aditivo off-by-default. Aprobada por el human owner. Escritor unico durante el bump+tag."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0031-ratify-claude",
+            "task_id": "TASK-0031",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0031",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0031",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0031-codex-runtime-adapter-loop.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0031-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0031-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0031-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Ratificacion de TASK-0031 (runtime M1 adapter+replay+loop) contra SPEC-0030. Scope por fila (DECISION-0011). Cierra M1."
+        },
+        {
+            "claim_id": "CLAIM-20260605-TASK-0030-ratify-claude",
+            "task_id": "TASK-0030",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0030",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0030",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0030-codex-runtime-apply-gate.md",
+                "Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0030-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260605-Codex-to-Claude-task0030-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0030-accepted.md"
+            ],
+            "started_at": "2026-06-05",
+            "updated_at": "2026-06-05",
+            "expires_at": "2026-06-06",
+            "notes": "Ratificacion de TASK-0030 (runtime M1 apply+gate+vcs) contra SPEC-0029. Usa scope por fila (DECISION-0011) sobre TASK_INDEX/PROJECT_STATE. Estado libre. Acepta y desbloquea TASK-0031."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0031-codex",
+            "task_id": "TASK-0031",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0031",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0031",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0031-codex-runtime-adapter-loop.md",
+                "runtime/adapters/",
+                "runtime/runlog.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_loop_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0031-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0030-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260605-Claude-to-Codex-task0030-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0031-coord.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0031-coord.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0031-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con TASK-0031 en in_review. Entregado AgentAdapter, replay adapter, loop --run/--once/--max-iter, run-log, golden deterministas y handoff."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0031-coord-claude",
+            "task_id": "TASK-0031",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0031-coord.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado tras confirmacion de Codex: --run-id inyectable y default determinista implementados; mensaje movido a answered."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0031-mailbox-polish-codex",
+            "task_id": "TASK-0031",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0031-in-review.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Correccion compacta de mailbox: anadidos context_refs al mensaje de revision de TASK-0031."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0031-status-sync-codex",
+            "task_id": "TASK-0031",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/tasks/TASK-0031-codex-runtime-adapter-loop.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Verificado status del archivo de tarea TASK-0031 en done tras ratificacion de Claude."
+        },
+        {
+            "claim_id": "CLAIM-20260606-mailbox-ok-cleanup-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-task0030-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260605-Claude-to-Codex-task0030-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0031-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0031-accepted.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: OK de Claude para TASK-0030 y TASK-0031 movidos a mailbox/answered."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v080-mailbox-cleanup-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v080.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-release-v080.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: FYI de release v0.8.0 movido a mailbox/answered tras publicacion y claim de Claude liberado."
         }
     ]
 }

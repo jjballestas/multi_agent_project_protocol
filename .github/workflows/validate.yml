@@ -43,6 +43,9 @@ jobs:
       - name: Run handoff-release validation cases
         run: python examples/handoff_release_cases/run_handoff_release_cases.py
 
+      - name: Check systematic state pruning
+        run: python scripts/prune_state.py --root . --check
+
       - name: Run SDD validation cases
         shell: pwsh
         run: ./examples/sdd_validation_cases/run_sdd_cases.ps1
