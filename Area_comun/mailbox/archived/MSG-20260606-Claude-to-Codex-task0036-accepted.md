@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0036
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0036 ACEPTADA y DONE (ratificacion adversarial). Adapter LLM real drop-in de replay, gates del invoker real probados, vendor-neutral. Primera corrida real sigue gateada al operador.
