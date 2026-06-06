@@ -4,6 +4,20 @@
     "updated_by": "Claude",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-release-v080-done-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v080-done.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "FYI/DONE terminal a Codex: v0.8.0 publicada+pusheada; rutas de version libres; siguiente = derivar M2. Sin respuesta requerida; ruta mailbox exenta de solape (DECISION-0011)."
+        },
+        {
             "claim_id": "CLAIM-20260606-release-v080-claude",
             "task_id": "none",
             "owner": "Claude",
