@@ -1005,6 +1005,44 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0031. Revision read-only + golden 5/5 (runtime_observability_cases) + regresiones verdes (loop 5/5, apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. budget.py (techo iter/coste), metrics.py (summarize post-hoc, tolera cost null), runlog.turn_entry enriquecido (trace/changed_paths/cost/duration_ms/collision_avoided; basico de 0030 = subconjunto), orchestrator --budget-tokens/--clock-fixed/summary. Determinismo via reloj inyectado (golden excluye duration_ms). Cierra M2 hito 1 (observabilidad). Notas de proceso: Codex dejo el claim activo en in_review y libero sin commitear (handoff-release pendiente, ver DECISION-0013/TASK-0033); deliverables commiteados por Claude al cerrar."
+        },
+        {
+            "id": "TASK-0033",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Gate de visibilidad y encoding: scan_encoding (ASCII canal + mojibake) + check handoff-release + liveness docs (DECISION-0012/0013/0006)",
+            "spec_id": "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
+            "file": "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+            "depends_on": [
+                "TASK-0032"
+            ],
+            "relates_to": [
+                "TASK-0017",
+                "TASK-0018",
+                "TASK-0021"
+            ],
+            "relevant_files": [
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "examples/encoding_gate_cases/",
+                "AGENTS.md"
+            ],
+            "deliverables": [
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/encoding_gate_cases/",
+                "AGENTS.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0032. Verificacion: scan_encoding limpio (exit 0; legacy mojibake TASK-0017/0018/0021 corregido), golden encoding_gate 3/3 + handoff_release 2/2, check handoff-release en validador (.py/.ps1), docs liveness/handoff-release en AGENTS.md 7 + TASK_PROTOCOL, CI actualizado; regresiones runtime verdes (apply 4/4, loop 5/5, obs 5/5); validador valid; scan neutralidad limpio. DOGFOOD CORRECTO: Codex aplico handoff-release (libero claim en in_review) + commiteo WIP antes de soltar + status consistente. Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013)."
         }
     ]
 }

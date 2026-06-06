@@ -1,27 +1,8 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
-        {
-            "claim_id": "CLAIM-20260606-task0035-close-claude",
-            "task_id": "TASK-0035",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/TASK_INDEX.json#TASK-0035",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0035",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0035-accepted.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Cierre TASK-0035 (flip done). Ratificacion ADVERSARIAL verde: bug plantado => gate falla exit 1; prune normaliza status al mover; golden 5/5 + 0 mismatches. Bug cerrado de raiz + blindado. Estado libre verificado."
-        },
         {
             "claim_id": "CLAIM-20260606-release-v080-done-mailbox-cleanup-codex",
             "task_id": "none",

@@ -1671,6 +1671,80 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Cierre TASK-0034 (poda real 20701->8565, ACEPTADA con defecto documentado: prune no normaliza status al mover mailbox, 41 mismatches) + registro/ampliacion TASK-0035 (gate + normalizar + fix prune). Estado libre verificado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0035-accepted-mailbox-cleanup-codex",
+            "task_id": "TASK-0035",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0035-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0035-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0035-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0035-in-review.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: acceptance TASK-0035 + handoff respondido movidos a answered con status sincronizado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0035-close-claude",
+            "task_id": "TASK-0035",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0035-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre TASK-0035 (flip done). Ratificacion ADVERSARIAL verde: bug plantado => gate falla exit 1; prune normaliza status al mover; golden 5/5 + 0 mismatches. Bug cerrado de raiz + blindado. Estado libre verificado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-post-task0035-mailbox-prune-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: poda sistematica aplicada tras limpieza mailbox TASK-0035; cold-start 9461 -> 8354 y prune_state --check queda verde."
+        },
+        {
+            "claim_id": "CLAIM-20260606-final-prune-check-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado y archivado: cierre de prune_state --check tras limpieza mailbox TASK-0035 sin dejar hot-state debido."
         }
     ]
 }

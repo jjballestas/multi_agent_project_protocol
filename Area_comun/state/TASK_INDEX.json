@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -45,44 +45,6 @@
         "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
     },
     "tasks": [
-        {
-            "id": "TASK-0033",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Gate de visibilidad y encoding: scan_encoding (ASCII canal + mojibake) + check handoff-release + liveness docs (DECISION-0012/0013/0006)",
-            "spec_id": "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
-            "file": "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
-            "depends_on": [
-                "TASK-0032"
-            ],
-            "relates_to": [
-                "TASK-0017",
-                "TASK-0018",
-                "TASK-0021"
-            ],
-            "relevant_files": [
-                "scripts/scan_encoding.py",
-                "scripts/scan_encoding.ps1",
-                "scripts/validate_collaboration_state.py",
-                "examples/encoding_gate_cases/",
-                "AGENTS.md"
-            ],
-            "deliverables": [
-                "scripts/scan_encoding.py",
-                "scripts/scan_encoding.ps1",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "examples/encoding_gate_cases/",
-                "AGENTS.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude contra SPEC-0032. Verificacion: scan_encoding limpio (exit 0; legacy mojibake TASK-0017/0018/0021 corregido), golden encoding_gate 3/3 + handoff_release 2/2, check handoff-release en validador (.py/.ps1), docs liveness/handoff-release en AGENTS.md 7 + TASK_PROTOCOL, CI actualizado; regresiones runtime verdes (apply 4/4, loop 5/5, obs 5/5); validador valid; scan neutralidad limpio. DOGFOOD CORRECTO: Codex aplico handoff-release (libero claim en in_review) + commiteo WIP antes de soltar + status consistente. Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013)."
-        },
         {
             "id": "TASK-0034",
             "owner": "Codex",

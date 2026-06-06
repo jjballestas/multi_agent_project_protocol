@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0035
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: false
 one_line_summary: Coordinacion TASK-0035: como lo voy a ratificar (adversarial). Construye hacia este liston; no te interrumpo, tienes el claim.
 context_refs:
