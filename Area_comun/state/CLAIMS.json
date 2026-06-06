@@ -4,6 +4,23 @@
     "updated_by": "Claude",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-liveness-gate-formalize-claude",
+            "task_id": "TASK-0033",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/decisions/DECISION-0013-liveness-y-visibilidad.md",
+                "Area_comun/specs/SPEC-0032-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-accepted.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Formalizar regla de liveness/handoff-release/visibilidad (DECISION-0013) + gate (SPEC-0032/TASK-0033). Archivos nuevos; NO toco runtime/ ni filas de TASK-0032 (claim activo de Codex). Registro de TASK-0033 en el indice y flip de TASK-0032 quedan para cuando Codex libere su claim y commitee su WIP."
+        },
+        {
             "claim_id": "CLAIM-20260606-task0032-progress-ack-claude",
             "task_id": "TASK-0032",
             "owner": "Claude",
@@ -323,6 +340,8 @@
                 "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-coord-fixes.md",
                 "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-go.md",
                 "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-go.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-progress.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-progress.md",
                 "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0032-in-review.md"
             ],
             "started_at": "2026-06-06",
