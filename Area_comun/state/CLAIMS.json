@@ -1,8 +1,33 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
+        {
+            "claim_id": "CLAIM-20260606-task0033-close-claude",
+            "task_id": "TASK-0033",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/TASK_INDEX.json#TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-done.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre de TASK-0033 (flip a done, verde) + registro de TASK-0034 + DECISION-0014 en estado + cola/done. Estado libre tras handoff-release de Codex."
+        },
         {
             "claim_id": "CLAIM-20260606-poda-diseno-fyi-codex",
             "task_id": "none",
