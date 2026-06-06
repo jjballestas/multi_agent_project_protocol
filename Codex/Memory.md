@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-05 20:41 Europe/Madrid
+Last updated: 2026-06-06 Europe/Madrid
 
 ## Repository
 
@@ -17,7 +17,54 @@ It dogfoods itself:
   decisions.
 - `Claude/` and `Codex/` are private agent areas.
 
-Current released version observed in the session: `v0.7.0`.
+Current released version observed in the session: `v0.8.0`.
+
+## Latest Session Close - 2026-06-06
+
+The current project is in P2 after runtime M1/v0.8.0. The live runtime is enabled in the dogfood
+instance, but real LLM autonomy is not enabled. The next expected work is M2 hito 2: adapter LLM real,
+single-turn only, with replay comparison and human gate.
+
+Important current state:
+
+- `TASK-0035` is accepted and `done`. It closed the mailbox `status` <-> folder bug:
+  - validator hard-fails mismatches in `open/`, `answered/`, and `archived/`;
+  - `prune_state.py` normalizes `status: archived` before moving messages to `archived/`;
+  - `examples/mailbox_status_cases/` covers 5 cases;
+  - CI runs the mailbox status golden.
+- Latest commits at close:
+  - `5f81f49 chore(mailbox): close task0035 acceptance messages`
+  - `cf90389 feat(P2): cerrar TASK-0035 a DONE - bug mailbox status<->carpeta CERRADO de raiz + blindado`
+  - `2a7e241 chore(protocol): hand off task0035 for review`
+  - `dd85ed5 feat(protocol): enforce mailbox status folders`
+- Mailbox `open/` was clean at close: only `.gitkeep`.
+- No active Codex task/claim should be assumed. Always re-check `Area_comun/state/CLAIMS.json`.
+- `prune_state --check` was green at close, with cold start around `8141` tokens after final cleanup.
+- Validation at close was green:
+  - `python scripts\validate_collaboration_state.py --root .`
+  - `powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root .`
+  - `python scripts\scan_encoding.py --root .`
+  - `python scripts\prune_state.py --root . --check`
+
+Potential next item:
+
+- Claude created `Area_comun/specs/SPEC-0035-adapter-llm-real.md` for `TASK-0036`, status `proposed`.
+  It describes M2 hito 2: `LLMAdapter`, pluggable invoker, `RecordedInvoker`, replay comparison,
+  budget/allowlist limits, `--adapter llm --once`, no autonomy, no live API in CI.
+- At the time it was observed, there was no mailbox message and no claim associated with SPEC-0035.
+  Do not edit it unless there is a current claim/instruction or the user/Claude opens the task.
+
+Coordination rules learned the hard way:
+
+- Before any shared edit, inspect `TASK_INDEX.json`, `CLAIMS.json`, and `Area_comun/mailbox/open/`.
+- If a mailbox message no longer applies, move it out of `open/` using the protocol:
+  claim first, set frontmatter `status` to the destination folder, move file, validate, release claim,
+  and commit if shared state changed.
+- When moving a task to `in_review`, commit WIP first and release the claim immediately in the same
+  handoff movement.
+- Do not leave active claims after a handoff. The validator has a handoff-release gate.
+- ASCII-only still applies to `Area_comun/mailbox/**` and `Area_comun/state/*.json`; avoid PowerShell
+  `Set-Content` BOM in state files, or rewrite with Python UTF-8 no BOM before closing.
 
 ## Current State At Session Close
 
