@@ -1144,6 +1144,35 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0035 con RATIFICACION ADVERSARIAL (2026-06-06). (1) Gates del invoker real probados en vivo: subprocess sin --allow-real-invoker => ValueError (no ejecuta nada); sin --llm-command => ValueError; requiere ademas --once + runtime.enabled:true; default sigue replay. (2) Drop-in de replay confirmado: golden replay comparativo llm==replay (mismo commit/transicion ready->done). (3) Limites: changed_paths fuera del claim => outcome rejected sin commit; budget excedido (cost 6 > 5) => budget_exhausted sin commit; enabled:false => abort exit 1. (4) Vendor-neutral: SubprocessInvoker generico por comando (decision operador #1); RecordedInvoker (recorded_invoker.v1, sin red) => CI sin API ni credenciales. (5) Codex NO disparo el invoker real (handoff + notas). Suite: llm 5/5, loop 5/5, observability 5/5, apply 4/4, router 5/5, validador/encoding/neutralidad limpios. Codex aplico handoff-release (claim liberado en in_review). PRIMERA CORRIDA REAL sobre el repo vivo SIGUE PENDIENTE de aprobacion puntual del operador (decision #2)."
+        },
+        {
+            "id": "TASK-0039",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "SubprocessInvoker robusto en Windows: fix shlex.split posix (corrompe rutas con backslash => WinError 2) + golden cross-platform (SPEC-0036)",
+            "spec_id": "Area_comun/specs/SPEC-0036-subprocess-invoker-windows-safe.md",
+            "file": "Area_comun/tasks/TASK-0039-codex-subprocess-invoker-windows-safe.md",
+            "depends_on": [
+                "TASK-0036"
+            ],
+            "relates_to": [
+                "TASK-0018"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "examples/llm_adapter_cases/"
+            ],
+            "deliverables": [
+                "runtime/adapters/llm_adapter.py",
+                "examples/llm_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0039-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0036 con RATIFICACION ADVERSARIAL (2026-06-06). Fix correcto: SubprocessInvoker.from_command usa CommandLineToArgvW (API Win32 que tokeniza igual que el SO) en Windows + shlex POSIX en otros SO; LocalFree del buffer. Verificado en vivo: split_command de un comando con rutas backslash nativas + comilla con espacios ('C:\\...\\my agent\\agent.py') tokeniza correcto (lo que antes daba WinError 2). Suite: llm 6/6 (incluye golden subprocess nativo end-to-end con 1 commit), loop 5/5, apply 4/4, router 5/5, turn schema 4/4 + semantic 3/3; validador/encoding/neutralidad limpios. Codex aplico handoff-release (claim liberado en in_review). No se disparo corrida real sobre el repo vivo (sigue gateada al operador)."
         }
     ]
 }

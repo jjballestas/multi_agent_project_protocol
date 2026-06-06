@@ -87,12 +87,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0039",
-            "owner": "Codex",
-            "status": "done",
-            "title": "SubprocessInvoker robusto en Windows (SPEC-0036) - ACEPTADA por Claude (ratificacion adversarial): parser nativo CommandLineToArgvW en Windows + shlex POSIX; split_command de rutas backslash+comillas con espacios verificado (antes WinError 2); golden subprocess nativo end-to-end + suite verde. Corrida real sobre repo vivo sigue gateada al operador."
-        },
-        {
             "id": "TASK-0038",
             "owner": "Claude",
             "status": "proposed",
@@ -107,8 +101,8 @@
         {
             "id": "TASK-0041",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Runtime commit robusto vs pre-commit hook de poda (SPEC-0037): implementado por Codex y pendiente de revision Claude. Incluye commit_turn --no-verify, auto-poda post-run y atomicidad ante fallo de commit."
+            "status": "done",
+            "title": "Runtime commit robusto vs pre-commit hook de poda (SPEC-0037) - ACEPTADA por Claude (ratificacion adversarial): commit_turn --no-verify solo en runtime + auto-poda post-run (commit separado) + atomicidad commit-fail; runtime_loop 8/8 con hook instalado. Resuelve el deadlock hallado en la corrida real (TASK-0040)."
         }
     ],
     "open_questions": [],
@@ -138,7 +132,7 @@
         "RUN REAL SOBRE EL REPO VIVO: APROBADO por el operador (2026-06-06) y EN EJECUCION via TASK-0040 (self-run del runtime: cierra la tarea con invoker subproceso real, 1 commit M1 en main). HALLAZGO: el commit del runtime corre el pre-commit hook de poda; cerrar tarea libera claim y puede cruzar released_count>4 => se archivo 1 released para no disparar. Run-logs (runtime/runs/) gitignoreados. Fix de raiz (runtime commit consciente del hook / poda como turno de mantenimiento) = FOLLOW-UP pendiente.",
         "v0.9.0 PUBLICADA (2026-06-06, aprobada por el operador): runtime M2 hito 2 = adapter LLM real (TASK-0036) + subprocess Windows-safe (TASK-0039), aditivo/off-by-default/MINOR. protocol_version 0.8.0->0.9.0, CHANGELOG [0.9.0], tag v0.9.0, reporte Area_comun/reports/REPORT-20260606-release-v0.9.0.md. Incluye la primera corrida real sobre el repo vivo (TASK-0040). FOLLOW-UP pendiente: runtime commit consciente del pre-commit hook de poda (released_count). Siguiente M2 (3+): loop autonomo multi-turno + mailbox automation + wrapper LLM real, gateados.",
         "TASK-0041 READY y encolada a Codex (FOLLOW-UP priorizado por el operador, SPEC-0037): el commit del propio runtime (commit_turn SIN --no-verify) dispara el pre-commit hook de poda y puede bloquearse al cruzar released_count>4, dejando el turno a medio aplicar (hallazgo de TASK-0040). Fix: --no-verify en la ruta del runtime (run_gate ya gatea validador+neutralidad) + auto-mantenimiento de poda (DECISION-0014 maintenance turn) + atomicidad ante fallo de commit (discard+block). Prioridad high.",
-        "TASK-0041 EN REVISION: Codex implemento SPEC-0037. Runtime commit usa --no-verify (hook manual intacto), el orquestador auto-poda post-run si prune_state --check esta due con commit de mantenimiento separado, y fallos de commit se convierten en discard+blocked sin excepcion cruda. Golden runtime_loop 8/8 (incluye hook de poda instalado, manual commit bloqueado, commit-fail atomico) + regresiones verdes.",
+        "TASK-0041 ACEPTADA y DONE (ratificacion adversarial de Claude): commit_turn(verify=False) => --no-verify SOLO en la ruta del runtime (run_gate ya gatea; commits manuales siguen bloqueados por el hook cuando la poda esta due); apply.py commit-fail => discard + block (atomicidad); orchestrator.auto_prune_if_due post-run (guarda contra worktree sucio, --check/--apply, commit separado --no-verify). runtime_loop 8/8 con hook instalado + regresiones verdes. RESUELVE el deadlock runtime-commit-vs-hook hallado en la corrida real (TASK-0040). El runtime ya se auto-mantiene; no requiere el workaround manual de archivar claims.",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "TASK-0038 (N-agent readiness) DISENO CAPTURADO: DECISION-0015 (proposed) + SPEC-0038 (proposed) definen el modelo de EQUIPO COMPLETO -> agent_registry config-driven por capacidades (architect/implementer/reviewer/qa/orchestrator/human_owner) con fallback de 3 niveles (cero migracion); turn_schema.agent de enum a string validado vs registry; router review-by-not-author + QA gate de primera clase + human gate parametrizado + ruteo por capacidad; defaults por agente actuante. Aditivo/MINOR. Descomposicion a-g en SPEC-0038 (NO registrada como tareas). TASK-0038 = paraguas proposed. Implementacion TRIPLE-GATEADA: TASK-0039 (hecho) -> aprobacion humana DECISION-0015 -> OK operador. El operador esta revisando el plan. Analisis fuente: Area_comun/artifacts/ANALISIS-n-agent-readiness.md."
     ],

@@ -1981,6 +1981,51 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: registrar SPEC-0037 + TASK-0041 (follow-up priorizado: runtime commit vs pre-commit hook de poda) y encolar a Codex. Se libera al terminar el registro."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0041-accept-claude",
+            "task_id": "TASK-0041",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0041",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0041",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0041-codex-runtime-commit-poda-hook.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0041-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0041-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0041-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0041 (commit_turn --no-verify + auto-poda post-run + atomicidad commit-fail; runtime_loop 8/8) + flip a done + cierre de mailbox."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0041-codex",
+            "task_id": "TASK-0041",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0041",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0041",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0041-codex-runtime-commit-poda-hook.md",
+                "runtime/vcs.py",
+                "runtime/orchestrator.py",
+                "runtime/apply.py",
+                "examples/runtime_loop_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0041-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0041-ready.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0041-ready.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0041-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado al pasar TASK-0041 a in_review. Implementado commit_turn --no-verify en runtime, auto-poda post-run y atomicidad ante fallo de commit."
         }
     ]
 }

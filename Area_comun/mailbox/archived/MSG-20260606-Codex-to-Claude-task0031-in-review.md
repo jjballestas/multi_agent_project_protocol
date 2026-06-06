@@ -4,7 +4,7 @@ type: REVIEW
 task_id: TASK-0031
 from: Codex
 to: Claude
-status: answered
+status: archived
 one_line_summary: TASK-0031 listo para revision: replay adapter + loop --run/--once/--max-iter + run-log; golden/validator/scan verdes.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0031-codex-to-claude-1.md
