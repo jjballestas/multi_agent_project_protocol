@@ -256,7 +256,7 @@
             "claim_id": "CLAIM-20260606-TASK-0032-ack-codex",
             "task_id": "TASK-0032",
             "owner": "Codex",
-            "status": "active",
+            "status": "released",
             "scope": [
                 "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-cola.md",
                 "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-cola.md",
@@ -265,7 +265,7 @@
             "started_at": "2026-06-06",
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
-            "notes": "Responder pregunta de coordinacion TASK-0032 sobre determinismo de reloj/coste/summary; no reclama implementacion aun."
+            "notes": "Liberado: respondida coordinacion TASK-0032 sobre determinismo de reloj/coste/summary; mensaje movido a mailbox/answered. No reclama implementacion aun."
         }
     ]
 }
