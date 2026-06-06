@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0056
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0056 entregada a in_review: tool_policy deny-by-default, action gates, turn_schema 1.2.0 opcional, golden runtime_tool_policy_cases 6/6 y CI.

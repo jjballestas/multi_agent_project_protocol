@@ -35,6 +35,48 @@
     "enabled": true,
     "entrypoint": "runtime/orchestrator.py"
   },
+  "tool_policy": {
+    "enabled": true,
+    "default": "deny",
+    "agent_policies": {
+      "Claude": "policy.architect",
+      "Codex": "policy.implementer"
+    },
+    "policies": {
+      "policy.architect": {
+        "allow": [
+          {
+            "tool": "runtime.plan",
+            "capabilities": ["orchestrator"],
+            "scope": ["Area_comun/", "runtime/"],
+            "actions": ["read"]
+          },
+          {
+            "tool": "mailbox.write",
+            "capabilities": ["orchestrator", "reviewer"],
+            "scope": ["Area_comun/mailbox/"],
+            "actions": ["local_write"]
+          }
+        ]
+      },
+      "policy.implementer": {
+        "allow": [
+          {
+            "tool": "local.shell",
+            "capabilities": ["implementer", "test_engineer"],
+            "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json", ".github/workflows/validate.yml"],
+            "actions": ["read", "local_exec"]
+          },
+          {
+            "tool": "local.patch",
+            "capabilities": ["implementer"],
+            "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json", ".github/workflows/validate.yml"],
+            "actions": ["local_write"]
+          }
+        ]
+      }
+    }
+  },
   "routing_epoch": "0",
   "routing_weights": {
     "active_claims": 10,

@@ -3156,6 +3156,33 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: RELEASE v0.10.0 (aprobada por el operador) - empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A. Bump protocol_version 0.9.0->0.10.0, PROJECT_STATE version + released_versions, CHANGELOG, reporte humano, tag v0.10.0. Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260607-cierre-task0056-claude",
+            "task_id": "TASK-0056",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0056",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0056-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260607-Codex-to-Claude-task0056-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0056-accepted.md",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "runtime/tool_policy.py",
+                "runtime/turn_validate.py",
+                "runtime/turn_schema.json",
+                "runtime/orchestrator.py"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0056 (Fase 5.2 tool-policy) + flip a done + commit de la impl de Codex (staging explicito, corrige el commit torn b1e519b). Suite 116/116. Claim efimero."
         }
     ]
 }

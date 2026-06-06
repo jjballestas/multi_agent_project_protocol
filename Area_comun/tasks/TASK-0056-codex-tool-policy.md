@@ -1,11 +1,12 @@
 ---
 id: TASK-0056
 owner: Codex
-status: in_review
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-07
 updated_at: 2026-06-07
+closed_by: Claude (ratificacion adversarial)
 depends_on: [TASK-0054]
 relates_to: [TASK-0049, TASK-0046]
 phase: P2

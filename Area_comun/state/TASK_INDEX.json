@@ -115,45 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0054",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase 5.1 (guardrails, SPEC-0040): anti-inyeccion de handoffs/inputs/tool-output + taint/provenance. runtime/guardrails.py (classify_provenance/scan_injection deny-by-default domain-neutral/contain_untrusted) + cableado aditivo en turn_validate (efecto de seguridad sostenido solo sobre contenido untrusted => rechazado; inyeccion => contenida como dato + security.handoff_injection_contained) + golden examples/runtime_guardrail_cases/. Invariante rector: ninguna decision de seguridad se deriva de contenido controlado por el actor. Aditivo, fallback N=2 intacto.",
-            "spec_id": "Area_comun/specs/SPEC-0040-fase5-guardrails.md",
-            "file": "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
-            "linked_decisions": [
-                "DECISION-0015",
-                "DECISION-0018"
-            ],
-            "depends_on": [
-                "TASK-0046",
-                "TASK-0049"
-            ],
-            "relates_to": [
-                "TASK-0044",
-                "TASK-0048"
-            ],
-            "relevant_files": [
-                "runtime/guardrails.py",
-                "runtime/turn_validate.py",
-                "examples/runtime_guardrail_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/guardrails.py",
-                "runtime/turn_validate.py",
-                "examples/runtime_guardrail_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden guardrail 5/5 + SUITE RUNTIME COMPLETA 110/110 (105 previos sin regresion) + validador/encoding/neutralidad py. Verifique runtime/guardrails.py genuino: classify_provenance deny-by-default (desconocido->untrusted); scan_injection determinista, bilingue, DOMAIN-NEUTRAL (protocol/scope/authority/escalation/quality, sin terminos de negocio); contain_untrusted preserva contenido como DATO (findings/events) y emite security.handoff_injection_contained. Verifique a MANO ambas ramas del invariante: (a) escalado sostenido SOLO por contenido untrusted => RECHAZADO (guardrail error); (b) escalado legitimo por QA-cycles desde estado trusted => PERMITIDO (sin falso positivo). Cableado aditivo en turn_validate (lee handoff del report, convierte errores de seguridad en semanticos) con guard de path-traversal; byte-equivalente sin contenido untrusted (fallback N=2 intacto). Diff dentro de scope + prune de mantenimiento sancionado por Codex (DECISION-0014, claim de mantenimiento declarado). Release atomico aplicado por Codex (claim released + in_review). Obs no bloqueante: el golden prueba la contencion (eventos) pero no la ruta de error directamente; la verifique yo a mano. Flip por arquitecto. CIERRA Fase 5.1; siguiente rebanada 5.2 (tool-policy) se especifica/encola aparte.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0055",
             "owner": "Codex",
             "status": "done",
@@ -192,7 +153,7 @@
         {
             "id": "TASK-0056",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -226,7 +187,8 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex 2026-06-07. Implementado tool_policy deny-by-default config-gated en live/template; runtime/tool_policy.py con is_tool_allowed/classify_action/gate_for_action; turn_validate rechaza tools fuera de allowlist con security.tool_denied, exige decision_refs para contract_change y gate.human_required para external/sensitive; turn_schema 1.2.0 agrega fields opcionales tools/actions/decision_refs y orchestrator los preserva. Golden examples/runtime_tool_policy_cases 6/6 + CI. Verificado: runtime suites verdes, validador/encoding/neutralidad py/ps y prune --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md. Pendiente ratificacion adversarial de Claude."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: tool-policy 6/6 + suite runtime COMPLETA 116/116 (110 previos sin regresion) + validador/encoding/neutralidad py. runtime/tool_policy.py genuino: deny-by-default real (sin tool_policy/enabled:false => True legacy byte-equivalente; habilitada => deny salvo regla que case tool+agente+capacidad+accion+scope); classify_action falla-cerrado (ambiguo=>sensitive); gate_for_action mapea tabla sec.8.3 (read/local_write/local_exec/contract_change/external/sensitive); cableado aditivo en turn_validate (security.tool_denied; decision_required para contract_change; human_required para external/sensitive; solo actua si el report declara tools/actions). turn_schema 1.1.0->1.2.0 (tools/actions opcionales, aditivo, coherente con A.7) + orchestrator passthrough. Domain-neutral, fallback N=2 byte-equivalente. Obs de proceso: 1er commit del encolado (b1e519b) capturo el golden pero no la impl de runtime/ (staging por dirs) => commit torn; corregido en el cierre con staging explicito (HALLAZGO #2 del metodo anti-colision). Flip por arquitecto. CIERRA Fase 5.2.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

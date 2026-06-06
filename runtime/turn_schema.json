@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://multi-agent-protocol/runtime/turn_schema.json",
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "title": "Turn report",
   "description": "Contrato estricto que un agente devuelve al terminar UN turno. El orquestador lo valida, comprueba que changed_paths esta dentro del claim, aplica las transiciones, corre el gate (validador + scan de neutralidad) y, si verde, hace 1 commit; si rojo, git revert + blocked + escala. Ver SPEC-0026 y DECISION-0009.",
   "type": "object",
@@ -37,6 +37,55 @@
       "type": "array",
       "items": { "type": "string" },
       "description": "Rutas escritas en el turno. INVARIANTE: cada ruta debe estar cubierta por el scope del claim activo del agente (write-allowlist). El orquestador rechaza si no."
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "action_type": {
+            "type": "string",
+            "enum": ["read", "local_write", "local_exec", "contract_change", "external", "sensitive"]
+          },
+          "scope": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "description": "Herramientas declaradas por el agente para el turno. Si protocol.config.json declara tool_policy, se validan deny-by-default por herramienta, capacidad y scope."
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["read", "local_write", "local_exec", "contract_change", "external", "sensitive"]
+          },
+          "summary": { "type": "string", "minLength": 1 },
+          "scope": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "decision_refs": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "description": "Acciones genericas declaradas para gate semantico: lectura, escritura local, ejecucion local, cambio de contrato, accion externa o accion sensible."
+    },
+    "decision_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Referencias a decisiones aprobadas que autorizan cambios de contrato."
     },
     "attempt_id": {
       "type": "string",

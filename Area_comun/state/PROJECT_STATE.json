@@ -98,12 +98,6 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). NUCLEO Fases 1-4 DONE (criterios 1-12 SPEC-0038 implementados). Fases 5-7 CONDICIONADAS/gateadas (pendiente OK operador). Brechas para spec-completa: event log writer-vivo, golden N=3/N=5, property-based I1-I8, concurrency sim, runtime suites en CI, autor-de-record hardening."
         },
         {
-            "id": "TASK-0054",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 5.1 (guardrails, SPEC-0040) DONE - ACEPTADA por Claude (ratificacion adversarial): runtime/guardrails.py (classify_provenance deny-by-default, scan_injection determinista domain-neutral, contain_untrusted) + cableado aditivo en turn_validate (inyeccion contenida como dato + security.handoff_injection_contained; escalado sostenido solo por untrusted RECHAZADO, escalado legitimo por QA-cycles PERMITIDO) + golden runtime_guardrail_cases 5/5 + CI. Suite 110/110, fallback N=2 intacto, neutralidad limpia. Invariante rector G1 cumplido."
-        },
-        {
             "id": "TASK-0055",
             "owner": "Codex",
             "status": "done",
@@ -112,8 +106,8 @@
         {
             "id": "TASK-0056",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Fase 5.2 (SPEC-0042): tool-policy deny-by-default + clasificacion de acciones. Promovida a ready en ventana segura (Codex offline hasta ~1:45). Aditiva, deny-by-default, fallback N=2 intacto."
+            "status": "done",
+            "title": "Fase 5.2 (SPEC-0042) DONE - ACEPTADA por Claude (ratificacion adversarial): tool-policy deny-by-default + clasificacion de acciones. runtime/tool_policy.py (is_tool_allowed/classify_action/gate_for_action) + cableado aditivo en turn_validate (security.tool_denied; contract_change=>decision_refs; external/sensitive=>human_required) + turn_schema 1.2.0 (tools/actions opcionales) + golden 6/6. Suite 116/116, fallback N=2 intacto, domain-neutral."
         }
     ],
     "open_questions": [],
@@ -169,7 +163,8 @@
         "TASK-0055 ENTREGADA a in_review por Codex (2026-06-07): prune robusto ante requires_response. scripts/prune_state.py exime conversaciones no resueltas y reconcilia status:archived al archivar; scripts/prune_state.ps1 mantiene paridad por delegacion; golden examples/runtime_prune_cases + CI. Verificado: runtime_prune, prune_state, mailbox_status, runtime completo 110/110, validador/encoding/neutralidad py/ps y prune py/ps verdes. Pendiente ratificacion adversarial de Claude.",
         "TASK-0055 DONE (ratificacion adversarial de Claude 2026-06-07): fix de higiene del prune (SPEC-0041) - requires_unresolved_response devuelve a open/ los mensajes requires_response sin resolver + reconcilia status:archived; CIERRA el FOLLOW-UP de Capa A. Golden runtime_prune_cases 4/4 (+ps1) + prune_state_cases 3/3 + gates py verdes. CODEX AHORA AUTONOMO (reloj ~100s, auto-reclama ready). SIGUIENTE Fase 5: rebanada 5.2 (tool-policy deny-by-default) y 5.3 (firma del envelope) PREPARADAS como borrador en personal/Claude/ (no promovidas a ready aun, para coordinar la promocion sin colisionar con el Codex autonomo). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
         "FASE 5.2 ENCOLADA (TASK-0056, ready, 2026-06-07): tool-policy deny-by-default + clasificacion de acciones (SPEC-0042). Promovida en VENTANA SEGURA (Codex offline por limite de creditos hasta ~1:45 => sin riesgo de colision). Aplicado el metodo anti-colision (prep en personal/ + promocion atomica + archivos-antes-de-claim, tras HALLAZGO #1). Codex la tomara al volver (~1:45); GO enviado por mailbox. 5.3 (firma del envelope) ya disenada en personal/, se encola tras cerrar 5.2. Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
-        "TASK-0056 ENTREGADA a in_review por Codex (2026-06-07): tool-policy deny-by-default + clasificacion de acciones. Implementado config tool_policy live/template; runtime/tool_policy.py; turn_validate con security.tool_denied, decision_refs para contract_change y gate.human_required para external/sensitive; turn_schema 1.2.0 opcional; golden runtime_tool_policy_cases 6/6 + CI. Verificado runtime completo + gates py/ps verdes. Pendiente ratificacion adversarial de Claude."
+        "TASK-0056 ENTREGADA a in_review por Codex (2026-06-07): tool-policy deny-by-default + clasificacion de acciones. Implementado config tool_policy live/template; runtime/tool_policy.py; turn_validate con security.tool_denied, decision_refs para contract_change y gate.human_required para external/sensitive; turn_schema 1.2.0 opcional; golden runtime_tool_policy_cases 6/6 + CI. Verificado runtime completo + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
+        "FASE 5.2 CERRADA (TASK-0056 DONE, ratificacion adversarial de Claude 2026-06-07): tool-policy deny-by-default + clasificacion de acciones (SPEC-0042). runtime/tool_policy.py + cableado aditivo en turn_validate + turn_schema 1.2.0 (tools/actions opcionales) + golden tool_policy 6/6. Suite 116/116, fallback N=2 byte-equivalente. COORDINACION CON CODEX AUTONOMO FUNCIONO: promovi 5.2 a ready en su ventana offline (creditos) y la tomo al volver (~1:45). HALLAZGO #2 del metodo: staging por dirs amplios capturo el golden sin la impl (commit torn b1e519b), corregido con staging explicito. Pendiente: Fase 5.3 (firma del envelope, ya disenada en personal/) - encolar tras coordinar con el operador (limite de creditos de Codex). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

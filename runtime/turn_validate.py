@@ -28,6 +28,7 @@ try:
         max_qa_cycles,
         qa_attempts_after_failure,
     )
+    from .tool_policy import TOOL_DENIED_EVENT, classify_action, gate_for_action, is_tool_allowed
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter
@@ -40,6 +41,7 @@ except ImportError:  # pragma: no cover - direct script execution
         max_qa_cycles,
         qa_attempts_after_failure,
     )
+    from tool_policy import TOOL_DENIED_EVENT, classify_action, gate_for_action, is_tool_allowed
 
 
 def load_report(path: Path) -> dict[str, Any]:
@@ -223,6 +225,51 @@ def validate_guardrail_semantics(report: dict[str, Any], root: Path, state: dict
     return [f"semantic: {error}" for error in guardrail_result.get("errors") or []]
 
 
+def values_as_strings(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [str(item).strip() for item in value if str(item).strip()]
+    text = str(value).strip()
+    return [text] if text else []
+
+
+def tool_label(tool: Any) -> str:
+    if isinstance(tool, dict):
+        return str(tool.get("name") or tool.get("tool") or "<unnamed>")
+    return str(tool or "<unnamed>")
+
+
+def decision_refs_for_action(report: dict[str, Any], action: Any) -> list[str]:
+    refs = values_as_strings(report.get("decision_refs"))
+    if isinstance(action, dict):
+        refs.extend(values_as_strings(action.get("decision_refs")))
+    return refs
+
+
+def validate_tool_policy_semantics(report: dict[str, Any], state: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    registry = state.get("agent_registry") or {}
+    config = state.get("config") or {}
+    agent_id = str(report.get("agent") or "")
+    task_scope = list(report.get("changed_paths") or [])
+
+    for tool in report.get("tools") or []:
+        if not is_tool_allowed(agent_id, tool, task_scope, registry, config):
+            errors.append(f"semantic: {TOOL_DENIED_EVENT}: agent {agent_id} cannot use tool {tool_label(tool)}")
+
+    for action in report.get("actions") or []:
+        action_type = classify_action(action)
+        gate = gate_for_action(action_type)
+        if gate.get("diff_required") and not [path for path in report.get("changed_paths") or [] if str(path).strip()]:
+            errors.append(f"semantic: gate.diff_required: action {action_type} requires changed_paths")
+        if gate.get("decision_required") and not decision_refs_for_action(report, action):
+            errors.append(f"semantic: gate.decision_required: action {action_type} requires decision_refs")
+        if gate.get("human_required") and (report.get("gate") or {}).get("human_required") is not True:
+            errors.append(f"semantic: gate.human_required: action {action_type} requires gate.human_required=true")
+    return errors
+
+
 def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads((root / "runtime" / "turn_schema.json").read_text(encoding="utf-8-sig"))
@@ -236,6 +283,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     state = load_state(root)
     errors.extend(validate_guardrail_semantics(report, root, state))
     errors.extend(validate_agent_semantics(report, root))
+    errors.extend(validate_tool_policy_semantics(report, state))
     errors.extend(validate_concurrency_semantics(report, root))
     errors.extend(validate_review_qa_semantics(report, state))
     claims = [
