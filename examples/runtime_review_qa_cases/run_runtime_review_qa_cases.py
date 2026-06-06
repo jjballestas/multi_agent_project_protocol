@@ -214,6 +214,19 @@ def case_pass_qa_by_author_rejected() -> None:
         assert_invalid(payload, root, "qa actor is task author")
 
 
+def case_pass_qa_by_author_with_forged_payload_rejected() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-selfqa-forged-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("qa_pending", original_author="Author"), "Author")
+        payload = report(
+            "Author",
+            "qa_pending",
+            "done",
+            {"event": "pass_qa", "qa": "Author", "author": "SomeoneElse", "evidence": ["reports/qa.md"]},
+        )
+        assert_invalid(payload, root, "qa actor is task author")
+
+
 def case_reject_review_by_author_rejected() -> None:
     with tempfile.TemporaryDirectory(prefix="runtime-review-qa-selfreview-") as temp:
         root = Path(temp)
@@ -222,12 +235,75 @@ def case_reject_review_by_author_rejected() -> None:
         assert_invalid(payload, root, "reviewer actor is task author")
 
 
+def case_reject_review_by_author_with_forged_payload_rejected() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-selfreview-forged-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("in_review", original_author="Author"), "Author")
+        payload = report(
+            "Author",
+            "in_review",
+            "changes_requested",
+            {"event": "reject_review", "reviewer": "Author", "author": "SomeoneElse", "checks_failed": [check()]},
+        )
+        assert_invalid(payload, root, "reviewer actor is task author")
+
+
+def case_reviewer_payload_author_is_not_authoritative() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-reviewer-payload-author-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("in_review", original_author="Author"), "Reviewer")
+        payload = report(
+            "Reviewer",
+            "in_review",
+            "changes_requested",
+            {"event": "reject_review", "reviewer": "Reviewer", "author": "Reviewer", "checks_failed": [check()]},
+        )
+        assert_valid(payload, root)
+
+
+def case_qa_payload_author_is_not_authoritative() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-qa-payload-author-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("qa_pending", original_author="Author"), "QA")
+        payload = report(
+            "QA",
+            "qa_pending",
+            "done",
+            {"event": "pass_qa", "qa": "QA", "author": "QA", "evidence": ["reports/qa.md"]},
+        )
+        assert_valid(payload, root)
+
+
 def case_done_without_evidence_rejected() -> None:
     with tempfile.TemporaryDirectory(prefix="runtime-review-qa-evidence-") as temp:
         root = Path(temp)
         build_fixture(root, task("qa_pending"), "QA")
         payload = report("QA", "qa_pending", "done", {"event": "pass_qa", "qa": "QA", "evidence": []})
         assert_invalid(payload, root, "pass_qa requires evidence")
+
+
+def case_apply_persists_original_author_once() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-original-author-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("ready"), "Author")
+        payload = report("Author", "ready", "in_review", None)
+        assert_valid(payload, root)
+        apply_turn(payload, root)
+        updated = read_task(root)
+        assert updated["original_author"] == "Author"
+        assert updated["status"] == "in_review"
+
+
+def case_assign_fix_does_not_overwrite_original_author() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-review-qa-original-author-fix-") as temp:
+        root = Path(temp)
+        build_fixture(root, task("qa_failed", owner="Reviewer", original_author="Author"), "Architect")
+        payload = report("Architect", "qa_failed", "claimed", {"event": "assign_fix", "assignee": "Reviewer"})
+        assert_valid(payload, root)
+        apply_turn(payload, root)
+        updated = read_task(root)
+        assert updated["original_author"] == "Author"
+        assert updated["assigned_to"] == "Reviewer"
 
 
 def case_router_prefers_original_author_for_fix() -> None:
@@ -255,8 +331,14 @@ def main() -> int:
         case_superficial_log_does_not_change_signature,
         case_max_qa_cycles_escalates_to_architect,
         case_pass_qa_by_author_rejected,
+        case_pass_qa_by_author_with_forged_payload_rejected,
         case_reject_review_by_author_rejected,
+        case_reject_review_by_author_with_forged_payload_rejected,
+        case_reviewer_payload_author_is_not_authoritative,
+        case_qa_payload_author_is_not_authoritative,
         case_done_without_evidence_rejected,
+        case_apply_persists_original_author_once,
+        case_assign_fix_does_not_overwrite_original_author,
         case_router_prefers_original_author_for_fix,
     ]
     failures = []

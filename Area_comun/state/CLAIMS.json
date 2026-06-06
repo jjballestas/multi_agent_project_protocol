@@ -4,63 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-TASK-0047-flip-y-publicar-A1-claude",
-            "task_id": "TASK-0047",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0047",
-                "Area_comun/state/TASK_INDEX.json#TASK-0048",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks",
-                "Area_comun/state/PROJECT_STATE.json#decisions",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0047-codex-runtime-suites-en-ci.md",
-                "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
-                "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md",
-                "Area_comun/decisions/DECISION-0017-event-log-writer-vivo.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0047-in-review.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0047-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0047-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
-                "personal/Claude/SPEC-0039-DRAFT-event-log-writer-vivo.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: ratificacion de TASK-0047 (suites en CI) + flip a done; PUBLICACION A.1 (operador aprobo alcance A->B): SPEC-0039 a Area_comun/specs + DECISION-0017 ACCEPTED + encolar TASK-0048 (impl Fase A control-plane gate) a Codex. Claim efimero: se libera al cierre; prune posterior."
-        },
-        {
-            "claim_id": "CLAIM-20260606-TASK-0048-codex",
-            "task_id": "TASK-0048",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0048",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0048",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0048-in-review.md",
-                "runtime/apply.py",
-                "runtime/orchestrator.py",
-                "runtime/eventlog.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "examples/runtime_eventlog_gate_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado con handoff-release: TASK-0048 entregada a in_review. Implementada Fase A control-plane gate (EventWriter en apply, snapshot gate apply+validador py/ps1, golden eventlog gate + CI); runtime suites 66/66 y gates globales verdes. No Fase B. Handoff: Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260606-TASK-0048-deliverable-paths-codex",
             "task_id": "TASK-0048",
             "owner": "Codex",
@@ -96,6 +39,55 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: ratificacion adversarial de TASK-0048 (Fase A writer-vivo control-plane) + flip a done + encolar Capa A.6 (TASK-0049: hardening autor-de-record I1/I2, cierra el FOLLOW-UP de seguridad de Fase 4). Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0049-codex",
+            "task_id": "TASK-0049",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0049",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0049",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0049-codex-hardening-autor-de-record.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0049-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0049-hardening.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0049-hardening.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0049-in-review.md",
+                "runtime/review_qa.py",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "examples/runtime_review_qa_cases/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con handoff-release: TASK-0049 entregada a in_review. Implementado autor-de-record desde estado, payload.author ignorado para I1/I2, original_author persistido e inmutable; Review/QA 15/15 y runtime suites 72/72. No Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0049-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0049-flip-y-encolar-A2-claude",
+            "task_id": "TASK-0049",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0049",
+                "Area_comun/state/TASK_INDEX.json#TASK-0050",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0049-codex-hardening-autor-de-record.md",
+                "Area_comun/tasks/TASK-0050-codex-golden-n3-n5.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0049-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0049-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0050-n3n5.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0049 (Capa A.6 hardening autor-de-record I1/I2, cierra FOLLOW-UP seguridad Fase 4) + flip a done + encolar Capa A.2 (TASK-0050: golden N=3/N=5). Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

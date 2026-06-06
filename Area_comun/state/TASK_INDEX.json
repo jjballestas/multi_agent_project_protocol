@@ -115,34 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0047",
-            "owner": "Codex",
-            "status": "done",
-            "type": "integration",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Capa A (consolidacion nucleo N-agente, criterio 14 SPEC-0038): correr las suites de runtime en CI (.github/workflows) - router/eventlog/review_qa/registry/turn-schema/turn-semantic/apply/loop/observability/llm-adapter - aditivo, sin tocar contrato, paridad con la corrida local del handoff",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0047-codex-runtime-suites-en-ci.md",
-            "depends_on": [
-                "TASK-0046"
-            ],
-            "relates_to": [
-                "TASK-0017"
-            ],
-            "relevant_files": [
-                ".github/workflows/validate.yml",
-                "examples/"
-            ],
-            "deliverables": [
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0047-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION (2026-06-06). Corri yo los 10 runners de runtime (61/61: router 10, eventlog 5, review_qa 9, registry 4, turn schema 5, turn semantic 5, apply 4, loop 8, obs 5, llm 6) + validador/encoding/neutralidad py + parse YAML del workflow OK. Diff revisado: solo .github/workflows/validate.yml (step pip install jsonschema + 10 steps de runners; llm-adapter en modo recorded SIN --allow-real-invoker, sin red). git status confirma que el unico archivo de producto tocado es el workflow; no se modifico runtime/ ni contrato ni fixtures. Cierra la brecha de regresion de CI del nucleo N-agente (criterio 14 SPEC-0038). Codex aplico handoff-release y coordino el desbloqueo del claim; flip por arquitecto."
-        },
-        {
             "id": "TASK-0048",
             "owner": "Codex",
             "status": "done",
@@ -188,7 +160,7 @@
         {
             "id": "TASK-0049",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -216,7 +188,38 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Capa A.6 (cierra el HALLAZGO de seguridad de la review de Fase 4): hoy la guarda de exclusion de autor (I1/I2) usa task_author(task, payload) que PRIORIZA payload.author/original_author sobre el estado; un actor adversarial podria declarar un autor falso en el payload y evadir el rechazo self-review/self-QA. Fix: (1) apply persiste original_author en el estado de la tarea en la 1ra asignacion/claim (si no existe ya), inmutable despues; (2) la GUARDA de exclusion reviewer/qa != autor lee el autor de record SOLO del estado (task.original_author, fallback task.owner del estado), ignorando payload.author/original_author para ese chequeo de seguridad; payload.author puede seguir como informacion no-autoritativa. Tests: un turno reviewer/qa con payload.author falso distinto del autor de record sigue siendo RECHAZADO; autor real no puede auto-revisar/auto-QA aunque mienta en el payload; casos existentes de runtime_review_qa siguen verdes. Aditivo, fallback N=2 intacto, sin red, neutralidad. Encolada a Codex."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (72/72 incl. review_qa 15/15) + validador/encoding/neutralidad py. Verificado en codigo y golden: author_of_record(task) lee SOLO task.original_author (fallback task.owner del estado); task_author delega ahi e IGNORA payload por completo; turn_validate usa author_of_record para la guarda I1/I2; apply.ensure_original_author fija original_author=owner SOLO si falta (inmutable; invocado en 1ra adquisicion de claim y 1ra transicion). Casos adversariales (golden 9->15) confirmados: autor real con payload.author falso => pass_qa/reject_review RECHAZADO (no se evade mintiendo); no-autor con payload.author=actor => NO causa falso positivo (payload no autoritativo); original_author se persiste en el 1er apply y assign_fix/cambio de owner NO lo sobreescribe. Cierra el HALLAZGO de seguridad de la review de Fase 4 (I1/I2 ahora robustos vs payload adversarial). Aditivo, fallback N=2 intacto, neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0050",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.2 (test plan global 15.3 SPEC-0038): golden N=3 y N=5 - demostrar con registry de 3 agentes reviewer/QA separados (review/QA != autor enrutados a distintos) y con 5 agentes balanceo de carga del router sin romper replay/determinismo; fallback N=2 byte-equivalente intacto",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0050-codex-golden-n3-n5.md",
+            "depends_on": [
+                "TASK-0045",
+                "TASK-0049"
+            ],
+            "relates_to": [
+                "TASK-0043"
+            ],
+            "relevant_files": [
+                "runtime/router.py",
+                "runtime/context.py",
+                "examples/runtime_router_cases/",
+                "examples/runtime_nagent_golden_cases/"
+            ],
+            "deliverables": [
+                "examples/runtime_nagent_golden_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0050-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Capa A.2 (criterio test plan global 15.3 de SPEC-0038: 'N=2 reproduce comportamiento anterior; N=3 permite reviewer/QA separados; N=5 balancea carga sin romper replay'). Nuevo golden runtime_nagent_golden_cases: (N=3) registry de 3 agentes con capacidades distintas => review se asigna a un reviewer != autor y QA a un qa != autor, ambos distintos del implementador autor (verifica I1/I2 end-to-end con roster real de 3); (N=5) registry de 5 agentes => el router weighted-least-loaded distribuye carga de forma determinista y el replay del mismo estado/routing_epoch reproduce identicas asignaciones (sin romper determinismo); fallback N=2 byte-equivalente (los golden existentes siguen verdes). Aditivo, sin red, neutralidad. Determinista (sin reloj/random). Encolada a Codex."
         }
     ]
 }

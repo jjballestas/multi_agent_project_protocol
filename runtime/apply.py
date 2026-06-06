@@ -173,6 +173,23 @@ def increment_int(task: dict[str, Any], key: str, amount: int = 1) -> int:
     return value
 
 
+def ensure_original_author(root: Path, task_id: str) -> None:
+    index_path = root / "Area_comun" / "state" / "TASK_INDEX.json"
+    index = read_json(index_path)
+    changed = False
+    for task in index.get("tasks") or []:
+        if task.get("id") != task_id:
+            continue
+        if not str(task.get("original_author") or "").strip():
+            original_author = str(task.get("owner") or "").strip()
+            if original_author:
+                task["original_author"] = original_author
+                changed = True
+        break
+    if changed:
+        write_json(index_path, index)
+
+
 def apply_review_qa_transition(root: Path, report: dict[str, Any]) -> None:
     transitions = report.get("transitions") or {}
     payload = transitions.get("review_qa")
@@ -249,12 +266,15 @@ def apply_claim_transitions(root: Path, transitions: list[dict[str, Any]]) -> No
         op = transition.get("op")
         claim_id = transition.get("claim_id")
         if op == "acquire":
+            task_id = str(transition.get("task_id") or "none")
+            if task_id != "none":
+                ensure_original_author(root, task_id)
             if any(claim.get("claim_id") == claim_id for claim in claims):
                 raise ApplyError(f"Claim already exists: {claim_id}")
             claims.append(
                 {
                     "claim_id": claim_id,
-                    "task_id": transition.get("task_id", "none"),
+                    "task_id": task_id,
                     "owner": transition.get("owner", "Codex"),
                     "status": "active",
                     "scope": transition.get("scope") or [],
@@ -303,6 +323,7 @@ def apply_turn(report: dict[str, Any], root: Path) -> dict[str, Any]:
     transitions = report.get("transitions") or {}
     task_transition = transitions.get("task_status")
     if isinstance(task_transition, dict):
+        ensure_original_author(root, str(report["task_id"]))
         set_task_status(root, str(report["task_id"]), str(task_transition["to"]))
     apply_review_qa_transition(root, report)
     apply_claim_transitions(root, transitions.get("claims") or [])

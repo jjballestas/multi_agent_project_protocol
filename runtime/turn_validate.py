@@ -20,23 +20,23 @@ try:
     from .context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from .eventlog import EventWriter
     from .review_qa import (
+        author_of_record,
         checks_with_signatures,
         expected_event,
         has_consecutive_failure,
         max_qa_cycles,
         qa_attempts_after_failure,
-        task_author,
     )
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter
     from review_qa import (
+        author_of_record,
         checks_with_signatures,
         expected_event,
         has_consecutive_failure,
         max_qa_cycles,
         qa_attempts_after_failure,
-        task_author,
     )
 
 
@@ -175,7 +175,7 @@ def validate_review_qa_semantics(report: dict[str, Any], state: dict[str, Any]) 
 
     task = tasks_by_id(state).get(report.get("task_id")) or {}
     actor = str(report.get("agent") or "")
-    author = task_author(task, payload)
+    author = author_of_record(task)
     checks = [item for item in payload.get("checks_failed") or [] if isinstance(item, dict)]
     signed_checks = checks_with_signatures(checks)
 

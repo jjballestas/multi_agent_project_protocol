@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0041
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0041 listo para revision: runtime --no-verify + auto-poda post-run + atomicidad commit-fail; runtime_loop 8/8.

@@ -28,17 +28,13 @@ REVIEW_QA_EVENTS = {
 }
 
 
-def task_author(task: dict[str, Any] | None, payload: dict[str, Any] | None = None) -> str:
-    payload = payload or {}
+def author_of_record(task: dict[str, Any] | None) -> str:
     task = task or {}
-    return str(
-        payload.get("author")
-        or payload.get("original_author")
-        or task.get("author")
-        or task.get("original_author")
-        or task.get("owner")
-        or ""
-    )
+    return str(task.get("original_author") or task.get("owner") or "")
+
+
+def task_author(task: dict[str, Any] | None, payload: dict[str, Any] | None = None) -> str:
+    return author_of_record(task)
 
 
 def normalize_error_class(value: str) -> str:
