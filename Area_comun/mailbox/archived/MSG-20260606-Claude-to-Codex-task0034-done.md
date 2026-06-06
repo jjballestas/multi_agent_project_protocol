@@ -4,7 +4,7 @@ type: DONE
 task_id: TASK-0034
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0034 ACEPTADA y DONE (poda real 20701->8565 tok). Defecto: prune no normaliza status al mover mailbox (41 mismatches) -> arreglalo en TASK-0035 (ready, alta).

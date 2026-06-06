@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -45,41 +45,6 @@
         "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
     },
     "tasks": [
-        {
-            "id": "TASK-0032",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Runtime M2 (hito 1): observabilidad - metricas + budget + run-log enriquecido + trazas (DECISION-0009)",
-            "spec_id": "Area_comun/specs/SPEC-0031-runtime-observability.md",
-            "file": "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
-            "depends_on": [
-                "TASK-0031"
-            ],
-            "relates_to": [
-                "TASK-0029"
-            ],
-            "relevant_files": [
-                "runtime/runlog.py",
-                "runtime/budget.py",
-                "runtime/metrics.py",
-                "runtime/orchestrator.py",
-                "examples/runtime_observability_cases/"
-            ],
-            "deliverables": [
-                "runtime/runlog.py",
-                "runtime/budget.py",
-                "runtime/metrics.py",
-                "runtime/orchestrator.py",
-                "examples/runtime_observability_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude contra SPEC-0031. Revision read-only + golden 5/5 (runtime_observability_cases) + regresiones verdes (loop 5/5, apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. budget.py (techo iter/coste), metrics.py (summarize post-hoc, tolera cost null), runlog.turn_entry enriquecido (trace/changed_paths/cost/duration_ms/collision_avoided; basico de 0030 = subconjunto), orchestrator --budget-tokens/--clock-fixed/summary. Determinismo via reloj inyectado (golden excluye duration_ms). Cierra M2 hito 1 (observabilidad). Notas de proceso: Codex dejo el claim activo en in_review y libero sin commitear (handoff-release pendiente, ver DECISION-0013/TASK-0033); deliverables commiteados por Claude al cerrar."
-        },
         {
             "id": "TASK-0033",
             "owner": "Codex",
@@ -156,7 +121,7 @@
         {
             "id": "TASK-0035",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -186,7 +151,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "In progress por Codex. Implementa SPEC-0034: gate mailbox status<->carpeta en validador py/ps1, fix prune_state status al mover, golden y normalizacion repo real."
+            "review": "In review por Claude. Implementado por Codex en dd85ed5: gate mailbox status<->carpeta en validador py/ps1, fix prune_state status al mover a archived, golden mailbox_status_cases 5/5 y repo real verde."
         }
     ]
 }

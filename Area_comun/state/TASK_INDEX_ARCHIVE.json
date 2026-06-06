@@ -970,6 +970,41 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0030. Revision read-only + golden 5/5 (runtime_loop_cases): --run --once => 1 turno + 1 commit + RUN-fixture-once.jsonl exacto; secuencia determinista con --max-iter N que corta en N; human_required => parada dura sin commit (worktree intacto); --plan sin regresion (read-only, enruta a review); runtime.enabled:false => --run aborta. Interfaz AgentAdapter (Protocol) vendor-neutral: cambiar replay->real (M2) no toca el loop. run-id inyectable (--run-id) + default determinista RUN-<sha256> (coordinado por mailbox antes de implementar). Regresiones M0/M1 verdes (apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. Cierra runtime M1 (DECISION-0009). Paridad .ps1 n/a (python). Reuso correcto de apply_gate_and_commit de TASK-0030."
+        },
+        {
+            "id": "TASK-0032",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Runtime M2 (hito 1): observabilidad - metricas + budget + run-log enriquecido + trazas (DECISION-0009)",
+            "spec_id": "Area_comun/specs/SPEC-0031-runtime-observability.md",
+            "file": "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+            "depends_on": [
+                "TASK-0031"
+            ],
+            "relates_to": [
+                "TASK-0029"
+            ],
+            "relevant_files": [
+                "runtime/runlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_observability_cases/"
+            ],
+            "deliverables": [
+                "runtime/runlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_observability_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0031. Revision read-only + golden 5/5 (runtime_observability_cases) + regresiones verdes (loop 5/5, apply 4/4, router 5/5, turn 4+3); validador valid; scan limpio. budget.py (techo iter/coste), metrics.py (summarize post-hoc, tolera cost null), runlog.turn_entry enriquecido (trace/changed_paths/cost/duration_ms/collision_avoided; basico de 0030 = subconjunto), orchestrator --budget-tokens/--clock-fixed/summary. Determinismo via reloj inyectado (golden excluye duration_ms). Cierra M2 hito 1 (observabilidad). Notas de proceso: Codex dejo el claim activo en in_review y libero sin commitear (handoff-release pendiente, ver DECISION-0013/TASK-0033); deliverables commiteados por Claude al cerrar."
         }
     ]
 }

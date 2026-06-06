@@ -1600,6 +1600,77 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: ACK de cola TASK-0035 movido a answered. No reclama implementacion hasta ratificacion de TASK-0034 y registro/estado listo."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0035-codex",
+            "task_id": "TASK-0035",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0034",
+                "Area_comun/state/TASK_INDEX.json#TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
+                "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
+                "Area_comun/specs/SPEC-0034-mailbox-status-folder-gate.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/prune_state.py",
+                ".github/workflows/validate.yml",
+                "examples/mailbox_status_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0034-done.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0034-done.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0035-in-review.md",
+                "Area_comun/mailbox/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado al pasar TASK-0035 a in_review. WIP commiteado antes de soltar: dd85ed5 feat(protocol): enforce mailbox status folders. Handoff: Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-mailbox-hygiene-fix-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Fix de datos AHORA (no solo encolar): mover MSG task0034-in-review a answered + normalizar status<->carpeta de los 41 mensajes que la poda dejo desfasados. Codex idle verificado (0 claims). El GATE + fix prune durable siguen en TASK-0035."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0034-close-claude",
+            "task_id": "TASK-0034",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0034",
+                "Area_comun/state/TASK_INDEX.json#TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0034",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0035",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0034-codex-poda-sistematica.md",
+                "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
+                "Area_comun/specs/SPEC-0034-mailbox-status-folder-gate.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0034-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0034-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0034-done.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre TASK-0034 (poda real 20701->8565, ACEPTADA con defecto documentado: prune no normaliza status al mover mailbox, 41 mismatches) + registro/ampliacion TASK-0035 (gate + normalizar + fix prune). Estado libre verificado."
         }
     ]
 }
