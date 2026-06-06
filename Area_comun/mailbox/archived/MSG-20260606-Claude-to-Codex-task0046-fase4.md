@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0046
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Encolada TASK-0046 (Fase 4 N-agente): maquina de estados Review/QA + defect logs (D-9) + corte de bucles por failure_signature canonica (A8) + escalado architect/max_qa_cycles. Aditivo, fallback N=2.
@@ -16,6 +16,9 @@ context_refs:
 ---
 
 # TASK-0046 (Fase 4 N-agente) encolada
+
+Respuesta Codex 2026-06-06: implementada y entregada a review en
+`Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md`.
 
 Codex, Fase 3 aceptada y DONE. Sigue la **Fase 4**: maquina de estados Review/QA.
 

@@ -11,10 +11,12 @@ from typing import Any
 
 try:
     from .gate import run_gate
+    from .review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
     from gate import run_gate
+    from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
     from turn_validate import validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
@@ -63,6 +65,84 @@ def set_task_status(root: Path, task_id: str, status: str) -> None:
             task["status"] = status
             break
     write_json(project_path, project)
+
+
+def increment_int(task: dict[str, Any], key: str, amount: int = 1) -> int:
+    try:
+        value = int(task.get(key) or 0)
+    except (TypeError, ValueError):
+        value = 0
+    value += amount
+    task[key] = value
+    return value
+
+
+def apply_review_qa_transition(root: Path, report: dict[str, Any]) -> None:
+    transitions = report.get("transitions") or {}
+    payload = transitions.get("review_qa")
+    if not isinstance(payload, dict):
+        return
+
+    index_path = root / "Area_comun" / "state" / "TASK_INDEX.json"
+    index = read_json(index_path)
+    task: dict[str, Any] | None = None
+    for item in index.get("tasks") or []:
+        if item.get("id") == report.get("task_id"):
+            task = item
+            break
+    if task is None:
+        raise ApplyError(f"Task not found in hot TASK_INDEX: {report.get('task_id')}")
+
+    event = str(payload.get("event") or "")
+    transition = transitions.get("task_status") or {}
+    from_status = str(transition.get("from") or "")
+    to_status = str(transition.get("to") or "")
+    attempt_id = str(payload.get("attempt_id") or report.get("attempt_id") or "attempt-unknown")
+    actor = str(report.get("agent") or "")
+
+    if event in {"reject_review", "approve_review"}:
+        increment_int(task, "review_attempts")
+    if event == "fail_qa":
+        task["qa_attempts"] = qa_attempts_after_failure(task)
+
+    if event in {"reject_review", "fail_qa"}:
+        checks = checks_with_signatures([item for item in payload.get("checks_failed") or [] if isinstance(item, dict)])
+        defects = task.setdefault("defect_log", [])
+        if not isinstance(defects, list):
+            defects = []
+            task["defect_log"] = defects
+        loop_cut = event == "fail_qa" and has_consecutive_failure(task, checks)
+        cycle_limit = max_qa_cycles(read_json(root / "protocol.config.json"))
+        escalation_reason = None
+        if event == "fail_qa" and loop_cut:
+            escalation_reason = "loop_cut"
+        elif event == "fail_qa" and int(task.get("qa_attempts") or 0) > cycle_limit:
+            escalation_reason = "max_qa_cycles"
+        defect = {
+            "event": event,
+            "attempt_id": attempt_id,
+            "actor": actor,
+            "from": from_status,
+            "to": to_status,
+            "checks_failed": checks,
+        }
+        if escalation_reason:
+            defect["escalation_reason"] = escalation_reason
+            task["quality_escalation_reason"] = escalation_reason
+        defects.append(defect)
+
+    if event == "pass_qa":
+        task["qa_evidence"] = list(payload.get("evidence") or [])
+        task["qa_passed_by"] = actor
+    elif event == "approve_review":
+        task["review_approved_by"] = actor
+    elif event == "assign_fix":
+        increment_int(task, "attempt")
+        assignee = str(payload.get("assignee") or task_author(task, payload) or task.get("owner") or "")
+        if assignee:
+            task["assigned_to"] = assignee
+
+    write_json(index_path, index)
 
 
 def apply_claim_transitions(root: Path, transitions: list[dict[str, Any]]) -> None:
@@ -128,6 +208,7 @@ def apply_turn(report: dict[str, Any], root: Path) -> dict[str, Any]:
     task_transition = transitions.get("task_status")
     if isinstance(task_transition, dict):
         set_task_status(root, str(report["task_id"]), str(task_transition["to"]))
+    apply_review_qa_transition(root, report)
     apply_claim_transitions(root, transitions.get("claims") or [])
     apply_mailbox_transitions(root, transitions.get("mailbox") or [])
     return {"applied": True}

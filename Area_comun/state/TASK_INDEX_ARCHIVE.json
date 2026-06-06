@@ -1293,6 +1293,35 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Probe en vivo los 3 niveles de load_agent_registry (default triada: Claude=reviewer/Codex=implementer/Codex!=orchestrator; agent_roles sintetiza; agent_registry explicito con 3er agente Gemini=implementer + disabled no concede capacidad). turn_validate semantico: no-registrado/disabled/sin-capacidad => error; conserva claim.owner==agent; required_capability_for_report mapea transicion->capacidad (in_review->done=reviewer; ->in_review/done/blocked=implementer; ->ready/claimed/in_progress=orchestrator). schema agent enum->string minLength 1. Suite completa verde (agent_registry 4/4, turn schema 5/5 + semantic 5/5 incl. 3er agente valido + no-registrado rojo, router 5/5, apply 4/4, loop 8/8, obs 5/5, llm 6/6) + validador/encoding/neutralidad. Fallback N=2 byte-equivalente (fixtures sin migrar pasan). Seam de firma/idempotencia listo para Fase 2. Codex aplico handoff-release."
+        },
+        {
+            "id": "TASK-0044",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "N-agente Fase 2 (SPEC-0038 sec.13): event log append-only (seq writer-only + schema version + append atomico) + aggregate_version/idempotency_key por-aggregate + leases/fencing por-aggregate + snapshot/compactacion + invariante validador hot==log+snapshot + negative replay test (gates A3/A5/A6/A7)",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0044-codex-n-agent-fase2-eventlog.md",
+            "depends_on": [
+                "TASK-0043"
+            ],
+            "relates_to": [
+                "TASK-0042"
+            ],
+            "relevant_files": [
+                "runtime/",
+                "examples/runtime_eventlog_cases/"
+            ],
+            "deliverables": [
+                "runtime/",
+                "examples/runtime_eventlog_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0044-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Probe en vivo runtime/eventlog.py: (1) idempotencia tupla actor/task/transition/attempt/fencing => duplicado devuelve mismo seq (deduped), TAMBIEN cruzando compactacion (all_events lee archives+live); (2) fencing por-aggregate => fencing obsoleto => state.stale_fencing_rejected applied=false sin bump; (3) NEGATIVE REPLAY (A6 critico) => reconstruye sin invocar callback prohibido; (4) assert_snapshot_matches pasa si coincide y DETECTA mismatch de up_to_seq; (5) seq writer-only monotonico; append torn-write safe. turn_schema admite attempt_id/idempotency_key/aggregate_version/fencing_token opcionales (aditivo); turn_validate los valida si vienen. Suite 47/47 (eventlog 5/5 + resto) + validador/encoding/neutralidad. Fallback N=2 intacto. FOLLOW-UP (nota de Codex): cablear assert_snapshot_matches al validador global py/ps1 como hard-gate repo-wide cuando el event log sea el writer vivo. Codex aplico handoff-release."
         }
     ]
 }

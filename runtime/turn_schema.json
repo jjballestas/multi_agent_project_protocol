@@ -67,8 +67,79 @@
           "additionalProperties": false,
           "required": ["from", "to"],
           "properties": {
-            "from": { "type": "string", "enum": ["proposed", "ready", "claimed", "in_progress", "in_review", "done", "blocked", "cancelled"] },
-            "to": { "type": "string", "enum": ["proposed", "ready", "claimed", "in_progress", "in_review", "done", "blocked", "cancelled"] }
+            "from": {
+              "type": "string",
+              "enum": [
+                "proposed",
+                "ready",
+                "claimed",
+                "in_progress",
+                "in_review",
+                "changes_requested",
+                "review_approved",
+                "qa_pending",
+                "qa_failed",
+                "architect_review",
+                "done",
+                "blocked",
+                "cancelled"
+              ]
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "proposed",
+                "ready",
+                "claimed",
+                "in_progress",
+                "in_review",
+                "changes_requested",
+                "review_approved",
+                "qa_pending",
+                "qa_failed",
+                "architect_review",
+                "done",
+                "blocked",
+                "cancelled"
+              ]
+            }
+          }
+        },
+        "review_qa": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["event"],
+          "properties": {
+            "event": {
+              "type": "string",
+              "enum": ["reject_review", "approve_review", "fail_qa", "pass_qa", "assign_fix"]
+            },
+            "author": { "type": "string" },
+            "original_author": { "type": "string" },
+            "reviewer": { "type": "string" },
+            "qa": { "type": "string" },
+            "attempt_id": { "type": "string" },
+            "assignee": { "type": "string" },
+            "evidence": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "checks_failed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["check_id", "error_class", "artifact_path"],
+                "properties": {
+                  "check_id": { "type": "string", "minLength": 1 },
+                  "error_class": { "type": "string", "minLength": 1 },
+                  "artifact_path": { "type": "string", "minLength": 1 },
+                  "log": { "type": "string" },
+                  "failure_signature": { "type": "string" }
+                }
+              }
+            },
+            "requires_human_decision": { "type": "boolean" }
           }
         },
         "claims": {

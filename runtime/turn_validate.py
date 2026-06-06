@@ -19,9 +19,25 @@ ROW_SCOPED_LEDGER_PATHS = {
 try:
     from .context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from .eventlog import EventWriter
+    from .review_qa import (
+        checks_with_signatures,
+        expected_event,
+        has_consecutive_failure,
+        max_qa_cycles,
+        qa_attempts_after_failure,
+        task_author,
+    )
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter
+    from review_qa import (
+        checks_with_signatures,
+        expected_event,
+        has_consecutive_failure,
+        max_qa_cycles,
+        qa_attempts_after_failure,
+        task_author,
+    )
 
 
 def load_report(path: Path) -> dict[str, Any]:
@@ -78,8 +94,14 @@ def required_capability_for_report(report: dict[str, Any]) -> str | None:
     if isinstance(transition, dict):
         from_status = transition.get("from")
         to_status = transition.get("to")
+        if from_status == "in_review" and to_status in {"changes_requested", "review_approved", "qa_pending"}:
+            return "reviewer"
         if from_status == "in_review" and to_status == "done":
             return "reviewer"
+        if from_status == "qa_pending" and to_status in {"qa_failed", "architect_review", "done"}:
+            return "qa"
+        if from_status in {"qa_failed", "changes_requested"} and to_status == "claimed":
+            return "orchestrator"
         if to_status in {"in_review", "done", "blocked"}:
             return "implementer"
         if to_status in {"ready", "claimed", "in_progress"}:
@@ -128,6 +150,67 @@ def validate_concurrency_semantics(report: dict[str, Any], root: Path) -> list[s
     return errors
 
 
+def validate_review_qa_semantics(report: dict[str, Any], state: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    transitions = report.get("transitions") or {}
+    transition = transitions.get("task_status")
+    if not isinstance(transition, dict):
+        return errors
+
+    from_status = str(transition.get("from") or "")
+    to_status = str(transition.get("to") or "")
+    expected = expected_event(from_status, to_status)
+    payload = transitions.get("review_qa")
+    if expected is None:
+        if from_status == "qa_pending" and to_status == "done":
+            errors.append("semantic: pass_qa requires Review/QA payload and evidence")
+        return errors
+    if not isinstance(payload, dict):
+        return [f"semantic: Review/QA transition {from_status}->{to_status} requires transitions.review_qa"]
+    if payload.get("event") != expected:
+        errors.append(
+            "semantic: Review/QA event mismatch "
+            f"for {from_status}->{to_status}: expected {expected}, found {payload.get('event')}"
+        )
+
+    task = tasks_by_id(state).get(report.get("task_id")) or {}
+    actor = str(report.get("agent") or "")
+    author = task_author(task, payload)
+    checks = [item for item in payload.get("checks_failed") or [] if isinstance(item, dict)]
+    signed_checks = checks_with_signatures(checks)
+
+    if expected in {"reject_review", "approve_review"}:
+        reviewer = str(payload.get("reviewer") or actor)
+        if reviewer != actor:
+            errors.append(f"semantic: reviewer payload must match report agent: {reviewer} != {actor}")
+        if actor == author:
+            errors.append("semantic: reviewer actor is task author")
+    if expected in {"fail_qa", "pass_qa"}:
+        qa = str(payload.get("qa") or actor)
+        if qa != actor:
+            errors.append(f"semantic: qa payload must match report agent: {qa} != {actor}")
+        if actor == author:
+            errors.append("semantic: qa actor is task author")
+
+    if expected in {"reject_review", "fail_qa"} and not signed_checks:
+        errors.append(f"semantic: {expected} requires checks_failed")
+    if expected == "pass_qa" and not [item for item in payload.get("evidence") or [] if str(item).strip()]:
+        errors.append("semantic: pass_qa requires evidence")
+
+    if expected == "fail_qa" and signed_checks:
+        attempts_after = qa_attempts_after_failure(task)
+        cycle_limit = max_qa_cycles(state.get("config") or {})
+        loop_cut = has_consecutive_failure(task, signed_checks)
+        must_escalate = loop_cut or attempts_after > cycle_limit
+        if must_escalate and to_status != "architect_review":
+            reason = "loop cut" if loop_cut else "max_qa_cycles"
+            errors.append(f"semantic: fail_qa must transition to architect_review after {reason}")
+        if not must_escalate and to_status == "architect_review":
+            errors.append("semantic: architect_review requires loop cut or max_qa_cycles exhaustion")
+
+    return errors
+
+
 def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads((root / "runtime" / "turn_schema.json").read_text(encoding="utf-8-sig"))
@@ -141,6 +224,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     state = load_state(root)
     errors.extend(validate_agent_semantics(report, root))
     errors.extend(validate_concurrency_semantics(report, root))
+    errors.extend(validate_review_qa_semantics(report, state))
     claims = [
         claim
         for claim in active_claims(state)

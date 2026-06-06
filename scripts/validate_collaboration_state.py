@@ -16,7 +16,7 @@ from typing import Any
 
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
-REVIEWED_TASK_STATUSES = {"in_review", "done"}
+REVIEWED_TASK_STATUSES = {"in_review", "review_approved", "qa_pending", "architect_review", "done"}
 IMPLEMENTABLE_TASK_TYPES = {
     "implementation",
     "refactor",
@@ -26,7 +26,18 @@ IMPLEMENTABLE_TASK_TYPES = {
     "release",
 }
 LIGHTWEIGHT_TASK_TYPES = {"discovery", "analysis", "review", "documentation", "triage"}
-IMPLEMENTABLE_SDD_STATUSES = {"ready", "claimed", "in_progress", "in_review", "done"}
+IMPLEMENTABLE_SDD_STATUSES = {
+    "ready",
+    "claimed",
+    "in_progress",
+    "in_review",
+    "changes_requested",
+    "review_approved",
+    "qa_pending",
+    "qa_failed",
+    "architect_review",
+    "done",
+}
 FULL_SDD_FIELDS = [
     "spec_id",
     "execution_pipeline",

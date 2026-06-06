@@ -44,6 +44,13 @@
     "cooldown_penalty": 1,
     "capability_affinity": 1
   },
+  "quality_policy": {
+    "max_review_cycles": 3,
+    "max_qa_cycles": 3,
+    "escalate_to_architect_before_human": true,
+    "allow_self_review": false,
+    "allow_self_qa": false
+  },
   "domain_neutrality": {
     "enabled": true,
     "denylist": [],

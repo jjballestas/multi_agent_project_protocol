@@ -7,7 +7,8 @@ $ErrorActionPreference = "Stop"
 
 $script:ImplementableTaskTypes = @("implementation", "refactor", "integration", "migration", "security", "release")
 $script:LightweightTaskTypes = @("discovery", "analysis", "review", "documentation", "triage")
-$script:ImplementableSddStatuses = @("ready", "claimed", "in_progress", "in_review", "done")
+$script:ImplementableSddStatuses = @("ready", "claimed", "in_progress", "in_review", "changes_requested", "review_approved", "qa_pending", "qa_failed", "architect_review", "done")
+$script:ReviewedTaskStatuses = @("in_review", "review_approved", "qa_pending", "architect_review", "done")
 $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
 $script:RowScopedLedgerSelectors = @{
@@ -665,7 +666,7 @@ if ($index -and $index.tasks) {
             Fail "Task $($task.id) status mismatch: index='$($task.status)' file='$mdStatus'"
         }
 
-        if ($task.status -in @("in_review", "done")) {
+        if ($script:ReviewedTaskStatuses -contains $task.status) {
             foreach ($deliverable in @($task.deliverables)) {
                 if (-not $deliverable) {
                     continue
@@ -737,7 +738,7 @@ if ($claims -and $claims.claims) {
 if ($index -and $index.tasks -and $claims -and $claims.claims) {
     $reviewedTasks = @{}
     foreach ($task in @($index.tasks)) {
-        if ($task.status -in @("in_review", "done")) {
+        if ($script:ReviewedTaskStatuses -contains $task.status) {
             $reviewedTasks[[string]$task.id] = $task
         }
     }

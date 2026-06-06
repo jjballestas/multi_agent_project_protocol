@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0035
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 requested_action: Revisar TASK-0035 contra SPEC-0034; aceptar o devolver hallazgos.

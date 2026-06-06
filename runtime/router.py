@@ -45,6 +45,10 @@ def select_next(state: dict[str, Any]) -> dict[str, Any] | None:
     if qa:
         return qa
 
+    fix = select_fix_task(tasks, state)
+    if fix:
+        return fix
+
     ready = select_ready_task(state, tasks)
     if ready:
         return ready
@@ -108,6 +112,14 @@ def select_qa(tasks: dict[str, dict[str, Any]], state: dict[str, Any]) -> dict[s
     return select_agent(task, "qa", state, action="qa")
 
 
+def select_fix_task(tasks: dict[str, dict[str, Any]], state: dict[str, Any]) -> dict[str, Any] | None:
+    candidates = [task for task in tasks.values() if task.get("status") in {"changes_requested", "qa_failed"}]
+    if not candidates:
+        return None
+    task = sorted(candidates, key=lambda item: (-priority_value(item), str(item.get("id"))))[0]
+    return select_agent(task, "assign_fix", state, action="assign_fix")
+
+
 def select_ready_task(state: dict[str, Any], tasks: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
     candidates = []
     for task in tasks.values():
@@ -150,6 +162,8 @@ def required_capability(task: dict[str, Any], transition: str) -> str | None:
         return "reviewer"
     if transition == "qa":
         return "qa"
+    if transition == "assign_fix":
+        return "implementer"
     return None
 
 
@@ -397,6 +411,9 @@ def select_agent(task: dict[str, Any], transition: str, state: dict[str, Any], *
         }
 
     selected = candidates[0]
+    if transition == "assign_fix":
+        author = task_author(task)
+        selected = next((candidate for candidate in candidates if candidate["agent"] == author), selected)
     owner = selected["agent"]
     return {
         "action": selected_action,

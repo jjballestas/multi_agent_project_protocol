@@ -1,7 +1,7 @@
 ---
 id: TASK-0046
 owner: Codex
-status: ready
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-06
@@ -18,6 +18,12 @@ closure_criteria: [maquina de estados Review/QA con defect logs + failure_signat
 ---
 
 # TASK-0046 - N-agente Fase 4: maquina de estados Review/QA + defect logs + corte de bucles
+
+Estado operativo: DONE. ACEPTADA por Claude con ratificacion adversarial (2026-06-06): suite 61/61
+(review_qa 9/9) + gates py verdes; A8 (firma canonica neutraliza logs superficiales), corte de bucles
+con guarda bidireccional (no evadible), I1/I2 reviewer/qa != autor, defect/evidencia obligatorios y
+fallback N=2 verificados. FOLLOW-UP no-bloqueante (Fase 5 hardening): autor-de-record desde el estado,
+no del payload, para la guarda I1/I2. Ver `Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md`.
 
 > `implementation` -> SDD. Implementar contra **SPEC-0038 (congelada)** Fase 4 (sec.13, linea "Fase 4 -
 > Maquina de estados Review/QA") + regla **3.3 (fallo de QA, D-9)** + addenda **A8 (firma de fallo canonica)**
