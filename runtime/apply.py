@@ -142,8 +142,13 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
     apply_turn(report, root)
     gate = run_gate(root)
     if gate["green"]:
-        commit = commit_turn(root, report["commit_message"], report.get("changed_paths") or [], allow_policy=allow_policy)
-        return {"green": True, "commit": commit, "gate": gate}
+        try:
+            commit = commit_turn(root, report["commit_message"], report.get("changed_paths") or [], allow_policy=allow_policy)
+            return {"green": True, "commit": commit, "gate": gate}
+        except VcsError as exc:
+            discard_worktree_changes(root)
+            block_task(root, str(report["task_id"]))
+            return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
     discard_worktree_changes(root)
     block_task(root, str(report["task_id"]))
     return {"green": False, "reverted": True, "blocked": True, "gate": gate}

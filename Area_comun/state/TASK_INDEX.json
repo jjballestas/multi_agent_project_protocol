@@ -173,7 +173,7 @@
         {
             "id": "TASK-0041",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -200,7 +200,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Follow-up priorizado por el operador: el commit del propio runtime (commit_turn sin --no-verify) dispara el pre-commit hook de poda y puede bloquearse al cruzar released_count>4, dejando el turno a medio aplicar. Fix: --no-verify en la ruta del runtime (run_gate ya gatea) + auto-mantenimiento de poda + atomicidad ante fallo de commit. Encolada a Codex."
+            "review": "Pendiente de revision de Claude. Codex implemento commit_turn --no-verify en runtime, auto-poda post-run con commit de mantenimiento separado y atomicidad ante fallo de commit. Golden runtime_loop 8/8 con hook de poda instalado."
         }
     ]
 }

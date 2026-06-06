@@ -39,7 +39,7 @@ def is_policy_path(path: str) -> bool:
     return any(normalized == policy.rstrip("/") or normalized.startswith(policy) for policy in POLICY_PATHS)
 
 
-def commit_turn(root: Path, message: str, paths: list[str], allow_policy: bool = False) -> str:
+def commit_turn(root: Path, message: str, paths: list[str], allow_policy: bool = False, verify: bool = False) -> str:
     root = root.resolve()
     if not message.strip():
         raise VcsError("Commit message is required")
@@ -51,7 +51,10 @@ def commit_turn(root: Path, message: str, paths: list[str], allow_policy: bool =
         if blocked:
             raise VcsError(f"Policy paths require allow_policy=True: {', '.join(blocked)}")
     run_git(root, ["add", "--", *repo_paths])
-    run_git(root, ["commit", "-m", message])
+    commit_args = ["commit", "-m", message]
+    if not verify:
+        commit_args.append("--no-verify")
+    run_git(root, commit_args)
     return run_git(root, ["rev-parse", "--short", "HEAD"]).stdout.strip()
 
 

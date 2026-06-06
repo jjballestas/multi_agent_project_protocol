@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -25,6 +26,7 @@ try:
     from .gate import run_gate
     from .runlog import RunLog, deterministic_run_id, turn_entry
     from .turn_validate import validate_turn
+    from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
     from context import load_state
     from router import select_next
@@ -38,6 +40,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from budget import Budget
     from metrics import summarize
     from runlog import turn_entry
+    from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
@@ -136,6 +139,27 @@ def dirty_worktree_paths(root: Path) -> list[str]:
     return sorted(paths)
 
 
+def dirty_tracked_worktree_paths(root: Path) -> list[str]:
+    completed = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=no"],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        return []
+    paths: list[str] = []
+    for line in completed.stdout.splitlines():
+        if not line.strip():
+            continue
+        payload = line[3:].strip()
+        if " -> " in payload:
+            payload = payload.split(" -> ", 1)[1]
+        paths.append(payload.replace("\\", "/"))
+    return sorted(paths)
+
+
 def unreported_dirty_paths(root: Path, report: dict[str, Any], *, baseline_dirty: set[str]) -> list[str]:
     declared = {normalize_report_path(str(path)) for path in report.get("changed_paths") or []}
     current = set(dirty_worktree_paths(root))
@@ -181,6 +205,48 @@ def adapter_for_turn(
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+
+
+def auto_prune_if_due(root: Path) -> dict[str, Any]:
+    script = root / "scripts" / "prune_state.py"
+    if not script.exists():
+        return {"checked": False, "reason": "prune_state.py not found"}
+    pre_dirty_all = set(dirty_worktree_paths(root))
+    pre_dirty = dirty_tracked_worktree_paths(root)
+    if pre_dirty:
+        return {"checked": False, "reason": "worktree dirty before prune", "dirty_paths": pre_dirty}
+
+    check = subprocess.run(
+        [sys.executable, str(script), "--root", str(root), "--check"],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if check.returncode == 0:
+        return {"checked": True, "due": False, "stdout": check.stdout}
+    if check.returncode != 1:
+        return {"checked": True, "due": None, "returncode": check.returncode, "stdout": check.stdout, "stderr": check.stderr}
+
+    apply = subprocess.run(
+        [sys.executable, str(script), "--root", str(root), "--apply"],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if apply.returncode != 0:
+        return {"checked": True, "due": True, "applied": False, "returncode": apply.returncode, "stdout": apply.stdout, "stderr": apply.stderr}
+
+    changed = sorted(set(dirty_worktree_paths(root)) - pre_dirty_all)
+    if not changed:
+        return {"checked": True, "due": True, "applied": True, "commit": None, "stdout": apply.stdout}
+    try:
+        commit = commit_turn(root, "chore(runtime): prune state", changed, verify=False)
+        return {"checked": True, "due": True, "applied": True, "commit": commit, "changed_paths": changed, "stdout": apply.stdout}
+    except VcsError as exc:
+        discard_worktree_changes(root)
+        return {"checked": True, "due": True, "applied": True, "commit": None, "error": str(exc)}
 
 
 def run_loop(
@@ -348,6 +414,7 @@ def run_loop(
             turns.append(budget_entry)
             break
 
+    maintenance = auto_prune_if_due(root)
     summary = summarize(runlog.path)
     summary_path = runlog.path.with_suffix(".summary.json")
     write_json(summary_path, summary)
@@ -357,6 +424,7 @@ def run_loop(
         "run_log": str(runlog.path),
         "summary": str(summary_path),
         "metrics": summary,
+        "maintenance": maintenance,
         "turns": turns,
     }
 

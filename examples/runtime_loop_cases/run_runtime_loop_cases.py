@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -36,7 +37,7 @@ def task(task_id: str, status: str = "ready") -> dict:
     }
 
 
-def claim(task_id: str) -> dict:
+def claim(task_id: str, *, extra_scope: list[str] | None = None) -> dict:
     return {
         "claim_id": f"CLAIM-{task_id}-codex",
         "task_id": task_id,
@@ -47,6 +48,7 @@ def claim(task_id: str) -> dict:
             f"Area_comun/state/TASK_INDEX.json#{task_id}",
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
             "Area_comun/state/CLAIMS.json",
+            *(extra_scope or []),
         ],
         "started_at": "2026-06-06",
         "updated_at": "2026-06-06",
@@ -55,7 +57,29 @@ def claim(task_id: str) -> dict:
     }
 
 
-def build_fixture(root: Path, *, enabled: bool = True, task_ids: list[str] | None = None) -> None:
+def released_claim(index: int) -> dict:
+    return {
+        "claim_id": f"CLAIM-released-{index:04d}",
+        "task_id": "none",
+        "owner": "Codex",
+        "status": "released",
+        "scope": ["Area_comun/state/CLAIMS.json"],
+        "started_at": "2026-06-06",
+        "updated_at": "2026-06-06",
+        "expires_at": "2026-06-07",
+        "notes": "released fixture",
+    }
+
+
+def build_fixture(
+    root: Path,
+    *,
+    enabled: bool = True,
+    task_ids: list[str] | None = None,
+    released_claims: int = 0,
+    extra_claim_scope: list[str] | None = None,
+    with_prune_scripts: bool = False,
+) -> None:
     task_ids = task_ids or ["TASK-9000"]
     tasks = [task(task_id) for task_id in task_ids]
     write_json(
@@ -63,6 +87,15 @@ def build_fixture(root: Path, *, enabled: bool = True, task_ids: list[str] | Non
         {
             "schema_version": "1.0",
             "runtime": {"enabled": enabled, "entrypoint": "runtime/orchestrator.py"},
+            "maintenance": {
+                "enabled": True,
+                "cold_start_tokens_hard": 20000,
+                "done_ratio_hard": 85,
+                "released_ratio_hard": 90,
+                "recent_done_tasks": 2,
+                "recent_released_claims": 4,
+                "mailbox_keep_recent": 8,
+            },
             "domain_neutrality": {
                 "enabled": True,
                 "denylist": [],
@@ -80,7 +113,11 @@ def build_fixture(root: Path, *, enabled: bool = True, task_ids: list[str] | Non
         },
     )
     write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": tasks})
-    write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": [claim(item["id"]) for item in tasks]})
+    claims = [claim(item["id"], extra_scope=extra_claim_scope) for item in tasks]
+    claims.extend(released_claim(index) for index in range(1, released_claims + 1))
+    write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": claims})
+    write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
     for item in tasks:
         task_path = root / item["file"]
         task_path.parent.mkdir(parents=True, exist_ok=True)
@@ -93,11 +130,31 @@ def build_fixture(root: Path, *, enabled: bool = True, task_ids: list[str] | Non
     schema_target = root / "runtime/turn_schema.json"
     schema_target.parent.mkdir(parents=True, exist_ok=True)
     schema_target.write_text((ROOT / "runtime/turn_schema.json").read_text(encoding="utf-8-sig"), encoding="utf-8")
+    if with_prune_scripts:
+        scripts = root / "scripts"
+        scripts.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "scripts/prune_state.py", scripts / "prune_state.py")
+        shutil.copy2(ROOT / "scripts/measure_context_cost.py", scripts / "measure_context_cost.py")
     run(["git", "init"], root)
     run(["git", "config", "user.email", "runtime@example.invalid"], root)
     run(["git", "config", "user.name", "Runtime Test"], root)
     run(["git", "add", "."], root)
     run(["git", "commit", "-m", "fixture baseline"], root)
+
+
+def install_prune_hook(root: Path) -> None:
+    hook = root / ".git/hooks/pre-commit"
+    hook.write_text(
+        "\n".join(
+            [
+                "#!/usr/bin/env python",
+                "import subprocess",
+                "import sys",
+                "raise SystemExit(subprocess.run([sys.executable, 'scripts/prune_state.py', '--root', '.', '--check']).returncode)",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def turn_report(task_id: str, *, outcome: str = "done", to_status: str = "done") -> dict:
@@ -123,6 +180,13 @@ def turn_report(task_id: str, *, outcome: str = "done", to_status: str = "done")
     }
 
 
+def policy_path_report(task_id: str) -> dict:
+    report = turn_report(task_id)
+    report["changed_paths"] = [*report["changed_paths"], "AGENTS.md"]
+    report["commit_message"] = f"test(runtime): policy fail {task_id}"
+    return report
+
+
 def human_report(task_id: str) -> dict:
     report = turn_report(task_id, outcome="human_required", to_status="blocked")
     report["changed_paths"] = []
@@ -138,6 +202,10 @@ def git_count(root: Path) -> int:
 
 def git_dirty(root: Path) -> str:
     return run(["git", "status", "--short"], root).stdout.strip()
+
+
+def task_status(root: Path) -> str:
+    return json.loads((root / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8-sig"))["tasks"][0]["status"]
 
 
 def write_reports(root: Path, reports: list[dict]) -> Path:
@@ -228,6 +296,55 @@ def case_enabled_false_aborts_run() -> None:
         assert git_count(fixture) == before
 
 
+def case_runtime_commit_bypasses_prune_hook_and_auto_prunes() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-prune-hook-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, released_claims=4, with_prune_scripts=True)
+        install_prune_hook(fixture)
+        report_dir = write_reports(fixture, [turn_report("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(fixture, ["--run", "--once", "--run-id", "RUN-prune-hook", "--replay-report", str(report_dir)])
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 2
+        assert result["maintenance"]["due"] is True
+        assert result["maintenance"]["commit"]
+        assert run([sys.executable, "scripts/prune_state.py", "--root", ".", "--check"], fixture, check=False).returncode == 0
+        claims = json.loads((fixture / "Area_comun/state/CLAIMS.json").read_text(encoding="utf-8-sig"))["claims"]
+        assert len([item for item in claims if item["status"] == "released"]) <= 4
+
+
+def case_manual_commit_still_uses_prune_hook() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-manual-hook-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, released_claims=10, with_prune_scripts=True)
+        install_prune_hook(fixture)
+        (fixture / "manual.txt").write_text("manual\n", encoding="utf-8")
+        run(["git", "add", "manual.txt"], fixture)
+        completed = run(["git", "commit", "-m", "manual should be gated"], fixture, check=False)
+        assert completed.returncode != 0
+        assert "PRUNE DUE" in completed.stderr
+
+
+def case_commit_failure_discards_half_applied_turn_and_blocks() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-commit-fail-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, extra_claim_scope=["AGENTS.md"])
+        (fixture / "AGENTS.md").write_text("# Fixture policy\n", encoding="utf-8")
+        run(["git", "add", "AGENTS.md"], fixture)
+        run(["git", "commit", "-m", "add policy fixture"], fixture)
+        report_dir = write_reports(fixture, [policy_path_report("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(fixture, ["--run", "--once", "--replay-report", str(report_dir)])
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        assert result["turns"][0]["reverted"] is True
+        assert task_status(fixture) == "blocked"
+        claims = json.loads((fixture / "Area_comun/state/CLAIMS.json").read_text(encoding="utf-8-sig"))["claims"]
+        assert claims[0]["status"] == "active"
+
+
 def main() -> int:
     cases = [
         case_once_commits_one_turn,
@@ -235,6 +352,9 @@ def main() -> int:
         case_human_required_stops_without_commit,
         case_plan_is_read_only,
         case_enabled_false_aborts_run,
+        case_runtime_commit_bypasses_prune_hook_and_auto_prunes,
+        case_manual_commit_still_uses_prune_hook,
+        case_commit_failure_discards_half_applied_turn_and_blocks,
     ]
     failures = []
     for case in cases:

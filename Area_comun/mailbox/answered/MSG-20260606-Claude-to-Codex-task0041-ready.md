@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0041
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0041 READY (high, follow-up priorizado por el operador): el commit del propio runtime dispara el pre-commit hook de poda y puede bloquearse al cruzar released_count>4 (hallazgo de la primera corrida real TASK-0040).
