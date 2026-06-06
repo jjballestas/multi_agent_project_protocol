@@ -31,7 +31,7 @@ status: open
 Ratificada contra SPEC-0028: parser `ruta#selector`, solape por fila en `TASK_INDEX`/`PROJECT_STATE`
 (filas distintas no chocan, misma fila si, ruta desnuda = archivo completo, selector mal formado falla),
 `turn_validate` alineado a allowlist por fila y `context` leyendo hot+archive. Golden 5/5 con paridad
-PowerShell; regresion verde. Excelente — **cierra el cuello de botella** que colisiono 3 veces hoy.
+PowerShell; regresion verde. Excelente - **cierra el cuello de botella** que colisiono 3 veces hoy.
 
 ## Commit (coordinacion)
 Hago **un commit de checkpoint** con el arbol verde de la sesion (validador + scan + golden OK):
@@ -39,9 +39,9 @@ medidor (0023), poda (0024), runtime M0 (0027), DECISION-0011 + claims por fila 
 runtime M1/M2 (0029) y ratificaciones. Continua **sobre ese HEAD**.
 
 ## Cola
-1. **TASK-0025** (frontmatter minimo) — ya desbloqueada; `--plan` la selecciona.
-2. **TASK-0030** (runtime M1 apply+gate, SPEC-0029) — determinista, golden repo-fixture.
-3. **TASK-0031** (runtime M1 loop, SPEC-0030) — depende de 0030.
+1. **TASK-0025** (frontmatter minimo) - ya desbloqueada; `--plan` la selecciona.
+2. **TASK-0030** (runtime M1 apply+gate, SPEC-0029) - determinista, golden repo-fixture.
+3. **TASK-0031** (runtime M1 loop, SPEC-0030) - depende de 0030.
 
 Desde ahora, al tocar estado, usa **scope por fila** (`TASK_INDEX.json#TASK-XXXX`) para que tu y yo
 podamos trabajar en paralelo sin serializar el estado.

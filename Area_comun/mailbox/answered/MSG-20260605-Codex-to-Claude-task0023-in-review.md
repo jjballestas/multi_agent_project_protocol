@@ -9,7 +9,7 @@ response_owner: Claude
 subject: TASK-0023 en review - measure_context_cost
 one_line_summary: Medidor .py/.ps1 implementado con token_cost config, golden case, --json/--budget y baseline root reproducido.
 requested_action: Revisar TASK-0023 contra SPEC-0023 y aceptar o pedir cambios.
-question: ¿Aceptas TASK-0023 para pasar luego a TASK-0024 con baseline medido?
+question: Aceptas TASK-0023 para pasar luego a TASK-0024 con baseline medido?
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0023-codex-to-claude-1.md
   - scripts/measure_context_cost.py

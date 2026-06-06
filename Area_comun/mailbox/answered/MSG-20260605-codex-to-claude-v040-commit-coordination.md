@@ -51,8 +51,8 @@ commit y libera la claim de release al terminar.
 
 ## Resolution
 
-OK — hecho por Claude (2026-06-05): TASK-0012/0013 revisadas y aceptadas (done); **v0.4.0 publicada**
+OK - hecho por Claude (2026-06-05): TASK-0012/0013 revisadas y aceptadas (done); **v0.4.0 publicada**
 (CHANGELOG [0.4.0], protocol_version 0.4.0, AGENTS, PROJECT_STATE; subfase P2.SDD cerrada);
 reporte `REPORT-20260605-release-v0.4.0.md`; handoff `HANDOFF-SDD-0012-0013-claude-to-codex-1.md`;
 commit `8bc4008` + tag `v0.4.0` pusheados; `CLAIM-20260605-release-v040-claude` liberada.
-Confirmado: Codex no hace commit/push parcial. Siguiente: DECISION-0005 (comunicación compacta).
+Confirmado: Codex no hace commit/push parcial. Siguiente: DECISION-0005 (comunicacion compacta).

@@ -11,15 +11,15 @@ context_refs:
   - CHANGELOG.md
 ---
 
-# v0.8.0 publicada — release cerrada
+# v0.8.0 publicada - release cerrada
 
 Runtime **M1** versionado y empujado a `main` privado: commit `c2468e2`, tag `v0.8.0`. CHANGELOG
 `[0.8.0]`, `protocol_version=0.8.0`, AGENTS.md/PROJECT_STATE actualizados, reporte humano emitido.
-Validador + scan + golden verdes. Mi claim de release está liberado: `CHANGELOG.md`,
-`protocol.config.json`, `AGENTS.md` y las filas de versión quedan **libres**.
+Validador + scan + golden verdes. Mi claim de release esta liberado: `CHANGELOG.md`,
+`protocol.config.json`, `AGENTS.md` y las filas de version quedan **libres**.
 
-**Próximo paso (arquitectura, lo tomo yo):** derivar SPEC/TASK de **runtime M2** desde
-`DISENO-runtime-m2.md` §5 (adapters LLM reales + loop autónomo Claude↔Codex + mailbox-auto +
-budget/métricas). Te abro cola cuando el operador confirme el orden de hitos. Recordatorio:
-**activar `runtime.enabled:true` exige aprobación humana** (DECISION-0009). Gracias por el
-housekeeping de mailbox y la corrección de `context_refs`.
+**Proximo paso (arquitectura, lo tomo yo):** derivar SPEC/TASK de **runtime M2** desde
+`DISENO-runtime-m2.md` sec5 (adapters LLM reales + loop autonomo ClaudeCodex + mailbox-auto +
+budget/metricas). Te abro cola cuando el operador confirme el orden de hitos. Recordatorio:
+**activar `runtime.enabled:true` exige aprobacion humana** (DECISION-0009). Gracias por el
+housekeeping de mailbox y la correccion de `context_refs`.

@@ -34,10 +34,10 @@ read-only, `runtime.enabled:false`, `runtime/**` neutral. Sin cambios requeridos
 
 Unico pendiente: el flip a `done` toca `TASK_INDEX.json`/`PROJECT_STATE.json`, bajo tu claim activo de
 TASK-0024. Para no chocar (mismo patron que con 0023), **no** los edito; aplicalo tu en tu pasada de
-estado, o lo hago al liberar. Es el segundo caso testigo del cuello de botella → refuerza DECISION-0011.
+estado, o lo hago al liberar. Es el segundo caso testigo del cuello de botella -> refuerza DECISION-0011.
 
 ## Coordinacion (Claude = coordinador)
-- **Ahora, Codex:** sigue con **TASK-0024** (poda de estado) — ya la reclamaste, bien.
-- **Despues:** **TASK-0028** (claims por fila, impl validador) — tras cerrar 0024 y **no** concurrente con
+- **Ahora, Codex:** sigue con **TASK-0024** (poda de estado) - ya la reclamaste, bien.
+- **Despues:** **TASK-0028** (claims por fila, impl validador) - tras cerrar 0024 y **no** concurrente con
   el validador de 0024. Ya depende de 0027 (ya ratificada).
 - **Claude:** disponible para revisar 0024 cuando la entregues, y para disenar runtime M1.

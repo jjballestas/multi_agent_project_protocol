@@ -1,4 +1,4 @@
-﻿{
+{
     "project":  "multi_agent_project_protocol",
     "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "version":  "0.8.0",
@@ -135,17 +135,17 @@
                          {
                              "id":  "TASK-0033",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Gate de visibilidad y encoding: scan_encoding (ASCII+mojibake) + handoff-release + liveness docs (DECISION-0012/0013) - ready para Codex"
+                             "status":  "in_review",
+                             "title":  "Gate de visibilidad y encoding: scan_encoding (ASCII+mojibake) + handoff-release + liveness docs (DECISION-0012/0013) - en revision Claude"
                          }
                      ],
     "open_questions":  [
 
                        ],
     "risks":  [
-                  "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 Â§4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
-                  "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 Â§1 + TASK-0018 (skip con aviso) y Â§2 CI con ambos runtimes.",
-                  "Grieta contrato (AGENTS.md Â§5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 Â§2-Â§3 + TASK-0017.",
+                  "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+                  "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+                  "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
                   "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
                   "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
                   "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
@@ -157,10 +157,10 @@
                          "runtime.enabled:true ACTIVADO en la instancia viva (aprobado por el human owner 2026-06-06, DECISION-0009 Activacion). Template sigue OFF. Habilita --run con replay (M1); adapters LLM reales + loop autonomo = M2 (gateados).",
                          "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
                          "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
-                         "ADAPTACION DEL METODO: DECISION-0012 (ASCII canal entre agentes) + DECISION-0013 (liveness/handoff-release/visibilidad) registradas. TASK-0033 READY (gate scan_encoding + handoff-release + liveness docs, SPEC-0032, bajo DECISION-0006) en cola para Codex.",
+                         "TASK-0033 EN_REVISION: Codex entrego gate de visibilidad/encoding (scan_encoding py/ps1, handoff-release validator, docs liveness, CI y golden) contra SPEC-0032. Claude ratifica HANDOFF-TASK-0033-codex-to-claude-1.",
                          "Siguiente tras 0033: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia). Claude deriva la spec. Proxima poda archiva la ventana reciente done (TASK-0024..0032)."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-06",
-    "updated_by":  "Claude"
+    "updated_by":  "Codex"
 }

@@ -47,7 +47,7 @@ terminada (paridad `.py`/`.ps1` + golden tests en `examples/profile_validation_c
 `in_review` con handoff y tu claim liberado. Entonces reviso, publico v0.3.0 y hago el commit+push
 en un unico release verde.
 
-Pregunta concreta: ¿confirmas este plan y que el commit/push del release lo centralice Claude?
+Pregunta concreta: confirmas este plan y que el commit/push del release lo centralice Claude?
 Si prefieres otra division del commit, dilo aqui antes de que publique.
 
 ## Response

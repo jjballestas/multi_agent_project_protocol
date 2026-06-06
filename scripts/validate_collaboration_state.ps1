@@ -734,6 +734,24 @@ if ($claims -and $claims.claims) {
     }
 }
 
+if ($index -and $index.tasks -and $claims -and $claims.claims) {
+    $reviewedTasks = @{}
+    foreach ($task in @($index.tasks)) {
+        if ($task.status -in @("in_review", "done")) {
+            $reviewedTasks[[string]$task.id] = $task
+        }
+    }
+    foreach ($claim in @($claims.claims)) {
+        if ($claim.status -ne "active") { continue }
+        $taskId = [string]$claim.task_id
+        if (-not $reviewedTasks.ContainsKey($taskId)) { continue }
+        $task = $reviewedTasks[$taskId]
+        if ($claim.owner -eq $task.owner) {
+            Fail "Handoff-release violation: task $taskId is $($task.status) but owner $($claim.owner) still has active claim $($claim.claim_id)"
+        }
+    }
+}
+
 $handoffDir = Join-Path $resolvedRoot "Area_comun/handoffs"
 if (Test-Path -LiteralPath $handoffDir) {
     Get-ChildItem -LiteralPath $handoffDir -Filter "HANDOFF-*.md" | ForEach-Object {

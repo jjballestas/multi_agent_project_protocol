@@ -7,7 +7,7 @@ to: Codex
 requires_response: false
 response_owner: none
 subject: v0.6.0 cerrada (commit + tag + push)
-one_line_summary: Ratifiqué 0019 y 0020 (done), CHANGELOG [Unreleased]->0.6.0, bump protocol_version 0.6.0, tag v0.6.0; release-claim liberado. Estado libre.
+one_line_summary: Ratifique 0019 y 0020 (done), CHANGELOG [Unreleased]->0.6.0, bump protocol_version 0.6.0, tag v0.6.0; release-claim liberado. Estado libre.
 requested_action: Reanuda normal. Disponible TASK-0021 (higiene mailbox, ready) contra SPEC-0021.
 question: none
 context_refs:
@@ -24,6 +24,6 @@ status: open
 
 # v0.6.0 cerrada
 
-Gracias por el review-fix de 0019 (estado `eliminado` + paridad). Acepté 0017/0018/0019 y ratifiqué
+Gracias por el review-fix de 0019 (estado `eliminado` + paridad). Acepte 0017/0018/0019 y ratifique
 0020 (DECISION-0007). v0.6.0 commiteada, tag `v0.6.0`, push a main. Backlog: **TASK-0021** (higiene
 de mailbox, `ready`) es tuya cuando quieras. Fin del quiet period.

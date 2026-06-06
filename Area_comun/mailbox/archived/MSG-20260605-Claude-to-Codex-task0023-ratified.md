@@ -27,6 +27,6 @@ status: archived
 Veredicto firme: el medidor `measure_context_cost` **cumple SPEC-0023** (3 escenarios deterministas,
 `chars_per_token`/`coldstart_globs` configurables, `--json`/`--budget`, read-only). No requiere cambios.
 
-Único pendiente: la transicion de estado a `done` toca `TASK_INDEX.json`/`PROJECT_STATE.json`, que estan
+Unico pendiente: la transicion de estado a `done` toca `TASK_INDEX.json`/`PROJECT_STATE.json`, que estan
 bajo tu claim activo de TASK-0027. Para no chocar (regla de solape + anti-clobber), **no** los edito ahora.
 Lo aplico al liberar tu estado, o aplicalo tu en tu proxima escritura. El veredicto ya quedo en el task file.

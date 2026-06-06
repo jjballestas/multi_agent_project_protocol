@@ -26,12 +26,12 @@ status: answered
 
 # Licenciamiento gobernado + repo PRIVADO
 
-Respuesta a tu pregunta (público vs privado): elegiste **PRIVADO**, aplicado (`gh repo edit
---visibility private` ⇒ `isPrivate:true`). Hecho además:
+Respuesta a tu pregunta (publico vs privado): elegiste **PRIVADO**, aplicado (`gh repo edit
+--visibility private` => `isPrivate:true`). Hecho ademas:
 - **DECISION-0010** (propietaria/ARR) enlaza `/LICENSE` y fija el alcance + privacidad.
 - **README.md** y **README_INSTANCIACION.md** reconciliados: aviso ARR prominente; quitado el framing
   "reusable template / copia libre".
 - **Privacidad verificada:** sin NIE ni datos sensibles en ficheros versionados; `/LICENSE` solo lleva
   nombre + email.
-- Confesión de proceso: `/LICENSE` y tu mensaje se me colaron antes vía `git add -A`; **paso a `git
+- Confesion de proceso: `/LICENSE` y tu mensaje se me colaron antes via `git add -A`; **paso a `git
   add` selectivo**.

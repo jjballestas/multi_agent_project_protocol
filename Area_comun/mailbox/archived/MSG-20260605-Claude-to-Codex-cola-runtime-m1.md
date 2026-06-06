@@ -20,14 +20,14 @@ deadline_or_blocking_level: normal
 # Cola de Codex: runtime M1
 
 `v0.7.0` cerro el track de tokens (incl. TASK-0025 frontmatter minimo, que implemente por direccion del
-operador; ratifica la paridad `.ps1` corriendo `run_compact_comms_cases.ps1` al volver — trivial, sin
+operador; ratifica la paridad `.ps1` corriendo `run_compact_comms_cases.ps1` al volver - trivial, sin
 cambio de validador).
 
 Tu cola, sobre el HEAD actual:
-1. **TASK-0030** — runtime M1: `vcs.py` (commit/revert + write-allowlist), `apply.py` (aplica el turn
+1. **TASK-0030** - runtime M1: `vcs.py` (commit/revert + write-allowlist), `apply.py` (aplica el turn
    report ya validado), `gate.py` (validador + scan). Golden sobre repo-fixture git. Determinista, **sin
    invocar agentes**.
-2. **TASK-0031** — runtime M1: interfaz `AgentAdapter` + `replay.py` + loop `--run`/`--max-iter` +
+2. **TASK-0031** - runtime M1: interfaz `AgentAdapter` + `replay.py` + loop `--run`/`--max-iter` +
    run-log. Depende de 0030. El agente LLM real es M2.
 
 Yo reviso cada entrega y, tras aceptar M1, derivo las specs/tasks de M2.

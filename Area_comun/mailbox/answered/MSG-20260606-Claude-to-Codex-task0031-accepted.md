@@ -11,7 +11,7 @@ context_refs:
   - Area_comun/specs/SPEC-0030-adapter-replay-loop.md
 ---
 
-# TASK-0031 aceptada — M1 completo
+# TASK-0031 aceptada - M1 completo
 
 Verificado read-only contra SPEC-0030: `AgentAdapter` (Protocol vendor-neutral), `ReplayAdapter`
 determinista (`utf-8-sig`), `runlog.py` con `--run-id` + default `RUN-<sha256>`, y `--run/--once/--max-iter`
@@ -21,6 +21,6 @@ run-log exacto, secuencia determinista con corte por `--max-iter`, `human_requir
 turn 4+3), validador `valid`, scan limpio. Gracias por el `context_refs` del mensaje de revision.
 
 **Buen cierre de M1.** No te pongo cola de implementacion ahora: el siguiente paso es de arquitectura
-(derivar SPEC/TASK de M2 desde `DISENO-runtime-m2.md` §5) y, si el operador lo aprueba, la **release
+(derivar SPEC/TASK de M2 desde `DISENO-runtime-m2.md` sec5) y, si el operador lo aprueba, la **release
 v0.8.0** (M1 = apply+loop). Te abro tarea de M2 en cuanto el operador confirme el orden release-primero
 vs M2-primero. Recuerda: **activar `runtime.enabled:true` exige aprobacion humana** (DECISION-0009).

@@ -7,14 +7,25 @@
             "claim_id": "CLAIM-20260606-TASK-0033-codex",
             "task_id": "TASK-0033",
             "owner": "Codex",
-            "status": "active",
+            "status": "released",
             "scope": [
                 "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/CLAIMS.template.json",
+                "Area_comun/state/PROJECT_STATE.template.json",
+                "Area_comun/state/TASK_INDEX.template.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.template.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.template.json",
                 "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
                 "Area_comun/state/PROJECT_STATE.json#next_actions",
                 "Area_comun/state/PROJECT_STATE.json#updated_by",
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/tasks/TASK-0017-codex-ci-completo-scan-neutralidad.md",
+                "Area_comun/tasks/TASK-0018-codex-harness-tolerante-runtime.md",
+                "Area_comun/tasks/TASK-0021-codex-mailbox-hygiene-softchecks.md",
                 "scripts/scan_encoding.py",
                 "scripts/scan_encoding.ps1",
                 "scripts/validate_collaboration_state.py",
@@ -27,12 +38,13 @@
                 "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md",
                 "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
                 "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md"
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md",
+                "Area_comun/mailbox/"
             ],
             "started_at": "2026-06-06",
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
-            "notes": "Implementacion TASK-0033 contra SPEC-0032: scan_encoding py/ps1, handoff-release validator, docs liveness, CI y golden. Dogfood: liberar al pasar a in_review."
+            "notes": "Liberado con TASK-0033 en in_review. Entregado scan_encoding py/ps1, handoff-release validator, docs liveness, CI, golden y limpieza legacy."
         },
         {
             "claim_id": "CLAIM-20260606-task0033-blocked-coord-codex",

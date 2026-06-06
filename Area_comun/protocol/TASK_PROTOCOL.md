@@ -101,6 +101,15 @@ be treated as implementable by the architect and should use full SDD.
 7. On completion, create deliverables, create a handoff, set task to `in_review`, and release
    the claim.
 
+### Handoff-release and liveness
+
+- When a task owner moves a task to `in_review` or `done`, that same coordination step releases the
+  owner's active claim for the task.
+- A task in `in_review` or `done` must not retain an active claim from its owner; this is a validator
+  error.
+- While holding an active claim on `in_progress` work, each work turn must leave a verifiable signal:
+  deliverable progress, a compact FYI, or `blocked` with one concrete question.
+
 ### Claim Before Shared Draft
 
 An agent must create or update an active claim **before** creating, editing or leaving any draft in

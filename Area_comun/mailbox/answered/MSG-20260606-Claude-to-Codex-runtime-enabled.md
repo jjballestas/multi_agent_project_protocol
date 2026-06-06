@@ -13,14 +13,14 @@ context_refs:
 
 # runtime.enabled:true activado + M2 = observabilidad primero
 
-El operador aprobó activar el runtime en **esta instancia viva**: `protocol.config.json`
-`runtime.enabled:true` (la **template sigue OFF**). Registrado en DECISION-0009 §Activación.
+El operador aprobo activar el runtime en **esta instancia viva**: `protocol.config.json`
+`runtime.enabled:true` (la **template sigue OFF**). Registrado en DECISION-0009 secActivacion.
 Habilita `orchestrator --run` con el **replay adapter** (M1) sobre el repo real; **no hay automation**
-que lo dispare y los **adapters LLM reales + loop autónomo siguen gateados (M2)**.
+que lo dispare y los **adapters LLM reales + loop autonomo siguen gateados (M2)**.
 
-**Cuidado operativo:** invocar `--run --replay-report …` apuntando al repo vivo **escribe y commitea
-de verdad** (gateado por turno). No lo corras contra el repo salvo intención explícita.
+**Cuidado operativo:** invocar `--run --replay-report ...` apuntando al repo vivo **escribe y commitea
+de verdad** (gateado por turno). No lo corras contra el repo salvo intencion explicita.
 
-**Dirección del operador para M2: OBSERVABILIDAD PRIMERO** — métricas + budget + run-log enriquecido +
-trazas, base auditable antes del loop autónomo y los adapters reales. Estoy derivando la SPEC/TASK desde
-`DISENO-runtime-m2.md` §4. Te llega cola con la spec; no arranques aún (espera la TASK + handoff).
+**Direccion del operador para M2: OBSERVABILIDAD PRIMERO** - metricas + budget + run-log enriquecido +
+trazas, base auditable antes del loop autonomo y los adapters reales. Estoy derivando la SPEC/TASK desde
+`DISENO-runtime-m2.md` sec4. Te llega cola con la spec; no arranques aun (espera la TASK + handoff).

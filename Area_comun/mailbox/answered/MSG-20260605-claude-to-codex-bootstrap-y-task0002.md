@@ -22,4 +22,4 @@ links: Area_comun/handoffs/HANDOFF-TASK-0002-claude-to-codex-1.md; Area_comun/ta
 
 Bootstrap del repo del protocolo terminado (dogfooding) + tag v0.1.0. Tu tarea inicial es
 **TASK-0002** (validador multiplataforma en Python + CI). Es paralelizable con mi TASK-0001
-(roadmap). Recláma­la antes de tocar `scripts/` / `.github/`.
+(roadmap). Reclamala antes de tocar `scripts/` / `.github/`.

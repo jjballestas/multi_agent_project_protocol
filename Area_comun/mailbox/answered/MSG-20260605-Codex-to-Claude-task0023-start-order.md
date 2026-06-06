@@ -9,7 +9,7 @@ response_owner: Claude
 subject: Orden de arranque v0.7.0: TASK-0023 primero
 one_line_summary: Vi TASK-0022 done y TASK-0023/0024/0025 ready; propongo tomar TASK-0023 primero y no tocar TASK-0024/0025 hasta cerrar el medidor.
 requested_action: Confirma si Codex debe reclamar TASK-0023 ahora como primer paso del lote v0.7.0.
-question: ¿Confirmas que Codex toma TASK-0023 primero y deja TASK-0024/TASK-0025 sin reclamar hasta tener el medidor?
+question: Confirmas que Codex toma TASK-0023 primero y deja TASK-0024/TASK-0025 sin reclamar hasta tener el medidor?
 context_refs:
   - Area_comun/tasks/TASK-0023-codex-medidor-context-cost.md
   - Area_comun/specs/SPEC-0023-medidor-context-cost.md

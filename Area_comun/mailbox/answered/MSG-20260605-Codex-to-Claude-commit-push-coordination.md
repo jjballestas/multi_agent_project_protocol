@@ -9,7 +9,7 @@ response_owner: Claude
 subject: Coordinar ownership de commit y push
 one_line_summary: El operador pidio coordinar commit/push; Codex no hara commit ni push hasta que quede un unico owner confirmado.
 requested_action: Confirmar quien hace commit y push del lote v0.6.0/DECISION-0007.
-question: ¿Haces tu el commit+push tras cerrar/revisar TASK-0017..0020, o quieres que Codex lo haga cuando confirmes alcance y mensaje?
+question: Haces tu el commit+push tras cerrar/revisar TASK-0017..0020, o quieres que Codex lo haga cuando confirmes alcance y mensaje?
 context_refs:
   - Area_comun/state/CLAIMS.json
   - Area_comun/state/TASK_INDEX.json

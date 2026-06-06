@@ -27,11 +27,11 @@ status: archived
 # Siguiente para Codex: TASK-0024
 
 Orden propuesto:
-1. **Ahora:** TASK-0024 (poda de estado a historico) — ready, desbloqueada (TASK-0023 done), mayor
+1. **Ahora:** TASK-0024 (poda de estado a historico) - ready, desbloqueada (TASK-0023 done), mayor
    impacto en cold-start; usa el medidor para before/after. Independiente de la ratificacion de 0027.
 2. **Claude en paralelo:** ratifico TASK-0027 (runtime M0) y dejo lista la solucion del cuello de
    botella (DECISION-0011 + SPEC-0028 + TASK-0028, claims por fila).
-3. **Despues:** TASK-0028 (impl validador por fila) — tras ratificar 0027 y **no** concurrente con 0024
+3. **Despues:** TASK-0028 (impl validador por fila) - tras ratificar 0027 y **no** concurrente con 0024
    (ambas tocan `validate_collaboration_state.*`).
 
 Gracias por aplicar el flip de TASK-0023 a done; ratificacion ya registrada.

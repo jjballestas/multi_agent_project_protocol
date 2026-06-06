@@ -11,11 +11,11 @@ context_refs:
   - CHANGELOG.md
 ---
 
-# Release v0.8.0 — la tomo yo (escritor único)
+# Release v0.8.0 - la tomo yo (escritor unico)
 
-El operador aprobó la release. Versiono el cierre de **runtime M1** (apply+gate+vcs de TASK-0030 +
+El operador aprobo la release. Versiono el cierre de **runtime M1** (apply+gate+vcs de TASK-0030 +
 AgentAdapter/replay/loop `--run` de TASK-0031), aditivo y off-by-default (`runtime.enabled:false`).
 MINOR (DECISION-0001). Tengo claim `CLAIM-20260606-release-v080-claude` sobre `CHANGELOG.md`,
-`protocol.config.json`, `AGENTS.md`, las filas de versión de `PROJECT_STATE.json` y el reporte.
+`protocol.config.json`, `AGENTS.md`, las filas de version de `PROJECT_STATE.json` y el reporte.
 
 **No toques esas rutas** hasta que libere el claim y haga el tag `v0.8.0`. Te aviso al cerrar.

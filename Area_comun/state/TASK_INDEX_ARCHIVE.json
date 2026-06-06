@@ -1,4 +1,4 @@
-﻿{
+{
     "schema_version":  "1.0",
     "updated_at":  "2026-06-05",
     "updated_by":  "Codex",
@@ -573,7 +573,7 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0017. Verificacion independiente (.py): scan repo exit 0 (25 archivos neutrales reales escaneados, no vacuo); fixtures clean=0/domain_term=1 con hallazgo correcto; CI cubre los 9 pasos (validate.py x2, validate.ps1 x2, harness SDD/compacto/neutralidad, scan .py/.ps1) =\u003e honra AGENTS.md §5. Paridad .ps1 atestiguada por Codex + CI (no ejecutada por Claude: deny-rule PowerShell). NOTA menor no bloqueante: profiles/PROFILE_TEMPLATE/** queda eclipsado por exempt profiles/** (no se escanea); afinar en follow-up."
+                      "review":  "ACEPTADA por Claude contra SPEC-0017. Verificacion independiente (.py): scan repo exit 0 (25 archivos neutrales reales escaneados, no vacuo); fixtures clean=0/domain_term=1 con hallazgo correcto; CI cubre los 9 pasos (validate.py x2, validate.ps1 x2, harness SDD/compacto/neutralidad, scan .py/.ps1) =\u003e honra AGENTS.md sec5. Paridad .ps1 atestiguada por Codex + CI (no ejecutada por Claude: deny-rule PowerShell). NOTA menor no bloqueante: profiles/PROFILE_TEMPLATE/** queda eclipsado por exempt profiles/** (no se escanea); afinar en follow-up."
                   },
                   {
                       "id":  "TASK-0018",
@@ -582,7 +582,7 @@
                       "type":  "implementation",
                       "priority":  "high",
                       "phase":  "P2",
-                      "title":  "Harness tolerantes a runtime - skip con aviso (DECISION-0006 §1, target v0.6.0)",
+                      "title":  "Harness tolerantes a runtime - skip con aviso (DECISION-0006 sec1, target v0.6.0)",
                       "spec_id":  "Area_comun/specs/SPEC-0018-harness-tolerante-runtime.md",
                       "file":  "Area_comun/tasks/TASK-0018-codex-harness-tolerante-runtime.md",
                       "depends_on":  [
@@ -613,7 +613,7 @@
                       "type":  "implementation",
                       "priority":  "normal",
                       "phase":  "P2",
-                      "title":  "Migracion/upgrade asistida entre versiones (DECISION-0006 §4, target v0.6.0)",
+                      "title":  "Migracion/upgrade asistida entre versiones (DECISION-0006 sec4, target v0.6.0)",
                       "spec_id":  "Area_comun/specs/SPEC-0019-upgrade-asistido.md",
                       "file":  "Area_comun/tasks/TASK-0019-codex-migracion-upgrade-asistida.md",
                       "depends_on":  [
@@ -747,7 +747,7 @@
                       "type":  "implementation",
                       "priority":  "high",
                       "phase":  "P2",
-                      "title":  "Medidor measure_context_cost (gate antes/despues) (DECISION-0008 §1/§4, target v0.7.0)",
+                      "title":  "Medidor measure_context_cost (gate antes/despues) (DECISION-0008 sec1/sec4, target v0.7.0)",
                       "spec_id":  "Area_comun/specs/SPEC-0023-medidor-context-cost.md",
                       "file":  "Area_comun/tasks/TASK-0023-codex-medidor-context-cost.md",
                       "depends_on":  [

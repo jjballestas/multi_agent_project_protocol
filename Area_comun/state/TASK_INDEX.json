@@ -1,4 +1,4 @@
-﻿{
+{
     "schema_version":  "1.0",
     "updated_at":  "2026-06-06",
     "updated_by":  "Claude",
@@ -52,7 +52,7 @@
                       "type":  "implementation",
                       "priority":  "high",
                       "phase":  "P2",
-                      "title":  "Poda de estado a historico (CLAIMS/TASK_INDEX _ARCHIVE) - mayor impacto (DECISION-0008 §2, target v0.7.0)",
+                      "title":  "Poda de estado a historico (CLAIMS/TASK_INDEX _ARCHIVE) - mayor impacto (DECISION-0008 sec2, target v0.7.0)",
                       "spec_id":  "Area_comun/specs/SPEC-0024-poda-estado-historico.md",
                       "file":  "Area_comun/tasks/TASK-0024-codex-poda-estado-historico.md",
                       "depends_on":  [
@@ -82,7 +82,7 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "ACEPTADA por Claude contra SPEC-0024. Verificacion independiente (.py): caliente solo no-done (+ventana reciente permitida por la spec); 24 done + 47 released en *_ARCHIVE, nada borrado; union hot∪archive con deteccion de duplicados (test de inconsistencia provocada OK); cold-start 37391 -> ~9.2k tok (-75%), dentro de budget. Paridad .ps1 atestiguada por Codex/CI (deny-rule PowerShell en sesion arquitecto). Cierra el mayor ahorro del track de tokens (DECISION-0008)."
+                      "review":  "ACEPTADA por Claude contra SPEC-0024. Verificacion independiente (.py): caliente solo no-done (+ventana reciente permitida por la spec); 24 done + 47 released en *_ARCHIVE, nada borrado; union hot+archive con deteccion de duplicados (test de inconsistencia provocada OK); cold-start 37391 -> ~9.2k tok (-75%), dentro de budget. Paridad .ps1 atestiguada por Codex/CI (deny-rule PowerShell en sesion arquitecto). Cierra el mayor ahorro del track de tokens (DECISION-0008)."
                   },
                   {
                       "id":  "TASK-0025",
@@ -91,7 +91,7 @@
                       "type":  "implementation",
                       "priority":  "high",
                       "phase":  "P2",
-                      "title":  "Frontmatter de mailbox minimo, compatible hacia atras (DECISION-0008 §3, target v0.7.0)",
+                      "title":  "Frontmatter de mailbox minimo, compatible hacia atras (DECISION-0008 sec3, target v0.7.0)",
                       "spec_id":  "Area_comun/specs/SPEC-0025-frontmatter-minimo.md",
                       "file":  "Area_comun/tasks/TASK-0025-codex-frontmatter-minimo.md",
                       "depends_on":  [
@@ -338,7 +338,7 @@
                   {
                       "id":  "TASK-0033",
                       "owner":  "Codex",
-                      "status":  "ready",
+                      "status":  "in_review",
                       "type":  "implementation",
                       "priority":  "normal",
                       "phase":  "P2",
@@ -373,7 +373,7 @@
 
                                                ],
                       "sdd_required":  true,
-                      "review":  "Ready. SDD-elegible: SPEC-0032 emitida. Adaptacion del metodo de coordinacion (DECISION-0012 ASCII + DECISION-0013 liveness/handoff-release) bajo DECISION-0006. Dogfood: libera el claim al pasar a in_review. Depende de TASK-0032."
+                      "review":  "En revision desde 2026-06-06. Codex implemento SPEC-0032: scan_encoding py/ps1, handoff-release en validador, docs liveness, CI, golden y limpieza legacy. Ver HANDOFF-TASK-0033-codex-to-claude-1."
                   }
               ]
 }

@@ -30,7 +30,7 @@ Ballestas Payares**, contacto john.ballestas@gmail.com) directamente en la raiz,
 del flujo de tareas. Es una decision de politica del operador, no trabajo de implementacion.
 
 Pendiente de gobernanza (lane del arquitecto):
-1. **DECISION de licenciamiento** que enlace `/LICENSE` y fije el alcance (propietaria/ARR) — analogo a
+1. **DECISION de licenciamiento** que enlace `/LICENSE` y fije el alcance (propietaria/ARR) - analogo a
    como DECISION-0001 gobierna el versionado.
 2. **Claim** sobre `/LICENSE` + `README*` antes de editarlos.
 3. **Alinear el mensaje**: `README.md` y `README_INSTANCIACION.md` se venden como *"reusable template"*

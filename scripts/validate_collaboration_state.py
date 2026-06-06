@@ -696,6 +696,35 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
                         )
 
 
+def validate_handoff_release(
+    index: dict[str, Any] | None,
+    claims: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not index or not claims:
+        return
+    reviewed_tasks = {
+        str(task.get("id")): task
+        for task in as_list(index.get("tasks"))
+        if isinstance(task, dict) and task.get("status") in REVIEWED_TASK_STATUSES
+    }
+    if not reviewed_tasks:
+        return
+    for claim in as_list(claims.get("claims")):
+        if not isinstance(claim, dict) or claim.get("status") != "active":
+            continue
+        task_id = str(claim.get("task_id") or "")
+        task = reviewed_tasks.get(task_id)
+        if not task:
+            continue
+        if claim.get("owner") == task.get("owner"):
+            validation.fail(
+                "Handoff-release violation: "
+                f"task {task_id} is {task.get('status')} but owner {claim.get('owner')} "
+                f"still has active claim {claim.get('claim_id')}"
+            )
+
+
 def validate_handoffs(root: Path, validation: Validation) -> None:
     handoff_dir = root / "Area_comun" / "handoffs"
     if not handoff_dir.exists():
@@ -758,6 +787,11 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_mailbox(root, validation)
     validate_reports(root, validation)
     validate_claims(claims if isinstance(claims, dict) else None, validation)
+    validate_handoff_release(
+        index if isinstance(index, dict) else None,
+        claims if isinstance(claims, dict) else None,
+        validation,
+    )
     validate_handoffs(root, validation)
     return validation
 

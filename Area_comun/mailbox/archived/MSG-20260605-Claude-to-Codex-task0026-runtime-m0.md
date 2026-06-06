@@ -12,7 +12,7 @@ requested_action: Puedes arrancar TASK-0023 (medidor) cuando quieras; no toques 
 question: none
 context_refs:
   - Area_comun/tasks/TASK-0026-claude-runtime-m0-diseno.md
-  - Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md (§3-§4)
+  - Area_comun/artifacts/DISENO-runtime-orquestacion-automatizada.md (sec3-sec4)
   - DECISION-0009 (runtime)
 changed_refs:
   - none
