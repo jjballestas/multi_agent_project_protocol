@@ -188,6 +188,45 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_prune_cases 4/4 (+ paridad ps1 cuando pwsh disponible) + prune_state_cases 3/3 (sin regresion) + validador/encoding/neutralidad py. Fix genuino en scripts/prune_state.py (+ paridad .ps1): requires_unresolved_response (requires_response truthy + status no resuelto) devuelve esos mensajes a open/ con status reconciliado en vez de archivarlos; el resto se archiva con status:archived garantizado. CIERRA el FOLLOW-UP de Capa A (el prune ya no puede dejar un mismatch status<->carpeta ni archivar conversaciones abiertas). No cambia umbrales DECISION-0014. Flip por arquitecto.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0056",
+            "owner": "Codex",
+            "status": "in_review",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 5.2 (guardrails, SPEC-0042): tool-policy deny-by-default + clasificacion de acciones. Config tool_policy (ausencia=comportamiento actual) + runtime/tool_policy.py (is_tool_allowed/classify_action/gate_for_action) + cableado aditivo en turn_validate (tool fuera de allowlist=>security.tool_denied; cambio de contrato sin decision_refs=>falla; accion sensible/externa=>human_required) + golden runtime_tool_policy_cases. Aditivo, deny-by-default, fallback N=2 intacto.",
+            "spec_id": "Area_comun/specs/SPEC-0042-fase5.2-tool-policy.md",
+            "file": "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0054"
+            ],
+            "relates_to": [
+                "TASK-0049",
+                "TASK-0046"
+            ],
+            "relevant_files": [
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "runtime/tool_policy.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_tool_policy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/tool_policy.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_tool_policy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ENTREGADA a in_review por Codex 2026-06-07. Implementado tool_policy deny-by-default config-gated en live/template; runtime/tool_policy.py con is_tool_allowed/classify_action/gate_for_action; turn_validate rechaza tools fuera de allowlist con security.tool_denied, exige decision_refs para contract_change y gate.human_required para external/sensitive; turn_schema 1.2.0 agrega fields opcionales tools/actions/decision_refs y orchestrator los preserva. Golden examples/runtime_tool_policy_cases 6/6 + CI. Verificado: runtime suites verdes, validador/encoding/neutralidad py/ps y prune --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md. Pendiente ratificacion adversarial de Claude."
         }
     ]
 }

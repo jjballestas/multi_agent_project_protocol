@@ -4,27 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-release-v0.10.0-claude",
-            "task_id": "none",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/PROJECT_STATE.json#version",
-                "Area_comun/state/PROJECT_STATE.json#released_versions",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "CHANGELOG.md",
-                "protocol.config.json",
-                "Area_comun/reports/REPORT-20260606-release-v0.10.0.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v0.10.0.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: RELEASE v0.10.0 (aprobada por el operador) - empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A. Bump protocol_version 0.9.0->0.10.0, PROJECT_STATE version + released_versions, CHANGELOG, reporte humano, tag v0.10.0. Claim efimero: se libera al cierre; prune posterior."
-        },
-        {
             "claim_id": "CLAIM-20260606-anomaly-agents-version-codex",
             "task_id": "none",
             "owner": "Codex",
@@ -92,6 +71,38 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0055 entregada a in_review. Implementado prune robusto ante requires_response/status archived con paridad py/ps1, golden runtime_prune_cases y CI. Verificado runtime_prune, prune_state, mailbox_status, runtime completo 110/110, validador/encoding/neutralidad py/ps y prune py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0055-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0056-codex",
+            "task_id": "TASK-0056",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0056",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0056",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0056-GO-tool-policy.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0056-GO-tool-policy.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0056-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "runtime/turn_schema.json",
+                "runtime/tool_policy.py",
+                "runtime/turn_validate.py",
+                "Area_comun/protocol/SCHEMA_VERSIONING.md",
+                "examples/runtime_tool_policy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0056 entregada a in_review. Implementado tool_policy deny-by-default, runtime/tool_policy.py, turn_validate, turn_schema 1.2.0 opcional, examples/runtime_tool_policy_cases y CI. Verificado runtime completo, validador/encoding/neutralidad py/ps; tras release se aplico prune de mantenimiento (2 claims archivados) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md."
         }
     ]
 }

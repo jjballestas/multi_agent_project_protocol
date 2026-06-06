@@ -6,7 +6,7 @@ The runtime turn schema is the contract for a single agent turn report. Its expl
 `schema_version` field is the SemVer version of that contract, independent from the repository
 release version.
 
-Current version: `1.1.0`.
+Current version: `1.2.0`.
 
 ## Consumers
 
@@ -57,5 +57,13 @@ The N-agent Fases 1-4 changes to the turn schema are `MINOR`:
 - Review/QA states and events were added so the runtime can model review failures, QA failures and
   architect review. Existing lifecycle reports remain valid.
 
-Because these changes extend accepted payloads and preserve existing producers, the current schema is
+Because those changes extended accepted payloads and preserved existing producers, the schema was
 declared as `1.1.0` rather than a new major version.
+
+## Fase 5.2 Justification
+
+TASK-0056 adds optional `tools`, `actions` and `decision_refs` fields for runtime tool-policy and
+action-gate validation. Existing turn reports remain valid when these fields are absent; the
+semantic checks are activated only when a report declares tools/actions or when a configured
+`tool_policy` must evaluate a declared tool. This is a `MINOR` schema change, so the runtime turn
+schema is now `1.2.0`.

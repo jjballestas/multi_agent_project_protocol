@@ -3114,6 +3114,48 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: respuesta a la anomalia DECISION-0018 de Codex (claim de cierre referenciaba el FYI de coordinacion antes de crearlo; ventana de orden de creacion, no scope sobre-inclusivo; archivo ya existe, validador verde). Archivos creados ANTES del claim (leccion aplicada). Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-encolar-task0056-fase5.2-claude",
+            "task_id": "TASK-0056",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0056",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/specs/SPEC-0042-fase5.2-tool-policy.md",
+                "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0056-GO-tool-policy.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: promueve Fase 5.2 (TASK-0056 tool-policy) a ready en ventana segura (Codex offline por creditos hasta ~1:45, sin riesgo de colision). Archivos creados ANTES del claim (leccion del HALLAZGO #1). 5.3 sigue en personal. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v0.10.0-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json#version",
+                "Area_comun/state/PROJECT_STATE.json#released_versions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "Area_comun/reports/REPORT-20260606-release-v0.10.0.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v0.10.0.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: RELEASE v0.10.0 (aprobada por el operador) - empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A. Bump protocol_version 0.9.0->0.10.0, PROJECT_STATE version + released_versions, CHANGELOG, reporte humano, tag v0.10.0. Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

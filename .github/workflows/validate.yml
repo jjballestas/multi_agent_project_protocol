@@ -82,6 +82,9 @@ jobs:
       - name: Run runtime guardrail cases
         run: python examples/runtime_guardrail_cases/run_runtime_guardrail_cases.py
 
+      - name: Run runtime tool policy cases
+        run: python examples/runtime_tool_policy_cases/run_runtime_tool_policy_cases.py
+
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 
