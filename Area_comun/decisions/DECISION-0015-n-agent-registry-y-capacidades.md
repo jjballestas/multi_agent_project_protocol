@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0015
 title: Registry de agentes por capacidades y runtime sin roles fijos (N-agente, modelo de equipo)
-status: proposed
+status: accepted
 date: 2026-06-06
-ratified_at: null
+ratified_at: 2026-06-06
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
@@ -14,7 +14,12 @@ spec_ref: Area_comun/specs/SPEC-0038-n-agent-registry.md
 
 # DECISION-0015 - Registry de agentes por capacidades y runtime sin roles fijos (N-agente)
 
-> Estado: PROPOSED - LISTA PARA CONGELAR (2026-06-06). El operador entrego un analisis independiente y una
+> Estado: **ACCEPTED - FASE 0 CONGELADA (2026-06-06, aprobada por el operador "apruebo SPEC-0038 lista para
+> congelar Fase 0").** El contrato queda fijado: registry por capacidades + `agent` enum->string validado en
+> runtime + D-1..D-16 + I1..I8 + addenda A1..A13 (SPEC-0038 sec.20). Arrancan las fases 1-4 (config-gated,
+> fallback N=2 intacto, A1-A7 como gates). Historico de la propuesta abajo.
+>
+> Estado previo: PROPOSED - LISTA PARA CONGELAR (2026-06-06). El operador entrego un analisis independiente y una
 > **SPEC-0038 CONSOLIDADA** (adoptada como spec de record) que cierra los huecos P0/P1/P2 como **decisiones
 > D-1..D-16** e **invariantes I1..I8**. La **validacion SOTA independiente de Codex (TASK-0042)** confirmo
 > alineamiento con el estado del arte SIN rediseno estrategico; Claude reconcilio y **acepto** sus

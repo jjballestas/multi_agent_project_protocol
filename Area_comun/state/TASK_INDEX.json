@@ -171,7 +171,41 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "ACEPTADA por Claude con RECONCILIACION ADVERSARIAL (2026-06-06). Validacion SOTA solida y bien citada (Temporal, LangGraph, MCP 2025-06-18, A2A, OWASP LLM2025/Agentic2026, ESAA, OTel, SLSA v1.2, CycloneDX 1.7, SemVer): SPEC-0038 alineada con el estado del arte SIN rediseno estrategico. Claude ACEPTO las correcciones de precision -> addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros: trust de dos capas + taint, idempotencia por tupla, fairness por elegibilidad + anti-starvation, writer unico de seq + crash tests, negative replay test, fencing por-aggregate, firma de fallo canonica, sin escalado oculto, umbrales duro/blando + colas, evidencia por tipo, tool-policy minima antes de tools externos, fuentes al dia). DECISION-0015 actualizada. Fase 0 LISTA PARA CONGELAR pendiente de aprobacion humana. Codex aplico handoff-release."
+            "review": "ACEPTADA por Claude con RECONCILIACION ADVERSARIAL (2026-06-06). Validacion SOTA solida y bien citada (Temporal, LangGraph, MCP 2025-06-18, A2A, OWASP LLM2025/Agentic2026, ESAA, OTel, SLSA v1.2, CycloneDX 1.7, SemVer): SPEC-0038 alineada con el estado del arte SIN rediseno estrategico. Claude ACEPTO las correcciones de precision -> addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros: trust de dos capas + taint, idempotencia por tupla, fairness por elegibilidad + anti-starvation, writer unico de seq + crash tests, negative replay test, fencing por-aggregate, firma de fallo canonica, sin escalado oculto, umbrales duro/blando + colas, evidencia por tipo, tool-policy minima antes de tools externos, fuentes al dia). DECISION-0015 actualizada. Fase 0 CONGELADA por el operador. Codex aplico handoff-release."
+        },
+        {
+            "id": "TASK-0043",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "N-agente Fase 1: load_agent_registry + fallback 3 niveles + helpers de capacidad; turn_schema agent enum->string; turn_validate semantico (registrado/enabled + capacidad) (SPEC-0038 sec.13 Fase 1)",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0043-codex-n-agent-fase1-registry.md",
+            "depends_on": [
+                "TASK-0038"
+            ],
+            "relates_to": [
+                "TASK-0042"
+            ],
+            "relevant_files": [
+                "runtime/context.py",
+                "runtime/turn_schema.json",
+                "runtime/turn_validate.py",
+                "examples/agent_registry_cases/",
+                "examples/runtime_turn_cases/"
+            ],
+            "deliverables": [
+                "runtime/context.py",
+                "runtime/turn_schema.json",
+                "runtime/turn_validate.py",
+                "examples/agent_registry_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0043-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Fase 1 del runtime N-agente tras congelar la Fase 0 (DECISION-0015 ACCEPTED). Aditivo/config-gated/fallback N=2 byte-equivalente. Firma (A1/D-1) e idempotencia (A3/D-2) se dejan como hook para Fase 2. Encolada a Codex."
         }
     ]
 }

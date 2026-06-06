@@ -2,7 +2,8 @@
 spec_id: SPEC-0038-n-agent-registry
 task_id: TASK-0038
 type: implementation
-status: ready
+status: accepted
+frozen_at: 2026-06-06
 linked_decisions: [DECISION-0015, DECISION-0009, DECISION-0014, DECISION-0001, DECISION-0011]
 created_at: 2026-06-06
 author: operador humano (consolidacion) + Claude (adopcion)
