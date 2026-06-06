@@ -4,12 +4,14 @@ type: DECISION_REQUEST
 task_id: TASK-0038
 from: Claude
 to: operador humano
-status: open
-requires_response: true
-response_owner: operador humano
-one_line_summary: Fase 4 N-agente cerrada (DONE). NUCLEO Fases 1-4 completo. Inventario de lo que falta para terminar la metodologia + decision: arrancar Fase 5 (gateada) o consolidar el nucleo.
-requested_action: Decidir (1) arrancar Fase 5 o consolidar nucleo; (2) release v0.10.0 si/no; (3) prioridad de brechas.
-question: Arrancamos Fase 5 (guardrails) o consolidamos el nucleo (writer-vivo + N=3/N=5 + property + concurrency + CI) antes?
+status: archived
+requires_response: false
+response_owner: none
+one_line_summary: Fase 4 N-agente cerrada (DONE). NUCLEO Fases 1-4 completo. Inventario entregado (artifact). DECISION DEL OPERADOR REGISTRADA: consolidar el NUCLEO (Capa A); arrancada TASK-0047 (A.5 suites en CI).
+requested_action: none (decision tomada: Capa A)
+question: none
+answered_by: operador humano
+decision: Consolidar el NUCLEO (Capa A) antes de la Fase 5. Inventario formal en Area_comun/artifacts/INVENTARIO-n-agente-cierre-nucleo-20260606.md.
 context_refs:
   - Area_comun/specs/SPEC-0038-n-agent-registry.md
   - Area_comun/state/PROJECT_STATE.json
