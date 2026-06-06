@@ -1200,6 +1200,38 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "DONE: la cerro el propio runtime sobre el repo vivo (commit 016b25e, trace gate_pre..commit, gate verde, 0 reverts; ready->done; claim liberado; artefacto commiteado). Primera corrida real exitosa (aprobada por el operador). Hallazgo de proceso -> SPEC-0037/TASK-0041 (runtime commit vs hook de poda); se archivo 1 released para esta corrida. Publicada en v0.9.0."
+        },
+        {
+            "id": "TASK-0041",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Runtime commit robusto frente al pre-commit hook de poda: commit_turn --no-verify + auto-mantenimiento de poda + atomicidad ante fallo de commit (SPEC-0037, hallazgo de TASK-0040)",
+            "spec_id": "Area_comun/specs/SPEC-0037-runtime-commit-poda-hook.md",
+            "file": "Area_comun/tasks/TASK-0041-codex-runtime-commit-poda-hook.md",
+            "depends_on": [
+                "TASK-0036"
+            ],
+            "relates_to": [
+                "TASK-0040",
+                "TASK-0034"
+            ],
+            "relevant_files": [
+                "runtime/vcs.py",
+                "runtime/orchestrator.py",
+                "examples/"
+            ],
+            "deliverables": [
+                "runtime/vcs.py",
+                "runtime/orchestrator.py",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0041-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0037 con RATIFICACION ADVERSARIAL (2026-06-06). commit_turn(verify=False) => --no-verify SOLO en la ruta del runtime (run_gate ya gatea); commits manuales siguen bloqueados por el hook cuando la poda esta due (golden lo confirma). apply.py: commit-fail => discard_worktree_changes + block_task (atomicidad, sin medio-aplicado). orchestrator.auto_prune_if_due: post-run, guarda contra worktree con tracked dirty, --check (0 no-op / 1 due), --apply + commit separado 'chore(runtime): prune state' con --no-verify, atomico ante fallo. Suite: runtime_loop 8/8 (incluye hook instalado + manual-commit-bloqueado + auto-poda + commit-fail), apply 4/4, llm 6/6, router 5/5, turn 4/4+3/3, validador/encoding/neutralidad limpios. Resuelve el deadlock hallado en la corrida real (TASK-0040). Codex aplico handoff-release."
         }
     ]
 }

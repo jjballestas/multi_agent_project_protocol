@@ -115,38 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0041",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Runtime commit robusto frente al pre-commit hook de poda: commit_turn --no-verify + auto-mantenimiento de poda + atomicidad ante fallo de commit (SPEC-0037, hallazgo de TASK-0040)",
-            "spec_id": "Area_comun/specs/SPEC-0037-runtime-commit-poda-hook.md",
-            "file": "Area_comun/tasks/TASK-0041-codex-runtime-commit-poda-hook.md",
-            "depends_on": [
-                "TASK-0036"
-            ],
-            "relates_to": [
-                "TASK-0040",
-                "TASK-0034"
-            ],
-            "relevant_files": [
-                "runtime/vcs.py",
-                "runtime/orchestrator.py",
-                "examples/"
-            ],
-            "deliverables": [
-                "runtime/vcs.py",
-                "runtime/orchestrator.py",
-                "examples/",
-                "Area_comun/handoffs/HANDOFF-TASK-0041-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude contra SPEC-0037 con RATIFICACION ADVERSARIAL (2026-06-06). commit_turn(verify=False) => --no-verify SOLO en la ruta del runtime (run_gate ya gatea); commits manuales siguen bloqueados por el hook cuando la poda esta due (golden lo confirma). apply.py: commit-fail => discard_worktree_changes + block_task (atomicidad, sin medio-aplicado). orchestrator.auto_prune_if_due: post-run, guarda contra worktree con tracked dirty, --check (0 no-op / 1 due), --apply + commit separado 'chore(runtime): prune state' con --no-verify, atomico ante fallo. Suite: runtime_loop 8/8 (incluye hook instalado + manual-commit-bloqueado + auto-poda + commit-fail), apply 4/4, llm 6/6, router 5/5, turn 4/4+3/3, validador/encoding/neutralidad limpios. Resuelve el deadlock hallado en la corrida real (TASK-0040). Codex aplico handoff-release."
-        },
-        {
             "id": "TASK-0042",
             "owner": "Codex",
             "status": "done",
@@ -176,7 +144,7 @@
         {
             "id": "TASK-0043",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -205,7 +173,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "EN REVISION por Claude. Codex implemento Fase 1: runtime/context.py con load_agent_registry + fallback 3 niveles + helpers; turn_schema agent enum->string minLength 1; turn_validate semantico rechaza agente no registrado/disabled/sin capacidad y conserva claim.owner==agent. Firma/idempotencia quedan como hook para Fase 2. Tests: agent_registry 4/4, turn schema 5/5, turn semantic 5/5, router 5/5, apply 4/4, loop 8/8, observability 5/5, llm 6/6, validador/encoding/neutralidad verdes."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Probe en vivo los 3 niveles de load_agent_registry (default triada: Claude=reviewer/Codex=implementer/Codex!=orchestrator; agent_roles sintetiza; agent_registry explicito con 3er agente Gemini=implementer + disabled no concede capacidad). turn_validate semantico: no-registrado/disabled/sin-capacidad => error; conserva claim.owner==agent; required_capability_for_report mapea transicion->capacidad (in_review->done=reviewer; ->in_review/done/blocked=implementer; ->ready/claimed/in_progress=orchestrator). schema agent enum->string minLength 1. Suite completa verde (agent_registry 4/4, turn schema 5/5 + semantic 5/5 incl. 3er agente valido + no-registrado rojo, router 5/5, apply 4/4, loop 8/8, obs 5/5, llm 6/6) + validador/encoding/neutralidad. Fallback N=2 byte-equivalente (fixtures sin migrar pasan). Seam de firma/idempotencia listo para Fase 2. Codex aplico handoff-release."
         }
     ]
 }

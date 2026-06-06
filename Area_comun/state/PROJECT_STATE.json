@@ -93,12 +93,6 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA (operador 2026-06-06) - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, addenda A1..A13). Implementacion por fases 1-4 en marcha (Fase 1 = TASK-0043). Fases 5-7 condicionadas."
         },
         {
-            "id": "TASK-0043",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "N-agente Fase 1 (SPEC-0038 sec.13): registry resolver + fallback 3 niveles + helpers de capacidad; turn_schema agent enum->string; turn_validate semantico. Entregada por Codex; pendiente review Claude."
-        },
-        {
             "id": "TASK-0040",
             "owner": "Claude",
             "status": "done",
@@ -143,7 +137,8 @@
         "PROGRAMA N-AGENTE (instruccion del operador 2026-06-06): el operador entrego analisis independiente + SPEC-0038 CONSOLIDADA. Claude: (1) adopto la consolidada como SPEC-0038 de record (Area_comun/specs/, D-1..D-16 + I1..I8; el borrador previo queda reemplazado); (2) unifico el analisis en Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md (las 3 fuentes del operador conservadas con banner); (3) DECISION-0015 actualizada a D-1..D-16/I1..I8 (proposed; direccion+implementacion aprobadas por el operador; congelamiento Fase 0 pendiente). MODELO: event log append-only fuente de verdad + escritor unico con intents/leases/fencing/idempotencia por-aggregate; registry por capacidades; routing weighted-least-loaded + fairness gate; review/QA != autor (property tests I1/I2); maquina de estados con QA-fail; authN de eventos + anti-inyeccion; presupuesto/deadline; fases 0-4 nucleo, 5-7 diferidas.",
         "TASK-0042 ACEPTADA y DONE (reconciliacion adversarial de Claude): validacion SOTA confirma SPEC-0038 alineada con el estado del arte SIN rediseno. Claude acepto las correcciones de precision => addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros): trust de dos capas (event envelope firmado vs auth externa OAuth/JWT) + taint/provenance de handoffs/tools; idempotencia por tupla; fairness por elegibilidad + anti-starvation; writer unico de seq + crash tests; negative replay test; fencing por-aggregate; firma de fallo canonica; sin escalado oculto; umbrales duro/blando + colas; evidencia por tipo; tool-policy minima antes de tools externos; SLSA v1.2/CycloneDX 1.7. DECISION-0015 actualizada.",
         "FASE 0 N-AGENTE CONGELADA (operador 2026-06-06: 'apruebo SPEC-0038 lista para congelar Fase 0'): DECISION-0015 ACCEPTED + SPEC-0038 frozen (registry/capacidades, schema agent enum->string validado en runtime, D-1..D-16 + I1..I8 + addenda A1..A13). Arranca la implementacion por fases.",
-        "FASE 1 N-AGENTE EN REVISION: TASK-0043 entregada por Codex = load_agent_registry(root) + fallback 3 niveles + helpers de capacidad; turn_schema agent enum->string; turn_validate semantico (registrado/enabled + capacidad), conservando claim.owner==agent. Firma (A1/D-1) e idempotencia (A3/D-2) = hook para Fase 2. Suites verdes y fallback N=2 intacto.",
+        "FASE 1 N-AGENTE ACEPTADA y DONE (TASK-0043, ratificacion adversarial de Claude): load_agent_registry 3 niveles + helpers; turn_schema agent enum->string; turn_validate semantico (registrado/enabled/capacidad), claim.owner==agent conservado; seam de firma/idempotencia listo para Fase 2. Suite verde, fallback N=2 byte-equivalente.",
+        "SIGUIENTE (arquitecto, plan aprobado): ejecutar la REESTRUCTURA DE AREAS PERSONALES a personal/<id>/ (DECISION-0016): git mv Claude//Codex/ -> personal/, exempt_globs -> personal/**, AGENTS.md/template sec.7-8 + regla de onboarding, TASK_PROTOCOL, new_instance.py crea personal/<id>/. Gateada a TASK-0043 done (ya cumplido). Luego encolar FASE 2 N-agente a Codex (event log append-only + leases/fencing/idempotencia por-aggregate, SPEC-0038 sec.13 Fase 2; gates A3/A5/A6/A7).",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar."
     ],
     "created_at": "2026-06-05",
