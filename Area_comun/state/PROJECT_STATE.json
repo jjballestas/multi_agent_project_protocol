@@ -106,7 +106,7 @@
         {
             "id": "TASK-0040",
             "owner": "Claude",
-            "status": "ready",
+            "status": "done",
             "title": "Primera corrida real del runtime sobre el repo vivo (self-run): cerrar esta tarea via invoker subproceso real, 1 commit M1 en main, evidencia auditable (DECISION-0009 #2, aprobada por el operador)."
         }
     ],

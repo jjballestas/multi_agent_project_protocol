@@ -7,7 +7,7 @@
             "claim_id": "CLAIM-20260606-TASK-0040-liverun-claude",
             "task_id": "TASK-0040",
             "owner": "Claude",
-            "status": "active",
+            "status": "released",
             "scope": [
                 ".gitignore",
                 "Area_comun/state/CLAIMS.json",

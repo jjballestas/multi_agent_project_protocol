@@ -177,7 +177,7 @@
         {
             "id": "TASK-0040",
             "owner": "Claude",
-            "status": "ready",
+            "status": "done",
             "type": "documentation",
             "priority": "normal",
             "phase": "P2",

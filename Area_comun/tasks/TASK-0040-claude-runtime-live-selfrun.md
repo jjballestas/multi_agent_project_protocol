@@ -1,7 +1,7 @@
 ---
 id: TASK-0040
 owner: Claude
-status: ready
+status: done
 type: documentation
 priority: normal
 created_at: 2026-06-06
