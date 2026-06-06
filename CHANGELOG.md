@@ -17,6 +17,48 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.10.0] — 2026-06-06
+
+N-agent **core consolidation** release. Packages the N-agent runtime phases 1-4 and the full
+**Layer A** consolidation, plus three protocol decisions. **MINOR** — additive, domain-neutral,
+back-compatible (the legacy N=2 path stays byte-equivalent; every previously valid turn report stays
+valid; runtime stays gated/off-by-default in templates).
+
+### Added
+- **N-agent runtime core (phases 1-4)** against [SPEC-0038](Area_comun/specs/SPEC-0038-n-agent-registry.md):
+  - Phase 1 — agent registry + capability resolution + semantic turn validation (TASK-0043).
+  - Phase 2 — append-only event log: writer-only `seq`, per-aggregate `aggregate_version`/idempotency +
+    leases/fencing, snapshot/compaction, negative replay (TASK-0044).
+  - Phase 3 — deterministic weighted-least-loaded router with author exclusion and fairness gate
+    (TASK-0045).
+  - Phase 4 — Review/QA state machine: defect logs, canonical `failure_signature`, loop-cut to
+    `architect_review`, evidence-gated `done` (TASK-0046).
+- **Layer A — core consolidation**:
+  - A.5 runtime suites wired into CI (TASK-0047).
+  - A.1 event log as **live writer of the control-plane** (Phase A): `assert_snapshot_matches` hard-gate
+    in `apply` and in the global validator when `runtime/state` exists; fallback intact
+    (TASK-0048, [SPEC-0039](Area_comun/specs/SPEC-0039-event-log-writer-vivo.md), DECISION-0017 scope A->B).
+  - A.6 author-of-record hardening (I1/I2 read from state, not payload) (TASK-0049).
+  - A.2 golden N=3/N=5 (reviewer/QA separation + deterministic load balancing) (TASK-0050).
+  - A.3 property-based invariants I1-I8 (TASK-0051).
+  - A.4 concurrency simulation (10 implementers / 100 tasks: conflicts recorded, no snapshot
+    corruption, fairness, zero double-applications) (TASK-0052).
+  - A.7 explicit turn-schema SemVer (`schema_version 1.1.0` + `Area_comun/protocol/SCHEMA_VERSIONING.md`)
+    (TASK-0053).
+- **`turn_schema` is now versioned** (`schema_version: 1.1.0`, additive metadata).
+
+### Decisions
+- [DECISION-0016](Area_comun/decisions/DECISION-0016-areas-personales-onboarding.md) — personal areas under
+  `personal/<id>/` + onboarding rule.
+- [DECISION-0017](Area_comun/decisions/DECISION-0017-event-log-writer-vivo.md) — event-log-as-live-writer
+  scope: A->B incremental (Phase A done; Phase B gated).
+- [DECISION-0018](Area_comun/decisions/DECISION-0018-notificacion-de-anomalias.md) — anomaly notification
+  between agents via mailbox.
+
+### Notes
+- The full global test plan (SPEC-0038 sec.15.3-15.5: N=3/N=5 golden, property-based, concurrency) is covered.
+- Phase B (event log as live writer of the **protocol state**) and Phases 5-7 remain **gated**.
+
 ## [0.9.0] — 2026-06-06
 
 Runtime **M2 hito 2** release: the orchestration runtime gains its **first real (non-replay) agent

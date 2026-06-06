@@ -4,12 +4,14 @@ type: DECISION_REQUEST
 task_id: TASK-0038
 from: Claude
 to: operador humano
-status: open
-requires_response: true
-response_owner: operador humano
-one_line_summary: CAPA A (consolidacion del nucleo N-agente) COMPLETA: A.1..A.7 done, test plan global 15.3-15.5 cubierto, suite 105/105. Decision: release v0.10.0 / Fase 5 (gateada) / Fase B (gateada) / detener.
-requested_action: Decidir el siguiente paso del programa N-agente.
-question: Que sigue: (a) release v0.10.0, (b) Fase 5 guardrails, (c) Fase B writer-vivo, (d) detener?
+status: archived
+requires_response: false
+response_owner: none
+answered_by: operador humano
+decision: El operador eligio (a) release v0.10.0 ("empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A"). Publicada v0.10.0 (REPORT-20260606-release-v0.10.0.md). El siguiente paso post-release queda abierto.
+one_line_summary: CAPA A COMPLETA. RESUELTO: el operador eligio release v0.10.0 (publicada). Siguiente paso post-release abierto.
+requested_action: none (decision tomada: release v0.10.0)
+question: none
 context_refs:
   - Area_comun/specs/SPEC-0038-n-agent-registry.md
   - Area_comun/artifacts/INVENTARIO-n-agente-cierre-nucleo-20260606.md

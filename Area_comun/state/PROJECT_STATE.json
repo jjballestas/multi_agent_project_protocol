@@ -1,7 +1,7 @@
 {
     "project": "multi_agent_project_protocol",
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version": "0.9.0",
+    "version": "0.10.0",
     "phase": {
         "id": "P2",
         "name": "Adopcion y expansion",
@@ -67,7 +67,8 @@
         "v0.6.0",
         "v0.7.0",
         "v0.8.0",
-        "v0.9.0"
+        "v0.9.0",
+        "v0.10.0"
     ],
     "decisions": [
         "DECISION-0001-versionado",
@@ -154,7 +155,8 @@
         "FOLLOW-UP DE FASE 2 CERRADO (control-plane): TASK-0048 cableo assert_snapshot_matches al validador global py/ps1 (hard-gate cuando runtime/state existe) y a apply (pre-commit del runtime). La parte de estado-de-protocolo como writer vivo es Fase B (gateada).",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "PENDIENTES GATEADOS OPERADOR: release v0.10.0 (acumula DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A completa); Fase 5 guardrails (gateada); Fase B writer-vivo del estado de protocolo (gateada); wrapper LLM real (claude CLI) tras el invoker subproceso; o detener el programa N-agente.",
-        "ANALISIS DEL COMPORTAMIENTO SEMI-AUTOMATICO (pedido por el operador): generado como reporte humano en Area_comun/reports/REPORT-20260606-comportamiento-semi-automatico.md + sugerencias extraidas como artefacto formal en Area_comun/artifacts/SUGERENCIAS-autonomia-semi-automatica-20260606.md. Observaciones en memoria semi-auto-collaboration-pattern."
+        "ANALISIS DEL COMPORTAMIENTO SEMI-AUTOMATICO (pedido por el operador): generado como reporte humano en Area_comun/reports/REPORT-20260606-comportamiento-semi-automatico.md + sugerencias extraidas como artefacto formal en Area_comun/artifacts/SUGERENCIAS-autonomia-semi-automatica-20260606.md. Observaciones en memoria semi-auto-collaboration-pattern.",
+        "v0.10.0 PUBLICADA (aprobada por el operador): empaqueta DECISION-0016/0017/0018 + N-agente Fases 1-4 + Capa A completa. protocol_version 0.10.0; CHANGELOG [0.10.0]; tag v0.10.0; reporte humano REPORT-20260606-release-v0.10.0.md. MINOR aditivo, neutral, fallback N=2 byte-equivalente, runtime gated/off-by-default en templates. Suite runtime 105/105 + gates verdes. Codex avisado por mailbox."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-06",
