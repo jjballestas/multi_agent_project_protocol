@@ -83,14 +83,22 @@
         "DECISION-0011-claims-por-fila-estado",
         "DECISION-0012-ascii-canal-entre-agentes",
         "DECISION-0013-liveness-y-visibilidad",
-        "DECISION-0014-poda-sistematica"
+        "DECISION-0014-poda-sistematica",
+        "DECISION-0015-n-agent-registry-y-capacidades",
+        "DECISION-0016-areas-personales-onboarding"
     ],
     "active_tasks": [
         {
             "id": "TASK-0038",
             "owner": "Claude",
             "status": "proposed",
-            "title": "PARAGUAS N-agente: FASE 0 CONGELADA (operador 2026-06-06) - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, addenda A1..A13). Implementacion por fases 1-4 en marcha (Fase 1 = TASK-0043). Fases 5-7 condicionadas."
+            "title": "PARAGUAS N-agente: FASE 0 CONGELADA (operador 2026-06-06) - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, addenda A1..A13). Fase 1 (TASK-0043) DONE; Fase 2 (TASK-0044) en marcha. Fases 5-7 condicionadas."
+        },
+        {
+            "id": "TASK-0044",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "N-agente Fase 2 (SPEC-0038 sec.13): event log append-only (seq writer-only) + idempotencia/fencing por-aggregate + snapshot/compactacion + invariante validador + negative replay test (gates A3/A5/A6/A7). Aditivo, fallback N=2 intacto. Encolada a Codex."
         },
         {
             "id": "TASK-0040",
@@ -138,7 +146,8 @@
         "TASK-0042 ACEPTADA y DONE (reconciliacion adversarial de Claude): validacion SOTA confirma SPEC-0038 alineada con el estado del arte SIN rediseno. Claude acepto las correcciones de precision => addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros): trust de dos capas (event envelope firmado vs auth externa OAuth/JWT) + taint/provenance de handoffs/tools; idempotencia por tupla; fairness por elegibilidad + anti-starvation; writer unico de seq + crash tests; negative replay test; fencing por-aggregate; firma de fallo canonica; sin escalado oculto; umbrales duro/blando + colas; evidencia por tipo; tool-policy minima antes de tools externos; SLSA v1.2/CycloneDX 1.7. DECISION-0015 actualizada.",
         "FASE 0 N-AGENTE CONGELADA (operador 2026-06-06: 'apruebo SPEC-0038 lista para congelar Fase 0'): DECISION-0015 ACCEPTED + SPEC-0038 frozen (registry/capacidades, schema agent enum->string validado en runtime, D-1..D-16 + I1..I8 + addenda A1..A13). Arranca la implementacion por fases.",
         "FASE 1 N-AGENTE ACEPTADA y DONE (TASK-0043, ratificacion adversarial de Claude): load_agent_registry 3 niveles + helpers; turn_schema agent enum->string; turn_validate semantico (registrado/enabled/capacidad), claim.owner==agent conservado; seam de firma/idempotencia listo para Fase 2. Suite verde, fallback N=2 byte-equivalente.",
-        "SIGUIENTE (arquitecto, plan aprobado): ejecutar la REESTRUCTURA DE AREAS PERSONALES a personal/<id>/ (DECISION-0016): git mv Claude//Codex/ -> personal/, exempt_globs -> personal/**, AGENTS.md/template sec.7-8 + regla de onboarding, TASK_PROTOCOL, new_instance.py crea personal/<id>/. Gateada a TASK-0043 done (ya cumplido). Luego encolar FASE 2 N-agente a Codex (event log append-only + leases/fencing/idempotencia por-aggregate, SPEC-0038 sec.13 Fase 2; gates A3/A5/A6/A7).",
+        "AREAS PERSONALES MIGRADAS (DECISION-0016, ACCEPTED, commit ed456d9): regla de onboarding (cada participante crea personal/<id>/ al darse de alta) + git mv Claude//Codex/ -> personal/Claude//personal/Codex/ (historia preservada); exempt_globs -> personal/**; AGENTS.md/template sec.7-8 + TASK_PROTOCOL + CLAUDE.md regla 8; new_instance.py crea personal/<id>/ (smoke: instancia 3 agentes valida verde). MINOR. Codex avisado; su area es personal/Codex/.",
+        "FASE 2 N-AGENTE EN MARCHA: TASK-0044 READY encolada a Codex = event log append-only (seq writer-only + schema version + append atomico) + aggregate_version/idempotency_key por-aggregate + leases/fencing por-aggregate + snapshot/compactacion + invariante validador hot==log+snapshot + negative replay test (gates A3/A5/A6/A7). Aditivo, fallback N=2 intacto. Siguientes: Fase 3 (router + fairness), Fase 4 (estados Review/QA).",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar."
     ],
     "created_at": "2026-06-05",
