@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,7 @@ try:
     from .metrics import summarize
     from .router import select_next
     from .adapters.base import ContextPack
+    from .adapters.llm_adapter import LLMAdapter, RecordedInvoker, SubprocessInvoker
     from .adapters.replay import ReplayAdapter, replay_paths
     from .apply import apply_gate_and_commit
     from .gate import run_gate
@@ -27,6 +29,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from context import load_state
     from router import select_next
     from adapters.base import ContextPack
+    from adapters.llm_adapter import LLMAdapter, RecordedInvoker, SubprocessInvoker
     from adapters.replay import ReplayAdapter, replay_paths
     from apply import apply_gate_and_commit
     from gate import run_gate
@@ -76,7 +79,7 @@ def build_context(
     *,
     state: dict[str, Any],
     unit: dict[str, Any] | None,
-    replay_report_path: Path,
+    replay_report_path: Path | None,
     turn_index: int,
 ) -> ContextPack:
     task = task_for_unit(state, unit)
@@ -92,9 +95,10 @@ def build_context(
     )
 
 
-def default_run_id(reports: list[Path]) -> str:
-    parts = [str(path.as_posix()) for path in reports]
-    for path in reports:
+def default_run_id(reports: list[Path | None], *, adapter_name: str = "replay") -> str:
+    parts = [adapter_name]
+    parts.extend(str(path.as_posix()) for path in reports if path is not None)
+    for path in [item for item in reports if item is not None]:
         if path.exists() and path.is_file():
             parts.append(path.read_text(encoding="utf-8-sig"))
     return deterministic_run_id(parts)
@@ -113,14 +117,80 @@ def report_cost_tokens(report: dict[str, Any]) -> int | None:
     return None
 
 
+def normalize_report_path(path: str) -> str:
+    return path.replace("\\", "/").split("#", 1)[0].strip("/")
+
+
+def dirty_worktree_paths(root: Path) -> list[str]:
+    completed = subprocess.run(["git", "status", "--porcelain"], cwd=root, text=True, capture_output=True, check=False)
+    if completed.returncode != 0:
+        return []
+    paths: list[str] = []
+    for line in completed.stdout.splitlines():
+        if not line.strip():
+            continue
+        payload = line[3:].strip()
+        if " -> " in payload:
+            payload = payload.split(" -> ", 1)[1]
+        paths.append(payload.replace("\\", "/"))
+    return sorted(paths)
+
+
+def unreported_dirty_paths(root: Path, report: dict[str, Any], *, baseline_dirty: set[str]) -> list[str]:
+    declared = {normalize_report_path(str(path)) for path in report.get("changed_paths") or []}
+    current = set(dirty_worktree_paths(root))
+    return [path for path in sorted(current - baseline_dirty) if normalize_report_path(path) not in declared]
+
+
+def select_reports(*, adapter_name: str, replay_path: Path | None, llm_invoker: str) -> list[Path | None]:
+    if adapter_name == "replay":
+        if replay_path is None:
+            raise ValueError("replay adapter requires --replay-report")
+        return list(replay_paths(replay_path))
+    if adapter_name == "llm" and llm_invoker == "recorded":
+        if replay_path is None:
+            raise ValueError("llm recorded invoker requires --replay-report transcript file or directory")
+        return list(replay_paths(replay_path))
+    return [None]
+
+
+def adapter_for_turn(
+    *,
+    adapter_name: str,
+    report_path: Path | None,
+    llm_invoker: str,
+    llm_command: str | None,
+    allow_real_invoker: bool,
+) -> Any:
+    if adapter_name == "replay":
+        return ReplayAdapter()
+    if adapter_name != "llm":
+        raise ValueError(f"unsupported adapter: {adapter_name}")
+    if llm_invoker == "recorded":
+        if report_path is None:
+            raise ValueError("recorded invoker requires a transcript path")
+        return LLMAdapter(RecordedInvoker(report_path))
+    if llm_invoker == "subprocess":
+        if not allow_real_invoker:
+            raise ValueError("subprocess invoker requires --allow-real-invoker")
+        if not llm_command:
+            raise ValueError("subprocess invoker requires --llm-command")
+        return LLMAdapter(SubprocessInvoker.from_command(llm_command))
+    raise ValueError(f"unsupported llm invoker: {llm_invoker}")
+
+
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
 
 
 def run_loop(
     root: Path,
-    replay_path: Path,
+    replay_path: Path | None,
     *,
+    adapter_name: str = "replay",
+    llm_invoker: str = "recorded",
+    llm_command: str | None = None,
+    allow_real_invoker: bool = False,
     once: bool = False,
     max_iter: int | None = None,
     run_id: str | None = None,
@@ -131,18 +201,23 @@ def run_loop(
     if not runtime_enabled(root):
         return {"ok": False, "reason": "runtime.enabled is false; --run is disabled"}
 
-    reports = replay_paths(replay_path)
+    try:
+        reports = select_reports(adapter_name=adapter_name, replay_path=replay_path, llm_invoker=llm_invoker)
+    except ValueError as exc:
+        return {"ok": False, "reason": str(exc)}
     if not reports:
         return {"ok": False, "reason": f"no replay reports found: {replay_path}"}
+    if adapter_name == "llm" and llm_invoker == "subprocess" and not once:
+        return {"ok": False, "reason": "subprocess llm invoker requires --once"}
 
     limit = 1 if once else (max_iter if max_iter is not None else len(reports))
     if limit < 1:
         return {"ok": False, "reason": "--max-iter must be >= 1"}
 
-    adapter = ReplayAdapter()
-    runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit]))
+    runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit], adapter_name=adapter_name))
     budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens)
     turns: list[dict[str, Any]] = []
+    baseline_dirty = set(dirty_worktree_paths(root))
 
     for index, report_path in enumerate(reports[:limit], start=1):
         trace: list[str] = ["gate_pre"]
@@ -173,7 +248,34 @@ def run_loop(
         trace.append("claim")
         context = build_context(state=state, unit=unit, replay_report_path=report_path, turn_index=index)
         trace.append("adapter")
+        try:
+            adapter = adapter_for_turn(
+                adapter_name=adapter_name,
+                report_path=report_path,
+                llm_invoker=llm_invoker,
+                llm_command=llm_command,
+                allow_real_invoker=allow_real_invoker,
+            )
+        except ValueError as exc:
+            entry = turn_entry(turn=index, trace=trace, unit=unit, outcome="rejected", errors=[str(exc)], duration_ms=clock_fixed)
+            runlog.append(entry)
+            turns.append(entry)
+            break
         report = adapter.run_turn(context=context, root=root)
+        unreported = unreported_dirty_paths(root, report, baseline_dirty=baseline_dirty)
+        if unreported:
+            entry = turn_entry(
+                turn=index,
+                trace=trace,
+                unit=unit,
+                report=report,
+                outcome="rejected",
+                errors=[f"unreported worktree change: {path}" for path in unreported],
+                duration_ms=clock_fixed,
+            )
+            runlog.append(entry)
+            turns.append(entry)
+            break
         clean_report = schema_report(report)
         trace.append("validate")
         errors = validate_turn(clean_report, root)
@@ -200,6 +302,21 @@ def run_loop(
             turns.append(entry)
             break
 
+        cost_tokens = report_cost_tokens(report)
+        if budget_tokens is not None and cost_tokens is not None and cost_tokens > budget_tokens:
+            entry = turn_entry(
+                turn=index,
+                trace=[*trace, "budget"],
+                unit=unit,
+                report=report,
+                outcome="budget_exhausted",
+                reason="max_cost_tokens",
+                duration_ms=clock_fixed,
+            )
+            runlog.append(entry)
+            turns.append(entry)
+            break
+
         trace.append("apply")
         result = apply_gate_and_commit(clean_report, root)
         trace.extend(["gate_post", "commit"])
@@ -216,7 +333,7 @@ def run_loop(
         )
         runlog.append(entry)
         turns.append(entry)
-        budget.consume(cost_tokens=report_cost_tokens(report))
+        budget.consume(cost_tokens=cost_tokens)
         if not result.get("green"):
             break
         if budget.exceeded() and index < len(reports[:limit]):
@@ -251,8 +368,11 @@ def main() -> int:
     parser.add_argument("--run", action="store_true", help="Execute deterministic runtime turns")
     parser.add_argument("--once", action="store_true", help="Execute exactly one turn")
     parser.add_argument("--max-iter", type=int, default=None, help="Maximum turns to execute")
-    parser.add_argument("--adapter", choices=["replay"], default="replay")
-    parser.add_argument("--replay-report", help="Replay report JSON file or directory")
+    parser.add_argument("--adapter", choices=["replay", "llm"], default="replay")
+    parser.add_argument("--replay-report", help="Replay report JSON file or directory; for llm recorded, transcript file or directory")
+    parser.add_argument("--llm-invoker", choices=["recorded", "subprocess"], default="recorded")
+    parser.add_argument("--llm-command", help="Command for the explicit subprocess LLM invoker")
+    parser.add_argument("--allow-real-invoker", action="store_true", help="Required to run the subprocess LLM invoker")
     parser.add_argument("--run-id", help="Deterministic run-log id; defaults to a replay-input hash")
     parser.add_argument("--budget-tokens", type=int, default=None, help="Maximum declared turn cost in tokens")
     parser.add_argument("--clock-fixed", type=int, default=0, help="Deterministic duration_ms value for tests")
@@ -270,14 +390,18 @@ def main() -> int:
         print(json.dumps({"dry_run": True, "next": result}, indent=2, ensure_ascii=False))
         return 0
 
-    if args.adapter != "replay":
-        parser.error("M1 only supports the replay adapter")
-    if not args.replay_report:
-        parser.error("--run requires --replay-report in M1")
+    if args.adapter == "replay" and not args.replay_report:
+        parser.error("--run with replay requires --replay-report")
+    if args.adapter == "llm" and args.llm_invoker == "recorded" and not args.replay_report:
+        parser.error("--run with llm recorded requires --replay-report")
 
     result = run_loop(
         root,
-        Path(args.replay_report),
+        Path(args.replay_report) if args.replay_report else None,
+        adapter_name=args.adapter,
+        llm_invoker=args.llm_invoker,
+        llm_command=args.llm_command,
+        allow_real_invoker=args.allow_real_invoker,
         once=args.once,
         max_iter=args.max_iter,
         run_id=args.run_id,
