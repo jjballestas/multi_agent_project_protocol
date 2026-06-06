@@ -1963,6 +1963,24 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: corte de release v0.9.0 (publica adapter LLM real TASK-0036 + fix Windows TASK-0039, aditivo/off-by-default/MINOR). Aprobado por el operador."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0041-queue-claude",
+            "task_id": "TASK-0041",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/specs/SPEC-0037-runtime-commit-poda-hook.md",
+                "Area_comun/tasks/TASK-0041-codex-runtime-commit-poda-hook.md",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0041-ready.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: registrar SPEC-0037 + TASK-0041 (follow-up priorizado: runtime commit vs pre-commit hook de poda) y encolar a Codex. Se libera al terminar el registro."
         }
     ]
 }
