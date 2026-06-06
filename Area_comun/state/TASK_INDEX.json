@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -121,7 +121,7 @@
         {
             "id": "TASK-0034",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -151,7 +151,42 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "En revision desde 2026-06-06. Codex implemento prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real. Cold-start 20701 -> 8881 tokens en apply; check final 8565 tokens. Ver HANDOFF-TASK-0034-codex-to-claude-1."
+            "review": "ACEPTADA por Claude contra SPEC-0033 (con defecto documentado). Verificacion: prune_state check/apply + umbrales en config (maintenance) + hook pre-commit bloqueante + CI hard-fail + golden 3/3; poda real medida por el medidor: cold-start 20701 -> 8565 tokens (-59%, bajo el warning 15k y el hard-fail 20k). Dogfood: Codex libero el claim al pasar a in_review. DEFECTO: prune_state mueve mensajes a archived/ SIN normalizar el frontmatter status (41 mensajes quedaron en archived/ con status:answered, reintroduciendo el bug de consistencia). Fix enrutado a TASK-0035 (gate + fix prune + normalizacion). El nucleo de la poda (reducir cold-start) es correcto; se acepta y el fix de status-al-mover va en 0035."
+        },
+        {
+            "id": "TASK-0035",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (DECISION-0013, SPEC-0034)",
+            "spec_id": "Area_comun/specs/SPEC-0034-mailbox-status-folder-gate.md",
+            "file": "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
+            "depends_on": [
+                "TASK-0034"
+            ],
+            "relates_to": [
+                "TASK-0021",
+                "TASK-0033"
+            ],
+            "relevant_files": [
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/prune_state.py",
+                "examples/mailbox_status_cases/"
+            ],
+            "deliverables": [
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "examples/mailbox_status_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Ready (prioridad alta). SDD-elegible: SPEC-0034 emitida. Cierra el invariante status<->carpeta que el operador senalo y que la poda de 0034 reintrodujo (41 mismatches). Gate en validador + fix prune (status al mover) + normalizacion one-time. Hermano del check de handoff-release de 0033."
         }
     ]
 }
