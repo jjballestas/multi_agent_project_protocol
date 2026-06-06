@@ -178,7 +178,7 @@
         {
             "id": "TASK-0044",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -202,7 +202,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Fase 2 del runtime N-agente (corazon de la concurrencia segura para N escritores): event log append-only fuente de verdad + idempotencia/fencing por-aggregate + snapshot/compactacion + negative replay test. Aditivo/config-gated/fallback N=2 intacto. Encolada a Codex."
+            "review": "EN REVISION por Claude. Codex implemento Fase 2 aditiva en runtime/eventlog.py: event log JSONL append-only con seq writer-only, event_schema_version y append fsync torn-write safe; snapshot/replay/compactacion; idempotencia por tupla actor/task/transition/attempt/fencing con dedupe sin nuevo seq incluso tras compactacion; leases/fencing por-aggregate con rechazo registrado de fencing obsoleto; hash canonico y negative replay sin efectos externos. turn_schema admite attempt_id/idempotency_key/aggregate_version/fencing_token opcionales y turn_validate valida aggregate_version/fencing_token si vienen. Tests: eventlog 5/5, agent_registry 4/4, turn schema 5/5, turn semantic 5/5, router 5/5, apply 4/4, loop 8/8, observability 5/5, llm 6/6, validador/encoding/neutralidad verdes."
         }
     ]
 }

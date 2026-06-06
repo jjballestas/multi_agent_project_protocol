@@ -37,6 +37,26 @@
       "items": { "type": "string" },
       "description": "Rutas escritas en el turno. INVARIANTE: cada ruta debe estar cubierta por el scope del claim activo del agente (write-allowlist). El orquestador rechaza si no."
     },
+    "attempt_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identificador de intento para idempotencia N-agente. Opcional hasta Fase 2+."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Clave de idempotencia del intent. Duplicado exacto se resuelve en el writer."
+    },
+    "aggregate_version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Version esperada del aggregate/tarea; si se informa, se valida contra el event log."
+    },
+    "fencing_token": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Fencing token del claim/intento; si se informa, se valida contra el token vigente del aggregate."
+    },
     "transitions": {
       "type": "object",
       "additionalProperties": false,

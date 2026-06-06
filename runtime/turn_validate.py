@@ -18,8 +18,10 @@ ROW_SCOPED_LEDGER_PATHS = {
 
 try:
     from .context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
+    from .eventlog import EventWriter
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
+    from eventlog import EventWriter
 
 
 def load_report(path: Path) -> dict[str, Any]:
@@ -105,6 +107,27 @@ def validate_agent_semantics(report: dict[str, Any], root: Path) -> list[str]:
     return errors
 
 
+def validate_concurrency_semantics(report: dict[str, Any], root: Path) -> list[str]:
+    errors: list[str] = []
+    task_id = str(report.get("task_id") or "")
+    if not task_id or task_id == "none":
+        return errors
+    state = EventWriter(root).state()
+    current_version = int(state.get("aggregate_versions", {}).get(task_id) or 0)
+    current_fencing = int(state.get("fencing_tokens", {}).get(task_id) or 0)
+    if "aggregate_version" in report and int(report["aggregate_version"]) != current_version:
+        errors.append(
+            "semantic: stale aggregate_version "
+            f"for {task_id}: expected {current_version}, found {report['aggregate_version']}"
+        )
+    if "fencing_token" in report and int(report["fencing_token"]) < current_fencing:
+        errors.append(
+            "semantic: stale fencing_token "
+            f"for {task_id}: expected >= {current_fencing}, found {report['fencing_token']}"
+        )
+    return errors
+
+
 def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads((root / "runtime" / "turn_schema.json").read_text(encoding="utf-8-sig"))
@@ -117,6 +140,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
 
     state = load_state(root)
     errors.extend(validate_agent_semantics(report, root))
+    errors.extend(validate_concurrency_semantics(report, root))
     claims = [
         claim
         for claim in active_claims(state)

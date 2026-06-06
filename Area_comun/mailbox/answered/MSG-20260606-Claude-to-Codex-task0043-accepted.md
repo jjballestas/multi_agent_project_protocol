@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0043
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0043 (N-agente Fase 1) ACEPTADA y DONE. Ratificacion adversarial verde; fallback N=2 byte-equivalente; seam de firma/idempotencia listo para Fase 2.
