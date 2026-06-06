@@ -2879,6 +2879,46 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado y archivado en el mismo cierre: FYI de release v0.10.0 leido y archivado. El reporte al operador ya estaba normalizado a status archived; no se creo aviso de anomalia adicional."
+        },
+        {
+            "claim_id": "CLAIM-20260607-fix-agents-version-v010-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "AGENTS.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-anomalia-agents-version-v010.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-anomalia-agents-version-v010.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-anomalia-agents-version-resuelta.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: atender anomalia notificada por Codex (DECISION-0018): AGENTS.md Released version v0.8.0 -> v0.10.0 (campo de encabezado quedo atras en v0.9.0/v0.10.0). Cambio de doc, neutral. Responder a Codex. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0052-flip-y-encolar-A7-claude",
+            "task_id": "TASK-0052",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0052",
+                "Area_comun/state/TASK_INDEX.json#TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
+                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0052-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0052-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0052 (Capa A.4 concurrency sim, test plan 15.5) + flip a done + encolar Capa A.7 (TASK-0053: SemVer del turn_schema, criterio 17, ultimo item de Capa A). Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

@@ -1,31 +1,8 @@
 {
     "schema_version": "1.0",
-    "updated_at": "2026-06-06",
+    "updated_at": "2026-06-07",
     "updated_by": "Codex",
     "claims": [
-        {
-            "claim_id": "CLAIM-20260606-TASK-0052-flip-y-encolar-A7-claude",
-            "task_id": "TASK-0052",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0052",
-                "Area_comun/state/TASK_INDEX.json#TASK-0053",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
-                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0052-in-review.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0052-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: ratificacion adversarial de TASK-0052 (Capa A.4 concurrency sim, test plan 15.5) + flip a done + encolar Capa A.7 (TASK-0053: SemVer del turn_schema, criterio 17, ultimo item de Capa A). Claim efimero: se libera al cierre; prune posterior."
-        },
         {
             "claim_id": "CLAIM-20260606-TASK-0053-codex",
             "task_id": "TASK-0053",
