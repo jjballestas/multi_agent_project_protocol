@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -45,37 +45,6 @@
         "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva)."
     },
     "tasks": [
-        {
-            "id": "TASK-0036",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Adapter LLM real: LLMAdapter(AgentAdapter) con invoker subproceso generico (vendor-neutral) + RecordedInvoker + limites M1/budget + replay comparativo + --adapter llm --once, SIN autonomia (M2 hito 2, SPEC-0035)",
-            "spec_id": "Area_comun/specs/SPEC-0035-adapter-llm-real.md",
-            "file": "Area_comun/tasks/TASK-0036-codex-adapter-llm-real.md",
-            "depends_on": [
-                "TASK-0031"
-            ],
-            "relates_to": [
-                "TASK-0032"
-            ],
-            "relevant_files": [
-                "runtime/adapters/llm_adapter.py",
-                "runtime/orchestrator.py",
-                "examples/llm_adapter_cases/"
-            ],
-            "deliverables": [
-                "runtime/adapters/llm_adapter.py",
-                "runtime/orchestrator.py",
-                "examples/llm_adapter_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0036-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude contra SPEC-0035 con RATIFICACION ADVERSARIAL (2026-06-06). (1) Gates del invoker real probados en vivo: subprocess sin --allow-real-invoker => ValueError (no ejecuta nada); sin --llm-command => ValueError; requiere ademas --once + runtime.enabled:true; default sigue replay. (2) Drop-in de replay confirmado: golden replay comparativo llm==replay (mismo commit/transicion ready->done). (3) Limites: changed_paths fuera del claim => outcome rejected sin commit; budget excedido (cost 6 > 5) => budget_exhausted sin commit; enabled:false => abort exit 1. (4) Vendor-neutral: SubprocessInvoker generico por comando (decision operador #1); RecordedInvoker (recorded_invoker.v1, sin red) => CI sin API ni credenciales. (5) Codex NO disparo el invoker real (handoff + notas). Suite: llm 5/5, loop 5/5, observability 5/5, apply 4/4, router 5/5, validador/encoding/neutralidad limpios. Codex aplico handoff-release (claim liberado en in_review). PRIMERA CORRIDA REAL sobre el repo vivo SIGUE PENDIENTE de aprobacion puntual del operador (decision #2)."
-        },
         {
             "id": "TASK-0037",
             "owner": "Claude",

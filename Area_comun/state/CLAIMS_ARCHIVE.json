@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-05",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "archive_policy": "Released claims moved from CLAIMS.json by TASK-0024; no data deleted.",
     "claims": [
         {
@@ -1943,6 +1943,26 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: DONE terminal de release v0.8.0 movido a mailbox/answered."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v090-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "Area_comun/state/PROJECT_STATE.json#version",
+                "Area_comun/state/PROJECT_STATE.json#released_versions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/reports/REPORT-20260606-release-v0.9.0.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: corte de release v0.9.0 (publica adapter LLM real TASK-0036 + fix Windows TASK-0039, aditivo/off-by-default/MINOR). Aprobado por el operador."
         }
     ]
 }

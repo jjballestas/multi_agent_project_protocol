@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
         {
             "claim_id": "CLAIM-20260606-TASK-0040-liverun-claude",

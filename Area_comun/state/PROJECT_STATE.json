@@ -1,7 +1,7 @@
 {
     "project": "multi_agent_project_protocol",
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "phase": {
         "id": "P2",
         "name": "Adopcion y expansion",
@@ -66,7 +66,8 @@
         "v0.5.0",
         "v0.6.0",
         "v0.7.0",
-        "v0.8.0"
+        "v0.8.0",
+        "v0.9.0"
     ],
     "decisions": [
         "DECISION-0001-versionado",
@@ -85,12 +86,6 @@
         "DECISION-0014-poda-sistematica"
     ],
     "active_tasks": [
-        {
-            "id": "TASK-0036",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Adapter LLM real (M2 hito 2, SPEC-0035) - ACEPTADA por Claude (ratificacion adversarial): LLMAdapter + RecordedInvoker sin red + SubprocessInvoker GENERICO gateado (--allow-real-invoker+--llm-command+--once+enabled), limites M1/budget abortan sin commit, replay comparativo llm==replay, default replay. Primera corrida real PENDIENTE de aprobacion puntual del operador."
-        },
         {
             "id": "TASK-0039",
             "owner": "Codex",
@@ -135,11 +130,11 @@
         "TASK-0039 READY y encolada a Codex (HALLAZGO de la corrida real): SubprocessInvoker.from_command usa shlex.split en modo POSIX -> corrompe rutas Windows (backslash como escape) -> subprocess WinError 2. El invoker real es inusable en Windows con rutas nativas (operador opera en Windows; en el smoke hubo que usar /). SPEC-0036: tokenizar Windows-safe sin romper POSIX + golden cross-platform. Prioridad high.",
         "TASK-0039 ACEPTADA y DONE (ratificacion adversarial de Claude): SubprocessInvoker.from_command usa CommandLineToArgvW (Win32) en Windows + shlex POSIX en otros SO. Verificado en vivo: split_command de rutas backslash nativas + comilla con espacios tokeniza correcto (antes WinError 2); golden subprocess nativo end-to-end (1 commit) + suite llm 6/6 + regresiones verdes. El invoker real ya es usable en Windows con rutas nativas (sin el workaround /). Corrida real sobre repo vivo sigue gateada al operador.",
         "RUN REAL SOBRE EL REPO VIVO: APROBADO por el operador (2026-06-06) y EN EJECUCION via TASK-0040 (self-run del runtime: cierra la tarea con invoker subproceso real, 1 commit M1 en main). HALLAZGO: el commit del runtime corre el pre-commit hook de poda; cerrar tarea libera claim y puede cruzar released_count>4 => se archivo 1 released para no disparar. Run-logs (runtime/runs/) gitignoreados. Fix de raiz (runtime commit consciente del hook / poda como turno de mantenimiento) = FOLLOW-UP pendiente.",
-        "RELEASE PENDIENTE (opcional, cuando el operador quiera): v0.9.0 MINOR aditiva/off-by-default que publica el adapter LLM real (TASK-0036). Requiere bump de version + CHANGELOG + reporte humano (CLAUDE.md regla 7). No cortada aun. Siguiente hito M2: (3+) loop autonomo multi-turno + mailbox automation, gateados.",
+        "v0.9.0 PUBLICADA (2026-06-06, aprobada por el operador): runtime M2 hito 2 = adapter LLM real (TASK-0036) + subprocess Windows-safe (TASK-0039), aditivo/off-by-default/MINOR. protocol_version 0.8.0->0.9.0, CHANGELOG [0.9.0], tag v0.9.0, reporte Area_comun/reports/REPORT-20260606-release-v0.9.0.md. Incluye la primera corrida real sobre el repo vivo (TASK-0040). FOLLOW-UP pendiente: runtime commit consciente del pre-commit hook de poda (released_count). Siguiente M2 (3+): loop autonomo multi-turno + mailbox automation + wrapper LLM real, gateados.",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "TASK-0038 (N-agent readiness) DISENO CAPTURADO: DECISION-0015 (proposed) + SPEC-0038 (proposed) definen el modelo de EQUIPO COMPLETO -> agent_registry config-driven por capacidades (architect/implementer/reviewer/qa/orchestrator/human_owner) con fallback de 3 niveles (cero migracion); turn_schema.agent de enum a string validado vs registry; router review-by-not-author + QA gate de primera clase + human gate parametrizado + ruteo por capacidad; defaults por agente actuante. Aditivo/MINOR. Descomposicion a-g en SPEC-0038 (NO registrada como tareas). TASK-0038 = paraguas proposed. Implementacion TRIPLE-GATEADA: TASK-0039 (hecho) -> aprobacion humana DECISION-0015 -> OK operador. El operador esta revisando el plan. Analisis fuente: Area_comun/artifacts/ANALISIS-n-agent-readiness.md."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }

@@ -17,6 +17,39 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.9.0] — 2026-06-06
+
+Runtime **M2 hito 2** release: the orchestration runtime gains its **first real (non-replay) agent
+invoker**, vendor-neutral and gated, all **additively and off-by-default** (`runtime.enabled:false`,
+default adapter still `replay`). Running a real agent requires explicit opt-in flags
+(`--adapter llm --llm-invoker subprocess --allow-real-invoker --llm-command <cmd> --once`) and a human
+gate for the first live run. **MINOR** — additive, domain-neutral, back-compatible (every previously
+valid turn report stays valid).
+
+### Added
+- **Real LLM adapter** (TASK-0036, [SPEC-0035](Area_comun/specs/SPEC-0035-adapter-llm-real.md)):
+  `runtime/adapters/llm_adapter.py` — `LLMAdapter(AgentAdapter)` driven by a **pluggable `Invoker`**.
+  `RecordedInvoker` (transcript `recorded_invoker.v1`, no network) keeps golden cases deterministic;
+  `SubprocessInvoker` runs a **generic external command** (vendor-neutral: Claude SDK / Codex CLI are
+  configurations of this invoker, not the base). Orchestrator flags `--adapter llm`,
+  `--llm-invoker recorded|subprocess`, `--llm-command`, `--allow-real-invoker`. Limits reuse M1: the real
+  invoker requires `enabled` + `--allow-real-invoker` + `--llm-command` + `--once`; `changed_paths`
+  outside the active claim are rejected; per-turn budget aborts before mutating state. Default stays
+  `replay`; CI never uses the real invoker. Golden `examples/llm_adapter_cases/` (once, replay-comparative
+  `llm==replay`, allowlist rejection, budget abort, `enabled:false` abort).
+- **Windows-safe subprocess command parsing** (TASK-0039,
+  [SPEC-0036](Area_comun/specs/SPEC-0036-subprocess-invoker-windows-safe.md)):
+  `SubprocessInvoker.from_command` tokenizes via `CommandLineToArgvW` on Windows (and `shlex` on POSIX),
+  so a real `--llm-command` with native backslash paths and quoted spaces works instead of failing with
+  `WinError 2`. Golden subprocess case runs end-to-end with the host-native separator.
+
+### Notes
+- First **real run on the live repo** executed under human approval (DECISION-0009 decision #2): the
+  runtime closed a task with one gated M1 commit via the real subprocess invoker. Run-logs
+  (`runtime/runs/`) are local audit traces and are git-ignored.
+- Autonomous multi-turn loop, mailbox automation and a real LLM wrapper remain **M2 (later milestones)**
+  and gated.
+
 ## [0.8.0] — 2026-06-06
 
 Runtime **M1** release: the orchestration runtime gains its **first safe writer** and closes the
