@@ -257,6 +257,26 @@ def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]
     }
 
 
+def create_personal_areas(target: Path, args: argparse.Namespace) -> None:
+    """DECISION-0016: each registered participant gets a personal area personal/<id>/.
+
+    Created with a .gitkeep so the directory persists in git when empty. <id> matches the
+    participant identifier used in the agent registry / agents block.
+    """
+    participants = [args.architect, args.implementer, args.human_owner]
+    seen: set[str] = set()
+    for participant in participants:
+        pid = str(participant).strip()
+        if not pid or pid in seen:
+            continue
+        seen.add(pid)
+        area = target / "personal" / pid
+        area.mkdir(parents=True, exist_ok=True)
+        keep = area / ".gitkeep"
+        if not keep.exists():
+            keep.write_text("\n", encoding="utf-8")
+
+
 def main() -> int:
     args = parse_args()
     source = Path(args.source_template).resolve()
@@ -272,6 +292,7 @@ def main() -> int:
         copy_support_dirs(source, target)
         render_templates(source, target, replacements)
         render_remaining_files(target, replacements)
+        create_personal_areas(target, args)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(

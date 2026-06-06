@@ -116,8 +116,8 @@ An agent must create or update an active claim **before** creating, editing or l
 a shared route. This includes new files, partial drafts, temporary scripts/fixtures that remain in
 the workspace, and shared state edits.
 
-Private drafts may live in the agent private area without a task claim only when that route is not
-covered by another owner's active claim.
+Private drafts may live in the participant's personal area `personal/<id>/` without a task claim only when
+that route is not covered by another owner's active claim.
 
 If an agent discovers unclaimed work in a shared route, it must not overwrite it. It opens one
 mailbox message with one concrete ownership question, then waits or works outside that route.

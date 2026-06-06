@@ -90,7 +90,10 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
 ## 7. Collaboration Protocol
 
 - Small, verifiable, single-owner tasks.
-- Shared work in `Area_comun/`; private drafts in `Claude/` and `Codex/`.
+- Shared work in `Area_comun/`; private drafts in each participant's personal area `personal/<id>/`.
+- **Onboarding rule (DECISION-0016):** every participant (agent or human) that registers in the project
+  creates its personal area at `personal/<id>/`, where `<id>` is its identifier in `agent_registry`/
+  `agents`. Private drafts/notes live there.
 - Before editing, check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/`.
 - Before creating or editing any file in a shared route, create/update an active claim that lists
   that route in `scope`; this includes new drafts and temporary files that remain in the workspace.
@@ -114,7 +117,7 @@ multi_agent_project_protocol/
 |-- Area_comun/               (protocol docs + live state + .template masters)
 |-- examples/minimal_instance/(reference instance, validates green)
 |-- scripts/validate_collaboration_state.ps1
-|-- Claude/ , Codex/          (private agent areas)
+|-- personal/<id>/            (per-participant private areas; e.g. personal/Claude, personal/Codex)
 ```
 
 ## 9. Base Definition of Done

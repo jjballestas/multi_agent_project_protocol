@@ -53,8 +53,7 @@
     "exempt_globs": [
       "profiles/**",
       "examples/**",
-      "Claude/**",
-      "Codex/**",
+      "personal/**",
       "Area_comun/decisions/**",
       "Area_comun/tasks/**",
       "Area_comun/handoffs/**",

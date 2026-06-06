@@ -99,7 +99,9 @@ The task status must match in two places:
 - Work is decomposed into small, verifiable, assignable tasks.
 - One task has one owner.
 - Shared work lives in `Area_comun/`.
-- Private drafts reside in each agent private folder if the project uses them.
+- Private drafts reside in each participant's personal area `personal/<id>/`.
+- Onboarding rule: every participant (agent or human) that registers creates its personal area at
+  `personal/<id>/` (same `<id>` as in the agent registry / agents block).
 - Before editing, check `TASK_INDEX.json`, `CLAIMS.json` and `mailbox/open/`.
 - Before creating or editing any file in a shared route, create/update an active claim that lists
   that route in `scope`; this includes new drafts and temporary files that remain in the workspace.
@@ -127,6 +129,7 @@ Recommended shared structure:
 |   |-- artifacts/
 |   |-- contracts/
 |   `-- decisions/
+|-- personal/<id>/   (per-participant private areas; created on registration)
 `-- {{PROJECT_CODE_OR_DOCS}}
 ```
 

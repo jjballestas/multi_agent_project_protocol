@@ -1,8 +1,34 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
+        {
+            "claim_id": "CLAIM-20260606-DECISION-0016-personal-areas-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "active",
+            "scope": [
+                "Claude/",
+                "Codex/",
+                "personal/",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "CLAUDE.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "scripts/new_instance.py",
+                "Area_comun/decisions/DECISION-0016-areas-personales-onboarding.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-fase2.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: DECISION-0016 (regla onboarding + reubicacion areas personales a personal/<id>/), migracion git mv Claude//Codex/ -> personal/, exempt_globs -> personal/**, AGENTS.md/template/TASK_PROTOCOL/CLAUDE.md/new_instance.py; y encolar Fase 2 (TASK-0044). Se libera al terminar."
+        },
         {
             "claim_id": "CLAIM-20260606-TASK-0040-liverun-claude",
             "task_id": "TASK-0040",
