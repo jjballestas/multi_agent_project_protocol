@@ -1763,6 +1763,56 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: fijar decisiones del operador en SPEC-0035 (invoker real = subproceso generico vendor-neutral; gate 1ra corrida real = aprobacion puntual del operador cuando Claude avise), pasar TASK-0036 proposed->ready y encolarla a Codex. Se libera al terminar el registro; Codex reclama para implementar."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0036-accept-claude",
+            "task_id": "TASK-0036",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0036",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0036",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0036-codex-adapter-llm-real.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0036-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0036-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0036-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0036 contra SPEC-0035 (gates del invoker real probados, llm==replay, allowlist/budget abortan, default replay). Flip a done + cierre de mailbox. Se libera al cerrar."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0036-codex",
+            "task_id": "TASK-0036",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0036",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0036",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0036-codex-adapter-llm-real.md",
+                "runtime/adapters/llm_adapter.py",
+                "runtime/adapters/__init__.py",
+                "runtime/orchestrator.py",
+                "runtime/README.md",
+                "examples/llm_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0036-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0036-ready.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0036-ready.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0036-claimed.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Codex-to-Claude-task0036-claimed.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0036-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado al pasar TASK-0036 a in_review. Implementado SPEC-0035: LLMAdapter con invoker subproceso generico vendor-neutral, RecordedInvoker sin red, limites M1/budget, --adapter llm --once y golden replay comparativo. No se disparo invoker real."
         }
     ]
 }
