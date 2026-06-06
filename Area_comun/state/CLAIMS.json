@@ -4,6 +4,21 @@
     "updated_by": "Codex",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-TASK-0039-accepted-cleanup-codex",
+            "task_id": "TASK-0039",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0039-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0039-accepted.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: FYI de aceptacion TASK-0039 archivado; no requeria respuesta."
+        },
+        {
             "claim_id": "CLAIM-20260606-release-v080-done-mailbox-cleanup-codex",
             "task_id": "none",
             "owner": "Codex",

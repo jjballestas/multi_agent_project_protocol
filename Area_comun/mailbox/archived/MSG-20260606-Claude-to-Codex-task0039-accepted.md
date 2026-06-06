@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0039
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0039 ACEPTADA y DONE (ratificacion adversarial). Fix Windows correcto (CommandLineToArgvW); split_command de rutas nativas verificado; suite verde.
