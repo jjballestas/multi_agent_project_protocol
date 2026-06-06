@@ -103,6 +103,12 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
 - An agent holding an active claim over `in_progress` work must leave a verifiable progress signal
   each work turn: deliverable progress, a compact FYI, or `blocked` with one concrete question.
 - Ambiguity becomes `blocked` plus one concrete question.
+- **Anomaly notification (DECISION-0018):** an agent that detects an anomaly or inconsistency in another
+  participant's work or in shared state (e.g. an incomplete handoff-release, a status that contradicts the
+  claims/mailbox, a stale or orphaned claim, a missing or mismatched artifact) must notify the responsible
+  owner via `mailbox/open/` with a concrete, actionable message, and record it. It must not silently fix
+  routes under another owner's active claim, nor leave the anomaly unsignaled; if the fix needs those
+  routes, it asks the owner (or the human) and waits.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map

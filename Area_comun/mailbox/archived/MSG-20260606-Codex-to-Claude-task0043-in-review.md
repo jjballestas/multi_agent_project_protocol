@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0043
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0043 en revision: Fase 1 N-agente implementada (registry resolver, schema agent string, turn_validate semantico) con fallback N=2 intacto.

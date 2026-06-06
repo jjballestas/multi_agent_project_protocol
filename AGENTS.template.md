@@ -107,6 +107,12 @@ The task status must match in two places:
   that route in `scope`; this includes new drafts and temporary files that remain in the workspace.
 - If a route is covered by another owner active claim, do not edit it.
 - Ambiguity becomes `blocked` plus one concrete question.
+- Anomaly notification: an agent that detects an anomaly or inconsistency in another participant's work
+  or in shared state (e.g. an incomplete handoff-release, a status that contradicts the claims/mailbox, a
+  stale or orphaned claim, a missing or mismatched artifact) must notify the responsible owner via
+  `mailbox/open/` with a concrete, actionable message, and record it. It must not silently fix routes
+  under another owner's active claim, nor leave the anomaly unsignaled; if the fix needs those routes, it
+  asks the owner (or the human) and waits.
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map

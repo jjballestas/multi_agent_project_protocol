@@ -115,39 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0049",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Capa A.6 (hardening I1/I2): autor-de-record desde el estado, no del payload - persistir original_author en la 1ra asignacion (apply) y que la guarda de exclusion reviewer/QA != autor lea SOLO del estado, ignorando payload.author/original_author para ese chequeo (cierra el FOLLOW-UP de seguridad de Fase 4)",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0049-codex-hardening-autor-de-record.md",
-            "depends_on": [
-                "TASK-0046"
-            ],
-            "relates_to": [
-                "TASK-0048"
-            ],
-            "relevant_files": [
-                "runtime/review_qa.py",
-                "runtime/turn_validate.py",
-                "runtime/apply.py",
-                "examples/runtime_review_qa_cases/"
-            ],
-            "deliverables": [
-                "runtime/review_qa.py",
-                "runtime/turn_validate.py",
-                "runtime/apply.py",
-                "examples/runtime_review_qa_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0049-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (72/72 incl. review_qa 15/15) + validador/encoding/neutralidad py. Verificado en codigo y golden: author_of_record(task) lee SOLO task.original_author (fallback task.owner del estado); task_author delega ahi e IGNORA payload por completo; turn_validate usa author_of_record para la guarda I1/I2; apply.ensure_original_author fija original_author=owner SOLO si falta (inmutable; invocado en 1ra adquisicion de claim y 1ra transicion). Casos adversariales (golden 9->15) confirmados: autor real con payload.author falso => pass_qa/reject_review RECHAZADO (no se evade mintiendo); no-autor con payload.author=actor => NO causa falso positivo (payload no autoritativo); original_author se persiste en el 1er apply y assign_fix/cambio de owner NO lo sobreescribe. Cierra el HALLAZGO de seguridad de la review de Fase 4 (I1/I2 ahora robustos vs payload adversarial). Aditivo, fallback N=2 intacto, neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
-        },
-        {
             "id": "TASK-0050",
             "owner": "Codex",
             "status": "done",
@@ -183,7 +150,7 @@
         {
             "id": "TASK-0051",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -210,7 +177,38 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Capa A.3 (criterio test plan global 15.4 de SPEC-0038, property-based de invariantes I1-I8). Nuevo harness examples/runtime_property_cases que, mediante GENERACION DETERMINISTA de estados variados (por construccion enumerada o seed FIJO derivado del indice; NO usar Math.random/reloj), comprueba que para todo estado generado se mantienen: I1 ningun reviewer es autor; I2 ningun QA es autor; I3 done tiene evidencia; I4 no hay dos claims activos por tarea; I5 todo evento aplicado incrementa seq y aggregate_version; I6 replay reconstruye el mismo snapshot (hash canonico); I7 todo evento aplicado esta atribuido/autenticado (actor presente); I8 ningun intent se aplica dos veces (idempotencia). Reusar runtime.router/turn_validate/eventlog reales (no reimplementar). Aditivo (solo examples/ + CI); NO tocar runtime/ ni contrato; determinista y reproducible; sin red; neutralidad. Documentar el numero de muestras y como se generan (cobertura declarada, sin truncamiento silencioso). Encolada a Codex."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL read-only (2026-06-06). Corri yo el harness (26/26) + suite runtime completa (104/104) + validador/encoding/neutralidad py. Verificado que el harness es GENUINO: importa el runtime REAL (runtime.router.select_next, runtime.turn_validate.validate_turn, runtime.eventlog) y NO reimplementa invariantes; 26 muestras deterministas enumeradas (seeds property-001..026, sin random/reloj/red/truncamiento, declarado en el output); cubre I1-I8 sobre rosters N=2/3/5; incluye CASOS NEGATIVOS reales (autor reviewer/qa => rechazado con expected_error; done sin evidencia => rechazado; intento de doble claim activo => detectado; intent duplicado => deduped) con contraejemplo reproducible por seed. Aditivo: solo examples/runtime_property_cases/ + step en validate.yml; NO toca runtime/ ni golden existentes. ANOMALIA DE PROCESO (notificada a Codex por mailbox segun DECISION-0018): el handoff-release quedo incompleto en la entrega (mensaje declaraba 'claim liberado' pero claim seguia active + status in_progress); Codex lo completo tras aviso del operador. Cubre test plan global 15.4. Flip a done por arquitecto."
+        },
+        {
+            "id": "TASK-0052",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.4 (test plan global 15.5 SPEC-0038): concurrency simulation determinista - 10 implementadores / 100 tareas / colisiones de claim / vencimiento de leases / agentes disabled a mitad de ejecucion / intents duplicados por reintento; esperado: conflictos registrados (no silenciosos), sin corrupcion del snapshot, distribucion de carga dentro de fairness_ratio, cero doble-aplicaciones",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
+            "depends_on": [
+                "TASK-0050",
+                "TASK-0051"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/router.py",
+                "runtime/eventlog.py",
+                "examples/runtime_concurrency_cases/"
+            ],
+            "deliverables": [
+                "examples/runtime_concurrency_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0052-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Capa A.4 (criterio test plan global 15.5 de SPEC-0038). Nuevo harness examples/runtime_concurrency_cases que simula DETERMINISTICAMENTE (sin random/reloj/red; por construccion/seed fijo) un escenario de 10 implementadores y 100 tareas con: colisiones de claim (dos agentes intentan la misma tarea), vencimiento de leases + re-claim con fencing, agentes disabled a mitad de ejecucion, e intents duplicados por reintento. Reutiliza el runtime real (router/eventlog/turn_validate). Aserciones del resultado esperado: (1) los conflictos quedan REGISTRADOS y no son silenciosos (rechazos visibles: doble-claim rechazado, fencing obsoleto registrado); (2) el snapshot del event log NO se corrompe (assert_snapshot_matches / replay reconstruye hash canonico); (3) la distribucion de carga entre implementadores queda dentro del fairness_ratio configurado; (4) CERO doble-aplicaciones (idempotencia: ningun intent se aplica dos veces). Declarar tamano de la simulacion y semillas; contraejemplo reproducible si falla. Aditivo (solo examples/ + .github/workflows); NO tocar runtime/ ni contrato ni golden existentes; determinista; sin red; neutralidad. Encolada a Codex."
         }
     ]
 }

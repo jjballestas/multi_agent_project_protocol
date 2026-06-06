@@ -109,6 +109,18 @@ be treated as implementable by the architect and should use full SDD.
   error.
 - While holding an active claim on `in_progress` work, each work turn must leave a verifiable signal:
   deliverable progress, a compact FYI, or `blocked` with one concrete question.
+- A handoff-release is atomic in intent: the message that declares `in_review`/`done` and the state
+  transition (release the claim, flip the status) must land together. If a turn ends with the message
+  written but the state not transitioned (claim still `active`, status still `in_progress`), that is an
+  anomaly to be notified and completed, not a valid delivery.
+
+### Anomaly notification (DECISION-0018)
+
+An agent that detects an anomaly or inconsistency in another participant's work or in shared state
+(incomplete handoff-release, status that contradicts the claims/mailbox, stale or orphaned claim, missing
+or mismatched artifact) must notify the responsible owner via `mailbox/open/` with one concrete, actionable
+message, and record it. It must not silently fix routes under another owner's active claim, nor leave the
+anomaly unsignaled; if the fix needs those routes, it asks the owner (or the human) and waits.
 
 ### Claim Before Shared Draft
 
