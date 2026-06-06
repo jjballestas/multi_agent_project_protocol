@@ -92,13 +92,13 @@
             "id": "TASK-0038",
             "owner": "Claude",
             "status": "proposed",
-            "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). Fases 1-2 DONE; Fase 3 (TASK-0045) en marcha. Fases 5-7 condicionadas."
+            "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). Fases 1-3 DONE; Fase 4 (TASK-0046) ready encolada. Fases 5-7 condicionadas."
         },
         {
-            "id": "TASK-0045",
+            "id": "TASK-0046",
             "owner": "Codex",
             "status": "ready",
-            "title": "N-agente Fase 3 (SPEC-0038 sec.13): router weighted-least-loaded determinista + exclusion de autor (review/QA, A9) + fairness gate por elegibilidad/anti-starvation (A4) + pesos en config + explanation. Aditivo, fallback N=2. Encolada a Codex."
+            "title": "N-agente Fase 4 (SPEC-0038 sec.13): maquina de estados Review/QA (changes_requested/qa_failed/review_approved/qa_pending) + counters + defect logs (D-9) + corte de bucles por failure_signature canonica (A8) + escalado architect_review/max_qa_cycles. Aditivo, fallback N=2. Encolada a Codex."
         },
         {
             "id": "TASK-0040",
@@ -148,7 +148,9 @@
         "FASE 1 N-AGENTE ACEPTADA y DONE (TASK-0043, ratificacion adversarial de Claude): load_agent_registry 3 niveles + helpers; turn_schema agent enum->string; turn_validate semantico (registrado/enabled/capacidad), claim.owner==agent conservado; seam de firma/idempotencia listo para Fase 2. Suite verde, fallback N=2 byte-equivalente.",
         "AREAS PERSONALES MIGRADAS (DECISION-0016, ACCEPTED, commit ed456d9): regla de onboarding (cada participante crea personal/<id>/ al darse de alta) + git mv Claude//Codex/ -> personal/Claude//personal/Codex/ (historia preservada); exempt_globs -> personal/**; AGENTS.md/template sec.7-8 + TASK_PROTOCOL + CLAUDE.md regla 8; new_instance.py crea personal/<id>/ (smoke: instancia 3 agentes valida verde). MINOR. Codex avisado; su area es personal/Codex/.",
         "FASE 2 N-AGENTE ACEPTADA y DONE (TASK-0044, ratificacion adversarial de Claude): runtime/eventlog.py event log append-only (seq writer-only, schema version, append torn-write safe) + idempotencia por tupla con dedup (incl. cruzando compactacion) + fencing por-aggregate (rechazo stale registrado) + snapshot/compactacion + assert_snapshot_matches (detecta mismatch) + negative replay (A6). Suite 47/47. FOLLOW-UP: cablear assert_snapshot_matches al validador global py/ps1 como hard-gate cuando el event log sea el writer vivo (hoy es modulo aditivo).",
-        "FASE 3 N-AGENTE EN MARCHA: TASK-0045 READY encolada a Codex = router weighted-least-loaded determinista + exclusion de autor en review/QA (A9 sin escalado oculto) + fairness gate por elegibilidad/anti-starvation (A4) + pesos en config + routing_decision.explanation. Aditivo, fallback N=2 byte-equivalente. Siguiente: Fase 4 (estados Review/QA con defect logs + corte de bucles).",
+        "FASE 3 N-AGENTE ACEPTADA y DONE (TASK-0045, ratificacion adversarial de Claude): runtime/router.py router weighted-least-loaded determinista (load_score con pesos en config) + exclusion de autor en review/QA aunque tenga capacidad (filtered author_excluded) + sin elegible => action escalate con candidatos+razon (owner==autor SOLO en escalate, nunca self-review) + max_active_claims + routing_decision.explanation + fairness gate (100 tareas/3 agentes identicos sin sesgo por nombre via stable_hash, anti-starvation, reparto ponderado, guarda denominador-cero). Determinismo verificado (select_next x2 identico; sha256 sin reloj/random). Corri yo la suite (52/52 incl. router 10/10) + validador/encoding/neutralidad py+ps1. Config aditiva routing_epoch+routing_weights en live+template; context.load_state expone config+agent_registry. 5 router cases legacy intactos; fallback N=2 (review->Claude, human gate->operador humano). Codex aplico handoff-release.",
+        "FASE 4 N-AGENTE READY: TASK-0046 encolada a Codex = maquina de estados Review/QA (reject_review->changes_requested, fail_qa->qa_failed, pass_qa->done con qa!=autor, assign_fix->claimed con attempt++) + counters review_attempts/qa_attempts + defect_log por attempt_id con checks fallidos + failure_signature canonica (A8: check_id + clase de error normalizada + artefacto/ruta; logs superficiales NO saltan el corte) + corte de bucles (mismo check 2x consecutivas misma firma => bloquear reasignacion => architect_review) + qa_attempts>max_qa_cycles => escalado architect; no se llega a done sin evidencia. Aditivo, fallback N=2. Siguiente: Fase 5 (guardrails/permisos, condicionada).",
+        "FOLLOW-UP RASTREADO (de Fase 2): cuando el event log (runtime/eventlog.py) pase a ser el writer VIVO del estado, cablear assert_snapshot_matches al validador global py/ps1 como hard-gate repo-wide antes de escribir. Hoy eventlog es modulo aditivo; no bloquea Fases 3-4.",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar."
     ],
     "created_at": "2026-06-05",

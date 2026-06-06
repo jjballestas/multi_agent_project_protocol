@@ -4,42 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-TASK-0040-liverun-claude",
-            "task_id": "TASK-0040",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                ".gitignore",
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0040",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0040",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0040-claude-runtime-live-selfrun.md",
-                "Area_comun/artifacts/RUNTIME-live-selfrun-20260606.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: setup + PRIMERA CORRIDA REAL del runtime sobre el repo vivo (TASK-0040). Claim unico activo: lo libera el turno del runtime (apply). Se archivo 1 released para que post-turno released_count=4 (no dispara el hook de poda)."
-        },
-        {
-            "claim_id": "CLAIM-20260606-runtime-enabled-mailbox-cleanup-codex",
-            "task_id": "none",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado: FYI runtime.enabled:true movido a mailbox/answered."
-        },
-        {
             "claim_id": "CLAIM-20260606-TASK-0032-ack-codex",
             "task_id": "TASK-0032",
             "owner": "Codex",
@@ -91,6 +55,87 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado tras aceptacion read-only de Claude. TASK-0032 queda in_review para flip arquitecto/deferred-flip; no se toca runtime en esta limpieza."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0045-codex",
+            "task_id": "TASK-0045",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0045",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0045",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0045-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0045-fase3.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0045-in-review.md",
+                "runtime/router.py",
+                "runtime/context.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_router_cases/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con handoff-release: TASK-0045 entregada a in_review. Implementado router N-agent weighted least-loaded deterministic, author exclusion review/QA, fairness gate, config weights, explanation y fallback N=2. Handoff: Area_comun/handoffs/HANDOFF-TASK-0045-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0045-flip-claude",
+            "task_id": "TASK-0045",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0045",
+                "Area_comun/state/TASK_INDEX.json#TASK-0046",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md",
+                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0045-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0045-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-fase4.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0044-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0045 (Fase 3) + flip a done + encolar Fase 4 (TASK-0046) + limpieza mailbox FYI. Claim efimero: se libera al cierre del turno; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0046-codex",
+            "task_id": "TASK-0046",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0046",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0046",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0045-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-fase4.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0046-fase4.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0046-in-review.md",
+                "runtime/",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_review_qa_cases/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "TASK-0046 in progress: Review/QA state machine, defect logs, canonical failure_signature, loop cut, max_qa_cycles escalation, evidence gate, fallback N=2."
         }
     ]
 }

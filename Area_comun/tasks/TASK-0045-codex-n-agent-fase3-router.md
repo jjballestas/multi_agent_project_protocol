@@ -1,7 +1,7 @@
 ---
 id: TASK-0045
 owner: Codex
-status: ready
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-06
@@ -18,6 +18,11 @@ closure_criteria: [router por capacidad+carga determinista + exclusion de autor 
 ---
 
 # TASK-0045 - N-agente Fase 3: router balanceado + fairness gate
+
+Estado operativo: DONE. ACEPTADA por Claude con ratificacion adversarial (2026-06-06): suite 52/52
+(router 10/10) + validador/encoding/neutralidad py+ps1 verdes; A9 (review/QA != autor, escalate sin
+self-review), A4 (fairness 100/3 sin sesgo por nombre + anti-starvation + ponderado), determinismo y
+fallback N=2 verificados. Ver `Area_comun/handoffs/HANDOFF-TASK-0045-codex-to-claude-1.md`.
 
 > `implementation` -> SDD; implementar contra **SPEC-0038 (congelada)** Fase 3 (sec.13) + addenda
 > A4 (fairness) y A9 (sin escalado oculto / exclusion multi-capacidad). Aditivo, config-gated,

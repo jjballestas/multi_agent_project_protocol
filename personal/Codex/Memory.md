@@ -5,194 +5,156 @@ Last updated: 2026-06-06 Europe/Madrid
 ## Repository
 
 `multi_agent_project_protocol` is the canonical, domain-neutral repository for the reusable
-multi-agent software project protocol.
+multi-agent software project protocol. It dogfoods itself.
 
-It dogfoods itself:
+Current private area: `personal/Codex/` (DECISION-0016). Do not create new files under legacy `Codex/`.
 
-- `AGENTS.md` is the live project contract.
-- `AGENTS.template.md` is the shipped template master.
-- `protocol.config.json` is the live instance config.
-- `protocol.config.template.json` is the shipped template master.
-- `Area_comun/` contains shared protocol docs, live state, tasks, mailbox, handoffs and
-  decisions.
-- `Claude/` and `Codex/` are private agent areas.
+## Session Close - 2026-06-06
 
-Current released version observed in the session: `v0.8.0`.
+The N-agent program is in progress after the human owner approved/froze Phase 0:
 
-## Latest Session Close - 2026-06-06
+- `DECISION-0015` is accepted.
+- `SPEC-0038` is frozen with D-1..D-16, I1..I8 and addenda A1..A13.
+- `TASK-0043` Phase 1 is accepted and done.
+- `TASK-0044` Phase 2 is accepted and done.
+- `TASK-0045` Phase 3 is ready and queued to Codex.
 
-The current project is in P2 after runtime M1/v0.8.0. The live runtime is enabled in the dogfood
-instance, but real LLM autonomy is not enabled. The next expected work is M2 hito 2: adapter LLM real,
-single-turn only, with replay comparison and human gate.
+Open mailbox at close:
 
-Important current state:
+- `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-accepted.md`
+  - FYI only, no response required.
+  - TASK-0044 accepted and done.
+- `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md`
+  - Requires Codex response.
+  - TASK-0045 READY: N-agent Phase 3 router + fairness.
 
-- `TASK-0035` is accepted and `done`. It closed the mailbox `status` <-> folder bug:
-  - validator hard-fails mismatches in `open/`, `answered/`, and `archived/`;
-  - `prune_state.py` normalizes `status: archived` before moving messages to `archived/`;
-  - `examples/mailbox_status_cases/` covers 5 cases;
-  - CI runs the mailbox status golden.
-- Latest commits at close:
-  - `5f81f49 chore(mailbox): close task0035 acceptance messages`
-  - `cf90389 feat(P2): cerrar TASK-0035 a DONE - bug mailbox status<->carpeta CERRADO de raiz + blindado`
-  - `2a7e241 chore(protocol): hand off task0035 for review`
-  - `dd85ed5 feat(protocol): enforce mailbox status folders`
-- Mailbox `open/` was clean at close: only `.gitkeep`.
-- No active Codex task/claim should be assumed. Always re-check `Area_comun/state/CLAIMS.json`.
-- `prune_state --check` was green at close, with cold start around `8141` tokens after final cleanup.
-- Validation at close was green:
-  - `python scripts\validate_collaboration_state.py --root .`
-  - `powershell -NoProfile -File scripts\validate_collaboration_state.ps1 -Root .`
-  - `python scripts\scan_encoding.py --root .`
-  - `python scripts\prune_state.py --root . --check`
+Git status was clean immediately before updating this memory and creating the startup prompt.
 
-Potential next item:
+## Latest Completed Work
 
-- Claude created `Area_comun/specs/SPEC-0035-adapter-llm-real.md` for `TASK-0036`, status `proposed`.
-  It describes M2 hito 2: `LLMAdapter`, pluggable invoker, `RecordedInvoker`, replay comparison,
-  budget/allowlist limits, `--adapter llm --once`, no autonomy, no live API in CI.
-- At the time it was observed, there was no mailbox message and no claim associated with SPEC-0035.
-  Do not edit it unless there is a current claim/instruction or the user/Claude opens the task.
+### TASK-0043 - N-agent Phase 1
 
-Coordination rules learned the hard way:
+Commit: `3430c2c feat(runtime): add agent registry validation`
 
-- Before any shared edit, inspect `TASK_INDEX.json`, `CLAIMS.json`, and `Area_comun/mailbox/open/`.
-- If a mailbox message no longer applies, move it out of `open/` using the protocol:
-  claim first, set frontmatter `status` to the destination folder, move file, validate, release claim,
-  and commit if shared state changed.
-- When moving a task to `in_review`, commit WIP first and release the claim immediately in the same
-  handoff movement.
-- Do not leave active claims after a handoff. The validator has a handoff-release gate.
-- ASCII-only still applies to `Area_comun/mailbox/**` and `Area_comun/state/*.json`; avoid PowerShell
-  `Set-Content` BOM in state files, or rewrite with Python UTF-8 no BOM before closing.
+Delivered:
 
-## Current State At Session Close
+- `runtime/context.py`
+  - `load_agent_registry(root)` with fallback:
+    `agent_registry` -> `agent_roles` -> default Claude/Codex/human triad.
+  - helpers: `enabled_agents`, `agents_with_capability`, `has_capability`.
+- `runtime/turn_schema.json`
+  - `agent` changed from fixed enum to non-empty string.
+- `runtime/turn_validate.py`
+  - semantic validation for registered/enabled/capable agent.
+  - preserves `claim.owner == report.agent`.
+- `examples/agent_registry_cases/`
+  - explicit registry, `agent_roles`, default fallback, unregistered/disabled/uncapable rejection.
 
-- `TASK-0030` is implemented by Codex and left in `in_review` for Claude.
-- There are no active claims in `Area_comun/state/CLAIMS.json`.
-- A review message for Claude is open:
-  - `Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0030-in-review.md`
-- Handoff for Claude:
-  - `Area_comun/handoffs/HANDOFF-TASK-0030-codex-to-claude-1.md`
-- Claude's previous queue message was archived:
-  - `Area_comun/mailbox/archived/MSG-20260605-Claude-to-Codex-cola-runtime-m1.md`
+Claude accepted TASK-0043.
 
-## Recently Completed / Reviewed Context
+### TASK-0044 - N-agent Phase 2
 
-- `TASK-0023` measure_context_cost was done and ratified.
-- `TASK-0024` state pruning was done and accepted:
-  - added `CLAIMS_ARCHIVE.json` and `TASK_INDEX_ARCHIVE.json`;
-  - validators read hot plus archive state;
-  - cold-start state was reduced.
-- `TASK-0027` runtime M0 was done and accepted:
-  - `runtime/context.py`
-  - `runtime/router.py`
-  - `runtime/turn_validate.py`
-  - `runtime/orchestrator.py`
-  - golden cases for turn schema, semantic validation and router behavior.
-- `TASK-0028` claims by row was done and accepted:
-  - validators support `path#selector`;
-  - runtime turn validation aligned;
-  - runtime context reads archives so router sees archived dependencies.
-- Claude published `v0.7.0`, closed earlier tokens including `TASK-0025`, and instructed Codex
-  to continue with `TASK-0030`, then `TASK-0031`.
+Commit: `e5faa1d feat(runtime): add event log concurrency core`
 
-## TASK-0030 Deliverables
+Delivered:
 
-Implemented runtime M1 apply gate:
+- `runtime/eventlog.py`
+  - append-only JSONL event log under `runtime/state/events.jsonl`;
+  - writer-only monotonic `seq`;
+  - `event_schema_version`;
+  - fsync append and torn-write-safe reader;
+  - canonical snapshot/replay/hash;
+  - archive compaction under `runtime/state/archives/`;
+  - idempotency by tuple `actor/task/transition/attempt/fencing`;
+  - duplicate intent returns existing event with no new seq, including after compaction;
+  - per-aggregate fencing tokens;
+  - stale-fencing rejection events without aggregate version bump;
+  - negative replay helper that does not invoke external callbacks.
+- `runtime/turn_schema.json`
+  - optional `attempt_id`, `idempotency_key`, `aggregate_version`, `fencing_token`.
+- `runtime/turn_validate.py`
+  - optional semantic checks for `aggregate_version` and `fencing_token`.
+- `runtime/orchestrator.py`
+  - preserves optional concurrency fields in sanitized reports.
+- `examples/runtime_eventlog_cases/`
+  - seq/torn-write;
+  - idempotency pre/post compaction;
+  - lease reclaim/stale fencing;
+  - snapshot hash/mismatch gate;
+  - negative replay.
 
-- `runtime/vcs.py`
-  - commit selected paths;
-  - reject policy paths unless explicitly allowed;
-  - revert last commit;
-  - discard worktree changes for failed apply.
-- `runtime/gate.py`
-  - runs Python collaboration validator;
-  - runs domain-neutrality scan.
-- `runtime/apply.py`
-  - validates turn reports with `runtime.turn_validate`;
-  - applies task status changes to task file, hot `TASK_INDEX.json`, and
-    `PROJECT_STATE.active_tasks`;
-  - applies claim acquire/release operations;
-  - sends, answers and archives mailbox messages;
-  - runs gate and commits on green;
-  - on red gate, rolls back the turn changes and marks the task blocked.
-- `examples/runtime_apply_cases/run_runtime_apply_cases.py`
-  - temporary git repo fixtures;
-  - 4 golden cases: valid commit, red gate rollback plus blocked task, policy rejection, invalid
-    report no write.
+Claude accepted TASK-0044. Follow-up noted by Claude: when event log becomes the live writer, wire
+`assert_snapshot_matches` into py/ps1 global validators as a repo-wide hard gate before writes. This does
+not block Phase 3.
 
-## Validation Run Before Closing
+## Next Task
 
-All were green:
+`TASK-0045` is ready:
 
-- `python scripts\validate_collaboration_state.py --root .`
-- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root .`
-- `python scripts\scan_domain_neutrality.py --root .`
-- `python examples\runtime_apply_cases\run_runtime_apply_cases.py`
-- M0 regressions:
-  - `python examples\runtime_turn_cases\run_runtime_turn_schema_cases.py`
-  - `python examples\runtime_turn_cases\run_runtime_turn_semantic_cases.py`
-  - `python examples\runtime_router_cases\run_runtime_router_cases.py`
-- Instance regressions:
-  - `python scripts\validate_collaboration_state.py --root examples\minimal_instance`
-  - `python scripts\validate_collaboration_state.py --root examples\minimal_sdd_instance`
-  - `python scripts\validate_collaboration_state.py --root examples\dotnet_enterprise_instance`
-  - `python scripts\validate_collaboration_state.py --root examples\compact_communication_case`
+- File: `Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md`
+- Message: `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md`
+- Goal: N-agent Phase 3 router + fairness.
 
-Confirmed no active claims with:
+Expected scope:
 
-```powershell
-python -c "import json; h=json.load(open('Area_comun/state/CLAIMS.json', encoding='utf-8-sig')); print([c for c in h.get('claims', []) if c.get('status')=='active'])"
-```
+- `runtime/router.py`
+- `runtime/context.py` if helper tweaks are needed
+- `examples/runtime_router_cases/`
+- probably new fairness/routing golden cases
+- protocol state/task/mailbox/handoff files for claim and handoff-release
 
-It printed `[]`.
+Key requirements from Claude:
 
-## Git Status At Close
+- Select by required capability and load.
+- `required_capability` optional in tasks; if absent, use current owner behavior.
+- Use `routing_weights` from config, not hardcoded constants.
+- Exclude author in review/QA, even if author has reviewer/QA capability.
+- No hidden escalation: if no eligible reviewer/QA distinct from author, escalate/blocked with reason and candidates; never self-review.
+- Deterministic tiebreak:
+  - stable hash of `task + transition + agent + routing_epoch`;
+  - lexicographic only as final tiebreak.
+- Respect `max_active_claims`.
+- Add `routing_decision.explanation` with candidates, filtered reasons and score tuple.
+- Fairness gate over eligible assignments:
+  - 100 tasks / 3 identical agents nearly uniform;
+  - weighted expected-vs-observed;
+  - anti-starvation if an eligible agent gets zero after minimum sample;
+  - guard denominator zero.
+- Keep fallback N=2 byte-equivalent:
+  - without registry, review -> Claude;
+  - human gate -> `operador humano`;
+  - current 5 router cases remain green.
 
-Expected dirty files from `TASK-0030`:
+## Validation Baseline
 
-- deleted from open mailbox:
-  - `Area_comun/mailbox/open/MSG-20260605-Claude-to-Codex-cola-runtime-m1.md`
-- modified:
-  - `Area_comun/state/CLAIMS.json`
-  - `Area_comun/state/CLAIMS_ARCHIVE.json`
-  - `Area_comun/state/PROJECT_STATE.json`
+Before closing, these suites were green after TASK-0044:
+
+- `python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py` -> 5/5
+- `python examples/agent_registry_cases/run_agent_registry_cases.py` -> 4/4
+- `python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py` -> 5/5
+- `python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py` -> 5/5
+- `python examples/runtime_router_cases/run_runtime_router_cases.py` -> 5/5
+- `python examples/runtime_apply_cases/run_runtime_apply_cases.py` -> 4/4
+- `python examples/runtime_loop_cases/run_runtime_loop_cases.py` -> 8/8
+- `python examples/runtime_observability_cases/run_runtime_observability_cases.py` -> 5/5
+- `python examples/llm_adapter_cases/run_llm_adapter_cases.py` -> 6/6
+- `python scripts/validate_collaboration_state.py` -> OK
+- `python scripts/scan_encoding.py` -> OK
+- `python scripts/scan_domain_neutrality.py` -> OK
+
+Run these again after implementing TASK-0045, plus any new router/fairness cases.
+
+## Protocol Reminders
+
+- Read `AGENTS.md` first.
+- Before shared edits, inspect:
   - `Area_comun/state/TASK_INDEX.json`
-  - `Area_comun/tasks/TASK-0030-codex-runtime-apply-gate.md`
-- new:
-  - `Area_comun/handoffs/HANDOFF-TASK-0030-codex-to-claude-1.md`
-  - `Area_comun/mailbox/archived/MSG-20260605-Claude-to-Codex-cola-runtime-m1.md`
-  - `Area_comun/mailbox/open/MSG-20260605-Codex-to-Claude-task0030-in-review.md`
-  - `examples/runtime_apply_cases/`
-  - `runtime/apply.py`
-  - `runtime/gate.py`
-  - `runtime/vcs.py`
-
-Do not revert unrelated changes.
-
-## Startup Checklist
-
-1. Read `AGENTS.md`.
-2. Read, in order:
-   - `Area_comun/README.md`
-   - `Area_comun/protocol/TASK_PROTOCOL.md`
-   - `Area_comun/state/PROJECT_STATE.json`
-   - `Area_comun/state/TASK_INDEX.json`
-   - `Area_comun/state/CLAIMS.json`
-   - `Area_comun/mailbox/open/`
-3. Check `git status --short --branch`.
-4. If Claude has reviewed `TASK-0030`, follow the mailbox outcome.
-5. If `TASK-0030` is accepted/done and Claude's queue still points there, next likely Codex
-   implementation task is `TASK-0031`.
-6. Before editing any shared route, create or update an active claim listing the exact route or
-   row selector in `scope`.
-
-## Safety Notes
-
-- Keep the protocol core domain-neutral.
+  - `Area_comun/state/CLAIMS.json`
+  - `Area_comun/mailbox/open/`
+- Create/update an active claim before editing shared routes.
+- Do not edit paths covered by another active claim.
+- When moving a task to `in_review`, release the active claim in the same coordination step.
+- ASCII-only applies to `Area_comun/mailbox/**` and `Area_comun/state/*.json`.
+- Keep protocol core domain-neutral.
 - Do not introduce secrets.
-- Do not change backward compatibility, boundaries or release policy without a recorded decision
-  and human approval.
-- Task status must match in the task file and `TASK_INDEX.json`.
-- Shared work belongs in `Area_comun/`; private notes stay in `Codex/`.
+- Do not change compatibility/boundaries/release policy without decision + human approval.

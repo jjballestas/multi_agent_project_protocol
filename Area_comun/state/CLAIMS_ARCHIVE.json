@@ -2258,6 +2258,42 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: TASK-0044 Fase 2 implementada (event log append-only, snapshot/replay, idempotencia, leases/fencing, negative replay) y entregada a Claude en in_review."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0040-liverun-claude",
+            "task_id": "TASK-0040",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                ".gitignore",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0040",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0040",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0040-claude-runtime-live-selfrun.md",
+                "Area_comun/artifacts/RUNTIME-live-selfrun-20260606.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: setup + PRIMERA CORRIDA REAL del runtime sobre el repo vivo (TASK-0040). Claim unico activo: lo libera el turno del runtime (apply). Se archivo 1 released para que post-turno released_count=4 (no dispara el hook de poda)."
+        },
+        {
+            "claim_id": "CLAIM-20260606-runtime-enabled-mailbox-cleanup-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: FYI runtime.enabled:true movido a mailbox/answered."
         }
     ]
 }

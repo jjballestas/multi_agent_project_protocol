@@ -115,40 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0043",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "N-agente Fase 1: load_agent_registry + fallback 3 niveles + helpers de capacidad; turn_schema agent enum->string; turn_validate semantico (registrado/enabled + capacidad) (SPEC-0038 sec.13 Fase 1)",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0043-codex-n-agent-fase1-registry.md",
-            "depends_on": [
-                "TASK-0038"
-            ],
-            "relates_to": [
-                "TASK-0042"
-            ],
-            "relevant_files": [
-                "runtime/context.py",
-                "runtime/turn_schema.json",
-                "runtime/turn_validate.py",
-                "examples/agent_registry_cases/",
-                "examples/runtime_turn_cases/"
-            ],
-            "deliverables": [
-                "runtime/context.py",
-                "runtime/turn_schema.json",
-                "runtime/turn_validate.py",
-                "examples/agent_registry_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0043-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Probe en vivo los 3 niveles de load_agent_registry (default triada: Claude=reviewer/Codex=implementer/Codex!=orchestrator; agent_roles sintetiza; agent_registry explicito con 3er agente Gemini=implementer + disabled no concede capacidad). turn_validate semantico: no-registrado/disabled/sin-capacidad => error; conserva claim.owner==agent; required_capability_for_report mapea transicion->capacidad (in_review->done=reviewer; ->in_review/done/blocked=implementer; ->ready/claimed/in_progress=orchestrator). schema agent enum->string minLength 1. Suite completa verde (agent_registry 4/4, turn schema 5/5 + semantic 5/5 incl. 3er agente valido + no-registrado rojo, router 5/5, apply 4/4, loop 8/8, obs 5/5, llm 6/6) + validador/encoding/neutralidad. Fallback N=2 byte-equivalente (fixtures sin migrar pasan). Seam de firma/idempotencia listo para Fase 2. Codex aplico handoff-release."
-        },
-        {
             "id": "TASK-0044",
             "owner": "Codex",
             "status": "done",
@@ -180,7 +146,7 @@
         {
             "id": "TASK-0045",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -205,7 +171,39 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Fase 3 del runtime N-agente: routing por capacidad+carga determinista con exclusion de autor (review-by-not-author, A9 sin escalado oculto), pesos en config, explanation, y fairness ratio como gate de CI (A4: por elegibilidad + anti-starvation + pesos). Aditivo/config-gated/fallback N=2 (review->Claude sin registry). Encolada a Codex."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (52/52: router 10/10 + eventlog/registry/turn/apply/loop/obs/llm) + validador/encoding/neutralidad py+ps1 verdes. Verificado en el codigo y los golden: (A9) review/QA nunca asignan al autor aunque tenga capacidad reviewer/qa (filtered author_excluded en candidate_evaluation); sin elegible => action escalate con candidatos+razon, owner==autor SOLO en escalate (nunca self-review en review/qa). (A4) fairness 100 tareas/3 agentes identicos sin sesgo por nombre (seleccion por stable_hash(task|transition|agent|epoch); agent_id solo desempata colisiones ~nulas) + anti-starvation (elegible >= muestra_min con 0 => fallo) + reparto ponderado + guarda denominador-cero. Determinismo: select_next x2 => identico por caso; sha256, sin reloj/random. 5 router cases legacy intactos; fallback N=2 (review->Claude, human gate->operador humano). Config aditiva (routing_epoch+routing_weights) en live+template; context.load_state expone config+agent_registry. Neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0046",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "N-agente Fase 4 (SPEC-0038 sec.13): maquina de estados Review/QA (changes_requested, qa_failed, review_approved, qa_pending) + counters review_attempts/qa_attempts + defect logs (D-9) + corte de bucles por failure_signature canonica (A8) + escalado a architect_review/max_qa_cycles; sin done sin evidencia",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
+            "depends_on": [
+                "TASK-0045"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/turn_schema.json",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "runtime/router.py",
+                "examples/runtime_review_qa_cases/"
+            ],
+            "deliverables": [
+                "runtime/ (maquina de estados Review/QA + defect logs + failure_signature)",
+                "examples/runtime_review_qa_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Fase 4 del runtime N-agente: formalizar transiciones reject_review->changes_requested, fail_qa->qa_failed, pass_qa->done (qa!=autor), assign_fix->claimed con attempt++; defect_log asociado a attempt_id con checks fallidos; failure_signature = check_id + clase de error normalizada + artefacto/ruta (A8: diferencias superficiales de log NO saltan el corte); corte de bucles: mismo check 2x consecutivas con misma firma => bloquear reasignacion automatica => architect_review; qa_attempts > max_qa_cycles => escalado a architect; sin red. Aditivo/config-gated; fallback N=2 intacto; no se llega a done sin evidencia. Encolada a Codex."
         }
     ]
 }

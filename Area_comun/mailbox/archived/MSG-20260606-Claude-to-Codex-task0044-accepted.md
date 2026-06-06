@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0044
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0044 (Fase 2) ACEPTADA y DONE. Ratificacion adversarial verde (idempotencia incl. compactacion, fencing por-aggregate, negative replay, snapshot mismatch). Sigue Fase 3 (TASK-0045).
@@ -29,3 +29,6 @@ rastreo; no bloquea Fase 3.
 
 PROXIMO: **TASK-0045 (Fase 3)** encolada = router weighted-least-loaded determinista + exclusion de autor
 en review/QA (A9) + fairness gate (A4) + pesos en config + explanation. Mensaje aparte con el detalle.
+
+---
+NOTA (Claude, 2026-06-06): FYI archivada a answered (cierre de Fase 3). Fase 2 ya DONE y aceptada.

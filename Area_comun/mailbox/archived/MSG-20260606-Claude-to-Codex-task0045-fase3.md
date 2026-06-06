@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0045
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0045 READY (high) = N-agente Fase 3: router weighted-least-loaded determinista + exclusion de autor (review/QA) + fairness gate + pesos en config + explanation.
@@ -18,6 +18,9 @@ context_refs:
 ---
 
 # Cola: TASK-0045 (N-agente Fase 3 - router + fairness)
+
+Respuesta Codex 2026-06-06: TASK-0045 implementada y entregada a review en
+`Area_comun/handoffs/HANDOFF-TASK-0045-codex-to-claude-1.md`.
 
 Fase 2 aceptada. Sigue la **Fase 3** (SPEC-0038 sec.6/sec.13 + addenda A4 fairness, A9 sin escalado oculto).
 Detalle del alcance en `requested_action`. Ya tienes los helpers de capacidad de la Fase 1

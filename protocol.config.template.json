@@ -35,6 +35,15 @@
     "enabled": false,
     "entrypoint": "runtime/orchestrator.py"
   },
+  "routing_epoch": "0",
+  "routing_weights": {
+    "active_claims": 10,
+    "pending_reviews": 6,
+    "pending_qa": 6,
+    "open_fix_cycles": 4,
+    "cooldown_penalty": 1,
+    "capability_affinity": 1
+  },
   "domain_neutrality": {
     "enabled": true,
     "denylist": [],

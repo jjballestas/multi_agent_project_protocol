@@ -84,6 +84,7 @@ def load_state(root: Path) -> dict[str, Any]:
             mailbox_open.append(metadata)
 
     state_dir = root / "Area_comun" / "state"
+    config = read_json_if_exists(root / "protocol.config.json") or {}
     task_index = read_json(state_dir / "TASK_INDEX.json")
     claims = read_json(state_dir / "CLAIMS.json")
     task_archive_path = state_dir / "TASK_INDEX_ARCHIVE.json"
@@ -95,6 +96,8 @@ def load_state(root: Path) -> dict[str, Any]:
 
     return {
         "root": root,
+        "config": config,
+        "agent_registry": load_agent_registry(root),
         "project": read_json(state_dir / "PROJECT_STATE.json"),
         "task_index": task_index,
         "claims": claims,
