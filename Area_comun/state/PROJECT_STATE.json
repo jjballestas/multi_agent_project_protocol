@@ -100,8 +100,8 @@
         {
             "id": "TASK-0034",
             "owner": "Codex",
-            "status": "in_progress",
-            "title": "Poda sistematica por umbral medido: prune_state + hook bloqueante + CI hard-fail (DECISION-0014, SPEC-0033) - in progress Codex"
+            "status": "in_review",
+            "title": "Poda sistematica por umbral medido: prune_state + hook bloqueante + CI hard-fail (DECISION-0014, SPEC-0033) - en revision Claude"
         }
     ],
     "open_questions": [],
@@ -121,7 +121,7 @@
         "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
         "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
         "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
-        "MANTENIMIENTO: DECISION-0014 ACEPTADA (poda sistematica por umbral medido). TASK-0034 IN_PROGRESS por Codex (prune_state --check/--apply + hook bloqueante + CI hard-fail, SPEC-0033). Cold-start hoy ~19.5k (borde del hard-fail 20k); 0034 corre la poda real (objetivo ~9-10k).",
+        "TASK-0034 EN_REVISION: Codex entrego prune_state --check/--apply + hook bloqueante + CI hard-fail contra SPEC-0033. Poda real aplicada: cold-start 20701 -> 8881 tokens (check final 8968). Claude ratifica HANDOFF-TASK-0034-codex-to-claude-1.",
         "Siguiente: (a) Codex implementa TASK-0034 (poda sistematica); (b) hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia), Claude deriva la spec."
     ],
     "created_at": "2026-06-05",

@@ -58,16 +58,20 @@ def assess(root: Path) -> Assessment:
     cfg = maintenance_config(root)
     measured = measure(root)
     cold_tokens = int(measured["cold_start"]["total_tokens"])
-    done_ratio = float(measured["dead_weight"]["tasks"]["done_percent"])
-    released_ratio = float(measured["dead_weight"]["claims"]["released_percent"])
+    task_weight = measured["dead_weight"]["tasks"]
+    claim_weight = measured["dead_weight"]["claims"]
+    done_ratio = float(task_weight["done_percent"])
+    released_ratio = float(claim_weight["released_percent"])
+    done_count = int(task_weight["done"])
+    released_count = int(claim_weight["released"])
     reasons: list[str] = []
     if cfg.get("enabled") is False:
         return Assessment(False, ["maintenance disabled"], cold_tokens)
     if cold_tokens >= int(cfg["cold_start_tokens_hard"]):
         reasons.append(f"cold_start_tokens {cold_tokens} >= {cfg['cold_start_tokens_hard']}")
-    if done_ratio >= float(cfg["done_ratio_hard"]):
+    if done_count > int(cfg["recent_done_tasks"]) and done_ratio >= float(cfg["done_ratio_hard"]):
         reasons.append(f"done_ratio {done_ratio} >= {cfg['done_ratio_hard']}")
-    if released_ratio >= float(cfg["released_ratio_hard"]):
+    if released_count > int(cfg["recent_released_claims"]) and released_ratio >= float(cfg["released_ratio_hard"]):
         reasons.append(f"released_ratio {released_ratio} >= {cfg['released_ratio_hard']}")
     return Assessment(bool(reasons), reasons, cold_tokens)
 

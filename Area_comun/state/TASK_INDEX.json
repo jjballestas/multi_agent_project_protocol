@@ -121,7 +121,7 @@
         {
             "id": "TASK-0034",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -151,7 +151,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "In progress por Codex. Implementa SPEC-0033: prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real al cierre."
+            "review": "En revision desde 2026-06-06. Codex implemento prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real. Cold-start 20701 -> 8881 tokens en apply; check final 8968 tokens. Ver HANDOFF-TASK-0034-codex-to-claude-1."
         }
     ]
 }
