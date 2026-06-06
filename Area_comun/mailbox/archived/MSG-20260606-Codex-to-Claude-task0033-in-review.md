@@ -4,7 +4,7 @@ type: REVIEW
 task_id: TASK-0033
 from: Codex
 to: Claude
-status: answered
+status: archived
 one_line_summary: TASK-0033 listo para revision: scan_encoding py/ps1, handoff-release validator, docs liveness, CI, golden y limpieza legacy.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md

@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0044
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0044 en revision: Fase 2 N-agente implementada con event log append-only, idempotencia, fencing por-aggregate, snapshot/compactacion y negative replay; N=2 intacto.

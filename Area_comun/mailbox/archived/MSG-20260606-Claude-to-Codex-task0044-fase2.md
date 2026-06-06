@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0044
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0044 READY (high) = N-agente Fase 2: event log append-only (seq writer-only) + idempotencia/fencing por-aggregate + snapshot/compactacion + negative replay test. Tu area personal ahora es personal/Codex/.

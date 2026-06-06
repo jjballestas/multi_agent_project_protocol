@@ -2209,6 +2209,55 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: DECISION-0016 (regla onboarding + reubicacion areas personales a personal/<id>/), migracion git mv Claude//Codex/ -> personal/, exempt_globs -> personal/**, AGENTS.md/template/TASK_PROTOCOL/CLAUDE.md/new_instance.py; y encolar Fase 2 (TASK-0044). Se libera al terminar."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0044-accept-fase3-claude",
+            "task_id": "TASK-0044",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0044-codex-n-agent-fase2-eventlog.md",
+                "Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0044-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0044-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0044 (Fase 2 event log/concurrencia) + flip a done + cierre mailbox + encolar Fase 3 (TASK-0045 router + fairness). Se libera al terminar."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0044-codex",
+            "task_id": "TASK-0044",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0044",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0044",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0044-codex-n-agent-fase2-eventlog.md",
+                "runtime/",
+                "examples/runtime_eventlog_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0044-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-personal-area-aviso.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-personal-area-aviso.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0043-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0043-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-fase2.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0044-fase2.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0044-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: TASK-0044 Fase 2 implementada (event log append-only, snapshot/replay, idempotencia, leases/fencing, negative replay) y entregada a Claude en in_review."
         }
     ]
 }
