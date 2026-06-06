@@ -6,15 +6,18 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import tempfile
 from pathlib import Path
 from typing import Any
 
 try:
+    from .eventlog import EventLogError, EventWriter, STATE_DIR, assert_snapshot_matches, runtime_state_has_content
     from .gate import run_gate
     from .review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
+    from eventlog import EventLogError, EventWriter, STATE_DIR, assert_snapshot_matches, runtime_state_has_content
     from gate import run_gate
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
     from turn_validate import validate_turn
@@ -25,12 +28,105 @@ class ApplyError(RuntimeError):
     pass
 
 
+RuntimeStateBackup = tuple[Path, Path | None]
+
+
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=4, ensure_ascii=False), encoding="utf-8")
+
+
+def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
+    temp_root = Path(tempfile.mkdtemp(prefix="runtime-state-backup-"))
+    state_dir = root / STATE_DIR
+    backup_dir = temp_root / "state"
+    if state_dir.exists():
+        shutil.copytree(state_dir, backup_dir)
+        return temp_root, backup_dir
+    return temp_root, None
+
+
+def restore_runtime_state(root: Path, backup: RuntimeStateBackup) -> None:
+    temp_root, backup_dir = backup
+    state_dir = root / STATE_DIR
+    if state_dir.exists():
+        shutil.rmtree(state_dir)
+    if backup_dir is not None and backup_dir.exists():
+        shutil.copytree(backup_dir, state_dir)
+    shutil.rmtree(temp_root, ignore_errors=True)
+
+
+def cleanup_runtime_state_backup(backup: RuntimeStateBackup) -> None:
+    shutil.rmtree(backup[0], ignore_errors=True)
+
+
+def runtime_state_commit_paths(root: Path) -> list[str]:
+    if not runtime_state_has_content(root):
+        return []
+    return [STATE_DIR.as_posix()]
+
+
+def active_claim_for_report(root: Path, report: dict[str, Any]) -> dict[str, Any] | None:
+    claims_doc = read_json(root / "Area_comun" / "state" / "CLAIMS.json")
+    for claim in claims_doc.get("claims") or []:
+        if (
+            isinstance(claim, dict)
+            and claim.get("status") == "active"
+            and claim.get("task_id") == report.get("task_id")
+            and claim.get("owner") == report.get("agent")
+        ):
+            return dict(claim)
+    return None
+
+
+def report_attempt_id(report: dict[str, Any]) -> str:
+    return str(report.get("attempt_id") or report.get("turn_id") or "attempt-unknown")
+
+
+def report_transition_name(report: dict[str, Any]) -> str:
+    transition = (report.get("transitions") or {}).get("task_status")
+    if isinstance(transition, dict):
+        return f"{transition.get('from')}->{transition.get('to')}"
+    return str(report.get("outcome") or "no_transition")
+
+
+def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, Any] | None) -> list[dict[str, Any]]:
+    task_id = str(report.get("task_id") or "")
+    actor = str(report.get("agent") or "")
+    if not task_id or task_id == "none" or not actor:
+        return []
+
+    attempt_id = report_attempt_id(report)
+    writer = EventWriter(root)
+    claim_event = writer.acquire_claim(
+        task_id=task_id,
+        owner=actor,
+        lease_until=str((claim or {}).get("expires_at") or ""),
+        idempotency_key=f"{actor}:{task_id}:claim:{attempt_id}:0",
+    )
+    intent_event = writer.apply_intent(
+        task_id=task_id,
+        actor_id=actor,
+        transition=report_transition_name(report),
+        attempt_id=attempt_id,
+        fencing_token=int(claim_event["fencing_token"]),
+        payload={
+            "turn_id": report.get("turn_id"),
+            "outcome": report.get("outcome"),
+            "claim_id": (claim or {}).get("claim_id"),
+            "changed_paths": list(report.get("changed_paths") or []),
+        },
+    )
+    writer.write_snapshot()
+    return [claim_event, intent_event]
+
+
+def assert_runtime_snapshot_if_active(root: Path) -> None:
+    if runtime_state_has_content(root):
+        assert_snapshot_matches(root)
 
 
 def set_task_file_status(path: Path, status: str) -> None:

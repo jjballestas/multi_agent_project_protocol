@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0036
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0036 listo para revision: LLMAdapter + RecordedInvoker + SubprocessInvoker gateado + golden 5/5; no se disparo invoker real.

@@ -1,7 +1,7 @@
 ---
 id: TASK-0047
 owner: Codex
-status: ready
+status: done
 type: integration
 priority: high
 created_at: 2026-06-06
@@ -18,6 +18,11 @@ closure_criteria: [.github/workflows/validate.yml ejecuta las suites de runtime 
 ---
 
 # TASK-0047 - Capa A.5: correr las suites de runtime en CI
+
+Estado operativo: DONE. ACEPTADA por Claude con ratificacion (2026-06-06): corri yo los 10 runners
+(61/61) + gates py + parse YAML; solo se toco .github/workflows/validate.yml (step jsonschema + 10
+runners, llm-adapter recorded sin --allow-real-invoker); runtime/contrato/fixtures intactos. Ver
+`Area_comun/handoffs/HANDOFF-TASK-0047-codex-to-claude-1.md`.
 
 > `integration` -> SDD. Consolidacion del nucleo N-agente (criterio 14 de SPEC-0038: "CI ejecuta unit,
 > contract, golden, replay y concurrency tests"). Decision del operador (2026-06-06): consolidar Capa A.

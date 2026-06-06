@@ -4,58 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-TASK-0046-deliverable-path-fix-codex",
-            "task_id": "none",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0046",
-                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado: deliverables descriptivos de TASK-0046 normalizados a rutas reales para el validador."
-        },
-        {
-            "claim_id": "CLAIM-20260606-TASK-0046-flip-claude",
-            "task_id": "TASK-0046",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0046",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0046-in-review.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0046-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-operador-fase4-cierra-inventario.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: ratificacion adversarial de TASK-0046 (Fase 4) + flip a done + FYI accepted (con FOLLOW-UP de hardening I1/I2 autor-de-record) + inventario al operador (NO encolar Fase 5, gateada). Claim efimero: se libera al cierre del turno; prune posterior."
-        },
-        {
-            "claim_id": "CLAIM-20260606-TASK-0046-accepted-ack-codex",
-            "task_id": "TASK-0046",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-accepted.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0046-accepted.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado: FYI TASK-0046 accepted movido a answered. No se arranca Fase 5; espera decision del operador."
-        },
-        {
             "claim_id": "CLAIM-20260606-inventario-capaA-claude",
             "task_id": "TASK-0038",
             "owner": "Claude",
@@ -75,6 +23,99 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: entregar inventario formal (artifact) + registrar decision del operador (consolidar Capa A) + encolar primer paso seguro de Capa A (TASK-0047: suites runtime en CI). Claim efimero: se libera al cierre del turno; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0047-codex",
+            "task_id": "TASK-0047",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0047",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0047",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0047-codex-runtime-suites-en-ci.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0047-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0047-ci.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0047-ci.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0047-in-review.md",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con handoff-release: TASK-0047 entregada a in_review. CI workflow ahora ejecuta suites runtime y declara jsonschema; no runtime/contract/fixture edits. Handoff: Area_comun/handoffs/HANDOFF-TASK-0047-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0047-coordinate-unblocked-codex",
+            "task_id": "TASK-0047",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0047-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: handoff abierto actualizado para aclarar que el bloqueo por claim de Codex ya esta despejado y que Claude puede revisar/cerrar TASK-0047 y publicar SPEC/decision bajo su propio claim."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0047-flip-y-publicar-A1-claude",
+            "task_id": "TASK-0047",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0047",
+                "Area_comun/state/TASK_INDEX.json#TASK-0048",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0047-codex-runtime-suites-en-ci.md",
+                "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
+                "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md",
+                "Area_comun/decisions/DECISION-0017-event-log-writer-vivo.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0047-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0047-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0047-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
+                "personal/Claude/SPEC-0039-DRAFT-event-log-writer-vivo.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion de TASK-0047 (suites en CI) + flip a done; PUBLICACION A.1 (operador aprobo alcance A->B): SPEC-0039 a Area_comun/specs + DECISION-0017 ACCEPTED + encolar TASK-0048 (impl Fase A control-plane gate) a Codex. Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0048-codex",
+            "task_id": "TASK-0048",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0048",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0048",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0048-faseA.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0048-in-review.md",
+                "runtime/apply.py",
+                "runtime/orchestrator.py",
+                "runtime/eventlog.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/runtime_eventlog_gate_cases/"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Implementar TASK-0048 Fase A: runtime emite EventWriter acquire_claim/apply_intent, assert_snapshot_matches gate en apply y validador py/ps1 cuando runtime/state existe; golden eventlog gate. No Fase B."
         }
     ]
 }

@@ -16,6 +16,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install Python test dependencies
+        run: python -m pip install jsonschema
+
       - name: Validate repository dogfood instance
         run: python scripts/validate_collaboration_state.py --root .
 
@@ -60,6 +63,36 @@ jobs:
       - name: Run neutrality scan validation cases
         shell: pwsh
         run: ./examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1
+
+      - name: Run runtime router cases
+        run: python examples/runtime_router_cases/run_runtime_router_cases.py
+
+      - name: Run runtime event log cases
+        run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
+
+      - name: Run runtime Review/QA cases
+        run: python examples/runtime_review_qa_cases/run_runtime_review_qa_cases.py
+
+      - name: Run agent registry cases
+        run: python examples/agent_registry_cases/run_agent_registry_cases.py
+
+      - name: Run runtime turn schema cases
+        run: python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py
+
+      - name: Run runtime turn semantic cases
+        run: python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py
+
+      - name: Run runtime apply cases
+        run: python examples/runtime_apply_cases/run_runtime_apply_cases.py
+
+      - name: Run runtime loop cases
+        run: python examples/runtime_loop_cases/run_runtime_loop_cases.py
+
+      - name: Run runtime observability cases
+        run: python examples/runtime_observability_cases/run_runtime_observability_cases.py
+
+      - name: Run LLM adapter recorded cases
+        run: python examples/llm_adapter_cases/run_llm_adapter_cases.py
 
       - name: Scan domain neutrality
         run: python scripts/scan_domain_neutrality.py --root .

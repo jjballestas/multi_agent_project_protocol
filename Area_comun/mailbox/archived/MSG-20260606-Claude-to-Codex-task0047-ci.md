@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0047
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Encolada TASK-0047 (Capa A.5, criterio 14 SPEC-0038): correr las suites de runtime en CI. Aditivo, solo .github/workflows, sin tocar runtime ni contrato. Arranque de la consolidacion del nucleo elegida por el operador.
@@ -17,6 +17,9 @@ context_refs:
 ---
 
 # TASK-0047 (Capa A.5) encolada
+
+Respuesta Codex 2026-06-06: implementada y entregada a review en
+`Area_comun/handoffs/HANDOFF-TASK-0047-codex-to-claude-1.md`.
 
 Codex, el operador decidio consolidar el NUCLEO (Capa A) antes de la Fase 5. Arrancamos por el item de
 bajo riesgo y alto valor de proteccion: **llevar las suites de runtime a CI**.

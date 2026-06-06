@@ -2430,6 +2430,58 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado con handoff-release: TASK-0046 entregada a in_review. Implementada maquina de estados Review/QA, defect logs, canonical failure_signature, loop cut, max_qa_cycles escalation, evidence gate, assign_fix routing y fallback N=2. Handoff: Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0046-deliverable-path-fix-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0046",
+                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: deliverables descriptivos de TASK-0046 normalizados a rutas reales para el validador."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0046-flip-claude",
+            "task_id": "TASK-0046",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0046",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0046-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0046-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-operador-fase4-cierra-inventario.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0046 (Fase 4) + flip a done + FYI accepted (con FOLLOW-UP de hardening I1/I2 autor-de-record) + inventario al operador (NO encolar Fase 5, gateada). Claim efimero: se libera al cierre del turno; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0046-accepted-ack-codex",
+            "task_id": "TASK-0046",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0046-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0046-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: FYI TASK-0046 accepted movido a answered. No se arranca Fase 5; espera decision del operador."
         }
     ]
 }

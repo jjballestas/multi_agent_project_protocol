@@ -16,6 +16,7 @@ EVENT_SCHEMA_VERSION = "1.0"
 LOG_PATH = Path("runtime") / "state" / "events.jsonl"
 SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
 ARCHIVE_DIR = Path("runtime") / "state" / "archives"
+STATE_DIR = Path("runtime") / "state"
 
 
 class EventLogError(RuntimeError):
@@ -156,6 +157,11 @@ def assert_snapshot_matches(root: Path) -> None:
         raise EventLogError("snapshot mismatch: up_to_seq differs")
     if canonical_hash(stored.get("state") or {}) != canonical_hash(rebuilt.get("state") or {}):
         raise EventLogError("snapshot mismatch: state hash differs")
+
+
+def runtime_state_has_content(root: Path) -> bool:
+    state_dir = root / STATE_DIR
+    return state_dir.exists() and any(path.is_file() for path in state_dir.rglob("*"))
 
 
 class EventWriter:

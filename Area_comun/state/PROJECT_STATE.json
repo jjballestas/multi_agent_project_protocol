@@ -85,14 +85,15 @@
         "DECISION-0013-liveness-y-visibilidad",
         "DECISION-0014-poda-sistematica",
         "DECISION-0015-n-agent-registry-y-capacidades",
-        "DECISION-0016-areas-personales-onboarding"
+        "DECISION-0016-areas-personales-onboarding",
+        "DECISION-0017-event-log-writer-vivo"
     ],
     "active_tasks": [
         {
-            "id": "TASK-0047",
+            "id": "TASK-0048",
             "owner": "Codex",
-            "status": "ready",
-            "title": "Capa A.5 (consolidacion nucleo N-agente, criterio 14 SPEC-0038): correr las suites de runtime en CI (.github/workflows). Aditivo, sin tocar runtime/contrato. Arranque de la Capa A elegida por el operador. Encolada a Codex."
+            "status": "in_progress",
+            "title": "Capa A.1 Fase A (SPEC-0039 + DECISION-0017 A->B): event log como writer vivo del CONTROL-PLANE - apply/orchestrator emiten acquire_claim/apply_intent + assert_snapshot_matches hard-gate en apply y en validador global cuando runtime/state existe; fallback intacto. En progreso por Codex. NO Fase B (gateada)."
         },
         {
             "id": "TASK-0038",
@@ -152,9 +153,9 @@
         "FASE 4 N-AGENTE ACEPTADA y DONE (TASK-0046, ratificacion adversarial de Claude): maquina de estados Review/QA (runtime/review_qa.py + turn_validate + apply + router + turn_schema): failure_signature canonica (A8) normaliza timestamps/ids-hex/epoch + rutas abs-rel => logs superficiales NO cambian la firma; corte de bucles con GUARDA BIDIRECCIONAL en turn_validate (must_escalate=loop_cut o attempts>max_qa_cycles => DEBE ir a architect_review; y no se puede escalar prematuramente) => NO se puede evadir el corte reportando qa_failed normal; I1/I2 reviewer/qa != autor + defect obligatorio (reject_review/fail_qa) + evidencia obligatoria (pass_qa, incl. qa_pending->done sin payload rechazado); routing assign_fix prefiere autor original. Corri yo la suite (61/61 incl. review_qa 9/9) + gates py. Codex amplio scripts/validate_*.py/.ps1 (bajo claim) para aceptar los nuevos estados como reviewed/release-like: aditivo, no abre done-sin-evidencia. Fallback N=2 y golden legacy intactos.",
         "HALLAZGO/FOLLOW-UP SEGURIDAD (Fase 5 hardening, NO bloqueante): la guarda de exclusion de autor (I1/I2) usa task_author(task,payload) que PRIORIZA payload.author sobre el estado; un actor adversarial podria declarar payload.author falso y evadir el rechazo self-review/self-QA. Riesgo nulo hoy (actores de buena fe, replay/recorded). Fix: persistir original_author en el estado en la 1ra asignacion (apply) y que la guarda lea SOLO del estado. Cerrar antes de operar agentes no confiables.",
         "FASES 5-7 GATEADAS: NUCLEO Fases 1-4 (criterios 1-12 SPEC-0038) COMPLETO. Fase 5 (guardrails/permisos/tool-policy/anti-inyeccion handoffs), Fase 6 (observabilidad/trace_id/presupuesto-deadline; budget.py ya existe), Fase 7 (release eng: SBOM/provenance/changelog-desde-eventos). Inventario formal entregado: Area_comun/artifacts/INVENTARIO-n-agente-cierre-nucleo-20260606.md.",
-        "DECISION DEL OPERADOR (2026-06-06): CONSOLIDAR EL NUCLEO (Capa A) antes de la Fase 5. Capa A (brechas de la spec congelada): A.1 event log WRITER-VIVO + assert_snapshot_matches en validador global (Claude especifica spec/posible DECISION; NO encolado aun, item delicado), A.2 golden N=3/N=5, A.3 property-based I1-I8, A.4 concurrency simulation (10 impl/100 tareas/leases/disabled mid-exec/intents duplicados), A.5 suites de runtime en CI (ENCOLADO = TASK-0047, arranque de bajo riesgo), A.6 hardening autor-de-record I1/I2, A.7 SemVer del schema. Secuencia: A.5 ya (Codex), A.1 tras spec, luego A.2/A.3/A.4/A.6/A.7.",
-        "FASE 5 N-AGENTE: NO arrancada (gateada). Codex avisado de no tomarla. Cola actual de Codex = TASK-0047 (Capa A.5).",
-        "FOLLOW-UP RASTREADO (de Fase 2): cuando el event log (runtime/eventlog.py) pase a ser el writer VIVO del estado, cablear assert_snapshot_matches al validador global py/ps1 como hard-gate repo-wide antes de escribir. Hoy eventlog es modulo aditivo.",
+        "CAPA A (consolidacion nucleo, decision operador 2026-06-06): A.5 suites en CI DONE (TASK-0047, ratificada por Claude, 10 runners 61/61). A.1 event log writer-vivo: SPEC-0039 publicada + DECISION-0017 ACCEPTED (alcance A->B incremental); Fase A encolada = TASK-0048 (control-plane gate: apply/orchestrator emiten al EventWriter + assert_snapshot_matches hard-gate en apply y en validador global cuando runtime/state existe; fallback intacto). Fase B (replay del estado de protocolo) ESPECIFICADA y GATEADA. Pendientes Capa A: A.2 golden N=3/N=5, A.3 property-based I1-I8, A.4 concurrency sim, A.6 hardening autor-de-record I1/I2, A.7 SemVer schema.",
+        "FASE 5 N-AGENTE: NO arrancada (gateada). Codex avisado de no tomarla NI la Fase B del writer-vivo. Cola actual de Codex = TASK-0048 en progreso (Capa A.1 Fase A).",
+        "FOLLOW-UP DE FASE 2 (en cierre): cablear assert_snapshot_matches al validador global py/ps1 como hard-gate cuando el event log sea writer vivo. Lo aborda TASK-0048 Fase A (gate cuando runtime/state existe). La parte de estado-de-protocolo como writer vivo es Fase B (gateada).",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "PENDIENTES GATEADOS OPERADOR: release v0.10.0 (acumula DECISION-0016 + N-agente Fases 1-4); wrapper LLM real (claude CLI) tras el invoker subproceso; arrancar Fase 5 o detener el programa N-agente."
     ],

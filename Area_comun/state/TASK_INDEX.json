@@ -115,36 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0045",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "N-agente Fase 3 (SPEC-0038 sec.13): router weighted-least-loaded determinista + exclusion de autor (review/QA) + required_capability + max_active_claims + pesos en config + routing_decision.explanation + fairness gate por elegibilidad/anti-starvation (gates A4/A9)",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md",
-            "depends_on": [
-                "TASK-0043"
-            ],
-            "relates_to": [
-                "TASK-0044"
-            ],
-            "relevant_files": [
-                "runtime/router.py",
-                "runtime/context.py",
-                "examples/runtime_router_cases/"
-            ],
-            "deliverables": [
-                "runtime/router.py",
-                "examples/runtime_router_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0045-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (52/52: router 10/10 + eventlog/registry/turn/apply/loop/obs/llm) + validador/encoding/neutralidad py+ps1 verdes. Verificado en el codigo y los golden: (A9) review/QA nunca asignan al autor aunque tenga capacidad reviewer/qa (filtered author_excluded en candidate_evaluation); sin elegible => action escalate con candidatos+razon, owner==autor SOLO en escalate (nunca self-review en review/qa). (A4) fairness 100 tareas/3 agentes identicos sin sesgo por nombre (seleccion por stable_hash(task|transition|agent|epoch); agent_id solo desempata colisiones ~nulas) + anti-starvation (elegible >= muestra_min con 0 => fallo) + reparto ponderado + guarda denominador-cero. Determinismo: select_next x2 => identico por caso; sha256, sin reloj/random. 5 router cases legacy intactos; fallback N=2 (review->Claude, human gate->operador humano). Config aditiva (routing_epoch+routing_weights) en live+template; context.load_state expone config+agent_registry. Neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
-        },
-        {
             "id": "TASK-0046",
             "owner": "Codex",
             "status": "done",
@@ -183,7 +153,7 @@
         {
             "id": "TASK-0047",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "integration",
             "priority": "high",
             "phase": "P2",
@@ -206,7 +176,45 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Capa A.5 elegida por el operador (consolidar nucleo). Agregar al workflow de CI los runners de runtime que hoy solo corren en local/handoff: examples/runtime_router_cases, runtime_eventlog_cases, runtime_review_qa_cases, agent_registry_cases, runtime_turn_cases (schema+semantic), runtime_apply_cases, runtime_loop_cases, runtime_observability_cases, llm_adapter_cases (este ultimo en modo recorded, sin --allow-real-invoker, sin red). Aditivo, no toca contrato ni runtime. Mantener determinismo (sin reloj/red). Si algun runner necesita dependencias (jsonschema), declararlas en el step. Cierre: CI verde con las suites incluidas; handoff autocontenido; claim liberado al pasar a in_review. NOTA: este item NO depende del event log writer-vivo (A.1), que Claude especificara aparte."
+            "review": "ACEPTADA por Claude con RATIFICACION (2026-06-06). Corri yo los 10 runners de runtime (61/61: router 10, eventlog 5, review_qa 9, registry 4, turn schema 5, turn semantic 5, apply 4, loop 8, obs 5, llm 6) + validador/encoding/neutralidad py + parse YAML del workflow OK. Diff revisado: solo .github/workflows/validate.yml (step pip install jsonschema + 10 steps de runners; llm-adapter en modo recorded SIN --allow-real-invoker, sin red). git status confirma que el unico archivo de producto tocado es el workflow; no se modifico runtime/ ni contrato ni fixtures. Cierra la brecha de regresion de CI del nucleo N-agente (criterio 14 SPEC-0038). Codex aplico handoff-release y coordino el desbloqueo del claim; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0048",
+            "owner": "Codex",
+            "status": "in_progress",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.1 Fase A (SPEC-0039, DECISION-0017): event log como writer vivo del CONTROL-PLANE - apply/orchestrator emiten acquire_claim/apply_intent al EventWriter en turnos de runtime + assert_snapshot_matches como hard-gate en apply (pre-commit del runtime) y en el validador global cuando runtime/state existe; fallback sin runtime/state intacto",
+            "spec_id": "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md",
+            "file": "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
+            "linked_decisions": [
+                "DECISION-0017"
+            ],
+            "depends_on": [
+                "TASK-0044",
+                "TASK-0046"
+            ],
+            "relates_to": [
+                "TASK-0047"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/apply.py",
+                "runtime/orchestrator.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/runtime_eventlog_gate_cases/"
+            ],
+            "deliverables": [
+                "runtime/ (apply/orchestrator emiten al EventWriter + assert_snapshot_matches gate)",
+                "scripts/validate_collaboration_state.py/.ps1 (gate cuando runtime/state existe)",
+                "examples/runtime_eventlog_gate_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "En progreso por Codex (CLAIM-20260606-TASK-0048-codex). Fase A del writer-vivo (DECISION-0017 ACCEPTED, alcance A->B incremental aprobado por el operador). Alcance Fase A (control-plane gate): (1) en los turnos de runtime, apply/orchestrator invocan EventWriter.acquire_claim/apply_intent de modo que el control-plane del log (claims/leases/fencing/idempotencia) refleje lo que el runtime aplica; (2) assert_snapshot_matches como hard-gate en apply ANTES de commitear el turno del runtime; (3) el validador global py/ps1 corre assert_snapshot_matches cuando runtime/state existe y no esta vacio (cierra el FOLLOW-UP de Fase 2); (4) fallback sin runtime/state intacto (no rompe el repo vivo que aun no usa el log como writer del estado de protocolo). Golden nuevo runtime_eventlog_gate_cases (mismatch detectado/ok + integracion apply+eventlog + fallback). Aditivo; NO incluye Fase B (replay del estado de protocolo, gateada). Sin red. Mantener neutralidad."
         }
     ]
 }
