@@ -3183,6 +3183,26 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: ratificacion adversarial de TASK-0056 (Fase 5.2 tool-policy) + flip a done + commit de la impl de Codex (staging explicito, corrige el commit torn b1e519b). Suite 116/116. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-encolar-task0057-fase5.3-claude",
+            "task_id": "TASK-0057",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0057",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/specs/SPEC-0043-fase5.3-envelope-signing.md",
+                "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0057-GO-envelope-signing.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: promueve Fase 5.3 (TASK-0057 firma del envelope, ultima del nucleo de Fase 5) a ready. Codex online. Metodo refinado: archivos-antes-de-claim (#1) + staging explicito al commitear (#2). Claim efimero."
         }
     ]
 }
