@@ -19,6 +19,8 @@ EXPECTED = {
     "semantic_valid.json": True,
     "semantic_out_of_allowlist.json": False,
     "semantic_stale_from.json": False,
+    "semantic_third_agent_valid.json": True,
+    "semantic_unregistered_agent.json": False,
 }
 
 
@@ -41,6 +43,13 @@ def build_fixture_root(target: Path) -> None:
                     "status": "in_progress",
                     "priority": "high",
                     "file": "Area_comun/tasks/TASK-0099.md",
+                },
+                {
+                    "id": "TASK-0100",
+                    "owner": "Builder",
+                    "status": "in_progress",
+                    "priority": "normal",
+                    "file": "Area_comun/tasks/TASK-0100.md",
                 }
             ]
         },
@@ -61,8 +70,36 @@ def build_fixture_root(target: Path) -> None:
                         "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
                         "Area_comun/state/CLAIMS.json",
                     ],
+                },
+                {
+                    "claim_id": "CLAIM-TASK-0100-builder",
+                    "task_id": "TASK-0100",
+                    "owner": "Builder",
+                    "status": "active",
+                    "scope": [
+                        "runtime/",
+                        "Area_comun/tasks/TASK-0100.md",
+                        "Area_comun/state/TASK_INDEX.json#TASK-0100",
+                        "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0100",
+                        "Area_comun/state/CLAIMS.json",
+                    ],
                 }
             ]
+        },
+    )
+    write_json(
+        target / "protocol.config.json",
+        {
+            "agent_registry": {
+                "enabled": True,
+                "agents": [
+                    {"id": "Claude", "capabilities": ["architect", "reviewer", "orchestrator", "qa"], "enabled": True},
+                    {"id": "Codex", "capabilities": ["implementer", "test_engineer"], "enabled": True},
+                    {"id": "Builder", "capabilities": ["implementer"], "enabled": True},
+                    {"id": "DisabledBuilder", "capabilities": ["implementer"], "enabled": False},
+                    {"id": "ReviewerOnly", "capabilities": ["reviewer"], "enabled": True},
+                ],
+            }
         },
     )
     (target / "Area_comun" / "mailbox" / "open").mkdir(parents=True)

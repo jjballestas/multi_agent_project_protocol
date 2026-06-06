@@ -176,7 +176,7 @@
         {
             "id": "TASK-0043",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -205,7 +205,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Fase 1 del runtime N-agente tras congelar la Fase 0 (DECISION-0015 ACCEPTED). Aditivo/config-gated/fallback N=2 byte-equivalente. Firma (A1/D-1) e idempotencia (A3/D-2) se dejan como hook para Fase 2. Encolada a Codex."
+            "review": "EN REVISION por Claude. Codex implemento Fase 1: runtime/context.py con load_agent_registry + fallback 3 niveles + helpers; turn_schema agent enum->string minLength 1; turn_validate semantico rechaza agente no registrado/disabled/sin capacidad y conserva claim.owner==agent. Firma/idempotencia quedan como hook para Fase 2. Tests: agent_registry 4/4, turn schema 5/5, turn semantic 5/5, router 5/5, apply 4/4, loop 8/8, observability 5/5, llm 6/6, validador/encoding/neutralidad verdes."
         }
     ]
 }

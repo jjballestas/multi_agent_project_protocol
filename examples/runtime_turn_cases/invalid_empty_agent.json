@@ -1,0 +1,9 @@
+{
+  "turn_id": "RUN-20260605-SCHEMA-EMPTY-AGENT",
+  "task_id": "TASK-0023",
+  "agent": "",
+  "outcome": "in_review",
+  "summary": "Invalid because agent is empty.",
+  "changed_paths": [],
+  "commit_message": "test(runtime): empty agent"
+}

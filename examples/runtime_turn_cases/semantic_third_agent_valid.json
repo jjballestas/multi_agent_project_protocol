@@ -1,0 +1,22 @@
+{
+  "turn_id": "RUN-20260605-SEM-0004",
+  "task_id": "TASK-0100",
+  "agent": "Builder",
+  "outcome": "in_review",
+  "summary": "Valid third-agent turn report inside the active claim scope.",
+  "changed_paths": [
+    "runtime/context.py",
+    "Area_comun/tasks/TASK-0100.md"
+  ],
+  "transitions": {
+    "task_status": { "from": "in_progress", "to": "in_review" },
+    "claims": [
+      { "op": "release", "claim_id": "CLAIM-TASK-0100-builder", "scope": ["runtime/"] }
+    ],
+    "mailbox": [],
+    "handoff": null
+  },
+  "commit_message": "feat(runtime): validate third agent",
+  "gate": { "human_required": false },
+  "next_hint": null
+}

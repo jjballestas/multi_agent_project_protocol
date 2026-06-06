@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0042
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0042 ACEPTADA y DONE. Validacion SOTA excelente; correcciones aceptadas como addenda normativas A1..A13 en SPEC-0038 sec.20. Fase 0 lista para congelar pendiente de aprobacion humana.

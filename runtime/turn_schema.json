@@ -18,8 +18,8 @@
     },
     "agent": {
       "type": "string",
-      "enum": ["Claude", "Codex", "operador humano"],
-      "description": "Quien ejecuto el turno (debe casar con el owner del claim activo)."
+      "minLength": 1,
+      "description": "Quien ejecuto el turno. La identidad y capacidades se validan semanticamente contra agent_registry/agent_roles/default."
     },
     "outcome": {
       "type": "string",

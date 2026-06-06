@@ -11,9 +11,27 @@ from typing import Any
 
 PRIORITY_RANK = {"critical": 4, "high": 3, "normal": 2, "low": 1}
 
+DEFAULT_AGENT_ROLES = {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano",
+}
+
+ROLE_CAPABILITIES = {
+    "architect": ["architect", "reviewer", "orchestrator", "qa"],
+    "implementer": ["implementer", "test_engineer"],
+    "human_owner": ["human_owner"],
+}
+
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def read_json_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    return read_json(path)
 
 
 def merge_by_array_field(hot: dict[str, Any], archive: dict[str, Any] | None, field: str) -> dict[str, Any]:
@@ -82,6 +100,80 @@ def load_state(root: Path) -> dict[str, Any]:
         "claims": claims,
         "mailbox_open": mailbox_open,
     }
+
+
+def normalize_agent(agent: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": str(agent.get("id") or ""),
+        "capabilities": sorted({str(cap) for cap in agent.get("capabilities") or [] if str(cap)}),
+        "adapter": agent.get("adapter", "llm"),
+        "enabled": agent.get("enabled") is not False,
+        "max_active_claims": agent.get("max_active_claims"),
+        "trust_boundary": agent.get("trust_boundary"),
+        "tool_policy_ref": agent.get("tool_policy_ref"),
+        "auth": agent.get("auth") or {},
+    }
+
+
+def registry_from_roles(agent_roles: dict[str, Any]) -> dict[str, Any]:
+    agents_by_id: dict[str, dict[str, Any]] = {}
+    for role, default_agent in DEFAULT_AGENT_ROLES.items():
+        agent_id = str(agent_roles.get(role) or default_agent)
+        agent = agents_by_id.setdefault(
+            agent_id,
+            {
+                "id": agent_id,
+                "capabilities": [],
+                "adapter": "human" if role == "human_owner" else "llm",
+                "enabled": True,
+            },
+        )
+        agent["capabilities"].extend(ROLE_CAPABILITIES[role])
+        if role == "human_owner":
+            agent["adapter"] = "human"
+    return {
+        "enabled": True,
+        "routing_policy": "legacy_roles",
+        "agents": [normalize_agent(agent) for agent in agents_by_id.values()],
+        "source": "agent_roles",
+    }
+
+
+def default_agent_registry() -> dict[str, Any]:
+    registry = registry_from_roles(DEFAULT_AGENT_ROLES)
+    registry["source"] = "default"
+    return registry
+
+
+def load_agent_registry(root: Path) -> dict[str, Any]:
+    config = read_json_if_exists(root.resolve() / "protocol.config.json") or {}
+    explicit = config.get("agent_registry")
+    if isinstance(explicit, dict) and explicit.get("enabled") is not False and isinstance(explicit.get("agents"), list):
+        return {
+            "enabled": True,
+            "routing_policy": explicit.get("routing_policy", "weighted_least_loaded_deterministic"),
+            "agents": [normalize_agent(agent) for agent in explicit.get("agents") or [] if isinstance(agent, dict)],
+            "source": "agent_registry",
+        }
+    if isinstance(config.get("agent_roles"), dict):
+        return registry_from_roles(config["agent_roles"])
+    return default_agent_registry()
+
+
+def enabled_agents(registry: dict[str, Any]) -> list[dict[str, Any]]:
+    return [agent for agent in registry.get("agents") or [] if isinstance(agent, dict) and agent.get("enabled") is True]
+
+
+def agents_with_capability(registry: dict[str, Any], capability: str) -> list[dict[str, Any]]:
+    return [
+        agent
+        for agent in enabled_agents(registry)
+        if capability in {str(item) for item in agent.get("capabilities") or []}
+    ]
+
+
+def has_capability(registry: dict[str, Any], agent_id: str, capability: str) -> bool:
+    return any(agent.get("id") == agent_id for agent in agents_with_capability(registry, capability))
 
 
 def tasks_by_id(state: dict[str, Any]) -> dict[str, dict[str, Any]]:

@@ -16,6 +16,7 @@ EXPECTED = {
     "valid_human_required.json": True,
     "invalid_missing_required.json": False,
     "invalid_human_gate.json": False,
+    "invalid_empty_agent.json": False,
 }
 
 

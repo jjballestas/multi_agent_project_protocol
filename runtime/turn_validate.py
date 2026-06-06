@@ -17,9 +17,9 @@ ROW_SCOPED_LEDGER_PATHS = {
 
 
 try:
-    from .context import active_claims, load_state, tasks_by_id
+    from .context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
 except ImportError:  # pragma: no cover - direct script execution
-    from context import active_claims, load_state, tasks_by_id
+    from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
 
 
 def load_report(path: Path) -> dict[str, Any]:
@@ -71,6 +71,40 @@ def derive_transition_scopes(report: dict[str, Any]) -> list[str]:
     return required
 
 
+def required_capability_for_report(report: dict[str, Any]) -> str | None:
+    transition = (report.get("transitions") or {}).get("task_status")
+    if isinstance(transition, dict):
+        from_status = transition.get("from")
+        to_status = transition.get("to")
+        if from_status == "in_review" and to_status == "done":
+            return "reviewer"
+        if to_status in {"in_review", "done", "blocked"}:
+            return "implementer"
+        if to_status in {"ready", "claimed", "in_progress"}:
+            return "orchestrator"
+    if report.get("changed_paths"):
+        return "implementer"
+    return None
+
+
+def validate_agent_semantics(report: dict[str, Any], root: Path) -> list[str]:
+    errors: list[str] = []
+    agent_id = str(report.get("agent") or "")
+    registry = load_agent_registry(root)
+    agents = {str(agent.get("id")): agent for agent in registry.get("agents") or [] if isinstance(agent, dict)}
+    agent = agents.get(agent_id)
+    if not agent:
+        return [f"semantic: agent not registered: {agent_id}"]
+    if agent.get("enabled") is not True:
+        errors.append(f"semantic: agent disabled: {agent_id}")
+    required = required_capability_for_report(report)
+    if required and not has_capability(registry, agent_id, required):
+        errors.append(f"semantic: agent {agent_id} lacks required capability: {required}")
+    if agent_id not in {str(agent.get("id")) for agent in enabled_agents(registry)}:
+        errors.append(f"semantic: agent not enabled: {agent_id}")
+    return errors
+
+
 def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads((root / "runtime" / "turn_schema.json").read_text(encoding="utf-8-sig"))
@@ -82,6 +116,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
         return errors
 
     state = load_state(root)
+    errors.extend(validate_agent_semantics(report, root))
     claims = [
         claim
         for claim in active_claims(state)
