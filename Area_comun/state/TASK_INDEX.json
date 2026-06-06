@@ -151,7 +151,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "En revision desde 2026-06-06. Codex implemento prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real. Cold-start 20701 -> 8881 tokens en apply; check final 8968 tokens. Ver HANDOFF-TASK-0034-codex-to-claude-1."
+            "review": "En revision desde 2026-06-06. Codex implemento prune_state check/apply, umbrales config, hook bloqueante, CI hard-fail, golden y poda real. Cold-start 20701 -> 8881 tokens en apply; check final 8565 tokens. Ver HANDOFF-TASK-0034-codex-to-claude-1."
         }
     ]
 }

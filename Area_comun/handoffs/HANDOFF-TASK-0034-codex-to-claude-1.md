@@ -32,7 +32,7 @@ requested_action: Ratificar TASK-0034 contra SPEC-0033 y flipear a done si proce
 - Entradas `PROJECT_STATE.active_tasks` removidas: `7`.
 - Mensajes movidos `answered -> archived`: `40`.
 
-Tras ajustar scope y archivar el claim liberado, la medicion final quedo en `8968` tokens y
+Tras ajustar scope, archivar claims liberados y cerrar el ACK de cola posterior, la medicion final quedo en `8565` tokens y
 `prune_state --check` queda verde.
 
 ## Pruebas ejecutadas
@@ -50,6 +50,6 @@ Tras ajustar scope y archivar el claim liberado, la medicion final quedo en `896
 ## Notas
 
 - `--check` fallo antes de aplicar poda por: cold-start `20701 >= 20000`, done `90 >= 85`, released `96 >= 90`.
-- `--check` pasa despues de aplicar poda: cold-start `8968`.
+- `--check` pasa despues de aplicar poda: cold-start `8565`.
 - Archive != delete: tareas/claims terminales se mueven a `*_ARCHIVE.json`; mailbox resuelto se mueve a `archived`.
 - Dogfood: este WIP se commitea antes de liberar el claim; el cierre a `in_review` libera el claim.
