@@ -17,6 +17,34 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [0.8.0] — 2026-06-06
+
+Runtime **M1** release: the orchestration runtime gains its **first safe writer** and closes the
+turn loop **deterministically**, all **additively and off-by-default** (`runtime.enabled:false`).
+Nothing runs real agents yet — M1 proves the apply/gate/commit engine and the loop via a **replay
+adapter**; real LLM adapters and autonomous multi-agent operation are M2 (and turning the runtime on
+requires human approval). **MINOR** — additive, domain-neutral, back-compatible.
+
+### Added
+- **Turn apply + gate + commit/revert** (TASK-0030, [SPEC-0029](Area_comun/specs/SPEC-0029-turn-apply-gate.md)):
+  `runtime/apply.py` (writes only if `validate_turn` passes), `runtime/gate.py` (validator + neutrality
+  scan) and `runtime/vcs.py` (one commit per green turn; `git restore` + task `blocked` on a red gate).
+  Honors the write-allowlist and row-scoped claims. Golden `examples/runtime_apply_cases/` (repo-fixture, 4/4).
+- **Vendor-neutral agent adapter + replay + run loop** (TASK-0031,
+  [SPEC-0030](Area_comun/specs/SPEC-0030-adapter-replay-loop.md)): `runtime/adapters/base.py`
+  (`AgentAdapter` Protocol + `ContextPack`/`TurnReport`), `runtime/adapters/replay.py` (deterministic
+  report replay), `runtime/runlog.py` (JSONL run-log with injectable `--run-id` + deterministic
+  `RUN-<sha256>` default), and `runtime/orchestrator.py` `--run/--once/--max-iter` reusing the
+  apply+gate+commit engine. `--plan` stays read-only. Golden `examples/runtime_loop_cases/` (5/5):
+  `--once`=1 turn/1 commit, deterministic sequence cut by `--max-iter`, `human_required` hard-stop
+  (no commit), `--plan` no-regression, `runtime.enabled:false` aborts `--run`.
+- **M1 design + specs** (TASK-0029): `Area_comun/artifacts/DISENO-runtime-m1.md` + SPEC-0029/0030,
+  refining the M1/M2 boundary (M1 deterministic via replay; real agents = M2).
+
+### Notes
+- Off-by-default and vendor-neutral: swapping the replay adapter for a future real adapter does **not**
+  touch the loop. Activating `runtime.enabled:true` is a human-owner decision (DECISION-0009).
+
 ## [0.7.0] — 2026-06-05
 
 Token-efficiency release: the protocol now **measures** its own context cost and trims the biggest

@@ -8,7 +8,7 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-05 · Maintainer: Claude (architect) + human owner. Released version: v0.7.0.
+> Last updated: 2026-06-06 · Maintainer: Claude (architect) + human owner. Released version: v0.8.0.
 
 ## 0. How to Start
 

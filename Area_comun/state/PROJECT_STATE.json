@@ -1,7 +1,7 @@
 ﻿{
     "project":  "multi_agent_project_protocol",
     "description":  "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
-    "version":  "0.7.0",
+    "version":  "0.8.0",
     "phase":  {
                   "id":  "P2",
                   "name":  "Adopcion y expansion",
@@ -65,7 +65,8 @@
                               "v0.4.0",
                               "v0.5.0",
                               "v0.6.0",
-                              "v0.7.0"
+                              "v0.7.0",
+                              "v0.8.0"
                           ],
     "decisions":  [
                       "DECISION-0001-versionado",
@@ -120,8 +121,8 @@
                          {
                              "id":  "TASK-0031",
                              "owner":  "Codex",
-                             "status":  "ready",
-                             "title":  "Runtime M1: AgentAdapter + replay + loop --run (SPEC-0030) - depende de TASK-0030; LLM real = M2"
+                             "status":  "done",
+                             "title":  "Runtime M1: AgentAdapter + replay + loop --run (SPEC-0030) - ACEPTADA por Claude (golden loop 5/5); cierra M1"
                          }
                      ],
     "open_questions":  [
@@ -136,10 +137,12 @@
               ],
     "next_actions":  [
                          "v0.7.0 PUBLICADA: cierra el track de eficiencia de tokens (DECISION-0008: medidor 0023 + poda 0024 + frontmatter minimo 0025; cold-start -75%) e incluye, aditivo/off-by-default, el runtime M0 (0027) y claims por fila (0028).",
-                         "TASK-0030 ACEPTADA (runtime M1 apply+gate+vcs). Codex: siguiente TASK-0031 (AgentAdapter + replay + loop --run, SPEC-0030) sobre HEAD.",
-                         "Claude: revisar 0031 al hand-off; tras aceptar M1 completo, derivar specs/tasks de runtime M2. Proxima poda archiva la ventana reciente done."
+                         "TASK-0031 ACEPTADA: runtime M1 COMPLETO (apply+gate+vcs de 0030 + AgentAdapter/replay/loop --run/run-log de 0031). Loop determinista off-by-default cerrado; golden loop 5/5 + regresiones verdes.",
+                         "Claude: derivar specs/tasks de runtime M2 desde DISENO-runtime-m2.md (adapters LLM reales claude/codex + loop autonomo Claude<->Codex + mailbox automation + budget/run-log/metricas). Activar runtime.enabled:true requiere APROBACION HUMANA.",
+                         "v0.8.0 PUBLICADA (runtime M1 completo: apply+gate+vcs + adapter/replay/loop --run, aditivo/off-by-default). Reporte humano en Area_comun/reports/REPORT-20260606-release-v0.8.0.md.",
+                         "Siguiente: derivar specs/tasks de runtime M2 desde DISENO-runtime-m2.md (adapters LLM reales + loop autonomo Claude<->Codex + mailbox-auto + budget/metricas). Activar runtime.enabled:true requiere APROBACION HUMANA. Proxima poda archiva la ventana reciente done."
                      ],
     "created_at":  "2026-06-05",
-    "updated_at":  "2026-06-05",
+    "updated_at":  "2026-06-06",
     "updated_by":  "Claude"
 }

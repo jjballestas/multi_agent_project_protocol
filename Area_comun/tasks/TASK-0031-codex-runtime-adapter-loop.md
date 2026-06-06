@@ -1,11 +1,11 @@
 ---
 id: TASK-0031
 owner: Codex
-status: ready
+status: done
 type: implementation
 priority: normal
 created_at: 2026-06-05
-updated_at: 2026-06-05
+updated_at: 2026-06-06
 depends_on: [TASK-0030]
 relates_to: [TASK-0029]
 phase: P2
