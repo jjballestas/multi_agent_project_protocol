@@ -1525,6 +1525,38 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (78/78 incl. N-agent golden 6/6) + validador/encoding/neutralidad py + parse YAML. Confirme que el diff NO toca runtime/ ni golden existentes (solo examples/runtime_nagent_golden_cases/ + step en validate.yml). Verificado en el harness: N=3 review->Reviewer!=Author y qa->QA!=Author con author_excluded en filtered; autor-unico-capaz => escalate sin candidates (no self-review/self-QA); N=5 select_next x2 mismo estado => identico (replay determinista) y simulacion 25 asignaciones/5 implementers acumulando claims => cada uno >0, diferencia max-min<=1 (balanceo weighted-least-loaded real). Determinista (sin red/reloj/random). Cubre test plan global 15.3. Aditivo, fallback N=2 intacto. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0051",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.3 (test plan global 15.4 SPEC-0038): property-based de invariantes I1-I8 - generar estados variados (deterministas, por construccion/seed fijo) y verificar que se mantienen los 8 invariantes (reviewer!=autor, qa!=autor, done con evidencia, no 2 claims activos por tarea, evento aplicado incrementa seq+aggregate_version, replay reconstruye mismo snapshot, evento aplicado autenticado/atribuido, ningun intent se aplica dos veces)",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
+            "depends_on": [
+                "TASK-0049",
+                "TASK-0050"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/router.py",
+                "runtime/turn_validate.py",
+                "runtime/eventlog.py",
+                "examples/runtime_property_cases/"
+            ],
+            "deliverables": [
+                "examples/runtime_property_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL read-only (2026-06-06). Corri yo el harness (26/26) + suite runtime completa (104/104) + validador/encoding/neutralidad py. Verificado que el harness es GENUINO: importa el runtime REAL (runtime.router.select_next, runtime.turn_validate.validate_turn, runtime.eventlog) y NO reimplementa invariantes; 26 muestras deterministas enumeradas (seeds property-001..026, sin random/reloj/red/truncamiento, declarado en el output); cubre I1-I8 sobre rosters N=2/3/5; incluye CASOS NEGATIVOS reales (autor reviewer/qa => rechazado con expected_error; done sin evidencia => rechazado; intento de doble claim activo => detectado; intent duplicado => deduped) con contraejemplo reproducible por seed. Aditivo: solo examples/runtime_property_cases/ + step en validate.yml; NO toca runtime/ ni golden existentes. ANOMALIA DE PROCESO (notificada a Codex por mailbox segun DECISION-0018): el handoff-release quedo incompleto en la entrega (mensaje declaraba 'claim liberado' pero claim seguia active + status in_progress); Codex lo completo tras aviso del operador. Cubre test plan global 15.4. Flip a done por arquitecto."
         }
     ]
 }

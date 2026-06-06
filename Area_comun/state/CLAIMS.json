@@ -4,59 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-TASK-0051-codex",
-            "task_id": "TASK-0051",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0051",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0051",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0051-property.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0051-property.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
-                "examples/runtime_property_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado con handoff-release: TASK-0051 entregada a in_review. Harness property-based determinista I1-I8 con 26 muestras + runner CI; runtime completo 104/104 y gates globales verdes. No runtime/, no contrato/golden existentes, no Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md."
-        },
-        {
-            "claim_id": "CLAIM-20260606-TASK-0051-flip-y-protocolo-anomalias-claude",
-            "task_id": "TASK-0051",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0051",
-                "Area_comun/state/TASK_INDEX.json#TASK-0052",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks",
-                "Area_comun/state/PROJECT_STATE.json#decisions",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
-                "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
-                "Area_comun/decisions/DECISION-0018-notificacion-de-anomalias.md",
-                "AGENTS.md",
-                "AGENTS.template.md",
-                "Area_comun/protocol/TASK_PROTOCOL.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
-                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0051-accepted-y-anomalia.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0052-concurrency.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Arquitecto: cierre TASK-0051 (A.3, ratificada read-only verde) + ESTABLECER REGLA DE NOTIFICACION DE ANOMALIAS en el protocolo (DECISION-0018 + AGENTS.md/.template sec.7 + TASK_PROTOCOL), pedida por el operador; aviso formal a Codex de la anomalia del handoff-release incompleto + encolar A.4 (TASK-0052). Claim efimero: se libera al cierre; prune posterior."
-        },
-        {
             "claim_id": "CLAIM-20260606-TASK-0052-codex",
             "task_id": "TASK-0052",
             "owner": "Codex",
@@ -105,6 +52,55 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: ratificacion adversarial de TASK-0052 (Capa A.4 concurrency sim, test plan 15.5) + flip a done + encolar Capa A.7 (TASK-0053: SemVer del turn_schema, criterio 17, ultimo item de Capa A). Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0053-codex",
+            "task_id": "TASK-0053",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0053-in-review.md",
+                "runtime/turn_schema.json",
+                "Area_comun/protocol/SCHEMA_VERSIONING.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con handoff-release atomico: TASK-0053 entregada a in_review. schema_version=1.1.0 en runtime/turn_schema.json + politica SemVer en Area_comun/protocol/SCHEMA_VERSIONING.md; turn golden 10/10, runtime 105/105 y gates globales verdes. No Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0053-flip-y-cierre-capaA-claude",
+            "task_id": "TASK-0053",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0053-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0053-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-accepted-capaA.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-operador-capaA-completa.md",
+                "Area_comun/reports/REPORT-20260606-comportamiento-semi-automatico.md",
+                "Area_comun/artifacts/SUGERENCIAS-autonomia-semi-automatica-20260606.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0053 (Capa A.7 SemVer schema) + flip a done => CAPA A COMPLETA. NO se encola nueva tarea a Codex; FYI a Codex (cola vacia hasta decision operador) + reporte al operador (Capa A completa, pregunta siguiente paso). Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

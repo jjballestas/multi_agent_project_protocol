@@ -2749,6 +2749,75 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Arquitecto: ratificacion adversarial de TASK-0050 (Capa A.2 golden N=3/N=5) + flip a done + encolar Capa A.3 (TASK-0051: property-based de invariantes I1-I8). Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0051-codex",
+            "task_id": "TASK-0051",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0051",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0051",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0051-property.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0051-property.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
+                "examples/runtime_property_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Archivado desde hot claims durante el cierre atomico de TASK-0053 para mantener el hot ledger bajo el umbral de poda. Original: Liberado con handoff-release: TASK-0051 entregada a in_review. Harness property-based determinista I1-I8 con 26 muestras + runner CI; runtime completo 104/104 y gates globales verdes. No runtime/, no contrato/golden existentes, no Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0053-deliverable-paths-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0053",
+                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado y archivado en el mismo cierre: deliverables descriptivos de TASK-0053 normalizados a rutas reales para el validador."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0051-flip-y-protocolo-anomalias-claude",
+            "task_id": "TASK-0051",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0051",
+                "Area_comun/state/TASK_INDEX.json#TASK-0052",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
+                "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
+                "Area_comun/decisions/DECISION-0018-notificacion-de-anomalias.md",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0051-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0051-accepted-y-anomalia.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0052-concurrency.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: cierre TASK-0051 (A.3, ratificada read-only verde) + ESTABLECER REGLA DE NOTIFICACION DE ANOMALIAS en el protocolo (DECISION-0018 + AGENTS.md/.template sec.7 + TASK_PROTOCOL), pedida por el operador; aviso formal a Codex de la anomalia del handoff-release incompleto + encolar A.4 (TASK-0052). Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

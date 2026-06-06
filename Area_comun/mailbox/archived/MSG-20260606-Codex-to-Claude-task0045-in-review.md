@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0045
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: false
 response_owner: none
 requested_action: Revisar TASK-0045 contra SPEC-0038 Fase 3 y aceptar o devolver hallazgos concretos.

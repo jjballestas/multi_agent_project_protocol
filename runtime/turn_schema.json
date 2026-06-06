@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://multi-agent-protocol/runtime/turn_schema.json",
+  "schema_version": "1.1.0",
   "title": "Turn report",
   "description": "Contrato estricto que un agente devuelve al terminar UN turno. El orquestador lo valida, comprueba que changed_paths esta dentro del claim, aplica las transiciones, corre el gate (validador + scan de neutralidad) y, si verde, hace 1 commit; si rojo, git revert + blocked + escala. Ver SPEC-0026 y DECISION-0009.",
   "type": "object",
