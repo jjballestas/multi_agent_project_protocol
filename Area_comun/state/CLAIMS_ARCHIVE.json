@@ -1813,6 +1813,44 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado al pasar TASK-0036 a in_review. Implementado SPEC-0035: LLMAdapter con invoker subproceso generico vendor-neutral, RecordedInvoker sin red, limites M1/budget, --adapter llm --once y golden replay comparativo. No se disparo invoker real."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0039-queue-claude",
+            "task_id": "TASK-0039",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/specs/SPEC-0036-subprocess-invoker-windows-safe.md",
+                "Area_comun/tasks/TASK-0039-codex-subprocess-invoker-windows-safe.md",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0039-ready.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: registrar SPEC-0036 + TASK-0039 (fix shlex.split posix-en-Windows del SubprocessInvoker, hallazgo de la primera corrida real smoke), pasar a ready y encolar a Codex. Se libera al terminar el registro."
+        },
+        {
+            "claim_id": "CLAIM-20260606-future-work-backlog-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0036-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0036-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: registrados TASK-0037 y TASK-0038 como trabajos futuros proposed; FYI de aceptacion TASK-0036 archivado."
         }
     ]
 }

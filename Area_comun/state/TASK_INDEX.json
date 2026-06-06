@@ -174,6 +174,35 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
+        },
+        {
+            "id": "TASK-0039",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "SubprocessInvoker robusto en Windows: fix shlex.split posix (corrompe rutas con backslash => WinError 2) + golden cross-platform (SPEC-0036)",
+            "spec_id": "Area_comun/specs/SPEC-0036-subprocess-invoker-windows-safe.md",
+            "file": "Area_comun/tasks/TASK-0039-codex-subprocess-invoker-windows-safe.md",
+            "depends_on": [
+                "TASK-0036"
+            ],
+            "relates_to": [
+                "TASK-0018"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "examples/llm_adapter_cases/"
+            ],
+            "deliverables": [
+                "runtime/adapters/llm_adapter.py",
+                "examples/llm_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0039-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Defecto real hallado por Claude en la PRIMERA CORRIDA REAL (smoke en repo temporal, 2026-06-06): SubprocessInvoker.from_command usa shlex.split en modo POSIX y corrompe rutas Windows (backslash como escape) => subprocess falla con WinError 2; el invoker real es inusable en Windows con rutas nativas (operador opera en Windows). Encolada a Codex via mailbox."
         }
     ]
 }

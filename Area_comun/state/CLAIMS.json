@@ -4,26 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-future-work-backlog-codex",
-            "task_id": "none",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
-                "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0036-accepted.md",
-                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0036-accepted.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado: registrados TASK-0037 y TASK-0038 como trabajos futuros proposed; FYI de aceptacion TASK-0036 archivado."
-        },
-        {
             "claim_id": "CLAIM-20260606-release-v080-done-mailbox-cleanup-codex",
             "task_id": "none",
             "owner": "Codex",
