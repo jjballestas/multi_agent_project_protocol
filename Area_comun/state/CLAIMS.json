@@ -4,6 +4,26 @@
     "updated_by": "Claude",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-m2-observability-design-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/specs/SPEC-0031-runtime-observability.md",
+                "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-cola.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Diseno M2 hito 1 (OBSERVABILIDAD, direccion del operador): SPEC-0031 + TASK-0032 (metricas + budget + run-log enriquecido + trazas). Bajo DECISION-0009, aditivo/off-by-default. Promueve TASK-0032 ready para Codex."
+        },
+        {
             "claim_id": "CLAIM-20260606-runtime-enable-claude",
             "task_id": "none",
             "owner": "Claude",
@@ -216,6 +236,36 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: DONE terminal de release v0.8.0 movido a mailbox/answered."
+        },
+        {
+            "claim_id": "CLAIM-20260606-runtime-enabled-mailbox-cleanup-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-runtime-enabled.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: FYI runtime.enabled:true movido a mailbox/answered."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0032-ack-codex",
+            "task_id": "TASK-0032",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-cola.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-cola.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Responder pregunta de coordinacion TASK-0032 sobre determinismo de reloj/coste/summary; no reclama implementacion aun."
         }
     ]
 }

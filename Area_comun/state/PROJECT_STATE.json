@@ -123,6 +123,12 @@
                              "owner":  "Codex",
                              "status":  "done",
                              "title":  "Runtime M1: AgentAdapter + replay + loop --run (SPEC-0030) - ACEPTADA por Claude (golden loop 5/5); cierra M1"
+                         },
+                         {
+                             "id":  "TASK-0032",
+                             "owner":  "Codex",
+                             "status":  "ready",
+                             "title":  "Runtime M2 hito 1: observabilidad - metricas + budget + run-log enriquecido + trazas (SPEC-0031) - ready para Codex"
                          }
                      ],
     "open_questions":  [
@@ -141,7 +147,8 @@
                          "TASK-0031 ACEPTADA: runtime M1 COMPLETO (apply+gate+vcs de 0030 + AgentAdapter/replay/loop --run/run-log de 0031). Loop determinista off-by-default cerrado; golden loop 5/5 + regresiones verdes.",
                          "v0.8.0 PUBLICADA (runtime M1 completo: apply+gate+vcs + adapter/replay/loop --run, aditivo/off-by-default). Reporte humano en Area_comun/reports/REPORT-20260606-release-v0.8.0.md.",
                          "runtime.enabled:true ACTIVADO en la instancia viva (aprobado por el human owner 2026-06-06, DECISION-0009 Activacion). Template sigue OFF. Habilita --run con replay (M1); adapters LLM reales + loop autonomo = M2 (gateados).",
-                         "M2 arranca por OBSERVABILIDAD primero (direccion del operador): metricas + budget + run-log enriquecido + trazas, base auditable antes del loop autonomo y los adapters reales. Claude deriva SPEC/TASK desde DISENO-runtime-m2.md §4. Proxima poda archiva la ventana reciente done."
+                         "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
+                         "TASK-0032 lista para Codex (cola enviada). Claude ratifica al handoff. Proxima poda archiva la ventana reciente done."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-06",
