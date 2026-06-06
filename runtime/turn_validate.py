@@ -19,6 +19,7 @@ ROW_SCOPED_LEDGER_PATHS = {
 try:
     from .context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from .eventlog import EventWriter
+    from .guardrails import contain_untrusted, sources_from_turn_report
     from .review_qa import (
         author_of_record,
         checks_with_signatures,
@@ -30,6 +31,7 @@ try:
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, enabled_agents, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter
+    from guardrails import contain_untrusted, sources_from_turn_report
     from review_qa import (
         author_of_record,
         checks_with_signatures,
@@ -211,6 +213,16 @@ def validate_review_qa_semantics(report: dict[str, Any], state: dict[str, Any]) 
     return errors
 
 
+def validate_guardrail_semantics(report: dict[str, Any], root: Path, state: dict[str, Any]) -> list[str]:
+    guardrail_result = contain_untrusted(
+        report,
+        state,
+        state.get("agent_registry") or {},
+        sources=sources_from_turn_report(report, root),
+    )
+    return [f"semantic: {error}" for error in guardrail_result.get("errors") or []]
+
+
 def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads((root / "runtime" / "turn_schema.json").read_text(encoding="utf-8-sig"))
@@ -222,6 +234,7 @@ def validate_turn(report: dict[str, Any], root: Path) -> list[str]:
         return errors
 
     state = load_state(root)
+    errors.extend(validate_guardrail_semantics(report, root, state))
     errors.extend(validate_agent_semantics(report, root))
     errors.extend(validate_concurrency_semantics(report, root))
     errors.extend(validate_review_qa_semantics(report, state))

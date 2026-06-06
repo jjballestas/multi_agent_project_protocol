@@ -4,31 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-TASK-0053-codex",
-            "task_id": "TASK-0053",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0053",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0053",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md",
-                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
-                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0053-in-review.md",
-                "runtime/turn_schema.json",
-                "Area_comun/protocol/SCHEMA_VERSIONING.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Liberado con handoff-release atomico: TASK-0053 entregada a in_review. schema_version=1.1.0 en runtime/turn_schema.json + politica SemVer en Area_comun/protocol/SCHEMA_VERSIONING.md; turn golden 10/10, runtime 105/105 y gates globales verdes. No Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260606-TASK-0053-flip-y-cierre-capaA-claude",
             "task_id": "TASK-0053",
             "owner": "Claude",
@@ -86,6 +61,61 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Aviso DECISION-0018: Codex detecto que AGENTS.md conserva 'Released version: v0.8.0' mientras protocol.config.json/PROJECT_STATE/CHANGELOG/report indican v0.10.0 publicada. Claim efimero liberado en el mismo paso."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0054-codex",
+            "task_id": "TASK-0054",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0054",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0054",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0054-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md",
+                "runtime/guardrails.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_guardrail_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0054 entregada a in_review. Implementado runtime/guardrails.py + turn_validate + examples/runtime_guardrail_cases + CI. Verificado guardrail 5/5, runtime previo 105/105 (total 110), validador/encoding/neutralidad py/ps y prune --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0055-codex",
+            "task_id": "TASK-0055",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0055",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0055",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0055-codex-prune-requires-response.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0055-prune.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0055-prune.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0055-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0055-codex-to-claude-1.md",
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "examples/runtime_prune_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Codex toma TASK-0055 para corregir prune requires_response/status archived con paridad py/ps1, golden determinista y CI. Claim creado antes de tocar scripts/prune_state.py/.ps1 o examples/runtime_prune_cases/."
         }
     ]
 }

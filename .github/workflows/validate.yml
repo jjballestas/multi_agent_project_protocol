@@ -76,6 +76,9 @@ jobs:
       - name: Run runtime concurrency simulation cases
         run: python examples/runtime_concurrency_cases/run_runtime_concurrency_cases.py
 
+      - name: Run runtime guardrail cases
+        run: python examples/runtime_guardrail_cases/run_runtime_guardrail_cases.py
+
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 

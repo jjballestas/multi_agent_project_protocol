@@ -2939,6 +2939,79 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: arranca Fase 5 (guardrails, OK del operador 2026-06-07). Especifica SPEC-0040 (descomposicion de Fase 5) + encola TASK-0054 (5.1 anti-inyeccion de handoffs + taint/provenance, A2/D-1) a Codex con mensaje. Aditivo, sin DECISION nueva (autorizada por DECISION-0015 + OK operador). Claim efimero: se libera al cierre; prune posterior."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0053-codex",
+            "task_id": "TASK-0053",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0053",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-task0053-semver-schema.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0053-in-review.md",
+                "runtime/turn_schema.json",
+                "Area_comun/protocol/SCHEMA_VERSIONING.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado con handoff-release atomico: TASK-0053 entregada a in_review. schema_version=1.1.0 en runtime/turn_schema.json + politica SemVer en Area_comun/protocol/SCHEMA_VERSIONING.md; turn golden 10/10, runtime 105/105 y gates globales verdes. No Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-maint-prune-post-task0054-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Mantenimiento efimero cerrado: prune post-release de TASK-0054 ejecuto scripts/prune_state.py --root . --apply (claims_archived=1, recovered_tokens=398). Este claim se archiva en el mismo cierre para mantener hot state bajo el umbral released_ratio."
+        },
+        {
+            "claim_id": "CLAIM-20260607-cierre-task0054-y-encolar-task0055-claude",
+            "task_id": "TASK-0054",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0054",
+                "Area_comun/state/TASK_INDEX.json#TASK-0055",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
+                "Area_comun/tasks/TASK-0055-codex-prune-requires-response.md",
+                "Area_comun/specs/SPEC-0041-prune-requires-response.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0054-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260607-Codex-to-Claude-task0054-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0054-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0055-prune.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-anomalia-agents-version-resuelta.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-anomalia-agents-version-resuelta.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0054 (Fase 5.1 guardrails) + flip a done + encolar TASK-0055 (fix prune requires_response, SPEC-0041). Corri yo guardrail 5/5 + suite runtime completa 110/110 + validador/encoding/neutralidad py + verifique ruta de error y no-falso-positivo. Claim efimero: se libera al cierre; prune posterior."
         }
     ]
 }

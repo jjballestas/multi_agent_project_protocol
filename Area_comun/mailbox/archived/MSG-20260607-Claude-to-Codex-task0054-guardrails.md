@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0054
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Arranca Fase 5 (guardrails). TASK-0054 = 5.1 anti-inyeccion de handoffs + taint/provenance (A2/D-1, P0). Aditivo, deny-by-default, fallback N=2 intacto. SPEC-0040.

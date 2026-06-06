@@ -115,37 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0052",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Capa A.4 (test plan global 15.5 SPEC-0038): concurrency simulation determinista - 10 implementadores / 100 tareas / colisiones de claim / vencimiento de leases / agentes disabled a mitad de ejecucion / intents duplicados por reintento; esperado: conflictos registrados (no silenciosos), sin corrupcion del snapshot, distribucion de carga dentro de fairness_ratio, cero doble-aplicaciones",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0052-codex-concurrency-simulation.md",
-            "depends_on": [
-                "TASK-0050",
-                "TASK-0051"
-            ],
-            "relates_to": [
-                "TASK-0044"
-            ],
-            "relevant_files": [
-                "runtime/router.py",
-                "runtime/eventlog.py",
-                "examples/runtime_concurrency_cases/"
-            ],
-            "deliverables": [
-                "examples/runtime_concurrency_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0052-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo el harness + suite completa (105/105) + validador/encoding/neutralidad py + parse YAML. Confirme diff limitado a examples/runtime_concurrency_cases/ + validate.yml (NO runtime/ ni golden existentes). Harness GENUINO: check() lanza con contraejemplo; reutiliza runtime real (router.select_next/evaluate_fairness, eventlog EventWriter/assert_snapshot_matches/rebuild_snapshot, turn_validate). Verificado el test plan 15.5: conflictos REGISTRADOS no silenciosos (colision y lease-expirado => state.stale_fencing_rejected, 8 rejections); snapshot SIN corrupcion (assert_snapshot_matches real + hash estable entre 2 corridas); fairness por ELEGIBILIDAD via evaluate_fairness real (max_weighted_share_delta ~0.0075; el fairness_ratio crudo 2.4 solo refleja Impl09/10 disabled a mitad, que dejan de ser elegibles); CERO doble-aplicaciones (applied_intents=100 == unique_applied_keys=100, 100 dedups); agentes disabled NO reciben asignaciones tras el disable point. Determinista (seed=concurrency-v1, sin random/reloj/red/truncamiento). Release ATOMICO aplicado por Codex (handoff+mensaje+claim released+status in_review juntos; la regla DECISION-0018 surtio efecto tras la anomalia de A.3). Cubre test plan global 15.5; con A.4 el test plan 15.3-15.5 queda completo. Flip por arquitecto."
-        },
-        {
             "id": "TASK-0053",
             "owner": "Codex",
             "status": "done",
@@ -178,7 +147,7 @@
         {
             "id": "TASK-0054",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -211,7 +180,43 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07: arranca Fase 5 (guardrails, OK del operador). Primera de 3 rebanadas (5.1 anti-inyeccion -> 5.2 tool-policy -> 5.3 firma del envelope). Aditiva, deny-by-default, fallback N=2 byte-equivalente; sin DECISION nueva (autorizada por DECISION-0015 + OK operador). Codex sin auto-disparo: lo empuja el operador. Release atomico (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden guardrail 5/5 + SUITE RUNTIME COMPLETA 110/110 (105 previos sin regresion) + validador/encoding/neutralidad py. Verifique runtime/guardrails.py genuino: classify_provenance deny-by-default (desconocido->untrusted); scan_injection determinista, bilingue, DOMAIN-NEUTRAL (protocol/scope/authority/escalation/quality, sin terminos de negocio); contain_untrusted preserva contenido como DATO (findings/events) y emite security.handoff_injection_contained. Verifique a MANO ambas ramas del invariante: (a) escalado sostenido SOLO por contenido untrusted => RECHAZADO (guardrail error); (b) escalado legitimo por QA-cycles desde estado trusted => PERMITIDO (sin falso positivo). Cableado aditivo en turn_validate (lee handoff del report, convierte errores de seguridad en semanticos) con guard de path-traversal; byte-equivalente sin contenido untrusted (fallback N=2 intacto). Diff dentro de scope + prune de mantenimiento sancionado por Codex (DECISION-0014, claim de mantenimiento declarado). Release atomico aplicado por Codex (claim released + in_review). Obs no bloqueante: el golden prueba la contencion (eventos) pero no la ruta de error directamente; la verifique yo a mano. Flip por arquitecto. CIERRA Fase 5.1; siguiente rebanada 5.2 (tool-policy) se especifica/encola aparte.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0055",
+            "owner": "Codex",
+            "status": "in_progress",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fix de higiene (SPEC-0041, FOLLOW-UP de Capa A): prune robusto ante mensajes que requieren respuesta. scripts/prune_state.py (+ paridad .ps1) debe EXIMIR del archivado a mensajes requires_response:true sin resolver y RECONCILIAR status:archived al mover, para que el prune nunca deje un mismatch status<->carpeta (gate de TASK-0035) ni archive conversaciones abiertas. Aditivo, no cambia umbrales DECISION-0014. Golden determinista.",
+            "spec_id": "Area_comun/specs/SPEC-0041-prune-requires-response.md",
+            "file": "Area_comun/tasks/TASK-0055-codex-prune-requires-response.md",
+            "linked_decisions": [
+                "DECISION-0014",
+                "DECISION-0012"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0035",
+                "TASK-0034"
+            ],
+            "relevant_files": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "scripts/validate_collaboration_state.py",
+                "examples/runtime_prune_cases/"
+            ],
+            "deliverables": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "examples/runtime_prune_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0055-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "En progreso por Codex 2026-06-07. Encolada por Claude (arquitecto) tras cerrar TASK-0054. Fix de raiz de un FOLLOW-UP de higiene rastreado desde Capa A (el prune dejo un mensaje en archived/ con mismatch status<->carpeta, corregido a mano). Independiente de Fase 5. Aditivo, paridad py/.ps1; SIN DECISION nueva. Release atomico esperado (DECISION-0018)."
         }
     ]
 }
