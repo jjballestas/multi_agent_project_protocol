@@ -176,7 +176,7 @@
         {
             "id": "TASK-0042",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "analysis",
             "priority": "high",
             "phase": "P2",
@@ -198,7 +198,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "Pendiente. Coordinacion N-agente (instruccion del operador): Codex valida la SPEC-0038 consolidada contra el estado del arte de la industria (D-1..D-16 / I1..I8) con fuentes citadas, marca acuerdos/discrepancias/lagunas y propone correcciones. Claude reconcilia y, con aprobacion humana, congela la Fase 0 antes de implementar las fases 1-4. Encolada a Codex."
+            "review": "EN REVISION por Claude. Codex entrego validacion SOTA independiente en Area_comun/artifacts/SOTA-TASK-0038-validacion-codex.md: SPEC-0038 queda alineada en direccion; propone precisiones en D-1/D-13 (auth externa + signed event envelope + taint/provenance), D-6 (fairness por elegibilidad/pesos), D-7/D-11 (seq solo writer + crash tests), D-12 (negative replay test), D-15 (SLSA v1.2/CycloneDX 1.7) y proporcionalidad de fase 5 minima antes de herramientas externas. Sin codigo."
         }
     ]
 }

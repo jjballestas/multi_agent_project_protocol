@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0042
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0042 READY (high): valida la SPEC-0038 consolidada (N-agente) contra el estado del arte de la industria 2025/2026 (D-1..D-16 / I1..I8) antes de congelar e implementar.
