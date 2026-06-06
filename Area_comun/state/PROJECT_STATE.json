@@ -79,7 +79,9 @@
                       "DECISION-0008-eficiencia-de-tokens",
                       "DECISION-0009-runtime-orquestacion",
                       "DECISION-0010-licenciamiento-propietario",
-                      "DECISION-0011-claims-por-fila-estado"
+                      "DECISION-0011-claims-por-fila-estado",
+                      "DECISION-0012-ascii-canal-entre-agentes",
+                      "DECISION-0013-liveness-y-visibilidad"
                   ],
     "active_tasks":  [
                          {
@@ -127,8 +129,14 @@
                          {
                              "id":  "TASK-0032",
                              "owner":  "Codex",
+                             "status":  "done",
+                             "title":  "Runtime M2 hito 1: observabilidad - metricas + budget + run-log enriquecido + trazas (SPEC-0031) - ACEPTADA por Claude (golden obs 5/5); cierra hito 1"
+                         },
+                         {
+                             "id":  "TASK-0033",
+                             "owner":  "Codex",
                              "status":  "ready",
-                             "title":  "Runtime M2 hito 1: observabilidad - metricas + budget + run-log enriquecido + trazas (SPEC-0031) - ready para Codex"
+                             "title":  "Gate de visibilidad y encoding: scan_encoding (ASCII+mojibake) + handoff-release + liveness docs (DECISION-0012/0013) - ready para Codex"
                          }
                      ],
     "open_questions":  [
@@ -148,7 +156,9 @@
                          "v0.8.0 PUBLICADA (runtime M1 completo: apply+gate+vcs + adapter/replay/loop --run, aditivo/off-by-default). Reporte humano en Area_comun/reports/REPORT-20260606-release-v0.8.0.md.",
                          "runtime.enabled:true ACTIVADO en la instancia viva (aprobado por el human owner 2026-06-06, DECISION-0009 Activacion). Template sigue OFF. Habilita --run con replay (M1); adapters LLM reales + loop autonomo = M2 (gateados).",
                          "ROADMAP M2 (orden fijado por el operador 2026-06-06): (1) OBSERVABILIDAD = TASK-0032 ready (SPEC-0031: metricas + budget + run-log enriquecido + trazas), base auditable primero; (2) ADAPTER LLM REAL = siguiente hito (Claude/Codex tras AgentAdapter, con limites claros + replay comparativo + SIN activar autonomia aun); (3+) loop autonomo + mailbox automation. Claude deriva la spec del adapter real cuando aterrice 0032.",
-                         "TASK-0032 lista para Codex (cola enviada). Claude ratifica al handoff. Proxima poda archiva la ventana reciente done."
+                         "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
+                         "ADAPTACION DEL METODO: DECISION-0012 (ASCII canal entre agentes) + DECISION-0013 (liveness/handoff-release/visibilidad) registradas. TASK-0033 READY (gate scan_encoding + handoff-release + liveness docs, SPEC-0032, bajo DECISION-0006) en cola para Codex.",
+                         "Siguiente tras 0033: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia). Claude deriva la spec. Proxima poda archiva la ventana reciente done (TASK-0024..0032)."
                      ],
     "created_at":  "2026-06-05",
     "updated_at":  "2026-06-06",

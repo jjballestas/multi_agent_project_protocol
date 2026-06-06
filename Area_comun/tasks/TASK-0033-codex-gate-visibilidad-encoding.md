@@ -1,7 +1,7 @@
 ---
 id: TASK-0033
 owner: Codex
-status: proposed
+status: in_progress
 type: implementation
 priority: normal
 created_at: 2026-06-06

@@ -13,13 +13,15 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from .budget import Budget
     from .context import load_state
+    from .metrics import summarize
     from .router import select_next
     from .adapters.base import ContextPack
     from .adapters.replay import ReplayAdapter, replay_paths
     from .apply import apply_gate_and_commit
     from .gate import run_gate
-    from .runlog import RunLog, deterministic_run_id
+    from .runlog import RunLog, deterministic_run_id, turn_entry
     from .turn_validate import validate_turn
 except ImportError:  # pragma: no cover - direct script execution
     from context import load_state
@@ -30,9 +32,24 @@ except ImportError:  # pragma: no cover - direct script execution
     from gate import run_gate
     from runlog import RunLog, deterministic_run_id
     from turn_validate import validate_turn
+    from budget import Budget
+    from metrics import summarize
+    from runlog import turn_entry
 
 
 HUMAN_OUTCOMES = {"decision_required", "human_required"}
+TURN_SCHEMA_KEYS = {
+    "turn_id",
+    "task_id",
+    "agent",
+    "outcome",
+    "summary",
+    "changed_paths",
+    "transitions",
+    "commit_message",
+    "gate",
+    "next_hint",
+}
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -83,6 +100,23 @@ def default_run_id(reports: list[Path]) -> str:
     return deterministic_run_id(parts)
 
 
+def schema_report(report: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in report.items() if key in TURN_SCHEMA_KEYS}
+
+
+def report_cost_tokens(report: dict[str, Any]) -> int | None:
+    cost = report.get("cost")
+    if isinstance(cost, int):
+        return cost
+    if isinstance(cost, dict) and isinstance(cost.get("tokens"), int):
+        return cost["tokens"]
+    return None
+
+
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+
+
 def run_loop(
     root: Path,
     replay_path: Path,
@@ -90,6 +124,8 @@ def run_loop(
     once: bool = False,
     max_iter: int | None = None,
     run_id: str | None = None,
+    budget_tokens: int | None = None,
+    clock_fixed: int = 0,
 ) -> dict[str, Any]:
     root = root.resolve()
     if not runtime_enabled(root):
@@ -105,66 +141,107 @@ def run_loop(
 
     adapter = ReplayAdapter()
     runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit]))
+    budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens)
     turns: list[dict[str, Any]] = []
 
     for index, report_path in enumerate(reports[:limit], start=1):
+        trace: list[str] = ["gate_pre"]
         gate_pre = run_gate(root)
         if not gate_pre["green"]:
-            entry = {"turn": index, "outcome": "stopped", "reason": "pre-gate failed", "gate": gate_pre}
+            entry = turn_entry(turn=index, trace=trace, outcome="stopped", reason="pre-gate failed", duration_ms=clock_fixed)
+            entry["gate"] = gate_pre
             runlog.append(entry)
             turns.append(entry)
             break
 
         state = load_state(root)
+        trace.append("route")
         unit = select_next(state)
         if unit is None or unit.get("action") == "escalate":
-            entry = {"turn": index, "unit": unit, "outcome": "stopped", "reason": "no runnable unit or human gate"}
+            entry = turn_entry(
+                turn=index,
+                trace=trace,
+                unit=unit,
+                outcome="stopped",
+                reason="no runnable unit or human gate",
+                duration_ms=clock_fixed,
+            )
             runlog.append(entry)
             turns.append(entry)
             break
 
+        trace.append("claim")
         context = build_context(state=state, unit=unit, replay_report_path=report_path, turn_index=index)
+        trace.append("adapter")
         report = adapter.run_turn(context=context, root=root)
-        errors = validate_turn(report, root)
+        clean_report = schema_report(report)
+        trace.append("validate")
+        errors = validate_turn(clean_report, root)
         if errors:
-            entry = {"turn": index, "unit": unit, "outcome": "rejected", "errors": errors}
+            entry = turn_entry(
+                turn=index,
+                trace=trace,
+                unit=unit,
+                report=report,
+                outcome="rejected",
+                errors=errors,
+                duration_ms=clock_fixed,
+            )
             runlog.append(entry)
             turns.append(entry)
             break
 
-        human_gate = report.get("outcome") in HUMAN_OUTCOMES or (report.get("gate") or {}).get("human_required") is True
+        trace.append("human_gate")
+        human_gate = clean_report.get("outcome") in HUMAN_OUTCOMES or (clean_report.get("gate") or {}).get("human_required") is True
         if human_gate:
-            entry = {
-                "turn": index,
-                "unit": unit,
-                "agent": report.get("agent"),
-                "task_id": report.get("task_id"),
-                "outcome": report.get("outcome"),
-                "human_required": True,
-                "commit": None,
-            }
+            entry = turn_entry(turn=index, trace=trace, unit=unit, report=report, duration_ms=clock_fixed)
+            entry["human_required"] = True
             runlog.append(entry)
             turns.append(entry)
             break
 
-        result = apply_gate_and_commit(report, root)
-        entry = {
-            "turn": index,
-            "unit": unit,
-            "agent": report.get("agent"),
-            "task_id": report.get("task_id"),
-            "outcome": report.get("outcome"),
-            "transition": (report.get("transitions") or {}).get("task_status"),
-            "gate_green": result.get("green"),
-            "commit": result.get("commit"),
-            "reverted": result.get("reverted", False),
-        }
+        trace.append("apply")
+        result = apply_gate_and_commit(clean_report, root)
+        trace.extend(["gate_post", "commit"])
+        entry = turn_entry(
+            turn=index,
+            trace=trace,
+            unit=unit,
+            report=report,
+            transition=(clean_report.get("transitions") or {}).get("task_status"),
+            gate_green=result.get("green"),
+            commit=result.get("commit"),
+            reverted=result.get("reverted", False),
+            duration_ms=clock_fixed,
+        )
         runlog.append(entry)
         turns.append(entry)
+        budget.consume(cost_tokens=report_cost_tokens(report))
         if not result.get("green"):
             break
+        if budget.exceeded() and index < len(reports[:limit]):
+            budget_entry = turn_entry(
+                turn=index + 1,
+                trace=["budget"],
+                outcome="budget_exhausted",
+                reason=budget.reason,
+                duration_ms=clock_fixed,
+            )
+            runlog.append(budget_entry)
+            turns.append(budget_entry)
+            break
 
-    return {"ok": True, "run_id": runlog.run_id, "run_log": str(runlog.path), "turns": turns}
+    summary = summarize(runlog.path)
+    summary_path = runlog.path.with_suffix(".summary.json")
+    write_json(summary_path, summary)
+    return {
+        "ok": True,
+        "run_id": runlog.run_id,
+        "run_log": str(runlog.path),
+        "summary": str(summary_path),
+        "metrics": summary,
+        "turns": turns,
+    }
 
 
 def main() -> int:
@@ -177,6 +254,8 @@ def main() -> int:
     parser.add_argument("--adapter", choices=["replay"], default="replay")
     parser.add_argument("--replay-report", help="Replay report JSON file or directory")
     parser.add_argument("--run-id", help="Deterministic run-log id; defaults to a replay-input hash")
+    parser.add_argument("--budget-tokens", type=int, default=None, help="Maximum declared turn cost in tokens")
+    parser.add_argument("--clock-fixed", type=int, default=0, help="Deterministic duration_ms value for tests")
     args = parser.parse_args()
 
     if args.plan and args.run:
@@ -196,7 +275,15 @@ def main() -> int:
     if not args.replay_report:
         parser.error("--run requires --replay-report in M1")
 
-    result = run_loop(root, Path(args.replay_report), once=args.once, max_iter=args.max_iter, run_id=args.run_id)
+    result = run_loop(
+        root,
+        Path(args.replay_report),
+        once=args.once,
+        max_iter=args.max_iter,
+        run_id=args.run_id,
+        budget_tokens=args.budget_tokens,
+        clock_fixed=args.clock_fixed,
+    )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if result.get("ok") else 1
 

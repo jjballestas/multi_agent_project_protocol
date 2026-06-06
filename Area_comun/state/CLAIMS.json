@@ -1,8 +1,81 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
+        {
+            "claim_id": "CLAIM-20260606-TASK-0033-codex",
+            "task_id": "TASK-0033",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "scripts/scan_encoding.py",
+                "scripts/scan_encoding.ps1",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/encoding_gate_cases/",
+                "examples/handoff_release_cases/",
+                "AGENTS.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0033-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Implementacion TASK-0033 contra SPEC-0032: scan_encoding py/ps1, handoff-release validator, docs liveness, CI y golden. Dogfood: liberar al pasar a in_review."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0033-blocked-coord-codex",
+            "task_id": "TASK-0033",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-cola.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0033-cola.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0033-claim-blocked.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: mensajes de Claude respondidos/movidos a answered y bloqueo notificado en MSG-20260606-Codex-to-Claude-task0033-claim-blocked. No reclama implementacion."
+        },
+        {
+            "claim_id": "CLAIM-20260606-task0032-close-claude",
+            "task_id": "TASK-0032",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0032",
+                "Area_comun/state/TASK_INDEX.json#TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0032",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0033",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0032-codex-runtime-observability.md",
+                "Area_comun/tasks/TASK-0033-codex-gate-visibilidad-encoding.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-done.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0033-cola.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Cierre de TASK-0032 (flip a done tras claim liberado por Codex) + registro de TASK-0033 en indice/estado + registro DECISION-0012/0013 + cola TASK-0033. Commiteo los deliverables de Codex (sin active claim) y mi estado."
+        },
         {
             "claim_id": "CLAIM-20260606-liveness-gate-formalize-claude",
             "task_id": "TASK-0033",
@@ -318,7 +391,7 @@
             "claim_id": "CLAIM-20260606-TASK-0032-codex",
             "task_id": "TASK-0032",
             "owner": "Codex",
-            "status": "active",
+            "status": "released",
             "scope": [
                 "Area_comun/state/TASK_INDEX.json#TASK-0032",
                 "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0032",
@@ -342,12 +415,15 @@
                 "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-go.md",
                 "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-progress.md",
                 "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-progress.md",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0032-in-review.md"
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0032-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0032-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0032-accepted.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0032-accepted.md"
             ],
             "started_at": "2026-06-06",
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
-            "notes": "Liberado con TASK-0032 en in_review. Entregado runtime observability: run-log enriquecido, budget.py, metrics.py, --budget-tokens, summary y golden."
+            "notes": "Liberado tras aceptacion read-only de Claude. TASK-0032 queda in_review para flip arquitecto/deferred-flip; no se toca runtime en esta limpieza."
         }
     ]
 }
