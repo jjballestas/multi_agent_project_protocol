@@ -1,19 +1,5 @@
----
-spec_id: SPEC-0038-n-agent-registry
-task_id: TASK-0038
-type: implementation
-status: ready
-linked_decisions: [DECISION-0015, DECISION-0009, DECISION-0014, DECISION-0001, DECISION-0011]
-created_at: 2026-06-06
-author: operador humano (consolidacion) + Claude (adopcion)
-supersedes_draft: SPEC-0038-n-agent-registry (borrador previo de Claude)
-origin: Area_comun/artifacts/SPEC-0038_N-AGENT_CONSOLIDADA.md
----
-
-> SPEC DE RECORD. Contenido normativo consolidado por el operador (revision independiente, P0/P1/P2
-> cerrados) y adoptado como SPEC-0038 oficial. Reemplaza el borrador previo de Claude. La validacion
-> SOTA profunda (TASK-0042, Codex) y la aprobacion humana de DECISION-0015 cierran la Fase 0 antes de
-> implementar (fases 1-4). Decisiones D-1..D-16 -> DECISION-0015.
+> **PROMOVIDO** a `Area_comun/specs/SPEC-0038-n-agent-registry.md` (spec de record, 2026-06-06).
+> Este artefacto se conserva como origen autoral. La fuente normativa es la copia en `specs/`.
 
 # SPEC-0038 — Runtime de colaboración N-Agente (especificación consolidada e implementable)
 

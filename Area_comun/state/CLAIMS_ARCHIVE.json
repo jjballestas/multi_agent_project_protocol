@@ -2026,6 +2026,31 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado al pasar TASK-0041 a in_review. Implementado commit_turn --no-verify en runtime, auto-poda post-run y atomicidad ante fallo de commit."
+        },
+        {
+            "claim_id": "CLAIM-20260606-n-agent-program-claude",
+            "task_id": "TASK-0038",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+                "Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md",
+                "Area_comun/artifacts/SPEC-0038_N-AGENT_CONSOLIDADA.md",
+                "Area_comun/artifacts/ANALISIS_CRITICO_TASK-0038_N-AGENT.md",
+                "Area_comun/artifacts/TASK-0038_IMPLEMENTACION_N_AGENT_READINESS_ANALISIS_TECNICO.md",
+                "Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md",
+                "TASK-0038_IMPLEMENTACION_N_AGENT_READINESS_ANALISIS_TECNICO.md",
+                "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
+                "Area_comun/tasks/TASK-0042-codex-n-agent-sota-validation.md",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0042-sota.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Arquitecto: programa N-agente. (1) adoptar SPEC-0038 consolidada del operador como spec de record; (2) unificar el analisis en un solo doc; (3) encolar a Codex la validacion SOTA profunda (TASK-0042); actualizar DECISION-0015 a las decisiones D-1..D-16. Se libera al terminar el registro. Implementacion (fases 1-4) tras SOTA + congelamiento + aprobacion humana."
         }
     ]
 }

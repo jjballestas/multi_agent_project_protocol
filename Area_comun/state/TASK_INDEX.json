@@ -172,6 +172,33 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0037 con RATIFICACION ADVERSARIAL (2026-06-06). commit_turn(verify=False) => --no-verify SOLO en la ruta del runtime (run_gate ya gatea); commits manuales siguen bloqueados por el hook cuando la poda esta due (golden lo confirma). apply.py: commit-fail => discard_worktree_changes + block_task (atomicidad, sin medio-aplicado). orchestrator.auto_prune_if_due: post-run, guarda contra worktree con tracked dirty, --check (0 no-op / 1 due), --apply + commit separado 'chore(runtime): prune state' con --no-verify, atomico ante fallo. Suite: runtime_loop 8/8 (incluye hook instalado + manual-commit-bloqueado + auto-poda + commit-fail), apply 4/4, llm 6/6, router 5/5, turn 4/4+3/3, validador/encoding/neutralidad limpios. Resuelve el deadlock hallado en la corrida real (TASK-0040). Codex aplico handoff-release."
+        },
+        {
+            "id": "TASK-0042",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "analysis",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Validacion SOTA profunda e independiente de la SPEC-0038 consolidada (N-agente) contra el estado del arte 2025/2026, como endurecimiento final de la Fase 0 antes de congelar e implementar",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0042-codex-n-agent-sota-validation.md",
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+                "Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md",
+                "Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md"
+            ],
+            "deliverables": [
+                "Area_comun/artifacts/SOTA-TASK-0038-validacion-codex.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0042-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "Pendiente. Coordinacion N-agente (instruccion del operador): Codex valida la SPEC-0038 consolidada contra el estado del arte de la industria (D-1..D-16 / I1..I8) con fuentes citadas, marca acuerdos/discrepancias/lagunas y propone correcciones. Claude reconcilia y, con aprobacion humana, congela la Fase 0 antes de implementar las fases 1-4. Encolada a Codex."
         }
     ]
 }

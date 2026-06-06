@@ -19,6 +19,11 @@ closure_criterion: Queda una propuesta arquitectonica con tareas implementables 
 
 # TASK-0038 - N-agent readiness (PARAGUAS)
 
+> ACTUALIZACION 2026-06-06: el operador entrego analisis independiente + **SPEC-0038 CONSOLIDADA**, adoptada
+> como spec de record (`../specs/SPEC-0038-n-agent-registry.md`, D-1..D-16 / I1..I8). Analisis unificado:
+> `../artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md`. Validacion SOTA profunda = **TASK-0042** (Codex).
+> Implementacion (fases 1-4) tras TASK-0042 + congelamiento Fase 0 + aprobacion humana de DECISION-0015.
+
 > Estado: PROPOSED (paraguas). Diseno CAPTURADO en
 > [DECISION-0015](../decisions/DECISION-0015-n-agent-registry-y-capacidades.md) +
 > [SPEC-0038](../specs/SPEC-0038-n-agent-registry.md) (modelo de equipo completo: registry por

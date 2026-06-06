@@ -1,3 +1,5 @@
+> **UNIFICADO** en `Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md` (analisis de record, 2026-06-06). Este documento se conserva como fuente autoral.
+
 # TASK-0038 — Implementación N-Agent Readiness
 
 **Documento nuevo para implementación**  

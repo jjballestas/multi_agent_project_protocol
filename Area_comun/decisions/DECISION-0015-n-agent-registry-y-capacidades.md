@@ -7,16 +7,46 @@ ratified_at: null
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
-relates_to: [DECISION-0009, DECISION-0001, DECISION-0011, DECISION-0007, DECISION-0006]
+relates_to: [DECISION-0009, DECISION-0001, DECISION-0011, DECISION-0007, DECISION-0006, DECISION-0014]
 phase: P2
+spec_ref: Area_comun/specs/SPEC-0038-n-agent-registry.md
 ---
 
 # DECISION-0015 - Registry de agentes por capacidades y runtime sin roles fijos (N-agente)
 
-> Estado: PROPOSED (2026-06-06). Diseno pedido por el operador (analisis de la tarea futura TASK-0038,
-> modelo objetivo = "equipo de desarrollo competente"). **Requiere aprobacion humana** antes de
-> implementar. Aditivo, off-by-default, backward-compat; se deriva SPEC-0038 + sub-tareas. NO se toca
-> codigo con esta decision; solo fija el contrato objetivo y los invariantes.
+> Estado: PROPOSED (2026-06-06). El operador entrego un analisis independiente y una **SPEC-0038
+> CONSOLIDADA** (adoptada como spec de record) que cierra los huecos P0/P1/P2 como **decisiones D-1..D-16**
+> e **invariantes I1..I8**. Esta DECISION fija esas decisiones. **Direccion + implementacion aprobadas por
+> el operador**; el **congelamiento (Fase 0)** queda pendiente de: (a) validacion SOTA profunda
+> independiente por Codex (TASK-0042) reconciliada por el arquitecto, y (b) aprobacion humana final del
+> congelamiento. Aditivo, off-by-default, backward-compat (N=2 sin migracion). Analisis unico de record:
+> `Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md`.
+
+## Decisiones cerradas (D-1..D-16, normativas en SPEC-0038 §17)
+- **D-1** Autenticar/firmar todo turn_report y evento; rechazar lo no atribuible (P0). Defensa de inyeccion
+  en handoffs; `trust_boundary` ligado a politica efectiva.
+- **D-2** `idempotency_key` por intent + concurrencia optimista **por-aggregate** (no global) (P0).
+- **D-3** `agent_registry` modela **capacidades**; cada accion requiere capacidad explicita.
+- **D-4** Fallback de 3 niveles (registry -> agent_roles -> triada) para compatibilidad N=2 sin migracion.
+- **D-5** Registry extendido: `max_active_claims`, `trust_boundary`, `tool_policy_ref`, `auth`.
+- **D-6** Routing weighted least-loaded determinista + hash estable + lexicografico SOLO como ultimo
+  desempate + **fairness ratio como gate de CI**.
+- **D-7** Escritor unico que recibe intents append-only; event log con `seq`/esquema/compactacion.
+- **D-8** Leases con **fencing token** monotono por-recurso; rechazo de escrituras con fencing menor.
+- **D-9** Fallo de QA como transicion formal con corte de bucles por firma.
+- **D-10** Escalar a humano solo tras arquitecto/orquestador o por decision sensible.
+- **D-11** Event log inmutable como fuente de verdad; snapshot derivado.
+- **D-12** Frontera de determinismo: efecto externo = evento grabado; el replay NO re-invoca agentes.
+- **D-13** Tool policy con **allowlist por-herramienta** atada a capacidad + scope.
+- **D-14** Presupuesto de coste + `deadline` por tarea/run; agotarlo => `escalated`.
+- **D-15** Supply chain (SBOM/SLSA) **diferida** hasta release real.
+- **D-16** Rollback de release como pasos de compensacion (saga).
+- Prohibir self-review y self-QA por defecto; `agent` de enum a string validado en runtime.
+
+## Invariantes verificables (I1..I8, property tests)
+I1 reviewer != autor; I2 qa != autor; I3 `done` con evidencia completa; I4 un solo claim activo por tarea;
+I5 todo evento aplicado incrementa `seq` y `aggregate_version`; I6 replay reconstruye el snapshot; I7 todo
+evento es atribuible/autenticado; I8 ningun intent se aplica dos veces.
 
 ## Contexto
 El protocolo se autogestiona (dogfooding) y hoy esta cableado a **2 agentes** (`Claude`=arquitecto,
