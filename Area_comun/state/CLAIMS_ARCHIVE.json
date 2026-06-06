@@ -2861,6 +2861,24 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado con handoff-release atomico: TASK-0052 entregada a in_review. Harness concurrency determinista seed=concurrency-v1, 10 implementadores/100 tareas, conflicts/reclaims/fencing/dedup/fairness/snapshot; runtime 105/105 y gates globales verdes. No runtime/, no contrato/golden existentes, no Fase B ni Fase 5. Handoff: Area_comun/handoffs/HANDOFF-TASK-0052-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260606-fix-release-mailbox-hygiene-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-operador-capaA-completa.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v0.10.0.md",
+                "Area_comun/mailbox/archived/MSG-20260606-Claude-to-Codex-release-v0.10.0.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-anomalia-mailbox-capaA-release.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado y archivado en el mismo cierre: FYI de release v0.10.0 leido y archivado. El reporte al operador ya estaba normalizado a status archived; no se creo aviso de anomalia adicional."
         }
     ]
 }
