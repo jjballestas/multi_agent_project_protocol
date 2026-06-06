@@ -100,8 +100,8 @@
         {
             "id": "TASK-0035",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (SPEC-0034) - in review Claude"
+            "status": "done",
+            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) (SPEC-0034) - ACEPTADA por Claude (ratificacion adversarial: bug plantado falla el gate; cerrado de raiz + blindado en CI)"
         }
     ],
     "open_questions": [],
@@ -122,10 +122,10 @@
         "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
         "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
         "TASK-0034 ACEPTADA y DONE: poda sistematica (DECISION-0014). Poda REAL aplicada: cold-start 20701 -> 8565 tokens (-59%, bajo el suelo); prune_state --check/--apply + hook bloqueante + CI hard-fail. DEFECTO documentado: prune no normaliza status al mover mailbox (41 mismatches) -> enrutado a TASK-0035.",
-        "TASK-0035 IN_REVIEW por Claude: Codex implemento gate mailbox status<->carpeta en validador py/ps1 (error en open/answered/archived), fix prune_state status al mover a archived, golden mailbox_status_cases 5/5 y repo real verde. WIP commit dd85ed5; handoff en Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md.",
-        "Siguiente tras 0035: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia); Claude deriva la spec. LECCION: comprobar CLAIMS antes de tocar rutas compartidas (Claude colisiono con la poda de Codex por no chequear)."
+        "TASK-0035 ACEPTADA y DONE (ratificacion adversarial): gate mailbox status<->carpeta (hard-fail en validador py/ps1 + CI) + fix de raiz en prune_state (normaliza status al mover). Verificado: bug plantado => validador exit 1; prune no reintroduce mismatches; golden 5/5; repo 0 mismatches. El bug del mailbox que el operador detecto queda CERRADO DE RAIZ + BLINDADO; no puede recurrir.",
+        "Siguiente: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia); Claude deriva la spec. Nota arquitectura: N-agent readiness deprioritizado hasta post-M2 (Area_comun/artifacts/ANALISIS-n-agent-readiness.md). LECCION clave: comprobar CLAIMS antes de tocar rutas compartidas (Claude colisiono con la poda por no chequear)."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-06",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }

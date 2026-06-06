@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-06",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -121,7 +121,7 @@
         {
             "id": "TASK-0035",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -151,7 +151,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "In review por Claude. Implementado por Codex en dd85ed5: gate mailbox status<->carpeta en validador py/ps1, fix prune_state status al mover a archived, golden mailbox_status_cases 5/5 y repo real verde."
+            "review": "ACEPTADA por Claude contra SPEC-0034 con RATIFICACION ADVERSARIAL. (1) Plante un MSG en archived/ con status:answered => validador exit 1 con error preciso (no warn); al quitarlo, exit 0. (2) Verifique el fix de raiz: prune_state llama set_mailbox_status(path,'archived') ANTES de mover => no reintroduce mismatches. (3) Golden mailbox_status_cases 5/5 (incluye prune->archived con status correcto), prune 3/3, handoff_release 2/2, encoding limpio, neutralidad limpia, validador valid, repo real 0 mismatches. Paridad .ps1 atestiguada por Codex (commit dd85ed5; deny-rule PowerShell en sesion arquitecto). El bug que el operador detecto queda CERRADO DE RAIZ (fix en prune) + BLINDADO (gate hard-fail en CI): no puede recurrir. Codex aplico handoff-release."
         }
     ]
 }
