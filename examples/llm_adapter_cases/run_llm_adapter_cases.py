@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import json
+import os
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -150,6 +152,34 @@ def write_replay(root: Path, report: dict[str, Any]) -> Path:
     return path.parent
 
 
+def command_arg(value: Path | str) -> str:
+    text = str(value)
+    if os.name == "nt":
+        return '"' + text.replace('"', r'\"') + '"'
+    return shlex.quote(text)
+
+
+def write_subprocess_agent(root: Path, report: dict[str, Any]) -> Path:
+    script = root / "agent script dir" / "fixture_agent.py"
+    payload = json.dumps(report, sort_keys=True)
+    script.parent.mkdir(parents=True, exist_ok=True)
+    script.write_text(
+        "\n".join(
+            [
+                "import json",
+                "import sys",
+                "prompt = sys.stdin.read()",
+                "if 'SPEC-9000 fixture' not in prompt:",
+                "    raise SystemExit('missing spec in prompt')",
+                f"report = json.loads({payload!r})",
+                "print(json.dumps(report))",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return script
+
+
 def run_orchestrator(root: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return run([sys.executable, str(ORCHESTRATOR), "--root", str(root), *args], ROOT, check=check)
 
@@ -261,6 +291,34 @@ def case_enabled_false_aborts() -> None:
         assert "runtime.enabled is false" in result["reason"]
 
 
+def case_subprocess_native_command_commits() -> None:
+    with tempfile.TemporaryDirectory(prefix="llm-adapter-subprocess-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture)
+        before = git_count(fixture)
+        script = write_subprocess_agent(fixture, turn_report("TASK-9000"))
+        command = f"{command_arg(sys.executable)} {command_arg(script)}"
+        assert "\\" in command if os.name == "nt" else "/" in command
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "subprocess",
+                "--allow-real-invoker",
+                "--llm-command",
+                command,
+                "--once",
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 1
+        assert task_status(fixture) == "done"
+
+
 def main() -> int:
     cases = [
         case_recorded_llm_once_commits,
@@ -268,6 +326,7 @@ def main() -> int:
         case_outside_allowlist_rejected,
         case_budget_abort_before_apply,
         case_enabled_false_aborts,
+        case_subprocess_native_command_commits,
     ]
     failures = []
     for case in cases:

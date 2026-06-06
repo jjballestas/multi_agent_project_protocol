@@ -178,7 +178,7 @@
         {
             "id": "TASK-0039",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -202,7 +202,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Defecto real hallado por Claude en la PRIMERA CORRIDA REAL (smoke en repo temporal, 2026-06-06): SubprocessInvoker.from_command usa shlex.split en modo POSIX y corrompe rutas Windows (backslash como escape) => subprocess falla con WinError 2; el invoker real es inusable en Windows con rutas nativas (operador opera en Windows). Encolada a Codex via mailbox."
+            "review": "Pendiente de revision de Claude. Codex corrigio SubprocessInvoker.from_command con CommandLineToArgvW en Windows y shlex POSIX en otros SO; anadio golden subprocess con separador nativo que commitea 1 turno en verde. No se disparo corrida real sobre repo vivo."
         }
     ]
 }

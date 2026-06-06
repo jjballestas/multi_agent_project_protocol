@@ -8,7 +8,9 @@ agent invocation is available only through an explicit subprocess invoker.
 from __future__ import annotations
 
 import hashlib
+import ctypes
 import json
+import os
 import shlex
 import subprocess
 from dataclasses import dataclass
@@ -56,6 +58,24 @@ def build_prompt(*, context: ContextPack, root: Path) -> str:
     return "\n".join(sections)
 
 
+def split_command(command: str) -> tuple[str, ...]:
+    if os.name != "nt":
+        return tuple(shlex.split(command))
+
+    argc = ctypes.c_int()
+    ctypes.windll.shell32.CommandLineToArgvW.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
+    ctypes.windll.shell32.CommandLineToArgvW.restype = ctypes.POINTER(ctypes.c_wchar_p)
+    ctypes.windll.kernel32.LocalFree.argtypes = [ctypes.c_void_p]
+    ctypes.windll.kernel32.LocalFree.restype = ctypes.c_void_p
+    argv = ctypes.windll.shell32.CommandLineToArgvW(command, ctypes.byref(argc))
+    if not argv:
+        raise ValueError("could not parse --llm-command")
+    try:
+        return tuple(argv[index] for index in range(argc.value))
+    finally:
+        ctypes.windll.kernel32.LocalFree(argv)
+
+
 @dataclass(frozen=True)
 class RecordedInvoker:
     transcript_path: Path
@@ -85,7 +105,7 @@ class SubprocessInvoker:
 
     @classmethod
     def from_command(cls, command: str, *, timeout_seconds: int = 120) -> "SubprocessInvoker":
-        parts = tuple(shlex.split(command))
+        parts = split_command(command)
         if not parts:
             raise ValueError("--llm-command cannot be empty")
         return cls(command=parts, timeout_seconds=timeout_seconds)
