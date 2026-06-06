@@ -591,50 +591,56 @@ def validate_mailbox(root: Path, validation: Validation) -> None:
         if not mailbox_state_path.exists():
             validation.fail(f"Missing mailbox folder: Area_comun/mailbox/{state}")
 
-    open_mailbox_dir = mailbox_root / "open"
-    if not open_mailbox_dir.exists():
-        return
-    for message_path in open_mailbox_dir.glob("MSG-*.md"):
-        content = message_path.read_text(encoding="utf-8-sig")
-        message_status = (get_markdown_field(content, "status") or "").lower()
-        message_type = (get_markdown_field(content, "type") or "").upper()
-        requires_response = get_markdown_field(content, "requires_response")
+    for state in ("open", "answered", "archived"):
+        mailbox_state_path = mailbox_root / state
+        if not mailbox_state_path.exists():
+            continue
+        for message_path in mailbox_state_path.glob("MSG-*.md"):
+            content = message_path.read_text(encoding="utf-8-sig")
+            message_status = (get_markdown_field(content, "status") or "").lower()
+            relative = message_path.relative_to(root).as_posix()
+            if message_status != state:
+                validation.fail(
+                    "Mailbox status/folder mismatch: "
+                    f"{relative} has status '{message_status or '<missing>'}', expected '{state}'"
+                )
 
-        if message_status in {"answered", "archived"}:
-            validation.warn(
-                "Mailbox message is resolved but still in open/; archive to answered/: "
-                f"{message_path.name}"
-            )
-        if message_type in {"ACK", "FYI"} and is_false_value(requires_response):
-            validation.warn(
-                "Mailbox message does not require response; consider archiving: "
-                f"{message_path.name}"
-            )
-        if re.search(r"requires_response:\s*true", content):
-            if not re.search(r"response_owner:\s*\S+", content):
-                validation.fail(
-                    "Mailbox message requires response but has no response_owner: "
+            if state != "open":
+                continue
+
+            message_type = (get_markdown_field(content, "type") or "").upper()
+            requires_response = get_markdown_field(content, "requires_response")
+
+            if message_type in {"ACK", "FYI"} and is_false_value(requires_response):
+                validation.warn(
+                    "Mailbox message does not require response; consider archiving: "
                     f"{message_path.name}"
                 )
-            if "requested_action" not in content:
-                validation.fail(
-                    "Mailbox message requires response but has no requested_action: "
+            if re.search(r"requires_response:\s*true", content):
+                if not re.search(r"response_owner:\s*\S+", content):
+                    validation.fail(
+                        "Mailbox message requires response but has no response_owner: "
+                        f"{message_path.name}"
+                    )
+                if "requested_action" not in content:
+                    validation.fail(
+                        "Mailbox message requires response but has no requested_action: "
+                        f"{message_path.name}"
+                    )
+                if is_compact_mailbox_message(content) and not has_markdown_field(content, "question"):
+                    validation.fail(
+                        "Compact mailbox message requires response but has no question: "
+                        f"{message_path.name}"
+                    )
+            if (
+                is_compact_mailbox_message(content)
+                and references_existing_work(content)
+                and not has_markdown_field(content, "context_refs")
+            ):
+                validation.warn(
+                    "Compact mailbox message references existing work but has no context_refs: "
                     f"{message_path.name}"
                 )
-            if is_compact_mailbox_message(content) and not has_markdown_field(content, "question"):
-                validation.fail(
-                    "Compact mailbox message requires response but has no question: "
-                    f"{message_path.name}"
-                )
-        if (
-            is_compact_mailbox_message(content)
-            and references_existing_work(content)
-            and not has_markdown_field(content, "context_refs")
-        ):
-            validation.warn(
-                "Compact mailbox message references existing work but has no context_refs: "
-                f"{message_path.name}"
-            )
 
 
 def validate_reports(root: Path, validation: Validation) -> None:

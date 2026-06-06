@@ -767,35 +767,49 @@ if (Test-Path -LiteralPath $handoffDir) {
     }
 }
 
-$openMailboxDir = Join-Path $resolvedRoot "Area_comun/mailbox/open"
-if (Test-Path -LiteralPath $openMailboxDir) {
-    Get-ChildItem -LiteralPath $openMailboxDir -Filter "MSG-*.md" | ForEach-Object {
+$mailboxRoot = Join-Path $resolvedRoot "Area_comun/mailbox"
+foreach ($mailboxState in @("open", "answered", "archived")) {
+    $mailboxStatePath = Join-Path $mailboxRoot $mailboxState
+    if (-not (Test-Path -LiteralPath $mailboxStatePath)) {
+        continue
+    }
+    Get-ChildItem -LiteralPath $mailboxStatePath -Filter "MSG-*.md" | ForEach-Object {
         $content = Get-Content -Raw -LiteralPath $_.FullName
         $messageStatus = (Get-MarkdownField -Content $content -Field "status")
-        if ($messageStatus) { $messageStatus = $messageStatus.ToLower() }
-        $messageType = (Get-MarkdownField -Content $content -Field "type")
-        if ($messageType) { $messageType = $messageType.ToUpper() }
-        $requiresResponse = Get-MarkdownField -Content $content -Field "requires_response"
+        if ($messageStatus) { $messageStatus = $messageStatus.ToLower() } else { $messageStatus = "" }
+        $rootPrefix = $resolvedRoot.TrimEnd("\", "/") + [System.IO.Path]::DirectorySeparatorChar
+        $relativePath = $_.FullName
+        if ($relativePath.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $relativePath = $relativePath.Substring($rootPrefix.Length)
+        }
+        $relativePath = $relativePath.Replace("\", "/")
+        if ($messageStatus -ne $mailboxState) {
+            if (-not $messageStatus) { $messageStatus = "<missing>" }
+            Fail "Mailbox status/folder mismatch: $relativePath has status '$messageStatus', expected '$mailboxState'"
+        }
 
-        if ($messageStatus -in @("answered", "archived")) {
-            Warn "Mailbox message is resolved but still in open/; archive to answered/: $($_.Name)"
-        }
-        if (($messageType -in @("ACK", "FYI")) -and $requiresResponse -and $requiresResponse.ToLower() -eq "false") {
-            Warn "Mailbox message does not require response; consider archiving: $($_.Name)"
-        }
-        if ($content -match 'requires_response:\s*true') {
-            if ($content -notmatch 'response_owner:\s*\S+') {
-                Fail "Mailbox message requires response but has no response_owner: $($_.Name)"
+        if ($mailboxState -eq "open") {
+            $messageType = (Get-MarkdownField -Content $content -Field "type")
+            if ($messageType) { $messageType = $messageType.ToUpper() }
+            $requiresResponse = Get-MarkdownField -Content $content -Field "requires_response"
+
+            if (($messageType -in @("ACK", "FYI")) -and $requiresResponse -and $requiresResponse.ToLower() -eq "false") {
+                Warn "Mailbox message does not require response; consider archiving: $($_.Name)"
             }
-            if ($content -notmatch 'requested_action') {
-                Fail "Mailbox message requires response but has no requested_action: $($_.Name)"
+            if ($content -match 'requires_response:\s*true') {
+                if ($content -notmatch 'response_owner:\s*\S+') {
+                    Fail "Mailbox message requires response but has no response_owner: $($_.Name)"
+                }
+                if ($content -notmatch 'requested_action') {
+                    Fail "Mailbox message requires response but has no requested_action: $($_.Name)"
+                }
+                if ((Test-CompactMailboxMessage -Content $content) -and -not (Test-MarkdownField -Content $content -Field "question")) {
+                    Fail "Compact mailbox message requires response but has no question: $($_.Name)"
+                }
             }
-            if ((Test-CompactMailboxMessage -Content $content) -and -not (Test-MarkdownField -Content $content -Field "question")) {
-                Fail "Compact mailbox message requires response but has no question: $($_.Name)"
+            if ((Test-CompactMailboxMessage -Content $content) -and (Test-ReferencesExistingWork -Content $content) -and -not (Test-MarkdownField -Content $content -Field "context_refs")) {
+                Warn "Compact mailbox message references existing work but has no context_refs: $($_.Name)"
             }
-        }
-        if ((Test-CompactMailboxMessage -Content $content) -and (Test-ReferencesExistingWork -Content $content) -and -not (Test-MarkdownField -Content $content -Field "context_refs")) {
-            Warn "Compact mailbox message references existing work but has no context_refs: $($_.Name)"
         }
     }
 }

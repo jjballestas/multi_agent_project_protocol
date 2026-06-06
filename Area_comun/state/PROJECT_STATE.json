@@ -106,8 +106,8 @@
         {
             "id": "TASK-0035",
             "owner": "Codex",
-            "status": "ready",
-            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (SPEC-0034) - ready, prioridad alta"
+            "status": "in_progress",
+            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (SPEC-0034) - in progress Codex"
         }
     ],
     "open_questions": [],
@@ -128,10 +128,10 @@
         "TASK-0032 ACEPTADA y DONE (M2 hito 1 observabilidad): golden obs 5/5 + regresiones verdes. Notas de proceso -> DECISION-0013 (Codex dejo claim activo en in_review y libero sin commitear; deliverables commiteados por Claude al cerrar).",
         "TASK-0033 ACEPTADA y DONE: gate de visibilidad/encoding (scan_encoding py/ps1 limpio + legacy mojibake corregido, handoff-release en validador, docs liveness AGENTS.md 7, CI, golden). Dogfood correcto (Codex aplico handoff-release). Cierra la adaptacion del metodo de coordinacion (DECISION-0012/0013).",
         "TASK-0034 ACEPTADA y DONE: poda sistematica (DECISION-0014). Poda REAL aplicada: cold-start 20701 -> 8565 tokens (-59%, bajo el suelo); prune_state --check/--apply + hook bloqueante + CI hard-fail. DEFECTO documentado: prune no normaliza status al mover mailbox (41 mismatches) -> enrutado a TASK-0035.",
-        "TASK-0035 READY (prioridad alta): gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (SPEC-0034, DECISION-0013). El operador detecto el fallo (mensajes archivados parecen abiertos); en produccion seria mal-enrutado. Hermano del handoff-release de 0033.",
+        "TASK-0035 IN_PROGRESS por Codex (prioridad alta): gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (SPEC-0034, DECISION-0013). El operador detecto el fallo (mensajes archivados parecen abiertos); en produccion seria mal-enrutado. Hermano del handoff-release de 0033.",
         "Siguiente tras 0035: hito 2 de M2 = ADAPTER LLM REAL (Claude/Codex tras AgentAdapter, limites + replay comparativo + SIN autonomia); Claude deriva la spec. LECCION: comprobar CLAIMS antes de tocar rutas compartidas (Claude colisiono con la poda de Codex por no chequear)."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-06",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }

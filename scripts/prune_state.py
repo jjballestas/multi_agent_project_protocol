@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -27,6 +28,9 @@ DEFAULT_CONFIG = {
     "recent_released_claims": 4,
     "mailbox_keep_recent": 8,
 }
+
+
+STATUS_FIELD_RE = re.compile(r"(?m)^status:\s*.*$")
 
 
 @dataclass(frozen=True)
@@ -130,8 +134,22 @@ def prune_mailbox(root: Path, keep_recent: int) -> int:
     for path in move:
         target = archived / path.name
         if not target.exists():
+            set_mailbox_status(path, "archived")
             shutil.move(str(path), str(target))
     return len(move)
+
+
+def set_mailbox_status(path: Path, status: str) -> None:
+    content = path.read_text(encoding="utf-8-sig")
+    replacement = f"status: {status}"
+    if STATUS_FIELD_RE.search(content):
+        updated = STATUS_FIELD_RE.sub(replacement, content, count=1)
+    elif content.startswith("---\n"):
+        updated = content.replace("---\n", f"---\n{replacement}\n", 1)
+    else:
+        updated = f"---\n{replacement}\n---\n\n{content}"
+    if updated != content:
+        path.write_text(updated, encoding="utf-8")
 
 
 def apply_prune(root: Path) -> dict[str, Any]:
