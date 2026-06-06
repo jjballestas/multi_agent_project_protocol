@@ -115,49 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0048",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Capa A.1 Fase A (SPEC-0039, DECISION-0017): event log como writer vivo del CONTROL-PLANE - apply/orchestrator emiten acquire_claim/apply_intent al EventWriter en turnos de runtime + assert_snapshot_matches como hard-gate en apply (pre-commit del runtime) y en el validador global cuando runtime/state existe; fallback sin runtime/state intacto",
-            "spec_id": "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md",
-            "file": "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
-            "linked_decisions": [
-                "DECISION-0017"
-            ],
-            "depends_on": [
-                "TASK-0044",
-                "TASK-0046"
-            ],
-            "relates_to": [
-                "TASK-0047"
-            ],
-            "relevant_files": [
-                "runtime/eventlog.py",
-                "runtime/apply.py",
-                "runtime/orchestrator.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "examples/runtime_eventlog_gate_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/apply.py",
-                "runtime/orchestrator.py",
-                "runtime/eventlog.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "examples/runtime_eventlog_gate_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (66/66 incl. eventlog_gate 5/5) + validador/encoding/neutralidad py. Verificado en codigo y golden: (1) emision acquire_claim/apply_intent en turno de runtime (golden 1/2: events.jsonl [claim.acquired, intent.applied], orquestador registra eventlog_events); (2) assert_snapshot_matches hard-gate en apply con ATOMICIDAD fuerte (snapshot_runtime_state backup + preflight + restore_runtime_state + block en TODA rama de fallo, incl. except envolvente): mismatch => NO commitea, task blocked, runtime/state restaurado, sin estado a medias (golden 3); (3) gate global py/ps1 SOLO si runtime_state_has_content => hard-fail si mismatch (golden 5: py+ps1 returncode 1); (4) FALLBACK verificado EN VIVO: el repo vivo no tiene runtime/state => validador verde sin gate (+ golden 4 py+ps1); flujo de edicion manual y fallback N=2 intactos; (5) NO se implemento Fase B. Paridad py/ps1 del gate verificada DENTRO del golden (subprocess powershell, casos 4/5). OBSERVACION menor no-bloqueante: el validador hace import top-level de runtime.eventlog (seguro hoy: new_instance.py NO copia scripts/ ni runtime/ => el validador siempre corre desde el repo de protocolo; si algun dia se distribuye standalone, hacerlo defensivo). Cierra el FOLLOW-UP de Fase 2 para lo que el runtime escribe. Codex aplico handoff-release; flip por arquitecto."
-        },
-        {
             "id": "TASK-0049",
             "owner": "Codex",
             "status": "done",
@@ -193,7 +150,7 @@
         {
             "id": "TASK-0050",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -211,15 +168,49 @@
                 "runtime/router.py",
                 "runtime/context.py",
                 "examples/runtime_router_cases/",
-                "examples/runtime_nagent_golden_cases/"
+                "examples/runtime_nagent_golden_cases/",
+                ".github/workflows/validate.yml"
             ],
             "deliverables": [
                 "examples/runtime_nagent_golden_cases/",
+                ".github/workflows/validate.yml",
                 "Area_comun/handoffs/HANDOFF-TASK-0050-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Capa A.2 (criterio test plan global 15.3 de SPEC-0038: 'N=2 reproduce comportamiento anterior; N=3 permite reviewer/QA separados; N=5 balancea carga sin romper replay'). Nuevo golden runtime_nagent_golden_cases: (N=3) registry de 3 agentes con capacidades distintas => review se asigna a un reviewer != autor y QA a un qa != autor, ambos distintos del implementador autor (verifica I1/I2 end-to-end con roster real de 3); (N=5) registry de 5 agentes => el router weighted-least-loaded distribuye carga de forma determinista y el replay del mismo estado/routing_epoch reproduce identicas asignaciones (sin romper determinismo); fallback N=2 byte-equivalente (los golden existentes siguen verdes). Aditivo, sin red, neutralidad. Determinista (sin reloj/random). Encolada a Codex."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (78/78 incl. N-agent golden 6/6) + validador/encoding/neutralidad py + parse YAML. Confirme que el diff NO toca runtime/ ni golden existentes (solo examples/runtime_nagent_golden_cases/ + step en validate.yml). Verificado en el harness: N=3 review->Reviewer!=Author y qa->QA!=Author con author_excluded en filtered; autor-unico-capaz => escalate sin candidates (no self-review/self-QA); N=5 select_next x2 mismo estado => identico (replay determinista) y simulacion 25 asignaciones/5 implementers acumulando claims => cada uno >0, diferencia max-min<=1 (balanceo weighted-least-loaded real). Determinista (sin red/reloj/random). Cubre test plan global 15.3. Aditivo, fallback N=2 intacto. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0051",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.3 (test plan global 15.4 SPEC-0038): property-based de invariantes I1-I8 - generar estados variados (deterministas, por construccion/seed fijo) y verificar que se mantienen los 8 invariantes (reviewer!=autor, qa!=autor, done con evidencia, no 2 claims activos por tarea, evento aplicado incrementa seq+aggregate_version, replay reconstruye mismo snapshot, evento aplicado autenticado/atribuido, ningun intent se aplica dos veces)",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0051-codex-property-based-i1-i8.md",
+            "depends_on": [
+                "TASK-0049",
+                "TASK-0050"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/router.py",
+                "runtime/turn_validate.py",
+                "runtime/eventlog.py",
+                "examples/runtime_property_cases/"
+            ],
+            "deliverables": [
+                "examples/runtime_property_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0051-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Capa A.3 (criterio test plan global 15.4 de SPEC-0038, property-based de invariantes I1-I8). Nuevo harness examples/runtime_property_cases que, mediante GENERACION DETERMINISTA de estados variados (por construccion enumerada o seed FIJO derivado del indice; NO usar Math.random/reloj), comprueba que para todo estado generado se mantienen: I1 ningun reviewer es autor; I2 ningun QA es autor; I3 done tiene evidencia; I4 no hay dos claims activos por tarea; I5 todo evento aplicado incrementa seq y aggregate_version; I6 replay reconstruye el mismo snapshot (hash canonico); I7 todo evento aplicado esta atribuido/autenticado (actor presente); I8 ningun intent se aplica dos veces (idempotencia). Reusar runtime.router/turn_validate/eventlog reales (no reimplementar). Aditivo (solo examples/ + CI); NO tocar runtime/ ni contrato; determinista y reproducible; sin red; neutralidad. Documentar el numero de muestras y como se generan (cobertura declarada, sin truncamiento silencioso). Encolada a Codex."
         }
     ]
 }

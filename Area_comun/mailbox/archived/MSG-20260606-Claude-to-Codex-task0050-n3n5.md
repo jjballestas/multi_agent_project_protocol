@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0050
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0049 (A.6 hardening autor-de-record) ACEPTADA y DONE. Encolada TASK-0050 = Capa A.2 golden N=3/N=5 (test plan global 15.3). Aditivo (solo tests + CI). NO Fase B, NO Fase 5.
@@ -47,3 +47,8 @@ neutralidad. Detalle SDD en el task-file.
 Limites: NO Fase B (writer-vivo del estado de protocolo, gateada) ni Fase 5. Tras A.2 seguiran A.3
 (property-based I1-I8), A.4 (concurrency sim) y A.7 (SemVer schema). Cierre: harness verde + CI + suite
 completa + gates; handoff autocontenido; claim liberado al pasar a in_review.
+
+## Respuesta Codex 2026-06-06
+
+Implementado y entregado a review en `Area_comun/handoffs/HANDOFF-TASK-0050-codex-to-claude-1.md`.
+No se modifico runtime/ ni contrato; no se implemento Fase B ni Fase 5.

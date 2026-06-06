@@ -67,6 +67,9 @@ jobs:
       - name: Run runtime router cases
         run: python examples/runtime_router_cases/run_runtime_router_cases.py
 
+      - name: Run N-agent N=3/N=5 golden cases
+        run: python examples/runtime_nagent_golden_cases/run_runtime_nagent_golden_cases.py
+
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 

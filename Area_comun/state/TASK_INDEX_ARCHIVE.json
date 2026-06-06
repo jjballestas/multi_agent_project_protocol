@@ -1416,6 +1416,49 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION (2026-06-06). Corri yo los 10 runners de runtime (61/61: router 10, eventlog 5, review_qa 9, registry 4, turn schema 5, turn semantic 5, apply 4, loop 8, obs 5, llm 6) + validador/encoding/neutralidad py + parse YAML del workflow OK. Diff revisado: solo .github/workflows/validate.yml (step pip install jsonschema + 10 steps de runners; llm-adapter en modo recorded SIN --allow-real-invoker, sin red). git status confirma que el unico archivo de producto tocado es el workflow; no se modifico runtime/ ni contrato ni fixtures. Cierra la brecha de regresion de CI del nucleo N-agente (criterio 14 SPEC-0038). Codex aplico handoff-release y coordino el desbloqueo del claim; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0048",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.1 Fase A (SPEC-0039, DECISION-0017): event log como writer vivo del CONTROL-PLANE - apply/orchestrator emiten acquire_claim/apply_intent al EventWriter en turnos de runtime + assert_snapshot_matches como hard-gate en apply (pre-commit del runtime) y en el validador global cuando runtime/state existe; fallback sin runtime/state intacto",
+            "spec_id": "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md",
+            "file": "Area_comun/tasks/TASK-0048-codex-eventlog-writer-vivo-faseA.md",
+            "linked_decisions": [
+                "DECISION-0017"
+            ],
+            "depends_on": [
+                "TASK-0044",
+                "TASK-0046"
+            ],
+            "relates_to": [
+                "TASK-0047"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/apply.py",
+                "runtime/orchestrator.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/runtime_eventlog_gate_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/apply.py",
+                "runtime/orchestrator.py",
+                "runtime/eventlog.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/runtime_eventlog_gate_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (66/66 incl. eventlog_gate 5/5) + validador/encoding/neutralidad py. Verificado en codigo y golden: (1) emision acquire_claim/apply_intent en turno de runtime (golden 1/2: events.jsonl [claim.acquired, intent.applied], orquestador registra eventlog_events); (2) assert_snapshot_matches hard-gate en apply con ATOMICIDAD fuerte (snapshot_runtime_state backup + preflight + restore_runtime_state + block en TODA rama de fallo, incl. except envolvente): mismatch => NO commitea, task blocked, runtime/state restaurado, sin estado a medias (golden 3); (3) gate global py/ps1 SOLO si runtime_state_has_content => hard-fail si mismatch (golden 5: py+ps1 returncode 1); (4) FALLBACK verificado EN VIVO: el repo vivo no tiene runtime/state => validador verde sin gate (+ golden 4 py+ps1); flujo de edicion manual y fallback N=2 intactos; (5) NO se implemento Fase B. Paridad py/ps1 del gate verificada DENTRO del golden (subprocess powershell, casos 4/5). OBSERVACION menor no-bloqueante: el validador hace import top-level de runtime.eventlog (seguro hoy: new_instance.py NO copia scripts/ ni runtime/ => el validador siempre corre desde el repo de protocolo; si algun dia se distribuye standalone, hacerlo defensivo). Cierra el FOLLOW-UP de Fase 2 para lo que el runtime escribe. Codex aplico handoff-release; flip por arquitecto."
         }
     ]
 }
