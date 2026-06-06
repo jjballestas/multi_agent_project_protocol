@@ -14,6 +14,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
+TOOLS_ROOT = Path(__file__).resolve().parents[1]
+if str(TOOLS_ROOT) not in sys.path:
+    sys.path.insert(0, str(TOOLS_ROOT))
+
+from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_state_has_content
+
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
 REVIEWED_TASK_STATUSES = {"in_review", "review_approved", "qa_pending", "architect_review", "done"}
@@ -761,6 +767,15 @@ def validate_handoffs(root: Path, validation: Validation) -> None:
                 )
 
 
+def validate_eventlog_snapshot(root: Path, validation: Validation) -> None:
+    if not runtime_state_has_content(root):
+        return
+    try:
+        assert_snapshot_matches(root)
+    except EventLogError as exc:
+        validation.fail(f"Runtime event log snapshot mismatch: {exc}")
+
+
 def validate(root: Path, config_path: Path | None = None) -> Validation:
     validation = Validation()
     root = root.resolve()
@@ -810,6 +825,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
         validation,
     )
     validate_handoffs(root, validation)
+    validate_eventlog_snapshot(root, validation)
     return validation
 
 

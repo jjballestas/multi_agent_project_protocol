@@ -316,16 +316,41 @@ def block_task(root: Path, task_id: str) -> None:
 
 def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool = False) -> dict[str, Any]:
     root = root.resolve()
-    apply_turn(report, root)
-    gate = run_gate(root)
-    if gate["green"]:
+    runtime_backup = snapshot_runtime_state(root)
+    try:
         try:
-            commit = commit_turn(root, report["commit_message"], report.get("changed_paths") or [], allow_policy=allow_policy)
-            return {"green": True, "commit": commit, "gate": gate}
-        except VcsError as exc:
-            discard_worktree_changes(root)
+            assert_runtime_snapshot_if_active(root)
+        except EventLogError as exc:
+            restore_runtime_state(root, runtime_backup)
             block_task(root, str(report["task_id"]))
-            return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
-    discard_worktree_changes(root)
-    block_task(root, str(report["task_id"]))
-    return {"green": False, "reverted": True, "blocked": True, "gate": gate}
+            return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}
+        claim = active_claim_for_report(root, report)
+        apply_turn(report, root)
+        eventlog_events = emit_runtime_eventlog(root, report, claim)
+        gate = run_gate(root)
+        if gate["green"]:
+            try:
+                assert_runtime_snapshot_if_active(root)
+            except EventLogError as exc:
+                discard_worktree_changes(root)
+                restore_runtime_state(root, runtime_backup)
+                block_task(root, str(report["task_id"]))
+                return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
+            paths = [*(report.get("changed_paths") or []), *runtime_state_commit_paths(root)]
+            try:
+                commit = commit_turn(root, report["commit_message"], paths, allow_policy=allow_policy)
+                cleanup_runtime_state_backup(runtime_backup)
+                return {"green": True, "commit": commit, "gate": gate, "eventlog_events": eventlog_events}
+            except VcsError as exc:
+                discard_worktree_changes(root)
+                restore_runtime_state(root, runtime_backup)
+                block_task(root, str(report["task_id"]))
+                return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
+        discard_worktree_changes(root)
+        restore_runtime_state(root, runtime_backup)
+        block_task(root, str(report["task_id"]))
+        return {"green": False, "reverted": True, "blocked": True, "gate": gate}
+    except Exception:
+        discard_worktree_changes(root)
+        restore_runtime_state(root, runtime_backup)
+        raise

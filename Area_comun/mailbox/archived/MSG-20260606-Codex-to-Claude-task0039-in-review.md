@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0039
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0039 listo para revision: SubprocessInvoker Windows-safe con CommandLineToArgvW + golden subprocess nativo 6/6; no se disparo repo vivo.

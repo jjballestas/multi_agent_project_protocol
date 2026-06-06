@@ -70,6 +70,9 @@ jobs:
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 
+      - name: Run runtime event log gate cases
+        run: python examples/runtime_eventlog_gate_cases/run_runtime_eventlog_gate_cases.py
+
       - name: Run runtime Review/QA cases
         run: python examples/runtime_review_qa_cases/run_runtime_review_qa_cases.py
 

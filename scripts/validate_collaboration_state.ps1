@@ -588,6 +588,50 @@ function Validate-Sdd {
     }
 }
 
+function Test-RuntimeStateHasContent {
+    param([string]$Root)
+    $runtimeState = Join-Path $Root "runtime/state"
+    if (-not (Test-Path -LiteralPath $runtimeState)) {
+        return $false
+    }
+    $firstFile = Get-ChildItem -LiteralPath $runtimeState -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    return $null -ne $firstFile
+}
+
+function Validate-EventLogSnapshot {
+    param([string]$Root)
+    if (-not (Test-RuntimeStateHasContent -Root $Root)) {
+        return
+    }
+
+    $toolsRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    $oldToolsRoot = $env:EVENTLOG_TOOLS_ROOT
+    $oldInstanceRoot = $env:EVENTLOG_INSTANCE_ROOT
+    $env:EVENTLOG_TOOLS_ROOT = $toolsRoot
+    $env:EVENTLOG_INSTANCE_ROOT = $Root
+    $pythonSnippet = @'
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, os.environ["EVENTLOG_TOOLS_ROOT"])
+from runtime.eventlog import assert_snapshot_matches
+
+assert_snapshot_matches(Path(os.environ["EVENTLOG_INSTANCE_ROOT"]))
+'@
+    try {
+        $output = $pythonSnippet | python - 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Fail "Runtime event log snapshot mismatch: $($output -join ' ')"
+        }
+    } catch {
+        Fail "Runtime event log snapshot mismatch: $($_.Exception.Message)"
+    } finally {
+        $env:EVENTLOG_TOOLS_ROOT = $oldToolsRoot
+        $env:EVENTLOG_INSTANCE_ROOT = $oldInstanceRoot
+    }
+}
+
 $script:Errors = [System.Collections.Generic.List[string]]::new()
 $script:Warnings = [System.Collections.Generic.List[string]]::new()
 
@@ -767,6 +811,8 @@ if (Test-Path -LiteralPath $handoffDir) {
         }
     }
 }
+
+Validate-EventLogSnapshot -Root $resolvedRoot
 
 $mailboxRoot = Join-Path $resolvedRoot "Area_comun/mailbox"
 foreach ($mailboxState in @("open", "answered", "archived")) {

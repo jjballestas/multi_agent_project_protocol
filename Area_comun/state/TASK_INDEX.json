@@ -115,42 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0046",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "N-agente Fase 4 (SPEC-0038 sec.13): maquina de estados Review/QA (changes_requested, qa_failed, review_approved, qa_pending) + counters review_attempts/qa_attempts + defect logs (D-9) + corte de bucles por failure_signature canonica (A8) + escalado a architect_review/max_qa_cycles; sin done sin evidencia",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
-            "depends_on": [
-                "TASK-0045"
-            ],
-            "relates_to": [
-                "TASK-0044"
-            ],
-            "relevant_files": [
-                "runtime/turn_schema.json",
-                "runtime/turn_validate.py",
-                "runtime/apply.py",
-                "runtime/router.py",
-                "examples/runtime_review_qa_cases/"
-            ],
-            "deliverables": [
-                "runtime/review_qa.py",
-                "runtime/turn_schema.json",
-                "runtime/turn_validate.py",
-                "runtime/apply.py",
-                "runtime/router.py",
-                "examples/runtime_review_qa_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (61/61: review_qa 9/9 + router 10/10 + eventlog/registry/turn/apply/loop/obs/llm) + validador/encoding/neutralidad py verdes (ps1 verificado por Codex sobre el mismo contenido). Verificado en codigo y golden: failure_signature canonica (A8) normaliza timestamps/ids-hex/epoch y rutas abs/rel (drive, separadores, ultimos 4 componentes) => logs superficiales NO cambian la firma; corte de bucles con guarda BIDIRECCIONAL en turn_validate (must_escalate=loop_cut o attempts>max_qa_cycles => to_status DEBE ser architect_review, y viceversa: no se puede evadir el corte reportando qa_failed normal NI escalar prematuramente); firma distinta NO corta (caso dedicado); I1/I2 reviewer/qa != autor + payload reviewer/qa debe coincidir con el agent; defect obligatorio para reject_review/fail_qa; pass_qa exige evidencia y qa_pending->done sin payload tambien se rechaza (no done sin evidencia); routing assign_fix prefiere autor original. Fallback N=2 y golden legacy intactos; neutralidad limpia. Codex amplio scripts/validate_collaboration_state.py/.ps1 (bajo claim deliverable-path-fix) para aceptar los nuevos estados Review/QA como reviewed/release-like: revisado, aditivo, no abre done-sin-evidencia. HALLAZGO NO-BLOQUEANTE (FOLLOW-UP Fase 5 hardening): la guarda de exclusion de autor usa task_author(task,payload) que PRIORIZA payload.author/original_author sobre el estado; un actor adversarial podria declarar payload.author falso y evadir I1/I2. Riesgo nulo hoy (actores de buena fe, replay/recorded) pero debe cerrarse antes de operar agentes no confiables: persistir original_author en el estado en la 1ra asignacion (apply) y que la guarda lea SOLO del estado. Codex aplico handoff-release; flip por arquitecto."
-        },
-        {
             "id": "TASK-0047",
             "owner": "Codex",
             "status": "done",
@@ -181,7 +145,7 @@
         {
             "id": "TASK-0048",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -204,17 +168,55 @@
                 "runtime/orchestrator.py",
                 "scripts/validate_collaboration_state.py",
                 "scripts/validate_collaboration_state.ps1",
-                "examples/runtime_eventlog_gate_cases/"
+                "examples/runtime_eventlog_gate_cases/",
+                ".github/workflows/validate.yml"
             ],
             "deliverables": [
-                "runtime/ (apply/orchestrator emiten al EventWriter + assert_snapshot_matches gate)",
-                "scripts/validate_collaboration_state.py/.ps1 (gate cuando runtime/state existe)",
+                "runtime/apply.py",
+                "runtime/orchestrator.py",
+                "runtime/eventlog.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
                 "examples/runtime_eventlog_gate_cases/",
+                ".github/workflows/validate.yml",
                 "Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "En progreso por Codex (CLAIM-20260606-TASK-0048-codex). Fase A del writer-vivo (DECISION-0017 ACCEPTED, alcance A->B incremental aprobado por el operador). Alcance Fase A (control-plane gate): (1) en los turnos de runtime, apply/orchestrator invocan EventWriter.acquire_claim/apply_intent de modo que el control-plane del log (claims/leases/fencing/idempotencia) refleje lo que el runtime aplica; (2) assert_snapshot_matches como hard-gate en apply ANTES de commitear el turno del runtime; (3) el validador global py/ps1 corre assert_snapshot_matches cuando runtime/state existe y no esta vacio (cierra el FOLLOW-UP de Fase 2); (4) fallback sin runtime/state intacto (no rompe el repo vivo que aun no usa el log como writer del estado de protocolo). Golden nuevo runtime_eventlog_gate_cases (mismatch detectado/ok + integracion apply+eventlog + fallback). Aditivo; NO incluye Fase B (replay del estado de protocolo, gateada). Sin red. Mantener neutralidad."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (66/66 incl. eventlog_gate 5/5) + validador/encoding/neutralidad py. Verificado en codigo y golden: (1) emision acquire_claim/apply_intent en turno de runtime (golden 1/2: events.jsonl [claim.acquired, intent.applied], orquestador registra eventlog_events); (2) assert_snapshot_matches hard-gate en apply con ATOMICIDAD fuerte (snapshot_runtime_state backup + preflight + restore_runtime_state + block en TODA rama de fallo, incl. except envolvente): mismatch => NO commitea, task blocked, runtime/state restaurado, sin estado a medias (golden 3); (3) gate global py/ps1 SOLO si runtime_state_has_content => hard-fail si mismatch (golden 5: py+ps1 returncode 1); (4) FALLBACK verificado EN VIVO: el repo vivo no tiene runtime/state => validador verde sin gate (+ golden 4 py+ps1); flujo de edicion manual y fallback N=2 intactos; (5) NO se implemento Fase B. Paridad py/ps1 del gate verificada DENTRO del golden (subprocess powershell, casos 4/5). OBSERVACION menor no-bloqueante: el validador hace import top-level de runtime.eventlog (seguro hoy: new_instance.py NO copia scripts/ ni runtime/ => el validador siempre corre desde el repo de protocolo; si algun dia se distribuye standalone, hacerlo defensivo). Cierra el FOLLOW-UP de Fase 2 para lo que el runtime escribe. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0049",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.6 (hardening I1/I2): autor-de-record desde el estado, no del payload - persistir original_author en la 1ra asignacion (apply) y que la guarda de exclusion reviewer/QA != autor lea SOLO del estado, ignorando payload.author/original_author para ese chequeo (cierra el FOLLOW-UP de seguridad de Fase 4)",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0049-codex-hardening-autor-de-record.md",
+            "depends_on": [
+                "TASK-0046"
+            ],
+            "relates_to": [
+                "TASK-0048"
+            ],
+            "relevant_files": [
+                "runtime/review_qa.py",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "examples/runtime_review_qa_cases/"
+            ],
+            "deliverables": [
+                "runtime/review_qa.py",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "examples/runtime_review_qa_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0049-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Pendiente. Capa A.6 (cierra el HALLAZGO de seguridad de la review de Fase 4): hoy la guarda de exclusion de autor (I1/I2) usa task_author(task, payload) que PRIORIZA payload.author/original_author sobre el estado; un actor adversarial podria declarar un autor falso en el payload y evadir el rechazo self-review/self-QA. Fix: (1) apply persiste original_author en el estado de la tarea en la 1ra asignacion/claim (si no existe ya), inmutable despues; (2) la GUARDA de exclusion reviewer/qa != autor lee el autor de record SOLO del estado (task.original_author, fallback task.owner del estado), ignorando payload.author/original_author para ese chequeo de seguridad; payload.author puede seguir como informacion no-autoritativa. Tests: un turno reviewer/qa con payload.author falso distinto del autor de record sigue siendo RECHAZADO; autor real no puede auto-revisar/auto-QA aunque mienta en el payload; casos existentes de runtime_review_qa siguen verdes. Aditivo, fallback N=2 intacto, sin red, neutralidad. Encolada a Codex."
         }
     ]
 }

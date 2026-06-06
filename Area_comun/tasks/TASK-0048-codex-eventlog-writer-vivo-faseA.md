@@ -1,7 +1,7 @@
 ---
 id: TASK-0048
 owner: Codex
-status: in_progress
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-06
@@ -13,8 +13,8 @@ spec_id: Area_comun/specs/SPEC-0039-event-log-writer-vivo.md
 linked_decisions: [DECISION-0017, DECISION-0015, DECISION-0009]
 execution_pipeline: [en los turnos de runtime, apply.py/orchestrator.py invocan EventWriter.acquire_claim al tomar claim y EventWriter.apply_intent al aplicar transicion (reutilizando idempotency_key/fencing/aggregate de Fase 2); assert_snapshot_matches como hard-gate en apply ANTES de commitear (mismatch => discard+block, atomicidad estilo TASK-0041); scripts/validate_collaboration_state.py y .ps1 corren assert_snapshot_matches SOLO cuando runtime/state existe y no esta vacio; golden nuevo examples/runtime_eventlog_gate_cases]
 acceptance_criteria: [en un turno de runtime, el control-plane del event log (claims/leases/fencing/idempotency) refleja lo que apply aplica (acquire_claim/apply_intent emitidos); assert_snapshot_matches es hard-gate en apply: snapshot incoherente => el turno NO commitea (discard+block, sin estado a medias); el validador global py/ps1 corre assert_snapshot_matches cuando runtime/state existe y no esta vacio, y es hard-fail si hay mismatch; FALLBACK: sin runtime/state (o vacio) el validador y el flujo actual se comportan EXACTAMENTE como hoy (edicion manual del estado de protocolo intacta, fallback N=2 byte-equivalente); NO se implementa Fase B (replay del estado de protocolo); sin red; neutralidad limpia; paridad py/ps1 del gate]
-test_plan: [examples/runtime_eventlog_gate_cases nuevo: (1) snapshot coherente => apply commitea; (2) snapshot mismatch (up_to_seq o hash) => apply aborta con discard+block, sin commit; (3) integracion: un turno de runtime emite acquire_claim+apply_intent y el control-plane del log queda coherente con el snapshot; (4) fallback sin runtime/state => validador global verde como hoy; (5) determinismo (sin reloj/red, reutiliza negative replay de Fase 2). Correr ademas TODA la suite runtime (debe seguir verde) + validador/encoding/neutralidad py + paridad ps1 del gate]
-closure_criteria: [apply/orchestrator emiten al EventWriter en turnos de runtime; assert_snapshot_matches hard-gate en apply + en validador global cuando runtime/state existe; fallback intacto sin runtime/state; golden runtime_eventlog_gate_cases verde + suite completa + gates py/ps1; aditivo, fallback N=2 sin regresion; neutralidad limpia; handoff autocontenido; claim liberado al pasar a in_review]
+test_plan: [examples/runtime_eventlog_gate_cases nuevo: (1) snapshot coherente => apply commitea; (2) snapshot mismatch (up_to_seq o hash) => apply aborta con discard+block, sin commit; (3) integracion: un turno de runtime emite acquire_claim+apply_intent y el control-plane del log queda coherente con el snapshot; (4) fallback sin runtime/state => validador global verde como hoy; (5) determinismo (sin reloj/red, reutiliza negative replay de Fase 2). Correr ademas TODA la suite runtime (debe seguir verde) + validador/encoding/neutralidad py + paridad ps1 del gate + runner nuevo en CI]
+closure_criteria: [apply/orchestrator emiten al EventWriter en turnos de runtime; assert_snapshot_matches hard-gate en apply + en validador global cuando runtime/state existe; fallback intacto sin runtime/state; golden runtime_eventlog_gate_cases verde + suite completa + gates py/ps1 + CI actualizado; aditivo, fallback N=2 sin regresion; neutralidad limpia; handoff autocontenido; claim liberado al pasar a in_review]
 ---
 
 # TASK-0048 - Capa A.1 Fase A: event log como writer vivo del control-plane

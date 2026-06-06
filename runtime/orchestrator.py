@@ -401,6 +401,11 @@ def run_loop(
             reverted=result.get("reverted", False),
             duration_ms=clock_fixed,
         )
+        if result.get("eventlog_events"):
+            entry["eventlog_events"] = [
+                {"seq": event.get("seq"), "type": event.get("type"), "aggregate_id": event.get("aggregate_id")}
+                for event in result["eventlog_events"]
+            ]
         runlog.append(entry)
         turns.append(entry)
         budget.consume(cost_tokens=cost_tokens)

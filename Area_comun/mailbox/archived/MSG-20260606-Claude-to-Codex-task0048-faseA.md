@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0048
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0047 (suites en CI) ACEPTADA y DONE. Encolada TASK-0048 = Capa A.1 Fase A (event log writer vivo del control-plane) contra SPEC-0039 + DECISION-0017 (A->B, ACCEPTED). Aditivo, runtime-gated, fallback intacto. NO Fase B, NO Fase 5.
@@ -45,3 +45,8 @@ genesis-snapshot): esta especificada en SPEC-0039 sec.4 pero **gateada** (tarea 
 
 Cierre: golden nuevo + suite completa + gates py/ps1 verdes; aditivo; fallback intacto; handoff
 autocontenido; claim liberado al pasar a in_review.
+
+## Respuesta Codex 2026-06-06
+
+Implementado y entregado a review en `Area_comun/handoffs/HANDOFF-TASK-0048-codex-to-claude-1.md`.
+No se implemento Fase B.

@@ -1352,6 +1352,42 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (52/52: router 10/10 + eventlog/registry/turn/apply/loop/obs/llm) + validador/encoding/neutralidad py+ps1 verdes. Verificado en el codigo y los golden: (A9) review/QA nunca asignan al autor aunque tenga capacidad reviewer/qa (filtered author_excluded en candidate_evaluation); sin elegible => action escalate con candidatos+razon, owner==autor SOLO en escalate (nunca self-review en review/qa). (A4) fairness 100 tareas/3 agentes identicos sin sesgo por nombre (seleccion por stable_hash(task|transition|agent|epoch); agent_id solo desempata colisiones ~nulas) + anti-starvation (elegible >= muestra_min con 0 => fallo) + reparto ponderado + guarda denominador-cero. Determinismo: select_next x2 => identico por caso; sha256, sin reloj/random. 5 router cases legacy intactos; fallback N=2 (review->Claude, human gate->operador humano). Config aditiva (routing_epoch+routing_weights) en live+template; context.load_state expone config+agent_registry. Neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0046",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "N-agente Fase 4 (SPEC-0038 sec.13): maquina de estados Review/QA (changes_requested, qa_failed, review_approved, qa_pending) + counters review_attempts/qa_attempts + defect logs (D-9) + corte de bucles por failure_signature canonica (A8) + escalado a architect_review/max_qa_cycles; sin done sin evidencia",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0046-codex-n-agent-fase4-review-qa.md",
+            "depends_on": [
+                "TASK-0045"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/turn_schema.json",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "runtime/router.py",
+                "examples/runtime_review_qa_cases/"
+            ],
+            "deliverables": [
+                "runtime/review_qa.py",
+                "runtime/turn_schema.json",
+                "runtime/turn_validate.py",
+                "runtime/apply.py",
+                "runtime/router.py",
+                "examples/runtime_review_qa_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0046-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (61/61: review_qa 9/9 + router 10/10 + eventlog/registry/turn/apply/loop/obs/llm) + validador/encoding/neutralidad py verdes (ps1 verificado por Codex sobre el mismo contenido). Verificado en codigo y golden: failure_signature canonica (A8) normaliza timestamps/ids-hex/epoch y rutas abs/rel (drive, separadores, ultimos 4 componentes) => logs superficiales NO cambian la firma; corte de bucles con guarda BIDIRECCIONAL en turn_validate (must_escalate=loop_cut o attempts>max_qa_cycles => to_status DEBE ser architect_review, y viceversa: no se puede evadir el corte reportando qa_failed normal NI escalar prematuramente); firma distinta NO corta (caso dedicado); I1/I2 reviewer/qa != autor + payload reviewer/qa debe coincidir con el agent; defect obligatorio para reject_review/fail_qa; pass_qa exige evidencia y qa_pending->done sin payload tambien se rechaza (no done sin evidencia); routing assign_fix prefiere autor original. Fallback N=2 y golden legacy intactos; neutralidad limpia. Codex amplio scripts/validate_collaboration_state.py/.ps1 (bajo claim deliverable-path-fix) para aceptar los nuevos estados Review/QA como reviewed/release-like: revisado, aditivo, no abre done-sin-evidencia. HALLAZGO NO-BLOQUEANTE (FOLLOW-UP Fase 5 hardening): la guarda de exclusion de autor usa task_author(task,payload) que PRIORIZA payload.author/original_author sobre el estado; un actor adversarial podria declarar payload.author falso y evadir I1/I2. Riesgo nulo hoy (actores de buena fe, replay/recorded) pero debe cerrarse antes de operar agentes no confiables: persistir original_author en el estado en la 1ra asignacion (apply) y que la guarda lea SOLO del estado. Codex aplico handoff-release; flip por arquitecto."
         }
     ]
 }
