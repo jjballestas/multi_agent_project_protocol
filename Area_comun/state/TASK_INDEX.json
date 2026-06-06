@@ -115,33 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0040",
-            "owner": "Claude",
-            "status": "done",
-            "type": "documentation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Primera corrida real del runtime sobre el repo vivo (self-run): cerrar esta tarea via invoker subproceso real (--allow-real-invoker --once), 1 commit M1 en main, con evidencia auditable (DECISION-0009 #2, aprobada por el operador)",
-            "spec_id": "none",
-            "file": "Area_comun/tasks/TASK-0040-claude-runtime-live-selfrun.md",
-            "depends_on": [
-                "TASK-0039"
-            ],
-            "relates_to": [
-                "TASK-0036"
-            ],
-            "relevant_files": [
-                "runtime/orchestrator.py",
-                "runtime/adapters/llm_adapter.py"
-            ],
-            "deliverables": [
-                "Area_comun/artifacts/RUNTIME-live-selfrun-20260606.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": false,
-            "review": "DONE: la cerro el propio runtime sobre el repo vivo (commit 016b25e, trace gate_pre..commit, gate verde, 0 reverts; ready->done; claim liberado; artefacto commiteado). Primera corrida real exitosa (aprobada por el operador). Hallazgo de proceso -> SPEC-0037/TASK-0041 (runtime commit vs hook de poda); se archivo 1 released para esta corrida. Publicada en v0.9.0."
-        },
-        {
             "id": "TASK-0041",
             "owner": "Codex",
             "status": "done",
@@ -176,7 +149,7 @@
         {
             "id": "TASK-0042",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "analysis",
             "priority": "high",
             "phase": "P2",
@@ -198,7 +171,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "EN REVISION por Claude. Codex entrego validacion SOTA independiente en Area_comun/artifacts/SOTA-TASK-0038-validacion-codex.md: SPEC-0038 queda alineada en direccion; propone precisiones en D-1/D-13 (auth externa + signed event envelope + taint/provenance), D-6 (fairness por elegibilidad/pesos), D-7/D-11 (seq solo writer + crash tests), D-12 (negative replay test), D-15 (SLSA v1.2/CycloneDX 1.7) y proporcionalidad de fase 5 minima antes de herramientas externas. Sin codigo."
+            "review": "ACEPTADA por Claude con RECONCILIACION ADVERSARIAL (2026-06-06). Validacion SOTA solida y bien citada (Temporal, LangGraph, MCP 2025-06-18, A2A, OWASP LLM2025/Agentic2026, ESAA, OTel, SLSA v1.2, CycloneDX 1.7, SemVer): SPEC-0038 alineada con el estado del arte SIN rediseno estrategico. Claude ACEPTO las correcciones de precision -> addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros: trust de dos capas + taint, idempotencia por tupla, fairness por elegibilidad + anti-starvation, writer unico de seq + crash tests, negative replay test, fencing por-aggregate, firma de fallo canonica, sin escalado oculto, umbrales duro/blando + colas, evidencia por tipo, tool-policy minima antes de tools externos, fuentes al dia). DECISION-0015 actualizada. Fase 0 LISTA PARA CONGELAR pendiente de aprobacion humana. Codex aplico handoff-release."
         }
     ]
 }

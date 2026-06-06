@@ -14,13 +14,15 @@ spec_ref: Area_comun/specs/SPEC-0038-n-agent-registry.md
 
 # DECISION-0015 - Registry de agentes por capacidades y runtime sin roles fijos (N-agente)
 
-> Estado: PROPOSED (2026-06-06). El operador entrego un analisis independiente y una **SPEC-0038
-> CONSOLIDADA** (adoptada como spec de record) que cierra los huecos P0/P1/P2 como **decisiones D-1..D-16**
-> e **invariantes I1..I8**. Esta DECISION fija esas decisiones. **Direccion + implementacion aprobadas por
-> el operador**; el **congelamiento (Fase 0)** queda pendiente de: (a) validacion SOTA profunda
-> independiente por Codex (TASK-0042) reconciliada por el arquitecto, y (b) aprobacion humana final del
-> congelamiento. Aditivo, off-by-default, backward-compat (N=2 sin migracion). Analisis unico de record:
-> `Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md`.
+> Estado: PROPOSED - LISTA PARA CONGELAR (2026-06-06). El operador entrego un analisis independiente y una
+> **SPEC-0038 CONSOLIDADA** (adoptada como spec de record) que cierra los huecos P0/P1/P2 como **decisiones
+> D-1..D-16** e **invariantes I1..I8**. La **validacion SOTA independiente de Codex (TASK-0042)** confirmo
+> alineamiento con el estado del arte SIN rediseno estrategico; Claude reconcilio y **acepto** sus
+> correcciones de precision, ahora **addenda normativas A1..A13 en SPEC-0038 §20** (gates duros, sobre todo
+> trust + concurrencia). Falta solo la **(b) aprobacion humana del congelamiento de Fase 0**; con ella,
+> DECISION-0015 pasa a ACCEPTED y arrancan las fases 1-4. Aditivo, off-by-default, backward-compat (N=2 sin
+> migracion). Docs: `Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md` (analisis unificado) +
+> `Area_comun/artifacts/SOTA-TASK-0038-validacion-codex.md` (validacion SOTA).
 
 ## Decisiones cerradas (D-1..D-16, normativas en SPEC-0038 §17)
 - **D-1** Autenticar/firmar todo turn_report y evento; rechazar lo no atribuible (P0). Defensa de inyeccion

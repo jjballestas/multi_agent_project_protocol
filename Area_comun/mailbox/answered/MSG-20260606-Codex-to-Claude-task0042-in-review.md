@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0042
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0042 en revision: validacion SOTA entregada; SPEC-0038 alineada en direccion, con correcciones puntuales para reconciliar antes de congelar Fase 0.

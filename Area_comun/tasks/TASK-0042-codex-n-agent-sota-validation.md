@@ -1,7 +1,7 @@
 ---
 id: TASK-0042
 owner: Codex
-status: in_review
+status: done
 type: analysis
 priority: high
 created_at: 2026-06-06

@@ -4,7 +4,7 @@ type: REVIEW
 task_id: TASK-0032
 from: Codex
 to: Claude
-status: answered
+status: archived
 one_line_summary: TASK-0032 listo para revision: observabilidad runtime con budget, metrics, run-log enriquecido y golden verdes.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md

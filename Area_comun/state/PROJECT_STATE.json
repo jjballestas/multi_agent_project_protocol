@@ -93,12 +93,6 @@
             "title": "PARAGUAS N-agente: SPEC-0038 CONSOLIDADA (operador) adoptada como spec de record (D-1..D-16, I1..I8); analisis unificado en ANALISIS-TASK-0038-n-agent-consolidado.md; DECISION-0015 actualizada. Fase 0 cierra tras validacion SOTA (TASK-0042) + aprobacion humana; luego fases 1-4."
         },
         {
-            "id": "TASK-0042",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Validacion SOTA profunda e independiente de la SPEC-0038 consolidada (N-agente) vs estado del arte 2025/2026 (D-1..D-16 / I1..I8). Entregada por Codex; pendiente reconciliacion de Claude."
-        },
-        {
             "id": "TASK-0040",
             "owner": "Claude",
             "status": "done",
@@ -141,7 +135,8 @@
         "TASK-0041 ACEPTADA y DONE (ratificacion adversarial de Claude): commit_turn(verify=False) => --no-verify SOLO en la ruta del runtime (run_gate ya gatea; commits manuales siguen bloqueados por el hook cuando la poda esta due); apply.py commit-fail => discard + block (atomicidad); orchestrator.auto_prune_if_due post-run (guarda contra worktree sucio, --check/--apply, commit separado --no-verify). runtime_loop 8/8 con hook instalado + regresiones verdes. RESUELVE el deadlock runtime-commit-vs-hook hallado en la corrida real (TASK-0040). El runtime ya se auto-mantiene; no requiere el workaround manual de archivar claims.",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar.",
         "PROGRAMA N-AGENTE (instruccion del operador 2026-06-06): el operador entrego analisis independiente + SPEC-0038 CONSOLIDADA. Claude: (1) adopto la consolidada como SPEC-0038 de record (Area_comun/specs/, D-1..D-16 + I1..I8; el borrador previo queda reemplazado); (2) unifico el analisis en Area_comun/artifacts/ANALISIS-TASK-0038-n-agent-consolidado.md (las 3 fuentes del operador conservadas con banner); (3) DECISION-0015 actualizada a D-1..D-16/I1..I8 (proposed; direccion+implementacion aprobadas por el operador; congelamiento Fase 0 pendiente). MODELO: event log append-only fuente de verdad + escritor unico con intents/leases/fencing/idempotencia por-aggregate; registry por capacidades; routing weighted-least-loaded + fairness gate; review/QA != autor (property tests I1/I2); maquina de estados con QA-fail; authN de eventos + anti-inyeccion; presupuesto/deadline; fases 0-4 nucleo, 5-7 diferidas.",
-        "TASK-0042 EN REVISION: Codex entrego validacion SOTA independiente de la SPEC-0038 (Area_comun/artifacts/SOTA-TASK-0038-validacion-codex.md). Veredicto: direccion alineada, sin bloqueo estrategico; correcciones propuestas en auth externa/event envelope/taint, fairness, crash/replay tests, SLSA v1.2 y tool-policy minima antes de herramientas externas. Siguiente: Claude reconcilia -> integra correcciones aceptadas -> aprobacion humana congela Fase 0.",
+        "TASK-0042 ACEPTADA y DONE (reconciliacion adversarial de Claude): validacion SOTA confirma SPEC-0038 alineada con el estado del arte SIN rediseno. Claude acepto las correcciones de precision => addenda normativas A1..A13 en SPEC-0038 sec.20 (gates duros): trust de dos capas (event envelope firmado vs auth externa OAuth/JWT) + taint/provenance de handoffs/tools; idempotencia por tupla; fairness por elegibilidad + anti-starvation; writer unico de seq + crash tests; negative replay test; fencing por-aggregate; firma de fallo canonica; sin escalado oculto; umbrales duro/blando + colas; evidencia por tipo; tool-policy minima antes de tools externos; SLSA v1.2/CycloneDX 1.7. DECISION-0015 actualizada.",
+        "FASE 0 N-AGENTE LISTA PARA CONGELAR - PENDIENTE DE APROBACION HUMANA: con el OK del operador, DECISION-0015 pasa a ACCEPTED (congela el contrato: registry/capacidades, schema agent enum->string validado en runtime, D-1..D-16 + I1..I8 + addenda A1..A13) y arrancan las fases 1-4 (config-gated, fallback N=2 intacto, golden+property+replay+concurrency, A1-A7 como gates). Es la (b) aprobacion humana del congelamiento (cambio de contrato, CLAUDE.md regla 2/6). Implementacion = #4 del operador.",
         "TRABAJO FUTURO: TASK-0037 (guia humana operativa neutral + HTML) sigue proposed sin especificar."
     ],
     "created_at": "2026-06-05",
