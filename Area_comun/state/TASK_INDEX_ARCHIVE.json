@@ -1492,6 +1492,39 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (72/72 incl. review_qa 15/15) + validador/encoding/neutralidad py. Verificado en codigo y golden: author_of_record(task) lee SOLO task.original_author (fallback task.owner del estado); task_author delega ahi e IGNORA payload por completo; turn_validate usa author_of_record para la guarda I1/I2; apply.ensure_original_author fija original_author=owner SOLO si falta (inmutable; invocado en 1ra adquisicion de claim y 1ra transicion). Casos adversariales (golden 9->15) confirmados: autor real con payload.author falso => pass_qa/reject_review RECHAZADO (no se evade mintiendo); no-autor con payload.author=actor => NO causa falso positivo (payload no autoritativo); original_author se persiste en el 1er apply y assign_fix/cambio de owner NO lo sobreescribe. Cierra el HALLAZGO de seguridad de la review de Fase 4 (I1/I2 ahora robustos vs payload adversarial). Aditivo, fallback N=2 intacto, neutralidad limpia. Codex aplico handoff-release; flip por arquitecto."
+        },
+        {
+            "id": "TASK-0050",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Capa A.2 (test plan global 15.3 SPEC-0038): golden N=3 y N=5 - demostrar con registry de 3 agentes reviewer/QA separados (review/QA != autor enrutados a distintos) y con 5 agentes balanceo de carga del router sin romper replay/determinismo; fallback N=2 byte-equivalente intacto",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0050-codex-golden-n3-n5.md",
+            "depends_on": [
+                "TASK-0045",
+                "TASK-0049"
+            ],
+            "relates_to": [
+                "TASK-0043"
+            ],
+            "relevant_files": [
+                "runtime/router.py",
+                "runtime/context.py",
+                "examples/runtime_router_cases/",
+                "examples/runtime_nagent_golden_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "examples/runtime_nagent_golden_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0050-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (78/78 incl. N-agent golden 6/6) + validador/encoding/neutralidad py + parse YAML. Confirme que el diff NO toca runtime/ ni golden existentes (solo examples/runtime_nagent_golden_cases/ + step en validate.yml). Verificado en el harness: N=3 review->Reviewer!=Author y qa->QA!=Author con author_excluded en filtered; autor-unico-capaz => escalate sin candidates (no self-review/self-QA); N=5 select_next x2 mismo estado => identico (replay determinista) y simulacion 25 asignaciones/5 implementers acumulando claims => cada uno >0, diferencia max-min<=1 (balanceo weighted-least-loaded real). Determinista (sin red/reloj/random). Cubre test plan global 15.3. Aditivo, fallback N=2 intacto. Codex aplico handoff-release; flip por arquitecto."
         }
     ]
 }

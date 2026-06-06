@@ -73,6 +73,9 @@ jobs:
       - name: Run runtime property invariant cases
         run: python examples/runtime_property_cases/run_runtime_property_cases.py
 
+      - name: Run runtime concurrency simulation cases
+        run: python examples/runtime_concurrency_cases/run_runtime_concurrency_cases.py
+
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 

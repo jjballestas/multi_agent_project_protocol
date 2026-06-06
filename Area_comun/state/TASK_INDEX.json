@@ -115,39 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0050",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Capa A.2 (test plan global 15.3 SPEC-0038): golden N=3 y N=5 - demostrar con registry de 3 agentes reviewer/QA separados (review/QA != autor enrutados a distintos) y con 5 agentes balanceo de carga del router sin romper replay/determinismo; fallback N=2 byte-equivalente intacto",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0050-codex-golden-n3-n5.md",
-            "depends_on": [
-                "TASK-0045",
-                "TASK-0049"
-            ],
-            "relates_to": [
-                "TASK-0043"
-            ],
-            "relevant_files": [
-                "runtime/router.py",
-                "runtime/context.py",
-                "examples/runtime_router_cases/",
-                "examples/runtime_nagent_golden_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "examples/runtime_nagent_golden_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0050-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (78/78 incl. N-agent golden 6/6) + validador/encoding/neutralidad py + parse YAML. Confirme que el diff NO toca runtime/ ni golden existentes (solo examples/runtime_nagent_golden_cases/ + step en validate.yml). Verificado en el harness: N=3 review->Reviewer!=Author y qa->QA!=Author con author_excluded en filtered; autor-unico-capaz => escalate sin candidates (no self-review/self-QA); N=5 select_next x2 mismo estado => identico (replay determinista) y simulacion 25 asignaciones/5 implementers acumulando claims => cada uno >0, diferencia max-min<=1 (balanceo weighted-least-loaded real). Determinista (sin red/reloj/random). Cubre test plan global 15.3. Aditivo, fallback N=2 intacto. Codex aplico handoff-release; flip por arquitecto."
-        },
-        {
             "id": "TASK-0051",
             "owner": "Codex",
             "status": "done",
@@ -182,7 +149,7 @@
         {
             "id": "TASK-0052",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -208,7 +175,37 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente. Capa A.4 (criterio test plan global 15.5 de SPEC-0038). Nuevo harness examples/runtime_concurrency_cases que simula DETERMINISTICAMENTE (sin random/reloj/red; por construccion/seed fijo) un escenario de 10 implementadores y 100 tareas con: colisiones de claim (dos agentes intentan la misma tarea), vencimiento de leases + re-claim con fencing, agentes disabled a mitad de ejecucion, e intents duplicados por reintento. Reutiliza el runtime real (router/eventlog/turn_validate). Aserciones del resultado esperado: (1) los conflictos quedan REGISTRADOS y no son silenciosos (rechazos visibles: doble-claim rechazado, fencing obsoleto registrado); (2) el snapshot del event log NO se corrompe (assert_snapshot_matches / replay reconstruye hash canonico); (3) la distribucion de carga entre implementadores queda dentro del fairness_ratio configurado; (4) CERO doble-aplicaciones (idempotencia: ningun intent se aplica dos veces). Declarar tamano de la simulacion y semillas; contraejemplo reproducible si falla. Aditivo (solo examples/ + .github/workflows); NO tocar runtime/ ni contrato ni golden existentes; determinista; sin red; neutralidad. Encolada a Codex."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo el harness + suite completa (105/105) + validador/encoding/neutralidad py + parse YAML. Confirme diff limitado a examples/runtime_concurrency_cases/ + validate.yml (NO runtime/ ni golden existentes). Harness GENUINO: check() lanza con contraejemplo; reutiliza runtime real (router.select_next/evaluate_fairness, eventlog EventWriter/assert_snapshot_matches/rebuild_snapshot, turn_validate). Verificado el test plan 15.5: conflictos REGISTRADOS no silenciosos (colision y lease-expirado => state.stale_fencing_rejected, 8 rejections); snapshot SIN corrupcion (assert_snapshot_matches real + hash estable entre 2 corridas); fairness por ELEGIBILIDAD via evaluate_fairness real (max_weighted_share_delta ~0.0075; el fairness_ratio crudo 2.4 solo refleja Impl09/10 disabled a mitad, que dejan de ser elegibles); CERO doble-aplicaciones (applied_intents=100 == unique_applied_keys=100, 100 dedups); agentes disabled NO reciben asignaciones tras el disable point. Determinista (seed=concurrency-v1, sin random/reloj/red/truncamiento). Release ATOMICO aplicado por Codex (handoff+mensaje+claim released+status in_review juntos; la regla DECISION-0018 surtio efecto tras la anomalia de A.3). Cubre test plan global 15.5; con A.4 el test plan 15.3-15.5 queda completo. Flip por arquitecto."
+        },
+        {
+            "id": "TASK-0053",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "documentation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Capa A.7 (criterio 17 SPEC-0038): SemVer del turn_schema - declarar version explicita del runtime/turn_schema.json + documentar la politica de versionado del schema (cuando MAJOR/MINOR/PATCH segun consumidores reales) + justificar que los cambios aditivos de Fases 1-4 fueron MINOR; ultimo item de Capa A",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+            "file": "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
+            "depends_on": [
+                "TASK-0043"
+            ],
+            "relates_to": [
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/turn_schema.json",
+                "Area_comun/protocol/",
+                "examples/runtime_turn_cases/"
+            ],
+            "deliverables": [
+                "runtime/turn_schema.json (campo de version explicito, aditivo)",
+                "Area_comun/protocol/ (doc de politica SemVer del schema)",
+                "Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "Pendiente. Capa A.7 (criterio 17 de SPEC-0038: 'Decision de SemVer justificada segun consumidores reales del schema'). Ultimo item de Capa A. Alcance: (1) declarar una version explicita del turn_schema (campo aditivo, p.ej. schema_version en runtime/turn_schema.json o doc equivalente, sin romper la validacion existente); (2) documentar la politica de versionado del schema en Area_comun/protocol/ (que cambio es PATCH/MINOR/MAJOR segun los consumidores: turn_validate, apply, adaptadores; campos opcionales nuevos = MINOR aditivo; quitar/renombrar requerido = MAJOR); (3) justificar que los cambios de Fases 1-4 (attempt_id/idempotency_key/aggregate_version/fencing_token/transitions.review_qa, estados Review/QA) fueron aditivos => MINOR, coherente con DECISION-0001. Aditivo; si toca turn_schema.json debe seguir validando los golden de turn (schema 5/5 + semantic 5/5) y toda la suite; sin red; neutralidad. Encolada a Codex."
         }
     ]
 }
