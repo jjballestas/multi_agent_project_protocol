@@ -70,7 +70,7 @@ autonomo multi-turno todavia).
 
 ## linked_decisions
 - `DECISION-0009` (runtime, adapters vendor-neutral, gates humanos); `DECISION-0001` (aditivo,
-  off-by-default ⇒ MINOR). La PRIMERA corrida real sobre el repo vivo es decision del operador.
+  off-by-default => MINOR). La PRIMERA corrida real sobre el repo vivo es decision del operador.
 
 ## test_plan
 - Golden `examples/llm_adapter_cases/` con `RecordedInvoker`: un turno => 1 commit; replay comparativo
