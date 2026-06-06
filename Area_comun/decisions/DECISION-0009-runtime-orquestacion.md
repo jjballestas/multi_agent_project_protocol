@@ -45,6 +45,21 @@ El operador humano **aprobó abrir este track en paralelo** (2026-06-05). Sigue 
 aprobación humana explícita: **la primera corrida autónoma del piloto** y cualquier endurecimiento
 (quitar dry-run / gate humano). Releases MAJOR mantienen la aprobación de DECISION-0001.
 
+## Activación (2026-06-06)
+El operador humano **aprobó activar `runtime.enabled:true` en esta instancia viva** (post-v0.8.0, con
+runtime M0+M1 completos). Registro del acto y su alcance:
+
+- **Cambio:** `protocol.config.json` (instancia viva) `runtime.enabled: false → true`. La
+  **`protocol.config.template.json` permanece `false`**: las instancias nuevas siguen naciendo apagadas.
+- **Qué habilita hoy:** `runtime/orchestrator.py --run` deja de abortar y **opera sobre el repo vivo**
+  cuando se invoca explícitamente (`--run --replay-report …`), con **gate por turno + 1 commit/turno +
+  paradas humanas duras**. Solo existe el **`replay` adapter** (determinista); no hay automation que lo
+  dispare por sí solo.
+- **Qué sigue gateado (sin cambio):** los **adapters LLM reales** (`claude_adapter`/`codex_adapter`) y el
+  **loop autónomo del piloto** son **M2** y requieren su propia aprobación; **endurecer** (quitar
+  dry-run/gate humano, escribir estado sin contrato de turno) sigue siendo **MAJOR**.
+- **Reversible:** volver a `false` restaura el comportamiento previo (instancia sin bloque = como hoy).
+
 ## Versionado y neutralidad (DECISION-0001)
 Por ser **aditivo y off-by-default** ⇒ **MINOR, target v0.8.0** (track separado del de eficiencia de
 tokens v0.7.0). Endurecer (auto-aplicar sin gate humano, escribir estado sin contrato de turno) sería

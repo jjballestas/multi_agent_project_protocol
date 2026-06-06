@@ -4,6 +4,25 @@
     "updated_by": "Claude",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-runtime-enable-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "protocol.config.json",
+                "Area_comun/decisions/DECISION-0009-runtime-orquestacion.md",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#risks",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-runtime-enabled.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Activacion runtime.enabled:true en la instancia VIVA (aprobada por el human owner 2026-06-06, DECISION-0009). Template queda OFF. Alcance: habilita --run con replay (M1); adapters LLM reales y piloto autonomo siguen gateados (M2/MAJOR)."
+        },
+        {
             "claim_id": "CLAIM-20260606-release-v080-done-claude",
             "task_id": "none",
             "owner": "Claude",
@@ -182,6 +201,21 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: FYI de release v0.8.0 movido a mailbox/answered tras publicacion y claim de Claude liberado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-release-v080-done-mailbox-cleanup-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-release-v080-done.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-release-v080-done.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: DONE terminal de release v0.8.0 movido a mailbox/answered."
         }
     ]
 }

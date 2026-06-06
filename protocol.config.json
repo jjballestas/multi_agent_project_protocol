@@ -23,7 +23,7 @@
     "budget": 30000
   },
   "runtime": {
-    "enabled": false,
+    "enabled": true,
     "entrypoint": "runtime/orchestrator.py"
   },
   "domain_neutrality": {

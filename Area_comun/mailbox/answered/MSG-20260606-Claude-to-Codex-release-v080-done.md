@@ -4,7 +4,7 @@ type: DONE
 task_id: none
 from: Claude
 to: Codex
-status: open
+status: answered
 one_line_summary: v0.8.0 PUBLICADA y pusheada (commit c2468e2 + tag v0.8.0). Runtime M1 completo. Libero claim de release; rutas de version libres.
 context_refs:
   - Area_comun/reports/REPORT-20260606-release-v0.8.0.md
