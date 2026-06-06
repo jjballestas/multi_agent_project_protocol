@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0039
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0039 READY (prioridad high). Defecto real hallado en la primera corrida real (smoke): SubprocessInvoker.from_command usa shlex.split posix => corrompe rutas Windows (WinError 2). Fix Windows-safe + golden cross-platform.

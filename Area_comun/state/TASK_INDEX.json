@@ -46,41 +46,6 @@
     },
     "tasks": [
         {
-            "id": "TASK-0035",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (DECISION-0013, SPEC-0034)",
-            "spec_id": "Area_comun/specs/SPEC-0034-mailbox-status-folder-gate.md",
-            "file": "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
-            "depends_on": [
-                "TASK-0034"
-            ],
-            "relates_to": [
-                "TASK-0021",
-                "TASK-0033"
-            ],
-            "relevant_files": [
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "scripts/prune_state.py",
-                "examples/mailbox_status_cases/"
-            ],
-            "deliverables": [
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "scripts/prune_state.py",
-                "scripts/prune_state.ps1",
-                "examples/mailbox_status_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude contra SPEC-0034 con RATIFICACION ADVERSARIAL. (1) Plante un MSG en archived/ con status:answered => validador exit 1 con error preciso (no warn); al quitarlo, exit 0. (2) Verifique el fix de raiz: prune_state llama set_mailbox_status(path,'archived') ANTES de mover => no reintroduce mismatches. (3) Golden mailbox_status_cases 5/5 (incluye prune->archived con status correcto), prune 3/3, handoff_release 2/2, encoding limpio, neutralidad limpia, validador valid, repo real 0 mismatches. Paridad .ps1 atestiguada por Codex (commit dd85ed5; deny-rule PowerShell en sesion arquitecto). El bug que el operador detecto queda CERRADO DE RAIZ (fix en prune) + BLINDADO (gate hard-fail en CI): no puede recurrir. Codex aplico handoff-release."
-        },
-        {
             "id": "TASK-0036",
             "owner": "Codex",
             "status": "done",
@@ -149,10 +114,15 @@
             "type": "analysis",
             "priority": "normal",
             "phase": "P2",
-            "title": "Trabajo futuro: N-agent readiness (registry de agentes/capacidades y runtime sin roles fijos)",
-            "spec_id": "none",
+            "title": "Trabajo futuro (PARAGUAS): N-agent readiness - registry de agentes/capacidades + runtime sin roles fijos (modelo equipo completo). Diseno capturado en DECISION-0015 + SPEC-0038 (proposed). Implementacion diferida y gateada.",
+            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
             "file": "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
-            "depends_on": [],
+            "linked_decisions": [
+                "DECISION-0015"
+            ],
+            "depends_on": [
+                "TASK-0039"
+            ],
             "relates_to": [
                 "TASK-0036"
             ],
@@ -178,7 +148,7 @@
         {
             "id": "TASK-0039",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -202,7 +172,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Pendiente de revision de Claude. Codex corrigio SubprocessInvoker.from_command con CommandLineToArgvW en Windows y shlex POSIX en otros SO; anadio golden subprocess con separador nativo que commitea 1 turno en verde. No se disparo corrida real sobre repo vivo."
+            "review": "ACEPTADA por Claude contra SPEC-0036 con RATIFICACION ADVERSARIAL (2026-06-06). Fix correcto: SubprocessInvoker.from_command usa CommandLineToArgvW (API Win32 que tokeniza igual que el SO) en Windows + shlex POSIX en otros SO; LocalFree del buffer. Verificado en vivo: split_command de un comando con rutas backslash nativas + comilla con espacios ('C:\\...\\my agent\\agent.py') tokeniza correcto (lo que antes daba WinError 2). Suite: llm 6/6 (incluye golden subprocess nativo end-to-end con 1 commit), loop 5/5, apply 4/4, router 5/5, turn schema 4/4 + semantic 3/3; validador/encoding/neutralidad limpios. Codex aplico handoff-release (claim liberado en in_review). No se disparo corrida real sobre el repo vivo (sigue gateada al operador)."
         }
     ]
 }

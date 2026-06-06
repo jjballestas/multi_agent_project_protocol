@@ -6,17 +6,25 @@ type: analysis
 priority: normal
 created_at: 2026-06-06
 updated_at: 2026-06-06
-depends_on: []
+depends_on: [TASK-0039]
 relates_to: [TASK-0036]
 phase: P2
-spec_id: none
+spec_id: Area_comun/specs/SPEC-0038-n-agent-registry.md
+linked_decisions: [DECISION-0015]
 objective: Analizar y especificar la preparacion N-agent del protocolo para que no dependa de roles fijos architect/implementer ni de nombres Claude/Codex.
 expected_output: Analisis de brechas, propuesta de registry de agentes/capacidades, y specs/tareas para migrar scaffolding, templates, router/runtime y validadores de forma aditiva.
 question_to_resolve: Que contratos deben cambiar para soportar N agentes configurables manteniendo compatibilidad con instancias actuales?
 closure_criterion: Queda una propuesta arquitectonica con tareas implementables y criterios de compatibilidad; no se ejecutan cambios incompatibles sin decision y aprobacion humana.
 ---
 
-# TASK-0038 - N-agent readiness
+# TASK-0038 - N-agent readiness (PARAGUAS)
+
+> Estado: PROPOSED (paraguas). Diseno CAPTURADO en
+> [DECISION-0015](../decisions/DECISION-0015-n-agent-registry-y-capacidades.md) +
+> [SPEC-0038](../specs/SPEC-0038-n-agent-registry.md) (modelo de equipo completo: registry por
+> capacidades + review-by-not-author + QA gate). La descomposicion (sub-tareas a-g) vive en SPEC-0038 y
+> NO esta registrada como tareas todavia. Implementacion **diferida y triple-gateada**: TASK-0039 (hecho)
+> -> aprobacion humana de DECISION-0015 -> OK puntual del operador.
 
 ## Intencion
 Dejar como trabajo futuro la preparacion real para N agentes. El protocolo no debe explicar el trabajo

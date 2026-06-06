@@ -1078,6 +1078,41 @@
             "blocked_by_questions": [],
             "sdd_required": true,
             "review": "ACEPTADA por Claude contra SPEC-0033 (con defecto documentado). Verificacion: prune_state check/apply + umbrales en config (maintenance) + hook pre-commit bloqueante + CI hard-fail + golden 3/3; poda real medida por el medidor: cold-start 20701 -> 8565 tokens (-59%, bajo el warning 15k y el hard-fail 20k). Dogfood: Codex libero el claim al pasar a in_review. DEFECTO: prune_state mueve mensajes a archived/ SIN normalizar el frontmatter status (41 mensajes quedaron en archived/ con status:answered, reintroduciendo el bug de consistencia). Fix enrutado a TASK-0035 (gate + fix prune + normalizacion). El nucleo de la poda (reducir cold-start) es correcto; se acepta y el fix de status-al-mover va en 0035."
+        },
+        {
+            "id": "TASK-0035",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Gate mailbox status<->carpeta + fix prune (status al mover) + normalizar 41 (DECISION-0013, SPEC-0034)",
+            "spec_id": "Area_comun/specs/SPEC-0034-mailbox-status-folder-gate.md",
+            "file": "Area_comun/tasks/TASK-0035-codex-mailbox-status-folder-gate.md",
+            "depends_on": [
+                "TASK-0034"
+            ],
+            "relates_to": [
+                "TASK-0021",
+                "TASK-0033"
+            ],
+            "relevant_files": [
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/prune_state.py",
+                "examples/mailbox_status_cases/"
+            ],
+            "deliverables": [
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "examples/mailbox_status_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0035-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude contra SPEC-0034 con RATIFICACION ADVERSARIAL. (1) Plante un MSG en archived/ con status:answered => validador exit 1 con error preciso (no warn); al quitarlo, exit 0. (2) Verifique el fix de raiz: prune_state llama set_mailbox_status(path,'archived') ANTES de mover => no reintroduce mismatches. (3) Golden mailbox_status_cases 5/5 (incluye prune->archived con status correcto), prune 3/3, handoff_release 2/2, encoding limpio, neutralidad limpia, validador valid, repo real 0 mismatches. Paridad .ps1 atestiguada por Codex (commit dd85ed5; deny-rule PowerShell en sesion arquitecto). El bug que el operador detecto queda CERRADO DE RAIZ (fix en prune) + BLINDADO (gate hard-fail en CI): no puede recurrir. Codex aplico handoff-release."
         }
     ]
 }

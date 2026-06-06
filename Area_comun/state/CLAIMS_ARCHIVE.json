@@ -1851,6 +1851,68 @@
             "updated_at": "2026-06-06",
             "expires_at": "2026-06-07",
             "notes": "Liberado: registrados TASK-0037 y TASK-0038 como trabajos futuros proposed; FYI de aceptacion TASK-0036 archivado."
+        },
+        {
+            "claim_id": "CLAIM-20260606-DECISION-0015-design-claude",
+            "task_id": "TASK-0038",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md",
+                "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+                "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0038",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: capturado el diseno N-agente (equipo completo) como DECISION-0015 + SPEC-0038 proposed y enlazada TASK-0038 (paraguas, sigue proposed). Implementacion diferida y gateada (TASK-0039 -> aprobacion humana DECISION-0015 -> OK operador). Sin codigo."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0039-accept-claude",
+            "task_id": "TASK-0039",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0039",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0039",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0039-codex-subprocess-invoker-windows-safe.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0039-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Codex-to-Claude-task0039-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0039-accepted.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado: ratificacion adversarial de TASK-0039 (fix Windows split_command verificado: backslash+comillas con espacios tokeniza correcto; suite verde) + flip a done + cierre de mailbox."
+        },
+        {
+            "claim_id": "CLAIM-20260606-TASK-0039-codex",
+            "task_id": "TASK-0039",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0039",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0039",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0039-codex-subprocess-invoker-windows-safe.md",
+                "runtime/adapters/llm_adapter.py",
+                "examples/llm_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0039-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0039-ready.md",
+                "Area_comun/mailbox/answered/MSG-20260606-Claude-to-Codex-task0039-ready.md",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-task0039-in-review.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Liberado al pasar TASK-0039 a in_review. Corregido SubprocessInvoker.from_command con parser nativo Windows y golden subprocess cross-platform. No se disparo corrida real sobre repo vivo."
         }
     ]
 }
