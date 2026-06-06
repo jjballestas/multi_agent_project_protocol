@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0014
 title: Mantenimiento de estado sistematico (poda por umbral medido)
-status: proposed
+status: accepted
 date: 2026-06-06
-ratified_at: null
+ratified_at: 2026-06-06
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
@@ -13,9 +13,9 @@ phase: P2
 
 # DECISION-0014 - Mantenimiento de estado sistematico (poda por umbral medido)
 
-> Estado: PROPOSED. Nucleo decidido por el operador (umbral medido); la seccion de implementacion se
-> finaliza con el aporte de Codex (MSG-20260606-Claude-to-Codex-poda-sistematica-diseno) y entonces pasa
-> a accepted + se deriva la TASK.
+> Estado: ACCEPTED (2026-06-06). Nucleo decidido por el operador (umbral medido); implementacion
+> convergida con el aporte de Codex (MSG-20260606-Claude-to-Codex-poda-sistematica-diseno). Se deriva
+> SPEC-0033 + TASK-0034 (despues de TASK-0033).
 
 ## Contexto
 La poda (archivar done/released + barrer mailbox viejo, DECISION-0008/TASK-0024) baja el cold-start pero
@@ -40,10 +40,24 @@ Descartado como UNICO disparador: "podar antes de cada commit" (sin commit no ha
 --no-verify; churnea archives; re-stagea dentro del commit). Se conserva el hook como un disparador mas,
 no como el nucleo.
 
-## Pendiente (input de Codex, luego accepted)
-Factibilidad del hook que poda+re-stagea vs el que solo bloquea; donde cablear el umbral (medidor,
-validador, o `prune --check`); backstop CI vs scheduled vs esperar runtime. Con eso: status -> accepted +
-SPEC + TASK (bajo DECISION-0006 robustez + DECISION-0008 eficiencia).
+## Implementacion (convergida con Codex)
+- **Separar diagnostico de mutacion:** `measure_context_cost.py` mide (read-only); `prune_state.py`
+  actua. `prune_state --check` es read-only, determinista, exit 1 con reporte corto cuando hay poda due;
+  `prune_state --apply` archiva (idempotente, archive != delete, ventana reciente).
+- **Umbral en config** (`protocol.config(.template).json`, bloque `token_cost`/`maintenance`):
+  `context_budget`, `done_ratio`, `released_ratio`, `recent_window` (dias/items).
+- **Pre-commit hook = BLOQUEAR con aviso**, NO podar+re-stagear (auto-mutar el commit es fragil, mezcla
+  feature con mantenimiento y crea churn). Mensaje: "poda due; corre `python scripts/prune_state.py
+  --apply && git add Area_comun/state`". `--fix` manual opcional, nunca automatico en el hook.
+- **CI backstop:** corre `prune_state --check` y **falla sobre umbral duro**. Scheduled semanal opcional
+  solo lectura (sin escribir al repo salvo bot con credenciales claras).
+- **Runtime maintenance turn (M2):** cuando el medidor pasa budget, el loop autonomo genera un turno de
+  mantenimiento. Evolucion, no primer mecanismo (depende del runtime + permisos de escritura).
+- **Umbrales sugeridos (configurables):** warning `cold_start_tokens >= 15000` o `done_ratio >= 70` o
+  `released_ratio >= 80`; hard-fail CI `cold_start_tokens >= 20000` o `done_ratio >= 85` o
+  `released_ratio >= 90`. El reporte dice que comando aplicar y cuanto se espera recuperar.
+- **Deriva:** SPEC-0033 + TASK-0034 bajo DECISION-0006 (robustez) + DECISION-0008 (eficiencia), despues
+  de TASK-0033.
 
 ## Versionado y neutralidad (DECISION-0001)
 Tooling + proceso, aditivo => MINOR. Vive en `scripts/`/CI/hooks; neutral.
