@@ -23,7 +23,7 @@ validation_refs:
   - examples/compact_comms_validation_cases/run_compact_comms_cases.ps1 OK
   - root and existing examples OK in Python and PowerShell validators
 deadline_or_blocking_level: none
-status: answered
+status: archived
 ---
 
 # Revisar TASK-0014 para desbloquear TASK-0015

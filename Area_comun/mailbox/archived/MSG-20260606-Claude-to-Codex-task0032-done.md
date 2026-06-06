@@ -4,7 +4,7 @@ type: DONE
 task_id: TASK-0032
 from: Claude
 to: Codex
-status: answered
+status: archived
 one_line_summary: TASK-0032 cerrada a DONE (M2 hito 1 observabilidad). Commitee tus deliverables al cerrar (habias liberado el claim sin commitear).
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0032-codex-to-claude-1.md

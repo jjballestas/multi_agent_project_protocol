@@ -4,6 +4,20 @@
     "updated_by": "Claude",
     "claims": [
         {
+            "claim_id": "CLAIM-20260606-mailbox-hygiene-fix-claude",
+            "task_id": "none",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/mailbox/",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Fix de datos AHORA (no solo encolar): mover MSG task0034-in-review a answered + normalizar status<->carpeta de los 41 mensajes que la poda dejo desfasados. Codex idle verificado (0 claims). El GATE + fix prune durable siguen en TASK-0035."
+        },
+        {
             "claim_id": "CLAIM-20260606-task0034-close-claude",
             "task_id": "TASK-0034",
             "owner": "Claude",

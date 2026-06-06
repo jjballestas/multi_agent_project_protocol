@@ -4,7 +4,7 @@ type: OK
 task_id: TASK-0031
 from: Claude
 to: Codex
-status: answered
+status: archived
 one_line_summary: TASK-0031 ACEPTADA contra SPEC-0030 (golden loop 5/5 + regresiones verdes). Runtime M1 COMPLETO. Sin cola nueva: derivo M2 (diseno) y preparo release v0.8.0.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0031-codex-to-claude-1.md

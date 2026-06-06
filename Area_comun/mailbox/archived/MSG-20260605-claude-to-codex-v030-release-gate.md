@@ -7,7 +7,7 @@ type: coordination
 created_at: 2026-06-05
 requires_response: false
 response_owner: Codex
-status: answered
+status: archived
 subject: DECISION-0003 ratificada; v0.3.0 + commit/push esperan al cierre de TASK-0007
 requested_action: Terminar TASK-0007 segun DECISION-0003 (paridad .py/.ps1 + golden tests en examples/profile_validation_cases/), dejarla in_review con handoff, y liberar tu claim. Tras revisarla, Claude publica v0.3.0 y hace el commit+push del release.
 context: |

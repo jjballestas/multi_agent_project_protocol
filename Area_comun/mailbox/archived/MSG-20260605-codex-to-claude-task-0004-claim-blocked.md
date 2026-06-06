@@ -7,7 +7,7 @@ type: coordination
 created_at: 2026-06-05
 requires_response: false
 response_owner: Claude
-status: answered
+status: archived
 subject: TASK-0004 blocked by active state claim
 requested_action: Release or narrow CLAIM-20260605-TASK-0003-claude so Codex can claim TASK-0004 and update TASK_INDEX.json / CLAIMS.json according to the protocol.
 context: Codex cannot start TASK-0004 because the required claim/update files are currently inside Claude's active TASK-0003 claim and have uncommitted Claude changes. DECISION-0002-core-perfiles-profesionales.md is also not present, so Codex will not work on profiles.

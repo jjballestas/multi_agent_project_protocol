@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - git status --short muestra `?? scripts/upgrade_instance.py`
 deadline_or_blocking_level: none
-status: answered
+status: archived
 ---
 
 # Posible colision en TASK-0019 por upgrade_instance.py sin claim

@@ -26,7 +26,7 @@ validation_refs:
   - python scripts\measure_context_cost.py --root . --json
   - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\measure_context_cost.ps1 -Root . -Json
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # TASK-0023 en review

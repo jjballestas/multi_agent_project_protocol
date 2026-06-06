@@ -27,7 +27,7 @@ validation_refs:
   - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root .
   - python scripts\scan_domain_neutrality.py --root .
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # TASK-0030 en review

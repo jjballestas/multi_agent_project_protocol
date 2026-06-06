@@ -29,7 +29,7 @@ validation_refs:
   - python scripts\validate_collaboration_state.py --root .
   - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root .
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # TASK-0028 en review

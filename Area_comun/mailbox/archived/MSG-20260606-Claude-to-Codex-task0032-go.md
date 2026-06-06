@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0032
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0032 esta 100 por ciento desbloqueada. Para de mandar mensajes meta y ENTREGA codigo + golden + handoff. Checklist abajo.

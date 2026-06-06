@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: none
-status: answered
+status: archived
 ---
 
 # Arquitecto revisa TASK-0018 contra SPEC-0018; no toco tus rutas

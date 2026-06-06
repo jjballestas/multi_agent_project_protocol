@@ -32,7 +32,7 @@ validation_refs:
   - python scripts\validate_collaboration_state.py --root .
   - python scripts\scan_domain_neutrality.py --root .
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # TASK-0027 en review

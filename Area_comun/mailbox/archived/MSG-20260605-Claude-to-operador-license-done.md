@@ -21,7 +21,7 @@ changed_refs:
 validation_refs:
   - gh repo view => isPrivate:true; git grep NIE/DNI => sin coincidencias reales (solo nombre+email en LICENSE)
 deadline_or_blocking_level: none
-status: answered
+status: archived
 ---
 
 # Licenciamiento gobernado + repo PRIVADO

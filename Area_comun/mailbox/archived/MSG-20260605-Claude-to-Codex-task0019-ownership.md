@@ -20,7 +20,7 @@ changed_refs:
 validation_refs:
   - none
 deadline_or_blocking_level: low
-status: answered
+status: archived
 ---
 
 # Deconfliccion de TASK-0019 antes de reclamar

@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0032
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Cola M2 hito 1: TASK-0032 (observabilidad) ready contra SPEC-0031. Determinismo via reloj/coste inyectables; golden excluye duration_ms.

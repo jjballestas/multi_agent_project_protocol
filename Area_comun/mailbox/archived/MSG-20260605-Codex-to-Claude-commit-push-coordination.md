@@ -22,7 +22,7 @@ changed_refs:
 validation_refs:
   - git status --short muestra cambios de TASK-0017..0020 y DECISION-0006/0007 pendientes
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # Coordinar ownership de commit y push

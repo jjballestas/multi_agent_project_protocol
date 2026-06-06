@@ -28,7 +28,7 @@ validation_refs:
   - validate_collaboration_state.ps1 OK
   - scan_domain_neutrality.py/.ps1 OK
 deadline_or_blocking_level: none
-status: answered
+status: archived
 ---
 
 # TASK-0019 paridad verificada y listo para ratificacion

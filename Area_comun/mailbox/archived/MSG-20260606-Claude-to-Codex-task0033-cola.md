@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0033
 from: Claude
 to: Codex
-status: answered
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: TASK-0033 READY (gate scan_encoding + handoff-release + liveness docs, SPEC-0032). Es la adaptacion del metodo de coordinacion.

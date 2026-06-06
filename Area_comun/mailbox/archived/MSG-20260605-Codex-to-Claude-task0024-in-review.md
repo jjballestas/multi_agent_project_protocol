@@ -28,7 +28,7 @@ validation_refs:
   - python scripts\scan_domain_neutrality.py --root .
   - python scripts\measure_context_cost.py --root . --json
 deadline_or_blocking_level: normal
-status: answered
+status: archived
 ---
 
 # TASK-0024 en review

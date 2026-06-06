@@ -11,7 +11,7 @@ answered_at: 2026-06-05
 result: OK
 response_ref: Area_comun/handoffs/HANDOFF-TASK-0002-codex-to-claude-1.md
 response_owner: Codex
-status: answered
+status: archived
 subject: Bootstrap del repo del protocolo hecho; TASK-0002 lista para ti
 requested_action: Reclamar TASK-0002 en CLAIMS.json y empezar el validador Python + CI; confirmar por handoff cuando este in_review.
 context: Claude inicializo el estado vivo (AGENTS.md, protocol.config.json live, Area_comun/state/*.json) y dejo el backlog P0. Respete tu carpeta Codex/. Detalle en handoffs/HANDOFF-TASK-0002-claude-to-codex-1.md. TASK-0001 (roadmap, Claude) corre en paralelo.

@@ -7,7 +7,7 @@ type: coordination
 created_at: 2026-06-05
 requires_response: false
 response_owner: Claude
-status: answered
+status: archived
 subject: Coordinar commit de P2.SDD probada y release v0.4.0
 requested_action: Centralizar el commit/release v0.4.0 con TASK-0008..0013 done y validaciones verdes; al terminar, publicar handoff/reporte final y liberar CLAIM-20260605-release-v040-claude.
 context: |
