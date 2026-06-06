@@ -115,36 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0053",
-            "owner": "Codex",
-            "status": "done",
-            "type": "documentation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Capa A.7 (criterio 17 SPEC-0038): SemVer del turn_schema - declarar version explicita del runtime/turn_schema.json + documentar la politica de versionado del schema (cuando MAJOR/MINOR/PATCH segun consumidores reales) + justificar que los cambios aditivos de Fases 1-4 fueron MINOR; ultimo item de Capa A",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0053-codex-semver-turn-schema.md",
-            "depends_on": [
-                "TASK-0043"
-            ],
-            "relates_to": [
-                "TASK-0044"
-            ],
-            "relevant_files": [
-                "runtime/turn_schema.json",
-                "Area_comun/protocol/",
-                "examples/runtime_turn_cases/"
-            ],
-            "deliverables": [
-                "runtime/turn_schema.json",
-                "Area_comun/protocol/SCHEMA_VERSIONING.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0053-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": false,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-06). Corri yo la suite (105/105 incl. turn schema 5/5 + semantic 5/5) + validador/encoding/neutralidad py. Verificado: schema_version=1.1.0 se anade como METADATA del documento JSON Schema (confirmado: NO esta en properties ni en required) => NO afecta la validacion de los reportes de turno; cambio aditivo puro. SCHEMA_VERSIONING.md documenta la politica (PATCH no contractual; MINOR aditivo/relajacion; MAJOR quitar-renombrar-requerir-endurecer-cambiar-semantica) segun consumidores reales (turn_validate/apply/adapters/golden) + justifica Fases 1-4=MINOR coherente con DECISION-0001. Neutralidad limpia. Release ATOMICO aplicado por Codex. Cubre el criterio 17 de SPEC-0038. CON A.7 LA CAPA A QUEDA COMPLETA (A.1/A.2/A.3/A.4/A.5/A.6/A.7); test plan global 15.3-15.5 cubierto. Flip por arquitecto; reporte al operador para decidir siguiente paso."
-        },
-        {
             "id": "TASK-0054",
             "owner": "Codex",
             "status": "done",
@@ -186,7 +156,7 @@
         {
             "id": "TASK-0055",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -216,7 +186,8 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "En progreso por Codex 2026-06-07. Encolada por Claude (arquitecto) tras cerrar TASK-0054. Fix de raiz de un FOLLOW-UP de higiene rastreado desde Capa A (el prune dejo un mensaje en archived/ con mismatch status<->carpeta, corregido a mano). Independiente de Fase 5. Aditivo, paridad py/.ps1; SIN DECISION nueva. Release atomico esperado (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_prune_cases 4/4 (+ paridad ps1 cuando pwsh disponible) + prune_state_cases 3/3 (sin regresion) + validador/encoding/neutralidad py. Fix genuino en scripts/prune_state.py (+ paridad .ps1): requires_unresolved_response (requires_response truthy + status no resuelto) devuelve esos mensajes a open/ con status reconciliado en vez de archivarlos; el resto se archiva con status:archived garantizado. CIERRA el FOLLOW-UP de Capa A (el prune ya no puede dejar un mismatch status<->carpeta ni archivar conversaciones abiertas). No cambia umbrales DECISION-0014. Flip por arquitecto.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

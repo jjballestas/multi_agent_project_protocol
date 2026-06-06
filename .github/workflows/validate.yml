@@ -52,6 +52,9 @@ jobs:
       - name: Check systematic state pruning
         run: python scripts/prune_state.py --root . --check
 
+      - name: Run runtime prune cases
+        run: python examples/runtime_prune_cases/run_runtime_prune_cases.py
+
       - name: Run SDD validation cases
         shell: pwsh
         run: ./examples/sdd_validation_cases/run_sdd_cases.ps1

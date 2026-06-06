@@ -6,6 +6,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+# Parity note: both -Check and -Apply delegate to the Python implementation,
+# so mailbox pruning semantics stay identical across entrypoints.
 if (($Check -and $Apply) -or (-not $Check -and -not $Apply)) {
     Write-Error "Use exactly one of -Check or -Apply."
     exit 2

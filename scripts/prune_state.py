@@ -31,6 +31,7 @@ DEFAULT_CONFIG = {
 
 
 STATUS_FIELD_RE = re.compile(r"(?m)^status:\s*.*$")
+FRONTMATTER_FIELD_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$")
 
 
 @dataclass(frozen=True)
@@ -126,11 +127,22 @@ def prune_project_state(root: Path, keep_recent: int) -> int:
 
 def prune_mailbox(root: Path, keep_recent: int) -> int:
     mailbox = root / "Area_comun/mailbox"
+    open_dir = mailbox / "open"
     answered = mailbox / "answered"
     archived = mailbox / "archived"
+    open_dir.mkdir(parents=True, exist_ok=True)
     archived.mkdir(parents=True, exist_ok=True)
     messages = sorted(answered.glob("MSG-*.md"), key=lambda path: path.name)
-    move = messages[:-keep_recent] if keep_recent > 0 else messages
+    eligible: list[Path] = []
+    for path in messages:
+        if requires_unresolved_response(path):
+            set_mailbox_status(path, "open")
+            target = open_dir / path.name
+            if not target.exists():
+                shutil.move(str(path), str(target))
+            continue
+        eligible.append(path)
+    move = eligible[:-keep_recent] if keep_recent > 0 else eligible
     for path in move:
         target = archived / path.name
         if not target.exists():
@@ -150,6 +162,34 @@ def set_mailbox_status(path: Path, status: str) -> None:
         updated = f"---\n{replacement}\n---\n\n{content}"
     if updated != content:
         path.write_text(updated, encoding="utf-8")
+
+
+def markdown_fields(path: Path) -> dict[str, str]:
+    content = path.read_text(encoding="utf-8-sig")
+    lines = content.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+    fields: dict[str, str] = {}
+    for line in lines[1:]:
+        if line.strip() == "---":
+            break
+        match = FRONTMATTER_FIELD_RE.match(line)
+        if match:
+            key, value = match.groups()
+            fields[key.strip().lower()] = value.strip().strip("\"'")
+    return fields
+
+
+def is_truthy(value: str | None) -> bool:
+    return str(value or "").strip().lower() in {"true", "yes", "1"}
+
+
+def requires_unresolved_response(path: Path) -> bool:
+    fields = markdown_fields(path)
+    if not is_truthy(fields.get("requires_response")):
+        return False
+    status = str(fields.get("status") or "").strip().lower()
+    return status not in {"answered", "archived", "closed", "resolved", "done"}
 
 
 def apply_prune(root: Path) -> dict[str, Any]:

@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0055
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0055 = fix de higiene del prune (SPEC-0041, FOLLOW-UP de Capa A): exime requires_response sin resolver + reconcilia status:archived al mover. Aditivo, paridad py/.ps1.
