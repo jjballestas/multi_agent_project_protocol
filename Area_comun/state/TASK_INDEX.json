@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -168,7 +168,7 @@
         {
             "id": "TASK-0071",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -197,7 +197,48 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.1 SBOM determinista implementado con scripts/generate_sbom.py + wrapper generate_sbom.ps1 delegado, JSON canonico ASCII/LF/sin BOM, version axes protocol/runtime/schema/profile, inventario ruta posix+sha256+tamano, exclusiones runtime/state runtime/runs .git __pycache__ personal/mailbox/state vivo; golden examples/sbom_cases (arbol fijo, determinismo byte-identico, salida a archivo, cambio de hash, paridad ps1 si disponible) + CI. Gates verdes; validator emite drift WARNING esperado por modo sombra.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 33/33 (nuevo sbom_cases) + validador/encoding/neutralidad verdes. scripts/generate_sbom.py (+ .ps1 delegado) genera SBOM canonico DETERMINISTA (2 corridas byte-identicas), inventario ruta+sha256+tamano (file_count 690), 4 ejes de version (protocol 1.0.0/runtime 0.10.0/schema turn 1.2.0/perfil dotnet_enterprise 0.1.0) + commit+timestamp PROVISTOS; excluye el runtime/state|runs|.git|pycache reales (las 5 coincidencias del grep son benignas: 4 el campo excluded_globs y 1 un fixture examples/.../runtime_state_exempt). Neutral (lista rutas/hashes, no contenido), sin secretos, sin firma (F7.4). Flip por arquitecto. CIERRA F7.1.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0072",
+            "owner": "Codex",
+            "status": "in_progress",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Flujo de coordinacion por INTENTS (SPEC-0058): runtime/submit_intent.py (+ .ps1) write-path del estado de protocolo - una transicion atomica (task_status/task_upsert/claim/decision) validada por la capa de seguridad (G1/tool-policy) + append intent.applied + materialize atomico => has_drift False; determinista (timestamp/commit provistos), idempotente, off-compatible; golden examples/intent_flow_cases. KEYSTONE de 3.b.2 (escritor unico): habilita encender enforce+authoritative sin romper el lazo.",
+            "spec_id": "Area_comun/specs/SPEC-0058-intent-coordination-flow.md",
+            "file": "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0015"
+            ],
+            "depends_on": [
+                "TASK-0066",
+                "TASK-0067",
+                "TASK-0068",
+                "TASK-0069"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/submit_intent.py",
+                "runtime/apply.py",
+                "runtime/protocol_replay.py",
+                "examples/intent_flow_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/submit_intent.py",
+                "examples/intent_flow_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0072-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "RECLAMADA por Codex (2026-06-07): implementando write-path por intents segun SPEC-0058. GO consumido; TASK-0071 accepted consumido. Modo sombra: drift warning esperado/benigno.",
             "updated_at": "2026-06-07"
         }
     ]

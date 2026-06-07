@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0071
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0071 entregada a in_review: SBOM determinista del paquete + wrapper ps1 + golden + CI.

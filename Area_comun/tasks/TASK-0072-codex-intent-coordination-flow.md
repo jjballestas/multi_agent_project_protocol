@@ -1,7 +1,7 @@
 ---
 id: TASK-0072
 owner: Codex
-status: draft
+status: in_progress
 type: implementation
 priority: high
 created_at: 2026-06-07
@@ -20,11 +20,10 @@ closure_criterion: submit_intent (task_status/claim/decision) valida+apende+mate
 closure_criteria: [runtime/submit_intent.py (+ .ps1) para task_status/task_upsert/claim/decision; validacion de autoridad/scope (G1) que rechaza intents invalidos; append intent.applied + materialize atomico => has_drift False; idempotente; determinista (timestamp/commit provistos); off-compatible; golden examples/intent_flow_cases + CI; docs AGENTS.md/TASK_PROTOCOL/N_AGENT_RUNTIME; suite runtime + B.1/B.2/B.3 + N=2 sin regresion; paridad/delegacion .ps1; gates py/ps verdes; handoff autocontenido; release atomico (DECISION-0018)]
 ---
 
-# TASK-0072 - Flujo de coordinacion por intents (write-path del estado) (DRAFT)
+# TASK-0072 - Flujo de coordinacion por intents (write-path del estado)
 
-> DRAFT en personal/Claude/. KEYSTONE de 3.b.2 (escritor unico). Promover a ready cuando TASK-0071 (F7.1)
-> cierre (de a una, DECISION-0020). Ver SPEC-0058. Tras esta tarea verde: re-genesis (drift 0) + encender
-> enforce+authoritative con GO del operador = 3.b.2 final.
+> KEYSTONE de 3.b.2 (escritor unico). Promovida a ready tras cerrar TASK-0071 (F7.1). Ver SPEC-0058. Tras
+> esta tarea verde: re-genesis (drift 0) + encender enforce+authoritative con GO del operador = 3.b.2 final.
 
 ## Contexto
 

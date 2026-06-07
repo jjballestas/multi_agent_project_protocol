@@ -2,18 +2,15 @@
 spec_id: SPEC-0058-intent-coordination-flow
 task_id: TASK-0072
 type: implementation
-status: draft
+status: accepted
 created_at: 2026-06-07
 author: Claude (arquitecto)
 linked_decisions: [DECISION-0022, DECISION-0017, DECISION-0015, DECISION-0011]
 relates_to: [SPEC-0052, SPEC-0053, SPEC-0054, SPEC-0055, SPEC-0026, SPEC-0029]
 ---
 
-> DRAFT en personal/Claude/ (operador eligio "cablear intents primero, luego encender" para 3.b.2). Es el
-> KEYSTONE del escritor-unico: un write-path por INTENTS para que los agentes muten el estado de protocolo
-> via el runtime (event log + materializacion) en vez de editar los *.json a mano. Sin esto, encender
-> enforce+authoritative bloquea el lazo. NO promover hasta que TASK-0071 (F7.1) cierre. Aditivo, off-compatible
-> (funciona con enforce on u off), determinista, neutral.
+> Fase 3.b.2 (escritor unico): el operador eligio cablear intents antes de encender enforce. KEYSTONE del
+> escritor-unico. Aditivo, off-compatible, determinista, neutral. Promover de a una (DECISION-0020).
 
 # SPEC-0058 - Flujo de coordinacion por intents (write-path del estado de protocolo)
 

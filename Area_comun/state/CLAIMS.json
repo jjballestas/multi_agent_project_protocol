@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260607-TASK-0070-codex",
@@ -108,6 +108,78 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0071 entregada a in_review. Implementado F7.1 SBOM determinista del paquete: generate_sbom.py + wrapper ps1 delegado + golden examples/sbom_cases + CI. Gates verdes; validator con drift WARNING esperado por modo sombra. Handoff: Area_comun/handoffs/HANDOFF-TASK-0071-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0072-ledger-codex",
+            "task_id": "TASK-0072",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0072-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0072-ledger.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras limpiar anomalia de carrera: SPEC-0058/TASK-0072 aparecieron antes de que el ledger/GO fueran visibles; Claude regularizo despues. Aviso obsoleto archivado para evitar ruido."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0071-close-claude",
+            "task_id": "TASK-0071",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0071-codex-faseF7.1-sbom.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0071-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0071-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0071-accepted.md",
+                "Area_comun/specs/SPEC-0058-intent-coordination-flow.md",
+                "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0072-GO-intent-flow.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0071 (F7.1 SBOM) a done + encolado de TASK-0072 (intent-flow). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0072-codex",
+            "task_id": "TASK-0072",
+            "owner": "Codex",
+            "status": "active",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0072",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0072",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/specs/SPEC-0058-intent-coordination-flow.md",
+                "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0071-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0071-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0072-GO-intent-flow.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0072-GO-intent-flow.md",
+                "runtime/submit_intent.py",
+                "runtime/submit_intent.ps1",
+                "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "runtime/turn_schema.json",
+                "examples/intent_flow_cases/",
+                ".github/workflows/validate.yml",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim activo: TASK-0072 flujo de coordinacion por intents. Consumire GO y accepted de TASK-0071, implementare submit_intent + golden + docs/CI. Modo sombra: drift warning esperado/benigno."
         }
     ]
 }
