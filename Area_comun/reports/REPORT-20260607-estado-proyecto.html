@@ -75,11 +75,11 @@
   <h1>Estado del proyecto</h1>
   <div class="sub">multi_agent_project_protocol &mdash; protocolo multiagente generico, dominio-neutral (dogfooding)</div>
   <div class="meta">
-    <span class="chip">Generado <b>2026-06-07</b></span>
+    <span class="chip">Generado <b>2026-06-07</b> (actualizado)</span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Rama <b>main</b></span>
-    <span class="chip">HEAD <b>d784937</b></span>
-    <span class="chip">Fase <b>P2 (adopcion y expansion)</b></span>
+    <span class="chip">HEAD <b>2848968</b></span>
+    <span class="chip">Fase <b>P2 &mdash; post-v1.0 (Fase B en marcha)</b></span>
   </div>
 </header>
 
@@ -88,15 +88,16 @@
   <div class="sub" style="margin-top:6px">
     La metodologia esta consolidada y soportada como <b>producto distribuible</b>: contrato de coordinacion,
     motor runtime N-agente, capa de seguridad, wrapper LLM real y track de adopcion. Tag <code>v1.0.0</code>,
-    <code>protocol_version 1.0.0</code>, golden 28/28 verde. El trabajo posterior a v1.0 ya arranco.
+    <code>protocol_version 1.0.0</code>, golden 29/29 verde. El trabajo posterior a v1.0 esta en marcha:
+    Fase B (writer-vivo del estado) avanzando rebanada a rebanada.
   </div>
 </div>
 
 <div class="grid">
   <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
   <div class="card"><div class="n">21</div><div class="l">decisiones de protocolo</div></div>
-  <div class="card"><div class="n">28/28</div><div class="l">golden runners verde</div></div>
-  <div class="card"><div class="n">1</div><div class="l">tarea en curso (TASK-0066, Codex)</div></div>
+  <div class="card"><div class="n">29/29</div><div class="l">golden runners verde</div></div>
+  <div class="card"><div class="n">B.2</div><div class="l">rebanada de Fase B en curso (TASK-0067, Codex)</div></div>
 </div>
 
 <h2>1. Que esta cerrado (v1.0.0)</h2>
@@ -115,10 +116,14 @@
 
 <h2>2. En curso ahora</h2>
 <div class="phase now">
-  <h3><span class="badge b-now">EN CURSO</span> TASK-0066 &mdash; Fase B.1 (Codex)</h3>
-  <p>Primera rebanada de la Fase B. Construye la maquinaria <b>read-only</b> para reconstruir el estado de
-     protocolo desde el event log (replay/materializacion/genesis) y detectar <code>drift</code> en modo
-     aviso. Gateada y byte-equivalente con la funcion apagada; no cambia todavia como se escribe el estado.</p>
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0067 &mdash; Fase B.2 (Codex)</h3>
+  <p>Segunda rebanada de la Fase B. Hace la materializacion <b>opt-in</b>: bajo flags explicitos
+     (<code>event_state.enabled</code> + <code>event_state.materialize</code>) y solo en instancias
+     runtime-tier, el runtime escribe los <code>*.json</code> desde <code>replay(log)</code> (log = fuente de
+     verdad). Doble-gated y byte-equivalente con la funcion apagada; el repo vivo sigue en edicion manual.</p>
+  <p class="why">B.1 (TASK-0066) ya esta <b>DONE</b> y ratificada (maquinaria read-only de replay/drift,
+     golden 6/6). B.3 (drift hard-fail) ya esta <b>disenada</b> como borrador en el area del arquitecto,
+     lista para encolar en cuanto B.2 cierre.</p>
 </div>
 
 <h2>3. Fases que faltan (explicacion breve)</h2>
@@ -138,10 +143,10 @@
      (tareas, claims, decisiones), de modo que el estado se reconstruya por <code>replay(log)</code> de forma
      determinista y auditable. Se hace en 4 rebanadas aditivas para acotar riesgo:</p>
   <ul class="steps">
-    <li class="now"><b>B.1 &mdash; replay/materializacion read-only + drift en aviso</b> (TASK-0066, en curso). Maquinaria que reconstruye y compara, sin cambiar como se escribe. <span class="badge b-now">EN CURSO</span></li>
-    <li class="next"><b>B.2 &mdash; materializacion opt-in</b>: el runtime materializa los <code>*.json</code> desde el log (log = verdad) bajo flag, en instancias runtime-tier.</li>
-    <li class="next"><b>B.3 &mdash; hard-fail</b>: el <code>drift</code> entre el estado vivo y <code>replay(log)</code> pasa de aviso a error duro del validador cuando el runtime es el escritor habitual.</li>
-    <li class="next"><b>B.4 &mdash; migrar/prohibir edicion manual</b>: las transiciones pasan por el runtime; posible cambio incompatible (requiere DECISION + evaluacion SemVer).</li>
+    <li class="done"><b>B.1 &mdash; replay/materializacion read-only + drift en aviso</b> (TASK-0066). Maquinaria que reconstruye y compara, sin cambiar como se escribe. <span class="badge b-ok">DONE</span></li>
+    <li class="now"><b>B.2 &mdash; materializacion opt-in</b> (TASK-0067): el runtime materializa los <code>*.json</code> desde el log (log = verdad) bajo flag, en instancias runtime-tier. <span class="badge b-now">EN CURSO</span></li>
+    <li class="next"><b>B.3 &mdash; hard-fail</b> (TASK-0068, disenada): el <code>drift</code> entre el estado vivo y <code>replay(log)</code> pasa de aviso a error duro del validador (y aborta el commit) cuando el runtime es el escritor habitual (<code>event_state.enforce</code>). <span class="badge b-next">DISENADA</span></li>
+    <li class="next"><b>B.4 &mdash; migrar/prohibir edicion manual</b>: las transiciones pasan por el runtime; posible cambio incompatible (requiere DECISION + evaluacion SemVer + aprobacion humana).</li>
   </ul>
   <div class="why">Por que: cierra los criterios 11-12 de SPEC-0038 e invariantes I5/I6 sobre el estado vivo;
      es el principal pendiente del paraguas N-agente (TASK-0038). Las demas brechas de ese paraguas (golden
@@ -182,7 +187,7 @@
 
 <footer>
   Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
-  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD d784937 (post-v1.0.0).
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD 2848968 (post-v1.0.0, Fase B.2 en curso).
   Las fases gateadas requieren aprobacion explicita del operador humano antes de arrancar.
 </footer>
 
