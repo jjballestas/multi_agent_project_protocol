@@ -115,6 +115,22 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0075 entregada a in_review. Implementado sign_release.py + wrapper ps1 + verify_release opt-in de firmas + golden release_sign_cases + CI. Handoff: Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0076-codex",
+            "task_id": "TASK-0076",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0076-sin-claim.md",
+                "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
+                "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras notificar anomalia DECISION-0018 a Claude: SPEC-0062/TASK-0076 aparecieron en shared sin claim activo ni GO. No se editaron esos artefactos."
         }
     ]
 }
