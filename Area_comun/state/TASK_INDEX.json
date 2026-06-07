@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,56 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0069",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase B.4 (SPEC-0055, DECISION-0022): runtime escritor autoritativo + genesis POR REFERENCIA verificable (snapshot content-addressed runtime/state/snapshots/<hash>.json fuera del prompt + evento con snapshot_ref hash/commit/actor/timestamp/schema_version; replay verifica hash y materializa bajo demanda) + flag event_state.authoritative (live+template default false, solo runtime-tier) + prohibicion de edicion manual reusando hard-gate B.3 + migracion asistida + docs + plan de rollback + golden runtime_protocol_genesis_ref_cases. ENTREGAR APAGADA (no encender en vivo). Ultima de Fase B.",
-            "spec_id": "Area_comun/specs/SPEC-0055-faseB4-migrar-edicion-manual.md",
-            "file": "Area_comun/tasks/TASK-0069-codex-faseB4-migrar-edicion-manual.md",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017",
-                "DECISION-0019",
-                "DECISION-0014"
-            ],
-            "depends_on": [
-                "TASK-0066",
-                "TASK-0067",
-                "TASK-0068"
-            ],
-            "relates_to": [
-                "TASK-0038",
-                "TASK-0048"
-            ],
-            "relevant_files": [
-                "runtime/protocol_replay.py",
-                "runtime/apply.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "README_INSTANCIACION.md",
-                "Area_comun/protocol/N_AGENT_RUNTIME.md",
-                "AGENTS.md",
-                "AGENTS.template.md",
-                "Area_comun/protocol/TASK_PROTOCOL.md",
-                "examples/runtime_protocol_genesis_ref_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/protocol_replay.py",
-                "examples/runtime_protocol_genesis_ref_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0069-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 (nuevo runtime_protocol_genesis_ref_cases) + validador/encoding/neutralidad/prune py verdes. GENESIS POR REFERENCIA conforme a DECISION-0022/restriccion del operador: write_genesis_reference exige actor_id + timestamp provisto, escribe snapshot content-addressed en runtime/state/snapshots/<hash>.json y emite protocol.genesis con payload SOLO {snapshot_ref} (sin blob); load_snapshot_ref verifica hash sha256 + existencia + schema_version + contenido antes de hidratar (mismatch/ausente => bloqueo seguro). protocol_authoritative_enabled true solo con enabled+materialize+enforce+authoritative+tier runtime. ENTREGADA APAGADA: flags vivos enabled/materialize/enforce/authoritative=false => byte-equivalente, vivo intacto. Docs propagados (AGENTS.md/.template sec.7, TASK_PROTOCOL, N_AGENT_RUNTIME, README_INSTANCIACION). Scope respetado: no activa en vivo, no retira flujo manual, no toca turn schema, coordination-tier intacto. Flip por arquitecto. >>> FASE B COMPLETA (B.1+B.2+B.3+B.4): writer-vivo construido pero APAGADO. <<< Activar en vivo = GO final del operador con validacion round-trip + rollback.",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0070",
@@ -203,7 +153,7 @@
         {
             "id": "TASK-0072",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -238,7 +188,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "RECLAMADA por Codex (2026-06-07): implementando write-path por intents segun SPEC-0058. GO consumido; TASK-0071 accepted consumido. Modo sombra: drift warning esperado/benigno.",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): runtime/submit_intent.py + wrapper .ps1 implementan write-path por intents para task_status/task_upsert/claim/decision; validan actor/capacidad/claim/scope, idempotencia y timestamp provisto; apenden intent.applied y materializan JSON de estado con rollback, manteniendo status markdown de tarea alineado. Golden examples/intent_flow_cases (9 casos: task_status, claim, decision, rechazo scope, rollback, idempotencia, determinismo, enforce ON hard-fail manual, wrapper ps1) + CI + docs. Gates verdes; drift WARNING esperado por modo sombra.",
             "updated_at": "2026-06-07"
         }
     ]

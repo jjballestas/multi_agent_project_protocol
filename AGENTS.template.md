@@ -124,9 +124,11 @@ The task status must match in two places:
   "ready" GO after the task is recorded); (7) promotes one task at a time with a GO + ETA.
 - Runtime-authoritative mode: only runtime-tier instances with
   `event_state.enabled/materialize/enforce/authoritative:true` treat the runtime as the writer of
-  `Area_comun/state/*.json`. In that mode, transitions go through runtime intents and manual state
-  edits are rejected as drift by the hard-gate. The capability is off by default and should be
-  activated only after a local decision/approval; coordination-tier instances keep manual ledger edits.
+  `Area_comun/state/*.json`. In that mode, transitions go through `runtime/submit_intent.py`
+  (`task_status`, `task_upsert`, `claim`, `decision`) with caller-provided `timestamp`/`commit`, and
+  manual state edits are rejected as drift by the hard-gate. The capability is off by default and
+  should be activated only after a local decision/approval; coordination-tier instances keep manual
+  ledger edits.
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map

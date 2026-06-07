@@ -189,10 +189,14 @@ snapshots son fuente de verdad de la instancia y deben poder commitearse. La neu
 exime `runtime/state/**` porque es estado generado de instancia, no fuente del protocolo; el resto de
 `runtime/**` sigue escaneado.
 
-Una vez activo el modo autoritativo, las transiciones se expresan como intents al runtime. Editar a
-mano `Area_comun/state/*.json` produce drift y el gate de `event_state.enforce` lo rechaza. No hay
-un bloqueo nuevo del sistema de archivos: la prohibicion vive en el contrato, el validador y el
-gate.
+Una vez activo el modo autoritativo, las transiciones se expresan como intents al runtime mediante
+`runtime/submit_intent.py` o su wrapper delegado `runtime/submit_intent.ps1`. Cada llamada somete una
+transicion atomica de tipo `task_status`, `task_upsert`, `claim` o `decision`, con `timestamp` y
+`commit` provistos por el caller. El runtime valida identidad/capacidad, claim activo y scope, rechaza
+intents fuera de autoridad, apende `intent.applied`, materializa `TASK_INDEX.json`, `PROJECT_STATE.json`
+y `CLAIMS.json` desde replay(log), y deja `protocol_state_drift().has_drift == false`. Editar a mano
+`Area_comun/state/*.json` produce drift y el gate de `event_state.enforce` lo rechaza. No hay un
+bloqueo nuevo del sistema de archivos: la prohibicion vive en el contrato, el validador y el gate.
 
 Rollback: apagar `event_state.enforce` y `event_state.authoritative` devuelve el flujo a edicion
 manual. El snapshot content-addressed y el `commit` registrado en el `snapshot_ref` quedan como

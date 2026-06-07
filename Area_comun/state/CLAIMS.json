@@ -1,80 +1,8 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
-        {
-            "claim_id": "CLAIM-20260607-TASK-0070-codex",
-            "task_id": "TASK-0070",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0070",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0070",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0070-codex-neutralidad-exime-runtime-state.md",
-                "Area_comun/specs/SPEC-0056-neutralidad-exime-runtime-state.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0070-GO-neutralidad-runtime-state.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0070-ledger.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-task0070-ledger.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0070-ledger.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "Area_comun/handoffs/",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "scripts/scan_domain_neutrality.ps1",
-                "examples/neutrality_scan_cases/",
-                "Area_comun/protocol/N_AGENT_RUNTIME.md",
-                "README_INSTANCIACION.md",
-                ".gitignore"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0070 entregada a in_review. Implementada exencion minima runtime/state/** en neutralidad vivo/template; golden exento-pasa/fuente-falla con paridad py/ps; scan_domain_neutrality.ps1 corrige archivos de una linea; docs de no gitignore; flags event_state/denylist/turn schema intactos. Handoff: Area_comun/handoffs/HANDOFF-TASK-0070-codex-to-claude-1.md."
-        },
-        {
-            "claim_id": "CLAIM-20260607-task0070-close-claude",
-            "task_id": "TASK-0070",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0070-codex-neutralidad-exime-runtime-state.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0070-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0070-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0070-accepted.md"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0070 (fix neutralidad runtime/state) a done. Liberado en el mismo paso (DECISION-0020)."
-        },
-        {
-            "claim_id": "CLAIM-20260607-activacion-sombra2-claude",
-            "task_id": "TASK-0069",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "protocol.config.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/CLAIMS.json",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json",
-                "runtime/state/snapshots/",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-activacion-sombra-on.md"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Activacion del writer-vivo en MODO SOMBRA (enabled+materialize on, enforce+authoritative off) + genesis de corte por referencia. Aprobado por el operador (3.b), desbloqueado por TASK-0070. No prohibe edicion manual. Liberado en el mismo paso."
-        },
         {
             "claim_id": "CLAIM-20260607-TASK-0071-codex",
             "task_id": "TASK-0071",
@@ -150,7 +78,7 @@
             "claim_id": "CLAIM-20260607-TASK-0072-codex",
             "task_id": "TASK-0072",
             "owner": "Codex",
-            "status": "active",
+            "status": "released",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/TASK_INDEX.json#TASK-0072",
@@ -160,10 +88,13 @@
                 "Area_comun/state/PROJECT_STATE.json#updated_by",
                 "Area_comun/specs/SPEC-0058-intent-coordination-flow.md",
                 "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0072-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0072-in-review.md",
                 "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0071-accepted.md",
                 "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0071-accepted.md",
                 "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0072-GO-intent-flow.md",
                 "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0072-GO-intent-flow.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0072-ledger.md",
                 "runtime/submit_intent.py",
                 "runtime/submit_intent.ps1",
                 "runtime/protocol_replay.py",
@@ -179,7 +110,7 @@
             "started_at": "2026-06-07",
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
-            "notes": "Claim activo: TASK-0072 flujo de coordinacion por intents. Consumire GO y accepted de TASK-0071, implementare submit_intent + golden + docs/CI. Modo sombra: drift warning esperado/benigno."
+            "notes": "Liberado con handoff-release atomico: TASK-0072 entregada a in_review. Implementado submit_intent.py + wrapper ps1 para task_status/task_upsert/claim/decision, validacion actor/capacidad/claim/scope, idempotencia, timestamp provisto, append intent.applied + materializacion con rollback, golden intent_flow + CI + docs. Handoff: Area_comun/handoffs/HANDOFF-TASK-0072-codex-to-claude-1.md."
         }
     ]
 }

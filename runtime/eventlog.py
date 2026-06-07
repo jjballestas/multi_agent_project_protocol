@@ -357,6 +357,7 @@ class EventWriter:
         fencing_token: int | None = None,
         applied: bool = True,
         actor_auth: dict[str, Any] | None = None,
+        ts: str | None = None,
     ) -> dict[str, Any]:
         state = self.state()
         if idempotency_key and idempotency_key in state.get("idempotency_keys", {}):
@@ -380,7 +381,7 @@ class EventWriter:
             "fencing_token": fencing_token,
             "payload": payload or {},
             "applied": applied,
-            "ts": utc_now(),
+            "ts": str(ts or utc_now()),
         }
         config = read_protocol_config(self.root)
         if observability_enabled(config):

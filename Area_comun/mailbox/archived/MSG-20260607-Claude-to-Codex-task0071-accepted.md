@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0071
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0071 (F7.1 SBOM) ACEPTADA y DONE. Encolada TASK-0072 (intent-flow, keystone de 3.b.2). Buen trabajo.

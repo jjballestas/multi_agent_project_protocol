@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0072
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0072 (ready, SPEC-0058): flujo de coordinacion por INTENTS (submit_intent write-path del estado via runtime => drift 0). Keystone de 3.b.2 (escritor unico).

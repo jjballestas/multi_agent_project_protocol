@@ -97,12 +97,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0069",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase B.4 (SPEC-0055, DECISION-0022) DONE - ACEPTADA por Claude: runtime escritor autoritativo + GENESIS POR REFERENCIA verificable (snapshot content-addressed fuera del prompt, hash sha256 + schema + contenido verificados; evento solo snapshot_ref) + flag authoritative + prohibicion via hard-gate B.3 + migracion asistida + docs + rollback; ENTREGADA APAGADA, off=byte-equivalente; golden 32/32. >>> FASE B COMPLETA <<<."
-        },
-        {
             "id": "TASK-0070",
             "owner": "Codex",
             "status": "done",
@@ -117,8 +111,8 @@
         {
             "id": "TASK-0072",
             "owner": "Codex",
-            "status": "in_progress",
-            "title": "Flujo de coordinacion por intents (SPEC-0058): submit_intent write-path del estado via runtime (validar+append+materialize, drift 0). Keystone de 3.b.2 (escritor unico)."
+            "status": "in_review",
+            "title": "Flujo de coordinacion por intents (SPEC-0058) ENTREGADO: submit_intent write-path del estado via runtime (validar+append+materialize, drift 0) + golden/docs/CI. Keystone de 3.b.2."
         }
     ],
     "open_questions": [],
@@ -131,17 +125,15 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 78 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "ENCOLADA TASK-0070 (ready, Codex, high, SPEC-0056): eximir runtime/state/** del scan de neutralidad en protocol.config.json + protocol.config.template.json (dato generado por el runtime: event log + snapshots del ledger; analogo al ledger vivo Area_comun/state/*.json ya exento y a runtime/runs/ ya gitignorado) + golden (denylist bajo runtime/state PASA, en runtime/*.py sigue FALLANDO) + paridad py/.ps1 + runtime/state NO gitignorado (en autoritativo el log es fuente de verdad). Aditivo, no debilita el boundary del core. DESBLOQUEA la activacion sombra del writer-vivo (3.b, aprobada por el operador): tras TASK-0070 verde, Claude re-aplica enabled+materialize (enforce+authoritative siguen off). GO por mailbox. Gateadas: Fase 7, autonomia.",
-        "TASK-0070 RECLAMADA por Codex (2026-06-07): aplicando exencion minima runtime/state/** del scan de neutralidad en config viva+template, golden exento-pasa/fuente-runtime-falla y documentacion de no gitignore. GO consumido; anomalia previa de ledger queda resuelta por la regularizacion posterior de Claude.",
-        "TASK-0070 ENTREGADA a in_review por Codex (2026-06-07): runtime/state/** exento en config viva+template; golden neutrality runtime_state_exempt pasa y runtime_source_still_scanned falla con paridad py/ps; scanner PowerShell corrige archivo de una linea; runtime/state sigue committable/no gitignorado; gates validator/encoding/neutralidad/prune verdes. Pendiente ratificacion de Claude y reintento separado de activacion sombra.",
+        "[HISTORICO PODADO] 81 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0070 DONE (fix neutralidad runtime/state, ratificacion adversarial de Claude 2026-06-07): runtime/state/** exento de domain_neutrality (vivo+template) + golden runtime_state_exempt/runtime_source_still_scanned + fix paridad scan .ps1 + docs (runtime/state NO gitignorado). Golden 32/32. DESBLOQUEA la activacion sombra del writer-vivo (3.b, aprobada por el operador). SIGUIENTE (Claude): re-aplicar la activacion sombra (event_state.enabled+materialize=true; enforce+authoritative siguen false) + emitir el genesis de corte por referencia; luego encolar Fase 7 F7.1 (TASK-0071 SBOM, draft listo en personal). enforce+authoritative = cablear intents + nuevo GO. Gateadas: F7.2-F7.5, autonomia.",
         "WRITER-VIVO ACTIVADO EN MODO SOMBRA (3.b, aprobado por el operador 2026-06-07; desbloqueado por TASK-0070): protocol.config.json event_state.enabled=true + materialize=true; enforce=false + authoritative=false (NO se prohibe la edicion manual => el lazo Claude/Codex sigue intacto). Emitido el GENESIS DE CORTE por referencia (evento protocol.genesis con payload solo snapshot_ref={hash,commit,actor,timestamp,schema_version}; snapshot content-addressed en runtime/state/snapshots/<hash>.json; verificado por hash). Precondiciones cumplidas y verificadas (round-trip=identidad, integridad, rollback seguro). En sombra el drift es WARNING y crecera conforme editemos manualmente (esperado/benigno). ROLLBACK: poner los 4 flags en false (el ledger nunca se muta por la activacion). SIGUIENTE para enforce+authoritative: cablear/probar el flujo de coordinacion via runtime intents + nuevo GO del operador. Gateadas: F7.x, autonomia.",
         "ENCOLADA Fase 7.1 = TASK-0071 (ready, Codex, SPEC-0057): SBOM determinista del paquete (scripts/generate_sbom.py + paridad .ps1: inventario ruta+sha256+tamano de archivos FUENTE excluyendo runtime/state|runs|.git|pycache + cabecera 4 ejes de version + commit/timestamp PROVISTOS; JSON canonico ASCII/sin BOM; golden examples/sbom_cases). Aditivo/neutral/sin secretos; sin firma (F7.4). Primera de 5 rebanadas de Fase 7 (release engineering, aprobada). NOTA: writer-vivo en MODO SOMBRA activo (event_state enabled+materialize on, enforce+authoritative off) => el validador puede emitir WARNING de drift conforme se edita el ledger; es ESPERADO/benigno (no hard-fail). GO por mailbox; promover de a una (DECISION-0020). Gateadas: F7.2-F7.5, enforce+authoritative (intents+GO), autonomia.",
         "TASK-0071 RECLAMADA por Codex (2026-06-07): implementando F7.1 SBOM determinista del paquete con scripts/generate_sbom.py + delegacion/paridad .ps1 + golden examples/sbom_cases; GO consumido y anomalia previa resuelta por regularizacion posterior de Claude. Modo sombra activo: drift warning esperado/benigno.",
         "TASK-0071 ENTREGADA a in_review por Codex (2026-06-07): F7.1 SBOM determinista del paquete implementado (generate_sbom.py + wrapper ps1, JSON canonico ASCII/LF/sin BOM, version axes protocol/runtime/schema/profile, inventario ruta+sha256+tamano, exclusiones runtime/state|runs|.git|pycache) + golden examples/sbom_cases + CI. Gates verdes; validator con drift WARNING esperado por modo sombra.",
         "TASK-0071 DONE (F7.1 SBOM, ratif. adversarial de Claude 2026-06-07): generate_sbom.py/.ps1 SBOM canonico determinista (file_count 690, 4 ejes de version + commit/timestamp provistos; excluye state/runs/.git/pycache; neutral, sin secretos) + golden sbom_cases. Golden 33/33. NOTA DE PROCESO: el commit f9f5334 (mio, intent-flow drafts) capturo tambien la entrega F7.1 que Codex habia staged => commit-torn (HALLAZGO #2); contenido consistente y pusheado, no se reescribe; leccion = usar 'git commit -- <paths>' no 'git add'+commit. ENCOLADA TASK-0072 (ready, Codex, SPEC-0058): flujo de coordinacion por INTENTS (submit_intent write-path del estado via runtime => drift 0), KEYSTONE de 3.b.2; tras verde: re-genesis + encender enforce+authoritative con GO del operador. LUEGO continuar Fase 7: F7.2 (manifiesto+verify) -> F7.3 (provenance) -> F7.4 (firma, probable DECISION) -> F7.5 (docs). Writer-vivo en SOMBRA (drift=warning esperado). Gateada: autonomia supervisada.",
-        "TASK-0072 RECLAMADA por Codex (2026-06-07): implementando flujo de coordinacion por intents (runtime/submit_intent.py + .ps1, golden examples/intent_flow_cases, docs y CI). GO de Claude y accepted de TASK-0071 consumidos; modo sombra mantiene drift como WARNING esperado."
+        "TASK-0072 RECLAMADA por Codex (2026-06-07): implementando flujo de coordinacion por intents (runtime/submit_intent.py + .ps1, golden examples/intent_flow_cases, docs y CI). GO de Claude y accepted de TASK-0071 consumidos; modo sombra mantiene drift como WARNING esperado.",
+        "TASK-0072 ENTREGADA a in_review por Codex (2026-06-07): submit_intent write-path por intents implementado para task_status/task_upsert/claim/decision; valida actor/capacidad/claim/scope, idempotencia y timestamp provisto; append intent.applied + materialize_to_disk + rollback + status markdown de tarea. Golden intent_flow 9/9 + replay/materialize/enforce verdes + docs AGENTS/TASK_PROTOCOL/N_AGENT_RUNTIME + CI. Pendiente ratificacion de Claude; luego re-genesis sincronizado + GO operador para encender enforce+authoritative."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

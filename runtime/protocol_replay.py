@@ -290,6 +290,7 @@ def write_genesis_reference(
         actor_id=actor_id,
         idempotency_key=idempotency_key,
         payload={"snapshot_ref": snapshot_ref},
+        ts=timestamp,
     )
     writer.write_snapshot()
     return {"event": event, "snapshot": snapshot, "snapshot_ref": snapshot_ref, "snapshot_path": snapshot_ref_path(root, snapshot_ref["hash"])}
@@ -418,12 +419,31 @@ def apply_intent_event(state: dict[str, Any], event: dict[str, Any], payload: di
                     "to": task_transition.get("to"),
                 },
             )
+        task_upsert = transitions.get("task_upsert")
+        if isinstance(task_upsert, dict):
+            task_payload = task_upsert.get("task")
+            if isinstance(task_payload, dict):
+                upsert_task(state, task_payload)
         for claim_transition in transitions.get("claims") or []:
             if isinstance(claim_transition, dict):
                 op = claim_transition.get("op")
                 claim_payload = dict(claim_transition)
-                claim_payload.setdefault("status", "released" if op == "release" else "active")
-                apply_claim_event(state, {"type": "claim.released" if op == "release" else "claim.upserted"}, claim_payload)
+                if op == "acquire":
+                    claim = claim_payload.get("claim")
+                    if isinstance(claim, dict):
+                        apply_claim_event(state, {"type": "claim.upserted"}, {"claim": claim})
+                    else:
+                        claim_payload.setdefault("status", "active")
+                        apply_claim_event(state, {"type": "claim.upserted", "actor": event.get("actor")}, claim_payload)
+                elif op == "block":
+                    claim_payload.setdefault("status", "blocked")
+                    apply_claim_event(state, {"type": "claim.blocked"}, claim_payload)
+                else:
+                    claim_payload.setdefault("status", "released")
+                    apply_claim_event(state, {"type": "claim.released"}, claim_payload)
+        decision_transition = transitions.get("decision")
+        if isinstance(decision_transition, dict):
+            apply_decision_event(state, decision_transition)
 
 
 def replay_protocol_state(
