@@ -11,15 +11,38 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .eventlog import EventLogError, EventWriter, STATE_DIR, assert_snapshot_matches, runtime_state_has_content
+    from .eventlog import (
+        EventLogError,
+        EventWriter,
+        STATE_DIR,
+        assert_snapshot_matches,
+        observability_enabled,
+        read_protocol_config,
+        runtime_state_has_content,
+    )
     from .gate import run_gate
-    from .review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
+    from .review_qa import (
+        checks_with_signatures,
+        has_consecutive_failure,
+        max_qa_cycles,
+        qa_attempts_after_failure,
+        review_qa_span,
+        task_author,
+    )
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
-    from eventlog import EventLogError, EventWriter, STATE_DIR, assert_snapshot_matches, runtime_state_has_content
+    from eventlog import (
+        EventLogError,
+        EventWriter,
+        STATE_DIR,
+        assert_snapshot_matches,
+        observability_enabled,
+        read_protocol_config,
+        runtime_state_has_content,
+    )
     from gate import run_gate
-    from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, task_author
+    from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
     from turn_validate import validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
@@ -93,6 +116,33 @@ def report_transition_name(report: dict[str, Any]) -> str:
     return str(report.get("outcome") or "no_transition")
 
 
+def review_qa_observability(root: Path, report: dict[str, Any], writer: EventWriter) -> dict[str, Any] | None:
+    if not observability_enabled(read_protocol_config(root)):
+        return None
+    transitions = report.get("transitions") or {}
+    payload = transitions.get("review_qa")
+    transition = transitions.get("task_status")
+    if not isinstance(payload, dict) or not isinstance(transition, dict):
+        return None
+    event = str(payload.get("event") or "")
+    if not event:
+        return None
+    attempt_id = str(payload.get("attempt_id") or report_attempt_id(report))
+    return {
+        "event": event,
+        "span": review_qa_span(
+            task_id=str(report.get("task_id") or ""),
+            event=event,
+            from_status=str(transition.get("from") or ""),
+            to_status=str(transition.get("to") or ""),
+            actor=str(report.get("agent") or ""),
+            run_id=str(report.get("turn_id") or "run-unknown"),
+            attempt_id=attempt_id,
+            seq=writer.next_seq(),
+        ),
+    }
+
+
 def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, Any] | None) -> list[dict[str, Any]]:
     task_id = str(report.get("task_id") or "")
     actor = str(report.get("agent") or "")
@@ -107,18 +157,22 @@ def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, A
         lease_until=str((claim or {}).get("expires_at") or ""),
         idempotency_key=f"{actor}:{task_id}:claim:{attempt_id}:0",
     )
+    intent_payload = {
+        "turn_id": report.get("turn_id"),
+        "outcome": report.get("outcome"),
+        "claim_id": (claim or {}).get("claim_id"),
+        "changed_paths": list(report.get("changed_paths") or []),
+    }
+    review_qa = review_qa_observability(root, report, writer)
+    if review_qa:
+        intent_payload["review_qa"] = review_qa
     intent_event = writer.apply_intent(
         task_id=task_id,
         actor_id=actor,
         transition=report_transition_name(report),
         attempt_id=attempt_id,
         fencing_token=int(claim_event["fencing_token"]),
-        payload={
-            "turn_id": report.get("turn_id"),
-            "outcome": report.get("outcome"),
-            "claim_id": (claim or {}).get("claim_id"),
-            "changed_paths": list(report.get("changed_paths") or []),
-        },
+        payload=intent_payload,
     )
     writer.write_snapshot()
     return [claim_event, intent_event]

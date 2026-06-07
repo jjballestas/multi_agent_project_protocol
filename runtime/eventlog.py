@@ -14,6 +14,7 @@ from typing import Any, Callable
 
 
 EVENT_SCHEMA_VERSION = "1.0"
+TRACE_ID_VERSION = "trace.v1"
 UNAUTHENTICATED_EVENT = "security.unauthenticated_event"
 LOG_PATH = Path("runtime") / "state" / "events.jsonl"
 SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
@@ -61,6 +62,55 @@ def canonical_json(payload: Any) -> str:
 
 def canonical_hash(payload: Any) -> str:
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+
+
+def observability_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    config = config or {}
+    observability = config.get("observability")
+    if not isinstance(observability, dict):
+        observability = (config.get("runtime") or {}).get("observability")
+    return observability if isinstance(observability, dict) else {}
+
+
+def observability_enabled(config: dict[str, Any] | None) -> bool:
+    return observability_config(config).get("enabled") is True
+
+
+def trace_value(*values: Any) -> str:
+    for value in values:
+        text = str(value or "").strip()
+        if text:
+            return text
+    return "unknown"
+
+
+def idempotency_attempt_id(idempotency_key: Any) -> str | None:
+    parts = [part for part in str(idempotency_key or "").split(":") if part]
+    if len(parts) >= 2 and parts[-1].isdigit():
+        return parts[-2]
+    return None
+
+
+def deterministic_trace_id(*, run_id: Any, task_id: Any, attempt_id: Any, seq: Any) -> str:
+    payload = {
+        "version": TRACE_ID_VERSION,
+        "run_id": trace_value(run_id),
+        "task_id": trace_value(task_id),
+        "attempt_id": trace_value(attempt_id),
+        "seq": int(seq or 0),
+    }
+    return "TRACE-" + hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()[:16]
+
+
+def event_trace_id(event: dict[str, Any]) -> str:
+    payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+    idempotency_key = event.get("idempotency_key")
+    return deterministic_trace_id(
+        run_id=trace_value(payload.get("run_id"), payload.get("turn_id"), "run-unknown"),
+        task_id=trace_value(payload.get("task_id"), event.get("aggregate_id"), "task-unknown"),
+        attempt_id=trace_value(payload.get("attempt_id"), idempotency_attempt_id(idempotency_key), idempotency_key, "attempt-unknown"),
+        seq=event.get("seq"),
+    )
 
 
 def read_protocol_config(root: Path) -> dict[str, Any]:
@@ -332,7 +382,10 @@ class EventWriter:
             "applied": applied,
             "ts": utc_now(),
         }
-        event = sign_event(event, read_protocol_config(self.root))
+        config = read_protocol_config(self.root)
+        if observability_enabled(config):
+            event["trace_id"] = event_trace_id(event)
+        event = sign_event(event, config)
         atomic_append_jsonl(self.log_path, event)
         return event
 

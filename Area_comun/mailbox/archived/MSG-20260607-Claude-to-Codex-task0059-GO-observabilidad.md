@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0059
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0059 (Fase 6.1: observabilidad N-agente, DELTA sobre M2) READY. trace_id/spans deterministas + summarize_nagent. Aditiva, config-gated. SPEC-0045. Cierra parte de D0.

@@ -19,11 +19,64 @@ try:
         task_is_claimed_by_other,
         tasks_by_id,
     )
+    from .eventlog import deterministic_trace_id, observability_enabled
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, default_agent_registry, enabled_agents, load_state, priority_value, task_is_claimed_by_other, tasks_by_id
+    from eventlog import deterministic_trace_id, observability_enabled
 
 
 REVIEW_TRANSITIONS = {"review", "qa"}
+
+
+def routing_run_id(state: dict[str, Any]) -> str:
+    config = state.get("config") or {}
+    runtime = config.get("runtime") if isinstance(config.get("runtime"), dict) else {}
+    return str(state.get("run_id") or config.get("run_id") or runtime.get("run_id") or "router")
+
+
+def routing_span(
+    *,
+    task_id: str,
+    transition: str,
+    action: str,
+    owner: str | None,
+    state: dict[str, Any],
+    policy: str | None = None,
+    parent: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "trace_id": deterministic_trace_id(run_id=routing_run_id(state), task_id=task_id, attempt_id=transition, seq=0),
+        "parent": parent,
+        "name": f"router.{transition}",
+        "attrs": {
+            "task_id": task_id,
+            "transition": transition,
+            "action": action,
+            "owner": owner,
+            "policy": policy,
+        },
+    }
+
+
+def with_routing_span(result: dict[str, Any], task: dict[str, Any], transition: str, state: dict[str, Any]) -> dict[str, Any]:
+    if not observability_enabled((state or {}).get("config") or {}):
+        return result
+    decision = result.get("routing_decision") if isinstance(result.get("routing_decision"), dict) else {}
+    span = routing_span(
+        task_id=str(task.get("id") or ""),
+        transition=transition,
+        action=str(result.get("action") or transition),
+        owner=result.get("owner"),
+        state=state,
+        policy=decision.get("policy"),
+    )
+    enriched = dict(result)
+    enriched["span"] = span
+    if decision:
+        enriched_decision = dict(decision)
+        enriched_decision["span"] = span
+        enriched["routing_decision"] = enriched_decision
+    return enriched
 
 
 def select_next(state: dict[str, Any]) -> dict[str, Any] | None:
@@ -402,20 +455,21 @@ def select_agent(task: dict[str, Any], transition: str, state: dict[str, Any], *
         reason = f"no eligible {required} agent for {transition}"
         if transition in REVIEW_TRANSITIONS:
             reason += "; review/qa author exclusion is enforced"
-        return {
+        result = {
             "action": "escalate",
             "task_id": task.get("id"),
             "owner": escalation_owner(state, task_author(task)),
             "reason": reason,
             "routing_decision": routing_decision(explanation),
         }
+        return with_routing_span(result, task, transition, state)
 
     selected = candidates[0]
     if transition == "assign_fix":
         author = task_author(task)
         selected = next((candidate for candidate in candidates if candidate["agent"] == author), selected)
     owner = selected["agent"]
-    return {
+    result = {
         "action": selected_action,
         "task_id": task.get("id"),
         "owner": owner,
@@ -425,6 +479,7 @@ def select_agent(task: dict[str, Any], transition: str, state: dict[str, Any], *
         ),
         "routing_decision": routing_decision(explanation, owner),
     }
+    return with_routing_span(result, task, transition, state)
 
 
 def assignment_weight(agent_id: str, weights: dict[str, Any]) -> float:

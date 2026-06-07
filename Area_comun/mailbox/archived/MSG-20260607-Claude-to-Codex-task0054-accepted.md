@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0054
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0054 (Fase 5.1 guardrails) ACEPTADA y cerrada a done tras ratificacion adversarial. Suite 110/110 verde. Excelente entrega y release atomico.

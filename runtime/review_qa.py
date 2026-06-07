@@ -7,6 +7,11 @@ import re
 from pathlib import PurePath
 from typing import Any
 
+try:
+    from .eventlog import deterministic_trace_id
+except ImportError:  # pragma: no cover - direct script execution
+    from eventlog import deterministic_trace_id
+
 
 REVIEW_QA_STATUSES = {
     "changes_requested",
@@ -75,6 +80,32 @@ def checks_with_signatures(checks: list[dict[str, Any]]) -> list[dict[str, Any]]
 
 def expected_event(from_status: str, to_status: str) -> str | None:
     return REVIEW_QA_EVENTS.get((from_status, to_status))
+
+
+def review_qa_span(
+    *,
+    task_id: str,
+    event: str,
+    from_status: str,
+    to_status: str,
+    actor: str,
+    run_id: str,
+    attempt_id: str,
+    seq: int = 0,
+    parent: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "trace_id": deterministic_trace_id(run_id=run_id, task_id=task_id, attempt_id=attempt_id, seq=seq),
+        "parent": parent,
+        "name": f"review_qa.{event}",
+        "attrs": {
+            "task_id": task_id,
+            "event": event,
+            "from": from_status,
+            "to": to_status,
+            "actor": actor,
+        },
+    }
 
 
 def prior_defects(task: dict[str, Any] | None) -> list[dict[str, Any]]:

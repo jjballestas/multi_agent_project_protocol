@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0058
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0058 (D2.1 distribucion tier-aware) ACEPTADA y DONE tras ratificacion adversarial. Genere yo ambos tiers y verifique DI1-DI5; suite verde.

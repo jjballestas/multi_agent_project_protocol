@@ -1733,6 +1733,46 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: tool-policy 6/6 + suite runtime COMPLETA 116/116 (110 previos sin regresion) + validador/encoding/neutralidad py. runtime/tool_policy.py genuino: deny-by-default real (sin tool_policy/enabled:false => True legacy byte-equivalente; habilitada => deny salvo regla que case tool+agente+capacidad+accion+scope); classify_action falla-cerrado (ambiguo=>sensitive); gate_for_action mapea tabla sec.8.3 (read/local_write/local_exec/contract_change/external/sensitive); cableado aditivo en turn_validate (security.tool_denied; decision_required para contract_change; human_required para external/sensitive; solo actua si el report declara tools/actions). turn_schema 1.1.0->1.2.0 (tools/actions opcionales, aditivo, coherente con A.7) + orchestrator passthrough. Domain-neutral, fallback N=2 byte-equivalente. Obs de proceso: 1er commit del encolado (b1e519b) capturo el golden pero no la impl de runtime/ (staging por dirs) => commit torn; corregido en el cierre con staging explicito (HALLAZGO #2 del metodo anti-colision). Flip por arquitecto. CIERRA Fase 5.2.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0057",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 5.3 (guardrails, SPEC-0043): autenticacion/atribucion de eventos (firma del envelope). HMAC por agente en runtime/eventlog.py (firma al append + verificacion en validate/replay; signing on => evento sin firma valida rechazado + security.unauthenticated_event) + config event_auth.enabled off por defecto + auth issuer/audience placeholder (A1 capa-b, sin flujo externo) + golden runtime_event_auth_cases. Determinista (negative-replay A6 intacto). Aditivo, fallback N=2 intacto. Ultima rebanada del nucleo de Fase 5.",
+            "spec_id": "Area_comun/specs/SPEC-0043-fase5.3-envelope-signing.md",
+            "file": "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0017",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0044",
+                "TASK-0056"
+            ],
+            "relates_to": [
+                "TASK-0048",
+                "TASK-0049"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_event_auth_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/eventlog.py",
+                "examples/runtime_event_auth_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: event-auth 5/5 + suite runtime COMPLETA 121/121 (sin regresion) + validador/encoding/neutralidad py. runtime/eventlog.py genuino: HMAC-SHA256 sobre canonical_json (DETERMINISTA, sin reloj/random); event_auth gate off => sign/verify no-op = byte-equivalente (fallback N=2 intacto); firma al append (L335) + verificacion en replay (L216) => firma ausente/alterada rechazada con security.unauthenticated_event (L222, compare_digest tiempo constante, I7); issuer/audience placeholder estructural (A1 capa-b, sin flujo OAuth/JWT externo). Config vivo event_auth.enabled=false SIN secreto real (solo method/issuer/audience). Scope dentro de lo declarado (eventlog/config/examples/CI). Flip por arquitecto. CIERRA Fase 5.3 => NUCLEO de Fase 5 (5.1+5.2+5.3) cubierto.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

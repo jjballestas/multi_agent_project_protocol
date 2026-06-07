@@ -115,46 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0057",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase 5.3 (guardrails, SPEC-0043): autenticacion/atribucion de eventos (firma del envelope). HMAC por agente en runtime/eventlog.py (firma al append + verificacion en validate/replay; signing on => evento sin firma valida rechazado + security.unauthenticated_event) + config event_auth.enabled off por defecto + auth issuer/audience placeholder (A1 capa-b, sin flujo externo) + golden runtime_event_auth_cases. Determinista (negative-replay A6 intacto). Aditivo, fallback N=2 intacto. Ultima rebanada del nucleo de Fase 5.",
-            "spec_id": "Area_comun/specs/SPEC-0043-fase5.3-envelope-signing.md",
-            "file": "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
-            "linked_decisions": [
-                "DECISION-0015",
-                "DECISION-0017",
-                "DECISION-0018"
-            ],
-            "depends_on": [
-                "TASK-0044",
-                "TASK-0056"
-            ],
-            "relates_to": [
-                "TASK-0048",
-                "TASK-0049"
-            ],
-            "relevant_files": [
-                "runtime/eventlog.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_event_auth_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/eventlog.py",
-                "examples/runtime_event_auth_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: event-auth 5/5 + suite runtime COMPLETA 121/121 (sin regresion) + validador/encoding/neutralidad py. runtime/eventlog.py genuino: HMAC-SHA256 sobre canonical_json (DETERMINISTA, sin reloj/random); event_auth gate off => sign/verify no-op = byte-equivalente (fallback N=2 intacto); firma al append (L335) + verificacion en replay (L216) => firma ausente/alterada rechazada con security.unauthenticated_event (L222, compare_digest tiempo constante, I7); issuer/audience placeholder estructural (A1 capa-b, sin flujo OAuth/JWT externo). Config vivo event_auth.enabled=false SIN secreto real (solo method/issuer/audience). Scope dentro de lo declarado (eventlog/config/examples/CI). Flip por arquitecto. CIERRA Fase 5.3 => NUCLEO de Fase 5 (5.1+5.2+5.3) cubierto.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0058",
             "owner": "Codex",
             "status": "done",
@@ -204,7 +164,7 @@
         {
             "id": "TASK-0059",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -226,6 +186,7 @@
             ],
             "relevant_files": [
                 "runtime/eventlog.py",
+                "runtime/apply.py",
                 "runtime/router.py",
                 "runtime/review_qa.py",
                 "runtime/metrics.py",
@@ -240,7 +201,44 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07. Prioridad D0 del operador (cerrar el motor). DELTA sobre la observabilidad del M2 (no rehacer summarize/runlog). Aditiva, config-gated, fallback N=2; sin DECISION nueva. Metodo anti-colision. Release atomico (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_observability_nagent_cases 5/5 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: trace_id determinista CONFIG-GATED en eventlog (observability AUSENTE en config vivo => OFF => byte-equivalente, O4); spans en router/review_qa; summarize_nagent() DELTA sobre M2 (no rehace summarize); apply.py aditivo (emite spans config-gated, dentro de scope); negative-replay (A6) intacto. Flip por arquitecto. Cierra parte de D0 (motor); falta 6.2 (A10 budget).",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0060",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 6.2 (A10 budget/deadline, SPEC-0046, DELTA sobre budget.py): umbral blando/duro + budget_exhausted con escalado (consumed/limit/last_responsible) + deadline por tarea DETERMINISTA (logico/inyectado, no wall-clock) + limite de cola; cableado aditivo config-gated en orchestrator/loop. Cierra D0 (motor) + criterio 13 SPEC-0038. Aditivo, byte-equivalente sin activar.",
+            "spec_id": "Area_comun/specs/SPEC-0046-fase6.2-budget-deadline.md",
+            "file": "Area_comun/tasks/TASK-0060-codex-budget-deadline.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0009",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0059"
+            ],
+            "relates_to": [
+                "TASK-0032"
+            ],
+            "relevant_files": [
+                "runtime/budget.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_budget_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/budget.py",
+                "examples/runtime_budget_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0060-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07. Cierra D0 (motor) junto con 6.1. DELTA sobre budget.py del M2 (no rehacer). Aditiva, config-gated, fallback N=2; sin DECISION nueva. Deadline determinista (no wall-clock). Metodo anti-colision. Release atomico (DECISION-0018)."
         }
     ]
 }
