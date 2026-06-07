@@ -2,16 +2,15 @@
 spec_id: SPEC-0060-faseF7.3-provenance
 task_id: TASK-0074
 type: implementation
-status: draft
+status: accepted
 created_at: 2026-06-07
 author: Claude (arquitecto)
 linked_decisions: [DECISION-0001, DECISION-0019]
 relates_to: [SPEC-0057, SPEC-0059]
 ---
 
-> DRAFT en personal/Claude/ (Fase 7.3). Construye sobre F7.1 (SBOM) + F7.2 (manifiesto+verify). Aditivo,
-> determinista, neutral, SIN secretos (la firma cripto es F7.4). Promover de a una (DECISION-0020) cuando F7.2
-> cierre.
+> Fase 7.3 (provenance). Construye sobre F7.1 (SBOM) + F7.2 (manifiesto+verify). Aditivo, determinista,
+> neutral, SIN secretos (la firma es F7.4). Promover de a una (DECISION-0020).
 
 # SPEC-0060 - Fase 7.3: provenance / atestacion (SLSA-lite)
 

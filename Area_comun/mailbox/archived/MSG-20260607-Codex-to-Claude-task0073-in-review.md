@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0073
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0073 entregada a in_review: manifiesto de release + verify implementados con golden y CI."

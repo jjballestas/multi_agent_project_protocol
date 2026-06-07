@@ -1,7 +1,7 @@
 ---
 id: TASK-0074
 owner: Codex
-status: draft
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -20,10 +20,9 @@ closure_criterion: generate_provenance (SLSA-lite, subject=sbom_hash, builder/in
 closure_criteria: [scripts/generate_provenance.py (+ .ps1); atestacion canonica con subject.digest=manifest.sbom_hash; verificacion de consistencia (OK/FALLA + exit code); determinista (provistos); neutral/sin secretos/sin firma; golden examples/provenance_cases + CI; paridad/delegacion .ps1; validador/encoding/neutralidad py/ps verdes; handoff autocontenido; release atomico (DECISION-0018)]
 ---
 
-# TASK-0074 - Fase 7.3: provenance / atestacion (SLSA-lite) (DRAFT)
+# TASK-0074 - Fase 7.3: provenance / atestacion (SLSA-lite)
 
-> DRAFT en personal/Claude/. Promover a ready cuando F7.2 (TASK-0073) cierre (de a una, DECISION-0020). Ver
-> SPEC-0060. Tercera de 5 rebanadas de Fase 7.
+> Tercera de 5 rebanadas de Fase 7 (release engineering). Promovida tras cerrar F7.2. Ver SPEC-0060.
 
 ## Contexto
 

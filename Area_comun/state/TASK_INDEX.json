@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -155,7 +155,7 @@
         {
             "id": "TASK-0073",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -187,7 +187,43 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.2 manifiesto de release + verify implementado. generate_manifest.py (+ .ps1) envuelve SBOM F7.1 en manifiesto canonico protocol_release_manifest.v1 con version_axes, commit/timestamp provistos, file_count, sbom, sbom_hash y manifest_hash; verify_release.py (+ .ps1) recomputa SBOM con globs del manifiesto y compara sbom_hash, OK exit 0 o diff changed/missing/extra y exit!=0. Golden release_verify_cases 6/6 + CI; gates verdes; drift WARNING esperado por modo sombra.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 35/35 (nuevo release_verify_cases 6/6) + smoke real: generate_manifest del arbol vivo -> verify_release ok=true exit 0; neutralidad/validador verdes (drift WARNING de sombra esperado). generate_manifest produce manifest protocol_release_manifest.v1 con version_axes+commit+timestamp provistos+sbom+sbom_hash+manifest_hash; verify_release recomputa SBOM y compara sbom_hash (ok/exit0; si difiere diff changed/missing/extra y exit!=0). Sin firma/provenance/secretos. Flip por arquitecto. CIERRA F7.2.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0074",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.3 (SPEC-0060): provenance/atestacion SLSA-lite - generate_provenance.py (+ .ps1) subject{name,digest.sha256=manifest.sbom_hash}+builder.id+invocation{commit,process}+metadata{timestamp,schema} provistos; verificacion de consistencia (subject.digest==sbom_hash); determinista, neutral, sin secretos/firma; golden provenance_cases.",
+            "spec_id": "Area_comun/specs/SPEC-0060-faseF7.3-provenance.md",
+            "file": "Area_comun/tasks/TASK-0074-codex-faseF7.3-provenance.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0073"
+            ],
+            "relates_to": [
+                "TASK-0071"
+            ],
+            "relevant_files": [
+                "scripts/generate_provenance.py",
+                "scripts/verify_release.py",
+                "examples/provenance_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/generate_provenance.py",
+                "examples/provenance_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0074-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto, 2026-06-07). Fase 7 en marcha. Aditivo/determinista/neutral/sin secretos. Release atomico (DECISION-0018) + anti-colision (DECISION-0020, staging por paths).",
             "updated_at": "2026-06-07"
         }
     ]

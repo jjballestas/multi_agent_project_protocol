@@ -111,8 +111,14 @@
         {
             "id": "TASK-0073",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Fase 7.2 (SPEC-0059) ENTREGADA: manifiesto de release + verify (integridad por hash). Segunda de 5 rebanadas de Fase 7."
+            "status": "done",
+            "title": "Fase 7.2 (SPEC-0059) DONE - ACEPTADA por Claude: generate_manifest.py (sbom_hash+manifest_hash+version_axes+commit/timestamp provistos) + verify_release.py (recomputa SBOM, compara hash, diff changed/missing/extra, exit code) + .ps1. Determinista, sin secretos/claves. golden release_verify_cases 6/6."
+        },
+        {
+            "id": "TASK-0074",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Fase 7.3 (SPEC-0060): provenance/atestacion SLSA-lite enlazada al manifiesto (subject=sbom_hash) + verificacion de consistencia. Tercera de 5 rebanadas de Fase 7."
         }
     ],
     "open_questions": [],
@@ -133,9 +139,10 @@
         "TASK-0072 DONE (intent-flow, ratif. adversarial de Claude 2026-06-07): runtime/submit_intent.py (+ .ps1) write-path del estado de protocolo (task_status/task_upsert/claim/decision) con validacion de actor/capacidad/claim/scope + append intent.applied + materialize_to_disk + rollback => has_drift False; idempotente, determinista (timestamp provisto), off-compatible; golden intent_flow_cases 9/9 (demuestran enforce-ON: intents pasan drift 0, edicion manual hard-failea). Suite 34/34. >>> KEYSTONE DE 3.b.2 LISTO <<<. FINALIZAR 3.b.2 (escritor unico) requiere: (1) re-emitir genesis sincronizado (drift 0), (2) que AMBOS agentes (incl. el lazo autonomo de Codex) adopten submit_intent para toda transicion del ledger, (3) GO del operador + encender enforce+authoritative. Es un switch operativo coordinado, no un flip. PENDIENTE de decision del operador. Mientras: writer-vivo en SOMBRA (manual valido). SIGUIENTE Fase 7: F7.2 (manifiesto+verify) -> F7.3 -> F7.4 (firma, probable DECISION) -> F7.5. Gateada: autonomia.",
         "3.b.2 EN PAUSA POR DECISION DEL OPERADOR: quedarse en MODO SOMBRA (end-state estable; writer-vivo con maquinaria completa + observabilidad; edicion manual valida; drift=warning). Encender enforce+authoritative (escritor unico) queda como operacion futura deliberada cuando AMBOS lazos (incl. el autonomo de Codex) adopten submit_intent. CONTINUA FASE 7: ENCOLADA F7.2 = TASK-0073 (ready, Codex, SPEC-0059): generate_manifest.py + verify_release.py (+ .ps1) - manifiesto con sbom_hash + verify por integridad de contenido; determinista, sin secretos/claves; golden release_verify_cases. Luego F7.3 provenance -> F7.4 firma (probable DECISION) -> F7.5 docs. GO por mailbox; promover de a una. Gateada: autonomia.",
         "TASK-0073 RECLAMADA por Codex (2026-06-07): implementando F7.2 manifiesto de release + verify (generate_manifest.py/verify_release.py + wrappers + golden release_verify_cases + CI). GO F7.2 y accepted TASK-0072 consumidos; modo sombra mantiene drift como WARNING esperado.",
-        "TASK-0073 ENTREGADA a in_review por Codex (2026-06-07): generate_manifest.py/.ps1 produce manifiesto canonico con SBOM embebido + sbom_hash + manifest_hash + version_axes + commit/timestamp provistos; verify_release.py/.ps1 recomputa SBOM y valida integridad por hash, reporta changed/missing/extra y exit!=0 ante drift. Golden release_verify_cases 6/6 + SBOM 4/4 + gates verdes. Pendiente ratificacion de Claude; luego F7.3 provenance."
+        "TASK-0073 ENTREGADA a in_review por Codex (2026-06-07): generate_manifest.py/.ps1 produce manifiesto canonico con SBOM embebido + sbom_hash + manifest_hash + version_axes + commit/timestamp provistos; verify_release.py/.ps1 recomputa SBOM y valida integridad por hash, reporta changed/missing/extra y exit!=0 ante drift. Golden release_verify_cases 6/6 + SBOM 4/4 + gates verdes. Pendiente ratificacion de Claude; luego F7.3 provenance.",
+        "TASK-0073 DONE (F7.2 manifiesto+verify, ratif. adversarial de Claude 2026-06-07): generate_manifest.py (+ .ps1) manifest protocol_release_manifest.v1 con sbom_hash+manifest_hash+version_axes+commit/timestamp provistos; verify_release.py (+ .ps1) recomputa SBOM y compara hash (ok exit0 / diff changed-missing-extra exit!=0). Golden 35/35 + smoke real (verify del arbol vivo ok=true). Sin secretos/firma. ENCOLADA F7.3 = TASK-0074 (ready, Codex, SPEC-0060): provenance SLSA-lite (subject=sbom_hash + builder/invocation/metadata provistos) + verificacion de consistencia. SIGUIENTE: F7.4 firma (TASK-0075 listo en personal; DECISION-0023 ACCEPTED por el operador, falta promoverla al ledger) -> F7.5 docs. Writer-vivo en SOMBRA. GO por mailbox; promover de a una."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }
