@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -175,7 +175,7 @@
         {
             "id": "TASK-0070",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -208,7 +208,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07) tras el bloqueante surfaceado al intentar la activacion sombra. Aditivo/consistencia (runtime/state es dato de instancia, no core); no debilita el boundary. Prerequisito para re-aplicar la activacion sombra. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): runtime/state/** exento del scan de neutralidad en protocol.config.json y protocol.config.template.json; golden runtime_state_exempt pasa y runtime_source_still_scanned falla, con paridad py/.ps1; corregida lectura de archivos de una linea en scan_domain_neutrality.ps1; documentado que runtime/state no se gitignora. Sin cambiar denylist, turn schema ni flags event_state. Handoff: Area_comun/handoffs/HANDOFF-TASK-0070-codex-to-claude-1.md.",
             "updated_at": "2026-06-07"
         }
     ]

@@ -4308,6 +4308,57 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado tras notificar anomalia DECISION-0018 sobre TASK-0070/SPEC-0056 no registrados en ledger/mailbox."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0068-codex",
+            "task_id": "TASK-0068",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0068",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0068",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0067-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-GO-faseB3.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0068 entregada a in_review. Implementada B.3 drift hard-fail bajo event_state.enforce: validador py/ps fail bajo enabled+enforce+tier runtime+runtime/state+drift; apply aborta commit con discard+restore+block; enforce=false vivo/template; no B.4 ni cambio de turn schema. Handoff: Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-prune-post-task0070-codex",
+            "task_id": "maintenance-prune",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras mantenimiento post TASK-0070. prune_state.py --apply: claims_archived=1, tasks_archived=0, project_state_done_removed=0, next_actions_condensed=3, recovered_tokens=825."
         }
     ]
 }

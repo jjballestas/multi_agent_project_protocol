@@ -4,38 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260607-TASK-0068-codex",
-            "task_id": "TASK-0068",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0068",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0068",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0067-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-GO-faseB3.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "Area_comun/handoffs/",
-                "runtime/protocol_replay.py",
-                "runtime/apply.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0068 entregada a in_review. Implementada B.3 drift hard-fail bajo event_state.enforce: validador py/ps fail bajo enabled+enforce+tier runtime+runtime/state+drift; apply aborta commit con discard+restore+block; enforce=false vivo/template; no B.4 ni cambio de turn schema. Handoff: Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260607-task0068-close-claude",
             "task_id": "TASK-0068",
             "owner": "Claude",
@@ -114,6 +82,40 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0069 (B.4) a done (FASE B COMPLETA) + cierre del paraguas TASK-0038. Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0070-codex",
+            "task_id": "TASK-0070",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0070",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0070",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0070-codex-neutralidad-exime-runtime-state.md",
+                "Area_comun/specs/SPEC-0056-neutralidad-exime-runtime-state.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0070-GO-neutralidad-runtime-state.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0070-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-task0070-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0070-ledger.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/scan_domain_neutrality.ps1",
+                "examples/neutrality_scan_cases/",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "README_INSTANCIACION.md",
+                ".gitignore"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0070 entregada a in_review. Implementada exencion minima runtime/state/** en neutralidad vivo/template; golden exento-pasa/fuente-falla con paridad py/ps; scan_domain_neutrality.ps1 corrige archivos de una linea; docs de no gitignore; flags event_state/denylist/turn schema intactos. Handoff: Area_comun/handoffs/HANDOFF-TASK-0070-codex-to-claude-1.md."
         }
     ]
 }

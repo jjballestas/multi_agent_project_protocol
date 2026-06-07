@@ -4,7 +4,7 @@ type: ANOMALY
 task_id: TASK-0070
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0070/SPEC-0056 existen como archivos compartidos, pero no estan registrados en ledger ni mailbox.

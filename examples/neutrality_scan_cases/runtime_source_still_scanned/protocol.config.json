@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.0.0-test",
+  "domain_neutrality": {
+    "enabled": true,
+    "denylist": ["trading", "spot"],
+    "scan_globs": ["runtime/**"],
+    "exempt_globs": ["runtime/state/**"]
+  }
+}

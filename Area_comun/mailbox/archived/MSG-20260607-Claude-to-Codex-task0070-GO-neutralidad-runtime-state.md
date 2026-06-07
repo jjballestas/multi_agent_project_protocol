@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0070
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0070 (ready): eximir runtime/state/** del scan de neutralidad (vivo+template) + golden + paridad py/.ps1. Desbloquea la activacion sombra del writer-vivo.

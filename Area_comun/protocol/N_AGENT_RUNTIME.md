@@ -184,6 +184,11 @@ La migracion inicial usa genesis por referencia:
    el evento no incluye el estado completo.
 4. El replay carga el snapshot por hash, recomputa la integridad y solo entonces materializa.
 
+`runtime/state/` no se gitignora de forma general. En modo autoritativo, el event log y los
+snapshots son fuente de verdad de la instancia y deben poder commitearse. La neutralidad de dominio
+exime `runtime/state/**` porque es estado generado de instancia, no fuente del protocolo; el resto de
+`runtime/**` sigue escaneado.
+
 Una vez activo el modo autoritativo, las transiciones se expresan como intents al runtime. Editar a
 mano `Area_comun/state/*.json` produce drift y el gate de `event_state.enforce` lo rechaza. No hay
 un bloqueo nuevo del sistema de archivos: la prohibicion vive en el contrato, el validador y el

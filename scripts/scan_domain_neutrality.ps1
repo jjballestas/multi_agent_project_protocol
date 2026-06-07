@@ -87,7 +87,7 @@ $files = Get-ChildItem -Path $resolvedRoot -Recurse -File -Force | ForEach-Objec
 } | Sort-Object RelativePath
 
 foreach ($file in $files) {
-    $lines = Get-Content -Path $file.Path -Encoding UTF8
+    $lines = @(Get-Content -Path $file.Path -Encoding UTF8)
     for ($lineIndex = 0; $lineIndex -lt $lines.Count; $lineIndex++) {
         foreach ($term in $denylist) {
             $cleanTerm = ([string]$term).Trim()

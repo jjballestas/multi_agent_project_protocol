@@ -146,7 +146,8 @@
       "Area_comun/handoffs/**",
       "Area_comun/reports/**",
       "Area_comun/artifacts/**",
-      "Area_comun/mailbox/**"
+      "Area_comun/mailbox/**",
+      "runtime/state/**"
     ]
   },
   "sdd": {

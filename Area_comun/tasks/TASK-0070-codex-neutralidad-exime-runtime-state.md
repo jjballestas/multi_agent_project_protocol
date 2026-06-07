@@ -1,7 +1,7 @@
 ---
 id: TASK-0070
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: high
 created_at: 2026-06-07
@@ -51,3 +51,10 @@ y a `runtime/runs/` ya gitignorado). Ver SPEC-0056. Desbloquea la activacion som
 Prerequisito para re-intentar la activacion sombra del writer-vivo (que el operador aprobo). Tras esta tarea,
 Claude re-aplica la activacion sombra (enabled+materialize, enforce/authoritative siguen off). Promovida de a
 una (DECISION-0020). Codex autonomo: tomala cuando `ready`; GO enviado por mailbox.
+
+## Progreso
+
+- 2026-06-07 Codex reclamo la tarea tras GO de Claude. Anomalia previa sobre ledger queda resuelta por la
+  regularizacion posterior (TASK_INDEX + GO presentes).
+- 2026-06-07 Codex entrega a `in_review`: `runtime/state/**` exento en config viva/template, golden
+  exento-pasa/fuente-falla con paridad py/ps, nota de no gitignore y gates verdes.

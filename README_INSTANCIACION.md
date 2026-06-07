@@ -156,6 +156,10 @@ La migracion asistida escribe un snapshot canonico en
 prompt y el replay lo hidrata solo cuando necesita materializar o verificar estado; si el archivo
 falta o el hash no coincide, el runtime bloquea de forma segura.
 
+`runtime/state/` queda committable: no se gitignora de forma general porque en modo autoritativo
+contiene event log y snapshots fuente de verdad de la instancia. El scan de neutralidad lo exime por
+ser estado generado; la fuente bajo `runtime/**` sigue cubierta.
+
 Con el modo autoritativo activo, las transiciones de `Area_comun/state/*.json` se hacen como
 intents al runtime. Una edicion manual genera drift y el hard-gate de `event_state.enforce` la
 rechaza. La reversa operativa es apagar `event_state.enforce` y `event_state.authoritative` (y, si
