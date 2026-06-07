@@ -20,7 +20,13 @@ try:
     from .metrics import summarize
     from .router import select_next
     from .adapters.base import ContextPack
-    from .adapters.llm_adapter import LLMAdapter, RecordedInvoker, SubprocessInvoker
+    from .adapters.llm_adapter import (
+        LLMAdapter,
+        RecordedInvoker,
+        SubprocessInvoker,
+        real_invoker_activation_error,
+        resolve_llm_command,
+    )
     from .adapters.replay import ReplayAdapter, replay_paths
     from .apply import apply_gate_and_commit
     from .gate import run_gate
@@ -31,7 +37,13 @@ except ImportError:  # pragma: no cover - direct script execution
     from context import load_state
     from router import select_next
     from adapters.base import ContextPack
-    from adapters.llm_adapter import LLMAdapter, RecordedInvoker, SubprocessInvoker
+    from adapters.llm_adapter import (
+        LLMAdapter,
+        RecordedInvoker,
+        SubprocessInvoker,
+        real_invoker_activation_error,
+        resolve_llm_command,
+    )
     from adapters.replay import ReplayAdapter, replay_paths
     from apply import apply_gate_and_commit
     from gate import run_gate
@@ -213,7 +225,9 @@ def adapter_for_turn(
     report_path: Path | None,
     llm_invoker: str,
     llm_command: str | None,
+    llm_preset: str | None,
     allow_real_invoker: bool,
+    config: dict[str, Any] | None,
 ) -> Any:
     if adapter_name == "replay":
         return ReplayAdapter()
@@ -226,9 +240,13 @@ def adapter_for_turn(
     if llm_invoker == "subprocess":
         if not allow_real_invoker:
             raise ValueError("subprocess invoker requires --allow-real-invoker")
-        if not llm_command:
-            raise ValueError("subprocess invoker requires --llm-command")
-        return LLMAdapter(SubprocessInvoker.from_command(llm_command))
+        activation_error = real_invoker_activation_error(config)
+        if activation_error:
+            raise ValueError(f"subprocess invoker requires registered activation: {activation_error}")
+        resolved = resolve_llm_command(config, command=llm_command, preset=llm_preset)
+        if resolved is None:
+            raise ValueError("subprocess invoker requires --llm-command or --llm-preset")
+        return LLMAdapter(SubprocessInvoker.from_command(resolved.command, name=f"subprocess:{resolved.label}"))
     raise ValueError(f"unsupported llm invoker: {llm_invoker}")
 
 
@@ -285,6 +303,7 @@ def run_loop(
     adapter_name: str = "replay",
     llm_invoker: str = "recorded",
     llm_command: str | None = None,
+    llm_preset: str | None = None,
     allow_real_invoker: bool = False,
     once: bool = False,
     max_iter: int | None = None,
@@ -295,6 +314,7 @@ def run_loop(
     root = root.resolve()
     if not runtime_enabled(root):
         return {"ok": False, "reason": "runtime.enabled is false; --run is disabled"}
+    config = read_json(root / "protocol.config.json")
 
     try:
         reports = select_reports(adapter_name=adapter_name, replay_path=replay_path, llm_invoker=llm_invoker)
@@ -310,7 +330,6 @@ def run_loop(
         return {"ok": False, "reason": "--max-iter must be >= 1"}
 
     runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit], adapter_name=adapter_name))
-    config = read_json(root / "protocol.config.json")
     budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens, **budget_settings(config))
     turns: list[dict[str, Any]] = []
     baseline_dirty = set(dirty_worktree_paths(root))
@@ -387,7 +406,9 @@ def run_loop(
                 report_path=report_path,
                 llm_invoker=llm_invoker,
                 llm_command=llm_command,
+                llm_preset=llm_preset,
                 allow_real_invoker=allow_real_invoker,
+                config=config,
             )
         except ValueError as exc:
             entry = turn_entry(turn=index, trace=trace, unit=unit, outcome="rejected", errors=[str(exc)], duration_ms=clock_fixed)
@@ -540,6 +561,7 @@ def main() -> int:
     parser.add_argument("--replay-report", help="Replay report JSON file or directory; for llm recorded, transcript file or directory")
     parser.add_argument("--llm-invoker", choices=["recorded", "subprocess"], default="recorded")
     parser.add_argument("--llm-command", help="Command for the explicit subprocess LLM invoker")
+    parser.add_argument("--llm-preset", help="Named runtime.llm_cli_presets entry for the subprocess LLM invoker")
     parser.add_argument("--allow-real-invoker", action="store_true", help="Required to run the subprocess LLM invoker")
     parser.add_argument("--run-id", help="Deterministic run-log id; defaults to a replay-input hash")
     parser.add_argument("--budget-tokens", type=int, default=None, help="Maximum declared turn cost in tokens")
@@ -569,6 +591,7 @@ def main() -> int:
         adapter_name=args.adapter,
         llm_invoker=args.llm_invoker,
         llm_command=args.llm_command,
+        llm_preset=args.llm_preset,
         allow_real_invoker=args.allow_real_invoker,
         once=args.once,
         max_iter=args.max_iter,

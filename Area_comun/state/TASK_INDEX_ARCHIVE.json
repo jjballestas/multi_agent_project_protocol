@@ -1863,6 +1863,83 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_observability_nagent_cases 5/5 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: trace_id determinista CONFIG-GATED en eventlog (observability AUSENTE en config vivo => OFF => byte-equivalente, O4); spans en router/review_qa; summarize_nagent() DELTA sobre M2 (no rehace summarize); apply.py aditivo (emite spans config-gated, dentro de scope); negative-replay (A6) intacto. Flip por arquitecto. Cierra parte de D0 (motor); falta 6.2 (A10 budget).",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0060",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 6.2 (A10 budget/deadline, SPEC-0046, DELTA sobre budget.py): umbral blando/duro + budget_exhausted con escalado (consumed/limit/last_responsible) + deadline por tarea DETERMINISTA (logico/inyectado, no wall-clock) + limite de cola; cableado aditivo config-gated en orchestrator/loop. Cierra D0 (motor) + criterio 13 SPEC-0038. Aditivo, byte-equivalente sin activar.",
+            "spec_id": "Area_comun/specs/SPEC-0046-fase6.2-budget-deadline.md",
+            "file": "Area_comun/tasks/TASK-0060-codex-budget-deadline.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0009",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0059"
+            ],
+            "relates_to": [
+                "TASK-0032"
+            ],
+            "relevant_files": [
+                "runtime/budget.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_budget_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/budget.py",
+                "examples/runtime_budget_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0060-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_budget_cases 5/5 + suite runtime completa sin regresion + gates py. Verifique: umbral blando=>warning, duro=>budget_exhausted+escalado (consumed/limit/last_responsible), deadline DETERMINISTA por task_deadlines (logico, NO wall-clock), limite de cola=>escalado; budget AUSENTE en config vivo => off => byte-equivalente; DELTA sobre budget.py (no rehace Budget); orchestrator aditivo con clock_fixed determinista; negative-replay (A6) intacto. Flip por arquitecto. >>> CON 6.1+6.2 D0 (MOTOR) CERRADO; criterio 13 SPEC-0038 cubierto <<<.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0061",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.2 (distribucion, SPEC-0047): upgrade_instance.py tier-aware (+ paridad .ps1) - propaga deltas de runtime/** + CI a instancias adoption_tier=runtime (coordination/ausente=>como hoy), excluye state/runs/pycache; sello runtime_version (master lo fija, instancia runtime lo porta); inform-only/aditivo. Mitiga el drift del tier runtime.",
+            "spec_id": "Area_comun/specs/SPEC-0047-d2.2-upgrade-tier-aware.md",
+            "file": "Area_comun/tasks/TASK-0061-codex-upgrade-tier-aware.md",
+            "linked_decisions": [
+                "DECISION-0019",
+                "DECISION-0006",
+                "DECISION-0001"
+            ],
+            "depends_on": [
+                "TASK-0058"
+            ],
+            "relates_to": [
+                "TASK-0019"
+            ],
+            "relevant_files": [
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_upgrade_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "examples/runtime_upgrade_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0061-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_upgrade_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: runtime_version sellado (live 0.10.0; template placeholder); upgrade_instance.py (+ paridad .ps1 +52) tier-aware via adoptable_for_instance: instancia runtime-tier recibe deltas runtime/** + runtime_version, coordination/ausente NO recibe runtime/** (como hoy); excluye runtime/state/runs/__pycache__; inform-only (no muta); reporte muestra runtime_version master vs instancia solo para runtime-tier. Flip por arquitecto. CIERRA D2.2. OBS menor (notificada a Codex): el handoff + in-review msg de 0061 llegaron tras la liberacion del claim/mi chequeo (timing), presentes y movidos a answered; ratificacion no afectada. Reconciliado el GO-upgrade que quedo status=archived en open/.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

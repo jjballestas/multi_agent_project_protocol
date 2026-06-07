@@ -77,6 +77,87 @@ def split_command(command: str) -> tuple[str, ...]:
 
 
 @dataclass(frozen=True)
+class ResolvedLLMCommand:
+    command: str
+    label: str
+
+
+def runtime_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(config, dict):
+        return {}
+    runtime = config.get("runtime")
+    return runtime if isinstance(runtime, dict) else {}
+
+
+def configured_llm_presets(config: dict[str, Any] | None) -> dict[str, str]:
+    runtime = runtime_config(config)
+    raw = runtime.get("llm_cli_presets")
+    if not isinstance(raw, dict):
+        return {}
+
+    presets: dict[str, str] = {}
+    for name, value in raw.items():
+        key = str(name or "").strip()
+        if not key:
+            continue
+        if isinstance(value, str):
+            command = value.strip()
+        elif isinstance(value, dict):
+            command = str(value.get("command") or "").strip()
+        else:
+            command = ""
+        if command:
+            presets[key] = command
+    return presets
+
+
+def resolve_llm_command(
+    config: dict[str, Any] | None,
+    *,
+    command: str | None = None,
+    preset: str | None = None,
+) -> ResolvedLLMCommand | None:
+    command_text = str(command or "").strip()
+    preset_name = str(preset or "").strip()
+    if command_text and preset_name:
+        raise ValueError("choose either --llm-command or --llm-preset")
+    if command_text:
+        return ResolvedLLMCommand(command=command_text, label="command")
+    if not preset_name:
+        return None
+
+    presets = configured_llm_presets(config)
+    preset_command = presets.get(preset_name)
+    if not preset_command:
+        available = ", ".join(sorted(presets)) or "none"
+        raise ValueError(f"unknown --llm-preset: {preset_name} (available: {available})")
+    return ResolvedLLMCommand(command=preset_command, label=f"preset:{preset_name}")
+
+
+def real_invoker_activation_error(config: dict[str, Any] | None) -> str | None:
+    runtime = runtime_config(config)
+    raw = runtime.get("real_invoker")
+    if not isinstance(raw, dict) or raw.get("enabled") is not True:
+        return "runtime.real_invoker.enabled is not true"
+
+    decision_id = str(raw.get("activation_decision") or raw.get("decision_id") or "").strip()
+    approved_by = str(raw.get("approved_by") or raw.get("approver") or "").strip()
+    approved_at = str(raw.get("approved_at") or raw.get("ratified_at") or "").strip()
+    missing = [
+        name
+        for name, value in (
+            ("activation_decision", decision_id),
+            ("approved_by", approved_by),
+            ("approved_at", approved_at),
+        )
+        if not value
+    ]
+    if missing:
+        return "runtime.real_invoker missing " + ", ".join(missing)
+    return None
+
+
+@dataclass(frozen=True)
 class RecordedInvoker:
     transcript_path: Path
     name: str = "recorded"
@@ -104,11 +185,11 @@ class SubprocessInvoker:
     name: str = "subprocess"
 
     @classmethod
-    def from_command(cls, command: str, *, timeout_seconds: int = 120) -> "SubprocessInvoker":
+    def from_command(cls, command: str, *, timeout_seconds: int = 120, name: str = "subprocess") -> "SubprocessInvoker":
         parts = split_command(command)
         if not parts:
             raise ValueError("--llm-command cannot be empty")
-        return cls(command=parts, timeout_seconds=timeout_seconds)
+        return cls(command=parts, timeout_seconds=timeout_seconds, name=name)
 
     def run(self, *, prompt: str, root: Path) -> TurnReport:
         completed = subprocess.run(

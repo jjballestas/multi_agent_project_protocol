@@ -44,12 +44,31 @@ Uso real gateado:
 
 ```text
 python runtime/orchestrator.py --run --adapter llm --llm-invoker subprocess --once --allow-real-invoker --llm-command "<command>"
+python runtime/orchestrator.py --run --adapter llm --llm-invoker subprocess --once --allow-real-invoker --llm-preset claude
 ```
 
-La primera corrida real sobre el repo vivo queda pendiente de aprobacion puntual del operador. El
-subproceso recibe el prompt por stdin y debe devolver por stdout un JSON de turn report, o
+El invoker real esta apagado aunque `runtime.enabled` sea `true`. Para arrancarlo se requiere, a
+la vez: `--once`, `--allow-real-invoker`, `--llm-command` o un `--llm-preset` declarado en
+`runtime.llm_cli_presets`, y un registro local en `protocol.config.json`:
+
+```json
+{
+  "runtime": {
+    "real_invoker": {
+      "enabled": true,
+      "activation_decision": "DECISION-XXXX",
+      "approved_by": "operador humano",
+      "approved_at": "YYYY-MM-DD"
+    }
+  }
+}
+```
+
+El subproceso recibe el prompt por stdin y debe devolver por stdout un JSON de turn report, o
 `{"report": <turn report>}`. El orquestador rechaza cambios de worktree no declarados en
-`changed_paths`, valida la allowlist del claim y aplica el budget antes de mutar estado.
+`changed_paths`, valida la allowlist del claim, aplica guardrails/tool-policy y budget antes de
+mutar estado, y mantiene 1 turno = 1 commit. Las credenciales del CLI pertenecen al entorno local
+del adoptante; no se commitean. La autonomia multi-turno no queda habilitada por este wrapper.
 
 ## Principios (no negociables, DECISION-0009)
 Ficheros = fuente de verdad. 1 turno = 1 commit. Gate por turno + rollback. Gates humanos como

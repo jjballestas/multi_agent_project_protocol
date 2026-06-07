@@ -100,22 +100,22 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). NUCLEO Fases 1-4 DONE (criterios 1-12 SPEC-0038 implementados). Fases 5-7 CONDICIONADAS/gateadas (pendiente OK operador). Brechas para spec-completa: event log writer-vivo, golden N=3/N=5, property-based I1-I8, concurrency sim, runtime suites en CI, autor-de-record hardening."
         },
         {
-            "id": "TASK-0060",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 6.2 (A10 budget/deadline, SPEC-0046) DONE - ACEPTADA por Claude: umbral blando/duro + budget_exhausted+escalado + deadline determinista (logico, no wall-clock) + limite de cola, config-gated (off=byte-equivalente). DELTA sobre budget.py. >>> D0 (MOTOR) CERRADO <<<."
-        },
-        {
-            "id": "TASK-0061",
-            "owner": "Codex",
-            "status": "done",
-            "title": "D2.2 (upgrade tier-aware, SPEC-0047) DONE - ACEPTADA por Claude: upgrade_instance.py/.ps1 propaga deltas runtime/** + runtime_version solo a instancias runtime-tier (coordination=como hoy), excluye state/runs/pycache, inform-only. golden 4/4 + suite verde."
-        },
-        {
             "id": "TASK-0062",
             "owner": "Codex",
+            "status": "done",
+            "title": "Wrapper LLM real (SPEC-0048, DECISION-0021) DONE - ACEPTADA por Claude: adapter CLI vendor-neutral (llm_cli_presets claude/codex) sobre SubprocessInvoker, off-by-default (real_invoker.enabled=false + registro), sin secretos, NO autonomia. golden 4/4 + suite verde. Ultimo bloque funcional de v1.0."
+        },
+        {
+            "id": "TASK-0063",
+            "owner": "Codex",
+            "status": "done",
+            "title": "D2.3 (docs adopcion, SPEC-0049) DONE - ACEPTADA por Claude: README_INSTANCIACION (tiers+upgrade+operar agentes reales) + N_AGENT_RUNTIME.md (criterio 16). Solo documentacion, gates verdes, sin secretos."
+        },
+        {
+            "id": "TASK-0064",
+            "owner": "Codex",
             "status": "ready",
-            "title": "Wrapper LLM real (SPEC-0048, DECISION-0021): adapter CLI concreto vendor-neutral + activacion off-by-default/gateada + limites + golden. DELTA sobre adapters, NO autonomia. Bloque funcional de v1.0."
+            "title": "D2.4 (versionado del paquete, SPEC-0050): PACKAGE_VERSIONING (4 ejes + SemVer adoptante + compatibilidad por tier) + notas de migracion. Ultima de D2. Solo documentacion."
         }
     ],
     "open_questions": [],
@@ -148,7 +148,13 @@
         "FASE 6.2 CERRADA (TASK-0060 DONE, ratificacion adversarial de Claude 2026-06-07): A10 budget/deadline (umbral blando/duro + budget_exhausted+escalado consumed/limit/last_responsible + deadline determinista logico no-wall-clock + limite de cola), config-gated off=byte-equivalente, DELTA sobre budget.py. >>> CON 6.1+6.2 EL MOTOR (D0) QUEDA CERRADO; criterio 13 SPEC-0038 cubierto <<<. ENCOLADA D2.2 = TASK-0061 (upgrade_instance tier-aware + runtime_version: propaga deltas de runtime/** solo a instancias runtime-tier; inform-only/aditivo, paridad py/.ps1). ALCANCE v1.0 restante (operador): D2.2 -> WRAPPER LLM REAL (adapter CLI + politica de activacion=probable DECISION-0021 + docs) -> D2.3 docs (criterio 16) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision) + fix prune -> RELEASE v1.0 (aprobacion humana). Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada.",
         "TASK-0061 ENTREGADA a in_review por Codex (2026-06-07): D2.2 upgrade_instance tier-aware + runtime_version. Implementado runtime_version live/template; upgrade_instance.py/.ps1 con runtime/** + .github/workflows/validate.yml adoptables solo para instancias adoption_tier=runtime; coordination/ausente conserva comportamiento sin runtime; exclusiones runtime/state, runtime/runs y __pycache__; reporte muestra runtime_version master/instancia solo en runtime-tier. Golden runtime_upgrade_cases 4/4 + paridad py/ps + suite runtime completa + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
         "D2.2 CERRADA (TASK-0061 DONE, ratificacion adversarial de Claude 2026-06-07): upgrade_instance.py/.ps1 tier-aware + runtime_version (propaga deltas runtime/** solo a instancias runtime-tier; inform-only/aditivo). golden runtime_upgrade_cases 4/4 + suite verde. Track distribucion: D2.1+D2.2 done. SIGUIENTE v1.0 = WRAPPER LLM REAL (GATEADO: requiere DECISION-0021 politica de activacion con APROBACION HUMANA; invoker generico ya existe TASK-0036/0039). Claude prepara DECISION-0021 en personal y pide OK al operador antes de encolar. Luego D2.3 docs (criterio 16) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune -> RELEASE v1.0. D0 (motor) ya cerrado. OBS: release de 0061 sin handoff/in-review msg (notificado a Codex, DECISION-0018).",
-        "DECISION-0021 ACCEPTED (activacion del wrapper LLM real, aprobada por el operador 2026-06-07): off-by-default, opt-in/gateada/supervisada por instancia (flags + registro, analogo a DECISION-0009), limites obligatorios (budget A10/tool-policy/guardrails/gate), vendor-neutral, sin secretos, NO autonomia. ENCOLADO el wrapper = TASK-0062 (SPEC-0048: adapter CLI concreto vendor-neutral sobre SubprocessInvoker -presets claude/codex- DELTA sobre adapters; golden runtime_real_adapter_cases con RecordedInvoker). Restante v1.0: wrapper -> D2.3 docs (criterio 16 + operar agentes reales) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune -> RELEASE v1.0 (aprobacion humana). D0 motor + D2.1+D2.2 done. Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada."
+        "DECISION-0021 ACCEPTED (activacion del wrapper LLM real, aprobada por el operador 2026-06-07): off-by-default, opt-in/gateada/supervisada por instancia (flags + registro, analogo a DECISION-0009), limites obligatorios (budget A10/tool-policy/guardrails/gate), vendor-neutral, sin secretos, NO autonomia. ENCOLADO el wrapper = TASK-0062 (SPEC-0048: adapter CLI concreto vendor-neutral sobre SubprocessInvoker -presets claude/codex- DELTA sobre adapters; golden runtime_real_adapter_cases con RecordedInvoker). Restante v1.0: wrapper -> D2.3 docs (criterio 16 + operar agentes reales) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune -> RELEASE v1.0 (aprobacion humana). D0 motor + D2.1+D2.2 done. Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada.",
+        "TASK-0062 RECLAMADA por Codex (2026-06-07): implementacion en progreso del wrapper LLM real vendor-neutral, off-by-default/gateado por DECISION-0021, con golden runtime_real_adapter_cases, CI y docs minimas. Release atomico esperado con handoff+in-review msg en el mismo paso.",
+        "TASK-0062 ENTREGADA a in_review por Codex (2026-06-07): wrapper LLM real vendor-neutral terminado. Subprocess requiere runtime.enabled=true + --once + --allow-real-invoker + --llm-command/--llm-preset + runtime.real_invoker registrado; presets claude/codex son config, no hardcode unico; CI usa RecordedInvoker/sentinels sin red/credenciales; NO autonomia. Pendiente ratificacion adversarial de Claude.",
+        "WRAPPER LLM REAL CERRADO (TASK-0062 DONE, ratif. adversarial de Claude 2026-06-07): adapter CLI vendor-neutral (presets claude/codex, sin hardcode/secretos) off-by-default (real_invoker.enabled=false + registro per DECISION-0021) + limites al activar + NO autonomia; golden 4/4 + suite verde. >>> ULTIMO BLOQUE FUNCIONAL DE v1.0 LISTO <<<. ENCOLADA D2.3 = TASK-0063 (docs adopcion + criterio 16). RESTANTE v1.0: D2.3 -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision) + fix prune -> RELEASE v1.0 (APROBACION HUMANA). Post-v1.0 gateado: Fase B, Fase 7, autonomia.",
+        "TASK-0063 RECLAMADA por Codex (2026-06-07): docs de adopcion D2.3 en progreso. Alcance: README_INSTANCIACION tiers/upgrade/operar agentes reales + Area_comun/protocol/N_AGENT_RUNTIME.md criterio 16. Solo documentacion, neutral, sin secretos.",
+        "TASK-0063 ENTREGADA a in_review por Codex (2026-06-07): README_INSTANCIACION ampliado (tiers coordination/runtime, instanciacion --tier, upgrade tier-aware, operacion de agentes reales) + Area_comun/protocol/N_AGENT_RUNTIME.md criterio 16. Solo docs; gates py/ps verdes. Pendiente ratificacion de Claude.",
+        "D2.3 CERRADA (TASK-0063 DONE, ratif. adversarial de Claude 2026-06-07): README_INSTANCIACION ampliado (tiers/upgrade/operar agentes reales) + N_AGENT_RUNTIME.md (criterio 16); gates verdes, sin secretos. TAMBIEN cerrado el wrapper (TASK-0062 DONE, ultimo bloque funcional). ENCOLADA D2.4 = TASK-0064 (versionado del paquete + migracion, ultima de D2). RESTANTE v1.0: D2.4 -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune (no condensa next_actions) -> RELEASE v1.0 (APROBACION HUMANA). Anomalias DECISION-0018 de Codex por timing (create-order) resueltas: 0060, 0063. PERMISOS del lazo a\u00f1adidos a .claude/settings.json (loop commands auto-allow). Post-v1.0 gateado: Fase B, Fase 7, autonomia."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

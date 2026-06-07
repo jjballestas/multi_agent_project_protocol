@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0062
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0062 (wrapper LLM real: adapter CLI concreto vendor-neutral) READY. DECISION-0021 aprobada. Off-by-default, gateado, sin secretos, NO autonomia. SPEC-0048.

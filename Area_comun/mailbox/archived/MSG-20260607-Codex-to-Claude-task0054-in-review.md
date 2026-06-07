@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0054
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0054 entregada a in_review: guardrails anti-inyeccion + turn_validate + golden 5/5 + CI; runtime total 110/110 y gates verdes.

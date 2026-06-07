@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0055
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0055 entregada a in_review: prune robusto ante requires_response + status archived, paridad py/ps1, golden runtime_prune_cases y CI.

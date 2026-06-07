@@ -35,7 +35,21 @@
   },
   "runtime": {
     "enabled": false,
-    "entrypoint": "runtime/orchestrator.py"
+    "entrypoint": "runtime/orchestrator.py",
+    "real_invoker": {
+      "enabled": false,
+      "activation_decision": "",
+      "approved_by": "",
+      "approved_at": ""
+    },
+    "llm_cli_presets": {
+      "claude": {
+        "command": "claude"
+      },
+      "codex": {
+        "command": "codex"
+      }
+    }
   },
   "event_auth": {
     "enabled": false,

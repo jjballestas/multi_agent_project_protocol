@@ -60,13 +60,21 @@ def claim(task_id: str) -> dict[str, Any]:
     }
 
 
-def build_fixture(root: Path, *, enabled: bool = True, task_id: str = "TASK-9000") -> None:
+def build_fixture(root: Path, *, enabled: bool = True, task_id: str = "TASK-9000", real_invoker_enabled: bool = False) -> None:
     item = task(task_id)
+    runtime_config: dict[str, Any] = {"enabled": enabled, "entrypoint": "runtime/orchestrator.py"}
+    if real_invoker_enabled:
+        runtime_config["real_invoker"] = {
+            "enabled": True,
+            "activation_decision": "DECISION-0021",
+            "approved_by": "Fixture Owner",
+            "approved_at": "2026-06-07",
+        }
     write_json(
         root / "protocol.config.json",
         {
             "schema_version": "1.0",
-            "runtime": {"enabled": enabled, "entrypoint": "runtime/orchestrator.py"},
+            "runtime": runtime_config,
             "domain_neutrality": {
                 "enabled": True,
                 "denylist": [],
@@ -294,7 +302,7 @@ def case_enabled_false_aborts() -> None:
 def case_subprocess_native_command_commits() -> None:
     with tempfile.TemporaryDirectory(prefix="llm-adapter-subprocess-") as temp:
         fixture = Path(temp)
-        build_fixture(fixture)
+        build_fixture(fixture, real_invoker_enabled=True)
         before = git_count(fixture)
         script = write_subprocess_agent(fixture, turn_report("TASK-9000"))
         command = f"{command_arg(sys.executable)} {command_arg(script)}"

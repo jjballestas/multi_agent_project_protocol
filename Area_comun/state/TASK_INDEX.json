@@ -115,86 +115,9 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0060",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase 6.2 (A10 budget/deadline, SPEC-0046, DELTA sobre budget.py): umbral blando/duro + budget_exhausted con escalado (consumed/limit/last_responsible) + deadline por tarea DETERMINISTA (logico/inyectado, no wall-clock) + limite de cola; cableado aditivo config-gated en orchestrator/loop. Cierra D0 (motor) + criterio 13 SPEC-0038. Aditivo, byte-equivalente sin activar.",
-            "spec_id": "Area_comun/specs/SPEC-0046-fase6.2-budget-deadline.md",
-            "file": "Area_comun/tasks/TASK-0060-codex-budget-deadline.md",
-            "linked_decisions": [
-                "DECISION-0015",
-                "DECISION-0009",
-                "DECISION-0018"
-            ],
-            "depends_on": [
-                "TASK-0059"
-            ],
-            "relates_to": [
-                "TASK-0032"
-            ],
-            "relevant_files": [
-                "runtime/budget.py",
-                "runtime/orchestrator.py",
-                "examples/runtime_budget_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/budget.py",
-                "examples/runtime_budget_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0060-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_budget_cases 5/5 + suite runtime completa sin regresion + gates py. Verifique: umbral blando=>warning, duro=>budget_exhausted+escalado (consumed/limit/last_responsible), deadline DETERMINISTA por task_deadlines (logico, NO wall-clock), limite de cola=>escalado; budget AUSENTE en config vivo => off => byte-equivalente; DELTA sobre budget.py (no rehace Budget); orchestrator aditivo con clock_fixed determinista; negative-replay (A6) intacto. Flip por arquitecto. >>> CON 6.1+6.2 D0 (MOTOR) CERRADO; criterio 13 SPEC-0038 cubierto <<<.",
-            "updated_at": "2026-06-07"
-        },
-        {
-            "id": "TASK-0061",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "D2.2 (distribucion, SPEC-0047): upgrade_instance.py tier-aware (+ paridad .ps1) - propaga deltas de runtime/** + CI a instancias adoption_tier=runtime (coordination/ausente=>como hoy), excluye state/runs/pycache; sello runtime_version (master lo fija, instancia runtime lo porta); inform-only/aditivo. Mitiga el drift del tier runtime.",
-            "spec_id": "Area_comun/specs/SPEC-0047-d2.2-upgrade-tier-aware.md",
-            "file": "Area_comun/tasks/TASK-0061-codex-upgrade-tier-aware.md",
-            "linked_decisions": [
-                "DECISION-0019",
-                "DECISION-0006",
-                "DECISION-0001"
-            ],
-            "depends_on": [
-                "TASK-0058"
-            ],
-            "relates_to": [
-                "TASK-0019"
-            ],
-            "relevant_files": [
-                "scripts/upgrade_instance.py",
-                "scripts/upgrade_instance.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_upgrade_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "scripts/upgrade_instance.py",
-                "scripts/upgrade_instance.ps1",
-                "examples/runtime_upgrade_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0061-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_upgrade_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: runtime_version sellado (live 0.10.0; template placeholder); upgrade_instance.py (+ paridad .ps1 +52) tier-aware via adoptable_for_instance: instancia runtime-tier recibe deltas runtime/** + runtime_version, coordination/ausente NO recibe runtime/** (como hoy); excluye runtime/state/runs/__pycache__; inform-only (no muta); reporte muestra runtime_version master vs instancia solo para runtime-tier. Flip por arquitecto. CIERRA D2.2. OBS menor (notificada a Codex): el handoff + in-review msg de 0061 llegaron tras la liberacion del claim/mi chequeo (timing), presentes y movidos a answered; ratificacion no afectada. Reconciliado el GO-upgrade que quedo status=archived en open/.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0062",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -228,7 +151,82 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07 tras DECISION-0021 aprobada por el operador. Bloque funcional de v1.0 (wrapper LLM real). DELTA sobre adapters; off-by-default, vendor-neutral, sin secretos, NO autonomia; sin DECISION nueva (DECISION-0021 cubre el boundary). Metodo anti-colision. Release atomico con handoff+in-review en el mismo paso (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_real_adapter_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. W1 off-by-default (TEMPLATE runtime.enabled=false; LIVE+TEMPLATE runtime.real_invoker.enabled=false con campos de registro; el CLI real no corre sin registro+flags aunque runtime.enabled); W2 vendor-neutral (runtime.llm_cli_presets claude+codex como config, resolve via --llm-command|--llm-preset, sin hardcode) y SIN secretos (grep limpio; CI con RecordedInvoker); W3 limites al activar (budget A10/tool-policy/guardrails/gate) + replay-comparativo; W4 NO autonomia. DELTA sobre runtime/adapters. Handoff+in-review completos. Flip por arquitecto. CIERRA el wrapper = ultimo bloque funcional de v1.0.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0063",
+            "owner": "Codex",
+            "status": "done",
+            "type": "documentation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.3 (docs de adopcion, SPEC-0049): ampliar README_INSTANCIACION (tiers coordination/runtime + elegir/instanciar --tier + upgrade tier-aware + OPERAR AGENTES REALES via wrapper DECISION-0021 off-by-default) + docs N-agente criterio 16 SPEC-0038 (registry/routing/estados/guardrails/seguridad/handoffs/observabilidad/budget). Solo documentacion, neutral, sin secretos, sin duplicar runtime/README.",
+            "spec_id": "Area_comun/specs/SPEC-0049-d2.3-docs-adopcion.md",
+            "file": "Area_comun/tasks/TASK-0063-codex-docs-adopcion.md",
+            "linked_decisions": [
+                "DECISION-0019",
+                "DECISION-0021",
+                "DECISION-0015"
+            ],
+            "depends_on": [
+                "TASK-0058",
+                "TASK-0061",
+                "TASK-0062"
+            ],
+            "relates_to": [
+                "TASK-0013"
+            ],
+            "relevant_files": [
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/",
+                "runtime/README.md"
+            ],
+            "deliverables": [
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0063-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Docs D2.3: README_INSTANCIACION ampliado (tiers coordination/runtime, elegir/instanciar --tier, upgrade tier-aware, OPERAR AGENTES REALES via wrapper DECISION-0021 off-by-default -line 129 documenta credenciales NO commiteadas-) + Area_comun/protocol/N_AGENT_RUNTIME.md (criterio 16: registry/routing/review-qa/guardrails/seguridad/handoffs/observabilidad/budget). Verifique cobertura (README 28 hits tiers/upgrade/activacion; N_AGENT cubre los 8 temas) + sin secretos (falsos positivos: docs dicen 'configuracion local, no secretos' + refs TASK-0001) + encoding/neutralidad/validador verdes. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.3.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0064",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "documentation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.4 (versionado del paquete, SPEC-0050): documento PACKAGE_VERSIONING (4 ejes protocol/runtime/schema/profile_version + SemVer para el adoptante + compatibilidad por tier) + notas de migracion (lite->runtime, upgrade inform-only, politica de cambios incompatibles). Ultima de D2. Solo documentacion, neutral.",
+            "spec_id": "Area_comun/specs/SPEC-0050-d2.4-versionado-paquete.md",
+            "file": "Area_comun/tasks/TASK-0064-codex-versionado-paquete.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019",
+                "DECISION-0021"
+            ],
+            "depends_on": [
+                "TASK-0058",
+                "TASK-0061",
+                "TASK-0063"
+            ],
+            "relates_to": [
+                "TASK-0053"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/SCHEMA_VERSIONING.md"
+            ],
+            "deliverables": [
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0064-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07. D2.4 (ultima de D2) del track de distribucion = v1.0. Solo documentacion; neutral, sin secretos, sin duplicar. Release atomico con handoff+in-review en el mismo paso (DECISION-0018)."
         }
     ]
 }

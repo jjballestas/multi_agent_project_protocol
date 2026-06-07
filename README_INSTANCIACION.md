@@ -63,6 +63,81 @@ La instancia generada deja `TASK_INDEX.json` vacio pero valido. La primera tarea
 despues copiando `Area_comun/protocol/TASK_TEMPLATE.md` dentro de `Area_comun/tasks/` y
 registrandola en `Area_comun/state/TASK_INDEX.json`.
 
+### Elegir tier de adopcion
+
+El protocolo se instancia en dos tiers, definidos por `adoption_tier`:
+
+| Tier | Para que sirve | Que copia | Estado por defecto |
+|---|---|---|---|
+| `coordination` | Adoptar la disciplina de trabajo sin motor automatizado. Es el default. | `AGENTS.md`, `Area_comun/`, estado, plantillas, validadores basicos. | Coordinacion manual. |
+| `runtime` | Adoptar tambien el motor local de orquestacion y sus gates. | Todo lo anterior + `runtime/`, scripts de gates, workflow CI y configuracion runtime. | Motor presente pero apagado. |
+
+Usa `coordination` cuando el proyecto solo necesita tareas, claims, mailbox, decisiones y handoffs
+auditables. Usa `runtime` cuando tambien quieres replay, routing, validacion de turnos, apply/gate,
+observabilidad, presupuesto y opcion futura de agentes reales bajo gate.
+
+Ejemplos:
+
+```powershell
+python scripts\new_instance.py ... --tier coordination
+python scripts\new_instance.py ... --tier runtime
+```
+
+Si omites `--tier`, el script usa `coordination`. En el tier `runtime`, `protocol.config.json`
+nace con `runtime.enabled:false`, `tool_policy.enabled:false`, `event_auth.enabled:false` y
+`runtime.real_invoker.enabled:false`; tener los archivos del motor no lo activa.
+
+### Upgrade entre versiones
+
+Para comparar una instancia con el master del protocolo:
+
+```powershell
+python scripts\upgrade_instance.py --instance D:\Agentes\mi_nuevo_proyecto --master . --report upgrade.md
+```
+
+El reporte es informativo: no muta la instancia. Si `adoption_tier` es `runtime`, el upgrade propone
+deltas de `runtime/**`, workflow de CI y `runtime_version`; si el tier es `coordination` o falta, no
+propone runtime y conserva el comportamiento ligero. Los artefactos de ejecucion (`runtime/state/`,
+`runtime/runs/`, `__pycache__/`) quedan fuera del upgrade.
+
+### Operar agentes reales
+
+El wrapper de CLI real existe solo para instancias runtime y sigue apagado por defecto. Una instancia
+solo puede invocar un agente real si antes registra su propia aprobacion humana, por ejemplo:
+
+```json
+{
+  "runtime": {
+    "enabled": true,
+    "real_invoker": {
+      "enabled": true,
+      "activation_decision": "DECISION-XXXX",
+      "approved_by": "operador humano",
+      "approved_at": "YYYY-MM-DD"
+    }
+  }
+}
+```
+
+La ejecucion real exige ademas un unico turno:
+
+```powershell
+python runtime\orchestrator.py --run --adapter llm --llm-invoker subprocess --once --allow-real-invoker --llm-command "<command>"
+python runtime\orchestrator.py --run --adapter llm --llm-invoker subprocess --once --allow-real-invoker --llm-preset claude
+```
+
+`--llm-command` y `runtime.llm_cli_presets` son configuracion local, no secretos. Las credenciales
+del CLI las aporta el entorno del adoptante y nunca se commitean. El runtime aplica claim, guardrails,
+tool-policy, budget/deadline, validacion de turn report, gate y 1 commit por turno antes de mutar
+estado. Esto no habilita autonomia multi-turno: para mas detalle operativo, ver
+[`runtime/README.md`](runtime/README.md).
+
+### Runtime N-agente
+
+La operacion N-agente se documenta en
+[`Area_comun/protocol/N_AGENT_RUNTIME.md`](Area_comun/protocol/N_AGENT_RUNTIME.md): registry de
+agentes/capacidades, routing, estados Review/QA, seguridad, handoffs, observabilidad y presupuesto.
+
 ## 2. Validar la instancia generada
 
 Valida la nueva instancia desde la raiz de este repo:

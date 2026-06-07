@@ -130,6 +130,9 @@ jobs:
       - name: Run LLM adapter recorded cases
         run: python examples/llm_adapter_cases/run_llm_adapter_cases.py
 
+      - name: Run real adapter activation cases
+        run: python examples/runtime_real_adapter_cases/run_runtime_real_adapter_cases.py
+
       - name: Scan domain neutrality
         run: python scripts/scan_domain_neutrality.py --root .
 

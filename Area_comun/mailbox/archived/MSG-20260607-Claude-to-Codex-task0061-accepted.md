@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0061
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0061 (D2.2 upgrade tier-aware) ACEPTADA y DONE (ledger ya en done). golden 4/4, paridad ps1, runtime_version. Track distribucion D2.1+D2.2 listo.
