@@ -80,19 +80,39 @@ de **referencia verificable**:
 6. Determinismo: replay sin reloj/red (timestamp provisto); negative-replay intacto.
 7. Regresion: suite runtime + B.1/B.2/B.3 intactos; coordination-tier sin cambios; fallback N=2 byte-equivalente.
 
-## 6. Fuera de alcance
+## 6. Plan de rollback (condicion del operador, DECISION-0022)
 
-- Encender el modo autoritativo en el repo vivo (decision/operacion aparte del operador).
+B.4 se entrega APAGADA. Encender enforce/autoritativo en la instancia viva es un paso aparte que exige
+aprobacion explicita del operador + validacion de replay/materializacion + este plan de rollback:
+
+1. **Reversa por flags:** apagar `event_state.enforce`/`authoritative` (y, si se desea, `materialize`)
+   devuelve al modo de edicion manual; el hard-gate deja de rechazar ediciones. Reversible en caliente
+   mientras no se haya retirado el flujo manual de forma permanente.
+2. **Reconstruccion del estado:** el snapshot de corte vive content-addressed (`snapshots/<hash>.json`) y el
+   evento genesis registra el `commit` de corte; combinando ambos se reconstruye el estado previo de forma
+   verificable (hash). El `git revert`/`checkout` del commit de corte es el ultimo recurso.
+3. **Prueba del rollback:** el golden incluye un caso "encender -> operar via intents -> apagar -> editar a
+   mano otra vez" que demuestra la reversibilidad sin perdida de estado.
+4. **Criterio de no-retorno:** la prohibicion DURA (retirar el flujo manual de forma permanente) NO entra en
+   B.4; quedaria para un paso futuro explicito. B.4 deja siempre la puerta de reversa abierta.
+
+## 7. Fuera de alcance
+
+- **Encender el modo autoritativo en el repo vivo** (decision/operacion aparte del operador, condicionada a
+  B.3 done + validacion replay/materializacion + plan de rollback; DECISION-0022).
+- Prohibicion DURA permanente (retirar el flujo manual sin reversa): paso futuro, no en B.4.
 - Mecanismos de bloqueo del sistema de archivos (la prohibicion es por gate + proceso, no por permisos de FS).
 - Cambiar el contrato del turn schema mas alla de lo necesario para el intent de transicion.
 
-## 7. SemVer
+## 8. SemVer
 
-- Lo fija el operador al ratificar DECISION-0022: MINOR-con-migracion (off-by-default, opt-in, coordination
-  intacto) o MAJOR si se considera que cambia el contrato operativo de una instancia valida. Genesis-por-
-  referencia es aditivo y favorable al cold-start.
+- **MINOR-con-migracion** (fijado por el operador 2026-06-07): off-by-default, opt-in, coordination-tier
+  intacto. Genesis-por-referencia es aditivo y favorable al cold-start.
 
-## 8. Secuencia
+## 9. Secuencia
 
-Encolar como TASK-0069 SOLO cuando: B.3 (TASK-0068) este done Y DECISION-0022 este ACCEPTED por el operador.
-Promover de a una (DECISION-0020).
+- DECISION-0022 ya esta ACCEPTED como direccion tecnica (operador, 2026-06-07).
+- Encolar como TASK-0069 cuando B.3 (TASK-0068) este `done` (B.4 se monta sobre el hard-gate de B.3).
+  Promover de a una (DECISION-0020). La implementacion se entrega APAGADA.
+- **Activar enforce/autoritativo en la instancia viva = aprobacion separada del operador** tras B.3 + validar
+  replay/materializacion + plan de rollback (sec.6).

@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0022
 title: Runtime como escritor autoritativo del estado de protocolo + genesis por referencia (no por volcado)
-status: proposed
+status: accepted
 date: 2026-06-07
-ratified_at: null
+ratified_at: 2026-06-07
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
@@ -13,11 +13,13 @@ phase: P2
 
 # DECISION-0022 - Runtime como escritor autoritativo del estado + genesis por referencia
 
-> Estado: PROPOSED (2026-06-07). El operador autorizo INICIAR la Fase B.4 y fijo la restriccion de diseno
-> del genesis. Esta decision habilita el cambio de modo operativo (runtime = escritor unico, prohibir
-> edicion manual) que es la rebanada B.4 de la Fase B (SPEC-0039). Es un cambio de FRONTERA del contrato
-> operativo => requiere aprobacion humana antes de ratificar y de aterrizar la prohibicion. Off-by-default,
-> opt-in por instancia, solo runtime-tier; coordination-tier no se ve afectado.
+> Estado: ACCEPTED como DIRECCION TECNICA (2026-06-07, ratificada por el operador). SemVer:
+> **MINOR-con-migracion** (off-by-default, opt-in, coordination-tier intacto). Habilita el cambio de modo
+> operativo (runtime = escritor unico, prohibir edicion manual) que es la rebanada B.4 de la Fase B
+> (SPEC-0039). CONDICION DEL OPERADOR: la implementacion de B.4 se construye apagada, pero **ACTIVAR enforce/
+> modo autoritativo en la INSTANCIA VIVA exige una aprobacion explicita POSTERIOR**, condicionada a:
+> (1) B.3 (TASK-0068) cerrada, (2) validacion de replay/materializacion, (3) plan de rollback documentado.
+> Off-by-default, opt-in por instancia, solo runtime-tier; coordination-tier no se ve afectado.
 
 ## Contexto
 
@@ -66,14 +68,27 @@ genesis **incrusta** todo el estado, infla el event log, el contexto del agente 
 
 ## Versionado y neutralidad (DECISION-0001)
 
-- Off-by-default + opt-in + coordination-tier intacto => el cambio es **aditivo** para quien no lo activa.
-  Para quien lo activa, cambia el flujo operativo (edicion manual prohibida): se evalua como
-  **MINOR-con-migracion** o **MAJOR** segun rompa o no una instancia valida existente; lo fija el operador
-  al ratificar/release. Neutral de dominio (coordinacion de proceso, sin terminos de negocio).
+- **SemVer: MINOR-con-migracion** (fijado por el operador 2026-06-07). Off-by-default + opt-in +
+  coordination-tier intacto => aditivo para quien no lo activa; para quien lo activa hay migracion asistida.
+  Neutral de dominio (coordinacion de proceso, sin terminos de negocio).
 - Genesis-por-referencia: aditivo y favorable al presupuesto de cold-start (DECISION-0014); sin secretos.
 
-## Pendiente antes de ACCEPTED
+## Condiciones para ACTIVAR enforce/modo autoritativo en la instancia viva (aprobacion separada)
+
+La direccion tecnica esta ratificada y B.4 se implementa **apagada**. Encender el modo en el repo vivo
+(`event_state.enforce`/`authoritative` = true) es un paso OPERATIVO aparte que requiere **aprobacion explicita
+del operador POSTERIOR al cierre de B.3**, condicionada a:
+
+- [ ] B.3 (TASK-0068) `done` y ratificada.
+- [ ] Validacion de replay/materializacion sobre el estado vivo (round-trip genesis-ref -> replay ->
+      materialize == estado canonico; integridad por hash).
+- [ ] **Plan de rollback** documentado y probado (apagar flags devuelve a edicion manual; el snapshot
+      content-addressed y el commit de corte permiten reconstruir el estado previo).
+
+Hasta esa aprobacion, B.4 queda como capacidad disponible pero **inactiva** en la instancia viva.
+
+## Pendiente antes de promover/aterrizar
 
 - [ ] Cerrar B.3 (TASK-0068) primero (B.4 se monta sobre el hard-gate de B.3).
-- [ ] Aprobacion del operador humano (cambio de frontera del modo operativo) + SemVer fijado.
-- [ ] Numero de decision confirmado (0022) y enlazado en PROJECT_STATE#decisions.
+- [x] Aprobacion del operador como direccion tecnica + SemVer (MINOR-con-migracion) -- 2026-06-07.
+- [ ] Promover a Area_comun/decisions/ + enlazar en PROJECT_STATE#decisions (en ventana segura, al cerrar B.3).
