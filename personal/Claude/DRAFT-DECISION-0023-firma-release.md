@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0023
 title: Politica de firma de releases (autenticidad de la cadena de suministro, sin secretos en el repo)
-status: proposed
+status: accepted
 date: 2026-06-07
-ratified_at: null
+ratified_at: 2026-06-07
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
@@ -13,9 +13,9 @@ phase: P2
 
 # DECISION-0023 - Politica de firma de releases (F7.4)
 
-> PROPOSED (2026-06-07). Borrador en personal/Claude/, adelantado para revision del operador. F7.4 (firma) es
-> la unica rebanada de Fase 7 que toca politica de seguridad/release => requiere DECISION + aprobacion humana
-> antes de implementarse/encolarse. Off-by-default, sin secretos en el repo, vendor-neutral. SemVer MINOR.
+> ACCEPTED (2026-06-07, el operador aprobo la politica tal cual). Habilita F7.4 (firma). Off-by-default, sin
+> secretos en el repo, vendor-neutral (backend configurable; no se mandata un proveedor unico). SemVer MINOR.
+> Pendiente solo: promover a Area_comun/decisions/ + PROJECT_STATE#decisions en ventana segura (Codex mid-flight).
 
 ## Contexto
 
@@ -56,8 +56,9 @@ violar ese boundary.
 
 - Aditivo, off-by-default, opt-in => **MINOR**. Neutral de dominio. Mantiene el boundary "no secretos".
 
-## Pendiente antes de ACCEPTED
+## Estado
 
-- [ ] Aprobacion del operador (politica de firma = boundary de seguridad/release).
-- [ ] Confirmar backend(s) real(es) preferido(s) (p.ej. cosign/minisign/gpg) para documentar, sin atar el core.
-- [ ] Numero de decision confirmado (0023) + enlazar en PROJECT_STATE#decisions al ratificar.
+- [x] Aprobacion del operador (2026-06-07): "Apruebo la politica actual".
+- [x] Backend: NO se mandata uno; queda configurable/vendor-neutral (cosign/minisign/gpg/sigstore como
+      ejemplos a documentar). El golden usa backend fixture HMAC (no-secreto) para determinismo.
+- [ ] Promover a Area_comun/decisions/DECISION-0023 + enlazar en PROJECT_STATE#decisions (ventana segura).
