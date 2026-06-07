@@ -57,7 +57,8 @@
       "approved_by": "",
       "approved_at": "",
       "caps": {
-        "max_turns": 5
+        "max_turns": 5,
+        "wall_clock_ms": 300000
       }
     }
   },

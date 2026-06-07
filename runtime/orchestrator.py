@@ -32,6 +32,7 @@ try:
     from .gate import run_gate
     from .runlog import RunLog, deterministic_run_id, turn_entry
     from .supervised_autonomy import (
+        pause_sentinel_path,
         supervised_autonomy_activation_error,
         supervised_autonomy_payload,
         write_run_report,
@@ -57,7 +58,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from budget import Budget, budget_settings, responsible
     from metrics import summarize
     from runlog import turn_entry
-    from supervised_autonomy import supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
+    from supervised_autonomy import pause_sentinel_path, supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -347,6 +348,7 @@ def run_loop(
     budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens, **budget_settings(config))
     turns: list[dict[str, Any]] = []
     baseline_dirty = set(dirty_worktree_paths(root))
+    wall_clock_elapsed_ms = 0
 
     def finalize(maintenance: dict[str, Any]) -> dict[str, Any]:
         summary = summarize(runlog.path)
@@ -377,6 +379,34 @@ def run_loop(
         return finalize(maintenance)
 
     for index, report_path in enumerate(reports[:limit], start=1):
+        if supervision is not None and pause_sentinel_path(root).exists():
+            entry = turn_entry(
+                turn=index,
+                trace=["supervised_autonomy", "pause"],
+                outcome="paused",
+                reason="runtime/state/PAUSE",
+                duration_ms=0,
+            )
+            entry["supervised_autonomy"] = {**supervision, "wall_clock_elapsed_ms": wall_clock_elapsed_ms}
+            runlog.append(entry)
+            turns.append(entry)
+            break
+
+        if supervision is not None:
+            wall_clock_limit = int((supervision.get("caps") or {}).get("wall_clock_ms") or 0)
+            if wall_clock_limit and wall_clock_elapsed_ms + clock_fixed > wall_clock_limit:
+                entry = turn_entry(
+                    turn=index,
+                    trace=["supervised_autonomy", "wall_clock"],
+                    outcome="wallclock_exhausted",
+                    reason=f"caps.wall_clock_ms={wall_clock_limit}",
+                    duration_ms=0,
+                )
+                entry["supervised_autonomy"] = {**supervision, "wall_clock_elapsed_ms": wall_clock_elapsed_ms}
+                runlog.append(entry)
+                turns.append(entry)
+                break
+
         trace: list[str] = ["gate_pre"]
         gate_pre = run_gate(root)
         if not gate_pre["green"]:
@@ -540,6 +570,7 @@ def run_loop(
         runlog.append(entry)
         turns.append(entry)
         budget.consume(cost_tokens=cost_tokens)
+        wall_clock_elapsed_ms += clock_fixed
         baseline_dirty = set(dirty_worktree_paths(root))
         if not result.get("green"):
             break

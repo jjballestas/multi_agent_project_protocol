@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0079
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0079 (SPEC-0064): autonomia supervisada SA.2 - kill-switch (centinela PAUSE) + reloj de pared, shadow, invoker real intacto.

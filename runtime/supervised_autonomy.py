@@ -27,6 +27,14 @@ def max_turns_value(raw: Any) -> int | None:
     return None
 
 
+def wall_clock_ms_value(raw: Any) -> int | None:
+    if isinstance(raw, bool):
+        return None
+    if isinstance(raw, int):
+        return raw if raw >= 0 else None
+    return None
+
+
 def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str | None:
     raw = supervised_autonomy_config(config)
     if raw.get("enabled") is not True:
@@ -37,6 +45,7 @@ def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str |
     approved_at = str(raw.get("approved_at") or raw.get("ratified_at") or "").strip()
     caps = raw.get("caps") if isinstance(raw.get("caps"), dict) else {}
     max_turns = max_turns_value(caps.get("max_turns"))
+    wall_clock_ms = wall_clock_ms_value(caps.get("wall_clock_ms"))
     missing = [
         name
         for name, value in (
@@ -50,6 +59,8 @@ def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str |
         return "runtime.supervised_autonomy missing " + ", ".join(missing)
     if max_turns is None:
         return "runtime.supervised_autonomy.caps.max_turns must be an integer >= 1"
+    if wall_clock_ms is None:
+        return "runtime.supervised_autonomy.caps.wall_clock_ms must be an integer >= 0"
     return None
 
 
@@ -61,8 +72,15 @@ def supervised_autonomy_payload(config: dict[str, Any]) -> dict[str, Any]:
         "activation_decision": str(raw.get("activation_decision") or raw.get("decision_id") or ""),
         "approved_by": str(raw.get("approved_by") or raw.get("approver") or ""),
         "approved_at": str(raw.get("approved_at") or raw.get("ratified_at") or ""),
-        "caps": {"max_turns": int(caps.get("max_turns"))},
+        "caps": {
+            "max_turns": int(caps.get("max_turns")),
+            "wall_clock_ms": int(caps.get("wall_clock_ms")),
+        },
     }
+
+
+def pause_sentinel_path(root: Path) -> Path:
+    return root.resolve() / "runtime" / "state" / "PAUSE"
 
 
 def turn_cost_tokens(turn: dict[str, Any]) -> int:
@@ -101,6 +119,7 @@ def write_run_report(
         f"- approved_by: {supervision.get('approved_by', '')}",
         f"- approved_at: {supervision.get('approved_at', '')}",
         f"- caps.max_turns: {(supervision.get('caps') or {}).get('max_turns')}",
+        f"- caps.wall_clock_ms: {(supervision.get('caps') or {}).get('wall_clock_ms')}",
         "",
         "## Turns",
         "",

@@ -63,13 +63,19 @@ def claim(task_id: str) -> dict[str, Any]:
     }
 
 
-def supervised_config(*, enabled: bool, max_turns: int = 2, valid: bool = True) -> dict[str, Any]:
+def supervised_config(
+    *,
+    enabled: bool,
+    max_turns: int = 2,
+    wall_clock_ms: int = 1000,
+    valid: bool = True,
+) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "enabled": enabled,
         "activation_decision": "DECISION-0024" if valid else "",
         "approved_by": "operador humano" if valid else "",
         "approved_at": "2026-06-08" if valid else "",
-        "caps": {"max_turns": max_turns},
+        "caps": {"max_turns": max_turns, "wall_clock_ms": wall_clock_ms},
     }
     return payload
 
@@ -218,6 +224,76 @@ def case_max_turns_stops_recorded_loop_and_writes_runreport() -> None:
         text = report.read_text(encoding="utf-8-sig")
         assert "max_turns_reached" in text
         assert "caps.max_turns: 2" in text
+        assert "caps.wall_clock_ms: 1000" in text
+
+
+def case_pause_sentinel_stops_before_turn_without_mutating_state() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-pause-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600"]
+        build_fixture(fixture, task_ids=task_ids, supervised=supervised_config(enabled=True, max_turns=2))
+        transcripts = write_transcripts(fixture, task_ids)
+        pause = fixture / "runtime/state/PAUSE"
+        pause.parent.mkdir(parents=True, exist_ok=True)
+        pause.write_text("paused by fixture\n", encoding="utf-8")
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "recorded",
+                "--allow-supervised-autonomy",
+                "--run-id",
+                "RUN-supervised-pause",
+                "--replay-report",
+                str(transcripts),
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        assert statuses(fixture) == ["ready"]
+        assert result["turns"][0]["outcome"] == "paused", result
+        assert result["turns"][0]["trace"] == ["supervised_autonomy", "pause"], result
+        assert Path(result["run_report"]).exists()
+
+
+def case_wall_clock_stops_before_turn_that_would_exceed_cap() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-wallclock-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600", "TASK-9601"]
+        build_fixture(fixture, task_ids=task_ids, supervised=supervised_config(enabled=True, max_turns=5, wall_clock_ms=150))
+        transcripts = write_transcripts(fixture, task_ids)
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "recorded",
+                "--allow-supervised-autonomy",
+                "--run-id",
+                "RUN-supervised-wallclock",
+                "--clock-fixed",
+                "100",
+                "--replay-report",
+                str(transcripts),
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 1
+        assert statuses(fixture) == ["done", "ready"]
+        assert result["turns"][-1]["outcome"] == "wallclock_exhausted", result
+        assert result["turns"][-1]["trace"] == ["supervised_autonomy", "wall_clock"], result
+        text = Path(result["run_report"]).read_text(encoding="utf-8-sig")
+        assert "wallclock_exhausted" in text
+        assert "caps.wall_clock_ms: 150" in text
 
 
 def case_activation_without_valid_registration_rejects_before_run() -> None:
@@ -307,6 +383,8 @@ def case_real_invoker_lock_remains_intact_in_sa1() -> None:
 def main() -> int:
     cases = [
         case_max_turns_stops_recorded_loop_and_writes_runreport,
+        case_pause_sentinel_stops_before_turn_without_mutating_state,
+        case_wall_clock_stops_before_turn_that_would_exceed_cap,
         case_activation_without_valid_registration_rejects_before_run,
         case_flag_absent_keeps_existing_multi_turn_behavior,
         case_real_invoker_lock_remains_intact_in_sa1,

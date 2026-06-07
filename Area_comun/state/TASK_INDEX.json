@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,48 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0076",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "submit_intent transaccional multi-intent + re-genesis (SPEC-0062) - KEYSTONE de la adopcion de submit_intent por AMBOS lazos (orden del operador): submit_intent --intents aplica una secuencia ordenada de intents de forma ATOMICA (append por intent + materializacion + drift 0) o rollback total; cada intent validado contra el estado resultante de los previos; idempotente; mantiene --intent mono. + runtime/regenesis.py: genesis fresco por referencia desde el estado materializado -> drift 0, no destructivo. golden examples/intent_tx_cases + paridad .ps1 + CI. SHADOW: enforce/authoritative OFF (sin flip).",
-            "spec_id": "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
-            "file": "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017",
-                "DECISION-0020"
-            ],
-            "depends_on": [
-                "TASK-0072"
-            ],
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/submit_intent.py",
-                "runtime/regenesis.py",
-                "runtime/protocol_replay.py",
-                "examples/intent_tx_cases/",
-                ".github/workflows/validate.yml",
-                "runtime/regenesis.ps1",
-                "runtime/submit_intent.ps1"
-            ],
-            "deliverables": [
-                "runtime/submit_intent.py",
-                "runtime/regenesis.py",
-                "examples/intent_tx_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0076-codex-to-claude-1.md",
-                "runtime/regenesis.ps1"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; validador valid (drift de sombra esperado); neutralidad/encoding limpios. Lei regenesis.py: NO destructivo (append de genesis por snapshot_ref desde hot state, re-snapshot, asserta drift_after=0; history_preserved). submit_intent --intents: valida cada intent contra el estado intermedio, un intent.applied por intent, materializa al final, rollback total, idempotente. SIN flip (enforce/authoritative OFF). Keystone de la adopcion listo. Flip por arquitecto. CIERRA TASK-0076.",
-            "updated_at": "2026-06-08"
         },
         {
             "id": "TASK-0077",
@@ -199,7 +157,7 @@
         {
             "id": "TASK-0079",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -230,7 +188,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "READY (encolada por Claude 2026-06-08 tras cerrar SA.1): SA.2 kill-switch (centinela PAUSE) + reloj de pared, shadow, sin tocar invoker real. GO en mailbox.",
+            "review": "ENTREGADA a in_review por Codex (2026-06-08): implementado SA.2 en shadow. El loop chequea runtime/state/PAUSE antes de cada turno y para con outcome=paused sin mutar estado; caps.wall_clock_ms se valida como cap obligatorio y corta de forma determinista con --clock-fixed antes del turno que excederia el limite. Golden supervised_autonomy_cases ampliado a 6 casos. Invoker real intacto; autonomia off.",
             "updated_at": "2026-06-08"
         }
     ]

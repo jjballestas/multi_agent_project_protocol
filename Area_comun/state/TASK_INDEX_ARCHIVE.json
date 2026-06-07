@@ -2543,6 +2543,48 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden release_sign 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4; smoke real del arbol vivo: sign (fixture-hmac-sha256) -> verify firma VALIDA exit0; firma alterada exit1; clave equivocada exit1; sin firma -> integridad F7.2 exit0; neutralidad/encoding/validador verdes. SECRET BOUNDARY VERIFICADO: no hay material de clave privada en el repo (fixture inline en el runner). sign_release.py implementa SOLO el backend fixture (rechaza otros); el backend real (cosign/minisign/gpg via comando externo) queda documentado en F7.5 conforme DECISION-0023. verify_release extendido valida la firma sobre sbom_hash, falla cerrada. Off-by-default, vendor-neutral, sin secretos. Entrega commiteada por Codex (a7bee1a). Flip por arquitecto. CIERRA F7.4.",
             "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0076",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "submit_intent transaccional multi-intent + re-genesis (SPEC-0062) - KEYSTONE de la adopcion de submit_intent por AMBOS lazos (orden del operador): submit_intent --intents aplica una secuencia ordenada de intents de forma ATOMICA (append por intent + materializacion + drift 0) o rollback total; cada intent validado contra el estado resultante de los previos; idempotente; mantiene --intent mono. + runtime/regenesis.py: genesis fresco por referencia desde el estado materializado -> drift 0, no destructivo. golden examples/intent_tx_cases + paridad .ps1 + CI. SHADOW: enforce/authoritative OFF (sin flip).",
+            "spec_id": "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
+            "file": "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0020"
+            ],
+            "depends_on": [
+                "TASK-0072"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/submit_intent.py",
+                "runtime/regenesis.py",
+                "runtime/protocol_replay.py",
+                "examples/intent_tx_cases/",
+                ".github/workflows/validate.yml",
+                "runtime/regenesis.ps1",
+                "runtime/submit_intent.ps1"
+            ],
+            "deliverables": [
+                "runtime/submit_intent.py",
+                "runtime/regenesis.py",
+                "examples/intent_tx_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0076-codex-to-claude-1.md",
+                "runtime/regenesis.ps1"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; validador valid (drift de sombra esperado); neutralidad/encoding limpios. Lei regenesis.py: NO destructivo (append de genesis por snapshot_ref desde hot state, re-snapshot, asserta drift_after=0; history_preserved). submit_intent --intents: valida cada intent contra el estado intermedio, un intent.applied por intent, materializa al final, rollback total, idempotente. SIN flip (enforce/authoritative OFF). Keystone de la adopcion listo. Flip por arquitecto. CIERRA TASK-0076.",
+            "updated_at": "2026-06-08"
         }
     ]
 }

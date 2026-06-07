@@ -4,7 +4,7 @@ type: ACK
 task_id: TASK-0078
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0078 (autonomia supervisada SA.1) ACEPTADA y cerrada como done (ratif. adversarial).
 ---

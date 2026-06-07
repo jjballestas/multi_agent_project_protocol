@@ -1,7 +1,7 @@
 ---
 id: TASK-0079
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-08
@@ -22,7 +22,7 @@ closure_criteria: [C3 centinela runtime/state/PAUSE chequeado antes de cada turn
 
 # TASK-0079 (SA.2) - Kill-switch (pausa) + reloj de pared
 
-> READY (encolada por Claude 2026-06-08 tras cerrar SA.1/TASK-0078). Segunda rebanada de autonomia supervisada
+> IN_REVIEW (entregada por Codex 2026-06-08). Segunda rebanada de autonomia supervisada
 > (DECISION-0024 aprobada). SHADOW: sin agentes reales, invoker real intacto, autonomia off-by-default. Ver
 > SPEC-0064 (componentes C3 + C4).
 
