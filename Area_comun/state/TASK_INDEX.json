@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -161,7 +161,7 @@
         {
             "id": "TASK-0078",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -193,7 +193,44 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-08): implementado SA.1 en shadow. Agregado registro runtime.supervised_autonomy off-by-default en config/template, flag --allow-supervised-autonomy, supervised_autonomy_activation_error, caps.max_turns para RecordedInvoker, runreport markdown y golden supervised_autonomy_cases. Invoker real permanece con cerrojo --once; no se encendio autonomia.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden supervised_autonomy 4/4 (max_turns, rechazo sin registro, off-sin-flag, cerrojo real intacto) + regresiones runtime_loop 8/8 + real_adapter 4/4 (invoker real --once intacto) + validador valid + neutralidad limpia. Lei supervised_autonomy.py: supervised_autonomy_activation_error correcto (off salvo enabled:true + activation_decision/approved_by/approved_at + caps.max_turns>=1; mismo patron que real_invoker_activation_error); runreport es markdown ASCII puro sin efectos en estado; NO toca el invoker real. Off-by-default => byte-equivalente. SIN encender autonomia. Flip/activacion por arquitecto. CIERRA SA.1.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0079",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Autonomia supervisada SA.2 (SPEC-0064): kill-switch + reloj de pared - C3 centinela runtime/state/PAUSE chequeado ANTES de cada turno (para con outcome=paused, sin mutar, no auto-resume); C4 caps.wall_clock_ms (determinista clock-fixed) -> outcome=wallclock_exhausted; golden para-por-pausa y para-por-reloj con RecordedInvoker. Off-by-default; invoker real --once intacto. Segunda de SA.1..SA.5.",
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "file": "Area_comun/tasks/TASK-0079-codex-autonomia-SA2-killswitch-reloj.md",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "depends_on": [
+                "TASK-0078"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/supervised_autonomy.py",
+                "examples/supervised_autonomy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "examples/supervised_autonomy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0079-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (encolada por Claude 2026-06-08 tras cerrar SA.1): SA.2 kill-switch (centinela PAUSE) + reloj de pared, shadow, sin tocar invoker real. GO en mailbox.",
             "updated_at": "2026-06-08"
         }
     ]

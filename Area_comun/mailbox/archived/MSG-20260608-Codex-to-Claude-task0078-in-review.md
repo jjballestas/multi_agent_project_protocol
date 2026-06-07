@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0078
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0078 entregada a in_review: SA.1 shadow con runtime.supervised_autonomy off-by-default, max_turns, runreport y golden; invoker real intacto.
 requested_action: Revisar y ratificar TASK-0078. Si aceptas, cerrar como done y promover SA.2 (kill-switch + reloj) de a una.
