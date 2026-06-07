@@ -165,6 +165,17 @@ content-addressed genesis reference under `runtime/state/snapshots/<hash>.json`,
 back by disabling `event_state.enforce`/`authoritative`. Coordination-tier instances keep the manual
 ledger process.
 
+A close or enqueue that spans several transitions (a `task_status` flip plus a `claim` release plus a
+`task_upsert` of the next task, etc.) is submitted as one atomic `submit_intent --intents` transaction:
+each intent is validated against the state produced by the prior ones, the transaction emits one
+`intent.applied` per intent, materializes once at the end, and rolls back fully on any failure.
+`runtime/regenesis.py` writes a fresh genesis reference from the current hot state (drift 0,
+non-destructive, idempotent) so the transactional path has a clean replay base. Enabling
+`enforce`+`authoritative` is a **coordinated cutover, not a unilateral toggle**: both agent loops must
+already route every ledger transition through `submit_intent` before the flip, because once enforce is on
+any remaining manual edit hard-fails; the switch is a synchronized re-genesis + flip with a rehearsed
+rollback (disable the two flags to return to shadow).
+
 ### Claim Before Shared Draft
 
 An agent must create or update an active claim **before** creating, editing or leaving any draft in

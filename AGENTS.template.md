@@ -126,9 +126,13 @@ The task status must match in two places:
   `event_state.enabled/materialize/enforce/authoritative:true` treat the runtime as the writer of
   `Area_comun/state/*.json`. In that mode, transitions go through `runtime/submit_intent.py`
   (`task_status`, `task_upsert`, `claim`, `decision`) with caller-provided `timestamp`/`commit`, and
-  manual state edits are rejected as drift by the hard-gate. The capability is off by default and
-  should be activated only after a local decision/approval; coordination-tier instances keep manual
-  ledger edits.
+  manual state edits are rejected as drift by the hard-gate. Multi-step ledger changes (a `task_status`
+  flip plus a `claim` release plus a `task_upsert`, etc.) go as one atomic `submit_intent --intents`
+  transaction (all-or-nothing with full rollback); `runtime/regenesis.py` writes a fresh content-addressed
+  genesis to bring drift to 0 first. The capability is off by default and should be activated only after a
+  local decision/approval. Turning `enforce`+`authoritative` on requires every agent loop to already route
+  its ledger transitions through `submit_intent`, so the switch is a coordinated re-genesis + flip with a
+  rehearsed rollback, not a unilateral toggle; coordination-tier instances keep manual ledger edits.
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map
