@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0080
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0080 entregada a in_review: SA.3 checkpoint humano por K turnos y fix-cycles; invoker real intacto.

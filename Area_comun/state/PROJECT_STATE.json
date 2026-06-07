@@ -113,8 +113,14 @@
         {
             "id": "TASK-0080",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "TASK-0080 EN REVISION por Claude: SA.3 checkpoint humano + fix-cycles entregado por Codex; invoker real intacto."
+            "status": "done",
+            "title": "Autonomia supervisada SA.3 (SPEC-0064) DONE - ACEPTADA por Claude (ratif. adversarial): checkpoint humano forzado (caps.human_checkpoint_every_k=2 tras turno verde con pendiente -> human_required/outcome=human_checkpoint, no auto-resume) + escalacion por fix-cycles (quality_policy.max_review_cycles/max_qa_cycles); golden 8/8 + real_adapter/review_qa verdes; invoker real --once intacto. Off => byte-equivalente. Tercera de SA.1..SA.5; SA.4 (invoker real) GATEADA."
+        },
+        {
+            "id": "TASK-0081",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Fase 7.5 (SPEC-0057): docs de la cadena de release (SBOM->manifiesto->provenance->firma) + guia generar/verificar + nota backend real sin secretos (DECISION-0023) + enlaces README. Cierra Fase 7."
         }
     ],
     "open_questions": [],
@@ -135,9 +141,10 @@
         "TASK-0079 ENTREGADA a in_review por Codex (2026-06-08): SA.2 kill-switch/reloj listo. runtime/state/PAUSE se chequea antes de cada turno -> outcome=paused sin mutar estado; caps.wall_clock_ms obligatorio en registro y evaluado con --clock-fixed -> outcome=wallclock_exhausted; golden supervised_autonomy_cases 6/6; regresiones runtime verdes; invoker real intacto y autonomia off. Pendiente ratificacion de Claude; siguiente SA.3 checkpoint humano + escalacion.",
         "TASK-0079 DONE (autonomia supervisada SA.2, ratif. adversarial de Claude 2026-06-08): kill-switch (centinela PAUSE) + reloj de pared; golden 6/6 + runtime_loop 8/8 + real_adapter 4/4 (invoker real intacto). Corri yo los gates. ENCOLADA SA.3 = TASK-0080 (SPEC-0064): checkpoint humano forzado + escalacion, shadow. SA.4 (invoker real multi-turno) sigue GATEADA con GO + rollback -- NO arrancar sin coordinacion. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, supervisada por el arquitecto (operador autorizo 2026-06-08). HEADS-UP: operador redacta DECISION-0025 (agent-teams-bridge), nueva direccion, aun no entregada. F7.5 docs pendiente. GO por mailbox; de a una.",
         "TASK-0080 RECLAMADA por Codex (2026-06-08): implementando SA.3 checkpoint humano tras caps.human_checkpoint_every_k o fix-cycles repetidos quality_policy; golden y runreport. Sin tocar invoker real ni encender autonomia.",
-        "TASK-0080 ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo; caps.human_checkpoint_every_k corta con human_required/outcome=human_checkpoint tras K turnos, fix-cycles alcanzando quality_policy max_review_cycles/max_qa_cycles tambien escalan a humano; runreport registra cap/checkpoint; golden supervised_autonomy_cases 8/8 + suite CI funcional verde; invoker real --once intacto y autonomia off. Pendiente ratificacion de Claude. SA.4 NO iniciar sin GO operador + rollback."
+        "TASK-0080 ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo; caps.human_checkpoint_every_k corta con human_required/outcome=human_checkpoint tras K turnos, fix-cycles alcanzando quality_policy max_review_cycles/max_qa_cycles tambien escalan a humano; runreport registra cap/checkpoint; golden supervised_autonomy_cases 8/8 + suite CI funcional verde; invoker real --once intacto y autonomia off. Pendiente ratificacion de Claude. SA.4 NO iniciar sin GO operador + rollback.",
+        "TASK-0080 DONE (autonomia supervisada SA.3 checkpoint humano, ratif. adversarial de Claude 2026-06-08): checkpoint por K turnos (=2) + por fix-cycles (quality_policy); golden 8/8 + real_adapter 4/4 + review_qa 15/15; invoker real intacto. Corri yo los gates. SA.1-SA.3 DONE en sombra. >>> SA.4 (invoker real multi-turno bajo el sobre) GATEADA: requiere GO del operador + ensayo de rollback -- NO arrancar autonomamente. ENCOLADA F7.5 = TASK-0081 (docs de la cadena de release, cierra Fase 7; non-gated, mantiene a Codex productivo lejos del ledger). PENDIENTES DEL OPERADOR (supervisados): (a) ACTIVACION escritor-unico = re-genesis vivo + flip enforce+authoritative + rollback (autorizado, lo ejecuta el arquitecto contigo); (b) SA.4 (autonomia real, GO+rollback); (c) DECISION-0025 (agent-teams-bridge, en tu draft). GO por mailbox; de a una."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }

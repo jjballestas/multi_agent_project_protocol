@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -154,7 +154,7 @@
         {
             "id": "TASK-0080",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -185,11 +185,51 @@
                 "runtime/supervised_autonomy.py",
                 "protocol.config.json",
                 "protocol.config.template.json",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0080-in-review.md"
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0080-in-review.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo. El sobre de autonomia supervisada valida caps.human_checkpoint_every_k, corta con outcome=human_checkpoint + human_required tras K turnos cuando queda trabajo, y escala tambien al alcanzar quality_policy max_review_cycles/max_qa_cycles usando review_attempts/qa_attempts ya aplicados. Runreport registra el cap y el checkpoint. Golden supervised_autonomy_cases 8/8; invoker real --once intacto; autonomia sigue off-by-default.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden supervised_autonomy 8/8 (max_turns, checkpoint-por-K-turnos, checkpoint-por-fix-cycles, pausa, reloj, rechazo sin registro, off-sin-flag, cerrojo real intacto) + real_adapter 4/4 (invoker real --once intacto) + review_qa 15/15 (logica de fix-cycles intacta) + validador valid + neutralidad limpia. Checkpoint por K turnos (=2) tras turno verde con trabajo pendiente -> human_required/outcome=human_checkpoint, no auto-resume; fix-cycles escalan al alcanzar quality_policy.max_review_cycles/max_qa_cycles leyendo review_attempts/qa_attempts del estado aplicado; sin campos fuera de schema. Off => byte-equivalente. CIERRA SA.3.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0081",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "documentation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.5 (SPEC-0057): docs de la cadena de release (SBOM -> manifiesto -> provenance -> firma) + guia de generar/verificar + nota de backend real de firma sin secretos (DECISION-0023; claves del emisor, fixture solo en golden) + enlaces desde README_INSTANCIACION. Cierra Fase 7. Neutral, ASCII, sin secretos. Quinta y ultima rebanada de Fase 7.",
+            "spec_id": "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
+            "file": "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019",
+                "DECISION-0023"
+            ],
+            "depends_on": [
+                "TASK-0071",
+                "TASK-0073",
+                "TASK-0074",
+                "TASK-0075"
+            ],
+            "relates_to": [
+                "TASK-0064"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "README_INSTANCIACION.md",
+                "scripts/generate_sbom.py",
+                "scripts/sign_release.py",
+                "scripts/verify_release.py"
+            ],
+            "deliverables": [
+                "Area_comun/protocol/RELEASE_ENGINEERING.md (o seccion equivalente)",
+                "Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "READY (encolada por Claude 2026-06-08 tras cerrar SA.3): F7.5 docs de la cadena de release, cierra Fase 7. Documentacion de lo ya implementado (F7.1-F7.4); sin codigo funcional. GO en mailbox.",
             "updated_at": "2026-06-08"
         }
     ]

@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260608-task0078-close-task0079-claude",
@@ -115,6 +115,27 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Liberado con handoff-release atomico: TASK-0080 entregada a in_review. Implementado SA.3 shadow: human_checkpoint_every_k + checkpoint por fix-cycles segun quality_policy, runreport y golden 8/8. Invoker real intacto; autonomia no activada. Handoff: Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0080-close-task0081-claude",
+            "task_id": "TASK-0080",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
+                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0080-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0080-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-GO-faseF7.5.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0080 (SA.3) a done + encolado de F7.5 (TASK-0081). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }
