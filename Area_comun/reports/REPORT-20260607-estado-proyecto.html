@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estado del proyecto - multi_agent_project_protocol</title>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#172029; --panel2:#1d2832; --ink:#e6edf3; --muted:#9aa7b4;
+    --line:#2b3946; --accent:#4ea1ff; --ok:#3fb950; --now:#4ea1ff; --warn:#d29922; --gate:#f85149;
+    --chip:#243240;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1060px;margin:0 auto;padding:32px 24px 80px;}
+  header{border-bottom:1px solid var(--line);padding-bottom:20px;}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:.2px;}
+  h2{font-size:19px;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h3{font-size:15.5px;margin:18px 0 6px;}
+  .sub{color:var(--muted);font-size:13.5px;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;
+    padding:3px 11px;font-size:12.5px;color:var(--muted);}
+  .chip b{color:var(--ink);font-weight:600;}
+  .banner{background:linear-gradient(90deg,rgba(63,185,80,.16),rgba(63,185,80,.03));
+    border:1px solid rgba(63,185,80,.4);border-radius:10px;padding:16px 20px;margin:22px 0;}
+  .banner .v{font-size:22px;font-weight:700;color:var(--ok);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:14px 0;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+  .card .n{font-size:28px;font-weight:700;color:var(--accent);line-height:1;}
+  .card .l{color:var(--muted);font-size:12.5px;margin-top:4px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.8px;}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px;
+    background:var(--panel2);}
+  tr:hover td{background:#141d26;}
+  .badge{display:inline-block;border-radius:5px;padding:1px 8px;font-size:11.5px;font-weight:600;white-space:nowrap;}
+  .b-ok{background:rgba(63,185,80,.15);color:var(--ok);border:1px solid rgba(63,185,80,.35);}
+  .b-now{background:rgba(78,161,255,.16);color:var(--now);border:1px solid rgba(78,161,255,.4);}
+  .b-next{background:rgba(210,153,34,.14);color:var(--warn);border:1px solid rgba(210,153,34,.35);}
+  .b-gate{background:rgba(248,81,73,.12);color:var(--gate);border:1px solid rgba(248,81,73,.32);}
+  code{background:#0b0f14;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12.5px;
+    font-family:SFMono-Regular,Consolas,Menlo,monospace;color:#c9d6e3;}
+  .phase{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);
+    border-radius:8px;padding:14px 18px;margin:12px 0;}
+  .phase.now{border-left-color:var(--now);}
+  .phase.next{border-left-color:var(--warn);}
+  .phase.gate{border-left-color:var(--gate);}
+  .phase h3{margin:0 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .phase p{margin:6px 0 0;color:#cdd9e5;font-size:13.7px;}
+  .phase .why{color:var(--muted);font-size:12.8px;margin-top:6px;}
+  .steps{list-style:none;padding:0;margin:10px 0 0;}
+  .steps li{padding:6px 0 6px 26px;position:relative;border-top:1px dashed var(--line);font-size:13.3px;}
+  .steps li:first-child{border-top:none;}
+  .steps li::before{content:"";position:absolute;left:6px;top:13px;width:8px;height:8px;border-radius:50%;
+    background:var(--line);}
+  .steps li.done::before{background:var(--ok);}
+  .steps li.now::before{background:var(--now);box-shadow:0 0 0 3px rgba(78,161,255,.2);}
+  .steps li.next::before{background:var(--warn);}
+  .rail{display:flex;gap:0;margin:18px 0;flex-wrap:wrap;}
+  .rail .seg{flex:1;min-width:120px;text-align:center;padding:10px 8px;border:1px solid var(--line);
+    font-size:12.5px;color:var(--muted);background:var(--panel);}
+  .rail .seg.done{color:var(--ok);border-color:rgba(63,185,80,.35);}
+  .rail .seg.now{color:var(--now);border-color:rgba(78,161,255,.45);background:#16222e;}
+  .rail .seg.gate{color:var(--gate);border-color:rgba(248,81,73,.3);}
+  .rail .seg b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px;}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Estado del proyecto</h1>
+  <div class="sub">multi_agent_project_protocol &mdash; protocolo multiagente generico, dominio-neutral (dogfooding)</div>
+  <div class="meta">
+    <span class="chip">Generado <b>2026-06-07</b></span>
+    <span class="chip">Autor <b>Claude (arquitecto)</b></span>
+    <span class="chip">Rama <b>main</b></span>
+    <span class="chip">HEAD <b>d784937</b></span>
+    <span class="chip">Fase <b>P2 (adopcion y expansion)</b></span>
+  </div>
+</header>
+
+<div class="banner">
+  <div class="v">&#10003; v1.0.0 PUBLICADO &mdash; primer release estable</div>
+  <div class="sub" style="margin-top:6px">
+    La metodologia esta consolidada y soportada como <b>producto distribuible</b>: contrato de coordinacion,
+    motor runtime N-agente, capa de seguridad, wrapper LLM real y track de adopcion. Tag <code>v1.0.0</code>,
+    <code>protocol_version 1.0.0</code>, golden 28/28 verde. El trabajo posterior a v1.0 ya arranco.
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
+  <div class="card"><div class="n">21</div><div class="l">decisiones de protocolo</div></div>
+  <div class="card"><div class="n">28/28</div><div class="l">golden runners verde</div></div>
+  <div class="card"><div class="n">1</div><div class="l">tarea en curso (TASK-0066, Codex)</div></div>
+</div>
+
+<h2>1. Que esta cerrado (v1.0.0)</h2>
+<table>
+  <thead><tr><th>Bloque</th><th>Contenido</th><th>Estado</th></tr></thead>
+  <tbody>
+    <tr><td><b>Nucleo de coordinacion</b></td><td>Ciclo de tareas, claims por fila, mailbox, handoffs, decisiones, reportes, validadores py/ps</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>SDD + Perfiles</b></td><td>Spec-Driven Development como gate; layering core/profiles/examples; perfil dotnet_enterprise</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>Motor runtime (D0)</b></td><td>Router, contrato de turno, apply+gate, eventlog, observabilidad N-agente, budget/deadline A10</td><td><span class="badge b-ok">CERRADO</span></td></tr>
+    <tr><td><b>Seguridad (Fase 5)</b></td><td>Anti-inyeccion (G1), tool-policy deny-by-default, firma de envelope / event-auth HMAC</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>Wrapper LLM real</b></td><td>Adapter CLI vendor-neutral, off-by-default, sin secretos, sin autonomia (DECISION-0021)</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>Distribucion (D2)</b></td><td>Tiers coordination/runtime, upgrade tier-aware, docs de adopcion, versionado del paquete</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>Proceso</b></td><td>Regla anti-colision (DECISION-0020); higiene de prune que condensa next_actions</td><td><span class="badge b-ok">DONE</span></td></tr>
+  </tbody>
+</table>
+
+<h2>2. En curso ahora</h2>
+<div class="phase now">
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0066 &mdash; Fase B.1 (Codex)</h3>
+  <p>Primera rebanada de la Fase B. Construye la maquinaria <b>read-only</b> para reconstruir el estado de
+     protocolo desde el event log (replay/materializacion/genesis) y detectar <code>drift</code> en modo
+     aviso. Gateada y byte-equivalente con la funcion apagada; no cambia todavia como se escribe el estado.</p>
+</div>
+
+<h2>3. Fases que faltan (explicacion breve)</h2>
+
+<p class="sub">Roadmap de cierre hacia el writer-vivo del estado de protocolo y la madurez operativa:</p>
+<div class="rail">
+  <div class="seg now"><b>Fase B</b>writer-vivo del estado</div>
+  <div class="seg gate"><b>Fase 7</b>release engineering</div>
+  <div class="seg gate"><b>Autonomia</b>supervisada</div>
+  <div class="seg gate"><b>Guia humana</b>operativa (TASK-0037)</div>
+</div>
+
+<div class="phase now">
+  <h3><span class="badge b-now">EN MARCHA</span> Fase B &mdash; Event log como writer vivo del estado de protocolo (SPEC-0039 / SPEC-0052)</h3>
+  <p>Hoy los agentes editan los <code>*.json</code> de estado a mano y el event log solo refleja el
+     control-plane de concurrencia. La Fase B convierte al <b>event log en la fuente de verdad del estado</b>
+     (tareas, claims, decisiones), de modo que el estado se reconstruya por <code>replay(log)</code> de forma
+     determinista y auditable. Se hace en 4 rebanadas aditivas para acotar riesgo:</p>
+  <ul class="steps">
+    <li class="now"><b>B.1 &mdash; replay/materializacion read-only + drift en aviso</b> (TASK-0066, en curso). Maquinaria que reconstruye y compara, sin cambiar como se escribe. <span class="badge b-now">EN CURSO</span></li>
+    <li class="next"><b>B.2 &mdash; materializacion opt-in</b>: el runtime materializa los <code>*.json</code> desde el log (log = verdad) bajo flag, en instancias runtime-tier.</li>
+    <li class="next"><b>B.3 &mdash; hard-fail</b>: el <code>drift</code> entre el estado vivo y <code>replay(log)</code> pasa de aviso a error duro del validador cuando el runtime es el escritor habitual.</li>
+    <li class="next"><b>B.4 &mdash; migrar/prohibir edicion manual</b>: las transiciones pasan por el runtime; posible cambio incompatible (requiere DECISION + evaluacion SemVer).</li>
+  </ul>
+  <div class="why">Por que: cierra los criterios 11-12 de SPEC-0038 e invariantes I5/I6 sobre el estado vivo;
+     es el principal pendiente del paraguas N-agente (TASK-0038). Las demas brechas de ese paraguas (golden
+     N=3/N=5, property-based I1-I8, simulacion de concurrencia, CI, autor-de-record) ya se cerraron en la Capa A.</div>
+</div>
+
+<div class="phase gate">
+  <h3><span class="badge b-gate">GATEADA</span> Fase 7 &mdash; Release engineering</h3>
+  <p>Endurecer la cadena de publicacion del paquete: <b>SBOM</b> (inventario de componentes) y
+     <b>provenance</b> (procedencia/firmas de los artefactos del release), para que un adoptante pueda
+     verificar que recibe exactamente lo publicado.</p>
+  <div class="why">Por que: confianza de cadena de suministro para una metodologia distribuible. No arranca sin OK del operador.</div>
+</div>
+
+<div class="phase gate">
+  <h3><span class="badge b-gate">GATEADA</span> Autonomia supervisada</h3>
+  <p>Permitir que el motor ejecute turnos con <b>agentes LLM reales</b> de forma encadenada, bajo
+     supervision dura: limites de budget, tool-policy deny-by-default, guardrails, gate por turno y paradas
+     humanas. Hoy el wrapper real existe pero esta apagado y sin autonomia por diseno.</p>
+  <div class="why">Por que: es el salto de "coordinacion asistida" a "operacion autonoma acotada"; alto impacto, por eso queda detras de aprobacion explicita.</div>
+</div>
+
+<div class="phase gate">
+  <h3><span class="badge b-gate">PROPUESTA</span> TASK-0037 &mdash; Guia humana operativa + formato HTML reusable</h3>
+  <p>Plantilla de guia operativa para humanos (como operar el protocolo en un proyecto real) y un formato
+     HTML legible reutilizable por cualquier instancia adoptante.</p>
+  <div class="why">Por que: baja la barrera de adopcion para operadores humanos. Pedida por el operador; pendiente de que el arquitecto la especifique y confirme alcance.</div>
+</div>
+
+<h2>4. Modelo de trabajo (lazo semi-automatico)</h2>
+<p class="sub">
+  <b>Codex</b> (implementador) opera autonomo (~100s): auto-reclama tareas <code>ready</code>, ejecuta,
+  poda y notifica anomalias. <b>Claude</b> (arquitecto) reacciona de forma autonoma: al detectar la entrega
+  de Codex (<code>in_review</code> + claim liberado) ratifica adversarialmente (corre la suite), cierra,
+  y encola la siguiente rebanada. <b>El operador humano</b> aprueba politica, cambios de boundary y releases.
+  La regla anti-colision (DECISION-0020) gobierna la escritura concurrente del estado compartido.
+</p>
+
+<footer>
+  Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD d784937 (post-v1.0.0).
+  Las fases gateadas requieren aprobacion explicita del operador humano antes de arrancar.
+</footer>
+
+</div>
+</body>
+</html>
