@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260608-TASK-0076-codex",
@@ -116,6 +116,28 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero (lado de Claude del cutover, en paralelo a TASK-0077 de Codex): mandato de protocolo - submit_intent --intents transaccional para cierres multi-paso + gate de activacion ambos-lazos (encender enforce exige que ambos lazos ya usen submit_intent). Rutas de doc fuera del scope de Codex; sin colision de contenido. Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0077-close-task0078-promote-claude",
+            "task_id": "TASK-0077",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0077-codex-cutover-submit-intent-loop.md",
+                "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+                "Area_comun/tasks/TASK-0078-codex-autonomia-SA1-sobre-shadow.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0077-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0077-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0077-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0078-GO-autonomia-SA1.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0077 (cutover lado Codex) a done + promocion de SA.1 (SPEC-0064 + TASK-0078, autonomia supervisada). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

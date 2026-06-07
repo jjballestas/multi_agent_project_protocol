@@ -1,21 +1,20 @@
 ---
-id: TASK-SA1 (ID a asignar al promover; probable TASK-0077 - NO fijar mientras TASK-0076 en vuelo)
+id: TASK-0078
 owner: Codex
-status: draft
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-08
 phase: P2
-spec_id: Area_comun/specs/SPEC-autonomia-supervisada.md (a asignar SPEC-id al promover)
+spec_id: Area_comun/specs/SPEC-0064-autonomia-supervisada.md
 linked_decisions: [DECISION-0024, DECISION-0021, DECISION-0022]
 relates_to: [TASK-0038]
 ---
 
-> DRAFT en personal/Claude/. DECISION-0024 (autonomia supervisada) ACCEPTED por el operador (2026-06-08).
-> Primera rebanada SA.1 del decompose (ver DRAFT-SPEC-autonomia-supervisada). SHADOW: sin agentes reales,
-> enforce intacto. Promover/encolar de a una tras TASK-0076 + promocion de DECISION-0024 (Codex ocupado ahora).
+> READY (promovida por Claude 2026-06-08). DECISION-0024 APROBADA. Primera rebanada SA.1 del decompose (ver
+> SPEC-0064). SHADOW: sin agentes reales, enforce intacto. GO en mailbox.
 
-# TASK-SA1 - Sobre de supervision en SHADOW (sin agentes reales)
+# TASK-0078 (SA.1) - Sobre de supervision en SHADOW (sin agentes reales)
 
 ## Contexto
 

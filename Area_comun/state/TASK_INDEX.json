@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -164,7 +164,7 @@
         {
             "id": "TASK-0077",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -198,7 +198,43 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-08): implementado runtime/ledger_ops.py/.ps1 para construir y, opcionalmente, ejecutar envelopes submit_intent --intents de auto-claim y handoff-release; agregado golden cutover_loop_cases (drift0, transaccional, idempotente, task_upsert opcional, paridad CLI/PowerShell) + CI. Sin enforce/authoritative y sin re-genesis del repo vivo.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden cutover_loop 4/4 + validador valid (drift de sombra esperado) + neutralidad limpia. Lei ledger_ops.py: orden de envelopes CORRECTO -- auto-claim = claim acquire + task_status ready->in_progress (claim primero, gana autoridad de scope); handoff-release = task_status in_progress->in_review + task_upsert + claim release AL FINAL (el claim sigue activo durante las escrituras que lo necesitan, se libera ultimo). Delega en submit_intents (transaccional); el helper no edita hot state por su cuenta. SIN flip ni re-genesis del vivo. Cierra el LADO CODEX del cutover; con el mandato (lado Claude, commit 1e65b91) ambos lados del cutover estan en codigo. Flip por arquitecto. CIERRA TASK-0077.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0078",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Autonomia supervisada SA.1 (SPEC-0064): sobre de supervision en SHADOW (sin agentes reales) - C1 registro runtime.supervised_autonomy{enabled:false,...,caps} + flag --allow-supervised-autonomy + supervised_autonomy_activation_error; C2 caps.max_turns (para con outcome=max_turns_reached, ejercitado con RecordedInvoker); C6 reporte de corrida (*.runreport.md). Golden: para por max_turns, rechazo sin registro, off byte-equivalente. NO toca el invoker real (cerrojo --once intacto sin registro). Primera de SA.1..SA.5 (DECISION-0024 aprobada).",
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "file": "Area_comun/tasks/TASK-0078-codex-autonomia-SA1-sobre-shadow.md",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/supervised_autonomy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "examples/supervised_autonomy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0078-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (encolada por Claude 2026-06-08): SA.1 de autonomia supervisada (DECISION-0024 aprobada). Sobre de supervision en SHADOW (registro+max_turns+runreport) ejercitado con RecordedInvoker, sin tocar el invoker real. GO en mailbox. Caps por defecto a confirmar (sugerencia max_turns<=5).",
             "updated_at": "2026-06-08"
         }
     ]

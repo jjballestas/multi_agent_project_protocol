@@ -113,8 +113,14 @@
         {
             "id": "TASK-0077",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "TASK-0077 EN REVIEW: cutover Codex a submit_intent --intents listo (ledger_ops.py/.ps1 + cutover_loop_cases drift0/idempotente + CI); shadow, sin flip ni regenesis vivo."
+            "status": "done",
+            "title": "Cutover (SPEC-0063) DONE - ACEPTADA por Claude (ratif. adversarial): runtime/ledger_ops.py construye envelopes auto-claim (claim acquire + status ready->in_progress) y handoff-release (status in_progress->in_review + task_upsert + claim release AL FINAL) y delega en submit_intents transaccional; golden cutover_loop 4/4 (fixture drift-0). LADO CODEX del cutover listo; con el mandato (lado Claude) ambos lados en codigo. SIN flip. Prerrequisito de la activacion del escritor-unico."
+        },
+        {
+            "id": "TASK-0078",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Autonomia supervisada SA.1 (SPEC-0064): sobre de supervision en SHADOW (registro+max_turns+runreport) ejercitado con RecordedInvoker, sin tocar el invoker real. Primera de SA.1..SA.5 (DECISION-0024 aprobada). Off-by-default."
         }
     ],
     "open_questions": [],
@@ -135,9 +141,10 @@
         "TASK-0076 ENTREGADA a in_review por Codex (2026-06-08): submit_intent --intents transaccional multi-intent (validacion contra estado intermedio, eventos intent.applied + materializacion final unica + rollback total) + runtime/regenesis.py/.ps1 (genesis fresco por snapshot_ref desde hot state, drift->0, no destructivo, idempotente) + golden intent_tx_cases 6/6 + suites runtime verdes. Sin flip enforce/authoritative; pendiente ratificacion de Claude y luego cutover/adopcion en sombra.",
         "TASK-0076 DONE (submit_intent transaccional + re-genesis, ratif. adversarial de Claude 2026-06-08): corri yo golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; regenesis.py NO destructivo (drift_after 0, history preserved). >>> MIGRACION ESCRITOR-UNICO: operador autorizo (2026-06-08) re-genesis vivo + flip enforce+authoritative + DECISION-0024. DECISION-0024 (autonomia supervisada) PROMOVIDA al ledger. ENCOLADA TASK-0077 = CUTOVER (SPEC-0063): el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release via transaccion) + helper + golden cutover_loop_cases (fixture drift-0); SHADOW sin flip. EN PARALELO (Claude): mandato en AGENTS.md/TASK_PROTOCOL + adopcion de mis cierres. LUEGO (activacion, arquitecto + GO ya dado): re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback, SOLO tras verificar que AMBOS lazos usan submit_intent. Autonomia supervisada: SA.1 draft listo en personal, encolar tras el cutover (de a una). F7.5 docs pendiente post-migracion. GO por mailbox.",
         "TASK-0077 RECLAMADA por Codex (2026-06-08): implementando helper runtime/ledger_ops.py/.ps1 + golden cutover_loop_cases para auto-claim y handoff-release via submit_intent --intents sobre fixture drift0. Sin enforce/authoritative ni regenesis vivo.",
-        "TASK-0077 ENTREGADA a in_review por Codex (2026-06-08): runtime/ledger_ops.py/.ps1 construye envelopes submit_intent --intents para auto-claim (claim acquire + task_status ready->in_progress) y handoff-release (task_status in_progress->in_review + task_upsert opcional + claim release), con --submit delegado a submit_intents. Golden cutover_loop_cases 4/4 sobre fixture drift0: materializa ledger esperado, drift 0, idempotente, paridad CLI/PowerShell; CI actualizado. No se activo enforce/authoritative ni se re-genesiso el repo vivo. Pendiente ratificacion de Claude y activacion coordinada posterior."
+        "TASK-0077 ENTREGADA a in_review por Codex (2026-06-08): runtime/ledger_ops.py/.ps1 construye envelopes submit_intent --intents para auto-claim (claim acquire + task_status ready->in_progress) y handoff-release (task_status in_progress->in_review + task_upsert opcional + claim release), con --submit delegado a submit_intents. Golden cutover_loop_cases 4/4 sobre fixture drift0: materializa ledger esperado, drift 0, idempotente, paridad CLI/PowerShell; CI actualizado. No se activo enforce/authoritative ni se re-genesiso el repo vivo. Pendiente ratificacion de Claude y activacion coordinada posterior.",
+        "TASK-0077 DONE (cutover lado Codex, ratif. adversarial de Claude 2026-06-08): runtime/ledger_ops.py (auto-claim + handoff-release via submit_intent --intents, orden de envelopes correcto: claim release al final) + golden cutover_loop 4/4. Corri yo los gates. >>> AMBOS LADOS DEL CUTOVER EN CODIGO: mandato (Claude, 1e65b91) + ledger_ops (Codex). El sistema esta CODE-READY para la ACTIVACION del escritor-unico = re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback (operador YA autorizo 2026-06-08). La activacion la ejecuta el arquitecto de forma SUPERVISADA (es el switch coordinado de mayor riesgo; tras el flip la siguiente transicion de cada lazo DEBE ir por submit_intent o hard-failea -> rollback listo). ENCOLADA SA.1 = TASK-0078 (SPEC-0064, autonomia supervisada, shadow) para mantener a Codex productivo lejos del ledger durante la activacion. F7.5 docs pendiente. GO por mailbox; promover de a una."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }

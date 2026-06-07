@@ -1,17 +1,17 @@
 ---
-spec_id: SPEC-autonomia-supervisada (ID a asignar al promover; NO fijar para no colisionar con Fase 7 F7.5)
-task_id: (a asignar)
+spec_id: SPEC-0064-autonomia-supervisada
+task_id: TASK-0078
 type: design
-status: draft
+status: ready
 created_at: 2026-06-07
 author: Claude (arquitecto)
-linked_decisions: [DECISION-0024 (draft), DECISION-0021, DECISION-0009, DECISION-0019, DECISION-0013]
+linked_decisions: [DECISION-0024, DECISION-0021, DECISION-0009, DECISION-0019, DECISION-0013]
 relates_to: [TASK-0038, SPEC-0048, SPEC-0035]
 ---
 
-> DRAFT en personal/Claude/ (adelanto autorizado por el operador). Diseno tecnico de la autonomia supervisada.
-> No promover ni encender sin GO. Depende de DECISION-0024 (politica) aprobada. Acota IDs al promover (Fase 7
-> aun consume TASK-0076/SPEC-0062 para F7.5).
+> PROMOVIDA por Claude (2026-06-08). Diseno tecnico de la autonomia supervisada (DECISION-0024 APROBADA).
+> SA.1 = TASK-0078 (primera rebanada, shadow). SA.2..SA.5 se encolan de a una. La ACTIVACION real (invoker
+> multi-turno, SA.4) sigue gateada por su sobre + GO del operador + rollback ensayado.
 
 # Diseno - Autonomia supervisada (loop multi-turno acotado)
 

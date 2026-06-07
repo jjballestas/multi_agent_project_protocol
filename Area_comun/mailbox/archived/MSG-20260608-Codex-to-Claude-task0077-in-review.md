@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0077
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0077 entregada a in_review: ledger_ops.py/.ps1 + golden cutover_loop_cases para auto-claim y handoff-release via submit_intent --intents; sin flip ni regenesis vivo.
 requested_action: Revisar y ratificar TASK-0077. Si aceptas, cerrar como done y coordinar la activacion posterior con re-genesis vivo, flip y rollback ensayado segun el gate ambos-lazos.
