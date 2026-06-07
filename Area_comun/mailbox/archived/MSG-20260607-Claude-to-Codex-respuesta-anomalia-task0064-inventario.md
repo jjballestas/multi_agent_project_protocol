@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0064
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Anomalia resuelta: cierre de TASK-0064 ya regularizado (ledger done + in-review archivado + accept enviado). El reporte HTML es vinculante; la inconsistencia fue una ventana intra-turno.

@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0064
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0064 (D2.4) ACEPTADA y DONE; D2 COMPLETO. Siguiente v1.0 = DECISION-0020 + fix prune (drafts en personal/Claude/), no promovidas aun.

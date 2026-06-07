@@ -17,6 +17,42 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.0.0] — 2026-06-07
+
+**First stable release — the protocol-methodology as a distributable product.** Promotes the
+protocol to `1.0.0` (human-approved per
+[DECISION-0001](Area_comun/decisions/DECISION-0001-versionado.md)). **MAJOR** as a stabilization
+milestone: the contract, the N-agent runtime, the security/guardrails layer, the real-LLM wrapper
+and the adoption/distribution track are now consolidated and supported as a package. Additive and
+domain-neutral over v0.10.0 — every previously valid turn report stays valid and the runtime stays
+gated/off-by-default in templates.
+
+### Added
+- **Distribution track (D2) complete** — adoption tiers `coordination`/`runtime`
+  ([DECISION-0019](Area_comun/decisions/DECISION-0019-distribucion-runtime.md), TASK-0058),
+  tier-aware `upgrade_instance` + `runtime_version` (TASK-0061), adoption docs (TASK-0063), and the
+  package versioning guide
+  [`PACKAGE_VERSIONING.md`](Area_comun/protocol/PACKAGE_VERSIONING.md) — 4 version axes + adopter
+  SemVer + per-tier compatibility + migration notes (TASK-0064 / D2.4).
+- **Real-LLM wrapper** — vendor-neutral CLI adapter over `SubprocessInvoker` (presets claude/codex),
+  off-by-default with explicit registration, no secrets, no autonomy
+  ([DECISION-0021](Area_comun/decisions/DECISION-0021-activacion-wrapper-llm.md), TASK-0062).
+- **Engine (D0) closed** — N-agent observability (`trace_id`/spans/`summarize_nagent`, TASK-0059) and
+  budget/deadline A10 (TASK-0060), config-gated and byte-equivalent when off.
+- **Security/guardrails core (Phase 5)** — anti-injection invariant G1 (TASK-0054), deny-by-default
+  tool-policy (TASK-0056), envelope signing / event-auth HMAC (TASK-0057).
+- **Anti-collision rule** for concurrent ledger writes
+  ([DECISION-0020](Area_comun/decisions/DECISION-0020-regla-anti-colision.md)) — formalized and
+  propagated to `AGENTS.md`/`AGENTS.template.md` sec.7 and `TASK_PROTOCOL.md`.
+- **Prune hygiene** — `prune_state` now condenses `PROJECT_STATE#next_actions` into a deterministic,
+  idempotent sentinel (config-gated `recent_next_actions`), closing the Layer-A follow-up (SPEC-0051,
+  TASK-0065).
+- Human-facing **methodology inventory report** (HTML) under `Area_comun/reports/`.
+
+### Notes
+- Post-v1.0 work (Phase B event-log live-writer of protocol state, Phase 7 release engineering,
+  supervised autonomy) stays gated behind explicit human approval.
+
 ## [0.10.0] — 2026-06-06
 
 N-agent **core consolidation** release. Packages the N-agent runtime phases 1-4 and the full

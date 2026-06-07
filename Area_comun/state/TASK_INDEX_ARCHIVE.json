@@ -1940,6 +1940,84 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_upgrade_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: runtime_version sellado (live 0.10.0; template placeholder); upgrade_instance.py (+ paridad .ps1 +52) tier-aware via adoptable_for_instance: instancia runtime-tier recibe deltas runtime/** + runtime_version, coordination/ausente NO recibe runtime/** (como hoy); excluye runtime/state/runs/__pycache__; inform-only (no muta); reporte muestra runtime_version master vs instancia solo para runtime-tier. Flip por arquitecto. CIERRA D2.2. OBS menor (notificada a Codex): el handoff + in-review msg de 0061 llegaron tras la liberacion del claim/mi chequeo (timing), presentes y movidos a answered; ratificacion no afectada. Reconciliado el GO-upgrade que quedo status=archived en open/.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0062",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Wrapper LLM real (SPEC-0048, DECISION-0021): adapter CLI concreto vendor-neutral sobre SubprocessInvoker (presets claude/codex, sin hardcode) + activacion off-by-default/gateada (flags + registro; sin flags=>recorded/replay) + limites al activar (budget A10/tool-policy/guardrails/gate) + golden runtime_real_adapter_cases (CI con RecordedInvoker, sin red/credenciales). DELTA sobre adapters. NO autonomia. Bloque funcional de v1.0.",
+            "spec_id": "Area_comun/specs/SPEC-0048-wrapper-llm-real.md",
+            "file": "Area_comun/tasks/TASK-0062-codex-wrapper-llm-real.md",
+            "linked_decisions": [
+                "DECISION-0021",
+                "DECISION-0009",
+                "DECISION-0015",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0036",
+                "TASK-0039"
+            ],
+            "relates_to": [
+                "TASK-0056",
+                "TASK-0060"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/adapters/",
+                "examples/runtime_real_adapter_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/adapters/",
+                "examples/runtime_real_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0062-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_real_adapter_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. W1 off-by-default (TEMPLATE runtime.enabled=false; LIVE+TEMPLATE runtime.real_invoker.enabled=false con campos de registro; el CLI real no corre sin registro+flags aunque runtime.enabled); W2 vendor-neutral (runtime.llm_cli_presets claude+codex como config, resolve via --llm-command|--llm-preset, sin hardcode) y SIN secretos (grep limpio; CI con RecordedInvoker); W3 limites al activar (budget A10/tool-policy/guardrails/gate) + replay-comparativo; W4 NO autonomia. DELTA sobre runtime/adapters. Handoff+in-review completos. Flip por arquitecto. CIERRA el wrapper = ultimo bloque funcional de v1.0.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0063",
+            "owner": "Codex",
+            "status": "done",
+            "type": "documentation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.3 (docs de adopcion, SPEC-0049): ampliar README_INSTANCIACION (tiers coordination/runtime + elegir/instanciar --tier + upgrade tier-aware + OPERAR AGENTES REALES via wrapper DECISION-0021 off-by-default) + docs N-agente criterio 16 SPEC-0038 (registry/routing/estados/guardrails/seguridad/handoffs/observabilidad/budget). Solo documentacion, neutral, sin secretos, sin duplicar runtime/README.",
+            "spec_id": "Area_comun/specs/SPEC-0049-d2.3-docs-adopcion.md",
+            "file": "Area_comun/tasks/TASK-0063-codex-docs-adopcion.md",
+            "linked_decisions": [
+                "DECISION-0019",
+                "DECISION-0021",
+                "DECISION-0015"
+            ],
+            "depends_on": [
+                "TASK-0058",
+                "TASK-0061",
+                "TASK-0062"
+            ],
+            "relates_to": [
+                "TASK-0013"
+            ],
+            "relevant_files": [
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/",
+                "runtime/README.md"
+            ],
+            "deliverables": [
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0063-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Docs D2.3: README_INSTANCIACION ampliado (tiers coordination/runtime, elegir/instanciar --tier, upgrade tier-aware, OPERAR AGENTES REALES via wrapper DECISION-0021 off-by-default -line 129 documenta credenciales NO commiteadas-) + Area_comun/protocol/N_AGENT_RUNTIME.md (criterio 16: registry/routing/review-qa/guardrails/seguridad/handoffs/observabilidad/budget). Verifique cobertura (README 28 hits tiers/upgrade/activacion; N_AGENT cubre los 8 temas) + sin secretos (falsos positivos: docs dicen 'configuracion local, no secretos' + refs TASK-0001) + encoding/neutralidad/validador verdes. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.3.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

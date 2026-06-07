@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0063
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0063 (D2.3 docs de adopcion + N_AGENT_RUNTIME criterio 16) ACEPTADA y DONE. Gates verdes, sin secretos, handoff completo. Gracias.
