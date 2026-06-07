@@ -58,6 +58,7 @@
       "approved_at": "",
       "caps": {
         "max_turns": 5,
+        "human_checkpoint_every_k": 2,
         "wall_clock_ms": 300000
       }
     }

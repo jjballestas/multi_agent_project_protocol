@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +36,14 @@ def wall_clock_ms_value(raw: Any) -> int | None:
     return None
 
 
+def human_checkpoint_every_k_value(raw: Any) -> int | None:
+    if isinstance(raw, bool):
+        return None
+    if isinstance(raw, int):
+        return raw if raw >= 1 else None
+    return None
+
+
 def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str | None:
     raw = supervised_autonomy_config(config)
     if raw.get("enabled") is not True:
@@ -46,6 +55,7 @@ def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str |
     caps = raw.get("caps") if isinstance(raw.get("caps"), dict) else {}
     max_turns = max_turns_value(caps.get("max_turns"))
     wall_clock_ms = wall_clock_ms_value(caps.get("wall_clock_ms"))
+    checkpoint_every = human_checkpoint_every_k_value(caps.get("human_checkpoint_every_k"))
     missing = [
         name
         for name, value in (
@@ -61,6 +71,8 @@ def supervised_autonomy_activation_error(config: dict[str, Any] | None) -> str |
         return "runtime.supervised_autonomy.caps.max_turns must be an integer >= 1"
     if wall_clock_ms is None:
         return "runtime.supervised_autonomy.caps.wall_clock_ms must be an integer >= 0"
+    if checkpoint_every is None:
+        return "runtime.supervised_autonomy.caps.human_checkpoint_every_k must be an integer >= 1"
     return None
 
 
@@ -75,12 +87,57 @@ def supervised_autonomy_payload(config: dict[str, Any]) -> dict[str, Any]:
         "caps": {
             "max_turns": int(caps.get("max_turns")),
             "wall_clock_ms": int(caps.get("wall_clock_ms")),
+            "human_checkpoint_every_k": int(caps.get("human_checkpoint_every_k")),
         },
     }
 
 
 def pause_sentinel_path(root: Path) -> Path:
     return root.resolve() / "runtime" / "state" / "PAUSE"
+
+
+def quality_policy(config: dict[str, Any] | None) -> dict[str, Any]:
+    raw = config.get("quality_policy") if isinstance(config, dict) else None
+    return raw if isinstance(raw, dict) else {}
+
+
+def int_value(value: Any, default: int) -> int:
+    if isinstance(value, bool):
+        return default
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def task_cycle_count(root: Path, task_id: str, key: str) -> int:
+    try:
+        index = json.loads((root / "Area_comun" / "state" / "TASK_INDEX.json").read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return 0
+    for task in index.get("tasks") or []:
+        if isinstance(task, dict) and task.get("id") == task_id:
+            return int_value(task.get(key), 0)
+    return 0
+
+
+def fix_cycle_checkpoint_reason(root: Path, report: dict[str, Any], config: dict[str, Any] | None) -> str | None:
+    transitions = report.get("transitions") if isinstance(report.get("transitions"), dict) else {}
+    review_qa = transitions.get("review_qa") if isinstance(transitions.get("review_qa"), dict) else {}
+    event = str(review_qa.get("event") or "")
+    task_id = str(report.get("task_id") or "")
+    policy = quality_policy(config)
+    if event == "reject_review":
+        count = task_cycle_count(root, task_id, "review_attempts")
+        limit = int_value(policy.get("max_review_cycles"), 3)
+        if count >= limit:
+            return f"quality_policy.max_review_cycles={limit}"
+    if event == "fail_qa":
+        count = task_cycle_count(root, task_id, "qa_attempts")
+        limit = int_value(policy.get("max_qa_cycles"), 3)
+        if count >= limit:
+            return f"quality_policy.max_qa_cycles={limit}"
+    return None
 
 
 def turn_cost_tokens(turn: dict[str, Any]) -> int:
@@ -120,6 +177,7 @@ def write_run_report(
         f"- approved_at: {supervision.get('approved_at', '')}",
         f"- caps.max_turns: {(supervision.get('caps') or {}).get('max_turns')}",
         f"- caps.wall_clock_ms: {(supervision.get('caps') or {}).get('wall_clock_ms')}",
+        f"- caps.human_checkpoint_every_k: {(supervision.get('caps') or {}).get('human_checkpoint_every_k')}",
         "",
         "## Turns",
         "",

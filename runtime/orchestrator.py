@@ -32,6 +32,7 @@ try:
     from .gate import run_gate
     from .runlog import RunLog, deterministic_run_id, turn_entry
     from .supervised_autonomy import (
+        fix_cycle_checkpoint_reason,
         pause_sentinel_path,
         supervised_autonomy_activation_error,
         supervised_autonomy_payload,
@@ -58,7 +59,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from budget import Budget, budget_settings, responsible
     from metrics import summarize
     from runlog import turn_entry
-    from supervised_autonomy import pause_sentinel_path, supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
+    from supervised_autonomy import fix_cycle_checkpoint_reason, pause_sentinel_path, supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -572,6 +573,28 @@ def run_loop(
         budget.consume(cost_tokens=cost_tokens)
         wall_clock_elapsed_ms += clock_fixed
         baseline_dirty = set(dirty_worktree_paths(root))
+        if supervision is not None and result.get("green"):
+            checkpoint_reason = fix_cycle_checkpoint_reason(root, report, config)
+            actual_adapter_turns = sum(1 for current in turns if "adapter" in (current.get("trace") or []))
+            checkpoint_every = int((supervision.get("caps") or {}).get("human_checkpoint_every_k") or 0)
+            if checkpoint_reason is None and checkpoint_every and actual_adapter_turns >= checkpoint_every and index < len(reports[:limit]):
+                checkpoint_reason = f"caps.human_checkpoint_every_k={checkpoint_every}"
+            if checkpoint_reason:
+                checkpoint_entry = turn_entry(
+                    turn=index + 1,
+                    trace=["supervised_autonomy", "human_checkpoint"],
+                    outcome="human_checkpoint",
+                    reason=checkpoint_reason,
+                    duration_ms=0,
+                )
+                checkpoint_entry["human_required"] = True
+                checkpoint_entry["supervised_autonomy"] = {
+                    **supervision,
+                    "wall_clock_elapsed_ms": wall_clock_elapsed_ms,
+                }
+                runlog.append(checkpoint_entry)
+                turns.append(checkpoint_entry)
+                break
         if not result.get("green"):
             break
         if budget.exceeded(last_responsible=last_responsible) and index < len(reports[:limit]):
@@ -598,7 +621,7 @@ def run_loop(
             or bool(last.get("errors"))
             or last.get("human_required") is True
             or last.get("gate_green") is False
-            or str(last.get("outcome") or "") in {"rejected", "budget_exhausted", "human_required", "decision_required"}
+            or str(last.get("outcome") or "") in {"rejected", "budget_exhausted", "human_required", "decision_required", "human_checkpoint"}
         )
         if actual_adapter_turns >= limit and not stopped_already:
             entry = turn_entry(

@@ -99,12 +99,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0077",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Cutover (SPEC-0063) DONE - ACEPTADA por Claude (ratif. adversarial): runtime/ledger_ops.py construye envelopes auto-claim (claim acquire + status ready->in_progress) y handoff-release (status in_progress->in_review + task_upsert + claim release AL FINAL) y delega en submit_intents transaccional; golden cutover_loop 4/4 (fixture drift-0). LADO CODEX del cutover listo; con el mandato (lado Claude) ambos lados en codigo. SIN flip. Prerrequisito de la activacion del escritor-unico."
-        },
-        {
             "id": "TASK-0078",
             "owner": "Codex",
             "status": "done",
@@ -119,8 +113,8 @@
         {
             "id": "TASK-0080",
             "owner": "Codex",
-            "status": "ready",
-            "title": "Autonomia supervisada SA.3 (SPEC-0064): checkpoint humano forzado (tras K turnos o fix-cycles repetidos -> human_required, no auto-resume) + escalacion via router/quality_policy, shadow, invoker real intacto. Tercera de SA.1..SA.5."
+            "status": "in_review",
+            "title": "TASK-0080 EN REVISION por Claude: SA.3 checkpoint humano + fix-cycles entregado por Codex; invoker real intacto."
         }
     ],
     "open_questions": [],
@@ -133,18 +127,17 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 103 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0077 RECLAMADA por Codex (2026-06-08): implementando helper runtime/ledger_ops.py/.ps1 + golden cutover_loop_cases para auto-claim y handoff-release via submit_intent --intents sobre fixture drift0. Sin enforce/authoritative ni regenesis vivo.",
-        "TASK-0077 ENTREGADA a in_review por Codex (2026-06-08): runtime/ledger_ops.py/.ps1 construye envelopes submit_intent --intents para auto-claim (claim acquire + task_status ready->in_progress) y handoff-release (task_status in_progress->in_review + task_upsert opcional + claim release), con --submit delegado a submit_intents. Golden cutover_loop_cases 4/4 sobre fixture drift0: materializa ledger esperado, drift 0, idempotente, paridad CLI/PowerShell; CI actualizado. No se activo enforce/authoritative ni se re-genesiso el repo vivo. Pendiente ratificacion de Claude y activacion coordinada posterior.",
-        "TASK-0077 DONE (cutover lado Codex, ratif. adversarial de Claude 2026-06-08): runtime/ledger_ops.py (auto-claim + handoff-release via submit_intent --intents, orden de envelopes correcto: claim release al final) + golden cutover_loop 4/4. Corri yo los gates. >>> AMBOS LADOS DEL CUTOVER EN CODIGO: mandato (Claude, 1e65b91) + ledger_ops (Codex). El sistema esta CODE-READY para la ACTIVACION del escritor-unico = re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback (operador YA autorizo 2026-06-08). La activacion la ejecuta el arquitecto de forma SUPERVISADA (es el switch coordinado de mayor riesgo; tras el flip la siguiente transicion de cada lazo DEBE ir por submit_intent o hard-failea -> rollback listo). ENCOLADA SA.1 = TASK-0078 (SPEC-0064, autonomia supervisada, shadow) para mantener a Codex productivo lejos del ledger durante la activacion. F7.5 docs pendiente. GO por mailbox; promover de a una.",
+        "[HISTORICO PODADO] 106 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0078 RECLAMADA por Codex (2026-06-08): implementando SA.1 autonomia supervisada en shadow (runtime.supervised_autonomy off-by-default + flag + activation_error, caps.max_turns con RecordedInvoker, runreport, golden supervised_autonomy_cases + CI). Sin tocar invoker real ni encender autonomia.",
         "TASK-0078 ENTREGADA a in_review por Codex (2026-06-08): SA.1 autonomia supervisada shadow lista. runtime.supervised_autonomy queda off-by-default en config/template; --allow-supervised-autonomy valida registro/caps; RecordedInvoker respeta caps.max_turns y emite runreport markdown; golden supervised_autonomy_cases 4/4; invoker real sigue bloqueado por --once, sin activar autonomia. Pendiente ratificacion de Claude; siguiente SA.2 kill-switch+reloj.",
         "TASK-0078 DONE (autonomia supervisada SA.1, ratif. adversarial de Claude 2026-06-08): supervised_autonomy.py (gate off-by-default + runreport) + orchestrator --allow-supervised-autonomy + caps.max_turns; invoker real --once intacto; golden 4/4 + runtime_loop 8/8 + real_adapter 4/4. Corri yo los gates. ENCOLADA SA.2 = TASK-0079 (SPEC-0064): kill-switch (centinela PAUSE) + reloj de pared, shadow. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, la ejecuta el arquitecto de forma SUPERVISADA (operador ya autorizo 2026-06-08); Codex en autonomia (SA.x) mientras tanto, lejos del ledger. F7.5 docs pendiente. GO por mailbox; de a una.",
         "TASK-0079 RECLAMADA por Codex (2026-06-08): implementando SA.2 kill-switch runtime/state/PAUSE antes de cada turno + caps.wall_clock_ms determinista con --clock-fixed; golden pausa/reloj/off/cerrojo real. Sin tocar invoker real ni encender autonomia.",
         "TASK-0079 ENTREGADA a in_review por Codex (2026-06-08): SA.2 kill-switch/reloj listo. runtime/state/PAUSE se chequea antes de cada turno -> outcome=paused sin mutar estado; caps.wall_clock_ms obligatorio en registro y evaluado con --clock-fixed -> outcome=wallclock_exhausted; golden supervised_autonomy_cases 6/6; regresiones runtime verdes; invoker real intacto y autonomia off. Pendiente ratificacion de Claude; siguiente SA.3 checkpoint humano + escalacion.",
-        "TASK-0079 DONE (autonomia supervisada SA.2, ratif. adversarial de Claude 2026-06-08): kill-switch (centinela PAUSE) + reloj de pared; golden 6/6 + runtime_loop 8/8 + real_adapter 4/4 (invoker real intacto). Corri yo los gates. ENCOLADA SA.3 = TASK-0080 (SPEC-0064): checkpoint humano forzado + escalacion, shadow. SA.4 (invoker real multi-turno) sigue GATEADA con GO + rollback -- NO arrancar sin coordinacion. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, supervisada por el arquitecto (operador autorizo 2026-06-08). HEADS-UP: operador redacta DECISION-0025 (agent-teams-bridge), nueva direccion, aun no entregada. F7.5 docs pendiente. GO por mailbox; de a una."
+        "TASK-0079 DONE (autonomia supervisada SA.2, ratif. adversarial de Claude 2026-06-08): kill-switch (centinela PAUSE) + reloj de pared; golden 6/6 + runtime_loop 8/8 + real_adapter 4/4 (invoker real intacto). Corri yo los gates. ENCOLADA SA.3 = TASK-0080 (SPEC-0064): checkpoint humano forzado + escalacion, shadow. SA.4 (invoker real multi-turno) sigue GATEADA con GO + rollback -- NO arrancar sin coordinacion. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, supervisada por el arquitecto (operador autorizo 2026-06-08). HEADS-UP: operador redacta DECISION-0025 (agent-teams-bridge), nueva direccion, aun no entregada. F7.5 docs pendiente. GO por mailbox; de a una.",
+        "TASK-0080 RECLAMADA por Codex (2026-06-08): implementando SA.3 checkpoint humano tras caps.human_checkpoint_every_k o fix-cycles repetidos quality_policy; golden y runreport. Sin tocar invoker real ni encender autonomia.",
+        "TASK-0080 ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo; caps.human_checkpoint_every_k corta con human_required/outcome=human_checkpoint tras K turnos, fix-cycles alcanzando quality_policy max_review_cycles/max_qa_cycles tambien escalan a humano; runreport registra cap/checkpoint; golden supervised_autonomy_cases 8/8 + suite CI funcional verde; invoker real --once intacto y autonomia off. Pendiente ratificacion de Claude. SA.4 NO iniciar sin GO operador + rollback."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }

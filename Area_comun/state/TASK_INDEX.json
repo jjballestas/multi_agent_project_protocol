@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,46 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0077",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Cutover (SPEC-0063): el lazo autonomo de Codex adopta submit_intent --intents como UNICO write-path del ledger (auto-claim = claim acquire + task_status ready->in_progress; handoff-release = task_status in_progress->in_review + claim release [+ task_upsert]) via transaccion atomica (TASK-0076); helper/receta runtime/ledger_ops.py + golden examples/cutover_loop_cases sobre fixture drift-0. Prerrequisito del flip. SHADOW: enforce/authoritative OFF; NO re-genesisar el vivo.",
-            "spec_id": "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
-            "file": "Area_comun/tasks/TASK-0077-codex-cutover-submit-intent-loop.md",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017",
-                "DECISION-0020"
-            ],
-            "depends_on": [
-                "TASK-0076"
-            ],
-            "relates_to": [
-                "TASK-0072",
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/ledger_ops.py",
-                "runtime/submit_intent.py",
-                "examples/cutover_loop_cases/",
-                ".github/workflows/validate.yml",
-                "runtime/ledger_ops.ps1"
-            ],
-            "deliverables": [
-                "runtime/ledger_ops.py",
-                "examples/cutover_loop_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0077-codex-to-claude-1.md",
-                "runtime/ledger_ops.ps1"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden cutover_loop 4/4 + validador valid (drift de sombra esperado) + neutralidad limpia. Lei ledger_ops.py: orden de envelopes CORRECTO -- auto-claim = claim acquire + task_status ready->in_progress (claim primero, gana autoridad de scope); handoff-release = task_status in_progress->in_review + task_upsert + claim release AL FINAL (el claim sigue activo durante las escrituras que lo necesitan, se libera ultimo). Delega en submit_intents (transaccional); el helper no edita hot state por su cuenta. SIN flip ni re-genesis del vivo. Cierra el LADO CODEX del cutover; con el mandato (lado Claude, commit 1e65b91) ambos lados del cutover estan en codigo. Flip por arquitecto. CIERRA TASK-0077.",
-            "updated_at": "2026-06-08"
         },
         {
             "id": "TASK-0078",
@@ -194,7 +154,7 @@
         {
             "id": "TASK-0080",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -221,11 +181,15 @@
             "deliverables": [
                 "runtime/orchestrator.py",
                 "examples/supervised_autonomy_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md"
+                "Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md",
+                "runtime/supervised_autonomy.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0080-in-review.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "READY (encolada por Claude 2026-06-08 tras cerrar SA.2): SA.3 checkpoint humano forzado + escalacion, shadow, sin tocar invoker real. GO en mailbox. Valor de human_checkpoint_every_k a confirmar (sugiero 2).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo. El sobre de autonomia supervisada valida caps.human_checkpoint_every_k, corta con outcome=human_checkpoint + human_required tras K turnos cuando queda trabajo, y escala tambien al alcanzar quality_policy max_review_cycles/max_qa_cycles usando review_attempts/qa_attempts ya aplicados. Runreport registra el cap y el checkpoint. Golden supervised_autonomy_cases 8/8; invoker real --once intacto; autonomia sigue off-by-default.",
             "updated_at": "2026-06-08"
         }
     ]

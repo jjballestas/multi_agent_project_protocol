@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Golden cases for supervised-autonomy SA.1 shadow envelope."""
+"""Golden cases for supervised-autonomy shadow envelope."""
 
 from __future__ import annotations
 
@@ -28,11 +28,11 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def task(task_id: str) -> dict[str, Any]:
-    return {
+def task(task_id: str, *, status: str = "ready", owner: str = "Codex", overrides: dict[str, Any] | None = None) -> dict[str, Any]:
+    payload = {
         "id": task_id,
-        "owner": "Codex",
-        "status": "ready",
+        "owner": owner,
+        "status": status,
         "type": "implementation",
         "priority": "normal",
         "phase": "P2",
@@ -42,13 +42,19 @@ def task(task_id: str) -> dict[str, Any]:
         "depends_on": [],
         "deliverables": [],
     }
+    payload.update(overrides or {})
+    return payload
 
 
-def claim(task_id: str) -> dict[str, Any]:
+def claim_id_for(task_id: str, owner: str) -> str:
+    return f"CLAIM-{task_id}-{owner.lower().replace(' ', '-')}"
+
+
+def claim(task_id: str, *, owner: str = "Codex") -> dict[str, Any]:
     return {
-        "claim_id": f"CLAIM-{task_id}-codex",
+        "claim_id": claim_id_for(task_id, owner),
         "task_id": task_id,
-        "owner": "Codex",
+        "owner": owner,
         "status": "active",
         "scope": [
             f"Area_comun/tasks/{task_id}.md",
@@ -68,6 +74,7 @@ def supervised_config(
     enabled: bool,
     max_turns: int = 2,
     wall_clock_ms: int = 1000,
+    human_checkpoint_every_k: int = 2,
     valid: bool = True,
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
@@ -75,7 +82,11 @@ def supervised_config(
         "activation_decision": "DECISION-0024" if valid else "",
         "approved_by": "operador humano" if valid else "",
         "approved_at": "2026-06-08" if valid else "",
-        "caps": {"max_turns": max_turns, "wall_clock_ms": wall_clock_ms},
+        "caps": {
+            "max_turns": max_turns,
+            "wall_clock_ms": wall_clock_ms,
+            "human_checkpoint_every_k": human_checkpoint_every_k,
+        },
     }
     return payload
 
@@ -85,25 +96,42 @@ def build_fixture(
     *,
     task_ids: list[str],
     supervised: dict[str, Any] | None = None,
+    task_statuses: dict[str, str] | None = None,
+    task_owners: dict[str, str] | None = None,
+    task_overrides: dict[str, dict[str, Any]] | None = None,
+    claim_owners: dict[str, str] | None = None,
+    quality_policy: dict[str, Any] | None = None,
 ) -> None:
-    tasks = [task(task_id) for task_id in task_ids]
+    task_statuses = task_statuses or {}
+    task_owners = task_owners or {}
+    task_overrides = task_overrides or {}
+    claim_owners = claim_owners or {}
+    tasks = [
+        task(
+            task_id,
+            status=task_statuses.get(task_id, "ready"),
+            owner=task_owners.get(task_id, "Codex"),
+            overrides=task_overrides.get(task_id),
+        )
+        for task_id in task_ids
+    ]
     runtime_config: dict[str, Any] = {"enabled": True, "entrypoint": "runtime/orchestrator.py"}
     if supervised is not None:
         runtime_config["supervised_autonomy"] = supervised
-    write_json(
-        root / "protocol.config.json",
-        {
-            "schema_version": "1.0",
-            "runtime": runtime_config,
-            "domain_neutrality": {
-                "enabled": True,
-                "denylist": [],
-                "scan_globs": ["Area_comun/tasks/*.md"],
-                "exempt_globs": [],
-            },
-            "state_invariants": [{"path": "status", "equals": "active"}],
+    config_payload = {
+        "schema_version": "1.0",
+        "runtime": runtime_config,
+        "domain_neutrality": {
+            "enabled": True,
+            "denylist": [],
+            "scan_globs": ["Area_comun/tasks/*.md"],
+            "exempt_globs": [],
         },
-    )
+        "state_invariants": [{"path": "status", "equals": "active"}],
+    }
+    if quality_policy is not None:
+        config_payload["quality_policy"] = quality_policy
+    write_json(root / "protocol.config.json", config_payload)
     write_json(
         root / "Area_comun/state/PROJECT_STATE.json",
         {
@@ -114,13 +142,19 @@ def build_fixture(
         },
     )
     write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": tasks})
-    write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": [claim(item["id"]) for item in tasks]})
+    write_json(
+        root / "Area_comun/state/CLAIMS.json",
+        {
+            "schema_version": "1.0",
+            "claims": [claim(item["id"], owner=claim_owners.get(item["id"], item["owner"])) for item in tasks],
+        },
+    )
     write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
     write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
     for item in tasks:
         task_path = root / item["file"]
         task_path.parent.mkdir(parents=True, exist_ok=True)
-        task_path.write_text(f"---\nid: {item['id']}\nstatus: ready\n---\n\n# Fixture\n", encoding="utf-8")
+        task_path.write_text(f"---\nid: {item['id']}\nstatus: {item['status']}\n---\n\n# Fixture\n", encoding="utf-8")
     spec_path = root / "Area_comun/specs/SPEC-9600-fixture.md"
     spec_path.parent.mkdir(parents=True, exist_ok=True)
     spec_path.write_text("# SPEC-9600 fixture\n", encoding="utf-8")
@@ -154,7 +188,7 @@ def turn_report(task_id: str) -> dict[str, Any]:
         ],
         "transitions": {
             "task_status": {"from": "ready", "to": "done"},
-            "claims": [{"op": "release", "claim_id": f"CLAIM-{task_id}-codex"}],
+            "claims": [{"op": "release", "claim_id": claim_id_for(task_id, "Codex")}],
         },
         "commit_message": f"test(runtime): supervised {task_id}",
         "gate": {"human_required": False},
@@ -163,11 +197,49 @@ def turn_report(task_id: str) -> dict[str, Any]:
     }
 
 
+def failed_check() -> dict[str, str]:
+    return {
+        "check_id": "review-cycle",
+        "error_class": "ReviewFinding",
+        "artifact_path": "Area_comun/reports/review-cycle.txt",
+        "log": "ts=2026-06-08 id=abc123",
+    }
+
+
+def review_rejection_report(task_id: str) -> dict[str, Any]:
+    return {
+        "turn_id": f"RUN-fixture-review-{task_id}",
+        "task_id": task_id,
+        "agent": "Claude",
+        "outcome": "ok",
+        "summary": f"Reject {task_id} in review.",
+        "changed_paths": [
+            f"Area_comun/tasks/{task_id}.md",
+            f"Area_comun/state/TASK_INDEX.json#{task_id}",
+            f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
+            "Area_comun/state/CLAIMS.json",
+        ],
+        "transitions": {
+            "task_status": {"from": "in_review", "to": "changes_requested"},
+            "review_qa": {"event": "reject_review", "reviewer": "Claude", "checks_failed": [failed_check()]},
+            "claims": [{"op": "release", "claim_id": claim_id_for(task_id, "Claude")}],
+        },
+        "commit_message": f"test(runtime): supervised review {task_id}",
+        "gate": {"human_required": False},
+        "next_hint": None,
+        "cost": {"tokens": 5},
+    }
+
+
 def write_transcripts(root: Path, task_ids: list[str]) -> Path:
+    return write_report_transcripts(root, [turn_report(task_id) for task_id in task_ids])
+
+
+def write_report_transcripts(root: Path, reports: list[dict[str, Any]]) -> Path:
     path = root / "transcripts"
     path.mkdir(parents=True, exist_ok=True)
-    for index, task_id in enumerate(task_ids, start=1):
-        report = turn_report(task_id)
+    for index, report in enumerate(reports, start=1):
+        task_id = str(report["task_id"])
         write_json(
             path / f"{index:02d}-{task_id}.json",
             {
@@ -225,6 +297,90 @@ def case_max_turns_stops_recorded_loop_and_writes_runreport() -> None:
         assert "max_turns_reached" in text
         assert "caps.max_turns: 2" in text
         assert "caps.wall_clock_ms: 1000" in text
+        assert "caps.human_checkpoint_every_k: 2" in text
+
+
+def case_human_checkpoint_every_k_stops_with_human_required() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-human-checkpoint-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600", "TASK-9601", "TASK-9602"]
+        build_fixture(
+            fixture,
+            task_ids=task_ids,
+            supervised=supervised_config(enabled=True, max_turns=5, human_checkpoint_every_k=2),
+        )
+        transcripts = write_transcripts(fixture, task_ids)
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "recorded",
+                "--allow-supervised-autonomy",
+                "--run-id",
+                "RUN-supervised-human-checkpoint",
+                "--replay-report",
+                str(transcripts),
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 2
+        assert statuses(fixture) == ["done", "done", "ready"]
+        last = result["turns"][-1]
+        assert last["outcome"] == "human_checkpoint", result
+        assert last["human_required"] is True, result
+        assert "caps.human_checkpoint_every_k=2" in last["reason"], result
+        text = Path(result["run_report"]).read_text(encoding="utf-8-sig")
+        assert "human_checkpoint" in text
+        assert "caps.human_checkpoint_every_k: 2" in text
+
+
+def case_fix_cycles_trigger_human_checkpoint() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-fix-cycle-checkpoint-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600", "TASK-9601"]
+        build_fixture(
+            fixture,
+            task_ids=task_ids,
+            supervised=supervised_config(enabled=True, max_turns=5, human_checkpoint_every_k=5),
+            task_statuses={"TASK-9600": "in_review"},
+            task_owners={"TASK-9600": "Codex"},
+            task_overrides={"TASK-9600": {"review_attempts": 2}},
+            claim_owners={"TASK-9600": "Claude"},
+            quality_policy={"max_review_cycles": 3, "max_qa_cycles": 3},
+        )
+        transcripts = write_report_transcripts(fixture, [review_rejection_report("TASK-9600"), turn_report("TASK-9601")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "recorded",
+                "--allow-supervised-autonomy",
+                "--run-id",
+                "RUN-supervised-fix-cycle-checkpoint",
+                "--replay-report",
+                str(transcripts),
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 1
+        assert statuses(fixture) == ["changes_requested", "ready"]
+        last = result["turns"][-1]
+        assert last["outcome"] == "human_checkpoint", result
+        assert last["human_required"] is True, result
+        assert "quality_policy.max_review_cycles=3" in last["reason"], result
+        text = Path(result["run_report"]).read_text(encoding="utf-8-sig")
+        assert "human_checkpoint" in text
+        assert "quality_policy.max_review_cycles=3" in text
 
 
 def case_pause_sentinel_stops_before_turn_without_mutating_state() -> None:
@@ -383,6 +539,8 @@ def case_real_invoker_lock_remains_intact_in_sa1() -> None:
 def main() -> int:
     cases = [
         case_max_turns_stops_recorded_loop_and_writes_runreport,
+        case_human_checkpoint_every_k_stops_with_human_required,
+        case_fix_cycles_trigger_human_checkpoint,
         case_pause_sentinel_stops_before_turn_without_mutating_state,
         case_wall_clock_stops_before_turn_that_would_exceed_cap,
         case_activation_without_valid_registration_rejects_before_run,

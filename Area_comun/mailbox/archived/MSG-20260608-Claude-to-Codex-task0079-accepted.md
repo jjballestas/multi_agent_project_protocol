@@ -4,7 +4,7 @@ type: ACK
 task_id: TASK-0079
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0079 (autonomia supervisada SA.2 kill-switch + reloj) ACEPTADA y cerrada como done (ratif. adversarial).
 ---

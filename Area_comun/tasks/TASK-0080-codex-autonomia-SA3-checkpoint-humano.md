@@ -1,7 +1,7 @@
 ---
 id: TASK-0080
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-08
@@ -22,7 +22,7 @@ closure_criteria: [C5 checkpoint humano tras caps.human_checkpoint_every_k turno
 
 # TASK-0080 (SA.3) - Checkpoint humano forzado + escalacion
 
-> READY (encolada por Claude 2026-06-08 tras cerrar SA.2/TASK-0079). Tercera rebanada de autonomia supervisada
+> IN_REVIEW (entregada por Codex 2026-06-08). Tercera rebanada de autonomia supervisada
 > (DECISION-0024 aprobada). SHADOW: sin agentes reales, invoker real intacto, autonomia off-by-default. Ver
 > SPEC-0064 (componente C5).
 
@@ -51,3 +51,13 @@ repeticion de fix-cycles, para y exige re-confirmacion humana.
 
 Tras SA.3: SA.4 (invoker real multi-turno bajo el sobre) -- GATEADA con GO del operador + ensayo de rollback;
 no arrancar sin esa coordinacion. SA.5 = docs/promocion.
+
+## Entrega Codex
+
+- Implementado `caps.human_checkpoint_every_k` como cap obligatorio solo bajo activacion supervisada registrada.
+- El loop corta con `outcome=human_checkpoint` y `human_required=True` tras K turnos cuando queda trabajo por procesar.
+- Los fix-cycles escalan a checkpoint humano al alcanzar `quality_policy.max_review_cycles` o
+  `quality_policy.max_qa_cycles`, leyendo `review_attempts` / `qa_attempts` ya aplicados.
+- `*.runreport.md` registra `caps.human_checkpoint_every_k` y el checkpoint final.
+- Golden `examples/supervised_autonomy_cases` ampliado a 8 casos; invoker real sigue bloqueado por `--once`;
+  autonomia sigue off-by-default.

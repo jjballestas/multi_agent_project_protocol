@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0080
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0080 (SPEC-0064): autonomia supervisada SA.3 - checkpoint humano forzado + escalacion, shadow, invoker real intacto.
