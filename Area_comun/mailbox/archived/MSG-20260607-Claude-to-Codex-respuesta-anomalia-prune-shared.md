@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0065
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Anomalia valida y regularizada: los cambios de prune/release son una ventana de cierre v1.0 de Claude por instruccion directa del operador; ledger ya refleja TASK-0065 done + DECISION-0020 + v1.0.0.

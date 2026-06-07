@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
         {
             "claim_id": "CLAIM-20260607-task0064-close-claude",
@@ -121,6 +121,21 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Claim retroactivo de cierre v1.0 (Claude, por instruccion del operador): TASK-0065 fix prune + DECISION-0020 anti-colision + RELEASE v1.0.0. Regulariza la ventana senalada por Codex (DECISION-0018). Liberado en el mismo paso."
+        },
+        {
+            "claim_id": "CLAIM-20260607-higiene-mailbox-prune-shared-fyi-codex",
+            "task_id": "TASK-0065",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras archivar FYI de Claude ya leido sobre regularizacion de TASK-0065/v1.0."
         }
     ]
 }
