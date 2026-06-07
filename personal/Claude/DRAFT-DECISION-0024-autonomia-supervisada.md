@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0024
 title: Politica de activacion de autonomia supervisada (loop multi-turno acotado, off-by-default, gateado)
-status: draft
+status: accepted
 date: 2026-06-07
-ratified_at: ""
+ratified_at: 2026-06-08
 deciders: [operador humano, Claude (architect)]
 supersedes: []
 superseded_by: []
@@ -13,9 +13,10 @@ phase: P2
 
 # DECISION-0024 - Activacion de autonomia supervisada (DRAFT)
 
-> DRAFT en personal/Claude/ (adelanto autorizado por el operador 2026-06-07: "trabaja en area personal").
-> NO promover al ledger ni encender flags sin GO explicito + aprobacion humana (cambio de boundary,
-> AGENTS.md sec.4). ID DECISION-0024 tentativo (0023 ya promovida; nada mas en cola de decision).
+> ACCEPTED por el operador (2026-06-08): autorizo expresamente aprobar DECISION-0024 (junto con re-genesis del
+> repo vivo y el flip enforce+authoritative). Pendiente solo PROMOVER al ledger (Area_comun/decisions/ +
+> PROJECT_STATE#decisions) en ventana segura (Codex in_progress en TASK-0076). Habilita encolar SA.1..SA.5.
+> La ACTIVACION de la autonomia (flip real del modo) sigue gateada por su propio sobre + rollback ensayado.
 
 ## Contexto
 
@@ -91,11 +92,15 @@ instancia (con su propia aprobacion humana).** Nunca se activa automaticamente.
 
 ## Aprobacion humana
 
-Requerida por ser cambio de boundary (AGENTS.md sec.4). PENDIENTE. Este draft solo prepara la politica para
-revision del operador; no habilita nada.
+Requerida por ser cambio de boundary (AGENTS.md sec.4). **OTORGADA por el operador el 2026-06-08** ("aprobar
+DECISION-0024"). La politica queda ACCEPTED. La ACTIVACION real de la autonomia sigue gateada por su sobre
+(SA.4 con GO + rollback ensayado); aprobar la politica NO enciende nada.
 
 ## Pendiente
 
-- [ ] Revision del operador a la politica (caps por defecto, valor de `max_turns`, `K`, reloj de pared).
-- [ ] Decompose tecnico (ver DRAFT-SPEC-autonomia-supervisada): SA.1..SA.5.
-- [ ] Promover a Area_comun/decisions/ + PROJECT_STATE#decisions SOLO con GO (ventana segura, DECISION-0020).
+- [x] Aprobacion del operador a la politica (2026-06-08).
+- [ ] Caps por defecto a confirmar al implementar SA.1 (sugerencias: `max_turns<=5`, `K`=2, reloj de pared
+      acotado; el operador puede ajustarlos en la activacion).
+- [ ] Promover a Area_comun/decisions/DECISION-0024 + PROJECT_STATE#decisions en ventana segura (Codex
+      in_progress en TASK-0076 ahora; promover cuando libere su claim, DECISION-0020).
+- [ ] Encolar SA.1 (primera rebanada, shadow) tras promover, de a una (Codex ocupado con TASK-0076).
