@@ -99,12 +99,6 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). NUCLEO Fases 1-4 DONE (criterios 1-12 SPEC-0038 implementados). Fases 5-7 CONDICIONADAS/gateadas (pendiente OK operador). Brechas para spec-completa: event log writer-vivo, golden N=3/N=5, property-based I1-I8, concurrency sim, runtime suites en CI, autor-de-record hardening."
         },
         {
-            "id": "TASK-0056",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 5.2 (SPEC-0042) DONE - ACEPTADA por Claude (ratificacion adversarial): tool-policy deny-by-default + clasificacion de acciones. runtime/tool_policy.py (is_tool_allowed/classify_action/gate_for_action) + cableado aditivo en turn_validate (security.tool_denied; contract_change=>decision_refs; external/sensitive=>human_required) + turn_schema 1.2.0 (tools/actions opcionales) + golden 6/6. Suite 116/116, fallback N=2 intacto, domain-neutral."
-        },
-        {
             "id": "TASK-0057",
             "owner": "Codex",
             "status": "done",
@@ -113,8 +107,14 @@
         {
             "id": "TASK-0058",
             "owner": "Codex",
+            "status": "done",
+            "title": "D2.1 (distribucion via tiers) DONE - ACEPTADA por Claude (ratificacion adversarial): new_instance.py --tier coordination|runtime (default coordination) + adoption_tier (ortogonal a adopted_profiles); tier runtime trae motor+gates(4)+CI (OFF), excluye state/runs/pycache; examples/full_runtime_instance verde, minimal_instance intacto; validador tier-aware aditivo py/ps1. Golden 5/5 + suite verde."
+        },
+        {
+            "id": "TASK-0059",
+            "owner": "Codex",
             "status": "ready",
-            "title": "D2.1 (distribucion via tiers, DECISION-0019): new_instance --tier (default coordination) + adoption_tier; tier runtime trae motor+gates+CI (OFF), excluye state/runs/pycache; examples/full_runtime_instance verde, minimal_instance intacto, validador tier-aware. Aditivo."
+            "title": "Fase 6.1 (observabilidad N-agente, SPEC-0045): trace_id/spans deterministas + summarize_nagent (DELTA sobre M2). Aditivo, config-gated. Cierra parte de D0."
         }
     ],
     "open_questions": [],
@@ -139,7 +139,8 @@
         "FASE 5.3 ENCOLADA (TASK-0057, ready, 2026-06-07): firma del envelope / autenticacion de eventos (SPEC-0043, A1/sec.8.1). HMAC por agente en eventlog (firma+verificacion; signing on => sin firma valida rechazado + security.unauthenticated_event) + event_auth off por defecto + replay determinista + negative-replay (A6). Codex ONLINE (~100s); GO enviado. Metodo anti-colision refinado aplicado (archivos-antes-de-claim #1 + staging explicito #2; es el test concurrente live del metodo). Con 5.1+5.2+5.3 el nucleo de Fase 5 (guardrails/permisos/identidad) queda cubierto. Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
         "TASK-0057 ENTREGADA a in_review por Codex (2026-06-07): Fase 5.3 firma del envelope/event auth. Implementado event_auth off por defecto; HMAC determinista en runtime/eventlog.py cuando esta enabled; replay/snapshot rechaza firma ausente/alterada con security.unauthenticated_event; issuer/audience placeholder sin flujo externo; golden runtime_event_auth_cases 5/5 + CI. Runtime completo + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
         "FASE 5.3 CERRADA (TASK-0057 DONE, ratificacion adversarial de Claude 2026-06-07): firma del envelope / autenticacion de eventos (SPEC-0043, A1/sec.8.1). HMAC determinista + security.unauthenticated_event + event_auth off por defecto + replay determinista. Suite 121/121. >>> NUCLEO DE FASE 5 (5.1 anti-inyeccion + 5.2 tool-policy + 5.3 firma del envelope) CUBIERTO <<<. El metodo anti-colision (prep en personal + script atomico + archivos-antes-de-claim + staging explicito + GO/ETA) corrio limpio en 5.2/5.3 => se formalizara como DECISION-0020 (regla anti-colision, pendiente) + AGENTS.md sec.7 + TASK_PROTOCOL. META FIJADA POR EL OPERADOR: metodologia DISTRIBUIBLE a otros proyectos => brecha mayor = new_instance/scripts NO distribuyen runtime/ ni gates (roadmap D0-D6; pivote = DECISION-0019 modelo de distribucion del runtime (a/b/c; borrador en preparacion en personal/Claude/ por peticion del operador)). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real.",
-        "DECISION-0019 ACCEPTED (modelo de distribucion del runtime, elegida y aprobada por el operador 2026-06-07): (c) TIERS DE ADOPCION + (a) scaffolding completo como motor del tier runtime. Dos tiers: coordination (ligero, DEFAULT) y runtime (completo, trae el motor OFF-by-default). adoption_tier es eje ORTOGONAL a los perfiles profesionales (stack). Adopcion ligera = ventaja estrategica + camino de upgrade lite->runtime. SPEC-0044 decompone D2.1 (new_instance --tier + adoption_tier + examples/full_runtime_instance verde + validador tier-aware) -> D2.2 (upgrade tier-aware + runtime_version) -> D2.3 (docs adopcion + criterio 16) -> D2.4 (SemVer del paquete + migracion). ENCOLADA D2.1 = TASK-0058 (ready, Codex). PENDIENTE: DECISION-0020 (regla anti-colision) por formalizar. FOLLOW-UP: el prune no condensa next_actions (rompio el presupuesto cold-start 20k; condensado a mano 49->12). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real."
+        "TASK-0058 ENTREGADA a in_review por Codex (2026-06-07): D2.1 distribucion tier-aware. Implementado adoption_tier live/template; new_instance.py --tier coordination|runtime (default coordination); tier runtime copia motor runtime/ + gates + CI y excluye state/runs/__pycache__; template runtime/tool_policy/event_auth OFF; validador py/ps1 tier-aware; examples/full_runtime_instance + golden examples/runtime_instantiation_cases en CI. Verificado: golden instanciacion, suite runtime completa, validador repo/minimal/full py, validador full/repo ps1, encoding/neutralidad/prune py/ps verdes. Pendiente ratificacion adversarial de Claude; luego D2.2.",
+        "D2.1 CERRADA (TASK-0058 DONE, ratificacion adversarial de Claude 2026-06-07): new_instance.py tier-aware (coordination|runtime, default coordination) + adoption_tier (ortogonal a adopted_profiles); tier runtime distribuye motor+gates(4 py+ps1)+CI OFF-by-default excluyendo state/runs/pycache; examples/full_runtime_instance verde, minimal_instance intacto; validador tier-aware aditivo py/ps1. Verifique YO ambos tiers (DI1-DI5) + determinismo + golden 5/5 + suite sin regresion. PRIORIDAD D0 DEL OPERADOR (cerrar el motor): ENCOLADA Fase 6.1 = TASK-0059 (observabilidad N-agente: trace_id/spans deterministas + summarize_nagent, DELTA sobre M2). Pendientes: Fase 6.2 (A10 budget/deadline) + D2.2 (upgrade tier-aware) + DECISION-0020 (regla anti-colision). FOLLOW-UP: prune no condensa next_actions. Gateadas: Fase B (SPEC-0039), Fase 7, wrapper LLM real, autonomia supervisada."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

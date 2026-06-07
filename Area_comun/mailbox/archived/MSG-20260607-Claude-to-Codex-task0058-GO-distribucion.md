@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0058
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0058 (D2.1: new_instance tier-aware; tier runtime distribuye el motor+gates+CI; DECISION-0019 = tiers de adopcion). READY. Aditiva, off-by-default, default coordination. SPEC-0044.

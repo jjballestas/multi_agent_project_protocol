@@ -91,6 +91,9 @@ jobs:
       - name: Run runtime event auth cases
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 
+      - name: Run runtime instantiation cases
+        run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
+
       - name: Run runtime event log gate cases
         run: python examples/runtime_eventlog_gate_cases/run_runtime_eventlog_gate_cases.py
 

@@ -2,6 +2,7 @@
   "schema_version": "1.0",
   "protocol_version": "{{PROTOCOL_VERSION}}",
   "project_name": "{{PROJECT_NAME}}",
+  "adoption_tier": "{{ADOPTION_TIER}}",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
     "architect": "{{AGENT_ARCHITECT}}",
@@ -42,7 +43,7 @@
     "audience": "runtime-event-log"
   },
   "tool_policy": {
-    "enabled": true,
+    "enabled": false,
     "default": "deny",
     "agent_policies": {
       "{{AGENT_ARCHITECT}}": "policy.architect",

@@ -115,46 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0056",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase 5.2 (guardrails, SPEC-0042): tool-policy deny-by-default + clasificacion de acciones. Config tool_policy (ausencia=comportamiento actual) + runtime/tool_policy.py (is_tool_allowed/classify_action/gate_for_action) + cableado aditivo en turn_validate (tool fuera de allowlist=>security.tool_denied; cambio de contrato sin decision_refs=>falla; accion sensible/externa=>human_required) + golden runtime_tool_policy_cases. Aditivo, deny-by-default, fallback N=2 intacto.",
-            "spec_id": "Area_comun/specs/SPEC-0042-fase5.2-tool-policy.md",
-            "file": "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
-            "linked_decisions": [
-                "DECISION-0015",
-                "DECISION-0018"
-            ],
-            "depends_on": [
-                "TASK-0054"
-            ],
-            "relates_to": [
-                "TASK-0049",
-                "TASK-0046"
-            ],
-            "relevant_files": [
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "runtime/tool_policy.py",
-                "runtime/turn_validate.py",
-                "examples/runtime_tool_policy_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/tool_policy.py",
-                "runtime/turn_validate.py",
-                "examples/runtime_tool_policy_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: tool-policy 6/6 + suite runtime COMPLETA 116/116 (110 previos sin regresion) + validador/encoding/neutralidad py. runtime/tool_policy.py genuino: deny-by-default real (sin tool_policy/enabled:false => True legacy byte-equivalente; habilitada => deny salvo regla que case tool+agente+capacidad+accion+scope); classify_action falla-cerrado (ambiguo=>sensitive); gate_for_action mapea tabla sec.8.3 (read/local_write/local_exec/contract_change/external/sensitive); cableado aditivo en turn_validate (security.tool_denied; decision_required para contract_change; human_required para external/sensitive; solo actua si el report declara tools/actions). turn_schema 1.1.0->1.2.0 (tools/actions opcionales, aditivo, coherente con A.7) + orchestrator passthrough. Domain-neutral, fallback N=2 byte-equivalente. Obs de proceso: 1er commit del encolado (b1e519b) capturo el golden pero no la impl de runtime/ (staging por dirs) => commit torn; corregido en el cierre con staging explicito (HALLAZGO #2 del metodo anti-colision). Flip por arquitecto. CIERRA Fase 5.2.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0057",
             "owner": "Codex",
             "status": "done",
@@ -197,7 +157,7 @@
         {
             "id": "TASK-0058",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -216,20 +176,71 @@
             ],
             "relevant_files": [
                 "scripts/new_instance.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
                 "examples/full_runtime_instance/",
+                "examples/runtime_instantiation_cases/",
                 "examples/minimal_instance/",
                 ".github/workflows/validate.yml",
                 "runtime/turn_schema.json"
             ],
             "deliverables": [
                 "scripts/new_instance.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
                 "examples/full_runtime_instance/",
+                "examples/runtime_instantiation_cases/",
                 "Area_comun/handoffs/HANDOFF-TASK-0058-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07 tras DECISION-0019(a) aprobada por el operador. Primera rebanada (D2.1) del track de distribucion = metodologia distribuible a otros proyectos. Aditiva, off-by-default, neutral; sin DECISION nueva (DECISION-0019 cubre el boundary). Metodo anti-colision aplicado. Release atomico (DECISION-0018).",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Genere YO ambos tiers con new_instance.py y verifique: coordination (default) sin runtime + adoption_tier=coordination; runtime con runtime/ + 4 scripts de gates (py+ps1) + CI + adoption_tier=runtime y runtime/tool_policy/event_auth OFF (DI1/DI2); NO copia runtime/state/runs/__pycache__ (DI3); adopted_profiles ausente=ortogonal (DI5); generacion determinista (rt==rt2). Validan verde: coord, rt, examples/full_runtime_instance y examples/minimal_instance (DI4 intacto). Validador tier-aware ADITIVO (tier ausente=>coordination; solo exige runtime/ si tier=runtime). Golden instanciacion 5/5 + suite runtime completa sin regresion + encoding/neutralidad py. Flip por arquitecto. CIERRA D2.1 (distribucion via tiers).",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0059",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 6.1 (observabilidad N-agente, SPEC-0045, DELTA sobre M2): trace_id determinista por evento en eventlog + span por transicion en router/review_qa + summarize_nagent() en metrics.py (routing+fairness/ciclos QA/conflictos fencing/escalados/exclusiones autor). Aditivo, config-gated, byte-equivalente sin activar, negative-replay A6 intacto. Cierra parte de D0 (motor).",
+            "spec_id": "Area_comun/specs/SPEC-0045-fase6.1-observabilidad-nagente.md",
+            "file": "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0009",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0044",
+                "TASK-0045",
+                "TASK-0046"
+            ],
+            "relates_to": [
+                "TASK-0032"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/router.py",
+                "runtime/review_qa.py",
+                "runtime/metrics.py",
+                "examples/runtime_observability_nagent_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/eventlog.py",
+                "runtime/metrics.py",
+                "examples/runtime_observability_nagent_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07. Prioridad D0 del operador (cerrar el motor). DELTA sobre la observabilidad del M2 (no rehacer summarize/runlog). Aditiva, config-gated, fallback N=2; sin DECISION nueva. Metodo anti-colision. Release atomico (DECISION-0018)."
         }
     ]
 }

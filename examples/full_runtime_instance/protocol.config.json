@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.10.0",
+  "project_name": "full_runtime_instance",
+  "adoption_tier": "runtime",
+  "source_of_truth": "AGENTS.md",
+  "agent_roles": {
+    "architect": "Claude",
+    "implementer": "Codex",
+    "human_owner": "operador humano"
+  },
+  "quality_gates": ["Run the collaboration state validator before handoff or review."],
+  "human_approval_points": ["Critical boundary changes and release decisions require human owner approval."],
+  "token_cost": {
+    "chars_per_token": 4,
+    "coldstart_globs": [
+      "AGENTS.md",
+      "Area_comun/README.md",
+      "Area_comun/protocol/TASK_PROTOCOL.md",
+      "Area_comun/state/PROJECT_STATE.json",
+      "Area_comun/state/TASK_INDEX.json",
+      "Area_comun/state/CLAIMS.json"
+    ],
+    "budget": null
+  },
+  "maintenance": {
+    "enabled": false,
+    "cold_start_tokens_hard": 20000,
+    "done_ratio_hard": 85,
+    "released_ratio_hard": 90,
+    "recent_done_tasks": 2,
+    "recent_released_claims": 4,
+    "mailbox_keep_recent": 8
+  },
+  "runtime": {
+    "enabled": false,
+    "entrypoint": "runtime/orchestrator.py"
+  },
+  "event_auth": {
+    "enabled": false,
+    "method": "hmac-sha256",
+    "issuer": "local-runtime",
+    "audience": "runtime-event-log"
+  },
+  "tool_policy": {
+    "enabled": false,
+    "default": "deny",
+    "agent_policies": {
+      "Claude": "policy.architect",
+      "Codex": "policy.implementer"
+    },
+    "policies": {
+      "policy.architect": {
+        "allow": [
+          {
+            "tool": "runtime.plan",
+            "capabilities": ["orchestrator"],
+            "scope": ["Area_comun/", "runtime/"],
+            "actions": ["read"]
+          },
+          {
+            "tool": "mailbox.write",
+            "capabilities": ["orchestrator", "reviewer"],
+            "scope": ["Area_comun/mailbox/"],
+            "actions": ["local_write"]
+          }
+        ]
+      },
+      "policy.implementer": {
+        "allow": [
+          {
+            "tool": "local.shell",
+            "capabilities": ["implementer", "test_engineer"],
+            "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json", ".github/workflows/validate.yml"],
+            "actions": ["read", "local_exec"]
+          },
+          {
+            "tool": "local.patch",
+            "capabilities": ["implementer"],
+            "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json", ".github/workflows/validate.yml"],
+            "actions": ["local_write"]
+          }
+        ]
+      }
+    }
+  },
+  "routing_epoch": "0",
+  "routing_weights": {
+    "active_claims": 10,
+    "pending_reviews": 6,
+    "pending_qa": 6,
+    "open_fix_cycles": 4,
+    "cooldown_penalty": 1,
+    "capability_affinity": 1
+  },
+  "quality_policy": {
+    "max_review_cycles": 3,
+    "max_qa_cycles": 3,
+    "escalate_to_architect_before_human": true,
+    "allow_self_review": false,
+    "allow_self_qa": false
+  },
+  "domain_neutrality": {
+    "enabled": true,
+    "denylist": [],
+    "scan_globs": [
+      "AGENTS.template.md",
+      "Area_comun/README.template.md",
+      "protocol.config.template.json",
+      "Area_comun/state/*.template.json",
+      "Area_comun/protocol/*.md",
+      "Area_comun/specs/*_TEMPLATE.md",
+      "profiles/PROFILE_TEMPLATE/**",
+      "runtime/**",
+      "scripts/*.py",
+      "scripts/*.ps1"
+    ],
+    "exempt_globs": [
+      "profiles/**",
+      "examples/**",
+      "personal/**",
+      "Area_comun/decisions/**",
+      "Area_comun/tasks/**",
+      "Area_comun/handoffs/**",
+      "Area_comun/reports/**",
+      "Area_comun/artifacts/**",
+      "Area_comun/mailbox/**"
+    ]
+  },
+  "sdd": {
+    "enabled": false,
+    "enforcement": "new_implementable_tasks",
+    "adopted_at": "2026-06-05"
+  },
+  "state_invariants": [
+    {
+      "path": "status",
+      "equals": "active",
+      "description": "Template example invariant. Replace or remove in each project."
+    }
+  ]
+}

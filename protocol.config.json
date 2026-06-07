@@ -2,6 +2,7 @@
   "schema_version": "1.0",
   "protocol_version": "0.10.0",
   "project_name": "multi_agent_project_protocol",
+  "adoption_tier": "runtime",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
     "architect": "Claude",

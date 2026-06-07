@@ -4,33 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260607-TASK-0054-codex",
-            "task_id": "TASK-0054",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0054",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0054",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0054-in-review.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md",
-                "runtime/guardrails.py",
-                "runtime/turn_validate.py",
-                "examples/runtime_guardrail_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0054 entregada a in_review. Implementado runtime/guardrails.py + turn_validate + examples/runtime_guardrail_cases + CI. Verificado guardrail 5/5, runtime previo 105/105 (total 110), validador/encoding/neutralidad py/ps y prune --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260607-TASK-0055-codex",
             "task_id": "TASK-0055",
             "owner": "Codex",
@@ -118,6 +91,38 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0057 entregada a in_review. Implementado event_auth config-gated off por defecto, HMAC determinista en runtime/eventlog.py, verificacion replay/snapshot con security.unauthenticated_event, issuer/audience placeholder, golden runtime_event_auth_cases y CI. Verificado runtime completo + validador/encoding/neutralidad/prune py/ps; tras release se aplico prune de mantenimiento (1 claim archivado) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0058-codex",
+            "task_id": "TASK-0058",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0058",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0058",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0058-GO-distribucion.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0058-GO-distribucion.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0058-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0058-codex-to-claude-1.md",
+                "scripts/new_instance.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                ".github/workflows/validate.yml",
+                "examples/full_runtime_instance/",
+                "examples/runtime_instantiation_cases/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0058 entregada a in_review. Implementado D2.1 tier-aware: new_instance --tier coordination|runtime, adoption_tier en config, tier runtime distribuye motor + gates + CI off-by-default y excluye runtime/state, runtime/runs, __pycache__; validador tier-aware py/ps1; examples/full_runtime_instance y golden runtime_instantiation_cases en CI. Verificado golden, runtime suite completa y gates py/ps verdes; despues del release se aplico prune de mantenimiento (1 claim archivado) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0058-codex-to-claude-1.md."
         }
     ]
 }

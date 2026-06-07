@@ -27,6 +27,18 @@ CANONICAL_TEMPLATE_FILES = {
     "Area_comun/state/CLAIMS.template.json": "Area_comun/state/CLAIMS.json",
 }
 
+GATE_SCRIPT_FILES = [
+    "validate_collaboration_state.py",
+    "validate_collaboration_state.ps1",
+    "scan_encoding.py",
+    "scan_encoding.ps1",
+    "scan_domain_neutrality.py",
+    "scan_domain_neutrality.ps1",
+    "measure_context_cost.py",
+    "prune_state.py",
+    "prune_state.ps1",
+]
+
 COPIED_DIRS = [
     "Area_comun/protocol",
     "Area_comun/mailbox/open",
@@ -39,6 +51,52 @@ COPIED_DIRS = [
     "Area_comun/contracts",
     "Area_comun/decisions",
 ]
+
+RUNTIME_TIER_WORKFLOW = """name: Validate protocol instance
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Compile distributed Python modules
+        run: python -m compileall runtime scripts
+
+      - name: Validate protocol state
+        run: python scripts/validate_collaboration_state.py --root .
+
+      - name: Validate protocol state with PowerShell
+        shell: pwsh
+        run: ./scripts/validate_collaboration_state.ps1 -Root .
+
+      - name: Scan encoding
+        run: python scripts/scan_encoding.py --root .
+
+      - name: Scan encoding with PowerShell
+        shell: pwsh
+        run: ./scripts/scan_encoding.ps1 -Root .
+
+      - name: Check systematic state pruning
+        run: python scripts/prune_state.py --root . --check
+
+      - name: Scan domain neutrality
+        run: python scripts/scan_domain_neutrality.py --root .
+
+      - name: Scan domain neutrality with PowerShell
+        shell: pwsh
+        run: ./scripts/scan_domain_neutrality.ps1 -Root .
+"""
 
 
 def parse_args() -> argparse.Namespace:
@@ -84,6 +142,12 @@ def parse_args() -> argparse.Namespace:
         "--force",
         action="store_true",
         help="Allow writing into an existing non-empty target directory.",
+    )
+    parser.add_argument(
+        "--tier",
+        choices=("coordination", "runtime"),
+        default="coordination",
+        help="Adoption tier for the generated instance. Default: coordination.",
     )
     return parser.parse_args()
 
@@ -168,6 +232,54 @@ def copy_gitkeep(source_dir: Path, target_dir: Path) -> None:
         (target_dir / ".gitkeep").write_text("\n", encoding="utf-8")
 
 
+def copy_runtime_dir(source: Path, target: Path) -> None:
+    source_dir = source / "runtime"
+    if not source_dir.exists():
+        raise FileNotFoundError(f"Missing runtime directory: {source_dir}")
+    target_dir = target / "runtime"
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+
+    def ignore_artifacts(current: str, names: list[str]) -> set[str]:
+        current_path = Path(current)
+        ignored: set[str] = set()
+        for name in names:
+            candidate = current_path / name
+            try:
+                relative_parts = candidate.relative_to(source_dir).parts
+            except ValueError:
+                continue
+            if "__pycache__" in relative_parts:
+                ignored.add(name)
+            elif len(relative_parts) == 1 and relative_parts[0] in {"state", "runs"}:
+                ignored.add(name)
+        return ignored
+
+    shutil.copytree(source_dir, target_dir, ignore=ignore_artifacts)
+
+
+def copy_gate_scripts(source: Path, target: Path) -> None:
+    target_scripts = target / "scripts"
+    target_scripts.mkdir(parents=True, exist_ok=True)
+    for filename in GATE_SCRIPT_FILES:
+        source_file = source / "scripts" / filename
+        if not source_file.exists():
+            raise FileNotFoundError(f"Missing gate script: {source_file}")
+        shutil.copy2(source_file, target_scripts / filename)
+
+
+def write_runtime_ci_workflow(target: Path) -> None:
+    workflow_path = target / ".github" / "workflows" / "validate.yml"
+    workflow_path.parent.mkdir(parents=True, exist_ok=True)
+    workflow_path.write_text(RUNTIME_TIER_WORKFLOW, encoding="utf-8")
+
+
+def copy_runtime_tier_files(source: Path, target: Path) -> None:
+    copy_runtime_dir(source, target)
+    copy_gate_scripts(source, target)
+    write_runtime_ci_workflow(target)
+
+
 def render_text(text: str, replacements: dict[str, str], source_path: Path) -> str:
     missing = sorted({match.group(1) for match in PLACEHOLDER_RE.finditer(text)} - replacements.keys())
     if missing:
@@ -230,6 +342,7 @@ def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]
     )
     return {
         "PROJECT_NAME": args.project_name,
+        "ADOPTION_TIER": args.tier,
         "PROJECT_GOAL": args.project_goal,
         "PROJECT_DESCRIPTION": args.project_description,
         "PHASE_ID": args.phase_id,
@@ -293,6 +406,8 @@ def main() -> int:
         render_templates(source, target, replacements)
         render_remaining_files(target, replacements)
         create_personal_areas(target, args)
+        if args.tier == "runtime":
+            copy_runtime_tier_files(source, target)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(

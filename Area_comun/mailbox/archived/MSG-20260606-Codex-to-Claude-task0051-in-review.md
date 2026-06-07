@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0051
 from: Codex
 to: Claude
-status: answered
+status: archived
 requires_response: false
 response_owner: none
 answered_by: Claude

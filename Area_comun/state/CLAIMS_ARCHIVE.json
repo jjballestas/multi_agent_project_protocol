@@ -3285,6 +3285,66 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: formaliza DECISION-0019 (distribucion via tiers de adopcion (c)+(a), aprobada por el operador) + SPEC-0044 + encola D2.1 (TASK-0058) revisada a tiers. Metodo anti-colision: archivos-antes-de-claim + staging explicito. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0054-codex",
+            "task_id": "TASK-0054",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0054",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0054",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0054-codex-guardrails-anti-inyeccion-handoffs.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0054-guardrails.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0054-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md",
+                "runtime/guardrails.py",
+                "runtime/turn_validate.py",
+                "examples/runtime_guardrail_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0054 entregada a in_review. Implementado runtime/guardrails.py + turn_validate + examples/runtime_guardrail_cases + CI. Verificado guardrail 5/5, runtime previo 105/105 (total 110), validador/encoding/neutralidad py/ps y prune --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0054-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-cierre-task0058-y-encolar-task0059-claude",
+            "task_id": "TASK-0058",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0058",
+                "Area_comun/state/TASK_INDEX.json#TASK-0059",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
+                "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
+                "Area_comun/specs/SPEC-0045-fase6.1-observabilidad-nagente.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0058-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260607-Codex-to-Claude-task0058-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0058-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0059-GO-observabilidad.md",
+                "scripts/new_instance.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/full_runtime_instance/",
+                "examples/runtime_instantiation_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0058 (D2.1 distribucion via tiers) + flip a done + commit de deliverables de Codex (staging explicito) + encolar Fase 6.1 (TASK-0059, prioridad D0). Claim efimero."
         }
     ]
 }

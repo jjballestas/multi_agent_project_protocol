@@ -1,0 +1,44 @@
+name: Validate protocol instance
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Compile distributed Python modules
+        run: python -m compileall runtime scripts
+
+      - name: Validate protocol state
+        run: python scripts/validate_collaboration_state.py --root .
+
+      - name: Validate protocol state with PowerShell
+        shell: pwsh
+        run: ./scripts/validate_collaboration_state.ps1 -Root .
+
+      - name: Scan encoding
+        run: python scripts/scan_encoding.py --root .
+
+      - name: Scan encoding with PowerShell
+        shell: pwsh
+        run: ./scripts/scan_encoding.ps1 -Root .
+
+      - name: Check systematic state pruning
+        run: python scripts/prune_state.py --root . --check
+
+      - name: Scan domain neutrality
+        run: python scripts/scan_domain_neutrality.py --root .
+
+      - name: Scan domain neutrality with PowerShell
+        shell: pwsh
+        run: ./scripts/scan_domain_neutrality.ps1 -Root .
