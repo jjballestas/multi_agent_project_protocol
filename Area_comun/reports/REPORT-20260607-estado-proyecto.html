@@ -78,8 +78,8 @@
     <span class="chip">Generado <b>2026-06-07</b> (actualizado)</span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Rama <b>main</b></span>
-    <span class="chip">HEAD <b>2fb09fd</b></span>
-    <span class="chip">Fase <b>P2 &mdash; post-v1.0 (Fase B COMPLETA)</b></span>
+    <span class="chip">HEAD <b>bd2b128</b></span>
+    <span class="chip">Fase <b>P2 &mdash; post-v1.0 (writer-vivo en SOMBRA; Fase 7 en marcha)</b></span>
   </div>
 </header>
 
@@ -88,8 +88,9 @@
   <div class="sub" style="margin-top:6px">
     La metodologia esta consolidada y soportada como <b>producto distribuible</b>: contrato de coordinacion,
     motor runtime N-agente, capa de seguridad, wrapper LLM real y track de adopcion. Tag <code>v1.0.0</code>,
-    <code>protocol_version 1.0.0</code>, golden 32/32 verde. <b>Fase B COMPLETA</b> (writer-vivo del estado
-    construido pero APAGADO); el unico pendiente es la activacion en vivo, que espera el GO del operador.
+    <code>protocol_version 1.0.0</code>, golden 32/32 verde. <b>Fase B COMPLETA</b> y el writer-vivo
+    <b>ACTIVADO EN MODO SOMBRA</b> (materializa/observa; la edicion manual sigue valida). <b>Fase 7</b>
+    (release engineering) aprobada y en marcha (F7.1 SBOM en curso).
   </div>
 </div>
 
@@ -97,7 +98,7 @@
   <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
   <div class="card"><div class="n">22</div><div class="l">decisiones de protocolo</div></div>
   <div class="card"><div class="n">32/32</div><div class="l">golden runners verde</div></div>
-  <div class="card"><div class="n">B.1-B.4</div><div class="l">Fase B COMPLETA (apagada); activacion en vivo = GO del operador</div></div>
+  <div class="card"><div class="n">SOMBRA</div><div class="l">writer-vivo activo (enabled+materialize; enforce/authoritative off)</div></div>
 </div>
 
 <h2>1. Que esta cerrado (v1.0.0)</h2>
@@ -115,27 +116,27 @@
 </table>
 
 <h2>2. En curso ahora</h2>
-<div class="phase">
-  <h3><span class="badge b-ok">FASE B COMPLETA</span> Sin tarea de implementacion en curso</h3>
-  <p>Las cuatro rebanadas de la Fase B (B.1-B.4) estan <b>DONE</b> y ratificadas: el writer-vivo del estado de
-     protocolo esta <b>construido pero APAGADO</b> en la instancia viva (los cuatro flags
-     <code>event_state.enabled/materialize/enforce/authoritative</code> en <code>false</code> &rarr;
-     byte-equivalente, edicion manual intacta). Suite golden <b>32/32</b>. Se cerro tambien el paraguas
-     N-agente (TASK-0038), cubierto por Capa A + Fase B.</p>
-  <p class="why">El siguiente movimiento NO es de Codex (no hay trabajo de implementacion pendiente de Fase B):
-     es preparar la <b>evidencia para la activacion en vivo</b> (validacion replay/materializacion + rollback,
-     no destructiva) y esperar el <b>GO final del operador</b> &mdash; ver 3.b. Sin ese GO no se enciende nada.</p>
+<div class="phase now">
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0071 &mdash; Fase 7.1 (Codex): SBOM determinista</h3>
+  <p>Primera rebanada de la <b>Fase 7</b> (release engineering, aprobada por el operador): un SBOM canonico y
+     determinista del paquete (inventario de archivos + sha256 + los 4 ejes de version + commit/timestamp
+     provistos), base para provenance/firma/verificacion. Aditivo, neutral, sin secretos. Ver 3.c.</p>
+  <p class="why">Ademas, el <b>writer-vivo esta ACTIVO en MODO SOMBRA</b> (<code>event_state.enabled+materialize=true</code>,
+     <code>enforce/authoritative=false</code>): el runtime materializa/observa y emitio el genesis de corte por
+     referencia, pero la <b>edicion manual del ledger sigue valida</b> (el lazo no se rompe). En sombra el
+     validador emite un <b>WARNING de drift</b> conforme se edita a mano &mdash; esperado y benigno, nunca
+     hard-fail. Ver 3.b.</p>
 </div>
 
 <h2>3. Fases que faltan (explicacion breve)</h2>
 
 <p class="sub">Roadmap de cierre hacia el writer-vivo del estado de protocolo y la madurez operativa:</p>
 <div class="rail">
-  <div class="seg done"><b>Fase B &#10003;</b>writer-vivo (apagado)</div>
-  <div class="seg gate"><b>Activacion</b>en vivo (GO operador)</div>
-  <div class="seg gate"><b>Fase 7</b>release engineering</div>
+  <div class="seg done"><b>Fase B &#10003;</b>writer-vivo construido</div>
+  <div class="seg done"><b>Sombra &#10003;</b>activado (observa)</div>
+  <div class="seg now"><b>Fase 7</b>release eng (F7.1 en curso)</div>
+  <div class="seg gate"><b>Escritor unico</b>enforce (intents+GO)</div>
   <div class="seg gate"><b>Autonomia</b>supervisada</div>
-  <div class="seg gate"><b>Guia humana</b>(TASK-0037)</div>
 </div>
 
 <div class="phase">
@@ -189,47 +190,53 @@
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA &mdash; espera OK explicito del operador</span> 3.b &mdash; Activacion del writer-vivo en la instancia viva</h3>
-  <p>Es un paso <b>operativo</b>, distinto de B.4: encender en ESTE repo (la instancia dogfooding) los flags
-     <code>event_state.enabled</code> + <code>materialize</code> + <code>enforce</code> + <code>authoritative</code>
-     (hoy los cuatro en <code>false</code>), de modo que el runtime sea el unico escritor del estado y la
-     edicion manual quede prohibida. No es parte de B.4 (que se entrega apagada): es una decision GO/NO-GO del
-     operador, condicionada por DECISION-0022.</p>
-
-  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Precondiciones que el arquitecto debe tener "en mano" antes de pedir el OK</h4>
+  <h3><span class="badge b-ok">3.b.1 SOMBRA ACTIVADA &#10003;</span> Activacion del writer-vivo (progresiva)</h3>
+  <p>El operador aprobo la activacion en <b>modo sombra (progresivo)</b>. Estado actual en ESTE repo:
+     <code>event_state.enabled=true</code> + <code>materialize=true</code>; <code>enforce=false</code> +
+     <code>authoritative=false</code>. El runtime <b>materializa/observa</b> y se emitio el <b>genesis de corte
+     por referencia</b> (snapshot content-addressed, verificado por hash), pero la <b>edicion manual del ledger
+     SIGUE valida</b> &mdash; el lazo Claude/Codex no se rompe.</p>
   <ul class="steps">
-    <li class="done"><b>1. B.4 (TASK-0069) done y ratificada</b> &mdash; la maquinaria existe y paso la suite adversarial (golden 32/32). <span class="badge b-ok">CUMPLIDO</span></li>
-    <li class="next"><b>2. Validacion de replay/materializacion sobre el estado vivo REAL</b>: tomar el estado vivo actual (<code>TASK_INDEX</code>/<code>PROJECT_STATE</code>/<code>CLAIMS</code>), hacer <code>genesis-ref &rarr; replay &rarr; materialize</code> y demostrar que el resultado es <b>identico</b> al estado canonico de hoy (round-trip = identidad), con integridad verificada por <code>hash</code>. Es la prueba de que el log reconstruye fielmente el estado antes de confiarle la fuente de verdad. <span class="badge b-next">PENDIENTE (no destructiva)</span></li>
-    <li class="next"><b>3. Plan de rollback probado</b>: ensayar que apagar los flags vuelve a edicion manual sin perdida, y que desde el snapshot content-addressed + el <code>commit</code> de corte se reconstruye el estado previo. Procedimiento de reversa escrito y verificado. <span class="badge b-next">PENDIENTE</span></li>
+    <li class="done"><b>Precondicion 1 &mdash; B.4 done y ratificada</b> (golden 32/32). <span class="badge b-ok">CUMPLIDO</span></li>
+    <li class="done"><b>Precondicion 2 &mdash; validacion round-trip = identidad</b> sobre el estado vivo real (<code>genesis-ref &rarr; replay &rarr; materialize == estado canonico</code>, <code>hot_hash==replay_hash</code>, integridad por hash). Verificada no-destructivamente. <span class="badge b-ok">CUMPLIDO</span></li>
+    <li class="done"><b>Precondicion 3 &mdash; rollback seguro</b>: activar NO muta el ledger (solo agrega <code>runtime/state/</code>); reversible poniendo los 4 flags en <code>false</code>. Ensayado. <span class="badge b-ok">CUMPLIDO</span></li>
+    <li class="done"><b>Bloqueante resuelto</b>: el genesis bajo <code>runtime/state/</code> ya no rompe neutralidad (TASK-0070 lo eximio). <span class="badge b-ok">CUMPLIDO</span></li>
   </ul>
-
-  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que cambia al activar (impacto operativo)</h4>
-  <ul class="steps">
-    <li class="next"><b>Runtime = unico escritor</b>: Claude y Codex dejan de editar los <code>*.json</code> a mano y emiten <b>intents</b> al runtime; una edicion manual es rechazada como <code>drift</code> (hard-gate B.3).</li>
-    <li class="next"><b>La regla anti-colision (DECISION-0020) se vuelve casi innecesaria</b>: ya no hay dos escritores manuales del ledger.</li>
-    <li class="next"><b>Queda registrado el corte</b>: snapshot content-addressed + evento genesis-ref (hash/commit/actor/timestamp/schema).</li>
-  </ul>
-
-  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que NO cambia / red de seguridad</h4>
-  <ul class="steps">
-    <li class="next"><b>coordination-tier intacto</b>: otras instancias sin <code>runtime/</code> siguen en edicion manual; esto solo afecta a la instancia que lo activa.</li>
-    <li class="next"><b>Reversible</b>: apagar los flags vuelve al modo manual. La prohibicion DURA permanente (retirar el flujo manual sin reversa) NO es esto; seria un paso futuro con su propia decision.</li>
-    <li class="next"><b>SemVer</b>: la capacidad se publica MINOR-con-migracion; activarla en la instancia propia es un toggle operativo registrado, no un cambio de contrato para terceros.</li>
-  </ul>
-
-  <div class="why">Decision del operador (GO/NO-GO): el arquitecto presentara el informe de validacion (evidencia del
-     round-trip = identidad sobre el estado vivo) y el rollback ensayado; el operador decide si encender, y
-     cuando. Riesgo principal &mdash; doble fuente de verdad en la transicion &mdash; se descarta exigiendo
-     round-trip identico ANTES de activar. <b>Sin ese OK explicito, B.4 queda como capacidad disponible pero
-     inactiva en el repo vivo.</b></div>
+  <div class="why">Comportamiento en sombra: el validador emite un <b>WARNING de drift</b> conforme se edita el
+     ledger a mano (el log shadow no rastrea las ediciones manuales) &mdash; <b>esperado y benigno, nunca
+     hard-fail</b>. coordination-tier intacto. Reversible.</div>
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA &mdash; requiere OK del operador</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
+  <h3><span class="badge b-gate">GATEADA &mdash; requiere cablear intents + nuevo GO</span> 3.b.2 &mdash; Escritor unico (enforce + authoritative)</h3>
+  <p>El siguiente y ultimo escalon: encender <code>enforce=true</code> + <code>authoritative=true</code> para
+     que el runtime sea el <b>unico escritor</b> y la edicion manual quede <b>prohibida</b> (rechazada como
+     drift por el hard-gate B.3). <b>No se enciende todavia</b> porque romperia el lazo actual (Claude y Codex
+     editan JSON) hasta que exista el flujo de coordinacion via <b>runtime intents</b>.</p>
+  <ul class="steps">
+    <li class="next"><b>1. Cablear el flujo de intents</b>: que Claude y Codex emitan transiciones (status de tareas, claims, decisiones) como intents al runtime en vez de editar los <code>*.json</code>.</li>
+    <li class="next"><b>2. Encender enforce+authoritative</b> con nuevo <b>GO del operador</b>; la edicion manual pasa a rechazarse como drift.</li>
+    <li class="next"><b>3. La regla anti-colision (DECISION-0020) se vuelve casi innecesaria</b>: ya no hay dos escritores manuales.</li>
+  </ul>
+  <div class="why">Reversible (apagar flags vuelve a manual). La prohibicion DURA permanente seria un paso futuro
+     con su propia decision. SemVer MINOR-con-migracion (DECISION-0022). Requiere el cableado de intents + GO
+     explicito del operador; sin eso, queda en SOMBRA.</div>
+</div>
+
+<div class="phase gate">
+  <h3><span class="badge b-now">3.c &mdash; APROBADA, EN MARCHA (F7.1 en curso)</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
   <p>Endurece <b>como se publica y como se verifica</b> el paquete-metodologia, para que un adoptante pueda
      confiar en que recibe exactamente lo que se publico, sin manipulacion. Hoy el release es un tag + CHANGELOG
      + reporte humano; Fase 7 le agrega trazabilidad criptografica y verificacion automatizable. Es aditiva al
-     proceso de release (DECISION-0001) y neutral de dominio.</p>
+     proceso de release (DECISION-0001) y neutral de dominio. <b>Aprobada por el operador</b>; decompuesta en 5
+     rebanadas (SPEC-0057), promovidas de a una:</p>
+  <ul class="steps">
+    <li class="now"><b>F7.1 &mdash; SBOM determinista</b> (TASK-0071): inventario canonico (rutas + sha256 + 4 ejes de version + commit/timestamp provistos). <span class="badge b-now">EN CURSO (Codex)</span></li>
+    <li class="next"><b>F7.2 &mdash; manifiesto + verify</b>: integridad por hash de un release.</li>
+    <li class="next"><b>F7.3 &mdash; provenance/atestacion</b>: quien/commit/proceso (SLSA-lite).</li>
+    <li class="next"><b>F7.4 &mdash; firma</b>: probable DECISION propia (claves locales/CI, sin secretos).</li>
+    <li class="next"><b>F7.5 &mdash; docs + integracion</b> al flujo de release.</li>
+  </ul>
 
   <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que entra en el alcance</h4>
   <ul class="steps">
@@ -297,7 +304,7 @@
 
 <footer>
   Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
-  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD 2fb09fd (post-v1.0.0; FASE B COMPLETA B.1-B.4, writer-vivo construido pero APAGADO; activacion en vivo pendiente de validacion + GO del operador).
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD bd2b128 (post-v1.0.0; FASE B COMPLETA; writer-vivo ACTIVADO en MODO SOMBRA -enabled+materialize, enforce/authoritative off-; Fase 7 aprobada y en marcha, F7.1 en curso). En sombra el validador emite WARNING de drift benigno (no hard-fail).
   Las fases gateadas requieren aprobacion explicita del operador humano antes de arrancar.
 </footer>
 
