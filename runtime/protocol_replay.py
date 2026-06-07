@@ -9,14 +9,16 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import tempfile
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from .eventlog import all_events, canonical_hash, read_protocol_config
+    from .eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
 except ImportError:  # pragma: no cover - direct script execution
-    from eventlog import all_events, canonical_hash, read_protocol_config
+    from eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
 
 
 PROTOCOL_STATE_PATHS = {
@@ -25,6 +27,11 @@ PROTOCOL_STATE_PATHS = {
     "claims": Path("Area_comun/state/CLAIMS.json"),
 }
 TASK_TRANSITION_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_-]*)\s*->\s*([A-Za-z_][A-Za-z0-9_-]*)\s*$")
+PROTOCOL_GENESIS_TYPES = {"protocol.genesis", "protocol_state.genesis"}
+
+
+class ProtocolMaterializationError(RuntimeError):
+    pass
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -34,6 +41,27 @@ def read_json(path: Path) -> dict[str, Any]:
 def event_state_enabled(config: dict[str, Any] | None) -> bool:
     event_state = (config or {}).get("event_state")
     return isinstance(event_state, dict) and event_state.get("enabled") is True
+
+
+def event_state_materialize_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("materialize") is True
+
+
+def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
+    config = config or {}
+    return event_state_enabled(config) and event_state_materialize_enabled(config) and config.get("adoption_tier") == "runtime"
+
+
+def protocol_materialization_disabled_reason(config: dict[str, Any] | None) -> str:
+    config = config or {}
+    if not event_state_enabled(config):
+        return "event_state.enabled is false"
+    if not event_state_materialize_enabled(config):
+        return "event_state.materialize is false"
+    if config.get("adoption_tier") != "runtime":
+        return "adoption_tier is not runtime"
+    return "enabled"
 
 
 def sort_by_key(items: list[Any], key: str) -> list[Any]:
@@ -107,6 +135,26 @@ def protocol_snapshot(state: dict[str, Any], *, up_to_seq: int = 0) -> dict[str,
 
 def build_genesis_snapshot(root: Path) -> dict[str, Any]:
     return protocol_snapshot(load_hot_protocol_state(root), up_to_seq=0)
+
+
+def write_genesis(
+    root: Path,
+    *,
+    actor_id: str = "runtime",
+    idempotency_key: str = "protocol-state:genesis:v1",
+) -> dict[str, Any]:
+    root = root.resolve()
+    snapshot = build_genesis_snapshot(root)
+    writer = EventWriter(root)
+    event = writer.append_event(
+        event_type="protocol.genesis",
+        aggregate_id="protocol-state",
+        actor_id=actor_id,
+        idempotency_key=idempotency_key,
+        payload={"state": snapshot["state"], "canonical_hash": snapshot["canonical_hash"]},
+    )
+    writer.write_snapshot()
+    return {"event": event, "snapshot": snapshot}
 
 
 def task_id_from_event(event: dict[str, Any], payload: dict[str, Any]) -> str:
@@ -258,6 +306,88 @@ def replay_protocol_state(
 
 def current_protocol_snapshot(root: Path) -> dict[str, Any]:
     return replay_protocol_state(all_events(root))
+
+
+def canonical_json_text(payload: dict[str, Any]) -> str:
+    return json.dumps(payload, indent=4, ensure_ascii=True, sort_keys=True) + "\n"
+
+
+def write_text_ascii(path: Path, text: str) -> None:
+    text.encode("ascii")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="ascii", newline="\n") as handle:
+        handle.write(text)
+
+
+def materialize_to_disk(
+    root: Path,
+    snapshot_or_state: dict[str, Any],
+    *,
+    fail_after_writes: int | None = None,
+) -> dict[str, Any]:
+    root = root.resolve()
+    materialized = materialize_protocol_state(snapshot_or_state)
+    ordered_paths = sorted(materialized)
+    with tempfile.TemporaryDirectory(prefix="protocol-state-materialize-") as temp_name:
+        temp_root = Path(temp_name)
+        staged_root = temp_root / "staged"
+        backup_root = temp_root / "backup"
+        backups: dict[str, Path | None] = {}
+
+        for relative in ordered_paths:
+            write_text_ascii(staged_root / relative, canonical_json_text(materialized[relative]))
+
+        for relative in ordered_paths:
+            target = root / relative
+            if target.exists():
+                backup = backup_root / relative
+                backup.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(target, backup)
+                backups[relative] = backup
+            else:
+                backups[relative] = None
+
+        try:
+            for index, relative in enumerate(ordered_paths, start=1):
+                target = root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                (staged_root / relative).replace(target)
+                if fail_after_writes is not None and index >= fail_after_writes:
+                    raise ProtocolMaterializationError("simulated materialization failure")
+        except Exception:
+            for relative in ordered_paths:
+                target = root / relative
+                backup = backups.get(relative)
+                if backup is None:
+                    if target.exists():
+                        target.unlink()
+                elif backup.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(backup, target)
+            raise
+
+    return {
+        "materialized": True,
+        "paths": ordered_paths,
+        "up_to_seq": int(snapshot_or_state.get("up_to_seq") or 0),
+        "canonical_hash": canonical_hash(materialized),
+    }
+
+
+def has_protocol_genesis(events: list[dict[str, Any]]) -> bool:
+    return any(event.get("type") in PROTOCOL_GENESIS_TYPES and event.get("applied", True) is True for event in events)
+
+
+def materialize_from_event_log_if_enabled(root: Path) -> dict[str, Any]:
+    root = root.resolve()
+    config = read_protocol_config(root)
+    if not protocol_materialization_enabled(config):
+        return {"materialized": False, "reason": protocol_materialization_disabled_reason(config), "paths": []}
+    events = all_events(root)
+    if not has_protocol_genesis(events):
+        raise ProtocolMaterializationError("protocol genesis event missing; run write_genesis(root) before enabling event_state.materialize")
+    snapshot = replay_protocol_state(events)
+    return materialize_to_disk(root, snapshot)
 
 
 def drift_entries(hot: dict[str, Any], materialized: dict[str, Any]) -> list[dict[str, str]]:

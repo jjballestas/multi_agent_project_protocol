@@ -396,16 +396,20 @@ class EventWriter:
         owner: str,
         lease_until: str,
         idempotency_key: str,
+        claim_id: str | None = None,
     ) -> dict[str, Any]:
         state = self.state()
         fencing = int(state.get("fencing_tokens", {}).get(task_id) or 0) + 1
+        payload = {"task_id": task_id, "owner": owner, "lease_until": lease_until}
+        if claim_id:
+            payload["claim_id"] = claim_id
         return self.append_event(
             event_type="claim.acquired",
             aggregate_id=task_id,
             actor_id=owner,
             idempotency_key=idempotency_key,
             fencing_token=fencing,
-            payload={"task_id": task_id, "owner": owner, "lease_until": lease_until},
+            payload=payload,
         )
 
     def apply_intent(

@@ -115,43 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0064",
-            "owner": "Codex",
-            "status": "done",
-            "type": "documentation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "D2.4 (versionado del paquete, SPEC-0050): documento PACKAGE_VERSIONING (4 ejes protocol/runtime/schema/profile_version + SemVer para el adoptante + compatibilidad por tier) + notas de migracion (lite->runtime, upgrade inform-only, politica de cambios incompatibles). Ultima de D2. Solo documentacion, neutral.",
-            "spec_id": "Area_comun/specs/SPEC-0050-d2.4-versionado-paquete.md",
-            "file": "Area_comun/tasks/TASK-0064-codex-versionado-paquete.md",
-            "linked_decisions": [
-                "DECISION-0001",
-                "DECISION-0019",
-                "DECISION-0021"
-            ],
-            "depends_on": [
-                "TASK-0058",
-                "TASK-0061",
-                "TASK-0063"
-            ],
-            "relates_to": [
-                "TASK-0053"
-            ],
-            "relevant_files": [
-                "Area_comun/protocol/",
-                "README_INSTANCIACION.md",
-                "Area_comun/protocol/SCHEMA_VERSIONING.md"
-            ],
-            "deliverables": [
-                "Area_comun/protocol/PACKAGE_VERSIONING.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0064-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": false,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: validador raiz+minimal, encoding, neutralidad y prune --check verdes; sin secretos (grep limpio). PACKAGE_VERSIONING.md coherente (4 ejes protocol/runtime/schema/profile_version + SemVer adoptante + compatibilidad por tier + migracion lite->runtime + activar agentes reales/perfiles + politica de cambios incompatibles), neutral, doc-only (no toca runtime/version/CHANGELOG/tag), defiere el release v1.0 a paso humano separado. Enlace breve en README_INSTANCIACION sin duplicar. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.4 => D2 COMPLETO (D2.1+D2.2+D2.3+D2.4).",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0065",
             "owner": "Claude",
             "status": "done",
@@ -230,7 +193,7 @@
         {
             "id": "TASK-0067",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -260,12 +223,58 @@
             ],
             "deliverables": [
                 "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "runtime/eventlog.py",
                 "examples/runtime_protocol_materialize_cases/",
                 "Area_comun/handoffs/HANDOFF-TASK-0067-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07) como segunda rebanada de Fase B. Doble-gated (enabled+materialize), solo runtime-tier, off=byte-equivalente. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 30/30 (nuevo runtime_protocol_materialize_cases 6/6) + validador/encoding/neutralidad/prune py verdes. materialize_to_disk canonico/ASCII/sin-BOM con rollback todo-o-nada; write_genesis idempotente; cableado en apply correctamente TRIPLE-gateado (materialize_from_event_log_if_enabled chequea enabled&&materialize&&tier==runtime; materialization_commit_paths solo agrega paths si materialized=True; ProtocolMaterializationError => revert+block seguro). Byte-equivalencia verificada: config viva event_state enabled=false+materialize=false => apply no materializa, vivo intacto; el payload intent.applied agrega transitions de forma aditiva sin romper eventlog/apply/negative-replay (suites verdes). Scope respetado: NO hard-fail (B.3), NO prohibe edicion manual (B.4), NO enciende materialize en vivo, NO cambia turn schema. Flip por arquitecto. CIERRA Fase B.2; avanza TASK-0038. Siguiente: B.3 (TASK-0068).",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0068",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase B.3 (SPEC-0054): drift del estado de protocolo como HARD-FAIL bajo event_state.enforce (live+template, default false). Validador global py/.ps1 => fail (no warn) cuando enabled&&enforce&&runtime/state con drift; gate en apply aborta el commit del turno ante drift (atomico). Reutiliza protocol_state_drift/materialize de B.1/B.2 (solo cambia severidad). Triple-gated, off=byte-equivalente. NO prohibir edicion manual (B.4), NO encender enforce en vivo. golden runtime_protocol_enforce_cases.",
+            "spec_id": "Area_comun/specs/SPEC-0054-faseB3-drift-hard-fail.md",
+            "file": "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+            "linked_decisions": [
+                "DECISION-0017",
+                "DECISION-0015",
+                "DECISION-0014"
+            ],
+            "depends_on": [
+                "TASK-0066",
+                "TASK-0067"
+            ],
+            "relates_to": [
+                "TASK-0038",
+                "TASK-0048"
+            ],
+            "relevant_files": [
+                "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_protocol_enforce_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/validate_collaboration_state.py",
+                "runtime/apply.py",
+                "examples/runtime_protocol_enforce_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto, 2026-06-07) como tercera rebanada de Fase B (disenada fuera de banda mientras Codex hacia B.2, DECISION-0020). Triple-gated (enabled+enforce), off=byte-equivalente. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
             "updated_at": "2026-06-07"
         }
     ]

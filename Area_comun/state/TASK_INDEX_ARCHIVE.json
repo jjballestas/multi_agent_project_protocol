@@ -2018,6 +2018,43 @@
             "sdd_required": false,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Docs D2.3: README_INSTANCIACION ampliado (tiers coordination/runtime, elegir/instanciar --tier, upgrade tier-aware, OPERAR AGENTES REALES via wrapper DECISION-0021 off-by-default -line 129 documenta credenciales NO commiteadas-) + Area_comun/protocol/N_AGENT_RUNTIME.md (criterio 16: registry/routing/review-qa/guardrails/seguridad/handoffs/observabilidad/budget). Verifique cobertura (README 28 hits tiers/upgrade/activacion; N_AGENT cubre los 8 temas) + sin secretos (falsos positivos: docs dicen 'configuracion local, no secretos' + refs TASK-0001) + encoding/neutralidad/validador verdes. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.3.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0064",
+            "owner": "Codex",
+            "status": "done",
+            "type": "documentation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.4 (versionado del paquete, SPEC-0050): documento PACKAGE_VERSIONING (4 ejes protocol/runtime/schema/profile_version + SemVer para el adoptante + compatibilidad por tier) + notas de migracion (lite->runtime, upgrade inform-only, politica de cambios incompatibles). Ultima de D2. Solo documentacion, neutral.",
+            "spec_id": "Area_comun/specs/SPEC-0050-d2.4-versionado-paquete.md",
+            "file": "Area_comun/tasks/TASK-0064-codex-versionado-paquete.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019",
+                "DECISION-0021"
+            ],
+            "depends_on": [
+                "TASK-0058",
+                "TASK-0061",
+                "TASK-0063"
+            ],
+            "relates_to": [
+                "TASK-0053"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/SCHEMA_VERSIONING.md"
+            ],
+            "deliverables": [
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0064-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: validador raiz+minimal, encoding, neutralidad y prune --check verdes; sin secretos (grep limpio). PACKAGE_VERSIONING.md coherente (4 ejes protocol/runtime/schema/profile_version + SemVer adoptante + compatibilidad por tier + migracion lite->runtime + activar agentes reales/perfiles + politica de cambios incompatibles), neutral, doc-only (no toca runtime/version/CHANGELOG/tag), defiere el release v1.0 a paso humano separado. Enlace breve en README_INSTANCIACION sin duplicar. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.4 => D2 COMPLETO (D2.1+D2.2+D2.3+D2.4).",
+            "updated_at": "2026-06-07"
         }
     ]
 }

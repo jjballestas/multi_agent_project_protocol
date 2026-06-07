@@ -7,6 +7,7 @@ import json
 import re
 import shutil
 import tempfile
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +22,7 @@ try:
         runtime_state_has_content,
     )
     from .gate import run_gate
+    from .protocol_replay import ProtocolMaterializationError, materialize_from_event_log_if_enabled
     from .review_qa import (
         checks_with_signatures,
         has_consecutive_failure,
@@ -42,6 +44,7 @@ except ImportError:  # pragma: no cover - direct script execution
         runtime_state_has_content,
     )
     from gate import run_gate
+    from protocol_replay import ProtocolMaterializationError, materialize_from_event_log_if_enabled
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
     from turn_validate import validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
@@ -156,12 +159,14 @@ def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, A
         owner=actor,
         lease_until=str((claim or {}).get("expires_at") or ""),
         idempotency_key=f"{actor}:{task_id}:claim:{attempt_id}:0",
+        claim_id=str((claim or {}).get("claim_id") or ""),
     )
     intent_payload = {
         "turn_id": report.get("turn_id"),
         "outcome": report.get("outcome"),
         "claim_id": (claim or {}).get("claim_id"),
         "changed_paths": list(report.get("changed_paths") or []),
+        "transitions": deepcopy(report.get("transitions") or {}),
     }
     review_qa = review_qa_observability(root, report, writer)
     if review_qa:
@@ -181,6 +186,12 @@ def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, A
 def assert_runtime_snapshot_if_active(root: Path) -> None:
     if runtime_state_has_content(root):
         assert_snapshot_matches(root)
+
+
+def materialization_commit_paths(result: dict[str, Any] | None) -> list[str]:
+    if not isinstance(result, dict) or result.get("materialized") is not True:
+        return []
+    return [str(path) for path in result.get("paths") or [] if str(path).strip()]
 
 
 def set_task_file_status(path: Path, status: str) -> None:
@@ -392,6 +403,7 @@ def block_task(root: Path, task_id: str) -> None:
 def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool = False) -> dict[str, Any]:
     root = root.resolve()
     runtime_backup = snapshot_runtime_state(root)
+    materialization: dict[str, Any] | None = None
     try:
         try:
             assert_runtime_snapshot_if_active(root)
@@ -402,6 +414,13 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
         claim = active_claim_for_report(root, report)
         apply_turn(report, root)
         eventlog_events = emit_runtime_eventlog(root, report, claim)
+        try:
+            materialization = materialize_from_event_log_if_enabled(root)
+        except ProtocolMaterializationError as exc:
+            discard_worktree_changes(root)
+            restore_runtime_state(root, runtime_backup)
+            block_task(root, str(report["task_id"]))
+            return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}
         gate = run_gate(root)
         if gate["green"]:
             try:
@@ -411,11 +430,21 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
                 restore_runtime_state(root, runtime_backup)
                 block_task(root, str(report["task_id"]))
                 return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
-            paths = [*(report.get("changed_paths") or []), *runtime_state_commit_paths(root)]
+            paths = [
+                *(report.get("changed_paths") or []),
+                *runtime_state_commit_paths(root),
+                *materialization_commit_paths(materialization),
+            ]
             try:
                 commit = commit_turn(root, report["commit_message"], paths, allow_policy=allow_policy)
                 cleanup_runtime_state_backup(runtime_backup)
-                return {"green": True, "commit": commit, "gate": gate, "eventlog_events": eventlog_events}
+                return {
+                    "green": True,
+                    "commit": commit,
+                    "gate": gate,
+                    "eventlog_events": eventlog_events,
+                    "protocol_materialization": materialization,
+                }
             except VcsError as exc:
                 discard_worktree_changes(root)
                 restore_runtime_state(root, runtime_backup)

@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0067
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0067 (Fase B.2, ready): materializacion opt-in del estado de protocolo desde replay(log), doble-gated (enabled+materialize), solo runtime-tier, off=byte-equivalente.
@@ -36,3 +36,4 @@ Limites duros (NO en B.2, son B.3/B.4 gateadas):
 
 Cuando cierres B.2 te encolo B.3 (drift hard-fail). Recordatorio DECISION-0020: ventana segura,
 archivos-antes-de-claim, staging explicito, FYI/in-review tras el flip.
+

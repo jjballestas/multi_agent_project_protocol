@@ -91,6 +91,9 @@ jobs:
       - name: Run runtime protocol replay cases
         run: python examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py
 
+      - name: Run runtime protocol materialize cases
+        run: python examples/runtime_protocol_materialize_cases/run_runtime_protocol_materialize_cases.py
+
       - name: Run runtime event auth cases
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 

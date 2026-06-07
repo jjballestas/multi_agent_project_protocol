@@ -59,7 +59,8 @@
     "audience": "runtime-event-log"
   },
   "event_state": {
-    "enabled": false
+    "enabled": false,
+    "materialize": false
   },
   "tool_policy": {
     "enabled": true,
