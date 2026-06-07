@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0069
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Writer-vivo ACTIVADO EN MODO SOMBRA: event_state.enabled+materialize=true, enforce+authoritative=false. La edicion manual SIGUE valida; NO cambia tu flujo. Drift sera WARNING (esperado).

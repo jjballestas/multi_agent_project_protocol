@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,52 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0068",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase B.3 (SPEC-0054): drift del estado de protocolo como HARD-FAIL bajo event_state.enforce (live+template, default false). Validador global py/.ps1 => fail (no warn) cuando enabled&&enforce&&runtime/state con drift; gate en apply aborta el commit del turno ante drift (atomico). Reutiliza protocol_state_drift/materialize de B.1/B.2 (solo cambia severidad). Triple-gated, off=byte-equivalente. NO prohibir edicion manual (B.4), NO encender enforce en vivo. golden runtime_protocol_enforce_cases.",
-            "spec_id": "Area_comun/specs/SPEC-0054-faseB3-drift-hard-fail.md",
-            "file": "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
-            "linked_decisions": [
-                "DECISION-0017",
-                "DECISION-0015",
-                "DECISION-0014"
-            ],
-            "depends_on": [
-                "TASK-0066",
-                "TASK-0067"
-            ],
-            "relates_to": [
-                "TASK-0038",
-                "TASK-0048"
-            ],
-            "relevant_files": [
-                "runtime/protocol_replay.py",
-                "runtime/apply.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_protocol_enforce_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/protocol_replay.py",
-                "runtime/apply.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "examples/runtime_protocol_enforce_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 31/31 (nuevo runtime_protocol_enforce_cases) + validador/encoding/neutralidad/prune py verdes. event_state.enforce promueve el drift a hard-fail SOLO con enabled&&enforce&&tier==runtime&&runtime/state; validador validation.fail con paths (warning-only si off); apply corre enforce_protocol_state_drift antes de run_gate y aborta el commit ante drift (discard_worktree + restaura runtime/state + bloquea tarea, atomico). Byte-equivalencia verificada: config viva enabled=false+materialize=false+enforce=false => vivo intacto. Scope respetado: no prohibe edicion manual (B.4), no enciende enforce en vivo, no toca turn schema. Flip por arquitecto. >>> CON B.3, EL INVARIANTE hot==replay(log) QUEDA ENFORCEABLE <<<. Avanza TASK-0038. Siguiente y ultima rebanada: B.4 (TASK-0069).",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0069",

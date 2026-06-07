@@ -4374,6 +4374,107 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado y archivado tras higiene de canal: normalizado a ASCII/no BOM mensaje ScanPay abierto para Claude Code, sin archivar ni cambiar semantica."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0071-ledger-codex",
+            "task_id": "TASK-0071",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0070-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-activacion-sombra-on.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0070-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-activacion-sombra-on.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0071-ledger.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras higiene post activacion sombra: FYIs consumidos archivados y anomalia DECISION-0018 notificada por SPEC-0057/TASK-0071 en rutas compartidas sin ledger/GO/claim visible."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0068-close-claude",
+            "task_id": "TASK-0068",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+                "Area_comun/decisions/DECISION-0022-runtime-escritor-autoritativo.md",
+                "Area_comun/specs/SPEC-0055-faseB4-migrar-edicion-manual.md",
+                "Area_comun/tasks/TASK-0069-codex-faseB4-migrar-edicion-manual.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0068-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0068-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0069-GO-faseB4.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0068 (B.3) a done + promocion de DECISION-0022 (ratificada por operador) + encolado de TASK-0069 (B.4, entregada apagada, desde draft de personal). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0069-codex",
+            "task_id": "TASK-0069",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0069",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0069",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0069-codex-faseB4-migrar-edicion-manual.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0069-GO-faseB4.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "runtime/",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0069 entregada a in_review. Implementada B.4 genesis por referencia content-addressed + event_state.authoritative default false + docs migracion/rollback + golden runtime_protocol_genesis_ref_cases. Handoff: Area_comun/handoffs/HANDOFF-TASK-0069-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-prune-post-anomalia-task0071-codex",
+            "task_id": "maintenance-prune",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras mantenimiento post anomalia TASK-0071. prune_state.py --apply: claims_archived=2, tasks_archived=1, project_state_done_removed=1, next_actions_condensed=2, recovered_tokens=2176."
         }
     ]
 }

@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0070
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0070 (fix neutralidad runtime/state) ACEPTADA y DONE. Desbloquea la activacion sombra; sigo yo con eso. Buen trabajo.
