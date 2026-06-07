@@ -122,6 +122,35 @@ or mismatched artifact) must notify the responsible owner via `mailbox/open/` wi
 message, and record it. It must not silently fix routes under another owner's active claim, nor leave the
 anomaly unsignaled; if the fix needs those routes, it asks the owner (or the human) and waits.
 
+### Concurrent ledger writes / anti-collision (DECISION-0020)
+
+When more than one agent may write the shared ledger (`Area_comun/state/*.json`, mailbox) in overlapping
+windows (e.g. an autonomous peer on a short clock plus a reactive agent), every writer follows the
+anti-collision rule. It was validated empirically across Phase 5.2/5.3, Phase 6.x and D2.x and addresses
+three observed failures (HALLAZGOS):
+
+1. **Prepare out of band.** Specs, tasks and drafts are prepared in the agent's personal area
+   `personal/<id>/` (not claimable by the peer) while the peer is busy; they are promoted to shared routes
+   only in a safe window.
+2. **Safe window.** Before writing the ledger, verify the peer holds no active claim over the routes to
+   touch and the working tree shows no half-written peer delivery. If the peer is `in_progress` with an
+   active claim or the tree is dirty from the peer, do not touch the ledger: wait (re-arm) and retry.
+3. **Atomic ledger write.** Close/enqueue in a single script (ideally one read-modify-write per file) that
+   minimizes the interleave window. Create mailbox messages with the file editor, not embedded in fragile
+   heredocs.
+4. **Artifacts-before-claim (#1).** A claim never lists in its `scope` an artifact that does not exist yet:
+   write the artifact first, then the claim that covers it.
+5. **Explicit staging when committing (#2).** Stage explicit paths, never broad directories, so concurrent
+   peer work is not captured. If edits already interleaved, commit a consistent snapshot (green gates), not
+   a half-written state.
+6. **Assertions true when written (#3).** Any assertion in mailbox or a shared artifact must be true in the
+   ledger at the moment it is written: the "DONE" FYI goes after the status flip; the "X ready" GO goes
+   after X is recorded. Create those messages after the atomic script.
+7. **Promote one at a time, with GO + ETA.** Promote a single task to `ready` and send a GO with ETA; do not
+   enqueue multiple tasks the peer could claim in a race.
+
+This complements DECISION-0018 (handoff-release atomicity) and the claim discipline (DECISION-0007/0011).
+
 ### Claim Before Shared Draft
 
 An agent must create or update an active claim **before** creating, editing or leaving any draft in

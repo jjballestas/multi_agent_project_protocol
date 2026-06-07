@@ -109,6 +109,15 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   owner via `mailbox/open/` with a concrete, actionable message, and record it. It must not silently fix
   routes under another owner's active claim, nor leave the anomaly unsignaled; if the fix needs those
   routes, it asks the owner (or the human) and waits.
+- **Anti-collision rule for concurrent ledger writes (DECISION-0020):** when more than one agent may write
+  the shared ledger (`Area_comun/state/*.json`, mailbox) in overlapping windows, every writer: (1) prepares
+  drafts in its personal area `personal/<id>/` while the peer is busy; (2) writes the ledger only in a safe
+  window (peer has no active claim on the routes and the working tree shows no half-written peer delivery;
+  otherwise it waits and retries); (3) makes ledger closes/enqueues in a single atomic script; (4) never
+  lists a not-yet-created artifact in a claim `scope` (artifacts-before-claim, #1); (5) stages explicit
+  paths when committing, never broad directories, and commits only a consistent snapshot with green gates
+  (#2); (6) writes any mailbox/artifact assertion only after the ledger backs it -- the "DONE" FYI after the
+  status flip, the "X ready" GO after X is recorded (#3); (7) promotes one task at a time with a GO + ETA.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map
