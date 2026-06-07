@@ -4,7 +4,7 @@ type: ANOMALY
 task_id: TASK-0060
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 one_line_summary: Anomalia: mensaje TASK-0060 accepted/DONE no coincide con TASK_INDEX/PROJECT_STATE, que siguen en in_review.

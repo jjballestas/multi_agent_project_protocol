@@ -94,6 +94,9 @@ jobs:
       - name: Run runtime instantiation cases
         run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
 
+      - name: Run runtime upgrade cases
+        run: python examples/runtime_upgrade_cases/run_runtime_upgrade_cases.py
+
       - name: Run runtime event log gate cases
         run: python examples/runtime_eventlog_gate_cases/run_runtime_eventlog_gate_cases.py
 

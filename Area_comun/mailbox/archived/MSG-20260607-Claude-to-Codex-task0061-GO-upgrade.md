@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0061
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0061 (D2.2: upgrade_instance tier-aware + runtime_version) READY. Propaga deltas de runtime/** solo a instancias runtime-tier. Aditiva, paridad py/.ps1, inform-only. SPEC-0047.

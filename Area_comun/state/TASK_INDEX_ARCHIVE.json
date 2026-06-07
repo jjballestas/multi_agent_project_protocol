@@ -1820,6 +1820,49 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Genere YO ambos tiers con new_instance.py y verifique: coordination (default) sin runtime + adoption_tier=coordination; runtime con runtime/ + 4 scripts de gates (py+ps1) + CI + adoption_tier=runtime y runtime/tool_policy/event_auth OFF (DI1/DI2); NO copia runtime/state/runs/__pycache__ (DI3); adopted_profiles ausente=ortogonal (DI5); generacion determinista (rt==rt2). Validan verde: coord, rt, examples/full_runtime_instance y examples/minimal_instance (DI4 intacto). Validador tier-aware ADITIVO (tier ausente=>coordination; solo exige runtime/ si tier=runtime). Golden instanciacion 5/5 + suite runtime completa sin regresion + encoding/neutralidad py. Flip por arquitecto. CIERRA D2.1 (distribucion via tiers).",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0059",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase 6.1 (observabilidad N-agente, SPEC-0045, DELTA sobre M2): trace_id determinista por evento en eventlog + span por transicion en router/review_qa + summarize_nagent() en metrics.py (routing+fairness/ciclos QA/conflictos fencing/escalados/exclusiones autor). Aditivo, config-gated, byte-equivalente sin activar, negative-replay A6 intacto. Cierra parte de D0 (motor).",
+            "spec_id": "Area_comun/specs/SPEC-0045-fase6.1-observabilidad-nagente.md",
+            "file": "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
+            "linked_decisions": [
+                "DECISION-0015",
+                "DECISION-0009",
+                "DECISION-0018"
+            ],
+            "depends_on": [
+                "TASK-0044",
+                "TASK-0045",
+                "TASK-0046"
+            ],
+            "relates_to": [
+                "TASK-0032"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/apply.py",
+                "runtime/router.py",
+                "runtime/review_qa.py",
+                "runtime/metrics.py",
+                "examples/runtime_observability_nagent_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/eventlog.py",
+                "runtime/metrics.py",
+                "examples/runtime_observability_nagent_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_observability_nagent_cases 5/5 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: trace_id determinista CONFIG-GATED en eventlog (observability AUSENTE en config vivo => OFF => byte-equivalente, O4); spans en router/review_qa; summarize_nagent() DELTA sobre M2 (no rehace summarize); apply.py aditivo (emite spans config-gated, dentro de scope); negative-replay (A6) intacto. Flip por arquitecto. Cierra parte de D0 (motor); falta 6.2 (A10 budget).",
+            "updated_at": "2026-06-07"
         }
     ]
 }

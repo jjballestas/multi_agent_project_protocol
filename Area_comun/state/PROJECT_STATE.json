@@ -99,12 +99,6 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). NUCLEO Fases 1-4 DONE (criterios 1-12 SPEC-0038 implementados). Fases 5-7 CONDICIONADAS/gateadas (pendiente OK operador). Brechas para spec-completa: event log writer-vivo, golden N=3/N=5, property-based I1-I8, concurrency sim, runtime suites en CI, autor-de-record hardening."
         },
         {
-            "id": "TASK-0059",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 6.1 (observabilidad N-agente, SPEC-0045) DONE - ACEPTADA por Claude: trace_id/spans deterministas config-gated en eventlog + summarize_nagent (DELTA sobre M2) + apply.py aditivo. Off=byte-equivalente, negative-replay A6 intacto. Golden 5/5 + suite verde."
-        },
-        {
             "id": "TASK-0060",
             "owner": "Codex",
             "status": "done",
@@ -113,8 +107,8 @@
         {
             "id": "TASK-0061",
             "owner": "Codex",
-            "status": "ready",
-            "title": "D2.2 (SPEC-0047): upgrade_instance tier-aware (deltas runtime/** solo si tier=runtime) + runtime_version. Inform-only, aditivo, paridad py/.ps1. Mitiga drift del tier runtime."
+            "status": "done",
+            "title": "D2.2 (upgrade tier-aware, SPEC-0047) DONE - ACEPTADA por Claude: upgrade_instance.py/.ps1 propaga deltas runtime/** + runtime_version solo a instancias runtime-tier (coordination=como hoy), excluye state/runs/pycache, inform-only. golden 4/4 + suite verde."
         }
     ],
     "open_questions": [],
@@ -144,7 +138,9 @@
         "TASK-0059 ENTREGADA a in_review por Codex (2026-06-07): observabilidad N-agente DELTA sobre M2. Implementado trace_id determinista config-gated en eventlog, span router/review_qa, summarize_nagent() post-hoc con routing+fairness/QA/fencing/escalados/exclusiones, golden runtime_observability_nagent_cases 5/5 y CI. Suite runtime completa verde + validador/encoding/neutralidad py/ps verdes (warnings preexistentes de FYI/ACK mailbox abiertos). Pendiente ratificacion adversarial de Claude; siguiente D0: Fase 6.2 (A10 budget/deadline).",
         "FASE 6.1 CERRADA (TASK-0059 DONE, ratificacion adversarial de Claude 2026-06-07): trace_id/spans deterministas config-gated en eventlog + summarize_nagent (DELTA sobre M2) + apply.py aditivo; off=byte-equivalente, negative-replay A6 intacto; golden 5/5 + suite verde. ENCOLADA Fase 6.2 = TASK-0060 (A10 budget/deadline, DELTA sobre budget.py): con 6.1+6.2 D0 (motor) queda CERRADO + criterio 13 SPEC-0038. ALCANCE v1.0 (operador): tras D0 -> D2.2 (upgrade tier-aware) -> WRAPPER LLM REAL (subido a v1.0; invoker generico ya existe TASK-0036/0039, falta adapter CLI concreto + politica de activacion -probable DECISION- + docs) -> D2.3 docs -> D2.4 SemVer -> DECISION-0020 + fix prune -> RELEASE v1.0 (aprobacion humana). Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada. Higiene: archivados 6 FYIs viejos de open/.",
         "TASK-0060 ENTREGADA a in_review por Codex (2026-06-07): A10 budget/deadline DELTA sobre Budget M2. Implementado budget_settings config-gated, umbral blando budget_warning, umbral duro budget_escalation, deadline logico determinista por tarea, limite de cola y payload consumed/limit/last_responsible en run-log; orchestrator conserva comportamiento off/ausente y --budget-tokens M2. Golden runtime_budget_cases 5/5 + CI; suite runtime completa y gates py/ps verdes. Pendiente ratificacion adversarial de Claude; si se acepta, D0 (motor) queda cerrado.",
-        "FASE 6.2 CERRADA (TASK-0060 DONE, ratificacion adversarial de Claude 2026-06-07): A10 budget/deadline (umbral blando/duro + budget_exhausted+escalado consumed/limit/last_responsible + deadline determinista logico no-wall-clock + limite de cola), config-gated off=byte-equivalente, DELTA sobre budget.py. >>> CON 6.1+6.2 EL MOTOR (D0) QUEDA CERRADO; criterio 13 SPEC-0038 cubierto <<<. ENCOLADA D2.2 = TASK-0061 (upgrade_instance tier-aware + runtime_version: propaga deltas de runtime/** solo a instancias runtime-tier; inform-only/aditivo, paridad py/.ps1). ALCANCE v1.0 restante (operador): D2.2 -> WRAPPER LLM REAL (adapter CLI + politica de activacion=probable DECISION-0021 + docs) -> D2.3 docs (criterio 16) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision) + fix prune -> RELEASE v1.0 (aprobacion humana). Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada."
+        "FASE 6.2 CERRADA (TASK-0060 DONE, ratificacion adversarial de Claude 2026-06-07): A10 budget/deadline (umbral blando/duro + budget_exhausted+escalado consumed/limit/last_responsible + deadline determinista logico no-wall-clock + limite de cola), config-gated off=byte-equivalente, DELTA sobre budget.py. >>> CON 6.1+6.2 EL MOTOR (D0) QUEDA CERRADO; criterio 13 SPEC-0038 cubierto <<<. ENCOLADA D2.2 = TASK-0061 (upgrade_instance tier-aware + runtime_version: propaga deltas de runtime/** solo a instancias runtime-tier; inform-only/aditivo, paridad py/.ps1). ALCANCE v1.0 restante (operador): D2.2 -> WRAPPER LLM REAL (adapter CLI + politica de activacion=probable DECISION-0021 + docs) -> D2.3 docs (criterio 16) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision) + fix prune -> RELEASE v1.0 (aprobacion humana). Post-v1.0 gateado: Fase B, Fase 7, autonomia supervisada.",
+        "TASK-0061 ENTREGADA a in_review por Codex (2026-06-07): D2.2 upgrade_instance tier-aware + runtime_version. Implementado runtime_version live/template; upgrade_instance.py/.ps1 con runtime/** + .github/workflows/validate.yml adoptables solo para instancias adoption_tier=runtime; coordination/ausente conserva comportamiento sin runtime; exclusiones runtime/state, runtime/runs y __pycache__; reporte muestra runtime_version master/instancia solo en runtime-tier. Golden runtime_upgrade_cases 4/4 + paridad py/ps + suite runtime completa + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
+        "D2.2 CERRADA (TASK-0061 DONE, ratificacion adversarial de Claude 2026-06-07): upgrade_instance.py/.ps1 tier-aware + runtime_version (propaga deltas runtime/** solo a instancias runtime-tier; inform-only/aditivo). golden runtime_upgrade_cases 4/4 + suite verde. Track distribucion: D2.1+D2.2 done. SIGUIENTE v1.0 = WRAPPER LLM REAL (GATEADO: requiere DECISION-0021 politica de activacion con APROBACION HUMANA; invoker generico ya existe TASK-0036/0039). Claude prepara DECISION-0021 en personal y pide OK al operador antes de encolar. Luego D2.3 docs (criterio 16) -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune -> RELEASE v1.0. D0 (motor) ya cerrado. OBS: release de 0061 sin handoff/in-review msg (notificado a Codex, DECISION-0018)."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

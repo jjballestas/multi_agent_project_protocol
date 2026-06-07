@@ -16,6 +16,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from pathlib import PurePosixPath
 
 # Conjunto adoptable (DISENO-robustez-operacional.md §1.2): archivos genericos/masters que una
 # instancia copia verbatim a la misma ruta relativa. Configurable via master
@@ -31,18 +32,34 @@ DEFAULT_ADOPTABLE_GLOBS = [
     "profiles/PROFILE_TEMPLATE/**/*",
     "scripts/*.py",
     "scripts/*.ps1",
+    "runtime/**",
+    ".github/workflows/validate.yml",
 ]
 
 
-def read_protocol_version(root: Path) -> str:
+def read_config(root: Path) -> dict:
     cfg = root / "protocol.config.json"
     if not cfg.is_file():
-        return "unknown"
+        return {}
     try:
-        data = json.loads(cfg.read_text(encoding="utf-8-sig"))
+        return json.loads(cfg.read_text(encoding="utf-8-sig"))
     except (ValueError, OSError):
-        return "unknown"
+        return {}
+
+
+def read_protocol_version(root: Path) -> str:
+    data = read_config(root)
     return str(data.get("protocol_version", "unknown"))
+
+
+def read_runtime_version(root: Path) -> str:
+    data = read_config(root)
+    return str(data.get("runtime_version", "unknown"))
+
+
+def adoption_tier(root: Path) -> str:
+    tier = str(read_config(root).get("adoption_tier", "coordination") or "coordination")
+    return tier if tier in {"coordination", "runtime"} else "coordination"
 
 
 def adoptable_globs(master: Path) -> list[str]:
@@ -58,11 +75,38 @@ def adoptable_globs(master: Path) -> list[str]:
     return DEFAULT_ADOPTABLE_GLOBS
 
 
+def runtime_tier_path(rel: str) -> bool:
+    return rel.startswith("runtime/") or rel == ".github/workflows/validate.yml"
+
+
+def excluded_runtime_artifact(rel: str) -> bool:
+    parts = PurePosixPath(rel).parts
+    return (
+        rel.startswith("runtime/state/")
+        or rel.startswith("runtime/runs/")
+        or "__pycache__" in parts
+    )
+
+
+def adoptable_for_instance(rel: str, instance_tier: str) -> bool:
+    if excluded_runtime_artifact(rel):
+        return False
+    if instance_tier != "runtime" and runtime_tier_path(rel):
+        return False
+    return True
+
+
 def collect_files(root: Path, globs: list[str]) -> set[str]:
     """Rutas relativas (posix) de los archivos que matchean los globs adoptables."""
     found: set[str] = set()
     for pattern in globs:
-        for path in root.glob(pattern):
+        if "**" in pattern:
+            base = pattern.split("**", 1)[0].rstrip("/")
+            base_path = root / base if base else root
+            matches = base_path.rglob("*") if base_path.exists() else []
+        else:
+            matches = root.glob(pattern)
+        for path in matches:
             if path.is_file():
                 found.add(path.relative_to(root).as_posix())
     return found
@@ -93,7 +137,15 @@ def classify(master: Path, instance: Path, rel_files: set[str]) -> list[tuple[st
     return rows
 
 
-def render_report(master_v: str, instance_v: str, rows: list[tuple[str, str]]) -> str:
+def render_report(
+    master_v: str,
+    instance_v: str,
+    rows: list[tuple[str, str]],
+    *,
+    instance_tier: str = "coordination",
+    master_runtime_v: str = "unknown",
+    instance_runtime_v: str = "unknown",
+) -> str:
     counts = {"nuevo": 0, "cambiado": 0, "igual": 0, "eliminado": 0}
     for _, status in rows:
         counts[status] = counts.get(status, 0) + 1
@@ -111,12 +163,24 @@ def render_report(master_v: str, instance_v: str, rows: list[tuple[str, str]]) -
         f"- Conjunto adoptable: {len(rows)} archivos "
         f"(nuevo={counts['nuevo']}, cambiado={counts['cambiado']}, "
         f"igual={counts['igual']}, eliminado={counts['eliminado']})",
+    ]
+    if instance_tier == "runtime":
+        lines.extend(
+            [
+                f"- Adoption tier de la instancia: `{instance_tier}`",
+                f"- Runtime version de la instancia: `{instance_runtime_v}`",
+                f"- Runtime version del master: `{master_runtime_v}`",
+            ]
+        )
+    lines.extend(
+        [
         "",
         "> La herramienta informa; la instancia adopta por decision (DECISION-0001). No se modifico nada.",
         "",
         "| Archivo | Estado | Accion recomendada |",
         "|---------|--------|--------------------|",
-    ]
+        ]
+    )
     for rel, status in rows:
         if status == "igual":
             continue
@@ -144,10 +208,22 @@ def main(argv: list[str] | None = None) -> int:
 
     master_v = read_protocol_version(master)
     instance_v = read_protocol_version(instance)
+    instance_tier = adoption_tier(instance)
     globs = adoptable_globs(master)
-    rel_files = collect_files(master, globs) | collect_files(instance, globs)
+    rel_files = {
+        rel
+        for rel in collect_files(master, globs) | collect_files(instance, globs)
+        if adoptable_for_instance(rel, instance_tier)
+    }
     rows = classify(master, instance, rel_files)
-    report = render_report(master_v, instance_v, rows)
+    report = render_report(
+        master_v,
+        instance_v,
+        rows,
+        instance_tier=instance_tier,
+        master_runtime_v=read_runtime_version(master),
+        instance_runtime_v=read_runtime_version(instance),
+    )
 
     if args.report:
         Path(args.report).write_text(report, encoding="utf-8")

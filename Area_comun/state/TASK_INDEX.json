@@ -115,49 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0059",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase 6.1 (observabilidad N-agente, SPEC-0045, DELTA sobre M2): trace_id determinista por evento en eventlog + span por transicion en router/review_qa + summarize_nagent() en metrics.py (routing+fairness/ciclos QA/conflictos fencing/escalados/exclusiones autor). Aditivo, config-gated, byte-equivalente sin activar, negative-replay A6 intacto. Cierra parte de D0 (motor).",
-            "spec_id": "Area_comun/specs/SPEC-0045-fase6.1-observabilidad-nagente.md",
-            "file": "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
-            "linked_decisions": [
-                "DECISION-0015",
-                "DECISION-0009",
-                "DECISION-0018"
-            ],
-            "depends_on": [
-                "TASK-0044",
-                "TASK-0045",
-                "TASK-0046"
-            ],
-            "relates_to": [
-                "TASK-0032"
-            ],
-            "relevant_files": [
-                "runtime/eventlog.py",
-                "runtime/apply.py",
-                "runtime/router.py",
-                "runtime/review_qa.py",
-                "runtime/metrics.py",
-                "examples/runtime_observability_nagent_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/eventlog.py",
-                "runtime/metrics.py",
-                "examples/runtime_observability_nagent_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_observability_nagent_cases 5/5 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: trace_id determinista CONFIG-GATED en eventlog (observability AUSENTE en config vivo => OFF => byte-equivalente, O4); spans en router/review_qa; summarize_nagent() DELTA sobre M2 (no rehace summarize); apply.py aditivo (emite spans config-gated, dentro de scope); negative-replay (A6) intacto. Flip por arquitecto. Cierra parte de D0 (motor); falta 6.2 (A10 budget).",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0060",
             "owner": "Codex",
             "status": "done",
@@ -197,7 +154,7 @@
         {
             "id": "TASK-0061",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -231,7 +188,8 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07. D2.2 del track de distribucion (DECISION-0019). Inform-only, aditiva, paridad py/.ps1; sin DECISION nueva. Metodo anti-colision. Release atomico (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_upgrade_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: runtime_version sellado (live 0.10.0; template placeholder); upgrade_instance.py (+ paridad .ps1 +52) tier-aware via adoptable_for_instance: instancia runtime-tier recibe deltas runtime/** + runtime_version, coordination/ausente NO recibe runtime/** (como hoy); excluye runtime/state/runs/__pycache__; inform-only (no muta); reporte muestra runtime_version master vs instancia solo para runtime-tier. Flip por arquitecto. CIERRA D2.2. OBS menor (notificada a Codex): el handoff + in-review msg de 0061 llegaron tras la liberacion del claim/mi chequeo (timing), presentes y movidos a answered; ratificacion no afectada. Reconciliado el GO-upgrade que quedo status=archived en open/.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

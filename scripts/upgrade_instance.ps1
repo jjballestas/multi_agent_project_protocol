@@ -30,7 +30,9 @@ $DefaultAdoptableGlobs = @(
     "Area_comun/specs/*_TEMPLATE.md",
     "profiles/PROFILE_TEMPLATE/**/*",
     "scripts/*.py",
-    "scripts/*.ps1"
+    "scripts/*.ps1",
+    "runtime/**",
+    ".github/workflows/validate.yml"
 )
 
 function Read-AllTextNoBom([string]$Path) {
@@ -48,6 +50,29 @@ function Get-ProtocolVersion([string]$Root) {
     return "unknown"
 }
 
+function Get-RuntimeVersion([string]$Root) {
+    $cfg = Join-Path $Root "protocol.config.json"
+    if (-not (Test-Path $cfg -PathType Leaf)) { return "unknown" }
+    try {
+        $data = Read-AllTextNoBom $cfg | ConvertFrom-Json
+        if ($null -ne $data.runtime_version) { return [string]$data.runtime_version }
+    } catch { }
+    return "unknown"
+}
+
+function Get-AdoptionTier([string]$Root) {
+    $cfg = Join-Path $Root "protocol.config.json"
+    if (-not (Test-Path $cfg -PathType Leaf)) { return "coordination" }
+    try {
+        $data = Read-AllTextNoBom $cfg | ConvertFrom-Json
+        if ($null -ne $data.adoption_tier) {
+            $tier = [string]$data.adoption_tier
+            if ($tier -eq "runtime" -or $tier -eq "coordination") { return $tier }
+        }
+    } catch { }
+    return "coordination"
+}
+
 function Get-AdoptableGlobs([string]$MasterRoot) {
     $cfg = Join-Path $MasterRoot "protocol.config.json"
     if (Test-Path $cfg -PathType Leaf) {
@@ -58,6 +83,21 @@ function Get-AdoptableGlobs([string]$MasterRoot) {
         } catch { }
     }
     return $DefaultAdoptableGlobs
+}
+
+function Test-RuntimeTierPath([string]$Rel) {
+    return ($Rel.StartsWith("runtime/") -or $Rel -eq ".github/workflows/validate.yml")
+}
+
+function Test-ExcludedRuntimeArtifact([string]$Rel) {
+    $parts = $Rel -split '/'
+    return ($Rel.StartsWith("runtime/state/") -or $Rel.StartsWith("runtime/runs/") -or ($parts -contains "__pycache__"))
+}
+
+function Test-AdoptableForInstance([string]$Rel, [string]$Tier) {
+    if (Test-ExcludedRuntimeArtifact $Rel) { return $false }
+    if ($Tier -ne "runtime" -and (Test-RuntimeTierPath $Rel)) { return $false }
+    return $true
 }
 
 function Get-RelPosix([string]$RootFull, [string]$FileFull) {
@@ -117,8 +157,13 @@ else {
 
 $masterV = Get-ProtocolVersion $masterFull
 $instanceV = Get-ProtocolVersion $instanceFull
+$instanceTier = Get-AdoptionTier $instanceFull
+$masterRuntimeV = Get-RuntimeVersion $masterFull
+$instanceRuntimeV = Get-RuntimeVersion $instanceFull
 $globs = Get-AdoptableGlobs $masterFull
-$relFiles = @((Get-AdoptableRelFiles $masterFull $globs) + (Get-AdoptableRelFiles $instanceFull $globs)) | Sort-Object -Unique
+$relFiles = @((Get-AdoptableRelFiles $masterFull $globs) + (Get-AdoptableRelFiles $instanceFull $globs)) |
+    Where-Object { Test-AdoptableForInstance $_ $instanceTier } |
+    Sort-Object -Unique
 
 # --- Clasificacion ---
 $rows = @()
@@ -149,6 +194,11 @@ $lines.Add("")
 $lines.Add("- Version de la instancia: ``$instanceV``")
 $lines.Add("- Version del master: ``$masterV``")
 $lines.Add("- Conjunto adoptable: $($rows.Count) archivos (nuevo=$nuevo, cambiado=$cambiado, igual=$igual, eliminado=$eliminado)")
+if ($instanceTier -eq "runtime") {
+    $lines.Add("- Adoption tier de la instancia: ``$instanceTier``")
+    $lines.Add("- Runtime version de la instancia: ``$instanceRuntimeV``")
+    $lines.Add("- Runtime version del master: ``$masterRuntimeV``")
+}
 $lines.Add("")
 $lines.Add("> La herramienta informa; la instancia adopta por decision (DECISION-0001). No se modifico nada.")
 $lines.Add("")

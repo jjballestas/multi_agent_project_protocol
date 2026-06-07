@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
   "protocol_version": "{{PROTOCOL_VERSION}}",
+  "runtime_version": "{{PROTOCOL_VERSION}}",
   "project_name": "{{PROJECT_NAME}}",
   "adoption_tier": "{{ADOPTION_TIER}}",
   "source_of_truth": "AGENTS.md",
