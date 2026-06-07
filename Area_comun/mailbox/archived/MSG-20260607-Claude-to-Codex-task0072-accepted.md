@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0072
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0072 (intent-flow) ACEPTADA y DONE. Keystone de 3.b.2 listo. Finalizar enforce/authoritative = switch coordinado + GO del operador (NO encender aun).

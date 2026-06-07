@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,45 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0070",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Eximir runtime/state/** del scan de neutralidad (protocol.config.json + protocol.config.template.json) - dato generado por el runtime (event log + snapshots del ledger), analogo al ledger vivo ya exento; golden (denylist bajo runtime/state pasa / en runtime/*.py sigue fallando); paridad py/.ps1; runtime/state NO gitignorado. Desbloquea la activacion sombra del writer-vivo (3.b).",
-            "spec_id": "Area_comun/specs/SPEC-0056-neutralidad-exime-runtime-state.md",
-            "file": "Area_comun/tasks/TASK-0070-codex-neutralidad-exime-runtime-state.md",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017"
-            ],
-            "depends_on": [
-                "TASK-0069"
-            ],
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "scripts/scan_domain_neutrality.py",
-                "scripts/scan_domain_neutrality.ps1",
-                "examples/neutrality_scan_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/neutrality_scan_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0070-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 + validador/encoding/neutralidad py verdes. runtime/state/** anadido a domain_neutrality.exempt_globs en protocol.config.json Y protocol.config.template.json; golden runtime_state_exempt (denylist bajo runtime/state PASA) + runtime_source_still_scanned (denylist en runtime/source.py SIGUE FALLANDO) => exencion precisa, NO debilita el core (la fuente del runtime sigue escaneada). Fix de paridad en scan_domain_neutrality.ps1 (lectura de archivos de una linea). Docs: runtime/state NO se gitignora (en autoritativo el log/snapshots son fuente de verdad). DESBLOQUEA el reintento de la activacion sombra del writer-vivo. Flip por arquitecto.",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0071",
@@ -194,7 +155,7 @@
         {
             "id": "TASK-0073",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -226,7 +187,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07). Fase 7 en marcha (operador: quedarse en sombra + continuar Fase 7). Aditivo/determinista/neutral/sin secretos. Release atomico (DECISION-0018) + anti-colision (DECISION-0020, staging por paths).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.2 manifiesto de release + verify implementado. generate_manifest.py (+ .ps1) envuelve SBOM F7.1 en manifiesto canonico protocol_release_manifest.v1 con version_axes, commit/timestamp provistos, file_count, sbom, sbom_hash y manifest_hash; verify_release.py (+ .ps1) recomputa SBOM con globs del manifiesto y compara sbom_hash, OK exit 0 o diff changed/missing/extra y exit!=0. Golden release_verify_cases 6/6 + CI; gates verdes; drift WARNING esperado por modo sombra.",
             "updated_at": "2026-06-07"
         }
     ]

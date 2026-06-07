@@ -2309,6 +2309,45 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 (nuevo runtime_protocol_genesis_ref_cases) + validador/encoding/neutralidad/prune py verdes. GENESIS POR REFERENCIA conforme a DECISION-0022/restriccion del operador: write_genesis_reference exige actor_id + timestamp provisto, escribe snapshot content-addressed en runtime/state/snapshots/<hash>.json y emite protocol.genesis con payload SOLO {snapshot_ref} (sin blob); load_snapshot_ref verifica hash sha256 + existencia + schema_version + contenido antes de hidratar (mismatch/ausente => bloqueo seguro). protocol_authoritative_enabled true solo con enabled+materialize+enforce+authoritative+tier runtime. ENTREGADA APAGADA: flags vivos enabled/materialize/enforce/authoritative=false => byte-equivalente, vivo intacto. Docs propagados (AGENTS.md/.template sec.7, TASK_PROTOCOL, N_AGENT_RUNTIME, README_INSTANCIACION). Scope respetado: no activa en vivo, no retira flujo manual, no toca turn schema, coordination-tier intacto. Flip por arquitecto. >>> FASE B COMPLETA (B.1+B.2+B.3+B.4): writer-vivo construido pero APAGADO. <<< Activar en vivo = GO final del operador con validacion round-trip + rollback.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0070",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Eximir runtime/state/** del scan de neutralidad (protocol.config.json + protocol.config.template.json) - dato generado por el runtime (event log + snapshots del ledger), analogo al ledger vivo ya exento; golden (denylist bajo runtime/state pasa / en runtime/*.py sigue fallando); paridad py/.ps1; runtime/state NO gitignorado. Desbloquea la activacion sombra del writer-vivo (3.b).",
+            "spec_id": "Area_comun/specs/SPEC-0056-neutralidad-exime-runtime-state.md",
+            "file": "Area_comun/tasks/TASK-0070-codex-neutralidad-exime-runtime-state.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017"
+            ],
+            "depends_on": [
+                "TASK-0069"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "examples/neutrality_scan_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/neutrality_scan_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0070-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 + validador/encoding/neutralidad py verdes. runtime/state/** anadido a domain_neutrality.exempt_globs en protocol.config.json Y protocol.config.template.json; golden runtime_state_exempt (denylist bajo runtime/state PASA) + runtime_source_still_scanned (denylist en runtime/source.py SIGUE FALLANDO) => exencion precisa, NO debilita el core (la fuente del runtime sigue escaneada). Fix de paridad en scan_domain_neutrality.ps1 (lectura de archivos de una linea). Docs: runtime/state NO se gitignora (en autoritativo el log/snapshots son fuente de verdad). DESBLOQUEA el reintento de la activacion sombra del writer-vivo. Flip por arquitecto.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

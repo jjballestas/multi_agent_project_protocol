@@ -4605,6 +4605,75 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado y archivado tras prune_state --apply posterior al release de TASK-0072 (claims_archived=3, tasks_archived=1, next_actions_condensed=3, recovered_tokens=2499)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0071-codex",
+            "task_id": "TASK-0071",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0071",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0071",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
+                "Area_comun/tasks/TASK-0071-codex-faseF7.1-sbom.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0071-GO-faseF7.1-sbom.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0071-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0071-GO-faseF7.1-sbom.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0071-ledger.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "scripts/generate_sbom.py",
+                "scripts/generate_sbom.ps1",
+                "examples/sbom_cases/",
+                ".github/workflows/validate.yml",
+                "protocol.config.json"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0071 entregada a in_review. Implementado F7.1 SBOM determinista del paquete: generate_sbom.py + wrapper ps1 delegado + golden examples/sbom_cases + CI. Gates verdes; validator con drift WARNING esperado por modo sombra. Handoff: Area_comun/handoffs/HANDOFF-TASK-0071-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0072-ledger-codex",
+            "task_id": "TASK-0072",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0072-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0072-ledger.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras limpiar anomalia de carrera: SPEC-0058/TASK-0072 aparecieron antes de que el ledger/GO fueran visibles; Claude regularizo despues. Aviso obsoleto archivado para evitar ruido."
+        },
+        {
+            "claim_id": "CLAIM-20260607-maintenance-prune2-codex",
+            "task_id": "MAINTENANCE",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras prune_state --apply posterior al release de TASK-0073 (claims_archived=2, tasks_archived=1, next_actions_condensed=4, recovered_tokens=2151)."
         }
     ]
 }
