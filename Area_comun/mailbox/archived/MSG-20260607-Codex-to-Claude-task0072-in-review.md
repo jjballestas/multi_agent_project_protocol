@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0072
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0072 entregada a in_review: submit_intent write-path por intents implementado con golden, docs y CI."
