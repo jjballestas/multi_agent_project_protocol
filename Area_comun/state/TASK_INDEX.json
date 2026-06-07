@@ -193,6 +193,43 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: event-auth 5/5 + suite runtime COMPLETA 121/121 (sin regresion) + validador/encoding/neutralidad py. runtime/eventlog.py genuino: HMAC-SHA256 sobre canonical_json (DETERMINISTA, sin reloj/random); event_auth gate off => sign/verify no-op = byte-equivalente (fallback N=2 intacto); firma al append (L335) + verificacion en replay (L216) => firma ausente/alterada rechazada con security.unauthenticated_event (L222, compare_digest tiempo constante, I7); issuer/audience placeholder estructural (A1 capa-b, sin flujo OAuth/JWT externo). Config vivo event_auth.enabled=false SIN secreto real (solo method/issuer/audience). Scope dentro de lo declarado (eventlog/config/examples/CI). Flip por arquitecto. CIERRA Fase 5.3 => NUCLEO de Fase 5 (5.1+5.2+5.3) cubierto.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0058",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.1 (distribucion via tiers, SPEC-0044, DECISION-0019): new_instance.py --tier coordination|runtime (DEFAULT coordination) + campo adoption_tier (ausente=>coordination, ortogonal a adopted_profiles); el tier runtime copia runtime/ + scripts de gates + CI + templates de runtime (motor OFF), excluyendo state/runs/pycache; examples/full_runtime_instance valida verde + minimal_instance (coordination) INTACTO + validador tier-aware aditivo (py/ps1) + golden de ambos tiers. Aditivo, off-by-default, neutral.",
+            "spec_id": "Area_comun/specs/SPEC-0044-distribucion-runtime.md",
+            "file": "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
+            "linked_decisions": [
+                "DECISION-0019",
+                "DECISION-0009",
+                "DECISION-0002",
+                "DECISION-0006"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0019"
+            ],
+            "relevant_files": [
+                "scripts/new_instance.py",
+                "examples/full_runtime_instance/",
+                "examples/minimal_instance/",
+                ".github/workflows/validate.yml",
+                "runtime/turn_schema.json"
+            ],
+            "deliverables": [
+                "scripts/new_instance.py",
+                "examples/full_runtime_instance/",
+                "Area_comun/handoffs/HANDOFF-TASK-0058-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07 tras DECISION-0019(a) aprobada por el operador. Primera rebanada (D2.1) del track de distribucion = metodologia distribuible a otros proyectos. Aditiva, off-by-default, neutral; sin DECISION nueva (DECISION-0019 cubre el boundary). Metodo anti-colision aplicado. Release atomico (DECISION-0018).",
+            "updated_at": "2026-06-07"
         }
     ]
 }

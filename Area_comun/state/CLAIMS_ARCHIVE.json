@@ -3241,6 +3241,50 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: ratificacion adversarial de TASK-0057 (Fase 5.3 firma del envelope) + flip a done + commit de impl (staging explicito). Suite 121/121. Nucleo de Fase 5 cubierto. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-decision0019-y-encolar-task0058-claude",
+            "task_id": "TASK-0058",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0058",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/decisions/DECISION-0019-distribucion-runtime.md",
+                "Area_comun/specs/SPEC-0044-distribucion-runtime.md",
+                "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0058-GO-distribucion.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: formaliza DECISION-0019 (distribucion runtime, opcion a, aprobada por el operador) + SPEC-0044 + encola D2.1 (TASK-0058). Metodo anti-colision: archivos-antes-de-claim + staging explicito. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-decision0019-tiers-y-encolar-task0058-claude",
+            "task_id": "TASK-0058",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0058",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/decisions/DECISION-0019-distribucion-runtime.md",
+                "Area_comun/specs/SPEC-0044-distribucion-runtime.md",
+                "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0058-GO-distribucion.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: formaliza DECISION-0019 (distribucion via tiers de adopcion (c)+(a), aprobada por el operador) + SPEC-0044 + encola D2.1 (TASK-0058) revisada a tiers. Metodo anti-colision: archivos-antes-de-claim + staging explicito. Claim efimero."
         }
     ]
 }
