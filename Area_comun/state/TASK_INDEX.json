@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -168,7 +168,7 @@
         {
             "id": "TASK-0071",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -197,7 +197,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07). Fase 7 aprobada por el operador. Primera rebanada (SBOM), aditiva/determinista/neutral/sin secretos. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.1 SBOM determinista implementado con scripts/generate_sbom.py + wrapper generate_sbom.ps1 delegado, JSON canonico ASCII/LF/sin BOM, version axes protocol/runtime/schema/profile, inventario ruta posix+sha256+tamano, exclusiones runtime/state runtime/runs .git __pycache__ personal/mailbox/state vivo; golden examples/sbom_cases (arbol fijo, determinismo byte-identico, salida a archivo, cambio de hash, paridad ps1 si disponible) + CI. Gates verdes; validator emite drift WARNING esperado por modo sombra.",
             "updated_at": "2026-06-07"
         }
     ]

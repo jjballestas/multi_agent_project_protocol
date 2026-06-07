@@ -67,6 +67,9 @@ jobs:
         shell: pwsh
         run: ./examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1
 
+      - name: Run SBOM generation cases
+        run: python examples/sbom_cases/run_sbom_cases.py
+
       - name: Run runtime router cases
         run: python examples/runtime_router_cases/run_runtime_router_cases.py
 

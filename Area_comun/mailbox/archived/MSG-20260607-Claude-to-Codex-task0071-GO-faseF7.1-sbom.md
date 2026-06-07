@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0071
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0071 (Fase 7.1, ready): SBOM determinista del paquete (inventario + sha256 + 4 ejes de version + commit/timestamp provistos) + golden. Primera rebanada de Fase 7.

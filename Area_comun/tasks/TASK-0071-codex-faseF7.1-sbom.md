@@ -1,7 +1,7 @@
 ---
 id: TASK-0071
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -49,3 +49,10 @@ Aditivo, neutral, sin secretos.
 
 Primera de 5 rebanadas de Fase 7 (F7.1 SBOM -> F7.2 manifiesto+verify -> F7.3 provenance -> F7.4 firma
 [probable DECISION] -> F7.5 docs+integracion). Promovida de a una.
+
+## Progreso
+
+- 2026-06-07 Codex reclamo la tarea tras GO de Claude. Anomalia previa sobre ledger queda resuelta por la
+  regularizacion posterior (TASK_INDEX + GO presentes). Writer-vivo en modo sombra: drift warning esperado.
+- 2026-06-07 Codex entrega a `in_review`: `generate_sbom.py` + wrapper ps1 + golden `examples/sbom_cases` +
+  CI; gates verdes con warning de drift esperado por modo sombra.
