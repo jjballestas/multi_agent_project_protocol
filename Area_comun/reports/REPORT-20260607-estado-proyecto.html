@@ -225,19 +225,58 @@
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA</span> Fase 7 &mdash; Release engineering</h3>
-  <p>Endurecer la cadena de publicacion del paquete: <b>SBOM</b> (inventario de componentes) y
-     <b>provenance</b> (procedencia/firmas de los artefactos del release), para que un adoptante pueda
-     verificar que recibe exactamente lo publicado.</p>
-  <div class="why">Por que: confianza de cadena de suministro para una metodologia distribuible. No arranca sin OK del operador.</div>
+  <h3><span class="badge b-gate">GATEADA &mdash; requiere OK del operador</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
+  <p>Endurece <b>como se publica y como se verifica</b> el paquete-metodologia, para que un adoptante pueda
+     confiar en que recibe exactamente lo que se publico, sin manipulacion. Hoy el release es un tag + CHANGELOG
+     + reporte humano; Fase 7 le agrega trazabilidad criptografica y verificacion automatizable. Es aditiva al
+     proceso de release (DECISION-0001) y neutral de dominio.</p>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que entra en el alcance</h4>
+  <ul class="steps">
+    <li class="next"><b>1. SBOM (Software Bill of Materials)</b>: inventario verificable de lo que compone cada release &mdash; archivos del nucleo, runtime, scripts, plantillas, perfiles, versiones (los 4 ejes de <code>PACKAGE_VERSIONING</code>) y, si las hubiera, dependencias. Generado de forma determinista y adjunto al release.</li>
+    <li class="next"><b>2. Provenance / atestacion</b>: registro firmado de <i>quien</i> construyo el release, <i>de que commit</i> y <i>con que proceso</i> (p.ej. estilo SLSA / build attestation), de modo que el origen sea verificable y no falsificable.</li>
+    <li class="next"><b>3. Firma de artefactos del release</b>: firmar el tag y/o los artefactos publicados; un adoptante puede validar la firma antes de adoptar. Reusa el principio de firma de eventos de Fase 5.3 (event-auth) llevado al artefacto de release.</li>
+    <li class="next"><b>4. Verificacion automatizable</b>: un comando/gate que, dado un release, recomputa el SBOM, valida la provenance y la firma, y confirma integridad (hash) &mdash; util en CI del adoptante y en auditoria.</li>
+    <li class="next"><b>5. Docs de release endurecido</b>: como producir un release con SBOM+provenance+firma y como un adoptante lo verifica; integrado al flujo de <code>PACKAGE_VERSIONING</code> + CHANGELOG + reporte humano.</li>
+  </ul>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Limites / no-alcance</h4>
+  <ul class="steps">
+    <li class="next"><b>Sin secretos en el repo</b>: las claves de firma son material local/CI del que publica, nunca commiteadas (analogo a la politica del wrapper real, DECISION-0021).</li>
+    <li class="next"><b>Aditivo y opt-in por tier</b>: aplica al empaquetado del paquete; no cambia el contrato de coordinacion ni obliga a las instancias coordination-tier.</li>
+  </ul>
+  <div class="why">Por que: confianza de cadena de suministro para una metodologia DISTRIBUIBLE &mdash; el adoptante
+     verifica procedencia e integridad de lo que incorpora. No arranca sin OK del operador (es ingenieria de
+     release, no del nucleo de coordinacion).</div>
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA</span> Autonomia supervisada</h3>
-  <p>Permitir que el motor ejecute turnos con <b>agentes LLM reales</b> de forma encadenada, bajo
-     supervision dura: limites de budget, tool-policy deny-by-default, guardrails, gate por turno y paradas
-     humanas. Hoy el wrapper real existe pero esta apagado y sin autonomia por diseno.</p>
-  <div class="why">Por que: es el salto de "coordinacion asistida" a "operacion autonoma acotada"; alto impacto, por eso queda detras de aprobacion explicita.</div>
+  <h3><span class="badge b-gate">GATEADA &mdash; requiere OK del operador</span> Autonomia supervisada</h3>
+  <p>Es el salto de <b>"coordinacion asistida"</b> (hoy: humanos lanzan a los agentes turno a turno) a
+     <b>"operacion autonoma acotada"</b>: el motor encadena turnos con <b>agentes LLM reales</b> (via el wrapper
+     de DECISION-0021) sin que un humano dispare cada paso, pero dentro de limites duros y con paradas. Hoy el
+     wrapper real existe pero esta <b>apagado y sin autonomia por diseno</b>; esta fase la habilitaria de forma
+     gradual y supervisada.</p>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que entra en el alcance</h4>
+  <ul class="steps">
+    <li class="next"><b>1. Lazo de ejecucion encadenado</b>: el orchestrator corre varios turnos seguidos (router &rarr; agente real &rarr; apply &rarr; gate) sin intervencion por turno, en lugar del disparo manual actual.</li>
+    <li class="next"><b>2. Barandales obligatorios ya construidos</b>: cada turno pasa por <b>tool-policy deny-by-default</b> (Fase 5.2), <b>guardrails anti-inyeccion</b> (5.1), <b>firma de eventos</b> (5.3), <b>budget/deadline A10</b> (6.2) y el <b>gate de apply</b>. La autonomia no inventa permisos: reusa la capa de seguridad existente.</li>
+    <li class="next"><b>3. Limites de alcance y "blast radius"</b>: cuotas de turnos/tokens por corrida, scope de archivos acotado, y <b>1 commit por turno</b> con staging explicito (consistente con la regla anti-colision DECISION-0020).</li>
+    <li class="next"><b>4. Paradas humanas duras (kill-switch)</b>: puntos donde el lazo se detiene y pide aprobacion (cambios de boundary, acciones sensibles/externas via tool-policy <code>gate.human_required</code>, presupuesto agotado, escalado de QA) y un corte de emergencia.</li>
+    <li class="next"><b>5. Observabilidad y auditoria</b>: trace_id/spans (Fase 6.1) + event log firmado (y, si el writer-vivo esta activo, estado reconstruible por replay) para que toda corrida autonoma sea auditable y reproducible.</li>
+    <li class="next"><b>6. Activacion gradual</b>: primero en seco/replay, luego runs cortas supervisadas, antes de cualquier operacion sostenida; off-by-default, opt-in por instancia, reversible.</li>
+  </ul>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Limites / no-alcance</h4>
+  <ul class="steps">
+    <li class="next"><b>No es "agentes sueltos"</b>: sin barandales activos y limites no hay autonomia; si algun control falta, la fase no arranca.</li>
+    <li class="next"><b>Sin secretos; vendor-neutral</b>: credenciales del wrapper real son locales, nunca commiteadas (DECISION-0021).</li>
+    <li class="next"><b>Probablemente requiere DECISION propia</b> (politica de autonomia + puntos de parada) ademas del OK del operador.</li>
+  </ul>
+  <div class="why">Por que es la mas sensible: alto impacto (el sistema actua sin disparo humano por turno). Por eso
+     queda detras de aprobacion explicita y se apoya enteramente en la capa de seguridad ya construida (Fase 5 +
+     budget + gate). Es el techo del roadmap: solo tiene sentido con el writer-vivo y los barandales maduros.</div>
 </div>
 
 <div class="phase gate">
