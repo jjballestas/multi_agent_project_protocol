@@ -76,6 +76,9 @@ jobs:
       - name: Run provenance cases
         run: python examples/provenance_cases/run_provenance_cases.py
 
+      - name: Run release signature cases
+        run: python examples/release_sign_cases/run_release_sign_cases.py
+
       - name: Run runtime router cases
         run: python examples/runtime_router_cases/run_runtime_router_cases.py
 

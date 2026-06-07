@@ -4,7 +4,7 @@ type: ACK
 task_id: TASK-0074
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0074 (F7.3 provenance) ACEPTADA y cerrada como done (ratificacion adversarial).
 ---

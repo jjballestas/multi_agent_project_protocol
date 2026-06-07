@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,47 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0072",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Flujo de coordinacion por INTENTS (SPEC-0058): runtime/submit_intent.py (+ .ps1) write-path del estado de protocolo - una transicion atomica (task_status/task_upsert/claim/decision) validada por la capa de seguridad (G1/tool-policy) + append intent.applied + materialize atomico => has_drift False; determinista (timestamp/commit provistos), idempotente, off-compatible; golden examples/intent_flow_cases. KEYSTONE de 3.b.2 (escritor unico): habilita encender enforce+authoritative sin romper el lazo.",
-            "spec_id": "Area_comun/specs/SPEC-0058-intent-coordination-flow.md",
-            "file": "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017",
-                "DECISION-0015"
-            ],
-            "depends_on": [
-                "TASK-0066",
-                "TASK-0067",
-                "TASK-0068",
-                "TASK-0069"
-            ],
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/submit_intent.py",
-                "runtime/apply.py",
-                "runtime/protocol_replay.py",
-                "examples/intent_flow_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/submit_intent.py",
-                "examples/intent_flow_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0072-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 34/34 (nuevo intent_flow_cases 9/9) + validador/encoding/neutralidad verdes (drift WARNING de sombra esperado). runtime/submit_intent.py (+ .ps1 delegado): write-path para task_status/task_upsert/claim/decision con validacion de actor/capacidad/claim/scope antes de aplicar, idempotencia, timestamp provisto (sin reloj), append intent.applied + materialize_to_disk + rollback ante fallo, rechazo si hay drift contra genesis previo. Golden demuestran enforce-ON en fixture: secuencia por intents pasa con drift 0 y una edicion manual posterior hard-failea. NO encendio enforce/authoritative en el repo vivo. Flip por arquitecto. KEYSTONE de 3.b.2 LISTO: habilita el escritor-unico (falta re-genesis + GO del operador + adopcion de submit_intent por ambos agentes).",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0073",
@@ -196,7 +155,7 @@
         {
             "id": "TASK-0075",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -220,16 +179,20 @@
                 "scripts/sign_release.py",
                 "scripts/verify_release.py",
                 "examples/release_sign_cases/",
-                ".github/workflows/validate.yml"
+                ".github/workflows/validate.yml",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1"
             ],
             "deliverables": [
                 "scripts/sign_release.py",
                 "examples/release_sign_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md"
+                "Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "READY (encolada por Claude 2026-06-07 tras cerrar F7.3): F7.4 firma segun SPEC-0061 + DECISION-0023 (ACCEPTED por el operador). Off-by-default, sin secretos en el repo, vendor-neutral, golden con clave fixture no-secreta. GO en mailbox. Si exige commitear clave real o proveedor unico => blocked + pregunta.",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.4 firma de releases implementada. sign_release.py (+ .ps1) firma manifest.sbom_hash o --digest con backend explicito fixture-hmac-sha256 y material local --key; emite artefacto canonico protocol_release_signature.v1 con subject_digest, backend, key_id y signature HMAC-SHA256 determinista. verify_release.py (+ .ps1) se extendio de forma opt-in con --signature + --pubkey/--key + --backend opcional: sin firma mantiene contrato F7.2; con firma valida autenticidad sobre sbom_hash, falla cerrada si falta material, si subject_digest no coincide o si la firma/key_id no verifican. Golden release_sign_cases 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4 + encoding/neutralidad/validador py/ps verdes. No hay claves reales commiteadas; solo material fixture no-real en golden. Drift WARNING esperado por writer-vivo en sombra.",
             "updated_at": "2026-06-07"
         }
     ]

@@ -1,11 +1,10 @@
 param(
-    [string]$Root = ".",
-    [Parameter(Mandatory = $true)][string]$Manifest,
-    [string]$Output = "-",
-    [string]$Signature = "",
-    [string]$Backend = "",
-    [string]$Pubkey = "",
-    [string]$Key = ""
+    [string]$Manifest = "",
+    [string]$Digest = "",
+    [Parameter(Mandatory = $true)][string]$Backend,
+    [Parameter(Mandatory = $true)][string]$Key,
+    [string]$KeyId = "",
+    [string]$Output = "-"
 )
 
 $ErrorActionPreference = "Stop"
@@ -29,20 +28,21 @@ function Resolve-Python {
     throw "Python runtime not found."
 }
 
+if (($Manifest -and $Digest) -or (-not $Manifest -and -not $Digest)) {
+    throw "Provide exactly one of -Manifest or -Digest."
+}
+
 $python = Resolve-Python
-$scriptPath = Join-Path $PSScriptRoot "verify_release.py"
-$arguments = @($python.Args + @($scriptPath, "--root", $Root, "--manifest", $Manifest, "--output", $Output))
-if ($Signature) {
-    $arguments += @("--signature", $Signature)
+$scriptPath = Join-Path $PSScriptRoot "sign_release.py"
+$arguments = @($python.Args + @($scriptPath, "--backend", $Backend, "--key", $Key, "--output", $Output))
+if ($Manifest) {
+    $arguments += @("--manifest", $Manifest)
 }
-if ($Backend) {
-    $arguments += @("--backend", $Backend)
+if ($Digest) {
+    $arguments += @("--digest", $Digest)
 }
-if ($Pubkey) {
-    $arguments += @("--pubkey", $Pubkey)
-}
-if ($Key) {
-    $arguments += @("--key", $Key)
+if ($KeyId) {
+    $arguments += @("--key-id", $KeyId)
 }
 
 & $python.Exe @arguments

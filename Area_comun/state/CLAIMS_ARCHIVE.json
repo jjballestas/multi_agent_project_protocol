@@ -4734,6 +4734,57 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0072 entregada a in_review. Implementado submit_intent.py + wrapper ps1 para task_status/task_upsert/claim/decision, validacion actor/capacidad/claim/scope, idempotencia, timestamp provisto, append intent.applied + materializacion con rollback, golden intent_flow + CI + docs. Handoff: Area_comun/handoffs/HANDOFF-TASK-0072-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0072-close-claude",
+            "task_id": "TASK-0072",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0072-codex-intent-coordination-flow.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0072-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0072-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0072-accepted.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0072 (intent-flow) a done. Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0073-codex",
+            "task_id": "TASK-0073",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0073",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0073",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/specs/SPEC-0059-faseF7.2-manifiesto-verify.md",
+                "Area_comun/tasks/TASK-0073-codex-faseF7.2-manifiesto-verify.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0072-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0072-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0073-GO-faseF7.2.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0073-GO-faseF7.2.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "scripts/",
+                "examples/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0073 entregada a in_review. Implementado generate_manifest.py/verify_release.py + wrappers ps1 + golden release_verify_cases + CI. Handoff: Area_comun/handoffs/HANDOFF-TASK-0073-codex-to-claude-1.md."
         }
     ]
 }

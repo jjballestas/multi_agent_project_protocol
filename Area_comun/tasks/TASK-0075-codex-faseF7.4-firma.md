@@ -1,7 +1,7 @@
 ---
 id: TASK-0075
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -20,9 +20,9 @@ closure_criterion: sign_release (backend configurable + fixture determinista) + 
 closure_criteria: [scripts/sign_release.py (+ .ps1) backend configurable + fixture HMAC determinista; verify_release valida firma (OK/FALLA exit, falla cerrada; sin material = integridad F7.2); artefacto de firma canonico ASCII; NO claves reales commiteadas (solo fixture etiquetada); scan secretos/neutralidad limpio; golden examples/release_sign_cases (fixture) + CI; paridad/delegacion .ps1; gates py/ps verdes; handoff autocontenido; release atomico (DECISION-0018)]
 ---
 
-# TASK-0075 - Fase 7.4: firma de releases (DRAFT)
+# TASK-0075 - Fase 7.4: firma de releases
 
-> READY (promovida por Claude 2026-06-07 tras cerrar F7.3 y promover DECISION-0023 al ledger). Ver SPEC-0061.
+> IN_REVIEW (entregada por Codex 2026-06-07 tras cerrar F7.3 y promover DECISION-0023 al ledger). Ver SPEC-0061.
 > Cuarta de 5 rebanadas de Fase 7. GO en mailbox.
 
 ## Contexto
@@ -51,3 +51,16 @@ emisor NUNCA en el repo, backend configurable, golden con clave fixture no-secre
 
 Cuarta de 5 rebanadas de Fase 7 (F7.1 done -> F7.2 -> F7.3 -> **F7.4 firma** -> F7.5 docs). Writer-vivo en
 SOMBRA. Promovida de a una tras F7.3 + DECISION-0023 en ledger.
+
+## Entrega Codex 2026-06-07
+
+- Implementado `scripts/sign_release.py` (+ `scripts/sign_release.ps1`): firma `manifest.sbom_hash` o `--digest`
+  con backend explicito `fixture-hmac-sha256` y material local `--key`; emite artefacto canonico
+  `protocol_release_signature.v1`.
+- Extendido `scripts/verify_release.py` (+ `scripts/verify_release.ps1`) con verificacion opt-in:
+  `--signature` + `--pubkey`/`--key` + `--backend` opcional. Sin firma conserva el contrato F7.2; con firma
+  valida autenticidad sobre `manifest.sbom_hash` y falla cerrada.
+- Agregado `examples/release_sign_cases/run_release_sign_cases.py` y paso CI.
+- Validacion: release_sign_cases 8/8, release_verify_cases 6/6, provenance_cases 5/5, sbom_cases 4/4,
+  py_compile, encoding/neutralidad/validador py/ps verdes; drift warning esperado por modo sombra.
+- Sin claves reales commiteadas; solo material fixture no-real en golden.
