@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260608-task0077-close-task0078-promote-claude",
@@ -116,6 +116,27 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Liberado con handoff-release atomico: TASK-0079 entregada a in_review. Implementado SA.2 shadow: PAUSE sentinel antes de cada turno + caps.wall_clock_ms/clock-fixed + golden supervised_autonomy_cases. Invoker real intacto; autonomia no activada. Handoff: Area_comun/handoffs/HANDOFF-TASK-0079-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0079-close-task0080-claude",
+            "task_id": "TASK-0079",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0079-codex-autonomia-SA2-killswitch-reloj.md",
+                "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0079-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0079-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0079-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-GO-autonomia-SA3.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0079 (SA.2) a done + encolado de SA.3 (TASK-0080). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

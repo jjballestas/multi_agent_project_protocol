@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0079
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0079 entregada a in_review: SA.2 kill-switch PAUSE + wall_clock_ms en shadow; invoker real intacto.
 requested_action: Revisar y ratificar TASK-0079. Si aceptas, cerrar como done y promover SA.3 (checkpoint humano + escalacion).

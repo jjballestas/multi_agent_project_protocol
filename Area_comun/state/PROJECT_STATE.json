@@ -113,8 +113,14 @@
         {
             "id": "TASK-0079",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "TASK-0079 EN REVIEW: SA.2 kill-switch PAUSE + wall_clock_ms listo; shadow, invoker real intacto."
+            "status": "done",
+            "title": "Autonomia supervisada SA.2 (SPEC-0064) DONE - ACEPTADA por Claude (ratif. adversarial): kill-switch (centinela runtime/state/PAUSE antes de cada turno -> outcome=paused, sin mutar) + reloj de pared (caps.wall_clock_ms -> outcome=wallclock_exhausted, antes del turno que excederia); golden 6/6 + regresiones verdes; invoker real --once intacto. Off => byte-equivalente. Segunda de SA.1..SA.5."
+        },
+        {
+            "id": "TASK-0080",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Autonomia supervisada SA.3 (SPEC-0064): checkpoint humano forzado (tras K turnos o fix-cycles repetidos -> human_required, no auto-resume) + escalacion via router/quality_policy, shadow, invoker real intacto. Tercera de SA.1..SA.5."
         }
     ],
     "open_questions": [],
@@ -135,9 +141,10 @@
         "TASK-0078 ENTREGADA a in_review por Codex (2026-06-08): SA.1 autonomia supervisada shadow lista. runtime.supervised_autonomy queda off-by-default en config/template; --allow-supervised-autonomy valida registro/caps; RecordedInvoker respeta caps.max_turns y emite runreport markdown; golden supervised_autonomy_cases 4/4; invoker real sigue bloqueado por --once, sin activar autonomia. Pendiente ratificacion de Claude; siguiente SA.2 kill-switch+reloj.",
         "TASK-0078 DONE (autonomia supervisada SA.1, ratif. adversarial de Claude 2026-06-08): supervised_autonomy.py (gate off-by-default + runreport) + orchestrator --allow-supervised-autonomy + caps.max_turns; invoker real --once intacto; golden 4/4 + runtime_loop 8/8 + real_adapter 4/4. Corri yo los gates. ENCOLADA SA.2 = TASK-0079 (SPEC-0064): kill-switch (centinela PAUSE) + reloj de pared, shadow. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, la ejecuta el arquitecto de forma SUPERVISADA (operador ya autorizo 2026-06-08); Codex en autonomia (SA.x) mientras tanto, lejos del ledger. F7.5 docs pendiente. GO por mailbox; de a una.",
         "TASK-0079 RECLAMADA por Codex (2026-06-08): implementando SA.2 kill-switch runtime/state/PAUSE antes de cada turno + caps.wall_clock_ms determinista con --clock-fixed; golden pausa/reloj/off/cerrojo real. Sin tocar invoker real ni encender autonomia.",
-        "TASK-0079 ENTREGADA a in_review por Codex (2026-06-08): SA.2 kill-switch/reloj listo. runtime/state/PAUSE se chequea antes de cada turno -> outcome=paused sin mutar estado; caps.wall_clock_ms obligatorio en registro y evaluado con --clock-fixed -> outcome=wallclock_exhausted; golden supervised_autonomy_cases 6/6; regresiones runtime verdes; invoker real intacto y autonomia off. Pendiente ratificacion de Claude; siguiente SA.3 checkpoint humano + escalacion."
+        "TASK-0079 ENTREGADA a in_review por Codex (2026-06-08): SA.2 kill-switch/reloj listo. runtime/state/PAUSE se chequea antes de cada turno -> outcome=paused sin mutar estado; caps.wall_clock_ms obligatorio en registro y evaluado con --clock-fixed -> outcome=wallclock_exhausted; golden supervised_autonomy_cases 6/6; regresiones runtime verdes; invoker real intacto y autonomia off. Pendiente ratificacion de Claude; siguiente SA.3 checkpoint humano + escalacion.",
+        "TASK-0079 DONE (autonomia supervisada SA.2, ratif. adversarial de Claude 2026-06-08): kill-switch (centinela PAUSE) + reloj de pared; golden 6/6 + runtime_loop 8/8 + real_adapter 4/4 (invoker real intacto). Corri yo los gates. ENCOLADA SA.3 = TASK-0080 (SPEC-0064): checkpoint humano forzado + escalacion, shadow. SA.4 (invoker real multi-turno) sigue GATEADA con GO + rollback -- NO arrancar sin coordinacion. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, supervisada por el arquitecto (operador autorizo 2026-06-08). HEADS-UP: operador redacta DECISION-0025 (agent-teams-bridge), nueva direccion, aun no entregada. F7.5 docs pendiente. GO por mailbox; de a una."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }
