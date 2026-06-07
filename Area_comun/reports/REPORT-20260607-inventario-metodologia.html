@@ -61,32 +61,34 @@
   <h1>Inventario de la metodologia</h1>
   <div class="sub">multi_agent_project_protocol &mdash; protocolo multiagente generico, dominio-neutral (dogfooding)</div>
   <div class="meta">
-    <span class="chip">Generado <b>2026-06-07</b></span>
+    <span class="chip">Actualizado <b>2026-06-08</b></span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Release vigente <b>v1.0.0</b></span>
-    <span class="chip">En curso <b>Fase 7 (release engineering) &mdash; F7.3</b></span>
-    <span class="chip">HEAD <b>cb376cd</b></span>
+    <span class="chip">En curso <b>Migracion escritor-unico (cutover) &middot; Fase 7 (F7.5 pend)</b></span>
+    <span class="chip">HEAD <b>1e65b91</b></span>
   </div>
 </header>
 
 <div class="lead">
-  <b>Resumen ejecutivo.</b> <b>v1.0.0 publicada</b> &mdash; la metodologia es un producto distribuible
-  completo: motor runtime (D0) cerrado, guardrails/seguridad (Fase 5) cubiertos, wrapper LLM real
-  entregado y track de distribucion (D2) COMPLETO. Post-v1.0, sobre orden del operador: <b>Fase B</b>
-  (writer-vivo del estado del protocolo) esta construida en sus 4 rebanadas y <b>activa en MODO SOMBRA</b>
-  (maquinaria completa pero <code>event_state.*</code> apagado &rarr; edicion manual sigue valida, drift =
-  warning benigno; reversible a apagado total). <b>Fase 7</b> (release engineering) avanza por rebanadas:
-  F7.1 SBOM y F7.2 manifiesto+verify cerradas, <b>F7.3 provenance en vuelo</b> (TASK-0074, Codex),
-  F7.4 firma y F7.5 docs pendientes. Gateado y consciente: la <b>activacion EN VIVO</b> del escritor-unico
-  (enforce+authoritative) y la <b>autonomia supervisada</b>, ambas requieren GO explicito del operador.
+  <b>Resumen ejecutivo.</b> <b>v1.0.0 publicada</b> (producto distribuible completo: motor runtime D0, guardrails
+  Fase 5, wrapper LLM real, distribucion D2). <b>Fase 7</b> (release engineering) casi cerrada: <b>F7.1 SBOM,
+  F7.2 manifiesto+verify, F7.3 provenance y F7.4 firma DONE</b>; solo resta F7.5 (docs). En curso, sobre orden del
+  operador, la <b>migracion al escritor-unico</b>: el writer-vivo (Fase B) sigue <b>EN SOMBRA</b> pero ya tiene el
+  <b>keystone transaccional</b> &mdash; <code>submit_intent --intents</code> (cierres multi-paso atomicos, TASK-0076)
+  + <code>regenesis.py</code> (genesis fresco, drift 0, no destructivo). El <b>cutover</b> esta en marcha: el mandato
+  de protocolo ya esta en AGENTS.md/TASK_PROTOCOL y el lazo de Codex adopta <code>submit_intent</code>
+  (TASK-0077, in&nbsp;progress). El operador <b>autorizo (2026-06-08) la activacion</b>: re-genesis vivo + flip
+  <code>enforce+authoritative</code> + aprobar DECISION-0024 (autonomia supervisada). El flip queda gateado
+  TECNICAMENTE: solo tras que AMBOS lazos usen <code>submit_intent</code> + ensayo de rollback (es un switch
+  coordinado, no un toggle).
 </div>
 
 <div class="grid">
   <div class="card"><div class="n">v1.0.0</div><div class="l">release vigente (producto distribuible)</div></div>
-  <div class="card"><div class="n">22</div><div class="l">decisiones (0001-0022; +0023 aprobada sin promover)</div></div>
-  <div class="card"><div class="n">49</div><div class="l">specs (SDD + runtime + fases)</div></div>
-  <div class="card"><div class="n">20</div><div class="l">modulos runtime (16 + 4 adapters)</div></div>
-  <div class="card"><div class="n">48</div><div class="l">carpetas golden / example</div></div>
+  <div class="card"><div class="n">24</div><div class="l">decisiones (0001-0024, todas en el ledger)</div></div>
+  <div class="card"><div class="n">52</div><div class="l">specs (SDD + runtime + fases)</div></div>
+  <div class="card"><div class="n">22</div><div class="l">modulos runtime (18 + 4 adapters)</div></div>
+  <div class="card"><div class="n">51</div><div class="l">carpetas golden / example</div></div>
   <div class="card"><div class="n">11</div><div class="l">versiones publicadas (v0.1-v1.0)</div></div>
 </div>
 
@@ -133,15 +135,20 @@
           docs de adopcion (D2.3), versionado del paquete (D2.4 / <code>PACKAGE_VERSIONING</code>)</td>
       <td><span class="badge b-ok">COMPLETO (D2.1-D2.4)</span></td></tr>
     <tr><td><b>Fase B &mdash; writer-vivo del estado</b></td>
-      <td>Event-log como fuente del estado del protocolo (DECISION-0017), 4 rebanadas B.1-B.4:
-          replay/drift &rarr; materializacion opt-in &rarr; hard-fail enforce &rarr; runtime autoritativo
-          (DECISION-0022) + genesis POR REFERENCIA content-addressed verificable.
-          Flujo por intents <code>submit_intent</code> (keystone, TASK-0072)</td>
+      <td>Event-log como fuente del estado (DECISION-0017), 4 rebanadas B.1-B.4 (replay/drift &rarr;
+          materializacion opt-in &rarr; hard-fail enforce &rarr; runtime autoritativo DECISION-0022) +
+          genesis POR REFERENCIA content-addressed</td>
       <td><span class="badge b-ok">CONSTRUIDO &mdash; EN SOMBRA</span></td></tr>
+    <tr><td><b>Escritor-unico &mdash; keystone</b></td>
+      <td>Flujo por intents <code>submit_intent</code> (TASK-0072) + <b>transaccional</b> <code>--intents</code>
+          (cierres multi-paso atomicos con rollback, TASK-0076) + <code>regenesis.py</code> (genesis fresco,
+          drift 0, no destructivo)</td>
+      <td><span class="badge b-ok">DONE (sombra)</span></td></tr>
     <tr><td><b>Fase 7 &mdash; release engineering</b></td>
-      <td>F7.1 SBOM determinista (<code>generate_sbom</code>); F7.2 manifiesto + verify por integridad de
-          contenido (<code>generate_manifest</code> / <code>verify_release</code>). Neutral, sin secretos/firma</td>
-      <td><span class="badge b-ok">F7.1-F7.2 DONE</span></td></tr>
+      <td>F7.1 SBOM (<code>generate_sbom</code>); F7.2 manifiesto+verify (<code>generate_manifest</code>/
+          <code>verify_release</code>); F7.3 provenance SLSA-lite (<code>generate_provenance</code>); F7.4 firma
+          (<code>sign_release</code>, backend fixture, sin secretos en repo)</td>
+      <td><span class="badge b-ok">F7.1-F7.4 DONE</span></td></tr>
   </tbody>
 </table>
 
@@ -149,49 +156,56 @@
 <table>
   <thead><tr><th>Area</th><th>Contenido</th></tr></thead>
   <tbody>
-    <tr><td class="path">Area_comun/decisions/</td><td>22 decisiones (DECISION-0001 .. 0022; +0023 firma ACCEPTED por el operador, pendiente de promover al ledger)</td></tr>
-    <tr><td class="path">Area_comun/specs/</td><td>49 specs + plantillas SDD (SPEC_TEMPLATE, REQUIREMENTS, TEST_PLAN, TRACEABILITY...)</td></tr>
-    <tr><td class="path">Area_comun/protocol/</td><td>TASK_PROTOCOL, COMMUNICATION_PROTOCOL, BRIDGE_CONTRACT, N_AGENT_RUNTIME, SCHEMA_VERSIONING, PACKAGE_VERSIONING, plantillas</td></tr>
-    <tr><td class="path">runtime/</td><td>16 modulos (router, turn_validate, apply, gate, eventlog, guardrails, tool_policy, budget, review_qa, metrics, runlog, context, orchestrator, vcs, <b>protocol_replay</b>, <b>submit_intent</b>) + adapters/ (base, replay, llm_adapter)</td></tr>
-    <tr><td class="path">scripts/</td><td>new_instance, upgrade_instance, validate_collaboration_state, scan_encoding, scan_domain_neutrality, prune_state, measure_context_cost, <b>generate_sbom</b>, <b>generate_manifest</b>, <b>verify_release</b>, <b>generate_provenance</b> (F7.3, en vuelo) &mdash; paridad .py/.ps1</td></tr>
-    <tr><td class="path">examples/</td><td>48 carpetas golden + instancias de referencia (minimal_instance, minimal_sdd_instance, full_runtime_instance, dotnet_enterprise_instance); golden de release: sbom_cases, release_verify_cases, intent_flow_cases, provenance_cases (en vuelo)</td></tr>
+    <tr><td class="path">Area_comun/decisions/</td><td>24 decisiones (DECISION-0001 .. 0024; las ultimas: 0022 runtime-autoritativo, 0023 firma de release, 0024 autonomia supervisada)</td></tr>
+    <tr><td class="path">Area_comun/specs/</td><td>52 specs + plantillas SDD (SPEC_TEMPLATE, REQUIREMENTS, TEST_PLAN, TRACEABILITY...)</td></tr>
+    <tr><td class="path">Area_comun/protocol/</td><td>TASK_PROTOCOL (con mandato de cutover), COMMUNICATION_PROTOCOL, BRIDGE_CONTRACT, N_AGENT_RUNTIME, SCHEMA_VERSIONING, PACKAGE_VERSIONING, plantillas</td></tr>
+    <tr><td class="path">runtime/</td><td>18 modulos: router, turn_validate, apply, gate, eventlog, guardrails, tool_policy, budget, review_qa, metrics, runlog, context, orchestrator, vcs, protocol_replay, <b>submit_intent</b> (+ <code>--intents</code> transaccional), <b>regenesis</b>, <b>ledger_ops</b> (cutover, en vuelo) + adapters/ (base, replay, llm_adapter)</td></tr>
+    <tr><td class="path">scripts/</td><td>new_instance, upgrade_instance, validate_collaboration_state, scan_encoding, scan_domain_neutrality, prune_state, measure_context_cost, generate_sbom, generate_manifest, verify_release, generate_provenance, <b>sign_release</b> &mdash; paridad .py/.ps1</td></tr>
+    <tr><td class="path">examples/</td><td>~51 carpetas golden + instancias de referencia (minimal_instance, minimal_sdd_instance, full_runtime_instance, dotnet_enterprise_instance); golden de release/escritor-unico: sbom, release_verify, provenance, release_sign, intent_flow, <b>intent_tx</b>, <b>cutover_loop</b> (en vuelo), genesis_ref/materialize/enforce</td></tr>
     <tr><td class="path">Area_comun/reports/</td><td>Reportes de release v0.2-v1.0 + reportes tematicos + este inventario (HTML)</td></tr>
   </tbody>
 </table>
 
 <h2>3. Trabajo en curso y futuro</h2>
 
-<h3>A) Fase 7 &mdash; release engineering (camino activo, en orden)</h3>
+<h3>A) Migracion al escritor-unico (camino activo, orden del operador)</h3>
 <ol class="ol">
-  <li><b>F7.1 SBOM &mdash; TASK-0071</b>: <span class="path">generate_sbom.py</span> (+ .ps1), inventario
-      canonico determinista (ruta+sha256+tamano, 4 ejes de version, commit/timestamp provistos). <span class="badge b-ok">DONE</span></li>
-  <li><b>F7.2 manifiesto + verify &mdash; TASK-0073</b>: <span class="path">generate_manifest.py</span> +
-      <span class="path">verify_release.py</span> (+ .ps1); manifiesto con <code>sbom_hash</code> + verify por
-      integridad de contenido. <span class="badge b-ok">DONE</span></li>
-  <li><b>F7.3 provenance &mdash; TASK-0074</b> (SPEC-0060): atestacion SLSA-lite
-      (<code>subject.digest = sbom_hash</code> + builder/invocation/metadata provistos) + verificacion de
-      consistencia. <span class="badge b-now">EN VUELO (Codex, in_progress)</span></li>
-  <li><b>F7.4 firma del release &mdash; TASK-0075</b> (SPEC-0061): firma del digest del manifiesto, backend
-      configurable, clave fixture en golden, sin secretos en repo, off-by-default. Apoyada en
-      <b>DECISION-0023</b> (ACCEPTED por el operador; pendiente de promover al ledger).
-      <span class="badge b-warn">listo en personal, encola tras F7.3</span></li>
-  <li><b>F7.5 docs</b> &mdash; documentacion de la cadena de release (SBOM &rarr; manifiesto &rarr; provenance
-      &rarr; firma) y guia de verificacion. <span class="badge b-warn">pendiente</span></li>
+  <li><b>Keystone &mdash; TASK-0076</b> (SPEC-0062): <code>submit_intent --intents</code> transaccional (cierre
+      multi-paso atomico + rollback) + <code>regenesis.py</code> (drift 0, no destructivo). <span class="badge b-ok">DONE</span></li>
+  <li><b>Mandato de protocolo (lado Claude)</b>: AGENTS.md/AGENTS.template + TASK_PROTOCOL documentan el
+      <code>--intents</code> transaccional y el gate de activacion ambos-lazos. <span class="badge b-ok">DONE</span></li>
+  <li><b>Cutover (lado Codex) &mdash; TASK-0077</b> (SPEC-0063): el lazo de Codex emite auto-claim y
+      handoff-release via <code>submit_intent --intents</code> (<code>ledger_ops.py</code> + golden
+      <code>cutover_loop_cases</code>, fixture drift-0). <span class="badge b-now">EN VUELO (Codex, in_progress)</span></li>
+  <li><b>Activacion EN VIVO</b>: re-genesis del repo vivo (drift 0) + flip <code>enforce+authoritative</code> +
+      ensayo de rollback. Operador <b>YA AUTORIZO</b> (2026-06-08); gateado TECNICAMENTE hasta que AMBOS lazos usen
+      <code>submit_intent</code>. <span class="badge b-gate">autorizado, pendiente ambos-lazos + rollback</span></li>
 </ol>
 
-<h3>B) Gateado &mdash; requiere GO explicito del operador</h3>
+<h3>B) Fase 7 &mdash; cierre</h3>
+<table>
+  <thead><tr><th>Rebanada</th><th>Contenido</th><th>Estado</th></tr></thead>
+  <tbody>
+    <tr><td><b>F7.1-F7.4</b></td>
+      <td>SBOM (TASK-0071) &middot; manifiesto+verify (TASK-0073) &middot; provenance (TASK-0074) &middot; firma
+          (TASK-0075). Deterministas, neutrales, sin secretos en repo</td>
+      <td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>F7.5 docs</b></td>
+      <td>Documentar la cadena de release (SBOM &rarr; manifiesto &rarr; provenance &rarr; firma) + backend real
+          de firma (cosign/minisign/gpg) + guia de verificacion</td>
+      <td><span class="badge b-warn">pendiente (post-migracion)</span></td></tr>
+  </tbody>
+</table>
+
+<h3>C) Gateado &mdash; requiere GO / coordinacion</h3>
 <table>
   <thead><tr><th>Item</th><th>Descripcion</th><th>Estado</th></tr></thead>
   <tbody>
-    <tr><td><b>Activacion EN VIVO del writer-vivo</b></td>
-      <td>Encender <code>event_state.enforce+authoritative</code> (3.b.2 escritor-unico): exige re-genesis
-          sincronizado (drift 0), que AMBOS lazos (incl. el autonomo de Codex) adopten <code>submit_intent</code>
-          para toda transicion, ensayo de replay/rollback no-destructivo y GO FINAL del operador.
-          Es un switch operativo coordinado, no un flip.</td>
-      <td><span class="badge b-gate">EN PAUSA (sombra estable)</span></td></tr>
     <tr><td><b>Autonomia supervisada</b></td>
-      <td>Ejecucion del motor con agentes reales bajo supervision dura</td>
-      <td><span class="badge b-gate">gateado</span></td></tr>
+      <td>Loop multi-turno acotado bajo sobre de supervision dura (max_turns, kill-switch, reloj, checkpoint
+          humano), off-by-default. DECISION-0024 APROBADA y promovida; rebanadas SA.1..SA.5 por encolar (SA.1
+          en draft)</td>
+      <td><span class="badge b-now">aprobada, por encolar</span></td></tr>
     <tr><td><b>TASK-0037</b></td>
       <td>Guia humana operativa neutral + formato HTML reusable por cualquier proyecto</td>
       <td><span class="badge b-warn">proposed</span></td></tr>
@@ -201,7 +215,8 @@
 <footer>
   Reporte humano generado por Claude (arquitecto) conforme a CLAUDE.md regla 7 (yo redacto, Codex ratifica).
   Fuente de verdad: <span class="path">AGENTS.md</span> + <span class="path">Area_comun/state/*.json</span>.
-  La activacion EN VIVO del escritor-unico y todo item gateado requieren aprobacion explicita del operador humano.
+  La activacion EN VIVO del escritor-unico (re-genesis + flip enforce/authoritative) se ejecuta tras verificar que
+  ambos lazos usan submit_intent + ensayo de rollback; el operador ya otorgo la autorizacion (2026-06-08).
 </footer>
 
 </div>
