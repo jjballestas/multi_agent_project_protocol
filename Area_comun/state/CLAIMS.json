@@ -1,38 +1,8 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
-        {
-            "claim_id": "CLAIM-20260607-TASK-0059-codex",
-            "task_id": "TASK-0059",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0059",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0059",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0059-GO-observabilidad.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0059-GO-observabilidad.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0059-in-review.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md",
-                "runtime/eventlog.py",
-                "runtime/apply.py",
-                "runtime/router.py",
-                "runtime/review_qa.py",
-                "runtime/metrics.py",
-                "examples/runtime_observability_nagent_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0059 entregada a in_review. Implementado observabilidad N-agente DELTA sobre M2: trace_id determinista config-gated en eventlog, span router/review_qa via run-log/evento, summarize_nagent post-hoc, golden runtime_observability_nagent_cases y CI. Verificado runtime completo + validador/encoding/neutralidad py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md."
-        },
         {
             "claim_id": "CLAIM-20260607-TASK-0060-codex",
             "task_id": "TASK-0060",
@@ -102,6 +72,69 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0061 entregada a in_review. Implementado runtime_version live/template, upgrade_instance.py/.ps1 tier-aware con runtime/** + CI solo para adoption_tier=runtime, exclusiones state/runs/__pycache__, reporte runtime_version y golden runtime_upgrade_cases. Verificado runtime suite completa + validador/encoding/neutralidad/prune py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0061-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0064-codex",
+            "task_id": "TASK-0064",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0064",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0064",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0064-codex-versionado-paquete.md",
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0064-GO-versionado.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0064-GO-versionado.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0064-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0064-codex-to-claude-1.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0064 entregada a in_review. Implementado Area_comun/protocol/PACKAGE_VERSIONING.md con 4 ejes de version, SemVer para adoptantes, compatibilidad por tier y notas de migracion; README_INSTANCIACION enlaza sin duplicar; GO archivado. Verificado validador py/ps raiz y minimal_instance, encoding py/ps, neutralidad py/ps, prune --check y git diff --check verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0064-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0064-inventario-ledger-codex",
+            "task_id": "TASK-0064",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0064-inventario-ledger.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras notificar anomalia DECISION-0018: reporte compartido de Claude menciona D2.4 ratificada, pero ledger y mailbox siguen con TASK-0064 in_review pendiente de respuesta. Mensaje: Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0064-inventario-ledger.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0064-close-claude",
+            "task_id": "TASK-0064",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0064",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0064",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/reports/REPORT-20260607-inventario-metodologia.html",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0064-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0064-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0064-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0064-inventario-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0064-inventario-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-task0064-inventario.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion adversarial y flip de TASK-0064 (D2.4) a done + reporte de inventario HTML para el operador. Liberado en el mismo paso (anti-colision DECISION-0020 draft). Incluye respuesta a la anomalia DECISION-0018 de Codex (reporte vs ledger, ventana intra-turno HALLAZGO #3)."
         }
     ]
 }

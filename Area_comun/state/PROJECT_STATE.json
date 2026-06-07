@@ -114,8 +114,8 @@
         {
             "id": "TASK-0064",
             "owner": "Codex",
-            "status": "ready",
-            "title": "D2.4 (versionado del paquete, SPEC-0050): PACKAGE_VERSIONING (4 ejes + SemVer adoptante + compatibilidad por tier) + notas de migracion. Ultima de D2. Solo documentacion."
+            "status": "done",
+            "title": "D2.4 (versionado del paquete, SPEC-0050) DONE - ACEPTADA por Claude: PACKAGE_VERSIONING.md (4 ejes + SemVer adoptante + compatibilidad por tier + migracion lite->runtime) + enlace en README_INSTANCIACION. Doc-only, gates verdes, sin secretos. CIERRA D2 (D2.1-D2.4). Ultima de D2."
         }
     ],
     "open_questions": [],
@@ -154,9 +154,10 @@
         "WRAPPER LLM REAL CERRADO (TASK-0062 DONE, ratif. adversarial de Claude 2026-06-07): adapter CLI vendor-neutral (presets claude/codex, sin hardcode/secretos) off-by-default (real_invoker.enabled=false + registro per DECISION-0021) + limites al activar + NO autonomia; golden 4/4 + suite verde. >>> ULTIMO BLOQUE FUNCIONAL DE v1.0 LISTO <<<. ENCOLADA D2.3 = TASK-0063 (docs adopcion + criterio 16). RESTANTE v1.0: D2.3 -> D2.4 SemVer del paquete -> DECISION-0020 (regla anti-colision) + fix prune -> RELEASE v1.0 (APROBACION HUMANA). Post-v1.0 gateado: Fase B, Fase 7, autonomia.",
         "TASK-0063 RECLAMADA por Codex (2026-06-07): docs de adopcion D2.3 en progreso. Alcance: README_INSTANCIACION tiers/upgrade/operar agentes reales + Area_comun/protocol/N_AGENT_RUNTIME.md criterio 16. Solo documentacion, neutral, sin secretos.",
         "TASK-0063 ENTREGADA a in_review por Codex (2026-06-07): README_INSTANCIACION ampliado (tiers coordination/runtime, instanciacion --tier, upgrade tier-aware, operacion de agentes reales) + Area_comun/protocol/N_AGENT_RUNTIME.md criterio 16. Solo docs; gates py/ps verdes. Pendiente ratificacion de Claude.",
-        "D2.3 CERRADA (TASK-0063 DONE, ratif. adversarial de Claude 2026-06-07): README_INSTANCIACION ampliado (tiers/upgrade/operar agentes reales) + N_AGENT_RUNTIME.md (criterio 16); gates verdes, sin secretos. TAMBIEN cerrado el wrapper (TASK-0062 DONE, ultimo bloque funcional). ENCOLADA D2.4 = TASK-0064 (versionado del paquete + migracion, ultima de D2). RESTANTE v1.0: D2.4 -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune (no condensa next_actions) -> RELEASE v1.0 (APROBACION HUMANA). Anomalias DECISION-0018 de Codex por timing (create-order) resueltas: 0060, 0063. PERMISOS del lazo a\u00f1adidos a .claude/settings.json (loop commands auto-allow). Post-v1.0 gateado: Fase B, Fase 7, autonomia."
+        "D2.3 CERRADA (TASK-0063 DONE, ratif. adversarial de Claude 2026-06-07): README_INSTANCIACION ampliado (tiers/upgrade/operar agentes reales) + N_AGENT_RUNTIME.md (criterio 16); gates verdes, sin secretos. TAMBIEN cerrado el wrapper (TASK-0062 DONE, ultimo bloque funcional). ENCOLADA D2.4 = TASK-0064 (versionado del paquete + migracion, ultima de D2). RESTANTE v1.0: D2.4 -> DECISION-0020 (regla anti-colision, HALLAZGOS #1/#2/#3) + fix prune (no condensa next_actions) -> RELEASE v1.0 (APROBACION HUMANA). Anomalias DECISION-0018 de Codex por timing (create-order) resueltas: 0060, 0063. PERMISOS del lazo a\u00f1adidos a .claude/settings.json (loop commands auto-allow). Post-v1.0 gateado: Fase B, Fase 7, autonomia.",
+        "D2.4 CERRADA (TASK-0064 DONE, ratificacion adversarial de Claude 2026-06-07): PACKAGE_VERSIONING.md (4 ejes protocol/runtime/schema/profile_version + SemVer adoptante + compatibilidad por tier + migracion lite->runtime + activar agentes reales/perfiles + politica de incompatibles) + enlace en README_INSTANCIACION; doc-only, defiere el release v1.0 a paso humano. Verifique YO validador raiz+minimal/encoding/neutralidad/prune --check verdes y sin secretos. >>> D2 COMPLETO (D2.1+D2.2+D2.3+D2.4) <<<. RESTANTE v1.0: DECISION-0020 (regla anti-colision; DRAFT en personal/Claude/) + fix prune TASK-0065/SPEC-0051 (condensar next_actions; DRAFT en personal/Claude/) -> RELEASE v1.0 (APROBACION HUMANA: bump protocol_version 1.0.0 + CHANGELOG + reporte + tag). Reporte de inventario HTML para el operador en Area_comun/reports/REPORT-20260607-inventario-metodologia.html. Post-v1.0 gateado: Fase B, Fase 7, autonomia, TASK-0037/0038."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }

@@ -100,6 +100,10 @@ deltas de `runtime/**`, workflow de CI y `runtime_version`; si el tier es `coord
 propone runtime y conserva el comportamiento ligero. Los artefactos de ejecucion (`runtime/state/`,
 `runtime/runs/`, `__pycache__/`) quedan fuera del upgrade.
 
+Para reglas de versionado y migracion (`protocol_version`, `runtime_version`, `schema_version`,
+`profile_version`, compatibilidad por tier y paso de `coordination` a `runtime`), ver
+[`Area_comun/protocol/PACKAGE_VERSIONING.md`](Area_comun/protocol/PACKAGE_VERSIONING.md).
+
 ### Operar agentes reales
 
 El wrapper de CLI real existe solo para instancias runtime y sigue apagado por defecto. Una instancia

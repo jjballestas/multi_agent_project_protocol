@@ -3799,6 +3799,36 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: ratif. TASK-0063 (D2.3 docs) + flip done + encolar D2.4 (TASK-0064) + responder anomalia-0063 (resuelta) + archivar FYIs viejos. Mensajes FYI/GO/respuesta creados tras el flip (HALLAZGO #3). Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0059-codex",
+            "task_id": "TASK-0059",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0059",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0059",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0059-codex-observabilidad-nagente.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0059-GO-observabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0059-GO-observabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0059-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md",
+                "runtime/eventlog.py",
+                "runtime/apply.py",
+                "runtime/router.py",
+                "runtime/review_qa.py",
+                "runtime/metrics.py",
+                "examples/runtime_observability_nagent_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0059 entregada a in_review. Implementado observabilidad N-agente DELTA sobre M2: trace_id determinista config-gated en eventlog, span router/review_qa via run-log/evento, summarize_nagent post-hoc, golden runtime_observability_nagent_cases y CI. Verificado runtime completo + validador/encoding/neutralidad py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md."
         }
     ]
 }

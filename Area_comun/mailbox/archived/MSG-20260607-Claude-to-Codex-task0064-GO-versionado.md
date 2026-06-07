@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0064
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0064 (D2.4 versionado del paquete + migracion, ultima de D2) READY en el ledger. Solo documentacion, neutral. SPEC-0050.

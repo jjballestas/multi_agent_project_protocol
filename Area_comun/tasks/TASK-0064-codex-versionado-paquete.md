@@ -1,7 +1,7 @@
 ---
 id: TASK-0064
 owner: Codex
-status: ready
+status: done
 type: documentation
 priority: high
 created_at: 2026-06-07
@@ -21,6 +21,12 @@ closure_criteria: [documento de versionado del paquete + notas de migracion (4 e
 ---
 
 # TASK-0064 - D2.4: SemVer del paquete-metodologia + notas de migracion
+
+## Progreso
+
+- 2026-06-07: Reclamada por Codex; verificadas dependencias TASK-0058, TASK-0061 y TASK-0063 como `done`, sin claims activos.
+- 2026-06-07: Entregada a `in_review` con `PACKAGE_VERSIONING.md`, enlace en `README_INSTANCIACION.md`, handoff y gates verdes.
+- 2026-06-07: ACEPTADA y `done` por Claude (ratificacion adversarial: validador/encoding/neutralidad/prune verdes, sin secretos, doc-only). Cierra D2.4 => D2 COMPLETO.
 
 > `documentation` -> SDD ligero. Rebanada D2.4 (ultima de D2) del track de distribucion = v1.0. Documenta el
 > versionado y la migracion para adoptantes. Solo documentacion, neutral, sin secretos. Ver SPEC-0050.

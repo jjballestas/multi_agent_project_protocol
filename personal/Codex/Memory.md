@@ -1,160 +1,165 @@
 # Codex Memory
 
-Last updated: 2026-06-06 Europe/Madrid
+Last updated: 2026-06-07 Europe/Madrid, after TASK-0063 was delivered to in_review.
 
 ## Repository
 
 `multi_agent_project_protocol` is the canonical, domain-neutral repository for the reusable
 multi-agent software project protocol. It dogfoods itself.
 
-Current private area: `personal/Codex/` (DECISION-0016). Do not create new files under legacy `Codex/`.
+Current private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Codex/`.
 
-## Session Close - 2026-06-06
+## Current State
 
-The N-agent program is in progress after the human owner approved/froze Phase 0:
+- Live protocol/runtime version: `0.10.0`.
+- v1.0 track is in progress. Functional blocks are complete through the wrapper LLM real.
+- Active claims: none.
+- `TASK-0061`: done, accepted by Claude.
+- `TASK-0062`: done, accepted by Claude. This closed the last functional block before docs/SemVer.
+- `TASK-0063`: in_review, owned by Codex, awaiting Claude ratification.
+- `python runtime\orchestrator.py --plan` currently returns:
+  - `action: answer_mailbox`
+  - `task_id: TASK-0063`
+  - `owner: Claude`
+  - reason: pending response to `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger`
+- No ready or in_progress task is currently available to Codex.
 
-- `DECISION-0015` is accepted.
-- `SPEC-0038` is frozen with D-1..D-16, I1..I8 and addenda A1..A13.
-- `TASK-0043` Phase 1 is accepted and done.
-- `TASK-0044` Phase 2 is accepted and done.
-- `TASK-0045` Phase 3 is ready and queued to Codex.
+## Open Mailbox To Watch
 
-Open mailbox at close:
+Open messages at refresh included:
 
-- `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0044-accepted.md`
-  - FYI only, no response required.
-  - TASK-0044 accepted and done.
-- `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md`
-  - Requires Codex response.
-  - TASK-0045 READY: N-agent Phase 3 router + fairness.
+- `MSG-20260607-Codex-to-Claude-task0063-in-review.md`
+  - requires Claude response.
+  - handoff for TASK-0063 docs.
+- `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger.md`
+  - requires Claude response.
+  - materially resolved by later ledger reconciliation, but still open; orchestrator points Claude to it.
+- `MSG-20260607-Claude-to-Codex-task0062-accepted.md`
+  - FYI, no response required.
+- `MSG-20260607-Claude-to-Codex-task0060-accepted.md`
+  - FYI, no response required.
+- `MSG-20260607-Claude-to-Codex-respuesta-anomalia-task0060.md`
+  - answer/FYI, no action required.
 
-Git status was clean immediately before updating this memory and creating the startup prompt.
+Do not claim a new task until TASK_INDEX/PROJECT_STATE show a ready task for Codex and no active claim
+conflicts. If Claude answers the TASK-0063 anomaly and/or accepts TASK-0063, re-read the ledger before acting.
 
-## Latest Completed Work
+## Completed This Session
 
-### TASK-0043 - N-agent Phase 1
+### TASK-0062 - Wrapper LLM real
 
-Commit: `3430c2c feat(runtime): add agent registry validation`
+Implemented and delivered; Claude accepted it as done.
 
-Delivered:
+Key changes:
 
-- `runtime/context.py`
-  - `load_agent_registry(root)` with fallback:
-    `agent_registry` -> `agent_roles` -> default Claude/Codex/human triad.
-  - helpers: `enabled_agents`, `agents_with_capability`, `has_capability`.
-- `runtime/turn_schema.json`
-  - `agent` changed from fixed enum to non-empty string.
-- `runtime/turn_validate.py`
-  - semantic validation for registered/enabled/capable agent.
-  - preserves `claim.owner == report.agent`.
-- `examples/agent_registry_cases/`
-  - explicit registry, `agent_roles`, default fallback, unregistered/disabled/uncapable rejection.
-
-Claude accepted TASK-0043.
-
-### TASK-0044 - N-agent Phase 2
-
-Commit: `e5faa1d feat(runtime): add event log concurrency core`
-
-Delivered:
-
-- `runtime/eventlog.py`
-  - append-only JSONL event log under `runtime/state/events.jsonl`;
-  - writer-only monotonic `seq`;
-  - `event_schema_version`;
-  - fsync append and torn-write-safe reader;
-  - canonical snapshot/replay/hash;
-  - archive compaction under `runtime/state/archives/`;
-  - idempotency by tuple `actor/task/transition/attempt/fencing`;
-  - duplicate intent returns existing event with no new seq, including after compaction;
-  - per-aggregate fencing tokens;
-  - stale-fencing rejection events without aggregate version bump;
-  - negative replay helper that does not invoke external callbacks.
-- `runtime/turn_schema.json`
-  - optional `attempt_id`, `idempotency_key`, `aggregate_version`, `fencing_token`.
-- `runtime/turn_validate.py`
-  - optional semantic checks for `aggregate_version` and `fencing_token`.
+- `runtime/adapters/llm_adapter.py`
+  - command/preset resolver;
+  - `runtime.llm_cli_presets`;
+  - `runtime.real_invoker` activation check.
 - `runtime/orchestrator.py`
-  - preserves optional concurrency fields in sanitized reports.
-- `examples/runtime_eventlog_cases/`
-  - seq/torn-write;
-  - idempotency pre/post compaction;
-  - lease reclaim/stale fencing;
-  - snapshot hash/mismatch gate;
-  - negative replay.
+  - added `--llm-preset`;
+  - real subprocess invoker now requires `--once`, `--allow-real-invoker`, command/preset, and local activation registration.
+- `protocol.config.json` and `protocol.config.template.json`
+  - `runtime.real_invoker.enabled:false`;
+  - example presets `claude` and `codex`.
+- `examples/runtime_real_adapter_cases/`
+  - deterministic golden cases for activation gates, replay comparison, limits, and presets.
+- `.github/workflows/validate.yml`
+  - added the real adapter activation cases.
+- Minimal docs in `runtime/README.md` and `README_INSTANCIACION.md`.
 
-Claude accepted TASK-0044. Follow-up noted by Claude: when event log becomes the live writer, wire
-`assert_snapshot_matches` into py/ps1 global validators as a repo-wide hard gate before writes. This does
-not block Phase 3.
+Validation before handoff included:
 
-## Next Task
+- py_compile for touched Python.
+- `examples/llm_adapter_cases` 6/6.
+- `examples/runtime_real_adapter_cases` 4/4.
+- Full runtime suite green.
+- validators, encoding, neutrality, prune, and `git diff --check` green.
 
-`TASK-0045` is ready:
+### TASK-0063 - Docs de adopcion
 
-- File: `Area_comun/tasks/TASK-0045-codex-n-agent-fase3-router.md`
-- Message: `Area_comun/mailbox/open/MSG-20260606-Claude-to-Codex-task0045-fase3.md`
-- Goal: N-agent Phase 3 router + fairness.
+Implemented and delivered to in_review.
 
-Expected scope:
+Key changes:
 
-- `runtime/router.py`
-- `runtime/context.py` if helper tweaks are needed
-- `examples/runtime_router_cases/`
-- probably new fairness/routing golden cases
-- protocol state/task/mailbox/handoff files for claim and handoff-release
+- `README_INSTANCIACION.md`
+  - tiers `coordination` and `runtime`;
+  - how to instantiate via `new_instance.py --tier`;
+  - tier-aware upgrade via `upgrade_instance.py`;
+  - safe operation of real agents via DECISION-0021 and wrapper flags;
+  - links to runtime docs and N-agent docs.
+- `Area_comun/protocol/N_AGENT_RUNTIME.md`
+  - registry/capabilities;
+  - routing;
+  - Review/QA states;
+  - claims and handoffs;
+  - guardrails/security;
+  - observability/event log/replay;
+  - budget/deadlines;
+  - adoption checklist.
+- Handoff:
+  - `Area_comun/handoffs/HANDOFF-TASK-0063-codex-to-claude-1.md`
+- Review message:
+  - `Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0063-in-review.md`
 
-Key requirements from Claude:
+Validation after handoff:
 
-- Select by required capability and load.
-- `required_capability` optional in tasks; if absent, use current owner behavior.
-- Use `routing_weights` from config, not hardcoded constants.
-- Exclude author in review/QA, even if author has reviewer/QA capability.
-- No hidden escalation: if no eligible reviewer/QA distinct from author, escalate/blocked with reason and candidates; never self-review.
-- Deterministic tiebreak:
-  - stable hash of `task + transition + agent + routing_epoch`;
-  - lexicographic only as final tiebreak.
-- Respect `max_active_claims`.
-- Add `routing_decision.explanation` with candidates, filtered reasons and score tuple.
-- Fairness gate over eligible assignments:
-  - 100 tasks / 3 identical agents nearly uniform;
-  - weighted expected-vs-observed;
-  - anti-starvation if an eligible agent gets zero after minimum sample;
-  - guard denominator zero.
-- Keep fallback N=2 byte-equivalent:
-  - without registry, review -> Claude;
-  - human gate -> `operador humano`;
-  - current 5 router cases remain green.
+- `python scripts\validate_collaboration_state.py --root .` -> OK, FYI warnings only.
+- PowerShell validator -> OK, same FYI warnings.
+- encoding scan -> OK.
+- neutrality scan -> OK.
+- `python scripts\prune_state.py --root . --check` -> OK.
+- `git diff --check` -> OK, only CRLF warnings.
 
-## Validation Baseline
+## Anomalies / Process Notes
 
-Before closing, these suites were green after TASK-0044:
+- A TASK-0063 GO appeared before TASK_INDEX/PROJECT_STATE had TASK-0063 and while TASK-0062 was still
+  in_review. Codex waited briefly, then sent:
+  `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger.md`.
+- Claude later reconciled the ledger, accepted TASK-0062, and registered TASK-0063 ready. Codex then
+  claimed TASK-0063 normally.
+- Keep applying DECISION-0018: notify anomalies via mailbox; do not silently fix another owner's closure.
+- Handoff-release must be atomic: task status, handoff, review message, GO archive, and claim release
+  should land in the same coordination step.
 
-- `python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py` -> 5/5
-- `python examples/agent_registry_cases/run_agent_registry_cases.py` -> 4/4
-- `python examples/runtime_turn_cases/run_runtime_turn_schema_cases.py` -> 5/5
-- `python examples/runtime_turn_cases/run_runtime_turn_semantic_cases.py` -> 5/5
-- `python examples/runtime_router_cases/run_runtime_router_cases.py` -> 5/5
-- `python examples/runtime_apply_cases/run_runtime_apply_cases.py` -> 4/4
-- `python examples/runtime_loop_cases/run_runtime_loop_cases.py` -> 8/8
-- `python examples/runtime_observability_cases/run_runtime_observability_cases.py` -> 5/5
-- `python examples/llm_adapter_cases/run_llm_adapter_cases.py` -> 6/6
-- `python scripts/validate_collaboration_state.py` -> OK
-- `python scripts/scan_encoding.py` -> OK
-- `python scripts/scan_domain_neutrality.py` -> OK
+## Dirty Worktree Caution
 
-Run these again after implementing TASK-0045, plus any new router/fairness cases.
+The worktree is intentionally dirty with shared task deliverables and Claude coordination changes.
+Do not revert unrelated files. Notable dirty/untracked areas seen at refresh:
 
-## Protocol Reminders
+- Shared deliverables for TASK-0062 and TASK-0063.
+- Mailbox moves/archives and handoffs.
+- `Area_comun/state/*` hot/archive updates.
+- `Area_comun/protocol/N_AGENT_RUNTIME.md`.
+- `examples/runtime_real_adapter_cases/`.
+- `.claude/settings.json` changed by another participant/tooling; do not touch unless asked.
+- `personal/Claude/*` untracked; do not touch.
+- `personal/Codex/Memory.md` and `personal/Codex/STARTUP_PROMPT.md` are intentionally updated by this refresh.
 
-- Read `AGENTS.md` first.
-- Before shared edits, inspect:
-  - `Area_comun/state/TASK_INDEX.json`
-  - `Area_comun/state/CLAIMS.json`
-  - `Area_comun/mailbox/open/`
+Claude usually commits accepted Codex deliverables. Do not commit unless the user asks.
+
+## Working Rules
+
+- Before any shared edit: read `TASK_INDEX.json`, `CLAIMS.json`, and `mailbox/open/`.
 - Create/update an active claim before editing shared routes.
-- Do not edit paths covered by another active claim.
-- When moving a task to `in_review`, release the active claim in the same coordination step.
-- ASCII-only applies to `Area_comun/mailbox/**` and `Area_comun/state/*.json`.
-- Keep protocol core domain-neutral.
-- Do not introduce secrets.
-- Do not change compatibility/boundaries/release policy without decision + human approval.
+- Do not edit routes under another owner's active claim.
+- Release claim when moving a task to `in_review` or `done`.
+- If a message says DONE but ledger disagrees, wait/recheck briefly; if persistent, notify via mailbox.
+- Private notes under `personal/Codex/` do not need a shared claim.
+
+## Useful Fresh-Session Commands
+
+```powershell
+git status --short
+python runtime\orchestrator.py --plan
+python scripts\validate_collaboration_state.py --root .
+python scripts\prune_state.py --root . --check
+python scripts\scan_encoding.py --root .
+python scripts\scan_domain_neutrality.py --root .
+```
+
+## Next Session Rule
+
+Start in monitoring/coordination mode. First expected action belongs to Claude: answer/close the open
+TASK-0063 anomaly message and review TASK-0063. If Claude accepts TASK-0063 and enqueues D2.4, inspect
+GO/spec/task/ledger and claims before claiming.
