@@ -4231,6 +4231,49 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado y archivado tras mantenimiento post TASK-0069. prune_state.py --apply: claims_archived=2, tasks_archived=1, project_state_done_removed=1, next_actions_condensed=3, recovered_tokens=2067."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0067-close-claude",
+            "task_id": "TASK-0067",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0067-codex-faseB2-materializacion-opt-in.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0067-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0067-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0067-accepted.md",
+                "Area_comun/specs/SPEC-0054-faseB3-drift-hard-fail.md",
+                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-GO-faseB3.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0067 (Fase B.2) a done + encolado de TASK-0068 (B.3, promovida desde draft de personal). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-higiene-prune-post-task0069-codex",
+            "task_id": "maintenance-mailbox-prune",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0069-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0069-accepted.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras archivar FYI TASK-0069 accepted y mantenimiento prune post cierre Fase B. prune_state.py --apply: claims_archived=1, tasks_archived=2, project_state_done_removed=2, next_actions_condensed=1, recovered_tokens=1927."
         }
     ]
 }

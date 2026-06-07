@@ -97,18 +97,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0038",
-            "owner": "Claude",
-            "status": "done",
-            "title": "PARAGUAS N-agente CERRADO (2026-06-07): cubierto por Capa A + FASE B completa (B.1-B.4). Criterios 11-12 SPEC-0038 e I5/I6 atendidos via writer-vivo (replay/materializacion/hard-fail/genesis-ref), construido y APAGADO. Activar en vivo = decision del operador."
-        },
-        {
-            "id": "TASK-0067",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase B.2 (SPEC-0053) DONE - ACEPTADA por Claude: materializacion opt-in del estado desde replay(log) (write_genesis + materialize_to_disk atomicos/canonicos) doble-gated (enabled+materialize), solo runtime-tier, cableado en apply; off=byte-equivalente; golden 6/6. No hard-fail, no prohibe edicion manual, no enciende en vivo. Avanza TASK-0038."
-        },
-        {
             "id": "TASK-0068",
             "owner": "Codex",
             "status": "done",
@@ -131,8 +119,7 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 69 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0067 RECLAMADA por Codex (2026-06-07): implementando B.2 materializacion opt-in doble-gated del estado de protocolo desde replay(log), solo runtime-tier; no hard-fail, no migracion/prohibicion de edicion manual, materialize queda false en repo vivo.",
+        "[HISTORICO PODADO] 70 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0067 ENTREGADA a in_review por Codex (2026-06-07): B.2 materializacion opt-in desde replay(log) implementada (write_genesis + materialize_to_disk atomico/canonico + event_state.materialize default false + cableado runtime solo enabled&&materialize&&tier runtime). Handoff listo para ratificacion de Claude; B.3/B.4 siguen gateadas.",
         "FASE B.2 CERRADA (TASK-0067 DONE, ratificacion adversarial de Claude 2026-06-07): materializacion OPT-IN del estado de protocolo desde replay(log) - write_genesis idempotente + materialize_to_disk canonico/ASCII/sin-BOM con rollback todo-o-nada + cableado en apply TRIPLE-gateado (enabled&&materialize&&tier==runtime); payload intent.applied agrega transitions (aditivo); off=byte-equivalente (config viva enabled=false+materialize=false => vivo intacto). golden runtime_protocol_materialize_cases 6/6; suite golden 30/30. ENCOLADA Fase B.3 = TASK-0068 (ready, Codex, high): drift como HARD-FAIL bajo event_state.enforce (validador global fail + gate en apply que aborta el commit), reutiliza B.1/B.2, triple-gated, off=byte-equivalente; cierra el invariante hot==replay(log). Resto de Fase B: B.4 migrar/prohibir edicion manual (posible DECISION/MAJOR + aprobacion humana). Avanza paraguas TASK-0038. GO por mailbox; promover de a una (DECISION-0020). Gateadas: Fase 7, autonomia.",
         "TASK-0068 RECLAMADA por Codex (2026-06-07): implementando B.3 drift hard-fail bajo event_state.enforce (default false), validador py/ps + gate apply; sin prohibir edicion manual ni cambiar turn schema.",
@@ -144,5 +131,5 @@
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }

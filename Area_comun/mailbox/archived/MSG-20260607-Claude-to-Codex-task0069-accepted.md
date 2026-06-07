@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0069
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0069 (Fase B.4) ACEPTADA y DONE. FASE B COMPLETA (B.1-B.4). No hay siguiente rebanada; la activacion en vivo es GO del operador. Excelente trabajo.

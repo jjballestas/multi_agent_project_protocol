@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,88 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0038",
-            "owner": "Claude",
-            "status": "done",
-            "type": "analysis",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Trabajo futuro (PARAGUAS): N-agent readiness - registry de agentes/capacidades + runtime sin roles fijos (modelo equipo completo). Diseno capturado en DECISION-0015 + SPEC-0038 (proposed). Implementacion diferida y gateada.",
-            "spec_id": "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-            "file": "Area_comun/tasks/TASK-0038-claude-n-agent-readiness.md",
-            "linked_decisions": [
-                "DECISION-0015"
-            ],
-            "depends_on": [
-                "TASK-0039"
-            ],
-            "relates_to": [
-                "TASK-0036"
-            ],
-            "relevant_files": [
-                "AGENTS.template.md",
-                "protocol.config.template.json",
-                "Area_comun/state/TASK_INDEX.template.json",
-                "Area_comun/state/PROJECT_STATE.template.json",
-                "scripts/new_instance.py",
-                "runtime/turn_schema.json",
-                "runtime/router.py",
-                "runtime/apply.py"
-            ],
-            "deliverables": [
-                "Area_comun/specs/SPEC-0038-n-agent-registry.md",
-                "Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md",
-                "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": false,
-            "review": "CERRADA (2026-06-07) por cobertura: el paraguas N-agente (SPEC-0038) queda cubierto. Brechas de spec-completa cerradas en Capa A (golden N=3/N=5 TASK-0050, property-based I1-I8 TASK-0051, concurrency sim TASK-0052, CI TASK-0047, autor-de-record TASK-0049) y el principal pendiente -event log writer-vivo del ESTADO de protocolo (criterios 11-12, I5/I6)- por la FASE B completa (B.1 replay/drift TASK-0066, B.2 materializacion TASK-0067, B.3 hard-fail TASK-0068, B.4 runtime autoritativo + genesis-ref TASK-0069). La capacidad queda construida y apagada; activarla en vivo es decision operativa del operador.",
-            "updated_at": "2026-06-07"
-        },
-        {
-            "id": "TASK-0067",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase B.2 (SPEC-0053): materializacion OPT-IN del estado de protocolo desde replay(log) (write_genesis + materialize_to_disk deterministas/atomicos/canonicos) bajo event_state.materialize (live+template, default false) ADEMAS de event_state.enabled, solo adoption_tier=runtime; cableado SOLO en el runtime (orchestrator/apply); drift sigue WARNING; off=byte-equivalente; golden runtime_protocol_materialize_cases. NO hard-fail (B.3), NO prohibir edicion manual (B.4), NO encender en repo vivo.",
-            "spec_id": "Area_comun/specs/SPEC-0053-faseB2-materializacion-opt-in.md",
-            "file": "Area_comun/tasks/TASK-0067-codex-faseB2-materializacion-opt-in.md",
-            "linked_decisions": [
-                "DECISION-0017",
-                "DECISION-0015",
-                "DECISION-0014"
-            ],
-            "depends_on": [
-                "TASK-0066"
-            ],
-            "relates_to": [
-                "TASK-0038",
-                "TASK-0048"
-            ],
-            "relevant_files": [
-                "runtime/protocol_replay.py",
-                "runtime/orchestrator.py",
-                "runtime/apply.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_protocol_materialize_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/protocol_replay.py",
-                "runtime/apply.py",
-                "runtime/eventlog.py",
-                "examples/runtime_protocol_materialize_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0067-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 30/30 (nuevo runtime_protocol_materialize_cases 6/6) + validador/encoding/neutralidad/prune py verdes. materialize_to_disk canonico/ASCII/sin-BOM con rollback todo-o-nada; write_genesis idempotente; cableado en apply correctamente TRIPLE-gateado (materialize_from_event_log_if_enabled chequea enabled&&materialize&&tier==runtime; materialization_commit_paths solo agrega paths si materialized=True; ProtocolMaterializationError => revert+block seguro). Byte-equivalencia verificada: config viva event_state enabled=false+materialize=false => apply no materializa, vivo intacto; el payload intent.applied agrega transitions de forma aditiva sin romper eventlog/apply/negative-replay (suites verdes). Scope respetado: NO hard-fail (B.3), NO prohibe edicion manual (B.4), NO enciende materialize en vivo, NO cambia turn schema. Flip por arquitecto. CIERRA Fase B.2; avanza TASK-0038. Siguiente: B.3 (TASK-0068).",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0068",
