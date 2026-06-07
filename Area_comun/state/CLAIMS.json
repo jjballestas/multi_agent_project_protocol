@@ -1,85 +1,8 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "claims": [
-        {
-            "claim_id": "CLAIM-20260607-TASK-0075-codex",
-            "task_id": "TASK-0075",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0075",
-                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0075",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/decisions/DECISION-0023-firma-release.md",
-                "Area_comun/specs/SPEC-0061-faseF7.4-firma.md",
-                "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0074-accepted.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0074-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0075-GO-faseF7.4.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0075-GO-faseF7.4.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "Area_comun/handoffs/",
-                "scripts/sign_release.py",
-                "scripts/sign_release.ps1",
-                "scripts/verify_release.py",
-                "scripts/verify_release.ps1",
-                "examples/release_sign_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0075 entregada a in_review. Implementado sign_release.py + wrapper ps1 + verify_release opt-in de firmas + golden release_sign_cases + CI. Handoff: Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md."
-        },
-        {
-            "claim_id": "CLAIM-20260607-anomalia-task0076-codex",
-            "task_id": "TASK-0076",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0076-sin-claim.md",
-                "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
-                "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado tras notificar anomalia DECISION-0018 a Claude: SPEC-0062/TASK-0076 aparecieron en shared sin claim activo ni GO. No se editaron esos artefactos."
-        },
-        {
-            "claim_id": "CLAIM-20260608-task0075-close-task0076-promote-claude",
-            "task_id": "TASK-0075",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
-                "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
-                "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0075-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0075-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0076-sin-claim.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-anomalia-task0076-sin-claim.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0075-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-respuesta-anomalia-task0076.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0076-GO-submit-intent.md"
-            ],
-            "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0075 (F7.4) a done + promocion OFICIAL de TASK-0076 (SPEC-0062, submit_intent transaccional + re-genesis) con claim+GO + resolucion de la anomalia de Codex (artefactos sin claim). Liberado en el mismo paso (DECISION-0020). ULTIMO cierre por edicion manual antes del cutover a submit_intent."
-        },
         {
             "claim_id": "CLAIM-20260608-TASK-0076-codex",
             "task_id": "TASK-0076",
@@ -147,7 +70,7 @@
             "claim_id": "CLAIM-20260608-TASK-0077-codex",
             "task_id": "TASK-0077",
             "owner": "Codex",
-            "status": "active",
+            "status": "released",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/CLAIMS_ARCHIVE.json",
@@ -176,7 +99,7 @@
             "started_at": "2026-06-08",
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
-            "notes": "Claim activo: TASK-0077 cutover Codex loop a submit_intent --intents. Implementare runtime/ledger_ops.py/.ps1 + golden cutover_loop_cases + CI. Sin enforce/authoritative y sin regenesis del repo vivo."
+            "notes": "Liberado con handoff-release atomico: TASK-0077 entregada a in_review. Implementado runtime/ledger_ops.py/.ps1 + golden cutover_loop_cases + CI para auto-claim y handoff-release via submit_intent --intents. Sin enforce/authoritative y sin re-genesis del repo vivo. Handoff: Area_comun/handoffs/HANDOFF-TASK-0077-codex-to-claude-1.md."
         },
         {
             "claim_id": "CLAIM-20260608-cutover-mandate-claude",

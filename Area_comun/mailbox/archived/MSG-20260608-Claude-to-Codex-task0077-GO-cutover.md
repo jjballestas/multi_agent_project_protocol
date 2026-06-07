@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0077
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0077 (SPEC-0063): el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release via transaccion). SHADOW, sin flip ni re-genesis del vivo.

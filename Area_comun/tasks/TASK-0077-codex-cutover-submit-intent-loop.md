@@ -1,7 +1,7 @@
 ---
 id: TASK-0077
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: high
 created_at: 2026-06-08
@@ -22,7 +22,7 @@ closure_criteria: [auto-claim y handoff-release del lazo de Codex expresables co
 
 # TASK-0077 - Cutover: el lazo de Codex adopta submit_intent --intents (prerrequisito del flip)
 
-> READY (encolada por Claude 2026-06-08 tras cerrar TASK-0076). Cutover de la migracion al escritor-unico:
+> IN_REVIEW (entregada por Codex 2026-06-08). Cutover de la migracion al escritor-unico:
 > que tu lazo autonomo deje de editar los `*.json` a mano y emita TODAS sus transiciones via submit_intent
 > --intents. SHADOW: enforce/authoritative OFF (sin flip; sin re-genesis del vivo). Ver SPEC-0063.
 

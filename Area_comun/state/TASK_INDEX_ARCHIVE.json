@@ -2462,6 +2462,44 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 35/35 (nuevo release_verify_cases 6/6) + smoke real: generate_manifest del arbol vivo -> verify_release ok=true exit 0; neutralidad/validador verdes (drift WARNING de sombra esperado). generate_manifest produce manifest protocol_release_manifest.v1 con version_axes+commit+timestamp provistos+sbom+sbom_hash+manifest_hash; verify_release recomputa SBOM y compara sbom_hash (ok/exit0; si difiere diff changed/missing/extra y exit!=0). Sin firma/provenance/secretos. Flip por arquitecto. CIERRA F7.2.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0074",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.3 (SPEC-0060): provenance/atestacion SLSA-lite - generate_provenance.py (+ .ps1) subject{name,digest.sha256=manifest.sbom_hash}+builder.id+invocation{commit,process}+metadata{timestamp,schema} provistos; verificacion de consistencia (subject.digest==sbom_hash); determinista, neutral, sin secretos/firma; golden provenance_cases.",
+            "spec_id": "Area_comun/specs/SPEC-0060-faseF7.3-provenance.md",
+            "file": "Area_comun/tasks/TASK-0074-codex-faseF7.3-provenance.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0073"
+            ],
+            "relates_to": [
+                "TASK-0071"
+            ],
+            "relevant_files": [
+                "scripts/generate_provenance.py",
+                "scripts/verify_release.py",
+                "examples/provenance_cases/",
+                ".github/workflows/validate.yml",
+                "scripts/generate_provenance.ps1"
+            ],
+            "deliverables": [
+                "scripts/generate_provenance.py",
+                "examples/provenance_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0074-codex-to-claude-1.md",
+                "scripts/generate_provenance.ps1"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden provenance_cases 5/5 + release_verify 6/6 + sbom 4/4; smoke real del arbol vivo: generate_manifest -> generate_provenance -> verify ok=true exit0 (subject multi_agent_project_protocol@1.0.0, digest==sbom_hash), mismatch => ok=false exit1; determinismo byte-identico; neutralidad/encoding/validador verdes (drift WARNING de sombra esperado). generate_provenance.py (+ .ps1) emite atestacion SLSA-lite canonica subject.digest.sha256=manifest.sbom_hash + builder/commit/process/timestamp PROVISTOS (sin reloj/red) + metadata.schema provenance.v1; --verify compara y exit!=0 en mismatch. Sin firma/claves (queda F7.4). Flip por arquitecto. CIERRA F7.3.",
+            "updated_at": "2026-06-07"
         }
     ]
 }
