@@ -1,7 +1,7 @@
 ---
 id: TASK-0078
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-08
@@ -11,7 +11,7 @@ linked_decisions: [DECISION-0024, DECISION-0021, DECISION-0022]
 relates_to: [TASK-0038]
 ---
 
-> READY (promovida por Claude 2026-06-08). DECISION-0024 APROBADA. Primera rebanada SA.1 del decompose (ver
+> IN_REVIEW (entregada por Codex 2026-06-08). DECISION-0024 APROBADA. Primera rebanada SA.1 del decompose (ver
 > SPEC-0064). SHADOW: sin agentes reales, enforce intacto. GO en mailbox.
 
 # TASK-0078 (SA.1) - Sobre de supervision en SHADOW (sin agentes reales)

@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,49 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0075",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Fase 7.4 (SPEC-0061): firma de releases (autenticidad) - scripts/sign_release.py (+ .ps1) firma el digest del release (manifest.sbom_hash) con --key (material local, NUNCA commiteado) + --backend configurable; backend FIXTURE HMAC-SHA256 determinista (clave de prueba no-secreta) para golden/CI; verify_release extendido --signature --pubkey valida la firma sobre sbom_hash (OK/FALLA exit, falla cerrada; sin material = integridad F7.2); SIN claves reales en el repo; golden examples/release_sign_cases (solo fixture) + CI. Off-by-default, vendor-neutral, sin secretos (DECISION-0023). Cuarta de 5 rebanadas de Fase 7.",
-            "spec_id": "Area_comun/specs/SPEC-0061-faseF7.4-firma.md",
-            "file": "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
-            "linked_decisions": [
-                "DECISION-0023",
-                "DECISION-0021",
-                "DECISION-0001",
-                "DECISION-0019"
-            ],
-            "depends_on": [
-                "TASK-0073",
-                "TASK-0074"
-            ],
-            "relates_to": [
-                "TASK-0071"
-            ],
-            "relevant_files": [
-                "scripts/sign_release.py",
-                "scripts/verify_release.py",
-                "examples/release_sign_cases/",
-                ".github/workflows/validate.yml",
-                "scripts/sign_release.ps1",
-                "scripts/verify_release.ps1"
-            ],
-            "deliverables": [
-                "scripts/sign_release.py",
-                "examples/release_sign_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md",
-                "scripts/sign_release.ps1",
-                "scripts/verify_release.ps1"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden release_sign 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4; smoke real del arbol vivo: sign (fixture-hmac-sha256) -> verify firma VALIDA exit0; firma alterada exit1; clave equivocada exit1; sin firma -> integridad F7.2 exit0; neutralidad/encoding/validador verdes. SECRET BOUNDARY VERIFICADO: no hay material de clave privada en el repo (fixture inline en el runner). sign_release.py implementa SOLO el backend fixture (rechaza otros); el backend real (cosign/minisign/gpg via comando externo) queda documentado en F7.5 conforme DECISION-0023. verify_release extendido valida la firma sobre sbom_hash, falla cerrada. Off-by-default, vendor-neutral, sin secretos. Entrega commiteada por Codex (a7bee1a). Flip por arquitecto. CIERRA F7.4.",
-            "updated_at": "2026-06-08"
         },
         {
             "id": "TASK-0076",
@@ -204,7 +161,7 @@
         {
             "id": "TASK-0078",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -225,16 +182,18 @@
                 "protocol.config.json",
                 "protocol.config.template.json",
                 "examples/supervised_autonomy_cases/",
-                ".github/workflows/validate.yml"
+                ".github/workflows/validate.yml",
+                "runtime/supervised_autonomy.py"
             ],
             "deliverables": [
                 "runtime/orchestrator.py",
                 "examples/supervised_autonomy_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0078-codex-to-claude-1.md"
+                "Area_comun/handoffs/HANDOFF-TASK-0078-codex-to-claude-1.md",
+                "runtime/supervised_autonomy.py"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "READY (encolada por Claude 2026-06-08): SA.1 de autonomia supervisada (DECISION-0024 aprobada). Sobre de supervision en SHADOW (registro+max_turns+runreport) ejercitado con RecordedInvoker, sin tocar el invoker real. GO en mailbox. Caps por defecto a confirmar (sugerencia max_turns<=5).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-08): implementado SA.1 en shadow. Agregado registro runtime.supervised_autonomy off-by-default en config/template, flag --allow-supervised-autonomy, supervised_autonomy_activation_error, caps.max_turns para RecordedInvoker, runreport markdown y golden supervised_autonomy_cases. Invoker real permanece con cerrojo --once; no se encendio autonomia.",
             "updated_at": "2026-06-08"
         }
     ]

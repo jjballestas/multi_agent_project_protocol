@@ -2500,6 +2500,49 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden provenance_cases 5/5 + release_verify 6/6 + sbom 4/4; smoke real del arbol vivo: generate_manifest -> generate_provenance -> verify ok=true exit0 (subject multi_agent_project_protocol@1.0.0, digest==sbom_hash), mismatch => ok=false exit1; determinismo byte-identico; neutralidad/encoding/validador verdes (drift WARNING de sombra esperado). generate_provenance.py (+ .ps1) emite atestacion SLSA-lite canonica subject.digest.sha256=manifest.sbom_hash + builder/commit/process/timestamp PROVISTOS (sin reloj/red) + metadata.schema provenance.v1; --verify compara y exit!=0 en mismatch. Sin firma/claves (queda F7.4). Flip por arquitecto. CIERRA F7.3.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0075",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.4 (SPEC-0061): firma de releases (autenticidad) - scripts/sign_release.py (+ .ps1) firma el digest del release (manifest.sbom_hash) con --key (material local, NUNCA commiteado) + --backend configurable; backend FIXTURE HMAC-SHA256 determinista (clave de prueba no-secreta) para golden/CI; verify_release extendido --signature --pubkey valida la firma sobre sbom_hash (OK/FALLA exit, falla cerrada; sin material = integridad F7.2); SIN claves reales en el repo; golden examples/release_sign_cases (solo fixture) + CI. Off-by-default, vendor-neutral, sin secretos (DECISION-0023). Cuarta de 5 rebanadas de Fase 7.",
+            "spec_id": "Area_comun/specs/SPEC-0061-faseF7.4-firma.md",
+            "file": "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
+            "linked_decisions": [
+                "DECISION-0023",
+                "DECISION-0021",
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0073",
+                "TASK-0074"
+            ],
+            "relates_to": [
+                "TASK-0071"
+            ],
+            "relevant_files": [
+                "scripts/sign_release.py",
+                "scripts/verify_release.py",
+                "examples/release_sign_cases/",
+                ".github/workflows/validate.yml",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1"
+            ],
+            "deliverables": [
+                "scripts/sign_release.py",
+                "examples/release_sign_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden release_sign 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4; smoke real del arbol vivo: sign (fixture-hmac-sha256) -> verify firma VALIDA exit0; firma alterada exit1; clave equivocada exit1; sin firma -> integridad F7.2 exit0; neutralidad/encoding/validador verdes. SECRET BOUNDARY VERIFICADO: no hay material de clave privada en el repo (fixture inline en el runner). sign_release.py implementa SOLO el backend fixture (rechaza otros); el backend real (cosign/minisign/gpg via comando externo) queda documentado en F7.5 conforme DECISION-0023. verify_release extendido valida la firma sobre sbom_hash, falla cerrada. Off-by-default, vendor-neutral, sin secretos. Entrega commiteada por Codex (a7bee1a). Flip por arquitecto. CIERRA F7.4.",
+            "updated_at": "2026-06-08"
         }
     ]
 }

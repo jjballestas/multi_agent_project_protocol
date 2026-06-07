@@ -31,6 +31,11 @@ try:
     from .apply import apply_gate_and_commit
     from .gate import run_gate
     from .runlog import RunLog, deterministic_run_id, turn_entry
+    from .supervised_autonomy import (
+        supervised_autonomy_activation_error,
+        supervised_autonomy_payload,
+        write_run_report,
+    )
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
@@ -52,6 +57,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from budget import Budget, budget_settings, responsible
     from metrics import summarize
     from runlog import turn_entry
+    from supervised_autonomy import supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -305,6 +311,7 @@ def run_loop(
     llm_command: str | None = None,
     llm_preset: str | None = None,
     allow_real_invoker: bool = False,
+    allow_supervised_autonomy: bool = False,
     once: bool = False,
     max_iter: int | None = None,
     run_id: str | None = None,
@@ -315,6 +322,12 @@ def run_loop(
     if not runtime_enabled(root):
         return {"ok": False, "reason": "runtime.enabled is false; --run is disabled"}
     config = read_json(root / "protocol.config.json")
+    supervision: dict[str, Any] | None = None
+    if allow_supervised_autonomy:
+        activation_error = supervised_autonomy_activation_error(config)
+        if activation_error:
+            return {"ok": False, "reason": f"supervised autonomy requires registered activation: {activation_error}"}
+        supervision = supervised_autonomy_payload(config)
 
     try:
         reports = select_reports(adapter_name=adapter_name, replay_path=replay_path, llm_invoker=llm_invoker)
@@ -325,7 +338,8 @@ def run_loop(
     if adapter_name == "llm" and llm_invoker == "subprocess" and not once:
         return {"ok": False, "reason": "subprocess llm invoker requires --once"}
 
-    limit = 1 if once else (max_iter if max_iter is not None else len(reports))
+    requested_limit = 1 if once else (max_iter if max_iter is not None else len(reports))
+    limit = min(requested_limit, int((supervision or {}).get("caps", {}).get("max_turns", requested_limit)))
     if limit < 1:
         return {"ok": False, "reason": "--max-iter must be >= 1"}
 
@@ -334,16 +348,11 @@ def run_loop(
     turns: list[dict[str, Any]] = []
     baseline_dirty = set(dirty_worktree_paths(root))
 
-    queue_event = budget.queue_event(queue_length=len(reports), last_responsible=responsible())
-    if queue_event:
-        entry = budget_stop_entry(turn=1, trace=["budget"], budget_event=queue_event, duration_ms=clock_fixed)
-        runlog.append(entry)
-        turns.append(entry)
-        maintenance = auto_prune_if_due(root)
+    def finalize(maintenance: dict[str, Any]) -> dict[str, Any]:
         summary = summarize(runlog.path)
         summary_path = runlog.path.with_suffix(".summary.json")
         write_json(summary_path, summary)
-        return {
+        result = {
             "ok": True,
             "run_id": runlog.run_id,
             "run_log": str(runlog.path),
@@ -352,6 +361,20 @@ def run_loop(
             "maintenance": maintenance,
             "turns": turns,
         }
+        if supervision is not None:
+            run_report_path = runlog.path.with_suffix(".runreport.md")
+            write_run_report(run_report_path, run_id=runlog.run_id, turns=turns, metrics=summary, supervision=supervision)
+            result["run_report"] = str(run_report_path)
+            result["supervised_autonomy"] = supervision
+        return result
+
+    queue_event = budget.queue_event(queue_length=len(reports), last_responsible=responsible())
+    if queue_event:
+        entry = budget_stop_entry(turn=1, trace=["budget"], budget_event=queue_event, duration_ms=clock_fixed)
+        runlog.append(entry)
+        turns.append(entry)
+        maintenance = auto_prune_if_due(root)
+        return finalize(maintenance)
 
     for index, report_path in enumerate(reports[:limit], start=1):
         trace: list[str] = ["gate_pre"]
@@ -517,6 +540,7 @@ def run_loop(
         runlog.append(entry)
         turns.append(entry)
         budget.consume(cost_tokens=cost_tokens)
+        baseline_dirty = set(dirty_worktree_paths(root))
         if not result.get("green"):
             break
         if budget.exceeded(last_responsible=last_responsible) and index < len(reports[:limit]):
@@ -535,19 +559,30 @@ def run_loop(
             turns.append(budget_entry)
             break
 
+    if supervision is not None and len(reports) > limit:
+        actual_adapter_turns = sum(1 for entry in turns if "adapter" in (entry.get("trace") or []))
+        last = turns[-1] if turns else {}
+        stopped_already = (
+            bool(last.get("reason"))
+            or bool(last.get("errors"))
+            or last.get("human_required") is True
+            or last.get("gate_green") is False
+            or str(last.get("outcome") or "") in {"rejected", "budget_exhausted", "human_required", "decision_required"}
+        )
+        if actual_adapter_turns >= limit and not stopped_already:
+            entry = turn_entry(
+                turn=limit + 1,
+                trace=["supervised_autonomy"],
+                outcome="max_turns_reached",
+                reason=f"caps.max_turns={limit}",
+                duration_ms=clock_fixed,
+            )
+            entry["supervised_autonomy"] = supervision
+            runlog.append(entry)
+            turns.append(entry)
+
     maintenance = auto_prune_if_due(root)
-    summary = summarize(runlog.path)
-    summary_path = runlog.path.with_suffix(".summary.json")
-    write_json(summary_path, summary)
-    return {
-        "ok": True,
-        "run_id": runlog.run_id,
-        "run_log": str(runlog.path),
-        "summary": str(summary_path),
-        "metrics": summary,
-        "maintenance": maintenance,
-        "turns": turns,
-    }
+    return finalize(maintenance)
 
 
 def main() -> int:
@@ -563,6 +598,7 @@ def main() -> int:
     parser.add_argument("--llm-command", help="Command for the explicit subprocess LLM invoker")
     parser.add_argument("--llm-preset", help="Named runtime.llm_cli_presets entry for the subprocess LLM invoker")
     parser.add_argument("--allow-real-invoker", action="store_true", help="Required to run the subprocess LLM invoker")
+    parser.add_argument("--allow-supervised-autonomy", action="store_true", help="Enable registered supervised-autonomy caps")
     parser.add_argument("--run-id", help="Deterministic run-log id; defaults to a replay-input hash")
     parser.add_argument("--budget-tokens", type=int, default=None, help="Maximum declared turn cost in tokens")
     parser.add_argument("--clock-fixed", type=int, default=0, help="Deterministic duration_ms value for tests")
@@ -593,6 +629,7 @@ def main() -> int:
         llm_command=args.llm_command,
         llm_preset=args.llm_preset,
         allow_real_invoker=args.allow_real_invoker,
+        allow_supervised_autonomy=args.allow_supervised_autonomy,
         once=args.once,
         max_iter=args.max_iter,
         run_id=args.run_id,

@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0078
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0078 (SPEC-0064): autonomia supervisada SA.1 - sobre de supervision en SHADOW (registro + max_turns + runreport) con RecordedInvoker, sin tocar el invoker real.

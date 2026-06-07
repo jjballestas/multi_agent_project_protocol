@@ -99,12 +99,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0075",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 7.4 (SPEC-0061) DONE - ACEPTADA por Claude (ratif. adversarial): sign_release.py (+ .ps1) firma el digest del release (backend fixture-hmac-sha256 determinista; backend real via comando externo queda para F7.5) + verify_release extendido valida la firma sobre sbom_hash (falla cerrada; sin firma = integridad F7.2). Sin secretos en repo (fixture inline), off-by-default, vendor-neutral. golden release_sign 8/8; smoke real verify ok/alterada/clave-mala. Cuarta de 5 rebanadas de Fase 7."
-        },
-        {
             "id": "TASK-0076",
             "owner": "Codex",
             "status": "done",
@@ -119,8 +113,8 @@
         {
             "id": "TASK-0078",
             "owner": "Codex",
-            "status": "ready",
-            "title": "Autonomia supervisada SA.1 (SPEC-0064): sobre de supervision en SHADOW (registro+max_turns+runreport) ejercitado con RecordedInvoker, sin tocar el invoker real. Primera de SA.1..SA.5 (DECISION-0024 aprobada). Off-by-default."
+            "status": "in_review",
+            "title": "TASK-0078 EN REVIEW: SA.1 shadow listo (supervised_autonomy registro/flag/error, max_turns, runreport, golden); invoker real intacto."
         }
     ],
     "open_questions": [],
@@ -133,18 +127,17 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 97 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0075 RECLAMADA por Codex (2026-06-07): implementando F7.4 firma de releases (sign_release.py/.ps1 + verify_release opt-in --signature/--pubkey + golden release_sign_cases + CI). GO F7.4 y accepted TASK-0074 consumidos; sin claves reales en repo, solo fixture HMAC no-secreta; modo sombra mantiene drift WARNING esperado.",
-        "TASK-0075 ENTREGADA a in_review por Codex (2026-06-07): F7.4 firma de releases lista. sign_release.py/.ps1 firma sbom_hash o --digest con backend fixture-hmac-sha256 y material local --key; verify_release.py/.ps1 opt-in --signature + --pubkey/--key valida autenticidad sobre manifest.sbom_hash y falla cerrada; sin firma conserva integridad F7.2. Golden release_sign_cases 8/8 + release_verify/provenance/SBOM verdes; sin claves reales commiteadas. Pendiente ratificacion de Claude; luego F7.5 docs.",
-        "TASK-0075 DONE (F7.4 firma, ratif. adversarial de Claude 2026-06-07; entrega commiteada por Codex a7bee1a): sign_release.py (+ .ps1) backend fixture-hmac-sha256 + verify_release extendido valida firma sobre sbom_hash (falla cerrada). SECRET BOUNDARY verificado (sin claves privadas en repo). Backend real documentado en F7.5. >>> ORDEN DEL OPERADOR: adoptar submit_intent en AMBOS lazos -> luego re-genesis + enforce+authoritative. ORDEN ELEGIDO (forzado por dependencias; submit_intent hard-failea con drift y hoy hay drift de sombra): (1) F7.4 cerrada; (2) PROMOVIDA OFICIALMENTE TASK-0076 (claim+GO) = submit_intent transaccional multi-intent + re-genesis (SPEC-0062, keystone, shadow sin flip) -> resuelve la anomalia que levanto Codex (artefactos sin claim, mi slip claim-before-artifact DECISION-0007); (3) re-genesis (drift 0); (4) cutover: ambos lazos usan submit_intent + mandato en protocolo; (5) flip enforce+authoritative SOLO tras verificar que el lazo autonomo de Codex ya usa submit_intent + ensayo de rollback. F7.5 docs pendiente post-migracion. GO por mailbox; promover de a una.",
+        "[HISTORICO PODADO] 100 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0076 RECLAMADA por Codex (2026-06-08): implementando submit_intent --intents transaccional atomico + runtime/regenesis.py (drift->0 no destructivo) + golden intent_tx_cases + CI; sin flip enforce/authoritative.",
         "TASK-0076 ENTREGADA a in_review por Codex (2026-06-08): submit_intent --intents transaccional multi-intent (validacion contra estado intermedio, eventos intent.applied + materializacion final unica + rollback total) + runtime/regenesis.py/.ps1 (genesis fresco por snapshot_ref desde hot state, drift->0, no destructivo, idempotente) + golden intent_tx_cases 6/6 + suites runtime verdes. Sin flip enforce/authoritative; pendiente ratificacion de Claude y luego cutover/adopcion en sombra.",
         "TASK-0076 DONE (submit_intent transaccional + re-genesis, ratif. adversarial de Claude 2026-06-08): corri yo golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; regenesis.py NO destructivo (drift_after 0, history preserved). >>> MIGRACION ESCRITOR-UNICO: operador autorizo (2026-06-08) re-genesis vivo + flip enforce+authoritative + DECISION-0024. DECISION-0024 (autonomia supervisada) PROMOVIDA al ledger. ENCOLADA TASK-0077 = CUTOVER (SPEC-0063): el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release via transaccion) + helper + golden cutover_loop_cases (fixture drift-0); SHADOW sin flip. EN PARALELO (Claude): mandato en AGENTS.md/TASK_PROTOCOL + adopcion de mis cierres. LUEGO (activacion, arquitecto + GO ya dado): re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback, SOLO tras verificar que AMBOS lazos usan submit_intent. Autonomia supervisada: SA.1 draft listo en personal, encolar tras el cutover (de a una). F7.5 docs pendiente post-migracion. GO por mailbox.",
         "TASK-0077 RECLAMADA por Codex (2026-06-08): implementando helper runtime/ledger_ops.py/.ps1 + golden cutover_loop_cases para auto-claim y handoff-release via submit_intent --intents sobre fixture drift0. Sin enforce/authoritative ni regenesis vivo.",
         "TASK-0077 ENTREGADA a in_review por Codex (2026-06-08): runtime/ledger_ops.py/.ps1 construye envelopes submit_intent --intents para auto-claim (claim acquire + task_status ready->in_progress) y handoff-release (task_status in_progress->in_review + task_upsert opcional + claim release), con --submit delegado a submit_intents. Golden cutover_loop_cases 4/4 sobre fixture drift0: materializa ledger esperado, drift 0, idempotente, paridad CLI/PowerShell; CI actualizado. No se activo enforce/authoritative ni se re-genesiso el repo vivo. Pendiente ratificacion de Claude y activacion coordinada posterior.",
-        "TASK-0077 DONE (cutover lado Codex, ratif. adversarial de Claude 2026-06-08): runtime/ledger_ops.py (auto-claim + handoff-release via submit_intent --intents, orden de envelopes correcto: claim release al final) + golden cutover_loop 4/4. Corri yo los gates. >>> AMBOS LADOS DEL CUTOVER EN CODIGO: mandato (Claude, 1e65b91) + ledger_ops (Codex). El sistema esta CODE-READY para la ACTIVACION del escritor-unico = re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback (operador YA autorizo 2026-06-08). La activacion la ejecuta el arquitecto de forma SUPERVISADA (es el switch coordinado de mayor riesgo; tras el flip la siguiente transicion de cada lazo DEBE ir por submit_intent o hard-failea -> rollback listo). ENCOLADA SA.1 = TASK-0078 (SPEC-0064, autonomia supervisada, shadow) para mantener a Codex productivo lejos del ledger durante la activacion. F7.5 docs pendiente. GO por mailbox; promover de a una."
+        "TASK-0077 DONE (cutover lado Codex, ratif. adversarial de Claude 2026-06-08): runtime/ledger_ops.py (auto-claim + handoff-release via submit_intent --intents, orden de envelopes correcto: claim release al final) + golden cutover_loop 4/4. Corri yo los gates. >>> AMBOS LADOS DEL CUTOVER EN CODIGO: mandato (Claude, 1e65b91) + ledger_ops (Codex). El sistema esta CODE-READY para la ACTIVACION del escritor-unico = re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback (operador YA autorizo 2026-06-08). La activacion la ejecuta el arquitecto de forma SUPERVISADA (es el switch coordinado de mayor riesgo; tras el flip la siguiente transicion de cada lazo DEBE ir por submit_intent o hard-failea -> rollback listo). ENCOLADA SA.1 = TASK-0078 (SPEC-0064, autonomia supervisada, shadow) para mantener a Codex productivo lejos del ledger durante la activacion. F7.5 docs pendiente. GO por mailbox; promover de a una.",
+        "TASK-0078 RECLAMADA por Codex (2026-06-08): implementando SA.1 autonomia supervisada en shadow (runtime.supervised_autonomy off-by-default + flag + activation_error, caps.max_turns con RecordedInvoker, runreport, golden supervised_autonomy_cases + CI). Sin tocar invoker real ni encender autonomia.",
+        "TASK-0078 ENTREGADA a in_review por Codex (2026-06-08): SA.1 autonomia supervisada shadow lista. runtime.supervised_autonomy queda off-by-default en config/template; --allow-supervised-autonomy valida registro/caps; RecordedInvoker respeta caps.max_turns y emite runreport markdown; golden supervised_autonomy_cases 4/4; invoker real sigue bloqueado por --once, sin activar autonomia. Pendiente ratificacion de Claude; siguiente SA.2 kill-switch+reloj."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }

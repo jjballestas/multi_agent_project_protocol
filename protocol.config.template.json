@@ -50,6 +50,15 @@
       "codex": {
         "command": "codex"
       }
+    },
+    "supervised_autonomy": {
+      "enabled": false,
+      "activation_decision": "",
+      "approved_by": "",
+      "approved_at": "",
+      "caps": {
+        "max_turns": 5
+      }
     }
   },
   "event_auth": {
