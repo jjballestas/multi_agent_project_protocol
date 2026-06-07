@@ -2424,6 +2424,44 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 34/34 (nuevo intent_flow_cases 9/9) + validador/encoding/neutralidad verdes (drift WARNING de sombra esperado). runtime/submit_intent.py (+ .ps1 delegado): write-path para task_status/task_upsert/claim/decision con validacion de actor/capacidad/claim/scope antes de aplicar, idempotencia, timestamp provisto (sin reloj), append intent.applied + materialize_to_disk + rollback ante fallo, rechazo si hay drift contra genesis previo. Golden demuestran enforce-ON en fixture: secuencia por intents pasa con drift 0 y una edicion manual posterior hard-failea. NO encendio enforce/authoritative en el repo vivo. Flip por arquitecto. KEYSTONE de 3.b.2 LISTO: habilita el escritor-unico (falta re-genesis + GO del operador + adopcion de submit_intent por ambos agentes).",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0073",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.2 (SPEC-0059): manifiesto de release + verify - generate_manifest.py (+ .ps1) envuelve el SBOM (F7.1) con version_axes + commit/timestamp provistos + sbom_hash (sha256 canonico); verify_release.py (+ .ps1) recomputa el SBOM y confirma integridad por hash (OK exit 0 / lista diffs y exit!=0). Determinista, neutral, sin secretos/claves. Sin firma (F7.4). golden release_verify_cases.",
+            "spec_id": "Area_comun/specs/SPEC-0059-faseF7.2-manifiesto-verify.md",
+            "file": "Area_comun/tasks/TASK-0073-codex-faseF7.2-manifiesto-verify.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0071"
+            ],
+            "relates_to": [
+                "TASK-0064"
+            ],
+            "relevant_files": [
+                "scripts/generate_manifest.py",
+                "scripts/verify_release.py",
+                "scripts/generate_sbom.py",
+                "examples/release_verify_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/generate_manifest.py",
+                "scripts/verify_release.py",
+                "examples/release_verify_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0073-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 35/35 (nuevo release_verify_cases 6/6) + smoke real: generate_manifest del arbol vivo -> verify_release ok=true exit 0; neutralidad/validador verdes (drift WARNING de sombra esperado). generate_manifest produce manifest protocol_release_manifest.v1 con version_axes+commit+timestamp provistos+sbom+sbom_hash+manifest_hash; verify_release recomputa SBOM y compara sbom_hash (ok/exit0; si difiere diff changed/missing/extra y exit!=0). Sin firma/provenance/secretos. Flip por arquitecto. CIERRA F7.2.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

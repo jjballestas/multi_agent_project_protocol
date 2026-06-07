@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0076
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0076 (SPEC-0062): submit_intent transaccional multi-intent + re-genesis - keystone de la adopcion de submit_intent por AMBOS lazos. SHADOW, sin flip de enforce.

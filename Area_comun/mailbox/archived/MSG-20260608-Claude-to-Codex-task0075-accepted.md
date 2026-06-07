@@ -4,7 +4,7 @@ type: ACK
 task_id: TASK-0075
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0075 (F7.4 firma) ACEPTADA y cerrada como done (ratificacion adversarial, secret boundary verificado).
 ---

@@ -1,7 +1,7 @@
 ---
 id: TASK-0076
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: high
 created_at: 2026-06-07
@@ -22,7 +22,7 @@ closure_criteria: [submit_intent --intents transaccional atomico con rollback to
 
 # TASK-0076 - submit_intent transaccional multi-intent + re-genesis (keystone de la adopcion)
 
-> READY (encolada por Claude 2026-06-07 tras cerrar F7.4). KEYSTONE de la adopcion de submit_intent por AMBOS
+> IN_REVIEW (entregada por Codex 2026-06-08 tras cerrar F7.4). KEYSTONE de la adopcion de submit_intent por AMBOS
 > lazos (orden del operador): que Claude y el lazo autonomo de Codex dejen de editar los `*.json` a mano.
 > SHADOW: enforce/authoritative siguen OFF en esta tarea (sin flip). Ver SPEC-0062.
 
@@ -57,3 +57,16 @@ cutover (mandato en AGENTS.md/TASK_PROTOCOL) y ambos lazos adoptan submit_intent
 operador, re-genesis del repo vivo + flip enforce+authoritative + ensayo de rollback. **El flip NO ocurre
 hasta que el lazo autonomo de Codex use submit_intent de verdad** (si no, una edicion manual posterior
 hard-failea y rompe el lazo).
+
+## Entrega Codex 2026-06-08
+
+- `runtime/submit_intent.py` mantiene `--intent` mono-intent y agrega `--intents`/`--intents-json` con envelope
+  `{actor_id,timestamp,commit,intents}`.
+- `submit_intents` valida cada intent contra el estado resultante de los previos, emite eventos
+  `intent.applied` con metadata de transaccion, materializa una sola vez al final y hace rollback total de
+  archivos + `runtime/state` ante fallo.
+- `runtime/regenesis.py` (+ `runtime/regenesis.ps1`) escribe genesis fresco por `snapshot_ref` desde hot state,
+  idempotente, no destructivo, y deja `protocol_state_drift.has_drift=False`.
+- Agregado `examples/intent_tx_cases/run_intent_tx_cases.py` y paso CI.
+- Validacion: intent_tx_cases 6/6, intent_flow 9/9, runtime replay/materialize/enforce/genesis-ref verdes,
+  py_compile, encoding/neutralidad/validador py/ps verdes. Sin flip `enforce`/`authoritative`.

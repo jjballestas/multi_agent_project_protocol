@@ -1,0 +1,367 @@
+#!/usr/bin/env python3
+"""Golden cases for transactional submit_intent and protocol re-genesis."""
+
+from __future__ import annotations
+
+import json
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from runtime.eventlog import read_jsonl_torn_safe  # noqa: E402
+from runtime.protocol_replay import protocol_state_drift, write_genesis_reference  # noqa: E402
+from runtime.regenesis import regenesis  # noqa: E402
+from runtime.submit_intent import IntentError, submit_intent, submit_intents  # noqa: E402
+
+
+TASK_ID = "TASK-9400"
+NEXT_TASK_ID = "TASK-9401"
+CLAIM_ID = f"CLAIM-{TASK_ID}-codex"
+TIMESTAMP = "2026-06-08T00:00:00Z"
+COMMIT = "txfixture123"
+
+
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=4, ensure_ascii=True, sort_keys=True) + "\n", encoding="ascii", newline="\n")
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def write(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="ascii", newline="\n")
+
+
+def protocol_config() -> dict[str, Any]:
+    return {
+        "schema_version": "1.0",
+        "adoption_tier": "runtime",
+        "runtime": {"enabled": True, "entrypoint": "runtime/orchestrator.py"},
+        "agent_registry": {
+            "enabled": True,
+            "agents": [
+                {
+                    "id": "Codex",
+                    "enabled": True,
+                    "capabilities": ["implementer", "orchestrator", "reviewer", "test_engineer"],
+                }
+            ],
+        },
+        "event_auth": {"enabled": False},
+        "event_state": {"enabled": True, "materialize": True, "enforce": False, "authoritative": False},
+        "domain_neutrality": {"enabled": True, "denylist": [], "scan_globs": [], "exempt_globs": []},
+        "state_invariants": [{"path": "status", "equals": "active"}],
+    }
+
+
+def task(task_id: str = TASK_ID, status: str = "in_progress") -> dict[str, Any]:
+    return {
+        "id": task_id,
+        "owner": "Codex",
+        "status": status,
+        "type": "implementation",
+        "priority": "normal",
+        "phase": "P2",
+        "title": f"Intent tx fixture {task_id}",
+        "file": f"Area_comun/tasks/{task_id}.md",
+        "depends_on": [],
+        "relates_to": [],
+        "relevant_files": [],
+        "deliverables": [],
+        "blocked_by_questions": [],
+        "updated_at": "2026-06-08",
+    }
+
+
+def claim(status: str = "active") -> dict[str, Any]:
+    return {
+        "claim_id": CLAIM_ID,
+        "task_id": TASK_ID,
+        "owner": "Codex",
+        "status": status,
+        "scope": [
+            f"Area_comun/tasks/{TASK_ID}.md",
+            f"Area_comun/state/TASK_INDEX.json#{TASK_ID}",
+            f"Area_comun/state/TASK_INDEX.json#{NEXT_TASK_ID}",
+            f"Area_comun/state/PROJECT_STATE.json#active_tasks/{TASK_ID}",
+            f"Area_comun/state/PROJECT_STATE.json#active_tasks/{NEXT_TASK_ID}",
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+        ],
+        "started_at": "2026-06-08",
+        "updated_at": "2026-06-08",
+        "expires_at": "2026-06-09",
+        "notes": "intent tx fixture",
+    }
+
+
+def hot_docs(status: str = "in_progress", claim_status: str = "active") -> dict[str, Any]:
+    task_payload = task(TASK_ID, status)
+    return {
+        "task_index": {"schema_version": "1.0", "tasks": [task_payload]},
+        "project_state": {
+            "status": "active",
+            "decisions": ["DECISION-0001"],
+            "active_tasks": [{"id": TASK_ID, "owner": "Codex", "status": status, "title": task_payload["title"]}],
+        },
+        "claims": {"schema_version": "1.0", "claims": [claim(claim_status)]},
+    }
+
+
+def write_hot_state(root: Path, docs: dict[str, Any], *, task_status: str = "in_progress") -> None:
+    write_json(root / "Area_comun/state/TASK_INDEX.json", docs["task_index"])
+    write_json(root / "Area_comun/state/PROJECT_STATE.json", docs["project_state"])
+    write_json(root / "Area_comun/state/CLAIMS.json", docs["claims"])
+    write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
+    write(root / "Area_comun/tasks" / f"{TASK_ID}.md", f"---\nid: {TASK_ID}\nstatus: {task_status}\n---\n\n# Fixture\n")
+    write(root / "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md", "# Human report\n")
+    for folder in ("open", "answered", "archived"):
+        write(root / "Area_comun/mailbox" / folder / ".gitkeep", "\n")
+
+
+def build_fixture(root: Path, *, status: str = "in_progress", genesis: bool = True) -> None:
+    write_json(root / "protocol.config.json", protocol_config())
+    write_hot_state(root, hot_docs(status), task_status=status)
+    write(root / "runtime/turn_schema.json", (ROOT / "runtime/turn_schema.json").read_text(encoding="utf-8-sig"))
+    if genesis:
+        write_genesis_reference(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
+
+
+def state_bytes(root: Path) -> dict[str, bytes]:
+    return {
+        path.relative_to(root).as_posix(): path.read_bytes()
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+    }
+
+
+def tx_intents() -> list[dict[str, Any]]:
+    next_task = task(NEXT_TASK_ID, "ready")
+    return [
+        {
+            "task_status": {
+                "task_id": TASK_ID,
+                "from": "in_progress",
+                "to": "done",
+                "idempotency_key": "tx-fixture:task-done",
+            }
+        },
+        {"task_upsert": {"task": next_task, "idempotency_key": "tx-fixture:task-upsert"}},
+        {"decision": {"decision_id": "DECISION-0099", "idempotency_key": "tx-fixture:decision"}},
+        {"claim": {"op": "release", "claim_id": CLAIM_ID, "idempotency_key": "tx-fixture:claim-release"}},
+    ]
+
+
+def acquire_status_release_intents() -> list[dict[str, Any]]:
+    new_claim = claim("active")
+    return [
+        {"claim": {"op": "acquire", "claim": new_claim, "idempotency_key": "tx-fixture:claim-acquire"}},
+        {
+            "task_status": {
+                "task_id": TASK_ID,
+                "from": "ready",
+                "to": "in_progress",
+                "idempotency_key": "tx-fixture:claim-then-status",
+            }
+        },
+        {"claim": {"op": "release", "claim_id": CLAIM_ID, "idempotency_key": "tx-fixture:claim-release-after-acquire"}},
+    ]
+
+
+def event_count(root: Path) -> int:
+    return len(read_jsonl_torn_safe(root / "runtime/state/events.jsonl"))
+
+
+def run(command: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, text=True, capture_output=True, check=False)
+
+
+def case_transaction_closes_and_enqueues() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-close-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        result = submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        assert len(result["events"]) == 4
+        task_index = read_json(root / "Area_comun/state/TASK_INDEX.json")
+        project_state = read_json(root / "Area_comun/state/PROJECT_STATE.json")
+        claims = read_json(root / "Area_comun/state/CLAIMS.json")["claims"]
+        tasks = {item["id"]: item for item in task_index["tasks"]}
+        active = {item["id"]: item for item in project_state["active_tasks"]}
+        assert tasks[TASK_ID]["status"] == "done", tasks
+        assert active[TASK_ID]["status"] == "done", active
+        assert tasks[NEXT_TASK_ID]["status"] == "ready", tasks
+        assert active[NEXT_TASK_ID]["status"] == "ready", active
+        assert "DECISION-0099" in project_state["decisions"]
+        assert claims[0]["status"] == "released", claims
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
+def case_validation_uses_intermediate_state() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-intermediate-") as temp:
+        root = Path(temp)
+        build_fixture(root, status="ready")
+        docs = hot_docs("ready", "released")
+        write_hot_state(root, docs, task_status="ready")
+        regenesis(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
+        result = submit_intents(root, "Codex", acquire_status_release_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        assert len(result["events"]) == 3
+        task_index = read_json(root / "Area_comun/state/TASK_INDEX.json")
+        claims = read_json(root / "Area_comun/state/CLAIMS.json")["claims"]
+        assert task_index["tasks"][0]["status"] == "in_progress"
+        assert claims[0]["status"] == "released", claims
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
+def case_transaction_rolls_back_on_materialization_failure() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-rollback-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        before = state_bytes(root)
+        try:
+            submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT, fail_after_writes=1)
+        except IntentError:
+            pass
+        else:
+            raise AssertionError("transaction did not fail on simulated materialization failure")
+        assert state_bytes(root) == before
+
+
+def case_regenesis_clears_drift_and_allows_submit_intent() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-regenesis-") as temp:
+        root = Path(temp)
+        build_fixture(root, status="ready")
+        docs = hot_docs("in_progress", "active")
+        write_hot_state(root, docs, task_status="in_progress")
+        assert protocol_state_drift(root)["has_drift"] is True
+        before_count = event_count(root)
+        result = regenesis(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
+        assert result["drift_after"]["has_drift"] is False
+        assert event_count(root) == before_count + 1
+        second = regenesis(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
+        assert second["deduped"] is True
+        assert event_count(root) == before_count + 1
+        submit_intent(
+            root,
+            "Codex",
+            {
+                "task_status": {
+                    "task_id": TASK_ID,
+                    "from": "in_progress",
+                    "to": "done",
+                    "idempotency_key": "tx-fixture:post-regenesis-status",
+                }
+            },
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
+def case_transaction_idempotent_retry_does_not_duplicate() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-idempotent-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        first = submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        count_after_first = event_count(root)
+        second = submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        assert second["deduped"] is True
+        assert event_count(root) == count_after_first
+        assert [event["seq"] for event in first["events"]] == [event["seq"] for event in second["events"]]
+
+
+def case_powershell_wrappers_parity_if_available() -> None:
+    shell = shutil.which("pwsh") or shutil.which("powershell")
+    if not shell:
+        return
+    with tempfile.TemporaryDirectory(prefix="intent-tx-ps-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        envelope = {
+            "actor_id": "Codex",
+            "timestamp": TIMESTAMP,
+            "commit": COMMIT,
+            "intents": tx_intents(),
+        }
+        envelope_path = root / "tx.json"
+        write_json(envelope_path, envelope)
+        result = run(
+            [
+                shell,
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(ROOT / "runtime/submit_intent.ps1"),
+                "-Root",
+                str(root),
+                "-Intents",
+                str(envelope_path),
+            ]
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        payload = json.loads(result.stdout)
+        assert payload["transaction"]["intent_count"] == 4, result.stdout
+        assert protocol_state_drift(root)["has_drift"] is False
+
+    with tempfile.TemporaryDirectory(prefix="intent-tx-regenesis-ps-") as temp:
+        root = Path(temp)
+        build_fixture(root, status="ready")
+        write_hot_state(root, hot_docs("in_progress", "active"), task_status="in_progress")
+        result = run(
+            [
+                shell,
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(ROOT / "runtime/regenesis.ps1"),
+                "-Root",
+                str(root),
+                "-ActorId",
+                "Codex",
+                "-Timestamp",
+                TIMESTAMP,
+                "-Commit",
+                COMMIT,
+            ]
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        payload = json.loads(result.stdout)
+        assert payload["drift_after"]["has_drift"] is False
+
+
+def main() -> int:
+    cases = [
+        case_transaction_closes_and_enqueues,
+        case_validation_uses_intermediate_state,
+        case_transaction_rolls_back_on_materialization_failure,
+        case_regenesis_clears_drift_and_allows_submit_intent,
+        case_transaction_idempotent_retry_does_not_duplicate,
+        case_powershell_wrappers_parity_if_available,
+    ]
+    failures = []
+    for case in cases:
+        try:
+            case()
+        except Exception as exc:  # noqa: BLE001 - compact golden failure reporting
+            failures.append({"case": case.__name__, "error": str(exc)})
+    if failures:
+        print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
+        return 1
+    print(f"OK: {len(cases)} intent transaction golden cases passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

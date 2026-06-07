@@ -17,6 +17,7 @@ try:
     from .eventlog import EventWriter, STATE_DIR, canonical_hash
     from .protocol_replay import (
         PROTOCOL_STATE_PATHS,
+        apply_intent_event,
         current_protocol_snapshot,
         has_protocol_genesis,
         materialize_to_disk,
@@ -28,6 +29,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from eventlog import EventWriter, STATE_DIR, canonical_hash
     from protocol_replay import (
         PROTOCOL_STATE_PATHS,
+        apply_intent_event,
         current_protocol_snapshot,
         has_protocol_genesis,
         materialize_to_disk,
@@ -278,6 +280,83 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
     return payload
 
 
+def transaction_idempotency_key(actor_id: str, normalized_intents: list[dict[str, Any]], explicit_key: str | None = None) -> str:
+    if explicit_key:
+        return str(explicit_key)
+    payload = [{"key": idempotency_key(actor_id, normalized), "intent": normalized} for normalized in normalized_intents]
+    return f"intent-tx:{actor_id}:{canonical_hash(payload)}"
+
+
+def transaction_event_keys(actor_id: str, normalized_intents: list[dict[str, Any]]) -> list[str]:
+    return [idempotency_key(actor_id, normalized) for normalized in normalized_intents]
+
+
+def existing_events_for_keys(writer: EventWriter, keys: list[str]) -> dict[str, dict[str, Any]]:
+    result: dict[str, dict[str, Any]] = {}
+    state_keys = writer.state().get("idempotency_keys", {})
+    events = writer.events()
+    for key in keys:
+        seq = state_keys.get(key)
+        if not seq:
+            continue
+        for event in events:
+            if int(event.get("seq") or 0) == int(seq) and event.get("type") == "intent.applied":
+                found = dict(event)
+                found["deduped"] = True
+                result[key] = found
+                break
+    return result
+
+
+def protocol_state_view(state: dict[str, Any]) -> dict[str, Any]:
+    view = deepcopy(state)
+    if "project_state" not in view and isinstance(view.get("project"), dict):
+        view["project_state"] = deepcopy(view["project"])
+    return view
+
+
+def advance_state_with_intent(
+    state: dict[str, Any],
+    normalized: dict[str, Any],
+    *,
+    actor_id: str,
+    timestamp: str,
+    commit: str | None,
+) -> dict[str, Any]:
+    updated = protocol_state_view(state)
+    payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
+    event = {
+        "type": "intent.applied",
+        "aggregate_id": aggregate_id_for(normalized),
+        "actor": actor_id,
+        "payload": payload,
+        "applied": True,
+        "seq": 0,
+    }
+    apply_intent_event(updated, event, payload)
+    if isinstance(updated.get("project_state"), dict):
+        updated["project"] = updated["project_state"]
+    return updated
+
+
+def validate_transaction(
+    root: Path,
+    actor_id: str,
+    normalized_intents: list[dict[str, Any]],
+    *,
+    timestamp: str,
+    commit: str | None,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    state = protocol_state_view(load_state(root))
+    states_before: list[dict[str, Any]] = []
+    for normalized in normalized_intents:
+        state_before = deepcopy(state)
+        validate_intent(root, actor_id, normalized, state_override=state_before)
+        states_before.append(state_before)
+        state = advance_state_with_intent(state_before, normalized, actor_id=actor_id, timestamp=timestamp, commit=commit)
+    return state, states_before
+
+
 def actor_enabled(registry: dict[str, Any], actor_id: str) -> bool:
     return any(
         isinstance(agent, dict) and agent.get("id") == actor_id and agent.get("enabled") is True
@@ -373,11 +452,11 @@ def validate_scope_authority(state: dict[str, Any], actor_id: str, normalized: d
             raise IntentValidationError(f"write outside active claim scope: {required_entry}")
 
 
-def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any]) -> dict[str, Any]:
+def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any], state_override: dict[str, Any] | None = None) -> dict[str, Any]:
     registry = load_agent_registry(root)
     if not actor_enabled(registry, actor_id):
         raise IntentValidationError(f"actor not registered/enabled: {actor_id}")
-    state = load_state(root)
+    state = state_override if state_override is not None else load_state(root)
     kind = normalized["kind"]
 
     if kind == "task_status":
@@ -600,6 +679,141 @@ def submit_intent(
         raise IntentApplyError(str(exc)) from exc
 
 
+def submit_intents(
+    root: Path,
+    actor_id: str,
+    intents: list[dict[str, Any]],
+    *,
+    timestamp: str,
+    commit: str | None = None,
+    transaction_key: str | None = None,
+    fail_after_writes: int | None = None,
+) -> dict[str, Any]:
+    root = root.resolve()
+    actor_id = str(actor_id or "").strip()
+    timestamp = str(timestamp or "").strip()
+    if not actor_id:
+        raise IntentValidationError("actor_id is required")
+    if not timestamp:
+        raise IntentValidationError("timestamp is required")
+    if not intents:
+        raise IntentValidationError("transaction requires at least one intent")
+
+    normalized_intents = [normalize_intent(intent) for intent in intents]
+    keys = transaction_event_keys(actor_id, normalized_intents)
+    if len(set(keys)) != len(keys):
+        raise IntentValidationError("transaction contains duplicate intent idempotency keys")
+    tx_key = transaction_idempotency_key(actor_id, normalized_intents, transaction_key)
+    ensure_actor_enabled(root, actor_id)
+    writer = EventWriter(root)
+    existing = existing_events_for_keys(writer, keys)
+    if existing:
+        if len(existing) != len(keys):
+            raise IntentApplyError("partial transaction idempotency state exists; refusing to continue")
+        file_backup = snapshot_files(root, protocol_file_paths())
+        runtime_backup = snapshot_runtime_state(root)
+        try:
+            materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+            runtime_snapshot = writer.write_snapshot()
+            drift_after = protocol_state_drift(root)
+            if drift_after.get("has_drift"):
+                raise IntentApplyError(f"protocol state drift remains after submit_intents retry: {drift_after.get('entries')}")
+            cleanup_runtime_state_backup(runtime_backup)
+            return {
+                "applied": True,
+                "deduped": True,
+                "transaction": {
+                    "idempotency_key": tx_key,
+                    "intent_count": len(normalized_intents),
+                    "event_keys": keys,
+                },
+                "events": [existing[key] for key in keys],
+                "genesis_event": None,
+                "intents": normalized_intents,
+                "materialization": materialization,
+                "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
+                "task_files_updated": [],
+                "drift": drift_after,
+            }
+        except Exception as exc:
+            restore_files(root, file_backup)
+            restore_runtime_state(root, runtime_backup)
+            if isinstance(exc, IntentError):
+                raise
+            raise IntentApplyError(str(exc)) from exc
+
+    _, states_before = validate_transaction(root, actor_id, normalized_intents, timestamp=timestamp, commit=commit)
+    task_file_paths: list[str] = []
+    for normalized, state_before in zip(normalized_intents, states_before):
+        task_file_paths.extend(task_files_for_backup(normalized, state_before))
+    file_backup = snapshot_files(root, [*protocol_file_paths(), *task_file_paths])
+    runtime_backup = snapshot_runtime_state(root)
+    try:
+        events_before = writer.events()
+        ensure_clean_replay_base(root, events_before)
+        genesis_result = None
+        if not has_protocol_genesis(events_before):
+            genesis_result = write_genesis_reference(
+                root,
+                actor_id=actor_id,
+                timestamp=timestamp,
+                commit=commit,
+                idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
+            )
+            writer = EventWriter(root)
+
+        events: list[dict[str, Any]] = []
+        for index, normalized in enumerate(normalized_intents, start=1):
+            payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
+            payload["transaction"] = {
+                "idempotency_key": tx_key,
+                "index": index,
+                "count": len(normalized_intents),
+            }
+            events.append(
+                writer.append_event(
+                    event_type="intent.applied",
+                    aggregate_id=aggregate_id_for(normalized),
+                    actor_id=actor_id,
+                    idempotency_key=keys[index - 1],
+                    payload=payload,
+                    ts=timestamp,
+                )
+            )
+
+        snapshot = current_protocol_snapshot(root)
+        materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
+        task_files_updated: list[str] = []
+        for normalized, state_before in zip(normalized_intents, states_before):
+            task_files_updated.extend(apply_task_file_side_effects(root, normalized, state_before))
+        runtime_snapshot = writer.write_snapshot()
+        drift_after = protocol_state_drift(root)
+        if drift_after.get("has_drift"):
+            raise IntentApplyError(f"protocol state drift remains after submit_intents: {drift_after.get('entries')}")
+        cleanup_runtime_state_backup(runtime_backup)
+        return {
+            "applied": True,
+            "events": events,
+            "genesis_event": (genesis_result or {}).get("event"),
+            "transaction": {
+                "idempotency_key": tx_key,
+                "intent_count": len(normalized_intents),
+                "event_keys": keys,
+            },
+            "intents": normalized_intents,
+            "materialization": materialization,
+            "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
+            "task_files_updated": list(dict.fromkeys(task_files_updated)),
+            "drift": drift_after,
+        }
+    except Exception as exc:
+        restore_files(root, file_backup)
+        restore_runtime_state(root, runtime_backup)
+        if isinstance(exc, IntentError):
+            raise
+        raise IntentApplyError(str(exc)) from exc
+
+
 def load_intent_from_args(args: argparse.Namespace) -> dict[str, Any]:
     if args.intent_json:
         payload = json.loads(args.intent_json)
@@ -615,25 +829,56 @@ def load_intent_from_args(args: argparse.Namespace) -> dict[str, Any]:
     return payload
 
 
+def load_transaction_from_args(args: argparse.Namespace) -> dict[str, Any]:
+    if args.intents_json:
+        payload = json.loads(args.intents_json)
+    elif args.intents:
+        if args.intents == "-":
+            payload = json.loads(sys.stdin.read())
+        else:
+            payload = read_json(Path(args.intents))
+    else:
+        raise IntentValidationError("--intents or --intents-json is required")
+    if not isinstance(payload, dict):
+        raise IntentValidationError("transaction JSON must be an object")
+    intents = payload.get("intents")
+    if not isinstance(intents, list) or not all(isinstance(item, dict) for item in intents):
+        raise IntentValidationError("transaction JSON requires intents: [object, ...]")
+    return payload
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Submit one protocol-state intent through the runtime event log.")
+    parser = argparse.ArgumentParser(description="Submit protocol-state intents through the runtime event log.")
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
-    parser.add_argument("--actor-id", required=True)
-    parser.add_argument("--timestamp", required=True)
+    parser.add_argument("--actor-id")
+    parser.add_argument("--timestamp")
     parser.add_argument("--commit")
     parser.add_argument("--intent", help="Path to an intent JSON file, or '-' for stdin.")
     parser.add_argument("--intent-json", help="Inline intent JSON.")
+    parser.add_argument("--intents", help="Path to a transaction JSON file, or '-' for stdin.")
+    parser.add_argument("--intents-json", help="Inline transaction JSON.")
     parser.add_argument("--output", default="-", help="Output JSON path, or '-' for stdout.")
     args = parser.parse_args()
 
     try:
-        result = submit_intent(
-            Path(args.root),
-            args.actor_id,
-            load_intent_from_args(args),
-            timestamp=args.timestamp,
-            commit=args.commit,
-        )
+        if args.intents or args.intents_json:
+            envelope = load_transaction_from_args(args)
+            result = submit_intents(
+                Path(args.root),
+                args.actor_id or str(envelope.get("actor_id") or ""),
+                [item for item in envelope["intents"] if isinstance(item, dict)],
+                timestamp=args.timestamp or str(envelope.get("timestamp") or ""),
+                commit=args.commit if args.commit is not None else (str(envelope.get("commit") or "") or None),
+                transaction_key=str(envelope.get("idempotency_key") or envelope.get("transaction_idempotency_key") or "") or None,
+            )
+        else:
+            result = submit_intent(
+                Path(args.root),
+                str(args.actor_id or ""),
+                load_intent_from_args(args),
+                timestamp=str(args.timestamp or ""),
+                commit=args.commit,
+            )
     except IntentError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1

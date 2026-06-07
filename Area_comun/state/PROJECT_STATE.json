@@ -98,12 +98,6 @@
     ],
     "active_tasks": [
         {
-            "id": "TASK-0073",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fase 7.2 (SPEC-0059) DONE - ACEPTADA por Claude: generate_manifest.py (sbom_hash+manifest_hash+version_axes+commit/timestamp provistos) + verify_release.py (recomputa SBOM, compara hash, diff changed/missing/extra, exit code) + .ps1. Determinista, sin secretos/claves. golden release_verify_cases 6/6."
-        },
-        {
             "id": "TASK-0074",
             "owner": "Codex",
             "status": "done",
@@ -118,8 +112,8 @@
         {
             "id": "TASK-0076",
             "owner": "Codex",
-            "status": "ready",
-            "title": "submit_intent transaccional multi-intent + re-genesis (SPEC-0062): KEYSTONE de la adopcion de submit_intent por AMBOS lazos (orden del operador) - transaccion atomica multi-intent (rollback total) + runtime/regenesis.py (genesis fresco -> drift 0, no destructivo) + golden intent_tx. SHADOW: enforce/authoritative OFF (sin flip; la activacion es rebanada posterior con GO)."
+            "status": "in_review",
+            "title": "TASK-0076 ENTREGADA a in_review: submit_intent transaccional multi-intent + runtime/regenesis.py; golden intent_tx_cases 6/6; sin flip enforce/authoritative."
         }
     ],
     "open_questions": [],
@@ -132,18 +126,17 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 91 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0073 RECLAMADA por Codex (2026-06-07): implementando F7.2 manifiesto de release + verify (generate_manifest.py/verify_release.py + wrappers + golden release_verify_cases + CI). GO F7.2 y accepted TASK-0072 consumidos; modo sombra mantiene drift como WARNING esperado.",
-        "TASK-0073 ENTREGADA a in_review por Codex (2026-06-07): generate_manifest.py/.ps1 produce manifiesto canonico con SBOM embebido + sbom_hash + manifest_hash + version_axes + commit/timestamp provistos; verify_release.py/.ps1 recomputa SBOM y valida integridad por hash, reporta changed/missing/extra y exit!=0 ante drift. Golden release_verify_cases 6/6 + SBOM 4/4 + gates verdes. Pendiente ratificacion de Claude; luego F7.3 provenance.",
-        "TASK-0073 DONE (F7.2 manifiesto+verify, ratif. adversarial de Claude 2026-06-07): generate_manifest.py (+ .ps1) manifest protocol_release_manifest.v1 con sbom_hash+manifest_hash+version_axes+commit/timestamp provistos; verify_release.py (+ .ps1) recomputa SBOM y compara hash (ok exit0 / diff changed-missing-extra exit!=0). Golden 35/35 + smoke real (verify del arbol vivo ok=true). Sin secretos/firma. ENCOLADA F7.3 = TASK-0074 (ready, Codex, SPEC-0060): provenance SLSA-lite (subject=sbom_hash + builder/invocation/metadata provistos) + verificacion de consistencia. SIGUIENTE: F7.4 firma (TASK-0075 listo en personal; DECISION-0023 ACCEPTED por el operador, falta promoverla al ledger) -> F7.5 docs. Writer-vivo en SOMBRA. GO por mailbox; promover de a una.",
+        "[HISTORICO PODADO] 94 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0074 RECLAMADA por Codex (2026-06-07): implementando F7.3 provenance/atestacion SLSA-lite (generate_provenance.py + wrapper + verificacion de consistencia + golden provenance_cases + CI). GO F7.3 y accepted TASK-0073 consumidos; modo sombra mantiene drift como WARNING esperado.",
         "TASK-0074 ENTREGADA a in_review por Codex (2026-06-07): generate_provenance.py/.ps1 produce atestacion SLSA-lite canonica enlazada a manifest.sbom_hash (subject.name multi_agent_project_protocol@<protocol_version>, subject.digest.sha256=sbom_hash, builder/commit/process/timestamp provistos, metadata.schema provenance.v1) + --verify de consistencia subject.digest==sbom_hash con exit!=0 en mismatch. Golden provenance_cases 5/5 + release_verify 6/6 + SBOM 4/4 + gates verdes. Pendiente ratificacion de Claude; luego F7.4 firma (fuera de F7.3).",
         "TASK-0074 DONE (F7.3 provenance, ratif. adversarial de Claude 2026-06-07): generate_provenance.py (+ .ps1) atestacion SLSA-lite canonica subject.digest.sha256=manifest.sbom_hash + builder/commit/process/timestamp provistos (sin reloj/red) + metadata.schema provenance.v1; --verify compara (ok exit0 / mismatch exit1). Corri yo: golden provenance 5/5 + release_verify 6/6 + sbom 4/4; smoke real del arbol vivo verify ok=true; determinismo byte-identico; neutralidad/encoding/validador verdes (drift de sombra esperado). Sin firma/claves (queda F7.4). ENCOLADA F7.4 = TASK-0075 (ready, Codex, SPEC-0061): firma del digest del release, backend configurable + fixture HMAC determinista para golden, verify_release valida firma (falla cerrada), SIN secretos en repo, off-by-default, vendor-neutral. DECISION-0023 (firma) PROMOVIDA al ledger. SIGUIENTE: F7.5 docs (cierra Fase 7). Writer-vivo en SOMBRA. GO por mailbox; promover de a una.",
         "TASK-0075 RECLAMADA por Codex (2026-06-07): implementando F7.4 firma de releases (sign_release.py/.ps1 + verify_release opt-in --signature/--pubkey + golden release_sign_cases + CI). GO F7.4 y accepted TASK-0074 consumidos; sin claves reales en repo, solo fixture HMAC no-secreta; modo sombra mantiene drift WARNING esperado.",
         "TASK-0075 ENTREGADA a in_review por Codex (2026-06-07): F7.4 firma de releases lista. sign_release.py/.ps1 firma sbom_hash o --digest con backend fixture-hmac-sha256 y material local --key; verify_release.py/.ps1 opt-in --signature + --pubkey/--key valida autenticidad sobre manifest.sbom_hash y falla cerrada; sin firma conserva integridad F7.2. Golden release_sign_cases 8/8 + release_verify/provenance/SBOM verdes; sin claves reales commiteadas. Pendiente ratificacion de Claude; luego F7.5 docs.",
-        "TASK-0075 DONE (F7.4 firma, ratif. adversarial de Claude 2026-06-07; entrega commiteada por Codex a7bee1a): sign_release.py (+ .ps1) backend fixture-hmac-sha256 + verify_release extendido valida firma sobre sbom_hash (falla cerrada). SECRET BOUNDARY verificado (sin claves privadas en repo). Backend real documentado en F7.5. >>> ORDEN DEL OPERADOR: adoptar submit_intent en AMBOS lazos -> luego re-genesis + enforce+authoritative. ORDEN ELEGIDO (forzado por dependencias; submit_intent hard-failea con drift y hoy hay drift de sombra): (1) F7.4 cerrada; (2) PROMOVIDA OFICIALMENTE TASK-0076 (claim+GO) = submit_intent transaccional multi-intent + re-genesis (SPEC-0062, keystone, shadow sin flip) -> resuelve la anomalia que levanto Codex (artefactos sin claim, mi slip claim-before-artifact DECISION-0007); (3) re-genesis (drift 0); (4) cutover: ambos lazos usan submit_intent + mandato en protocolo; (5) flip enforce+authoritative SOLO tras verificar que el lazo autonomo de Codex ya usa submit_intent + ensayo de rollback. F7.5 docs pendiente post-migracion. GO por mailbox; promover de a una."
+        "TASK-0075 DONE (F7.4 firma, ratif. adversarial de Claude 2026-06-07; entrega commiteada por Codex a7bee1a): sign_release.py (+ .ps1) backend fixture-hmac-sha256 + verify_release extendido valida firma sobre sbom_hash (falla cerrada). SECRET BOUNDARY verificado (sin claves privadas en repo). Backend real documentado en F7.5. >>> ORDEN DEL OPERADOR: adoptar submit_intent en AMBOS lazos -> luego re-genesis + enforce+authoritative. ORDEN ELEGIDO (forzado por dependencias; submit_intent hard-failea con drift y hoy hay drift de sombra): (1) F7.4 cerrada; (2) PROMOVIDA OFICIALMENTE TASK-0076 (claim+GO) = submit_intent transaccional multi-intent + re-genesis (SPEC-0062, keystone, shadow sin flip) -> resuelve la anomalia que levanto Codex (artefactos sin claim, mi slip claim-before-artifact DECISION-0007); (3) re-genesis (drift 0); (4) cutover: ambos lazos usan submit_intent + mandato en protocolo; (5) flip enforce+authoritative SOLO tras verificar que el lazo autonomo de Codex ya usa submit_intent + ensayo de rollback. F7.5 docs pendiente post-migracion. GO por mailbox; promover de a una.",
+        "TASK-0076 RECLAMADA por Codex (2026-06-08): implementando submit_intent --intents transaccional atomico + runtime/regenesis.py (drift->0 no destructivo) + golden intent_tx_cases + CI; sin flip enforce/authoritative.",
+        "TASK-0076 ENTREGADA a in_review por Codex (2026-06-08): submit_intent --intents transaccional multi-intent (validacion contra estado intermedio, eventos intent.applied + materializacion final unica + rollback total) + runtime/regenesis.py/.ps1 (genesis fresco por snapshot_ref desde hot state, drift->0, no destructivo, idempotente) + golden intent_tx_cases 6/6 + suites runtime verdes. Sin flip enforce/authoritative; pendiente ratificacion de Claude y luego cutover/adopcion en sombra."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Claude"
+    "updated_by": "Codex"
 }
