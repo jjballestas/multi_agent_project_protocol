@@ -721,7 +721,11 @@ print(json.dumps(protocol_state_drift(Path(os.environ["EVENTLOG_INSTANCE_ROOT"])
         $drift = ($output -join "`n") | ConvertFrom-Json
         if ($drift.has_drift) {
             $paths = @($drift.entries | ForEach-Object { $_.path }) -join ", "
-            Warn "Runtime protocol state drift detected (warning-only B.1): $paths"
+            if ($drift.enforced) {
+                Fail "Runtime protocol state drift detected under event_state.enforce (hard-fail B.3): $paths. Reconcile by re-materializing from replay(log) or writing a fresh genesis."
+            } else {
+                Warn "Runtime protocol state drift detected (warning-only B.1): $paths"
+            }
         }
     } catch {
         Fail "Runtime protocol state drift check failed: $($_.Exception.Message)"

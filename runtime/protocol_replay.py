@@ -34,6 +34,10 @@ class ProtocolMaterializationError(RuntimeError):
     pass
 
 
+class ProtocolStateDriftError(RuntimeError):
+    pass
+
+
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
@@ -48,9 +52,19 @@ def event_state_materialize_enabled(config: dict[str, Any] | None) -> bool:
     return isinstance(event_state, dict) and event_state.get("materialize") is True
 
 
+def event_state_enforce_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("enforce") is True
+
+
 def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
     config = config or {}
     return event_state_enabled(config) and event_state_materialize_enabled(config) and config.get("adoption_tier") == "runtime"
+
+
+def protocol_state_enforcement_enabled(config: dict[str, Any] | None) -> bool:
+    config = config or {}
+    return event_state_enabled(config) and event_state_enforce_enabled(config) and config.get("adoption_tier") == "runtime"
 
 
 def protocol_materialization_disabled_reason(config: dict[str, Any] | None) -> str:
@@ -249,6 +263,9 @@ def apply_decision_event(state: dict[str, Any], payload: dict[str, Any]) -> None
 
 
 def apply_intent_event(state: dict[str, Any], event: dict[str, Any], payload: dict[str, Any]) -> None:
+    task = payload.get("task")
+    if isinstance(task, dict):
+        upsert_task(state, task)
     transition = payload.get("transition")
     if isinstance(transition, str):
         apply_task_transition_event(state, event, {"task_id": task_id_from_event(event, payload), "transition": transition})
@@ -390,6 +407,25 @@ def materialize_from_event_log_if_enabled(root: Path) -> dict[str, Any]:
     return materialize_to_disk(root, snapshot)
 
 
+def drift_paths(drift: dict[str, Any]) -> str:
+    return ", ".join(str(entry.get("path") or "<unknown>") for entry in drift.get("entries") or [])
+
+
+def enforce_protocol_state_drift(root: Path) -> dict[str, Any]:
+    root = root.resolve()
+    config = read_protocol_config(root)
+    if not protocol_state_enforcement_enabled(config):
+        return {"enforced": False, "reason": "event_state.enforce is false or tier is not runtime"}
+    drift = protocol_state_drift(root)
+    if drift.get("has_drift"):
+        paths = drift_paths(drift)
+        raise ProtocolStateDriftError(
+            "runtime protocol state drift detected under event_state.enforce: "
+            f"{paths}. Reconcile by re-materializing from replay(log) or writing a fresh genesis."
+        )
+    return {"enforced": True, "has_drift": False, "up_to_seq": drift.get("up_to_seq"), "paths": []}
+
+
 def drift_entries(hot: dict[str, Any], materialized: dict[str, Any]) -> list[dict[str, str]]:
     entries: list[dict[str, str]] = []
     for path in sorted(set(hot) | set(materialized)):
@@ -402,13 +438,15 @@ def drift_entries(hot: dict[str, Any], materialized: dict[str, Any]) -> list[dic
 
 def protocol_state_drift(root: Path) -> dict[str, Any]:
     root = root.resolve()
+    config = read_protocol_config(root)
     hot_snapshot = build_genesis_snapshot(root)
     replay_snapshot = current_protocol_snapshot(root)
     hot = materialize_protocol_state(hot_snapshot)
     materialized = materialize_protocol_state(replay_snapshot)
     entries = drift_entries(hot, materialized)
     return {
-        "enabled": event_state_enabled(read_protocol_config(root)),
+        "enabled": event_state_enabled(config),
+        "enforced": protocol_state_enforcement_enabled(config),
         "has_drift": bool(entries),
         "up_to_seq": replay_snapshot["up_to_seq"],
         "entries": entries,

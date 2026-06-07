@@ -61,8 +61,8 @@ genesis **incrusta** todo el estado, infla el event log, el contexto del agente 
 - Implementacion = Fase B.4 (SPEC-0055): genesis-por-referencia + carga/verificacion del snapshot
   content-addressed + flag de modo autoritativo + prohibicion (via hard-gate B.3) + docs de migracion
   (coordination/manual -> runtime-escritor) y de reversa.
-- `AGENTS.md`/`AGENTS.template.md` y `TASK_PROTOCOL.md`: nota de que, en instancias con runtime-escritor
-  activo, las transiciones pasan por el runtime y la edicion manual del estado esta prohibida.
+- `AGENTS.md`/`AGENTS.template.md` y `TASK_PROTOCOL.md`: nota (entregada con B.4) de que, en instancias con
+  runtime-escritor activo, las transiciones pasan por el runtime y la edicion manual del estado esta prohibida.
 - La regla anti-colision (DECISION-0020) se vuelve mayormente innecesaria en ese modo (no hay dos escritores
   manuales); se mantiene para coordination-tier y para la fase de transicion.
 
@@ -79,7 +79,7 @@ La direccion tecnica esta ratificada y B.4 se implementa **apagada**. Encender e
 (`event_state.enforce`/`authoritative` = true) es un paso OPERATIVO aparte que requiere **aprobacion explicita
 del operador POSTERIOR al cierre de B.3**, condicionada a:
 
-- [ ] B.3 (TASK-0068) `done` y ratificada.
+- [ ] B.3 (TASK-0068) `done` y ratificada. (CUMPLIDO 2026-06-07.)
 - [ ] Validacion de replay/materializacion sobre el estado vivo (round-trip genesis-ref -> replay ->
       materialize == estado canonico; integridad por hash).
 - [ ] **Plan de rollback** documentado y probado (apagar flags devuelve a edicion manual; el snapshot
@@ -87,8 +87,10 @@ del operador POSTERIOR al cierre de B.3**, condicionada a:
 
 Hasta esa aprobacion, B.4 queda como capacidad disponible pero **inactiva** en la instancia viva.
 
-## Pendiente antes de promover/aterrizar
+## Consecuencias
 
-- [ ] Cerrar B.3 (TASK-0068) primero (B.4 se monta sobre el hard-gate de B.3).
-- [x] Aprobacion del operador como direccion tecnica + SemVer (MINOR-con-migracion) -- 2026-06-07.
-- [ ] Promover a Area_comun/decisions/ + enlazar en PROJECT_STATE#decisions (en ventana segura, al cerrar B.3).
+- Cierra el "writer-vivo" del estado de protocolo de forma reversible y verificable, sin inflar el cold-start
+  (genesis por referencia).
+- Mantiene dos modos: coordination-tier / manual (sin cambios) y runtime-escritor (opt-in, gateado).
+- La prohibicion DURA permanente (retirar el flujo manual sin reversa) NO entra aqui; seria un paso futuro
+  explicito con su propia decision.

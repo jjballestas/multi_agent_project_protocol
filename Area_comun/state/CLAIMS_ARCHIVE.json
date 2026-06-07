@@ -4095,6 +4095,70 @@
                        "updated_at":  "2026-06-07",
                        "expires_at":  "2026-06-08",
                        "notes":  "Liberado y archivado tras mantenimiento post TASK-0067. prune_state.py --apply ejecutado para resolver released_ratio tras handoff-release."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260607-higiene-mailbox-prune-shared-fyi-codex",
+                       "task_id":  "TASK-0065",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md",
+                                     "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md"
+                                 ],
+                       "started_at":  "2026-06-07",
+                       "updated_at":  "2026-06-07",
+                       "expires_at":  "2026-06-08",
+                       "notes":  "Liberado tras archivar FYI de Claude ya leido sobre regularizacion de TASK-0065/v1.0."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260607-TASK-0066-codex",
+                       "task_id":  "TASK-0066",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/state/TASK_INDEX.json#TASK-0066",
+                                     "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0066",
+                                     "Area_comun/state/PROJECT_STATE.json#next_actions",
+                                     "Area_comun/state/PROJECT_STATE.json#updated_at",
+                                     "Area_comun/state/PROJECT_STATE.json#updated_by",
+                                     "Area_comun/tasks/TASK-0066-codex-faseB1-replay-estado-protocolo.md",
+                                     "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0066-GO-faseB1.md",
+                                     "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0066-GO-faseB1.md",
+                                     "Area_comun/mailbox/open/",
+                                     "Area_comun/handoffs/",
+                                     "runtime/",
+                                     "scripts/validate_collaboration_state.py",
+                                     "scripts/validate_collaboration_state.ps1",
+                                     "protocol.config.json",
+                                     "protocol.config.template.json",
+                                     "examples/",
+                                     ".github/workflows/validate.yml"
+                                 ],
+                       "started_at":  "2026-06-07",
+                       "updated_at":  "2026-06-07",
+                       "expires_at":  "2026-06-08",
+                       "notes":  "Liberado con handoff-release atomico: TASK-0066 entregada a in_review. Implementado B.1 read-only replay/materializacion del estado de protocolo + drift WARNING gateado; event_state.enabled=false live/template; golden runtime_protocol_replay_cases y CI; no toca apply/orchestrator write-path ni edicion manual. Handoff: Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md."
+                   },
+                   {
+                       "claim_id":  "CLAIM-20260607-prune-post-task0068-codex",
+                       "task_id":  "TASK-0068",
+                       "owner":  "Codex",
+                       "status":  "released",
+                       "scope":  [
+                                     "Area_comun/state/CLAIMS.json",
+                                     "Area_comun/state/CLAIMS_ARCHIVE.json",
+                                     "Area_comun/state/TASK_INDEX.json",
+                                     "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                                     "Area_comun/state/PROJECT_STATE.json",
+                                     "Area_comun/mailbox/open/",
+                                     "Area_comun/mailbox/archived/"
+                                 ],
+                       "started_at":  "2026-06-07",
+                       "updated_at":  "2026-06-07",
+                       "expires_at":  "2026-06-08",
+                       "notes":  "Liberado y archivado tras mantenimiento post TASK-0068. prune_state.py --apply ejecutado para resolver released_ratio tras handoff-release."
                    }
                ]
 }

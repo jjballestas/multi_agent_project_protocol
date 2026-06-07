@@ -19,7 +19,7 @@ if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
 from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_state_has_content
-from runtime.protocol_replay import event_state_enabled, protocol_state_drift
+from runtime.protocol_replay import drift_paths, event_state_enabled, protocol_state_drift, protocol_state_enforcement_enabled
 
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
@@ -826,8 +826,15 @@ def validate_protocol_state_drift(
         return
     drift = protocol_state_drift(root)
     if drift.get("has_drift"):
-        paths = ", ".join(entry.get("path", "<unknown>") for entry in drift.get("entries") or [])
-        validation.warn(f"Runtime protocol state drift detected (warning-only B.1): {paths}")
+        paths = drift_paths(drift)
+        if protocol_state_enforcement_enabled(config):
+            validation.fail(
+                "Runtime protocol state drift detected under event_state.enforce "
+                f"(hard-fail B.3): {paths}. Reconcile by re-materializing from replay(log) "
+                "or writing a fresh genesis."
+            )
+        else:
+            validation.warn(f"Runtime protocol state drift detected (warning-only B.1): {paths}")
 
 
 def validate(root: Path, config_path: Path | None = None) -> Validation:

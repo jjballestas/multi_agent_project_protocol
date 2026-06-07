@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0068
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0068 (Fase B.3, ready): drift del estado de protocolo como hard-fail bajo event_state.enforce (validador + gate en apply), triple-gated, off=byte-equivalente.

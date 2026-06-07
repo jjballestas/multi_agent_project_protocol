@@ -22,7 +22,12 @@ try:
         runtime_state_has_content,
     )
     from .gate import run_gate
-    from .protocol_replay import ProtocolMaterializationError, materialize_from_event_log_if_enabled
+    from .protocol_replay import (
+        ProtocolMaterializationError,
+        ProtocolStateDriftError,
+        enforce_protocol_state_drift,
+        materialize_from_event_log_if_enabled,
+    )
     from .review_qa import (
         checks_with_signatures,
         has_consecutive_failure,
@@ -44,7 +49,12 @@ except ImportError:  # pragma: no cover - direct script execution
         runtime_state_has_content,
     )
     from gate import run_gate
-    from protocol_replay import ProtocolMaterializationError, materialize_from_event_log_if_enabled
+    from protocol_replay import (
+        ProtocolMaterializationError,
+        ProtocolStateDriftError,
+        enforce_protocol_state_drift,
+        materialize_from_event_log_if_enabled,
+    )
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
     from turn_validate import validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
@@ -168,6 +178,9 @@ def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, A
         "changed_paths": list(report.get("changed_paths") or []),
         "transitions": deepcopy(report.get("transitions") or {}),
     }
+    task_payload = task_payload_after_apply(root, task_id)
+    if task_payload:
+        intent_payload["task"] = task_payload
     review_qa = review_qa_observability(root, report, writer)
     if review_qa:
         intent_payload["review_qa"] = review_qa
@@ -181,6 +194,17 @@ def emit_runtime_eventlog(root: Path, report: dict[str, Any], claim: dict[str, A
     )
     writer.write_snapshot()
     return [claim_event, intent_event]
+
+
+def task_payload_after_apply(root: Path, task_id: str) -> dict[str, Any] | None:
+    index_path = root / "Area_comun" / "state" / "TASK_INDEX.json"
+    if not index_path.exists():
+        return None
+    index = read_json(index_path)
+    for task in index.get("tasks") or []:
+        if isinstance(task, dict) and task.get("id") == task_id:
+            return deepcopy(task)
+    return None
 
 
 def assert_runtime_snapshot_if_active(root: Path) -> None:
@@ -404,6 +428,7 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
     root = root.resolve()
     runtime_backup = snapshot_runtime_state(root)
     materialization: dict[str, Any] | None = None
+    protocol_drift_gate: dict[str, Any] | None = None
     try:
         try:
             assert_runtime_snapshot_if_active(root)
@@ -417,6 +442,13 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
         try:
             materialization = materialize_from_event_log_if_enabled(root)
         except ProtocolMaterializationError as exc:
+            discard_worktree_changes(root)
+            restore_runtime_state(root, runtime_backup)
+            block_task(root, str(report["task_id"]))
+            return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}
+        try:
+            protocol_drift_gate = enforce_protocol_state_drift(root)
+        except ProtocolStateDriftError as exc:
             discard_worktree_changes(root)
             restore_runtime_state(root, runtime_backup)
             block_task(root, str(report["task_id"]))
@@ -444,6 +476,7 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
                     "gate": gate,
                     "eventlog_events": eventlog_events,
                     "protocol_materialization": materialization,
+                    "protocol_drift_gate": protocol_drift_gate,
                 }
             except VcsError as exc:
                 discard_worktree_changes(root)

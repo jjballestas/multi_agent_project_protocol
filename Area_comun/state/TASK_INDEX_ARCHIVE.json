@@ -2055,6 +2055,40 @@
             "sdd_required": false,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: validador raiz+minimal, encoding, neutralidad y prune --check verdes; sin secretos (grep limpio). PACKAGE_VERSIONING.md coherente (4 ejes protocol/runtime/schema/profile_version + SemVer adoptante + compatibilidad por tier + migracion lite->runtime + activar agentes reales/perfiles + politica de cambios incompatibles), neutral, doc-only (no toca runtime/version/CHANGELOG/tag), defiere el release v1.0 a paso humano separado. Enlace breve en README_INSTANCIACION sin duplicar. Handoff+in-review completos. Flip por arquitecto. CIERRA D2.4 => D2 COMPLETO (D2.1+D2.2+D2.3+D2.4).",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0065",
+            "owner": "Claude",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fix de higiene del prune (SPEC-0051): scripts/prune_state.py condensa PROJECT_STATE#next_actions config-gated (recent_next_actions) en un centinela determinista idempotente (fusiona centinelas previos) + next_actions_condensed en run-log; paridad py/.ps1 por delegacion; 4 golden nuevos. CIERRA el FOLLOW-UP de Capa A/D2.1.",
+            "spec_id": "Area_comun/specs/SPEC-0051-prune-next-actions.md",
+            "file": "Area_comun/tasks/TASK-0065-fix-prune-next-actions.md",
+            "linked_decisions": [
+                "DECISION-0014",
+                "DECISION-0012"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0055",
+                "TASK-0053"
+            ],
+            "relevant_files": [
+                "scripts/prune_state.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_prune_cases/run_runtime_prune_cases.py"
+            ],
+            "deliverables": [
+                "scripts/prune_state.py",
+                "examples/runtime_prune_cases/run_runtime_prune_cases.py"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "RESUELTA por Claude (instruccion del operador 2026-06-07). recent_next_actions config-gated (vivo+template=8) + condense_next_actions determinista/idempotente con fusion de centinelas previos + next_actions_condensed en run-log; paridad py/.ps1 por delegacion; 4 golden nuevos en runtime_prune_cases (sobre/bajo umbral, ausente/0, fusion). Gates verdes. Aditivo, off por defecto (0=previo). CIERRA el FOLLOW-UP de Capa A/D2.1.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

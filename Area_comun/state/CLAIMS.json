@@ -4,51 +4,6 @@
     "updated_by": "Claude",
     "claims": [
         {
-            "claim_id": "CLAIM-20260607-higiene-mailbox-prune-shared-fyi-codex",
-            "task_id": "TASK-0065",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-respuesta-anomalia-prune-shared.md"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado tras archivar FYI de Claude ya leido sobre regularizacion de TASK-0065/v1.0."
-        },
-        {
-            "claim_id": "CLAIM-20260607-TASK-0066-codex",
-            "task_id": "TASK-0066",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0066",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0066",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0066-codex-faseB1-replay-estado-protocolo.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0066-GO-faseB1.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0066-GO-faseB1.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/handoffs/",
-                "runtime/",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0066 entregada a in_review. Implementado B.1 read-only replay/materializacion del estado de protocolo + drift WARNING gateado; event_state.enabled=false live/template; golden runtime_protocol_replay_cases y CI; no toca apply/orchestrator write-path ni edicion manual. Handoff: Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260607-task0066-close-claude",
             "task_id": "TASK-0066",
             "owner": "Claude",
@@ -122,6 +77,61 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0067 (Fase B.2) a done + encolado de TASK-0068 (B.3, promovida desde draft de personal). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0068-codex",
+            "task_id": "TASK-0068",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0068",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0068",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0067-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-GO-faseB3.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0068 entregada a in_review. Implementada B.3 drift hard-fail bajo event_state.enforce: validador py/ps fail bajo enabled+enforce+tier runtime+runtime/state+drift; apply aborta commit con discard+restore+block; enforce=false vivo/template; no B.4 ni cambio de turn schema. Handoff: Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0068-close-claude",
+            "task_id": "TASK-0068",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0068-codex-faseB3-drift-hard-fail.md",
+                "Area_comun/decisions/DECISION-0022-runtime-escritor-autoritativo.md",
+                "Area_comun/specs/SPEC-0055-faseB4-migrar-edicion-manual.md",
+                "Area_comun/tasks/TASK-0069-codex-faseB4-migrar-edicion-manual.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0068-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0068-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0068-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0069-GO-faseB4.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero de cierre: ratificacion + flip de TASK-0068 (B.3) a done + promocion de DECISION-0022 (ratificada por operador) + encolado de TASK-0069 (B.4, entregada apagada, desde draft de personal). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

@@ -115,40 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0065",
-            "owner": "Claude",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Fix de higiene del prune (SPEC-0051): scripts/prune_state.py condensa PROJECT_STATE#next_actions config-gated (recent_next_actions) en un centinela determinista idempotente (fusiona centinelas previos) + next_actions_condensed en run-log; paridad py/.ps1 por delegacion; 4 golden nuevos. CIERRA el FOLLOW-UP de Capa A/D2.1.",
-            "spec_id": "Area_comun/specs/SPEC-0051-prune-next-actions.md",
-            "file": "Area_comun/tasks/TASK-0065-fix-prune-next-actions.md",
-            "linked_decisions": [
-                "DECISION-0014",
-                "DECISION-0012"
-            ],
-            "depends_on": [],
-            "relates_to": [
-                "TASK-0055",
-                "TASK-0053"
-            ],
-            "relevant_files": [
-                "scripts/prune_state.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_prune_cases/run_runtime_prune_cases.py"
-            ],
-            "deliverables": [
-                "scripts/prune_state.py",
-                "examples/runtime_prune_cases/run_runtime_prune_cases.py"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "RESUELTA por Claude (instruccion del operador 2026-06-07). recent_next_actions config-gated (vivo+template=8) + condense_next_actions determinista/idempotente con fusion de centinelas previos + next_actions_condensed en run-log; paridad py/.ps1 por delegacion; 4 golden nuevos en runtime_prune_cases (sobre/bajo umbral, ausente/0, fusion). Gates verdes. Aditivo, off por defecto (0=previo). CIERRA el FOLLOW-UP de Capa A/D2.1.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0066",
             "owner": "Codex",
             "status": "done",
@@ -236,7 +202,7 @@
         {
             "id": "TASK-0068",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -267,14 +233,66 @@
                 ".github/workflows/validate.yml"
             ],
             "deliverables": [
-                "scripts/validate_collaboration_state.py",
+                "runtime/protocol_replay.py",
                 "runtime/apply.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
                 "examples/runtime_protocol_enforce_cases/",
                 "Area_comun/handoffs/HANDOFF-TASK-0068-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07) como tercera rebanada de Fase B (disenada fuera de banda mientras Codex hacia B.2, DECISION-0020). Triple-gated (enabled+enforce), off=byte-equivalente. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 31/31 (nuevo runtime_protocol_enforce_cases) + validador/encoding/neutralidad/prune py verdes. event_state.enforce promueve el drift a hard-fail SOLO con enabled&&enforce&&tier==runtime&&runtime/state; validador validation.fail con paths (warning-only si off); apply corre enforce_protocol_state_drift antes de run_gate y aborta el commit ante drift (discard_worktree + restaura runtime/state + bloquea tarea, atomico). Byte-equivalencia verificada: config viva enabled=false+materialize=false+enforce=false => vivo intacto. Scope respetado: no prohibe edicion manual (B.4), no enciende enforce en vivo, no toca turn schema. Flip por arquitecto. >>> CON B.3, EL INVARIANTE hot==replay(log) QUEDA ENFORCEABLE <<<. Avanza TASK-0038. Siguiente y ultima rebanada: B.4 (TASK-0069).",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0069",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase B.4 (SPEC-0055, DECISION-0022): runtime escritor autoritativo + genesis POR REFERENCIA verificable (snapshot content-addressed runtime/state/snapshots/<hash>.json fuera del prompt + evento con snapshot_ref hash/commit/actor/timestamp/schema_version; replay verifica hash y materializa bajo demanda) + flag event_state.authoritative (live+template default false, solo runtime-tier) + prohibicion de edicion manual reusando hard-gate B.3 + migracion asistida + docs + plan de rollback + golden runtime_protocol_genesis_ref_cases. ENTREGAR APAGADA (no encender en vivo). Ultima de Fase B.",
+            "spec_id": "Area_comun/specs/SPEC-0055-faseB4-migrar-edicion-manual.md",
+            "file": "Area_comun/tasks/TASK-0069-codex-faseB4-migrar-edicion-manual.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0019",
+                "DECISION-0014"
+            ],
+            "depends_on": [
+                "TASK-0066",
+                "TASK-0067",
+                "TASK-0068"
+            ],
+            "relates_to": [
+                "TASK-0038",
+                "TASK-0048"
+            ],
+            "relevant_files": [
+                "runtime/protocol_replay.py",
+                "runtime/apply.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "examples/runtime_protocol_genesis_ref_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/protocol_replay.py",
+                "examples/runtime_protocol_genesis_ref_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0069-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto, 2026-06-07). Ultima rebanada de Fase B. DECISION-0022 ratificada como direccion tecnica por el operador (MINOR-con-migracion). ENTREGAR APAGADA; activar en vivo = aprobacion separada del operador (validar replay/materializacion + rollback). Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
             "updated_at": "2026-06-07"
         }
     ]

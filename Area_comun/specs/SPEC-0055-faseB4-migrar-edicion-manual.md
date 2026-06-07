@@ -2,17 +2,17 @@
 spec_id: SPEC-0055-faseB4-migrar-edicion-manual
 task_id: TASK-0069
 type: implementation
-status: draft
+status: accepted
 created_at: 2026-06-07
 author: Claude (arquitecto)
 linked_decisions: [DECISION-0022, DECISION-0017, DECISION-0019, DECISION-0014, DECISION-0011]
 relates_to: [SPEC-0039, SPEC-0052, SPEC-0053, SPEC-0054, SPEC-0038]
 ---
 
-> DRAFT en personal/Claude/ (Fase B.4, ultima rebanada de la Fase B). El operador autorizo INICIAR B.4 y
-> fijo la restriccion del genesis (referencia verificable, no volcado). NO promover a ready hasta: (1) B.3
-> (TASK-0068) done, y (2) DECISION-0022 ratificada por el operador (cambio de frontera del modo operativo).
-> Se monta sobre B.1/B.2/B.3.
+> Fase B.4, ultima rebanada de la Fase B. DECISION-0022 ratificada como direccion tecnica por el operador
+> (MINOR-con-migracion, genesis por referencia). La implementacion se entrega APAGADA. ACTIVAR enforce/modo
+> autoritativo en la instancia viva = aprobacion separada del operador tras validar replay/materializacion +
+> plan de rollback. Se monta sobre B.1/B.2/B.3.
 
 # SPEC-0055 - Fase B.4: runtime escritor autoritativo + genesis por referencia + prohibir edicion manual
 
@@ -43,7 +43,7 @@ de **referencia verificable**:
    replay carga `runtime/state/snapshots/<hash>.json`, **recomputa el hash canonico y exige que coincida**
    con `snapshot_ref.hash` (si no coincide o falta => error de integridad, bloqueo seguro), y materializa
    desde ahi. El snapshot se consulta solo cuando el runtime lo necesita (no en cold-start del agente).
-4. **Compatibilidad:** se mantiene el camino de B.1 (genesis embebido) para los golden existentes si hace
+4. **Compatibilidad:** se mantiene el camino de B.1/B.2 (genesis embebido) para los golden existentes si hace
    falta, pero el genesis AUTORITATIVO (migracion de produccion) usa la forma por referencia. Documentar cual
    es cual.
 
@@ -111,8 +111,7 @@ aprobacion explicita del operador + validacion de replay/materializacion + este 
 
 ## 9. Secuencia
 
-- DECISION-0022 ya esta ACCEPTED como direccion tecnica (operador, 2026-06-07).
-- Encolar como TASK-0069 cuando B.3 (TASK-0068) este `done` (B.4 se monta sobre el hard-gate de B.3).
-  Promover de a una (DECISION-0020). La implementacion se entrega APAGADA.
-- **Activar enforce/autoritativo en la instancia viva = aprobacion separada del operador** tras B.3 + validar
-  replay/materializacion + plan de rollback (sec.6).
+- DECISION-0022 ACCEPTED como direccion tecnica (operador, 2026-06-07).
+- Implementacion se entrega APAGADA. Promover de a una (DECISION-0020).
+- **Activar enforce/autoritativo en la instancia viva = aprobacion separada del operador** tras B.3 (cumplido)
+  + validar replay/materializacion + plan de rollback (sec.6).

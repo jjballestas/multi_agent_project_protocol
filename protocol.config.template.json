@@ -60,7 +60,8 @@
   },
   "event_state": {
     "enabled": false,
-    "materialize": false
+    "materialize": false,
+    "enforce": false
   },
   "tool_policy": {
     "enabled": false,
