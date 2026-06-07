@@ -190,6 +190,45 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_upgrade_cases 4/4 + suite runtime completa sin regresion + validador/encoding/neutralidad py. Verifique: runtime_version sellado (live 0.10.0; template placeholder); upgrade_instance.py (+ paridad .ps1 +52) tier-aware via adoptable_for_instance: instancia runtime-tier recibe deltas runtime/** + runtime_version, coordination/ausente NO recibe runtime/** (como hoy); excluye runtime/state/runs/__pycache__; inform-only (no muta); reporte muestra runtime_version master vs instancia solo para runtime-tier. Flip por arquitecto. CIERRA D2.2. OBS menor (notificada a Codex): el handoff + in-review msg de 0061 llegaron tras la liberacion del claim/mi chequeo (timing), presentes y movidos a answered; ratificacion no afectada. Reconciliado el GO-upgrade que quedo status=archived en open/.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0062",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Wrapper LLM real (SPEC-0048, DECISION-0021): adapter CLI concreto vendor-neutral sobre SubprocessInvoker (presets claude/codex, sin hardcode) + activacion off-by-default/gateada (flags + registro; sin flags=>recorded/replay) + limites al activar (budget A10/tool-policy/guardrails/gate) + golden runtime_real_adapter_cases (CI con RecordedInvoker, sin red/credenciales). DELTA sobre adapters. NO autonomia. Bloque funcional de v1.0.",
+            "spec_id": "Area_comun/specs/SPEC-0048-wrapper-llm-real.md",
+            "file": "Area_comun/tasks/TASK-0062-codex-wrapper-llm-real.md",
+            "linked_decisions": [
+                "DECISION-0021",
+                "DECISION-0009",
+                "DECISION-0015",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0036",
+                "TASK-0039"
+            ],
+            "relates_to": [
+                "TASK-0056",
+                "TASK-0060"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/adapters/",
+                "examples/runtime_real_adapter_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/adapters/",
+                "examples/runtime_real_adapter_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0062-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07 tras DECISION-0021 aprobada por el operador. Bloque funcional de v1.0 (wrapper LLM real). DELTA sobre adapters; off-by-default, vendor-neutral, sin secretos, NO autonomia; sin DECISION nueva (DECISION-0021 cubre el boundary). Metodo anti-colision. Release atomico con handoff+in-review en el mismo paso (DECISION-0018)."
         }
     ]
 }

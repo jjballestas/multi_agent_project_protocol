@@ -3580,6 +3580,28 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: ratificacion TASK-0061 (D2.2) + flip done (HALLAZGO #3: FYI tras flip) + commit deliverables Codex + reconciliar GO-upgrade + incluir respuesta-anomalia-0060. Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260607-decision0021-y-encolar-task0062-claude",
+            "task_id": "TASK-0062",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0062",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/decisions/DECISION-0021-activacion-wrapper-llm.md",
+                "Area_comun/specs/SPEC-0048-wrapper-llm-real.md",
+                "Area_comun/tasks/TASK-0062-codex-wrapper-llm-real.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0062-GO-wrapper.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: promueve DECISION-0021 (activacion wrapper LLM real, aprobada por el operador) + SPEC-0048 + encola wrapper (TASK-0062). Archivos-antes-de-claim + staging explicito. Claim efimero."
         }
     ]
 }
