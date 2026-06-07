@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0066
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0066 (Fase B.1, ready): replay/materializacion del estado de protocolo read-only + drift WARNING gateado (off=byte-equivalente). Primera rebanada de Fase B post-v1.0.

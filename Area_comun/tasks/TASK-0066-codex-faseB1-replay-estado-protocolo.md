@@ -1,7 +1,7 @@
 ---
 id: TASK-0066
 owner: Codex
-status: ready
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-07
@@ -21,6 +21,12 @@ closure_criteria: [replay_protocol_state + materialize_protocol_state + build_ge
 ---
 
 # TASK-0066 - Fase B.1: replay/materializacion del estado de protocolo (read-only + drift warning)
+
+## Progreso
+
+- 2026-06-07: Reclamada por Codex; implementacion B.1 en progreso.
+- 2026-06-07: Entregada a `in_review` por Codex con handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md`.
 
 ## Contexto
 

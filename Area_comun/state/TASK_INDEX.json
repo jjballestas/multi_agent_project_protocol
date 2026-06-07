@@ -188,7 +188,7 @@
         {
             "id": "TASK-0066",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -218,13 +218,54 @@
                 ".github/workflows/validate.yml"
             ],
             "deliverables": [
-                "runtime/protocol_replay.py (o eventlog.py)",
+                "runtime/protocol_replay.py",
                 "examples/runtime_protocol_replay_cases/",
                 "Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07) como primera rebanada de Fase B (post-v1.0, orden del operador). Read-only/gateada/byte-equivalente off. Release atomico esperado (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 29/29 (nuevo runtime_protocol_replay_cases 6/6) + validador/encoding/neutralidad/prune py verdes. runtime/protocol_replay.py es PURO/DETERMINISTA/READ-ONLY (sin write_text; replay_protocol_state/materialize_protocol_state/build_genesis_snapshot/protocol_state_drift; canonicalizacion estable). Gating correcto: el validador solo emite WARNING de drift si event_state.enabled Y runtime/state tiene contenido; con la feature off retorna temprano => byte-equivalente verificado (validador sin warning nuevo); nunca hard-fail (solo warn). Scope respetado: no toca apply.py/orchestrator ni el flujo de edicion manual (handoff lo confirma). Flip por arquitecto. CIERRA Fase B.1; avanza TASK-0038. Siguiente: B.2 (TASK-0067).",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0067",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase B.2 (SPEC-0053): materializacion OPT-IN del estado de protocolo desde replay(log) (write_genesis + materialize_to_disk deterministas/atomicos/canonicos) bajo event_state.materialize (live+template, default false) ADEMAS de event_state.enabled, solo adoption_tier=runtime; cableado SOLO en el runtime (orchestrator/apply); drift sigue WARNING; off=byte-equivalente; golden runtime_protocol_materialize_cases. NO hard-fail (B.3), NO prohibir edicion manual (B.4), NO encender en repo vivo.",
+            "spec_id": "Area_comun/specs/SPEC-0053-faseB2-materializacion-opt-in.md",
+            "file": "Area_comun/tasks/TASK-0067-codex-faseB2-materializacion-opt-in.md",
+            "linked_decisions": [
+                "DECISION-0017",
+                "DECISION-0015",
+                "DECISION-0014"
+            ],
+            "depends_on": [
+                "TASK-0066"
+            ],
+            "relates_to": [
+                "TASK-0038",
+                "TASK-0048"
+            ],
+            "relevant_files": [
+                "runtime/protocol_replay.py",
+                "runtime/orchestrator.py",
+                "runtime/apply.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_protocol_materialize_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/protocol_replay.py",
+                "examples/runtime_protocol_materialize_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0067-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto, 2026-06-07) como segunda rebanada de Fase B. Doble-gated (enabled+materialize), solo runtime-tier, off=byte-equivalente. Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
             "updated_at": "2026-06-07"
         }
     ]

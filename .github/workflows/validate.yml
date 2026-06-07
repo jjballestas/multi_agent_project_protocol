@@ -88,6 +88,9 @@ jobs:
       - name: Run runtime event log cases
         run: python examples/runtime_eventlog_cases/run_runtime_eventlog_cases.py
 
+      - name: Run runtime protocol replay cases
+        run: python examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py
+
       - name: Run runtime event auth cases
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 

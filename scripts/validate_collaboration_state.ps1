@@ -674,6 +674,63 @@ assert_snapshot_matches(Path(os.environ["EVENTLOG_INSTANCE_ROOT"]))
     }
 }
 
+function Test-EventStateEnabled {
+    param([object]$Config)
+    if (-not $Config) { return $false }
+    if (-not ($Config.PSObject.Properties.Name -contains "event_state")) { return $false }
+    $eventState = $Config.event_state
+    if (-not $eventState) { return $false }
+    if (-not ($eventState.PSObject.Properties.Name -contains "enabled")) { return $false }
+    return [bool]$eventState.enabled
+}
+
+function Validate-ProtocolStateDrift {
+    param(
+        [string]$Root,
+        [object]$Config
+    )
+    if (-not (Test-EventStateEnabled -Config $Config)) {
+        return
+    }
+    if (-not (Test-RuntimeStateHasContent -Root $Root)) {
+        return
+    }
+
+    $toolsRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    $oldToolsRoot = $env:EVENTLOG_TOOLS_ROOT
+    $oldInstanceRoot = $env:EVENTLOG_INSTANCE_ROOT
+    $env:EVENTLOG_TOOLS_ROOT = $toolsRoot
+    $env:EVENTLOG_INSTANCE_ROOT = $Root
+    $pythonSnippet = @'
+import json
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, os.environ["EVENTLOG_TOOLS_ROOT"])
+from runtime.protocol_replay import protocol_state_drift
+
+print(json.dumps(protocol_state_drift(Path(os.environ["EVENTLOG_INSTANCE_ROOT"])), sort_keys=True))
+'@
+    try {
+        $output = $pythonSnippet | python - 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Fail "Runtime protocol state drift check failed: $($output -join ' ')"
+            return
+        }
+        $drift = ($output -join "`n") | ConvertFrom-Json
+        if ($drift.has_drift) {
+            $paths = @($drift.entries | ForEach-Object { $_.path }) -join ", "
+            Warn "Runtime protocol state drift detected (warning-only B.1): $paths"
+        }
+    } catch {
+        Fail "Runtime protocol state drift check failed: $($_.Exception.Message)"
+    } finally {
+        $env:EVENTLOG_TOOLS_ROOT = $oldToolsRoot
+        $env:EVENTLOG_INSTANCE_ROOT = $oldInstanceRoot
+    }
+}
+
 $script:Errors = [System.Collections.Generic.List[string]]::new()
 $script:Warnings = [System.Collections.Generic.List[string]]::new()
 
@@ -856,6 +913,7 @@ if (Test-Path -LiteralPath $handoffDir) {
 }
 
 Validate-EventLogSnapshot -Root $resolvedRoot
+Validate-ProtocolStateDrift -Root $resolvedRoot -Config $config
 
 $mailboxRoot = Join-Path $resolvedRoot "Area_comun/mailbox"
 foreach ($mailboxState in @("open", "answered", "archived")) {

@@ -19,6 +19,7 @@ if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
 from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_state_has_content
+from runtime.protocol_replay import event_state_enabled, protocol_state_drift
 
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
@@ -814,6 +815,21 @@ def validate_eventlog_snapshot(root: Path, validation: Validation) -> None:
         validation.fail(f"Runtime event log snapshot mismatch: {exc}")
 
 
+def validate_protocol_state_drift(
+    root: Path,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not event_state_enabled(config):
+        return
+    if not runtime_state_has_content(root):
+        return
+    drift = protocol_state_drift(root)
+    if drift.get("has_drift"):
+        paths = ", ".join(entry.get("path", "<unknown>") for entry in drift.get("entries") or [])
+        validation.warn(f"Runtime protocol state drift detected (warning-only B.1): {paths}")
+
+
 def validate(root: Path, config_path: Path | None = None) -> Validation:
     validation = Validation()
     root = root.resolve()
@@ -865,6 +881,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     )
     validate_handoffs(root, validation)
     validate_eventlog_snapshot(root, validation)
+    validate_protocol_state_drift(root, config, validation)
     return validation
 
 

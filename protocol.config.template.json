@@ -58,6 +58,9 @@
     "issuer": "local-runtime",
     "audience": "runtime-event-log"
   },
+  "event_state": {
+    "enabled": false
+  },
   "tool_policy": {
     "enabled": false,
     "default": "deny",
