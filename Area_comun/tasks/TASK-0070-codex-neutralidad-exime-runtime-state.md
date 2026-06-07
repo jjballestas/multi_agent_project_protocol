@@ -1,7 +1,7 @@
 ---
 id: TASK-0070
 owner: Codex
-status: in_review
+status: done
 type: implementation
 priority: high
 created_at: 2026-06-07
