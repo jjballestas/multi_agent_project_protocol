@@ -1,7 +1,7 @@
 ---
 id: TASK-0071
 owner: Codex
-status: draft
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -20,10 +20,10 @@ closure_criterion: SBOM canonico determinista del paquete (rutas+sha256+version 
 closure_criteria: [scripts/generate_sbom.py (+ .ps1) determinista/canonico; inventario con sha256+tamano+4 ejes+commit/timestamp provistos; exclusiones state/runs/.git/pycache; SBOM neutral (rutas/hashes); golden examples/sbom_cases + CI; paridad o delegacion .ps1; validador/encoding/neutralidad/prune py/ps verdes; handoff autocontenido; release atomico (DECISION-0018)]
 ---
 
-# TASK-0071 - Fase 7.1: SBOM determinista del paquete (DRAFT, no promovida)
+# TASK-0071 - Fase 7.1: SBOM determinista del paquete
 
-> DRAFT en personal/Claude/. Promover a ready en ventana segura (tras TASK-0070 + re-activacion sombra), de a
-> una (DECISION-0020). Primera rebanada de Fase 7 (release engineering), aprobada por el operador. Ver SPEC-0057.
+> Primera rebanada de Fase 7 (release engineering), aprobada por el operador. Promovida a ready en ventana
+> segura tras cerrar TASK-0070 y re-aplicar la activacion sombra. Ver SPEC-0057.
 
 ## Contexto
 

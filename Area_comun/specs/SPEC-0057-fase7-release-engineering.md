@@ -2,16 +2,16 @@
 spec_id: SPEC-0057-fase7-release-engineering
 task_id: TASK-0071
 type: implementation
-status: draft
+status: accepted
 created_at: 2026-06-07
 author: Claude (arquitecto)
 linked_decisions: [DECISION-0001, DECISION-0019, DECISION-0021]
 relates_to: [PACKAGE_VERSIONING, SPEC-0043]
 ---
 
-> DRAFT en personal/Claude/ (Fase 7 aprobada por el operador 2026-06-07). Decomposicion en rebanadas
-> aditivas; la primera (F7.1 SBOM) es la de menor riesgo. NO promover hasta ventana segura (Codex mid-flight
-> en TASK-0070). Aditivo al proceso de release (DECISION-0001), neutral, sin secretos.
+> Fase 7 (release engineering) aprobada por el operador 2026-06-07. Decomposicion en rebanadas aditivas;
+> la primera (F7.1 SBOM) es la de menor riesgo. Aditivo al proceso de release (DECISION-0001), neutral, sin
+> secretos. Promover de a una (DECISION-0020).
 
 # SPEC-0057 - Fase 7: Release engineering (cadena de suministro del paquete)
 
