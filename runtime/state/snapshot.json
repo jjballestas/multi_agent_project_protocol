@@ -1,0 +1,16 @@
+{
+  "canonical_hash": "aba5fa8bd9b48793729494f4cb9fafec6d5308334db682e1302cdff91ce9caca",
+  "state": {
+    "aggregate_versions": {
+      "protocol-state": 1
+    },
+    "events_applied": 1,
+    "fencing_tokens": {},
+    "idempotency_keys": {
+      "protocol-state:genesis-ref:v1": 1
+    },
+    "leases": {},
+    "rejections": []
+  },
+  "up_to_seq": 1
+}

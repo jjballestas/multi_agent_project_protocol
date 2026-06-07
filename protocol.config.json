@@ -59,8 +59,8 @@
     "audience": "runtime-event-log"
   },
   "event_state": {
-    "enabled": false,
-    "materialize": false,
+    "enabled": true,
+    "materialize": true,
     "enforce": false,
     "authoritative": false
   },
