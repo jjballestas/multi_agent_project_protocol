@@ -1,7 +1,7 @@
 ---
 id: TASK-0074
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -48,3 +48,14 @@ Da trazabilidad; la autenticidad (firma) es F7.4. Ver SPEC-0060.
 
 Tercera de 5 rebanadas de Fase 7 (F7.1 done -> F7.2 -> **F7.3** -> F7.4 firma [DECISION-0023, requiere
 aprobacion humana] -> F7.5 docs). Writer-vivo en SOMBRA. Promovida de a una.
+
+## Entrega Codex 2026-06-07
+
+- Implementado `scripts/generate_provenance.py` (+ `scripts/generate_provenance.ps1`) con atestacion canonica:
+  `subject.digest.sha256 = manifest.sbom_hash`, `builder.id`, `invocation.commit`,
+  `invocation.process`, `metadata.timestamp` y `metadata.schema = provenance.v1`.
+- Implementado `--verify` para comprobar `subject.digest.sha256 == manifest.sbom_hash`; mismatch sale con
+  exit != 0 y JSON legible.
+- Agregado `examples/provenance_cases/run_provenance_cases.py` y paso CI.
+- Validacion: provenance_cases 5/5, release_verify_cases 6/6, sbom_cases 4/4, validador/encoding/neutralidad
+  py/ps verdes; drift warning esperado por modo sombra.

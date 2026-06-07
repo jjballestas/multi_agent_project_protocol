@@ -2348,6 +2348,41 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 + validador/encoding/neutralidad py verdes. runtime/state/** anadido a domain_neutrality.exempt_globs en protocol.config.json Y protocol.config.template.json; golden runtime_state_exempt (denylist bajo runtime/state PASA) + runtime_source_still_scanned (denylist en runtime/source.py SIGUE FALLANDO) => exencion precisa, NO debilita el core (la fuente del runtime sigue escaneada). Fix de paridad en scan_domain_neutrality.ps1 (lectura de archivos de una linea). Docs: runtime/state NO se gitignora (en autoritativo el log/snapshots son fuente de verdad). DESBLOQUEA el reintento de la activacion sombra del writer-vivo. Flip por arquitecto.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0071",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.1 (SPEC-0057): SBOM determinista del paquete - scripts/generate_sbom.py (+ paridad/delegacion .ps1) genera un inventario canonico (ruta posix + sha256 + tamano por archivo FUENTE; excluye runtime/state, runtime/runs, .git, __pycache__) + cabecera con 4 ejes de version + commit + timestamp PROVISTOS (sin reloj/red); salida JSON canonica ASCII/sin BOM; golden examples/sbom_cases + CI. Sin firma (F7.4). Primera de 5 rebanadas de Fase 7 (release engineering).",
+            "spec_id": "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
+            "file": "Area_comun/tasks/TASK-0071-codex-faseF7.1-sbom.md",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0064"
+            ],
+            "relevant_files": [
+                "scripts/generate_sbom.py",
+                "scripts/generate_sbom.ps1",
+                "examples/sbom_cases/",
+                ".github/workflows/validate.yml",
+                "protocol.config.json"
+            ],
+            "deliverables": [
+                "scripts/generate_sbom.py",
+                "examples/sbom_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0071-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 33/33 (nuevo sbom_cases) + validador/encoding/neutralidad verdes. scripts/generate_sbom.py (+ .ps1 delegado) genera SBOM canonico DETERMINISTA (2 corridas byte-identicas), inventario ruta+sha256+tamano (file_count 690), 4 ejes de version (protocol 1.0.0/runtime 0.10.0/schema turn 1.2.0/perfil dotnet_enterprise 0.1.0) + commit+timestamp PROVISTOS; excluye el runtime/state|runs|.git|pycache reales (las 5 coincidencias del grep son benignas: 4 el campo excluded_globs y 1 un fixture examples/.../runtime_state_exempt). Neutral (lista rutas/hashes, no contenido), sin secretos, sin firma (F7.4). Flip por arquitecto. CIERRA F7.1.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

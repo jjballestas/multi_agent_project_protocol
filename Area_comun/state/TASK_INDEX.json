@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Claude",
+    "updated_by": "Codex",
     "legend": {
         "status": [
             "proposed",
@@ -75,41 +75,6 @@
             "blocked_by_questions": [],
             "sdd_required": false,
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
-        },
-        {
-            "id": "TASK-0071",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Fase 7.1 (SPEC-0057): SBOM determinista del paquete - scripts/generate_sbom.py (+ paridad/delegacion .ps1) genera un inventario canonico (ruta posix + sha256 + tamano por archivo FUENTE; excluye runtime/state, runtime/runs, .git, __pycache__) + cabecera con 4 ejes de version + commit + timestamp PROVISTOS (sin reloj/red); salida JSON canonica ASCII/sin BOM; golden examples/sbom_cases + CI. Sin firma (F7.4). Primera de 5 rebanadas de Fase 7 (release engineering).",
-            "spec_id": "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
-            "file": "Area_comun/tasks/TASK-0071-codex-faseF7.1-sbom.md",
-            "linked_decisions": [
-                "DECISION-0001",
-                "DECISION-0019"
-            ],
-            "depends_on": [],
-            "relates_to": [
-                "TASK-0064"
-            ],
-            "relevant_files": [
-                "scripts/generate_sbom.py",
-                "scripts/generate_sbom.ps1",
-                "examples/sbom_cases/",
-                ".github/workflows/validate.yml",
-                "protocol.config.json"
-            ],
-            "deliverables": [
-                "scripts/generate_sbom.py",
-                "examples/sbom_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0071-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 33/33 (nuevo sbom_cases) + validador/encoding/neutralidad verdes. scripts/generate_sbom.py (+ .ps1 delegado) genera SBOM canonico DETERMINISTA (2 corridas byte-identicas), inventario ruta+sha256+tamano (file_count 690), 4 ejes de version (protocol 1.0.0/runtime 0.10.0/schema turn 1.2.0/perfil dotnet_enterprise 0.1.0) + commit+timestamp PROVISTOS; excluye el runtime/state|runs|.git|pycache reales (las 5 coincidencias del grep son benignas: 4 el campo excluded_globs y 1 un fixture examples/.../runtime_state_exempt). Neutral (lista rutas/hashes, no contenido), sin secretos, sin firma (F7.4). Flip por arquitecto. CIERRA F7.1.",
-            "updated_at": "2026-06-07"
         },
         {
             "id": "TASK-0072",
@@ -193,7 +158,7 @@
         {
             "id": "TASK-0074",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -214,16 +179,18 @@
                 "scripts/generate_provenance.py",
                 "scripts/verify_release.py",
                 "examples/provenance_cases/",
-                ".github/workflows/validate.yml"
+                ".github/workflows/validate.yml",
+                "scripts/generate_provenance.ps1"
             ],
             "deliverables": [
                 "scripts/generate_provenance.py",
                 "examples/provenance_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0074-codex-to-claude-1.md"
+                "Area_comun/handoffs/HANDOFF-TASK-0074-codex-to-claude-1.md",
+                "scripts/generate_provenance.ps1"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07). Fase 7 en marcha. Aditivo/determinista/neutral/sin secretos. Release atomico (DECISION-0018) + anti-colision (DECISION-0020, staging por paths).",
+            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.3 provenance/atestacion SLSA-lite implementada. generate_provenance.py (+ .ps1 delegado) emite JSON canonico ASCII con subject.name=multi_agent_project_protocol@<protocol_version>, subject.digest.sha256=manifest.sbom_hash, builder.id, invocation{commit,process} y metadata{timestamp,schema=provenance.v1} provistos; sin reloj/red. El modo --verify comprueba subject.digest.sha256 == manifest.sbom_hash y falla con exit!=0 + error legible en mismatch. Golden provenance_cases 5/5 + release_verify_cases 6/6 + sbom_cases 4/4 + validador/encoding/neutralidad py/ps verdes; poda aplicada y prune check final ~12.4k tokens; drift WARNING esperado por writer-vivo en sombra. Sin firma/claves; F7.4 queda fuera de alcance.",
             "updated_at": "2026-06-07"
         }
     ]

@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0074
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0074 (Fase 7.3, ready): provenance/atestacion SLSA-lite enlazada al manifiesto (subject=sbom_hash) + verificacion de consistencia. Sin firma (F7.4).

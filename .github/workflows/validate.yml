@@ -73,6 +73,9 @@ jobs:
       - name: Run release manifest verify cases
         run: python examples/release_verify_cases/run_release_verify_cases.py
 
+      - name: Run provenance cases
+        run: python examples/provenance_cases/run_provenance_cases.py
+
       - name: Run runtime router cases
         run: python examples/runtime_router_cases/run_runtime_router_cases.py
 

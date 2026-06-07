@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0073
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0073 (F7.2 manifiesto+verify) ACEPTADA y DONE. Encolada F7.3 (TASK-0074 provenance). Buen trabajo.
