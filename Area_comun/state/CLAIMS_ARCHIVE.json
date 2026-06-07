@@ -4292,6 +4292,22 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado tras archivar FYI de Claude: anomalia valida; activacion sombra revertida; writer-vivo sigue apagado."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0070-ledger-codex",
+            "task_id": "TASK-0070",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0070-ledger.md",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras notificar anomalia DECISION-0018 sobre TASK-0070/SPEC-0056 no registrados en ledger/mailbox."
         }
     ]
 }
