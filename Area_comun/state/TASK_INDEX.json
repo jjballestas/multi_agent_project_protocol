@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
-    "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_at": "2026-06-08",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -155,7 +155,7 @@
         {
             "id": "TASK-0075",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -192,8 +192,47 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.4 firma de releases implementada. sign_release.py (+ .ps1) firma manifest.sbom_hash o --digest con backend explicito fixture-hmac-sha256 y material local --key; emite artefacto canonico protocol_release_signature.v1 con subject_digest, backend, key_id y signature HMAC-SHA256 determinista. verify_release.py (+ .ps1) se extendio de forma opt-in con --signature + --pubkey/--key + --backend opcional: sin firma mantiene contrato F7.2; con firma valida autenticidad sobre sbom_hash, falla cerrada si falta material, si subject_digest no coincide o si la firma/key_id no verifican. Golden release_sign_cases 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4 + encoding/neutralidad/validador py/ps verdes. No hay claves reales commiteadas; solo material fixture no-real en golden. Drift WARNING esperado por writer-vivo en sombra.",
-            "updated_at": "2026-06-07"
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden release_sign 8/8 + release_verify 6/6 + provenance 5/5 + sbom 4/4; smoke real del arbol vivo: sign (fixture-hmac-sha256) -> verify firma VALIDA exit0; firma alterada exit1; clave equivocada exit1; sin firma -> integridad F7.2 exit0; neutralidad/encoding/validador verdes. SECRET BOUNDARY VERIFICADO: no hay material de clave privada en el repo (fixture inline en el runner). sign_release.py implementa SOLO el backend fixture (rechaza otros); el backend real (cosign/minisign/gpg via comando externo) queda documentado en F7.5 conforme DECISION-0023. verify_release extendido valida la firma sobre sbom_hash, falla cerrada. Off-by-default, vendor-neutral, sin secretos. Entrega commiteada por Codex (a7bee1a). Flip por arquitecto. CIERRA F7.4.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0076",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "submit_intent transaccional multi-intent + re-genesis (SPEC-0062) - KEYSTONE de la adopcion de submit_intent por AMBOS lazos (orden del operador): submit_intent --intents aplica una secuencia ordenada de intents de forma ATOMICA (append por intent + materializacion + drift 0) o rollback total; cada intent validado contra el estado resultante de los previos; idempotente; mantiene --intent mono. + runtime/regenesis.py: genesis fresco por referencia desde el estado materializado -> drift 0, no destructivo. golden examples/intent_tx_cases + paridad .ps1 + CI. SHADOW: enforce/authoritative OFF (sin flip).",
+            "spec_id": "Area_comun/specs/SPEC-0062-submit-intent-transaccional-regenesis.md",
+            "file": "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0020"
+            ],
+            "depends_on": [
+                "TASK-0072"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/submit_intent.py",
+                "runtime/regenesis.py",
+                "runtime/protocol_replay.py",
+                "examples/intent_tx_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/submit_intent.py",
+                "runtime/regenesis.py",
+                "examples/intent_tx_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0076-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (promovida OFICIALMENTE por Claude 2026-06-08 con claim+GO, tras cerrar F7.4 y resolver la anomalia que levanto Codex): keystone de la adopcion de submit_intent por AMBOS lazos (DECISION-0022). Transaccion multi-intent atomica + re-genesis (drift 0). SHADOW: sin flip de enforce. GO en mailbox.",
+            "updated_at": "2026-06-08"
         }
     ]
 }

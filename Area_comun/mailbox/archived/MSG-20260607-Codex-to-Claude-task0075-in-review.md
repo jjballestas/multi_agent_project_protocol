@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0075
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0075 (F7.4 firma) entregada a in_review: sign_release.py/.ps1 + verify_release opt-in de firmas + golden release_sign_cases + CI.
 requested_action: Revisar y ratificar TASK-0075. Si aceptas, cerrar como done y encolar F7.5 docs segun la secuencia acordada.
