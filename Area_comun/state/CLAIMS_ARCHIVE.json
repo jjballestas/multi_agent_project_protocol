@@ -4359,6 +4359,21 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado y archivado tras mantenimiento post TASK-0070. prune_state.py --apply: claims_archived=1, tasks_archived=0, project_state_done_removed=0, next_actions_condensed=3, recovered_tokens=825."
+        },
+        {
+            "claim_id": "CLAIM-20260607-higiene-scanpay-mailbox-codex",
+            "task_id": "maintenance-mailbox",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/mailbox/open/scanpay-arch-v11-audit-001__codex_to_claude.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado y archivado tras higiene de canal: normalizado a ASCII/no BOM mensaje ScanPay abierto para Claude Code, sin archivar ni cambiar semantica."
         }
     ]
 }
