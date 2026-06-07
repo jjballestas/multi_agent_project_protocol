@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0060
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO - TASK-0060 (Fase 6.2: A10 budget/deadline, DELTA sobre budget.py) READY. Cierra D0. Aditiva, config-gated, deadline determinista (no wall-clock). SPEC-0046.

@@ -115,53 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0058",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "D2.1 (distribucion via tiers, SPEC-0044, DECISION-0019): new_instance.py --tier coordination|runtime (DEFAULT coordination) + campo adoption_tier (ausente=>coordination, ortogonal a adopted_profiles); el tier runtime copia runtime/ + scripts de gates + CI + templates de runtime (motor OFF), excluyendo state/runs/pycache; examples/full_runtime_instance valida verde + minimal_instance (coordination) INTACTO + validador tier-aware aditivo (py/ps1) + golden de ambos tiers. Aditivo, off-by-default, neutral.",
-            "spec_id": "Area_comun/specs/SPEC-0044-distribucion-runtime.md",
-            "file": "Area_comun/tasks/TASK-0058-codex-distribucion-runtime-scaffolding.md",
-            "linked_decisions": [
-                "DECISION-0019",
-                "DECISION-0009",
-                "DECISION-0002",
-                "DECISION-0006"
-            ],
-            "depends_on": [],
-            "relates_to": [
-                "TASK-0019"
-            ],
-            "relevant_files": [
-                "scripts/new_instance.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/full_runtime_instance/",
-                "examples/runtime_instantiation_cases/",
-                "examples/minimal_instance/",
-                ".github/workflows/validate.yml",
-                "runtime/turn_schema.json"
-            ],
-            "deliverables": [
-                "scripts/new_instance.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/full_runtime_instance/",
-                "examples/runtime_instantiation_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0058-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Genere YO ambos tiers con new_instance.py y verifique: coordination (default) sin runtime + adoption_tier=coordination; runtime con runtime/ + 4 scripts de gates (py+ps1) + CI + adoption_tier=runtime y runtime/tool_policy/event_auth OFF (DI1/DI2); NO copia runtime/state/runs/__pycache__ (DI3); adopted_profiles ausente=ortogonal (DI5); generacion determinista (rt==rt2). Validan verde: coord, rt, examples/full_runtime_instance y examples/minimal_instance (DI4 intacto). Validador tier-aware ADITIVO (tier ausente=>coordination; solo exige runtime/ si tier=runtime). Golden instanciacion 5/5 + suite runtime completa sin regresion + encoding/neutralidad py. Flip por arquitecto. CIERRA D2.1 (distribucion via tiers).",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0059",
             "owner": "Codex",
             "status": "done",
@@ -207,7 +160,7 @@
         {
             "id": "TASK-0060",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -238,7 +191,47 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07. Cierra D0 (motor) junto con 6.1. DELTA sobre budget.py del M2 (no rehacer). Aditiva, config-gated, fallback N=2; sin DECISION nueva. Deadline determinista (no wall-clock). Metodo anti-colision. Release atomico (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_budget_cases 5/5 + suite runtime completa sin regresion + gates py. Verifique: umbral blando=>warning, duro=>budget_exhausted+escalado (consumed/limit/last_responsible), deadline DETERMINISTA por task_deadlines (logico, NO wall-clock), limite de cola=>escalado; budget AUSENTE en config vivo => off => byte-equivalente; DELTA sobre budget.py (no rehace Budget); orchestrator aditivo con clock_fixed determinista; negative-replay (A6) intacto. Flip por arquitecto. >>> CON 6.1+6.2 D0 (MOTOR) CERRADO; criterio 13 SPEC-0038 cubierto <<<.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0061",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "D2.2 (distribucion, SPEC-0047): upgrade_instance.py tier-aware (+ paridad .ps1) - propaga deltas de runtime/** + CI a instancias adoption_tier=runtime (coordination/ausente=>como hoy), excluye state/runs/pycache; sello runtime_version (master lo fija, instancia runtime lo porta); inform-only/aditivo. Mitiga el drift del tier runtime.",
+            "spec_id": "Area_comun/specs/SPEC-0047-d2.2-upgrade-tier-aware.md",
+            "file": "Area_comun/tasks/TASK-0061-codex-upgrade-tier-aware.md",
+            "linked_decisions": [
+                "DECISION-0019",
+                "DECISION-0006",
+                "DECISION-0001"
+            ],
+            "depends_on": [
+                "TASK-0058"
+            ],
+            "relates_to": [
+                "TASK-0019"
+            ],
+            "relevant_files": [
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_upgrade_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/upgrade_instance.py",
+                "scripts/upgrade_instance.ps1",
+                "examples/runtime_upgrade_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0061-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "Encolada por Claude (arquitecto) 2026-06-07. D2.2 del track de distribucion (DECISION-0019). Inform-only, aditiva, paridad py/.ps1; sin DECISION nueva. Metodo anti-colision. Release atomico (DECISION-0018)."
         }
     ]
 }

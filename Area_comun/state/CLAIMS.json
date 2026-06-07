@@ -4,67 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260607-TASK-0056-codex",
-            "task_id": "TASK-0056",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0056",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0056",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0056-codex-tool-policy.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0056-GO-tool-policy.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0056-GO-tool-policy.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0056-in-review.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "runtime/turn_schema.json",
-                "runtime/tool_policy.py",
-                "runtime/turn_validate.py",
-                "Area_comun/protocol/SCHEMA_VERSIONING.md",
-                "examples/runtime_tool_policy_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0056 entregada a in_review. Implementado tool_policy deny-by-default, runtime/tool_policy.py, turn_validate, turn_schema 1.2.0 opcional, examples/runtime_tool_policy_cases y CI. Verificado runtime completo, validador/encoding/neutralidad py/ps; tras release se aplico prune de mantenimiento (2 claims archivados) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md."
-        },
-        {
-            "claim_id": "CLAIM-20260607-TASK-0057-codex",
-            "task_id": "TASK-0057",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0057",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0057",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
-                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0057-GO-envelope-signing.md",
-                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0057-GO-envelope-signing.md",
-                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0057-in-review.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "runtime/eventlog.py",
-                "examples/runtime_event_auth_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-07",
-            "updated_at": "2026-06-07",
-            "expires_at": "2026-06-08",
-            "notes": "Liberado con handoff-release atomico: TASK-0057 entregada a in_review. Implementado event_auth config-gated off por defecto, HMAC determinista en runtime/eventlog.py, verificacion replay/snapshot con security.unauthenticated_event, issuer/audience placeholder, golden runtime_event_auth_cases y CI. Verificado runtime completo + validador/encoding/neutralidad/prune py/ps; tras release se aplico prune de mantenimiento (1 claim archivado) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260607-TASK-0058-codex",
             "task_id": "TASK-0058",
             "owner": "Codex",
@@ -125,6 +64,47 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0059 entregada a in_review. Implementado observabilidad N-agente DELTA sobre M2: trace_id determinista config-gated en eventlog, span router/review_qa via run-log/evento, summarize_nagent post-hoc, golden runtime_observability_nagent_cases y CI. Verificado runtime completo + validador/encoding/neutralidad py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0059-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0060-codex",
+            "task_id": "TASK-0060",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0060",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0060",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0060-codex-budget-deadline.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0060-GO-budget.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0060-GO-budget.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0060-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0060-codex-to-claude-1.md",
+                "runtime/budget.py",
+                "runtime/orchestrator.py",
+                "examples/runtime_budget_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0060 entregada a in_review. Implementado A10 budget/deadline DELTA sobre Budget M2: budget_settings config-gated, umbral blando budget_warning, umbral duro budget_escalation con consumed/limit/last_responsible, deadline logico determinista por tarea, limite de cola, golden runtime_budget_cases y CI. Verificado runtime completo + validador/encoding/neutralidad/prune py/ps verdes. Handoff: Area_comun/handoffs/HANDOFF-TASK-0060-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-anomalia-task0060-ledger-codex",
+            "task_id": "TASK-0060",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0060-accepted-ledger.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras notificar anomalia DECISION-0018: Claude envio aceptacion DONE de TASK-0060, pero ledger hot sigue en in_review. Mensaje: Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-anomalia-task0060-accepted-ledger.md."
         }
     ]
 }

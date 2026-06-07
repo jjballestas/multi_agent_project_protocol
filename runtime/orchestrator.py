@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .budget import Budget
+    from .budget import Budget, budget_settings, responsible
     from .context import load_state
     from .metrics import summarize
     from .router import select_next
@@ -37,7 +37,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from gate import run_gate
     from runlog import RunLog, deterministic_run_id
     from turn_validate import validate_turn
-    from budget import Budget
+    from budget import Budget, budget_settings, responsible
     from metrics import summarize
     from runlog import turn_entry
     from vcs import VcsError, commit_turn, discard_worktree_changes
@@ -125,6 +125,28 @@ def report_cost_tokens(report: dict[str, Any]) -> int | None:
     if isinstance(cost, dict) and isinstance(cost.get("tokens"), int):
         return cost["tokens"]
     return None
+
+
+def budget_stop_entry(
+    *,
+    turn: int,
+    trace: list[str],
+    budget_event: dict[str, Any],
+    unit: dict[str, Any] | None = None,
+    report: dict[str, Any] | None = None,
+    duration_ms: int = 0,
+) -> dict[str, Any]:
+    entry = turn_entry(
+        turn=turn,
+        trace=trace,
+        unit=unit,
+        report=report,
+        outcome="budget_exhausted",
+        reason=str(budget_event.get("reason") or "budget_exhausted"),
+        duration_ms=duration_ms,
+    )
+    entry["budget_escalation"] = budget_event
+    return entry
 
 
 def normalize_report_path(path: str) -> str:
@@ -288,9 +310,29 @@ def run_loop(
         return {"ok": False, "reason": "--max-iter must be >= 1"}
 
     runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit], adapter_name=adapter_name))
-    budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens)
+    config = read_json(root / "protocol.config.json")
+    budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens, **budget_settings(config))
     turns: list[dict[str, Any]] = []
     baseline_dirty = set(dirty_worktree_paths(root))
+
+    queue_event = budget.queue_event(queue_length=len(reports), last_responsible=responsible())
+    if queue_event:
+        entry = budget_stop_entry(turn=1, trace=["budget"], budget_event=queue_event, duration_ms=clock_fixed)
+        runlog.append(entry)
+        turns.append(entry)
+        maintenance = auto_prune_if_due(root)
+        summary = summarize(runlog.path)
+        summary_path = runlog.path.with_suffix(".summary.json")
+        write_json(summary_path, summary)
+        return {
+            "ok": True,
+            "run_id": runlog.run_id,
+            "run_log": str(runlog.path),
+            "summary": str(summary_path),
+            "metrics": summary,
+            "maintenance": maintenance,
+            "turns": turns,
+        }
 
     for index, report_path in enumerate(reports[:limit], start=1):
         trace: list[str] = ["gate_pre"]
@@ -312,6 +354,24 @@ def run_loop(
                 unit=unit,
                 outcome="stopped",
                 reason="no runnable unit or human gate",
+                duration_ms=clock_fixed,
+            )
+            runlog.append(entry)
+            turns.append(entry)
+            break
+
+        task_id = str(unit.get("task_id") or "none")
+        deadline_event = budget.deadline_event(
+            task_id=task_id,
+            turn_index=index,
+            last_responsible=responsible(str(unit.get("owner") or ""), task_id),
+        )
+        if deadline_event:
+            entry = budget_stop_entry(
+                turn=index,
+                trace=[*trace, "budget"],
+                unit=unit,
+                budget_event=deadline_event,
                 duration_ms=clock_fixed,
             )
             runlog.append(entry)
@@ -376,14 +436,36 @@ def run_loop(
             break
 
         cost_tokens = report_cost_tokens(report)
-        if budget_tokens is not None and cost_tokens is not None and cost_tokens > budget_tokens:
-            entry = turn_entry(
+        last_responsible = responsible(str(report.get("agent") or ""), str(report.get("task_id") or "none"))
+        budget_warning = budget.soft_warning(cost_tokens=cost_tokens, last_responsible=last_responsible)
+        hard_event = budget.hard_event(cost_tokens=cost_tokens, last_responsible=last_responsible)
+        if hard_event:
+            entry = budget_stop_entry(
                 turn=index,
                 trace=[*trace, "budget"],
                 unit=unit,
                 report=report,
-                outcome="budget_exhausted",
+                budget_event=hard_event,
+                duration_ms=clock_fixed,
+            )
+            if budget_warning:
+                entry["budget_warning"] = budget_warning
+            runlog.append(entry)
+            turns.append(entry)
+            break
+        if budget_tokens is not None and cost_tokens is not None and cost_tokens > budget_tokens:
+            budget_event = budget.event(
                 reason="max_cost_tokens",
+                consumed={"cost_tokens": cost_tokens},
+                limit={"cost_tokens": budget_tokens},
+                last_responsible=last_responsible,
+            )
+            entry = budget_stop_entry(
+                turn=index,
+                trace=[*trace, "budget"],
+                unit=unit,
+                report=report,
+                budget_event=budget_event,
                 duration_ms=clock_fixed,
             )
             runlog.append(entry)
@@ -409,17 +491,23 @@ def run_loop(
                 {"seq": event.get("seq"), "type": event.get("type"), "aggregate_id": event.get("aggregate_id")}
                 for event in result["eventlog_events"]
             ]
+        if budget_warning:
+            entry["budget_warning"] = budget_warning
         runlog.append(entry)
         turns.append(entry)
         budget.consume(cost_tokens=cost_tokens)
         if not result.get("green"):
             break
-        if budget.exceeded() and index < len(reports[:limit]):
-            budget_entry = turn_entry(
+        if budget.exceeded(last_responsible=last_responsible) and index < len(reports[:limit]):
+            budget_entry = budget_stop_entry(
                 turn=index + 1,
                 trace=["budget"],
-                outcome="budget_exhausted",
-                reason=budget.reason,
+                budget_event=budget.last_event or budget.event(
+                    reason=budget.reason or "budget_exhausted",
+                    consumed={"turns": budget.turns, "cost_tokens": budget.cost_tokens},
+                    limit={},
+                    last_responsible=last_responsible,
+                ),
                 duration_ms=clock_fixed,
             )
             runlog.append(budget_entry)

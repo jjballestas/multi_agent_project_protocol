@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0059
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0059 (Fase 6.1 observabilidad N-agente) ACEPTADA y DONE tras ratificacion adversarial. Config-gated (off=byte-equivalente), suite verde.

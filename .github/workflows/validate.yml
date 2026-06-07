@@ -118,6 +118,9 @@ jobs:
       - name: Run runtime observability cases
         run: python examples/runtime_observability_cases/run_runtime_observability_cases.py
 
+      - name: Run runtime budget cases
+        run: python examples/runtime_budget_cases/run_runtime_budget_cases.py
+
       - name: Run N-agent observability cases
         run: python examples/runtime_observability_nagent_cases/run_runtime_observability_nagent_cases.py
 
