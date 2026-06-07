@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import subprocess
 import tempfile
 from copy import deepcopy
 from pathlib import Path
@@ -27,10 +28,17 @@ PROTOCOL_STATE_PATHS = {
     "claims": Path("Area_comun/state/CLAIMS.json"),
 }
 TASK_TRANSITION_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_-]*)\s*->\s*([A-Za-z_][A-Za-z0-9_-]*)\s*$")
+SNAPSHOT_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
 PROTOCOL_GENESIS_TYPES = {"protocol.genesis", "protocol_state.genesis"}
+PROTOCOL_SNAPSHOT_SCHEMA_VERSION = "protocol_state_snapshot.v1"
+PROTOCOL_SNAPSHOT_DIR = Path("runtime") / "state" / "snapshots"
 
 
 class ProtocolMaterializationError(RuntimeError):
+    pass
+
+
+class ProtocolSnapshotRefError(ProtocolMaterializationError):
     pass
 
 
@@ -57,6 +65,11 @@ def event_state_enforce_enabled(config: dict[str, Any] | None) -> bool:
     return isinstance(event_state, dict) and event_state.get("enforce") is True
 
 
+def event_state_authoritative_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("authoritative") is True
+
+
 def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
     config = config or {}
     return event_state_enabled(config) and event_state_materialize_enabled(config) and config.get("adoption_tier") == "runtime"
@@ -65,6 +78,15 @@ def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
 def protocol_state_enforcement_enabled(config: dict[str, Any] | None) -> bool:
     config = config or {}
     return event_state_enabled(config) and event_state_enforce_enabled(config) and config.get("adoption_tier") == "runtime"
+
+
+def protocol_authoritative_enabled(config: dict[str, Any] | None) -> bool:
+    config = config or {}
+    return (
+        protocol_state_enforcement_enabled(config)
+        and event_state_materialize_enabled(config)
+        and event_state_authoritative_enabled(config)
+    )
 
 
 def protocol_materialization_disabled_reason(config: dict[str, Any] | None) -> str:
@@ -151,6 +173,55 @@ def build_genesis_snapshot(root: Path) -> dict[str, Any]:
     return protocol_snapshot(load_hot_protocol_state(root), up_to_seq=0)
 
 
+def snapshot_document(snapshot: dict[str, Any]) -> dict[str, Any]:
+    return {"schema_version": PROTOCOL_SNAPSHOT_SCHEMA_VERSION, "snapshot": snapshot}
+
+
+def snapshot_ref_path(root: Path, snapshot_hash: str) -> Path:
+    return root.resolve() / PROTOCOL_SNAPSHOT_DIR / f"{snapshot_hash}.json"
+
+
+def write_snapshot_ref(root: Path, snapshot: dict[str, Any]) -> dict[str, str]:
+    document = snapshot_document(snapshot)
+    snapshot_hash = canonical_hash(document)
+    path = snapshot_ref_path(root, snapshot_hash)
+    write_text_ascii(path, canonical_json_text(document))
+    return {"hash": snapshot_hash, "schema_version": PROTOCOL_SNAPSHOT_SCHEMA_VERSION}
+
+
+def load_snapshot_ref(root: Path | None, snapshot_ref: dict[str, Any]) -> dict[str, Any]:
+    if root is None:
+        raise ProtocolSnapshotRefError("snapshot_ref replay requires an instance root")
+    expected_hash = str(snapshot_ref.get("hash") or "").strip()
+    if not expected_hash:
+        raise ProtocolSnapshotRefError("snapshot_ref missing hash")
+    if not SNAPSHOT_HASH_RE.match(expected_hash):
+        raise ProtocolSnapshotRefError("snapshot_ref hash is not a canonical sha256 hex digest")
+    path = snapshot_ref_path(root, expected_hash)
+    if not path.exists():
+        raise ProtocolSnapshotRefError(f"snapshot_ref missing content-addressed snapshot: {path.relative_to(root).as_posix()}")
+    document = read_json(path)
+    actual_hash = canonical_hash(document)
+    if actual_hash != expected_hash:
+        raise ProtocolSnapshotRefError(f"snapshot_ref hash mismatch: expected {expected_hash}, found {actual_hash}")
+    if document.get("schema_version") != snapshot_ref.get("schema_version"):
+        raise ProtocolSnapshotRefError(
+            "snapshot_ref schema_version mismatch: "
+            f"expected {snapshot_ref.get('schema_version')}, found {document.get('schema_version')}"
+        )
+    snapshot = document.get("snapshot")
+    if not isinstance(snapshot, dict) or not isinstance(snapshot.get("state"), dict):
+        raise ProtocolSnapshotRefError("snapshot_ref document has no protocol state snapshot")
+    return snapshot
+
+
+def current_git_commit(root: Path) -> str:
+    completed = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root.resolve(), text=True, capture_output=True, check=False)
+    if completed.returncode != 0:
+        return "unknown"
+    return completed.stdout.strip() or "unknown"
+
+
 def write_genesis(
     root: Path,
     *,
@@ -169,6 +240,72 @@ def write_genesis(
     )
     writer.write_snapshot()
     return {"event": event, "snapshot": snapshot}
+
+
+def write_genesis_reference(
+    root: Path,
+    *,
+    actor_id: str,
+    timestamp: str,
+    commit: str | None = None,
+    idempotency_key: str = "protocol-state:genesis-ref:v1",
+) -> dict[str, Any]:
+    if not str(actor_id or "").strip():
+        raise ProtocolSnapshotRefError("actor_id is required for genesis snapshot_ref")
+    if not str(timestamp or "").strip():
+        raise ProtocolSnapshotRefError("timestamp is required for deterministic genesis snapshot_ref")
+    root = root.resolve()
+    writer = EventWriter(root)
+    if idempotency_key:
+        existing_seq = writer.state().get("idempotency_keys", {}).get(idempotency_key)
+        if existing_seq:
+            for existing in writer.events():
+                if int(existing.get("seq") or 0) != int(existing_seq):
+                    continue
+                event = dict(existing)
+                event["deduped"] = True
+                existing_payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+                existing_ref = existing_payload.get("snapshot_ref") if isinstance(existing_payload, dict) else None
+                if not isinstance(existing_ref, dict):
+                    raise ProtocolSnapshotRefError("deduped genesis event has no snapshot_ref")
+                snapshot = load_snapshot_ref(root, existing_ref)
+                return {
+                    "event": event,
+                    "snapshot": snapshot,
+                    "snapshot_ref": dict(existing_ref),
+                    "snapshot_path": snapshot_ref_path(root, str(existing_ref.get("hash") or "")),
+                }
+    snapshot = build_genesis_snapshot(root)
+    snapshot_ref = write_snapshot_ref(root, snapshot)
+    snapshot_ref.update(
+        {
+            "commit": str(commit or current_git_commit(root)),
+            "actor": str(actor_id),
+            "timestamp": str(timestamp),
+        }
+    )
+    event = writer.append_event(
+        event_type="protocol.genesis",
+        aggregate_id="protocol-state",
+        actor_id=actor_id,
+        idempotency_key=idempotency_key,
+        payload={"snapshot_ref": snapshot_ref},
+    )
+    writer.write_snapshot()
+    return {"event": event, "snapshot": snapshot, "snapshot_ref": snapshot_ref, "snapshot_path": snapshot_ref_path(root, snapshot_ref["hash"])}
+
+
+def prepare_authoritative_migration(
+    root: Path,
+    *,
+    actor_id: str,
+    timestamp: str,
+    commit: str | None = None,
+) -> dict[str, Any]:
+    result = write_genesis_reference(root, actor_id=actor_id, timestamp=timestamp, commit=commit)
+    result["authoritative_ready"] = True
+    result["activation_note"] = "Keep event_state.authoritative/enforce false until the operator approves activation."
+    return result
 
 
 def task_id_from_event(event: dict[str, Any], payload: dict[str, Any]) -> str:
@@ -293,6 +430,7 @@ def replay_protocol_state(
     events: list[dict[str, Any]],
     base_state: dict[str, Any] | None = None,
     forbidden_callback: Callable[[], None] | None = None,
+    root: Path | None = None,
 ) -> dict[str, Any]:
     if forbidden_callback is not None:
         # Deliberately unused: replay is pure and must not call external effects.
@@ -306,7 +444,12 @@ def replay_protocol_state(
         event_type = str(event.get("type") or "")
         payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
         if event_type in {"protocol.genesis", "protocol_state.genesis"}:
-            genesis = payload.get("state") or payload.get("protocol_state")
+            snapshot_ref = payload.get("snapshot_ref")
+            if isinstance(snapshot_ref, dict):
+                genesis_snapshot = load_snapshot_ref(root, snapshot_ref)
+                genesis = genesis_snapshot.get("state")
+            else:
+                genesis = payload.get("state") or payload.get("protocol_state")
             if isinstance(genesis, dict):
                 state = canonicalize_protocol_state(genesis)
         elif event_type in {"task.created", "task.upserted", "task.status_changed", "protocol.task_status_changed"}:
@@ -322,7 +465,7 @@ def replay_protocol_state(
 
 
 def current_protocol_snapshot(root: Path) -> dict[str, Any]:
-    return replay_protocol_state(all_events(root))
+    return replay_protocol_state(all_events(root), root=root)
 
 
 def canonical_json_text(payload: dict[str, Any]) -> str:
@@ -403,7 +546,7 @@ def materialize_from_event_log_if_enabled(root: Path) -> dict[str, Any]:
     events = all_events(root)
     if not has_protocol_genesis(events):
         raise ProtocolMaterializationError("protocol genesis event missing; run write_genesis(root) before enabling event_state.materialize")
-    snapshot = replay_protocol_state(events)
+    snapshot = replay_protocol_state(events, root=root)
     return materialize_to_disk(root, snapshot)
 
 
@@ -447,6 +590,7 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
     return {
         "enabled": event_state_enabled(config),
         "enforced": protocol_state_enforcement_enabled(config),
+        "authoritative": protocol_authoritative_enabled(config),
         "has_drift": bool(entries),
         "up_to_seq": replay_snapshot["up_to_seq"],
         "entries": entries,

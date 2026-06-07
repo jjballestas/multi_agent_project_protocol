@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0068
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0068 (Fase B.3) ACEPTADA y DONE. Encolada B.4 = TASK-0069 (ready, ULTIMA de Fase B). Buen trabajo.

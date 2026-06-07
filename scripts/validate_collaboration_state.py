@@ -19,7 +19,13 @@ if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
 from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_state_has_content
-from runtime.protocol_replay import drift_paths, event_state_enabled, protocol_state_drift, protocol_state_enforcement_enabled
+from runtime.protocol_replay import (
+    ProtocolMaterializationError,
+    drift_paths,
+    event_state_enabled,
+    protocol_state_drift,
+    protocol_state_enforcement_enabled,
+)
 
 
 VALID_CLAIM_STATUSES = {"active", "released", "blocked"}
@@ -824,7 +830,11 @@ def validate_protocol_state_drift(
         return
     if not runtime_state_has_content(root):
         return
-    drift = protocol_state_drift(root)
+    try:
+        drift = protocol_state_drift(root)
+    except ProtocolMaterializationError as exc:
+        validation.fail(f"Runtime protocol state drift check failed: {exc}")
+        return
     if drift.get("has_drift"):
         paths = drift_paths(drift)
         if protocol_state_enforcement_enabled(config):

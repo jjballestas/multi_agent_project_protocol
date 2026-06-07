@@ -2089,6 +2089,48 @@
             "sdd_required": true,
             "review": "RESUELTA por Claude (instruccion del operador 2026-06-07). recent_next_actions config-gated (vivo+template=8) + condense_next_actions determinista/idempotente con fusion de centinelas previos + next_actions_condensed en run-log; paridad py/.ps1 por delegacion; 4 golden nuevos en runtime_prune_cases (sobre/bajo umbral, ausente/0, fusion). Gates verdes. Aditivo, off por defecto (0=previo). CIERRA el FOLLOW-UP de Capa A/D2.1.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0066",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Fase B.1 (SPEC-0052, decompone SPEC-0039 sec.4): replay/materializacion del ESTADO DE PROTOCOLO (replay_protocol_state + materialize_protocol_state + build_genesis_snapshot + protocol_state_drift, deterministas/canonicos) + config event_state.enabled (live+template, default false) + validador py/.ps1 reporta drift como WARNING solo con runtime/state + feature on (off=byte-equivalente) + golden runtime_protocol_replay_cases. READ-ONLY: no toca write-path ni edicion manual (B.2-B.4 gateadas). Avanza el paraguas TASK-0038.",
+            "spec_id": "Area_comun/specs/SPEC-0052-faseB-replay-estado-protocolo.md",
+            "file": "Area_comun/tasks/TASK-0066-codex-faseB1-replay-estado-protocolo.md",
+            "linked_decisions": [
+                "DECISION-0017",
+                "DECISION-0015",
+                "DECISION-0014"
+            ],
+            "depends_on": [
+                "TASK-0048"
+            ],
+            "relates_to": [
+                "TASK-0038",
+                "TASK-0044"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/runtime_protocol_replay_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/protocol_replay.py",
+                "examples/runtime_protocol_replay_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 29/29 (nuevo runtime_protocol_replay_cases 6/6) + validador/encoding/neutralidad/prune py verdes. runtime/protocol_replay.py es PURO/DETERMINISTA/READ-ONLY (sin write_text; replay_protocol_state/materialize_protocol_state/build_genesis_snapshot/protocol_state_drift; canonicalizacion estable). Gating correcto: el validador solo emite WARNING de drift si event_state.enabled Y runtime/state tiene contenido; con la feature off retorna temprano => byte-equivalente verificado (validador sin warning nuevo); nunca hard-fail (solo warn). Scope respetado: no toca apply.py/orchestrator ni el flujo de edicion manual (handoff lo confirma). Flip por arquitecto. CIERRA Fase B.1; avanza TASK-0038. Siguiente: B.2 (TASK-0067).",
+            "updated_at": "2026-06-07"
         }
     ]
 }

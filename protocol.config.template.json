@@ -61,7 +61,8 @@
   "event_state": {
     "enabled": false,
     "materialize": false,
-    "enforce": false
+    "enforce": false,
+    "authoritative": false
   },
   "tool_policy": {
     "enabled": false,

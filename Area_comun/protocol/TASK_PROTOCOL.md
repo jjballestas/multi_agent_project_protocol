@@ -151,6 +151,16 @@ three observed failures (HALLAZGOS):
 
 This complements DECISION-0018 (handoff-release atomicity) and the claim discipline (DECISION-0007/0011).
 
+### Runtime-authoritative state
+
+In runtime-tier instances that explicitly enable
+`event_state.enabled/materialize/enforce/authoritative`, the runtime is the writer for
+`Area_comun/state/*.json`. Task and claim transitions must be submitted as runtime intents; manual
+ledger edits are drift and the B.3 hard-gate rejects them. The mode is off by default, uses a
+content-addressed genesis reference under `runtime/state/snapshots/<hash>.json`, and can be rolled
+back by disabling `event_state.enforce`/`authoritative`. Coordination-tier instances keep the manual
+ledger process.
+
 ### Claim Before Shared Draft
 
 An agent must create or update an active claim **before** creating, editing or leaving any draft in

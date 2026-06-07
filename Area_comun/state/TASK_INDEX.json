@@ -79,7 +79,7 @@
         {
             "id": "TASK-0038",
             "owner": "Claude",
-            "status": "proposed",
+            "status": "done",
             "type": "analysis",
             "priority": "normal",
             "phase": "P2",
@@ -106,54 +106,13 @@
                 "runtime/apply.py"
             ],
             "deliverables": [
-                "Analisis de brechas N-agent",
-                "Propuesta de registry de agentes/capacidades",
-                "Specs/tareas de migracion aditiva"
+                "Area_comun/specs/SPEC-0038-n-agent-registry.md",
+                "Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md",
+                "Area_comun/specs/SPEC-0039-event-log-writer-vivo.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
-        },
-        {
-            "id": "TASK-0066",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "high",
-            "phase": "P2",
-            "title": "Fase B.1 (SPEC-0052, decompone SPEC-0039 sec.4): replay/materializacion del ESTADO DE PROTOCOLO (replay_protocol_state + materialize_protocol_state + build_genesis_snapshot + protocol_state_drift, deterministas/canonicos) + config event_state.enabled (live+template, default false) + validador py/.ps1 reporta drift como WARNING solo con runtime/state + feature on (off=byte-equivalente) + golden runtime_protocol_replay_cases. READ-ONLY: no toca write-path ni edicion manual (B.2-B.4 gateadas). Avanza el paraguas TASK-0038.",
-            "spec_id": "Area_comun/specs/SPEC-0052-faseB-replay-estado-protocolo.md",
-            "file": "Area_comun/tasks/TASK-0066-codex-faseB1-replay-estado-protocolo.md",
-            "linked_decisions": [
-                "DECISION-0017",
-                "DECISION-0015",
-                "DECISION-0014"
-            ],
-            "depends_on": [
-                "TASK-0048"
-            ],
-            "relates_to": [
-                "TASK-0038",
-                "TASK-0044"
-            ],
-            "relevant_files": [
-                "runtime/eventlog.py",
-                "runtime/protocol_replay.py",
-                "scripts/validate_collaboration_state.py",
-                "scripts/validate_collaboration_state.ps1",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/runtime_protocol_replay_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/protocol_replay.py",
-                "examples/runtime_protocol_replay_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0066-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 29/29 (nuevo runtime_protocol_replay_cases 6/6) + validador/encoding/neutralidad/prune py verdes. runtime/protocol_replay.py es PURO/DETERMINISTA/READ-ONLY (sin write_text; replay_protocol_state/materialize_protocol_state/build_genesis_snapshot/protocol_state_drift; canonicalizacion estable). Gating correcto: el validador solo emite WARNING de drift si event_state.enabled Y runtime/state tiene contenido; con la feature off retorna temprano => byte-equivalente verificado (validador sin warning nuevo); nunca hard-fail (solo warn). Scope respetado: no toca apply.py/orchestrator ni el flujo de edicion manual (handoff lo confirma). Flip por arquitecto. CIERRA Fase B.1; avanza TASK-0038. Siguiente: B.2 (TASK-0067).",
+            "review": "CERRADA (2026-06-07) por cobertura: el paraguas N-agente (SPEC-0038) queda cubierto. Brechas de spec-completa cerradas en Capa A (golden N=3/N=5 TASK-0050, property-based I1-I8 TASK-0051, concurrency sim TASK-0052, CI TASK-0047, autor-de-record TASK-0049) y el principal pendiente -event log writer-vivo del ESTADO de protocolo (criterios 11-12, I5/I6)- por la FASE B completa (B.1 replay/drift TASK-0066, B.2 materializacion TASK-0067, B.3 hard-fail TASK-0068, B.4 runtime autoritativo + genesis-ref TASK-0069). La capacidad queda construida y apagada; activarla en vivo es decision operativa del operador.",
             "updated_at": "2026-06-07"
         },
         {
@@ -248,7 +207,7 @@
         {
             "id": "TASK-0069",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -292,7 +251,7 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto, 2026-06-07). Ultima rebanada de Fase B. DECISION-0022 ratificada como direccion tecnica por el operador (MINOR-con-migracion). ENTREGAR APAGADA; activar en vivo = aprobacion separada del operador (validar replay/materializacion + rollback). Release atomico (DECISION-0018) + anti-colision (DECISION-0020).",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden 32/32 (nuevo runtime_protocol_genesis_ref_cases) + validador/encoding/neutralidad/prune py verdes. GENESIS POR REFERENCIA conforme a DECISION-0022/restriccion del operador: write_genesis_reference exige actor_id + timestamp provisto, escribe snapshot content-addressed en runtime/state/snapshots/<hash>.json y emite protocol.genesis con payload SOLO {snapshot_ref} (sin blob); load_snapshot_ref verifica hash sha256 + existencia + schema_version + contenido antes de hidratar (mismatch/ausente => bloqueo seguro). protocol_authoritative_enabled true solo con enabled+materialize+enforce+authoritative+tier runtime. ENTREGADA APAGADA: flags vivos enabled/materialize/enforce/authoritative=false => byte-equivalente, vivo intacto. Docs propagados (AGENTS.md/.template sec.7, TASK_PROTOCOL, N_AGENT_RUNTIME, README_INSTANCIACION). Scope respetado: no activa en vivo, no retira flujo manual, no toca turn schema, coordination-tier intacto. Flip por arquitecto. >>> FASE B COMPLETA (B.1+B.2+B.3+B.4): writer-vivo construido pero APAGADO. <<< Activar en vivo = GO final del operador con validacion round-trip + rollback.",
             "updated_at": "2026-06-07"
         }
     ]

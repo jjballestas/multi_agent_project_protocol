@@ -168,6 +168,31 @@ Funciones relevantes:
 La frontera de determinismo es estricta: el replay reconstruye estado desde eventos grabados y no
 reinvoca agentes ni herramientas.
 
+## Runtime escritor autoritativo
+
+En instancias `adoption_tier: "runtime"`, el estado de protocolo puede pasar de edicion manual a
+escritura por runtime. El modo esta apagado por defecto y solo queda activo cuando son verdaderos
+`event_state.enabled`, `event_state.materialize`, `event_state.enforce` y
+`event_state.authoritative`. Coordination-tier no cambia: sigue operando con edicion manual del
+ledger.
+
+La migracion inicial usa genesis por referencia:
+
+1. El runtime toma el corte canonico de `TASK_INDEX.json`, `PROJECT_STATE.json` y `CLAIMS.json`.
+2. Escribe el snapshot en `runtime/state/snapshots/<hash>.json`, donde `<hash>` es verificable.
+3. Emite `protocol.genesis` con `snapshot_ref = {hash, commit, actor, timestamp, schema_version}`;
+   el evento no incluye el estado completo.
+4. El replay carga el snapshot por hash, recomputa la integridad y solo entonces materializa.
+
+Una vez activo el modo autoritativo, las transiciones se expresan como intents al runtime. Editar a
+mano `Area_comun/state/*.json` produce drift y el gate de `event_state.enforce` lo rechaza. No hay
+un bloqueo nuevo del sistema de archivos: la prohibicion vive en el contrato, el validador y el
+gate.
+
+Rollback: apagar `event_state.enforce` y `event_state.authoritative` devuelve el flujo a edicion
+manual. El snapshot content-addressed y el `commit` registrado en el `snapshot_ref` quedan como
+punto de reconstruccion verificable.
+
 ## Presupuesto y deadlines
 
 El bloque `budget` puede limitar coste y terminacion:

@@ -97,6 +97,9 @@ jobs:
       - name: Run runtime protocol enforce cases
         run: python examples/runtime_protocol_enforce_cases/run_runtime_protocol_enforce_cases.py
 
+      - name: Run runtime protocol genesis-ref cases
+        run: python examples/runtime_protocol_genesis_ref_cases/run_runtime_protocol_genesis_ref_cases.py
+
       - name: Run runtime event auth cases
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 

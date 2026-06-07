@@ -137,6 +137,7 @@ def build_fixture(
     event_enabled: bool,
     materialize: bool,
     enforce: bool = False,
+    authoritative: bool = False,
     tier: str = "runtime",
     init_repo: bool = False,
 ) -> None:
@@ -147,7 +148,12 @@ def build_fixture(
             "adoption_tier": tier,
             "runtime": {"enabled": True, "entrypoint": "runtime/orchestrator.py"},
             "event_auth": {"enabled": False},
-            "event_state": {"enabled": event_enabled, "materialize": materialize, "enforce": enforce},
+            "event_state": {
+                "enabled": event_enabled,
+                "materialize": materialize,
+                "enforce": enforce,
+                "authoritative": authoritative,
+            },
             "domain_neutrality": {"enabled": True, "denylist": [], "scan_globs": [], "exempt_globs": []},
             "state_invariants": [{"path": "status", "equals": "active"}],
         },

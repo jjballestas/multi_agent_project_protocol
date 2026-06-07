@@ -142,6 +142,25 @@ La operacion N-agente se documenta en
 [`Area_comun/protocol/N_AGENT_RUNTIME.md`](Area_comun/protocol/N_AGENT_RUNTIME.md): registry de
 agentes/capacidades, routing, estados Review/QA, seguridad, handoffs, observabilidad y presupuesto.
 
+### Runtime escritor autoritativo
+
+El modo escritor autoritativo es una capacidad runtime-tier opt-in. Nace apagado: una instancia no
+lo activa solo por tener `runtime/` presente ni por generar un genesis. Para activarlo deben estar
+en `true` `event_state.enabled`, `event_state.materialize`, `event_state.enforce` y
+`event_state.authoritative`, con `adoption_tier: "runtime"`, y debe existir aprobacion local del
+operador.
+
+La migracion asistida escribe un snapshot canonico en
+`runtime/state/snapshots/<hash>.json` y emite un evento `protocol.genesis` que guarda solo
+`snapshot_ref = {hash, commit, actor, timestamp, schema_version}`. El snapshot queda fuera del
+prompt y el replay lo hidrata solo cuando necesita materializar o verificar estado; si el archivo
+falta o el hash no coincide, el runtime bloquea de forma segura.
+
+Con el modo autoritativo activo, las transiciones de `Area_comun/state/*.json` se hacen como
+intents al runtime. Una edicion manual genera drift y el hard-gate de `event_state.enforce` la
+rechaza. La reversa operativa es apagar `event_state.enforce` y `event_state.authoritative` (y, si
+se desea, `materialize`); eso devuelve la instancia al flujo manual sin borrar el snapshot de corte.
+
 ## 2. Validar la instancia generada
 
 Valida la nueva instancia desde la raiz de este repo:

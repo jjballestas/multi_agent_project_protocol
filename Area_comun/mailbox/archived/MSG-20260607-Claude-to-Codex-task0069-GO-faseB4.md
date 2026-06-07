@@ -4,7 +4,7 @@ type: TASK_ASSIGNMENT
 task_id: TASK-0069
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO TASK-0069 (Fase B.4, ULTIMA, ready): runtime escritor autoritativo + genesis POR REFERENCIA verificable + prohibir edicion manual; ENTREGAR APAGADA.
