@@ -78,7 +78,7 @@
     <span class="chip">Generado <b>2026-06-07</b> (actualizado)</span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Rama <b>main</b></span>
-    <span class="chip">HEAD <b>bd2b128</b></span>
+    <span class="chip">HEAD <b>20ac8db</b></span>
     <span class="chip">Fase <b>P2 &mdash; post-v1.0 (writer-vivo en SOMBRA; Fase 7 en marcha)</b></span>
   </div>
 </header>
@@ -88,17 +88,18 @@
   <div class="sub" style="margin-top:6px">
     La metodologia esta consolidada y soportada como <b>producto distribuible</b>: contrato de coordinacion,
     motor runtime N-agente, capa de seguridad, wrapper LLM real y track de adopcion. Tag <code>v1.0.0</code>,
-    <code>protocol_version 1.0.0</code>, golden 32/32 verde. <b>Fase B COMPLETA</b> y el writer-vivo
-    <b>ACTIVADO EN MODO SOMBRA</b> (materializa/observa; la edicion manual sigue valida). <b>Fase 7</b>
-    (release engineering) aprobada y en marcha (F7.1 SBOM en curso).
+    <code>protocol_version 1.0.0</code>, golden 34/34 verde. <b>Fase B COMPLETA</b>; writer-vivo en <b>MODO
+    SOMBRA</b> (end-state estable elegido por el operador; edicion manual valida). El intent-flow
+    (<code>submit_intent</code>, keystone del escritor-unico) esta DONE; <b>3.b.2 enforce en PAUSA</b>. <b>Fase 7</b>
+    (release engineering) en marcha: F7.1 SBOM done, F7.2 manifiesto+verify en curso.
   </div>
 </div>
 
 <div class="grid">
   <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
   <div class="card"><div class="n">22</div><div class="l">decisiones de protocolo</div></div>
-  <div class="card"><div class="n">32/32</div><div class="l">golden runners verde</div></div>
-  <div class="card"><div class="n">SOMBRA</div><div class="l">writer-vivo activo (enabled+materialize; enforce/authoritative off)</div></div>
+  <div class="card"><div class="n">34/34</div><div class="l">golden runners verde</div></div>
+  <div class="card"><div class="n">SOMBRA</div><div class="l">writer-vivo activo (enabled+materialize; enforce/authoritative off, en pausa)</div></div>
 </div>
 
 <h2>1. Que esta cerrado (v1.0.0)</h2>
@@ -117,25 +118,25 @@
 
 <h2>2. En curso ahora</h2>
 <div class="phase now">
-  <h3><span class="badge b-now">EN CURSO</span> TASK-0071 &mdash; Fase 7.1 (Codex): SBOM determinista</h3>
-  <p>Primera rebanada de la <b>Fase 7</b> (release engineering, aprobada por el operador): un SBOM canonico y
-     determinista del paquete (inventario de archivos + sha256 + los 4 ejes de version + commit/timestamp
-     provistos), base para provenance/firma/verificacion. Aditivo, neutral, sin secretos. Ver 3.c.</p>
-  <p class="why">Ademas, el <b>writer-vivo esta ACTIVO en MODO SOMBRA</b> (<code>event_state.enabled+materialize=true</code>,
-     <code>enforce/authoritative=false</code>): el runtime materializa/observa y emitio el genesis de corte por
-     referencia, pero la <b>edicion manual del ledger sigue valida</b> (el lazo no se rompe). En sombra el
-     validador emite un <b>WARNING de drift</b> conforme se edita a mano &mdash; esperado y benigno, nunca
-     hard-fail. Ver 3.b.</p>
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0073 &mdash; Fase 7.2 (Codex): manifiesto + verify</h3>
+  <p>Segunda rebanada de la <b>Fase 7</b>: un <b>manifiesto de release</b> (envuelve el SBOM de F7.1 con un
+     <code>sbom_hash</code> global) y un comando <b>verify</b> que confirma por hash que un arbol coincide con
+     lo declarado (integridad de contenido; sin claves todavia, la firma es F7.4). Aditivo, determinista,
+     neutral, sin secretos. Ver 3.c.</p>
+  <p class="why">El <b>intent-flow</b> (<code>submit_intent</code>, keystone del escritor-unico) ya esta
+     <b>DONE</b> (TASK-0072, golden 34/34). El writer-vivo sigue en <b>MODO SOMBRA</b> (edicion manual valida;
+     drift = WARNING benigno). El switch a escritor-unico (3.b.2 enforce) esta <b>en PAUSA</b> por decision del
+     operador hasta que ambos lazos adopten <code>submit_intent</code> &mdash; ver 3.b.2.</p>
 </div>
 
 <h2>3. Fases que faltan (explicacion breve)</h2>
 
 <p class="sub">Roadmap de cierre hacia el writer-vivo del estado de protocolo y la madurez operativa:</p>
 <div class="rail">
-  <div class="seg done"><b>Fase B &#10003;</b>writer-vivo construido</div>
+  <div class="seg done"><b>Fase B &#10003;</b>writer-vivo + intent-flow</div>
   <div class="seg done"><b>Sombra &#10003;</b>activado (observa)</div>
-  <div class="seg now"><b>Fase 7</b>release eng (F7.1 en curso)</div>
-  <div class="seg gate"><b>Escritor unico</b>enforce (intents+GO)</div>
+  <div class="seg now"><b>Fase 7</b>release eng (F7.2 en curso)</div>
+  <div class="seg gate"><b>Escritor unico</b>enforce (EN PAUSA)</div>
   <div class="seg gate"><b>Autonomia</b>supervisada</div>
 </div>
 
@@ -208,31 +209,34 @@
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA &mdash; requiere cablear intents + nuevo GO</span> 3.b.2 &mdash; Escritor unico (enforce + authoritative)</h3>
-  <p>El siguiente y ultimo escalon: encender <code>enforce=true</code> + <code>authoritative=true</code> para
-     que el runtime sea el <b>unico escritor</b> y la edicion manual quede <b>prohibida</b> (rechazada como
-     drift por el hard-gate B.3). <b>No se enciende todavia</b> porque romperia el lazo actual (Claude y Codex
-     editan JSON) hasta que exista el flujo de coordinacion via <b>runtime intents</b>.</p>
+  <h3><span class="badge b-gate">EN PAUSA &mdash; decision del operador</span> 3.b.2 &mdash; Escritor unico (enforce + authoritative)</h3>
+  <p>El ultimo escalon: encender <code>enforce=true</code> + <code>authoritative=true</code> para que el
+     runtime sea el <b>unico escritor</b> y la edicion manual quede prohibida. El <b>keystone ya esta listo</b>:
+     el intent-flow <code>submit_intent</code> (TASK-0072, DONE; golden 34/34) permite mutar el estado via el
+     runtime dejando drift 0. El operador decidio <b>quedarse en MODO SOMBRA</b> (end-state estable) y NO
+     encender enforce todavia.</p>
   <ul class="steps">
-    <li class="next"><b>1. Cablear el flujo de intents</b>: que Claude y Codex emitan transiciones (status de tareas, claims, decisiones) como intents al runtime en vez de editar los <code>*.json</code>.</li>
-    <li class="next"><b>2. Encender enforce+authoritative</b> con nuevo <b>GO del operador</b>; la edicion manual pasa a rechazarse como drift.</li>
-    <li class="next"><b>3. La regla anti-colision (DECISION-0020) se vuelve casi innecesaria</b>: ya no hay dos escritores manuales.</li>
+    <li class="done"><b>1. Cablear el flujo de intents</b>: <code>submit_intent</code> (task_status/claim/decision) validado, idempotente, drift 0. <span class="badge b-ok">DONE (TASK-0072)</span></li>
+    <li class="next"><b>2. Adoptar submit_intent en AMBOS lazos</b>: que Claude y, sobre todo, el <b>lazo autonomo de Codex</b> dejen de editar los <code>*.json</code> y usen <code>submit_intent</code>. Pendiente (cambio de comportamiento de Codex, lo coordina el operador).</li>
+    <li class="next"><b>3. Re-genesis + encender enforce+authoritative</b> con GO del operador: la edicion manual pasa a rechazarse como drift; la regla anti-colision (DECISION-0020) se vuelve casi innecesaria.</li>
   </ul>
-  <div class="why">Reversible (apagar flags vuelve a manual). La prohibicion DURA permanente seria un paso futuro
-     con su propia decision. SemVer MINOR-con-migracion (DECISION-0022). Requiere el cableado de intents + GO
-     explicito del operador; sin eso, queda en SOMBRA.</div>
+  <div class="why">Por que en pausa: encender enforce sin que el lazo de Codex use <code>submit_intent</code>
+     romperia su operativa (su edicion manual seria rechazada). El modo SOMBRA da toda la maquinaria +
+     observabilidad sin romper nada, asi que es un end-state valido por ahora. Reversible. SemVer
+     MINOR-con-migracion (DECISION-0022). Se retoma como switch deliberado y coordinado cuando ambos lazos
+     adopten intents.</div>
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-now">3.c &mdash; APROBADA, EN MARCHA (F7.1 en curso)</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
+  <h3><span class="badge b-now">3.c &mdash; EN MARCHA (F7.2 en curso)</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
   <p>Endurece <b>como se publica y como se verifica</b> el paquete-metodologia, para que un adoptante pueda
      confiar en que recibe exactamente lo que se publico, sin manipulacion. Hoy el release es un tag + CHANGELOG
      + reporte humano; Fase 7 le agrega trazabilidad criptografica y verificacion automatizable. Es aditiva al
      proceso de release (DECISION-0001) y neutral de dominio. <b>Aprobada por el operador</b>; decompuesta en 5
      rebanadas (SPEC-0057), promovidas de a una:</p>
   <ul class="steps">
-    <li class="now"><b>F7.1 &mdash; SBOM determinista</b> (TASK-0071): inventario canonico (rutas + sha256 + 4 ejes de version + commit/timestamp provistos). <span class="badge b-now">EN CURSO (Codex)</span></li>
-    <li class="next"><b>F7.2 &mdash; manifiesto + verify</b>: integridad por hash de un release.</li>
+    <li class="done"><b>F7.1 &mdash; SBOM determinista</b> (TASK-0071): inventario canonico (rutas + sha256 + 4 ejes de version + commit/timestamp provistos). <span class="badge b-ok">DONE</span></li>
+    <li class="now"><b>F7.2 &mdash; manifiesto + verify</b> (TASK-0073): manifiesto con <code>sbom_hash</code> + comando verify (integridad por hash de un release, sin claves). <span class="badge b-now">EN CURSO (Codex)</span></li>
     <li class="next"><b>F7.3 &mdash; provenance/atestacion</b>: quien/commit/proceso (SLSA-lite).</li>
     <li class="next"><b>F7.4 &mdash; firma</b>: probable DECISION propia (claves locales/CI, sin secretos).</li>
     <li class="next"><b>F7.5 &mdash; docs + integracion</b> al flujo de release.</li>
@@ -304,7 +308,7 @@
 
 <footer>
   Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
-  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD bd2b128 (post-v1.0.0; FASE B COMPLETA; writer-vivo ACTIVADO en MODO SOMBRA -enabled+materialize, enforce/authoritative off-; Fase 7 aprobada y en marcha, F7.1 en curso). En sombra el validador emite WARNING de drift benigno (no hard-fail).
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD 20ac8db (post-v1.0.0; FASE B COMPLETA; intent-flow submit_intent DONE; writer-vivo en MODO SOMBRA -end-state estable elegido por el operador-; 3.b.2 enforce EN PAUSA; Fase 7 en marcha: F7.1 done, F7.2 en curso). En sombra el validador emite WARNING de drift benigno (no hard-fail).
   Las fases gateadas requieren aprobacion explicita del operador humano antes de arrancar.
 </footer>
 
