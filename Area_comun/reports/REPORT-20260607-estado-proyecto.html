@@ -78,7 +78,7 @@
     <span class="chip">Generado <b>2026-06-07</b> (actualizado)</span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Rama <b>main</b></span>
-    <span class="chip">HEAD <b>f22022e</b></span>
+    <span class="chip">HEAD <b>ae3722c</b></span>
     <span class="chip">Fase <b>P2 &mdash; post-v1.0 (Fase B en marcha)</b></span>
   </div>
 </header>
@@ -95,9 +95,9 @@
 
 <div class="grid">
   <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
-  <div class="card"><div class="n">21</div><div class="l">decisiones de protocolo</div></div>
-  <div class="card"><div class="n">30/30</div><div class="l">golden runners verde</div></div>
-  <div class="card"><div class="n">B.3</div><div class="l">rebanada de Fase B en curso (TASK-0068, Codex)</div></div>
+  <div class="card"><div class="n">22</div><div class="l">decisiones de protocolo</div></div>
+  <div class="card"><div class="n">31/31</div><div class="l">golden runners verde</div></div>
+  <div class="card"><div class="n">B.4</div><div class="l">ultima rebanada de Fase B en curso (TASK-0069, Codex)</div></div>
 </div>
 
 <h2>1. Que esta cerrado (v1.0.0)</h2>
@@ -116,14 +116,15 @@
 
 <h2>2. En curso ahora</h2>
 <div class="phase now">
-  <h3><span class="badge b-now">EN CURSO</span> TASK-0068 &mdash; Fase B.3 (Codex)</h3>
-  <p>Tercera rebanada de la Fase B. Promueve el <code>drift</code> entre el estado vivo y
-     <code>replay(log)</code> de aviso a <b>error duro</b> (hard-fail del validador + aborta el commit en
-     apply) cuando el runtime es el escritor habitual (<code>event_state.enforce</code>). Triple-gated y
-     byte-equivalente con la funcion apagada; cierra el invariante objetivo <code>hot == replay(log)</code>.</p>
-  <p class="why">B.1 (TASK-0066) y B.2 (TASK-0067) ya estan <b>DONE</b> y ratificadas (maquinaria read-only
-     de replay/drift + materializacion opt-in atomica; golden 30/30). Tras B.3 solo queda <b>B.4</b>
-     (migrar/prohibir edicion manual), gateada y detallada en la seccion 3.</p>
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0069 &mdash; Fase B.4 (Codex), ultima rebanada de Fase B</h3>
+  <p>Convierte al runtime en <b>escritor autoritativo</b> del estado y prohibe la edicion manual (reusando el
+     hard-gate de B.3), con una migracion por <b>genesis de referencia</b> (DECISION-0022): el evento genesis
+     guarda solo un <code>snapshot_ref</code> verificable (hash/commit/actor/timestamp/schema) y el snapshot
+     completo vive content-addressed <i>fuera del prompt</i>. <b>Se entrega APAGADA</b>: la maquinaria queda
+     lista pero el repo vivo sigue en edicion manual hasta una activacion aparte (ver 3.b).</p>
+  <p class="why">B.1+B.2+B.3 (TASK-0066/0067/0068) ya estan <b>DONE</b> y ratificadas: con B.3 el invariante
+     <code>hot == replay(log)</code> es <b>enforceable</b> (golden 31/31). DECISION-0022 ratificada como
+     direccion tecnica (MINOR-con-migracion). Tras B.4 done, la Fase B queda completa pero inactiva en vivo.</p>
 </div>
 
 <h2>3. Fases que faltan (explicacion breve)</h2>
@@ -145,8 +146,8 @@
   <ul class="steps">
     <li class="done"><b>B.1 &mdash; replay/materializacion read-only + drift en aviso</b> (TASK-0066). Maquinaria que reconstruye y compara, sin cambiar como se escribe. <span class="badge b-ok">DONE</span></li>
     <li class="done"><b>B.2 &mdash; materializacion opt-in</b> (TASK-0067): el runtime materializa los <code>*.json</code> desde el log (log = verdad) bajo flag, en instancias runtime-tier. <span class="badge b-ok">DONE</span></li>
-    <li class="now"><b>B.3 &mdash; hard-fail</b> (TASK-0068): el <code>drift</code> entre el estado vivo y <code>replay(log)</code> pasa de aviso a error duro del validador (y aborta el commit) cuando el runtime es el escritor habitual (<code>event_state.enforce</code>). <span class="badge b-now">EN CURSO</span></li>
-    <li class="next"><b>B.4 &mdash; migrar/prohibir edicion manual</b>: el runtime pasa a ser el <b>unico escritor</b> del estado; se prohibe editar los <code>*.json</code> a mano. Cambio incompatible del modo operativo => requiere DECISION + evaluacion SemVer (posible MAJOR) + aprobacion humana. <span class="badge b-gate">GATEADA</span> &mdash; ver detalle abajo.</li>
+    <li class="done"><b>B.3 &mdash; hard-fail</b> (TASK-0068): el <code>drift</code> entre el estado vivo y <code>replay(log)</code> pasa de aviso a error duro del validador (y aborta el commit) cuando el runtime es el escritor habitual (<code>event_state.enforce</code>). <span class="badge b-ok">DONE</span></li>
+    <li class="now"><b>B.4 &mdash; migrar/prohibir edicion manual</b> (TASK-0069): el runtime pasa a ser el <b>unico escritor</b> del estado; se prohibe editar los <code>*.json</code> a mano. DECISION-0022 ratificada (MINOR-con-migracion). <b>Se entrega APAGADA</b> &mdash; ver detalle en 3.a y la activacion en vivo en 3.b. <span class="badge b-now">EN CURSO</span></li>
   </ul>
   <div class="why">Por que: cierra los criterios 11-12 de SPEC-0038 e invariantes I5/I6 sobre el estado vivo;
      es el principal pendiente del paraguas N-agente (TASK-0038). Las demas brechas de ese paraguas (golden
@@ -154,20 +155,21 @@
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">GATEADA &mdash; requiere DECISION + aprobacion humana</span> Fase B.4 &mdash; Migrar/prohibir la edicion manual del estado de protocolo</h3>
+  <h3><span class="badge b-now">3.a &mdash; EN IMPLEMENTACION (apagada)</span> Fase B.4 &mdash; Migrar/prohibir la edicion manual del estado de protocolo</h3>
   <p>Es la <b>ultima rebanada</b> de la Fase B y la que de verdad cierra el "writer-vivo": convierte al
      runtime en el <b>unico escritor</b> del estado de protocolo y retira el modo actual en el que los agentes
      editan los <code>*.json</code> a mano. B.1-B.3 construyen la maquinaria y los gates; B.4 cambia el
-     <b>modo operativo</b>. Por eso es la unica rebanada de Fase B que no es puramente aditiva y que requiere
-     una DECISION nueva + evaluacion SemVer (posible MAJOR) + aprobacion del operador antes de arrancar.</p>
+     <b>modo operativo</b>. <b>DECISION-0022</b> ya esta ratificada como direccion tecnica
+     (<b>MINOR-con-migracion</b>, off-by-default, opt-in); B.4 (TASK-0069) se <b>entrega APAGADA</b>. Encenderla
+     en el repo vivo es un paso operativo aparte (ver 3.b).</p>
 
-  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que entra en el alcance</h4>
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que entra en el alcance (la maquinaria, B.4)</h4>
   <ul class="steps">
-    <li class="next"><b>1. Migracion (genesis definitivo)</b>: convertir el estado vivo actual en el evento <code>genesis</code> del log como fuente de verdad permanente. A partir de ese punto, <code>replay(log)</code> gobierna el estado; los <code>*.json</code> pasan a ser una <i>materializacion</i> del log, no el original.</li>
-    <li class="next"><b>2. Encender los tres flags en la instancia viva</b>: <code>event_state.enabled</code> + <code>materialize</code> + <code>enforce</code> en el repo vivo (hoy los tres estan en <code>false</code>). Esto solo aplica a instancias <code>runtime-tier</code>.</li>
-    <li class="next"><b>3. Prohibir la edicion manual</b>: las transiciones de estado (status de tareas, claims, decisiones) dejan de hacerse editando JSON a mano y pasan por el runtime (intent &rarr; apply &rarr; event log &rarr; materializacion). Una edicion manual que produzca <code>drift</code> es rechazada por el hard-gate (B.3).</li>
-    <li class="next"><b>4. Nuevo flujo de coordinacion</b>: Claude y Codex dejan de escribir el ledger directamente y emiten <b>turnos/intents</b> al runtime. El lazo semi-automatico actual (editar <code>*.json</code> + commit) se reemplaza por el runtime como mediador unico; la regla anti-colision (DECISION-0020) se vuelve en gran parte innecesaria porque ya no hay dos escritores manuales.</li>
-    <li class="next"><b>5. Documentacion y migracion para adoptantes</b>: como una instancia existente pasa de "edicion manual" a "runtime-escritor" sin perder historia, y como revertir.</li>
+    <li class="next"><b>1. Genesis por REFERENCIA (no por volcado)</b>: el evento <code>genesis</code> registra solo un <code>snapshot_ref</code> verificable (<code>hash</code>, <code>commit</code>, <code>actor</code>, <code>timestamp</code>, <code>schema_version</code>). El snapshot completo se persiste <b>content-addressed fuera del prompt</b> (<code>runtime/state/snapshots/&lt;hash&gt;.json</code>) y el replay lo carga por hash, <b>verifica integridad</b> y materializa <i>bajo demanda</i>. No infla el contexto del agente ni el cold-start.</li>
+    <li class="next"><b>2. Flag de modo autoritativo</b>: <code>event_state.authoritative</code> (ademas de <code>enabled</code>+<code>materialize</code>+<code>enforce</code>), default <code>false</code>, solo <code>runtime-tier</code>.</li>
+    <li class="next"><b>3. Prohibir la edicion manual</b>: las transiciones (status de tareas, claims, decisiones) pasan por el runtime (intent &rarr; apply &rarr; event log &rarr; materializacion); una edicion manual que produzca <code>drift</code> es rechazada por el hard-gate de B.3. Se reusa B.3 (sin mecanismo nuevo).</li>
+    <li class="next"><b>4. Migracion asistida + plan de rollback</b>: operacion que escribe el snapshot y emite el genesis-ref; y un rollback probado (apagar flags &rarr; volver a edicion manual sin perdida).</li>
+    <li class="next"><b>5. Docs</b>: como una instancia pasa de "edicion manual" a "runtime-escritor" y como revertir; nota en <code>AGENTS.md</code>/<code>.template</code> + <code>TASK_PROTOCOL</code>.</li>
   </ul>
 
   <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que NO cambia / limites</h4>
@@ -177,12 +179,47 @@
     <li class="next"><b>Sin secretos ni dominio</b>: se mantiene la neutralidad y el determinismo del replay (sin reloj/red).</li>
   </ul>
 
-  <div class="why">Por que es la mas delicada: rompe el flujo de edicion manual que es el <b>modo operativo
-     actual</b> del repo (y el unico modo de las instancias coordination-tier). Es un cambio incompatible del
-     contrato operativo &rarr; DECISION nueva + SemVer (MAJOR si una instancia valida deja de operar igual) +
-     aprobacion humana. Riesgo principal: doble fuente de verdad durante la transicion, mitigado por la ventana
-     warning&rarr;hard-fail de B.1-B.3 y por hacer la migracion genesis explicita y reversible. <b>El arquitecto
-     la disenara (SPEC + DECISION borrador en su area), pero NO se encola sin OK del operador.</b></div>
+  <div class="why">Por que es la mas delicada: cambia el modo operativo (en instancias que la activen, la
+     edicion manual queda prohibida). Mitigaciones: off-by-default + opt-in + coordination-tier intacto;
+     migracion genesis explicita, verificable (por hash) y reversible; ventana warning&rarr;hard-fail de
+     B.1-B.3. La <b>maquinaria</b> (B.4) es solo eso: entregar la capacidad apagada. Activarla en una instancia
+     real es el paso 3.b.</div>
+</div>
+
+<div class="phase gate">
+  <h3><span class="badge b-gate">GATEADA &mdash; espera OK explicito del operador</span> 3.b &mdash; Activacion del writer-vivo en la instancia viva</h3>
+  <p>Es un paso <b>operativo</b>, distinto de B.4: encender en ESTE repo (la instancia dogfooding) los flags
+     <code>event_state.enabled</code> + <code>materialize</code> + <code>enforce</code> + <code>authoritative</code>
+     (hoy los cuatro en <code>false</code>), de modo que el runtime sea el unico escritor del estado y la
+     edicion manual quede prohibida. No es parte de B.4 (que se entrega apagada): es una decision GO/NO-GO del
+     operador, condicionada por DECISION-0022.</p>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Precondiciones que el arquitecto debe tener "en mano" antes de pedir el OK</h4>
+  <ul class="steps">
+    <li class="next"><b>1. B.4 (TASK-0069) done y ratificada</b> &mdash; la maquinaria existe y paso la suite adversarial.</li>
+    <li class="next"><b>2. Validacion de replay/materializacion sobre el estado vivo REAL</b>: tomar el estado vivo actual (<code>TASK_INDEX</code>/<code>PROJECT_STATE</code>/<code>CLAIMS</code>), hacer <code>genesis-ref &rarr; replay &rarr; materialize</code> y demostrar que el resultado es <b>identico</b> al estado canonico de hoy (round-trip = identidad), con integridad verificada por <code>hash</code>. Es la prueba de que el log reconstruye fielmente el estado antes de confiarle la fuente de verdad.</li>
+    <li class="next"><b>3. Plan de rollback probado</b>: ensayar que apagar los flags vuelve a edicion manual sin perdida, y que desde el snapshot content-addressed + el <code>commit</code> de corte se reconstruye el estado previo. Procedimiento de reversa escrito y verificado.</li>
+  </ul>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que cambia al activar (impacto operativo)</h4>
+  <ul class="steps">
+    <li class="next"><b>Runtime = unico escritor</b>: Claude y Codex dejan de editar los <code>*.json</code> a mano y emiten <b>intents</b> al runtime; una edicion manual es rechazada como <code>drift</code> (hard-gate B.3).</li>
+    <li class="next"><b>La regla anti-colision (DECISION-0020) se vuelve casi innecesaria</b>: ya no hay dos escritores manuales del ledger.</li>
+    <li class="next"><b>Queda registrado el corte</b>: snapshot content-addressed + evento genesis-ref (hash/commit/actor/timestamp/schema).</li>
+  </ul>
+
+  <h4 style="margin:12px 0 4px;font-size:14px;color:var(--accent)">Que NO cambia / red de seguridad</h4>
+  <ul class="steps">
+    <li class="next"><b>coordination-tier intacto</b>: otras instancias sin <code>runtime/</code> siguen en edicion manual; esto solo afecta a la instancia que lo activa.</li>
+    <li class="next"><b>Reversible</b>: apagar los flags vuelve al modo manual. La prohibicion DURA permanente (retirar el flujo manual sin reversa) NO es esto; seria un paso futuro con su propia decision.</li>
+    <li class="next"><b>SemVer</b>: la capacidad se publica MINOR-con-migracion; activarla en la instancia propia es un toggle operativo registrado, no un cambio de contrato para terceros.</li>
+  </ul>
+
+  <div class="why">Decision del operador (GO/NO-GO): el arquitecto presentara el informe de validacion (evidencia del
+     round-trip = identidad sobre el estado vivo) y el rollback ensayado; el operador decide si encender, y
+     cuando. Riesgo principal &mdash; doble fuente de verdad en la transicion &mdash; se descarta exigiendo
+     round-trip identico ANTES de activar. <b>Sin ese OK explicito, B.4 queda como capacidad disponible pero
+     inactiva en el repo vivo.</b></div>
 </div>
 
 <div class="phase gate">
@@ -219,7 +256,7 @@
 
 <footer>
   Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
-  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD f22022e (post-v1.0.0; B.1+B.2 DONE, B.3 en curso).
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD ae3722c (post-v1.0.0; B.1-B.3 DONE, B.4 en curso/apagada; activacion en vivo pendiente de OK del operador).
   Las fases gateadas requieren aprobacion explicita del operador humano antes de arrancar.
 </footer>
 
