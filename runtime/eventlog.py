@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
 import os
 from copy import deepcopy
@@ -13,6 +14,7 @@ from typing import Any, Callable
 
 
 EVENT_SCHEMA_VERSION = "1.0"
+UNAUTHENTICATED_EVENT = "security.unauthenticated_event"
 LOG_PATH = Path("runtime") / "state" / "events.jsonl"
 SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
 ARCHIVE_DIR = Path("runtime") / "state" / "archives"
@@ -61,6 +63,101 @@ def canonical_hash(payload: Any) -> str:
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
+def read_protocol_config(root: Path) -> dict[str, Any]:
+    path = root / "protocol.config.json"
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def event_auth_enabled(config: dict[str, Any] | None) -> bool:
+    event_auth = (config or {}).get("event_auth")
+    return isinstance(event_auth, dict) and event_auth.get("enabled") is True
+
+
+def agent_auth_config(config: dict[str, Any], actor: str) -> dict[str, Any]:
+    event_auth = config.get("event_auth") or {}
+    merged: dict[str, Any] = {}
+    for agent in ((config.get("agent_registry") or {}).get("agents") or []):
+        if isinstance(agent, dict) and str(agent.get("id") or "") == actor and isinstance(agent.get("auth"), dict):
+            merged.update(agent["auth"])
+            break
+    keys = event_auth.get("keys") or {}
+    entry = keys.get(actor) if isinstance(keys, dict) else None
+    if isinstance(entry, str):
+        merged["secret"] = entry
+    elif isinstance(entry, dict):
+        merged.update(entry)
+    for key in ("issuer", "audience", "method"):
+        if key in event_auth and key not in merged:
+            merged[key] = event_auth[key]
+    return merged
+
+
+def signing_secret(config: dict[str, Any], actor: str) -> str | None:
+    auth = agent_auth_config(config, actor)
+    for key in ("secret", "hmac_secret", "signing_secret", "key"):
+        value = auth.get(key)
+        if str(value or "").strip():
+            return str(value)
+    return None
+
+
+def signing_key_id(config: dict[str, Any], actor: str) -> str:
+    auth = agent_auth_config(config, actor)
+    return str(auth.get("key_id") or f"{actor}:local")
+
+
+def signable_event(event: dict[str, Any]) -> dict[str, Any]:
+    payload = deepcopy(event)
+    payload.pop("event_auth", None)
+    payload.pop("deduped", None)
+    return payload
+
+
+def event_signature(event: dict[str, Any], secret: str) -> str:
+    return hmac.new(secret.encode("utf-8"), canonical_json(signable_event(event)).encode("utf-8"), hashlib.sha256).hexdigest()
+
+
+def sign_event(event: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
+    if not event_auth_enabled(config):
+        return event
+    actor = str(event.get("actor") or "")
+    secret = signing_secret(config, actor)
+    if not secret:
+        raise EventLogError(f"event auth signing key missing for actor: {actor}")
+    auth = agent_auth_config(config, actor)
+    signed = dict(event)
+    signed["event_auth"] = {
+        "method": str(auth.get("method") or (config.get("event_auth") or {}).get("method") or "hmac-sha256"),
+        "key_id": signing_key_id(config, actor),
+        "signature": event_signature(signed, secret),
+    }
+    if str(auth.get("issuer") or "").strip():
+        signed["event_auth"]["issuer"] = str(auth["issuer"])
+    if str(auth.get("audience") or "").strip():
+        signed["event_auth"]["audience"] = str(auth["audience"])
+    return signed
+
+
+def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None) -> dict[str, Any]:
+    if not event_auth_enabled(config):
+        return {"valid": True, "reason": "event_auth_disabled"}
+    auth = event.get("event_auth")
+    if not isinstance(auth, dict):
+        return {"valid": False, "reason": "missing_signature"}
+    signature = str(auth.get("signature") or "")
+    if not signature:
+        return {"valid": False, "reason": "missing_signature"}
+    secret = signing_secret(config or {}, str(event.get("actor") or ""))
+    if not secret:
+        return {"valid": False, "reason": "missing_key"}
+    expected = event_signature(event, secret)
+    if not hmac.compare_digest(signature, expected):
+        return {"valid": False, "reason": "invalid_signature"}
+    return {"valid": True, "reason": "valid"}
+
+
 def empty_snapshot() -> dict[str, Any]:
     return {
         "up_to_seq": 0,
@@ -100,7 +197,11 @@ def all_events(root: Path) -> list[dict[str, Any]]:
     return sorted(events, key=lambda event: int(event.get("seq") or 0))
 
 
-def replay_events(events: list[dict[str, Any]], base_state: dict[str, Any] | None = None) -> dict[str, Any]:
+def replay_events(
+    events: list[dict[str, Any]],
+    base_state: dict[str, Any] | None = None,
+    config: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     state = deepcopy(base_state) if base_state is not None else empty_snapshot()["state"]
     state.setdefault("aggregate_versions", {})
     state.setdefault("fencing_tokens", {})
@@ -112,6 +213,19 @@ def replay_events(events: list[dict[str, Any]], base_state: dict[str, Any] | Non
     for event in sorted(events, key=lambda item: int(item.get("seq") or 0)):
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
+        auth_result = verify_event_auth(event, config)
+        if auth_result.get("valid") is not True:
+            state["rejections"].append(
+                {
+                    "seq": event.get("seq"),
+                    "aggregate_id": aggregate_id,
+                    "event": UNAUTHENTICATED_EVENT,
+                    "reason": auth_result.get("reason"),
+                    "actor": event.get("actor"),
+                }
+            )
+            state["events_applied"] = int(state["events_applied"]) + 1
+            continue
         key = event.get("idempotency_key")
         if key:
             state["idempotency_keys"][str(key)] = int(event.get("seq") or 0)
@@ -144,7 +258,7 @@ def rebuild_snapshot(root: Path) -> dict[str, Any]:
     events = all_events(root)
     snapshot = {
         "up_to_seq": int(events[-1]["seq"]) if events else 0,
-        "state": replay_events(events),
+        "state": replay_events(events, config=read_protocol_config(root)),
     }
     snapshot["canonical_hash"] = canonical_hash(snapshot["state"])
     return snapshot
@@ -176,7 +290,7 @@ class EventWriter:
         return all_events(self.root)
 
     def state(self) -> dict[str, Any]:
-        return replay_events(self.events())
+        return replay_events(self.events(), config=read_protocol_config(self.root))
 
     def next_seq(self) -> int:
         events = self.events()
@@ -218,6 +332,7 @@ class EventWriter:
             "applied": applied,
             "ts": utc_now(),
         }
+        event = sign_event(event, read_protocol_config(self.root))
         atomic_append_jsonl(self.log_path, event)
         return event
 

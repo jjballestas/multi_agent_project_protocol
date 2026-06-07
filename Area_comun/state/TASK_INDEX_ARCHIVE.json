@@ -1657,6 +1657,42 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden guardrail 5/5 + SUITE RUNTIME COMPLETA 110/110 (105 previos sin regresion) + validador/encoding/neutralidad py. Verifique runtime/guardrails.py genuino: classify_provenance deny-by-default (desconocido->untrusted); scan_injection determinista, bilingue, DOMAIN-NEUTRAL (protocol/scope/authority/escalation/quality, sin terminos de negocio); contain_untrusted preserva contenido como DATO (findings/events) y emite security.handoff_injection_contained. Verifique a MANO ambas ramas del invariante: (a) escalado sostenido SOLO por contenido untrusted => RECHAZADO (guardrail error); (b) escalado legitimo por QA-cycles desde estado trusted => PERMITIDO (sin falso positivo). Cableado aditivo en turn_validate (lee handoff del report, convierte errores de seguridad en semanticos) con guard de path-traversal; byte-equivalente sin contenido untrusted (fallback N=2 intacto). Diff dentro de scope + prune de mantenimiento sancionado por Codex (DECISION-0014, claim de mantenimiento declarado). Release atomico aplicado por Codex (claim released + in_review). Obs no bloqueante: el golden prueba la contencion (eventos) pero no la ruta de error directamente; la verifique yo a mano. Flip por arquitecto. CIERRA Fase 5.1; siguiente rebanada 5.2 (tool-policy) se especifica/encola aparte.",
             "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0055",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fix de higiene (SPEC-0041, FOLLOW-UP de Capa A): prune robusto ante mensajes que requieren respuesta. scripts/prune_state.py (+ paridad .ps1) debe EXIMIR del archivado a mensajes requires_response:true sin resolver y RECONCILIAR status:archived al mover, para que el prune nunca deje un mismatch status<->carpeta (gate de TASK-0035) ni archive conversaciones abiertas. Aditivo, no cambia umbrales DECISION-0014. Golden determinista.",
+            "spec_id": "Area_comun/specs/SPEC-0041-prune-requires-response.md",
+            "file": "Area_comun/tasks/TASK-0055-codex-prune-requires-response.md",
+            "linked_decisions": [
+                "DECISION-0014",
+                "DECISION-0012"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0035",
+                "TASK-0034"
+            ],
+            "relevant_files": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "scripts/validate_collaboration_state.py",
+                "examples/runtime_prune_cases/"
+            ],
+            "deliverables": [
+                "scripts/prune_state.py",
+                "scripts/prune_state.ps1",
+                "examples/runtime_prune_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0055-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_prune_cases 4/4 (+ paridad ps1 cuando pwsh disponible) + prune_state_cases 3/3 (sin regresion) + validador/encoding/neutralidad py. Fix genuino en scripts/prune_state.py (+ paridad .ps1): requires_unresolved_response (requires_response truthy + status no resuelto) devuelve esos mensajes a open/ con status reconciliado en vez de archivarlos; el resto se archiva con status:archived garantizado. CIERRA el FOLLOW-UP de Capa A (el prune ya no puede dejar un mismatch status<->carpeta ni archivar conversaciones abiertas). No cambia umbrales DECISION-0014. Flip por arquitecto.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

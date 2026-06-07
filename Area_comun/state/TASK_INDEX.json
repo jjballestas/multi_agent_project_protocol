@@ -115,42 +115,6 @@
             "review": "Futuro trabajo pedido por el operador. Debe mantener neutralidad de dominio y no atar la arquitectura a Claude/Codex."
         },
         {
-            "id": "TASK-0055",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Fix de higiene (SPEC-0041, FOLLOW-UP de Capa A): prune robusto ante mensajes que requieren respuesta. scripts/prune_state.py (+ paridad .ps1) debe EXIMIR del archivado a mensajes requires_response:true sin resolver y RECONCILIAR status:archived al mover, para que el prune nunca deje un mismatch status<->carpeta (gate de TASK-0035) ni archive conversaciones abiertas. Aditivo, no cambia umbrales DECISION-0014. Golden determinista.",
-            "spec_id": "Area_comun/specs/SPEC-0041-prune-requires-response.md",
-            "file": "Area_comun/tasks/TASK-0055-codex-prune-requires-response.md",
-            "linked_decisions": [
-                "DECISION-0014",
-                "DECISION-0012"
-            ],
-            "depends_on": [],
-            "relates_to": [
-                "TASK-0035",
-                "TASK-0034"
-            ],
-            "relevant_files": [
-                "scripts/prune_state.py",
-                "scripts/prune_state.ps1",
-                "scripts/validate_collaboration_state.py",
-                "examples/runtime_prune_cases/"
-            ],
-            "deliverables": [
-                "scripts/prune_state.py",
-                "scripts/prune_state.ps1",
-                "examples/runtime_prune_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0055-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden runtime_prune_cases 4/4 (+ paridad ps1 cuando pwsh disponible) + prune_state_cases 3/3 (sin regresion) + validador/encoding/neutralidad py. Fix genuino en scripts/prune_state.py (+ paridad .ps1): requires_unresolved_response (requires_response truthy + status no resuelto) devuelve esos mensajes a open/ con status reconciliado en vez de archivarlos; el resto se archiva con status:archived garantizado. CIERRA el FOLLOW-UP de Capa A (el prune ya no puede dejar un mismatch status<->carpeta ni archivar conversaciones abiertas). No cambia umbrales DECISION-0014. Flip por arquitecto.",
-            "updated_at": "2026-06-07"
-        },
-        {
             "id": "TASK-0056",
             "owner": "Codex",
             "status": "done",
@@ -193,7 +157,7 @@
         {
             "id": "TASK-0057",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -227,7 +191,8 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "Encolada por Claude (arquitecto) 2026-06-07. Rebanada 3 (ultima del nucleo) de Fase 5 (5.1 done -> 5.2 done -> 5.3). Aditiva, config-gated (firma off por defecto), fallback N=2; SIN DECISION nueva. Metodo anti-colision refinado (archivos-antes-de-claim + staging explicito). Release atomico (DECISION-0018)."
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: event-auth 5/5 + suite runtime COMPLETA 121/121 (sin regresion) + validador/encoding/neutralidad py. runtime/eventlog.py genuino: HMAC-SHA256 sobre canonical_json (DETERMINISTA, sin reloj/random); event_auth gate off => sign/verify no-op = byte-equivalente (fallback N=2 intacto); firma al append (L335) + verificacion en replay (L216) => firma ausente/alterada rechazada con security.unauthenticated_event (L222, compare_digest tiempo constante, I7); issuer/audience placeholder estructural (A1 capa-b, sin flujo OAuth/JWT externo). Config vivo event_auth.enabled=false SIN secreto real (solo method/issuer/audience). Scope dentro de lo declarado (eventlog/config/examples/CI). Flip por arquitecto. CIERRA Fase 5.3 => NUCLEO de Fase 5 (5.1+5.2+5.3) cubierto.",
+            "updated_at": "2026-06-07"
         }
     ]
 }

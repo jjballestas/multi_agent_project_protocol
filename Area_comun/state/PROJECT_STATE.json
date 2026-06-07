@@ -98,12 +98,6 @@
             "title": "PARAGUAS N-agente: FASE 0 CONGELADA - DECISION-0015 ACCEPTED + SPEC-0038 frozen (D-1..D-16, I1..I8, A1..A13). NUCLEO Fases 1-4 DONE (criterios 1-12 SPEC-0038 implementados). Fases 5-7 CONDICIONADAS/gateadas (pendiente OK operador). Brechas para spec-completa: event log writer-vivo, golden N=3/N=5, property-based I1-I8, concurrency sim, runtime suites en CI, autor-de-record hardening."
         },
         {
-            "id": "TASK-0055",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Fix de higiene (SPEC-0041) DONE - ACEPTADA por Claude (ratificacion adversarial): prune_state.py (+ paridad .ps1) exime del archivado los requires_response sin resolver (los devuelve a open/) y reconcilia status:archived al mover. Cierra el FOLLOW-UP de Capa A: el prune ya no deja mismatch status<->carpeta ni archiva conversaciones abiertas. Golden runtime_prune_cases 4/4 + prune_state_cases 3/3, gates verdes."
-        },
-        {
             "id": "TASK-0056",
             "owner": "Codex",
             "status": "done",
@@ -112,8 +106,8 @@
         {
             "id": "TASK-0057",
             "owner": "Codex",
-            "status": "ready",
-            "title": "Fase 5.3 (SPEC-0043): firma del envelope (autenticacion de eventos). HMAC por agente + security.unauthenticated_event + config event_auth off por defecto + replay determinista. Aditivo, fallback N=2 intacto. Ultima rebanada del nucleo de Fase 5."
+            "status": "done",
+            "title": "Fase 5.3 (SPEC-0043) DONE - ACEPTADA por Claude (ratificacion adversarial): firma del envelope / autenticacion de eventos. HMAC-SHA256 determinista en eventlog (firma al append + verificacion en replay; signing on => sin firma valida rechazado + security.unauthenticated_event) + event_auth off por defecto (byte-equivalente) + issuer/audience placeholder. Suite 121/121, fallback N=2 intacto. NUCLEO de Fase 5 (5.1+5.2+5.3) CUBIERTO."
         }
     ],
     "open_questions": [],
@@ -171,7 +165,9 @@
         "FASE 5.2 ENCOLADA (TASK-0056, ready, 2026-06-07): tool-policy deny-by-default + clasificacion de acciones (SPEC-0042). Promovida en VENTANA SEGURA (Codex offline por limite de creditos hasta ~1:45 => sin riesgo de colision). Aplicado el metodo anti-colision (prep en personal/ + promocion atomica + archivos-antes-de-claim, tras HALLAZGO #1). Codex la tomara al volver (~1:45); GO enviado por mailbox. 5.3 (firma del envelope) ya disenada en personal/, se encola tras cerrar 5.2. Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
         "TASK-0056 ENTREGADA a in_review por Codex (2026-06-07): tool-policy deny-by-default + clasificacion de acciones. Implementado config tool_policy live/template; runtime/tool_policy.py; turn_validate con security.tool_denied, decision_refs para contract_change y gate.human_required para external/sensitive; turn_schema 1.2.0 opcional; golden runtime_tool_policy_cases 6/6 + CI. Verificado runtime completo + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
         "FASE 5.2 CERRADA (TASK-0056 DONE, ratificacion adversarial de Claude 2026-06-07): tool-policy deny-by-default + clasificacion de acciones (SPEC-0042). runtime/tool_policy.py + cableado aditivo en turn_validate + turn_schema 1.2.0 (tools/actions opcionales) + golden tool_policy 6/6. Suite 116/116, fallback N=2 byte-equivalente. COORDINACION CON CODEX AUTONOMO FUNCIONO: promovi 5.2 a ready en su ventana offline (creditos) y la tomo al volver (~1:45). HALLAZGO #2 del metodo: staging por dirs amplios capturo el golden sin la impl (commit torn b1e519b), corregido con staging explicito. Pendiente: Fase 5.3 (firma del envelope, ya disenada en personal/) - encolar tras coordinar con el operador (limite de creditos de Codex). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
-        "FASE 5.3 ENCOLADA (TASK-0057, ready, 2026-06-07): firma del envelope / autenticacion de eventos (SPEC-0043, A1/sec.8.1). HMAC por agente en eventlog (firma+verificacion; signing on => sin firma valida rechazado + security.unauthenticated_event) + event_auth off por defecto + replay determinista + negative-replay (A6). Codex ONLINE (~100s); GO enviado. Metodo anti-colision refinado aplicado (archivos-antes-de-claim #1 + staging explicito #2; es el test concurrente live del metodo). Con 5.1+5.2+5.3 el nucleo de Fase 5 (guardrails/permisos/identidad) queda cubierto. Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037."
+        "FASE 5.3 ENCOLADA (TASK-0057, ready, 2026-06-07): firma del envelope / autenticacion de eventos (SPEC-0043, A1/sec.8.1). HMAC por agente en eventlog (firma+verificacion; signing on => sin firma valida rechazado + security.unauthenticated_event) + event_auth off por defecto + replay determinista + negative-replay (A6). Codex ONLINE (~100s); GO enviado. Metodo anti-colision refinado aplicado (archivos-antes-de-claim #1 + staging explicito #2; es el test concurrente live del metodo). Con 5.1+5.2+5.3 el nucleo de Fase 5 (guardrails/permisos/identidad) queda cubierto. Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real, autonomia supervisada, TASK-0037.",
+        "TASK-0057 ENTREGADA a in_review por Codex (2026-06-07): Fase 5.3 firma del envelope/event auth. Implementado event_auth off por defecto; HMAC determinista en runtime/eventlog.py cuando esta enabled; replay/snapshot rechaza firma ausente/alterada con security.unauthenticated_event; issuer/audience placeholder sin flujo externo; golden runtime_event_auth_cases 5/5 + CI. Runtime completo + gates py/ps verdes. Pendiente ratificacion adversarial de Claude.",
+        "FASE 5.3 CERRADA (TASK-0057 DONE, ratificacion adversarial de Claude 2026-06-07): firma del envelope / autenticacion de eventos (SPEC-0043, A1/sec.8.1). HMAC determinista + security.unauthenticated_event + event_auth off por defecto + replay determinista. Suite 121/121. >>> NUCLEO DE FASE 5 (5.1 anti-inyeccion + 5.2 tool-policy + 5.3 firma del envelope) CUBIERTO <<<. El metodo anti-colision (prep en personal + script atomico + archivos-antes-de-claim + staging explicito + GO/ETA) corrio limpio en 5.2/5.3 => se formalizara como DECISION-0020 (regla anti-colision, pendiente) + AGENTS.md sec.7 + TASK_PROTOCOL. META FIJADA POR EL OPERADOR: metodologia DISTRIBUIBLE a otros proyectos => brecha mayor = new_instance/scripts NO distribuyen runtime/ ni gates (roadmap D0-D6; pivote = DECISION-0019 modelo de distribucion del runtime (a/b/c; borrador en preparacion en personal/Claude/ por peticion del operador)). Gateadas: Fase B (SPEC-0039), Fase 6/7, wrapper LLM real."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-07",

@@ -35,6 +35,12 @@
     "enabled": true,
     "entrypoint": "runtime/orchestrator.py"
   },
+  "event_auth": {
+    "enabled": false,
+    "method": "hmac-sha256",
+    "issuer": "local-runtime",
+    "audience": "runtime-event-log"
+  },
   "tool_policy": {
     "enabled": true,
     "default": "deny",

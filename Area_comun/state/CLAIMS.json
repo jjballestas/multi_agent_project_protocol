@@ -4,20 +4,6 @@
     "updated_by": "Codex",
     "claims": [
         {
-            "claim_id": "CLAIM-20260606-anomaly-agents-version-codex",
-            "task_id": "none",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-anomalia-agents-version-v010.md"
-            ],
-            "started_at": "2026-06-06",
-            "updated_at": "2026-06-06",
-            "expires_at": "2026-06-07",
-            "notes": "Aviso DECISION-0018: Codex detecto que AGENTS.md conserva 'Released version: v0.8.0' mientras protocol.config.json/PROJECT_STATE/CHANGELOG/report indican v0.10.0 publicada. Claim efimero liberado en el mismo paso."
-        },
-        {
             "claim_id": "CLAIM-20260607-TASK-0054-codex",
             "task_id": "TASK-0054",
             "owner": "Codex",
@@ -103,6 +89,35 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0056 entregada a in_review. Implementado tool_policy deny-by-default, runtime/tool_policy.py, turn_validate, turn_schema 1.2.0 opcional, examples/runtime_tool_policy_cases y CI. Verificado runtime completo, validador/encoding/neutralidad py/ps; tras release se aplico prune de mantenimiento (2 claims archivados) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0056-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-TASK-0057-codex",
+            "task_id": "TASK-0057",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0057",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0057",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0057-GO-envelope-signing.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-task0057-GO-envelope-signing.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0057-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "runtime/eventlog.py",
+                "examples/runtime_event_auth_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado con handoff-release atomico: TASK-0057 entregada a in_review. Implementado event_auth config-gated off por defecto, HMAC determinista en runtime/eventlog.py, verificacion replay/snapshot con security.unauthenticated_event, issuer/audience placeholder, golden runtime_event_auth_cases y CI. Verificado runtime completo + validador/encoding/neutralidad/prune py/ps; tras release se aplico prune de mantenimiento (1 claim archivado) y --check final verde. Handoff: Area_comun/handoffs/HANDOFF-TASK-0057-codex-to-claude-1.md."
         }
     ]
 }

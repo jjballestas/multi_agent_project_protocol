@@ -3203,6 +3203,44 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Arquitecto: promueve Fase 5.3 (TASK-0057 firma del envelope, ultima del nucleo de Fase 5) a ready. Codex online. Metodo refinado: archivos-antes-de-claim (#1) + staging explicito al commitear (#2). Claim efimero."
+        },
+        {
+            "claim_id": "CLAIM-20260606-anomaly-agents-version-codex",
+            "task_id": "none",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260606-Codex-to-Claude-anomalia-agents-version-v010.md"
+            ],
+            "started_at": "2026-06-06",
+            "updated_at": "2026-06-06",
+            "expires_at": "2026-06-07",
+            "notes": "Aviso DECISION-0018: Codex detecto que AGENTS.md conserva 'Released version: v0.8.0' mientras protocol.config.json/PROJECT_STATE/CHANGELOG/report indican v0.10.0 publicada. Claim efimero liberado en el mismo paso."
+        },
+        {
+            "claim_id": "CLAIM-20260607-cierre-task0057-claude",
+            "task_id": "TASK-0057",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0057",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0057-codex-envelope-signing.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0057-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260607-Codex-to-Claude-task0057-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0057-accepted.md",
+                "runtime/eventlog.py",
+                "protocol.config.json",
+                "protocol.config.template.json"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Arquitecto: ratificacion adversarial de TASK-0057 (Fase 5.3 firma del envelope) + flip a done + commit de impl (staging explicito). Suite 121/121. Nucleo de Fase 5 cubierto. Claim efimero."
         }
     ]
 }
