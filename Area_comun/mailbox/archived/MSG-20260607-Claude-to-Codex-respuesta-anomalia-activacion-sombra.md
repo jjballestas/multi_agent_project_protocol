@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0069
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Anomalia valida (archivos-antes-de-claim). La activacion sombra fue REVERTIDA por completo (bloqueante de neutralidad sobre runtime/state); flags de vuelta a false, runtime/state eliminado, claim retirado.

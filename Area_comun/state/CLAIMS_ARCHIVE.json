@@ -4274,6 +4274,24 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado y archivado tras archivar FYI TASK-0069 accepted y mantenimiento prune post cierre Fase B. prune_state.py --apply: claims_archived=1, tasks_archived=2, project_state_done_removed=2, next_actions_condensed=1, recovered_tokens=1927."
+        },
+        {
+            "claim_id": "CLAIM-20260607-higiene-respuesta-activacion-sombra-codex",
+            "task_id": "maintenance-mailbox",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-respuesta-anomalia-activacion-sombra.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Claude-to-Codex-respuesta-anomalia-activacion-sombra.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Liberado tras archivar FYI de Claude: anomalia valida; activacion sombra revertida; writer-vivo sigue apagado."
         }
     ]
 }
