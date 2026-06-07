@@ -42,6 +42,7 @@
       "Bash(true:*)",
       "Bash(date:*)",
       "Bash(mkdir:*)",
+      "Bash(rm:*)",
       "Bash(mktemp:*)",
       "Bash(sort:*)",
       "Bash(uniq:*)",
