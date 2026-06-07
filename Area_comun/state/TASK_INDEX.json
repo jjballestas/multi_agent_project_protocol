@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -160,7 +160,7 @@
         {
             "id": "TASK-0076",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "high",
             "phase": "P2",
@@ -196,7 +196,45 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-08): SPEC-0062 implementada. runtime/submit_intent.py mantiene --intent mono-intent y agrega --intents/--intents-json con envelope {actor_id,timestamp,commit,intents}. submit_intents valida cada intent contra el estado resultante de los previos, aplica la secuencia como eventos intent.applied con metadata de transaccion, materializa una sola vez al final, actualiza side-effects de task markdown y hace rollback total de archivos + runtime/state ante fallo. runtime/regenesis.py (+ .ps1) escribe genesis fresco por snapshot_ref desde hot state, idempotente y no destructivo, dejando protocol_state_drift.has_drift=False. Golden intent_tx_cases 6/6 cubren cierre+encole multi-intent, claim acquire->task_status->release, rollback byte-identico, regenesis drift->0 + submit posterior, idempotencia y paridad PS. Tambien verdes intent_flow 9/9, runtime replay 6/6, materialize 6/6, enforce 7/7, genesis-ref 9/9, encoding/neutralidad/validador py/ps. Sin flip enforce/authoritative.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; validador valid (drift de sombra esperado); neutralidad/encoding limpios. Lei regenesis.py: NO destructivo (append de genesis por snapshot_ref desde hot state, re-snapshot, asserta drift_after=0; history_preserved). submit_intent --intents: valida cada intent contra el estado intermedio, un intent.applied por intent, materializa al final, rollback total, idempotente. SIN flip (enforce/authoritative OFF). Keystone de la adopcion listo. Flip por arquitecto. CIERRA TASK-0076.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0077",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "high",
+            "phase": "P2",
+            "title": "Cutover (SPEC-0063): el lazo autonomo de Codex adopta submit_intent --intents como UNICO write-path del ledger (auto-claim = claim acquire + task_status ready->in_progress; handoff-release = task_status in_progress->in_review + claim release [+ task_upsert]) via transaccion atomica (TASK-0076); helper/receta runtime/ledger_ops.py + golden examples/cutover_loop_cases sobre fixture drift-0. Prerrequisito del flip. SHADOW: enforce/authoritative OFF; NO re-genesisar el vivo.",
+            "spec_id": "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
+            "file": "Area_comun/tasks/TASK-0077-codex-cutover-submit-intent-loop.md",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0020"
+            ],
+            "depends_on": [
+                "TASK-0076"
+            ],
+            "relates_to": [
+                "TASK-0072",
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/ledger_ops.py",
+                "runtime/submit_intent.py",
+                "examples/cutover_loop_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "runtime/ledger_ops.py",
+                "examples/cutover_loop_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0077-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (encolada por Claude 2026-06-08 tras cerrar TASK-0076): cutover de la migracion al escritor-unico - el lazo de Codex emite sus transiciones via submit_intent --intents. SHADOW: sin flip ni re-genesis del vivo. Prerrequisito para encender enforce. GO en mailbox.",
             "updated_at": "2026-06-08"
         }
     ]

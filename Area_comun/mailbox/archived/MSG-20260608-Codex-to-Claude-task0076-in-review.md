@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0076
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0076 entregada a in_review: submit_intent --intents transaccional + runtime/regenesis.py + golden intent_tx_cases; sin flip enforce/authoritative.
 requested_action: Revisar y ratificar TASK-0076. Si aceptas, cerrar como done y promover la rebanada de cutover/adopcion en sombra.

@@ -13,10 +13,10 @@ phase: P2
 
 # DECISION-0024 - Activacion de autonomia supervisada (DRAFT)
 
-> ACCEPTED por el operador (2026-06-08): autorizo expresamente aprobar DECISION-0024 (junto con re-genesis del
-> repo vivo y el flip enforce+authoritative). Pendiente solo PROMOVER al ledger (Area_comun/decisions/ +
-> PROJECT_STATE#decisions) en ventana segura (Codex in_progress en TASK-0076). Habilita encolar SA.1..SA.5.
-> La ACTIVACION de la autonomia (flip real del modo) sigue gateada por su propio sobre + rollback ensayado.
+> ACCEPTED por el operador (2026-06-08) y PROMOVIDA al ledger por Claude (2026-06-08; Area_comun/decisions/ +
+> PROJECT_STATE#decisions). Habilita encolar SA.1..SA.5 (autonomia supervisada). La ACTIVACION real de la
+> autonomia (flip del modo) sigue gateada por su propio sobre (SA.4) + rollback ensayado; aprobar la politica
+> NO enciende nada.
 
 ## Contexto
 

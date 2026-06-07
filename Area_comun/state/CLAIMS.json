@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260607-TASK-0075-codex",
@@ -119,6 +119,29 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Liberado con handoff-release atomico: TASK-0076 entregada a in_review. Implementado submit_intent --intents transaccional + runtime/regenesis.py/.ps1 + golden intent_tx_cases + CI. Handoff: Area_comun/handoffs/HANDOFF-TASK-0076-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0076-close-task0077-promote-claude",
+            "task_id": "TASK-0076",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0076-codex-submit-intent-transaccional-regenesis.md",
+                "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
+                "Area_comun/tasks/TASK-0077-codex-cutover-submit-intent-loop.md",
+                "Area_comun/decisions/DECISION-0024-autonomia-supervisada.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0076-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0076-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0076-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0077-GO-cutover.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0076 (done) + promocion OFICIAL de TASK-0077 (cutover, SPEC-0063) + promocion de DECISION-0024 (autonomia supervisada, autorizada por el operador) al ledger. Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

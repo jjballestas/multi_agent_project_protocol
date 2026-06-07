@@ -94,7 +94,8 @@
         "DECISION-0020-regla-anti-colision",
         "DECISION-0021-activacion-wrapper-llm",
         "DECISION-0022-runtime-escritor-autoritativo",
-        "DECISION-0023-firma-release"
+        "DECISION-0023-firma-release",
+        "DECISION-0024-autonomia-supervisada"
     ],
     "active_tasks": [
         {
@@ -112,8 +113,14 @@
         {
             "id": "TASK-0076",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "TASK-0076 ENTREGADA a in_review: submit_intent transaccional multi-intent + runtime/regenesis.py; golden intent_tx_cases 6/6; sin flip enforce/authoritative."
+            "status": "done",
+            "title": "submit_intent transaccional multi-intent + re-genesis (SPEC-0062) DONE - ACEPTADA por Claude (ratif. adversarial): submit_intent --intents aplica una transaccion atomica (un intent.applied por intent, materializa al final, rollback total, idempotente, valida contra estado intermedio) + runtime/regenesis.py genesis fresco por snapshot_ref -> drift 0, NO destructivo. golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7. SIN flip. Keystone de la adopcion del escritor-unico."
+        },
+        {
+            "id": "TASK-0077",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Cutover (SPEC-0063): el lazo de Codex adopta submit_intent --intents como unico write-path del ledger (auto-claim + handoff-release via transaccion) + helper runtime/ledger_ops.py + golden cutover_loop_cases (fixture drift-0). Prerrequisito del flip. SHADOW: enforce OFF, sin re-genesis vivo."
         }
     ],
     "open_questions": [],
@@ -134,9 +141,10 @@
         "TASK-0075 ENTREGADA a in_review por Codex (2026-06-07): F7.4 firma de releases lista. sign_release.py/.ps1 firma sbom_hash o --digest con backend fixture-hmac-sha256 y material local --key; verify_release.py/.ps1 opt-in --signature + --pubkey/--key valida autenticidad sobre manifest.sbom_hash y falla cerrada; sin firma conserva integridad F7.2. Golden release_sign_cases 8/8 + release_verify/provenance/SBOM verdes; sin claves reales commiteadas. Pendiente ratificacion de Claude; luego F7.5 docs.",
         "TASK-0075 DONE (F7.4 firma, ratif. adversarial de Claude 2026-06-07; entrega commiteada por Codex a7bee1a): sign_release.py (+ .ps1) backend fixture-hmac-sha256 + verify_release extendido valida firma sobre sbom_hash (falla cerrada). SECRET BOUNDARY verificado (sin claves privadas en repo). Backend real documentado en F7.5. >>> ORDEN DEL OPERADOR: adoptar submit_intent en AMBOS lazos -> luego re-genesis + enforce+authoritative. ORDEN ELEGIDO (forzado por dependencias; submit_intent hard-failea con drift y hoy hay drift de sombra): (1) F7.4 cerrada; (2) PROMOVIDA OFICIALMENTE TASK-0076 (claim+GO) = submit_intent transaccional multi-intent + re-genesis (SPEC-0062, keystone, shadow sin flip) -> resuelve la anomalia que levanto Codex (artefactos sin claim, mi slip claim-before-artifact DECISION-0007); (3) re-genesis (drift 0); (4) cutover: ambos lazos usan submit_intent + mandato en protocolo; (5) flip enforce+authoritative SOLO tras verificar que el lazo autonomo de Codex ya usa submit_intent + ensayo de rollback. F7.5 docs pendiente post-migracion. GO por mailbox; promover de a una.",
         "TASK-0076 RECLAMADA por Codex (2026-06-08): implementando submit_intent --intents transaccional atomico + runtime/regenesis.py (drift->0 no destructivo) + golden intent_tx_cases + CI; sin flip enforce/authoritative.",
-        "TASK-0076 ENTREGADA a in_review por Codex (2026-06-08): submit_intent --intents transaccional multi-intent (validacion contra estado intermedio, eventos intent.applied + materializacion final unica + rollback total) + runtime/regenesis.py/.ps1 (genesis fresco por snapshot_ref desde hot state, drift->0, no destructivo, idempotente) + golden intent_tx_cases 6/6 + suites runtime verdes. Sin flip enforce/authoritative; pendiente ratificacion de Claude y luego cutover/adopcion en sombra."
+        "TASK-0076 ENTREGADA a in_review por Codex (2026-06-08): submit_intent --intents transaccional multi-intent (validacion contra estado intermedio, eventos intent.applied + materializacion final unica + rollback total) + runtime/regenesis.py/.ps1 (genesis fresco por snapshot_ref desde hot state, drift->0, no destructivo, idempotente) + golden intent_tx_cases 6/6 + suites runtime verdes. Sin flip enforce/authoritative; pendiente ratificacion de Claude y luego cutover/adopcion en sombra.",
+        "TASK-0076 DONE (submit_intent transaccional + re-genesis, ratif. adversarial de Claude 2026-06-08): corri yo golden intent_tx 6/6 + genesis-ref 9/9 + enforce 7/7 + intent_flow 9/9; regenesis.py NO destructivo (drift_after 0, history preserved). >>> MIGRACION ESCRITOR-UNICO: operador autorizo (2026-06-08) re-genesis vivo + flip enforce+authoritative + DECISION-0024. DECISION-0024 (autonomia supervisada) PROMOVIDA al ledger. ENCOLADA TASK-0077 = CUTOVER (SPEC-0063): el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release via transaccion) + helper + golden cutover_loop_cases (fixture drift-0); SHADOW sin flip. EN PARALELO (Claude): mandato en AGENTS.md/TASK_PROTOCOL + adopcion de mis cierres. LUEGO (activacion, arquitecto + GO ya dado): re-genesis vivo (drift0) + flip enforce+authoritative + ensayo de rollback, SOLO tras verificar que AMBOS lazos usan submit_intent. Autonomia supervisada: SA.1 draft listo en personal, encolar tras el cutover (de a una). F7.5 docs pendiente post-migracion. GO por mailbox."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }
