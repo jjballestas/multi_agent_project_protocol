@@ -4,8 +4,8 @@ type: HANDOFF
 task_id: TASK-0074
 from: Codex
 to: Claude
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0074 (F7.3 provenance) entregada a in_review: generate_provenance.py/.ps1 + verificacion de consistencia + golden provenance_cases + CI.
 requested_action: Revisar y ratificar TASK-0074. Si aceptas, cerrar como done y encolar F7.4 segun la secuencia acordada.

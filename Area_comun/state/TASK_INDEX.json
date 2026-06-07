@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -158,7 +158,7 @@
         {
             "id": "TASK-0074",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "implementation",
             "priority": "normal",
             "phase": "P2",
@@ -190,7 +190,46 @@
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "ENTREGADA a in_review por Codex (2026-06-07): F7.3 provenance/atestacion SLSA-lite implementada. generate_provenance.py (+ .ps1 delegado) emite JSON canonico ASCII con subject.name=multi_agent_project_protocol@<protocol_version>, subject.digest.sha256=manifest.sbom_hash, builder.id, invocation{commit,process} y metadata{timestamp,schema=provenance.v1} provistos; sin reloj/red. El modo --verify comprueba subject.digest.sha256 == manifest.sbom_hash y falla con exit!=0 + error legible en mismatch. Golden provenance_cases 5/5 + release_verify_cases 6/6 + sbom_cases 4/4 + validador/encoding/neutralidad py/ps verdes; poda aplicada y prune check final ~12.4k tokens; drift WARNING esperado por writer-vivo en sombra. Sin firma/claves; F7.4 queda fuera de alcance.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-07). Corri yo: golden provenance_cases 5/5 + release_verify 6/6 + sbom 4/4; smoke real del arbol vivo: generate_manifest -> generate_provenance -> verify ok=true exit0 (subject multi_agent_project_protocol@1.0.0, digest==sbom_hash), mismatch => ok=false exit1; determinismo byte-identico; neutralidad/encoding/validador verdes (drift WARNING de sombra esperado). generate_provenance.py (+ .ps1) emite atestacion SLSA-lite canonica subject.digest.sha256=manifest.sbom_hash + builder/commit/process/timestamp PROVISTOS (sin reloj/red) + metadata.schema provenance.v1; --verify compara y exit!=0 en mismatch. Sin firma/claves (queda F7.4). Flip por arquitecto. CIERRA F7.3.",
+            "updated_at": "2026-06-07"
+        },
+        {
+            "id": "TASK-0075",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Fase 7.4 (SPEC-0061): firma de releases (autenticidad) - scripts/sign_release.py (+ .ps1) firma el digest del release (manifest.sbom_hash) con --key (material local, NUNCA commiteado) + --backend configurable; backend FIXTURE HMAC-SHA256 determinista (clave de prueba no-secreta) para golden/CI; verify_release extendido --signature --pubkey valida la firma sobre sbom_hash (OK/FALLA exit, falla cerrada; sin material = integridad F7.2); SIN claves reales en el repo; golden examples/release_sign_cases (solo fixture) + CI. Off-by-default, vendor-neutral, sin secretos (DECISION-0023). Cuarta de 5 rebanadas de Fase 7.",
+            "spec_id": "Area_comun/specs/SPEC-0061-faseF7.4-firma.md",
+            "file": "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
+            "linked_decisions": [
+                "DECISION-0023",
+                "DECISION-0021",
+                "DECISION-0001",
+                "DECISION-0019"
+            ],
+            "depends_on": [
+                "TASK-0073",
+                "TASK-0074"
+            ],
+            "relates_to": [
+                "TASK-0071"
+            ],
+            "relevant_files": [
+                "scripts/sign_release.py",
+                "scripts/verify_release.py",
+                "examples/release_sign_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "deliverables": [
+                "scripts/sign_release.py",
+                "examples/release_sign_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0075-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (encolada por Claude 2026-06-07 tras cerrar F7.3): F7.4 firma segun SPEC-0061 + DECISION-0023 (ACCEPTED por el operador). Off-by-default, sin secretos en el repo, vendor-neutral, golden con clave fixture no-secreta. GO en mailbox. Si exige commitear clave real o proveedor unico => blocked + pregunta.",
             "updated_at": "2026-06-07"
         }
     ]

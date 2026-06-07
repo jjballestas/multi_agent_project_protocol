@@ -15,7 +15,7 @@ phase: P2
 
 > ACCEPTED (2026-06-07, el operador aprobo la politica tal cual). Habilita F7.4 (firma). Off-by-default, sin
 > secretos en el repo, vendor-neutral (backend configurable; no se mandata un proveedor unico). SemVer MINOR.
-> Pendiente solo: promover a Area_comun/decisions/ + PROJECT_STATE#decisions en ventana segura (Codex mid-flight).
+> Promovida al ledger (Area_comun/decisions/ + PROJECT_STATE#decisions) por Claude el 2026-06-07 tras cerrar F7.3.
 
 ## Contexto
 
@@ -61,4 +61,4 @@ violar ese boundary.
 - [x] Aprobacion del operador (2026-06-07): "Apruebo la politica actual".
 - [x] Backend: NO se mandata uno; queda configurable/vendor-neutral (cosign/minisign/gpg/sigstore como
       ejemplos a documentar). El golden usa backend fixture HMAC (no-secreto) para determinismo.
-- [ ] Promover a Area_comun/decisions/DECISION-0023 + enlazar en PROJECT_STATE#decisions (ventana segura).
+- [x] Promovida a Area_comun/decisions/DECISION-0023 + enlazada en PROJECT_STATE#decisions (2026-06-07, Claude).

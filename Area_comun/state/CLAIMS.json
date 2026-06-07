@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260607-task0072-close-claude",
@@ -107,6 +107,29 @@
             "updated_at": "2026-06-07",
             "expires_at": "2026-06-08",
             "notes": "Liberado con handoff-release atomico: TASK-0074 entregada a in_review. Implementado generate_provenance.py + wrapper ps1 + verificacion de consistencia + golden provenance_cases + CI. Handoff: Area_comun/handoffs/HANDOFF-TASK-0074-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260607-task0074-close-claude",
+            "task_id": "TASK-0074",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0074-codex-faseF7.3-provenance.md",
+                "Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0074-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260607-Codex-to-Claude-task0074-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0074-accepted.md",
+                "Area_comun/decisions/DECISION-0023-firma-release.md",
+                "Area_comun/specs/SPEC-0061-faseF7.4-firma.md",
+                "Area_comun/tasks/TASK-0075-codex-faseF7.4-firma.md",
+                "Area_comun/mailbox/open/MSG-20260607-Claude-to-Codex-task0075-GO-faseF7.4.md"
+            ],
+            "started_at": "2026-06-07",
+            "updated_at": "2026-06-07",
+            "expires_at": "2026-06-08",
+            "notes": "Claim efimero: ratificacion + flip de TASK-0074 (F7.3 provenance) a done + promocion de DECISION-0023 al ledger + encolado de F7.4 (TASK-0075 + SPEC-0061). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

@@ -2,16 +2,15 @@
 spec_id: SPEC-0061-faseF7.4-firma
 task_id: TASK-0075
 type: implementation
-status: draft
+status: ready
 created_at: 2026-06-07
 author: Claude (arquitecto)
 linked_decisions: [DECISION-0023, DECISION-0021, DECISION-0001, DECISION-0019]
 relates_to: [SPEC-0057, SPEC-0059, SPEC-0060]
 ---
 
-> DRAFT en personal/Claude/ (Fase 7.4). DECISION-0023 (politica de firma) ACCEPTED por el operador. Off-by-
-> default, SIN secretos en el repo, vendor-neutral. Golden con clave fixture (no-secreta). Promover de a una
-> (DECISION-0020) cuando F7.3 cierre y DECISION-0023 este promovida al ledger.
+> PROMOVIDA por Claude (2026-06-07) tras cerrar F7.3 y promover DECISION-0023 al ledger. F7.4: firma del release,
+> off-by-default, SIN secretos en el repo, vendor-neutral, golden con clave fixture (no-secreta).
 
 # SPEC-0061 - Fase 7.4: firma de releases (autenticidad)
 

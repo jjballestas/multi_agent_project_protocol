@@ -1,7 +1,7 @@
 ---
 id: TASK-0075
 owner: Codex
-status: draft
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-07
@@ -22,9 +22,8 @@ closure_criteria: [scripts/sign_release.py (+ .ps1) backend configurable + fixtu
 
 # TASK-0075 - Fase 7.4: firma de releases (DRAFT)
 
-> DRAFT en personal/Claude/. DECISION-0023 (politica de firma) ACCEPTED por el operador. Promover a ready
-> cuando F7.3 (TASK-0074) cierre y DECISION-0023 este en el ledger (de a una, DECISION-0020). Ver SPEC-0061.
-> Cuarta de 5 rebanadas de Fase 7.
+> READY (promovida por Claude 2026-06-07 tras cerrar F7.3 y promover DECISION-0023 al ledger). Ver SPEC-0061.
+> Cuarta de 5 rebanadas de Fase 7. GO en mailbox.
 
 ## Contexto
 
