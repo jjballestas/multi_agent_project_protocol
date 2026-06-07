@@ -170,8 +170,109 @@ def case_powershell_wrapper_parity_if_available() -> None:
         assert_pruned_fixture(root)
 
 
+SENTINEL = "[HISTORICO PODADO]"
+
+
+def build_next_actions_fixture(root: Path, next_actions: list, recent_next_actions: int) -> None:
+    """Fixture minimo para ejercitar la condensacion de next_actions via prune --apply."""
+    write_json(
+        root / "protocol.config.json",
+        {
+            "schema_version": "1.0",
+            "token_cost": {
+                "chars_per_token": 4,
+                "coldstart_globs": ["Area_comun/state/PROJECT_STATE.json"],
+                "budget": 30000,
+            },
+            "maintenance": {
+                "enabled": True,
+                "cold_start_tokens_hard": 999999,
+                "done_ratio_hard": 99,
+                "released_ratio_hard": 99,
+                "recent_done_tasks": 5,
+                "recent_released_claims": 5,
+                "mailbox_keep_recent": 5,
+                "recent_next_actions": recent_next_actions,
+            },
+        },
+    )
+    write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": []})
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
+    write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": []})
+    write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
+    write_json(
+        root / "Area_comun/state/PROJECT_STATE.json",
+        {"status": "active", "active_tasks": [], "next_actions": next_actions},
+    )
+    write(root / "Area_comun/mailbox/open/.gitkeep", "\n")
+    write(root / "Area_comun/mailbox/answered/.gitkeep", "\n")
+    write(root / "Area_comun/mailbox/archived/.gitkeep", "\n")
+
+
+def load_next_actions(root: Path) -> list:
+    return load_json(root / "Area_comun/state/PROJECT_STATE.json")["next_actions"]
+
+
+def case_next_actions_condensed_above_threshold() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-prune-na-") as temp:
+        root = Path(temp)
+        actions = [f"accion historica {i}" for i in range(10)]
+        build_next_actions_fixture(root, actions, recent_next_actions=3)
+        result = run_prune(root)
+        assert result.returncode == 0, result.stdout + result.stderr
+        na = load_next_actions(root)
+        # 1 centinela + 3 recientes
+        assert len(na) == 4, na
+        assert na[0].startswith(SENTINEL), na[0]
+        assert "7 next_actions" in na[0], na[0]  # 10 - 3 condensadas
+        assert na[1:] == actions[-3:], na
+        # idempotente: segunda corrida no re-condensa ni duplica centinela
+        assert run_prune(root).returncode == 0
+        na2 = load_next_actions(root)
+        assert na2 == na, na2
+
+
+def case_next_actions_below_threshold_unchanged() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-prune-na2-") as temp:
+        root = Path(temp)
+        actions = ["accion 1", "accion 2"]
+        build_next_actions_fixture(root, actions, recent_next_actions=3)
+        assert run_prune(root).returncode == 0
+        assert load_next_actions(root) == actions
+
+
+def case_next_actions_disabled_when_absent_or_zero() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-prune-na3-") as temp:
+        root = Path(temp)
+        actions = [f"accion {i}" for i in range(10)]
+        build_next_actions_fixture(root, actions, recent_next_actions=0)
+        assert run_prune(root).returncode == 0
+        assert load_next_actions(root) == actions
+
+
+def case_next_actions_merges_prior_sentinel() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-prune-na4-") as temp:
+        root = Path(temp)
+        prior = f"{SENTINEL} 37 next_actions antiguas removidas (DECISION-0014)."
+        actions = [prior] + [f"accion {i}" for i in range(6)]
+        build_next_actions_fixture(root, actions, recent_next_actions=2)
+        assert run_prune(root).returncode == 0
+        na = load_next_actions(root)
+        assert len(na) == 3, na  # centinela + 2 recientes
+        assert na[0].startswith(SENTINEL), na[0]
+        assert "41 next_actions" in na[0], na[0]  # 37 previos + (6 - 2) = 41
+        assert na[1:] == [f"accion {i}" for i in range(4, 6)], na
+
+
 def main() -> int:
-    cases = [case_python_prune_mailbox_safety, case_powershell_wrapper_parity_if_available]
+    cases = [
+        case_python_prune_mailbox_safety,
+        case_powershell_wrapper_parity_if_available,
+        case_next_actions_condensed_above_threshold,
+        case_next_actions_below_threshold_unchanged,
+        case_next_actions_disabled_when_absent_or_zero,
+        case_next_actions_merges_prior_sentinel,
+    ]
     failures = []
     for case in cases:
         try:
@@ -181,7 +282,7 @@ def main() -> int:
     if failures:
         print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
         return 1
-    print("OK: runtime prune mailbox cases passed (4 checks + ps1 parity when available).")
+    print("OK: runtime prune cases passed (mailbox safety + next_actions condensation + ps1 parity when available).")
     return 0
 
 

@@ -31,7 +31,8 @@
     "released_ratio_hard": 90,
     "recent_done_tasks": 2,
     "recent_released_claims": 4,
-    "mailbox_keep_recent": 8
+    "mailbox_keep_recent": 8,
+    "recent_next_actions": 8
   },
   "runtime": {
     "enabled": false,

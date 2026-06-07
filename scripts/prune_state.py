@@ -27,11 +27,18 @@ DEFAULT_CONFIG = {
     "recent_done_tasks": 2,
     "recent_released_claims": 4,
     "mailbox_keep_recent": 8,
+    # 0 (o ausente) preserva el comportamiento previo: el prune NO condensa next_actions.
+    # Un valor > 0 conserva esas N entradas mas recientes y condensa el resto en un centinela.
+    "recent_next_actions": 0,
 }
 
 
 STATUS_FIELD_RE = re.compile(r"(?m)^status:\s*.*$")
 FRONTMATTER_FIELD_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$")
+
+# Centinela determinista para next_actions condensadas (mismo patron que la poda manual historica).
+NEXT_ACTIONS_SENTINEL_MARK = "[HISTORICO PODADO]"
+NEXT_ACTIONS_SENTINEL_RE = re.compile(r"\[HISTORICO PODADO\]\s*(\d+)")
 
 
 @dataclass(frozen=True)
@@ -107,7 +114,42 @@ def archive_entries(
     return len(to_archive), hot_doc, archive_doc
 
 
-def prune_project_state(root: Path, keep_recent: int) -> int:
+def condense_next_actions(state: dict[str, Any], keep_recent: int) -> int:
+    """Condensa next_actions historicas en un centinela determinista, idempotente.
+
+    Conserva las `keep_recent` entradas regulares mas recientes y reemplaza el resto por UNA
+    entrada centinela que acumula el conteo de todo lo condensado. Centinelas previos se
+    preservan (fusionados en el conteo). Con keep_recent <= 0 no hace nada. Una segunda corrida
+    no re-condensa ni duplica el centinela.
+    """
+    if keep_recent <= 0:
+        return 0
+    items = state.get("next_actions", [])
+    if not isinstance(items, list):
+        return 0
+    str_items = [entry for entry in items if isinstance(entry, str)]
+    other = [entry for entry in items if not isinstance(entry, str)]
+    sentinels = [entry for entry in str_items if NEXT_ACTIONS_SENTINEL_MARK in entry]
+    regulars = [entry for entry in str_items if NEXT_ACTIONS_SENTINEL_MARK not in entry]
+    if len(regulars) <= keep_recent:
+        return 0
+    to_condense = regulars[:-keep_recent]
+    kept = regulars[-keep_recent:]
+    prior = 0
+    for entry in sentinels:
+        match = NEXT_ACTIONS_SENTINEL_RE.search(entry)
+        if match:
+            prior += int(match.group(1))
+    total = prior + len(to_condense)
+    sentinel = (
+        f"{NEXT_ACTIONS_SENTINEL_MARK} {total} next_actions historicas condensadas por el prune "
+        "(DECISION-0014); trazabilidad en git history + memoria de Claude."
+    )
+    state["next_actions"] = [sentinel] + kept + other
+    return len(to_condense)
+
+
+def prune_project_state(root: Path, keep_recent: int, keep_next_actions: int = 0) -> tuple[int, int]:
     path = root / "Area_comun/state/PROJECT_STATE.json"
     state = read_json(path)
     tasks = [task for task in state.get("active_tasks", []) if isinstance(task, dict)]
@@ -120,9 +162,10 @@ def prune_project_state(root: Path, keep_recent: int) -> int:
     ]
     removed = len(tasks) - len(kept)
     state["active_tasks"] = kept
+    condensed = condense_next_actions(state, keep_next_actions)
     state["updated_by"] = "Codex"
     write_json(path, state)
-    return removed
+    return removed, condensed
 
 
 def prune_mailbox(root: Path, keep_recent: int) -> int:
@@ -226,7 +269,11 @@ def apply_prune(root: Path) -> dict[str, Any]:
     write_json(task_archive_path, task_archive)
     write_json(claims_hot_path, claims_hot)
     write_json(claims_archive_path, claims_archive)
-    project_removed = prune_project_state(root, int(cfg["recent_done_tasks"]))
+    project_removed, next_actions_condensed = prune_project_state(
+        root,
+        int(cfg["recent_done_tasks"]),
+        int(cfg.get("recent_next_actions", 0)),
+    )
     mailbox_moved = prune_mailbox(root, int(cfg["mailbox_keep_recent"]))
 
     after = measure(root)["cold_start"]["total_tokens"]
@@ -234,6 +281,7 @@ def apply_prune(root: Path) -> dict[str, Any]:
         "tasks_archived": tasks_moved,
         "claims_archived": claims_moved,
         "project_state_done_removed": project_removed,
+        "next_actions_condensed": next_actions_condensed,
         "mailbox_archived": mailbox_moved,
         "before_tokens": before,
         "after_tokens": after,
