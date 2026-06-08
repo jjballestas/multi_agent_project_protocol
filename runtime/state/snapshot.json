@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fed5621cfc6c3996827b6d7080a217b3ffae7f65d8744ea6749181361a96282e",
+  "canonical_hash": "7d0ffc95b9affda27dc2853d6a0329e8372c9ea6be59fde72841b4cd9ce84117",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -31,6 +31,7 @@
       "CLAIM-20260608-enqueue-task0084-claude": 1,
       "CLAIM-20260608-enqueue-task0085-claude": 1,
       "CLAIM-20260608-enqueue-task0088-claude": 1,
+      "CLAIM-20260608-enqueue-task0089-claude": 1,
       "CLAIM-20260608-memory-rule-codex": 1,
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "DECISION-0026": 1,
@@ -45,10 +46,11 @@
       "TASK-0086": 9,
       "TASK-0087": 1,
       "TASK-0088": 10,
+      "TASK-0089": 2,
       "protocol-prune": 7,
       "protocol-state": 2
     },
-    "events_applied": 101,
+    "events_applied": 104,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -92,6 +94,9 @@
       "enqueue-task0088:claim-acquire": 76,
       "enqueue-task0088:claim-release": 78,
       "enqueue-task0088:task-upsert": 77,
+      "enqueue-task0089:claim-acquire": 102,
+      "enqueue-task0089:claim-release": 104,
+      "enqueue-task0089:task-upsert": 103,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:auto-claim:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-acquire": 24,
@@ -156,5 +161,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 101
+  "up_to_seq": 104
 }

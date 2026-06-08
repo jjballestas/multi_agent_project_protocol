@@ -23,6 +23,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior)."
+        },
+        {
+            "id": "TASK-0089",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto."
         }
     ],
     "agents": {

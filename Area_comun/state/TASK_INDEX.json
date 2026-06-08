@@ -228,6 +228,46 @@
             "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior).",
             "type": "implementation",
             "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/",
+                "protocol.config.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0089-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0088"
+            ],
+            "file": "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md",
+            "id": "TASK-0089",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0021",
+                "DECISION-0024"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0021",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/llm_turn_wrapper.py",
+                "runtime/adapters/llm_adapter.py",
+                "runtime/turn_schema.json",
+                "protocol.config.json",
+                "examples/llm_turn_wrapper_cases/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-08 via submit_intent bajo enforce+authoritative). Opcion 2 operador: endurecer el preset del invoker antes del piloto SA.4. OFF-PILOT (no re-armar, no piloto). GO en mailbox.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+            "status": "ready",
+            "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto.",
+            "type": "implementation",
+            "updated_at": "2026-06-08"
         }
     ],
     "updated_at": "2026-06-08",
