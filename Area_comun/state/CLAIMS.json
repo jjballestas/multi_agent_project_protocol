@@ -1,34 +1,10 @@
 {
-    "schema_version": "1.0",
-    "updated_at": "2026-06-08",
-    "updated_by": "Claude",
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
-            "task_id": "TASK-0081",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
-                "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-GO-autonomia-SA5.md"
-            ],
-            "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020)."
-        },
-        {
             "claim_id": "CLAIM-20260608-TASK-0082-codex",
-            "task_id": "TASK-0082",
+            "expires_at": "2026-06-09",
+            "notes": "Liberado con handoff-release atomico: TASK-0082 entregada a in_review. Documentado SA.5 en SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; no se encendio autonomia ni se toco el invoker real. Handoff: Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md.",
             "owner": "Codex",
-            "status": "released",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/CLAIMS_ARCHIVE.json",
@@ -50,37 +26,15 @@
                 "protocol.config.json"
             ],
             "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Liberado con handoff-release atomico: TASK-0082 entregada a in_review. Documentado SA.5 en SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; no se encendio autonomia ni se toco el invoker real. Handoff: Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md."
-        },
-        {
-            "claim_id": "CLAIM-20260608-close0082-promote0025-claude",
-            "task_id": "TASK-0083",
-            "owner": "Claude",
             "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/decisions/DECISION-0025-integracion-agent-teams-bridge.md",
-                "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
-                "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0083-GO-team-bridge-AB.md"
-            ],
-            "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0082 (SA.5) a done + promocion de DECISION-0025 (Capas A+B) + SPEC-0065 + encolado de TASK-0083 (ready) + GO. Liberado en el mismo paso (DECISION-0020)."
+            "task_id": "TASK-0082",
+            "updated_at": "2026-06-08"
         },
         {
             "claim_id": "CLAIM-20260608-TASK-0083-codex",
-            "task_id": "TASK-0083",
+            "expires_at": "2026-06-09",
+            "notes": "Liberado con handoff-release atomico: TASK-0083 entregada a in_review. Implementado runtime/team_bridge.py Capas A+B, config off-by-default, scan_globs explicito, golden team_bridge_cases 7/7 y CI. NO Capa C, NO activar bridge, NO tocar .claude/settings.json vivo. Handoff: Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md.",
             "owner": "Codex",
-            "status": "released",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/CLAIMS_ARCHIVE.json",
@@ -104,15 +58,37 @@
                 "scripts/scan_domain_neutrality.py"
             ],
             "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0083",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-close0082-promote0025-claude",
             "expires_at": "2026-06-09",
-            "notes": "Liberado con handoff-release atomico: TASK-0083 entregada a in_review. Implementado runtime/team_bridge.py Capas A+B, config off-by-default, scan_globs explicito, golden team_bridge_cases 7/7 y CI. NO Capa C, NO activar bridge, NO tocar .claude/settings.json vivo. Handoff: Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md."
+            "notes": "Claim efimero: cierre de TASK-0082 (SA.5) a done + promocion de DECISION-0025 (Capas A+B) + SPEC-0065 + encolado de TASK-0083 (ready) + GO. Liberado en el mismo paso (DECISION-0020).",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0025-integracion-agent-teams-bridge.md",
+                "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
+                "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0083-GO-team-bridge-AB.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0083",
+            "updated_at": "2026-06-08"
         },
         {
             "claim_id": "CLAIM-20260608-close0083-claude",
-            "task_id": "TASK-0083",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0083 (bridge A+B) a done. Ultima transicion manual antes del cutover a submit_intent (re-genesis + enforce). Liberado en el mismo paso (DECISION-0020).",
             "owner": "Claude",
-            "status": "released",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/TASK_INDEX.json",
@@ -123,9 +99,49 @@
                 "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0083-accepted.md"
             ],
             "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0083",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-enqueue-task0084-claude",
             "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0083 (bridge A+B) a done. Ultima transicion manual antes del cutover a submit_intent (re-genesis + enforce). Liberado en el mismo paso (DECISION-0020)."
+            "notes": "Claim efimero: enqueue de TASK-0084 via submit_intent (prueba de adopcion Claude). Liberado en la misma transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0084",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0084",
+                "Area_comun/tasks/TASK-0084-codex-cutover-submit-intent-vivo.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0084",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020).",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+                "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-GO-autonomia-SA5.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0081",
+            "updated_at": "2026-06-08"
         }
-    ]
+    ],
+    "schema_version": "1.0",
+    "updated_at": "2026-06-08",
+    "updated_by": "Claude"
 }

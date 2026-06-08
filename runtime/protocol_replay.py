@@ -508,7 +508,10 @@ def materialize_to_disk(
     root = root.resolve()
     materialized = materialize_protocol_state(snapshot_or_state)
     ordered_paths = sorted(materialized)
-    with tempfile.TemporaryDirectory(prefix="protocol-state-materialize-") as temp_name:
+    # Stage on the SAME filesystem as the targets so the atomic os.replace() below is an
+    # intra-drive rename. Using the OS default temp dir breaks on Windows when temp and the
+    # repo live on different drives (os.replace raises WinError 17 across drives).
+    with tempfile.TemporaryDirectory(prefix=".protocol-state-materialize-", dir=root) as temp_name:
         temp_root = Path(temp_name)
         staged_root = temp_root / "staged"
         backup_root = temp_root / "backup"

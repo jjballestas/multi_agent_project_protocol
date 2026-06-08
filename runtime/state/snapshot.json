@@ -1,17 +1,22 @@
 {
-  "canonical_hash": "5246a8633f337745fd57e0e94110521e7c3453f4fdcad1f9036d9a42fd4b0046",
+  "canonical_hash": "e906785c5a5918472f6b980cf7572a0454ac2ccde1c794dc7f3f6472a8990052",
   "state": {
     "aggregate_versions": {
+      "CLAIM-20260608-enqueue-task0084-claude": 1,
+      "TASK-0084": 2,
       "protocol-state": 2
     },
-    "events_applied": 2,
+    "events_applied": 5,
     "fencing_tokens": {},
     "idempotency_keys": {
+      "enqueue-task0084:claim-acquire": 3,
+      "enqueue-task0084:claim-release": 5,
+      "enqueue-task0084:task-upsert": 4,
       "protocol-state:genesis-ref:v1": 1,
       "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2
+  "up_to_seq": 5
 }
