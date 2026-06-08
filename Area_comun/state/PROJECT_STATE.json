@@ -95,15 +95,10 @@
         "DECISION-0021-activacion-wrapper-llm",
         "DECISION-0022-runtime-escritor-autoritativo",
         "DECISION-0023-firma-release",
-        "DECISION-0024-autonomia-supervisada"
+        "DECISION-0024-autonomia-supervisada",
+        "DECISION-0025-integracion-agent-teams-bridge"
     ],
     "active_tasks": [
-        {
-            "id": "TASK-0079",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Autonomia supervisada SA.2 (SPEC-0064) DONE - ACEPTADA por Claude (ratif. adversarial): kill-switch (centinela runtime/state/PAUSE antes de cada turno -> outcome=paused, sin mutar) + reloj de pared (caps.wall_clock_ms -> outcome=wallclock_exhausted, antes del turno que excederia); golden 6/6 + regresiones verdes; invoker real --once intacto. Off => byte-equivalente. Segunda de SA.1..SA.5."
-        },
         {
             "id": "TASK-0080",
             "owner": "Codex",
@@ -119,8 +114,14 @@
         {
             "id": "TASK-0082",
             "owner": "Codex",
+            "status": "done",
+            "title": "Autonomia supervisada SA.5 (SPEC-0064) DONE - ACEPTADA por Claude (ratif. adversarial): SUPERVISED_AUTONOMY.md documenta el sobre SA.1-SA.3 (config off-by-default + caps + --allow-supervised-autonomy, paradas duras max_turns/PAUSE/reloj/checkpoint humano, *.runreport.md, frontera SA.4 gateada) + enlaces. Neutral, ASCII, sin secretos. >>> CIERRA autonomia supervisada documental SA.1-SA.5. <<<"
+        },
+        {
+            "id": "TASK-0083",
+            "owner": "Codex",
             "status": "ready",
-            "title": "Autonomia supervisada SA.5 (SPEC-0064): docs del sobre de supervision (SA.1-SA.3: registro/caps/max_turns/PAUSE/reloj/checkpoint humano/runreport) + nota SA.4 gateado + enlaces. Neutral, sin secretos. Ultima rebanada documental."
+            "title": "Bridge Agent Teams -> protocolo Capas A+B (DECISION-0025/SPEC-0065): gate enforcement + audit append-only, off-by-default. Capa C diferida (precondiciones DECISION-0022)."
         }
     ],
     "open_questions": [],
@@ -133,16 +134,17 @@
         "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
     ],
     "next_actions": [
-        "[HISTORICO PODADO] 109 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0079 RECLAMADA por Codex (2026-06-08): implementando SA.2 kill-switch runtime/state/PAUSE antes de cada turno + caps.wall_clock_ms determinista con --clock-fixed; golden pausa/reloj/off/cerrojo real. Sin tocar invoker real ni encender autonomia.",
-        "TASK-0079 ENTREGADA a in_review por Codex (2026-06-08): SA.2 kill-switch/reloj listo. runtime/state/PAUSE se chequea antes de cada turno -> outcome=paused sin mutar estado; caps.wall_clock_ms obligatorio en registro y evaluado con --clock-fixed -> outcome=wallclock_exhausted; golden supervised_autonomy_cases 6/6; regresiones runtime verdes; invoker real intacto y autonomia off. Pendiente ratificacion de Claude; siguiente SA.3 checkpoint humano + escalacion.",
+        "[HISTORICO PODADO] 111 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0079 DONE (autonomia supervisada SA.2, ratif. adversarial de Claude 2026-06-08): kill-switch (centinela PAUSE) + reloj de pared; golden 6/6 + runtime_loop 8/8 + real_adapter 4/4 (invoker real intacto). Corri yo los gates. ENCOLADA SA.3 = TASK-0080 (SPEC-0064): checkpoint humano forzado + escalacion, shadow. SA.4 (invoker real multi-turno) sigue GATEADA con GO + rollback -- NO arrancar sin coordinacion. RECORDATORIO: la ACTIVACION del escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback) sigue pendiente, supervisada por el arquitecto (operador autorizo 2026-06-08). HEADS-UP: operador redacta DECISION-0025 (agent-teams-bridge), nueva direccion, aun no entregada. F7.5 docs pendiente. GO por mailbox; de a una.",
         "TASK-0080 RECLAMADA por Codex (2026-06-08): implementando SA.3 checkpoint humano tras caps.human_checkpoint_every_k o fix-cycles repetidos quality_policy; golden y runreport. Sin tocar invoker real ni encender autonomia.",
         "TASK-0080 ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo; caps.human_checkpoint_every_k corta con human_required/outcome=human_checkpoint tras K turnos, fix-cycles alcanzando quality_policy max_review_cycles/max_qa_cycles tambien escalan a humano; runreport registra cap/checkpoint; golden supervised_autonomy_cases 8/8 + suite CI funcional verde; invoker real --once intacto y autonomia off. Pendiente ratificacion de Claude. SA.4 NO iniciar sin GO operador + rollback.",
         "TASK-0080 DONE (autonomia supervisada SA.3 checkpoint humano, ratif. adversarial de Claude 2026-06-08): checkpoint por K turnos (=2) + por fix-cycles (quality_policy); golden 8/8 + real_adapter 4/4 + review_qa 15/15; invoker real intacto. Corri yo los gates. SA.1-SA.3 DONE en sombra. >>> SA.4 (invoker real multi-turno bajo el sobre) GATEADA: requiere GO del operador + ensayo de rollback -- NO arrancar autonomamente. ENCOLADA F7.5 = TASK-0081 (docs de la cadena de release, cierra Fase 7; non-gated, mantiene a Codex productivo lejos del ledger). PENDIENTES DEL OPERADOR (supervisados): (a) ACTIVACION escritor-unico = re-genesis vivo + flip enforce+authoritative + rollback (autorizado, lo ejecuta el arquitecto contigo); (b) SA.4 (autonomia real, GO+rollback); (c) DECISION-0025 (agent-teams-bridge, en tu draft). GO por mailbox; de a una.",
         "TASK-0081 RECLAMADA por Codex (2026-06-08): F7.5 docs de release engineering; documentar SBOM->manifiesto->provenance->firma, comandos generar/verificar, backend real sin secretos y enlaces README/PACKAGE_VERSIONING.",
         "TASK-0081 ENTREGADA a in_review por Codex (2026-06-08): F7.5 docs listas; RELEASE_ENGINEERING.md documenta SBOM->manifiesto->provenance->firma, comandos generar/verificar, interpretacion verify_release/generate_provenance, backend real de firma fuera del repo sin secretos (DECISION-0023) y enlaces README/PACKAGE_VERSIONING. Pendiente ratificacion de Claude; si acepta, cierra Fase 7.",
-        ">>> FASE 7 COMPLETA (2026-06-08): F7.1 SBOM + F7.2 manifiesto+verify + F7.3 provenance + F7.4 firma + F7.5 docs (RELEASE_ENGINEERING.md) -- todas ratificadas adversarialmente por Claude. TASK-0081 (F7.5 docs) DONE: corri neutralidad/encoding/validador verdes; doc exacta vs CLI real, sin secretos (solo placeholders), nota DECISION-0023. ENCOLADA SA.5 = TASK-0082 (docs del sobre de autonomia supervisada SA.1-SA.3; non-gated, ultima rebanada documental). ESTADO: backlog non-gated casi agotado. PENDIENTES SUPERVISADOS DEL OPERADOR: (a) ACTIVACION escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback; autorizada 2026-06-08, la ejecuta el arquitecto contigo); (b) SA.4 (autonomia con invoker real multi-turno; GO + rollback); (c) DECISION-0025 (agent-teams-bridge, tu draft). GO por mailbox; de a una."
+        ">>> FASE 7 COMPLETA (2026-06-08): F7.1 SBOM + F7.2 manifiesto+verify + F7.3 provenance + F7.4 firma + F7.5 docs (RELEASE_ENGINEERING.md) -- todas ratificadas adversarialmente por Claude. TASK-0081 (F7.5 docs) DONE: corri neutralidad/encoding/validador verdes; doc exacta vs CLI real, sin secretos (solo placeholders), nota DECISION-0023. ENCOLADA SA.5 = TASK-0082 (docs del sobre de autonomia supervisada SA.1-SA.3; non-gated, ultima rebanada documental). ESTADO: backlog non-gated casi agotado. PENDIENTES SUPERVISADOS DEL OPERADOR: (a) ACTIVACION escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback; autorizada 2026-06-08, la ejecuta el arquitecto contigo); (b) SA.4 (autonomia con invoker real multi-turno; GO + rollback); (c) DECISION-0025 (agent-teams-bridge, tu draft). GO por mailbox; de a una.",
+        "TASK-0082 RECLAMADA por Codex (2026-06-08): documentando SA.5, sobre de autonomia supervisada SA.1-SA.3 (registro/caps/paradas/runreport) + nota SA.4 gateado; sin encender autonomia ni tocar invoker real.",
+        "TASK-0082 ENTREGADA a in_review por Codex (2026-06-08): SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; documenta SA.1-SA.3 y deja SA.4 gateado con GO operador + rollback. Sin cambios funcionales ni secretos; claim liberado.",
+        ">>> TASK-0082 DONE (SA.5 docs SUPERVISED_AUTONOMY.md, ratif. adversarial Claude 2026-06-08) -> autonomia supervisada documental SA.1-SA.5 COMPLETA. DECISION-0025 PROMOVIDA (ACCEPTED por el operador, alcance Capas A+B: gate enforcement + audit append-only; Capa C mapeo autoritativo DIFERIDA a precondiciones DECISION-0022). Integracion Agent Teams (Anthropic) = motor en vivo + este protocolo = ledger durable encima via hooks; off-by-default/opt-in/neutral/reversible (MINOR). ENCOLADA TASK-0083 (ready, Codex, SPEC-0065): runtime/team_bridge.py Capas A+B + bloque off + alta scan_globs + golden team_bridge_cases; off => byte-equivalente; NO Capa C, NO encender. GO en mailbox. De a una. PENDIENTES SUPERVISADOS DEL OPERADOR: activacion escritor-unico (re-genesis + flip enforce+authoritative + rollback), SA.4 (invoker real multi-turno; GO + rollback), activacion bridge A+B en instancia viva (paso separado registrado)."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",

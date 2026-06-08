@@ -4,62 +4,6 @@
     "updated_by": "Claude",
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-task0079-close-task0080-claude",
-            "task_id": "TASK-0079",
-            "owner": "Claude",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0079-codex-autonomia-SA2-killswitch-reloj.md",
-                "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0079-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0079-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0079-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-GO-autonomia-SA3.md"
-            ],
-            "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0079 (SA.2) a done + encolado de SA.3 (TASK-0080). Liberado en el mismo paso (DECISION-0020)."
-        },
-        {
-            "claim_id": "CLAIM-20260608-TASK-0080-codex",
-            "task_id": "TASK-0080",
-            "owner": "Codex",
-            "status": "released",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/CLAIMS_ARCHIVE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0080",
-                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0080",
-                "Area_comun/state/PROJECT_STATE.json#next_actions",
-                "Area_comun/state/PROJECT_STATE.json#updated_at",
-                "Area_comun/state/PROJECT_STATE.json#updated_by",
-                "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
-                "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0079-accepted.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0079-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-GO-autonomia-SA3.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0080-GO-autonomia-SA3.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "Area_comun/handoffs/",
-                "runtime/orchestrator.py",
-                "runtime/supervised_autonomy.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/supervised_autonomy_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "started_at": "2026-06-08",
-            "updated_at": "2026-06-08",
-            "expires_at": "2026-06-09",
-            "notes": "Liberado con handoff-release atomico: TASK-0080 entregada a in_review. Implementado SA.3 shadow: human_checkpoint_every_k + checkpoint por fix-cycles segun quality_policy, runreport y golden 8/8. Invoker real intacto; autonomia no activada. Handoff: Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md."
-        },
-        {
             "claim_id": "CLAIM-20260608-task0080-close-task0081-claude",
             "task_id": "TASK-0080",
             "owner": "Claude",
@@ -137,6 +81,58 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260608-TASK-0082-codex",
+            "task_id": "TASK-0082",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0082",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0082",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
+                "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+                "Area_comun/protocol/",
+                "README_INSTANCIACION.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "runtime/supervised_autonomy.py",
+                "runtime/orchestrator.py",
+                "protocol.config.json"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Liberado con handoff-release atomico: TASK-0082 entregada a in_review. Documentado SA.5 en SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; no se encendio autonomia ni se toco el invoker real. Handoff: Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-close0082-promote0025-claude",
+            "task_id": "TASK-0083",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0025-integracion-agent-teams-bridge.md",
+                "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
+                "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0083-GO-team-bridge-AB.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0082 (SA.5) a done + promocion de DECISION-0025 (Capas A+B) + SPEC-0065 + encolado de TASK-0083 (ready) + GO. Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

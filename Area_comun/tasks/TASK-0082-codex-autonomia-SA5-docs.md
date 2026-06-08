@@ -1,7 +1,7 @@
 ---
 id: TASK-0082
 owner: Codex
-status: ready
+status: done
 type: documentation
 priority: normal
 created_at: 2026-06-08
@@ -55,3 +55,11 @@ multi-turno (SA.4) sigue gateado con GO del operador + ensayo de rollback.
 
 Tras SA.5: SA.4 (invoker real) queda como activacion gateada del operador. Es la ultima rebanada documental de la
 autonomia supervisada.
+
+## Entrega Codex
+
+- Creado `Area_comun/protocol/SUPERVISED_AUTONOMY.md`.
+- Documenta configuracion `runtime.supervised_autonomy`, flag `--allow-supervised-autonomy`, caps y paradas duras.
+- Documenta `runtime/state/PAUSE`, `*.runreport.md` y el limite actual del invoker real (`--once` sigue vigente).
+- Enlaces agregados desde `Area_comun/protocol/N_AGENT_RUNTIME.md` y `README_INSTANCIACION.md`.
+- No se encendio autonomia, no se modifico `protocol.config.json` y no se toco el invoker real.

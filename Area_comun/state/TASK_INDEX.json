@@ -77,43 +77,6 @@
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
         },
         {
-            "id": "TASK-0079",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Autonomia supervisada SA.2 (SPEC-0064): kill-switch + reloj de pared - C3 centinela runtime/state/PAUSE chequeado ANTES de cada turno (para con outcome=paused, sin mutar, no auto-resume); C4 caps.wall_clock_ms (determinista clock-fixed) -> outcome=wallclock_exhausted; golden para-por-pausa y para-por-reloj con RecordedInvoker. Off-by-default; invoker real --once intacto. Segunda de SA.1..SA.5.",
-            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
-            "file": "Area_comun/tasks/TASK-0079-codex-autonomia-SA2-killswitch-reloj.md",
-            "linked_decisions": [
-                "DECISION-0024",
-                "DECISION-0021",
-                "DECISION-0022"
-            ],
-            "depends_on": [
-                "TASK-0078"
-            ],
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/orchestrator.py",
-                "runtime/supervised_autonomy.py",
-                "examples/supervised_autonomy_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/orchestrator.py",
-                "examples/supervised_autonomy_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0079-codex-to-claude-1.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden supervised_autonomy 6/6 (max_turns, pausa, reloj, rechazo sin registro, off-sin-flag, cerrojo real intacto) + regresiones runtime_loop 8/8 + real_adapter 4/4 (invoker real --once intacto) + validador valid + neutralidad limpia. Centinela runtime/state/PAUSE chequeado ANTES de cada turno (outcome=paused, sin mutar/commit, no auto-resume); reloj caps.wall_clock_ms evaluado ANTES del turno que excederia (outcome=wallclock_exhausted, sin medio turno). PAUSE no se commitea (centinela operativo). Off => byte-equivalente. SIN encender autonomia. CIERRA SA.2.",
-            "updated_at": "2026-06-08"
-        },
-        {
             "id": "TASK-0080",
             "owner": "Codex",
             "status": "done",
@@ -200,7 +163,7 @@
         {
             "id": "TASK-0082",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "documentation",
             "priority": "normal",
             "phase": "P2",
@@ -228,12 +191,54 @@
                 "protocol.config.json"
             ],
             "deliverables": [
-                "Area_comun/protocol/SUPERVISED_AUTONOMY.md (o seccion equivalente)",
-                "Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md"
+                "Area_comun/protocol/SUPERVISED_AUTONOMY.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "READY (encolada por Claude 2026-06-08 tras cerrar Fase 7): SA.5 docs del sobre de autonomia supervisada (SA.1-SA.3 implementado). SA.4 (invoker real) sigue gateado. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: neutralidad exit 0, encoding OK, validador valid (drift benigno esperado), prune OK. SUPERVISED_AUTONOMY.md documenta config runtime.supervised_autonomy off-by-default + caps + --allow-supervised-autonomy, tabla de paradas duras (max_turns_reached/paused via runtime/state/PAUSE/wallclock_exhausted/human_checkpoint por K y por fix-cycles), *.runreport.md y frontera SA.4 (invoker real --once intacto, gateado por GO + rollback). Enlaces desde N_AGENT_RUNTIME y README_INSTANCIACION. Neutral, ASCII, sin secretos. CIERRA SA.5 -> autonomia supervisada documental SA.1-SA.5 completa.",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0083",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "integration",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Bridge Agent Teams -> protocolo, Capas A+B (DECISION-0025/SPEC-0065): runtime/team_bridge.py (gate enforcement exit 2 + audit append-only a team_audit.jsonl) + bloque runtime.team_bridge off-by-default en template e instancia + alta en scan_globs + golden team_bridge_cases. Capa C (submit_intent) DIFERIDA a precondiciones DECISION-0022. Off => byte-equivalente.",
+            "spec_id": "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
+            "file": "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
+            "linked_decisions": [
+                "DECISION-0025",
+                "DECISION-0022",
+                "DECISION-0018",
+                "DECISION-0017"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/team_bridge.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/scan_domain_neutrality.py",
+                "examples/team_bridge_cases/"
+            ],
+            "deliverables": [
+                "runtime/team_bridge.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/team_bridge_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "READY (encolada por Claude 2026-06-08). DECISION-0025 ACCEPTED por el operador, alcance A+B. Capa C diferida a precondiciones DECISION-0022. GO en mailbox.",
             "updated_at": "2026-06-08"
         }
     ]

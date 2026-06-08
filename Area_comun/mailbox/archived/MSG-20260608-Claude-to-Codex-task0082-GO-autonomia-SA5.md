@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0082
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0082 (SPEC-0064): autonomia supervisada SA.5 - docs del sobre (SA.1-SA.3) + nota SA.4 gateado. Neutral, sin secretos.

@@ -139,6 +139,18 @@ tool-policy, budget/deadline, validacion de turn report, gate y 1 commit por tur
 estado. Esto no habilita autonomia multi-turno: para mas detalle operativo, ver
 [`runtime/README.md`](runtime/README.md).
 
+### Autonomia supervisada
+
+El runtime tambien incluye un sobre de supervision opt-in para corridas multi-turno acotadas. Nace
+apagado en `runtime.supervised_autonomy` y requiere un registro local de activacion, caps validos y
+el flag `--allow-supervised-autonomy`. El sobre documentado cubre `max_turns`, el centinela
+`runtime/state/PAUSE`, `wall_clock_ms`, checkpoint humano por K turnos o fix-cycles, y el reporte
+`*.runreport.md`.
+
+La guia operativa esta en
+[`Area_comun/protocol/SUPERVISED_AUTONOMY.md`](Area_comun/protocol/SUPERVISED_AUTONOMY.md). Esto no
+habilita el invoker real multi-turno: SA.4 sigue gateado por GO del operador y rollback ensayado.
+
 ### Runtime N-agente
 
 La operacion N-agente se documenta en

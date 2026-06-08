@@ -146,6 +146,20 @@ Para agentes reales via CLI, el wrapper sigue apagado hasta que la instancia reg
 `runtime.real_invoker` y ejecute un unico turno con `--once`, `--allow-real-invoker` y comando o
 preset configurado. Las credenciales pertenecen al entorno del adoptante y no se commitean.
 
+## Autonomia supervisada
+
+La autonomia supervisada es un sobre opt-in para acotar corridas multi-turno con caps y paradas duras.
+La guia operativa esta en `Area_comun/protocol/SUPERVISED_AUTONOMY.md`.
+
+El bloque `runtime.supervised_autonomy` nace apagado. Si una instancia lo activa con decision,
+aprobador, fecha y caps validos, el orquestador solo aplica el sobre cuando el caller pasa
+`--allow-supervised-autonomy`. El sobre ya documentado cubre `caps.max_turns`, el centinela
+`runtime/state/PAUSE`, `caps.wall_clock_ms`, checkpoint humano por `caps.human_checkpoint_every_k`
+o fix-cycles repetidos, y `*.runreport.md`.
+
+Esto no activa agentes reales multi-turno. El invoker real sigue protegido por `--once` hasta una
+activacion SA.4 separada con GO del operador y rollback ensayado.
+
 ## Observabilidad
 
 El runtime escribe logs estructurados por run y eventos. Los identificadores utiles son:
@@ -231,13 +245,16 @@ responsable. Los deadlines son logicos/deterministas por turno, no dependen de r
 4. Activar `tool_policy`, `event_auth`, observabilidad o budget de forma incremental.
 5. Ejecutar los golden de runtime y los validadores antes de cerrar tareas.
 6. Para CLI real, registrar `runtime.real_invoker` y ejecutar solo un turno bajo gate.
-7. Revisar run logs, event logs y handoffs antes de promover releases.
+7. Para autonomia supervisada, seguir `Area_comun/protocol/SUPERVISED_AUTONOMY.md` y no tratar
+   `human_checkpoint` como auto-resume.
+8. Revisar run logs, event logs y handoffs antes de promover releases.
 
 ## Referencias
 
 - `Area_comun/decisions/DECISION-0015-n-agent-registry-y-capacidades.md`
 - `Area_comun/specs/SPEC-0038-n-agent-registry.md`
 - `runtime/README.md`
+- `Area_comun/protocol/SUPERVISED_AUTONOMY.md`
 - `runtime/turn_schema.json`
 - `runtime/router.py`
 - `runtime/turn_validate.py`
