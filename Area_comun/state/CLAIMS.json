@@ -31,6 +31,20 @@
             "updated_at": "2026-06-08"
         },
         {
+            "claim_id": "CLAIM-20260608-decision0027-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: formaliza DECISION-0027 (activacion SA.4) via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "DECISION-0027",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-memory-rule-codex",
             "expires_at": "2026-06-09",
             "notes": "Operator directive: record golden rule that every agent updates its memory after every commit.",

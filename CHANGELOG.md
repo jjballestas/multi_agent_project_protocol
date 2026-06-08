@@ -17,6 +17,40 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.1.0] — 2026-06-08
+
+**Runtime-authoritative activation + supervised-autonomy SA.4 pilot.** Additive and domain-neutral
+over 1.0.0; every previously valid turn report stays valid and the shipped templates stay
+off-by-default. This MINOR records the live activation of the protocol-state event-log writer and
+the first bounded real-invoker autonomy pilot, all gated and reversible.
+
+### Added
+- **Live single-writer (event-sourced state).** `event_state.enforce=true` then
+  `authoritative=true` activated in the live instance: the event log is the source of truth, state
+  is reconstructed by `replay(log)`, and manual edits to `Area_comun/state/*.json` hard-fail as
+  drift (B.3). All ledger transitions now flow through `runtime/submit_intent.py`. Reversible
+  (flags → false restores shadow). (DECISION-0022)
+- **New `submit_intent` intents** `project_narrative` (updates `next_actions`/`risks`/
+  `open_questions`) and `protocol_prune` (retires terminal hot entries), so narrative updates and
+  pruning run through `submit_intent` under enforce. (TASK-0085 / SPEC-0066)
+- **Config guard `event_state_config_error`**: rejects an incoherent `event_state` chain
+  (`authoritative⇒enforce⇒materialize⇒enabled`, runtime tier) in the validator, `submit_intent`
+  and `apply` — kills the "false-secure" config. (TASK-0086 / SPEC-0067)
+- **Supervised-autonomy SA.4 lock-lift** (off-by-default): the real subprocess invoker may run
+  multi-turn only when both `runtime.real_invoker` and `runtime.supervised_autonomy` are registered
+  and both `--allow-*` flags are passed; otherwise the `--once` lock holds (byte-equivalent).
+  Activated for a single bounded pilot. (DECISION-0027 / TASK-0088 / SPEC-0064 §4)
+- **Agent Teams bridge, layers A+B** (gate enforcement + append-only audit), off-by-default; layer C
+  (authoritative mapping) deferred. (DECISION-0025 / TASK-0083 / SPEC-0065)
+- **Cross-FS materialize fix** for Windows when temp and repo live on different drives; regression
+  golden added.
+- **Golden rule:** every agent updates its memory after each commit. (DECISION-0026)
+
+### Notes
+- Templates (`*.template.*`) unchanged; new instances stay off-by-default.
+- Open follow-up (blocking for adoption, not for SA.4): decide authoritative-specific teeth vs
+  documenting `enforce` as the single-writer mechanism. (TASK-0087)
+
 ## [1.0.0] — 2026-06-07
 
 **First stable release — the protocol-methodology as a distributable product.** Promotes the

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ac3fcdf7ca8a43623b9844d958d031cc868d9de644f875a2739c7aad4f606852",
+  "canonical_hash": "fed5621cfc6c3996827b6d7080a217b3ffae7f65d8744ea6749181361a96282e",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -26,6 +26,7 @@
       "CLAIM-20260608-close-task0086-claude": 1,
       "CLAIM-20260608-close-task0088-claude": 1,
       "CLAIM-20260608-decision0026-claude": 1,
+      "CLAIM-20260608-decision0027-claude": 1,
       "CLAIM-20260608-enqueue-0086-0087-claude": 1,
       "CLAIM-20260608-enqueue-task0084-claude": 1,
       "CLAIM-20260608-enqueue-task0085-claude": 1,
@@ -34,6 +35,8 @@
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
+      "DECISION-0027": 1,
+      "DECISION-0027-activacion-sa4-piloto": 1,
       "MAINTENANCE-PRUNE": 7,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
       "PROJECT_STATE": 7,
@@ -45,7 +48,7 @@
       "protocol-prune": 7,
       "protocol-state": 2
     },
-    "events_applied": 98,
+    "events_applied": 101,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -73,6 +76,9 @@
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
       "decision0026:decision": 19,
+      "decision0027:claim-acquire": 99,
+      "decision0027:claim-release": 101,
+      "decision0027:decision": 100,
       "enqueue-0086-0087:claim-acquire": 57,
       "enqueue-0086-0087:claim-release": 60,
       "enqueue-0086-0087:upsert-0086": 58,
@@ -150,5 +156,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 98
+  "up_to_seq": 101
 }
