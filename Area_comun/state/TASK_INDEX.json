@@ -226,6 +226,41 @@
             "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto.",
             "type": "implementation",
             "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0090-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0089"
+            ],
+            "file": "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
+            "id": "TASK-0090",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "DECISION-0006",
+                "SPEC-0068"
+            ],
+            "relevant_files": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-09 via submit_intent). Fix puntual del wrapper de TASK-0089 (smoke real lo caracterizo). OFF-PILOT. GO en mailbox.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+            "status": "ready",
+            "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto.",
+            "type": "implementation",
+            "updated_at": "2026-06-09"
         }
     ],
     "updated_at": "2026-06-08",
