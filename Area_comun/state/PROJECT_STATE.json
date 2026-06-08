@@ -1,12 +1,6 @@
 {
     "active_tasks": [
         {
-            "id": "TASK-0086",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto."
-        },
-        {
             "id": "TASK-0087",
             "owner": "Claude",
             "status": "proposed",
@@ -27,7 +21,7 @@
         {
             "id": "TASK-0090",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto."
         }
     ],
@@ -69,8 +63,7 @@
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
     "next_actions": [
-        "[HISTORICO PODADO] 120 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        ">>> TASK-0082 DONE (SA.5 docs SUPERVISED_AUTONOMY.md, ratif. adversarial Claude 2026-06-08) -> autonomia supervisada documental SA.1-SA.5 COMPLETA. DECISION-0025 PROMOVIDA (ACCEPTED por el operador, alcance Capas A+B: gate enforcement + audit append-only; Capa C mapeo autoritativo DIFERIDA a precondiciones DECISION-0022). Integracion Agent Teams (Anthropic) = motor en vivo + este protocolo = ledger durable encima via hooks; off-by-default/opt-in/neutral/reversible (MINOR). ENCOLADA TASK-0083 (ready, Codex, SPEC-0065): runtime/team_bridge.py Capas A+B + bloque off + alta scan_globs + golden team_bridge_cases; off => byte-equivalente; NO Capa C, NO encender. GO en mailbox. De a una. PENDIENTES SUPERVISADOS DEL OPERADOR: activacion escritor-unico (re-genesis + flip enforce+authoritative + rollback), SA.4 (invoker real multi-turno; GO + rollback), activacion bridge A+B en instancia viva (paso separado registrado).",
+        "[HISTORICO PODADO] 121 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0083 RECLAMADA por Codex (2026-06-08): bridge Agent Teams Capas A+B, runtime/team_bridge.py + config off + neutralidad + golden; NO Capa C, NO encender bridge ni tocar .claude/settings.json.",
         "TASK-0083 ENTREGADA a in_review por Codex (2026-06-08): team_bridge.py Capas A+B + config off + scan_globs + CI/golden 7/7; audit append-only, gate exit2, [TASK-XXXX] solo audita. NO Capa C, NO activar bridge, NO tocar .claude/settings.json.",
         ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",

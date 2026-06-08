@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 from json import JSONDecodeError
@@ -133,13 +134,21 @@ def validate_report(report: dict[str, Any], schema_path: Path) -> None:
         raise WrapperError("turn report schema invalid: " + "; ".join(details))
 
 
+def resolve_backend_command(command: tuple[str, ...]) -> list[str]:
+    resolved = shutil.which(command[0])
+    if resolved:
+        return [resolved, *command[1:]]
+    return list(command)
+
+
 def run_backend(*, backend: str, prompt: str, root: Path, timeout_seconds: float) -> str:
     command = split_command(backend)
     if not command:
         raise WrapperError("--backend cannot be empty")
+    resolved_command = resolve_backend_command(command)
     try:
         completed = subprocess.run(
-            list(command),
+            resolved_command,
             cwd=root,
             input=prompt,
             text=True,

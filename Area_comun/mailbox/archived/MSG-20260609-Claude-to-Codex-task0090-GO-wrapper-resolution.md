@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0090
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0090 (off-pilot, SPEC-0068): wrapper debe resolver el backend via shutil.which (shims npm Windows claude.CMD) -> hoy subprocess.run(['claude',...]) da WinError 2 y el piloto no invoca el backend. NO re-armar SA.4 ni piloto.

@@ -18,6 +18,10 @@ FIXTURES = CASE_ROOT / "fixtures"
 WRAPPER = ROOT / "runtime" / "llm_turn_wrapper.py"
 FAKE_BACKEND = CASE_ROOT / "fake_backend.py"
 
+sys.path.insert(0, str(ROOT))
+
+from runtime import llm_turn_wrapper as wrapper_module  # noqa: E402
+
 
 def command_arg(value: Path | str) -> str:
     text = str(value)
@@ -110,6 +114,24 @@ def case_backend_env_fallback() -> None:
     assert json.loads(completed.stdout) == read_fixture(fixture)
 
 
+def case_backend_resolved_by_shutil_which() -> None:
+    original_which = wrapper_module.shutil.which
+    try:
+        wrapper_module.shutil.which = lambda value: sys.executable if value == "fake-python-shim" else None
+        backend = f"fake-python-shim {command_arg(FAKE_BACKEND)} --fixture {command_arg(FIXTURES / 'clean.json')}"
+        stdout = wrapper_module.run_backend(backend=backend, prompt="fixture prompt", root=ROOT, timeout_seconds=2.0)
+    finally:
+        wrapper_module.shutil.which = original_which
+    assert json.loads(stdout) == read_fixture(FIXTURES / "clean.json")
+
+
+def case_backend_missing_fails_cleanly() -> None:
+    completed = run_wrapper("definitely-missing-wrapper-backend-0090 --version")
+    assert completed.returncode != 0, completed
+    assert completed.stdout == "", completed.stdout
+    assert "backend could not be started" in completed.stderr, completed.stderr
+
+
 def case_schema_invalid_fails_cleanly() -> None:
     completed = run_wrapper(fake_command(fixture=FIXTURES / "invalid.json"))
     assert completed.returncode != 0, completed
@@ -151,6 +173,8 @@ def main() -> int:
         case_fenced_prose_json,
         case_wrapped_report_json,
         case_backend_env_fallback,
+        case_backend_resolved_by_shutil_which,
+        case_backend_missing_fails_cleanly,
         case_schema_invalid_fails_cleanly,
         case_backend_failure_fails_cleanly,
         case_timeout_fails_before_invoker_timeout,

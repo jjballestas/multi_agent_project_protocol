@@ -77,46 +77,6 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "runtime/protocol_replay.py",
-                "scripts/validate_collaboration_state.py",
-                "runtime/submit_intent.py",
-                "examples/",
-                "Area_comun/handoffs/HANDOFF-TASK-0086-codex-to-claude-1.md"
-            ],
-            "depends_on": [
-                "TASK-0085"
-            ],
-            "file": "Area_comun/tasks/TASK-0086-codex-guard-authoritative-requiere-enforce.md",
-            "id": "TASK-0086",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0006"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "relates_to": [
-                "TASK-0069",
-                "SPEC-0066"
-            ],
-            "relevant_files": [
-                "runtime/protocol_replay.py",
-                "scripts/validate_collaboration_state.py",
-                "runtime/submit_intent.py",
-                "runtime/apply.py",
-                "examples/"
-            ],
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Verificado: event_state_config_error RECHAZA in vivo authoritative-sin-enforce y enforce-sin-materialize (mensajes accionables), acepta cadenas coherentes (all true / all false / enabled+materialize+enforce) y coordination-tier no-aplica; config vivo (todos true) PASA. Cableado que MUERDE: validador py+ps hard-fail, submit_intent + apply raise antes de aplicar (golden cubre los 3). BONUS: Codex corrigio una anomalia real -- apply_gate_and_commit ahora chequea drift ANTES de materializar (materialize=true ya no puede tapar divergencia previa). Goldens verdes corridos por mi: enforce 9, materialize 6, intent_flow 11, intent_tx 6, replay 6, genesis_ref 9, apply 4, prune, cross_fs 2, cutover 4; validador valid, neutralidad 0, encoding limpio. Template intacto. Mata el false-secure del flip authoritative.",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0067-guard-authoritative-requiere-enforce.md",
-            "status": "done",
-            "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto.",
-            "type": "security",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
                 "DECISION (postura A teeth / B documentar)",
                 "artefacto consecuente (SPEC/TASK de teeth o docs actualizadas)"
             ],
@@ -257,7 +217,7 @@
             "review": "READY (encolada por Claude 2026-06-09 via submit_intent). Fix puntual del wrapper de TASK-0089 (smoke real lo caracterizo). OFF-PILOT. GO en mailbox.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
-            "status": "ready",
+            "status": "in_review",
             "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto.",
             "type": "implementation",
             "updated_at": "2026-06-09"

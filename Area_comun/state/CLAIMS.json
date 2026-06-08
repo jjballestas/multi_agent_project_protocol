@@ -1,78 +1,17 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-214938-prune-claude",
+            "claim_id": "CLAIM-20260608-224225-prune-claude",
             "expires_at": "2026-06-08",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
             "scope": [
                 "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-06-08T21:49:38Z",
+            "started_at": "2026-06-08T22:42:25Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-08T21:49:38Z"
-        },
-        {
-            "claim_id": "CLAIM-20260608-close-task0089-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0089 (wrapper invoker) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0089",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0089",
-                "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "TASK-0089",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020).",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
-                "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-accepted.md",
-                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-GO-autonomia-SA5.md"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "TASK-0081",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "claim_id": "CLAIM-20260608-task0089-codex",
-            "expires_at": "2026-06-09",
-            "notes": "TASK-0089 wrapper fino vendor-neutral para invoker real, off-pilot; NO re-armar SA.4 ni correr piloto.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0089",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md",
-                "protocol.config.json",
-                "runtime/",
-                "examples/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-08T21:38:14Z",
-            "status": "released",
-            "task_id": "TASK-0089",
-            "updated_at": "2026-06-08T21:38:14Z"
+            "updated_at": "2026-06-08T22:42:25Z"
         },
         {
             "claim_id": "CLAIM-20260608-task0089-mailbox-hygiene-codex",
@@ -103,6 +42,28 @@
             "status": "released",
             "task_id": "TASK-0090",
             "updated_at": "2026-06-09"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0090-codex",
+            "expires_at": "2026-06-10",
+            "notes": "TASK-0090 wrapper backend resolution via shutil.which, off-pilot; NO re-armar SA.4 ni correr piloto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0090",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-08T22:37:59Z",
+            "status": "released",
+            "task_id": "TASK-0090",
+            "updated_at": "2026-06-08T22:37:59Z"
         }
     ],
     "schema_version": "1.0",
