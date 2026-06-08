@@ -76,3 +76,21 @@ dominio: es coordinacion de proceso, sin terminos de negocio.
   inconsistentes, con traza auditable.
 - Un futuro endurecimiento podria automatizar la deteccion de ventana segura (lock ligero / validador que
   alerte claim-antes-de-artefacto), fuera de alcance aqui.
+
+## Addendum 2026-06-08 - enforce protege el ledger JSON, NO los archivos de contrato en prosa
+
+Con `event_state.enforce=true` (DECISION-0022), una edicion concurrente del **ledger JSON**
+(`Area_comun/state/*.json`) se detecta como drift y **hard-failea**: el propio enforce actua de red de
+seguridad anti-colision para el estado. Pero enforce **NO cubre** los archivos de **contrato en prosa**
+-- `AGENTS.md`, `CLAUDE.md`, `Area_comun/decisions/*.md`, `Area_comun/specs/*.md`, `Area_comun/protocol/*.md`,
+reportes. Ahi la disciplina anti-colision sigue siendo **manual**.
+
+**Casi-fallo que motiva la nota (2026-06-08):** el operador y Claude editaron `AGENTS.md` en paralelo (la
+regla de oro de memoria, DECISION-0026). Un `git add AGENTS.md` "amplio" capturo la edicion concurrente del
+operador junto con la propia, produciendo un **bullet duplicado** committeado. Se corrigio removiendo el
+duplicado, pero ilustra el riesgo.
+
+**Regla:** para archivos de contrato en prosa, antes de commitear, (1) `git diff`/`git status` para detectar
+edicion concurrente del peer; (2) **staging de rutas explicitas** (nunca `git add -A`/`git add .`/directorio
+amplio que pueda barrer trabajo del peer); (3) revisar el `git diff --cached` antes del commit. El punto #5
+(staging explicito) aplica con doble fuerza a la prosa porque ahi no hay enforce que cace el clobber.

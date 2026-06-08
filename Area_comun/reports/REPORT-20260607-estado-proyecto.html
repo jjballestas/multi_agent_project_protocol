@@ -78,30 +78,31 @@
     <span class="chip">Actualizado <b>2026-06-08</b></span>
     <span class="chip">Autor <b>Claude (arquitecto)</b></span>
     <span class="chip">Rama <b>main</b></span>
-    <span class="chip">HEAD <b>0d7d48d</b></span>
-    <span class="chip">Fase <b>P2 &mdash; post-v1.0 (migracion escritor-unico + Fase 7 cierre + autonomia SA)</b></span>
+    <span class="chip">HEAD <b>b1eb946</b></span>
+    <span class="chip">Fase <b>P2 &mdash; post-v1.0 (escritor-unico: ENFORCE ON &middot; Fase 7 COMPLETA &middot; autonomia SA.1-SA.5)</b></span>
   </div>
 </header>
 
 <div class="banner">
-  <div class="v">&#10003; v1.0.0 PUBLICADO &mdash; primer release estable</div>
+  <div class="v">&#10003; v1.0.0 PUBLICADO &mdash; escritor-unico parcial EN VIVO (enforce ON)</div>
   <div class="sub" style="margin-top:6px">
     Metodologia consolidada como <b>producto distribuible</b>: contrato de coordinacion, motor runtime N-agente,
-    capa de seguridad, wrapper LLM real, track de adopcion. Tag <code>v1.0.0</code>,
-    <code>protocol_version 1.0.0</code>, suite golden verde. <b>Fase 7</b> (release engineering)
-    <b>F7.1-F7.4 DONE</b> (SBOM, manifiesto+verify, provenance, firma); <b>F7.5 (docs) en curso</b> &mdash; cierra
-    Fase 7. La <b>migracion al escritor-unico</b> tiene <b>ambos lados del cutover en codigo</b> (intents
-    transaccional + mandato + ledger_ops de Codex) y queda <b>CODE-READY para la activacion</b>, ya
-    <b>autorizada por el operador</b> (re-genesis + flip enforce/authoritative, supervisada). <b>Autonomia
-    supervisada</b> (DECISION-0024): <b>SA.1-SA.3 DONE</b> en sombra; SA.4 (invoker real) gateada.
+    capa de seguridad, wrapper LLM real, release engineering y track de adopcion. <b>Fase 7 COMPLETA</b>
+    (F7.1-F7.5: SBOM, manifiesto+verify, provenance, firma, docs). <b>Escritor-unico:</b> se ejecuto el cutover
+    en vivo &mdash; <code>submit_intent</code> ya escribe el ledger del repo (se corrigio un bug cross-drive que
+    lo bloqueaba), re-genesis a drift 0, y <b><code>event_state.enforce=true</code> ENCENDIDO</b> (la edicion
+    manual de <code>*.json</code> ahora hard-failea); <code>authoritative</code> sigue OFF (es la ventana
+    posterior). <b>Autonomia supervisada</b> (DECISION-0024): <b>SA.1-SA.5 DONE</b> (documental incluida); SA.4
+    (invoker real) gateada. <b>DECISION-0025</b> (bridge Agent Teams, Capas A+B) implementada; <b>DECISION-0026</b>
+    (regla de oro: memoria despues de cada commit).
   </div>
 </div>
 
 <div class="grid">
   <div class="card"><div class="n">v1.0.0</div><div class="l">version publicada (tag)</div></div>
-  <div class="card"><div class="n">24</div><div class="l">decisiones de protocolo (0001-0024)</div></div>
+  <div class="card"><div class="n">26</div><div class="l">decisiones de protocolo (0001-0026)</div></div>
   <div class="card"><div class="n">~40</div><div class="l">golden runners verde</div></div>
-  <div class="card"><div class="n">SOMBRA</div><div class="l">writer-vivo (enabled+materialize; enforce/authoritative off &mdash; activacion autorizada, pendiente supervisada)</div></div>
+  <div class="card"><div class="n">ENFORCE</div><div class="l">writer-vivo (enabled+materialize+<b>enforce</b>; authoritative off &mdash; drift = HARD-FAIL; edicion manual prohibida)</div></div>
 </div>
 
 <h2>1. Que esta cerrado (v1.0.0 + post-v1.0)</h2>
@@ -114,119 +115,96 @@
     <tr><td><b>Seguridad (Fase 5)</b></td><td>Anti-inyeccion (G1), tool-policy deny-by-default, firma de envelope / event-auth HMAC</td><td><span class="badge b-ok">DONE</span></td></tr>
     <tr><td><b>Wrapper LLM real</b></td><td>Adapter CLI vendor-neutral, off-by-default, sin secretos, sin autonomia (DECISION-0021)</td><td><span class="badge b-ok">DONE</span></td></tr>
     <tr><td><b>Distribucion (D2)</b></td><td>Tiers coordination/runtime, upgrade tier-aware, docs de adopcion, versionado del paquete</td><td><span class="badge b-ok">DONE</span></td></tr>
-    <tr><td><b>Fase 7 &mdash; release eng</b></td><td>F7.1 SBOM, F7.2 manifiesto+verify, F7.3 provenance, F7.4 firma (backend fixture, sin secretos)</td><td><span class="badge b-ok">F7.1-F7.4 DONE</span></td></tr>
-    <tr><td><b>Escritor-unico &mdash; cutover</b></td><td>Intents transaccional <code>submit_intent --intents</code> + <code>regenesis.py</code> + mandato de protocolo + <code>ledger_ops.py</code> del lazo de Codex</td><td><span class="badge b-ok">AMBOS LADOS EN CODIGO</span></td></tr>
-    <tr><td><b>Autonomia supervisada</b></td><td>SA.1 sobre+max_turns+runreport; SA.2 kill-switch+reloj; SA.3 checkpoint humano+fix-cycles (off-by-default, invoker real intacto)</td><td><span class="badge b-ok">SA.1-SA.3 DONE</span></td></tr>
-    <tr><td><b>Proceso</b></td><td>Regla anti-colision (DECISION-0020); higiene de prune que condensa next_actions</td><td><span class="badge b-ok">DONE</span></td></tr>
+    <tr><td><b>Fase 7 &mdash; release eng</b></td><td>F7.1 SBOM, F7.2 manifiesto+verify, F7.3 provenance, F7.4 firma, F7.5 docs (RELEASE_ENGINEERING.md). Goldens verde: sbom 4 / provenance 5 / firma 8 / verify 6</td><td><span class="badge b-ok">COMPLETA (F7.1-F7.5)</span></td></tr>
+    <tr><td><b>Escritor-unico &mdash; enforce</b></td><td>Cutover ejecutado: <code>submit_intent --intents</code> escribe el ledger en vivo (fix bug cross-drive) + re-genesis drift 0 + ambos lazos probados + <code>enforce=true</code> (authoritative off)</td><td><span class="badge b-ok">ENFORCE ON</span></td></tr>
+    <tr><td><b>Autonomia supervisada</b></td><td>SA.1 sobre+max_turns+runreport; SA.2 kill-switch+reloj; SA.3 checkpoint humano+fix-cycles; SA.5 docs (off-by-default, invoker real intacto)</td><td><span class="badge b-ok">SA.1-SA.5 DONE</span></td></tr>
+    <tr><td><b>Bridge Agent Teams</b></td><td>DECISION-0025 Capas A+B (gate enforcement + audit append-only), off-by-default, sin Capa C (diferida)</td><td><span class="badge b-ok">A+B DONE</span></td></tr>
+    <tr><td><b>Proceso</b></td><td>Regla anti-colision (DECISION-0020); regla de oro memoria-post-commit (DECISION-0026)</td><td><span class="badge b-ok">DONE</span></td></tr>
   </tbody>
 </table>
 
 <h2>2. En curso ahora</h2>
 <div class="phase now">
-  <h3><span class="badge b-now">EN CURSO</span> TASK-0081 &mdash; Fase 7.5 (Codex): docs de la cadena de release</h3>
-  <p>Ultima rebanada de la <b>Fase 7</b>: documentar de extremo a extremo la cadena ya implementada
-     (<code>generate_sbom</code> &rarr; <code>generate_manifest</code> &rarr; <code>generate_provenance</code>
-     &rarr; <code>sign_release</code> + <code>verify_release</code>): como generar y verificar un release, y la
-     nota de seguridad de DECISION-0023 (backend real de firma del emisor, claves <b>nunca</b> commiteadas;
-     fixture solo en golden). <b>Cierra Fase 7.</b> Documentacion, sin codigo funcional nuevo; neutral, sin secretos.</p>
-  <p class="why">En paralelo, los pasos de mayor impacto quedan reservados para un momento <b>supervisado con el
-     operador</b>: la <b>activacion del escritor-unico</b> (ya autorizada) y <b>SA.4</b> (autonomia con invoker
-     real). Codex avanza F7.5 lejos del ledger mientras tanto.</p>
+  <h3><span class="badge b-now">EN CURSO</span> TASK-0085 &mdash; intent de next_actions/narrativa + prune via submit_intent (Codex)</h3>
+  <p>Cierra el <b>gap</b> que aparecio al encender enforce: <code>PROJECT_STATE.next_actions</code> no tiene
+     intent en <code>submit_intent</code> y el prune editaba <code>*.json</code> a mano &mdash; ambos
+     incompatibles con enforce. Por eso el prune quedo <b>congelado</b> (<code>maintenance.enabled=false</code>,
+     solo instancia viva; template intacto). TASK-0085 (SPEC-0066) agrega un intent <code>project_narrative</code>
+     y <b>reencauza el prune por submit_intent</b>, para descongelarlo sin romper enforce.</p>
+  <p class="why">Criterio de cierre: intent + prune <b>verificados EN VIVO con drift 0</b> (no solo golden) +
+     <b>golden de replay-identidad</b>; el intent nuevo validado aparte como deliverable; template intacto. El
+     ciclo de vida de TASK-0085 (ambos lazos, todo por <code>submit_intent</code>) llena la <b>ventana de
+     observacion</b> de enforce (criterio: drift 0 sostenido sobre &ge;6 transiciones reales sin hard-fails falsos).</p>
 </div>
 
 <h2>3. Roadmap de cierre</h2>
 <div class="rail">
   <div class="seg done"><b>Fase B &#10003;</b>writer-vivo + intents</div>
-  <div class="seg done"><b>Sombra &#10003;</b>activada (observa)</div>
-  <div class="seg done"><b>Cutover &#10003;</b>ambos lados en codigo</div>
-  <div class="seg now"><b>Fase 7</b>F7.5 cierra</div>
-  <div class="seg gate"><b>Escritor unico</b>activacion autorizada</div>
-  <div class="seg gate"><b>Autonomia</b>SA.4 (real) gate</div>
+  <div class="seg done"><b>Cutover &#10003;</b>submit_intent en vivo</div>
+  <div class="seg done"><b>enforce &#10003;</b>encendido (drift=hard-fail)</div>
+  <div class="seg now"><b>TASK-0085</b>next_actions + prune</div>
+  <div class="seg gate"><b>authoritative</b>ventana posterior</div>
+  <div class="seg gate"><b>SA.4 / Capa C</b>cada una su ventana</div>
 </div>
 
 <div class="phase">
-  <h3><span class="badge b-ok">COMPLETA (en sombra)</span> Fase B &mdash; Event log como writer vivo del estado de protocolo (SPEC-0039 / SPEC-0052)</h3>
-  <p>La Fase B convierte al <b>event log en la fuente de verdad del estado</b> (tareas, claims, decisiones), de
-     modo que el estado se reconstruya por <code>replay(log)</code> de forma determinista y auditable. Entregada
-     en 4 rebanadas aditivas (B.1 replay/drift read-only &rarr; B.2 materializacion opt-in &rarr; B.3 hard-fail
-     enforce &rarr; B.4 runtime autoritativo + genesis POR REFERENCIA content-addressed). <b>CONSTRUIDO; activo en
-     MODO SOMBRA</b> (<code>enforce/authoritative</code> off, edicion manual valida, drift = warning benigno).
-     DECISION-0022 ratificada (MINOR-con-migracion).</p>
-  <div class="why">Cierra los criterios 11-12 de SPEC-0038 e invariantes I5/I6; con ello el <b>paraguas N-agente
-     (TASK-0038) quedo CERRADO</b>. La maquinaria del writer-vivo esta completa; lo que faltaba era el
-     <i>cutover</i> de ambos lazos a <code>submit_intent</code> y decidir <i>encenderla</i> (abajo).</div>
+  <h3><span class="badge b-ok">ENFORCE ON &#10003;</span> Escritor-unico parcial: cutover ejecutado + <code>enforce=true</code> (authoritative off)</h3>
+  <p>El event log es la fuente de verdad del estado; el estado se reconstruye por <code>replay(log)</code>
+     determinista (Fase B, DECISION-0022). Esta ventana <b>ejecuto el cutover en vivo</b>, un solo multiplicador
+     de riesgo a la vez:</p>
+  <ul class="steps">
+    <li class="done"><b>Verificacion previa</b>: el event log vivo solo tenia la genesis &rarr; ninguna transicion habia pasado por <code>submit_intent</code>; ambos lazos editaban <code>*.json</code> a mano. <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>Fix del blocker</b>: <code>materialize_to_disk</code> montaba en el temp del SO y <code>os.replace</code> cruzaba de disco (Windows WinError 17) &rarr; staging en el mismo FS; golden de regresion cross-FS aterrizado. <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>Re-genesis del repo vivo</b> a drift 0 (genesis por referencia content-addressed). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>Adopcion probada en sombra</b>: ambos lazos emiten por <code>submit_intent</code> con drift 0 (TASK-0084: Codex auto-claim + handoff-release; Claude enqueue + cierre). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>Flip <code>enforce=true</code></b> (authoritative OFF) con GO del operador: drift = HARD-FAIL (B.3). Verificado: drift 0 pasa / mutacion manual hard-failea / restaurado verde. Prune congelado. <span class="badge b-ok">DONE</span></li>
+    <li class="next"><b>Ventana de observacion</b>: drift 0 sostenido sobre &ge;6 transiciones reales de ambos lazos sin hard-fails falsos. Rollback armado: cualquier hard-fail de rutina legitima &rarr; <code>enforce=false</code>.</li>
+  </ul>
+  <div class="why">Reversible (<code>enforce=false</code> restaura el modo sombra). <code>authoritative=true</code>
+     (runtime como UNICO escritor) es la <b>ventana posterior</b> separada. Disciplina del operador: nunca
+     enforce + SA.4 + Capa C en la misma ventana &mdash; un multiplicador de riesgo a la vez, testeable y reversible.</div>
 </div>
 
 <div class="phase">
-  <h3><span class="badge b-ok">CUTOVER &mdash; AMBOS LADOS EN CODIGO &#10003;</span> Escritor-unico: del intent mono al transaccional + adopcion de ambos lazos</h3>
-  <p>Para que el escritor-unico (enforce) no rompa el lazo, ambos agentes deben dejar de editar los
-     <code>*.json</code> a mano y usar <code>submit_intent</code>. Eso exigia dos piezas que ya estan en codigo:</p>
-  <ul class="steps">
-    <li class="done"><b>Keystone transaccional</b> (TASK-0076): <code>submit_intent --intents</code> aplica un cierre/encole multi-paso (status + claim + task_upsert + decision) como <b>una transaccion atomica con rollback</b>; + <code>regenesis.py</code> (genesis fresco por referencia, drift 0, no destructivo). <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>Mandato de protocolo (lado Claude)</b>: AGENTS.md/<code>.template</code> + TASK_PROTOCOL documentan el flujo transaccional y el <b>gate de activacion ambos-lazos</b>. <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>Cutover del lazo de Codex</b> (TASK-0077): <code>ledger_ops.py</code> mapea auto-claim y handoff-release a transacciones <code>submit_intent --intents</code> (claim release al final, conservando autoridad de scope) + golden. <span class="badge b-ok">DONE</span></li>
-  </ul>
-  <div class="why">Con esto el sistema queda <b>CODE-READY</b> para encender enforce sin romper ningun lazo. La
-     activacion en vivo es el paso de abajo.</div>
-</div>
-
-<div class="phase gate">
-  <h3><span class="badge b-gate">AUTORIZADA &mdash; pendiente (supervisada)</span> Activacion del escritor-unico (re-genesis + flip enforce+authoritative)</h3>
-  <p>El ultimo escalon de la migracion: <b>re-genesis del repo vivo</b> (drift 0) + encender
-     <code>enforce=true</code>+<code>authoritative=true</code> para que el runtime sea el <b>unico escritor</b> y
-     la edicion manual quede prohibida (rechazada como drift). El <b>operador ya autorizo (2026-06-08)</b>
-     re-genesis + flip + aprobar DECISION-0024.</p>
-  <ul class="steps">
-    <li class="done"><b>1. Keystone + cutover en codigo</b> (ambos lazos). <span class="badge b-ok">DONE</span></li>
-    <li class="next"><b>2. Re-genesis del repo vivo</b> (drift 0) + flip <code>enforce+authoritative</code>, ejecutado por el arquitecto de forma <b>supervisada</b>, tras verificar que ambos lazos enrutan sus transiciones por <code>submit_intent</code>.</li>
-    <li class="next"><b>3. Ensayo de rollback</b> (poner los 4 flags en <code>false</code> restaura el modo sombra) como red de seguridad del switch.</li>
-  </ul>
-  <div class="why">Por que sigue gateada pese a estar autorizada: tras el flip, la <b>siguiente transicion de cada
-     lazo DEBE ir por submit_intent</b> o hard-failea; es el switch coordinado de mayor riesgo, asi que se ejecuta
-     en un momento supervisado con rollback listo, no en piloto automatico. Reversible.</div>
-</div>
-
-<div class="phase gate">
-  <h3><span class="badge b-now">EN CURSO &mdash; F7.5 cierra</span> Fase 7 &mdash; Release engineering (cadena de suministro del paquete)</h3>
+  <h3><span class="badge b-ok">COMPLETA (F7.1-F7.5) &#10003;</span> Fase 7 &mdash; Release engineering (cadena de suministro)</h3>
   <p>Endurece <b>como se publica y como se verifica</b> el paquete-metodologia: trazabilidad criptografica y
-     verificacion automatizable, aditiva al proceso de release (DECISION-0001), neutral. Aprobada por el operador;
-     5 rebanadas (SPEC-0057), promovidas de a una:</p>
+     verificacion automatizable, aditiva (DECISION-0001), neutral. 5 rebanadas (SPEC-0057), todas ratificadas:</p>
   <ul class="steps">
-    <li class="done"><b>F7.1 &mdash; SBOM determinista</b> (TASK-0071): inventario canonico (rutas + sha256 + 4 ejes de version + commit/timestamp provistos). <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>F7.2 &mdash; manifiesto + verify</b> (TASK-0073): manifiesto con <code>sbom_hash</code> + verify por integridad de contenido. <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>F7.3 &mdash; provenance SLSA-lite</b> (TASK-0074): atestacion <code>subject.digest = sbom_hash</code> + verificacion de consistencia. <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>F7.4 &mdash; firma</b> (TASK-0075): firma del digest, backend fixture determinista para golden, sin claves reales en el repo (DECISION-0023). <span class="badge b-ok">DONE</span></li>
-    <li class="now"><b>F7.5 &mdash; docs + integracion</b> (TASK-0081, Codex): documenta la cadena de extremo a extremo y como verificar. <b>Cierra Fase 7.</b> <span class="badge b-now">EN CURSO</span></li>
+    <li class="done"><b>F7.1 &mdash; SBOM determinista</b> (TASK-0071). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>F7.2 &mdash; manifiesto + verify</b> (TASK-0073). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>F7.3 &mdash; provenance SLSA-lite</b> (TASK-0074). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>F7.4 &mdash; firma</b> (TASK-0075): backend fixture, sin claves reales (DECISION-0023). <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>F7.5 &mdash; docs</b> (TASK-0081): <code>RELEASE_ENGINEERING.md</code>, cadena de extremo a extremo + verificacion. <b>CIERRA Fase 7.</b> <span class="badge b-ok">DONE</span></li>
   </ul>
-  <div class="why">Limites (firmes): <b>sin secretos en el repo</b> (claves del emisor/CI, nunca commiteadas; fixture
-     solo en golden); aditivo y opt-in por tier. Confianza de cadena de suministro para una metodologia
-     distribuible: el adoptante verifica procedencia e integridad.</div>
+  <div class="why">Limites firmes: <b>sin secretos en el repo</b> (claves del emisor/CI nunca commiteadas; fixture
+     solo en golden); aditivo y opt-in por tier. Cadena SBOM &rarr; manifiesto &rarr; provenance &rarr; firma &rarr; verify, goldens verde.</div>
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-ok">SA.1-SA.3 DONE (sombra)</span> Autonomia supervisada (DECISION-0024 aprobada)</h3>
-  <p>El salto de <b>"coordinacion asistida"</b> a <b>"operacion autonoma acotada"</b>: el motor encadena turnos
-     con agentes reales (wrapper de DECISION-0021) sin disparo humano por turno, pero dentro de un <b>sobre de
-     supervision dura</b>. DECISION-0024 (politica) <b>aprobada y promovida</b>; decompuesta en SA.1..SA.5,
-     off-by-default, sin tocar el invoker real hasta SA.4. Construido sobre el loop multi-turno que ya existia
-     (todas las paradas duras: gate, escalada, budget/deadline, schema, dirty no declarado).</p>
+  <h3><span class="badge b-ok">SA.1-SA.5 DONE (sombra)</span> Autonomia supervisada (DECISION-0024) &mdash; SA.4 gateada</h3>
+  <p>De <b>"coordinacion asistida"</b> a <b>"operacion autonoma acotada"</b>: el motor encadena turnos con agentes
+     reales dentro de un <b>sobre de supervision dura</b>, off-by-default. SA.1-SA.5 entregadas (incluida la
+     documental); el unico paso con efecto real nuevo (SA.4) sigue gateado.</p>
   <ul class="steps">
-    <li class="done"><b>SA.1 &mdash; sobre en sombra</b> (TASK-0078): registro <code>runtime.supervised_autonomy</code> off-by-default + <code>caps.max_turns</code> + runreport, ejercitado con RecordedInvoker. <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>SA.2 &mdash; kill-switch + reloj</b> (TASK-0079): centinela <code>runtime/state/PAUSE</code> (chequeado antes de cada turno &rarr; <code>paused</code>) + reloj de pared (<code>wall_clock_ms</code> &rarr; <code>wallclock_exhausted</code>). <span class="badge b-ok">DONE</span></li>
-    <li class="done"><b>SA.3 &mdash; checkpoint humano</b> (TASK-0080): tras K turnos o fix-cycles repetidos (quality_policy) &rarr; <code>human_required</code>, sin auto-resume. <span class="badge b-ok">DONE</span></li>
-    <li class="next"><b>SA.4 &mdash; invoker real multi-turno</b> bajo el sobre: levanta el cerrojo <code>--once</code> SOLO con registro + caps; <b>GATEADA con GO del operador + ensayo de rollback</b>. Es el unico paso con efecto real nuevo.</li>
-    <li class="next"><b>SA.5 &mdash; docs + promocion</b> de la autonomia supervisada.</li>
+    <li class="done"><b>SA.1 &mdash; sobre en sombra</b> (TASK-0078): registro off-by-default + <code>max_turns</code> + runreport. <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>SA.2 &mdash; kill-switch + reloj</b> (TASK-0079): centinela <code>PAUSE</code> + <code>wall_clock_ms</code>. <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>SA.3 &mdash; checkpoint humano</b> (TASK-0080): K turnos o fix-cycles &rarr; <code>human_required</code>. <span class="badge b-ok">DONE</span></li>
+    <li class="done"><b>SA.5 &mdash; docs</b> (TASK-0082): <code>SUPERVISED_AUTONOMY.md</code> documenta el sobre. <span class="badge b-ok">DONE</span></li>
+    <li class="next"><b>SA.4 &mdash; invoker real multi-turno</b> bajo el sobre: levanta el cerrojo <code>--once</code> SOLO con registro + caps; <b>GATEADA con GO del operador + ensayo de rollback</b>. Ventana posterior separada.</li>
   </ul>
-  <div class="why">Por que es sensible: SA.4 hace que el sistema actue sin disparo humano por turno; por eso queda
-     detras de aprobacion explicita y se apoya enteramente en la capa de seguridad (Fase 5 + budget + gate) y en
-     el sobre (max_turns, pausa, reloj, checkpoint). SA.1-SA.3 son shadow puro (off-by-default, invoker real
-     intacto). Reversible.</div>
+  <div class="why">SA.1-SA.5 son shadow puro (invoker real intacto). SA.4 hace que el sistema actue sin disparo
+     humano por turno; queda detras de aprobacion explicita, apoyado en la capa de seguridad (Fase 5 + budget + gate)
+     y el sobre (max_turns, pausa, reloj, checkpoint). Reversible.</div>
 </div>
 
 <div class="phase gate">
-  <h3><span class="badge b-gate">EN PREPARACION (operador)</span> DECISION-0025 &mdash; Integracion agent-teams / bridge</h3>
-  <p>Nueva direccion que el operador esta redactando en su area personal (draft); aun <b>no entregada ni
-     promovida al ledger</b>. Se incorporara al roadmap cuando el operador la formalice.</p>
+  <h3><span class="badge b-ok">A+B DONE</span> DECISION-0025 &mdash; Bridge Agent Teams (Capas A+B)</h3>
+  <p>Agent Teams (Anthropic) como <b>motor de ejecucion en vivo</b> y este protocolo como <b>ledger durable</b>
+     encima, via hooks. Implementado <b>Capas A+B</b> (TASK-0083): <b>A</b> gate enforcement (corre los gates en
+     <code>TaskCompleted</code>/<code>TeammateIdle</code> y bloquea con <code>exit 2</code>) + <b>B</b> audit
+     append-only. Off-by-default, neutral, sin secretos.</p>
+  <div class="why"><b>Capa C</b> (mapeo autoritativo del ledger via <code>submit_intent</code>) <b>DIFERIDA</b> a las
+     precondiciones de DECISION-0022 y a su propia ventana &mdash; nunca en el camino critico del flip.</div>
 </div>
 
 <div class="phase gate">
@@ -236,23 +214,25 @@
   <div class="why">Baja la barrera de adopcion para operadores humanos. Pedida por el operador; pendiente de que el arquitecto la especifique y confirme alcance.</div>
 </div>
 
-<h2>4. Modelo de trabajo (lazo semi-automatico)</h2>
+<h2>4. Modelo de trabajo (lazo semi-automatico, bajo enforce)</h2>
 <p class="sub">
-  <b>Codex</b> (implementador) opera autonomo (~100s): auto-reclama tareas <code>ready</code>, ejecuta, poda y
-  notifica anomalias (DECISION-0018). <b>Claude</b> (arquitecto) reacciona de forma autonoma: al detectar la
-  entrega de Codex (<code>in_review</code> + claim liberado) ratifica adversarialmente (corre la suite), cierra,
-  y encola la siguiente rebanada. <b>El operador humano</b> aprueba politica, cambios de boundary y releases, y
-  ejecuta con el arquitecto los switches de mayor riesgo (activacion del escritor-unico, SA.4). La regla
-  anti-colision (DECISION-0020) gobierna la escritura concurrente del estado compartido.
+  <b>Codex</b> (implementador) opera autonomo (~100s): auto-reclama tareas <code>ready</code>, ejecuta y notifica
+  anomalias (DECISION-0018) &mdash; ahora <b>toda transicion del ledger por <code>submit_intent</code></b> (la
+  edicion manual hard-failea bajo enforce). <b>Claude</b> (arquitecto) reacciona de forma autonoma: ratifica
+  adversarialmente (corre la suite), cierra y encola la siguiente rebanada, tambien por <code>submit_intent</code>.
+  <b>El operador humano</b> aprueba politica, cambios de boundary y releases, y dirige los switches de mayor riesgo
+  (flip de enforce/authoritative, SA.4, Capa C) <b>uno por ventana</b>. <b>Regla de oro (DECISION-0026):</b> cada
+  agente actualiza su memoria despues de cada commit.
 </p>
 
 <footer>
   Reporte de estado generado por Claude (arquitecto) conforme a CLAUDE.md regla 7. Fuente de verdad:
-  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code>. Snapshot a HEAD 0d7d48d (post-v1.0.0; Fase 7
-  F7.1-F7.4 DONE, F7.5 en curso; cutover del escritor-unico con ambos lados en codigo, activacion autorizada y
-  pendiente supervisada; autonomia supervisada SA.1-SA.3 DONE en sombra, SA.4 gateada). En sombra el validador
-  emite WARNING de drift benigno (no hard-fail). Los pasos gateados/supervisados requieren la coordinacion
-  explicita del operador humano.
+  <code>AGENTS.md</code> + <code>Area_comun/state/*.json</code> (event-sourced). Snapshot a HEAD b1eb946
+  (post-v1.0.0; Fase 7 COMPLETA F7.1-F7.5; escritor-unico parcial EN VIVO con <code>enforce=true</code> y
+  <code>authoritative</code> off; autonomia supervisada SA.1-SA.5 DONE, SA.4 gateada; bridge Agent Teams A+B DONE,
+  Capa C diferida; 26 decisiones). Bajo enforce el validador emite HARD-FAIL ante drift (edicion manual prohibida);
+  rollback = <code>enforce=false</code>. Los pasos gateados (authoritative, SA.4, Capa C) requieren la coordinacion
+  explicita del operador humano, cada uno en su propia ventana.
 </footer>
 
 </div>
