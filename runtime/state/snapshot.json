@@ -1,7 +1,8 @@
 {
-  "canonical_hash": "881b500dba220157acc508698abedfeb85d9e153c6065e29aea6945637bacaae",
+  "canonical_hash": "44e3da11853281f9565c4166c5c1cab39027f4b18caa99e389d8fc6e7f08265a",
   "state": {
     "aggregate_versions": {
+      "AUTHORITATIVE-ACTIVATION": 1,
       "CLAIM-20260608-111600-prune-claude": 1,
       "CLAIM-20260608-113700-prune-claude": 1,
       "CLAIM-20260608-114700-prune-claude": 1,
@@ -11,6 +12,7 @@
       "CLAIM-20260608-TASK-0085-codex": 2,
       "CLAIM-20260608-TASK-0085-handoff-final-evidence-codex": 1,
       "CLAIM-20260608-TASK-0085-prune-self-fix-codex": 1,
+      "CLAIM-20260608-authoritative-activation-claude": 1,
       "CLAIM-20260608-close-task0084-claude": 1,
       "CLAIM-20260608-close-task0085-claude": 1,
       "CLAIM-20260608-decision0026-claude": 1,
@@ -22,15 +24,18 @@
       "DECISION-0026-memoria-post-commit": 1,
       "MAINTENANCE-PRUNE": 4,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 2,
+      "PROJECT_STATE": 3,
       "TASK-0084": 8,
       "TASK-0085": 12,
       "protocol-prune": 4,
       "protocol-state": 2
     },
-    "events_applied": 53,
+    "events_applied": 56,
     "fencing_tokens": {},
     "idempotency_keys": {
+      "auth-activation:claim-acquire": 54,
+      "auth-activation:claim-release": 56,
+      "auth-activation:project-narrative": 55,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -88,5 +93,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 53
+  "up_to_seq": 56
 }

@@ -80,7 +80,7 @@
     "enabled": true,
     "materialize": true,
     "enforce": true,
-    "authoritative": false
+    "authoritative": true
   },
   "tool_policy": {
     "enabled": true,

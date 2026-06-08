@@ -14,6 +14,20 @@
             "updated_at": "2026-06-08T11:59:00Z"
         },
         {
+            "claim_id": "CLAIM-20260608-authoritative-activation-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: nota de activacion authoritative via project_narrative. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "AUTHORITATIVE-ACTIVATION",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-close-task0085-claude",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero: cierre de TASK-0085 (ratificacion) via submit_intent. Liberado en la transaccion.",
