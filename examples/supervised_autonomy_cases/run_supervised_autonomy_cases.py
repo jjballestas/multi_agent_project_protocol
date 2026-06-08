@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import json
+import os
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -91,11 +93,21 @@ def supervised_config(
     return payload
 
 
+def real_invoker_config(*, enabled: bool = True, valid: bool = True) -> dict[str, Any]:
+    return {
+        "enabled": enabled,
+        "activation_decision": "DECISION-0021" if valid else "",
+        "approved_by": "operador humano" if valid else "",
+        "approved_at": "2026-06-08" if valid else "",
+    }
+
+
 def build_fixture(
     root: Path,
     *,
     task_ids: list[str],
     supervised: dict[str, Any] | None = None,
+    real_invoker: dict[str, Any] | None = None,
     task_statuses: dict[str, str] | None = None,
     task_owners: dict[str, str] | None = None,
     task_overrides: dict[str, dict[str, Any]] | None = None,
@@ -118,6 +130,8 @@ def build_fixture(
     runtime_config: dict[str, Any] = {"enabled": True, "entrypoint": "runtime/orchestrator.py"}
     if supervised is not None:
         runtime_config["supervised_autonomy"] = supervised
+    if real_invoker is not None:
+        runtime_config["real_invoker"] = real_invoker
     config_payload = {
         "schema_version": "1.0",
         "runtime": runtime_config,
@@ -249,6 +263,38 @@ def write_report_transcripts(root: Path, reports: list[dict[str, Any]]) -> Path:
             },
         )
     return path
+
+
+def command_arg(value: Path | str) -> str:
+    text = str(value)
+    if os.name == "nt":
+        return '"' + text.replace('"', r'\"') + '"'
+    return shlex.quote(text)
+
+
+def write_dynamic_subprocess_agent(root: Path, reports: list[dict[str, Any]]) -> Path:
+    script = root / "agent script dir" / "supervised_subprocess_agent.py"
+    by_task = {str(report["task_id"]): report for report in reports}
+    payload = json.dumps(by_task, sort_keys=True)
+    script.parent.mkdir(parents=True, exist_ok=True)
+    script.write_text(
+        "\n".join(
+            [
+                "import json",
+                "import sys",
+                "prompt = sys.stdin.read()",
+                f"reports = json.loads({payload!r})",
+                "for task_id, report in reports.items():",
+                "    if task_id in prompt:",
+                "        print(json.dumps(report))",
+                "        break",
+                "else:",
+                "    raise SystemExit('no task id in prompt')",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return script
 
 
 def run_orchestrator(root: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -536,6 +582,45 @@ def case_real_invoker_lock_remains_intact_in_sa1() -> None:
         assert "subprocess llm invoker requires --once" in result["reason"], result
 
 
+def case_real_subprocess_multiturn_requires_registered_supervision_and_real_invoker() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-real-multiturn-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600", "TASK-9601"]
+        build_fixture(
+            fixture,
+            task_ids=task_ids,
+            supervised=supervised_config(enabled=True, max_turns=2, human_checkpoint_every_k=5),
+            real_invoker=real_invoker_config(enabled=True),
+        )
+        script = write_dynamic_subprocess_agent(fixture, [turn_report(task_id) for task_id in task_ids])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "subprocess",
+                "--allow-real-invoker",
+                "--allow-supervised-autonomy",
+                "--llm-command",
+                f"{command_arg(sys.executable)} {command_arg(script)}",
+                "--max-iter",
+                "2",
+                "--run-id",
+                "RUN-supervised-real-multiturn",
+            ],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 2
+        assert statuses(fixture) == ["done", "done"]
+        assert "run_report" in result, result
+        assert result["supervised_autonomy"]["caps"]["max_turns"] == 2
+        assert [turn["task_id"] for turn in result["turns"]] == task_ids
+
+
 def main() -> int:
     cases = [
         case_max_turns_stops_recorded_loop_and_writes_runreport,
@@ -546,6 +631,7 @@ def main() -> int:
         case_activation_without_valid_registration_rejects_before_run,
         case_flag_absent_keeps_existing_multi_turn_behavior,
         case_real_invoker_lock_remains_intact_in_sa1,
+        case_real_subprocess_multiturn_requires_registered_supervision_and_real_invoker,
     ]
     failures = []
     for case in cases:

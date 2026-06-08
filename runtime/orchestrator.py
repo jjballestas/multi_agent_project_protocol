@@ -227,6 +227,20 @@ def select_reports(*, adapter_name: str, replay_path: Path | None, llm_invoker: 
     return [None]
 
 
+def subprocess_multiturn_allowed(
+    *,
+    config: dict[str, Any],
+    allow_real_invoker: bool,
+    allow_supervised_autonomy: bool,
+) -> bool:
+    return (
+        allow_real_invoker
+        and allow_supervised_autonomy
+        and supervised_autonomy_activation_error(config) is None
+        and real_invoker_activation_error(config) is None
+    )
+
+
 def adapter_for_turn(
     *,
     adapter_name: str,
@@ -325,10 +339,13 @@ def run_loop(
         return {"ok": False, "reason": "runtime.enabled is false; --run is disabled"}
     config = read_json(root / "protocol.config.json")
     supervision: dict[str, Any] | None = None
-    if allow_supervised_autonomy:
+    subprocess_multiturn = adapter_name == "llm" and llm_invoker == "subprocess" and not once
+    if allow_supervised_autonomy and not subprocess_multiturn:
         activation_error = supervised_autonomy_activation_error(config)
         if activation_error:
             return {"ok": False, "reason": f"supervised autonomy requires registered activation: {activation_error}"}
+        supervision = supervised_autonomy_payload(config)
+    elif allow_supervised_autonomy and supervised_autonomy_activation_error(config) is None:
         supervision = supervised_autonomy_payload(config)
 
     try:
@@ -337,13 +354,24 @@ def run_loop(
         return {"ok": False, "reason": str(exc)}
     if not reports:
         return {"ok": False, "reason": f"no replay reports found: {replay_path}"}
-    if adapter_name == "llm" and llm_invoker == "subprocess" and not once:
+    if subprocess_multiturn and not subprocess_multiturn_allowed(
+        config=config,
+        allow_real_invoker=allow_real_invoker,
+        allow_supervised_autonomy=allow_supervised_autonomy,
+    ):
         return {"ok": False, "reason": "subprocess llm invoker requires --once"}
 
-    requested_limit = 1 if once else (max_iter if max_iter is not None else len(reports))
+    if once:
+        requested_limit = 1
+    elif subprocess_multiturn:
+        requested_limit = max_iter if max_iter is not None else int((supervision or {}).get("caps", {}).get("max_turns", 1))
+    else:
+        requested_limit = max_iter if max_iter is not None else len(reports)
     limit = min(requested_limit, int((supervision or {}).get("caps", {}).get("max_turns", requested_limit)))
     if limit < 1:
         return {"ok": False, "reason": "--max-iter must be >= 1"}
+    if subprocess_multiturn and len(reports) < limit:
+        reports = [None for _ in range(limit)]
 
     runlog = RunLog(root, run_id=run_id or default_run_id(reports[:limit], adapter_name=adapter_name))
     budget = Budget(max_iter=limit, max_cost_tokens=budget_tokens, **budget_settings(config))

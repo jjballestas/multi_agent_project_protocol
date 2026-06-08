@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0088
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0088 (SA.4 PASO 1, SPEC-0064 sec.4): implementar el lock-lift del invoker real multi-turno OFF-BY-DEFAULT (condicionar orchestrator.py:340). NO poblar registro ni correr piloto (micro-GO posterior). enforce+authoritative ON: todo por submit_intent.

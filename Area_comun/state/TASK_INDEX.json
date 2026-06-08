@@ -221,10 +221,10 @@
                 "examples/supervised_autonomy_cases/",
                 ".github/workflows/validate.yml"
             ],
-            "review": "READY (encolada por Claude 2026-06-08 via submit_intent bajo enforce+authoritative). GO operador PASO 1 de SA.4 (lock-lift OFF-BY-DEFAULT). El piloto (pasos 3+4) es micro-GO posterior. Capa C OFF. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. SA.4 PASO 1 (lock-lift OFF-BY-DEFAULT). Verificado: subprocess_multiturn_allowed exige allow_real_invoker AND allow_supervised_autonomy AND supervised_autonomy_activation_error None AND real_invoker_activation_error None (orchestrator.py:357-362); OFF-BY-DEFAULT confirmado en vivo (registro vacio -> allowed=False -> rechazo 'subprocess llm invoker requires --once' intacto, byte-equivalente); --once subprocess intacto. ENSAYO DE ROLLBACK del lock-lift (in-process, sin tocar registro vivo): registro-off->cerrojo en pie; poblado sintetico->se levanta; despoblar->restaurado; replay==hot, drift 0. Goldens verdes corridos por mi: supervised_autonomy 9 (nuevo caso lock-lift con subprocess fake determinista), runtime_loop 8, real_adapter 4, enforce 9, intent_flow 11, replay 6, cutover 4, cross_fs 2; validador valid, neutralidad 0, encoding limpio. NO se poblo el registro vivo NI se corrio el piloto (eso es el micro-GO posterior). Bonus: Codex corrigio fixture runtime_loop (copia runtime .py para prune hooks). Template intacto.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
-            "status": "ready",
+            "status": "done",
             "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior).",
             "type": "implementation",
             "updated_at": "2026-06-08"

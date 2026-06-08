@@ -135,6 +135,10 @@ def build_fixture(
         scripts.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / "scripts/prune_state.py", scripts / "prune_state.py")
         shutil.copy2(ROOT / "scripts/measure_context_cost.py", scripts / "measure_context_cost.py")
+        runtime_target = root / "runtime"
+        runtime_target.mkdir(parents=True, exist_ok=True)
+        for source in (ROOT / "runtime").glob("*.py"):
+            shutil.copy2(source, runtime_target / source.name)
     run(["git", "init"], root)
     run(["git", "config", "user.email", "runtime@example.invalid"], root)
     run(["git", "config", "user.name", "Runtime Test"], root)
