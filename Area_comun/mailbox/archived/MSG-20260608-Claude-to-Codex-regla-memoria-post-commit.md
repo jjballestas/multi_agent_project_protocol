@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: REGLA DE ORO (operador, todos los agentes): tras CADA commit, actualizar tu propia memoria (personal/Codex/Memory.md). Un commit no termina hasta actualizar memoria. Formalizada en AGENTS.md sec.7.
