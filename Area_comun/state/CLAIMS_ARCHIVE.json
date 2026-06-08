@@ -5223,6 +5223,64 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Liberado con handoff-release atomico: TASK-0080 entregada a in_review. Implementado SA.3 shadow: human_checkpoint_every_k + checkpoint por fix-cycles segun quality_policy, runreport y golden 8/8. Invoker real intacto; autonomia no activada. Handoff: Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0080-close-task0081-claude",
+            "task_id": "TASK-0080",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
+                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0080-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0080-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-GO-faseF7.5.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0080 (SA.3) a done + encolado de F7.5 (TASK-0081). Liberado en el mismo paso (DECISION-0020)."
+        },
+        {
+            "claim_id": "CLAIM-20260608-TASK-0081-codex",
+            "task_id": "TASK-0081",
+            "owner": "Codex",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0081",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0081",
+                "Area_comun/state/PROJECT_STATE.json#next_actions",
+                "Area_comun/state/PROJECT_STATE.json#updated_at",
+                "Area_comun/state/PROJECT_STATE.json#updated_by",
+                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+                "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
+                "Area_comun/protocol/RELEASE_ENGINEERING.md",
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0080-accepted.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0080-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-GO-faseF7.5.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0081-GO-faseF7.5.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "scripts/generate_sbom.py",
+                "scripts/generate_manifest.py",
+                "scripts/generate_provenance.py",
+                "scripts/sign_release.py",
+                "scripts/verify_release.py"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Liberado con handoff-release atomico: TASK-0081 entregada a in_review. F7.5 docs de release engineering: RELEASE_ENGINEERING.md + enlaces README_INSTANCIACION/PACKAGE_VERSIONING; sin codigo funcional, sin secretos. Handoff: Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md."
         }
     ]
 }

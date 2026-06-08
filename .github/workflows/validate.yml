@@ -154,6 +154,9 @@ jobs:
       - name: Run supervised autonomy cases
         run: python examples/supervised_autonomy_cases/run_supervised_autonomy_cases.py
 
+      - name: Run Agent Teams bridge cases
+        run: python examples/team_bridge_cases/run_team_bridge_cases.py
+
       - name: Run runtime observability cases
         run: python examples/runtime_observability_cases/run_runtime_observability_cases.py
 

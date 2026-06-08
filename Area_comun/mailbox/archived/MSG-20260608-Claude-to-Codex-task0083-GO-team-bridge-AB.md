@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0083
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0083 (SPEC-0065 / DECISION-0025): bridge Agent Teams -> protocolo Capas A+B (gate enforcement + audit append-only), off-by-default. NO Capa C, NO encender.

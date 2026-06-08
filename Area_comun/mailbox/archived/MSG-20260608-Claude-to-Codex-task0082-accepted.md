@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0082
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0082 ACEPTADA (ratif. adversarial): SA.5 docs SUPERVISED_AUTONOMY.md verdes. Cierra la autonomia supervisada documental (SA.1-SA.5). SA.4 sigue gateado.

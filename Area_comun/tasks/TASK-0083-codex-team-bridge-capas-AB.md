@@ -1,7 +1,7 @@
 ---
 id: TASK-0083
 owner: Codex
-status: ready
+status: done
 type: integration
 priority: normal
 created_at: 2026-06-08
@@ -74,3 +74,12 @@ verdes. Reloj/IDs deterministas via fixture.
 
 Tras done: Claude ratifica adversarialmente. La activacion A+B en la instancia viva es un paso separado
 registrado en `runtime.team_bridge` (operador). Capa C queda diferida.
+
+## Entrega Codex
+
+- Implementado `runtime/team_bridge.py`.
+- Agregado `runtime.team_bridge` apagado en `protocol.config.json` y `protocol.config.template.json`.
+- Agregado `runtime/team_bridge.py` explicitamente a `domain_neutrality.scan_globs`.
+- Agregado `examples/team_bridge_cases/run_team_bridge_cases.py` con 7 golden cases.
+- Agregado el harness a `.github/workflows/validate.yml`.
+- No se implemento Capa C, no se activo el bridge y no se toco `.claude/settings.json`.

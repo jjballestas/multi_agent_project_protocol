@@ -77,47 +77,6 @@
             "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance."
         },
         {
-            "id": "TASK-0080",
-            "owner": "Codex",
-            "status": "done",
-            "type": "implementation",
-            "priority": "normal",
-            "phase": "P2",
-            "title": "Autonomia supervisada SA.3 (SPEC-0064): checkpoint humano forzado + escalacion - tras caps.human_checkpoint_every_k turnos o fix-cycles repetidos (quality_policy) el loop para con human_required/outcome=human_checkpoint sin auto-resume; apoyo en escalada del router + quality_policy; runreport registra el checkpoint; golden (para por K turnos, para por fix-cycles) con RecordedInvoker. Off-by-default; invoker real --once intacto. Tercera de SA.1..SA.5.",
-            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
-            "file": "Area_comun/tasks/TASK-0080-codex-autonomia-SA3-checkpoint-humano.md",
-            "linked_decisions": [
-                "DECISION-0024",
-                "DECISION-0021",
-                "DECISION-0022"
-            ],
-            "depends_on": [
-                "TASK-0079"
-            ],
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/orchestrator.py",
-                "runtime/supervised_autonomy.py",
-                "examples/supervised_autonomy_cases/",
-                ".github/workflows/validate.yml"
-            ],
-            "deliverables": [
-                "runtime/orchestrator.py",
-                "examples/supervised_autonomy_cases/",
-                "Area_comun/handoffs/HANDOFF-TASK-0080-codex-to-claude-1.md",
-                "runtime/supervised_autonomy.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0080-in-review.md"
-            ],
-            "blocked_by_questions": [],
-            "sdd_required": true,
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden supervised_autonomy 8/8 (max_turns, checkpoint-por-K-turnos, checkpoint-por-fix-cycles, pausa, reloj, rechazo sin registro, off-sin-flag, cerrojo real intacto) + real_adapter 4/4 (invoker real --once intacto) + review_qa 15/15 (logica de fix-cycles intacta) + validador valid + neutralidad limpia. Checkpoint por K turnos (=2) tras turno verde con trabajo pendiente -> human_required/outcome=human_checkpoint, no auto-resume; fix-cycles escalan al alcanzar quality_policy.max_review_cycles/max_qa_cycles leyendo review_attempts/qa_attempts del estado aplicado; sin campos fuera de schema. Off => byte-equivalente. CIERRA SA.3.",
-            "updated_at": "2026-06-08"
-        },
-        {
             "id": "TASK-0081",
             "owner": "Codex",
             "status": "done",
@@ -205,7 +164,7 @@
         {
             "id": "TASK-0083",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "type": "integration",
             "priority": "normal",
             "phase": "P2",
@@ -234,11 +193,12 @@
                 "protocol.config.json",
                 "protocol.config.template.json",
                 "examples/team_bridge_cases/",
+                ".github/workflows/validate.yml",
                 "Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": true,
-            "review": "READY (encolada por Claude 2026-06-08). DECISION-0025 ACCEPTED por el operador, alcance A+B. Capa C diferida a precondiciones DECISION-0022. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden team_bridge_cases 7/7, validador valid (drift benigno esperado), neutralidad exit 0, encoding OK. team_bridge.py Capas A+B (gate enforcement exit 2 en TaskCompleted/TeammateIdle + audit append-only ASCII fail-soft), off-by-default (team_bridge_activation_error bloquea hasta enabled+registro), alta en scan_globs, golden en CI. SIN Capa C / SIN submit_intent / SIN activar el bridge; config enabled:false,layers:[] en instancia y template. Cierra DECISION-0025 (alcance A+B). Capa C diferida a precondiciones DECISION-0022.",
             "updated_at": "2026-06-08"
         }
     ]

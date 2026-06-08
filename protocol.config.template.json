@@ -61,6 +61,13 @@
         "human_checkpoint_every_k": 2,
         "wall_clock_ms": 300000
       }
+    },
+    "team_bridge": {
+      "enabled": false,
+      "layers": [],
+      "activation_decision": "",
+      "approved_by": "",
+      "approved_at": ""
     }
   },
   "event_auth": {
@@ -144,6 +151,7 @@
       "Area_comun/protocol/*.md",
       "Area_comun/specs/*_TEMPLATE.md",
       "profiles/PROFILE_TEMPLATE/**",
+      "runtime/team_bridge.py",
       "runtime/**",
       "scripts/*.py",
       "scripts/*.ps1"
