@@ -14,6 +14,23 @@
             "updated_at": "2026-06-08T21:49:38Z"
         },
         {
+            "claim_id": "CLAIM-20260608-close-task0089-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0089 (wrapper invoker) via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0089",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0089",
+                "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0089",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020).",

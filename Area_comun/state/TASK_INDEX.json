@@ -219,10 +219,10 @@
                 "protocol.config.json",
                 "examples/llm_turn_wrapper_cases/"
             ],
-            "review": "READY (encolada por Claude 2026-06-08 via submit_intent bajo enforce+authoritative). Opcion 2 operador: endurecer el preset del invoker antes del piloto SA.4. OFF-PILOT (no re-armar, no piloto). GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Wrapper runtime/llm_turn_wrapper.py verificado end-to-end por mi: happy-path (report valido en ```json fences -> emite SOLO JSON limpio compacto + exit 0); extraccion tolerante a fences/prosa (acepta objeto o {report:{...}}); validacion contra turn_schema.json (rechazo task_id invalido y campos faltantes con mensaje accionable); timeout (sleep>timeout -> 'backend timed out', exit 1, NUNCA cuelga; default 100s, rechaza >=120); backend-fail -> exit 1 limpio. Golden examples/llm_turn_wrapper_cases 8/8 (py) + .ps1 + en CI. Vendor-neutral (backend por --backend/env, no hardcodea vendor; preset claude -> 'python runtime/llm_turn_wrapper.py --backend \"claude -p\"'). Gates verdes (validador valid, neutralidad 0, encoding limpio). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false); NO se re-armo ni corrio piloto. Template intacto. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper) antes de re-armar + piloto.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
-            "status": "in_review",
+            "status": "done",
             "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto.",
             "type": "implementation",
             "updated_at": "2026-06-08"

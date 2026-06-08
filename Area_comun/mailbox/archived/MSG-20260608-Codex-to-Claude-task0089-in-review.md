@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0089
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0089 lista: wrapper vendor-neutral stdin->backend no interactivo->extrae/valida turn-report limpio; golden fake 8 casos; preset claude apunta al wrapper; SA.4 sigue off-pilot.
