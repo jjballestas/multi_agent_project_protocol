@@ -113,8 +113,14 @@
         {
             "id": "TASK-0081",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "TASK-0081 EN REVISION por Claude: F7.5 docs release engineering entregadas por Codex; cierra Fase 7 si se ratifica."
+            "status": "done",
+            "title": "Fase 7.5 (SPEC-0057) DONE - ACEPTADA por Claude (ratif. adversarial): Area_comun/protocol/RELEASE_ENGINEERING.md documenta la cadena SBOM->manifiesto->provenance->firma (comandos exactos de generar/verificar) + nota DECISION-0023 (sin secretos, backend real del emisor) + enlaces README/PACKAGE_VERSIONING. Sin claves reales. >>> CIERRA FASE 7 (F7.1-F7.5 DONE). <<<"
+        },
+        {
+            "id": "TASK-0082",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Autonomia supervisada SA.5 (SPEC-0064): docs del sobre de supervision (SA.1-SA.3: registro/caps/max_turns/PAUSE/reloj/checkpoint humano/runreport) + nota SA.4 gateado + enlaces. Neutral, sin secretos. Ultima rebanada documental."
         }
     ],
     "open_questions": [],
@@ -135,9 +141,10 @@
         "TASK-0080 ENTREGADA a in_review por Codex (2026-06-08): SA.3 checkpoint humano forzado listo; caps.human_checkpoint_every_k corta con human_required/outcome=human_checkpoint tras K turnos, fix-cycles alcanzando quality_policy max_review_cycles/max_qa_cycles tambien escalan a humano; runreport registra cap/checkpoint; golden supervised_autonomy_cases 8/8 + suite CI funcional verde; invoker real --once intacto y autonomia off. Pendiente ratificacion de Claude. SA.4 NO iniciar sin GO operador + rollback.",
         "TASK-0080 DONE (autonomia supervisada SA.3 checkpoint humano, ratif. adversarial de Claude 2026-06-08): checkpoint por K turnos (=2) + por fix-cycles (quality_policy); golden 8/8 + real_adapter 4/4 + review_qa 15/15; invoker real intacto. Corri yo los gates. SA.1-SA.3 DONE en sombra. >>> SA.4 (invoker real multi-turno bajo el sobre) GATEADA: requiere GO del operador + ensayo de rollback -- NO arrancar autonomamente. ENCOLADA F7.5 = TASK-0081 (docs de la cadena de release, cierra Fase 7; non-gated, mantiene a Codex productivo lejos del ledger). PENDIENTES DEL OPERADOR (supervisados): (a) ACTIVACION escritor-unico = re-genesis vivo + flip enforce+authoritative + rollback (autorizado, lo ejecuta el arquitecto contigo); (b) SA.4 (autonomia real, GO+rollback); (c) DECISION-0025 (agent-teams-bridge, en tu draft). GO por mailbox; de a una.",
         "TASK-0081 RECLAMADA por Codex (2026-06-08): F7.5 docs de release engineering; documentar SBOM->manifiesto->provenance->firma, comandos generar/verificar, backend real sin secretos y enlaces README/PACKAGE_VERSIONING.",
-        "TASK-0081 ENTREGADA a in_review por Codex (2026-06-08): F7.5 docs listas; RELEASE_ENGINEERING.md documenta SBOM->manifiesto->provenance->firma, comandos generar/verificar, interpretacion verify_release/generate_provenance, backend real de firma fuera del repo sin secretos (DECISION-0023) y enlaces README/PACKAGE_VERSIONING. Pendiente ratificacion de Claude; si acepta, cierra Fase 7."
+        "TASK-0081 ENTREGADA a in_review por Codex (2026-06-08): F7.5 docs listas; RELEASE_ENGINEERING.md documenta SBOM->manifiesto->provenance->firma, comandos generar/verificar, interpretacion verify_release/generate_provenance, backend real de firma fuera del repo sin secretos (DECISION-0023) y enlaces README/PACKAGE_VERSIONING. Pendiente ratificacion de Claude; si acepta, cierra Fase 7.",
+        ">>> FASE 7 COMPLETA (2026-06-08): F7.1 SBOM + F7.2 manifiesto+verify + F7.3 provenance + F7.4 firma + F7.5 docs (RELEASE_ENGINEERING.md) -- todas ratificadas adversarialmente por Claude. TASK-0081 (F7.5 docs) DONE: corri neutralidad/encoding/validador verdes; doc exacta vs CLI real, sin secretos (solo placeholders), nota DECISION-0023. ENCOLADA SA.5 = TASK-0082 (docs del sobre de autonomia supervisada SA.1-SA.3; non-gated, ultima rebanada documental). ESTADO: backlog non-gated casi agotado. PENDIENTES SUPERVISADOS DEL OPERADOR: (a) ACTIVACION escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback; autorizada 2026-06-08, la ejecuta el arquitecto contigo); (b) SA.4 (autonomia con invoker real multi-turno; GO + rollback); (c) DECISION-0025 (agent-teams-bridge, tu draft). GO por mailbox; de a una."
     ],
     "created_at": "2026-06-05",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex"
+    "updated_by": "Claude"
 }

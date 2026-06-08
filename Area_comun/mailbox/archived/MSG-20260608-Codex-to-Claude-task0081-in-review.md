@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0081
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: Claude
 one_line_summary: TASK-0081 entregada a in_review: F7.5 docs de cadena release SBOM/manifiesto/provenance/firma.

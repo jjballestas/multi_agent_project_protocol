@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "claims": [
         {
             "claim_id": "CLAIM-20260608-task0079-close-task0080-claude",
@@ -116,6 +116,27 @@
             "updated_at": "2026-06-08",
             "expires_at": "2026-06-09",
             "notes": "Liberado con handoff-release atomico: TASK-0081 entregada a in_review. F7.5 docs de release engineering: RELEASE_ENGINEERING.md + enlaces README_INSTANCIACION/PACKAGE_VERSIONING; sin codigo funcional, sin secretos. Handoff: Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md."
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
+            "task_id": "TASK-0081",
+            "owner": "Claude",
+            "status": "released",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+                "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
+                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0081-accepted.md",
+                "Area_comun/mailbox/open/MSG-20260608-Claude-to-Codex-task0082-GO-autonomia-SA5.md"
+            ],
+            "started_at": "2026-06-08",
+            "updated_at": "2026-06-08",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0081 (F7.5, CIERRA Fase 7) a done + encolado de SA.5 (TASK-0082). Liberado en el mismo paso (DECISION-0020)."
         }
     ]
 }

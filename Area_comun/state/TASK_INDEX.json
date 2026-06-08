@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-08",
-    "updated_by": "Codex",
+    "updated_by": "Claude",
     "legend": {
         "status": [
             "proposed",
@@ -157,7 +157,7 @@
         {
             "id": "TASK-0081",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "type": "documentation",
             "priority": "normal",
             "phase": "P2",
@@ -190,11 +190,50 @@
                 "Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md",
                 "README_INSTANCIACION.md",
                 "Area_comun/protocol/PACKAGE_VERSIONING.md",
-                "Area_comun/mailbox/open/MSG-20260608-Codex-to-Claude-task0081-in-review.md"
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md"
             ],
             "blocked_by_questions": [],
             "sdd_required": false,
-            "review": "ENTREGADA a in_review por Codex (2026-06-08): F7.5 docs de release engineering listas. Agregado Area_comun/protocol/RELEASE_ENGINEERING.md con cadena SBOM->manifiesto->provenance->firma, comandos generar/verificar, interpretacion de resultados y seguridad de backend real sin secretos; enlaces desde README_INSTANCIACION y PACKAGE_VERSIONING. Sin codigo funcional nuevo.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Lei RELEASE_ENGINEERING.md: comandos exactos vs la CLI real (generate_sbom/manifest --commit --timestamp --output; generate_provenance --manifest --builder-id --commit --process --timestamp + --verify; sign_release --manifest --backend --key --key-id; verify_release --manifest [--signature --backend --pubkey]); principios determinismo/neutralidad/sin-secretos/off-by-default correctos; nota DECISION-0023 (backend real del emisor, claves NUNCA commiteadas, fixture solo golden); SIN claves reales (solo placeholders). Corri yo: neutralidad limpia (cubre protocol/*.md), encoding limpio, validador valid. Enlaces desde README_INSTANCIACION + PACKAGE_VERSIONING. CIERRA F7.5 -> >>> FASE 7 COMPLETA (F7.1 SBOM, F7.2 manifiesto+verify, F7.3 provenance, F7.4 firma, F7.5 docs). <<<",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0082",
+            "owner": "Codex",
+            "status": "ready",
+            "type": "documentation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Autonomia supervisada SA.5 (SPEC-0064): docs del sobre de supervision (SA.1-SA.3) - configuracion runtime.supervised_autonomy (off-by-default, registro+caps) + paradas duras (max_turns, centinela runtime/state/PAUSE, reloj wall_clock_ms, checkpoint humano K-turnos/fix-cycles) + runreport + nota de SA.4 (invoker real) gateado; enlaces desde N_AGENT_RUNTIME/README. Neutral, sin secretos. Ultima rebanada documental de la autonomia supervisada.",
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "file": "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "depends_on": [
+                "TASK-0078",
+                "TASK-0079",
+                "TASK-0080"
+            ],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "README_INSTANCIACION.md",
+                "runtime/supervised_autonomy.py",
+                "runtime/orchestrator.py",
+                "protocol.config.json"
+            ],
+            "deliverables": [
+                "Area_comun/protocol/SUPERVISED_AUTONOMY.md (o seccion equivalente)",
+                "Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": false,
+            "review": "READY (encolada por Claude 2026-06-08 tras cerrar Fase 7): SA.5 docs del sobre de autonomia supervisada (SA.1-SA.3 implementado). SA.4 (invoker real) sigue gateado. GO en mailbox.",
             "updated_at": "2026-06-08"
         }
     ]

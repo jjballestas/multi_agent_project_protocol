@@ -1,7 +1,7 @@
 ---
 id: TASK-0081
 owner: Codex
-status: in_review
+status: done
 type: documentation
 priority: normal
 created_at: 2026-06-08
