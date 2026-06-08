@@ -8,7 +8,7 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-07 · Maintainer: Claude (architect) + human owner. Released version: v1.0.0.
+> Last updated: 2026-06-08 · Maintainer: Claude (architect) + human owner. Released version: v1.0.0.
 
 ## 0. How to Start
 
@@ -100,6 +100,10 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
 - Do not edit routes covered by another owner's active claim.
 - A task owner that moves a task to `in_review` or `done` must release its active claim in the same
   coordination step. A reviewed task must not retain an active claim from its owner.
+- **Golden memory rule (DECISION-0026):** immediately after every commit, each agent must update its own
+  persistent memory in `personal/<id>/` (or equivalent personal runbook) with the commit's relevant context,
+  so the next cold start reflects the just-committed reality. A commit is not complete until that memory
+  update is done.
 - An agent holding an active claim over `in_progress` work must leave a verifiable progress signal
   each work turn: deliverable progress, a compact FYI, or `blocked` with one concrete question.
 - Ambiguity becomes `blocked` plus one concrete question.
@@ -132,6 +136,10 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   `submit_intent`** -- otherwise the first manual edit after the flip hard-fails and breaks the peer loop;
   the switch is therefore a coordinated re-genesis + flip with a rehearsed rollback, never a unilateral
   toggle. Coordination-tier instances keep the manual ledger flow.
+- **Golden rule -- memory after every commit (all agents).** Immediately after each commit, every agent
+  updates its own memory (its persistent notes / personal area, e.g. `personal/<id>/`) with what changed
+  and why, so the next cold start reflects the just-committed reality. A commit is not finished until its
+  memory update is done.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map

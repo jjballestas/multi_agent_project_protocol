@@ -133,6 +133,10 @@ The task status must match in two places:
   local decision/approval. Turning `enforce`+`authoritative` on requires every agent loop to already route
   its ledger transitions through `submit_intent`, so the switch is a coordinated re-genesis + flip with a
   rehearsed rollback, not a unilateral toggle; coordination-tier instances keep manual ledger edits.
+- **Golden rule -- memory after every commit (all agents).** Immediately after each commit, every agent
+  updates its own memory (its persistent notes / personal area, e.g. `personal/<id>/`) with what changed
+  and why, so the next cold start reflects the just-committed reality. A commit is not finished until its
+  memory update is done.
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map
