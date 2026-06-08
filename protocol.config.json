@@ -38,7 +38,7 @@
     "enabled": true,
     "entrypoint": "runtime/orchestrator.py",
     "real_invoker": {
-      "enabled": true,
+      "enabled": false,
       "activation_decision": "DECISION-0027",
       "approved_by": "operador humano (Jball, john.ballestas@gmail.com)",
       "approved_at": "2026-06-08"
@@ -52,7 +52,7 @@
       }
     },
     "supervised_autonomy": {
-      "enabled": true,
+      "enabled": false,
       "activation_decision": "DECISION-0027",
       "approved_by": "operador humano (Jball, john.ballestas@gmail.com)",
       "approved_at": "2026-06-08",
