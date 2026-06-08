@@ -1,92 +1,17 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-142300-prune-claude",
+            "claim_id": "CLAIM-20260608-214938-prune-claude",
             "expires_at": "2026-06-08",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
             "scope": [
                 "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-06-08T14:23:00Z",
+            "started_at": "2026-06-08T21:49:38Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-08T14:23:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260608-close-task0088-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0088 (ratificacion SA.4 paso 1) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0088",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0088",
-                "Area_comun/tasks/TASK-0088-codex-sa4-lock-lift-invoker-real-multiturno.md"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "TASK-0088",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "claim_id": "CLAIM-20260608-decision0027-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: formaliza DECISION-0027 (activacion SA.4) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/PROJECT_STATE.json"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "DECISION-0027",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "claim_id": "CLAIM-20260608-enqueue-task0089-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: enqueue TASK-0089 (wrapper invoker) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0089",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0089",
-                "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "TASK-0089",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "claim_id": "CLAIM-20260608-memory-rule-codex",
-            "expires_at": "2026-06-09",
-            "notes": "Operator directive: record golden rule that every agent updates its memory after every commit.",
-            "owner": "Codex",
-            "scope": [
-                "AGENTS.md",
-                "AGENTS.template.md",
-                "Area_comun/decisions/"
-            ],
-            "started_at": "2026-06-08T10:20:00Z",
-            "status": "released",
-            "task_id": "OPERATOR-DIRECTIVE-20260608-memory-rule",
-            "updated_at": "2026-06-08T10:20:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260608-memory-rule-release-helper-codex",
-            "expires_at": "2026-06-09",
-            "notes": "Helper claim to release CLAIM-20260608-memory-rule-codex under enforce=true.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-08T10:31:00Z",
-            "status": "released",
-            "task_id": "OPERATOR-DIRECTIVE-20260608-memory-rule",
-            "updated_at": "2026-06-08T10:31:00Z"
+            "updated_at": "2026-06-08T21:49:38Z"
         },
         {
             "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",
@@ -108,6 +33,43 @@
             "status": "released",
             "task_id": "TASK-0081",
             "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0089-codex",
+            "expires_at": "2026-06-09",
+            "notes": "TASK-0089 wrapper fino vendor-neutral para invoker real, off-pilot; NO re-armar SA.4 ni correr piloto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0089",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md",
+                "protocol.config.json",
+                "runtime/",
+                "examples/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-08T21:38:14Z",
+            "status": "released",
+            "task_id": "TASK-0089",
+            "updated_at": "2026-06-08T21:38:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260608-task0089-mailbox-hygiene-codex",
+            "expires_at": "2026-06-09",
+            "notes": "Fix archived mailbox frontmatter status for TASK-0089 GO after handoff archival.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0089-GO-llm-wrapper.md"
+            ],
+            "started_at": "2026-06-08T21:48:37Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260608",
+            "updated_at": "2026-06-08T21:48:37Z"
         }
     ],
     "schema_version": "1.0",

@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0089
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0089 (SPEC-0068, off-pilot): wrapper fino vendor-neutral para el invoker real - stdin->backend no interactivo->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (nunca cuelga). NO re-armar SA.4 ni correr piloto. enforce+authoritative ON: todo por submit_intent.

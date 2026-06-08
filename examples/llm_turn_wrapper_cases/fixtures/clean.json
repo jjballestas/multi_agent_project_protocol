@@ -1,0 +1,11 @@
+{
+  "agent": "Codex",
+  "changed_paths": [
+    "runtime/llm_turn_wrapper.py"
+  ],
+  "commit_message": "test(runtime): clean wrapper report",
+  "outcome": "in_review",
+  "summary": "Clean wrapper fixture.",
+  "task_id": "TASK-9000",
+  "turn_id": "RUN-wrapper-clean"
+}

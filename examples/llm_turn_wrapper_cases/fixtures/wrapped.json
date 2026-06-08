@@ -1,0 +1,13 @@
+{
+  "report": {
+    "agent": "Codex",
+    "changed_paths": [
+      "protocol.config.json"
+    ],
+    "commit_message": "test(runtime): wrapped wrapper report",
+    "outcome": "ok",
+    "summary": "Wrapped report fixture.",
+    "task_id": "TASK-9002",
+    "turn_id": "RUN-wrapper-wrapped"
+  }
+}

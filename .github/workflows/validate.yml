@@ -172,6 +172,13 @@ jobs:
       - name: Run LLM adapter recorded cases
         run: python examples/llm_adapter_cases/run_llm_adapter_cases.py
 
+      - name: Run LLM turn wrapper cases
+        run: python examples/llm_turn_wrapper_cases/run_llm_turn_wrapper_cases.py
+
+      - name: Run LLM turn wrapper cases with PowerShell
+        shell: pwsh
+        run: ./examples/llm_turn_wrapper_cases/run_llm_turn_wrapper_cases.ps1
+
       - name: Run real adapter activation cases
         run: python examples/runtime_real_adapter_cases/run_runtime_real_adapter_cases.py
 

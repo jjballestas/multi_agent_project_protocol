@@ -1,0 +1,10 @@
+{
+  "agent": "Codex",
+  "changed_paths": [
+    "runtime/llm_turn_wrapper.py"
+  ],
+  "outcome": "in_review",
+  "summary": "Invalid wrapper fixture.",
+  "task_id": "TASK-9003",
+  "turn_id": "RUN-wrapper-invalid"
+}
