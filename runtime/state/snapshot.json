@@ -1,16 +1,17 @@
 {
-  "canonical_hash": "aba5fa8bd9b48793729494f4cb9fafec6d5308334db682e1302cdff91ce9caca",
+  "canonical_hash": "5246a8633f337745fd57e0e94110521e7c3453f4fdcad1f9036d9a42fd4b0046",
   "state": {
     "aggregate_versions": {
-      "protocol-state": 1
+      "protocol-state": 2
     },
-    "events_applied": 1,
+    "events_applied": 2,
     "fencing_tokens": {},
     "idempotency_keys": {
-      "protocol-state:genesis-ref:v1": 1
+      "protocol-state:genesis-ref:v1": 1,
+      "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1
+  "up_to_seq": 2
 }
