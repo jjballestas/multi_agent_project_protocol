@@ -1,32 +1,50 @@
 {
-  "canonical_hash": "152dbd8a5d6d09be0173fd6e9c350fd70d00bdc13170812dad76c4ce436d9fe6",
+  "canonical_hash": "cf45ada07da76261fc3eee21bc993de003551ac5c690b2b69c4e6364c7c92a25",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260608-TASK-0084-codex": 1,
       "CLAIM-20260608-close-task0084-claude": 1,
+      "CLAIM-20260608-decision0026-claude": 1,
       "CLAIM-20260608-enqueue-task0084-claude": 1,
+      "CLAIM-20260608-enqueue-task0085-claude": 1,
+      "CLAIM-20260608-memory-rule-codex": 1,
+      "CLAIM-20260608-memory-rule-release-helper-codex": 1,
+      "DECISION-0026": 1,
+      "DECISION-0026-memoria-post-commit": 1,
+      "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
       "TASK-0084": 8,
+      "TASK-0085": 2,
       "protocol-state": 2
     },
-    "events_applied": 13,
+    "events_applied": 23,
     "fencing_tokens": {},
     "idempotency_keys": {
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
       "close-task0084:task-upsert": 11,
+      "decision0026:claim-acquire": 18,
+      "decision0026:claim-release": 20,
+      "decision0026:decision": 19,
       "enqueue-task0084:claim-acquire": 3,
       "enqueue-task0084:claim-release": 5,
       "enqueue-task0084:task-upsert": 4,
+      "enqueue-task0085:claim-acquire": 21,
+      "enqueue-task0085:claim-release": 23,
+      "enqueue-task0085:task-upsert": 22,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-release": 9,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 8,
+      "operator-memory-rule-20260608:claim-acquire": 14,
+      "operator-memory-rule-20260608:claim-release": 16,
+      "operator-memory-rule-20260608:release-helper-acquire": 15,
+      "operator-memory-rule-20260608:release-helper-release": 17,
       "protocol-state:genesis-ref:v1": 1,
       "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 13
+  "up_to_seq": 23
 }

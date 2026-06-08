@@ -23,6 +23,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams."
+        },
+        {
+            "id": "TASK-0085",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce; re-habilita maintenance.enabled SOLO en instancia viva, template intacto). Cierra el GAP congelado al encender enforce. Verificacion EN VIVO drift 0 + golden replay-identidad."
         }
     ],
     "agents": {
@@ -56,7 +62,8 @@
         "DECISION-0022-runtime-escritor-autoritativo",
         "DECISION-0023-firma-release",
         "DECISION-0024-autonomia-supervisada",
-        "DECISION-0025-integracion-agent-teams-bridge"
+        "DECISION-0025-integracion-agent-teams-bridge",
+        "DECISION-0026-memoria-post-commit"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

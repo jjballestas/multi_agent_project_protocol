@@ -136,10 +136,6 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   `submit_intent`** -- otherwise the first manual edit after the flip hard-fails and breaks the peer loop;
   the switch is therefore a coordinated re-genesis + flip with a rehearsed rollback, never a unilateral
   toggle. Coordination-tier instances keep the manual ledger flow.
-- **Golden rule -- memory after every commit (all agents).** Immediately after each commit, every agent
-  updates its own memory (its persistent notes / personal area, e.g. `personal/<id>/`) with what changed
-  and why, so the next cold start reflects the just-committed reality. A commit is not finished until its
-  memory update is done.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map

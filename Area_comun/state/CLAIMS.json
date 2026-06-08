@@ -143,6 +143,20 @@
             "updated_at": "2026-06-08"
         },
         {
+            "claim_id": "CLAIM-20260608-decision0026-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: formaliza DECISION-0026 en el ledger via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "DECISION-0026",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-enqueue-task0084-claude",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero: enqueue de TASK-0084 via submit_intent (prueba de adopcion Claude). Liberado en la misma transaccion.",
@@ -157,6 +171,50 @@
             "status": "released",
             "task_id": "TASK-0084",
             "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-enqueue-task0085-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: enqueue de TASK-0085 via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0085",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0085",
+                "Area_comun/tasks/TASK-0085-codex-next-actions-intent-y-prune-submit-intent.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0085",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "claim_id": "CLAIM-20260608-memory-rule-codex",
+            "expires_at": "2026-06-09",
+            "notes": "Operator directive: record golden rule that every agent updates its memory after every commit.",
+            "owner": "Codex",
+            "scope": [
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/decisions/"
+            ],
+            "started_at": "2026-06-08T10:20:00Z",
+            "status": "released",
+            "task_id": "OPERATOR-DIRECTIVE-20260608-memory-rule",
+            "updated_at": "2026-06-08T10:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260608-memory-rule-release-helper-codex",
+            "expires_at": "2026-06-09",
+            "notes": "Helper claim to release CLAIM-20260608-memory-rule-codex under enforce=true.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-08T10:31:00Z",
+            "status": "released",
+            "task_id": "OPERATOR-DIRECTIVE-20260608-memory-rule",
+            "updated_at": "2026-06-08T10:31:00Z"
         },
         {
             "claim_id": "CLAIM-20260608-task0081-close-task0082-claude",

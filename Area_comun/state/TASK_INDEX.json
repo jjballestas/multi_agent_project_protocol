@@ -236,6 +236,48 @@
             "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams.",
             "type": "migration",
             "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/submit_intent.py",
+                "scripts/prune_state.py",
+                "protocol.config.json",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0085-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0084"
+            ],
+            "file": "Area_comun/tasks/TASK-0085-codex-next-actions-intent-y-prune-submit-intent.md",
+            "id": "TASK-0085",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0014",
+                "DECISION-0026"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0065",
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/submit_intent.py",
+                "runtime/ledger_ops.py",
+                "scripts/prune_state.py",
+                "protocol.config.json",
+                "examples/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-08 VIA submit_intent bajo enforce). SPEC-0066. Cierra el gap de next_actions/prune bajo enforce. authoritative/SA.4/CapaC en ventanas posteriores. GO en mailbox.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0066-next-actions-intent-y-prune-submit-intent.md",
+            "status": "ready",
+            "title": "Intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce; re-habilita maintenance.enabled SOLO en instancia viva, template intacto). Cierra el GAP congelado al encender enforce. Verificacion EN VIVO drift 0 + golden replay-identidad.",
+            "type": "implementation",
+            "updated_at": "2026-06-08"
         }
     ],
     "updated_at": "2026-06-08",
