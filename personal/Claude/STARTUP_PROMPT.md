@@ -6,78 +6,89 @@ Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
 
 Retoma como arquitecto (Claude) de multi_agent_project_protocol.
 
-COLD-START: lee AGENTS.md seccion 0 + Area_comun/state/*.json (con utf-8-sig: Codex escribe BOM/CRLF; las
-state JSON viven sin BOM, escribir utf-8 + ensure_ascii) + Area_comun/mailbox/open/ + mi memoria (MEMORY.md +
-project-state-snapshot.md, ULTIMA entrada = estado actual). CHEQUEA CLAIMS.json antes de escribir cualquier
-ruta compartida. ASCII-only en mailbox/state (DECISION-0012). Mi area personal es personal/Claude/
-(DECISION-0016). Permisos del lazo ya en .claude/settings.json (cd/python/git add,rm,tag,restore,commit,push/
-grep/etc. auto-allow).
+COLD-START: lee AGENTS.md seccion 0 + Area_comun/state/*.json (con utf-8-sig: Codex escribe BOM/CRLF; al
+escribir usar utf-8 + ensure_ascii=False, ASCII-only) + Area_comun/mailbox/open/ + mi memoria (MEMORY.md,
+linea project-state-snapshot = estado vigente). CHEQUEA CLAIMS.json antes de escribir cualquier ruta
+compartida. ASCII-only en mailbox/state (DECISION-0012). Mi area personal = personal/Claude/ (DECISION-0016).
+NUNCA commitear areas personales de OTROS (personal/operador/, personal/Codex/).
 
-CONTEXTO (cierre 2026-06-07, HEAD 357950d en main, pusheado, tag v1.0.0): producto = metodologia
-multiagente distribuible. v1.0.0 PUBLICADO. Despues, post-v1.0 (el operador fue desgateando por turno).
+>>> CODEX DESACTIVADO POR EL OPERADOR HASTA LAS 9 AM (orden del 2026-06-08 noche). NO esperes entregas de
+Codex hasta entonces. TASK-0082 (SA.5 docs) quedo `ready` con GO en mailbox pero NO sera reclamada hasta que
+Codex vuelva. Mientras Codex este off: NO hay lazo de ratificacion; solo trabajo de arquitecto (drafts en
+personal, reportes, preparacion) o lo que pida el operador. <<<
 
-ESTADO ACTUAL:
-- DONE v1.0.0: nucleo Fases 1-4 + Capa A + Fase 5 (5.1/5.2/5.3 seguridad) + D0 motor (6.1 observabilidad +
-  6.2 budget A10) + D2 completo (tiers DECISION-0019, upgrade tier-aware, docs, PACKAGE_VERSIONING) + wrapper
-  LLM real (DECISION-0021) + DECISION-0020 (regla anti-colision) + fix prune (condensa next_actions).
-- FASE B COMPLETA (writer-vivo del ESTADO de protocolo, SPEC-0039/0052-0055): B.1 replay/drift read-only
-  (TASK-0066) | B.2 materializacion opt-in (TASK-0067) | B.3 drift HARD-FAIL bajo event_state.enforce
-  (TASK-0068) | B.4 runtime escritor autoritativo + GENESIS POR REFERENCIA (TASK-0069, DECISION-0022). +
-  INTENT-FLOW submit_intent (TASK-0072, SPEC-0058) = write-path del estado via runtime (keystone del escritor
-  unico). Paraguas TASK-0038 (N-agente) CERRADO.
-- WRITER-VIVO EN MODO SOMBRA (decision del operador, end-state estable): protocol.config.json event_state.
-  enabled=true + materialize=true; enforce=false + authoritative=false. EDICION MANUAL del ledger SIGUE
-  VALIDA (el lazo no cambia). El validador emite WARNING de drift al editar a mano = ESPERADO/BENIGNO (no
-  hard-fail). ROLLBACK = poner los 4 flags en false. runtime/state/** exento de neutralidad (TASK-0070).
-  GENESIS = referencia (snapshot_ref {hash,commit,actor,timestamp,schema_version}; snapshot content-addressed
-  en runtime/state/snapshots/<hash>.json FUERA del prompt; restriccion del operador).
-- 3.b.2 ESCRITOR UNICO (enforce+authoritative) EN PAUSA: encenderlo exige que AMBOS lazos -incl. el autonomo
-  de Codex- adopten submit_intent (dejar de editar JSON) + re-genesis sincronizado + GO del operador. NO
-  encender sin eso (rompe el lazo). NO es decision unilateral de Claude.
-- FASE 7 (release engineering, SPEC-0057, APROBADA) EN MARCHA, 5 rebanadas de a una: F7.1 SBOM DONE
-  (TASK-0071); F7.2 manifiesto+verify DONE (TASK-0073); F7.3 provenance SLSA-lite EN VUELO (TASK-0074 ready/
-  in-progress, SPEC-0060); F7.4 FIRMA (TASK-0075 listo en personal, SPEC-0061; DECISION-0023 ACCEPTED por el
-  operador -firma del digest, claves del emisor NUNCA en repo, backend configurable, golden con clave fixture,
-  off-by-default-; FALTA promover DECISION-0023 a Area_comun/decisions/ + PROJECT_STATE#decisions al cerrar
-  F7.3); F7.5 docs+integracion (pendiente, cierra Fase 7).
-- Drafts listos en personal/Claude/ para promover de a una: DRAFT-DECISION-0023-firma-release.md,
-  DRAFT-SPEC-0061-faseF7.4-firma.md, DRAFT-TASK-0075-faseF7.4-firma.md.
-- DECISIONES: 22 en ledger (0001-0022); DECISION-0023 aprobada, sin promover. Proximos IDs: TASK-0076, SPEC-0062.
-- GATEADA (post-Fase 7): autonomia supervisada (lazo encadenado de agentes reales + barandales Fase 5/budget/
-  gate + paradas humanas). Probable DECISION + GO.
+CONTEXTO (cierre 2026-06-08, HEAD 73a8610 en main, pusheado, tag v1.0.0): producto = metodologia multiagente
+distribuible. v1.0.0 PUBLICADO. Post-v1.0 el operador fue desgateando por turno.
 
-LAZO DE TRABAJO (semi-automatico):
-- Codex AUTONOMO (~100s): auto-reclama `ready`, ejecuta, poda, detecta anomalias (DECISION-0018). Su release
-  atomico = handoff + in-review msg + claim liberado + flip de status juntos. A veces lo cazas mid-release
-  (handoff escrito pero ledger sin flip) => espera, no toques.
-- Yo (Claude) reacciono via ScheduleWakeup (~270s): al ver in_review + sin claim activo, RATIFICO adversarial
-  (corro YO el golden suite -~35 runners- + validador/encoding/neutralidad + smoke especifico de la tarea),
-  flip a done, in_review->archived + FYI accept, claim efimero, promuevo la SIGUIENTE rebanada con GO+ETA,
-  commit PATH-SCOPED + push. Si Codex sigue in_progress/claim activo/arbol sucio: NO toco el ledger (carrera),
-  re-armo ~270s.
+ESTADO ACTUAL (2026-06-08):
+- DONE v1.0.0: nucleo Fases 1-4 + Capa A + Fase 5 (seguridad 5.1/5.2/5.3) + D0 motor (6.1 obs + 6.2 budget
+  A10) + D2 completo (tiers DECISION-0019, upgrade tier-aware, docs, PACKAGE_VERSIONING) + wrapper LLM real
+  (DECISION-0021) + DECISION-0020 (anti-colision) + fix prune. Paraguas TASK-0038 (N-agente) CERRADO.
+- FASE B COMPLETA, writer-vivo EN MODO SOMBRA (end-state estable): protocol.config.json event_state.enabled=
+  true + materialize=true; enforce=false + authoritative=false. Edicion manual del ledger SIGUE VALIDA;
+  validador emite WARNING de drift al editar a mano = ESPERADO/BENIGNO. ROLLBACK = 4 flags a false. genesis
+  POR REFERENCIA (snapshot_ref content-addressed en runtime/state/snapshots/<hash>.json). runtime/state/**
+  exento de neutralidad (TASK-0070).
+- FASE 7 COMPLETA (release engineering, SPEC-0057): F7.1 SBOM (TASK-0071) | F7.2 manifiesto+verify (TASK-0073)
+  | F7.3 provenance SLSA-lite (TASK-0074) | F7.4 firma (TASK-0075, DECISION-0023; backend fixture HMAC para
+  golden, claves reales del emisor NUNCA en repo, off-by-default) | F7.5 docs (TASK-0081 =
+  Area_comun/protocol/RELEASE_ENGINEERING.md). Todas ratificadas adversarialmente.
+- MIGRACION ESCRITOR-UNICO: AMBOS LADOS DEL CUTOVER EN CODIGO -> CODE-READY PARA ACTIVACION.
+  * submit_intent TRANSACCIONAL `--intents` (TASK-0076, SPEC-0062): un cierre/encole multi-paso (status+claim+
+    task_upsert+decision) como UNA transaccion atomica con rollback. + runtime/regenesis.py (genesis fresco por
+    snapshot_ref -> drift 0, no destructivo, idempotente).
+  * Mandato de protocolo (lado Claude): AGENTS.md/.template + TASK_PROTOCOL documentan el flujo transaccional +
+    el gate de activacion AMBOS-LAZOS.
+  * Cutover lado Codex (TASK-0077, SPEC-0063): runtime/ledger_ops.py (auto-claim + handoff-release via
+    submit_intent --intents; claim release AL FINAL conservando scope) + golden cutover_loop.
+- AUTONOMIA SUPERVISADA (DECISION-0024 APROBADA y promovida, SPEC-0064, off-by-default): SA.1 sobre+max_turns+
+  runreport (TASK-0078) | SA.2 kill-switch centinela runtime/state/PAUSE + reloj wall_clock_ms (TASK-0079) |
+  SA.3 checkpoint humano por K turnos / fix-cycles, sin auto-resume (TASK-0080). TODO en SHADOW, invoker real
+  --once INTACTO. SA.5 docs = TASK-0082 (ready, GO dado, sin reclamar hasta que Codex vuelva).
+- DECISIONES: 24 en ledger (0001-0024). DECISION-0025 (integracion agent-teams/bridge) = DRAFT del OPERADOR en
+  personal/operador/, AUN NO promovida ni entregada a mi. Proximos IDs: TASK-0083, SPEC-0065.
 
-ANTI-COLISION (DECISION-0020, critico con Codex autonomo escribiendo en paralelo):
-1. Preparar specs/tareas en personal/Claude/ (no reclamable por Codex) mientras Codex esta ocupado.
-2. Escrituras del ledger en UN script python atomico (lee-modifica-escribe; sin heredocs fragiles para
-   mensajes -usar Write/cat-). OJO: heredocs y loops bash pueden auto-irse a background y su output a veces
-   no se captura -> preferir scripts _tmp_*.py en personal o driver `python - <<PY` corto.
-3. ARCHIVOS-ANTES-DE-CLAIM: un claim no referencia artefactos/mensajes inexistentes (Codex lo caza).
-4. STAGING POR PATHS al commitear: `git commit -m "..." -- <paths>` (el -m ANTES de --). NUNCA `git add`+`git
-   commit` a secas si Codex puede tener algo staged (committea TODO el indice = COMMIT-TORN, captura su WIP).
-   Si Codex esta IDLE, `git add -A` + commit es seguro. NUNCA capturar runtime/*.py del WIP de Codex.
-5. Aserciones en mailbox verdaderas al escribirlas: FYI 'DONE' TRAS el flip; GO 'X ready' TRAS registrar X.
-6. Promover de a UNA tarea con GO + ETA.
+>>> PENDIENTES SUPERVISADOS (autorizados pero requieren al operador presente; NO en piloto automatico) <<<
+1. ACTIVACION ESCRITOR-UNICO: re-genesis del repo VIVO (drift 0) + flip enforce=true+authoritative=true +
+   ENSAYO DE ROLLBACK. El operador YA AUTORIZO (2026-06-08). GATEADO TECNICAMENTE: tras el flip, la siguiente
+   transicion de CADA lazo DEBE ir por submit_intent o hard-failea -> ejecutar SUPERVISADO con rollback listo,
+   tras verificar que el lazo de Codex realmente usa submit_intent. Es el switch de MAYOR RIESGO.
+2. SA.4 (autonomia con invoker real multi-turno bajo el sobre): levanta el cerrojo --once SOLO con registro+
+   caps; requiere GO del operador + ensayo de rollback. Unico paso con efecto real nuevo de la autonomia.
+3. DECISION-0025 (agent-teams-bridge): esperar a que el operador la entregue/promueva.
+
+LAZO DE TRABAJO (semi-automatico, CUANDO CODEX ESTE ACTIVO):
+- Codex AUTONOMO (~100s): auto-reclama `ready`, ejecuta, poda, detecta anomalias (DECISION-0018). Release
+  atomico = handoff + in-review msg + claim liberado + flip status juntos; a veces commitea su entrega en
+  background. Si lo cazas mid-release: espera, no toques.
+- Yo (Claude) reacciono via ScheduleWakeup (~270s): al ver in_review + claim liberado, RATIFICO ADVERSARIAL
+  (corro YO el golden de la tarea + regresiones + validador/encoding/neutralidad + smoke especifico; leo el
+  codigo nuevo), flip a done, in_review->archived + FYI accept, claim efimero, promuevo la SIGUIENTE de a una
+  con GO+ETA, commit + push. Mantener a Codex en cola NON-GATED (lejos del ledger durante activaciones).
+
+ANTI-COLISION (DECISION-0020) y LECCIONES DE PROCESO:
+1. Preparar specs/tareas en personal/Claude/ mientras Codex ocupado; promover de a UNA con GO+ETA.
+2. Escrituras del ledger en UN script python atomico (_tmp_*.py en personal/Claude/, lee-modifica-escribe).
+3. PERMISOS (clave): el harness pide prompt para comandos COMPUESTOS (varios `&&`, multilinea) y `-m` con
+   SALTOS DE LINEA. -> emitir UN comando por Bash; commits con DOS flags `-m` ("subject" y trailer Co-Authored)
+   para que quede en UNA linea. `git add a b c` (multi-arg, una linea) pasa. `Bash(rm:*)` ya en allowlist.
+4. STAGING: si Codex IDLE, `git add -A` + commit (TRAS add -A: `git restore --staged personal/operador/
+   personal/Codex/` para no commitear areas ajenas). Si Codex puede tener WIP staged: paths explicitos.
+5. DELIVERABLE REPOINT: Codex lista el mensaje in-review como DELIVERABLE del task; al archivarlo (open->
+   archived) el validador falla 'deliverable missing' -> en el close, RE-APUNTAR ese deliverable a
+   mailbox/archived/ tras mover el mensaje.
+6. Aserciones en mailbox verdaderas: FYI 'DONE' TRAS el flip; GO 'X ready' TRAS registrar X.
 
 QUE HACER AL ENTRAR:
-1. Cold-start. Mira si Codex entrego TASK-0074 (F7.3): si in_review + claim liberado -> ratifica
-   adversarial, flip done, FYI; en ese mismo cierre PROMUEVE DECISION-0023 al ledger (Area_comun/decisions/ +
-   PROJECT_STATE#decisions, desde el draft de personal) y encola F7.4 = TASK-0075 (firma, draft listo) con GO.
-   Si Codex sigue in_progress/mid-release: no toques, re-arma ~270s.
-2. Tras F7.4: F7.5 (docs+integracion al flujo de release: como firmar/verificar; cierra Fase 7).
-3. NO encender enforce/authoritative (3.b.2) sin: ambos lazos via submit_intent + re-genesis + GO del operador.
-4. Actualiza el reporte HTML del operador (Area_comun/reports/REPORT-20260607-estado-proyecto.html) cuando
-   cambie el estado, si el operador lo pide.
-5. NADA gateado (autonomia) sin OK del operador. Cambios de protocolo/boundary -> DECISION + aprobacion humana.
+1. Cold-start. Si es ANTES de las 9 AM: Codex sigue OFF -> no esperes entregas; revisa si el operador dejo
+   instruccion; si no, trabajo de arquitecto (drafts/reportes) o espera. Si es DESPUES de las 9 AM y Codex
+   volvio: revisa si entrego TASK-0082 (SA.5) -> ratifica + cierra.
+2. Reportes HTML del operador (Area_comun/reports/REPORT-20260607-estado-proyecto.html y
+   REPORT-20260607-inventario-metodologia.html): actualizar cuando cambie el estado, si el operador lo pide.
+   (Son artefactos-hoja de mi autoria; commit con path explicito, sin tocar CLAIMS.json).
+3. NADA gateado/supervisado (activacion escritor-unico, SA.4) sin el operador PRESENTE. Cambios de protocolo/
+   boundary -> DECISION + aprobacion humana.
+4. Si el operador entrega DECISION-0025: leerla, ayudarle a formalizarla (es nueva direccion).
 
-Detalle/cronologia: project-state-snapshot.md (ultima entrada "POST-v1.0: FASE B COMPLETA + WRITER-VIVO EN
-SOMBRA + FASE 7 EN MARCHA") + semi-auto-collaboration-pattern.md (metodo + hallazgos).
+Detalle/cronologia: MEMORY.md (linea project-state-snapshot, estado vigente) + semi-auto-collaboration-pattern.md
++ permission-auto-exec.md (lecciones de permisos) + operator-working-style.md.
