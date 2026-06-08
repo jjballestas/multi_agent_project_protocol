@@ -1,12 +1,6 @@
 {
     "active_tasks": [
         {
-            "id": "TASK-0084",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams."
-        },
-        {
             "id": "TASK-0085",
             "owner": "Codex",
             "status": "done",
@@ -23,6 +17,12 @@
             "owner": "Claude",
             "status": "proposed",
             "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4."
+        },
+        {
+            "id": "TASK-0088",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior)."
         }
     ],
     "agents": {
@@ -62,8 +62,7 @@
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
     "next_actions": [
-        "[HISTORICO PODADO] 118 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0082 RECLAMADA por Codex (2026-06-08): documentando SA.5, sobre de autonomia supervisada SA.1-SA.3 (registro/caps/paradas/runreport) + nota SA.4 gateado; sin encender autonomia ni tocar invoker real.",
+        "[HISTORICO PODADO] 119 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0082 ENTREGADA a in_review por Codex (2026-06-08): SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; documenta SA.1-SA.3 y deja SA.4 gateado con GO operador + rollback. Sin cambios funcionales ni secretos; claim liberado.",
         ">>> TASK-0082 DONE (SA.5 docs SUPERVISED_AUTONOMY.md, ratif. adversarial Claude 2026-06-08) -> autonomia supervisada documental SA.1-SA.5 COMPLETA. DECISION-0025 PROMOVIDA (ACCEPTED por el operador, alcance Capas A+B: gate enforcement + audit append-only; Capa C mapeo autoritativo DIFERIDA a precondiciones DECISION-0022). Integracion Agent Teams (Anthropic) = motor en vivo + este protocolo = ledger durable encima via hooks; off-by-default/opt-in/neutral/reversible (MINOR). ENCOLADA TASK-0083 (ready, Codex, SPEC-0065): runtime/team_bridge.py Capas A+B + bloque off + alta scan_globs + golden team_bridge_cases; off => byte-equivalente; NO Capa C, NO encender. GO en mailbox. De a una. PENDIENTES SUPERVISADOS DEL OPERADOR: activacion escritor-unico (re-genesis + flip enforce+authoritative + rollback), SA.4 (invoker real multi-turno; GO + rollback), activacion bridge A+B en instancia viva (paso separado registrado).",
         "TASK-0083 RECLAMADA por Codex (2026-06-08): bridge Agent Teams Capas A+B, runtime/team_bridge.py + config off + neutralidad + golden; NO Capa C, NO encender bridge ni tocar .claude/settings.json.",

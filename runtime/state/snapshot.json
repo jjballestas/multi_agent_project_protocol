@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "9795ddbd931b4e7a71732e69f5e5a38153b7cc48bb4152fbda715883c047fd25",
+  "canonical_hash": "788dd8339dfbc3d92bb9d13bfe0851ea3e35b3507d8f53a7a115ba5435333ce8",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -8,6 +8,7 @@
       "CLAIM-20260608-114700-prune-claude": 1,
       "CLAIM-20260608-115900-prune-claude": 1,
       "CLAIM-20260608-132600-prune-claude": 1,
+      "CLAIM-20260608-140500-prune-claude": 1,
       "CLAIM-20260608-TASK-0084-codex": 1,
       "CLAIM-20260608-TASK-0085-anomaly-handoff-seq-codex": 1,
       "CLAIM-20260608-TASK-0085-codex": 2,
@@ -23,21 +24,23 @@
       "CLAIM-20260608-enqueue-0086-0087-claude": 1,
       "CLAIM-20260608-enqueue-task0084-claude": 1,
       "CLAIM-20260608-enqueue-task0085-claude": 1,
+      "CLAIM-20260608-enqueue-task0088-claude": 1,
       "CLAIM-20260608-memory-rule-codex": 1,
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
-      "MAINTENANCE-PRUNE": 5,
+      "MAINTENANCE-PRUNE": 6,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 5,
+      "PROJECT_STATE": 6,
       "TASK-0084": 8,
       "TASK-0085": 12,
       "TASK-0086": 9,
       "TASK-0087": 1,
-      "protocol-prune": 5,
+      "TASK-0088": 2,
+      "protocol-prune": 6,
       "protocol-state": 2
     },
-    "events_applied": 75,
+    "events_applied": 82,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -70,6 +73,9 @@
       "enqueue-task0085:claim-acquire": 21,
       "enqueue-task0085:claim-release": 23,
       "enqueue-task0085:task-upsert": 22,
+      "enqueue-task0088:claim-acquire": 76,
+      "enqueue-task0088:claim-release": 78,
+      "enqueue-task0088:task-upsert": 77,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:auto-claim:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-acquire": 24,
@@ -101,6 +107,10 @@
       "prune-state:2026-06-08T13:26:00Z:claim-release": 70,
       "prune-state:2026-06-08T13:26:00Z:project-narrative": 68,
       "prune-state:2026-06-08T13:26:00Z:protocol-prune": 69,
+      "prune-state:2026-06-08T14:05:00Z:claim-acquire": 79,
+      "prune-state:2026-06-08T14:05:00Z:claim-release": 82,
+      "prune-state:2026-06-08T14:05:00Z:project-narrative": 80,
+      "prune-state:2026-06-08T14:05:00Z:protocol-prune": 81,
       "task0085-anomaly-handoff-seq:claim-acquire": 44,
       "task0085-anomaly-handoff-seq:claim-release": 45,
       "task0085-handoff-final-evidence:claim-acquire": 39,
@@ -119,5 +129,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 75
+  "up_to_seq": 82
 }

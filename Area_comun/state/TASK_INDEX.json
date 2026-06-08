@@ -77,44 +77,6 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "runtime/state/events.jsonl",
-                "personal/Codex/STARTUP_PROMPT.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0084-codex-to-claude-1.md"
-            ],
-            "depends_on": [
-                "TASK-0076",
-                "TASK-0077"
-            ],
-            "file": "Area_comun/tasks/TASK-0084-codex-cutover-submit-intent-vivo.md",
-            "id": "TASK-0084",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0017",
-                "DECISION-0020"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/ledger_ops.py",
-                "runtime/submit_intent.py",
-                "runtime/state/events.jsonl",
-                "personal/Codex/STARTUP_PROMPT.md"
-            ],
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Codex adopto submit_intent EN VIVO para su ciclo: event log seq 5->9, intent.applied actor=Codex (seq6 claim acquire + seq7 ready->in_progress = auto-claim; seq8 in_progress->in_review + seq9 claim release = handoff-release); drift 0 tras cada transaccion; CERO edicion manual de *.json. Runbook de Codex actualizado a submit_intent/ledger_ops por defecto. Deliverables corregidos por Claude via submit_intent task_upsert (Codex no tiene capability orchestrator; hizo lo correcto al no editar a mano). >>> Precondicion del flip enforce CUMPLIDA por ambos lazos en sombra (Claude seq3-5, Codex seq6-9, drift 0). enforce/authoritative siguen OFF; el flip espera GO del operador. <<< Pendiente Codex: golden de regresion cross-FS (fast-follow).",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
-            "status": "done",
-            "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams.",
-            "type": "migration",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
                 "runtime/submit_intent.py",
                 "scripts/prune_state.py",
                 "protocol.config.json",
@@ -226,6 +188,45 @@
             "status": "proposed",
             "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4.",
             "type": "analysis",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "examples/supervised_autonomy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0088-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0080"
+            ],
+            "file": "Area_comun/tasks/TASK-0088-codex-sa4-lock-lift-invoker-real-multiturno.md",
+            "id": "TASK-0088",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0078",
+                "TASK-0079",
+                "TASK-0086"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/supervised_autonomy.py",
+                "examples/supervised_autonomy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "review": "READY (encolada por Claude 2026-06-08 via submit_intent bajo enforce+authoritative). GO operador PASO 1 de SA.4 (lock-lift OFF-BY-DEFAULT). El piloto (pasos 3+4) es micro-GO posterior. Capa C OFF. GO en mailbox.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "status": "ready",
+            "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior).",
+            "type": "implementation",
             "updated_at": "2026-06-08"
         }
     ],

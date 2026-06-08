@@ -1,7 +1,7 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-132600-prune-claude",
+            "claim_id": "CLAIM-20260608-140500-prune-claude",
             "expires_at": "2026-06-08",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
@@ -10,27 +10,10 @@
                 "Area_comun/state/TASK_INDEX.json",
                 "Area_comun/state/PROJECT_STATE.json"
             ],
-            "started_at": "2026-06-08T13:26:00Z",
+            "started_at": "2026-06-08T14:05:00Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-08T13:26:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260608-close-task0086-claude",
-            "expires_at": "2026-06-09",
-            "notes": "Claim efimero: cierre de TASK-0086 (ratificacion) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0086",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0086",
-                "Area_comun/tasks/TASK-0086-codex-guard-authoritative-requiere-enforce.md"
-            ],
-            "started_at": "2026-06-08",
-            "status": "released",
-            "task_id": "TASK-0086",
-            "updated_at": "2026-06-08"
+            "updated_at": "2026-06-08T14:05:00Z"
         },
         {
             "claim_id": "CLAIM-20260608-memory-rule-codex",
