@@ -23,6 +23,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto."
+        },
+        {
+            "id": "TASK-0091",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027)."
         }
     ],
     "agents": {
