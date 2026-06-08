@@ -106,6 +106,9 @@ jobs:
       - name: Run runtime protocol materialize cases
         run: python examples/runtime_protocol_materialize_cases/run_runtime_protocol_materialize_cases.py
 
+      - name: Run materialize cross-FS cases
+        run: python examples/materialize_cross_fs_cases/run_materialize_cross_fs_cases.py
+
       - name: Run intent flow cases
         run: python examples/intent_flow_cases/run_intent_flow_cases.py
 

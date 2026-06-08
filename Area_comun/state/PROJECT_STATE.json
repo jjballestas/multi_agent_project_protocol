@@ -21,7 +21,7 @@
         {
             "id": "TASK-0084",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams."
         }
     ],

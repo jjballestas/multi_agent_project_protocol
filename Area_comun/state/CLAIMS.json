@@ -63,6 +63,45 @@
             "updated_at": "2026-06-08"
         },
         {
+            "claim_id": "CLAIM-20260608-TASK-0084-codex",
+            "expires_at": "2026-06-09",
+            "notes": "TASK-0084 cutover Codex loop to submit_intent live path; auto-claim via ledger_ops.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0084",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0084",
+                "Area_comun/tasks/TASK-0084-codex-cutover-submit-intent-vivo.md",
+                "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "Area_comun/handoffs/",
+                "personal/Codex/STARTUP_PROMPT.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/"
+            ],
+            "started_at": "2026-06-08T09:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0084",
+            "updated_at": "2026-06-08T09:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260608-close-task0084-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: cierre de TASK-0084 (corrige deliverables + done) via submit_intent. Liberado en la misma transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0084",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0084",
+                "Area_comun/tasks/TASK-0084-codex-cutover-submit-intent-vivo.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0084",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-close0082-promote0025-claude",
             "expires_at": "2026-06-09",
             "notes": "Claim efimero: cierre de TASK-0082 (SA.5) a done + promocion de DECISION-0025 (Capas A+B) + SPEC-0065 + encolado de TASK-0083 (ready) + GO. Liberado en el mismo paso (DECISION-0020).",

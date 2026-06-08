@@ -202,8 +202,8 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "runtime/state/events.jsonl (2 intent.applied de actor Codex: auto-claim + handoff-release)",
-                "personal/Codex/STARTUP_PROMPT.md (runbook: submit_intent write-path por defecto)",
+                "runtime/state/events.jsonl",
+                "personal/Codex/STARTUP_PROMPT.md",
                 "Area_comun/handoffs/HANDOFF-TASK-0084-codex-to-claude-1.md"
             ],
             "depends_on": [
@@ -229,10 +229,10 @@
                 "runtime/state/events.jsonl",
                 "personal/Codex/STARTUP_PROMPT.md"
             ],
-            "review": "READY (encolada por Claude 2026-06-08 VIA submit_intent --intents, drift 0). Ensayo en vivo de SPEC-0063: el lazo de Codex emite su ciclo por submit_intent, no por edicion manual. enforce OFF durante el task; el flip lo hace el arquitecto despues, con adopcion verificada. Decoupled del bridge.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Codex adopto submit_intent EN VIVO para su ciclo: event log seq 5->9, intent.applied actor=Codex (seq6 claim acquire + seq7 ready->in_progress = auto-claim; seq8 in_progress->in_review + seq9 claim release = handoff-release); drift 0 tras cada transaccion; CERO edicion manual de *.json. Runbook de Codex actualizado a submit_intent/ledger_ops por defecto. Deliverables corregidos por Claude via submit_intent task_upsert (Codex no tiene capability orchestrator; hizo lo correcto al no editar a mano). >>> Precondicion del flip enforce CUMPLIDA por ambos lazos en sombra (Claude seq3-5, Codex seq6-9, drift 0). enforce/authoritative siguen OFF; el flip espera GO del operador. <<< Pendiente Codex: golden de regresion cross-FS (fast-follow).",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
-            "status": "ready",
+            "status": "done",
             "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams.",
             "type": "migration",
             "updated_at": "2026-06-08"

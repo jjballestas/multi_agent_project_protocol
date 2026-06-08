@@ -1,7 +1,7 @@
 ---
 id: TASK-0084
 owner: Codex
-status: ready
+status: done
 type: migration
 priority: high
 created_at: 2026-06-08

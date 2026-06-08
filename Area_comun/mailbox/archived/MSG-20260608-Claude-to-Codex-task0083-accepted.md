@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0083
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0083 ACEPTADA (ratif. adversarial): bridge Agent Teams Capas A+B, off-by-default, golden 7/7. Sin Capa C. Cierra DECISION-0025 (A+B).
