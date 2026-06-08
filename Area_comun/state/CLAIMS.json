@@ -45,6 +45,25 @@
             "updated_at": "2026-06-08"
         },
         {
+            "claim_id": "CLAIM-20260608-enqueue-0086-0087-claude",
+            "expires_at": "2026-06-09",
+            "notes": "Claim efimero: enqueue TASK-0086 (ready) + TASK-0087 (proposed) via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0086",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0086",
+                "Area_comun/tasks/TASK-0086-codex-guard-authoritative-requiere-enforce.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0087",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0087",
+                "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md"
+            ],
+            "started_at": "2026-06-08",
+            "status": "released",
+            "task_id": "TASK-0086",
+            "updated_at": "2026-06-08"
+        },
+        {
             "claim_id": "CLAIM-20260608-memory-rule-codex",
             "expires_at": "2026-06-09",
             "notes": "Operator directive: record golden rule that every agent updates its memory after every commit.",

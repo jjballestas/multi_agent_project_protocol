@@ -17,6 +17,18 @@
             "owner": "Codex",
             "status": "done",
             "title": "Intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce; re-habilita maintenance.enabled SOLO en instancia viva, template intacto). Cierra el GAP congelado al encender enforce. Verificacion EN VIVO drift 0 + golden replay-identidad."
+        },
+        {
+            "id": "TASK-0086",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto."
+        },
+        {
+            "id": "TASK-0087",
+            "owner": "Claude",
+            "status": "proposed",
+            "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4."
         }
     ],
     "agents": {

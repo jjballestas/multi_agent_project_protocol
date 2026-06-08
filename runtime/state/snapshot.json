@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "44e3da11853281f9565c4166c5c1cab39027f4b18caa99e389d8fc6e7f08265a",
+  "canonical_hash": "fb09887d9adb9f4154913841265e7763a0a6c555d19b6050ba304778ce83b5ee",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -16,6 +16,7 @@
       "CLAIM-20260608-close-task0084-claude": 1,
       "CLAIM-20260608-close-task0085-claude": 1,
       "CLAIM-20260608-decision0026-claude": 1,
+      "CLAIM-20260608-enqueue-0086-0087-claude": 1,
       "CLAIM-20260608-enqueue-task0084-claude": 1,
       "CLAIM-20260608-enqueue-task0085-claude": 1,
       "CLAIM-20260608-memory-rule-codex": 1,
@@ -27,10 +28,12 @@
       "PROJECT_STATE": 3,
       "TASK-0084": 8,
       "TASK-0085": 12,
+      "TASK-0086": 2,
+      "TASK-0087": 1,
       "protocol-prune": 4,
       "protocol-state": 2
     },
-    "events_applied": 56,
+    "events_applied": 60,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -48,6 +51,10 @@
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
       "decision0026:decision": 19,
+      "enqueue-0086-0087:claim-acquire": 57,
+      "enqueue-0086-0087:claim-release": 60,
+      "enqueue-0086-0087:upsert-0086": 58,
+      "enqueue-0086-0087:upsert-0087": 59,
       "enqueue-task0084:claim-acquire": 3,
       "enqueue-task0084:claim-release": 5,
       "enqueue-task0084:task-upsert": 4,
@@ -93,5 +100,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 56
+  "up_to_seq": 60
 }
