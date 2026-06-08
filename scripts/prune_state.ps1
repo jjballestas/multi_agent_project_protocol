@@ -1,5 +1,8 @@
 param(
     [string]$Root = ".",
+    [string]$ActorId = "",
+    [string]$Timestamp = "",
+    [string]$Commit = "",
     [switch]$Check,
     [switch]$Apply
 )
@@ -15,5 +18,9 @@ if (($Check -and $Apply) -or (-not $Check -and -not $Apply)) {
 
 $scriptPath = Join-Path $PSScriptRoot "prune_state.py"
 $mode = if ($Check) { "--check" } else { "--apply" }
-python $scriptPath --root $Root $mode
+$argsList = @($scriptPath, "--root", $Root, $mode)
+if ($ActorId) { $argsList += @("--actor-id", $ActorId) }
+if ($Timestamp) { $argsList += @("--timestamp", $Timestamp) }
+if ($Commit) { $argsList += @("--commit", $Commit) }
+python @argsList
 exit $LASTEXITCODE

@@ -229,6 +229,65 @@ def case_decision_materializes_project_state() -> None:
         assert protocol_state_drift(root)["has_drift"] is False
 
 
+def case_project_narrative_materializes_project_state() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-project-narrative-") as temp:
+        root = Path(temp)
+        build_fixture(root, claims=[claim(owner="Claude", scope=["Area_comun/state/PROJECT_STATE.json"])])
+        result = submit_intent(
+            root,
+            "Claude",
+            {
+                "project_narrative": {
+                    "append": {"next_actions": ["Revisar ventana enforce"]},
+                    "idempotency_key": "intent-fixture:project-narrative",
+                }
+            },
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+        assert result["event"]["type"] == "intent.applied"
+        project = read_json(root / "Area_comun/state/PROJECT_STATE.json")
+        assert project["next_actions"] == ["Revisar ventana enforce"], project
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
+def case_protocol_prune_removes_terminal_hot_entries() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-protocol-prune-") as temp:
+        root = Path(temp)
+        build_fixture(
+            root,
+            status="done",
+            claims=[
+                claim(status="released"),
+                claim(owner="Claude", scope=[
+                    "Area_comun/state/TASK_INDEX.json",
+                    "Area_comun/state/PROJECT_STATE.json",
+                    "Area_comun/state/CLAIMS.json",
+                ]),
+            ],
+        )
+        result = submit_intent(
+            root,
+            "Claude",
+            {
+                "protocol_prune": {
+                    "task_ids": [TASK_ID],
+                    "active_task_ids": [TASK_ID],
+                    "claim_ids": [CLAIM_ID],
+                    "idempotency_key": "intent-fixture:protocol-prune",
+                }
+            },
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+        assert result["event"]["type"] == "intent.applied"
+        assert read_json(root / "Area_comun/state/TASK_INDEX.json")["tasks"] == []
+        assert read_json(root / "Area_comun/state/PROJECT_STATE.json")["active_tasks"] == []
+        claims = read_json(root / "Area_comun/state/CLAIMS.json")["claims"]
+        assert [item["claim_id"] for item in claims] == [f"CLAIM-{TASK_ID}-claude"], claims
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
 def case_invalid_scope_rejected_without_changes() -> None:
     with tempfile.TemporaryDirectory(prefix="intent-invalid-scope-") as temp:
         root = Path(temp)
@@ -349,6 +408,8 @@ def main() -> int:
         case_task_status_materializes_json_and_task_file,
         case_claim_release_materializes_claims,
         case_decision_materializes_project_state,
+        case_project_narrative_materializes_project_state,
+        case_protocol_prune_removes_terminal_hot_entries,
         case_invalid_scope_rejected_without_changes,
         case_materialization_failure_rolls_back_event_and_hot_state,
         case_idempotent_retry_does_not_duplicate,

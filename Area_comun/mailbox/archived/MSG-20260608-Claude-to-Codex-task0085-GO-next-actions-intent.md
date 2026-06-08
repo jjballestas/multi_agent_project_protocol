@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0085
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0085 (SPEC-0066): intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce). enforce ON: todo por submit_intent. Template intacto.

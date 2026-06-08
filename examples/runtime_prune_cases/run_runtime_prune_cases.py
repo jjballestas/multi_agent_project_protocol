@@ -6,11 +6,16 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from runtime.protocol_replay import protocol_state_drift, write_genesis_reference  # noqa: E402
+
 PRUNE = ROOT / "scripts" / "prune_state.py"
 PRUNE_PS1 = ROOT / "scripts" / "prune_state.ps1"
 VALIDATOR = ROOT / "scripts" / "validate_collaboration_state.py"
@@ -264,6 +269,54 @@ def case_next_actions_merges_prior_sentinel() -> None:
         assert na[1:] == [f"accion {i}" for i in range(4, 6)], na
 
 
+def case_enforced_prune_uses_submit_intent_and_stays_drift_free() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-prune-submit-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        config = load_json(root / "protocol.config.json")
+        config["adoption_tier"] = "runtime"
+        config["agent_roles"] = {"architect": "Claude", "implementer": "Codex", "human_owner": "operador humano"}
+        config["event_state"] = {"enabled": True, "materialize": True, "enforce": True, "authoritative": False}
+        config["maintenance"]["recent_next_actions"] = 2
+        write_json(root / "protocol.config.json", config)
+        claims = load_json(root / "Area_comun/state/CLAIMS.json")
+        claims["claims"] = [item for item in claims["claims"] if item.get("status") != "active"]
+        write_json(root / "Area_comun/state/CLAIMS.json", claims)
+        project = load_json(root / "Area_comun/state/PROJECT_STATE.json")
+        project["next_actions"] = [f"accion submit {i}" for i in range(5)]
+        write_json(root / "Area_comun/state/PROJECT_STATE.json", project)
+        write_genesis_reference(root, actor_id="Claude", timestamp="2026-06-08T00:00:00Z", commit="fixture")
+
+        result = run([
+            "python",
+            str(PRUNE),
+            "--root",
+            str(root),
+            "--apply",
+            "--timestamp",
+            "2026-06-08T00:01:00Z",
+            "--commit",
+            "fixture",
+        ])
+        assert result.returncode == 0, result.stdout + result.stderr
+        payload = json.loads(result.stdout)
+        assert payload["mode"] == "submit_intent", payload
+        assert payload["transaction"]["intent_count"] == 4, payload
+        assert payload["drift"]["has_drift"] is False, payload
+        assert protocol_state_drift(root)["has_drift"] is False
+
+        task_ids = [item["id"] for item in load_json(root / "Area_comun/state/TASK_INDEX.json")["tasks"]]
+        assert task_ids == ["TASK-9004", "TASK-9999"], task_ids
+        claim_ids = [item["claim_id"] for item in load_json(root / "Area_comun/state/CLAIMS.json")["claims"]]
+        assert claim_ids == ["CLAIM-0005", "CLAIM-20260608-000100-prune-claude"], claim_ids
+        next_actions = load_next_actions(root)
+        assert len(next_actions) == 3, next_actions
+        assert next_actions[0].startswith(SENTINEL), next_actions
+        assert "3 next_actions" in next_actions[0], next_actions
+        assert load_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json")["tasks"] == []
+        assert load_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json")["claims"] == []
+
+
 def main() -> int:
     cases = [
         case_python_prune_mailbox_safety,
@@ -272,6 +325,7 @@ def main() -> int:
         case_next_actions_below_threshold_unchanged,
         case_next_actions_disabled_when_absent_or_zero,
         case_next_actions_merges_prior_sentinel,
+        case_enforced_prune_uses_submit_intent_and_stays_drift_free,
     ]
     failures = []
     for case in cases:

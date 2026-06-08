@@ -9,14 +9,27 @@ import re
 import shutil
 import subprocess
 import sys
+from copy import deepcopy
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 try:
     from measure_context_cost import measure
 except ImportError:  # pragma: no cover
     from .measure_context_cost import measure
+
+try:
+    from runtime.protocol_replay import protocol_state_enforcement_enabled, protocol_state_drift
+    from runtime.submit_intent import submit_intents
+except ImportError:  # pragma: no cover
+    from ..runtime.protocol_replay import protocol_state_enforcement_enabled, protocol_state_drift
+    from ..runtime.submit_intent import submit_intents
 
 
 DEFAULT_CONFIG = {
@@ -114,6 +127,17 @@ def archive_entries(
     return len(to_archive), hot_doc, archive_doc
 
 
+def terminal_ids(entries: list[Any], id_field: str, terminal_status: str, keep_recent: int) -> list[str]:
+    hot_entries = [entry for entry in entries if isinstance(entry, dict)]
+    terminal = [entry for entry in hot_entries if str(entry.get("status", "")).lower() == terminal_status]
+    keep_ids = {str(entry.get(id_field)) for entry in terminal[-keep_recent:]} if keep_recent > 0 else set()
+    return [
+        str(entry.get(id_field))
+        for entry in terminal
+        if str(entry.get(id_field) or "") and str(entry.get(id_field)) not in keep_ids
+    ]
+
+
 def condense_next_actions(state: dict[str, Any], keep_recent: int) -> int:
     """Condensa next_actions historicas en un centinela determinista, idempotente.
 
@@ -166,6 +190,15 @@ def prune_project_state(root: Path, keep_recent: int, keep_next_actions: int = 0
     state["updated_by"] = "Codex"
     write_json(path, state)
     return removed, condensed
+
+
+def condensed_next_actions(state: dict[str, Any], keep_next_actions: int) -> tuple[int, list[Any] | None]:
+    working = deepcopy(state)
+    condensed = condense_next_actions(working, keep_next_actions)
+    if condensed <= 0:
+        return 0, None
+    values = working.get("next_actions")
+    return condensed, values if isinstance(values, list) else []
 
 
 def prune_mailbox(root: Path, keep_recent: int) -> int:
@@ -235,8 +268,22 @@ def requires_unresolved_response(path: Path) -> bool:
     return status not in {"answered", "archived", "closed", "resolved", "done"}
 
 
-def apply_prune(root: Path) -> dict[str, Any]:
+def apply_prune(
+    root: Path,
+    *,
+    actor_id: str | None = None,
+    timestamp: str | None = None,
+    commit: str | None = None,
+) -> dict[str, Any]:
     cfg = maintenance_config(root)
+    config = read_json(root / "protocol.config.json")
+    if protocol_state_enforcement_enabled(config):
+        return apply_prune_via_submit_intent(root, cfg, actor_id=actor_id, timestamp=timestamp, commit=commit)
+
+    return apply_prune_direct(root, cfg)
+
+
+def apply_prune_direct(root: Path, cfg: dict[str, Any]) -> dict[str, Any]:
     state_dir = root / "Area_comun/state"
     task_hot_path = state_dir / "TASK_INDEX.json"
     task_archive_path = state_dir / "TASK_INDEX_ARCHIVE.json"
@@ -289,6 +336,156 @@ def apply_prune(root: Path) -> dict[str, Any]:
     }
 
 
+def default_actor_id(root: Path) -> str:
+    config = read_json(root / "protocol.config.json")
+    roles = config.get("agent_roles") if isinstance(config.get("agent_roles"), dict) else {}
+    return str(roles.get("architect") or "Claude")
+
+
+def default_timestamp() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def current_commit(root: Path) -> str:
+    completed = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return completed.stdout.strip() if completed.returncode == 0 and completed.stdout.strip() else "unknown"
+
+
+def claim_intent(claim_id: str, task_id: str, actor_id: str, timestamp: str, scope: list[str]) -> dict[str, Any]:
+    return {
+        "claim": {
+            "op": "acquire",
+            "idempotency_key": f"prune-state:{timestamp}:claim-acquire",
+            "claim": {
+                "claim_id": claim_id,
+                "task_id": task_id,
+                "owner": actor_id,
+                "status": "active",
+                "started_at": timestamp,
+                "updated_at": timestamp,
+                "expires_at": timestamp.split("T", 1)[0],
+                "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+                "scope": scope,
+            },
+        }
+    }
+
+
+def claim_release_intent(claim_id: str, timestamp: str) -> dict[str, Any]:
+    return {
+        "claim": {
+            "op": "release",
+            "claim_id": claim_id,
+            "idempotency_key": f"prune-state:{timestamp}:claim-release",
+        }
+    }
+
+
+def apply_prune_via_submit_intent(
+    root: Path,
+    cfg: dict[str, Any],
+    *,
+    actor_id: str | None = None,
+    timestamp: str | None = None,
+    commit: str | None = None,
+) -> dict[str, Any]:
+    actor = str(actor_id or default_actor_id(root)).strip()
+    ts = str(timestamp or default_timestamp()).strip()
+    commit_ref = str(commit or current_commit(root)).strip()
+    state_dir = root / "Area_comun/state"
+    before = measure(root)["cold_start"]["total_tokens"]
+    task_hot = read_json(state_dir / "TASK_INDEX.json")
+    claims_hot = read_json(state_dir / "CLAIMS.json")
+    project = read_json(state_dir / "PROJECT_STATE.json")
+
+    task_ids = terminal_ids(task_hot.get("tasks") or [], "id", "done", int(cfg["recent_done_tasks"]))
+    active_task_ids = terminal_ids(project.get("active_tasks") or [], "id", "done", int(cfg["recent_done_tasks"]))
+    # The submit_intent transaction leaves its own maintenance claim as released after pruning.
+    # Keep one fewer pre-existing released claim so the post-transaction hot set still satisfies
+    # recent_released_claims and a second --check is not immediately due again.
+    keep_released_before_maintenance = max(int(cfg["recent_released_claims"]) - 1, 0)
+    claim_ids = terminal_ids(
+        claims_hot.get("claims") or [],
+        "claim_id",
+        "released",
+        keep_released_before_maintenance,
+    )
+    next_actions_condensed, next_actions = condensed_next_actions(project, int(cfg.get("recent_next_actions", 0)))
+
+    scopes = ["Area_comun/state/CLAIMS.json"]
+    if task_ids:
+        scopes.append("Area_comun/state/TASK_INDEX.json")
+    if active_task_ids or next_actions is not None:
+        scopes.append("Area_comun/state/PROJECT_STATE.json")
+    if claim_ids:
+        scopes.append("Area_comun/state/CLAIMS.json")
+    scopes = list(dict.fromkeys(scopes))
+
+    intents: list[dict[str, Any]] = []
+    if next_actions is not None:
+        intents.append(
+            {
+                "project_narrative": {
+                    "set": {"next_actions": next_actions},
+                    "idempotency_key": f"prune-state:{ts}:project-narrative",
+                }
+            }
+        )
+    if task_ids or active_task_ids or claim_ids:
+        intents.append(
+            {
+                "protocol_prune": {
+                    "task_ids": task_ids,
+                    "active_task_ids": active_task_ids,
+                    "claim_ids": claim_ids,
+                    "idempotency_key": f"prune-state:{ts}:protocol-prune",
+                }
+            }
+        )
+
+    submit_result: dict[str, Any] | None = None
+    if intents:
+        task_id = "MAINTENANCE-PRUNE"
+        actor_slug = re.sub(r"[^a-z0-9]+", "-", actor.lower()).strip("-") or "actor"
+        claim_id = f"CLAIM-{ts.replace(':', '').replace('-', '').replace('T', '-').replace('Z', '')}-prune-{actor_slug}"
+        transaction = [
+            claim_intent(claim_id, task_id, actor, ts, scopes),
+            *intents,
+            claim_release_intent(claim_id, ts),
+        ]
+        submit_result = submit_intents(
+            root,
+            actor,
+            transaction,
+            timestamp=ts,
+            commit=commit_ref,
+            transaction_key=f"prune-state:{ts}:tx",
+        )
+
+    after = measure(root)["cold_start"]["total_tokens"]
+    drift = protocol_state_drift(root)
+    return {
+        "mode": "submit_intent",
+        "actor_id": actor,
+        "tasks_archived": len(task_ids),
+        "claims_archived": len(claim_ids),
+        "project_state_done_removed": len(active_task_ids),
+        "next_actions_condensed": next_actions_condensed,
+        "mailbox_archived": 0,
+        "before_tokens": before,
+        "after_tokens": after,
+        "recovered_tokens": before - after,
+        "drift": {"has_drift": drift.get("has_drift"), "up_to_seq": drift.get("up_to_seq")},
+        "transaction": (submit_result or {}).get("transaction"),
+    }
+
+
 def run_check(root: Path) -> int:
     assessment = assess(root)
     if not assessment.due:
@@ -304,6 +501,9 @@ def run_check(root: Path) -> int:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check or apply systematic protocol state pruning.")
     parser.add_argument("--root", default=".", help="Repository or instance root.")
+    parser.add_argument("--actor-id", help="Actor id used for submit_intent mode; defaults to configured architect.")
+    parser.add_argument("--timestamp", help="Timestamp used for submit_intent mode.")
+    parser.add_argument("--commit", help="Commit recorded for submit_intent mode.")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true", help="Read-only threshold check.")
     mode.add_argument("--apply", action="store_true", help="Archive terminal hot state entries.")
@@ -315,7 +515,7 @@ def main() -> int:
     root = Path(args.root).resolve()
     if args.check:
         return run_check(root)
-    result = apply_prune(root)
+    result = apply_prune(root, actor_id=args.actor_id, timestamp=args.timestamp, commit=args.commit)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

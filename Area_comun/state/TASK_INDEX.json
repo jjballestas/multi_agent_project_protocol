@@ -77,91 +77,6 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "Area_comun/protocol/RELEASE_ENGINEERING.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md",
-                "README_INSTANCIACION.md",
-                "Area_comun/protocol/PACKAGE_VERSIONING.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md"
-            ],
-            "depends_on": [
-                "TASK-0071",
-                "TASK-0073",
-                "TASK-0074",
-                "TASK-0075"
-            ],
-            "file": "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
-            "id": "TASK-0081",
-            "linked_decisions": [
-                "DECISION-0001",
-                "DECISION-0019",
-                "DECISION-0023"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "relates_to": [
-                "TASK-0064"
-            ],
-            "relevant_files": [
-                "Area_comun/protocol/PACKAGE_VERSIONING.md",
-                "README_INSTANCIACION.md",
-                "scripts/generate_sbom.py",
-                "scripts/sign_release.py",
-                "scripts/verify_release.py"
-            ],
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Lei RELEASE_ENGINEERING.md: comandos exactos vs la CLI real (generate_sbom/manifest --commit --timestamp --output; generate_provenance --manifest --builder-id --commit --process --timestamp + --verify; sign_release --manifest --backend --key --key-id; verify_release --manifest [--signature --backend --pubkey]); principios determinismo/neutralidad/sin-secretos/off-by-default correctos; nota DECISION-0023 (backend real del emisor, claves NUNCA commiteadas, fixture solo golden); SIN claves reales (solo placeholders). Corri yo: neutralidad limpia (cubre protocol/*.md), encoding limpio, validador valid. Enlaces desde README_INSTANCIACION + PACKAGE_VERSIONING. CIERRA F7.5 -> >>> FASE 7 COMPLETA (F7.1 SBOM, F7.2 manifiesto+verify, F7.3 provenance, F7.4 firma, F7.5 docs). <<<",
-            "sdd_required": false,
-            "spec_id": "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
-            "status": "done",
-            "title": "Fase 7.5 (SPEC-0057): docs de la cadena de release (SBOM -> manifiesto -> provenance -> firma) + guia de generar/verificar + nota de backend real de firma sin secretos (DECISION-0023; claves del emisor, fixture solo en golden) + enlaces desde README_INSTANCIACION. Cierra Fase 7. Neutral, ASCII, sin secretos. Quinta y ultima rebanada de Fase 7.",
-            "type": "documentation",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
-                "Area_comun/protocol/SUPERVISED_AUTONOMY.md",
-                "Area_comun/protocol/N_AGENT_RUNTIME.md",
-                "README_INSTANCIACION.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md",
-                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md"
-            ],
-            "depends_on": [
-                "TASK-0078",
-                "TASK-0079",
-                "TASK-0080"
-            ],
-            "file": "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
-            "id": "TASK-0082",
-            "linked_decisions": [
-                "DECISION-0024",
-                "DECISION-0021",
-                "DECISION-0022"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "Area_comun/protocol/N_AGENT_RUNTIME.md",
-                "README_INSTANCIACION.md",
-                "runtime/supervised_autonomy.py",
-                "runtime/orchestrator.py",
-                "protocol.config.json"
-            ],
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: neutralidad exit 0, encoding OK, validador valid (drift benigno esperado), prune OK. SUPERVISED_AUTONOMY.md documenta config runtime.supervised_autonomy off-by-default + caps + --allow-supervised-autonomy, tabla de paradas duras (max_turns_reached/paused via runtime/state/PAUSE/wallclock_exhausted/human_checkpoint por K y por fix-cycles), *.runreport.md y frontera SA.4 (invoker real --once intacto, gateado por GO + rollback). Enlaces desde N_AGENT_RUNTIME y README_INSTANCIACION. Neutral, ASCII, sin secretos. CIERRA SA.5 -> autonomia supervisada documental SA.1-SA.5 completa.",
-            "sdd_required": false,
-            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
-            "status": "done",
-            "title": "Autonomia supervisada SA.5 (SPEC-0064): docs del sobre de supervision (SA.1-SA.3) - configuracion runtime.supervised_autonomy (off-by-default, registro+caps) + paradas duras (max_turns, centinela runtime/state/PAUSE, reloj wall_clock_ms, checkpoint humano K-turnos/fix-cycles) + runreport + nota de SA.4 (invoker real) gateado; enlaces desde N_AGENT_RUNTIME/README. Neutral, sin secretos. Ultima rebanada documental de la autonomia supervisada.",
-            "type": "documentation",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
                 "runtime/team_bridge.py",
                 "protocol.config.json",
                 "protocol.config.template.json",
@@ -271,10 +186,10 @@
                 "protocol.config.json",
                 "examples/"
             ],
-            "review": "READY (encolada por Claude 2026-06-08 VIA submit_intent bajo enforce). SPEC-0066. Cierra el gap de next_actions/prune bajo enforce. authoritative/SA.4/CapaC en ventanas posteriores. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Verificado SUSTANTIVAMENTE bajo enforce: (1) intent project_narrative actualiza next_actions EN VIVO con drift 0 (lo emiti en este mismo cierre); (2) intent protocol_prune + prune_state.py --apply reencauzado por submit_intent corrieron EN VIVO con drift 0 (event log seq 27-30/36-38/42/47, actor=architect; retira solo entradas terminales: task done / claim released, verificado en codigo); (3) goldens verdes corridos por mi: intent_flow 11 (incluye case_project_narrative + case_protocol_prune con assert drift 0 = replay-identidad), runtime_prune, replay 6, intent_tx 6, materialize 6, cross_fs 2, prune_state 3, enforce 7, cutover 4; (4) validador valid bajo enforce, neutralidad exit 0, encoding limpio. maintenance.enabled=true SOLO en instancia viva; template intacto. Capability: project_narrative/protocol_prune requieren orchestrator (prune corre como architect bajo enforce). Anomalia menor de Codex (evidencia up_to_seq=38 vs estado vivo) ACKNOWLEDGED: benigna, drift 0 vigente, use el event log como autoritativo. CIERRA el gap de next_actions/prune bajo enforce.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0066-next-actions-intent-y-prune-submit-intent.md",
-            "status": "ready",
+            "status": "done",
             "title": "Intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce; re-habilita maintenance.enabled SOLO en instancia viva, template intacto). Cierra el GAP congelado al encender enforce. Verificacion EN VIVO drift 0 + golden replay-identidad.",
             "type": "implementation",
             "updated_at": "2026-06-08"

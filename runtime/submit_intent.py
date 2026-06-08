@@ -53,7 +53,8 @@ VALID_TASK_STATUSES = {
     "blocked",
     "cancelled",
 }
-INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision"}
+INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narrative", "protocol_prune"}
+PROJECT_NARRATIVE_FIELDS = {"next_actions", "risks", "open_questions"}
 ROW_SCOPED_LEDGER_PATHS = {
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/PROJECT_STATE.json",
@@ -169,7 +170,8 @@ def parse_intent(intent: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         return explicit_type, payload
     keys = [key for key in INTENT_TYPES if key in intent]
     if len(keys) != 1:
-        raise IntentValidationError("intent must declare exactly one of: task_status, task_upsert, claim, decision")
+        supported = ", ".join(sorted(INTENT_TYPES))
+        raise IntentValidationError(f"intent must declare exactly one of: {supported}")
     payload = intent[keys[0]]
     if not isinstance(payload, dict):
         raise IntentValidationError(f"{keys[0]} intent payload must be an object")
@@ -183,6 +185,43 @@ def require_text(payload: dict[str, Any], key: str) -> str:
     if not value:
         raise IntentValidationError(f"{key} is required")
     return value
+
+
+def require_string_list(value: Any, key: str) -> list[str]:
+    if not isinstance(value, list):
+        raise IntentValidationError(f"{key} must be a list")
+    result: list[str] = []
+    for item in value:
+        text = str(item or "").strip()
+        if text:
+            result.append(text)
+    return result
+
+
+def narrative_ops(payload: dict[str, Any]) -> dict[str, dict[str, list[str]]]:
+    set_values = payload.get("set") if isinstance(payload.get("set"), dict) else {}
+    append_values = payload.get("append") if isinstance(payload.get("append"), dict) else {}
+    direct_set = {field: payload[field] for field in PROJECT_NARRATIVE_FIELDS if field in payload}
+    set_payload = {**set_values, **direct_set}
+    normalized: dict[str, dict[str, list[str]]] = {"set": {}, "append": {}}
+    for mode, values in (("set", set_payload), ("append", append_values)):
+        for field, raw in sorted(values.items()):
+            if field not in PROJECT_NARRATIVE_FIELDS:
+                raise IntentValidationError(f"unsupported project_narrative field: {field}")
+            normalized[mode][field] = require_string_list(raw, f"project_narrative.{mode}.{field}")
+    if not normalized["set"] and not normalized["append"]:
+        raise IntentValidationError("project_narrative requires set/append values")
+    return normalized
+
+
+def unique_text_list(value: Any, key: str) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for item in require_string_list(value or [], key):
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
 
 
 def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
@@ -232,6 +271,17 @@ def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
                 normalized["scope"] = list(payload["scope"])
         return normalized
 
+    if kind == "project_narrative":
+        return {**common, **narrative_ops(payload)}
+
+    if kind == "protocol_prune":
+        task_ids = unique_text_list(payload.get("task_ids") or [], "protocol_prune.task_ids")
+        active_task_ids = unique_text_list(payload.get("active_task_ids") or [], "protocol_prune.active_task_ids")
+        claim_ids = unique_text_list(payload.get("claim_ids") or [], "protocol_prune.claim_ids")
+        if not task_ids and not active_task_ids and not claim_ids:
+            raise IntentValidationError("protocol_prune requires task_ids, active_task_ids, or claim_ids")
+        return {**common, "task_ids": task_ids, "active_task_ids": active_task_ids, "claim_ids": claim_ids}
+
     decision_id = str(payload.get("decision_id") or payload.get("id") or "").strip()
     if not decision_id:
         raise IntentValidationError("decision_id is required")
@@ -246,6 +296,10 @@ def idempotency_key(actor_id: str, normalized: dict[str, Any]) -> str:
 
 
 def aggregate_id_for(normalized: dict[str, Any]) -> str:
+    if normalized.get("kind") == "project_narrative":
+        return "PROJECT_STATE"
+    if normalized.get("kind") == "protocol_prune":
+        return "protocol-prune"
     for key in ("task_id", "decision_id", "claim_id"):
         value = str(normalized.get(key) or "").strip()
         if value:
@@ -277,6 +331,20 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
     elif kind == "decision":
         payload["decision_id"] = normalized["decision_id"]
         payload["transitions"]["decision"] = {"decision_id": normalized["decision_id"]}
+    elif kind == "project_narrative":
+        transition = {
+            key: deepcopy(normalized[key])
+            for key in ("set", "append")
+            if normalized.get(key)
+        }
+        payload["transitions"]["project_narrative"] = transition
+    elif kind == "protocol_prune":
+        transition = {
+            key: deepcopy(normalized[key])
+            for key in ("task_ids", "active_task_ids", "claim_ids")
+            if normalized.get(key)
+        }
+        payload["transitions"]["protocol_prune"] = transition
     return payload
 
 
@@ -415,6 +483,17 @@ def required_scopes(normalized: dict[str, Any], state: dict[str, Any]) -> list[s
         return ["Area_comun/state/CLAIMS.json"]
     if kind == "decision":
         return ["Area_comun/state/PROJECT_STATE.json"]
+    if kind == "project_narrative":
+        return ["Area_comun/state/PROJECT_STATE.json"]
+    if kind == "protocol_prune":
+        scopes: list[str] = []
+        if normalized.get("task_ids"):
+            scopes.append("Area_comun/state/TASK_INDEX.json")
+        if normalized.get("active_task_ids"):
+            scopes.append("Area_comun/state/PROJECT_STATE.json")
+        if normalized.get("claim_ids"):
+            scopes.append("Area_comun/state/CLAIMS.json")
+        return scopes
     return []
 
 
@@ -473,6 +552,36 @@ def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any], state
     elif kind == "task_upsert":
         if not actor_has_any(registry, actor_id, {"orchestrator"}):
             raise IntentValidationError(f"actor {actor_id} lacks required capability: orchestrator")
+    elif kind == "project_narrative":
+        if not actor_has_any(registry, actor_id, {"orchestrator"}):
+            raise IntentValidationError(f"actor {actor_id} lacks required capability: orchestrator")
+    elif kind == "protocol_prune":
+        if not actor_has_any(registry, actor_id, {"orchestrator"}):
+            raise IntentValidationError(f"actor {actor_id} lacks required capability: orchestrator")
+        tasks = tasks_by_id(state)
+        for task_id in normalized.get("task_ids") or []:
+            task = tasks.get(task_id)
+            if task and str(task.get("status") or "").lower() != "done":
+                raise IntentValidationError(f"protocol_prune task is not done: {task_id}")
+        project_doc = state.get("project_state") if isinstance(state.get("project_state"), dict) else state.get("project") or {}
+        active_by_id = {
+            item.get("id"): item
+            for item in project_doc.get("active_tasks") or []
+            if isinstance(item, dict) and item.get("id")
+        }
+        for task_id in normalized.get("active_task_ids") or []:
+            task = active_by_id.get(task_id)
+            if task and str(task.get("status") or "").lower() != "done":
+                raise IntentValidationError(f"protocol_prune active task is not done: {task_id}")
+        claims_by_id = {
+            claim.get("claim_id"): claim
+            for claim in state.get("claims", {}).get("claims") or []
+            if isinstance(claim, dict) and claim.get("claim_id")
+        }
+        for claim_id in normalized.get("claim_ids") or []:
+            claim = claims_by_id.get(claim_id)
+            if claim and str(claim.get("status") or "").lower() != "released":
+                raise IntentValidationError(f"protocol_prune claim is not released: {claim_id}")
     elif kind == "claim":
         if not actor_has_any(registry, actor_id, {"implementer", "orchestrator", "reviewer"}):
             raise IntentValidationError(f"actor {actor_id} lacks required claim capability")

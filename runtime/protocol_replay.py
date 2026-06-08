@@ -400,6 +400,41 @@ def apply_decision_event(state: dict[str, Any], payload: dict[str, Any]) -> None
         decisions.append(decision_id)
 
 
+def apply_project_narrative_event(state: dict[str, Any], payload: dict[str, Any]) -> None:
+    project = state.setdefault("project_state", {})
+    set_values = payload.get("set") if isinstance(payload.get("set"), dict) else {}
+    append_values = payload.get("append") if isinstance(payload.get("append"), dict) else {}
+    for field, values in sorted(set_values.items()):
+        if isinstance(values, list):
+            project[field] = [str(item) for item in values]
+    for field, values in sorted(append_values.items()):
+        if not isinstance(values, list):
+            continue
+        current = project.setdefault(field, [])
+        if not isinstance(current, list):
+            current = []
+            project[field] = current
+        for item in values:
+            text = str(item)
+            if text not in current:
+                current.append(text)
+
+
+def apply_protocol_prune_event(state: dict[str, Any], payload: dict[str, Any]) -> None:
+    task_ids = {str(item) for item in payload.get("task_ids") or [] if str(item)}
+    active_task_ids = {str(item) for item in payload.get("active_task_ids") or [] if str(item)}
+    claim_ids = {str(item) for item in payload.get("claim_ids") or [] if str(item)}
+    if task_ids:
+        tasks = state.setdefault("task_index", {}).setdefault("tasks", [])
+        tasks[:] = [item for item in tasks if not (isinstance(item, dict) and str(item.get("id") or "") in task_ids)]
+    if active_task_ids:
+        active = state.setdefault("project_state", {}).setdefault("active_tasks", [])
+        active[:] = [item for item in active if not (isinstance(item, dict) and str(item.get("id") or "") in active_task_ids)]
+    if claim_ids:
+        claims = state.setdefault("claims", {}).setdefault("claims", [])
+        claims[:] = [item for item in claims if not (isinstance(item, dict) and str(item.get("claim_id") or "") in claim_ids)]
+
+
 def apply_intent_event(state: dict[str, Any], event: dict[str, Any], payload: dict[str, Any]) -> None:
     task = payload.get("task")
     if isinstance(task, dict):
@@ -444,6 +479,12 @@ def apply_intent_event(state: dict[str, Any], event: dict[str, Any], payload: di
         decision_transition = transitions.get("decision")
         if isinstance(decision_transition, dict):
             apply_decision_event(state, decision_transition)
+        narrative_transition = transitions.get("project_narrative")
+        if isinstance(narrative_transition, dict):
+            apply_project_narrative_event(state, narrative_transition)
+        prune_transition = transitions.get("protocol_prune")
+        if isinstance(prune_transition, dict):
+            apply_protocol_prune_event(state, prune_transition)
 
 
 def replay_protocol_state(

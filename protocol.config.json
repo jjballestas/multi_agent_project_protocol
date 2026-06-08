@@ -25,7 +25,7 @@
     "budget": 30000
   },
   "maintenance": {
-    "enabled": false,
+    "enabled": true,
     "cold_start_tokens_hard": 20000,
     "done_ratio_hard": 85,
     "released_ratio_hard": 90,
