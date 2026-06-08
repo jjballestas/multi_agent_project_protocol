@@ -70,6 +70,36 @@ def event_state_authoritative_enabled(config: dict[str, Any] | None) -> bool:
     return isinstance(event_state, dict) and event_state.get("authoritative") is True
 
 
+def event_state_config_error(config: dict[str, Any] | None) -> str | None:
+    config = config or {}
+    if config.get("adoption_tier") != "runtime":
+        return None
+    event_state = config.get("event_state")
+    if not isinstance(event_state, dict):
+        return None
+
+    enabled = event_state.get("enabled") is True
+    materialize = event_state.get("materialize") is True
+    enforce = event_state.get("enforce") is True
+    authoritative = event_state.get("authoritative") is True
+    if authoritative and not enforce:
+        return (
+            "event_state.authoritative=true requires event_state.enforce=true "
+            "for adoption_tier=runtime; set event_state.enforce=true or event_state.authoritative=false."
+        )
+    if enforce and not materialize:
+        return (
+            "event_state.enforce=true requires event_state.materialize=true "
+            "for adoption_tier=runtime; set event_state.materialize=true or event_state.enforce=false."
+        )
+    if materialize and not enabled:
+        return (
+            "event_state.materialize=true requires event_state.enabled=true "
+            "for adoption_tier=runtime; set event_state.enabled=true or event_state.materialize=false."
+        )
+    return None
+
+
 def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
     config = config or {}
     return event_state_enabled(config) and event_state_materialize_enabled(config) and config.get("adoption_tier") == "runtime"

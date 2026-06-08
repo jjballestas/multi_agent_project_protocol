@@ -19,6 +19,7 @@ try:
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
         current_protocol_snapshot,
+        event_state_config_error,
         has_protocol_genesis,
         materialize_to_disk,
         protocol_state_drift,
@@ -31,6 +32,7 @@ except ImportError:  # pragma: no cover - direct script execution
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
         current_protocol_snapshot,
+        event_state_config_error,
         has_protocol_genesis,
         materialize_to_disk,
         protocol_state_drift,
@@ -613,6 +615,15 @@ def ensure_actor_enabled(root: Path, actor_id: str) -> None:
         raise IntentValidationError(f"actor not registered/enabled: {actor_id}")
 
 
+def ensure_event_state_config_valid(root: Path) -> None:
+    config_path = root.resolve() / "protocol.config.json"
+    if not config_path.exists():
+        return
+    error = event_state_config_error(read_json(config_path))
+    if error:
+        raise IntentValidationError(f"invalid event_state config: {error}")
+
+
 def existing_idempotent_event(writer: EventWriter, key: str) -> dict[str, Any] | None:
     seq = writer.state().get("idempotency_keys", {}).get(key)
     if not seq:
@@ -701,6 +712,7 @@ def submit_intent(
     if not timestamp:
         raise IntentValidationError("timestamp is required")
 
+    ensure_event_state_config_valid(root)
     normalized = normalize_intent(intent)
     ensure_actor_enabled(root, actor_id)
     writer = EventWriter(root)
@@ -808,6 +820,7 @@ def submit_intents(
     if not intents:
         raise IntentValidationError("transaction requires at least one intent")
 
+    ensure_event_state_config_valid(root)
     normalized_intents = [normalize_intent(intent) for intent in intents]
     keys = transaction_event_keys(actor_id, normalized_intents)
     if len(set(keys)) != len(keys):

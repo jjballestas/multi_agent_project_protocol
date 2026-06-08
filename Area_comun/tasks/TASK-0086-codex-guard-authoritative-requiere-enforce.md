@@ -1,7 +1,7 @@
 ---
 id: TASK-0086
 owner: Codex
-status: ready
+status: done
 type: security
 priority: high
 created_at: 2026-06-08

@@ -25,6 +25,7 @@ try:
     from .protocol_replay import (
         ProtocolMaterializationError,
         ProtocolStateDriftError,
+        event_state_config_error,
         enforce_protocol_state_drift,
         materialize_from_event_log_if_enabled,
     )
@@ -52,6 +53,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from protocol_replay import (
         ProtocolMaterializationError,
         ProtocolStateDriftError,
+        event_state_config_error,
         enforce_protocol_state_drift,
         materialize_from_event_log_if_enabled,
     )
@@ -73,6 +75,12 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=4, ensure_ascii=False), encoding="utf-8")
+
+
+def assert_event_state_config_valid(root: Path) -> None:
+    error = event_state_config_error(read_protocol_config(root))
+    if error:
+        raise ApplyError(f"invalid event_state config: {error}")
 
 
 def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
@@ -406,6 +414,7 @@ def apply_mailbox_transitions(root: Path, transitions: list[dict[str, Any]]) -> 
 
 def apply_turn(report: dict[str, Any], root: Path) -> dict[str, Any]:
     root = root.resolve()
+    assert_event_state_config_valid(root)
     errors = validate_turn(report, root)
     if errors:
         raise ApplyError("; ".join(errors))
@@ -426,6 +435,7 @@ def block_task(root: Path, task_id: str) -> None:
 
 def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool = False) -> dict[str, Any]:
     root = root.resolve()
+    assert_event_state_config_valid(root)
     runtime_backup = snapshot_runtime_state(root)
     materialization: dict[str, Any] | None = None
     protocol_drift_gate: dict[str, Any] | None = None
@@ -433,6 +443,12 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
         try:
             assert_runtime_snapshot_if_active(root)
         except EventLogError as exc:
+            restore_runtime_state(root, runtime_backup)
+            block_task(root, str(report["task_id"]))
+            return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}
+        try:
+            protocol_drift_gate = enforce_protocol_state_drift(root)
+        except ProtocolStateDriftError as exc:
             restore_runtime_state(root, runtime_backup)
             block_task(root, str(report["task_id"]))
             return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}

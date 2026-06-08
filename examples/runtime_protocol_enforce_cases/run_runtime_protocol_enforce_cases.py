@@ -24,9 +24,10 @@ from run_runtime_protocol_materialize_cases import (  # noqa: E402
     turn_report,
     write_json,
 )
-from runtime.apply import apply_gate_and_commit  # noqa: E402
+from runtime.apply import ApplyError, apply_gate_and_commit  # noqa: E402
 from runtime.eventlog import read_jsonl_torn_safe  # noqa: E402
-from runtime.protocol_replay import protocol_state_drift, write_genesis  # noqa: E402
+from runtime.protocol_replay import event_state_config_error, protocol_state_drift, write_genesis  # noqa: E402
+from runtime.submit_intent import IntentError, submit_intent  # noqa: E402
 
 
 def validator(root: Path, *, powershell: bool = False, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -68,8 +69,74 @@ def event_types(root: Path) -> list[str]:
     return [event["type"] for event in read_jsonl_torn_safe(root / "runtime/state/events.jsonl")]
 
 
-def build_runtime_fixture(root: Path, *, enforce: bool, materialize: bool = False) -> None:
+def build_runtime_fixture(root: Path, *, enforce: bool, materialize: bool | None = None) -> None:
+    if materialize is None:
+        materialize = enforce
     build_fixture(root, event_enabled=True, materialize=materialize, enforce=enforce, tier="runtime")
+
+
+def task_status_intent() -> dict[str, Any]:
+    return {
+        "task_status": {
+            "task_id": "TASK-9200",
+            "from": "ready",
+            "to": "in_progress",
+            "idempotency_key": "fixture:task-status",
+        }
+    }
+
+
+def case_event_state_config_guard_rejects_false_authoritative() -> None:
+    with tempfile.TemporaryDirectory(prefix="protocol-enforce-config-red-") as temp:
+        root = Path(temp)
+        build_fixture(root, event_enabled=True, materialize=True, enforce=False, authoritative=True, tier="runtime")
+        config_error = event_state_config_error(read_json(root / "protocol.config.json"))
+        assert config_error is not None and "authoritative=true requires event_state.enforce=true" in config_error
+
+        py = validator(root, check=False)
+        assert py.returncode != 0, py.stdout
+        assert "Event state config invalid" in py.stdout, py.stdout
+        assert "event_state.authoritative=true requires event_state.enforce=true" in py.stdout, py.stdout
+        ps = validator(root, powershell=True, check=False)
+        if ps.args:
+            assert ps.returncode != 0, ps.stdout
+            assert "Event state config invalid" in ps.stdout, ps.stdout
+
+        try:
+            submit_intent(root, "Codex", task_status_intent(), timestamp="2026-06-08T00:00:00Z", commit="fixture")
+        except IntentError as exc:
+            assert "event_state.authoritative=true requires event_state.enforce=true" in str(exc), str(exc)
+        else:
+            raise AssertionError("submit_intent accepted an incoherent authoritative config")
+
+        try:
+            apply_gate_and_commit(turn_report(), root)
+        except ApplyError as exc:
+            assert "event_state.authoritative=true requires event_state.enforce=true" in str(exc), str(exc)
+        else:
+            raise AssertionError("apply accepted an incoherent authoritative config")
+
+
+def case_event_state_config_guard_allows_coherent_chains_and_coordination() -> None:
+    with tempfile.TemporaryDirectory(prefix="protocol-enforce-config-green-all-") as temp:
+        root = Path(temp)
+        build_fixture(root, event_enabled=True, materialize=True, enforce=True, authoritative=True, tier="runtime")
+        assert event_state_config_error(read_json(root / "protocol.config.json")) is None
+
+    with tempfile.TemporaryDirectory(prefix="protocol-enforce-config-green-enforce-") as temp:
+        root = Path(temp)
+        build_fixture(root, event_enabled=True, materialize=True, enforce=True, authoritative=False, tier="runtime")
+        assert event_state_config_error(read_json(root / "protocol.config.json")) is None
+
+    with tempfile.TemporaryDirectory(prefix="protocol-enforce-config-green-off-") as temp:
+        root = Path(temp)
+        build_fixture(root, event_enabled=False, materialize=False, enforce=False, authoritative=False, tier="runtime")
+        assert event_state_config_error(read_json(root / "protocol.config.json")) is None
+
+    with tempfile.TemporaryDirectory(prefix="protocol-enforce-config-green-coordination-") as temp:
+        root = Path(temp)
+        build_fixture(root, event_enabled=True, materialize=True, enforce=False, authoritative=True, tier="coordination")
+        assert event_state_config_error(read_json(root / "protocol.config.json")) is None
 
 
 def case_validator_enforce_drift_hard_fails_py_and_ps() -> None:
@@ -180,6 +247,8 @@ def case_b1_b2_regression_suites_still_pass() -> None:
 
 def main() -> int:
     cases = [
+        case_event_state_config_guard_rejects_false_authoritative,
+        case_event_state_config_guard_allows_coherent_chains_and_coordination,
         case_validator_enforce_drift_hard_fails_py_and_ps,
         case_validator_enforce_coherent_passes,
         case_enforce_false_or_no_runtime_state_is_warning_only,

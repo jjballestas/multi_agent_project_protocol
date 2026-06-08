@@ -77,46 +77,6 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "runtime/team_bridge.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "examples/team_bridge_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md"
-            ],
-            "depends_on": [],
-            "file": "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
-            "id": "TASK-0083",
-            "linked_decisions": [
-                "DECISION-0025",
-                "DECISION-0022",
-                "DECISION-0018",
-                "DECISION-0017"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "relates_to": [
-                "TASK-0038"
-            ],
-            "relevant_files": [
-                "runtime/team_bridge.py",
-                "protocol.config.json",
-                "protocol.config.template.json",
-                "scripts/scan_domain_neutrality.py",
-                "examples/team_bridge_cases/"
-            ],
-            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden team_bridge_cases 7/7, validador valid (drift benigno esperado), neutralidad exit 0, encoding OK. team_bridge.py Capas A+B (gate enforcement exit 2 en TaskCompleted/TeammateIdle + audit append-only ASCII fail-soft), off-by-default (team_bridge_activation_error bloquea hasta enabled+registro), alta en scan_globs, golden en CI. SIN Capa C / SIN submit_intent / SIN activar el bridge; config enabled:false,layers:[] en instancia y template. Cierra DECISION-0025 (alcance A+B). Capa C diferida a precondiciones DECISION-0022.",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
-            "status": "done",
-            "title": "Bridge Agent Teams -> protocolo, Capas A+B (DECISION-0025/SPEC-0065): runtime/team_bridge.py (gate enforcement exit 2 + audit append-only a team_audit.jsonl) + bloque runtime.team_bridge off-by-default en template e instancia + alta en scan_globs + golden team_bridge_cases. Capa C (submit_intent) DIFERIDA a precondiciones DECISION-0022. Off => byte-equivalente.",
-            "type": "integration",
-            "updated_at": "2026-06-08"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
                 "runtime/state/events.jsonl",
                 "personal/Codex/STARTUP_PROMPT.md",
                 "Area_comun/handoffs/HANDOFF-TASK-0084-codex-to-claude-1.md"
@@ -226,10 +186,10 @@
                 "runtime/apply.py",
                 "examples/"
             ],
-            "review": "READY (encolada por Claude 2026-06-08 via submit_intent bajo enforce+authoritative). SPEC-0067. Cierra el false-secure del flip authoritative. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Verificado: event_state_config_error RECHAZA in vivo authoritative-sin-enforce y enforce-sin-materialize (mensajes accionables), acepta cadenas coherentes (all true / all false / enabled+materialize+enforce) y coordination-tier no-aplica; config vivo (todos true) PASA. Cableado que MUERDE: validador py+ps hard-fail, submit_intent + apply raise antes de aplicar (golden cubre los 3). BONUS: Codex corrigio una anomalia real -- apply_gate_and_commit ahora chequea drift ANTES de materializar (materialize=true ya no puede tapar divergencia previa). Goldens verdes corridos por mi: enforce 9, materialize 6, intent_flow 11, intent_tx 6, replay 6, genesis_ref 9, apply 4, prune, cross_fs 2, cutover 4; validador valid, neutralidad 0, encoding limpio. Template intacto. Mata el false-secure del flip authoritative.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0067-guard-authoritative-requiere-enforce.md",
-            "status": "ready",
+            "status": "done",
             "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto.",
             "type": "security",
             "updated_at": "2026-06-08"

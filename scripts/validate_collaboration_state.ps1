@@ -684,6 +684,41 @@ function Test-EventStateEnabled {
     return [bool]$eventState.enabled
 }
 
+function Test-ConfigBool {
+    param([object]$Object, [string]$Name)
+    if (-not $Object) { return $false }
+    if (-not ($Object.PSObject.Properties.Name -contains $Name)) { return $false }
+    return [bool]$Object.$Name
+}
+
+function Get-EventStateConfigError {
+    param([object]$Config)
+    if (-not $Config) { return $null }
+    $tier = "coordination"
+    if (($Config.PSObject.Properties.Name -contains "adoption_tier") -and $null -ne $Config.adoption_tier) {
+        $tier = [string]$Config.adoption_tier
+    }
+    if ($tier -ne "runtime") { return $null }
+    if (-not ($Config.PSObject.Properties.Name -contains "event_state")) { return $null }
+    $eventState = $Config.event_state
+    if (-not $eventState) { return $null }
+
+    $enabled = Test-ConfigBool -Object $eventState -Name "enabled"
+    $materialize = Test-ConfigBool -Object $eventState -Name "materialize"
+    $enforce = Test-ConfigBool -Object $eventState -Name "enforce"
+    $authoritative = Test-ConfigBool -Object $eventState -Name "authoritative"
+    if ($authoritative -and -not $enforce) {
+        return "event_state.authoritative=true requires event_state.enforce=true for adoption_tier=runtime; set event_state.enforce=true or event_state.authoritative=false."
+    }
+    if ($enforce -and -not $materialize) {
+        return "event_state.enforce=true requires event_state.materialize=true for adoption_tier=runtime; set event_state.materialize=true or event_state.enforce=false."
+    }
+    if ($materialize -and -not $enabled) {
+        return "event_state.materialize=true requires event_state.enabled=true for adoption_tier=runtime; set event_state.enabled=true or event_state.materialize=false."
+    }
+    return $null
+}
+
 function Validate-ProtocolStateDrift {
     param(
         [string]$Root,
@@ -788,6 +823,10 @@ if ($state -and $config -and $config.state_invariants) {
 }
 
 Validate-AdoptionTier -Root $resolvedRoot -Config $config
+$eventStateConfigError = Get-EventStateConfigError -Config $config
+if ($eventStateConfigError) {
+    Fail "Event state config invalid: $eventStateConfigError"
+}
 Validate-AdoptedProfiles -Root $resolvedRoot -State $state -Config $config
 
 if ($index -and $index.tasks) {

@@ -285,7 +285,6 @@ def apply_and_return_state(*, event_enabled: bool, materialize: bool, tier: str)
 
 def case_runtime_gating_off_is_byte_equivalent() -> None:
     baseline = apply_and_return_state(event_enabled=False, materialize=False, tier="runtime")
-    assert apply_and_return_state(event_enabled=False, materialize=True, tier="runtime") == baseline
     assert apply_and_return_state(event_enabled=True, materialize=False, tier="runtime") == baseline
     assert apply_and_return_state(event_enabled=True, materialize=True, tier="coordination") == baseline
 

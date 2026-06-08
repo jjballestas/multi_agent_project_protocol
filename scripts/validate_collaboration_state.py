@@ -22,6 +22,7 @@ from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_sta
 from runtime.protocol_replay import (
     ProtocolMaterializationError,
     drift_paths,
+    event_state_config_error,
     event_state_enabled,
     protocol_state_drift,
     protocol_state_enforcement_enabled,
@@ -460,6 +461,12 @@ def validate_adoption_tier(
             validation.fail(f"Runtime adoption tier missing required path: {relative}")
 
 
+def validate_event_state_config(config: dict[str, Any] | None, validation: Validation) -> None:
+    error = event_state_config_error(config)
+    if error:
+        validation.fail(f"Event state config invalid: {error}")
+
+
 def validate_adopted_profiles(
     root: Path,
     state: dict[str, Any] | None,
@@ -885,6 +892,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
 
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
     validate_adoption_tier(root, config, validation)
+    validate_event_state_config(config, validation)
     validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
     validate_sdd(root, index if isinstance(index, dict) else None, config, validation)

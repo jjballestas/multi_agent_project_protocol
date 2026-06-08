@@ -1,12 +1,6 @@
 {
     "active_tasks": [
         {
-            "id": "TASK-0083",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Bridge Agent Teams -> protocolo Capas A+B (DECISION-0025/SPEC-0065) DONE - ACEPTADA por Claude (ratif. adversarial): runtime/team_bridge.py gate-enforcement+audit append-only, off-by-default, golden 7/7, alta scan_globs. Sin Capa C (diferida a precondiciones DECISION-0022). Off => byte-equivalente."
-        },
-        {
             "id": "TASK-0084",
             "owner": "Codex",
             "status": "done",
@@ -21,7 +15,7 @@
         {
             "id": "TASK-0086",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto."
         },
         {
@@ -68,9 +62,7 @@
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
     "next_actions": [
-        "[HISTORICO PODADO] 116 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0081 ENTREGADA a in_review por Codex (2026-06-08): F7.5 docs listas; RELEASE_ENGINEERING.md documenta SBOM->manifiesto->provenance->firma, comandos generar/verificar, interpretacion verify_release/generate_provenance, backend real de firma fuera del repo sin secretos (DECISION-0023) y enlaces README/PACKAGE_VERSIONING. Pendiente ratificacion de Claude; si acepta, cierra Fase 7.",
-        ">>> FASE 7 COMPLETA (2026-06-08): F7.1 SBOM + F7.2 manifiesto+verify + F7.3 provenance + F7.4 firma + F7.5 docs (RELEASE_ENGINEERING.md) -- todas ratificadas adversarialmente por Claude. TASK-0081 (F7.5 docs) DONE: corri neutralidad/encoding/validador verdes; doc exacta vs CLI real, sin secretos (solo placeholders), nota DECISION-0023. ENCOLADA SA.5 = TASK-0082 (docs del sobre de autonomia supervisada SA.1-SA.3; non-gated, ultima rebanada documental). ESTADO: backlog non-gated casi agotado. PENDIENTES SUPERVISADOS DEL OPERADOR: (a) ACTIVACION escritor-unico (re-genesis vivo + flip enforce+authoritative + rollback; autorizada 2026-06-08, la ejecuta el arquitecto contigo); (b) SA.4 (autonomia con invoker real multi-turno; GO + rollback); (c) DECISION-0025 (agent-teams-bridge, tu draft). GO por mailbox; de a una.",
+        "[HISTORICO PODADO] 118 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         "TASK-0082 RECLAMADA por Codex (2026-06-08): documentando SA.5, sobre de autonomia supervisada SA.1-SA.3 (registro/caps/paradas/runreport) + nota SA.4 gateado; sin encender autonomia ni tocar invoker real.",
         "TASK-0082 ENTREGADA a in_review por Codex (2026-06-08): SUPERVISED_AUTONOMY.md + enlaces N_AGENT_RUNTIME/README_INSTANCIACION; documenta SA.1-SA.3 y deja SA.4 gateado con GO operador + rollback. Sin cambios funcionales ni secretos; claim liberado.",
         ">>> TASK-0082 DONE (SA.5 docs SUPERVISED_AUTONOMY.md, ratif. adversarial Claude 2026-06-08) -> autonomia supervisada documental SA.1-SA.5 COMPLETA. DECISION-0025 PROMOVIDA (ACCEPTED por el operador, alcance Capas A+B: gate enforcement + audit append-only; Capa C mapeo autoritativo DIFERIDA a precondiciones DECISION-0022). Integracion Agent Teams (Anthropic) = motor en vivo + este protocolo = ledger durable encima via hooks; off-by-default/opt-in/neutral/reversible (MINOR). ENCOLADA TASK-0083 (ready, Codex, SPEC-0065): runtime/team_bridge.py Capas A+B + bloque off + alta scan_globs + golden team_bridge_cases; off => byte-equivalente; NO Capa C, NO encender. GO en mailbox. De a una. PENDIENTES SUPERVISADOS DEL OPERADOR: activacion escritor-unico (re-genesis + flip enforce+authoritative + rollback), SA.4 (invoker real multi-turno; GO + rollback), activacion bridge A+B en instancia viva (paso separado registrado).",
@@ -78,7 +70,8 @@
         "TASK-0083 ENTREGADA a in_review por Codex (2026-06-08): team_bridge.py Capas A+B + config off + scan_globs + CI/golden 7/7; audit append-only, gate exit2, [TASK-XXXX] solo audita. NO Capa C, NO activar bridge, NO tocar .claude/settings.json.",
         ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
         "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
-        "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos."
+        "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",
+        "TASK-0086 DONE (ratif. adversarial): guard event_state_config_error (authoritative=>enforce=>materialize=>enabled, tier runtime) cableado en validador py/ps + submit_intent + apply -> RECHAZA authoritative-sin-enforce; mata el false-secure. + fix apply_gate (drift antes de materializar). PRE-REQ SA.4 #1 cumplido. #2 TASK-0087 registrada (proposed, bloqueante-adopcion). #3 ventana authoritative: evaluar estabilidad."
     ],
     "open_questions": [],
     "phase": {

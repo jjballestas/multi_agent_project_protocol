@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0086
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0086 (SPEC-0067): guard que RECHAZA authoritative=true sin enforce=true (mata el false-secure), via maquinaria existente + golden. enforce+authoritative ON: todo por submit_intent. Template intacto.
