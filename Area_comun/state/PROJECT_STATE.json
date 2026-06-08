@@ -27,8 +27,14 @@
         {
             "id": "TASK-0091",
             "owner": "Codex",
-            "status": "ready",
+            "status": "blocked",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027)."
+        },
+        {
+            "id": "TASK-0092",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto."
         }
     ],
     "agents": {

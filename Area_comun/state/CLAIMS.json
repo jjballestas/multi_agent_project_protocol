@@ -77,6 +77,38 @@
             "updated_at": "2026-06-09"
         },
         {
+            "claim_id": "CLAIM-20260609-enqueue-task0092-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Claim efimero: enqueue TASK-0092 (codex invoker) via submit_intent. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0092",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0092",
+                "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md"
+            ],
+            "started_at": "2026-06-09",
+            "status": "released",
+            "task_id": "TASK-0092",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "claim_id": "CLAIM-20260609-hold-task0091-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Claim efimero: hold de TASK-0091 (objetivo piloto) a blocked via task_upsert. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+            ],
+            "started_at": "2026-06-09",
+            "status": "released",
+            "task_id": "TASK-0091",
+            "updated_at": "2026-06-09"
+        },
+        {
             "claim_id": "CLAIM-20260609-task0090-codex",
             "expires_at": "2026-06-10",
             "notes": "TASK-0090 wrapper backend resolution via shutil.which, off-pilot; NO re-armar SA.4 ni correr piloto.",

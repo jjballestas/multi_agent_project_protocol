@@ -1,7 +1,7 @@
 ---
 id: TASK-0091
 owner: Codex
-status: ready
+status: blocked
 type: documentation
 priority: normal
 created_at: 2026-06-09

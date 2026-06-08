@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "065de6d467db780dce5c41775285bd718f6f0ab3f8ab866bb72dfa7147f7d6b1",
+  "canonical_hash": "0f54d3daf01164fd0bb5d10923ba7de9b37d6c1f30dce6b41a4f47c481b1550e",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -44,6 +44,8 @@
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-enqueue-task0090-claude": 1,
       "CLAIM-20260609-enqueue-task0091-claude": 1,
+      "CLAIM-20260609-enqueue-task0092-claude": 1,
+      "CLAIM-20260609-hold-task0091-claude": 1,
       "CLAIM-20260609-task0090-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
@@ -60,11 +62,12 @@
       "TASK-0088": 10,
       "TASK-0089": 8,
       "TASK-0090": 8,
-      "TASK-0091": 2,
+      "TASK-0091": 4,
+      "TASK-0092": 2,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 144,
+    "events_applied": 150,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -127,6 +130,12 @@
       "enqueue-task0091:claim-acquire": 142,
       "enqueue-task0091:claim-release": 144,
       "enqueue-task0091:task-upsert": 143,
+      "enqueue-task0092:claim-acquire": 145,
+      "enqueue-task0092:claim-release": 147,
+      "enqueue-task0092:task-upsert": 146,
+      "hold-task0091b:claim-acquire": 148,
+      "hold-task0091b:claim-release": 150,
+      "hold-task0091b:task-upsert": 149,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:auto-claim:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-acquire": 24,
@@ -215,5 +224,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 144
+  "up_to_seq": 150
 }

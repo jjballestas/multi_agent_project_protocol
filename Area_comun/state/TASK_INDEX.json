@@ -223,7 +223,9 @@
             "updated_at": "2026-06-09"
         },
         {
-            "blocked_by_questions": [],
+            "blocked_by_questions": [
+                "RESERVADA como objetivo del piloto SA.4: NO auto-reclamar en el lazo normal. Volver a 'ready' SOLO al disparar el piloto (tras TASK-0092 + smoke real de turno completo + go del operador)."
+            ],
             "deliverables": [
                 "examples/neutrality_scan_cases/README.md"
             ],
@@ -244,12 +246,55 @@
             "relevant_files": [
                 "examples/neutrality_scan_cases/README.md"
             ],
-            "review": "READY (encolada por Claude 2026-06-09 via submit_intent). TAREA-OBJETIVO del PILOTO SA.4 (invoker real, caps 2/1/180000, checkpoint tras turno 1). Bajo riesgo, solo prosa, reversible.",
+            "review": "BLOQUEADA por Claude (2026-06-09 via task_upsert): reservada como tarea-objetivo del piloto SA.4. Se usara codex (implementer) tras TASK-0092. Volver a ready al re-disparar.",
             "sdd_required": false,
             "spec_id": "none",
-            "status": "ready",
+            "status": "blocked",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
             "type": "documentation",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/llm_turn_wrapper.py",
+                "protocol.config.json",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0092-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0090"
+            ],
+            "file": "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md",
+            "id": "TASK-0092",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0021",
+                "DECISION-0024"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0088",
+                "TASK-0089",
+                "TASK-0091",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/llm_turn_wrapper.py",
+                "runtime/turn_schema.json",
+                "protocol.config.json",
+                "examples/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-09 via submit_intent). Integra codex invoker implementer + turno completo (tras el 1er piloto rechazado por capability). OFF-PILOT. GO en mailbox.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0069-codex-implementer-invoker-turno-completo.md",
+            "status": "ready",
+            "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto.",
+            "type": "implementation",
             "updated_at": "2026-06-09"
         }
     ],
