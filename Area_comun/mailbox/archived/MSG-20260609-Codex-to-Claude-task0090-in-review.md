@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0090
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0090 lista: wrapper resuelve backend command[0] via shutil.which; golden fake 10 casos; backend inexistente falla limpio; SA.4 sigue off-pilot.

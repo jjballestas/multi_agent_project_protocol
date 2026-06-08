@@ -214,10 +214,10 @@
                 "runtime/llm_turn_wrapper.py",
                 "examples/llm_turn_wrapper_cases/"
             ],
-            "review": "READY (encolada por Claude 2026-06-09 via submit_intent). Fix puntual del wrapper de TASK-0089 (smoke real lo caracterizo). OFF-PILOT. GO en mailbox.",
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-09) bajo enforce+authoritative. resolve_backend_command resuelve command[0] via shutil.which (usa ruta resuelta o deja command tal cual). Verificado por mi: bare 'claude -p' AHORA RESUELVE y corre (paso de WinError 2 a ejecutar el CLI); comando inexistente -> fallo limpio (WinError 2 capturado). Golden llm_turn_wrapper_cases 10/10 (sube de 8: resoluble-via-PATHEXT OK + inexistente fail-limpio). RE-SMOKE END-TO-END limpio: wrapper con backend BARE 'claude -p' (forma del preset) + prompt no-op -> turn-report schema-valido JSON limpio exit0 (real claude). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false). Gates verdes. Template/preset/flags intactos. El path del piloto (orquestador->preset->wrapper->claude) queda PROBADO.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
-            "status": "in_review",
+            "status": "done",
             "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto.",
             "type": "implementation",
             "updated_at": "2026-06-09"
