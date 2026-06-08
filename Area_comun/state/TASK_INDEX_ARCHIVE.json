@@ -2625,6 +2625,44 @@
             "sdd_required": true,
             "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden cutover_loop 4/4 + validador valid (drift de sombra esperado) + neutralidad limpia. Lei ledger_ops.py: orden de envelopes CORRECTO -- auto-claim = claim acquire + task_status ready->in_progress (claim primero, gana autoridad de scope); handoff-release = task_status in_progress->in_review + task_upsert + claim release AL FINAL (el claim sigue activo durante las escrituras que lo necesitan, se libera ultimo). Delega en submit_intents (transaccional); el helper no edita hot state por su cuenta. SIN flip ni re-genesis del vivo. Cierra el LADO CODEX del cutover; con el mandato (lado Claude, commit 1e65b91) ambos lados del cutover estan en codigo. Flip por arquitecto. CIERRA TASK-0077.",
             "updated_at": "2026-06-08"
+        },
+        {
+            "id": "TASK-0078",
+            "owner": "Codex",
+            "status": "done",
+            "type": "implementation",
+            "priority": "normal",
+            "phase": "P2",
+            "title": "Autonomia supervisada SA.1 (SPEC-0064): sobre de supervision en SHADOW (sin agentes reales) - C1 registro runtime.supervised_autonomy{enabled:false,...,caps} + flag --allow-supervised-autonomy + supervised_autonomy_activation_error; C2 caps.max_turns (para con outcome=max_turns_reached, ejercitado con RecordedInvoker); C6 reporte de corrida (*.runreport.md). Golden: para por max_turns, rechazo sin registro, off byte-equivalente. NO toca el invoker real (cerrojo --once intacto sin registro). Primera de SA.1..SA.5 (DECISION-0024 aprobada).",
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "file": "Area_comun/tasks/TASK-0078-codex-autonomia-SA1-sobre-shadow.md",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "depends_on": [],
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/supervised_autonomy_cases/",
+                ".github/workflows/validate.yml",
+                "runtime/supervised_autonomy.py"
+            ],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "examples/supervised_autonomy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0078-codex-to-claude-1.md",
+                "runtime/supervised_autonomy.py"
+            ],
+            "blocked_by_questions": [],
+            "sdd_required": true,
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden supervised_autonomy 4/4 (max_turns, rechazo sin registro, off-sin-flag, cerrojo real intacto) + regresiones runtime_loop 8/8 + real_adapter 4/4 (invoker real --once intacto) + validador valid + neutralidad limpia. Lei supervised_autonomy.py: supervised_autonomy_activation_error correcto (off salvo enabled:true + activation_decision/approved_by/approved_at + caps.max_turns>=1; mismo patron que real_invoker_activation_error); runreport es markdown ASCII puro sin efectos en estado; NO toca el invoker real. Off-by-default => byte-equivalente. SIN encender autonomia. Flip/activacion por arquitecto. CIERRA SA.1.",
+            "updated_at": "2026-06-08"
         }
     ]
 }

@@ -4,7 +4,7 @@ type: ACK
 task_id: TASK-0080
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 one_line_summary: TASK-0080 (autonomia supervisada SA.3 checkpoint humano) ACEPTADA y cerrada como done (ratif. adversarial).
 ---

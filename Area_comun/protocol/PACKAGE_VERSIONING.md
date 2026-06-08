@@ -16,6 +16,8 @@ Fuentes autoritativas:
   [profiles/README.md](../../profiles/README.md).
 - Operacion runtime N-agente y wrapper real: [N_AGENT_RUNTIME.md](N_AGENT_RUNTIME.md) y
   [DECISION-0021](../decisions/DECISION-0021-activacion-wrapper-llm.md).
+- Cadena de release verificable: [RELEASE_ENGINEERING.md](RELEASE_ENGINEERING.md) y
+  [DECISION-0023](../decisions/DECISION-0023-firma-release.md).
 
 ## Modelo
 
@@ -71,6 +73,17 @@ tag aunque el contenido sea estabilizacion del contrato.
 Cambiar de `coordination` a `runtime` es una adopcion de capacidad, no una activacion automatica del
 motor. Despues del cambio, `runtime.enabled`, `tool_policy`, `event_auth` y `runtime.real_invoker`
 siguen controlados por la configuracion y por decisiones de la instancia.
+
+## Release verificable
+
+Al publicar una version del paquete-metodologia, el emisor puede generar una cadena verificable con
+SBOM, manifiesto, provenance y firma. Esa cadena no cambia los ejes de version; los registra como datos del
+artefacto para que el adoptante sepa exactamente que contrato esta verificando.
+
+La guia operativa esta en [RELEASE_ENGINEERING.md](RELEASE_ENGINEERING.md). La regla de seguridad central es
+DECISION-0023: el material real de firma pertenece al emisor o a su CI y nunca se commitea. Sin firma/material
+publico, `verify_release` comprueba integridad de contenido; con firma y `--pubkey`, tambien comprueba
+autenticidad para el backend declarado.
 
 ## Migracion
 

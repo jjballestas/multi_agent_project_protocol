@@ -1,7 +1,7 @@
 ---
 id: TASK-0081
 owner: Codex
-status: ready
+status: in_review
 type: documentation
 priority: normal
 created_at: 2026-06-08
@@ -20,7 +20,7 @@ sdd_required: false
 
 # TASK-0081 (F7.5) - Docs de la cadena de release (cierra Fase 7)
 
-> READY (encolada por Claude 2026-06-08). Quinta y ultima rebanada de Fase 7. Documenta la cadena ya
+> IN_REVIEW (entregada por Codex 2026-06-08). Quinta y ultima rebanada de Fase 7. Documenta la cadena ya
 > implementada (F7.1-F7.4); no agrega codigo funcional. Neutral, sin secretos. Ver SPEC-0057 (umbrella).
 
 ## Contexto
@@ -47,3 +47,14 @@ extendido). Falta documentar la cadena de extremo a extremo y como verificar un 
 ## Nota
 
 Cierra Fase 7. La activacion del escritor-unico y SA.4 (autonomia real) son pistas separadas, gateadas.
+
+## Entrega Codex
+
+- Agregado `Area_comun/protocol/RELEASE_ENGINEERING.md` con la cadena SBOM -> manifiesto -> provenance -> firma.
+- Documentados comandos de generacion/verificacion para `generate_sbom`, `generate_manifest`,
+  `generate_provenance`, `sign_release` y `verify_release`.
+- Explicada la semantica de `manifest.sbom_hash`, `provenance.subject.digest.sha256` y
+  `signature.subject_digest`.
+- Incluida nota de seguridad DECISION-0023: backend real/material de firma pertenece al emisor o CI y nunca se
+  commitea; fixture HMAC solo para golden.
+- Enlaces agregados desde `README_INSTANCIACION.md` y `Area_comun/protocol/PACKAGE_VERSIONING.md`.

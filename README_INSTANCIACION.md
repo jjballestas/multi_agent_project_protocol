@@ -104,6 +104,9 @@ Para reglas de versionado y migracion (`protocol_version`, `runtime_version`, `s
 `profile_version`, compatibilidad por tier y paso de `coordination` a `runtime`), ver
 [`Area_comun/protocol/PACKAGE_VERSIONING.md`](Area_comun/protocol/PACKAGE_VERSIONING.md).
 
+Para producir y verificar un release endurecido con SBOM, manifiesto, provenance y firma, ver
+[`Area_comun/protocol/RELEASE_ENGINEERING.md`](Area_comun/protocol/RELEASE_ENGINEERING.md).
+
 ### Operar agentes reales
 
 El wrapper de CLI real existe solo para instancias runtime y sigue apagado por defecto. Una instancia
@@ -255,6 +258,9 @@ una spec resoluble y una tarea `implementation` conforme a SDD.
 8. Declara `protocol_version` (placeholder `{{PROTOCOL_VERSION}}`) con la version del protocolo
    que sigue la instancia (p.ej. `0.1.0`); ver `CHANGELOG.md` y
    `Area_comun/decisions/DECISION-0001-versionado.md`.
+9. Si vas a publicar un paquete verificable, sigue
+   `Area_comun/protocol/RELEASE_ENGINEERING.md`: genera manifiesto/provenance, verifica integridad y firma con
+   material del emisor fuera del repo.
 
 ## 5. Archivos a completar primero
 

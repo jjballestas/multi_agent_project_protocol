@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0081
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0081 (SPEC-0057): F7.5 docs de la cadena de release (SBOM->manifiesto->provenance->firma) + guia verificar + backend real sin secretos. Cierra Fase 7.
