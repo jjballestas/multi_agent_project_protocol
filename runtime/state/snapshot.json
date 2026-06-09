@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4e581e88f26e9d80ceb7e1e4b29a139dbb214cb67bc74f7145e83fc773975271",
+  "canonical_hash": "218083e789c5321b7c8dd4fca20a8a5a241c4e301da058fae1e7d999857a200c",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -41,6 +41,7 @@
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "CLAIM-20260608-task0089-codex": 1,
       "CLAIM-20260608-task0089-mailbox-hygiene-codex": 1,
+      "CLAIM-20260609-anomalia-task0092-codex": 1,
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-close-task0092-claude": 1,
       "CLAIM-20260609-enqueue-task0090-claude": 1,
@@ -64,11 +65,11 @@
       "TASK-0089": 8,
       "TASK-0090": 8,
       "TASK-0091": 4,
-      "TASK-0092": 4,
+      "TASK-0092": 5,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 154,
+    "events_applied": 156,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -107,6 +108,8 @@
       "close-task0092:claim-release": 154,
       "close-task0092:project-narrative": 153,
       "close-task0092:task-upsert": 152,
+      "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
+      "codex:anomaly-task0092-unclaimed-edits:claim-release": 156,
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
       "decision0026:decision": 19,
@@ -229,5 +232,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 154
+  "up_to_seq": 156
 }

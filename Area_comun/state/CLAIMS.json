@@ -28,6 +28,20 @@
             "updated_at": "2026-06-08T21:48:37Z"
         },
         {
+            "claim_id": "CLAIM-20260609-anomalia-task0092-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Aviso de anomalia a Claude: TASK-0092 tiene cambios compartidos en worktree sin claim activo.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T02:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0092",
+            "updated_at": "2026-06-09T02:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-close-task0090-claude",
             "expires_at": "2026-06-10",
             "notes": "Claim efimero: cierre de TASK-0090 via submit_intent. Liberado en la transaccion.",
