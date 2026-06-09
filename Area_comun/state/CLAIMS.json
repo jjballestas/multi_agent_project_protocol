@@ -28,6 +28,24 @@
             "updated_at": "2026-06-08T21:48:37Z"
         },
         {
+            "claim_id": "CLAIM-20260609-anomalia-hardening-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Registra TASK-0094 (formalizar hardening) + SPEC-0071 + nota de anomalia DECISION-0018. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T20:41:13Z",
+            "status": "released",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T20:41:13Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-anomalia-task0092-amend-codex",
             "expires_at": "2026-06-10",
             "notes": "Enmienda del aviso de anomalia TASK-0092 tras confirmar que los diffs compartidos ya no estan presentes.",
@@ -185,6 +203,22 @@
             "updated_at": "2026-06-09"
         },
         {
+            "claim_id": "CLAIM-20260609-hardening-untracked-response-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Respond to Claude anomaly about untracked tempfile ACL hardening and AGENTS.md rule posture.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T04:30:00Z",
+            "status": "active",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T04:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-hold-task0091-claude",
             "expires_at": "2026-06-10",
             "notes": "Claim efimero: hold de TASK-0091 (objetivo piloto) a blocked via task_upsert. Liberado en la transaccion.",
@@ -199,6 +233,21 @@
             "status": "released",
             "task_id": "TASK-0091",
             "updated_at": "2026-06-09"
+        },
+        {
+            "claim_id": "CLAIM-20260609-mailbox-hygiene-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Higiene de mailbox: responde request tempfile-acl + archiva hilos resueltos (sandbox/GO/changes-requested). Liberado al cerrar.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-09T03:18:41Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-MAILBOX-20260609",
+            "updated_at": "2026-06-09T03:18:41Z"
         },
         {
             "claim_id": "CLAIM-20260609-ready-task0091-claude",
@@ -327,6 +376,99 @@
             "status": "released",
             "task_id": "TASK-0093",
             "updated_at": "2026-06-09T02:58:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0093-fix-rejection-codex",
+            "expires_at": "2026-06-10",
+            "notes": "TASK-0093 changes_requested fix: release orchestrator-acquired claim on pre-apply rejection/blocked paths; no SA.4 re-arm or pilot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                "runtime/orchestrator.py",
+                "runtime/apply.py",
+                "examples/runtime_loop_cases/",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T03:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T03:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-temp-acl-rule-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Add project rule for Windows sandbox temp ACL fallout: no work routes with ACL 0o700 under %TEMP%.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "AGENTS.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T04:15:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09T04:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-tempfile-acl-coord-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Coordination request to Claude about Windows sandbox unelevated tempfile ACL failures.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T03:35:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09T03:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-tempfile-acl-hardening-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Maintenance: repair Windows unelevated sandbox ACL fallout from protocol state materialization and harden materialize_to_disk staging to inherit repo ACLs.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "runtime/protocol_replay.py",
+                "examples/runtime_protocol_materialize_cases/",
+                "examples/materialize_cross_fs_cases/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T03:50:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09T03:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-tempfile-runtime-backup-hardening-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Maintenance: replace runtime backup tempdirs that use OS TEMP with repo-local inherited-ACL tempdirs for Windows unelevated sandbox compatibility.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/temp_paths.py",
+                "runtime/protocol_replay.py",
+                "runtime/submit_intent.py",
+                "runtime/apply.py",
+                "examples/runtime_protocol_materialize_cases/",
+                "examples/materialize_cross_fs_cases/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T04:00:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09T04:00:00Z"
         }
     ],
     "schema_version": "1.0",
