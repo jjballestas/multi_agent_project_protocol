@@ -1,0 +1,1386 @@
+{
+    "schema_version": "protocol_state_snapshot.v1",
+    "snapshot": {
+        "canonical_hash": "3a63ede134f3b9beead276812bb2a87eb1a3538921762008a93bdfc2035c28e3",
+        "state": {
+            "claims": {
+                "claims": [
+                    {
+                        "claim_id": "CLAIM-20260608-224225-prune-claude",
+                        "expires_at": "2026-06-08",
+                        "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-08T22:42:25Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-PRUNE",
+                        "updated_at": "2026-06-08T22:42:25Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260608-task0089-mailbox-hygiene-codex",
+                        "expires_at": "2026-06-09",
+                        "notes": "Fix archived mailbox frontmatter status for TASK-0089 GO after handoff archival.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0089-GO-llm-wrapper.md"
+                        ],
+                        "started_at": "2026-06-08T21:48:37Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260608",
+                        "updated_at": "2026-06-08T21:48:37Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-accept-0093-0094-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "FYI accept de TASK-0093+0094 + higiene de hilos resueltos. Liberado al cerrar.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-09T21:28:50Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T21:28:50Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-anomalia-hardening-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Registra TASK-0094 (formalizar hardening) + SPEC-0071 + nota de anomalia DECISION-0018. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                            "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                            "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T20:41:13Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T20:41:13Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-anomalia-task0092-amend-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Enmienda del aviso de anomalia TASK-0092 tras confirmar que los diffs compartidos ya no estan presentes.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T02:10:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0092",
+                        "updated_at": "2026-06-09T02:10:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-anomalia-task0092-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Aviso de anomalia a Claude: TASK-0092 tiene cambios compartidos en worktree sin claim activo.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T02:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0092",
+                        "updated_at": "2026-06-09T02:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-close-0093-0094-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Cierre reviewer de TASK-0093 (gap-8 v2) y TASK-0094 (hardening tempfile/ACL), ambos ratificados PASA. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                            "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                            "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md"
+                        ],
+                        "started_at": "2026-06-09T21:28:05Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T21:28:05Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-close-task0090-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: cierre de TASK-0090 via submit_intent. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0090",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0090",
+                            "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0090",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-close-task0092-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: cierre de TASK-0092 (ejecutada por Claude, Codex down) via submit_intent task_upsert. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0092",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0092",
+                            "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0092",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-codex-sandbox-cli-correlation",
+                        "expires_at": "2026-06-10",
+                        "notes": "Coordination with Claude to verify Codex CLI install correlation with Windows sandbox spawn setup refresh.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T03:12:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T03:12:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-coord-sandbox-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claude coordina root-cause+fix del sandbox (os740/elevated->unelevated) y normaliza encoding de su mensaje. Liberado al cerrar.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-enqueue-task0090-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: enqueue TASK-0090 (wrapper resolution) via submit_intent. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0090",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0090",
+                            "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0090",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-enqueue-task0091-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: enqueue TASK-0091 (objetivo piloto SA.4) via submit_intent. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-enqueue-task0092-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: enqueue TASK-0092 (codex invoker) via submit_intent. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0092",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0092",
+                            "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0092",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-enqueue-task0093-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: enqueue de TASK-0093 + SPEC-0070 (gap-8 claim-acquire) via submit_intent. Liberado en la misma transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                            "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                            "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-hardening-untracked-response-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Respond to Claude anomaly about untracked tempfile ACL hardening and AGENTS.md rule posture.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T04:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T04:30:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-hold-task0091-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: hold de TASK-0091 (objetivo piloto) a blocked via task_upsert. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-mailbox-hygiene-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Higiene de mailbox: responde request tempfile-acl + archiva hilos resueltos (sandbox/GO/changes-requested). Liberado al cerrar.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-09T03:18:41Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-MAILBOX-20260609",
+                        "updated_at": "2026-06-09T03:18:41Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-ready-task0091-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Claim efimero: TASK-0091 blocked->ready para el piloto via task_upsert. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+                        ],
+                        "started_at": "2026-06-09",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-reject-task0093-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Reviewer reject_review de TASK-0093 (DoD SPEC-0070 2.4 release-on-rejection sin cumplir). Liberado en la misma transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                            "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md"
+                        ],
+                        "started_at": "2026-06-09T02:57:04Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T02:57:04Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-sandbox-failures-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Aviso operativo a Claude sobre fallos repetidos del sandbox Windows: spawn setup refresh.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T02:58:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T02:58:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0090-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0090 wrapper backend resolution via shutil.which, off-pilot; NO re-armar SA.4 ni correr piloto.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0090",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
+                            "runtime/llm_turn_wrapper.py",
+                            "examples/llm_turn_wrapper_cases/",
+                            ".github/workflows/validate.yml",
+                            "Area_comun/handoffs/",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-08T22:37:59Z",
+                        "status": "released",
+                        "task_id": "TASK-0090",
+                        "updated_at": "2026-06-08T22:37:59Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0091-refire-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Confirma TASK-0091 ready como objetivo del re-fire SA.4. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+                        ],
+                        "started_at": "2026-06-09T21:46:20Z",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09T21:46:20Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0093-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0093 claim-acquire gap-8: orchestrator acquires routed owner claim off-pilot; no SA.4 re-arm or pilot.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                            "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                            "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+                            "runtime/orchestrator.py",
+                            "runtime/adapters/llm_adapter.py",
+                            "runtime/turn_validate.py",
+                            "runtime/apply.py",
+                            "runtime/submit_intent.py",
+                            "examples/supervised_autonomy_cases/",
+                            "examples/runtime_loop_cases/",
+                            "examples/runtime_real_adapter_cases/",
+                            "examples/llm_adapter_cases/",
+                            "examples/intent_flow_cases/",
+                            "examples/llm_turn_wrapper_cases/",
+                            ".github/workflows/validate.yml",
+                            "Area_comun/handoffs/",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-09T01:48:02Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T01:48:02Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0093-finding-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Deposita el finding de reject_review de TASK-0093 en mailbox/open. Liberado tras escribir.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T02:58:07Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T02:58:07Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0093-finding2-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Corrige frontmatter del finding de TASK-0093 a esquema de mailbox. Liberado tras corregir.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T02:58:07Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T02:58:07Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0093-fix-rejection-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0093 changes_requested fix: release orchestrator-acquired claim on pre-apply rejection/blocked paths; no SA.4 re-arm or pilot.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                            "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                            "runtime/orchestrator.py",
+                            "runtime/apply.py",
+                            "examples/runtime_loop_cases/",
+                            "Area_comun/handoffs/",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T03:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0093",
+                        "updated_at": "2026-06-09T03:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0094-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0094 formalize tempfile ACL hardening for authoritative write-path; posture B runbook, no SA.4 re-arm, no pilot.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                            "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                            "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                            "AGENTS.md",
+                            "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
+                            "runtime/temp_paths.py",
+                            "runtime/apply.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/submit_intent.py",
+                            "examples/runtime_protocol_materialize_cases/",
+                            "examples/materialize_cross_fs_cases/",
+                            "Area_comun/handoffs/",
+                            "Area_comun/mailbox/open/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T04:45:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T04:45:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0094-ready-claude",
+                        "expires_at": "2026-06-10",
+                        "notes": "Postura B ratificada por operador: lock B + promover TASK-0094 a ready+GO. Liberado tras escribir.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                            "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                            "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T20:55:40Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T20:55:40Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0094-regression-harness-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0094 follow-on scope: migrate requested regression harness fixtures off OS TEMP so they pass inside Codex Windows sandbox.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "examples/intent_flow_cases/",
+                            "examples/runtime_real_adapter_cases/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T05:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T05:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-task0094-replay-cases-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "TASK-0094 follow-on scope: make nested B1 replay harness use repo-local inherited-ACL temp dirs so materialization golden passes inside Codex sandbox.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "examples/runtime_protocol_replay_cases/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T05:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0094",
+                        "updated_at": "2026-06-09T05:00:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-temp-acl-rule-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Add project rule for Windows sandbox temp ACL fallout: no work routes with ACL 0o700 under %TEMP%.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "AGENTS.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T04:15:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T04:15:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-tempfile-acl-coord-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Coordination request to Claude about Windows sandbox unelevated tempfile ACL failures.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T03:35:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T03:35:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-tempfile-acl-hardening-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Maintenance: repair Windows unelevated sandbox ACL fallout from protocol state materialization and harden materialize_to_disk staging to inherit repo ACLs.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "runtime/protocol_replay.py",
+                            "examples/runtime_protocol_materialize_cases/",
+                            "examples/materialize_cross_fs_cases/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-09T03:50:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T03:50:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260609-tempfile-runtime-backup-hardening-codex",
+                        "expires_at": "2026-06-10",
+                        "notes": "Maintenance: replace runtime backup tempdirs that use OS TEMP with repo-local inherited-ACL tempdirs for Windows unelevated sandbox compatibility.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/temp_paths.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/submit_intent.py",
+                            "runtime/apply.py",
+                            "examples/runtime_protocol_materialize_cases/",
+                            "examples/materialize_cross_fs_cases/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-09T04:00:00Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+                        "updated_at": "2026-06-09T04:00:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-archive-accept-0093-0094-codex",
+                        "expires_at": "2026-06-11",
+                        "notes": "Archive obsolete FYI accept message for TASK-0093/TASK-0094.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-10T00:00:00Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260610",
+                        "updated_at": "2026-06-10T00:00:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-archive-open-fyi-codex",
+                        "expires_at": "2026-06-11",
+                        "notes": "Archive obsolete open FYI messages that require no Codex response.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-10T00:10:00Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260610",
+                        "updated_at": "2026-06-10T00:10:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-close-0091-claude",
+                        "expires_at": "2026-06-11",
+                        "notes": "Cierre TASK-0091 (re-pilot, ratif. PASA) + registro de follow-ups TASK-0095/0096. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0095",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0095",
+                            "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0096",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0096",
+                            "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-10T00:11:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-10T00:11:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-decision0028-claude",
+                        "expires_at": "2026-06-11",
+                        "notes": "TASK-0087 postura B: DECISION-0028 (enforce=mecanismo, authoritative=marcador) + docs + CHANGELOG + cierre. Liberado en la transaccion de cierre.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0087",
+                            "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
+                            "Area_comun/decisions/",
+                            "AGENTS.md",
+                            "AGENTS.template.md",
+                            "Area_comun/protocol/TASK_PROTOCOL.md",
+                            "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                            "CHANGELOG.md"
+                        ],
+                        "started_at": "2026-06-10T00:25:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0087",
+                        "updated_at": "2026-06-10T00:25:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-fix0087-claude",
+                        "expires_at": "2026-06-11",
+                        "notes": "Corrige deliverables de TASK-0087 a artefactos reales producidos. Liberado en la transaccion.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0087",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0087",
+                            "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md"
+                        ],
+                        "started_at": "2026-06-10T00:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0087",
+                        "updated_at": "2026-06-10T00:30:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260610-fyi0087-claude",
+                        "expires_at": "2026-06-11",
+                        "notes": "FYI cierre TASK-0087 / DECISION-0028 a Codex. Liberado tras escribir.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/"
+                        ],
+                        "started_at": "2026-06-10T00:32:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0087",
+                        "updated_at": "2026-06-10T00:32:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0091-codex-runtime",
+                        "expires_at": "2026-06-10",
+                        "notes": "Acquired by runtime orchestrator before routed turn.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+                            "examples/neutrality_scan_cases/README.md"
+                        ],
+                        "started_at": "2026-06-09T21:50:50Z",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09T21:50:50Z"
+                    }
+                ],
+                "schema_version": "1.0",
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            },
+            "project_state": {
+                "active_tasks": [
+                    {
+                        "id": "TASK-0087",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4."
+                    },
+                    {
+                        "id": "TASK-0088",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior)."
+                    },
+                    {
+                        "id": "TASK-0089",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto."
+                    },
+                    {
+                        "id": "TASK-0090",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto."
+                    },
+                    {
+                        "id": "TASK-0091",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027)."
+                    },
+                    {
+                        "id": "TASK-0092",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto."
+                    },
+                    {
+                        "id": "TASK-0093",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto."
+                    },
+                    {
+                        "id": "TASK-0094",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado."
+                    },
+                    {
+                        "id": "TASK-0095",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0096",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
+                    }
+                ],
+                "agents": {
+                    "architect": "Claude",
+                    "human_owner": "operador humano",
+                    "implementer": "Codex"
+                },
+                "created_at": "2026-06-05",
+                "decisions": [
+                    "DECISION-0001-versionado",
+                    "DECISION-0002-core-perfiles-profesionales",
+                    "DECISION-0003-adopted-profiles-contract",
+                    "DECISION-0004-sdd-pipeline-y-cierre",
+                    "DECISION-0005-comunicacion-compacta-token-efficient",
+                    "DECISION-0006-robustez-operacional",
+                    "DECISION-0007-claim-before-shared-draft",
+                    "DECISION-0008-eficiencia-de-tokens",
+                    "DECISION-0009-runtime-orquestacion",
+                    "DECISION-0010-licenciamiento-propietario",
+                    "DECISION-0011-claims-por-fila-estado",
+                    "DECISION-0012-ascii-canal-entre-agentes",
+                    "DECISION-0013-liveness-y-visibilidad",
+                    "DECISION-0014-poda-sistematica",
+                    "DECISION-0015-n-agent-registry-y-capacidades",
+                    "DECISION-0016-areas-personales-onboarding",
+                    "DECISION-0017-event-log-writer-vivo",
+                    "DECISION-0018-notificacion-de-anomalias",
+                    "DECISION-0019-distribucion-runtime",
+                    "DECISION-0020-regla-anti-colision",
+                    "DECISION-0021-activacion-wrapper-llm",
+                    "DECISION-0022-runtime-escritor-autoritativo",
+                    "DECISION-0023-firma-release",
+                    "DECISION-0024-autonomia-supervisada",
+                    "DECISION-0025-integracion-agent-teams-bridge",
+                    "DECISION-0026-memoria-post-commit",
+                    "DECISION-0027-activacion-sa4-piloto",
+                    "DECISION-0028"
+                ],
+                "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
+                "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
+                "next_actions": [
+                    "[HISTORICO PODADO] 121 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
+                    "TASK-0083 RECLAMADA por Codex (2026-06-08): bridge Agent Teams Capas A+B, runtime/team_bridge.py + config off + neutralidad + golden; NO Capa C, NO encender bridge ni tocar .claude/settings.json.",
+                    "TASK-0083 ENTREGADA a in_review por Codex (2026-06-08): team_bridge.py Capas A+B + config off + scan_globs + CI/golden 7/7; audit append-only, gate exit2, [TASK-XXXX] solo audita. NO Capa C, NO activar bridge, NO tocar .claude/settings.json.",
+                    ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
+                    "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "TASK-0086 DONE (ratif. adversarial): guard event_state_config_error (authoritative=>enforce=>materialize=>enabled, tier runtime) cableado en validador py/ps + submit_intent + apply -> RECHAZA authoritative-sin-enforce; mata el false-secure. + fix apply_gate (drift antes de materializar). PRE-REQ SA.4 #1 cumplido. #2 TASK-0087 registrada (proposed, bloqueante-adopcion). #3 ventana authoritative: evaluar estabilidad.",
+                    "TASK-0088 DONE (SA.4 paso 1, ratif. adversarial): lock-lift del invoker real multi-turno OFF-BY-DEFAULT (orchestrator.py condicionado; registro vivo vacio -> cerrojo --once intacto, byte-equivalente); golden determinista 9; ensayo de rollback del lock-lift verde (lifts solo con registro, off restaura, replay==hot). PASOS 1+2 COMPLETOS. PENDIENTE: MICRO-GO del operador para pasos 3+4 = DECISION-0027 (activacion, MINOR+CHANGELOG) + poblar runtime.real_invoker + runtime.supervised_autonomy + PILOTO (nota prosa en examples/neutrality_scan_cases/README.md, caps max_turns=2/checkpoint_every_k=1/wall_clock=180000/budget+deadline/PAUSE, invocacion real). NO poblar registro hasta el micro-GO. Capa C OFF.",
+                    "TASK-0089 DONE (wrapper fino vendor-neutral del invoker, ratif. adversarial): runtime/llm_turn_wrapper.py (stdin->backend no interactivo->extrae+valida turn-report JSON tolerante fences/prosa->emite limpio o falla limpio, timeout<120s nunca cuelga); golden 8/8 + en CI; preset claude->wrapper; vendor-neutral. SA.4 sigue DE-ARMADO. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper -> turn-report schema-valido); si limpio, re-armar registro + piloto (nota examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint tras turno 1). NO re-armar ni piloto sin smoke limpio. Capa C OFF.",
+                    "TASK-0090 DONE (wrapper resolucion cross-platform via shutil.which, ratif. adversarial): bare 'claude -p' resuelve y corre; golden 10/10; RE-SMOKE END-TO-END limpio (preset->wrapper->claude real -> turn-report schema-valido). Path del piloto PROBADO. SA.4 sigue DE-ARMADO. LISTO para re-armar registro (enabled=true) + DISPARAR PILOTO (orquestador real invoker, tarea-objetivo nota en examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint OBLIGATORIO tras turno 1). enforce/authoritative intactos; Capa C OFF.",
+                    "TASK-0092 DONE (EJECUTADA POR CLAUDE, Codex agente down): invoker codex implementer integrado (preset->wrapper->codex exec workspace-write + reasoning_effort=low) + build_prompt endurecido. SMOKE REAL DE TURNO COMPLETO LIMPIO: codex edito un README + turn-report schema-valido aceptado (agent=Codex casa implementer), ~44s. Goldens verdes. SA.4 sigue DE-ARMADO. LISTO para el go del operador a re-armar (preset codex) + re-disparar piloto (TASK-0091 blocked->ready via task_upsert; caps 2/1/180000; checkpoint tras turno 1)."
+                ],
+                "open_questions": [],
+                "phase": {
+                    "exit_criteria": [
+                        "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
+                        "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
+                        "Backlog de adopcion/expansion definido cuando surja",
+                        "Core sigue neutral en cada cambio"
+                    ],
+                    "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
+                    "id": "P2",
+                    "name": "Adopcion y expansion",
+                    "previous_phase": {
+                        "closed_with": "v0.3.0",
+                        "exit_criteria_met": [
+                            "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
+                            "Perfil dotnet_enterprise publicado (TASK-0006)",
+                            "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
+                            "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
+                            "v0.3.0 publicada"
+                        ],
+                        "id": "P1",
+                        "name": "Arquitectura de perfiles profesionales",
+                        "status": "completed"
+                    },
+                    "subphase": {
+                        "backlog": [
+                            "TASK-0008",
+                            "TASK-0009",
+                            "TASK-0010",
+                            "TASK-0011",
+                            "TASK-0012",
+                            "TASK-0013"
+                        ],
+                        "closed_with": "v0.4.0",
+                        "exit_criteria_met": [
+                            "DECISION-0004 + diseno + specs (TASK-0008)",
+                            "Plantillas de protocolo SDD (TASK-0009)",
+                            "specs/ + plantillas reutilizables (TASK-0010)",
+                            "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
+                            "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
+                            "Onboarding SDD documentado (TASK-0013)",
+                            "v0.4.0 publicada"
+                        ],
+                        "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+                        "id": "P2.SDD",
+                        "name": "Formalizacion SDD (Spec-Driven Development)",
+                        "status": "completed"
+                    }
+                },
+                "project": "multi_agent_project_protocol",
+                "released_versions": [
+                    "v0.1.0",
+                    "v0.2.0",
+                    "v0.3.0",
+                    "v0.4.0",
+                    "v0.5.0",
+                    "v0.6.0",
+                    "v0.7.0",
+                    "v0.8.0",
+                    "v0.9.0",
+                    "v0.10.0",
+                    "v1.0.0",
+                    "v1.1.0"
+                ],
+                "risks": [
+                    "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+                    "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+                    "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
+                    "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
+                    "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
+                    "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
+                ],
+                "source_of_truth": "AGENTS.md",
+                "status": "active",
+                "updated_at": "2026-06-09",
+                "updated_by": "Claude",
+                "version": "1.1.0"
+            },
+            "task_index": {
+                "legend": {
+                    "owner": [
+                        "Claude",
+                        "Codex",
+                        "operador humano"
+                    ],
+                    "phase": [
+                        "P0 = enriquecimiento del protocolo",
+                        "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
+                        "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
+                    ],
+                    "priority": [
+                        "low",
+                        "normal",
+                        "high",
+                        "critical"
+                    ],
+                    "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva).",
+                    "status": [
+                        "proposed",
+                        "ready",
+                        "claimed",
+                        "in_progress",
+                        "in_review",
+                        "done",
+                        "blocked",
+                        "cancelled"
+                    ],
+                    "type": [
+                        "implementation",
+                        "refactor",
+                        "integration",
+                        "migration",
+                        "security",
+                        "release",
+                        "discovery",
+                        "analysis",
+                        "review",
+                        "documentation",
+                        "triage"
+                    ]
+                },
+                "schema_version": "1.0",
+                "tasks": [
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "Plantilla markdown de guia humana operativa",
+                            "Formato HTML legible para humanos",
+                            "Documentacion de adopcion en README_INSTANCIACION.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                        "id": "TASK-0037",
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0004",
+                            "TASK-0013"
+                        ],
+                        "relevant_files": [
+                            "README_INSTANCIACION.md",
+                            "README.md",
+                            "Area_comun/protocol/",
+                            "Area_comun/artifacts/",
+                            "examples/minimal_instance/"
+                        ],
+                        "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance.",
+                        "sdd_required": false,
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "Trabajo futuro: guia humana operativa neutral + formato HTML reusable por cualquier proyecto",
+                        "type": "documentation"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "Area_comun/decisions/DECISION-0028-enforce-mecanismo-authoritative-marcador.md",
+                            "AGENTS.md",
+                            "Area_comun/protocol/TASK_PROTOCOL.md",
+                            "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                            "CHANGELOG.md"
+                        ],
+                        "depends_on": [
+                            "TASK-0086"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
+                        "id": "TASK-0087",
+                        "linked_decisions": [
+                            "DECISION-0022",
+                            "DECISION-0028"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0085",
+                            "SPEC-0067"
+                        ],
+                        "relevant_files": [
+                            "AGENTS.md",
+                            "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                            "runtime/protocol_replay.py"
+                        ],
+                        "review": "DONE (postura B, operador + arquitecto, 2026-06-10). Resuelto por DECISION-0028: enforce ES el mecanismo de escritor-unico (gate B.3); authoritative es el marcador declarativo del modo (DECISION-0022), sin callers de comportamiento; NO se cablean teeth propias (no hay invariante que enforce no cubra); el guard de TASK-0086 mata el false-secure (authoritative sin enforce). Docs actualizados (AGENTS.md s7, TASK_PROTOCOL.md, N_AGENT_RUNTIME.md, AGENTS.template.md) + CHANGELOG v1.1.0 (resolved). Neutral; defaults del template intactos. Deliverables apuntan a los artefactos reales producidos. Cierra el ultimo bloqueante de ADOPCION. enforce/authoritative intactos; SA.4/Capa C OFF.",
+                        "sdd_required": false,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4.",
+                        "type": "analysis",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "examples/supervised_autonomy_cases/",
+                            "Area_comun/handoffs/HANDOFF-TASK-0088-codex-to-claude-1.md"
+                        ],
+                        "depends_on": [
+                            "TASK-0080"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0088-codex-sa4-lock-lift-invoker-real-multiturno.md",
+                        "id": "TASK-0088",
+                        "linked_decisions": [
+                            "DECISION-0024",
+                            "DECISION-0021",
+                            "DECISION-0022"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "TASK-0078",
+                            "TASK-0079",
+                            "TASK-0086"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/supervised_autonomy.py",
+                            "examples/supervised_autonomy_cases/",
+                            ".github/workflows/validate.yml"
+                        ],
+                        "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. SA.4 PASO 1 (lock-lift OFF-BY-DEFAULT). Verificado: subprocess_multiturn_allowed exige allow_real_invoker AND allow_supervised_autonomy AND supervised_autonomy_activation_error None AND real_invoker_activation_error None (orchestrator.py:357-362); OFF-BY-DEFAULT confirmado en vivo (registro vacio -> allowed=False -> rechazo 'subprocess llm invoker requires --once' intacto, byte-equivalente); --once subprocess intacto. ENSAYO DE ROLLBACK del lock-lift (in-process, sin tocar registro vivo): registro-off->cerrojo en pie; poblado sintetico->se levanta; despoblar->restaurado; replay==hot, drift 0. Goldens verdes corridos por mi: supervised_autonomy 9 (nuevo caso lock-lift con subprocess fake determinista), runtime_loop 8, real_adapter 4, enforce 9, intent_flow 11, replay 6, cutover 4, cross_fs 2; validador valid, neutralidad 0, encoding limpio. NO se poblo el registro vivo NI se corrio el piloto (eso es el micro-GO posterior). Bonus: Codex corrigio fixture runtime_loop (copia runtime .py para prune hooks). Template intacto.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+                        "status": "done",
+                        "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior).",
+                        "type": "implementation",
+                        "updated_at": "2026-06-08"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/llm_turn_wrapper.py",
+                            "examples/llm_turn_wrapper_cases/",
+                            "protocol.config.json",
+                            "Area_comun/handoffs/HANDOFF-TASK-0089-codex-to-claude-1.md"
+                        ],
+                        "depends_on": [
+                            "TASK-0088"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md",
+                        "id": "TASK-0089",
+                        "linked_decisions": [
+                            "DECISION-0027",
+                            "DECISION-0021",
+                            "DECISION-0024"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "TASK-0021",
+                            "SPEC-0064"
+                        ],
+                        "relevant_files": [
+                            "runtime/llm_turn_wrapper.py",
+                            "runtime/adapters/llm_adapter.py",
+                            "runtime/turn_schema.json",
+                            "protocol.config.json",
+                            "examples/llm_turn_wrapper_cases/"
+                        ],
+                        "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Wrapper runtime/llm_turn_wrapper.py verificado end-to-end por mi: happy-path (report valido en ```json fences -> emite SOLO JSON limpio compacto + exit 0); extraccion tolerante a fences/prosa (acepta objeto o {report:{...}}); validacion contra turn_schema.json (rechazo task_id invalido y campos faltantes con mensaje accionable); timeout (sleep>timeout -> 'backend timed out', exit 1, NUNCA cuelga; default 100s, rechaza >=120); backend-fail -> exit 1 limpio. Golden examples/llm_turn_wrapper_cases 8/8 (py) + .ps1 + en CI. Vendor-neutral (backend por --backend/env, no hardcodea vendor; preset claude -> 'python runtime/llm_turn_wrapper.py --backend \"claude -p\"'). Gates verdes (validador valid, neutralidad 0, encoding limpio). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false); NO se re-armo ni corrio piloto. Template intacto. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper) antes de re-armar + piloto.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+                        "status": "done",
+                        "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-08"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/llm_turn_wrapper.py",
+                            "examples/llm_turn_wrapper_cases/",
+                            "Area_comun/handoffs/HANDOFF-TASK-0090-codex-to-claude-1.md"
+                        ],
+                        "depends_on": [
+                            "TASK-0089"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
+                        "id": "TASK-0090",
+                        "linked_decisions": [
+                            "DECISION-0027",
+                            "DECISION-0006"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0006",
+                            "SPEC-0068"
+                        ],
+                        "relevant_files": [
+                            "runtime/llm_turn_wrapper.py",
+                            "examples/llm_turn_wrapper_cases/"
+                        ],
+                        "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-09) bajo enforce+authoritative. resolve_backend_command resuelve command[0] via shutil.which (usa ruta resuelta o deja command tal cual). Verificado por mi: bare 'claude -p' AHORA RESUELVE y corre (paso de WinError 2 a ejecutar el CLI); comando inexistente -> fallo limpio (WinError 2 capturado). Golden llm_turn_wrapper_cases 10/10 (sube de 8: resoluble-via-PATHEXT OK + inexistente fail-limpio). RE-SMOKE END-TO-END limpio: wrapper con backend BARE 'claude -p' (forma del preset) + prompt no-op -> turn-report schema-valido JSON limpio exit0 (real claude). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false). Gates verdes. Template/preset/flags intactos. El path del piloto (orquestador->preset->wrapper->claude) queda PROBADO.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+                        "status": "done",
+                        "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "examples/neutrality_scan_cases/README.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+                        "id": "TASK-0091",
+                        "linked_decisions": [
+                            "DECISION-0027",
+                            "DECISION-0024"
+                        ],
+                        "original_author": "Codex",
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0088",
+                            "DECISION-0027"
+                        ],
+                        "relevant_files": [
+                            "examples/neutrality_scan_cases/README.md"
+                        ],
+                        "review": "(PILOTO SA.4 RE-FIRE) Objetivo del re-pilot bajo el sobre (DECISION-0027), GO operador 2026-06-09 tras smoke real limpio. Codex (invoker real) edita SOLO prosa en examples/neutrality_scan_cases/README.md; caps 2/1/180000, checkpoint tras turno 1.",
+                        "sdd_required": false,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
+                        "type": "documentation",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/adapters/llm_adapter.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "protocol.config.json"
+                        ],
+                        "depends_on": [
+                            "TASK-0090"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md",
+                        "id": "TASK-0092",
+                        "linked_decisions": [
+                            "DECISION-0027",
+                            "DECISION-0021",
+                            "DECISION-0024"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "TASK-0088",
+                            "TASK-0089",
+                            "TASK-0091",
+                            "SPEC-0064"
+                        ],
+                        "relevant_files": [
+                            "runtime/adapters/llm_adapter.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "runtime/turn_schema.json",
+                            "protocol.config.json",
+                            "examples/"
+                        ],
+                        "review": "EJECUTADA POR CLAUDE (Codex agente down; operador autorizo 'ejecuta tu la tarea') y auto-ratificada con verificacion real, 2026-06-09. Integrado el invoker codex implementer: preset codex -> wrapper -> 'codex exec -s workspace-write -c approval_policy=never -c model_reasoning_effort=low --skip-git-repo-check' (sin --output-schema, que erroraba; el wrapper extrae el turn-report del stdout de codex y valida contra turn_schema). build_prompt endurecido para conducir EDICION real + turn-report completo (agent ruteado, changed_paths, commit_message, transitions task_status from=status to=in_review). HALLAZGOS por smoke real: (a) auth de codex caduco -> el operador re-login; (b) -o/stdout dan el turn-report limpio; (c) codex con reasoning xhigh tarda >115s -> model_reasoning_effort=low lo baja a ~44s (dentro del cap 120s). SMOKE REAL DE TURNO COMPLETO LIMPIO (off-pilot, fixture aislado -C/--root): codex EDITO el README + emitio un turn-report schema-valido que el wrapper acepto; agent=Codex (implementer) casa la capability del gate. Goldens verdes corridos por mi: llm_adapter 6, supervised_autonomy 9, real_adapter 4, runtime_loop 8, wrapper 10, intent_flow 11; validador/neutralidad/encoding verdes. SA.4 sigue DE-ARMADO; template no tocado salvo el preset codex (instancia viva). LISTO para re-armar + re-disparar el piloto (con TASK-0091 blocked->ready).",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0069-codex-implementer-invoker-turno-completo.md",
+                        "status": "done",
+                        "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "runtime/adapters/llm_adapter.py",
+                            "examples/"
+                        ],
+                        "depends_on": [
+                            "TASK-0092"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                        "id": "TASK-0093",
+                        "linked_decisions": [
+                            "DECISION-0027",
+                            "DECISION-0022",
+                            "DECISION-0020"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "TASK-0091",
+                            "TASK-0088",
+                            "SPEC-0064"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/submit_intent.py",
+                            "runtime/turn_validate.py",
+                            "runtime/adapters/llm_adapter.py",
+                            "examples/"
+                        ],
+                        "review": "READY (encolada por Claude 2026-06-09 via submit_intent bajo enforce+authoritative). OFF-PILOT. Cierra el gap-8 del orquestador hallado en el 2do piloto (codex invoker): el paso claim es NO-OP -> turno rechazado por no-active-claim. Opcion 1 (operador): el orquestador adquiere el claim del owner ruteado (actor_id=owner). SA.4 DE-ARMADO; el re-fire es paso posterior con GO separado.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+                        "status": "done",
+                        "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto.",
+                        "type": "implementation"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/temp_paths.py",
+                            "examples/runtime_protocol_materialize_cases/",
+                            "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
+                            "Area_comun/handoffs/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                        "id": "TASK-0094",
+                        "linked_decisions": [
+                            "DECISION-0022",
+                            "DECISION-0020",
+                            "DECISION-0007",
+                            "DECISION-0006"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "TASK-0093",
+                            "SPEC-0070",
+                            "MAINTENANCE-CODEX-SANDBOX-20260609"
+                        ],
+                        "relevant_files": [
+                            "runtime/temp_paths.py",
+                            "runtime/apply.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/submit_intent.py",
+                            "AGENTS.md"
+                        ],
+                        "review": "READY+GO (Claude 2026-06-09 via submit_intent). Postura ACL RATIFICADA por el operador = B: revertir AGENTS.md s7 + runbook en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). Codex commitea su hardening untracked bajo flujo (helper + cableado + golden byte-equivalente + drift0 + cross-platform + handoff), commiteando SOLO sus rutas (sin arrastrar la entrega v2 de TASK-0093). Arranca cuando el operador lo empuje (push-driven).",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                        "status": "done",
+                        "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-09"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                        "id": "TASK-0095",
+                        "linked_decisions": [
+                            "DECISION-0022"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "TASK-0093",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "runtime/submit_intent.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #1 del re-pilot SA.4): commit de turno self-consistente (incluir el task .md mutado por las transiciones). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "examples/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                        "id": "TASK-0096",
+                        "linked_decisions": [
+                            "DECISION-0013"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "DECISION-0013"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "runtime/runlog.py",
+                            "examples/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #2 del re-pilot SA.4): run_id unico por corrida (evita el ruido de agregacion de metricas; run_id colisiono con el smoke en el re-pilot). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    }
+                ],
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            }
+        },
+        "up_to_seq": 0
+    }
+}

@@ -173,7 +173,8 @@
         "v0.8.0",
         "v0.9.0",
         "v0.10.0",
-        "v1.0.0"
+        "v1.0.0",
+        "v1.1.0"
     ],
     "risks": [
         "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
@@ -185,7 +186,7 @@
     ],
     "source_of_truth": "AGENTS.md",
     "status": "active",
-    "updated_at": "2026-06-08",
+    "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.0.0"
+    "version": "1.1.0"
 }

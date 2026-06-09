@@ -17,7 +17,7 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
-## [1.1.0] — 2026-06-08
+## [1.1.0] — 2026-06-09
 
 **Runtime-authoritative activation + supervised-autonomy SA.4 pilot.** Additive and domain-neutral
 over 1.0.0; every previously valid turn report stays valid and the shipped templates stay
@@ -38,8 +38,19 @@ the first bounded real-invoker autonomy pilot, all gated and reversible.
   and `apply` — kills the "false-secure" config. (TASK-0086 / SPEC-0067)
 - **Supervised-autonomy SA.4 lock-lift** (off-by-default): the real subprocess invoker may run
   multi-turn only when both `runtime.real_invoker` and `runtime.supervised_autonomy` are registered
-  and both `--allow-*` flags are passed; otherwise the `--once` lock holds (byte-equivalent).
-  Activated for a single bounded pilot. (DECISION-0027 / TASK-0088 / SPEC-0064 §4)
+  and both `--allow-*` flags are passed; otherwise the `--once` lock holds (byte-equivalent). Run for
+  **one bounded pilot, validated end-to-end with the real `codex exec` invoker** (orchestrator-acquired
+  claim, gate ACCEPT, clean claim lifecycle, checkpoint after turn 1), then **de-armed back to
+  off-by-default** (the shipped default). (DECISION-0027 / TASK-0088 / TASK-0091 / SPEC-0064 §4)
+- **Orchestrator acquires the routed owner's claim before the turn** (gap-8 fix): the `claim` step,
+  formerly a no-op, now acquires the routed owner's claim via `submit_intent` before the adapter
+  (idempotent with a pre-claim, conflict-rejects before the adapter, releases the acquired claim on
+  every terminal/rejection outcome — no orphan). (TASK-0093 / SPEC-0070)
+- **Windows-sandbox tempfile/ACL hardening** of the authoritative write-path: materialization staging
+  and rollback backups use repo-local inherited-ACL temp dirs instead of `%TEMP%` `0o700` dirs that
+  blocked the unelevated sandbox token; materialization stays byte-equivalent (same `canonical_hash`).
+  Operational runbook documented (`Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md`).
+  (TASK-0094 / SPEC-0071)
 - **Agent Teams bridge, layers A+B** (gate enforcement + append-only audit), off-by-default; layer C
   (authoritative mapping) deferred. (DECISION-0025 / TASK-0083 / SPEC-0065)
 - **Cross-FS materialize fix** for Windows when temp and repo live on different drives; regression

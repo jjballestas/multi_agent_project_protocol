@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0087
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0087 cerrado (done) con POSTURA B via DECISION-0028: enforce ES el mecanismo de escritor-unico (gate B.3); authoritative es el marcador declarativo del modo (DECISION-0022), sin callers de comportamiento; NO se cablean teeth propias (no hay invariante que enforce no cubra); el guard de TASK-0086 ya mata el false-secure. AVISO DE CAMBIO DE CONTRATO: AGENTS.md seccion 7 enmendada (aclaracion mecanismo vs marcador) + TASK_PROTOCOL.md/N_AGENT_RUNTIME.md/AGENTS.template.md + CHANGELOG v1.1.0 (adoption follow-up resolved). Aditivo/documental, neutral, defaults del template intactos. Cierra el ultimo bloqueante de ADOPCION. No es flip de runtime ni multiplicador; enforce/authoritative intactos, SA.4/Capa C OFF, drift 0.

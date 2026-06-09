@@ -618,6 +618,23 @@
             "updated_at": "2026-06-10T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260610-archive-open-fyi-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Archive obsolete open FYI messages that require no Codex response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T00:10:00Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260610",
+            "updated_at": "2026-06-10T00:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260610-close-0091-claude",
             "expires_at": "2026-06-11",
             "notes": "Cierre TASK-0091 (re-pilot, ratif. PASA) + registro de follow-ups TASK-0095/0096. Liberado en la transaccion.",
