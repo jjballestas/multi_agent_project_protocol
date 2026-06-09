@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0094
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0094 entregada a revision: hardening tempfile/ACL formalizado, postura B aplicada con runbook, AGENTS.md sin regla contractual, goldens/regresiones verdes dentro del sandbox, drift 0. No SA.4 ni piloto.

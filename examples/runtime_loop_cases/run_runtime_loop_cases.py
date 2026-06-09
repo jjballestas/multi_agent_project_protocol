@@ -245,6 +245,11 @@ def task_status(root: Path) -> str:
     return json.loads((root / "Area_comun/state/TASK_INDEX.json").read_text(encoding="utf-8-sig"))["tasks"][0]["status"]
 
 
+def claims_for_task(root: Path, task_id: str) -> list[dict]:
+    claims = json.loads((root / "Area_comun/state/CLAIMS.json").read_text(encoding="utf-8-sig"))["claims"]
+    return [item for item in claims if item["task_id"] == task_id and item["owner"] == "Codex"]
+
+
 def write_reports(root: Path, reports: list[dict]) -> Path:
     report_dir = root / "replay"
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -337,6 +342,84 @@ def case_claim_step_rejects_conflicting_other_claim() -> None:
         assert "claim acquire failed" in turn["errors"][0], result
         assert "overlaps active claim" in turn["errors"][0], result
         assert "adapter" not in turn["trace"], result
+        assert task_status(fixture) == "ready"
+
+
+def case_acquired_claim_released_after_validate_rejection() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-reject-release-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, omit_claims=["TASK-9000"])
+        report_dir = write_reports(fixture, [policy_path_report("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-reject-release", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        turn = result["turns"][0]
+        assert turn["outcome"] == "rejected", result
+        assert any("write outside active claim scope" in error for error in turn["errors"]), result
+        assert turn["claim_cleanup"]["released"] is True, result
+        assert claims_for_task(fixture, "TASK-9000")[0]["status"] == "released"
+        assert task_status(fixture) == "ready"
+
+
+def case_acquired_claim_released_after_human_gate() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-human-release-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, omit_claims=["TASK-9000"])
+        report_dir = write_reports(fixture, [human_report("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-human-release", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        turn = result["turns"][0]
+        assert turn["human_required"] is True, result
+        assert turn["claim_cleanup"]["released"] is True, result
+        assert claims_for_task(fixture, "TASK-9000")[0]["status"] == "released"
+        assert task_status(fixture) == "ready"
+
+
+def case_acquired_claim_released_after_blocked_terminal() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-blocked-release-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, omit_claims=["TASK-9000"])
+        report_dir = write_reports(fixture, [turn_report_without_claim_transition("TASK-9000", outcome="blocked", to_status="blocked")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-blocked-release", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 1
+        assert claims_for_task(fixture, "TASK-9000")[0]["status"] == "released"
+        assert task_status(fixture) == "blocked"
+
+
+def case_preclaimed_rejection_keeps_existing_claim() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-preclaim-reject-keeps-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture)
+        report_dir = write_reports(fixture, [policy_path_report("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-preclaim-reject-keeps", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        turn = result["turns"][0]
+        assert turn["outcome"] == "rejected", result
+        assert "claim_cleanup" not in turn, result
+        assert claims_for_task(fixture, "TASK-9000")[0]["status"] == "active"
         assert task_status(fixture) == "ready"
 
 
@@ -452,6 +535,10 @@ def main() -> int:
         case_claim_step_acquires_missing_owner_claim,
         case_preclaimed_turn_does_not_emit_orchestrator_acquire,
         case_claim_step_rejects_conflicting_other_claim,
+        case_acquired_claim_released_after_validate_rejection,
+        case_acquired_claim_released_after_human_gate,
+        case_acquired_claim_released_after_blocked_terminal,
+        case_preclaimed_rejection_keeps_existing_claim,
         case_sequence_max_iter_cuts,
         case_human_required_stops_without_commit,
         case_plan_is_read_only,

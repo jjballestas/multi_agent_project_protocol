@@ -28,6 +28,21 @@
             "updated_at": "2026-06-08T21:48:37Z"
         },
         {
+            "claim_id": "CLAIM-20260609-accept-0093-0094-claude",
+            "expires_at": "2026-06-10",
+            "notes": "FYI accept de TASK-0093+0094 + higiene de hilos resueltos. Liberado al cerrar.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-09T21:28:50Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T21:28:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-anomalia-hardening-claude",
             "expires_at": "2026-06-10",
             "notes": "Registra TASK-0094 (formalizar hardening) + SPEC-0071 + nota de anomalia DECISION-0018. Liberado en la transaccion.",
@@ -72,6 +87,25 @@
             "status": "released",
             "task_id": "TASK-0092",
             "updated_at": "2026-06-09T02:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-close-0093-0094-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Cierre reviewer de TASK-0093 (gap-8 v2) y TASK-0094 (hardening tempfile/ACL), ambos ratificados PASA. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md"
+            ],
+            "started_at": "2026-06-09T21:28:05Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T21:28:05Z"
         },
         {
             "claim_id": "CLAIM-20260609-close-task0090-claude",

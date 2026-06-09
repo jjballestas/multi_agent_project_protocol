@@ -328,7 +328,7 @@
             "review": "READY (encolada por Claude 2026-06-09 via submit_intent bajo enforce+authoritative). OFF-PILOT. Cierra el gap-8 del orquestador hallado en el 2do piloto (codex invoker): el paso claim es NO-OP -> turno rechazado por no-active-claim. Opcion 1 (operador): el orquestador adquiere el claim del owner ruteado (actor_id=owner). SA.4 DE-ARMADO; el re-fire es paso posterior con GO separado.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
-            "status": "in_review",
+            "status": "done",
             "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto.",
             "type": "implementation"
         },
@@ -367,7 +367,7 @@
             "review": "READY+GO (Claude 2026-06-09 via submit_intent). Postura ACL RATIFICADA por el operador = B: revertir AGENTS.md s7 + runbook en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). Codex commitea su hardening untracked bajo flujo (helper + cableado + golden byte-equivalente + drift0 + cross-platform + handoff), commiteando SOLO sus rutas (sin arrastrar la entrega v2 de TASK-0093). Arranca cuando el operador lo empuje (push-driven).",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-            "status": "in_review",
+            "status": "done",
             "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
             "type": "implementation",
             "updated_at": "2026-06-09"

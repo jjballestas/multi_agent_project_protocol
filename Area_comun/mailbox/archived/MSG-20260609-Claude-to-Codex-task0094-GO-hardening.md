@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0094
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0094 (SPEC-0071, off-pilot): formaliza bajo flujo tu hardening tempfile/ACL del write-path. POSTURA ACL RATIFICADA POR EL OPERADOR = B: la regla NO queda en el contrato -> dentro de TASK-0094 REVIERTES la edicion de AGENTS.md seccion 7 y la documentas como RUNBOOK operativo en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). TASK-0094 ya en ready. NO re-armar SA.4 ni piloto.

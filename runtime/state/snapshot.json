@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a2da32e93a8001e7b64760175109404939a5e0681bba57afde12d97695ff607a",
+  "canonical_hash": "8866656591fee9c9a92f1900ee8be3b47aa7de0e7c1d2cbc8a7135248d8ac8fe",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -41,9 +41,11 @@
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "CLAIM-20260608-task0089-codex": 1,
       "CLAIM-20260608-task0089-mailbox-hygiene-codex": 1,
+      "CLAIM-20260609-accept-0093-0094-claude": 1,
       "CLAIM-20260609-anomalia-hardening-claude": 1,
       "CLAIM-20260609-anomalia-task0092-amend-codex": 1,
       "CLAIM-20260609-anomalia-task0092-codex": 1,
+      "CLAIM-20260609-close-0093-0094-claude": 1,
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-close-task0092-claude": 1,
       "CLAIM-20260609-codex-sandbox-cli-correlation": 1,
@@ -91,17 +93,23 @@
       "TASK-0090": 8,
       "TASK-0091": 6,
       "TASK-0092": 6,
-      "TASK-0093": 12,
-      "TASK-0094": 10,
+      "TASK-0093": 15,
+      "TASK-0094": 11,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 211,
+    "events_applied": 217,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
+      "claude:accept-0093-0094:claim-acquire": 216,
+      "claude:accept-0093-0094:claim-release": 217,
+      "claude:close-0093-0094:claim-acquire": 212,
+      "claude:close-0093-0094:claim-release": 215,
+      "claude:close-0093-0094:status-0093": 214,
+      "claude:close-0093-0094:status-0094": 213,
       "claude:mailbox-hygiene-20260609:claim-acquire": 188,
       "claude:mailbox-hygiene-20260609:claim-release": 189,
       "claude:reject-review:claim-acquire:TASK-0093": 175,
@@ -314,5 +322,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 211
+  "up_to_seq": 217
 }

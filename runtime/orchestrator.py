@@ -223,6 +223,64 @@ def acquire_routed_claim(root: Path, state: dict[str, Any], unit: dict[str, Any]
     return {"acquired": True, "claim": claim, "result": result}
 
 
+def release_acquired_routed_claim(root: Path, claim_result: dict[str, Any]) -> dict[str, Any]:
+    if not claim_result.get("acquired"):
+        return {"released": False}
+    claim = claim_result.get("claim") if isinstance(claim_result.get("claim"), dict) else {}
+    claim_id = str(claim.get("claim_id") or "").strip()
+    owner = str(claim.get("owner") or "").strip()
+    task_id = str(claim.get("task_id") or "").strip()
+    if not claim_id or not owner:
+        return {"released": False, "error": "claim cleanup missing claim_id or owner"}
+
+    timestamp = utc_now()
+    try:
+        result = submit_intent(
+            root,
+            owner,
+            {
+                "claim": {
+                    "op": "release",
+                    "idempotency_key": f"orchestrator:claim-release:{task_id}:{owner_slug(owner)}",
+                    "claim_id": claim_id,
+                }
+            },
+            timestamp=timestamp,
+        )
+    except IntentError as exc:
+        return {"released": False, "claim_id": claim_id, "error": str(exc)}
+    return {"released": True, "claim_id": claim_id, "result": result}
+
+
+def cleanup_event_summary(cleanup: dict[str, Any]) -> dict[str, Any]:
+    summary = {
+        "released": cleanup.get("released") is True,
+        "claim_id": cleanup.get("claim_id"),
+    }
+    if cleanup.get("error"):
+        summary["error"] = cleanup["error"]
+    result = cleanup.get("result") if isinstance(cleanup.get("result"), dict) else {}
+    events = result.get("events") if isinstance(result, dict) else []
+    if events:
+        summary["eventlog_events"] = [
+            {"seq": event.get("seq"), "type": event.get("type"), "aggregate_id": event.get("aggregate_id")}
+            for event in events
+            if isinstance(event, dict)
+        ]
+    return {key: value for key, value in summary.items() if value not in (None, [], {})}
+
+
+def with_pre_apply_claim_cleanup(root: Path, claim_result: dict[str, Any], entry: dict[str, Any]) -> dict[str, Any]:
+    cleanup = release_acquired_routed_claim(root, claim_result)
+    if cleanup.get("released") or cleanup.get("error"):
+        entry["claim_cleanup"] = cleanup_event_summary(cleanup)
+    if cleanup.get("error"):
+        errors = entry.setdefault("errors", [])
+        if isinstance(errors, list):
+            errors.append(f"claim cleanup failed: {cleanup['error']}")
+    return entry
+
+
 def report_cost_tokens(report: dict[str, Any]) -> int | None:
     cost = report.get("cost")
     if isinstance(cost, int):
@@ -596,6 +654,7 @@ def run_loop(
             )
         except ValueError as exc:
             entry = turn_entry(turn=index, trace=trace, unit=unit, outcome="rejected", errors=[str(exc)], duration_ms=clock_fixed)
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -611,6 +670,7 @@ def run_loop(
                 errors=[f"unreported worktree change: {path}" for path in unreported],
                 duration_ms=clock_fixed,
             )
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -627,6 +687,7 @@ def run_loop(
                 errors=errors,
                 duration_ms=clock_fixed,
             )
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -636,6 +697,7 @@ def run_loop(
         if human_gate:
             entry = turn_entry(turn=index, trace=trace, unit=unit, report=report, duration_ms=clock_fixed)
             entry["human_required"] = True
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -655,6 +717,7 @@ def run_loop(
             )
             if budget_warning:
                 entry["budget_warning"] = budget_warning
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -673,6 +736,7 @@ def run_loop(
                 budget_event=budget_event,
                 duration_ms=clock_fixed,
             )
+            entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
             break
