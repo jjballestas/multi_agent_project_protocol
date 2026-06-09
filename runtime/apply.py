@@ -37,7 +37,7 @@ try:
         review_qa_span,
         task_author,
     )
-    from .turn_validate import validate_turn
+    from .turn_validate import derive_transition_scopes, validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import (
@@ -58,7 +58,7 @@ except ImportError:  # pragma: no cover - direct script execution
         materialize_from_event_log_if_enabled,
     )
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
-    from turn_validate import validate_turn
+    from turn_validate import derive_transition_scopes, validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -224,6 +224,45 @@ def materialization_commit_paths(result: dict[str, Any] | None) -> list[str]:
     if not isinstance(result, dict) or result.get("materialized") is not True:
         return []
     return [str(path) for path in result.get("paths") or [] if str(path).strip()]
+
+
+def transition_commit_paths(report: dict[str, Any]) -> list[str]:
+    paths: list[str] = []
+    for path in derive_transition_scopes(report):
+        clean = str(path or "").split("#", 1)[0].strip()
+        if clean and clean not in paths:
+            paths.append(clean)
+    return paths
+
+
+def with_terminal_claim_release(report: dict[str, Any], claim: dict[str, Any] | None) -> dict[str, Any]:
+    if not claim or not str(claim.get("claim_id") or "").strip():
+        return report
+
+    transitions = deepcopy(report.get("transitions") or {})
+    claims = transitions.get("claims")
+    if claims is None:
+        claims = []
+    if not isinstance(claims, list):
+        return report
+
+    claim_id = str(claim["claim_id"])
+    if any(isinstance(item, dict) and item.get("claim_id") == claim_id for item in claims):
+        return report
+
+    task_transition = transitions.get("task_status")
+    to_status = str((task_transition or {}).get("to") or "") if isinstance(task_transition, dict) else ""
+    should_release = to_status in {"in_review", "done", "blocked"} or report.get("outcome") == "blocked"
+    if not should_release:
+        return report
+
+    updated = deepcopy(report)
+    updated_transitions = dict(transitions)
+    updated_claims = [deepcopy(item) for item in claims]
+    updated_claims.append({"op": "release", "claim_id": claim_id})
+    updated_transitions["claims"] = updated_claims
+    updated["transitions"] = updated_transitions
+    return updated
 
 
 def set_task_file_status(path: Path, status: str) -> None:
@@ -453,8 +492,9 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
             block_task(root, str(report["task_id"]))
             return {"green": False, "reverted": True, "blocked": True, "gate": None, "error": str(exc)}
         claim = active_claim_for_report(root, report)
-        apply_turn(report, root)
-        eventlog_events = emit_runtime_eventlog(root, report, claim)
+        report_for_apply = with_terminal_claim_release(report, claim)
+        apply_turn(report_for_apply, root)
+        eventlog_events = emit_runtime_eventlog(root, report_for_apply, claim)
         try:
             materialization = materialize_from_event_log_if_enabled(root)
         except ProtocolMaterializationError as exc:
@@ -479,12 +519,13 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
                 block_task(root, str(report["task_id"]))
                 return {"green": False, "reverted": True, "blocked": True, "gate": gate, "error": str(exc)}
             paths = [
-                *(report.get("changed_paths") or []),
+                *(report_for_apply.get("changed_paths") or []),
+                *transition_commit_paths(report_for_apply),
                 *runtime_state_commit_paths(root),
                 *materialization_commit_paths(materialization),
             ]
             try:
-                commit = commit_turn(root, report["commit_message"], paths, allow_policy=allow_policy)
+                commit = commit_turn(root, report_for_apply["commit_message"], paths, allow_policy=allow_policy)
                 cleanup_runtime_state_backup(runtime_backup)
                 return {
                     "green": True,

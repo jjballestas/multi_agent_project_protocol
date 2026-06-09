@@ -57,6 +57,20 @@ def claim(task_id: str, *, extra_scope: list[str] | None = None) -> dict:
     }
 
 
+def foreign_claim(task_id: str, scope: list[str]) -> dict:
+    return {
+        "claim_id": "CLAIM-foreign-claude",
+        "task_id": task_id,
+        "owner": "Claude",
+        "status": "active",
+        "scope": scope,
+        "started_at": "2026-06-06",
+        "updated_at": "2026-06-06",
+        "expires_at": "2026-06-07",
+        "notes": "foreign claim fixture",
+    }
+
+
 def released_claim(index: int) -> dict:
     return {
         "claim_id": f"CLAIM-released-{index:04d}",
@@ -78,9 +92,12 @@ def build_fixture(
     task_ids: list[str] | None = None,
     released_claims: int = 0,
     extra_claim_scope: list[str] | None = None,
+    omit_claims: list[str] | None = None,
+    extra_claims: list[dict] | None = None,
     with_prune_scripts: bool = False,
 ) -> None:
     task_ids = task_ids or ["TASK-9000"]
+    omit_claims = omit_claims or []
     tasks = [task(task_id) for task_id in task_ids]
     write_json(
         root / "protocol.config.json",
@@ -113,8 +130,9 @@ def build_fixture(
         },
     )
     write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": tasks})
-    claims = [claim(item["id"], extra_scope=extra_claim_scope) for item in tasks]
+    claims = [claim(item["id"], extra_scope=extra_claim_scope) for item in tasks if item["id"] not in omit_claims]
     claims.extend(released_claim(index) for index in range(1, released_claims + 1))
+    claims.extend(extra_claims or [])
     write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": claims})
     write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
     write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
@@ -184,6 +202,21 @@ def turn_report(task_id: str, *, outcome: str = "done", to_status: str = "done")
     }
 
 
+def turn_report_without_claim_transition(task_id: str, *, outcome: str = "done", to_status: str = "done") -> dict:
+    return {
+        "turn_id": f"RUN-fixture-no-claim-{task_id}",
+        "task_id": task_id,
+        "agent": "Codex",
+        "outcome": outcome,
+        "summary": f"Move {task_id} without self-reporting a claim.",
+        "changed_paths": [f"Area_comun/tasks/{task_id}.md"],
+        "transitions": {"task_status": {"from": "ready", "to": to_status}},
+        "commit_message": f"test(runtime): claim step {task_id}",
+        "gate": {"human_required": False},
+        "next_hint": None,
+    }
+
+
 def policy_path_report(task_id: str) -> dict:
     report = turn_report(task_id)
     report["changed_paths"] = [*report["changed_paths"], "AGENTS.md"]
@@ -241,6 +274,70 @@ def case_once_commits_one_turn() -> None:
         assert status == "done"
         assert result["run_id"] == "RUN-fixture-once"
         assert (fixture / "runtime/runs/RUN-fixture-once.jsonl").exists()
+
+
+def case_claim_step_acquires_missing_owner_claim() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-acquire-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, omit_claims=["TASK-9000"])
+        report_dir = write_reports(fixture, [turn_report_without_claim_transition("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-acquire", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before + 1
+        assert task_status(fixture) == "done"
+        claims = json.loads((fixture / "Area_comun/state/CLAIMS.json").read_text(encoding="utf-8-sig"))["claims"]
+        claim_rows = [item for item in claims if item["task_id"] == "TASK-9000" and item["owner"] == "Codex"]
+        assert len(claim_rows) == 1, claims
+        assert claim_rows[0]["status"] == "released", claims
+        events = (fixture / "runtime/state/events.jsonl").read_text(encoding="utf-8-sig")
+        assert "orchestrator:claim-acquire:TASK-9000:codex" in events
+        assert result["turns"][0]["trace"][:4] == ["gate_pre", "route", "claim", "adapter"], result
+
+
+def case_preclaimed_turn_does_not_emit_orchestrator_acquire() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-reuse-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture)
+        report_dir = write_reports(fixture, [turn_report("TASK-9000")])
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-reuse", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        events = (fixture / "runtime/state/events.jsonl").read_text(encoding="utf-8-sig")
+        assert "orchestrator:claim-acquire:TASK-9000:codex" not in events
+
+
+def case_claim_step_rejects_conflicting_other_claim() -> None:
+    with tempfile.TemporaryDirectory(prefix="runtime-loop-claim-conflict-") as temp:
+        fixture = Path(temp)
+        build_fixture(
+            fixture,
+            task_ids=["TASK-9000", "TASK-9001"],
+            omit_claims=["TASK-9000"],
+            extra_claims=[foreign_claim("TASK-9001", ["Area_comun/state/CLAIMS.json"])],
+        )
+        report_dir = write_reports(fixture, [turn_report_without_claim_transition("TASK-9000")])
+        before = git_count(fixture)
+        completed = run_orchestrator(
+            fixture,
+            ["--run", "--once", "--run-id", "RUN-claim-conflict", "--replay-report", str(report_dir)],
+        )
+        result = json.loads(completed.stdout)
+        assert result["ok"] is True, result
+        assert git_count(fixture) == before
+        turn = result["turns"][0]
+        assert turn["outcome"] == "rejected", result
+        assert "claim acquire failed" in turn["errors"][0], result
+        assert "overlaps active claim" in turn["errors"][0], result
+        assert "adapter" not in turn["trace"], result
+        assert task_status(fixture) == "ready"
 
 
 def case_sequence_max_iter_cuts() -> None:
@@ -352,6 +449,9 @@ def case_commit_failure_discards_half_applied_turn_and_blocks() -> None:
 def main() -> int:
     cases = [
         case_once_commits_one_turn,
+        case_claim_step_acquires_missing_owner_claim,
+        case_preclaimed_turn_does_not_emit_orchestrator_acquire,
+        case_claim_step_rejects_conflicting_other_claim,
         case_sequence_max_iter_cuts,
         case_human_required_stops_without_commit,
         case_plan_is_read_only,

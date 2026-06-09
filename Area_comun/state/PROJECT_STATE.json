@@ -39,7 +39,7 @@
         {
             "id": "TASK-0093",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto."
         }
     ],

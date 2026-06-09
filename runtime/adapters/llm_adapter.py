@@ -60,6 +60,7 @@ def build_prompt(*, context: ContextPack, root: Path) -> str:
         '  "summary": one sentence; "changed_paths": the EXACT list of files you edited;',
         '  "commit_message": a short conventional-commit line;',
         f'  "transitions": {{"task_status": {{"from": "{status}", "to": "in_review"}}}}.',
+        "The orchestrator already acquired your active claim before this turn; do not include transitions.claims.",
         'If you cannot complete the work within scope, make NO edits and return "outcome": "blocked" with'
         ' "changed_paths": [] and omit the task_status transition.',
         "Return only a JSON turn report conforming to runtime/turn_schema.json.",

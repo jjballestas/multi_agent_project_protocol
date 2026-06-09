@@ -16,7 +16,8 @@ from typing import Any
 
 try:
     from .budget import Budget, budget_settings, responsible
-    from .context import load_state
+    from .context import active_claims, load_state
+    from .eventlog import utc_now
     from .metrics import summarize
     from .router import select_next
     from .adapters.base import ContextPack
@@ -38,10 +39,12 @@ try:
         supervised_autonomy_payload,
         write_run_report,
     )
+    from .submit_intent import IntentError, submit_intent
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
-    from context import load_state
+    from context import active_claims, load_state
+    from eventlog import utc_now
     from router import select_next
     from adapters.base import ContextPack
     from adapters.llm_adapter import (
@@ -60,6 +63,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from metrics import summarize
     from runlog import turn_entry
     from supervised_autonomy import fix_cycle_checkpoint_reason, pause_sentinel_path, supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
+    from submit_intent import IntentError, submit_intent
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -136,6 +140,87 @@ def default_run_id(reports: list[Path | None], *, adapter_name: str = "replay") 
 
 def schema_report(report: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in report.items() if key in TURN_SCHEMA_KEYS}
+
+
+def normalize_scope_path(path: Any) -> str:
+    return str(path or "").replace("\\", "/").strip()
+
+
+def owner_slug(owner: str) -> str:
+    return "".join(char.lower() if char.isalnum() else "-" for char in owner).strip("-") or "agent"
+
+
+def claim_id_for_unit(task_id: str, owner: str) -> str:
+    return f"CLAIM-{task_id}-{owner_slug(owner)}-runtime"
+
+
+def task_claim_scope(task: dict[str, Any], task_id: str) -> list[str]:
+    scope: list[str] = [
+        "Area_comun/state/CLAIMS.json",
+        f"Area_comun/state/TASK_INDEX.json#{task_id}",
+        f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
+    ]
+    for key in ("file", "task_file"):
+        value = normalize_scope_path(task.get(key))
+        if value:
+            scope.append(value)
+    for key in ("scope", "relevant_files", "deliverables"):
+        values = task.get(key)
+        if isinstance(values, (list, tuple)):
+            for value in values:
+                text = normalize_scope_path(value)
+                if text and ("/" in text or "." in Path(text).name):
+                    scope.append(text)
+    return list(dict.fromkeys(scope))
+
+
+def active_claim_for_unit(state: dict[str, Any], task_id: str, owner: str) -> dict[str, Any] | None:
+    for claim in active_claims(state):
+        if claim.get("task_id") == task_id and claim.get("owner") == owner:
+            return dict(claim)
+    return None
+
+
+def acquire_routed_claim(root: Path, state: dict[str, Any], unit: dict[str, Any]) -> dict[str, Any]:
+    task_id = str(unit.get("task_id") or "")
+    owner = str(unit.get("owner") or "")
+    task = task_for_unit(state, unit) or {}
+    if not task_id or task_id == "none" or not owner:
+        return {"acquired": False, "claim": None}
+
+    existing = active_claim_for_unit(state, task_id, owner)
+    if existing is not None:
+        return {"acquired": False, "claim": existing, "reused": True}
+
+    claim_id = claim_id_for_unit(task_id, owner)
+    timestamp = utc_now()
+    claim = {
+        "claim_id": claim_id,
+        "task_id": task_id,
+        "owner": owner,
+        "status": "active",
+        "scope": task_claim_scope(task, task_id),
+        "started_at": timestamp,
+        "updated_at": timestamp,
+        "expires_at": "2026-06-10",
+        "notes": "Acquired by runtime orchestrator before routed turn.",
+    }
+    try:
+        result = submit_intent(
+            root,
+            owner,
+            {
+                "claim": {
+                    "op": "acquire",
+                    "idempotency_key": f"orchestrator:claim-acquire:{task_id}:{owner_slug(owner)}",
+                    "claim": claim,
+                }
+            },
+            timestamp=timestamp,
+        )
+    except IntentError as exc:
+        return {"acquired": False, "claim": None, "error": str(exc)}
+    return {"acquired": True, "claim": claim, "result": result}
 
 
 def report_cost_tokens(report: dict[str, Any]) -> int | None:
@@ -480,6 +565,23 @@ def run_loop(
             break
 
         trace.append("claim")
+        claim_result = acquire_routed_claim(root, state, unit)
+        if claim_result.get("error"):
+            entry = turn_entry(
+                turn=index,
+                trace=trace,
+                unit=unit,
+                outcome="rejected",
+                errors=[f"claim acquire failed: {claim_result['error']}"],
+                duration_ms=clock_fixed,
+            )
+            runlog.append(entry)
+            turns.append(entry)
+            break
+        if claim_result.get("acquired"):
+            baseline_dirty = set(dirty_worktree_paths(root))
+            state = load_state(root)
+
         context = build_context(state=state, unit=unit, replay_report_path=report_path, turn_index=index)
         trace.append("adapter")
         try:

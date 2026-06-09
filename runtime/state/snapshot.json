@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8caf8b567fd92f0bd17e0a2f930adab7dc1dd25ff63b3371b9419b35bfa9ace6",
+  "canonical_hash": "09b877d03b3ae11787df1a1ff691b581ff426dcfceefaa7e6de1c6a5dd07909c",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -53,6 +53,7 @@
       "CLAIM-20260609-ready-task0091-claude": 1,
       "CLAIM-20260609-sandbox-failures-codex": 1,
       "CLAIM-20260609-task0090-codex": 1,
+      "CLAIM-20260609-task0093-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -71,11 +72,11 @@
       "TASK-0090": 8,
       "TASK-0091": 6,
       "TASK-0092": 6,
-      "TASK-0093": 2,
+      "TASK-0093": 5,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 166,
+    "events_applied": 170,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -165,6 +166,8 @@
       "ledger-op:auto-claim:TASK-0089:CLAIM-20260608-task0089-codex:task-status": 110,
       "ledger-op:auto-claim:TASK-0090:CLAIM-20260609-task0090-codex:claim-acquire": 130,
       "ledger-op:auto-claim:TASK-0090:CLAIM-20260609-task0090-codex:task-status": 131,
+      "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-codex:claim-acquire": 167,
+      "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-codex:task-status": 168,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-release": 9,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 8,
       "ledger-op:handoff-release:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-release": 33,
@@ -173,6 +176,8 @@
       "ledger-op:handoff-release:TASK-0089:CLAIM-20260608-task0089-codex:task-status": 111,
       "ledger-op:handoff-release:TASK-0090:CLAIM-20260609-task0090-codex:claim-release": 133,
       "ledger-op:handoff-release:TASK-0090:CLAIM-20260609-task0090-codex:task-status": 132,
+      "ledger-op:handoff-release:TASK-0093:CLAIM-20260609-task0093-codex:claim-release": 170,
+      "ledger-op:handoff-release:TASK-0093:CLAIM-20260609-task0093-codex:task-status": 169,
       "mailbox-hygiene:task0089-go-status:claim-acquire": 113,
       "mailbox-hygiene:task0089-go-status:claim-release": 114,
       "operator-memory-rule-20260608:claim-acquire": 14,
@@ -248,5 +253,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 166
+  "up_to_seq": 170
 }
