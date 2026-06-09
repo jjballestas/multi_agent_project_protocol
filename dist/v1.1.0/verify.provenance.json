@@ -1,0 +1,9 @@
+{
+  "actual_subject_digest": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
+  "expected_sbom_hash": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
+  "manifest": "D:/Agentes/multi_agent_project_protocol/dist/v1.1.0/manifest.json",
+  "ok": true,
+  "provenance": "D:/Agentes/multi_agent_project_protocol/dist/v1.1.0/provenance.json",
+  "schema_version": "protocol_provenance_verify.v1",
+  "subject_name": "multi_agent_project_protocol@1.1.0"
+}

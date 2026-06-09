@@ -1,0 +1,21 @@
+{
+  "builder": {
+    "id": "ci:release"
+  },
+  "generated_by": "scripts/generate_provenance.py",
+  "invocation": {
+    "commit": "928e5dd7c3b0dce0a997a3112e5cd99acdac7226",
+    "process": "python scripts/generate_manifest.py --root . --commit 928e5dd7c3b0dce0a997a3112e5cd99acdac7226 --timestamp 2026-06-09T00:00:00Z"
+  },
+  "metadata": {
+    "schema": "provenance.v1",
+    "timestamp": "2026-06-09T00:01:00Z"
+  },
+  "schema_version": "protocol_provenance.v1",
+  "subject": {
+    "digest": {
+      "sha256": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac"
+    },
+    "name": "multi_agent_project_protocol@1.1.0"
+  }
+}
