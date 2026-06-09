@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "170c1b67edb907ef742bd19409c541dbfd56d4bb3333bdb6b9169ae210854907",
+  "canonical_hash": "58ab7cb8b3f43b705f4de0d5c8b2a221757033e2c8f9caba105d14a38ca6daaa",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -53,9 +53,12 @@
       "CLAIM-20260609-enqueue-task0093-claude": 1,
       "CLAIM-20260609-hold-task0091-claude": 1,
       "CLAIM-20260609-ready-task0091-claude": 1,
+      "CLAIM-20260609-reject-task0093-claude": 1,
       "CLAIM-20260609-sandbox-failures-codex": 1,
       "CLAIM-20260609-task0090-codex": 1,
       "CLAIM-20260609-task0093-codex": 1,
+      "CLAIM-20260609-task0093-finding-claude": 1,
+      "CLAIM-20260609-task0093-finding2-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -75,16 +78,23 @@
       "TASK-0090": 8,
       "TASK-0091": 6,
       "TASK-0092": 6,
-      "TASK-0093": 5,
+      "TASK-0093": 9,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 174,
+    "events_applied": 181,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
+      "claude:reject-review:claim-acquire:TASK-0093": 175,
+      "claude:reject-review:claim-release:TASK-0093": 177,
+      "claude:reject-review:status:TASK-0093": 176,
+      "claude:task0093-finding:claim-acquire": 178,
+      "claude:task0093-finding:claim-reacquire": 180,
+      "claude:task0093-finding:claim-release": 179,
+      "claude:task0093-finding:claim-release2": 181,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -260,5 +270,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 174
+  "up_to_seq": 181
 }

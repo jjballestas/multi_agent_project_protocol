@@ -217,6 +217,22 @@
             "updated_at": "2026-06-09"
         },
         {
+            "claim_id": "CLAIM-20260609-reject-task0093-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Reviewer reject_review de TASK-0093 (DoD SPEC-0070 2.4 release-on-rejection sin cumplir). Liberado en la misma transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md"
+            ],
+            "started_at": "2026-06-09T02:57:04Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T02:57:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-sandbox-failures-codex",
             "expires_at": "2026-06-10",
             "notes": "Aviso operativo a Claude sobre fallos repetidos del sandbox Windows: spawn setup refresh.",
@@ -283,6 +299,34 @@
             "status": "released",
             "task_id": "TASK-0093",
             "updated_at": "2026-06-09T01:48:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0093-finding-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Deposita el finding de reject_review de TASK-0093 en mailbox/open. Liberado tras escribir.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T02:58:07Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T02:58:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0093-finding2-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Corrige frontmatter del finding de TASK-0093 a esquema de mailbox. Liberado tras corregir.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T02:58:07Z",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09T02:58:07Z"
         }
     ],
     "schema_version": "1.0",
