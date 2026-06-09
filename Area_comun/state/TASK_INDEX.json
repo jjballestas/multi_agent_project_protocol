@@ -248,7 +248,7 @@
             "review": "(PILOTO SA.4 RE-FIRE) Objetivo del re-pilot bajo el sobre (DECISION-0027), GO operador 2026-06-09 tras smoke real limpio. Codex (invoker real) edita SOLO prosa en examples/neutrality_scan_cases/README.md; caps 2/1/180000, checkpoint tras turno 1.",
             "sdd_required": false,
             "spec_id": "none",
-            "status": "in_review",
+            "status": "done",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
             "type": "documentation",
             "updated_at": "2026-06-09"
@@ -372,6 +372,75 @@
             "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
             "type": "implementation",
             "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/apply.py",
+                "runtime/vcs.py",
+                "examples/runtime_loop_cases/"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+            "id": "TASK-0095",
+            "linked_decisions": [
+                "DECISION-0022"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0091",
+                "TASK-0093",
+                "DECISION-0022"
+            ],
+            "relevant_files": [
+                "runtime/apply.py",
+                "runtime/vcs.py",
+                "runtime/submit_intent.py",
+                "examples/runtime_loop_cases/"
+            ],
+            "review": "PROPOSED (Claude 2026-06-10, follow-up #1 del re-pilot SA.4): commit de turno self-consistente (incluir el task .md mutado por las transiciones). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+            "sdd_required": true,
+            "spec_id": "none",
+            "status": "proposed",
+            "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "runtime/metrics.py",
+                "examples/"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+            "id": "TASK-0096",
+            "linked_decisions": [
+                "DECISION-0013"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0091",
+                "DECISION-0013"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/metrics.py",
+                "runtime/runlog.py",
+                "examples/"
+            ],
+            "review": "PROPOSED (Claude 2026-06-10, follow-up #2 del re-pilot SA.4): run_id unico por corrida (evita el ruido de agregacion de metricas; run_id colisiono con el smoke en el re-pilot). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+            "sdd_required": true,
+            "spec_id": "none",
+            "status": "proposed",
+            "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
         }
     ],
     "updated_at": "2026-06-08",

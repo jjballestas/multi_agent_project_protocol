@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b4566223a05083b4b703628322e6bbd1804177a04325b227ef600d7b2b1f5eb7",
+  "canonical_hash": "24163d2e9a9eb4865a36fb2c1a4704f2b56a23c48e20bb5dc5143be577084990",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -74,11 +74,14 @@
       "CLAIM-20260609-tempfile-acl-coord-codex": 1,
       "CLAIM-20260609-tempfile-acl-hardening-codex": 1,
       "CLAIM-20260609-tempfile-runtime-backup-hardening-codex": 1,
+      "CLAIM-20260610-archive-accept-0093-0094-codex": 1,
+      "CLAIM-20260610-close-0091-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
       "DECISION-0027-activacion-sa4-piloto": 1,
       "MAILBOX-HYGIENE-20260608": 1,
+      "MAILBOX-HYGIENE-20260610": 1,
       "MAINTENANCE-CODEX-SANDBOX-20260609": 6,
       "MAINTENANCE-MAILBOX-20260609": 1,
       "MAINTENANCE-PRUNE": 11,
@@ -92,14 +95,16 @@
       "TASK-0088": 10,
       "TASK-0089": 8,
       "TASK-0090": 8,
-      "TASK-0091": 11,
+      "TASK-0091": 13,
       "TASK-0092": 6,
       "TASK-0093": 15,
       "TASK-0094": 11,
+      "TASK-0095": 1,
+      "TASK-0096": 1,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 223,
+    "events_applied": 230,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -115,6 +120,11 @@
       "claude:close-0093-0094:claim-release": 215,
       "claude:close-0093-0094:status-0093": 214,
       "claude:close-0093-0094:status-0094": 213,
+      "claude:close0091-followups:claim-acquire": 226,
+      "claude:close0091-followups:claim-release": 230,
+      "claude:close0091-followups:status-0091": 227,
+      "claude:close0091-followups:upsert-0095": 228,
+      "claude:close0091-followups:upsert-0096": 229,
       "claude:mailbox-hygiene-20260609:claim-acquire": 188,
       "claude:mailbox-hygiene-20260609:claim-release": 189,
       "claude:reject-review:claim-acquire:TASK-0093": 175,
@@ -172,6 +182,8 @@
       "codex:anomaly-task0092-unclaimed-edits:claim-release": 156,
       "codex:hardening-untracked-response:claim-acquire": 199,
       "codex:hardening-untracked-response:claim-release": 200,
+      "codex:mailbox-accept-0093-0094-archive:claim-acquire": 224,
+      "codex:mailbox-accept-0093-0094-archive:claim-release": 225,
       "codex:maintenance-tempfile-acl-hardening:claim-acquire": 190,
       "codex:maintenance-tempfile-acl-hardening:claim-release": 192,
       "codex:maintenance-tempfile-runtime-backup-hardening:claim-acquire": 191,
@@ -337,5 +349,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 223
+  "up_to_seq": 230
 }
