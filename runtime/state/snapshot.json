@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0f54d3daf01164fd0bb5d10923ba7de9b37d6c1f30dce6b41a4f47c481b1550e",
+  "canonical_hash": "4e581e88f26e9d80ceb7e1e4b29a139dbb214cb67bc74f7145e83fc773975271",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -42,6 +42,7 @@
       "CLAIM-20260608-task0089-codex": 1,
       "CLAIM-20260608-task0089-mailbox-hygiene-codex": 1,
       "CLAIM-20260609-close-task0090-claude": 1,
+      "CLAIM-20260609-close-task0092-claude": 1,
       "CLAIM-20260609-enqueue-task0090-claude": 1,
       "CLAIM-20260609-enqueue-task0091-claude": 1,
       "CLAIM-20260609-enqueue-task0092-claude": 1,
@@ -54,7 +55,7 @@
       "MAILBOX-HYGIENE-20260608": 1,
       "MAINTENANCE-PRUNE": 11,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 11,
+      "PROJECT_STATE": 12,
       "TASK-0084": 8,
       "TASK-0085": 12,
       "TASK-0086": 9,
@@ -63,11 +64,11 @@
       "TASK-0089": 8,
       "TASK-0090": 8,
       "TASK-0091": 4,
-      "TASK-0092": 2,
+      "TASK-0092": 4,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 150,
+    "events_applied": 154,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -102,6 +103,10 @@
       "close-task0090:project-narrative": 140,
       "close-task0090:task-status": 139,
       "close-task0090:task-upsert": 138,
+      "close-task0092:claim-acquire": 151,
+      "close-task0092:claim-release": 154,
+      "close-task0092:project-narrative": 153,
+      "close-task0092:task-upsert": 152,
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
       "decision0026:decision": 19,
@@ -224,5 +229,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 150
+  "up_to_seq": 154
 }

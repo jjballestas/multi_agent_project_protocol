@@ -48,7 +48,7 @@
         "command": "python runtime/llm_turn_wrapper.py --backend \"claude -p\""
       },
       "codex": {
-        "command": "codex"
+        "command": "python runtime/llm_turn_wrapper.py --backend \"codex exec -s workspace-write -c approval_policy=never -c model_reasoning_effort=low --skip-git-repo-check\""
       }
     },
     "supervised_autonomy": {

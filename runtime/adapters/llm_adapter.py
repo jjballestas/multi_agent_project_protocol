@@ -44,8 +44,24 @@ def context_file(root: Path, relative_path: str) -> str:
 def build_prompt(*, context: ContextPack, root: Path) -> str:
     task = context.task or {}
     unit = context.unit or {}
+    task_id = str(task.get("id") or unit.get("task_id") or "none")
+    owner = str(unit.get("owner") or task.get("owner") or "")
+    status = str(task.get("status") or "ready")
+    scope = task.get("relevant_files") or task.get("deliverables") or []
     sections = [
-        "You are running one protocol runtime turn.",
+        f"You are agent {owner}, executing ONE protocol runtime turn for task {task_id}.",
+        "Do the task's work NOW: edit ONLY the file(s) within the task scope to accomplish its objective;"
+        " do not read or change anything outside that scope.",
+        f"task scope (files you may edit): {json.dumps(list(scope), ensure_ascii=False)}",
+        "When done, output ONLY a single JSON object (no prose, no markdown code fences) that is a turn report"
+        " conforming to runtime/turn_schema.json, with these fields:",
+        f'  "turn_id": any unique string; "task_id": "{task_id}"; "agent": "{owner}";',
+        '  "outcome": "done" if you completed the work (else "blocked" with a one-line summary);',
+        '  "summary": one sentence; "changed_paths": the EXACT list of files you edited;',
+        '  "commit_message": a short conventional-commit line;',
+        f'  "transitions": {{"task_status": {{"from": "{status}", "to": "in_review"}}}}.',
+        'If you cannot complete the work within scope, make NO edits and return "outcome": "blocked" with'
+        ' "changed_paths": [] and omit the task_status transition.',
         "Return only a JSON turn report conforming to runtime/turn_schema.json.",
         f"turn_index: {context.turn_index}",
         f"unit: {json.dumps(unit, ensure_ascii=False, sort_keys=True)}",
