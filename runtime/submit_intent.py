@@ -7,7 +7,6 @@ import argparse
 import json
 import shutil
 import sys
-import tempfile
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -25,6 +24,7 @@ try:
         protocol_state_drift,
         write_genesis_reference,
     )
+    from .temp_paths import make_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter, STATE_DIR, canonical_hash
@@ -38,6 +38,7 @@ except ImportError:  # pragma: no cover - direct script execution
         protocol_state_drift,
         write_genesis_reference,
     )
+    from temp_paths import make_root_temp_dir
 
 
 VALID_TASK_STATUSES = {
@@ -119,7 +120,7 @@ def scopes_overlap(left: str, right: str) -> bool:
 
 
 def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
-    temp_root = Path(tempfile.mkdtemp(prefix="submit-intent-runtime-backup-"))
+    temp_root = make_root_temp_dir(root, ".submit-intent-runtime-backup-")
     state_dir = root / STATE_DIR
     backup_dir = temp_root / "state"
     if state_dir.exists():

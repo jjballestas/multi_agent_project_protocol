@@ -11,15 +11,16 @@ import json
 import re
 import shutil
 import subprocess
-import tempfile
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Callable
 
 try:
     from .eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
+    from .temp_paths import make_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
+    from temp_paths import make_root_temp_dir
 
 
 PROTOCOL_STATE_PATHS = {
@@ -582,8 +583,11 @@ def materialize_to_disk(
     # Stage on the SAME filesystem as the targets so the atomic os.replace() below is an
     # intra-drive rename. Using the OS default temp dir breaks on Windows when temp and the
     # repo live on different drives (os.replace raises WinError 17 across drives).
-    with tempfile.TemporaryDirectory(prefix=".protocol-state-materialize-", dir=root) as temp_name:
-        temp_root = Path(temp_name)
+    # Avoid tempfile.TemporaryDirectory(): on Python 3.12+ for Windows it can create 0o700
+    # directories whose ACLs are too restrictive for unelevated sandbox tokens, and replace()
+    # carries those file ACLs into the hot state. A normal repo-local mkdir inherits repo ACLs.
+    temp_root = make_root_temp_dir(root, ".protocol-state-materialize-")
+    try:
         staged_root = temp_root / "staged"
         backup_root = temp_root / "backup"
         backups: dict[str, Path | None] = {}
@@ -619,6 +623,8 @@ def materialize_to_disk(
                     target.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(backup, target)
             raise
+    finally:
+        shutil.rmtree(temp_root, ignore_errors=True)
 
     return {
         "materialized": True,

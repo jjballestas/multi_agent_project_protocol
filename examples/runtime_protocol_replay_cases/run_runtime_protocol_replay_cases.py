@@ -7,7 +7,6 @@ import json
 import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +20,7 @@ from runtime.protocol_replay import (  # noqa: E402
     protocol_state_drift,
     replay_protocol_state,
 )
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 TASK_ID = "TASK-9000"
@@ -158,8 +158,7 @@ def case_materialize_is_idempotent_and_canonical() -> None:
 
 
 def case_genesis_round_trip_matches_hot_state() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-replay-genesis-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-replay-genesis-") as root:
         build_fixture(root, event_state_enabled=False, hot_status="ready")
         genesis = build_genesis_snapshot(root)
         replayed = replay_protocol_state([event(1, "protocol.genesis", {"state": genesis["state"]})])
@@ -167,8 +166,7 @@ def case_genesis_round_trip_matches_hot_state() -> None:
 
 
 def case_drift_detected_and_absent() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-replay-drift-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-replay-drift-") as root:
         build_fixture(root, event_state_enabled=True, hot_status="ready")
         assert protocol_state_drift(root)["has_drift"] is False
         write_json(root / "Area_comun/state/TASK_INDEX.json", hot_docs("done")["task_index"])
@@ -200,8 +198,7 @@ def validator_stdout(root: Path, *, powershell: bool = False) -> str:
 
 
 def case_validator_gate_off_is_silent_and_gate_on_warns() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-replay-validator-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-replay-validator-") as root:
         build_fixture(root, event_state_enabled=False, hot_status="done")
         stdout = validator_stdout(root)
         assert "Runtime protocol state drift" not in stdout, stdout
@@ -214,8 +211,7 @@ def case_validator_gate_off_is_silent_and_gate_on_warns() -> None:
 
 
 def case_replay_has_no_side_effects() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-replay-negative-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-replay-negative-") as root:
         build_fixture(root, event_state_enabled=True, hot_status="ready")
         before = {
             path.relative_to(root).as_posix(): path.read_text(encoding="utf-8-sig")

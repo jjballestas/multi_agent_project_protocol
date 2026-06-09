@@ -6,7 +6,6 @@ from __future__ import annotations
 import json
 import re
 import shutil
-import tempfile
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -38,6 +37,7 @@ try:
         task_author,
     )
     from .turn_validate import derive_transition_scopes, validate_turn
+    from .temp_paths import make_root_temp_dir
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import (
@@ -58,6 +58,7 @@ except ImportError:  # pragma: no cover - direct script execution
         materialize_from_event_log_if_enabled,
     )
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
+    from temp_paths import make_root_temp_dir
     from turn_validate import derive_transition_scopes, validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
@@ -84,7 +85,7 @@ def assert_event_state_config_valid(root: Path) -> None:
 
 
 def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
-    temp_root = Path(tempfile.mkdtemp(prefix="runtime-state-backup-"))
+    temp_root = make_root_temp_dir(root, ".runtime-state-backup-")
     state_dir = root / STATE_DIR
     backup_dir = temp_root / "state"
     if state_dir.exists():

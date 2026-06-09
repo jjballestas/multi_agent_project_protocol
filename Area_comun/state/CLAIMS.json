@@ -399,6 +399,35 @@
             "updated_at": "2026-06-09T03:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260609-task0094-codex",
+            "expires_at": "2026-06-10",
+            "notes": "TASK-0094 formalize tempfile ACL hardening for authoritative write-path; posture B runbook, no SA.4 re-arm, no pilot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                "AGENTS.md",
+                "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
+                "runtime/temp_paths.py",
+                "runtime/apply.py",
+                "runtime/protocol_replay.py",
+                "runtime/submit_intent.py",
+                "examples/runtime_protocol_materialize_cases/",
+                "examples/materialize_cross_fs_cases/",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T04:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T04:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-task0094-ready-claude",
             "expires_at": "2026-06-10",
             "notes": "Postura B ratificada por operador: lock B + promover TASK-0094 a ready+GO. Liberado tras escribir.",
@@ -415,6 +444,39 @@
             "status": "released",
             "task_id": "TASK-0094",
             "updated_at": "2026-06-09T20:55:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0094-regression-harness-codex",
+            "expires_at": "2026-06-10",
+            "notes": "TASK-0094 follow-on scope: migrate requested regression harness fixtures off OS TEMP so they pass inside Codex Windows sandbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "examples/intent_flow_cases/",
+                "examples/runtime_real_adapter_cases/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T05:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T05:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0094-replay-cases-codex",
+            "expires_at": "2026-06-10",
+            "notes": "TASK-0094 follow-on scope: make nested B1 replay harness use repo-local inherited-ACL temp dirs so materialization golden passes inside Codex sandbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "examples/runtime_protocol_replay_cases/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-09T05:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T05:00:00Z"
         },
         {
             "claim_id": "CLAIM-20260609-temp-acl-rule-codex",

@@ -18,7 +18,6 @@ from __future__ import annotations
 import errno
 import os
 import sys
-import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +32,7 @@ from run_runtime_protocol_materialize_cases import (  # noqa: E402
     replay_protocol_state,
 )
 from runtime.protocol_replay import materialize_protocol_state, materialize_to_disk  # noqa: E402
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 def _is_under(child: Path, parent: Path) -> bool:
@@ -43,8 +43,7 @@ def _is_under(child: Path, parent: Path) -> bool:
 
 def case_materialize_succeeds_when_temp_would_be_cross_fs() -> None:
     """Staging must be under root so the atomic rename never crosses filesystems."""
-    with tempfile.TemporaryDirectory(prefix="materialize-cross-fs-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".materialize-cross-fs-") as root:
         snapshot = replay_protocol_state(
             [event(1, "protocol.genesis", {"state": hot_docs("done", "released")})]
         )
@@ -78,8 +77,7 @@ def case_materialize_succeeds_when_temp_would_be_cross_fs() -> None:
 
 def case_materialize_is_still_idempotent_under_guard() -> None:
     """A second materialize over identical state is a no-op and stays intra-FS."""
-    with tempfile.TemporaryDirectory(prefix="materialize-cross-fs-idem-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".materialize-cross-fs-idem-") as root:
         snapshot = replay_protocol_state(
             [event(1, "protocol.genesis", {"state": hot_docs("done", "released")})]
         )

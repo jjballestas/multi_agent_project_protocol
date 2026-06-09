@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import json
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +28,7 @@ from runtime.adapters.llm_adapter import (  # noqa: E402
     real_invoker_activation_error,
     resolve_llm_command,
 )
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -76,8 +76,7 @@ def command_for(script: Path) -> str:
 
 
 def case_real_invoker_requires_activation_gates() -> None:
-    with tempfile.TemporaryDirectory(prefix="runtime-real-gated-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-gated-") as fixture:
         build_fixture(fixture)
         before = git_count(fixture)
         script, sentinel = write_sentinel_agent(fixture, turn_report("TASK-9000"))
@@ -102,8 +101,7 @@ def case_real_invoker_requires_activation_gates() -> None:
         assert git_count(fixture) == before
         assert task_status(fixture) == "ready"
 
-    with tempfile.TemporaryDirectory(prefix="runtime-real-no-allow-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-no-allow-") as fixture:
         build_fixture(fixture, real_invoker_enabled=True)
         script, sentinel = write_sentinel_agent(fixture, turn_report("TASK-9000"))
         completed = run_orchestrator(
@@ -124,8 +122,7 @@ def case_real_invoker_requires_activation_gates() -> None:
         assert "--allow-real-invoker" in result["turns"][0]["errors"][0], result
         assert not sentinel.exists()
 
-    with tempfile.TemporaryDirectory(prefix="runtime-real-no-once-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-no-once-") as fixture:
         build_fixture(fixture, real_invoker_enabled=True)
         script, sentinel = write_sentinel_agent(fixture, turn_report("TASK-9000"))
         completed = run_orchestrator(
@@ -150,8 +147,7 @@ def case_real_invoker_requires_activation_gates() -> None:
 
 
 def case_recorded_replay_comparative() -> None:
-    with tempfile.TemporaryDirectory(prefix="runtime-real-compare-") as temp:
-        base = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-compare-") as base:
         replay_root = base / "replay-root"
         recorded_root = base / "recorded-root"
         report = turn_report("TASK-9000")
@@ -176,8 +172,7 @@ def case_recorded_replay_comparative() -> None:
 
 
 def case_recorded_stand_in_enforces_limits() -> None:
-    with tempfile.TemporaryDirectory(prefix="runtime-real-budget-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-budget-") as fixture:
         build_fixture(fixture)
         update_config(fixture, {"budget": {"enabled": True, "hard_cost_tokens": 5}})
         transcripts = write_transcript(fixture, turn_report("TASK-9000", cost=6))
@@ -190,8 +185,7 @@ def case_recorded_stand_in_enforces_limits() -> None:
         assert result["turns"][0]["outcome"] == "budget_exhausted", result
         assert result["turns"][0]["budget_escalation"]["reason"] == "hard_cost_tokens"
 
-    with tempfile.TemporaryDirectory(prefix="runtime-real-policy-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-policy-") as fixture:
         build_fixture(fixture)
         update_config(
             fixture,
@@ -216,8 +210,7 @@ def case_recorded_stand_in_enforces_limits() -> None:
         assert result["turns"][0]["outcome"] == "rejected", result
         assert any("security.tool_denied" in error for error in result["turns"][0]["errors"]), result
 
-    with tempfile.TemporaryDirectory(prefix="runtime-real-guardrail-") as temp:
-        fixture = Path(temp)
+    with root_temp_dir(ROOT, ".runtime-real-guardrail-") as fixture:
         build_fixture(fixture)
         claims_path = fixture / "Area_comun" / "state" / "CLAIMS.json"
         claims = read_json(claims_path)

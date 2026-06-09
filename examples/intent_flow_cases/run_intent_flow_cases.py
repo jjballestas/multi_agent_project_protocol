@@ -7,7 +7,6 @@ import json
 import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 
 from runtime.protocol_replay import protocol_state_drift, write_genesis_reference  # noqa: E402
 from runtime.submit_intent import IntentError, submit_intent  # noqa: E402
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 TASK_ID = "TASK-9300"
@@ -181,8 +181,7 @@ def task_status_intent(from_status: str = "ready", to_status: str = "in_progress
 
 
 def case_task_status_materializes_json_and_task_file() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-task-status-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-task-status-") as root:
         build_fixture(root, status="ready")
         result = submit_intent(root, "Codex", task_status_intent(), timestamp=TIMESTAMP, commit=COMMIT)
         assert result["event"]["type"] == "intent.applied"
@@ -196,8 +195,7 @@ def case_task_status_materializes_json_and_task_file() -> None:
 
 
 def case_claim_release_materializes_claims() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-claim-release-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-claim-release-") as root:
         build_fixture(root, status="in_progress")
         result = submit_intent(
             root,
@@ -213,8 +211,7 @@ def case_claim_release_materializes_claims() -> None:
 
 
 def case_decision_materializes_project_state() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-decision-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-decision-") as root:
         build_fixture(root, claims=[claim(owner="Claude")])
         result = submit_intent(
             root,
@@ -230,8 +227,7 @@ def case_decision_materializes_project_state() -> None:
 
 
 def case_project_narrative_materializes_project_state() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-project-narrative-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-project-narrative-") as root:
         build_fixture(root, claims=[claim(owner="Claude", scope=["Area_comun/state/PROJECT_STATE.json"])])
         result = submit_intent(
             root,
@@ -252,8 +248,7 @@ def case_project_narrative_materializes_project_state() -> None:
 
 
 def case_protocol_prune_removes_terminal_hot_entries() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-protocol-prune-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-protocol-prune-") as root:
         build_fixture(
             root,
             status="done",
@@ -289,8 +284,7 @@ def case_protocol_prune_removes_terminal_hot_entries() -> None:
 
 
 def case_invalid_scope_rejected_without_changes() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-invalid-scope-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-invalid-scope-") as root:
         build_fixture(root, claims=[claim(scope=[f"Area_comun/tasks/{TASK_ID}.md"])])
         before = state_bytes(root)
         try:
@@ -303,8 +297,7 @@ def case_invalid_scope_rejected_without_changes() -> None:
 
 
 def case_materialization_failure_rolls_back_event_and_hot_state() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-atomic-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-atomic-") as root:
         build_fixture(root, status="ready")
         before = state_bytes(root)
         try:
@@ -317,8 +310,7 @@ def case_materialization_failure_rolls_back_event_and_hot_state() -> None:
 
 
 def case_idempotent_retry_does_not_duplicate() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-idempotent-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-idempotent-") as root:
         build_fixture(root, status="ready")
         first = submit_intent(root, "Codex", task_status_intent(), timestamp=TIMESTAMP, commit=COMMIT)
         second = submit_intent(root, "Codex", task_status_intent(), timestamp=TIMESTAMP, commit=COMMIT)
@@ -335,8 +327,7 @@ def case_idempotent_retry_does_not_duplicate() -> None:
 
 
 def build_and_apply_for_determinism() -> dict[str, bytes]:
-    root = Path(tempfile.mkdtemp(prefix="intent-deterministic-"))
-    try:
+    with root_temp_dir(ROOT, ".intent-deterministic-") as root:
         build_fixture(root, status="ready")
         submit_intent(root, "Codex", task_status_intent(), timestamp=TIMESTAMP, commit=COMMIT)
         return {
@@ -346,8 +337,6 @@ def build_and_apply_for_determinism() -> dict[str, bytes]:
             "project_state": (root / "Area_comun/state/PROJECT_STATE.json").read_bytes(),
             "claims": (root / "Area_comun/state/CLAIMS.json").read_bytes(),
         }
-    finally:
-        shutil.rmtree(root, ignore_errors=True)
 
 
 def case_deterministic_bytes_for_same_inputs() -> None:
@@ -355,8 +344,7 @@ def case_deterministic_bytes_for_same_inputs() -> None:
 
 
 def case_enforce_on_sequence_passes_and_manual_edit_fails() -> None:
-    with tempfile.TemporaryDirectory(prefix="intent-enforce-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-enforce-") as root:
         build_fixture(root, status="ready", enforce=True, authoritative=True)
         submit_intent(root, "Codex", task_status_intent(), timestamp=TIMESTAMP, commit=COMMIT)
         ok = run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)])
@@ -373,8 +361,7 @@ def case_powershell_wrapper_parity_if_available() -> None:
     shell = shutil.which("pwsh") or shutil.which("powershell")
     if not shell:
         return
-    with tempfile.TemporaryDirectory(prefix="intent-wrapper-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".intent-wrapper-") as root:
         build_fixture(root, status="ready")
         intent_path = root / "intent.json"
         write_json(intent_path, task_status_intent())

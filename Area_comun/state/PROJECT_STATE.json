@@ -45,7 +45,7 @@
         {
             "id": "TASK-0094",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado."
         }
     ],

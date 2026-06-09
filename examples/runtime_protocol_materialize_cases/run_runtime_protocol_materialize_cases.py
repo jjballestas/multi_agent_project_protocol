@@ -4,10 +4,10 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from runtime.apply import apply_gate_and_commit  # noqa: E402
+from runtime.eventlog import canonical_hash  # noqa: E402
 from runtime.protocol_replay import (  # noqa: E402
     ProtocolMaterializationError,
     build_genesis_snapshot,
@@ -25,6 +26,7 @@ from runtime.protocol_replay import (  # noqa: E402
     replay_protocol_state,
     write_genesis,
 )
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 TASK_ID = "TASK-9200"
@@ -42,8 +44,13 @@ RUNTIME_TIER_REQUIRED_PATHS = [
 ]
 
 
-def run(command: list[str], cwd: Path = ROOT, check: bool = True) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=cwd, text=True, capture_output=True, check=check)
+def run(
+    command: list[str],
+    cwd: Path = ROOT,
+    check: bool = True,
+    env: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, cwd=cwd, text=True, capture_output=True, check=check, env=env)
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -225,12 +232,12 @@ def validator_stdout(root: Path) -> str:
 
 
 def case_materialize_writes_canonical_ascii_state() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-materialize-write-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-materialize-write-") as root:
         snapshot = replay_protocol_state([event(1, "protocol.genesis", {"state": hot_docs("done", "released")})])
         result = materialize_to_disk(root, snapshot)
         expected = materialize_protocol_state(snapshot)
         assert result["paths"] == sorted(expected)
+        assert result["canonical_hash"] == canonical_hash(expected)
         before = state_bytes(root)
         for relative, document in expected.items():
             raw = (root / relative).read_bytes()
@@ -242,8 +249,7 @@ def case_materialize_writes_canonical_ascii_state() -> None:
 
 
 def case_write_genesis_round_trip_is_idempotent() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-materialize-genesis-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-materialize-genesis-") as root:
         build_fixture(root, event_enabled=True, materialize=False)
         expected = materialize_protocol_state(build_genesis_snapshot(root))
         first = write_genesis(root)
@@ -259,8 +265,7 @@ def case_write_genesis_round_trip_is_idempotent() -> None:
 
 
 def case_materialize_rolls_back_on_mid_write_failure() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-materialize-atomic-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-materialize-atomic-") as root:
         build_fixture(root, event_enabled=True, materialize=False)
         before = state_bytes(root)
         snapshot = replay_protocol_state([event(1, "protocol.genesis", {"state": hot_docs("done", "released")})])
@@ -274,8 +279,7 @@ def case_materialize_rolls_back_on_mid_write_failure() -> None:
 
 
 def apply_and_return_state(*, event_enabled: bool, materialize: bool, tier: str) -> dict[str, bytes]:
-    with tempfile.TemporaryDirectory(prefix="protocol-materialize-gate-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-materialize-gate-") as root:
         build_fixture(root, event_enabled=event_enabled, materialize=materialize, tier=tier, init_repo=True)
         result = apply_gate_and_commit(turn_report(), root)
         assert result["green"] is True, result
@@ -290,8 +294,7 @@ def case_runtime_gating_off_is_byte_equivalent() -> None:
 
 
 def case_runtime_materialization_on_clears_drift_and_warns_on_divergence() -> None:
-    with tempfile.TemporaryDirectory(prefix="protocol-materialize-runtime-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, ".protocol-materialize-runtime-") as root:
         build_fixture(root, event_enabled=True, materialize=True, tier="runtime")
         write_genesis(root)
         init_git(root)
@@ -307,8 +310,25 @@ def case_runtime_materialization_on_clears_drift_and_warns_on_divergence() -> No
         assert "Runtime protocol state drift detected" in stdout, stdout
 
 
+def case_root_temp_dir_is_repo_local_and_cleaned() -> None:
+    with root_temp_dir(ROOT, ".protocol-materialize-helper-") as temp_root:
+        assert temp_root.parent == ROOT
+        marker = temp_root / "marker.txt"
+        marker.write_text("ok\n", encoding="ascii")
+        assert marker.read_text(encoding="ascii") == "ok\n"
+    assert not temp_root.exists()
+
+
 def case_b1_replay_suite_still_passes() -> None:
-    completed = run([sys.executable, str(ROOT / "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py")])
+    with root_temp_dir(ROOT, ".protocol-replay-nested-temp-") as temp_root:
+        env = os.environ.copy()
+        env["TEMP"] = str(temp_root)
+        env["TMP"] = str(temp_root)
+        env["TMPDIR"] = str(temp_root)
+        completed = run(
+            [sys.executable, str(ROOT / "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py")],
+            env=env,
+        )
     assert "OK:" in completed.stdout, completed.stdout
 
 
@@ -319,6 +339,7 @@ def main() -> int:
         case_materialize_rolls_back_on_mid_write_failure,
         case_runtime_gating_off_is_byte_equivalent,
         case_runtime_materialization_on_clears_drift_and_warns_on_divergence,
+        case_root_temp_dir_is_repo_local_and_cleaned,
         case_b1_replay_suite_still_passes,
     ]
     failures = []

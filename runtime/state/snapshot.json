@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "47b506a5be56b058de533d18cf63437498bfca49b69877be9264643954a66faf",
+  "canonical_hash": "a2da32e93a8001e7b64760175109404939a5e0681bba57afde12d97695ff607a",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -63,7 +63,10 @@
       "CLAIM-20260609-task0093-finding-claude": 1,
       "CLAIM-20260609-task0093-finding2-claude": 1,
       "CLAIM-20260609-task0093-fix-rejection-codex": 1,
+      "CLAIM-20260609-task0094-codex": 1,
       "CLAIM-20260609-task0094-ready-claude": 1,
+      "CLAIM-20260609-task0094-regression-harness-codex": 1,
+      "CLAIM-20260609-task0094-replay-cases-codex": 1,
       "CLAIM-20260609-temp-acl-rule-codex": 1,
       "CLAIM-20260609-tempfile-acl-coord-codex": 1,
       "CLAIM-20260609-tempfile-acl-hardening-codex": 1,
@@ -89,11 +92,11 @@
       "TASK-0091": 6,
       "TASK-0092": 6,
       "TASK-0093": 12,
-      "TASK-0094": 5,
+      "TASK-0094": 10,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 203,
+    "events_applied": 211,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -161,6 +164,14 @@
       "codex:sandbox-cli-correlation:claim-release": 172,
       "codex:sandbox-failures-notice:claim-acquire": 159,
       "codex:sandbox-failures-notice:claim-release": 160,
+      "codex:task0094-regression-harness-temp-acl:claim-acquire": 207,
+      "codex:task0094-regression-harness-temp-acl:claim-release": 211,
+      "codex:task0094-replay-cases-temp-acl:claim-acquire": 206,
+      "codex:task0094-replay-cases-temp-acl:claim-release": 210,
+      "codex:task0094-tempfile-acl-hardening:claim-acquire": 204,
+      "codex:task0094-tempfile-acl-hardening:claim-release": 209,
+      "codex:task0094-tempfile-acl-hardening:in-progress-to-in-review": 208,
+      "codex:task0094-tempfile-acl-hardening:ready-to-in-progress": 205,
       "codex:temp-acl-rule:claim-acquire": 194,
       "codex:temp-acl-rule:claim-release": 195,
       "codex:tempfile-acl-coord:claim-acquire": 186,
@@ -303,5 +314,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 203
+  "up_to_seq": 211
 }
