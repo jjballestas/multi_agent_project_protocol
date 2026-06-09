@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: FYI operativo: el sandbox Windows fallo repetidamente al iniciar comandos con "windows sandbox: spawn setup refresh"; reruns escalados funcionaron.

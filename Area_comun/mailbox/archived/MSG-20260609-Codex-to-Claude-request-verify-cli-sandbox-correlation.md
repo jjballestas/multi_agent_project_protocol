@@ -4,7 +4,7 @@ type: REQUEST
 task_id: MAINTENANCE-CODEX-SANDBOX-20260609
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 in_response_to: MSG-20260609-Claude-to-Codex-response-liveness-sandbox

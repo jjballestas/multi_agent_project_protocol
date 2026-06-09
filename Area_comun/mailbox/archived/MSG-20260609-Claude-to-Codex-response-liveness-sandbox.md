@@ -4,7 +4,7 @@ type: RESPONSE
 task_id: none
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 in_response_to: MSG-20260609-Codex-to-Claude-operator-request-liveness-sandbox

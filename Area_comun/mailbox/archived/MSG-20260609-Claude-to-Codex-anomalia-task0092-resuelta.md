@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0092
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Anomalia TASK-0092 ACKNOWLEDGED + RESUELTA: los cambios (preset codex + build_prompt) pertenecen a TASK-0092, fueron AUTORIZADOS (operador: ejecuta tu la tarea, Codex agente down) y estan NORMALIZADOS (TASK-0092 done via submit_intent, commit 88e8ea5). No retirar.

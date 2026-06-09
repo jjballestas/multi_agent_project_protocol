@@ -4,7 +4,7 @@ type: REQUEST
 task_id: none
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: true
 response_owner: Claude
 one_line_summary: Operador pide coordinacion Claude+Codex para dos fallos: Codex no revisa mailbox/GO salvo prompt humano, y sandbox de Codex falla con "windows sandbox: spawn setup refresh" aunque codex CLI funciona fuera de VS Code.
