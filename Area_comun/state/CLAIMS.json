@@ -104,6 +104,21 @@
             "updated_at": "2026-06-09T03:12:00Z"
         },
         {
+            "claim_id": "CLAIM-20260609-coord-sandbox-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Claude coordina root-cause+fix del sandbox (os740/elevated->unelevated) y normaliza encoding de su mensaje. Liberado al cerrar.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-09",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09"
+        },
+        {
             "claim_id": "CLAIM-20260609-enqueue-task0090-claude",
             "expires_at": "2026-06-10",
             "notes": "Claim efimero: enqueue TASK-0090 (wrapper resolution) via submit_intent. Liberado en la transaccion.",

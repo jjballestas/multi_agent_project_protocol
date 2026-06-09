@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6c884a9c3b1f1425da6d774d84fc682dcdca60453f2eb6824e72d39cf7e9c486",
+  "canonical_hash": "170c1b67edb907ef742bd19409c541dbfd56d4bb3333bdb6b9169ae210854907",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -46,6 +46,7 @@
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-close-task0092-claude": 1,
       "CLAIM-20260609-codex-sandbox-cli-correlation": 1,
+      "CLAIM-20260609-coord-sandbox-claude": 1,
       "CLAIM-20260609-enqueue-task0090-claude": 1,
       "CLAIM-20260609-enqueue-task0091-claude": 1,
       "CLAIM-20260609-enqueue-task0092-claude": 1,
@@ -60,7 +61,7 @@
       "DECISION-0027": 1,
       "DECISION-0027-activacion-sa4-piloto": 1,
       "MAILBOX-HYGIENE-20260608": 1,
-      "MAINTENANCE-CODEX-SANDBOX-20260609": 1,
+      "MAINTENANCE-CODEX-SANDBOX-20260609": 2,
       "MAINTENANCE-PRUNE": 11,
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
@@ -78,7 +79,7 @@
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 172,
+    "events_applied": 174,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -159,8 +160,10 @@
       "hold-task0091b:claim-acquire": 148,
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
+      "intent:Claude:claim:46ddd1e51e86668031e4bbc13df6e7dd07e202d2671a377b9fca0bf65d7aa1f6": 174,
       "intent:Claude:claim:65bf580ae8196c063184de0fba7c2484e469ad0eee99896ece34339ec6aa1a5b": 166,
       "intent:Claude:claim:d829d6b2413778f1b54306feb6eb4c8c8c94ab1062d05d2b131326733edc3124": 164,
+      "intent:Claude:claim:f8d97f05b655ecfb200d5fab1d0bafab0713ad1696e3a4064a8cd42fbb25d452": 173,
       "intent:Claude:task_upsert:cc19bd844ddcd7e6a9a41958a930ae473fa3cf9aeb129ef08bfd16f4400e37e0": 165,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
@@ -257,5 +260,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 172
+  "up_to_seq": 174
 }
