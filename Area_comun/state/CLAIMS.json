@@ -28,6 +28,20 @@
             "updated_at": "2026-06-08T21:48:37Z"
         },
         {
+            "claim_id": "CLAIM-20260609-anomalia-task0092-amend-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Enmienda del aviso de anomalia TASK-0092 tras confirmar que los diffs compartidos ya no estan presentes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T02:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0092",
+            "updated_at": "2026-06-09T02:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-anomalia-task0092-codex",
             "expires_at": "2026-06-10",
             "notes": "Aviso de anomalia a Claude: TASK-0092 tiene cambios compartidos en worktree sin claim activo.",
@@ -138,6 +152,36 @@
             "status": "released",
             "task_id": "TASK-0091",
             "updated_at": "2026-06-09"
+        },
+        {
+            "claim_id": "CLAIM-20260609-ready-task0091-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Claim efimero: TASK-0091 blocked->ready para el piloto via task_upsert. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
+            ],
+            "started_at": "2026-06-09",
+            "status": "released",
+            "task_id": "TASK-0091",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "claim_id": "CLAIM-20260609-sandbox-failures-codex",
+            "expires_at": "2026-06-10",
+            "notes": "Aviso operativo a Claude sobre fallos repetidos del sandbox Windows: spawn setup refresh.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T02:58:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-SANDBOX-20260609",
+            "updated_at": "2026-06-09T02:58:00Z"
         },
         {
             "claim_id": "CLAIM-20260609-task0090-codex",

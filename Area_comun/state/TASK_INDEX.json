@@ -223,9 +223,7 @@
             "updated_at": "2026-06-09"
         },
         {
-            "blocked_by_questions": [
-                "RESERVADA como objetivo del piloto SA.4: NO auto-reclamar en el lazo normal. Volver a 'ready' SOLO al disparar el piloto (tras TASK-0092 + smoke real de turno completo + go del operador)."
-            ],
+            "blocked_by_questions": [],
             "deliverables": [
                 "examples/neutrality_scan_cases/README.md"
             ],
@@ -246,10 +244,10 @@
             "relevant_files": [
                 "examples/neutrality_scan_cases/README.md"
             ],
-            "review": "BLOQUEADA por Claude (2026-06-09 via task_upsert): reservada como tarea-objetivo del piloto SA.4. Se usara codex (implementer) tras TASK-0092. Volver a ready al re-disparar.",
+            "review": "REACTIVADA a ready por Claude (2026-06-09) para disparar el piloto SA.4 con el invoker codex. Objetivo del piloto.",
             "sdd_required": false,
             "spec_id": "none",
-            "status": "blocked",
+            "status": "ready",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
             "type": "documentation",
             "updated_at": "2026-06-09"

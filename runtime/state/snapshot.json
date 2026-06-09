@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "218083e789c5321b7c8dd4fca20a8a5a241c4e301da058fae1e7d999857a200c",
+  "canonical_hash": "cbb9a470aabaee963d3bed657d25e546601e34f7c71e285a82e1e162f6d2b12f",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -41,6 +41,7 @@
       "CLAIM-20260608-memory-rule-release-helper-codex": 1,
       "CLAIM-20260608-task0089-codex": 1,
       "CLAIM-20260608-task0089-mailbox-hygiene-codex": 1,
+      "CLAIM-20260609-anomalia-task0092-amend-codex": 1,
       "CLAIM-20260609-anomalia-task0092-codex": 1,
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-close-task0092-claude": 1,
@@ -48,6 +49,8 @@
       "CLAIM-20260609-enqueue-task0091-claude": 1,
       "CLAIM-20260609-enqueue-task0092-claude": 1,
       "CLAIM-20260609-hold-task0091-claude": 1,
+      "CLAIM-20260609-ready-task0091-claude": 1,
+      "CLAIM-20260609-sandbox-failures-codex": 1,
       "CLAIM-20260609-task0090-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
@@ -55,6 +58,7 @@
       "DECISION-0027-activacion-sa4-piloto": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAINTENANCE-PRUNE": 11,
+      "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
       "PROJECT_STATE": 12,
       "TASK-0084": 8,
@@ -64,12 +68,12 @@
       "TASK-0088": 10,
       "TASK-0089": 8,
       "TASK-0090": 8,
-      "TASK-0091": 4,
-      "TASK-0092": 5,
+      "TASK-0091": 6,
+      "TASK-0092": 6,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 156,
+    "events_applied": 163,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -108,8 +112,12 @@
       "close-task0092:claim-release": 154,
       "close-task0092:project-narrative": 153,
       "close-task0092:task-upsert": 152,
+      "codex:anomaly-task0092-unclaimed-edits-amend:claim-acquire": 157,
+      "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
       "codex:anomaly-task0092-unclaimed-edits:claim-release": 156,
+      "codex:sandbox-failures-notice:claim-acquire": 159,
+      "codex:sandbox-failures-notice:claim-release": 160,
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
       "decision0026:decision": 19,
@@ -206,6 +214,9 @@
       "prune-state:2026-06-08T22:42:25Z:claim-acquire": 134,
       "prune-state:2026-06-08T22:42:25Z:claim-release": 136,
       "prune-state:2026-06-08T22:42:25Z:protocol-prune": 135,
+      "ready-task0091:claim-acquire": 161,
+      "ready-task0091:claim-release": 163,
+      "ready-task0091:task-upsert": 162,
       "task0085-anomaly-handoff-seq:claim-acquire": 44,
       "task0085-anomaly-handoff-seq:claim-release": 45,
       "task0085-handoff-final-evidence:claim-acquire": 39,
@@ -232,5 +243,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 156
+  "up_to_seq": 163
 }
