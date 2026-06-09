@@ -244,7 +244,7 @@
             "relevant_files": [
                 "examples/neutrality_scan_cases/README.md"
             ],
-            "review": "REACTIVADA a ready por Claude (2026-06-09) para disparar el piloto SA.4 con el invoker codex. Objetivo del piloto.",
+            "review": "(PILOTO SA.4 RE-FIRE) Objetivo del re-pilot bajo el sobre (DECISION-0027), GO operador 2026-06-09 tras smoke real limpio. Codex (invoker real) edita SOLO prosa en examples/neutrality_scan_cases/README.md; caps 2/1/180000, checkpoint tras turno 1.",
             "sdd_required": false,
             "spec_id": "none",
             "status": "ready",
