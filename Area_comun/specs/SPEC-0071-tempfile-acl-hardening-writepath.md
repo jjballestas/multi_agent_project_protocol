@@ -65,7 +65,10 @@ El cambio incluye una regla operativa nueva. Hay dos posturas:
   como runbook (p.ej. `Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md` o seccion en
   `runtime/README.md`). Sin edicion de contrato, sin DECISION.
 
-**Claude recomienda (B).** El operador ratifica la postura ANTES de que TASK-0094 pase a ready+GO.
+**Claude recomienda (B).** >>> RATIFICADA = **(B)** por el operador (2026-06-09): se revierte la edicion
+de AGENTS.md seccion 7 y la regla baja a runbook operativo en
+`Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md` (sin DECISION, sin edicion de contrato).
+TASK-0094 promovida a ready+GO.
 
 ## 5. Invariantes (duras)
 

@@ -1,13 +1,13 @@
 ---
 id: TASK-0094
 owner: Codex
-status: proposed
+status: ready
 type: implementation
 priority: high
 created_at: 2026-06-09
 updated_at: 2026-06-09
-depends_on: [TASK-0093]
-relates_to: [SPEC-0070, MAINTENANCE-CODEX-SANDBOX-20260609]
+depends_on: []
+relates_to: [TASK-0093, SPEC-0070, MAINTENANCE-CODEX-SANDBOX-20260609]
 phase: P2
 spec_id: Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md
 linked_decisions: [DECISION-0022, DECISION-0020, DECISION-0007, DECISION-0006]
@@ -20,10 +20,15 @@ sdd_required: true
 
 # TASK-0094 - Formalizar el hardening tempfile/ACL del write-path (off-pilot)
 
-> PROPOSED (registrada por Claude 2026-06-09 via submit_intent). OFF-PILOT, no multiplicador. Formaliza
-> bajo flujo el cambio que Codex implemento como mantenimiento UNTRACKED durante la re-entrega de
-> TASK-0093 (ver anomalia DECISION-0018 en mailbox). SA.4 DE-ARMADO; NO re-armar ni piloto.
-> PENDIENTE: ratificacion del operador de la postura ACL (A/B; Claude recomienda B) ANTES de ready+GO.
+> READY+GO (Claude 2026-06-09 via submit_intent). OFF-PILOT, no multiplicador. Formaliza bajo flujo el
+> cambio que Codex implemento como mantenimiento UNTRACKED durante la re-entrega de TASK-0093 (ver
+> anomalia DECISION-0018 en mailbox). SA.4 DE-ARMADO; NO re-armar ni piloto.
+>
+> >>> POSTURA ACL RATIFICADA POR EL OPERADOR (2026-06-09) = B. La regla "Windows sandbox temp ACL" NO
+> queda en el contrato: dentro de esta task (1) REVERTIR la edicion de AGENTS.md seccion 7 (hecha sin
+> DECISION ni claim), y (2) documentarla como RUNBOOK operativo en
+> Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). El
+> resto del alcance (helper temp_paths.py + cableado + golden byte-equivalente + handoff) sin cambios.
 
 ## Contexto
 

@@ -337,11 +337,10 @@
             "deliverables": [
                 "runtime/temp_paths.py",
                 "examples/runtime_protocol_materialize_cases/",
+                "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
                 "Area_comun/handoffs/"
             ],
-            "depends_on": [
-                "TASK-0093"
-            ],
+            "depends_on": [],
             "file": "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
             "id": "TASK-0094",
             "linked_decisions": [
@@ -354,6 +353,7 @@
             "phase": "P2",
             "priority": "high",
             "relates_to": [
+                "TASK-0093",
                 "SPEC-0070",
                 "MAINTENANCE-CODEX-SANDBOX-20260609"
             ],
@@ -364,11 +364,11 @@
                 "runtime/submit_intent.py",
                 "AGENTS.md"
             ],
-            "review": "PROPOSED (registrada por Claude 2026-06-09 via submit_intent). Formaliza el hardening tempfile/ACL que Codex implemento untracked durante la re-entrega de TASK-0093. Pendiente ratificacion del operador de la postura ACL (A contrato+DECISION vs B runbook; Claude recomienda B) ANTES de ready+GO.",
+            "review": "READY+GO (Claude 2026-06-09 via submit_intent). Postura ACL RATIFICADA por el operador = B: revertir AGENTS.md s7 + runbook en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). Codex commitea su hardening untracked bajo flujo (helper + cableado + golden byte-equivalente + drift0 + cross-platform + handoff), commiteando SOLO sus rutas (sin arrastrar la entrega v2 de TASK-0093). Arranca cuando el operador lo empuje (push-driven).",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-            "status": "proposed",
-            "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL: operador ratifica (Claude recomienda B = runbook + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
+            "status": "ready",
+            "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
             "type": "implementation",
             "updated_at": "2026-06-09"
         }

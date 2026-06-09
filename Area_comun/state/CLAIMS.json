@@ -214,7 +214,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-09T04:30:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0094",
             "updated_at": "2026-06-09T04:30:00Z"
         },
@@ -397,6 +397,24 @@
             "status": "released",
             "task_id": "TASK-0093",
             "updated_at": "2026-06-09T03:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260609-task0094-ready-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Postura B ratificada por operador: lock B + promover TASK-0094 a ready+GO. Liberado tras escribir.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0094",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
+                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T20:55:40Z",
+            "status": "released",
+            "task_id": "TASK-0094",
+            "updated_at": "2026-06-09T20:55:40Z"
         },
         {
             "claim_id": "CLAIM-20260609-temp-acl-rule-codex",
