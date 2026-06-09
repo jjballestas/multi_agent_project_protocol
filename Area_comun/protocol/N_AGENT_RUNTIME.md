@@ -212,6 +212,13 @@ y `CLAIMS.json` desde replay(log), y deja `protocol_state_drift().has_drift == f
 `Area_comun/state/*.json` produce drift y el gate de `event_state.enforce` lo rechaza. No hay un
 bloqueo nuevo del sistema de archivos: la prohibicion vive en el contrato, el validador y el gate.
 
+**Mecanismo vs marcador (DECISION-0028, postura B):** `enforce` (el hard-gate B.3) ES el mecanismo de
+escritor-unico: provee la garantia de que solo el runtime escribe el ledger. `event_state.authoritative`
+es el MARCADOR declarativo que formaliza el modo runtime-authoritative y NO tiene callers de
+comportamiento propios. No se cablean teeth propias para `authoritative` porque hoy no hay un invariante
+que `enforce` no cubra; ademas el guard `authoritative => enforce => materialize => enabled` (validador +
+`submit_intent` + `apply`) rechaza `authoritative` sin `enforce`, matando el false-secure.
+
 Rollback: apagar `event_state.enforce` y `event_state.authoritative` devuelve el flujo a edicion
 manual. El snapshot content-addressed y el `commit` registrado en el `snapshot_ref` quedan como
 punto de reconstruccion verificable.

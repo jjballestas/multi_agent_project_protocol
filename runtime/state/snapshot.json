@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "24163d2e9a9eb4865a36fb2c1a4704f2b56a23c48e20bb5dc5143be577084990",
+  "canonical_hash": "d9345acbf7fc7b7021ccc0240e4dbdfdee4ed0e0c8e49e8f0b620b3528379b1e",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -76,10 +76,14 @@
       "CLAIM-20260609-tempfile-runtime-backup-hardening-codex": 1,
       "CLAIM-20260610-archive-accept-0093-0094-codex": 1,
       "CLAIM-20260610-close-0091-claude": 1,
+      "CLAIM-20260610-decision0028-claude": 1,
+      "CLAIM-20260610-fix0087-claude": 1,
+      "CLAIM-20260610-fyi0087-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
       "DECISION-0027-activacion-sa4-piloto": 1,
+      "DECISION-0028": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 1,
       "MAINTENANCE-CODEX-SANDBOX-20260609": 6,
@@ -91,7 +95,7 @@
       "TASK-0084": 8,
       "TASK-0085": 12,
       "TASK-0086": 9,
-      "TASK-0087": 1,
+      "TASK-0087": 6,
       "TASK-0088": 10,
       "TASK-0089": 8,
       "TASK-0090": 8,
@@ -104,7 +108,7 @@
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 230,
+    "events_applied": 239,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -125,6 +129,15 @@
       "claude:close0091-followups:status-0091": 227,
       "claude:close0091-followups:upsert-0095": 228,
       "claude:close0091-followups:upsert-0096": 229,
+      "claude:decision0028-acquire": 231,
+      "claude:decision0028-close:claim-release": 234,
+      "claude:decision0028-close:decision": 232,
+      "claude:decision0028-close:upsert-0087": 233,
+      "claude:fix0087-deliverables:claim-acquire": 235,
+      "claude:fix0087-deliverables:claim-release": 237,
+      "claude:fix0087-deliverables:upsert": 236,
+      "claude:fyi0087-acquire": 238,
+      "claude:fyi0087-release": 239,
       "claude:mailbox-hygiene-20260609:claim-acquire": 188,
       "claude:mailbox-hygiene-20260609:claim-release": 189,
       "claude:reject-review:claim-acquire:TASK-0093": 175,
@@ -349,5 +362,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 230
+  "up_to_seq": 239
 }

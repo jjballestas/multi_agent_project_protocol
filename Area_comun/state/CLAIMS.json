@@ -641,6 +641,58 @@
             "updated_at": "2026-06-10T00:11:00Z"
         },
         {
+            "claim_id": "CLAIM-20260610-decision0028-claude",
+            "expires_at": "2026-06-11",
+            "notes": "TASK-0087 postura B: DECISION-0028 (enforce=mecanismo, authoritative=marcador) + docs + CHANGELOG + cierre. Liberado en la transaccion de cierre.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0087",
+                "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
+                "Area_comun/decisions/",
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "CHANGELOG.md"
+            ],
+            "started_at": "2026-06-10T00:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0087",
+            "updated_at": "2026-06-10T00:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-fix0087-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Corrige deliverables de TASK-0087 a artefactos reales producidos. Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0087",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0087",
+                "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md"
+            ],
+            "started_at": "2026-06-10T00:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0087",
+            "updated_at": "2026-06-10T00:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-fyi0087-claude",
+            "expires_at": "2026-06-11",
+            "notes": "FYI cierre TASK-0087 / DECISION-0028 a Codex. Liberado tras escribir.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-10T00:32:00Z",
+            "status": "released",
+            "task_id": "TASK-0087",
+            "updated_at": "2026-06-10T00:32:00Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0091-codex-runtime",
             "expires_at": "2026-06-10",
             "notes": "Acquired by runtime orchestrator before routed turn.",

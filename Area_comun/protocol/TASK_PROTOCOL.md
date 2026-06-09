@@ -160,7 +160,12 @@ In runtime-tier instances that explicitly enable
 `decision` intent. The caller provides `timestamp` and, when relevant, `commit`; the runtime validates
 actor capability, active claim scope and idempotency, appends `intent.applied`, materializes the hot
 JSON from replay(log), and keeps task markdown status aligned for task status changes. Manual ledger
-edits are drift and the B.3 hard-gate rejects them. The mode is off by default, uses a
+edits are drift and the B.3 hard-gate rejects them. Mechanism vs marker (DECISION-0028, posture B):
+`enforce` (the B.3 hard-gate) is the single-writer mechanism that provides the guarantee, while
+`authoritative` is the declarative marker that formalizes the mode and has no behavior callers of its
+own; no authoritative-specific teeth are wired because no invariant exists that `enforce` does not
+already cover, and the guard `authoritative⇒enforce⇒materialize⇒enabled` rejects
+authoritative-without-enforce (no false-secure). The mode is off by default, uses a
 content-addressed genesis reference under `runtime/state/snapshots/<hash>.json`, and can be rolled
 back by disabling `event_state.enforce`/`authoritative`. Coordination-tier instances keep the manual
 ledger process.

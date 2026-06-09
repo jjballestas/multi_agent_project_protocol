@@ -126,7 +126,13 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   `event_state.enabled/materialize/enforce/authoritative:true` treat the runtime as the writer of
   `Area_comun/state/*.json`. In that mode, state transitions go through `runtime/submit_intent.py`
   (`task_status`, `task_upsert`, `claim`, `decision`) with caller-provided `timestamp`/`commit`, and
-  manual state edits are rejected as drift by the B.3 hard-gate. Multi-step ledger changes (e.g. a close
+  manual state edits are rejected as drift by the B.3 hard-gate. **Mechanism vs marker (DECISION-0028,
+  posture B):** `enforce` (its B.3 hard-gate) **is** the single-writer mechanism — it provides the
+  "only the runtime writes the ledger" guarantee; `authoritative` is the declarative marker that
+  formalizes runtime-authoritative mode and has no behavior callers of its own. No authoritative-specific
+  teeth are wired (no invariant exists that `enforce` does not already cover), and the TASK-0086 guard
+  (`authoritative⇒enforce⇒materialize⇒enabled`) already rejects authoritative-without-enforce, so the
+  false-secure cannot occur. Multi-step ledger changes (e.g. a close
   that flips `task_status`, releases a `claim` and upserts the next task) go as one atomic
   `submit_intent --intents` transaction (all-or-nothing with full rollback; each intent validated against
   the state produced by the prior ones); `runtime/regenesis.py` writes a fresh content-addressed genesis to

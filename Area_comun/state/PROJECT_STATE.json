@@ -3,7 +3,7 @@
         {
             "id": "TASK-0087",
             "owner": "Claude",
-            "status": "proposed",
+            "status": "done",
             "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4."
         },
         {
@@ -94,7 +94,8 @@
         "DECISION-0024-autonomia-supervisada",
         "DECISION-0025-integracion-agent-teams-bridge",
         "DECISION-0026-memoria-post-commit",
-        "DECISION-0027-activacion-sa4-piloto"
+        "DECISION-0027-activacion-sa4-piloto",
+        "DECISION-0028"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

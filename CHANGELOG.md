@@ -48,8 +48,10 @@ the first bounded real-invoker autonomy pilot, all gated and reversible.
 
 ### Notes
 - Templates (`*.template.*`) unchanged; new instances stay off-by-default.
-- Open follow-up (blocking for adoption, not for SA.4): decide authoritative-specific teeth vs
-  documenting `enforce` as the single-writer mechanism. (TASK-0087)
+- Adoption follow-up resolved — posture B (DECISION-0028): `enforce` is the single-writer mechanism
+  (its B.3 hard-gate rejects manual ledger edits), `authoritative` is the declarative mode marker with
+  no behavior callers; no authoritative-specific teeth are wired and the TASK-0086 guard already
+  rejects authoritative-without-enforce. Closes the last adoption blocker (TASK-0087).
 
 ## [1.0.0] — 2026-06-07
 

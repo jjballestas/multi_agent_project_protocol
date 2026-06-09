@@ -126,7 +126,11 @@ The task status must match in two places:
   `event_state.enabled/materialize/enforce/authoritative:true` treat the runtime as the writer of
   `Area_comun/state/*.json`. In that mode, transitions go through `runtime/submit_intent.py`
   (`task_status`, `task_upsert`, `claim`, `decision`) with caller-provided `timestamp`/`commit`, and
-  manual state edits are rejected as drift by the hard-gate. Multi-step ledger changes (a `task_status`
+  manual state edits are rejected as drift by the hard-gate. Mechanism vs marker: `enforce` (the
+  hard-gate) is the single-writer mechanism that provides the guarantee; `authoritative` is the
+  declarative marker that formalizes the mode and has no behavior callers of its own, so no
+  authoritative-specific teeth are required (a guard rejects authoritative-without-enforce). Multi-step
+  ledger changes (a `task_status`
   flip plus a `claim` release plus a `task_upsert`, etc.) go as one atomic `submit_intent --intents`
   transaction (all-or-nothing with full rollback); `runtime/regenesis.py` writes a fresh content-addressed
   genesis to bring drift to 0 first. The capability is off by default and should be activated only after a

@@ -77,8 +77,11 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "DECISION (postura A teeth / B documentar)",
-                "artefacto consecuente (SPEC/TASK de teeth o docs actualizadas)"
+                "Area_comun/decisions/DECISION-0028-enforce-mecanismo-authoritative-marcador.md",
+                "AGENTS.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "CHANGELOG.md"
             ],
             "depends_on": [
                 "TASK-0086"
@@ -86,7 +89,8 @@
             "file": "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
             "id": "TASK-0087",
             "linked_decisions": [
-                "DECISION-0022"
+                "DECISION-0022",
+                "DECISION-0028"
             ],
             "owner": "Claude",
             "phase": "P2",
@@ -100,13 +104,13 @@
                 "Area_comun/protocol/N_AGENT_RUNTIME.md",
                 "runtime/protocol_replay.py"
             ],
-            "review": "PROPOSED (registrada por Claude 2026-06-08 como follow-up del flip authoritative). BLOQUEANTE PARA ADOPCION, no para SA.4. No arrancar hasta fijar direccion A/B.",
+            "review": "DONE (postura B, operador + arquitecto, 2026-06-10). Resuelto por DECISION-0028: enforce ES el mecanismo de escritor-unico (gate B.3); authoritative es el marcador declarativo del modo (DECISION-0022), sin callers de comportamiento; NO se cablean teeth propias (no hay invariante que enforce no cubra); el guard de TASK-0086 mata el false-secure (authoritative sin enforce). Docs actualizados (AGENTS.md s7, TASK_PROTOCOL.md, N_AGENT_RUNTIME.md, AGENTS.template.md) + CHANGELOG v1.1.0 (resolved). Neutral; defaults del template intactos. Deliverables apuntan a los artefactos reales producidos. Cierra el ultimo bloqueante de ADOPCION. enforce/authoritative intactos; SA.4/Capa C OFF.",
             "sdd_required": false,
             "spec_id": "none",
-            "status": "proposed",
+            "status": "done",
             "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4.",
             "type": "analysis",
-            "updated_at": "2026-06-08"
+            "updated_at": "2026-06-10"
         },
         {
             "blocked_by_questions": [],
