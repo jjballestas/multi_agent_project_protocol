@@ -234,6 +234,7 @@
                 "DECISION-0027",
                 "DECISION-0024"
             ],
+            "original_author": "Codex",
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
@@ -247,7 +248,7 @@
             "review": "(PILOTO SA.4 RE-FIRE) Objetivo del re-pilot bajo el sobre (DECISION-0027), GO operador 2026-06-09 tras smoke real limpio. Codex (invoker real) edita SOLO prosa en examples/neutrality_scan_cases/README.md; caps 2/1/180000, checkpoint tras turno 1.",
             "sdd_required": false,
             "spec_id": "none",
-            "status": "ready",
+            "status": "in_review",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
             "type": "documentation",
             "updated_at": "2026-06-09"

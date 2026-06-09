@@ -12,3 +12,5 @@ Run with:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1
 ```
+
+These cases document the expected behavior of the domain-neutrality scan across clean content, core violations, and runtime exemptions. A failing case is intentionally invalid input: read it as a guardrail example that must keep producing a non-zero scan result.

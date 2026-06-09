@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0bdb22cc5a769ac4b6aef6e369c9f6103b9a23a4bae16b68b45bc705ccf715ad",
+  "canonical_hash": "b4566223a05083b4b703628322e6bbd1804177a04325b227ef600d7b2b1f5eb7",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -92,16 +92,20 @@
       "TASK-0088": 10,
       "TASK-0089": 8,
       "TASK-0090": 8,
-      "TASK-0091": 8,
+      "TASK-0091": 11,
       "TASK-0092": 6,
       "TASK-0093": 15,
       "TASK-0094": 11,
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 220,
-    "fencing_tokens": {},
+    "events_applied": 223,
+    "fencing_tokens": {
+      "TASK-0091": 1
+    },
     "idempotency_keys": {
+      "Codex:TASK-0091:claim:codex-TASK-0091-20260609-1:0": 222,
+      "Codex:TASK-0091:ready->in_review:codex-TASK-0091-20260609-1:1": 223,
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
@@ -257,6 +261,7 @@
       "operator-memory-rule-20260608:claim-release": 16,
       "operator-memory-rule-20260608:release-helper-acquire": 15,
       "operator-memory-rule-20260608:release-helper-release": 17,
+      "orchestrator:claim-acquire:TASK-0091:codex": 221,
       "protocol-state:genesis-ref:v1": 1,
       "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2,
       "prune-state:2026-06-08T11:16:00Z:claim-acquire": 27,
@@ -323,8 +328,14 @@
       "task0088-codex-start:claim-acquire": 83,
       "task0088-codex-start:task-in-progress": 84
     },
-    "leases": {},
+    "leases": {
+      "TASK-0091": {
+        "fencing_token": 1,
+        "lease_until": "2026-06-10",
+        "owner": "Codex"
+      }
+    },
     "rejections": []
   },
-  "up_to_seq": 220
+  "up_to_seq": 223
 }

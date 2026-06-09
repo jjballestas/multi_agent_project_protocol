@@ -27,7 +27,7 @@
         {
             "id": "TASK-0091",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027)."
         },
         {
