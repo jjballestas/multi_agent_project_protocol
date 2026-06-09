@@ -13,7 +13,9 @@ CHEQUEA CLAIMS.json antes de escribir cualquier ruta compartida. ASCII-only en m
 Mi area personal = personal/Claude/ (DECISION-0016). NUNCA commitear areas personales de OTROS
 (personal/operador/, personal/Codex/) -> staging de rutas EXPLICITAS, nunca `git add -A`/dir amplio.
 
-ESTADO VIGENTE (2026-06-09, HEAD 89d140b en main; v1.1.0; protocol_version 1.1.0, runtime_version 0.11.0):
+ESTADO VIGENTE (2026-06-09, HEAD 720b417 en main; v1.1.0; protocol_version 1.1.0, runtime_version 0.11.0;
+drift 0 seq 174). NOTA: esta sesion se REINICIO para que Codex/extension tomen el fix de sandbox (ver abajo).
+AL VOLVER: 1ro `Write-Output SANDBOX_OK` debe pasar (si no, el fix no quedo / falta restart).
 
 >>> ESCRITOR-UNICO VIVO Y CONSOLIDADO <<<
 - event_state = {enabled, materialize, enforce, authoritative} TODOS true. enforce TIENE DIENTES: editar
@@ -41,30 +43,45 @@ ESTADO DONE (historico consolidado):
   agentes). DECISION-0027 = activacion piloto SA.4.
 - Proximos IDs: TASK-0093 / SPEC-0070 (verificar en TASK_INDEX al entrar).
 
->>> ASUNTO ABIERTO PRINCIPAL: PILOTO SA.4 (autonomia con invoker REAL) BLOQUEADO por gap del orquestador <<<
-- La cadena de invoker real esta CONSTRUIDA y FUNCIONAL: orchestrator -> preset -> runtime/llm_turn_wrapper.py
-  (vendor-neutral; shutil.which; timeout<120s; extraccion JSON tolerante a fences/prosa + validacion turn_schema)
-  -> backend CLI. Preset codex = `codex exec -s workspace-write -c approval_policy=never -c
-  model_reasoning_effort=low --skip-git-repo-check` (low evita timeout del reasoning xhigh; ~44s). Solo Codex
-  (implementer) puede hacer turnos de file-edit. codex CLI presente+autenticado (OAuth).
-- AL DISPARAR EL PILOTO (invoker codex): el orquestador ruteo `execute` TASK-0091 y **codex EDITO el README
-  real** (=> el invoker codex SI funciona para trabajo real), PERO el gate RECHAZO con "no active claim for
-  report task_id and agent". RAIZ (8vo gap 'assumed-ready'): `orchestrator.py:482` el paso "claim" es un NO-OP
-  (solo trace.append, NO crea claim); un turno `execute` asume la tarea YA reclamada (el golden
-  llm_adapter_cases PRE-CREA un claim activo de Codex antes de correr; el report lo release-a). `select_ready_task`
-  (router.py:176-196) rutea execute directo sobre ready SIN claim. Y Claude NO puede pre-crear un claim de Codex
-  (claim acquire owner debe == actor_id). => el turno execute no tiene claim activo -> rechazo. El turno
-  rechazado NO revierte el edit del agente (worktree quedo dirty; revertido con git checkout; drift 0, sin
-  footprint de ledger).
-- FIX PENDIENTE (decision del operador/proxima sesion), una de: (1) que el paso claim del orquestador realmente
-  adquiera un claim para el owner ruteado ANTES del adapter; (2) rutear accion `claim` primero para ready sin
-  claim (flujo 2-turnos claim->checkpoint->execute, encaja con el checkpoint_every_k=1 del piloto); (3) que el
-  report del agente incluya claim-acquire y el orquestador lo aplique antes del gate. Es BLOQUEANTE del piloto
-  SA.4 real-execute, NO del escritor-unico (ya vivo).
-- ESTADO SEGURO AL CIERRE: SA.4 DE-ARMADO (runtime.real_invoker.enabled=false + runtime.supervised_autonomy.
-  enabled=false; commit 89d140b). DECISION-0027 vigente; caps del sobre {max_turns:2, human_checkpoint_every_k:1,
-  wall_clock_ms:180000}, kill-switch PAUSE, budget+deadline. enforce+authoritative INTACTOS ON. Capa C OFF.
-  PILOTO-1 (invoker claude) ya habia validado el SOBRE (rechazo limpio, cero footprint) = safety de SA.4 OK.
+>>> ASUNTO ABIERTO PRINCIPAL: gap-8 YA ARREGLADO (TASK-0093) - estoy MID-RATIFICACION + smoke pendiente <<<
+- gap-8 (paso claim NO-OP del orquestador) FIX IMPLEMENTADO por Codex: TASK-0093 (SPEC-0070, opcion 1),
+  commit d6569f4 "fix(runtime): acquire routed claims before turns", status in_review, claim liberado.
+  Cambios: orchestrator.py `acquire_routed_claim` en el paso claim (antes del adapter): reusa claim activo
+  owner+task si existe (idempotente -> byte-equiv goldens con pre-claim), si falta lo adquiere por
+  submit_intent con actor_id=owner (owner==actor pasa validate_scope_authority), si submit_intent falla por
+  conflicto -> rechaza el turno ANTES del adapter (cero commit). apply.py `with_terminal_claim_release`
+  inyecta release del claim cuando el outcome/transition es terminal (in_review/done/blocked) y el report no
+  lo trae (handoff-release, section 7). llm_adapter build_prompt: "do not include transitions.claims" (sin
+  doble-acquire). 3 goldens nuevos en runtime_loop_cases (sin-pre-claim aceptado / pre-claim sin acquire extra
+  / claim ajeno rechazado). Handoff: Area_comun/handoffs/HANDOFF-TASK-0093-codex-to-claude-1.md.
+- MI RATIFICACION (en curso, reproducida): 51 goldens verdes (runtime_loop 11, SA 9, real_adapter 4,
+  llm_adapter 6, intent_flow 11, wrapper 10) + validador/neutralidad/encoding verdes + drift 0. Diff revisado.
+  >>> HALLAZGO ABIERTO A CONFIRMAR (release-on-rejection): el claim se adquiere ANTES del turno; en los paths
+  de RECHAZO por gate/validate (unreported worktree change / validate-error / gate-not-green en apply), el
+  orquestador NO libera el claim adquirido -> posible CLAIM HUERFANO + worktree dirty (rompe el cero-footprint
+  que tenia el piloto). `with_terminal_claim_release` solo cubre el path GREEN terminal, no las rechazos.
+  ANTES DEL VEREDICTO: confirmar con un golden adversarial (acquire-exitoso -> turno rechazado por scope) si
+  el claim queda huerfano; si se confirma -> finding a Codex (blocked-with-finding) O aceptar con follow-up +
+  el checkpoint humano del piloto lo caza. Los OTROS puntos (idempotencia, conflicto-rechazo, handoff-release,
+  reconciliacion sin doble-acquire) los doy por buenos. La paridad .ps1 / drift-0-bajo-authoritative del
+  acquire NO la cubren los goldens (event_state off) -> lo cubre el SMOKE REAL.
+- SANDBOX FIX APLICADO (operador): C:\Users\johnb\.codex\config.toml `[windows] sandbox` elevated -> unelevated.
+  Causa raiz: os error 740 (ERROR_ELEVATION_REQUIRED) - el setup refresh del sandbox de Windows exige elevacion
+  que ni el app-server background ni codex exec no-interactivo consiguen. Correlacion con la INSTALACION DEL CLI
+  confirmada (config.toml global reescrito hoy con elevated, lo leen CLI + extension). unelevated = ACL-based,
+  no requiere admin. POR ESO se reinicio la sesion. AL VOLVER: `Write-Output SANDBOX_OK` debe pasar.
+- CODEX ES PUSH-DRIVEN (hecho operativo, operador 2026-06-09): su lazo NO auto-ejecuta; solo corre cuando el
+  operador lo empuja ("tienes mensaje"). NO asumir "ready+GO => Codex auto-reclama"; el disparador es el push.
+  Follow-up: eximir mailbox/ del auto_claim de Codex (lockea el canal de coordinacion; smell DECISION-0020).
+- SECUENCIA RESTANTE (mi turno, tras restart + SANDBOX_OK): (1) confirmar el hallazgo release-on-rejection
+  (golden adversarial); (2) VEREDICTO de ratificacion; (3) cerrar TASK-0093 (reviewer in_review->done por
+  submit_intent + handoff->archived + FYI accept) si verde, o devolver finding; (4) SMOKE REAL end-to-end
+  (orquestador adquiere claim -> codex edita README -> gate ACEPTA), AHORA viable con sandbox unelevated; el
+  invoker codex confirmado vivo (PONG); (5) reportar al operador para GO al re-fire SA.4.
+- SA.4 SIGUE DE-ARMADO (runtime.real_invoker.enabled=false + supervised_autonomy.enabled=false). DECISION-0027
+  vigente; caps {max_turns:2, human_checkpoint_every_k:1, wall_clock_ms:180000}, PAUSE, budget+deadline.
+  enforce+authoritative INTACTOS ON. Capa C OFF. PILOTO-1 (invoker claude) valido el SOBRE (rechazo limpio).
+  El re-fire es EL UNICO MULTIPLICADOR; solo con GO del operador + sandbox verde + ratificacion cerrada.
 
 >>> REGLAS DE RIESGO (innegociables) <<<
 - UN SOLO MULTIPLICADOR DE RIESGO POR VENTANA: NUNCA enforce + SA.4 + Capa C juntos. Cada uno testeable y
@@ -90,16 +107,20 @@ prompt para comandos COMPUESTOS (varios `&&`, multilinea) y `-m` con SALTOS DE L
 Bash; commits con DOS flags `-m`. Heredocs/loops bash pueden auto-irse a background (output a veces no se
 captura) -> preferir scripts _tmp_*.py en personal/Claude/ o driver python inline. Ver [[permission-auto-exec]].
 
-QUE HACER AL ENTRAR:
-1. Cold-start + RE-LEER state files en disco (Codex muta entre lecturas; la memoria puede quedar stale en una
-   sola sesion). Revisa mailbox/open/ (hay 2 FYIs informativos abiertos: sandbox-spawn-flakiness de Codex y
-   anomalia-task0092-resuelta mio a Codex; req_resp=false ambos).
-2. Si el operador retoma el PILOTO SA.4: el fix del gap del orquestador (claim no-op) es PRE-REQUISITO. Discutir
-   con el operador cual de las 3 opciones de fix; probablemente un TASK chico (Codex es implementer) + golden,
-   luego re-armar + re-disparar el piloto con --llm-preset codex. NO re-armar SA.4 ni disparar sin GO + fix.
+QUE HACER AL ENTRAR (tras el restart):
+1. Cold-start + RE-LEER state files en disco. PRIMERO `Write-Output SANDBOX_OK` (debe pasar; si no, el fix de
+   config.toml unelevated no quedo o falta restart -> avisar al operador). Verifica drift 0 (seq ~174+),
+   TASK-0093 = in_review owner Codex. Revisa mailbox/open/ (mis RESPONSE a Codex sobre sandbox/liveness +
+   FYIs informativos). Codex es PUSH-DRIVEN: no esperes que arranque solo.
+2. RETOMAR LA RATIFICACION de TASK-0093 (es mi turno; ver ASUNTO ABIERTO arriba): confirmar el hallazgo
+   release-on-rejection con un golden adversarial (acquire-exitoso -> turno rechazado por scope). Si el claim
+   queda huerfano -> devolver finding a Codex; si no, o si se acepta con follow-up -> VEREDICTO -> cerrar
+   TASK-0093 (reviewer in_review->done por submit_intent) -> SMOKE REAL end-to-end (sandbox ya unelevated) ->
+   reportar al operador para el GO al re-fire SA.4.
 3. NADA gateado/supervisado (SA.4 re-fire, Capa C) sin operador PRESENTE + rollback armado + un solo
-   multiplicador. Cambios de protocolo/boundary -> DECISION + aprobacion humana.
-4. Verifica antes de cualquier disparo: drift 0, activation_errors None, replay==hot, PAUSE ausente.
+   multiplicador. NO re-armar SA.4 ni disparar el piloto sin GO + ratificacion cerrada + sandbox verde.
+   Cambios de protocolo/boundary -> DECISION + aprobacion humana.
+4. Verifica antes de cualquier disparo: drift 0, activation_errors None, replay==hot, PAUSE ausente, SANDBOX_OK.
 
 Detalle/cronologia: MEMORY.md (linea project-state-snapshot + ENTRADA 2026-06-09 al final del snapshot) +
 semi-auto-collaboration-pattern.md + permission-auto-exec.md + operator-working-style.md + cutover-risk-staging.md
