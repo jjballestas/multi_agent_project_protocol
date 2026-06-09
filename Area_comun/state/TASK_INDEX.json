@@ -292,6 +292,45 @@
             "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto.",
             "type": "implementation",
             "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "runtime/adapters/llm_adapter.py",
+                "examples/"
+            ],
+            "depends_on": [
+                "TASK-0092"
+            ],
+            "file": "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+            "id": "TASK-0093",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0022",
+                "DECISION-0020"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0091",
+                "TASK-0088",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/submit_intent.py",
+                "runtime/turn_validate.py",
+                "runtime/adapters/llm_adapter.py",
+                "examples/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-09 via submit_intent bajo enforce+authoritative). OFF-PILOT. Cierra el gap-8 del orquestador hallado en el 2do piloto (codex invoker): el paso claim es NO-OP -> turno rechazado por no-active-claim. Opcion 1 (operador): el orquestador adquiere el claim del owner ruteado (actor_id=owner). SA.4 DE-ARMADO; el re-fire es paso posterior con GO separado.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+            "status": "ready",
+            "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto.",
+            "type": "implementation"
         }
     ],
     "updated_at": "2026-06-08",

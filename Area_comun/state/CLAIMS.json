@@ -138,6 +138,24 @@
             "updated_at": "2026-06-09"
         },
         {
+            "claim_id": "CLAIM-20260609-enqueue-task0093-claude",
+            "expires_at": "2026-06-10",
+            "notes": "Claim efimero: enqueue de TASK-0093 + SPEC-0070 (gap-8 claim-acquire) via submit_intent. Liberado en la misma transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0093",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
+                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+                "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09",
+            "status": "released",
+            "task_id": "TASK-0093",
+            "updated_at": "2026-06-09"
+        },
+        {
             "claim_id": "CLAIM-20260609-hold-task0091-claude",
             "expires_at": "2026-06-10",
             "notes": "Claim efimero: hold de TASK-0091 (objetivo piloto) a blocked via task_upsert. Liberado en la transaccion.",
