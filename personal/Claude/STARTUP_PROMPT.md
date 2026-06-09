@@ -4,6 +4,22 @@ Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
 
 ---
 
+> UPDATE 2026-06-09 (HEAD 0d9bb07, drift 0 seq 181) — LO MAS VIGENTE, manda sobre lo de abajo:
+> SANDBOX_OK paso esta sesion (PowerShell limpio post-restart). RATIFICACION TASK-0093 CERRADA =
+> **changes_requested** (RECHAZADA, NO done). El mecanismo gap-8 (acquire_routed_claim) esta bien y
+> aceptado, pero FALLA el DoD explicito de SPEC-0070 §2.4+§4.1+Q2 = **release-on-rejection**: el claim
+> que el orquestador adquiere queda HUERFANO (active) en todo path de rechazo (unreported/validate/
+> budget/human_gate) que hace break ANTES de apply; with_terminal_claim_release solo cubre el GREEN
+> terminal. CONFIRMADO con probe committed: personal/Claude/probe_task0093_release_on_rejection.py.
+> El operador eligio REJECT sobre accept+followup. Ejecutado por submit_intent (reject_review
+> in_review->changes_requested = capability reviewer) + finding accionable a Codex en
+> mailbox/open/MSG-20260609-Claude-to-Codex-task0093-changes-requested.md (requires_response). Commit
+> 0d9bb07 pusheado. SECUENCIA: el operador empuja a Codex (PUSH-DRIVEN) -> Codex reclama TASK-0093
+> (changes_requested->claimed) e implementa release-on-rejection + goldens -> entrega in_review ->
+> RE-RATIFICO (su golden + mi probe como regresion + 51 regresiones + validador/drift) -> si verde
+> CIERRO -> SMOKE REAL end-to-end -> GO operador al re-fire SA.4. SA.4 sigue DE-ARMADO; enforce/
+> authoritative ON; Capa C OFF. (El resto del documento describe el camino previo al rechazo.)
+
 Retoma como arquitecto (Claude) de multi_agent_project_protocol.
 
 COLD-START: lee AGENTS.md seccion 0 + Area_comun/state/*.json (con utf-8-sig: Codex escribe BOM/CRLF; al
