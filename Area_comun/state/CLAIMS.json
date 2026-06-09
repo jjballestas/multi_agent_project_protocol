@@ -90,6 +90,20 @@
             "updated_at": "2026-06-09"
         },
         {
+            "claim_id": "CLAIM-20260609-codex-sandbox-cli-correlation",
+            "expires_at": "2026-06-10",
+            "notes": "Coordination with Claude to verify Codex CLI install correlation with Windows sandbox spawn setup refresh.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-09T03:12:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
+            "updated_at": "2026-06-09T03:12:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260609-enqueue-task0090-claude",
             "expires_at": "2026-06-10",
             "notes": "Claim efimero: enqueue TASK-0090 (wrapper resolution) via submit_intent. Liberado en la transaccion.",

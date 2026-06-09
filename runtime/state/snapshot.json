@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "09b877d03b3ae11787df1a1ff691b581ff426dcfceefaa7e6de1c6a5dd07909c",
+  "canonical_hash": "6c884a9c3b1f1425da6d774d84fc682dcdca60453f2eb6824e72d39cf7e9c486",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -45,6 +45,7 @@
       "CLAIM-20260609-anomalia-task0092-codex": 1,
       "CLAIM-20260609-close-task0090-claude": 1,
       "CLAIM-20260609-close-task0092-claude": 1,
+      "CLAIM-20260609-codex-sandbox-cli-correlation": 1,
       "CLAIM-20260609-enqueue-task0090-claude": 1,
       "CLAIM-20260609-enqueue-task0091-claude": 1,
       "CLAIM-20260609-enqueue-task0092-claude": 1,
@@ -59,6 +60,7 @@
       "DECISION-0027": 1,
       "DECISION-0027-activacion-sa4-piloto": 1,
       "MAILBOX-HYGIENE-20260608": 1,
+      "MAINTENANCE-CODEX-SANDBOX-20260609": 1,
       "MAINTENANCE-PRUNE": 11,
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
@@ -76,7 +78,7 @@
       "protocol-prune": 11,
       "protocol-state": 2
     },
-    "events_applied": 170,
+    "events_applied": 172,
     "fencing_tokens": {},
     "idempotency_keys": {
       "auth-activation:claim-acquire": 54,
@@ -119,6 +121,8 @@
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
       "codex:anomaly-task0092-unclaimed-edits:claim-release": 156,
+      "codex:sandbox-cli-correlation:claim-acquire": 171,
+      "codex:sandbox-cli-correlation:claim-release": 172,
       "codex:sandbox-failures-notice:claim-acquire": 159,
       "codex:sandbox-failures-notice:claim-release": 160,
       "decision0026:claim-acquire": 18,
@@ -253,5 +257,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 170
+  "up_to_seq": 172
 }
