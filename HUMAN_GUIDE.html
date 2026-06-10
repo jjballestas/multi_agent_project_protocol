@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia humana operativa - multi_agent_project_protocol - multi_agent_project_protocol</title>
+<style>
+  :root{
+    --bg:#101418; --panel:#172028; --panel2:#1f2a33; --ink:#e9eef4; --muted:#9aa8b6;
+    --line:#2d3a45; --accent:#56a6ff; --ok:#3fb950; --warn:#d29922; --danger:#f85149;
+    --chip:#253340; --paper:#f7f8fa; --paper-ink:#20262d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 22px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:20px}
+  .generated{display:inline-block;border:1px solid rgba(86,166,255,.45);background:rgba(86,166,255,.12);
+    color:#b9ddff;border-radius:6px;padding:4px 9px;font-size:12px;font-weight:700;letter-spacing:.04em}
+  h1{font-size:28px;line-height:1.18;margin:14px 0 8px;letter-spacing:0}
+  h2{font-size:20px;margin:0}
+  h3{font-size:16px;margin:18px 0 8px}
+  p{margin:10px 0}
+  a{color:#9ed0ff}
+  code{background:#0b0f14;border:1px solid var(--line);border-radius:4px;padding:1px 5px;
+    font-family:SFMono-Regular,Consolas,"Liberation Mono",monospace;font-size:12.5px;color:#d8e6f3}
+  pre{overflow:auto;background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:13px 15px}
+  pre code{background:transparent;border:0;padding:0}
+  .sub{color:var(--muted);font-size:13.5px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip,.badge{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--chip);
+    border-radius:6px;padding:3px 9px;color:var(--muted);font-size:12.5px;white-space:nowrap}
+  .chip b{color:var(--ink);font-weight:650;margin-left:4px}
+  .badge.required{color:#d8f5df;border-color:rgba(63,185,80,.4);background:rgba(63,185,80,.14)}
+  .badge.optional{color:#ffe2a3;border-color:rgba(210,153,34,.42);background:rgba(210,153,34,.14)}
+  .badge.na{color:#c7d0d9;border-color:rgba(154,168,182,.35);background:rgba(154,168,182,.1)}
+  .panorama{margin:22px 0;border-left:4px solid var(--accent);background:var(--panel);
+    border-radius:8px;padding:16px 18px;color:#d4e1ed}
+  .layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;margin-top:24px}
+  nav{position:sticky;top:16px;align-self:start;border:1px solid var(--line);background:var(--panel);
+    border-radius:8px;padding:14px}
+  nav h2{font-size:14px;text-transform:uppercase;color:var(--muted);letter-spacing:.05em;margin-bottom:8px}
+  nav ol{margin:0;padding-left:24px}
+  nav li{margin:7px 0;color:var(--muted)}
+  nav a{color:var(--ink);text-decoration:none}
+  nav a:hover{text-decoration:underline}
+  section{border-top:1px solid var(--line);padding:24px 0}
+  .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px}
+  .section-meta{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 12px}
+  blockquote{margin:14px 0;border-left:3px solid var(--accent);padding:5px 0 5px 14px;color:#cbd8e4}
+  .callout{border:1px solid rgba(248,81,73,.38);border-left:4px solid var(--danger);border-radius:8px;
+    padding:12px 14px;background:rgba(248,81,73,.10);margin:14px 0}
+  .callout-title{font-weight:750;color:#ffb4ae;font-size:12px;letter-spacing:.05em;margin-bottom:4px}
+  ul{padding-left:24px}
+  li{margin:6px 0}
+  li.check{list-style:none;margin-left:-22px;display:flex;gap:8px;align-items:flex-start}
+  li.check input{margin-top:4px}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.8px}
+  th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{background:var(--panel2);color:var(--muted);font-weight:650}
+  footer{margin-top:42px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  @media (max-width: 860px){
+    .layout{grid-template-columns:1fr}
+    nav{position:static}
+    .section-head{display:block}
+  }
+  @media print{
+    body{background:#fff;color:var(--paper-ink);font-size:12px}
+    .wrap{max-width:none;padding:0}
+    nav{display:none}
+    header,section,footer{border-color:#c9d1d9}
+    .panorama,section{break-inside:avoid}
+    code,pre{background:#f0f3f6;color:#111;border-color:#c9d1d9}
+    .chip,.badge{border-color:#c9d1d9;background:#fff;color:#333}
+    a{color:#111;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="generated">GENERADO - NO EDITAR</span>
+  <h1>Guia humana operativa - multi_agent_project_protocol</h1>
+  <div class="sub">HTML autocontenido generado desde el markdown fuente de la guia humana operativa.</div>
+  <div class="meta">
+    <span class="chip">Instancia <b>multi_agent_project_protocol</b></span>
+    <span class="chip">Estado <b>activo</b></span>
+    <span class="chip">Tier <b>runtime</b></span>
+    <span class="chip">Protocol <b>1.1.0</b></span>
+    <span class="chip">Runtime <b>0.11.0</b></span>
+    <span class="chip">Perfiles <b>ninguno</b></span>
+    <span class="chip">Actualizado <b>2026-06-10</b></span>
+  </div>
+</header>
+<div class="panorama">Panorama. Este repositorio mantiene y enriquece un protocolo de proyecto multiagente, generico y reutilizable, para trabajo de software (ciclo de vida de tareas, claims, buzon, handoffs, decisiones, reportes humanos y un validador de estado), y ademas se gestiona a si mismo con su propio protocolo (dogfooding). Esta guia permite que cualquier persona o agente nuevo entienda que es la instancia, que hace, como se construye/ejecuta/prueba/opera, como se diagnostica, donde estan las rutas del protocolo, que roles hay y como retomar el contexto.</div>
+<div class="layout">
+<nav aria-label="Indice">
+<h2>Indice</h2>
+<ol>
+<li><a href="#1-identidad-de-la-instancia">1. Identidad de la instancia</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#2-que-es-esta-instancia">2. Que es esta instancia</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#3-que-hace">3. Que hace</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#4-como-lo-hace">4. Como lo hace</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#5-arquitectura">5. Arquitectura</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#6-componentes-principales">6. Componentes principales</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#7-flujo-operativo">7. Flujo operativo</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#8-flujo-de-datos">8. Flujo de datos</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#9-flujo-de-decisiones">9. Flujo de decisiones</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#10-como-se-implementa-la-metodologia-aqui">10. Como se implementa la metodologia aqui</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#11-como-se-construye">11. Como se construye</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#12-como-se-ejecuta-localmente">12. Como se ejecuta localmente</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#13-como-se-prueba">13. Como se prueba</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#14-como-se-despliega-o-lanza">14. Como se despliega o lanza</a> <span class="badge optional">opcional</span></li>
+<li><a href="#15-como-se-opera">15. Como se opera</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#16-troubleshooting">16. Troubleshooting</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#17-rutas-relevantes-del-protocolo">17. Rutas relevantes del protocolo</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#18-roles-y-capacidades-configuradas">18. Roles y capacidades configuradas</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#19-seguridad-y-datos-sensibles">19. Seguridad y datos sensibles</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#20-continuidad-traspaso-y-recuperacion-de-contexto">20. Continuidad, traspaso y recuperacion de contexto</a> <span class="badge required">obligatorio</span></li>
+<li><a href="#21-historial-de-cambios">21. Historial de cambios</a> <span class="badge required">obligatorio</span></li>
+</ol>
+</nav>
+<main>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="1-identidad-de-la-instancia">
+<div class="section-head">
+<h2>1. Identidad de la instancia</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Repositorio <code>multi_agent_project_protocol</code>. Proposito en una linea: protocolo multiagente neutral de dominio para coordinar trabajo de software entre agentes y un operador humano. Lo mantiene un arquitecto (rol revisor/orquestador) con un implementador (rol operativo), bajo aprobacion del operador humano, a quien se reporta. Licencia propietaria (todos los derechos reservados). Es la instancia viva de referencia del propio protocolo (dogfooding); los masters publicables son los archivos <code>*.template.*</code>.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="2-que-es-esta-instancia">
+<div class="section-head">
+<h2>2. Que es esta instancia</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Un protocolo reutilizable -mas su runtime opcional- que organiza el trabajo de varios agentes y un operador humano en tareas de un solo dueño con estado compartido, decisiones registradas y traza verificable. El nucleo es neutral de dominio: no contiene logica de negocio. La primera instancia aplicada (piloto) fue un proyecto separado; este repositorio es el protocolo en si.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="3-que-hace">
+<div class="section-head">
+<h2>3. Que hace</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<ul>
+<li>Define y mantiene el ciclo de vida de tareas, claims, buzon, handoffs, decisiones y reportes.</li>
+<li>Provee validadores de estado, escaneo de neutralidad de dominio y de encoding, con paridad <code>.py</code>/<code>.ps1</code>.</li>
+<li>Provee un runtime opcional event-sourced (escritor unico del estado) y herramientas de release</li>
+</ul>
+<p>(SBOM, manifiesto, procedencia y firma de autenticidad).</p>
+<ul>
+<li>Se publica como masters <code>*.template.*</code> para que otras instancias lo adopten.</li>
+</ul>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="4-como-lo-hace">
+<div class="section-head">
+<h2>4. Como lo hace</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Aplica su propio metodo: tareas pequeñas, verificables y de un solo dueño; coordinacion en el area comun; decisiones registradas antes de aplicarse; gates de calidad que deben quedar en verde. En esta instancia el runtime esta activo como escritor autoritativo: cada transicion de estado pasa por una transaccion atomica de intents y la edicion manual del ledger se rechaza como drift.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="5-arquitectura">
+<div class="section-head">
+<h2>5. Arquitectura</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<pre><code class="language-text">AGENTS.md (contrato)        CLAUDE.md (reglas del arquitecto)
+      |
+      v
+Area_comun/  --&gt; protocol/ (docs + *.template.*)
+             --&gt; state/    (PROJECT_STATE, TASK_INDEX, CLAIMS)  &lt;-- escritor unico: runtime/submit_intent
+             --&gt; mailbox/  open|answered|archived
+             --&gt; handoffs/ decisions/ reports/
+      |
+      v
+runtime/  --&gt; submit_intent + apply + eventlog + protocol_replay (event-sourced, drift 0)
+scripts/  --&gt; validadores, escaneos, generadores (SBOM/manifiesto/procedencia/firma, guia humana)
+examples/ --&gt; instancias de referencia + golden cases
+personal/Claude, personal/Codex  --&gt; areas privadas de cada participante</code></pre>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="6-componentes-principales">
+<div class="section-head">
+<h2>6. Componentes principales</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<ul>
+<li><code>AGENTS.md</code> - contrato compartido (fuente de verdad). <code>CLAUDE.md</code> - reglas propias del arquitecto.</li>
+<li><code>Area_comun/state/</code> - estado vivo (tareas, claims, estado del proyecto).</li>
+<li><code>runtime/submit_intent.py</code> + <code>runtime/apply.py</code> + <code>runtime/protocol_replay.py</code> - ledger event-sourced.</li>
+<li><code>scripts/validate_collaboration_state.{py,ps1}</code> - validador de estado; <code>scan_domain_neutrality.*</code>,</li>
+</ul>
+<p><code>scan_encoding.*</code> - escaneos; <code>generate_sbom/manifest/provenance</code>, <code>sign_release</code>/<code>verify_release</code>, <code>generate_human_guide</code> - herramientas de release y de esta guia.</p>
+<ul>
+<li><code>examples/</code> - instancias de referencia (<code>minimal_instance</code>, <code>minimal_sdd_instance</code>, <code>human_guide_instance</code>)</li>
+</ul>
+<p>y golden cases.</p>
+</section>
+<!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="7-flujo-operativo">
+<div class="section-head">
+<h2>7. Flujo operativo</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE+INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] El trabajo se organiza en tareas de un solo dueño con ciclo de vida <code>proposed -&gt; ready -&gt; claimed -&gt; in_progress -&gt; in_review -&gt; done</code> (ramas <code>blocked</code> / <code>cancelled</code>); la coordinacion ocurre en el area comun (estado, claims, buzon, handoffs) y el avance deja señales verificables.</p>
+<p>[INSTANCIA] El arquitecto propone, descompone y revisa; el implementador reclama tareas <code>ready</code> y entrega a <code>in_review</code> con handoff; el arquitecto ratifica adversarialmente y cierra a <code>done</code>. El operador humano aprueba politica, cambios incompatibles y releases. El implementador trabaja empujado por el operador (push-driven). Toda transicion de estado pasa por <code>runtime/submit_intent.py</code>.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="8-flujo-de-datos">
+<div class="section-head">
+<h2>8. Flujo de datos</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Entran tareas, decisiones y mensajes de coordinacion. Se transforman en intents que el runtime valida y materializa al estado (<code>Area_comun/state/*.json</code>), dejando eventos en <code>runtime/state/events.jsonl</code> y un snapshot reconstruible (replay == estado materializado, drift 0). Salen entregables al control de versiones y, en releases, la cadena <code>dist/&lt;version&gt;/</code> (SBOM, manifiesto, procedencia, firma). Todo en texto, sin secretos.</p>
+</section>
+<!-- origen: CORE | tier: todos | campo: obligatorio -->
+<section id="9-flujo-de-decisiones">
+<div class="section-head">
+<h2>9. Flujo de decisiones</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] Las decisiones de protocolo/limites se registran como DECISIONES en <code>Area_comun/decisions/</code> (una por archivo) antes de aplicarse; los cambios incompatibles requieren ademas aprobacion del operador humano. Las tareas enlazan las decisiones que las gobiernan. La ambiguedad se vuelve <code>blocked</code> con una pregunta concreta, no una suposicion.</p>
+</section>
+<!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="10-como-se-implementa-la-metodologia-aqui">
+<div class="section-head">
+<h2>10. Como se implementa la metodologia aqui</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE+INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] El contrato compartido es <code>AGENTS.md</code>; el estado vivo y los artefactos de coordinacion estan en <code>Area_comun/</code>; cada participante mantiene su area privada en <code>personal/&lt;id&gt;/</code>. La fuente de verdad de los masters publicados son los archivos <code>*.template.*</code>.</p>
+<p>[INSTANCIA] Esta instancia no adopta perfiles profesionales (es el core). Activa el runtime como escritor autoritativo (<code>event_state</code> con <code>enforce</code> + <code>authoritative</code>): el gate de sombra duro rechaza la edicion manual del ledger. Hay una regla anti-colision para escrituras concurrentes (staging por rutas explicitas, nunca <code>git add -A</code>) y la regla de memoria post-commit (actualizar la memoria propia tras cada commit).</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="11-como-se-construye">
+<div class="section-head">
+<h2>11. Como se construye</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>No requiere compilacion: son artefactos de texto (Markdown + JSON) y scripts en Python/PowerShell. El prerequisito es un interprete de Python 3 (y opcionalmente PowerShell para la paridad de scripts).</p>
+<pre><code class="language-text"># no hay build; instanciar un nuevo proyecto desde los masters
+python scripts/new_instance.py --help</code></pre>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="12-como-se-ejecuta-localmente">
+<div class="section-head">
+<h2>12. Como se ejecuta localmente</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>No hay servicio que levantar. Para "ejecutar" el runtime de coordinacion se emiten intents y se valida el estado. El orquestador opcional se invoca explicitamente y solo escribe con gates por turno.</p>
+<pre><code class="language-text"># emitir una transaccion de estado (escritor unico)
+python runtime/submit_intent.py --intents transaccion.json
+# verificar consistencia event-sourced
+python runtime/protocol_replay.py --check</code></pre>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="13-como-se-prueba">
+<div class="section-head">
+<h2>13. Como se prueba</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Las pruebas son los gates de calidad y los golden cases. Verde = salida sin errores y codigo de salida 0; rojo = el gate imprime el motivo y devuelve codigo distinto de 0.</p>
+<pre><code class="language-text">python scripts/validate_collaboration_state.py --root .
+python scripts/scan_domain_neutrality.py --root .
+python scripts/scan_encoding.py --root .
+python runtime/protocol_replay.py --check
+python examples/release_sign_cases/run_release_sign_cases.py
+python examples/human_guide_cases/run_human_guide_cases.py</code></pre>
+<ul>
+<li class="check"><input type="checkbox" disabled> <span>Validador de estado de coordinacion en verde</span></li>
+<li class="check"><input type="checkbox" disabled> <span>Escaneo de neutralidad de dominio sin hallazgos</span></li>
+<li class="check"><input type="checkbox" disabled> <span>Escaneo de encoding limpio (ASCII en el canal entre agentes)</span></li>
+<li class="check"><input type="checkbox" disabled> <span>Replay event-sourced sin drift (<code>has_drift=false</code>)</span></li>
+<li class="check"><input type="checkbox" disabled> <span>Golden cases (release tooling, guia humana, sign/verify) en verde</span></li>
+</ul>
+</section>
+<!-- origen: INSTANCIA | tier: opcional | campo: opcional: si la instancia no se despliega, marcar no-aplica con motivo -->
+<section id="14-como-se-despliega-o-lanza">
+<div class="section-head">
+<h2>14. Como se despliega o lanza</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">opcional</span> <span class="badge optional">opcional</span></div>
+<p>El "despliegue" es el corte de release: se regenera la cadena verificable en <code>dist/&lt;version&gt;/</code> (SBOM, manifiesto, procedencia) sobre un HEAD estable, el emisor la firma con un backend externo (firma keyless, material fuera del repo) y se etiqueta la version con aprobacion del operador humano. Rollback = no etiquetar / revertir el commit de release.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="15-como-se-opera">
+<div class="section-head">
+<h2>15. Como se opera</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>Operacion diaria: el arquitecto revisa estado y buzon, descompone backlog y ratifica entregas; el implementador atiende tareas <code>ready</code> empujado por el operador y deja una señal de avance por turno; mantenimiento periodico (poda sistematica del estado vivo) bajo capability de orquestador. El operador humano marca el alcance por turno y aprueba releases. Un solo multiplicador de riesgo activo por ventana.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="16-troubleshooting">
+<div class="section-head">
+<h2>16. Troubleshooting</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<table>
+<thead><tr>
+<th>Sintoma</th>
+<th>Causa probable</th>
+<th>Remedio</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Validador en rojo por mismatch de estado</td>
+<td>Indice y archivo de tarea discrepan</td>
+<td>Reconciliar via <code>submit_intent</code>; nunca editar el JSON a mano bajo <code>enforce</code></td>
+</tr>
+<tr>
+<td><code>protocol_replay --check</code> reporta drift</td>
+<td>Edicion manual del ledger o base sucia</td>
+<td>Regenerar genesis (<code>runtime/regenesis.py</code>) y volver a emitir por intents</td>
+</tr>
+<tr>
+<td>Escaneo de neutralidad con hallazgos</td>
+<td>Termino de dominio en un archivo del core o <code>*.template.*</code></td>
+<td>Quitar el termino o moverlo a un perfil/ejemplo</td>
+</tr>
+<tr>
+<td>Encoding en rojo</td>
+<td>Caracter no-ASCII en el canal entre agentes</td>
+<td>Reemplazar por ASCII (regla del canal entre agentes)</td>
+</tr>
+<tr>
+<td><code>prune --check</code> en rojo (poda debida)</td>
+<td>Acumulacion de claims liberados / tokens de arranque</td>
+<td>Ejecutar <code>protocol_prune</code> por <code>submit_intent</code> (capability orquestador)</td>
+</tr>
+</tbody></table>
+<p>Diagnostico antes de actuar: leer el mensaje del gate y el estado vivo; escalar al operador humano si el cambio toca limites o requiere aprobacion.</p>
+</section>
+<!-- origen: CORE | tier: todos | campo: obligatorio -->
+<section id="17-rutas-relevantes-del-protocolo">
+<div class="section-head">
+<h2>17. Rutas relevantes del protocolo</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] Esta seccion ENLAZA a los documentos vivos del protocolo (no los reescribe):</p>
+<ul>
+<li>Contrato compartido: <code>AGENTS.md</code></li>
+<li>Protocolo de tareas: <code>Area_comun/protocol/TASK_PROTOCOL.md</code></li>
+<li>Estado vivo: <code>Area_comun/state/</code> (PROJECT_STATE, TASK_INDEX, CLAIMS)</li>
+<li>Buzon y handoffs: <code>Area_comun/mailbox/</code>, <code>Area_comun/handoffs/</code></li>
+<li>Decisiones y reportes: <code>Area_comun/decisions/</code>, <code>Area_comun/reports/</code></li>
+<li>Runtime (solo tier runtime): <code>Area_comun/protocol/N_AGENT_RUNTIME.md</code>, runbooks <code>Area_comun/protocol/RUNBOOK-*</code></li>
+</ul>
+</section>
+<!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="18-roles-y-capacidades-configuradas">
+<div class="section-head">
+<h2>18. Roles y capacidades configuradas</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE+INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] Roles genericos del metodo: <strong>operador humano</strong> (aprueba politica, cambios incompatibles y releases), <strong>agente operativo/implementador</strong> (ejecuta el trabajo), <strong>agente revisor/arquitecto</strong> (diseña, revisa y mantiene la coherencia y la neutralidad). La capability requerida sale del CONTENIDO del trabajo, no del nombre del participante.</p>
+<p>[INSTANCIA] Configurados aqui: un agente arquitecto con capabilities de arquitecto/orquestador/qa/revisor; un agente implementador con capabilities de implementador/ingeniero de pruebas; y un operador humano. Las transiciones se autorizan por capability segun el contenido del trabajo, no por el nombre del participante.</p>
+</section>
+<!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="19-seguridad-y-datos-sensibles">
+<div class="section-head">
+<h2>19. Seguridad y datos sensibles</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE+INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] No se commitean secretos (claves, tokens, material de firma). El material real de firma/credenciales pertenece al emisor o a su CI y nunca entra al repositorio.</p>
+<div class="callout safety"><div class="callout-title">SEGURIDAD</div><p>La firma de releases usa un backend externo configurable (firma keyless): la identidad y el material de firma viven en el emisor/CI (OIDC del emisor), nunca en el repositorio. Las areas privadas <code>personal/&lt;id&gt;/</code> no se comparten entre participantes. Nunca se pegan valores reales de secretos en esta guia.</p></div>
+<p>[INSTANCIA] El repositorio no maneja datos de usuario: son artefactos de protocolo en texto. El unico material sensible (claves/identidad de firma) es del emisor y queda fuera del repo por diseño.</p>
+</section>
+<!-- origen: CORE | tier: todos | campo: obligatorio -->
+<section id="20-continuidad-traspaso-y-recuperacion-de-contexto">
+<div class="section-head">
+<h2>20. Continuidad, traspaso y recuperacion de contexto</h2>
+</div>
+<div class="section-meta"><span class="badge">CORE</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<p>[CORE] Un participante que entra en frio retoma leyendo: <code>AGENTS.md</code> seccion "How to Start", el estado vivo en <code>Area_comun/state/</code>, el buzon en <code>Area_comun/mailbox/open/</code> y el punto de retoma de la instancia (<code>RESUME.md</code> u hoja de arranque equivalente / <code>cold_start_globs</code>). Cada tarea y handoff es autocontenido; nadie asume el contexto de otro.</p>
+</section>
+<!-- origen: INSTANCIA | tier: todos | campo: obligatorio -->
+<section id="21-historial-de-cambios">
+<div class="section-head">
+<h2>21. Historial de cambios</h2>
+</div>
+<div class="section-meta"><span class="badge">INSTANCIA</span> <span class="badge">todos</span> <span class="badge required">obligatorio</span></div>
+<table>
+<thead><tr>
+<th>Fecha</th>
+<th>Cambio</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>2026-06-10</td>
+<td>Guia dogfooding creada para la instancia viva (tier runtime, protocol 1.1.0) via el generador</td>
+</tr>
+</tbody></table>
+</section>
+</main>
+</div>
+<footer>
+  Generado por <code>scripts/generate_human_guide.py</code>. Fuente unica: el archivo <code>.md</code>.
+  Hash de fuente: <code>217e8945d31b1b7b</code>. Sin JavaScript, CDN ni recursos externos.
+</footer>
+</div>
+</body>
+</html>

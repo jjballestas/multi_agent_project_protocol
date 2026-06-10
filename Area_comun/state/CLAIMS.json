@@ -1,7 +1,7 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260610-004010-prune-claude",
+            "claim_id": "CLAIM-20260610-095738-prune-claude",
             "expires_at": "2026-06-10",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
@@ -10,193 +10,10 @@
                 "Area_comun/state/TASK_INDEX.json",
                 "Area_comun/state/PROJECT_STATE.json"
             ],
-            "started_at": "2026-06-10T00:40:10Z",
+            "started_at": "2026-06-10T09:57:38Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-10T00:40:10Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-codex",
-            "expires_at": "2026-06-11",
-            "notes": "TASK-0098 human guide deterministic generator, schema validation, --check, goldens and CI/githook wiring. Off-pilot; no SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0098",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
-                "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
-                "Area_comun/protocol/",
-                "scripts/",
-                "examples/",
-                ".github/workflows/validate.yml",
-                ".githooks/pre-commit",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T01:20:00Z",
-            "status": "blocked",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T01:20:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-go-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Registra TASK-0098 (generador, Codex) ready + GO. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0098",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
-                "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-10T01:05:00Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T01:05:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-mailbox-close-codex",
-            "expires_at": "2026-06-11",
-            "notes": "Close resolved TASK-0098 mailbox messages after handoff delivery; no SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/answered/",
-                "Area_comun/mailbox/archived/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T07:45:45Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T07:45:45Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-mailbox-fix-codex",
-            "expires_at": "2026-06-11",
-            "notes": "Fix mailbox frontmatter for TASK-0098 blocker response so validator remains green.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260610-Codex-to-Claude-task0098-prune-blocker.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0098-codex-to-claude-1.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T01:45:00Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T01:45:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-resume-codex",
-            "expires_at": "2026-06-11",
-            "notes": "Resume TASK-0098 after orchestrator prune unblock; update handoff and move blocked to in_review. No SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0098",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
-                "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0098-codex-to-claude-1.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T02:05:00Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T02:05:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-unblock-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Respuesta de desbloqueo a Codex (prune aplicado). Liberado tras escribir.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/mailbox/open/MSG-20260610-Claude-to-Codex-task0098-unblock-prune.md"
-            ],
-            "started_at": "2026-06-10T01:10:00Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T01:10:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0098-unblock-fix-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Fix: cubre CLAIMS.json para poder liberar el claim de desbloqueo mal-escopado.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-10T01:12:00Z",
-            "status": "released",
-            "task_id": "TASK-0098",
-            "updated_at": "2026-06-10T01:12:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0099-close-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Ratificacion adversarial TASK-0099 = PASA (neutralidad + sin-secretos + binding subject_digest + determinismo + fixture intacto). Cierre reviewer in_review->done + FYI accept. Liberado tras escribir el FYI.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0099",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
-                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-10T08:10:26Z",
-            "status": "released",
-            "task_id": "TASK-0099",
-            "updated_at": "2026-06-10T08:10:26Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0099-codex",
-            "expires_at": "2026-06-11",
-            "notes": "TASK-0099 external-command release signing backend; vendor-neutral, no secrets, no SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0099",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
-                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
-                "scripts/sign_release.py",
-                "scripts/verify_release.py",
-                "scripts/sign_release.ps1",
-                "scripts/verify_release.ps1",
-                "examples/release_sign_cases/",
-                "README_INSTANCIACION.md",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T07:48:08Z",
-            "status": "released",
-            "task_id": "TASK-0099",
-            "updated_at": "2026-06-10T07:48:08Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0099-go-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Formaliza SPEC-0073 + registra TASK-0099 (backend firma external-command, Codex) ready + GO. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0099",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
-                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
-                "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-10T07:45:09Z",
-            "status": "released",
-            "task_id": "TASK-0099",
-            "updated_at": "2026-06-10T07:45:09Z"
+            "updated_at": "2026-06-10T09:57:38Z"
         },
         {
             "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
@@ -214,7 +31,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-10T08:02:41Z",
-            "status": "blocked",
+            "status": "released",
             "task_id": "TASK-0099",
             "updated_at": "2026-06-10T08:02:41Z"
         },

@@ -39,6 +39,7 @@ DEFAULT_INCLUDE_GLOBS = [
 
 DEFAULT_EXCLUDE_GLOBS = [
     ".git/**",
+    "dist/**",
     "personal/**",
     "Area_comun/handoffs/**",
     "Area_comun/mailbox/**",

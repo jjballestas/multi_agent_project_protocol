@@ -1,24 +1,6 @@
 {
     "active_tasks": [
         {
-            "id": "TASK-0037",
-            "owner": "Claude",
-            "status": "ready",
-            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI."
-        },
-        {
-            "id": "TASK-0093",
-            "owner": "Codex",
-            "status": "done",
-            "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto."
-        },
-        {
-            "id": "TASK-0094",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado."
-        },
-        {
             "id": "TASK-0095",
             "owner": "Codex",
             "status": "proposed",
@@ -39,7 +21,7 @@
         {
             "id": "TASK-0098",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral."
         },
         {

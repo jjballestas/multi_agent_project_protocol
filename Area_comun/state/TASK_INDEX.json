@@ -46,129 +46,6 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "Area_comun/protocol/HUMAN_GUIDE.template.md",
-                "Area_comun/protocol/HUMAN_GUIDE.template.html",
-                "scripts/generate_human_guide.py",
-                "examples/human_guide_instance/HUMAN_GUIDE.example.md",
-                "HUMAN_GUIDE.md",
-                "README_INSTANCIACION.md"
-            ],
-            "depends_on": [],
-            "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
-            "id": "TASK-0037",
-            "linked_decisions": [
-                "DECISION-0004",
-                "DECISION-0019",
-                "DECISION-0001",
-                "DECISION-0020",
-                "DECISION-0006"
-            ],
-            "owner": "Claude",
-            "phase": "P2",
-            "priority": "normal",
-            "relates_to": [
-                "TASK-0004",
-                "TASK-0013",
-                "SPEC-0072"
-            ],
-            "relevant_files": [
-                "Area_comun/protocol/HUMAN_GUIDE.template.md",
-                "scripts/generate_human_guide.py",
-                "examples/human_guide_cases/",
-                "protocol.config.json",
-                "README_INSTANCIACION.md",
-                ".github/workflows/validate.yml"
-            ],
-            "review": "READY (Claude 2026-06-10, formalizada bajo SDD/SPEC-0072 por GO del operador). Aditivo MINOR off-by-default. Arquitecto: plantilla 21 secciones + neutrality globs + README; Implementador (Codex, tarea separada): generador + golden + CI/githook. Fuente de verdad = .md; HTML = artefacto generado. Las 3 preguntas resueltas (SPEC sec.13). enforce/authoritative intactos; SA.4/Capa C OFF.",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
-            "status": "ready",
-            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
-            "type": "documentation",
-            "updated_at": "2026-06-10"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
-                "runtime/orchestrator.py",
-                "runtime/adapters/llm_adapter.py",
-                "examples/"
-            ],
-            "depends_on": [
-                "TASK-0092"
-            ],
-            "file": "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
-            "id": "TASK-0093",
-            "linked_decisions": [
-                "DECISION-0027",
-                "DECISION-0022",
-                "DECISION-0020"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "relates_to": [
-                "TASK-0091",
-                "TASK-0088",
-                "SPEC-0064"
-            ],
-            "relevant_files": [
-                "runtime/orchestrator.py",
-                "runtime/submit_intent.py",
-                "runtime/turn_validate.py",
-                "runtime/adapters/llm_adapter.py",
-                "examples/"
-            ],
-            "review": "READY (encolada por Claude 2026-06-09 via submit_intent bajo enforce+authoritative). OFF-PILOT. Cierra el gap-8 del orquestador hallado en el 2do piloto (codex invoker): el paso claim es NO-OP -> turno rechazado por no-active-claim. Opcion 1 (operador): el orquestador adquiere el claim del owner ruteado (actor_id=owner). SA.4 DE-ARMADO; el re-fire es paso posterior con GO separado.",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
-            "status": "done",
-            "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto.",
-            "type": "implementation"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
-                "runtime/temp_paths.py",
-                "examples/runtime_protocol_materialize_cases/",
-                "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
-                "Area_comun/handoffs/"
-            ],
-            "depends_on": [],
-            "file": "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
-            "id": "TASK-0094",
-            "linked_decisions": [
-                "DECISION-0022",
-                "DECISION-0020",
-                "DECISION-0007",
-                "DECISION-0006"
-            ],
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "relates_to": [
-                "TASK-0093",
-                "SPEC-0070",
-                "MAINTENANCE-CODEX-SANDBOX-20260609"
-            ],
-            "relevant_files": [
-                "runtime/temp_paths.py",
-                "runtime/apply.py",
-                "runtime/protocol_replay.py",
-                "runtime/submit_intent.py",
-                "AGENTS.md"
-            ],
-            "review": "READY+GO (Claude 2026-06-09 via submit_intent). Postura ACL RATIFICADA por el operador = B: revertir AGENTS.md s7 + runbook en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). Codex commitea su hardening untracked bajo flujo (helper + cableado + golden byte-equivalente + drift0 + cross-platform + handoff), commiteando SOLO sus rutas (sin arrastrar la entrega v2 de TASK-0093). Arranca cuando el operador lo empuje (push-driven).",
-            "sdd_required": true,
-            "spec_id": "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-            "status": "done",
-            "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
-            "type": "implementation",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "blocked_by_questions": [],
-            "deliverables": [
                 "runtime/apply.py",
                 "runtime/vcs.py",
                 "examples/runtime_loop_cases/"
@@ -307,7 +184,7 @@
             "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0072). Implementador: generador determinista .md->.html + --check (drift + validacion de esquema) + golden + CI/githook, sobre la plantilla de 21 secciones del arquitecto. Aditivo MINOR off-by-default. NO cambiar el esquema ni la neutralidad. Arranca cuando el operador lo empuje (push-driven).",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
-            "status": "in_review",
+            "status": "done",
             "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral.",
             "type": "implementation",
             "updated_at": "2026-06-10"

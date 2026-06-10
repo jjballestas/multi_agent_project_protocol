@@ -17,12 +17,14 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
-## [1.1.0] — 2026-06-09
+## [1.1.0] — 2026-06-10
 
-**Runtime-authoritative activation + supervised-autonomy SA.4 pilot.** Additive and domain-neutral
-over 1.0.0; every previously valid turn report stays valid and the shipped templates stay
-off-by-default. This MINOR records the live activation of the protocol-state event-log writer and
-the first bounded real-invoker autonomy pilot, all gated and reversible.
+**Runtime-authoritative activation + supervised-autonomy SA.4 pilot + operator human guide and
+authentic release signing.** Additive and domain-neutral over 1.0.0; every previously valid turn
+report stays valid and the shipped templates stay off-by-default. This MINOR records the live
+activation of the protocol-state event-log writer, the first bounded real-invoker autonomy pilot,
+the neutral operator human guide with its deterministic HTML generator, and a configurable
+external-command release-signing backend — all gated and reversible.
 
 ### Added
 - **Live single-writer (event-sourced state).** `event_state.enforce=true` then
@@ -56,6 +58,22 @@ the first bounded real-invoker autonomy pilot, all gated and reversible.
 - **Cross-FS materialize fix** for Windows when temp and repo live on different drives; regression
   golden added.
 - **Golden rule:** every agent updates its memory after each commit. (DECISION-0026)
+- **Operator human guide (neutral) + deterministic HTML generator.** A 21-section operator guide
+  master (`Area_comun/protocol/HUMAN_GUIDE.template.md`) and `scripts/generate_human_guide.py`
+  (+ `.ps1` parity) that renders `.md → .html` byte-deterministically (stdlib-only, no network/JS/CDN),
+  with `--check` drift control, integrated schema validation and tier-awareness; goldens + CI/githook
+  wiring. The `.md` is the single source of truth; the HTML is a generated artifact ("GENERATED — DO
+  NOT EDIT" banner). Domain-neutral master; the live dogfooding guide (`HUMAN_GUIDE.md`) and the
+  `examples/human_guide_instance/` example are generated via the generator.
+  (TASK-0037 / TASK-0098 / SPEC-0072)
+- **Configurable external-command release-signing backend (authenticity).** `sign_release.py` and
+  `verify_release.py` gain an `external-command` backend (configured only by CLI flags, nothing of the
+  backend persisted in the repo) that wraps/verifies the `protocol_release_signature.v1` schema while
+  preserving `subject_digest == manifest.sbom_hash` and the deterministic fixture HMAC backend.
+  Vendor-neutral — no provider hardcoded (cosign/minisign/gpg are the emitter's configuration); the
+  digest binding is checked before the backend runs; golden uses a deterministic fake/recorded backend
+  (no network, no keys). The release SBOM now excludes `dist/**` so adding a signature/bundle under
+  `dist/` does not change the signed `sbom_hash`. (TASK-0099 / SPEC-0073 / DECISION-0023 §4)
 
 ### Notes
 - Templates (`*.template.*`) unchanged; new instances stay off-by-default.
