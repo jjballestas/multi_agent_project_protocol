@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e7146d55a380143b37b3b87d7b0a529e1c6ce7171178fdc37b878379913ca4d6",
+  "canonical_hash": "2138e950649f6f071150186d0594713eb7908c067b860395f00af7f0a7f9caf1",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -80,6 +80,7 @@
       "CLAIM-20260610-decision0028-claude": 1,
       "CLAIM-20260610-fix0087-claude": 1,
       "CLAIM-20260610-fyi0087-claude": 1,
+      "CLAIM-20260610-task0097-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -106,10 +107,11 @@
       "TASK-0094": 11,
       "TASK-0095": 1,
       "TASK-0096": 1,
+      "TASK-0097": 2,
       "protocol-prune": 11,
       "protocol-state": 3
     },
-    "events_applied": 242,
+    "events_applied": 245,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -157,6 +159,9 @@
       "claude:task0094-ready:claim-acquire": 201,
       "claude:task0094-ready:claim-release": 203,
       "claude:task0094-ready:upsert": 202,
+      "claude:task0097-enqueue:claim-acquire": 243,
+      "claude:task0097-enqueue:claim-release": 245,
+      "claude:task0097-enqueue:upsert": 244,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -366,5 +371,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 242
+  "up_to_seq": 245
 }

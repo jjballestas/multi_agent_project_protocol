@@ -445,6 +445,42 @@
             "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
             "type": "implementation",
             "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/temp_paths.py",
+                "scripts/clean_workspace_temp.py",
+                "examples/"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0097-codex-temp-dir-cleanup-robusto.md",
+            "id": "TASK-0097",
+            "linked_decisions": [
+                "DECISION-0023",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0094",
+                "TASK-0095",
+                "TASK-0096"
+            ],
+            "relevant_files": [
+                "runtime/temp_paths.py",
+                "scripts/clean_workspace_temp.py",
+                ".gitignore",
+                "examples/"
+            ],
+            "review": "PROPOSED (Claude 2026-06-10, follow-up de higiene tras hallazgo del operador). Mitigacion inmediata YA aplicada (sweep 70 restos + .gitignore + scripts/clean_workspace_temp.py). Esta task arregla la RAIZ: consolidar temp dirs bajo un parent unico gitignoreado + cleanup robusto en Windows + golden cero-restos. OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+            "sdd_required": true,
+            "spec_id": "none",
+            "status": "proposed",
+            "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
         }
     ],
     "updated_at": "2026-06-08",

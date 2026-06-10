@@ -710,6 +710,22 @@
             "updated_at": "2026-06-10T00:32:00Z"
         },
         {
+            "claim_id": "CLAIM-20260610-task0097-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Registra TASK-0097 (cleanup robusto de temp dirs). Liberado en la transaccion.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0097",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0097",
+                "Area_comun/tasks/TASK-0097-codex-temp-dir-cleanup-robusto.md"
+            ],
+            "started_at": "2026-06-10T00:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0097",
+            "updated_at": "2026-06-10T00:55:00Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0091-codex-runtime",
             "expires_at": "2026-06-10",
             "notes": "Acquired by runtime orchestrator before routed turn.",

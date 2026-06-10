@@ -9,3 +9,15 @@ Thumbs.db
 
 # Runtime execution traces (local audit; deterministic per run, regenerable)
 runtime/runs/
+
+# Repo-local transient temp dirs: runtime write-path staging/backups + golden test fixtures
+# (inherited-ACL, TASK-0094). Transient and regenerable; the live runtime removes its own, but test
+# harnesses can leak them on Windows. Sweep with scripts/clean_workspace_temp.py. Never committed.
+.protocol-state-materialize-*/
+.runtime-state-backup-*/
+.submit-intent-runtime-backup-*/
+.protocol-materialize-*/
+.protocol-replay-nested-temp-*/
+.runtime-real-*/
+.debug-replay-temp-*/
+.smoke-fixture-*/

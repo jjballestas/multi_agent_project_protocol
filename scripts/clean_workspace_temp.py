@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""Sweep leftover repo-local temporary directories.
+
+The runtime write-path and the golden test harnesses create repo-local inherited-ACL temp dirs
+(DECISION-0023 boundary / TASK-0094 hardening: avoid %TEMP% 0o700 dirs that the Windows unelevated
+sandbox token cannot access). They are transient and regenerable; the live runtime removes its own,
+but test harnesses can leak them on Windows when shutil.rmtree(ignore_errors=True) hits a locked file.
+This sweeper removes the leftovers from the repo root. It NEVER touches tracked content or .git/.
+
+Default is a dry-run (prints what it would remove). Pass --apply to delete.
+"""
+from __future__ import annotations
+
+import argparse
+import shutil
+import sys
+from pathlib import Path
+
+# Known repo-local temp-dir prefixes (dir name = "<prefix><hex>"). Keep specific to avoid
+# deleting anything legitimate. The live runtime uses the first three; the rest are test harnesses.
+TEMP_PREFIXES = (
+    ".protocol-state-materialize-",
+    ".runtime-state-backup-",
+    ".submit-intent-runtime-backup-",
+    ".protocol-materialize-",
+    ".protocol-replay-nested-temp-",
+    ".runtime-real-",
+    ".debug-replay-temp-",
+    ".smoke-fixture-",
+)
+
+# Never remove these, even if a prefix somehow matched.
+PROTECTED = {".git", ".github", ".githooks", ".claude"}
+
+
+def find_temp_dirs(root: Path) -> list[Path]:
+    found: list[Path] = []
+    for child in sorted(root.iterdir()):
+        if not child.is_dir():
+            continue
+        if child.name in PROTECTED:
+            continue
+        if any(child.name.startswith(prefix) for prefix in TEMP_PREFIXES):
+            found.append(child)
+    return found
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Sweep leftover repo-local temp dirs.")
+    parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
+    parser.add_argument("--apply", action="store_true", help="Delete the dirs (default: dry-run).")
+    args = parser.parse_args()
+
+    root = Path(args.root).resolve()
+    targets = find_temp_dirs(root)
+    if not targets:
+        print("clean: no leftover temp dirs at repo root.")
+        return 0
+
+    print(f"{'removing' if args.apply else 'would remove'} {len(targets)} leftover temp dir(s):")
+    removed = 0
+    for path in targets:
+        print(f"  {path.name}")
+        if args.apply:
+            shutil.rmtree(path, ignore_errors=True)
+            if not path.exists():
+                removed += 1
+    if args.apply:
+        print(f"removed {removed}/{len(targets)} (locked dirs, if any, are skipped; re-run later).")
+    else:
+        print("dry-run: pass --apply to delete.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
