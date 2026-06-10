@@ -7,42 +7,6 @@
             "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI."
         },
         {
-            "id": "TASK-0087",
-            "owner": "Claude",
-            "status": "done",
-            "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4."
-        },
-        {
-            "id": "TASK-0088",
-            "owner": "Codex",
-            "status": "done",
-            "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior)."
-        },
-        {
-            "id": "TASK-0089",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto."
-        },
-        {
-            "id": "TASK-0090",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto."
-        },
-        {
-            "id": "TASK-0091",
-            "owner": "Codex",
-            "status": "done",
-            "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027)."
-        },
-        {
-            "id": "TASK-0092",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto."
-        },
-        {
             "id": "TASK-0093",
             "owner": "Codex",
             "status": "done",
@@ -75,7 +39,7 @@
         {
             "id": "TASK-0098",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral."
         }
     ],
@@ -118,9 +82,7 @@
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
     "next_actions": [
-        "[HISTORICO PODADO] 121 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
-        "TASK-0083 RECLAMADA por Codex (2026-06-08): bridge Agent Teams Capas A+B, runtime/team_bridge.py + config off + neutralidad + golden; NO Capa C, NO encender bridge ni tocar .claude/settings.json.",
-        "TASK-0083 ENTREGADA a in_review por Codex (2026-06-08): team_bridge.py Capas A+B + config off + scan_globs + CI/golden 7/7; audit append-only, gate exit2, [TASK-XXXX] solo audita. NO Capa C, NO activar bridge, NO tocar .claude/settings.json.",
+        "[HISTORICO PODADO] 123 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
         ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
         "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
         "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",

@@ -5,4 +5,10 @@ if [ "$status" -ne 0 ]; then
   echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
   exit "$status"
 fi
+python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "human guide template drift; run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template" >&2
+  exit "$status"
+fi
 exit 0

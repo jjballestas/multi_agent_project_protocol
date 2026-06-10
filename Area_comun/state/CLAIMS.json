@@ -1,749 +1,44 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260608-224225-prune-claude",
-            "expires_at": "2026-06-08",
+            "claim_id": "CLAIM-20260610-004010-prune-claude",
+            "expires_at": "2026-06-10",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
             "scope": [
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-08T22:42:25Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-08T22:42:25Z"
-        },
-        {
-            "claim_id": "CLAIM-20260608-task0089-mailbox-hygiene-codex",
-            "expires_at": "2026-06-09",
-            "notes": "Fix archived mailbox frontmatter status for TASK-0089 GO after handoff archival.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/archived/MSG-20260608-Claude-to-Codex-task0089-GO-llm-wrapper.md"
-            ],
-            "started_at": "2026-06-08T21:48:37Z",
-            "status": "released",
-            "task_id": "MAILBOX-HYGIENE-20260608",
-            "updated_at": "2026-06-08T21:48:37Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-accept-0093-0094-claude",
-            "expires_at": "2026-06-10",
-            "notes": "FYI accept de TASK-0093+0094 + higiene de hilos resueltos. Liberado al cerrar.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-09T21:28:50Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T21:28:50Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-anomalia-hardening-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Registra TASK-0094 (formalizar hardening) + SPEC-0071 + nota de anomalia DECISION-0018. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0094",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
-                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
-                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T20:41:13Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T20:41:13Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-anomalia-task0092-amend-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Enmienda del aviso de anomalia TASK-0092 tras confirmar que los diffs compartidos ya no estan presentes.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T02:10:00Z",
-            "status": "released",
-            "task_id": "TASK-0092",
-            "updated_at": "2026-06-09T02:10:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-anomalia-task0092-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Aviso de anomalia a Claude: TASK-0092 tiene cambios compartidos en worktree sin claim activo.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T02:05:00Z",
-            "status": "released",
-            "task_id": "TASK-0092",
-            "updated_at": "2026-06-09T02:05:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-close-0093-0094-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Cierre reviewer de TASK-0093 (gap-8 v2) y TASK-0094 (hardening tempfile/ACL), ambos ratificados PASA. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0093",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
-                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0094",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
-                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md"
-            ],
-            "started_at": "2026-06-09T21:28:05Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T21:28:05Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-close-task0090-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: cierre de TASK-0090 via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0090",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0090",
-                "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0090",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-close-task0092-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: cierre de TASK-0092 (ejecutada por Claude, Codex down) via submit_intent task_upsert. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0092",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0092",
-                "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0092",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-codex-sandbox-cli-correlation",
-            "expires_at": "2026-06-10",
-            "notes": "Coordination with Claude to verify Codex CLI install correlation with Windows sandbox spawn setup refresh.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T03:12:00Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09T03:12:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-coord-sandbox-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claude coordina root-cause+fix del sandbox (os740/elevated->unelevated) y normaliza encoding de su mensaje. Liberado al cerrar.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-enqueue-task0090-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: enqueue TASK-0090 (wrapper resolution) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0090",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0090",
-                "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0090",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-enqueue-task0091-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: enqueue TASK-0091 (objetivo piloto SA.4) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0091",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
-                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0091",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-enqueue-task0092-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: enqueue TASK-0092 (codex invoker) via submit_intent. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0092",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0092",
-                "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0092",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-enqueue-task0093-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: enqueue de TASK-0093 + SPEC-0070 (gap-8 claim-acquire) via submit_intent. Liberado en la misma transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0093",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
-                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
-                "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-hardening-untracked-response-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Respond to Claude anomaly about untracked tempfile ACL hardening and AGENTS.md rule posture.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T04:30:00Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T04:30:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-hold-task0091-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: hold de TASK-0091 (objetivo piloto) a blocked via task_upsert. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0091",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
-                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0091",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-mailbox-hygiene-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Higiene de mailbox: responde request tempfile-acl + archiva hilos resueltos (sandbox/GO/changes-requested). Liberado al cerrar.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-09T03:18:41Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-MAILBOX-20260609",
-            "updated_at": "2026-06-09T03:18:41Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-ready-task0091-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Claim efimero: TASK-0091 blocked->ready para el piloto via task_upsert. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0091",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
-                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
-            ],
-            "started_at": "2026-06-09",
-            "status": "released",
-            "task_id": "TASK-0091",
-            "updated_at": "2026-06-09"
-        },
-        {
-            "claim_id": "CLAIM-20260609-reject-task0093-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Reviewer reject_review de TASK-0093 (DoD SPEC-0070 2.4 release-on-rejection sin cumplir). Liberado en la misma transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0093",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
-                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md"
-            ],
-            "started_at": "2026-06-09T02:57:04Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T02:57:04Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-sandbox-failures-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Aviso operativo a Claude sobre fallos repetidos del sandbox Windows: spawn setup refresh.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T02:58:00Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-SANDBOX-20260609",
-            "updated_at": "2026-06-09T02:58:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0090-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0090 wrapper backend resolution via shutil.which, off-pilot; NO re-armar SA.4 ni correr piloto.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0090",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
-                "runtime/llm_turn_wrapper.py",
-                "examples/llm_turn_wrapper_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-08T22:37:59Z",
-            "status": "released",
-            "task_id": "TASK-0090",
-            "updated_at": "2026-06-08T22:37:59Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0091-refire-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Confirma TASK-0091 ready como objetivo del re-fire SA.4. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0091",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
-                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md"
-            ],
-            "started_at": "2026-06-09T21:46:20Z",
-            "status": "released",
-            "task_id": "TASK-0091",
-            "updated_at": "2026-06-09T21:46:20Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0093-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0093 claim-acquire gap-8: orchestrator acquires routed owner claim off-pilot; no SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0093",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
-                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
-                "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
-                "runtime/orchestrator.py",
-                "runtime/adapters/llm_adapter.py",
-                "runtime/turn_validate.py",
-                "runtime/apply.py",
-                "runtime/submit_intent.py",
-                "examples/supervised_autonomy_cases/",
-                "examples/runtime_loop_cases/",
-                "examples/runtime_real_adapter_cases/",
-                "examples/llm_adapter_cases/",
-                "examples/intent_flow_cases/",
-                "examples/llm_turn_wrapper_cases/",
-                ".github/workflows/validate.yml",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "started_at": "2026-06-09T01:48:02Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T01:48:02Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0093-finding-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Deposita el finding de reject_review de TASK-0093 en mailbox/open. Liberado tras escribir.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T02:58:07Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T02:58:07Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0093-finding2-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Corrige frontmatter del finding de TASK-0093 a esquema de mailbox. Liberado tras corregir.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T02:58:07Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T02:58:07Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0093-fix-rejection-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0093 changes_requested fix: release orchestrator-acquired claim on pre-apply rejection/blocked paths; no SA.4 re-arm or pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0093",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0093",
-                "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
-                "runtime/orchestrator.py",
-                "runtime/apply.py",
-                "examples/runtime_loop_cases/",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T03:05:00Z",
-            "status": "released",
-            "task_id": "TASK-0093",
-            "updated_at": "2026-06-09T03:05:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0094-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0094 formalize tempfile ACL hardening for authoritative write-path; posture B runbook, no SA.4 re-arm, no pilot.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0094",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
-                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
-                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-                "AGENTS.md",
-                "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
-                "runtime/temp_paths.py",
-                "runtime/apply.py",
-                "runtime/protocol_replay.py",
-                "runtime/submit_intent.py",
-                "examples/runtime_protocol_materialize_cases/",
-                "examples/materialize_cross_fs_cases/",
-                "Area_comun/handoffs/",
-                "Area_comun/mailbox/open/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T04:45:00Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T04:45:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0094-ready-claude",
-            "expires_at": "2026-06-10",
-            "notes": "Postura B ratificada por operador: lock B + promover TASK-0094 a ready+GO. Liberado tras escribir.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0094",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0094",
-                "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
-                "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T20:55:40Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T20:55:40Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0094-regression-harness-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0094 follow-on scope: migrate requested regression harness fixtures off OS TEMP so they pass inside Codex Windows sandbox.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "examples/intent_flow_cases/",
-                "examples/runtime_real_adapter_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T05:05:00Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T05:05:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-task0094-replay-cases-codex",
-            "expires_at": "2026-06-10",
-            "notes": "TASK-0094 follow-on scope: make nested B1 replay harness use repo-local inherited-ACL temp dirs so materialization golden passes inside Codex sandbox.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "examples/runtime_protocol_replay_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T05:00:00Z",
-            "status": "released",
-            "task_id": "TASK-0094",
-            "updated_at": "2026-06-09T05:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-temp-acl-rule-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Add project rule for Windows sandbox temp ACL fallout: no work routes with ACL 0o700 under %TEMP%.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "AGENTS.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T04:15:00Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09T04:15:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-tempfile-acl-coord-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Coordination request to Claude about Windows sandbox unelevated tempfile ACL failures.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-09T03:35:00Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09T03:35:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260609-tempfile-acl-hardening-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Maintenance: repair Windows unelevated sandbox ACL fallout from protocol state materialization and harden materialize_to_disk staging to inherit repo ACLs.",
-            "owner": "Codex",
-            "scope": [
                 "Area_comun/state/CLAIMS.json",
                 "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "runtime/protocol_replay.py",
-                "examples/runtime_protocol_materialize_cases/",
-                "examples/materialize_cross_fs_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json",
-                "Area_comun/mailbox/open/"
+                "Area_comun/state/PROJECT_STATE.json"
             ],
-            "started_at": "2026-06-09T03:50:00Z",
+            "started_at": "2026-06-10T00:40:10Z",
             "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09T03:50:00Z"
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-06-10T00:40:10Z"
         },
         {
-            "claim_id": "CLAIM-20260609-tempfile-runtime-backup-hardening-codex",
-            "expires_at": "2026-06-10",
-            "notes": "Maintenance: replace runtime backup tempdirs that use OS TEMP with repo-local inherited-ACL tempdirs for Windows unelevated sandbox compatibility.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "runtime/temp_paths.py",
-                "runtime/protocol_replay.py",
-                "runtime/submit_intent.py",
-                "runtime/apply.py",
-                "examples/runtime_protocol_materialize_cases/",
-                "examples/materialize_cross_fs_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-09T04:00:00Z",
-            "status": "released",
-            "task_id": "MAINTENANCE-CODEX-SANDBOX-20260609",
-            "updated_at": "2026-06-09T04:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-archive-accept-0093-0094-codex",
+            "claim_id": "CLAIM-20260610-task0098-codex",
             "expires_at": "2026-06-11",
-            "notes": "Archive obsolete FYI accept message for TASK-0093/TASK-0094.",
+            "notes": "TASK-0098 human guide deterministic generator, schema validation, --check, goldens and CI/githook wiring. Off-pilot; no SA.4 re-arm or pilot.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0098",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
+                "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
+                "Area_comun/protocol/",
+                "scripts/",
+                "examples/",
+                ".github/workflows/validate.yml",
+                ".githooks/pre-commit",
+                "Area_comun/handoffs/",
                 "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json"
             ],
-            "started_at": "2026-06-10T00:00:00Z",
-            "status": "released",
-            "task_id": "MAILBOX-HYGIENE-20260610",
-            "updated_at": "2026-06-10T00:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-archive-open-fyi-codex",
-            "expires_at": "2026-06-11",
-            "notes": "Archive obsolete open FYI messages that require no Codex response.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T00:10:00Z",
-            "status": "released",
-            "task_id": "MAILBOX-HYGIENE-20260610",
-            "updated_at": "2026-06-10T00:10:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-close-0091-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Cierre TASK-0091 (re-pilot, ratif. PASA) + registro de follow-ups TASK-0095/0096. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0091",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
-                "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0095",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0095",
-                "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0096",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0096",
-                "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-10T00:11:00Z",
-            "status": "released",
-            "task_id": "TASK-0091",
-            "updated_at": "2026-06-10T00:11:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-decision0028-claude",
-            "expires_at": "2026-06-11",
-            "notes": "TASK-0087 postura B: DECISION-0028 (enforce=mecanismo, authoritative=marcador) + docs + CHANGELOG + cierre. Liberado en la transaccion de cierre.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0087",
-                "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
-                "Area_comun/decisions/",
-                "AGENTS.md",
-                "AGENTS.template.md",
-                "Area_comun/protocol/TASK_PROTOCOL.md",
-                "Area_comun/protocol/N_AGENT_RUNTIME.md",
-                "CHANGELOG.md"
-            ],
-            "started_at": "2026-06-10T00:25:00Z",
-            "status": "released",
-            "task_id": "TASK-0087",
-            "updated_at": "2026-06-10T00:25:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-fix0087-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Corrige deliverables de TASK-0087 a artefactos reales producidos. Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0087",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0087",
-                "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md"
-            ],
-            "started_at": "2026-06-10T00:30:00Z",
-            "status": "released",
-            "task_id": "TASK-0087",
-            "updated_at": "2026-06-10T00:30:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-fyi0087-claude",
-            "expires_at": "2026-06-11",
-            "notes": "FYI cierre TASK-0087 / DECISION-0028 a Codex. Liberado tras escribir.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/"
-            ],
-            "started_at": "2026-06-10T00:32:00Z",
-            "status": "released",
-            "task_id": "TASK-0087",
-            "updated_at": "2026-06-10T00:32:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-spec0072-formalize-claude",
-            "expires_at": "2026-06-11",
-            "notes": "TASK-0037 bajo SDD: formaliza SPEC-0072 + plantilla HUMAN_GUIDE + neutrality globs + README. Liberado al cerrar el paso de arquitecto.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0037",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0037",
-                "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
-                "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
-                "Area_comun/protocol/HUMAN_GUIDE.template.md",
-                "protocol.config.json",
-                "README_INSTANCIACION.md"
-            ],
-            "started_at": "2026-06-10T01:00:00Z",
-            "status": "released",
-            "task_id": "TASK-0037",
-            "updated_at": "2026-06-10T01:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0097-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Registra TASK-0097 (cleanup robusto de temp dirs). Liberado en la transaccion.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0097",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0097",
-                "Area_comun/tasks/TASK-0097-codex-temp-dir-cleanup-robusto.md"
-            ],
-            "started_at": "2026-06-10T00:55:00Z",
-            "status": "released",
-            "task_id": "TASK-0097",
-            "updated_at": "2026-06-10T00:55:00Z"
+            "started_at": "2026-06-10T01:20:00Z",
+            "status": "blocked",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T01:20:00Z"
         },
         {
             "claim_id": "CLAIM-20260610-task0098-go-claude",
@@ -761,6 +56,68 @@
             "status": "released",
             "task_id": "TASK-0098",
             "updated_at": "2026-06-10T01:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0098-mailbox-fix-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Fix mailbox frontmatter for TASK-0098 blocker response so validator remains green.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260610-Codex-to-Claude-task0098-prune-blocker.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0098-codex-to-claude-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T01:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T01:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0098-resume-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Resume TASK-0098 after orchestrator prune unblock; update handoff and move blocked to in_review. No SA.4 re-arm or pilot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0098",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
+                "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0098-codex-to-claude-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T02:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T02:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0098-unblock-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Respuesta de desbloqueo a Codex (prune aplicado). Liberado tras escribir.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260610-Claude-to-Codex-task0098-unblock-prune.md"
+            ],
+            "started_at": "2026-06-10T01:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T01:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0098-unblock-fix-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Fix: cubre CLAIMS.json para poder liberar el claim de desbloqueo mal-escopado.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-10T01:12:00Z",
+            "status": "released",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T01:12:00Z"
         },
         {
             "claim_id": "CLAIM-TASK-0091-codex-runtime",

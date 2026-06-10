@@ -33,6 +33,12 @@ jobs:
         shell: pwsh
         run: ./scripts/validate_collaboration_state.ps1 -Root examples/minimal_instance
 
+      - name: Check human guide template HTML
+        run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
+
+      - name: Run human guide generator cases
+        run: python examples/human_guide_cases/run_human_guide_cases.py
+
       - name: Scan encoding
         run: python scripts/scan_encoding.py --root .
 

@@ -1,0 +1,49 @@
+param(
+    [Parameter(Mandatory = $true)]
+    [Alias("In")]
+    [string]$InputPath,
+
+    [Alias("Out")]
+    [string]$OutputPath = "",
+
+    [string]$Root = ".",
+
+    [switch]$Check,
+
+    [ValidateSet("auto", "template", "example", "live")]
+    [string]$Kind = "auto"
+)
+
+$ErrorActionPreference = "Stop"
+
+function Resolve-Python {
+    $candidates = @(
+        @{ Exe = "python"; Args = @(); VersionArgs = @("--version") },
+        @{ Exe = "py"; Args = @("-3"); VersionArgs = @("--version") },
+        @{ Exe = "python3"; Args = @(); VersionArgs = @("--version") }
+    )
+    foreach ($candidate in $candidates) {
+        $command = Get-Command $candidate.Exe -ErrorAction SilentlyContinue
+        if (-not $command) {
+            continue
+        }
+        & $command.Source @($candidate.Args + $candidate.VersionArgs) 1>$null 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            return [pscustomobject]@{ Exe = $command.Source; Args = $candidate.Args }
+        }
+    }
+    throw "Python runtime not found."
+}
+
+$python = Resolve-Python
+$scriptPath = Join-Path $PSScriptRoot "generate_human_guide.py"
+$arguments = @($python.Args + @($scriptPath, "--root", $Root, "--in", $InputPath, "--kind", $Kind))
+if ($OutputPath) {
+    $arguments += @("--out", $OutputPath)
+}
+if ($Check) {
+    $arguments += "--check"
+}
+
+& $python.Exe @arguments
+exit $LASTEXITCODE
