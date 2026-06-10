@@ -4,17 +4,17 @@
   },
   "generated_by": "scripts/generate_provenance.py",
   "invocation": {
-    "commit": "928e5dd7c3b0dce0a997a3112e5cd99acdac7226",
-    "process": "python scripts/generate_manifest.py --root . --commit 928e5dd7c3b0dce0a997a3112e5cd99acdac7226 --timestamp 2026-06-09T00:00:00Z"
+    "commit": "04436c3c93f9aaddd7167cf2f7d4a4529e7ebe4d",
+    "process": "python scripts/generate_manifest.py --root . --commit 04436c3c93f9aaddd7167cf2f7d4a4529e7ebe4d --timestamp 2026-06-10T00:00:00Z --output dist/v1.1.0/manifest.json"
   },
   "metadata": {
     "schema": "provenance.v1",
-    "timestamp": "2026-06-09T00:01:00Z"
+    "timestamp": "2026-06-10T00:00:00Z"
   },
   "schema_version": "protocol_provenance.v1",
   "subject": {
     "digest": {
-      "sha256": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac"
+      "sha256": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6"
     },
     "name": "multi_agent_project_protocol@1.1.0"
   }

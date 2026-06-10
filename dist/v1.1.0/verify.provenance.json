@@ -1,6 +1,6 @@
 {
-  "actual_subject_digest": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
-  "expected_sbom_hash": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
+  "actual_subject_digest": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6",
+  "expected_sbom_hash": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6",
   "manifest": "D:/Agentes/multi_agent_project_protocol/dist/v1.1.0/manifest.json",
   "ok": true,
   "provenance": "D:/Agentes/multi_agent_project_protocol/dist/v1.1.0/provenance.json",

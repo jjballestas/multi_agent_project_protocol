@@ -1,16 +1,16 @@
 {
-  "commit": "928e5dd7c3b0dce0a997a3112e5cd99acdac7226",
-  "file_count": 747,
+  "commit": "04436c3c93f9aaddd7167cf2f7d4a4529e7ebe4d",
+  "file_count": 757,
   "generated_by": "scripts/generate_manifest.py",
-  "manifest_hash": "2026dde03bc6ab52e78290111415c5adafcd4c9e2828431669c9f65aff54ac64",
+  "manifest_hash": "b39beac1d5808fbebb35d875eba9f90fdfc9fd48790be89d2042f7ae43e0f0f4",
   "sbom": {
-    "commit": "928e5dd7c3b0dce0a997a3112e5cd99acdac7226",
-    "file_count": 747,
+    "commit": "04436c3c93f9aaddd7167cf2f7d4a4529e7ebe4d",
+    "file_count": 757,
     "files": [
       {
         "path": ".github/workflows/validate.yml",
-        "sha256": "eac34b0b7b710f12838a1b851132080fe9a7c8e08aede3e2c559c3444a14abaa",
-        "size": 7339
+        "sha256": "56dec629580ff021049e06a744f194955367fc2da328df84da588487ed351374",
+        "size": 7691
       },
       {
         "path": "AGENTS.md",
@@ -281,6 +281,16 @@
         "path": "Area_comun/protocol/HANDOFF_TEMPLATE.md",
         "sha256": "fcb3b268cab8778cc5e8d491adac0ff945e567eab9602574f76556098636f7f1",
         "size": 1959
+      },
+      {
+        "path": "Area_comun/protocol/HUMAN_GUIDE.template.html",
+        "sha256": "3604e271c517d139c9bbf8b7293c9398adfbf242bc64b94b9e05c70fab127451",
+        "size": 21770
+      },
+      {
+        "path": "Area_comun/protocol/HUMAN_GUIDE.template.md",
+        "sha256": "b3865104f66e45ca792762b528a3ef9f9cdeedfb05321812605a8c10e2aa2f2e",
+        "size": 9086
       },
       {
         "path": "Area_comun/protocol/MAILBOX_MESSAGE_TEMPLATE.md",
@@ -648,6 +658,16 @@
         "size": 5989
       },
       {
+        "path": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+        "sha256": "4b82939bec7dcf0b4421a11a2b750028e81f05dd42ab467785f2097c09af5f23",
+        "size": 9647
+      },
+      {
+        "path": "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
+        "sha256": "8725884fc84ce2e2d53f680eb04cce01001e0c0e26df2ef292c8806ca3593031",
+        "size": 6965
+      },
+      {
         "path": "Area_comun/specs/SPEC_TEMPLATE.md",
         "sha256": "a4b9c8a02a53ece704df9d3f5079173e950b115596e7440b8ae1f1e45bc6d155",
         "size": 954
@@ -664,8 +684,8 @@
       },
       {
         "path": "CHANGELOG.md",
-        "sha256": "e8452833d60518b7411b26c88d115d3fad6b1d06ba9732e7e36d59593d7aed36",
-        "size": 28469
+        "sha256": "9bb8ece294dbcd331e202ba28623a9a4d5c9df38c7c92406890a7138941b3507",
+        "size": 30167
       },
       {
         "path": "CLAUDE.md",
@@ -684,8 +704,8 @@
       },
       {
         "path": "README_INSTANCIACION.md",
-        "sha256": "33e0abb9ec0cc718f40ad23d7324cd9246aee13ffded50643e3d99c28def824d",
-        "size": 15090
+        "sha256": "8afe1489cdecda4e4c3e16aad978855d0ff31abd26feca95c638127e88c6c438",
+        "size": 18555
       },
       {
         "path": "examples/agent_registry_cases/run_agent_registry_cases.py",
@@ -1646,6 +1666,21 @@
         "path": "examples/handoff_release_cases/run_handoff_release_cases.py",
         "sha256": "72d74443bd5fb65b70b1c6d1fd33426fee83a2b9b82c6da24ea5403f90d4ae99",
         "size": 1815
+      },
+      {
+        "path": "examples/human_guide_cases/run_human_guide_cases.py",
+        "sha256": "70200dac21b374a1288e96ece2aaf04e596553510104b434ed81d8ee7e8d08e3",
+        "size": 9021
+      },
+      {
+        "path": "examples/human_guide_instance/HUMAN_GUIDE.example.html",
+        "sha256": "cb2c4426e93a6f75356561db45dbf67c6d1679852850a1adfed847286f8b5188",
+        "size": 22531
+      },
+      {
+        "path": "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+        "sha256": "550d9dd06ae677dbb5109efb9129272de7aca8ef2f9d75a8f0bc20f351bdd006",
+        "size": 8640
       },
       {
         "path": "examples/intent_flow_cases/run_intent_flow_cases.py",
@@ -2804,8 +2839,8 @@
       },
       {
         "path": "examples/release_sign_cases/run_release_sign_cases.py",
-        "sha256": "a98526e088f7a59b7e7f88ab14aedbaad9801d9d19edf3b435d4f09569f8795f",
-        "size": 12649
+        "sha256": "8be8f71b90e97745f19664a94c4c1fc55b06c8f4c85e1505140bf5ffa0f0d355",
+        "size": 22065
       },
       {
         "path": "examples/release_verify_cases/run_release_verify_cases.py",
@@ -3464,8 +3499,8 @@
       },
       {
         "path": "protocol.config.json",
-        "sha256": "d03d0826c0c7c872ed00fba30e0ff3478b119e3bbd7558323c9574686e0af6d7",
-        "size": 5190
+        "sha256": "ac8ebfd2ca8cbcc279933fd26baf1caec852d253e87df5270c612059c3e26c02",
+        "size": 5295
       },
       {
         "path": "protocol.config.template.json",
@@ -3628,6 +3663,21 @@
         "size": 2209
       },
       {
+        "path": "scripts/clean_workspace_temp.py",
+        "sha256": "8905b5f67805c9b50c5b2da1699f64535af06c61e93bae6f18026b40f4e8d464",
+        "size": 2726
+      },
+      {
+        "path": "scripts/generate_human_guide.ps1",
+        "sha256": "a7e13530664518f580bb4df1350aa0a567ad4b6a7185063c6e4e9bfa0afd3fdc",
+        "size": 1351
+      },
+      {
+        "path": "scripts/generate_human_guide.py",
+        "sha256": "4e04b318e5cf47107783814b4be29ebfcad3291b2916394c8e4452996a082b4b",
+        "size": 29284
+      },
+      {
         "path": "scripts/generate_manifest.ps1",
         "sha256": "a5e3ed314772a95f9bfb4e9fe02dd714801b3c9694ab075c2bad543cca430104",
         "size": 1493
@@ -3654,8 +3704,8 @@
       },
       {
         "path": "scripts/generate_sbom.py",
-        "sha256": "fc4c93581702aab443ae9e1180eb188981f222664bc38c21ab0f7d63fa4004ce",
-        "size": 6548
+        "sha256": "f4c664ce11f86fd8094a49b02a258b4eba4c1b445099d75583308cbfcf02458b",
+        "size": 6563
       },
       {
         "path": "scripts/measure_context_cost.ps1",
@@ -3704,13 +3754,13 @@
       },
       {
         "path": "scripts/sign_release.ps1",
-        "sha256": "a3ce49cb432bc79fbb635ea02754b439d733fa228d31e5a9ff911e78f6891164",
-        "size": 1496
+        "sha256": "f47bc534c941cf0c55c201c717f07431986694c05bfb8a0632e6c2ee3e69b4e1",
+        "size": 1903
       },
       {
         "path": "scripts/sign_release.py",
-        "sha256": "a608ffcf31d76210dfbda962b856383631659d5fa729672d78672c4683e4a529",
-        "size": 3182
+        "sha256": "1758b5a5b069f570265b38fba074056eaea23ec7676446cfefc96476d65cbb41",
+        "size": 7541
       },
       {
         "path": "scripts/upgrade_instance.ps1",
@@ -3734,13 +3784,13 @@
       },
       {
         "path": "scripts/verify_release.ps1",
-        "sha256": "4f8f4e3ff7a57ec3f1c508f9b170bacd208b5431855b56ff3015a25f2afcee1a",
-        "size": 1432
+        "sha256": "b0c170cf380146441c18a8dc7833a11385aa8e02e064fa5973f2dfd1ca88d70b",
+        "size": 1545
       },
       {
         "path": "scripts/verify_release.py",
-        "sha256": "e6e43095b6a70776139df4bd69525ee4eeed181227f5e8367fa5861fa3942348",
-        "size": 8273
+        "sha256": "e85f3c5ef3abb509ab1d9451175557d1012e6ffd7115282bf707cbeaed5756eb",
+        "size": 12027
       }
     ],
     "generated_by": "scripts/generate_sbom.py",
@@ -3748,6 +3798,7 @@
     "source_globs": {
       "exclude": [
         ".git/**",
+        "dist/**",
         "personal/**",
         "Area_comun/handoffs/**",
         "Area_comun/mailbox/**",
@@ -3784,7 +3835,7 @@
         "scripts/**"
       ]
     },
-    "timestamp": "2026-06-09T00:00:00Z",
+    "timestamp": "2026-06-10T00:00:00Z",
     "version_axes": {
       "profiles": [
         {
@@ -3799,9 +3850,9 @@
       }
     }
   },
-  "sbom_hash": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
+  "sbom_hash": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6",
   "schema_version": "protocol_release_manifest.v1",
-  "timestamp": "2026-06-09T00:00:00Z",
+  "timestamp": "2026-06-10T00:00:00Z",
   "version_axes": {
     "profiles": [
       {

@@ -1,12 +1,12 @@
 {
-  "actual_sbom_hash": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
+  "actual_sbom_hash": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6",
   "diff": {
     "changed": [],
     "extra": [],
     "missing": []
   },
-  "expected_sbom_hash": "92113b4a882dc32feebc9d24e197f936f2f3bdd57158cb382a62c88d6b7e2fac",
-  "file_count": 747,
+  "expected_sbom_hash": "0083c1c9a5bd4f6f568bbc6988b0ac9003518ab854feb01f9b1ae7814ddcb8e6",
+  "file_count": 757,
   "manifest": "D:/Agentes/multi_agent_project_protocol/dist/v1.1.0/manifest.json",
   "ok": true,
   "root": "D:/Agentes/multi_agent_project_protocol",
