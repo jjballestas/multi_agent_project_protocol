@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fea0ee103e107f705b8dcd577685b589ac201c6a70e38bc8761eef5415ed7b0a",
+  "canonical_hash": "50d0e8f8ddfca2dc2bf0d89d4549c53496a93df1c2d99ab5968171bcde405a7b",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -86,6 +86,8 @@
       "CLAIM-20260610-spec0072-formalize-claude": 1,
       "CLAIM-20260610-task0037-close-claude": 1,
       "CLAIM-20260610-task0097-claude": 1,
+      "CLAIM-20260610-task0097-go-claude": 1,
+      "CLAIM-20260610-task0097-sdd-blocker-codex": 1,
       "CLAIM-20260610-task0098-close-claude": 1,
       "CLAIM-20260610-task0098-codex": 2,
       "CLAIM-20260610-task0098-go-claude": 1,
@@ -128,13 +130,13 @@
       "TASK-0094": 11,
       "TASK-0095": 1,
       "TASK-0096": 1,
-      "TASK-0097": 2,
+      "TASK-0097": 5,
       "TASK-0098": 13,
       "TASK-0099": 12,
       "protocol-prune": 13,
       "protocol-state": 3
     },
-    "events_applied": 301,
+    "events_applied": 306,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -194,6 +196,9 @@
       "claude:task0097-enqueue:claim-acquire": 243,
       "claude:task0097-enqueue:claim-release": 245,
       "claude:task0097-enqueue:upsert": 244,
+      "claude:task0097-promote:claim-acquire": 304,
+      "claude:task0097-promote:claim-release": 306,
+      "claude:task0097-promote:upsert-ready": 305,
       "claude:task0098-close:claim-acquire": 289,
       "claude:task0098-close:claim-release": 291,
       "claude:task0098-close:in-review-to-done": 290,
@@ -270,6 +275,8 @@
       "codex:task0094-tempfile-acl-hardening:claim-release": 209,
       "codex:task0094-tempfile-acl-hardening:in-progress-to-in-review": 208,
       "codex:task0094-tempfile-acl-hardening:ready-to-in-progress": 205,
+      "codex:task0097-sdd-blocker-mailbox:claim-acquire": 302,
+      "codex:task0097-sdd-blocker-mailbox:claim-release": 303,
       "codex:task0098-human-guide:blocked-to-in-review": 267,
       "codex:task0098-human-guide:claim-acquire": 252,
       "codex:task0098-human-guide:claim-block": 255,
@@ -450,5 +457,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 301
+  "up_to_seq": 306
 }

@@ -15,7 +15,7 @@
         {
             "id": "TASK-0097",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT."
         },
         {

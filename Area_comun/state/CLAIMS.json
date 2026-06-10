@@ -16,6 +16,41 @@
             "updated_at": "2026-06-10T09:57:38Z"
         },
         {
+            "claim_id": "CLAIM-20260610-task0097-go-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Formaliza SPEC-0074 + promueve TASK-0097 proposed->ready+GO (desbloquea el blocker de Codex). Liberado en la tx.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0097",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0097",
+                "Area_comun/tasks/TASK-0097-codex-temp-dir-cleanup-robusto.md",
+                "Area_comun/specs/SPEC-0074-temp-dir-cleanup-robusto.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/answered/"
+            ],
+            "started_at": "2026-06-10T10:56:32Z",
+            "status": "released",
+            "task_id": "TASK-0097",
+            "updated_at": "2026-06-10T10:56:32Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0097-sdd-blocker-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Block root temp-dir cleanup implementation until TASK-0097 is promoted/formalized with full SDD/spec.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T10:34:28Z",
+            "status": "released",
+            "task_id": "TASK-0097",
+            "updated_at": "2026-06-10T10:34:28Z"
+        },
+        {
             "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
             "expires_at": "2026-06-11",
             "notes": "Block TASK-0099 close because prune --check requires orchestrator protocol_prune; implementation is ready but gate is red.",
