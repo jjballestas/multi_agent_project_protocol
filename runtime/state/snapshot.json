@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "33d0706376e09c9c9fce6854be997fd877adb238bfb0a8f31ab57d548c67e90c",
+  "canonical_hash": "1b94997ab3e9118c638572af8ad383d27136e667fd432917972a9771e61012ba",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -89,6 +89,7 @@
       "CLAIM-20260610-task0098-resume-codex": 1,
       "CLAIM-20260610-task0098-unblock-claude": 1,
       "CLAIM-20260610-task0098-unblock-fix-claude": 1,
+      "CLAIM-20260610-task0099-go-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -118,10 +119,11 @@
       "TASK-0096": 1,
       "TASK-0097": 2,
       "TASK-0098": 10,
+      "TASK-0099": 2,
       "protocol-prune": 12,
       "protocol-state": 3
     },
-    "events_applied": 268,
+    "events_applied": 271,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -182,6 +184,9 @@
       "claude:task0098-unblock-fix:release-fix": 265,
       "claude:task0098-unblock-fix:release-unblock": 264,
       "claude:task0098-unblock:acquire": 262,
+      "claude:task0099-backend-firma-externo:claim-acquire": 269,
+      "claude:task0099-backend-firma-externo:claim-release": 271,
+      "claude:task0099-backend-firma-externo:task-upsert-ready": 270,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -404,5 +409,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 268
+  "up_to_seq": 271
 }

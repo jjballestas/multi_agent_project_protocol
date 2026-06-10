@@ -311,6 +311,51 @@
             "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral.",
             "type": "implementation",
             "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-10",
+            "deliverables": [
+                "scripts/sign_release.py",
+                "scripts/verify_release.py",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1",
+                "examples/release_sign_cases/run_release_sign_cases.py",
+                "README_INSTANCIACION.md"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+            "id": "TASK-0099",
+            "linked_decisions": [
+                "DECISION-0023",
+                "DECISION-0021",
+                "DECISION-0001",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "SPEC-0073",
+                "SPEC-0061",
+                "TASK-0075",
+                "DECISION-0023"
+            ],
+            "relevant_files": [
+                "scripts/sign_release.py",
+                "scripts/verify_release.py",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1",
+                "examples/release_sign_cases/run_release_sign_cases.py",
+                "README_INSTANCIACION.md"
+            ],
+            "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0073, GO del operador). Backend de firma external-command configurable (DECISION-0023 sec.4); hoy sign/verify rechazan backend != fixture. Aditivo MINOR off-by-default, vendor-neutral, sin secretos, golden fake/recorded determinista. NO runtime flip; SA.4/Capa C OFF.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
+            "status": "ready",
+            "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
         }
     ],
     "updated_at": "2026-06-08",

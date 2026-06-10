@@ -41,6 +41,12 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral."
+        },
+        {
+            "id": "TASK-0099",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT."
         }
     ],
     "agents": {
