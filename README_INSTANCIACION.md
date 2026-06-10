@@ -107,6 +107,41 @@ Para reglas de versionado y migracion (`protocol_version`, `runtime_version`, `s
 Para producir y verificar un release endurecido con SBOM, manifiesto, provenance y firma, ver
 [`Area_comun/protocol/RELEASE_ENGINEERING.md`](Area_comun/protocol/RELEASE_ENGINEERING.md).
 
+### Firma externa de releases
+
+La firma de autenticidad real es opt-in y no guarda comandos, claves ni identidad privada en el repo. El
+emisor configura el backend por flags en el momento de publicar:
+
+```powershell
+python scripts\sign_release.py `
+  --manifest dist\vX.Y.Z\manifest.json `
+  --backend external-command `
+  --sign-command "<comando-local-que-emite-firma-o-bundle-por-stdout>" `
+  --identity "<identidad-publica-del-firmante>" `
+  --issuer "<issuer-oidc-publico>" `
+  --signature-field bundle `
+  --output dist\vX.Y.Z\signature.json
+```
+
+El comando externo recibe `{digest}` y `{manifest}` como placeholders; si no se usan placeholders, el digest
+se envia por stdin. Para verificar, el adoptante recibe la identidad publica, el issuer y el comando exacto:
+
+```powershell
+python scripts\verify_release.py `
+  --root . `
+  --manifest dist\vX.Y.Z\manifest.json `
+  --signature dist\vX.Y.Z\signature.json `
+  --backend external-command `
+  --verify-command "<comando-publico-de-verificacion>"
+```
+
+`--verify-command` puede usar `{digest}`, `{manifest}`, `{signature}`, `{bundle}`, `{signature_file}`,
+`{identity}`, `{issuer}` y `{key_id}`. Si no usa placeholders, recibe el JSON de firma por stdin. Un emisor que
+use una herramienta concreta (por ejemplo, keyless con identidad OIDC) debe publicar en el reporte de release:
+identidad, issuer, backend declarado, archivo de firma, comando exacto de verificacion y si requiere red o
+bundle offline. El backend `fixture-hmac-sha256` es solo para golden/CI determinista; no afirma autenticidad
+de un release real.
+
 ### Operar agentes reales
 
 El wrapper de CLI real existe solo para instancias runtime y sigue apagado por defecto. Una instancia
@@ -272,7 +307,8 @@ una spec resoluble y una tarea `implementation` conforme a SDD.
    `Area_comun/decisions/DECISION-0001-versionado.md`.
 9. Si vas a publicar un paquete verificable, sigue
    `Area_comun/protocol/RELEASE_ENGINEERING.md`: genera manifiesto/provenance, verifica integridad y firma con
-   material del emisor fuera del repo.
+   material del emisor fuera del repo. Si usas `external-command`, publica en el reporte de release la identidad,
+   issuer y comando exacto de verificacion.
 
 ## 5. Archivos a completar primero
 

@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0099
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 one_line_summary: GO TASK-0099 (SPEC-0073 / DECISION-0023 sec.4) - backend de firma "external-command" configurable en sign_release.py + verify_release.py (config por flags CLI, sin persistir nada del backend; objetivo del emisor=cosign keyless, NO hardcodeado), conservando subject_digest=manifest.sbom_hash, fixture HMAC intacto, golden DETERMINISTA fake/recorded sin red ni claves. Aditivo MINOR off-by-default. NO runtime flip; enforce/authoritative intactos; SA.4/Capa C OFF.

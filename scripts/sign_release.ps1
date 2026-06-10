@@ -2,8 +2,12 @@ param(
     [string]$Manifest = "",
     [string]$Digest = "",
     [Parameter(Mandatory = $true)][string]$Backend,
-    [Parameter(Mandatory = $true)][string]$Key,
+    [string]$Key = "",
     [string]$KeyId = "",
+    [string]$Identity = "",
+    [string]$Issuer = "",
+    [string]$SignCommand = "",
+    [string]$SignatureField = "",
     [string]$Output = "-"
 )
 
@@ -34,15 +38,30 @@ if (($Manifest -and $Digest) -or (-not $Manifest -and -not $Digest)) {
 
 $python = Resolve-Python
 $scriptPath = Join-Path $PSScriptRoot "sign_release.py"
-$arguments = @($python.Args + @($scriptPath, "--backend", $Backend, "--key", $Key, "--output", $Output))
+$arguments = @($python.Args + @($scriptPath, "--backend", $Backend, "--output", $Output))
 if ($Manifest) {
     $arguments += @("--manifest", $Manifest)
 }
 if ($Digest) {
     $arguments += @("--digest", $Digest)
 }
+if ($Key) {
+    $arguments += @("--key", $Key)
+}
 if ($KeyId) {
     $arguments += @("--key-id", $KeyId)
+}
+if ($Identity) {
+    $arguments += @("--identity", $Identity)
+}
+if ($Issuer) {
+    $arguments += @("--issuer", $Issuer)
+}
+if ($SignCommand) {
+    $arguments += @("--sign-command", $SignCommand)
+}
+if ($SignatureField) {
+    $arguments += @("--signature-field", $SignatureField)
 }
 
 & $python.Exe @arguments

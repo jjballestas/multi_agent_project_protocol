@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1b94997ab3e9118c638572af8ad383d27136e667fd432917972a9771e61012ba",
+  "canonical_hash": "59a6002f80e765a983c231beb8cc645d2d8e48d8b7437240b842e50671db5e89",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -85,11 +85,16 @@
       "CLAIM-20260610-task0097-claude": 1,
       "CLAIM-20260610-task0098-codex": 1,
       "CLAIM-20260610-task0098-go-claude": 1,
+      "CLAIM-20260610-task0098-mailbox-close-codex": 1,
       "CLAIM-20260610-task0098-mailbox-fix-codex": 1,
       "CLAIM-20260610-task0098-resume-codex": 1,
       "CLAIM-20260610-task0098-unblock-claude": 1,
       "CLAIM-20260610-task0098-unblock-fix-claude": 1,
+      "CLAIM-20260610-task0099-close-claude": 1,
+      "CLAIM-20260610-task0099-codex": 1,
       "CLAIM-20260610-task0099-go-claude": 1,
+      "CLAIM-20260610-task0099-prune-blocker-codex": 1,
+      "CLAIM-20260610-task0099-resume-review-codex": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -118,12 +123,12 @@
       "TASK-0095": 1,
       "TASK-0096": 1,
       "TASK-0097": 2,
-      "TASK-0098": 10,
-      "TASK-0099": 2,
+      "TASK-0098": 11,
+      "TASK-0099": 11,
       "protocol-prune": 12,
       "protocol-state": 3
     },
-    "events_applied": 271,
+    "events_applied": 286,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -187,6 +192,9 @@
       "claude:task0099-backend-firma-externo:claim-acquire": 269,
       "claude:task0099-backend-firma-externo:claim-release": 271,
       "claude:task0099-backend-firma-externo:task-upsert-ready": 270,
+      "claude:task0099-close-v2:claim-acquire": 284,
+      "claude:task0099-close-v2:claim-release": 286,
+      "claude:task0099-close-v2:in-review-to-done": 285,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -253,8 +261,20 @@
       "codex:task0098-human-guide:ready-to-in-progress": 253,
       "codex:task0098-human-guide:resume-claim-acquire": 266,
       "codex:task0098-human-guide:resume-claim-release": 268,
+      "codex:task0098-mailbox-close:claim-acquire": 272,
+      "codex:task0098-mailbox-close:claim-release": 273,
       "codex:task0098-mailbox-fix:claim-acquire": 256,
       "codex:task0098-mailbox-fix:claim-release": 257,
+      "codex:task0099-external-signing:claim-acquire": 274,
+      "codex:task0099-external-signing:claim-release": 277,
+      "codex:task0099-external-signing:in-progress-to-in-review": 276,
+      "codex:task0099-external-signing:ready-to-in-progress": 275,
+      "codex:task0099-prune-blocker:claim-acquire": 278,
+      "codex:task0099-prune-blocker:claim-block": 280,
+      "codex:task0099-prune-blocker:in-review-to-blocked": 279,
+      "codex:task0099-resume-review:blocked-to-in-review": 282,
+      "codex:task0099-resume-review:claim-acquire": 281,
+      "codex:task0099-resume-review:claim-release": 283,
       "codex:temp-acl-rule:claim-acquire": 194,
       "codex:temp-acl-rule:claim-release": 195,
       "codex:tempfile-acl-coord:claim-acquire": 186,
@@ -409,5 +429,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 271
+  "up_to_seq": 286
 }

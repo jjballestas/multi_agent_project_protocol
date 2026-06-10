@@ -4,7 +4,7 @@ type: BLOCKED
 task_id: TASK-0098
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 one_line_summary: TASK-0098 generador implementado y goldens verdes, pero cierre bloqueado por prune --check; Codex no tiene capability orchestrator para aplicar protocol_prune.

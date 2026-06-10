@@ -9,12 +9,16 @@ import json
 import shutil
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from runtime.temp_paths import root_temp_dir  # noqa: E402
+
 MANIFEST_PY = ROOT / "scripts" / "generate_manifest.py"
 SIGN_PY = ROOT / "scripts" / "sign_release.py"
 VERIFY_PY = ROOT / "scripts" / "verify_release.py"
@@ -23,7 +27,10 @@ VERIFY_PS = ROOT / "scripts" / "verify_release.ps1"
 COMMIT = "def456"
 TIMESTAMP = "2026-06-07T00:00:00Z"
 FIXTURE_BACKEND = "fixture-hmac-sha256"
+EXTERNAL_BACKEND = "external-command"
 FIXTURE_MATERIAL = "fixture-public-test-material-release-sign-cases"
+EXTERNAL_IDENTITY = "fixture-signer@example.invalid"
+EXTERNAL_ISSUER = "https://issuer.example.invalid"
 
 
 def write(path: Path, text: str) -> None:
@@ -188,6 +195,153 @@ def write_signature(manifest: Path, key_file: Path) -> Path:
     return output
 
 
+def write_fake_external_backend(root: Path) -> Path:
+    backend = root / "fake_external_backend.py"
+    write(
+        backend,
+        "\n".join(
+            [
+                "#!/usr/bin/env python3",
+                "import hashlib",
+                "import sys",
+                "",
+                "def signature(digest):",
+                "    return 'fake-recorded:' + hashlib.sha256(('release-sign-fake:' + digest).encode('utf-8')).hexdigest()",
+                "",
+                "mode = sys.argv[1]",
+                "digest = sys.argv[2]",
+                "if mode == 'sign':",
+                "    print(signature(digest))",
+                "    raise SystemExit(0)",
+                "if mode == 'verify':",
+                "    actual = sys.argv[3]",
+                "    raise SystemExit(0 if actual == signature(digest) else 23)",
+                "raise SystemExit(2)",
+                "",
+            ]
+        ),
+    )
+    return backend
+
+
+def python_command() -> str:
+    return Path(sys.executable).as_posix()
+
+
+def external_sign_command(backend: Path) -> str:
+    return f"{python_command()} {backend.as_posix()} sign {{digest}}"
+
+
+def external_verify_command(backend: Path) -> str:
+    return f"{python_command()} {backend.as_posix()} verify {{digest}} {{signature}}"
+
+
+def sign_external_release(manifest: Path, sign_command: str, output: str = "-") -> subprocess.CompletedProcess[str]:
+    return run(
+        [
+            sys.executable,
+            str(SIGN_PY),
+            "--manifest",
+            str(manifest),
+            "--backend",
+            EXTERNAL_BACKEND,
+            "--sign-command",
+            sign_command,
+            "--identity",
+            EXTERNAL_IDENTITY,
+            "--issuer",
+            EXTERNAL_ISSUER,
+            "--output",
+            output,
+        ]
+    )
+
+
+def sign_external_digest(digest: str, sign_command: str, output: str = "-") -> subprocess.CompletedProcess[str]:
+    return run(
+        [
+            sys.executable,
+            str(SIGN_PY),
+            "--digest",
+            digest,
+            "--backend",
+            EXTERNAL_BACKEND,
+            "--sign-command",
+            sign_command,
+            "--identity",
+            EXTERNAL_IDENTITY,
+            "--issuer",
+            EXTERNAL_ISSUER,
+            "--output",
+            output,
+        ]
+    )
+
+
+def verify_external_release(
+    root: Path,
+    manifest: Path,
+    signature: Path,
+    verify_command: str | None,
+    *,
+    backend: str | None = EXTERNAL_BACKEND,
+) -> subprocess.CompletedProcess[str]:
+    command = [sys.executable, str(VERIFY_PY), "--root", str(root), "--manifest", str(manifest), "--signature", str(signature)]
+    if backend is not None:
+        command += ["--backend", backend]
+    if verify_command is not None:
+        command += ["--verify-command", verify_command]
+    return run(command)
+
+
+def sign_external_release_ps(manifest: Path, sign_command: str) -> subprocess.CompletedProcess[str] | None:
+    shell = shutil.which("pwsh") or shutil.which("powershell")
+    if not shell:
+        return None
+    return run(
+        [
+            shell,
+            "-NoProfile",
+            "-File",
+            str(SIGN_PS),
+            "-Manifest",
+            str(manifest),
+            "-Backend",
+            EXTERNAL_BACKEND,
+            "-SignCommand",
+            sign_command,
+            "-Identity",
+            EXTERNAL_IDENTITY,
+            "-Issuer",
+            EXTERNAL_ISSUER,
+        ]
+    )
+
+
+def verify_external_release_ps(root: Path, manifest: Path, signature: Path, verify_command: str) -> subprocess.CompletedProcess[str] | None:
+    shell = shutil.which("pwsh") or shutil.which("powershell")
+    if not shell:
+        return None
+    return run(
+        [
+            shell,
+            "-NoProfile",
+            "-File",
+            str(VERIFY_PS),
+            "-Root",
+            str(root),
+            "-Manifest",
+            str(manifest),
+            "-Signature",
+            str(signature),
+            "-Backend",
+            EXTERNAL_BACKEND,
+            "-VerifyCommand",
+            verify_command,
+        ]
+    )
+
+
 def expected_signature(manifest: dict[str, Any]) -> dict[str, Any]:
     subject_digest = manifest["sbom_hash"]
     return {
@@ -201,8 +355,7 @@ def expected_signature(manifest: dict[str, Any]) -> dict[str, Any]:
 
 
 def case_signature_expected_payload() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-expected-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-expected-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -215,8 +368,7 @@ def case_signature_expected_payload() -> None:
 
 
 def case_signature_deterministic_bytes() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-deterministic-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-deterministic-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -228,8 +380,7 @@ def case_signature_deterministic_bytes() -> None:
 
 
 def case_verify_signature_ok() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-ok-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-ok-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -242,8 +393,7 @@ def case_verify_signature_ok() -> None:
 
 
 def case_verify_signature_fails_for_subject_mismatch() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-subject-fail-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-subject-fail-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -259,8 +409,7 @@ def case_verify_signature_fails_for_subject_mismatch() -> None:
 
 
 def case_verify_signature_fails_for_altered_signature() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-altered-fail-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-altered-fail-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -276,8 +425,7 @@ def case_verify_signature_fails_for_altered_signature() -> None:
 
 
 def case_verify_without_signature_keeps_integrity_contract() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-off-by-default-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-off-by-default-") as root:
         build_fixture(root)
         manifest_path = write_manifest(root)
         result = verify_release(root, manifest_path)
@@ -287,8 +435,7 @@ def case_verify_without_signature_keeps_integrity_contract() -> None:
 
 
 def case_verify_fails_closed_without_material() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-no-material-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-no-material-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -299,9 +446,72 @@ def case_verify_fails_closed_without_material() -> None:
         assert payload["signature"]["error"] == "signature verification requested but no --pubkey/--key material was provided"
 
 
+def case_external_command_round_trip_ok() -> None:
+    with root_temp_dir(ROOT, "release-sign-external-ok-") as root:
+        build_fixture(root)
+        manifest_path = write_manifest(root)
+        fake_backend = write_fake_external_backend(root)
+        signature_path = manifest_path.parent / "external-signature.json"
+        sign = sign_external_release(manifest_path, external_sign_command(fake_backend), str(signature_path))
+        assert sign.returncode == 0, sign.stdout + sign.stderr
+        signature = json.loads(signature_path.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        assert signature["backend"] == EXTERNAL_BACKEND
+        assert signature["subject_digest"] == manifest["sbom_hash"]
+        assert signature["identity"] == EXTERNAL_IDENTITY
+        assert signature["issuer"] == EXTERNAL_ISSUER
+        assert signature["signature"].startswith("fake-recorded:")
+        assert "sign_command" not in signature
+        verify = verify_external_release(root, manifest_path, signature_path, external_verify_command(fake_backend))
+        payload = load_json_result(verify)
+        assert payload["ok"] is True
+        assert payload["signature"]["ok"] is True
+
+
+def case_external_command_fails_for_backend_mismatch() -> None:
+    with root_temp_dir(ROOT, "release-sign-external-backend-fail-") as root:
+        build_fixture(root)
+        manifest_path = write_manifest(root)
+        fake_backend = write_fake_external_backend(root)
+        signature_path = manifest_path.parent / "external-signature.json"
+        sign = sign_external_release(manifest_path, external_sign_command(fake_backend), str(signature_path))
+        assert sign.returncode == 0, sign.stdout + sign.stderr
+        verify = verify_external_release(root, manifest_path, signature_path, external_verify_command(fake_backend), backend="external-other")
+        assert verify.returncode != 0
+        payload = json.loads(verify.stdout)
+        assert payload["signature"]["error"] == "signature backend does not match requested backend"
+
+
+def case_external_command_fails_for_subject_mismatch() -> None:
+    with root_temp_dir(ROOT, "release-sign-external-subject-fail-") as root:
+        build_fixture(root)
+        manifest_path = write_manifest(root)
+        fake_backend = write_fake_external_backend(root)
+        signature_path = manifest_path.parent / "external-signature.json"
+        sign = sign_external_digest("0" * 64, external_sign_command(fake_backend), str(signature_path))
+        assert sign.returncode == 0, sign.stdout + sign.stderr
+        verify = verify_external_release(root, manifest_path, signature_path, external_verify_command(fake_backend))
+        assert verify.returncode != 0
+        payload = json.loads(verify.stdout)
+        assert payload["signature"]["error"] == "signature subject_digest does not match manifest.sbom_hash"
+
+
+def case_external_command_fails_closed_without_verify_command() -> None:
+    with root_temp_dir(ROOT, "release-sign-external-no-command-") as root:
+        build_fixture(root)
+        manifest_path = write_manifest(root)
+        fake_backend = write_fake_external_backend(root)
+        signature_path = manifest_path.parent / "external-signature.json"
+        sign = sign_external_release(manifest_path, external_sign_command(fake_backend), str(signature_path))
+        assert sign.returncode == 0, sign.stdout + sign.stderr
+        verify = verify_external_release(root, manifest_path, signature_path, None)
+        assert verify.returncode != 0
+        payload = json.loads(verify.stdout)
+        assert payload["signature"]["error"] == "--verify-command is required for backend external-command"
+
+
 def case_powershell_wrappers_parity_if_available() -> None:
-    with tempfile.TemporaryDirectory(prefix="release-sign-ps-") as temp:
-        root = Path(temp)
+    with root_temp_dir(ROOT, "release-sign-ps-") as root:
         build_fixture(root)
         key_file = write_key(root)
         manifest_path = write_manifest(root)
@@ -320,6 +530,29 @@ def case_powershell_wrappers_parity_if_available() -> None:
         assert py_verify.stdout.replace("\r\n", "\n") == ps_verify.stdout.replace("\r\n", "\n")
 
 
+def case_external_powershell_wrappers_parity_if_available() -> None:
+    with root_temp_dir(ROOT, "release-sign-external-ps-") as root:
+        build_fixture(root)
+        manifest_path = write_manifest(root)
+        fake_backend = write_fake_external_backend(root)
+        sign_command = external_sign_command(fake_backend)
+        verify_command = external_verify_command(fake_backend)
+        py_signature = sign_external_release(manifest_path, sign_command)
+        ps_signature = sign_external_release_ps(manifest_path, sign_command)
+        if ps_signature is None:
+            return
+        assert py_signature.returncode == 0, py_signature.stderr
+        assert ps_signature.returncode == 0, ps_signature.stdout + ps_signature.stderr
+        assert py_signature.stdout.replace("\r\n", "\n") == ps_signature.stdout.replace("\r\n", "\n")
+        signature_path = manifest_path.parent / "external-signature.json"
+        write(signature_path, py_signature.stdout)
+        py_verify = verify_external_release(root, manifest_path, signature_path, verify_command)
+        ps_verify = verify_external_release_ps(root, manifest_path, signature_path, verify_command)
+        assert ps_verify is not None
+        assert py_verify.returncode == ps_verify.returncode == 0
+        assert py_verify.stdout.replace("\r\n", "\n") == ps_verify.stdout.replace("\r\n", "\n")
+
+
 def main() -> int:
     cases = [
         case_signature_expected_payload,
@@ -329,7 +562,12 @@ def main() -> int:
         case_verify_signature_fails_for_altered_signature,
         case_verify_without_signature_keeps_integrity_contract,
         case_verify_fails_closed_without_material,
+        case_external_command_round_trip_ok,
+        case_external_command_fails_for_backend_mismatch,
+        case_external_command_fails_for_subject_mismatch,
+        case_external_command_fails_closed_without_verify_command,
         case_powershell_wrappers_parity_if_available,
+        case_external_powershell_wrappers_parity_if_available,
     ]
     failures = []
     for case in cases:

@@ -45,7 +45,7 @@
         {
             "id": "TASK-0099",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT."
         }
     ],

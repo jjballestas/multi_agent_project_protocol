@@ -7,12 +7,15 @@ import argparse
 import hashlib
 import hmac
 import json
+import os
+import shlex
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
 from generate_sbom import DEFAULT_EXCLUDE_GLOBS, DEFAULT_INCLUDE_GLOBS, build_sbom, canonical_json
-from sign_release import FIXTURE_BACKEND, fixture_key_id, read_material, sign_fixture
+from sign_release import EXTERNAL_COMMAND_BACKEND, FIXTURE_BACKEND, fixture_key_id, read_material, sign_fixture
 
 
 def sha256_text(text: str) -> str:
@@ -24,14 +27,74 @@ def read_json(path: Path) -> dict[str, Any]:
     return payload if isinstance(payload, dict) else {}
 
 
+def split_command(command: str) -> list[str]:
+    parts = shlex.split(command, posix=os.name != "nt")
+    if not parts:
+        raise ValueError("external verification command is empty")
+    return parts
+
+
+def render_command(command: str, values: dict[str, str]) -> tuple[list[str], bool]:
+    used_placeholder = False
+    rendered: list[str] = []
+    for part in split_command(command):
+        updated = part
+        for key, value in values.items():
+            placeholder = "{" + key + "}"
+            if placeholder in updated:
+                if not value:
+                    raise ValueError(f"external verification command uses unavailable placeholder: {placeholder}")
+                updated = updated.replace(placeholder, value)
+                used_placeholder = True
+        rendered.append(updated)
+    return rendered, used_placeholder
+
+
+def run_external_verify_command(
+    command: str,
+    *,
+    expected_subject_digest: str,
+    manifest_path: Path,
+    signature_path: Path,
+    signature_payload: dict[str, Any],
+) -> str | None:
+    values = {
+        "digest": expected_subject_digest,
+        "manifest": manifest_path.as_posix(),
+        "signature_file": signature_path.as_posix(),
+        "signature": str(signature_payload.get("signature") or ""),
+        "bundle": str(signature_payload.get("bundle") or ""),
+        "identity": str(signature_payload.get("identity") or ""),
+        "issuer": str(signature_payload.get("issuer") or ""),
+        "key_id": str(signature_payload.get("key_id") or ""),
+    }
+    try:
+        args, used_placeholder = render_command(command, values)
+    except ValueError as exc:
+        return str(exc)
+    stdin = None if used_placeholder else canonical_json(signature_payload)
+    try:
+        result = subprocess.run(args, input=stdin, text=True, capture_output=True, check=False)
+    except OSError as exc:
+        return f"external verification command failed to start: {exc}"
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout or "").strip()
+        suffix = f": {detail}" if detail else ""
+        return f"external verification command failed with exit code {result.returncode}{suffix}"
+    return None
+
+
 def verify_signature(
     signature_path: Path,
     *,
     expected_subject_digest: str,
+    manifest_path: Path,
     backend: str | None,
     material_reference: str | None,
+    verify_command: str | None,
 ) -> dict[str, Any]:
     signature_payload = read_json(signature_path)
+    actual_backend = str(signature_payload.get("backend") or "")
     selected_backend = backend or str(signature_payload.get("backend") or "")
     actual_subject_digest = str(signature_payload.get("subject_digest") or "")
     payload: dict[str, Any] = {
@@ -43,29 +106,48 @@ def verify_signature(
         "actual_subject_digest": actual_subject_digest,
         "key_id": str(signature_payload.get("key_id") or ""),
     }
-    if not material_reference:
-        payload["error"] = "signature verification requested but no --pubkey/--key material was provided"
-        return payload
-    if selected_backend != FIXTURE_BACKEND:
-        payload["error"] = f"unsupported signature backend: {selected_backend}"
-        return payload
-    material = read_material(material_reference)
-    expected_signature = sign_fixture(expected_subject_digest, material)
-    expected_key_id = fixture_key_id(material)
-    actual_signature = str(signature_payload.get("signature") or "")
     if actual_subject_digest != expected_subject_digest:
         payload["error"] = "signature subject_digest does not match manifest.sbom_hash"
         return payload
-    if str(signature_payload.get("backend") or "") != selected_backend:
+    if actual_backend != selected_backend:
         payload["error"] = "signature backend does not match requested backend"
         return payload
-    if str(signature_payload.get("key_id") or "") != expected_key_id:
-        payload["error"] = "signature key_id does not match verification material"
+    if selected_backend == FIXTURE_BACKEND:
+        if not material_reference:
+            payload["error"] = "signature verification requested but no --pubkey/--key material was provided"
+            return payload
+        material = read_material(material_reference)
+        expected_signature = sign_fixture(expected_subject_digest, material)
+        expected_key_id = fixture_key_id(material)
+        actual_signature = str(signature_payload.get("signature") or "")
+        if str(signature_payload.get("key_id") or "") != expected_key_id:
+            payload["error"] = "signature key_id does not match verification material"
+            return payload
+        if not hmac.compare_digest(actual_signature, expected_signature):
+            payload["error"] = "signature does not verify for manifest.sbom_hash"
+            return payload
+        payload["ok"] = True
         return payload
-    if not hmac.compare_digest(actual_signature, expected_signature):
-        payload["error"] = "signature does not verify for manifest.sbom_hash"
+    if selected_backend == EXTERNAL_COMMAND_BACKEND:
+        if not verify_command:
+            payload["error"] = f"--verify-command is required for backend {EXTERNAL_COMMAND_BACKEND}"
+            return payload
+        if not str(signature_payload.get("signature") or signature_payload.get("bundle") or ""):
+            payload["error"] = "external-command signature has no signature or bundle field"
+            return payload
+        error = run_external_verify_command(
+            verify_command,
+            expected_subject_digest=expected_subject_digest,
+            manifest_path=manifest_path,
+            signature_path=signature_path,
+            signature_payload=signature_payload,
+        )
+        if error:
+            payload["error"] = error
+            return payload
+        payload["ok"] = True
         return payload
-    payload["ok"] = True
+    payload["error"] = f"unsupported signature backend: {selected_backend}"
     return payload
 
 
@@ -117,6 +199,7 @@ def verify_release(
     signature_path: Path | None = None,
     signature_backend: str | None = None,
     signature_material: str | None = None,
+    signature_verify_command: str | None = None,
 ) -> dict[str, Any]:
     manifest = read_json(manifest_path)
     include_globs, exclude_globs = sbom_globs(manifest)
@@ -142,7 +225,7 @@ def verify_release(
         "file_count": actual_sbom["file_count"],
         "diff": diffs,
     }
-    if signature_path is not None or signature_backend is not None or signature_material is not None:
+    if signature_path is not None or signature_backend is not None or signature_material is not None or signature_verify_command is not None:
         if signature_path is None:
             payload["ok"] = False
             payload["signature"] = {
@@ -154,8 +237,10 @@ def verify_release(
             signature_result = verify_signature(
                 signature_path,
                 expected_subject_digest=expected_hash,
+                manifest_path=manifest_path,
                 backend=signature_backend,
                 material_reference=signature_material,
+                verify_command=signature_verify_command,
             )
             payload["signature"] = signature_result
             payload["ok"] = ok and bool(signature_result["ok"])
@@ -171,6 +256,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--backend", help="Signature backend id. Defaults to the backend recorded in the signature.")
     parser.add_argument("--pubkey", help="Public verification material reference for signature verification.")
     parser.add_argument("--key", help="Verification material reference; accepted for fixture HMAC parity.")
+    parser.add_argument(
+        "--verify-command",
+        help="External verification command. Supports {digest}, {manifest}, {signature}, {bundle}, {signature_file}, {identity}, {issuer}, {key_id}; otherwise signature JSON is sent on stdin.",
+    )
     return parser.parse_args()
 
 
@@ -182,6 +271,7 @@ def main() -> int:
         signature_path=Path(args.signature).resolve() if args.signature else None,
         signature_backend=args.backend,
         signature_material=args.pubkey or args.key,
+        signature_verify_command=args.verify_command,
     )
     rendered = canonical_json(payload)
     if args.output == "-":

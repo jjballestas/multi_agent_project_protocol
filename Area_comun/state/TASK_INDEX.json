@@ -352,7 +352,7 @@
             "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0073, GO del operador). Backend de firma external-command configurable (DECISION-0023 sec.4); hoy sign/verify rechazan backend != fixture. Aditivo MINOR off-by-default, vendor-neutral, sin secretos, golden fake/recorded determinista. NO runtime flip; SA.4/Capa C OFF.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
-            "status": "ready",
+            "status": "done",
             "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT.",
             "type": "implementation",
             "updated_at": "2026-06-10"

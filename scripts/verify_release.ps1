@@ -5,7 +5,8 @@ param(
     [string]$Signature = "",
     [string]$Backend = "",
     [string]$Pubkey = "",
-    [string]$Key = ""
+    [string]$Key = "",
+    [string]$VerifyCommand = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -43,6 +44,9 @@ if ($Pubkey) {
 }
 if ($Key) {
     $arguments += @("--key", $Key)
+}
+if ($VerifyCommand) {
+    $arguments += @("--verify-command", $VerifyCommand)
 }
 
 & $python.Exe @arguments

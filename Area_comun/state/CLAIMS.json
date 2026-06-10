@@ -58,6 +58,24 @@
             "updated_at": "2026-06-10T01:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260610-task0098-mailbox-close-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Close resolved TASK-0098 mailbox messages after handoff delivery; no SA.4 re-arm or pilot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T07:45:45Z",
+            "status": "released",
+            "task_id": "TASK-0098",
+            "updated_at": "2026-06-10T07:45:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260610-task0098-mailbox-fix-codex",
             "expires_at": "2026-06-11",
             "notes": "Fix mailbox frontmatter for TASK-0098 blocker response so validator remains green.",
@@ -120,6 +138,49 @@
             "updated_at": "2026-06-10T01:12:00Z"
         },
         {
+            "claim_id": "CLAIM-20260610-task0099-close-claude",
+            "expires_at": "2026-06-11",
+            "notes": "Ratificacion adversarial TASK-0099 = PASA (neutralidad + sin-secretos + binding subject_digest + determinismo + fixture intacto). Cierre reviewer in_review->done + FYI accept. Liberado tras escribir el FYI.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0099",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                "Area_comun/mailbox/open/"
+            ],
+            "started_at": "2026-06-10T08:10:26Z",
+            "status": "released",
+            "task_id": "TASK-0099",
+            "updated_at": "2026-06-10T08:10:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0099-codex",
+            "expires_at": "2026-06-11",
+            "notes": "TASK-0099 external-command release signing backend; vendor-neutral, no secrets, no SA.4 re-arm or pilot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0099",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                "scripts/sign_release.py",
+                "scripts/verify_release.py",
+                "scripts/sign_release.ps1",
+                "scripts/verify_release.ps1",
+                "examples/release_sign_cases/",
+                "README_INSTANCIACION.md",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T07:48:08Z",
+            "status": "released",
+            "task_id": "TASK-0099",
+            "updated_at": "2026-06-10T07:48:08Z"
+        },
+        {
             "claim_id": "CLAIM-20260610-task0099-go-claude",
             "expires_at": "2026-06-11",
             "notes": "Formaliza SPEC-0073 + registra TASK-0099 (backend firma external-command, Codex) ready + GO. Liberado en la transaccion.",
@@ -136,6 +197,47 @@
             "status": "released",
             "task_id": "TASK-0099",
             "updated_at": "2026-06-10T07:45:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Block TASK-0099 close because prune --check requires orchestrator protocol_prune; implementation is ready but gate is red.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0099",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0099-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T08:02:41Z",
+            "status": "blocked",
+            "task_id": "TASK-0099",
+            "updated_at": "2026-06-10T08:02:41Z"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0099-resume-review-codex",
+            "expires_at": "2026-06-11",
+            "notes": "Resume TASK-0099 review after prune --check returned green; withdraw transient prune blocker.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0099",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0099-codex-to-claude-1.md",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/archived/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-10T08:06:33Z",
+            "status": "released",
+            "task_id": "TASK-0099",
+            "updated_at": "2026-06-10T08:06:33Z"
         },
         {
             "claim_id": "CLAIM-TASK-0091-codex-runtime",
