@@ -26,10 +26,20 @@ from runtime.protocol_replay import (  # noqa: E402
     replay_protocol_state,
     write_genesis,
 )
-from runtime.temp_paths import root_temp_dir  # noqa: E402
+from runtime.temp_paths import PROTOCOL_TEMP_PARENT_NAME, root_temp_dir  # noqa: E402
 
 
 TASK_ID = "TASK-9200"
+LEGACY_REPO_TEMP_PREFIXES = (
+    ".protocol-state-materialize-",
+    ".runtime-state-backup-",
+    ".submit-intent-runtime-backup-",
+    ".protocol-materialize-",
+    ".protocol-replay-nested-temp-",
+    ".runtime-real-",
+    ".debug-replay-temp-",
+    ".smoke-fixture-",
+)
 RUNTIME_TIER_REQUIRED_PATHS = [
     "scripts/validate_collaboration_state.py",
     "scripts/validate_collaboration_state.ps1",
@@ -56,6 +66,18 @@ def run(
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+
+
+def repo_temp_leftovers(root: Path) -> list[str]:
+    leftovers = [
+        child.name
+        for child in sorted(root.iterdir())
+        if child.is_dir() and any(child.name.startswith(prefix) for prefix in LEGACY_REPO_TEMP_PREFIXES)
+    ]
+    parent = root / PROTOCOL_TEMP_PARENT_NAME
+    if parent.is_dir():
+        leftovers.extend(f"{PROTOCOL_TEMP_PARENT_NAME}/{child.name}" for child in sorted(parent.iterdir()) if child.is_dir())
+    return leftovers
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -312,11 +334,38 @@ def case_runtime_materialization_on_clears_drift_and_warns_on_divergence() -> No
 
 def case_root_temp_dir_is_repo_local_and_cleaned() -> None:
     with root_temp_dir(ROOT, ".protocol-materialize-helper-") as temp_root:
-        assert temp_root.parent == ROOT
+        assert temp_root.parent == ROOT / PROTOCOL_TEMP_PARENT_NAME
+        assert temp_root.parent.parent == ROOT
         marker = temp_root / "marker.txt"
         marker.write_text("ok\n", encoding="ascii")
         assert marker.read_text(encoding="ascii") == "ok\n"
     assert not temp_root.exists()
+    parent = ROOT / PROTOCOL_TEMP_PARENT_NAME
+    assert not parent.exists() or not any(parent.iterdir())
+
+
+def case_clean_workspace_temp_removes_legacy_and_parent_dirs() -> None:
+    with root_temp_dir(ROOT, ".protocol-materialize-sweeper-") as fixture_root:
+        for name in (
+            ".protocol-materialize-legacy00000000000000000000000000000000",
+            ".runtime-real-legacy00000000000000000000000000000000",
+            ".debug-replay-temp-legacy00000000000000000000000000000000",
+        ):
+            (fixture_root / name).mkdir()
+        nested = fixture_root / PROTOCOL_TEMP_PARENT_NAME / ".protocol-materialize-child00000000000000000000000000000000"
+        nested.mkdir(parents=True)
+
+        completed = run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "clean_workspace_temp.py"),
+                "--root",
+                str(fixture_root),
+                "--apply",
+            ]
+        )
+        assert "removed 4/4" in completed.stdout, completed.stdout
+        assert repo_temp_leftovers(fixture_root) == []
 
 
 def case_b1_replay_suite_still_passes() -> None:
@@ -332,6 +381,11 @@ def case_b1_replay_suite_still_passes() -> None:
     assert "OK:" in completed.stdout, completed.stdout
 
 
+def case_no_repo_root_temp_leftovers_after_suite() -> None:
+    leftovers = repo_temp_leftovers(ROOT)
+    assert leftovers == [], leftovers
+
+
 def main() -> int:
     cases = [
         case_materialize_writes_canonical_ascii_state,
@@ -340,7 +394,9 @@ def main() -> int:
         case_runtime_gating_off_is_byte_equivalent,
         case_runtime_materialization_on_clears_drift_and_warns_on_divergence,
         case_root_temp_dir_is_repo_local_and_cleaned,
+        case_clean_workspace_temp_removes_legacy_and_parent_dirs,
         case_b1_replay_suite_still_passes,
+        case_no_repo_root_temp_leftovers_after_suite,
     ]
     failures = []
     for case in cases:

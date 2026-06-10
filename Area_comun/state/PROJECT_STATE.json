@@ -13,12 +13,6 @@
             "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
         },
         {
-            "id": "TASK-0097",
-            "owner": "Codex",
-            "status": "ready",
-            "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT."
-        },
-        {
             "id": "TASK-0098",
             "owner": "Codex",
             "status": "done",
@@ -29,6 +23,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0100",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
         }
     ],
     "agents": {

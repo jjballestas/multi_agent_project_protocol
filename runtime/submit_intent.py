@@ -24,7 +24,7 @@ try:
         protocol_state_drift,
         write_genesis_reference,
     )
-    from .temp_paths import make_root_temp_dir
+    from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
     from eventlog import EventWriter, STATE_DIR, canonical_hash
@@ -38,7 +38,7 @@ except ImportError:  # pragma: no cover - direct script execution
         protocol_state_drift,
         write_genesis_reference,
     )
-    from temp_paths import make_root_temp_dir
+    from temp_paths import make_root_temp_dir, remove_root_temp_dir
 
 
 VALID_TASK_STATUSES = {
@@ -136,11 +136,11 @@ def restore_runtime_state(root: Path, backup: RuntimeStateBackup) -> None:
         shutil.rmtree(state_dir)
     if backup_dir is not None and backup_dir.exists():
         shutil.copytree(backup_dir, state_dir)
-    shutil.rmtree(temp_root, ignore_errors=True)
+    remove_root_temp_dir(temp_root)
 
 
 def cleanup_runtime_state_backup(backup: RuntimeStateBackup) -> None:
-    shutil.rmtree(backup[0], ignore_errors=True)
+    remove_root_temp_dir(backup[0])
 
 
 def snapshot_files(root: Path, relatives: list[str]) -> FileBackup:

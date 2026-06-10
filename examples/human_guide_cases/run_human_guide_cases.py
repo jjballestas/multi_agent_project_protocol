@@ -37,7 +37,7 @@ SECTION_TITLES = (
 )
 
 sys.path.insert(0, str(ROOT))
-from runtime.temp_paths import make_root_temp_dir  # noqa: E402
+from runtime.temp_paths import root_temp_dir  # noqa: E402
 
 
 def run_command(command: list[str], *, expect_success: bool = True) -> subprocess.CompletedProcess[str]:
@@ -182,8 +182,7 @@ def run_check(input_path: Path, output_path: Path, *, kind: str, expect_success:
 
 
 def main() -> int:
-    temp_root = make_root_temp_dir(ROOT, ".human-guide-cases-")
-    try:
+    with root_temp_dir(ROOT, ".human-guide-cases-") as temp_root:
         live_md = temp_root / "HUMAN_GUIDE.md"
         live_a = temp_root / "HUMAN_GUIDE-a.html"
         live_b = temp_root / "HUMAN_GUIDE-b.html"
@@ -253,8 +252,6 @@ def main() -> int:
 
         print("OK: human guide generator cases passed.")
         return 0
-    finally:
-        shutil.rmtree(temp_root, ignore_errors=True)
 
 
 if __name__ == "__main__":

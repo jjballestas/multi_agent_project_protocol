@@ -17,10 +17,10 @@ from typing import Any, Callable
 
 try:
     from .eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
-    from .temp_paths import make_root_temp_dir
+    from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
-    from temp_paths import make_root_temp_dir
+    from temp_paths import make_root_temp_dir, remove_root_temp_dir
 
 
 PROTOCOL_STATE_PATHS = {
@@ -624,7 +624,7 @@ def materialize_to_disk(
                     shutil.copy2(backup, target)
             raise
     finally:
-        shutil.rmtree(temp_root, ignore_errors=True)
+        remove_root_temp_dir(temp_root)
 
     return {
         "materialized": True,

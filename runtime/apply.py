@@ -37,7 +37,7 @@ try:
         task_author,
     )
     from .turn_validate import derive_transition_scopes, validate_turn
-    from .temp_paths import make_root_temp_dir
+    from .temp_paths import make_root_temp_dir, remove_root_temp_dir
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import (
@@ -58,7 +58,7 @@ except ImportError:  # pragma: no cover - direct script execution
         materialize_from_event_log_if_enabled,
     )
     from review_qa import checks_with_signatures, has_consecutive_failure, max_qa_cycles, qa_attempts_after_failure, review_qa_span, task_author
-    from temp_paths import make_root_temp_dir
+    from temp_paths import make_root_temp_dir, remove_root_temp_dir
     from turn_validate import derive_transition_scopes, validate_turn
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
@@ -101,11 +101,11 @@ def restore_runtime_state(root: Path, backup: RuntimeStateBackup) -> None:
         shutil.rmtree(state_dir)
     if backup_dir is not None and backup_dir.exists():
         shutil.copytree(backup_dir, state_dir)
-    shutil.rmtree(temp_root, ignore_errors=True)
+    remove_root_temp_dir(temp_root)
 
 
 def cleanup_runtime_state_backup(backup: RuntimeStateBackup) -> None:
-    shutil.rmtree(backup[0], ignore_errors=True)
+    remove_root_temp_dir(backup[0])
 
 
 def runtime_state_commit_paths(root: Path) -> list[str]:
