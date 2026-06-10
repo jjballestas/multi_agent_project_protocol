@@ -46,33 +46,46 @@
         {
             "blocked_by_questions": [],
             "deliverables": [
-                "Plantilla markdown de guia humana operativa",
-                "Formato HTML legible para humanos",
-                "Documentacion de adopcion en README_INSTANCIACION.md"
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "Area_comun/protocol/HUMAN_GUIDE.template.html",
+                "scripts/generate_human_guide.py",
+                "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+                "HUMAN_GUIDE.md",
+                "README_INSTANCIACION.md"
             ],
             "depends_on": [],
             "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
             "id": "TASK-0037",
+            "linked_decisions": [
+                "DECISION-0004",
+                "DECISION-0019",
+                "DECISION-0001",
+                "DECISION-0020",
+                "DECISION-0006"
+            ],
             "owner": "Claude",
             "phase": "P2",
             "priority": "normal",
             "relates_to": [
                 "TASK-0004",
-                "TASK-0013"
+                "TASK-0013",
+                "SPEC-0072"
             ],
             "relevant_files": [
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "scripts/generate_human_guide.py",
+                "examples/human_guide_cases/",
+                "protocol.config.json",
                 "README_INSTANCIACION.md",
-                "README.md",
-                "Area_comun/protocol/",
-                "Area_comun/artifacts/",
-                "examples/minimal_instance/"
+                ".github/workflows/validate.yml"
             ],
-            "review": "Futuro trabajo pedido por el operador. No arrancar hasta que el arquitecto lo especifique y confirme alcance.",
-            "sdd_required": false,
-            "spec_id": "none",
-            "status": "proposed",
-            "title": "Trabajo futuro: guia humana operativa neutral + formato HTML reusable por cualquier proyecto",
-            "type": "documentation"
+            "review": "READY (Claude 2026-06-10, formalizada bajo SDD/SPEC-0072 por GO del operador). Aditivo MINOR off-by-default. Arquitecto: plantilla 21 secciones + neutrality globs + README; Implementador (Codex, tarea separada): generador + golden + CI/githook. Fuente de verdad = .md; HTML = artefacto generado. Las 3 preguntas resueltas (SPEC sec.13). enforce/authoritative intactos; SA.4/Capa C OFF.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+            "status": "ready",
+            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
+            "type": "documentation",
+            "updated_at": "2026-06-10"
         },
         {
             "blocked_by_questions": [],
@@ -479,6 +492,47 @@
             "spec_id": "none",
             "status": "proposed",
             "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "scripts/generate_human_guide.py",
+                "scripts/generate_human_guide.ps1",
+                "examples/human_guide_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "depends_on": [
+                "TASK-0037"
+            ],
+            "file": "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
+            "id": "TASK-0098",
+            "linked_decisions": [
+                "DECISION-0004",
+                "DECISION-0019",
+                "DECISION-0001",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0037",
+                "SPEC-0072"
+            ],
+            "relevant_files": [
+                "scripts/generate_human_guide.py",
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "examples/human_guide_cases/",
+                ".github/workflows/validate.yml",
+                ".githooks/pre-commit"
+            ],
+            "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0072). Implementador: generador determinista .md->.html + --check (drift + validacion de esquema) + golden + CI/githook, sobre la plantilla de 21 secciones del arquitecto. Aditivo MINOR off-by-default. NO cambiar el esquema ni la neutralidad. Arranca cuando el operador lo empuje (push-driven).",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+            "status": "ready",
+            "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral.",
             "type": "implementation",
             "updated_at": "2026-06-10"
         }

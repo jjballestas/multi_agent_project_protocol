@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "2138e950649f6f071150186d0594713eb7908c067b860395f00af7f0a7f9caf1",
+  "canonical_hash": "da9320534b9663defe8ed3141daeb222e3098ac31e8326d54e12723fc4b6d8be",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -80,7 +80,9 @@
       "CLAIM-20260610-decision0028-claude": 1,
       "CLAIM-20260610-fix0087-claude": 1,
       "CLAIM-20260610-fyi0087-claude": 1,
+      "CLAIM-20260610-spec0072-formalize-claude": 1,
       "CLAIM-20260610-task0097-claude": 1,
+      "CLAIM-20260610-task0098-go-claude": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -94,6 +96,7 @@
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
       "PROJECT_STATE": 12,
+      "TASK-0037": 2,
       "TASK-0084": 8,
       "TASK-0085": 12,
       "TASK-0086": 9,
@@ -108,10 +111,11 @@
       "TASK-0095": 1,
       "TASK-0096": 1,
       "TASK-0097": 2,
+      "TASK-0098": 2,
       "protocol-prune": 11,
       "protocol-state": 3
     },
-    "events_applied": 245,
+    "events_applied": 251,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -146,6 +150,8 @@
       "claude:reject-review:claim-acquire:TASK-0093": 175,
       "claude:reject-review:claim-release:TASK-0093": 177,
       "claude:reject-review:status:TASK-0093": 176,
+      "claude:spec0072-formalize:acquire": 246,
+      "claude:task0037-ready:upsert": 247,
       "claude:task0091-refire-ready:claim-acquire": 218,
       "claude:task0091-refire-ready:claim-release": 220,
       "claude:task0091-refire-ready:upsert": 219,
@@ -162,6 +168,10 @@
       "claude:task0097-enqueue:claim-acquire": 243,
       "claude:task0097-enqueue:claim-release": 245,
       "claude:task0097-enqueue:upsert": 244,
+      "claude:task0098-go:acquire": 249,
+      "claude:task0098-go:release-formalize": 248,
+      "claude:task0098-go:release-go": 251,
+      "claude:task0098-go:upsert": 250,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -371,5 +381,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 245
+  "up_to_seq": 251
 }

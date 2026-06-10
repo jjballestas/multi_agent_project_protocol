@@ -345,3 +345,31 @@ plantilla.
 protocolo a su desarrollo, por lo que aqui SI conviven los `.template.*` (masters publicados) con
 los canonicos vivos (la instancia de este repo) y `examples/minimal_instance/` (instancia de
 ejemplo). No es drift: cada par tiene un proposito distinto (master publicado vs estado vivo).
+
+## 11. Guia humana operativa
+
+La **guia humana operativa** es el contrato minimo de documentacion para personas (y agentes nuevos):
+un solo documento que explica que es la instancia, que hace, como se construye/ejecuta/prueba/despliega/
+opera, como se diagnostica, donde estan las rutas del protocolo, que roles/capacidades hay y como retomar
+el contexto. Tiene 21 secciones fijas (ver `Area_comun/protocol/HUMAN_GUIDE.template.md` y SPEC-0072).
+
+- **Fuente de verdad = el `.md`.** El HTML es un **artefacto generado** y **nunca se edita a mano** (lleva
+  un banner "GENERADO - NO EDITAR").
+- **Donde:** la plantilla master neutral esta en `Area_comun/protocol/HUMAN_GUIDE.template.md`; la guia
+  llena de tu instancia va en la **raiz** (`HUMAN_GUIDE.md` + `HUMAN_GUIDE.html`, junto a `AGENTS.md`);
+  hay un ejemplo en `examples/human_guide_instance/`.
+- **Cuando completarla:** al instanciar, y como parte del DoD de cada release o cambio de
+  arquitectura/roles/tier (manten la seccion 21 "Historial de cambios" al dia).
+- **Como generar el HTML:**
+
+  ```text
+  python scripts/generate_human_guide.py --in HUMAN_GUIDE.md --out HUMAN_GUIDE.html
+  ```
+
+- **Tier-awareness:** las secciones solo-runtime se marcan "no aplica" automaticamente en instancias
+  `coordination`.
+- **Validacion/drift:** `python scripts/generate_human_guide.py --in HUMAN_GUIDE.md --check` regenera en
+  memoria y compara byte a byte (falla si el HTML fue tocado a mano o si falta una seccion obligatoria o
+  queda un placeholder `<...>` en una guia viva). Ese `--check` corre en CI y en el git hook local.
+- **Neutralidad:** los `*.template.*` son masters neutrales de dominio (sin negocio/stack/nombres de
+  agente); las versiones llenas de la instancia estan exentas del escaneo de neutralidad.

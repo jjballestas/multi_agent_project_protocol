@@ -149,6 +149,7 @@
       "protocol.config.template.json",
       "Area_comun/state/*.template.json",
       "Area_comun/protocol/*.md",
+      "Area_comun/protocol/HUMAN_GUIDE.template.html",
       "Area_comun/specs/*_TEMPLATE.md",
       "profiles/PROFILE_TEMPLATE/**",
       "runtime/team_bridge.py",
@@ -166,7 +167,9 @@
       "Area_comun/reports/**",
       "Area_comun/artifacts/**",
       "Area_comun/mailbox/**",
-      "runtime/state/**"
+      "runtime/state/**",
+      "HUMAN_GUIDE.md",
+      "HUMAN_GUIDE.html"
     ]
   },
   "state_invariants": [

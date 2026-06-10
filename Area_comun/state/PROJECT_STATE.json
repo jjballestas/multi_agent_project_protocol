@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "TASK-0037",
+            "owner": "Claude",
+            "status": "ready",
+            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI."
+        },
+        {
             "id": "TASK-0087",
             "owner": "Claude",
             "status": "done",
@@ -65,6 +71,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0098",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral."
         }
     ],
     "agents": {
