@@ -9,7 +9,7 @@ updated_at: 2026-06-12
 depends_on: [TASK-0101]
 relates_to: [DECISION-0029, DECISION-0023, DECISION-0019]
 phase: P2
-spec_id: pending (SPEC a formalizar por Claude antes de GO)
+spec_id: SPEC-0072
 linked_decisions: [DECISION-0029, DECISION-0023, DECISION-0019]
 deliverables:
   - anclaje externo periodico del digest de cabeza de la cadena (backend configurable), off-by-default
