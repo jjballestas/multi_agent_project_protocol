@@ -224,7 +224,7 @@
                 "protocol.config.json",
                 "examples/chain_cases/"
             ],
-            "status": "in_review",
+            "status": "done",
             "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)",
             "updated_at": "2026-06-13"
         },
