@@ -260,9 +260,9 @@
                 "runtime/team_bridge.py",
                 "protocol.config.json"
             ],
-            "status": "proposed",
+            "status": "ready",
             "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
-            "updated_at": "2026-06-12"
+            "updated_at": "2026-06-13"
         },
         {
             "blocked_by_questions": [],
@@ -294,9 +294,9 @@
                 "scripts/sign_release.ps1",
                 "protocol.config.json"
             ],
-            "status": "proposed",
+            "status": "ready",
             "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
-            "updated_at": "2026-06-12"
+            "updated_at": "2026-06-13"
         },
         {
             "blocked_by_questions": [],

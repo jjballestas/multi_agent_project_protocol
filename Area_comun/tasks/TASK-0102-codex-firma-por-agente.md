@@ -1,11 +1,11 @@
 ---
 id: TASK-0102
 owner: Codex
-status: proposed
+status: ready
 type: implementation
 priority: high
 created_at: 2026-06-12
-updated_at: 2026-06-12
+updated_at: 2026-06-13
 depends_on: [TASK-0101]
 relates_to: [DECISION-0029, DECISION-0015, DECISION-0023]
 phase: P2
