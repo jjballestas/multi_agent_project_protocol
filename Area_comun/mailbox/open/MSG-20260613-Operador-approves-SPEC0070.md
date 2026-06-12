@@ -1,3 +1,7 @@
+---
+status: open
+---
+
 # MSG 2026-06-13 - Operador -> Claude - SPEC-0070 APROBADA
 
 - **De:** Operador humano

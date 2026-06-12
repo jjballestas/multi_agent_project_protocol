@@ -1,7 +1,7 @@
 ---
 id: TASK-0101
 owner: Codex
-status: proposed
+status: ready
 type: implementation
 priority: high
 created_at: 2026-06-12

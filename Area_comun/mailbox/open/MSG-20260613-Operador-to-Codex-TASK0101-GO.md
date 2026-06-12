@@ -1,3 +1,7 @@
+---
+status: open
+---
+
 # MSG 2026-06-13 - Operador -> Codex - TASK-0101 promovido a ready + GO
 
 - **De:** Operador humano (john.ballestas@gmail.com)

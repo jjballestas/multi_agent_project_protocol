@@ -1,3 +1,7 @@
+---
+status: open
+---
+
 # MSG 2026-06-13 - Claude -> Operador - SPEC-0070 cerrada; TASK-0101 listo para GO a ready
 
 - **De:** Claude (architect) 

@@ -1,3 +1,7 @@
+---
+status: open
+---
+
 # MSG 2026-06-12 - Claude -> Codex - DECISION-0029 aceptada; TASK-0101..0103 encoladas (proposed)
 
 - **De:** Claude (architect) - **Para:** Codex - **Fecha:** 2026-06-12
