@@ -13,12 +13,6 @@
             "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
         },
         {
-            "id": "TASK-0098",
-            "owner": "Codex",
-            "status": "done",
-            "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral."
-        },
-        {
             "id": "TASK-0099",
             "owner": "Codex",
             "status": "done",
@@ -33,7 +27,7 @@
         {
             "id": "TASK-0101",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "in_review",
             "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
         },
         {
@@ -47,6 +41,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)"
+        },
+        {
+            "id": "TASK-0104",
+            "owner": "Claude",
+            "status": "done",
+            "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)"
         }
     ],
     "agents": {

@@ -1,8 +1,8 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260610-112317-prune-claude",
-            "expires_at": "2026-06-10",
+            "claim_id": "CLAIM-20260612-233357-prune-claude",
+            "expires_at": "2026-06-12",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Claude",
             "scope": [
@@ -10,90 +10,10 @@
                 "Area_comun/state/TASK_INDEX.json",
                 "Area_comun/state/PROJECT_STATE.json"
             ],
-            "started_at": "2026-06-10T11:23:17Z",
+            "started_at": "2026-06-12T23:33:57Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-06-10T11:23:17Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0099-resume-review-codex",
-            "expires_at": "2026-06-11",
-            "notes": "Resume TASK-0099 review after prune --check returned green; withdraw transient prune blocker.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0099",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
-                "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0099-codex-to-claude-1.md",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/archived/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "started_at": "2026-06-10T08:06:33Z",
-            "status": "released",
-            "task_id": "TASK-0099",
-            "updated_at": "2026-06-10T08:06:33Z"
-        },
-        {
-            "claim_id": "CLAIM-20260610-task0100-register-claude",
-            "expires_at": "2026-06-11",
-            "notes": "Encola SPEC-0075 + TASK-0100 (.gitattributes eol=lf, robustez release) como proposed. Liberado en la tx.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0100",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0100",
-                "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
-                "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md"
-            ],
-            "started_at": "2026-06-10T11:21:20Z",
-            "status": "released",
-            "task_id": "TASK-0100",
-            "updated_at": "2026-06-10T11:21:20Z"
-        },
-        {
-            "claim_id": "CLAIM-DECISION-0029-claude-firmantes-cruzados",
-            "expires_at": "2026-06-13",
-            "notes": "Registro de DECISION-0029 (firmantes cruzados) aprobada por el operador 2026-06-12 + encolado de TASK-0101..0103.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/decisions/DECISION-0029-firmantes-cruzados.md",
-                "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
-                "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
-                "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
-                "Area_comun/mailbox/open/MSG-20260612-Claude-to-Codex-decision0029-tareas.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0101",
-                "Area_comun/state/TASK_INDEX.json#TASK-0102",
-                "Area_comun/state/TASK_INDEX.json#TASK-0103",
-                "Area_comun/state/PROJECT_STATE.json#decisions",
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-12T21:46:55Z",
-            "status": "released",
-            "task_id": "DECISION-0029"
-        },
-        {
-            "claim_id": "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2",
-            "expires_at": "2026-06-13",
-            "notes": "Scope ampliado (decision intent exige PROJECT_STATE.json completo). Sustituye al claim v1 liberado.",
-            "owner": "Claude",
-            "scope": [
-                "Area_comun/decisions/DECISION-0029-firmantes-cruzados.md",
-                "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
-                "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
-                "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
-                "Area_comun/mailbox/open/MSG-20260612-Claude-to-Codex-decision0029-tareas.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0101",
-                "Area_comun/state/TASK_INDEX.json#TASK-0102",
-                "Area_comun/state/TASK_INDEX.json#TASK-0103",
-                "Area_comun/state/PROJECT_STATE.json",
-                "Area_comun/state/CLAIMS.json"
-            ],
-            "started_at": "2026-06-12T21:50:06Z",
-            "status": "released",
-            "task_id": "DECISION-0029"
+            "updated_at": "2026-06-12T23:33:57Z"
         },
         {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
@@ -124,6 +44,22 @@
             "status": "released",
             "task_id": "TASK-0091",
             "updated_at": "2026-06-09T21:50:50Z"
+        },
+        {
+            "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
+            "expires_at": "2026-06-14",
+            "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md",
+                "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0104",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0104",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-12T23:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0104"
         }
     ],
     "schema_version": "1.0",
