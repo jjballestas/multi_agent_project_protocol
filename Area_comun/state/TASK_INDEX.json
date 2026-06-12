@@ -232,6 +232,109 @@
             "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT.",
             "type": "implementation",
             "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-12",
+            "deliverables": [
+                "runtime/eventlog.py prev_hash off-by-default",
+                "golden cases cadena"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
+            "id": "TASK-0101",
+            "linked_decisions": [
+                "DECISION-0029",
+                "DECISION-0017",
+                "DECISION-0022",
+                "DECISION-0028"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "DECISION-0029",
+                "DECISION-0017",
+                "DECISION-0022"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "protocol.config.json"
+            ],
+            "status": "ready",
+            "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)",
+            "updated_at": "2026-06-13"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-12",
+            "deliverables": [
+                "atestacion de turno firmada por agente (in-toto compatible) off-by-default",
+                "atestacion de revisor maker!=checker"
+            ],
+            "depends_on": [
+                "TASK-0101"
+            ],
+            "file": "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+            "id": "TASK-0102",
+            "linked_decisions": [
+                "DECISION-0029",
+                "DECISION-0015",
+                "DECISION-0021",
+                "DECISION-0023"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "DECISION-0029",
+                "DECISION-0015",
+                "DECISION-0023"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "runtime/llm_turn_wrapper.py",
+                "runtime/team_bridge.py",
+                "protocol.config.json"
+            ],
+            "status": "proposed",
+            "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
+            "updated_at": "2026-06-12"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-12",
+            "deliverables": [
+                "anclaje externo periodico del digest de cabeza (backend configurable) off-by-default",
+                "verificador de monotonia anti-rollback"
+            ],
+            "depends_on": [
+                "TASK-0101"
+            ],
+            "file": "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+            "id": "TASK-0103",
+            "linked_decisions": [
+                "DECISION-0029",
+                "DECISION-0023",
+                "DECISION-0019"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "DECISION-0029",
+                "DECISION-0023",
+                "DECISION-0019"
+            ],
+            "relevant_files": [
+                "runtime/eventlog.py",
+                "scripts/sign_release.ps1",
+                "protocol.config.json"
+            ],
+            "status": "proposed",
+            "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
+            "updated_at": "2026-06-12"
         }
     ],
     "updated_at": "2026-06-08",
