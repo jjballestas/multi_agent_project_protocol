@@ -1,0 +1,44 @@
+{
+  "idempotency_key": "codex:task0098-human-guide:start-tx",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "idempotency_key": "codex:task0098-human-guide:claim-acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260610-task0098-codex",
+          "task_id": "TASK-0098",
+          "owner": "Codex",
+          "status": "active",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0098",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0098",
+            "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
+            "Area_comun/protocol/",
+            "scripts/",
+            "examples/",
+            ".github/workflows/validate.yml",
+            ".githooks/pre-commit",
+            "Area_comun/handoffs/",
+            "Area_comun/mailbox/open/",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-10T01:20:00Z",
+          "updated_at": "2026-06-10T01:20:00Z",
+          "expires_at": "2026-06-11",
+          "notes": "TASK-0098 human guide deterministic generator, schema validation, --check, goldens and CI/githook wiring. Off-pilot; no SA.4 re-arm or pilot."
+        }
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0098",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0098-human-guide:ready-to-in-progress"
+      }
+    }
+  ]
+}

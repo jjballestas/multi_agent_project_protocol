@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260610-task0098-mailbox-fix-codex",
+    "idempotency_key": "codex:task0098-mailbox-fix:claim-release"
+  }
+}

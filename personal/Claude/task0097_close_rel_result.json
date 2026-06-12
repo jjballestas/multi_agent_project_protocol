@@ -1,0 +1,77 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "96ed905dd89b8fac3aaa9d154f54e360af3e4ca4f35435b585ee7155eb7c1186",
+        "replay_hash": "96ed905dd89b8fac3aaa9d154f54e360af3e4ca4f35435b585ee7155eb7c1186",
+        "up_to_seq": 318
+    },
+    "events": [
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "CLAIM-20260610-task0097-close-claude",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:task0097-close:claim-release",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-06-10T11:22:04Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "claude:task0097-close:release-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260610-task0097-close-claude",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "seq": 318,
+            "ts": "2026-06-10T11:22:04Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim_id": "CLAIM-20260610-task0097-close-claude",
+            "idempotency_key": "claude:task0097-close:claim-release",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "materialization": {
+        "canonical_hash": "96ed905dd89b8fac3aaa9d154f54e360af3e4ca4f35435b585ee7155eb7c1186",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json"
+        ],
+        "up_to_seq": 318
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 318
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "claude:task0097-close:claim-release"
+        ],
+        "idempotency_key": "claude:task0097-close:release-tx",
+        "intent_count": 1
+    }
+}

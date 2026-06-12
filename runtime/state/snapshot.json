@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "269963cedf48cb9b32e7afb63789c2f111436c24184b2e0a3cc7918a2cc6f0ff",
+  "canonical_hash": "2482eee6221ac81796312c2086f60ba5e2b0bca37e6efb04afb0bffe10847317",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -107,11 +107,15 @@
       "CLAIM-20260610-task0099-prune-blocker-codex": 2,
       "CLAIM-20260610-task0099-resume-review-codex": 1,
       "CLAIM-20260610-task0100-register-claude": 1,
+      "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
+      "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
+      "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
       "DECISION-0027-activacion-sa4-piloto": 1,
       "DECISION-0028": 1,
+      "DECISION-0029": 4,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAINTENANCE-CLEAR-BLOCKED": 1,
@@ -139,10 +143,13 @@
       "TASK-0098": 13,
       "TASK-0099": 12,
       "TASK-0100": 2,
+      "TASK-0101": 1,
+      "TASK-0102": 1,
+      "TASK-0103": 1,
       "protocol-prune": 14,
       "protocol-state": 3
     },
-    "events_applied": 321,
+    "events_applied": 331,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -353,10 +360,20 @@
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
       "intent:Claude:claim:46ddd1e51e86668031e4bbc13df6e7dd07e202d2671a377b9fca0bf65d7aa1f6": 174,
+      "intent:Claude:claim:52a23f9f4c92e92f26126d9348daf179630aa39bb18c32e36419a93a221f1e63": 331,
       "intent:Claude:claim:65bf580ae8196c063184de0fba7c2484e469ad0eee99896ece34339ec6aa1a5b": 166,
+      "intent:Claude:claim:85658672c895f2c5eb4385b5bac1c01b45ba3b88f6ba1d8bbc367ba8f4bd22ab": 324,
+      "intent:Claude:claim:a41fc6eaf274e6e815dbbb60fea0460e541f9dc54e676fbc345e6c088ab01350": 323,
+      "intent:Claude:claim:bb7d488665e68cf0ebc198001b1d73709ddf80d015894cc7de60ef195b446558": 329,
       "intent:Claude:claim:d829d6b2413778f1b54306feb6eb4c8c8c94ab1062d05d2b131326733edc3124": 164,
+      "intent:Claude:claim:f717e3b24d8e5a7243e5f93824478567eb8a063a35ade2204350a83451a2d217": 330,
       "intent:Claude:claim:f8d97f05b655ecfb200d5fab1d0bafab0713ad1696e3a4064a8cd42fbb25d452": 173,
+      "intent:Claude:claim:fc669a7b7b1b6aa51220d9c1980e9e6be86db5f56bbf56d8b23a5cecda4b3e52": 322,
+      "intent:Claude:decision:d28352c9cd823e7a7f1f0e17cc6838062f9ba671481007c2533dabf2336df789": 325,
+      "intent:Claude:task_upsert:3374f8f755cdecc47f4f8bb5974a07279571ecab53a589bb54a523da4725e8fa": 326,
+      "intent:Claude:task_upsert:ba7df22227df99cd62c4800483e09a452d6d23afe63c2b1216a8705d5b7c99c3": 327,
       "intent:Claude:task_upsert:cc19bd844ddcd7e6a9a41958a930ae473fa3cf9aeb129ef08bfd16f4400e37e0": 165,
+      "intent:Claude:task_upsert:d0762069d760aaef873a4a1417d9ca81846efd86c6b844bbc5001679d8687254": 328,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:auto-claim:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-acquire": 24,
@@ -478,5 +495,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 321
+  "up_to_seq": 331
 }

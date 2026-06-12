@@ -1,0 +1,20 @@
+{
+  "idempotency_key": "codex:task0098-human-guide:blocker-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0098",
+        "from": "in_progress",
+        "to": "blocked",
+        "idempotency_key": "codex:task0098-human-guide:in-progress-to-blocked"
+      }
+    },
+    {
+      "claim": {
+        "op": "block",
+        "claim_id": "CLAIM-20260610-task0098-codex",
+        "idempotency_key": "codex:task0098-human-guide:claim-block"
+      }
+    }
+  ]
+}

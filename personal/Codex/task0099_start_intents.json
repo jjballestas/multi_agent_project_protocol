@@ -1,0 +1,45 @@
+{
+  "idempotency_key": "codex:task0099-external-signing:start-tx",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "idempotency_key": "codex:task0099-external-signing:claim-acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260610-task0099-codex",
+          "task_id": "TASK-0099",
+          "owner": "Codex",
+          "status": "active",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0099",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+            "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+            "scripts/sign_release.py",
+            "scripts/verify_release.py",
+            "scripts/sign_release.ps1",
+            "scripts/verify_release.ps1",
+            "examples/release_sign_cases/",
+            "README_INSTANCIACION.md",
+            "Area_comun/handoffs/",
+            "Area_comun/mailbox/open/",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-10T07:48:08Z",
+          "updated_at": "2026-06-10T07:48:08Z",
+          "expires_at": "2026-06-11",
+          "notes": "TASK-0099 external-command release signing backend; vendor-neutral, no secrets, no SA.4 re-arm or pilot."
+        }
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0099",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0099-external-signing:ready-to-in-progress"
+      }
+    }
+  ]
+}

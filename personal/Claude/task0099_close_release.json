@@ -1,0 +1,14 @@
+{
+  "actor_id": "Claude",
+  "timestamp": "2026-06-10T08:10:26Z",
+  "idempotency_key": "claude:task0099-close-v2:release-tx",
+  "intents": [
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260610-task0099-close-claude",
+        "idempotency_key": "claude:task0099-close-v2:claim-release"
+      }
+    }
+  ]
+}

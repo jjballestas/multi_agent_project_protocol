@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "idempotency_key": "codex:task0097-prune-due:claim-release",
+    "claim_id": "CLAIM-20260610-task0097-prune-due-codex"
+  }
+}

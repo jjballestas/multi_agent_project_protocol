@@ -9,7 +9,7 @@ updated_at: 2026-06-12
 depends_on: []
 relates_to: [DECISION-0029, DECISION-0017, DECISION-0022]
 phase: P2
-spec_id: SPEC-0070
+spec_id: SPEC-0076
 linked_decisions: [DECISION-0029, DECISION-0017, DECISION-0022, DECISION-0028]
 deliverables:
   - runtime/eventlog.py (prev_hash encadenado, off-by-default)

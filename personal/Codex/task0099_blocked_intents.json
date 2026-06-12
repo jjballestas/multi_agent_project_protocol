@@ -1,0 +1,20 @@
+{
+  "idempotency_key": "codex:task0099-prune-blocker:blocked-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0099",
+        "from": "in_review",
+        "to": "blocked",
+        "idempotency_key": "codex:task0099-prune-blocker:in-review-to-blocked"
+      }
+    },
+    {
+      "claim": {
+        "op": "block",
+        "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+        "idempotency_key": "codex:task0099-prune-blocker:claim-block"
+      }
+    }
+  ]
+}

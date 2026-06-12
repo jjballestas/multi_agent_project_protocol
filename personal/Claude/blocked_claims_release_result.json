@@ -1,0 +1,225 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "55c88112201492e2c479d4ac618a735f7a2b641e256cd7cc8dd515faefbce742",
+        "replay_hash": "55c88112201492e2c479d4ac618a735f7a2b641e256cd7cc8dd515faefbce742",
+        "up_to_seq": 298
+    },
+    "events": [
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "MAINTENANCE-CLEAR-BLOCKED",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:clear-blocked:acquire",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "MAINTENANCE-CLEAR-BLOCKED",
+                "timestamp": "2026-06-10T10:06:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "claude:clear-blocked-claims:tx2",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260610-clear-blocked-claude",
+                                "expires_at": "2026-06-11",
+                                "notes": "Orchestrator: libera 2 claims blocked moot de Codex (task0098 huerfano + task0099 prune-blocker) por directiva del operador para estabilizar HEAD. Liberado en la tx.",
+                                "owner": "Claude",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json"
+                                ],
+                                "started_at": "2026-06-10T10:06:00Z",
+                                "status": "active",
+                                "task_id": "MAINTENANCE-CLEAR-BLOCKED",
+                                "updated_at": "2026-06-10T10:06:00Z"
+                            },
+                            "claim_id": "CLAIM-20260610-clear-blocked-claude",
+                            "op": "acquire",
+                            "owner": "Claude",
+                            "task_id": "MAINTENANCE-CLEAR-BLOCKED"
+                        }
+                    ]
+                }
+            },
+            "seq": 295,
+            "ts": "2026-06-10T10:06:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "CLAIM-20260610-task0098-codex",
+            "aggregate_version": 2,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:clear-blocked:rel-0098",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-06-10T10:06:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "claude:clear-blocked-claims:tx2",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260610-task0098-codex",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "seq": 296,
+            "ts": "2026-06-10T10:06:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+            "aggregate_version": 2,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:clear-blocked:rel-0099pb",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-06-10T10:06:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "claude:clear-blocked-claims:tx2",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "seq": 297,
+            "ts": "2026-06-10T10:06:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "CLAIM-20260610-clear-blocked-claude",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:clear-blocked:rel-self",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-06-10T10:06:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "claude:clear-blocked-claims:tx2",
+                    "index": 4
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260610-clear-blocked-claude",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "seq": 298,
+            "ts": "2026-06-10T10:06:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260610-clear-blocked-claude",
+                "expires_at": "2026-06-11",
+                "notes": "Orchestrator: libera 2 claims blocked moot de Codex (task0098 huerfano + task0099 prune-blocker) por directiva del operador para estabilizar HEAD. Liberado en la tx.",
+                "owner": "Claude",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json"
+                ],
+                "started_at": "2026-06-10T10:06:00Z",
+                "status": "active",
+                "task_id": "MAINTENANCE-CLEAR-BLOCKED",
+                "updated_at": "2026-06-10T10:06:00Z"
+            },
+            "claim_id": "CLAIM-20260610-clear-blocked-claude",
+            "idempotency_key": "claude:clear-blocked:acquire",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Claude",
+            "task_id": "MAINTENANCE-CLEAR-BLOCKED"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0098-codex",
+            "idempotency_key": "claude:clear-blocked:rel-0098",
+            "kind": "claim",
+            "op": "release"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+            "idempotency_key": "claude:clear-blocked:rel-0099pb",
+            "kind": "claim",
+            "op": "release"
+        },
+        {
+            "claim_id": "CLAIM-20260610-clear-blocked-claude",
+            "idempotency_key": "claude:clear-blocked:rel-self",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "materialization": {
+        "canonical_hash": "55c88112201492e2c479d4ac618a735f7a2b641e256cd7cc8dd515faefbce742",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json"
+        ],
+        "up_to_seq": 298
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 298
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "claude:clear-blocked:acquire",
+            "claude:clear-blocked:rel-0098",
+            "claude:clear-blocked:rel-0099pb",
+            "claude:clear-blocked:rel-self"
+        ],
+        "idempotency_key": "claude:clear-blocked-claims:tx2",
+        "intent_count": 4
+    }
+}

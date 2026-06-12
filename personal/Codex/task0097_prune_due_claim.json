@@ -1,0 +1,23 @@
+{
+  "claim": {
+    "op": "acquire",
+    "idempotency_key": "codex:task0097-prune-due:claim-acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260610-task0097-prune-due-codex",
+      "task_id": "TASK-0097",
+      "owner": "Codex",
+      "status": "active",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/handoffs/HANDOFF-TASK-0097-codex-to-claude-1.md",
+        "Area_comun/mailbox/open/",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-10T11:11:51Z",
+      "updated_at": "2026-06-10T11:11:51Z",
+      "expires_at": "2026-06-11",
+      "notes": "Signal TASK-0097 post-release prune due; protocol_prune requires orchestrator."
+    }
+  }
+}

@@ -54,6 +54,61 @@
             "updated_at": "2026-06-10T11:21:20Z"
         },
         {
+            "claim_id": "CLAIM-DECISION-0029-claude-firmantes-cruzados",
+            "expires_at": "2026-06-13",
+            "notes": "Registro de DECISION-0029 (firmantes cruzados) aprobada por el operador 2026-06-12 + encolado de TASK-0101..0103.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/decisions/DECISION-0029-firmantes-cruzados.md",
+                "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
+                "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                "Area_comun/mailbox/open/MSG-20260612-Claude-to-Codex-decision0029-tareas.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0101",
+                "Area_comun/state/TASK_INDEX.json#TASK-0102",
+                "Area_comun/state/TASK_INDEX.json#TASK-0103",
+                "Area_comun/state/PROJECT_STATE.json#decisions",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-12T21:46:55Z",
+            "status": "released",
+            "task_id": "DECISION-0029"
+        },
+        {
+            "claim_id": "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2",
+            "expires_at": "2026-06-13",
+            "notes": "Scope ampliado (decision intent exige PROJECT_STATE.json completo). Sustituye al claim v1 liberado.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/decisions/DECISION-0029-firmantes-cruzados.md",
+                "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
+                "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                "Area_comun/mailbox/open/MSG-20260612-Claude-to-Codex-decision0029-tareas.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0101",
+                "Area_comun/state/TASK_INDEX.json#TASK-0102",
+                "Area_comun/state/TASK_INDEX.json#TASK-0103",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-12T21:50:06Z",
+            "status": "released",
+            "task_id": "DECISION-0029"
+        },
+        {
+            "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
+            "expires_at": "2026-06-13",
+            "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/handoffs/HANDOFF-SESION-20260612-claude-analisis-doctoral.md",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-12T22:07:20Z",
+            "status": "released",
+            "task_id": "DECISION-0029"
+        },
+        {
             "claim_id": "CLAIM-TASK-0091-codex-runtime",
             "expires_at": "2026-06-10",
             "notes": "Acquired by runtime orchestrator before routed turn.",

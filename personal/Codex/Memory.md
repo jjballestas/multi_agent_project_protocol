@@ -1,165 +1,232 @@
 # Codex Memory
 
-Last updated: 2026-06-07 Europe/Madrid, after TASK-0063 was delivered to in_review.
+Last updated: 2026-06-09 Europe/Madrid, after re-delivering TASK-0093 release-on-rejection fix.
 
 ## Repository
 
-`multi_agent_project_protocol` is the canonical, domain-neutral repository for the reusable
-multi-agent software project protocol. It dogfoods itself.
+`multi_agent_project_protocol` is the canonical, domain-neutral repository for the reusable multi-agent
+software project protocol. It dogfoods itself.
 
-Current private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Codex/`.
+Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Codex/`. Do not touch
+`personal/Claude/` or `personal/operador/` unless explicitly asked.
 
-## Current State
+## Current Expected State
 
-- Live protocol/runtime version: `0.10.0`.
-- v1.0 track is in progress. Functional blocks are complete through the wrapper LLM real.
-- Active claims: none.
-- `TASK-0061`: done, accepted by Claude.
-- `TASK-0062`: done, accepted by Claude. This closed the last functional block before docs/SemVer.
-- `TASK-0063`: in_review, owned by Codex, awaiting Claude ratification.
-- `python runtime\orchestrator.py --plan` currently returns:
-  - `action: answer_mailbox`
-  - `task_id: TASK-0063`
-  - `owner: Claude`
-  - reason: pending response to `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger`
-- No ready or in_progress task is currently available to Codex.
+- Latest observed committed HEAD before this delivery: `6a9b21e chore(personal): checkpoint Claude pre-restart
+  (sandbox unelevated fix + TASK-0093 in_review mid-ratificacion)`.
+- Current TASK-0093 delivery is re-entered after Claude's `changes_requested` review:
+  - Claude rejected the first TASK-0093 handoff because release-on-rejection was missing for pre-apply rejection
+    paths. Mailbox finding: `MSG-20260609-Claude-to-Codex-task0093-changes-requested.md`.
+  - Codex acquired `CLAIM-20260609-task0093-fix-rejection-codex`, implemented cleanup for orchestrator-acquired
+    claims on pre-apply stops, added runtime_loop goldens, delivered
+    `Area_comun/handoffs/HANDOFF-TASK-0093-codex-to-claude-2.md`, moved TASK-0093 back to `in_review`, and
+    released the claim.
+- Sandbox/tempfile coordination:
+  - Codex opened `MSG-20260609-Codex-to-Claude-request-tempfile-acl-sandbox.md` for Claude to verify whether the
+    Windows sandbox `unelevated` + Python `tempfile` ACL failure reproduces on his side and to decide runbook vs
+    hardening task.
+- Important recent commits:
+  - `6a9b21e`: Claude personal checkpoint after sandbox unelevated fix and TASK-0093 mid-ratification.
+  - `720b417`: Claude root-caused the sandbox failure to Windows `sandbox="elevated"` / os error 740 and
+    documented the `unelevated` fix.
+  - `8d2734f`: after TASK-0093 checkpoint, Codex asked Claude to verify the operator hypothesis that the
+    sandbox failures may correlate with Codex CLI installation; temporary maintenance claim was acquired/released,
+    mailbox request opened, drift 0 at seq 172.
+  - `d6569f4`: TASK-0093 first delivery to `in_review`; orchestrator acquires routed owner claims before adapter,
+    terminal outcomes release claims automatically, runtime_loop goldens cover missing-claim/pre-claim/conflict,
+    handoff created, claim released, drift 0 at seq 170.
+  - `88e8ea5`: TASK-0092 done, executed by Claude while Codex agent was down; codex invoker implementer and
+    full-turn prompt contract integrated.
+  - `79814ff`: Claude acknowledged Codex's anomaly report; changes were authorized and normalized; anomaly reply
+    opened for Codex.
+  - `8926f39`: SA.4 was re-armed and TASK-0091 moved blocked->ready for the codex-invoker pilot.
+  - `4923c62`: stale TASK-0092 GO was archived after TASK-0092 was already done.
+  - `89d140b`: SA.4 was de-armed again after the pilot was rejected by the gate (`no active claim`).
+  - `b04b791`: Claude's startup prompt was refreshed for the post-pilot state.
+- `protocol_version=1.1.0`, `runtime_version=0.11.0`.
+- `event_state.enabled=true`, `materialize=true`, `enforce=true`, `authoritative=true`.
+- Runtime drift last observed after tempfile coordination: `has_drift=false`, `up_to_seq=187`,
+  hash `e63a17339195733d454c0d7a8c36440c4e45b6a0b566ef3de0898d157e1314f9`.
+- `runtime.real_invoker.enabled=false` and `runtime.supervised_autonomy.enabled=false`. Do not re-arm or run the
+  SA.4 pilot without explicit operator/Claude GO.
+- `TASK-0092` is `done`; its stale GO has been archived. Do not claim it.
+- `TASK-0091` is `ready` in the ledger, but it is the SA.4 pilot target. Because SA.4 is de-armed after the
+  `no active claim` gate rejection, do not manually claim/run it without a fresh architect/operator GO.
+- `TASK-0093` is `in_review`; latest handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0093-codex-to-claude-2.md`. Claims
+  `CLAIM-20260609-task0093-codex` and `CLAIM-20260609-task0093-fix-rejection-codex` are released.
+- `TASK-0087` remains proposed for Claude.
+- Active claims expected: none.
 
-## Open Mailbox To Watch
+## Open Mailbox To Expect
 
-Open messages at refresh included:
+- `MSG-20260609-Claude-to-Codex-anomalia-task0092-resuelta.md`
+  - FYI, no response required; explains TASK-0092 changes were authorized and normalized.
+- `MSG-20260609-Codex-to-Claude-fyi-sandbox-spawn-setup-refresh.md`
+  - FYI from Codex to Claude about the sandbox failure pattern.
+- `MSG-20260609-Claude-to-Codex-response-liveness-sandbox.md`
+  - Claude response: Codex in VS Code is push-driven; checkpoint/commit before restart; then restart app-server or
+    VS Code; later create shared runbook.
+- `MSG-20260609-Claude-to-Codex-task0093-changes-requested.md`
+  - Review finding for TASK-0093. Codex responded by implementing release-on-rejection and re-delivering handoff 2;
+    Claude still needs to ratify and archive/close as appropriate.
+- `MSG-20260609-Codex-to-Claude-request-tempfile-acl-sandbox.md`
+  - Codex request to Claude: verify whether the Python tempfile ACL issue reproduces under sandbox unelevated and
+    choose runbook vs hardening task.
 
-- `MSG-20260607-Codex-to-Claude-task0063-in-review.md`
-  - requires Claude response.
-  - handoff for TASK-0063 docs.
-- `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger.md`
-  - requires Claude response.
-  - materially resolved by later ledger reconciliation, but still open; orchestrator points Claude to it.
-- `MSG-20260607-Claude-to-Codex-task0062-accepted.md`
-  - FYI, no response required.
-- `MSG-20260607-Claude-to-Codex-task0060-accepted.md`
-  - FYI, no response required.
-- `MSG-20260607-Claude-to-Codex-respuesta-anomalia-task0060.md`
-  - answer/FYI, no action required.
+The old TASK-0092 GO is no longer open; it was archived in `4923c62`.
 
-Do not claim a new task until TASK_INDEX/PROJECT_STATE show a ready task for Codex and no active claim
-conflicts. If Claude answers the TASK-0063 anomaly and/or accepts TASK-0063, re-read the ledger before acting.
+Validators warn when FYI/no-response messages remain in `open/`; that is hygiene debt, not a hard failure.
 
-## Completed This Session
+## Sandbox Diagnosis And Fix
 
-### TASK-0062 - Wrapper LLM real
+The Windows sandbox failed in this session before some commands executed:
 
-Implemented and delivered; Claude accepted it as done.
+`windows sandbox: spawn setup refresh`
 
-Key changes:
+Confirmed findings:
 
-- `runtime/adapters/llm_adapter.py`
-  - command/preset resolver;
-  - `runtime.llm_cli_presets`;
-  - `runtime.real_invoker` activation check.
-- `runtime/orchestrator.py`
-  - added `--llm-preset`;
-  - real subprocess invoker now requires `--once`, `--allow-real-invoker`, command/preset, and local activation registration.
-- `protocol.config.json` and `protocol.config.template.json`
-  - `runtime.real_invoker.enabled:false`;
-  - example presets `claude` and `codex`.
-- `examples/runtime_real_adapter_cases/`
-  - deterministic golden cases for activation gates, replay comparison, limits, and presets.
-- `.github/workflows/validate.yml`
-  - added the real adapter activation cases.
-- Minimal docs in `runtime/README.md` and `README_INSTANCIACION.md`.
+- In this running session, `Write-Output SANDBOX_OK` still failed inside the sandbox but worked with escalation.
+- The failure happens without `workdir`, so it is not caused by this repo or `D:\Agentes`.
+- TEMP is writable and disk space is fine.
+- Re-running the same commands with `sandbox_permissions: require_escalated` works.
+- The validator and drift check can still succeed sandboxed; treat isolated `spawn setup refresh` failures as
+  environment noise and re-run only the needed command with approval.
+- A separate `codex exec -s read-only` run from this repo confirmed it is a separate session that can see
+  TASK-0093/claim state from disk, but it also reproduced `windows sandbox: spawn setup refresh` for some reads.
+- Claude's root-cause hypothesis was verified against official docs and local state: the Codex CLI install/update
+  rewrote shared user config under `C:\Users\johnb\.codex`. `config.toml` was written on 2026-06-09 03:23 and
+  `.codex-global-state.json`/`.bak` on 2026-06-09 03:14. That user config is shared by CLI and extension.
+- Local config previously had `[windows] sandbox = "elevated"`. Official Codex docs say `elevated` is preferred on
+  Windows, but `unelevated` is the documented fallback when elevated/admin setup fails.
+- The operator applied the fix: `C:\Users\johnb\.codex\config.toml` now has:
 
-Validation before handoff included:
+```toml
+[windows]
+sandbox = "unelevated"
+```
 
-- py_compile for touched Python.
-- `examples/llm_adapter_cases` 6/6.
-- `examples/runtime_real_adapter_cases` 4/4.
-- Full runtime suite green.
-- validators, encoding, neutrality, prune, and `git diff --check` green.
+Operational next step: restart VS Code / the Codex app-server so the running process reloads `~/.codex/config.toml`.
+This current session may continue to fail until restart because it likely loaded the old sandbox configuration.
 
-### TASK-0063 - Docs de adopcion
+Post-restart verification passed for the basic sandbox path:
 
-Implemented and delivered to in_review.
+1. `Write-Output SANDBOX_OK` without escalation -> OK.
+2. `Get-Content`/state reads generally work without escalation again.
+3. `python scripts\validate_collaboration_state.py --root .` without escalation -> OK.
+4. Drift check -> false.
 
-Key changes:
+Remaining sandbox caveat: Python `tempfile.TemporaryDirectory()` creates directories with restrictive mode
+(`0o700`); under Windows sandbox `unelevated`, those directories can become unreadable/unwritable to the sandboxed
+process. Suites using `%TEMP%` may fail sandboxed with `WinError 5` / `PermissionError` and pass outside the
+sandbox. This affected `runtime_real_adapter`, `llm_adapter`, `intent_flow`, and sometimes `scan_encoding`.
 
-- `README_INSTANCIACION.md`
-  - tiers `coordination` and `runtime`;
-  - how to instantiate via `new_instance.py --tier`;
-  - tier-aware upgrade via `upgrade_instance.py`;
-  - safe operation of real agents via DECISION-0021 and wrapper flags;
-  - links to runtime docs and N-agent docs.
-- `Area_comun/protocol/N_AGENT_RUNTIME.md`
-  - registry/capabilities;
-  - routing;
-  - Review/QA states;
-  - claims and handoffs;
-  - guardrails/security;
-  - observability/event log/replay;
-  - budget/deadlines;
-  - adoption checklist.
-- Handoff:
-  - `Area_comun/handoffs/HANDOFF-TASK-0063-codex-to-claude-1.md`
-- Review message:
-  - `Area_comun/mailbox/open/MSG-20260607-Codex-to-Claude-task0063-in-review.md`
+If sandbox still fails after restart, collect `C:\Users\johnb\.codex\.sandbox\sandbox.log` and compare whether the
+failure is now from `unelevated` setup rather than elevated UAC/error 740. Do not re-fire SA.4 while sandbox health
+is red; the pilot invokes `codex exec` non-interactively and may hit the same setup path.
 
-Validation after handoff:
+## Hygiene / Golden Rules Notes
 
-- `python scripts\validate_collaboration_state.py --root .` -> OK, FYI warnings only.
-- PowerShell validator -> OK, same FYI warnings.
-- encoding scan -> OK.
-- neutrality scan -> OK.
-- `python scripts\prune_state.py --root . --check` -> OK.
-- `git diff --check` -> OK, only CRLF warnings.
+- Operator golden rule (DECISION-0026): after every commit, each agent updates its own memory. For Codex, update
+  this file after any Codex commit and after observing a peer commit that materially changes the expected state.
+- Observation from golden-rule verification: Claude's personal memory files looked stale versus recent commits
+  (`personal/Claude/MEMORY.md` still dated 2026-06-05; startup prompt still old). Do not edit Claude's memory.
+- Shared-state mode is authoritative. Never edit `Area_comun/state/*.json` by hand. Use
+  `runtime/submit_intent.py` or `runtime/ledger_ops.py --submit`.
+- Before shared edits: read `TASK_INDEX.json`, `CLAIMS.json`, `PROJECT_STATE.json`, and `mailbox/open/`.
+- Create/update an active claim before editing shared routes, including mailbox. Release it when done.
+- If an anomaly is detected, notify via `Area_comun/mailbox/open/` with one concrete actionable question.
 
-## Anomalies / Process Notes
+## Hygiene Verification Snapshot
 
-- A TASK-0063 GO appeared before TASK_INDEX/PROJECT_STATE had TASK-0063 and while TASK-0062 was still
-  in_review. Codex waited briefly, then sent:
-  `MSG-20260607-Codex-to-Claude-anomalia-task0063-go-ledger.md`.
-- Claude later reconciled the ledger, accepted TASK-0062, and registered TASK-0063 ready. Codex then
-  claimed TASK-0063 normally.
-- Keep applying DECISION-0018: notify anomalies via mailbox; do not silently fix another owner's closure.
-- Handoff-release must be atomic: task status, handoff, review message, GO archive, and claim release
-  should land in the same coordination step.
+Recent checks:
+
+- `python scripts\validate_collaboration_state.py --root .` -> OK with warnings for FYI/no-response messages in
+  `mailbox/open/`.
+- `protocol_state_drift(Path('.'))` -> `has_drift=false`, latest observed `up_to_seq=187`, hot hash equals replay hash.
+- PowerShell validator -> OK with the same warnings.
+- `examples\mailbox_status_cases` -> OK.
+- `examples\compact_comms_validation_cases` -> OK.
+- `examples\mailbox_hygiene_cases` failed: its legacy expectation treats resolved messages in `open/` as warnings,
+  but the newer status-folder gate makes `status: answered` in `open/` a hard mismatch. Treat as a likely obsolete
+  harness needing triage, not as proof the live repo is invalid.
 
 ## Dirty Worktree Caution
 
-The worktree is intentionally dirty with shared task deliverables and Claude coordination changes.
-Do not revert unrelated files. Notable dirty/untracked areas seen at refresh:
+Expected dirty/untracked areas after this refresh:
 
-- Shared deliverables for TASK-0062 and TASK-0063.
-- Mailbox moves/archives and handoffs.
-- `Area_comun/state/*` hot/archive updates.
-- `Area_comun/protocol/N_AGENT_RUNTIME.md`.
-- `examples/runtime_real_adapter_cases/`.
-- `.claude/settings.json` changed by another participant/tooling; do not touch unless asked.
-- `personal/Claude/*` untracked; do not touch.
-- `personal/Codex/Memory.md` and `personal/Codex/STARTUP_PROMPT.md` are intentionally updated by this refresh.
+- `.claude/scheduled_tasks.lock` deleted; leave it alone unless the operator asks.
+- `personal/Codex/Memory.md` and `personal/Codex/STARTUP_PROMPT.md` from this refresh/update.
+- `personal/Codex/REPORT-20260609-sandbox-spawn-setup-refresh.md` untracked.
+- `personal/operador/` may remain untracked; leave it alone.
 
-Claude usually commits accepted Codex deliverables. Do not commit unless the user asks.
-
-## Working Rules
-
-- Before any shared edit: read `TASK_INDEX.json`, `CLAIMS.json`, and `mailbox/open/`.
-- Create/update an active claim before editing shared routes.
-- Do not edit routes under another owner's active claim.
-- Release claim when moving a task to `in_review` or `done`.
-- If a message says DONE but ledger disagrees, wait/recheck briefly; if persistent, notify via mailbox.
-- Private notes under `personal/Codex/` do not need a shared claim.
+Do not revert unrelated changes or peer/operator work.
 
 ## Useful Fresh-Session Commands
 
 ```powershell
+Write-Output SANDBOX_OK
 git status --short
-python runtime\orchestrator.py --plan
+git log -5 --oneline
+Get-ChildItem -File Area_comun\mailbox\open | Select-Object -ExpandProperty Name
 python scripts\validate_collaboration_state.py --root .
 python scripts\prune_state.py --root . --check
-python scripts\scan_encoding.py --root .
-python scripts\scan_domain_neutrality.py --root .
+python -c "from pathlib import Path; from runtime.protocol_replay import protocol_state_drift; import json; print(json.dumps(protocol_state_drift(Path('.')), indent=2, ensure_ascii=False))"
 ```
 
-## Next Session Rule
+If the first command fails with `windows sandbox: spawn setup refresh`, the sandbox is still broken; escalate only
+when needed and ask the operator to restart Codex/app-server if the `unelevated` config has not yet been loaded.
 
-Start in monitoring/coordination mode. First expected action belongs to Claude: answer/close the open
-TASK-0063 anomaly message and review TASK-0063. If Claude accepts TASK-0063 and enqueues D2.4, inspect
-GO/spec/task/ledger and claims before claiming.
+## 2026-06-09 - TASK-0094 tempfile/ACL hardening committed
+
+- Commit `18d8162 fix(runtime): harden temp ACL write path` formalized TASK-0094 and moved it to `in_review`.
+- TASK-0094 posture B was ratified by the operator: the temp ACL rule is not in `AGENTS.md`; it lives in
+  `Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md`.
+- Runtime write-path hardening now uses `runtime/temp_paths.py` for repo-local inherited-ACL temp dirs:
+  `runtime/protocol_replay.py` materialization staging, `runtime/submit_intent.py` runtime-state backups, and
+  `runtime/apply.py` runtime-state backups no longer use OS `%TEMP%` helpers.
+- Harnesses requested by the GO were hardened where needed so they pass inside the Codex Windows sandbox:
+  `runtime_protocol_replay_cases`, `runtime_protocol_materialize_cases`, `materialize_cross_fs_cases`,
+  `intent_flow_cases`, and `runtime_real_adapter_cases`.
+- Evidence before commit/release: materialize 7 OK, cross-FS 2 OK, replay 6 OK, intent_flow 11 OK,
+  runtime_loop 15 OK, runtime_real_adapter 4 OK, validator OK, neutrality OK, encoding OK.
+- Post-release drift: `has_drift=false`, `up_to_seq=211`; TASK-0094 claims released; handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0094-codex-to-claude-1.md`.
+- Do not include TASK-0093 v2 leftovers in TASK-0094 follow-up commits: `runtime/orchestrator.py`,
+  `examples/runtime_loop_cases/run_runtime_loop_cases.py`, and
+  `Area_comun/handoffs/HANDOFF-TASK-0093-codex-to-claude-2.md` remain separate worktree changes for Claude's
+  TASK-0093 closure path.
+
+## 2026-06-10 - TASK-0098 human guide generator committed
+
+- Commit `9076528 feat(P2): TASK-0098 human guide generator` delivered the deterministic HUMAN_GUIDE renderer:
+  `scripts/generate_human_guide.py`, `scripts/generate_human_guide.ps1`,
+  `Area_comun/protocol/HUMAN_GUIDE.template.html`, `examples/human_guide_cases/run_human_guide_cases.py`,
+  CI wiring, pre-commit hook, TASK-0098 handoff, mailbox unblock/blocker audit, and materialized runtime state.
+- TASK-0098 is `in_review`; Codex claim `CLAIM-20260610-task0098-resume-codex` is released. Latest observed drift
+  before commit was `has_drift=false`, `up_to_seq=268`.
+- Claude applied the required prune as `orchestrator` before Codex resumed; `python scripts/prune_state.py --root .
+  --check` was green (`cold_start_tokens` around 16k). Codex does not have `orchestrator` and must not run
+  `protocol_prune` as itself.
+- Gates run by Codex before delivery: human guide cases OK, template `--check` OK, prune check OK, collaboration
+  validator OK, domain neutrality 0, encoding clean, drift 0.
+- Open mailbox after the commit may still contain the original TASK-0098 GO, Claude's unblock response, and Codex's
+  prune blocker audit. They are related to the TASK-0098 review/closure path; let Claude ratify and close/archive
+  them unless the operator asks for hygiene.
+- SA.4/Capa C stayed off; no pilot was run.
+
+## 2026-06-10 - TASK-0099 external-command signing backend accepted
+
+- Claude committed `aeaa12c feat(P2): TASK-0099 done - backend de firma external-command configurable
+  (DECISION-0023 sec.4)`.
+- TASK-0099 is `done`; Claude ratified the external-command backend adversarially:
+  vendor-neutral, no secrets, `subject_digest == manifest.sbom_hash` binding before backend execution, fixture
+  HMAC byte-equivalent, deterministic goldens, and `.py/.ps1` parity.
+- Open FYI `MSG-20260610-Claude-to-Codex-task0099-accept-done.md` was archived by Codex under
+  `CLAIM-20260610-task0099-accept-fyi-archive-codex`; claim released. Drift after archive release:
+  `has_drift=false`, `up_to_seq=288`.
+- Current hygiene caveat: two Codex-owned blocked claims remain intentionally not released because releasing them
+  may raise released-claim ratio and trigger `protocol_prune`: `CLAIM-20260610-task0098-codex` and
+  `CLAIM-20260610-task0099-prune-blocker-codex`. Let Claude/orchestrator decide prune+cleanup timing.
+- Latest observed checks after FYI archive: collaboration validator OK, mailbox/open only `.gitkeep`, drift 0.
+- SA.4/Capa C stayed off; no pilot was run.

@@ -1,0 +1,328 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "12fb4a02042dc1e9ddcbe68f8a9903c3235a907674d36ba41ae39cf85ac164aa",
+        "replay_hash": "12fb4a02042dc1e9ddcbe68f8a9903c3235a907674d36ba41ae39cf85ac164aa",
+        "up_to_seq": 294
+    },
+    "events": [
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "TASK-0037",
+            "aggregate_version": 3,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:task0037-close:claim-acquire",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "TASK-0037",
+                "timestamp": "2026-06-10T09:54:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "claude:task0037-close:tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260610-task0037-close-claude",
+                                "expires_at": "2026-06-11",
+                                "notes": "Cierre TASK-0037: guia dogfooding raiz HUMAN_GUIDE.md/.html (live) + ejemplo examples/human_guide_instance (example) generados VIA el generador; --check verde, goldens/neutralidad/encoding verdes. proposed/ready->done por task_upsert (Claude sin implementer).",
+                                "owner": "Claude",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0037",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0037",
+                                    "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                                    "HUMAN_GUIDE.md",
+                                    "HUMAN_GUIDE.html",
+                                    "examples/human_guide_instance/"
+                                ],
+                                "started_at": "2026-06-10T09:54:59Z",
+                                "status": "active",
+                                "task_id": "TASK-0037",
+                                "updated_at": "2026-06-10T09:54:59Z"
+                            },
+                            "claim_id": "CLAIM-20260610-task0037-close-claude",
+                            "op": "acquire",
+                            "owner": "Claude",
+                            "task_id": "TASK-0037"
+                        }
+                    ]
+                }
+            },
+            "seq": 292,
+            "ts": "2026-06-10T09:54:59Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "TASK-0037",
+            "aggregate_version": 4,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:task0037-close:upsert-done",
+            "payload": {
+                "intent_type": "task_upsert",
+                "task": {
+                    "blocked_by_questions": [],
+                    "deliverables": [
+                        "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                        "Area_comun/protocol/HUMAN_GUIDE.template.html",
+                        "scripts/generate_human_guide.py",
+                        "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+                        "HUMAN_GUIDE.md",
+                        "README_INSTANCIACION.md"
+                    ],
+                    "depends_on": [],
+                    "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                    "id": "TASK-0037",
+                    "linked_decisions": [
+                        "DECISION-0004",
+                        "DECISION-0019",
+                        "DECISION-0001",
+                        "DECISION-0020",
+                        "DECISION-0006"
+                    ],
+                    "owner": "Claude",
+                    "phase": "P2",
+                    "priority": "normal",
+                    "relates_to": [
+                        "TASK-0004",
+                        "TASK-0013",
+                        "SPEC-0072"
+                    ],
+                    "relevant_files": [
+                        "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                        "scripts/generate_human_guide.py",
+                        "examples/human_guide_cases/",
+                        "protocol.config.json",
+                        "README_INSTANCIACION.md",
+                        ".github/workflows/validate.yml"
+                    ],
+                    "review": "DONE (Claude 2026-06-10). Generador TASK-0098 ratificado. Guia dogfooding de la instancia viva (HUMAN_GUIDE.md/.html, live, tier runtime, protocol 1.1.0) + ejemplo neutral (examples/human_guide_instance/HUMAN_GUIDE.example.md/.html, example) generados VIA el generador (HTML nunca a mano). --check byte-identico verde; goldens human_guide verdes; neutralidad 0 (raiz exenta por globs; ejemplo neutral verde); encoding limpio. Aditivo MINOR off-by-default; enforce/authoritative intactos; SA.4/Capa C OFF.",
+                    "sdd_required": true,
+                    "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+                    "status": "done",
+                    "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
+                    "type": "documentation",
+                    "updated_at": "2026-06-10"
+                },
+                "task_id": "TASK-0037",
+                "timestamp": "2026-06-10T09:54:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "claude:task0037-close:tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_upsert": {
+                        "task": {
+                            "blocked_by_questions": [],
+                            "deliverables": [
+                                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                                "Area_comun/protocol/HUMAN_GUIDE.template.html",
+                                "scripts/generate_human_guide.py",
+                                "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+                                "HUMAN_GUIDE.md",
+                                "README_INSTANCIACION.md"
+                            ],
+                            "depends_on": [],
+                            "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                            "id": "TASK-0037",
+                            "linked_decisions": [
+                                "DECISION-0004",
+                                "DECISION-0019",
+                                "DECISION-0001",
+                                "DECISION-0020",
+                                "DECISION-0006"
+                            ],
+                            "owner": "Claude",
+                            "phase": "P2",
+                            "priority": "normal",
+                            "relates_to": [
+                                "TASK-0004",
+                                "TASK-0013",
+                                "SPEC-0072"
+                            ],
+                            "relevant_files": [
+                                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                                "scripts/generate_human_guide.py",
+                                "examples/human_guide_cases/",
+                                "protocol.config.json",
+                                "README_INSTANCIACION.md",
+                                ".github/workflows/validate.yml"
+                            ],
+                            "review": "DONE (Claude 2026-06-10). Generador TASK-0098 ratificado. Guia dogfooding de la instancia viva (HUMAN_GUIDE.md/.html, live, tier runtime, protocol 1.1.0) + ejemplo neutral (examples/human_guide_instance/HUMAN_GUIDE.example.md/.html, example) generados VIA el generador (HTML nunca a mano). --check byte-identico verde; goldens human_guide verdes; neutralidad 0 (raiz exenta por globs; ejemplo neutral verde); encoding limpio. Aditivo MINOR off-by-default; enforce/authoritative intactos; SA.4/Capa C OFF.",
+                            "sdd_required": true,
+                            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+                            "status": "done",
+                            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
+                            "type": "documentation",
+                            "updated_at": "2026-06-10"
+                        }
+                    }
+                }
+            },
+            "seq": 293,
+            "ts": "2026-06-10T09:54:59Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Claude",
+            "actor_auth": {
+                "method": "not_enforced_phase2"
+            },
+            "aggregate_id": "CLAIM-20260610-task0037-close-claude",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "claude:task0037-close:claim-release",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-06-10T09:54:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "claude:task0037-close:tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260610-task0037-close-claude",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "seq": 294,
+            "ts": "2026-06-10T09:54:59Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260610-task0037-close-claude",
+                "expires_at": "2026-06-11",
+                "notes": "Cierre TASK-0037: guia dogfooding raiz HUMAN_GUIDE.md/.html (live) + ejemplo examples/human_guide_instance (example) generados VIA el generador; --check verde, goldens/neutralidad/encoding verdes. proposed/ready->done por task_upsert (Claude sin implementer).",
+                "owner": "Claude",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0037",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0037",
+                    "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                    "HUMAN_GUIDE.md",
+                    "HUMAN_GUIDE.html",
+                    "examples/human_guide_instance/"
+                ],
+                "started_at": "2026-06-10T09:54:59Z",
+                "status": "active",
+                "task_id": "TASK-0037",
+                "updated_at": "2026-06-10T09:54:59Z"
+            },
+            "claim_id": "CLAIM-20260610-task0037-close-claude",
+            "idempotency_key": "claude:task0037-close:claim-acquire",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Claude",
+            "task_id": "TASK-0037"
+        },
+        {
+            "idempotency_key": "claude:task0037-close:upsert-done",
+            "kind": "task_upsert",
+            "task": {
+                "blocked_by_questions": [],
+                "deliverables": [
+                    "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                    "Area_comun/protocol/HUMAN_GUIDE.template.html",
+                    "scripts/generate_human_guide.py",
+                    "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+                    "HUMAN_GUIDE.md",
+                    "README_INSTANCIACION.md"
+                ],
+                "depends_on": [],
+                "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+                "id": "TASK-0037",
+                "linked_decisions": [
+                    "DECISION-0004",
+                    "DECISION-0019",
+                    "DECISION-0001",
+                    "DECISION-0020",
+                    "DECISION-0006"
+                ],
+                "owner": "Claude",
+                "phase": "P2",
+                "priority": "normal",
+                "relates_to": [
+                    "TASK-0004",
+                    "TASK-0013",
+                    "SPEC-0072"
+                ],
+                "relevant_files": [
+                    "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                    "scripts/generate_human_guide.py",
+                    "examples/human_guide_cases/",
+                    "protocol.config.json",
+                    "README_INSTANCIACION.md",
+                    ".github/workflows/validate.yml"
+                ],
+                "review": "DONE (Claude 2026-06-10). Generador TASK-0098 ratificado. Guia dogfooding de la instancia viva (HUMAN_GUIDE.md/.html, live, tier runtime, protocol 1.1.0) + ejemplo neutral (examples/human_guide_instance/HUMAN_GUIDE.example.md/.html, example) generados VIA el generador (HTML nunca a mano). --check byte-identico verde; goldens human_guide verdes; neutralidad 0 (raiz exenta por globs; ejemplo neutral verde); encoding limpio. Aditivo MINOR off-by-default; enforce/authoritative intactos; SA.4/Capa C OFF.",
+                "sdd_required": true,
+                "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+                "status": "done",
+                "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
+                "type": "documentation",
+                "updated_at": "2026-06-10"
+            },
+            "task_id": "TASK-0037"
+        },
+        {
+            "claim_id": "CLAIM-20260610-task0037-close-claude",
+            "idempotency_key": "claude:task0037-close:claim-release",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "materialization": {
+        "canonical_hash": "12fb4a02042dc1e9ddcbe68f8a9903c3235a907674d36ba41ae39cf85ac164aa",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json"
+        ],
+        "up_to_seq": 294
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 294
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "claude:task0037-close:claim-acquire",
+            "claude:task0037-close:upsert-done",
+            "claude:task0037-close:claim-release"
+        ],
+        "idempotency_key": "claude:task0037-close:tx",
+        "intent_count": 3
+    }
+}

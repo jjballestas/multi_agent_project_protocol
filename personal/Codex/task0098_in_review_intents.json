@@ -1,0 +1,20 @@
+{
+  "idempotency_key": "codex:task0098-human-guide:in-review-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0098",
+        "from": "blocked",
+        "to": "in_review",
+        "idempotency_key": "codex:task0098-human-guide:blocked-to-in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260610-task0098-resume-codex",
+        "idempotency_key": "codex:task0098-human-guide:resume-claim-release"
+      }
+    }
+  ]
+}

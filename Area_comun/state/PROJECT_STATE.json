@@ -29,6 +29,24 @@
             "owner": "Codex",
             "status": "proposed",
             "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0101",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
+        },
+        {
+            "id": "TASK-0102",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)"
+        },
+        {
+            "id": "TASK-0103",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)"
         }
     ],
     "agents": {
@@ -65,7 +83,8 @@
         "DECISION-0025-integracion-agent-teams-bridge",
         "DECISION-0026-memoria-post-commit",
         "DECISION-0027-activacion-sa4-piloto",
-        "DECISION-0028"
+        "DECISION-0028",
+        "DECISION-0029"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

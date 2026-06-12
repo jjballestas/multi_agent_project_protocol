@@ -1,0 +1,26 @@
+{
+  "claim": {
+    "op": "acquire",
+    "idempotency_key": "codex:task0099-prune-blocker:claim-acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260610-task0099-prune-blocker-codex",
+      "task_id": "TASK-0099",
+      "owner": "Codex",
+      "status": "active",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/state/TASK_INDEX.json#TASK-0099",
+        "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0099",
+        "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+        "Area_comun/handoffs/HANDOFF-TASK-0099-codex-to-claude-1.md",
+        "Area_comun/mailbox/open/",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-10T08:02:41Z",
+      "updated_at": "2026-06-10T08:02:41Z",
+      "expires_at": "2026-06-11",
+      "notes": "Block TASK-0099 close because prune --check requires orchestrator protocol_prune; implementation is ready but gate is red."
+    }
+  }
+}

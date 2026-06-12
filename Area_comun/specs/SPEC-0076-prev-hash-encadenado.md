@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-0070
+spec_id: SPEC-0076
 title: "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
 status: draft
 date_created: 2026-06-13
@@ -9,7 +9,7 @@ task_id: TASK-0101
 related_decisions: [DECISION-0029, DECISION-0017, DECISION-0022, DECISION-0014]
 ---
 
-# SPEC-0070 – prev_hash encadenado en el eventlog
+# SPEC-0076 – prev_hash encadenado en el eventlog
 
 **Resumen ejecutivo:** Implementar encadenado criptográfico (SHA256) en el eventlog sin romper
 compatibilidad con el log legacy. El flag `event_state.chain_enabled` controla su activación;
