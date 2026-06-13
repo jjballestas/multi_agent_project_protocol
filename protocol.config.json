@@ -80,7 +80,25 @@
     "enabled": true,
     "materialize": true,
     "enforce": true,
-    "authoritative": true
+    "authoritative": true,
+    "slim_views_enabled": false,
+    "chain_enabled": false,
+    "agent_signatures_enabled": false,
+    "signature_backend": "local-ed25519",
+    "signature_config": {
+      "backend": "local-ed25519",
+      "public_keys": {}
+    },
+    "anchor_enabled": false,
+    "anchor_config": {
+      "backend": "git-remote",
+      "remote_url": "",
+      "branch": "audits/default",
+      "identity": "runtime-anchor",
+      "interval_seconds": 3600,
+      "retry_max_attempts": 3,
+      "retry_backoff_seconds": 10
+    }
   },
   "tool_policy": {
     "enabled": true,

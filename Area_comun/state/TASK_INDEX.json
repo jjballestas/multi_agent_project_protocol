@@ -268,7 +268,7 @@
                 "scripts/validate_collaboration_state.py",
                 "examples/agent_signature_cases/"
             ],
-            "status": "in_review",
+            "status": "done",
             "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
             "updated_at": "2026-06-13"
         },
@@ -309,7 +309,7 @@
                 "scripts/validate_collaboration_state.py",
                 "examples/anchor_cases/"
             ],
-            "status": "in_review",
+            "status": "done",
             "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
             "updated_at": "2026-06-13"
         },
@@ -382,7 +382,7 @@
                 "scripts/measure_context_cost.py"
             ],
             "spec_id": "SPEC-0077",
-            "status": "ready",
+            "status": "done",
             "title": "Slim-views del estado y politica de cold-start just-in-time (DECISION-0030 / SPEC-0077)",
             "type": "implementation",
             "updated_at": "2026-06-13"
