@@ -1,5 +1,16 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260613-152600-task0109-claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0109",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0109",
+                "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
+            ],
+            "task_id": "TASK-0109"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

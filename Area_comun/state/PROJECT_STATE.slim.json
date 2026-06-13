@@ -23,6 +23,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
+        },
+        {
+            "id": "TASK-0109",
+            "owner": "Claude",
+            "status": "in_progress",
+            "title": "Revision adversarial SOTA del contexto del arquitecto (consolidacion multi-voz)"
         }
     ],
     "next_actions": [

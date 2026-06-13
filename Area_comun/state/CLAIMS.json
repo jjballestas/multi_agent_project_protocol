@@ -16,6 +16,72 @@
             "updated_at": "2026-06-12T23:33:57Z"
         },
         {
+            "claim_id": "CLAIM-20260613-152600-task0109-claude",
+            "expires_at": "2026-06-16",
+            "notes": "Coordinacion + consolidacion de la revision adversarial multi-voz (TASK-0109, analysis).",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0109",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0109",
+                "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
+            ],
+            "started_at": "2026-06-13T15:26:00Z",
+            "status": "active",
+            "task_id": "TASK-0109",
+            "updated_at": "2026-06-13T15:26:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",
+            "expires_at": "2026-06-14",
+            "notes": "Archive consumed commit-boundary coordination exchange before explicit-path commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-coord-boundary-answer.md",
+                "Area_comun/mailbox/archived/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-coord-boundary-answer.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-13T14:20:00Z",
+            "status": "released",
+            "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+            "updated_at": "2026-06-13T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260613-coord-claude-commit-boundary-codex",
+            "expires_at": "2026-06-14",
+            "notes": "Coordinate current uncommitted mailbox/TASK-0106 boundary with Claude.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-13T14:12:00Z",
+            "status": "released",
+            "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+            "updated_at": "2026-06-13T14:12:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260613-coord-claude-question-fix-codex",
+            "expires_at": "2026-06-14",
+            "notes": "Add compact mailbox question field required by validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-13T14:15:00Z",
+            "status": "released",
+            "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+            "updated_at": "2026-06-13T14:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260613-mailbox-hygiene-codex",
             "expires_at": "2026-06-14",
             "notes": "Archive executed mailbox messages after TASK-0101..0103 flow.",

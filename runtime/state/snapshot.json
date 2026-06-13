@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8cc6681552756f4d9c99a7b4f371d319f547e8d5b4d2571f820d571d944a8c20",
+  "canonical_hash": "2c38745ac8ce506bff53c47a57b664ec69e28de746d175a40600ce3f448ef670",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -108,6 +108,9 @@
       "CLAIM-20260610-task0099-resume-review-codex": 1,
       "CLAIM-20260610-task0100-register-claude": 1,
       "CLAIM-20260612-233357-prune-claude": 1,
+      "CLAIM-20260613-coord-boundary-archive-codex": 1,
+      "CLAIM-20260613-coord-claude-commit-boundary-codex": 1,
+      "CLAIM-20260613-coord-claude-question-fix-codex": 1,
       "CLAIM-20260613-mailbox-hygiene-codex": 1,
       "CLAIM-20260613-task0101-codex": 1,
       "CLAIM-20260613-task0101-metadata-claude": 1,
@@ -124,6 +127,7 @@
       "CLAIM-TASK-0104-claude-analisis-sota": 1,
       "CLAIM-TASK-0105-claude-registro": 1,
       "CLAIM-TASK-0106-claude-registro": 1,
+      "COORD-20260613-COMMIT-BOUNDARY": 3,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -165,10 +169,11 @@
       "TASK-0104": 2,
       "TASK-0105": 6,
       "TASK-0106": 2,
+      "TASK-0109": 2,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 379,
+    "events_applied": 387,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -300,6 +305,12 @@
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
       "codex:anomaly-task0092-unclaimed-edits:claim-release": 156,
+      "codex:coord-boundary-archive:claim-acquire": 384,
+      "codex:coord-boundary-archive:claim-release": 385,
+      "codex:coord-claude-commit-boundary:claim-acquire": 380,
+      "codex:coord-claude-commit-boundary:claim-release": 381,
+      "codex:coord-claude-question-field-fix:claim-acquire": 382,
+      "codex:coord-claude-question-field-fix:claim-release": 383,
       "codex:hardening-untracked-response:claim-acquire": 199,
       "codex:hardening-untracked-response:claim-release": 200,
       "codex:mailbox-accept-0093-0094-archive:claim-acquire": 224,
@@ -530,6 +541,8 @@
       "ready-task0091:task-upsert": 162,
       "regenesis-decision0029-20260613": 378,
       "regenesis-decision0029-consistent-20260613": 379,
+      "register-0109:2026-06-13T15:26:00Z:claim": 386,
+      "register-0109:2026-06-13T15:26:00Z:upsert": 387,
       "task0085-anomaly-handoff-seq:claim-acquire": 44,
       "task0085-anomaly-handoff-seq:claim-release": 45,
       "task0085-handoff-final-evidence:claim-acquire": 39,
@@ -562,5 +575,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 379
+  "up_to_seq": 387
 }
