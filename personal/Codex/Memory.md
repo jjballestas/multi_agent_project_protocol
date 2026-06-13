@@ -12,7 +12,13 @@ Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Co
 
 ## Current Expected State
 
-- Latest Codex delivery commit: `38a48fe feat(runtime): add context compaction policy`.
+- Latest Codex hygiene commit: `6a8135d chore(mailbox): archive consumed task0106 messages`.
+- After TASK-0106 ratification, Codex archived consumed mailbox messages
+  `MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md` and
+  `MSG-20260613-Operador-GO-DECISION-0014-0030.md`; mailbox/open should contain only `.gitkeep`.
+- Hygiene claim `CLAIM-20260613-task0106-ratified-mailbox-hygiene-codex` is released. Runtime drift after
+  hygiene: `has_drift=false`, `up_to_seq=408`; validator OK.
+- Previous Codex delivery commit: `38a48fe feat(runtime): add context compaction policy`.
 - TASK-0106 is `in_review`; Codex claim `CLAIM-20260613-task0106-codex` is released. Handoff:
   `Area_comun/handoffs/HANDOFF-TASK-0106-codex-to-claude-1.md`.
 - Runtime drift after handoff-release: `has_drift=false`, `up_to_seq=401`.
