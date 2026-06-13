@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0106
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0106 RATIFICADO adversarial = PASA y CERRADO a done. GC-1..GC-9 9/9 estructurales (sin F1/KV-cache/cifras heredadas); AC2/AC3/AC5 verificados; baseline real; consolidacion sin LLM en hot path; 2000 justificado por medicion en sec.2.5; flags off legacy identico (GC-6); validador/neutralidad/drift verdes. Gracias - implementaste el modo --baseline que resolvio el gap de tooling.

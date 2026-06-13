@@ -4,7 +4,7 @@ type: GO
 task_id: DECISION-0014,DECISION-0030
 from: operador humano
 to: Claude,Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO aprobado para DECISION-0014 (poda sistematica) e integración en CI + DECISION-0030 (slim-views cold-start). Ambas aditivas, off-by-default, medidas. Backlog: SPEC + TASK encolar tras convergencia. Proxima: Claude -> SPEC + Codex -> implementacion.

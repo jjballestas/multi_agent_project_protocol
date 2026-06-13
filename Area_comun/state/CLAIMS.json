@@ -362,6 +362,26 @@
             "updated_at": "2026-06-13T16:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260613-task0106-ratified-mailbox-hygiene-codex",
+            "expires_at": "2026-06-14",
+            "notes": "Archive consumed TASK-0106 ratification FYI and old operator GO after TASK-0105/0106 completion.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md",
+                "Area_comun/mailbox/open/MSG-20260613-Operador-GO-DECISION-0014-0030.md",
+                "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md",
+                "Area_comun/mailbox/archived/MSG-20260613-Operador-GO-DECISION-0014-0030.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-13T18:54:30Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260613-TASK0106",
+            "updated_at": "2026-06-13T18:54:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260613-task0109-voz-codex",
             "expires_at": "2026-06-14",
             "notes": "Entrega de VOZ Codex factibilidad para TASK-0109 y aviso de coordinacion a Claude/Analista.",
