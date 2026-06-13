@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-13 Europe/Madrid, after delivering TASK-0106 context compaction.
+Last updated: 2026-06-14 Europe/Madrid, after refreshing Codex startup prompt.
 
 ## Repository
 
@@ -12,7 +12,20 @@ Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Co
 
 ## Current Expected State
 
-- Latest Codex hygiene commit: `6a8135d chore(mailbox): archive consumed task0106 messages`.
+- Latest observed HEAD: `237f04d chore(state): commitea CLAIMS.slim.json (baja del claim TASK-0109 liberado en Part 2)`.
+- Startup instruction for future Codex sessions is now intentionally short: ask the next session to read
+  `AGENTS.md` and `personal/Codex/STARTUP_PROMPT.md`; the startup file contains the operational checklist.
+- Recent Claude/operator state since Codex's TASK-0106 work:
+  - `e5c13a0` released v1.4.0 and activated measured compaction in the live instance.
+  - `d74caae` released v1.5.0, closed analysis tasks under DECISION-0032, and closed TASK-0109.
+  - `04c236b` cleaned non-ASCII bytes from mailbox channels.
+  - `93dbb2b` reconciled `PROJECT_STATE.version` to 1.5.0 through state flow.
+  - `237f04d` committed the final `CLAIMS.slim.json` reconciliation after TASK-0109 claim release.
+- Current observed state on 2026-06-14: `mailbox/open` contains only `.gitkeep`, active claims are empty,
+  collaboration validator OK, runtime drift `has_drift=false`, `up_to_seq=422`.
+- Remaining Codex-owned hot items are proposed only: `TASK-0095`, `TASK-0096`, and `TASK-0100`; do not claim
+  without checking mailbox/GO/claims first.
+- Previous Codex hygiene commit: `6a8135d chore(mailbox): archive consumed task0106 messages`.
 - After TASK-0106 ratification, Codex archived consumed mailbox messages
   `MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md` and
   `MSG-20260613-Operador-GO-DECISION-0014-0030.md`; mailbox/open should contain only `.gitkeep`.
