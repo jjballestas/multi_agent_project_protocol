@@ -232,8 +232,13 @@
             "blocked_by_questions": [],
             "created_at": "2026-06-12",
             "deliverables": [
-                "atestacion de turno firmada por agente (in-toto compatible) off-by-default",
-                "atestacion de revisor maker!=checker"
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "runtime/llm_turn_wrapper.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/validate_collaboration_state.py",
+                "examples/agent_signature_cases/"
             ],
             "depends_on": [
                 "TASK-0101"
@@ -256,11 +261,14 @@
             ],
             "relevant_files": [
                 "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
                 "runtime/llm_turn_wrapper.py",
-                "runtime/team_bridge.py",
-                "protocol.config.json"
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/validate_collaboration_state.py",
+                "examples/agent_signature_cases/"
             ],
-            "status": "ready",
+            "status": "in_review",
             "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
             "updated_at": "2026-06-13"
         },
@@ -268,8 +276,12 @@
             "blocked_by_questions": [],
             "created_at": "2026-06-12",
             "deliverables": [
-                "anclaje externo periodico del digest de cabeza (backend configurable) off-by-default",
-                "verificador de monotonia anti-rollback"
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/validate_collaboration_state.py",
+                "examples/anchor_cases/"
             ],
             "depends_on": [
                 "TASK-0101"
@@ -291,10 +303,13 @@
             ],
             "relevant_files": [
                 "runtime/eventlog.py",
-                "scripts/sign_release.ps1",
-                "protocol.config.json"
+                "runtime/protocol_replay.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/validate_collaboration_state.py",
+                "examples/anchor_cases/"
             ],
-            "status": "ready",
+            "status": "in_review",
             "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
             "updated_at": "2026-06-13"
         },
@@ -330,6 +345,92 @@
             "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)",
             "type": "analysis",
             "updated_at": "2026-06-12"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-13",
+            "deliverables": [
+                "runtime/protocol_replay.py",
+                "protocol.config.json",
+                "Area_comun/state/TASK_INDEX.slim.template.json",
+                "scripts/measure_context_cost.py",
+                "examples/slim_view_cases"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0105-codex-slim-views.md",
+            "id": "TASK-0105",
+            "linked_decisions": [
+                "DECISION-0030",
+                "DECISION-0008",
+                "DECISION-0014",
+                "DECISION-0017",
+                "DECISION-0022"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "DECISION-0030",
+                "DECISION-0008",
+                "DECISION-0014",
+                "DECISION-0022"
+            ],
+            "relevant_files": [
+                "runtime/protocol_replay.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/measure_context_cost.py"
+            ],
+            "spec_id": "SPEC-0077",
+            "status": "ready",
+            "title": "Slim-views del estado y politica de cold-start just-in-time (DECISION-0030 / SPEC-0077)",
+            "type": "implementation",
+            "updated_at": "2026-06-13"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-13",
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "runtime/runlog.py",
+                "protocol.config.json",
+                "scripts/measure_context_cost.py",
+                "examples/context_policy_cases"
+            ],
+            "depends_on": [
+                "TASK-0105"
+            ],
+            "file": "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md",
+            "id": "TASK-0106",
+            "linked_decisions": [
+                "DECISION-0030",
+                "DECISION-0009",
+                "DECISION-0024",
+                "DECISION-0022",
+                "DECISION-0017"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "relates_to": [
+                "DECISION-0030",
+                "DECISION-0009",
+                "DECISION-0024",
+                "DECISION-0022"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/runlog.py",
+                "runtime/adapters/base.py",
+                "runtime/budget.py",
+                "protocol.config.json",
+                "protocol.config.template.json"
+            ],
+            "spec_id": "SPEC-0078",
+            "status": "proposed",
+            "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)",
+            "type": "implementation",
+            "updated_at": "2026-06-13"
         }
     ],
     "updated_at": "2026-06-08",
