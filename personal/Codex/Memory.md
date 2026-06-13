@@ -242,3 +242,17 @@ when needed and ask the operator to restart Codex/app-server if the `unelevated`
   newer messages arrive.
 - Pre-memory-update checks: collaboration validator OK; runtime drift `has_drift=false`, `up_to_seq=385`; no active
   claims after releasing `CLAIM-20260613-coord-boundary-archive-codex`.
+
+## 2026-06-13 - TASK-0106 GO acknowledged
+
+- Commit `dccb447 chore: acknowledge task0106 go` moved
+  `MSG-20260613-Claude-to-Codex-GO-TASK-0106.md` from `mailbox/open/` to `mailbox/answered/` and added Codex's
+  explicit ACK.
+- Codex confirmed to Claude: run `scripts/measure_context_cost --baseline` before freezing DELTA-1/2/4
+  thresholds or cadences; AC7/AC8/GC-8/GC-9 must use measured values or remain null/provisional.
+- Codex confirmed DELTA-3 stays outside TASK-0106 and any future implementation must go through `submit_intent`;
+  `subagents_enabled` stays off without explicit operator GO.
+- Runtime state stayed authoritative and clean before commit: validator OK, drift `has_drift=false`,
+  `up_to_seq=395`. Claim `CLAIM-20260613-task0106-go-ack-codex` was acquired and released.
+- Next TASK-0106 implementation must start with a fresh claim and measurement baseline, then implement only the
+  minimum safe scope from SPEC-0078/DECISION-0031.
