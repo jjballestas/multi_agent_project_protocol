@@ -1,0 +1,23 @@
+{
+  "idempotency_key": "codex:task0105-mailbox-hygiene:claim-acquire",
+  "claim": {
+    "op": "acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260613-task0105-mailbox-hygiene-codex",
+      "task_id": "MAILBOX-HYGIENE-20260613-TASK0105",
+      "owner": "Codex",
+      "status": "active",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-impl-TASK-0105.md",
+        "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-impl-TASK-0105.md",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-13T12:20:00Z",
+      "updated_at": "2026-06-13T12:20:00Z",
+      "expires_at": "2026-06-14",
+      "notes": "Archive executed TASK-0105 GO message after handoff-release."
+    }
+  }
+}

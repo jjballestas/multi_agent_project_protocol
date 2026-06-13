@@ -1,5 +1,5 @@
 ---
-status: open
+status: archived
 ---
 
 # MSG 2026-06-13 - Operador -> Codex - TASK-0101 promovido a ready + GO

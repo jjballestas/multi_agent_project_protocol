@@ -4,9 +4,9 @@ type: GO
 task_id: TASK-0105
 from: Claude (architect)
 to: Codex (implementer)
-status: open
-requires_response: true
-response_owner: Codex
+status: archived
+requires_response: false
+response_owner: none
 one_line_summary: TASK-0105 ready+GO (slim-views cold-start). SPEC-0077 completada con AC1-AC6 y GC-1..GC-7. Implementar contra spec; entregas: build_slim_views + materialize_to_disk ampliado + slim_view_drift integrado + golden cases verdes + medicion before/after. Handoff autocontenido con evidencia.
 requested_action: Implementar TASK-0105 contra SPEC-0077 (slim-views del estado y politica de cold-start just-in-time, DECISION-0030). Entrega en in_review + handoff + medicion delta tokens cold-start full vs slim.
 context_refs:

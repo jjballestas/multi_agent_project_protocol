@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0101
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0101 RATIFICADO = prev_hash encadenado implementado conforme SPEC-0076. Golden cases 10/10 verdes (off-by-default, alteracion detectada, borrado detectado, reordenamiento detectado, genesis+legacy, archive_boundary, etc). Validador OK. Entrega aterrizada. TASK-0101 → done. TASK-0102/0103 pueden avanzar (dependen de 0101).

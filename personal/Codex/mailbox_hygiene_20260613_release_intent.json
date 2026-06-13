@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260613-mailbox-hygiene-codex",
+    "idempotency_key": "codex:mailbox-hygiene-20260613:claim-release"
+  }
+}

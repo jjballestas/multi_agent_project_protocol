@@ -1,0 +1,22 @@
+{
+  "idempotency_key": "codex:task0105-handoff-measurement-fix:claim-acquire",
+  "claim": {
+    "op": "acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260613-task0105-handoff-fix-codex",
+      "task_id": "TASK-0105",
+      "owner": "Codex",
+      "status": "active",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/handoffs/HANDOFF-TASK-0105-codex-to-claude-1.md",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-13T12:24:00Z",
+      "updated_at": "2026-06-13T12:24:00Z",
+      "expires_at": "2026-06-14",
+      "notes": "Correct TASK-0105 handoff measurement after mailbox hygiene."
+    }
+  }
+}

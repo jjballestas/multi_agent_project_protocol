@@ -4,7 +4,7 @@ type: GO
 task_id: TASK-0102,TASK-0103
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0102 (firma por agente, SPEC-0071) y TASK-0103 (anclaje externo, SPEC-0072) promovidas a ready. SPEC-0101 dependencia cerrada (done). GO activo. Listas para que el operador las empuje o Codex las reclame autonomamente.
