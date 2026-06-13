@@ -1,0 +1,38 @@
+{
+    "schema_version": "1.0",
+    "tasks": [
+        {
+            "id": "TASK-0095",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0096",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0100",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0106",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "proposed",
+            "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
+        }
+    ],
+    "view": "task_index.slim"
+}

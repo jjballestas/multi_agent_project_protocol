@@ -17,6 +17,51 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.2.0] — 2026-06-13
+
+**Cross-signed tamper-evidence (DECISION-0029) + slim-views just-in-time cold-start
+(DECISION-0030).** Additive and domain-neutral over 1.1.0; every previously valid turn report
+stays valid and the new capabilities ship off-by-default in the templates. This MINOR records the
+implementation of the three independent-signer audit pieces (chained `prev_hash`, per-agent
+attestation, external anchoring) and the live activation of derived slim-views that cut this
+instance's cold-start from ~17.4k to ~8.8k tokens.
+
+### Added
+- **Chained `prev_hash` event log (DECISION-0029 piece 2a).** Each event carries
+  `prev_hash = SHA256(event || prev)`; genesis = `SHA256(canonical_json(protocol.config.json))`.
+  `validate_chain` detects alteration, insertion, deletion and reordering, with an archive-boundary
+  anchor so pruning preserves verifiability. Flag `event_state.chain_enabled` (default false).
+  (TASK-0101 / SPEC-0076)
+- **Per-agent authorship attestation (DECISION-0029 piece 2b).** `agent.attestation` events with an
+  in-toto-compatible predicate and a configurable, vendor-neutral signature backend
+  (`local-ed25519` / keyless-OIDC / external-command). `validate_agent_signatures` enforces
+  maker!=checker reviewer attestations. No private keys in the repo (public keys only); missing
+  `cryptography` falls back to `backend_unavailable`. Flag `event_state.agent_signatures_enabled`
+  (default false). (TASK-0102 / SPEC-0071)
+- **External chain anchoring (DECISION-0029 piece 2c).** Periodic `chain.anchor` of the head digest
+  to a write-independent medium (git-remote default, transparency-log, or RFC 3161 TSA);
+  `verify_anchor_monotonicity` is anti-rollback. `remote_url` empty by default (no secrets); a real
+  remote fails closed. Flag `event_state.anchor_enabled` (default false). (TASK-0103 / SPEC-0072)
+- **Slim-views derived state + just-in-time cold-start (DECISION-0030).** The runtime materializes
+  compact, regenerable projections `TASK_INDEX.slim.json`, `PROJECT_STATE.slim.json`,
+  `CLAIMS.slim.json` (hot statuses only, minimal fields) in the same atomic batch as the full views;
+  `slim_view_drift` is folded into the drift gate so a slim can never diverge from the snapshot.
+  `measure_context_cost` reports cold-start full vs slim. Flag `event_state.slim_views_enabled`.
+  (TASK-0105 / SPEC-0077)
+
+### Changed
+- **Live instance cold-start promoted to slim-views.** `event_state.slim_views_enabled=true` and
+  `token_cost.coldstart_globs` now point to the `*.slim.json` projections (full views and the event
+  log are no longer loaded at start). Measured before/after: **~17.4k -> ~8.8k tokens** (<10k target
+  met, real not projected). Gated promotion per DECISION-0008/0014; reversible (flag -> false +
+  globs -> full). The shipped master `protocol.config.template.json` stays conservative
+  (`slim_views_enabled=false`, `coldstart_globs` on full views): new instances measure first.
+
+### Notes
+- All four flags ship **off-by-default** in the templates; legacy logs without `prev_hash`/
+  signatures/anchors keep validating. Goldens: `chain_cases` 10/10, `agent_signature_cases` 10/10,
+  `anchor_cases` 10/10, `slim_view_cases` 7/7.
+
 ## [1.1.0] — 2026-06-10
 
 **Runtime-authoritative activation + supervised-autonomy SA.4 pilot + operator human guide and

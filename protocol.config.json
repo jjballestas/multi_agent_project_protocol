@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "protocol_version": "1.1.0",
-  "runtime_version": "0.11.0",
+  "protocol_version": "1.2.0",
+  "runtime_version": "0.12.0",
   "project_name": "multi_agent_project_protocol",
   "adoption_tier": "runtime",
   "source_of_truth": "AGENTS.md",
@@ -18,9 +18,9 @@
       "AGENTS.md",
       "Area_comun/README.md",
       "Area_comun/protocol/TASK_PROTOCOL.md",
-      "Area_comun/state/PROJECT_STATE.json",
-      "Area_comun/state/TASK_INDEX.json",
-      "Area_comun/state/CLAIMS.json"
+      "Area_comun/state/PROJECT_STATE.slim.json",
+      "Area_comun/state/TASK_INDEX.slim.json",
+      "Area_comun/state/CLAIMS.slim.json"
     ],
     "budget": 30000
   },
@@ -81,7 +81,7 @@
     "materialize": true,
     "enforce": true,
     "authoritative": true,
-    "slim_views_enabled": false,
+    "slim_views_enabled": true,
     "chain_enabled": false,
     "agent_signatures_enabled": false,
     "signature_backend": "local-ed25519",

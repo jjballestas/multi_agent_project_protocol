@@ -1,0 +1,49 @@
+{
+    "active_tasks": [
+        {
+            "id": "TASK-0095",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0096",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0100",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
+        },
+        {
+            "id": "TASK-0106",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
+        }
+    ],
+    "next_actions": [
+        ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
+        "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
+        "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",
+        "TASK-0086 DONE (ratif. adversarial): guard event_state_config_error (authoritative=>enforce=>materialize=>enabled, tier runtime) cableado en validador py/ps + submit_intent + apply -> RECHAZA authoritative-sin-enforce; mata el false-secure. + fix apply_gate (drift antes de materializar). PRE-REQ SA.4 #1 cumplido. #2 TASK-0087 registrada (proposed, bloqueante-adopcion). #3 ventana authoritative: evaluar estabilidad.",
+        "TASK-0088 DONE (SA.4 paso 1, ratif. adversarial): lock-lift del invoker real multi-turno OFF-BY-DEFAULT (orchestrator.py condicionado; registro vivo vacio -> cerrojo --once intacto, byte-equivalente); golden determinista 9; ensayo de rollback del lock-lift verde (lifts solo con registro, off restaura, replay==hot). PASOS 1+2 COMPLETOS. PENDIENTE: MICRO-GO del operador para pasos 3+4 = DECISION-0027 (activacion, MINOR+CHANGELOG) + poblar runtime.real_invoker + runtime.supervised_autonomy + PILOTO (nota prosa en examples/neutrality_scan_cases/README.md, caps max_turns=2/checkpoint_every_k=1/wall_clock=180000/budget+deadline/PAUSE, invocacion real). NO poblar registro hasta el micro-GO. Capa C OFF.",
+        "TASK-0089 DONE (wrapper fino vendor-neutral del invoker, ratif. adversarial): runtime/llm_turn_wrapper.py (stdin->backend no interactivo->extrae+valida turn-report JSON tolerante fences/prosa->emite limpio o falla limpio, timeout<120s nunca cuelga); golden 8/8 + en CI; preset claude->wrapper; vendor-neutral. SA.4 sigue DE-ARMADO. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper -> turn-report schema-valido); si limpio, re-armar registro + piloto (nota examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint tras turno 1). NO re-armar ni piloto sin smoke limpio. Capa C OFF.",
+        "TASK-0090 DONE (wrapper resolucion cross-platform via shutil.which, ratif. adversarial): bare 'claude -p' resuelve y corre; golden 10/10; RE-SMOKE END-TO-END limpio (preset->wrapper->claude real -> turn-report schema-valido). Path del piloto PROBADO. SA.4 sigue DE-ARMADO. LISTO para re-armar registro (enabled=true) + DISPARAR PILOTO (orquestador real invoker, tarea-objetivo nota en examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint OBLIGATORIO tras turno 1). enforce/authoritative intactos; Capa C OFF.",
+        "TASK-0092 DONE (EJECUTADA POR CLAUDE, Codex agente down): invoker codex implementer integrado (preset->wrapper->codex exec workspace-write + reasoning_effort=low) + build_prompt endurecido. SMOKE REAL DE TURNO COMPLETO LIMPIO: codex edito un README + turn-report schema-valido aceptado (agent=Codex casa implementer), ~44s. Goldens verdes. SA.4 sigue DE-ARMADO. LISTO para el go del operador a re-armar (preset codex) + re-disparar piloto (TASK-0091 blocked->ready via task_upsert; caps 2/1/180000; checkpoint tras turno 1)."
+    ],
+    "open_questions": [],
+    "risks": [
+        "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+        "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+        "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
+        "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
+        "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
+        "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
+    ],
+    "status": "active",
+    "view": "project_state.slim"
+}
