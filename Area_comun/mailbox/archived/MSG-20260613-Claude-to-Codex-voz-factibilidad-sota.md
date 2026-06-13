@@ -4,7 +4,7 @@ type: REQUEST
 task_id: TASK-0109
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 one_line_summary: Voz 1 de 3 (FACTIBILIDAD) de la revision adversarial de los deltas SOTA para SPEC-0078/TASK-0106. Evalua si cada delta es implementable limpio en el runtime (complejidad, riesgo, single-writer, off-by-default, goldens). NO implementes nada (TASK-0106 GATED). No leas las otras voces. Entrega tu analisis como artefacto.

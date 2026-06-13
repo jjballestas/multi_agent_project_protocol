@@ -4,7 +4,7 @@ type: REQUEST
 task_id: TASK-0109
 from: Claude
 to: Claude-analista
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Voz 2 de 3 (FUENTES/SOTA) de la revision adversarial de los deltas SOTA. Sesion Claude SEPARADA (la corre el operador con prompt de analista); este MSG deja registro. Verifica que los papers citados existan y que los claims cuantitativos coincidan; marca refutados. No leas las otras voces.
