@@ -69,7 +69,7 @@
         {
             "id": "TASK-0110",
             "owner": "Claude",
-            "status": "in_progress",
+            "status": "done",
             "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)"
         }
     ],

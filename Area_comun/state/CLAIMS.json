@@ -73,9 +73,25 @@
                 "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md"
             ],
             "started_at": "2026-06-13T18:53:03Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0110",
             "updated_at": "2026-06-13T18:53:03Z"
+        },
+        {
+            "claim_id": "CLAIM-20260613-201643-close-0110",
+            "expires_at": "2026-06-13",
+            "notes": "Cierre TASK-0110 via qa path.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md"
+            ],
+            "started_at": "2026-06-13T20:16:43Z",
+            "status": "released",
+            "task_id": "TASK-0110",
+            "updated_at": "2026-06-13T20:16:43Z"
         },
         {
             "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",

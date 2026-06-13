@@ -491,7 +491,7 @@
             ],
             "sdd_required": false,
             "spec_id": "none",
-            "status": "in_progress",
+            "status": "done",
             "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)",
             "type": "analysis",
             "updated_at": "2026-06-13"

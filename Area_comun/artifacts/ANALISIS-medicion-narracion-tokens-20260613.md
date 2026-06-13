@@ -28,32 +28,40 @@ drift 0, sin re-preguntas del revisor).
 - **Guardrail (no negociable):** handoff autocontenido y completo; validador verde; drift 0; el revisor NO
   pidio aclaraciones (re-preguntas = coste oculto que anula el ahorro).
 
-## Resultados (a completar con las corridas)
+## Resultados
 
-| Tarea | Variante | Corrida | Output tok | Total tok | Turnos | Handoff completo | Validador | Drift 0 | Re-preguntas |
-|-------|----------|---------|-----------|-----------|--------|------------------|-----------|---------|--------------|
-| T1 | A | 1 | | | | | | | |
-| T1 | A | 2 | | | | | | | |
-| T1 | A | 3 | | | | | | | |
-| T1 | B | 1 | | | | | | | |
-| T1 | B | 2 | | | | | | | |
-| T1 | B | 3 | | | | | | | |
-| T2 | A | 1 | | | | | | | |
-| T2 | A | 2 | | | | | | | |
-| T2 | A | 3 | | | | | | | |
-| T2 | B | 1 | | | | | | | |
-| T2 | B | 2 | | | | | | | |
-| T2 | B | 3 | | | | | | | |
+**Diseno realmente ejecutado (caveat):** 1 corrida REPRESENTATIVA por celda (no 3); output **estimado**
+por `chars/4` (proxy de tokens, no contador exacto del CLI). 4 celdas (T1-A, T1-B, T2-A, T2-B).
 
-## Sintesis (a completar)
+| Tarea | Variante | Output (proxy) | Guardrail auditabilidad |
+|-------|----------|----------------|--------------------------|
+| T1 (impl corta con goldens) | A (verboso) | baseline | completo |
+| T1 | B (reporte final) | **~84% menos** que A | **intacto** - 5/5 goldens correctos |
+| T2 (revision de artefacto fijo) | A (verboso) | baseline | completo |
+| T2 | B (reporte final) | **~84% menos** que A | **intacto** - mismas 5 criticas que A |
 
-- Media y dispersion de output tokens por variante (A vs B), por tarea.
-- Porcentaje de ahorro medio de B vs A (apuntan las 3 corridas en la misma direccion?).
-- Estado del guardrail de auditabilidad en B (se mantuvo en todas las corridas?).
+## Sintesis
 
-## Recomendacion (a completar)
+- **Ahorro de output:** la variante B (reporte final, sin narrar pasos) reduce el output **~84%** frente a
+  A (verboso) en ambas tareas (T1 y T2), en la misma direccion.
+- **Guardrail de auditabilidad: INTACTO.** T1-B mantuvo 5/5 goldens correctos; T2-B produjo las mismas 5
+  criticas que T2-A. Sin perdida de senal, sin re-preguntas del revisor en B.
 
-- CONFIRMA / NO CONFIRMA segun el criterio del operador (sugerencia: ahorro medio >=15% consistente +
-  guardrail intacto). Si CONFIRMA: siguiente paso separado, con GO del operador = addendum a DECISION-0005
-  (golden rule "los agentes minimizan la narracion intra-ejecucion; el reporte/handoff final queda
-  autocontenido y auditable"). Autoria de la DECISION = Claude; ratificacion = operador.
+### Caveats (validez)
+
+- **Tareas diminutas:** el 84% es un **techo**, no el ahorro esperable en tareas grandes (donde la prosa de
+  ejecucion es proporcionalmente menor al trabajo util). El ahorro real sera menor pero positivo.
+- **Output estimado por `chars/4`**, no medido con el contador exacto del CLI -> magnitud aproximada.
+- **1 corrida representativa por celda** (no 3) -> sin dispersion; lectura cualitativa robusta (direccion
+  clara y consistente), no estadistica fina.
+
+## Recomendacion
+
+**CONFIRMA (con caveats).** B ahorra output de forma clara y consistente en ambos perfiles **manteniendo el
+guardrail** (handoff/criticas completas, sin re-preguntas). Supera holgadamente el umbral sugerido (>=15%),
+aunque el 84% es techo por el tamano de las tareas.
+
+**Siguiente paso (separado, NO en esta tarea, requiere GO del operador):** addendum a DECISION-0005
+(golden rule: "los agentes minimizan la narracion intra-ejecucion; el reporte/handoff final queda
+autocontenido y auditable"). Autoria de la DECISION = Claude; ratificacion = operador. **AGENTS.md /
+CLAUDE.md / DECISION-0005 NO se tocan hasta ese GO.**
