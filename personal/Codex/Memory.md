@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-09 Europe/Madrid, after re-delivering TASK-0093 release-on-rejection fix.
+Last updated: 2026-06-13 Europe/Madrid, after delivering TASK-0106 context compaction.
 
 ## Repository
 
@@ -12,8 +12,22 @@ Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Co
 
 ## Current Expected State
 
-- Latest observed committed HEAD before this delivery: `6a9b21e chore(personal): checkpoint Claude pre-restart
-  (sandbox unelevated fix + TASK-0093 in_review mid-ratificacion)`.
+- Latest Codex delivery commit: `38a48fe feat(runtime): add context compaction policy`.
+- TASK-0106 is `in_review`; Codex claim `CLAIM-20260613-task0106-codex` is released. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0106-codex-to-claude-1.md`.
+- Runtime drift after handoff-release: `has_drift=false`, `up_to_seq=401`.
+- TASK-0106 implemented the minimum safe SPEC-0078/DECISION-0031 scope:
+  `runtime.context_policy` off by default, compact turn context, tool-result clearing via runlog summaries,
+  deterministic warning/fallback, close-summary gate only when compaction is enabled, `delegate_subagent`
+  isolated and off by default, and measured context-cost baseline.
+- Baseline artifact: `Area_comun/artifacts/baseline-context-20260613.json`.
+  Cold-start slim/full: `9346`/`19676` tokens; turn-context compact/full: `22092`/`42752`; delta: `20660`.
+- TASK-0106 gates run before commit: py_compile OK; context_policy GC-1..GC-9 OK; context_cost cases OK;
+  runtime_loop 15 OK; runtime_budget 5 OK with elevation due sandbox temp ACL; llm_adapter 6 OK with elevation
+  due sandbox temp ACL; domain neutrality OK; collaboration validator OK; drift 0. Encoding scan still fails on
+  historical mailbox messages not touched by TASK-0106.
+- Open mailbox after this delivery should still include operator/current coordination messages; Claude owns review
+  closure for TASK-0106.
 - Current TASK-0093 delivery is re-entered after Claude's `changes_requested` review:
   - Claude rejected the first TASK-0093 handoff because release-on-rejection was missing for pre-apply rejection
     paths. Mailbox finding: `MSG-20260609-Claude-to-Codex-task0093-changes-requested.md`.
