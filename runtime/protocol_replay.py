@@ -842,6 +842,9 @@ def apply_decision_event(state: dict[str, Any], payload: dict[str, Any]) -> None
 
 def apply_project_narrative_event(state: dict[str, Any], payload: dict[str, Any]) -> None:
     project = state.setdefault("project_state", {})
+    version = payload.get("version")
+    if isinstance(version, str) and version:
+        project["version"] = version
     set_values = payload.get("set") if isinstance(payload.get("set"), dict) else {}
     append_values = payload.get("append") if isinstance(payload.get("append"), dict) else {}
     for field, values in sorted(set_values.items()):

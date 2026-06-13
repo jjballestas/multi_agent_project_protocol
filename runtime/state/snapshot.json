@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8749c0a57aabaacdde40b79221cf5b4aebf98dad0247b8400f5e6b8875783b8f",
+  "canonical_hash": "59980ae87c33e8eb7cfccdca72429caa169c64218666017f8e662067b742a50f",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -114,6 +114,7 @@
       "CLAIM-20260613-185303-task0110-claude": 1,
       "CLAIM-20260613-201643-close-0110": 1,
       "CLAIM-20260613-214805-p2": 1,
+      "CLAIM-20260613-222506-verrec": 1,
       "CLAIM-20260613-coord-boundary-archive-codex": 1,
       "CLAIM-20260613-coord-claude-commit-boundary-codex": 1,
       "CLAIM-20260613-coord-claude-question-fix-codex": 1,
@@ -158,7 +159,7 @@
       "MAINTENANCE-PRUNE": 15,
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 13,
+      "PROJECT_STATE": 14,
       "TASK-0037": 4,
       "TASK-0084": 8,
       "TASK-0085": 12,
@@ -185,10 +186,11 @@
       "TASK-0106": 11,
       "TASK-0109": 6,
       "TASK-0110": 5,
+      "VERSION-RECONCILE": 1,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 419,
+    "events_applied": 422,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -611,7 +613,10 @@
       "task0088-codex-runtime-loop-fixture:claim-acquire": 86,
       "task0088-codex-runtime-real-adapter:claim-acquire": 85,
       "task0088-codex-start:claim-acquire": 83,
-      "task0088-codex-start:task-in-progress": 84
+      "task0088-codex-start:task-in-progress": 84,
+      "ver:2026-06-13T22:25:06Z:cl": 420,
+      "ver:2026-06-13T22:25:06Z:rel": 422,
+      "ver:2026-06-13T22:25:06Z:v": 421
     },
     "leases": {
       "TASK-0091": {
@@ -622,5 +627,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 419
+  "up_to_seq": 422
 }

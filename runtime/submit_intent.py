@@ -206,14 +206,22 @@ def narrative_ops(payload: dict[str, Any]) -> dict[str, dict[str, list[str]]]:
     append_values = payload.get("append") if isinstance(payload.get("append"), dict) else {}
     direct_set = {field: payload[field] for field in PROJECT_NARRATIVE_FIELDS if field in payload}
     set_payload = {**set_values, **direct_set}
-    normalized: dict[str, dict[str, list[str]]] = {"set": {}, "append": {}}
+    # Scalar `version` reconciliation: project_narrative may carry a single `version` string
+    # (from `set.version` or a top-level `version`) to align PROJECT_STATE.version with the
+    # authoritative protocol.config.json, via the state flow. It is not a narrative list-field.
+    version = set_payload.pop("version", None)
+    if version is None:
+        version = payload.get("version")
+    normalized: dict[str, Any] = {"set": {}, "append": {}}
+    if version is not None:
+        normalized["version"] = str(version)
     for mode, values in (("set", set_payload), ("append", append_values)):
         for field, raw in sorted(values.items()):
             if field not in PROJECT_NARRATIVE_FIELDS:
                 raise IntentValidationError(f"unsupported project_narrative field: {field}")
             normalized[mode][field] = require_string_list(raw, f"project_narrative.{mode}.{field}")
-    if not normalized["set"] and not normalized["append"]:
-        raise IntentValidationError("project_narrative requires set/append values")
+    if not normalized["set"] and not normalized["append"] and "version" not in normalized:
+        raise IntentValidationError("project_narrative requires set/append/version values")
     return normalized
 
 
@@ -340,6 +348,8 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
             for key in ("set", "append")
             if normalized.get(key)
         }
+        if normalized.get("version"):
+            transition["version"] = str(normalized["version"])
         payload["transitions"]["project_narrative"] = transition
     elif kind == "protocol_prune":
         transition = {
