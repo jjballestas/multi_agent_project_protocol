@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3edbf0cb8528d20eadf298d1832e2adb49f23316c3d62abab866ede2b42bbf0b",
+  "canonical_hash": "5c05fb75b7cc0a829e8f60ab35ce04a68af1e3a9f27f47feb8d972d0b733ed33",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -177,10 +177,11 @@
       "TASK-0105": 6,
       "TASK-0106": 11,
       "TASK-0109": 3,
+      "TASK-0110": 2,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 404,
+    "events_applied": 406,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -559,6 +560,8 @@
       "ready-task0091:claim-acquire": 161,
       "ready-task0091:claim-release": 163,
       "ready-task0091:task-upsert": 162,
+      "reg-0110:2026-06-13T18:53:03Z:claim": 405,
+      "reg-0110:2026-06-13T18:53:03Z:upsert": 406,
       "regenesis-decision0029-20260613": 378,
       "regenesis-decision0029-consistent-20260613": 379,
       "register-0109:2026-06-13T15:26:00Z:claim": 386,
@@ -599,5 +602,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 404
+  "up_to_seq": 406
 }

@@ -65,6 +65,12 @@
             "owner": "Claude",
             "status": "in_progress",
             "title": "Revision adversarial SOTA del contexto del arquitecto (consolidacion multi-voz)"
+        },
+        {
+            "id": "TASK-0110",
+            "owner": "Claude",
+            "status": "in_progress",
+            "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)"
         }
     ],
     "agents": {

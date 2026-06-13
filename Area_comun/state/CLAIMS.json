@@ -63,6 +63,21 @@
             "updated_at": "2026-06-13T18:40:23Z"
         },
         {
+            "claim_id": "CLAIM-20260613-185303-task0110-claude",
+            "expires_at": "2026-06-16",
+            "notes": "Coordinacion de la medicion A/B de narracion (TASK-0110).",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0110",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0110",
+                "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md"
+            ],
+            "started_at": "2026-06-13T18:53:03Z",
+            "status": "active",
+            "task_id": "TASK-0110",
+            "updated_at": "2026-06-13T18:53:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",
             "expires_at": "2026-06-14",
             "notes": "Archive consumed commit-boundary coordination exchange before explicit-path commit.",
