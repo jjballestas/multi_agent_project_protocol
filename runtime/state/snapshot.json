@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fea3df92e5fb4c34b8edcae490917376ddd4e29a0b0298e5c9e8fbaad0629a34",
+  "canonical_hash": "2b86651c08784a9f6ed7ab5a982586e6f5ed425837ef59591289cd27a5f472bd",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -122,6 +122,7 @@
       "CLAIM-20260613-task0105-codex": 1,
       "CLAIM-20260613-task0105-handoff-fix-codex": 1,
       "CLAIM-20260613-task0105-mailbox-hygiene-codex": 1,
+      "CLAIM-20260613-task0106-go-ack-codex": 1,
       "CLAIM-20260613-task0109-voz-codex": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
@@ -171,12 +172,12 @@
       "TASK-0103": 6,
       "TASK-0104": 2,
       "TASK-0105": 6,
-      "TASK-0106": 4,
+      "TASK-0106": 5,
       "TASK-0109": 3,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 393,
+    "events_applied": 395,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -372,6 +373,8 @@
       "codex:task0105-mailbox-hygiene:claim-acquire": 374,
       "codex:task0105-mailbox-hygiene:claim-release": 375,
       "codex:task0105:regenesis-before-claim": 369,
+      "codex:task0106-go-ack:claim-acquire": 394,
+      "codex:task0106-go-ack:claim-release": 395,
       "codex:task0109-voz-factibilidad:claim-acquire": 388,
       "codex:task0109-voz-factibilidad:claim-release": 389,
       "codex:temp-acl-rule:claim-acquire": 194,
@@ -584,5 +587,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 393
+  "up_to_seq": 395
 }
