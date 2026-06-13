@@ -57,7 +57,7 @@
         {
             "id": "TASK-0106",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
         },
         {
@@ -102,7 +102,8 @@
         "DECISION-0026-memoria-post-commit",
         "DECISION-0027-activacion-sa4-piloto",
         "DECISION-0028",
-        "DECISION-0029"
+        "DECISION-0029",
+        "DECISION-0031"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

@@ -31,6 +31,22 @@
             "updated_at": "2026-06-13T15:26:00Z"
         },
         {
+            "claim_id": "CLAIM-20260613-171150-sota-go-claude",
+            "expires_at": "2026-06-13",
+            "notes": "Registrar DECISION-0031 (ratificada por operador) y promover TASK-0106 a ready (GO).",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md"
+            ],
+            "started_at": "2026-06-13T17:11:50Z",
+            "status": "released",
+            "task_id": "TASK-0106",
+            "updated_at": "2026-06-13T17:11:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",
             "expires_at": "2026-06-14",
             "notes": "Archive consumed commit-boundary coordination exchange before explicit-path commit.",

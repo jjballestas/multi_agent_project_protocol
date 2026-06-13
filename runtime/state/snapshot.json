@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c80e4cab001a5891aa564183f17efdd3c991d11134cea3ff37f47dcc38f00a57",
+  "canonical_hash": "fea3df92e5fb4c34b8edcae490917376ddd4e29a0b0298e5c9e8fbaad0629a34",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -108,6 +108,7 @@
       "CLAIM-20260610-task0099-resume-review-codex": 1,
       "CLAIM-20260610-task0100-register-claude": 1,
       "CLAIM-20260612-233357-prune-claude": 1,
+      "CLAIM-20260613-171150-sota-go-claude": 1,
       "CLAIM-20260613-coord-boundary-archive-codex": 1,
       "CLAIM-20260613-coord-claude-commit-boundary-codex": 1,
       "CLAIM-20260613-coord-claude-question-fix-codex": 1,
@@ -135,6 +136,7 @@
       "DECISION-0027-activacion-sa4-piloto": 1,
       "DECISION-0028": 1,
       "DECISION-0029": 4,
+      "DECISION-0031": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -169,12 +171,12 @@
       "TASK-0103": 6,
       "TASK-0104": 2,
       "TASK-0105": 6,
-      "TASK-0106": 2,
+      "TASK-0106": 4,
       "TASK-0109": 3,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 389,
+    "events_applied": 393,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -546,6 +548,10 @@
       "regenesis-decision0029-consistent-20260613": 379,
       "register-0109:2026-06-13T15:26:00Z:claim": 386,
       "register-0109:2026-06-13T15:26:00Z:upsert": 387,
+      "sota-go:2026-06-13T17:11:50Z:claim": 390,
+      "sota-go:2026-06-13T17:11:50Z:decision": 391,
+      "sota-go:2026-06-13T17:11:50Z:promote-0106": 392,
+      "sota-go:2026-06-13T17:11:50Z:release": 393,
       "task0085-anomaly-handoff-seq:claim-acquire": 44,
       "task0085-anomaly-handoff-seq:claim-release": 45,
       "task0085-handoff-final-evidence:claim-acquire": 39,
@@ -578,5 +584,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 389
+  "up_to_seq": 393
 }
