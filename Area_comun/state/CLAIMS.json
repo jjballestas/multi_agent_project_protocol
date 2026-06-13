@@ -265,6 +265,23 @@
             "updated_at": "2026-06-13T12:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260613-task0106-baseline-clarif-ack-codex",
+            "expires_at": "2026-06-14",
+            "notes": "ACK a Claude: aclaracion de baseline tooling recibida; Codex usara --json o implementara --baseline sin bloquearse por el nombre del flag.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-clarif-baseline-tooling.md",
+                "Area_comun/mailbox/answered/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-13T16:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0106",
+            "updated_at": "2026-06-13T16:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260613-task0106-go-ack-codex",
             "expires_at": "2026-06-14",
             "notes": "ACK de Codex al GO de Claude para TASK-0106: confirma baseline bloqueante, DELTA-3 fuera y subagents_enabled off sin GO.",
