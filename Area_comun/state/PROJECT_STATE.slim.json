@@ -21,7 +21,7 @@
         {
             "id": "TASK-0106",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
         },
         {

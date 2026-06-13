@@ -1,6 +1,7 @@
 param(
     [string]$Root = ".",
     [switch]$Json,
+    [switch]$Baseline,
     [switch]$Budget
 )
 
@@ -377,6 +378,124 @@ function Measure-MailboxOverhead {
     }
 }
 
+function Get-RuntimeContextPolicy {
+    param($Config)
+    $raw = $null
+    if ($Config -and $Config.runtime -and $Config.runtime.context_policy) {
+        $raw = $Config.runtime.context_policy
+    }
+    function Get-PolicyInt {
+        param($Object, [string]$Name, [int]$Default)
+        if ($Object -and ($Object.PSObject.Properties.Name -contains $Name) -and $null -ne $Object.$Name) {
+            return [int]$Object.$Name
+        }
+        return $Default
+    }
+    return [ordered]@{
+        compaction_enabled = [bool]($raw -and $raw.compaction_enabled)
+        recent_turn_summaries = Get-PolicyInt -Object $raw -Name "recent_turn_summaries" -Default 3
+        task_close_summary_max_tokens = Get-PolicyInt -Object $raw -Name "task_close_summary_max_tokens" -Default 2000
+        subagents_enabled = [bool]($raw -and $raw.subagents_enabled)
+        subagent_summary_max_tokens = Get-PolicyInt -Object $raw -Name "subagent_summary_max_tokens" -Default 2000
+        assembled_context_warn_tokens = if ($raw) { $raw.assembled_context_warn_tokens } else { $null }
+        consolidation_tool_call_count = Get-PolicyInt -Object $raw -Name "consolidation_tool_call_count" -Default 10
+        consolidation_overhead_budget_pct = Get-PolicyInt -Object $raw -Name "consolidation_overhead_budget_pct" -Default 5
+    }
+}
+
+function Get-TaskSpecPaths {
+    param(
+        [string]$RootPath,
+        $Task
+    )
+    $value = [string]$Task.spec_id
+    if ([string]::IsNullOrWhiteSpace($value) -or $value.ToLowerInvariant() -eq "none") {
+        return @()
+    }
+    $normalized = $value.Replace("\", "/")
+    if ($normalized.EndsWith(".md") -or $normalized.Contains("/")) {
+        return @($normalized)
+    }
+    $specDir = Join-Path $RootPath "Area_comun/specs"
+    return @(Get-ChildItem -Path $specDir -File -Filter "$normalized*.md" -ErrorAction SilentlyContinue |
+        Sort-Object Name |
+        ForEach-Object { Get-RelativePath -RootPath $RootPath -FullPath $_.FullName })
+}
+
+function Measure-TaskContextFiles {
+    param(
+        [string]$RootPath,
+        [array]$Paths,
+        [int]$Divisor
+    )
+    $seen = @{}
+    $files = @()
+    foreach ($relative in @($Paths | Sort-Object)) {
+        $text = ([string]$relative).Replace("\", "/")
+        if ([string]::IsNullOrWhiteSpace($text) -or $seen.ContainsKey($text)) {
+            continue
+        }
+        $seen[$text] = $true
+        $path = Join-Path $RootPath $text
+        if (Test-Path $path -PathType Leaf) {
+            $files += New-FileEntry -RootPath $RootPath -Path $path -Divisor $Divisor
+        }
+    }
+    $totalChars = ($files | Measure-Object -Property chars -Sum).Sum
+    $totalTokens = ($files | Measure-Object -Property tokens -Sum).Sum
+    if ($null -eq $totalChars) { $totalChars = 0 }
+    if ($null -eq $totalTokens) { $totalTokens = 0 }
+    return [ordered]@{
+        files = $files
+        total_chars = [int]$totalChars
+        total_tokens = [int]$totalTokens
+    }
+}
+
+function Measure-TurnContext {
+    param(
+        [string]$RootPath,
+        $Config,
+        [int]$Divisor
+    )
+    $taskDoc = Read-JsonFile -Path (Join-Path $RootPath "Area_comun/state/TASK_INDEX.json")
+    $tasks = @()
+    if ($taskDoc -and $taskDoc.tasks) {
+        $tasks = @($taskDoc.tasks | Where-Object { @("ready", "claimed", "in_progress", "in_review", "blocked") -contains ([string]$_.status).ToLowerInvariant() })
+    }
+    $compactSources = $DefaultSlimColdstartGlobs
+    if ($Config -and $Config.token_cost -and $Config.token_cost.coldstart_globs) {
+        $compactSources = @($Config.token_cost.coldstart_globs)
+    }
+    $entries = @()
+    foreach ($task in $tasks) {
+        $specs = @(Get-TaskSpecPaths -RootPath $RootPath -Task $task)
+        $compact = Measure-TaskContextFiles -RootPath $RootPath -Paths @($compactSources + $specs) -Divisor $Divisor
+        $legacy = Measure-TaskContextFiles -RootPath $RootPath -Paths @($DefaultColdstartGlobs + $specs) -Divisor $Divisor
+        $entries += [pscustomobject][ordered]@{
+            task_id = $task.id
+            status = $task.status
+            with_compaction = $compact
+            without_compaction = $legacy
+            delta_tokens = [int]($legacy.total_tokens - $compact.total_tokens)
+            delta_chars = [int]($legacy.total_chars - $compact.total_chars)
+        }
+    }
+    $withTokens = ($entries | ForEach-Object { $_.with_compaction.total_tokens } | Measure-Object -Sum).Sum
+    $withoutTokens = ($entries | ForEach-Object { $_.without_compaction.total_tokens } | Measure-Object -Sum).Sum
+    $deltaTokens = ($entries | ForEach-Object { $_.delta_tokens } | Measure-Object -Sum).Sum
+    if ($null -eq $withTokens) { $withTokens = 0 }
+    if ($null -eq $withoutTokens) { $withoutTokens = 0 }
+    if ($null -eq $deltaTokens) { $deltaTokens = 0 }
+    return [ordered]@{
+        context_policy = Get-RuntimeContextPolicy -Config $Config
+        tasks = $entries
+        total_with_compaction_tokens = [int]$withTokens
+        total_without_compaction_tokens = [int]$withoutTokens
+        total_delta_tokens = [int]$deltaTokens
+    }
+}
+
 function Measure-ContextCost {
     param([string]$RootPath)
     $config = Read-JsonFile -Path (Join-Path $RootPath "protocol.config.json")
@@ -398,6 +517,7 @@ function Measure-ContextCost {
         cold_start_modes = Measure-ColdStartModes -RootPath $RootPath -Config $config -Divisor $divisor
         dead_weight = Measure-DeadWeight -RootPath $RootPath
         mailbox_overhead = Measure-MailboxOverhead -RootPath $RootPath -Divisor $divisor
+        turn_context = Measure-TurnContext -RootPath $RootPath -Config $config -Divisor $divisor
         budget = [ordered]@{
             cold_start_tokens = $budgetValue
             exceeded = [bool]($null -ne $budgetValue -and $coldStart.total_tokens -gt $budgetValue)
@@ -446,6 +566,13 @@ function Write-HumanReport {
 
 $resolvedRoot = (Resolve-Path $Root).Path
 $result = Measure-ContextCost -RootPath $resolvedRoot
+if ($Baseline) {
+    $Json = $true
+    $result["baseline"] = [ordered]@{
+        schema_version = "context_baseline.v1"
+        measured_with = "measure_context_cost"
+    }
+}
 if ($Json) {
     $result | ConvertTo-Json -Depth 20
 } else {

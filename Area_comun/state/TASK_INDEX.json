@@ -427,7 +427,7 @@
                 "protocol.config.template.json"
             ],
             "spec_id": "SPEC-0078",
-            "status": "ready",
+            "status": "in_review",
             "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)",
             "type": "implementation",
             "updated_at": "2026-06-13"

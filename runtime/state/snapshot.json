@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4fe82041da73d447c6411b7e697d3f841356ae4f246f28cf3b6900affe1001f2",
+  "canonical_hash": "073821390e40e3657b12d80e3edec5dd1a18ede820d9e403b8542ac9bb1aa785",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -123,6 +123,7 @@
       "CLAIM-20260613-task0105-handoff-fix-codex": 1,
       "CLAIM-20260613-task0105-mailbox-hygiene-codex": 1,
       "CLAIM-20260613-task0106-baseline-clarif-ack-codex": 1,
+      "CLAIM-20260613-task0106-codex": 1,
       "CLAIM-20260613-task0106-go-ack-codex": 1,
       "CLAIM-20260613-task0109-voz-codex": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
@@ -173,12 +174,12 @@
       "TASK-0103": 6,
       "TASK-0104": 2,
       "TASK-0105": 6,
-      "TASK-0106": 6,
+      "TASK-0106": 9,
       "TASK-0109": 3,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 397,
+    "events_applied": 401,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -464,6 +465,8 @@
       "ledger-op:auto-claim:TASK-0103:CLAIM-20260613-task0103-codex:task-status": 355,
       "ledger-op:auto-claim:TASK-0105:CLAIM-20260613-task0105-codex:claim-acquire": 370,
       "ledger-op:auto-claim:TASK-0105:CLAIM-20260613-task0105-codex:task-status": 371,
+      "ledger-op:auto-claim:TASK-0106:CLAIM-20260613-task0106-codex:claim-acquire": 398,
+      "ledger-op:auto-claim:TASK-0106:CLAIM-20260613-task0106-codex:task-status": 399,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-release": 9,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 8,
       "ledger-op:handoff-release:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-release": 33,
@@ -486,6 +489,8 @@
       "ledger-op:handoff-release:TASK-0103:CLAIM-20260613-task0103-codex:task-status": 356,
       "ledger-op:handoff-release:TASK-0105:CLAIM-20260613-task0105-codex:claim-release": 373,
       "ledger-op:handoff-release:TASK-0105:CLAIM-20260613-task0105-codex:task-status": 372,
+      "ledger-op:handoff-release:TASK-0106:CLAIM-20260613-task0106-codex:claim-release": 401,
+      "ledger-op:handoff-release:TASK-0106:CLAIM-20260613-task0106-codex:task-status": 400,
       "mailbox-hygiene:task0089-go-status:claim-acquire": 113,
       "mailbox-hygiene:task0089-go-status:claim-release": 114,
       "operator-memory-rule-20260608:claim-acquire": 14,
@@ -590,5 +595,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 397
+  "up_to_seq": 401
 }

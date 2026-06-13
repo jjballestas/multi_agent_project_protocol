@@ -68,6 +68,18 @@
       "activation_decision": "",
       "approved_by": "",
       "approved_at": ""
+    },
+    "context_policy": {
+      "compaction_enabled": false,
+      "recent_turn_summaries": 3,
+      "task_close_summary_max_tokens": 2000,
+      "subagents_enabled": false,
+      "subagent_summary_max_tokens": 2000,
+      "assembled_context_warn_tokens": null,
+      "consolidation_trigger": "min(time, volume, tokens)",
+      "consolidation_interval_minutes": 30,
+      "consolidation_tool_call_count": 10,
+      "consolidation_overhead_budget_pct": 5
     }
   },
   "event_auth": {

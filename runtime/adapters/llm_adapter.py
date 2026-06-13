@@ -72,6 +72,19 @@ def build_prompt(*, context: ContextPack, root: Path) -> str:
     for spec_path in context.spec_paths:
         sections.append(f"--- file: {spec_path} ---")
         sections.append(context_file(root, spec_path))
+    if context.context_policy and context.context_policy.get("compaction_enabled") is True:
+        sections.extend(
+            [
+                "--- runtime context policy ---",
+                f"context_sources: {json.dumps(list(context.context_sources), ensure_ascii=False)}",
+                f"assembled_context_tokens: {context.assembled_context_tokens}",
+                f"compaction_warning: {json.dumps(context.compaction_warning)}",
+                f"compaction_fallback: {json.dumps(context.compaction_fallback)}",
+                f"rolling_summary: {json.dumps(context.rolling_summary or {}, ensure_ascii=False, sort_keys=True)}",
+                f"recent_turn_summaries: {json.dumps(list(context.turn_summaries), ensure_ascii=False, sort_keys=True)}",
+                f"consolidation: {json.dumps(context.consolidation or {}, ensure_ascii=False, sort_keys=True)}",
+            ]
+        )
     return "\n".join(sections)
 
 

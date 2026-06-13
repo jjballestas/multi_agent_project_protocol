@@ -20,6 +20,14 @@ class ContextPack:
     decision_ids: tuple[str, ...] = ()
     replay_report_path: Path | None = None
     turn_index: int = 0
+    context_sources: tuple[str, ...] = ()
+    turn_summaries: tuple[dict[str, Any], ...] = ()
+    rolling_summary: dict[str, Any] | None = None
+    context_policy: dict[str, Any] | None = None
+    assembled_context_tokens: int = 0
+    compaction_warning: bool = False
+    compaction_fallback: bool = False
+    consolidation: dict[str, Any] | None = None
 
 
 class AgentAdapter(Protocol):

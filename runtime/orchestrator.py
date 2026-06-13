@@ -88,9 +88,85 @@ TURN_SCHEMA_KEYS = {
     "next_hint",
 }
 
+DEFAULT_CONTEXT_POLICY = {
+    "compaction_enabled": False,
+    "recent_turn_summaries": 3,
+    "task_close_summary_max_tokens": 2000,
+    "subagents_enabled": False,
+    "subagent_summary_max_tokens": 2000,
+    "assembled_context_warn_tokens": None,
+    "consolidation_trigger": "min(time, volume, tokens)",
+    "consolidation_interval_minutes": 30,
+    "consolidation_tool_call_count": 10,
+    "consolidation_overhead_budget_pct": 5,
+}
+
+FULL_STATE_CONTEXT_PATHS = {
+    "Area_comun/state/CLAIMS.json",
+    "Area_comun/state/PROJECT_STATE.json",
+    "Area_comun/state/TASK_INDEX.json",
+    "runtime/state/events.jsonl",
+}
+SLIM_CONTEXT_PATHS = (
+    "AGENTS.md",
+    "Area_comun/README.md",
+    "Area_comun/protocol/TASK_PROTOCOL.md",
+    "Area_comun/state/PROJECT_STATE.slim.json",
+    "Area_comun/state/TASK_INDEX.slim.json",
+    "Area_comun/state/CLAIMS.slim.json",
+)
+
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def token_count(text: str, divisor: int = 4) -> int:
+    return len(str(text or "")) // max(int(divisor or 4), 1)
+
+
+def runtime_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    runtime = (config or {}).get("runtime")
+    return runtime if isinstance(runtime, dict) else {}
+
+
+def context_policy(config: dict[str, Any] | None) -> dict[str, Any]:
+    raw = runtime_config(config).get("context_policy")
+    policy = dict(DEFAULT_CONTEXT_POLICY)
+    if isinstance(raw, dict):
+        policy.update(raw)
+    return policy
+
+
+def positive_int(value: Any, default: int | None = None) -> int | None:
+    if value in (None, ""):
+        return default
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed >= 0 else default
+
+
+def compact_context_sources(config: dict[str, Any] | None) -> tuple[str, ...]:
+    token_config = (config or {}).get("token_cost") if isinstance((config or {}).get("token_cost"), dict) else {}
+    configured = token_config.get("coldstart_globs") if isinstance(token_config, dict) else None
+    sources = list(configured or SLIM_CONTEXT_PATHS)
+    clean: list[str] = []
+    for source in sources:
+        normalized = normalize_scope_path(source)
+        if not normalized or normalized in FULL_STATE_CONTEXT_PATHS:
+            continue
+        if normalized not in clean:
+            clean.append(normalized)
+    return tuple(clean)
+
+
+def read_text_if_exists(root: Path, relative: str) -> str:
+    path = root / normalize_scope_path(relative)
+    if not path.exists() or not path.is_file():
+        return ""
+    return path.read_text(encoding="utf-8-sig")
 
 
 def runtime_enabled(root: Path) -> bool:
@@ -127,6 +203,172 @@ def build_context(
         replay_report_path=replay_report_path,
         turn_index=turn_index,
     )
+
+
+def estimate_context_tokens(root: Path, context: ContextPack, *, divisor: int = 4) -> int:
+    chunks = [
+        json.dumps(context.unit or {}, ensure_ascii=False, sort_keys=True),
+        json.dumps(context.task or {}, ensure_ascii=False, sort_keys=True),
+        json.dumps(list(context.decision_ids), ensure_ascii=False),
+        json.dumps(list(context.turn_summaries), ensure_ascii=False, sort_keys=True),
+        json.dumps(context.rolling_summary or {}, ensure_ascii=False, sort_keys=True),
+    ]
+    for source in context.context_sources:
+        chunks.append(read_text_if_exists(root, source))
+    for spec_path in context.spec_paths:
+        chunks.append(read_text_if_exists(root, spec_path))
+    return token_count("\n".join(chunks), divisor)
+
+
+def build_turn_context(
+    *,
+    root: Path,
+    state: dict[str, Any],
+    unit: dict[str, Any] | None,
+    replay_report_path: Path | None,
+    turn_index: int,
+    config: dict[str, Any] | None = None,
+    runlog: RunLog | None = None,
+) -> ContextPack:
+    base = build_context(state=state, unit=unit, replay_report_path=replay_report_path, turn_index=turn_index)
+    policy = context_policy(config)
+    if policy.get("compaction_enabled") is not True:
+        return base
+
+    task_id = str((base.task or {}).get("id") or (unit or {}).get("task_id") or "none")
+    recent_limit = positive_int(policy.get("recent_turn_summaries"), 3) or 0
+    token_config = (config or {}).get("token_cost") if isinstance((config or {}).get("token_cost"), dict) else {}
+    divisor = positive_int((token_config or {}).get("chars_per_token"), 4) or 4
+    compacted = (
+        runlog.compacted_context(
+            task_id=task_id,
+            recent_limit=recent_limit,
+            consolidation_tool_call_count=positive_int(policy.get("consolidation_tool_call_count")),
+            accumulated_token_limit=positive_int(policy.get("assembled_context_warn_tokens")),
+        )
+        if runlog is not None
+        else {"recent": [], "rolling_summary": None, "triggered": False, "triggered_by": []}
+    )
+    context = ContextPack(
+        unit=base.unit,
+        task=base.task,
+        spec_paths=base.spec_paths,
+        decision_ids=base.decision_ids,
+        replay_report_path=base.replay_report_path,
+        turn_index=base.turn_index,
+        context_sources=compact_context_sources(config),
+        turn_summaries=tuple(compacted.get("recent") or []),
+        rolling_summary=compacted.get("rolling_summary"),
+        context_policy=policy,
+        consolidation={
+            "triggered": bool(compacted.get("triggered")),
+            "triggered_by": list(compacted.get("triggered_by") or []),
+            "run_log": compacted.get("run_log"),
+            "tool_result_count": compacted.get("tool_result_count", 0),
+            "accumulated_tokens": compacted.get("accumulated_tokens", 0),
+            "overhead_budget_pct": policy.get("consolidation_overhead_budget_pct"),
+        },
+    )
+    assembled_tokens = estimate_context_tokens(root, context, divisor=divisor)
+    warn_threshold = positive_int(policy.get("assembled_context_warn_tokens"))
+    warning = warn_threshold is not None and assembled_tokens > warn_threshold
+    if not warning:
+        return ContextPack(**{**context.__dict__, "assembled_context_tokens": assembled_tokens})
+
+    fallback_context = ContextPack(
+        unit=context.unit,
+        task=context.task,
+        spec_paths=context.spec_paths,
+        decision_ids=context.decision_ids,
+        replay_report_path=context.replay_report_path,
+        turn_index=context.turn_index,
+        context_sources=context.context_sources,
+        turn_summaries=(),
+        rolling_summary=context.rolling_summary
+        or {
+            "task_id": task_id,
+            "summary": "Fallback context: recent turn summaries omitted after assembled_context_tokens exceeded threshold.",
+            "changed_paths": [],
+            "source_turns": [],
+        },
+        context_policy=policy,
+        consolidation={**(context.consolidation or {}), "fallback": True},
+        compaction_warning=True,
+        compaction_fallback=True,
+    )
+    return ContextPack(**{**fallback_context.__dict__, "assembled_context_tokens": estimate_context_tokens(root, fallback_context, divisor=divisor)})
+
+
+def validate_task_close_summary(report: dict[str, Any], config: dict[str, Any] | None) -> list[str]:
+    policy = context_policy(config)
+    if policy.get("compaction_enabled") is not True:
+        return []
+    task_status = (report.get("transitions") or {}).get("task_status") or {}
+    if task_status.get("to") != "done":
+        return []
+    summary = str(report.get("task_close_summary") or "").strip()
+    if not summary:
+        return ["context_policy: task_close_summary is required when moving a task to done"]
+    max_tokens = positive_int(policy.get("task_close_summary_max_tokens"), 2000) or 2000
+    if token_count(summary) > max_tokens:
+        return [f"context_policy: task_close_summary exceeds {max_tokens} tokens"]
+    return []
+
+
+def delegate_subagent(
+    *,
+    subtask: dict[str, Any],
+    context_pack: ContextPack,
+    root: Path,
+    config: dict[str, Any] | None,
+    report: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    policy = context_policy(config)
+    if policy.get("subagents_enabled") is not True:
+        return {"ok": False, "reason": "subagents_disabled"}
+    report = dict(report or {})
+    max_tokens = positive_int(policy.get("subagent_summary_max_tokens"), 2000) or 2000
+    divisor = positive_int(((config or {}).get("token_cost") or {}).get("chars_per_token"), 4) or 4
+    summary = str(report.get("summary") or subtask.get("summary") or "").strip()
+    limit_chars = max_tokens * divisor
+    truncated = len(summary) > limit_chars
+    if truncated:
+        summary = summary[:limit_chars].rstrip()
+    return {
+        "ok": True,
+        "summary": summary,
+        "summary_tokens": token_count(summary, divisor),
+        "truncated": truncated,
+        "changed_paths": list(report.get("changed_paths") or []),
+        "context": {
+            "unit": subtask,
+            "task": subtask,
+            "spec_paths": list(context_pack.spec_paths),
+            "decision_ids": list(context_pack.decision_ids),
+            "context_sources": list(context_pack.context_sources),
+        },
+    }
+
+
+def context_metadata(context: ContextPack) -> dict[str, Any]:
+    if not context.context_policy:
+        return {}
+    return {
+        "context_sources": list(context.context_sources),
+        "assembled_context_tokens": context.assembled_context_tokens,
+        "compaction_warning": context.compaction_warning,
+        "compaction_fallback": context.compaction_fallback,
+        "rolling_summary": context.rolling_summary,
+        "recent_turn_summaries": list(context.turn_summaries),
+        "consolidation": context.consolidation,
+    }
+
+
+def attach_context_metadata(entry: dict[str, Any], context: ContextPack) -> dict[str, Any]:
+    metadata = context_metadata(context)
+    if metadata:
+        entry["context_policy"] = metadata
+    return entry
 
 
 def default_run_id(reports: list[Path | None], *, adapter_name: str = "replay") -> str:
@@ -640,7 +882,15 @@ def run_loop(
             baseline_dirty = set(dirty_worktree_paths(root))
             state = load_state(root)
 
-        context = build_context(state=state, unit=unit, replay_report_path=report_path, turn_index=index)
+        context = build_turn_context(
+            root=root,
+            state=state,
+            unit=unit,
+            replay_report_path=report_path,
+            turn_index=index,
+            config=config,
+            runlog=runlog,
+        )
         trace.append("adapter")
         try:
             adapter = adapter_for_turn(
@@ -654,6 +904,7 @@ def run_loop(
             )
         except ValueError as exc:
             entry = turn_entry(turn=index, trace=trace, unit=unit, outcome="rejected", errors=[str(exc)], duration_ms=clock_fixed)
+            entry = attach_context_metadata(entry, context)
             entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
@@ -677,6 +928,7 @@ def run_loop(
         clean_report = schema_report(report)
         trace.append("validate")
         errors = validate_turn(clean_report, root)
+        errors.extend(validate_task_close_summary(clean_report, config))
         if errors:
             entry = turn_entry(
                 turn=index,
@@ -687,6 +939,7 @@ def run_loop(
                 errors=errors,
                 duration_ms=clock_fixed,
             )
+            entry = attach_context_metadata(entry, context)
             entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
@@ -697,6 +950,7 @@ def run_loop(
         if human_gate:
             entry = turn_entry(turn=index, trace=trace, unit=unit, report=report, duration_ms=clock_fixed)
             entry["human_required"] = True
+            entry = attach_context_metadata(entry, context)
             entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
@@ -717,6 +971,7 @@ def run_loop(
             )
             if budget_warning:
                 entry["budget_warning"] = budget_warning
+            entry = attach_context_metadata(entry, context)
             entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
             runlog.append(entry)
             turns.append(entry)
@@ -737,6 +992,7 @@ def run_loop(
                 duration_ms=clock_fixed,
             )
             entry = with_pre_apply_claim_cleanup(root, claim_result, entry)
+            entry = attach_context_metadata(entry, context)
             runlog.append(entry)
             turns.append(entry)
             break
@@ -762,6 +1018,7 @@ def run_loop(
             ]
         if budget_warning:
             entry["budget_warning"] = budget_warning
+        entry = attach_context_metadata(entry, context)
         runlog.append(entry)
         turns.append(entry)
         budget.consume(cost_tokens=cost_tokens)

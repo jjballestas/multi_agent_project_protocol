@@ -204,6 +204,77 @@ def measure_mailbox_overhead(root: Path, divisor: int) -> dict[str, Any]:
     }
 
 
+def runtime_context_policy(config: dict[str, Any]) -> dict[str, Any]:
+    runtime = config.get("runtime") if isinstance(config.get("runtime"), dict) else {}
+    raw = runtime.get("context_policy") if isinstance(runtime.get("context_policy"), dict) else {}
+    return {
+        "compaction_enabled": bool(raw.get("compaction_enabled") is True),
+        "recent_turn_summaries": int(raw.get("recent_turn_summaries") or 3),
+        "task_close_summary_max_tokens": int(raw.get("task_close_summary_max_tokens") or 2000),
+        "subagents_enabled": bool(raw.get("subagents_enabled") is True),
+        "subagent_summary_max_tokens": int(raw.get("subagent_summary_max_tokens") or 2000),
+        "assembled_context_warn_tokens": raw.get("assembled_context_warn_tokens"),
+        "consolidation_tool_call_count": int(raw.get("consolidation_tool_call_count") or 10),
+        "consolidation_overhead_budget_pct": int(raw.get("consolidation_overhead_budget_pct") or 5),
+    }
+
+
+def task_spec_paths(root: Path, task: dict[str, Any]) -> list[str]:
+    value = str(task.get("spec_id") or "").strip()
+    if not value or value.lower() == "none":
+        return []
+    if value.endswith(".md") or "/" in value or "\\" in value:
+        return [value.replace("\\", "/")]
+    spec_dir = root / "Area_comun/specs"
+    return [path.relative_to(root).as_posix() for path in sorted(spec_dir.glob(f"{value}*.md"))]
+
+
+def task_context_file_tokens(root: Path, paths: list[str], divisor: int) -> dict[str, Any]:
+    files: list[dict[str, Any]] = []
+    for relative in sorted(dict.fromkeys(paths)):
+        path = root / relative
+        if not path.exists() or not path.is_file():
+            continue
+        files.append(file_entry(root, path, divisor))
+    return {
+        "files": files,
+        "total_chars": sum(item["chars"] for item in files),
+        "total_tokens": sum(item["tokens"] for item in files),
+    }
+
+
+def measure_turn_context(root: Path, config: dict[str, Any], divisor: int) -> dict[str, Any]:
+    tasks = [
+        task
+        for task in load_json(root / "Area_comun/state/TASK_INDEX.json").get("tasks") or []
+        if str(task.get("status") or "").lower() in {"ready", "claimed", "in_progress", "in_review", "blocked"}
+    ]
+    compact_sources = list((config.get("token_cost") or {}).get("coldstart_globs") or DEFAULT_SLIM_COLDSTART_GLOBS)
+    legacy_sources = list(DEFAULT_COLDSTART_GLOBS)
+    entries: list[dict[str, Any]] = []
+    for task in tasks:
+        specs = task_spec_paths(root, task)
+        compact = task_context_file_tokens(root, [*compact_sources, *specs], divisor)
+        legacy = task_context_file_tokens(root, [*legacy_sources, *specs], divisor)
+        entries.append(
+            {
+                "task_id": task.get("id"),
+                "status": task.get("status"),
+                "with_compaction": compact,
+                "without_compaction": legacy,
+                "delta_tokens": legacy["total_tokens"] - compact["total_tokens"],
+                "delta_chars": legacy["total_chars"] - compact["total_chars"],
+            }
+        )
+    return {
+        "context_policy": runtime_context_policy(config),
+        "tasks": entries,
+        "total_with_compaction_tokens": sum(item["with_compaction"]["total_tokens"] for item in entries),
+        "total_without_compaction_tokens": sum(item["without_compaction"]["total_tokens"] for item in entries),
+        "total_delta_tokens": sum(item["delta_tokens"] for item in entries),
+    }
+
+
 def measure(root: Path) -> dict[str, Any]:
     config = load_json(root / "protocol.config.json")
     token_config = config.get("token_cost") or {}
@@ -216,6 +287,7 @@ def measure(root: Path) -> dict[str, Any]:
         "cold_start_modes": measure_cold_start_modes(root, config, divisor),
         "dead_weight": measure_dead_weight(root),
         "mailbox_overhead": measure_mailbox_overhead(root, divisor),
+        "turn_context": measure_turn_context(root, config, divisor),
         "budget": {
             "cold_start_tokens": budget,
             "exceeded": bool(budget is not None and measure_cold_start(root, config, divisor)["total_tokens"] > int(budget)),
@@ -260,6 +332,13 @@ def print_human(result: dict[str, Any], show_budget: bool) -> None:
     print(f"  messages: {mailbox['message_count']}")
     print(f"  frontmatter/body ratio: {mailbox['frontmatter_to_body_ratio']}")
     print(f"  frontmatter_percent: {mailbox['frontmatter_percent']}%")
+    turn_context = result.get("turn_context") or {}
+    if turn_context:
+        print("")
+        print("Turn context")
+        print(f"  with_compaction_tokens: {turn_context['total_with_compaction_tokens']}")
+        print(f"  without_compaction_tokens: {turn_context['total_without_compaction_tokens']}")
+        print(f"  delta_tokens: {turn_context['total_delta_tokens']}")
     if show_budget and result["budget"]["cold_start_tokens"] is not None:
         budget = result["budget"]["cold_start_tokens"]
         if result["budget"]["exceeded"]:
@@ -272,11 +351,19 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Measure deterministic context cost.")
     parser.add_argument("--root", default=".", help="Repository or instance root.")
     parser.add_argument("--json", action="store_true", dest="json_output", help="Emit parseable JSON.")
+    parser.add_argument("--baseline", action="store_true", help="Emit parseable baseline JSON (alias for --json with baseline metadata).")
     parser.add_argument("--budget", action="store_true", help="Evaluate token_cost.budget as warning.")
+    parser.add_argument("--output", help="Write JSON output to this path.")
     args = parser.parse_args()
 
     result = measure(Path(args.root).resolve())
-    if args.json_output:
+    if args.baseline:
+        result["baseline"] = {"schema_version": "context_baseline.v1", "measured_with": "measure_context_cost"}
+    if args.output:
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+    elif args.json_output or args.baseline:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
         print_human(result, args.budget)

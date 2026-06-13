@@ -155,6 +155,14 @@ se **decide por medicion propia** del tamano real de resumenes (`measure_context
 aqui** antes del cierre de TASK-0106. 2000 conservador es defendible si la medicion no muestra ganancia
 clara al reducir.
 
+**Justificacion TASK-0106 (baseline 2026-06-13):** `Area_comun/artifacts/baseline-context-20260613.json`
+fue generado con `python scripts/measure_context_cost.py --root . --baseline` antes de congelar
+umbrales/cadencias. La medicion muestra cold-start slim `9346` tokens vs full `19676` (delta `10330`) y
+turn-context con compaction `22092` vs legacy `42752` (delta `20660`; TASK-0106: `13598` vs `23928`;
+TASK-0109: `8494` vs `18824`). No hay todavia evidencia propia de que bajar los summaries a `1200` mejore
+el objetivo sin perdida de recall; por tanto se mantiene `2000` como limite conservador, medido y
+tuneable, y los goldens fijan umbrales locales de caso en vez de cifras SOTA.
+
 ### 2.6 Edicion atomica de memoria de protocolo (DELTA-3, Future Work, TASK-0107)
 
 **FUERA del alcance de TASK-0106.** Patron confirmado (arXiv:2603.18718 MemMA: ops ADD/UPDATE/DELETE; se
