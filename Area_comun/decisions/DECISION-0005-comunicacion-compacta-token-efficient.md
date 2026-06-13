@@ -104,3 +104,27 @@ sería **MAJOR** y requeriría aprobación humana. Neutral de dominio.
 ## Alternativas consideradas
 - **Límites rígidos de longitud:** descartado ahora (frágil, rompería históricos) → posible MAJOR futuro.
 - **Solo guía sin template/códigos:** insuficiente; no da estructura accionable ni validable.
+
+## Addendum 2026-06-13 — Narración mínima intra-ejecución
+
+**Ratificado:** 2026-06-13 (operador humano + Claude architect). Deriva de **TASK-0110** (medición A/B).
+SemVer: MINOR (publicado en v1.3.0). Aditivo, neutral de dominio.
+
+**Regla (por comportamiento):** los agentes **minimizan la narración de proceso intra-ejecución**
+(play-by-play de pasos: "voy a…", "ahora abro…", discusión paso a paso). El **reporte/handoff final**
+debe quedar **autocontenido y auditable**, y prevalece sobre la narración intermedia.
+
+**Alcance acotado (innegociable):** aplica a la narración de **proceso** durante la ejecución. **NO
+aplica** a contenido sustantivo — análisis, voces de revisión, decisiones, specs y explicaciones donde el
+razonamiento **es** el entregable no se recortan. La brevedad **nunca** sacrifica auditabilidad ni
+completitud del reporte final (preserva **DECISION-0018/0020** y la **regla 7 de CLAUDE.md**).
+
+**Evidencia (con caveats):** TASK-0110 (A/B, medición no asunción — DECISION-0008) mostró que el estilo
+"reporte final, sin narrar pasos" reduce **sustancialmente** el output **sin perder corrección ni
+cobertura conceptual** (T1: goldens OK en ambas variantes; T2: las mismas críticas; el verboso solo añade
+desarrollo, ningún punto sustantivo extra). **Caveats:** las tareas del test son diminutas, así que el
+ahorro medido es un **techo** (en tareas grandes será menor); output **estimado** por proxy (chars/4);
+1 corrida representativa por celda. **No se registra un porcentaje como promesa.**
+
+**Relación:** extiende esta DECISION-0005 (comunicación compacta) a la narración intra-sesión; converge con
+la regla 7 de CLAUDE.md (reporte de cierre) y el note-taking de DECISION-0030.

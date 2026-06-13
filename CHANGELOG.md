@@ -17,6 +17,22 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.3.0] — 2026-06-13
+
+**Minimal intra-execution narration (DECISION-0005 addendum).** Additive and domain-neutral over 1.2.0;
+a behavioral style rule, no code or format change. Derived from the TASK-0110 A/B measurement
+(measure, don't assume — DECISION-0008).
+
+### Added
+- **Minimal-narration golden rule (DECISION-0005 addendum 2026-06-13).** Agents minimize step-by-step
+  process narration during execution; the final report/handoff stays self-contained and auditable and
+  prevails. Bounded scope: does NOT apply to substantive content (analysis, review voices, specs,
+  decisions, where the reasoning IS the deliverable); brevity never sacrifices completeness or
+  auditability (preserves DECISION-0018/0020 and CLAUDE.md rule 7). Landed as a `Collaboration Protocol`
+  bullet in `AGENTS.md` §7 and `AGENTS.template.md` §7. Evidence: TASK-0110 (reduces output substantially
+  without loss of correctness/coverage; caveats: tiny tasks = ceiling, output proxy chars/4, one run per
+  cell — no percentage recorded as a promise).
+
 ## [1.2.0] — 2026-06-13
 
 **Cross-signed tamper-evidence (DECISION-0029) + slim-views just-in-time cold-start

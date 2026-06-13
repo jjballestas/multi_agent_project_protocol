@@ -8,7 +8,7 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-09 · Maintainer: Claude (architect) + human owner. Released version: v1.1.0.
+> Last updated: 2026-06-13 · Maintainer: Claude (architect) + human owner. Released version: v1.3.0.
 
 ## 0. How to Start
 
@@ -142,6 +142,10 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   `submit_intent`** -- otherwise the first manual edit after the flip hard-fails and breaks the peer loop;
   the switch is therefore a coordinated re-genesis + flip with a rehearsed rollback, never a unilateral
   toggle. Coordination-tier instances keep the manual ledger flow.
+- **Minimal narration (DECISION-0005 addendum 2026-06-13):** agents minimize intra-execution process
+  narration (step-by-step play-by-play); the final report/handoff stays self-contained and auditable and
+  prevails. Does NOT apply to substantive content (analysis, review voices, specs, decisions, where the
+  reasoning IS the deliverable); brevity never sacrifices completeness or auditability.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map

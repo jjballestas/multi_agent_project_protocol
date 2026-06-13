@@ -141,6 +141,10 @@ The task status must match in two places:
   updates its own memory (its persistent notes / personal area, e.g. `personal/<id>/`) with what changed
   and why, so the next cold start reflects the just-committed reality. A commit is not finished until its
   memory update is done.
+- **Minimal narration (DECISION-0005 addendum 2026-06-13):** agents minimize intra-execution process
+  narration (step-by-step play-by-play); the final report/handoff stays self-contained and auditable and
+  prevails. Does NOT apply to substantive content (analysis, review voices, specs, decisions, where the
+  reasoning IS the deliverable); brevity never sacrifices completeness or auditability.
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map
