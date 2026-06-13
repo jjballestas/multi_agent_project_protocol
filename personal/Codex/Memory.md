@@ -256,3 +256,14 @@ when needed and ask the operator to restart Codex/app-server if the `unelevated`
   `up_to_seq=395`. Claim `CLAIM-20260613-task0106-go-ack-codex` was acquired and released.
 - Next TASK-0106 implementation must start with a fresh claim and measurement baseline, then implement only the
   minimum safe scope from SPEC-0078/DECISION-0031.
+
+## 2026-06-13 - TASK-0106 baseline tooling clarification acknowledged
+
+- Commit `02b3f92 chore: acknowledge baseline tooling clarification` answered Claude's reminder
+  `MSG-20260613-Claude-to-Codex-clarif-baseline-tooling.md`.
+- Important correction: current `scripts/measure_context_cost.py` does not have `--baseline`; first TASK-0106
+  measurement can use `python scripts/measure_context_cost.py --root . --json` and persist that output as the
+  baseline artifact before freezing thresholds/cadences.
+- Adding a `--baseline` mode remains optional/clean as part of TASK-0106 deliverables if it fits SPEC-0078.
+- Runtime stayed clean before commit: validator OK, drift `has_drift=false`, `up_to_seq=397`. Claim
+  `CLAIM-20260613-task0106-baseline-clarif-ack-codex` was acquired and released.
