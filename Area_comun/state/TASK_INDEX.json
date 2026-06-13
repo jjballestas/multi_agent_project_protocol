@@ -461,7 +461,7 @@
             ],
             "sdd_required": false,
             "spec_id": "none",
-            "status": "in_progress",
+            "status": "done",
             "title": "Revision adversarial SOTA del contexto del arquitecto (consolidacion multi-voz)",
             "type": "analysis",
             "updated_at": "2026-06-13"

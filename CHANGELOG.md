@@ -17,6 +17,21 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.5.0] — 2026-06-13
+
+**The architect/orchestrator can close its own analysis-tasks (DECISION-0032).** Additive over 1.4.0; a
+state-authorization relaxation scoped to `type==analysis` owned by the actor. Other task types and
+analysis-tasks owned by someone else keep requiring `implementer`.
+
+### Changed
+- **`task_status_capability` (runtime/submit_intent.py):** for `type==analysis` tasks owned by the actor,
+  transitions to `in_review`/`done`/`blocked` accept `{orchestrator, architect}` instead of requiring
+  `implementer`. Fixes the gap where the architect (no implementer capability) could not close its own
+  analysis-tasks via the standard `in_progress → in_review → done` path (seen in TASK-0109/0110). The
+  mutation still flows through `submit_intent` (single-writer, DECISION-0022); maker≠checker for
+  implementations is unchanged. Golden: `examples/analysis_close_cases/` (GC-1..GC-4). (DECISION-0032)
+- **TASK-0109 closed to `done`** via the new capability (validating the fix end-to-end).
+
 ## [1.4.0] — 2026-06-13
 
 **Measured activation of context compaction in the live instance (SPEC-0078 / TASK-0106).** Additive and

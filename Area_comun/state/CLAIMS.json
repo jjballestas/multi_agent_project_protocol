@@ -26,7 +26,7 @@
                 "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
             ],
             "started_at": "2026-06-13T15:26:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0109",
             "updated_at": "2026-06-13T15:26:00Z"
         },
@@ -92,6 +92,22 @@
             "status": "released",
             "task_id": "TASK-0110",
             "updated_at": "2026-06-13T20:16:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260613-214805-p2",
+            "expires_at": "2026-06-13",
+            "notes": "DECISION-0032 + cierre TASK-0109 via nueva capacidad.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
+            ],
+            "started_at": "2026-06-13T21:48:05Z",
+            "status": "released",
+            "task_id": "TASK-0109",
+            "updated_at": "2026-06-13T21:48:05Z"
         },
         {
             "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4173853a4f7d2c3c84299b689626d311dfbfddc78004d107db3bcd52063af922",
+  "canonical_hash": "8749c0a57aabaacdde40b79221cf5b4aebf98dad0247b8400f5e6b8875783b8f",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -108,10 +108,12 @@
       "CLAIM-20260610-task0099-resume-review-codex": 1,
       "CLAIM-20260610-task0100-register-claude": 1,
       "CLAIM-20260612-233357-prune-claude": 1,
+      "CLAIM-20260613-152600-task0109-claude": 1,
       "CLAIM-20260613-171150-sota-go-claude": 1,
       "CLAIM-20260613-184023-close-0106-claude": 1,
       "CLAIM-20260613-185303-task0110-claude": 1,
       "CLAIM-20260613-201643-close-0110": 1,
+      "CLAIM-20260613-214805-p2": 1,
       "CLAIM-20260613-coord-boundary-archive-codex": 1,
       "CLAIM-20260613-coord-claude-commit-boundary-codex": 1,
       "CLAIM-20260613-coord-claude-question-fix-codex": 1,
@@ -144,6 +146,7 @@
       "DECISION-0028": 1,
       "DECISION-0029": 4,
       "DECISION-0031": 1,
+      "DECISION-0032": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -180,12 +183,12 @@
       "TASK-0104": 2,
       "TASK-0105": 6,
       "TASK-0106": 11,
-      "TASK-0109": 3,
+      "TASK-0109": 6,
       "TASK-0110": 5,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 413,
+    "events_applied": 419,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -514,6 +517,12 @@
       "operator-memory-rule-20260608:release-helper-acquire": 15,
       "operator-memory-rule-20260608:release-helper-release": 17,
       "orchestrator:claim-acquire:TASK-0091:codex": 221,
+      "p2:2026-06-13T21:48:05Z:cl": 414,
+      "p2:2026-06-13T21:48:05Z:dec": 415,
+      "p2:2026-06-13T21:48:05Z:done": 417,
+      "p2:2026-06-13T21:48:05Z:ir": 416,
+      "p2:2026-06-13T21:48:05Z:relnew": 419,
+      "p2:2026-06-13T21:48:05Z:relold": 418,
       "protocol-state:genesis-ref:v1": 1,
       "protocol-state:regenesis-ref:d4c9f1a8f484e192d3ad7328575115919d003b8c4996174a83994e84b95acdac": 242,
       "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2,
@@ -613,5 +622,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 413
+  "up_to_seq": 419
 }
