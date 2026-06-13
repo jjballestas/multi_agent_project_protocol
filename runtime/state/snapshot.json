@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "073821390e40e3657b12d80e3edec5dd1a18ede820d9e403b8542ac9bb1aa785",
+  "canonical_hash": "3edbf0cb8528d20eadf298d1832e2adb49f23316c3d62abab866ede2b42bbf0b",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -109,6 +109,7 @@
       "CLAIM-20260610-task0100-register-claude": 1,
       "CLAIM-20260612-233357-prune-claude": 1,
       "CLAIM-20260613-171150-sota-go-claude": 1,
+      "CLAIM-20260613-184023-close-0106-claude": 1,
       "CLAIM-20260613-coord-boundary-archive-codex": 1,
       "CLAIM-20260613-coord-claude-commit-boundary-codex": 1,
       "CLAIM-20260613-coord-claude-question-fix-codex": 1,
@@ -174,12 +175,12 @@
       "TASK-0103": 6,
       "TASK-0104": 2,
       "TASK-0105": 6,
-      "TASK-0106": 9,
+      "TASK-0106": 11,
       "TASK-0109": 3,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 401,
+    "events_applied": 404,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -274,6 +275,9 @@
       "claude:task0103:metadata-fix:claim-acquire": 358,
       "claude:task0103:metadata-fix:claim-release": 360,
       "claude:task0103:metadata-fix:task-upsert": 359,
+      "close-0106:2026-06-13T18:40:23Z:claim": 402,
+      "close-0106:2026-06-13T18:40:23Z:done": 403,
+      "close-0106:2026-06-13T18:40:23Z:release": 404,
       "close-task0084:claim-acquire": 10,
       "close-task0084:claim-release": 13,
       "close-task0084:task-status": 12,
@@ -595,5 +599,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 401
+  "up_to_seq": 404
 }
