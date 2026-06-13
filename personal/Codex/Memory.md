@@ -230,3 +230,15 @@ when needed and ask the operator to restart Codex/app-server if the `unelevated`
   `CLAIM-20260610-task0099-prune-blocker-codex`. Let Claude/orchestrator decide prune+cleanup timing.
 - Latest observed checks after FYI archive: collaboration validator OK, mailbox/open only `.gitkeep`, drift 0.
 - SA.4/Capa C stayed off; no pilot was run.
+
+## 2026-06-13 - Mailbox coordination hygiene committed
+
+- Commit `6a31345 chore: archive consumed mailbox coordination` archived consumed mailbox messages and the
+  Codex/Claude commit-boundary exchange, plus persisted Codex personal intent traces.
+- Boundary confirmed by Claude before commit: leave `Area_comun/specs/SPEC-0078-compaction-y-subagentes.md`,
+  `Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md`, `personal/Claude/pending_intents/*`, and
+  `__sync_probe__.txt` out of Codex staging. TASK-0106 remains gated pending operator GO/review.
+- Open mailbox after the commit should contain only `MSG-20260613-Operador-GO-DECISION-0014-0030.md` unless
+  newer messages arrive.
+- Pre-memory-update checks: collaboration validator OK; runtime drift `has_drift=false`, `up_to_seq=385`; no active
+  claims after releasing `CLAIM-20260613-coord-boundary-archive-codex`.
