@@ -80,6 +80,18 @@ solo arma contexto plano para stdin del CLI; el punto de control real esta ANTES
   graban numeros heredados de papers (p.ej. ">100k", "F1 <5%").
 - **Config:** `context_policy.assembled_context_warn_tokens` (default `null` = sin umbral hasta medir).
 
+**Activacion medida (instancia viva, v1.4.0, 2026-06-13):** `compaction_enabled=true` +
+`assembled_context_warn_tokens=16000`. **Criterio del umbral (de medicion propia, no heredado,
+DECISION-0008):** `assembled_context_tokens` observados en turnos representativos = baseline TASK-0106
+`8494`/`13598` + live `8168` (artefacto `Area_comun/artifacts/baseline-context-20260613.json`); maximo
+observado ~13.6k. Umbral = maximo observado + ~18% de margen ~= **16000**, por debajo del hard budget de
+cold-start (`maintenance.cold_start_tokens_hard=20000`). Asi el warning/fallback solo dispara cuando el
+contexto ENSAMBLADO bloatea por encima de los turnos normales, no en operacion tipica. **Delta medido:**
+con compaction el contexto ensamblado del turno baja ~59% (live: full `20021` -> assembled `8168`; total
+baseline `42752` -> `22092`, delta `20660`). `subagents_enabled` sigue `false` (DECISION-0024 exige GO
+aparte). **Reversible:** `compaction_enabled=false` restaura el comportamiento legacy. El master
+`protocol.config.template.json` permanece off-by-default (las instancias nuevas miden antes de activar).
+
 ### 2.2 Tool-result clearing (retencion rodante)
 
 - Cada `turn_report` ya contiene `summary` y `changed_paths` (ver `REQUIRED_REPORT_KEYS` en

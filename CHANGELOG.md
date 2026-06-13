@@ -17,6 +17,26 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.4.0] — 2026-06-13
+
+**Measured activation of context compaction in the live instance (SPEC-0078 / TASK-0106).** Additive and
+reversible over 1.3.0; turns the off-by-default compaction policy ON in this instance with a threshold
+derived from our own baseline (measure, don't assume — DECISION-0008). The shipped master
+`protocol.config.template.json` stays off-by-default.
+
+### Changed
+- **`runtime.context_policy.compaction_enabled=true`** and
+  **`assembled_context_warn_tokens=16000`** in the live `protocol.config.json`. Threshold derived from the
+  observed `assembled_context_tokens` distribution (baseline TASK-0106 `8494`/`13598` + live `8168`; max
+  ~13.6k → max +~18% margin ≈ 16000, below the 20000 cold-start hard budget) so warning/fallback only
+  fires on genuine bloat. Criterion documented in SPEC-0078 §2.1-bis. Measured effect: per-turn assembled
+  context drops ~59% (full `20021` → assembled `8168`); consolidation is structural (no LLM in the hot
+  path); goldens GC-1..GC-9 green. `subagents_enabled` stays `false` (DECISION-0024 needs separate GO).
+  **Reversible:** `compaction_enabled=false` restores legacy behavior.
+
+> **Scope note.** This affects **runtime turns** (the context the runtime assembles per turn). The effect
+> on interactive sessions arrives when the loop directs turns; the loop is currently off.
+
 ## [1.3.0] — 2026-06-13
 
 **Minimal intra-execution narration (DECISION-0005 addendum).** Additive and domain-neutral over 1.2.0;
