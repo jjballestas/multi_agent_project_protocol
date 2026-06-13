@@ -11,15 +11,36 @@ import json
 import re
 import shutil
 import subprocess
+import base64
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from .eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
+    from .eventlog import (
+        EventWriter,
+        all_events,
+        attestation_signing_payload,
+        anchor_enabled,
+        canonical_hash,
+        chain_enabled,
+        compute_event_prev_hash,
+        compute_genesis_prev_hash,
+        read_protocol_config,
+    )
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
-    from eventlog import EventWriter, all_events, canonical_hash, read_protocol_config
+    from eventlog import (
+        EventWriter,
+        all_events,
+        attestation_signing_payload,
+        anchor_enabled,
+        canonical_hash,
+        chain_enabled,
+        compute_event_prev_hash,
+        compute_genesis_prev_hash,
+        read_protocol_config,
+    )
     from temp_paths import make_root_temp_dir, remove_root_temp_dir
 
 
@@ -27,6 +48,23 @@ PROTOCOL_STATE_PATHS = {
     "task_index": Path("Area_comun/state/TASK_INDEX.json"),
     "project_state": Path("Area_comun/state/PROJECT_STATE.json"),
     "claims": Path("Area_comun/state/CLAIMS.json"),
+}
+SLIM_VIEW_PATHS = {
+    "task_index_slim": Path("Area_comun/state/TASK_INDEX.slim.json"),
+    "project_state_slim": Path("Area_comun/state/PROJECT_STATE.slim.json"),
+    "claims_slim": Path("Area_comun/state/CLAIMS.slim.json"),
+}
+HOT_TASK_STATUSES = {
+    "proposed",
+    "ready",
+    "claimed",
+    "in_progress",
+    "in_review",
+    "changes_requested",
+    "qa_pending",
+    "qa_failed",
+    "architect_review",
+    "blocked",
 }
 TASK_TRANSITION_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_-]*)\s*->\s*([A-Za-z_][A-Za-z0-9_-]*)\s*$")
 SNAPSHOT_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -44,6 +82,14 @@ class ProtocolSnapshotRefError(ProtocolMaterializationError):
 
 
 class ProtocolStateDriftError(RuntimeError):
+    pass
+
+
+class ChainValidationError(RuntimeError):
+    pass
+
+
+class AgentSignatureValidationError(RuntimeError):
     pass
 
 
@@ -69,6 +115,11 @@ def event_state_enforce_enabled(config: dict[str, Any] | None) -> bool:
 def event_state_authoritative_enabled(config: dict[str, Any] | None) -> bool:
     event_state = (config or {}).get("event_state")
     return isinstance(event_state, dict) and event_state.get("authoritative") is True
+
+
+def slim_views_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("slim_views_enabled") is True
 
 
 def event_state_config_error(config: dict[str, Any] | None) -> str | None:
@@ -99,6 +150,267 @@ def event_state_config_error(config: dict[str, Any] | None) -> str | None:
             "for adoption_tier=runtime; set event_state.enabled=true or event_state.materialize=false."
         )
     return None
+
+
+def validate_chain(events: list[dict[str, Any]], config: dict[str, Any] | None, *, root: Path | None = None) -> dict[str, Any]:
+    if not chain_enabled(config):
+        return {"valid": True, "reason": "chain_disabled", "checked_events": 0}
+    ordered = list(events)
+    if not ordered:
+        return {"valid": True, "reason": "no_events", "checked_events": 0}
+    config_path = (root.resolve() / "protocol.config.json") if root is not None else Path("protocol.config.json")
+    genesis_hash = compute_genesis_prev_hash(config_path)
+    start_index = 0
+    previous_seq: int | None = None
+    previous_hash = genesis_hash
+
+    for index, event in enumerate(ordered):
+        if event.get("type") == "chain.genesis":
+            actual = str(event.get("prev_hash") or "")
+            if actual != genesis_hash:
+                return {"valid": False, "reason": "genesis mismatch", "seq": event.get("seq")}
+            start_index = index + 1
+            previous_seq = int(event.get("seq") or 0)
+            previous_hash = actual
+            break
+    else:
+        if any("prev_hash" in event for event in ordered):
+            first = ordered[0]
+            actual = str(first.get("prev_hash") or "")
+            if actual != compute_event_prev_hash(first, genesis_hash):
+                return {"valid": False, "reason": "chain.genesis_missing", "seq": first.get("seq")}
+            previous_hash = actual
+            previous_seq = int(first.get("seq") or 0)
+            start_index = 1
+        else:
+            return {"valid": False, "reason": "chain.genesis_missing", "seq": ordered[0].get("seq")}
+
+    checked = 0
+    for event in ordered[start_index:]:
+        seq = int(event.get("seq") or 0)
+        if previous_seq is not None:
+            expected_seq = previous_seq + 1
+            if seq != expected_seq:
+                if event.get("type") == "chain.archive_boundary" and seq > expected_seq:
+                    pass
+                elif seq < expected_seq:
+                    return {"valid": False, "reason": f"seq out of order at seq {seq}: expected {expected_seq}", "seq": seq}
+                else:
+                    return {"valid": False, "reason": f"gap at seq {seq}: expected {expected_seq}", "seq": seq}
+        actual = str(event.get("prev_hash") or "")
+        if not actual:
+            return {"valid": False, "reason": f"missing prev_hash at seq {seq}", "seq": seq}
+        expected = compute_event_prev_hash(event, previous_hash)
+        if actual != expected:
+            return {"valid": False, "reason": f"corruption at seq {seq}: hash mismatch", "seq": seq}
+        previous_hash = actual
+        previous_seq = seq
+        checked += 1
+    return {"valid": True, "reason": "chain valid", "checked_events": checked, "head": previous_hash}
+
+
+def agent_signatures_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("agent_signatures_enabled") is True
+
+
+def signature_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    event_state = (config or {}).get("event_state")
+    if not isinstance(event_state, dict):
+        return {}
+    nested = event_state.get("signature_config")
+    if isinstance(nested, dict):
+        return nested
+    return {}
+
+
+def agent_registry_from_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    registry = (config or {}).get("agent_registry")
+    if isinstance(registry, dict) and isinstance(registry.get("agents"), list):
+        return registry
+    roles = (config or {}).get("agent_roles") if isinstance((config or {}).get("agent_roles"), dict) else {}
+    agents = []
+    if roles:
+        role_caps = {"architect": ["orchestrator", "reviewer"], "implementer": ["implementer"], "human_owner": ["human"]}
+        for role, agent_id in sorted(roles.items()):
+            if str(agent_id or "").strip():
+                agents.append({"id": str(agent_id), "enabled": True, "capabilities": role_caps.get(role, [])})
+    return {"enabled": True, "agents": agents}
+
+
+def attestation_payload(event: dict[str, Any]) -> dict[str, Any]:
+    payload = event.get("payload")
+    if isinstance(payload, dict) and payload.get("agent_id"):
+        return payload
+    return event
+
+
+def agents_by_id(registry: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        str(agent.get("id")): agent
+        for agent in registry.get("agents") or []
+        if isinstance(agent, dict) and str(agent.get("id") or "").strip()
+    }
+
+
+def public_key_for_attestation(agent: dict[str, Any], signature: dict[str, Any], config: dict[str, Any]) -> str | None:
+    keyid = str(signature.get("keyid") or "")
+    public_keys = config.get("public_keys")
+    if isinstance(public_keys, dict) and keyid in public_keys:
+        return str(public_keys[keyid])
+    agent_public_keys = config.get("agent_public_keys")
+    agent_id = str(agent.get("id") or "")
+    if isinstance(agent_public_keys, dict) and agent_id in agent_public_keys:
+        return str(agent_public_keys[agent_id])
+    for container_key in ("signature", "auth"):
+        container = agent.get(container_key)
+        if isinstance(container, dict):
+            if keyid and str(container.get("keyid") or "") not in {"", keyid}:
+                continue
+            for value_key in ("public_key", "public_key_pem", "ed25519_public_key"):
+                if str(container.get(value_key) or "").strip():
+                    return str(container[value_key])
+    return None
+
+
+def verify_ed25519_signature(public_key_text: str, signature_b64: str, message: bytes) -> tuple[bool, str]:
+    try:
+        from cryptography.exceptions import InvalidSignature  # type: ignore
+        from cryptography.hazmat.primitives import serialization  # type: ignore
+        from cryptography.hazmat.primitives.asymmetric import ed25519  # type: ignore
+    except ImportError:
+        return False, "backend_unavailable"
+    try:
+        raw_signature = base64.b64decode(signature_b64, validate=True)
+        key_text = public_key_text.strip()
+        if "BEGIN PUBLIC KEY" in key_text:
+            key = serialization.load_pem_public_key(key_text.encode("ascii"))
+        else:
+            key = ed25519.Ed25519PublicKey.from_public_bytes(base64.b64decode(key_text, validate=True))
+        if not isinstance(key, ed25519.Ed25519PublicKey):
+            return False, "unsupported_public_key"
+        key.verify(raw_signature, message)
+        return True, "valid"
+    except InvalidSignature:
+        return False, "signature_invalid"
+    except Exception:
+        return False, "signature_invalid"
+
+
+def validate_attestation_schema(payload: dict[str, Any]) -> str | None:
+    for key in ("agent_id", "subject_digest", "predicate", "signature"):
+        if key not in payload:
+            return f"missing {key}"
+    predicate = payload.get("predicate")
+    if not isinstance(predicate, dict):
+        return "predicate_not_object"
+    signature = payload.get("signature")
+    if not isinstance(signature, dict):
+        return "signature_not_object"
+    for key in ("agent_id", "role", "timestamp_claimed"):
+        if not str(predicate.get(key) or "").strip():
+            return f"missing predicate field: {key}"
+    if not (str(predicate.get("task_id") or "").strip() or str(predicate.get("reviewed_task") or "").strip()):
+        return "missing predicate field: task_id"
+    for key in ("keyid", "sig", "algorithm"):
+        if not str(signature.get(key) or "").strip():
+            return f"missing signature field: {key}"
+    return None
+
+
+def validate_agent_signatures(events: list[dict[str, Any]], config: dict[str, Any] | None) -> dict[str, Any]:
+    if not agent_signatures_enabled(config):
+        return {"valid": True, "reason": "agent_signatures_disabled", "findings": [], "checked": 0}
+    registry = agent_registry_from_config(config)
+    agents = agents_by_id(registry)
+    sig_config = signature_config(config)
+    findings: list[dict[str, Any]] = []
+    checked = 0
+    for event in events:
+        if event.get("type") != "agent.attestation":
+            continue
+        checked += 1
+        payload = attestation_payload(event)
+        seq = event.get("seq")
+        schema_error = validate_attestation_schema(payload)
+        agent_id = str(payload.get("agent_id") or "")
+        if schema_error:
+            findings.append({"seq": seq, "agent_id": agent_id, "error": schema_error})
+            continue
+        agent = agents.get(agent_id)
+        if agent is None:
+            findings.append({"seq": seq, "agent_id": agent_id, "error": "unknown_agent"})
+            continue
+        signature = payload["signature"]
+        algorithm = str(signature.get("algorithm") or "").lower()
+        backend = str(payload.get("verification_backend") or sig_config.get("backend") or "local-ed25519")
+        if algorithm != "ed25519" or backend not in {"local-ed25519", "ed25519"}:
+            findings.append({"seq": seq, "agent_id": agent_id, "error": "unsupported_signature_backend"})
+            continue
+        public_key = public_key_for_attestation(agent, signature, sig_config)
+        if not public_key:
+            findings.append({"seq": seq, "agent_id": agent_id, "error": "public_key_missing"})
+            continue
+        ok, reason = verify_ed25519_signature(
+            public_key,
+            str(signature.get("sig") or ""),
+            attestation_signing_payload(str(payload["subject_digest"]), payload["predicate"]),
+        )
+        if not ok:
+            findings.append({"seq": seq, "agent_id": agent_id, "error": reason})
+    return {"valid": not findings, "reason": "agent signatures valid" if not findings else "agent signatures invalid", "findings": findings, "checked": checked}
+
+
+def anchor_payload(event: dict[str, Any]) -> dict[str, Any]:
+    payload = event.get("payload")
+    if isinstance(payload, dict) and payload.get("head_digest"):
+        return payload
+    return event
+
+
+def validate_anchor_schema(payload: dict[str, Any]) -> str | None:
+    for key in ("head_digest", "head_seq", "anchor_backend", "anchor_evidence"):
+        if key not in payload:
+            return f"missing {key}"
+    if not str(payload.get("head_digest") or "").startswith("sha256:"):
+        return "invalid head_digest"
+    try:
+        int(payload.get("head_seq"))
+    except (TypeError, ValueError):
+        return "invalid head_seq"
+    if not isinstance(payload.get("anchor_evidence"), dict):
+        return "anchor_evidence_not_object"
+    return None
+
+
+def verify_anchor_monotonicity(events: list[dict[str, Any]], config: dict[str, Any] | None) -> dict[str, Any]:
+    if not anchor_enabled(config):
+        return {"valid": True, "reason": "anchor_disabled", "findings": [], "checked": 0}
+    findings: list[dict[str, Any]] = []
+    checked = 0
+    last_event_seq = -1
+    last_head_seq = -1
+    seen_digests: set[str] = set()
+    for event in events:
+        if event.get("type") != "chain.anchor":
+            continue
+        checked += 1
+        payload = anchor_payload(event)
+        seq = int(event.get("seq") or 0)
+        schema_error = validate_anchor_schema(payload)
+        if schema_error:
+            findings.append({"seq": seq, "error": schema_error})
+            continue
+        head_seq = int(payload.get("head_seq") or 0)
+        digest = str(payload.get("head_digest") or "")
+        if seq <= last_event_seq or head_seq <= last_head_seq:
+            findings.append({"seq": seq, "error": "anchor_reordered"})
+        if digest in seen_digests:
+            findings.append({"seq": seq, "error": "anchor_duplicate"})
+        last_event_seq = seq
+        last_head_seq = head_seq
+        seen_digests.add(digest)
+    return {"valid": not findings, "reason": "anchors valid" if not findings else "anchors invalid", "findings": findings, "checked": checked}
 
 
 def protocol_materialization_enabled(config: dict[str, Any] | None) -> bool:
@@ -179,6 +491,103 @@ def load_hot_protocol_state(root: Path) -> dict[str, Any]:
             if (root / relative).exists()
         }
     )
+
+
+def is_hot_status(status: Any) -> bool:
+    return str(status or "").strip() in HOT_TASK_STATUSES
+
+
+def compact_task(task: dict[str, Any]) -> dict[str, Any]:
+    compact = {
+        key: task.get(key)
+        for key in ("id", "status", "owner", "phase", "priority", "title")
+        if task.get(key) is not None
+    }
+    blocked = task.get("blocked_by_questions")
+    if isinstance(blocked, list) and blocked:
+        compact["blocked_by_questions"] = blocked
+    return compact
+
+
+def compact_active_task(task: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: task.get(key)
+        for key in ("id", "status", "owner", "title")
+        if task.get(key) is not None
+    }
+
+
+def recent_window(config: dict[str, Any] | None, field: str) -> int:
+    maintenance = (config or {}).get("maintenance")
+    if not isinstance(maintenance, dict):
+        return 8
+    keys = [f"recent_{field}", "recent_next_actions"]
+    for key in keys:
+        try:
+            value = int(maintenance.get(key))
+        except (TypeError, ValueError):
+            continue
+        if value >= 0:
+            return value
+    return 8
+
+
+def tail_strings(values: Any, limit: int) -> list[str]:
+    if not isinstance(values, list):
+        return []
+    strings = [str(item) for item in values]
+    if limit <= 0:
+        return []
+    return strings[-limit:]
+
+
+def build_slim_views(snapshot_or_state: dict[str, Any], config: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
+    state = snapshot_or_state.get("state") if isinstance(snapshot_or_state.get("state"), dict) else snapshot_or_state
+    canonical = canonicalize_protocol_state(state)
+    task_index = canonical["task_index"]
+    project_state = canonical["project_state"]
+    claims = canonical["claims"]
+
+    task_entries = [
+        compact_task(task)
+        for task in task_index.get("tasks") or []
+        if isinstance(task, dict) and is_hot_status(task.get("status"))
+    ]
+    active_entries = [
+        compact_active_task(task)
+        for task in project_state.get("active_tasks") or []
+        if isinstance(task, dict) and is_hot_status(task.get("status"))
+    ]
+    claim_entries = [
+        {
+            key: claim.get(key)
+            for key in ("claim_id", "task_id", "owner", "scope")
+            if claim.get(key) is not None
+        }
+        for claim in claims.get("claims") or []
+        if isinstance(claim, dict) and str(claim.get("status") or "") == "active"
+    ]
+
+    return {
+        SLIM_VIEW_PATHS["task_index_slim"].as_posix(): {
+            "schema_version": "1.0",
+            "view": "task_index.slim",
+            "tasks": sort_by_key(task_entries, "id"),
+        },
+        SLIM_VIEW_PATHS["project_state_slim"].as_posix(): {
+            "view": "project_state.slim",
+            "status": project_state.get("status"),
+            "active_tasks": sort_by_key(active_entries, "id"),
+            "next_actions": tail_strings(project_state.get("next_actions"), recent_window(config, "next_actions")),
+            "risks": tail_strings(project_state.get("risks"), recent_window(config, "risks")),
+            "open_questions": tail_strings(project_state.get("open_questions"), recent_window(config, "open_questions")),
+        },
+        SLIM_VIEW_PATHS["claims_slim"].as_posix(): {
+            "schema_version": "1.0",
+            "view": "claims.slim",
+            "claims": sort_by_key(claim_entries, "claim_id"),
+        },
+    }
 
 
 def materialize_protocol_state(snapshot_or_state: dict[str, Any]) -> dict[str, Any]:
@@ -578,7 +987,10 @@ def materialize_to_disk(
     fail_after_writes: int | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
+    config = read_protocol_config(root)
     materialized = materialize_protocol_state(snapshot_or_state)
+    if slim_views_enabled(config):
+        materialized.update(build_slim_views(snapshot_or_state, config))
     ordered_paths = sorted(materialized)
     # Stage on the SAME filesystem as the targets so the atomic os.replace() below is an
     # intra-drive rename. Using the OS default temp dir breaks on Windows when temp and the
@@ -679,6 +1091,33 @@ def drift_entries(hot: dict[str, Any], materialized: dict[str, Any]) -> list[dic
     return entries
 
 
+def slim_view_drift(root: Path) -> dict[str, Any]:
+    root = root.resolve()
+    config = read_protocol_config(root)
+    if not slim_views_enabled(config):
+        return {
+            "enabled": False,
+            "has_drift": False,
+            "up_to_seq": None,
+            "entries": [],
+        }
+    replay_snapshot = current_protocol_snapshot(root)
+    expected = build_slim_views(replay_snapshot, config)
+    hot: dict[str, Any] = {}
+    for relative in sorted(expected):
+        path = root / relative
+        hot[relative] = read_json(path) if path.exists() else {}
+    entries = drift_entries(hot, expected)
+    return {
+        "enabled": True,
+        "has_drift": bool(entries),
+        "up_to_seq": replay_snapshot["up_to_seq"],
+        "entries": entries,
+        "hot_hash": canonical_hash(hot),
+        "replay_hash": canonical_hash(expected),
+    }
+
+
 def protocol_state_drift(root: Path) -> dict[str, Any]:
     root = root.resolve()
     config = read_protocol_config(root)
@@ -687,6 +1126,8 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
     hot = materialize_protocol_state(hot_snapshot)
     materialized = materialize_protocol_state(replay_snapshot)
     entries = drift_entries(hot, materialized)
+    if slim_views_enabled(config):
+        entries.extend(slim_view_drift(root).get("entries") or [])
     return {
         "enabled": event_state_enabled(config),
         "enforced": protocol_state_enforcement_enabled(config),

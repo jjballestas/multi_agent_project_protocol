@@ -64,6 +64,87 @@ def canonical_hash(payload: Any) -> str:
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
 
+def chain_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("chain_enabled") is True
+
+
+def compute_genesis_prev_hash(config_path: Path = Path("protocol.config.json")) -> str:
+    if not config_path.exists():
+        raise EventLogError(f"config not found: {config_path}")
+    config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+    return canonical_hash(config)
+
+
+def event_without_chain_fields(event: dict[str, Any]) -> dict[str, Any]:
+    payload = deepcopy(event)
+    payload.pop("prev_hash", None)
+    payload.pop("deduped", None)
+    return payload
+
+
+def compute_event_prev_hash(event: dict[str, Any], prev_hash_of_previous: str) -> str:
+    return hashlib.sha256(
+        (canonical_json(event_without_chain_fields(event)) + str(prev_hash_of_previous)).encode("utf-8")
+    ).hexdigest()
+
+
+def agent_signatures_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("agent_signatures_enabled") is True
+
+
+def anchor_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("anchor_enabled") is True
+
+
+def anchor_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    event_state = (config or {}).get("event_state")
+    if not isinstance(event_state, dict):
+        return {}
+    value = event_state.get("anchor_config")
+    return value if isinstance(value, dict) else {}
+
+
+def attestation_signing_payload(subject_digest: str, predicate: dict[str, Any]) -> bytes:
+    return (str(subject_digest) + "\n" + canonical_json(predicate)).encode("utf-8")
+
+
+def event_head_digest(event: dict[str, Any]) -> str:
+    return "sha256:" + canonical_hash(event)
+
+
+def anchor_to_git_remote(head_digest: str, config: dict[str, Any], *, now: str) -> dict[str, Any]:
+    remote_url = str(config.get("remote_url") or "").strip()
+    if not remote_url:
+        raise EventLogError("anchor git-remote backend requires remote_url")
+    if "://" in remote_url and not remote_url.startswith("file://"):
+        raise EventLogError("external git-remote anchoring requires operator-provided credentials outside the repo")
+    remote_path = Path(remote_url[7:] if remote_url.startswith("file://") else remote_url)
+    remote_path.mkdir(parents=True, exist_ok=True)
+    identity = str(config.get("identity") or "runtime-anchor")
+    head_file = remote_path / "HEAD"
+    anchors_log = remote_path / "anchors.log"
+    line = f"{now} {head_digest} {identity}\n"
+    head_file.write_text(head_digest + "\n", encoding="ascii")
+    with anchors_log.open("a", encoding="ascii", newline="\n") as handle:
+        handle.write(line)
+    proof = canonical_hash({"head": head_digest, "identity": identity, "line": line, "backend": "git-remote"})
+    return {"backend": "git-remote", "git_timestamp": now, "proof": proof, "remote_ref": str(remote_path)}
+
+
+def anchor_due(last_anchor_ts: str | None, now: str, interval_seconds: int) -> bool:
+    if interval_seconds <= 0 or not last_anchor_ts:
+        return True
+    try:
+        last = datetime.fromisoformat(last_anchor_ts.replace("Z", "+00:00"))
+        current = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    return (current - last).total_seconds() >= interval_seconds
+
+
 def observability_config(config: dict[str, Any] | None) -> dict[str, Any]:
     config = config or {}
     observability = config.get("observability")
@@ -238,13 +319,17 @@ def write_snapshot(root: Path, snapshot: dict[str, Any]) -> None:
 
 
 def all_events(root: Path) -> list[dict[str, Any]]:
+    return sorted(events_in_log_order(root), key=lambda event: int(event.get("seq") or 0))
+
+
+def events_in_log_order(root: Path) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
     archive_dir = root / ARCHIVE_DIR
     if archive_dir.exists():
         for path in sorted(archive_dir.glob("events-*.jsonl")):
             events.extend(read_jsonl_torn_safe(path))
     events.extend(read_jsonl_torn_safe(root / LOG_PATH))
-    return sorted(events, key=lambda event: int(event.get("seq") or 0))
+    return events
 
 
 def replay_events(
@@ -346,6 +431,34 @@ class EventWriter:
         events = self.events()
         return (int(events[-1].get("seq") or 0) + 1) if events else 1
 
+    def chain_anchor(self, config: dict[str, Any]) -> str:
+        events = self.events()
+        if not events:
+            return compute_genesis_prev_hash(self.root / "protocol.config.json")
+        last = events[-1]
+        last_prev = last.get("prev_hash")
+        if isinstance(last_prev, str) and last_prev:
+            return last_prev
+        genesis = {
+            "seq": self.next_seq(),
+            "event_schema_version": EVENT_SCHEMA_VERSION,
+            "type": "chain.genesis",
+            "aggregate_id": "eventlog-chain",
+            "aggregate_version": 1,
+            "actor": "runtime",
+            "actor_auth": {"method": "not_enforced_phase2"},
+            "idempotency_key": "eventlog-chain:genesis:v1",
+            "fencing_token": None,
+            "payload": {"reason": "chain_enabled"},
+            "applied": False,
+            "ts": utc_now(),
+            "prev_hash": compute_genesis_prev_hash(self.root / "protocol.config.json"),
+        }
+        if observability_enabled(config):
+            genesis["trace_id"] = event_trace_id(genesis)
+        atomic_append_jsonl(self.log_path, sign_event(genesis, config))
+        return str(genesis["prev_hash"])
+
     def append_event(
         self,
         *,
@@ -384,11 +497,89 @@ class EventWriter:
             "ts": str(ts or utc_now()),
         }
         config = read_protocol_config(self.root)
+        if chain_enabled(config):
+            previous_hash = self.chain_anchor(config)
+            event["seq"] = self.next_seq()
         if observability_enabled(config):
             event["trace_id"] = event_trace_id(event)
+        if chain_enabled(config):
+            event["prev_hash"] = compute_event_prev_hash(event, previous_hash)
         event = sign_event(event, config)
         atomic_append_jsonl(self.log_path, event)
         return event
+
+    def append_agent_attestation(
+        self,
+        *,
+        agent_id: str,
+        subject_digest: str,
+        subject_reference: str,
+        predicate: dict[str, Any],
+        signature: dict[str, Any],
+        verification_backend: str = "local-ed25519",
+        idempotency_key: str | None = None,
+        ts: str | None = None,
+    ) -> dict[str, Any] | None:
+        config = read_protocol_config(self.root)
+        if not agent_signatures_enabled(config):
+            return None
+        return self.append_event(
+            event_type="agent.attestation",
+            aggregate_id=str(predicate.get("task_id") or predicate.get("reviewed_task") or subject_reference or agent_id),
+            actor_id=agent_id,
+            idempotency_key=idempotency_key,
+            applied=False,
+            payload={
+                "agent_id": agent_id,
+                "subject_digest": subject_digest,
+                "subject_reference": subject_reference,
+                "predicate": predicate,
+                "signature": signature,
+                "verification_backend": verification_backend,
+            },
+            ts=ts,
+        )
+
+    def last_anchor_timestamp(self) -> str | None:
+        for event in reversed(self.events()):
+            if event.get("type") == "chain.anchor":
+                payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+                return str(payload.get("timestamp") or event.get("ts") or "")
+        return None
+
+    def periodic_anchor_if_due(self, *, now: str | None = None) -> dict[str, Any] | None:
+        config = read_protocol_config(self.root)
+        if not anchor_enabled(config):
+            return None
+        cfg = anchor_config(config)
+        interval = int(cfg["interval_seconds"]) if "interval_seconds" in cfg else 3600
+        timestamp = str(now or utc_now())
+        if not anchor_due(self.last_anchor_timestamp(), timestamp, interval):
+            return None
+        events = self.events()
+        if not events:
+            return None
+        head_event = events[-1]
+        head_digest = event_head_digest(head_event)
+        backend = str(cfg.get("backend") or "git-remote")
+        if backend != "git-remote":
+            raise EventLogError(f"unsupported anchor backend: {backend}")
+        evidence = anchor_to_git_remote(head_digest, cfg, now=timestamp)
+        return self.append_event(
+            event_type="chain.anchor",
+            aggregate_id="eventlog-chain",
+            actor_id="runtime",
+            applied=False,
+            payload={
+                "head_digest": head_digest,
+                "head_seq": int(head_event.get("seq") or 0),
+                "anchor_backend": backend,
+                "anchor_config": {key: value for key, value in cfg.items() if "secret" not in key.lower() and "token" not in key.lower()},
+                "anchor_evidence": evidence,
+                "timestamp": timestamp,
+            },
+            ts=timestamp,
+        )
 
     def acquire_claim(
         self,

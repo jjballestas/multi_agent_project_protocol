@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import shutil
@@ -20,8 +21,10 @@ except ImportError:  # pragma: no cover - exercised as a clean CLI failure.
 
 try:
     from .adapters.llm_adapter import split_command
+    from .eventlog import attestation_signing_payload, canonical_hash
 except ImportError:  # pragma: no cover - direct script execution
     from adapters.llm_adapter import split_command
+    from eventlog import attestation_signing_payload, canonical_hash
 
 
 DEFAULT_TIMEOUT_SECONDS = 100.0
@@ -132,6 +135,48 @@ def validate_report(report: dict[str, Any], schema_path: Path) -> None:
         if len(errors) > 3:
             details.append(f"... {len(errors) - 3} more")
         raise WrapperError("turn report schema invalid: " + "; ".join(details))
+
+
+def sign_turn_report(
+    turn_report: dict[str, Any],
+    *,
+    agent_id: str,
+    private_key_path: Path,
+    keyid: str,
+    role: str = "implementer",
+    decision_id: str = "DECISION-0029",
+) -> dict[str, Any]:
+    """Return an agent attestation for a turn report using an external private key file."""
+
+    try:
+        from cryptography.hazmat.primitives import serialization  # type: ignore
+    except ImportError as exc:  # pragma: no cover - depends on optional provider.
+        raise WrapperError("cryptography package is required for local-ed25519 signing") from exc
+    if not private_key_path.exists():
+        raise WrapperError(f"private signing key not found: {private_key_path}")
+    key = serialization.load_pem_private_key(private_key_path.read_bytes(), password=None)
+    subject_digest = "sha256:" + canonical_hash(turn_report)
+    predicate = {
+        "agent_id": agent_id,
+        "agent_model": str(os.environ.get("LLM_TURN_WRAPPER_MODEL") or "unknown"),
+        "task_id": str(turn_report.get("task_id") or "none"),
+        "decision_id": decision_id,
+        "role": role,
+        "inputs_trust_boundary": str(os.environ.get("LLM_TURN_WRAPPER_TRUST_BOUNDARY") or "internal"),
+        "outputs_scope": list(turn_report.get("changed_paths") or []),
+        "timestamp_claimed": str(os.environ.get("LLM_TURN_WRAPPER_TIMESTAMP") or "1970-01-01T00:00:00Z"),
+        "turn_index": int(os.environ.get("LLM_TURN_WRAPPER_TURN_INDEX") or 0),
+        "human_checkpoint": False,
+    }
+    signature = key.sign(attestation_signing_payload(subject_digest, predicate))
+    return {
+        "agent_id": agent_id,
+        "subject_digest": subject_digest,
+        "subject_reference": str(turn_report.get("turn_id") or ""),
+        "predicate": predicate,
+        "signature": {"keyid": keyid, "algorithm": "ed25519", "sig": base64.b64encode(signature).decode("ascii")},
+        "verification_backend": "local-ed25519",
+    }
 
 
 def resolve_backend_command(command: tuple[str, ...]) -> list[str]:

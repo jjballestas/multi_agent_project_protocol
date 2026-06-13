@@ -1,0 +1,593 @@
+{
+    "schema_version": "protocol_state_snapshot.v1",
+    "snapshot": {
+        "canonical_hash": "697c2a37becff7bcc5136a5345fb610065789d025bc6246e81a0aa670d28ff3b",
+        "state": {
+            "claims": {
+                "claims": [
+                    {
+                        "claim_id": "CLAIM-20260612-233357-prune-claude",
+                        "expires_at": "2026-06-12",
+                        "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json"
+                        ],
+                        "started_at": "2026-06-12T23:33:57Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-PRUNE",
+                        "updated_at": "2026-06-12T23:33:57Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
+                        "expires_at": "2026-06-13",
+                        "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/handoffs/HANDOFF-SESION-20260612-claude-analisis-doctoral.md",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-12T22:07:20Z",
+                        "status": "released",
+                        "task_id": "DECISION-0029"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0091-codex-runtime",
+                        "expires_at": "2026-06-10",
+                        "notes": "Acquired by runtime orchestrator before routed turn.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+                            "examples/neutrality_scan_cases/README.md"
+                        ],
+                        "started_at": "2026-06-09T21:50:50Z",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09T21:50:50Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
+                        "expires_at": "2026-06-14",
+                        "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md",
+                            "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0104",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0104",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-12T23:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0104"
+                    }
+                ],
+                "schema_version": "1.0",
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            },
+            "project_state": {
+                "active_tasks": [
+                    {
+                        "id": "TASK-0095",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0096",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0099",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0100",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0101",
+                        "owner": "Codex",
+                        "status": "in_review",
+                        "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
+                    },
+                    {
+                        "id": "TASK-0102",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)"
+                    },
+                    {
+                        "id": "TASK-0103",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)"
+                    },
+                    {
+                        "id": "TASK-0104",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)"
+                    }
+                ],
+                "agents": {
+                    "architect": "Claude",
+                    "human_owner": "operador humano",
+                    "implementer": "Codex"
+                },
+                "created_at": "2026-06-05",
+                "decisions": [
+                    "DECISION-0001-versionado",
+                    "DECISION-0002-core-perfiles-profesionales",
+                    "DECISION-0003-adopted-profiles-contract",
+                    "DECISION-0004-sdd-pipeline-y-cierre",
+                    "DECISION-0005-comunicacion-compacta-token-efficient",
+                    "DECISION-0006-robustez-operacional",
+                    "DECISION-0007-claim-before-shared-draft",
+                    "DECISION-0008-eficiencia-de-tokens",
+                    "DECISION-0009-runtime-orquestacion",
+                    "DECISION-0010-licenciamiento-propietario",
+                    "DECISION-0011-claims-por-fila-estado",
+                    "DECISION-0012-ascii-canal-entre-agentes",
+                    "DECISION-0013-liveness-y-visibilidad",
+                    "DECISION-0014-poda-sistematica",
+                    "DECISION-0015-n-agent-registry-y-capacidades",
+                    "DECISION-0016-areas-personales-onboarding",
+                    "DECISION-0017-event-log-writer-vivo",
+                    "DECISION-0018-notificacion-de-anomalias",
+                    "DECISION-0019-distribucion-runtime",
+                    "DECISION-0020-regla-anti-colision",
+                    "DECISION-0021-activacion-wrapper-llm",
+                    "DECISION-0022-runtime-escritor-autoritativo",
+                    "DECISION-0023-firma-release",
+                    "DECISION-0024-autonomia-supervisada",
+                    "DECISION-0025-integracion-agent-teams-bridge",
+                    "DECISION-0026-memoria-post-commit",
+                    "DECISION-0027-activacion-sa4-piloto",
+                    "DECISION-0028",
+                    "DECISION-0029"
+                ],
+                "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
+                "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
+                "next_actions": [
+                    "[HISTORICO PODADO] 123 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
+                    ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
+                    "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "TASK-0086 DONE (ratif. adversarial): guard event_state_config_error (authoritative=>enforce=>materialize=>enabled, tier runtime) cableado en validador py/ps + submit_intent + apply -> RECHAZA authoritative-sin-enforce; mata el false-secure. + fix apply_gate (drift antes de materializar). PRE-REQ SA.4 #1 cumplido. #2 TASK-0087 registrada (proposed, bloqueante-adopcion). #3 ventana authoritative: evaluar estabilidad.",
+                    "TASK-0088 DONE (SA.4 paso 1, ratif. adversarial): lock-lift del invoker real multi-turno OFF-BY-DEFAULT (orchestrator.py condicionado; registro vivo vacio -> cerrojo --once intacto, byte-equivalente); golden determinista 9; ensayo de rollback del lock-lift verde (lifts solo con registro, off restaura, replay==hot). PASOS 1+2 COMPLETOS. PENDIENTE: MICRO-GO del operador para pasos 3+4 = DECISION-0027 (activacion, MINOR+CHANGELOG) + poblar runtime.real_invoker + runtime.supervised_autonomy + PILOTO (nota prosa en examples/neutrality_scan_cases/README.md, caps max_turns=2/checkpoint_every_k=1/wall_clock=180000/budget+deadline/PAUSE, invocacion real). NO poblar registro hasta el micro-GO. Capa C OFF.",
+                    "TASK-0089 DONE (wrapper fino vendor-neutral del invoker, ratif. adversarial): runtime/llm_turn_wrapper.py (stdin->backend no interactivo->extrae+valida turn-report JSON tolerante fences/prosa->emite limpio o falla limpio, timeout<120s nunca cuelga); golden 8/8 + en CI; preset claude->wrapper; vendor-neutral. SA.4 sigue DE-ARMADO. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper -> turn-report schema-valido); si limpio, re-armar registro + piloto (nota examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint tras turno 1). NO re-armar ni piloto sin smoke limpio. Capa C OFF.",
+                    "TASK-0090 DONE (wrapper resolucion cross-platform via shutil.which, ratif. adversarial): bare 'claude -p' resuelve y corre; golden 10/10; RE-SMOKE END-TO-END limpio (preset->wrapper->claude real -> turn-report schema-valido). Path del piloto PROBADO. SA.4 sigue DE-ARMADO. LISTO para re-armar registro (enabled=true) + DISPARAR PILOTO (orquestador real invoker, tarea-objetivo nota en examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint OBLIGATORIO tras turno 1). enforce/authoritative intactos; Capa C OFF.",
+                    "TASK-0092 DONE (EJECUTADA POR CLAUDE, Codex agente down): invoker codex implementer integrado (preset->wrapper->codex exec workspace-write + reasoning_effort=low) + build_prompt endurecido. SMOKE REAL DE TURNO COMPLETO LIMPIO: codex edito un README + turn-report schema-valido aceptado (agent=Codex casa implementer), ~44s. Goldens verdes. SA.4 sigue DE-ARMADO. LISTO para el go del operador a re-armar (preset codex) + re-disparar piloto (TASK-0091 blocked->ready via task_upsert; caps 2/1/180000; checkpoint tras turno 1)."
+                ],
+                "open_questions": [],
+                "phase": {
+                    "exit_criteria": [
+                        "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
+                        "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
+                        "Backlog de adopcion/expansion definido cuando surja",
+                        "Core sigue neutral en cada cambio"
+                    ],
+                    "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
+                    "id": "P2",
+                    "name": "Adopcion y expansion",
+                    "previous_phase": {
+                        "closed_with": "v0.3.0",
+                        "exit_criteria_met": [
+                            "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
+                            "Perfil dotnet_enterprise publicado (TASK-0006)",
+                            "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
+                            "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
+                            "v0.3.0 publicada"
+                        ],
+                        "id": "P1",
+                        "name": "Arquitectura de perfiles profesionales",
+                        "status": "completed"
+                    },
+                    "subphase": {
+                        "backlog": [
+                            "TASK-0008",
+                            "TASK-0009",
+                            "TASK-0010",
+                            "TASK-0011",
+                            "TASK-0012",
+                            "TASK-0013"
+                        ],
+                        "closed_with": "v0.4.0",
+                        "exit_criteria_met": [
+                            "DECISION-0004 + diseno + specs (TASK-0008)",
+                            "Plantillas de protocolo SDD (TASK-0009)",
+                            "specs/ + plantillas reutilizables (TASK-0010)",
+                            "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
+                            "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
+                            "Onboarding SDD documentado (TASK-0013)",
+                            "v0.4.0 publicada"
+                        ],
+                        "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+                        "id": "P2.SDD",
+                        "name": "Formalizacion SDD (Spec-Driven Development)",
+                        "status": "completed"
+                    }
+                },
+                "project": "multi_agent_project_protocol",
+                "released_versions": [
+                    "v0.1.0",
+                    "v0.2.0",
+                    "v0.3.0",
+                    "v0.4.0",
+                    "v0.5.0",
+                    "v0.6.0",
+                    "v0.7.0",
+                    "v0.8.0",
+                    "v0.9.0",
+                    "v0.10.0",
+                    "v1.0.0",
+                    "v1.1.0"
+                ],
+                "risks": [
+                    "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+                    "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+                    "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
+                    "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
+                    "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
+                    "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
+                ],
+                "source_of_truth": "AGENTS.md",
+                "status": "active",
+                "updated_at": "2026-06-09",
+                "updated_by": "Claude",
+                "version": "1.1.0"
+            },
+            "task_index": {
+                "legend": {
+                    "owner": [
+                        "Claude",
+                        "Codex",
+                        "operador humano"
+                    ],
+                    "phase": [
+                        "P0 = enriquecimiento del protocolo",
+                        "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
+                        "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
+                    ],
+                    "priority": [
+                        "low",
+                        "normal",
+                        "high",
+                        "critical"
+                    ],
+                    "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva).",
+                    "status": [
+                        "proposed",
+                        "ready",
+                        "claimed",
+                        "in_progress",
+                        "in_review",
+                        "done",
+                        "blocked",
+                        "cancelled"
+                    ],
+                    "type": [
+                        "implementation",
+                        "refactor",
+                        "integration",
+                        "migration",
+                        "security",
+                        "release",
+                        "discovery",
+                        "analysis",
+                        "review",
+                        "documentation",
+                        "triage"
+                    ]
+                },
+                "schema_version": "1.0",
+                "tasks": [
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                        "id": "TASK-0095",
+                        "linked_decisions": [
+                            "DECISION-0022"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "TASK-0093",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "runtime/submit_intent.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #1 del re-pilot SA.4): commit de turno self-consistente (incluir el task .md mutado por las transiciones). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "examples/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                        "id": "TASK-0096",
+                        "linked_decisions": [
+                            "DECISION-0013"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "DECISION-0013"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "runtime/runlog.py",
+                            "examples/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #2 del re-pilot SA.4): run_id unico por corrida (evita el ruido de agregacion de metricas; run_id colisiono con el smoke en el re-pilot). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-10",
+                        "deliverables": [
+                            "scripts/sign_release.py",
+                            "scripts/verify_release.py",
+                            "scripts/sign_release.ps1",
+                            "scripts/verify_release.ps1",
+                            "examples/release_sign_cases/run_release_sign_cases.py",
+                            "README_INSTANCIACION.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                        "id": "TASK-0099",
+                        "linked_decisions": [
+                            "DECISION-0023",
+                            "DECISION-0021",
+                            "DECISION-0001",
+                            "DECISION-0006"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "SPEC-0073",
+                            "SPEC-0061",
+                            "TASK-0075",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            "scripts/sign_release.py",
+                            "scripts/verify_release.py",
+                            "scripts/sign_release.ps1",
+                            "scripts/verify_release.ps1",
+                            "examples/release_sign_cases/run_release_sign_cases.py",
+                            "README_INSTANCIACION.md"
+                        ],
+                        "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0073, GO del operador). Backend de firma external-command configurable (DECISION-0023 sec.4); hoy sign/verify rechazan backend != fixture. Aditivo MINOR off-by-default, vendor-neutral, sin secretos, golden fake/recorded determinista. NO runtime flip; SA.4/Capa C OFF.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
+                        "status": "done",
+                        "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-10",
+                        "deliverables": [
+                            ".gitattributes"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                        "id": "TASK-0100",
+                        "linked_decisions": [
+                            "DECISION-0023",
+                            "DECISION-0006",
+                            "DECISION-0019"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0099",
+                            "SPEC-0075",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            ".gitattributes",
+                            "scripts/generate_sbom.py",
+                            "scripts/verify_release.py"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up de robustez tras el corte v1.1.0; el operador pidio encolarlo). spec_id=SPEC-0075. .gitattributes eol=lf para verificacion de release reproducible cross-platform; .gitattributes NO esta en el SBOM (no cambia el sbom_hash firmado); si renormalize alterara bytes SBOM-included -> blocked. OFF-PILOT. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md",
+                        "status": "proposed",
+                        "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "examples/chain_cases/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
+                        "id": "TASK-0101",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0017",
+                            "DECISION-0022",
+                            "DECISION-0028"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0017",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "examples/chain_cases/"
+                        ],
+                        "status": "done",
+                        "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "atestacion de turno firmada por agente (in-toto compatible) off-by-default",
+                            "atestacion de revisor maker!=checker"
+                        ],
+                        "depends_on": [
+                            "TASK-0101"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                        "id": "TASK-0102",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0015",
+                            "DECISION-0021",
+                            "DECISION-0023"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0015",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "runtime/team_bridge.py",
+                            "protocol.config.json"
+                        ],
+                        "status": "ready",
+                        "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "anclaje externo periodico del digest de cabeza (backend configurable) off-by-default",
+                            "verificador de monotonia anti-rollback"
+                        ],
+                        "depends_on": [
+                            "TASK-0101"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                        "id": "TASK-0103",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0023",
+                            "DECISION-0019"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0023",
+                            "DECISION-0019"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "scripts/sign_release.ps1",
+                            "protocol.config.json"
+                        ],
+                        "status": "ready",
+                        "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                        "id": "TASK-0104",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0005",
+                            "DECISION-0008",
+                            "DECISION-0022",
+                            "DECISION-0023"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "TASK-0101",
+                            "TASK-0102",
+                            "TASK-0103"
+                        ],
+                        "relevant_files": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md"
+                        ],
+                        "status": "done",
+                        "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)",
+                        "type": "analysis",
+                        "updated_at": "2026-06-12"
+                    }
+                ],
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            }
+        },
+        "up_to_seq": 0
+    }
+}

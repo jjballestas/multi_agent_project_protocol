@@ -18,7 +18,7 @@ TOOLS_ROOT = Path(__file__).resolve().parents[1]
 if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
-from runtime.eventlog import EventLogError, assert_snapshot_matches, runtime_state_has_content
+from runtime.eventlog import EventLogError, assert_snapshot_matches, events_in_log_order, runtime_state_has_content
 from runtime.protocol_replay import (
     ProtocolMaterializationError,
     drift_paths,
@@ -26,6 +26,9 @@ from runtime.protocol_replay import (
     event_state_enabled,
     protocol_state_drift,
     protocol_state_enforcement_enabled,
+    validate_agent_signatures,
+    verify_anchor_monotonicity,
+    validate_chain,
 )
 
 
@@ -828,6 +831,30 @@ def validate_eventlog_snapshot(root: Path, validation: Validation) -> None:
         validation.fail(f"Runtime event log snapshot mismatch: {exc}")
 
 
+def validate_eventlog_chain(root: Path, config: dict[str, Any] | None, validation: Validation) -> None:
+    if not runtime_state_has_content(root):
+        return
+    result = validate_chain(events_in_log_order(root), config, root=root)
+    if result.get("valid") is not True:
+        validation.fail(f"Runtime event log chain invalid: {result.get('reason')}")
+
+
+def validate_eventlog_agent_signatures(root: Path, config: dict[str, Any] | None, validation: Validation) -> None:
+    if not runtime_state_has_content(root):
+        return
+    result = validate_agent_signatures(events_in_log_order(root), config)
+    if result.get("valid") is not True:
+        validation.fail(f"Runtime event log agent signatures invalid: {result.get('findings')}")
+
+
+def validate_eventlog_anchors(root: Path, config: dict[str, Any] | None, validation: Validation) -> None:
+    if not runtime_state_has_content(root):
+        return
+    result = verify_anchor_monotonicity(events_in_log_order(root), config)
+    if result.get("valid") is not True:
+        validation.fail(f"Runtime event log anchors invalid: {result.get('findings')}")
+
+
 def validate_protocol_state_drift(
     root: Path,
     config: dict[str, Any] | None,
@@ -906,6 +933,9 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     )
     validate_handoffs(root, validation)
     validate_eventlog_snapshot(root, validation)
+    validate_eventlog_chain(root, config, validation)
+    validate_eventlog_agent_signatures(root, config, validation)
+    validate_eventlog_anchors(root, config, validation)
     validate_protocol_state_drift(root, config, validation)
     return validation
 

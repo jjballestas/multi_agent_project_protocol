@@ -19,6 +19,19 @@ DEFAULT_COLDSTART_GLOBS = [
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/CLAIMS.json",
 ]
+DEFAULT_SLIM_COLDSTART_GLOBS = [
+    "AGENTS.md",
+    "Area_comun/README.md",
+    "Area_comun/protocol/TASK_PROTOCOL.md",
+    "Area_comun/state/PROJECT_STATE.slim.json",
+    "Area_comun/state/TASK_INDEX.slim.json",
+    "Area_comun/state/CLAIMS.slim.json",
+]
+SLIM_VIEW_FILES = {
+    "Area_comun/state/PROJECT_STATE.slim.json",
+    "Area_comun/state/TASK_INDEX.slim.json",
+    "Area_comun/state/CLAIMS.slim.json",
+}
 
 
 def read_text(path: Path) -> str:
@@ -59,18 +72,68 @@ def file_entry(root: Path, path: Path, divisor: int) -> dict[str, Any]:
     }
 
 
-def measure_cold_start(root: Path, config: dict[str, Any], divisor: int) -> dict[str, Any]:
-    token_config = config.get("token_cost") or {}
-    patterns = token_config.get("coldstart_globs") or DEFAULT_COLDSTART_GLOBS
+def virtual_file_entry(path: str, text: str, divisor: int) -> dict[str, Any]:
+    chars = len(text)
+    return {
+        "path": path,
+        "chars": chars,
+        "tokens": token_count(chars, divisor),
+        "virtual": True,
+    }
+
+
+def generated_slim_entries(root: Path, config: dict[str, Any], divisor: int) -> list[dict[str, Any]]:
+    try:
+        sys.path.insert(0, str(root))
+        from runtime.protocol_replay import build_genesis_snapshot, build_slim_views, canonical_json_text
+    except Exception:
+        return []
+    slim_views = build_slim_views(build_genesis_snapshot(root), config)
+    return [
+        virtual_file_entry(path, canonical_json_text(slim_views[path]), divisor)
+        for path in sorted(slim_views)
+    ]
+
+
+def measure_patterns(root: Path, patterns: list[str], divisor: int, *, config: dict[str, Any] | None = None) -> dict[str, Any]:
     patterns = [str(pattern) for pattern in patterns]
     mailbox_pattern = "Area_comun/mailbox/open/*.md"
     if mailbox_pattern not in patterns:
         patterns.append(mailbox_pattern)
     files = [file_entry(root, path, divisor) for path in unique_files(root, patterns)]
+    missing_slim = SLIM_VIEW_FILES.intersection(patterns) - {item["path"] for item in files}
+    if missing_slim and config is not None:
+        generated = {
+            item["path"]: item
+            for item in generated_slim_entries(root, config, divisor)
+            if item["path"] in missing_slim
+        }
+        files.extend(generated[path] for path in sorted(generated))
+        files = sorted(files, key=lambda item: item["path"])
     return {
         "files": files,
         "total_chars": sum(item["chars"] for item in files),
         "total_tokens": sum(item["tokens"] for item in files),
+    }
+
+
+def measure_cold_start(root: Path, config: dict[str, Any], divisor: int) -> dict[str, Any]:
+    token_config = config.get("token_cost") or {}
+    patterns = token_config.get("coldstart_globs") or DEFAULT_COLDSTART_GLOBS
+    return measure_patterns(root, patterns, divisor, config=config)
+
+
+def measure_cold_start_modes(root: Path, config: dict[str, Any], divisor: int) -> dict[str, Any]:
+    full = measure_patterns(root, DEFAULT_COLDSTART_GLOBS, divisor, config=config)
+    slim = measure_patterns(root, DEFAULT_SLIM_COLDSTART_GLOBS, divisor, config=config)
+    target_tokens = 10000
+    return {
+        "full": full,
+        "slim": slim,
+        "delta_tokens": full["total_tokens"] - slim["total_tokens"],
+        "delta_chars": full["total_chars"] - slim["total_chars"],
+        "target_tokens": target_tokens,
+        "slim_within_target": slim["total_tokens"] < target_tokens,
     }
 
 
@@ -150,6 +213,7 @@ def measure(root: Path) -> dict[str, Any]:
         "root": str(root),
         "chars_per_token": divisor,
         "cold_start": measure_cold_start(root, config, divisor),
+        "cold_start_modes": measure_cold_start_modes(root, config, divisor),
         "dead_weight": measure_dead_weight(root),
         "mailbox_overhead": measure_mailbox_overhead(root, divisor),
         "budget": {
@@ -174,6 +238,14 @@ def print_human(result: dict[str, Any], show_budget: bool) -> None:
     for item in cold["files"]:
         print(f"  - {item['path']}: {item['tokens']} tok ({item['chars']} chars)")
     print("")
+    modes = result.get("cold_start_modes") or {}
+    if modes:
+        print("Cold-start modes")
+        print(f"  full_tokens: {modes['full']['total_tokens']}")
+        print(f"  slim_tokens: {modes['slim']['total_tokens']}")
+        print(f"  delta_tokens: {modes['delta_tokens']}")
+        print(f"  slim_within_target: {modes['slim_within_target']}")
+        print("")
     print("Dead weight")
     print(
         f"  claims released: {dead['claims']['released']}/{dead['claims']['total']} "

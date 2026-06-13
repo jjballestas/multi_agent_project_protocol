@@ -27,19 +27,19 @@
         {
             "id": "TASK-0101",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
         },
         {
             "id": "TASK-0102",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "done",
             "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)"
         },
         {
             "id": "TASK-0103",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "done",
             "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)"
         },
         {
@@ -47,6 +47,18 @@
             "owner": "Claude",
             "status": "done",
             "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)"
+        },
+        {
+            "id": "TASK-0105",
+            "owner": "Codex",
+            "status": "done",
+            "title": "Slim-views del estado y politica de cold-start just-in-time (DECISION-0030 / SPEC-0077)"
+        },
+        {
+            "id": "TASK-0106",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
         }
     ],
     "agents": {

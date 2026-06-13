@@ -14,6 +14,31 @@ $DefaultColdstartGlobs = @(
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/CLAIMS.json"
 )
+$DefaultSlimColdstartGlobs = @(
+    "AGENTS.md",
+    "Area_comun/README.md",
+    "Area_comun/protocol/TASK_PROTOCOL.md",
+    "Area_comun/state/PROJECT_STATE.slim.json",
+    "Area_comun/state/TASK_INDEX.slim.json",
+    "Area_comun/state/CLAIMS.slim.json"
+)
+$SlimViewFiles = @(
+    "Area_comun/state/PROJECT_STATE.slim.json",
+    "Area_comun/state/TASK_INDEX.slim.json",
+    "Area_comun/state/CLAIMS.slim.json"
+)
+$HotTaskStatuses = @(
+    "proposed",
+    "ready",
+    "claimed",
+    "in_progress",
+    "in_review",
+    "changes_requested",
+    "qa_pending",
+    "qa_failed",
+    "architect_review",
+    "blocked"
+)
 
 function Read-Text {
     param([string]$Path)
@@ -79,6 +104,159 @@ function New-FileEntry {
     }
 }
 
+function New-VirtualFileEntry {
+    param(
+        [string]$Path,
+        [string]$Text,
+        [int]$Divisor
+    )
+    $chars = $Text.Length
+    return [pscustomobject][ordered]@{
+        path = $Path
+        chars = $chars
+        tokens = (Get-TokenCount -CharCount $chars -Divisor $Divisor)
+        virtual = $true
+    }
+}
+
+function ConvertTo-MeasureJson {
+    param($Value)
+    return (($Value | ConvertTo-Json -Depth 30) + "`n")
+}
+
+function Get-RecentLimit {
+    param(
+        $Config,
+        [string]$Field
+    )
+    if ($Config -and $Config.maintenance) {
+        $specific = "recent_$Field"
+        if ($Config.maintenance.PSObject.Properties.Name -contains $specific) {
+            return [int]$Config.maintenance.$specific
+        }
+        if ($Config.maintenance.recent_next_actions) {
+            return [int]$Config.maintenance.recent_next_actions
+        }
+    }
+    return 8
+}
+
+function Get-TailStrings {
+    param(
+        $Values,
+        [int]$Limit
+    )
+    if ($null -eq $Values -or $Limit -le 0) {
+        return @()
+    }
+    $items = @($Values | ForEach-Object { [string]$_ })
+    if ($items.Count -le $Limit) {
+        return $items
+    }
+    return $items[($items.Count - $Limit)..($items.Count - 1)]
+}
+
+function Get-GeneratedSlimEntries {
+    param(
+        [string]$RootPath,
+        $Config,
+        [int]$Divisor
+    )
+    $taskDoc = Read-JsonFile -Path (Join-Path $RootPath "Area_comun/state/TASK_INDEX.json")
+    $projectDoc = Read-JsonFile -Path (Join-Path $RootPath "Area_comun/state/PROJECT_STATE.json")
+    $claimsDoc = Read-JsonFile -Path (Join-Path $RootPath "Area_comun/state/CLAIMS.json")
+    $tasks = @()
+    if ($taskDoc -and $taskDoc.tasks) {
+        $tasks = @($taskDoc.tasks | Where-Object { $HotTaskStatuses -contains ([string]$_.status) } | Sort-Object id | ForEach-Object {
+            $item = [ordered]@{}
+            foreach ($key in @("id", "status", "owner", "phase", "priority", "title")) {
+                if ($null -ne $_.$key) { $item[$key] = $_.$key }
+            }
+            if ($_.blocked_by_questions -and @($_.blocked_by_questions).Count -gt 0) {
+                $item["blocked_by_questions"] = @($_.blocked_by_questions)
+            }
+            [pscustomobject]$item
+        })
+    }
+    $activeTasks = @()
+    if ($projectDoc -and $projectDoc.active_tasks) {
+        $activeTasks = @($projectDoc.active_tasks | Where-Object { $HotTaskStatuses -contains ([string]$_.status) } | Sort-Object id | ForEach-Object {
+            $item = [ordered]@{}
+            foreach ($key in @("id", "status", "owner", "title")) {
+                if ($null -ne $_.$key) { $item[$key] = $_.$key }
+            }
+            [pscustomobject]$item
+        })
+    }
+    $claims = @()
+    if ($claimsDoc -and $claimsDoc.claims) {
+        $claims = @($claimsDoc.claims | Where-Object { ([string]$_.status) -eq "active" } | Sort-Object claim_id | ForEach-Object {
+            [pscustomobject][ordered]@{
+                claim_id = $_.claim_id
+                task_id = $_.task_id
+                owner = $_.owner
+                scope = @($_.scope)
+            }
+        })
+    }
+    $projectSlim = [pscustomobject][ordered]@{
+        view = "project_state.slim"
+        status = $projectDoc.status
+        active_tasks = $activeTasks
+        next_actions = Get-TailStrings -Values $projectDoc.next_actions -Limit (Get-RecentLimit -Config $Config -Field "next_actions")
+        risks = Get-TailStrings -Values $projectDoc.risks -Limit (Get-RecentLimit -Config $Config -Field "risks")
+        open_questions = Get-TailStrings -Values $projectDoc.open_questions -Limit (Get-RecentLimit -Config $Config -Field "open_questions")
+    }
+    $taskSlim = [pscustomobject][ordered]@{
+        schema_version = "1.0"
+        view = "task_index.slim"
+        tasks = $tasks
+    }
+    $claimSlim = [pscustomobject][ordered]@{
+        schema_version = "1.0"
+        view = "claims.slim"
+        claims = $claims
+    }
+    return @(
+        New-VirtualFileEntry -Path "Area_comun/state/CLAIMS.slim.json" -Text (ConvertTo-MeasureJson -Value $claimSlim) -Divisor $Divisor
+        New-VirtualFileEntry -Path "Area_comun/state/PROJECT_STATE.slim.json" -Text (ConvertTo-MeasureJson -Value $projectSlim) -Divisor $Divisor
+        New-VirtualFileEntry -Path "Area_comun/state/TASK_INDEX.slim.json" -Text (ConvertTo-MeasureJson -Value $taskSlim) -Divisor $Divisor
+    )
+}
+
+function Measure-ColdStartPatterns {
+    param(
+        [string]$RootPath,
+        [array]$Patterns,
+        $Config,
+        [int]$Divisor
+    )
+    $patterns = @($Patterns)
+    if ($patterns -notcontains "Area_comun/mailbox/open/*.md") {
+        $patterns += "Area_comun/mailbox/open/*.md"
+    }
+    $files = @(Get-UniqueFiles -RootPath $RootPath -Patterns $patterns | ForEach-Object {
+        New-FileEntry -RootPath $RootPath -Path $_ -Divisor $Divisor
+    })
+    $present = @($files | ForEach-Object { $_.path })
+    $missingSlim = @($SlimViewFiles | Where-Object { ($patterns -contains $_) -and ($present -notcontains $_) })
+    if ($missingSlim.Count -gt 0) {
+        $generated = @(Get-GeneratedSlimEntries -RootPath $RootPath -Config $Config -Divisor $Divisor | Where-Object {
+            $missingSlim -contains $_.path
+        })
+        $files = @($files + $generated | Sort-Object path)
+    }
+    $totalChars = ($files | Measure-Object -Property chars -Sum).Sum
+    $totalTokens = ($files | Measure-Object -Property tokens -Sum).Sum
+    if ($null -eq $totalChars) { $totalChars = 0 }
+    if ($null -eq $totalTokens) { $totalTokens = 0 }
+    return [ordered]@{
+        files = $files
+        total_chars = [int]$totalChars
+        total_tokens = [int]$totalTokens
+    }
+}
+
 function Get-Percent {
     param(
         [double]$Part,
@@ -100,20 +278,24 @@ function Measure-ColdStart {
     if ($Config -and $Config.token_cost -and $Config.token_cost.coldstart_globs) {
         $patterns = @($Config.token_cost.coldstart_globs)
     }
-    if ($patterns -notcontains "Area_comun/mailbox/open/*.md") {
-        $patterns += "Area_comun/mailbox/open/*.md"
-    }
-    $files = @(Get-UniqueFiles -RootPath $RootPath -Patterns $patterns | ForEach-Object {
-        New-FileEntry -RootPath $RootPath -Path $_ -Divisor $Divisor
-    })
-    $totalChars = ($files | Measure-Object -Property chars -Sum).Sum
-    $totalTokens = ($files | Measure-Object -Property tokens -Sum).Sum
-    if ($null -eq $totalChars) { $totalChars = 0 }
-    if ($null -eq $totalTokens) { $totalTokens = 0 }
+    return Measure-ColdStartPatterns -RootPath $RootPath -Patterns $patterns -Config $Config -Divisor $Divisor
+}
+
+function Measure-ColdStartModes {
+    param(
+        [string]$RootPath,
+        $Config,
+        [int]$Divisor
+    )
+    $full = Measure-ColdStartPatterns -RootPath $RootPath -Patterns $DefaultColdstartGlobs -Config $Config -Divisor $Divisor
+    $slim = Measure-ColdStartPatterns -RootPath $RootPath -Patterns $DefaultSlimColdstartGlobs -Config $Config -Divisor $Divisor
     return [ordered]@{
-        files = $files
-        total_chars = [int]$totalChars
-        total_tokens = [int]$totalTokens
+        full = $full
+        slim = $slim
+        delta_tokens = [int]($full.total_tokens - $slim.total_tokens)
+        delta_chars = [int]($full.total_chars - $slim.total_chars)
+        target_tokens = 10000
+        slim_within_target = [bool]($slim.total_tokens -lt 10000)
     }
 }
 
@@ -213,6 +395,7 @@ function Measure-ContextCost {
         root = $RootPath
         chars_per_token = $divisor
         cold_start = $coldStart
+        cold_start_modes = Measure-ColdStartModes -RootPath $RootPath -Config $config -Divisor $divisor
         dead_weight = Measure-DeadWeight -RootPath $RootPath
         mailbox_overhead = Measure-MailboxOverhead -RootPath $RootPath -Divisor $divisor
         budget = [ordered]@{
@@ -237,6 +420,12 @@ function Write-HumanReport {
     foreach ($item in $Result.cold_start.files) {
         Write-Host "  - $($item.path): $($item.tokens) tok ($($item.chars) chars)"
     }
+    Write-Host ""
+    Write-Host "Cold-start modes"
+    Write-Host "  full_tokens: $($Result.cold_start_modes.full.total_tokens)"
+    Write-Host "  slim_tokens: $($Result.cold_start_modes.slim.total_tokens)"
+    Write-Host "  delta_tokens: $($Result.cold_start_modes.delta_tokens)"
+    Write-Host "  slim_within_target: $($Result.cold_start_modes.slim_within_target)"
     Write-Host ""
     Write-Host "Dead weight"
     Write-Host "  claims released: $($Result.dead_weight.claims.released)/$($Result.dead_weight.claims.total) ($($Result.dead_weight.claims.released_percent)%)"
