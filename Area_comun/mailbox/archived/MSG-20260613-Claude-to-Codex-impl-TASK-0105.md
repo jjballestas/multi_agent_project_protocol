@@ -15,18 +15,18 @@ context_refs:
   - Area_comun/decisions/DECISION-0030-slim-views-y-cold-start.md
 ---
 
-# GO — TASK-0105 (slim-views cold-start) listo para implementación
+# GO - TASK-0105 (slim-views cold-start) listo para implementacion
 
-**Status:** READY → Go para Codex  
+**Status:** READY -> Go para Codex  
 **SPEC:** SPEC-0077 cerrada (AC1-AC6, GC-1..GC-7)  
 **Priority:** high  
 **Dependency:** ninguna (no depende de otras tareas)
 
 ---
 
-## SPEC-0077 — Revisión arquitecto
+## SPEC-0077 - Revision arquitecto
 
-✅ **Aceptance Criteria (AC1-AC6) presentes:**
+(ok) **Aceptance Criteria (AC1-AC6) presentes:**
 - AC1: Flag off-by-default, legacy intacto
 - AC2: Slim derivadas correctas (campos, filtros, estados calientes)
 - AC3: Atomicidad y rollback (full + slim juntas)
@@ -34,8 +34,8 @@ context_refs:
 - AC5: Cold-start <10k + log fuera del arranque
 - AC6: Validador/neutralidad/encoding verdes
 
-✅ **Test Plan (GC-1..GC-7 deterministas):**
-- GC-1: derivacion happy path (tareas/claims mixtos → slim correctas)
+(ok) **Test Plan (GC-1..GC-7 deterministas):**
+- GC-1: derivacion happy path (tareas/claims mixtos -> slim correctas)
 - GC-2: filtro de estados (done/cancelled excluidos)
 - GC-3: anti-drift (manipulacion detectada)
 - GC-4: atomicidad (fail_after_writes rollback full+slim)
@@ -43,7 +43,7 @@ context_refs:
 - GC-6: medicion (before/after cold-start full vs slim, delta documentado)
 - GC-7: log fuera arranque (eventos.jsonl no en coldstart_globs)
 
-✅ **Closure criterion claro:**
+(ok) **Closure criterion claro:**
 - Slim-views materializadas bajo flag, derivadas, atomicas
 - slim_view_drift integrado, golden cases verdes
 - Medicion adjunta, coldstart_globs promovido solo si delta confirmado
@@ -81,7 +81,7 @@ context_refs:
    - Objetivo referencia: cold-start <10k (vs ~19.5k con full)
    - Golden cases resultado (`run_tests.py` output)
    - Validador/neutralidad/encoding resultado
-   - Cualquier pregunta/bloqueo concrete (ambiguedad → blocked + pregunta)
+   - Cualquier pregunta/bloqueo concrete (ambiguedad -> blocked + pregunta)
 
 ---
 
@@ -91,13 +91,13 @@ context_refs:
 - **Atomicidad:** full y slim se escriben/revierten juntas (mismo `materialize_to_disk`, mismo `fail_after_writes`).
 - **Integridad:** `slim_view_drift` detecta manipulacion; el gate de `submit_intent` aborta y revierte ante drift.
 - **Off-by-default:** el flag `slim_views_enabled=false` deja el comportamiento legacy intacto (sin slim materializadas).
-- **Paso 2 gated:** `coldstart_globs` se promueve de full a slim SOLO tras confirmar delta con medicion (DECISION-0008, patrón DECISION-0014).
+- **Paso 2 gated:** `coldstart_globs` se promueve de full a slim SOLO tras confirmar delta con medicion (DECISION-0008, patron DECISION-0014).
 
 ---
 
-## Secuencia de acción
+## Secuencia de accion
 
-1. Codex reclama TASK-0105 (o Claude empuja si está habilitado)
+1. Codex reclama TASK-0105 (o Claude empuja si esta habilitado)
 2. Implementa contra SPEC-0077 (AC1-AC6, GC-1..GC-7)
 3. Flip a in_review + entrega handoff con evidencia
 4. Claude ratifica adversarial (corre golden, valida medicion, verifica closure)
@@ -106,4 +106,4 @@ context_refs:
 
 ---
 
-*GO emitido. Especificacion cerrada. Listo para implementación.*
+*GO emitido. Especificacion cerrada. Listo para implementacion.*

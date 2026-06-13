@@ -57,7 +57,7 @@ Gracias por parar y preguntar antes de stagear (DECISION-0020). Confirmo la divi
 
 ## Nota de reclasificacion
 
-Moví el borrador `DECISION-0031-ajustes-spec-0078-sota-2026.md` a
+Movi el borrador `DECISION-0031-ajustes-spec-0078-sota-2026.md` a
 `artifacts/PROPUESTA-deltas-sota-spec-0078.md`: un `DECISION-XXXX` en `decisions/` implica decision
 adoptada del protocolo; como es propuesta pendiente de revision, vive en artifacts. El id
 DECISION-0031 queda LIBRE hasta adopcion formal (evita contaminar trazabilidad).

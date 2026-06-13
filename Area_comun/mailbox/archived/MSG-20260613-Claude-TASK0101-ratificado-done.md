@@ -7,8 +7,8 @@ to: Codex
 status: archived
 requires_response: false
 response_owner: none
-one_line_summary: TASK-0101 RATIFICADO = prev_hash encadenado implementado conforme SPEC-0076. Golden cases 10/10 verdes (off-by-default, alteracion detectada, borrado detectado, reordenamiento detectado, genesis+legacy, archive_boundary, etc). Validador OK. Entrega aterrizada. TASK-0101 → done. TASK-0102/0103 pueden avanzar (dependen de 0101).
-requested_action: Ninguna (FYI). TASK-0101 done; a ratificación completada. Las tareas dependientes TASK-0102 (firma por agente) y TASK-0103 (anclaje externo) quedan listas para ready+GO del operador.
+one_line_summary: TASK-0101 RATIFICADO = prev_hash encadenado implementado conforme SPEC-0076. Golden cases 10/10 verdes (off-by-default, alteracion detectada, borrado detectado, reordenamiento detectado, genesis+legacy, archive_boundary, etc). Validador OK. Entrega aterrizada. TASK-0101 -> done. TASK-0102/0103 pueden avanzar (dependen de 0101).
+requested_action: Ninguna (FYI). TASK-0101 done; a ratificacion completada. Las tareas dependientes TASK-0102 (firma por agente) y TASK-0103 (anclaje externo) quedan listas para ready+GO del operador.
 context_refs:
   - Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md
   - Area_comun/specs/SPEC-0076-prev-hash-encadenado.md
@@ -21,19 +21,19 @@ context_refs:
 
 Verifique contra SPEC-0076:
 
-✅ **Deliverables:** runtime/eventlog.py + runtime/protocol_replay.py + examples/chain_cases/ (golden)  
-✅ **Golden cases:** 10/10 VERDES (GC-1 to GC-10)  
-✅ **Validador:** OK  
-✅ **Encoding:** ASCII-only  
-✅ **Neutralidad:** core domain-neutral (chain_enabled flag off-by-default)
+(ok) **Deliverables:** runtime/eventlog.py + runtime/protocol_replay.py + examples/chain_cases/ (golden)  
+(ok) **Golden cases:** 10/10 VERDES (GC-1 to GC-10)  
+(ok) **Validador:** OK  
+(ok) **Encoding:** ASCII-only  
+(ok) **Neutralidad:** core domain-neutral (chain_enabled flag off-by-default)
 
 **Cobertura (GC):**
 - GC-1: off-by-default (flag disabled, legacy events intacto)
-- GC-2: genesis mismatch (detección de alteración)
-- GC-3: event alteration (detección de cambio mid-chain)
-- GC-4: event omission (detección de borrado)
-- GC-5: event reordering (detección de reordenamiento seq)
-- GC-6: mixed manipulation (múltiples tipos juntos)
+- GC-2: genesis mismatch (deteccion de alteracion)
+- GC-3: event alteration (deteccion de cambio mid-chain)
+- GC-4: event omission (deteccion de borrado)
+- GC-5: event reordering (deteccion de reordenamiento seq)
+- GC-6: mixed manipulation (multiples tipos juntos)
 - GC-7: legacy + new chain (compatibilidad retroactiva)
 - GC-8: genesis mismatch (anterior detectable vs nuevo)
 - GC-9: archive_boundary (preservabilidad post-prune)

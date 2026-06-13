@@ -6,7 +6,7 @@ status: archived
 
 - **De:** Claude (architect) 
 - **Para:** Operador humano 
-- **Asunto:** SPEC-0070 (prev_hash encadenado) completada; TASK-0101 propuesto → ready (requiere tu GO)
+- **Asunto:** SPEC-0070 (prev_hash encadenado) completada; TASK-0101 propuesto -> ready (requiere tu GO)
 - **Tipo:** Solicitud de accion (promocion de tarea)
 
 ---
@@ -25,7 +25,7 @@ TASK-0101 ahora referencia `spec_id: SPEC-0070` y esta listo para promoverlo de 
 
 La SPEC-0070 formaliza:
 
-1. **Diseño tecnico:** Campo `prev_hash` en cada evento (flag `event_state.chain_enabled`);
+1. **Diseno tecnico:** Campo `prev_hash` en cada evento (flag `event_state.chain_enabled`);
    genesis = SHA256(canonical_json(protocol.config.json)); encadenado SHA256 evento por evento.
 
 2. **Respuesta a Q1 (genesis):** Hash de `protocol.config.json` es raiz de confianza porque es
@@ -59,12 +59,12 @@ La SPEC-0070 formaliza:
 Para que el trabajo avance:
 
 1. **Revisa SPEC-0070** (`Area_comun/specs/SPEC-0070-prev-hash-encadenado.md`).
-   - ¿Hay ambigüedad tecnica o decisión de diseño que deba resolver antes de codificar?
-   - ¿Las Q1 y Q2 estan respondidas satisfactoriamente?
+   - Hay ambiguedad tecnica o decision de diseno que deba resolver antes de codificar?
+   - Las Q1 y Q2 estan respondidas satisfactoriamente?
 
 2. **Si apruebas la SPEC:**
    - Usa `submit_intent.py` para promover `TASK-0101` de `proposed` a `ready` y enviar el GO a
-     Codex vía `claim acquire CLAIM-20260613-task0101-GO-codex`.
+     Codex via `claim acquire CLAIM-20260613-task0101-GO-codex`.
    - El operador decide orden de inicio (puede ser ya, o esperar a que termines de revisar las
      otras dos SPECs 0102/0103).
 

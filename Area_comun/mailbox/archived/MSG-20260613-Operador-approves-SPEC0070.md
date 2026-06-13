@@ -13,8 +13,8 @@ status: archived
 
 SPEC-0070 revisada y **APROBADA**.
 
-TASK-0101 listo para Codex. GO activo a operador para empujar a Codex cuando esté listo.
+TASK-0101 listo para Codex. GO activo a operador para empujar a Codex cuando este listo.
 
 ---
 
-*Confirmación terminal.*
+*Confirmacion terminal.*
