@@ -89,6 +89,9 @@ Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
 
 - The worktree may contain unrelated deletions under `personal/Claude/` and untracked `personal/operador/`.
   Treat them as peer/operator state and do not revert or stage them.
+- Latest Codex mailbox hygiene: archived `MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md`, stopped the
+  coordination cron via `personal/Codex/coord_cron.stop`, released `CLAIM-20260615-Codex-standdown`, and left no
+  active Codex claims. Commit: `c0efaaf chore(mailbox): archive Codex stand-down`.
 
 ## Useful Fresh-Session Commands
 
