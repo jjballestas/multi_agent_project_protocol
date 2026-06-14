@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>sintesis_hoja_de_ruta</title>
+<style>
+@page { size: A4; margin: 16mm 14mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Segoe UI", "Calibri", Arial, sans-serif; font-size: 11pt;
+       line-height: 1.5; color: #1a1a1a; max-width: 100%; }
+h1 { color: #1f4e79; font-size: 22pt; border-bottom: 3px solid #1f4e79;
+     padding-bottom: 6px; margin-top: 0; }
+h2 { color: #2e6da4; font-size: 16pt; border-bottom: 1px solid #cdd9e5;
+     padding-bottom: 4px; margin-top: 22px; page-break-after: avoid; }
+h3 { color: #2e6da4; font-size: 13pt; margin-top: 16px; page-break-after: avoid; }
+h4 { color: #444; font-size: 11.5pt; page-break-after: avoid; }
+p, li { orphans: 2; widows: 2; }
+strong { color: #14304a; }
+a { color: #1f4e79; text-decoration: none; }
+blockquote { border-left: 4px solid #f0ad4e; background: #fff8ec;
+             margin: 10px 0; padding: 8px 14px; border-radius: 4px; }
+code { background: #f1f3f5; padding: 1px 5px; border-radius: 3px;
+       font-family: "Consolas", "Courier New", monospace; font-size: 9.5pt; color: #c0341d; }
+pre { background: #1e1e2e; color: #e6e6e6; padding: 12px 14px; border-radius: 6px;
+      overflow-x: auto; page-break-inside: avoid; }
+pre code { background: none; color: #e6e6e6; font-size: 8.5pt; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt;
+        page-break-inside: avoid; }
+th { background: #1f4e79; color: #fff; padding: 7px 9px; text-align: left; border: 1px solid #1f4e79; }
+td { padding: 6px 9px; border: 1px solid #cdd9e5; vertical-align: top; }
+tr:nth-child(even) td { background: #f4f7fb; }
+hr { border: none; border-top: 2px solid #cdd9e5; margin: 22px 0; }
+ul, ol { margin: 6px 0 6px 4px; padding-left: 22px; }
+</style></head><body>
+<h1>🧭 Hoja de Ruta Ejecutable: Pipeline Unificado (Ingeniería + Investigación)</h1>
+<blockquote>
+<p><strong>Caso:</strong> Loops Agénticos · <strong>Fecha:</strong> 2026-06-12 · <strong>Objeto:</strong> plan de ejecución sobre<br />
+<code>multi_agent_project_protocol</code> (protocol v1.1.0 · runtime v0.11.0). · <strong>Registro:</strong> impersonal,<br />
+académico, sin interrogantes — camino definido para una revisión posterior con criterio propio.<br />
+<strong>Alcance:</strong> documento de <em>estrategia</em> del caso. <strong>Describe</strong> lo que se ejecutará en el repositorio del<br />
+protocolo; no lo modifica. Las rutas (<code>runtime/*.py</code>, <code>Area_comun/...</code>, <code>protocol.config.json</code>) son<br />
+objetivos <strong>verificados contra el repositorio real</strong> (qué existe y qué no), no suposiciones.</p>
+<p><strong>⚠️ CONTROL DE CAMBIOS (rev. 2026-06-12 — correcciones metodológicas).</strong> Esta revisión incorpora el<br />
+paquete de correcciones <code>01_Sources/Documents/01–05</code> derivado del veredicto crítico de 2026-06-12:<br />
+<strong>(1)</strong> hipótesis de la Fase 6 reformulada con métricas falsables H1–H3 y pre-registro<br />
+(<a href="../../01_Sources/Documents/01_Hipotesis_Reformulada.md">doc. 01</a>); <strong>(2)</strong> modelo de amenaza explícito<br />
+para G3.1 con firmantes cruzados + anclaje externo, y revisión de §3.5<br />
+(<a href="../../01_Sources/Documents/02_Modelo_de_Amenaza_G3.1.md">doc. 02</a>); <strong>(3)</strong> publicabilidad del dataset<br />
+resuelta con esquema de dos planos y GATE-DATASET bloqueante<br />
+(<a href="../../01_Sources/Documents/03_Publicabilidad_Dataset.md">doc. 03</a>); más las enmiendas R1–R8 y los gates<br />
+GATE-DATASET / GATE-INST / GATE-SOTA (<a href="../../01_Sources/Documents/04_Integracion_en_Fase_6.md">doc. 04</a>).<br />
+Las secciones marcadas <strong>[rev. 2026-06-12]</strong> sustituyen al texto de la versión anterior.</p>
+</blockquote>
+<hr />
+<h2>0. Contexto del documento</h2>
+<h3>0.1 Qué es y para qué sirve</h3>
+<p>Este documento ordena, como <strong>pipeline ejecutable</strong>, las mejoras propuestas para la metodología<br />
+<code>multi_agent_project_protocol</code>: las nueve de ingeniería (<code>E1</code>–<code>E9</code>) y las siete derivadas de literatura<br />
+académica (<code>#1</code>–<code>#7</code>), recogidas en <a href="../../01_Sources/Other/Sugerencias_Mejora.txt"><code>Sugerencias_Mejora.txt</code></a>.<br />
+El propósito no es deliberar entre opciones, sino fijar <strong>qué hacer, en qué orden y dónde</strong>, de forma que<br />
+la revisión humana posterior trabaje sobre un plan cerrado, no sobre un abanico de alternativas.</p>
+<h3>0.2 El doble foco de la metodología</h3>
+<p>La metodología se orienta a <strong>dos resultados simultáneos</strong>, no excluyentes:</p>
+<ol>
+<li><strong>Aplicación en producción.</strong> El protocolo coordina agentes (arquitecto <code>Claude</code> ↔ implementador<br />
+<code>Codex</code>) para construir y mantener software real de la empresa, con disciplina de ingeniería<br />
+   (event-sourcing, tool-policy, gates, release verificable).</li>
+<li><strong>Generación de un TFM (vía investigación).</strong> El <strong>uso real</strong> del protocolo produce un historial<br />
+   event-sourced (decisiones, handoffs, fallos, coste de tokens) que constituye el dataset de una posible<br />
+   contribución académica.</li>
+</ol>
+<p>Ambos focos <strong>comparten el mismo repositorio y el 90 % del trabajo</strong>; divergen solo al final, en la<br />
+medición experimental (Fase 6). El foco de producción <strong>no compite</strong> con el de investigación: lo<br />
+<strong>alimenta</strong>, porque sin uso real no hay dataset.</p>
+<h3>0.3 Qué son los proyectos de producción referenciados</h3>
+<p>El pipeline cita dos proyectos reales de la empresa como terreno de aplicación y fuente del dataset:</p>
+<ul>
+<li><strong>Financiero (sistema «Galapa»).</strong> Reconstrucción de un <strong>ERP financiero-tributario municipal</strong>. El<br />
+  sistema legacy está escrito en <strong>Visual Basic 6 sobre Access/Jet</strong> y gestiona el ciclo financiero<br />
+  público del municipio de <strong>Galapá (Atlántico, Colombia)</strong>: presupuesto, contabilidad, tesorería,<br />
+  nómina, impuestos territoriales (Predial, ICA), Ley 550, entre otros. Es <strong>multi-entidad y<br />
+  multi-vigencia</strong>. El caso de estudio ya catalogó <strong>13 módulos y 205 bugs</strong> del legacy como entrada para<br />
+  un <strong>rebuild moderno</strong>. Aporta al pipeline un dominio complejo, normado y con verificación objetiva<br />
+  (las reglas fiscales son contrastables).</li>
+<li><strong>ScanPay.</strong> Aplicación <strong>móvil (.NET MAUI, arquitectura Azure-first alojada en la UE)</strong> para<br />
+<strong>captura, lectura, validación, clasificación, análisis e informe de gastos</strong> a partir de tickets,<br />
+  facturas y recibos, mediante <strong>OCR (Azure Document Intelligence) + LLM (Azure OpenAI)</strong>. Es<br />
+<strong>multi-tenant</strong> (Row-Level Security), con endurecimiento <strong>RGPD</strong> y <strong>fiscalidad española</strong>, en<br />
+  arquitectura de referencia <strong>v11</strong> tras auditoría crítica. Es <strong>el caso vivo más relevante para la<br />
+  investigación</strong>: su <code>Area_comun/mailbox</code> evidencia que <strong>ya se desarrolla con el protocolo</strong> mediante<br />
+  coordinación heterogénea <strong>Claude ↔ Codex</strong> —exactamente el escenario que el estado del arte señala como<br />
+  hueco abierto (coordinación persistente de agentes heterogéneos)—. Además, su capa <code>AuditLogs</code> ya<br />
+  implementa una <strong>cadena de hash</strong> (<code>Hash_n = SHA256(Datos_n ‖ Hash_{n-1})</code>): una primitiva <strong>afín</strong> a la<br />
+  que la capa de procedencia (Fase 3) necesita <strong>[rev. 2026-06-12]</strong> — afín, no «la misma»: la procedencia<br />
+  de protocolo exige además firma por agente y anclaje externo (doc. 02 §5); la cadena de hash de dominio<br />
+  no transfiere esas propiedades.</li>
+</ul>
+<blockquote>
+<p><strong>Lectura honesta del contexto:</strong> ScanPay no es un ejemplo hipotético; es la instancia donde el<br />
+protocolo ya opera con dos agentes heterogéneos y donde la primitiva de integridad de la tesis ya existe<br />
+en el dominio. Financiero aporta un segundo dominio, normativo y verificable. Entre ambos sostienen la<br />
+afirmación de la §1: el dataset real es el activo, y ya está empezando a generarse.</p>
+</blockquote>
+<hr />
+<h2>1. Axioma central y único activo real</h2>
+<p>El protocolo, como artefacto, <strong>no constituye una ventaja</strong>. <code>AutoGen</code>, <code>ChatDev</code> y <code>OpenHands</code> también son<br />
+protocolos multiagente, publicados y con tracción. Replicar capacidades (skills, MCP, scanners) sitúa la<br />
+metodología <strong>a la par del campo</strong>, no por delante. Eso es ingeniería de producto, legítima, pero no<br />
+ciencia.</p>
+<p>El <strong>único activo diferencial</strong> es el <strong>dataset longitudinal</strong> que produce el <strong>uso real y operativo</strong> del<br />
+protocolo sobre los proyectos de producción (Financiero, ScanPay): el historial de decisiones<br />
+(0001–00xx), handoffs, fallos, colisiones y consumo de tokens. <strong>[rev. 2026-06-12]</strong> La formulación<br />
+precisa de la ventaja: existen <strong>pocos datasets públicos y estructurados</strong> de coordinación heterogénea<br />
+persistente con ledger de decisiones — los labs y proyectos que se dogfoodean (p. ej. OpenHands) disponen<br />
+de trazas internas masivas, pero no publicadas ni estructuradas como ledger auditable. La ventaja es de<br />
+<strong>publicabilidad estructurada</strong> (condicionada al GATE-DATASET, doc. 03), no de existencia única; afirmar<br />
+«ningún otro grupo dispone de ese dataset» violaría la propia regla 3.3.</p>
+<blockquote>
+<p><strong>Consecuencia operativa (no negociable):</strong> bifurcar o aislar el entorno de desarrollo <strong>destruye la<br />
+materia prima</strong> de la investigación. El desarrollo de ingeniería <strong>no distrae de la tesis: es su fuente<br />
+exclusiva de datos válidos.</strong> Sin uso real no hay dataset; sin dataset no hay contribución; sin<br />
+contribución no hay doctorado. El orden es: <strong>construir → usar en producción → medir lo usado.</strong></p>
+</blockquote>
+<hr />
+<h2>2. Arquitectura de repositorios: acoplamiento unidireccional</h2>
+<p>Arquitectura estricta de <strong>UN SOLO REPO CORE</strong>. Sin forks de código.</p>
+<pre><code>[ multi_agent_project_protocol ]   ← Repo Core (Producción / Ingeniería)
+        │   grado ingeniería · liberable · opera en Financiero/ScanPay
+        │   NO conoce la existencia de la investigación
+        │
+        │  (instrumentación aditiva: export PROV / MAST-Data / atestación de autoría)
+        ▼
+[ protocol_research/ ]             ← Repo Satélite (Solo lectura / Análisis)
+            consume el eventlog y las decisiones del Core como DATOS
+            aloja: scripts de ablation · harness de benchmarks · exporters
+                   científicos · redacción del TFM/paper
+</code></pre>
+<ul>
+<li><strong>Core (único):</strong> una sola base de código. Evita la divergencia y el coste de merges. Todo lo que se<br />
+  construye sirve a producción <strong>y</strong>, de rebote, genera el dataset.</li>
+<li><strong><code>protocol_research/</code> (satélite):</strong> lee del Core, <strong>nunca</strong> escribe en él. La investigación<br />
+  —desordenada, de otra cadencia y otro público (el tribunal)— no contamina el código que se entrega a la<br />
+  empresa.</li>
+<li><strong>Regla de oro:</strong> <em>el Core genera los datos; la investigación los procesa.</em> Acoplamiento estrictamente<br />
+  unidireccional, sin excepción.</li>
+</ul>
+<hr />
+<h2>3. Reglas del pipeline (previas a las fases)</h2>
+<p>Estas reglas eliminan ambigüedad y aplican a <strong>todas</strong> las tareas siguientes.</p>
+<h3>3.1 Etiquetas</h3>
+<ul>
+<li><strong>🔧 ENG</strong> — Ingeniería de producto. <strong>Aportación a investigación = CERO.</strong> Son buenas prácticas que<br />
+  hacen la metodología usable en Financiero/ScanPay y, con ello, <strong>habilitan</strong> la captura del dataset.<br />
+  Conviene no confundirse: añadir skills o MCP no acerca al doctorado; acerca a <strong>entregar producto</strong>.</li>
+<li><strong>🔬 SEED-INV</strong> — Semilla de tesis. La <strong>única</strong> novedad científica. Reside en la instrumentación de<br />
+  procedencia (Fase 3) y en la validación experimental (Fase 6).</li>
+<li><strong>⚠️ CORRECCIÓN</strong> — Guardia de honestidad. <strong>No es una tarea</strong>: marca lo que <strong>no</strong> debe afirmarse ni<br />
+  construirse de forma equívoca.</li>
+</ul>
+<h3>3.2 Regla de entrada (cómo entra cada tarea)</h3>
+<p>Toda tarea entra <strong>por el propio método</strong>, sin excepción: <code>DECISION-00xx</code> registrada <strong>antes</strong> de<br />
+aplicarse → <code>SPEC-00xx</code> con <code>acceptance_criteria</code> + <code>test_plan</code> → <strong>golden cases</strong> → <strong>off-by-default</strong><br />
+(opt-in) → sin romper la <strong>neutralidad de dominio</strong> del core. La metodología ya prescribe cómo<br />
+enriquecerse a sí misma (dogfooding). Una mejora que no encaje en este molde <strong>no entra</strong>.</p>
+<h3>3.3 Regla de honestidad de nombres</h3>
+<ul>
+<li><strong>«Capability» del registry ≠ seguridad por capacidad.</strong> <code>DECISION-0015</code> / <code>tool_policy.py</code> usan<br />
+<em>capability</em> como <strong>habilidad</strong> (string cotejado en una allowlist deny-by-default = RBAC/ABAC). <strong>No es</strong><br />
+<em>object-capability</em> (CaMeL/Progent/seL4): no hay token inforjable, ni delegación, ni atenuación. <strong>No<br />
+  debe citarse el protocolo como «alineado con CaMeL».</strong> La coincidencia es de <em>filosofía</em> (dato≠autoridad),<br />
+  no de mecanismo.</li>
+<li><strong>«Economía de tokens» = coste de cómputo, no tokenomics.</strong> <code>token_cost</code>/<code>budget</code> miden y topan el gasto<br />
+  de inferencia. No hay incentivos, staking ni mercados. No debe denominarse «coordinación económica».</li>
+<li><strong>Principio general:</strong> no reclamar lo que el código no hace. Un tribunal penaliza una afirmación inflada<br />
+  más que un alcance modesto bien delimitado.</li>
+</ul>
+<h3>3.4 Regla de disciplina (anti meta-proyecto perpetuo) — el riesgo nº 1</h3>
+<p>El fracaso probable <strong>no</strong> es elegir mal la vía, sino caer en <strong>dogfooding infinito</strong>: pulir el protocolo<br />
+de forma endógena en lugar de cerrar y desplegar entregables reales.</p>
+<ul>
+<li><strong>Toda mejora la motiva una necesidad real</strong> de Financiero o ScanPay <strong>con fecha de entrega fija</strong>. Nada<br />
+  especulativo. Si ningún proyecto real la exige, <strong>no se construye todavía</strong>.</li>
+<li><strong>La instrumentación 🔬 opera <em>durante</em> el uso real, no después.</strong> Retrofitar procedencia sobre un<br />
+  historial ya cerrado produce un dataset débil y poco creíble. Debe instrumentarse <strong>antes</strong> del uso en<br />
+  producción, para que cada decisión real de Financiero/ScanPay quede capturada en formato científico <strong>en<br />
+  caliente</strong>.</li>
+</ul>
+<p><strong>[rev. 2026-06-12] Riesgo simétrico nº 2 (igual de letal, antes no nombrado):</strong> que <strong>producción se<br />
+retrase o fracase y no haya dataset</strong>. La tesis es rehén del éxito de dos proyectos plurianuales operados<br />
+por <strong>una sola persona</strong> más agentes (dos productos + protocolo + investigación: la capacidad es la<br />
+restricción no escrita del plan). Mitigación: (a) hitos trimestrales de <strong>volumen mínimo de datos T1</strong>; si<br />
+no se alcanzan, GATE-INST se re-evalúa antes de seguir invirtiendo en la vía de investigación; (b) la<br />
+Fase 5 completa y E3 quedan <strong>diferidas por defecto</strong> — solo entran si un proyecto real las exige con<br />
+fecha; (c) la evidencia de uso real se considera anecdótica hasta que el mailbox/eventlog acumule volumen<br />
+medible (hoy: un puñado de mensajes, no un dataset).</p>
+<h3>3.5 Lista de NO-hacer <strong>[rev. 2026-06-12 — revisada por doc. 02 §8]</strong></h3>
+<p>La versión anterior de esta regla mezclaba dos cosas distintas y contenía una contradicción no declarada:<br />
+apostaba la novedad a G3.1 (atestación de autoría verificable) mientras excluía de raíz a los únicos<br />
+adversarios frente a los que esa atestación tiene valor. Queda así:</p>
+<p><strong>Sigue prohibido (sin cambio):</strong><br />
+- ❌ <strong>Consenso BFT / SMR / CRDTs</strong> — resuelven la desconfianza multipartita <em>trustless</em>; el modelo aquí es<br />
+  de escritor único confiable. Copiar CometBFT empeoraría el sistema, no lo mejoraría.<br />
+- ❌ <strong>Tokenomics on-chain</strong> (staking/slashing/mercados) — problema económico que el protocolo no tiene.<br />
+- ❌ <strong>Object-capabilities de delegación (Macaroons/Biscuit/zcap)</strong> — <strong>solo</strong> el día que exista delegación<br />
+  agente→agente→tool. Hoy no la hay; construirla ahora es autoridad muerta.</p>
+<p><strong>Se adopta (nuevo — distinción clave):</strong><br />
+- ✅ <strong>Múltiples firmantes independientes SIN consenso</strong> — clave/identidad de firma <strong>por agente</strong> +<br />
+<code>prev_hash</code> encadenado + <strong>anclaje externo</strong> periódico (doc. 02 §5). No es coordinación multipartita:<br />
+  cada firmante atesta unilateralmente y el orden lo sigue fijando el escritor único. La distinción es<br />
+  entre <em>decidir juntos</em> (prohibido, innecesario) y <em>no poder falsificarse mutuamente</em> (necesario para que<br />
+  G3.1 tenga adversario — sin esto, la atestación es auto-atestación y no hay contribución).</p>
+<hr />
+<h2>4. EL PIPELINE — Fases 0 → 6</h2>
+<blockquote>
+<p><strong>Leyenda de columnas:</strong> <em>Dónde</em> = ubicación real verificada en el repositorio (✦ = hay que crearlo, no<br />
+existe hoy). <em>Esfuerzo</em> = Bajo / Medio / Alto. <em>Etiqueta</em> = 🔧 ENG / 🔬 SEED-INV.</p>
+</blockquote>
+<hr />
+<h3>⬛ Fase 0 — Cimientos baratos (sin runtime, desbloquean todo)</h3>
+<p><strong>Objetivo:</strong> instalar el <strong>vocabulario</strong> y el <strong>gobernador</strong> que hacen seguro todo lo demás, y plantar el<br />
+primer dato científico al menor coste. Sin código de runtime; solo documentación y un script de export.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E5</strong></td>
+<td>Catálogo nombrado de modos de fallo → guardrail</td>
+<td>✦ <code>Area_comun/protocol/FAILURE_MODES.md</code> (NO existe)</td>
+<td>Fallos ya mitigados (drift, anomalías, colisión, liveness, budget) → tabla <code>modo → síntoma → guardrail</code>, con taxonomía <strong>MAST</strong> como vocabulario</td>
+<td>La tabla cubre los 14 modos MAST + los guardrails; queda enlazada desde el onboarding y la guía de review</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+<tr>
+<td><strong>E6</strong></td>
+<td>Test «¿merece esto un loop?» (gobernador de E3)</td>
+<td><code>Area_comun/protocol/TASK_PROTOCOL.md</code> (existe)</td>
+<td>4 condiciones (¿se repite ≥ semanal? ¿verificación automatizada? ¿el budget absorbe el reintento? ¿tools de nivel senior?) + check de 30 s</td>
+<td>Checklist obligatorio antes de crear cualquier <code>discovery_scanner</code> o flujo de autonomía</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+<tr>
+<td><strong>#1</strong></td>
+<td><strong>MAST sobre el historial propio</strong></td>
+<td><code>protocol_research/</code> (lee <code>Area_comun/decisions/</code>, <code>handoffs/</code>, eventlog)</td>
+<td>Historial de fallos pasados (handoffs fallidos, drift DECISION-0017, colisiones DECISION-0020) → anotación <strong>MAST-inspired</strong> (taxonomía MAST aplicada a incidentes operacionales de protocolo)</td>
+<td><strong>[rev. 2026-06-12]</strong> Dataset versionado; la comparabilidad 1:1 con MAST-Data (trazas de frameworks en tareas, no incidentes de protocolo) se <strong>evalúa y se reporta como límite</strong>, no se asume; «citable» queda condicionado al GATE-DATASET (doc. 03)</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> ninguna; es el arranque. <strong>E5 y #1 son la misma materia</strong> vista dos veces: E5 nombra los<br />
+fallos para el equipo; #1 los exporta en formato científico. Se ejecutan juntos.<br />
+<strong>Riesgo / mitigación:</strong> ninguno serio (es documental). El valor de #1 es desproporcionado a su coste: es<br />
+<strong>el win de investigación más barato del pipeline</strong> —convierte historia ya existente en dato citable—.</p>
+<hr />
+<h3>⬛ Fase 1 — Skills (registry + digestion)</h3>
+<p><strong>Objetivo:</strong> conocimiento reutilizable, declarado una vez y <strong>digerido</strong> a 4–5 reglas por run. Refuerza<br />
+la prioridad de coste de tokens del protocolo: hoy el subagente recibe el spec completo; con digestion<br />
+recibe lo mínimo. Es neutral de dominio por construcción, de modo que cabe en el core sin romperlo.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E1</strong></td>
+<td>Skill registry + digestion bajo demanda</td>
+<td>✦ contrato <code>SKILL</code> en <code>Area_comun/protocol/</code> + ✦ bloque <code>skill_registry</code> en <code>protocol.config.json</code> + integración con <code>tool_policy.py</code> + <code>DECISION-0029</code>+SPEC</td>
+<td>Skills como <strong>artefactos versionados</strong> (referencia por ID, nunca estado mutable fuera del ledger) → carga por trigger/descripción → el orquestador digiere a 4–5 reglas antes del handoff</td>
+<td>Un subagente recibe reglas digeridas, no el spec completo; <code>tool_policy</code> decide qué skills ve cada capacidad; un golden case mide la reducción de tokens</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> Fase 0 (E5/E6 aportan el vocabulario). Puede solaparse con la Fase 3.<br />
+<strong>Riesgo / mitigación:</strong> que las skills muten fuera del ledger → mantenerlas como artefactos versionados y<br />
+referenciadas por ID (coherente con la anti-duplicación del protocolo). <strong>Aportación a investigación:<br />
+cero</strong> — es la mejor práctica de Gentleman/Codez/DevSecOps, bien ejecutada.</p>
+<hr />
+<h3>⬛ Fase 2 — Connectors / MCP (la palanca de producción)</h3>
+<p><strong>Objetivo:</strong> operar <strong>sistemas reales</strong> (GitHub, Linear/Jira, Slack, error-trackers, DB, DevTools)<br />
+gobernados por la <code>tool_policy</code> existente. <strong>Esta es la fase que habilita el dataset:</strong> sin conectores, el<br />
+protocolo coordina artefactos de texto; con ellos, opera Financiero/ScanPay de verdad y <strong>genera la<br />
+historia real</strong> que la investigación necesita.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E2</strong></td>
+<td>Capa de conectores MCP sobre tool-policy</td>
+<td><code>runtime/adapters/</code> (existe: base/replay/llm) + ✦ bloque <code>connectors</code> en config + <code>DECISION</code></td>
+<td>La <code>tool_policy</code> (deny-by-default, scope, capabilities) ya <strong>es</strong> la capa de autorización del MCP → añadir transporte/registro de conectores con <code>trust_boundary</code> por conector</td>
+<td>El output del conector se trata como <strong>dato no confiable</strong> (ya garantizado); deny-by-default + threat model documentado por conector; ningún conector concede autoridad</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> Fase 1 (las skills describen <em>cómo</em> usar cada conector). Habilita la Fase 4 (los scanners<br />
+requieren leer/escribir issues reales).<br />
+<strong>Riesgo / mitigación:</strong> <em>permission drift</em> (Codez: «no le des un token y los endpoints, te hace un<br />
+desastre»). El deny-by-default + event-auth lo contienen; la <code>DECISION</code> debe fijar explícitamente que<br />
+<strong>MCP no concede autoridad</strong>. <strong>Aportación a investigación: cero</strong>, pero es el <strong>prerrequisito físico</strong> del<br />
+dataset (la Fase 3 sin uso real es instrumentación sin datos).</p>
+<hr />
+<h3>🟦 Fase 3 — Columna de procedencia (LA TESIS) · carril PARALELO continuo</h3>
+<p><strong>Objetivo:</strong> la <strong>única</strong> novedad científica del plan. Tres exporters <strong>aditivos</strong> que no alteran el<br />
+comportamiento del core: leen el eventlog y producen el dataset en formatos que el campo reconoce. <strong>Opera<br />
+en paralelo a las Fases 1–2 y permanece activa durante todo el uso de producción</strong> (regla 3.4: capturar en<br />
+caliente, no retrofitar).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>#2</strong></td>
+<td><strong>PROV-AGENT</strong> — eventlog → W3C PROV</td>
+<td>nuevo exporter sobre <code>eventlog.py</code> (<code>seq</code>, <code>canonical_hash</code>); ✦ <code>protocol_research/</code></td>
+<td>Eventos del log → grafo W3C <strong>PROV</strong> (entidades, actividades, agentes), emitido conforme al <strong>esquema de dos planos</strong> (doc. 03 §2: plano de protocolo sin texto libre; carga útil solo por hash) <strong>desde la primera versión</strong></td>
+<td><strong>[rev.]</strong> <strong>Aborda G1.2</strong> (log operativo <em>unificado</em> con grafo de provenance normativo). Export determinista, validado contra el esquema PROV; salida apta para liberación T1</td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>#3</strong></td>
+<td><strong>Cost-attribution por handoff</strong></td>
+<td>extender <code>budget.py</code> + <code>metrics.py</code> (existen)</td>
+<td>Medición actual <strong>agregada/tope global</strong> → imputación de tokens por <strong>handoff / decisión / agente</strong> (esquema de dos planos, doc. 03 §2)</td>
+<td><strong>[rev.]</strong> <strong>Aborda G4.1</strong>. Aporta la granularidad que contrasta con datos propios el hallazgo de Tokenomics (≈59 % del gasto en review → respalda <code>DECISION-0005</code>/<code>0008</code>), medido, no citado</td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>#4</strong></td>
+<td><strong>Atestación de autoría (in-toto)</strong> — <strong>NÚCLEO</strong></td>
+<td>extender <code>generate_provenance.py</code> (SLSA-lite, existe) + <code>DECISION-0023</code> + <code>eventlog.py</code></td>
+<td><strong>[rev. 2026-06-12 — alcance fijado por doc. 02 §5, tres sub-tareas]:</strong> (a) <strong><code>prev_hash</code> encadenado</strong> en el eventlog; (b) <strong>clave/identidad de firma POR AGENTE</strong> (Ed25519 o keyless) con atestación de turno formato in-toto — el runtime almacena y encadena pero <strong>no puede producirlas</strong>; (c) <strong>anclaje externo periódico</strong> del digest de cabeza (backend configurable: remoto git independiente / log de transparencia / RFC 3161)</td>
+<td><strong>[rev.]</strong> <strong>Aborda G3.1</strong> con <strong>adversario explícito</strong> (A1/A2/A3r/A4, doc. 02 §3): atestación verificable por terceros, no auto-atestación. La DECISION de entrada debe citar la revisión de §3.5. Riesgo residual declarado: omisión dentro de ventana de anclaje (doc. 02 §6)</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> <strong>[rev. 2026-06-12]</strong> <strong>GATE-DATASET (bloqueante, doc. 03 §6):</strong> antes de activar la<br />
+instrumentación en producción debe constar por escrito (registrado como DECISION) la aprobación del<br />
+responsable del tratamiento para la captura en dos planos y la liberación T1, con revisión jurídica<br />
+RGPD (ScanPay) + Ley 1581/2012 (Galapa), DPIA-lite y verificación de ToS de proveedores LLM. Sin GATE<br />
+superado no se captura en producción (la publicación es irreversible; el esquema depende del resultado).<br />
+Técnicamente #2/#3 leen lo ya existente; el <em>volumen</em> de datos reales depende de la Fase 2. <strong>#4 es el<br />
+corazón del TFM.</strong><br />
+<strong>Riesgo / mitigación:</strong> posponer la instrumentación «para cuando haya tiempo» implica capturar sobre<br />
+historial muerto y perder credibilidad del dataset. Debe <strong>activarse antes</strong> de poner Financiero/ScanPay en<br />
+producción. El ledger de decisiones <strong>ya es</strong> la materia prima de #4: la tarea consiste en darle formato<br />
+verificable, no en inventar desde cero.</p>
+<blockquote>
+<p><strong>Por qué esta fase, y no otra, es la tesis:</strong> de los 6 pilares del SOTA, <strong>G3.1 (autoría)</strong> es el único<br />
+gap donde el protocolo <em>ya roza una contribución sin proponérselo</em> — <code>Area_comun/decisions/</code> + los<br />
+handoffs por agente conforman un registro embrionario de autoría que <strong>ningún otro grupo tiene</strong>. La<br />
+distancia hasta la contribución es de <strong>formato y criptografía</strong> (HMAC simétrico → firma<br />
+asimétrica/keyless, encadenado in-toto), <strong>no de concepto.</strong> Es la apuesta más barata por novedad.</p>
+</blockquote>
+<hr />
+<h3>⬛ Fase 4 — Cierre del bucle (auto-descubrimiento) · gobernado por E6, vigilado por E5</h3>
+<p><strong>Objetivo:</strong> completar la mitad del bucle ausente (invariante #8 del campo). Hoy el backlog es<br />
+<em>push-driven</em>; con escáneres-proponedores se cierra el círculo <strong>encuentra → propone → enruta →<br />
+implementa → verifica → poda</strong> sin perder rigor: cada hallazgo entra como tarea <code>proposed</code> con su SDD, pasa<br />
+por el router, el maker≠checker y los gates.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E3</strong></td>
+<td>Scanners que encolan trabajo</td>
+<td>✦ bloque <code>discovery_scanners</code> en config + runtime + <code>DECISION</code>; emite vía <code>submit_intent.py</code> (existe, escritor único)</td>
+<td>Escáneres (rendimiento, seguridad, código muerto, specs incompletas, deuda) → <code>task_upsert(proposed)</code> con <code>max_proposed</code> por escáner</td>
+<td>Cada escáner supera el test E6; todo hallazgo tiene <strong>verificación objetiva</strong> + <strong>hard stop</strong>; respeta el escritor único; <code>max_proposed</code> evita saturación</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> <strong>E6</strong> (gobernador: decide qué se automatiza) + <strong>E5</strong> (vigila el modo de fallo) +<br />
+<strong>Fase 2</strong> (los escáneres leen/escriben issues reales).<br />
+<strong>Riesgo / mitigación:</strong> <strong>Ralph Wiggum loop</strong> (bucle que se repite sin converger) → exigir que <strong>todo<br />
+escáner</strong> tenga verificación objetiva y hard stop (budget/caps ya existen). Sin E6 esto se descontrola:<br />
+<strong>no debe construirse E3 antes que E6.</strong> <strong>Aportación a investigación: cero</strong>, pero es el mayor salto de<br />
+producto (protocolo auto-mantenido).</p>
+<hr />
+<h3>⬛ Fase 5 — Soporte a instancias reales (según necesidad de Financiero/ScanPay)</h3>
+<p><strong>Objetivo:</strong> piezas que <strong>solo</strong> se construyen cuando un proyecto real las exige (regla 3.4). Residen en<br />
+<code>profiles/</code> o como gates opcionales, <strong>no</strong> en el núcleo neutral.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E7</strong></td>
+<td>Perfil de self-validation (software)</td>
+<td>✦ <code>profiles/software_runtime/</code> (no existe; hoy solo <code>dotnet_enterprise</code>) + capability en el registry</td>
+<td>Tools de autovalidación: compilar, type/lint-check, ejecutar la app y observarla (DevTools), leer logs, DB, smoke tests + DoD que los exige</td>
+<td>Una instancia-código se autovalida sin humano hasta el checkpoint; reside en perfil, <strong>no</strong> en el core neutral</td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+<tr>
+<td><strong>E4</strong></td>
+<td>Review-risk gate + troceo de entregas</td>
+<td><code>protocol.config.json</code> <code>quality_policy</code> (existe) + guía en <code>RELEASE_ENGINEERING.md</code>/<code>TASK_PROTOCOL.md</code></td>
+<td>Riesgo de review (tamaño, nº de áreas) → troceo (»400 líneas o muchas áreas → partir»)</td>
+<td>Umbral configurable en <code>quality_policy</code>; el handoff rechaza entregas sobre-grandes; protege al humano (coherente con la autonomía supervisada)</td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+<tr>
+<td><strong>E8</strong></td>
+<td>Notación testable EARS / Gherkin</td>
+<td>templates de <code>Area_comun/specs/</code> (existen)</td>
+<td><code>acceptance_criteria</code> en prosa → EARS («cuando X, el sistema debe Y») o Gherkin <code>.feature</code></td>
+<td>Cada requisito ⇒ un test mecánicamente verificable; notación <strong>opcional</strong> por tipo de spec</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+<tr>
+<td><strong>E9</strong></td>
+<td>Git worktrees (aislamiento FS)</td>
+<td>adaptador en <code>runtime/adapters/</code> (existe) — opción, no núcleo</td>
+<td>Agentes-código concurrentes → checkouts aislados</td>
+<td>Complementa los claims+ventana segura+áreas personales con aislamiento de FS; opt-in</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔧</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> Fase 2 (E7 requiere conectores a DB/CI). Las demás son independientes y reactivas.<br />
+<strong>Riesgo / mitigación:</strong> construir esto <strong>antes</strong> de que un proyecto lo pida es especulación (viola 3.4).<br />
+<strong>No deben ejecutarse «por completitud».</strong> <strong>Aportación a investigación: cero.</strong></p>
+<hr />
+<h3>🟦 Fase 6 — Validación científica (el TFM) · reside en <code>protocol_research/</code> · <strong>[rev. 2026-06-12 — sustituida íntegramente por doc. 01 + doc. 04 §1]</strong></h3>
+<p><strong>Objetivo:</strong> someter a prueba las <strong>hipótesis pre-registradas H1–H3</strong> (doc. 01 §2) bajo el <strong>modelo de<br />
+amenaza M</strong> (doc. 02 §3–5), sobre datos capturados conforme al <strong>esquema de dos planos</strong> (doc. 03 §2).<br />
+<strong>El TFM = un <em>position paper</em> temprano (GATE-INST) + UN experimento medido (H1+H2 endpoints primarios;<br />
+H3 secundario).</strong> La hipótesis anterior («mayor completitud que un baseline sin esa capa») queda<br />
+<strong>retirada por circular</strong>: era verdadera por construcción y su métrica medía la adopción de la propia<br />
+feature (doc. 01 §1). La «completitud» pasa a <em>manipulation check</em> (precondición instrumental, no<br />
+hallazgo).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Qué hace</th>
+<th>Dónde</th>
+<th>Entrada → Salida</th>
+<th>Definition of Done</th>
+<th style="text-align: center;">Esf.</th>
+<th style="text-align: center;">Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PRE-REG</strong></td>
+<td>Pre-registro congelado</td>
+<td><code>protocol_research/</code></td>
+<td>Doc. 01 §3.1 → umbrales, catálogo de ataques, n, plan de análisis</td>
+<td>Hash del pre-registro <strong>anclado externamente antes</strong> de la primera ejecución medida</td>
+<td style="text-align: center;">Bajo</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>TFM-H1</strong></td>
+<td><strong>Solidez</strong>: campaña de inyección de fallos</td>
+<td><code>protocol_research/</code> (harness)</td>
+<td>Catálogo A1/A2/A3r/A4 → propiedades P1–P6 (doc. 02 §4): sustitución de autoría, alteración/borrado/reordenamiento, rollback, re-firma, omisión</td>
+<td>H1: detección ≥ 95 % por clase, FPR ≤ 1 % (umbrales del pre-registro). Clases con detección parcial esperada (omisión en ventana de anclaje) se <strong>reportan como resultado</strong>. Absorbe la antigua #6 en versión acotada: <strong>atacante programático</strong> con capacidades de M (el agente LLM subversivo general queda como extensión futura declarada)</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>TFM-H2</strong></td>
+<td><strong>Coste</strong>: ablation apareada</td>
+<td><code>protocol_research/</code></td>
+<td>≥ 30 runs/condición con/sin capa de procedencia, orden aleatorizado → Δtokens/handoff, Δlatencia/turno, bytes/patch, curva de verificación vs. nº de patches</td>
+<td>H2: overhead ≤ 5 % tokens y ≤ 10 % latencia (pre-registro). El rechazo de H2 es <strong>resultado negativo publicable</strong> (capa correcta pero inviable)</td>
+<td style="text-align: center;">Alto</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>TFM-H3</strong></td>
+<td><strong>Verificabilidad externa</strong>: protocolo de auditor</td>
+<td><code>protocol_research/</code></td>
+<td>Auditor ≠ autor, con <strong>solo artefactos públicos</strong> (T1 + claves + anclas) → % de cadena autoría→release verificable; misma auditoría documental sobre <strong>AutoGen/ChatDev/OpenHands</strong> por defecto</td>
+<td>H3: reconstrucción externa ≥ 90 %. Los baselines son <strong>caracterización del estado de la práctica</strong> (qué puede verificar un tercero con sus logs best-effort), <strong>no</strong> el comparando de una carrera — eso reintroduciría la circularidad</td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+<tr>
+<td><strong>#7</strong></td>
+<td>Semántica de parada en cascada (G6.2)</td>
+<td><code>protocol_research/</code> (formalización) + apoyo en <code>DECISION-0024</code></td>
+<td>N tareas en vuelo + handoffs pendientes al pulsar stop → ¿qué queda consistente?</td>
+<td><strong>Definición falsable</strong> de «parada consistente» (no solución completa: G6.2 es <em>problema abierto sin teoría</em> en el campo) + propiedad verificable sobre los estados <code>blocked</code>/<code>claimed</code></td>
+<td style="text-align: center;">Medio</td>
+<td style="text-align: center;">🔬</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dependencias:</strong> <strong>GATE-DATASET superado</strong> (doc. 03 §6) → Fase 3 con datos reales (volumen vía Fase 2) →<br />
+<strong>GATE-INST</strong> (position paper con revisión por pares + director/tutor + programa confirmado, <strong>antes</strong> de<br />
+la inversión experimental fuerte) → PRE-REG → TFM-H1/H2/H3. <strong>GATE-SOTA</strong> corre en paralelo: re-validación<br />
+del estado del arte cada <strong>3 meses</strong> («agent authorship attestation», «AI agent provenance», in-toto/SLSA<br />
++ agentes); si aparece trabajo que cubre G3.1 → re-posicionar (diferenciación o pivote a #7/G6.2) antes de<br />
+seguir invirtiendo.<br />
+<strong>Riesgo / mitigación:</strong> sobre-alcance (sin cambio: G3.1 es EL experimento; #7 es extensión definicional).<br />
+Riesgo nuevo declarado: si GATE-DATASET no aprueba T1, H1/H2 sobreviven (verificación interna + artefactos<br />
+públicos) pero H3 se reporta bajo acuerdo y el paper <strong>no</strong> afirma «dataset citable» (degradación honesta,<br />
+doc. 03 §6). La deprecación de SWE-bench Verified por contaminación sigue vigente como advertencia: no<br />
+confiar en benchmarks contaminables.</p>
+<hr />
+<h2>5. Mapa de dependencias y orden de ejecución</h2>
+<pre><code>        ┌─────────────────────────────────────────────────────────────┐
+        │  Fase 3 (PROCEDENCIA / 🔬)  ── carril PARALELO continuo ──►   │
+        │  #2 PROV · #3 cost-attr · #4 autoría in-toto                  │
+        │  (activa ANTES de producción y durante TODO el uso real)     │
+        └─────────────────────────────────────────────────────────────┘
+                          ▲ lee eventlog                 ▼ alimenta
+   Fase 0 ──► Fase 1 ──► Fase 2 ──────────────────────► Fase 6 (TFM / 🔬)
+   E5·E6·#1   E1 Skills   E2 MCP                         G3.1 medido + #6 + #7
+   (Bajo)     (Alto)      (Alto)                         (Alto)
+      │                     │
+      │                     └──► Fase 4 ──► Fase 5 (bajo demanda real)
+      │  (E6 gobierna)           E3 scanners  E7·E4·E8·E9
+      └──────────────────────────►│           (Medio/Bajo)
+                                   (Alto)
+</code></pre>
+<p><strong>Camino crítico hacia el doctorado [rev. 2026-06-12 — con gates, doc. 04 §2]:</strong> <code>Fase 0 (#1) →
+GATE-DATASET (legal, bloqueante) → Fase 3 activa (2 planos + firma por agente) → Fase 2 en producción →
+datos reales T1 acumulados → GATE-INST (position paper revisado + director + programa) → PRE-REG →
+Fase 6 (TFM-H1/H2/H3)</code>, con <strong>GATE-SOTA</strong> cada 3 meses en paralelo. El resto (E1, E3, Fase 5) es<br />
+<strong>producto</strong> que mejora el dataset pero <strong>no está en el camino crítico</strong> de la tesis.</p>
+<p><strong>Orden recomendado de arranque:</strong><br />
+1. <strong>Fase 0</strong> completa (barata; desbloquea vocabulario + primer dato científico).<br />
+2. <strong>Fase 3 #2 y #3 activas</strong> (instrumentación lista <em>antes</em> de producción).<br />
+3. <strong>Fase 1 (E1)</strong> y <strong>Fase 2 (E2)</strong> — para el uso real en Financiero/ScanPay.<br />
+4. <strong>Fase 3 #4</strong> (atestación de autoría) en cuanto existan patches reales de agentes que atestar.<br />
+5. <strong>Fase 4 (E3)</strong> solo tras E6, con el flujo manual ya probado.<br />
+6. <strong>Fase 5</strong> reactiva, pieza a pieza, según lo exija cada proyecto.<br />
+7. <strong>Fase 6 (TFM)</strong> cuando el dataset tenga volumen real.</p>
+<hr />
+<h2>6. El bloque de investigación en detalle — qué significa «medido» <strong>[rev. 2026-06-12 — sustituido por doc. 01]</strong></h2>
+<p>El TFM no es «describir el protocolo». Es <strong>un experimento controlado con hipótesis que pueden fallar</strong>.<br />
+La hipótesis de la versión anterior queda retirada por circular (doc. 01 §1). Operacionalizado:</p>
+<ul>
+<li><strong>H1 — Solidez (endpoint primario):</strong> bajo el modelo de amenaza M (doc. 02), el verificador detecta<br />
+  ≥ 95 % de las manipulaciones de autoría inyectadas (catálogo A1/A2/A3r/A4) con FPR ≤ 1 %. <strong>Criterio de<br />
+  rechazo:</strong> detección menor en cualquier clase dentro del alcance, o FPR mayor → la capa es un formato de<br />
+  log, no una contribución de seguridad, y así se reporta.</li>
+<li><strong>H2 — Coste (endpoint primario):</strong> overhead ≤ 5 % tokens y ≤ 10 % latencia por handoff (ablation<br />
+  apareada, ≥ 30 runs/condición); verificación de release a lo sumo cuasilineal en nº de patches.<br />
+<strong>Rechazo = resultado negativo publicable.</strong></li>
+<li><strong>H3 — Verificabilidad externa (secundario):</strong> un auditor con <strong>solo artefactos públicos</strong> reconstruye y<br />
+  verifica criptográficamente ≥ 90 % de la cadena autoría→release; sobre los baselines se <strong>caracteriza</strong><br />
+  qué puede verificar un tercero con logs best-effort (descriptivo, no carrera).</li>
+<li><strong>Manipulation check (no es hipótesis):</strong> % de patches con atestación bien formada ≥ 99 % en ejecuciones<br />
+  legítimas; si falla, el instrumento está roto y H1–H3 no son interpretables.</li>
+<li><strong>Pre-registro:</strong> umbrales, catálogo, n y plan de análisis congelados y <strong>anclados externamente antes</strong><br />
+  de medir (doc. 01 §3.1). Sin pre-registro, los umbrales serían ajustables a posteriori — el mismo defecto<br />
+  que se corrige.</li>
+<li><strong>Amenazas a la validez</strong> (sección obligatoria): catálogo de ataques ≠ espacio total (constructo); deriva<br />
+  de modelo entre versiones; un operador / dos dominios / dos agentes — la generalización <strong>se declara, no<br />
+  se extrapola</strong> (doc. 01 §3.4).</li>
+<li><strong>Criterio de éxito → viabilidad doctoral [rev.]:</strong> GATE-INST superado (position paper con revisión<br />
+  externa + director + programa) <strong>+</strong> H1 no rechazada <strong>+</strong> H2 no rechazada con datos reales. Un plan<br />
+  endógeno al repo no constituye vía doctoral: la capa institucional es parte del criterio.</li>
+<li><strong>Criterio de cancelación sin pérdida:</strong> sin cambio — #2/#3/#4 se capitalizan como features de negocio<br />
+  (auditoría, cost-attribution, trazabilidad). Se añade: el rechazo de H2 se publica como resultado<br />
+  negativo; la no-aprobación de T1 degrada honestamente las afirmaciones (doc. 03 §6).</li>
+</ul>
+<hr />
+<h2>7. Honestidad final, lista de NO-hacer y decisión post-TFM</h2>
+<p><strong>Lo que este pipeline NO concede (sin complacencia):</strong><br />
+- E1–E9 <strong>no</strong> acercan al doctorado. Son producto. Si solo se ejecuta eso, el resultado es una buena<br />
+  metodología y <strong>cero</strong> tesis.<br />
+- Ocupar el gap <strong>no</strong> equivale a cerrarlo. El protocolo se <strong>sitúa</strong> en la intersección de los 6 pilares;<br />
+  la contribución exige <strong>medir</strong> (Fase 6), que es precisamente lo que aún no se ha hecho ni una vez.<br />
+- La «seguridad por capacidad» del protocolo es <strong>RBAC</strong> (regla 3.3). No debe presentarse como CaMeL.<br />
+<strong>[rev. 2026-06-12]</strong> El «ledger» actual es HMAC simétrico con <code>seq</code> <strong>sin</strong> <code>prev_hash</code> — es decir,<br />
+<strong>auto-atestación</strong>: quien produce el registro lo autentica. Tras la corrección del doc. 02 §5 (firma<br />
+  por agente + <code>prev_hash</code> + anclaje externo) será tamper-evident frente a A1/A2/A3-restringido, <strong>nunca</strong><br />
+  integridad bizantina (no-objetivo declarado, doc. 02 §7). Toda afirmación de seguridad debe citar la<br />
+  clase de adversario que cubre; sin clase asignada, no se afirma.<br />
+- La <strong>parada en cascada (#7)</strong> y la <strong>autoría (G3.1)</strong> son problemas <strong>abiertos en el campo</strong>: se<br />
+<strong>siembran</strong>, no se resuelven. El TFM demuestra <strong>feasibilidad en uno (G3.1)</strong>, no cierra el frente.</p>
+<p><strong>Lista de NO-hacer (recordatorio de 3.5):</strong> BFT, tokenomics, object-capabilities reales (hasta que exista<br />
+delegación). Y, sobre todo: <strong>no construir nada que ningún proyecto real exija con fecha</strong> (regla 3.4) — el<br />
+meta-proyecto perpetuo es el único fracaso que de verdad amenaza al plan.</p>
+<p><strong>Árbol de decisión post-TFM [rev. 2026-06-12]:</strong></p>
+<pre><code>TFM termina
+   ├─ GATE-INST superado + H1 no rechazada + H2 no rechazada (datos reales, pre-registro respetado)
+   │     └─► VÍA DOCTORAL VIABLE → formalizar (#7, definiciones falsables) + ampliar catálogo de
+   │         ataques + segunda instancia para validez externa
+   ├─ H2 rechazada (coste inviable) con H1 sólida
+   │     └─► RESULTADO NEGATIVO PUBLICABLE + capa como feature opt-in de auditoría premium
+   └─ H1 rechazada / GATE-DATASET no aprueba T1 / GATE-SOTA detecta cierre del gap / dataset insuficiente
+         └─► CERRAR investigación SIN pérdida
+               └─► #2/#3/#4 quedan como features de producto (auditoría, costes, autoría)
+                   → 100 % del esfuerzo capitalizado en Financiero/ScanPay
+</code></pre>
+<hr />
+<h2>8. Tabla maestra (cobertura completa — una fila por tarea)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Fase</th>
+<th style="text-align: center;">ID</th>
+<th>Qué</th>
+<th style="text-align: center;">Tag</th>
+<th style="text-align: center;">Esf.</th>
+<th>Dónde (✦ = crear)</th>
+<th style="text-align: center;">Depende de</th>
+<th style="text-align: center;">Gap SOTA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><strong>E5</strong></td>
+<td>Catálogo de modos de fallo (MAST)</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Bajo</td>
+<td>✦ <code>protocol/FAILURE_MODES.md</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><strong>E6</strong></td>
+<td>Test «¿merece un loop?»</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Bajo</td>
+<td><code>protocol/TASK_PROTOCOL.md</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><strong>#1</strong></td>
+<td>MAST sobre el historial → MAST-Data</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Bajo</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">G1/G5 (fallos)</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><strong>E1</strong></td>
+<td>Skills (registry + digestion)</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Alto</td>
+<td>✦ contrato <code>SKILL</code> + ✦ <code>skill_registry</code> + <code>tool_policy.py</code></td>
+<td style="text-align: center;">E5/E6</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><strong>E2</strong></td>
+<td>Connectors / MCP</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Alto</td>
+<td><code>runtime/adapters/</code> + ✦ <code>connectors</code></td>
+<td style="text-align: center;">E1</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>GATE-DATASET</strong></td>
+<td>Gate legal bloqueante (doc. 03 §6)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Bajo</td>
+<td>DECISION + DPIA-lite</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>#2</strong></td>
+<td>PROV-AGENT (eventlog → W3C PROV, 2 planos)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Medio</td>
+<td>exporter ✦ sobre <code>eventlog.py</code></td>
+<td style="text-align: center;"><strong>GATE-DATASET</strong> (vol. de Fase 2)</td>
+<td style="text-align: center;"><strong>G1.2</strong> (aborda)</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>#3</strong></td>
+<td>Cost-attribution por handoff (2 planos)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Medio</td>
+<td><code>budget.py</code> + <code>metrics.py</code></td>
+<td style="text-align: center;"><strong>GATE-DATASET</strong></td>
+<td style="text-align: center;"><strong>G4.1</strong> (aborda)</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>#4</strong></td>
+<td>Atestación de autoría: <code>prev_hash</code> + firma por agente + anclaje externo (doc. 02 §5)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Alto</td>
+<td><code>generate_provenance.py</code> + <code>eventlog.py</code> + <code>DECISION-0023</code></td>
+<td style="text-align: center;">#2, <strong>GATE-DATASET</strong></td>
+<td style="text-align: center;"><strong>G3.1</strong> ⭐ (aborda, con adversario)</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><strong>E3</strong></td>
+<td>Scanners → tareas <code>proposed</code></td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Alto</td>
+<td>✦ <code>discovery_scanners</code> + <code>submit_intent.py</code></td>
+<td style="text-align: center;"><strong>E6</strong>, E5, E2</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><strong>E7</strong></td>
+<td>Perfil self-validation (software)</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Medio</td>
+<td>✦ <code>profiles/software_runtime/</code></td>
+<td style="text-align: center;">E2</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><strong>E4</strong></td>
+<td>Review-risk gate + troceo</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Medio</td>
+<td><code>quality_policy</code> + <code>RELEASE_ENGINEERING.md</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><strong>E8</strong></td>
+<td>Notación EARS / Gherkin</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Bajo</td>
+<td>templates <code>Area_comun/specs/</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><strong>E9</strong></td>
+<td>Git worktrees (aislamiento FS)</td>
+<td style="text-align: center;">🔧</td>
+<td style="text-align: center;">Bajo</td>
+<td>adaptador <code>runtime/adapters/</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>GATE-INST</strong></td>
+<td>Position paper revisado + director + programa</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Medio</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">datos T1 acumulándose</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>PRE-REG</strong></td>
+<td>Pre-registro congelado y anclado (doc. 01 §3.1)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Bajo</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">GATE-INST</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>TFM-H1</strong></td>
+<td>Solidez: inyección de fallos vs. modelo M (absorbe #6 acotado)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Alto</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">PRE-REG, Fase 3 + datos reales</td>
+<td style="text-align: center;"><strong>G3.1</strong> ⭐</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>TFM-H2</strong></td>
+<td>Coste: ablation apareada (umbrales pre-registrados)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Alto</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">PRE-REG</td>
+<td style="text-align: center;"><strong>G3.1/G4.1</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>TFM-H3</strong></td>
+<td>Verificabilidad externa: auditor + caracterización de baselines</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Medio</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">PRE-REG, T1</td>
+<td style="text-align: center;"><strong>G3.1</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><strong>#7</strong></td>
+<td>Parada en cascada (definición falsable)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Medio</td>
+<td><code>protocol_research/</code> + <code>DECISION-0024</code></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>G6.2</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">∥</td>
+<td style="text-align: center;"><strong>GATE-SOTA</strong></td>
+<td>Re-validación del SOTA cada 3 meses (vigilancia de novedad)</td>
+<td style="text-align: center;">🔬</td>
+<td style="text-align: center;">Bajo</td>
+<td><code>protocol_research/</code></td>
+<td style="text-align: center;">— (continuo)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>#5</strong></td>
+<td>⚠️ <em>Corrección:</em> registry capability ≠ ocap</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td>regla de honestidad (§3.3), <strong>no es tarea</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">G2.2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cobertura [rev. 2026-06-12]:</strong> E1–E9 (9) + #1–#7 (7) = <strong>16 ítems</strong> originales, todos mapeados, más los<br />
+gates y artefactos de la corrección (GATE-DATASET, GATE-INST, GATE-SOTA, PRE-REG; TFM desglosado en<br />
+H1/H2/H3 y #6 absorbido en TFM-H1). #5 figura como guardia de honestidad transversal, no como tarea de<br />
+construcción.</p>
+<hr />
+<blockquote>
+<p><em>Documento generado el 2026-06-12; </em><em>revisado el 2026-06-12</em><em> con el paquete de correcciones<br />
+metodológicas <code>01_Sources/Documents/01–05</code> (hipótesis falsables, modelo de amenaza G3.1, publicabilidad<br />
+del dataset, gates DATASET/INST/SOTA). Pipeline fundamentado en el inventario verificado del repositorio real<br />
+<code>multi_agent_project_protocol</code> (v1.1.0 · runtime v0.11.0): se distingue lo que </em><em>existe</em><em> de lo que hay<br />
+que </em><em>crear</em><em> (✦). El contexto de Financiero (sistema «Galapa») y ScanPay procede de la documentación<br />
+real de ambos casos. Registro impersonal y académico (regla §6 bis de <code>Contexto_Redaccion.md</code>); honestidad<br />
+y delimitación de alcance priorizadas sobre el halago. Fuentes: <code>Sugerencias_Mejora.txt</code> (E1–E9 + 7<br />
+sugerencias de papers), <code>COMPARATIVA_CRITICA_SOTA_vs_METODOLOGIA</code>, e inventario verificado del repositorio.<br />
+Caso 🌱 en expansión.</em></p>
+</blockquote>
+</body></html>
