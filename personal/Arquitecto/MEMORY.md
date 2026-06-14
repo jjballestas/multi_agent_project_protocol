@@ -1,45 +1,66 @@
-# MEMORY - Claude (arquitecto) - multi_agent_project_protocol
+# MEMORY - Arquitecto (antes "Claude") - multi_agent_project_protocol
 
-> Runbook in-repo de Claude (DECISION-0026: actualizar tras cada commit). La cronologia completa vive en la
+> Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-14, HEAD 60465f1, v1.6.0.
+> Ultima actualizacion: 2026-06-15, HEAD 823b5b9, v1.9.3.
 
-## Estado vigente (2026-06-14)
-- **v1.6.0 PUBLICADO.** HEAD `60465f1` en main. protocol_version 1.6.0, runtime_version 0.12.0. drift 0.
-- **Escritor unico VIVO:** event_state {enabled, materialize, enforce, authoritative} = true. enforce con dientes
-  (drift B.3 hard-fail si se edita state a mano). Toda transicion por `runtime/submit_intent.py`.
-- **#3 cost-attribution ACTIVO:** `metrics.cost_attribution_enabled=true` vivo (template false). Evento `cost.attributed`
-  applied:false (no muta estado, no drift; via append_cost_attribution fuera de submit_intent). cost_schema=2
-  (cost_tokens=total productor autoreportado + context_tokens=assembled proxy chars/div). Hot-verified seq 445. Reversible.
-- **TASK-0111 (cost-attribution) + TASK-0113 (fix chain+auth) DONE.** chain_auth_combined golden en CI.
-- **Gateado OFF:** #4 (chain/agent_signatures/anchor), SA.4 (real_invoker+supervised_autonomy), subagents, Capa C (team_bridge).
-- **Codex:** push/cron-driven por el operador; en STAND-DOWN (sin trabajo no-gateado).
+## Identidad (reforma del operador, 2026-06-15)
+- Soy **Arquitecto** (antes "Claude"). `agent_roles.architect="Arquitecto"` en protocol.config.json
+  (renombrado via `runtime/regenesis.py`, drift 0, history preserved). **submit_intent SIEMPRE
+  `--actor-id Arquitecto`** (caps architect/reviewer/orchestrator/qa; "Claude" ya NO tiene caps).
+  Mailbox `from: Arquitecto`. Mi area = `personal/Arquitecto/`. La voz analista firma **Analista**
+  (`personal/Analista/`). Defaults genericos de plantilla (`context.DEFAULT_AGENT_ROLES`, `router` fallback)
+  siguen "Claude" -- son la plantilla neutral, no la instancia viva.
 
-## Capabilities (clave operativa)
-- Claude = [architect, orchestrator, qa, reviewer] -- NO implementer. Codex = [implementer, test_engineer].
-- Claude PUEDE: task_upsert, in_review->done (reviewer), claims propias, project_narrative, protocol_prune, decision,
-  analysis-tasks propias in_progress->done (DECISION-0032). Claude NO PUEDE hop ->in_review (exige implementer=Codex).
-- Cierre de IMPLEMENTACION = dos partes: Codex in_progress->in_review (su atestacion), Claude in_review->done.
+## Estado vigente (2026-06-15)
+- **v1.9.3 PUBLICADO.** HEAD `823b5b9` en main. protocol_version 1.9.3, runtime_version 0.12.0. drift 0.
+- **TRIO OFF-PILOT COMPLETO:** TASK-0100 done (v1.9.1, .gitattributes LF futuros + v1.1.0 pre-normalizacion
+  honesta, DECISION-0037, firma v1.1.0 INTACTA), TASK-0095 done (v1.9.2, commit_turn self-consistente),
+  TASK-0096 done (v1.9.3, run_id unico por corrida real). Cada uno con CONCURRO de la Analista + mi reproduccion.
+- **Codex y Analista en STAND-DOWN** (mailbox limpio, cron parado). El operador los reactiva (agent-activation-lifecycle).
+  mailbox/open vacio. SIN trabajo activo; esperar GO del operador.
+- **Escritor unico VIVO:** event_state {enabled, materialize, enforce, authoritative}=true. enforce con dientes
+  (editar state a mano = drift B.3 hard-fail). Toda transicion por submit_intent. Rollback = 4 flags a false.
+- **#3 cost-attribution ACTIVO (v1.6.0):** metrics.cost_attribution_enabled=true vivo (template false). cost_schema=2.
+  Reversible. **Gateado OFF:** #4 (chain/agent_signatures/anchor), SA.4 (real_invoker+supervised_autonomy),
+  subagents, Capa C (team_bridge).
+- **Satelite read-only** `d:\Agentes\protocol_research` (DECISION-0035, repo SEPARADO, scaffolding/stubs OFF;
+  poblar/correr = GATE-DATASET/GATE-INST/PRE-REG). Fase 0 E5/E6 hecha (DECISION-0034). Fase 1/2/4 NO existen.
 
-## Backlog (GATEADO; no promover sin GO)
-- TASK-0095/0096/0100 proposed (TASK-0100 .gitattributes eol=lf espera GO). Fase 0 (E5/E6), Fase 1 (E1 skills),
-  Fase 2 (E2 connectors): no existen, requieren decision+GO. SA.4 piloto (DECISION-0027): sin disparar.
-- Mapa real reconciliado: `Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md` (#4 hecho off-by-default; E9 worktrees=NO).
+## Cierre de tarea via submit_intent (patron probado)
+- Transaccion atomica `submit_intent --intents <tx.json> --actor-id Arquitecto --timestamp <ts> --commit <HEAD>`.
+  Plantilla del tx (4 intents): claim acquire (ANIDADO `{op:"acquire", claim:{...scope...}}`) -> task_status
+  in_review->done -> project_narrative `{version:"X"}` -> claim release. Ejemplo replicado de tx-0095/0096-done.
+- Tras el submit_intent: edit PUNTUAL de `protocol.config.json` protocol_version (NO json.dump) + entrada
+  CHANGELOG. validate_collaboration_state (incluye drift B.3) + scan_encoding + scan_domain_neutrality VERDES
+  antes de commitear. Staging EXPLICITO por path (nunca git add -A; barre personal/Codex|operador).
+
+## Capabilities
+- Arquitecto = [architect, orchestrator, qa, reviewer] -- NO implementer. Codex = [implementer, test_engineer].
+- Cierre de IMPLEMENTACION = dos partes: Codex in_progress->in_review (su atestacion), Arquitecto in_review->done.
 
 ## Lecciones no-obvias (persisten)
-- **claim en submit_intent tx = forma ANIDADA** `{op, claim:{...scope...}}`; la plana pierde el scope al avanzar el estado
-  in-memory (apply_claim_event reconstruye sin scope) => "write outside active claim scope".
-- **Config: edit PUNTUAL** (nunca json.dump -> reformatea todo el archivo). protocol.config.json = fuente unica de version.
-- **`.protocol-tmp/` leftovers** (gitignored) hacen fallar el golden de materialize: `rm -rf .protocol-tmp/.protocol-state-materialize-* .protocol-tmp/.submit-intent-runtime-backup-*`.
-- **`utf-8-sig`** para leer state JSON (Codex escribe BOM+CRLF). Canal mailbox/state = ASCII-only (DECISION-0012).
-- **Staging EXPLICITO por path** (DECISION-0020); nunca `git add -A` (barre personal/operador|Codex). index.lock huerfano: `rm -f .git/index.lock` si no hay proceso git.
-- **maker != checker REAL:** reproducir el fix del peer (no confiar). En esta sesion Codex hallo un bug latente de #4
-  (chain+auth) que yo no habia visto -> el doble gate (Codex + analista) atrapo lo que un solo revisor no.
-- **Fail-closed:** ante fallo (golden rojo / drift != 0 / hot != real), deja estado consistente (flag false) + reporta. No fuerces.
+- **MULTI-SESION = descoordinacion (2026-06-15).** Hubo 2 sesiones arquitecto + 2 analista concurrentes en el
+  MISMO working tree -> vistas stale ("tienes mensaje"/"falta tu veredicto" sin inbound real), verdicts
+  duplicados bajo una identidad, ficheros que se mueven solos. Ante "falta tu X" sin inbound real: reconciliar
+  contra git/ledger y PREGUNTAR, no asumir/inventar. **Operar UNA sola sesion por rol.**
+- **NARRACION MINIMA "primordial" (DECISION-0036/0038):** CERO narracion intra-ejecucion; encadenar tool calls
+  en silencio; UN reporte final. El operador la marco con fuerte enfasis. Reincidir = anomalia DECISION-0018.
+- **claim en tx = forma ANIDADA** `{op, claim:{...scope...}}`; la plana pierde el scope al avanzar el estado.
+- **`utf-8-sig`** para leer state (Codex escribe BOM+CRLF). Canal mailbox/state = ASCII-only (DECISION-0012);
+  verifica scan_encoding ANTES de aseverar (rompi ASCII por acentos 2 veces -- siempre revisar).
+- **Renombrar el actor del ledger** = editar agent_roles (alimenta genesis) + regenesis.py (nuevo genesis desde
+  hot state -> los eventos historicos quedan antes del boundary, no se re-validan). Goldens corren en sandboxes
+  aislados (no afectados por el cambio de la instancia viva).
+- **Referencias historicas NO se reescriben:** mailbox archivado, dist/v1.1.0 FIRMADO, CLAIMS_ARCHIVE, tasks
+  cerradas registran el nombre de su epoca; solo se actualizan punteros VIVOS.
+- **maker != checker REAL:** reproducir el fix del peer (no confiar). El Arquitecto/revisor NO debe firmar
+  tambien como voz Analista (eso paso por la doble sesion: lo reconcilie a una voz).
+- **Fail-closed:** ante fallo (golden rojo / drift!=0 / hot!=real), deja estado consistente (flag false) + reporta.
 
 ## Reglas de riesgo
-- UN multiplicador por ventana. Activaciones gateadas solo con operador PRESENTE + rollback armado, nunca en tick desatendido.
-- enforce protege el LEDGER JSON, NO la prosa-contrato (AGENTS.md/decisions/specs) -> anti-colision MANUAL ahi (git diff + staging explicito).
-- Narracion minima (DECISION-0005 addendum): encadena, UN reporte final; no recortes contenido sustantivo.
+- UN multiplicador por ventana. Activaciones gateadas solo con operador PRESENTE + rollback armado.
+- enforce protege el LEDGER JSON, NO la prosa-contrato (AGENTS.md/decisions/specs) -> anti-colision MANUAL ahi.
 
-Detalle/cronologia completa: `memory/project-state-snapshot.md` (memoria auto) + semi-auto-collaboration-pattern + permission-auto-exec + operator-working-style + cutover-risk-staging + commit-then-memory.
+Detalle/cronologia completa: `memory/project-state-snapshot.md` + semi-auto-collaboration-pattern +
+permission-auto-exec + operator-working-style + cutover-risk-staging + commit-then-memory.

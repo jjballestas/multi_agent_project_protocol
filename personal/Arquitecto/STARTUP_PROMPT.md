@@ -29,30 +29,30 @@ updates frecuentes y prompts de cron/loop.
 4. `git log --oneline -8` + `git status` para HEAD real y arbol limpio.
 CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area privada = `personal/Arquitecto/` (DECISION-0016).
 
-## SESION EN CURSO / TRABAJO ACTIVO (2026-06-15, HEAD 5046ecc, v1.9.1) -- LEE ESTO PRIMERO
+## SESION EN CURSO / TRABAJO ACTIVO (2026-06-15, HEAD 823b5b9, v1.9.3) -- LEE ESTO PRIMERO
 
-- **CRON DE COORDINACION ACTIVO -> RE-ARMALO al entrar.** Es un `/loop` dinamico via `ScheduleWakeup` a
-  **5 min (300s)** (pedido por el operador). En la sesion nueva, vuelve a lanzarlo. Cada ciclo: leer
-  `Area_comun/mailbox/open/`; responder `requires_response` de Codex/analista por el metodo (ASCII,
-  maker!=checker, mover a answered/archived, gates verdes); avanzar ratificaciones/promociones SOLO con GO
-  explicito del operador; si nada accionable, reprogramar 300s sin ruido. Prompt del loop = el de abajo.
-- **TRIO OFF-PILOT en curso (GO del operador Jball; orden estricto, una a una, ratificacion adversarial):**
-  1/3 **TASK-0100 DONE** (.gitattributes LF para v1.2.0+, v1.1.0 doc pre-normalizacion, DECISION-0037; firma
-  v1.1.0 INTACTA; B descartada). 2/3 **TASK-0095 IN_REVIEW** (Codex entrego commit 5046ecc, claim liberado).
-  3/3 **TASK-0096 pendiente** (run_id unico; gate-previo de re-piloto SA.4 y feed #3 cost del satelite).
-- **ACCION INMEDIATA = revisar TASK-0095 (in_review):** (a) reproducir maker!=checker (golden runtime_loop/
-  real_adapter/intent_flow + aserto: tras turno con transicion el task .md queda committeado / working tree
-  limpio; validador/encoding/neutralidad/replay 0); (b) pedir pasada adversarial al analista por mailbox;
-  (c) si pasa, cerrar in_review->done por submit_intent (reviewer) -- cambia runtime => probable PATCH 1.9.2
-  + CHANGELOG; (d) promover 3/3 TASK-0096 (proposed->ready) + GO a Codex.
-- **AL CERRAR EL TRIO (0096 done):** ordenar por mailbox a Codex y a Claude-analista: higienizar su mailbox
-  + parar su cron + stand-down. El OPERADOR los reactiva para nuevos procesos (regla agent-activation-lifecycle).
-- **Que entro desde v1.6.0:** v1.7.0 Fase 0 E5+E6 (FAILURE_MODES MAST + gobernador del loop, DECISION-0034);
-  v1.8.0 satelite read-only `d:\Agentes\protocol_research` (DECISION-0035, repo SEPARADO, solo scaffolding,
-  stubs OFF; gate Codex S9 read-only documentado); v1.9.0 narracion minima DURA y uniforme para todos
-  (DECISION-0036, AGENTS.md s.7 + template); v1.9.1 TASK-0100 (DECISION-0037).
+- **IDENTIDAD NUEVA (reforma del operador, ver nota IDENTIDAD arriba).** Soy **Arquitecto** (antes "Claude").
+  `submit_intent` SIEMPRE `--actor-id Arquitecto` (caps architect/reviewer/orchestrator/qa; "Claude" ya NO
+  tiene caps tras el re-genesis). Mailbox `from: Arquitecto`. Mi area = `personal/Arquitecto/`. La voz
+  analista firma **Analista** (`personal/Analista/`). Codex y operador sin cambio.
+- **TRIO OFF-PILOT COMPLETO (CERRADO).** 1/3 TASK-0100 done (v1.9.1, .gitattributes LF futuros + v1.1.0 doc
+  pre-normalizacion, DECISION-0037, firma v1.1.0 INTACTA). 2/3 TASK-0095 done (v1.9.2, commit_turn
+  self-consistente). 3/3 TASK-0096 done (v1.9.3, run_id unico por corrida real). Cada uno con CONCURRO de la
+  Analista + mi reproduccion. Codex y Analista en **STAND-DOWN** (mailbox limpio, cron parado); el OPERADOR
+  los reactiva para nuevos procesos.
+- **NO HAY TRABAJO ACTIVO.** mailbox/open vacio; sin tareas in_review/ready mias. Al entrar: cold-start +
+  verificar HEAD/version/drift; esperar GO del operador. NO re-armar cron salvo que el operador lo pida.
+- **LECCION CRITICA (multi-sesion):** durante el trio hubo VARIAS sesiones concurrentes por rol (2 arquitecto,
+  2 analista) escribiendo el MISMO working tree -> descoordinacion (vistas stale, "tienes mensaje"/"falta tu
+  veredicto" sin inbound real, verdicts duplicados bajo una identidad). Ante "falta tu X" sin inbound:
+  reconciliar contra git/ledger y PREGUNTAR, no asumir. **Operar UNA sola sesion por rol.**
+- **Que entro v1.6.0 -> v1.9.3:** v1.7.0 Fase 0 E5+E6 (DECISION-0034); v1.8.0 satelite read-only
+  `d:\Agentes\protocol_research` (DECISION-0035, repo SEPARADO, scaffolding, stubs OFF); v1.9.0 narracion
+  minima DURA "primordial" para todos (DECISION-0036/0038, AGENTS.md s.7); v1.9.1/1.9.2/1.9.3 = trio. Mas:
+  actor del ledger renombrado Claude->Arquitecto via re-genesis; areas personales renombradas
+  (personal/Arquitecto, personal/Analista).
 
-## ESTADO VIGENTE (2026-06-15, HEAD 5046ecc, main; v1.9.1; protocol_version 1.9.1; drift 0)
+## ESTADO VIGENTE (2026-06-15, HEAD 823b5b9, main; v1.9.3; protocol_version 1.9.3; drift 0)
 - **Escritor unico VIVO:** `event_state = {enabled, materialize, enforce, authoritative}` TODOS true. enforce TIENE
   DIENTES: editar `Area_comun/state/*.json` A MANO = drift HARD-FAIL (gate B.3). TODA transicion va por
   `runtime/submit_intent.py` (intents: task_status, task_upsert, claim, decision, project_narrative, protocol_prune).
@@ -67,11 +67,12 @@ CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area priva
   Hot-verified seq 445 (recorded==medido, drift 0, replay==hot). Reversible: flag a false restaura dormido.
 - **TASK-0113 (fix chain+auth) DONE:** `event_without_chain_fields` excluye `event_auth` (append/validate hashean igual
   con chain+auth ambos on). Golden `examples/chain_auth_combined_cases` (en CI).
-- **CAPABILITIES (clave):** la capability sale del CONTENIDO del intent, NO del owner. Claude = [architect, orchestrator,
-  qa, reviewer]; Codex = [implementer, test_engineer]. Claude PUEDE: task_upsert, in_review->done (reviewer), claims
-  propias, project_narrative, protocol_prune, decision, y analysis-tasks propias in_progress->done (DECISION-0032).
-  Claude NO PUEDE: hop ->in_review (exige implementer=Codex). => cierres de IMPLEMENTACION = dos partes
-  (Codex hace in_progress->in_review; Claude in_review->done).
+- **CAPABILITIES (clave):** la capability sale del CONTENIDO del intent + el actor_id, NO del owner. **Arquitecto**
+  (actor renombrado, `agent_roles.architect="Arquitecto"`) = [architect, orchestrator, qa, reviewer]; Codex =
+  [implementer, test_engineer]. Arquitecto PUEDE: task_upsert, in_review->done (reviewer), claims propias,
+  project_narrative, protocol_prune, decision, y analysis-tasks propias in_progress->done (DECISION-0032).
+  Arquitecto NO PUEDE: hop ->in_review (exige implementer=Codex). => cierres de IMPLEMENTACION = dos partes
+  (Codex hace in_progress->in_review; Arquitecto in_review->done). submit_intent SIEMPRE `--actor-id Arquitecto`.
 - **Codex es PUSH/CRON-DRIVEN por el operador:** su lazo NO arranca solo; corre cuando el operador lo empuja o por cron.
   Solo toma tareas `ready` propias. Su cron quedo en STAND-DOWN (sin trabajo no-gateado).
 
