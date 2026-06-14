@@ -12,7 +12,18 @@ Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Co
 
 ## Current Expected State
 
-- Latest observed HEAD: `237f04d chore(state): commitea CLAIMS.slim.json (baja del claim TASK-0109 liberado en Part 2)`.
+- Latest Codex coordination commit: `8c43845 chore(mailbox): send task0111 review blocker`.
+- Codex reviewed TASK-0111 cost-attribution on 2026-06-14 and sent
+  `Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0111-review-blocker.md`.
+  Verdict: NO PASA until Claude fixes event_auth+chain interaction. Specific finding: `append_event()`
+  computes `prev_hash` before `sign_event()`, while `validate_chain()` recomputes over the signed event
+  because `event_without_chain_fields()` does not exclude `event_auth`. Recommended regression: enable
+  `event_auth.enabled=true`, `event_state.chain_enabled=true`, `metrics.cost_attribution_enabled=true`, emit
+  `cost.attributed`, then assert event auth, chain, and protocol drift all pass.
+- TASK-0111 review evidence run by Codex: cost-attribution 6/6 OK with elevation for `%TEMP%` ACL,
+  runtime_event_auth 5/5 OK with elevation for `%TEMP%` ACL, agent_signature 10/10 OK, chain 10/10 OK,
+  collaboration validator OK, domain neutrality OK.
+- Previous observed HEAD before TASK-0111 coordination: `237f04d chore(state): commitea CLAIMS.slim.json (baja del claim TASK-0109 liberado en Part 2)`.
 - Startup instruction for future Codex sessions is now intentionally short: ask the next session to read
   `AGENTS.md` and `personal/Codex/STARTUP_PROMPT.md`; the startup file contains the operational checklist.
 - Recent Claude/operator state since Codex's TASK-0106 work:
