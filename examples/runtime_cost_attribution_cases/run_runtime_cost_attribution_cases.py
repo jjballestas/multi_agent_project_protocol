@@ -58,6 +58,7 @@ def case_single_handoff_attributed_to_agent() -> None:
             actor="Codex",
             subject_id="HANDOFF-TASK-A-1",
             cost_tokens=120,
+            context_tokens=80,
             subject_seq=1,
             task_id="TASK-A",
         )
@@ -66,15 +67,18 @@ def case_single_handoff_attributed_to_agent() -> None:
         payload = emitted["payload"]
         # Protocol plane: structured metric + unit/version tags + subject hash; no prose, no payload plane.
         assert payload["subject_hash"] == handoff_hash("HANDOFF-TASK-A-1")
-        assert payload["cost_unit"] == "tokens_total" and payload["cost_schema"] == "1"
-        assert set(payload) == {"dimension", "subject_hash", "subject_seq", "cost_tokens", "cost_unit", "cost_schema", "task_id"}
+        assert payload["cost_unit"] == "tokens_total" and payload["cost_schema"] == "2"
+        assert payload["context_tokens"] == 80 and payload["context_unit"] == "context_tokens_proxy_chars_div"
+        assert set(payload) == {"dimension", "subject_hash", "subject_seq", "cost_tokens", "cost_unit",
+                                "cost_schema", "context_tokens", "context_unit", "task_id"}
 
         summary = summarize_cost_attribution(event_log(root))
         assert summary == {
             "attributions": 1,
             "rejected": 0,
             "total_cost_tokens": 120,
-            "units": {"tokens_total/1": 1},
+            "total_context_tokens": 80,
+            "units": {"tokens_total/2": 1},
             "by_handoff": [
                 {
                     "seq": 1,
@@ -83,6 +87,7 @@ def case_single_handoff_attributed_to_agent() -> None:
                     "actor": "Codex",
                     "task_id": "TASK-A",
                     "cost_tokens": 120,
+                    "context_tokens": 80,
                 }
             ],
             "by_decision": {},
@@ -139,6 +144,24 @@ def case_decision_attribution() -> None:
         assert summary["by_decision"] == {"DECISION-0033": 200}, summary
         assert summary["by_agent"] == {"Claude": 200}, summary
         assert summary["by_handoff"] == [], summary
+
+
+def case_context_tokens_input_arm() -> None:
+    # Operator's focus: input-context per handoff. context_tokens (proxy) captured durably; decisions
+    # without an assembled context carry context_tokens=null and don't inflate total_context_tokens.
+    with tempfile.TemporaryDirectory(prefix="cost-context-") as temp:
+        root = Path(temp)
+        configure(root, enabled=True)
+        writer = EventWriter(root)
+        attribute_cost(writer, dimension="handoff", actor="Codex", subject_id="H1", cost_tokens=100, context_tokens=70, subject_seq=1)
+        attribute_cost(writer, dimension="handoff", actor="Codex", subject_id="H2", cost_tokens=40, context_tokens=25, subject_seq=2)
+        # A decision with no assembled context: context_tokens stays None.
+        attribute_cost(writer, dimension="decision", actor="Claude", subject_id="DECISION-X", cost_tokens=10, decision_id="DECISION-X", subject_seq=3)
+        summary = summarize_cost_attribution(event_log(root))
+        assert summary["total_context_tokens"] == 95, summary  # 70 + 25, decision's null excluded
+        ctx = {row["subject_hash"]: row["context_tokens"] for row in summary["by_handoff"]}
+        assert ctx[handoff_hash("H1")] == 70 and ctx[handoff_hash("H2")] == 25, summary
+        assert summary["units"] == {"tokens_total/2": 3}, summary
 
 
 def case_summarizer_rejects_rows_without_tags() -> None:
@@ -211,8 +234,8 @@ def case_disabled_byte_equivalent_empty_and_populated() -> None:
             assert attribute_cost(EventWriter(root), dimension="handoff", actor="Codex", subject_id=f"H{i}", cost_tokens=10 * i, subject_seq=i) is None
         assert log.read_bytes() == control, "flag-off append mutated a populated log"
         assert summarize_cost_attribution(log) == {
-            "attributions": 0, "rejected": 0, "total_cost_tokens": 0, "units": {},
-            "by_handoff": [], "by_decision": {}, "by_agent": {},
+            "attributions": 0, "rejected": 0, "total_cost_tokens": 0, "total_context_tokens": 0,
+            "units": {}, "by_handoff": [], "by_decision": {}, "by_agent": {},
         }
 
 
@@ -228,22 +251,20 @@ def case_hot_recorded_equals_measured_count() -> None:
         root = Path(temp)
         configure(root, enabled=True)
         writer = EventWriter(root)
-        fixtures = {"HANDOFF-short": "abcd" * 5, "HANDOFF-long": "abcd" * 50}
-        measured = {hid: measure_tokens(text) for hid, text in fixtures.items()}
-        seq = 0
-        for hid, text in fixtures.items():
-            seq += 1
+        fixtures = {"HANDOFF-short": ("abcd" * 5, "ctx" * 4), "HANDOFF-long": ("abcd" * 50, "ctx" * 40)}
+        measured = {hid: (measure_tokens(out), measure_tokens(ctx)) for hid, (out, ctx) in fixtures.items()}
+        for seq, (hid, (out, ctx)) in enumerate(fixtures.items(), start=1):
             attribute_cost(writer, dimension="handoff", actor="Codex", subject_id=hid,
-                           cost_tokens=measure_tokens(text), subject_seq=seq, task_id="TASK-HOT")
-        recorded = {
-            row["subject_hash"]: row["cost_tokens"]
-            for row in summarize_cost_attribution(event_log(root))["by_handoff"]
-        }
-        for hid, m in measured.items():
-            assert recorded[handoff_hash(hid)] == m, (hid, recorded, measured)
-        # Not a literal: distinct inputs => distinct recorded values matching their measures.
-        assert measured["HANDOFF-short"] != measured["HANDOFF-long"]
-        assert recorded[handoff_hash("HANDOFF-short")] != recorded[handoff_hash("HANDOFF-long")]
+                           cost_tokens=measure_tokens(out), context_tokens=measure_tokens(ctx),
+                           subject_seq=seq, task_id="TASK-HOT")
+        rows = {row["subject_hash"]: row for row in summarize_cost_attribution(event_log(root))["by_handoff"]}
+        for hid, (m_cost, m_ctx) in measured.items():
+            assert rows[handoff_hash(hid)]["cost_tokens"] == m_cost, (hid, rows, measured)
+            assert rows[handoff_hash(hid)]["context_tokens"] == m_ctx, (hid, rows, measured)
+        # Not a literal: distinct inputs => distinct recorded values matching their measures (both arms).
+        assert measured["HANDOFF-short"][0] != measured["HANDOFF-long"][0]
+        assert rows[handoff_hash("HANDOFF-short")]["cost_tokens"] != rows[handoff_hash("HANDOFF-long")]["cost_tokens"]
+        assert rows[handoff_hash("HANDOFF-short")]["context_tokens"] != rows[handoff_hash("HANDOFF-long")]["context_tokens"]
 
 
 def case_drift_unaffected() -> None:
@@ -279,6 +300,7 @@ def main() -> int:
         case_canonical_subject_two_equal_emissions,
         case_multiple_handoffs_no_cross_aggregation,
         case_decision_attribution,
+        case_context_tokens_input_arm,
         case_summarizer_rejects_rows_without_tags,
         case_actor_vocabulary_restricted,
         case_record_rejects_free_text_dimension_and_missing_tags,

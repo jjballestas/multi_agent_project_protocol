@@ -203,8 +203,15 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
     by_agent: dict[str, int] = {}
     units: dict[str, int] = {}
     total = 0
+    total_context = 0
     attributions = 0
     rejected = 0
+
+    def to_int(value: Any) -> int | None:
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return None
 
     for event in read_jsonl(event_log_path):
         if event.get("type") != "cost.attributed":
@@ -218,11 +225,11 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
         attributions += 1
         dimension = str(payload.get("dimension") or "")
         actor = str(event.get("actor") or payload.get("actor") or "none")
-        try:
-            cost = int(payload.get("cost_tokens") or 0)
-        except (TypeError, ValueError):
-            cost = 0
+        cost = to_int(payload.get("cost_tokens")) or 0
+        context = to_int(payload.get("context_tokens"))  # None if absent/unmeasured
         total += cost
+        if context is not None:
+            total_context += context
         increment(units, f"{unit}/{schema}")
         by_agent[actor] = by_agent.get(actor, 0) + cost
         if dimension == "handoff":
@@ -234,6 +241,7 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
                     "actor": actor,
                     "task_id": payload.get("task_id"),
                     "cost_tokens": cost,
+                    "context_tokens": context,
                 }
             )
         elif dimension == "decision":
@@ -245,6 +253,7 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
         "attributions": attributions,
         "rejected": rejected,
         "total_cost_tokens": total,
+        "total_context_tokens": total_context,
         "units": sorted_counts(units),
         "by_handoff": handoffs,
         "by_decision": sorted_counts(by_decision),

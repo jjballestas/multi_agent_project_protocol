@@ -163,9 +163,12 @@ COST_ATTRIBUTION_DIMENSIONS = ("handoff", "decision", "agent")
 # is built from a single typed identifier so two logically-equal emissions hash identically; no prose.
 COST_ATTRIBUTION_SUBJECT_KEY = {"handoff": "handoff_id", "decision": "decision_id", "agent": "agent_id"}
 # Default unit/version tags carried by every cost.attributed payload (C2). `tokens_total` = producer's
-# input(context)+output(generation) tokens. Bump cost_schema if the convention ever changes.
+# input(context)+output(generation) tokens (self-reported scalar). `context_tokens` = the producer's
+# INPUT-context measure (runtime `assembled_context_tokens`, a chars/divisor proxy; the invoker exposes
+# no prompt/completion split). schema "2" carries cost_tokens + context_tokens. Bump on any change.
 COST_ATTRIBUTION_DEFAULT_UNIT = "tokens_total"
-COST_ATTRIBUTION_DEFAULT_SCHEMA = "1"
+COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT = "context_tokens_proxy_chars_div"
+COST_ATTRIBUTION_DEFAULT_SCHEMA = "2"
 
 
 def cost_attribution_enabled(config: dict[str, Any] | None) -> bool:
@@ -565,6 +568,8 @@ class EventWriter:
         cost_tokens: int,
         cost_unit: str = COST_ATTRIBUTION_DEFAULT_UNIT,
         cost_schema: str = COST_ATTRIBUTION_DEFAULT_SCHEMA,
+        context_tokens: int | None = None,
+        context_unit: str = COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
         subject_seq: int | None = None,
         task_id: str | None = None,
         decision_id: str | None = None,
@@ -599,6 +604,8 @@ class EventWriter:
             "cost_tokens": int(cost_tokens),
             "cost_unit": unit,
             "cost_schema": schema,
+            "context_tokens": int(context_tokens) if context_tokens is not None else None,
+            "context_unit": str(context_unit or "").strip() or COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
         }
         if task_id:
             payload["task_id"] = str(task_id)

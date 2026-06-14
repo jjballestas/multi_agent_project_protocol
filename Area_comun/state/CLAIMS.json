@@ -481,6 +481,22 @@
             "task_id": "TASK-0112"
         },
         {
+            "claim_id": "CLAIM-20260614-TASK0111-context",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/eventlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "examples/runtime_cost_attribution_cases/",
+                "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md"
+            ],
+            "started_at": "2026-06-14T15:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0111"
+        },
+        {
             "claim_id": "CLAIM-20260614-TASK0113-Claude",
             "owner": "Claude",
             "scope": [

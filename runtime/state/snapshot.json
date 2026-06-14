@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e77510fbbe1424a768629d64286b7772b0d2f21a46cdf44ffbd1cf6debd8b17c",
+  "canonical_hash": "dafcda43e779e6858a3ff5513d1141d46d9ca6c0ba25a0dc3402a35a23fae970",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -135,6 +135,7 @@
       "CLAIM-20260613-task0109-voz-codex": 1,
       "CLAIM-20260614-TASK-0111-Claude": 1,
       "CLAIM-20260614-TASK-0112-Claude": 1,
+      "CLAIM-20260614-TASK0111-context": 1,
       "CLAIM-20260614-TASK0113-Claude": 1,
       "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
@@ -191,14 +192,14 @@
       "TASK-0106": 11,
       "TASK-0109": 6,
       "TASK-0110": 5,
-      "TASK-0111": 3,
+      "TASK-0111": 4,
       "TASK-0112": 3,
       "TASK-0113": 2,
       "VERSION-RECONCILE": 1,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 435,
+    "events_applied": 437,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -455,6 +456,7 @@
       "intent:Claude:claim:46ddd1e51e86668031e4bbc13df6e7dd07e202d2671a377b9fca0bf65d7aa1f6": 174,
       "intent:Claude:claim:4aa0234bee8abfea6550a0c47a726a2c658972678727e40c89e336a9a593c688": 366,
       "intent:Claude:claim:52a23f9f4c92e92f26126d9348daf179630aa39bb18c32e36419a93a221f1e63": 331,
+      "intent:Claude:claim:5ba8dc463000f7ae369024298475367c459ec3b95bce55785fb590fc75e43f96": 437,
       "intent:Claude:claim:63c58d3bddf428731f27ddae15a82d67adaec0e2180e582f4cd0c84d0bc73977": 363,
       "intent:Claude:claim:65bf580ae8196c063184de0fba7c2484e469ad0eee99896ece34339ec6aa1a5b": 166,
       "intent:Claude:claim:8369882a354f98988c5bc296e41b748c08e1e79d74c154c006ea68dcb59393b8": 423,
@@ -467,6 +469,7 @@
       "intent:Claude:claim:a083c9f267de68165518c7a6586b56480f7a8c35eb1505fb5eaba2ad768e410f": 435,
       "intent:Claude:claim:a41fc6eaf274e6e815dbbb60fea0460e541f9dc54e676fbc345e6c088ab01350": 323,
       "intent:Claude:claim:bb7d488665e68cf0ebc198001b1d73709ddf80d015894cc7de60ef195b446558": 329,
+      "intent:Claude:claim:bc9cc3110a9c72cd93561551d538fe3c93067e21e5fe6dc40c19c2e2ea9e2e6a": 436,
       "intent:Claude:claim:d829d6b2413778f1b54306feb6eb4c8c8c94ab1062d05d2b131326733edc3124": 164,
       "intent:Claude:claim:f717e3b24d8e5a7243e5f93824478567eb8a063a35ade2204350a83451a2d217": 330,
       "intent:Claude:claim:f884ee8665baa734647b06ab5c85f67bde9b144b2fc91957005f970cc040e7bf": 342,
@@ -648,5 +651,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 435
+  "up_to_seq": 437
 }

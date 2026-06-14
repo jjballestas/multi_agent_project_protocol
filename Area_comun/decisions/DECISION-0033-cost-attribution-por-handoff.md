@@ -46,8 +46,14 @@ inmutable):**
   variables. Dos emisiones logicamente iguales producen el MISMO `subject_hash` (apareamiento estable
   para H2; `idempotency_key` estable).
 - **`cost_tokens` = total del PRODUCTOR** (input contexto + output generacion) gastado por `actor` al
-  producir `subject`. Tags `cost_unit` (`tokens_total` por defecto) + `cost_schema` (`"1"`) en cada
-  emision; si la convencion cambia, se bumpea `cost_schema`. El summarizer rechaza filas sin ambos tags.
+  producir `subject`, escalar autoreportado (el invoker no expone split prompt/completion). Tags
+  `cost_unit` (`tokens_total`) + `cost_schema` (`"2"`) en cada emision; si la convencion cambia, se
+  bumpea `cost_schema`. El summarizer rechaza filas sin ambos tags.
+- **`context_tokens` = brazo INPUT capturado ahora** (decision del operador 2026-06-14, foco
+  input-contexto, log inmutable): el `assembled_context_tokens` del runtime (proxy chars/divisor del
+  contexto ensamblado), `context_unit = context_tokens_proxy_chars_div`. Opcional (null si no medido).
+  Antes solo vivia en el run-log efimero; ahora queda por handoff en el corpus inmutable. El split real
+  prompt/completion sigue como migracion futura interpretable.
 - **`subject_hash` es SEUDONIMO, no anonimo.** Bajo RGPD (Considerando 26) / Ley 1581, un hash de
   contenido con el plano de carga util **retenido** es dato **seudonimizado y re-identificable**, no
   anonimo. El plano de protocolo es *regulado-pero-minimizado*: NO es "publicable" sin romper el enlace

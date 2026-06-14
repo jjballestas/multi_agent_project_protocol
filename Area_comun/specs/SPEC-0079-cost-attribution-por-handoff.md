@@ -49,14 +49,21 @@ El event log es append-only e inmutable; el formato se fija ANTES de la primera 
   Invariante: dos emisiones logicamente iguales (mismo dimension+subject_id) producen el MISMO
   `subject_hash` (apareamiento de H2 y `idempotency_key` estables).
 - **`cost_tokens` - semantica fijada.** Es el total de tokens del **PRODUCTOR**: `input` (contexto
-  ensamblado) `+ output` (generacion) gastados por `actor` al producir `subject`. Ambos brazos del
-  experimento (A/B) miden lo mismo (total del productor) => conmensurables. El `actor` es el emisor
-  (el golden carga el coste al emisor, p.ej. Codex).
+  ensamblado) `+ output` (generacion) gastados por `actor` al producir `subject`, **escalar
+  autoreportado** (el invoker NO expone split prompt/completion). Ambos brazos del experimento (A/B)
+  miden lo mismo (total del productor) => conmensurables. El `actor` es el emisor.
+- **`context_tokens` - brazo input capturado AHORA** (decision del operador 2026-06-14; foco: reducir
+  input-contexto; log inmutable). Es el `assembled_context_tokens` del runtime (`orchestrator.py`), un
+  **proxy chars/divisor** del contexto ensamblado (input), `context_unit = context_tokens_proxy_chars_div`.
+  Hoy ese valor solo vive en el run-log efimero (gitignored); se captura por handoff en el corpus
+  inmutable. Es **opcional** (null si no hay contexto medido, p.ej. una decision); el split real
+  prompt/completion queda como migracion futura (bumpeando `cost_schema`).
 - **C2 - Tags `cost_unit` + `cost_schema`.** Toda emision los lleva en el payload. `cost_unit` por
-  defecto `tokens_total` (input+output); `cost_schema` = `"1"`. Si la convencion cambia (split
-  input/output, o mueve la frontera productor<->consumidor), se bumpea `cost_schema` y el corpus
-  historico sigue siendo interpretable. El summarizer RECHAZA filas sin ambos tags (las excluye de las
-  sumas y las cuenta en `rejected`); `units` reporta los pares unit/schema sumados.
+  defecto `tokens_total`; **`cost_schema` = `"2"`** (lleva `cost_tokens` + `context_tokens`). Si la
+  convencion cambia (split input/output real, o mueve la frontera productor<->consumidor), se bumpea
+  `cost_schema` y el corpus historico sigue siendo interpretable. El summarizer RECHAZA filas sin
+  `cost_unit`+`cost_schema` (las excluye y las cuenta en `rejected`); `units` reporta los pares
+  unit/schema; `total_context_tokens` suma el brazo input (no-null).
 - **C3 - `subject_hash` es SEUDONIMO, no anonimo.** Bajo RGPD (Considerando 26) / Ley 1581, un hash de
   contenido con el plano de carga util RETENIDO es dato seudonimizado y re-identificable. No filtra
   texto libre al plano de protocolo (correcto), pero NO es "publicable/anonimo". `actor` se restringe

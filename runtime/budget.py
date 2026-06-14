@@ -7,6 +7,7 @@ from typing import Any
 
 try:
     from .eventlog import (
+        COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
         COST_ATTRIBUTION_DEFAULT_SCHEMA,
         COST_ATTRIBUTION_DEFAULT_UNIT,
         COST_ATTRIBUTION_DIMENSIONS,
@@ -16,6 +17,7 @@ try:
     )
 except ImportError:  # pragma: no cover - direct script execution
     from eventlog import (
+        COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
         COST_ATTRIBUTION_DEFAULT_SCHEMA,
         COST_ATTRIBUTION_DEFAULT_UNIT,
         COST_ATTRIBUTION_DIMENSIONS,
@@ -86,6 +88,8 @@ def cost_attribution_record(
     cost_tokens: int,
     cost_unit: str = COST_ATTRIBUTION_DEFAULT_UNIT,
     cost_schema: str = COST_ATTRIBUTION_DEFAULT_SCHEMA,
+    context_tokens: int | None = None,
+    context_unit: str = COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
     subject_seq: int | None = None,
     task_id: str | None = None,
     decision_id: str | None = None,
@@ -113,6 +117,11 @@ def cost_attribution_record(
     actor_text = str(actor or "runtime")
     if agent_vocabulary is not None and actor_text not in agent_vocabulary:
         raise ValueError(f"actor outside agent vocabulary: {actor_text!r}")
+    context: int | None = None
+    if context_tokens is not None:
+        context = positive_int(context_tokens)
+        if context is None:
+            raise ValueError(f"context_tokens must be a non-negative integer, got: {context_tokens!r}")
     record: dict[str, Any] = {
         "dimension": dimension,
         "actor": actor_text,
@@ -121,6 +130,8 @@ def cost_attribution_record(
         "cost_tokens": tokens,
         "cost_unit": unit,
         "cost_schema": schema,
+        "context_tokens": context,
+        "context_unit": str(context_unit or "").strip() or COST_ATTRIBUTION_DEFAULT_CONTEXT_UNIT,
     }
     if task_id:
         record["task_id"] = str(task_id)
@@ -158,6 +169,8 @@ def attribute_cost(writer: Any, **kwargs: Any) -> dict[str, Any] | None:
         cost_tokens=record["cost_tokens"],
         cost_unit=record["cost_unit"],
         cost_schema=record["cost_schema"],
+        context_tokens=record["context_tokens"],
+        context_unit=record["context_unit"],
         subject_seq=record["subject_seq"],
         task_id=record.get("task_id"),
         decision_id=record.get("decision_id"),
