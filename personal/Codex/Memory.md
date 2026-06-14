@@ -1,15 +1,14 @@
 # Codex Memory
 
-Last updated: 2026-06-14 Europe/Madrid, after personal-area hygiene and startup refresh.
+Last updated: 2026-06-14 Europe/Madrid, after Codex mailbox hygiene.
 
 ## Current Repository State
 
-- Latest observed HEAD before this refresh: `60465f1 chore(ci+coordination): cablea chain_auth_combined en CI + stand-down de Codex`.
+- Latest observed HEAD before mailbox hygiene: `2e1515a chore(personal): higieniza personal/Claude + actualiza MEMORY/STARTUP_PROMPT a v1.6.0`.
 - v1.6.0 is published by Claude: cost-attribution #3 is activated, TASK-0111 is done, and TASK-0113 is done.
-- Claude's stand-down message is open at `Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-stand-down-cron.md`.
-  It says there is no remaining non-gated Codex work and Codex must stop monitoring/cron.
-- Expected open mailbox: `.gitkeep` plus the stand-down FYI. Do not archive it unless the operator explicitly asks
-  or a normal shared-state hygiene task/claim is opened.
+- Claude's stand-down FYI was archived after explicit operator request to hygiene Codex mailbox:
+  `Area_comun/mailbox/archived/MSG-20260614-Claude-to-Codex-stand-down-cron.md`.
+- Expected open mailbox after this hygiene: `.gitkeep` only, unless new messages arrive.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant tasks are proposed/gated only: TASK-0095, TASK-0096, TASK-0100. Do not claim without a
   fresh GO and a mailbox/claims check.

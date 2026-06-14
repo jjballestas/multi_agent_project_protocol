@@ -549,6 +549,25 @@
             "task_id": "TASK-0114"
         },
         {
+            "claim_id": "CLAIM-20260614-mailbox-hygiene-standdown-codex",
+            "owner": "Codex",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260614-STANDDOWN"
+        },
+        {
+            "claim_id": "CLAIM-20260614-mailbox-hygiene-standdown-releasefix-codex",
+            "expires_at": "2026-06-15",
+            "notes": "Technical claim to release malformed hygiene claim created without materialized scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-14T18:08:00Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260614-STANDDOWN",
+            "updated_at": "2026-06-14T18:08:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-rereview-codex",
             "expires_at": "2026-06-15",
             "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",

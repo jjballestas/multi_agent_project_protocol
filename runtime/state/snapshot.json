@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a368286d6350153694e3ebb18f2873e2ca5d6b50c17e82674c569429f0809d78",
+  "canonical_hash": "25817df42f9d42a1ad434d478ac50264f562937b9899af4829b4c79dfb206a83",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -139,6 +139,8 @@
       "CLAIM-20260614-TASK0113-Claude": 1,
       "CLAIM-20260614-activation-Claude": 1,
       "CLAIM-20260614-fase0-Claude": 1,
+      "CLAIM-20260614-mailbox-hygiene-standdown-codex": 1,
+      "CLAIM-20260614-mailbox-hygiene-standdown-releasefix-codex": 1,
       "CLAIM-20260614-task0111-rereview-codex": 1,
       "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-20260614-task0113-codex": 1,
@@ -165,6 +167,7 @@
       "MAILBOX-HYGIENE-20260613": 1,
       "MAILBOX-HYGIENE-20260613-TASK0105": 1,
       "MAILBOX-HYGIENE-20260613-TASK0106": 1,
+      "MAILBOX-HYGIENE-20260614-STANDDOWN": 2,
       "MAINTENANCE-CLEAR-BLOCKED": 1,
       "MAINTENANCE-CODEX-SANDBOX-20260609": 6,
       "MAINTENANCE-MAILBOX-20260609": 1,
@@ -206,7 +209,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 457,
+    "events_applied": 461,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -511,6 +514,7 @@
       "intent:Claude:task_upsert:d0762069d760aaef873a4a1417d9ca81846efd86c6b844bbc5001679d8687254": 328,
       "intent:Claude:task_upsert:dc0c0dc88babcc2ce9906967a16ba9a72b32b89d0b7c407b34de551692988f9e": 367,
       "intent:Claude:task_upsert:fca4f27273e7941bdd81561154e158b55a749b34827a1496230ea667b6e0012a": 427,
+      "intent:Codex:claim:0d8bb79d3bcd88545029fe5ea43dfd2c21d8f09556bfd4847472abc089371040": 458,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-acquire": 6,
       "ledger-op:auto-claim:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 7,
       "ledger-op:auto-claim:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-acquire": 24,
@@ -563,6 +567,9 @@
       "ledger-op:handoff-release:TASK-0106:CLAIM-20260613-task0106-codex:task-status": 400,
       "ledger-op:handoff-release:TASK-0113:CLAIM-20260614-task0113-codex:claim-release": 441,
       "ledger-op:handoff-release:TASK-0113:CLAIM-20260614-task0113-codex:task-status": 440,
+      "mailbox-hygiene-codex-standdown-release-fix-20260614": 461,
+      "mailbox-hygiene-codex-standdown-release-main-20260614": 460,
+      "mailbox-hygiene-codex-standdown-repair-acquire-20260614": 459,
       "mailbox-hygiene:task0089-go-status:claim-acquire": 113,
       "mailbox-hygiene:task0089-go-status:claim-release": 114,
       "operator-memory-rule-20260608:claim-acquire": 14,
@@ -678,5 +685,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 457
+  "up_to_seq": 461
 }

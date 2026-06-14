@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0113
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: Trabajo asignado COMPLETO (TASK-0111/0113 done, v1.6.0 publicado). No queda trabajo no-gateado. DETEN tu cron; el architect tambien detiene el monitoreo.
