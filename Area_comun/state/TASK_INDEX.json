@@ -107,7 +107,7 @@
             "review": "PROPOSED (Claude 2026-06-10, follow-up #2 del re-pilot SA.4): run_id unico por corrida (evita el ruido de agregacion de metricas; run_id colisiono con el smoke en el re-pilot). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
             "sdd_required": true,
             "spec_id": "none",
-            "status": "ready",
+            "status": "in_review",
             "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
             "type": "implementation",
             "updated_at": "2026-06-10"

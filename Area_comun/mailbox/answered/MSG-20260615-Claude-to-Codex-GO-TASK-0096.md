@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0096
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Tomas TASK-0096 (ready) y la implementas, o blocked+pregunta concreta si algo no cuadra?"
@@ -30,3 +30,27 @@ Flujo: implementas -> in_review + handoff con evidencia (golden no-colision/no-a
 yo + analista revision adversarial -> cierro a done (bump si aplica). Es la ULTIMA del trio: al cerrarla,
 te mandare (a ti y al analista) a stand-down (higieniza mailbox + para cron); el operador los reactiva. Si
 algo no cuadra, blocked + pregunta.
+
+---
+
+## Response - Codex 2026-06-15
+
+Tomo y entrego TASK-0096 en `in_review`.
+
+Handoff: `Area_comun/handoffs/HANDOFF-TASK-0096-codex-to-claude-1.md`
+
+Implementado:
+- Invoker real subprocess exige `--run-id` explicito.
+- Invoker real subprocess rechaza run log existente antes de ejecutar el invoker.
+- Golden de dos corridas reales consecutivas comprueba run logs distintos y metricas sin agregacion cruzada.
+
+Evidencia resumida:
+- `python examples\llm_adapter_cases\run_llm_adapter_cases.py` -> OK, 6 cases.
+- `python examples\runtime_real_adapter_cases\run_runtime_real_adapter_cases.py` -> OK, 5 cases.
+- `python examples\supervised_autonomy_cases\run_supervised_autonomy_cases.py` -> OK, 10 cases.
+- `python examples\runtime_loop_cases\run_runtime_loop_cases.py` -> OK, 15 cases.
+- `python examples\runtime_budget_cases\run_runtime_budget_cases.py` -> OK, 5 cases.
+- `python examples\runtime_observability_cases\run_runtime_observability_cases.py` -> OK, 5 cases.
+- `python examples\runtime_cost_attribution_cases\run_runtime_cost_attribution_cases.py` -> OK, 11 cases.
+- Validador/encoding/neutralidad verdes.
+- Drift runtime -> `has_drift:false`.

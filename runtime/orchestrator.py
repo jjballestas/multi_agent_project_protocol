@@ -380,6 +380,20 @@ def default_run_id(reports: list[Path | None], *, adapter_name: str = "replay") 
     return deterministic_run_id(parts)
 
 
+def run_log_path(root: Path, run_id: str) -> Path:
+    return root / "runtime" / "runs" / f"{run_id}.jsonl"
+
+
+def real_invoker_run_id_error(root: Path, *, llm_invoker: str, run_id: str | None) -> str | None:
+    if llm_invoker != "subprocess":
+        return None
+    if not str(run_id or "").strip():
+        return "subprocess llm invoker requires --run-id"
+    if run_log_path(root, str(run_id)).exists():
+        return f"run_log already exists for run_id: {run_id}"
+    return None
+
+
 def schema_report(report: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in report.items() if key in TURN_SCHEMA_KEYS}
 
@@ -745,6 +759,9 @@ def run_loop(
         allow_supervised_autonomy=allow_supervised_autonomy,
     ):
         return {"ok": False, "reason": "subprocess llm invoker requires --once"}
+    run_id_error = real_invoker_run_id_error(root, llm_invoker=llm_invoker, run_id=run_id)
+    if run_id_error:
+        return {"ok": False, "reason": run_id_error}
 
     if once:
         requested_limit = 1
@@ -1104,7 +1121,7 @@ def main() -> int:
     parser.add_argument("--llm-preset", help="Named runtime.llm_cli_presets entry for the subprocess LLM invoker")
     parser.add_argument("--allow-real-invoker", action="store_true", help="Required to run the subprocess LLM invoker")
     parser.add_argument("--allow-supervised-autonomy", action="store_true", help="Enable registered supervised-autonomy caps")
-    parser.add_argument("--run-id", help="Deterministic run-log id; defaults to a replay-input hash")
+    parser.add_argument("--run-id", help="Run-log id. Required for subprocess invoker; replay defaults to a replay-input hash")
     parser.add_argument("--budget-tokens", type=int, default=None, help="Maximum declared turn cost in tokens")
     parser.add_argument("--clock-fixed", type=int, default=0, help="Deterministic duration_ms value for tests")
     args = parser.parse_args()

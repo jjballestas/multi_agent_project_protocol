@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-15 Europe/Madrid, after DECISION-0038 narration hardening.
+Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review.
 
 ## Current Repository State
 
@@ -36,6 +36,12 @@ Last updated: 2026-06-15 Europe/Madrid, after DECISION-0038 narration hardening.
   AGENTS.template.md, personal/Codex/STARTUP_PROMPT.md, and personal/Claude/STARTUP_PROMPT.md were hardened:
   no visible process narration, no step announcements/recaps, no non-actionable periodic progress. Only final
   report/handoff, real blocking question, actionable coordination result, or substantive reasoning-as-deliverable.
+- TASK-0096 is implemented and in `in_review`: real subprocess invoker runs require an explicit fresh
+  `--run-id`; existing `runtime/runs/<run_id>.jsonl` is rejected before invoker execution to avoid run-log
+  accumulation and cross-run metrics. Handoff: `Area_comun/handoffs/HANDOFF-TASK-0096-codex-to-claude-1.md`.
+  Evidence: llm_adapter OK (6), runtime_real_adapter OK (5), supervised_autonomy OK (10), runtime_loop OK
+  (15), runtime_budget OK (5), runtime_observability OK (5), runtime_cost_attribution OK (11),
+  validator/encoding/neutrality/drift green. No active Codex claims expected.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.

@@ -319,6 +319,8 @@ def case_subprocess_native_command_commits() -> None:
                 "--llm-command",
                 command,
                 "--once",
+                "--run-id",
+                "RUN-llm-subprocess-native",
             ],
         )
         result = json.loads(completed.stdout)

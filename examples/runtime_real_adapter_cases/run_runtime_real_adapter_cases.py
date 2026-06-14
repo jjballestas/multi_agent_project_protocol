@@ -92,6 +92,8 @@ def case_real_invoker_requires_activation_gates() -> None:
                 "--llm-command",
                 command_for(script),
                 "--once",
+                "--run-id",
+                "RUN-real-gated",
             ],
         )
         result = json.loads(completed.stdout)
@@ -115,6 +117,8 @@ def case_real_invoker_requires_activation_gates() -> None:
                 "--llm-command",
                 command_for(script),
                 "--once",
+                "--run-id",
+                "RUN-real-no-allow",
             ],
         )
         result = json.loads(completed.stdout)
@@ -143,6 +147,60 @@ def case_real_invoker_requires_activation_gates() -> None:
         assert completed.returncode == 1
         assert result["ok"] is False
         assert "requires --once" in result["reason"], result
+        assert not sentinel.exists()
+
+
+def case_real_invoker_requires_explicit_fresh_run_id() -> None:
+    with root_temp_dir(ROOT, ".runtime-real-run-id-required-") as fixture:
+        build_fixture(fixture, real_invoker_enabled=True)
+        script, sentinel = write_sentinel_agent(fixture, turn_report("TASK-9000"))
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "subprocess",
+                "--allow-real-invoker",
+                "--llm-command",
+                command_for(script),
+                "--once",
+            ],
+            check=False,
+        )
+        result = json.loads(completed.stdout)
+        assert completed.returncode == 1
+        assert result["ok"] is False
+        assert result["reason"] == "subprocess llm invoker requires --run-id", result
+        assert not sentinel.exists()
+
+    with root_temp_dir(ROOT, ".runtime-real-run-id-existing-") as fixture:
+        build_fixture(fixture, real_invoker_enabled=True)
+        (fixture / "runtime/runs").mkdir(parents=True, exist_ok=True)
+        (fixture / "runtime/runs/RUN-existing.jsonl").write_text('{"run_id":"RUN-existing"}\n', encoding="utf-8")
+        script, sentinel = write_sentinel_agent(fixture, turn_report("TASK-9000"))
+        completed = run_orchestrator(
+            fixture,
+            [
+                "--run",
+                "--adapter",
+                "llm",
+                "--llm-invoker",
+                "subprocess",
+                "--allow-real-invoker",
+                "--llm-command",
+                command_for(script),
+                "--once",
+                "--run-id",
+                "RUN-existing",
+            ],
+            check=False,
+        )
+        result = json.loads(completed.stdout)
+        assert completed.returncode == 1
+        assert result["ok"] is False
+        assert result["reason"] == "run_log already exists for run_id: RUN-existing", result
         assert not sentinel.exists()
 
 
@@ -271,6 +329,7 @@ def case_vendor_neutral_presets_are_configured() -> None:
 def main() -> int:
     cases = [
         case_real_invoker_requires_activation_gates,
+        case_real_invoker_requires_explicit_fresh_run_id,
         case_recorded_replay_comparative,
         case_recorded_stand_in_enforces_limits,
         case_vendor_neutral_presets_are_configured,

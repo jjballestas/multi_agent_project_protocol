@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "afbbbb78e178c643d2931efce36cd2e10632fd6c50d5e68e5c8de8c222ab3b96",
+  "canonical_hash": "aa0c084bb14b89029cc9d385977aad57040eeebc28c143a3d455643d41cf73ba",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -159,6 +159,8 @@
       "CLAIM-20260614-winddown": 1,
       "CLAIM-20260615-Codex-DECISION-0038": 1,
       "CLAIM-20260615-Codex-TASK-0095": 1,
+      "CLAIM-20260615-Codex-TASK-0096": 1,
+      "CLAIM-20260615-Codex-TASK-0096-llm-adapter": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
@@ -211,7 +213,7 @@
       "TASK-0093": 15,
       "TASK-0094": 11,
       "TASK-0095": 8,
-      "TASK-0096": 3,
+      "TASK-0096": 7,
       "TASK-0097": 11,
       "TASK-0098": 13,
       "TASK-0099": 12,
@@ -234,7 +236,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 519,
+    "events_applied": 525,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -243,6 +245,10 @@
       "Codex:TASK-0091:ready->in_review:codex-TASK-0091-20260609-1:1": 223,
       "DECISION-0038-claim": 518,
       "DECISION-0038-release-claim": 519,
+      "TASK-0096-extend-claim-llm-adapter": 522,
+      "TASK-0096-release-llm-adapter-claim": 524,
+      "TASK-0096-release-main-claim": 525,
+      "TASK-0096-status-in-review": 523,
       "TASK-0100-extend-claim-handoff": 494,
       "TASK-0100-extend-claim-release-verify-cases": 492,
       "TASK-0100-extend-claim-spec-0075": 493,
@@ -600,6 +606,8 @@
       "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:task-status": 183,
       "ledger-op:auto-claim:TASK-0095:CLAIM-20260615-Codex-TASK-0095:claim-acquire": 507,
       "ledger-op:auto-claim:TASK-0095:CLAIM-20260615-Codex-TASK-0095:task-status": 508,
+      "ledger-op:auto-claim:TASK-0096:CLAIM-20260615-Codex-TASK-0096:claim-acquire": 520,
+      "ledger-op:auto-claim:TASK-0096:CLAIM-20260615-Codex-TASK-0096:task-status": 521,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:claim-acquire": 307,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:task-status": 308,
       "ledger-op:auto-claim:TASK-0100:CLAIM-20260614-Codex-TASK-0100-rescoped:claim-acquire": 490,
@@ -768,5 +776,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 519
+  "up_to_seq": 525
 }

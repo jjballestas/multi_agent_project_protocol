@@ -621,6 +621,45 @@ def case_real_subprocess_multiturn_requires_registered_supervision_and_real_invo
         assert [turn["task_id"] for turn in result["turns"]] == task_ids
 
 
+def case_real_subprocess_consecutive_runs_use_distinct_logs() -> None:
+    with tempfile.TemporaryDirectory(prefix="supervised-real-distinct-runs-") as temp:
+        fixture = Path(temp)
+        task_ids = ["TASK-9600", "TASK-9601"]
+        build_fixture(
+            fixture,
+            task_ids=task_ids,
+            supervised=supervised_config(enabled=True, max_turns=2, human_checkpoint_every_k=5),
+            real_invoker=real_invoker_config(enabled=True),
+        )
+        script = write_dynamic_subprocess_agent(fixture, [turn_report(task_id) for task_id in task_ids])
+        common = [
+            "--run",
+            "--adapter",
+            "llm",
+            "--llm-invoker",
+            "subprocess",
+            "--allow-real-invoker",
+            "--allow-supervised-autonomy",
+            "--llm-command",
+            f"{command_arg(sys.executable)} {command_arg(script)}",
+            "--once",
+        ]
+        first = json.loads(run_orchestrator(fixture, [*common, "--run-id", "RUN-real-pass-1"]).stdout)
+        second = json.loads(run_orchestrator(fixture, [*common, "--run-id", "RUN-real-pass-2"]).stdout)
+
+        assert first["ok"] is True, first
+        assert second["ok"] is True, second
+        assert first["run_id"] == "RUN-real-pass-1"
+        assert second["run_id"] == "RUN-real-pass-2"
+        assert first["run_log"] != second["run_log"]
+        assert first["metrics"]["turns_total"] == 1, first
+        assert second["metrics"]["turns_total"] == 1, second
+        assert [turn["task_id"] for turn in first["turns"]] == ["TASK-9600"]
+        assert [turn["task_id"] for turn in second["turns"]] == ["TASK-9601"]
+        assert len([line for line in Path(first["run_log"]).read_text(encoding="utf-8-sig").splitlines() if line.strip()]) == 1
+        assert len([line for line in Path(second["run_log"]).read_text(encoding="utf-8-sig").splitlines() if line.strip()]) == 1
+
+
 def main() -> int:
     cases = [
         case_max_turns_stops_recorded_loop_and_writes_runreport,
@@ -632,6 +671,7 @@ def main() -> int:
         case_flag_absent_keeps_existing_multi_turn_behavior,
         case_real_invoker_lock_remains_intact_in_sa1,
         case_real_subprocess_multiturn_requires_registered_supervision_and_real_invoker,
+        case_real_subprocess_consecutive_runs_use_distinct_logs,
     ]
     failures = []
     for case in cases:

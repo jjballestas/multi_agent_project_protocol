@@ -876,6 +876,47 @@
             "updated_at": "2026-06-14T22:23:00Z"
         },
         {
+            "claim_id": "CLAIM-20260615-Codex-TASK-0096",
+            "expires_at": "2026-06-15T02:48:23Z",
+            "notes": "TASK-0096 unique run_id per real orchestrator run; prevent run_log and metrics cross-run accumulation.",
+            "owner": "Codex",
+            "scope": [
+                "runtime/orchestrator.py",
+                "runtime/runlog.py",
+                "runtime/metrics.py",
+                "examples/runtime_loop_cases",
+                "examples/runtime_real_adapter_cases",
+                "examples/supervised_autonomy_cases",
+                "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/MSG-20260615-Claude-to-Codex-GO-TASK-0096.md",
+                "Area_comun/mailbox/answered",
+                "Area_comun/handoffs",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T22:48:23Z",
+            "status": "released",
+            "task_id": "TASK-0096",
+            "updated_at": "2026-06-14T22:48:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260615-Codex-TASK-0096-llm-adapter",
+            "expires_at": "2026-06-15T02:51:11Z",
+            "notes": "Extend TASK-0096 claim for subprocess run-id regression coverage.",
+            "owner": "Codex",
+            "scope": [
+                "examples/llm_adapter_cases/run_llm_adapter_cases.py",
+                "examples/llm_adapter_cases"
+            ],
+            "started_at": "2026-06-14T22:51:11Z",
+            "status": "released",
+            "task_id": "TASK-0096",
+            "updated_at": "2026-06-14T22:51:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260615-close-0095-Claude",
             "owner": "Claude",
             "scope": [
