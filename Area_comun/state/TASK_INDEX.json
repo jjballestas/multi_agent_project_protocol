@@ -509,6 +509,19 @@
             "status": "in_progress",
             "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)",
             "type": "implementation"
+        },
+        {
+            "deliverables": [
+                "Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md"
+            ],
+            "file": "Area_comun/tasks/TASK-0112-claude-reconciliacion-hoja-de-ruta.md",
+            "id": "TASK-0112",
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "done",
+            "title": "Reconciliacion de la hoja de ruta vs estado real del repo",
+            "type": "analysis"
         }
     ],
     "updated_at": "2026-06-08",
