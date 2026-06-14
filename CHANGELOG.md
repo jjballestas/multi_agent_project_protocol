@@ -17,6 +17,19 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.9.2] — 2026-06-15
+
+**Self-consistent runtime turn commits (TASK-0095, trio 2/3).** Additive, OFF-PILOT, domain-neutral. No
+gate/claim semantics changed.
+
+### Fixed
+- `runtime/apply.py`: `apply_gate_and_commit` now derives the task `.md` paths mutated by the turn's
+  transitions (`task_file_commit_paths`, scoped to the turn's `task_status`/`task_upsert` ids — no
+  over-inclusion) and includes them in `commit_turn`. After a turn with a transition, the committed
+  snapshot keeps `TASK_INDEX` and the task `.md` aligned (no transient dirty `.md`). Golden
+  `runtime_apply_cases` asserts the working tree is clean for the task `.md` and HEAD carries the new
+  status. Regressions green (runtime_loop, real_adapter, intent_flow).
+
 ## [1.9.1] — 2026-06-15
 
 **Release LF-reproducibility scoped to future releases (v1.2.0+); v1.1.0 documented as pre-normalization

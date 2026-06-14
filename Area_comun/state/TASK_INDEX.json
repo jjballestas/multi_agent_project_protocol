@@ -73,7 +73,7 @@
             "review": "PROPOSED (Claude 2026-06-10, follow-up #1 del re-pilot SA.4): commit de turno self-consistente (incluir el task .md mutado por las transiciones). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
             "sdd_required": true,
             "spec_id": "none",
-            "status": "in_review",
+            "status": "done",
             "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT.",
             "type": "implementation",
             "updated_at": "2026-06-10"

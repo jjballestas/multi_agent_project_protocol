@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "tasks": [
         {
-            "id": "TASK-0095",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
-        },
-        {
             "id": "TASK-0096",
             "owner": "Codex",
             "phase": "P2",
