@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "73ed5d98bad483828e40348c07c1a89cdbc43903c577364fec74230c85a88747",
+  "canonical_hash": "1ddca15b73522a2db4a27d95133adf733e1e7be0c185dc611e4694241a0803e7",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -146,6 +146,8 @@
       "CLAIM-20260614-narration-Claude": 1,
       "CLAIM-20260614-promote-0100-Claude": 1,
       "CLAIM-20260614-satellite-Claude": 1,
+      "CLAIM-20260614-task0100-blocker-msg-codex": 1,
+      "CLAIM-20260614-task0100-codex": 1,
       "CLAIM-20260614-task0111-rereview-codex": 1,
       "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-20260614-task0113-codex": 1,
@@ -200,7 +202,7 @@
       "TASK-0097": 11,
       "TASK-0098": 13,
       "TASK-0099": 12,
-      "TASK-0100": 4,
+      "TASK-0100": 8,
       "TASK-0101": 6,
       "TASK-0102": 6,
       "TASK-0103": 6,
@@ -219,7 +221,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 478,
+    "events_applied": 484,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -556,6 +558,8 @@
       "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:task-status": 183,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:claim-acquire": 307,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:task-status": 308,
+      "ledger-op:auto-claim:TASK-0100:CLAIM-20260614-task0100-codex:claim-acquire": 479,
+      "ledger-op:auto-claim:TASK-0100:CLAIM-20260614-task0100-codex:task-status": 480,
       "ledger-op:auto-claim:TASK-0101:CLAIM-20260613-task0101-codex:claim-acquire": 333,
       "ledger-op:auto-claim:TASK-0101:CLAIM-20260613-task0101-codex:task-status": 334,
       "ledger-op:auto-claim:TASK-0102:CLAIM-20260613-task0102-codex:claim-acquire": 347,
@@ -699,6 +703,10 @@
       "task0088-codex-runtime-real-adapter:claim-acquire": 85,
       "task0088-codex-start:claim-acquire": 83,
       "task0088-codex-start:task-in-progress": 84,
+      "task0100-blocked-20260614-release-main": 483,
+      "task0100-blocked-20260614-release-msg": 484,
+      "task0100-blocked-20260614-status": 482,
+      "task0100-blocker-msg-claim-20260614-acquire": 481,
       "ver:2026-06-13T22:25:06Z:cl": 420,
       "ver:2026-06-13T22:25:06Z:rel": 422,
       "ver:2026-06-13T22:25:06Z:v": 421
@@ -712,5 +720,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 478
+  "up_to_seq": 484
 }

@@ -636,6 +636,42 @@
             "task_id": "TASK-0115"
         },
         {
+            "claim_id": "CLAIM-20260614-task0100-blocker-msg-codex",
+            "expires_at": "2026-06-15",
+            "notes": "Notify architect that TASK-0100 guard fired: .gitattributes LF breaks v1.1.0 manifest verification for existing SBOM-included bytes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0100-blocked-release-manifest.md"
+            ],
+            "started_at": "2026-06-14T18:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T18:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260614-task0100-codex",
+            "expires_at": "2026-06-15",
+            "notes": "TASK-0100 .gitattributes LF release reproducibility; operator reactivated Codex with 5-min coordination cron.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0100",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0100",
+                "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                ".gitattributes",
+                "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-GO-TASK-0100.md",
+                "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-GO-TASK-0100.md",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T18:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T18:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-rereview-codex",
             "expires_at": "2026-06-15",
             "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",

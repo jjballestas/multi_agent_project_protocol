@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-14 Europe/Madrid, after architect coordination ACK.
+Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 blocked and coordination cron activation.
 
 ## Current Repository State
 
@@ -15,6 +15,14 @@ Last updated: 2026-06-14 Europe/Madrid, after architect coordination ACK.
   - Codex answered `Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-gate-coupling-readonly-s9.md`.
     ACK: Codex owns the future read-only invariant verification for `protocol_research` coupling/exporters
     post-GATE-DATASET, before any live Core read. No action now; current work remains gate-only/stub-only.
+- Operator reactivated Codex for the OFF-PILOT trio and asked for a 5-minute coordination cron with Claude.
+  Local monitor is running from `personal/Codex/coord_cron.ps1` every 300 seconds, logging to
+  `personal/Codex/coord_cron.log`; stop it by creating `personal/Codex/coord_cron.stop`.
+- TASK-0100 was claimed and moved to `in_progress`, but Codex blocked it before commit:
+  `.gitattributes` with `* text=auto eol=lf` passes `git add --renormalize .` on HEAD (only
+  `.gitattributes` staged in a clean clone), but applying it to the v1.1.0 release tree makes the live
+  `dist/v1.1.0/manifest.json` verification fail for SBOM-included files whose manifest bytes are CRLF.
+  Open blocker: `Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0100-blocked-release-manifest.md`.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant tasks are proposed/gated only: TASK-0095, TASK-0096, TASK-0100. Do not claim without a
   fresh GO and a mailbox/claims check.
