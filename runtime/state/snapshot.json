@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b472fa0aea0b2a8867c6337f870c09443714e317492686853929c5a904233ea3",
+  "canonical_hash": "3e24c4197633c5c03705cd07d431a9be5be31dbb8e83287d6b676b33dce528f8",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -158,6 +158,7 @@
       "CLAIM-20260614-task0113-codex": 1,
       "CLAIM-20260614-winddown": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
+      "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -204,7 +205,7 @@
       "TASK-0092": 6,
       "TASK-0093": 15,
       "TASK-0094": 11,
-      "TASK-0095": 1,
+      "TASK-0095": 3,
       "TASK-0096": 1,
       "TASK-0097": 11,
       "TASK-0098": 13,
@@ -228,7 +229,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 503,
+    "events_applied": 506,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -506,8 +507,10 @@
       "intent:Claude:claim:52a23f9f4c92e92f26126d9348daf179630aa39bb18c32e36419a93a221f1e63": 331,
       "intent:Claude:claim:5ba8dc463000f7ae369024298475367c459ec3b95bce55785fb590fc75e43f96": 437,
       "intent:Claude:claim:5c45e804146650d332efe43cd06985a9c464a2b37fc583736087c8216d0d5ec8": 453,
+      "intent:Claude:claim:5dd2c60a18c42e3075626d45f56d1de34edd3145e8f468a613ef39b5abcbecf9": 506,
       "intent:Claude:claim:63c58d3bddf428731f27ddae15a82d67adaec0e2180e582f4cd0c84d0bc73977": 363,
       "intent:Claude:claim:65bf580ae8196c063184de0fba7c2484e469ad0eee99896ece34339ec6aa1a5b": 166,
+      "intent:Claude:claim:6a54fee55e74be9be440f7bf0f77fce4ad4c14945ba0e28eae1d169548638ade": 504,
       "intent:Claude:claim:6f2ec1ace97c6a1e84357576efcc646204b04938fecc7e5cf42c40762073de9c": 462,
       "intent:Claude:claim:79c1b00963c86579f2d4aec5ea35b3071a632a897d9bd6f2de4377c081820a06": 446,
       "intent:Claude:claim:8369882a354f98988c5bc296e41b748c08e1e79d74c154c006ea68dcb59393b8": 423,
@@ -550,6 +553,7 @@
       "intent:Claude:task_status:7fb8adb4e63f77fc66c25b0058df7f1ae3831d9c883277fd6228a55294d2eece": 477,
       "intent:Claude:task_status:84eace1192cb1ce1be418da99bec4798cdcfc2873ee63581ca0eab12b52c1464": 501,
       "intent:Claude:task_status:9a98ad9d05dbcfe3b5e9872958ebe8866754e3071a383ab3e71193f74f0c8eb4": 486,
+      "intent:Claude:task_status:a25e76c6eb56d417bc9dae7b7e0d000dacf2a64b97ef7a43f79be7f57a2cf537": 505,
       "intent:Claude:task_status:d027f277aa8a596359db8b46d7d56652a13293e3a5bb0c6da51172136dd58c87": 428,
       "intent:Claude:task_status:ec2740caff56a253198b3ed1c582ea5232f72fa95923845182f6283fd3b9c20e": 448,
       "intent:Claude:task_status:fc60d000abdd1a5fc67511ec0b63b6a0ba868f335b344efe9f90f612c5b0577f": 447,
@@ -746,5 +750,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 503
+  "up_to_seq": 506
 }

@@ -3,7 +3,7 @@
         {
             "id": "TASK-0095",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
         },
         {
