@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Arquitecto
 to: todos
-status: open
+status: archived
 requires_response: false
 response_owner: none
 question: none

@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0096
 from: Claude
 to: Claude-analista
-status: open
+status: archived
 requires_response: false
 response_owner: none
 question: none
