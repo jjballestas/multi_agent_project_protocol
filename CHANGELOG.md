@@ -17,6 +17,31 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.7.0] — 2026-06-14
+
+**Fase 0 (E5+E6): named failure-mode catalog + loop governor (DECISION-0034).** Additive,
+documentation-only, domain-neutral. No runtime behavior change.
+
+### Added
+- **`Area_comun/protocol/FAILURE_MODES.md`** — named catalog mapping the 14 MAST failure modes
+  (Cemri et al. 2025) to this protocol's mitigated operational incidents and their guardrails
+  (drift/DECISION-0017, anomaly/0018, collision/0020, liveness/0013, budget/deadline, dirty-tree,
+  escalation, schema, maker!=checker). Honest scope: MAST *applied to protocol incidents*, not 1:1 with
+  MAST-Data; the `Incident?` column cites a concrete incident or marks the guardrail preventive-only (no
+  tally); modes with no own incident (FM-2.1, FM-2.6) are marked, and MAST is noted as the vocabulary,
+  not the exhaustive failure surface (non-MAST guards: encoding/DECISION-0012, neutrality, secrets).
+  Linked from onboarding (`Area_comun/README.md`) and the review guide.
+- **Loop governor "Does It Deserve a Loop?"** in `Area_comun/protocol/TASK_PROTOCOL.md` — mandatory
+  4-condition pre-check (recurrence / objective verification / budget absorbs retry / senior tools) +
+  30-second check before building any discovery scanner or autonomy flow; a non-optional
+  termination/convergence requirement (explicit bound or the SA.4 budget/deadline/liveness envelope); a
+  scope-in-time clause (binds future expansions, does not revoke authority already granted, e.g. the SA.4
+  pilot DECISION-0027); roadmap rule "no E3 before E6" and standing pre-check for SA.4 expansion.
+
+### Notes
+- `#1 / protocol_research` (empirical MAST study over project history) remains deferred to its own
+  decision. No change to #3 (cost-attribution flag), #4 (chain/signatures/anchor) or SA.4.
+
 ## [1.6.0] — 2026-06-14
 
 **Cost-attribution per handoff/decision/agent, activated in the live instance (DECISION-0033), plus a

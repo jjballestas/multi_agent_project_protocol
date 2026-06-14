@@ -54,7 +54,45 @@ No implementable task may move to `ready`, `claimed` or `in_progress` unless it 
 - `closure_criteria`
 
 The review checks the result against `spec_id`, `acceptance_criteria`, `test_plan` and
-`closure_criteria`.
+`closure_criteria`. Reviews also check that any proposed loop/scanner passed the loop governor (see
+"Does It Deserve a Loop?"), and may cite a named mode from
+[`FAILURE_MODES.md`](FAILURE_MODES.md) when a finding matches one.
+
+## Does It Deserve a Loop? (loop governor)
+
+Before building **any** `discovery_scanner` or autonomy flow (a recurring, self-driven loop), the
+proposer must pass this governor. It is a **mandatory pre-check**: a loop/scanner proposal that does not
+record all four answers as "yes" is not eligible to be built, and the review rejects it.
+
+**30-second check.** Answer all four. If any answer is "no", do not build a loop: do the work as a
+normal owned task (or a manual step), and revisit only if the answers change.
+
+1. **Recurrence** - does the work recur **at least weekly**? (One-off or rare work does not justify a
+   standing loop.)
+2. **Verifiability** - is there **automated, objective verification** of the result? (A loop whose
+   output cannot be checked without a human each cycle is not a loop; it is hidden manual work.)
+3. **Economy** - does the **budget absorb the retry**? (The loop's cost, including retries on failure,
+   must fit within the cost/deadline caps in `runtime/budget.py`.)
+4. **Capability** - does it require **senior-level tools**? (If a simple manual step suffices, a
+   dedicated autonomous agent is not warranted.)
+
+Record the four answers in the proposing task (or its decision) so the review can check them.
+
+**Termination/convergence is NOT optional.** Independently of the four answers above, no loop is eligible
+unless it has a defined **termination/convergence condition and bound** — it must not be able to run
+unbounded. Either state the loop's explicit stop/convergence condition, **or** route its containment to
+the supervised-autonomy envelope as a hard requirement: budget/deadline caps and the liveness signal
+(FM-1.5 in [`FAILURE_MODES.md`](FAILURE_MODES.md); `runtime/budget.py`; DECISION-0013/0024). A loop with
+no bound and no SA envelope is rejected regardless of the four conditions.
+
+**Roadmap rule.** Do **not** build discovery scanners (roadmap E3, Phase 4) before this governor exists,
+and **every** expansion of supervised autonomy (e.g. widening the SA.4 window, DECISION-0024/0027) must
+pass this governor first. The governor is the standing pre-check for both.
+
+**Scope in time.** This governor binds loop/scanner expansions **decided after it takes effect**. It does
+**not** retroactively revoke authority already granted by a prior decision (e.g. the SA.4 pilot,
+DECISION-0027): such authority stands under its own terms until its owner re-decides. The governor applies
+the next time that authority is **expanded** or a new loop/scanner is proposed.
 
 ## Task Types
 

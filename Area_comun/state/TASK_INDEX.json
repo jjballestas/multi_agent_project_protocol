@@ -536,6 +536,19 @@
             "status": "done",
             "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado",
             "type": "implementation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0114-claude-fase0-failure-modes-y-loop-governor.md",
+            "id": "TASK-0114",
+            "linked_decisions": [
+                "DECISION-0034"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "done",
+            "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)",
+            "type": "documentation"
         }
     ],
     "updated_at": "2026-06-08",

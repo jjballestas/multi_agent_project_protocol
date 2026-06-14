@@ -536,6 +536,19 @@
             "task_id": "TASK-0111"
         },
         {
+            "claim_id": "CLAIM-20260614-fase0-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0114-claude-fase0-failure-modes-y-loop-governor.md"
+            ],
+            "started_at": "2026-06-14T17:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0114"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-rereview-codex",
             "expires_at": "2026-06-15",
             "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",

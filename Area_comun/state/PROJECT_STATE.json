@@ -89,6 +89,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado"
+        },
+        {
+            "id": "TASK-0114",
+            "owner": "Claude",
+            "status": "done",
+            "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)"
         }
     ],
     "agents": {
@@ -129,7 +135,8 @@
         "DECISION-0029",
         "DECISION-0031",
         "DECISION-0032",
-        "DECISION-0033"
+        "DECISION-0033",
+        "DECISION-0034"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -220,5 +227,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.6.0"
+    "version": "1.7.0"
 }

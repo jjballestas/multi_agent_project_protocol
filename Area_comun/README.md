@@ -17,7 +17,7 @@ Shared, auditable state for `multi_agent_project_protocol` (the protocol dogfood
 
 | Folder | Purpose |
 |--------|---------|
-| `protocol/` | Method, task, communication and handoff contracts (also the shipped product). |
+| `protocol/` | Method, task, communication and handoff contracts (also the shipped product), incl. `FAILURE_MODES.md` (named failure modes -> guardrails). |
 | `state/` | Live project state, task index and claims (`*.json`). `*.template.json` are shipped masters. |
 | `mailbox/` | Lightweight messages between agents. |
 | `tasks/` | One file per task. |
@@ -34,3 +34,6 @@ Shared, auditable state for `multi_agent_project_protocol` (the protocol dogfood
 - Do not edit another owner's active claim.
 - Record blocking ambiguity as `blocked` with one concrete question.
 - Keep the protocol core **domain-neutral**; protocol/compatibility changes need a decision.
+- Map any failure you hit to a named mode + guardrail in `protocol/FAILURE_MODES.md`; run the loop
+  governor in `protocol/TASK_PROTOCOL.md` ("Does It Deserve a Loop?") before building any scanner or
+  autonomy loop.
