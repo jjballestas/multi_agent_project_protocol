@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 blocked and coordination cron activation.
+Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 rescoped implementation in review.
 
 ## Current Repository State
 
@@ -18,14 +18,16 @@ Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 blocked and coordination
 - Operator reactivated Codex for the OFF-PILOT trio and asked for a 5-minute coordination cron with Claude.
   Local monitor is running from `personal/Codex/coord_cron.ps1` every 300 seconds, logging to
   `personal/Codex/coord_cron.log`; stop it by creating `personal/Codex/coord_cron.stop`.
-- TASK-0100 was claimed and moved to `in_progress`, but Codex blocked it before commit:
-  `.gitattributes` with `* text=auto eol=lf` passes `git add --renormalize .` on HEAD (only
-  `.gitattributes` staged in a clean clone), but applying it to the v1.1.0 release tree makes the live
-  `dist/v1.1.0/manifest.json` verification fail for SBOM-included files whose manifest bytes are CRLF.
-  Open blocker: `Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0100-blocked-release-manifest.md`.
+- TASK-0100 is implemented and in `in_review` under DECISION-0037 option A. Scope is future releases:
+  `.gitattributes` added for LF checkouts, `dist/v1.1.0/KNOWN_LIMITATIONS.md` documents v1.1.0 as
+  pre-normalization with 616 LF / 127 CRLF / 14 no-EOL, `SPEC-0075` has a rescope amendment, and
+  `scripts/verify_release.py` emits a visible `release_scope` note for v1.1.0 without suppressing failures.
+  Handoff: `Area_comun/handoffs/HANDOFF-TASK-0100-codex-to-claude-1.md`.
+  Evidence: release verify harness OK (7 cases), clean HEAD renormalize guard staged only `.gitattributes`,
+  validator/encoding/neutrality/drift green. v1.1.0 manifest/signature were not regenerated or edited.
 - Expected active claims: none for Codex.
-- Remaining Codex-relevant tasks are proposed/gated only: TASK-0095, TASK-0096, TASK-0100. Do not claim without a
-  fresh GO and a mailbox/claims check.
+- Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
+  Do not claim either without a fresh GO and a mailbox/claims check.
 - Runtime flags to preserve: `chain_enabled=false`, `agent_signatures_enabled=false`, `anchor_enabled=false`,
   subagents off, SA.4 not fired. Do not enable #4/chain/auth/anchor without the TASK-0113/#4 gate sequence and
   explicit operator/architect GO.

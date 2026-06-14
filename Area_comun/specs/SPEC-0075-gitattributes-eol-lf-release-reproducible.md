@@ -25,6 +25,15 @@ contenido sea identico. El emisor (LF) verifica bien; un tercero en Windows-auto
 durante el corte v1.1.0, un `git checkout` re-aplico CRLF a `README_INSTANCIACION.md` (18966 vs 18555 LF) y
 rompio la verificacion hasta restaurar los bytes LF.
 
+### Enmienda 2026-06-14 (DECISION-0037)
+
+La premisa original de esta spec ("los blobs ya son LF" y ningun blob SBOM-included cambia) era cierta para
+`HEAD`, pero **falsa para v1.1.0**: el manifest firmado contiene 616 ficheros reproducibles bajo LF, 127
+ficheros CRLF en el commit registrado y 14 mismatches no-EOL generados desde un arbol de trabajo sucio. Por
+tanto esta spec queda acotada a releases **v1.2.0+**. `v1.1.0` queda documentado como release historico
+pre-normalizacion en `dist/v1.1.0/KNOWN_LIMITATIONS.md`; su manifest y firma no se regeneran ni se
+re-firman.
+
 ## 2. Alcance
 
 - Anadir `.gitattributes` en la raiz que NORMALICE line-endings a LF en checkout para los archivos de texto

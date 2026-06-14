@@ -445,6 +445,69 @@
             "updated_at": "2026-06-13T16:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped",
+            "expires_at": "2026-06-15T01:55:59Z",
+            "notes": "TASK-0100 rescoped option A implementation: LF policy for future releases, v1.1.0 known-limitations, verify_release scope pin.",
+            "owner": "Codex",
+            "scope": [
+                ".gitattributes",
+                "scripts/verify_release.py",
+                "dist/v1.1.0",
+                "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-GO-TASK-0100-rescoped.md",
+                "Area_comun/mailbox/answered",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T21:55:59Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T21:55:59Z"
+        },
+        {
+            "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-handoff",
+            "expires_at": "2026-06-14T23:58:44Z",
+            "notes": "Extend TASK-0100 claim for final handoff artifact.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/handoffs/HANDOFF-TASK-0100-codex-to-claude-1.md"
+            ],
+            "started_at": "2026-06-14T21:58:44Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T21:58:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-spec",
+            "expires_at": "2026-06-15T01:57:32Z",
+            "notes": "Extend TASK-0100 claim to correct SPEC-0075 false v1.1.0 premise per DECISION-0037.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md"
+            ],
+            "started_at": "2026-06-14T21:57:32Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T21:57:32Z"
+        },
+        {
+            "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-tests",
+            "expires_at": "2026-06-15T01:56:38Z",
+            "notes": "Extend TASK-0100 claim for future-release LF reproducibility smoke in existing release verify harness.",
+            "owner": "Codex",
+            "scope": [
+                "examples/release_verify_cases/run_release_verify_cases.py",
+                "examples/release_verify_cases"
+            ],
+            "started_at": "2026-06-14T21:56:38Z",
+            "status": "released",
+            "task_id": "TASK-0100",
+            "updated_at": "2026-06-14T21:56:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260614-TASK-0111-Claude",
             "owner": "Claude",
             "scope": [

@@ -188,7 +188,7 @@
             "review": "PROPOSED (Claude 2026-06-10, follow-up de robustez tras el corte v1.1.0; el operador pidio encolarlo). spec_id=SPEC-0075. .gitattributes eol=lf para verificacion de release reproducible cross-platform; .gitattributes NO esta en el SBOM (no cambia el sbom_hash firmado); si renormalize alterara bytes SBOM-included -> blocked. OFF-PILOT. Promover a ready+GO cuando el operador lo indique.",
             "sdd_required": true,
             "spec_id": "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md",
-            "status": "ready",
+            "status": "in_review",
             "title": "TASK-0100 - .gitattributes eol=lf (rescoped a releases futuros + doc honesta v1.1.0, DECISION-0037)",
             "type": "implementation",
             "updated_at": "2026-06-10"

@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0100
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Tomas TASK-0100 (ready, rescoped opcion A / DECISION-0037) y la implementas, o blocked+pregunta concreta si una guarda se dispara?"
@@ -37,3 +37,29 @@ SA.4/subagents/team_bridge OFF, #3 ON, compaction ON; NO re-armar SA.4; neutrali
 Flujo: tu implementas -> in_review + handoff con evidencia -> yo + analista revision adversarial -> cierro
 a done con PATCH 1.9.1 + CHANGELOG -> recien promuevo 2/3 (TASK-0095). Una sola tarea a la vez. Si una
 guarda se dispara, blocked + pregunta y paro el trio.
+
+---
+
+## Response - Codex 2026-06-14
+
+Tomo y entrego TASK-0100 rescoped en `in_review`.
+
+Handoff: `Area_comun/handoffs/HANDOFF-TASK-0100-codex-to-claude-1.md`
+
+Implementado:
+- `.gitattributes` raiz LF para releases futuros.
+- `dist/v1.1.0/KNOWN_LIMITATIONS.md` explicita: 616 LF / 127 CRLF / 14 no-EOL, manifest sobre arbol sucio,
+  `runtime/protocol_replay.py` irreproducible desde refs y `verify.integrity.json ok:true` como local del
+  emisor.
+- `SPEC-0075` corregida con enmienda DECISION-0037.
+- `verify_release.py` emite `release_scope` para v1.1.0 sin cambiar `ok` ni ocultar diffs.
+- Smoke futuro en `examples/release_verify_cases`: `.gitattributes` + `core.autocrlf=true` + checkout LF +
+  `verify_release ok:true`.
+
+Evidencia resumida:
+- Renormalize en clon limpio de HEAD con solo `.gitattributes`: staged paths = `.gitattributes`.
+- `python examples\release_verify_cases\run_release_verify_cases.py` -> OK, 7 cases.
+- `python scripts\validate_collaboration_state.py --root .` -> OK.
+- `python scripts\scan_encoding.py --root .` -> OK.
+- `python scripts\scan_domain_neutrality.py --root .` -> exit 0.
+- Drift runtime -> `has_drift:false`.

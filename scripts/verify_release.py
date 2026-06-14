@@ -18,6 +18,15 @@ from generate_sbom import DEFAULT_EXCLUDE_GLOBS, DEFAULT_INCLUDE_GLOBS, build_sb
 from sign_release import EXTERNAL_COMMAND_BACKEND, FIXTURE_BACKEND, fixture_key_id, read_material, sign_fixture
 
 
+PRE_LF_NORMALIZATION_PROTOCOL_RELEASES = {
+    "1.1.0": {
+        "applies_to": "protocol_release",
+        "guarantee": "The LF-reproducible checkout guarantee applies to releases v1.2.0 and newer.",
+        "note": "v1.1.0 is documented as pre-normalization in dist/v1.1.0/KNOWN_LIMITATIONS.md; verification diffs under clean LF checkout are expected and are not suppressed.",
+    }
+}
+
+
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -192,6 +201,15 @@ def diff_sboms(expected: dict[str, Any], actual: dict[str, Any]) -> dict[str, li
     return {"changed": changed, "missing": missing, "extra": extra}
 
 
+def release_scope_note(manifest: dict[str, Any]) -> dict[str, Any] | None:
+    version_axes = manifest.get("version_axes") if isinstance(manifest.get("version_axes"), dict) else {}
+    protocol_version = str(version_axes.get("protocol") or "")
+    note = PRE_LF_NORMALIZATION_PROTOCOL_RELEASES.get(protocol_version)
+    if not note:
+        return None
+    return {"protocol_version": protocol_version, **note}
+
+
 def verify_release(
     root: Path,
     manifest_path: Path,
@@ -225,6 +243,9 @@ def verify_release(
         "file_count": actual_sbom["file_count"],
         "diff": diffs,
     }
+    scope_note = release_scope_note(manifest)
+    if scope_note is not None:
+        payload["release_scope"] = scope_note
     if signature_path is not None or signature_backend is not None or signature_material is not None or signature_verify_command is not None:
         if signature_path is None:
             payload["ok"] = False

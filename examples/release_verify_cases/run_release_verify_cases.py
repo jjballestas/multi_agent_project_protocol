@@ -66,6 +66,10 @@ def run(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(command, text=True, capture_output=True, check=False)
 
 
+def run_git(root: Path, *args: str) -> subprocess.CompletedProcess[str]:
+    return run(["git", "-C", str(root), *args])
+
+
 def generate_manifest(root: Path, output: str = "-") -> subprocess.CompletedProcess[str]:
     return run([sys.executable, str(MANIFEST_PY), "--root", str(root), "--commit", COMMIT, "--timestamp", TIMESTAMP, "--output", output])
 
@@ -196,6 +200,45 @@ def case_powershell_wrappers_parity_if_available() -> None:
         assert py_verify.stdout.replace("\r\n", "\n") == ps_verify.stdout.replace("\r\n", "\n")
 
 
+def case_future_release_checkout_lf_with_autocrlf() -> None:
+    if not shutil.which("git"):
+        return
+    with tempfile.TemporaryDirectory(prefix="manifest-future-lf-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        write(root / ".gitattributes", "* text=auto eol=lf\n")
+        manifest_path = write_manifest(root)
+
+        shutil.rmtree(root / ".git")
+        assert run_git(root, "init").returncode == 0
+        assert run_git(root, "config", "user.email", "release@example.invalid").returncode == 0
+        assert run_git(root, "config", "user.name", "Release Verify Case").returncode == 0
+        assert run_git(root, "config", "core.autocrlf", "true").returncode == 0
+        assert run_git(root, "add", ".").returncode == 0
+        assert run_git(root, "commit", "-m", "fixture").returncode == 0
+
+        for path in [
+            root / "scripts/tool.py",
+            root / "runtime/source.py",
+            root / "Area_comun/protocol/GUIDE.md",
+            root / "examples/demo_case/input.txt",
+        ]:
+            path.unlink()
+        assert run_git(root, "checkout", "--", ".").returncode == 0
+
+        for path in [
+            root / "scripts/tool.py",
+            root / "runtime/source.py",
+            root / "Area_comun/protocol/GUIDE.md",
+            root / "examples/demo_case/input.txt",
+        ]:
+            assert b"\r\n" not in path.read_bytes(), path.as_posix()
+
+        payload = load_json_result(verify_release(root, manifest_path))
+        assert payload["ok"] is True
+        assert payload["diff"] == {"changed": [], "missing": [], "extra": []}
+
+
 def main() -> int:
     cases = [
         case_manifest_expected_tree,
@@ -204,6 +247,7 @@ def main() -> int:
         case_verify_detects_missing_and_extra_files,
         case_deterministic_manifest_bytes,
         case_powershell_wrappers_parity_if_available,
+        case_future_release_checkout_lf_with_autocrlf,
     ]
     failures = []
     for case in cases:
