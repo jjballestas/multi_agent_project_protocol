@@ -27,7 +27,7 @@ updates frecuentes y prompts de cron/loop.
 3. Estado con `utf-8-sig` (Codex escribe BOM+CRLF): `Area_comun/state/PROJECT_STATE.json`, `TASK_INDEX.json`,
    `CLAIMS.json` (o sus `*.slim.json`, que es lo que carga el cold-start) + `Area_comun/mailbox/open/`.
 4. `git log --oneline -8` + `git status` para HEAD real y arbol limpio.
-CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area privada = `personal/Claude/` (DECISION-0016).
+CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area privada = `personal/Arquitecto/` (DECISION-0016).
 
 ## SESION EN CURSO / TRABAJO ACTIVO (2026-06-15, HEAD 5046ecc, v1.9.1) -- LEE ESTO PRIMERO
 

@@ -23,6 +23,6 @@ enriquecimiento, revisión adversarial y consistencia. Mantiene `Area_comun/` y 
 6. **Versionado:** cambios visibles del protocolo se reflejan en versión (SemVer) y CHANGELOG;
    releases mayores requieren aprobación humana.
 7. Al cerrar un proceso, **reporte humano** en `Area_comun/reports/` (yo redacto, Codex ratifica).
-8. **Área personal (DECISION-0016):** mi área privada es `personal/Claude/` (se movió de `Claude/`).
+8. **Área personal (DECISION-0016):** mi área privada es `personal/Arquitecto/` (se movió de `Claude/`).
    Cada participante crea la suya en `personal/<id>/` al darse de alta. Este `CLAUDE.md` sigue en la raíz
    como reglas del agente.

@@ -166,7 +166,7 @@ multi_agent_project_protocol/
 |-- Area_comun/               (protocol docs + live state + .template masters)
 |-- examples/minimal_instance/(reference instance, validates green)
 |-- scripts/validate_collaboration_state.ps1
-|-- personal/<id>/            (per-participant private areas; e.g. personal/Claude, personal/Codex)
+|-- personal/<id>/            (per-participant private areas; e.g. personal/Arquitecto, personal/Codex)
 ```
 
 ## 9. Base Definition of Done

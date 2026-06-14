@@ -2,7 +2,7 @@
 
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista**, NO "Claude-analista" (el prefijo
 > "Claude-" confunde a otros modelos con el arquitecto Claude). Mensajes: from: Analista / to: Analista.
-> La carpeta sigue en `personal/Claude-analista/` por ahora (no romper el path de arranque); rename del
+> La carpeta sigue en `personal/Analista/` por ahora (no romper el path de arranque); rename del
 > directorio a `personal/Analista/` pendiente de coordinar.
 
 Pega el bloque de "PROMPT PARA PEGAR" como primer mensaje al iniciar otra sesion de analista.
@@ -28,13 +28,13 @@ entrego artefacto ANALISTA-*.md en Area_comun/artifacts/ + aviso mailbox; canal 
 
 ## ARRANQUE EN FRIO (lee en este orden, NO asumas)
 
-1. Este runbook + `personal/Claude-analista/MEMORY.md` (rol, lecciones, estado de la ultima sesion).
+1. Este runbook + `personal/Analista/MEMORY.md` (rol, lecciones, estado de la ultima sesion).
 2. `AGENTS.md` (sec. 0 y 7) + `CLAUDE.md` (reglas del repo).
 3. Estado con `utf-8-sig` (Codex escribe BOM+CRLF): `Area_comun/state/PROJECT_STATE.json`,
    `TASK_INDEX.json`, `CLAIMS.json` (o sus `*.slim.json`) + `Area_comun/mailbox/open/`.
 4. `git log --oneline -8` + `git status` para HEAD real y arbol limpio.
 5. Para estado tecnico PROFUNDO (flags gateados, capabilities, escritor unico) ver el runbook del
-   arquitecto: `personal/Claude/STARTUP_PROMPT.md`. Yo no necesito mutarlo; solo entenderlo.
+   arquitecto: `personal/Arquitecto/STARTUP_PROMPT.md`. Yo no necesito mutarlo; solo entenderlo.
 
 ## MI ROL Y LENTE (que soy / que no soy)
 

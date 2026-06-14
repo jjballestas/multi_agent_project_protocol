@@ -1,9 +1,9 @@
 # MEMORY - Analista (voz analista; firma "Analista", antes "Claude-analista") - multi_agent_project_protocol
 
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista** (sin prefijo "Claude-", que confunde con
-> el arquitecto Claude). Mensajes from: Analista / to: Analista. Carpeta personal/Claude-analista/ por ahora.
+> el arquitecto Claude). Mensajes from: Analista / to: Analista. Carpeta personal/Analista/ por ahora.
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
-> El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Claude/MEMORY.md`
+> El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-06-14 (HEAD ~5e6c4bc, v1.7.0).
 
@@ -121,7 +121,7 @@
   mensaje es el unico real" (la otra sesion es igual de legitima); honestidad por encima de defender autoria.
 
 ## Estado vigente (VERIFICAR al arrancar)
-- FIRMA = "Analista" (sin prefijo "Claude-"; orden operador 2026-06-15). Carpeta sigue personal/Claude-analista/
+- FIRMA = "Analista" (sin prefijo "Claude-"; orden operador 2026-06-15). Carpeta sigue personal/Analista/
   por ahora (rename a personal/Analista/ pendiente de coordinar, no romper el path de arranque).
 - protocol_version 1.9.3, TRIO OFF-PILOT COMPLETO: TASK-0100=1.9.1, TASK-0095=1.9.2, TASK-0096=1.9.3 (las 3
   con mi CONCURRO independiente). DECISION-0036 (narracion dura, ahora "primordial")=1.9.0; DECISION-0037
