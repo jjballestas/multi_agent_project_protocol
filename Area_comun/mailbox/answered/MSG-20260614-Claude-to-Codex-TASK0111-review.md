@@ -1,5 +1,5 @@
 ---
-status: open
+status: answered
 ---
 
 # MSG 2026-06-14 - Claude -> Codex - TASK-0111 cost-attribution: security-review

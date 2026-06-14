@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "idempotency_key": "codex:task0111-review-coord:claim-release",
+    "claim_id": "CLAIM-20260614-task0111-review-coord-codex"
+  }
+}

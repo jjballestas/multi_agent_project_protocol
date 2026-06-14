@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e3e9e2cdbce0188355da00ceace00dd33012b97aa54a42bb5192996e29f09b76",
+  "canonical_hash": "7efdab3c9813597d9490eb243ff850e6b2646f9ff1b8fc68a65393db7324bb31",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -135,6 +135,7 @@
       "CLAIM-20260613-task0109-voz-codex": 1,
       "CLAIM-20260614-TASK-0111-Claude": 1,
       "CLAIM-20260614-TASK-0112-Claude": 1,
+      "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -189,13 +190,13 @@
       "TASK-0106": 11,
       "TASK-0109": 6,
       "TASK-0110": 5,
-      "TASK-0111": 2,
+      "TASK-0111": 3,
       "TASK-0112": 3,
       "VERSION-RECONCILE": 1,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 430,
+    "events_applied": 432,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -407,6 +408,8 @@
       "codex:task0106-go-ack:claim-release": 395,
       "codex:task0109-voz-factibilidad:claim-acquire": 388,
       "codex:task0109-voz-factibilidad:claim-release": 389,
+      "codex:task0111-review-coord:claim-acquire": 431,
+      "codex:task0111-review-coord:claim-release": 432,
       "codex:temp-acl-rule:claim-acquire": 194,
       "codex:temp-acl-rule:claim-release": 195,
       "codex:tempfile-acl-coord:claim-acquire": 186,
@@ -640,5 +643,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 430
+  "up_to_seq": 432
 }
