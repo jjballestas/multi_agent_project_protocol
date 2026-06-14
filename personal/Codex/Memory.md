@@ -1,14 +1,19 @@
 # Codex Memory
 
-Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
+Last updated: 2026-06-15 Europe/Madrid, after identity re-genesis and Codex startup refresh.
 
 ## Current Repository State
 
-- Latest observed HEAD before mailbox hygiene: `2e1515a chore(personal): higieniza personal/Claude + actualiza MEMORY/STARTUP_PROMPT a v1.6.0`.
-- v1.6.0 is published by Claude: cost-attribution #3 is activated, TASK-0111 is done, and TASK-0113 is done.
+- Latest observed HEAD before this refresh: `823b5b9 chore(personal): renombra areas a la identidad nueva (personal/Claude->Arquitecto, personal/Claude-analista->Analista)`.
+- v1.9.3 is published and the OFF-PILOT trio is closed: TASK-0100, TASK-0095, and TASK-0096 are done.
+- Identity reform is live: use `Arquitecto` for the architect/orchestrator and `Analista` for the independent
+  analyst voice. The ledger actor was renamed from `Claude` to `Arquitecto` through coordinated re-genesis
+  (`c9a5dd6 chore(identity): renombra actor del ledger Claude -> Arquitecto (re-genesis)`).
+- `personal/Claude/` and `personal/Claude-analista/` were renamed to `personal/Arquitecto/` and
+  `personal/Analista/`. Do not edit those areas unless the operator explicitly asks.
 - Claude's stand-down FYI was archived after explicit operator request to hygiene Codex mailbox:
   `Area_comun/mailbox/archived/MSG-20260614-Claude-to-Codex-stand-down-cron.md`.
-- Expected open mailbox after this hygiene: `.gitkeep` only, unless new messages arrive.
+- Expected Codex mailbox after hygiene: no open messages addressed to Codex unless new messages arrive.
 - Coordination after operator request:
   - Codex sent `Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-coord-next-work.md` asking Claude
     whether there is a new GO or Codex remains in stand-down.
@@ -16,8 +21,8 @@ Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
     ACK: Codex owns the future read-only invariant verification for `protocol_research` coupling/exporters
     post-GATE-DATASET, before any live Core read. No action now; current work remains gate-only/stub-only.
 - Operator reactivated Codex for the OFF-PILOT trio and asked for a 5-minute coordination cron with Claude.
-  Local monitor is running from `personal/Codex/coord_cron.ps1` every 300 seconds, logging to
-  `personal/Codex/coord_cron.log`; stop it by creating `personal/Codex/coord_cron.stop`.
+  That process is now closed; the local coordination cron was stopped and `personal/Codex/coord_cron.stop`
+  may exist. Do not restart it without explicit operator reactivation.
 - TASK-0100 is implemented and in `in_review` under DECISION-0037 option A. Scope is future releases:
   `.gitattributes` added for LF checkouts, `dist/v1.1.0/KNOWN_LIMITATIONS.md` documents v1.1.0 as
   pre-normalization with 616 LF / 127 CRLF / 14 no-EOL, `SPEC-0075` has a rescope amendment, and
@@ -55,13 +60,13 @@ Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
   `Area_comun/mailbox/archived/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md`. Validator
   is OK with one unrelated warning for `MSG-20260615-Claude-to-ClaudeAnalista-sync-reply.md`; drift 0 and
   no active Codex claims.
-- Claude closed the OFF-PILOT trio and sent Codex stand-down:
+- Arquitecto closed the OFF-PILOT trio and sent Codex stand-down:
   `Area_comun/mailbox/archived/MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md`. Codex mailbox is
   clean for Codex; only non-Codex open mailbox remains. Local coordination cron was stopped (PID 80672) and
   `personal/Codex/coord_cron.stop` was created locally. Do not take new tasks until operator reactivation.
 - Expected active claims: none for Codex.
-- Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
-  Do not claim either without a fresh GO and a mailbox/claims check.
+- No remaining Codex-relevant trio tasks are active after review. Do not claim new work without a fresh GO and
+  a mailbox/claims check.
 - Runtime flags to preserve: `chain_enabled=false`, `agent_signatures_enabled=false`, `anchor_enabled=false`,
   subagents off, SA.4 not fired. Do not enable #4/chain/auth/anchor without the TASK-0113/#4 gate sequence and
   explicit operator/architect GO.
@@ -73,7 +78,7 @@ Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
   They are retained for traceability but should not clutter cold-start reading.
 - Root of `personal/Codex/` should stay small: `README.md`, `Memory.md`, `STARTUP_PROMPT.md`, durable reports, and
   archive folders.
-- Do not touch `personal/Claude/` or `personal/operador/` unless the operator explicitly asks.
+- Do not touch `personal/Arquitecto/`, `personal/Analista/` or `personal/operador/` unless the operator explicitly asks.
 
 ## Operating Rules
 
@@ -87,11 +92,13 @@ Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
 
 ## Known Dirty-Tree Caution
 
-- The worktree may contain unrelated deletions under `personal/Claude/` and untracked `personal/operador/`.
+- The worktree may contain unrelated edits under `personal/Arquitecto/`, `personal/Analista/` and `personal/operador/`.
   Treat them as peer/operator state and do not revert or stage them.
 - Latest Codex mailbox hygiene: archived `MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md`, stopped the
   coordination cron via `personal/Codex/coord_cron.stop`, released `CLAIM-20260615-Codex-standdown`, and left no
   active Codex claims. Commit: `c0efaaf chore(mailbox): archive Codex stand-down`.
+- Startup files were refreshed so the next Codex session reads both `personal/Codex/STARTUP_PROMPT.md` and
+  this memory before acting.
 
 ## Useful Fresh-Session Commands
 

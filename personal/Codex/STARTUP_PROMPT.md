@@ -3,7 +3,7 @@
 Prompt corto para pegar al iniciar una sesion nueva:
 
 ```text
-Lee AGENTS.md y personal/Codex/STARTUP_PROMPT.md.
+Lee AGENTS.md, personal/Codex/STARTUP_PROMPT.md y personal/Codex/Memory.md.
 ```
 
 Despues de leerlo, ejecuta este arranque:
@@ -12,7 +12,7 @@ REGLA PRIMORDIAL (DECISION-0038): no narrar proceso. No digas "voy a leer", "voy
 ni recapitules pasos intermedios. Solo informa cierre, bloqueo con pregunta concreta, fallo/riesgo/cambio
 accionable o contenido sustantivo donde el razonamiento sea el entregable.
 
-1. Lee `personal/Codex/Memory.md`.
+1. Ya debes haber leido `personal/Codex/Memory.md`; si no, leelo antes de tocar estado o mailbox.
 2. Revisa `git status --short` y no toques cambios ajenos.
 3. Revisa `Area_comun/mailbox/open/`.
 4. Verifica estado con:
@@ -26,12 +26,13 @@ python -c "from pathlib import Path; from runtime.protocol_replay import protoco
 
 ## Estado Esperado
 
-- Refresco: 2026-06-14 Europe/Madrid.
-- HEAD observado antes del refresco: `60465f1 chore(ci+coordination): cablea chain_auth_combined en CI + stand-down de Codex`.
-- v1.6.0 publicado; TASK-0111 y TASK-0113 cerradas.
-- `mailbox/open` puede contener `MSG-20260614-Claude-to-Codex-stand-down-cron.md`; es FYI de parada.
-- No hay trabajo no-gated para Codex. No iniciar cron/monitor ni reclamar tareas sin nuevo GO.
-- Tareas Codex restantes conocidas: TASK-0095, TASK-0096, TASK-0100 en estado propuesto/gated.
+- Refresco: 2026-06-15 Europe/Madrid.
+- HEAD observado antes de este refresco: `823b5b9 chore(personal): renombra areas a la identidad nueva (personal/Claude->Arquitecto, personal/Claude-analista->Analista)`.
+- Trio OFF-PILOT cerrado: TASK-0100 done, TASK-0095 done, TASK-0096 done.
+- Codex esta en stand-down: no iniciar cron/monitor ni reclamar tareas sin reactivacion explicita del operador.
+- El cron local de coordinacion fue detenido; `personal/Codex/coord_cron.stop` puede existir y debe respetarse.
+- Reforma de identidad aplicada: dirigirse al arquitecto como `Arquitecto` y a la voz analista como `Analista`.
+- El actor tecnico del ledger fue renombrado a `Arquitecto` por re-genesis coordinado; verifica drift antes de cualquier ledger action.
 - Mantener off: chain, agent_signatures, anchor, subagents y SA.4, salvo GO explicito.
 
 ## Reglas De Arranque
@@ -39,5 +40,5 @@ python -c "from pathlib import Path; from runtime.protocol_replay import protoco
 - Estado compartido: solo via runtime/submit_intent o ledger_ops; nunca edicion manual de `Area_comun/state/*.json`.
 - Crear claim antes de editar rutas compartidas, incluido mailbox.
 - Despues de cada commit Codex, actualizar `personal/Codex/Memory.md`.
-- No editar `personal/Claude/` ni `personal/operador/` salvo instruccion explicita.
+- No editar `personal/Arquitecto/`, `personal/Analista/` ni `personal/operador/` salvo instruccion explicita.
 - Staging siempre por rutas explicitas.
