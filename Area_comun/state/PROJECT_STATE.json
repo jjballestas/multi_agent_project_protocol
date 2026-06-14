@@ -21,7 +21,7 @@
         {
             "id": "TASK-0100",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": ".gitattributes eol=lf para releases reproducibles cross-platform: un checkout Windows-autocrlf hoy da CRLF y rompe verify_release (el SBOM hasheo LF). Anadir .gitattributes que fije LF en checkout, verificar que no altera bytes SBOM-included (firma v1.1.0 intacta) + regresion de reproducibilidad. OFF-PILOT."
         },
         {
