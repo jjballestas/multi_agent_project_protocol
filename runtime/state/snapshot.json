@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3e24c4197633c5c03705cd07d431a9be5be31dbb8e83287d6b676b33dce528f8",
+  "canonical_hash": "1bbb3962eb147b7e8317556f4b05c627f19a08c56a548c354c3c93c607eec6da",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -157,6 +157,7 @@
       "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-20260614-task0113-codex": 1,
       "CLAIM-20260614-winddown": 1,
+      "CLAIM-20260615-Codex-TASK-0095": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
@@ -205,7 +206,7 @@
       "TASK-0092": 6,
       "TASK-0093": 15,
       "TASK-0094": 11,
-      "TASK-0095": 3,
+      "TASK-0095": 6,
       "TASK-0096": 1,
       "TASK-0097": 11,
       "TASK-0098": 13,
@@ -229,7 +230,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 506,
+    "events_applied": 510,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -584,6 +585,8 @@
       "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-codex:task-status": 168,
       "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:claim-acquire": 182,
       "ledger-op:auto-claim:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:task-status": 183,
+      "ledger-op:auto-claim:TASK-0095:CLAIM-20260615-Codex-TASK-0095:claim-acquire": 507,
+      "ledger-op:auto-claim:TASK-0095:CLAIM-20260615-Codex-TASK-0095:task-status": 508,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:claim-acquire": 307,
       "ledger-op:auto-claim:TASK-0097:CLAIM-20260610-task0097-codex:task-status": 308,
       "ledger-op:auto-claim:TASK-0100:CLAIM-20260614-Codex-TASK-0100-rescoped:claim-acquire": 490,
@@ -614,6 +617,8 @@
       "ledger-op:handoff-release:TASK-0093:CLAIM-20260609-task0093-codex:task-status": 169,
       "ledger-op:handoff-release:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:claim-release": 185,
       "ledger-op:handoff-release:TASK-0093:CLAIM-20260609-task0093-fix-rejection-codex:task-status": 184,
+      "ledger-op:handoff-release:TASK-0095:CLAIM-20260615-Codex-TASK-0095:claim-release": 510,
+      "ledger-op:handoff-release:TASK-0095:CLAIM-20260615-Codex-TASK-0095:task-status": 509,
       "ledger-op:handoff-release:TASK-0097:CLAIM-20260610-task0097-codex:claim-release": 310,
       "ledger-op:handoff-release:TASK-0097:CLAIM-20260610-task0097-codex:task-status": 309,
       "ledger-op:handoff-release:TASK-0101:CLAIM-20260613-task0101-codex:claim-release": 336,
@@ -750,5 +755,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 506
+  "up_to_seq": 510
 }

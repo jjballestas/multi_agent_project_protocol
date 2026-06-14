@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 rescoped implementation in review.
+Last updated: 2026-06-15 Europe/Madrid, after TASK-0095 implementation in review.
 
 ## Current Repository State
 
@@ -25,6 +25,13 @@ Last updated: 2026-06-14 Europe/Madrid, after TASK-0100 rescoped implementation 
   Handoff: `Area_comun/handoffs/HANDOFF-TASK-0100-codex-to-claude-1.md`.
   Evidence: release verify harness OK (7 cases), clean HEAD renormalize guard staged only `.gitattributes`,
   validator/encoding/neutrality/drift green. v1.1.0 manifest/signature were not regenerated or edited.
+- TASK-0100 was later closed by Claude in v1.9.1. TASK-0095 is now implemented and in `in_review`:
+  `runtime/apply.py` derives task markdown paths mutated by turn transitions and includes them in
+  `commit_turn`; `examples/runtime_apply_cases` now proves the task `.md` is committed even when omitted
+  from `changed_paths`. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0095-codex-to-claude-1.md`. Evidence: runtime_apply OK (4),
+  runtime_loop OK (15), runtime_real_adapter OK (4), intent_flow OK (11), validator/encoding/neutrality/drift
+  green. No active Codex claims expected.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.

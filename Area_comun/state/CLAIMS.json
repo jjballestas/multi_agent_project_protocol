@@ -830,6 +830,32 @@
             "task_id": "TASK-0113"
         },
         {
+            "claim_id": "CLAIM-20260615-Codex-TASK-0095",
+            "expires_at": "2026-06-15T02:23:00Z",
+            "notes": "TASK-0095 turn commit self-consistency: include task markdown side-effect paths in commit_turn.",
+            "owner": "Codex",
+            "scope": [
+                "runtime/apply.py",
+                "runtime/vcs.py",
+                "examples/runtime_loop_cases",
+                "examples/runtime_real_adapter_cases",
+                "examples/runtime_apply_cases",
+                "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/mailbox/open/MSG-20260615-Claude-to-Codex-GO-TASK-0095.md",
+                "Area_comun/mailbox/answered",
+                "Area_comun/handoffs",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T22:23:00Z",
+            "status": "released",
+            "task_id": "TASK-0095",
+            "updated_at": "2026-06-14T22:23:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260615-close-0100-Claude",
             "owner": "Claude",
             "scope": [

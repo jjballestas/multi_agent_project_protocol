@@ -118,7 +118,6 @@ def turn_report() -> dict:
         "outcome": "in_review",
         "summary": "Move fixture task to review.",
         "changed_paths": [
-            f"Area_comun/tasks/{TASK_ID}.md",
             f"Area_comun/state/TASK_INDEX.json#{TASK_ID}",
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{TASK_ID}",
             "Area_comun/state/CLAIMS.json",
@@ -137,6 +136,10 @@ def git_count(root: Path) -> int:
     return int(run(["git", "rev-list", "--count", "HEAD"], root).stdout.strip())
 
 
+def git_status_for_path(root: Path, path: str) -> str:
+    return run(["git", "status", "--short", "--", path], root).stdout.strip()
+
+
 def case_valid_commit() -> None:
     with tempfile.TemporaryDirectory(prefix="runtime-apply-valid-") as temp:
         fixture = Path(temp)
@@ -147,6 +150,10 @@ def case_valid_commit() -> None:
         assert git_count(fixture) == before + 1
         status = json.loads((fixture / "Area_comun/state/TASK_INDEX.json").read_text())["tasks"][0]["status"]
         assert status == "in_review"
+        task_path = f"Area_comun/tasks/{TASK_ID}.md"
+        assert git_status_for_path(fixture, task_path) == ""
+        committed = run(["git", "show", f"HEAD:{task_path}"], fixture).stdout
+        assert "status: in_review" in committed
 
 
 def case_gate_red_reverts_turn() -> None:

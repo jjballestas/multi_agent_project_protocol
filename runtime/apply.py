@@ -236,6 +236,31 @@ def transition_commit_paths(report: dict[str, Any]) -> list[str]:
     return paths
 
 
+def task_file_commit_paths(root: Path, report: dict[str, Any]) -> list[str]:
+    transitions = report.get("transitions") or {}
+    task_ids: list[str] = []
+    if isinstance(transitions.get("task_status"), dict) and report.get("task_id"):
+        task_ids.append(str(report["task_id"]))
+    for upsert in transitions.get("task_upserts") or []:
+        if isinstance(upsert, dict) and str(upsert.get("id") or "").strip():
+            task_ids.append(str(upsert["id"]))
+    if not task_ids:
+        return []
+
+    index_path = root / "Area_comun" / "state" / "TASK_INDEX.json"
+    if not index_path.exists():
+        return []
+    index = read_json(index_path)
+    paths: list[str] = []
+    for task in index.get("tasks") or []:
+        if not isinstance(task, dict) or str(task.get("id") or "") not in task_ids:
+            continue
+        task_file = str(task.get("file") or task.get("task_file") or "").replace("\\", "/").strip()
+        if task_file and task_file not in paths:
+            paths.append(task_file)
+    return paths
+
+
 def with_terminal_claim_release(report: dict[str, Any], claim: dict[str, Any] | None) -> dict[str, Any]:
     if not claim or not str(claim.get("claim_id") or "").strip():
         return report
@@ -522,6 +547,7 @@ def apply_gate_and_commit(report: dict[str, Any], root: Path, allow_policy: bool
             paths = [
                 *(report_for_apply.get("changed_paths") or []),
                 *transition_commit_paths(report_for_apply),
+                *task_file_commit_paths(root, report_for_apply),
                 *runtime_state_commit_paths(root),
                 *materialization_commit_paths(materialization),
             ]
