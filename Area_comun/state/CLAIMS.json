@@ -520,6 +520,27 @@
             "task_id": "TASK-0113"
         },
         {
+            "claim_id": "CLAIM-20260614-task0111-rereview-codex",
+            "expires_at": "2026-06-15",
+            "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0111",
+                "Area_comun/state/TASK_INDEX.slim.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0111",
+                "Area_comun/state/PROJECT_STATE.slim.json",
+                "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T03:04:00Z",
+            "status": "released",
+            "task_id": "TASK-0111",
+            "updated_at": "2026-06-14T03:04:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-review-coord-codex",
             "expires_at": "2026-06-15",
             "notes": "Coordinate Codex security review finding for TASK-0111 without touching implementation routes.",
@@ -537,6 +558,36 @@
             "status": "released",
             "task_id": "TASK-0111",
             "updated_at": "2026-06-14T00:18:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260614-task0113-codex",
+            "expires_at": "2026-06-15",
+            "notes": "TASK-0113 fix chain+auth prev_hash interaction and combined golden; rereview TASK-0111.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/CLAIMS.slim.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0113",
+                "Area_comun/state/TASK_INDEX.slim.json",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0113",
+                "Area_comun/state/PROJECT_STATE.slim.json",
+                "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                "Area_comun/specs/SPEC-0080-fix-chain-auth-prev-hash.md",
+                "runtime/eventlog.py",
+                "examples/chain_auth_combined_cases/",
+                "examples/runtime_event_auth_cases/",
+                "examples/chain_cases/",
+                "examples/runtime_cost_attribution_cases/",
+                "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-TASK0113-fix-and-rereview.md",
+                "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-TASK0113-fix-and-rereview.md",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T02:51:10Z",
+            "status": "released",
+            "task_id": "TASK-0113",
+            "updated_at": "2026-06-14T02:51:10Z"
         },
         {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",

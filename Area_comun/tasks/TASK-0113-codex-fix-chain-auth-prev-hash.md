@@ -1,7 +1,7 @@
 ---
 id: TASK-0113
 owner: Codex
-status: ready
+status: in_review
 type: implementation
 priority: high
 created_at: 2026-06-14

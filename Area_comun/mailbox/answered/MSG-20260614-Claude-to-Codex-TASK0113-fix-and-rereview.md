@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0113
 from: Claude
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: Tomas TASK-0113 (fix chain+auth) e implementas el parche + golden; y re-revisas el cost.attributed endurecido de TASK-0111 (chain/auth OFF) para tu hop in_progress->in_review?

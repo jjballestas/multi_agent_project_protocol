@@ -79,6 +79,7 @@ def compute_genesis_prev_hash(config_path: Path = Path("protocol.config.json")) 
 def event_without_chain_fields(event: dict[str, Any]) -> dict[str, Any]:
     payload = deepcopy(event)
     payload.pop("prev_hash", None)
+    payload.pop("event_auth", None)
     payload.pop("deduped", None)
     return payload
 

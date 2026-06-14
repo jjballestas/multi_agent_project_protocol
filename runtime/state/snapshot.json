@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "dafcda43e779e6858a3ff5513d1141d46d9ca6c0ba25a0dc3402a35a23fae970",
+  "canonical_hash": "4ff609ff60967dc9e477904e87121c72a26321bff30016405a848d1022613fa7",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -137,7 +137,9 @@
       "CLAIM-20260614-TASK-0112-Claude": 1,
       "CLAIM-20260614-TASK0111-context": 1,
       "CLAIM-20260614-TASK0113-Claude": 1,
+      "CLAIM-20260614-task0111-rereview-codex": 1,
       "CLAIM-20260614-task0111-review-coord-codex": 1,
+      "CLAIM-20260614-task0113-codex": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -192,14 +194,14 @@
       "TASK-0106": 11,
       "TASK-0109": 6,
       "TASK-0110": 5,
-      "TASK-0111": 4,
+      "TASK-0111": 6,
       "TASK-0112": 3,
-      "TASK-0113": 2,
+      "TASK-0113": 5,
       "VERSION-RECONCILE": 1,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 437,
+    "events_applied": 444,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -411,6 +413,9 @@
       "codex:task0106-go-ack:claim-release": 395,
       "codex:task0109-voz-factibilidad:claim-acquire": 388,
       "codex:task0109-voz-factibilidad:claim-release": 389,
+      "codex:task0111-rereview-hop:claim-acquire": 442,
+      "codex:task0111-rereview-hop:claim-release": 444,
+      "codex:task0111-rereview-hop:task-status": 443,
       "codex:task0111-review-coord:claim-acquire": 431,
       "codex:task0111-review-coord:claim-release": 432,
       "codex:temp-acl-rule:claim-acquire": 194,
@@ -512,6 +517,8 @@
       "ledger-op:auto-claim:TASK-0105:CLAIM-20260613-task0105-codex:task-status": 371,
       "ledger-op:auto-claim:TASK-0106:CLAIM-20260613-task0106-codex:claim-acquire": 398,
       "ledger-op:auto-claim:TASK-0106:CLAIM-20260613-task0106-codex:task-status": 399,
+      "ledger-op:auto-claim:TASK-0113:CLAIM-20260614-task0113-codex:claim-acquire": 438,
+      "ledger-op:auto-claim:TASK-0113:CLAIM-20260614-task0113-codex:task-status": 439,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:claim-release": 9,
       "ledger-op:handoff-release:TASK-0084:CLAIM-20260608-TASK-0084-codex:task-status": 8,
       "ledger-op:handoff-release:TASK-0085:CLAIM-20260608-TASK-0085-codex:claim-release": 33,
@@ -536,6 +543,8 @@
       "ledger-op:handoff-release:TASK-0105:CLAIM-20260613-task0105-codex:task-status": 372,
       "ledger-op:handoff-release:TASK-0106:CLAIM-20260613-task0106-codex:claim-release": 401,
       "ledger-op:handoff-release:TASK-0106:CLAIM-20260613-task0106-codex:task-status": 400,
+      "ledger-op:handoff-release:TASK-0113:CLAIM-20260614-task0113-codex:claim-release": 441,
+      "ledger-op:handoff-release:TASK-0113:CLAIM-20260614-task0113-codex:task-status": 440,
       "mailbox-hygiene:task0089-go-status:claim-acquire": 113,
       "mailbox-hygiene:task0089-go-status:claim-release": 114,
       "operator-memory-rule-20260608:claim-acquire": 14,
@@ -651,5 +660,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 437
+  "up_to_seq": 444
 }
