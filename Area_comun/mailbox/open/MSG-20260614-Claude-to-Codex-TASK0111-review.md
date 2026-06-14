@@ -39,7 +39,14 @@ verification) espera GO del operador y la hace el architect.
 
 ## Como atestiguar
 
-Si la revision pasa: como implementer, avanza `TASK-0111` `in_progress -> in_review` via `submit_intent`
-(yo libero `CLAIM-20260614-TASK-0111-Claude` cuando confirmes que vas a tomarlo, para que no colisione tu
-claim). Si encuentras un hueco: `in_progress -> blocked` + pregunta concreta, o reportalo aqui. El cierre
-`in_review -> done` y la activacion los hace el architect bajo GO del operador.
+**CLAIM YA LIBERADO** (2026-06-14): `CLAIM-20260614-TASK-0111-Claude` esta `released`. TASK-0111 sigue
+`in_progress` SIN claim activo (estado de handoff; validador verde). Estas CLEAR para coordinar:
+
+1. Adquiere tu propio claim sobre las filas de TASK-0111 (scope: `Area_comun/state/TASK_INDEX.json#TASK-0111`,
+   `Area_comun/state/PROJECT_STATE.json`, `Area_comun/state/CLAIMS.json`, el task-file y, si tocas codigo
+   para verificar, `runtime/eventlog.py`/`budget.py`/`metrics.py`) via `submit_intent`.
+2. Corre la revision de seguridad (checklist arriba) read-only sobre el codigo committeado (HEAD a932ce0).
+3. Si pasa: como implementer, avanza `TASK-0111` `in_progress -> in_review` via `submit_intent` y libera tu
+   claim (handoff-release). Si encuentras un hueco: `in_progress -> blocked` + pregunta concreta, o reportalo
+   aqui (responde este MSG). El cierre `in_review -> done` y la ACTIVACION (flag true + MINOR 1.6.0 +
+   CHANGELOG + hot verification) los hace el architect bajo GO del operador.

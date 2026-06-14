@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "472cf45c03d9998518356e4853aac27825f148bdc16967915de77071e19bb27d",
+  "canonical_hash": "e3e9e2cdbce0188355da00ceace00dd33012b97aa54a42bb5192996e29f09b76",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -133,6 +133,7 @@
       "CLAIM-20260613-task0106-go-ack-codex": 1,
       "CLAIM-20260613-task0106-ratified-mailbox-hygiene-codex": 1,
       "CLAIM-20260613-task0109-voz-codex": 1,
+      "CLAIM-20260614-TASK-0111-Claude": 1,
       "CLAIM-20260614-TASK-0112-Claude": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
@@ -194,7 +195,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 429,
+    "events_applied": 430,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -445,6 +446,7 @@
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
       "intent:Claude:claim:07db78327217c1de99dba3edcb9c0282f9c919ddf82b89cd77c62326ce754daf": 368,
+      "intent:Claude:claim:253d7db29e3a386ce41fead01161e0dcd51c0c9f16e5cc8c11e0e6437583f7d1": 430,
       "intent:Claude:claim:46ddd1e51e86668031e4bbc13df6e7dd07e202d2671a377b9fca0bf65d7aa1f6": 174,
       "intent:Claude:claim:4aa0234bee8abfea6550a0c47a726a2c658972678727e40c89e336a9a593c688": 366,
       "intent:Claude:claim:52a23f9f4c92e92f26126d9348daf179630aa39bb18c32e36419a93a221f1e63": 331,
@@ -638,5 +640,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 429
+  "up_to_seq": 430
 }
