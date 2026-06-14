@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4a23397b76067a0111967495a069e213c013979e7aa02ed4b659b4f1536ce066",
+  "canonical_hash": "48023ea82f4b3711a126979596026a8c0a2df3d1ef248e63efc0fda002ed4aa6",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -164,6 +164,7 @@
       "CLAIM-20260615-Codex-TASK0096-coord-delivery": 1,
       "CLAIM-20260615-Codex-mailbox-hygiene": 1,
       "CLAIM-20260615-Codex-notify-mailbox-anomaly-sync-coord": 1,
+      "CLAIM-20260615-Codex-standdown": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0096-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
@@ -237,11 +238,11 @@
       "TASK-0115": 2,
       "TASK-0116": 2,
       "VERSION-RECONCILE": 1,
-      "none": 2,
+      "none": 3,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 535,
+    "events_applied": 537,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -397,6 +398,8 @@
       "close-task0092:task-upsert": 152,
       "codex-mailbox-hygiene-20260615-claim": 530,
       "codex-mailbox-hygiene-20260615-release": 531,
+      "codex-standdown-20260615-claim": 536,
+      "codex-standdown-20260615-release": 537,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-acquire": 157,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
@@ -791,5 +794,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 535
+  "up_to_seq": 537
 }

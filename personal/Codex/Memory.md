@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review.
+Last updated: 2026-06-15 Europe/Madrid, after trio stand-down.
 
 ## Current Repository State
 
@@ -55,6 +55,10 @@ Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review
   `Area_comun/mailbox/archived/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md`. Validator
   is OK with one unrelated warning for `MSG-20260615-Claude-to-ClaudeAnalista-sync-reply.md`; drift 0 and
   no active Codex claims.
+- Claude closed the OFF-PILOT trio and sent Codex stand-down:
+  `Area_comun/mailbox/archived/MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md`. Codex mailbox is
+  clean for Codex; only non-Codex open mailbox remains. Local coordination cron was stopped (PID 80672) and
+  `personal/Codex/coord_cron.stop` was created locally. Do not take new tasks until operator reactivation.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.
