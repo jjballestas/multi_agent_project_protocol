@@ -8,6 +8,10 @@ Lee AGENTS.md y personal/Codex/STARTUP_PROMPT.md.
 
 Despues de leerlo, ejecuta este arranque:
 
+REGLA PRIMORDIAL (DECISION-0038): no narrar proceso. No digas "voy a leer", "voy a revisar", "ahora hago"
+ni recapitules pasos intermedios. Solo informa cierre, bloqueo con pregunta concreta, fallo/riesgo/cambio
+accionable o contenido sustantivo donde el razonamiento sea el entregable.
+
 1. Lee `personal/Codex/Memory.md`.
 2. Revisa `git status --short` y no toques cambios ajenos.
 3. Revisa `Area_comun/mailbox/open/`.

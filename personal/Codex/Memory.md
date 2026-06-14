@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-06-15 Europe/Madrid, after TASK-0095 implementation in review.
+Last updated: 2026-06-15 Europe/Madrid, after DECISION-0038 narration hardening.
 
 ## Current Repository State
 
@@ -32,6 +32,10 @@ Last updated: 2026-06-15 Europe/Madrid, after TASK-0095 implementation in review
   `Area_comun/handoffs/HANDOFF-TASK-0095-codex-to-claude-1.md`. Evidence: runtime_apply OK (4),
   runtime_loop OK (15), runtime_real_adapter OK (4), intent_flow OK (11), validator/encoding/neutrality/drift
   green. No active Codex claims expected.
+- DECISION-0038 is accepted by operator order: minimal narration is now a primordial rule. AGENTS.md,
+  AGENTS.template.md, personal/Codex/STARTUP_PROMPT.md, and personal/Claude/STARTUP_PROMPT.md were hardened:
+  no visible process narration, no step announcements/recaps, no non-actionable periodic progress. Only final
+  report/handoff, real blocking question, actionable coordination result, or substantive reasoning-as-deliverable.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.

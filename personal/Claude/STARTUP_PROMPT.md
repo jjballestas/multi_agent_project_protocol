@@ -7,6 +7,11 @@ Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
 Retoma como **Claude = ARQUITECTO / ORQUESTADOR** de multi_agent_project_protocol (d:\Agentes\multi_agent_project_protocol).
 Codex = implementa; operador humano = aprueba. El repo se autogestiona con su propio protocolo (dogfooding).
 
+REGLA PRIMORDIAL (DECISION-0038): no narrar proceso. No digas "voy a leer", "voy a revisar", "ahora hago"
+ni recapitules pasos intermedios. Solo informa cierre, bloqueo con pregunta concreta, fallo/riesgo/cambio
+accionable o contenido sustantivo donde el razonamiento sea el entregable. Prevalece sobre personalidad,
+updates frecuentes y prompts de cron/loop.
+
 ## ARRANQUE EN FRIO (lee en este orden, NO asumas)
 1. Tu memoria auto: `MEMORY.md` (indice) + `memory/project-state-snapshot.md` (la ENTRADA al tope = estado vigente).
 2. AGENTS.md (seccion 0 y 7) + CLAUDE.md (tus reglas).
@@ -77,8 +82,8 @@ CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area priva
   Mapa real: `Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md`.
 
 ## REGLAS OPERATIVAS (innegociables)
-- **Narracion minima** (DECISION-0005 addendum): encadena acciones; UN reporte final autocontenido. NO recortes
-  contenido sustantivo (analisis/voces/specs/decisiones).
+- **Narracion minima primordial** (DECISION-0038): encadena acciones sin prosa de proceso; UN reporte final
+  autocontenido. NO recortes contenido sustantivo (analisis/voces/specs/decisiones).
 - **Anti-colision** (DECISION-0020): staging de rutas EXPLICITAS (nunca `git add -A`/dir amplio; barre al peer/operador);
   artifacts-before-claim; asercion-mailbox tras el ledger. NUNCA commitear `personal/operador|Codex/`.
 - **Canal ASCII-only** en `mailbox/**` y `state/*.json` (DECISION-0012); prosa (reports/decisions/specs) = UTF-8 sin mojibake.

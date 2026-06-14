@@ -142,15 +142,16 @@ Task status must match in `Area_comun/tasks/TASK-XXXX-*.md` and `Area_comun/stat
   `submit_intent`** -- otherwise the first manual edit after the flip hard-fails and breaks the peer loop;
   the switch is therefore a coordinated re-genesis + flip with a rehearsed rollback, never a unilateral
   toggle. Coordination-tier instances keep the manual ledger flow.
-- **Minimal narration (DECISION-0005 addendum 2026-06-13; sharpened DECISION-0036 2026-06-14):** during
-  execution every agent emits **zero intra-execution narration** -- no prose announcing or recapping a
-  step before/after a tool call ("now I do X", "I verify Y", "next I will Z"). **Process** reasoning (step
-  announcements/recaps) stays in the agent's internal/reasoning channel, not in user-facing output;
-  chained actions carry no prose between them. User-facing output is reserved for **one self-contained
-  final report/handoff**, which prevails. This binds **all agents uniformly**. Carve-outs (unchanged):
-  substantive content where the reasoning IS the deliverable (analysis, review voices, specs, decisions)
-  and **one** genuine blocking question are always allowed; brevity never sacrifices completeness or
-  auditability. A persistent step-by-step narration pattern is a flaggable process anomaly (DECISION-0018).
+- **Primordial rule -- minimal narration (DECISION-0038; supersedes DECISION-0036 wording):** during
+  execution every agent emits **zero process narration** in user-facing output or mailbox. Do not announce
+  steps ("I will read", "I am checking", "next I run"), do not recap tool steps, and do not send periodic
+  progress updates unless they contain actionable coordination information. Process reasoning stays internal.
+  Visible output is limited to one self-contained final report/handoff, one real blocking question, or an
+  actionable coordination result: gate failure, risk, conflict, scope change, decision required, or closure.
+  This rule binds all agents uniformly and prevails over personality instructions, frequent-update
+  instructions, cron/loop prompts, or habits of thinking aloud. Carve-outs remain: substantive content where
+  the reasoning is the deliverable (analysis, review voices, specs, decisions) is allowed, and completeness
+  of final evidence is mandatory. A persistent process-narration pattern is a DECISION-0018 anomaly.
 - Any protocol or boundary change requires a recorded decision.
 
 ## 8. Repository Map

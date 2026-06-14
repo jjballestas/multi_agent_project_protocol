@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "734a7b5e4a265708ed3dedfc3ec870b9dbfa49604ff0b879f68fa0de3fbaf7dd",
+  "canonical_hash": "afbbbb78e178c643d2931efce36cd2e10632fd6c50d5e68e5c8de8c222ab3b96",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -157,6 +157,7 @@
       "CLAIM-20260614-task0111-review-coord-codex": 1,
       "CLAIM-20260614-task0113-codex": 1,
       "CLAIM-20260614-winddown": 1,
+      "CLAIM-20260615-Codex-DECISION-0038": 1,
       "CLAIM-20260615-Codex-TASK-0095": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
@@ -183,6 +184,7 @@
       "DECISION-0035": 2,
       "DECISION-0036": 1,
       "DECISION-0037": 1,
+      "DECISION-0038": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -232,13 +234,15 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 517,
+    "events_applied": 519,
     "fencing_tokens": {
       "TASK-0091": 1
     },
     "idempotency_keys": {
       "Codex:TASK-0091:claim:codex-TASK-0091-20260609-1:0": 222,
       "Codex:TASK-0091:ready->in_review:codex-TASK-0091-20260609-1:1": 223,
+      "DECISION-0038-claim": 518,
+      "DECISION-0038-release-claim": 519,
       "TASK-0100-extend-claim-handoff": 494,
       "TASK-0100-extend-claim-release-verify-cases": 492,
       "TASK-0100-extend-claim-spec-0075": 493,
@@ -764,5 +768,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 517
+  "up_to_seq": 519
 }

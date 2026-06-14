@@ -830,6 +830,26 @@
             "task_id": "TASK-0113"
         },
         {
+            "claim_id": "CLAIM-20260615-Codex-DECISION-0038",
+            "expires_at": "2026-06-15T00:46:16Z",
+            "notes": "Operator-approved hardening of minimal narration as primordial rule.",
+            "owner": "Codex",
+            "scope": [
+                "AGENTS.md",
+                "AGENTS.template.md",
+                "Area_comun/decisions/DECISION-0038-narracion-minima-regla-primordial.md",
+                "personal/Codex/STARTUP_PROMPT.md",
+                "personal/Claude/STARTUP_PROMPT.md",
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T22:46:16Z",
+            "status": "released",
+            "task_id": "DECISION-0038",
+            "updated_at": "2026-06-14T22:46:16Z"
+        },
+        {
             "claim_id": "CLAIM-20260615-Codex-TASK-0095",
             "expires_at": "2026-06-15T02:23:00Z",
             "notes": "TASK-0095 turn commit self-consistency: include task markdown side-effect paths in commit_turn.",
