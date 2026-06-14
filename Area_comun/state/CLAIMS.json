@@ -895,6 +895,19 @@
             "task_id": "TASK-0095"
         },
         {
+            "claim_id": "CLAIM-20260615-promote-0096-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md"
+            ],
+            "started_at": "2026-06-15T00:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0096"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",

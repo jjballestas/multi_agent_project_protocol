@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "58e57eea11f0ba319c847e5df1a3860fbe4b1959027ea79b9752eaaf701f7ed2",
+  "canonical_hash": "734a7b5e4a265708ed3dedfc3ec870b9dbfa49604ff0b879f68fa0de3fbaf7dd",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -161,6 +161,7 @@
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
+      "CLAIM-20260615-promote-0096-Claude": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -208,7 +209,7 @@
       "TASK-0093": 15,
       "TASK-0094": 11,
       "TASK-0095": 8,
-      "TASK-0096": 1,
+      "TASK-0096": 3,
       "TASK-0097": 11,
       "TASK-0098": 13,
       "TASK-0099": 12,
@@ -231,7 +232,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 514,
+    "events_applied": 517,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -527,6 +528,7 @@
       "intent:Claude:claim:904ffa4142adafd3b45578b77aac779a9d8ec189412f6810b64fb2b079ccbe82": 429,
       "intent:Claude:claim:a083c9f267de68165518c7a6586b56480f7a8c35eb1505fb5eaba2ad768e410f": 435,
       "intent:Claude:claim:a0dfce2f7aa4f7903e781341a908452d195f772d7c3ff9f3d9a80eee74579585": 457,
+      "intent:Claude:claim:a178d219dfe25ddec4f67b9622fb7cdc6d44ef41a412730c827b24a021a210cc": 517,
       "intent:Claude:claim:a41fc6eaf274e6e815dbbb60fea0460e541f9dc54e676fbc345e6c088ab01350": 323,
       "intent:Claude:claim:b4e48a4d2fa69430b72941ffa0eb408fb01b064f52a6ebf6cd3d63c989fe7e33": 475,
       "intent:Claude:claim:bb7d488665e68cf0ebc198001b1d73709ddf80d015894cc7de60ef195b446558": 329,
@@ -536,6 +538,7 @@
       "intent:Claude:claim:bd50bcd819a14e3bdb2ce3e2290f3d68cd7ad09132d178783b3758d8f4d734d9": 452,
       "intent:Claude:claim:cf34446b09b98cb30f69479d5792830e74b545c53e1281e88cf264bf00ce88cd": 478,
       "intent:Claude:claim:d4f2cce2934102e50c4310fd3cd940ba8c82ae9266d0eb84c77a0d51842923ab": 489,
+      "intent:Claude:claim:d5e3e167488a1b3a17ba218771b4b0a1c9e205729258c97621ebc8e7be938b3d": 515,
       "intent:Claude:claim:d829d6b2413778f1b54306feb6eb4c8c8c94ab1062d05d2b131326733edc3124": 164,
       "intent:Claude:claim:da5a74f1a73a3d99b6e29db41d30920c3aa0637962c54a59decf6ad321892cc8": 476,
       "intent:Claude:claim:f717e3b24d8e5a7243e5f93824478567eb8a063a35ade2204350a83451a2d217": 330,
@@ -555,6 +558,7 @@
       "intent:Claude:project_narrative:a5b17e8447fec685f1fe6fc19bb537df9e1b1edaab91b60272e729e5b2960077": 474,
       "intent:Claude:project_narrative:ae60e31e03ee17d6a03813df208a8bbab6b5b8e24828ed9373d64fd5e72b615f": 465,
       "intent:Claude:project_narrative:c13f04a310ed69ee2078e046d2ee50b85544827b74155b2f56befa1a8f6d4f4b": 449,
+      "intent:Claude:task_status:22a6efd11349517001c8ed2776caf17fe3e54038a6132ba6c78cd6bb048bf9d9": 516,
       "intent:Claude:task_status:40d891fc156c52983c89ee29d86c78239adacbb11483cdb5210374bfb5991b80": 512,
       "intent:Claude:task_status:7fb8adb4e63f77fc66c25b0058df7f1ae3831d9c883277fd6228a55294d2eece": 477,
       "intent:Claude:task_status:84eace1192cb1ce1be418da99bec4798cdcfc2873ee63581ca0eab12b52c1464": 501,
@@ -760,5 +764,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 514
+  "up_to_seq": 517
 }
