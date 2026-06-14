@@ -34,6 +34,9 @@
     "mailbox_keep_recent": 8,
     "recent_next_actions": 8
   },
+  "metrics": {
+    "cost_attribution_enabled": false
+  },
   "runtime": {
     "enabled": false,
     "entrypoint": "runtime/orchestrator.py",

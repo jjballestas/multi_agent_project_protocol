@@ -3,7 +3,15 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
+
+try:
+    from .eventlog import COST_ATTRIBUTION_DIMENSIONS, canonical_hash, cost_attribution_enabled
+except ImportError:  # pragma: no cover - direct script execution
+    from eventlog import COST_ATTRIBUTION_DIMENSIONS, canonical_hash, cost_attribution_enabled
+
+_SHA256_HEX_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def positive_int(value: Any) -> int | None:
@@ -39,6 +47,86 @@ def responsible(agent_id: str | None = None, task_id: str | None = None) -> dict
         "agent": str(agent_id or "runtime"),
         "task_id": str(task_id or "none"),
     }
+
+
+def subject_hash(subject: Any) -> str:
+    """Return the protocol-plane hash for a cost-attribution subject.
+
+    Two-plane rule (DECISION-0033): the subject's payload (handoff prose, decision body, turn report)
+    lives in the payload plane and is referenced ONLY by hash. If `subject` is already a sha256 hex
+    digest it is used verbatim; otherwise its canonical hash is computed.
+    """
+    if isinstance(subject, str) and _SHA256_HEX_RE.match(subject):
+        return subject
+    return canonical_hash(subject)
+
+
+def cost_attribution_record(
+    *,
+    dimension: str,
+    actor: str,
+    subject: Any,
+    cost_tokens: int,
+    subject_seq: int | None = None,
+    task_id: str | None = None,
+    decision_id: str | None = None,
+) -> dict[str, Any]:
+    """Build the structured protocol-plane cost-attribution record (no free text).
+
+    Only the metric and structured identifiers are kept; the subject is referenced by hash. Raises on
+    an unknown dimension so callers cannot smuggle arbitrary content into the protocol plane.
+    """
+    dimension = str(dimension or "")
+    if dimension not in COST_ATTRIBUTION_DIMENSIONS:
+        raise ValueError(f"invalid cost attribution dimension: {dimension}")
+    tokens = positive_int(cost_tokens)
+    if tokens is None:
+        raise ValueError(f"cost_tokens must be a non-negative integer, got: {cost_tokens!r}")
+    record: dict[str, Any] = {
+        "dimension": dimension,
+        "actor": str(actor or "runtime"),
+        "subject_hash": subject_hash(subject),
+        "subject_seq": int(subject_seq) if subject_seq is not None else None,
+        "cost_tokens": tokens,
+    }
+    if task_id:
+        record["task_id"] = str(task_id)
+    if decision_id:
+        record["decision_id"] = str(decision_id)
+    return record
+
+
+def cost_attribution_idempotency_key(record: dict[str, Any]) -> str:
+    """Deterministic dedup key: same subject+dimension+actor+seq => one attribution."""
+    return ":".join(
+        [
+            "cost",
+            str(record.get("dimension") or ""),
+            str(record.get("subject_hash") or ""),
+            str(record.get("subject_seq")),
+            str(record.get("actor") or ""),
+        ]
+    )
+
+
+def attribute_cost(writer: Any, **kwargs: Any) -> dict[str, Any] | None:
+    """Build the record and emit it via the event log writer (gated by the flag).
+
+    Production-faithful emission point for the orchestrator/wrapper at turn close: it is called with
+    the turn's `cost_tokens` and the subject it produced (handoff/decision). Returns the emitted event,
+    or None when `metrics.cost_attribution_enabled` is off (writer.append_cost_attribution no-ops).
+    """
+    record = cost_attribution_record(**kwargs)
+    return writer.append_cost_attribution(
+        dimension=record["dimension"],
+        actor_id=record["actor"],
+        subject_hash=record["subject_hash"],
+        cost_tokens=record["cost_tokens"],
+        subject_seq=record["subject_seq"],
+        task_id=record.get("task_id"),
+        decision_id=record.get("decision_id"),
+        idempotency_key=cost_attribution_idempotency_key(record),
+    )
 
 
 class Budget:

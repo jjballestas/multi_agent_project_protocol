@@ -186,6 +186,57 @@ def fairness_summary(assignments: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
+    """Read `cost.attributed` events from the event log and impute tokens per dimension.
+
+    Three dimensions (DECISION-0033): `by_handoff` keeps every handoff separate (NO cross-aggregation),
+    `by_decision` sums per decision_id, `by_agent` sums per actor. Deterministic: handoffs sorted by
+    `(seq, subject_hash)`, maps sorted by key. Reads the protocol plane only (metric + subject hash).
+    """
+    handoffs: list[dict[str, Any]] = []
+    by_decision: dict[str, int] = {}
+    by_agent: dict[str, int] = {}
+    total = 0
+    attributions = 0
+
+    for event in read_jsonl(event_log_path):
+        if event.get("type") != "cost.attributed":
+            continue
+        attributions += 1
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        dimension = str(payload.get("dimension") or "")
+        actor = str(event.get("actor") or payload.get("actor") or "none")
+        try:
+            cost = int(payload.get("cost_tokens") or 0)
+        except (TypeError, ValueError):
+            cost = 0
+        total += cost
+        by_agent[actor] = by_agent.get(actor, 0) + cost
+        if dimension == "handoff":
+            handoffs.append(
+                {
+                    "seq": event.get("seq"),
+                    "subject_seq": payload.get("subject_seq"),
+                    "subject_hash": payload.get("subject_hash"),
+                    "actor": actor,
+                    "task_id": payload.get("task_id"),
+                    "cost_tokens": cost,
+                }
+            )
+        elif dimension == "decision":
+            decision_id = str(payload.get("decision_id") or payload.get("subject_hash") or "none")
+            by_decision[decision_id] = by_decision.get(decision_id, 0) + cost
+
+    handoffs.sort(key=lambda item: (int(item.get("seq") or 0), str(item.get("subject_hash") or "")))
+    return {
+        "attributions": attributions,
+        "total_cost_tokens": total,
+        "by_handoff": handoffs,
+        "by_decision": sorted_counts(by_decision),
+        "by_agent": sorted_counts(by_agent),
+    }
+
+
 def summarize_nagent(event_log_path: Path, run_log_path: Path) -> dict[str, Any]:
     events = read_jsonl(event_log_path)
     entries = read_entries(run_log_path)

@@ -445,6 +445,28 @@
             "updated_at": "2026-06-13T16:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260614-TASK-0111-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0111",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md",
+                "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                "runtime/eventlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "examples/runtime_cost_attribution_cases/",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-06-14T12:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0111"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",

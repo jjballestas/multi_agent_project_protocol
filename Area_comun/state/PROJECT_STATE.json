@@ -71,6 +71,12 @@
             "owner": "Claude",
             "status": "done",
             "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)"
+        },
+        {
+            "id": "TASK-0111",
+            "owner": "Claude",
+            "status": "in_progress",
+            "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)"
         }
     ],
     "agents": {
@@ -110,7 +116,8 @@
         "DECISION-0028",
         "DECISION-0029",
         "DECISION-0031",
-        "DECISION-0032"
+        "DECISION-0032",
+        "DECISION-0033"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

@@ -157,6 +157,15 @@ def observability_enabled(config: dict[str, Any] | None) -> bool:
     return observability_config(config).get("enabled") is True
 
 
+COST_ATTRIBUTION_EVENT_TYPE = "cost.attributed"
+COST_ATTRIBUTION_DIMENSIONS = ("handoff", "decision", "agent")
+
+
+def cost_attribution_enabled(config: dict[str, Any] | None) -> bool:
+    metrics = (config or {}).get("metrics")
+    return isinstance(metrics, dict) and metrics.get("cost_attribution_enabled") is True
+
+
 def trace_value(*values: Any) -> str:
     for value in values:
         text = str(value or "").strip()
@@ -537,6 +546,51 @@ class EventWriter:
                 "signature": signature,
                 "verification_backend": verification_backend,
             },
+            ts=ts,
+        )
+
+    def append_cost_attribution(
+        self,
+        *,
+        dimension: str,
+        actor_id: str,
+        subject_hash: str,
+        cost_tokens: int,
+        subject_seq: int | None = None,
+        task_id: str | None = None,
+        decision_id: str | None = None,
+        idempotency_key: str | None = None,
+        ts: str | None = None,
+    ) -> dict[str, Any] | None:
+        """Emit a `cost.attributed` annotation event (DECISION-0033, two-plane).
+
+        Protocol plane only: structured metric + `subject_hash` reference; no free text. The event is
+        `applied:false` so `protocol_replay.replay_protocol_state` skips it (no state mutation, no
+        drift). Off-by-default: returns None and writes nothing unless `metrics.cost_attribution_enabled`.
+        """
+        config = read_protocol_config(self.root)
+        if not cost_attribution_enabled(config):
+            return None
+        dimension = str(dimension or "")
+        if dimension not in COST_ATTRIBUTION_DIMENSIONS:
+            raise EventLogError(f"invalid cost attribution dimension: {dimension}")
+        payload: dict[str, Any] = {
+            "dimension": dimension,
+            "subject_hash": str(subject_hash),
+            "subject_seq": int(subject_seq) if subject_seq is not None else None,
+            "cost_tokens": int(cost_tokens),
+        }
+        if task_id:
+            payload["task_id"] = str(task_id)
+        if decision_id:
+            payload["decision_id"] = str(decision_id)
+        return self.append_event(
+            event_type=COST_ATTRIBUTION_EVENT_TYPE,
+            aggregate_id=str(task_id or decision_id or subject_hash),
+            actor_id=actor_id,
+            idempotency_key=idempotency_key,
+            applied=False,
+            payload=payload,
             ts=ts,
         )
 

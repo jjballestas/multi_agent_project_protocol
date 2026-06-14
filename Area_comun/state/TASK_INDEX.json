@@ -495,6 +495,20 @@
             "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)",
             "type": "analysis",
             "updated_at": "2026-06-13"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+            "id": "TASK-0111",
+            "linked_decisions": [
+                "DECISION-0033"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0079",
+            "status": "in_progress",
+            "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)",
+            "type": "implementation"
         }
     ],
     "updated_at": "2026-06-08",
