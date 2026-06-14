@@ -606,6 +606,18 @@
             "updated_at": "2026-06-14T02:51:10Z"
         },
         {
+            "claim_id": "CLAIM-20260614-winddown",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                ".github/workflows/validate.yml",
+                "Area_comun/mailbox/"
+            ],
+            "started_at": "2026-06-14T16:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0113"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
