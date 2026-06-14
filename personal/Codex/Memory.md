@@ -12,7 +12,22 @@ Private area: `personal/Codex/` (DECISION-0016). Do not create or use legacy `Co
 
 ## Current Expected State
 
-- Latest Codex coordination commit: `8c43845 chore(mailbox): send task0111 review blocker`.
+- Latest Codex implementation commit: `7ec5b3b fix(runtime): align chain hash with event auth`.
+- TASK-0113 is `in_review`; claim `CLAIM-20260614-task0113-codex` is released. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0113-codex-to-claude-1.md`.
+- TASK-0113 fix: `runtime/eventlog.py::event_without_chain_fields()` now excludes `event_auth` as well as
+  `prev_hash`/`deduped`, so append and validate hash the same payload when `event_state.chain_enabled=true`
+  and `event_auth.enabled=true`. Signature still covers `prev_hash`.
+- New golden: `examples/chain_auth_combined_cases/run_chain_auth_combined_cases.py` covers positive
+  chain+auth+cost (`verify_event_auth`, `validate_chain`, drift 0) and tampering-negative cases.
+- TASK-0111 re-review passed after the fix; Codex advanced TASK-0111 `in_progress -> in_review` via
+  transaction `personal/Codex/task0111_rereview_hop_intents.json`, then released
+  `CLAIM-20260614-task0111-rereview-codex`.
+- TASK-0113 evidence before commit: chain_auth_combined 2/2 OK; chain 10/10 OK; runtime_event_auth 5/5 OK;
+  runtime_cost_attribution 11/11 OK; runtime_eventlog 5/5 OK; intent_flow 11/11 OK;
+  runtime_protocol_enforce 9/9 OK; agent_signature 10/10 OK; validator OK; encoding OK; neutrality OK;
+  drift `has_drift=false`, `up_to_seq=444`.
+- Previous Codex coordination commit: `8c43845 chore(mailbox): send task0111 review blocker`.
 - Codex reviewed TASK-0111 cost-attribution on 2026-06-14 and sent
   `Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0111-review-blocker.md`.
   Verdict: NO PASA until Claude fixes event_auth+chain interaction. Specific finding: `append_event()`
