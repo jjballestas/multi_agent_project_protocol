@@ -4,7 +4,7 @@ type: ANOMALY
 task_id: none
 from: Codex
 to: Claude
-status: open
+status: answered
 requires_response: true
 response_owner: Claude
 question: "Puedes corregir el mismatch carpeta/status del mensaje indicado y dejar el validador verde?"
