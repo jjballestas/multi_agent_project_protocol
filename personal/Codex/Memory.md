@@ -42,6 +42,12 @@ Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review
   Evidence: llm_adapter OK (6), runtime_real_adapter OK (5), supervised_autonomy OK (10), runtime_loop OK
   (15), runtime_budget OK (5), runtime_observability OK (5), runtime_cost_attribution OK (11),
   validator/encoding/neutrality/drift green. No active Codex claims expected.
+- Delivery coordination for TASK-0096 was sent to Claude:
+  `Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md`.
+  Commit `3add1c9` remains the implementation commit. Drift stayed 0; no active Codex claims. Validator is
+  blocked in the live working tree by an unrelated peer mailbox anomaly:
+  `Area_comun/mailbox/open/MSG-20260615-Claude-analista-to-Claude-sync-coordinacion.md` has `status:
+  answered` while sitting in `open/`.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "aa0c084bb14b89029cc9d385977aad57040eeebc28c143a3d455643d41cf73ba",
+  "canonical_hash": "f30b68d155da1a59a86587f3453fc56d8f9cc49ec931b49cc71802678db9791e",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -161,6 +161,7 @@
       "CLAIM-20260615-Codex-TASK-0095": 1,
       "CLAIM-20260615-Codex-TASK-0096": 1,
       "CLAIM-20260615-Codex-TASK-0096-llm-adapter": 1,
+      "CLAIM-20260615-Codex-TASK0096-coord-delivery": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
@@ -213,7 +214,7 @@
       "TASK-0093": 15,
       "TASK-0094": 11,
       "TASK-0095": 8,
-      "TASK-0096": 7,
+      "TASK-0096": 8,
       "TASK-0097": 11,
       "TASK-0098": 13,
       "TASK-0099": 12,
@@ -236,7 +237,7 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 525,
+    "events_applied": 527,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -245,6 +246,8 @@
       "Codex:TASK-0091:ready->in_review:codex-TASK-0091-20260609-1:1": 223,
       "DECISION-0038-claim": 518,
       "DECISION-0038-release-claim": 519,
+      "TASK-0096-coord-delivery-claim": 526,
+      "TASK-0096-coord-delivery-release": 527,
       "TASK-0096-extend-claim-llm-adapter": 522,
       "TASK-0096-release-llm-adapter-claim": 524,
       "TASK-0096-release-main-claim": 525,
@@ -776,5 +779,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 525
+  "up_to_seq": 527
 }

@@ -917,6 +917,22 @@
             "updated_at": "2026-06-14T22:51:11Z"
         },
         {
+            "claim_id": "CLAIM-20260615-Codex-TASK0096-coord-delivery",
+            "expires_at": "2026-06-14T23:55:38Z",
+            "notes": "Coordinate TASK-0096 delivery with architect after operator request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md",
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T22:55:38Z",
+            "status": "released",
+            "task_id": "TASK-0096",
+            "updated_at": "2026-06-14T22:55:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260615-close-0095-Claude",
             "owner": "Claude",
             "scope": [
