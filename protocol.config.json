@@ -6,7 +6,7 @@
   "adoption_tier": "runtime",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
-    "architect": "Claude",
+    "architect": "Arquitecto",
     "implementer": "Codex",
     "human_owner": "operador humano"
   },

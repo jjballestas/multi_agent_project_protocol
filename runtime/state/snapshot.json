@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "48023ea82f4b3711a126979596026a8c0a2df3d1ef248e63efc0fda002ed4aa6",
+  "canonical_hash": "41f95854829f175d7c40c9940d3249b14028d5ad06be5eb7701b4e392576effb",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -240,9 +240,9 @@
       "VERSION-RECONCILE": 1,
       "none": 3,
       "protocol-prune": 15,
-      "protocol-state": 8
+      "protocol-state": 9
     },
-    "events_applied": 537,
+    "events_applied": 538,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -689,6 +689,7 @@
       "p2:2026-06-13T21:48:05Z:relnew": 419,
       "p2:2026-06-13T21:48:05Z:relold": 418,
       "protocol-state:genesis-ref:v1": 1,
+      "protocol-state:regenesis-ref:45e928ca668375474b4ed9d5412bd86b7202410623019ef0771e043a51540497": 538,
       "protocol-state:regenesis-ref:d4c9f1a8f484e192d3ad7328575115919d003b8c4996174a83994e84b95acdac": 242,
       "protocol-state:regenesis-ref:f2177bbb6ed0d74a57500acd75e4628caaf54edd005bcef6c9bfe2d5c3355fb8": 2,
       "prune-state:2026-06-08T11:16:00Z:claim-acquire": 27,
@@ -794,5 +795,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 537
+  "up_to_seq": 538
 }

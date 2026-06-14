@@ -15,7 +15,13 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 ## [Unreleased]
 
-_No changes yet._
+### Changed (live instance only; not the neutral protocol/template)
+- **Ledger actor renamed `Claude` -> `Arquitecto`** (operator order). `protocol.config.json`
+  `agent_roles.architect = "Arquitecto"`; `runtime/regenesis.py --actor-id Arquitecto` wrote a fresh
+  genesis from hot state (drift 0, history preserved). `submit_intent` now requires `--actor-id Arquitecto`
+  (capabilities `[architect, reviewer, orchestrator, qa]`); the analyst voice signs `Analista`. Generic
+  template defaults (`context.DEFAULT_AGENT_ROLES`, `router` fallback) stay `Claude` — they are not the
+  live instance. No protocol/template/contract change; isolated goldens unaffected.
 
 ## [1.9.3] — 2026-06-15
 
