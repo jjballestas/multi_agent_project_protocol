@@ -95,6 +95,12 @@
             "owner": "Claude",
             "status": "done",
             "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)"
+        },
+        {
+            "id": "TASK-0115",
+            "owner": "Claude",
+            "status": "done",
+            "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)"
         }
     ],
     "agents": {
@@ -136,7 +142,8 @@
         "DECISION-0031",
         "DECISION-0032",
         "DECISION-0033",
-        "DECISION-0034"
+        "DECISION-0034",
+        "DECISION-0035"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -227,5 +234,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.7.0"
+    "version": "1.8.0"
 }

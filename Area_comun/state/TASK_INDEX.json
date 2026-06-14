@@ -549,6 +549,19 @@
             "status": "done",
             "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)",
             "type": "documentation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0115-claude-satelite-protocol-research.md",
+            "id": "TASK-0115",
+            "linked_decisions": [
+                "DECISION-0035"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "done",
+            "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)",
+            "type": "documentation"
         }
     ],
     "updated_at": "2026-06-08",

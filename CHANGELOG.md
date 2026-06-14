@@ -17,6 +17,29 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.8.0] — 2026-06-14
+
+**Research satellite authorized: protocol_research (read-only, unidirectional) — structure + scaffolding
+(DECISION-0035).** Additive, documentation-only in the Core; domain-neutral; no Core behavior change.
+
+### Added
+- **DECISION-0035** authorizes a SEPARATE, read-only research repo `protocol_research/` (sibling at
+  `d:\Agentes\protocol_research`). Documents the UNIDIRECTIONAL coupling (satellite reads the Core via
+  `../multi_agent_project_protocol`; does not write the Core — sustained by separate-repo + read-only
+  convention + static inspection, not sandboxed in this phase; Core has no dependency on the satellite),
+  names the hard-stop gates **GATE-DATASET** (legal: #1 citability/publication + #2/#3 production),
+  **GATE-INST** (institutional: ablation/TFM) and **PRE-REG** (pre-registration), and scopes #1
+  (MAST-over-own-history dataset, INTERNAL — internal use needs no gate — comparability to MAST-Data
+  reported as a limit, not "citable" until GATE-DATASET).
+- Scope = STRUCTURE + SCAFFOLDING only: the satellite runs nothing and publishes nothing. Stubs for
+  #2 (PROV exporter), #3 (cost-attribution feed) and the ablation/TFM harness are OFF and non-executable
+  (inert `.py.stub`), each behind its named gate.
+
+### Notes
+- The satellite is a separate repository; it is not committed into the Core. Populating/executing/
+  publishing any component requires clearing its gate plus a decision of its own. No change to #3 (flag),
+  #4 (chain/signatures/anchor) or SA.4.
+
 ## [1.7.0] — 2026-06-14
 
 **Fase 0 (E5+E6): named failure-mode catalog + loop governor (DECISION-0034).** Additive,
