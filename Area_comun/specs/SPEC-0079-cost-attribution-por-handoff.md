@@ -39,6 +39,30 @@ PROV-AGENT (export W3C PROV), firma por agente, activacion del loop/SA.4/subagen
 `enforce`/`authoritative`. La emision NO se cablea dentro de `submit_intent` (queda explicita en el
 orquestador/wrapper al cierre de turno).
 
+## Contrato de esquema (endurecimiento analista pasada-3, 2026-06-14)
+
+El event log es append-only e inmutable; el formato se fija ANTES de la primera emision en caliente.
+
+- **C1 - Subject canonico por dimension.** El `subject` se construye de UN identificador tipado por
+  dimension: `handoff -> {handoff_id}`, `decision -> {decision_id}`, `agent -> {agent_id}`. Sin prosa
+  ni campos variables (`to`, titulos, cuerpos). `subject_hash = canonical_hash(subject_canonico)`.
+  Invariante: dos emisiones logicamente iguales (mismo dimension+subject_id) producen el MISMO
+  `subject_hash` (apareamiento de H2 y `idempotency_key` estables).
+- **`cost_tokens` - semantica fijada.** Es el total de tokens del **PRODUCTOR**: `input` (contexto
+  ensamblado) `+ output` (generacion) gastados por `actor` al producir `subject`. Ambos brazos del
+  experimento (A/B) miden lo mismo (total del productor) => conmensurables. El `actor` es el emisor
+  (el golden carga el coste al emisor, p.ej. Codex).
+- **C2 - Tags `cost_unit` + `cost_schema`.** Toda emision los lleva en el payload. `cost_unit` por
+  defecto `tokens_total` (input+output); `cost_schema` = `"1"`. Si la convencion cambia (split
+  input/output, o mueve la frontera productor<->consumidor), se bumpea `cost_schema` y el corpus
+  historico sigue siendo interpretable. El summarizer RECHAZA filas sin ambos tags (las excluye de las
+  sumas y las cuenta en `rejected`); `units` reporta los pares unit/schema sumados.
+- **C3 - `subject_hash` es SEUDONIMO, no anonimo.** Bajo RGPD (Considerando 26) / Ley 1581, un hash de
+  contenido con el plano de carga util RETENIDO es dato seudonimizado y re-identificable. No filtra
+  texto libre al plano de protocolo (correcto), pero NO es "publicable/anonimo". `actor` se restringe
+  por esquema a un vocabulario controlado de ids de agente (no-humano); un `actor` fuera del
+  vocabulario se rechaza.
+
 ## execution_pipeline
 
 1. `eventlog.py`: anadir `COST_ATTRIBUTION_EVENT_TYPE = "cost.attributed"`,
@@ -71,6 +95,14 @@ orquestador/wrapper al cierre de turno).
   hard-gate (`enforce`: `enforced=True`, `has_drift=False`).
 - **Plano de protocolo sin texto libre:** el evento `cost.attributed` solo contiene la metrica e
   identificadores estructurados; el contenido se referencia por `subject_hash`.
+- **(C1)** dos emisiones logicamente iguales (mismo dimension+subject_id) => mismo `subject_hash`;
+  distinto subject_id => distinto hash.
+- **(C2)** toda emision lleva `cost_unit`+`cost_schema`; el summarizer rechaza (no suma) las filas sin
+  ambos y las cuenta en `rejected`.
+- **(C3)** `actor` fuera del vocabulario de agentes se rechaza; `subject_hash` documentado como
+  seudonimo (no anonimo).
+- **(C4)** byte-equivalencia con flag off sobre un log POBLADO (no solo vacio); caso EN CALIENTE que
+  asierta que lo registrado == un conteo de tokens medido de forma independiente (no un literal).
 
 ## linked_decisions
 
@@ -88,6 +120,9 @@ orquestador/wrapper al cierre de turno).
   `python examples/runtime_protocol_enforce_cases/run_runtime_protocol_enforce_cases.py`.
 - Gates: `python scripts/validate_collaboration_state.py --root .`;
   `python scripts/scan_encoding.py --root .`; `python scripts/scan_domain_neutrality.py` (o equivalente).
+- Casos de endurecimiento: subject canonico (dos emisiones iguales => mismo hash), rechazo de filas sin
+  `cost_unit`/`cost_schema`, vocabulario de `actor`, byte-equivalencia sobre log poblado, caso en
+  caliente `recorded == measure_tokens(input)` (no literal).
 - EN CALIENTE: con el flag activo, emitir una imputacion real para un evento existente del event log y
   leerla con `summarize_cost_attribution`; `protocol_state_drift` `has_drift=False`, replay==hot.
 

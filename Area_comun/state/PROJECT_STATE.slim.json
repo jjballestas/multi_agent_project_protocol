@@ -23,6 +23,12 @@
             "owner": "Claude",
             "status": "in_progress",
             "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)"
+        },
+        {
+            "id": "TASK-0113",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado"
         }
     ],
     "next_actions": [

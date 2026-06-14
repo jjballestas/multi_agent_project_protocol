@@ -159,6 +159,13 @@ def observability_enabled(config: dict[str, Any] | None) -> bool:
 
 COST_ATTRIBUTION_EVENT_TYPE = "cost.attributed"
 COST_ATTRIBUTION_DIMENSIONS = ("handoff", "decision", "agent")
+# Canonical `subject` key per dimension (DECISION-0033 hardening, analista pasada-3 C1): the subject
+# is built from a single typed identifier so two logically-equal emissions hash identically; no prose.
+COST_ATTRIBUTION_SUBJECT_KEY = {"handoff": "handoff_id", "decision": "decision_id", "agent": "agent_id"}
+# Default unit/version tags carried by every cost.attributed payload (C2). `tokens_total` = producer's
+# input(context)+output(generation) tokens. Bump cost_schema if the convention ever changes.
+COST_ATTRIBUTION_DEFAULT_UNIT = "tokens_total"
+COST_ATTRIBUTION_DEFAULT_SCHEMA = "1"
 
 
 def cost_attribution_enabled(config: dict[str, Any] | None) -> bool:
@@ -556,6 +563,8 @@ class EventWriter:
         actor_id: str,
         subject_hash: str,
         cost_tokens: int,
+        cost_unit: str = COST_ATTRIBUTION_DEFAULT_UNIT,
+        cost_schema: str = COST_ATTRIBUTION_DEFAULT_SCHEMA,
         subject_seq: int | None = None,
         task_id: str | None = None,
         decision_id: str | None = None,
@@ -567,6 +576,11 @@ class EventWriter:
         Protocol plane only: structured metric + `subject_hash` reference; no free text. The event is
         `applied:false` so `protocol_replay.replay_protocol_state` skips it (no state mutation, no
         drift). Off-by-default: returns None and writes nothing unless `metrics.cost_attribution_enabled`.
+
+        `cost_unit`/`cost_schema` (analista pasada-3 C2) are ALWAYS carried so the immutable corpus is
+        self-describing; the summarizer rejects rows without them. `cost_unit` defaults to
+        `tokens_total` (producer input+output). `subject_hash` is a SEUDONIMO, not anonymous
+        (DECISION-0033): the payload plane is retained and re-linkable by this hash.
         """
         config = read_protocol_config(self.root)
         if not cost_attribution_enabled(config):
@@ -574,11 +588,17 @@ class EventWriter:
         dimension = str(dimension or "")
         if dimension not in COST_ATTRIBUTION_DIMENSIONS:
             raise EventLogError(f"invalid cost attribution dimension: {dimension}")
+        unit = str(cost_unit or "").strip()
+        schema = str(cost_schema or "").strip()
+        if not unit or not schema:
+            raise EventLogError("cost.attributed requires non-empty cost_unit and cost_schema")
         payload: dict[str, Any] = {
             "dimension": dimension,
             "subject_hash": str(subject_hash),
             "subject_seq": int(subject_seq) if subject_seq is not None else None,
             "cost_tokens": int(cost_tokens),
+            "cost_unit": unit,
+            "cost_schema": schema,
         }
         if task_id:
             payload["task_id"] = str(task_id)

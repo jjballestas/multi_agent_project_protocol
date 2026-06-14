@@ -33,11 +33,28 @@ y con el constructor del registro en `budget.py`. Es **aditiva** y **off-by-defa
 
 **Esquema de DOS PLANOS (innegociable):**
 - **Plano de protocolo:** un evento `cost.attributed` (estructurado, SIN texto libre) con la metrica:
-  `dimension`, `subject_hash`, `subject_seq`, `actor`, `cost_tokens` e identificadores estructurados
-  (`task_id`/`decision_id`). Vive en el event log.
+  `dimension`, `subject_hash`, `subject_seq`, `actor`, `cost_tokens`, los tags `cost_unit`/`cost_schema`
+  e identificadores estructurados (`task_id`/`decision_id`). Vive en el event log.
 - **Plano de carga util:** el contenido real del handoff/decision (prosa, deliverable) **NO** se copia
-  al plano de protocolo; se referencia **solo por hash** (`subject_hash = canonical_hash(...)`). Nada
-  de contenido sensible entra al plano de protocolo.
+  al plano de protocolo; se referencia **solo por hash** (`subject_hash = canonical_hash(subject_canonico)`).
+  No filtra texto libre al plano de protocolo.
+
+**Esquema fijado ANTES de la primera emision en caliente (endurecimiento analista pasada-3, el log es
+inmutable):**
+- **Subject canonico por dimension.** El `subject` se construye de UN identificador tipado:
+  `handoff -> {handoff_id}`, `decision -> {decision_id}`, `agent -> {agent_id}`; sin prosa ni campos
+  variables. Dos emisiones logicamente iguales producen el MISMO `subject_hash` (apareamiento estable
+  para H2; `idempotency_key` estable).
+- **`cost_tokens` = total del PRODUCTOR** (input contexto + output generacion) gastado por `actor` al
+  producir `subject`. Tags `cost_unit` (`tokens_total` por defecto) + `cost_schema` (`"1"`) en cada
+  emision; si la convencion cambia, se bumpea `cost_schema`. El summarizer rechaza filas sin ambos tags.
+- **`subject_hash` es SEUDONIMO, no anonimo.** Bajo RGPD (Considerando 26) / Ley 1581, un hash de
+  contenido con el plano de carga util **retenido** es dato **seudonimizado y re-identificable**, no
+  anonimo. El plano de protocolo es *regulado-pero-minimizado*: NO es "publicable" sin romper el enlace
+  (no retener `subject`, o salar por-publicacion y descartar la sal) o acotar explicitamente.
+  GATE-DATASET trata el corpus como seudonimizado, carga util retirada. `actor` se restringe por
+  esquema a un vocabulario controlado de ids de agente **no-humano**; si alguna vez fuera un id humano
+  (usuario/correo) seria dato personal directo, por eso se acota.
 
 **No-mutador del estado.** El evento `cost.attributed` se emite con `applied:false`: es una anotacion
 (como `agent.attestation`/`chain.anchor`). El replay de estado de protocolo lo **omite**
@@ -75,6 +92,7 @@ anotacion `cost.attributed` no muta estado.
 
 - Antes del piloto del loop, cada handoff/decision/agente puede imputarse en caliente (leido del event
   log), no estimado a posteriori. Insumo directo para los topes de coste del loop (DECISION-0009/0024).
-- El plano de protocolo nunca contiene el contenido del handoff/decision: solo su hash -- auditable sin
-  exponer carga util.
+- El plano de protocolo nunca contiene el contenido del handoff/decision: solo su hash (seudonimo). No
+  expone texto libre, pero NO es publicable como "anonimo": el enlace a la carga util retenida lo hace
+  re-identificable (ver GATE-DATASET arriba).
 - Maker != checker intacto: esto es instrumentacion de medicion, no una relajacion de autorizacion.

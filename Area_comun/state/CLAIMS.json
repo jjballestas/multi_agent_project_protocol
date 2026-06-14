@@ -481,6 +481,29 @@
             "task_id": "TASK-0112"
         },
         {
+            "claim_id": "CLAIM-20260614-TASK0113-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                "Area_comun/specs/SPEC-0080-fix-chain-auth-prev-hash.md",
+                "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md",
+                "runtime/eventlog.py",
+                "runtime/budget.py",
+                "runtime/metrics.py",
+                "examples/runtime_cost_attribution_cases/",
+                "Area_comun/mailbox/",
+                "Area_comun/artifacts/ANALISTA-pasada-adversarial-3-cost-attribution.md"
+            ],
+            "started_at": "2026-06-14T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0113"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-review-coord-codex",
             "expires_at": "2026-06-15",
             "notes": "Coordinate Codex security review finding for TASK-0111 without touching implementation routes.",

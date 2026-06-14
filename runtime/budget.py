@@ -3,15 +3,26 @@
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 try:
-    from .eventlog import COST_ATTRIBUTION_DIMENSIONS, canonical_hash, cost_attribution_enabled
+    from .eventlog import (
+        COST_ATTRIBUTION_DEFAULT_SCHEMA,
+        COST_ATTRIBUTION_DEFAULT_UNIT,
+        COST_ATTRIBUTION_DIMENSIONS,
+        COST_ATTRIBUTION_SUBJECT_KEY,
+        canonical_hash,
+        cost_attribution_enabled,
+    )
 except ImportError:  # pragma: no cover - direct script execution
-    from eventlog import COST_ATTRIBUTION_DIMENSIONS, canonical_hash, cost_attribution_enabled
-
-_SHA256_HEX_RE = re.compile(r"^[0-9a-f]{64}$")
+    from eventlog import (
+        COST_ATTRIBUTION_DEFAULT_SCHEMA,
+        COST_ATTRIBUTION_DEFAULT_UNIT,
+        COST_ATTRIBUTION_DIMENSIONS,
+        COST_ATTRIBUTION_SUBJECT_KEY,
+        canonical_hash,
+        cost_attribution_enabled,
+    )
 
 
 def positive_int(value: Any) -> int | None:
@@ -49,32 +60,45 @@ def responsible(agent_id: str | None = None, task_id: str | None = None) -> dict
     }
 
 
-def subject_hash(subject: Any) -> str:
-    """Return the protocol-plane hash for a cost-attribution subject.
+def canonical_subject(dimension: str, subject_id: str) -> dict[str, str]:
+    """Build the CANONICAL subject for a dimension from a single typed identifier.
 
-    Two-plane rule (DECISION-0033): the subject's payload (handoff prose, decision body, turn report)
-    lives in the payload plane and is referenced ONLY by hash. If `subject` is already a sha256 hex
-    digest it is used verbatim; otherwise its canonical hash is computed.
+    DECISION-0033 hardening (analista pasada-3 C1): the subject is exactly one structured id per
+    dimension (handoff=`{handoff_id}`, decision=`{decision_id}`, agent=`{agent_id}`) -- no prose, no
+    variable fields. This guarantees two logically-equal emissions hash identically, so H2's paired
+    handoff matching (and the idempotency key) cannot silently break. The payload plane (the actual
+    handoff/decision content) is NOT here; it is referenced only by the hash of this subject.
     """
-    if isinstance(subject, str) and _SHA256_HEX_RE.match(subject):
-        return subject
-    return canonical_hash(subject)
+    key = COST_ATTRIBUTION_SUBJECT_KEY.get(str(dimension or ""))
+    if key is None:
+        raise ValueError(f"invalid cost attribution dimension: {dimension}")
+    text = str(subject_id or "").strip()
+    if not text:
+        raise ValueError(f"cost attribution subject_id is required for dimension {dimension}")
+    return {key: text}
 
 
 def cost_attribution_record(
     *,
     dimension: str,
     actor: str,
-    subject: Any,
+    subject_id: str,
     cost_tokens: int,
+    cost_unit: str = COST_ATTRIBUTION_DEFAULT_UNIT,
+    cost_schema: str = COST_ATTRIBUTION_DEFAULT_SCHEMA,
     subject_seq: int | None = None,
     task_id: str | None = None,
     decision_id: str | None = None,
+    agent_vocabulary: set[str] | None = None,
 ) -> dict[str, Any]:
     """Build the structured protocol-plane cost-attribution record (no free text).
 
-    Only the metric and structured identifiers are kept; the subject is referenced by hash. Raises on
-    an unknown dimension so callers cannot smuggle arbitrary content into the protocol plane.
+    Only the metric, the unit/version tags and structured identifiers are kept; the subject is
+    referenced by the hash of its CANONICAL form (DECISION-0033). Raises on an unknown dimension so
+    callers cannot smuggle arbitrary content into the protocol plane. `cost_tokens` is the PRODUCER's
+    total tokens (input context + output generation) spent by `actor` producing the subject;
+    `cost_unit`/`cost_schema` make the immutable corpus self-describing (analista pasada-3 C2). If
+    `agent_vocabulary` is given, `actor` is restricted to it (non-human agent ids; C3).
     """
     dimension = str(dimension or "")
     if dimension not in COST_ATTRIBUTION_DIMENSIONS:
@@ -82,12 +106,21 @@ def cost_attribution_record(
     tokens = positive_int(cost_tokens)
     if tokens is None:
         raise ValueError(f"cost_tokens must be a non-negative integer, got: {cost_tokens!r}")
+    unit = str(cost_unit or "").strip()
+    schema = str(cost_schema or "").strip()
+    if not unit or not schema:
+        raise ValueError("cost_unit and cost_schema are required and must be non-empty")
+    actor_text = str(actor or "runtime")
+    if agent_vocabulary is not None and actor_text not in agent_vocabulary:
+        raise ValueError(f"actor outside agent vocabulary: {actor_text!r}")
     record: dict[str, Any] = {
         "dimension": dimension,
-        "actor": str(actor or "runtime"),
-        "subject_hash": subject_hash(subject),
+        "actor": actor_text,
+        "subject_hash": canonical_hash(canonical_subject(dimension, subject_id)),
         "subject_seq": int(subject_seq) if subject_seq is not None else None,
         "cost_tokens": tokens,
+        "cost_unit": unit,
+        "cost_schema": schema,
     }
     if task_id:
         record["task_id"] = str(task_id)
@@ -113,8 +146,9 @@ def attribute_cost(writer: Any, **kwargs: Any) -> dict[str, Any] | None:
     """Build the record and emit it via the event log writer (gated by the flag).
 
     Production-faithful emission point for the orchestrator/wrapper at turn close: it is called with
-    the turn's `cost_tokens` and the subject it produced (handoff/decision). Returns the emitted event,
-    or None when `metrics.cost_attribution_enabled` is off (writer.append_cost_attribution no-ops).
+    the turn's measured `cost_tokens` and the typed `subject_id` it produced (handoff/decision/agent).
+    Returns the emitted event, or None when `metrics.cost_attribution_enabled` is off
+    (writer.append_cost_attribution no-ops).
     """
     record = cost_attribution_record(**kwargs)
     return writer.append_cost_attribution(
@@ -122,6 +156,8 @@ def attribute_cost(writer: Any, **kwargs: Any) -> dict[str, Any] | None:
         actor_id=record["actor"],
         subject_hash=record["subject_hash"],
         cost_tokens=record["cost_tokens"],
+        cost_unit=record["cost_unit"],
+        cost_schema=record["cost_schema"],
         subject_seq=record["subject_seq"],
         task_id=record.get("task_id"),
         decision_id=record.get("decision_id"),

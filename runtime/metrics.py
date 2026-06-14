@@ -192,18 +192,30 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
     Three dimensions (DECISION-0033): `by_handoff` keeps every handoff separate (NO cross-aggregation),
     `by_decision` sums per decision_id, `by_agent` sums per actor. Deterministic: handoffs sorted by
     `(seq, subject_hash)`, maps sorted by key. Reads the protocol plane only (metric + subject hash).
+
+    Hardening (analista pasada-3 C2): every well-formed row carries `cost_unit`+`cost_schema`. A
+    cost.attributed row WITHOUT both (e.g. a forged/legacy row) is REJECTED -- excluded from all sums
+    and counted in `rejected` -- so the immutable corpus is never silently mixed across conventions.
+    `units` records the unit/schema pairs actually summed, so a reader knows the convention.
     """
     handoffs: list[dict[str, Any]] = []
     by_decision: dict[str, int] = {}
     by_agent: dict[str, int] = {}
+    units: dict[str, int] = {}
     total = 0
     attributions = 0
+    rejected = 0
 
     for event in read_jsonl(event_log_path):
         if event.get("type") != "cost.attributed":
             continue
-        attributions += 1
         payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        unit = str(payload.get("cost_unit") or "").strip()
+        schema = str(payload.get("cost_schema") or "").strip()
+        if not unit or not schema:
+            rejected += 1
+            continue
+        attributions += 1
         dimension = str(payload.get("dimension") or "")
         actor = str(event.get("actor") or payload.get("actor") or "none")
         try:
@@ -211,6 +223,7 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
         except (TypeError, ValueError):
             cost = 0
         total += cost
+        increment(units, f"{unit}/{schema}")
         by_agent[actor] = by_agent.get(actor, 0) + cost
         if dimension == "handoff":
             handoffs.append(
@@ -230,7 +243,9 @@ def summarize_cost_attribution(event_log_path: Path) -> dict[str, Any]:
     handoffs.sort(key=lambda item: (int(item.get("seq") or 0), str(item.get("subject_hash") or "")))
     return {
         "attributions": attributions,
+        "rejected": rejected,
         "total_cost_tokens": total,
+        "units": sorted_counts(units),
         "by_handoff": handoffs,
         "by_decision": sorted_counts(by_decision),
         "by_agent": sorted_counts(by_agent),

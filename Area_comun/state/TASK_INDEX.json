@@ -522,6 +522,20 @@
             "status": "done",
             "title": "Reconciliacion de la hoja de ruta vs estado real del repo",
             "type": "analysis"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+            "id": "TASK-0113",
+            "linked_decisions": [
+                "DECISION-0029"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0080",
+            "status": "ready",
+            "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado",
+            "type": "implementation"
         }
     ],
     "updated_at": "2026-06-08",

@@ -7,7 +7,7 @@ priority: high
 created_at: 2026-06-14
 updated_at: 2026-06-14
 depends_on: []
-relates_to: [DECISION-0033, DECISION-0022, DECISION-0028, DECISION-0030, DECISION-0009, DECISION-0024]
+relates_to: [TASK-0113, DECISION-0033, DECISION-0022, DECISION-0028, DECISION-0030, DECISION-0009, DECISION-0024]
 phase: P2
 spec_id: SPEC-0079
 linked_decisions: [DECISION-0033]
@@ -48,6 +48,20 @@ sdd_required: true
 > Aterriza DORMIDA (flag off-by-default; sin bump de version). La ACTIVACION (flag true + MINOR 1.6.0 +
 > CHANGELOG + hot verification + cierre) espera GO explicito del operador. Escritor unico: toda mutacion
 > de estado por submit_intent. enforce/authoritative intactos; subagents_enabled false; SA.4 sin disparar.
+
+## Endurecimiento aplicado (analista pasada-3, 2026-06-14)
+
+Esquema fijado ANTES de cualquier emision en caliente (log inmutable): subject canonico por dimension
+(`{handoff_id}`/`{decision_id}`/`{agent_id}`); `cost_tokens` = total del productor (input+output); tags
+`cost_unit`/`cost_schema` (summarizer rechaza filas sin ellos); `subject_hash` reetiquetado SEUDONIMO;
+`actor` restringido a vocabulario de agentes. Golden 10/10. Review del analista cerrada.
+
+## Relacion con TASK-0113 (chain+auth)
+
+La review de Codex hallo un bug LATENTE de #4 (chain+auth: `event_without_chain_fields` no excluye
+`event_auth`) => TASK-0113 (Codex implementa, Claude revisa). NO bloquea la activacion de cost-attribution:
+la activacion mantiene `chain_enabled`/`event_auth.enabled` OFF, asi que el bug no se dispara; TASK-0113
+cierra antes de activar chain+auth juntos. Codex re-revisa el codigo endurecido para su hop in_review.
 
 ## Pendiente para Codex (revision de seguridad concreta)
 1. cost.attributed es applied:false => `protocol_replay.replay_protocol_state` lo omite (no muta

@@ -83,6 +83,12 @@
             "owner": "Claude",
             "status": "done",
             "title": "Reconciliacion de la hoja de ruta vs estado real del repo"
+        },
+        {
+            "id": "TASK-0113",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado"
         }
     ],
     "agents": {
