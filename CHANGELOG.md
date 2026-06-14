@@ -17,6 +17,19 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.9.0] — 2026-06-14
+
+**Minimal narration hardened to a uniform hard rule for all agents (DECISION-0036).** Additive,
+documentation-only; sharpens the DECISION-0005 narration addendum. Domain-neutral.
+
+### Changed
+- `AGENTS.md` §7 + `AGENTS.template.md` §7: the minimal-narration bullet now requires **zero
+  intra-execution narration** (no prose between tool calls; process reasoning to the internal channel;
+  user-facing output reserved for one self-contained final report), binding **all agents uniformly**, with
+  unchanged carve-outs (substantive content where the reasoning IS the deliverable + one blocking
+  question) and a flaggable-process-anomaly clause (DECISION-0018). Enforcement is normative + peer-flag,
+  not an automated gate (narration is model output, not validator-gateable today).
+
 ## [1.8.0] — 2026-06-14
 
 **Research satellite authorized: protocol_research (read-only, unidirectional) — structure + scaffolding

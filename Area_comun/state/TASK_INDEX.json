@@ -562,6 +562,19 @@
             "status": "done",
             "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)",
             "type": "documentation"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0116-claude-narracion-minima-dura.md",
+            "id": "TASK-0116",
+            "linked_decisions": [
+                "DECISION-0036"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "done",
+            "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)",
+            "type": "documentation"
         }
     ],
     "updated_at": "2026-06-08",

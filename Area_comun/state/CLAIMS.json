@@ -597,6 +597,19 @@
             "updated_at": "2026-06-14T18:08:00Z"
         },
         {
+            "claim_id": "CLAIM-20260614-narration-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0116-claude-narracion-minima-dura.md"
+            ],
+            "started_at": "2026-06-14T23:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0116"
+        },
+        {
             "claim_id": "CLAIM-20260614-satellite-Claude",
             "owner": "Claude",
             "scope": [

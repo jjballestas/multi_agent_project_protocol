@@ -101,6 +101,12 @@
             "owner": "Claude",
             "status": "done",
             "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)"
+        },
+        {
+            "id": "TASK-0116",
+            "owner": "Claude",
+            "status": "done",
+            "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)"
         }
     ],
     "agents": {
@@ -143,7 +149,8 @@
         "DECISION-0032",
         "DECISION-0033",
         "DECISION-0034",
-        "DECISION-0035"
+        "DECISION-0035",
+        "DECISION-0036"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -234,5 +241,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.8.0"
+    "version": "1.9.0"
 }

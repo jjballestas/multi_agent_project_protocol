@@ -141,10 +141,15 @@ The task status must match in two places:
   updates its own memory (its persistent notes / personal area, e.g. `personal/<id>/`) with what changed
   and why, so the next cold start reflects the just-committed reality. A commit is not finished until its
   memory update is done.
-- **Minimal narration (DECISION-0005 addendum 2026-06-13):** agents minimize intra-execution process
-  narration (step-by-step play-by-play); the final report/handoff stays self-contained and auditable and
-  prevails. Does NOT apply to substantive content (analysis, review voices, specs, decisions, where the
-  reasoning IS the deliverable); brevity never sacrifices completeness or auditability.
+- **Minimal narration (DECISION-0005 addendum 2026-06-13; sharpened DECISION-0036 2026-06-14):** during
+  execution every agent emits **zero intra-execution narration** -- no prose announcing or recapping a
+  step before/after a tool call ("now I do X", "I verify Y", "next I will Z"). **Process** reasoning (step
+  announcements/recaps) stays in the agent's internal/reasoning channel, not in user-facing output;
+  chained actions carry no prose between them. User-facing output is reserved for **one self-contained
+  final report/handoff**, which prevails. This binds **all agents uniformly**. Carve-outs (unchanged):
+  substantive content where the reasoning IS the deliverable (analysis, review voices, specs, decisions)
+  and **one** genuine blocking question are always allowed; brevity never sacrifices completeness or
+  auditability. A persistent step-by-step narration pattern is a flaggable process anomaly (DECISION-0018).
 - Any protocol or critical-boundary change requires a recorded decision.
 
 ## 8. Repository Map
