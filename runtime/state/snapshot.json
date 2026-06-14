@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "61c7e70baa2b3d7bda8f8c20434477fe80920962f2b960aeaef61a365c66d67b",
+  "canonical_hash": "67a6dd6b52f262fec1708f4ac1f8fdcaf69b6a90d7e0ee07fc0c6d9a63449941",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -162,6 +162,7 @@
       "CLAIM-20260615-Codex-TASK-0096": 1,
       "CLAIM-20260615-Codex-TASK-0096-llm-adapter": 1,
       "CLAIM-20260615-Codex-TASK0096-coord-delivery": 1,
+      "CLAIM-20260615-Codex-mailbox-hygiene": 1,
       "CLAIM-20260615-Codex-notify-mailbox-anomaly-sync-coord": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
@@ -235,11 +236,11 @@
       "TASK-0115": 2,
       "TASK-0116": 2,
       "VERSION-RECONCILE": 1,
-      "none": 1,
+      "none": 2,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 529,
+    "events_applied": 531,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -393,6 +394,8 @@
       "close-task0092:claim-release": 154,
       "close-task0092:project-narrative": 153,
       "close-task0092:task-upsert": 152,
+      "codex-mailbox-hygiene-20260615-claim": 530,
+      "codex-mailbox-hygiene-20260615-release": 531,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-acquire": 157,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
@@ -783,5 +786,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 529
+  "up_to_seq": 531
 }

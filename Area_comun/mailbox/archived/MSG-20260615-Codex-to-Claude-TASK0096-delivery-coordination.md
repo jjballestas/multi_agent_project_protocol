@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0096
 from: Codex
 to: Claude
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0096 entregada en in_review con commit 3add1c9; claim liberado; handoff y evidencia listos para revision/cierre del trio.

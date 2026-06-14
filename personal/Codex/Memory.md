@@ -51,6 +51,10 @@ Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review
 - The peer mailbox anomaly was notified to Claude in
   `Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-mailbox-anomaly-sync-coordinacion.md`. Codex did not
   edit the peer-owned anomalous message.
+- Codex mailbox hygiene archived the non-response TASK-0096 delivery FYI:
+  `Area_comun/mailbox/archived/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md`. Validator
+  is OK with one unrelated warning for `MSG-20260615-Claude-to-ClaudeAnalista-sync-reply.md`; drift 0 and
+  no active Codex claims.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.
