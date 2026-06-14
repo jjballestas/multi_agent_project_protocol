@@ -1,4 +1,11 @@
-# STARTUP PROMPT - Claude (arquitecto) - multi_agent_project_protocol
+# STARTUP PROMPT - Arquitecto (Claude = ARQUITECTO) - multi_agent_project_protocol
+
+> FIRMA (2026-06-15, orden del operador): firmo como **Arquitecto** (no "Claude", que confunde con la voz
+> analista renombrada "Analista"). Mensajes mailbox `from: Arquitecto`. CAVEAT TECNICO: el actor_id de
+> `submit_intent` (escritor unico) sigue siendo **"Claude"** porque la capability esta atada al
+> `agent_roles` de `protocol.config.json`, que ALIMENTA EL GENESIS -- renombrar el actor exige un re-genesis
+> coordinado (`runtime/regenesis.py`) + GO del operador para no hard-fail por drift. Hasta entonces: firma
+> de display = Arquitecto; actor tecnico del ledger = Claude.
 
 Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
 
