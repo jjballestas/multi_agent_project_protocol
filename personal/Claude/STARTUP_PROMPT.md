@@ -4,140 +4,70 @@ Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
 
 ---
 
-> UPDATE 2026-06-09 (HEAD 0d9bb07, drift 0 seq 181) — LO MAS VIGENTE, manda sobre lo de abajo:
-> SANDBOX_OK paso esta sesion (PowerShell limpio post-restart). RATIFICACION TASK-0093 CERRADA =
-> **changes_requested** (RECHAZADA, NO done). El mecanismo gap-8 (acquire_routed_claim) esta bien y
-> aceptado, pero FALLA el DoD explicito de SPEC-0070 §2.4+§4.1+Q2 = **release-on-rejection**: el claim
-> que el orquestador adquiere queda HUERFANO (active) en todo path de rechazo (unreported/validate/
-> budget/human_gate) que hace break ANTES de apply; with_terminal_claim_release solo cubre el GREEN
-> terminal. CONFIRMADO con probe committed: personal/Claude/probe_task0093_release_on_rejection.py.
-> El operador eligio REJECT sobre accept+followup. Ejecutado por submit_intent (reject_review
-> in_review->changes_requested = capability reviewer) + finding accionable a Codex en
-> mailbox/open/MSG-20260609-Claude-to-Codex-task0093-changes-requested.md (requires_response). Commit
-> 0d9bb07 pusheado. SECUENCIA: el operador empuja a Codex (PUSH-DRIVEN) -> Codex reclama TASK-0093
-> (changes_requested->claimed) e implementa release-on-rejection + goldens -> entrega in_review ->
-> RE-RATIFICO (su golden + mi probe como regresion + 51 regresiones + validador/drift) -> si verde
-> CIERRO -> SMOKE REAL end-to-end -> GO operador al re-fire SA.4. SA.4 sigue DE-ARMADO; enforce/
-> authoritative ON; Capa C OFF. (El resto del documento describe el camino previo al rechazo.)
+Retoma como **Claude = ARQUITECTO / ORQUESTADOR** de multi_agent_project_protocol (d:\Agentes\multi_agent_project_protocol).
+Codex = implementa; operador humano = aprueba. El repo se autogestiona con su propio protocolo (dogfooding).
 
-Retoma como arquitecto (Claude) de multi_agent_project_protocol.
+## ARRANQUE EN FRIO (lee en este orden, NO asumas)
+1. Tu memoria auto: `MEMORY.md` (indice) + `memory/project-state-snapshot.md` (la ENTRADA al tope = estado vigente).
+2. AGENTS.md (seccion 0 y 7) + CLAUDE.md (tus reglas).
+3. Estado con `utf-8-sig` (Codex escribe BOM+CRLF): `Area_comun/state/PROJECT_STATE.json`, `TASK_INDEX.json`,
+   `CLAIMS.json` (o sus `*.slim.json`, que es lo que carga el cold-start) + `Area_comun/mailbox/open/`.
+4. `git log --oneline -8` + `git status` para HEAD real y arbol limpio.
+CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area privada = `personal/Claude/` (DECISION-0016).
 
-COLD-START: lee AGENTS.md seccion 0 + Area_comun/state/*.json (con utf-8-sig: Codex escribe BOM/CRLF; al
-escribir usar utf-8 + ensure_ascii=False, ASCII-only) + Area_comun/mailbox/open/ + mi memoria (MEMORY.md,
-linea project-state-snapshot = estado vigente; la ENTRADA 2026-06-09 al final del snapshot es lo vigente).
-CHEQUEA CLAIMS.json antes de escribir cualquier ruta compartida. ASCII-only en mailbox/state (DECISION-0012).
-Mi area personal = personal/Claude/ (DECISION-0016). NUNCA commitear areas personales de OTROS
-(personal/operador/, personal/Codex/) -> staging de rutas EXPLICITAS, nunca `git add -A`/dir amplio.
+## ESTADO VIGENTE (2026-06-14, HEAD 60465f1, main; v1.6.0; protocol_version 1.6.0; runtime_version 0.12.0; drift 0)
+- **Escritor unico VIVO:** `event_state = {enabled, materialize, enforce, authoritative}` TODOS true. enforce TIENE
+  DIENTES: editar `Area_comun/state/*.json` A MANO = drift HARD-FAIL (gate B.3). TODA transicion va por
+  `runtime/submit_intent.py` (intents: task_status, task_upsert, claim, decision, project_narrative, protocol_prune).
+  Cierres multi-paso = UNA transaccion `submit_intent --intents`. authoritative = marcador declarativo (la garantia
+  la da ENFORCE). Rollback escritor-unico = 4 flags a false.
+- **#3 cost-attribution ACTIVO (v1.6.0):** `metrics.cost_attribution_enabled=true` en vivo (template false). Evento
+  `cost.attributed` (applied:false => replay lo omite, no muta estado, no drift; emitido fuera de submit_intent via
+  `EventWriter.append_cost_attribution`). Imputa por handoff/decision/agente; dos planos (subject por canonical_hash,
+  sin texto libre). cost_schema=2: `cost_tokens` = total productor (escalar AUTOREPORTADO, no medido; el invoker no da
+  split prompt/completion) + `context_tokens` = `assembled_context_tokens` proxy chars/div (`context_unit=context_tokens_proxy_chars_div`,
+  FIJO, no migrar). `summarize_cost_attribution` rechaza filas sin tags. `subject_hash` = SEUDONIMO (no anonimo, RGPD/Ley1581).
+  Hot-verified seq 445 (recorded==medido, drift 0, replay==hot). Reversible: flag a false restaura dormido.
+- **TASK-0113 (fix chain+auth) DONE:** `event_without_chain_fields` excluye `event_auth` (append/validate hashean igual
+  con chain+auth ambos on). Golden `examples/chain_auth_combined_cases` (en CI).
+- **CAPABILITIES (clave):** la capability sale del CONTENIDO del intent, NO del owner. Claude = [architect, orchestrator,
+  qa, reviewer]; Codex = [implementer, test_engineer]. Claude PUEDE: task_upsert, in_review->done (reviewer), claims
+  propias, project_narrative, protocol_prune, decision, y analysis-tasks propias in_progress->done (DECISION-0032).
+  Claude NO PUEDE: hop ->in_review (exige implementer=Codex). => cierres de IMPLEMENTACION = dos partes
+  (Codex hace in_progress->in_review; Claude in_review->done).
+- **Codex es PUSH/CRON-DRIVEN por el operador:** su lazo NO arranca solo; corre cuando el operador lo empuja o por cron.
+  Solo toma tareas `ready` propias. Su cron quedo en STAND-DOWN (sin trabajo no-gateado).
 
-ESTADO VIGENTE (2026-06-09, HEAD 720b417 en main; v1.1.0; protocol_version 1.1.0, runtime_version 0.11.0;
-drift 0 seq 174). NOTA: esta sesion se REINICIO para que Codex/extension tomen el fix de sandbox (ver abajo).
-AL VOLVER: 1ro `Write-Output SANDBOX_OK` debe pasar (si no, el fix no quedo / falta restart).
+## GATEADO - OFF, NO encender sin GO explicito del operador (UN multiplicador de riesgo por ventana)
+- **#4 chain/agent_signatures/anchor** (`chain_enabled`/`agent_signatures_enabled`/`anchor_enabled`): OFF. Ventana
+  aparte con su GO. El fix de TASK-0113 los hace seguros pero NO se encienden.
+- **SA.4** (`runtime.real_invoker.enabled` + `runtime.supervised_autonomy.enabled`): OFF. DECISION-0027 (caps 2/1/180000,
+  checkpoint tras turno 1). Solo con operador PRESENTE + rollback armado.
+- **subagents** (`runtime.context_policy.subagents_enabled`): OFF (DECISION-0024). **Capa C** (`team_bridge`): OFF.
 
->>> ESCRITOR-UNICO VIVO Y CONSOLIDADO <<<
-- event_state = {enabled, materialize, enforce, authoritative} TODOS true. enforce TIENE DIENTES: editar
-  Area_comun/state/*.json A MANO = drift HARD-FAIL (gate B.3). TODA transicion de estado va por
-  `runtime/submit_intent.py` (intents: task_status, task_upsert, claim, decision, project_narrative,
-  protocol_prune); cierres multi-paso = UNA transaccion atomica `submit_intent --intents`. drift 0 sostenido.
-  authoritative=true es MARCADOR DECLARATIVO (sin callers de comportamiento distintos; la garantia escritor-unico
-  la da ENFORCE). ROLLBACK del escritor-unico = poner los 4 flags a false (lossless, ensayado).
-- maintenance.enabled=true (prune reencauzado por submit_intent en instancia viva; template intacto).
-- CAPABILITIES (clave operativa): la capability requerida sale del CONTENIDO del turno/intent, NO del owner.
-  Claude = [architect, orchestrator, qa, reviewer]; Codex = [implementer, test_engineer]. Claude PUEDE:
-  task_upsert, task_status in_review->done (reviewer), claims propias, project_narrative, protocol_prune,
-  decision. Claude NO PUEDE: editar archivos / task_status ->in_review/->done/->blocked / ready->in_progress
-  (todo eso exige IMPLEMENTER). Para holds/cierres de tareas implementer, usa task_upsert.
+## BACKLOG (todo GATEADO; no promover sin GO)
+- TASK-0095/0096/0100 = `proposed` (TASK-0100 .gitattributes eol=lf espera GO). Fase 0 (E5 FAILURE_MODES / E6 test
+  "merece un loop"), Fase 1 (E1 skill registry), Fase 2 (E2 connectors): NO existen; requieren decision + GO.
+  Mapa real: `Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md` (#4 hecho off-by-default; E9 worktrees=NO).
 
-ESTADO DONE (historico consolidado):
-- v1.0.0: nucleo Fases 1-4 + Capa A + Fase 5 + D0 motor + D2 (tiers) + wrapper LLM + anti-colision. Paraguas
-  TASK-0038 (N-agente) cerrado. Fase B (writer-vivo) completa.
-- FASE 7 COMPLETA (release eng): SBOM/manifiesto+verify/provenance/firma/docs (RELEASE_ENGINEERING.md).
-- AUTONOMIA SUPERVISADA documental SA.1-SA.5 COMPLETA (sobre+max_turns+runreport, kill-switch PAUSE+wall_clock,
-  checkpoint humano por K turnos, docs SUPERVISED_AUTONOMY.md). Todo OFF-BY-DEFAULT.
-- DECISION-0025 (Agent Teams bridge) promovida SOLO Capas A+B (sombra/aditivo/drift benigno); Capa C diferida.
-  TASK-0083 (bridge A+B, runtime/team_bridge.py) DONE; team_bridge.enabled=false (OFF).
-- DECISIONES: 27 en ledger. DECISION-0026 = regla de oro: ACTUALIZAR MEMORIA TRAS CADA COMMIT (todos los
-  agentes). DECISION-0027 = activacion piloto SA.4.
-- Proximos IDs: TASK-0093 / SPEC-0070 (verificar en TASK_INDEX al entrar).
+## REGLAS OPERATIVAS (innegociables)
+- **Narracion minima** (DECISION-0005 addendum): encadena acciones; UN reporte final autocontenido. NO recortes
+  contenido sustantivo (analisis/voces/specs/decisiones).
+- **Anti-colision** (DECISION-0020): staging de rutas EXPLICITAS (nunca `git add -A`/dir amplio; barre al peer/operador);
+  artifacts-before-claim; asercion-mailbox tras el ledger. NUNCA commitear `personal/operador|Codex/`.
+- **Canal ASCII-only** en `mailbox/**` y `state/*.json` (DECISION-0012); prosa (reports/decisions/specs) = UTF-8 sin mojibake.
+- **claim en transaccion** = forma ANIDADA `{op, claim:{...scope...}}` (la plana pierde el scope al avanzar el estado).
+- **Gates verdes antes de commit:** `python scripts/validate_collaboration_state.py --root .` (incluye drift B.3) +
+  `scan_encoding.py` + `scan_domain_neutrality.py` + el golden de la tarea. Si `examples/runtime_protocol_materialize_cases`
+  falla por leftovers: `rm -rf .protocol-tmp/.protocol-state-materialize-* .protocol-tmp/.submit-intent-runtime-backup-*`.
+- **Config:** edit PUNTUAL (nunca `json.dump`, reformatea todo). protocol.config.json = fuente unica de version.
+- **Tras CADA commit:** actualiza memoria (DECISION-0026) + push si verde. Cambios visibles = SemVer + CHANGELOG.
+- **maker != checker REAL** (no sello): Codex implementa, Claude revisa (reproduce, corre suites, no confia). Cambios de
+  protocolo/boundary -> DECISION + aprobacion humana. Fail-closed: ante cualquier fallo, deja estado consistente + reporta.
 
->>> ASUNTO ABIERTO PRINCIPAL: gap-8 YA ARREGLADO (TASK-0093) - estoy MID-RATIFICACION + smoke pendiente <<<
-- gap-8 (paso claim NO-OP del orquestador) FIX IMPLEMENTADO por Codex: TASK-0093 (SPEC-0070, opcion 1),
-  commit d6569f4 "fix(runtime): acquire routed claims before turns", status in_review, claim liberado.
-  Cambios: orchestrator.py `acquire_routed_claim` en el paso claim (antes del adapter): reusa claim activo
-  owner+task si existe (idempotente -> byte-equiv goldens con pre-claim), si falta lo adquiere por
-  submit_intent con actor_id=owner (owner==actor pasa validate_scope_authority), si submit_intent falla por
-  conflicto -> rechaza el turno ANTES del adapter (cero commit). apply.py `with_terminal_claim_release`
-  inyecta release del claim cuando el outcome/transition es terminal (in_review/done/blocked) y el report no
-  lo trae (handoff-release, section 7). llm_adapter build_prompt: "do not include transitions.claims" (sin
-  doble-acquire). 3 goldens nuevos en runtime_loop_cases (sin-pre-claim aceptado / pre-claim sin acquire extra
-  / claim ajeno rechazado). Handoff: Area_comun/handoffs/HANDOFF-TASK-0093-codex-to-claude-1.md.
-- MI RATIFICACION (en curso, reproducida): 51 goldens verdes (runtime_loop 11, SA 9, real_adapter 4,
-  llm_adapter 6, intent_flow 11, wrapper 10) + validador/neutralidad/encoding verdes + drift 0. Diff revisado.
-  >>> HALLAZGO ABIERTO A CONFIRMAR (release-on-rejection): el claim se adquiere ANTES del turno; en los paths
-  de RECHAZO por gate/validate (unreported worktree change / validate-error / gate-not-green en apply), el
-  orquestador NO libera el claim adquirido -> posible CLAIM HUERFANO + worktree dirty (rompe el cero-footprint
-  que tenia el piloto). `with_terminal_claim_release` solo cubre el path GREEN terminal, no las rechazos.
-  ANTES DEL VEREDICTO: confirmar con un golden adversarial (acquire-exitoso -> turno rechazado por scope) si
-  el claim queda huerfano; si se confirma -> finding a Codex (blocked-with-finding) O aceptar con follow-up +
-  el checkpoint humano del piloto lo caza. Los OTROS puntos (idempotencia, conflicto-rechazo, handoff-release,
-  reconciliacion sin doble-acquire) los doy por buenos. La paridad .ps1 / drift-0-bajo-authoritative del
-  acquire NO la cubren los goldens (event_state off) -> lo cubre el SMOKE REAL.
-- SANDBOX FIX APLICADO (operador): C:\Users\johnb\.codex\config.toml `[windows] sandbox` elevated -> unelevated.
-  Causa raiz: os error 740 (ERROR_ELEVATION_REQUIRED) - el setup refresh del sandbox de Windows exige elevacion
-  que ni el app-server background ni codex exec no-interactivo consiguen. Correlacion con la INSTALACION DEL CLI
-  confirmada (config.toml global reescrito hoy con elevated, lo leen CLI + extension). unelevated = ACL-based,
-  no requiere admin. POR ESO se reinicio la sesion. AL VOLVER: `Write-Output SANDBOX_OK` debe pasar.
-- CODEX ES PUSH-DRIVEN (hecho operativo, operador 2026-06-09): su lazo NO auto-ejecuta; solo corre cuando el
-  operador lo empuja ("tienes mensaje"). NO asumir "ready+GO => Codex auto-reclama"; el disparador es el push.
-  Follow-up: eximir mailbox/ del auto_claim de Codex (lockea el canal de coordinacion; smell DECISION-0020).
-- SECUENCIA RESTANTE (mi turno, tras restart + SANDBOX_OK): (1) confirmar el hallazgo release-on-rejection
-  (golden adversarial); (2) VEREDICTO de ratificacion; (3) cerrar TASK-0093 (reviewer in_review->done por
-  submit_intent + handoff->archived + FYI accept) si verde, o devolver finding; (4) SMOKE REAL end-to-end
-  (orquestador adquiere claim -> codex edita README -> gate ACEPTA), AHORA viable con sandbox unelevated; el
-  invoker codex confirmado vivo (PONG); (5) reportar al operador para GO al re-fire SA.4.
-- SA.4 SIGUE DE-ARMADO (runtime.real_invoker.enabled=false + supervised_autonomy.enabled=false). DECISION-0027
-  vigente; caps {max_turns:2, human_checkpoint_every_k:1, wall_clock_ms:180000}, PAUSE, budget+deadline.
-  enforce+authoritative INTACTOS ON. Capa C OFF. PILOTO-1 (invoker claude) valido el SOBRE (rechazo limpio).
-  El re-fire es EL UNICO MULTIPLICADOR; solo con GO del operador + sandbox verde + ratificacion cerrada.
+## QUE HACER AL ENTRAR
+1. Cold-start + verifica: HEAD, version, drift 0, flags gateados OFF, tareas activas, mailbox/open.
+2. Si hay mensaje del operador con orden -> ejecuta por el metodo. Si no -> reporta estado y espera.
+3. NADA gateado sin GO + operador presente + rollback armado + un solo multiplicador.
 
->>> REGLAS DE RIESGO (innegociables) <<<
-- UN SOLO MULTIPLICADOR DE RIESGO POR VENTANA: NUNCA enforce + SA.4 + Capa C juntos. Cada uno testeable y
-  reversible por separado.
-- Activaciones gateadas (SA.4 re-fire, Capa C del bridge): SOLO con el operador PRESENTE, con rollback armado.
-  No en tick desatendido.
-- enforce protege el LEDGER JSON (drift=hard-fail) pero NO los archivos de PROSA-contrato (AGENTS.md/CLAUDE.md/
-  decisions/specs/protocol/reportes) -> ahi la anti-colision sigue MANUAL: git diff antes, STAGING DE RUTAS
-  EXPLICITAS (nunca git add -A que barra al peer/operador), revisar git diff --cached.
-
-LAZO DE TRABAJO (semi-automatico):
-- Codex AUTONOMO (~100s): auto-reclama `ready` (via submit_intent), ejecuta, poda, detecta anomalias
-  (DECISION-0018). Release atomico = handoff + in-review + claim liberado + flip status. Si lo cazas mid-release:
-  espera, no toques. A veces commitea su entrega en background.
-- Yo (Claude) reacciono via ScheduleWakeup: al ver in_review + claim liberado, RATIFICO ADVERSARIAL (corro YO
-  el golden de la tarea + regresiones + validador/encoding/neutralidad + smoke; leo el codigo nuevo), flip a
-  done por submit_intent, in_review->archived + FYI accept (RE-APUNTAR el deliverable del msg in-review a
-  mailbox/archived/ tras moverlo, o el validador falla 'deliverable missing'), claim efimero, promuevo la
-  siguiente de a una con GO+ETA, commit (paths explicitos) + push, ACTUALIZO MEMORIA (DECISION-0026).
-
-PERMISOS (settings.json auto-allow cd/python/git add,rm,tag,restore,commit,push/grep/etc.): el harness pide
-prompt para comandos COMPUESTOS (varios `&&`, multilinea) y `-m` con SALTOS DE LINEA -> emitir UN comando por
-Bash; commits con DOS flags `-m`. Heredocs/loops bash pueden auto-irse a background (output a veces no se
-captura) -> preferir scripts _tmp_*.py en personal/Claude/ o driver python inline. Ver [[permission-auto-exec]].
-
-QUE HACER AL ENTRAR (tras el restart):
-1. Cold-start + RE-LEER state files en disco. PRIMERO `Write-Output SANDBOX_OK` (debe pasar; si no, el fix de
-   config.toml unelevated no quedo o falta restart -> avisar al operador). Verifica drift 0 (seq ~174+),
-   TASK-0093 = in_review owner Codex. Revisa mailbox/open/ (mis RESPONSE a Codex sobre sandbox/liveness +
-   FYIs informativos). Codex es PUSH-DRIVEN: no esperes que arranque solo.
-2. RETOMAR LA RATIFICACION de TASK-0093 (es mi turno; ver ASUNTO ABIERTO arriba): confirmar el hallazgo
-   release-on-rejection con un golden adversarial (acquire-exitoso -> turno rechazado por scope). Si el claim
-   queda huerfano -> devolver finding a Codex; si no, o si se acepta con follow-up -> VEREDICTO -> cerrar
-   TASK-0093 (reviewer in_review->done por submit_intent) -> SMOKE REAL end-to-end (sandbox ya unelevated) ->
-   reportar al operador para el GO al re-fire SA.4.
-3. NADA gateado/supervisado (SA.4 re-fire, Capa C) sin operador PRESENTE + rollback armado + un solo
-   multiplicador. NO re-armar SA.4 ni disparar el piloto sin GO + ratificacion cerrada + sandbox verde.
-   Cambios de protocolo/boundary -> DECISION + aprobacion humana.
-4. Verifica antes de cualquier disparo: drift 0, activation_errors None, replay==hot, PAUSE ausente, SANDBOX_OK.
-
-Detalle/cronologia: MEMORY.md (linea project-state-snapshot + ENTRADA 2026-06-09 al final del snapshot) +
-semi-auto-collaboration-pattern.md + permission-auto-exec.md + operator-working-style.md + cutover-risk-staging.md
-+ submit-intent-live-bug.md + commit-then-memory.md.
+Confirma que leiste el estado (HEAD, version, drift, flags, mailbox) y di "listo, en que avanzamos" - o ejecuta si hay orden.
