@@ -75,7 +75,7 @@
         {
             "id": "TASK-0111",
             "owner": "Claude",
-            "status": "in_review",
+            "status": "done",
             "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)"
         },
         {
@@ -87,7 +87,7 @@
         {
             "id": "TASK-0113",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado"
         }
     ],
@@ -220,5 +220,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.5.0"
+    "version": "1.6.0"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "protocol_version": "1.5.0",
+  "protocol_version": "1.6.0",
   "runtime_version": "0.12.0",
   "project_name": "multi_agent_project_protocol",
   "adoption_tier": "runtime",
@@ -35,7 +35,7 @@
     "recent_next_actions": 8
   },
   "metrics": {
-    "cost_attribution_enabled": false
+    "cost_attribution_enabled": true
   },
   "runtime": {
     "enabled": true,

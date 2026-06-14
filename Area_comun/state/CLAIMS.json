@@ -520,6 +520,22 @@
             "task_id": "TASK-0113"
         },
         {
+            "claim_id": "CLAIM-20260614-activation-Claude",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                "protocol.config.json",
+                "CHANGELOG.md"
+            ],
+            "started_at": "2026-06-14T16:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0111"
+        },
+        {
             "claim_id": "CLAIM-20260614-task0111-rereview-codex",
             "expires_at": "2026-06-15",
             "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",

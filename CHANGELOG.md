@@ -17,6 +17,34 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.6.0] — 2026-06-14
+
+**Cost-attribution per handoff/decision/agent, activated in the live instance (DECISION-0033), plus a
+latent chain+auth fix (TASK-0113).** Additive over 1.5.0; off-by-default in the shipped template.
+
+### Added
+- **`cost.attributed` annotation event (runtime/eventlog.py, budget.py, metrics.py).** Imputes producer
+  tokens per **handoff / decision / agent**, two-plane (protocol plane carries only the metric + a
+  `subject_hash`; the payload is referenced by hash, never copied). The event is `applied:false`, so
+  `replay_protocol_state` skips it — no state mutation, no drift — and it is emitted outside
+  `submit_intent` (annotation, like attestations/anchors). Off-by-default via
+  `metrics.cost_attribution_enabled` (absent ⇒ false). Schema hardening (adversarial pass-3): canonical
+  `subject` per dimension (`{handoff_id}`/`{decision_id}`/`{agent_id}`, no prose) so logically-equal
+  emissions hash identically; `cost_unit`/`cost_schema` tags (`tokens_total`/`"2"`) with the summarizer
+  rejecting rows that lack them; `subject_hash` documented as a **pseudonym** (RGPD/Ley 1581), not
+  anonymous; `actor` restricted to an agent vocabulary. `cost_tokens` = producer total (self-reported);
+  `context_tokens` = the runtime's `assembled_context_tokens` input proxy (chars/divisor), captured per
+  handoff in the immutable corpus. Golden `examples/runtime_cost_attribution_cases` + CI.
+
+### Changed
+- **Live instance:** `metrics.cost_attribution_enabled=true` (template stays false). Hot-verified on a
+  real handoff (recorded == an independently measured count, not a literal), drift 0, replay==hot.
+- **`runtime/eventlog.py::event_without_chain_fields` now excludes `event_auth` (TASK-0113, SPEC-0080).**
+  Fixes a latent bug where, with `chain_enabled` **and** `event_auth.enabled` both on, `append_event`
+  computed `prev_hash` without `event_auth` while `validate_chain` recomputed with it — invalidating the
+  chain. The signature still covers `prev_hash`. Golden `examples/chain_auth_combined_cases` (chain +
+  auth + cost together, plus a tampering-detected negative). No live exposure (both flags off-by-default).
+
 ## [1.5.0] — 2026-06-13
 
 **The architect/orchestrator can close its own analysis-tasks (DECISION-0032).** Additive over 1.4.0; a
