@@ -1,7 +1,7 @@
 ---
 id: TASK-0100
 owner: Codex
-status: blocked
+status: ready
 type: implementation
 priority: normal
 created_at: 2026-06-10
@@ -10,7 +10,7 @@ depends_on: []
 relates_to: [TASK-0099, SPEC-0075, DECISION-0023]
 phase: P2
 spec_id: Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md
-linked_decisions: [DECISION-0023, DECISION-0006, DECISION-0019]
+linked_decisions: [DECISION-0023, DECISION-0006, DECISION-0019, DECISION-0037]
 deliverables:
   - .gitattributes
 relevant_files:
@@ -49,3 +49,35 @@ deberia haber cambios; verificarlo es parte del DoD.
 
 - OFF-PILOT: SA.4 de-armado, NO re-armar ni piloto. enforce+authoritative ON. ASCII, sin secretos,
   determinista, cross-platform. Template intacto. 1 commit/turno con rutas explicitas.
+
+## RESCOPE 2026-06-14 (DECISION-0037) -- AUTORITATIVO (supersede objetivo/DoD de arriba)
+
+El bloqueo de Codex revelo que el manifest firmado de v1.1.0 NO es reproducible bajo LF: clasificacion al
+byte (artefacto `Area_comun/artifacts/ANALISTA-TASK-0100-decision-A-eol-rescope.md`) = **616 LF / 127 CRLF
+/ 14 no-EOL**; ademas el manifest se genero sobre un **arbol sucio** (14 deltas vs el commit 04436c3) y
+`runtime/protocol_replay.py` es **irreproducible desde refs**. Por tanto v1.1.0 NO puede arreglarse sin
+re-firmar (opcion B, descartada). El operador eligio **opcion A** (DECISION-0037): acotar a releases
+FUTUROS, firma de v1.1.0 INTACTA.
+
+**Objetivo (rescoped):** que los releases **v1.2.0+** sean LF-reproducibles cross-platform, y documentar
+v1.1.0 honestamente como release historico con deuda de integridad. NO re-firmar ni regenerar v1.1.0. NO
+tocar el manifest firmado.
+
+**Expected output (rescoped):**
+1. `.gitattributes` raiz que fije LF en checkout para texto (binarios marcados). Pre-condicion ya
+   verificada: en HEAD `git add --renormalize .` solo stagea `.gitattributes` (0 cambios SBOM en HEAD).
+   **GUARDA DURA intacta:** si renormalize alterara bytes SBOM-included del HEAD -> BLOCKED + nota (no
+   commitear).
+2. **Nota known-limitations de v1.1.0 EXPLICITA y NO eufemistica** (p.ej. en `dist/v1.1.0/` y/o doc de
+   release): clasificacion real 616 LF / 127 CRLF / 14 no-EOL; el manifest se genero sobre arbol sucio (no
+   checkout limpio de 04436c3); `protocol_replay.py` irreproducible desde refs; `verify.integrity.json
+   ok:true` = verificacion local del emisor, no de terceros; corrige la premisa falsa de SPEC-0075 ("ningun
+   blob SBOM cambia" -- 127 eran CRLF). Sin numeros no respaldados por la clasificacion.
+3. `verify_release` fija/excluye v1.1.0 de la promesa LF (la garantia aplica desde v1.2.0); un verify LF
+   que falle en v1.1.0 es esperado y documentado, NO silenciado. SIN tocar el manifest firmado.
+4. Regresion de reproducibilidad sobre un release **futuro** (smoke): checkout LF -> verify_release ok:true.
+   Cross-platform; `.ps1` paridad; validador/neutralidad/encoding verdes; drift 0.
+
+**Closure (rescoped):** lo de los 4 puntos verde + handoff con evidencia (clasificacion, .gitattributes,
+nota v1.1.0, pin verify_release, smoke futuro). Bump **PATCH 1.9.1** + CHANGELOG (lo aplica el arquitecto al
+cierre). Firma v1.1.0 INTACTA. OFF-PILOT; NO re-armar SA.4; #4 OFF; #3 ON.

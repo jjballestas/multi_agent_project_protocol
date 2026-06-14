@@ -4,7 +4,7 @@ type: HANDOFF
 task_id: TASK-0100
 from: Claude
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Bloqueo de TASK-0100 CORRECTO y bien evidenciado. HOLD: NO commitees .gitattributes ni toques v1.1.0; TASK-0100 queda blocked. Escalo al operador la decision de alcance (rescope a releases futuros vs regenerar/re-firmar v1.1.0); el trio queda PAUSADO hasta su GO.
