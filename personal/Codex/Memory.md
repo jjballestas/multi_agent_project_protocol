@@ -48,6 +48,9 @@ Last updated: 2026-06-15 Europe/Madrid, after TASK-0096 implementation in review
   blocked in the live working tree by an unrelated peer mailbox anomaly:
   `Area_comun/mailbox/open/MSG-20260615-Claude-analista-to-Claude-sync-coordinacion.md` has `status:
   answered` while sitting in `open/`.
+- The peer mailbox anomaly was notified to Claude in
+  `Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-mailbox-anomaly-sync-coordinacion.md`. Codex did not
+  edit the peer-owned anomalous message.
 - Expected active claims: none for Codex.
 - Remaining Codex-relevant trio tasks after Claude review are TASK-0095 then TASK-0096, but order is strict.
   Do not claim either without a fresh GO and a mailbox/claims check.

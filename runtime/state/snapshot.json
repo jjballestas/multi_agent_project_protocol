@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "f30b68d155da1a59a86587f3453fc56d8f9cc49ec931b49cc71802678db9791e",
+  "canonical_hash": "61c7e70baa2b3d7bda8f8c20434477fe80920962f2b960aeaef61a365c66d67b",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -162,6 +162,7 @@
       "CLAIM-20260615-Codex-TASK-0096": 1,
       "CLAIM-20260615-Codex-TASK-0096-llm-adapter": 1,
       "CLAIM-20260615-Codex-TASK0096-coord-delivery": 1,
+      "CLAIM-20260615-Codex-notify-mailbox-anomaly-sync-coord": 1,
       "CLAIM-20260615-close-0095-Claude": 1,
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
@@ -234,10 +235,11 @@
       "TASK-0115": 2,
       "TASK-0116": 2,
       "VERSION-RECONCILE": 1,
+      "none": 1,
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 527,
+    "events_applied": 529,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -662,6 +664,8 @@
       "mailbox-hygiene-codex-standdown-repair-acquire-20260614": 459,
       "mailbox-hygiene:task0089-go-status:claim-acquire": 113,
       "mailbox-hygiene:task0089-go-status:claim-release": 114,
+      "notify-mailbox-anomaly-sync-coord-claim": 528,
+      "notify-mailbox-anomaly-sync-coord-release": 529,
       "operator-memory-rule-20260608:claim-acquire": 14,
       "operator-memory-rule-20260608:claim-release": 16,
       "operator-memory-rule-20260608:release-helper-acquire": 15,
@@ -779,5 +783,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 527
+  "up_to_seq": 529
 }

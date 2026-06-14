@@ -933,6 +933,22 @@
             "updated_at": "2026-06-14T22:55:38Z"
         },
         {
+            "claim_id": "CLAIM-20260615-Codex-notify-mailbox-anomaly-sync-coord",
+            "expires_at": "2026-06-14T23:57:39Z",
+            "notes": "Notify Claude of mailbox folder/status mismatch detected by validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-mailbox-anomaly-sync-coordinacion.md",
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-14T22:57:39Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-06-14T22:57:39Z"
+        },
+        {
             "claim_id": "CLAIM-20260615-close-0095-Claude",
             "owner": "Claude",
             "scope": [
