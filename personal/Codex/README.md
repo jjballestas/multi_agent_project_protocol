@@ -7,7 +7,7 @@ Use it for:
 - private notes and memory;
 - implementation sketches before they become shared artifacts;
 - local analysis that is not yet ready for `Area_comun/`.
+- archived Codex intent envelopes under `archive/`, kept for traceability but not used as live state.
 
 Do not use this folder as the source of truth for protocol decisions, task state, claims, or
 handoffs. Shared, auditable outputs belong in `Area_comun/` once there is a task and claim.
-
