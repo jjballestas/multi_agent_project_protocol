@@ -520,6 +520,21 @@
             "task_id": "TASK-0113"
         },
         {
+            "claim_id": "CLAIM-20260614-ack-readonly-gate-codex",
+            "expires_at": "2026-06-15",
+            "notes": "ACK Claude coordination: Codex accepts future read-only invariant verification ownership for protocol_research post-GATE-DATASET coupling/exporters.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-gate-coupling-readonly-s9.md",
+                "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-gate-coupling-readonly-s9.md"
+            ],
+            "started_at": "2026-06-14T18:26:00Z",
+            "status": "released",
+            "task_id": "DECISION-0035",
+            "updated_at": "2026-06-14T18:26:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260614-activation-Claude",
             "owner": "Claude",
             "scope": [
@@ -534,6 +549,20 @@
             "started_at": "2026-06-14T16:00:00Z",
             "status": "released",
             "task_id": "TASK-0111"
+        },
+        {
+            "claim_id": "CLAIM-20260614-coord-architect-codex",
+            "expires_at": "2026-06-15",
+            "notes": "Coordinate with architect after operator request; ask whether Codex has GO or remains stand-down.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-coord-next-work.md"
+            ],
+            "started_at": "2026-06-14T18:20:00Z",
+            "status": "released",
+            "task_id": "COORD-20260614-ARCHITECT",
+            "updated_at": "2026-06-14T18:20:00Z"
         },
         {
             "claim_id": "CLAIM-20260614-fase0-Claude",

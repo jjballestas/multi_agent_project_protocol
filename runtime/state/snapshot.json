@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "2b0b0a266aed8889132dedd61aa4d83d523f1c6591bbac75d4e44d3645a06fb2",
+  "canonical_hash": "a8f1a698d7f673817e8a87bbb48e55481192d470a8a412067d15dec71cb2b6d2",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -137,7 +137,9 @@
       "CLAIM-20260614-TASK-0112-Claude": 1,
       "CLAIM-20260614-TASK0111-context": 1,
       "CLAIM-20260614-TASK0113-Claude": 1,
+      "CLAIM-20260614-ack-readonly-gate-codex": 1,
       "CLAIM-20260614-activation-Claude": 1,
+      "CLAIM-20260614-coord-architect-codex": 1,
       "CLAIM-20260614-fase0-Claude": 1,
       "CLAIM-20260614-mailbox-hygiene-standdown-codex": 1,
       "CLAIM-20260614-mailbox-hygiene-standdown-releasefix-codex": 1,
@@ -153,6 +155,7 @@
       "CLAIM-TASK-0105-claude-registro": 1,
       "CLAIM-TASK-0106-claude-registro": 1,
       "COORD-20260613-COMMIT-BOUNDARY": 3,
+      "COORD-20260614-ARCHITECT": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -163,7 +166,7 @@
       "DECISION-0032": 1,
       "DECISION-0033": 1,
       "DECISION-0034": 1,
-      "DECISION-0035": 1,
+      "DECISION-0035": 2,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -212,13 +215,15 @@
       "protocol-prune": 15,
       "protocol-state": 8
     },
-    "events_applied": 466,
+    "events_applied": 470,
     "fencing_tokens": {
       "TASK-0091": 1
     },
     "idempotency_keys": {
       "Codex:TASK-0091:claim:codex-TASK-0091-20260609-1:0": 222,
       "Codex:TASK-0091:ready->in_review:codex-TASK-0091-20260609-1:1": 223,
+      "ack-readonly-gate-codex-20260614-acquire": 469,
+      "ack-readonly-gate-codex-20260614-release": 470,
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
@@ -433,6 +438,8 @@
       "codex:temp-acl-rule:claim-release": 195,
       "codex:tempfile-acl-coord:claim-acquire": 186,
       "codex:tempfile-acl-coord:claim-release": 187,
+      "coord-codex-to-claude-20260614-ask-work-acquire": 467,
+      "coord-codex-to-claude-20260614-ask-work-release": 468,
       "cost:handoff:754b1513ab403972db72ed59c69d3e48086c8fce438460b28dc8390bee72ac60:444:Codex": 445,
       "decision0026:claim-acquire": 18,
       "decision0026:claim-release": 20,
@@ -693,5 +700,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 466
+  "up_to_seq": 470
 }
