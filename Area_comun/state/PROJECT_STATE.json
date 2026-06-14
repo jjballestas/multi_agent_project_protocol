@@ -21,7 +21,7 @@
         {
             "id": "TASK-0100",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "TASK-0100 - .gitattributes eol=lf (rescoped a releases futuros + doc honesta v1.1.0, DECISION-0037)"
         },
         {
@@ -242,5 +242,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.9.0"
+    "version": "1.9.1"
 }

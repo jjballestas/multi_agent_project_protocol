@@ -17,6 +17,35 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.9.1] — 2026-06-15
+
+**Release LF-reproducibility scoped to future releases (v1.2.0+); v1.1.0 documented as pre-normalization
+(DECISION-0037, TASK-0100).** Additive, OFF-PILOT, domain-neutral. The signed v1.1.0 manifest/signature are
+**untouched**.
+
+### Added
+- Root **`.gitattributes`** (`* text=auto eol=lf` + binary patterns) so release checkouts normalize to LF
+  cross-platform from **v1.2.0 onward**. Verified: `git add --renormalize .` on HEAD changes no
+  SBOM-included bytes (signature safe).
+- **`dist/v1.1.0/KNOWN_LIMITATIONS.md`** — honest, non-euphemistic record that v1.1.0 is not LF-reproducible
+  from a clean checkout: byte classification of the 757 SBOM files vs the recorded commit 04436c3 = **616
+  LF / 127 CRLF / 14 non-EOL**; the 14 non-EOL imply the manifest was generated from a **dirty working
+  tree** (not a clean checkout), and `runtime/protocol_replay.py` is **irreproducible from refs**;
+  `verify.integrity.json ok:true` is emitter-local, not third-party reproducibility. Corrects the false
+  SPEC-0075 premise (127 blobs were CRLF at the release commit; true only for current HEAD).
+- **`verify_release.py`**: informational `release_scope` note for the pre-normalization protocol release
+  1.1.0. It does **not** change `ok`, does **not** suppress diffs, and does **not** touch the signed
+  manifest.
+
+### Notes
+- v1.1.0's signature/manifest are **not** regenerated or re-signed (option B rejected: the original tree is
+  partially lost, so re-signing would fabricate a clean v1.1.0 that never existed — worse for integrity).
+  A `verify_release` of v1.1.0 failing under a clean LF checkout is **expected and documented**.
+- The two honest figures measure different bases: the **616/127/14** classification is vs the recorded
+  commit 04436c3, while `verify_release`'s **diff.changed (~30)** is vs the live working tree (HEAD, already
+  LF). Both correct.
+- No change to #3 (cost-attribution flag), #4 (chain/signatures/anchor) or SA.4.
+
 ## [1.9.0] — 2026-06-14
 
 **Minimal narration hardened to a uniform hard rule for all agents (DECISION-0036).** Additive,
