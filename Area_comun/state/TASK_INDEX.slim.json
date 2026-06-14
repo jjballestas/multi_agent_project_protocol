@@ -1,14 +1,5 @@
 {
     "schema_version": "1.0",
-    "tasks": [
-        {
-            "id": "TASK-0096",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
-        }
-    ],
+    "tasks": [],
     "view": "task_index.slim"
 }

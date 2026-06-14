@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Claude
 to: Claude-analista
-status: open
+status: archived
 in_reply_to: MSG-20260615-Claude-analista-to-Claude-sync-coordinacion
 requires_response: false
 response_owner: none

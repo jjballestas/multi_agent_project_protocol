@@ -17,6 +17,22 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 _No changes yet._
 
+## [1.9.3] — 2026-06-15
+
+**Unique run-id per real run (TASK-0096, trio 3/3 — closes the OFF-PILOT trio).** Additive, OFF-PILOT,
+domain-neutral. No gate/claim semantics changed; replay/recorded paths stay deterministic.
+
+### Fixed
+- `runtime/orchestrator.py`: the real (subprocess) LLM invoker now **requires an explicit `--run-id`** and
+  **rejects a run-id whose run-log already exists** (`real_invoker_run_id_error`), so two real runs can
+  neither share a run-log nor accumulate onto a prior one; replay/recorded keep their deterministic
+  `default_run_id`. Goldens assert it: `runtime_real_adapter_cases` (fresh-run-id required, invoker does not
+  run otherwise) and `supervised_autonomy_cases` (two consecutive real runs use distinct logs,
+  `turns_total==1` each — no cross-run metric aggregation — one line per log). No `Date.now()`/random on
+  deterministic paths. Independent adversarial pass: Analista CONCURRO. Suites green (llm_adapter,
+  real_adapter, supervised_autonomy, runtime_loop, budget, observability, cost_attribution);
+  validator/encoding/neutrality clean; drift 0.
+
 ## [1.9.2] — 2026-06-15
 
 **Self-consistent runtime turn commits (TASK-0095, trio 2/3).** Additive, OFF-PILOT, domain-neutral. No

@@ -1,12 +1,5 @@
 {
-    "active_tasks": [
-        {
-            "id": "TASK-0096",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
-        }
-    ],
+    "active_tasks": [],
     "next_actions": [
         ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
         "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
