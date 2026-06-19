@@ -1233,19 +1233,20 @@
         },
         {
             "claim_id": "CLAIM-20260619-Codex-work-monitor",
-            "expires_at": "2026-06-19T09:58:23Z",
+            "expires_at": "2026-06-19T10:07:24Z",
             "notes": "Work monitor mailbox hygiene for Codex messages.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260619-092823-Codex-to-Arquitecto-no-response-TASK-0117.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-status-0117.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-0117.md",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json"
             ],
-            "started_at": "2026-06-19T09:28:23Z",
+            "started_at": "2026-06-19T09:37:24Z",
             "status": "released",
             "task_id": "COORD-20260619-WORK-MONITOR",
-            "updated_at": "2026-06-19T09:28:23Z"
+            "updated_at": "2026-06-19T09:37:24Z"
         },
         {
             "claim_id": "CLAIM-20260619-close-0119-Arquitecto",
@@ -1335,6 +1336,19 @@
             "started_at": "2026-06-19T00:30:02Z",
             "status": "released",
             "task_id": "MAILBOX-HYGIENE-20260619"
+        },
+        {
+            "claim_id": "CLAIM-20260619-mirror-stall-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Escalar al operador: mirror no aplico PROMOTE-0043 en varios ciclos; esta sesion SI persiste (origin==HEAD, drift 0). Pregunta bloqueante. Claim FILE-SCOPED.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-mirror-stall.md"
+            ],
+            "started_at": "2026-06-19T09:41:21Z",
+            "status": "released",
+            "task_id": "TASK-0120"
         },
         {
             "claim_id": "CLAIM-20260619-promo-coord-Arquitecto",
