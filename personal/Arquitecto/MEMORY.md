@@ -2,7 +2,7 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-19, HEAD 6f4e8c5, v1.9.3.
+> Ultima actualizacion: 2026-06-19, HEAD 8f6a233, v1.9.3.
 
 ## Carril A Presupuesto/tesis (2026-06-19) - EN REVISION, sin promover
 - Encargo del operador: arrancar el modulo-app de Presupuesto bajo el protocolo, instrumentado para tesis.
@@ -24,6 +24,10 @@
   el SO). NINGUN GO implicito; promover/encender = GO del operador.
 - PENDIENTE: incorporar los 7 cambios a los drafts -> GO operador -> promover por submit_intent (DECISION
   0039/0040/0041 + SPEC-0081, SemVer MINOR + CHANGELOG). Codex+Analista en STAND-DOWN tras converger.
+- MAILBOX HIGIENIZADO (8f6a233): open/ solo con MSG-Arquitecto-to-Codex-standdown (Codex aun no confirma
+  stand-down; Analista SI confirmo). Contestados->answered/, FYIs->archived/. Monitor 300s activo para
+  cerrar cuando Codex confirme. Anomalias operativas (lock stale 2.3h/BOM/churn) reportadas a Codex por
+  mailbox (DECISION-0018 auto-mejora, regla nueva del operador).
 - Anomalia abierta (Analista, DECISION-0018): PROJECT_STATE.json agents.architect="Claude" stale vs
   identidad Arquitecto (config agent_roles ya="Arquitecto"; capability OK). Reconciliar por escritor unico.
 - LECCION reforzada: multi-sesion/cron concurrente = churn fuerte del working tree (mailbox movido,
