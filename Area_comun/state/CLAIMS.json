@@ -1078,6 +1078,21 @@
             "task_id": "COORD-20260619-CARRILA-REVIEW"
         },
         {
+            "claim_id": "CLAIM-20260619-mailbox-hygiene-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Higiene de mailbox post-convergencia Carril A: archivar consumidos y mover contestados a answered (orden del operador).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
+            ],
+            "started_at": "2026-06-19T00:30:02Z",
+            "status": "active",
+            "task_id": "MAILBOX-HYGIENE-20260619"
+        },
+        {
             "claim_id": "CLAIM-20260619-standdown-Arquitecto",
             "expires_at": "2026-06-20",
             "notes": "Stand-down de Codex y Analista tras convergencia de la revision Carril A (orden del operador).",
@@ -1088,7 +1103,7 @@
                 "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Analista-standdown.md"
             ],
             "started_at": "2026-06-19T00:18:39Z",
-            "status": "active",
+            "status": "released",
             "task_id": "COORD-20260619-STANDDOWN"
         },
         {

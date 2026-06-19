@@ -1,14 +1,15 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260619-standdown-Arquitecto",
+            "claim_id": "CLAIM-20260619-mailbox-hygiene-Arquitecto",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-standdown.md",
-                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Analista-standdown.md"
+                "Area_comun/mailbox/open/",
+                "Area_comun/mailbox/answered/",
+                "Area_comun/mailbox/archived/"
             ],
-            "task_id": "COORD-20260619-STANDDOWN"
+            "task_id": "MAILBOX-HYGIENE-20260619"
         }
     ],
     "schema_version": "1.0",

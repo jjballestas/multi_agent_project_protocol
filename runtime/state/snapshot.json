@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d23c27d7b02ba3c06824fb06ff86dd3d43473ff025306cfe72612a62649c94f8",
+  "canonical_hash": "53ec72a160aa7040b58bf47c5e6fb188d82013f8059b0f2c8942754ff27e48af",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -181,7 +181,7 @@
       "COORD-20260614-ARCHITECT": 1,
       "COORD-20260619-CARRIL-A-REVIEW": 1,
       "COORD-20260619-CARRILA-REVIEW": 2,
-      "COORD-20260619-STANDDOWN": 1,
+      "COORD-20260619-STANDDOWN": 2,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -202,6 +202,7 @@
       "MAILBOX-HYGIENE-20260613-TASK0105": 1,
       "MAILBOX-HYGIENE-20260613-TASK0106": 1,
       "MAILBOX-HYGIENE-20260614-STANDDOWN": 2,
+      "MAILBOX-HYGIENE-20260619": 1,
       "MAINTENANCE-CLEAR-BLOCKED": 1,
       "MAINTENANCE-CODEX-SANDBOX-20260609": 6,
       "MAINTENANCE-MAILBOX-20260609": 1,
@@ -246,7 +247,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 543,
+    "events_applied": 545,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -528,6 +529,8 @@
       "hold-task0091b:claim-acquire": 148,
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
+      "intent:Arquitecto:claim:0ff3ae32cdd3cb45577fa4552559a42e742c82aee22472937ff5ae8c7d281c43": 544,
+      "intent:Arquitecto:claim:2918a1f1f24fb0bb786062d7322d3e7201c552a409f0a9fdcf4382c8fbe22f4b": 545,
       "intent:Arquitecto:claim:928ea82d3b4291ebb33ccb790e90b1d202feea3809bd67d32dfff025d6a25449": 543,
       "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
       "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
@@ -804,5 +807,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 543
+  "up_to_seq": 545
 }
