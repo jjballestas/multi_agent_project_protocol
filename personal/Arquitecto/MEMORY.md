@@ -2,7 +2,7 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-19, HEAD 218e8ff, v1.10.0.
+> Ultima actualizacion: 2026-06-19, HEAD a575559, v1.11.0.
 
 ## Carril A Presupuesto/tesis (2026-06-19) - PROMOVIDO v1.10.0 (e56b027)
 - **PROMOVIDO** (GO operador + OK Codex + cross-check asistente): DECISION-0039 (activacion #4) + SPEC-0081
@@ -15,6 +15,15 @@
   (archivos) + cp + submit_intent (no bloqueados). LECCION: ante bloqueo del clasificador, usar la
   herramienta natural (Write) en vez de reintentar el bash.
 - DECISION-0042 (mailbox file-scoped) nacio del incidente del claim dir-level que bloqueo a Codex.
+- **TASK-0119 (guard mailbox) DONE -> v1.11.0 (a575559):** Codex implemento el guard (submit_intent +
+  validador py/ps RECHAZAN claim acquire con scope de directorio de mailbox; MSG-*.md permitidos; solo
+  claims activos). Revisado maker!=checker: golden mailbox_claim_scope_cases 5/5 + PRUEBA NEGATIVA EN VIVO
+  (claim dir-level rechazado "mailbox claim must be file-scoped", estado intacto) + validadores verdes +
+  drift 0. Cerre in_review->done (reviewer) + reconcilie version a 1.11.0 (Codex bumpeo config, sin cap
+  orchestrator para PROJECT_STATE). GUARD AHORA LIVE -> todo claim mailbox debe ser file-scoped (incluido
+  Codex). NOTA: el clasificador bloqueo el 1er intento de cierre; con "go" del operador paso.
+- PENDIENTE Codex (activo): SPEC-0081 (provisioning + attestation_health_cases + 6 goldens AC3 + smoke) +
+  prueba negativa A3. TASK-0117 (encendido #4) = GO posterior + piloto; TASK-0118 (DEF-PII) diferida.
 
 ## (historico) Carril A - EN REVISION, sin promover
 - Encargo del operador: arrancar el modulo-app de Presupuesto bajo el protocolo, instrumentado para tesis.
