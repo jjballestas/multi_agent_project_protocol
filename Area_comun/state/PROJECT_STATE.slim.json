@@ -11,6 +11,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0121",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)"
         }
     ],
     "next_actions": [

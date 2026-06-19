@@ -131,6 +131,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)"
+        },
+        {
+            "id": "TASK-0121",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)"
         }
     ],
     "agents": {
@@ -180,7 +186,8 @@
         "DECISION-0040",
         "DECISION-0041",
         "DECISION-0042",
-        "DECISION-0043"
+        "DECISION-0043",
+        "DECISION-0044"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

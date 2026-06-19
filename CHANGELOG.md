@@ -16,6 +16,16 @@ for what counts as MAJOR / MINOR / PATCH here.
 ## [Unreleased]
 
 ### Added
+- **Carril B piece 1 (DECISION-0044 / SPEC-0083, TASK-0121 ready):** a domain-neutral **connector
+  capability** (`connectors/` layer) for **read-only** access to external sources, governed by a
+  per-connector `trust_boundary`, **deny-by-default**, and the principle **"a connector grants no
+  authority"** (read data is evidence, never authority or a mutation path; connectors never write the
+  ledger/event log). First adapter: **SQL Server read-only** with a fixtures backend (golden runs with no
+  live DB). Off-by-default; the connector registry lives **outside** `protocol.config.json` so landing it
+  leaves genesis/drift untouched. Live use against a real DB is a later operator GO after a real read-only
+  enforcement verification by Codex (DECISION-0041 §9: connector-side deny-by-default + server-side
+  least-privilege + objective negative proof). Independent of #4 (stays OFF). PII never to the event log
+  (DECISION-0040); DEF-PII (TASK-0118) stays deferred.
 - **TASK-0120 implementation (SPEC-0082):** `event_auth` HMAC secrets can now be resolved from
   `secret_file` or `secret_env` at signing/verification time without mutating `read_protocol_config`.
   Resolution is fail-closed, path-safe, root-explicit, and covered by `event_auth_secret_resolution_cases`;

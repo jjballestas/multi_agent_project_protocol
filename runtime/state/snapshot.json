@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b7637a668758b6a38ce04daa7b9f4367018b4365d8f4d780dc47b85517c42f58",
+  "canonical_hash": "b5970d7d0b49e4a7e4c360d22780c533e92916d4415adca5e5beeadf507a9cb0",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -172,6 +172,7 @@
       "CLAIM-20260615-promote-0096-Claude": 1,
       "CLAIM-20260619-Arquitecto-close-0120": 1,
       "CLAIM-20260619-Arquitecto-promote-0043": 1,
+      "CLAIM-20260619-Arquitecto-promote-0044": 1,
       "CLAIM-20260619-Codex-TASK-0117": 1,
       "CLAIM-20260619-Codex-TASK-0117-encendido-fase1": 1,
       "CLAIM-20260619-Codex-TASK-0119": 1,
@@ -182,6 +183,8 @@
       "CLAIM-20260619-Codex-feasibility-0043": 1,
       "CLAIM-20260619-Codex-feasibility-0043-encoding": 1,
       "CLAIM-20260619-Codex-promo-coord-reply": 1,
+      "CLAIM-20260619-Codex-standdown-TASK-0117-encoding": 1,
+      "CLAIM-20260619-Codex-standdown-TASK-0117-monitor": 1,
       "CLAIM-20260619-Codex-work-monitor": 5,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
@@ -215,6 +218,7 @@
       "DECISION-0041": 1,
       "DECISION-0042": 1,
       "DECISION-0043": 1,
+      "DECISION-0044": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -262,16 +266,17 @@
       "TASK-0114": 2,
       "TASK-0115": 2,
       "TASK-0116": 2,
-      "TASK-0117": 14,
+      "TASK-0117": 16,
       "TASK-0118": 1,
       "TASK-0119": 7,
       "TASK-0120": 13,
+      "TASK-0121": 2,
       "VERSION-RECONCILE": 1,
       "none": 3,
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 663,
+    "events_applied": 671,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -305,6 +310,10 @@
       "arquitecto:promote-0043:decision-0043": 648,
       "arquitecto:promote-0043:project-version-1.12.0": 650,
       "arquitecto:promote-0043:task-0120-upsert": 649,
+      "arquitecto:promote-0044:claim-acquire": 668,
+      "arquitecto:promote-0044:claim-release": 671,
+      "arquitecto:promote-0044:decision-0044": 669,
+      "arquitecto:promote-0044:task-0121-upsert": 670,
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
@@ -488,6 +497,10 @@
       "codex:sandbox-cli-correlation:claim-release": 172,
       "codex:sandbox-failures-notice:claim-acquire": 159,
       "codex:sandbox-failures-notice:claim-release": 160,
+      "codex:standdown-task0117-encoding:claim": 666,
+      "codex:standdown-task0117-encoding:release": 667,
+      "codex:standdown-task0117-monitor:claim": 664,
+      "codex:standdown-task0117-monitor:release": 665,
       "codex:task0094-regression-harness-temp-acl:claim-acquire": 207,
       "codex:task0094-regression-harness-temp-acl:claim-release": 211,
       "codex:task0094-replay-cases-temp-acl:claim-acquire": 206,
@@ -929,5 +942,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 663
+  "up_to_seq": 671
 }

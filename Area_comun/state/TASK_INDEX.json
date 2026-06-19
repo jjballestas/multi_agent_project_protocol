@@ -642,6 +642,23 @@
             "status": "done",
             "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)",
             "type": "security"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+            "id": "TASK-0121",
+            "linked_decisions": [
+                "DECISION-0044",
+                "DECISION-0040",
+                "DECISION-0041"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0083",
+            "status": "ready",
+            "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)",
+            "type": "security"
         }
     ],
     "updated_at": "2026-06-08",

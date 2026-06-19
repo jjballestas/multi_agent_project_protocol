@@ -1083,6 +1083,24 @@
             "updated_at": "2026-06-19T09:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-promote-0044",
+            "expires_at": "2026-06-19T19:00:00Z",
+            "notes": "Promote DECISION-0044 + SPEC-0083 + TASK-0121 (connector read-only SQL Server deny-by-default, ready). Carril B pieza 1, independiente de #4. #4 OFF.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T15:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0121",
+            "updated_at": "2026-06-19T15:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-TASK-0117",
             "expires_at": "2026-06-19T13:20:00Z",
             "notes": "Build SPEC-0081 harness/goldens/smoke for TASK-0117 without enabling #4 or pilot.",
@@ -1295,6 +1313,39 @@
             "status": "released",
             "task_id": "COORD-20260619-CARRIL-A-REVERIFY",
             "updated_at": "2026-06-19T01:08:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-standdown-TASK-0117-encoding",
+            "expires_at": "2026-06-19T15:10:00Z",
+            "notes": "Fix ASCII/BOM on archived TASK-0117 standdown FYI.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T14:48:00Z",
+            "status": "released",
+            "task_id": "TASK-0117",
+            "updated_at": "2026-06-19T14:48:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-standdown-TASK-0117-monitor",
+            "expires_at": "2026-06-19T15:10:00Z",
+            "notes": "Archive TASK-0117 standdown FYI and stand down Codex monitor for TASK-0117.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T14:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0117",
+            "updated_at": "2026-06-19T14:40:00Z"
         },
         {
             "claim_id": "CLAIM-20260619-Codex-work-monitor",
