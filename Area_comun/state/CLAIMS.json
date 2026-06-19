@@ -1153,6 +1153,24 @@
             "updated_at": "2026-06-19T16:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-promo-0123",
+            "expires_at": "2026-06-19T23:35:00Z",
+            "notes": "Promueve FLOOR Fase2 pieza1: DECISION-0048 + SPEC-0085 + TASK-0123 (connector Git inspeccion, ready/Codex). Off-by-default, sin uso vivo, sin tocar #4.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0123-codex-connector-git-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T19:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0123",
+            "updated_at": "2026-06-19T19:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-promote-0043",
             "expires_at": "2026-06-19T13:40:00Z",
             "notes": "Promote DECISION-0043 + SPEC-0082 + TASK-0120 (loader HMAC event_auth fuera del repo). SemVer MINOR 1.12.0. #4 OFF.",

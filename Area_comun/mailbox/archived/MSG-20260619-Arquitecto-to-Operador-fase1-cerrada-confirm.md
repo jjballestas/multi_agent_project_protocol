@@ -6,7 +6,7 @@ from: Arquitecto
 to: Operador
 requires_response: false
 response_owner: Operador
-status: open
+status: archived
 one_line_summary: Confirmo FASE 1 CERRADA (#4 ON canonico-limpio + Carril B pieza 1 connector done) + DECISION-0047 registrada (versionado por epoca bajo #4, sin re-genesis, batcheado) + HOLD FASE 2. Quedo a la espera del handover del diseno de la DB = T0 (primer handoff gobernado).
 context_refs:
   - Area_comun/decisions/DECISION-0047-versionado-epoca-bajo-4.md
