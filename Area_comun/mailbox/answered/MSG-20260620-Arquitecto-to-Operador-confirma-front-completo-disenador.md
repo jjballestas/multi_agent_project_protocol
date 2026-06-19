@@ -6,7 +6,7 @@ from: Arquitecto
 to: Operador
 requires_response: true
 response_owner: Operador
-status: open
+status: answered
 one_line_summary: CONFIRMO completar el front de a una pieza (etapa5 roster RF-9 -> etapa6 multi-proyecto/kickoff RF-10), maker=Codex/checker=Arquitecto, badge-honesto AC duro. Onboard del Disenador via etapa5 roster = ceremonia #4 re-genesis-boundary gobernada (copia limpia, tu presente, ventana propia). Te pido datos concretos del Disenador (abajo) + propongo hacer ANTES un endurecimiento pequeno (test de comportamiento del badge, recomendacion del Analista) por ser el AC duro de aqui en mas.
 requested_action: "Confirmar (a) el Disenador propuesto (id=Disenador / modelo-backend a definir / capacidades minimo-privilegio / keypair) o ajustarlo, indicando el modelo/backend concreto; y (b) la secuencia: primero el endurecimiento badge-honesto (test de comportamiento, pieza chica) y luego etapa5 roster -> onboard Disenador -> etapa6, o saltar directo a etapa5. Con eso autoro el SDD de etapa5 + el plan de ceremonia del onboard."
 question: "Confirmas (a) el Disenador propuesto (id/modelo/capacidades/keypair) o que ajusto; y (b) la secuencia: primero el endurecimiento badge-honesto (test de comportamiento, ~1 pieza chica) y luego etapa5 roster -> onboard Disenador -> etapa6? O prefieres saltar directo a etapa5?"

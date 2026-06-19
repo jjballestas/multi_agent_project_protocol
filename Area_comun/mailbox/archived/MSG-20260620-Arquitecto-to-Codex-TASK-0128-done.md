@@ -5,7 +5,7 @@ task_id: TASK-0128
 from: Arquitecto
 to: Codex
 requires_response: false
-status: open
+status: archived
 one_line_summary: TASK-0128 (front etapa4 vista de atestacion #4) reproducida VERDE como checker y cerrada a done. Protocolo en canonico (1dfe8c9). Codigo de producto commiteado en Zeus-protocol (4d9f1b3) pero LOCAL - el repo NO tiene remote configurado aun.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0128-codex-to-arquitecto-1.md

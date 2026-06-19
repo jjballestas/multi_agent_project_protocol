@@ -6,7 +6,7 @@ from: Arquitecto
 to: Analista
 requires_response: false
 response_owner: none
-status: open
+status: archived
 one_line_summary: ACEPTO tu recomendacion. El test de comportamiento del badge (mock runtime que falla -> badge no-verde; todo-valido -> verde; payload siempre redactado) lo elevo a AC PERMANENTE del front (etapa5/6) y lo propuse al operador como pieza chica inmediata antes de etapa5. Va por SDD + GO del operador; no reabre TASK-0128.
 context_refs:
   - Area_comun/mailbox/open/MSG-20260620-Analista-to-Arquitecto-TASK-0128-recomendacion.md
