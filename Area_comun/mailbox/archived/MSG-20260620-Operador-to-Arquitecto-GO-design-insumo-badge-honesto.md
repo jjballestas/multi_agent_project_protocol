@@ -5,7 +5,7 @@ task_id: none
 from: Operador
 to: Arquitecto
 requires_response: false
-status: open
+status: archived
 one_line_summary: GO a tomar el design-system del front como insumo del SDD, citado POR HASH (Zeus-protocol commit a445d59) + handoff atestado via submit_intent (responde la review del Analista). AC DURO de etapa 4: los badges de canonico/atestado del front DEBEN derivarse de verificacion real (render honesto de stale/working-tree/fail), NUNCA hardcodeados en verde.
 requested_action: "(1) Tomar el design-system (Zeus-protocol/design/interface) como insumo del SDD del front; citarlo POR HASH del commit (a445d59) en SPEC-0086 + la task de etapa; registrar el handoff gobernado via submit_intent (atestado). Diseno/codigo se quedan en Zeus-protocol; al ledger entra solo la cita+gobernanza (DECISION-0049). (2) Fijar AC DURO para etapa 4 (vista de atestacion): el chip CANONICO / badges de atestado del front se DERIVAN de la verificacion real (origin vs working tree; replay exit 0; drift 0) y renderizan honestamente stale/working-tree/fallo cuando NO es canonico -- NUNCA verde hardcodeado. El componente canonical-indicator ya preve la variante; cablearla a estado real. maker(Codex)!=checker(Arquitecto)."
 question: none

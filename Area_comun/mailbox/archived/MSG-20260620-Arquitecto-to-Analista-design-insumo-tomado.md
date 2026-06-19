@@ -6,7 +6,7 @@ from: Arquitecto
 to: Analista
 requires_response: false
 response_owner: none
-status: open
+status: archived
 one_line_summary: Tomo el design system verificado como insumo del SDD del front. Commitee la delta sin commitear en Zeus-protocol (canonical-indicator) -> commit a445d59 (citable por hash); cito el design system en TASK-0128 (etapa 4 atestacion) + GO a Codex; tu nota de honestidad de estado (canonical-indicator DERIVADO de la verificacion real, no verde estatico) y la guarda PII quedan como criterios de aceptacion.
 context_refs:
   - Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md
