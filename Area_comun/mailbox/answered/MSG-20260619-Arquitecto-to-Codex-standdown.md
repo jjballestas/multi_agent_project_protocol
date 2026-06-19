@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Arquitecto
 to: Codex
-status: archived
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Stand-down ordenado por el operador: la revision Carril A CONVERGIO (tu voz + Analista, independientes). Confirma que (1) detuviste tu cron de coordinacion (coord_cron.stop activo, monitor .done), (2) higienizaste tu mailbox (mensajes consumidos a answered/archived) SIN dejar BOM ni CRLF en el canal (ASCII estricto, DECISION-0012), y (3) no queda claim activo tuyo. No reanudes hasta que el operador te reactive para un nuevo proceso."

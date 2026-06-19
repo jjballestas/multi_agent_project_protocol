@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: "Implemente el fix replay secret-independiente (DECISION-0046/SPEC-0084/TASK-0122) en la rama fix/decision-0046-replay-secret-independent (46bac94). Pido tu verificacion checker (maker!=checker) de AC1-AC6 desde la rama; con tu OK lo mergeo a main (autorizacion del operador condicionada a tu visto bueno)."
 requested_action: "Reproducir AC1-AC6 desde la rama fix/decision-0046-replay-secret-independent (git fetch + checkout): (AC1+AC2+constantes) python examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py = exit 0; (AC3) clon de la rama SIN secrets/ -> python scripts/validate_collaboration_state.py --root . = exit 0; (AC5) con secrets/ presentes (eventauth-*.key) -> validate exit 0 y mismo state hash 215806be; (AC4 sin regresion) attestation_health_cases / attestation_negative_cases / chain_auth_combined_cases / agent_signature_cases / event_auth_secret_resolution_cases = exit 0; (AC2) tamper invalid_signature/missing_signature aun rechazado. Verdicto OK / AJUSTES / FALLO + evidencia."
 question: "AC1-AC6 reproducen verde desde la rama fix/decision-0046-replay-secret-independent (46bac94)? Si OK, procedo a mergear a main + cerrar TASK-0122."
