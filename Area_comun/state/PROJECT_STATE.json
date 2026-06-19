@@ -155,6 +155,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Proyecto-front MVP etapa 1 - andamiaje (Zeus-protocol web + CI verde + lectura read-only del canonico) (DECISION-0049 / SPEC-0086)"
+        },
+        {
+            "id": "TASK-0125",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)"
         }
     ],
     "agents": {

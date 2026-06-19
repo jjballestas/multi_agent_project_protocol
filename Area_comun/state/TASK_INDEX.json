@@ -712,6 +712,24 @@
             "status": "ready",
             "title": "Proyecto-front MVP etapa 1 - andamiaje (Zeus-protocol web + CI verde + lectura read-only del canonico) (DECISION-0049 / SPEC-0086)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0125-codex-connector-ci-readonly.md",
+            "id": "TASK-0125",
+            "linked_decisions": [
+                "DECISION-0048",
+                "DECISION-0044",
+                "DECISION-0041",
+                "DECISION-0047"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0087",
+            "status": "ready",
+            "title": "Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)",
+            "type": "security"
         }
     ],
     "updated_at": "2026-06-08",
