@@ -32,10 +32,12 @@
 - ANOMALIA agents.architect="Claude" DIFERIDA: NO reconciliable por submit_intent (project_narrative solo
   cubre campos-lista + version; agents.* solo cambia por re-genesis). Re-genesis solo por campo display =
   multiplicador de riesgo desproporcionado; capability ya sale de agent_roles="Arquitecto". Esperar ventana.
-- MAILBOX HIGIENIZADO (8f6a233): open/ solo con MSG-Arquitecto-to-Codex-standdown (Codex aun no confirma
-  stand-down; Analista SI confirmo). Contestados->answered/, FYIs->archived/. Monitor 300s activo para
-  cerrar cuando Codex confirme. Anomalias operativas (lock stale 2.3h/BOM/churn) reportadas a Codex por
-  mailbox (DECISION-0018 auto-mejora, regla nueva del operador).
+- MAILBOX HIGIENIZADO + MONITOR CERRADO (32e0cf6): **mailbox/open VACIO**, sin claims activos. Analista
+  confirmo stand-down; Codex QUIESCIO (flags coord_cron.stop + carril_a_coord_monitor.stop/.done, sin
+  commits ni churn en 2 ciclos) -> archive la orden de stand-down a Codex con nota de cierre y TERMINE el
+  loop de monitoreo (no reprogramado). Anomalias operativas (lock stale 2.3h/BOM/churn) reportadas a Codex
+  por mailbox archivado (DECISION-0018 auto-mejora, regla nueva del operador); el operador las enruta a
+  Codex en su proxima reactivacion (lock stale ya removido, BOM normalizado, churn cesado por mi).
 - Anomalia abierta (Analista, DECISION-0018): PROJECT_STATE.json agents.architect="Claude" stale vs
   identidad Arquitecto (config agent_roles ya="Arquitecto"; capability OK). Reconciliar por escritor unico.
 - LECCION reforzada: multi-sesion/cron concurrente = churn fuerte del working tree (mailbox movido,
