@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "41f95854829f175d7c40c9940d3249b14028d5ad06be5eb7701b4e392576effb",
+  "canonical_hash": "d23c27d7b02ba3c06824fb06ff86dd3d43473ff025306cfe72612a62649c94f8",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -170,6 +170,7 @@
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-20260615-promote-0096-Claude": 1,
+      "CLAIM-20260619-Codex-carril-A-coord": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -178,6 +179,9 @@
       "CLAIM-TASK-0106-claude-registro": 1,
       "COORD-20260613-COMMIT-BOUNDARY": 3,
       "COORD-20260614-ARCHITECT": 1,
+      "COORD-20260619-CARRIL-A-REVIEW": 1,
+      "COORD-20260619-CARRILA-REVIEW": 2,
+      "COORD-20260619-STANDDOWN": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -242,7 +246,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 538,
+    "events_applied": 543,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -396,6 +400,8 @@
       "close-task0092:claim-release": 154,
       "close-task0092:project-narrative": 153,
       "close-task0092:task-upsert": 152,
+      "codex-carril-a-review-coord-claim-20260619": 539,
+      "codex-carril-a-review-coord-release-20260619": 540,
       "codex-mailbox-hygiene-20260615-claim": 530,
       "codex-mailbox-hygiene-20260615-release": 531,
       "codex-standdown-20260615-claim": 536,
@@ -522,6 +528,9 @@
       "hold-task0091b:claim-acquire": 148,
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
+      "intent:Arquitecto:claim:928ea82d3b4291ebb33ccb790e90b1d202feea3809bd67d32dfff025d6a25449": 543,
+      "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
+      "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
       "intent:Claude:claim:07db78327217c1de99dba3edcb9c0282f9c919ddf82b89cd77c62326ce754daf": 368,
       "intent:Claude:claim:0fab9e9756b0a3dfe71316044e1d50326395f1df1440c8c0e88ac5939f050f66": 535,
       "intent:Claude:claim:2524f0218ddc7edb3ef7606cc2d2809e82933c149062499b1d014c3de1fd7df4": 514,
@@ -795,5 +804,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 538
+  "up_to_seq": 543
 }
