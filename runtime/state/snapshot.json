@@ -1,21 +1,28 @@
 {
-  "canonical_hash": "215806bea5c6453fdb34baeff246700e45e5fbc88406d4a51dee4e1c2d239e28",
+  "canonical_hash": "804494338ece6f1a7deb75cdb8ba33062806a2e20c379c346f1edd92a41f7e2a",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
+      "CLAIM-20260619-Arquitecto-close-0122": 1,
       "CLAIM-20260619-Arquitecto-decision-0045": 1,
       "DECISION-0045": 1,
+      "DECISION-0046": 1,
       "PROJECT_STATE": 1,
       "TASK-0117": 3,
+      "TASK-0122": 2,
       "protocol-state": 1
     },
-    "events_applied": 9,
+    "events_applied": 13,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
       "arq:close-0117-flip4:ver-1.14.0": 676,
+      "arq:close-0122:acq": 681,
+      "arq:close-0122:dec46": 682,
+      "arq:close-0122:rel": 684,
+      "arq:close-0122:upsert-done": 683,
       "arq:dec45:acq": 678,
       "arq:dec45:rec": 679,
       "arq:dec45:rel": 680,
@@ -25,5 +32,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 680
+  "up_to_seq": 684
 }

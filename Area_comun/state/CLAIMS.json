@@ -1084,6 +1084,24 @@
             "updated_at": "2026-06-19T10:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-close-0122",
+            "expires_at": "2026-06-19T21:30:00Z",
+            "notes": "Cierre TASK-0122 (replay secret-independiente) tras Codex checker OK; registra DECISION-0046.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0122-arquitecto-replay-secret-independent.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T17:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0122",
+            "updated_at": "2026-06-19T17:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-decision-0045",
             "expires_at": "2026-06-19T20:35:00Z",
             "notes": "Record DECISION-0045 (T0 boundary + pre-T0 seal) in the ledger.",

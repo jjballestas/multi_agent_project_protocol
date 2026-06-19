@@ -15,6 +15,20 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 ## [1.14.0] - 2026-06-19
 
+### Fixed
+- **Replay/snapshot now secret-independent (DECISION-0046 / SPEC-0084 / TASK-0122).** Enabling #4 surfaced
+  that `replay_events` treated `unresolved_key` / `missing_key` (secret absent in this checkout =
+  environment, not a security finding) the same as `invalid_signature` / `missing_signature` (real tamper):
+  a state-mutating rejection + skip. That made the materialized state depend on whether the gitignored
+  secrets were present, so a clean clone without secrets could not reproduce the live state and
+  `validate_collaboration_state` failed there. Fix: partition the reasons
+  (`EVENT_AUTH_UNVERIFIABLE_REASONS` vs `EVENT_AUTH_TAMPER_REASONS`); UNVERIFIABLE reasons apply the event
+  normally without a state rejection, TAMPER still rejects+skips. Canonical state is now secret-independent
+  (`validate --root .` exit 0 from a clean clone WITHOUT secrets AND from the live instance WITH secrets,
+  same hash); tamper detection unchanged. Golden `examples/replay_secret_independent_cases` (in CI).
+  maker=Arquitecto, checker=Codex (AC1-AC6 reproduced green). #4 stays ON; T0 boundary (DECISION-0045)
+  intact.
+
 ### Changed (live instance only; not the neutral protocol/template)
 - **#4 security stack ACTIVATED (chain + agent_signatures + anchor + event_auth ON; DECISION-0045).** The
   live instance now signs/chains/anchors its event log: Ed25519 per-agent signatures (public keys in

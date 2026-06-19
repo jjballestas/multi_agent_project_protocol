@@ -1,8 +1,8 @@
 ---
 decision_id: DECISION-0046
 title: Replay secret-independiente - "verificacion no disponible" (clave ausente) != "verificacion fallo" (firma falsa); el estado canonico no debe depender de los secretos
-status: proposed
-ratified_at:
+status: accepted
+ratified_at: 2026-06-19
 date: 2026-06-19
 deciders: [operador humano, Arquitecto]
 supersedes: []

@@ -2,7 +2,7 @@
 spec_id: SPEC-0084
 task_id: TASK-0122
 type: security
-status: proposed
+status: accepted
 linked_decisions:
   - DECISION-0046
   - DECISION-0045

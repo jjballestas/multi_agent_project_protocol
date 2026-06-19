@@ -2,7 +2,7 @@
 id: TASK-0122
 title: Replay secret-independiente - unresolved_key/missing_key no mutan estado (DECISION-0046 / SPEC-0084)
 type: security
-status: proposed
+status: done
 owner: Arquitecto
 phase: P2
 priority: high
