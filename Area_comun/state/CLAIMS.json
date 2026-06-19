@@ -1078,6 +1078,30 @@
             "updated_at": "2026-06-19T07:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Codex-TASK-0117-encendido-fase1",
+            "expires_at": "2026-06-19T10:25:00Z",
+            "notes": "TASK-0117 GO encendido Fase 1: provisioning + piloto acotado + rollback, dejando #4 OFF.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0117",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0117",
+                "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-encendido-fase1-handoff.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0117-codex-to-arquitecto-encendido-fase1.md",
+                "protocol.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T08:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0117",
+            "updated_at": "2026-06-19T08:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-TASK-0119",
             "expires_at": "2026-06-19T06:25:00Z",
             "notes": "Implement TASK-0119 mailbox claim file-scope enforcement guard and goldens.",
@@ -1156,6 +1180,24 @@
             "updated_at": "2026-06-19T00:48:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Codex-feasibility-0043",
+            "expires_at": "2026-06-19T09:35:00Z",
+            "notes": "Factibilidad codigo-invariante DRAFT DECISION-0043 / SPEC-0082; no promover ni encender #4.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-feasibility-0043.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T09:05:00Z",
+            "status": "active",
+            "task_id": "TASK-0120",
+            "updated_at": "2026-06-19T09:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-promo-coord-reply",
             "expires_at": "2026-06-19T02:08:00Z",
             "notes": "Reply to Arquitecto promotion coordination request after claim window cleared.",
@@ -1218,6 +1260,22 @@
             "started_at": "2026-06-19T00:09:19Z",
             "status": "released",
             "task_id": "COORD-20260619-CARRILA-REVIEW"
+        },
+        {
+            "claim_id": "CLAIM-20260619-feasibility-0043-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Coordinar pasada de factibilidad Codex sobre cargador DECISION-0043/SPEC-0082 + reporte de integridad al operador. Claim FILE-SCOPED.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-integridad-y-secuencia.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-cargador-0043.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Codex-to-Arquitecto-carril-A-encendido-fase1-handoff.md"
+            ],
+            "started_at": "2026-06-19T08:47:23Z",
+            "status": "released",
+            "task_id": "TASK-0120"
         },
         {
             "claim_id": "CLAIM-20260619-go-encendido-Arquitecto",

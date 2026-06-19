@@ -30,6 +30,12 @@ El operador autorizo la opcion 1: construir infraestructura SPEC-0081 sin encend
 TASK-0117 pasa a `in_progress` solo para el build de harness/goldens/smoke. El encendido, piloto y ON
 siguen fuera de esta ventana y requieren GO posterior.
 
+## GO 2026-06-19 - Fase 1 encendido supervisado, flip permanente pendiente
+
+El operador autorizo Fase 1: provisioning + piloto acotado con #4 temporalmente ON, rollback ensayado y
+entrega maker!=checker. Codex ejecuto el piloto en ventana acotada y dejo los cuatro flags OFF al cierre.
+El flip permanente queda reservado para Arquitecto con operador presente.
+
 ## Alcance (ver SPEC-0081 para acceptance_criteria + test_plan)
 
 - Provisioning (AC1): `event_state.signature_config.public_keys` por agente; `event_auth.keys`;
@@ -61,3 +67,11 @@ modulo-app; SemVer MINOR + CHANGELOG; memoria actualizada.
 - `python examples\attestation_health_cases\run_attestation_health_cases.py`
 - `python examples\attestation_negative_cases\run_attestation_negative_cases.py`
 - `python examples\readonly_enforcement_cases\run_readonly_enforcement_cases.py`
+
+## Verification - Fase 1
+
+- Piloto vivo: seq 590-630; AC2 N=20, numerator=20, denominator=20, health_rate=1.0; 20 anchors.
+- AC3: 6/6 vectores rechazados con clase esperada (A1/A2).
+- AC5: rollback byte-equivalent de `protocol.config.json`; drift 0; replay==hot hasta seq 630.
+- Flags finales: `event_auth.enabled=false`, `chain_enabled=false`, `agent_signatures_enabled=false`,
+  `anchor_enabled=false`; `event_auth.keys` ausente del repo.
