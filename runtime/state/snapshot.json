@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8b084e4780c9a579f11951357f2f088aa7ffd635c3ad63a964a49cf564a91d0d",
+  "canonical_hash": "75a743d2626ae11d94e8779f94fb33de8d07ba341fce5c1f8f1070cc3567c243",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -171,6 +171,7 @@
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-20260615-promote-0096-Claude": 1,
       "CLAIM-20260619-Codex-carril-A-coord": 1,
+      "CLAIM-20260619-Codex-carril-A-reverify": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -179,6 +180,7 @@
       "CLAIM-TASK-0106-claude-registro": 1,
       "COORD-20260613-COMMIT-BOUNDARY": 3,
       "COORD-20260614-ARCHITECT": 1,
+      "COORD-20260619-CARRIL-A-REVERIFY": 2,
       "COORD-20260619-CARRIL-A-REVIEW": 1,
       "COORD-20260619-CARRILA-REVIEW": 2,
       "COORD-20260619-STANDDOWN": 2,
@@ -247,7 +249,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 546,
+    "events_applied": 549,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -401,6 +403,8 @@
       "close-task0092:claim-release": 154,
       "close-task0092:project-narrative": 153,
       "close-task0092:task-upsert": 152,
+      "codex-carril-a-reverify-claim-20260619": 547,
+      "codex-carril-a-reverify-release-20260619": 548,
       "codex-carril-a-review-coord-claim-20260619": 539,
       "codex-carril-a-review-coord-release-20260619": 540,
       "codex-mailbox-hygiene-20260615-claim": 530,
@@ -531,6 +535,7 @@
       "hold-task0091b:task-upsert": 149,
       "intent:Arquitecto:claim:0ff3ae32cdd3cb45577fa4552559a42e742c82aee22472937ff5ae8c7d281c43": 544,
       "intent:Arquitecto:claim:2918a1f1f24fb0bb786062d7322d3e7201c552a409f0a9fdcf4382c8fbe22f4b": 545,
+      "intent:Arquitecto:claim:4f6b1ab4cd2d5e6adbca7890c6bf7dc54afc54ec8b087b3173fa77dc579af08f": 549,
       "intent:Arquitecto:claim:928ea82d3b4291ebb33ccb790e90b1d202feea3809bd67d32dfff025d6a25449": 543,
       "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
       "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
@@ -808,5 +813,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 546
+  "up_to_seq": 549
 }
