@@ -161,6 +161,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)"
+        },
+        {
+            "id": "TASK-0126",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)"
         }
     ],
     "agents": {

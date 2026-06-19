@@ -730,6 +730,23 @@
             "status": "done",
             "title": "Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)",
             "type": "security"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0126-codex-front-mvp-etapa2-observar.md",
+            "id": "TASK-0126",
+            "linked_decisions": [
+                "DECISION-0049",
+                "DECISION-0029",
+                "DECISION-0047"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

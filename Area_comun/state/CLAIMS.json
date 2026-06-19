@@ -1917,6 +1917,24 @@
             "updated_at": "2026-06-20T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promo-0126",
+            "expires_at": "2026-06-20T04:15:00Z",
+            "notes": "Promueve TASK-0126 (front etapa2 observar, ready/Codex) SPEC-0086. Siguiente pieza del MVP.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0126-codex-front-mvp-etapa2-observar.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T00:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0126",
+            "updated_at": "2026-06-20T00:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
