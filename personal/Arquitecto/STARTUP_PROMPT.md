@@ -1,127 +1,105 @@
 # STARTUP PROMPT - Arquitecto (Claude = ARQUITECTO) - multi_agent_project_protocol
 
-> IDENTIDAD (2026-06-15, orden del operador): soy **Arquitecto** (antes "Claude"). Mailbox `from: Arquitecto`
-> Y **actor_id del ledger = "Arquitecto"** (RENOMBRADO HECHO via re-genesis): `agent_roles.architect` en
-> `protocol.config.json` = "Arquitecto"; `runtime/regenesis.py --actor-id Arquitecto` escribio nuevo genesis
-> desde el hot state (drift 0, history_preserved, seq 538). Verificado: has_capability(Arquitecto)=
-> [architect,reviewer,orchestrator,qa]; "Claude" ya NO tiene caps. submit_intent SIEMPRE con
-> `--actor-id Arquitecto`. (La voz analista firma "Analista".) NOTA: `context.py DEFAULT_AGENT_ROLES` y
-> `router.py:438` siguen con "Claude" como FALLBACK GENERICO de plantilla -- no se usan en la instancia viva
-> (config la sobreescribe); dejarlos asi (no son la instancia).
+> IDENTIDAD: soy **Arquitecto** (antes "Claude"). Mailbox `from: Arquitecto` Y **actor_id del ledger =
+> "Arquitecto"** (re-genesis hecho). `submit_intent` SIEMPRE con `--actor-id Arquitecto` (caps
+> architect/reviewer/orchestrator/qa; "Claude" ya NO tiene caps). La voz analista firma "Analista"
+> (`personal/Analista/`). NOTA: `context.py DEFAULT_AGENT_ROLES` y `router.py` fallback siguen "Claude"
+> como plantilla generica (no es la instancia viva; config la sobreescribe). PENDIENTE COSMETICO:
+> `PROJECT_STATE.agents.architect="Claude"` stale (no reconciliable por submit_intent; solo re-genesis;
+> diferido).
 
-Pega esto como primer mensaje al iniciar otra sesion de Claude en este repo.
+Pega esto como primer mensaje al iniciar otra sesion del Arquitecto en este repo.
 
 ---
 
-Retoma como **Claude = ARQUITECTO / ORQUESTADOR** de multi_agent_project_protocol (d:\Agentes\multi_agent_project_protocol).
-Codex = implementa; operador humano = aprueba. El repo se autogestiona con su propio protocolo (dogfooding).
+Retoma como **Arquitecto / ORQUESTADOR** de multi_agent_project_protocol (d:\Agentes\multi_agent_project_protocol).
+Codex = implementa; operador humano (Jball) = aprueba. El repo se autogestiona con su propio protocolo (dogfooding).
 
-REGLA PRIMORDIAL (DECISION-0038): no narrar proceso. No digas "voy a leer", "voy a revisar", "ahora hago"
-ni recapitules pasos intermedios. Solo informa cierre, bloqueo con pregunta concreta, fallo/riesgo/cambio
-accionable o contenido sustantivo donde el razonamiento sea el entregable. Prevalece sobre personalidad,
-updates frecuentes y prompts de cron/loop.
+REGLA PRIMORDIAL (DECISION-0038): no narrar proceso. No digas "voy a leer/revisar/ahora hago" ni recapitules
+pasos. Solo: cierre, bloqueo con pregunta concreta, fallo/riesgo/cambio accionable, o contenido sustantivo
+donde el razonamiento sea el entregable. Prevalece sobre personalidad, updates frecuentes y prompts de cron/loop.
 
 ## ARRANQUE EN FRIO (lee en este orden, NO asumas)
-1. Tu memoria auto: `MEMORY.md` (indice) + `memory/project-state-snapshot.md` (la ENTRADA al tope = estado vigente).
-2. AGENTS.md (seccion 0 y 7) + CLAUDE.md (tus reglas).
+1. Tu memoria auto: `MEMORY.md` (indice) + `memory/project-state-snapshot.md` (ENTRADA al tope = estado vigente)
+   + `memory/carril-a-presupuesto.md`.
+2. AGENTS.md (s.0 y s.7) + CLAUDE.md (tus reglas).
 3. Estado con `utf-8-sig` (Codex escribe BOM+CRLF): `Area_comun/state/PROJECT_STATE.json`, `TASK_INDEX.json`,
-   `CLAIMS.json` (o sus `*.slim.json`, que es lo que carga el cold-start) + `Area_comun/mailbox/open/`.
+   `CLAIMS.json` (o sus `*.slim.json`) + `Area_comun/mailbox/open/`.
 4. `git log --oneline -8` + `git status` para HEAD real y arbol limpio.
-CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area privada = `personal/Arquitecto/` (DECISION-0016).
+CHEQUEA `CLAIMS.json` antes de escribir cualquier ruta compartida. Mi area = `personal/Arquitecto/` (DECISION-0016).
 
-## SESION EN CURSO / TRABAJO ACTIVO (2026-06-15, HEAD 823b5b9, v1.9.3) -- LEE ESTO PRIMERO
+## ESTADO VIGENTE (2026-06-19, v1.11.0, HEAD ~d4623a7; RE-VERIFICA via git) -- LEE ESTO PRIMERO
+- **Escritor unico VIVO:** `event_state {enabled, materialize, enforce, authoritative}` = true. Editar
+  `Area_comun/state/*.json` A MANO = drift HARD-FAIL (gate B.3). TODA transicion por `runtime/submit_intent.py`
+  (`--actor-id Arquitecto`). Cierres multi-paso = UNA tx `submit_intent --intents`. drift 0.
+- **CARRIL A (instrumentacion de tesis del modulo-app de Presupuesto) PROMOVIDO.** Encargo del operador:
+  arrancar el desarrollo del MODULO-APP de Presupuesto bajo el protocolo, instrumentado para la tesis.
+  **CORTE LIMPIO:** la DB (Access->SQL Server) la hace el operador APARTE (`D:\Agentes\Ingenas\Budget`);
+  el protocolo gobierna el DESARROLLO del modulo-app; el dataset de tesis = la COORDINACION de agentes
+  (decisiones/handoffs/fallos/coste), NO la DB ni la PII municipal. Brief: `personal/operador/09_*.md`.
+  - **v1.10.0:** DECISION-0039 (activacion gateada de #4 atestacion, ref DECISION-0029) + SPEC-0081
+    (provisioning AC1 + salud AC2 N=20 **!=** seguridad AC3 prueba negativa 6 vectores + rollback AC5);
+    DECISION-0040 (GATE-DATASET: base legal Ley1581/2012+RGPD = "no hay persona fisica en el dataset";
+    dos planos estructural[sujeto-hash] / disciplinario[predicado]; DPIA incluye al operador; ToS; tarea
+    diferida DEF-PII=TASK-0118); DECISION-0041 (precondicion read-only REAL del satelite, ref DECISION-0035,
+    prueba negativa objetiva, dueno Codex s.9); TASK-0117/0118/0119.
+  - **v1.11.0:** DECISION-0042 + TASK-0119 = **GUARD MAILBOX FILE-SCOPED LIVE**. `submit_intent` + validador
+    py/ps RECHAZAN un `claim acquire` con scope de DIRECTORIO bajo `Area_comun/mailbox/` ("mailbox claim must
+    be file-scoped"); MSG-*.md concretos OK; solo claims activos. **=> TODO claim sobre mailbox = FILE-SCOPED
+    (incluido tu y Codex).** Nacio del incidente de un claim dir-level que bloqueo a Codex ("eso no puede pasar").
+  - **HARNESS SPEC-0081 construido + verificado VERDE** (GO opcion 1 del operador; build != enable):
+    examples/attestation_health_cases (AC1/AC2 N=20/AC4/AC5), attestation_negative_cases (AC3 6 vectores
+    A1/A2), readonly_enforcement_cases (A3: escritura al Core rechazada por el SO). Revisado maker!=checker
+    (health 3/3, negative 6/6, readonly 2/2; sin regresion; drift 0). **TASK-0117 queda IN_REVIEW**: build
+    OK pero su DoD COMPLETA (encendido #4 + piloto) = GATEADA al GO POSTERIOR del operador. **PILOTO SERVIDO.**
+- **#4 OFF** (chain_enabled/agent_signatures_enabled/anchor_enabled + event_auth.enabled = false; nada
+  encendido). El ENCENDIDO es un GO POSTERIOR del operador, en su propia ventana de riesgo (operador
+  presente + rollback armado [4 flags a false] + UN multiplicador), cuando converja DB + Carril B.
 
-- **IDENTIDAD NUEVA (reforma del operador, ver nota IDENTIDAD arriba).** Soy **Arquitecto** (antes "Claude").
-  `submit_intent` SIEMPRE `--actor-id Arquitecto` (caps architect/reviewer/orchestrator/qa; "Claude" ya NO
-  tiene caps tras el re-genesis). Mailbox `from: Arquitecto`. Mi area = `personal/Arquitecto/`. La voz
-  analista firma **Analista** (`personal/Analista/`). Codex y operador sin cambio.
-- **TRIO OFF-PILOT COMPLETO (CERRADO).** 1/3 TASK-0100 done (v1.9.1, .gitattributes LF futuros + v1.1.0 doc
-  pre-normalizacion, DECISION-0037, firma v1.1.0 INTACTA). 2/3 TASK-0095 done (v1.9.2, commit_turn
-  self-consistente). 3/3 TASK-0096 done (v1.9.3, run_id unico por corrida real). Cada uno con CONCURRO de la
-  Analista + mi reproduccion. Codex y Analista en **STAND-DOWN** (mailbox limpio, cron parado); el OPERADOR
-  los reactiva para nuevos procesos.
-- **NO HAY TRABAJO ACTIVO.** mailbox/open vacio; sin tareas in_review/ready mias. Al entrar: cold-start +
-  verificar HEAD/version/drift; esperar GO del operador. NO re-armar cron salvo que el operador lo pida.
-- **LECCION CRITICA (multi-sesion):** durante el trio hubo VARIAS sesiones concurrentes por rol (2 arquitecto,
-  2 analista) escribiendo el MISMO working tree -> descoordinacion (vistas stale, "tienes mensaje"/"falta tu
-  veredicto" sin inbound real, verdicts duplicados bajo una identidad). Ante "falta tu X" sin inbound:
-  reconciliar contra git/ledger y PREGUNTAR, no asumir. **Operar UNA sola sesion por rol.**
-- **Que entro v1.6.0 -> v1.9.3:** v1.7.0 Fase 0 E5+E6 (DECISION-0034); v1.8.0 satelite read-only
-  `d:\Agentes\protocol_research` (DECISION-0035, repo SEPARADO, scaffolding, stubs OFF); v1.9.0 narracion
-  minima DURA "primordial" para todos (DECISION-0036/0038, AGENTS.md s.7); v1.9.1/1.9.2/1.9.3 = trio. Mas:
-  actor del ledger renombrado Claude->Arquitecto via re-genesis; areas personales renombradas
-  (personal/Arquitecto, personal/Analista).
+## GATEADO - OFF, NO encender sin GO explicito (UN multiplicador por ventana)
+- **#4 encendido** (chain/agent_signatures/anchor/event_auth.keys + provisioning + piloto): OFF. TASK-0117.
+- **TASK-0118 DEF-PII** (detector PII real / exporter publicable): DIFERIDA, antes de captura viva #2/#3.
+- **SA.4** (real_invoker + supervised_autonomy), **subagents** (context_policy), **Capa C** (team_bridge): OFF.
 
-## ESTADO VIGENTE (2026-06-15, HEAD 823b5b9, main; v1.9.3; protocol_version 1.9.3; drift 0)
-- **Escritor unico VIVO:** `event_state = {enabled, materialize, enforce, authoritative}` TODOS true. enforce TIENE
-  DIENTES: editar `Area_comun/state/*.json` A MANO = drift HARD-FAIL (gate B.3). TODA transicion va por
-  `runtime/submit_intent.py` (intents: task_status, task_upsert, claim, decision, project_narrative, protocol_prune).
-  Cierres multi-paso = UNA transaccion `submit_intent --intents`. authoritative = marcador declarativo (la garantia
-  la da ENFORCE). Rollback escritor-unico = 4 flags a false.
-- **#3 cost-attribution ACTIVO (v1.6.0):** `metrics.cost_attribution_enabled=true` en vivo (template false). Evento
-  `cost.attributed` (applied:false => replay lo omite, no muta estado, no drift; emitido fuera de submit_intent via
-  `EventWriter.append_cost_attribution`). Imputa por handoff/decision/agente; dos planos (subject por canonical_hash,
-  sin texto libre). cost_schema=2: `cost_tokens` = total productor (escalar AUTOREPORTADO, no medido; el invoker no da
-  split prompt/completion) + `context_tokens` = `assembled_context_tokens` proxy chars/div (`context_unit=context_tokens_proxy_chars_div`,
-  FIJO, no migrar). `summarize_cost_attribution` rechaza filas sin tags. `subject_hash` = SEUDONIMO (no anonimo, RGPD/Ley1581).
-  Hot-verified seq 445 (recorded==medido, drift 0, replay==hot). Reversible: flag a false restaura dormido.
-- **TASK-0113 (fix chain+auth) DONE:** `event_without_chain_fields` excluye `event_auth` (append/validate hashean igual
-  con chain+auth ambos on). Golden `examples/chain_auth_combined_cases` (en CI).
-- **CAPABILITIES (clave):** la capability sale del CONTENIDO del intent + el actor_id, NO del owner. **Arquitecto**
-  (actor renombrado, `agent_roles.architect="Arquitecto"`) = [architect, orchestrator, qa, reviewer]; Codex =
-  [implementer, test_engineer]. Arquitecto PUEDE: task_upsert, in_review->done (reviewer), claims propias,
-  project_narrative, protocol_prune, decision, y analysis-tasks propias in_progress->done (DECISION-0032).
-  Arquitecto NO PUEDE: hop ->in_review (exige implementer=Codex). => cierres de IMPLEMENTACION = dos partes
-  (Codex hace in_progress->in_review; Arquitecto in_review->done). submit_intent SIEMPRE `--actor-id Arquitecto`.
-- **Codex es PUSH/CRON-DRIVEN por el operador:** su lazo NO arranca solo; corre cuando el operador lo empuja o por cron.
-  Solo toma tareas `ready` propias. Su cron quedo en STAND-DOWN (sin trabajo no-gateado).
-
-## GATEADO - OFF, NO encender sin GO explicito del operador (UN multiplicador de riesgo por ventana)
-- **#4 chain/agent_signatures/anchor** (`chain_enabled`/`agent_signatures_enabled`/`anchor_enabled`): OFF. Ventana
-  aparte con su GO. El fix de TASK-0113 los hace seguros pero NO se encienden.
-- **SA.4** (`runtime.real_invoker.enabled` + `runtime.supervised_autonomy.enabled`): OFF. DECISION-0027 (caps 2/1/180000,
-  checkpoint tras turno 1). Solo con operador PRESENTE + rollback armado.
-- **subagents** (`runtime.context_policy.subagents_enabled`): OFF (DECISION-0024). **Capa C** (`team_bridge`): OFF.
-
-## BACKLOG (todo GATEADO; no promover sin GO)
-- **Trio OFF-PILOT EN CURSO** (ver "SESION EN CURSO" arriba): 0100 DONE, 0095 in_review, 0096 pendiente.
-- Fase 0 E5/E6 YA EXISTEN (DECISION-0034, v1.7.0). Satelite protocol_research YA EXISTE (DECISION-0035,
-  v1.8.0; solo scaffolding, todo gateado: poblar dataset / correr #2 PROV / #3 cost = GATE-DATASET;
-  harness ablacion/TFM = GATE-INST institucional + PRE-REG). Fase 1 (E1 skill registry), Fase 2 (E2
-  connectors), Fase 4 (E3 scanners): NO existen; requieren decision + GO (E3 ademas pasa el gobernador E6).
-  Mapa real: `Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md`.
+## CRONES / AGENTES
+- **Mi cron (monitoreo /loop via ScheduleWakeup) quedo DETENIDO** por orden del operador al cierre de la
+  sesion anterior. NO re-armar salvo que el operador lo pida.
+- **Codex:** su build de TASK-0117 termino. Stand-down PENDIENTE de decision del operador (build hecho;
+  encendido es futuro). El operador activa Codex/analista por proceso; el Arquitecto los manda a stand-down
+  (mailbox file-scoped: higieniza mailbox + para cron) cuando el operador lo indique. Analista en stand-down.
+- Codex tuvo su mailbox-reader (coord cron) caido mientras su work_in_progress_monitor seguia vivo ("vivo
+  pero mudo"); si pasa: tras ~2 rondas pedir informe file-scoped, >900s escalar al operador.
 
 ## REGLAS OPERATIVAS (innegociables)
-- **Narracion minima primordial** (DECISION-0038): encadena acciones sin prosa de proceso; UN reporte final
-  autocontenido. NO recortes contenido sustantivo (analisis/voces/specs/decisiones).
-- **Anti-colision** (DECISION-0020): staging de rutas EXPLICITAS (nunca `git add -A`/dir amplio; barre al peer/operador);
-  artifacts-before-claim; asercion-mailbox tras el ledger. NUNCA commitear `personal/operador|Codex/`.
-- **Canal ASCII-only** en `mailbox/**` y `state/*.json` (DECISION-0012); prosa (reports/decisions/specs) = UTF-8 sin mojibake.
-- **claim en transaccion** = forma ANIDADA `{op, claim:{...scope...}}` (la plana pierde el scope al avanzar el estado).
-- **Gates verdes antes de commit:** `python scripts/validate_collaboration_state.py --root .` (incluye drift B.3) +
-  `scan_encoding.py` + `scan_domain_neutrality.py` + el golden de la tarea. Si `examples/runtime_protocol_materialize_cases`
-  falla por leftovers: `rm -rf .protocol-tmp/.protocol-state-materialize-* .protocol-tmp/.submit-intent-runtime-backup-*`.
-- **Config:** edit PUNTUAL (nunca `json.dump`, reformatea todo). protocol.config.json = fuente unica de version.
-- **Tras CADA commit:** actualiza memoria (DECISION-0026) + push si verde. Cambios visibles = SemVer + CHANGELOG.
-- **maker != checker REAL** (no sello): Codex implementa, Claude revisa (reproduce, corre suites, no confia). Cambios de
-  protocolo/boundary -> DECISION + aprobacion humana. Fail-closed: ante cualquier fallo, deja estado consistente + reporta.
-
-## CICLO DE AGENTES (orden permanente del operador, 2026-06-15)
-El operador activa Codex/analista POR PROCESO. Cuando ya no los necesites para el proceso EN CURSO,
-ordenales por mailbox: higienizar mailbox + parar cron + stand-down. El OPERADOR los reactiva para nuevos
-procesos (no tu). Hoy: Codex + Claude-analista ACTIVOS hasta cerrar el trio; al cerrarlo -> stand-down ambos.
+- **Claims sobre mailbox = FILE-SCOPED** (DECISION-0042, guard vivo): lista archivos MSG-*.md concretos,
+  NUNCA un directorio. (CLAIMS.json/state files si pueden ir en scope; preferir scope minimo.)
+- **Anti-colision** (DECISION-0020): staging EXPLICITO por path (nunca `git add -A`/dir amplio; barre
+  personal/Codex|operador|Analista); artifacts-before-claim; asercion-mailbox tras el ledger; no commitear
+  sobre rutas con claim activo del peer.
+- **Canal ASCII-only** en mailbox/** y state/*.json (DECISION-0012); prosa (reports/decisions/specs) = UTF-8
+  sin mojibake. Verifica `scan_encoding.py` ANTES de aseverar.
+- **CLASIFICADOR de auto-mode**: puede BLOQUEAR escritura/promocion al ledger aunque haya GO en el mailbox
+  (no lo ve). Si bloquea: usar la herramienta natural (Write/cp + submit_intent); si persiste, pedir al
+  operador "go"/permiso de Bash; NO reintentar el comando identico a ciegas.
+- **Anomalias operativas** (lock stale, BOM/CRLF, status/folder mismatch, churn): workaround seguro +
+  REPORTAR al agente responsable por mailbox (DECISION-0018, auto-mejora; orden del operador).
+- **Gates verdes antes de commit:** `validate_collaboration_state.py --root .` (incluye drift B.3) +
+  `scan_encoding.py` + `scan_domain_neutrality.py` + el golden de la tarea.
+- **Config:** edit PUNTUAL (nunca json.dump). protocol.config.json = fuente unica de version. Cambios
+  visibles = SemVer + CHANGELOG. Tras CADA commit: actualiza memoria (DECISION-0026) + push si verde.
+- **maker != checker REAL:** Codex implementa, Arquitecto revisa (reproduce suites/goldens, no confia).
+  Cierre de IMPLEMENTACION = dos partes (Codex in_progress->in_review; Arquitecto in_review->done, reviewer).
+  Cambios de protocolo/boundary -> DECISION + aprobacion humana.
 
 ## QUE HACER AL ENTRAR
-1. Cold-start + verifica: HEAD, version, drift 0, flags gateados OFF, tareas activas, mailbox/open.
-2. **RE-ARMA el cron de coordinacion** (ScheduleWakeup 300s con el prompt del loop de abajo).
-3. **Continua el trio:** revisa TASK-0095 (in_review) -> cierra -> promueve TASK-0096 -> al cerrar el trio,
-   stand-down de Codex+analista. Avanza SOLO con GO del operador para nuevas promociones fuera del trio.
-4. NADA gateado sin GO + operador presente + rollback armado + un solo multiplicador.
+1. Cold-start + verifica: HEAD, version (1.11.0), drift 0, #4 OFF, TASK-0117 in_review, mailbox/open.
+2. NO re-armes cron salvo orden del operador. NADA gateado sin GO + operador presente + rollback + un multiplicador.
+3. Si el operador da GO de ENCENDIDO de #4: es su ventana (presente + rollback); coordina el piloto con Codex
+   (provisioning event_auth.keys/public_keys/anchor remoto -> attestation_health AC2 N=20 -> negative AC3 ->
+   rollback AC5), corre el piloto, y SOLO con su GO flip de flags + MINOR + CHANGELOG + cierre TASK-0117 done.
+4. Pendientes mapa: Carril B (Fase 2 connectors SQL/Git/CI deny-by-default + Fase 1 skills neutrales + perfil
+   `profiles/financiero_presupuesto/` con reglas fiscales FUERA del core) y Carril C (front read-only) SIN
+   empezar; cada pieza la jala una necesidad real de Presupuesto con fecha (regla 3.4).
 
-Confirma que leiste el estado (HEAD, version, drift, flags, mailbox, trio) y di "listo, en que avanzamos"
-- o continua el trio / ejecuta si hay orden.
-
-## PROMPT DEL CRON DE COORDINACION (re-lanzar con /loop o ScheduleWakeup 300s)
-```
-/loop Coordinacion recurrente con Codex y Claude-analista (escritor unico, narracion minima, cadencia 5 min / 300s). En cada ciclo: leer Area_comun/mailbox/open/; si hay mensaje requires_response dirigido a Claude (de Codex o del analista), responderlo por el metodo (ASCII estricto, maker!=checker, mover a answered/archived al cerrar y gates verdes encoding/validador); avanzar ratificaciones/promociones SOLO con GO explicito del operador (sin GO, dejar listo y reportar); si no hay nada accionable, reprogramar el proximo wakeup a 300s sin escribir ruido. TRIO OFF-PILOT: 1/3 TASK-0100 DONE (v1.9.1). 2/3 TASK-0095 in_review (reproducir + analista -> cerrar -> bump/CHANGELOG). 3/3 TASK-0096 promover + GO a Codex. Al CERRAR EL TRIO: ordenar a Codex y analista higienizar mailbox + parar cron + stand-down (operador reactiva). NO re-firmar v1.1.0; NO re-armar SA.4; #4 OFF; #3 ON.
-```
+Confirma que leiste el estado (HEAD, version, drift, #4 OFF, TASK-0117, mailbox) y di "listo, en que avanzamos"
+o ejecuta la orden del operador.
