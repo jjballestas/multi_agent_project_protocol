@@ -19,7 +19,7 @@ T0 del proyecto-front (DECISION-0049). Etapa 1 (andamiaje) del MVP single-operat
 `D:\Agentes\Zeus\Zeus-protocol` (ya git-init): stack web + pipeline CI verde (via connector CI del floor) +
 **lectura read-only del estado/ledger del CANONICO** del protocolo (objetos git/origin, NO el working tree)
 + esqueleto de navegacion/base de componentes (segun diseno UI cuando aterrice). maker=Codex, checker=
-Arquitecto. Ver SPEC-0086 (AC1-AC10) + requirements/pipeline en D:\Agentes\Zeus\design.
+Arquitecto. Ver SPEC-0086 (AC1-AC10) + requirements/pipeline en D:\Agentes\Zeus\Zeus-protocol\design.
 
 ## Prerequisito (CI antes del codigo que compila/testea)
 

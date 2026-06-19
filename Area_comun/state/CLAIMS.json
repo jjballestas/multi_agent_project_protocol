@@ -1258,6 +1258,24 @@
             "updated_at": "2026-06-19T15:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-upd-0124",
+            "expires_at": "2026-06-20T03:15:00Z",
+            "notes": "Marcador atestado: correccion de ruta de insumos de diseno en SPEC-0086/TASK-0124 (D:/Agentes/Zeus/design -> Zeus-protocol/design) por decision del operador. Sin cambio semantico.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0124-codex-front-mvp-etapa1-andamiaje.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T23:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0124",
+            "updated_at": "2026-06-19T23:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-TASK-0117",
             "expires_at": "2026-06-19T13:20:00Z",
             "notes": "Build SPEC-0081 harness/goldens/smoke for TASK-0117 without enabling #4 or pilot.",

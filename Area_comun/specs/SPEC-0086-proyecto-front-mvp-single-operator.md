@@ -19,7 +19,7 @@ author: Arquitecto
 
 DECISION-0049: el proyecto-front (UI single-operator) es el proyecto PRIMARIO de tesis y T0. Repo producto
 `D:\Agentes\Zeus\Zeus-protocol` (codigo); gobernanza (esta SPEC, tasks, handoffs) en `Area_comun` (atestada
-#4 = dataset publicable). Insumos: `D:\Agentes\Zeus\design\front_requirements.html` (RF/RNF) +
+#4 = dataset publicable). Insumos: `D:\Agentes\Zeus\Zeus-protocol\design\front_requirements.html` (RF/RNF) +
 `front_pipeline.html` (etapas). El diseno UI de Claude Design (`design\interface\`) alimenta las tareas de
 UI; NO bloquea el resto del SPEC. maker=Codex, checker=Arquitecto, de a una etapa.
 
