@@ -45,7 +45,7 @@ toda FASE 2 antes del lanzamiento. Por tanto:
   para Carril B. Carril B pieza 1 queda cerrada/off-by-default.
 - El protocolo queda **EN ESPERA** de que yo entregue el **diseno de la DB** (lo termino y testeo aparte);
   ese **handover sera el primer handoff gobernado = T0**, atestado en caliente bajo #4.
-- **Tras T0**, jalamos en orden y de a una: §9 read-only verificada por Codex (DECISION-0041) + mi GO de
+- **Tras T0**, jalamos en orden y de a una: ?9 read-only verificada por Codex (DECISION-0041) + mi GO de
   uso vivo del connector -> perfil financiero (`profiles/financiero_presupuesto/`, fuera del core) ->
   modulos (Seguridad, Presupuesto) con handoffs atestados.
 
