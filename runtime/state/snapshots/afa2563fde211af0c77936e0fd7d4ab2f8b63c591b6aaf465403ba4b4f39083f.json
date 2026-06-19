@@ -1,0 +1,2606 @@
+{
+    "schema_version": "protocol_state_snapshot.v1",
+    "snapshot": {
+        "canonical_hash": "85f625f89468e70f30fcd9529524418767da7195b2f9f023846c45110e019a74",
+        "state": {
+            "claims": {
+                "claims": [
+                    {
+                        "claim_id": "CLAIM-20260612-233357-prune-claude",
+                        "expires_at": "2026-06-12",
+                        "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json"
+                        ],
+                        "started_at": "2026-06-12T23:33:57Z",
+                        "status": "released",
+                        "task_id": "MAINTENANCE-PRUNE",
+                        "updated_at": "2026-06-12T23:33:57Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-152600-task0109-claude",
+                        "expires_at": "2026-06-16",
+                        "notes": "Coordinacion + consolidacion de la revision adversarial multi-voz (TASK-0109, analysis).",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json#TASK-0109",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0109",
+                            "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
+                        ],
+                        "started_at": "2026-06-13T15:26:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0109",
+                        "updated_at": "2026-06-13T15:26:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-171150-sota-go-claude",
+                        "expires_at": "2026-06-13",
+                        "notes": "Registrar DECISION-0031 (ratificada por operador) y promover TASK-0106 a ready (GO).",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md"
+                        ],
+                        "started_at": "2026-06-13T17:11:50Z",
+                        "status": "released",
+                        "task_id": "TASK-0106",
+                        "updated_at": "2026-06-13T17:11:50Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-184023-close-0106-claude",
+                        "expires_at": "2026-06-13",
+                        "notes": "Ratificacion adversarial TASK-0106 -> done.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md"
+                        ],
+                        "started_at": "2026-06-13T18:40:23Z",
+                        "status": "released",
+                        "task_id": "TASK-0106",
+                        "updated_at": "2026-06-13T18:40:23Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-185303-task0110-claude",
+                        "expires_at": "2026-06-16",
+                        "notes": "Coordinacion de la medicion A/B de narracion (TASK-0110).",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json#TASK-0110",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0110",
+                            "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md"
+                        ],
+                        "started_at": "2026-06-13T18:53:03Z",
+                        "status": "released",
+                        "task_id": "TASK-0110",
+                        "updated_at": "2026-06-13T18:53:03Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-201643-close-0110",
+                        "expires_at": "2026-06-13",
+                        "notes": "Cierre TASK-0110 via qa path.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md"
+                        ],
+                        "started_at": "2026-06-13T20:16:43Z",
+                        "status": "released",
+                        "task_id": "TASK-0110",
+                        "updated_at": "2026-06-13T20:16:43Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-214805-p2",
+                        "expires_at": "2026-06-13",
+                        "notes": "DECISION-0032 + cierre TASK-0109 via nueva capacidad.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md"
+                        ],
+                        "started_at": "2026-06-13T21:48:05Z",
+                        "status": "released",
+                        "task_id": "TASK-0109",
+                        "updated_at": "2026-06-13T21:48:05Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-222506-verrec",
+                        "expires_at": "2026-06-13",
+                        "notes": "Reconciliar PROJECT_STATE.version a 1.5.0.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json"
+                        ],
+                        "started_at": "2026-06-13T22:25:06Z",
+                        "status": "released",
+                        "task_id": "VERSION-RECONCILE",
+                        "updated_at": "2026-06-13T22:25:06Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-coord-boundary-archive-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Archive consumed commit-boundary coordination exchange before explicit-path commit.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-coord-boundary-answer.md",
+                            "Area_comun/mailbox/archived/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                            "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-coord-boundary-answer.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T14:20:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+                        "updated_at": "2026-06-13T14:20:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-coord-claude-commit-boundary-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Coordinate current uncommitted mailbox/TASK-0106 boundary with Claude.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T14:12:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+                        "updated_at": "2026-06-13T14:12:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-coord-claude-question-fix-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Add compact mailbox question field required by validator.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Codex-to-Claude-coord-commit-boundary.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T14:15:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260613-COMMIT-BOUNDARY",
+                        "updated_at": "2026-06-13T14:15:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-mailbox-hygiene-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Archive executed mailbox messages after TASK-0101..0103 flow.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/archived/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T01:35:00Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260613",
+                        "updated_at": "2026-06-13T01:35:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0102-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "TASK-0102 agent signature attestations off-by-default with local verifier and goldens.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0102",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0102",
+                            "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                            "Area_comun/handoffs/HANDOFF-TASK-0102-codex-to-claude-1.md",
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "examples/agent_signature_cases/",
+                            "scripts/validate_collaboration_state.py",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T00:41:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0102",
+                        "updated_at": "2026-06-13T00:41:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0102-metadata-claude",
+                        "expires_at": "2026-06-14",
+                        "notes": "Correct TASK-0102 deliverables metadata to concrete paths for validator.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0102",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0102",
+                            "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T01:08:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0102",
+                        "updated_at": "2026-06-13T01:08:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0103-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "TASK-0103 external chain anchor off-by-default with monotonicity verifier and goldens.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0103",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0103",
+                            "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                            "Area_comun/handoffs/HANDOFF-TASK-0103-codex-to-claude-1.md",
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "examples/anchor_cases/",
+                            "scripts/validate_collaboration_state.py",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T01:12:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0103",
+                        "updated_at": "2026-06-13T01:12:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0103-metadata-claude",
+                        "expires_at": "2026-06-14",
+                        "notes": "Correct TASK-0103 deliverables metadata to concrete paths for validator.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0103",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0103",
+                            "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T01:28:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0103",
+                        "updated_at": "2026-06-13T01:28:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0105-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "TASK-0105 slim-views cold-start implementation per SPEC-0077.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0105",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0105",
+                            "Area_comun/tasks/TASK-0105-codex-slim-views.md",
+                            "Area_comun/specs/SPEC-0077-slim-views-cold-start.md",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-impl-TASK-0105.md",
+                            "Area_comun/handoffs/HANDOFF-TASK-0105-codex-to-claude-1.md",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "Area_comun/state/TASK_INDEX.slim.template.json",
+                            "Area_comun/state/PROJECT_STATE.slim.template.json",
+                            "Area_comun/state/CLAIMS.slim.template.json",
+                            "scripts/measure_context_cost.py",
+                            "scripts/measure_context_cost.ps1",
+                            "examples/slim_view_cases/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T11:57:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0105",
+                        "updated_at": "2026-06-13T11:57:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0105-handoff-fix-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Correct TASK-0105 handoff measurement after mailbox hygiene.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/handoffs/HANDOFF-TASK-0105-codex-to-claude-1.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T12:24:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0105",
+                        "updated_at": "2026-06-13T12:24:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0105-mailbox-hygiene-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Archive executed TASK-0105 GO message after handoff-release.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-impl-TASK-0105.md",
+                            "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-impl-TASK-0105.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T12:20:00Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260613-TASK0105",
+                        "updated_at": "2026-06-13T12:20:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0106-baseline-clarif-ack-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "ACK a Claude: aclaracion de baseline tooling recibida; Codex usara --json o implementara --baseline sin bloquearse por el nombre del flag.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-clarif-baseline-tooling.md",
+                            "Area_comun/mailbox/answered/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T16:50:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0106",
+                        "updated_at": "2026-06-13T16:50:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0106-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "TASK-0106 compaction/tool-result clearing minimum safe implementation per SPEC-0078/DECISION-0031.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0106",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0106",
+                            "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md",
+                            "Area_comun/specs/SPEC-0078-compaction-y-subagentes.md",
+                            "runtime/orchestrator.py",
+                            "runtime/runlog.py",
+                            "runtime/adapters/base.py",
+                            "runtime/budget.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/measure_context_cost.py",
+                            "scripts/measure_context_cost.ps1",
+                            "examples/context_policy_cases/",
+                            "Area_comun/artifacts/",
+                            "Area_comun/handoffs/",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/answered/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T17:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0106",
+                        "updated_at": "2026-06-13T17:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0106-go-ack-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "ACK de Codex al GO de Claude para TASK-0106: confirma baseline bloqueante, DELTA-3 fuera y subagents_enabled off sin GO.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-GO-TASK-0106.md",
+                            "Area_comun/mailbox/answered/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T16:35:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0106",
+                        "updated_at": "2026-06-13T16:35:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0106-ratified-mailbox-hygiene-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Archive consumed TASK-0106 ratification FYI and old operator GO after TASK-0105/0106 completion.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/CLAIMS.slim.json",
+                            "Area_comun/mailbox/open/MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md",
+                            "Area_comun/mailbox/open/MSG-20260613-Operador-GO-DECISION-0014-0030.md",
+                            "Area_comun/mailbox/archived/MSG-20260613-Claude-to-Codex-TASK0106-ratificado-done.md",
+                            "Area_comun/mailbox/archived/MSG-20260613-Operador-GO-DECISION-0014-0030.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T18:54:30Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260613-TASK0106",
+                        "updated_at": "2026-06-13T18:54:30Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260613-task0109-voz-codex",
+                        "expires_at": "2026-06-14",
+                        "notes": "Entrega de VOZ Codex factibilidad para TASK-0109 y aviso de coordinacion a Claude/Analista.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/artifacts/",
+                            "Area_comun/mailbox/open/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-13T16:10:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0109",
+                        "updated_at": "2026-06-13T16:10:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped",
+                        "expires_at": "2026-06-15T01:55:59Z",
+                        "notes": "TASK-0100 rescoped option A implementation: LF policy for future releases, v1.1.0 known-limitations, verify_release scope pin.",
+                        "owner": "Codex",
+                        "scope": [
+                            ".gitattributes",
+                            "scripts/verify_release.py",
+                            "dist/v1.1.0",
+                            "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-GO-TASK-0100-rescoped.md",
+                            "Area_comun/mailbox/answered",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T21:55:59Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T21:55:59Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-handoff",
+                        "expires_at": "2026-06-14T23:58:44Z",
+                        "notes": "Extend TASK-0100 claim for final handoff artifact.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/handoffs/HANDOFF-TASK-0100-codex-to-claude-1.md"
+                        ],
+                        "started_at": "2026-06-14T21:58:44Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T21:58:44Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-spec",
+                        "expires_at": "2026-06-15T01:57:32Z",
+                        "notes": "Extend TASK-0100 claim to correct SPEC-0075 false v1.1.0 premise per DECISION-0037.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md"
+                        ],
+                        "started_at": "2026-06-14T21:57:32Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T21:57:32Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-Codex-TASK-0100-rescoped-tests",
+                        "expires_at": "2026-06-15T01:56:38Z",
+                        "notes": "Extend TASK-0100 claim for future-release LF reproducibility smoke in existing release verify harness.",
+                        "owner": "Codex",
+                        "scope": [
+                            "examples/release_verify_cases/run_release_verify_cases.py",
+                            "examples/release_verify_cases"
+                        ],
+                        "started_at": "2026-06-14T21:56:38Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T21:56:38Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-TASK-0111-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json#TASK-0111",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                            "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md",
+                            "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                            "runtime/eventlog.py",
+                            "runtime/budget.py",
+                            "runtime/metrics.py",
+                            "examples/runtime_cost_attribution_cases/",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            ".github/workflows/validate.yml"
+                        ],
+                        "started_at": "2026-06-14T12:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0111"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-TASK-0112-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json#TASK-0112",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0112-claude-reconciliacion-hoja-de-ruta.md",
+                            "Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md"
+                        ],
+                        "started_at": "2026-06-14T12:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0112"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-TASK0111-context",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/eventlog.py",
+                            "runtime/budget.py",
+                            "runtime/metrics.py",
+                            "examples/runtime_cost_attribution_cases/",
+                            "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                            "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md"
+                        ],
+                        "started_at": "2026-06-14T15:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0111"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-TASK0113-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                            "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                            "Area_comun/specs/SPEC-0080-fix-chain-auth-prev-hash.md",
+                            "Area_comun/specs/SPEC-0079-cost-attribution-por-handoff.md",
+                            "Area_comun/decisions/DECISION-0033-cost-attribution-por-handoff.md",
+                            "runtime/eventlog.py",
+                            "runtime/budget.py",
+                            "runtime/metrics.py",
+                            "examples/runtime_cost_attribution_cases/",
+                            "Area_comun/mailbox/",
+                            "Area_comun/artifacts/ANALISTA-pasada-adversarial-3-cost-attribution.md"
+                        ],
+                        "started_at": "2026-06-14T14:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0113"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-ack-readonly-gate-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "ACK Claude coordination: Codex accepts future read-only invariant verification ownership for protocol_research post-GATE-DATASET coupling/exporters.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-gate-coupling-readonly-s9.md",
+                            "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-gate-coupling-readonly-s9.md"
+                        ],
+                        "started_at": "2026-06-14T18:26:00Z",
+                        "status": "released",
+                        "task_id": "DECISION-0035",
+                        "updated_at": "2026-06-14T18:26:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-activation-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                            "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                            "protocol.config.json",
+                            "CHANGELOG.md"
+                        ],
+                        "started_at": "2026-06-14T16:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0111"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-coord-architect-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "Coordinate with architect after operator request; ask whether Codex has GO or remains stand-down.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-coord-next-work.md"
+                        ],
+                        "started_at": "2026-06-14T18:20:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260614-ARCHITECT",
+                        "updated_at": "2026-06-14T18:20:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-fase0-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0114-claude-fase0-failure-modes-y-loop-governor.md"
+                        ],
+                        "started_at": "2026-06-14T17:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0114"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-mailbox-hygiene-standdown-codex",
+                        "owner": "Codex",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260614-STANDDOWN"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-mailbox-hygiene-standdown-releasefix-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "Technical claim to release malformed hygiene claim created without materialized scope.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-14T18:08:00Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260614-STANDDOWN",
+                        "updated_at": "2026-06-14T18:08:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-narration-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0116-claude-narracion-minima-dura.md"
+                        ],
+                        "started_at": "2026-06-14T23:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0116"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-promote-0100-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md"
+                        ],
+                        "started_at": "2026-06-14T23:15:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0100"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-reopen-0100-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md"
+                        ],
+                        "started_at": "2026-06-14T23:50:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0100"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-satellite-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0115-claude-satelite-protocol-research.md"
+                        ],
+                        "started_at": "2026-06-14T22:10:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0115"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-task0100-blocker-msg-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "Notify architect that TASK-0100 guard fired: .gitattributes LF breaks v1.1.0 manifest verification for existing SBOM-included bytes.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0100-blocked-release-manifest.md"
+                        ],
+                        "started_at": "2026-06-14T18:55:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T18:55:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-task0100-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "TASK-0100 .gitattributes LF release reproducibility; operator reactivated Codex with 5-min coordination cron.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0100",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0100",
+                            "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                            ".gitattributes",
+                            "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-GO-TASK-0100.md",
+                            "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-GO-TASK-0100.md",
+                            "Area_comun/handoffs/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T18:35:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0100",
+                        "updated_at": "2026-06-14T18:35:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-task0111-rereview-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "Codex re-review passed after TASK-0113 fix; advance TASK-0111 to in_review for architect closure/activation.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/CLAIMS.slim.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0111",
+                            "Area_comun/state/TASK_INDEX.slim.json",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0111",
+                            "Area_comun/state/PROJECT_STATE.slim.json",
+                            "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T03:04:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0111",
+                        "updated_at": "2026-06-14T03:04:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-task0111-review-coord-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "Coordinate Codex security review finding for TASK-0111 without touching implementation routes.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/CLAIMS.slim.json",
+                            "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-TASK0111-review.md",
+                            "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-TASK0111-review.md",
+                            "Area_comun/mailbox/open/MSG-20260614-Codex-to-Claude-TASK0111-review-blocker.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T00:18:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0111",
+                        "updated_at": "2026-06-14T00:18:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-task0113-codex",
+                        "expires_at": "2026-06-15",
+                        "notes": "TASK-0113 fix chain+auth prev_hash interaction and combined golden; rereview TASK-0111.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/CLAIMS.slim.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0113",
+                            "Area_comun/state/TASK_INDEX.slim.json",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0113",
+                            "Area_comun/state/PROJECT_STATE.slim.json",
+                            "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                            "Area_comun/specs/SPEC-0080-fix-chain-auth-prev-hash.md",
+                            "runtime/eventlog.py",
+                            "examples/chain_auth_combined_cases/",
+                            "examples/runtime_event_auth_cases/",
+                            "examples/chain_cases/",
+                            "examples/runtime_cost_attribution_cases/",
+                            "Area_comun/mailbox/open/MSG-20260614-Claude-to-Codex-TASK0113-fix-and-rereview.md",
+                            "Area_comun/mailbox/answered/MSG-20260614-Claude-to-Codex-TASK0113-fix-and-rereview.md",
+                            "Area_comun/handoffs/",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T02:51:10Z",
+                        "status": "released",
+                        "task_id": "TASK-0113",
+                        "updated_at": "2026-06-14T02:51:10Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260614-winddown",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            ".github/workflows/validate.yml",
+                            "Area_comun/mailbox/"
+                        ],
+                        "started_at": "2026-06-14T16:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0113"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-DECISION-0038",
+                        "expires_at": "2026-06-15T00:46:16Z",
+                        "notes": "Operator-approved hardening of minimal narration as primordial rule.",
+                        "owner": "Codex",
+                        "scope": [
+                            "AGENTS.md",
+                            "AGENTS.template.md",
+                            "Area_comun/decisions/DECISION-0038-narracion-minima-regla-primordial.md",
+                            "personal/Codex/STARTUP_PROMPT.md",
+                            "personal/Claude/STARTUP_PROMPT.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T22:46:16Z",
+                        "status": "released",
+                        "task_id": "DECISION-0038",
+                        "updated_at": "2026-06-14T22:46:16Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-TASK-0095",
+                        "expires_at": "2026-06-15T02:23:00Z",
+                        "notes": "TASK-0095 turn commit self-consistency: include task markdown side-effect paths in commit_turn.",
+                        "owner": "Codex",
+                        "scope": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "examples/runtime_loop_cases",
+                            "examples/runtime_real_adapter_cases",
+                            "examples/runtime_apply_cases",
+                            "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/mailbox/open/MSG-20260615-Claude-to-Codex-GO-TASK-0095.md",
+                            "Area_comun/mailbox/answered",
+                            "Area_comun/handoffs",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T22:23:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0095",
+                        "updated_at": "2026-06-14T22:23:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-TASK-0096",
+                        "expires_at": "2026-06-15T02:48:23Z",
+                        "notes": "TASK-0096 unique run_id per real orchestrator run; prevent run_log and metrics cross-run accumulation.",
+                        "owner": "Codex",
+                        "scope": [
+                            "runtime/orchestrator.py",
+                            "runtime/runlog.py",
+                            "runtime/metrics.py",
+                            "examples/runtime_loop_cases",
+                            "examples/runtime_real_adapter_cases",
+                            "examples/supervised_autonomy_cases",
+                            "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/mailbox/open/MSG-20260615-Claude-to-Codex-GO-TASK-0096.md",
+                            "Area_comun/mailbox/answered",
+                            "Area_comun/handoffs",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T22:48:23Z",
+                        "status": "released",
+                        "task_id": "TASK-0096",
+                        "updated_at": "2026-06-14T22:48:23Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-TASK-0096-llm-adapter",
+                        "expires_at": "2026-06-15T02:51:11Z",
+                        "notes": "Extend TASK-0096 claim for subprocess run-id regression coverage.",
+                        "owner": "Codex",
+                        "scope": [
+                            "examples/llm_adapter_cases/run_llm_adapter_cases.py",
+                            "examples/llm_adapter_cases"
+                        ],
+                        "started_at": "2026-06-14T22:51:11Z",
+                        "status": "released",
+                        "task_id": "TASK-0096",
+                        "updated_at": "2026-06-14T22:51:11Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-TASK0096-coord-delivery",
+                        "expires_at": "2026-06-14T23:55:38Z",
+                        "notes": "Coordinate TASK-0096 delivery with architect after operator request.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T22:55:38Z",
+                        "status": "released",
+                        "task_id": "TASK-0096",
+                        "updated_at": "2026-06-14T22:55:38Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-mailbox-hygiene",
+                        "expires_at": "2026-06-15T00:05:26Z",
+                        "notes": "Hygiene Codex outgoing TASK-0096 delivery FYI from open mailbox.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md",
+                            "Area_comun/mailbox/archived/MSG-20260615-Codex-to-Claude-TASK0096-delivery-coordination.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T23:05:26Z",
+                        "status": "released",
+                        "task_id": "none",
+                        "updated_at": "2026-06-14T23:05:26Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-notify-mailbox-anomaly-sync-coord",
+                        "expires_at": "2026-06-14T23:57:39Z",
+                        "notes": "Notify Claude of mailbox folder/status mismatch detected by validator.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/mailbox/open/MSG-20260615-Codex-to-Claude-mailbox-anomaly-sync-coordinacion.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T22:57:39Z",
+                        "status": "released",
+                        "task_id": "none",
+                        "updated_at": "2026-06-14T22:57:39Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-Codex-standdown",
+                        "expires_at": "2026-06-15T00:19:47Z",
+                        "notes": "Stand-down mailbox hygiene after trio closed.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/mailbox/open/MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md",
+                            "Area_comun/mailbox/archived/MSG-20260615-Claude-to-Codex-trio-cerrado-standdown.md",
+                            "Area_comun/state/CLAIMS.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-14T23:19:47Z",
+                        "status": "released",
+                        "task_id": "none",
+                        "updated_at": "2026-06-14T23:19:47Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-close-0095-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md"
+                        ],
+                        "started_at": "2026-06-15T00:40:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0095"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-close-0096-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md"
+                        ],
+                        "started_at": "2026-06-15T01:20:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0096"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-close-0100-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md"
+                        ],
+                        "started_at": "2026-06-15T00:15:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0100"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-promote-0095-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md"
+                        ],
+                        "started_at": "2026-06-15T00:20:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0095"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260615-promote-0096-Claude",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md"
+                        ],
+                        "started_at": "2026-06-15T00:45:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0096"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Arquitecto-close-0120",
+                        "expires_at": "2026-06-19T14:30:00Z",
+                        "notes": "Close TASK-0120 in_review->done (reviewer, maker!=checker reproducido verde) + reconcile version 1.13.0.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T10:30:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0120",
+                        "updated_at": "2026-06-19T10:30:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Arquitecto-promote-0043",
+                        "expires_at": "2026-06-19T13:40:00Z",
+                        "notes": "Promote DECISION-0043 + SPEC-0082 + TASK-0120 (loader HMAC event_auth fuera del repo). SemVer MINOR 1.12.0. #4 OFF.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T09:40:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0120",
+                        "updated_at": "2026-06-19T09:40:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Arquitecto-promote-0044",
+                        "expires_at": "2026-06-19T19:00:00Z",
+                        "notes": "Promote DECISION-0044 + SPEC-0083 + TASK-0121 (connector read-only SQL Server deny-by-default, ready). Carril B pieza 1, independiente de #4. #4 OFF.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T15:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0121",
+                        "updated_at": "2026-06-19T15:00:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-TASK-0117",
+                        "expires_at": "2026-06-19T13:20:00Z",
+                        "notes": "Build SPEC-0081 harness/goldens/smoke for TASK-0117 without enabling #4 or pilot.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0117",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0117",
+                            "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                            "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                            "Area_comun/decisions/DECISION-0041-precondicion-acoplamiento-readonly.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-GO-harness-ack.md",
+                            "Area_comun/handoffs/",
+                            "examples/attestation_health_cases/",
+                            "examples/attestation_negative_cases/",
+                            "examples/readonly_enforcement_cases/",
+                            ".github/workflows/validate.yml",
+                            "CHANGELOG.md",
+                            "protocol.config.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T07:20:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0117",
+                        "updated_at": "2026-06-19T07:20:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-TASK-0117-encendido-fase1",
+                        "expires_at": "2026-06-19T10:25:00Z",
+                        "notes": "TASK-0117 GO encendido Fase 1: provisioning + piloto acotado + rollback, dejando #4 OFF.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0117",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0117",
+                            "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                            "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-encendido-fase1-handoff.md",
+                            "Area_comun/handoffs/HANDOFF-TASK-0117-codex-to-arquitecto-encendido-fase1.md",
+                            "protocol.config.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T08:25:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0117",
+                        "updated_at": "2026-06-19T08:25:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-TASK-0119",
+                        "expires_at": "2026-06-19T06:25:00Z",
+                        "notes": "Implement TASK-0119 mailbox claim file-scope enforcement guard and goldens.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0119",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0119",
+                            "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md",
+                            "Area_comun/handoffs/",
+                            "runtime/submit_intent.py",
+                            "scripts/validate_collaboration_state.py",
+                            "scripts/validate_collaboration_state.ps1",
+                            "examples/mailbox_claim_scope_cases/",
+                            ".github/workflows/validate.yml",
+                            "CHANGELOG.md",
+                            "protocol.config.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T02:25:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0119",
+                        "updated_at": "2026-06-19T02:25:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-TASK-0120",
+                        "expires_at": "2026-06-19T17:25:00Z",
+                        "notes": "Implement TASK-0120 event_auth HMAC secret resolution by secret_file/secret_env; keep #4 OFF.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0120",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0120",
+                            "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+                            "Area_comun/specs/SPEC-0082-event-auth-secret-resolution.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-impl-TASK-0120.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-impl-TASK-0120.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0120-delivery.md",
+                            "Area_comun/handoffs/HANDOFF-TASK-0120-codex-to-arquitecto-1.md",
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "scripts/validate_collaboration_state.py",
+                            "examples/event_auth_secret_resolution_cases/",
+                            ".github/workflows/validate.yml",
+                            "CHANGELOG.md",
+                            "protocol.config.json",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T13:25:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0120",
+                        "updated_at": "2026-06-19T13:25:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-carril-A-coord",
+                        "expires_at": "2026-06-19T03:05:00Z",
+                        "notes": "Coordinate Codex adversarial review verdict for Arquitecto Carril A drafts after operator request.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-review.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T02:05:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-CARRIL-A-REVIEW",
+                        "updated_at": "2026-06-19T02:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-carril-A-estado-reply",
+                        "expires_at": "2026-06-19T07:21:00Z",
+                        "notes": "Reply to Arquitecto Carril A status request without activating #4.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-informe-estado.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T06:51:00Z",
+                        "status": "released",
+                        "task_id": "PROMO-20260619-CARRIL-A",
+                        "updated_at": "2026-06-19T06:51:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-carril-A-reverify",
+                        "expires_at": "2026-06-19T01:48:00Z",
+                        "notes": "Respond to operator Carril A re-verification request; read-only verdict, no promotion or flag activation.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Operador-to-Codex-carril-A-reverify.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Codex-carril-A-reverify.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Operador-carril-A-reverify-verdict.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T00:48:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-CARRIL-A-REVERIFY",
+                        "updated_at": "2026-06-19T00:48:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-feasibility-0043",
+                        "expires_at": "2026-06-19T09:35:00Z",
+                        "notes": "Factibilidad codigo-invariante DRAFT DECISION-0043 / SPEC-0082; no promover ni encender #4.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-feasibility-0043.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T09:05:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0120",
+                        "updated_at": "2026-06-19T09:05:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-feasibility-0043-encoding",
+                        "expires_at": "2026-06-19T09:35:00Z",
+                        "notes": "Fix ASCII channel in Codex feasibility response.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-feasibility-0043.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T09:18:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0120",
+                        "updated_at": "2026-06-19T09:18:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-promo-coord-reply",
+                        "expires_at": "2026-06-19T02:08:00Z",
+                        "notes": "Reply to Arquitecto promotion coordination request after claim window cleared.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-promocion-coord.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-promocion-coord.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-promocion-ok.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T01:08:00Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-CARRIL-A-REVERIFY",
+                        "updated_at": "2026-06-19T01:08:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-standdown-TASK-0117-encoding",
+                        "expires_at": "2026-06-19T15:10:00Z",
+                        "notes": "Fix ASCII/BOM on archived TASK-0117 standdown FYI.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T14:48:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0117",
+                        "updated_at": "2026-06-19T14:48:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-standdown-TASK-0117-monitor",
+                        "expires_at": "2026-06-19T15:10:00Z",
+                        "notes": "Archive TASK-0117 standdown FYI and stand down Codex monitor for TASK-0117.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                            "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-TASK-0117-standdown.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T14:40:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0117",
+                        "updated_at": "2026-06-19T14:40:00Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-Codex-work-monitor",
+                        "expires_at": "2026-06-19T12:01:27Z",
+                        "notes": "Work monitor mailbox hygiene for Codex messages.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-113127-Codex-to-Arquitecto-no-response-TASK-0117.md",
+                            "runtime/state/events.jsonl",
+                            "runtime/state/snapshot.json"
+                        ],
+                        "started_at": "2026-06-19T11:31:27Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-WORK-MONITOR",
+                        "updated_at": "2026-06-19T11:31:27Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-close-0119-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Cierre TASK-0119 (guard mailbox file-scoped) tras revision maker!=checker (golden 5/5 + prueba negativa en vivo) + reconciliar PROJECT_STATE.version a 1.11.0. GO del operador.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md"
+                        ],
+                        "started_at": "2026-06-19T06:20:12Z",
+                        "status": "released",
+                        "task_id": "TASK-0119"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-coord-carrilA-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Coordinacion revision paralela Carril A: peticion codigo-invariante a Codex + ACK/ajuste CR1 a Analista.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-review-carril-A.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Analista-ack-carril-A.md"
+                        ],
+                        "started_at": "2026-06-19T00:09:19Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-CARRILA-REVIEW"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-feasibility-0043-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Coordinar pasada de factibilidad Codex sobre cargador DECISION-0043/SPEC-0082 + reporte de integridad al operador. Claim FILE-SCOPED.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-feasibility-0043.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-integridad-y-secuencia.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-cargador-0043.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Codex-to-Arquitecto-carril-A-encendido-fase1-handoff.md"
+                        ],
+                        "started_at": "2026-06-19T08:47:23Z",
+                        "status": "released",
+                        "task_id": "TASK-0120"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-go-encendido-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "GO encendido #4 Fase 1: coordinar provisioning+piloto con Codex; ack operador. Claim FILE-SCOPED.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-GO-encendido-ack.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-encender-y-lanzar.md"
+                        ],
+                        "started_at": "2026-06-19T08:15:21Z",
+                        "status": "released",
+                        "task_id": "TASK-0117"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-informe-codex-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Peticion de informe de estado a Codex (regla operador) + hygiene promocion-done. Claim FILE-SCOPED (guard DECISION-0042).",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                            "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Operador-carril-A-promocion-done.md"
+                        ],
+                        "started_at": "2026-06-19T06:28:22Z",
+                        "status": "released",
+                        "task_id": "PROMO-20260619-CARRIL-A"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-mailbox-hygiene-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Higiene de mailbox post-convergencia Carril A: archivar consumidos y mover contestados a answered (orden del operador).",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/answered/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-19T00:30:02Z",
+                        "status": "released",
+                        "task_id": "MAILBOX-HYGIENE-20260619"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-mirror-stall-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Escalar al operador: mirror no aplico PROMOTE-0043 en varios ciclos; esta sesion SI persiste (origin==HEAD, drift 0). Pregunta bloqueante. Claim FILE-SCOPED.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-mirror-stall.md"
+                        ],
+                        "started_at": "2026-06-19T09:41:21Z",
+                        "status": "released",
+                        "task_id": "TASK-0120"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-promo-coord-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Coordinacion de promocion Carril A con Codex + fix anomalia status/folder gate-codex (DECISION-0018).",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/",
+                            "Area_comun/mailbox/answered/",
+                            "Area_comun/mailbox/archived/"
+                        ],
+                        "started_at": "2026-06-19T01:05:15Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-CARRIL-A-REVERIFY"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-promo-hygiene-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Higiene post-promocion + respuesta a operador/Codex. Claim FILE-SCOPED (DECISION-0042).",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-promocion-done.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-promovido.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-promocion.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-coord-crons.md",
+                            "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-promocion-coord.md",
+                            "Area_comun/mailbox/archived/MSG-20260619-Codex-to-Arquitecto-carril-A-promocion-ok.md"
+                        ],
+                        "started_at": "2026-06-19T01:32:52Z",
+                        "status": "released",
+                        "task_id": "PROMO-20260619-CARRIL-A"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-promote-carrilA-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Promocion Carril A (GO operador + OK Codex): DECISION-0039/0040/0041/0042 + SPEC-0081 + TASK-0117/0118/0119 + v1.10.0. #4 OFF.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/decisions/DECISION-0039-activacion-atestacion-autoria.md",
+                            "Area_comun/decisions/DECISION-0040-gate-dataset.md",
+                            "Area_comun/decisions/DECISION-0041-precondicion-acoplamiento-readonly.md",
+                            "Area_comun/decisions/DECISION-0042-mailbox-claims-file-scoped.md",
+                            "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                            "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                            "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md",
+                            "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md"
+                        ],
+                        "started_at": "2026-06-19T01:29:10Z",
+                        "status": "released",
+                        "task_id": "PROMO-20260619-CARRIL-A"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-ready-0117-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "GO operador opcion 1: promover TASK-0117 proposed->ready para construir infraestructura SPEC-0081 (#4 OFF). N=20 fijado. Claim FILE-SCOPED.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json",
+                            "Area_comun/state/PROJECT_STATE.json",
+                            "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                            "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-GO-harness-ack.md"
+                        ],
+                        "started_at": "2026-06-19T07:10:16Z",
+                        "status": "released",
+                        "task_id": "TASK-0117"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-standdown-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Stand-down de Codex y Analista tras convergencia de la revision Carril A (orden del operador).",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-standdown.md",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Analista-standdown.md"
+                        ],
+                        "started_at": "2026-06-19T00:18:39Z",
+                        "status": "released",
+                        "task_id": "COORD-20260619-STANDDOWN"
+                    },
+                    {
+                        "claim_id": "CLAIM-20260619-status0117-Arquitecto",
+                        "expires_at": "2026-06-20",
+                        "notes": "Responder estado TASK-0117 a Codex + fix anomalia de formato (requires_response sin question / task_id partido). Claim FILE-SCOPED.",
+                        "owner": "Arquitecto",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-status-0117.md",
+                            "Area_comun/mailbox/answered/MSG-20260619-092823-Codex-to-Arquitecto-no-response-TASK-0117.md"
+                        ],
+                        "started_at": "2026-06-19T09:35:17Z",
+                        "status": "released",
+                        "task_id": "TASK-0117"
+                    },
+                    {
+                        "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
+                        "expires_at": "2026-06-13",
+                        "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/handoffs/HANDOFF-SESION-20260612-claude-analisis-doctoral.md",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-12T22:07:20Z",
+                        "status": "released",
+                        "task_id": "DECISION-0029"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0091-codex-runtime",
+                        "expires_at": "2026-06-10",
+                        "notes": "Acquired by runtime orchestrator before routed turn.",
+                        "owner": "Codex",
+                        "scope": [
+                            "Area_comun/state/CLAIMS.json",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0091",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0091",
+                            "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+                            "examples/neutrality_scan_cases/README.md"
+                        ],
+                        "started_at": "2026-06-09T21:50:50Z",
+                        "status": "released",
+                        "task_id": "TASK-0091",
+                        "updated_at": "2026-06-09T21:50:50Z"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
+                        "expires_at": "2026-06-14",
+                        "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md",
+                            "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0104",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0104",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-12T23:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0104"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0105-claude-registro",
+                        "expires_at": "2026-06-15",
+                        "notes": "Registro de TASK-0105 (implementacion slim-views, owner Codex) bajo DECISION-0030 / SPEC-0077. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/tasks/TASK-0105-codex-slim-views.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0105",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0105",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-13T00:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0105"
+                    },
+                    {
+                        "claim_id": "CLAIM-TASK-0106-claude-registro",
+                        "expires_at": "2026-06-15",
+                        "notes": "Registro de TASK-0106 (compaction + sub-agentes, owner Codex) bajo DECISION-0030 / SPEC-0078. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+                        "owner": "Claude",
+                        "scope": [
+                            "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md",
+                            "Area_comun/state/TASK_INDEX.json#TASK-0106",
+                            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0106",
+                            "Area_comun/state/CLAIMS.json"
+                        ],
+                        "started_at": "2026-06-13T00:00:00Z",
+                        "status": "released",
+                        "task_id": "TASK-0106"
+                    }
+                ],
+                "schema_version": "1.0",
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            },
+            "project_state": {
+                "active_tasks": [
+                    {
+                        "id": "TASK-0095",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0096",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0099",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT."
+                    },
+                    {
+                        "id": "TASK-0100",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "TASK-0100 - .gitattributes eol=lf (rescoped a releases futuros + doc honesta v1.1.0, DECISION-0037)"
+                    },
+                    {
+                        "id": "TASK-0101",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)"
+                    },
+                    {
+                        "id": "TASK-0102",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)"
+                    },
+                    {
+                        "id": "TASK-0103",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)"
+                    },
+                    {
+                        "id": "TASK-0104",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)"
+                    },
+                    {
+                        "id": "TASK-0105",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Slim-views del estado y politica de cold-start just-in-time (DECISION-0030 / SPEC-0077)"
+                    },
+                    {
+                        "id": "TASK-0106",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)"
+                    },
+                    {
+                        "id": "TASK-0109",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Revision adversarial SOTA del contexto del arquitecto (consolidacion multi-voz)"
+                    },
+                    {
+                        "id": "TASK-0110",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)"
+                    },
+                    {
+                        "id": "TASK-0111",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)"
+                    },
+                    {
+                        "id": "TASK-0112",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Reconciliacion de la hoja de ruta vs estado real del repo"
+                    },
+                    {
+                        "id": "TASK-0113",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado"
+                    },
+                    {
+                        "id": "TASK-0114",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)"
+                    },
+                    {
+                        "id": "TASK-0115",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)"
+                    },
+                    {
+                        "id": "TASK-0116",
+                        "owner": "Claude",
+                        "status": "done",
+                        "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)"
+                    },
+                    {
+                        "id": "TASK-0117",
+                        "owner": "Codex",
+                        "status": "in_review",
+                        "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)"
+                    },
+                    {
+                        "id": "TASK-0118",
+                        "owner": "Codex",
+                        "status": "proposed",
+                        "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+                    },
+                    {
+                        "id": "TASK-0119",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
+                    },
+                    {
+                        "id": "TASK-0120",
+                        "owner": "Codex",
+                        "status": "done",
+                        "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)"
+                    },
+                    {
+                        "id": "TASK-0121",
+                        "owner": "Codex",
+                        "status": "ready",
+                        "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)"
+                    }
+                ],
+                "agents": {
+                    "architect": "Claude",
+                    "human_owner": "operador humano",
+                    "implementer": "Codex"
+                },
+                "created_at": "2026-06-05",
+                "decisions": [
+                    "DECISION-0001-versionado",
+                    "DECISION-0002-core-perfiles-profesionales",
+                    "DECISION-0003-adopted-profiles-contract",
+                    "DECISION-0004-sdd-pipeline-y-cierre",
+                    "DECISION-0005-comunicacion-compacta-token-efficient",
+                    "DECISION-0006-robustez-operacional",
+                    "DECISION-0007-claim-before-shared-draft",
+                    "DECISION-0008-eficiencia-de-tokens",
+                    "DECISION-0009-runtime-orquestacion",
+                    "DECISION-0010-licenciamiento-propietario",
+                    "DECISION-0011-claims-por-fila-estado",
+                    "DECISION-0012-ascii-canal-entre-agentes",
+                    "DECISION-0013-liveness-y-visibilidad",
+                    "DECISION-0014-poda-sistematica",
+                    "DECISION-0015-n-agent-registry-y-capacidades",
+                    "DECISION-0016-areas-personales-onboarding",
+                    "DECISION-0017-event-log-writer-vivo",
+                    "DECISION-0018-notificacion-de-anomalias",
+                    "DECISION-0019-distribucion-runtime",
+                    "DECISION-0020-regla-anti-colision",
+                    "DECISION-0021-activacion-wrapper-llm",
+                    "DECISION-0022-runtime-escritor-autoritativo",
+                    "DECISION-0023-firma-release",
+                    "DECISION-0024-autonomia-supervisada",
+                    "DECISION-0025-integracion-agent-teams-bridge",
+                    "DECISION-0026-memoria-post-commit",
+                    "DECISION-0027-activacion-sa4-piloto",
+                    "DECISION-0028",
+                    "DECISION-0029",
+                    "DECISION-0031",
+                    "DECISION-0032",
+                    "DECISION-0033",
+                    "DECISION-0034",
+                    "DECISION-0035",
+                    "DECISION-0036",
+                    "DECISION-0037",
+                    "DECISION-0039",
+                    "DECISION-0040",
+                    "DECISION-0041",
+                    "DECISION-0042",
+                    "DECISION-0043",
+                    "DECISION-0044"
+                ],
+                "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
+                "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
+                "next_actions": [
+                    "[HISTORICO PODADO] 123 next_actions historicas condensadas por el prune (DECISION-0014); trazabilidad en git history + memoria de Claude.",
+                    ">>> TASK-0083 DONE (bridge Agent Teams Capas A+B, ratif. adversarial Claude 2026-06-08) -> DECISION-0025 implementada en su alcance A+B (gate-enforcement + audit append-only, off-by-default; Capa C diferida). ULTIMA transicion por edicion manual: a continuacion el ARQUITECTO re-genesisa el repo vivo a drift 0 + enciende event_state.enforce=true (authoritative OFF) -> el gate de sombra duro fuerza que AMBOS lazos emitan toda transicion por submit_intent --intents (ledger_ops.py); edit manual = HARD-FAIL. Decoupled del bridge y del flip authoritative. Directiva a Codex enviada. PENDIENTE flip authoritative (separado, supervisado) cuando ambos lazos esten verificados en submit_intent.",
+                    "TASK-0085 DONE (ratif. adversarial): intent project_narrative + protocol_prune + prune via submit_intent verificados EN VIVO drift 0; cierra el gap de next_actions/prune bajo enforce; prune descongelado (maintenance.enabled=true solo instancia viva, template intacto). Ventana de observacion de enforce: pendiente declarar estable (>=6 transacciones reales ambos lazos, drift 0, sin hard-fails falsos). PENDIENTE GATE: GO explicito del operador para flip authoritative=true (su propia ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "FLIP authoritative=true (GO operador 2026-06-08): runtime-authoritative mode formal (enabled+materialize+enforce+authoritative). Pre-checks: replay==hot (hash identico), root-cause anomalia seq38 = temporal (prosa stale vs log creciente), NO divergencia JSON-vs-log; rollback ensayado lossless (state hash sin cambio). NOTA: la garantia escritor-unico (JSON==log, edit manual hard-failea) la provee ENFORCE; authoritative es marcador declarativo (sin callers de comportamiento) -> opcional cablear teeth como follow-up. Ventana de observacion authoritative ABIERTA; rollback=authoritative=false. PENDIENTE: GO operador para SA.4 (su ventana). authoritative/SA.4/CapaC nunca juntos.",
+                    "TASK-0086 DONE (ratif. adversarial): guard event_state_config_error (authoritative=>enforce=>materialize=>enabled, tier runtime) cableado en validador py/ps + submit_intent + apply -> RECHAZA authoritative-sin-enforce; mata el false-secure. + fix apply_gate (drift antes de materializar). PRE-REQ SA.4 #1 cumplido. #2 TASK-0087 registrada (proposed, bloqueante-adopcion). #3 ventana authoritative: evaluar estabilidad.",
+                    "TASK-0088 DONE (SA.4 paso 1, ratif. adversarial): lock-lift del invoker real multi-turno OFF-BY-DEFAULT (orchestrator.py condicionado; registro vivo vacio -> cerrojo --once intacto, byte-equivalente); golden determinista 9; ensayo de rollback del lock-lift verde (lifts solo con registro, off restaura, replay==hot). PASOS 1+2 COMPLETOS. PENDIENTE: MICRO-GO del operador para pasos 3+4 = DECISION-0027 (activacion, MINOR+CHANGELOG) + poblar runtime.real_invoker + runtime.supervised_autonomy + PILOTO (nota prosa en examples/neutrality_scan_cases/README.md, caps max_turns=2/checkpoint_every_k=1/wall_clock=180000/budget+deadline/PAUSE, invocacion real). NO poblar registro hasta el micro-GO. Capa C OFF.",
+                    "TASK-0089 DONE (wrapper fino vendor-neutral del invoker, ratif. adversarial): runtime/llm_turn_wrapper.py (stdin->backend no interactivo->extrae+valida turn-report JSON tolerante fences/prosa->emite limpio o falla limpio, timeout<120s nunca cuelga); golden 8/8 + en CI; preset claude->wrapper; vendor-neutral. SA.4 sigue DE-ARMADO. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper -> turn-report schema-valido); si limpio, re-armar registro + piloto (nota examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint tras turno 1). NO re-armar ni piloto sin smoke limpio. Capa C OFF.",
+                    "TASK-0090 DONE (wrapper resolucion cross-platform via shutil.which, ratif. adversarial): bare 'claude -p' resuelve y corre; golden 10/10; RE-SMOKE END-TO-END limpio (preset->wrapper->claude real -> turn-report schema-valido). Path del piloto PROBADO. SA.4 sigue DE-ARMADO. LISTO para re-armar registro (enabled=true) + DISPARAR PILOTO (orquestador real invoker, tarea-objetivo nota en examples/neutrality_scan_cases/README.md, caps 2/1/180000, checkpoint OBLIGATORIO tras turno 1). enforce/authoritative intactos; Capa C OFF.",
+                    "TASK-0092 DONE (EJECUTADA POR CLAUDE, Codex agente down): invoker codex implementer integrado (preset->wrapper->codex exec workspace-write + reasoning_effort=low) + build_prompt endurecido. SMOKE REAL DE TURNO COMPLETO LIMPIO: codex edito un README + turn-report schema-valido aceptado (agent=Codex casa implementer), ~44s. Goldens verdes. SA.4 sigue DE-ARMADO. LISTO para el go del operador a re-armar (preset codex) + re-disparar piloto (TASK-0091 blocked->ready via task_upsert; caps 2/1/180000; checkpoint tras turno 1)."
+                ],
+                "open_questions": [],
+                "phase": {
+                    "exit_criteria": [
+                        "SDD formalizado y publicado como v0.4.0 (TASK-0008..0013)",
+                        "Validador SDD aditivo (no rompe historicas ni ejemplos), con paridad .py/.ps1",
+                        "Backlog de adopcion/expansion definido cuando surja",
+                        "Core sigue neutral en cada cambio"
+                    ],
+                    "goal": "Apoyar la adopcion del protocolo y sus perfiles en instancias reales, anadir mas perfiles/ejemplos/docs segun necesidad y mantener el core, siempre de forma aditiva y neutral. Sin trabajo incompatible en curso.",
+                    "id": "P2",
+                    "name": "Adopcion y expansion",
+                    "previous_phase": {
+                        "closed_with": "v0.3.0",
+                        "exit_criteria_met": [
+                            "Arquitectura core/profiles/examples (DECISION-0002, TASK-0005)",
+                            "Perfil dotnet_enterprise publicado (TASK-0006)",
+                            "adopted_profiles + validadores con conciencia de perfiles, aditivo y con paridad (DECISION-0003, TASK-0007)",
+                            "Instancia core + perfil (examples/dotnet_enterprise_instance) verde + golden cases",
+                            "v0.3.0 publicada"
+                        ],
+                        "id": "P1",
+                        "name": "Arquitectura de perfiles profesionales",
+                        "status": "completed"
+                    },
+                    "subphase": {
+                        "backlog": [
+                            "TASK-0008",
+                            "TASK-0009",
+                            "TASK-0010",
+                            "TASK-0011",
+                            "TASK-0012",
+                            "TASK-0013"
+                        ],
+                        "closed_with": "v0.4.0",
+                        "exit_criteria_met": [
+                            "DECISION-0004 + diseno + specs (TASK-0008)",
+                            "Plantillas de protocolo SDD (TASK-0009)",
+                            "specs/ + plantillas reutilizables (TASK-0010)",
+                            "Validadores SDD config-gated con paridad .py/.ps1 + golden cases (TASK-0011)",
+                            "examples/minimal_sdd_instance verde con sdd.enabled (TASK-0012)",
+                            "Onboarding SDD documentado (TASK-0013)",
+                            "v0.4.0 publicada"
+                        ],
+                        "goal": "Adoptar SDD como gate previo a implementacion (DECISION-0004): spec + pipeline + criterios de cierre antes de ejecutar. Publicado aditivamente como v0.4.0; config-gated; sin migracion retroactiva.",
+                        "id": "P2.SDD",
+                        "name": "Formalizacion SDD (Spec-Driven Development)",
+                        "status": "completed"
+                    }
+                },
+                "project": "multi_agent_project_protocol",
+                "released_versions": [
+                    "v0.1.0",
+                    "v0.2.0",
+                    "v0.3.0",
+                    "v0.4.0",
+                    "v0.5.0",
+                    "v0.6.0",
+                    "v0.7.0",
+                    "v0.8.0",
+                    "v0.9.0",
+                    "v0.10.0",
+                    "v1.0.0",
+                    "v1.1.0"
+                ],
+                "risks": [
+                    "Drift entre este repo y las instancias (p.ej. bot_spot_ai_strategy_pack): el protocolo NO se propaga automaticamente; las instancias lo adoptan via decision. MITIGACION EN CURSO: DECISION-0006 sec4 + TASK-0019 (upgrade asistido) bajan el costo de detectar/razonar el delta sin automatizar la adopcion.",
+                    "Portabilidad de runtime: los harness exigian python Y powershell a la vez y caian por entorno. MITIGACION EN CURSO: DECISION-0006 sec1 + TASK-0018 (skip con aviso) y sec2 CI con ambos runtimes.",
+                    "Grieta contrato (AGENTS.md sec5) vs CI: el scan de neutralidad y el validador .ps1/harness no corrian en CI. MITIGACION EN CURSO: DECISION-0006 sec2-sec3 + TASK-0017.",
+                    "Arranque concurrente Claude/Codex en el bootstrap: Codex creo su area privada y espero el bootstrap (sin colision).",
+                    "Colisiones por borradores en rutas compartidas sin ownership explicito. MITIGACION: DECISION-0007 exige claim activo antes de crear/editar borradores compartidos.",
+                    "Runtime ARMADO en la instancia viva (runtime.enabled:true): invocar 'orchestrator --run' apuntando al repo vivo escribe y commitea de verdad. MITIGACION: solo replay adapter (sin agentes reales), sin automation que lo dispare, gate por turno + 1 commit/turno + paradas humanas duras; template sigue OFF; reversible a false."
+                ],
+                "source_of_truth": "AGENTS.md",
+                "status": "active",
+                "updated_at": "2026-06-09",
+                "updated_by": "Claude",
+                "version": "1.13.0"
+            },
+            "task_index": {
+                "legend": {
+                    "owner": [
+                        "Claude",
+                        "Codex",
+                        "operador humano"
+                    ],
+                    "phase": [
+                        "P0 = enriquecimiento del protocolo",
+                        "P1 = arquitectura core/perfiles profesionales (target v0.3.0)",
+                        "P2 = adopcion y expansion; subfase P2.SDD = formalizacion SDD (target v0.4.0)"
+                    ],
+                    "priority": [
+                        "low",
+                        "normal",
+                        "high",
+                        "critical"
+                    ],
+                    "sdd_note": "SDD obligatorio (6 campos) para implementation/refactor/integration/migration/security/release; discovery/analysis/review/documentation/triage solo exigen objective/expected_output/question_to_resolve/closure_criterion. Ver DECISION-0004. Tareas TASK-0001..0007 son pre-SDD (sin migracion retroactiva).",
+                    "status": [
+                        "proposed",
+                        "ready",
+                        "claimed",
+                        "in_progress",
+                        "in_review",
+                        "done",
+                        "blocked",
+                        "cancelled"
+                    ],
+                    "type": [
+                        "implementation",
+                        "refactor",
+                        "integration",
+                        "migration",
+                        "security",
+                        "release",
+                        "discovery",
+                        "analysis",
+                        "review",
+                        "documentation",
+                        "triage"
+                    ]
+                },
+                "schema_version": "1.0",
+                "tasks": [
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0095-codex-turn-commit-incluye-task-md.md",
+                        "id": "TASK-0095",
+                        "linked_decisions": [
+                            "DECISION-0022"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "TASK-0093",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/apply.py",
+                            "runtime/vcs.py",
+                            "runtime/submit_intent.py",
+                            "examples/runtime_loop_cases/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #1 del re-pilot SA.4): commit de turno self-consistente (incluir el task .md mutado por las transiciones). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "Commits de turno self-consistentes: el commit del orquestador incluye el task .md cuyo frontmatter muto submit_intent en una transicion (hoy queda dirty; visto en el re-pilot TASK-0091.md). Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "examples/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0096-codex-run-id-unico-por-corrida.md",
+                        "id": "TASK-0096",
+                        "linked_decisions": [
+                            "DECISION-0013"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0091",
+                            "DECISION-0013"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/metrics.py",
+                            "runtime/runlog.py",
+                            "examples/"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up #2 del re-pilot SA.4): run_id unico por corrida (evita el ruido de agregacion de metricas; run_id colisiono con el smoke en el re-pilot). OFF-PILOT, pequena. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "run_id unico por corrida del orquestador (evita acumulacion del run_log y agregacion cruzada de metricas; en el re-pilot el run_id colisiono con el smoke). Determinismo de goldens preservado. Golden + regresiones. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-10",
+                        "deliverables": [
+                            "scripts/sign_release.py",
+                            "scripts/verify_release.py",
+                            "scripts/sign_release.ps1",
+                            "scripts/verify_release.ps1",
+                            "examples/release_sign_cases/run_release_sign_cases.py",
+                            "README_INSTANCIACION.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0099-codex-backend-firma-externo-configurable.md",
+                        "id": "TASK-0099",
+                        "linked_decisions": [
+                            "DECISION-0023",
+                            "DECISION-0021",
+                            "DECISION-0001",
+                            "DECISION-0006"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "SPEC-0073",
+                            "SPEC-0061",
+                            "TASK-0075",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            "scripts/sign_release.py",
+                            "scripts/verify_release.py",
+                            "scripts/sign_release.ps1",
+                            "scripts/verify_release.ps1",
+                            "examples/release_sign_cases/run_release_sign_cases.py",
+                            "README_INSTANCIACION.md"
+                        ],
+                        "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0073, GO del operador). Backend de firma external-command configurable (DECISION-0023 sec.4); hoy sign/verify rechazan backend != fixture. Aditivo MINOR off-by-default, vendor-neutral, sin secretos, golden fake/recorded determinista. NO runtime flip; SA.4/Capa C OFF.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0073-backend-firma-externo-configurable.md",
+                        "status": "done",
+                        "title": "Backend de firma external-command configurable en sign_release.py + verify_release.py (DECISION-0023 sec.4): el emisor provee el comando de firma/verificacion por flags CLI (cosign keyless NO hardcodeado), conservando subject_digest=manifest.sbom_hash y el fixture HMAC intacto; golden fake/recorded determinista sin red ni claves; paridad .py/.ps1; docs con receta de verificacion. Aditivo MINOR off-by-default, vendor-neutral, sin secretos. OFF-PILOT.",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-10",
+                        "deliverables": [
+                            ".gitattributes"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0100-codex-gitattributes-eol-lf.md",
+                        "id": "TASK-0100",
+                        "linked_decisions": [
+                            "DECISION-0023",
+                            "DECISION-0006",
+                            "DECISION-0019",
+                            "DECISION-0037"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "TASK-0099",
+                            "SPEC-0075",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            ".gitattributes",
+                            "scripts/generate_sbom.py",
+                            "scripts/verify_release.py"
+                        ],
+                        "review": "PROPOSED (Claude 2026-06-10, follow-up de robustez tras el corte v1.1.0; el operador pidio encolarlo). spec_id=SPEC-0075. .gitattributes eol=lf para verificacion de release reproducible cross-platform; .gitattributes NO esta en el SBOM (no cambia el sbom_hash firmado); si renormalize alterara bytes SBOM-included -> blocked. OFF-PILOT. Promover a ready+GO cuando el operador lo indique.",
+                        "sdd_required": true,
+                        "spec_id": "Area_comun/specs/SPEC-0075-gitattributes-eol-lf-release-reproducible.md",
+                        "status": "done",
+                        "title": "TASK-0100 - .gitattributes eol=lf (rescoped a releases futuros + doc honesta v1.1.0, DECISION-0037)",
+                        "type": "implementation",
+                        "updated_at": "2026-06-10"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "examples/chain_cases/"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0101-codex-eventlog-prev-hash.md",
+                        "id": "TASK-0101",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0017",
+                            "DECISION-0022",
+                            "DECISION-0028"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0017",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "examples/chain_cases/"
+                        ],
+                        "status": "done",
+                        "title": "prev_hash encadenado en el eventlog (DECISION-0029 pieza 2a)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/validate_collaboration_state.py",
+                            "examples/agent_signature_cases/"
+                        ],
+                        "depends_on": [
+                            "TASK-0101"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0102-codex-firma-por-agente.md",
+                        "id": "TASK-0102",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0015",
+                            "DECISION-0021",
+                            "DECISION-0023"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0015",
+                            "DECISION-0023"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "runtime/llm_turn_wrapper.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/validate_collaboration_state.py",
+                            "examples/agent_signature_cases/"
+                        ],
+                        "status": "done",
+                        "title": "Firma por agente: atestacion de autoria (DECISION-0029 pieza 2b)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/validate_collaboration_state.py",
+                            "examples/anchor_cases/"
+                        ],
+                        "depends_on": [
+                            "TASK-0101"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0103-codex-anclaje-externo.md",
+                        "id": "TASK-0103",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0023",
+                            "DECISION-0019"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "DECISION-0023",
+                            "DECISION-0019"
+                        ],
+                        "relevant_files": [
+                            "runtime/eventlog.py",
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/validate_collaboration_state.py",
+                            "examples/anchor_cases/"
+                        ],
+                        "status": "done",
+                        "title": "Anclaje externo periodico de la cadena (DECISION-0029 pieza 2c)",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-12",
+                        "deliverables": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                        "id": "TASK-0104",
+                        "linked_decisions": [
+                            "DECISION-0029",
+                            "DECISION-0005",
+                            "DECISION-0008",
+                            "DECISION-0022",
+                            "DECISION-0023"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0029",
+                            "TASK-0101",
+                            "TASK-0102",
+                            "TASK-0103"
+                        ],
+                        "relevant_files": [
+                            "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md"
+                        ],
+                        "status": "done",
+                        "title": "Analisis SOTA y viabilidad doctoral de la metodologia (tipo analysis, registro retroactivo)",
+                        "type": "analysis",
+                        "updated_at": "2026-06-12"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-13",
+                        "deliverables": [
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "Area_comun/state/TASK_INDEX.slim.template.json",
+                            "scripts/measure_context_cost.py",
+                            "examples/slim_view_cases"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0105-codex-slim-views.md",
+                        "id": "TASK-0105",
+                        "linked_decisions": [
+                            "DECISION-0030",
+                            "DECISION-0008",
+                            "DECISION-0014",
+                            "DECISION-0017",
+                            "DECISION-0022"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0030",
+                            "DECISION-0008",
+                            "DECISION-0014",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/protocol_replay.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json",
+                            "scripts/measure_context_cost.py"
+                        ],
+                        "spec_id": "SPEC-0077",
+                        "status": "done",
+                        "title": "Slim-views del estado y politica de cold-start just-in-time (DECISION-0030 / SPEC-0077)",
+                        "type": "implementation",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-13",
+                        "deliverables": [
+                            "runtime/orchestrator.py",
+                            "runtime/runlog.py",
+                            "protocol.config.json",
+                            "scripts/measure_context_cost.py",
+                            "examples/context_policy_cases"
+                        ],
+                        "depends_on": [
+                            "TASK-0105"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md",
+                        "id": "TASK-0106",
+                        "linked_decisions": [
+                            "DECISION-0030",
+                            "DECISION-0009",
+                            "DECISION-0024",
+                            "DECISION-0022",
+                            "DECISION-0017"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "medium",
+                        "relates_to": [
+                            "DECISION-0030",
+                            "DECISION-0009",
+                            "DECISION-0024",
+                            "DECISION-0022"
+                        ],
+                        "relevant_files": [
+                            "runtime/orchestrator.py",
+                            "runtime/runlog.py",
+                            "runtime/adapters/base.py",
+                            "runtime/budget.py",
+                            "protocol.config.json",
+                            "protocol.config.template.json"
+                        ],
+                        "spec_id": "SPEC-0078",
+                        "status": "done",
+                        "title": "Compaction / tool-result clearing y sub-agentes en el turno (DECISION-0030 / SPEC-0078)",
+                        "type": "implementation",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-13",
+                        "deliverables": [
+                            "Area_comun/artifacts/ANALISIS-CONSOLIDADO-deltas-sota-spec-0078.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0109-claude-revision-adversarial-sota.md",
+                        "id": "TASK-0109",
+                        "linked_decisions": [
+                            "DECISION-0008",
+                            "DECISION-0017",
+                            "DECISION-0022",
+                            "DECISION-0030"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "high",
+                        "relates_to": [
+                            "DECISION-0030",
+                            "SPEC-0078",
+                            "TASK-0106"
+                        ],
+                        "relevant_files": [
+                            "Area_comun/artifacts/PROPUESTA-deltas-sota-spec-0078.md",
+                            "Area_comun/specs/SPEC-0078-compaction-y-subagentes.md"
+                        ],
+                        "sdd_required": false,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "Revision adversarial SOTA del contexto del arquitecto (consolidacion multi-voz)",
+                        "type": "analysis",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "blocked_by_questions": [],
+                        "created_at": "2026-06-13",
+                        "deliverables": [
+                            "Area_comun/artifacts/ANALISIS-medicion-narracion-tokens-20260613.md"
+                        ],
+                        "depends_on": [],
+                        "file": "Area_comun/tasks/TASK-0110-claude-medicion-narracion-tokens.md",
+                        "id": "TASK-0110",
+                        "linked_decisions": [
+                            "DECISION-0005",
+                            "DECISION-0008"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "relates_to": [
+                            "DECISION-0005",
+                            "DECISION-0008"
+                        ],
+                        "relevant_files": [
+                            "Area_comun/artifacts/ANALISIS-medicion-narracion-tokens-20260613.md"
+                        ],
+                        "sdd_required": false,
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "Medicion A/B de la narracion intra-ejecucion (ahorro de tokens vs auditabilidad)",
+                        "type": "analysis",
+                        "updated_at": "2026-06-13"
+                    },
+                    {
+                        "file": "Area_comun/tasks/TASK-0111-claude-cost-attribution.md",
+                        "id": "TASK-0111",
+                        "linked_decisions": [
+                            "DECISION-0033"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "SPEC-0079",
+                        "status": "done",
+                        "title": "Cost-attribution por handoff/decision/agente (DECISION-0033, SPEC-0079)",
+                        "type": "implementation"
+                    },
+                    {
+                        "deliverables": [
+                            "Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md"
+                        ],
+                        "file": "Area_comun/tasks/TASK-0112-claude-reconciliacion-hoja-de-ruta.md",
+                        "id": "TASK-0112",
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "medium",
+                        "status": "done",
+                        "title": "Reconciliacion de la hoja de ruta vs estado real del repo",
+                        "type": "analysis"
+                    },
+                    {
+                        "file": "Area_comun/tasks/TASK-0113-codex-fix-chain-auth-prev-hash.md",
+                        "id": "TASK-0113",
+                        "linked_decisions": [
+                            "DECISION-0029"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "SPEC-0080",
+                        "status": "done",
+                        "title": "Fix chain+auth prev_hash/sign ordering (event_without_chain_fields excluye event_auth) + golden combinado",
+                        "type": "implementation"
+                    },
+                    {
+                        "file": "Area_comun/tasks/TASK-0114-claude-fase0-failure-modes-y-loop-governor.md",
+                        "id": "TASK-0114",
+                        "linked_decisions": [
+                            "DECISION-0034"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "medium",
+                        "status": "done",
+                        "title": "Fase 0 (E5+E6) - FAILURE_MODES.md (MAST) + gobernador 'merece un loop?' (DECISION-0034)",
+                        "type": "documentation"
+                    },
+                    {
+                        "file": "Area_comun/tasks/TASK-0115-claude-satelite-protocol-research.md",
+                        "id": "TASK-0115",
+                        "linked_decisions": [
+                            "DECISION-0035"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "medium",
+                        "status": "done",
+                        "title": "Satelite protocol_research (read-only, unidireccional) - estructura + scaffolding (DECISION-0035)",
+                        "type": "documentation"
+                    },
+                    {
+                        "file": "Area_comun/tasks/TASK-0116-claude-narracion-minima-dura.md",
+                        "id": "TASK-0116",
+                        "linked_decisions": [
+                            "DECISION-0036"
+                        ],
+                        "owner": "Claude",
+                        "phase": "P2",
+                        "priority": "medium",
+                        "status": "done",
+                        "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)",
+                        "type": "documentation"
+                    },
+                    {
+                        "created_at": "2026-06-19",
+                        "file": "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                        "id": "TASK-0117",
+                        "linked_decisions": [
+                            "DECISION-0039",
+                            "DECISION-0029",
+                            "DECISION-0033"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "SPEC-0081",
+                        "status": "in_review",
+                        "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)",
+                        "type": "security"
+                    },
+                    {
+                        "created_at": "2026-06-19",
+                        "file": "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md",
+                        "id": "TASK-0118",
+                        "linked_decisions": [
+                            "DECISION-0040",
+                            "DECISION-0033"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "normal",
+                        "spec_id": "none",
+                        "status": "proposed",
+                        "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)",
+                        "type": "security"
+                    },
+                    {
+                        "created_at": "2026-06-19",
+                        "file": "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md",
+                        "id": "TASK-0119",
+                        "linked_decisions": [
+                            "DECISION-0042",
+                            "DECISION-0020"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "none",
+                        "status": "done",
+                        "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)",
+                        "type": "security"
+                    },
+                    {
+                        "created_at": "2026-06-19",
+                        "file": "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+                        "id": "TASK-0120",
+                        "linked_decisions": [
+                            "DECISION-0043",
+                            "DECISION-0039",
+                            "DECISION-0029"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "SPEC-0082",
+                        "status": "done",
+                        "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)",
+                        "type": "security"
+                    },
+                    {
+                        "created_at": "2026-06-19",
+                        "file": "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+                        "id": "TASK-0121",
+                        "linked_decisions": [
+                            "DECISION-0044",
+                            "DECISION-0040",
+                            "DECISION-0041"
+                        ],
+                        "owner": "Codex",
+                        "phase": "P2",
+                        "priority": "high",
+                        "spec_id": "SPEC-0083",
+                        "status": "ready",
+                        "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)",
+                        "type": "security"
+                    }
+                ],
+                "updated_at": "2026-06-08",
+                "updated_by": "Claude"
+            }
+        },
+        "up_to_seq": 0
+    }
+}

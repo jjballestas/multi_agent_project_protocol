@@ -1048,6 +1048,24 @@
             "task_id": "TASK-0096"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-close-0117-flip4",
+            "expires_at": "2026-06-19T20:30:00Z",
+            "notes": "Close TASK-0117 in_review->done: #4 ON tras piloto verde (Ruta B, DECISION-0045). Reconcile version 1.14.0.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T16:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0117",
+            "updated_at": "2026-06-19T16:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-close-0120",
             "expires_at": "2026-06-19T14:30:00Z",
             "notes": "Close TASK-0120 in_review->done (reviewer, maker!=checker reproducido verde) + reconcile version 1.13.0.",
@@ -1064,6 +1082,23 @@
             "status": "released",
             "task_id": "TASK-0120",
             "updated_at": "2026-06-19T10:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Arquitecto-decision-0045",
+            "expires_at": "2026-06-19T20:35:00Z",
+            "notes": "Record DECISION-0045 (T0 boundary + pre-T0 seal) in the ledger.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T16:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0117",
+            "updated_at": "2026-06-19T16:35:00Z"
         },
         {
             "claim_id": "CLAIM-20260619-Arquitecto-promote-0043",

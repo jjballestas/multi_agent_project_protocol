@@ -1,0 +1,19 @@
+{
+  "schema_version": "chain_manifest.v1",
+  "boundary": "T0",
+  "decision": "DECISION-0045",
+  "declaration": "operative ledger of the thesis dataset starts at T0; pre-T0 history sealed outside the operative validation path",
+  "pre_t0": {
+    "last_commit": "94d2e58e2b34506d32c20ebd258245eabd0ed7db",
+    "sealed_export": {
+      "path": "pre_t0_ledger_seal/events-pre-t0-000001-000671.jsonl",
+      "sha256": "7e2452aef71352c863f467612a4b3742446574d342c100020619055ff186fbe3",
+      "seq_range": [
+        1,
+        671
+      ],
+      "event_count": 671
+    }
+  },
+  "cryptographic_continuity": "pre_t0.last_commit + sealed_export.sha256 are embedded in protocol.config.json.pre_t0_provenance, so the T0 genesis hash (= canonical_hash(config)) commits to the sealed pre-T0 history."
+}

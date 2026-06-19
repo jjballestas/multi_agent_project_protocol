@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "tasks": [
         {
-            "id": "TASK-0117",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)"
-        },
-        {
             "id": "TASK-0118",
             "owner": "Codex",
             "phase": "P2",

@@ -13,6 +13,25 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.14.0] - 2026-06-19
+
+### Changed (live instance only; not the neutral protocol/template)
+- **#4 security stack ACTIVATED (chain + agent_signatures + anchor + event_auth ON; DECISION-0045).** The
+  live instance now signs/chains/anchors its event log: Ed25519 per-agent signatures (public keys in
+  `signature_config.public_keys`, privates wrapper-side outside the repo; A2 independence declared WEAK for
+  this pilot — all keypairs minted in one ceremony), HMAC `event_auth` via gitignored `secret_file`
+  (DECISION-0043 loader), and a git-remote anchor to a dedicated sibling repo `D:\Agentes\audit-anchor`
+  (A3 independence WEAK — same disk, declared). Pilot verified GREEN in a clean clone before any canonical
+  write: AC2 health 1.0 (>=0.99), AC3 6/6 negative vectors rejected, AC5 rollback byte-equivalent, live
+  smoke (real keys sign+chain + anchor wrote), full validator + drift 0.
+- **One-time T0 boundary; pre-T0 history sealed (DECISION-0045).** A prior sanctioned #4 pilot had written
+  immutable artifacts to the live event log, structurally blocking a clean re-enable. The operative ledger
+  of the thesis dataset now starts fresh at T0; pre-T0 history (seq 1-671) is preserved in git (commit
+  `94d2e58`) + a cold export `pre_t0_ledger_seal/` (sha256 recorded) outside the operative validation path,
+  and cryptographically bound into the T0 genesis via `protocol.config.json.pre_t0_provenance` +
+  `chain_manifest.json`. **TASK-0117 done.** Enforced lesson: no #4 pilot/ceremony ever runs against the
+  live log again — always a throwaway copy.
+
 ## [Unreleased]
 
 ### Added

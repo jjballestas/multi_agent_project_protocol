@@ -111,7 +111,7 @@
         {
             "id": "TASK-0117",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)"
         },
         {
@@ -187,7 +187,8 @@
         "DECISION-0041",
         "DECISION-0042",
         "DECISION-0043",
-        "DECISION-0044"
+        "DECISION-0044",
+        "DECISION-0045"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -278,5 +279,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.13.0"
+    "version": "1.14.0"
 }

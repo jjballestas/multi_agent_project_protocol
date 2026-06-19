@@ -2,7 +2,7 @@
 id: TASK-0117
 title: Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)
 type: security
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

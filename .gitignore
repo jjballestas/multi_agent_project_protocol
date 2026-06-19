@@ -13,3 +13,5 @@ runtime/runs/
 # Repo-local transient temp dirs: runtime write-path staging/backups + golden test fixtures.
 # Sweep legacy root-level leftovers and this parent with scripts/clean_workspace_temp.py.
 .protocol-tmp/
+secrets/
+.protocol-secrets/

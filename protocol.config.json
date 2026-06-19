@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "protocol_version": "1.13.0",
+  "protocol_version": "1.14.0",
   "runtime_version": "0.12.0",
   "project_name": "multi_agent_project_protocol",
   "adoption_tier": "runtime",
@@ -86,10 +86,15 @@
     }
   },
   "event_auth": {
-    "enabled": false,
+    "enabled": true,
     "method": "hmac-sha256",
     "issuer": "local-runtime",
-    "audience": "runtime-event-log"
+    "audience": "runtime-event-log",
+    "keys": {
+      "Arquitecto": { "key_id": "arquitecto-hmac:v1", "secret_file": "secrets/eventauth-arquitecto.key" },
+      "Codex": { "key_id": "codex-hmac:v1", "secret_file": "secrets/eventauth-codex.key" },
+      "runtime": { "key_id": "runtime-hmac:v1", "secret_file": "secrets/eventauth-runtime.key" }
+    }
   },
   "event_state": {
     "enabled": true,
@@ -97,22 +102,46 @@
     "enforce": true,
     "authoritative": true,
     "slim_views_enabled": true,
-    "chain_enabled": false,
-    "agent_signatures_enabled": false,
+    "chain_enabled": true,
+    "agent_signatures_enabled": true,
     "signature_backend": "local-ed25519",
     "signature_config": {
       "backend": "local-ed25519",
-      "public_keys": {}
+      "public_keys": {
+        "arquitecto:v1": "d0bU3HbNAfVJcM2q1csln299CAzmSI65izWZIcohXLk=",
+        "codex:v1": "2CjyIx4Tt2oGIE0UDBI9GQ8P4w3R5pjGfMrdk8KDQRU=",
+        "analista:v1": "vD7vTJ9xcJtOBTEQ0hoEVqWX7yDU18JqGrqRX6JH3Qg="
+      }
     },
-    "anchor_enabled": false,
+    "anchor_enabled": true,
     "anchor_config": {
       "backend": "git-remote",
-      "remote_url": "",
+      "remote_url": "D:\\Agentes\\audit-anchor",
       "branch": "audits/default",
       "identity": "runtime-anchor",
       "interval_seconds": 3600,
       "retry_max_attempts": 3,
       "retry_backoff_seconds": 10
+    }
+  },
+  "agent_registry": {
+    "enabled": true,
+    "agents": [
+      { "id": "Arquitecto", "enabled": true, "capabilities": ["architect", "reviewer", "orchestrator", "qa"] },
+      { "id": "Codex", "enabled": true, "capabilities": ["implementer"] },
+      { "id": "Analista", "enabled": true, "capabilities": ["reviewer"] }
+    ]
+  },
+  "pre_t0_provenance": {
+    "boundary": "T0",
+    "decision": "DECISION-0045",
+    "declaration": "operative ledger of the thesis dataset starts at T0; pre-T0 history is sealed (preserved in git + cold export) outside the operative validation path",
+    "pre_t0_last_commit": "94d2e58e2b34506d32c20ebd258245eabd0ed7db",
+    "sealed_export": {
+      "path": "pre_t0_ledger_seal/events-pre-t0-000001-000671.jsonl",
+      "sha256": "7e2452aef71352c863f467612a4b3742446574d342c100020619055ff186fbe3",
+      "seq_range": [1, 671],
+      "event_count": 671
     }
   },
   "tool_policy": {
