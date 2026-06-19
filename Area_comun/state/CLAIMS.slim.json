@@ -1,17 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260619-promo-coord-Arquitecto",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/",
-                "Area_comun/mailbox/answered/",
-                "Area_comun/mailbox/archived/"
-            ],
-            "task_id": "COORD-20260619-CARRIL-A-REVERIFY"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
