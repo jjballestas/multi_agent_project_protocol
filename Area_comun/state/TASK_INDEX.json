@@ -762,7 +762,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)",
             "type": "product"
         }

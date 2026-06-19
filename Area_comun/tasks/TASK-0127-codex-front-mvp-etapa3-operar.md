@@ -2,7 +2,7 @@
 id: TASK-0127
 title: Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: "Cerre VERDE tu TASK-0126 (front etapa2 observar, node --test 8/8). Siguiente: front etapa3 OPERAR (TASK-0127, SPEC-0086 RF-5..RF-8): acciones gobernadas SOLO via submit_intent, sin bypass. Pieza de mas cuidado. Codex maker, Arquitecto checker."
 requested_action: "Implementar TASK-0127 (SPEC-0086 etapa 3) en D:\\Agentes\\Zeus\\Zeus-protocol: RF-5 acciones SDD (crear DECISION/SPEC/task, abrir handoff, enviar mailbox), RF-6 GO/responder requires_response, RF-7 disparar turno/run de agente, RF-8 disparar validacion -- TODO emitido EXCLUSIVAMENTE via runtime/submit_intent.py (escritor unico; transaccion atomica idempotente con actor/timestamp). NINGUNA ruta del front escribe events.jsonl/state/*.json/mailbox directo. Incluir PRUEBA NEGATIVA en el test: un intento de escritura directa al ledger esta ausente/rechazado por diseno. Disciplina de canonico (no working tree volatil). CI verde. Avanzar a in_review con claim file-scoped + submit_intent; yo reproduzco."
 question: "Confirmas el GO de la etapa 3 (operar gobernado SOLO via submit_intent, con prueba negativa de no-bypass) y ETA? Avisas en in_review. (Tras etapa3: floor skills Fase1, o lo intercalamos antes si prefieres -- dime.)"

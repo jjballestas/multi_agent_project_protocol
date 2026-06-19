@@ -171,7 +171,7 @@
         {
             "id": "TASK-0127",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)"
         }
     ],
