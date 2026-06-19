@@ -765,6 +765,23 @@
             "status": "done",
             "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md",
+            "id": "TASK-0128",
+            "linked_decisions": [
+                "DECISION-0049",
+                "DECISION-0045",
+                "DECISION-0047"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 4 - Vista de atestacion #4 (timeline ledger + boundary T0 + sello pre-T0 + manifest), read-only (DECISION-0049 / SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

@@ -169,6 +169,22 @@ multi_agent_project_protocol/
 |-- personal/<id>/            (per-participant private areas; e.g. personal/Arquitecto, personal/Codex)
 ```
 
+### 8.1 Repos architecture and unidirectional coupling (DECISION-0050)
+
+The protocol is the **permanent hub**; product repos rotate around it. Convention (methodology-neutral):
+
+1. **Governance / coordination / attestation -> ALWAYS in the protocol** (`multi_agent_project_protocol`):
+   DECISION / SPEC / tasks / handoffs / mailbox + `submit_intent` + the attested #4 ledger. **This is the
+   dataset.** Never inside a product repo (it would not be attested there).
+2. **Product code -> ALWAYS in its own repo under `D:\Agentes\Zeus\`** (unidirectional coupling, mirror of
+   DECISION-0035/0049; the neutral core is never touched by product code). First product: `Zeus-protocol`.
+3. **Each agent's runtime reaches BOTH by path** (already configured): an agent commits code in its product
+   repo and attests governance in the protocol, with no multi-root VS Code workspace required.
+4. **The FRONT (`Zeus-protocol`) is the operator's PANEL** to operate/observe the methodology (mailbox/
+   state/ledger/attestation, GOs, launch agents, multi-project). **VS Code is OPTIONAL** (raw code only).
+5. **Repeatable pattern:** every future project (Budget, etc.) gets its own repo under `D:\Agentes\Zeus\`;
+   the governance of all of them lives in the single protocol (constant hub). Product repos rotate.
+
 ## 9. Base Definition of Done
 
 A task is not done until: its specific DoD is met; it does not violate the domain-neutrality

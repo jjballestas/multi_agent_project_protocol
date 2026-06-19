@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6c1c23e31452b3d31fd07dffec54cc9e36dd88704f2b50f1e0a148401b05ff27",
+  "canonical_hash": "cf1c1d4065979509745777f402dc371d39785920bea4bebc1ff5213588720737",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -21,6 +21,7 @@
       "CLAIM-20260620-Arquitecto-close-0124-0125": 1,
       "CLAIM-20260620-Arquitecto-close-0126": 1,
       "CLAIM-20260620-Arquitecto-close-0127": 1,
+      "CLAIM-20260620-Arquitecto-d50-t128": 1,
       "CLAIM-20260620-Arquitecto-promo-0126": 1,
       "CLAIM-20260620-Arquitecto-promo-0127": 1,
       "CLAIM-20260620-Codex-TASK-0126": 1,
@@ -31,6 +32,7 @@
       "DECISION-0047": 1,
       "DECISION-0048": 1,
       "DECISION-0049": 1,
+      "DECISION-0050": 1,
       "PROJECT_STATE": 1,
       "TASK-0117": 3,
       "TASK-0121": 5,
@@ -40,10 +42,11 @@
       "TASK-0125": 6,
       "TASK-0126": 7,
       "TASK-0127": 7,
+      "TASK-0128": 2,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 82,
+    "events_applied": 86,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -70,6 +73,10 @@
       "arq:closeboth:done124": 732,
       "arq:closeboth:done125": 731,
       "arq:closeboth:rel": 733,
+      "arq:d50t128:acq": 754,
+      "arq:d50t128:dec50": 755,
+      "arq:d50t128:rel": 757,
+      "arq:d50t128:upsert": 756,
       "arq:dec45:acq": 678,
       "arq:dec45:rec": 679,
       "arq:dec45:rel": 680,
@@ -132,5 +139,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 753
+  "up_to_seq": 757
 }

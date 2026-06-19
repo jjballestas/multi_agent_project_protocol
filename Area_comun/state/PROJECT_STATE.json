@@ -173,6 +173,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)"
+        },
+        {
+            "id": "TASK-0128",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 4 - Vista de atestacion #4 (timeline ledger + boundary T0 + sello pre-T0 + manifest), read-only (DECISION-0049 / SPEC-0086)"
         }
     ],
     "agents": {
@@ -228,7 +234,8 @@
         "DECISION-0046",
         "DECISION-0047",
         "DECISION-0048",
-        "DECISION-0049"
+        "DECISION-0049",
+        "DECISION-0050"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
