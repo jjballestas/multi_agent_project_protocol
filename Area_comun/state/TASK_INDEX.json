@@ -625,6 +625,23 @@
             "status": "done",
             "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)",
             "type": "security"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+            "id": "TASK-0120",
+            "linked_decisions": [
+                "DECISION-0043",
+                "DECISION-0039",
+                "DECISION-0029"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0082",
+            "status": "ready",
+            "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)",
+            "type": "security"
         }
     ],
     "updated_at": "2026-06-08",

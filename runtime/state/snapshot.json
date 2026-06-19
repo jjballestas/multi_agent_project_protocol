@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4bea627ae09e6c5f6cb5afc048f075bd5d5f3ff93d0f709443a5b4c5df0a3ae8",
+  "canonical_hash": "a11374c46a0643a43b9320880ab8de2661d1b784d7868c0192b3dc14d273ebc8",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -170,6 +170,7 @@
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-20260615-promote-0096-Claude": 1,
+      "CLAIM-20260619-Arquitecto-promote-0043": 1,
       "CLAIM-20260619-Codex-TASK-0117": 1,
       "CLAIM-20260619-Codex-TASK-0117-encendido-fase1": 1,
       "CLAIM-20260619-Codex-TASK-0119": 1,
@@ -211,6 +212,7 @@
       "DECISION-0040": 1,
       "DECISION-0041": 1,
       "DECISION-0042": 1,
+      "DECISION-0043": 1,
       "MAILBOX-HYGIENE-20260608": 1,
       "MAILBOX-HYGIENE-20260610": 2,
       "MAILBOX-HYGIENE-20260613": 1,
@@ -224,7 +226,7 @@
       "MAINTENANCE-PRUNE": 15,
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 23,
+      "PROJECT_STATE": 24,
       "PROMO-20260619-CARRIL-A": 7,
       "TASK-0037": 4,
       "TASK-0084": 8,
@@ -261,13 +263,13 @@
       "TASK-0117": 14,
       "TASK-0118": 1,
       "TASK-0119": 7,
-      "TASK-0120": 6,
+      "TASK-0120": 8,
       "VERSION-RECONCILE": 1,
       "none": 3,
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 646,
+    "events_applied": 651,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -292,6 +294,11 @@
       "TASK-0100-rescoped-status-in-review-v2": 495,
       "ack-readonly-gate-codex-20260614-acquire": 469,
       "ack-readonly-gate-codex-20260614-release": 470,
+      "arquitecto:promote-0043:claim-acquire": 647,
+      "arquitecto:promote-0043:claim-release": 651,
+      "arquitecto:promote-0043:decision-0043": 648,
+      "arquitecto:promote-0043:project-version-1.12.0": 650,
+      "arquitecto:promote-0043:task-0120-upsert": 649,
       "auth-activation:claim-acquire": 54,
       "auth-activation:claim-release": 56,
       "auth-activation:project-narrative": 55,
@@ -908,5 +915,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 646
+  "up_to_seq": 651
 }

@@ -125,6 +125,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
+        },
+        {
+            "id": "TASK-0120",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)"
         }
     ],
     "agents": {
@@ -173,7 +179,8 @@
         "DECISION-0039",
         "DECISION-0040",
         "DECISION-0041",
-        "DECISION-0042"
+        "DECISION-0042",
+        "DECISION-0043"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -264,5 +271,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.11.0"
+    "version": "1.12.0"
 }

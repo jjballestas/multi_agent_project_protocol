@@ -28,6 +28,17 @@ for what counts as MAJOR / MINOR / PATCH here.
   template defaults (`context.DEFAULT_AGENT_ROLES`, `router` fallback) stay `Claude` — they are not the
   live instance. No protocol/template/contract change; isolated goldens unaffected.
 
+## [1.12.0] - 2026-06-19
+
+### Added
+- **DECISION-0043 + SPEC-0082 + TASK-0120 (cargador HMAC `event_auth` fuera del repo):** resolucion del
+  secreto HMAC de `event_auth` por referencia (`secret_file` keyfile gitignored / `secret_env`), fuera del
+  config commiteado, como precondicion de activacion de #4 (SPEC-0081 AC1, capa HMAC). El secreto resuelto
+  no entra a genesis/canonical_json/prev_hash; fail-closed ante referencia irresoluble; gate dedicado de
+  no-literal-commiteado; path-safety con allowlist. La privada Ed25519 sigue wrapper-side. Aditivo, neutral,
+  off-by-default; TASK-0120 queda `ready` (owner Codex) para implementar. **#4 permanece OFF**
+  (chain/agent_signatures/anchor/event_auth = false).
+
 ## [1.11.0] - 2026-06-19
 
 ### Added

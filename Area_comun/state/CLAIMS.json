@@ -1048,6 +1048,23 @@
             "task_id": "TASK-0096"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-promote-0043",
+            "expires_at": "2026-06-19T13:40:00Z",
+            "notes": "Promote DECISION-0043 + SPEC-0082 + TASK-0120 (loader HMAC event_auth fuera del repo). SemVer MINOR 1.12.0. #4 OFF.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T09:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0120",
+            "updated_at": "2026-06-19T09:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-TASK-0117",
             "expires_at": "2026-06-19T13:20:00Z",
             "notes": "Build SPEC-0081 harness/goldens/smoke for TASK-0117 without enabling #4 or pilot.",
