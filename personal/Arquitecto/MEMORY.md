@@ -2,7 +2,34 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-15, HEAD 823b5b9, v1.9.3.
+> Ultima actualizacion: 2026-06-19, HEAD 6f4e8c5, v1.9.3.
+
+## Carril A Presupuesto/tesis (2026-06-19) - EN REVISION, sin promover
+- Encargo del operador: arrancar el modulo-app de Presupuesto bajo el protocolo, instrumentado para tesis.
+  Corte limpio: la DB (Access->SQL Server, D:\Agentes\Ingenas\Budget) la hace el operador APARTE; el
+  protocolo gobierna el DESARROLLO del modulo-app; dataset = la COORDINACION de agentes (no la DB/PII).
+- Drafts en `personal/Arquitecto/carril_A/` (NO en el ledger): A1 = activacion gateada #4 (REFERENCIA
+  DECISION-0029, no rediseno) DRAFT-DECISION-0039 + DRAFT-SPEC-0081; A2 = GATE-DATASET nueva
+  DRAFT-DECISION-0040; A3 = precondicion read-only (REFERENCIA DECISION-0035) DRAFT-DECISION-0041.
+- RESTRICCION DURA: #4 ON antes del primer handoff real (cripto NO retrofiteable) -> Carril A primero.
+  Ventana de riesgo SOLA (sin SA.4/authoritative-teeth/subagents).
+- REVISION CONVERGIO (Analista + Codex, INDEPENDIENTES, 2026-06-19): A1 aprobable con provisioning
+  (claves HMAC en event_auth.keys + remoto de anclaje ANTES del piloto; event_auth SI existe top-level,
+  enabled=false) + 99%=salud-no-seguridad (AC3 prueba negativa = la seguridad, binaria/bloqueante con
+  vectores+goldens) + denominador del 99% de fuente independiente. A2 OBJECION CENTRAL: "cero PII
+  estructural" FALSO hoy (event log lleva texto libre en deliverables/title/notes; NO hay scan de PII;
+  encoding scan NO detecta PII) -> acotar garantia al SUJETO-por-hash + declarar control disciplinario o
+  anadir detector PII; base legal en "no hay persona fisica" no en Cons.26 (mal aplicado); DPIA incluir al
+  operador humano (unica persona fisica). A3 aprobable + prueba negativa objetiva (escritura rechazada por
+  el SO). NINGUN GO implicito; promover/encender = GO del operador.
+- PENDIENTE: incorporar los 7 cambios a los drafts -> GO operador -> promover por submit_intent (DECISION
+  0039/0040/0041 + SPEC-0081, SemVer MINOR + CHANGELOG). Codex+Analista en STAND-DOWN tras converger.
+- Anomalia abierta (Analista, DECISION-0018): PROJECT_STATE.json agents.architect="Claude" stale vs
+  identidad Arquitecto (config agent_roles ya="Arquitecto"; capability OK). Reconciliar por escritor unico.
+- LECCION reforzada: multi-sesion/cron concurrente = churn fuerte del working tree (mailbox movido,
+  index.lock stale de 2.3h, archivos con BOM/CRLF de Codex). Estabilizar = ORDENAR stand-down + commit de
+  snapshot consistente + monitor de verificacion. No forzar locks activos; lock viejo (horas) = stale, se
+  remueve.
 
 ## Identidad (reforma del operador, 2026-06-15)
 - Soy **Arquitecto** (antes "Claude"). `agent_roles.architect="Arquitecto"` en protocol.config.json
