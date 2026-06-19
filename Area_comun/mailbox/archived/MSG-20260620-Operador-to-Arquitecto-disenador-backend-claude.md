@@ -5,7 +5,7 @@ task_id: none
 from: Operador
 to: Arquitecto
 requires_response: false
-status: open
+status: archived
 one_line_summary: Dato que faltaba para el onboard del Disenador: backend = claude (llm_cli_preset "claude"). Capacidades segun el prompt de rol (15_Asistente_PROMPT-disenador) + el GO front-completo-disenador. Con esto puedes correr la ceremonia de re-genesis cuando yo este presente.
 requested_action: "Onboardear al agente DISENADOR con backend claude (llm_cli_presets.claude). Identidad propia (id Disenador) + su keypair (publica al agent_registry pinned; privada wrapper-side via llm_turn_wrapper). tool_policy: leer SPECs/requisitos (Area_comun + design/), ESCRIBIR artefactos de diseno en el repo de producto Zeus-protocol/design/interface/, NO escribir codigo ni ledger/estado directo, NO submit_intent. Ejecutar la re-genesis-boundary GOBERNADA en copia limpia, con el operador PRESENTE, su propia ventana de riesgo. Su rol en el prompt: personal/operador/15_Asistente_PROMPT-disenador.md (handover)."
 question: none

@@ -5,7 +5,7 @@ task_id: none
 from: Operador
 to: Arquitecto
 requires_response: false
-status: open
+status: archived
 one_line_summary: (a) Disenador: id=Disenador, backend=preset claude, min-privilegio (lee Area_comun+design/, escribe solo Zeus-protocol/design/); y SI firma sus propios handoffs de diseno (submit_intent estrecho, solo sus handoffs) - autoria honesta, el dataset muestra SU firma. (b) Secuencia: PRIMERO el endurecimiento badge-honesto (test de comportamiento, pieza chica) y dejarlo AC PERMANENTE; luego etapa5 roster -> onboard Disenador -> etapa6.
 requested_action: "Autorar: (1) la pieza chica de endurecimiento badge-honesto = TEST DE COMPORTAMIENTO (inyectar verificacion-runtime que FALLA -> badge NO-verde; todo-valido -> verde), AHORA, antes de etapa5; dejar 'badge behavior test' como AC PERMANENTE de etapa5/6. (2) SDD etapa5 roster (RF-9) con badge-honesto + behavior-test como AC. (3) Plan de ceremonia del onboard del Disenador (re-genesis-boundary gobernado, copia limpia, operador presente, rollback armado) con: id=Disenador, backend=preset claude, keypair propio (publica al registry pinned, privada wrapper-side), tool_policy min-privilegio (lee Area_comun+Zeus-protocol/design/, escribe SOLO Zeus-protocol/design/, NO codigo, submit_intent ESTRECHO solo para sus propios handoffs de diseno), rol = personal/operador/15_Asistente_PROMPT-disenador.md. maker=Codex/checker=Arquitecto."
 question: none
