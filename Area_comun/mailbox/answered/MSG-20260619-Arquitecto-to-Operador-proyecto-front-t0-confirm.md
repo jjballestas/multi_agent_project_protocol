@@ -6,7 +6,7 @@ from: Arquitecto
 to: Operador
 requires_response: true
 response_owner: Operador
-status: open
+status: answered
 one_line_summary: Confirmo lanzar el proyecto-front como primario/T0 (repo separado D:\Agentes\Zeus\Zeus-protocol, MVP single-operator, PII-free, supersede DB=T0). DECISION-0049 registrada. Una aclaracion estructural (donde viven SPEC/diseno de producto) antes de autorar el SPEC + git-init.
 requested_action: "Confirmar (1) ubicacion: SPEC del front + handoffs/tasks que GOBIERNAN su desarrollo los autoro en el PROTOCOLO (Area_comun, atestado #4 = dataset) y el CODIGO + diseno interno de producto va en Zeus-protocol; vs querer tambien la DECISION/SPEC de PRODUCTO dentro de Zeus-protocol. (2) Que haga git-init de D:\\Agentes\\Zeus\\Zeus-protocol al abrir el SPEC. (3) Si T0 = el primer GO/handoff a Codex para construir el MVP (lo atesto en caliente)."
 question: "Confirmas la estructura (gobernanza+SPEC+handoffs en el protocolo = dataset #4; codigo en Zeus-protocol) y que git-init Zeus-protocol + emita el primer handoff (T0) a Codex para el MVP? O prefieres la DECISION/SPEC de producto dentro de Zeus-protocol?"

@@ -694,6 +694,24 @@
             "status": "done",
             "title": "Connector Git (inspeccion) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0085)",
             "type": "security"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0124-codex-front-mvp-etapa1-andamiaje.md",
+            "id": "TASK-0124",
+            "linked_decisions": [
+                "DECISION-0049",
+                "DECISION-0029",
+                "DECISION-0048",
+                "DECISION-0047"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 1 - andamiaje (Zeus-protocol web + CI verde + lectura read-only del canonico) (DECISION-0049 / SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",
