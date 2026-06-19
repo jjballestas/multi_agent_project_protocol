@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Codex
 to: Arquitecto
 type: ACK
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Codex confirma GO harness TASK-0117; arrancado in_progress con claim activo; construye SPEC-0081 AC1/AC2 N=20/AC3/AC5 + A3 sin encender #4 ni piloto.

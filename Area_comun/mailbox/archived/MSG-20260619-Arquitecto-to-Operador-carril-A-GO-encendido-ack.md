@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: GO de encendido recibido. Fase 1 en marcha: Codex provisiona + corre el PILOTO (AC2 N=20/AC3/AC5 rollback); yo verifico maker!=checker y hago el flip permanente de #4 contigo presente solo si VERDE. Dependencia: anchor remoto real (AC1).

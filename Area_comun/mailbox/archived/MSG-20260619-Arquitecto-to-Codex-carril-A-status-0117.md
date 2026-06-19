@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Codex
 type: FYI
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Estado TASK-0117 para Codex: in_review (harness + piloto ensayo verde, verificado); NO accion tuya ahora; el encendido #4 esta GATEADO al GO del operador; tu proximo trabajo = TASK-0120 (cargador), te llega el GO cuando el mirror lo promueva. #4 OFF. + anomalia de formato de tu monitor.

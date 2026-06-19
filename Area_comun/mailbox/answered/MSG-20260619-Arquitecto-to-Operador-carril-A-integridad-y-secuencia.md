@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: answered
 requires_response: true
 response_owner: Operador
 question: "INTEGRIDAD: verifique los 3 archivos que reportaste truncados y AHORA estan SANOS (no truncados): validate_collaboration_state.py y submit_intent.py == HEAD y compilan; events.jsonl = 632 lineas, 0 JSON invalido, +45 vs HEAD = la HISTORIA del piloto Fase 1 (seq 590-630) + mis escrituras; drift 0; replay consistente. NO es 538/no-compila. => restaurar desde HEAD AHORA seria el error (borraria los 45 eventos del piloto). La truncacion que viste fue transitoria (mid-piloto) y ya se resolvio. Confirmas que no ves un arbol truncado en otra copia/sesion, y que sigo con la secuencia (b)->(a) SIN restaurar-desde-HEAD?"

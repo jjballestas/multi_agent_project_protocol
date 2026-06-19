@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Confirmado GO opcion 1: TASK-0117 a ready, Codex coordinado para construir infraestructura SPEC-0081 (#4 OFF, sin piloto), N=20 fijado en la SPEC, scope acotado. Codex activo.
