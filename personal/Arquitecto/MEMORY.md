@@ -22,8 +22,16 @@
   anadir detector PII; base legal en "no hay persona fisica" no en Cons.26 (mal aplicado); DPIA incluir al
   operador humano (unica persona fisica). A3 aprobable + prueba negativa objetiva (escritura rechazada por
   el SO). NINGUN GO implicito; promover/encender = GO del operador.
-- PENDIENTE: incorporar los 7 cambios a los drafts -> GO operador -> promover por submit_intent (DECISION
-  0039/0040/0041 + SPEC-0081, SemVer MINOR + CHANGELOG). Codex+Analista en STAND-DOWN tras converger.
+- 7 CAMBIOS INCORPORADOS a los drafts (GO operador, commit e09a560): A1 event_auth top-level +
+  provisioning (HMAC keys+anchor remote) condicion de encendido + salud(99%)!=seguridad(prueba negativa
+  binaria, 6 vectores); A2 cero-PII estructural(sujeto-hash) vs disciplinario + base legal "no hay persona
+  fisica" (no Cons.26) + operador en DPIA + tarea diferida DEF-PII; A3 prueba negativa objetiva (escritura
+  rechazada por el SO). PENDIENTE: cross-check read-only del asistente -> GO de PROMOCION del operador ->
+  promover por submit_intent (DECISION 0039/0040/0041 + SPEC-0081, SemVer MINOR + CHANGELOG). NO promovido,
+  #4 OFF. Codex+Analista STAND-DOWN. Nota: "§9" en drafts = UTF-8 valido (decisions NO estan en canal ASCII).
+- ANOMALIA agents.architect="Claude" DIFERIDA: NO reconciliable por submit_intent (project_narrative solo
+  cubre campos-lista + version; agents.* solo cambia por re-genesis). Re-genesis solo por campo display =
+  multiplicador de riesgo desproporcionado; capability ya sale de agent_roles="Arquitecto". Esperar ventana.
 - MAILBOX HIGIENIZADO (8f6a233): open/ solo con MSG-Arquitecto-to-Codex-standdown (Codex aun no confirma
   stand-down; Analista SI confirmo). Contestados->answered/, FYIs->archived/. Monitor 300s activo para
   cerrar cuando Codex confirme. Anomalias operativas (lock stale 2.3h/BOM/churn) reportadas a Codex por
