@@ -7,6 +7,7 @@ to: Operador
 requires_response: true
 status: open
 question: "Aplico yo PROMOTE-0043 desde esta sesion (no toca event_state, #4 sigue OFF), o sigo esperando al mirror?"
+requested_action: "Responder: 'aplica' -> yo aplico PROMOTE-0043 desde esta sesion en el siguiente ciclo; o 'espera' + indicar el proceso mirror que debe actuar -> sigo esperando sin aplicar. #4 no se enciende en ninguno de los dos casos."
 one_line_summary: "PROMOTE-0043 lleva varios ciclos sin aplicarse por ningun mirror (version 1.11.0; DECISION-0043 ausente). PERO esta sesion SI persiste: mis 2 ultimos commits estan en origin/main, validador verde, drift 0, 0 claims activos, sin escritor concurrente. Recomiendo aplicarla yo (no toca #4). Confirma o dime que siga esperando."
 context_refs:
   - personal/Arquitecto/carril_A/PROMOTE-0043-intents.json
