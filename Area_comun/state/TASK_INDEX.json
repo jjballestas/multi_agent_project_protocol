@@ -747,6 +747,24 @@
             "status": "done",
             "title": "Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0127-codex-front-mvp-etapa3-operar.md",
+            "id": "TASK-0127",
+            "linked_decisions": [
+                "DECISION-0049",
+                "DECISION-0029",
+                "DECISION-0022",
+                "DECISION-0047"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

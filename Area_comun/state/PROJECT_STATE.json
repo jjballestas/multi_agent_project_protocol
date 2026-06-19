@@ -167,6 +167,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)"
+        },
+        {
+            "id": "TASK-0127",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front MVP etapa 3 - Operar gobernado (RF-5..RF-8 SOLO via submit_intent, sin bypass) (DECISION-0049 / SPEC-0086)"
         }
     ],
     "agents": {
