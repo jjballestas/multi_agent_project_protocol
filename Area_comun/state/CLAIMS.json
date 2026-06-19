@@ -1120,6 +1120,22 @@
             "updated_at": "2026-06-19T17:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-dec47",
+            "expires_at": "2026-06-19T22:30:00Z",
+            "notes": "Registra DECISION-0047 (politica de versionado por epoca bajo #4). Sin bump ni re-genesis.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T18:30:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-06-19T18:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-decision-0045",
             "expires_at": "2026-06-19T20:35:00Z",
             "notes": "Record DECISION-0045 (T0 boundary + pre-T0 seal) in the ledger.",
