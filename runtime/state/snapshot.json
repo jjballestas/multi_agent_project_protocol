@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0a4e57042fc74cf69cdc8e5974271271221d76a9cfa6bd53d232b2193c7ce94d",
+  "canonical_hash": "88cfb3f8034e80457e456f623d1e51c278e16a47a359b04abe074e3b84ecf65d",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -15,7 +15,10 @@
       "CLAIM-20260619-Arquitecto-upd-0124": 1,
       "CLAIM-20260619-Codex-TASK-0121": 1,
       "CLAIM-20260619-Codex-TASK-0123": 1,
+      "CLAIM-20260619-Codex-TASK-0124": 1,
+      "CLAIM-20260619-Codex-TASK-0125": 1,
       "CLAIM-20260619-Codex-carril-A-monitor": 2,
+      "CLAIM-20260620-Arquitecto-close-0124-0125": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "DECISION-0045": 1,
       "DECISION-0046": 1,
@@ -27,12 +30,12 @@
       "TASK-0121": 5,
       "TASK-0122": 2,
       "TASK-0123": 7,
-      "TASK-0124": 4,
-      "TASK-0125": 2,
+      "TASK-0124": 9,
+      "TASK-0125": 6,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 50,
+    "events_applied": 62,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -49,6 +52,10 @@
       "arq:close0123:acq": 707,
       "arq:close0123:done": 708,
       "arq:close0123:rel": 709,
+      "arq:closeboth:acq": 730,
+      "arq:closeboth:done124": 732,
+      "arq:closeboth:done125": 731,
+      "arq:closeboth:rel": 733,
       "arq:dec45:acq": 678,
       "arq:dec45:rec": 679,
       "arq:dec45:rel": 680,
@@ -83,11 +90,19 @@
       "codex:task0123-git-readonly:in-progress-to-in-review": 705,
       "codex:task0123-git-readonly:ready-to-in-progress": 704,
       "codex:task0123-git-readonly:release": 706,
+      "codex:task0124-front-etapa1:claim": 726,
+      "codex:task0124-front-etapa1:in-progress-to-in-review": 728,
+      "codex:task0124-front-etapa1:ready-to-in-progress": 727,
+      "codex:task0124-front-etapa1:release": 729,
+      "codex:task0125-ci-readonly:claim": 722,
+      "codex:task0125-ci-readonly:in-progress-to-in-review": 724,
+      "codex:task0125-ci-readonly:ready-to-in-progress": 723,
+      "codex:task0125-ci-readonly:release": 725,
       "eventlog-chain:genesis:v1": 672,
       "protocol-state:regenesis-ref:b230d9a4503cb3736d256f019c737f73e3b37e4b60264781471610bcf27af954": 673
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 721
+  "up_to_seq": 733
 }

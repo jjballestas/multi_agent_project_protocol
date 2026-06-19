@@ -67,6 +67,46 @@
           "s9_verification_required": true
         }
       }
+    },
+    {
+      "id": "fixture-ci-ro",
+      "kind": "ci_readonly",
+      "provider": "github_actions",
+      "enabled": false,
+      "tool_policy": {
+        "deny_by_default": true,
+        "allow_verbs": [
+          "list_runs",
+          "run_status",
+          "run_conclusion",
+          "job_status",
+          "run_summary"
+        ]
+      },
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false,
+        "access": {
+          "allow": {
+            "schemas": [
+              "ci"
+            ],
+            "objects": [
+              "list_runs",
+              "run_status",
+              "run_conclusion",
+              "job_status",
+              "run_summary"
+            ]
+          }
+        },
+        "live_connection": {
+          "principal_least_privilege_required": true,
+          "operator_go_required": true,
+          "s9_verification_required": true
+        }
+      }
     }
   ]
 }

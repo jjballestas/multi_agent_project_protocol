@@ -12,3 +12,4 @@ Hard rules:
 - Outputs stay in memory. Connectors do not import ledger or event-log writers and do not persist result data.
 - Live use against an external source requires a later operator GO plus an independent least-privilege verification.
 - Action-capable surfaces such as Git stay limited to explicit inspection verbs until a later GO. Mutating verbs remain denied before backend access.
+- CI connectors stay limited to reading run/job status, conclusion, and summaries until a later GO. Dispatch, rerun, cancel, approval, secret, variable, and workflow edits remain denied before backend access.

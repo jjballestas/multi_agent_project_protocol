@@ -2,7 +2,7 @@
 id: TASK-0125
 title: Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)
 type: security
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

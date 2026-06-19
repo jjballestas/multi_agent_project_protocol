@@ -21,6 +21,15 @@ for what counts as MAJOR / MINOR / PATCH here.
 > touching genesis.
 
 ### Added
+- **FLOOR Fase 2 piece 2 in review (DECISION-0048 / SPEC-0087 / TASK-0125):** added a domain-neutral
+  `ci_readonly` connector for reading CI run/job status, conclusion, and summaries through a
+  deny-by-default classifier. Dispatch, rerun, cancel, approve, secret/variable mutation, workflow edits,
+  shell-injection, multi-command, unknown-verb, and unsafe-argument vectors are rejected before backend
+  access. Registry entry `fixture-ci-ro` lives in `connectors/connectors.config.json`, outside
+  `protocol.config.json`, defaults to `enabled:false`, and live use remains fail-closed pending later s9
+  least-privilege verification plus operator GO. Golden `examples/connector_ci_cases` covers trust
+  boundary, fixture reads, 11 negative vectors with 0 backend calls, no authority imports/writes,
+  off-by-default fail-closed, registry outside protocol config, and PII-like fixture data staying in memory.
 - **FLOOR Fase 2 piece 1 in review (DECISION-0048 / SPEC-0085 / TASK-0123):** added a domain-neutral
   `git_readonly` inspection connector governed by deny-by-default operation classification. Allowed verbs
   are limited to `status`, `log`, `diff`, `show`, `ls-files`, `rev-parse`, and `blame`; mutating,

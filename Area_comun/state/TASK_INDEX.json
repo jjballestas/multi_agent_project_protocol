@@ -709,7 +709,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front MVP etapa 1 - andamiaje (Zeus-protocol web + CI verde + lectura read-only del canonico) (DECISION-0049 / SPEC-0086)",
             "type": "product"
         },
@@ -727,7 +727,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0087",
-            "status": "ready",
+            "status": "done",
             "title": "Connector CI (lectura de corridas) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0087)",
             "type": "security"
         }

@@ -2,7 +2,7 @@
 id: TASK-0124
 title: Proyecto-front MVP etapa 1 - andamiaje (Zeus-protocol web + CI verde + lectura read-only del canonico) (DECISION-0049 / SPEC-0086)
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high
