@@ -15,6 +15,11 @@ for what counts as MAJOR / MINOR / PATCH here.
 
 ## [Unreleased]
 
+### Added
+- **TASK-0117 harness build (SPEC-0081, #4 still OFF):** added deterministic attestation health cases
+  (AC1/AC2 N=20/AC4/AC5), six binary negative attestation goldens (AC3), and read-only enforcement
+  negative cases for DECISION-0041. CI runs the new suites; no pilot or flag activation is included.
+
 ### Changed (live instance only; not the neutral protocol/template)
 - **Ledger actor renamed `Claude` -> `Arquitecto`** (operator order). `protocol.config.json`
   `agent_roles.architect = "Arquitecto"`; `runtime/regenesis.py --actor-id Arquitecto` wrote a fresh

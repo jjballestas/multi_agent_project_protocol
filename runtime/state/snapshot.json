@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "dded79ab88d040b4c93a31d5874749ca15c25962ca39ce8895e73f91ae070065",
+  "canonical_hash": "620954d2fb418f0da5b7952149b6218efde037bd80063784dc08b0da80d79d97",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -170,6 +170,7 @@
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-20260615-promote-0096-Claude": 1,
+      "CLAIM-20260619-Codex-TASK-0117": 1,
       "CLAIM-20260619-Codex-TASK-0119": 1,
       "CLAIM-20260619-Codex-carril-A-coord": 1,
       "CLAIM-20260619-Codex-carril-A-estado-reply": 1,
@@ -254,7 +255,7 @@
       "TASK-0114": 2,
       "TASK-0115": 2,
       "TASK-0116": 2,
-      "TASK-0117": 4,
+      "TASK-0117": 7,
       "TASK-0118": 1,
       "TASK-0119": 7,
       "VERSION-RECONCILE": 1,
@@ -262,7 +263,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 581,
+    "events_applied": 585,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -511,6 +512,10 @@
       "codex:task0111-rereview-hop:task-status": 443,
       "codex:task0111-review-coord:claim-acquire": 431,
       "codex:task0111-review-coord:claim-release": 432,
+      "codex:task0117-spec0081-harness:claim": 582,
+      "codex:task0117-spec0081-harness:in-progress-to-in-review": 584,
+      "codex:task0117-spec0081-harness:ready-to-in-progress": 583,
+      "codex:task0117-spec0081-harness:release": 585,
       "codex:task0119-mailbox-claim-guard:claim": 567,
       "codex:task0119-mailbox-claim-guard:in-progress-to-in-review": 569,
       "codex:task0119-mailbox-claim-guard:proposed-to-in-progress": 568,
@@ -858,5 +863,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 581
+  "up_to_seq": 585
 }

@@ -181,6 +181,15 @@ jobs:
       - name: Run chain+auth combined cases
         run: python examples/chain_auth_combined_cases/run_chain_auth_combined_cases.py
 
+      - name: Run attestation health cases
+        run: python examples/attestation_health_cases/run_attestation_health_cases.py
+
+      - name: Run attestation negative cases
+        run: python examples/attestation_negative_cases/run_attestation_negative_cases.py
+
+      - name: Run read-only enforcement cases
+        run: python examples/readonly_enforcement_cases/run_readonly_enforcement_cases.py
+
       - name: Run N-agent observability cases
         run: python examples/runtime_observability_nagent_cases/run_runtime_observability_nagent_cases.py
 

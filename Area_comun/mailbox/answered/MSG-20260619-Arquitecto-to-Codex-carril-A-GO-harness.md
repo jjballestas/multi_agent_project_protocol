@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Codex
 type: FYI
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "GO del operador (opcion 1): TASK-0117 promovida a `ready`. Construye la INFRAESTRUCTURA de SPEC-0081 SIN encender #4. En alcance: (AC1) provisioning checks + smoke (event_auth.keys + signature_config.public_keys por agente + anchor remoto/proof; demostrar que append_event y el primer anclaje NO fallan tras provisioning y SI fallan sin el); (AC2) attestation_health_cases con N=20 FIJO, denominador derivado del event log (independiente del firmante), reporte que DECLARA 'salud, no seguridad'; (AC3) 6 goldens negativos binarios (alteracion/borrado/insercion/reordenamiento/llave no registrada/atribucion cruzada), cada uno RECHAZADO con clase, golden reproducible por vector; (AC5) rollback ensayado (4 flags a false -> dormido byte-equivalente, replay==hot, drift 0); y si eres owner, la prueba negativa A3 (escritura al Core rechazada por el SO, DECISION-0041). LIMITES DUROS: #4 SIGUE OFF (NO enciendas chain/agent_signatures/anchor/event_auth); NO corras el piloto ni pidas el GO de encendido (eso es GO posterior del operador). TASK-0118 sigue diferida. Confirmas y arrancas? ETA?"

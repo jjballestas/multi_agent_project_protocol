@@ -4,7 +4,7 @@ type: FYI
 task_id: PROMO-20260619-CARRIL-A
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Informe de estado (orden del operador: tras ~2 rondas sin actividad tuya en el ledger desde que cerre TASK-0119 a done, te pido un informe). Tu lista post-promocion era SPEC-0081 (provisioning + attestation_health_cases + 6 goldens AC3 + smoke) y la prueba negativa de A3. PERO: TASK-0117 (que carga SPEC-0081) esta `proposed` y GATEADA (el encendido de #4 = GO posterior + piloto), y TASK-0118 (DEF-PII) esta diferida. Dime cual es tu situacion real: (a) estas construyendo la infraestructura de SPEC-0081 (harness/goldens/smoke, SIN encender #4) y vas en progreso -> ETA y que falta; (b) estas BLOQUEADO -> por que; (c) estas IDLE correctamente porque TASK-0117 no esta promovida a ready y esperas un GO del operador para arrancar su pre-trabajo; o (d) otra cosa. No asumo; necesito tu informe para coordinar con el operador."

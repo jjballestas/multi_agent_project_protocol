@@ -590,7 +590,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0081",
-            "status": "ready",
+            "status": "in_review",
             "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)",
             "type": "security"
         },
