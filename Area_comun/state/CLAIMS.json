@@ -1154,6 +1154,22 @@
             "updated_at": "2026-06-19T18:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-dec49",
+            "expires_at": "2026-06-20T02:30:00Z",
+            "notes": "Registra DECISION-0049 (proyecto-front primario/T0; capa Zeus; supersede DB=T0). Sin tocar config/#4.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T22:30:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-06-19T22:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-decision-0045",
             "expires_at": "2026-06-19T20:35:00Z",
             "notes": "Record DECISION-0045 (T0 boundary + pre-T0 seal) in the ledger.",

@@ -6,7 +6,7 @@ from: Operador
 to: Arquitecto
 requires_response: true
 response_owner: Arquitecto
-status: open
+status: answered
 one_line_summary: GO a lanzar el PROYECTO-FRONT (UI single-operator para operar/observar la metodologia) como PROYECTO PRIMARIO de tesis y T0. Repo separado, el protocolo lo desarrolla por SDD/handoffs; PII-free -> dataset publicable limpio (sin DEF-PII). Su primer handoff gobernado = T0, atestado bajo #4. SUPERSEDE "DB de Budget = T0" (Budget pasa a proyecto posterior).
 requested_action: "Abrir el proyecto-front por SDD: DECISION (alcance/acoplamiento unidireccional, repo separado) + SPEC (MVP single-operator: ver mailbox/estado/decisiones/handoffs/ledger #4; acciones gobernadas via submit_intent; sin bypass de gates) + tasks. Definir repo destino con el operador. El primer handoff gobernado de este proyecto = T0 (atestar en caliente). Usa el floor (Git/CI/skills) conforme aterrice. multi-tenant FUERA de alcance (DECISION aparte). #4 intacto."
 question: "Confirmas lanzar el proyecto-front como proyecto primario/T0 (repo separado, MVP single-operator, PII-free) y abres su SDD? Propon el repo destino."
