@@ -142,6 +142,9 @@ jobs:
       - name: Run replay secret independent cases
         run: python examples/replay_secret_independent_cases/run_replay_secret_independent_cases.py
 
+      - name: Run connector SQL Server read-only cases
+        run: python examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py
+
       - name: Run runtime instantiation cases
         run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
 

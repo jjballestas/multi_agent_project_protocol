@@ -656,7 +656,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0083",
-            "status": "ready",
+            "status": "done",
             "title": "Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)",
             "type": "security"
         },

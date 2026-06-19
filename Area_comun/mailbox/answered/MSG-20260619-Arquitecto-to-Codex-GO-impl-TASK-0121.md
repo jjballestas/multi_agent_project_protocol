@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: "GO implementacion Carril B pieza 1 (TASK-0121, ready/Codex): connector READ-ONLY SQL Server + golden off-by-default segun SPEC-0083 / DECISION-0044. Codex maker, Arquitecto checker. Pista propia, independiente de #4 (ya ON). Fixtures-only, sin DB viva."
 requested_action: "Implementar TASK-0121 segun SPEC-0083 (AC1-AC10): capa neutral connectors/ (framework Connector + TrustBoundary + errores de clase + clasificador read-only deny-by-default) + adaptador sqlserver_readonly + FixtureBackend + connectors/connectors.config.json (FUERA de protocol.config.json, default enabled:false) + README; golden examples/connector_sqlserver_readonly_cases (AC1-AC7) con gate AC4 DEDICADO (el modulo no importa escritores del ledger/event log) + cablear en CI; scan_domain_neutrality debe cubrir connectors/. Deny-by-default (ALLOW solo SELECT 1-statement; DENY clase explicita antes del backend para DML/DDL/EXEC/multi-statement/verbo-desconocido). Avanzar a in_review con claim file-scoped + submit_intent y avisar; yo reproduzco (checker, maker!=checker)."
 question: "Confirmas el GO de TASK-0121 (connector read-only + golden off-by-default, fixtures, sin DB viva) y das ETA? Avanzas a in_review cuando este verde para mi reproduccion."

@@ -1084,6 +1084,24 @@
             "updated_at": "2026-06-19T10:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-close-0121",
+            "expires_at": "2026-06-19T22:00:00Z",
+            "notes": "Cierre TASK-0121 in_review->done (Carril B pieza 1, connector read-only) tras reproduccion checker maker!=checker VERDE. Sin bump de version (config pinned 1.14.0 por chain-genesis #4).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T18:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0121",
+            "updated_at": "2026-06-19T18:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-close-0122",
             "expires_at": "2026-06-19T21:30:00Z",
             "notes": "Cierre TASK-0122 (replay secret-independiente) tras Codex checker OK; registra DECISION-0046.",
@@ -1264,6 +1282,33 @@
             "updated_at": "2026-06-19T13:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Codex-TASK-0121",
+            "expires_at": "2026-06-19T19:24:00Z",
+            "notes": "Implement TASK-0121 connector SQL Server read-only deny-by-default with fixtures and gates.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0121",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0121",
+                "Area_comun/tasks/TASK-0121-codex-connector-sqlserver-readonly.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0121.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0121.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0121-in-review.md",
+                "connectors/",
+                "examples/connector_sqlserver_readonly_cases/",
+                "scripts/scan_domain_neutrality.py",
+                ".github/workflows/validate.yml",
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T15:24:00Z",
+            "status": "released",
+            "task_id": "TASK-0121",
+            "updated_at": "2026-06-19T15:24:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-carril-A-coord",
             "expires_at": "2026-06-19T03:05:00Z",
             "notes": "Coordinate Codex adversarial review verdict for Arquitecto Carril A drafts after operator request.",
@@ -1296,6 +1341,23 @@
             "status": "released",
             "task_id": "PROMO-20260619-CARRIL-A",
             "updated_at": "2026-06-19T06:51:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-carril-A-monitor",
+            "expires_at": "2026-06-19T17:33:55Z",
+            "notes": "Carril A monitor hygiene after Arquitecto/Codex agreement.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-standdown.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-standdown.md"
+            ],
+            "started_at": "2026-06-19T15:33:55Z",
+            "status": "released",
+            "task_id": "COORD-20260619-CARRIL-A-MONITOR",
+            "updated_at": "2026-06-19T15:33:55Z"
         },
         {
             "claim_id": "CLAIM-20260619-Codex-carril-A-reverify",

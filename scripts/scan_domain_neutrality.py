@@ -92,6 +92,8 @@ def main() -> int:
     denylist = neutrality.get("denylist") or []
     scan_globs = neutrality.get("scan_globs") or []
     exempt_globs = neutrality.get("exempt_globs") or []
+    if (root / "connectors").exists() and "connectors/**" not in scan_globs:
+        scan_globs = [*scan_globs, "connectors/**"]
     terms = compile_terms(denylist)
 
     if not terms or not scan_globs:

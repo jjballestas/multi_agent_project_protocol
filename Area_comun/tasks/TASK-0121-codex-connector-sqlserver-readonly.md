@@ -2,7 +2,7 @@
 id: TASK-0121
 title: Connector READ-ONLY (SQL Server) deny-by-default + trust_boundary + golden off-by-default (DECISION-0044 / SPEC-0083)
 type: security
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

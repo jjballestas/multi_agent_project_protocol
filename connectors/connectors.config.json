@@ -1,0 +1,29 @@
+{
+  "schema_version": "connectors.config.v1",
+  "connectors": [
+    {
+      "id": "fixture-sqlserver-ro",
+      "kind": "sqlserver_readonly",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false,
+        "access": {
+          "allow": {
+            "schemas": [
+              "catalog"
+            ],
+            "objects": [
+              "catalog.records"
+            ]
+          }
+        },
+        "live_connection": {
+          "principal_least_privilege_required": true,
+          "operator_go_required": true
+        }
+      }
+    }
+  ]
+}

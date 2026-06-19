@@ -13,6 +13,26 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.15.0] - 2026-06-19
+> Note: capability implemented + TASK-0121 done, but the live instance `protocol_version` stays
+> **1.14.0**: under #4 (chain ON) the genesis hash = `canonical_hash(protocol.config.json)`, so bumping
+> the version would invalidate `chain.genesis`; a real version bump needs a coordinated
+> re-genesis-boundary. The connector registry lives outside `protocol.config.json` precisely to avoid
+> touching genesis.
+
+### Added
+- **Carril B piece 1 implemented (DECISION-0044 / SPEC-0083 / TASK-0121):** added a domain-neutral
+  `connectors/` layer for read-only external-source adapters with explicit `trust_boundary`,
+  deny-by-default classification, and the principle that a connector grants no authority. First adapter:
+  `sqlserver_readonly` with a deterministic `FixtureBackend`. The connector registry lives in
+  `connectors/connectors.config.json` outside `protocol.config.json`, defaults to `enabled:false`, and the
+  live path fails closed without attempting a connection. Golden
+  `examples/connector_sqlserver_readonly_cases` covers trust boundary, fixture reads, 7 negative vectors,
+  no ledger/event-log writer imports, no state/event-log writes, off-by-default live fail-closed, registry
+  outside protocol config, and PII-like data staying in memory only. CI runs the suite and
+  `scan_domain_neutrality` now includes `connectors/`. Live use against a real source remains gated by a
+  later operator GO plus server-side least-privilege verification.
+
 ## [1.14.0] - 2026-06-19
 
 ### Fixed
@@ -49,16 +69,6 @@ for what counts as MAJOR / MINOR / PATCH here.
 ## [Unreleased]
 
 ### Added
-- **Carril B piece 1 (DECISION-0044 / SPEC-0083, TASK-0121 ready):** a domain-neutral **connector
-  capability** (`connectors/` layer) for **read-only** access to external sources, governed by a
-  per-connector `trust_boundary`, **deny-by-default**, and the principle **"a connector grants no
-  authority"** (read data is evidence, never authority or a mutation path; connectors never write the
-  ledger/event log). First adapter: **SQL Server read-only** with a fixtures backend (golden runs with no
-  live DB). Off-by-default; the connector registry lives **outside** `protocol.config.json` so landing it
-  leaves genesis/drift untouched. Live use against a real DB is a later operator GO after a real read-only
-  enforcement verification by Codex (DECISION-0041 §9: connector-side deny-by-default + server-side
-  least-privilege + objective negative proof). Independent of #4 (stays OFF). PII never to the event log
-  (DECISION-0040); DEF-PII (TASK-0118) stays deferred.
 - **TASK-0120 implementation (SPEC-0082):** `event_auth` HMAC secrets can now be resolved from
   `secret_file` or `secret_env` at signing/verification time without mutating `read_protocol_config`.
   Resolution is fail-closed, path-safe, root-explicit, and covered by `event_auth_secret_resolution_cases`;
