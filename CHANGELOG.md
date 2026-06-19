@@ -16,6 +16,10 @@ for what counts as MAJOR / MINOR / PATCH here.
 ## [Unreleased]
 
 ### Added
+- **TASK-0120 implementation (SPEC-0082):** `event_auth` HMAC secrets can now be resolved from
+  `secret_file` or `secret_env` at signing/verification time without mutating `read_protocol_config`.
+  Resolution is fail-closed, path-safe, root-explicit, and covered by `event_auth_secret_resolution_cases`;
+  the validator rejects literal event-auth secrets for live actors in committed config. #4 remains OFF.
 - **TASK-0117 harness build (SPEC-0081, #4 still OFF):** added deterministic attestation health cases
   (AC1/AC2 N=20/AC4/AC5), six binary negative attestation goldens (AC3), and read-only enforcement
   negative cases for DECISION-0041. CI runs the new suites; no pilot or flag activation is included.

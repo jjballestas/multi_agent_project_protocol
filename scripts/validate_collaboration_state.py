@@ -482,6 +482,50 @@ def validate_event_state_config(config: dict[str, Any] | None, validation: Valid
         validation.fail(f"Event state config invalid: {error}")
 
 
+def live_actor_ids(config: dict[str, Any] | None) -> set[str]:
+    if not isinstance(config, dict):
+        return set()
+    actors: set[str] = set()
+    roles = config.get("agent_roles")
+    if isinstance(roles, dict):
+        actors.update(str(value) for value in roles.values() if str(value or "").strip())
+    registry = config.get("agent_registry")
+    if isinstance(registry, dict):
+        for agent in registry.get("agents") or []:
+            if isinstance(agent, dict) and agent.get("enabled") is not False and str(agent.get("id") or "").strip():
+                actors.add(str(agent["id"]))
+    return actors
+
+
+def has_inline_event_auth_secret(entry: Any) -> bool:
+    if isinstance(entry, str):
+        return bool(entry.strip())
+    if not isinstance(entry, dict):
+        return False
+    return any(str(entry.get(key) or "").strip() for key in ("secret", "hmac_secret", "signing_secret", "key"))
+
+
+def validate_event_auth_no_live_literal_secret(config: dict[str, Any] | None, validation: Validation) -> None:
+    if not isinstance(config, dict):
+        return
+    actors = live_actor_ids(config)
+    event_auth = config.get("event_auth")
+    if isinstance(event_auth, dict):
+        keys = event_auth.get("keys")
+        if isinstance(keys, dict):
+            for actor, entry in sorted(keys.items()):
+                if str(actor) in actors and has_inline_event_auth_secret(entry):
+                    validation.fail(f"event_auth.keys.{actor} uses a literal secret in committed config; use secret_file or secret_env")
+    registry = config.get("agent_registry")
+    if isinstance(registry, dict):
+        for agent in registry.get("agents") or []:
+            if not isinstance(agent, dict):
+                continue
+            actor = str(agent.get("id") or "")
+            if actor in actors and has_inline_event_auth_secret(agent.get("auth")):
+                validation.fail(f"agent_registry agent {actor} uses a literal event_auth secret in committed config")
+
+
 def validate_adopted_profiles(
     root: Path,
     state: dict[str, Any] | None,
@@ -936,6 +980,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
     validate_adoption_tier(root, config, validation)
     validate_event_state_config(config, validation)
+    validate_event_auth_no_live_literal_secret(config, validation)
     validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
     validate_sdd(root, index if isinstance(index, dict) else None, config, validation)

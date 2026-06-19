@@ -639,7 +639,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0082",
-            "status": "ready",
+            "status": "done",
             "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)",
             "type": "security"
         }

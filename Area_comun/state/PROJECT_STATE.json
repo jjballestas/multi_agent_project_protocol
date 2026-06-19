@@ -129,7 +129,7 @@
         {
             "id": "TASK-0120",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)"
         }
     ],
@@ -271,5 +271,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.12.0"
+    "version": "1.13.0"
 }

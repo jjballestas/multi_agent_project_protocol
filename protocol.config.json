@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "protocol_version": "1.12.0",
+  "protocol_version": "1.13.0",
   "runtime_version": "0.12.0",
   "project_name": "multi_agent_project_protocol",
   "adoption_tier": "runtime",

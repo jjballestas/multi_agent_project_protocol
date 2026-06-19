@@ -11,12 +11,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0120",
-            "owner": "Codex",
-            "status": "ready",
-            "title": "Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)"
         }
     ],
     "next_actions": [

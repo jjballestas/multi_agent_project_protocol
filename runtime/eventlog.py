@@ -20,9 +20,14 @@ LOG_PATH = Path("runtime") / "state" / "events.jsonl"
 SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
 ARCHIVE_DIR = Path("runtime") / "state" / "archives"
 STATE_DIR = Path("runtime") / "state"
+SECRET_DIRS = {"secrets", ".protocol-secrets"}
 
 
 class EventLogError(RuntimeError):
+    pass
+
+
+class EventAuthSecretResolutionError(EventLogError):
     pass
 
 
@@ -245,13 +250,61 @@ def agent_auth_config(config: dict[str, Any], actor: str) -> dict[str, Any]:
     return merged
 
 
-def signing_secret(config: dict[str, Any], actor: str) -> str | None:
-    auth = agent_auth_config(config, actor)
+def secret_root_dirs(config: dict[str, Any]) -> set[str]:
+    event_auth = config.get("event_auth") if isinstance(config.get("event_auth"), dict) else {}
+    configured = event_auth.get("secret_dirs") if isinstance(event_auth, dict) else None
+    if not isinstance(configured, list):
+        return set(SECRET_DIRS)
+    values = {str(item).strip().replace("\\", "/").strip("/") for item in configured if str(item).strip()}
+    return values or set(SECRET_DIRS)
+
+
+def resolve_secret_file(path_text: str, *, root: Path, config: dict[str, Any]) -> str:
+    if root is None:
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file requires explicit root")
+    raw_path = Path(str(path_text or ""))
+    if raw_path.is_absolute():
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file must be relative")
+    normalized = raw_path.as_posix()
+    if not normalized or normalized.startswith("../") or "/../" in normalized or normalized == "..":
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file traversal rejected")
+    first_part = normalized.split("/", 1)[0]
+    if first_part not in secret_root_dirs(config):
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file outside allowed dirs")
+    path = (root.resolve() / raw_path).resolve()
+    try:
+        path.relative_to(root.resolve())
+    except ValueError as exc:
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file escaped root") from exc
+    try:
+        value = path.read_text(encoding="utf-8-sig").strip()
+    except OSError as exc:
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file unreadable") from exc
+    if not value:
+        raise EventAuthSecretResolutionError("unresolved_key: secret_file empty")
+    return value
+
+
+def resolve_event_auth_secret(auth: dict[str, Any], *, root: Path | None, config: dict[str, Any]) -> str | None:
     for key in ("secret", "hmac_secret", "signing_secret", "key"):
         value = auth.get(key)
         if str(value or "").strip():
             return str(value)
+    if str(auth.get("secret_file") or "").strip():
+        if root is None:
+            raise EventAuthSecretResolutionError("unresolved_key: secret_file requires explicit root")
+        return resolve_secret_file(str(auth["secret_file"]), root=root, config=config)
+    if str(auth.get("secret_env") or "").strip():
+        value = os.environ.get(str(auth["secret_env"]))
+        if not str(value or "").strip():
+            raise EventAuthSecretResolutionError("unresolved_key: secret_env missing")
+        return str(value)
     return None
+
+
+def signing_secret(config: dict[str, Any], actor: str, *, root: Path | None = None) -> str | None:
+    auth = agent_auth_config(config, actor)
+    return resolve_event_auth_secret(auth, root=root, config=config)
 
 
 def signing_key_id(config: dict[str, Any], actor: str) -> str:
@@ -270,11 +323,11 @@ def event_signature(event: dict[str, Any], secret: str) -> str:
     return hmac.new(secret.encode("utf-8"), canonical_json(signable_event(event)).encode("utf-8"), hashlib.sha256).hexdigest()
 
 
-def sign_event(event: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
+def sign_event(event: dict[str, Any], config: dict[str, Any], *, root: Path | None = None) -> dict[str, Any]:
     if not event_auth_enabled(config):
         return event
     actor = str(event.get("actor") or "")
-    secret = signing_secret(config, actor)
+    secret = signing_secret(config, actor, root=root)
     if not secret:
         raise EventLogError(f"event auth signing key missing for actor: {actor}")
     auth = agent_auth_config(config, actor)
@@ -291,7 +344,7 @@ def sign_event(event: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
     return signed
 
 
-def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None) -> dict[str, Any]:
+def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None, *, root: Path | None = None) -> dict[str, Any]:
     if not event_auth_enabled(config):
         return {"valid": True, "reason": "event_auth_disabled"}
     auth = event.get("event_auth")
@@ -300,7 +353,10 @@ def verify_event_auth(event: dict[str, Any], config: dict[str, Any] | None) -> d
     signature = str(auth.get("signature") or "")
     if not signature:
         return {"valid": False, "reason": "missing_signature"}
-    secret = signing_secret(config or {}, str(event.get("actor") or ""))
+    try:
+        secret = signing_secret(config or {}, str(event.get("actor") or ""), root=root)
+    except EventAuthSecretResolutionError:
+        return {"valid": False, "reason": "unresolved_key"}
     if not secret:
         return {"valid": False, "reason": "missing_key"}
     expected = event_signature(event, secret)
@@ -356,6 +412,7 @@ def replay_events(
     events: list[dict[str, Any]],
     base_state: dict[str, Any] | None = None,
     config: dict[str, Any] | None = None,
+    root: Path | None = None,
 ) -> dict[str, Any]:
     state = deepcopy(base_state) if base_state is not None else empty_snapshot()["state"]
     state.setdefault("aggregate_versions", {})
@@ -368,7 +425,7 @@ def replay_events(
     for event in sorted(events, key=lambda item: int(item.get("seq") or 0)):
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
-        auth_result = verify_event_auth(event, config)
+        auth_result = verify_event_auth(event, config, root=root)
         if auth_result.get("valid") is not True:
             state["rejections"].append(
                 {
@@ -413,7 +470,7 @@ def rebuild_snapshot(root: Path) -> dict[str, Any]:
     events = all_events(root)
     snapshot = {
         "up_to_seq": int(events[-1]["seq"]) if events else 0,
-        "state": replay_events(events, config=read_protocol_config(root)),
+        "state": replay_events(events, config=read_protocol_config(root), root=root),
     }
     snapshot["canonical_hash"] = canonical_hash(snapshot["state"])
     return snapshot
@@ -445,7 +502,7 @@ class EventWriter:
         return all_events(self.root)
 
     def state(self) -> dict[str, Any]:
-        return replay_events(self.events(), config=read_protocol_config(self.root))
+        return replay_events(self.events(), config=read_protocol_config(self.root), root=self.root)
 
     def next_seq(self) -> int:
         events = self.events()
@@ -476,7 +533,7 @@ class EventWriter:
         }
         if observability_enabled(config):
             genesis["trace_id"] = event_trace_id(genesis)
-        atomic_append_jsonl(self.log_path, sign_event(genesis, config))
+        atomic_append_jsonl(self.log_path, sign_event(genesis, config, root=self.root))
         return str(genesis["prev_hash"])
 
     def append_event(
@@ -524,7 +581,7 @@ class EventWriter:
             event["trace_id"] = event_trace_id(event)
         if chain_enabled(config):
             event["prev_hash"] = compute_event_prev_hash(event, previous_hash)
-        event = sign_event(event, config)
+        event = sign_event(event, config, root=self.root)
         atomic_append_jsonl(self.log_path, event)
         return event
 

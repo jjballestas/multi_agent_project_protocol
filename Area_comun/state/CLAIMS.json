@@ -1048,6 +1048,24 @@
             "task_id": "TASK-0096"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-close-0120",
+            "expires_at": "2026-06-19T14:30:00Z",
+            "notes": "Close TASK-0120 in_review->done (reviewer, maker!=checker reproducido verde) + reconcile version 1.13.0.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T10:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0120",
+            "updated_at": "2026-06-19T10:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-promote-0043",
             "expires_at": "2026-06-19T13:40:00Z",
             "notes": "Promote DECISION-0043 + SPEC-0082 + TASK-0120 (loader HMAC event_auth fuera del repo). SemVer MINOR 1.12.0. #4 OFF.",
@@ -1143,6 +1161,36 @@
             "status": "released",
             "task_id": "TASK-0119",
             "updated_at": "2026-06-19T02:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-TASK-0120",
+            "expires_at": "2026-06-19T17:25:00Z",
+            "notes": "Implement TASK-0120 event_auth HMAC secret resolution by secret_file/secret_env; keep #4 OFF.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0120",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0120",
+                "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+                "Area_comun/specs/SPEC-0082-event-auth-secret-resolution.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-impl-TASK-0120.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-impl-TASK-0120.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0120-delivery.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0120-codex-to-arquitecto-1.md",
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "scripts/validate_collaboration_state.py",
+                "examples/event_auth_secret_resolution_cases/",
+                ".github/workflows/validate.yml",
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T13:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0120",
+            "updated_at": "2026-06-19T13:25:00Z"
         },
         {
             "claim_id": "CLAIM-20260619-Codex-carril-A-coord",
@@ -1250,20 +1298,19 @@
         },
         {
             "claim_id": "CLAIM-20260619-Codex-work-monitor",
-            "expires_at": "2026-06-19T10:07:24Z",
+            "expires_at": "2026-06-19T12:01:27Z",
             "notes": "Work monitor mailbox hygiene for Codex messages.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-status-0117.md",
-                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-status-0117.md",
+                "Area_comun/mailbox/open/MSG-20260619-113127-Codex-to-Arquitecto-no-response-TASK-0117.md",
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json"
             ],
-            "started_at": "2026-06-19T09:37:24Z",
+            "started_at": "2026-06-19T11:31:27Z",
             "status": "released",
             "task_id": "COORD-20260619-WORK-MONITOR",
-            "updated_at": "2026-06-19T09:37:24Z"
+            "updated_at": "2026-06-19T11:31:27Z"
         },
         {
             "claim_id": "CLAIM-20260619-close-0119-Arquitecto",

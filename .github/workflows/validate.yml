@@ -136,6 +136,9 @@ jobs:
       - name: Run runtime event auth cases
         run: python examples/runtime_event_auth_cases/run_runtime_event_auth_cases.py
 
+      - name: Run event auth secret resolution cases
+        run: python examples/event_auth_secret_resolution_cases/run_event_auth_secret_resolution_cases.py
+
       - name: Run runtime instantiation cases
         run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
 

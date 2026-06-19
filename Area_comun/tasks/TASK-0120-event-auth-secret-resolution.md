@@ -2,7 +2,7 @@
 id: TASK-0120
 title: Cargador de secreto HMAC de event_auth fuera del repo (secret_file/secret_env) - precondicion de #4 (DECISION-0043 / SPEC-0082)
 type: security
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high
@@ -49,3 +49,11 @@ CHANGELOG; memoria actualizada. **NO enciende #4** (habilita su provisioning). #
   `agent_signature_cases`) byte-identicas
 - `python scripts\validate_collaboration_state.py --root .` (drift 0) + `scan_encoding.py` +
   `scan_domain_neutrality.py`
+
+## Implementation Notes
+
+- `runtime/eventlog.py` resolves `secret_file` / `secret_env` only inside signing and verification,
+  with explicit `root` propagation through replay/snapshot paths; `read_protocol_config` stays unchanged.
+- `scripts/validate_collaboration_state.py` includes the dedicated AC4 gate rejecting literal event-auth
+  secrets for live actors in committed config.
+- `examples/event_auth_secret_resolution_cases/` covers AC1-AC7; CI runs the suite.
