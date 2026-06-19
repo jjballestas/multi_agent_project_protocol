@@ -1917,6 +1917,24 @@
             "updated_at": "2026-06-20T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0126",
+            "expires_at": "2026-06-20T04:45:00Z",
+            "notes": "Cierre TASK-0126 (front etapa2 observar) in_review->done tras checker VERDE (node --test 8/8, RF-1..RF-4 read-only, sin escritura directa). Sin bump epoca.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0126-codex-front-mvp-etapa2-observar.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T00:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0126",
+            "updated_at": "2026-06-20T00:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-promo-0126",
             "expires_at": "2026-06-20T04:15:00Z",
             "notes": "Promueve TASK-0126 (front etapa2 observar, ready/Codex) SPEC-0086. Siguiente pieza del MVP.",
@@ -1933,6 +1951,36 @@
             "status": "released",
             "task_id": "TASK-0126",
             "updated_at": "2026-06-20T00:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0126",
+            "expires_at": "2026-06-20T03:08:00Z",
+            "notes": "Implement TASK-0126 front observe views RF-1..RF-4 over canonical read-only data.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0126",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0126",
+                "Area_comun/tasks/TASK-0126-codex-front-mvp-etapa2-observar.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0126.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0126.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0126-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0126-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T21:08:00Z",
+            "status": "released",
+            "task_id": "TASK-0126",
+            "updated_at": "2026-06-19T21:08:00Z"
         },
         {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",

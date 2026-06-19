@@ -2,7 +2,7 @@
 id: TASK-0126
 title: Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -744,7 +744,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front MVP etapa 2 - Observar (RF-1..RF-4 read-only sobre el canonico) (DECISION-0049 / SPEC-0086)",
             "type": "product"
         }
