@@ -29,6 +29,13 @@
   rechazada por el SO). PENDIENTE: cross-check read-only del asistente -> GO de PROMOCION del operador ->
   promover por submit_intent (DECISION 0039/0040/0041 + SPEC-0081, SemVer MINOR + CHANGELOG). NO promovido,
   #4 OFF. Codex+Analista STAND-DOWN. Nota: "§9" en drafts = UTF-8 valido (decisions NO estan en canal ASCII).
+- MEDIDA mailbox-claims (operador "eso no puede pasar", 2026-06-19): un claim mio con scope dir-level
+  sobre Area_comun/mailbox/ bloqueo la respuesta de Codex. Lo libere (449b08d). Medidas: (1) REGLA
+  vinculante = claims sobre mailbox SOLO a archivos MSG-*.md concretos, NUNCA dir-level (memoria
+  [[mailbox-claims-file-scoped]]); (2) DRAFT-DECISION-0042 (addendum DECISION-0020) + TASK-0119 (Codex:
+  guard en validador/submit_intent que RECHAZA claim acquire con scope de directorio de mailbox) para
+  promover con el batch; (3) disciplina inmediata: claims file-scoped. NOTA: CLAIMS.json en scope tambien
+  puede solapar entre agentes -> preferir scope minimo.
 - ANOMALIA agents.architect="Claude" DIFERIDA: NO reconciliable por submit_intent (project_narrative solo
   cubre campos-lista + version; agents.* solo cambia por re-genesis). Re-genesis solo por campo display =
   multiplicador de riesgo desproporcionado; capability ya sale de agent_roles="Arquitecto". Esperar ventana.
