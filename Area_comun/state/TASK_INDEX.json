@@ -622,7 +622,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "none",
-            "status": "proposed",
+            "status": "done",
             "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)",
             "type": "security"
         }

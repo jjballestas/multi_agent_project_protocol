@@ -23,6 +23,14 @@ for what counts as MAJOR / MINOR / PATCH here.
   template defaults (`context.DEFAULT_AGENT_ROLES`, `router` fallback) stay `Claude` — they are not the
   live instance. No protocol/template/contract change; isolated goldens unaffected.
 
+## [1.11.0] - 2026-06-19
+
+### Added
+- **TASK-0119 / DECISION-0042 enforcement:** `submit_intent` now rejects `claim acquire` scopes under
+  `Area_comun/mailbox/` unless the entry names a concrete `MSG-*.md` file, and both validators flag active
+  mailbox directory claims with `mailbox claim must be file-scoped: <entry>`. Released historical claims are
+  not re-failed. Golden coverage added in `examples/mailbox_claim_scope_cases` and CI.
+
 ## [1.10.0] - 2026-06-19
 
 **Carril A (instrumentacion de tesis del modulo-app de Presupuesto) promovido - documental/gateado; #4 sigue OFF.**

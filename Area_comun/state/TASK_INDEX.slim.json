@@ -16,14 +16,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0119",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "proposed",
-            "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
         }
     ],
     "view": "task_index.slim"

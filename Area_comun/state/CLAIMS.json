@@ -1048,6 +1048,32 @@
             "task_id": "TASK-0096"
         },
         {
+            "claim_id": "CLAIM-20260619-Codex-TASK-0119",
+            "expires_at": "2026-06-19T06:25:00Z",
+            "notes": "Implement TASK-0119 mailbox claim file-scope enforcement guard and goldens.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0119",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0119",
+                "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md",
+                "Area_comun/handoffs/",
+                "runtime/submit_intent.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/mailbox_claim_scope_cases/",
+                ".github/workflows/validate.yml",
+                "CHANGELOG.md",
+                "protocol.config.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T02:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0119",
+            "updated_at": "2026-06-19T02:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-carril-A-coord",
             "expires_at": "2026-06-19T03:05:00Z",
             "notes": "Coordinate Codex adversarial review verdict for Arquitecto Carril A drafts after operator request.",
@@ -1098,6 +1124,38 @@
             "status": "released",
             "task_id": "COORD-20260619-CARRIL-A-REVERIFY",
             "updated_at": "2026-06-19T01:08:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-work-monitor",
+            "expires_at": "2026-06-19T02:07:34Z",
+            "notes": "Work monitor mailbox hygiene for Codex messages.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-promovido.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-promovido.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T01:37:34Z",
+            "status": "released",
+            "task_id": "COORD-20260619-WORK-MONITOR",
+            "updated_at": "2026-06-19T01:37:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-close-0119-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Cierre TASK-0119 (guard mailbox file-scoped) tras revision maker!=checker (golden 5/5 + prueba negativa en vivo) + reconciliar PROJECT_STATE.version a 1.11.0. GO del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md"
+            ],
+            "started_at": "2026-06-19T06:20:12Z",
+            "status": "released",
+            "task_id": "TASK-0119"
         },
         {
             "claim_id": "CLAIM-20260619-coord-carrilA-Arquitecto",

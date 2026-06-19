@@ -97,6 +97,18 @@ def split_scope(scope: str) -> tuple[str, str | None]:
     return path, selector if separator else None
 
 
+def mailbox_claim_scope_error(scope: str) -> str | None:
+    path, _selector = split_scope(scope)
+    mailbox_root = "Area_comun/mailbox"
+    normalized = path.rstrip("/")
+    if normalized != mailbox_root and not normalized.startswith(f"{mailbox_root}/"):
+        return None
+    filename = normalized.rsplit("/", 1)[-1]
+    if filename.startswith("MSG-") and filename.endswith(".md"):
+        return None
+    return f"mailbox claim must be file-scoped: {scope}"
+
+
 def scope_covers(scope_entry: str, required_entry: str) -> bool:
     scope_path, scope_selector = split_scope(scope_entry)
     required_path, required_selector = split_scope(required_entry)
@@ -533,6 +545,10 @@ def validate_scope_authority(state: dict[str, Any], actor_id: str, normalized: d
         if owner != actor_id:
             raise IntentValidationError("claim acquire owner must match actor_id")
         new_scope = [str(item) for item in normalized.get("scope") or (normalized.get("claim") or {}).get("scope") or []]
+        for entry in new_scope:
+            error = mailbox_claim_scope_error(entry)
+            if error:
+                raise IntentValidationError(error)
         for current in active_claims(state):
             if current.get("owner") == actor_id:
                 continue

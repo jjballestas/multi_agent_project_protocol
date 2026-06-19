@@ -2,7 +2,7 @@
 id: TASK-0119
 title: Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)
 type: security
-status: proposed
+status: done
 owner: Codex
 phase: P2
 priority: high
@@ -37,3 +37,20 @@ el canal compartido (deadlock auto-infligido). Addendum a DECISION-0020 (anti-co
 ## DoD
 
 Guard + golden verdes; aditivo; SemVer MINOR + CHANGELOG; sin romper claims historicos.
+
+## Implementation Notes
+
+- `runtime/submit_intent.py` rechaza `claim acquire` con scope bajo `Area_comun/mailbox/` si la entrada no
+  termina en un archivo concreto `MSG-*.md`.
+- `scripts/validate_collaboration_state.py` y `.ps1` reportan el mismo guard para claims activos, sin
+  re-fallar claims historicos `released`.
+- Golden agregado: `examples/mailbox_claim_scope_cases/run_mailbox_claim_scope_cases.py`.
+
+## Verification
+
+- `python examples\mailbox_claim_scope_cases\run_mailbox_claim_scope_cases.py`
+- `python -m py_compile runtime\submit_intent.py scripts\validate_collaboration_state.py examples\mailbox_claim_scope_cases\run_mailbox_claim_scope_cases.py`
+- `python scripts\validate_collaboration_state.py --root .`
+- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1 -Root .`
+- `python scripts\scan_encoding.py --root .`
+- `python scripts\scan_domain_neutrality.py --root .`

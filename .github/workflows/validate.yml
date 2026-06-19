@@ -55,6 +55,9 @@ jobs:
       - name: Run mailbox status validation cases
         run: python examples/mailbox_status_cases/run_mailbox_status_cases.py
 
+      - name: Run mailbox claim scope validation cases
+        run: python examples/mailbox_claim_scope_cases/run_mailbox_claim_scope_cases.py
+
       - name: Check systematic state pruning
         run: python scripts/prune_state.py --root . --check
 

@@ -123,6 +123,21 @@ function Test-ClaimScopeSelector {
     }
 }
 
+function Get-MailboxClaimScopeError {
+    param([string]$Scope)
+    $parts = Split-Scope $Scope
+    $mailboxRoot = "Area_comun/mailbox"
+    $normalized = $parts.Path.TrimEnd("/")
+    if ($normalized -ne $mailboxRoot -and -not $normalized.StartsWith("$mailboxRoot/")) {
+        return $null
+    }
+    $filename = ($normalized -split "/")[-1]
+    if ($filename.StartsWith("MSG-") -and $filename.EndsWith(".md")) {
+        return $null
+    }
+    return "mailbox claim must be file-scoped: $Scope"
+}
+
 function Test-ScopeEntriesOverlap {
     param([string]$LeftScope, [string]$RightScope)
     $left = Split-Scope $LeftScope
@@ -896,7 +911,15 @@ if ($claims -and $claims.claims) {
             Fail "Claim $($claim.claim_id) has invalid status '$($claim.status)'"
         }
         foreach ($scope in @($claim.scope)) {
-            if ($scope) { Test-ClaimScopeSelector -Scope ([string]$scope) -ClaimId ([string]$claim.claim_id) }
+            if ($scope) {
+                Test-ClaimScopeSelector -Scope ([string]$scope) -ClaimId ([string]$claim.claim_id)
+                if ($claim.status -eq "active") {
+                    $mailboxError = Get-MailboxClaimScopeError -Scope ([string]$scope)
+                    if ($mailboxError) {
+                        Fail "Claim $($claim.claim_id) $mailboxError"
+                    }
+                }
+            }
         }
     }
 

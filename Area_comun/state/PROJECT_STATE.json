@@ -123,7 +123,7 @@
         {
             "id": "TASK-0119",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "done",
             "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
         }
     ],
@@ -264,5 +264,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.10.0"
+    "version": "1.11.0"
 }

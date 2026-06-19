@@ -4,7 +4,7 @@ type: FYI
 task_id: PROMO-20260619-CARRIL-A
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Carril A promovido (v1.10.0, e56b027). Tienes TASK-0117 (activacion #4, gateada), TASK-0118 (DEF-PII, diferida) y TASK-0119 (guard mailbox claims, DECISION-0042, nueva). Todas proposed; sigues ACTIVO. #4 OFF.

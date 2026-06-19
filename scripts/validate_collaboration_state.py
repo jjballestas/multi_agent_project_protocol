@@ -304,6 +304,18 @@ def split_scope(scope: str) -> tuple[str, str | None]:
     return path, selector
 
 
+def mailbox_claim_scope_error(scope: str) -> str | None:
+    path, _selector = split_scope(scope)
+    mailbox_root = "Area_comun/mailbox"
+    normalized = path.rstrip("/")
+    if normalized != mailbox_root and not normalized.startswith(f"{mailbox_root}/"):
+        return None
+    filename = normalized.rsplit("/", 1)[-1]
+    if filename.startswith("MSG-") and filename.endswith(".md"):
+        return None
+    return f"mailbox claim must be file-scoped: {scope}"
+
+
 def validate_claim_scope_selector(scope: str, validation: Validation, claim_id: str | None) -> None:
     path, selector = split_scope(scope)
     if selector is None:
@@ -745,6 +757,10 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
         for scope in as_list(claim.get("scope")):
             if scope:
                 validate_claim_scope_selector(str(scope), validation, claim_id)
+                if claim.get("status") == "active":
+                    error = mailbox_claim_scope_error(str(scope))
+                    if error:
+                        validation.fail(f"Claim {claim_id} {error}")
 
     active_claims = [claim for claim in claim_entries if claim.get("status") == "active"]
     for left_index, left in enumerate(active_claims):

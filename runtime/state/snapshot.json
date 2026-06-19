@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "db675e28f73cb4898759c4480fffa7e81d4c7b3219dd98b4693135b295824f14",
+  "canonical_hash": "aadbc55efd68b0b94bd840b27dfba7f296ba58feab5b57625505e4aa37204a07",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -170,9 +170,11 @@
       "CLAIM-20260615-close-0100-Claude": 1,
       "CLAIM-20260615-promote-0095-Claude": 1,
       "CLAIM-20260615-promote-0096-Claude": 1,
+      "CLAIM-20260619-Codex-TASK-0119": 1,
       "CLAIM-20260619-Codex-carril-A-coord": 1,
       "CLAIM-20260619-Codex-carril-A-reverify": 1,
       "CLAIM-20260619-Codex-promo-coord-reply": 1,
+      "CLAIM-20260619-Codex-work-monitor": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados": 1,
       "CLAIM-DECISION-0029-claude-firmantes-cruzados-v2": 1,
       "CLAIM-HANDOFF-20260612-claude-sesion-analisis": 1,
@@ -185,6 +187,7 @@
       "COORD-20260619-CARRIL-A-REVIEW": 1,
       "COORD-20260619-CARRILA-REVIEW": 2,
       "COORD-20260619-STANDDOWN": 2,
+      "COORD-20260619-WORK-MONITOR": 1,
       "DECISION-0026": 1,
       "DECISION-0026-memoria-post-commit": 1,
       "DECISION-0027": 1,
@@ -216,7 +219,7 @@
       "MAINTENANCE-PRUNE": 15,
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
-      "PROJECT_STATE": 22,
+      "PROJECT_STATE": 23,
       "PROMO-20260619-CARRIL-A": 4,
       "TASK-0037": 4,
       "TASK-0084": 8,
@@ -252,13 +255,13 @@
       "TASK-0116": 2,
       "TASK-0117": 1,
       "TASK-0118": 1,
-      "TASK-0119": 1,
+      "TASK-0119": 7,
       "VERSION-RECONCILE": 1,
       "none": 3,
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 564,
+    "events_applied": 574,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -422,6 +425,8 @@
       "codex-promo-coord-reply-release-20260619": 552,
       "codex-standdown-20260615-claim": 536,
       "codex-standdown-20260615-release": 537,
+      "codex-work-monitor-acquire-2026-06-19T01:37:34Z": 565,
+      "codex-work-monitor-release-2026-06-19T01:37:34Z": 566,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-acquire": 157,
       "codex:anomaly-task0092-unclaimed-edits-amend:claim-release": 158,
       "codex:anomaly-task0092-unclaimed-edits:claim-acquire": 155,
@@ -503,6 +508,10 @@
       "codex:task0111-rereview-hop:task-status": 443,
       "codex:task0111-review-coord:claim-acquire": 431,
       "codex:task0111-review-coord:claim-release": 432,
+      "codex:task0119-mailbox-claim-guard:claim": 567,
+      "codex:task0119-mailbox-claim-guard:in-progress-to-in-review": 569,
+      "codex:task0119-mailbox-claim-guard:proposed-to-in-progress": 568,
+      "codex:task0119-mailbox-claim-guard:release": 570,
       "codex:temp-acl-rule:claim-acquire": 194,
       "codex:temp-acl-rule:claim-release": 195,
       "codex:tempfile-acl-coord:claim-acquire": 186,
@@ -548,10 +557,12 @@
       "intent:Arquitecto:claim:2524eee44ccc0a1662eed243f45183473eeabb94b5a5075b7af6a29bf2e04951": 563,
       "intent:Arquitecto:claim:2918a1f1f24fb0bb786062d7322d3e7201c552a409f0a9fdcf4382c8fbe22f4b": 545,
       "intent:Arquitecto:claim:29d6ccdd30a66ca2ff18f437f01a39e17e38d254b68c5ca4944f2470e9276569": 562,
+      "intent:Arquitecto:claim:2a14b95a4ed5c31670f020b5486496fefb9395a2693a1d2d9023becd8d988207": 574,
       "intent:Arquitecto:claim:328340ee980e96f697721d8ad9c534d9f873695e6a2c6c289502c6819f0ba84a": 553,
       "intent:Arquitecto:claim:476bf41377d94b6cae6a32e45d53cf991d8826ac514821874b2c9e22a478ff98": 550,
       "intent:Arquitecto:claim:4f6b1ab4cd2d5e6adbca7890c6bf7dc54afc54ec8b087b3173fa77dc579af08f": 549,
       "intent:Arquitecto:claim:928ea82d3b4291ebb33ccb790e90b1d202feea3809bd67d32dfff025d6a25449": 543,
+      "intent:Arquitecto:claim:9ef69f63113a3878daa1aa35b2e08f2127decac9b4d2312abbb8ae27dc8eb93a": 571,
       "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
       "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
       "intent:Arquitecto:claim:d90de4a818d5538220da492c8f0909ddd242f635b737ec8686ed701f96176fcf": 546,
@@ -561,6 +572,8 @@
       "intent:Arquitecto:decision:c63ef7a8267c45f45b90daba163b9d61401db65739fdfa0c86ecc5c519c9b9f9": 554,
       "intent:Arquitecto:decision:e3822e9feb69e55ce5656e525129e6bbc23cebf6e7fcccb41a28b9a0dc6a5d44": 555,
       "intent:Arquitecto:project_narrative:bb530f2608b8539d92d4f65b63babbffb7273b14e45e1b2838e99fd80bf399eb": 561,
+      "intent:Arquitecto:project_narrative:ff7c6488c9148703498bbd23157a429f707013eba8bbd41c28670a0c0765f086": 573,
+      "intent:Arquitecto:task_status:f8387c71aa543cf8963ae34d1ee20621c98889a48b51362b105b3deac981b46b": 572,
       "intent:Arquitecto:task_upsert:64b3b7ff5dc7d3f8aa2652a67b7eec61e74a2c9a6010253ff566e40973c2138f": 559,
       "intent:Arquitecto:task_upsert:a234e5f1bc362adf151ff7f6cd2728f59168301c349bfe0e3ba2dc6f492e11bb": 558,
       "intent:Arquitecto:task_upsert:f64be92f3ce194d333a358e5f73390f454cad025a466b13f72c7547e3f3cc714": 560,
@@ -837,5 +850,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 564
+  "up_to_seq": 574
 }
