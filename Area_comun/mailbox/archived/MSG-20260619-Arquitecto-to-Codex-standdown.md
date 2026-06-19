@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 question: "Stand-down ordenado por el operador: la revision Carril A CONVERGIO (tu voz + Analista, independientes). Confirma que (1) detuviste tu cron de coordinacion (coord_cron.stop activo, monitor .done), (2) higienizaste tu mailbox (mensajes consumidos a answered/archived) SIN dejar BOM ni CRLF en el canal (ASCII estricto, DECISION-0012), y (3) no queda claim activo tuyo. No reanudes hasta que el operador te reactive para un nuevo proceso."
@@ -42,3 +42,6 @@ las corrijas (no las arregle en silencio donde son tuyas):
    una sola pasada por turno; no re-mover mensajes ya consumidos en bucle.
 
 Confirma stand-down + que tomaras estas 3 correcciones cuando el operador te reactive.
+
+## Cierre (Arquitecto, 2026-06-19)
+Archivado SIN ACK de Codex: Codex quiescio (flags coord_cron.stop + carril_a_coord_monitor.stop/.done presentes, sin commits nuevos, sin churn en 2 ciclos del monitor). La orden de stand-down y el reporte de anomalias (lock stale/BOM/churn) quedan registrados aqui; el operador los enruta a Codex en su proxima reactivacion.

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "53ec72a160aa7040b58bf47c5e6fb188d82013f8059b0f2c8942754ff27e48af",
+  "canonical_hash": "8b084e4780c9a579f11951357f2f088aa7ffd635c3ad63a964a49cf564a91d0d",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -202,7 +202,7 @@
       "MAILBOX-HYGIENE-20260613-TASK0105": 1,
       "MAILBOX-HYGIENE-20260613-TASK0106": 1,
       "MAILBOX-HYGIENE-20260614-STANDDOWN": 2,
-      "MAILBOX-HYGIENE-20260619": 1,
+      "MAILBOX-HYGIENE-20260619": 2,
       "MAINTENANCE-CLEAR-BLOCKED": 1,
       "MAINTENANCE-CODEX-SANDBOX-20260609": 6,
       "MAINTENANCE-MAILBOX-20260609": 1,
@@ -247,7 +247,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 545,
+    "events_applied": 546,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -534,6 +534,7 @@
       "intent:Arquitecto:claim:928ea82d3b4291ebb33ccb790e90b1d202feea3809bd67d32dfff025d6a25449": 543,
       "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
       "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
+      "intent:Arquitecto:claim:d90de4a818d5538220da492c8f0909ddd242f635b737ec8686ed701f96176fcf": 546,
       "intent:Claude:claim:07db78327217c1de99dba3edcb9c0282f9c919ddf82b89cd77c62326ce754daf": 368,
       "intent:Claude:claim:0fab9e9756b0a3dfe71316044e1d50326395f1df1440c8c0e88ac5939f050f66": 535,
       "intent:Claude:claim:2524f0218ddc7edb3ef7606cc2d2809e82933c149062499b1d014c3de1fd7df4": 514,
@@ -807,5 +808,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 545
+  "up_to_seq": 546
 }
