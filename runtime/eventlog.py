@@ -21,6 +21,11 @@ SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
 ARCHIVE_DIR = Path("runtime") / "state" / "archives"
 STATE_DIR = Path("runtime") / "state"
 SECRET_DIRS = {"secrets", ".protocol-secrets"}
+# DECISION-0046: distinguish 'verification unavailable here' (no secret material in this
+# checkout -> environment, NOT a security finding) from real tamper. UNVERIFIABLE reasons must
+# NOT mutate the materialized state, so the canonical state hash is secret-independent.
+EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key"}
+EVENT_AUTH_TAMPER_REASONS = {"invalid_signature", "missing_signature"}
 
 
 class EventLogError(RuntimeError):
@@ -426,7 +431,10 @@ def replay_events(
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
         auth_result = verify_event_auth(event, config, root=root)
-        if auth_result.get("valid") is not True:
+        if (
+            auth_result.get("valid") is not True
+            and str(auth_result.get("reason")) not in EVENT_AUTH_UNVERIFIABLE_REASONS
+        ):
             state["rejections"].append(
                 {
                     "seq": event.get("seq"),
