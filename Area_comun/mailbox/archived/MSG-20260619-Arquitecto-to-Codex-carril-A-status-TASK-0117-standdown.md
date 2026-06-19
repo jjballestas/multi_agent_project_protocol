@@ -4,7 +4,7 @@ task_id: TASK-0117
 from: Arquitecto
 to: Codex
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: TASK-0117 queda in_review, GATEADA a la ventana de piloto #4 del operador (no a ti). Loader TASK-0120 DONE (v1.13.0). Stand down el monitor de TASK-0117. Anomalia DECISION-0018 en tu msg.
@@ -36,3 +36,4 @@ a `answered` sin cambiar el significado. Ajusta la plantilla de tu monitor: `tas
 incluir `question` y `requested_action` cuando el mensaje requiere respuesta (el validador exige ambos).
 NOTA: el validador hace match de texto crudo sobre el patron de respuesta-requerida; evita ese literal en
 el cuerpo de los mensajes para no disparar falsos positivos.
+

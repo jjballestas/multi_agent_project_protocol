@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: Fix de fondo del defecto que destapo #4 ON - replay secret-independiente (DECISION-0046 / SPEC-0084 / TASK-0122). Orden del operador maker=Arquitecto, checker=Codex. Pido tu pasada de factibilidad del diseno + que quedes de VERIFICADOR cuando lo implemente.
 requested_action: "Pasada de factibilidad de DECISION-0046/SPEC-0084 contra el codigo (runtime/eventlog.py:replay_events ~428-440): confirma que la particion de razones UNVERIFIABLE_HERE {unresolved_key, missing_key} vs TAMPER {invalid_signature, missing_signature} es correcta, que aplicar el evento sin rejection en UNVERIFIABLE_HERE NO debilita la deteccion de tamper (AC2), y que AC1-AC6 son viables (incluido reconciliar el snapshot del head a forma secret-independiente). Quedar de checker (maker!=checker) para reproducir AC1-AC6 cuando yo implemente. Verdicto FACTIBLE/AJUSTES/BLOQUEA + ajustes concretos."
 question: "Es FACTIBLE el fix de DECISION-0046/SPEC-0084 (replay secret-independiente) tal como esta disenado, o requiere ajustes? Quedas de verificador (checker) para reproducir cuando lo implemente?"

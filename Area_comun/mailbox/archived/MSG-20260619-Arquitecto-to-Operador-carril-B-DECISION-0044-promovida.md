@@ -6,7 +6,7 @@ from: Arquitecto
 to: Operador
 requires_response: false
 response_owner: Operador
-status: open
+status: archived
 one_line_summary: Confirmo scope Carril B pieza 1 y arranco el flujo - DECISION-0044 + SPEC-0083 + TASK-0121 (ready) promovidos al canonico, drift 0, #4 OFF. Falta el golden (Codex). Staging del GO a Codex pendiente de que actives a Codex para Carril B.
 context_refs:
   - Area_comun/decisions/DECISION-0044-connector-readonly-deny-by-default.md
