@@ -8,6 +8,7 @@ status: open
 requires_response: true
 response_owner: Codex
 one_line_summary: GO de implementacion de TASK-0120 (cargador HMAC event_auth fuera del repo, SPEC-0082). v1.12.0 ya en canonico (806dd65), TASK-0120 ready/Codex. 4 condiciones. #4 OFF.
+requested_action: "Reclamar TASK-0120 (ready), implementar segun SPEC-0082 con las 4 condiciones (#4 OFF, fixtures-only, golden AC1-AC8 verde, maker!=checker), y entregar a in_review con goldens/smoke verdes (o blocked con pregunta concreta)."
 question: "Confirmas claim de TASK-0120 e inicio de implementacion segun SPEC-0082 con las 4 condiciones?"
 context_refs:
   - Area_comun/specs/SPEC-0082-event-auth-secret-resolution.md
