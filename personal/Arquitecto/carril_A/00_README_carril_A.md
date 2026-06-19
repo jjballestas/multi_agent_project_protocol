@@ -22,6 +22,35 @@ El operador reactiva a Analista (honestidad/metodologia) y Codex (invariante de 
 revision paralela. Los drafts A1/A2/A3 quedan listos para revision. A la espera de sus vistos + GO
 del operador antes de promover por `submit_intent` (SemVer MINOR + CHANGELOG).
 
+## Cambios incorporados (GO del operador 2026-06-19) - drafts ACTUALIZADOS, sin promover
+
+Revision Analista+Codex convergio; el operador dio GO a incorporar los 7 cambios (NO promover, NO
+encender, #4 sigue OFF). Incorporado:
+
+- **A1 / DECISION-0039:** `event_auth` reubicado como clave **top-level** (no event_state), existe
+  `enabled=false` y **sin claves en `event_auth.keys`**. Provisioning elevado a **condicion de
+  encendido** (claves HMAC en `event_auth.keys` + `anchor_config.remote_url`/proof antes del piloto, si
+  no `append_event`/primer anclaje fallan). Salud (99%) y seguridad (prueba negativa) separadas como dos
+  criterios distintos, ambos bloqueantes.
+- **A1 / SPEC-0081:** AC1 = provisioning (public_keys + event_auth.keys + anchor remote) + smoke. AC2 =
+  salud >=99% **declarada NO-seguridad** + denominador de **fuente independiente** (event log). AC3 =
+  seguridad **binaria, bloqueante**, **6 vectores** con golden por vector. AC4 = evento de atestacion
+  estructurado, verificado por **esquema** (no por scan_encoding, que NO detecta PII). test_plan +
+  traceability actualizados.
+- **A2 / DECISION-0040:** "cero PII" separado en **estructural** (sujeto-por-hash) vs **disciplinario**
+  (predicado/handoffs/mailbox; NO hay scan PII). Base legal **refundada** en "no hay persona fisica en el
+  dataset" (Cons.26 corregido: el seudonimo sigue DENTRO del ambito). **Operador humano** incluido en la
+  DPIA-lite (unica persona fisica; rol/consentimiento). Frase falsa del scan corregida. **Tarea diferida
+  DEF-PII** (detector real / exporter publicable) registrada con fecha: cierra ANTES de la captura viva
+  (#2/#3), NO bloquea Carril A, NO se construye ahora (regla 3.4).
+- **A3 / DECISION-0041:** anadida **prueba negativa objetiva** (escritura al Core rechazada por el SO),
+  registrada, no juicio del dueno.
+- **No reabierto** (ya verificado): encuadre activacion!=rediseno (A1<->0029), referencia!=redecide
+  (A3<->0035), modelo de amenaza A1-A4, corte limpio, ventana #4 sola.
+
+PENDIENTE: cruce read-only del asistente -> GO de PROMOCION del operador -> promover por `submit_intent`.
+Sin ese GO no se promueve ni se enciende nada.
+
 ## 0. Reconciliacion previa (honestidad - LEER PRIMERO)
 
 El brief pide "DECISION + SPEC #4 atestacion de autoria" como si fuera de cero. **No lo es.** El

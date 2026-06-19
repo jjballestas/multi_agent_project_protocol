@@ -49,7 +49,12 @@ Core. Esta decision fija la precondicion que lo impide.
      mera asercion;
    - confirmar que **no existe ruta de escritura** al Core en el codigo implementado (un grep estatico
      es evadible: es una revision sustantiva, no un match de patron);
-   - **registrar** la verificacion en la tarea como precondicion explicita.
+   - **prueba negativa OBJETIVA y registrada (no juicio del dueno):** ejecutar un **intento de escritura
+     al Core que el SO RECHACE** (el proceso del satelite corre bajo identidad/montaje sin permiso de
+     escritura al path del Core), y registrar el rechazo como evidencia reproducible -- analoga a la
+     prueba negativa AC3 de A1. La verificacion de Codex NO descansa solo en su lectura del codigo.
+   - **registrar** la verificacion (revision sustantiva + prueba negativa) en la tarea como precondicion
+     explicita.
    Si la verificacion no esta, la lectura viva NO procede (no se cae en silencio).
 
 3. **Direccion del acoplamiento (sin cambio).** El Core NO depende del satelite (no lo importa, no lo

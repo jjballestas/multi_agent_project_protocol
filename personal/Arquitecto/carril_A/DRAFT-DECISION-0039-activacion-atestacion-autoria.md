@@ -21,9 +21,12 @@ phase: P2
 DECISION-0029 adopto la politica de "firmantes cruzados sin consenso" (atestacion de autoria con
 adversario explicito) y dejo el mecanismo CONSTRUIDO off-by-default en tres piezas: prev_hash
 encadenado (TASK-0101), firma por agente (TASK-0102), anclaje externo periodico (TASK-0103); TASK-0113
-hizo segura la interaccion chain+auth. Hoy todo esta OFF en la instancia viva
-(`chain_enabled`/`agent_signatures_enabled`/`anchor_enabled`/`event_auth.enabled` = false;
-`signature_config.public_keys = {}`).
+hizo segura la interaccion chain+auth. Hoy todo esta OFF en la instancia viva: `event_state.chain_enabled`,
+`event_state.agent_signatures_enabled`, `event_state.anchor_enabled` = false; `event_auth.enabled` = false
+(clave **top-level** de `protocol.config.json`, capa HMAC de compatibilidad) **y sin claves en
+`event_auth.keys`**; `event_state.signature_config.public_keys = {}` y `event_state.anchor_config.remote_url
+= ""`. Es decir: el mecanismo existe pero **NO esta provisionado** (confirmado por el operador y por la
+revision de Codex).
 
 DECISION-0029 condiciono el ENCENDIDO a "SPEC cerrada + golden cases verdes + aprobacion explicita
 posterior del operador". Esta decision es ese paso, motivado por una **necesidad real con fecha**
@@ -55,22 +58,36 @@ Reusa DECISION-0029 sec. 3 y lo fija como contrato de la activacion:
 
 ## Decision
 
-1. **Autorizar la activacion gateada de #4** en la instancia viva, encendiendo las tres piezas
-   (`chain_enabled`, `agent_signatures_enabled`, `anchor_enabled` y, como capa de compatibilidad,
-   `event_auth.enabled`) bajo el plan off -> piloto -> on de la seccion siguiente. Vendor-neutral:
-   firma Ed25519 local o keyless (patron DECISION-0023); anclaje configurable (remoto git
-   independiente / transparency log / RFC 3161). Off-by-default se conserva en el template.
+1. **Autorizar la activacion gateada de #4** en la instancia viva, encendiendo las tres piezas de
+   `event_state` (`chain_enabled`, `agent_signatures_enabled`, `anchor_enabled`) y, como capa de
+   compatibilidad, la clave **top-level** `event_auth.enabled` (HMAC). **El encendido EXIGE provisioning
+   previo (SPEC-0081 AC1): claves HMAC en `event_auth.keys` + `anchor_config.remote_url`/proof backend
+   reales.** Encender sin esto rompe `append_event` ("signing key missing") y/o falla el primer anclaje
+   (`remote_url=""`) -- objecion verificada por Codex y confirmada por el operador. Plan off -> piloto ->
+   on en la seccion siguiente. Vendor-neutral: firma Ed25519 local o keyless (patron DECISION-0023);
+   anclaje configurable (remoto git independiente / transparency log / RFC 3161). Off-by-default se
+   conserva en el template.
 
-2. **Provisioning de identidad por agente.** Poblar `event_state.signature_config.public_keys` con la
-   clave publica de cada agente del `agent_registry` (Arquitecto, Codex, y cualquier alta futura). Las
-   **claves privadas viven FUERA del repo** (wrapper de cada agente), sin secretos en el repositorio
-   (DECISION-0029 sec.5). Sin la llave publica registrada, la atestacion de ese agente no verifica.
+2. **Provisioning (CONDICION DE ENCENDIDO, antes del piloto).**
+   - **Firma por agente:** poblar `event_state.signature_config.public_keys` con la clave publica de cada
+     agente del `agent_registry` (Arquitecto, Codex, altas futuras). Claves privadas FUERA del repo
+     (wrapper de cada agente), sin secretos en el repositorio (DECISION-0029 sec.5). Sin la publica
+     registrada, la atestacion de ese agente no verifica.
+   - **Capa HMAC (`event_auth`):** proveer las claves en `event_auth.keys` ANTES de
+     `event_auth.enabled=true` (si no, `append_event` falla por "signing key missing").
+   - **Anclaje:** proveer `anchor_config.remote_url` (remoto git independiente) o un proof backend real
+     ANTES de `anchor_enabled=true` (si no, el primer anclaje falla).
 
-3. **Criterio de instrumento sano (manipulation-check).** En runs legitimos, **>=99% de las
-   atestaciones esperadas estan bien formadas y verificables** (definicion exacta y denominador en
-   SPEC-0081). Por debajo de ese umbral el instrumento se declara roto y se vuelve a off (rollback). El
-   instrumento debe ademas **detectar la mentira del adversario**: una atestacion forjada/alterada
-   (A1/A2) DEBE ser rechazada por el validador (prueba negativa obligatoria en SPEC-0081).
+3. **Dos criterios DISTINTOS, ambos bloqueantes (no confundir salud con seguridad).**
+   - **Salud del instrumento (manipulation-check, AC2):** en runs legitimos, **>=99% de las atestaciones
+     esperadas estan bien formadas y verificables**. Mide el instrumento EN AUSENCIA de adversario; **NO
+     es una afirmacion de seguridad**. El denominador se deriva de una **fuente INDEPENDIENTE del
+     firmante** (conteo de eventos autoria-relevantes del log), no de lo que el firmante decidio firmar.
+     Por debajo del umbral, instrumento roto -> off (rollback).
+   - **Seguridad (prueba negativa, AC3):** una atestacion forjada/alterada DEBE ser rechazada por el
+     validador. Es **binaria** (no umbral) y **bloqueante igual que AC2**, con vectores fijos (alteracion
+     puntual, borrado, insercion, reordenamiento, llave no registrada, atribucion cruzada) y golden
+     reproducible por vector. Esta es la propiedad de seguridad de #4; el 99% NO lo es.
 
 4. **Dos planos / sin PII (DECISION-0033, reforzado por DECISION-0040/GATE-DATASET).** La atestacion
    firma el **hash** del artefacto (sujeto = `canonical_hash`); el predicado es agente / modelo-version
@@ -88,8 +105,10 @@ Reusa DECISION-0029 sec. 3 y lo fija como contrato de la activacion:
 ## Plan de activacion (off -> piloto -> on)
 
 1. **OFF (hoy).** Mecanismo construido, flags false, `public_keys = {}`. Nada cambia.
-2. **PROVISIONING.** Generar par de llaves por agente (privada fuera del repo); registrar publicas en
-   `signature_config.public_keys`. Verificar: sin secretos en repo; cada agente firma con su llave.
+2. **PROVISIONING (condicion dura del piloto).** Generar par de llaves por agente (privada fuera del
+   repo); registrar publicas en `signature_config.public_keys`. Proveer claves HMAC en `event_auth.keys`
+   y `anchor_config.remote_url`/proof backend reales. Verificar: sin secretos en repo; cada agente firma
+   con su llave; `append_event` no falla; el primer anclaje no falla.
 3. **PILOTO (ventana supervisada).** Encender chain+firmas+anclaje en una ventana acotada con operador
    presente. Correr el manipulation-check sobre runs legitimos del propio protocolo (no del modulo-app
    todavia). Aceptacion: >=99% bien formadas + prueba negativa pasa + goldens verdes + drift 0.
