@@ -67,8 +67,8 @@ manipulation-check, piloto, prueba negativa y rollback.
   "signing key missing"). (c) `anchor_config.remote_url`/proof backend real esta provisto antes de
   `anchor_enabled=true` (sin eso el primer anclaje falla). Un smoke de provisioning debe demostrar que
   `append_event` y el primer anclaje NO fallan tras (a)-(c).
-- **AC2 - Salud del instrumento >=99% (NO es seguridad).** En >=N runs legitimos (N definido con el
-  operador; sugerido N>=20), la tasa de atestaciones bien formadas y verificables es **>=99%**. Esta
+- **AC2 - Salud del instrumento >=99% (NO es seguridad).** En N=20 runs legitimos (N=20 FIJADO por el operador; guardrail Analista:
+  medicion ACOTADA, no harness auto-justificado), la tasa de atestaciones bien formadas y verificables es **>=99%**. Esta
   metrica mide la salud del instrumento EN AUSENCIA de adversario; **NO es una afirmacion de seguridad**
   (la seguridad la mide AC3). El reporte debe declarar explicitamente esta distincion.
   - **Definicion de "atestacion bien formada y verificable":** el evento autoria-relevante (turno o

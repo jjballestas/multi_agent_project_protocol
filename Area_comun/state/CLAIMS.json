@@ -1090,6 +1090,24 @@
             "updated_at": "2026-06-19T02:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Codex-carril-A-estado-reply",
+            "expires_at": "2026-06-19T07:21:00Z",
+            "notes": "Reply to Arquitecto Carril A status request without activating #4.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-informe-estado.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T06:51:00Z",
+            "status": "released",
+            "task_id": "PROMO-20260619-CARRIL-A",
+            "updated_at": "2026-06-19T06:51:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Codex-carril-A-reverify",
             "expires_at": "2026-06-19T01:48:00Z",
             "notes": "Respond to operator Carril A re-verification request; read-only verdict, no promotion or flag activation.",
@@ -1254,6 +1272,24 @@
             "started_at": "2026-06-19T01:29:10Z",
             "status": "released",
             "task_id": "PROMO-20260619-CARRIL-A"
+        },
+        {
+            "claim_id": "CLAIM-20260619-ready-0117-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "GO operador opcion 1: promover TASK-0117 proposed->ready para construir infraestructura SPEC-0081 (#4 OFF). N=20 fijado. Claim FILE-SCOPED.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+                "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-GO-harness-ack.md"
+            ],
+            "started_at": "2026-06-19T07:10:16Z",
+            "status": "released",
+            "task_id": "TASK-0117"
         },
         {
             "claim_id": "CLAIM-20260619-standdown-Arquitecto",
