@@ -1,6 +1,44 @@
 # Codex Memory
 
-Last updated: 2026-06-15 Europe/Madrid, after identity re-genesis and Codex startup refresh.
+Last updated: 2026-06-20 Europe/Madrid, after TASK-0128 stage-4 attestation delivery to in_review.
+
+## Latest Session Note
+
+- TASK-0128 is delivered to `in_review`: `D:/Agentes/Zeus/Zeus-protocol` now deepens RF-4 with a read-only
+  #4 attestation view. The observe API exposes runtime-derived chain, event-auth, agent-signature, anchor,
+  drift, and source-state checks, plus boundary T0 / pre-T0 seal / `chain_manifest.json`; event payload
+  previews are redacted as `[redacted - PII de tercero]`. Evidence: product `npm test` (11 tests), `node
+  --check` for server/reader/app, server smoke on `http://127.0.0.1:4173` PID 137252, protocol validator,
+  encoding, neutrality, and drift green. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0128-codex-to-arquitecto-1.md`.
+- TASK-0127 is delivered to `in_review`: `D:/Agentes/Zeus/Zeus-protocol` now exposes the governed operate
+  surface for RF-5..RF-8. `/api/protocol/actions` lists SDD, GO/response, agent-run, and validation actions;
+  `/api/protocol/actions/submit` prepares transactions and executes only through `runtime/submit_intent.py`
+  with explicit `SUBMIT_INTENT` confirmation. Direct ledger/state/mailbox write surfaces are absent and
+  rejected by contract. Evidence: product `npm test` (10 tests), server smoke on `http://127.0.0.1:4173`
+  PID 137196, protocol validator, encoding, neutrality, and drift green. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0127-codex-to-arquitecto-1.md`.
+- TASK-0126 is delivered to `in_review`: product code lives in `D:/Agentes/Zeus/Zeus-protocol` and now
+  implements front stage 2 observe with RF-1 dashboard, RF-2 mailbox, RF-3 artifacts, and RF-4 #4 ledger
+  timeline. The server exposes read-only `/api/protocol/observe`; canonical data is read from the protocol
+  repo through allowlisted `git show <ref>:<path>` and `git ls-tree`, with no direct write APIs or ledger
+  mutation routes. Evidence: product `npm test` (8 tests), protocol validator, encoding, neutrality, and
+  drift green. Handoff: `Area_comun/handoffs/HANDOFF-TASK-0126-codex-to-arquitecto-1.md`.
+- TASK-0125 is delivered to `in_review`: `connectors/ci_readonly/` implements a deny-by-default CI read
+  connector with fixture backend; `examples/connector_ci_cases` covers AC1-AC7, including 11 negative
+  vectors with 0 backend calls; CI includes the golden. `connectors.config.json` records `fixture-ci-ro`
+  outside `protocol.config.json`, `enabled:false`; live use remains gated by s9 + operator GO. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0125-codex-to-arquitecto-1.md`.
+- TASK-0124 stage 1 is delivered to `in_review`: product code lives in `D:/Agentes/Zeus/Zeus-protocol`;
+  dependency-free Node scaffold adds static UI shell, local `/api/protocol/snapshot`, and a canonical
+  reader using `git show <ref>:<path>` against the protocol repo rather than the working tree. Product
+  tests pass (`npm test`, 4 tests). Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0124-codex-to-arquitecto-1.md`.
+- TASK-0123 is delivered to `in_review`: `connectors/git_readonly/` implements a deny-by-default Git
+  inspection connector with fixture backend; `examples/connector_git_cases` covers AC1-AC7, including 10
+  negative vectors with 0 backend calls; CI includes the golden. `connectors.config.json` records
+  `fixture-git-ro` outside `protocol.config.json`, `enabled:false`; live use remains gated by s9 + operator
+  GO. Handoff: `Area_comun/handoffs/HANDOFF-TASK-0123-codex-to-arquitecto-1.md`.
 
 ## Current Repository State
 

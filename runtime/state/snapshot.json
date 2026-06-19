@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cf1c1d4065979509745777f402dc371d39785920bea4bebc1ff5213588720737",
+  "canonical_hash": "ee50f404ff54d27528f403c0604eb405b867d094bb1c89e672372b2908e505f3",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -21,11 +21,13 @@
       "CLAIM-20260620-Arquitecto-close-0124-0125": 1,
       "CLAIM-20260620-Arquitecto-close-0126": 1,
       "CLAIM-20260620-Arquitecto-close-0127": 1,
+      "CLAIM-20260620-Arquitecto-close-0128": 1,
       "CLAIM-20260620-Arquitecto-d50-t128": 1,
       "CLAIM-20260620-Arquitecto-promo-0126": 1,
       "CLAIM-20260620-Arquitecto-promo-0127": 1,
       "CLAIM-20260620-Codex-TASK-0126": 1,
       "CLAIM-20260620-Codex-TASK-0127": 1,
+      "CLAIM-20260620-Codex-TASK-0128": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "DECISION-0045": 1,
       "DECISION-0046": 1,
@@ -42,11 +44,11 @@
       "TASK-0125": 6,
       "TASK-0126": 7,
       "TASK-0127": 7,
-      "TASK-0128": 2,
+      "TASK-0128": 7,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 86,
+    "events_applied": 93,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -105,6 +107,9 @@
       "arq:upd0124:acq": 716,
       "arq:upd0124:rel": 718,
       "arq:upd0124:reupsert-pathfix": 717,
+      "arquitecto:close-0128:claim-acquire": 762,
+      "arquitecto:close-0128:claim-release": 764,
+      "arquitecto:close-0128:status-done": 763,
       "codex-carril-a-monitor-acquire-2026-06-19T15:30:53Z": 685,
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
@@ -133,11 +138,15 @@
       "codex:task0127-front-etapa3:in-progress-to-in-review": 749,
       "codex:task0127-front-etapa3:ready-to-in-progress": 748,
       "codex:task0127-front-etapa3:release": 750,
+      "codex:task0128-front-etapa4:claim": 758,
+      "codex:task0128-front-etapa4:in-progress-to-in-review": 760,
+      "codex:task0128-front-etapa4:ready-to-in-progress": 759,
+      "codex:task0128-front-etapa4:release": 761,
       "eventlog-chain:genesis:v1": 672,
       "protocol-state:regenesis-ref:b230d9a4503cb3736d256f019c737f73e3b37e4b60264781471610bcf27af954": 673
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 757
+  "up_to_seq": 764
 }

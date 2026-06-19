@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: "Prioridad del operador: front etapa 4 VISTA DE ATESTACION #4 (TASK-0128, SPEC-0086 RF-4): timeline del ledger atestado + boundary T0 + sello pre-T0 + manifest, READ-ONLY sobre el canonico. Usa el design system (Zeus-protocol a445d59). Codex maker, Arquitecto checker. Riesgo cero (no toca #4/re-genesis)."
 requested_action: "Implementar TASK-0128 (SPEC-0086 etapa 4) en D:\\Agentes\\Zeus\\Zeus-protocol: vista READ-ONLY del ledger #4 (timeline seq/actor/firma VERIFICADA por evento/prev_hash/anclaje) + boundary T0 + sello pre-T0 + manifest (chain_manifest.json + pre_t0_provenance sha/commit). La verificacion del front DEBE coincidir con validate_chain/validate_agent_signatures/verify_anchor del runtime; drift == protocol_state_drift. Honestidad de estado: canonical-indicator + badges DERIVADOS de la verificacion real (NO verde estatico; render WORKING TREE/stale o 'indeterminado' cuando no sea canonico o no se pueda verificar). Guarda PII: payload de texto libre REDACTADO, export PII-free. Usar el design system en design/interface (commit a445d59: timeline/badges/canonical-indicator/ledger). SIN escritura (read-only). Avanzar a in_review con claim file-scoped + submit_intent; yo reproduzco."
 question: "Confirmas el GO de la etapa 4 (vista de atestacion #4, read-only, con el design system a445d59 y la honestidad de estado/guarda PII) y ETA? Avisas en in_review."

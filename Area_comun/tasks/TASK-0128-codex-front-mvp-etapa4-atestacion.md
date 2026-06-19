@@ -2,7 +2,7 @@
 id: TASK-0128
 title: Proyecto-front MVP etapa 4 - Vista de atestacion #4 (timeline ledger + boundary T0 + sello pre-T0 + manifest), read-only (DECISION-0049 / SPEC-0086)
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

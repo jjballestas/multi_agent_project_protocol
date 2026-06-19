@@ -1953,6 +1953,26 @@
             "updated_at": "2026-06-20T01:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0128",
+            "expires_at": "2026-06-19T22:31:54Z",
+            "notes": "Close TASK-0128 in_review->done (checker Arquitecto, maker!=checker reproducido verde: node --test 11/11, validate con/sin secretos exit0, drift0, badge-honesto derivado del runtime no hardcodeado, PII redactado, read-only). Epoca 1.14.0 pinned (DECISION-0047, sin bump).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/PROJECT_STATE.slim.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/TASK_INDEX.slim.json",
+                "Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T22:31:54Z",
+            "status": "released",
+            "task_id": "TASK-0128",
+            "updated_at": "2026-06-19T22:31:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",
@@ -2065,6 +2085,36 @@
             "status": "released",
             "task_id": "TASK-0127",
             "updated_at": "2026-06-19T21:22:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0128",
+            "expires_at": "2026-06-20T06:30:00Z",
+            "notes": "Implement TASK-0128 front attestation view #4 read-only over canonical ledger.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0128",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0128",
+                "Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0128.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0128.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0128-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0128-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T00:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0128",
+            "updated_at": "2026-06-20T00:30:00Z"
         },
         {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",

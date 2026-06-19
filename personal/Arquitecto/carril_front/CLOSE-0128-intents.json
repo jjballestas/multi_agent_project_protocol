@@ -1,0 +1,45 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-close-0128",
+          "task_id": "TASK-0128",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json",
+            "Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T22:31:54Z",
+          "updated_at": "2026-06-19T22:31:54Z",
+          "expires_at": "2026-06-19T22:31:54Z",
+          "status": "active",
+          "notes": "Close TASK-0128 in_review->done (checker Arquitecto, maker!=checker reproducido verde: node --test 11/11, validate con/sin secretos exit0, drift0, badge-honesto derivado del runtime no hardcodeado, PII redactado, read-only). Epoca 1.14.0 pinned (DECISION-0047, sin bump)."
+        },
+        "idempotency_key": "arquitecto:close-0128:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0128",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0128:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-close-0128",
+        "idempotency_key": "arquitecto:close-0128:claim-release"
+      }
+    }
+  ]
+}
