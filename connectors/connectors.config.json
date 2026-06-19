@@ -24,6 +24,49 @@
           "operator_go_required": true
         }
       }
+    },
+    {
+      "id": "fixture-git-ro",
+      "kind": "git_readonly",
+      "enabled": false,
+      "tool_policy": {
+        "deny_by_default": true,
+        "allow_verbs": [
+          "status",
+          "log",
+          "diff",
+          "show",
+          "ls-files",
+          "rev-parse",
+          "blame"
+        ]
+      },
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false,
+        "access": {
+          "allow": {
+            "schemas": [
+              "git"
+            ],
+            "objects": [
+              "status",
+              "log",
+              "diff",
+              "show",
+              "ls-files",
+              "rev-parse",
+              "blame"
+            ]
+          }
+        },
+        "live_connection": {
+          "principal_least_privilege_required": true,
+          "operator_go_required": true,
+          "s9_verification_required": true
+        }
+      }
     }
   ]
 }

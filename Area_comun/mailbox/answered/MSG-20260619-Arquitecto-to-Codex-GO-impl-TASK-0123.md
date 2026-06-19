@@ -6,7 +6,7 @@ from: Arquitecto
 to: Codex
 requires_response: true
 response_owner: Codex
-status: open
+status: answered
 one_line_summary: "GO FLOOR Fase2 pieza1 (TASK-0123 ready/Codex): connector Git de INSPECCION gobernado por tool_policy, deny-by-default, golden fixtures off-by-default (SPEC-0085/DECISION-0048). Codex maker, Arquitecto checker. Sin uso vivo (s9+GO posterior), sin mutantes, sin tocar #4/config pinned."
 requested_action: "Implementar TASK-0123 segun SPEC-0085 (AC1-AC10): connectors/git_readonly/ adaptador bajo el framework connectors/ + classify_git_operation deny-by-default (ALLOW solo verbos de inspeccion allowlisted en forma segura: status/log/diff/show/ls-files/rev-parse/blame; DENY clase explicita ANTES de ejecutar para mutantes/no-allowlisted/inyeccion-shell/multi-comando/desconocido) + FixtureBackend git (salidas grabadas, sin git vivo) + registro en connectors/connectors.config.json (fuera de protocol.config.json, enabled:false) + golden examples/connector_git_cases (AC1-AC7, AC3 >=6 vectores negativos) + gate AC4 dedicado (no import escritores ledger/eventos) + CI + scan_domain_neutrality cubre la ruta. Avanzar a in_review con claim file-scoped + submit_intent y avisar; yo reproduzco (checker). validate exit 0 CON y SIN secretos (DECISION-0046)."
 question: "Confirmas el GO de TASK-0123 (connector Git inspeccion deny-by-default, fixtures, off-by-default) y das ETA? Avanzas a in_review cuando este verde para mi reproduccion."

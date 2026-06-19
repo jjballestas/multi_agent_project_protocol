@@ -21,6 +21,15 @@ for what counts as MAJOR / MINOR / PATCH here.
 > touching genesis.
 
 ### Added
+- **FLOOR Fase 2 piece 1 in review (DECISION-0048 / SPEC-0085 / TASK-0123):** added a domain-neutral
+  `git_readonly` inspection connector governed by deny-by-default operation classification. Allowed verbs
+  are limited to `status`, `log`, `diff`, `show`, `ls-files`, `rev-parse`, and `blame`; mutating,
+  non-allowlisted, shell-injection, multi-command, and unsafe-argument vectors are rejected before backend
+  access. The connector registry entry lives in `connectors/connectors.config.json`, outside
+  `protocol.config.json`, defaults to `enabled:false`, and live use remains fail-closed pending later s9
+  least-privilege verification plus operator GO. Golden `examples/connector_git_cases` covers trust
+  boundary, fixture reads, 10 negative vectors with 0 backend calls, no authority imports/writes,
+  off-by-default fail-closed, registry outside protocol config, and PII-like fixture data staying in memory.
 - **Carril B piece 1 implemented (DECISION-0044 / SPEC-0083 / TASK-0121):** added a domain-neutral
   `connectors/` layer for read-only external-source adapters with explicit `trust_boundary`,
   deny-by-default classification, and the principle that a connector grants no authority. First adapter:

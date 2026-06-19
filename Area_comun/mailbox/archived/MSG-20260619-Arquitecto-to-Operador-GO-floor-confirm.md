@@ -6,7 +6,7 @@ from: Arquitecto
 to: Operador
 requires_response: false
 response_owner: Operador
-status: open
+status: archived
 one_line_summary: Confirmo el alcance del FLOOR (Fase2 Git+CI via tool_policy deny-by-default; Fase1 registro+digestion skills + 3 skills neutrales; off-by-default; sin Fase4; sin DB-live hasta T0; sin tocar #4) y arranco de a una pieza por SDD. Pieza 1 Git connector promovida + GO a Codex. Monitoreo reactivado.
 context_refs:
   - Area_comun/decisions/DECISION-0048-connectors-accion-tool-policy.md

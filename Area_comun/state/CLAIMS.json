@@ -1120,6 +1120,24 @@
             "updated_at": "2026-06-19T17:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260619-Arquitecto-close-0123",
+            "expires_at": "2026-06-20T02:00:00Z",
+            "notes": "Cierre TASK-0123 in_review->done (FLOOR Fase2 pieza1 Git connector) tras reproduccion checker VERDE (golden 8/8, AC3 deny-by-default, AC4 no-writers, off-by-default). Sin bump epoca.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0123-codex-connector-git-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T22:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0123",
+            "updated_at": "2026-06-19T22:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260619-Arquitecto-dec47",
             "expires_at": "2026-06-19T22:30:00Z",
             "notes": "Registra DECISION-0047 (politica de versionado por epoca bajo #4). Sin bump ni re-genesis.",
@@ -1341,6 +1359,35 @@
             "status": "released",
             "task_id": "TASK-0121",
             "updated_at": "2026-06-19T15:24:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260619-Codex-TASK-0123",
+            "expires_at": "2026-06-19T23:38:00Z",
+            "notes": "Implement TASK-0123 Git inspection connector deny-by-default with fixture backend and golden gates.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0123",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0123",
+                "Area_comun/tasks/TASK-0123-codex-connector-git-readonly.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0123.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0123.md",
+                "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0123-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0123-codex-to-arquitecto-1.md",
+                "connectors/connectors.config.json",
+                "connectors/README.md",
+                "connectors/git_readonly/__init__.py",
+                "connectors/git_readonly/connector.py",
+                "examples/connector_git_cases/run_connector_git_cases.py",
+                ".github/workflows/validate.yml",
+                "CHANGELOG.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T19:38:00Z",
+            "status": "released",
+            "task_id": "TASK-0123",
+            "updated_at": "2026-06-19T19:38:00Z"
         },
         {
             "claim_id": "CLAIM-20260619-Codex-carril-A-coord",

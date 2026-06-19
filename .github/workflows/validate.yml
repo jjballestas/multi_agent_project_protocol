@@ -145,6 +145,9 @@ jobs:
       - name: Run connector SQL Server read-only cases
         run: python examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py
 
+      - name: Run connector Git inspection cases
+        run: python examples/connector_git_cases/run_connector_git_cases.py
+
       - name: Run runtime instantiation cases
         run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
 

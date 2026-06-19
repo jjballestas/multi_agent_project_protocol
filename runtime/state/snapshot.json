@@ -1,14 +1,16 @@
 {
-  "canonical_hash": "040068ba309283d927cdba41ac357e671a679a31ac7e02aa187c5524922f5c1b",
+  "canonical_hash": "4447413fea644d0b1fb09e798f853c6f25a4a0989a42cd24c9113c80fec553d7",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
       "CLAIM-20260619-Arquitecto-close-0121": 1,
       "CLAIM-20260619-Arquitecto-close-0122": 1,
+      "CLAIM-20260619-Arquitecto-close-0123": 1,
       "CLAIM-20260619-Arquitecto-dec47": 1,
       "CLAIM-20260619-Arquitecto-decision-0045": 1,
       "CLAIM-20260619-Arquitecto-promo-0123": 1,
       "CLAIM-20260619-Codex-TASK-0121": 1,
+      "CLAIM-20260619-Codex-TASK-0123": 1,
       "CLAIM-20260619-Codex-carril-A-monitor": 2,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "DECISION-0045": 1,
@@ -19,11 +21,11 @@
       "TASK-0117": 3,
       "TASK-0121": 5,
       "TASK-0122": 2,
-      "TASK-0123": 2,
+      "TASK-0123": 7,
       "none": 1,
       "protocol-state": 1
     },
-    "events_applied": 31,
+    "events_applied": 38,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -37,6 +39,9 @@
       "arq:close-0122:dec46": 682,
       "arq:close-0122:rel": 684,
       "arq:close-0122:upsert-done": 683,
+      "arq:close0123:acq": 707,
+      "arq:close0123:done": 708,
+      "arq:close0123:rel": 709,
       "arq:dec45:acq": 678,
       "arq:dec45:rec": 679,
       "arq:dec45:rel": 680,
@@ -55,11 +60,15 @@
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
       "codex:task0121-connector-readonly:ready-to-in-progress": 690,
+      "codex:task0123-git-readonly:claim": 703,
+      "codex:task0123-git-readonly:in-progress-to-in-review": 705,
+      "codex:task0123-git-readonly:ready-to-in-progress": 704,
+      "codex:task0123-git-readonly:release": 706,
       "eventlog-chain:genesis:v1": 672,
       "protocol-state:regenesis-ref:b230d9a4503cb3736d256f019c737f73e3b37e4b60264781471610bcf27af954": 673
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 702
+  "up_to_seq": 709
 }

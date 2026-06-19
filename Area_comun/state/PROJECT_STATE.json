@@ -147,7 +147,7 @@
         {
             "id": "TASK-0123",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Connector Git (inspeccion) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0085)"
         }
     ],
