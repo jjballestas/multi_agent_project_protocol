@@ -1220,6 +1220,21 @@
             "task_id": "COORD-20260619-CARRILA-REVIEW"
         },
         {
+            "claim_id": "CLAIM-20260619-go-encendido-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "GO encendido #4 Fase 1: coordinar provisioning+piloto con Codex; ack operador. Claim FILE-SCOPED.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-encendido-fase1.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-GO-encendido-ack.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-encender-y-lanzar.md"
+            ],
+            "started_at": "2026-06-19T08:15:21Z",
+            "status": "released",
+            "task_id": "TASK-0117"
+        },
+        {
             "claim_id": "CLAIM-20260619-informe-codex-Arquitecto",
             "expires_at": "2026-06-20",
             "notes": "Peticion de informe de estado a Codex (regla operador) + hygiene promocion-done. Claim FILE-SCOPED (guard DECISION-0042).",
