@@ -2,7 +2,7 @@
 id: TASK-0129
 title: Proyecto-front - endurecimiento badge-honesto - test de COMPORTAMIENTO (regresion-proof honestidad de estado), producto Zeus-protocol (SPEC-0086 AC11)
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

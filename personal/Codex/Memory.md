@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-20 Europe/Madrid, after TASK-0128 stage-4 attestation delivery to in_review.
+Last updated: 2026-06-20 Europe/Madrid, after TASK-0129 badge behavior delivery to in_review and startup prompt refresh.
 
 ## Latest Session Note
 
+- TASK-0129 is delivered to `in_review`: `D:/Agentes/Zeus/Zeus-protocol` now has behavior tests for
+  attestation badge honesty. `public/app.js` exports pure derivation helpers while preserving browser render;
+  `tests/staticContract.test.js` verifies false-green prevention for chain, agent signatures, anchor,
+  event-auth, drift, validator, source-state, and indeterminate cases. Evidence: product `npm test`
+  (13 tests), `node --check public/app.js`, encoding, neutrality, and drift green. The protocol validator is
+  blocked by unrelated mailbox anomaly `MSG-20260620-Operador-to-Arquitecto-GO-etapa6.md` (marked as requiring
+  response without `question`); Codex notified Arquitecto in
+  `Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-validator-anomaly-etapa6.md`. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0129-codex-to-arquitecto-1.md`. `personal/Codex/STARTUP_PROMPT.md` was
+  refreshed for the next session with v1.14.0/#4 ON, TASK-0129 in_review, cron PID 141272, and the validator
+  anomaly caveat.
 - TASK-0128 is delivered to `in_review`: `D:/Agentes/Zeus/Zeus-protocol` now deepens RF-4 with a read-only
   #4 attestation view. The observe API exposes runtime-derived chain, event-auth, agent-signature, anchor,
   drift, and source-state checks, plus boundary T0 / pre-T0 seal / `chain_manifest.json`; event payload

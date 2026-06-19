@@ -2136,6 +2136,46 @@
             "updated_at": "2026-06-20T00:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0129",
+            "expires_at": "2026-06-20T06:00:00Z",
+            "notes": "Implement TASK-0129 badge honesty behavior tests in Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0129",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0129",
+                "Area_comun/tasks/TASK-0129-codex-front-badge-behavior-test.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0129.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0129.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0129-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0129-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0129",
+            "updated_at": "2026-06-20T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-validator-anomaly-etapa6",
+            "expires_at": "2026-06-20T01:00:00Z",
+            "notes": "Notify validator-blocking mailbox anomaly detected after TASK-0129.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-validator-anomaly-etapa6.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T00:00:00Z",
+            "status": "released",
+            "task_id": "COORD-20260620-VALIDATOR-ANOMALY",
+            "updated_at": "2026-06-20T00:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
