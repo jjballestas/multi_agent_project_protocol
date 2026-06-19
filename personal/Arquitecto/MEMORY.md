@@ -2,7 +2,7 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-19, HEAD 35be10a, v1.11.0.
+> Ultima actualizacion: 2026-06-19, HEAD e68dca7, v1.11.0.
 
 ## Carril A Presupuesto/tesis (2026-06-19) - PROMOVIDO v1.10.0 (e56b027)
 - **PROMOVIDO** (GO operador + OK Codex + cross-check asistente): DECISION-0039 (activacion #4) + SPEC-0081
@@ -28,8 +28,15 @@
   en SPEC-0081 AC2 + medicion acotada. TASK-0118 (DEF-PII) diferida. Codex informo idle-esperando-GO (no
   bloqueo tecnico; su mailbox-reader/coord-cron estaba parado -> arreglo su monitor: coordina tras 3 rondas).
   El ENCENDIDO de #4 sigue siendo GO POSTERIOR del operador + piloto (cuando converja DB + Carril B).
-- ESPERO: Codex mueve TASK-0117 a in_progress -> handoff/in_review -> reviso maker!=checker -> cierro.
-  Codex + mi cron ACTIVOS hasta aviso de cierre del operador.
+- **HARNESS SPEC-0081 ENTREGADO + REVISADO VERDE (e68dca7):** Codex construyo examples/attestation_health_cases
+  (AC1 provisioning/smoke + AC2 N=20 + AC4 schema + AC5 rollback), attestation_negative_cases (AC3 6 vectores
+  A1/A2), readonly_enforcement_cases (A3: escritura al Core sintetico rechazada por SO + AST). Revise
+  maker!=checker reproduciendo: health 3/3, negative 6/6, readonly 2/2; #4 OFF (nada encendido); sin
+  regresion; drift 0. TASK-0117 queda IN_REVIEW (build verificada; DoD completa = encendido #4 + piloto =
+  GATEADA al GO POSTERIOR del operador cuando converja DB + Carril B). Sin bump de version (build-only, #4 OFF).
+  PILOTO SERVIDO al GO de encendido del operador. Pendiente decision del operador: stand-down de Codex
+  (build hecho, encendido futuro) o seguir activo; y estado de TASK-0117. El ENCENDIDO es su propia ventana
+  de riesgo (operador presente + rollback + un solo multiplicador).
 
 ## (historico) Carril A - EN REVISION, sin promover
 - Encargo del operador: arrancar el modulo-app de Presupuesto bajo el protocolo, instrumentado para tesis.
