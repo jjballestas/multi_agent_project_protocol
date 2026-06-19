@@ -23,6 +23,32 @@ for what counts as MAJOR / MINOR / PATCH here.
   template defaults (`context.DEFAULT_AGENT_ROLES`, `router` fallback) stay `Claude` — they are not the
   live instance. No protocol/template/contract change; isolated goldens unaffected.
 
+## [1.10.0] - 2026-06-19
+
+**Carril A (instrumentacion de tesis del modulo-app de Presupuesto) promovido - documental/gateado; #4 sigue OFF.**
+Aditivo, neutral de dominio. Base: GO de promocion del operador + OK de Codex (re-verificacion aprobable) +
+cruce read-only del asistente; convergencia de tres revisiones independientes.
+
+### Added
+- **DECISION-0039** - activacion gateada de la atestacion de autoria (#4), off->piloto->on; referencia
+  DECISION-0029 (no rediseno). **No enciende #4** (flags OFF); el encendido es un GO posterior tras el
+  piloto. Implementacion gateada: TASK-0117.
+- **SPEC-0081** - criterios de la activacion #4: provisioning (AC1: public_keys + event_auth.keys + anchor
+  remoto), salud >=99% (AC2, denominador independiente, NO seguridad), prueba negativa binaria (AC3, 6
+  vectores, golden por vector), rollback (AC5).
+- **DECISION-0040** - GATE-DATASET: base legal (Ley 1581/2012 + RGPD; ausencia de persona fisica en el
+  dataset), dos planos (estructural para el sujeto-por-hash + disciplinario para el predicado), DPIA-lite
+  (incluye al operador humano), verificacion de ToS. Tarea diferida DEF-PII (TASK-0118) antes de #2/#3.
+- **DECISION-0041** - precondicion de acoplamiento read-only REAL del satelite (verificada por Codex, s.9,
+  con prueba negativa objetiva) antes de cualquier lectura viva; referencia DECISION-0035 (no la redecide).
+- **DECISION-0042** - claims sobre el mailbox deben ser file-scoped (prohibido dir-level del canal
+  compartido); guard de enforcement = TASK-0119. Addendum a DECISION-0020 tras un incidente real.
+- **TASK-0117/0118/0119** (owner Codex, proposed, gateadas): activacion #4 / DEF-PII / guard mailbox.
+
+### Notes
+- Off-by-default intacto en template y config vivo; #4 (chain/agent_signatures/anchor/event_auth) sigue
+  OFF. protocol_version 1.9.3 -> 1.10.0. Drift 0; validador/encoding/neutralidad verdes.
+
 ## [1.9.3] — 2026-06-15
 
 **Unique run-id per real run (TASK-0096, trio 3/3 — closes the OFF-PILOT trio).** Additive, OFF-PILOT,

@@ -1,5 +1,30 @@
 {
     "schema_version": "1.0",
-    "tasks": [],
+    "tasks": [
+        {
+            "id": "TASK-0117",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)"
+        },
+        {
+            "id": "TASK-0118",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0119",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
+        }
+    ],
     "view": "task_index.slim"
 }

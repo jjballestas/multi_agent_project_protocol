@@ -576,6 +576,55 @@
             "status": "done",
             "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)",
             "type": "documentation"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+            "id": "TASK-0117",
+            "linked_decisions": [
+                "DECISION-0039",
+                "DECISION-0029",
+                "DECISION-0033"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0081",
+            "status": "proposed",
+            "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)",
+            "type": "security"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md",
+            "id": "TASK-0118",
+            "linked_decisions": [
+                "DECISION-0040",
+                "DECISION-0033"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "none",
+            "status": "proposed",
+            "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)",
+            "type": "security"
+        },
+        {
+            "created_at": "2026-06-19",
+            "file": "Area_comun/tasks/TASK-0119-codex-guard-mailbox-claims.md",
+            "id": "TASK-0119",
+            "linked_decisions": [
+                "DECISION-0042",
+                "DECISION-0020"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "none",
+            "status": "proposed",
+            "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)",
+            "type": "security"
         }
     ],
     "updated_at": "2026-06-08",

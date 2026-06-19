@@ -107,6 +107,24 @@
             "owner": "Claude",
             "status": "done",
             "title": "Narracion minima como regla DURA y uniforme para todos los agentes (DECISION-0036)"
+        },
+        {
+            "id": "TASK-0117",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Activacion gateada de la atestacion de autoria (#4) - provisioning + piloto + encendido (DECISION-0039 / SPEC-0081)"
+        },
+        {
+            "id": "TASK-0118",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0119",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Guard de enforcement - rechazar claim acquire con scope de directorio de mailbox (DECISION-0042)"
         }
     ],
     "agents": {
@@ -151,7 +169,11 @@
         "DECISION-0034",
         "DECISION-0035",
         "DECISION-0036",
-        "DECISION-0037"
+        "DECISION-0037",
+        "DECISION-0039",
+        "DECISION-0040",
+        "DECISION-0041",
+        "DECISION-0042"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
@@ -242,5 +264,5 @@
     "status": "active",
     "updated_at": "2026-06-09",
     "updated_by": "Claude",
-    "version": "1.9.3"
+    "version": "1.10.0"
 }
