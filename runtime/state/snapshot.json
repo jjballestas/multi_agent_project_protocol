@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6d52be6a8f49d0564ecc9a2165dd5e4ae959a8bd9d83d49c364e31eff2bce82e",
+  "canonical_hash": "db675e28f73cb4898759c4480fffa7e81d4c7b3219dd98b4693135b295824f14",
   "state": {
     "aggregate_versions": {
       "AUTHORITATIVE-ACTIVATION": 1,
@@ -217,7 +217,7 @@
       "MAINTENANCE-SANDBOX-20260609": 1,
       "OPERATOR-DIRECTIVE-20260608-memory-rule": 2,
       "PROJECT_STATE": 22,
-      "PROMO-20260619-CARRIL-A": 2,
+      "PROMO-20260619-CARRIL-A": 4,
       "TASK-0037": 4,
       "TASK-0084": 8,
       "TASK-0085": 12,
@@ -258,7 +258,7 @@
       "protocol-prune": 15,
       "protocol-state": 9
     },
-    "events_applied": 562,
+    "events_applied": 564,
     "fencing_tokens": {
       "TASK-0091": 1
     },
@@ -545,6 +545,7 @@
       "hold-task0091b:claim-release": 150,
       "hold-task0091b:task-upsert": 149,
       "intent:Arquitecto:claim:0ff3ae32cdd3cb45577fa4552559a42e742c82aee22472937ff5ae8c7d281c43": 544,
+      "intent:Arquitecto:claim:2524eee44ccc0a1662eed243f45183473eeabb94b5a5075b7af6a29bf2e04951": 563,
       "intent:Arquitecto:claim:2918a1f1f24fb0bb786062d7322d3e7201c552a409f0a9fdcf4382c8fbe22f4b": 545,
       "intent:Arquitecto:claim:29d6ccdd30a66ca2ff18f437f01a39e17e38d254b68c5ca4944f2470e9276569": 562,
       "intent:Arquitecto:claim:328340ee980e96f697721d8ad9c534d9f873695e6a2c6c289502c6819f0ba84a": 553,
@@ -554,6 +555,7 @@
       "intent:Arquitecto:claim:c0b31b9a3536dc24db85df1da6e6897793a0330130b585c97f797631f1d3d60a": 541,
       "intent:Arquitecto:claim:d40ad5523c71f650a2d4c96d835a95e90b9ee9c9b13d2b58a328445e31155839": 542,
       "intent:Arquitecto:claim:d90de4a818d5538220da492c8f0909ddd242f635b737ec8686ed701f96176fcf": 546,
+      "intent:Arquitecto:claim:f3b2b759e688b47ad16c6c115d3d22367f0a29eae5a8e90d3efa3fe5db79a4fd": 564,
       "intent:Arquitecto:decision:273c254358e66050fd303fc08744c43542ed0afc710b778f2a5dd12d0e1e1957": 557,
       "intent:Arquitecto:decision:5b6dcaacb9cac2865f22bd4c07fe5df2090e6a5bcf7e45803c96a10ce462880f": 556,
       "intent:Arquitecto:decision:c63ef7a8267c45f45b90daba163b9d61401db65739fdfa0c86ecc5c519c9b9f9": 554,
@@ -835,5 +837,5 @@
     },
     "rejections": []
   },
-  "up_to_seq": 562
+  "up_to_seq": 564
 }

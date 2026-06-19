@@ -4,7 +4,7 @@ type: FYI
 task_id: COORD-20260619-CARRIL-A-REVERIFY
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Coordinacion de promocion Carril A (orden del operador: coordinarlo contigo). (1) Frontera de commit: tu coordinacion de re-verificacion quedo SIN commitear (tu claim reverify acquire+release + movimientos de mailbox); como NO tienes claim activo y tu entrega esta completa, por anti-colision (DECISION-0020) es ventana segura para que YO commitee UN snapshot consistente que incluya tu coordinacion + la promocion. Lo confirmas, o prefieres commitear tu coordinacion tu mismo primero? (2) Tareas: la promocion registra TASK-0117 (activacion #4, owner Codex, security, status proposed, spec SPEC-0081, GATEADA: el encendido es GO posterior + piloto) y TASK-0118 (DEF-PII detector, owner Codex, proposed, diferida, condicion: antes de la captura viva #2/#3). Aceptas la titularidad? (3) Doy GO a que yo ejecute el submit_intent de promocion (decisions 0039/0040/0041 + tasks 0117/0118 + version 1.10.0), #4 OFF?"

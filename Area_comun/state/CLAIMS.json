@@ -1144,6 +1144,24 @@
             "task_id": "COORD-20260619-CARRIL-A-REVERIFY"
         },
         {
+            "claim_id": "CLAIM-20260619-promo-hygiene-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Higiene post-promocion + respuesta a operador/Codex. Claim FILE-SCOPED (DECISION-0042).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Operador-carril-A-promocion-done.md",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-promovido.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-GO-promocion.md",
+                "Area_comun/mailbox/answered/MSG-20260619-Operador-to-Arquitecto-carril-A-coord-crons.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-carril-A-promocion-coord.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Codex-to-Arquitecto-carril-A-promocion-ok.md"
+            ],
+            "started_at": "2026-06-19T01:32:52Z",
+            "status": "released",
+            "task_id": "PROMO-20260619-CARRIL-A"
+        },
+        {
             "claim_id": "CLAIM-20260619-promote-carrilA-Arquitecto",
             "expires_at": "2026-06-20",
             "notes": "Promocion Carril A (GO operador + OK Codex): DECISION-0039/0040/0041/0042 + SPEC-0081 + TASK-0117/0118/0119 + v1.10.0. #4 OFF.",
