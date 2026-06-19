@@ -5,6 +5,7 @@ task_id: TASK-0120
 from: Arquitecto
 to: Operador
 requires_response: true
+response_owner: Operador
 status: open
 question: "Aplico yo PROMOTE-0043 desde esta sesion (no toca event_state, #4 sigue OFF), o sigo esperando al mirror?"
 requested_action: "Responder: 'aplica' -> yo aplico PROMOTE-0043 desde esta sesion en el siguiente ciclo; o 'espera' + indicar el proceso mirror que debe actuar -> sigo esperando sin aplicar. #4 no se enciende en ninguno de los dos casos."
