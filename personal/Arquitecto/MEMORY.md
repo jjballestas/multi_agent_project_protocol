@@ -2,7 +2,7 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-19, HEAD a575559, v1.11.0.
+> Ultima actualizacion: 2026-06-19, HEAD 35be10a, v1.11.0.
 
 ## Carril A Presupuesto/tesis (2026-06-19) - PROMOVIDO v1.10.0 (e56b027)
 - **PROMOVIDO** (GO operador + OK Codex + cross-check asistente): DECISION-0039 (activacion #4) + SPEC-0081
@@ -22,8 +22,14 @@
   drift 0. Cerre in_review->done (reviewer) + reconcilie version a 1.11.0 (Codex bumpeo config, sin cap
   orchestrator para PROJECT_STATE). GUARD AHORA LIVE -> todo claim mailbox debe ser file-scoped (incluido
   Codex). NOTA: el clasificador bloqueo el 1er intento de cierre; con "go" del operador paso.
-- PENDIENTE Codex (activo): SPEC-0081 (provisioning + attestation_health_cases + 6 goldens AC3 + smoke) +
-  prueba negativa A3. TASK-0117 (encendido #4) = GO posterior + piloto; TASK-0118 (DEF-PII) diferida.
+- **GO OPCION 1 (operador, 35be10a):** TASK-0117 proposed->READY; Codex GO'd para construir la
+  INFRAESTRUCTURA de SPEC-0081 (AC1 provisioning/smoke + AC2 attestation_health_cases + AC3 6 goldens +
+  AC5 rollback + A3 si owner) SIN encender #4 ni piloto (build != enable). Guardrail Analista: **N FIJADO=20**
+  en SPEC-0081 AC2 + medicion acotada. TASK-0118 (DEF-PII) diferida. Codex informo idle-esperando-GO (no
+  bloqueo tecnico; su mailbox-reader/coord-cron estaba parado -> arreglo su monitor: coordina tras 3 rondas).
+  El ENCENDIDO de #4 sigue siendo GO POSTERIOR del operador + piloto (cuando converja DB + Carril B).
+- ESPERO: Codex mueve TASK-0117 a in_progress -> handoff/in_review -> reviso maker!=checker -> cierro.
+  Codex + mi cron ACTIVOS hasta aviso de cierre del operador.
 
 ## (historico) Carril A - EN REVISION, sin promover
 - Encargo del operador: arrancar el modulo-app de Presupuesto bajo el protocolo, instrumentado para tesis.
