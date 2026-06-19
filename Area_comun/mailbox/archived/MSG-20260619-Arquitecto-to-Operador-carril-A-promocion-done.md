@@ -4,7 +4,7 @@ type: FYI
 task_id: PROMO-20260619-CARRIL-A
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Promocion Carril A HECHA. v1.10.0 (e56b027). DECISION-0039/0040/0041/0042 + SPEC-0081 + TASK-0117/0118/0119 en el ledger; drift 0; gates verdes; #4 sigue OFF; Codex queda ACTIVO.

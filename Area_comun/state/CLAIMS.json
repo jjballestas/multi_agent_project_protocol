@@ -1172,6 +1172,20 @@
             "task_id": "COORD-20260619-CARRILA-REVIEW"
         },
         {
+            "claim_id": "CLAIM-20260619-informe-codex-Arquitecto",
+            "expires_at": "2026-06-20",
+            "notes": "Peticion de informe de estado a Codex (regla operador) + hygiene promocion-done. Claim FILE-SCOPED (guard DECISION-0042).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+                "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Operador-carril-A-promocion-done.md"
+            ],
+            "started_at": "2026-06-19T06:28:22Z",
+            "status": "released",
+            "task_id": "PROMO-20260619-CARRIL-A"
+        },
+        {
             "claim_id": "CLAIM-20260619-mailbox-hygiene-Arquitecto",
             "expires_at": "2026-06-20",
             "notes": "Higiene de mailbox post-convergencia Carril A: archivar consumidos y mover contestados a answered (orden del operador).",
