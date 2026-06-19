@@ -92,6 +92,14 @@ producto/dominio en el core neutral.
 - **AC10 - Gates del protocolo verdes.** La coordinacion (esta SPEC, tasks, handoffs) en `Area_comun` deja
   `validate_collaboration_state --root .` exit 0 (con y SIN secretos, DECISION-0046), encoding/neutralidad
   limpios, drift 0; el codigo del producto pasa su CI.
+- **AC11 - Honestidad de estado regresion-proof (test de COMPORTAMIENTO) [PERMANENTE].** Para TODA pieza del
+  front con badges/indicadores derivados de verificacion (chip canonico, atestacion #4, drift, source-state),
+  la honestidad no descansa en string-match: existe un **test de comportamiento** que inyecta una
+  verificacion-runtime controlada y asevera el render real -- verificacion que FALLA / no-canonico / no
+  verificable -> badge **NO-verde** (warn/danger/indeterminate); TODO valido -> verde; payload de texto libre
+  -> SIEMPRE redactado. Falla si un refactor repinta verde una verificacion fallida. AC permanente de las
+  etapas con UI (4 ya cubierta retro por TASK-0129; 5/6 lo traen de origen). Es la propiedad-tesis (un badge
+  que mienta sobre el estado es el pecado capital): nunca verde hardcodeado.
 
 ## test_plan
 
@@ -127,4 +135,5 @@ producto/dominio en el core neutral.
 | RF-1..RF-4 observar read-only canonico | TASK-0124 (etapas 1-2) | vistas vs canonico; atestacion vs runtime | AC1/AC3/AC5 |
 | RF-5..RF-8,RF-10 operar gobernado | TASK-0124 (etapa 3) | toda accion via submit_intent; prueba negativa | AC2/AC4/AC9 |
 | RF-9 roster re-genesis-gobernado | TASK-0124 (etapa 5) | flujo gateado, no toggle | AC8 |
+| Honestidad de estado regresion-proof | TASK-0129 (badge behavior test) + etapa5/6 | test de comportamiento: verif. falla -> badge no-verde; valido -> verde; PII redactada | AC11 |
 | CI verde / neutralidad / gates | TASK-0124 | CI producto + validate/scan protocolo | AC6/AC7/AC10 |

@@ -1,0 +1,54 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-upsert-0129",
+          "task_id": "TASK-0129",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+            "Area_comun/tasks/TASK-0129-codex-front-badge-behavior-test.md",
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T23:18:33Z",
+          "updated_at": "2026-06-19T23:18:33Z",
+          "expires_at": "2026-06-19T23:18:33Z",
+          "status": "active",
+          "notes": "Autora TASK-0129 (badge behavior test, pieza chica pre-etapa5) + AC11 permanente en SPEC-0086. GO operador (confirma-disenador-y-secuencia)."
+        },
+        "idempotency_key": "arquitecto:upsert-0129:claim-acquire"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": {
+          "created_at": "2026-06-20",
+          "file": "Area_comun/tasks/TASK-0129-codex-front-badge-behavior-test.md",
+          "id": "TASK-0129",
+          "linked_decisions": ["DECISION-0049"],
+          "owner": "Codex",
+          "phase": "P2",
+          "priority": "high",
+          "spec_id": "SPEC-0086",
+          "status": "ready",
+          "title": "Proyecto-front - endurecimiento badge-honesto - test de COMPORTAMIENTO (regresion-proof honestidad de estado), producto Zeus-protocol (SPEC-0086 AC11)",
+          "type": "product"
+        },
+        "idempotency_key": "arquitecto:upsert-0129:task-ready"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-upsert-0129",
+        "idempotency_key": "arquitecto:upsert-0129:claim-release"
+      }
+    }
+  ]
+}

@@ -179,6 +179,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front MVP etapa 4 - Vista de atestacion #4 (timeline ledger + boundary T0 + sello pre-T0 + manifest), read-only (DECISION-0049 / SPEC-0086)"
+        },
+        {
+            "id": "TASK-0129",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front - endurecimiento badge-honesto - test de COMPORTAMIENTO (regresion-proof honestidad de estado), producto Zeus-protocol (SPEC-0086 AC11)"
         }
     ],
     "agents": {

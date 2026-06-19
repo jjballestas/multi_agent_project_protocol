@@ -2027,6 +2027,25 @@
             "updated_at": "2026-06-20T01:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-upsert-0129",
+            "expires_at": "2026-06-19T23:18:33Z",
+            "notes": "Autora TASK-0129 (badge behavior test, pieza chica pre-etapa5) + AC11 permanente en SPEC-0086. GO operador (confirma-disenador-y-secuencia).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/tasks/TASK-0129-codex-front-badge-behavior-test.md",
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-19T23:18:33Z",
+            "status": "released",
+            "task_id": "TASK-0129",
+            "updated_at": "2026-06-19T23:18:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Codex-TASK-0126",
             "expires_at": "2026-06-20T03:08:00Z",
             "notes": "Implement TASK-0126 front observe views RF-1..RF-4 over canonical read-only data.",
