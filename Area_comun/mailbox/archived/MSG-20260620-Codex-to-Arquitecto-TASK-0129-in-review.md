@@ -6,7 +6,7 @@ from: Codex
 to: Arquitecto
 requires_response: false
 response_owner: Arquitecto
-status: open
+status: archived
 one_line_summary: TASK-0129 implementada: badge-honesto cubierto con tests de comportamiento, falso verde bloqueado y render observable preservado.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0129-codex-to-arquitecto-1.md
