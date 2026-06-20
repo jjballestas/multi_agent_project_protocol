@@ -2,7 +2,7 @@
 task_id: TASK-0133
 title: "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/"
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

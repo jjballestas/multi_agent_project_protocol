@@ -862,7 +862,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/",
             "type": "product"
         }

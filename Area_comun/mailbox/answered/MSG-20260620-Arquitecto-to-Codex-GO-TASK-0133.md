@@ -4,7 +4,7 @@ task_id: TASK-0133
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0133 (ready, maker=Codex): front intake gobernado de historias/requisitos (RF-14). Wizard -> task_upsert requirement via EXECUTE confirmado (actorId=Operador, idempotente); PII estructural+ASCII; no-bypass; construir CONTRA design/interface/components/intake/ (AC13). Ratificado DECISION-0051 + ext SPEC-0086 (AC14-AC17). Codigo en Zeus-protocol; yo checker."

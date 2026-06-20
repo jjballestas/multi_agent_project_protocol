@@ -8,14 +8,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0133",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/"
         }
     ],
     "view": "task_index.slim"
