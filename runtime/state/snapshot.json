@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a97b3ef8f36086929a4c43f387ce9ff91df9a5a71d1467757f257dd56193926d",
+  "canonical_hash": "1fc16a5f2953c528ff4594c87fa4aac6b8175af2ac05a491f5f5c88542424b74",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -69,11 +69,11 @@
       "TASK-0131": 7,
       "TASK-0132": 8,
       "TASK-0133": 8,
-      "TASK-0134": 4,
+      "TASK-0134": 6,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 157,
+    "events_applied": 159,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -214,6 +214,7 @@
       "intent:Codex:claim:1c0eec7211d560eaa751067eec97bf6a1050dcd665a302948e704adb0093288d": 808,
       "intent:Codex:claim:200c7d1a04059164f98a51e17854844e9dc0c27cfa8005184442c9fafb6392c1": 775,
       "intent:Codex:claim:46518f1e436e697eba9d0cde9f97a4d5f655f7ad1d09d30f2c8bed03501c04a3": 798,
+      "intent:Codex:claim:54a81dbf9f6d1d1dd19f53f66663f678e6d9c588c5d708849b4435c00c3c54fa": 830,
       "intent:Codex:claim:6621ce1342d5b57926d37f1916067c6f851bf28134c18ce2704cd31ae77e230c": 796,
       "intent:Codex:claim:6f1f0f315ce8fcb57c70918dcd6fbdb43f2ddb3b58e700eeab0d959ba636a2a7": 805,
       "intent:Codex:claim:72bc2dbe8e86084b892bc92dc2ae4061afe0bcaf9cf0f96c438a277221f0c1f5": 788,
@@ -226,6 +227,7 @@
       "intent:Codex:claim:f521d71adb57e00b577dadc85de95799fe3aae6ea1de1da194b8366aa626f386": 789,
       "intent:Codex:task_status:03c65bed3bd3427aa651bcd1523fca734a69acadd2b63a69919741cd7b376231": 817,
       "intent:Codex:task_status:3f8d3707ca485a2da7cd13c4b12280de55b6f62777403151f9e719f96b0e1f59": 785,
+      "intent:Codex:task_status:7db5eca3b111a50d3a653ab61c5da3f3b95df9a2483efaae7d67624d1e96a87c": 829,
       "intent:Codex:task_status:91b9a3f9860f758cac63a0d89ccf8a52812d8cf25f161ae17ede244566604718": 797,
       "intent:Codex:task_status:9367f315bf1a461122f2cd2bbfebbdd16ccfbba7457be91ee0b5bb093431438e": 787,
       "intent:Codex:task_status:9f649a7b5517ff8ca3a728466e0e42f350f45b5882419d6cbba8e1dcf4d15a07": 818,
@@ -237,5 +239,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 828
+  "up_to_seq": 830
 }
