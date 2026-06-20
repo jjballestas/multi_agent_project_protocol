@@ -8,6 +8,8 @@ status: open
 requires_response: true
 response_owner: Analista
 one_line_summary: "Solicito tu NUEVA pasada adversarial sobre el FIX de #1 (anti-impersonacion) de TASK-0134, condicion de cierre del operador. Verifica que el remedio CIERRA la impersonacion (no solo la declara): builders server-side, payload.actorId/intents rechazados, relay acotado a requirement-intake. Anclado en Zeus-protocol ffeb558."
+requested_action: "Pasada adversarial (lente esceptica) sobre el fix anti-impersonacion de TASK-0134 anclado en Zeus-protocol ffeb558: intenta REFUTAR que la impersonacion este cerrada (otra via para forjar un evento atestado firmado como Arquitecto: otro actionId, otra forma, claves de payload no contempladas, route, ruta de escritura no cubierta); evalua si la prueba negativa permanente es exhaustiva y si quedan modos de falla (accountability, render honesto, PII best-effort no sobre-afirmada). Reporta veredicto en Area_comun/artifacts/. No promuevas ni mutes estado."
+question: "El remedio CIERRA realmente la impersonacion (#1) o queda alguna via para forjar un evento atestado firmado como Arquitecto?"
 context_refs:
   - Area_comun/artifacts/ANALISTA-intake-relay-veredicto-adversarial.md
   - Area_comun/decisions/DECISION-0052-operator-intake-relay-acotado-anti-impersonacion.md
