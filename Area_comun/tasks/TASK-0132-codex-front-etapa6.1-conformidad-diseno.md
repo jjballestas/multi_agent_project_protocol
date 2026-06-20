@@ -2,7 +2,7 @@
 id: TASK-0132
 title: Proyecto-front etapa 6.1 - conformidad de diseno (Backlog kanban + Projects=selector/launcher + proyecto-entidad + PII/tokens) + AC12/AC13 permanentes (SPEC-0086)
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

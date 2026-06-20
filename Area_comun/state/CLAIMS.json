@@ -2049,6 +2049,24 @@
             "updated_at": "2026-06-20T11:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0132",
+            "expires_at": "2026-06-20T18:50:00Z",
+            "notes": "Close TASK-0132 in_review->done (checker Arquitecto, maker=Codex): Zeus a4acb68 review OK -- Backlog kanban (columns+claims+agent filter), Projects=selector entity-model (path removed, id/kind/source) + Add-project wired a kickoff RF-10 gobernado (sin git-init), PII safePayloadPreview, tokens design-system, AC12/AC13. node --test 19/19, validate con/sin secretos exit 0, drift 0, smoke 7 vistas+entity+kickoff live.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0132-codex-front-etapa6.1-conformidad-diseno.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T14:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0132",
+            "updated_at": "2026-06-20T14:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",
@@ -2358,6 +2376,34 @@
             "status": "released",
             "task_id": "TASK-0131",
             "updated_at": "2026-06-20T11:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0132",
+            "expires_at": "2026-06-20T15:40:00Z",
+            "notes": "Implement TASK-0132 front design conformity: backlog kanban, projects selector launcher, project entity API, tokens and tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0132",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0132",
+                "Area_comun/tasks/TASK-0132-codex-front-etapa6.1-conformidad-diseno.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0132.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0132.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0132-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0132-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T11:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0132",
+            "updated_at": "2026-06-20T11:40:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",

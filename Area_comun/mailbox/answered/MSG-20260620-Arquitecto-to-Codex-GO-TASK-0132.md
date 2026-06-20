@@ -4,7 +4,7 @@ type: DECISION
 task_id: TASK-0132
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 one_line_summary: GO a Codex (maker) para TASK-0132 = front etapa 6.1 conformidad de diseno (ratificada por el operador, OPCION A). Backlog=KANBAN + Projects=SELECTOR/launcher (entity-cards + "+ add project" cableado al kickoff RF-10 ya existente) + proyecto-entidad + PII-confirm + tokens + fidelidad. NO reabrir routing (TASK-0131 done). AC12/AC13 ya en SPEC-0086 (cubrir con tests). Codigo en Zeus-protocol; checker=Arquitecto.
 context_refs:
