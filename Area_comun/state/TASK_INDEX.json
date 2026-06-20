@@ -68,6 +68,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-b65e7802-requirement-seed.md",
+            "id": "REQ-B65E7802",
+            "narrative": "Como operador, quiero ver en el front mis mensajes ya leidos y procesados y archivarlos(higienizar) con un click, sin bajar a la terminal.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "higienizar mensajes leidos/procesados con un click desde el front",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un EXECUTE exitoso el wizard muestra un resultado inequivoco (enviado-atestado, id y seq) y elformulario se RESETEA (campos vacios, vuelve al paso 1, estado borrador) listo para una historianueva. No queda ambiguedad sobre si se completo; se evita el reenvio accidental. La idempotencia porid=hash ya protege contra el duplicado exacto, pero la UI debe dejarlo explicito.",
             "author": "Operador",
             "endorsement": "none",

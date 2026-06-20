@@ -7,6 +7,12 @@
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
         },
         {
+            "id": "REQ-B65E7802",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "higienizar mensajes leidos/procesados con un click desde el front"
+        },
+        {
             "id": "REQ-DCC3BC1A",
             "owner": "Operador",
             "status": "proposed",
