@@ -46,7 +46,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "critical",
-            "status": "ready",
+            "status": "in_review",
             "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
         }
     ],

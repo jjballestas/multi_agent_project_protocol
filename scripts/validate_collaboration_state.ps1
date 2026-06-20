@@ -12,8 +12,8 @@ $script:ReviewedTaskStatuses = @("in_review", "review_approved", "qa_pending", "
 $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
 $script:RowScopedLedgerSelectors = @{
-    "Area_comun/state/TASK_INDEX.json" = "^TASK-\d{4}$"
-    "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/TASK-\d{4}|[A-Za-z_][A-Za-z0-9_]*)$"
+    "Area_comun/state/TASK_INDEX.json" = "^(TASK-\d{4}|REQ-[0-9A-Fa-f]+)$"
+    "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/(TASK-\d{4}|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
 }
 $script:ValidAdoptionTiers = @("coordination", "runtime")
 $script:RuntimeTierRequiredPaths = @(

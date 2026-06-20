@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "369f07c5feeb3e5db55a0c565aa7321966d4571229a6eee8501c4aecf76d7e55",
+  "canonical_hash": "28e6c44c23f27e7f1cdb571697679a3e8ea9cd77bda06d6ada6075b571d18e6a",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -76,13 +76,16 @@
       "TASK-0132": 8,
       "TASK-0133": 8,
       "TASK-0134": 8,
-      "TASK-0136": 2,
+      "TASK-0136": 6,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 177,
+    "events_applied": 181,
     "fencing_tokens": {},
     "idempotency_keys": {
+      "Codex:TASK-0136:claim-release:20260620T202500Z": 852,
+      "Codex:TASK-0136:in-progress-to-in-review:20260620T202500Z": 851,
+      "Codex:TASK-0136:ready-to-in-progress:20260620T194500Z": 850,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -244,6 +247,7 @@
       "intent:Codex:claim:6f1f0f315ce8fcb57c70918dcd6fbdb43f2ddb3b58e700eeab0d959ba636a2a7": 805,
       "intent:Codex:claim:72bc2dbe8e86084b892bc92dc2ae4061afe0bcaf9cf0f96c438a277221f0c1f5": 788,
       "intent:Codex:claim:835a7174434d647757b791bdadaebe4b8a9976f0836eb7942f14bf508d588144": 774,
+      "intent:Codex:claim:9019b2a03d948893c561fe199be1fcc06504ad30970eb5557b8ae79bff80f246": 849,
       "intent:Codex:claim:9b4b38657f64a94073d716f89397b51875a7a6d91fa141fdb8454747ee0ee355": 786,
       "intent:Codex:claim:abb756c9a8ee6b00a7c138f61a969494d2e4eb7b5f3d62a1abef51b4c0b72517": 784,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
@@ -264,5 +268,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 848
+  "up_to_seq": 852
 }

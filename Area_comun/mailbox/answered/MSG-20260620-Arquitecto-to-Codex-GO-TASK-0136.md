@@ -4,7 +4,7 @@ task_id: TASK-0136
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0136 (ready, maker=Codex, CRITICAL): remediacion DECISION-0018 -- el intake dejo el canonico ROJO (validate exit 1). Fix: (1) validador acepta ids REQ-[0-9A-Fa-f]+ (spec exacta abajo); (2) intake builder escribe el seed file + claim scopes validos + TEST PERMANENTE 'intake deja canonico verde' (AC22); (3) reconciliar los 4 seeds existentes. Yo checker."
