@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0138 AC26 listo para checker: core sin literales Operador/Arquitecto, author/relayed_by caller-derived, message_id acotado, scan_domain_neutrality con caso identity_literal_in_core. Producto commit 7619fd2; tests/gates verdes; drift 0."

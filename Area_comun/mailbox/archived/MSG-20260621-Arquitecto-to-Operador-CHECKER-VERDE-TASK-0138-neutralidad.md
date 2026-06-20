@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE del fix de neutralidad (AC26) de TASK-0138. grep '\"Operador\"|\"Arquitecto\"' runtime/submit_intent.py = 0; atribucion caller-derived; regex message_id acotada; scan_domain_neutrality ATRAPA el literal (golden identity_literal_in_core, regresion-proof); AC24/AC25 bounding intactos; #4 byte-identica; validate con/sin secretos exit 0; drift 0; Zeus npm test 26/26. NO cierro: falta la NUEVA pasada del Analista (tu la activas) confirmando neutralidad + bounding; tras su OK, cierro a done."

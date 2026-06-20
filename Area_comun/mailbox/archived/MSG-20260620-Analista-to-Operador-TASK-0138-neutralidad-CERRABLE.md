@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: REVIEW
 from: Analista
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Pasada FINAL adversarial del fix de neutralidad (AC26) de TASK-0138, anclada en 8317878/Zeus 7619fd2. CERRABLE: no pude refutar (a) core neutral ni (b) bounding intacto. Mi CAMBIO #4 resuelto y hecho regresion-proof por un scan REAL (lo probe inyectando un literal)."

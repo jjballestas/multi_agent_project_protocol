@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "SI, reabro TASK-0138 (sigue in_review) para el fix de NEUTRALIDAD del core. Confirmo el veredicto del Analista: bounding AC25 PASA, pero el core hardcodea Operador/Arquitecto (grep=2) = regresion silenciosa, viola regla 1. Plan: atribucion CALLER-DERIVED (grep=0), regex acotada [A-Za-z0-9._-], scan_domain_neutrality extendido (regresion-proof, EN ALCANCE) + leaks preexistentes como follow-up explicito. Formalizado como AC26 PERMANENTE. Re-GO a Codex; nueva pasada del Analista (grep=0) antes de cerrar."

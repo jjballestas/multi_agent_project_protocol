@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: REVIEW
 from: Analista
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Voz adversarial DECISION-0053 (mailbox_archive + relay mailbox-archive), anclada en canonico 7e47cbc/Zeus 6afefe7. BOUNDING (#1) PASA -- no pude reabrir la impersonacion. CAMBIO REQUERIDO en NEUTRALIDAD (#4): el core hardcodea Operador/Arquitecto, scan no lo atrapa. Cerrable SOLO tras resolver o declarar #4."
