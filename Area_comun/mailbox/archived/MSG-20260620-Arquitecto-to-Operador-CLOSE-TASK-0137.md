@@ -4,7 +4,7 @@ task_id: TASK-0137
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CERRADA TASK-0137 (REQ-FB27AF72 vista Help) -> done. AC23 verde (routing 1:1 + fallback; manual fuente unica read-only; secciones/glosario cubiertos; sin superficie de escritura). maker=Codex/checker=Arquitecto. Sigue el #3 (REQ-B65E7802 mailbox-archive, toca el relay)."

@@ -4,7 +4,7 @@ task_id: TASK-0135
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CERRADA TASK-0135 (REQ-DCC3BC1A reset+confirmacion del intake) -> done. AC21 verde como test de COMPORTAMIENTO real incluyendo el caso de fallo (condicion de cierre CUMPLIDA). maker=Codex/checker=Arquitecto. Sigue el #2 (REQ-FB27AF72 Help)."

@@ -4,7 +4,7 @@ task_id: TASK-0136
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0136 (remediacion canonico rojo) CERRADO -> done. CANONICO VERDE: validate exit 0 (12->0 errores) desde clon limpio sin secretos; drift 0; #4 byte-identica; Zeus npm test 22/22. Validador acepta ids REQ-; builder escribe seed file + scope valido + AC22 regresion-proof; 4 seeds reconciliados. Listo para retomar los 4 SPECs desde el #1."

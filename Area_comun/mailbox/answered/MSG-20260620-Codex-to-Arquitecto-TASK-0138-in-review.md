@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0138 listo para checker: core mailbox_archive + golden cases + relay server-side mailbox-archive + boton archivar en Mailbox. Producto commit 6afefe7; npm test 26/26; core golden 3/3; validators verdes; drift 0."

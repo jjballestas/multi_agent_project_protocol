@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "NO cerrar TASK-0138 todavia. El Analista valido DECISION-0053: BOUNDING anti-impersonacion PASA (no se reabre la impersonacion), pero CAMBIO REQUERIDO en NEUTRALIDAD -- el core runtime/submit_intent.py (L337-338, verificado en canonico) HARDCODEA author:Operador/relayed_by:Arquitecto = identidades de instancia en el core generico, regresion SILENCIOSA (scan no la atrapa), viola regla 1. Fix: atribucion CALLER-DERIVED (grep de los literales = 0); acotar regex message_id; y extender el scan para atrapar literales de agente (regresion-proof). Nueva pasada del Analista (grep=0) antes de cerrar."

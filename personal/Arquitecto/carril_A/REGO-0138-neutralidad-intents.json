@@ -1,0 +1,35 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260621-Arquitecto-rego-0138-neutralidad",
+          "task_id": "TASK-0138",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+            "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-REGO-fix-neutralidad-TASK-0138.md",
+            "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Operador-RESP-fix-neutralidad-TASK-0138.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-21T00:30:00Z",
+          "updated_at": "2026-06-21T00:30:00Z",
+          "expires_at": "2026-06-21T04:30:00Z",
+          "status": "active",
+          "notes": "Re-GO TASK-0138 fix neutralidad: AC26 PERMANENTE en SPEC-0086 (atribucion caller-derived grep=0 + regex acotada + scan extendido) + RESP al operador (rr=true) + RE-GO a Codex. Task sigue in_review; Codex remediara. checker=Arquitecto + nueva pasada del Analista antes de cerrar."
+        },
+        "idempotency_key": "arquitecto:rego-0138-neutralidad:claim-acquire"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260621-Arquitecto-rego-0138-neutralidad",
+        "idempotency_key": "arquitecto:rego-0138-neutralidad:claim-release"
+      }
+    }
+  ]
+}

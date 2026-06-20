@@ -200,6 +200,17 @@ producto/dominio en el core neutral.
   relayado NO se cuenta/renderiza como AUTORADO ni avalado por el Arquitecto (hereda AC20). **AC4-byte:** el nuevo
   intent kind y la accion NO tocan `protocol.config.json` (signer set)/genesis/keys/`protocol_version`; se asierta
   BYTE-IDENTIDAD antes/despues (drift 0 necesario, no suficiente). Golden cases negativos PERMANENTES en el core.
+- **AC26 - Neutralidad del core: atribucion CALLER-DERIVED del `mailbox_archive`, regresion-proof [comportamiento PERMANENTE; DECISION-0053; pasada del Analista].**
+  El core generico (`runtime/submit_intent.py`) NO lleva literales de identidad de agente/instancia: la atribucion
+  (`author`, `relayed_by`) del intent `mailbox_archive` la PROVEE EL CALLER (el front/Zeus, igual que el intake),
+  no se hardcodea en el runtime. El core usa ROLES, no nombres. **Falsable (gate permanente):**
+  `grep '"Operador"|"Arquitecto"' runtime/submit_intent.py` = 0 (antes del fix = 2, defecto). Esto tambien cierra
+  el riesgo #5 (un archive directo no-via-front no queda mis-atribuido a una identidad fija). **Regresion-proof:**
+  `scan_domain_neutrality` se EXTIENDE para atrapar literales de identidad de agente en el core (esta clase de
+  regresion deja de ser silenciosa; filosofia AC11/AC22). **Bounding del `message_id`:** la regex se acota a
+  `[A-Za-z0-9._-]` (sin `:` = NTFS ADS en Windows), manteniendo la guarda de path (no `/`,`\`,`..`, resolve-escape).
+  Follow-up EXPLICITO (fuera de esta task): leaks analogos preexistentes (`apply.py` owner default, `context.py`
+  implementer->nombre). El core permanece DOMAIN/INSTANCE-NEUTRAL (regla 1).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

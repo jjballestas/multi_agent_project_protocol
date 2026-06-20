@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Triage de los 4 requisitos del intake + DRAFT #1 (REQ-DCC3BC1A = reset del formulario + confirmacion id/seq tras EXECUTE). #1 es UX read-only -> extension de SPEC-0086 (AC21), SIN DECISION. Roadmap: #2 Help read-only (ext, sin DECISION); #3 mailbox-archive TOCA escritura (extiende DECISION-0052, accion acotada + prueba negativa); #4 auto commit+push = nueva superficie de TRANSPORTE -> requiere DECISION (regla 2). Autoro de a una; aqui va el #1."
