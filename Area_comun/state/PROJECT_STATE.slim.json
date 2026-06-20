@@ -5,12 +5,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0131",
-            "owner": "Arquitecto",
-            "status": "in_progress",
-            "title": "Proyecto-front - routing real de vistas (cada nav item renderiza SOLO su panel; header persistente) (SPEC-0086 RF-1..RF-12)"
         }
     ],
     "next_actions": [

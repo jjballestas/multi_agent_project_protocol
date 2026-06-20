@@ -2,7 +2,7 @@
 id: TASK-0131
 title: Proyecto-front - routing real de vistas (cada nav item renderiza SOLO su panel; header persistente) (SPEC-0086 RF-1..RF-12)
 type: product
-status: in_progress
+status: done
 owner: Arquitecto
 phase: P2
 priority: high

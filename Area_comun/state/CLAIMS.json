@@ -2031,6 +2031,24 @@
             "updated_at": "2026-06-20T11:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0131-final",
+            "expires_at": "2026-06-20T15:45:00Z",
+            "notes": "Close TASK-0131 in_review->done (reviewer): routing 2ca79cc verified independently by Codex (implementer, seq 796-798: 17/17, read-only, drift 0). Routing piece (G1) banked; remaining design-conformance scope -> etapa 6.1 (TASK-0132 draft).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0131-arquitecto-front-view-routing.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T11:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0131",
+            "updated_at": "2026-06-20T11:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",
@@ -2299,6 +2317,27 @@
             "status": "released",
             "task_id": "TASK-0130",
             "updated_at": "2026-06-20T10:46:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0131-verify",
+            "expires_at": "2026-06-20T12:05:00Z",
+            "notes": "Independent verification of TASK-0131 routing and in_review handoff if green.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0131",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0131",
+                "Area_comun/tasks/TASK-0131-arquitecto-front-view-routing.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-verify-TASK-0131.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-verify-TASK-0131.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0131-verified.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T11:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0131",
+            "updated_at": "2026-06-20T11:05:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
