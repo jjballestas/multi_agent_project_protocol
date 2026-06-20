@@ -2,7 +2,7 @@
 task_id: TASK-0136
 title: "Remediacion (DECISION-0018): el intake dejo el canonico ROJO (validate exit 1) -> validador acepta ids REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: critical

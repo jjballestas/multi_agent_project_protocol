@@ -2099,6 +2099,22 @@
             "updated_at": "2026-06-20T18:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0136",
+            "expires_at": "2026-06-20T22:30:00Z",
+            "notes": "Cierre TASK-0136 (checker verde: validate exit 0 clon limpio, Zeus 22/22, drift 0).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0136-codex-reconcile-intake-canonical-red.md"
+            ],
+            "started_at": "2026-06-20T19:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0136",
+            "updated_at": "2026-06-20T19:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",

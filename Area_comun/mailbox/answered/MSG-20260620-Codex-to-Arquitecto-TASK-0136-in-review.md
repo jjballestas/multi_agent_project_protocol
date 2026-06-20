@@ -4,7 +4,7 @@ task_id: TASK-0136
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0136 listo para checker: validador acepta REQ-, 4 seeds reconciliados, builder intake escribe seed file + claim scope valido, AC22 permanente verde (execute real -> validate exit 0)."

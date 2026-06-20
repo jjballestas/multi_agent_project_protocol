@@ -243,7 +243,7 @@
         {
             "id": "TASK-0136",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
         }
     ],

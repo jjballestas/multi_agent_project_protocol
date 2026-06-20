@@ -29,12 +29,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0136",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
         }
     ],
     "next_actions": [

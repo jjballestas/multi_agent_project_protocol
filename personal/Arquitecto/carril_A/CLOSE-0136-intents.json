@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260620-Arquitecto-close-0136", "task_id": "TASK-0136", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0136-codex-reconcile-intake-canonical-red.md"],
+      "started_at": "2026-06-20T19:30:00Z", "updated_at": "2026-06-20T19:30:00Z", "expires_at": "2026-06-20T22:30:00Z",
+      "status": "active", "notes": "Cierre TASK-0136 (checker verde: validate exit 0 clon limpio, Zeus 22/22, drift 0)." },
+      "idempotency_key": "arquitecto:close-0136:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0136", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0136:status-done" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260620-Arquitecto-close-0136", "idempotency_key": "arquitecto:close-0136:claim-release" } }
+  ]
+}

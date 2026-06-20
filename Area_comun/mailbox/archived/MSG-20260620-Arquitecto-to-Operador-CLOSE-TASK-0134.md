@@ -4,7 +4,7 @@ task_id: TASK-0134
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0134 (remediacion seguridad intake RF-14) CERRADO -> done. Condicion de cierre CUMPLIDA: PASA del Analista sobre el #1 (canonico) + reproduccion checker verde. AC19 anti-impersonacion + AC15 write-real + #4 byte-identico verdes; validate exit 0 con/sin secretos; drift 0; npm test 22/22 Zeus ffeb558. Cierre via submit_intent (claim->task_status->release). Mailbox higienizado (open vacio)."

@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "BLOQUEO: canonico 5c918d2 validate exit 1 (12 errores) por defectos del intake ya mergeado (B1 seed files nunca escritos; B2 validador no reconoce ids REQ-<hash> en selectores de claim). Preempta el triage (no se promueve sobre rojo). Ratificaste opcion 1 = remediar primero. DRAFT-TASK-0136 listo (validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconcilia los 4 seeds). Espera tu ratificacion del draft -> GO a Codex. Draft #1 (reset/confirm) en cola detras."
