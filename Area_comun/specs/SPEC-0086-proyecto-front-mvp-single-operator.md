@@ -149,6 +149,12 @@ producto/dominio en el core neutral.
   AUTORADO ni avalado por el Arquitecto.
 - **AC4-byte (refuerzo #4).** El relay/intake no toca `protocol.config.json` (signer set), genesis, keys ni
   `protocol_version`: se aserta BYTE-IDENTIDAD antes/despues (drift 0 es necesario, no suficiente).
+- **AC22 - Un intake deja el canonico VERDE [PERMANENTE; DECISION-0018].** Tras un intake EXECUTE, el estado
+  resultante pasa `validate_collaboration_state` exit 0: el seed file referenciado por el `task_upsert`
+  requirement EXISTE (escrito por el builder) y los claim scopes del relay usan selectores VALIDOS para el
+  validador (que reconoce ids de requisito `REQ-[0-9A-Fa-f]+` ademas de `TASK-\d{4}`). Test de comportamiento
+  PERMANENTE: tras un intake real, validate exit 0 (regresion-proof; un intake nunca rompe el canonico).
+  Remedia la anomalia DECISION-0018 (TASK-0136).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

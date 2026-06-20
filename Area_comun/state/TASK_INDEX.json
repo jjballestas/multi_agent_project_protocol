@@ -979,6 +979,23 @@
             "status": "done",
             "title": "Proyecto-front - REMEDIACION DE SEGURIDAD del intake (RF-14): anti-impersonacion (builders server-side) + relay acotado + camino feliz write-real + accountability",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0136-codex-reconcile-intake-canonical-red.md",
+            "id": "TASK-0136",
+            "linked_decisions": [
+                "DECISION-0018",
+                "DECISION-0051",
+                "DECISION-0052"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "critical",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

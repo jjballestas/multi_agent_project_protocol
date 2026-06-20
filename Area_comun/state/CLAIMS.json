@@ -2229,6 +2229,24 @@
             "updated_at": "2026-06-20T17:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promote-0136",
+            "expires_at": "2026-06-20T22:00:00Z",
+            "notes": "Promote TASK-0136 (remediacion DECISION-0018 canonico rojo) ready + GO a Codex; AC22 permanente en SPEC-0086. maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0136-codex-reconcile-intake-canonical-red.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0136.md"
+            ],
+            "started_at": "2026-06-20T19:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0136",
+            "updated_at": "2026-06-20T19:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-task-0131",
             "expires_at": "2026-06-20T15:15:00Z",
             "notes": "Front view routing (operator-directed): nav item -> only its panel; persistent header; Ledger #4 own view; Backlog gets a real view. maker=Arquitecto, checker=Operador (visual). Guards Zeus front files vs live Codex.",

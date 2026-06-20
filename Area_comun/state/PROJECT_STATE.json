@@ -239,6 +239,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front - REMEDIACION DE SEGURIDAD del intake (RF-14): anti-impersonacion (builders server-side) + relay acotado + camino feliz write-real + accountability"
+        },
+        {
+            "id": "TASK-0136",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
         }
     ],
     "agents": {
