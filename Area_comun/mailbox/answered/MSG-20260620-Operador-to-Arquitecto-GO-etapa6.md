@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: GO a front etapa 6 (multi-proyecto + kickoff RF-10) para dejar el front totalmente funcional. De a una pieza, SDD, maker=Codex/checker=Arquitecto. Badge-honesto (test de COMPORTAMIENTO) sigue como AC PERMANENTE. Etapa 5 roster DEFERIDA (sin Disenador). #4 epoca 1.14.0 intacta, sin re-genesis. NOTA: queda encolado; el cron se detiene (fin de sesion del operador) -> recoger al reanudar.

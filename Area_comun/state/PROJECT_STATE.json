@@ -185,6 +185,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front - endurecimiento badge-honesto - test de COMPORTAMIENTO (regresion-proof honestidad de estado), producto Zeus-protocol (SPEC-0086 AC11)"
+        },
+        {
+            "id": "TASK-0130",
+            "owner": "Codex",
+            "status": "in_progress",
+            "title": "Proyecto-front MVP etapa 6 - Multi-proyecto (selector read-only, modelo hub-centrico) + Kickoff RF-10 gobernado (DECISION-0049 / DECISION-0050 / SPEC-0086)"
         }
     ],
     "agents": {

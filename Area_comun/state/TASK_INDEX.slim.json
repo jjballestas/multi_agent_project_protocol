@@ -8,6 +8,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0130",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "in_progress",
+            "title": "Proyecto-front MVP etapa 6 - Multi-proyecto (selector read-only, modelo hub-centrico) + Kickoff RF-10 gobernado (DECISION-0049 / DECISION-0050 / SPEC-0086)"
         }
     ],
     "view": "task_index.slim"

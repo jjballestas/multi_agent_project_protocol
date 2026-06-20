@@ -5,7 +5,7 @@ task_id: none
 from: Operador
 to: Arquitecto
 requires_response: false
-status: open
+status: archived
 one_line_summary: Remote de Zeus-protocol creado en GitHub. Configura el remote y pushea el estado COMMITEADO (HEAD 4d9f1b3). Push = commits, no working tree (los 8 'M' actuales son artefacto del mount; NO commitearlos como si fueran trabajo). Setea la descripcion del repo.
 requested_action: "En D:\\Agentes\\Zeus\\Zeus-protocol: git remote add origin https://github.com/jjballestas/Zeus-protocol.git ; git push -u origin main. Pushea el HEAD commiteado (4d9f1b3). ANTES de pushear: verifica que los 'M' del working tree sean artefacto de re-truncacion del mount (compara con git show HEAD) y NO los commitees como trabajo; si hubiera trabajo real sin commitear, commitealo aparte con mensaje claro. Descripcion del repo (GitHub): 'Panel web single-operator para operar y observar un protocolo multi-agente gobernado con atestacion criptografica (#4). Construido por la propia metodologia. PII-free.'"
 question: none

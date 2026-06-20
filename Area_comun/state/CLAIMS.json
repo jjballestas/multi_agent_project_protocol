@@ -1898,6 +1898,28 @@
             "task_id": "TASK-0117"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-author-0130",
+            "expires_at": "2026-06-20T14:20:00Z",
+            "notes": "Author etapa6 SDD: create TASK-0130 (ready, maker=Codex) hub-centrico per operator; GO to Codex + answer GO-etapa6 (rr=true) + archive consumed GO-remote (push done).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0130-codex-front-mvp-etapa6-multiproyecto-kickoff.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-etapa6-TASK-0130.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Operador-etapa6-SDD-autorado.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Operador-to-Arquitecto-GO-etapa6.md",
+                "Area_comun/mailbox/archived/MSG-20260620-Operador-to-Arquitecto-GO-remote-zeus-protocol.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T10:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0130",
+            "updated_at": "2026-06-20T10:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-close-0124-0125",
             "expires_at": "2026-06-20T04:00:00Z",
             "notes": "Cierra TASK-0125 (CI connector) + TASK-0124 (front etapa1) in_review->done tras checker VERDE. Ventana segura (sin claim de Codex). Sin bump epoca.",
@@ -2194,6 +2216,35 @@
             "status": "released",
             "task_id": "TASK-0129",
             "updated_at": "2026-06-20T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0130",
+            "expires_at": "2026-06-20T14:20:00Z",
+            "notes": "Implement TASK-0130 front MVP stage 6: read-only multi-project selector and governed kickoff RF-10.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0130",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0130",
+                "Area_comun/tasks/TASK-0130-codex-front-mvp-etapa6-multiproyecto-kickoff.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-etapa6-TASK-0130.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-etapa6-TASK-0130.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0130-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T10:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0130",
+            "updated_at": "2026-06-20T10:20:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
