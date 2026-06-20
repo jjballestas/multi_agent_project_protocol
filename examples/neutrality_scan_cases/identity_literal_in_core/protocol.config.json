@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "protocol_version": "0.0.0-test",
+  "agent_registry": {
+    "enabled": true,
+    "agents": [
+      { "id": "AlphaAgent", "enabled": true, "capabilities": ["orchestrator"] }
+    ]
+  },
+  "domain_neutrality": {
+    "enabled": true,
+    "denylist": [],
+    "scan_globs": ["runtime/**"],
+    "exempt_globs": []
+  }
+}

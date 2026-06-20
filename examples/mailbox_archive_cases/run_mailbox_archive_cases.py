@@ -27,6 +27,7 @@ MESSAGE_ID = "MSG-mailbox-archive-case"
 CLAIM_ID = "CLAIM-MAILBOX-ARCHIVE-CASE"
 TIMESTAMP = "2026-06-20T00:00:00Z"
 COMMIT = "mailboxcase123"
+ACCOUNTABILITY = {"author": "Operador", "relayed_by": "Arquitecto", "endorsement": "none"}
 
 
 def prepare_root(root: Path) -> None:
@@ -97,6 +98,7 @@ def archive_intents(message_id: str = MESSAGE_ID) -> list[dict[str, Any]]:
             "mailbox_archive": {
                 "message_id": message_id,
                 "idempotency_key": "mailbox-archive-case:archive",
+                **ACCOUNTABILITY,
             }
         },
         {
@@ -146,14 +148,7 @@ def case_archive_happy_path_and_idempotent() -> None:
         assert result["applied"] is True
         archive_event = next(event for event in result["events"] if event["payload"]["intent_type"] == "mailbox_archive")
         transition = archive_event["payload"]["transitions"]["mailbox_archive"]
-        assert transition == {
-            "message_id": MESSAGE_ID,
-            "from": "open",
-            "to": "archived",
-            "author": "Operador",
-            "relayed_by": "Arquitecto",
-            "endorsement": "none",
-        }
+        assert transition == {"message_id": MESSAGE_ID, "from": "open", "to": "archived", **ACCOUNTABILITY}
         assert not (root / "Area_comun/mailbox/open" / f"{MESSAGE_ID}.md").exists()
         archived = root / "Area_comun/mailbox/archived" / f"{MESSAGE_ID}.md"
         assert archived.exists()
@@ -183,7 +178,7 @@ def case_archive_rejects_nonexistent_and_path_traversal() -> None:
             lambda: submit_intent(
                 root,
                 "Arquitecto",
-                {"mailbox_archive": {"message_id": "MSG-does-not-exist"}},
+                {"mailbox_archive": {"message_id": "MSG-does-not-exist", **ACCOUNTABILITY}},
                 timestamp=TIMESTAMP,
                 commit=COMMIT,
             ),
@@ -193,7 +188,7 @@ def case_archive_rejects_nonexistent_and_path_traversal() -> None:
             lambda: submit_intent(
                 root,
                 "Arquitecto",
-                {"mailbox_archive": {"message_id": "../MSG-escape"}},
+                {"mailbox_archive": {"message_id": "../MSG-escape", **ACCOUNTABILITY}},
                 timestamp=TIMESTAMP,
                 commit=COMMIT,
             ),
@@ -208,7 +203,7 @@ def case_archive_rejects_extra_payload_and_missing_claim() -> None:
             lambda: submit_intent(
                 root,
                 "Arquitecto",
-                {"mailbox_archive": {"message_id": MESSAGE_ID, "task_status": {"task_id": TASK_ID}}},
+                {"mailbox_archive": {"message_id": MESSAGE_ID, "task_status": {"task_id": TASK_ID}, **ACCOUNTABILITY}},
                 timestamp=TIMESTAMP,
                 commit=COMMIT,
             ),
@@ -218,7 +213,7 @@ def case_archive_rejects_extra_payload_and_missing_claim() -> None:
             lambda: submit_intent(
                 root,
                 "Arquitecto",
-                {"mailbox_archive": {"message_id": MESSAGE_ID}},
+                {"mailbox_archive": {"message_id": MESSAGE_ID, **ACCOUNTABILITY}},
                 timestamp=TIMESTAMP,
                 commit=COMMIT,
             ),

@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 $cases = @(
     @{ Name = "clean"; Exit = 0 },
     @{ Name = "domain_term_in_core"; Exit = 1 },
+    @{ Name = "identity_literal_in_core"; Exit = 1 },
     @{ Name = "runtime_state_exempt"; Exit = 0 },
     @{ Name = "runtime_source_still_scanned"; Exit = 1 }
 )

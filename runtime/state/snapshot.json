@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a211e0ef95561c8a8e5bc1ba0e8d606f6bb8048d11ee70e6c9f1baa1a41f0bb3",
+  "canonical_hash": "93a8518c5f73b6d2c3c9b9af67161f50898bfe3de859f1f23ad07b06321dc9c8",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -87,11 +87,11 @@
       "TASK-0135": 8,
       "TASK-0136": 8,
       "TASK-0137": 8,
-      "TASK-0138": 7,
+      "TASK-0138": 11,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 214,
+    "events_applied": 218,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -104,7 +104,11 @@
       "Codex:TASK-0137:in-progress-to-in-review:20260620T220000Z": 871,
       "Codex:TASK-0137:ready-to-in-progress:20260620T213000Z": 870,
       "Codex:TASK-0138:claim-release:20260620T225900Z": 883,
+      "Codex:TASK-0138:neutrality-fix-claim-release:20260621T011500Z": 889,
+      "Codex:TASK-0138:neutrality-fix-status-in-review:20260621T011500Z": 888,
       "Codex:TASK-0138:ready-to-in-progress:20260620T221500Z": 881,
+      "Codex:TASK-0138:rego-neutrality-claim-acquire:20260621T003000Z": 886,
+      "Codex:TASK-0138:rego-neutrality-status-in-progress:20260621T003000Z": 887,
       "Codex:TASK-0138:status-in-review:20260620T225900Z": 882,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
@@ -312,5 +316,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 885
+  "up_to_seq": 889
 }

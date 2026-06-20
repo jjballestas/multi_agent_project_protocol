@@ -9,6 +9,25 @@ import re
 import sys
 from pathlib import Path
 
+LEGACY_IDENTITY_LITERAL_FILES = {
+    "runtime/apply.py",
+    "runtime/budget.py",
+    "runtime/context.py",
+    "runtime/eventlog.py",
+    "runtime/ledger_ops.py",
+    "runtime/metrics.py",
+    "runtime/router.py",
+    "scripts/prune_state.py",
+}
+GENERIC_IDENTITY_TOKENS = {"agent", "human", "humano", "owner"}
+
+
+def identity_scan_path(relative_path: str) -> bool:
+    return (
+        (relative_path.startswith("runtime/") and relative_path.endswith(".py"))
+        or (relative_path.startswith("scripts/") and relative_path.endswith((".py", ".ps1")))
+    )
+
 
 def glob_to_regex(pattern: str) -> re.Pattern[str]:
     normalized = pattern.replace("\\", "/").strip("/")
@@ -56,23 +75,46 @@ def load_config(root: Path) -> dict:
         return json.load(handle)
 
 
-def compile_terms(denylist: list[str]) -> list[tuple[str, re.Pattern[str]]]:
-    compiled: list[tuple[str, re.Pattern[str]]] = []
-    for term in denylist:
+def configured_identity_terms(config: dict) -> list[str]:
+    terms: set[str] = set()
+    registry = config.get("agent_registry") if isinstance(config.get("agent_registry"), dict) else {}
+    for agent in registry.get("agents") or []:
+        if isinstance(agent, dict):
+            value = str(agent.get("id") or "").strip()
+            if len(value) >= 3:
+                terms.add(value)
+    roles = config.get("agent_roles") if isinstance(config.get("agent_roles"), dict) else {}
+    for value in roles.values():
+        text = str(value or "").strip()
+        if len(text) >= 3:
+            terms.add(text)
+        for token in re.split(r"\s+", text):
+            clean = token.strip()
+            if len(clean) >= 4 and clean.casefold() not in GENERIC_IDENTITY_TOKENS:
+                terms.add(clean)
+    return sorted(terms, key=str.casefold)
+
+
+def compile_terms(terms: list[str], kind: str) -> list[tuple[str, re.Pattern[str], str]]:
+    compiled: list[tuple[str, re.Pattern[str], str]] = []
+    for term in terms:
         clean_term = str(term).strip()
         if not clean_term:
             continue
         pattern = re.compile(rf"(?<!\w){re.escape(clean_term)}(?!\w)", re.IGNORECASE)
-        compiled.append((clean_term, pattern))
+        compiled.append((clean_term, pattern, kind))
     return compiled
 
 
-def scan_file(root: Path, path: Path, terms: list[tuple[str, re.Pattern[str]]]) -> list[str]:
+def scan_file(root: Path, path: Path, terms: list[tuple[str, re.Pattern[str], str]]) -> list[str]:
     findings: list[str] = []
     relative_path = path.relative_to(root).as_posix()
     text = path.read_text(encoding="utf-8-sig", errors="replace")
     for line_number, line in enumerate(text.splitlines(), start=1):
-        for term, pattern in terms:
+        for term, pattern, kind in terms:
+            if kind == "identity":
+                if not identity_scan_path(relative_path) or relative_path in LEGACY_IDENTITY_LITERAL_FILES:
+                    continue
             if pattern.search(line):
                 findings.append(f"{relative_path}:{line_number}: {term}")
     return findings
@@ -94,7 +136,10 @@ def main() -> int:
     exempt_globs = neutrality.get("exempt_globs") or []
     if (root / "connectors").exists() and "connectors/**" not in scan_globs:
         scan_globs = [*scan_globs, "connectors/**"]
-    terms = compile_terms(denylist)
+    terms = [
+        *compile_terms(denylist, "domain"),
+        *compile_terms(configured_identity_terms(config), "identity"),
+    ]
 
     if not terms or not scan_globs:
         return 0

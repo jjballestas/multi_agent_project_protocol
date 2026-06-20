@@ -2812,6 +2812,36 @@
             "updated_at": "2026-06-21T00:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Codex-TASK-0138-neutrality-fix",
+            "expires_at": "2026-06-21T04:30:00Z",
+            "notes": "Fix AC26 neutrality regression for TASK-0138 RE-GO.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0138",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0138",
+                "Area_comun/tasks/TASK-0138-codex-mailbox-archive.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0138-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-REGO-fix-neutralidad-TASK-0138.md",
+                "Area_comun/mailbox/answered/MSG-20260621-Arquitecto-to-Codex-REGO-fix-neutralidad-TASK-0138.md",
+                "Area_comun/mailbox/open/MSG-20260621-Codex-to-Arquitecto-TASK-0138-neutrality-fix-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/submit_intent.py",
+                "scripts/scan_domain_neutrality.py",
+                "scripts/scan_domain_neutrality.ps1",
+                "examples/mailbox_archive_cases/run_mailbox_archive_cases.py",
+                "examples/neutrality_scan_cases/run_neutrality_scan_cases.ps1",
+                "examples/neutrality_scan_cases/identity_literal_in_core/protocol.config.json",
+                "examples/neutrality_scan_cases/identity_literal_in_core/runtime/source.py",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-21T00:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0138",
+            "updated_at": "2026-06-21T00:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-444E0DE5",
             "expires_at": "2026-06-20T19:57:55.436Z",
             "notes": "Front requirement-intake relay claim.",

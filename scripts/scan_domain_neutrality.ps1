@@ -3,6 +3,17 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$LegacyIdentityLiteralFiles = @(
+    "runtime/apply.py",
+    "runtime/budget.py",
+    "runtime/context.py",
+    "runtime/eventlog.py",
+    "runtime/ledger_ops.py",
+    "runtime/metrics.py",
+    "runtime/router.py",
+    "scripts/prune_state.py"
+)
+$GenericIdentityTokens = @("agent", "human", "humano", "owner")
 
 function Convert-GlobToRegex {
     param([string]$Pattern)
@@ -58,6 +69,42 @@ function Get-RelativePath {
     return $rootUri.MakeRelativeUri($fileUri).ToString()
 }
 
+function Get-ConfiguredIdentityTerms {
+    param([object]$Config)
+
+    $terms = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::OrdinalIgnoreCase)
+    if ($Config.agent_registry -and $Config.agent_registry.agents) {
+        foreach ($agent in @($Config.agent_registry.agents)) {
+            $value = ([string]$agent.id).Trim()
+            if ($value.Length -ge 3) {
+                [void]$terms.Add($value)
+            }
+        }
+    }
+    if ($Config.agent_roles) {
+        foreach ($property in $Config.agent_roles.PSObject.Properties) {
+            $text = ([string]$property.Value).Trim()
+            if ($text.Length -ge 3) {
+                [void]$terms.Add($text)
+            }
+            foreach ($token in ($text -split "\s+")) {
+                $clean = ([string]$token).Trim()
+                if ($clean.Length -ge 4 -and -not ($GenericIdentityTokens -contains $clean.ToLowerInvariant())) {
+                    [void]$terms.Add($clean)
+                }
+            }
+        }
+    }
+    return @($terms) | Sort-Object { $_.ToLowerInvariant() }
+}
+
+function Test-IdentityScanPath {
+    param([string]$RelativePath)
+
+    return (($RelativePath.StartsWith("runtime/") -and $RelativePath.EndsWith(".py")) -or
+        ($RelativePath.StartsWith("scripts/") -and ($RelativePath.EndsWith(".py") -or $RelativePath.EndsWith(".ps1"))))
+}
+
 $resolvedRoot = (Resolve-Path $Root).Path
 $configPath = Join-Path $resolvedRoot "protocol.config.json"
 if (-not (Test-Path $configPath)) {
@@ -74,7 +121,15 @@ $denylist = @($neutrality.denylist)
 $scanGlobs = @($neutrality.scan_globs)
 $exemptGlobs = @($neutrality.exempt_globs)
 
-if ($denylist.Count -eq 0 -or $scanGlobs.Count -eq 0) {
+$scanTerms = @()
+foreach ($term in $denylist) {
+    $scanTerms += [pscustomobject]@{ Term = $term; Kind = "domain" }
+}
+foreach ($term in (Get-ConfiguredIdentityTerms -Config $config)) {
+    $scanTerms += [pscustomobject]@{ Term = $term; Kind = "identity" }
+}
+
+if ($scanTerms.Count -eq 0 -or $scanGlobs.Count -eq 0) {
     exit 0
 }
 
@@ -89,8 +144,13 @@ $files = Get-ChildItem -Path $resolvedRoot -Recurse -File -Force | ForEach-Objec
 foreach ($file in $files) {
     $lines = @(Get-Content -Path $file.Path -Encoding UTF8)
     for ($lineIndex = 0; $lineIndex -lt $lines.Count; $lineIndex++) {
-        foreach ($term in $denylist) {
-            $cleanTerm = ([string]$term).Trim()
+        foreach ($scanTerm in $scanTerms) {
+            if ($scanTerm.Kind -eq "identity") {
+                if (-not (Test-IdentityScanPath -RelativePath $file.RelativePath) -or $LegacyIdentityLiteralFiles -contains $file.RelativePath) {
+                    continue
+                }
+            }
+            $cleanTerm = ([string]$scanTerm.Term).Trim()
             if (-not $cleanTerm) {
                 continue
             }

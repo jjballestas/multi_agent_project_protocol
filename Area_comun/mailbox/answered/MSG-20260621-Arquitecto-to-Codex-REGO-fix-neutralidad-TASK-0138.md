@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "RE-GO TASK-0138 (sigue in_review; NO cerrada): fix de NEUTRALIDAD del core por la pasada del Analista. (1) atribucion CALLER-DERIVED del mailbox_archive: el caller (Zeus) provee author/relayed_by; el core SIN literales de agente -> grep '\"Operador\"|\"Arquitecto\"' runtime/submit_intent.py = 0 (hoy 2). (2) regex message_id acotada a [A-Za-z0-9._-] (sin ':' NTFS ADS), mantiene guarda de path. (3) scan_domain_neutrality EXTENDIDO para atrapar literales de identidad de agente en el core (regresion-proof). Mantener verde AC24/AC25/hard-gate/#4 byte-identica. AC26 PERMANENTE en SPEC. Nueva pasada del Analista antes de cerrar; yo checker."

@@ -59,7 +59,7 @@ VALID_TASK_STATUSES = {
 }
 INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narrative", "protocol_prune", "mailbox_archive"}
 PROJECT_NARRATIVE_FIELDS = {"next_actions", "risks", "open_questions"}
-MAILBOX_MESSAGE_ID_RE = re.compile(r"^MSG-[A-Za-z0-9_@{}~^:-]+$")
+MAILBOX_MESSAGE_ID_RE = re.compile(r"^MSG-[A-Za-z0-9._-]+$")
 ROW_SCOPED_LEDGER_PATHS = {
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/PROJECT_STATE.json",
@@ -268,6 +268,13 @@ def mailbox_archive_path_status(root: Path, message_id: str) -> tuple[Path, Path
     return open_path, archived_path, open_path.exists(), archived_path.exists()
 
 
+def mailbox_archive_accountability(payload: dict[str, Any]) -> dict[str, str]:
+    author = require_text(payload, "author")
+    relayed_by = require_text(payload, "relayed_by")
+    endorsement = str(payload.get("endorsement") or "none").strip() or "none"
+    return {"author": author, "relayed_by": relayed_by, "endorsement": endorsement}
+
+
 def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
     kind, payload = parse_intent(intent)
     common = {"kind": kind}
@@ -327,16 +334,14 @@ def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
         return {**common, "task_ids": task_ids, "active_task_ids": active_task_ids, "claim_ids": claim_ids}
 
     if kind == "mailbox_archive":
-        allowed = {"message_id", "idempotency_key"}
+        allowed = {"message_id", "author", "relayed_by", "endorsement", "idempotency_key"}
         unsupported = sorted(key for key in payload if key not in allowed)
         if unsupported:
             raise IntentValidationError(f"mailbox_archive contains unsupported fields: {', '.join(unsupported)}")
         return {
             **common,
             "message_id": mailbox_message_id(payload),
-            "author": "Operador",
-            "relayed_by": "Arquitecto",
-            "endorsement": "none",
+            **mailbox_archive_accountability(payload),
         }
 
     decision_id = str(payload.get("decision_id") or payload.get("id") or "").strip()

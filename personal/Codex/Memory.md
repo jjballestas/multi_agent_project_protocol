@@ -4,6 +4,15 @@ Last updated: 2026-06-20 Europe/Madrid, after TASK-0138 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0138 AC26 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `7619fd2 fix(mailbox): derive archive attribution in server builder`. `mailbox-archive` now sends
+  `author`/`relayed_by`/`endorsement` from the server-side action builder, keeps rejecting client
+  `actorId`/`intents`, and rejects `:` in `messageId` for the NTFS ADS guard. Evidence before commit:
+  `npm test` PASS 26/26 and `node --check src/server.js tests/staticContract.test.js` OK. Protocol-side AC26
+  landed as `eee35c7 fix(runtime): make mailbox archive attribution caller-derived`: `mailbox_archive` now
+  requires caller-derived `author`/`relayed_by`, message ids are limited to `MSG-[A-Za-z0-9._-]+`,
+  `scan_domain_neutrality` has an identity-literal golden, RE-GO is answered, TASK-0138 is back in
+  `in_review`, and Codex claim is released.
 - TASK-0138 product implementation commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `6afefe7 feat(mailbox): add governed archive relay`. The front now exposes `mailbox-archive` as the second
   executable RF-14 action, builds its transaction server-side, rejects client actor/intents and unsafe
