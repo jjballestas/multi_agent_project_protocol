@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ff183ec75fd522ed2a1f3d686166489969257f1eee76c77dc2ea01186a065c16",
+  "canonical_hash": "2af02e3fda8cb596e31274136997d96e99301faca27a19aa4f65b782ac751caa",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -32,6 +32,7 @@
       "CLAIM-20260620-Arquitecto-promo-0126": 1,
       "CLAIM-20260620-Arquitecto-promo-0127": 1,
       "CLAIM-20260620-Arquitecto-promote-0132": 1,
+      "CLAIM-20260620-Arquitecto-promote-0133": 1,
       "CLAIM-20260620-Arquitecto-task-0131": 1,
       "CLAIM-20260620-Arquitecto-upsert-0129": 1,
       "CLAIM-20260620-Codex-TASK-0126": 1,
@@ -47,6 +48,7 @@
       "DECISION-0048": 1,
       "DECISION-0049": 1,
       "DECISION-0050": 1,
+      "DECISION-0051": 1,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
       "PROJECT_STATE": 1,
@@ -63,10 +65,11 @@
       "TASK-0130": 10,
       "TASK-0131": 7,
       "TASK-0132": 8,
+      "TASK-0133": 2,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 140,
+    "events_applied": 144,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -148,6 +151,10 @@
       "arquitecto:promote-0132:claim-acquire": 802,
       "arquitecto:promote-0132:claim-release": 804,
       "arquitecto:promote-0132:task-upsert-ready": 803,
+      "arquitecto:promote-0133:claim-acquire": 812,
+      "arquitecto:promote-0133:claim-release": 815,
+      "arquitecto:promote-0133:decision-0051": 813,
+      "arquitecto:promote-0133:task-upsert-ready": 814,
       "arquitecto:task-0131:claim-acquire": 793,
       "arquitecto:task-0131:claim-release-for-codex": 795,
       "arquitecto:task-0131:upsert-in-progress": 794,
@@ -213,5 +220,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 811
+  "up_to_seq": 815
 }

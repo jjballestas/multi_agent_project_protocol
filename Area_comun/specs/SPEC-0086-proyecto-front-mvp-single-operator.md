@@ -45,6 +45,12 @@ estado/ledger directo ni bypassa gates/#4/drift. Toda escritura = transaccion at
   un toggle (ceremonia gobernada; el conjunto de firmantes queda pinned por el genesis). El MVP solo
   EXPONE/prepara el flujo; la ceremonia es gateada por el operador.
 - **Kickoff (RF-10):** lanzar un proyecto nuevo bajo `D:\Agentes\Zeus\` (su primer handoff gobernado = su T0).
+- **Intake gobernado de requisitos (RF-14; DECISION-0051):** el operador monta una historia/requisito en un
+  wizard (titulo, narrativa, intencion de aceptacion en lenguaje llano, proyecto destino) y la emite como
+  artefacto GOBERNADO via submit_intent EXECUTE (`task_upsert` de una tarea `type:requirement`, `actorId:
+  "Operador"`, idempotente). Es la SEMILLA del pipeline SDD; el Arquitecto la consume para autorar la SPEC
+  (handoff explicito). Habilita la PRIMERA superficie de escritura EXECUTE del operador desde el front,
+  acotada al intake, con confirmacion visible. Cuelga del patron `governed-action` (un solo writer).
 
 ## Out Of Scope (posterior, pull-based, regla 3.4)
 
@@ -113,6 +119,34 @@ producto/dominio en el core neutral.
   este DEFERIDA; la nav lleva 7 vistas a proposito.) Toda etapa con UI sobre un design brief trae de origen un
   AC de conformidad + un test de comportamiento de interaccion (leccion de proceso, runbook).
 
+### Intake gobernado de requisitos (RF-14; DECISION-0051) - AC14..AC17
+
+- **AC14 - Intake -> artefacto gobernado atribuido al Operador, idempotente.** El wizard estructura la
+  historia (titulo, narrativa, intencion de aceptacion en lenguaje llano, proyecto destino) y la emite SOLO
+  via submit_intent (`task_upsert` de una tarea `type:requirement`, status `proposed`, `author/owner:
+  Operador`). Test de comportamiento: el submit de intake produce el requirement con `author=Operador`;
+  re-submit con la misma `idempotency_key` NO duplica. El intake es la SEMILLA, no una SPEC.
+- **AC15 - EXECUTE exige confirmacion (prueba negativa).** EXECUTE solo escribe con
+  `confirm:SUBMIT_INTENT`; sin confirm -> rechazo (409) y NO hay escritura al ledger (drift 0
+  antes/despues). La UI muestra paso de confirmacion visible y declara el writer
+  (`runtime/submit_intent.py`); preview (dry_run) != envio (execute), sin verde sin respuesta real del
+  execute. Test negativo: `mode:execute` sin confirm no muta TASK_INDEX/PROJECT_STATE.
+- **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
+  automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
+  (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
+  publicable/exportable; (c) canal ASCII en todo string que el front escriba al protocolo; (d) advertir al
+  operador en compose y en confirm ("no incluyas PII de terceros: NIT, razon social, datos SQL"). Coherente
+  con DECISION-0040. Test: payload con patrones tipo NIT/razon social/SQL -> el plano publicable no expone el
+  literal; el intake NO levanta el gate TASK-0118/DEF-PII antes de captura viva real.
+- **AC17 - No-bypass.** Se mantiene `directLedgerWrites:false`; ninguna ruta del front escribe estado/ledger
+  fuera de submit_intent (extiende la prueba negativa de superficie de TASK-0127). El intake cuelga del
+  patron `governed-action` (un solo writer), no crea un segundo escritor.
+
+> RF-14 se construye CONTRA el diseno ya entregado por Claude Design en
+> `Zeus-protocol/design/interface/components/intake/` (lista, wizard-1-capturar, wizard-2-preview,
+> wizard-3-confirmar, wizard-4-resultado, detalle, estados, NOTES.md): **AC13 (conformidad de diseno) aplica
+> a estas pantallas**.
+
 ## test_plan
 
 - **Producto (Zeus-protocol):** suite del front (unit/integration) + CI verde; pruebas de que las vistas
@@ -149,3 +183,4 @@ producto/dominio en el core neutral.
 | RF-9 roster re-genesis-gobernado | TASK-0124 (etapa 5) | flujo gateado, no toggle | AC8 |
 | Honestidad de estado regresion-proof | TASK-0129 (badge behavior test) + etapa5/6 | test de comportamiento: verif. falla -> badge no-verde; valido -> verde; PII redactada | AC11 |
 | CI verde / neutralidad / gates | TASK-0124 | CI producto + validate/scan protocolo | AC6/AC7/AC10 |
+| RF-14 intake gobernado de requisitos | TASK-0133 (DECISION-0051) | wizard -> task_upsert requirement (Operador, idempotente); EXECUTE con confirmacion (prueba negativa); PII estructural+ASCII; no-bypass; conforme al diseno components/intake/ | AC14/AC15/AC16/AC17 + AC11/AC12/AC13 |

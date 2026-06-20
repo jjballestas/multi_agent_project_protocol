@@ -203,6 +203,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front etapa 6.1 - conformidad de diseno (Backlog kanban + Projects=selector/launcher + proyecto-entidad + PII/tokens) + AC12/AC13 permanentes (SPEC-0086)"
+        },
+        {
+            "id": "TASK-0133",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/"
         }
     ],
     "agents": {
@@ -259,7 +265,8 @@
         "DECISION-0047",
         "DECISION-0048",
         "DECISION-0049",
-        "DECISION-0050"
+        "DECISION-0050",
+        "DECISION-0051"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

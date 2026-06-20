@@ -1,0 +1,60 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-promote-0133",
+          "task_id": "TASK-0133",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0133-codex-front-intake-historias.md",
+            "Area_comun/decisions/DECISION-0051-operator-execute-write-surface-front.md",
+            "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+            "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0133.md"
+          ],
+          "started_at": "2026-06-20T14:00:00Z",
+          "updated_at": "2026-06-20T14:00:00Z",
+          "expires_at": "2026-06-20T18:00:00Z",
+          "status": "active",
+          "notes": "Promote DECISION-0051 + ext SPEC-0086 (RF-14/AC14-AC17) + TASK-0133 ready + GO a Codex. maker=Codex/checker=Arquitecto."
+        },
+        "idempotency_key": "arquitecto:promote-0133:claim-acquire"
+      }
+    },
+    {
+      "decision": {
+        "decision_id": "DECISION-0051",
+        "idempotency_key": "arquitecto:promote-0133:decision-0051"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": {
+          "id": "TASK-0133",
+          "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/",
+          "type": "product",
+          "status": "ready",
+          "owner": "Codex",
+          "phase": "P2",
+          "priority": "high",
+          "spec_id": "SPEC-0086",
+          "linked_decisions": ["DECISION-0051", "DECISION-0040", "DECISION-0049", "DECISION-0050"],
+          "created_at": "2026-06-20",
+          "file": "Area_comun/tasks/TASK-0133-codex-front-intake-historias.md"
+        },
+        "idempotency_key": "arquitecto:promote-0133:task-upsert-ready"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-promote-0133",
+        "idempotency_key": "arquitecto:promote-0133:claim-release"
+      }
+    }
+  ]
+}

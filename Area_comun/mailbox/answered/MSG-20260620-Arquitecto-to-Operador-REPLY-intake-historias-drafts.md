@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: answered
 requires_response: false
 response_owner: Operador
 in_reply_to: MSG-20260620-Operador-to-Arquitecto-GO-front-intake-historias

@@ -847,6 +847,24 @@
             "status": "done",
             "title": "Proyecto-front etapa 6.1 - conformidad de diseno (Backlog kanban + Projects=selector/launcher + proyecto-entidad + PII/tokens) + AC12/AC13 permanentes (SPEC-0086)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0133-codex-front-intake-historias.md",
+            "id": "TASK-0133",
+            "linked_decisions": [
+                "DECISION-0051",
+                "DECISION-0040",
+                "DECISION-0049",
+                "DECISION-0050"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

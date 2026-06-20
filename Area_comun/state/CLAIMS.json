@@ -2159,6 +2159,25 @@
             "updated_at": "2026-06-20T12:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promote-0133",
+            "expires_at": "2026-06-20T18:00:00Z",
+            "notes": "Promote DECISION-0051 + ext SPEC-0086 (RF-14/AC14-AC17) + TASK-0133 ready + GO a Codex. maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0133-codex-front-intake-historias.md",
+                "Area_comun/decisions/DECISION-0051-operator-execute-write-surface-front.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0133.md"
+            ],
+            "started_at": "2026-06-20T14:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0133",
+            "updated_at": "2026-06-20T14:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-task-0131",
             "expires_at": "2026-06-20T15:15:00Z",
             "notes": "Front view routing (operator-directed): nav item -> only its panel; persistent header; Ledger #4 own view; Backlog gets a real view. maker=Arquitecto, checker=Operador (visual). Guards Zeus front files vs live Codex.",
