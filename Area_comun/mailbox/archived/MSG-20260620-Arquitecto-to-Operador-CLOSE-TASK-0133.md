@@ -4,7 +4,7 @@ task_id: TASK-0133
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0133 (intake gobernado RF-14) CERRADO -> done. Checker Arquitecto verde: producto 21 tests PASS + smoke (dry_run intake actorId=Operador / execute-sin-confirm 409 sin escritura) + PII estructural redactada + gates protocolo (encoding/neutrality/validate con-clon-limpio-sin-secretos exit 0, drift 0, #4 epoca 1.14.0 intacta). Zeus-protocol commit 42e7931 (Arquitecto + Co-Author Codex). Cierre via submit_intent (claim->task_status->release)."
