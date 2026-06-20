@@ -4,7 +4,7 @@ task_id: TASK-0139
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CERRADA TASK-0139 (auto commit+push gobernado, DECISION-0054) -> done. Analista=OK/CERRABLE (transporte/egress/honestidad behavior-tested). OFF-by-default; commit acotado --only; sin force; non-fast-forward->409 sin sobrescribir; landed solo con ls-remote; sucio ajeno excluido; #4 byte-identica; validate con/sin secretos exit 0; drift 0; Zeus npm 29/29. LA COLA DE LOS 4 REQUISITOS DEL INTAKE QUEDA SERVIDA. PENDIENTE (tu GO aparte): activar el push VIVO contra el remote real (la capacidad nace OFF)."

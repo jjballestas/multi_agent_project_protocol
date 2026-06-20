@@ -2926,6 +2926,21 @@
             "updated_at": "2026-06-21T03:15:00Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-A6AE1D68",
+            "expires_at": "2026-06-20T23:43:39.258Z",
+            "notes": "Front mailbox-archive relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139.md",
+                "Area_comun/mailbox/archived/MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139.md"
+            ],
+            "started_at": "2026-06-20T23:33:39.258Z",
+            "status": "released",
+            "task_id": "MAILBOX-ARCHIVE",
+            "updated_at": "2026-06-20T23:33:39.258Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-444E0DE5",
             "expires_at": "2026-06-20T19:57:55.436Z",
             "notes": "Front requirement-intake relay claim.",
