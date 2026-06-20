@@ -2009,6 +2009,24 @@
             "updated_at": "2026-06-20T02:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-mailbox-hygiene-resume",
+            "expires_at": "2026-06-20T14:10:00Z",
+            "notes": "Archive consumed messages on resume: TASK-0129 in_review FYI (task now done), operator standdown-cron (session resumed), and finalize prior-session move of Arquitecto->Codex standdown FYI.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/archived/MSG-20260620-Codex-to-Arquitecto-TASK-0129-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260620-Operador-to-Arquitecto-standdown-cron.md",
+                "Area_comun/mailbox/archived/MSG-20260620-Arquitecto-to-Codex-standdown.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T10:10:00Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260620-RESUME",
+            "updated_at": "2026-06-20T10:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-promo-0126",
             "expires_at": "2026-06-20T04:15:00Z",
             "notes": "Promueve TASK-0126 (front etapa2 observar, ready/Codex) SPEC-0086. Siguiente pieza del MVP.",

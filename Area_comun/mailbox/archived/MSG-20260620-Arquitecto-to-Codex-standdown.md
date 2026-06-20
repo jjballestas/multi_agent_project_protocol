@@ -5,7 +5,7 @@ task_id: none
 from: Arquitecto
 to: Codex
 requires_response: false
-status: open
+status: archived
 one_line_summary: STAND DOWN por fin de sesion del operador (cron detenido). Anomalia del validador (GO-etapa6 con flag de respuesta en true pero sin question) RESUELTA por mi (agregado el campo question) -> validate exit 0 restaurado. Queda pendiente que liberes tu claim COORD-20260620-VALIDATOR-ANOMALY. TASK-0129 queda in_review (la reproduzco como checker al reanudar). Gracias por el catch.
 context_refs:
   - Area_comun/mailbox/open/MSG-20260620-Operador-to-Arquitecto-standdown-cron.md
