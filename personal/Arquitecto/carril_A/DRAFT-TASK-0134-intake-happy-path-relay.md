@@ -1,34 +1,45 @@
-# DRAFT - TASK-0134: Fix camino feliz del intake (RF-14) - relay-signer + happy-path test + UX project-first
+# DRAFT v2 - TASK-0134: REMEDIACION DE SEGURIDAD del intake (RF-14) - anti-impersonacion + relay acotado + camino feliz + accountability + UX
 
-> DRAFT en personal/Arquitecto; NO promovido. Espera ratificacion de DECISION-0052 + ext2 SPEC-0086.
-> maker=Codex / checker=Arquitecto. Codigo en Zeus-protocol. Sucesor de TASK-0133 (done pero con el camino
-> feliz NO demostrado = falla de verificacion del checker; ver REPLY al operador).
+> DRAFT v2 en personal/Arquitecto; NO promovido. Espera ratificacion de DECISION-0052 v2 + ext2 SPEC-0086 v2.
+> maker=Codex / checker=Arquitecto. Codigo en Zeus-protocol. **Es REMEDIACION de un defecto de seguridad
+> CRITICO ya mergeado (Zeus 42e7931), no solo "agregar el relay".** Insumo: veredicto adversarial del Analista.
 
-## Por que TASK nueva y no reabrir 0133
-TASK-0133 quedo `done`; reabrir un done complica el ledger. La correccion (write real + relay + test del
-happy path + UX) entra como TASK-0134, encadenada a 0133 y a DECISION-0052. (Si el operador prefiere reabrir
-0133, lo ajusto.)
+## Contexto del defecto (anomalia DECISION-0018, ya en canonico)
+`src/server.js` (Zeus 42e7931): `actorId = action.actorId || payload.actorId || "Arquitecto"` (linea 384) y
+para acciones no-intake los `intents` vienen crudos del cliente (linea 371; solo se valida el kind). Endpoint
+127.0.0.1 sin auth -> un POST local puede forjar decision/claim/task_status atestado firmado como Arquitecto.
 
-## Alcance
-1. **Relay-signer (DECISION-0052):** el front emite EXECUTE con `actorId:"Arquitecto"` (no `Operador`); el
-   payload requirement lleva `author:"Operador"`, `origin:"front-intake"`, `relayed_by:"Arquitecto"`. La
-   transaccion envuelve `claim acquire (Arquitecto) -> task_upsert requirement -> claim release`.
-2. **CAMINO FELIZ (AC15 revisado):** test de comportamiento que prueba `execute+confirm` -> escritura REAL
-   por submit_intent (requirement en TASK_INDEX/PROJECT_STATE, seq, drift 0). NO solo dry_run/409.
-3. **Atribucion honesta (AC18):** la UI declara "firmado por el Arquitecto en nombre del Operador"; evento
-   con author=Operador + relayed_by=Arquitecto.
-4. **UX (Claude Design):** project-first (selector de proyecto primero; demas campos habilitados tras elegir
-   proyecto) + tipografia del selector destacada. Construir contra el rework de `components/intake/`.
-5. Mantener AC14/AC16/AC17 + carry AC11/AC12/AC13.
+## Alcance (remediacion)
+1. **#1 ANTI-IMPERSONACION (CRITICO, bloqueante):**
+   - Eliminar el trust de `payload.actorId` y de `payload.intents` crudos.
+   - Cada accion gobernada = **builder SERVER-SIDE con forma estricta**: el servidor construye el intent
+     canonicamente desde campos de datos validados; el cliente no inyecta intents.
+   - `actorId` determinado SERVER-SIDE por accion. Relay-como-Arquitecto SOLO para la forma exacta
+     `requirement-intake` (task_upsert requirement, author=Operador).
+   - **Prueba negativa PERMANENTE (AC19):** forjar actorId/intents arbitrarios o cualquier forma !=
+     requirement-intake como Arquitecto -> RECHAZADO (no firma, no escribe). En CI.
+2. **#3 ACCOUNTABILITY (AC20):** evento con `endorsement:none`; firma=origen+transporte, no aval; test de
+   que un relayado NO cuenta como autorado/avalado por el Arquitecto. El aval es la SPEC posterior.
+3. **CAMINO FELIZ (AC15, write REAL no mock):** test de comportamiento permanente que demuestra
+   execute+confirm -> escritura real (requirement en estado, seq, drift 0, author=Operador/relayed_by).
+4. **RENDER honesto (AC18):** UI muestra firmante=Arquitecto + author=Operador; ningun verde "Operador firmo".
+5. **#4 byte-identico:** asertar config/genesis/keys/version byte-identicos (no solo drift 0).
+6. **PII (AC16):** redaccion estructural por patrones best-effort; NO sobre-afirmar PII-free; DEF-PII sigue gate.
+7. **UX (Claude Design):** project-first + tipografia del selector destacada (rework de components/intake/).
+8. **(opcional, follow-on) endpoint hardening:** token de confirmacion/same-origin/loopback-auth en EXECUTE
+   contra drive-by (severidad menor una vez cerrado #1; decido si entra aqui o como pieza aparte).
 
-## DoD
-- AC15 (negativo **y** camino feliz) + AC18 verdes con tests de comportamiento; AC14/16/17 + AC11/12/13 verdes.
-- node --test/CI verde; npm start ejecutable; la vista Intake navega y el intake ESCRIBE de verdad (demostrado).
-- validate exit 0 CON y SIN secretos (clon limpio, DECISION-0046); drift 0; #4 epoca 1.14.0 intacta;
-  neutralidad limpia (codigo solo en Zeus-protocol).
-- Reproducido por el checker (Arquitecto) desde clon limpio, **incluyendo el write real** (no se cierra sin
-  ejecutar el happy path); maker!=checker. Commit como Arquitecto + Co-Authored-By: Codex.
+## DoD / CONDICION DE CIERRE (innegociable)
+- **(a) Prueba negativa de impersonacion (AC19) VERDE** + **(b) camino feliz con write REAL (AC15) VERDE.**
+  TASK-0134 NO cierra sin ambas.
+- AC18/AC20 + #4 byte-identico + AC16 + carry AC11/AC12/AC13/AC14/AC17 verdes.
+- node --test/CI verde (incl. AC19 y AC15 permanentes); npm start ejecutable; vista Intake navega y ESCRIBE.
+- validate exit 0 CON y SIN secretos (clon limpio, DECISION-0046); drift 0; #4 epoca 1.14.0 byte-identica;
+  neutralidad limpia.
+- **Nueva pasada del Analista sobre el fix de #1 ANTES de cerrar** (orden del operador).
+- Reproducido por el checker (Arquitecto) desde clon limpio, incluyendo el write real Y la prueba de
+  impersonacion; maker!=checker. Commit como Arquitecto + Co-Authored-By: Codex.
 
 ## Fuera de alcance
-- Operador como firmante criptografico propio (opcion (c) re-genesis -> ceremonia RF-9 roster, DIFERIDA).
-- Otros intent kinds desde el front. DEF-PII vivo (TASK-0118 sigue gate).
+- Operador como firmante propio (re-genesis RF-9 roster, DIFERIDO).
+- DEF-PII vivo / captura PII real (TASK-0118 gate).
