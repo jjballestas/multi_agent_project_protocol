@@ -4,7 +4,7 @@ task_id: TASK-0135
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0135 (ready, maker=Codex): Intake RF-14 reset del formulario + confirmacion inequivoca (id REQ-xxxx + seq) tras EXECUTE exitoso; honestidad de fallo (execute fallido -> NO reset, NO verde, error real, borrador conservado). UX read-only (cuelga del submit ya gobernado, sin nueva superficie de escritura). Ratificado por el Operador: ext3 SPEC-0086 (AC21 PERMANENTE). Codigo en Zeus-protocol; yo checker."

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8b435a2f3a615e5a766d51942ae6cd0d17f17217fc94883a057d062c84b82340",
+  "canonical_hash": "b85ec085ea9d4c7cc2141b17adc9e2f56538306c67450d47f29affb34a527a9a",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -29,6 +29,7 @@
       "CLAIM-20260620-Arquitecto-close-0132": 1,
       "CLAIM-20260620-Arquitecto-close-0133": 1,
       "CLAIM-20260620-Arquitecto-close-0134": 1,
+      "CLAIM-20260620-Arquitecto-close-0135": 1,
       "CLAIM-20260620-Arquitecto-close-0136": 1,
       "CLAIM-20260620-Arquitecto-d50-t128": 1,
       "CLAIM-20260620-Arquitecto-mailbox-hygiene-resume": 1,
@@ -78,14 +79,17 @@
       "TASK-0132": 8,
       "TASK-0133": 8,
       "TASK-0134": 8,
-      "TASK-0135": 2,
+      "TASK-0135": 8,
       "TASK-0136": 8,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 187,
+    "events_applied": 194,
     "fencing_tokens": {},
     "idempotency_keys": {
+      "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
+      "Codex:TASK-0135:in-progress-to-in-review:20260620T211000Z": 861,
+      "Codex:TASK-0135:ready-to-in-progress:20260620T204500Z": 860,
       "Codex:TASK-0136:claim-release:20260620T202500Z": 852,
       "Codex:TASK-0136:in-progress-to-in-review:20260620T202500Z": 851,
       "Codex:TASK-0136:ready-to-in-progress:20260620T194500Z": 850,
@@ -169,6 +173,9 @@
       "arquitecto:close-0134:claim-acquire": 831,
       "arquitecto:close-0134:claim-release": 833,
       "arquitecto:close-0134:status-done": 832,
+      "arquitecto:close-0135:claim-acquire": 863,
+      "arquitecto:close-0135:claim-release": 865,
+      "arquitecto:close-0135:status-done": 864,
       "arquitecto:close-0136:claim-acquire": 853,
       "arquitecto:close-0136:claim-release": 855,
       "arquitecto:close-0136:status-done": 854,
@@ -261,6 +268,7 @@
       "intent:Codex:claim:abb756c9a8ee6b00a7c138f61a969494d2e4eb7b5f3d62a1abef51b4c0b72517": 784,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
       "intent:Codex:claim:bef13b0e12b904b8d232183cf56cc03adc8cce70677349a6edd8b32391fa2465": 819,
+      "intent:Codex:claim:df078943138fa4f2414dda60ffa5f8a1063e8ade46d5950d08163bbd1aaf9381": 859,
       "intent:Codex:claim:e9b24db5c4d4ab1484338c44c5234de86f49ec423ec861ba14ecf4547298c131": 816,
       "intent:Codex:claim:f521d71adb57e00b577dadc85de95799fe3aae6ea1de1da194b8366aa626f386": 789,
       "intent:Codex:task_status:03c65bed3bd3427aa651bcd1523fca734a69acadd2b63a69919741cd7b376231": 817,
@@ -277,5 +285,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 858
+  "up_to_seq": 865
 }

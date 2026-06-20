@@ -2,7 +2,7 @@
 task_id: TASK-0135
 title: "Proyecto-front - Intake (RF-14): reset del formulario + confirmacion inequivoca (id+seq) tras EXECUTE exitoso; honestidad de fallo (no reset/no verde si no hubo write real)"
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-close-0135",
+          "task_id": "TASK-0135",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T21:30:00Z",
+          "updated_at": "2026-06-20T21:30:00Z",
+          "expires_at": "2026-06-21T01:30:00Z",
+          "status": "active",
+          "notes": "Close TASK-0135 in_review->done (checker Arquitecto, maker!=checker): AC21 verde test de comportamiento real (execute OK applied+REQ+seq->reset/step1/draft vacio/piiAck=false; execute fallido->no reset/no verde/error/borrador conservado; applied-sin-seq->danger=no falso verde). Zeus npm test 23/23; validate con/sin secretos exit 0; drift 0; #4 byte-identica."
+        },
+        "idempotency_key": "arquitecto:close-0135:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0135",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0135:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-close-0135",
+        "idempotency_key": "arquitecto:close-0135:claim-release"
+      }
+    }
+  ]
+}

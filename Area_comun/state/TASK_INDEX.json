@@ -992,7 +992,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front intake (RF-14) - reset del formulario + confirmacion inequivoca (id+seq) tras EXECUTE exitoso; honestidad de fallo (AC21 permanente, SPEC-0086)",
             "type": "product"
         },

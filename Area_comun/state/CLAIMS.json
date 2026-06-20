@@ -2099,6 +2099,24 @@
             "updated_at": "2026-06-20T18:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0135",
+            "expires_at": "2026-06-21T01:30:00Z",
+            "notes": "Close TASK-0135 in_review->done (checker Arquitecto, maker!=checker): AC21 verde test de comportamiento real (execute OK applied+REQ+seq->reset/step1/draft vacio/piiAck=false; execute fallido->no reset/no verde/error/borrador conservado; applied-sin-seq->danger=no falso verde). Zeus npm test 23/23; validate con/sin secretos exit 0; drift 0; #4 byte-identica.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T21:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0135",
+            "updated_at": "2026-06-20T21:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-close-0136",
             "expires_at": "2026-06-20T22:30:00Z",
             "notes": "Cierre TASK-0136 (checker verde: validate exit 0 clon limpio, Zeus 22/22, drift 0).",
@@ -2583,6 +2601,30 @@
             "status": "released",
             "task_id": "TASK-0134",
             "updated_at": "2026-06-20T17:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0135",
+            "expires_at": "2026-06-20T23:45:00Z",
+            "notes": "TASK-0135 intake reset and confirmation AC21.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0135",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0135",
+                "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0135-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0135.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0135.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0135-in-review.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-20T20:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0135",
+            "updated_at": "2026-06-20T20:45:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-TASK-0136",
