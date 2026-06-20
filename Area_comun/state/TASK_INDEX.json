@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "Tras un EXECUTE exitoso la app commitea SOLO los archivos que escribio submit_intent (seed +ledger/state) con mensaje claro y pushea al remote configurado, como parte de la transaccion.Resultado atomico: \"enviado + aterrizado en canonico (HEAD, seq)\". Si el push falla -> error, NOverde (AC11). NO commitea cambios arbitrarios del working tree (add acotado; prueba negativa: unsucio ajeno no entra). Nueva superficie de transporte: el Arquitecto evalua si requiere DECISION.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-444e0de5-requirement-seed.md",
+            "id": "REQ-444E0DE5",
+            "narrative": "Como operador, tras confirmar un EXECUTE en el intake no quiero bajar a la terminal a hacergit add/commit/push; quiero que la app aterrice el cambio en canonico por mi, para operar sinsalir del front.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
             "author": "Operador",
             "endorsement": "none",

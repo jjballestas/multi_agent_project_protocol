@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-444E0DE5",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "status": "proposed",

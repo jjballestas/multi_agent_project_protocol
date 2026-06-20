@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-444E0DE5",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "phase": "P2",
