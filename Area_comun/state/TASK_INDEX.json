@@ -1012,6 +1012,21 @@
             "status": "done",
             "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0137-codex-front-help-view.md",
+            "id": "TASK-0137",
+            "linked_decisions": [
+                "DECISION-0051"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front - vista Help (RF-14/UX): guia navegable de metodologia y consola, fuente unica docs/MANUAL-operador.md, read-only y honesta (AC23 permanente, SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

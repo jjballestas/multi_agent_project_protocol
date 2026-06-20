@@ -166,6 +166,19 @@ producto/dominio en el core neutral.
   execute OK -> asertar render de id+seq y formulario reseteado (campos vacios, paso 1, borrador, piiAck=false);
   execute FALLIDO -> asertar NO reset, NO verde, error real, borrador conservado. UX read-only: NO nueva superficie
   de escritura (cuelga del submit ya gobernado). Conformidad AC13 contra `components/intake/` (wizard-4-resultado).
+- **AC23 - Vista Help: guia navegable de metodologia y consola, read-only, honesta [comportamiento PERMANENTE; REQ-FB27AF72].**
+  Un nav item **Help** entra en `NAV_VIEWS` (routing 1:1 con su panel, hereda AC12: al activarlo solo el panel
+  Help es visible y el resto queda hidden; vista desconocida -> fallback DEFAULT_VIEW). El panel renderiza una
+  guia DETALLADA y NAVEGABLE (secciones + indice/glosario) que cubre: la consola; observar vs operar;
+  `submit_intent` como ESCRITOR UNICO; dry_run vs execute/confirmacion; atestacion #4; las vistas; el intake
+  gobernado (RF-14); el pipeline SDD; y un glosario. **Fuente unica = `docs/MANUAL-operador.md`** (se REUSA, NO
+  se duplica una copia divergente). Honestidad (hereda AC11): refleja lo que la app HACE HOY incluidas sus
+  limitaciones; lo no implementado se marca pendiente/fuera-de-alcance, nunca se afirma como activo. **Read-only:**
+  la vista NO escribe estado/ledger, NO expone superficie de escritura (sin botones de accion / sin llamadas a
+  `/actions/submit`), extiende la prueba negativa de no-bypass (AC17). Conforme al design-system (hereda AC13:
+  dark-first, tokens, la vista existe y navega). Test de COMPORTAMIENTO permanente: "help" en NAV_VIEWS ->
+  routing solo-su-panel + fallback; el panel deriva su contenido del manual (no placeholder; cubre las secciones
+  clave/glosario); el panel no expone superficie de escritura.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

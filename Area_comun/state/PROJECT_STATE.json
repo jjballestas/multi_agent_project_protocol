@@ -251,6 +251,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Remediacion (DECISION-0018): el intake dejo el canonico ROJO -> validador acepta REQ-, builder escribe seed + scopes validos + test regresion-proof, reconciliar los 4 seeds"
+        },
+        {
+            "id": "TASK-0137",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front - vista Help (RF-14/UX): guia navegable de metodologia y consola, fuente unica docs/MANUAL-operador.md, read-only y honesta (AC23 permanente, SPEC-0086)"
         }
     ],
     "agents": {
