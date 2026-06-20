@@ -4,7 +4,7 @@ task_id: TASK-0134
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "Re-pasada adversarial del fix anti-impersonacion (TASK-0134, ffeb558): PASA. No pude refutar el cierre de #1; #3/#4/#5 resueltos y testeados; #2 atendido; #6 nota best-effort. Cerrable a mi juicio."

@@ -2,7 +2,7 @@
 task_id: TASK-0134
 title: "Proyecto-front - REMEDIACION DE SEGURIDAD del intake (RF-14): anti-impersonacion (builders server-side, sin trust de payload.actorId/intents) + relay acotado + camino feliz write-real + accountability"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: critical

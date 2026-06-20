@@ -4,7 +4,7 @@ type: REVIEW
 task_id: none
 from: Analista
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: Voz externa adversarial sobre el RELAY del intake (anclado en canonico fc31bfe + Zeus 42e7931). 2 CAMBIOS CRITICOS (1 impersonacion ya en canonico, 3 accountability), 3 cambios, 2 PASA-con-nota. Recomiendo NO ratificar hasta cerrar #1 y #3.

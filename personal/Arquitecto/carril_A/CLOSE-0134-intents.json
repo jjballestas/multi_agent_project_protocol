@@ -1,0 +1,41 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-close-0134",
+          "task_id": "TASK-0134",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/tasks/TASK-0134-codex-intake-remediacion-seguridad.md"
+          ],
+          "started_at": "2026-06-20T18:00:00Z",
+          "updated_at": "2026-06-20T18:00:00Z",
+          "expires_at": "2026-06-20T21:00:00Z",
+          "status": "active",
+          "notes": "Cierre TASK-0134 (checker Arquitecto verde + PASA del Analista sobre #1): close in_review->done."
+        },
+        "idempotency_key": "arquitecto:close-0134:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0134",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0134:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-close-0134",
+        "idempotency_key": "arquitecto:close-0134:claim-release"
+      }
+    }
+  ]
+}

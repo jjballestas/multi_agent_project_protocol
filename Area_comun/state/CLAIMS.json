@@ -2083,6 +2083,22 @@
             "updated_at": "2026-06-20T16:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0134",
+            "expires_at": "2026-06-20T21:00:00Z",
+            "notes": "Cierre TASK-0134 (checker Arquitecto verde + PASA del Analista sobre #1): close in_review->done.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0134-codex-intake-remediacion-seguridad.md"
+            ],
+            "started_at": "2026-06-20T18:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0134",
+            "updated_at": "2026-06-20T18:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",

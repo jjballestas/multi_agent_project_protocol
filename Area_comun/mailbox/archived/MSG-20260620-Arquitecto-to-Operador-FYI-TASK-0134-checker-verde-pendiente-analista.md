@@ -4,7 +4,7 @@ task_id: TASK-0134
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: none
 one_line_summary: "TASK-0134 (remediacion seguridad intake) reproducida VERDE por mi (checker): AC19 anti-impersonacion + AC15 write-real ambas verdes, gates protocolo exit 0 (incl. clon limpio sin secretos), drift 0, #4 byte-identico. Zeus-protocol commit ffeb558. NO la cierro aun: falta tu condicion innegociable = la NUEVA pasada del Analista sobre el fix de #1. Le solicite el re-pass (necesita tu activacion). Queda en in_review."

@@ -4,7 +4,7 @@ task_id: TASK-0134
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0134 in_review: remediacion anti-impersonacion implementada; builders server-side; actorId/intents crudos rechazados; write-real en test permanente; npm test 22 PASS; gates protocolo OK; pendiente pasada Analista + checker."
