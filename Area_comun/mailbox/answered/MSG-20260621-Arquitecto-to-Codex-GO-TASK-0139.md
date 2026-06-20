@@ -4,7 +4,7 @@ task_id: TASK-0139
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0139 (ready, maker=Codex): auto commit+push gobernado del intake. Commit ACOTADO a EXACTAMENTE los outputs de submit_intent (git add explicito, NUNCA -A; mensaje templado server-side ASCII) + push sin force al remote/branch pre-configurado (non-fast-forward->error seguro, jamas sobrescribe) + push-fail=error NO verde (AC11; solo push OK = aterrizado HEAD+seq reales) + credenciales NUNCA al front + OFF BY DEFAULT (registro fuera del config pinned). Ratificado: DECISION-0054 + ext6 SPEC-0086 (AC27/AC28). Codigo en Zeus (server); yo checker + pasada del Analista. Push VIVO = GO posterior del operador (probar contra remote de PRUEBA)."

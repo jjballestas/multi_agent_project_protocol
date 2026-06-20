@@ -1056,7 +1056,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Auto commit+push gobernado del intake (RF-14): commit acotado a outputs de submit_intent + push sin force al remote pre-configurado; off-by-default; anti-commit-arbitrario y anti-egress; #4 byte-identica (AC27/AC28, SPEC-0086 ext6, DECISION-0054)",
             "type": "product"
         }

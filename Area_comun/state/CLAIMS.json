@@ -2881,6 +2881,33 @@
             "updated_at": "2026-06-21T00:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Codex-TASK-0139",
+            "expires_at": "2026-06-21T08:00:00Z",
+            "notes": "TASK-0139 auto commit+push gobernado del intake: bounded submit_intent outputs, off-by-default, test remote only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0139",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0139",
+                "Area_comun/tasks/TASK-0139-codex-auto-commit-push.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0139-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0139.md",
+                "Area_comun/mailbox/answered/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0139.md",
+                "Area_comun/mailbox/open/MSG-20260621-Codex-to-Arquitecto-TASK-0139-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/commit-push.config.json"
+            ],
+            "started_at": "2026-06-21T03:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0139",
+            "updated_at": "2026-06-21T03:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-444E0DE5",
             "expires_at": "2026-06-20T19:57:55.436Z",
             "notes": "Front requirement-intake relay claim.",

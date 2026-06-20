@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-20 Europe/Madrid, after TASK-0138 protocol delivery commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0139 product commit.
 
 ## Latest Session Note
 
+- TASK-0139 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `9d0a586 feat(intake): add governed auto commit push`. The server now has an OFF-by-default
+  `commit-push.config.json` transport: after successful governed `submit_intent`, when enabled, it stages
+  exactly runtime-reported outputs plus seed files and runtime state, commits with `commit --only` and a
+  templated ASCII message, pushes without force to configured remote/branch, verifies landed HEAD, redacts
+  remote credentials, and reports HEAD+seq only on push OK. Client `paths`/`commitMessage` remain rejected.
+  Product evidence before commit: `node --check` for server/app/tests, `npm test` PASS 29/29, healthz smoke OK.
+  Protocol handoff is `Area_comun/handoffs/HANDOFF-TASK-0139-codex-to-arquitecto-1.md`; GO was moved to
+  answered, TASK-0139 moved to `in_review`, and `CLAIM-20260621-Codex-TASK-0139` was released via
+  `runtime/submit_intent.py` (drift 0, up_to_seq 900). `design/front_pipeline.html` remains dirty and
+  untouched.
 - TASK-0138 AC26 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `7619fd2 fix(mailbox): derive archive attribution in server builder`. `mailbox-archive` now sends
   `author`/`relayed_by`/`endorsement` from the server-side action builder, keeps rejecting client
