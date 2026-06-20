@@ -1027,6 +1027,22 @@
             "status": "done",
             "title": "Proyecto-front - vista Help (RF-14/UX): guia navegable de metodologia y consola, fuente unica docs/MANUAL-operador.md, read-only y honesta (AC23 permanente, SPEC-0086)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0138-codex-mailbox-archive.md",
+            "id": "TASK-0138",
+            "linked_decisions": [
+                "DECISION-0053",
+                "DECISION-0052"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Mailbox-archive gobernado de 1 click (RF-14): intent kind core mailbox_archive (aditivo, neutral) + relay acotado server-side + vista Mailbox con boton archivar; anti-impersonacion y #4 byte-identica (AC24/AC25, SPEC-0086 ext5, DECISION-0053)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

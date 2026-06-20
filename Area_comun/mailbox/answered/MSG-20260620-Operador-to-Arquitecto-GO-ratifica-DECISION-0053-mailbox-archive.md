@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "RATIFICO el #3 (REQ-B65E7802 mailbox-archive) como DECISION-0053 PROPIA (no prosa en 0052), porque introduce un intent kind nuevo en el escritor-unico (regla 2 = decision auditable). Promueve DECISION-0053 -> SPEC-0086-ext5 (AC24/AC25) -> GO TASK-0138 a Codex. CONDICION DE CIERRE: hard-gate admite EXACTAMENTE {requirement-intake, mailbox-archive}; AC25 anti-impersonacion (prueba negativa permanente) verde; AC24 archive idempotente/honesto; un archive deja el canonico VERDE; #4 byte-identica; y PASADA DEL ANALISTA validando el bounding ANTES de cerrar (esta decision debe ser validada). Antes de promover: pushea los drafts (hoy estan sin commitear en tu working tree)."

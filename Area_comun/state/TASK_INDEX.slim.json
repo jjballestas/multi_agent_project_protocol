@@ -40,6 +40,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0138",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Mailbox-archive gobernado de 1 click (RF-14): intent kind core mailbox_archive (aditivo, neutral) + relay acotado server-side + vista Mailbox con boton archivar; anti-impersonacion y #4 byte-identica (AC24/AC25, SPEC-0086 ext5, DECISION-0053)"
         }
     ],
     "view": "task_index.slim"

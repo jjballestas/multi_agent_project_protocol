@@ -179,6 +179,27 @@ producto/dominio en el core neutral.
   dark-first, tokens, la vista existe y navega). Test de COMPORTAMIENTO permanente: "help" en NAV_VIEWS ->
   routing solo-su-panel + fallback; el panel deriva su contenido del manual (no placeholder; cubre las secciones
   clave/glosario); el panel no expone superficie de escritura.
+- **AC24 - Mailbox-archive gobernado de 1 click, atestado e idempotente [comportamiento PERMANENTE; DECISION-0053; REQ-B65E7802].**
+  La vista **Mailbox** muestra los mensajes con su **estado** (open/answered/archived) y marca los consumidos. Un
+  **boton "archivar"** por mensaje en `open/` dispara la accion de relay gobernada `mailbox-archive`: el builder
+  SERVER-SIDE construye el intent core `mailbox_archive` desde un `message_id` VALIDADO -> `submit_intent` emite un
+  evento ATESTADO (author=Operador, relayed_by=Arquitecto, endorsement=none) y el runtime mueve `open/<msg>.md` ->
+  `archived/<msg>.md` con `status: archived` (ASCII). **NUNCA edita el mailbox directo:** no hay ruta de escritura
+  del front al filesystem; todo pasa por el runtime (escritor unico; extiende la prueba negativa de no-bypass AC17).
+  **Idempotente:** re-archivar (mismo idempotency_key / mensaje ya archivado) es no-op, no falla ni duplica.
+  **Honestidad (hereda AC11):** el archive y el cambio de estado en la UI SOLO se reflejan si el runtime REALMENTE
+  aplico (evento con seq); si falla -> error real visible, el mensaje sigue en open/, NO se pinta como archivado.
+  Conforme al design-system (hereda AC13). Un archive REAL deja el canonico VERDE (validate exit 0; el mensaje
+  movido casa carpeta/status; regresion-proof, espiritu AC22).
+- **AC25 - ANTI-IMPERSONACION de mailbox-archive (prueba negativa PERMANENTE) [CRITICO; DECISION-0053].** El servidor
+  NUNCA confia en datos crudos del cliente para esta accion. Test permanente (no reabrir el 403): forjar
+  `payload.actorId`/`payload.intents`/llaves extra -> RECHAZADO (assertAllowedKeys; hereda AC19); archivar un
+  `message_id` inexistente o una ruta FUERA de `Area_comun/mailbox/open/` (path-traversal) -> RECHAZADO; usar
+  `mailbox-archive` para emitir CUALQUIER otro intent que no sea el `mailbox_archive` de forma exacta -> RECHAZADO.
+  El hard-gate 403 admite EXACTAMENTE {`requirement-intake`, `mailbox-archive`}; toda otra forma 403. El evento
+  relayado NO se cuenta/renderiza como AUTORADO ni avalado por el Arquitecto (hereda AC20). **AC4-byte:** el nuevo
+  intent kind y la accion NO tocan `protocol.config.json` (signer set)/genesis/keys/`protocol_version`; se asierta
+  BYTE-IDENTIDAD antes/despues (drift 0 necesario, no suficiente). Golden cases negativos PERMANENTES en el core.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

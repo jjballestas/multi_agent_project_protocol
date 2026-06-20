@@ -2339,6 +2339,27 @@
             "updated_at": "2026-06-20T22:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promote-0138",
+            "expires_at": "2026-06-21T03:00:00Z",
+            "notes": "Promote DECISION-0053 (intent kind core mailbox_archive, extiende 0052) + ext5 SPEC-0086 (AC24/AC25) + TASK-0138 ready + GO a Codex. REQ-B65E7802. maker=Codex/checker=Arquitecto; pasada del Analista antes de cerrar.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0053-mailbox-archive-relay.md",
+                "Area_comun/tasks/TASK-0138-codex-mailbox-archive.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0138.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T23:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0138",
+            "updated_at": "2026-06-20T23:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-task-0131",
             "expires_at": "2026-06-20T15:15:00Z",
             "notes": "Front view routing (operator-directed): nav item -> only its panel; persistent header; Ledger #4 own view; Backlog gets a real view. maker=Arquitecto, checker=Operador (visual). Guards Zeus front files vs live Codex.",
