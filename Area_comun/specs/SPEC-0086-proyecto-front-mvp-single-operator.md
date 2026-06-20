@@ -211,6 +211,25 @@ producto/dominio en el core neutral.
   `[A-Za-z0-9._-]` (sin `:` = NTFS ADS en Windows), manteniendo la guarda de path (no `/`,`\`,`..`, resolve-escape).
   Follow-up EXPLICITO (fuera de esta task): leaks analogos preexistentes (`apply.py` owner default, `context.py`
   implementer->nombre). El core permanece DOMAIN/INSTANCE-NEUTRAL (regla 1).
+- **AC27 - Auto commit+push gobernado, acotado, atomico y honesto [comportamiento PERMANENTE; DECISION-0054; REQ-444E0DE5].**
+  Tras un EXECUTE gobernado EXITOSO (requirement-intake / mailbox-archive), si la capacidad esta HABILITADA, el
+  server hace `git add` de EXACTAMENTE las rutas reportadas por la transaccion submit_intent (task/seed file +
+  `events.jsonl`/`snapshot.json`/`CLAIMS`/`PROJECT_STATE`/`TASK_INDEX`(+slim)), `git commit` con mensaje TEMPLADO
+  server-side (ASCII; deriva de actionId+id+seq), y `git push` al remote/branch PRE-CONFIGURADO. **Honestidad
+  (hereda AC11):** solo con push OK se reporta "enviado + aterrizado en canonico" con el **HEAD (sha)** y el
+  **seq** REALES; si el push FALLA (red/auth/non-fast-forward) -> error real visible, NO verde, resultado =
+  NO-aterrizado (el commit local puede existir, pero no se afirma aterrizado). **OFF BY DEFAULT:** capacidad
+  deshabilitada por defecto; flag + remote/branch en registro FUERA del config pinned (#4 epoca 1.14.0); push vivo
+  contra el remote real = GO posterior del operador. **Snapshot consistente:** commitea exactamente los outputs ->
+  el clon limpio del HEAD pusheado valida exit 0 (regresion-proof estilo AC22).
+- **AC28 - Anti-commit-arbitrario y anti-egress inseguro (prueba negativa PERMANENTE) [CRITICO; DECISION-0054].**
+  Tests permanentes (no reabrir): un archivo **SUCIO AJENO** (no escrito por la transaccion) NO entra al commit
+  (add explicito de rutas derivadas server-side; NUNCA `git add -A`/`.`); el cliente **NO puede inyectar** rutas ni
+  el mensaje de commit (ambos server-side); **NO force-push** (`--force`/`--force-with-lease` ausentes;
+  non-fast-forward -> error SEGURO "remote advanced", nunca sobrescribe el remote); el front **NUNCA** recibe/
+  almacena credenciales (git las resuelve via el credential helper del entorno); el commit+push NO emite eventos
+  ni muta el ledger (solo persiste en git lo que submit_intent escribio); **#4 byte-identica** (config/genesis/keys
+  sin cambio; se asierta antes/despues). Carry AC17 (no es un 2o escritor del ledger).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
