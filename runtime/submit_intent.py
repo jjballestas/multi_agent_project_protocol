@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from copy import deepcopy
@@ -56,8 +57,9 @@ VALID_TASK_STATUSES = {
     "blocked",
     "cancelled",
 }
-INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narrative", "protocol_prune"}
+INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narrative", "protocol_prune", "mailbox_archive"}
 PROJECT_NARRATIVE_FIELDS = {"next_actions", "risks", "open_questions"}
+MAILBOX_MESSAGE_ID_RE = re.compile(r"^MSG-[A-Za-z0-9_@{}~^:-]+$")
 ROW_SCOPED_LEDGER_PATHS = {
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/PROJECT_STATE.json",
@@ -247,6 +249,25 @@ def unique_text_list(value: Any, key: str) -> list[str]:
     return result
 
 
+def mailbox_message_id(payload: dict[str, Any]) -> str:
+    message_id = require_text(payload, "message_id")
+    if "/" in message_id or "\\" in message_id or ".." in message_id or not MAILBOX_MESSAGE_ID_RE.fullmatch(message_id):
+        raise IntentValidationError("mailbox_archive.message_id must be a safe MSG-* id")
+    return message_id
+
+
+def mailbox_archive_paths(message_id: str) -> tuple[str, str]:
+    filename = f"{message_id}.md"
+    return f"Area_comun/mailbox/open/{filename}", f"Area_comun/mailbox/archived/{filename}"
+
+
+def mailbox_archive_path_status(root: Path, message_id: str) -> tuple[Path, Path, bool, bool]:
+    open_relative, archived_relative = mailbox_archive_paths(message_id)
+    open_path = root / open_relative
+    archived_path = root / archived_relative
+    return open_path, archived_path, open_path.exists(), archived_path.exists()
+
+
 def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
     kind, payload = parse_intent(intent)
     common = {"kind": kind}
@@ -305,6 +326,19 @@ def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
             raise IntentValidationError("protocol_prune requires task_ids, active_task_ids, or claim_ids")
         return {**common, "task_ids": task_ids, "active_task_ids": active_task_ids, "claim_ids": claim_ids}
 
+    if kind == "mailbox_archive":
+        allowed = {"message_id", "idempotency_key"}
+        unsupported = sorted(key for key in payload if key not in allowed)
+        if unsupported:
+            raise IntentValidationError(f"mailbox_archive contains unsupported fields: {', '.join(unsupported)}")
+        return {
+            **common,
+            "message_id": mailbox_message_id(payload),
+            "author": "Operador",
+            "relayed_by": "Arquitecto",
+            "endorsement": "none",
+        }
+
     decision_id = str(payload.get("decision_id") or payload.get("id") or "").strip()
     if not decision_id:
         raise IntentValidationError("decision_id is required")
@@ -323,7 +357,7 @@ def aggregate_id_for(normalized: dict[str, Any]) -> str:
         return "PROJECT_STATE"
     if normalized.get("kind") == "protocol_prune":
         return "protocol-prune"
-    for key in ("task_id", "decision_id", "claim_id"):
+    for key in ("task_id", "decision_id", "claim_id", "message_id"):
         value = str(normalized.get(key) or "").strip()
         if value:
             return value
@@ -340,6 +374,8 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
         payload["commit"] = commit
     if normalized.get("task_id"):
         payload["task_id"] = normalized["task_id"]
+    if normalized.get("message_id"):
+        payload["message_id"] = normalized["message_id"]
 
     kind = normalized["kind"]
     if kind == "task_status":
@@ -370,6 +406,15 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
             if normalized.get(key)
         }
         payload["transitions"]["protocol_prune"] = transition
+    elif kind == "mailbox_archive":
+        payload["transitions"]["mailbox_archive"] = {
+            "message_id": normalized["message_id"],
+            "from": "open",
+            "to": "archived",
+            "author": normalized["author"],
+            "relayed_by": normalized["relayed_by"],
+            "endorsement": normalized["endorsement"],
+        }
     return payload
 
 
@@ -526,6 +571,8 @@ def required_scopes(normalized: dict[str, Any], state: dict[str, Any]) -> list[s
         if normalized.get("claim_ids"):
             scopes.append("Area_comun/state/CLAIMS.json")
         return scopes
+    if kind == "mailbox_archive":
+        return list(mailbox_archive_paths(str(normalized.get("message_id") or "")))
     return []
 
 
@@ -618,6 +665,17 @@ def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any], state
             claim = claims_by_id.get(claim_id)
             if claim and str(claim.get("status") or "").lower() != "released":
                 raise IntentValidationError(f"protocol_prune claim is not released: {claim_id}")
+    elif kind == "mailbox_archive":
+        if not actor_has_any(registry, actor_id, {"orchestrator"}):
+            raise IntentValidationError(f"actor {actor_id} lacks required capability: orchestrator")
+        open_path, archived_path, open_exists, archived_exists = mailbox_archive_path_status(root, normalized["message_id"])
+        mailbox_root = (root / "Area_comun" / "mailbox").resolve()
+        for path in (open_path, archived_path):
+            resolved = path.resolve()
+            if resolved != mailbox_root and mailbox_root not in resolved.parents:
+                raise IntentValidationError("mailbox_archive path escapes Area_comun/mailbox")
+        if not open_exists and not archived_exists:
+            raise IntentValidationError(f"mailbox message not found in open or archived: {normalized['message_id']}")
     elif kind == "claim":
         if not actor_has_any(registry, actor_id, {"implementer", "orchestrator", "reviewer"}):
             raise IntentValidationError(f"actor {actor_id} lacks required claim capability")
@@ -689,6 +747,18 @@ def set_task_file_status(root: Path, relative: str, status: str) -> None:
     raise IntentApplyError(f"task file has no status field: {relative}")
 
 
+def set_mailbox_file_status(path: Path, status: str, relative: str) -> None:
+    text = path.read_text(encoding="utf-8-sig")
+    lines = text.splitlines(keepends=True)
+    for index, line in enumerate(lines):
+        if line.startswith("status:"):
+            suffix = "\n" if line.endswith("\n") else ""
+            lines[index] = f"status: {status}{suffix}"
+            path.write_text("".join(lines), encoding="utf-8", newline="")
+            return
+    raise IntentApplyError(f"mailbox message has no status field: {relative}")
+
+
 def apply_task_file_side_effects(root: Path, normalized: dict[str, Any], state_before: dict[str, Any]) -> list[str]:
     if normalized["kind"] == "task_status":
         relative = task_file_for(state_before, normalized["task_id"])
@@ -705,6 +775,31 @@ def apply_task_file_side_effects(root: Path, normalized: dict[str, Any], state_b
     return []
 
 
+def apply_mailbox_side_effects(root: Path, normalized: dict[str, Any]) -> list[str]:
+    if normalized["kind"] != "mailbox_archive":
+        return []
+    open_relative, archived_relative = mailbox_archive_paths(normalized["message_id"])
+    open_path = root / open_relative
+    archived_path = root / archived_relative
+    if archived_path.exists() and open_path.exists():
+        raise IntentApplyError(f"mailbox message exists in both open and archived: {normalized['message_id']}")
+    if archived_path.exists() and not open_path.exists():
+        set_mailbox_file_status(archived_path, "archived", archived_relative)
+        return [archived_relative]
+    if not open_path.exists():
+        raise IntentApplyError(f"mailbox message not found in open: {normalized['message_id']}")
+    archived_path.parent.mkdir(parents=True, exist_ok=True)
+    set_mailbox_file_status(open_path, "archived", open_relative)
+    open_path.replace(archived_path)
+    return [open_relative, archived_relative]
+
+
+def apply_file_side_effects(root: Path, normalized: dict[str, Any], state_before: dict[str, Any]) -> list[str]:
+    updated = apply_task_file_side_effects(root, normalized, state_before)
+    updated.extend(apply_mailbox_side_effects(root, normalized))
+    return list(dict.fromkeys(updated))
+
+
 def task_files_for_backup(normalized: dict[str, Any], state_before: dict[str, Any]) -> list[str]:
     paths: list[str] = []
     task_id = str(normalized.get("task_id") or "")
@@ -718,6 +813,16 @@ def task_files_for_backup(normalized: dict[str, Any], state_before: dict[str, An
         if declared:
             paths.append(declared)
     return list(dict.fromkeys(paths))
+
+
+def mailbox_files_for_backup(normalized: dict[str, Any]) -> list[str]:
+    if normalized["kind"] == "mailbox_archive":
+        return list(mailbox_archive_paths(normalized["message_id"]))
+    return []
+
+
+def files_for_backup(normalized: dict[str, Any], state_before: dict[str, Any]) -> list[str]:
+    return list(dict.fromkeys([*task_files_for_backup(normalized, state_before), *mailbox_files_for_backup(normalized)]))
 
 
 def ensure_clean_replay_base(root: Path, events: list[dict[str, Any]]) -> None:
@@ -754,11 +859,11 @@ def submit_intent(
     existing = existing_idempotent_event(writer, key)
     if existing is not None:
         state_before = load_state(root)
-        file_backup = snapshot_files(root, [*protocol_file_paths(), *task_files_for_backup(normalized, state_before)])
+        file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
         runtime_backup = snapshot_runtime_state(root)
         try:
             materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
-            task_files_updated = apply_task_file_side_effects(root, normalized, state_before)
+            task_files_updated = apply_file_side_effects(root, normalized, state_before)
             runtime_snapshot = writer.write_snapshot()
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
@@ -783,7 +888,7 @@ def submit_intent(
             raise IntentApplyError(str(exc)) from exc
 
     state_before = validate_intent(root, actor_id, normalized)
-    file_backup = snapshot_files(root, [*protocol_file_paths(), *task_files_for_backup(normalized, state_before)])
+    file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
     runtime_backup = snapshot_runtime_state(root)
     try:
         events_before = writer.events()
@@ -810,7 +915,7 @@ def submit_intent(
         )
         snapshot = current_protocol_snapshot(root)
         materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
-        task_files_updated = apply_task_file_side_effects(root, normalized, state_before)
+        task_files_updated = apply_file_side_effects(root, normalized, state_before)
         runtime_snapshot = writer.write_snapshot()
         drift_after = protocol_state_drift(root)
         if drift_after.get("has_drift"):
@@ -866,10 +971,17 @@ def submit_intents(
     if existing:
         if len(existing) != len(keys):
             raise IntentApplyError("partial transaction idempotency state exists; refusing to continue")
-        file_backup = snapshot_files(root, protocol_file_paths())
+        state_before = load_state(root)
+        side_effect_paths: list[str] = []
+        for normalized in normalized_intents:
+            side_effect_paths.extend(files_for_backup(normalized, state_before))
+        file_backup = snapshot_files(root, [*protocol_file_paths(), *side_effect_paths])
         runtime_backup = snapshot_runtime_state(root)
         try:
             materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+            task_files_updated: list[str] = []
+            for normalized in normalized_intents:
+                task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
             runtime_snapshot = writer.write_snapshot()
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
@@ -888,7 +1000,7 @@ def submit_intents(
                 "intents": normalized_intents,
                 "materialization": materialization,
                 "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
-                "task_files_updated": [],
+                "task_files_updated": list(dict.fromkeys(task_files_updated)),
                 "drift": drift_after,
             }
         except Exception as exc:
@@ -901,7 +1013,7 @@ def submit_intents(
     _, states_before = validate_transaction(root, actor_id, normalized_intents, timestamp=timestamp, commit=commit)
     task_file_paths: list[str] = []
     for normalized, state_before in zip(normalized_intents, states_before):
-        task_file_paths.extend(task_files_for_backup(normalized, state_before))
+        task_file_paths.extend(files_for_backup(normalized, state_before))
     file_backup = snapshot_files(root, [*protocol_file_paths(), *task_file_paths])
     runtime_backup = snapshot_runtime_state(root)
     try:
@@ -941,7 +1053,7 @@ def submit_intents(
         materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
         task_files_updated: list[str] = []
         for normalized, state_before in zip(normalized_intents, states_before):
-            task_files_updated.extend(apply_task_file_side_effects(root, normalized, state_before))
+            task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
         runtime_snapshot = writer.write_snapshot()
         drift_after = protocol_state_drift(root)
         if drift_after.get("has_drift"):

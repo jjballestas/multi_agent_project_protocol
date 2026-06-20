@@ -2736,6 +2736,34 @@
             "updated_at": "2026-06-20T21:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0138",
+            "expires_at": "2026-06-21T01:15:00Z",
+            "notes": "TASK-0138 mailbox_archive core intent + Zeus mailbox-archive relay/action/view.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0138",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0138",
+                "Area_comun/tasks/TASK-0138-codex-mailbox-archive.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0138-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0138.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0138.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0138-in-review.md",
+                "runtime/submit_intent.py",
+                "runtime/protocol_replay.py",
+                "examples/mailbox_archive_cases/run_mailbox_archive_cases.py",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-20T22:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0138",
+            "updated_at": "2026-06-20T22:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
             "expires_at": "2026-06-20T10:30:00Z",
             "notes": "Archive consumed non-response standdown message addressed to Codex after cron stop signal.",

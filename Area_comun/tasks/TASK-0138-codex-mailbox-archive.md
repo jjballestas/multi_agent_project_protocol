@@ -2,7 +2,7 @@
 task_id: TASK-0138
 title: "Mailbox-archive gobernado de 1 click (RF-14): intent kind core `mailbox_archive` (aditivo, neutral) + accion de relay acotada server-side + vista Mailbox con boton archivar; anti-impersonacion y #4 byte-identica"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

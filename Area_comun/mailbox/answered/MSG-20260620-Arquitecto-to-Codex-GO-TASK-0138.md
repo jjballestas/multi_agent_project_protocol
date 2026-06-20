@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0138 (ready, maker=Codex): mailbox-archive gobernado de 1 click. NUEVO intent kind core `mailbox_archive` (aditivo, neutral; valida mensaje existe en open/ + ruta dentro de mailbox/ sin path-traversal; emite evento atestado; mueve open->archived + status; IDEMPOTENTE) + accion de relay acotada server-side `mailbox-archive` (hard-gate EXACTAMENTE {requirement-intake, mailbox-archive}) + vista Mailbox con boton archivar. Anti-impersonacion permanente (AC25); #4 byte-identica. Ratificado: DECISION-0053 + ext5 SPEC-0086 (AC24/AC25). Core en este repo + front/server en Zeus; yo checker."

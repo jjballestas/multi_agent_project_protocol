@@ -1,9 +1,18 @@
 # Codex Memory
 
-Last updated: 2026-06-20 Europe/Madrid, after TASK-0132 product commit.
+Last updated: 2026-06-20 Europe/Madrid, after TASK-0138 protocol delivery commit.
 
 ## Latest Session Note
 
+- TASK-0138 product implementation commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `6afefe7 feat(mailbox): add governed archive relay`. The front now exposes `mailbox-archive` as the second
+  executable RF-14 action, builds its transaction server-side, rejects client actor/intents and unsafe
+  message ids, and moves open mailbox messages to archived in the UI only after a real `submit_intent`
+  response with id/seq. Product evidence before commit: `npm test` PASS 26 tests; `node --check` OK for
+  `public/app.js`, `src/server.js`, and `tests/staticContract.test.js`. `design/front_pipeline.html`
+  remains dirty and untouched. Protocol side is delivered in the current protocol commit: core
+  `mailbox_archive` intent, golden cases, handoff, GO answered, TASK-0138 moved to `in_review`, and Codex
+  claim released through `runtime/submit_intent.py`.
 - TASK-0132 implementation commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a4acb68 feat(front): align selector and backlog with design`. The front now aligns the remaining stage 6.1
   design gaps: Backlog is a read-only kanban with agent filter and active-claim badges; Projects consumes
