@@ -4,7 +4,7 @@ task_id: TASK-0134
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "RATIFICO la remediacion v2 (verifique en canonico cb18b7b que cierra el #1). Promueve en orden: DECISION-0052 v2 (relay acotado, builders server-side, nunca confiar en payload.actorId/intents, firma=origen+transporte no aval) -> SPEC-0086-ext2 v2 (AC19 anti-impersonacion + AC20 accountability + AC15 write-real + AC18 render + AC16 PII) -> GO TASK-0134 a Codex (maker). CONDICION DE CIERRE INNEGOCIABLE: AC19 (prueba negativa de impersonacion) VERDE + AC15 write-real VERDE + NUEVA pasada del Analista sobre el fix de #1 ANTES de cerrar. #4 epoca 1.14.0 byte-identica."

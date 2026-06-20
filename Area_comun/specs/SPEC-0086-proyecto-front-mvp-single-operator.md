@@ -126,18 +126,38 @@ producto/dominio en el core neutral.
   via submit_intent (`task_upsert` de una tarea `type:requirement`, status `proposed`, `author/owner:
   Operador`). Test de comportamiento: el submit de intake produce el requirement con `author=Operador`;
   re-submit con la misma `idempotency_key` NO duplica. El intake es la SEMILLA, no una SPEC.
-- **AC15 - EXECUTE exige confirmacion (prueba negativa).** EXECUTE solo escribe con
-  `confirm:SUBMIT_INTENT`; sin confirm -> rechazo (409) y NO hay escritura al ledger (drift 0
-  antes/despues). La UI muestra paso de confirmacion visible y declara el writer
-  (`runtime/submit_intent.py`); preview (dry_run) != envio (execute), sin verde sin respuesta real del
-  execute. Test negativo: `mode:execute` sin confirm no muta TASK_INDEX/PROJECT_STATE.
+- **AC15 - EXECUTE: prueba negativa Y camino feliz con WRITE REAL (DECISION-0052; revisado).** (i) Negativo:
+  EXECUTE solo escribe con `confirm:SUBMIT_INTENT`; sin confirm -> rechazo (409), sin escritura. (ii) CAMINO
+  FELIZ (write REAL, no mock): test de comportamiento PERMANENTE en CI que demuestra `execute+confirm` ->
+  escritura REAL por submit_intent: el requirement aterriza en TASK_INDEX/PROJECT_STATE (proposed,
+  author=Operador, relayed_by=Arquitecto), runtime ok con seq, drift 0 despues. El front emite el intake con
+  actor RELAY=Arquitecto (firmante pinned) determinado SERVER-SIDE (ver AC19); preview(dry_run) != envio. NO
+  basta el dry_run ni el 409: hay que probar que el happy path ESCRIBE de verdad. (Cierra el miss de TASK-0133.)
+- **AC18 - Atribucion honesta del relay (RENDER).** Test de RENDER: la UI muestra firmante=Arquitecto y
+  `author:Operador`; NINGUN verde/elemento afirma que "Operador firmo". El evento lleva
+  `author:Operador`+`relayed_by:Arquitecto`.
+- **AC19 - ANTI-IMPERSONACION (prueba negativa PERMANENTE) [CRITICO; DECISION-0052].** El servidor NUNCA
+  confia en el cliente para autoria ni forma: se elimina `payload.actorId` y los `payload.intents` crudos;
+  cada accion = builder SERVER-SIDE con forma estricta. Test de comportamiento permanente en CI: un POST al
+  endpoint EXECUTE que intente (a) un actor distinto, o (b) intents/forma arbitrarios (decision/claim/
+  task_status/cualquier forma != requirement-intake) para firmarse como Arquitecto -> es RECHAZADO (no
+  construye, no firma, no escribe). Solo la forma exacta del requirement-intake se relaya. Falla si un cliente
+  local puede forjar un evento atestado firmado como Arquitecto. Remedia la anomalia DECISION-0018 mergeada en
+  Zeus 42e7931.
+- **AC20 - Accountability del relay [DECISION-0052].** Firma del relay = ORIGEN+TRANSPORTE, NO aval
+  (`endorsement:none`); el aval es la SPEC posterior. Test: un evento relayado NO se cuenta/renderiza como
+  AUTORADO ni avalado por el Arquitecto.
+- **AC4-byte (refuerzo #4).** El relay/intake no toca `protocol.config.json` (signer set), genesis, keys ni
+  `protocol_version`: se aserta BYTE-IDENTIDAD antes/despues (drift 0 es necesario, no suficiente).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
   publicable/exportable; (c) canal ASCII en todo string que el front escriba al protocolo; (d) advertir al
   operador en compose y en confirm ("no incluyas PII de terceros: NIT, razon social, datos SQL"). Coherente
   con DECISION-0040. Test: payload con patrones tipo NIT/razon social/SQL -> el plano publicable no expone el
-  literal; el intake NO levanta el gate TASK-0118/DEF-PII antes de captura viva real.
+  literal; el intake NO levanta el gate TASK-0118/DEF-PII antes de captura viva real. NOTA (Analista): la
+  redaccion es best-effort por PATRONES (NIT/razon social/SQL); **no se afirma "PII-free" garantizado** (un
+  nombre/email/telefono podria pasar) -- DEF-PII (TASK-0118) sigue siendo el gate.
 - **AC17 - No-bypass.** Se mantiene `directLedgerWrites:false`; ninguna ruta del front escribe estado/ledger
   fuera de submit_intent (extiende la prueba negativa de superficie de TASK-0127). El intake cuelga del
   patron `governed-action` (un solo writer), no crea un segundo escritor.
@@ -184,3 +204,4 @@ producto/dominio en el core neutral.
 | Honestidad de estado regresion-proof | TASK-0129 (badge behavior test) + etapa5/6 | test de comportamiento: verif. falla -> badge no-verde; valido -> verde; PII redactada | AC11 |
 | CI verde / neutralidad / gates | TASK-0124 | CI producto + validate/scan protocolo | AC6/AC7/AC10 |
 | RF-14 intake gobernado de requisitos | TASK-0133 (DECISION-0051) | wizard -> task_upsert requirement (Operador, idempotente); EXECUTE con confirmacion (prueba negativa); PII estructural+ASCII; no-bypass; conforme al diseno components/intake/ | AC14/AC15/AC16/AC17 + AC11/AC12/AC13 |
+| RF-14 remediacion seguridad (relay acotado + anti-impersonacion) | TASK-0134 (DECISION-0052) | builders server-side (sin trust de payload.actorId/intents); relay-como-Arquitecto SOLO para requirement-intake; firma=origen+transporte no aval; write real demostrado; #4 byte-identico | AC15(write-real)/AC18/AC19/AC20/AC4-byte + carry AC11/12/13/14/16/17 |

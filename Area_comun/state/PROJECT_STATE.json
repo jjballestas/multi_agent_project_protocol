@@ -209,6 +209,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front - intake gobernado de historias/requisitos (RF-14): wizard -> task_upsert requirement via EXECUTE confirmado; PII estructural; conforme al diseno components/intake/"
+        },
+        {
+            "id": "TASK-0134",
+            "owner": "Codex",
+            "status": "in_progress",
+            "title": "Proyecto-front - REMEDIACION DE SEGURIDAD del intake (RF-14): anti-impersonacion (builders server-side) + relay acotado + camino feliz write-real + accountability"
         }
     ],
     "agents": {
@@ -266,7 +272,8 @@
         "DECISION-0048",
         "DECISION-0049",
         "DECISION-0050",
-        "DECISION-0051"
+        "DECISION-0051",
+        "DECISION-0052"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

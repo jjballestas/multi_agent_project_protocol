@@ -2194,6 +2194,25 @@
             "updated_at": "2026-06-20T14:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promote-0134",
+            "expires_at": "2026-06-20T20:00:00Z",
+            "notes": "Promote DECISION-0052 + ext2 SPEC-0086 (AC15/AC18/AC19/AC20) + TASK-0134 ready (remediacion seguridad) + GO a Codex. maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0134-codex-intake-remediacion-seguridad.md",
+                "Area_comun/decisions/DECISION-0052-operator-intake-relay-acotado-anti-impersonacion.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0134.md"
+            ],
+            "started_at": "2026-06-20T17:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0134",
+            "updated_at": "2026-06-20T17:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-task-0131",
             "expires_at": "2026-06-20T15:15:00Z",
             "notes": "Front view routing (operator-directed): nav item -> only its panel; persistent header; Ledger #4 own view; Backlog gets a real view. maker=Arquitecto, checker=Operador (visual). Guards Zeus front files vs live Codex.",
@@ -2467,6 +2486,33 @@
             "status": "released",
             "task_id": "TASK-0133",
             "updated_at": "2026-06-20T14:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0134",
+            "expires_at": "2026-06-20T21:15:00Z",
+            "notes": "Implement TASK-0134 intake security remediation: anti-impersonation, strict server-side builders, write-real coverage, accountability render.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0134",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0134",
+                "Area_comun/tasks/TASK-0134-codex-intake-remediacion-seguridad.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0134.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0134.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0134-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0134-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T17:15:00Z",
+            "status": "active",
+            "task_id": "TASK-0134",
+            "updated_at": "2026-06-20T17:15:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
