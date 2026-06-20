@@ -1973,6 +1973,24 @@
             "updated_at": "2026-06-19T22:31:54Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0129",
+            "expires_at": "2026-06-20T14:05:00Z",
+            "notes": "Close TASK-0129 in_review->done (checker Arquitecto, maker!=checker reproducido verde: Zeus-protocol node --test 13/13 incl badge-behavior, validate con/sin secretos exit 0, drift 0 seq773).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0129-codex-front-badge-behavior-test.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T10:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0129",
+            "updated_at": "2026-06-20T10:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",
@@ -2158,6 +2176,20 @@
             "status": "released",
             "task_id": "TASK-0129",
             "updated_at": "2026-06-20T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
+            "expires_at": "2026-06-20T10:30:00Z",
+            "notes": "Archive consumed non-response standdown message addressed to Codex after cron stop signal.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-standdown.md"
+            ],
+            "started_at": "2026-06-20T09:56:38Z",
+            "status": "released",
+            "task_id": "MAILBOX-HYGIENE-20260620",
+            "updated_at": "2026-06-20T09:56:38Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-validator-anomaly-etapa6",
