@@ -4,7 +4,7 @@ task_id: TASK-0138
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CERRADA TASK-0138 (mailbox-archive gobernado, DECISION-0053) -> done. Pasada FINAL del Analista=CERRABLE (neutralidad + bounding resisten). AC24/AC25/AC26 verdes; grep core=0 (caller-derived); scan regresion-proof; hard-gate EXACTAMENTE {requirement-intake, mailbox-archive}; #4 byte-identica; validate con/sin secretos exit 0; drift 0; Zeus npm 26/26. Sigue el #4 REQ-444E0DE5 (auto commit+push, su propia DECISION por transporte)."

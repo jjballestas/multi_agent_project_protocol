@@ -2,7 +2,7 @@
 task_id: TASK-0139
 title: "Auto commit+push gobernado del intake (RF-14): commit ACOTADO a outputs de submit_intent + push sin force al remote pre-configurado; off-by-default; push-fail=error-no-verde; anti-commit-arbitrario y anti-egress; #4 byte-identica"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

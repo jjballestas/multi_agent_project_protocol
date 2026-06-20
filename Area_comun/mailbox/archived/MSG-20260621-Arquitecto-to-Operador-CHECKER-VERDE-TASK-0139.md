@@ -4,7 +4,7 @@ task_id: TASK-0139
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE de TASK-0139 (auto commit+push, DECISION-0054). OFF-by-default; commit acotado (collectSubmitIntentOutputPaths server-side + git add -- + commit --only -- paths); cliente NO inyecta paths/mensaje/actorId; sucio ajeno + staged-unrelated NO entran; SIN force-push (grep=0), non-fast-forward->409 no verde, ls-remote confirma aterrizaje; camino feliz contra remote de PRUEBA (HEAD pusheado valida exit 0); push vivo al remote real NO ejecutado (gateado); #4 byte-identica; validate con/sin secretos exit 0; drift 0; Zeus npm 29/29. NO cierro: falta la PASADA DEL ANALISTA (transporte+egress) -- tu la activas; tras su OK cierro a done."
