@@ -1,0 +1,55 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-promote-0135",
+          "task_id": "TASK-0135",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+            "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+            "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0135.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T21:00:00Z",
+          "updated_at": "2026-06-20T21:00:00Z",
+          "expires_at": "2026-06-21T01:00:00Z",
+          "status": "active",
+          "notes": "Promote TASK-0135 (intake reset + confirmacion, REQ-DCC3BC1A) + GO a Codex; AC21 agregado a SPEC-0086 (permanente). maker=Codex/checker=Arquitecto."
+        },
+        "idempotency_key": "arquitecto:promote-0135:claim-acquire"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": {
+          "id": "TASK-0135",
+          "title": "Proyecto-front intake (RF-14) - reset del formulario + confirmacion inequivoca (id+seq) tras EXECUTE exitoso; honestidad de fallo (AC21 permanente, SPEC-0086)",
+          "type": "product",
+          "status": "ready",
+          "owner": "Codex",
+          "phase": "P2",
+          "priority": "high",
+          "spec_id": "SPEC-0086",
+          "linked_decisions": ["DECISION-0051", "DECISION-0052"],
+          "created_at": "2026-06-20",
+          "file": "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md"
+        },
+        "idempotency_key": "arquitecto:promote-0135:task-upsert-ready"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-promote-0135",
+        "idempotency_key": "arquitecto:promote-0135:claim-release"
+      }
+    }
+  ]
+}

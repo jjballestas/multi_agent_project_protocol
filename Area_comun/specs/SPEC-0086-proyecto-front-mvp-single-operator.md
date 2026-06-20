@@ -155,6 +155,17 @@ producto/dominio en el core neutral.
   validador (que reconoce ids de requisito `REQ-[0-9A-Fa-f]+` ademas de `TASK-\d{4}`). Test de comportamiento
   PERMANENTE: tras un intake real, validate exit 0 (regresion-proof; un intake nunca rompe el canonico).
   Remedia la anomalia DECISION-0018 (TASK-0136).
+- **AC21 - Reset del formulario + confirmacion inequivoca tras EXECUTE exitoso [comportamiento PERMANENTE; REQ-DCC3BC1A].**
+  Tras un EXECUTE **exitoso** del intake (respuesta real del runtime: applied true + seq), el wizard: (a) muestra
+  un resultado INEQUIVOCO derivado de la respuesta REAL ("enviado - evento gobernado") con el **id del requisito
+  (REQ-xxxx)** y el **seq** del evento; (b) **RESETEA el formulario**: campos vacios, vuelve al paso 1 (capturar),
+  estado borrador, `piiAck=false`, listo para una historia NUEVA sin texto stale. Honestidad (hereda AC11): la
+  confirmacion y el reset SOLO ocurren si el execute REALMENTE aplico (applied true + seq); si el execute **falla**
+  o no se confirma -> **NO reset, NO verde, error real visible, borrador conservado** para reintentar. Elimina el
+  reenvio accidental y el mangleo de la siguiente submission por campos stale. Test de COMPORTAMIENTO permanente:
+  execute OK -> asertar render de id+seq y formulario reseteado (campos vacios, paso 1, borrador, piiAck=false);
+  execute FALLIDO -> asertar NO reset, NO verde, error real, borrador conservado. UX read-only: NO nueva superficie
+  de escritura (cuelga del submit ya gobernado). Conformidad AC13 contra `components/intake/` (wizard-4-resultado).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

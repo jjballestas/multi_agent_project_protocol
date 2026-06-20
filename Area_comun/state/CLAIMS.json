@@ -2245,6 +2245,26 @@
             "updated_at": "2026-06-20T17:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-promote-0135",
+            "expires_at": "2026-06-21T01:00:00Z",
+            "notes": "Promote TASK-0135 (intake reset + confirmacion, REQ-DCC3BC1A) + GO a Codex; AC21 agregado a SPEC-0086 (permanente). maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0135.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T21:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0135",
+            "updated_at": "2026-06-20T21:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-promote-0136",
             "expires_at": "2026-06-20T22:00:00Z",
             "notes": "Promote TASK-0136 (remediacion DECISION-0018 canonico rojo) ready + GO a Codex; AC22 permanente en SPEC-0086. maker=Codex/checker=Arquitecto.",

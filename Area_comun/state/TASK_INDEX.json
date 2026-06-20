@@ -982,6 +982,22 @@
         },
         {
             "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0135-codex-intake-reset-confirm.md",
+            "id": "TASK-0135",
+            "linked_decisions": [
+                "DECISION-0051",
+                "DECISION-0052"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front intake (RF-14) - reset del formulario + confirmacion inequivoca (id+seq) tras EXECUTE exitoso; honestidad de fallo (AC21 permanente, SPEC-0086)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
             "file": "Area_comun/tasks/TASK-0136-codex-reconcile-intake-canonical-red.md",
             "id": "TASK-0136",
             "linked_decisions": [

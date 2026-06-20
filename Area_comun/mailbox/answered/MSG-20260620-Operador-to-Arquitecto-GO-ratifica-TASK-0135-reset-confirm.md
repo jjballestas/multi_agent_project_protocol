@@ -4,7 +4,7 @@ task_id: TASK-0135
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "RATIFICO el requisito #1 (REQ-DCC3BC1A): reset del formulario del intake + confirmacion id/seq tras EXECUTE. UX read-only, SIN cambio de superficie de escritura, sin DECISION. Promueve ext SPEC-0086 (AC21) -> GO TASK-0135 a Codex. CONDICION DE CIERRE: AC21 con AC11 honesto VERDE (execute fallido -> NO reset, NO verde, error real, borrador conservado) como test de comportamiento permanente. Sigue de a una; al cerrar, retoma el #2 (Help). Canonico ya VERDE (TASK-0136 cerrada)."
