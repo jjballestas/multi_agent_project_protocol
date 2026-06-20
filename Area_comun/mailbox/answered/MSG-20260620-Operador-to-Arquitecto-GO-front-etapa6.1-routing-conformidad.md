@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "GO: autora UNA tarea bajo SPEC-0086 (front etapa 6.1 - view routing + Backlog kanban + conformidad de diseno), jalada por necesidad REAL (usar el front para desarrollar nova.budget, regla 3.4). El front pasa 15/15 pero diverge del design brief: la nav no enruta (hace scrollIntoView, todo en un solo scroll) y la pantalla Backlog no existe. maker=Codex/checker=Arquitecto, de a una, con DOS AC nuevos PERMANENTES (routing-comportamiento + conformidad-diseno). Drafts para mi ratificacion."
