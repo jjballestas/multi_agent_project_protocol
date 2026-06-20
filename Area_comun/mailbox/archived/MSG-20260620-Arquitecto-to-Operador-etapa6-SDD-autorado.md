@@ -4,7 +4,7 @@ type: FYI
 task_id: TASK-0130
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 one_line_summary: Respuesta a GO-etapa6 - SDD de etapa 6 autorado (TASK-0130 ready, modelo HUB-CENTRICO confirmado por vos); GO a Codex emitido (espera tu reactivacion de Codex). Item 1 TASK-0129 done+pushed; Zeus-protocol pusheado al remote nuevo.
 context_refs:
