@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "387376a6c860e3a3edff2ce7ef9305c66f59843fdf00eef361db28be4ce542a9",
+  "canonical_hash": "0c70c3bfb129d51afaba434e0fb5f93e2143ec5b781d29be6d6288d666d7bfb3",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -57,6 +57,7 @@
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
       "PROJECT_STATE": 1,
       "REQ-444E0DE5": 3,
+      "REQ-DCC3BC1A": 3,
       "REQ-FB27AF72": 3,
       "TASK-0117": 3,
       "TASK-0121": 5,
@@ -76,7 +77,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 168,
+    "events_applied": 171,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -220,6 +221,9 @@
       "front:requirement-intake:444E0DE5": 838,
       "front:requirement-intake:444E0DE5:claim-acquire": 837,
       "front:requirement-intake:444E0DE5:claim-release": 839,
+      "front:requirement-intake:DCC3BC1A": 841,
+      "front:requirement-intake:DCC3BC1A:claim-acquire": 840,
+      "front:requirement-intake:DCC3BC1A:claim-release": 842,
       "front:requirement-intake:FB27AF72": 835,
       "front:requirement-intake:FB27AF72:claim-acquire": 834,
       "front:requirement-intake:FB27AF72:claim-release": 836,
@@ -251,5 +255,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 839
+  "up_to_seq": 842
 }

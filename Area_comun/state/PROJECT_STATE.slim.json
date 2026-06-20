@@ -7,6 +7,12 @@
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
         },
         {
+            "id": "REQ-DCC3BC1A",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Intake: limpiar el formulario y confirmar claramente tras un submit exitoso"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "status": "proposed",
