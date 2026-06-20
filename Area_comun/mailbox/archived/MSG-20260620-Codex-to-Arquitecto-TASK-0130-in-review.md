@@ -6,7 +6,7 @@ from: Codex
 to: Arquitecto
 requires_response: false
 response_owner: Arquitecto
-status: open
+status: archived
 one_line_summary: TASK-0130 implementada: selector multi-proyecto read-only hub-centrico + kickoff RF-10 gobernado via submit_intent.
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0130-codex-to-arquitecto-1.md
