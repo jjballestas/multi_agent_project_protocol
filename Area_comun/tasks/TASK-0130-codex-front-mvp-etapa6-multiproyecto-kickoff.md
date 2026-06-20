@@ -2,7 +2,7 @@
 id: TASK-0130
 title: Proyecto-front MVP etapa 6 - Multi-proyecto (selector read-only, modelo hub-centrico) + Kickoff RF-10 gobernado (DECISION-0049 / DECISION-0050 / SPEC-0086)
 type: product
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: high

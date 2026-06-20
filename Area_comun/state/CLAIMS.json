@@ -2242,9 +2242,23 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-20T10:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0130",
             "updated_at": "2026-06-20T10:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0130-handoff-msg",
+            "expires_at": "2026-06-20T11:15:00Z",
+            "notes": "File-scoped claim for TASK-0130 in_review mailbox handoff message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0130-in-review.md"
+            ],
+            "started_at": "2026-06-20T10:46:00Z",
+            "status": "released",
+            "task_id": "TASK-0130",
+            "updated_at": "2026-06-20T10:46:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",

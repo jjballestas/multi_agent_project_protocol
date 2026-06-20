@@ -4,7 +4,7 @@ type: DECISION
 task_id: TASK-0130
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 one_line_summary: GO a Codex (maker) para TASK-0130 = front etapa 6 (ultima del MVP-T0): selector multi-proyecto READ-ONLY modelo HUB-CENTRICO + kickoff RF-10 gobernado SOLO via submit_intent. Etapa 5 roster DEFERIDA. Codigo en Zeus-protocol; checker=Arquitecto. Arranca cuando el operador te reactive.
 context_refs:
