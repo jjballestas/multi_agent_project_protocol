@@ -197,6 +197,12 @@
             "owner": "Arquitecto",
             "status": "done",
             "title": "Proyecto-front - routing real de vistas (cada nav item renderiza SOLO su panel; header persistente) (SPEC-0086 RF-1..RF-12)"
+        },
+        {
+            "id": "TASK-0132",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front etapa 6.1 - conformidad de diseno (Backlog kanban + Projects=selector/launcher + proyecto-entidad + PII/tokens) + AC12/AC13 permanentes (SPEC-0086)"
         }
     ],
     "agents": {

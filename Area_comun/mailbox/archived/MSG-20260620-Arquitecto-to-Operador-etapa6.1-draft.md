@@ -4,7 +4,7 @@ type: FYI
 task_id: none
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 one_line_summary: Respuesta a GO-etapa6.1 - alcance confirmado + draft TASK-0132 listo para tu ratificacion. RECONCILIACION: el routing (G1) ya estaba HECHO+VERIFICADO+CERRADO como TASK-0131 (Zeus 2ca79cc, Codex verifico, yo cerre); etapa 6.1 cubre el RESTO (Backlog kanban, proyecto-entidad, PII-confirm, tokens, fidelidad) + 2 AC permanentes. G4 decidido = capa-entidad (a). No promovi: espero tu GO de ratificacion. maker=Codex.
 context_refs:

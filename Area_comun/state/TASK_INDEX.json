@@ -831,6 +831,22 @@
             "status": "done",
             "title": "Proyecto-front - routing real de vistas (cada nav item renderiza SOLO su panel; header persistente) (SPEC-0086 RF-1..RF-12)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-20",
+            "file": "Area_comun/tasks/TASK-0132-codex-front-etapa6.1-conformidad-diseno.md",
+            "id": "TASK-0132",
+            "linked_decisions": [
+                "DECISION-0049",
+                "DECISION-0050"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front etapa 6.1 - conformidad de diseno (Backlog kanban + Projects=selector/launcher + proyecto-entidad + PII/tokens) + AC12/AC13 permanentes (SPEC-0086)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

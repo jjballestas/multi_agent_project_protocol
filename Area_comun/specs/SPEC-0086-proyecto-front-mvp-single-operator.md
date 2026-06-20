@@ -101,6 +101,18 @@ producto/dominio en el core neutral.
   etapas con UI (4 ya cubierta retro por TASK-0129; 5/6 lo traen de origen). Es la propiedad-tesis (un badge
   que mienta sobre el estado es el pecado capital): nunca verde hardcodeado.
 
+- **AC12 - AC-ROUTING (comportamiento) [PERMANENTE].** Para CADA nav-item del front, un test de comportamiento
+  asevera "clic en X -> SOLO el panel X visible (los demas `hidden`/fuera del DOM visible); topbar +
+  integrity-band (epoca/drift/atestado/canonico/seq) SIGUEN presentes". Falla si un refactor vuelve a apilar
+  las vistas en un solo scroll (regresion-proof de la navegacion; extiende AC11 a la UX). Satisfecho de origen
+  por TASK-0131; permanente para toda etapa con UI navegable.
+- **AC13 - AC-CONFORMIDAD-DISENO [PERMANENTE].** Las vistas del front EXISTEN, son navegables y cada una
+  corresponde a su pantalla del `front_design_brief` (Backlog=kanban con claims+filtro; Projects=selector con
+  entity-cards + "+ add project" cableado al kickoff RF-10 gobernado; Ledger #4=vista dedicada). "Verde" pasa a
+  significar tambien "coincide con el diseno". (La pantalla Agentes/Roster 4.6 NO cuenta mientras RF-9 etapa5
+  este DEFERIDA; la nav lleva 7 vistas a proposito.) Toda etapa con UI sobre un design brief trae de origen un
+  AC de conformidad + un test de comportamiento de interaccion (leccion de proceso, runbook).
+
 ## test_plan
 
 - **Producto (Zeus-protocol):** suite del front (unit/integration) + CI verde; pruebas de que las vistas

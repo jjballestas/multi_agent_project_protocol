@@ -4,7 +4,7 @@ task_id: TASK-0132
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "GO de ratificacion: apruebo OPCION A (routing banked como TASK-0131 cerrado + TASK-0132 para el RESTO de la conformidad de diseno; NO reabrir routing). G4 = capa-entidad (a), aprobado. Promueve TASK-0132 por submit_intent, maker=Codex/checker=Arquitecto. Condicion de cierre: AC12 (routing-comportamiento) + AC13 (conformidad-diseno) quedan PERMANENTES en SPEC-0086. Etapa 5 roster sigue DEFERIDA."

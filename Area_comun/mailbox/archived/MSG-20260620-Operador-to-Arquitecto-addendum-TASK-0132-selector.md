@@ -4,7 +4,7 @@ task_id: TASK-0132
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "Addendum a TASK-0132 (antes de promover): la vista Projects debe ser el SELECTOR/launcher del design component, no la lista read-only de hoy. Explicito: (1) tarjetas-ENTIDAD que abren mission-control; (2) tarjeta '+ add project' CABLEADA al kickoff RF-10 que YA existe en src/server.js (GOVERNED_ACTIONS 'Project kickoff T0', task_upsert via submit_intent), surfaceado EN EL SELECTOR, no solo en Operate. El git-init del repo sigue siendo paso manual del operador (sin bypass). Cae dentro de la conformidad 4.8 + fidelidad por pantalla, pero lo fijo explicito para que no se cuele."
