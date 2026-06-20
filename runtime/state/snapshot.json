@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "65159a0679e30f98b9de36d9729b08d9cb1ee629453c66068e76009b5731a214",
+  "canonical_hash": "93856837544975f28e83473cd825ef5a5e48d301bd9d0ab43d3742ec1e3ae4e6",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -31,6 +31,7 @@
       "CLAIM-20260620-Arquitecto-close-0134": 1,
       "CLAIM-20260620-Arquitecto-close-0135": 1,
       "CLAIM-20260620-Arquitecto-close-0136": 1,
+      "CLAIM-20260620-Arquitecto-close-0137": 1,
       "CLAIM-20260620-Arquitecto-d50-t128": 1,
       "CLAIM-20260620-Arquitecto-mailbox-hygiene-resume": 1,
       "CLAIM-20260620-Arquitecto-promo-0126": 1,
@@ -82,11 +83,11 @@
       "TASK-0134": 8,
       "TASK-0135": 8,
       "TASK-0136": 8,
-      "TASK-0137": 2,
+      "TASK-0137": 8,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 197,
+    "events_applied": 204,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -95,6 +96,9 @@
       "Codex:TASK-0136:claim-release:20260620T202500Z": 852,
       "Codex:TASK-0136:in-progress-to-in-review:20260620T202500Z": 851,
       "Codex:TASK-0136:ready-to-in-progress:20260620T194500Z": 850,
+      "Codex:TASK-0137:claim-release:20260620T220000Z": 872,
+      "Codex:TASK-0137:in-progress-to-in-review:20260620T220000Z": 871,
+      "Codex:TASK-0137:ready-to-in-progress:20260620T213000Z": 870,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -181,6 +185,9 @@
       "arquitecto:close-0136:claim-acquire": 853,
       "arquitecto:close-0136:claim-release": 855,
       "arquitecto:close-0136:status-done": 854,
+      "arquitecto:close-0137:claim-acquire": 873,
+      "arquitecto:close-0137:claim-release": 875,
+      "arquitecto:close-0137:status-done": 874,
       "arquitecto:hygiene-0620-resume:claim-acquire": 779,
       "arquitecto:hygiene-0620-resume:claim-release": 780,
       "arquitecto:promote-0132:claim-acquire": 802,
@@ -270,6 +277,7 @@
       "intent:Codex:claim:835a7174434d647757b791bdadaebe4b8a9976f0836eb7942f14bf508d588144": 774,
       "intent:Codex:claim:9019b2a03d948893c561fe199be1fcc06504ad30970eb5557b8ae79bff80f246": 849,
       "intent:Codex:claim:9b4b38657f64a94073d716f89397b51875a7a6d91fa141fdb8454747ee0ee355": 786,
+      "intent:Codex:claim:a616d2c4f59e34ba2764ec773f5f6a589fd478e00eb5377138c8ef6dab97e8b1": 869,
       "intent:Codex:claim:abb756c9a8ee6b00a7c138f61a969494d2e4eb7b5f3d62a1abef51b4c0b72517": 784,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
       "intent:Codex:claim:bef13b0e12b904b8d232183cf56cc03adc8cce70677349a6edd8b32391fa2465": 819,
@@ -290,5 +298,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 868
+  "up_to_seq": 875
 }

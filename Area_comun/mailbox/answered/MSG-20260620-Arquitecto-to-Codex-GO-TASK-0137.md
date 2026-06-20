@@ -4,7 +4,7 @@ task_id: TASK-0137
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0137 (ready, maker=Codex): vista Help (RF-14/UX). Nav item Help + routing 1:1 (AC12); guia navegable de metodologia+consola con fuente UNICA docs/MANUAL-operador.md (reusar, no duplicar); honesta (no documenta lo inexistente, AC11); READ-ONLY (sin superficie de escritura, AC17); conforme design-system (AC13). Ratificado por el Operador: ext4 SPEC-0086 (AC23 PERMANENTE). Codigo en Zeus-protocol; yo checker."

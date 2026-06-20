@@ -2,7 +2,7 @@
 task_id: TASK-0137
 title: "Proyecto-front - vista Help (RF-14/UX): guia navegable de metodologia y consola, fuente unica docs/MANUAL-operador.md, read-only y honesta (no documenta lo inexistente)"
 type: product
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: normal

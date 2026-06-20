@@ -2133,6 +2133,24 @@
             "updated_at": "2026-06-20T19:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260620-Arquitecto-close-0137",
+            "expires_at": "2026-06-21T02:30:00Z",
+            "notes": "Close TASK-0137 in_review->done (checker Arquitecto, maker!=checker): AC23 verde (routing help 1:1 + fallback; manual fuente unica via GET /api/help/manual read-only fixed-path; helpCoverage secciones+glosario; panel sin superficie de escritura AC17). Zeus npm test 24/24; validate con/sin secretos exit 0; drift 0; #4 byte-identica.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0137-codex-front-help-view.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-20T22:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0137",
+            "updated_at": "2026-06-20T22:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260620-Arquitecto-d50-t128",
             "expires_at": "2026-06-20T06:00:00Z",
             "notes": "Registra DECISION-0050 (convencion repos) + promueve TASK-0128 (front etapa4 atestacion-view, ready/Codex). Prioridad operador.",
@@ -2670,6 +2688,31 @@
             "status": "released",
             "task_id": "TASK-0136",
             "updated_at": "2026-06-20T19:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260620-Codex-TASK-0137",
+            "expires_at": "2026-06-21T00:30:00Z",
+            "notes": "TASK-0137 Help view AC23: read-only manual rendering from docs/MANUAL-operador.md.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0137",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0137",
+                "Area_comun/tasks/TASK-0137-codex-front-help-view.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0137-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0137.md",
+                "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0137.md",
+                "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0137-in-review.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-20T21:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0137",
+            "updated_at": "2026-06-20T21:30:00Z"
         },
         {
             "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",

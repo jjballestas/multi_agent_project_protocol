@@ -1024,7 +1024,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "done",
             "title": "Proyecto-front - vista Help (RF-14/UX): guia navegable de metodologia y consola, fuente unica docs/MANUAL-operador.md, read-only y honesta (AC23 permanente, SPEC-0086)",
             "type": "product"
         }

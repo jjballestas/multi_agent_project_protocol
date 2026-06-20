@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-close-0137",
+          "task_id": "TASK-0137",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0137-codex-front-help-view.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T22:30:00Z",
+          "updated_at": "2026-06-20T22:30:00Z",
+          "expires_at": "2026-06-21T02:30:00Z",
+          "status": "active",
+          "notes": "Close TASK-0137 in_review->done (checker Arquitecto, maker!=checker): AC23 verde (routing help 1:1 + fallback; manual fuente unica via GET /api/help/manual read-only fixed-path; helpCoverage secciones+glosario; panel sin superficie de escritura AC17). Zeus npm test 24/24; validate con/sin secretos exit 0; drift 0; #4 byte-identica."
+        },
+        "idempotency_key": "arquitecto:close-0137:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0137",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0137:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-close-0137",
+        "idempotency_key": "arquitecto:close-0137:claim-release"
+      }
+    }
+  ]
+}
