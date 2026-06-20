@@ -1,0 +1,43 @@
+---
+id: TASK-0123
+title: Connector Git (inspeccion) gobernado por tool_policy, deny-by-default + golden off-by-default (DECISION-0048 / SPEC-0085)
+type: security
+status: ready
+owner: Codex
+phase: P2
+priority: high
+spec_id: SPEC-0085
+linked_decisions: [DECISION-0048, DECISION-0044, DECISION-0041, DECISION-0047]
+created_at: 2026-06-19
+---
+
+# TASK-0123 - Connector Git (inspeccion) deny-by-default
+
+## Objective
+
+FLOOR Fase 2, pieza 1: connector Git de INSPECCION (read-only) bajo la capa `connectors/`, gobernado por
+tool_policy deny-by-default, allowlist de verbos de inspeccion, no concede autoridad, off-by-default, golden
+con fixtures (sin git vivo). Ver SPEC-0085 (AC1-AC10). maker=Codex, checker=Arquitecto. NO uso vivo (s9+GO
+posterior, DECISION-0041). NO operaciones mutantes. NO tocar #4/config pinned.
+
+## Alcance (SPEC-0085)
+
+- `connectors/git_readonly/` adaptador + `classify_git_operation` deny-by-default (ALLOW solo verbos de
+  inspeccion allowlisted en forma segura; DENY clase explicita ANTES de ejecutar para mutantes/no-
+  allowlisted/inyeccion/multi-comando/desconocido).
+- `FixtureBackend` git (salidas grabadas, deterministas; sin proceso git ni repo vivo).
+- Registro en `connectors/connectors.config.json` (FUERA de protocol.config.json), default `enabled:false`.
+- Golden `examples/connector_git_cases/` (AC1-AC7, AC3 >=6 vectores) + gate AC4 dedicado (no import de
+  escritores ledger/eventos) + CI; `scan_domain_neutrality` cubre la nueva ruta.
+
+## DoD
+
+SPEC-0085 AC1-AC10; maker=Codex / checker=Arquitecto; off-by-default; sin uso vivo; sin tocar #4/config
+(epoca 1.14.0, DECISION-0047); CHANGELOG (linea de release/capacidad, sin bump de epoca); memoria. validate
+exit 0 con y SIN secretos (DECISION-0046), drift 0.
+
+## Verification
+
+- `python examples\connector_git_cases\run_connector_git_cases.py` (AC1-AC7)
+- gate AC4 (no import escritores) ; `scan_domain_neutrality` cubre connectors/git*
+- `validate_collaboration_state.py --root .` (con y sin secretos) + `scan_encoding.py`

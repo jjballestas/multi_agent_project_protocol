@@ -1,0 +1,19 @@
+{
+  "type": "claim",
+  "op": "acquire",
+  "claim": {
+    "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
+    "owner": "Codex",
+    "task_id": "MAILBOX-HYGIENE-20260620",
+    "status": "active",
+    "started_at": "2026-06-20T09:56:38Z",
+    "updated_at": "2026-06-20T09:56:38Z",
+    "expires_at": "2026-06-20T10:30:00Z",
+    "notes": "Archive consumed non-response standdown message addressed to Codex after cron stop signal.",
+    "scope": [
+      "Area_comun/state/CLAIMS.json",
+      "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-standdown.md"
+    ]
+  },
+  "idempotency_key": "Codex:mailbox-hygiene-standdown:claim:20260620T095638Z"
+}

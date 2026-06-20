@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-06-20 Europe/Madrid, after TASK-0129 badge behavior delivery to in_review and startup prompt refresh.
+Last updated: 2026-06-20 Europe/Madrid, after TASK-0132 product commit.
 
 ## Latest Session Note
 
+- TASK-0132 implementation commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a4acb68 feat(front): align selector and backlog with design`. The front now aligns the remaining stage 6.1
+  design gaps: Backlog is a read-only kanban with agent filter and active-claim badges; Projects consumes
+  project entities (`id/name/kind/source/state`) and includes the selector add-project card wired to the
+  existing governed RF-10 kickoff; PII preview redaction is enforced at render; styles now expose the design
+  token families. Product evidence before commit: `npm test` PASS 19 tests, `node --check public/app.js
+  src/server.js` OK, server smoke on port 4176 OK (`/healthz`, `/api/protocol/observe`, 7 panels). Protocol
+  encoding, neutrality, and validator were green before product commit. `design/front_pipeline.html` remains
+  dirty and untouched.
+- TASK-0130 implementation commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `661ed8d feat(front): add multiproject selector and governed kickoff`. The front now has a read-only
+  hub-centric product selector for `D:/Agentes/Zeus`, RF-10 governed kickoff preparation via
+  `runtime/submit_intent.py`, behavior coverage for selector indicator honesty, and negative no-bypass checks
+  (no repo creation / no `git init` route). Product evidence before commit: `npm test` PASS 15 tests,
+  `node --check public/app.js src/server.js src/canonicalReader.js` OK, server smoke on port 4174 OK
+  (`/healthz`, `/api/protocol/projects`, dry-run `project-kickoff-t0`). `design/front_pipeline.html` remains
+  dirty and untouched. Protocol task is still in progress until handoff/status close is completed.
 - TASK-0129 is delivered to `in_review`: `D:/Agentes/Zeus/Zeus-protocol` now has behavior tests for
   attestation badge honesty. `public/app.js` exports pure derivation helpers while preserving browser render;
   `tests/staticContract.test.js` verifies false-green prevention for chain, agent signatures, anchor,

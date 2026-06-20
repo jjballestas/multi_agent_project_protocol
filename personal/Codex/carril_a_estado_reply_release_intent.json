@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260619-Codex-carril-A-estado-reply",
+    "idempotency_key": "codex:carril-a-estado-reply:release"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "idempotency_key": "Codex:TASK-0132:start:20260620T114000Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260620-Codex-TASK-0132",
+        "owner": "Codex",
+        "task_id": "TASK-0132",
+        "status": "active",
+        "started_at": "2026-06-20T11:40:00Z",
+        "updated_at": "2026-06-20T11:40:00Z",
+        "expires_at": "2026-06-20T15:40:00Z",
+        "notes": "Implement TASK-0132 front design conformity: backlog kanban, projects selector launcher, project entity API, tokens and tests.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json",
+          "Area_comun/state/TASK_INDEX.json#TASK-0132",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0132",
+          "Area_comun/tasks/TASK-0132-codex-front-etapa6.1-conformidad-diseno.md",
+          "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0132.md",
+          "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-TASK-0132.md",
+          "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0132-in-review.md",
+          "Area_comun/handoffs/HANDOFF-TASK-0132-codex-to-arquitecto-1.md",
+          "D:/Agentes/Zeus/Zeus-protocol/README.md",
+          "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+          "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+          "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+          "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+          "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0132",
+      "from": "ready",
+      "to": "in_progress"
+    }
+  ]
+}

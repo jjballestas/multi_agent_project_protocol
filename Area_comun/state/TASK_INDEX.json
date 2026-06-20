@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-fb27af72-requirement-seed.md",
+            "id": "REQ-FB27AF72",
+            "narrative": "Como cualquier usuario del front (no solo el operador experto), quiero una opcion Help en elmenu que muestre ayuda DETALLADA de como funciona la metodologia y como usar la consola, paraentender y operar sin conocimiento previo.Como cualquier usuario del front (no solo el operador experto), quiero una opcion Help en elmenu que muestre ayuda DETALLADA de como funciona la metodologia y como usar la consola, paraentender y operar sin conocimiento previo.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "arrancamos con nova.budget:",
+            "type": "requirement"
+        },
+        {
             "blocked_by_questions": [],
             "deliverables": [
                 "runtime/apply.py",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "78a2155959b4245365449b6f579f8690df9f9231233c5174a86a26b4e1dacf51",
+  "canonical_hash": "7bd7149fc0340fe9039b1e75584796ffe2e904ab88e6c8e5bf357b699e125f12",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -56,6 +56,7 @@
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
       "PROJECT_STATE": 1,
+      "REQ-FB27AF72": 3,
       "TASK-0117": 3,
       "TASK-0121": 5,
       "TASK-0122": 2,
@@ -74,7 +75,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 162,
+    "events_applied": 165,
     "fencing_tokens": {},
     "idempotency_keys": {
       "arq:close-0117-flip4:acq": 674,
@@ -215,6 +216,9 @@
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
+      "front:requirement-intake:FB27AF72": 835,
+      "front:requirement-intake:FB27AF72:claim-acquire": 834,
+      "front:requirement-intake:FB27AF72:claim-release": 836,
       "intent:Codex:claim:1c0eec7211d560eaa751067eec97bf6a1050dcd665a302948e704adb0093288d": 808,
       "intent:Codex:claim:200c7d1a04059164f98a51e17854844e9dc0c27cfa8005184442c9fafb6392c1": 775,
       "intent:Codex:claim:46518f1e436e697eba9d0cde9f97a4d5f655f7ad1d09d30f2c8bed03501c04a3": 798,
@@ -243,5 +247,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 833
+  "up_to_seq": 836
 }

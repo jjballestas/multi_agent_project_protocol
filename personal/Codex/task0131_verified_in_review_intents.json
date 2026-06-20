@@ -1,0 +1,19 @@
+{
+  "idempotency_key": "Codex:TASK-0131:verified-in-review:20260620T112000Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0131",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260620-Codex-TASK-0131-verify",
+      "task_id": "TASK-0131",
+      "owner": "Codex",
+      "updated_at": "2026-06-20T11:20:00Z"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Codex-TASK-0128",
+          "task_id": "TASK-0128",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0128",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0128",
+            "Area_comun/tasks/TASK-0128-codex-front-mvp-etapa4-atestacion.md",
+            "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0128.md",
+            "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-impl-TASK-0128.md",
+            "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0128-in-review.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0128-codex-to-arquitecto-1.md",
+            "D:/Agentes/Zeus/Zeus-protocol/README.md",
+            "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+            "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+            "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+            "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+            "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T00:30:00Z",
+          "updated_at": "2026-06-20T00:30:00Z",
+          "expires_at": "2026-06-20T06:30:00Z",
+          "status": "active",
+          "notes": "Implement TASK-0128 front attestation view #4 read-only over canonical ledger."
+        },
+        "idempotency_key": "codex:task0128-front-etapa4:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0128",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0128-front-etapa4:ready-to-in-progress"
+      }
+    }
+  ]
+}

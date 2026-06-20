@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0130:in-review:20260620T105000Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0130",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260620-Codex-TASK-0130",
+      "task_id": "TASK-0130",
+      "owner": "Codex",
+      "updated_at": "2026-06-20T10:50:00Z"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260620-Codex-TASK-0130-handoff-msg",
+      "task_id": "TASK-0130",
+      "owner": "Codex",
+      "updated_at": "2026-06-20T10:50:00Z"
+    }
+  ]
+}

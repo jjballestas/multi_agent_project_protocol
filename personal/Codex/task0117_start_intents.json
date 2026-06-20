@@ -1,0 +1,48 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Codex-TASK-0117",
+          "task_id": "TASK-0117",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0117",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0117",
+            "Area_comun/tasks/TASK-0117-codex-activacion-4-atestacion.md",
+            "Area_comun/specs/SPEC-0081-activacion-atestacion-autoria.md",
+            "Area_comun/decisions/DECISION-0041-precondicion-acoplamiento-readonly.md",
+            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-GO-harness.md",
+            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-GO-harness-ack.md",
+            "Area_comun/handoffs/",
+            "examples/attestation_health_cases/",
+            "examples/attestation_negative_cases/",
+            "examples/readonly_enforcement_cases/",
+            ".github/workflows/validate.yml",
+            "CHANGELOG.md",
+            "protocol.config.json",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T07:20:00Z",
+          "updated_at": "2026-06-19T07:20:00Z",
+          "expires_at": "2026-06-19T13:20:00Z",
+          "status": "active",
+          "notes": "Build SPEC-0081 harness/goldens/smoke for TASK-0117 without enabling #4 or pilot."
+        },
+        "idempotency_key": "codex:task0117-spec0081-harness:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0117",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0117-spec0081-harness:ready-to-in-progress"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+﻿{
+    "claim":  {
+                  "claim":  {
+                                "updated_at":  "2026-06-19T15:33:55Z",
+                                "started_at":  "2026-06-19T15:33:55Z",
+                                "notes":  "Carril A monitor hygiene after Arquitecto/Codex agreement.",
+                                "owner":  "Codex",
+                                "scope":  [
+                                              "Area_comun/state/CLAIMS.json",
+                                              "runtime/state/events.jsonl",
+                                              "runtime/state/snapshot.json",
+                                              "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-standdown.md",
+                                              "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-standdown.md"
+                                          ],
+                                "claim_id":  "CLAIM-20260619-Codex-carril-A-monitor",
+                                "expires_at":  "2026-06-19T17:33:55Z",
+                                "task_id":  "COORD-20260619-CARRIL-A-MONITOR",
+                                "status":  "active"
+                            },
+                  "op":  "acquire",
+                  "idempotency_key":  "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z"
+              }
+}

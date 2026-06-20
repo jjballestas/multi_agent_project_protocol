@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-close-0132",
+          "task_id": "TASK-0132",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0132-codex-front-etapa6.1-conformidad-diseno.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T14:50:00Z",
+          "updated_at": "2026-06-20T14:50:00Z",
+          "expires_at": "2026-06-20T18:50:00Z",
+          "status": "active",
+          "notes": "Close TASK-0132 in_review->done (checker Arquitecto, maker=Codex): Zeus a4acb68 review OK -- Backlog kanban (columns+claims+agent filter), Projects=selector entity-model (path removed, id/kind/source) + Add-project wired a kickoff RF-10 gobernado (sin git-init), PII safePayloadPreview, tokens design-system, AC12/AC13. node --test 19/19, validate con/sin secretos exit 0, drift 0, smoke 7 vistas+entity+kickoff live."
+        },
+        "idempotency_key": "arquitecto:close-0132:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0132",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0132:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-close-0132",
+        "idempotency_key": "arquitecto:close-0132:claim-release"
+      }
+    }
+  ]
+}

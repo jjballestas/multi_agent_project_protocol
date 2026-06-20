@@ -1,0 +1,47 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Codex-TASK-0123",
+          "task_id": "TASK-0123",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0123",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0123",
+            "Area_comun/tasks/TASK-0123-codex-connector-git-readonly.md",
+            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0123.md",
+            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0123.md",
+            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0123-in-review.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0123-codex-to-arquitecto-1.md",
+            "connectors/connectors.config.json",
+            "connectors/README.md",
+            "connectors/git_readonly/__init__.py",
+            "connectors/git_readonly/connector.py",
+            "examples/connector_git_cases/run_connector_git_cases.py",
+            ".github/workflows/validate.yml",
+            "CHANGELOG.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T19:38:00Z",
+          "updated_at": "2026-06-19T19:38:00Z",
+          "expires_at": "2026-06-19T23:38:00Z",
+          "status": "active",
+          "notes": "Implement TASK-0123 Git inspection connector deny-by-default with fixture backend and golden gates."
+        },
+        "idempotency_key": "codex:task0123-git-readonly:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0123",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0123-git-readonly:ready-to-in-progress"
+      }
+    }
+  ]
+}

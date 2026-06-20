@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-FB27AF72",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "arrancamos con nova.budget:"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "phase": "P2",

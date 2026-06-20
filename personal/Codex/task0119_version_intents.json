@@ -1,0 +1,32 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Codex-TASK-0119-version",
+          "task_id": "TASK-0119",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T02:35:00Z",
+          "updated_at": "2026-06-19T02:35:00Z",
+          "expires_at": "2026-06-19T06:25:00Z",
+          "status": "active",
+          "notes": "Align PROJECT_STATE.version for TASK-0119 SemVer MINOR enforcement release."
+        },
+        "idempotency_key": "codex:task0119-mailbox-claim-guard:version-claim"
+      }
+    },
+    {
+      "project_narrative": {
+        "version": "1.11.0",
+        "idempotency_key": "codex:task0119-mailbox-claim-guard:project-version-1.11.0"
+      }
+    }
+  ]
+}

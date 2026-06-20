@@ -1,0 +1,49 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Arquitecto-close-0120",
+          "task_id": "TASK-0120",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0120-event-auth-secret-resolution.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T10:30:00Z",
+          "updated_at": "2026-06-19T10:30:00Z",
+          "expires_at": "2026-06-19T14:30:00Z",
+          "status": "active",
+          "notes": "Close TASK-0120 in_review->done (reviewer, maker!=checker reproducido verde) + reconcile version 1.13.0."
+        },
+        "idempotency_key": "arquitecto:close-0120:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0120",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0120:status-done"
+      }
+    },
+    {
+      "project_narrative": {
+        "version": "1.13.0",
+        "idempotency_key": "arquitecto:close-0120:version-1.13.0"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260619-Arquitecto-close-0120",
+        "idempotency_key": "arquitecto:close-0120:claim-release"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260620-Arquitecto-mailbox-hygiene-resume",
+          "task_id": "MAILBOX-HYGIENE-20260620-RESUME",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/mailbox/archived/MSG-20260620-Codex-to-Arquitecto-TASK-0129-in-review.md",
+            "Area_comun/mailbox/archived/MSG-20260620-Operador-to-Arquitecto-standdown-cron.md",
+            "Area_comun/mailbox/archived/MSG-20260620-Arquitecto-to-Codex-standdown.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-20T10:10:00Z",
+          "updated_at": "2026-06-20T10:10:00Z",
+          "expires_at": "2026-06-20T14:10:00Z",
+          "status": "active",
+          "notes": "Archive consumed messages on resume: TASK-0129 in_review FYI (task now done), operator standdown-cron (session resumed), and finalize prior-session move of Arquitecto->Codex standdown FYI."
+        },
+        "idempotency_key": "arquitecto:hygiene-0620-resume:claim-acquire"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-mailbox-hygiene-resume",
+        "idempotency_key": "arquitecto:hygiene-0620-resume:claim-release"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260619-Codex-promo-coord-reply",
+    "idempotency_key": "codex-promo-coord-reply-release-20260619"
+  }
+}

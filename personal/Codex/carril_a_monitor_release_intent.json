@@ -1,0 +1,7 @@
+﻿{
+    "claim":  {
+                  "op":  "release",
+                  "claim_id":  "CLAIM-20260619-Codex-carril-A-monitor",
+                  "idempotency_key":  "codex-carril-a-monitor-release-2026-06-19T15:33:55Z"
+              }
+}

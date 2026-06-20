@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260619-Codex-carril-A-coord",
+    "idempotency_key": "codex-carril-a-review-coord-release-20260619"
+  }
+}

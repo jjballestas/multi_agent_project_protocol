@@ -1,0 +1,22 @@
+{
+    "claim":  {
+                  "claim":  {
+                                "updated_at":  "2026-06-19T11:31:27Z",
+                                "started_at":  "2026-06-19T11:31:27Z",
+                                "notes":  "Work monitor mailbox hygiene for Codex messages.",
+                                "owner":  "Codex",
+                                "scope":  [
+                                              "Area_comun/state/CLAIMS.json",
+                                              "Area_comun/mailbox/open/MSG-20260619-113127-Codex-to-Arquitecto-no-response-TASK-0117.md",
+                                              "runtime/state/events.jsonl",
+                                              "runtime/state/snapshot.json"
+                                          ],
+                                "claim_id":  "CLAIM-20260619-Codex-work-monitor",
+                                "expires_at":  "2026-06-19T12:01:27Z",
+                                "task_id":  "COORD-20260619-WORK-MONITOR",
+                                "status":  "active"
+                            },
+                  "op":  "acquire",
+                  "idempotency_key":  "codex-work-monitor-acquire-2026-06-19T11:31:27Z"
+              }
+}

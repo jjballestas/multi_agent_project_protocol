@@ -1,0 +1,7 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260620-Codex-validator-anomaly-etapa6",
+    "idempotency_key": "codex:validator-anomaly-etapa6:release"
+  }
+}

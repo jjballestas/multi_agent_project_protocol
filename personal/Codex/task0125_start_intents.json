@@ -1,0 +1,47 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Codex-TASK-0125",
+          "task_id": "TASK-0125",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0125",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0125",
+            "Area_comun/tasks/TASK-0125-codex-connector-ci-readonly.md",
+            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0125.md",
+            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-GO-impl-TASK-0125.md",
+            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0125-in-review.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0125-codex-to-arquitecto-1.md",
+            "connectors/connectors.config.json",
+            "connectors/README.md",
+            "connectors/ci_readonly/__init__.py",
+            "connectors/ci_readonly/connector.py",
+            "examples/connector_ci_cases/run_connector_ci_cases.py",
+            ".github/workflows/validate.yml",
+            "CHANGELOG.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T20:45:23Z",
+          "updated_at": "2026-06-19T20:45:23Z",
+          "expires_at": "2026-06-20T00:45:23Z",
+          "status": "active",
+          "notes": "Implement TASK-0125 CI read-only connector deny-by-default with fixture backend and golden gates."
+        },
+        "idempotency_key": "codex:task0125-ci-readonly:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0125",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0125-ci-readonly:ready-to-in-progress"
+      }
+    }
+  ]
+}

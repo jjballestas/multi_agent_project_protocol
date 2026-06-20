@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0125",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:task0125-ci-readonly:in-progress-to-in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260619-Codex-TASK-0125",
+        "idempotency_key": "codex:task0125-ci-readonly:release"
+      }
+    }
+  ]
+}

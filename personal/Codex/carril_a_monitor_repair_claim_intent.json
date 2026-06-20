@@ -1,0 +1,23 @@
+{
+  "claim": {
+    "op": "acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260619-Codex-carril-A-monitor-repair",
+      "task_id": "COORD-20260619-CARRIL-A-MONITOR",
+      "owner": "Codex",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/mailbox/archived/MSG-20260619-Arquitecto-to-Codex-review-carril-A.md",
+        "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-review-carril-A.md",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-19T00:16:00Z",
+      "updated_at": "2026-06-19T00:16:00Z",
+      "expires_at": "2026-06-19T02:16:00Z",
+      "status": "active",
+      "notes": "Repair Carril A monitor hygiene: restore Arquitecto message that still requires Codex response."
+    },
+    "idempotency_key": "codex-carril-a-monitor-repair-claim-20260619"
+  }
+}

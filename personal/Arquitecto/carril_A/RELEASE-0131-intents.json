@@ -1,0 +1,11 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260620-Arquitecto-task-0131",
+        "idempotency_key": "arquitecto:task-0131:claim-release-for-codex"
+      }
+    }
+  ]
+}

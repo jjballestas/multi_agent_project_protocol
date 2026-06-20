@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-FB27AF72",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "arrancamos con nova.budget:"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "status": "proposed",

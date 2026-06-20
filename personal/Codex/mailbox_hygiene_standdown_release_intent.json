@@ -1,0 +1,9 @@
+{
+  "type": "claim",
+  "op": "release",
+  "claim_id": "CLAIM-20260620-Codex-mailbox-hygiene-standdown",
+  "task_id": "MAILBOX-HYGIENE-20260620",
+  "owner": "Codex",
+  "updated_at": "2026-06-20T09:58:30Z",
+  "idempotency_key": "Codex:mailbox-hygiene-standdown:release:20260620T095830Z"
+}

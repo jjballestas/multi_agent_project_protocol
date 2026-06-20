@@ -1,0 +1,54 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260619-Codex-TASK-0124",
+          "task_id": "TASK-0124",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/TASK_INDEX.json#TASK-0124",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0124",
+            "Area_comun/tasks/TASK-0124-codex-front-mvp-etapa1-andamiaje.md",
+            "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-GO-T0-front-mvp.md",
+            "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-GO-T0-front-mvp.md",
+            "Area_comun/mailbox/open/MSG-20260619-Operador-to-Codex-coord-T0-front.md",
+            "Area_comun/mailbox/archived/MSG-20260619-Operador-to-Codex-coord-T0-front.md",
+            "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-TASK-0124-in-review.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0124-codex-to-arquitecto-1.md",
+            "D:/Agentes/Zeus/Zeus-protocol/.github/workflows/ci.yml",
+            "D:/Agentes/Zeus/Zeus-protocol/.gitignore",
+            "D:/Agentes/Zeus/Zeus-protocol/README.md",
+            "D:/Agentes/Zeus/Zeus-protocol/package.json",
+            "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+            "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+            "D:/Agentes/Zeus/Zeus-protocol/public/protocol-console-mark.svg",
+            "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+            "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+            "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-19T20:53:00Z",
+          "updated_at": "2026-06-19T20:53:00Z",
+          "expires_at": "2026-06-20T02:53:00Z",
+          "status": "active",
+          "notes": "Implement TASK-0124 etapa 1 front scaffolding in Zeus-protocol with read-only canonical reader and green product CI."
+        },
+        "idempotency_key": "codex:task0124-front-etapa1:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0124",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0124-front-etapa1:ready-to-in-progress"
+      }
+    }
+  ]
+}

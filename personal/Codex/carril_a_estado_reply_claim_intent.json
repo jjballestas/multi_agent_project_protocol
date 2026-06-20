@@ -1,0 +1,24 @@
+{
+  "claim": {
+    "op": "acquire",
+    "claim": {
+      "claim_id": "CLAIM-20260619-Codex-carril-A-estado-reply",
+      "task_id": "PROMO-20260619-CARRIL-A",
+      "owner": "Codex",
+      "scope": [
+        "Area_comun/state/CLAIMS.json",
+        "Area_comun/mailbox/open/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+        "Area_comun/mailbox/answered/MSG-20260619-Arquitecto-to-Codex-carril-A-informe-estado.md",
+        "Area_comun/mailbox/open/MSG-20260619-Codex-to-Arquitecto-carril-A-informe-estado.md",
+        "runtime/state/events.jsonl",
+        "runtime/state/snapshot.json"
+      ],
+      "started_at": "2026-06-19T06:51:00Z",
+      "updated_at": "2026-06-19T06:51:00Z",
+      "expires_at": "2026-06-19T07:21:00Z",
+      "status": "active",
+      "notes": "Reply to Arquitecto Carril A status request without activating #4."
+    },
+    "idempotency_key": "codex:carril-a-estado-reply:claim"
+  }
+}

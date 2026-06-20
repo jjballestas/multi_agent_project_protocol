@@ -1,0 +1,19 @@
+{
+  "type": "claim",
+  "op": "acquire",
+  "claim": {
+    "claim_id": "CLAIM-20260620-Codex-TASK-0130-handoff-msg",
+    "owner": "Codex",
+    "task_id": "TASK-0130",
+    "status": "active",
+    "started_at": "2026-06-20T10:46:00Z",
+    "updated_at": "2026-06-20T10:46:00Z",
+    "expires_at": "2026-06-20T11:15:00Z",
+    "notes": "File-scoped claim for TASK-0130 in_review mailbox handoff message.",
+    "scope": [
+      "Area_comun/state/CLAIMS.json",
+      "Area_comun/mailbox/open/MSG-20260620-Codex-to-Arquitecto-TASK-0130-in-review.md"
+    ]
+  },
+  "idempotency_key": "Codex:TASK-0130:handoff-msg:claim:20260620T104600Z"
+}

@@ -1,0 +1,44 @@
+{
+  "idempotency_key": "Codex:TASK-0130:start:20260620T102000Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260620-Codex-TASK-0130",
+        "owner": "Codex",
+        "task_id": "TASK-0130",
+        "status": "active",
+        "started_at": "2026-06-20T10:20:00Z",
+        "updated_at": "2026-06-20T10:20:00Z",
+        "expires_at": "2026-06-20T14:20:00Z",
+        "notes": "Implement TASK-0130 front MVP stage 6: read-only multi-project selector and governed kickoff RF-10.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json",
+          "Area_comun/state/TASK_INDEX.json#TASK-0130",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0130",
+          "Area_comun/tasks/TASK-0130-codex-front-mvp-etapa6-multiproyecto-kickoff.md",
+          "Area_comun/mailbox/open/MSG-20260620-Arquitecto-to-Codex-GO-etapa6-TASK-0130.md",
+          "Area_comun/mailbox/answered/MSG-20260620-Arquitecto-to-Codex-GO-etapa6-TASK-0130.md",
+          "Area_comun/handoffs/HANDOFF-TASK-0130-codex-to-arquitecto-1.md",
+          "D:/Agentes/Zeus/Zeus-protocol/README.md",
+          "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+          "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+          "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+          "D:/Agentes/Zeus/Zeus-protocol/src/canonicalReader.js",
+          "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+          "D:/Agentes/Zeus/Zeus-protocol/tests/canonicalReader.test.js",
+          "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0130",
+      "from": "ready",
+      "to": "in_progress"
+    }
+  ]
+}

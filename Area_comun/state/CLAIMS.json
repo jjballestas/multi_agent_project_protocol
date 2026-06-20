@@ -2561,6 +2561,21 @@
             "updated_at": "2026-06-20T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-REQ-FB27AF72",
+            "expires_at": "2026-06-20T19:52:26.094Z",
+            "notes": "Front requirement-intake relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#REQ-FB27AF72",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-FB27AF72"
+            ],
+            "started_at": "2026-06-20T19:42:26.094Z",
+            "status": "released",
+            "task_id": "REQ-FB27AF72",
+            "updated_at": "2026-06-20T19:42:26.094Z"
+        },
+        {
             "claim_id": "CLAIM-HANDOFF-20260612-claude-sesion-analisis",
             "expires_at": "2026-06-13",
             "notes": "Handoff de sesion (analisis SOTA + correcciones + DECISION-0029) para continuidad en VS Code.",
