@@ -49,6 +49,12 @@
             "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos"
         },
         {
+            "id": "REQ-6D80DB17",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
+        },
+        {
             "id": "REQ-829CBFCE",
             "owner": "Operador",
             "status": "proposed",
