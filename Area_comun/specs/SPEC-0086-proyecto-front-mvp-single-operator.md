@@ -302,6 +302,61 @@ producto/dominio en el core neutral.
   RECHAZADO (no se crea REQ, no verde); proyecto no elegido -> RECHAZADO; contenido real + proyecto explicito ->
   requirement real id+seq. Carry AC11/AC14/AC22; #4 byte-identica. Read-only sobre la superficie de escritura
   (tightening de la validacion del execute ya gobernado; no abre superficie nueva).
+- **AC40 - Upload gobernado server-NO-MODELO-EGRESS: screening PII real + store fuera del dataset + SHA-256 + emit extraction-task [PERMANENTE; DECISION-0056; REQ-D642E4D8].**
+  El upload es accion gobernada server-side. **El server NO llama a ningun endpoint de MODELO/inferencia** (sin
+  SDK de modelo, sin socket a host de LLM, sin API key de modelo) -- garantia ESTRECHA, NO "cero egress" (el
+  `git push` gobernado del intake es transporte existente DECISION-0054). El upload: (a) corre **screening de PII
+  REAL best-effort** (email/telefono/documento-cedula/NIT/razon-social/SQL/nombres heuristicos) + ASCII sobre el
+  contenido; HONESTO: best-effort, **NO** se afirma PII-free garantizado ni "ningun LLM ve PII"; (b) guarda el
+  archivo en un **STORE FUERA DEL DATASET ATESTADO** (tmp del SO o area gitignored entregada con su linea
+  `.gitignore` en el MISMO commit y EXCLUIDA del git-status del indicador canonico), ruta server-derived acotada,
+  nombre saneado (sin traversal), allowlist .md/.txt + limite de tamano (hereda AC37/AC38), contenido INERTE; el
+  **hash atestado del archivo es SHA-256 sobre los BYTES CRUDOS** (no FNV-32 ni sobre texto saneado); (c) emite una
+  **TAREA de extraccion con CONTRATO AUTOCONTENIDO** (ruta, formato de salida de candidatas, criterio de done) via
+  `task_upsert` con status YA VALIDO (NO crea intent kind/status nuevo). El evento atestado solo registra "archivo
+  subido (sha256) + extraccion pedida". **Idempotente** por (sha256-bytes + project). **#4 byte-identica.** Test +
+  PRUEBA NEGATIVA: el handler de upload no importa SDK de modelo ni abre socket a host de LLM (estatico falsable +
+  control positivo); tipo/tamano/traversal -> rechazado; `git ls-files <store>` vacio; el screening corre antes de
+  persistir.
+- **AC41 - Extraccion = trabajo de AGENTE (egress del agente acotado/consentido) -> candidatas en STORE NO-LEDGER fuera del backlog [PERMANENTE; DECISION-0056].**
+  La extraccion (archivo -> historias candidatas) la hace un **AGENTE** que toma la tarea (no el server). RECONOCIDO:
+  el agente LEE el archivo externo (post best-effort screening); el upload **etiqueta/consiente y registra** que el
+  archivo sera leido por el agente extractor (ventana reconocida, no oculta). Las candidatas viven en un **STORE
+  NO-LEDGER, gitignored, FUERA del dataset**, con **ciclo de vida propio que NO es `task_status`** (el estado
+  `candidate` NO existe en VALID_TASK_STATUSES y NO se agrega): el ledger atestado **NUNCA** ve `candidate`, no
+  tocan TASK_INDEX/PROJECT_STATE; **drift 0 con candidatas presentes**; un clon limpio sin el store sigue validando
+  exit 0. El no-determinismo del LLM queda FUERA de #4. Test: candidatas producidas no aparecen en TASK_INDEX ni en
+  el validate del ledger; drift 0.
+- **AC42 - Selector de modo (digitado vs archivo), obligatorios en ambos, rama-archivo gateada [PERMANENTE; REQ-D642E4D8].**
+  Antes de crear, el operador elige el MODO: (a) "Nueva historia digitada" -> campos actuales; (b) "Por carga de
+  archivo". En AMBOS se validan los **obligatorios** antes de EXECUTE (carry AC39). La **rama "por carga de archivo"
+  se GATEA detras de B+C** (feature-flag de UI: no se ofrece vacia) o lleva un consumidor minimo no-LLM (archivo
+  entero = 1 candidato editable). Conforme al design-system (AC13). Test: cada modo expone su flujo; ninguno permite
+  EXECUTE con obligatorios vacios/placeholder; modo-archivo no se ofrece sin B+C activos.
+- **AC43 - GATE HUMANO DURO de PII + aprobacion por candidata; id del contenido editado [CRITICO PERMANENTE; DECISION-0056].**
+  El operador revisa/edita CADA candidata en el panel y para **APROBARLA DECLARA explicitamente que reviso PII**
+  (atestacion humana por-candidata; el front EXPONE la accion de aprobar/editar/descartar por candidata). Solo una
+  candidata APROBADA pasa por el `requirement-intake` EXISTENTE (execute gobernado AC39) con **re-screening de PII**
+  en la frontera candidate->intake (el texto EDITADO -- contenido nuevo que no paso el gate de ingest -- se valida
+  por los MISMOS guards al aprobar). El **id/idempotency** del requirement deriva del **CONTENIDO EDITADO**
+  (title+narrative+intent+project), NO del archivo (1 archivo -> N candidatas -> N requirements distintos; re-aprobar
+  la misma candidata es idempotente). El `narrative` aprobado se atesta en #4 (IRREVERSIBLE) -> la declaracion
+  humana es el gate duro antes del write inmutable. **Atribucion (D-ACTOR): relay honesto** author=Operador/
+  relayed_by=Arquitecto (sin tocar registry, #4 byte-identica). Test: aprobar sin declarar PII -> bloqueado;
+  editar un candidato para inyectar PII/contenido activo -> redactado/rechazado al aprobar; 1 archivo -> 3
+  candidatas -> 3 REQ con ids distintos.
+- **AC44 - Anti-abuso, estados de extraccion, purga y procedencia (prueba negativa PERMANENTE) [CRITICO; DECISION-0056].**
+  Tests permanentes: server **no-MODELO-egress** (estatico falsable + control positivo); store de uploads y
+  candidatas FUERA del dataset (gitignored, `git ls-files` vacio, excluido del git-status del indicador, no toca
+  `Area_comun/state`/working-tree -- 2a-superficie aislada, unica mutacion de ledger = `task_upsert` via
+  submit_intent); contenido INERTE; **estados de extraccion explicitos** (encolada / sin-agente-en-loop con aviso /
+  corriendo / completed-empty / completed-N con cap maximo / failed con razon + timeout/liberacion del claim);
+  **purga del raw** al estado terminal del candidato + TTL para huerfanos (test: el raw no sobrevive al estado
+  terminal; clon limpio sin la carpeta valida exit 0); **procedencia PII-free determinista** en el requirement
+  aprobado (sha256 archivo + id extraction-task + hash candidato pre-edicion); errores/logs del flujo NO ecoan
+  contenido crudo; el panel (front) es read/edit local puro (sin SDK/fetch de modelo en el browser);
+  **#4 byte-identica** (config/genesis/registry/keys sin cambio, version pinned 1.14.0). OFF-by-default.
+  Un upload->aprobacion real deja el canonico VERDE (regresion-proof, AC22).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

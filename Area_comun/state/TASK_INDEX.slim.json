@@ -118,7 +118,7 @@
             "owner": "Operador",
             "phase": "P2",
             "priority": "high",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {
@@ -128,6 +128,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0150",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)"
         }
     ],
     "view": "task_index.slim"

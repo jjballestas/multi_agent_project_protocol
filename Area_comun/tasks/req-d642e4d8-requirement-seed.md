@@ -1,7 +1,7 @@
 ---
 task_id: REQ-D642E4D8
 type: requirement
-status: proposed
+status: in_progress
 owner: Operador
 phase: P2
 priority: high

@@ -497,6 +497,7 @@
         {
             "author": "Operador",
             "created_at": "2026-06-22",
+            "delivered_by": "TASK-0150 (Fase A; B/C pendientes)",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-d642e4d8-requirement-seed.md",
             "id": "REQ-D642E4D8",
@@ -506,7 +507,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "in_progress",
             "supersedes": "REQ-31100EAF",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo",
             "type": "requirement"
@@ -1632,6 +1633,23 @@
             "spec_id": "SPEC-0086",
             "status": "done",
             "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-22",
+            "file": "Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md",
+            "id": "TASK-0150",
+            "linked_decisions": [
+                "DECISION-0056",
+                "DECISION-0055",
+                "DECISION-0051"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)",
             "type": "product"
         }
     ],

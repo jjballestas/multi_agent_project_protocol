@@ -1,0 +1,23 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260622-Arquitecto-promote-0150", "task_id": "TASK-0150", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/decisions/DECISION-0056-file-ingestion-v2.md","Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md","Area_comun/tasks/req-d642e4d8-requirement-seed.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0150.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-22T01:00:00Z","updated_at": "2026-06-22T01:00:00Z","expires_at": "2026-06-22T05:00:00Z","status": "active",
+    "notes": "Promote DECISION-0056 (carga por archivo v2 OPCION 4 + red-team edits + D-PII/D-ACTOR) + ext10 SPEC (AC40-AC44) + TASK-0150 Fase A ready + GO Codex. REQ-D642E4D8 proposed->in_progress. maker=Codex/checker=Arquitecto + Analista." },
+    "idempotency_key": "arquitecto:promote-0150:claim-acquire" } },
+  { "decision": { "decision_id": "DECISION-0056", "idempotency_key": "arquitecto:promote-0150:decision-0056" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0150",
+    "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "high","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0056","DECISION-0055","DECISION-0051"],"created_at": "2026-06-22","file": "Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md" },
+    "idempotency_key": "arquitecto:promote-0150:task-upsert-ready" } },
+  { "task_upsert": { "task": {
+    "id": "REQ-D642E4D8", "type": "requirement", "status": "in_progress", "owner": "Operador", "phase": "P2",
+    "priority": "high", "project": "Zeus-protocol", "author": "Operador", "relayed_by": "Arquitecto",
+    "endorsement": "none", "sdd_role": "seed_only_architect_authors_spec", "supersedes": "REQ-31100EAF",
+    "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo",
+    "delivered_by": "TASK-0150 (Fase A; B/C pendientes)", "created_at": "2026-06-22", "file": "Area_comun/tasks/req-d642e4d8-requirement-seed.md" },
+    "idempotency_key": "arquitecto:promote-0150:req-inprogress" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-promote-0150", "idempotency_key": "arquitecto:promote-0150:claim-release" } }
+] }

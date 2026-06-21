@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "529bf110cd55d6c76c56a42685685d19f3f0566ea30ed4f009ea4af0bd373169",
+  "canonical_hash": "2a6166fb0cdeb3e2b190d7903be0d3dc7658dc444af57a6edd603c8b4075b5e7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -80,6 +80,7 @@
       "CLAIM-20260621-Codex-TASK-0141": 1,
       "CLAIM-20260621-Codex-TASK-0142": 1,
       "CLAIM-20260622-Arquitecto-close-0149": 1,
+      "CLAIM-20260622-Arquitecto-promote-0150": 1,
       "CLAIM-20260622-Arquitecto-register-ingv2": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -94,6 +95,7 @@
       "DECISION-0053": 1,
       "DECISION-0054": 1,
       "DECISION-0055": 1,
+      "DECISION-0056": 1,
       "MAILBOX-ARCHIVE": 6,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
@@ -121,7 +123,7 @@
       "REQ-C1976857": 3,
       "REQ-CEB7F585": 3,
       "REQ-D2C6579F": 3,
-      "REQ-D642E4D8": 2,
+      "REQ-D642E4D8": 3,
       "REQ-DCC3BC1A": 4,
       "REQ-FB27AF72": 4,
       "TASK-0117": 3,
@@ -154,10 +156,11 @@
       "TASK-0147": 8,
       "TASK-0148": 10,
       "TASK-0149": 8,
+      "TASK-0150": 2,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 410,
+    "events_applied": 415,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -364,6 +367,11 @@
       "arquitecto:promote-0149:claim-release": 1064,
       "arquitecto:promote-0149:req-inprogress": 1063,
       "arquitecto:promote-0149:task-upsert-ready": 1062,
+      "arquitecto:promote-0150:claim-acquire": 1082,
+      "arquitecto:promote-0150:claim-release": 1086,
+      "arquitecto:promote-0150:decision-0056": 1083,
+      "arquitecto:promote-0150:req-inprogress": 1085,
+      "arquitecto:promote-0150:task-upsert-ready": 1084,
       "arquitecto:prune-junk:cancel-829cbfce": 1016,
       "arquitecto:prune-junk:cancel-984a85c6": 1015,
       "arquitecto:prune-junk:claim-acquire": 1014,
@@ -574,5 +582,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1081
+  "up_to_seq": 1086
 }

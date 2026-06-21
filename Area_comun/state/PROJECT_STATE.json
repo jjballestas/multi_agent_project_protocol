@@ -117,7 +117,7 @@
         {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {
@@ -437,6 +437,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)"
+        },
+        {
+            "id": "TASK-0150",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)"
         }
     ],
     "agents": {
@@ -498,7 +504,8 @@
         "DECISION-0052",
         "DECISION-0053",
         "DECISION-0054",
-        "DECISION-0055"
+        "DECISION-0055",
+        "DECISION-0056"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

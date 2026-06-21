@@ -3661,6 +3661,28 @@
             "updated_at": "2026-06-22T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-promote-0150",
+            "expires_at": "2026-06-22T05:00:00Z",
+            "notes": "Promote DECISION-0056 (carga por archivo v2 OPCION 4 + red-team edits + D-PII/D-ACTOR) + ext10 SPEC (AC40-AC44) + TASK-0150 Fase A ready + GO Codex. REQ-D642E4D8 proposed->in_progress. maker=Codex/checker=Arquitecto + Analista.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0056-file-ingestion-v2.md",
+                "Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md",
+                "Area_comun/tasks/req-d642e4d8-requirement-seed.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0150.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T01:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0150",
+            "updated_at": "2026-06-22T01:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-register-ingv2",
             "expires_at": "2026-06-22T04:30:00Z",
             "notes": "Registrar gobernado REQ ingestion v2 (priority high, supersede REQ-31100EAF) por orden del operador (#1). Autoro SPEC con prioridad.",
