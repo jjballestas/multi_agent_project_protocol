@@ -248,6 +248,11 @@ producto/dominio en el core neutral.
   que significa cuando cambia, cuando preocuparse (ej. drift=0 OK, drift>0 atencion). READ-ONLY. Texto consistente
   con el glosario del Help (no contradice la doc). Accesible (title/aria). Test de comportamiento: cada badge
   expone su tooltip con el contenido esperado para los 5 badges. Carry AC11/AC12/AC13/AC17; #4 byte-identica.
+- **AC32 - Tooltips en codigos RF-N y acronimos [comportamiento PERMANENTE; REQ-3E31293F].** Hover sobre un codigo
+  RF-N (RF-5, RF-14...) o acronimo (SDD/T0/HMAC/PII...) en cualquier vista muestra su nombre completo; los codigos
+  son interactivos (cursor pointer). El diccionario es UNA fuente unica (compartida con el glosario del Help, no
+  duplicada). READ-ONLY. Test de comportamiento: hover sobre RF-5/SDD/HMAC rinde el texto esperado; el set cubre
+  los codigos que el front realmente muestra. Carry AC11/AC12/AC13/AC17; #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

@@ -2866,6 +2866,24 @@
             "updated_at": "2026-06-21T07:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Arquitecto-close-0142",
+            "expires_at": "2026-06-21T12:00:00Z",
+            "notes": "Close TASK-0142 in_review->done (checker). AC31 verde (5 badges con tooltips title+aria), Zeus cb4c0b1 solo front, npm 34/34, validate con/sin secretos exit 0, #4 byte-identica, drift 0.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0142-codex-front-badge-tooltips.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-21T08:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0142",
+            "updated_at": "2026-06-21T08:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260621-Arquitecto-promote-0139",
             "expires_at": "2026-06-21T07:00:00Z",
             "notes": "Promote DECISION-0054 (superficie de transporte auto commit+push) + ext6 SPEC-0086 (AC27/AC28) + TASK-0139 ready + GO a Codex. REQ-444E0DE5. OFF by default; push vivo=GO posterior. maker=Codex/checker=Arquitecto; pasada del Analista antes de cerrar.",
@@ -2945,6 +2963,26 @@
             "status": "released",
             "task_id": "TASK-0142",
             "updated_at": "2026-06-21T07:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260621-Arquitecto-promote-0143",
+            "expires_at": "2026-06-21T12:05:00Z",
+            "notes": "Promote TASK-0143 (UX tooltips RF-N/acronimos, REQ-3E31293F) + GO Codex; AC32 a SPEC-0086 ext7. #4 de 9.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0143-codex-front-rfn-tooltips.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0143.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-21T08:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0143",
+            "updated_at": "2026-06-21T08:05:00Z"
         },
         {
             "claim_id": "CLAIM-20260621-Arquitecto-reconcile-backlog",

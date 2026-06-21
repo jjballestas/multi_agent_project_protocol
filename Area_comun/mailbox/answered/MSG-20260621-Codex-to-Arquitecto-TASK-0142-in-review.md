@@ -4,7 +4,7 @@ task_id: TASK-0142
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0142 in_review: tooltips de integridad entregados en Zeus commit cb4c0b1; tests PASS 34/34; healthz OK."

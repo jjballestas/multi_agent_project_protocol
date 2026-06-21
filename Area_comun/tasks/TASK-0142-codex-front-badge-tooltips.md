@@ -2,7 +2,7 @@
 task_id: TASK-0142
 title: "Proyecto-front (UX): tooltips explicativos en los badges de la barra de integridad (epoch/drift/attested/canonical/validator) (AC31, SPEC-0086 ext7)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

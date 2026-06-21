@@ -4,7 +4,7 @@ task_id: none
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CRON DE AUTODRIVE DETENIDO por la regla de las 7 rondas: Codex quedo en silencio tras entregar el #2 (no tomo TASK-0142 en 7 rondas seguidas del cron). Progreso 2/9 done (TASK-0140 AC29 + TASK-0141 AC30, ambos cerrados verdes). #3 TASK-0142 (tooltips badges, AC31) quedo ready/Codex con GO emitido, esperando que Codex lo tome. Cron 276658d4 eliminado. Para reanudar: reactiva a Codex y relanza el monitoreo."
