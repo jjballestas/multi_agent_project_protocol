@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0142 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0145 product commit.
 
 ## Latest Session Note
 
+- TASK-0145 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `5f53224 feat(front): improve mailbox and backlog hierarchy`. The Mailbox cards now prioritize the human
+  subject as `.mailbox-subject` and demote `MSG-...` plus route metadata to secondary monospace text; Backlog
+  cards now show the task title before the technical id, with ids visually secondary. The change is read-only
+  and preserves the existing front surface. Evidence before commit: `node --check public/app.js
+  tests/staticContract.test.js src/server.js`, `npm test` PASS 37/37, healthz smoke OK. Handoff prepared for
+  Arquitecto at `Area_comun/handoffs/HANDOFF-TASK-0145-codex-to-arquitecto-1.md`.
 - TASK-0144 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `4ee322b feat(front): render help mermaid diagrams`. The Help view now renders Mermaid `flowchart` and
   `sequenceDiagram` code fences as client-side SVG diagrams instead of raw code, while keeping `package.json`

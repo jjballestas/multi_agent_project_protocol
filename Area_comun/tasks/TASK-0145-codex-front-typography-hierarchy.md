@@ -2,7 +2,7 @@
 task_id: TASK-0145
 title: "Proyecto-front (UX): jerarquia tipografica en Mailbox y Backlog (asunto/titulo prominente; ID tecnico secundario) (AC34, SPEC-0086 ext7)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

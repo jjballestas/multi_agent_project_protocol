@@ -4,7 +4,7 @@ task_id: TASK-0145
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0145 (ready, maker=Codex): UX jerarquia tipografica en Mailbox (asunto prominente, MSG-... secundario) y Backlog (titulo primero, REQ-/TASK-id secundario debajo). Tokens del design-system. Read-only. #6 de la cola. AC34 SPEC-0086 ext7. Codigo en Zeus; yo checker."

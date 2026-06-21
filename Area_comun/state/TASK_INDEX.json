@@ -1510,7 +1510,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): jerarquia tipografica Mailbox/Backlog (AC34, SPEC-0086 ext7)",
             "type": "product"
         }
