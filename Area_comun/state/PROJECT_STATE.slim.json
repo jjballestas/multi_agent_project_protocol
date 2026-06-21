@@ -13,6 +13,12 @@
             "title": "carga de requerimiento por archivo"
         },
         {
+            "id": "REQ-3E31293F",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas"
+        },
+        {
             "id": "REQ-4120B017",
             "owner": "Operador",
             "status": "proposed",

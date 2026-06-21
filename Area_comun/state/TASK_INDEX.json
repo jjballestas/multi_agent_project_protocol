@@ -92,6 +92,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Al hacer hover sobre RF-5 debe aparecer: RF-5 - SDD task (crear tarea). Sobre SDD: Spec-Driven Development. Sobre T0: boundary de inicio del proyecto. Sobre HMAC: firma criptografica del evento. Los codigos deben ser interactivos (cursor pointer) en lugar de texto plano.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-3e31293f-requirement-seed.md",
+            "id": "REQ-3E31293F",
+            "narrative": "Como operador quiero ver un tooltip con el nombre completo al hacer hover sobre cualquier codigo RF-N (RF-5, RF-14, etc.), acronimo tecnico (SDD, T0, HMAC, PII) o identificador de estado que aparezca en las vistas, para no tener que memorizar el glosario ni navegar al Help.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Al hacer hover en cada badge debe aparecer un tooltip corto: que valor es normal, que significa cuando cambia, y cuando debo preocuparme. Por ejemplo drift=0 es OK, drift>0 requiere atencion.",
             "author": "Operador",
             "endorsement": "none",
