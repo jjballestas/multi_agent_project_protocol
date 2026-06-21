@@ -375,8 +375,14 @@
         {
             "id": "TASK-0144",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): render de diagramas Mermaid en Help (SVG) sin dependencia de servidor (AC33, SPEC-0086 ext7)"
+        },
+        {
+            "id": "TASK-0145",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (UX): jerarquia tipografica Mailbox/Backlog (AC34, SPEC-0086 ext7)"
         }
     ],
     "agents": {

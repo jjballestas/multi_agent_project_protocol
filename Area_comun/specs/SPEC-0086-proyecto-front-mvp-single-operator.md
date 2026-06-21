@@ -259,6 +259,11 @@ producto/dominio en el core neutral.
   pre-generado; preserva la propiedad "sin dependencias" de la consola. READ-ONLY. Test de comportamiento: el panel
   Help no muestra el codigo mermaid crudo de esos bloques (render presente); el server sigue sin deps de npm.
   Carry AC11/AC12/AC13/AC17; #4 byte-identica.
+- **AC34 - Jerarquia tipografica Mailbox/Backlog [conformidad-diseno PERMANENTE; REQ-28118FC3].** En tarjetas de
+  Mailbox el ASUNTO es prominente y el `MSG-...` secundario (menor tamano/contraste); en Backlog el TITULO primero
+  y el `REQ-/TASK-id` secundario debajo. Tokens del design-system (AC13). READ-ONLY. Test de conformidad: el id
+  tecnico no tiene el mismo peso visual que el asunto/titulo (clases/tokens correctos). Carry AC11/AC12/AC13/AC17;
+  #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

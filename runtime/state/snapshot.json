@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "961ba0e695c6dca76685f85634a90f4e2fb8f8a3e509cdaf944753ba5b7f2669",
+  "canonical_hash": "b109b25097706f897fbeffde70ef03c1f3e85f0ff984780871d65367bd6dee68",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -57,12 +57,14 @@
       "CLAIM-20260621-Arquitecto-close-0141": 1,
       "CLAIM-20260621-Arquitecto-close-0142": 1,
       "CLAIM-20260621-Arquitecto-close-0143": 1,
+      "CLAIM-20260621-Arquitecto-close-0144": 1,
       "CLAIM-20260621-Arquitecto-promote-0139": 1,
       "CLAIM-20260621-Arquitecto-promote-0140": 1,
       "CLAIM-20260621-Arquitecto-promote-0141": 1,
       "CLAIM-20260621-Arquitecto-promote-0142": 1,
       "CLAIM-20260621-Arquitecto-promote-0143": 1,
       "CLAIM-20260621-Arquitecto-promote-0144": 1,
+      "CLAIM-20260621-Arquitecto-promote-0145": 1,
       "CLAIM-20260621-Arquitecto-reconcile-backlog": 1,
       "CLAIM-20260621-Arquitecto-rego-0138-neutralidad": 1,
       "CLAIM-20260621-Codex-TASK-0141": 1,
@@ -126,11 +128,12 @@
       "TASK-0141": 7,
       "TASK-0142": 7,
       "TASK-0143": 8,
-      "TASK-0144": 6,
+      "TASK-0144": 8,
+      "TASK-0145": 2,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 330,
+    "events_applied": 336,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -256,6 +259,9 @@
       "arquitecto:close-0143:claim-acquire": 989,
       "arquitecto:close-0143:claim-release": 991,
       "arquitecto:close-0143:status-done": 990,
+      "arquitecto:close-0144:claim-acquire": 1002,
+      "arquitecto:close-0144:claim-release": 1004,
+      "arquitecto:close-0144:status-done": 1003,
       "arquitecto:hygiene-0620-resume:claim-acquire": 779,
       "arquitecto:hygiene-0620-resume:claim-release": 780,
       "arquitecto:promote-0132:claim-acquire": 802,
@@ -301,6 +307,9 @@
       "arquitecto:promote-0144:claim-acquire": 992,
       "arquitecto:promote-0144:claim-release": 994,
       "arquitecto:promote-0144:task-upsert-ready": 993,
+      "arquitecto:promote-0145:claim-acquire": 1005,
+      "arquitecto:promote-0145:claim-release": 1007,
+      "arquitecto:promote-0145:task-upsert-ready": 1006,
       "arquitecto:reconcile-backlog:claim-acquire": 937,
       "arquitecto:reconcile-backlog:claim-release": 942,
       "arquitecto:reconcile-backlog:req-444e0de5-done": 938,
@@ -467,5 +476,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1001
+  "up_to_seq": 1007
 }

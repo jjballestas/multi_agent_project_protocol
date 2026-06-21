@@ -114,12 +114,12 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
-            "id": "TASK-0144",
+            "id": "TASK-0145",
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
-            "title": "Proyecto-front (UX): render de diagramas Mermaid en Help (SVG) sin dependencia de servidor (AC33, SPEC-0086 ext7)"
+            "status": "ready",
+            "title": "Proyecto-front (UX): jerarquia tipografica Mailbox/Backlog (AC34, SPEC-0086 ext7)"
         }
     ],
     "view": "task_index.slim"

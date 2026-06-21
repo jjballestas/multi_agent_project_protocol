@@ -1,0 +1,10 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-close-0144", "task_id": "TASK-0144", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0144-codex-front-mermaid-help.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T09:30:00Z","updated_at": "2026-06-21T09:30:00Z","expires_at": "2026-06-21T13:30:00Z","status": "active",
+    "notes": "Close TASK-0144 in_review->done (checker). AC33 verde (Mermaid SVG sin dep npm/server, package.json deps vacio), Zeus 4ee322b solo front, npm 36/36, validate con/sin secretos exit 0, #4 byte-identica, drift 0." },
+    "idempotency_key": "arquitecto:close-0144:claim-acquire" } },
+  { "task_status": { "task_id": "TASK-0144", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0144:status-done" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-close-0144", "idempotency_key": "arquitecto:close-0144:claim-release" } }
+] }

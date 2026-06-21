@@ -2,7 +2,7 @@
 task_id: TASK-0144
 title: "Proyecto-front (UX): render de diagramas Mermaid en la vista Help (SVG) sin agregar dependencia de servidor (AC33, SPEC-0086 ext7)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

@@ -1,0 +1,15 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-promote-0145", "task_id": "TASK-0145", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0145-codex-front-typography-hierarchy.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0145.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T09:35:00Z","updated_at": "2026-06-21T09:35:00Z","expires_at": "2026-06-21T13:35:00Z","status": "active",
+    "notes": "Promote TASK-0145 (UX jerarquia tipografica, REQ-28118FC3) + GO Codex; AC34 a SPEC-0086 ext7. #6 de 9." },
+    "idempotency_key": "arquitecto:promote-0145:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0145",
+    "title": "Proyecto-front (UX): jerarquia tipografica Mailbox/Backlog (AC34, SPEC-0086 ext7)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "normal","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0049"],"created_at": "2026-06-21","file": "Area_comun/tasks/TASK-0145-codex-front-typography-hierarchy.md" },
+    "idempotency_key": "arquitecto:promote-0145:task-upsert-ready" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-promote-0145", "idempotency_key": "arquitecto:promote-0145:claim-release" } }
+] }

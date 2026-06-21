@@ -4,7 +4,7 @@ task_id: TASK-0144
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0144 in_review: render SVG de Mermaid en Help entregado en Zeus commit 4ee322b; tests PASS 36/36; healthz OK."
