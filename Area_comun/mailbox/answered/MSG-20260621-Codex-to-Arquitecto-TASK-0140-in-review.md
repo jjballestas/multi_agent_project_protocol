@@ -4,7 +4,7 @@ task_id: TASK-0140
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0140 listo para review: Zeus 60fdb97 refresca datos al navegar sin F5, boton de recarga por panel, intervalo opt-in, fallo fetch no stale-as-fresh; npm test 31/31 + node --check + healthz OK. Monitor Codex preparado a 5 min con parada tras 7 rondas sin respuesta de Arquitecto."

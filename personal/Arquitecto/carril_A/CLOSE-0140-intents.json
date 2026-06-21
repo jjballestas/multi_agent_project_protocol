@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260621-Arquitecto-close-0140", "task_id": "TASK-0140", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0140-codex-front-refetch-nav.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+      "started_at": "2026-06-21T06:30:00Z","updated_at": "2026-06-21T06:30:00Z","expires_at": "2026-06-21T10:30:00Z","status": "active",
+      "notes": "Close TASK-0140 in_review->done (checker Arquitecto). AC29 verde (nav-fetch+no-stale-as-fresh+manual+interval opt-in), Zeus npm 31/31, commit 60fdb97 solo front read-only, validate con/sin secretos exit 0, #4 byte-identica, drift 0." },
+      "idempotency_key": "arquitecto:close-0140:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0140", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0140:status-done" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-close-0140", "idempotency_key": "arquitecto:close-0140:claim-release" } }
+  ]
+}

@@ -2,7 +2,7 @@
 task_id: TASK-0140
 title: "Proyecto-front (UX): refetch fresco al navegar entre vistas (sin F5) + boton de recarga manual + refresco por intervalo opt-in (AC29, SPEC-0086 ext7)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

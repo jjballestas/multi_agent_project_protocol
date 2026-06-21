@@ -237,6 +237,12 @@ producto/dominio en el core neutral.
   AC17). Honestidad (AC11): si el fetch falla -> estado de error, no datos stale pintados como frescos. Test de
   comportamiento: navegar a una vista dispara el fetch (mock) y re-renderiza con el dato nuevo; el intervalo
   configurable se respeta; sin intervalo, no hay polling. Carry AC12 (routing) / AC13 (design). #4 byte-identica.
+- **AC30 - Indicador de frescura + staleness [comportamiento PERMANENTE; REQ-547C6C54].** La barra de integridad /
+  pie de seccion muestra **"actualizado hace Ns"**; durante una carga, un spinner/indicador sutil; si el dato es
+  STALE (> N s sin refrescar) el indicador cambia de estado visual. Deriva del timestamp REAL del ultimo fetch
+  exitoso (no estatico). READ-ONLY (carry AC17). Honestidad (AC11): el indicador refleja la antiguedad real, nunca
+  pinta "fresco" un dato viejo. Test de comportamiento: tras un fetch, el indicador muestra la antiguedad; pasado
+  el umbral pasa a STALE; durante carga muestra el spinner. Construye sobre AC29. Carry AC12/AC13; #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

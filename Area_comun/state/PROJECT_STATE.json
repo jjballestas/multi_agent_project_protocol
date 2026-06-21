@@ -327,8 +327,14 @@
         {
             "id": "TASK-0140",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)"
+        },
+        {
+            "id": "TASK-0141",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (UX): indicador de frescura (actualizado hace Ns) + spinner + estado STALE (AC30, SPEC-0086 ext7)"
         }
     ],
     "agents": {
