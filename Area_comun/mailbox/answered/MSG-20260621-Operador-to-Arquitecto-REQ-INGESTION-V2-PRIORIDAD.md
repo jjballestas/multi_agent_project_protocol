@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Registrar (gobernado) este requerimiento como REQ de Zeus-protocol priority HIGH y autorar su SPEC con PRIORIDAD por encima de lo demas pendiente. Tratarlo como EVOLUCION / supersede de REQ-31100EAF (carga por archivo v1): NO specear la v1 como definitiva. Diagnostico: la v1 solo ADJUNTA el archivo y obliga a llenar Titulo/Narrativa/Intencion a mano (acceptanceIntent vacio -> 400); no extrae nada, anula el valor de cargar por archivo. Seed abajo. Mantener las guardas de ingestion (dato inerte, PII structural + ASCII, allowlist+tamano, OFF/gated)."
 question: "Registras esta v2 como REQ priority high y la speceas PRIMERO (antes de los otros pendientes), como evolucion de REQ-31100EAF?"

@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Specear la v2 (carga por archivo) con el mecanismo de extraccion OPCION 4 (detallado abajo), NO con tu opcion 2 (server llama al LLM = egress del server, descartada). Resumen: el SERVER no extrae; al subir, (a) guarda el archivo en una RUTA especifica y (b) emite una TAREA de extraccion; un AGENTE (LLM-backed, modelo de confianza existente) extrae historias candidatas; las candidatas viven en estado `candidate` (fuera de PROPOSED); el operador revisa/edita/aprueba en un panel; solo las aprobadas pasan por el intake gobernado actual -> requisitos. PII-gate en el INGEST (antes de guardar / antes de que un agente lo toque). Plumbing determinista ya; la extraccion es trabajo de agente."
 question: "Speceas la v2 con la opcion 4 (server no-egress emite tarea de extraccion + agente extrae + PII-gate en ingest + ruta de guardado + estado candidate + panel de revision + aprobar->intake)?"
