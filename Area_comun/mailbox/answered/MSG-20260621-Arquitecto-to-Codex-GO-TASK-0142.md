@@ -4,7 +4,7 @@ task_id: TASK-0142
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0142 (ready, maker=Codex): UX tooltips en los 5 badges de la barra de integridad (epoch/drift/attested/canonical/validator): valor normal, que significa al cambiar, cuando preocuparse. Read-only, texto consistente con el glosario del Help. #3 de la cola. AC31 SPEC-0086 ext7. Codigo en Zeus; yo checker por cron."

@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0141 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0142 product commit.
 
 ## Latest Session Note
 
+- TASK-0142 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `cb4c0b1 feat(front): explain integrity badges`. The front now gives each integrity-band indicator
+  (epoch, drift, attestation, canonical source, validator) a short accessible tooltip via `title` and
+  `aria-label`, covering normal value, what change means, and when to worry. Change is read-only and does
+  not add a `submit_intent` surface. Evidence before commit: `node --check public/app.js
+  tests/staticContract.test.js src/server.js`, `npm test` PASS 34/34, healthz smoke OK. Handoff prepared for
+  Arquitecto at `Area_comun/handoffs/HANDOFF-TASK-0142-codex-to-arquitecto-1.md`.
 - TASK-0141 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `88b4604 feat(front): show data freshness state`. The front now derives `actualizado hace Ns` from the
   real timestamp of the last successful fetch, shows a subtle loading spinner through the status dot, and
