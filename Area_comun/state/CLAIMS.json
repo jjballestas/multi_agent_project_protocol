@@ -3661,6 +3661,24 @@
             "updated_at": "2026-06-22T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-register-ingv2",
+            "expires_at": "2026-06-22T04:30:00Z",
+            "notes": "Registrar gobernado REQ ingestion v2 (priority high, supersede REQ-31100EAF) por orden del operador (#1). Autoro SPEC con prioridad.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/req-d642e4d8-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T00:30:00Z",
+            "status": "released",
+            "task_id": "REQ-D642E4D8",
+            "updated_at": "2026-06-22T00:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",

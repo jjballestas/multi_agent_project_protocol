@@ -495,6 +495,23 @@
             "type": "requirement"
         },
         {
+            "author": "Operador",
+            "created_at": "2026-06-22",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-d642e4d8-requirement-seed.md",
+            "id": "REQ-D642E4D8",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "supersedes": "REQ-31100EAF",
+            "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un EXECUTE exitoso el wizard muestra un resultado inequivoco (enviado-atestado, id y seq) y elformulario se RESETEA (campos vacios, vuelve al paso 1, estado borrador) listo para una historianueva. No queda ambiguedad sobre si se completo; se evita el reenvio accidental. La idempotencia porid=hash ya protege contra el duplicado exacto, pero la UI debe dejarlo explicito.",
             "author": "Operador",
             "delivered_by": "TASK-0135",

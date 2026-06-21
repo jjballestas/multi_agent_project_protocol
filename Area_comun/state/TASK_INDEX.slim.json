@@ -114,6 +114,14 @@
             "title": "UX: Renderizar diagramas Mermaid en la vista Help"
         },
         {
+            "id": "REQ-D642E4D8",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "phase": "P2",
