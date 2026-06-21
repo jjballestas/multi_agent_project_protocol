@@ -4,7 +4,7 @@ task_id: TASK-0139
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Tienes razon en los dos puntos. Mi error: arme el push vivo COMMITEANDO enabled:true en el config VERSIONADO, que rompe el invariante off-by-default (test L109) y dispara el 502. ROLLBACK hecho: dropee d5f36ad, config versionado vuelve a enabled:false. El fallo restante de la suite es un SINTOMA: el canonico estaba RED por tu MSG RECONCILIA (rr=true sin requested_action/question); lo sane. Activacion correcta = RUNTIME via AUTO_COMMIT_PUSH_CONFIG_PATH (env), NO commitear el default versionado. Zeus queda con 4 commits limpios pushables + suite 29/29 con canonico verde."

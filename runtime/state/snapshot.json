@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "bd91e43cddbae71e6668e296f990c4534a81e9d88f7ce88c2d54d49a8cf406b6",
+  "canonical_hash": "58a5a01975d8314151241092c553da956f16a473ed6c0bc7d3b36458f1bd8d1f",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -66,10 +66,11 @@
       "DECISION-0052": 1,
       "DECISION-0053": 1,
       "DECISION-0054": 1,
-      "MAILBOX-ARCHIVE": 2,
+      "MAILBOX-ARCHIVE": 4,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
       "MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139": 1,
+      "MSG-20260621-Arquitecto-to-Operador-RESP-RECONCILIA-ZEUS": 1,
       "PROJECT_STATE": 1,
       "REQ-444E0DE5": 3,
       "REQ-B65E7802": 3,
@@ -98,7 +99,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 235,
+    "events_applied": 238,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -289,6 +290,9 @@
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
+      "front:mailbox-archive:30FE8242": 908,
+      "front:mailbox-archive:30FE8242:claim-acquire": 907,
+      "front:mailbox-archive:30FE8242:claim-release": 909,
       "front:mailbox-archive:A6AE1D68": 905,
       "front:mailbox-archive:A6AE1D68:claim-acquire": 904,
       "front:mailbox-archive:A6AE1D68:claim-release": 906,
@@ -340,5 +344,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 906
+  "up_to_seq": 909
 }
