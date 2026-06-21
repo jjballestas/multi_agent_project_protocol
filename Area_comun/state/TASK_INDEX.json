@@ -1510,8 +1510,23 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): jerarquia tipografica Mailbox/Backlog (AC34, SPEC-0086 ext7)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0146-codex-front-kanban-collapse.md",
+            "id": "TASK-0146",
+            "linked_decisions": [
+                "DECISION-0049"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (UX): kanban colapsar columnas vacias + mostrar done (AC35, SPEC-0086 ext7)",
             "type": "product"
         }
     ],

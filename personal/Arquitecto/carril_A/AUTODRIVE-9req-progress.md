@@ -13,7 +13,7 @@
 - job_id: b5085d65 (every 5 min, session-only, auto-expira 7 dias; el previo 276658d4 se detuvo a las 7 rondas y se relanzo). Stand-down = CronDelete b5085d65 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 2   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
+- rounds_without_codex_response: 0   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
 
 ## Orden y estado
 | # | REQ | AC / DECISION | TASK | estado |
@@ -23,8 +23,8 @@
 | 3 | REQ-4120B017 (tooltips badges)           | AC31            | TASK-0142 | DONE (checker verde; Zeus cb4c0b1; npm 34/34) |
 | 4 | REQ-3E31293F (tooltips RF-N/acronimos)   | AC32            | TASK-0143 | DONE (checker verde; Zeus 8e41461; npm 35/35) |
 | 5 | REQ-D2C6579F (Mermaid render Help)       | AC33            | TASK-0144 | DONE (checker verde; Zeus 4ee322b; npm 36/36) |
-| 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | TASK-0145 | PROMOVIDO ready, GO emitido (esperando in_review) |
-| 7 | REQ-B97838C6 (kanban colapsar/done)      | AC35            | -         | pendiente |
+| 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | TASK-0145 | DONE (checker verde; Zeus 5f53224; npm 37/37) |
+| 7 | REQ-B97838C6 (kanban colapsar/done)      | AC35            | TASK-0146 | PROMOVIDO ready, GO emitido (esperando in_review) |
 | 8 | REQ-9AF54A75 (filtros Ledger)            | AC36            | -         | pendiente |
 | 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | - | pendiente (LAST; OFF/gated; Analista al cierre). PRE-AUTH del operador REGISTRADA: al cerrar con Analista OK dejar ingestion RUNTIME-READY (versionado OFF, env) SIN otro GO; si Analista pide cambios, NO aplica |
 
