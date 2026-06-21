@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0148 in_review: file ingestion OFF-by-default entregada en Zeus commit 0eaf602; tests PASS 41/41; healthz OK; requiere Analista antes de cierre."

@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0148 RE-GO CRLF corregido: Zeus commit 2f760a6 agrega .gitattributes + regex Mermaid CRLF-tolerante; npm test PASS 41/41 en clon limpio; ingestion sin cambios."

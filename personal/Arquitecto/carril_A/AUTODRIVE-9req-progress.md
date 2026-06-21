@@ -1,7 +1,7 @@
 # AUTODRIVE - progreso de los 9 requisitos PROPOSED de Zeus (operador ausente)
 
 > Tracker del drive autonomo. Cron cada ~5 min. Counter de rondas-sin-respuesta de Codex (parar a 7).
-> Stand-down al terminar los 9: ordenar a Codex parar su cron + parar el mio.
+> COMPLETADO 9/9 -> STAND-DOWN ejecutado. (orig) Stand-down al terminar los 9: ordenar a Codex parar su cron + parar el mio.
 
 ## Reglas (operador)
 - Monitoreo cada ~5 min para coordinar con Codex.
@@ -26,7 +26,7 @@
 | 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | TASK-0145 | DONE (checker verde; Zeus 5f53224; npm 37/37) |
 | 7 | REQ-B97838C6 (kanban colapsar/done)      | AC35            | TASK-0146 | DONE (checker verde; Zeus 90ea26b; npm 38/38) |
 | 8 | REQ-9AF54A75 (filtros Ledger)            | AC36            | TASK-0147 | DONE (checker verde; Zeus 7daf70e; npm 39/39) |
-| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | TASK-0148 | in_review. Analista: INGESTION OK (7/7) pero MARCA ROJO clon-limpio (mermaid CRLF, Zeus sin .gitattributes) -> RE-GO fix a Codex (.gitattributes eol=lf + test CRLF-tolerante, 41/41 clon limpio). Pre-auth NO aplica hasta verde determinista. PRE-AUTH del operador REGISTRADA: al cerrar con Analista OK dejar ingestion RUNTIME-READY (versionado OFF, env) SIN otro GO; si Analista pide cambios, NO aplica |
+| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | TASK-0148 | DONE (Analista OK ingestion 7/7 + fix CRLF .gitattributes; npm 41/41 CLON LIMPIO; runtime-ready versionado OFF) |
 
 ## Drafts canonicos
 - PLAN-9req-zeus-orden.md ; DRAFT-SPEC-0086-ext7-ux-batch.md (AC29-AC36) ; DRAFT-DECISION-0055-file-ingestion.md ;

@@ -89,12 +89,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0148",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055"
         }
     ],
     "next_actions": [

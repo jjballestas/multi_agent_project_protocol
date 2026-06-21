@@ -2,7 +2,7 @@
 task_id: TASK-0148
 title: "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - allowlist tipo/tamano + nombre saneado + contenido inerte + PII/ASCII + idempotente; anti-abuso (AC37/AC38, DECISION-0055)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

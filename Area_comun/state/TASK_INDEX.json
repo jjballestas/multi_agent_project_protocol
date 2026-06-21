@@ -1572,7 +1572,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055",
             "type": "product"
         }
