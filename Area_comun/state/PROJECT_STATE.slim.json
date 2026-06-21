@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-31100EAF",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "carga de requerimiento por archivo"
+        },
+        {
             "id": "REQ-444E0DE5",
             "owner": "Operador",
             "status": "proposed",

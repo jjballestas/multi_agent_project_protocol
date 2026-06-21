@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "Aceptado cuando, desde el Intake de la consola, el operador puede adjuntar un archivoy su contenido queda relevado como requerimiento gobernado que aterriza en canonicocon id y seq reales (sin preview-as-green, mismo camino que el intake actual).Condiciones:(1) solo el execute gobernado escribe;(2) ingestion acotada: allowlist de tipo y limite de tamano, nombre de archivo saneado (sin path traversal), contenido nunca ejecutado;(3) PII structural guard y ASCII-only aplicados al texto extraido del archivo;(4) idempotente: re-subir el mismo archivo no duplica;(5) si abre una superficie de ingreso nueva, nace OFF/gateada y reversible por flag.Honestidad: exito solo con el requerimiento realmente escrito.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-31100eaf-requirement-seed.md",
+            "id": "REQ-31100EAF",
+            "narrative": "Como operador requiero que se habilite poder cargar archivos para usarlos comorequerimientos, de modo que pueda adjuntar un archivo en el Intake y su contenidoalimente un requerimiento gobernado sin tener que transcribirlo a mano.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "carga de requerimiento por archivo",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un EXECUTE exitoso la app commitea SOLO los archivos que escribio submit_intent (seed +ledger/state) con mensaje claro y pushea al remote configurado, como parte de la transaccion.Resultado atomico: \"enviado + aterrizado en canonico (HEAD, seq)\". Si el push falla -> error, NOverde (AC11). NO commitea cambios arbitrarios del working tree (add acotado; prueba negativa: unsucio ajeno no entra). Nueva superficie de transporte: el Arquitecto evalua si requiere DECISION.",
             "author": "Operador",
             "endorsement": "none",

@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-31100EAF",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "carga de requerimiento por archivo"
+        },
+        {
             "id": "REQ-444E0DE5",
             "owner": "Operador",
             "phase": "P2",
