@@ -4,7 +4,7 @@ task_id: TASK-0149
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CERRADO el defecto del Intake REQ-643B160A (fantasma) -> done via TASK-0149 (AC39). El EXECUTE ahora rechaza server-side narrativa/aceptacion vacias o == placeholder (sin preview-as-green) y exige proyecto destino EXPLICITO (no default a Zeus-protocol); el TASK_INDEX no crece en los rechazos (no se crea fantasma). Zeus 03991cd; npm 41/41 EN CLON LIMPIO; validate con/sin secretos exit 0; #4 byte-identica; drift 0. Cola VACIA."
