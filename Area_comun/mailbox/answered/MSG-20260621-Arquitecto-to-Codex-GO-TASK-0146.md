@@ -4,7 +4,7 @@ task_id: TASK-0146
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0146 (ready, maker=Codex): UX kanban del Backlog - columnas con count=0 compactas (solo cabecera) + columna done MUESTRA su contenido (lista o resumen paginado, no solo el numero) + ancho adaptado. Read-only. #7 de la cola. AC35 SPEC-0086 ext7. Codigo en Zeus; yo checker."

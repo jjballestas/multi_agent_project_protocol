@@ -2,7 +2,7 @@
 task_id: TASK-0146
 title: "Proyecto-front (UX): kanban del Backlog - colapsar columnas vacias (count=0) y mostrar contenido de done (AC35, SPEC-0086 ext7)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

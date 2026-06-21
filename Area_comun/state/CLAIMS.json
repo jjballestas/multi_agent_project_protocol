@@ -3374,6 +3374,32 @@
             "updated_at": "2026-06-21T21:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Codex-TASK-0146",
+            "expires_at": "2026-06-22T01:40:00Z",
+            "notes": "TASK-0146 UX kanban colapsar vacias y mostrar done; read-only front changes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0146",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0146",
+                "Area_comun/tasks/TASK-0146-codex-front-kanban-collapse.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0146-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0146.md",
+                "Area_comun/mailbox/answered/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0146.md",
+                "Area_comun/mailbox/open/MSG-20260621-Codex-to-Arquitecto-TASK-0146-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-21T21:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0146",
+            "updated_at": "2026-06-21T21:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",

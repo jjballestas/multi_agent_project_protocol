@@ -87,7 +87,7 @@
         {
             "id": "TASK-0146",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): kanban colapsar columnas vacias + mostrar done (AC35, SPEC-0086 ext7)"
         }
     ],
