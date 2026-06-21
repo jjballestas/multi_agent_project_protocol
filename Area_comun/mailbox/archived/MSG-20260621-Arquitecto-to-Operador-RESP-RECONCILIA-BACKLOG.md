@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Backlog reconciliado por el camino gobernado (task_upsert, orchestrator): los 4 requisitos entregados pasan PROPOSED->DONE con delivered_by a su task. REQ-DCC3BC1A->TASK-0135, REQ-FB27AF72->TASK-0137, REQ-B65E7802->TASK-0138, REQ-444E0DE5->TASK-0139. REQ-FB27AF72 NO se re-fila: su trabajo (vista Help) ya esta entregado en TASK-0137; el seed corrupto (titulo nova.budget, narrativa duplicada) es artefacto historico del bug de campos-stale que arreglo TASK-0135. validate exit 0, drift 0."

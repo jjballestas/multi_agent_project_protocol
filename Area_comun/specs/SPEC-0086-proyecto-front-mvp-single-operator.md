@@ -230,6 +230,13 @@ producto/dominio en el core neutral.
   almacena credenciales (git las resuelve via el credential helper del entorno); el commit+push NO emite eventos
   ni muta el ledger (solo persiste en git lo que submit_intent escribio); **#4 byte-identica** (config/genesis/keys
   sin cambio; se asierta antes/despues). Carry AC17 (no es un 2o escritor del ledger).
+- **AC29 - Refetch fresco al navegar [comportamiento PERMANENTE; REQ-C1976857].** Al activar un nav-item, la vista
+  hace **fetch fresco** al server y actualiza su contenido sin requerir F5: Ledger seq, conteo del Backlog, Mailbox
+  y la barra de integridad reflejan el canonico ACTUAL. Incluye **boton de recarga manual** por seccion y
+  **refresco por intervalo** configurable (opt-in). READ-ONLY (solo GETs de observe; no toca submit_intent, carry
+  AC17). Honestidad (AC11): si el fetch falla -> estado de error, no datos stale pintados como frescos. Test de
+  comportamiento: navegar a una vista dispara el fetch (mock) y re-renderiza con el dato nuevo; el intervalo
+  configurable se respeta; sin intervalo, no hay polling. Carry AC12 (routing) / AC13 (design). #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

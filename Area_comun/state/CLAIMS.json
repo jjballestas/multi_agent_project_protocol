@@ -2851,6 +2851,26 @@
             "updated_at": "2026-06-21T03:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Arquitecto-promote-0140",
+            "expires_at": "2026-06-21T10:00:00Z",
+            "notes": "Promote TASK-0140 (UX refetch al navegar, REQ-C1976857) + GO Codex; AC29 a SPEC-0086 ext7. #1 de 9. maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0140-codex-front-refetch-nav.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0140.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-21T06:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0140",
+            "updated_at": "2026-06-21T06:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260621-Arquitecto-reconcile-backlog",
             "expires_at": "2026-06-21T09:00:00Z",
             "notes": "Reconcilia backlog: 4 requirements entregados (REQ-444E0DE5/B65E7802/DCC3BC1A/FB27AF72) proposed->done, linkeados a su task entregadora. Camino gobernado task_upsert (orchestrator).",

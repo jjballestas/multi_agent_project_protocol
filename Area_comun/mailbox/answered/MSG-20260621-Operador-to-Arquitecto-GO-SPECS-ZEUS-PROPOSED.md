@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Autorar las SPECs (DECISION->SPEC con AC+test_plan, modelo SDD) de los 9 requisitos en PROPOSED del proyecto Zeus-protocol, listados abajo. Los quiero TODOS; tu propones el orden de ejecucion. Para REQ-31100EAF (carga por archivo) planifica que es superficie de ingestion de archivos -> probable pasada del Analista (ingestion/egress) al cierre, y nace OFF/gateada si abre superficie nueva. Reporta el plan/orden y los drafts en canonico por el camino gobernado."
 question: "Autorizo que autores las SPECs de los 9 requisitos PROPOSED de Zeus-protocol (los quiero todos). Procedes y me propones el orden de ejecucion?"

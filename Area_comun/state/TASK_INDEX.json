@@ -1279,6 +1279,21 @@
             "status": "done",
             "title": "Auto commit+push gobernado del intake (RF-14): commit acotado a outputs de submit_intent + push sin force al remote pre-configurado; off-by-default; anti-commit-arbitrario y anti-egress; #4 byte-identica (AC27/AC28, SPEC-0086 ext6, DECISION-0054)",
             "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0140-codex-front-refetch-nav.md",
+            "id": "TASK-0140",
+            "linked_decisions": [
+                "DECISION-0049"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

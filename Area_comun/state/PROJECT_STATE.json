@@ -323,6 +323,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Auto commit+push gobernado del intake (RF-14): commit acotado a outputs de submit_intent + push sin force al remote pre-configurado; off-by-default; anti-commit-arbitrario y anti-egress; #4 byte-identica (AC27/AC28, SPEC-0086 ext6, DECISION-0054)"
+        },
+        {
+            "id": "TASK-0140",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)"
         }
     ],
     "agents": {

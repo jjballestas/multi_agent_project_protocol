@@ -59,6 +59,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0140",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)"
         }
     ],
     "next_actions": [
