@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-28118FC3",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Jerarquia tipografica en vistas Mailbox y Backlog"
+        },
+        {
             "id": "REQ-31100EAF",
             "owner": "Operador",
             "status": "proposed",

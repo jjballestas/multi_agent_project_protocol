@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-28118FC3",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Jerarquia tipografica en vistas Mailbox y Backlog"
+        },
+        {
             "id": "REQ-31100EAF",
             "owner": "Operador",
             "phase": "P2",

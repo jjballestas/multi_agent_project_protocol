@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "En tarjetas del Mailbox: el asunto del mensaje debe ser prominente (mayor tamano o peso), el identificador MSG-... debe aparecer en texto secundario (mas pequeno, menor contraste). En tarjetas del Backlog: el titulo de la tarea es lo primero, el REQ-ID en formato secundario debajo.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-28118fc3-requirement-seed.md",
+            "id": "REQ-28118FC3",
+            "narrative": "Como operador quiero que la jerarquia visual en Mailbox y Backlog priorice el asunto/titulo sobre el identificador tecnico (MSG-..., REQ-...) para procesar la informacion mas rapido. Actualmente el ID tecnico tiene el mismo peso visual que el cuerpo del mensaje.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Jerarquia tipografica en vistas Mailbox y Backlog",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Aceptado cuando, desde el Intake de la consola, el operador puede adjuntar un archivoy su contenido queda relevado como requerimiento gobernado que aterriza en canonicocon id y seq reales (sin preview-as-green, mismo camino que el intake actual).Condiciones:(1) solo el execute gobernado escribe;(2) ingestion acotada: allowlist de tipo y limite de tamano, nombre de archivo saneado (sin path traversal), contenido nunca ejecutado;(3) PII structural guard y ASCII-only aplicados al texto extraido del archivo;(4) idempotente: re-subir el mismo archivo no duplica;(5) si abre una superficie de ingreso nueva, nace OFF/gateada y reversible por flag.Honestidad: exito solo con el requerimiento realmente escrito.",
             "author": "Operador",
             "endorsement": "none",
