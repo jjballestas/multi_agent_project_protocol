@@ -269,6 +269,12 @@ producto/dominio en el core neutral.
   (lista o resumen paginado, no solo el numero). El ancho se adapta al contenido real. READ-ONLY. Test de
   comportamiento: con una columna en 0 -> modo compacto; done con N tareas -> renderiza/pagina; no queda done con
   count pero sin lista. Carry AC11/AC12/AC13/AC17; #4 byte-identica.
+- **AC36 - Filtros + paginacion del Ledger #4 [comportamiento PERMANENTE; REQ-9AF54A75].** La cabecera del Ledger
+  ofrece filtro por **actor** y por **tipo de evento**; al seleccionar, la lista se reduce a los que coinciden;
+  **paginacion/carga progresiva** para no renderizar 900+ eventos a la vez. READ-ONLY sobre el ledger atestado; el
+  texto libre sigue REDACTADO (no afloja PII). Test de comportamiento: filtrar por actor=Codex / tipo=intent.applied
+  reduce la lista; la paginacion limita el render; sin filtro, pagina por defecto. Carry AC11/AC12/AC13/AC17;
+  #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

@@ -4,7 +4,7 @@ task_id: TASK-0146
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0146 in_review: kanban Backlog compacta columnas vacias y muestra done en Zeus commit 90ea26b; tests PASS 38/38; healthz OK."

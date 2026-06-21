@@ -114,12 +114,12 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
-            "id": "TASK-0146",
+            "id": "TASK-0147",
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
-            "title": "Proyecto-front (UX): kanban colapsar columnas vacias + mostrar done (AC35, SPEC-0086 ext7)"
+            "status": "ready",
+            "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)"
         }
     ],
     "view": "task_index.slim"

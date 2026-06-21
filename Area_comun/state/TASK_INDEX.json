@@ -1525,8 +1525,23 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): kanban colapsar columnas vacias + mostrar done (AC35, SPEC-0086 ext7)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0147-codex-front-ledger-filters.md",
+            "id": "TASK-0147",
+            "linked_decisions": [
+                "DECISION-0049"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)",
             "type": "product"
         }
     ],

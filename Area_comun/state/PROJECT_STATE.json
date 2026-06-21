@@ -399,8 +399,14 @@
         {
             "id": "TASK-0146",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): kanban colapsar columnas vacias + mostrar done (AC35, SPEC-0086 ext7)"
+        },
+        {
+            "id": "TASK-0147",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)"
         }
     ],
     "agents": {

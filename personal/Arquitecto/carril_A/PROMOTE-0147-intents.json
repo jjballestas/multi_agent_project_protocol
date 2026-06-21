@@ -1,0 +1,15 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-promote-0147", "task_id": "TASK-0147", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0147-codex-front-ledger-filters.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0147.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T11:05:00Z","updated_at": "2026-06-21T11:05:00Z","expires_at": "2026-06-21T15:05:00Z","status": "active",
+    "notes": "Promote TASK-0147 (UX filtros Ledger, REQ-9AF54A75) + GO Codex; AC36 a SPEC-0086 ext7. #8 (ultimo UX) de 9." },
+    "idempotency_key": "arquitecto:promote-0147:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0147",
+    "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "normal","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0049"],"created_at": "2026-06-21","file": "Area_comun/tasks/TASK-0147-codex-front-ledger-filters.md" },
+    "idempotency_key": "arquitecto:promote-0147:task-upsert-ready" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-promote-0147", "idempotency_key": "arquitecto:promote-0147:claim-release" } }
+] }
