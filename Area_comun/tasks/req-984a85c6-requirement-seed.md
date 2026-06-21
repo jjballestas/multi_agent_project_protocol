@@ -2,7 +2,7 @@
 task_id: "REQ-984A85C6"
 title: "Conciliar saldos por cuenta al cierre mensual"
 type: "requirement"
-status: proposed
+status: cancelled
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -280,7 +280,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
             "type": "requirement"
         },
@@ -328,7 +328,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "Conciliar saldos por cuenta al cierre mensual",
             "type": "requirement"
         },

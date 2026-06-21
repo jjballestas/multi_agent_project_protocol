@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Prunear (gobernado) 2 entradas de PROPOSED de Zeus-protocol que NO son requerimientos validos: (1) REQ-984A85C6 'Conciliar saldos por cuenta al cierre mensual' = fantasma de un bug del front (placeholder/ejemplo persistido como requerimiento; narrativa e intencion de aceptacion vacias; yo no lo file; no hay trabajo para NOVA). (2) duplicado del fix de estilo del boton: conservar REQ-40EC863F (mas completo) y prunear REQ-829CBFCE. Root cause lo filo aparte como defecto por el Intake."
 question: "Pruneas REQ-984A85C6 (fantasma) y REQ-829CBFCE (duplicado), dejando solo REQ-40EC863F del fix del boton?"

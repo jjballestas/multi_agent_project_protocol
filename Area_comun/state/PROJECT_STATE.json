@@ -57,7 +57,7 @@
         {
             "id": "REQ-829CBFCE",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
         },
         {
@@ -69,7 +69,7 @@
         {
             "id": "REQ-984A85C6",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "Conciliar saldos por cuenta al cierre mensual"
         },
         {

@@ -26,7 +26,7 @@
 | 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | TASK-0145 | PROMOVIDO ready, GO emitido (esperando in_review) |
 | 7 | REQ-B97838C6 (kanban colapsar/done)      | AC35            | -         | pendiente |
 | 8 | REQ-9AF54A75 (filtros Ledger)            | AC36            | -         | pendiente |
-| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | - | pendiente (LAST; OFF/gated; Analista al cierre; live=GO operador) |
+| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | - | pendiente (LAST; OFF/gated; Analista al cierre). PRE-AUTH del operador REGISTRADA: al cerrar con Analista OK dejar ingestion RUNTIME-READY (versionado OFF, env) SIN otro GO; si Analista pide cambios, NO aplica |
 
 ## Drafts canonicos
 - PLAN-9req-zeus-orden.md ; DRAFT-SPEC-0086-ext7-ux-batch.md (AC29-AC36) ; DRAFT-DECISION-0055-file-ingestion.md ;

@@ -49,22 +49,10 @@
             "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
         },
         {
-            "id": "REQ-829CBFCE",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
-        },
-        {
             "id": "REQ-86154148",
             "owner": "Operador",
             "status": "proposed",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
-        },
-        {
-            "id": "REQ-984A85C6",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "Conciliar saldos por cuenta al cierre mensual"
         },
         {
             "id": "REQ-9AF54A75",

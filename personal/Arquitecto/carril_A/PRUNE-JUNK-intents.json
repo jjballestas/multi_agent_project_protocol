@@ -1,0 +1,11 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-prune-junk", "task_id": "PRUNE-JUNK", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/req-984a85c6-requirement-seed.md","Area_comun/tasks/req-829cbfce-requirement-seed.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T10:00:00Z","updated_at": "2026-06-21T10:00:00Z","expires_at": "2026-06-21T14:00:00Z","status": "active",
+    "notes": "Prune gobernado (proposed->cancelled) de 2 entradas junk del intake por orden del operador: REQ-984A85C6 (fantasma, narrativa/acceptance vacias) + REQ-829CBFCE (duplicado de REQ-40EC863F). Conservar REQ-40EC863F." },
+    "idempotency_key": "arquitecto:prune-junk:claim-acquire" } },
+  { "task_status": { "task_id": "REQ-984A85C6", "from": "proposed", "to": "cancelled", "idempotency_key": "arquitecto:prune-junk:cancel-984a85c6" } },
+  { "task_status": { "task_id": "REQ-829CBFCE", "from": "proposed", "to": "cancelled", "idempotency_key": "arquitecto:prune-junk:cancel-829cbfce" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-prune-junk", "idempotency_key": "arquitecto:prune-junk:claim-release" } }
+] }

@@ -3061,6 +3061,25 @@
             "updated_at": "2026-06-21T09:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Arquitecto-prune-junk",
+            "expires_at": "2026-06-21T14:00:00Z",
+            "notes": "Prune gobernado (proposed->cancelled) de 2 entradas junk del intake por orden del operador: REQ-984A85C6 (fantasma, narrativa/acceptance vacias) + REQ-829CBFCE (duplicado de REQ-40EC863F). Conservar REQ-40EC863F.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/req-984a85c6-requirement-seed.md",
+                "Area_comun/tasks/req-829cbfce-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-21T10:00:00Z",
+            "status": "released",
+            "task_id": "PRUNE-JUNK",
+            "updated_at": "2026-06-21T10:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260621-Arquitecto-reconcile-backlog",
             "expires_at": "2026-06-21T09:00:00Z",
             "notes": "Reconcilia backlog: 4 requirements entregados (REQ-444E0DE5/B65E7802/DCC3BC1A/FB27AF72) proposed->done, linkeados a su task entregadora. Camino gobernado task_upsert (orchestrator).",

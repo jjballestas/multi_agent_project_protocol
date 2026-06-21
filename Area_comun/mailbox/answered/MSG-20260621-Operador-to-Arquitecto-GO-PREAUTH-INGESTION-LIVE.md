@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Registrar mi PRE-AUTORIZACION para encender en vivo la carga por archivo (REQ-31100EAF/DECISION-0055), aplicable SOLO cuando: (1) la feature este entregada y cerrada, (2) con pasada del Analista (ingestion/egress) OK, (3) activacion por RUNTIME (versionado queda OFF-by-default, patron commit-push). No enciendas nada hasta cumplir las 3. Si el Analista marca cualquier cambio, la pre-autorizacion NO aplica hasta resolverlo."
 question: "Registras esta pre-autorizacion condicionada para que, al cerrar REQ-31100EAF con Analista OK, puedas dejar la ingestion lista para runtime sin esperar otro GO mio? (versionado OFF; encendido por entorno)"

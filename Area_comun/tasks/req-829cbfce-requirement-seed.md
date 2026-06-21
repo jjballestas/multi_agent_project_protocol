@@ -2,7 +2,7 @@
 task_id: "REQ-829CBFCE"
 title: "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
 type: "requirement"
-status: proposed
+status: cancelled
 owner: "Operador"
 phase: "P2"
 priority: "normal"
