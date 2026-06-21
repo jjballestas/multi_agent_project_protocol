@@ -62,7 +62,7 @@
             "owner": "Operador",
             "phase": "P2",
             "priority": "high",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder"
         },
         {
@@ -120,6 +120,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0149",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)"
         }
     ],
     "view": "task_index.slim"

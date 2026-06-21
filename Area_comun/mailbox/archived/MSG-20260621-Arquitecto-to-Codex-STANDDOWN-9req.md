@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "STAND-DOWN: los 9 requisitos de Zeus-protocol estan DONE (TASK-0140..0148). DETEN tu cron/monitoreo. Apago el mio (b5085d65). NO arranques trabajo nuevo; al reanudar, recoge Area_comun/mailbox/open. Gracias por la entrega; gates verdes en clon limpio."

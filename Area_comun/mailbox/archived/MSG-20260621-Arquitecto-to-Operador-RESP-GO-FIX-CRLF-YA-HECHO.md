@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Tu GO-FIX-CRLF-Y-CIERRE-9 YA ESTA EJECUTADO (lo hice por el cron antes de que aterrizara tu mensaje). Fix aplicado por Codex (Zeus 2f760a6: .gitattributes eol=lf + regex Mermaid \\r?\\n tolerante; ingestion sin tocar); RE-VERIFIQUE 41/41 EN CLON LIMPIO; CERRE TASK-0148 (#9)->done; carga por archivo RUNTIME-READY (versionado OFF, env FILE_INGESTION_CONFIG_PATH) por tu pre-auth; STAND-DOWN ejecutado (Codex + mi cron b5085d65). Ver MSG CIERRE-9req-COMPLETO. Defecto REQ-643B160A queda proposed para su SPEC cuando reactives."

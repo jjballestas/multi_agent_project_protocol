@@ -291,6 +291,17 @@ producto/dominio en el core neutral.
   como TEXTO INERTE, nunca ejecutado/renderizado; el cliente NO inyecta actor ni rutas de escritura (server-side,
   hereda AC19); sin egress; **#4 byte-identica** (config/genesis/keys sin cambio). PII: patrones tipo NIT/razon
   social/SQL en el archivo -> el plano publicable no expone el literal. Golden/test del lado server.
+- **AC39 - Intake honesto: no requerimientos fantasma desde placeholder/vacio + proyecto explicito [comportamiento PERMANENTE; REQ-643B160A].**
+  El EXECUTE del intake (RF-14) NUNCA crea un requerimiento a partir de texto placeholder/ejemplo o campos vacios:
+  (a) **rechaza** (sin preview-as-green) si la **narrativa** o la **intencion de aceptacion** estan VACIAS o son
+  IGUALES al placeholder/ejemplo conocido (validacion server-side, no solo client-side); (b) el **proyecto destino
+  debe elegirse explicitamente** -> NO defaultea a `Zeus-protocol` (ni a ningun proyecto) cuando el operador no
+  eligio; un EXECUTE sin proyecto explicito se rechaza. Honestidad (hereda AC11): el rechazo es un error real, no
+  un verde; solo un requerimiento con contenido REAL aterriza (id+seq). Remedia la anomalia del fantasma
+  REQ-984A85C6 (ya cancelado). Test de COMPORTAMIENTO permanente: narrativa/aceptacion vacias o == placeholder ->
+  RECHAZADO (no se crea REQ, no verde); proyecto no elegido -> RECHAZADO; contenido real + proyecto explicito ->
+  requirement real id+seq. Carry AC11/AC14/AC22; #4 byte-identica. Read-only sobre la superficie de escritura
+  (tightening de la validacion del execute ya gobernado; no abre superficie nueva).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

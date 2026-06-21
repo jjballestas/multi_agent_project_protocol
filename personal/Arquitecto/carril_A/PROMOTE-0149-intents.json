@@ -1,0 +1,22 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-promote-0149", "task_id": "TASK-0149", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0149-codex-intake-no-phantom.md","Area_comun/tasks/req-643b160a-requirement-seed.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0149.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T14:00:00Z","updated_at": "2026-06-21T14:00:00Z","expires_at": "2026-06-21T18:00:00Z","status": "active",
+    "notes": "Promote TASK-0149 (Intake honesto no-fantasma + proyecto explicito, REQ-643B160A) + GO Codex; AC39 a SPEC-0086 ext9; ademas avanza REQ-643B160A proposed->in_progress (su trabajo). maker=Codex/checker=Arquitecto." },
+    "idempotency_key": "arquitecto:promote-0149:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0149",
+    "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "high","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0051","DECISION-0052"],"created_at": "2026-06-21","file": "Area_comun/tasks/TASK-0149-codex-intake-no-phantom.md" },
+    "idempotency_key": "arquitecto:promote-0149:task-upsert-ready" } },
+  { "task_upsert": { "task": {
+    "id": "REQ-643B160A", "type": "requirement", "status": "in_progress", "owner": "Operador", "phase": "P2",
+    "priority": "high", "project": "Zeus-protocol", "author": "Operador", "relayed_by": "Arquitecto",
+    "endorsement": "none", "sdd_role": "seed_only_architect_authors_spec",
+    "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder",
+    "delivered_by": "TASK-0149", "created_at": "2026-06-21", "file": "Area_comun/tasks/req-643b160a-requirement-seed.md" },
+    "idempotency_key": "arquitecto:promote-0149:req-inprogress" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-promote-0149", "idempotency_key": "arquitecto:promote-0149:claim-release" } }
+] }

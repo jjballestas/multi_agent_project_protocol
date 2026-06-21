@@ -4,7 +4,7 @@ task_id: none
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "LOS 9 REQUISITOS DE ZEUS-PROTOCOL COMPLETOS (TASK-0140..0148 done). #9 carga por archivo cerrado tras Analista (ingestion OK 7/7) + fix CRLF (.gitattributes eol=lf, npm 41/41 EN CLON LIMPIO determinista). Ingestion RUNTIME-READY: versionado OFF, activacion por entorno FILE_INGESTION_CONFIG_PATH -> file-ingestion.runtime.json (enabled:true), gitignored; pre-auth cumplida (no requiere otro GO). STAND-DOWN: ordene a Codex parar su cron y apague el mio (b5085d65). Defecto REQ-643B160A (fantasma) queda proposed encolado para SPEC."

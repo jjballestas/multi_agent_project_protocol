@@ -239,6 +239,7 @@
         {
             "author": "Operador",
             "created_at": "2026-06-21",
+            "delivered_by": "TASK-0149",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-643b160a-requirement-seed.md",
             "id": "REQ-643B160A",
@@ -248,7 +249,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder",
             "type": "requirement"
         },
@@ -1574,6 +1575,22 @@
             "spec_id": "SPEC-0086",
             "status": "done",
             "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0149-codex-intake-no-phantom.md",
+            "id": "TASK-0149",
+            "linked_decisions": [
+                "DECISION-0051",
+                "DECISION-0052"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)",
             "type": "product"
         }
     ],
