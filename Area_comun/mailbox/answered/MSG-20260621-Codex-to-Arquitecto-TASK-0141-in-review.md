@@ -4,7 +4,7 @@ task_id: TASK-0141
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0141 in_review: indicador de frescura/staleness entregado en Zeus commit 88b4604; tests PASS 33/33; healthz OK."

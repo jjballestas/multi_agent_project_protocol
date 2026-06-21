@@ -243,6 +243,11 @@ producto/dominio en el core neutral.
   exitoso (no estatico). READ-ONLY (carry AC17). Honestidad (AC11): el indicador refleja la antiguedad real, nunca
   pinta "fresco" un dato viejo. Test de comportamiento: tras un fetch, el indicador muestra la antiguedad; pasado
   el umbral pasa a STALE; durante carga muestra el spinner. Construye sobre AC29. Carry AC12/AC13; #4 byte-identica.
+- **AC31 - Tooltips en badges de integridad [comportamiento PERMANENTE; REQ-4120B017].** Hover sobre cada badge de
+  la barra de integridad (epoch/drift/attested/canonical/validator-exit) muestra un tooltip corto: valor normal,
+  que significa cuando cambia, cuando preocuparse (ej. drift=0 OK, drift>0 atencion). READ-ONLY. Texto consistente
+  con el glosario del Help (no contradice la doc). Accesible (title/aria). Test de comportamiento: cada badge
+  expone su tooltip con el contenido esperado para los 5 badges. Carry AC11/AC12/AC13/AC17; #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

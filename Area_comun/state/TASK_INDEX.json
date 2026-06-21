@@ -1306,8 +1306,23 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): indicador de frescura (actualizado hace Ns) + spinner + estado STALE (AC30, SPEC-0086 ext7)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0142-codex-front-badge-tooltips.md",
+            "id": "TASK-0142",
+            "linked_decisions": [
+                "DECISION-0049"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (UX): tooltips en los badges de la barra de integridad (AC31, SPEC-0086 ext7)",
             "type": "product"
         }
     ],

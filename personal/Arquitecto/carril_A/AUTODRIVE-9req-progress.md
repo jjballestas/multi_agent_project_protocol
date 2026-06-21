@@ -19,8 +19,8 @@
 | # | REQ | AC / DECISION | TASK | estado |
 |---|-----|---------------|------|--------|
 | 1 | REQ-C1976857 (refetch al navegar)        | AC29            | TASK-0140 | DONE (checker verde; Zeus 60fdb97; npm 31/31) |
-| 2 | REQ-547C6C54 (frescura/staleness)        | AC30            | TASK-0141 | PROMOVIDO ready, GO emitido (esperando in_review) |
-| 3 | REQ-4120B017 (tooltips badges)           | AC31            | -         | pendiente |
+| 2 | REQ-547C6C54 (frescura/staleness)        | AC30            | TASK-0141 | DONE (checker verde; Zeus 88b4604; npm 33/33) |
+| 3 | REQ-4120B017 (tooltips badges)           | AC31            | TASK-0142 | PROMOVIDO ready, GO emitido (esperando in_review) |
 | 4 | REQ-3E31293F (tooltips RF-N/acronimos)   | AC32            | -         | pendiente |
 | 5 | REQ-D2C6579F (Mermaid render Help)       | AC33            | -         | pendiente |
 | 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | -         | pendiente |

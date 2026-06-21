@@ -82,12 +82,12 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
-            "id": "TASK-0141",
+            "id": "TASK-0142",
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
-            "title": "Proyecto-front (UX): indicador de frescura (actualizado hace Ns) + spinner + estado STALE (AC30, SPEC-0086 ext7)"
+            "status": "ready",
+            "title": "Proyecto-front (UX): tooltips en los badges de la barra de integridad (AC31, SPEC-0086 ext7)"
         }
     ],
     "view": "task_index.slim"
