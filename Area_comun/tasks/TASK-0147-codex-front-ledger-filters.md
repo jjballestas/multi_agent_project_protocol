@@ -2,7 +2,7 @@
 task_id: TASK-0147
 title: "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo de evento + paginacion/carga progresiva (AC36, SPEC-0086 ext7)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0146 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0147 product commit.
 
 ## Latest Session Note
 
+- TASK-0147 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `7daf70e feat(front): filter ledger events`. The Ledger #4 view now exposes read-only actor/type filters,
+  paginates the timeline at 40 events by default, supports progressive "Show more", and keeps payload previews
+  redacted. The observe reader now sends the full ledger event list to the client while the DOM render remains
+  bounded by pagination. Evidence before commit: `node --check public/app.js tests/staticContract.test.js
+  src/server.js`, `npm test` PASS 39/39, healthz smoke OK. Handoff prepared for Arquitecto at
+  `Area_comun/handoffs/HANDOFF-TASK-0147-codex-to-arquitecto-1.md`.
 - TASK-0146 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `90ea26b feat(front): compact empty backlog lanes`. The Backlog kanban now builds its board from
   `tasks.byStatus` so `done` content is visible, marks empty lanes as compact header-only columns, adapts lane

@@ -118,7 +118,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)"
         }
     ],

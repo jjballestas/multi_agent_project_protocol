@@ -4,7 +4,7 @@ task_id: TASK-0147
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0147 (ready, maker=Codex): UX filtros del Ledger #4 por actor y por tipo de evento + paginacion/carga progresiva (no renderizar 900+); el texto libre sigue REDACTADO (no afloja PII). Read-only. #8 (ultimo UX) de la cola. AC36 SPEC-0086 ext7. Codigo en Zeus; yo checker."
