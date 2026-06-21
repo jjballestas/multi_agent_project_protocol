@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0148 (ready, maker=Codex): #9 ULTIMO - carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default). Server-side: allowlist tipo .md/.txt + limite tamano + nombre saneado (sin path traversal) + contenido INERTE (nunca ejecutado) + PII structural/ASCII + idempotente; alimenta el MISMO requirement-intake (solo execute escribe). Anti-abuso prueba negativa permanente. #4 byte-identica. Ratificado: DECISION-0055 + ext8 SPEC-0086 (AC37/AC38). Codigo en Zeus; yo checker + PASADA DEL ANALISTA antes de cerrar. NO encender vivo (OFF; pre-auth condicionada del operador, activacion runtime)."

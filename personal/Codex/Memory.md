@@ -1,9 +1,17 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0147 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0148 product commit.
 
 ## Latest Session Note
 
+- TASK-0148 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `0eaf602 feat(intake): gate file requirement ingestion`. The Intake now has an OFF-by-default file ingestion
+  config (`file-ingestion.config.json` with runtime/local overrides ignored), server-side bounded `.md/.txt`
+  validation, safe basename checks, inert active-content rejection, PII/ASCII redaction, idempotent relay into the
+  existing `requirement-intake` path, and permanent anti-abuse coverage. Evidence before commit: `node --check
+  public/app.js tests/staticContract.test.js src/server.js`, `npm test` PASS 41/41, healthz smoke OK with
+  `fileIngestion.enabled=false`. Handoff prepared for Arquitecto at
+  `Area_comun/handoffs/HANDOFF-TASK-0148-codex-to-arquitecto-1.md`.
 - TASK-0147 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `7daf70e feat(front): filter ledger events`. The Ledger #4 view now exposes read-only actor/type filters,
   paginates the timeline at 40 events by default, supports progressive "Show more", and keeps payload previews

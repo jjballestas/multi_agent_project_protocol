@@ -118,7 +118,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055"
         }
     ],
