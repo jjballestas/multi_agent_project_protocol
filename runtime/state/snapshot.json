@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b109b25097706f897fbeffde70ef03c1f3e85f0ff984780871d65367bd6dee68",
+  "canonical_hash": "1518f2ba3c4e73d9b15966b9dc2d8e30662661b7b3802e24b41520169b4132f4",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -87,6 +87,7 @@
       "MSG-20260621-Arquitecto-to-Operador-CLOSE-TASK-0139": 1,
       "MSG-20260621-Arquitecto-to-Operador-RESP-RECONCILIA-ZEUS": 1,
       "PROJECT_STATE": 1,
+      "REQ-0873A67C": 3,
       "REQ-28118FC3": 3,
       "REQ-31100EAF": 3,
       "REQ-3E31293F": 3,
@@ -133,7 +134,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 336,
+    "events_applied": 339,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -385,6 +386,9 @@
       "front:mailbox-archive:A6AE1D68": 905,
       "front:mailbox-archive:A6AE1D68:claim-acquire": 904,
       "front:mailbox-archive:A6AE1D68:claim-release": 906,
+      "front:requirement-intake:0873A67C": 1009,
+      "front:requirement-intake:0873A67C:claim-acquire": 1008,
+      "front:requirement-intake:0873A67C:claim-release": 1010,
       "front:requirement-intake:28118FC3": 923,
       "front:requirement-intake:28118FC3:claim-acquire": 922,
       "front:requirement-intake:28118FC3:claim-release": 924,
@@ -476,5 +480,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1007
+  "up_to_seq": 1010
 }

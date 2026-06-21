@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "Al pulsar el boton: titulo vacio, narrativa vacia, intencion de aceptacion vacia, proyecto destino en valor por defecto, checkbox PII desmarcado, wizard en paso 1, sin resultados de preview ni submit anteriores visibles.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-0873a67c-requirement-seed.md",
+            "id": "REQ-0873A67C",
+            "narrative": "Como operador quiero que al hacer click en el boton Nueva historia/requisito el formulario del Intake se limpie completamente (todos los campos vacios, checkbox desmarcado, wizard en paso 1) para poder iniciar un nuevo requisito desde cero sin datos del draft anterior.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Boton Nueva historia/requisito no resetea el formulario del Intake",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "En tarjetas del Mailbox: el asunto del mensaje debe ser prominente (mayor tamano o peso), el identificador MSG-... debe aparecer en texto secundario (mas pequeno, menor contraste). En tarjetas del Backlog: el titulo de la tarea es lo primero, el REQ-ID en formato secundario debajo.",
             "author": "Operador",
             "endorsement": "none",
