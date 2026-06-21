@@ -31,6 +31,12 @@
             "title": "higienizar mensajes leidos/procesados con un click desde el front"
         },
         {
+            "id": "REQ-B97838C6",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done"
+        },
+        {
             "id": "REQ-DCC3BC1A",
             "owner": "Operador",
             "status": "proposed",

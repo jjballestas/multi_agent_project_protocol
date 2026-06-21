@@ -164,6 +164,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Las columnas con count=0 deberian mostrarse en modo compacto (solo cabecera, sin espacio vacio). La columna done deberia mostrar las tareas completadas o al menos un resumen paginado. El ancho del kanban deberia adaptarse al contenido real.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-b97838c6-requirement-seed.md",
+            "id": "REQ-B97838C6",
+            "narrative": "Como operador quiero que el kanban del Backlog colapse o minimice las columnas que tienen 0 tareas (ready, in_progress, in_review) para reducir el ruido visual, y que la columna done muestre su contenido (actualmente done=40 pero no lista las tareas).",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un EXECUTE exitoso el wizard muestra un resultado inequivoco (enviado-atestado, id y seq) y elformulario se RESETEA (campos vacios, vuelve al paso 1, estado borrador) listo para una historianueva. No queda ambiguedad sobre si se completo; se evita el reenvio accidental. La idempotencia porid=hash ya protege contra el duplicado exacto, pero la UI debe dejarlo explicito.",
             "author": "Operador",
             "endorsement": "none",

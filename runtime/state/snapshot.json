@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "facd122791aa2633d822e1e80c4991792a0bd1ac60688fcf76ee66a02fce6248",
+  "canonical_hash": "54445298763d286b8f29a6516ed7b281815af0b28a1c3326959c47b55db4faf2",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -77,6 +77,7 @@
       "REQ-444E0DE5": 3,
       "REQ-9AF54A75": 3,
       "REQ-B65E7802": 3,
+      "REQ-B97838C6": 3,
       "REQ-DCC3BC1A": 3,
       "REQ-FB27AF72": 3,
       "TASK-0117": 3,
@@ -102,7 +103,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 247,
+    "events_applied": 250,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -314,6 +315,9 @@
       "front:requirement-intake:B65E7802": 844,
       "front:requirement-intake:B65E7802:claim-acquire": 843,
       "front:requirement-intake:B65E7802:claim-release": 845,
+      "front:requirement-intake:B97838C6": 920,
+      "front:requirement-intake:B97838C6:claim-acquire": 919,
+      "front:requirement-intake:B97838C6:claim-release": 921,
       "front:requirement-intake:DCC3BC1A": 841,
       "front:requirement-intake:DCC3BC1A:claim-acquire": 840,
       "front:requirement-intake:DCC3BC1A:claim-release": 842,
@@ -356,5 +360,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 918
+  "up_to_seq": 921
 }
