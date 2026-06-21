@@ -10,7 +10,7 @@
 - De a UNA tarea (anti-colision). Cada cierre: checker verde clon limpio + promover el siguiente del orden.
 
 ## Cron
-- job_id: 276658d4 (every 5 min, session-only, auto-expira 7 dias). Stand-down = CronDelete 276658d4 (o CronList).
+- job_id: b5085d65 (every 5 min, session-only, auto-expira 7 dias; el previo 276658d4 se detuvo a las 7 rondas y se relanzo). Stand-down = CronDelete b5085d65 (o CronList).
 
 ## Counter
 - rounds_without_codex_response: 0 (Codex reactivado; cron relanzado)   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
