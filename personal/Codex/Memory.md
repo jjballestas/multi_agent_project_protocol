@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0148 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0148 CRLF product fix.
 
 ## Latest Session Note
 
+- TASK-0148 CRLF determinism fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `2f760a6 test(front): make mermaid fixture CRLF stable`. The product repo now has `.gitattributes` enforcing
+  LF checkout for text/code files, and the Mermaid code-fence test accepts `\r?\n`, fixing the clean-clone
+  Windows red reported by Analista. No ingestion logic changed. Evidence: `node --check public/app.js
+  tests/staticContract.test.js src/server.js`, product `npm test` PASS 41/41, and clean-clone Zeus `npm test`
+  PASS 41/41. Handoff prepared at
+  `Area_comun/handoffs/HANDOFF-TASK-0148-CRLF-codex-to-arquitecto-1.md`.
 - TASK-0148 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `0eaf602 feat(intake): gate file requirement ingestion`. The Intake now has an OFF-by-default file ingestion
   config (`file-ingestion.config.json` with runtime/local overrides ignored), server-side bounded `.md/.txt`

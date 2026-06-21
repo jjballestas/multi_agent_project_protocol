@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "RE-GO TASK-0148 (sigue in_review; NO cerrada): fix CHICO ajeno a la ingestion marcado por el Analista. La suite es 40/41 en CLON LIMPIO (Windows) porque el test de mermaid falla por CRLF y Zeus no tiene .gitattributes. Fix: anadir .gitattributes (eol=lf / text=auto) a Zeus-protocol Y/O hacer la regex/asercion del test mermaid CRLF-tolerante; re-verificar npm test 41/41 en CLON LIMPIO determinista. La LOGICA de ingestion NO requiere rework (bounding/egress 7/7 OK)."

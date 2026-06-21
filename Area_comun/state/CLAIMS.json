@@ -3552,6 +3552,31 @@
             "updated_at": "2026-06-21T22:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260621-Codex-TASK-0148-CRLF",
+            "expires_at": "2026-06-22T03:05:00Z",
+            "notes": "TASK-0148 RE-GO CRLF deterministic clean-clone fix; no ingestion logic changes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0148",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0148",
+                "Area_comun/tasks/TASK-0148-codex-front-file-ingestion.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0148-CRLF-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-REGO-fix-CRLF-TASK-0148.md",
+                "Area_comun/mailbox/answered/MSG-20260621-Arquitecto-to-Codex-REGO-fix-CRLF-TASK-0148.md",
+                "Area_comun/mailbox/open/MSG-20260621-Codex-to-Arquitecto-TASK-0148-CRLF-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-protocol/.gitattributes",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-21T23:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0148",
+            "updated_at": "2026-06-21T23:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",
