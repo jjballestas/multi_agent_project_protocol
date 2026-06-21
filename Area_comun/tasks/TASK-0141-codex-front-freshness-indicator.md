@@ -2,7 +2,7 @@
 task_id: TASK-0141
 title: "Proyecto-front (UX): indicador de frescura ('actualizado hace Ns') + spinner de carga + estado STALE (AC30, SPEC-0086 ext7)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

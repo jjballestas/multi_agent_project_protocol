@@ -1306,7 +1306,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): indicador de frescura (actualizado hace Ns) + spinner + estado STALE (AC30, SPEC-0086 ext7)",
             "type": "product"
         }

@@ -1,9 +1,17 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0139 product commit.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0141 product commit.
 
 ## Latest Session Note
 
+- TASK-0141 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `88b4604 feat(front): show data freshness state`. The front now derives `actualizado hace Ns` from the
+  real timestamp of the last successful fetch, shows a subtle loading spinner through the status dot, and
+  marks the integrity note `STALE` after the configured freshness threshold. Fetch failures do not update
+  `lastRefreshAt`, preserving no-stale-as-fresh behavior. Evidence before commit:
+  `node --check public/app.js tests/staticContract.test.js src/server.js`, `npm test` PASS 33/33, healthz
+  smoke OK. Handoff prepared for Arquitecto at
+  `Area_comun/handoffs/HANDOFF-TASK-0141-codex-to-arquitecto-1.md`.
 - TASK-0140 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `60fdb97 feat(front): refresh data on navigation`. The front now fetches fresh observe/actions/help data and
   re-renders when navigating between views, exposes a read-only refresh button per panel, and has an opt-in

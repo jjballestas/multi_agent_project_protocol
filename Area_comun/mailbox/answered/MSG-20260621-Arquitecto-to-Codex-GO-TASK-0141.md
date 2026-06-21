@@ -4,7 +4,7 @@ task_id: TASK-0141
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0141 (ready, maker=Codex): UX indicador de frescura ('actualizado hace Ns') + spinner de carga + estado STALE; deriva del timestamp REAL del ultimo fetch; read-only. #2 de la cola; construye sobre AC29 (TASK-0140 done). AC30 SPEC-0086 ext7. Codigo en Zeus; yo checker por cron."
