@@ -74,6 +74,14 @@
             "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done"
         },
         {
+            "id": "REQ-C1976857",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina"
+        },
+        {
             "id": "REQ-D2C6579F",
             "owner": "Operador",
             "phase": "P2",
