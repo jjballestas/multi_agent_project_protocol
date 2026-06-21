@@ -1408,8 +1408,23 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): tooltips en codigos RF-N y acronimos en todas las vistas (AC32, SPEC-0086 ext7)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-21",
+            "file": "Area_comun/tasks/TASK-0144-codex-front-mermaid-help.md",
+            "id": "TASK-0144",
+            "linked_decisions": [
+                "DECISION-0049"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (UX): render de diagramas Mermaid en Help (SVG) sin dependencia de servidor (AC33, SPEC-0086 ext7)",
             "type": "product"
         }
     ],

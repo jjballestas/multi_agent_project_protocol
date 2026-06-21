@@ -4,7 +4,7 @@ task_id: TASK-0143
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0143 in_review: tooltips RF-N/acronimos entregados en Zeus commit 8e41461; tests PASS 35/35; healthz OK."

@@ -2,7 +2,7 @@
 task_id: TASK-0143
 title: "Proyecto-front (UX): tooltips en codigos RF-N y acronimos tecnicos (SDD/T0/HMAC/PII...) en todas las vistas, fuente unica = glosario del Help (AC32, SPEC-0086 ext7)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

@@ -1,0 +1,15 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-promote-0144", "task_id": "TASK-0144", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0144-codex-front-mermaid-help.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0144.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T09:05:00Z","updated_at": "2026-06-21T09:05:00Z","expires_at": "2026-06-21T13:05:00Z","status": "active",
+    "notes": "Promote TASK-0144 (UX render Mermaid Help, REQ-D2C6579F) + GO Codex; AC33 a SPEC-0086 ext7. #5 de 9." },
+    "idempotency_key": "arquitecto:promote-0144:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0144",
+    "title": "Proyecto-front (UX): render de diagramas Mermaid en Help (SVG) sin dependencia de servidor (AC33, SPEC-0086 ext7)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "normal","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0049"],"created_at": "2026-06-21","file": "Area_comun/tasks/TASK-0144-codex-front-mermaid-help.md" },
+    "idempotency_key": "arquitecto:promote-0144:task-upsert-ready" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-promote-0144", "idempotency_key": "arquitecto:promote-0144:claim-release" } }
+] }

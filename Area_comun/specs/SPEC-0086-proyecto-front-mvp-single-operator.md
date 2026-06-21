@@ -253,6 +253,12 @@ producto/dominio en el core neutral.
   son interactivos (cursor pointer). El diccionario es UNA fuente unica (compartida con el glosario del Help, no
   duplicada). READ-ONLY. Test de comportamiento: hover sobre RF-5/SDD/HMAC rinde el texto esperado; el set cubre
   los codigos que el front realmente muestra. Carry AC11/AC12/AC13/AC17; #4 byte-identica.
+- **AC33 - Render de diagramas Mermaid en Help [comportamiento PERMANENTE; REQ-D2C6579F].** Los bloques Mermaid de
+  las secciones 4/5/6/7 del Help se renderizan como diagramas (SVG) en vez de texto crudo. **SIN agregar dependencia
+  de servidor / npm install:** vendorizar la lib como asset estatico servido por el propio server, o SVG
+  pre-generado; preserva la propiedad "sin dependencias" de la consola. READ-ONLY. Test de comportamiento: el panel
+  Help no muestra el codigo mermaid crudo de esos bloques (render presente); el server sigue sin deps de npm.
+  Carry AC11/AC12/AC13/AC17; #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
