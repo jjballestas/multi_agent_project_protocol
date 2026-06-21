@@ -13,7 +13,7 @@
 - job_id: 276658d4 (every 5 min, session-only, auto-expira 7 dias). Stand-down = CronDelete 276658d4 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 2   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
+- rounds_without_codex_response: 3   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
 
 ## Orden y estado
 | # | REQ | AC / DECISION | TASK | estado |
