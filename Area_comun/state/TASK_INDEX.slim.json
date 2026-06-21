@@ -98,6 +98,14 @@
             "title": "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina"
         },
         {
+            "id": "REQ-CEB7F585",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele"
+        },
+        {
             "id": "REQ-D2C6579F",
             "owner": "Operador",
             "phase": "P2",
