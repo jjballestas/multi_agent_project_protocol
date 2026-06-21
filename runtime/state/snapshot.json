@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ab2097ee128f01f826eb2deb7bf5bc5c553a1313b2e644fcb5a7eb34514ef4e7",
+  "canonical_hash": "acc54a1debdfc5980418912fab958c75bca6b14d0389b10e3c3feff2d36ece9c",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -60,6 +60,7 @@
       "CLAIM-20260621-Arquitecto-close-0144": 1,
       "CLAIM-20260621-Arquitecto-close-0145": 1,
       "CLAIM-20260621-Arquitecto-close-0146": 1,
+      "CLAIM-20260621-Arquitecto-close-0147": 1,
       "CLAIM-20260621-Arquitecto-promote-0139": 1,
       "CLAIM-20260621-Arquitecto-promote-0140": 1,
       "CLAIM-20260621-Arquitecto-promote-0141": 1,
@@ -69,6 +70,7 @@
       "CLAIM-20260621-Arquitecto-promote-0145": 1,
       "CLAIM-20260621-Arquitecto-promote-0146": 1,
       "CLAIM-20260621-Arquitecto-promote-0147": 1,
+      "CLAIM-20260621-Arquitecto-promote-0148": 1,
       "CLAIM-20260621-Arquitecto-prune-junk": 1,
       "CLAIM-20260621-Arquitecto-reconcile-backlog": 1,
       "CLAIM-20260621-Arquitecto-rego-0138-neutralidad": 1,
@@ -86,6 +88,7 @@
       "DECISION-0052": 1,
       "DECISION-0053": 1,
       "DECISION-0054": 1,
+      "DECISION-0055": 1,
       "MAILBOX-ARCHIVE": 4,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
@@ -139,11 +142,12 @@
       "TASK-0144": 8,
       "TASK-0145": 8,
       "TASK-0146": 8,
-      "TASK-0147": 6,
+      "TASK-0147": 8,
+      "TASK-0148": 2,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 370,
+    "events_applied": 377,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -278,6 +282,9 @@
       "arquitecto:close-0146:claim-acquire": 1032,
       "arquitecto:close-0146:claim-release": 1034,
       "arquitecto:close-0146:status-done": 1033,
+      "arquitecto:close-0147:claim-acquire": 1042,
+      "arquitecto:close-0147:claim-release": 1044,
+      "arquitecto:close-0147:status-done": 1043,
       "arquitecto:hygiene-0620-resume:claim-acquire": 779,
       "arquitecto:hygiene-0620-resume:claim-release": 780,
       "arquitecto:promote-0132:claim-acquire": 802,
@@ -332,6 +339,10 @@
       "arquitecto:promote-0147:claim-acquire": 1035,
       "arquitecto:promote-0147:claim-release": 1037,
       "arquitecto:promote-0147:task-upsert-ready": 1036,
+      "arquitecto:promote-0148:claim-acquire": 1045,
+      "arquitecto:promote-0148:claim-release": 1048,
+      "arquitecto:promote-0148:decision-0055": 1046,
+      "arquitecto:promote-0148:task-upsert-ready": 1047,
       "arquitecto:prune-junk:cancel-829cbfce": 1016,
       "arquitecto:prune-junk:cancel-984a85c6": 1015,
       "arquitecto:prune-junk:claim-acquire": 1014,
@@ -520,5 +531,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1041
+  "up_to_seq": 1048
 }

@@ -1,0 +1,16 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-promote-0148", "task_id": "TASK-0148", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/decisions/DECISION-0055-file-ingestion.md","Area_comun/tasks/TASK-0148-codex-front-file-ingestion.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260621-Arquitecto-to-Codex-GO-TASK-0148.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T11:40:00Z","updated_at": "2026-06-21T11:40:00Z","expires_at": "2026-06-21T15:40:00Z","status": "active",
+    "notes": "Promote DECISION-0055 (ingestion archivos OFF-by-default) + ext8 SPEC-0086 (AC37/AC38) + TASK-0148 ready + GO a Codex. REQ-31100EAF, #9 ULTIMO. Analista al cierre; pre-auth operador registrada. maker=Codex/checker=Arquitecto." },
+    "idempotency_key": "arquitecto:promote-0148:claim-acquire" } },
+  { "decision": { "decision_id": "DECISION-0055", "idempotency_key": "arquitecto:promote-0148:decision-0055" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0148",
+    "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "normal","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0055", "DECISION-0051"],"created_at": "2026-06-21","file": "Area_comun/tasks/TASK-0148-codex-front-file-ingestion.md" },
+    "idempotency_key": "arquitecto:promote-0148:task-upsert-ready" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-promote-0148", "idempotency_key": "arquitecto:promote-0148:claim-release" } }
+] }

@@ -4,7 +4,7 @@ task_id: TASK-0147
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0147 in_review: Ledger #4 con filtros actor/tipo y paginacion en Zeus commit 7daf70e; tests PASS 39/39; healthz OK."

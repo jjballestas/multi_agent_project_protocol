@@ -275,6 +275,22 @@ producto/dominio en el core neutral.
   texto libre sigue REDACTADO (no afloja PII). Test de comportamiento: filtrar por actor=Codex / tipo=intent.applied
   reduce la lista; la paginacion limita el render; sin filtro, pagina por defecto. Carry AC11/AC12/AC13/AC17;
   #4 byte-identica.
+- **AC37 - Carga de requerimiento por archivo, gobernada y acotada [comportamiento PERMANENTE; DECISION-0055; REQ-31100EAF].**
+  Desde el Intake, el operador adjunta un archivo; el server (a) valida **tipo** (allowlist .md/.txt), **tamano**
+  (<= N KB) y **nombre saneado** (sin path traversal); (b) extrae el texto como contenido INERTE (nunca ejecutado/
+  evaluado); (c) aplica **PII structural guard + ASCII** al texto extraido; (d) alimenta el MISMO
+  `requirement-intake` (task_upsert type=requirement, author=Operador, relayed_by=Arquitecto provistos por el
+  caller). Solo el EXECUTE gobernado escribe; preview(dry_run) != green. **Idempotente:** re-subir el mismo archivo
+  (mismo id-hash) no duplica. **Honestidad (AC11):** exito SOLO con el requerimiento REALMENTE escrito (id+seq
+  reales); ingestion/execute fallidos -> error real, no verde. **OFF BY DEFAULT** (flag fuera del config pinned;
+  uso vivo = pre-auth condicionada del operador, activacion runtime). El HEAD resultante valida exit 0 (regresion-
+  proof, estilo AC22).
+- **AC38 - Anti-abuso de ingestion (prueba negativa PERMANENTE) [CRITICO; DECISION-0055].** Tests permanentes (no
+  reabrir): tipo NO permitido (binario/ejecutable) -> RECHAZADO; archivo sobre-tamano -> RECHAZADO; nombre con
+  **path traversal** (`/`,`\`,`..`,`:`, control) -> RECHAZADO/saneado; contenido "activo" (script/macro) -> tratado
+  como TEXTO INERTE, nunca ejecutado/renderizado; el cliente NO inyecta actor ni rutas de escritura (server-side,
+  hereda AC19); sin egress; **#4 byte-identica** (config/genesis/keys sin cambio). PII: patrones tipo NIT/razon
+  social/SQL en el archivo -> el plano publicable no expone el literal. Golden/test del lado server.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

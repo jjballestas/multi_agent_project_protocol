@@ -405,8 +405,14 @@
         {
             "id": "TASK-0147",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (UX): filtros del Ledger #4 por actor y tipo + paginacion (AC36, SPEC-0086 ext7)"
+        },
+        {
+            "id": "TASK-0148",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga de requerimiento por archivo (ingestion gobernada acotada, OFF-by-default) - AC37/AC38, SPEC-0086 ext8, DECISION-0055"
         }
     ],
     "agents": {
@@ -467,7 +473,8 @@
         "DECISION-0051",
         "DECISION-0052",
         "DECISION-0053",
-        "DECISION-0054"
+        "DECISION-0054",
+        "DECISION-0055"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
