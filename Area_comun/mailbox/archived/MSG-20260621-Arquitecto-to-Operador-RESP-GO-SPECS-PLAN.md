@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Plan/orden de los 9 requisitos PROPOSED autorado y drafts canonicos (commit be25260). Orden: bloque A frescura (C1976857->547C6C54), B tooltips (4120B017->3E31293F->D2C6579F), C layout (28118FC3->B97838C6->9AF54A75), D ingestion LAST (REQ-31100EAF=DECISION-0055, OFF/gated, Analista al cierre). 8 UX = ext SPEC-0086 sin DECISION; ingestion = DECISION propia. Arranque: TASK-0140 (#1) promovido + GO a Codex. Drive autonomo (ausente): monitoreo por cron cada ~5 min, de a una tarea; paro el cron si 7 rondas seguidas sin respuesta de Codex; al terminar los 9 ordeno a Codex parar su cron y paro el mio."
