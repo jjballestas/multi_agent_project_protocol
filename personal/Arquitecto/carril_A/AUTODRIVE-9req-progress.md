@@ -13,7 +13,7 @@
 - job_id: b5085d65 (every 5 min, session-only, auto-expira 7 dias; el previo 276658d4 se detuvo a las 7 rondas y se relanzo). Stand-down = CronDelete b5085d65 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 0   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
+- rounds_without_codex_response: 1   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
 
 ## Orden y estado
 | # | REQ | AC / DECISION | TASK | estado |
