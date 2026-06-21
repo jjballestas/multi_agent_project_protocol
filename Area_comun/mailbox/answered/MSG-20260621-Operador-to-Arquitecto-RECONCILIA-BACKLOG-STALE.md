@@ -4,8 +4,8 @@ task_id: none
 type: REVIEW
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Reconciliar en el backlog el estado de REQ-444E0DE5, REQ-B65E7802 y REQ-DCC3BC1A (avanzarlas/cerrarlas al estado que corresponda) ya que su trabajo aterrizo y cerro en TASK-0139/0138/0135. Y confirmar si REQ-FB27AF72 se re-fila por contenido corrupto."
 one_line_summary: "Backlog desreconciliado: 3 requerimientos siguen en PROPOSED aunque su trabajo ya esta done y cerrado (REQ-444E0DE5->TASK-0139, REQ-B65E7802->TASK-0138, REQ-DCC3BC1A->TASK-0135). Ademas REQ-FB27AF72 tiene el seed corrupto (titulo nova.budget, cuerpo = texto del Help duplicado)."

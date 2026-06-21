@@ -1,7 +1,8 @@
 {
-  "canonical_hash": "1b7be92bfdc1acdc20f4a246cb0580a543a5ccc261f4a22a03ed35ef2385955f",
+  "canonical_hash": "d9d5fdfd51a87230fdfa23ab0bdcd833c7b9c1ce4175329dbd9d3fe2d765b7ed",
   "state": {
     "aggregate_versions": {
+      "BACKLOG-RECONCILE": 1,
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
       "CLAIM-20260619-Arquitecto-close-0121": 1,
       "CLAIM-20260619-Arquitecto-close-0122": 1,
@@ -53,6 +54,7 @@
       "CLAIM-20260621-Arquitecto-close-0138": 1,
       "CLAIM-20260621-Arquitecto-close-0139": 1,
       "CLAIM-20260621-Arquitecto-promote-0139": 1,
+      "CLAIM-20260621-Arquitecto-reconcile-backlog": 1,
       "CLAIM-20260621-Arquitecto-rego-0138-neutralidad": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -76,15 +78,15 @@
       "REQ-31100EAF": 3,
       "REQ-3E31293F": 3,
       "REQ-4120B017": 3,
-      "REQ-444E0DE5": 3,
+      "REQ-444E0DE5": 4,
       "REQ-547C6C54": 3,
       "REQ-9AF54A75": 3,
-      "REQ-B65E7802": 3,
+      "REQ-B65E7802": 4,
       "REQ-B97838C6": 3,
       "REQ-C1976857": 3,
       "REQ-D2C6579F": 3,
-      "REQ-DCC3BC1A": 3,
-      "REQ-FB27AF72": 3,
+      "REQ-DCC3BC1A": 4,
+      "REQ-FB27AF72": 4,
       "TASK-0117": 3,
       "TASK-0121": 5,
       "TASK-0122": 2,
@@ -108,7 +110,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 265,
+    "events_applied": 271,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -252,6 +254,12 @@
       "arquitecto:promote-0139:claim-release": 896,
       "arquitecto:promote-0139:decision-0054": 894,
       "arquitecto:promote-0139:task-upsert-ready": 895,
+      "arquitecto:reconcile-backlog:claim-acquire": 937,
+      "arquitecto:reconcile-backlog:claim-release": 942,
+      "arquitecto:reconcile-backlog:req-444e0de5-done": 938,
+      "arquitecto:reconcile-backlog:req-b65e7802-done": 939,
+      "arquitecto:reconcile-backlog:req-dcc3bc1a-done": 940,
+      "arquitecto:reconcile-backlog:req-fb27af72-done": 941,
       "arquitecto:rego-0138-neutralidad:claim-acquire": 884,
       "arquitecto:rego-0138-neutralidad:claim-release": 885,
       "arquitecto:task-0131:claim-acquire": 793,
@@ -380,5 +388,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 936
+  "up_to_seq": 942
 }

@@ -2,7 +2,7 @@
 task_id: REQ-444E0DE5
 title: "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
 type: requirement
-status: proposed
+status: done
 owner: Operador
 phase: P2
 priority: normal

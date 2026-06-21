@@ -2,7 +2,7 @@
 task_id: REQ-B65E7802
 title: "higienizar mensajes leidos/procesados con un click desde el front"
 type: requirement
-status: proposed
+status: done
 owner: Operador
 phase: P2
 priority: normal

@@ -2,7 +2,7 @@
 task_id: REQ-FB27AF72
 title: "arrancamos con nova.budget:"
 type: requirement
-status: proposed
+status: done
 owner: Operador
 phase: P2
 priority: normal

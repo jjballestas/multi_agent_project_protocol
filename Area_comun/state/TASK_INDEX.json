@@ -142,6 +142,7 @@
         {
             "acceptance_intent": "Tras un EXECUTE exitoso la app commitea SOLO los archivos que escribio submit_intent (seed +ledger/state) con mensaje claro y pushea al remote configurado, como parte de la transaccion.Resultado atomico: \"enviado + aterrizado en canonico (HEAD, seq)\". Si el push falla -> error, NOverde (AC11). NO commitea cambios arbitrarios del working tree (add acotado; prueba negativa: unsucio ajeno no entra). Nueva superficie de transporte: el Arquitecto evalua si requiere DECISION.",
             "author": "Operador",
+            "delivered_by": "TASK-0139",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-444e0de5-requirement-seed.md",
             "id": "REQ-444E0DE5",
@@ -159,7 +160,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)",
             "type": "requirement"
         },
@@ -214,6 +215,7 @@
         {
             "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
             "author": "Operador",
+            "delivered_by": "TASK-0138",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-b65e7802-requirement-seed.md",
             "id": "REQ-B65E7802",
@@ -231,7 +233,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "higienizar mensajes leidos/procesados con un click desde el front",
             "type": "requirement"
         },
@@ -310,6 +312,7 @@
         {
             "acceptance_intent": "Tras un EXECUTE exitoso el wizard muestra un resultado inequivoco (enviado-atestado, id y seq) y elformulario se RESETEA (campos vacios, vuelve al paso 1, estado borrador) listo para una historianueva. No queda ambiguedad sobre si se completo; se evita el reenvio accidental. La idempotencia porid=hash ya protege contra el duplicado exacto, pero la UI debe dejarlo explicito.",
             "author": "Operador",
+            "delivered_by": "TASK-0135",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-dcc3bc1a-requirement-seed.md",
             "id": "REQ-DCC3BC1A",
@@ -327,13 +330,14 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Intake: limpiar el formulario y confirmar claramente tras un submit exitoso",
             "type": "requirement"
         },
         {
             "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
             "author": "Operador",
+            "delivered_by": "TASK-0137",
             "endorsement": "none",
             "file": "Area_comun/tasks/req-fb27af72-requirement-seed.md",
             "id": "REQ-FB27AF72",
@@ -351,7 +355,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "arrancamos con nova.budget:",
             "type": "requirement"
         },

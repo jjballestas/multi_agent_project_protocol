@@ -27,7 +27,7 @@
         {
             "id": "REQ-444E0DE5",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
         },
         {
@@ -45,7 +45,7 @@
         {
             "id": "REQ-B65E7802",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "higienizar mensajes leidos/procesados con un click desde el front"
         },
         {
@@ -69,13 +69,13 @@
         {
             "id": "REQ-DCC3BC1A",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Intake: limpiar el formulario y confirmar claramente tras un submit exitoso"
         },
         {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "arrancamos con nova.budget:"
         },
         {

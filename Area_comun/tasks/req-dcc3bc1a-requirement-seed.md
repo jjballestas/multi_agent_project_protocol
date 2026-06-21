@@ -2,7 +2,7 @@
 task_id: REQ-DCC3BC1A
 title: "Intake: limpiar el formulario y confirmar claramente tras un submit exitoso"
 type: requirement
-status: proposed
+status: done
 owner: Operador
 phase: P2
 priority: normal
