@@ -1384,7 +1384,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): tooltips en codigos RF-N y acronimos en todas las vistas (AC32, SPEC-0086 ext7)",
             "type": "product"
         }

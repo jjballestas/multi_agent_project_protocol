@@ -357,7 +357,7 @@
         {
             "id": "TASK-0143",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): tooltips en codigos RF-N y acronimos en todas las vistas (AC32, SPEC-0086 ext7)"
         }
     ],

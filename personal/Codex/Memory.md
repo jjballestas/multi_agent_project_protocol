@@ -4,6 +4,15 @@ Last updated: 2026-06-21 Europe/Madrid, after TASK-0142 product commit.
 
 ## Latest Session Note
 
+- TASK-0143 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `8e41461 feat(front): explain RF and glossary terms`. The front now uses one shared
+  `HELP_GLOSSARY_TERMS` dictionary for RF-N/acronym tooltips and the Help-rendered surface, annotates matching
+  terms with `title`, `aria-label`, `role="button"`, focusability and pointer cursor, and covers RF-5/RF-14,
+  SDD, T0, HMAC and PII. The integration test fixture now selects a claim-free and drift-free protocol ref
+  before write-real tests, preventing false reds when live protocol HEAD is mid-ledger. Evidence before commit:
+  `node --check public/app.js tests/staticContract.test.js src/server.js`, `npm test` PASS 35/35, healthz smoke
+  OK. Handoff prepared for Arquitecto at
+  `Area_comun/handoffs/HANDOFF-TASK-0143-codex-to-arquitecto-1.md`.
 - TASK-0142 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cb4c0b1 feat(front): explain integrity badges`. The front now gives each integrity-band indicator
   (epoch, drift, attestation, canonical source, validator) a short accessible tooltip via `title` and

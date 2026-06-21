@@ -4,7 +4,7 @@ task_id: TASK-0143
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0143 (ready, maker=Codex): UX tooltips en codigos RF-N (RF-5, RF-14...) y acronimos (SDD/T0/HMAC/PII...) en todas las vistas; codigos interactivos; diccionario UNA fuente unica compartida con el glosario del Help. Read-only. #4 de la cola. AC32 SPEC-0086 ext7. Codigo en Zeus; yo checker."
