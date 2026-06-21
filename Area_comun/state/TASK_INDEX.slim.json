@@ -50,6 +50,14 @@
             "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos"
         },
         {
+            "id": "REQ-984A85C6",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Conciliar saldos por cuenta al cierre mensual"
+        },
+        {
             "id": "REQ-9AF54A75",
             "owner": "Operador",
             "phase": "P2",
