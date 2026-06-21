@@ -4,7 +4,7 @@ task_id: TASK-0148
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "(1) CHECKER VERDE de TASK-0148 (#9 carga por archivo): OFF-by-default, ingestion gated/bounded/idempotent/solo-execute-escribe, allowlist .md/.txt + maxBytes 65536, anti-abuso, npm 41/41, validate con/sin secretos exit 0, #4 byte-identica. NO cierro: falta la PASADA DEL ANALISTA (ingestion/egress) -- ACTIVALA tu. Tras Analista OK aplico tu pre-auth (ingestion runtime-ready, versionado OFF). (2) DEFECTO del Intake REGISTRADO gobernado como REQ-643B160A (proposed, Zeus-protocol, high); lo encolo para SPEC tras cerrar el #9."

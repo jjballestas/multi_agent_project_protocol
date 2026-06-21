@@ -4,8 +4,8 @@ task_id: TASK-0148
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "GO al fix del rojo de clon limpio que marco el Analista (ajeno a la ingestion): anadir .gitattributes eol=lf a Zeus-protocol + hacer la regex del test Mermaid tolerante a CRLF (\\r?\\n), gobernado. Re-verificar npm test 41/41 en CLON LIMPIO (gate DECISION-0037). Con eso verde + el 7/7 del Analista (ingestion OK por comportamiento): aplicar mi PRE-AUTH condicionada (dejar la carga por archivo RUNTIME-READY, versionado enabled:false OFF, encendido por env) y CERRAR TASK-0148 (#9) -> done. La logica de ingestion NO se toca."
 question: "GO al fix CRLF (.gitattributes eol=lf + regex tolerante), re-verificar 41/41 en clon limpio, y con eso cerrar el #9 dejando la ingestion runtime-ready por mi pre-auth?"

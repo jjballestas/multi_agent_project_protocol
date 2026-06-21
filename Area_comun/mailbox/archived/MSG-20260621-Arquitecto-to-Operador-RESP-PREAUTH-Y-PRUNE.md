@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Hechas tus 2 directivas. (1) PRE-AUTH ingestion viva REGISTRADA (condicionada: solo tras entrega+cierre de REQ-31100EAF + Analista OK + activacion RUNTIME con versionado OFF; si el Analista pide cambios no aplica). Anotada en el tracker del #9; al cerrar dejare la ingestion runtime-ready sin otro GO. (2) PRUNE gobernado: REQ-984A85C6 (fantasma) y REQ-829CBFCE (duplicado) -> CANCELLED; conservado REQ-40EC863F. validate exit 0, drift 0."

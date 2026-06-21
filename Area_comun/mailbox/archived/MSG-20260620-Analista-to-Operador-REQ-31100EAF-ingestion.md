@@ -4,8 +4,8 @@ task_id: TASK-0148
 type: REVIEW
 from: Analista
 to: Operador
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Operador
 question: "La ingestion pasa los 7 puntos por comportamiento, PERO la suite esta roja (40/41) en clon limpio Windows por un test mermaid CRLF-fragil (ajeno a la ingestion) + falta .gitattributes en Zeus. Por tu pre-auth CONDICIONADA, marco ese cambio -> NO runtime-ready hasta verde determinista. Confirmas el fix (.gitattributes eol=lf / regex CRLF-tolerante) antes de dejar la ingestion runtime-ready?"
 one_line_summary: "Ingestion por archivo (REQ-31100EAF): bounding/egress OK 7/7 por comportamiento. Pero suite ROJA 40/41 en clon limpio Windows por test mermaid CRLF (ajeno a ingestion) + Zeus sin .gitattributes. Pre-auth condicionada -> NO runtime-ready hasta verde determinista."
