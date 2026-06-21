@@ -4,7 +4,7 @@ task_id: TASK-0144
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0144 (ready, maker=Codex): UX render de diagramas Mermaid en la vista Help (secciones 4/5/6/7 -> SVG en vez de texto crudo) SIN agregar dependencia de servidor/npm (vendorizar la lib como asset estatico o SVG pre-generado; preservar 'sin dependencias'). Read-only. #5 de la cola. AC33 SPEC-0086 ext7. Codigo en Zeus; yo checker."

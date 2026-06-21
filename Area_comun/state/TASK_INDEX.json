@@ -1423,7 +1423,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): render de diagramas Mermaid en Help (SVG) sin dependencia de servidor (AC33, SPEC-0086 ext7)",
             "type": "product"
         }

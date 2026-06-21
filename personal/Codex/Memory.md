@@ -4,6 +4,13 @@ Last updated: 2026-06-21 Europe/Madrid, after TASK-0142 product commit.
 
 ## Latest Session Note
 
+- TASK-0144 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `4ee322b feat(front): render help mermaid diagrams`. The Help view now renders Mermaid `flowchart` and
+  `sequenceDiagram` code fences as client-side SVG diagrams instead of raw code, while keeping `package.json`
+  free of npm/server dependencies. The change is read-only and does not add any `submit_intent` surface.
+  Evidence before commit: `node --check public/app.js tests/staticContract.test.js src/server.js`, `npm test`
+  PASS 36/36, healthz smoke OK. Handoff prepared for Arquitecto at
+  `Area_comun/handoffs/HANDOFF-TASK-0144-codex-to-arquitecto-1.md`.
 - TASK-0143 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `8e41461 feat(front): explain RF and glossary terms`. The front now uses one shared
   `HELP_GLOSSARY_TERMS` dictionary for RF-N/acronym tooltips and the Help-rendered surface, annotates matching
