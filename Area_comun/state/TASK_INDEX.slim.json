@@ -58,6 +58,14 @@
             "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done"
         },
         {
+            "id": "REQ-D2C6579F",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Renderizar diagramas Mermaid en la vista Help"
+        },
+        {
             "id": "REQ-DCC3BC1A",
             "owner": "Operador",
             "phase": "P2",

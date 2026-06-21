@@ -212,6 +212,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Las secciones 4 (arquitectura), 5 (mapa de la app), 6 (flujo gobernado) y 7 (intake) del Help contienen bloques Mermaid que aparecen como texto crudo. Deberian renderizarse como diagramas SVG usando la libreria mermaid.js. Si no es posible en el servidor, al menos mostrar una imagen estatica pre-generada.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-d2c6579f-requirement-seed.md",
+            "id": "REQ-D2C6579F",
+            "narrative": "Como operador quiero que los diagramas de arquitectura y flujo de la vista Help se muestren visualmente renderizados (flowchart, sequenceDiagram) en lugar de mostrar el codigo fuente Mermaid en texto plano, para poder entender la arquitectura y flujos sin conocer la sintaxis.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Renderizar diagramas Mermaid en la vista Help",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un EXECUTE exitoso el wizard muestra un resultado inequivoco (enviado-atestado, id y seq) y elformulario se RESETEA (campos vacios, vuelve al paso 1, estado borrador) listo para una historianueva. No queda ambiguedad sobre si se completo; se evita el reenvio accidental. La idempotencia porid=hash ya protege contra el duplicado exacto, pero la UI debe dejarlo explicito.",
             "author": "Operador",
             "endorsement": "none",
