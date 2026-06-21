@@ -3642,6 +3642,25 @@
             "updated_at": "2026-06-21T21:55:52Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-close-0149",
+            "expires_at": "2026-06-22T04:00:00Z",
+            "notes": "Close TASK-0149 in_review->done (checker DESDE CLON LIMPIO) + REQ-643B160A done. AC39 verde behavior-tested (empty->400 narrative-required; placeholder->400 placeholder-text incl dry_run; sin proyecto->400 explicit-project; TASK_INDEX no crece=no fantasma). Zeus 03991cd; npm 41/41 CLON LIMPIO; validate con/sin secretos exit 0; #4 byte-identica; drift 0.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0149-codex-intake-no-phantom.md",
+                "Area_comun/tasks/req-643b160a-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0149",
+            "updated_at": "2026-06-22T00:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",

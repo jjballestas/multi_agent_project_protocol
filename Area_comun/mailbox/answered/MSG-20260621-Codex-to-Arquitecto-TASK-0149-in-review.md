@@ -4,7 +4,7 @@ task_id: TASK-0149
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0149 listo para checker: producto 03991cd rechaza fantasmas/placeholder y exige proyecto destino explicito. npm test 41/41 en working tree y clon limpio; node --check OK; protocolo encoding/neutrality/validator/drift OK."

@@ -43,12 +43,6 @@
             "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos"
         },
         {
-            "id": "REQ-643B160A",
-            "owner": "Operador",
-            "status": "in_progress",
-            "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder"
-        },
-        {
             "id": "REQ-6D80DB17",
             "owner": "Operador",
             "status": "proposed",
@@ -89,12 +83,6 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0149",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)"
         }
     ],
     "next_actions": [

@@ -2,7 +2,7 @@
 task_id: TASK-0149
 title: "Proyecto-front (RF-14): Intake honesto - rechazar requerimientos fantasma desde placeholder/vacio + exigir proyecto destino explicito (no default a Zeus-protocol) (AC39, SPEC-0086 ext9)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

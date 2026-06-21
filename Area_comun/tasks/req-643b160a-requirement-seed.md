@@ -1,7 +1,7 @@
 ---
 task_id: REQ-643B160A
 type: requirement
-status: in_progress
+status: done
 owner: Operador
 phase: P2
 priority: high

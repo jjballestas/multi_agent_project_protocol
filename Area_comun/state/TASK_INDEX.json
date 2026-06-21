@@ -249,7 +249,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "in_progress",
+            "status": "done",
             "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder",
             "type": "requirement"
         },
@@ -1589,7 +1589,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)",
             "type": "product"
         }

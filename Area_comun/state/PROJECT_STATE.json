@@ -51,7 +51,7 @@
         {
             "id": "REQ-643B160A",
             "owner": "Operador",
-            "status": "in_progress",
+            "status": "done",
             "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder"
         },
         {
@@ -423,7 +423,7 @@
         {
             "id": "TASK-0149",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): Intake honesto - no fantasmas (placeholder/vacio rechazado) + proyecto destino explicito (AC39, SPEC-0086 ext9)"
         }
     ],
