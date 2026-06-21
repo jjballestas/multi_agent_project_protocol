@@ -4,7 +4,7 @@ task_id: TASK-0149
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0149 (ready, maker=Codex): Intake honesto (RF-14) - el EXECUTE RECHAZA server-side requerimientos fantasma (narrativa/aceptacion vacias o == placeholder, sin preview-as-green) + exige PROYECTO DESTINO EXPLICITO (no default a Zeus-protocol). Remedia el fantasma REQ-984A85C6. Tightening del execute ya gobernado (no abre superficie). AC39 SPEC-0086 ext9. Codigo en Zeus; yo checker DESDE CLON LIMPIO."

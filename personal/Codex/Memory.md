@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0148 CRLF product fix.
+Last updated: 2026-06-21 Europe/Madrid, after TASK-0149 no-phantom intake fix.
 
 ## Latest Session Note
 
+- TASK-0149 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `03991cd fix(intake): reject phantom requirements`. The Intake no longer preloads example narrative,
+  acceptance, or project values; server-side `requirement-intake` rejects empty/placeholder narrative and
+  acceptance, and requires an explicit project instead of defaulting to `Zeus-protocol`. The front keeps failed
+  submissions as real errors, without reset-as-success. Evidence: `node --check public/app.js src/server.js
+  tests/staticContract.test.js`, product `npm test` PASS 41/41, and clean-clone Zeus `npm test` PASS 41/41.
+  Handoff prepared at `Area_comun/handoffs/HANDOFF-TASK-0149-codex-to-arquitecto-1.md`.
 - TASK-0148 CRLF determinism fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `2f760a6 test(front): make mermaid fixture CRLF stable`. The product repo now has `.gitattributes` enforcing
   LF checkout for text/code files, and the Mermaid code-fence test accepts `\r?\n`, fixing the clean-clone

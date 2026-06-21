@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "46cd20a5ea7696f4dfaef7899c9ab1af10de6c6570ad5421cef91d4d8224e39a",
+  "canonical_hash": "ef4224eb16541346bcf6c8f8280c5fb17e85f1a802ffb35d26f59f0bff02ba74",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -148,11 +148,11 @@
       "TASK-0146": 8,
       "TASK-0147": 8,
       "TASK-0148": 10,
-      "TASK-0149": 2,
+      "TASK-0149": 6,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 393,
+    "events_applied": 397,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -380,6 +380,10 @@
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
       "codex-carril-a-monitor-release-2026-06-19T15:33:55Z": 688,
+      "codex:TASK-0149:claim-acquire": 1065,
+      "codex:TASK-0149:claim-release": 1068,
+      "codex:TASK-0149:status-in-progress": 1066,
+      "codex:TASK-0149:status-in-review": 1067,
       "codex:task-0141:claim-acquire": 956,
       "codex:task-0141:claim-release": 959,
       "codex:task-0141:status-in-progress": 957,
@@ -552,5 +556,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1064
+  "up_to_seq": 1068
 }
