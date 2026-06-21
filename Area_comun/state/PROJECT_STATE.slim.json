@@ -37,6 +37,12 @@
             "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos"
         },
         {
+            "id": "REQ-829CBFCE",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
+        },
+        {
             "id": "REQ-984A85C6",
             "owner": "Operador",
             "status": "proposed",

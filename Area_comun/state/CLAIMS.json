@@ -3329,6 +3329,22 @@
             "updated_at": "2026-06-21T09:12:31.894Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-REQ-829CBFCE",
+            "expires_at": "2026-06-21T20:29:32.659Z",
+            "notes": "Front requirement-intake relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#REQ-829CBFCE",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-829CBFCE",
+                "Area_comun/tasks/req-829cbfce-requirement-seed.md"
+            ],
+            "started_at": "2026-06-21T20:19:32.659Z",
+            "status": "released",
+            "task_id": "REQ-829CBFCE",
+            "updated_at": "2026-06-21T20:19:32.659Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-984A85C6",
             "expires_at": "2026-06-21T20:10:28.187Z",
             "notes": "Front requirement-intake relay claim.",

@@ -213,6 +213,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los demas elementos de la fila, y respetar el sistema de estilos de la consola. Puede incluir un icono + antes del texto para reforzar su funcion de creacion.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-829cbfce-requirement-seed.md",
+            "id": "REQ-829CBFCE",
+            "narrative": "Como operador quiero que el boton Nueva historia/requisito tenga un estilo visual correcto: el texto se parte en dos lineas, el boton aparece desalineado verticalmente respecto a los elementos adyacentes (borrador, Mis requisitos) y rompe la fila de controles del Intake.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "",
             "author": "Operador",
             "endorsement": "none",
