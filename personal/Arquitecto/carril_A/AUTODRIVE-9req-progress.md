@@ -13,14 +13,14 @@
 - job_id: 276658d4 (every 5 min, session-only, auto-expira 7 dias). Stand-down = CronDelete 276658d4 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 6   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
+- rounds_without_codex_response: 7 (UMBRAL ALCANZADO -> cron detenido)   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
 
 ## Orden y estado
 | # | REQ | AC / DECISION | TASK | estado |
 |---|-----|---------------|------|--------|
 | 1 | REQ-C1976857 (refetch al navegar)        | AC29            | TASK-0140 | DONE (checker verde; Zeus 60fdb97; npm 31/31) |
 | 2 | REQ-547C6C54 (frescura/staleness)        | AC30            | TASK-0141 | DONE (checker verde; Zeus 88b4604; npm 33/33) |
-| 3 | REQ-4120B017 (tooltips badges)           | AC31            | TASK-0142 | PROMOVIDO ready, GO emitido (esperando in_review) |
+| 3 | REQ-4120B017 (tooltips badges)           | AC31            | TASK-0142 | PROMOVIDO ready, GO emitido -- Codex NO lo tomo en 7 rondas; cron DETENIDO |
 | 4 | REQ-3E31293F (tooltips RF-N/acronimos)   | AC32            | -         | pendiente |
 | 5 | REQ-D2C6579F (Mermaid render Help)       | AC33            | -         | pendiente |
 | 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | -         | pendiente |
