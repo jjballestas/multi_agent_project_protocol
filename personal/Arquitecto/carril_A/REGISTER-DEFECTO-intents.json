@@ -1,0 +1,16 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260621-Arquitecto-register-defecto", "task_id": "REQ-643B160A", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/req-643b160a-requirement-seed.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-21T12:00:00Z","updated_at": "2026-06-21T12:00:00Z","expires_at": "2026-06-21T16:00:00Z","status": "active",
+    "notes": "Registrar gobernado el DEFECTO del Intake (fantasma) como REQ-643B160A (proposed, Zeus-protocol) por orden del operador (via mailbox, no Intake, porque el bug esta en el Intake). Encolar para SPEC+fix." },
+    "idempotency_key": "arquitecto:register-defecto:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "REQ-643B160A", "type": "requirement", "status": "proposed", "owner": "Operador", "phase": "P2",
+    "priority": "high", "project": "Zeus-protocol", "author": "Operador", "relayed_by": "Arquitecto",
+    "endorsement": "none", "sdd_role": "seed_only_architect_authors_spec",
+    "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder",
+    "created_at": "2026-06-21", "file": "Area_comun/tasks/req-643b160a-requirement-seed.md" },
+    "idempotency_key": "arquitecto:register-defecto:task-upsert" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260621-Arquitecto-register-defecto", "idempotency_key": "arquitecto:register-defecto:claim-release" } }
+] }

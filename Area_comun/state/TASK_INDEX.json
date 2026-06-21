@@ -237,6 +237,22 @@
             "type": "requirement"
         },
         {
+            "author": "Operador",
+            "created_at": "2026-06-21",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-643b160a-requirement-seed.md",
+            "id": "REQ-643B160A",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un commit nuevo al repo, el servidor deberia detectar el cambio (via git poll o watcher) y actualizar el estado canonico que sirve a la UI sin requerir reinicio manual. El Ledger SEQ, backlog y artefactos deben reflejar el nuevo HEAD automaticamente.",
             "author": "Operador",
             "endorsement": "none",

@@ -4,8 +4,8 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Registrar (gobernado, capability orchestrator) este DEFECTO como requerimiento de Zeus-protocol y encolarlo (tu decides el orden respecto al batch). Lo registro por mailbox y no por el Intake a proposito: el bug ESTA en el Intake (genero el fantasma REQ-984A85C6 ya cancelado). Contenido del seed abajo (narrativa + intencion de aceptacion). Autoras la SPEC como con los demas."
 question: "Registras este defecto del Intake como REQ (Zeus-protocol) y lo encolas para SPEC+fix?"

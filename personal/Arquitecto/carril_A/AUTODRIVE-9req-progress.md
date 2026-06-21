@@ -26,7 +26,7 @@
 | 6 | REQ-28118FC3 (tipografia Mailbox/Backlog)| AC34            | TASK-0145 | DONE (checker verde; Zeus 5f53224; npm 37/37) |
 | 7 | REQ-B97838C6 (kanban colapsar/done)      | AC35            | TASK-0146 | DONE (checker verde; Zeus 90ea26b; npm 38/38) |
 | 8 | REQ-9AF54A75 (filtros Ledger)            | AC36            | TASK-0147 | DONE (checker verde; Zeus 7daf70e; npm 39/39) |
-| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | TASK-0148 | PROMOVIDO ready, GO emitido (OFF/gated; Analista al cierre). PRE-AUTH del operador REGISTRADA: al cerrar con Analista OK dejar ingestion RUNTIME-READY (versionado OFF, env) SIN otro GO; si Analista pide cambios, NO aplica |
+| 9 | REQ-31100EAF (carga por archivo)         | DECISION-0055 + AC37/AC38 | TASK-0148 | CHECKER VERDE (Zeus 0eaf602; npm 41/41; OFF-default) -- NO cerrado, FALTA PASADA ANALISTA. PRE-AUTH del operador REGISTRADA: al cerrar con Analista OK dejar ingestion RUNTIME-READY (versionado OFF, env) SIN otro GO; si Analista pide cambios, NO aplica |
 
 ## Drafts canonicos
 - PLAN-9req-zeus-orden.md ; DRAFT-SPEC-0086-ext7-ux-batch.md (AC29-AC36) ; DRAFT-DECISION-0055-file-ingestion.md ;
