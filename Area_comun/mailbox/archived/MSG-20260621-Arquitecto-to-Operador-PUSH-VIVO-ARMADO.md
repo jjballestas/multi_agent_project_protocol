@@ -4,7 +4,7 @@ task_id: TASK-0139
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "PUSH VIVO ARMADO por tu GO explicito: commit-push.config.json enabled:true (remote origin, branch main). A partir de ahora cada EXECUTE gobernado del front (intake/mailbox-archive) auto-commitea los outputs de submit_intent + pushea a origin/main del protocolo con credenciales del entorno. Reversible: enabled:false. Zeus commit d5f36ad (push de Zeus gateado a ti). Conectividad ls-remote OK; baseline limpio."
