@@ -9,6 +9,9 @@
 - Al terminar el desarrollo (los 9 done) -> ordenar a Codex parar su cron + parar el mio.
 - De a UNA tarea (anti-colision). Cada cierre: checker verde clon limpio + promover el siguiente del orden.
 
+## Cron
+- job_id: 276658d4 (every 5 min, session-only, auto-expira 7 dias). Stand-down = CronDelete 276658d4 (o CronList).
+
 ## Counter
 - rounds_without_codex_response: 0   (reset a 0 cada vez que hay actividad de Codex: delivery/commit/mailbox)
 
