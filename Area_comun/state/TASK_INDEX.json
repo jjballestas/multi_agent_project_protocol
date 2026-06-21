@@ -116,6 +116,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los elementos de la misma fila, y respetar el sistema de estilos de la consola (color de acento, bordes, tipografia). Opcionalmente puede usar un icono + antes del texto para reforzar su funcion de creacion.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-40ec863f-requirement-seed.md",
+            "id": "REQ-40EC863F",
+            "narrative": "Como operador quiero que el boton Nueva historia/requisito tenga un estilo visual correcto y coherente con el resto de la interfaz, ya que actualmente el texto se parte en dos lineas, el boton aparece desalineado verticalmente respecto a los elementos adyacentes (borrador, Mis requisitos) y rompe la fila de controles del Intake.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Al hacer hover en cada badge debe aparecer un tooltip corto: que valor es normal, que significa cuando cambia, y cuando debo preocuparme. Por ejemplo drift=0 es OK, drift>0 requiere atencion.",
             "author": "Operador",
             "endorsement": "none",

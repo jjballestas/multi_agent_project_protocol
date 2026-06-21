@@ -19,6 +19,12 @@
             "title": "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas"
         },
         {
+            "id": "REQ-40EC863F",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
+        },
+        {
             "id": "REQ-4120B017",
             "owner": "Operador",
             "status": "proposed",
