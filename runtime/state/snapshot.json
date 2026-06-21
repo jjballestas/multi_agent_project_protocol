@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8123e626cad594758d46f8c26687683888a80030a5fb9a397290dd0dabf3e938",
+  "canonical_hash": "a87679389110099f003e4d7dabad332bebec5223d63eec860abddb67600ec6d6",
   "state": {
     "aggregate_versions": {
       "CLAIM-20260619-Arquitecto-close-0117-flip4": 1,
@@ -73,6 +73,7 @@
       "MSG-20260621-Arquitecto-to-Operador-RESP-RECONCILIA-ZEUS": 1,
       "PROJECT_STATE": 1,
       "REQ-31100EAF": 3,
+      "REQ-4120B017": 3,
       "REQ-444E0DE5": 3,
       "REQ-B65E7802": 3,
       "REQ-DCC3BC1A": 3,
@@ -100,7 +101,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 241,
+    "events_applied": 244,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -300,6 +301,9 @@
       "front:requirement-intake:31100EAF": 911,
       "front:requirement-intake:31100EAF:claim-acquire": 910,
       "front:requirement-intake:31100EAF:claim-release": 912,
+      "front:requirement-intake:4120B017": 914,
+      "front:requirement-intake:4120B017:claim-acquire": 913,
+      "front:requirement-intake:4120B017:claim-release": 915,
       "front:requirement-intake:444E0DE5": 838,
       "front:requirement-intake:444E0DE5:claim-acquire": 837,
       "front:requirement-intake:444E0DE5:claim-release": 839,
@@ -348,5 +352,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 912
+  "up_to_seq": 915
 }

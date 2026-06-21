@@ -10,6 +10,14 @@
             "title": "carga de requerimiento por archivo"
         },
         {
+            "id": "REQ-4120B017",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Tooltips explicativos en badges de la barra de integridad"
+        },
+        {
             "id": "REQ-444E0DE5",
             "owner": "Operador",
             "phase": "P2",
