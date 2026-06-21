@@ -116,6 +116,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Deberia ver controles de filtro (desplegable de actor, desplegable de tipo de evento) en la cabecera del Ledger. Al seleccionar un filtro la lista de eventos se reduce mostrando solo los que coinciden. Tambien deberia haber paginacion o carga progresiva para no renderizar 900+ eventos a la vez.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-9af54a75-requirement-seed.md",
+            "id": "REQ-9AF54A75",
+            "narrative": "Como operador quiero poder filtrar los eventos del Ledger #4 por actor (Arquitecto, Codex, Operador) y por tipo de evento (intent.applied, etc.) para encontrar eventos especificos sin hacer scroll manual entre mas de 900 entradas.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Filtros en Ledger #4 por actor y tipo de evento",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
             "author": "Operador",
             "endorsement": "none",

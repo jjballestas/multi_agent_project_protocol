@@ -26,6 +26,14 @@
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
         },
         {
+            "id": "REQ-9AF54A75",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Filtros en Ledger #4 por actor y tipo de evento"
+        },
+        {
             "id": "REQ-B65E7802",
             "owner": "Operador",
             "phase": "P2",
