@@ -1,17 +1,22 @@
 param(
-    [int]$IntervalSeconds = 180,
+    [int]$IntervalSeconds = 300,
+    [int]$MaxNoArquitectoRounds = 7,
     [string]$CodexExe = ""
 )
 
 $ErrorActionPreference = "Stop"
 
 $Root = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$LogPath = Join-Path $PSScriptRoot "codex_mailbox_cron.log"
-$PidPath = Join-Path $PSScriptRoot "codex_mailbox_cron.pid"
-$StopPath = Join-Path $PSScriptRoot "codex_mailbox_cron.stop"
-$LockPath = Join-Path $PSScriptRoot "codex_mailbox_cron.lock"
-$PromptPath = Join-Path $PSScriptRoot "codex_mailbox_cron.prompt.txt"
-$RunsDir = Join-Path $PSScriptRoot "codex_mailbox_cron_runs"
+$RuntimeDir = Join-Path $Root ".protocol-tmp\codex_mailbox_cron"
+$LogPath = Join-Path $RuntimeDir "codex_mailbox_cron.log"
+$PidPath = Join-Path $RuntimeDir "codex_mailbox_cron.pid"
+$StopPath = Join-Path $RuntimeDir "codex_mailbox_cron.stop"
+$LockPath = Join-Path $RuntimeDir "codex_mailbox_cron.lock"
+$PromptPath = Join-Path $RuntimeDir "codex_mailbox_cron.prompt.txt"
+$SeenPath = Join-Path $RuntimeDir "codex_mailbox_cron.seen.json"
+$RunsDir = Join-Path $RuntimeDir "runs"
+$StartedAtUtc = [DateTime]::UtcNow
+$NoArquitectoRounds = 0
 
 function Write-Utf8NoBom {
     param([string]$Path, [string]$Content)
@@ -51,6 +56,12 @@ function Get-CodexExecutable {
             return $match.Groups[1].Value
         }
     }
+    $whereResults = @(& where.exe codex 2>$null)
+    foreach ($candidatePath in $whereResults) {
+        if ($candidatePath -and (Test-Path -LiteralPath $candidatePath) -and $candidatePath.EndsWith(".exe")) {
+            return (Resolve-Path -LiteralPath $candidatePath).Path
+        }
+    }
     $base = Join-Path $env:LOCALAPPDATA "OpenAI\Codex\bin"
     $candidate = Get-ChildItem -Path $base -Recurse -Filter codex.exe -ErrorAction SilentlyContinue |
         Sort-Object LastWriteTime -Descending |
@@ -58,23 +69,101 @@ function Get-CodexExecutable {
     if ($candidate) {
         return $candidate.FullName
     }
+    $extensionBase = Join-Path $env:USERPROFILE ".vscode\extensions"
+    $extensionCandidate = Get-ChildItem -Path $extensionBase -Recurse -Filter codex.exe -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+    if ($extensionCandidate) {
+        return $extensionCandidate.FullName
+    }
     throw "codex.exe not found"
 }
 
-function Get-ExecutableCodexMessages {
+function Read-Seen {
+    if (-not (Test-Path -LiteralPath $SeenPath)) {
+        return @{}
+    }
+    try {
+        $json = Get-Content -LiteralPath $SeenPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $seen = @{}
+        foreach ($prop in $json.PSObject.Properties) {
+            $seen[$prop.Name] = [string]$prop.Value
+        }
+        return $seen
+    } catch {
+        return @{}
+    }
+}
+
+function Write-Seen {
+    param([hashtable]$Seen)
+    $object = [ordered]@{}
+    foreach ($key in ($Seen.Keys | Sort-Object)) {
+        $object[$key] = $Seen[$key]
+    }
+    Write-Utf8NoBom -Path $SeenPath -Content (($object | ConvertTo-Json -Depth 5) + "`n")
+}
+
+function Get-MessageSignature {
+    param([System.IO.FileInfo]$Message)
+    return "$($Message.Name)|$($Message.Length)|$($Message.LastWriteTimeUtc.Ticks)"
+}
+
+function Get-ProcessableCodexMessages {
     $openDir = Join-Path $Root "Area_comun\mailbox\open"
     if (-not (Test-Path -LiteralPath $openDir)) {
         return @()
     }
+    $seen = Read-Seen
     @(Get-ChildItem -LiteralPath $openDir -File -Filter "MSG-*.md" | Where-Object {
         $content = Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8
         $to = Get-Field -Content $content -Name "to"
+        $status = Get-Field -Content $content -Name "status"
         $requires = Get-Field -Content $content -Name "requires_response"
+        $type = (Get-Field -Content $content -Name "type").ToUpperInvariant()
         $requested = Get-Field -Content $content -Name "requested_action"
+        $signature = Get-MessageSignature -Message $_
         ($to -eq "Codex") -and
-        ($requires -match "^(true|yes)$") -and
-        -not [string]::IsNullOrWhiteSpace($requested)
+        ($status -in @("", "open")) -and
+        (
+            ($requires -match "^(true|yes)$") -or
+            -not [string]::IsNullOrWhiteSpace($requested) -or
+            ($type -in @("GO", "REQUEST", "ACTION", "HANDOFF", "REVIEW", "QUESTION"))
+        ) -and
+        ((-not $seen.ContainsKey($_.Name)) -or ($seen[$_.Name] -ne $signature))
     })
+}
+
+function Get-ArquitectoResponsesToCodex {
+    $mailboxRoot = Join-Path $Root "Area_comun\mailbox"
+    $folders = @("open", "answered", "archived")
+    $matches = @()
+    foreach ($folder in $folders) {
+        $dir = Join-Path $mailboxRoot $folder
+        if (-not (Test-Path -LiteralPath $dir)) {
+            continue
+        }
+        $matches += @(Get-ChildItem -LiteralPath $dir -File -Filter "MSG-*.md" | Where-Object {
+            $_.LastWriteTimeUtc -ge $StartedAtUtc -and
+            ((Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8) -match "(?im)^from:\s*Arquitecto\s*$") -and
+            ((Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8) -match "(?im)^to:\s*Codex\s*$")
+        })
+    }
+    return @($matches)
+}
+
+function Test-ArquitectoStopOrder {
+    $responses = Get-ArquitectoResponsesToCodex
+    foreach ($response in $responses) {
+        $content = Get-Content -LiteralPath $response.FullName -Raw -Encoding UTF8
+        $requested = Get-Field -Content $content -Name "requested_action"
+        $summary = Get-Field -Content $content -Name "one_line_summary"
+        $text = "$summary`n$requested`n$content"
+        if ($text -match "(?i)\b(detener|deten|parar|para|stop|standdown|stand-down)\b.*\b(cron|monitor|monitoreo|Codex)\b") {
+            return $true
+        }
+    }
+    return $false
 }
 
 function Invoke-CodexForMessage {
@@ -105,7 +194,7 @@ Arranque obligatorio:
 Mensaje a procesar en esta ejecucion:
 $messageRelative
 
-Si el mensaje sigue abierto, tiene to: Codex, requires_response:true y requested_action ejecutable, procesarlo en esta sesion con claim file-scoped + submit_intent; no dejarlo solo como ACTION_REQUIRED. Si ya fue resuelto o no aplica, emitir cierre concreto.
+Si el mensaje sigue abierto, esta dirigido a Codex y contiene una accion ejecutable (requested_action, GO, QUESTION, HANDOFF o requires_response:true), procesarlo en esta sesion con claim file-scoped + submit_intent cuando toque ledger; no dejarlo solo como ACTION_REQUIRED. Si ya fue resuelto o no aplica, emitir cierre concreto.
 "@
     Write-Utf8NoBom -Path $PromptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
@@ -124,8 +213,14 @@ Si el mensaje sigue abierto, tiene to: Codex, requires_response:true y requested
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         $process.WaitForExit()
         Write-Log "EXEC_EXIT code=$($process.ExitCode) message=$($Message.Name)"
+        $seen = Read-Seen
+        $seen[$Message.Name] = Get-MessageSignature -Message $Message
+        Write-Seen -Seen $seen
     } catch {
         Write-Log "EXEC_FAIL message=$($Message.Name) error=$($_.Exception.Message)"
+        $seen = Read-Seen
+        $seen[$Message.Name] = Get-MessageSignature -Message $Message
+        Write-Seen -Seen $seen
     } finally {
         if (Test-Path -LiteralPath $LockPath) {
             Remove-Item -LiteralPath $LockPath -Force
@@ -133,11 +228,13 @@ Si el mensaje sigue abierto, tiene to: Codex, requires_response:true y requested
     }
 }
 
+New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
+New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
 Set-Content -LiteralPath $PidPath -Value $PID -Encoding ASCII
 if (Test-Path -LiteralPath $StopPath) {
     Remove-Item -LiteralPath $StopPath -Force
 }
-Write-Log "Codex mailbox cron started. interval_seconds=$IntervalSeconds"
+Write-Log "Codex mailbox cron started. interval_seconds=$IntervalSeconds max_no_arquitecto_rounds=$MaxNoArquitectoRounds"
 
 while ($true) {
     if (Test-Path -LiteralPath $StopPath) {
@@ -146,9 +243,27 @@ while ($true) {
     }
 
     try {
-        $messages = @(Get-ExecutableCodexMessages)
+        if (Test-ArquitectoStopOrder) {
+            Write-Log "Arquitecto stop order detected; exiting."
+            exit 0
+        }
+
+        $architectResponses = @(Get-ArquitectoResponsesToCodex)
+        if ($architectResponses.Count -gt 0) {
+            $NoArquitectoRounds = 0
+            Write-Log "Arquitecto responses detected count=$($architectResponses.Count)"
+        } else {
+            $NoArquitectoRounds += 1
+            Write-Log "No Arquitecto response round=$NoArquitectoRounds"
+            if ($NoArquitectoRounds -ge $MaxNoArquitectoRounds) {
+                Write-Log "No Arquitecto response limit reached; exiting."
+                exit 0
+            }
+        }
+
+        $messages = @(Get-ProcessableCodexMessages)
         if ($messages.Count -eq 0) {
-            Write-Log "Heartbeat executable_messages=0"
+            Write-Log "Heartbeat processable_messages=0"
         } else {
             foreach ($message in $messages) {
                 Invoke-CodexForMessage -Message $message

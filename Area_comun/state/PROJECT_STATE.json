@@ -327,7 +327,7 @@
         {
             "id": "TASK-0140",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)"
         }
     ],

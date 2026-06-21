@@ -1291,7 +1291,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (UX): refetch fresco al navegar (sin F5) + recarga manual + intervalo opt-in (AC29, SPEC-0086 ext7)",
             "type": "product"
         }

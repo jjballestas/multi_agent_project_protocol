@@ -4,6 +4,14 @@ Last updated: 2026-06-21 Europe/Madrid, after TASK-0139 product commit.
 
 ## Latest Session Note
 
+- TASK-0140 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `60fdb97 feat(front): refresh data on navigation`. The front now fetches fresh observe/actions/help data and
+  re-renders when navigating between views, exposes a read-only refresh button per panel, and has an opt-in
+  interval refresh control. The exported refresh controller has behavior coverage for navigation fetch,
+  manual refresh, configured interval, and fetch-failure no-stale-as-fresh. Evidence before commit:
+  `node --check public/app.js tests/staticContract.test.js src/server.js`, `npm test` PASS 31/31, healthz
+  smoke OK. The Codex mailbox monitor script was updated for 5-minute cadence, executable Codex-message
+  dispatch, and 7-round no-Arquitecto-response stop logic.
 - TASK-0139 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `9d0a586 feat(intake): add governed auto commit push`. The server now has an OFF-by-default
   `commit-push.config.json` transport: after successful governed `submit_intent`, when enabled, it stages

@@ -4,7 +4,7 @@ task_id: TASK-0140
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0140 (ready, maker=Codex): UX refetch fresco al navegar entre vistas (sin F5) + boton recarga manual + refresco por intervalo opt-in. Read-only (solo GETs observe, no submit_intent). #1 de la cola de 9 requisitos UX/ingestion. AC29 SPEC-0086 ext7. Codigo en Zeus; yo checker. ENTREGA in_review cuando este; voy a coordinar por cron cada 5 min."
