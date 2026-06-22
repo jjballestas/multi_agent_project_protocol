@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "El Analista probo un escape NUEVO material en TASK-0153 (external-cli sigue denylist sobre child_process -> execFile/spawn('powershell'|'sh', curl/IWR) ESCAPA, rompe la meta de AC46). DECISION (tu bar 'no-cerrable si escape material nuevo'): NO cierro test-only; devuelvo a Codex el flip de external-cli a allowlist {git,python} (fix chico, sin falso positivo) y cierro tras re-checker + Analista. Override disponible: si prefieres cerrar test-only ya y diferir el flip al GO de uso vivo, dime."

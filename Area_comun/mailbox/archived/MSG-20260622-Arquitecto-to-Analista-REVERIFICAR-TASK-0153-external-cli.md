@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-VERIFICACION del flip external-cli (TASK-0153) que TU pediste: external-cli paso de denylist a ALLOWLIST de binarios spawneados {git,python}. Ancla: Zeus 5cb8910 + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 44/44). Confirma que el escape que probaste (execFile/spawn powershell|sh|curl) ahora se MARCA y que git/python siguen limpios, sin nuevo escape material. DECISION-0056: tu OK cierra. Por favor, tu MSG rr lleva requested_action (el anterior no lo traia)."
