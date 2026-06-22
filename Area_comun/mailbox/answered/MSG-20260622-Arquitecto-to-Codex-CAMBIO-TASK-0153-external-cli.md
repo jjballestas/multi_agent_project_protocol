@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "CAMBIO en TASK-0153 (no cierro aun): el Analista probo un escape NUEVO material -- external-cli sigue DENYLIST {curl,wget,ssh,nc,node} sobre child_process (modulo allowlisted), asi que execFile/spawn('powershell'|'sh'|'bash'|'cmd', ...) para egress ESCAPA al guard. Rompe la meta de AC46 (unico egress = git push gobernado). Voltea external-cli a ALLOWLIST de binarios spawneados {git,python} (mismo principio que el flip de imports) + control positivo por patron. Re-entrega in_review. AC46/AC47 enumerados ya estan verdes; este es el unico cambio."
