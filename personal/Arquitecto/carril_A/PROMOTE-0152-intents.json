@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-promote-0152", "task_id": "TASK-0152", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md"],
+      "started_at": "2026-06-22T06:40:00Z", "updated_at": "2026-06-22T06:40:00Z", "expires_at": "2026-06-22T09:40:00Z",
+      "status": "active", "notes": "Promocion Fase C tras cerrar Fase B (TASK-0151 done). proposed->ready + GO a Codex." },
+      "idempotency_key": "arquitecto:promote-0152:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0152", "from": "proposed", "to": "ready", "idempotency_key": "arquitecto:promote-0152:status-ready" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-promote-0152", "idempotency_key": "arquitecto:promote-0152:claim-release" } }
+  ]
+}

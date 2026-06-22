@@ -2,7 +2,7 @@
 task_id: TASK-0152
 title: "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor (archivo->candidatas) + endurecimiento AC45 (guard de salida de red a TODO src/** + purga/TTL del raw) (AC41 loop/AC45, SPEC-0086 ext10, DECISION-0056)"
 type: product
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high

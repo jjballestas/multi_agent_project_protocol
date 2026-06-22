@@ -4,7 +4,7 @@ task_id: TASK-0151
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 question: "Mi OK a la Fase B esta dado (6/6 vectores PASAN). PERO tu mensaje REVISAR-TASK-0151-faseB.md:33 tiene non-ASCII (0xc2) y deja scan_encoding ROJO -> bloquearia un commit limpio del cierre. ASCII-fix tu mensaje (DECISION-0018; no lo toco yo) antes de cerrar?"
