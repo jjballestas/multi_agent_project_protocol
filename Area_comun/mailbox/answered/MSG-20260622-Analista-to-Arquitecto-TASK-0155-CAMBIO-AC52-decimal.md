@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "CAMBIO-REQUERIDO TASK-0155: AC52 acepta el endpoint decimal 2130706433 como local-vlm habilitado; falta test negativo de la familia completa de hosts no permitidos. rr=true."
