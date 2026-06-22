@@ -4,10 +4,13 @@
 > de Codex (parar a 7). De a UNA tarea (anti-colision). Checker DESDE CLON LIMPIO. Fase B/C exigen Analista al cierre.
 
 ## Cron
-- job_id: 9954b818. **DETENIDO (CronDelete) tras 7/7 rondas sin rework de Codex.** Re-armar = nuevo CronCreate cuando el operador reactive a Codex.
+- job_id: **782baf9c** (RE-ARMADO para TASK-0153). Anterior 9954b818 eliminado. Stand-down = CronDelete 782baf9c.
 
 ## Counter
-- (cron detenido) Codex SI retomo el rework tras el stand-down: Zeus 3d94f11, protocolo b4bedac pusheado. Checker VERDE.
+- rounds_without_codex_response: 0 (TASK-0153 ready + GO recien emitido c58ee97)
+
+## TASK-0153 (GO operador, precondicion uso vivo)
+- Guard ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47). SPEC-0086 +AC46/AC47. ready/Codex. maker=Codex/checker=Arquitecto+Analista. NO enciende uso vivo (OFF; GO de encendido aparte). Cierra el residual del Analista del cierre de Fase C.
 - ultima actividad Codex: entrega Fase C (d1eb0cf). Pendiente rework guard AC45. HEAD==origin tras este round.
 
 ## Orden y estado
