@@ -459,7 +459,7 @@
         {
             "id": "TASK-0153",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor"
         }
     ],

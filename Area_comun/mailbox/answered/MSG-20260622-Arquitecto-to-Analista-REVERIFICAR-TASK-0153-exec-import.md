@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-VERIFICACION final del exec-import (TASK-0153): Codex marco el IMPORT named de exec/execSync desde child_process como cli-exec-import (sin tocar el bare exec( -> RegExp.exec limpio). Ancla: Zeus 8751051 + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 44/44). Confirma que el residual exec/execSync que declaraste CIERRA y que solo queda el inherente python-c/git-ext. DECISION-0056: tu OK cierra. rr=true con requested_action."

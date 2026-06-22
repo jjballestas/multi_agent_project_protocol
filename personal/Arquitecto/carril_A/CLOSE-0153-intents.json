@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-close-0153", "task_id": "TASK-0153", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0153-codex-guard-allowlist-test-isolation.md"],
+      "started_at": "2026-06-22T13:50:00Z", "updated_at": "2026-06-22T13:50:00Z", "expires_at": "2026-06-22T16:50:00Z",
+      "status": "active", "notes": "Cierre TASK-0153 (guard ALLOWLIST AC46 + aislamiento AC47 + external-cli {git,python} + exec-import). Checker Arquitecto verde + Analista OK->CERRABLE (3 ciclos: allowlist, external-cli, exec-import). Residual python-c/git-ext inherente = nota precondicion uso vivo." },
+      "idempotency_key": "arquitecto:close-0153:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0153", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0153:status-done" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-close-0153", "idempotency_key": "arquitecto:close-0153:claim-release" } }
+  ]
+}

@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0153 exec-import re-verificado: OK->CERRABLE; cli-exec-import cierra exec/execSync sin FP en RegExp.exec; npm 44/44 y gates protocolo verdes."

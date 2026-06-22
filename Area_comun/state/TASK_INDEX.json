@@ -1707,7 +1707,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor",
             "type": "product"
         }
