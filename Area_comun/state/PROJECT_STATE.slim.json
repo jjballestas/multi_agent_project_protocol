@@ -11,6 +11,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-EXTRACT-DC0E283672",
+            "owner": "Arquitecto",
+            "status": "ready",
+            "title": "Extraction request from intake-ux-feedback.md"
         }
     ],
     "next_actions": [

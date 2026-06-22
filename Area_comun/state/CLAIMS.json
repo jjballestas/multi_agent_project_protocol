@@ -4410,6 +4410,22 @@
             "updated_at": "2026-06-22T05:55:47Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-FILE-EXTRACT-DC0E283672",
+            "expires_at": "2026-06-22T18:31:06.453Z",
+            "notes": "Front file-intake extraction relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/task-extract-dc0e283672-file-intake.md"
+            ],
+            "started_at": "2026-06-22T18:21:06.453Z",
+            "status": "released",
+            "task_id": "TASK-EXTRACT-DC0E283672",
+            "updated_at": "2026-06-22T18:21:06.453Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-1DBE8A04",
             "expires_at": "2026-06-22T18:14:30.638Z",
             "notes": "Front mailbox-archive relay claim.",

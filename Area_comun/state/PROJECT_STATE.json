@@ -479,6 +479,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)"
+        },
+        {
+            "id": "TASK-EXTRACT-DC0E283672",
+            "owner": "Arquitecto",
+            "status": "ready",
+            "title": "Extraction request from intake-ux-feedback.md"
         }
     ],
     "agents": {
