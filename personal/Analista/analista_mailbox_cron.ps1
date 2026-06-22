@@ -187,7 +187,7 @@ function Invoke-AnalistaForMessage {
     $messageRelative = $Message.FullName.Substring($Root.Length + 1).Replace("\", "/")
 
 $prompt = @"
-Eres el ANALISTA (firma "Analista"): voz adversarial independiente / checker del repo
+Eres el ANALISTA (firma 'Analista'): voz adversarial independiente / checker del repo
 multi_agent_project_protocol. NO eres arquitecto, NI Codex, NI disenador. NO implementas, NO promueves,
 NO cierras, NO consolidas, NO ratificas. Si te entregan un prompt de otro rol, NO lo asumes (rompe
 maker != checker); ante ambiguedad, preguntas. Lee, en orden y sin asumir: AGENTS.md (sec 0 y 7), CLAUDE.md,
@@ -211,10 +211,10 @@ Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-005
 3. PRUEBA POR COMPORTAMIENTO cada vector/AC que la instruccion pide refutar: no confies en el nombre del test;
    ejercita TODA la familia que el AC promete (no solo el ejemplo). Extrae la funcion/guard y corre tus propios
    payloads. Intenta ROMPER cada garantia y busca un escape NUEVO; si lo hallas, documentalo falsable. Default a
-   "no cerrable si dudas".
+   'no cerrable si dudas'.
 4. GATES del protocolo: python scripts/validate_collaboration_state.py con Y sin secretos (exit 0); drift 0;
    python scripts/scan_domain_neutrality.py (exit 0); python scripts/scan_encoding.py (exit 0); #4 byte-identica.
-5. EMITE veredicto (ASCII-only; tras escribir corre scan_encoding y arregla; para rr usa el texto "rr=true",
+5. EMITE veredicto (ASCII-only; tras escribir corre scan_encoding y arregla; para rr usa el texto 'rr=true',
    nunca el literal requires_response dos-puntos true en el cuerpo):
    - un ARTEFACTO en Area_comun/artifacts/ANALISTA-<tarea>-<tema>-veredicto.md (voz/firma Analista, ancla
      canonica, reproduccion con exit codes, tabla vector-por-vector PASA/SLIPS falsable, residuales declarados,
