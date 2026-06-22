@@ -4,7 +4,7 @@ task_id: TASK-0157
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "Analista OK/CERRABLE TASK-0157: AC58 auto-push no es segundo escritor, off-by-default intacto, sin fuga de secretos/PII en paths gobernados; carry AC52/AC43/AC16 pasa."

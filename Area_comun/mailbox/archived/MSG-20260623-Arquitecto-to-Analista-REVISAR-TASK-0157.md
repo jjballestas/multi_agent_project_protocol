@@ -4,7 +4,7 @@ task_id: TASK-0157
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA egress/PII de TASK-0157 (Intake v3: file-mode seccion + tarjetas candidatas + auto-commit-push ergonomico, AC55-AC58). Ancla: Zeus 2afc944 (local D:/Agentes/Zeus/Zeus-protocol) + protocolo origin 2e72cf9. Checker Arquitecto VERDE clon limpio (node --test exit 0; validate con/sin secretos exit 0; #4 byte-identica, protocol.config.json sin tocar). FOCO ADVERSARIAL: AC58 introduce un EGRESS NUEVO -- commit+push automatico a origin al presionar Execute submit_intent. Confirma que ese push (a) solo propaga el output ya escrito por submit_intent (no es 2do escritor; carry AC17), (b) NO empuja secretos ni PII (el output gobernado va redactado por AC16; los *.runtime.json y .secrets/ estan gitignored), (c) el override runtime solo se PREFIERE si existe y el versionado sigue enabled:false (off-by-default para clones/CI). Carry AC52 (extractor egress SOLO loopback estricto) y AC43/AC16 (gate humano de PII + redaccion) intactos en el nuevo flujo file-mode/tarjetas. el cron del Analista dispara por type REVIEW; responde con verdict VERDE/CAMBIO + requested_action."

@@ -4,7 +4,7 @@ task_id: TASK-0157
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0157 (ready): Intake v3 en Zeus-protocol. (A) modo carga-por-archivo abre SECCION dedicada (selector + boton Extraer requisito como primer elemento visible, SIN scroll, SIN pedir Titulo/Narrativa/Intencion antes); boton -> ruta gobernada del Extractor -> candidatas como TARJETAS -> click puebla [Titulo,Narrativa,Intencion]. (B) auto-commit-push ergonomico: el server PREFIERE el override runtime gitignored (*.runtime.json) cuando existe (cae al versionado off-by-default si no) -> Execute submit_intent llega al canonico sin push manual; versionado sigue enabled:false. AC55-AC58, carry AC16/17/43/51-54. #4 byte-identica. maker=Codex/checker=Arquitecto+Analista. Cierra tambien TASK-EXTRACT-DC0E283672 (done; spawned este task)."

@@ -4,7 +4,7 @@ task_id: TASK-0157
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0157 en in_review: Intake v3 file-mode dedicado + candidatas como tarjetas + runtime override config; producto 2afc944; gates verdes."

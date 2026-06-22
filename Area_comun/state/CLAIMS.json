@@ -4410,6 +4410,27 @@
             "updated_at": "2026-06-22T05:55:47Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-archive-0157",
+            "expires_at": "2026-06-23T05:00:00Z",
+            "notes": "Archive the 4 resolved TASK-0157 messages (GO, in_review, REVISAR, Analista verdict) after close.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0157.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0157.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0157-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Codex-to-Arquitecto-TASK-0157-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0157.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0157.md",
+                "Area_comun/mailbox/open/MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0157.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0157.md"
+            ],
+            "started_at": "2026-06-23T01:18:00Z",
+            "status": "released",
+            "task_id": "TASK-0157",
+            "updated_at": "2026-06-23T01:18:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-close-0157",
             "expires_at": "2026-06-23T05:00:00Z",
             "notes": "Close TASK-0157 in_review->done (checker Arquitecto, maker=Codex): Zeus 2afc944 reproducido VERDE en clon limpio (node --test exit 0), AC55-AC58 fieles, #4 byte-identica (protocol.config.json sin tocar), validate con/sin secretos exit 0, drift 0; Analista OK/CERRABLE (AC58 auto-push no es 2do escritor, off-by-default intacto, sin fuga secretos/PII; carry AC52/43/16).",
