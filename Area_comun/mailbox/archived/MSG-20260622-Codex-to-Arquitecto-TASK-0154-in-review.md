@@ -4,7 +4,7 @@ task_id: TASK-0154
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0154 delivered to in_review: product commit da5825d adds permanent AC48/AC49/AC50 behavior tests; npm test and clean-clone npm test pass 47/47; no live capability enabled."
