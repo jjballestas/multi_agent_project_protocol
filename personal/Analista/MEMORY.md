@@ -151,6 +151,15 @@
   neutralidad/encoding exit 0; #4 sin cambios de bytes. Commit de veredicto: `54c2374` (`review(TASK-0153):
   Analista OK exec import`). Residual no bloqueante queda solo en gadgets inherentes `python -c` / `git ext::` para
   la ventana posterior de uso vivo.
+- TASK-0155 (local-vlm provider AC51/AC52/AC53): PASADA sobre Zeus `79be511` + protocolo `90de6fa` -> CAMBIO-
+  REQUERIDO. Clon limpio producto `npm test` 48/48 exit 0. AC52 comportamiento real contra servidor: `0.0.0.0`,
+  `8.8.8.8`, `evil.com`, IPv6 no-loopback, `127.0.0.1.evil.com`, `[::ffff:8.8.8.8]` deshabilitan config; PERO
+  `http://2130706433:11434/api/chat` queda habilitado como `local-vlm` (URL lo canonicaliza a loopback). Como el
+  prompt pidio ese truco y AC52 dice solo host:puerto local allowlisted, lo gatee como escape/canonicalizacion sin
+  test. AC46 payloads propios pasaron; AC51/AC53 pasan por suite y lectura. Gates protocolo: validate con secretos
+  en vivo exit 0, sin secretos en clon limpio exit 0, drift 0 up_to_seq 1191, neutrality/encoding exit 0, #4 byte-
+  identica. Veredicto + MSG rr=true commiteados y pusheados en `45645bd` (`review(TASK-0155): Analista requires
+  AC52 hardening`).
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
