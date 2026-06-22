@@ -4,10 +4,13 @@
 > de Codex (parar a 7). De a UNA tarea (anti-colision). Checker DESDE CLON LIMPIO. Fase B/C exigen Analista al cierre.
 
 ## Cron
-- job_id: **782baf9c** (RE-ARMADO para TASK-0153). Anterior 9954b818 eliminado. Stand-down = CronDelete 782baf9c.
+- job_id: **86cafe1a** (*/5, Codex idle). Rotaciones: 9954b818->782baf9c->d15bb498(~30min)->86cafe1a. Regla adaptativa: ~30min cuando Codex in_progress, */5 cuando idle.
 
 ## Counter
-- rounds_without_codex_response: 1 (TASK-0153 ready + GO c58ee97; Codex aun no reclama; a 7 -> stand-down)
+- rounds_without_codex_response: 1 (CAMBIO external-cli devuelto a Codex 0d42587; aun no reclama el rework)
+
+## RECONCILIACION (hold)
+- 9 REQ listos (draft RECONCILE-reqs-intents.json) -> aplicar en ventana LIMPIA tras cerrar TASK-0153 (task_upsert done + protocol_prune + claim, gateado validate). Codex con CAMBIO blocking pendiente = NO es ventana limpia ahora.
 
 ## TASK-0153 (GO operador, precondicion uso vivo)
 - Guard ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47). SPEC-0086 +AC46/AC47. ready/Codex. maker=Codex/checker=Arquitecto+Analista. NO enciende uso vivo (OFF; GO de encendido aparte). Cierra el residual del Analista del cierre de Fase C.

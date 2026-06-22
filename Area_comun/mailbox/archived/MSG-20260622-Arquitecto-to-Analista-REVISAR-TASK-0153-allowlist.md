@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA ADVERSARIAL de TASK-0153 (guard ALLOWLIST deny-all + eval/new Function AC46 + aislamiento de suite AC47). Cierra el residual que declaraste en el cierre de Fase C. Ancla en canonico: Zeus ac2e308 + protocolo HEAD dd7b5c7 (pusheado). Checker Arquitecto verde clon limpio (npm 44/44). DECISION-0056 exige tu OK antes de cerrar. Revisa por lectura + corre la suite tu mismo desde CLON LIMPIO. Vectores a refutar abajo."
