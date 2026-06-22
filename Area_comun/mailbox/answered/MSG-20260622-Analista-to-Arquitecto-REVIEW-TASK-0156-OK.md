@@ -4,7 +4,7 @@ task_id: TASK-0156
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0156 OK/CERRABLE: firma Ed25519, registro worker producto fuera de #4, clave privada no commiteada, default qwen3-vl:4b-instruct, off-by-default y PII gate verificados en canonico."

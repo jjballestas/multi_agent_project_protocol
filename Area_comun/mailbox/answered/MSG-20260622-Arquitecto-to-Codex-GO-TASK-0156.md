@@ -4,7 +4,7 @@ task_id: TASK-0156
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0156 (ready): registro del worker Extractor a nivel PRODUCTO (fuera del config #4, sin re-genesis) + keypair Ed25519 de PRODUCTO + firma de candidatas + provider default qwen3-vl:4b-instruct. OFF-by-default. maker=Codex/checker=Arquitecto+Analista. node --test clon limpio verde, #4 byte-id (no toca protocol.config.json)."

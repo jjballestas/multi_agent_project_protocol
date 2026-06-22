@@ -4,7 +4,7 @@ task_id: TASK-0156
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de firma/PII de TASK-0156 (worker Extractor a nivel producto + keypair Ed25519 + firma de candidatas, AC54, Opcion 2). Ancla Zeus 560a226 + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 48/48, #4 byte-identica, clave privada gitignored). Confirma: firma valida verificada, firma forjada/ausente RECHAZADA, registro de workers FUERA del config #4, default qwen3-vl:4b-instruct, off-by-default. rr=true con requested_action."

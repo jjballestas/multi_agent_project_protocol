@@ -2,7 +2,7 @@
 task_id: TASK-0156
 title: "Proyecto-front: registro del worker Extractor a nivel PRODUCTO + keypair de producto + firma de candidatas + provider default qwen3-vl:4b-instruct (AC54, SPEC-0086, DECISION-0058 Opcion 2), off-by-default"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

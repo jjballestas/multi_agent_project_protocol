@@ -3759,6 +3759,22 @@
             "updated_at": "2026-06-22T17:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-close-0156",
+            "expires_at": "2026-06-22T22:20:00Z",
+            "notes": "Cierre TASK-0156 (worker Extractor producto + keypair + firma, AC54). Checker Arquitecto verde + Analista OK firma/PII. off-by-default; #4 byte-id.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0156-codex-extractor-product-registration.md"
+            ],
+            "started_at": "2026-06-22T19:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0156",
+            "updated_at": "2026-06-22T19:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-decision-0057",
             "expires_at": "2026-06-22T13:00:00Z",
             "notes": "Registrar DECISION-0057 (facultad del Arquitecto para activar/detener agentes).",
