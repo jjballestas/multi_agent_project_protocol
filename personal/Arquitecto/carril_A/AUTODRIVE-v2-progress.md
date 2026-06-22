@@ -3,8 +3,14 @@
 > Tracker del drive. Cron Arquitecto 9954b818 cada ~5 min (session-only, 7-dias). Counter de rondas-sin-respuesta
 > de Codex (parar a 7). De a UNA tarea (anti-colision). Checker DESDE CLON LIMPIO. Fase B/C exigen Analista al cierre.
 
-## Cron
-- job_id: **86cafe1a** (*/5, Codex idle). Rotaciones: 9954b818->782baf9c->d15bb498(~30min)->86cafe1a. Regla adaptativa: ~30min cuando Codex in_progress, */5 cuando idle.
+## Cron Arquitecto
+- job_id rota; regla adaptativa: ~30min ("11,41 * * * *") cuando Codex in_progress, */5 cuando idle.
+
+## RUNBOOK ACTIVACION 3-WAY (DECISION-0057; permiso Bash(powershell:*) en .claude/settings.json L57)
+Relanzar un cron caido (cold-start o stop stale). Verificar vivo: `cat .protocol-tmp/<name>/<name>.pid` + `powershell -NoProfile -Command "Get-Process -Id <pid> -ErrorAction SilentlyContinue"`.
+- Codex:   `rm -f .protocol-tmp/codex_mailbox_cron/codex_mailbox_cron.stop` ; `powershell -NoProfile -Command "Start-Process -WindowStyle Hidden -FilePath powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','D:\Agentes\multi_agent_project_protocol\personal\Codex\codex_mailbox_cron.ps1'"`
+- Analista: `rm -f .protocol-tmp/analista_mailbox_cron/analista_mailbox_cron.stop` ; idem con `personal\Analista\analista_mailbox_cron.ps1`
+- Ambos auto-salen a 7 rondas sin mensaje mio (costo). Relanzar cuando haya cola para ellos. NO mandarles MSG con stop/standdown+cron (se auto-detienen). Detener: crear el .stop o CronDelete + matar PID.
 
 ## Counter
 - rounds_without_codex_response: 1 (CAMBIO external-cli devuelto a Codex 0d42587; aun no reclama el rework)

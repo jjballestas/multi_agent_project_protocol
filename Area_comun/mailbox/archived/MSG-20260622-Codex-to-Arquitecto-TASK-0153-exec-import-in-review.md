@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0153 re-delivered in_review: product 8751051 flags exec/execSync imports from child_process without matching bare exec(); npm test and clean clone PASS 44/44."
