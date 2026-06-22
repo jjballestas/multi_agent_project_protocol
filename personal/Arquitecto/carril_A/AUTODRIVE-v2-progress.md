@@ -4,10 +4,10 @@
 > de Codex (parar a 7). De a UNA tarea (anti-colision). Checker DESDE CLON LIMPIO. Fase B/C exigen Analista al cierre.
 
 ## Cron
-- job_id: 9954b818. Stand-down = CronDelete 9954b818 (o CronList).
+- job_id: 9954b818. **DETENIDO (CronDelete) tras 7/7 rondas sin rework de Codex.** Re-armar = nuevo CronCreate cuando el operador reactive a Codex.
 
 ## Counter
-- rounds_without_codex_response: 6 (CAMBIO-REQUERIDO guard AC45 devuelto a Codex a3c75a9; aun no re-reclama; a 7 -> stand-down)
+- rounds_without_codex_response: 7 -> STAND-DOWN. Cron 9954b818 eliminado; FYI al operador (STANDDOWN-CRON-faseC). Codex no tomo el rework del guard AC45.
 - ultima actividad Codex: entrega Fase C (d1eb0cf). Pendiente rework guard AC45. HEAD==origin tras este round.
 
 ## Orden y estado
