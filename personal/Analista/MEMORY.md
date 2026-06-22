@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-14 (HEAD ~5e6c4bc, v1.7.0).
+> Ultima actualizacion: 2026-06-22 (serie front intake/carga-por-archivo v2; #4 ON en vivo; epoca 1.14.0).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -84,7 +84,83 @@
   OFICIAL; cuenta UNA voz (la mia). Reforma de firma adoptada: firmo "Analista". El arquitecto me mando
   STAND-DOWN; pare el cron.
 
+## Serie FRONT intake / carga-por-archivo v2 (2026-06-20..22) -- VOZ ADVERSARIAL del producto Zeus
+> Proyecto-front Zeus-protocol (repo PRODUCTO separado D:\Agentes\Zeus\Zeus-protocol; gobernanza/SPEC-0086/
+> handoffs en Area_comun=dataset; DECISION-0049/0050). Codex maker / Arquitecto checker / yo adversarial
+> independiente; DECISION-0056 exige mi OK para cerrar cada fase. Metodo SIEMPRE: clono Zeus a tmp en C:,
+> corro npm test YO, pruebo POR COMPORTAMIENTO, gateo por EXIT CODE.
+- TASK-0128 (vista atestacion #4): CONCURRO (badges derivados del runtime + fail-closed, guarda PII redactada).
+- TASK-0134 (relay anti-impersonacion): HALLE el hueco -- el front confiaba `payload.actorId`/`payload.intents`
+  -> un POST local podia forjar decision/claim/task_status FIRMADA como Arquitecto (enforce no lo paraba: el
+  claim iba en la misma tx). CAMBIO. Re-verifique el fix CERRADO: builder server-side, execute solo para
+  requirement-intake (403 el resto), payload.actorId/intents -> 400, prueba negativa PERMANENTE.
+- TASK-0138 (mailbox_archive, kind core nuevo): HALLE leak de NEUTRALIDAD -- `runtime/submit_intent.py`
+  hardcodeaba `author:"Operador"`/`relayed_by:"Arquitecto"` (identidades de instancia en el core neutral; el
+  scan no lo atrapaba). CAMBIO. Re-verifique CALLER-DERIVED (require_text; literales movidos al server Zeus =
+  producto) + scan de neutralidad regresion-proof (inyecte "Operador" en copia de submit_intent.py -> scan
+  exit 1; submit_intent.py NO esta en la whitelist legacy).
+- TASK-0139 (commit-push acotado): OK. No-drag (`git commit --only -- <paths>`) y non-fast-forward (409 sin
+  sobrescribir) PROBADOS por comportamiento contra un bare-remote local; landed solo tras ls-remote real.
+- TASK-0148 (intake v1): HALLE suite ROJA en clon LIMPIO Windows -- el test mermaid usa regex LF-only
+  (`/```+mermaid\n/`) y el manual quedo CRLF (core.autocrlf=true, sin .gitattributes). Fix `.gitattributes
+  eol=lf` (entro en TASK-0150+). Ingestion v1 limpia 7/7.
+- TASK-0150 (file v2 Fase A plumbing): OK 7/7 (store os-tmp fuera del repo, raw nunca al #4, server CERO
+  egress, candidatas no en VALID_TASK_STATUSES) + RECO ampliar el guard AC40/AC45 a todo src/**.
+- TASK-0151 (Fase B panel + gate humano DURO de PII): OK 6/6 (aprobar sin piiReviewed -> 409; re-screen del
+  texto editado; editedFingerprint -> ids distintos; candidatas fuera del ledger; provenance-mismatch -> 409)
+  + ANOMALIA DECISION-0018: el MENSAJE del Arquitecto rompia ASCII (notifique, no lo arregle).
+- TASK-0152 (Fase C agente extractor + AC45 = LA VENTANA REAL DE MODELO): HALLE 5 huecos del guard de egress,
+  PROBADOS por comportamiento -- `await import("openai")` (dinamico), `import("undici")`, `net.connect` bare,
+  `axios`, `got` SLIPS (el guard solo veia server.js + proveedores nombrados + import estatico). CAMBIO-
+  REQUERIDO. Re-verifique el rework CERRADO: familia ampliada (dynamic-import marca CUALQUIER `import(`,
+  network-call, bare network-module, model-sdk/http-package estatico Y dinamico) + control positivo POR
+  familia; los 5 huecos ahora FLAGGED; src real []. OK/CERRABLE con RESIDUAL DECLARADO: un scan estatico
+  inherentemente NO atrapa clientes HTTP no listados (phin/needle) ni ofuscacion (eval/computed-global) ->
+  reco ALLOWLIST + marcar eval/new Function como follow-up del USO VIVO. Extractor entregado = deterministic-
+  local (cero egress); uso vivo = GO APARTE del operador.
+
+- TASK-0153 (guard ALLOWLIST AC46 + aislamiento AC47, 2 pasadas): PASADA 1 sobre Zeus ac2e308 -- import-side
+  flip a deny-by-default CERRO el residual que declare en Fase C (phin/needle + eval), confirmado por
+  comportamiento; PERO halle escape NUEVO: `external-cli` seguia DENYLIST {curl,wget,ssh,nc,node} sobre
+  child_process -> execFile/spawn("powershell"|"sh", curl/IWR) ESCAPABA. CAMBIO. El Arquitecto lo devolvio a
+  Codex. PASADA 2 (re-verificacion) sobre Zeus 5cb8910 + protocolo HEAD 15e66a1: external-cli paso a ALLOWLIST
+  de binarios spawneados {git,python} -> powershell/sh/bash/cmd/curl/wget + hints node/deno/pwsh/nc/paths
+  absolutos TODOS FLAGGED; git/python y src real -> [] (sin FP). 44/44 exit 0 clon limpio; gates protocolo exit 0;
+  #4 byte-identica. RESIDUAL NUEVO declarado (NO bloqueante): `child_process.exec`/`execSync` NO estan en
+  cliPattern (solo execFile*/spawn*) -> exec("curl...") escapa; ademas python -c y git ext::/fetch son gadgets
+  allowlisted INEVITABLES (no hay "cero egress" por scan estatico). Por que residual y no bloqueo: un fix bare
+  `\bexec\(` COLISIONA con RegExp.exec que el src real usa (canonicalReader.js:229/243); fix limpio = import-binding
+  (marcar import de exec/execSync desde node:child_process; src solo importa {execFile,spawn} -> cero FP) y queda
+  como follow-up del USO VIVO. Veredicto = CERRABLE con residual declarado. Commit 56da208 (autor Analista) PUSHEADO
+  a origin/main yo mismo (cron ANALISTA-EJECUTOR autoriza commitear mi propio veredicto con rutas explicitas,
+  gateado por validate+encoding exit 0, ventana 0 claims activos). LECCION: un allowlist de binarios spawneados NO
+  da "cero egress" si los binarios permitidos son interpretes (python -c) o tienen transportes (git ext::); el gate
+  real del egress en vivo es el extractor deterministic-local, no el scan (regresion-proof, no sandbox).
+
 ## Lecciones no-obvias (persisten)
+- **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
+  Windows: `core.autocrlf=true` reescribe LF->CRLF en el clon -> tests LF-only (regex `\n`) rompen aunque el
+  repo este "bien"; el fix es `.gitattributes eol=lf`. Probar POR COMPORTAMIENTO (forjar payloads, bare-remote
+  real, inyectar literal en una copia) destapa lo que un test STRING-MATCH no atrapa.
+- **Guard de no-egress / anti-impersonacion (patron):** un scan estatico necesita (a) TODO src/** (no un solo
+  archivo), (b) `import(` DINAMICO, (c) bare network-modules + call sites (`.connect/.request/.get`), (d)
+  control positivo POR familia. ALLOWLIST > denylist (un denylist de nombres nunca es completo). Limite
+  inherente honesto: ningun scan estatico atrapa eval/ofuscacion/cliente-no-listado -> declararlo como
+  residual + reco allowlist, NO sobre-afirmar "no hay egress".
+- **Neutralidad del core:** identidades de instancia (Operador/Arquitecto/Codex) van al PRODUCTO (server Zeus),
+  NUNCA al core neutral (runtime). El scan de neutralidad ahora deriva los nombres del agent_registry y los
+  marca en runtime/*.py salvo una whitelist legacy nombrada (deuda declarada, no silenciosa).
+- **Anti-impersonacion:** el front es CLIENTE; el servidor NUNCA confia en `payload.actorId`/`payload.intents`;
+  builder server-side + execute solo para acciones permitidas (hard-gate set cerrado) + prueba negativa
+  permanente. Agregar una 2a accion no debe erosionar el bound (sigue siendo un Set cerrado).
+- **PII:** la redaccion estructural es por PATRONES best-effort (NIT/razon social/SQL/email/telefono), NO
+  cero-PII garantizado; declararlo honesto; DEF-PII (TASK-0118) sigue el gate de citabilidad. El gate HUMANO
+  de PII al aprobar candidatas es DURO (piiReviewed -> 409).
+- **npm test flake en arranque frio:** la 1a corrida del clon puede dar 1 fallo por timeout (los tests
+  behavioral spawnean server+git+python); correr 2-3 veces y reportar la distribucion, no asumir el 1er run.
+- **maker != checker REAL / identidad:** NO asumo otros roles (me dieron el prompt del DISENADOR -> lo rechace;
+  cambio de firmante = re-genesis gobernado). Aplico la lente a MI: si me equivoco, RETRACTO (CR1 Carril A
+  "event_auth no existe" era falso -> top-level; lo corregi yo mismo).
 - **NARRACION MINIMA = REGLA DURA (DECISION-0036, que YO revise).** CERO narracion intra-ejecucion: NADA de
   "Leo X", "Verifico Y", "Escribo Z", "Confirmo", "Reprogramo" antes/despues de tool calls. Encadenar las
   herramientas EN SILENCIO; el razonamiento de proceso va al canal interno, NO al output. Output = UN solo
@@ -121,16 +197,21 @@
   mensaje es el unico real" (la otra sesion es igual de legitima); honestidad por encima de defender autoria.
 
 ## Estado vigente (VERIFICAR al arrancar)
-- FIRMA = "Analista" (sin prefijo "Claude-"; orden operador 2026-06-15). Carpeta sigue personal/Analista/
-  por ahora (rename a personal/Analista/ pendiente de coordinar, no romper el path de arranque).
-- protocol_version 1.9.3, TRIO OFF-PILOT COMPLETO: TASK-0100=1.9.1, TASK-0095=1.9.2, TASK-0096=1.9.3 (las 3
-  con mi CONCURRO independiente). DECISION-0036 (narracion dura, ahora "primordial")=1.9.0; DECISION-0037
-  (rescope eol=lf opcion A). STAND-DOWN: cron parado, en reposo hasta que el operador reactive. Gateado OFF:
-  #4 chain/agent_signatures/anchor, SA.4, subagents, Capa C.
-- v1.8.0 previo: DECISION-0035 satelite protocol_research (repo separado read-only).
-- Satelite protocol_research (DECISION-0035) ya autorizado: repo SEPARADO read-only hermano del Core,
-  estructura+scaffolding, todo gateado OFF/stub. NO muta el Core.
-- Codex en STAND-DOWN. Fase 1 (E1)/Fase 2 (E2) no existen, requieren decision + GO.
-- Mapa real: Area_comun/artifacts/RECONCILIACION-hoja-de-ruta-20260614.md.
-- Operador maneja monitoreo via "cron" (ScheduleWakeup cada 2 min): "cancela cron" lo detiene; una
-  activacion rezagada tras el cancel NO se reprograma.
+- FIRMA = "Analista" (sin prefijo "Claude-"; orden operador 2026-06-15). Area = personal/Analista/.
+- **#4 ON EN EL VIVO** (chain + agent_signatures + anchor + event_auth), `enforce`+`authoritative` ON, #3 cost
+  ON. **Epoca/protocol_version 1.14.0 PINNED** (bump => re-genesis-boundary). Protocolo HEAD a veces 1 commit
+  ADELANTE de origin (handoff sin pushear, esperado in_review). DECISION-0046 (replay secret-independiente):
+  validate exit 0 con Y sin secretos desde clon limpio.
+- **Proyecto-front Zeus-protocol (DECISION-0049/0050):** producto en repo separado D:\Agentes\Zeus\Zeus-protocol
+  (HEAD suele ir adelante de origin). Gobernanza/SPEC-0086/handoffs en Area_comun=dataset atestado. Serie
+  INTAKE / carga-por-archivo v2 (DECISION-0053 mailbox_archive, 0055/0056 file-ingestion). Codex maker /
+  Arquitecto checker / yo voz adversarial; DECISION-0056 exige mi OK para cerrar fase. Ultimo: Fase C
+  (TASK-0152, agente extractor + AC45) re-verificada OK/CERRABLE; el Arquitecto cierra. USO VIVO del extractor
+  = GO APARTE del operador (ventana de modelo real), fuera de los cierres de fase.
+- Gates de cada pasada (verifico yo): npm test verde en clon limpio (sin flake, correr 2-3x), validate exit 0
+  CON y SIN secretos, drift 0, neutralidad+encoding 0, #4 byte-identica (config/genesis/keys sin cambio).
+- Operador maneja monitoreo via "cron" (ScheduleWakeup): "cancela cron" lo detiene; una activacion rezagada
+  tras el cancel NO se reprograma. El flujo tipico: el operador me dice "tienes mensaje" -> reviso
+  mailbox/open inbound a Analista (REVIEW/REVISAR del Arquitecto) -> pasada adversarial -> entrego.
+- (Historico: trio off-pilot v1.9.1-1.9.3, Carril A activacion #4, satelite protocol_research DECISION-0035 --
+  ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)

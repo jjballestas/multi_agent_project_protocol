@@ -3,7 +3,7 @@
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista**, NO "Claude-analista" (el prefijo
 > "Claude-" confunde a otros modelos con el arquitecto Claude). Mensajes: from: Analista / to: Analista.
 > Mi area privada = `personal/Analista/`.
-> Ultima actualizacion: 2026-06-20 (front MVP etapas 1-4 done; TASK-0128 CONCURRO; #4 ON en vivo).
+> Ultima actualizacion: 2026-06-22 (serie front intake/carga-por-archivo v2 Fases A/B/C; #4 ON en vivo).
 
 Pega el bloque de "PROMPT PARA PEGAR" como primer mensaje al iniciar otra sesion de analista.
 Despues, ejecuta el ARRANQUE EN FRIO de abajo.
@@ -84,30 +84,43 @@ mensaje antes de aseverar.
    soporte sigue sin commitear; el commit lo hace el escritor unico. Verifica tu propio mensaje ASCII antes
    de cerrar.
 
-## ESTADO DE LA ULTIMA SESION (2026-06-20 - VERIFICAR, no asumir)
+## ESTADO DE LA ULTIMA SESION (2026-06-22 - VERIFICAR, no asumir)
 
-- protocolo HEAD ~`81e99c2`, origin == HEAD. **Epoca/protocol_version 1.14.0 PINNED** (bajo #4 chain ON un
-  bump exige re-genesis-boundary). **#4 ON EN EL VIVO** (chain + agent_signatures + anchor + event_auth),
-  `enforce`+`authoritative` ON, #3 cost ON. (Cambio vs runbooks viejos que lo daban OFF.)
-- **Carril A (A1/A2/A3 = activacion #4 + GATE-DATASET + precondicion read-only):** revise honestidad/
-  metodologia; convergencia INDEPENDIENTE con Codex (PII disciplinaria no estructural; prueba negativa
-  objetiva; provisioning). Autocorregi CR1 (event_auth SI existe top-level). Arquitecto consolida; STAND-DOWN
-  ordenado. Drafts en personal/Arquitecto/carril_A/; promocion pendiente de GO del operador.
-- **Proyecto-front Zeus-protocol (T0, DECISION-0049):** MVP single-operator para operar/observar el
-  protocolo. Codigo en repo PRODUCTO separado `D:\Agentes\Zeus\Zeus-protocol`; gobernanza/SPEC(-0086)/
-  handoffs en Area_comun = dataset atestado. **Etapas 1-4 DONE.** Design system insumo en
-  `Zeus-protocol/design/interface` (commit a445d59), verificado por mi.
-- **TASK-0128 (front etapa 4, vista de atestacion #4) DONE + mi CONCURRO independiente** (clon limpio:
-  npm test 11/11 exit 0; badges DERIVADOS del runtime via python -c + fail-closed, no verde estatico;
-  guarda PII estructural [payloadPreview siempre redactado]; read-only; gates protocolo exit 0; drift 0).
-  Residual declarado: el smoke del server SIN secretos lo reporto el maker, no lo corri yo.
-- **DECISION-0050** formaliza la convencion de repos (gobernanza en el protocolo / codigo en producto).
-- **Recomendacion mia pendiente al Arquitecto** (MSG-20260620-Analista-to-Arquitecto-TASK-0128-recomendacion):
-  el staticContract test es string-match; sugiero test de COMPORTAMIENTO (mock de runtime que falla -> badge
-  NO-verde) para hacer regresion-proof la honestidad de estado. No bloquea el cierre.
-- Carril B (connector read-only SQL Server / Git) off-by-default; uso vivo gateado a GO del operador.
-- LECCION DEL DIA: me entregaron el prompt del DISENADOR; NO lo asumi (rompe maker != checker). Cambio de
-  firmante = re-genesis gobernado. Soy y sigo siendo el Analista.
+- protocolo HEAD ~`9f91dd4`, origin == HEAD (verificar; el HEAD a veces va 1 commit ADELANTE de origin por
+  handoff sin pushear -- esperado en in_review, lo dejo explicito). **Epoca/protocol_version 1.14.0 PINNED**
+  (bajo #4 chain ON un bump exige re-genesis-boundary). **#4 ON EN EL VIVO** (chain + agent_signatures +
+  anchor + event_auth), `enforce`+`authoritative` ON, #3 cost ON.
+- **Proyecto-front Zeus-protocol (T0, DECISION-0049/0050):** MVP single-operator + serie INTAKE / CARGA POR
+  ARCHIVO v2 (DECISION-0053/0055/0056). Codigo en repo PRODUCTO separado `D:\Agentes\Zeus\Zeus-protocol`
+  (HEAD suele ir adelante de origin; sin pushear in_review). Gobernanza/SPEC(-0086)/handoffs en Area_comun =
+  dataset atestado. **Codex maker / Arquitecto checker / yo = voz adversarial independiente** (DECISION-0056
+  exige mi OK antes de cerrar cada fase). Cada pasada: clono Zeus a un tmp en C:, corro `npm test` YO,
+  gateo por EXIT CODE.
+- **Mis pasadas recientes (todas entregadas, ANALISTA-*.md + aviso):**
+  - TASK-0128 (atestacion-view #4): CONCURRO.
+  - TASK-0134 (relay anti-impersonacion): HALLE el hueco (front confiaba payload.actorId/intents -> forjar
+    decision/claim firmada como Arquitecto) -> CAMBIO; re-verifique el fix CERRADO (builder server-side +
+    execute solo requirement-intake + prueba negativa permanente).
+  - TASK-0138 (mailbox_archive): HALLE leak de NEUTRALIDAD (el core runtime hardcodeaba "Operador"/
+    "Arquitecto") -> CAMBIO; re-verifique fix CALLER-DERIVED + scan de neutralidad regresion-proof (inyecte
+    un literal en copia -> scan exit 1).
+  - TASK-0139 (commit-push acotado): OK (no-drag `commit --only` y non-fast-forward 409 probados por
+    comportamiento contra bare-remote local).
+  - TASK-0148 (intake v1): HALLE suite ROJA en clon limpio Windows por test mermaid LF-only + CRLF
+    (autocrlf) -> fix `.gitattributes eol=lf` (resuelto en TASK-0150+).
+  - TASK-0150 (file v2 Fase A plumbing): OK 7/7 + reco ampliar guard AC45 a todo src/**.
+  - TASK-0151 (Fase B panel + gate humano DURO de PII): OK 6/6 + anomalia DECISION-0018 (el MENSAJE del
+    Arquitecto rompia ASCII; notifique, no lo arregle).
+  - TASK-0152 (Fase C agente extractor + AC45): HALLE 5 huecos del guard (import() dinamico, import("undici"),
+    net.connect bare, axios, got SLIP) -> CAMBIO-REQUERIDO; re-verifique el rework CERRADO (familia ampliada +
+    control positivo por familia) -> **OK/CERRABLE con RESIDUAL declarado** (scan estatico NO atrapa clientes
+    HTTP no listados ni ofuscacion eval/computed -> reco ALLOWLIST como follow-up del USO VIVO; el extractor
+    es deterministic-local, cero egress).
+- **ULTIMO estado abierto:** mi MSG-20260622-Analista-to-Arquitecto-TASK-0152-guard-OK (OK la Fase C); el
+  Arquitecto cierra. **USO VIVO del agente extractor = GO APARTE del operador** (la ventana de modelo real),
+  fuera de los cierres de fase.
+- LECCION VIGENTE: me entregaron el prompt del DISENADOR; NO lo asumi (rompe maker != checker). Soy y sigo
+  siendo el Analista.
 
 ## QUE HACER AL ENTRAR
 
