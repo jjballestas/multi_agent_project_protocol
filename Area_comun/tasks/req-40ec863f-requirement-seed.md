@@ -2,7 +2,7 @@
 task_id: "REQ-40EC863F"
 title: "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

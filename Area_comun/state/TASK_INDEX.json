@@ -63,8 +63,9 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Boton Nueva historia/requisito no resetea el formulario del Intake",
+            "triage_note": "Done (operador ratifico): reset solo tras EXECUTE OK (AC21); Nueva historia no borra lo tipeado. AC permanente + behavior-test = follow-up TASK-0154.",
             "type": "requirement"
         },
         {
@@ -162,8 +163,9 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+            "triage_note": "Done (operador ratifico): boton governed-button + design tokens en el front; comportamiento entregado. AC permanente + behavior-test = follow-up TASK-0154.",
             "type": "requirement"
         },
         {
@@ -278,8 +280,9 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor",
+            "triage_note": "Done (operador ratifico): server lee canonico fresco por request (git show/diff, sin cache) + AC29 refetch. AC permanente + behavior-test = follow-up TASK-0154.",
             "type": "requirement"
         },
         {
@@ -326,8 +329,9 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+            "triage_note": "Cancelado (operador ratifico): duplicado exacto de REQ-40EC863F (boton mal estilo).",
             "type": "requirement"
         },
         {
@@ -474,8 +478,9 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele",
+            "triage_note": "Cancelado (operador ratifico): duplicado de REQ-D642E4D8 (carga por archivo v2).",
             "type": "requirement"
         },
         {

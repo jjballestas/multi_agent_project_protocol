@@ -2,7 +2,7 @@
 task_id: "REQ-CEB7F585"
 title: "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele"
 type: "requirement"
-status: proposed
+status: cancelled
 owner: "Operador"
 phase: "P2"
 priority: "normal"

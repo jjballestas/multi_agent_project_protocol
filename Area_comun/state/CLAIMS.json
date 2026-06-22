@@ -3826,6 +3826,26 @@
             "updated_at": "2026-06-22T00:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-triage-reqs",
+            "expires_at": "2026-06-22T16:20:00Z",
+            "notes": "Triage ratificado por el operador: cancelar 2 dups + done 3 (AC nuevo follow-up TASK-0154).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/req-86154148-requirement-seed.md",
+                "Area_comun/tasks/req-ceb7f585-requirement-seed.md",
+                "Area_comun/tasks/req-40ec863f-requirement-seed.md",
+                "Area_comun/tasks/req-0873a67c-requirement-seed.md",
+                "Area_comun/tasks/req-6d80db17-requirement-seed.md"
+            ],
+            "started_at": "2026-06-22T13:20:00Z",
+            "status": "released",
+            "task_id": "TRIAGE-REQS",
+            "updated_at": "2026-06-22T13:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-upsert-0153",
             "expires_at": "2026-06-22T12:00:00Z",
             "notes": "Registrar+promover TASK-0153 (guard allowlist AC46 + aislamiento test AC47) ready tras GO del operador.",

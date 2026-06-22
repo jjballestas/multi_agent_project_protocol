@@ -2,7 +2,7 @@
 task_id: "REQ-0873A67C"
 title: "UX: Boton Nueva historia/requisito no resetea el formulario del Intake"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

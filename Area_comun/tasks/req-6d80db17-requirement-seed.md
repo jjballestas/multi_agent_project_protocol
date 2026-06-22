@@ -2,7 +2,7 @@
 task_id: "REQ-6D80DB17"
 title: "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

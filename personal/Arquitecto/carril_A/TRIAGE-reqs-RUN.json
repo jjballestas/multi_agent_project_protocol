@@ -1,0 +1,187 @@
+{
+ "intents": [
+  {
+   "claim": {
+    "op": "acquire",
+    "claim": {
+     "claim_id": "CLAIM-20260622-Arquitecto-triage-reqs",
+     "task_id": "TRIAGE-REQS",
+     "owner": "Arquitecto",
+     "scope": [
+      "Area_comun/state/CLAIMS.json",
+      "Area_comun/state/TASK_INDEX.json",
+      "Area_comun/state/PROJECT_STATE.json",
+      "Area_comun/tasks/req-86154148-requirement-seed.md",
+      "Area_comun/tasks/req-ceb7f585-requirement-seed.md",
+      "Area_comun/tasks/req-40ec863f-requirement-seed.md",
+      "Area_comun/tasks/req-0873a67c-requirement-seed.md",
+      "Area_comun/tasks/req-6d80db17-requirement-seed.md"
+     ],
+     "started_at": "2026-06-22T13:20:00Z",
+     "updated_at": "2026-06-22T13:20:00Z",
+     "expires_at": "2026-06-22T16:20:00Z",
+     "status": "active",
+     "notes": "Triage ratificado por el operador: cancelar 2 dups + done 3 (AC nuevo follow-up TASK-0154)."
+    },
+    "idempotency_key": "arquitecto:triage:claim-acquire"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los demas elementos de la fila, y respetar el sistema de estilos de la consola. Puede incluir un icono + antes del texto.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-86154148-requirement-seed.md",
+     "id": "REQ-86154148",
+     "narrative": "Como operador quiero que el boton Nueva historia/requisito tenga un estilo visual correcto: el texto se parte en dos lineas, el boton aparece desalineado verticalmente respecto a los elementos adyacentes (borrador, Mis requisitos) y rompe la fila de controles del Intake.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "cancelled",
+     "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+     "type": "requirement",
+     "triage_note": "Cancelado (operador ratifico): duplicado exacto de REQ-40EC863F (boton mal estilo)."
+    },
+    "idempotency_key": "arquitecto:triage:req-86154148"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "- Antes de crear, el operador elige el MODO: (a) \"Nueva historia digitada\" -> muestra los campos actuales; (b) \"Por carga de archivo\" -> flujo de archivo. En AMBOS modos se validan los campos obligatorios antes de EXECUTE (sin enviar con vacios/placeholder).- Modo archivo: se sube un .md/.txt SIN formato definido; el sistema extrae las historias/casos de uso y genera 1..N requisitos candidatos a partir del contenido.- Los candidatos se muestran en una PESTANA/panel de REVISION donde el operador valida o edita cada uno hasta dejarlo con el formato requerido (titulo + narrativa + intencion + proyecto).- Solo los candidatos VALIDADOS se envian (EXECUTE gobernado) y aterrizan como semillas para SPEC; nada se envia sin validacion del operador.- Se mantienen las guardas: contenido como dato INERTE (nunca ejecutado), PII structural guard + ASCII sobre el texto extraido, allowlist de tipo + limite de tamano, OFF/gated.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-ceb7f585-requirement-seed.md",
+     "id": "REQ-CEB7F585",
+     "narrative": "Como operador quiero subir un archivo con historias de usuario o casos de uso SIN un formatorigido, y que el sistema analice y extraiga la informacion y genere en ese momento losrequisitos/tareas candidatos que el archivo amerite; luego yo los valido o edito (ya con elformato requerido) en una pestana especial, y solo al validarlos se envian para convertirse enSPEC. La carga actual (REQ-31100EAF) solo adjunta y obliga a llenar los campos a mano, lo queanula el valor de cargar por archivo.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "cancelled",
+     "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele",
+     "type": "requirement",
+     "triage_note": "Cancelado (operador ratifico): duplicado de REQ-D642E4D8 (carga por archivo v2)."
+    },
+    "idempotency_key": "arquitecto:triage:req-ceb7f585"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los elementos de la misma fila, y respetar el sistema de estilos de la consola (color de acento, bordes, tipografia). Opcionalmente puede usar un icono + antes del texto para reforzar su funcion de creacion.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-40ec863f-requirement-seed.md",
+     "id": "REQ-40EC863F",
+     "narrative": "Como operador quiero que el boton Nueva historia/requisito tenga un estilo visual correcto y coherente con el resto de la interfaz, ya que actualmente el texto se parte en dos lineas, el boton aparece desalineado verticalmente respecto a los elementos adyacentes (borrador, Mis requisitos) y rompe la fila de controles del Intake.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake",
+     "type": "requirement",
+     "triage_note": "Done (operador ratifico): boton governed-button + design tokens en el front; comportamiento entregado. AC permanente + behavior-test = follow-up TASK-0154."
+    },
+    "idempotency_key": "arquitecto:triage:req-40ec863f"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Al pulsar el boton: titulo vacio, narrativa vacia, intencion de aceptacion vacia, proyecto destino en valor por defecto, checkbox PII desmarcado, wizard en paso 1, sin resultados de preview ni submit anteriores visibles.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-0873a67c-requirement-seed.md",
+     "id": "REQ-0873A67C",
+     "narrative": "Como operador quiero que al hacer click en el boton Nueva historia/requisito el formulario del Intake se limpie completamente (todos los campos vacios, checkbox desmarcado, wizard en paso 1) para poder iniciar un nuevo requisito desde cero sin datos del draft anterior.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Boton Nueva historia/requisito no resetea el formulario del Intake",
+     "type": "requirement",
+     "triage_note": "Done (operador ratifico): reset solo tras EXECUTE OK (AC21); Nueva historia no borra lo tipeado. AC permanente + behavior-test = follow-up TASK-0154."
+    },
+    "idempotency_key": "arquitecto:triage:req-0873a67c"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Tras un commit nuevo al repo, el servidor deberia detectar el cambio (via git poll o watcher) y actualizar el estado canonico que sirve a la UI sin requerir reinicio manual. El Ledger SEQ, backlog y artefactos deben reflejar el nuevo HEAD automaticamente.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-6d80db17-requirement-seed.md",
+     "id": "REQ-6D80DB17",
+     "narrative": "Como operador quiero que los nuevos commits aplicados al protocolo por Codex o el Arquitecto sean visibles en la consola sin necesidad de reiniciar el servidor Node (npm start), ya que actualmente el servidor carga el estado canonico al inicio y no detecta nuevos commits posteriores.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor",
+     "type": "requirement",
+     "triage_note": "Done (operador ratifico): server lee canonico fresco por request (git show/diff, sin cache) + AC29 refetch. AC permanente + behavior-test = follow-up TASK-0154."
+    },
+    "idempotency_key": "arquitecto:triage:req-6d80db17"
+   }
+  },
+  {
+   "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260622-Arquitecto-triage-reqs",
+    "idempotency_key": "arquitecto:triage:claim-release"
+   }
+  }
+ ]
+}

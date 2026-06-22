@@ -3,7 +3,7 @@
         {
             "id": "REQ-0873A67C",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Boton Nueva historia/requisito no resetea el formulario del Intake"
         },
         {
@@ -27,7 +27,7 @@
         {
             "id": "REQ-40EC863F",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
         },
         {
@@ -57,7 +57,7 @@
         {
             "id": "REQ-6D80DB17",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
         },
         {
@@ -69,7 +69,7 @@
         {
             "id": "REQ-86154148",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
         },
         {
@@ -105,7 +105,7 @@
         {
             "id": "REQ-CEB7F585",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele"
         },
         {
