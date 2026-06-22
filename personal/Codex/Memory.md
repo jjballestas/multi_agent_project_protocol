@@ -4,6 +4,18 @@ Last updated: 2026-06-21 Europe/Madrid, after TASK-0149 no-phantom intake fix.
 
 ## Latest Session Note
 
+- TASK-0151 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `0a5e737 feat(intake): add candidate review gate`. File intake v2 Phase B now keeps candidates in an OS temp
+  store outside the attested dataset, exposes a review panel for pending candidates, blocks approval without
+  per-candidate human PII acknowledgement, rejects active edited content, re-screens/redacts candidate text through
+  governed `requirement-intake`, derives requirement ids from edited content, preserves PII-free provenance
+  (`source_file_sha256`, `extraction_task_id`, `candidate_pre_edit_hash`), and keeps discard/approval lifecycle
+  outside `task_status`. Evidence before commit: `node --check src/server.js public/app.js
+  tests/staticContract.test.js`, product `npm test` PASS 43/43, and clean-clone Zeus `npm test` PASS 43/43.
+  Protocol delivery commit moved TASK-0151 to `in_review`, released
+  `CLAIM-20260622-Codex-TASK-0151`, answered the GO, and opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0151-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0151-codex-to-arquitecto-1.md`.
 - TASK-0150 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `5121335 feat(intake): emit file extraction tasks`. File intake v2 Phase A now keeps upload ingestion
   OFF-by-default, hashes raw upload bytes with SHA-256, performs honest best-effort ASCII PII screening, stores

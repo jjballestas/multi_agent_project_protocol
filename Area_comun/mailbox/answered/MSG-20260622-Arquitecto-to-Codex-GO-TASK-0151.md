@@ -4,7 +4,7 @@ task_id: TASK-0151
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0151 (ready, maker=Codex): carga por archivo v2 FASE B. Candidatas en STORE NO-LEDGER (gitignored fuera del dataset, ciclo propio NO task_status, ledger nunca lo ve, drift 0) + PANEL de revision con GATE HUMANO DURO de PII (por candidata: revisar/editar/aprobar/descartar; aprobar EXIGE declarar 'PII revisada') + solo aprobadas al intake AC39 con RE-SCREEN candidate->intake + id del CONTENIDO EDITADO (1 archivo->N candidatas->N REQ) + procedencia PII-free + estabilizar el flake de timeout. AC41/AC43/AC45c SPEC-0086 ext10, DECISION-0056. Codigo en Zeus; yo checker DESDE CLON LIMPIO + Analista al cierre. NO encender vivo."
