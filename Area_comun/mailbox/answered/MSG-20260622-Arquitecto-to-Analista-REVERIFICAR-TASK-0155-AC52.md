@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-VERIFICACION del rework AC52 (TASK-0155): Codex endurecio isLoopbackHost a canonicalizacion estricta (rechaza 2130706433/octal/hex/0.0.0.0/externos/hostnames/sufijos/IPv4-mapped) + test negativo de la familia (linea ~1059). Ancla Zeus 6369b5c + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 48/48, #4 byte-id). Confirma que el hueco DECIMAL que probaste CIERRA y que ningun host no-loopback pasa. rr=true con requested_action."

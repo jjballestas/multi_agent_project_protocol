@@ -2,7 +2,7 @@
 task_id: TASK-0155
 title: "Proyecto-front: provider local-vlm del Extractor (troceado per-pagina/chunk + egress localhost allowlisted + salida robusta), off-by-default (AC51/AC52/AC53, SPEC-0086, DECISION-0058)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

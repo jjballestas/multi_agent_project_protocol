@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0155 AC52 re-verificado OK/CERRABLE: decimal 2130706433 y familia ambigua/no-loopback rechazados; positivos loopback aceptados; npm test 48/48 en segunda corrida; gates protocolo verdes."

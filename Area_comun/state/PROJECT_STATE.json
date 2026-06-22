@@ -471,7 +471,7 @@
         {
             "id": "TASK-0155",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default"
         }
     ],
