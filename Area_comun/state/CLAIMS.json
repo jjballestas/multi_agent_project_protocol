@@ -3824,6 +3824,32 @@
             "updated_at": "2026-06-22T05:40:22Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0152",
+            "expires_at": "2026-06-22T14:29:35Z",
+            "notes": "TASK-0152 file intake v2 phase C extractor plus AC45 guard and raw purge TTL in Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0152",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0152",
+                "Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0152-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0152-faseC.md",
+                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0152-faseC.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0152-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-22T06:29:35Z",
+            "status": "released",
+            "task_id": "TASK-0152",
+            "updated_at": "2026-06-22T06:29:35Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
             "expires_at": "2026-06-22T07:55:47Z",
             "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",

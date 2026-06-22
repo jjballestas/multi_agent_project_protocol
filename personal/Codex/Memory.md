@@ -1,9 +1,19 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after Codex cron executor prompt hardening.
+Last updated: 2026-06-22 Europe/Madrid, after TASK-0152 file intake v2 Phase C handoff.
 
 ## Latest Session Note
 
+- TASK-0152 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `63a80ee feat(intake): add extractor loop and raw purge`. File intake v2 Phase C now has a gated/off-by-default
+  extraction loop endpoint (`/api/protocol/intake-extractions/run`) with explicit `FILE_EXTRACTION_AGENT` consent,
+  deterministic-local provider, labelled agent egress boundary and no network egress; AC45 expands the static
+  egress guard to all `src/**`, adds raw upload TTL sweeping, and purges raw uploads when a candidate reaches
+  terminal status. Evidence before delivery: `node --check src/server.js public/app.js tests/staticContract.test.js`,
+  product `npm test` PASS 43/43, clean-clone Zeus `npm test` PASS 43/43, and healthz/actions smoke OK. Protocol
+  delivery moved TASK-0152 to `in_review`, released `CLAIM-20260622-Codex-TASK-0152`, answered the GO, and opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0152-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0152-codex-to-arquitecto-1.md`.
 - Codex cron executor prompt was hardened per
   `MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR`: `personal/Codex/codex_mailbox_cron.ps1` now treats
   DECISION messages to Codex as processable and reinjects an executor prompt that must claim ready Codex GO tasks,

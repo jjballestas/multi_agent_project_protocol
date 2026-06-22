@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO Fase C (TASK-0152, carga por archivo v2): agente extractor archivo->candidatas (AC41 loop) + AC45 PREREQ (guard de salida de red a TODO src/** + purga/TTL del raw). Fase B cerrada (done 5d5d1ad). maker=Codex / checker=Arquitecto + PASADA DEL ANALISTA al cierre. OFF-by-default; USO VIVO = GO APARTE del operador. Entrega in_review por clon limpio verde."
