@@ -181,6 +181,17 @@
   pusheados en `63b8740` (`review(TASK-0156): Analista OK firma PII`). Residual no bloqueante: si el operador
   decide mover la privada a rutas de producto `secrets/` o `.protocol-secrets/`, anadirlas al `.gitignore` del
   producto antes de colocar la clave. Uso vivo del VLM sigue GO aparte con pasada corta sobre config viva.
+- TASK-0157 (Intake v3 file-mode + tarjetas + auto-push ergonomico AC55-AC58): OK/CERRABLE sobre Zeus `2afc944`
+  + protocolo citado `2e72cf9` (HEAD de emision `7172e75`). Clon limpio producto `npm test`: primera corrida
+  timeout local a 124s, segunda exit 0 50/50; targeted suite de AC55-AC58 + file ingestion + local-vlm +
+  candidate review + auto-push exit 0 8/8. Verifique que AC58 no es segundo escritor: `runSubmitIntent` llama
+  primero a `runtime/submit_intent.py` y el auto-push commitea solo paths de output gobernado con `git add --`
+  + `git commit --only -- <paths>`; dirty/staged ajeno no entra y non-fast-forward da error sin overwrite.
+  Versionados `commit-push.config.json` y `file-ingestion.config.json` siguen `enabled:false`; runtime overrides
+  y `.secrets/` siguen gitignored. Carry AC52 loopback y AC43/AC16 PII pasan. Gates protocolo con/sin secretos,
+  drift 0, neutralidad/encoding y #4 byte-identica verdes. Veredicto + MSG rr=true commiteados y pusheados en
+  `85f70d6` (`review(TASK-0157): Analista OK egress PII`). Residuales no bloqueantes: auto-push es egress real a
+  `origin` si operador activa override; PII sigue best-effort estructural; scan estatico no es sandbox.
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
