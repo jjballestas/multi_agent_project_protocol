@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after TASK-0152 file intake v2 Phase C handoff.
+Last updated: 2026-06-22 Europe/Madrid, after TASK-0152 AC45 guard rework handoff.
 
 ## Latest Session Note
 
+- TASK-0152 AC45 guard rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `3d94f11 test(intake): harden egress guard patterns`. `sourceEgressViolations` now marks dynamic
+  `import(`, dynamic/static/require model SDKs, bare network imports, network call sites
+  `.connect/.request/.get/.createConnection`, and common HTTP clients (`undici`, `axios`, `got`,
+  `node-fetch`, `superagent`, `request`). Positive controls cover each new pattern, including the falsable
+  `await import("openai")` case requested by Arquitecto. Evidence before delivery: `node --check
+  tests/staticContract.test.js`, product `npm test` PASS 43/43, and clean-clone Zeus `npm test` PASS 43/43.
+  Protocol delivery moved TASK-0152 back through `in_progress` to `in_review`, released the AC45 guard claim,
+  answered `MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0152-guard-AC45`, opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0152-AC45-guard-in-review.md`, and wrote
+  handoff `Area_comun/handoffs/HANDOFF-TASK-0152-AC45-guard-codex-to-arquitecto-2.md`.
 - TASK-0152 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `63a80ee feat(intake): add extractor loop and raw purge`. File intake v2 Phase C now has a gated/off-by-default
   extraction loop endpoint (`/api/protocol/intake-extractions/run`) with explicit `FILE_EXTRACTION_AGENT` consent,

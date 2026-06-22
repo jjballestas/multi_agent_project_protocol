@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "CAMBIO REQUERIDO en Fase C (TASK-0152): el Analista probo por comportamiento que el guard AC45 SLIPS en await import('openai'), await import('undici'), net.connect por import bare, y axios/got -- justo los que el operador nombro como must-catch. Endurece sourceEgressViolations (familia + control positivo POR patron, o flip a allowlist) y re-entrega in_review. Vectores 2-6 ya PASAN. Sin breach vivo (extractor deterministic-local) pero la teeth de AC45 no cierra la ruta await import(...)."

@@ -3850,6 +3850,49 @@
             "updated_at": "2026-06-22T06:29:35Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0152-AC45-delivery-mailbox",
+            "expires_at": "2026-06-22T09:30:48Z",
+            "notes": "Mailbox and memory delivery closeout for TASK-0152 AC45 guard rework.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0152-guard-AC45.md",
+                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0152-guard-AC45.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0152-AC45-guard-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T08:30:48Z",
+            "status": "released",
+            "task_id": "TASK-0152",
+            "updated_at": "2026-06-22T08:30:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0152-AC45-guard",
+            "expires_at": "2026-06-22T12:23:04Z",
+            "notes": "TASK-0152 AC45 guard rework after Arquitecto change directive.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0152",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0152",
+                "Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0152-AC45-guard-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0152-guard-AC45.md",
+                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0152-guard-AC45.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0152-AC45-guard-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-22T08:23:04Z",
+            "status": "released",
+            "task_id": "TASK-0152",
+            "updated_at": "2026-06-22T08:23:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
             "expires_at": "2026-06-22T07:55:47Z",
             "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",
