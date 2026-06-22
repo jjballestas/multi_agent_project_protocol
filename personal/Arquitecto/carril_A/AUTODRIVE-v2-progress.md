@@ -13,7 +13,7 @@
 | Fase | TASK | AC | estado |
 |------|------|----|--------|
 | A | TASK-0150 | AC40/AC42 | DONE (Analista OK 10/10; checker clon limpio npm 42/42) |
-| B | TASK-0151 | AC41/AC43/AC45c | in_progress (Codex trabajando). Al entregar: checker clon limpio -> FYI operador (activar Analista) -> Analista OK -> cerrar -> promover Fase C |
+| B | TASK-0151 | AC41/AC43/AC45c | in_review. CHECKER VERDE clon limpio (npm 43/43, candidatas no-ledger OS tmp, gate PII 409, re-screen, id-editado, #4 byte-id). INSTRUCCION del Analista dejada. ESPERA Analista OK -> cerrar -> promover Fase C |
 | C | TASK-0152 | AC41-loop/AC45 | proposed/ENCOLADA. Promover ready+GO TRAS cerrar B. Ventana real de modelo: USO VIVO=GO APARTE del operador + Analista al cierre. AC45 (guard a todo src/** + purga/TTL) prereq |
 
 ## Notas

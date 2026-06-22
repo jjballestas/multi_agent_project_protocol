@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3d7f55e8c7e1855715c59de9279d67bea49b1b3faf9d2119cd9eaf843c006230",
+  "canonical_hash": "6484efae73ac662fd99169a47f6e52c5a3d3feb5751a645d3020d6a38d8a0207",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -84,6 +84,7 @@
       "CLAIM-20260622-Arquitecto-promote-0150": 1,
       "CLAIM-20260622-Arquitecto-promote-0151": 1,
       "CLAIM-20260622-Arquitecto-register-ingv2": 1,
+      "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
       "DECISION-0045": 1,
@@ -164,7 +165,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 430,
+    "events_applied": 431,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -417,6 +418,7 @@
       "codex:TASK-0149:status-in-review": 1067,
       "codex:TASK-0150:claim-acquire": 1087,
       "codex:TASK-0150:status-in-progress": 1088,
+      "codex:cron-executor-config:claim-acquire": 1102,
       "codex:task-0141:claim-acquire": 956,
       "codex:task-0141:claim-release": 959,
       "codex:task-0141:status-in-progress": 957,
@@ -601,5 +603,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1101
+  "up_to_seq": 1102
 }

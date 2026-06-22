@@ -3792,6 +3792,25 @@
             "updated_at": "2026-06-22T05:40:22Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
+            "expires_at": "2026-06-22T07:55:47Z",
+            "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR.md",
+                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T05:55:47Z",
+            "status": "active",
+            "task_id": "CONFIG-CRON-CODEX",
+            "updated_at": "2026-06-22T05:55:47Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",
