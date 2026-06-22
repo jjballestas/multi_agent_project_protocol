@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Detengo el cron de monitoreo (9954b818) tras 7 rondas sin que Codex tome el rework. Fase C (TASK-0152) queda BLOQUEADA en CAMBIO-REQUERIDO: el guard AC45 SLIPS en await import('openai')/import('undici')/net.connect-bare/axios-got (probado por el Analista; los must-catch que nombraste). El directivo de cambio esta en open/ esperando a Codex. Para avanzar: reactiva a Codex para que endurezca el guard (o re-arma el cron). Sin breach vivo (extractor deterministic-local); canonico verde HEAD aeac725."

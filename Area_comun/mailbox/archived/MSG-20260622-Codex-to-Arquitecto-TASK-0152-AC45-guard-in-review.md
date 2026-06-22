@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0152 re-entregada in_review: guard AC45 endurecido contra import() dinamico, bare network imports/call sites, HTTP clients y SDKs; producto 3d94f11; npm test y clon limpio verdes."
