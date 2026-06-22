@@ -2,7 +2,7 @@
 task_id: TASK-0157
 title: "Proyecto-front (RF-14): Intake v3 -- modo carga-por-archivo en seccion dedicada (sin scroll, sin campos previos) + boton Extraer requisito -> candidatas como tarjetas -> click puebla campos; auto-commit-push ergonomico (override runtime) (AC55-AC58, SPEC-0086)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
