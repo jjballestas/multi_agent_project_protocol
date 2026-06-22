@@ -7,15 +7,15 @@
 - job_id: 9954b818. Stand-down = CronDelete 9954b818 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 0 (reset cada actividad de Codex)
-- ultima actividad Codex: 498ea86 (08:00) cerro su claim cron-executor-config + dejo su cron como EJECUTOR (msg CONFIG-CRON->answered). Pusheado por mi -> HEAD==origin 498ea86.
+- rounds_without_codex_response: 0 (reset cada actividad de Codex/Analista)
+- ultima actividad: Analista OK Fase B (0bca9fb) + Codex cron-config (498ea86). HEAD==origin 57894df.
 
 ## Orden y estado
 | Fase | TASK | AC | estado |
 |------|------|----|--------|
 | A | TASK-0150 | AC40/AC42 | DONE (Analista OK 10/10; checker clon limpio npm 42/42) |
-| B | TASK-0151 | AC41/AC43/AC45c | in_review. CHECKER VERDE clon limpio (npm 43/43, candidatas no-ledger OS tmp, gate PII 409, re-screen, id-editado, #4 byte-id). INSTRUCCION del Analista dejada. ESPERA Analista OK -> cerrar -> promover Fase C |
-| C | TASK-0152 | AC41-loop/AC45 | proposed/ENCOLADA. Promover ready+GO TRAS cerrar B. Ventana real de modelo: USO VIVO=GO APARTE del operador + Analista al cierre. AC45 (guard a todo src/** + purga/TTL) prereq |
+| B | TASK-0151 | AC41/AC43/AC45c | **DONE** (5d5d1ad). Checker Arquitecto verde + Analista OK 6/6 (0bca9fb). Cierre via submit_intent seq 1106. LECCION: clasificador denego el cierre porque el veredicto del Analista estaba UNTRACKED (no en canonico); aterrizarlo primero (commit 0bca9fb) satisface genuinamente la precondicion -> cierre OK. |
+| C | TASK-0152 | AC41-loop/AC45 | **ready + GO a Codex** (57894df, seq 1107). maker=Codex/checker=Arquitecto+Analista al cierre. AC45 prereq (guard a TODO src/** + purga/TTL) ANTES del agente. USO VIVO=GO APARTE del operador, OFF-by-default. Esperando entrega in_review de Codex. |
 
 ## Notas
 - Uso vivo v2 OFF (versionado enabled:false; activacion por env FILE_INGESTION_CONFIG_PATH/FILE_UPLOAD_STORE_ROOT;
