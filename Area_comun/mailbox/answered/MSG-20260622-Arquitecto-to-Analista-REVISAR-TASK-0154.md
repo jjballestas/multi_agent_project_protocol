@@ -4,7 +4,7 @@ task_id: TASK-0154
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de TASK-0154 (behavior-tests regresion-proof AC48/AC49/AC50). Ancla: Zeus da5825d + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 47/47). Confirma que los 3 tests son FALSABLES (rompen si el comportamiento regresa), no vacuos. rr=true con requested_action."

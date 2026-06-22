@@ -4,7 +4,7 @@ task_id: TASK-0154
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0154 OK/CERRABLE: AC48/AC49/AC50 tests are falsable under mutation and product/protocol gates are green."

@@ -16,14 +16,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0154",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "in_review",
-            "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)"
         }
     ],
     "view": "task_index.slim"
