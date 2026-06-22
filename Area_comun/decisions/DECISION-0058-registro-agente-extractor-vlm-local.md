@@ -73,3 +73,16 @@ de forma fiable en Ollama. **Resolucion: el Extractor usa `qwen3-vl:4b-instruct`
 tag DIRECTO en la libreria de Ollama; sin import manual de GGUF+mmproj). Validado empiricamente: thinking len = 0,
 `content` = JSON limpio, `done="stop"` (sin sobre-generar), `format: json` funciona. El provider (TASK-0155) es
 agnostico al modelo -> este cambio es de CONFIG (que tag apunta el Extractor), no de codigo; no rehace TASK-0155.
+
+## Addendum 2026-06-22 - Opcion 2: alta a nivel PRODUCTO, SIN re-genesis (elegida por el operador)
+
+Al detallar la mecanica se constato que el `agent_registry`/`signature_config` (lo que un re-genesis tocaria) es
+el registro de **firmantes del ledger atestado #4**, y **el Extractor NO escribe el ledger** (no usa submit_intent;
+candidatas al store no-ledger con gate humano). Por tanto NO necesita estar en el registro de firmantes #4 ni una
+clave Ed25519 de firmante #4. **Decision del operador: Opcion 2** -- el Extractor se registra como **worker de
+PRODUCTO** (en la capa Zeus, FUERA del config #4 pinned), firma sus candidatas con una **clave de PRODUCTO**, y su
+alta **NO requiere re-genesis-boundary**. Esto SUPERSEDE el punto 8 ("alta = ceremonia re-genesis"): el
+`agent_registry` #4 se reserva para los agentes de gobernanza que atestan el ledger (Arquitecto, Codex, Analista);
+el config sigue pinned 1.14.0 sin re-genesis. Implementacion (registro de worker fuera del config + keypair de
+producto + firma de candidatas, off-by-default) = tarea de Codex gateada (TASK-0156, tras cerrar TASK-0155). El
+uso vivo del extractor sigue siendo GO aparte del operador + pasada del Analista.
