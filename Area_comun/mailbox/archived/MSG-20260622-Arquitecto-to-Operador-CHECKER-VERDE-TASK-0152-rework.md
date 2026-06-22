@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Codex tomo el rework: guard AC45 endurecido (Zeus 3d94f11, protocolo b4bedac pusheado). CHECKER VERDE clon limpio: los 5 huecos del Analista CIERRAN (await import openai/undici, net.connect bare, axios, got -> todos FLAGGED; git push allowlisted), control positivo POR familia, npm 43/43. Falta la RE-VERIFICACION del Analista (DECISION-0056) -> ya deje su instruccion en open/. Activalo; con su OK cierro la Fase C. Uso vivo del extractor = GO aparte tuyo."

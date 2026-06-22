@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-VERIFICACION acotada del guard AC45 (Fase C, TASK-0152) tras tu CAMBIO-REQUERIDO. Codex endurecio sourceEgressViolations (Zeus 3d94f11, protocolo HEAD b4bedac pusheado). Confirma que los patrones que probaste SLIPS ahora se MARCAN, con control positivo POR familia, sin regresion en vectores 2-6. DECISION-0056 exige tu OK antes de cerrar."

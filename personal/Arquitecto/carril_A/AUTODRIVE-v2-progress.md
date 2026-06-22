@@ -15,7 +15,11 @@
 |------|------|----|--------|
 | A | TASK-0150 | AC40/AC42 | DONE (Analista OK 10/10; checker clon limpio npm 42/42) |
 | B | TASK-0151 | AC41/AC43/AC45c | **DONE** (5d5d1ad). Checker Arquitecto verde + Analista OK 6/6 (0bca9fb). Cierre via submit_intent seq 1106. LECCION: clasificador denego el cierre porque el veredicto del Analista estaba UNTRACKED (no en canonico); aterrizarlo primero (commit 0bca9fb) satisface genuinamente la precondicion -> cierre OK. |
-| C | TASK-0152 | AC41-loop/AC45 | **in_review, REWORK CHECKER-VERDE** (Zeus 3d94f11, protocolo b4bedac pusheado). Codex endurecio sourceEgressViolations (familia: dynamic-import, network-module bare, network-call, model-sdk, http-package undici/axios/got/node-fetch, external-cli) + control positivo POR familia. Probe independiente: los 5 huecos del Analista CIERRAN (import openai/undici, net.connect bare, axios, got -> FLAGGED; git push -> []). npm 43/43 clon limpio; validate con/sin secretos exit0; #4 byte-id; drift0. ESPERA RE-VERIFICACION del Analista (instruccion acotada dejada) -> cierro. USO VIVO extractor = GO APARTE operador. |
+| C | TASK-0152 | AC41-loop/AC45 | **DONE** (6d1ca65). Rework guard AC45 checker-verde (Zeus 3d94f11) + Analista OK->CERRABLE reverificacion (5 huecos cierran, control positivo por familia, src real [], sin regresion). Cierre submit_intent. RESIDUAL no bloqueante (clientes HTTP no listados + ofuscacion = limite scan estatico) -> FOLLOW-UP del GO de uso vivo: flip a ALLOWLIST + marcar eval/new Function. |
+
+## CIERRE
+- **Carga por archivo v2 (A+B+C) COMPLETA** (HEAD 6d1ca65). Off-by-default. Codex en stand-down (sin cola); cron detenido.
+- PENDIENTE OPERADOR (GO aparte): uso vivo del extractor + follow-up allowlist (precondicion recomendada por Analista). Si lo pide, autoro pieza SDD (maker=Codex/checker=Arquitecto+Analista).
 
 ## Notas
 - Uso vivo v2 OFF (versionado enabled:false; activacion por env FILE_INGESTION_CONFIG_PATH/FILE_UPLOAD_STORE_ROOT;
