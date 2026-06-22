@@ -477,7 +477,7 @@
         {
             "id": "TASK-0156",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)"
         }
     ],

@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)"
         }
     ],

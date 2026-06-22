@@ -4,6 +4,22 @@ Last updated: 2026-06-22 Europe/Madrid, after TASK-0155 AC52 strict loopback rew
 
 ## Latest Session Note
 
+- TASK-0156 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `560a226 feat(intake): sign extractor candidates`. The product now has `extractors.config.json` as a
+  product-level worker registry for `Extractor` (role `extraccion`, default model `qwen3-vl:4b-instruct`,
+  default loopback endpoint `http://127.0.0.1:11434/api/chat`, public Ed25519 key) outside `protocol.config.json`.
+  The matching private key was generated at `D:/Agentes/Zeus/Zeus-protocol/.secrets/extractor_ed25519_private.pem`
+  and remains gitignored; rotate/regenerate with `node -e`/Ed25519 and update only the public key in the registry.
+  Extracted candidates now carry `extractor_worker_id` plus an Ed25519 signature over canonical candidate
+  provenance/content, and candidate approval rejects absent or forged signatures before governed intake. Local-vlm
+  now defaults to the registry model when no per-runtime model is configured. Evidence before memory update:
+  `node --check src/server.js tests/staticContract.test.js`, product `git diff --check`, product `npm test` PASS
+  48/48, local smoke on port 4184 OK for `/healthz` + `/api/protocol/observe`, and clean-clone Zeus `npm test`
+  PASS 48/48. Protocol delivery moved TASK-0156 to `in_review`, released all Codex TASK-0156 claims, opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0156-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0156-codex-to-arquitecto-1.md`. Final protocol evidence: encoding OK,
+  neutrality OK, drift false up_to_seq 1213, and `validate_collaboration_state.py` OK with one unrelated warning
+  for `MSG-20260622-Arquitecto-to-Operador-ESTADO-cola-vacia.md`.
 - TASK-0155 AC52 rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `6369b5c fix(intake): enforce strict loopback host syntax`. The local-vlm endpoint guard now validates the raw
   URL host before WHATWG URL canonicalization and accepts only `localhost`, dotted-decimal IPv4 in `127.0.0.0/8`

@@ -1746,7 +1746,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)",
             "type": "product"
         }

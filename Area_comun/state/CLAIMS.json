@@ -4312,6 +4312,69 @@
             "updated_at": "2026-06-22T14:37:01Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0156",
+            "expires_at": "2026-06-23T00:00:00Z",
+            "notes": "TASK-0156 product extractor worker registration implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0156",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0156",
+                "Area_comun/tasks/TASK-0156-codex-extractor-product-registration.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js"
+            ],
+            "started_at": "2026-06-22T16:44:22Z",
+            "status": "released",
+            "task_id": "TASK-0156",
+            "updated_at": "2026-06-22T16:44:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0156-delivery",
+            "expires_at": "2026-06-23T00:00:00Z",
+            "notes": "TASK-0156 delivery handoff and mailbox coordination.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0156-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0156-in-review.md"
+            ],
+            "started_at": "2026-06-22T17:05:48Z",
+            "status": "released",
+            "task_id": "TASK-0156",
+            "updated_at": "2026-06-22T17:05:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0156-mailbox-fix",
+            "expires_at": "2026-06-23T00:00:00Z",
+            "notes": "Fix TASK-0156 delivery mailbox validator metadata.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0156-in-review.md"
+            ],
+            "started_at": "2026-06-22T17:08:15Z",
+            "status": "released",
+            "task_id": "TASK-0156",
+            "updated_at": "2026-06-22T17:08:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0156-product-config",
+            "expires_at": "2026-06-23T00:00:00Z",
+            "notes": "TASK-0156 product config and gitignore scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "D:/Agentes/Zeus/Zeus-protocol/.gitignore",
+                "D:/Agentes/Zeus/Zeus-protocol/extractors.config.json"
+            ],
+            "started_at": "2026-06-22T16:46:25Z",
+            "status": "released",
+            "task_id": "TASK-0156",
+            "updated_at": "2026-06-22T16:46:25Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
             "expires_at": "2026-06-22T07:55:47Z",
             "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",
