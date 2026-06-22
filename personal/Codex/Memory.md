@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after TASK-0152 AC45 guard rework handoff.
+Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 product commit.
 
 ## Latest Session Note
 
+- TASK-0153 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `ac2e308 test(intake): enforce egress allowlist isolation`. The `src/**` egress guard flipped to an
+  explicit import/require allowlist with deny-by-default behavior, keeps governed `git push` wrapper usage
+  allowed, flags unlisted HTTP/model clients such as `phin`/`axios`/`openai`, and now marks `eval(` plus
+  `new Function(`. The test harness creates its own OFF runtime config fixtures and `startServer` injects them
+  by default, so operator shell env values for `AUTO_COMMIT_PUSH_CONFIG_PATH` or `FILE_INGESTION_CONFIG_PATH`
+  cannot turn tests live unless a test explicitly overrides them. Local product evidence after commit:
+  `node --check tests/staticContract.test.js`, `git diff --check`, product `npm test` PASS 44/44, and clean-clone
+  Zeus `npm test` PASS 44/44. Protocol delivery moves TASK-0153 to `in_review`, answers the GO, releases Codex
+  claims, and opens `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0153-in-review.md` with
+  handoff `Area_comun/handoffs/HANDOFF-TASK-0153-codex-to-arquitecto-1.md`.
 - TASK-0152 AC45 guard rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `3d94f11 test(intake): harden egress guard patterns`. `sourceEgressViolations` now marks dynamic
   `import(`, dynamic/static/require model SDKs, bare network imports, network call sites

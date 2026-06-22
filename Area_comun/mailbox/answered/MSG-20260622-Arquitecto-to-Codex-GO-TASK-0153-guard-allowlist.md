@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0153 (ready): flip del guard de egress a ALLOWLIST deny-all + marcar eval/new Function (AC46) + AISLAMIENTO de la suite del entorno de runtime del operador (AC47). Precondicion del uso vivo del extractor. NO enciende el uso vivo (sigue OFF-by-default). maker=Codex/checker=Arquitecto + pasada del Analista. Entrega in_review por clon limpio verde."

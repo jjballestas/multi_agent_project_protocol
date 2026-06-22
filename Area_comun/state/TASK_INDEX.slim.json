@@ -134,7 +134,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor"
         }
     ],

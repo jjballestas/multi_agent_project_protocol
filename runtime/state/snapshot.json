@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a6756d2409f3cd6d815b28555e47c0def71e43c2608a4874923c9a7fc91ac879",
+  "canonical_hash": "ec18316f7ed3fe6f3f05cef9020ddd84fd663ecf7bb7ea786610ed2ed02a73a7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -91,6 +91,8 @@
       "CLAIM-20260622-Codex-TASK-0152": 1,
       "CLAIM-20260622-Codex-TASK-0152-AC45-delivery-mailbox": 1,
       "CLAIM-20260622-Codex-TASK-0152-AC45-guard": 1,
+      "CLAIM-20260622-Codex-TASK-0153": 1,
+      "CLAIM-20260622-Codex-TASK-0153-delivery": 1,
       "CLAIM-20260622-Codex-cron-executor-config": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -170,11 +172,11 @@
       "TASK-0150": 8,
       "TASK-0151": 8,
       "TASK-0152": 12,
-      "TASK-0153": 2,
+      "TASK-0153": 6,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 454,
+    "events_applied": 460,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -442,6 +444,10 @@
       "codex:TASK-0150:status-in-progress": 1088,
       "codex:TASK-0152:AC45-delivery-mailbox:claim-acquire:20260622T083048Z": 1118,
       "codex:TASK-0152:AC45-delivery-mailbox:claim-release:20260622T083141Z": 1119,
+      "codex:TASK-0153:delivery-claim:acquire:20260622T093804Z": 1128,
+      "codex:TASK-0153:handoff-release:claim-delivery:20260622T093819Z": 1131,
+      "codex:TASK-0153:handoff-release:claim-main:20260622T093819Z": 1130,
+      "codex:TASK-0153:handoff-release:task-status:20260622T093819Z": 1129,
       "codex:cron-executor-config:claim-acquire": 1102,
       "codex:task-0141:claim-acquire": 956,
       "codex:task-0141:claim-release": 959,
@@ -626,6 +632,8 @@
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:task-status": 1115,
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152:claim-acquire": 1110,
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152:task-status": 1111,
+      "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153:claim-acquire": 1126,
+      "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153:task-status": 1127,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:claim-release": 1117,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:task-status": 1116,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152:claim-release": 1113,
@@ -635,5 +643,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1125
+  "up_to_seq": 1131
 }

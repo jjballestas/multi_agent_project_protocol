@@ -2,7 +2,7 @@
 task_id: TASK-0153
 title: "Proyecto-front: endurecer guard de egress a ALLOWLIST deny-all + marcar eval/new Function (AC46) + AISLAMIENTO de la suite del entorno de runtime del operador (AC47) -- precondicion del uso vivo del extractor (SPEC-0086, DECISION-0056)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high
