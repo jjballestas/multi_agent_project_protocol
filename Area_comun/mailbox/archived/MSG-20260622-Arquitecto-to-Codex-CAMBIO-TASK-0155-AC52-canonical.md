@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "CAMBIO en TASK-0155 (no cierro): el Analista probo que AC52 acepta el endpoint DECIMAL 2130706433 (= 127.0.0.1 en entero) como local-vlm habilitado, y falta el test negativo de la familia completa de hosts no permitidos. Endurece isLoopbackHost a CANONICALIZACION ESTRICTA (solo loopback literal) + agrega el test negativo completo. Re-entrega in_review."

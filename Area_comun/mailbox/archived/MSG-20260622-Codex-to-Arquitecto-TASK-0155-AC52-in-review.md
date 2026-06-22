@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0155 AC52 rework delivered: local-vlm now rejects non-canonical loopback host forms, including decimal 2130706433; product commit 6369b5c; ready for review."

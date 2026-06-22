@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de egress/PII de TASK-0155 (provider local-vlm del Extractor, AC51/AC52/AC53). Ancla: Zeus 79be511 + protocolo HEAD pusheado. Checker Arquitecto verde clon limpio (npm 48/48, #4 byte-id). FOCO: AC52 es CRITICO (frontera de egress) y hay un GAP -- el rechazo de host NO-loopback NO tiene test de comportamiento (la logica isLoopbackHost existe pero no esta regresion-probada). Confirma que el rechazo es real y decide si exige test (CAMBIO) antes de cerrar. rr=true con requested_action."
