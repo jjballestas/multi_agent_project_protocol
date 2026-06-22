@@ -23,6 +23,13 @@ for what counts as MAJOR / MINOR / PATCH here.
   agents for cost control. Runtime-only (never reconfigures identity/keys/registry); honours an explicit
   operator stop; activation grants no live/risk capability (live-use, #4 config, external pushes stay
   separate operator GOs); single instance; audited. AGENTS.md s.3 roles updated.
+- **Extractor agent registration design (DECISION-0058).** New `Extractor` agent for document extraction
+  in file-ingestion v2, backed by a LOCAL VLM (zero external egress; file content never leaves the host).
+  Chunked design (per-page/per-chunk -> bounded context per call, scales to any document size; accumulate
+  + dedup candidates), egress boundary = localhost endpoint only (allowlisted in the AC46 deny-all guard),
+  minimal tool_policy (read upload-store + write no-ledger candidates only), honest authorship (signs its
+  own candidates), human PII gate (AC43) unchanged, off-by-default. Registration = governed
+  re-genesis-boundary ceremony (registry + keypair). Design accepted; implementation + ceremony gated.
 
 ## [1.15.0] - 2026-06-19
 > Note: capability implemented + TASK-0121 done, but the live instance `protocol_version` stays

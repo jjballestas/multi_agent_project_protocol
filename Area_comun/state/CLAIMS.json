@@ -3757,6 +3757,20 @@
             "updated_at": "2026-06-22T10:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-decision-0058",
+            "expires_at": "2026-06-22T19:30:00Z",
+            "notes": "Registrar DECISION-0058 (registro del agente Extractor, VLM local, diseno troceado).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-06-22T16:30:00Z",
+            "status": "released",
+            "task_id": "DECISION-0058",
+            "updated_at": "2026-06-22T16:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-promote-0150",
             "expires_at": "2026-06-22T05:00:00Z",
             "notes": "Promote DECISION-0056 (carga por archivo v2 OPCION 4 + red-team edits + D-PII/D-ACTOR) + ext10 SPEC (AC40-AC44) + TASK-0150 Fase A ready + GO Codex. REQ-D642E4D8 proposed->in_progress. maker=Codex/checker=Arquitecto + Analista.",
