@@ -97,10 +97,16 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
-            "id": "TASK-0150",
+            "id": "TASK-0151",
             "owner": "Codex",
-            "status": "in_review",
-            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)"
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B - candidatas no-ledger + panel + gate humano PII (AC41/AC43, SPEC-0086 ext10, DECISION-0056)"
+        },
+        {
+            "id": "TASK-0152",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor + AC45 (guard a todo src/** + purga/TTL) (SPEC-0086 ext10, DECISION-0056)"
         }
     ],
     "next_actions": [

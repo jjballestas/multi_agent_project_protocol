@@ -4,8 +4,8 @@ task_id: TASK-0150
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "(1) CERRAR Fase A (TASK-0150) -> done: el Analista dio OK/CERRABLE 10/10 por comportamiento (server no-modelo-egress, raw fuera del #4, candidatas no-ledger, PII best-effort honesta, #4 byte-identica). (2) ARRANCAR Fase B (panel + gate humano de PII + re-screen candidate->intake) y Fase C (agente extractor), PLEGANDO las 2 recomendaciones del Analista como AC/prerequisito: (a) ampliar el guard AC40 a TODO src/** y marcar CUALQUIER red saliente (no solo proveedores nombrados) ANTES de Fase C (cuando enciende el agente = ventana real de modelo); (b) politica de purga/TTL del raw en os-tmp. (3) Atender el flake de timeout (1a corrida 41/42 luego 42/42 x3): hacer el test determinista/no sensible a timeout para que no parpadee en CI. La rama 'por archivo' del selector sigue GATEADA tras B/C; uso vivo OFF (requiere GO aparte mio cuando este lista)."
 question: "Cierras Fase A (Analista OK) y arrancas B/C plegando las 2 recomendaciones del Analista como AC (guard AC40 a todo src/** + cualquier salida de red antes de Fase C; purga/TTL del raw), y de paso estabilizas el test del flake de timeout?"

@@ -1648,8 +1648,40 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (AC40/AC42, SPEC-0086 ext10, DECISION-0056)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-22",
+            "file": "Area_comun/tasks/TASK-0151-codex-file-intake-v2-faseB.md",
+            "id": "TASK-0151",
+            "linked_decisions": [
+                "DECISION-0056",
+                "DECISION-0055",
+                "DECISION-0051"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B - candidatas no-ledger + panel + gate humano PII (AC41/AC43, SPEC-0086 ext10, DECISION-0056)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-22",
+            "file": "Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md",
+            "id": "TASK-0152",
+            "linked_decisions": [
+                "DECISION-0056"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "proposed",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor + AC45 (guard a todo src/** + purga/TTL) (SPEC-0086 ext10, DECISION-0056)",
             "type": "product"
         }
     ],

@@ -357,6 +357,16 @@ producto/dominio en el core neutral.
   contenido crudo; el panel (front) es read/edit local puro (sin SDK/fetch de modelo en el browser);
   **#4 byte-identica** (config/genesis/registry/keys sin cambio, version pinned 1.14.0). OFF-by-default.
   Un upload->aprobacion real deja el canonico VERDE (regresion-proof, AC22).
+- **AC45 - Endurecimiento pre-Fase-C: guard de salida de red a TODO src/** + purga/TTL del raw [PERMANENTE; DECISION-0056; pasada del Analista TASK-0150].**
+  PREREQUISITO antes de Fase C (cuando enciende el agente extractor = ventana real de modelo): (a) el guard de
+  AC40 se AMPLIA a **TODO `src/**`** (no solo el handler de upload) y marca **CUALQUIER salida de red** (no solo
+  proveedores de modelo nombrados): import/require de SDKs de modelo, `fetch`/`http(s)`/`node:net|tls|dgram`/
+  `WebSocket` a hosts no-allowlisted -- el unico egress permitido es el `git push` gobernado existente y las
+  lecturas read-only ya allowlisted; prueba estatica falsable + control positivo. (b) **politica de purga/TTL del
+  raw** en os-tmp: el archivo se borra al estado terminal del candidato (aprobado/descartado) + barredor TTL para
+  huerfanos (agente murio / sin aprobar); test: el raw no sobrevive al estado terminal; un proceso reiniciado
+  purga huerfanos > TTL. (c) **estabilidad de CI:** los tests del flujo son deterministas / no sensibles a timeout
+  (sin flake frio-vs-caliente). Carry AC40/AC44; #4 byte-identica. Bloquea el cierre de Fase C.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

@@ -3661,6 +3661,24 @@
             "updated_at": "2026-06-22T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-close-0150",
+            "expires_at": "2026-06-22T06:00:00Z",
+            "notes": "Close TASK-0150 in_review->done. Analista OK/CERRABLE 10/10 por comportamiento (server no-modelo-egress estructural+control-positivo, raw en os-tmp fuera del #4, candidatas no-ledger, PII best-effort honesta, #4 byte-identica) + checker Arquitecto DESDE CLON LIMPIO (npm 42/42, validate con/sin secretos exit 0, drift 0). Fase A (plumbing). 2 recos del Analista -> AC en Fase B/C.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T02:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0150",
+            "updated_at": "2026-06-22T02:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-promote-0150",
             "expires_at": "2026-06-22T05:00:00Z",
             "notes": "Promote DECISION-0056 (carga por archivo v2 OPCION 4 + red-team edits + D-PII/D-ACTOR) + ext10 SPEC (AC40-AC44) + TASK-0150 Fase A ready + GO Codex. REQ-D642E4D8 proposed->in_progress. maker=Codex/checker=Arquitecto + Analista.",
@@ -3681,6 +3699,27 @@
             "status": "released",
             "task_id": "TASK-0150",
             "updated_at": "2026-06-22T01:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Arquitecto-promote-0151",
+            "expires_at": "2026-06-22T06:10:00Z",
+            "notes": "Promote TASK-0151 (v2 Fase B: candidatas no-ledger + panel + gate humano PII, AC41/AC43) ready + GO + AC45 a SPEC + TASK-0152 (Fase C agente extractor) proposed/encolada. Por GO del operador (Analista OK Fase A). maker=Codex/checker=Arquitecto+Analista.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0151-codex-file-intake-v2-faseB.md",
+                "Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0151.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-22T02:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0151",
+            "updated_at": "2026-06-22T02:10:00Z"
         },
         {
             "claim_id": "CLAIM-20260622-Arquitecto-register-ingv2",

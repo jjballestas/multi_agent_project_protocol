@@ -1,0 +1,21 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260622-Arquitecto-promote-0151", "task_id": "TASK-0151", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0151-codex-file-intake-v2-faseB.md","Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md","Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md","Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0151.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-22T02:10:00Z","updated_at": "2026-06-22T02:10:00Z","expires_at": "2026-06-22T06:10:00Z","status": "active",
+    "notes": "Promote TASK-0151 (v2 Fase B: candidatas no-ledger + panel + gate humano PII, AC41/AC43) ready + GO + AC45 a SPEC + TASK-0152 (Fase C agente extractor) proposed/encolada. Por GO del operador (Analista OK Fase A). maker=Codex/checker=Arquitecto+Analista." },
+    "idempotency_key": "arquitecto:promote-0151:claim-acquire" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0151",
+    "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B - candidatas no-ledger + panel + gate humano PII (AC41/AC43, SPEC-0086 ext10, DECISION-0056)",
+    "type": "product","status": "ready","owner": "Codex","phase": "P2","priority": "high","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0056","DECISION-0055","DECISION-0051"],"created_at": "2026-06-22","file": "Area_comun/tasks/TASK-0151-codex-file-intake-v2-faseB.md" },
+    "idempotency_key": "arquitecto:promote-0151:task-upsert-ready" } },
+  { "task_upsert": { "task": {
+    "id": "TASK-0152",
+    "title": "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor + AC45 (guard a todo src/** + purga/TTL) (SPEC-0086 ext10, DECISION-0056)",
+    "type": "product","status": "proposed","owner": "Codex","phase": "P2","priority": "high","spec_id": "SPEC-0086",
+    "linked_decisions": ["DECISION-0056"],"created_at": "2026-06-22","file": "Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md" },
+    "idempotency_key": "arquitecto:promote-0151:taskC-proposed" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-promote-0151", "idempotency_key": "arquitecto:promote-0151:claim-release" } }
+] }

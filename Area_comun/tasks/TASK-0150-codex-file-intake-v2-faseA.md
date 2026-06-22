@@ -2,7 +2,7 @@
 task_id: TASK-0150
 title: "Proyecto-front (RF-14): carga por archivo v2 FASE A - plumbing determinista (upload no-MODELO-egress + screening PII real + store FUERA del dataset + emit extraction-task con contrato + selector de modo) (AC40/AC42, SPEC-0086 ext10, DECISION-0056)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

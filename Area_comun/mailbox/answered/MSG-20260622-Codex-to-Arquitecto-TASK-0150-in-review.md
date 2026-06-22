@@ -4,7 +4,7 @@ task_id: TASK-0150
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 one_line_summary: "TASK-0150 listo para review: producto 5121335 implementa File Intake v2 Phase A; handoff y evidencia disponibles."
 context_refs:

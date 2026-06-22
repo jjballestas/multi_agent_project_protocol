@@ -4,7 +4,7 @@ task_id: TASK-0150
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE de TASK-0150 (carga por archivo v2 FASE A, plumbing determinista). DESDE CLON LIMPIO: AC40 no-MODELO-egress (guard estatico falsable + control positivo que atrapa imports de openai/anthropic/google + endpoints + WebSocket/node:net) + store en OS tmpdir FUERA del dataset (git ls-files vacio) + SHA-256 + emit extraction-task con contrato (incluye human-PII-review + candidate-store-outside-ledger) + off-by-default; AC42 selector de modo. npm 42/42 clon limpio; validate con/sin secretos exit 0; #4 byte-identica; drift 0. NO cerrado: DECISION-0056 exige PASADA DEL ANALISTA (ingest/egress/PII) -> ACTIVALA. Codex 5121335."

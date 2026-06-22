@@ -1,0 +1,10 @@
+{ "intents": [
+  { "claim": { "op": "acquire", "claim": {
+    "claim_id": "CLAIM-20260622-Arquitecto-close-0150", "task_id": "TASK-0150", "owner": "Arquitecto",
+    "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0150-codex-file-intake-v2-faseA.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],
+    "started_at": "2026-06-22T02:00:00Z","updated_at": "2026-06-22T02:00:00Z","expires_at": "2026-06-22T06:00:00Z","status": "active",
+    "notes": "Close TASK-0150 in_review->done. Analista OK/CERRABLE 10/10 por comportamiento (server no-modelo-egress estructural+control-positivo, raw en os-tmp fuera del #4, candidatas no-ledger, PII best-effort honesta, #4 byte-identica) + checker Arquitecto DESDE CLON LIMPIO (npm 42/42, validate con/sin secretos exit 0, drift 0). Fase A (plumbing). 2 recos del Analista -> AC en Fase B/C." },
+    "idempotency_key": "arquitecto:close-0150:claim-acquire" } },
+  { "task_status": { "task_id": "TASK-0150", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0150:status-done" } },
+  { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-close-0150", "idempotency_key": "arquitecto:close-0150:claim-release" } }
+] }

@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Carga por archivo v2 REGISTRADA (REQ-D642E4D8, priority high, supersede REQ-31100EAF) y SPEC autorada con tu OPCION 4 (server NO-EGRESS: upload gobernado guarda en ruta acotada + PII-gate-en-ingest + emite tarea de extraccion; un AGENTE extrae candidatas en estado candidate FUERA del backlog; panel de revision; solo aprobadas -> intake gobernado AC39). DRAFT-DECISION-0056 + DRAFT-SPEC-0086-ext10 (AC40..AC43), dimensionada en FASES A/B/C. Espera ratificacion para promover. La OPCION 4 disuelve el trilema: server determinista/#4-limpio; LLM vive en los agentes; no-determinismo fuera de #4."
