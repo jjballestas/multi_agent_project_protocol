@@ -4,6 +4,17 @@ Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 exec import rework hando
 
 ## Latest Session Note
 
+- TASK-0155 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `79be511 feat(intake): add local vlm extractor provider`. The extractor keeps `deterministic-local` as the
+  default and adds off-by-default `local-vlm` with loopback-only endpoint validation, bounded per-chunk/per-image
+  calls, robust JSON extraction from noisy model responses, candidate dedupe, and no-ledger candidate storage
+  behind the existing human PII review gate. Evidence before this memory update: `node --check src/server.js
+  tests/staticContract.test.js public/app.js`, product `git diff --check`, product `npm test` PASS 48/48, and
+  clean-clone Zeus `npm test` PASS 48/48. Protocol delivery moved TASK-0155 to `in_review`, released Codex
+  claims, and opened `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0155-in-review.md` with
+  handoff `Area_comun/handoffs/HANDOFF-TASK-0155-codex-to-arquitecto-1.md`. Codex could not archive the
+  original GO through `mailbox_archive` because that intent requires `orchestrator`; the GO remains open with
+  `requires_response:false`.
 - TASK-0154 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `da5825d test(intake): lock UX regression behavior`. The suite now has permanent behavior coverage for
   AC48/AC49/AC50: the Intake "Nueva historia/requisito" button must keep the `governed-button` design-system

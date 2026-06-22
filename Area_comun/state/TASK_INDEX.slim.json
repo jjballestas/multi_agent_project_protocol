@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default"
         }
     ],

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3e665d8aeb586a1464de117269ab560df08392986e932013741f81f4bd0c0f2e",
+  "canonical_hash": "78d54e07a4e265f41d7df0644aab37c3d916b5137c1e64ecdee901884249e268",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -105,6 +105,8 @@
       "CLAIM-20260622-Codex-TASK-0153-exec-import-delivery": 1,
       "CLAIM-20260622-Codex-TASK-0153-external-cli": 1,
       "CLAIM-20260622-Codex-TASK-0153-external-cli-delivery": 1,
+      "CLAIM-20260622-Codex-TASK-0155": 1,
+      "CLAIM-20260622-Codex-TASK-0155-delivery": 1,
       "CLAIM-20260622-Codex-cron-executor-config": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -189,12 +191,12 @@
       "TASK-0152": 12,
       "TASK-0153": 16,
       "TASK-0154": 10,
-      "TASK-0155": 2,
+      "TASK-0155": 6,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 514,
+    "events_applied": 520,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -549,6 +551,12 @@
       "codex:task-0154:release-implementation": 1175,
       "codex:task-0154:start": 1172,
       "codex:task-0154:status-in-review": 1174,
+      "codex:task-0155:claim-acquire": 1186,
+      "codex:task-0155:claim-release": 1190,
+      "codex:task-0155:delivery-claim-acquire": 1188,
+      "codex:task-0155:delivery-claim-release": 1191,
+      "codex:task-0155:status-in-progress": 1187,
+      "codex:task-0155:status-in-review": 1189,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -715,5 +723,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1185
+  "up_to_seq": 1191
 }

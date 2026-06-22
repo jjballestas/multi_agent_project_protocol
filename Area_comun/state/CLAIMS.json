@@ -4212,6 +4212,41 @@
             "updated_at": "2026-06-22T11:57:22Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0155",
+            "expires_at": "2026-06-22T20:20:02Z",
+            "notes": "Implementar provider local-vlm TASK-0155 en Zeus-protocol, off-by-default.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0155",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0155",
+                "Area_comun/tasks/TASK-0155-codex-extractor-local-vlm-provider.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-22T14:20:02Z",
+            "status": "released",
+            "task_id": "TASK-0155",
+            "updated_at": "2026-06-22T14:20:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0155-delivery",
+            "expires_at": "2026-06-22T16:37:01Z",
+            "notes": "Delivery TASK-0155 handoff, mailbox, and GO archive.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0155.md",
+                "Area_comun/mailbox/archived/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0155.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0155-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0155-codex-to-arquitecto-1.md"
+            ],
+            "started_at": "2026-06-22T14:37:01Z",
+            "status": "released",
+            "task_id": "TASK-0155",
+            "updated_at": "2026-06-22T14:37:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
             "expires_at": "2026-06-22T07:55:47Z",
             "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",
