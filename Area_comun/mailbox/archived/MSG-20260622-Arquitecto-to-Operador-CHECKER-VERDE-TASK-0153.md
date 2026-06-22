@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE de TASK-0153 (guard ALLOWLIST deny-all AC46 + aislamiento de suite AC47). Codex ac2e308 / protocolo dd7b5c7. Clon limpio npm 44/44; probe independiente: clientes no listados (phin/needle/axios) + eval/new Function -> FLAGGED; permitidos (fs/path/relativos/git push) + src real -> []; AC47 aisla los env del shell (poison ON -> 403/200). validate con/sin secretos exit 0; #4 byte-identica; drift 0. CIERRA el residual del Analista. Falta su PASADA (DECISION-0056) -> instruccion dejada en open/. El Analista ya esta activo (su cron). Con su OK cierro + aplico la reconciliacion de requerimientos."
