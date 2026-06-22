@@ -1736,6 +1736,19 @@
             "status": "done",
             "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default",
             "type": "product"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0156-codex-extractor-product-registration.md",
+            "id": "TASK-0156",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

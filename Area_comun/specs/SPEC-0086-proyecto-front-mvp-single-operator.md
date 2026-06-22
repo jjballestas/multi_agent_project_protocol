@@ -420,6 +420,14 @@ producto/dominio en el core neutral.
   sin cambio (carry). El extractor NO escribe el ledger (sin `submit_intent`), NO toca codigo/estado. #4
   byte-identica (el core no cambia). Behavior-test: respuesta con razonamiento+JSON -> extrae solo las candidatas;
   respuesta basura -> 0 candidatas sin crash; ninguna candidata entra al intake sin aprobacion humana.
+- **AC54 - Extractor = worker de PRODUCTO con autoria honesta, fuera del config #4 [PERMANENTE; DECISION-0058 Opcion 2].**
+  El Extractor se registra en un **registro de workers a nivel PRODUCTO** (Zeus, FUERA de protocol.config.json; sin
+  re-genesis): id `Extractor`, rol/extraccion, modelo por defecto `qwen3-vl:4b-instruct`, endpoint loopback. Firma
+  sus candidatas con una **clave de PRODUCTO** (Ed25519 propia, privada fuera del repo); cada candidata lleva la
+  firma + el id del firmante -> autoria honesta verificable. NO esta en el `agent_registry` #4 ni en
+  `signature_config` (no firma el ledger). Behavior-test: cada candidata producida lleva firma valida del Extractor;
+  una firma forjada/ausente se detecta; el registro de workers NO toca el config #4 (config pinned 1.14.0,
+  byte-identica); off-by-default (el provider live solo con flag+consentimiento).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

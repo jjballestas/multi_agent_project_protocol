@@ -473,6 +473,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default"
+        },
+        {
+            "id": "TASK-0156",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)"
         }
     ],
     "agents": {

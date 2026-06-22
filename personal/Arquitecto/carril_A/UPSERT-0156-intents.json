@@ -1,0 +1,17 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-upsert-0156", "task_id": "TASK-0156", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0156-codex-extractor-product-registration.md"],
+      "started_at": "2026-06-22T18:00:00Z", "updated_at": "2026-06-22T18:00:00Z", "expires_at": "2026-06-22T21:00:00Z",
+      "status": "active", "notes": "Registrar TASK-0156 ready (worker Extractor producto + keypair + firma, off-by-default)." },
+      "idempotency_key": "arquitecto:upsert-0156:claim-acquire" } },
+    { "task_upsert": { "task": {
+      "id": "TASK-0156", "title": "registro worker Extractor producto + keypair + firma candidatas + provider default qwen3-vl:4b-instruct (AC54)",
+      "status": "ready", "type": "product", "owner": "Codex", "phase": "P2", "priority": "high",
+      "spec_id": "SPEC-0086", "maker": "Codex", "checker": "Arquitecto",
+      "file": "Area_comun/tasks/TASK-0156-codex-extractor-product-registration.md"
+    }, "idempotency_key": "arquitecto:upsert-0156:ready" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-upsert-0156", "idempotency_key": "arquitecto:upsert-0156:claim-release" } }
+  ]
+}
