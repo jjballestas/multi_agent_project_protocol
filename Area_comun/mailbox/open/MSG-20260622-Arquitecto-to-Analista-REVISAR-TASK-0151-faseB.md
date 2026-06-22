@@ -30,17 +30,17 @@ Candidatas en store NO-ledger (OS tmp `FILE_CANDIDATE_STORE_ROOT||tmpdir()/zeus-
 de revision (`/api/protocol/intake-candidates` GET, `/discard` POST) + GATE HUMANO DURO de PII al aprobar.
 
 ## Vectores a REFUTAR (intenta romper cada uno; default a "no cerrable" si dudas)
-1. **AC43 gate humano de PII:** ¿se puede aprobar una candidata SIN declarar PII revisada? (esperado: 409
+1. **AC43 gate humano de PII:** se puede aprobar una candidata SIN declarar PII revisada? (esperado: 409
    "candidate approval requires human PII review acknowledgement"; ver server.js ~853). Intenta forjar la
    aprobacion sin el flag.
 2. **Re-screen candidate->intake:** el texto EDITADO por el operador (contenido nuevo que NO paso el screening de
-   ingest) ¿se re-valida por los MISMOS guards al aprobar? Edita un candidato inyectando PII/contenido activo ->
-   ¿redactado/rechazado? (sanitizeRequirementIntake + redactPublicText).
-3. **id del CONTENIDO EDITADO (no del archivo):** 1 archivo -> N candidatas aprobadas -> ¿N REQ con ids DISTINTOS?
+   ingest) se re-valida por los MISMOS guards al aprobar? Edita un candidato inyectando PII/contenido activo ->
+   redactado/rechazado? (sanitizeRequirementIntake + redactPublicText).
+3. **id del CONTENIDO EDITADO (no del archivo):** 1 archivo -> N candidatas aprobadas -> N REQ con ids DISTINTOS?
    (no colision; ver editedFingerprint/sha256Hex ~868). Intenta colisionar 2 candidatas del mismo upload.
-4. **Candidatas FUERA del ledger:** ¿alguna candidata aparece en TASK_INDEX/PROJECT_STATE o se atesta en #4 sin
+4. **Candidatas FUERA del ledger:** alguna candidata aparece en TASK_INDEX/PROJECT_STATE o se atesta en #4 sin
    aprobacion? (esperado: NO; drift 0 con candidatas presentes; clon limpio sin el store valida exit 0).
-5. **Carry AC40 no-MODELO-egress:** ¿la Fase B reintrodujo alguna llamada a un modelo / salida de red no
+5. **Carry AC40 no-MODELO-egress:** la Fase B reintrodujo alguna llamada a un modelo / salida de red no
    allowlisted? (esperado: NO; el agente extractor es Fase C, no B).
 6. **#4 byte-identica** (config/genesis/registry/keys sin cambio, version pinned 1.14.0) + validate con/sin
    secretos exit 0 + drift 0 + npm verde en clon limpio (sin flake).
