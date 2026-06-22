@@ -2,7 +2,7 @@
 task_id: TASK-0151
 title: "Proyecto-front (RF-14): carga por archivo v2 FASE B - candidatas store-no-ledger + panel de revision + GATE HUMANO DURO de PII (aprobar por candidata declarando PII revisada) + re-screen candidate->intake + estabilizar flake de timeout (AC41/AC43, SPEC-0086 ext10, DECISION-0056)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

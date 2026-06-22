@@ -130,14 +130,6 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
-            "id": "TASK-0151",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B - candidatas no-ledger + panel + gate humano PII (AC41/AC43, SPEC-0086 ext10, DECISION-0056)"
-        },
-        {
             "id": "TASK-0152",
             "owner": "Codex",
             "phase": "P2",

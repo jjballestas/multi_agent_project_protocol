@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-close-0151", "task_id": "TASK-0151", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0151-codex-file-intake-v2-faseB.md"],
+      "started_at": "2026-06-22T06:20:00Z", "updated_at": "2026-06-22T06:20:00Z", "expires_at": "2026-06-22T09:20:00Z",
+      "status": "active", "notes": "Cierre Fase B (checker Arquitecto verde clon limpio npm 43/43; Analista OK 6/6 vectores; validate con/sin secretos exit 0; drift 0; #4 byte-identica)." },
+      "idempotency_key": "arquitecto:close-0151:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0151", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0151:status-done" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-close-0151", "idempotency_key": "arquitecto:close-0151:claim-release" } }
+  ]
+}
