@@ -7,8 +7,8 @@
 - job_id: 9954b818. Stand-down = CronDelete 9954b818 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 0 (Codex ENTREGO Fase C: Zeus 63a80ee, in_review d1eb0cf)
-- ultima actividad Codex: entrega Fase C (d1eb0cf, in_review). HEAD==origin tras este round.
+- rounds_without_codex_response: 1 (CAMBIO-REQUERIDO guard AC45 devuelto a Codex a3c75a9; aun no re-reclama)
+- ultima actividad Codex: entrega Fase C (d1eb0cf). Pendiente rework guard AC45. HEAD==origin tras este round.
 
 ## Orden y estado
 | Fase | TASK | AC | estado |
