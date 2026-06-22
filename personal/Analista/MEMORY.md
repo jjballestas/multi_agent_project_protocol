@@ -160,6 +160,15 @@
   en vivo exit 0, sin secretos en clon limpio exit 0, drift 0 up_to_seq 1191, neutrality/encoding exit 0, #4 byte-
   identica. Veredicto + MSG rr=true commiteados y pusheados en `45645bd` (`review(TASK-0155): Analista requires
   AC52 hardening`).
+- TASK-0155 AC52 rework (2026-06-22): re-verifique sobre Zeus `6369b5c` + protocolo `1cb2b40`.
+  Resultado OK/CERRABLE. Clon limpio producto: `npm test` corrida 1 exit 1 por `EACCES 127.0.0.1:5040` en test
+  ajeno de auto commit push; corrida 2 exit 0, 48/48. Payloads propios contra guard extraido de `src/server.js`
+  cerraron decimal `2130706433`, octal/hex, `0.0.0.0`, externos, sufijos, IPv4-mapped, leading-zero, userinfo
+  confusion, percent/sufijo, out-of-range, HTTPS no-localhost y protocolo no HTTP; positivos `localhost`,
+  `https://localhost`, `127.0.0.1`, `127.0.0.5`, `127.255.255.255`, `[::1]` pasan. Gates protocolo: validate con
+  secretos exit 0, validate sin secretos en clon limpio exit 0, drift 0 `up_to_seq=1197`, neutrality/encoding exit
+  0, #4 byte-identica. Veredicto + MSG rr=true commiteados en `4cf8fa2` (`review(TASK-0155): Analista OK AC52
+  rework`). Residual: AC52 no es sandbox de red; uso vivo sigue GO/ceremonia aparte.
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
