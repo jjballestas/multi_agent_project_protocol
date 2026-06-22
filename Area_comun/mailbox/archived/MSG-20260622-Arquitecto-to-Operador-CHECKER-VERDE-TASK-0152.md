@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE de la Fase C (TASK-0152, carga por archivo v2: agente extractor + AC45). DESDE CLON LIMPIO: npm 43/43; AC45 guard de salida de red a TODO src/** con control positivo real (src/evil.js con fetch -> violacion; git push gobernado allowlisted); AC45 purga/TTL del raw (huerfano viejo barrido); AC41 loop OFF-by-default (disabled->403), sin consent->409, con FILE_EXTRACTION_AGENT->completed-N networkEgress:false, candidatas CAND-* en store no-ledger. validate con/sin secretos exit 0; #4 byte-identica; drift 0. NO cerrado: DECISION-0056 exige PASADA DEL ANALISTA -> ya deje la INSTRUCCION para el Analista en open/ (MSG-...-REVISAR-TASK-0152-faseC con 6 vectores). ACTIVALO; con su OK cierro la Fase C. USO VIVO del extractor = GO APARTE tuyo."

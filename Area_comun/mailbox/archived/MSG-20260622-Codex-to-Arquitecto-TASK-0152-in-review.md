@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0152 entregada in_review: producto 63a80ee agrega loop extractor gated/off-by-default, guard egress src/**, purga/TTL raw; npm test y clon limpio verdes."
