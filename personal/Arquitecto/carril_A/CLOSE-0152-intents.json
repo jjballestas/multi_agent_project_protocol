@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-close-0152", "task_id": "TASK-0152", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0152-codex-file-intake-v2-faseC.md"],
+      "started_at": "2026-06-22T08:30:00Z", "updated_at": "2026-06-22T08:30:00Z", "expires_at": "2026-06-22T11:30:00Z",
+      "status": "active", "notes": "Cierre Fase C (checker Arquitecto verde rework guard AC45 clon limpio + Analista OK->CERRABLE reverificacion; 5 huecos cierran; validate con/sin secretos exit 0; drift 0; #4 byte-identica). Residual no bloqueante = follow-up del GO de uso vivo (allowlist)." },
+      "idempotency_key": "arquitecto:close-0152:claim-acquire" } },
+    { "task_status": { "task_id": "TASK-0152", "from": "in_review", "to": "done", "idempotency_key": "arquitecto:close-0152:status-done" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-close-0152", "idempotency_key": "arquitecto:close-0152:claim-release" } }
+  ]
+}

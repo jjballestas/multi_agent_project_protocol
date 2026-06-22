@@ -453,7 +453,7 @@
         {
             "id": "TASK-0152",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor + AC45 (guard a todo src/** + purga/TTL) (SPEC-0086 ext10, DECISION-0056)"
         }
     ],
