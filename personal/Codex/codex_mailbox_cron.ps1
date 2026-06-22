@@ -208,16 +208,18 @@ Modo ejecutor obligatorio:
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
 
     try {
-        $args = @(
+        # El prompt se pasa por STDIN (RedirectStandardInput), NO como argumento: Start-Process -ArgumentList
+        # parte un argumento multi-palabra en tokens sueltos (PS 5.1) y codex interpreta la 2da palabra como
+        # subcomando. codex exec lee el prompt de stdin con '-'.
+        $execArgs = @(
             "exec",
             "-s", "danger-full-access",
             "-c", "approval_policy=never",
             "-c", "model_reasoning_effort=low",
             "--skip-git-repo-check",
-            "--"
+            "-"
         )
-        $args += $prompt
-        $process = Start-Process -FilePath $codexPath -ArgumentList $args -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $codexPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $PromptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         $process.WaitForExit()
         Write-Log "EXEC_EXIT code=$($process.ExitCode) message=$($Message.Name)"
