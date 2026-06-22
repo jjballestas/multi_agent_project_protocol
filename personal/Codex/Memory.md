@@ -4,6 +4,16 @@ Last updated: 2026-06-21 Europe/Madrid, after TASK-0149 no-phantom intake fix.
 
 ## Latest Session Note
 
+- TASK-0150 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `5121335 feat(intake): emit file extraction tasks`. File intake v2 Phase A now keeps upload ingestion
+  OFF-by-default, hashes raw upload bytes with SHA-256, performs honest best-effort ASCII PII screening, stores
+  raw uploads in OS temp outside the attested dataset, emits idempotent `TASK-EXTRACT-*` extraction tasks via
+  governed `task_upsert`, and adds the typed/file intake mode selector with execute-time required-field checks.
+  Evidence before commit: `node --check src/server.js public/app.js tests/staticContract.test.js`, product
+  `npm test` PASS 42/42, and clean-clone Zeus `npm test` PASS 42/42. Protocol delivery moved TASK-0150 to
+  `in_review`, released `CLAIM-20260622-Codex-TASK-0150`, answered the GO, and opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0150-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0150-codex-to-arquitecto-1.md`.
 - TASK-0149 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `03991cd fix(intake): reject phantom requirements`. The Intake no longer preloads example narrative,
   acceptance, or project values; server-side `requirement-intake` rejects empty/placeholder narrative and

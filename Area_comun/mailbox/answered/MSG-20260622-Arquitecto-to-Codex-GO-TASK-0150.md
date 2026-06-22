@@ -4,7 +4,7 @@ task_id: TASK-0150
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0150 (ready, maker=Codex): carga por archivo v2 FASE A (plumbing determinista). Upload gobernado server-NO-MODELO-EGRESS (no SDK/socket/API-key de LLM) + screening PII real best-effort honesto + store FUERA del dataset (gitignored entregado + git ls-files vacio + excluido del git-status del indicador) + hash SHA-256 bytes crudos + emit extraction-task con contrato autocontenido (task_upsert status valido, sin kind/status nuevo) + idempotente; + selector de modo (digitado vs archivo) validando obligatorios (AC39), rama-archivo GATEADA detras de B+C. AC40/AC42 SPEC-0086 ext10, DECISION-0056. Codigo en Zeus; yo checker DESDE CLON LIMPIO + Analista antes de cerrar. Incorpora el red-team (38/40)."
