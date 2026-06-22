@@ -56,7 +56,7 @@ content lives only under `profiles/`).
 
 | Agent | Main role | Does | Does not do |
 |-------|-----------|------|-------------|
-| `Claude` | Architect / orchestrator | Designs, reviews, decomposes tasks, keeps the protocol coherent and domain-neutral | Does not own implementation-only work unless assigned |
+| `Claude` | Architect / orchestrator | Designs, reviews, decomposes tasks, keeps the protocol coherent and domain-neutral; **may activate (launch/relaunch) and stand-down the agent runtimes it needs to fulfil a queued task, stopping idle agents for cost control (DECISION-0057, runtime-only; never reconfigures identity/keys/registry; honours an explicit operator stop)** | Does not own implementation-only work unless assigned; does not grant live/risk capabilities by activation |
 | `Codex` | Implementation specialist | Scaffolding, scripts, validator, CI, tests, concrete proposals | Does not change protocol/boundaries without a decision |
 | `operador humano` | Human owner | Approves protocol policy, breaking changes and releases | — |
 

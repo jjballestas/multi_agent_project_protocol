@@ -13,6 +13,17 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.16.0] - 2026-06-22
+> Note: capability documented; the live instance `protocol_version` stays **1.14.0** under #4 (epoch
+> versioning, DECISION-0047) -- no config change, no re-genesis.
+
+### Added
+- **Architect agent-activation faculty (DECISION-0057).** The Architect/orchestrator role may activate
+  (launch/relaunch) and stand-down the agent runtimes it needs to fulfil a queued task, and stops idle
+  agents for cost control. Runtime-only (never reconfigures identity/keys/registry); honours an explicit
+  operator stop; activation grants no live/risk capability (live-use, #4 config, external pushes stay
+  separate operator GOs); single instance; audited. AGENTS.md s.3 roles updated.
+
 ## [1.15.0] - 2026-06-19
 > Note: capability implemented + TASK-0121 done, but the live instance `protocol_version` stays
 > **1.14.0**: under #4 (chain ON) the genesis hash = `canonical_hash(protocol.config.json)`, so bumping

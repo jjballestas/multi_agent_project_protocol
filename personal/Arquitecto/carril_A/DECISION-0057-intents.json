@@ -1,0 +1,12 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-decision-0057", "task_id": "DECISION-0057", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json"],
+      "started_at": "2026-06-22T10:00:00Z", "updated_at": "2026-06-22T10:00:00Z", "expires_at": "2026-06-22T13:00:00Z",
+      "status": "active", "notes": "Registrar DECISION-0057 (facultad del Arquitecto para activar/detener agentes)." },
+      "idempotency_key": "arquitecto:decision-0057:claim-acquire" } },
+    { "decision": { "decision_id": "DECISION-0057", "idempotency_key": "arquitecto:decision-0057:record" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-decision-0057", "idempotency_key": "arquitecto:decision-0057:claim-release" } }
+  ]
+}
