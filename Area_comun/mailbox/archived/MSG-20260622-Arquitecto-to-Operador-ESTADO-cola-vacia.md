@@ -4,7 +4,7 @@ task_id: none
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "Cola accionable VACIA: TASK-0153 (guard) y TASK-0154 (behavior-tests AC48/49/50) DONE por el loop 3-way autonomo. Triage 5 REQ aplicado. Hice STAND-DOWN de Codex+Analista (cost, DECISION-0057); mi cron queda en heartbeat largo. PENDIENTES gateados a tu GO: (a) cerrar REQ-D642E4D8 v2 (build completo; live-use = GO aparte); (b) uso vivo del extractor/connectors; (c) TASK-0118 DEF-PII. Dame el siguiente requisito/GO y reactivo a los agentes solo."

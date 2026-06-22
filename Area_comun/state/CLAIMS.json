@@ -4410,6 +4410,21 @@
             "updated_at": "2026-06-22T05:55:47Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-1DBE8A04",
+            "expires_at": "2026-06-22T18:14:30.638Z",
+            "notes": "Front mailbox-archive relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Operador-ESTADO-cola-vacia.md",
+                "Area_comun/mailbox/archived/MSG-20260622-Arquitecto-to-Operador-ESTADO-cola-vacia.md"
+            ],
+            "started_at": "2026-06-22T18:04:30.638Z",
+            "status": "released",
+            "task_id": "MAILBOX-ARCHIVE",
+            "updated_at": "2026-06-22T18:04:30.638Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-MAILBOX-ARCHIVE-30FE8242",
             "expires_at": "2026-06-21T01:24:05.566Z",
             "notes": "Front mailbox-archive relay claim.",
