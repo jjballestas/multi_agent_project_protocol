@@ -65,4 +65,11 @@ propiedades vinculantes:
   allowlisted, candidatas no-ledger, manejo de los 5 formatos, acumula+dedup).
 - Tarea de implementacion (maker=Codex / checker=Arquitecto + Analista), off-by-default.
 - La ceremonia de re-genesis-boundary (alta en registry + keypair).
-- Optimizacion del thinking (investigacion del operador) -- no bloquea Path 1.
+
+## Addendum 2026-06-22 - Modelo resuelto: Qwen3-VL-4B-Instruct (no-thinking)
+
+La investigacion del operador confirmo que el thinking del tag `qwen3-vl:4b` (variante Thinking) NO se desactiva
+de forma fiable en Ollama. **Resolucion: el Extractor usa `qwen3-vl:4b-instruct`** (variante Instruct, NO-thinking,
+tag DIRECTO en la libreria de Ollama; sin import manual de GGUF+mmproj). Validado empiricamente: thinking len = 0,
+`content` = JSON limpio, `done="stop"` (sin sobre-generar), `format: json` funciona. El provider (TASK-0155) es
+agnostico al modelo -> este cambio es de CONFIG (que tag apunta el Extractor), no de codigo; no rehace TASK-0155.
