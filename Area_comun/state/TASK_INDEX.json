@@ -1723,6 +1723,19 @@
             "status": "done",
             "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)",
             "type": "product"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0155-codex-extractor-local-vlm-provider.md",
+            "id": "TASK-0155",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

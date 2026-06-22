@@ -11,6 +11,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0155",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "provider local-vlm del Extractor (troceado AC51 + egress localhost AC52 + salida robusta AC53), off-by-default"
         }
     ],
     "next_actions": [

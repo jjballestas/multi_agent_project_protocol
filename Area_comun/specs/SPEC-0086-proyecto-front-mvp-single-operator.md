@@ -399,6 +399,27 @@ producto/dominio en el core neutral.
   snapshot) y el front refetcha al navegar (AC29), de modo que un commit nuevo del protocolo aparece sin reiniciar.
   Behavior-test: cambiar el canonico (nuevo HEAD) entre dos requests -> el segundo refleja el cambio sin reinicio;
   un cache de modulo del canonico rompe el test.
+- **AC51 - Extractor TROCEADO: contexto acotado por llamada, escala a cualquier tamano [PERMANENTE; DECISION-0058].**
+  El provider `local-vlm` del extractor procesa **per-pagina** (PDF -> imagen por pagina) y **per-chunk** (texto
+  grande partido en pedazos acotados), **una llamada al modelo por pagina/chunk**. El `num_ctx`/payload por llamada
+  es **fijo y acotado**, independiente del tamano total del documento. Las candidatas de todas las paginas/chunks
+  se **acumulan y deduplican** en el store no-ledger. Behavior-test: un documento de N paginas produce N llamadas
+  acotadas (no una con contexto N-dependiente); duplicados entre paginas se colapsan; cubre los 5 formatos
+  (pdf/imagen via vision, md/html/txt via texto).
+- **AC52 - Frontera de egress del Extractor = SOLO endpoint local allowlisted [CRITICO PERMANENTE; DECISION-0058].**
+  El extractor live solo puede llamar al **endpoint del modelo local configurado** (p.ej. `127.0.0.1:11434`); el
+  guard de egress (AC46 deny-all) **allowlistea unicamente ese host:puerto local** y marca CUALQUIER otra salida
+  de red (incluido cualquier host no-loopback). El contenido del archivo NUNCA va a un host externo. Control
+  positivo: una llamada a un host no-loopback desde el extractor -> FLAGGED; la llamada al endpoint local
+  configurado -> permitida; un endpoint con host != loopback en la config -> rechazado. Off-by-default
+  (`local-vlm` solo activo con flag + consentimiento explicito).
+- **AC53 - Extractor: salida estructurada robusta + carry de PII/no-ledger [PERMANENTE; DECISION-0058].** El
+  extractor parsea de la respuesta del modelo SOLO el JSON de candidatas (tolerante a campos de razonamiento
+  separados / texto extra; descarta lo que no sea candidata valida; no crashea si el modelo divaga). Las candidatas
+  van al store NO-ledger; el **GATE HUMANO DURO de PII (AC43)** + aprobacion humana antes del intake se mantienen
+  sin cambio (carry). El extractor NO escribe el ledger (sin `submit_intent`), NO toca codigo/estado. #4
+  byte-identica (el core no cambia). Behavior-test: respuesta con razonamiento+JSON -> extrae solo las candidatas;
+  respuesta basura -> 0 candidatas sin crash; ninguna candidata entra al intake sin aprobacion humana.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
