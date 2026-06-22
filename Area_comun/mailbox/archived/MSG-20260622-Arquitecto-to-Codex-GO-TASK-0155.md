@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0155 (ready): provider local-vlm del Extractor en Zeus, OFF-by-default. AC51 troceado (per-pagina/chunk, una llamada acotada por pagina, acumula+dedup -> escala a cualquier tamano), AC52 egress = SOLO endpoint loopback allowlisted (127.0.0.1:11434; cualquier otro host FLAGGED por el guard AC46), AC53 parseo robusto del JSON de candidatas (tolera razonamiento/texto extra, sin crash) + carry gate humano PII AC43 + candidatas no-ledger. NO enciende uso vivo. maker=Codex/checker=Arquitecto+Analista (egress). node --test clon limpio verde (sin Ollama: mock/deterministic+guard), #4 byte-id, validate con/sin secretos exit 0."

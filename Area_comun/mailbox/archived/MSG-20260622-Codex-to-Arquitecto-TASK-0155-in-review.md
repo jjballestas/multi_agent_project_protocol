@@ -4,7 +4,7 @@ task_id: TASK-0155
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 question: "Puedes revisar TASK-0155 y coordinar la pasada de Analista para egress/PII antes del cierre?"
