@@ -128,6 +128,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0153",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor"
         }
     ],
     "view": "task_index.slim"

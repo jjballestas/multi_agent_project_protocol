@@ -1,0 +1,18 @@
+{
+  "intents": [
+    { "claim": { "op": "acquire", "claim": {
+      "claim_id": "CLAIM-20260622-Arquitecto-upsert-0153", "task_id": "TASK-0153", "owner": "Arquitecto",
+      "scope": ["Area_comun/state/CLAIMS.json","Area_comun/state/TASK_INDEX.json","Area_comun/state/PROJECT_STATE.json","Area_comun/tasks/TASK-0153-codex-guard-allowlist-test-isolation.md"],
+      "started_at": "2026-06-22T09:00:00Z", "updated_at": "2026-06-22T09:00:00Z", "expires_at": "2026-06-22T12:00:00Z",
+      "status": "active", "notes": "Registrar+promover TASK-0153 (guard allowlist AC46 + aislamiento test AC47) ready tras GO del operador." },
+      "idempotency_key": "arquitecto:upsert-0153:claim-acquire" } },
+    { "task_upsert": { "task": {
+      "id": "TASK-0153",
+      "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor",
+      "status": "ready", "type": "product", "owner": "Codex", "phase": "P2", "priority": "high",
+      "spec_id": "SPEC-0086", "maker": "Codex", "checker": "Arquitecto",
+      "file": "Area_comun/tasks/TASK-0153-codex-guard-allowlist-test-isolation.md"
+    }, "idempotency_key": "arquitecto:upsert-0153:ready" } },
+    { "claim": { "op": "release", "claim_id": "CLAIM-20260622-Arquitecto-upsert-0153", "idempotency_key": "arquitecto:upsert-0153:claim-release" } }
+  ]
+}

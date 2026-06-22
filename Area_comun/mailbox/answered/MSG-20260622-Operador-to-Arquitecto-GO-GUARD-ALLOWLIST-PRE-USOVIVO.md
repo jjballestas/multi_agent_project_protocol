@@ -4,7 +4,7 @@ task_id: none
 type: DECISION
 from: Operador
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Autorar la pieza SDD que el Analista puso como PRECONDICION del GO de uso vivo del extractor: (1) flip del guard de egress de DENYLIST (proveedores nombrados) a ALLOWLIST (deny-all salida de red por defecto; permite solo lo estrictamente necesario) + marcar eval/new Function (cubre el residual: clientes HTTP no listados + ofuscacion = limite del scan estatico). (2) AISLAMIENTO DE TEST: la suite NO debe heredar los env de runtime del operador -- que npm test limpie/sobrescriba AUTO_COMMIT_PUSH_CONFIG_PATH y FILE_INGESTION_CONFIG_PATH al arrancar (fixtures propias), para que no salga rojo por el shell (off-by-default falso 200!=403 + executes 502!=200 falsos cuando el operador tiene los env vivos). maker=Codex / checker=Arquitecto + pasada del Analista. ESTO NO ENCIENDE el uso vivo: solo endurece el guard. El GO de uso vivo del extractor LLM va aparte y despues, con su Analista."

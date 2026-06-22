@@ -367,6 +367,25 @@ producto/dominio en el core neutral.
   huerfanos (agente murio / sin aprobar); test: el raw no sobrevive al estado terminal; un proceso reiniciado
   purga huerfanos > TTL. (c) **estabilidad de CI:** los tests del flujo son deterministas / no sensibles a timeout
   (sin flake frio-vs-caliente). Carry AC40/AC44; #4 byte-identica. Bloquea el cierre de Fase C.
+- **AC46 - Guard de egress ALLOWLIST (deny-all) + ejecucion dinamica [PERMANENTE; DECISION-0056; pasada del Analista TASK-0152; PRECONDICION del uso vivo del extractor].**
+  El guard de salida de red de AC45 pasa de **denylist** (proveedores/clientes nombrados) a **ALLOWLIST deny-all**:
+  el scan estatico de TODO `src/**` marca **CUALQUIER `import`/`require` cuyo modulo NO este en una lista permitida
+  explicita** (p.ej. fs/path/crypto/url/os/util + el wrapper de git gobernado), no solo los proveedores conocidos.
+  Esto cierra el residual reconocido por el Analista (clientes HTTP no listados: phin/needle/bent/ky/...; el denylist
+  no puede enumerarlos todos). Ademas el guard marca **ejecucion dinamica**: `eval(` y `new Function(` (ofuscacion /
+  egress encubierto). El unico egress permitido sigue siendo el `git push` gobernado + lecturas read-only ya
+  allowlisted. Prueba estatica falsable + **control positivo POR familia**, incluyendo al menos: un cliente HTTP NO
+  listado (p.ej. `import phin from "phin"`) -> FLAGGED; `eval(`/`new Function(` -> FLAGGED; un import permitido
+  (fs/path/...) -> `[]`; el `git push` gobernado -> `[]`. El src real da `[]` (sin falso positivo). Carry AC45/AC41.
+  #4 byte-identica. **NO enciende el uso vivo**; es PRECONDICION del GO de uso vivo del extractor (ventana de modelo).
+- **AC47 - Aislamiento de la suite del entorno de runtime del operador [PERMANENTE; DECISION-0056].**
+  `npm test` NO debe heredar los env de runtime del operador. Al arrancar, la suite limpia/sobrescribe con fixtures
+  propias `AUTO_COMMIT_PUSH_CONFIG_PATH`, `FILE_INGESTION_CONFIG_PATH` (y cualquier env que altere el off-by-default),
+  de modo que el resultado sea **determinista** independientemente del shell. Motivo: hoy, si el operador corre los
+  tests con el server push-vivo/ingestion ON en el mismo shell, salen 3 rojos FALSOS (off-by-default 200!=403,
+  executes 502!=200) aunque el codigo este verde en clon limpio -- es aislamiento del harness, no un defecto del
+  producto. Test falsable: con esos env apuntando a configs "ON", la suite sigue verde porque los aisla; un test que
+  dependa del env heredado rompe el aislamiento. #4 byte-identica.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

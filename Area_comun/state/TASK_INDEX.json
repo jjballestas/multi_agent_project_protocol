@@ -1683,6 +1683,19 @@
             "status": "done",
             "title": "Proyecto-front (RF-14): carga por archivo v2 FASE C - agente extractor + AC45 (guard a todo src/** + purga/TTL) (SPEC-0086 ext10, DECISION-0056)",
             "type": "product"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0153-codex-guard-allowlist-test-isolation.md",
+            "id": "TASK-0153",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

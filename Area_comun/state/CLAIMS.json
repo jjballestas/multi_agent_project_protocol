@@ -3788,6 +3788,22 @@
             "updated_at": "2026-06-22T00:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-upsert-0153",
+            "expires_at": "2026-06-22T12:00:00Z",
+            "notes": "Registrar+promover TASK-0153 (guard allowlist AC46 + aislamiento test AC47) ready tras GO del operador.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0153-codex-guard-allowlist-test-isolation.md"
+            ],
+            "started_at": "2026-06-22T09:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0153",
+            "updated_at": "2026-06-22T09:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-TASK-0150",
             "expires_at": "2026-06-22T06:00:00Z",
             "notes": "TASK-0150 file intake v2 phase A deterministic plumbing in Zeus-protocol.",
