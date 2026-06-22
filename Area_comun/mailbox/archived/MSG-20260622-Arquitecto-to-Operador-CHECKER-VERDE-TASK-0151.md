@@ -4,7 +4,7 @@ task_id: TASK-0151
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CHECKER VERDE de la Fase B (TASK-0151, carga por archivo v2). DESDE CLON LIMPIO: candidatas en store NO-ledger (OS tmp); GATE HUMANO DURO de PII (aprobar sin declarar PII -> 409); re-screen candidate->intake; id del contenido editado (sha256, 1 archivo->N candidatas->N REQ); flake estabilizado. npm 43/43 clon limpio; validate con/sin secretos exit 0; #4 byte-identica; drift 0. NO cerrado: DECISION-0056 exige PASADA DEL ANALISTA -> ya deje la INSTRUCCION para el Analista en open/ (MSG-...-REVISAR-TASK-0151-faseB con 6 vectores a refutar). ACTIVALO; con su OK cierro Fase B y promuevo Fase C."

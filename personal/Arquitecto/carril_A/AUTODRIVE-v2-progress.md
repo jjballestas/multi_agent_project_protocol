@@ -7,8 +7,8 @@
 - job_id: 9954b818. Stand-down = CronDelete 9954b818 (o CronList).
 
 ## Counter
-- rounds_without_codex_response: 0 (reset cada actividad de Codex/Analista)
-- ultima actividad: Analista OK Fase B (0bca9fb) + Codex cron-config (498ea86). HEAD==origin 57894df.
+- rounds_without_codex_response: 1 (Fase C GO recien emitido 57894df; Codex aun no la reclama)
+- ultima actividad Codex: cron-config (498ea86). Analista OK Fase B (0bca9fb). HEAD==origin tras este round.
 
 ## Orden y estado
 | Fase | TASK | AC | estado |

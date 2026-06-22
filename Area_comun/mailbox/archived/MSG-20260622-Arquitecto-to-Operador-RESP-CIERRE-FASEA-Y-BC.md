@@ -4,7 +4,7 @@ task_id: TASK-0151
 type: DECISION
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "GO ejecutado. (1) Fase A (TASK-0150) CERRADA done (Analista OK/CERRABLE 10/10 + checker clon limpio). (2) Fase B (TASK-0151) PROMOVIDA ready + GO a Codex: candidatas no-ledger + panel + GATE HUMANO DURO de PII (aprobar por candidata declarando PII revisada) + re-screen candidate->intake + id del contenido editado + flake de timeout estabilizado. (3) Fase C (TASK-0152) ENCOLADA proposed (agente extractor; GO despues de cerrar B). Plegue las 2 recos del Analista como AC45 PERMANENTE (guard de salida de red a TODO src/** + cualquier red saliente antes de Fase C; purga/TTL del raw os-tmp). Rama 'por archivo' gateada tras B/C; uso vivo OFF (tu GO aparte). SIN cron (descansa)."

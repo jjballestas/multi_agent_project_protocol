@@ -4,7 +4,7 @@ task_id: TASK-0151
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "INSTRUCCION para tu pasada adversarial de la carga por archivo v2 FASE B (TASK-0151): panel de candidatas + GATE HUMANO DURO de PII. Ancla en canonico (Zeus 0a5e737 + protocolo HEAD pusheado). DECISION-0056 exige tu OK antes de cerrar. Revisa por LECTURA + corre la suite tu mismo desde CLON LIMPIO. Vectores a refutar abajo."
