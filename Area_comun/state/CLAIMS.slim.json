@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR.md",
-                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR.md",
-                "personal/Codex/codex_mailbox_cron.ps1",
-                "personal/Codex/Memory.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "CONFIG-CRON-CODEX"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -3806,7 +3806,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-22T05:55:47Z",
-            "status": "active",
+            "status": "released",
             "task_id": "CONFIG-CRON-CODEX",
             "updated_at": "2026-06-22T05:55:47Z"
         },

@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-06-21 Europe/Madrid, after TASK-0149 no-phantom intake fix.
+Last updated: 2026-06-22 Europe/Madrid, after Codex cron executor prompt hardening.
 
 ## Latest Session Note
 
+- Codex cron executor prompt was hardened per
+  `MSG-20260622-Arquitecto-to-Codex-CONFIG-CRON-EJECUTOR`: `personal/Codex/codex_mailbox_cron.ps1` now treats
+  DECISION messages to Codex as processable and reinjects an executor prompt that must claim ready Codex GO tasks,
+  move them to `in_progress`, implement in `D:/Agentes/Zeus/Zeus-protocol`, run product/protocol gates, deliver
+  `in_review`, release the claim via `runtime/submit_intent.py`, and avoid self-closing to `done`. The CONFIG
+  message was moved to answered and `CLAIM-20260622-Codex-cron-executor-config` was released. No live cron was
+  started by this change.
 - TASK-0151 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `0a5e737 feat(intake): add candidate review gate`. File intake v2 Phase B now keeps candidates in an OS temp
   store outside the attested dataset, exposes a review panel for pending candidates, blocks approval without
