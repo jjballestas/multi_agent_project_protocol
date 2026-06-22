@@ -428,6 +428,30 @@ producto/dominio en el core neutral.
   `signature_config` (no firma el ledger). Behavior-test: cada candidata producida lleva firma valida del Extractor;
   una firma forjada/ausente se detecta; el registro de workers NO toca el config #4 (config pinned 1.14.0,
   byte-identica); off-by-default (el provider live solo con flag+consentimiento).
+- **AC55 - Intake: el modo "carga por archivo" abre una SECCION dedicada, sin scroll y sin pedir campos antes [PERMANENTE; REQ intake-ux-feedback].**
+  Elegir "carga por archivo" en el Intake abre una seccion propia cuyo primer elemento visible es el selector de
+  archivo + el boton "Extraer requisito" (no requiere scroll para alcanzar el cargador). Los campos Titulo /
+  Narrativa / Intencion de aceptacion NO se solicitan antes de cargar el archivo (vienen del archivo o los propone
+  el modelo). Behavior-test: en modo archivo el selector y el boton "Extraer requisito" estan en el render inicial
+  de la seccion; los inputs Titulo/Narrativa/Intencion no se renderizan ni se exigen antes de la carga.
+- **AC56 - Boton "Extraer requisito" -> Extractor -> candidatas como TARJETAS [PERMANENTE; REQ intake-ux-feedback].**
+  El boton envia el archivo al agente Extractor por la ruta gobernada de extraccion (off-by-default, loopback, carry
+  AC51-AC54) y al volver muestra las candidatas como tarjetas visuales (una por candidata, pendientes de aprobacion).
+  Behavior-test: respuesta con N candidatas -> N tarjetas; 0 candidatas -> mensaje sin crash; respeta consent + gate
+  de PII; ninguna candidata entra al ledger sin aprobacion humana + submit_intent.
+- **AC57 - Click en una tarjeta candidata puebla [Titulo, Narrativa, Intencion de aceptacion] [PERMANENTE; REQ intake-ux-feedback].**
+  Al hacer click en una tarjeta, las secciones Titulo / Narrativa / Intencion de aceptacion se cargan con los valores
+  de esa candidata, quedando pendientes de aprobacion/envio humano (no entran al ledger hasta submit_intent +
+  aprobacion). Behavior-test: click en tarjeta -> los tres campos toman los valores de la candidata; el gate humano
+  de PII/aprobacion se mantiene antes del submit.
+- **AC58 - Auto-commit-push ergonomico: el submit gobernado llega al canonico sin push manual [PERMANENTE; REQ intake-ux-feedback].**
+  El server resuelve la config de auto-commit-push (y de file-ingestion) prefiriendo el override runtime gitignored
+  (`*.runtime.json`) cuando existe, y cae al config VERSIONADO off-by-default cuando no. Con el override activo,
+  presionar "Execute submit_intent" hace commit+push del output gobernado a origin -> el Arquitecto/checker lo ve sin
+  push manual. El config versionado permanece `enabled:false` (invariante off-by-default intacto para clones/CI). El
+  push NO es un segundo escritor: solo propaga el output ya escrito por submit_intent (carry AC17/no-bypass).
+  Behavior-test: override presente+enabled -> el submit dispara commit+push (git mockeado); override ausente -> sin
+  push (off); el config versionado sigue `enabled:false`.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

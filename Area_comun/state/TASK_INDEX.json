@@ -1751,6 +1751,20 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0157-codex-intake-v3-file-mode-cards-autopush.md",
+            "id": "TASK-0157",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spawned_from": "TASK-EXTRACT-DC0E283672",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): Intake v3 -- modo carga-por-archivo en seccion dedicada (sin scroll, sin campos previos) + boton Extraer requisito -> candidatas como tarjetas -> click puebla campos; auto-commit-push ergonomico (override runtime) (AC55-AC58, SPEC-0086)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

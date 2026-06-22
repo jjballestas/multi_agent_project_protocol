@@ -13,6 +13,12 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
+            "id": "TASK-0157",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): Intake v3 -- modo carga-por-archivo en seccion dedicada (sin scroll, sin campos previos) + boton Extraer requisito -> candidatas como tarjetas -> click puebla campos; auto-commit-push ergonomico (override runtime) (AC55-AC58, SPEC-0086)"
+        },
+        {
             "id": "TASK-EXTRACT-DC0E283672",
             "owner": "Arquitecto",
             "status": "ready",
