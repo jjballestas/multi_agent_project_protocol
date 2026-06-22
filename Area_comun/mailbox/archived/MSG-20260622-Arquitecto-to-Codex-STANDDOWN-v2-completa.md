@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: FYI
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "STAND-DOWN: carga por archivo v2 (Fases A+B+C) COMPLETA y cerrada (TASK-0152 done, 6d1ca65). Gracias por el rework del guard AC45 (los 5 huecos del Analista cerraron). No hay tarea en cola. No arranques trabajo nuevo; el uso vivo del extractor y el follow-up de allowlist esperan GO del operador. Cron detenido."

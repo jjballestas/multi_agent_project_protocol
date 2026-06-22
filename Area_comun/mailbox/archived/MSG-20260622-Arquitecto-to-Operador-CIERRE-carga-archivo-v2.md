@@ -4,7 +4,7 @@ task_id: TASK-0152
 type: FYI
 from: Arquitecto
 to: Operador
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 one_line_summary: "CARGA POR ARCHIVO v2 (OPCION 4) COMPLETA: Fase A (TASK-0150) + Fase B (TASK-0151) + Fase C (TASK-0152) DONE. Todo checker Arquitecto + Analista. Off-by-default; canonico verde HEAD 6d1ca65; #4 byte-identica epoca 1.14.0. PENDIENTE TUYO antes del USO VIVO del extractor (GO aparte): el Analista recomienda endurecer el guard a ALLOWLIST + marcar eval/new Function (cierra clientes HTTP no listados y ofuscacion; residual inherente del scan estatico, NO bloqueo el cierre). Cron de monitoreo detenido."
