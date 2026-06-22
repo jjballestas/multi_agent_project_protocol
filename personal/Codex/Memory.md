@@ -1,9 +1,19 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 external-cli rework handoff.
+Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 exec import rework handoff.
 
 ## Latest Session Note
 
+- TASK-0153 exec/execSync import rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `8751051 test(intake): flag child process exec imports`. The guard now flags named imports/destructured
+  requires of `exec` or `execSync` from `node:child_process` / `child_process` with reason `cli-exec-import`,
+  without matching bare `exec(` so legitimate `RegExp.exec(...)` remains clean. Positive controls cover named
+  ESM imports, aliases, destructured CommonJS requires, allowed `execFile`/`spawn`, and real `src/**` as clean.
+  Evidence after commit: `node --check tests/staticContract.test.js`, product `git diff --check`, product
+  `npm test` PASS 44/44, and clean-clone Zeus `npm test` PASS 44/44. Protocol delivery moves TASK-0153 back to
+  `in_review`, answers `MSG-20260622-Arquitecto-to-Codex-CAMBIO-TASK-0153-exec-import`, releases Codex claims,
+  and opens `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0153-exec-import-in-review.md` with
+  handoff `Area_comun/handoffs/HANDOFF-TASK-0153-exec-import-codex-to-arquitecto-3.md`.
 - TASK-0153 external-cli rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `5cb8910 test(intake): allowlist spawned egress commands`. The `external-cli` guard now uses an explicit
   allowlist for spawned binaries (`git`, `python`) across `execFile`, `execFileAsync`, `execFileSync`, `spawn`

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7d5db9c601c35d11f4256e4d0e112bec1b0561b3c4be4a5847331de60bd79fd3",
+  "canonical_hash": "cf051cf8aa8f33de4ab40870cac62b02abf0cc5688974baac2c9615e354baa49",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -95,6 +95,8 @@
       "CLAIM-20260622-Codex-TASK-0152-AC45-guard": 1,
       "CLAIM-20260622-Codex-TASK-0153": 1,
       "CLAIM-20260622-Codex-TASK-0153-delivery": 1,
+      "CLAIM-20260622-Codex-TASK-0153-exec-import": 1,
+      "CLAIM-20260622-Codex-TASK-0153-exec-import-delivery": 1,
       "CLAIM-20260622-Codex-TASK-0153-external-cli": 1,
       "CLAIM-20260622-Codex-TASK-0153-external-cli-delivery": 1,
       "CLAIM-20260622-Codex-cron-executor-config": 1,
@@ -178,11 +180,11 @@
       "TASK-0150": 8,
       "TASK-0151": 8,
       "TASK-0152": 12,
-      "TASK-0153": 10,
+      "TASK-0153": 14,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 480,
+    "events_applied": 486,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -465,6 +467,10 @@
       "codex:TASK-0152:AC45-delivery-mailbox:claim-acquire:20260622T083048Z": 1118,
       "codex:TASK-0152:AC45-delivery-mailbox:claim-release:20260622T083141Z": 1119,
       "codex:TASK-0153:delivery-claim:acquire:20260622T093804Z": 1128,
+      "codex:TASK-0153:exec-import-delivery-claim:acquire:20260622T110136Z": 1154,
+      "codex:TASK-0153:exec-import-handoff-release:claim-delivery:20260622T110148Z": 1157,
+      "codex:TASK-0153:exec-import-handoff-release:claim-main:20260622T110148Z": 1156,
+      "codex:TASK-0153:exec-import-handoff-release:task-status:20260622T110148Z": 1155,
       "codex:TASK-0153:external-cli-delivery-claim:acquire:20260622T101249Z": 1134,
       "codex:TASK-0153:external-cli-handoff-release:claim-delivery:20260622T101332Z": 1137,
       "codex:TASK-0153:external-cli-handoff-release:claim-main:20260622T101332Z": 1136,
@@ -656,6 +662,8 @@
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:task-status": 1115,
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152:claim-acquire": 1110,
       "ledger-op:auto-claim:TASK-0152:CLAIM-20260622-Codex-TASK-0152:task-status": 1111,
+      "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153-exec-import:claim-acquire": 1152,
+      "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153-exec-import:task-status": 1153,
       "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153-external-cli:claim-acquire": 1132,
       "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153-external-cli:task-status": 1133,
       "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153:claim-acquire": 1126,
@@ -669,5 +677,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1151
+  "up_to_seq": 1157
 }

