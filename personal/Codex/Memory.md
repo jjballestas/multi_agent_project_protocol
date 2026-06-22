@@ -13,7 +13,12 @@ Last updated: 2026-06-22 Europe/Madrid, after TASK-0155 AC52 strict loopback rew
   test/operator env path is injected. Evidence after commit: `node --check public/app.js src/server.js
   tests/staticContract.test.js`, product `npm test` PASS 50/50, clean-clone Zeus `npm test` PASS 50/50.
   During startup Codex corrected an initial invalid claim row selector via runtime events; drift stayed false
-  after the correction.
+  after the correction. Protocol delivery commit `d41e75b coord(TASK-0157): deliver intake v3 flow` moved
+  TASK-0157 to `in_review`, moved `TASK-EXTRACT-DC0E283672` to `done`, released the Codex claim, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0157-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0157-codex-to-arquitecto-1.md`. Final protocol evidence before memory
+  follow-up: encoding OK, neutrality OK, drift false up_to_seq 1233, `validate_collaboration_state.py` OK;
+  `--with-secrets` is still not a supported validator flag.
 - TASK-0156 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `560a226 feat(intake): sign extractor candidates`. The product now has `extractors.config.json` as a
   product-level worker registry for `Extractor` (role `extraccion`, default model `qwen3-vl:4b-instruct`,
