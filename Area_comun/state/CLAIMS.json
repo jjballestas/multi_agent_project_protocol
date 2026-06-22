@@ -4230,6 +4230,39 @@
             "updated_at": "2026-06-22T14:20:02Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0155-AC52-delivery",
+            "expires_at": "2026-06-22T17:10:20Z",
+            "notes": "Delivery artifacts and mailbox for TASK-0155 AC52 rework.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0155-AC52-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0155-AC52-codex-to-arquitecto-2.md"
+            ],
+            "started_at": "2026-06-22T15:10:20Z",
+            "status": "released",
+            "task_id": "TASK-0155",
+            "updated_at": "2026-06-22T15:10:20Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0155-AC52-rework",
+            "expires_at": "2026-06-22T21:05:33Z",
+            "notes": "Rework TASK-0155 AC52 strict loopback canonicalization.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0155",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0155",
+                "Area_comun/tasks/TASK-0155-codex-extractor-local-vlm-provider.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-22T15:05:33Z",
+            "status": "released",
+            "task_id": "TASK-0155",
+            "updated_at": "2026-06-22T15:05:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-TASK-0155-delivery",
             "expires_at": "2026-06-22T16:37:01Z",
             "notes": "Delivery TASK-0155 handoff, mailbox, and GO archive.",

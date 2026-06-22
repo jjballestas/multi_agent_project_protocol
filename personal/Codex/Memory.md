@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 exec import rework handoff.
+Last updated: 2026-06-22 Europe/Madrid, after TASK-0155 AC52 strict loopback rework product commit.
 
 ## Latest Session Note
 
+- TASK-0155 AC52 rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `6369b5c fix(intake): enforce strict loopback host syntax`. The local-vlm endpoint guard now validates the raw
+  URL host before WHATWG URL canonicalization and accepts only `localhost`, dotted-decimal IPv4 in `127.0.0.0/8`
+  without ambiguous octal/hex/integer notation, and `::1`/`[::1]`; decimal `2130706433`, octal, hex,
+  `0.0.0.0`, external IPs, hostnames, suffix tricks, IPv4-mapped IPv6, and leading-zero ambiguous IPv4 are
+  rejected before any extractor call. Product evidence before this memory update: `node --check src/server.js
+  tests/staticContract.test.js public/app.js`, product `git diff --check`, and product `npm test` PASS 48/48.
+  Protocol delivery commit `coord(TASK-0155): deliver AC52 loopback rework` moved TASK-0155 back to
+  `in_review`, released Codex claims, opened
+  `Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0155-AC52-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0155-AC52-codex-to-arquitecto-2.md`. Final evidence: clean-clone Zeus
+  `npm test` PASS 48/48; protocol encoding OK, neutrality OK, drift false up_to_seq 1197, and
+  `validate_collaboration_state.py` OK with one unrelated warning for
+  `MSG-20260622-Arquitecto-to-Operador-ESTADO-cola-vacia.md`. Codex could not archive the original AC52
+  directive because `mailbox_archive` requires `orchestrator`; the original message remains open with
+  `requires_response:false`.
 - TASK-0155 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `79be511 feat(intake): add local vlm extractor provider`. The extractor keeps `deterministic-local` as the
   default and adds off-by-default `local-vlm` with loopback-only endpoint validation, bounded per-chunk/per-image
