@@ -4,6 +4,15 @@ Last updated: 2026-06-22 Europe/Madrid, after TASK-0153 exec import rework hando
 
 ## Latest Session Note
 
+- TASK-0154 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `da5825d test(intake): lock UX regression behavior`. The suite now has permanent behavior coverage for
+  AC48/AC49/AC50: the Intake "Nueva historia/requisito" button must keep the `governed-button` design-system
+  class and CSS token surface, compose/new-story behavior preserves typed drafts while reset remains tied to
+  successful `status.variant === "ok"`, and a live server fixture proves `/api/protocol/snapshot` reflects a new
+  canonical HEAD across two requests without restart. Evidence before memory update: `node --check
+  tests/staticContract.test.js public/app.js src/server.js`, product `git diff --check`, product `npm test` PASS
+  47/47, and clean-clone Zeus `npm test` PASS 47/47. Protocol delivery still needs handoff, GO answer, status
+  flip to `in_review`, claim release, protocol gates, and commit.
 - TASK-0153 exec/execSync import rework product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `8751051 test(intake): flag child process exec imports`. The guard now flags named imports/destructured
   requires of `exec` or `execSync` from `node:child_process` / `child_process` with reason `cli-exec-import`,

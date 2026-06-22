@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "60f7c517d86000a7844fdba8b38faad587c2188a4b8f7350c37487fe9b9974ba",
+  "canonical_hash": "29269ba3d110847357cf6468150efb2c3faaccd29ac46296083921630b56c2cc",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -184,12 +184,12 @@
       "TASK-0151": 8,
       "TASK-0152": 12,
       "TASK-0153": 16,
-      "TASK-0154": 2,
+      "TASK-0154": 8,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 499,
+    "events_applied": 505,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -531,6 +531,10 @@
       "codex:task-0148:claim-release": 1052,
       "codex:task-0148:status-in-progress": 1050,
       "codex:task-0148:status-in-review": 1051,
+      "codex:task-0154:release-delivery": 1176,
+      "codex:task-0154:release-implementation": 1175,
+      "codex:task-0154:start": 1172,
+      "codex:task-0154:status-in-review": 1174,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -641,6 +645,7 @@
       "front:requirement-intake:FB27AF72": 835,
       "front:requirement-intake:FB27AF72:claim-acquire": 834,
       "front:requirement-intake:FB27AF72:claim-release": 836,
+      "intent:Codex:claim:0b4a04bb3ee920dad72a62211893436a5b9b233c34eca742ca820aee78d691c2": 1173,
       "intent:Codex:claim:179aac6c27f94f8346124188f8720b8f1acd0e2ab1616486e70003f32a0ac70d": 900,
       "intent:Codex:claim:1c0eec7211d560eaa751067eec97bf6a1050dcd665a302948e704adb0093288d": 808,
       "intent:Codex:claim:1f5c4d81abff14d5c2fc1612502c73ab58666cc00cc01b0dde08390d0facf842": 949,
@@ -652,6 +657,7 @@
       "intent:Codex:claim:68bbf3e975118973ab379d188b080da9f5a2b2cd22866c34348bbc4bfcaf162c": 897,
       "intent:Codex:claim:6f1f0f315ce8fcb57c70918dcd6fbdb43f2ddb3b58e700eeab0d959ba636a2a7": 805,
       "intent:Codex:claim:72bc2dbe8e86084b892bc92dc2ae4061afe0bcaf9cf0f96c438a277221f0c1f5": 788,
+      "intent:Codex:claim:7993a39d25b417aba063341c17d8556d6a9aa5d8944237bfe3f7828ff7055162": 1171,
       "intent:Codex:claim:835a7174434d647757b791bdadaebe4b8a9976f0836eb7942f14bf508d588144": 774,
       "intent:Codex:claim:9019b2a03d948893c561fe199be1fcc06504ad30970eb5557b8ae79bff80f246": 849,
       "intent:Codex:claim:9b4b38657f64a94073d716f89397b51875a7a6d91fa141fdb8454747ee0ee355": 786,
@@ -695,5 +701,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1170
+  "up_to_seq": 1176
 }

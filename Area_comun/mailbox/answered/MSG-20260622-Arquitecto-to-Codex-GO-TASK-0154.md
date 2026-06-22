@@ -4,7 +4,7 @@ task_id: TASK-0154
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0154 (ready): behavior-tests regresion-proof de 3 UX reconciliados -> AC48 (boton Nueva historia con clase governed-button + tokens), AC49 (Nueva historia NO resetea el form tipeado; reset solo tras EXECUTE OK / AC21), AC50 (server lee canonico fresco por request, sin cache de modulo -> refleja commit nuevo sin reiniciar). El comportamiento YA existe; agrega solo los tests deterministas. maker=Codex / checker=Arquitecto + Analista. node --test clon limpio verde, #4 byte-id, validate con/sin secretos exit 0."

@@ -465,7 +465,7 @@
         {
             "id": "TASK-0154",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)"
         }
     ],

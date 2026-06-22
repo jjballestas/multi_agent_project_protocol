@@ -2,7 +2,7 @@
 task_id: TASK-0154
 title: "Proyecto-front: behavior-tests regresion-proof de 3 UX reconciliados (AC48 boton gobernado / AC49 no-reset Nueva-historia / AC50 canonico fresco sin reiniciar) (SPEC-0086)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: medium

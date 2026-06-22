@@ -1720,7 +1720,7 @@
             "phase": "P2",
             "priority": "medium",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)",
             "type": "product"
         }

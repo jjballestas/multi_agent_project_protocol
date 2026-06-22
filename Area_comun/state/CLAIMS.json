@@ -4132,6 +4132,40 @@
             "updated_at": "2026-06-22T10:12:49Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0154",
+            "expires_at": "2026-06-23T23:59:59Z",
+            "notes": "Implement TASK-0154 behavior tests in Zeus-protocol and deliver in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0154",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0154",
+                "Area_comun/tasks/TASK-0154-codex-ux-behavior-tests-regresion-proof.md",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-22T11:50:33Z",
+            "status": "released",
+            "task_id": "TASK-0154",
+            "updated_at": "2026-06-22T11:50:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260622-Codex-TASK-0154-delivery",
+            "expires_at": "2026-06-23T23:59:59Z",
+            "notes": "Deliver TASK-0154 handoff and mailbox response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0154-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0154.md",
+                "Area_comun/mailbox/answered/MSG-20260622-Arquitecto-to-Codex-GO-TASK-0154.md",
+                "Area_comun/mailbox/open/MSG-20260622-Codex-to-Arquitecto-TASK-0154-in-review.md"
+            ],
+            "started_at": "2026-06-22T11:57:22Z",
+            "status": "released",
+            "task_id": "TASK-0154",
+            "updated_at": "2026-06-22T11:57:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Codex-cron-executor-config",
             "expires_at": "2026-06-22T07:55:47Z",
             "notes": "Configure Codex mailbox cron prompt as executor per Arquitecto message.",
