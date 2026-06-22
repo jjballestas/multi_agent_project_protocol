@@ -2,7 +2,7 @@
 task_id: "TASK-EXTRACT-DC0E283672"
 title: "Extraction request from intake-ux-feedback.md"
 type: "triage"
-status: ready
+status: done
 owner: "Arquitecto"
 phase: "P2"
 priority: "normal"

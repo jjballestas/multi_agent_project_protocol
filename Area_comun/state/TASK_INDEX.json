@@ -1760,7 +1760,7 @@
             "priority": "high",
             "spawned_from": "TASK-EXTRACT-DC0E283672",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): Intake v3 -- modo carga-por-archivo en seccion dedicada (sin scroll, sin campos previos) + boton Extraer requisito -> candidatas como tarjetas -> click puebla campos; auto-commit-push ergonomico (override runtime) (AC55-AC58, SPEC-0086)",
             "type": "product"
         },
@@ -1805,7 +1805,7 @@
             "source_file_sha256": "de1f1cb12e084606e373fd76c9ff253206d0515f54cf79f430f92ab14fd61434",
             "source_store_kind": "os_tmp_outside_attested_dataset",
             "source_store_locator": "os-tmp/zeus-protocol-file-intake/de/de1f1cb12e084606e373fd76c9ff253206d0515f54cf79f430f92ab14fd61434/payload.bin",
-            "status": "ready",
+            "status": "done",
             "title": "Extraction request from intake-ux-feedback.md",
             "type": "triage"
         }

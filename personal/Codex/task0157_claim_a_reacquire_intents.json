@@ -1,0 +1,41 @@
+{
+  "idempotency_key": "Codex:TASK-0157:claim-a-reacquire:20260623T003000Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "idempotency_key": "Codex:TASK-0157:claim-a-reacquire:A",
+      "claim": {
+        "claim_id": "CLAIM-20260623-Codex-TASK-0157",
+        "owner": "Codex",
+        "task_id": "TASK-0157",
+        "status": "released",
+        "started_at": "2026-06-23T00:00:00Z",
+        "updated_at": "2026-06-23T00:30:00Z",
+        "expires_at": "2026-06-23T04:00:00Z",
+        "notes": "Corrected released TASK-0157 initial claim scope after validator row-selector failure.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json",
+          "Area_comun/state/TASK_INDEX.json#TASK-0157",
+          "Area_comun/state/TASK_INDEX.json",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0157",
+          "Area_comun/state/PROJECT_STATE.json",
+          "Area_comun/tasks/TASK-0157-codex-intake-v3-file-mode-cards-autopush.md",
+          "Area_comun/tasks/task-extract-dc0e283672-file-intake.md",
+          "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0157.md",
+          "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0157.md",
+          "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0157-in-review.md",
+          "Area_comun/handoffs/HANDOFF-TASK-0157-codex-to-arquitecto-1.md",
+          "personal/Codex/Memory.md",
+          "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+          "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+          "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+          "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+          "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    }
+  ]
+}

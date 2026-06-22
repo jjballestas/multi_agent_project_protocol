@@ -4,6 +4,16 @@ Last updated: 2026-06-22 Europe/Madrid, after TASK-0155 AC52 strict loopback rew
 
 ## Latest Session Note
 
+- TASK-0157 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `2afc944 feat(intake): streamline file extraction flow`. File-mode Intake now opens a dedicated section with
+  the file selector and `Extraer requisito` action before typed fields, runs the existing governed extraction
+  path, renders candidates as selectable cards, and lets a card populate title/narrative/acceptance while
+  preserving PII review and submit_intent approval. The server now resolves gitignored runtime overrides
+  (`commit-push.runtime.json`, `file-ingestion.runtime.json`) before versioned off-by-default configs when no
+  test/operator env path is injected. Evidence after commit: `node --check public/app.js src/server.js
+  tests/staticContract.test.js`, product `npm test` PASS 50/50, clean-clone Zeus `npm test` PASS 50/50.
+  During startup Codex corrected an initial invalid claim row selector via runtime events; drift stayed false
+  after the correction.
 - TASK-0156 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `560a226 feat(intake): sign extractor candidates`. The product now has `extractors.config.json` as a
   product-level worker registry for `Extractor` (role `extraccion`, default model `qwen3-vl:4b-instruct`,
