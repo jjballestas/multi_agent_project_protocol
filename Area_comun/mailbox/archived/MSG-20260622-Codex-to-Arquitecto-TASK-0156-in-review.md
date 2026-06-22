@@ -4,7 +4,7 @@ task_id: TASK-0156
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0156 entregada a in_review: registry producto Extractor + keypair Ed25519 producto + firma de candidatas + default qwen3-vl:4b-instruct; producto 560a226; gates verdes."
