@@ -1710,6 +1710,19 @@
             "status": "done",
             "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor",
             "type": "product"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0154-codex-ux-behavior-tests-regresion-proof.md",
+            "id": "TASK-0154",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)",
+            "type": "product"
         }
     ],
     "updated_at": "2026-06-08",

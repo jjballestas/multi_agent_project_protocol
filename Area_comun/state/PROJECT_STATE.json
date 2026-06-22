@@ -461,6 +461,12 @@
             "owner": "Codex",
             "status": "done",
             "title": "Guard egress ALLOWLIST deny-all + eval/new Function (AC46) + aislamiento de suite del runtime del operador (AC47); precondicion uso vivo extractor"
+        },
+        {
+            "id": "TASK-0154",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "behavior-tests regresion-proof AC48/AC49/AC50 (boton gobernado / no-reset Nueva-historia / canonico fresco)"
         }
     ],
     "agents": {

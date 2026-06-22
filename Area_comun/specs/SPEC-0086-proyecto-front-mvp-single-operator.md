@@ -386,6 +386,19 @@ producto/dominio en el core neutral.
   executes 502!=200) aunque el codigo este verde en clon limpio -- es aislamiento del harness, no un defecto del
   producto. Test falsable: con esos env apuntando a configs "ON", la suite sigue verde porque los aisla; un test que
   dependa del env heredado rompe el aislamiento. #4 byte-identica.
+- **AC48 - Boton 'Nueva historia/requisito' con estilo gobernado [comportamiento PERMANENTE; REQ-40EC863F].** El
+  boton de la vista Intake usa la clase de boton gobernada del design-system (`governed-button`) + los design
+  tokens (no estilo ad-hoc/roto). Behavior-test: el render del boton expone la clase gobernada y los tokens; un
+  boton con estilo ad-hoc rompe el test.
+- **AC49 - 'Nueva historia/requisito' NO resetea el formulario tipeado [comportamiento PERMANENTE; REQ-0873A67C].**
+  El reset del formulario del Intake ocurre SOLO tras un EXECUTE exitoso (AC21); el boton/paso 'Nueva historia'
+  (compose) NO borra el contenido que el operador ya tipeo. Behavior-test: simular texto en el form + accion
+  'Nueva historia' (sin execute) -> el contenido persiste; reset solo con `status.variant === "ok"`.
+- **AC50 - El sitio refleja el canonico fresco sin reiniciar el servidor [comportamiento PERMANENTE; REQ-6D80DB17].**
+  El server lee el canonico FRESCO por request (via `git show`/`git diff` del HEAD, sin cache de modulo del
+  snapshot) y el front refetcha al navegar (AC29), de modo que un commit nuevo del protocolo aparece sin reiniciar.
+  Behavior-test: cambiar el canonico (nuevo HEAD) entre dos requests -> el segundo refleja el cambio sin reinicio;
+  un cache de modulo del canonico rompe el test.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
