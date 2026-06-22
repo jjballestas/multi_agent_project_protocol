@@ -169,6 +169,18 @@
   secretos exit 0, validate sin secretos en clon limpio exit 0, drift 0 `up_to_seq=1197`, neutrality/encoding exit
   0, #4 byte-identica. Veredicto + MSG rr=true commiteados en `4cf8fa2` (`review(TASK-0155): Analista OK AC52
   rework`). Residual: AC52 no es sandbox de red; uso vivo sigue GO/ceremonia aparte.
+- TASK-0156 (worker Extractor producto + firma Ed25519 + default qwen3-vl:4b-instruct): OK/CERRABLE sobre Zeus
+  `560a226150a2b6237bbf00a84fd6dca07504ba09` + protocolo `f4eb93b36f4e04d4a0aa2889271a25e66307791d`.
+  Clon limpio producto `npm test` 48/48 exit 0. Payloads propios por comportamiento contra servidor temporal:
+  firma valida 200; firma ausente, bytes alterados, payload_hash alterado, worker mismatch, algorithm mismatch,
+  payload almacenado alterado tras firmar y key atacante en `public_key_pem` autodeclarado -> todos 409. Registro
+  `Extractor` vive en `extractors.config.json` del PRODUCTO; no aparece en `protocol.config.json`; #4 byte-identica.
+  Privada default `.secrets/extractor_ed25519_private.pem` queda fuera del repo y `.secrets/` esta gitignored; no
+  hay private key PEM commiteada. Gates protocolo: validate con secretos exit 0, validate sin secretos en clon
+  limpio exit 0, drift 0 `up_to_seq=1213`, neutrality/encoding exit 0. Veredicto + MSG rr=true commiteados y
+  pusheados en `63b8740` (`review(TASK-0156): Analista OK firma PII`). Residual no bloqueante: si el operador
+  decide mover la privada a rutas de producto `secrets/` o `.protocol-secrets/`, anadirlas al `.gitignore` del
+  producto antes de colocar la clave. Uso vivo del VLM sigue GO aparte con pasada corta sobre config viva.
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
