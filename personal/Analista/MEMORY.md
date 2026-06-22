@@ -89,6 +89,14 @@
 > handoffs en Area_comun=dataset; DECISION-0049/0050). Codex maker / Arquitecto checker / yo adversarial
 > independiente; DECISION-0056 exige mi OK para cerrar cada fase. Metodo SIEMPRE: clono Zeus a tmp en C:,
 > corro npm test YO, pruebo POR COMPORTAMIENTO, gateo por EXIT CODE.
+- TASK-0154 (behavior-tests AC48/AC49/AC50): OK/CERRABLE sobre Zeus `da5825d8405f3b2140e42821c6183c90bba49ec9`
+  + protocolo `5b04324`. Clean clone producto `npm test` 47/47 exit 0. Mutaciones propias falsables:
+  quitar `governed-button` del boton compose -> AC48 exit 1; hacer reset en `mode==="compose"` -> AC49 exit 1;
+  cachear `loadProtocolSnapshot` por modulo -> AC50 exit 1 (`1.0.0 !== 1.0.1`). Gates protocolo: validate con
+  y sin secretos exit 0; drift 0; neutrality/encoding exit 0; #4 byte-identica. Veredicto y MSG commiteados y
+  pusheados en `c0484e5` (`review(TASK-0154): Analista OK behavior tests`). Residuales no bloqueantes: AC48 no
+  es test visual pixel-perfect; AC49 no simula click DOM completo pero cubre funcion de negocio; AC50 cubre server
+  snapshot fresco, mientras refetch de front pertenece a AC29.
 - TASK-0128 (vista atestacion #4): CONCURRO (badges derivados del runtime + fail-closed, guarda PII redactada).
 - TASK-0134 (relay anti-impersonacion): HALLE el hueco -- el front confiaba `payload.actorId`/`payload.intents`
   -> un POST local podia forjar decision/claim/task_status FIRMADA como Arquitecto (enforce no lo paraba: el
