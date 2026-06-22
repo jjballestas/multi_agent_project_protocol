@@ -26,6 +26,16 @@ que necesite para cumplir una tarea, y el deber de detenerlos (stand-down de su 
 encolado esta hecho**, para control de costo. La activacion/desactivacion es **operacional** (gestion del proceso
 de runtime), no concede ninguna autoridad nueva sobre el contenido del trabajo.
 
+### Modo operativo estandar (PRIORITARIO, sin recordatorio)
+
+La cadena de activacion es: **el operador activa al Arquitecto; el Arquitecto activa y detiene a los demas agentes
+(Codex, Analista, futuros).** Esto es el modo por defecto y PRIORITARIO: el operador no tiene que pedirlo ni
+recordarlo en cada proceso. Mientras haya un proyecto/cola activa, el Arquitecto mantiene vivos los runtimes que
+necesita (revive el que este caido con trabajo encolado) y apaga los ociosos al terminar, sin esperar instruccion
+explicita. El operador conserva el override (regla 9) y puede fijar un agente ON/OFF. Para que el Arquitecto pueda
+ejercer esto, cada agente debe tener un runtime LANZABLE por el Arquitecto (un script/cron invocable); si un agente
+no lo tiene, crear uno uniforme es parte de habilitar este modo.
+
 ## Guardas (vinculantes)
 
 1. **Alcance: solo el runtime.** El Arquitecto lanza/relanza y detiene UNICAMENTE el proceso de ejecutor/cron del
