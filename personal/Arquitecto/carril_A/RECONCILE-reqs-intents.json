@@ -1,0 +1,275 @@
+{
+ "_note": "Aplicar en ventana segura de Codex (sin claim activo sobre el ledger). Envolver con claim acquire/release sobre CLAIMS+TASK_INDEX+PROJECT_STATE. Gatear por validate exit 0 (con/sin secretos) + drift 0 ANTES de commitear.",
+ "intents_preview": [
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "En tarjetas del Mailbox: el asunto del mensaje debe ser prominente (mayor tamano o peso), el identificador MSG-... debe aparecer en texto secundario (mas pequeno, menor contraste). En tarjetas del Backlog: el titulo de la tarea es lo primero, el REQ-ID en formato secundario debajo.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-28118fc3-requirement-seed.md",
+     "id": "REQ-28118FC3",
+     "narrative": "Como operador quiero que la jerarquia visual en Mailbox y Backlog priorice el asunto/titulo sobre el identificador tecnico (MSG-..., REQ-...) para procesar la informacion mas rapido. Actualmente el ID tecnico tiene el mismo peso visual que el cuerpo del mensaje.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Jerarquia tipografica en vistas Mailbox y Backlog",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC34 (PERMANENTE, SPEC-0086) que cita REQ-28118FC3."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-28118fc3"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Aceptado cuando, desde el Intake de la consola, el operador puede adjuntar un archivoy su contenido queda relevado como requerimiento gobernado que aterriza en canonicocon id y seq reales (sin preview-as-green, mismo camino que el intake actual).Condiciones:(1) solo el execute gobernado escribe;(2) ingestion acotada: allowlist de tipo y limite de tamano, nombre de archivo saneado (sin path traversal), contenido nunca ejecutado;(3) PII structural guard y ASCII-only aplicados al texto extraido del archivo;(4) idempotente: re-subir el mismo archivo no duplica;(5) si abre una superficie de ingreso nueva, nace OFF/gateada y reversible por flag.Honestidad: exito solo con el requerimiento realmente escrito.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-31100eaf-requirement-seed.md",
+     "id": "REQ-31100EAF",
+     "narrative": "Como operador requiero que se habilite poder cargar archivos para usarlos comorequerimientos, de modo que pueda adjuntar un archivo en el Intake y su contenidoalimente un requerimiento gobernado sin tener que transcribirlo a mano.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "carga de requerimiento por archivo",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC37 (PERMANENTE, SPEC-0086) que cita REQ-31100EAF."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-31100eaf"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Al hacer hover sobre RF-5 debe aparecer: RF-5 - SDD task (crear tarea). Sobre SDD: Spec-Driven Development. Sobre T0: boundary de inicio del proyecto. Sobre HMAC: firma criptografica del evento. Los codigos deben ser interactivos (cursor pointer) en lugar de texto plano.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-3e31293f-requirement-seed.md",
+     "id": "REQ-3E31293F",
+     "narrative": "Como operador quiero ver un tooltip con el nombre completo al hacer hover sobre cualquier codigo RF-N (RF-5, RF-14, etc.), acronimo tecnico (SDD, T0, HMAC, PII) o identificador de estado que aparezca en las vistas, para no tener que memorizar el glosario ni navegar al Help.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC32 (PERMANENTE, SPEC-0086) que cita REQ-3E31293F."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-3e31293f"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Al hacer hover en cada badge debe aparecer un tooltip corto: que valor es normal, que significa cuando cambia, y cuando debo preocuparme. Por ejemplo drift=0 es OK, drift>0 requiere atencion.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-4120b017-requirement-seed.md",
+     "id": "REQ-4120B017",
+     "narrative": "Como operador quiero ver tooltips explicativos al hacer hover sobre cada badge de la barra de integridad (epoch, drift, attested, canonical, validator exit) para entender su significado sin tener que consultar el Help.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Tooltips explicativos en badges de la barra de integridad",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC31 (PERMANENTE, SPEC-0086) que cita REQ-4120B017."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-4120b017"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "La barra de integridad o el pie de cada seccion debe mostrar hace cuanto se refresco el dato (ej: 'actualizado hace 30s'). Durante una carga activa debe mostrarse un spinner o indicador de progreso sutil. Si los datos son stale (mas de N segundos sin actualizar) el indicador debe cambiar de estado visualmente.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-547c6c54-requirement-seed.md",
+     "id": "REQ-547C6C54",
+     "narrative": "Como operador quiero ver una indicacion de cuando se actualizaron por ultima vez los datos que estoy viendo (Ledger seq, estado del backlog, mailbox) para saber si lo que veo es fresco o puede estar desactualizado sin tener que interpretar manualmente los badges de integridad.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC30 (PERMANENTE, SPEC-0086) que cita REQ-547C6C54."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-547c6c54"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Deberia ver controles de filtro (desplegable de actor, desplegable de tipo de evento) en la cabecera del Ledger. Al seleccionar un filtro la lista de eventos se reduce mostrando solo los que coinciden. Tambien deberia haber paginacion o carga progresiva para no renderizar 900+ eventos a la vez.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-9af54a75-requirement-seed.md",
+     "id": "REQ-9AF54A75",
+     "narrative": "Como operador quiero poder filtrar los eventos del Ledger #4 por actor (Arquitecto, Codex, Operador) y por tipo de evento (intent.applied, etc.) para encontrar eventos especificos sin hacer scroll manual entre mas de 900 entradas.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Filtros en Ledger #4 por actor y tipo de evento",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC36 (PERMANENTE, SPEC-0086) que cita REQ-9AF54A75."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-9af54a75"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Las columnas con count=0 deberian mostrarse en modo compacto (solo cabecera, sin espacio vacio). La columna done deberia mostrar las tareas completadas o al menos un resumen paginado. El ancho del kanban deberia adaptarse al contenido real.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-b97838c6-requirement-seed.md",
+     "id": "REQ-B97838C6",
+     "narrative": "Como operador quiero que el kanban del Backlog colapse o minimice las columnas que tienen 0 tareas (ready, in_progress, in_review) para reducir el ruido visual, y que la columna done muestre su contenido (actualmente done=40 pero no lista las tareas).",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC35 (PERMANENTE, SPEC-0086) que cita REQ-B97838C6."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-b97838c6"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Cada vez que el operador navega a una seccion (click en nav lateral) la vista debe hacer fetch fresco al servidor y actualizar su contenido. El Ledger SEQ, el conteo del Backlog, el Mailbox y el estado de integridad deben reflejar el canonico actual sin obligar al operador a usar F5. Adicionalmente, seria deseable un boton de recarga manual por seccion y/o un refresco automatico por intervalo configurable.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-c1976857-requirement-seed.md",
+     "id": "REQ-C1976857",
+     "narrative": "Como operador quiero que al hacer click en cualquier opcion de la barra lateral (Dashboard, Mailbox, Backlog, Ledger, etc.) los datos de esa seccion se recarguen desde el servidor automaticamente, sin necesidad de recargar la pagina completa con F5 o el boton del navegador para ver el estado actualizado.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC29 (PERMANENTE, SPEC-0086) que cita REQ-C1976857."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-c1976857"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "acceptance_intent": "Las secciones 4 (arquitectura), 5 (mapa de la app), 6 (flujo gobernado) y 7 (intake) del Help contienen bloques Mermaid que aparecen como texto crudo. Deberian renderizarse como diagramas SVG usando la libreria mermaid.js. Si no es posible en el servidor, al menos mostrar una imagen estatica pre-generada.",
+     "author": "Operador",
+     "endorsement": "none",
+     "file": "Area_comun/tasks/req-d2c6579f-requirement-seed.md",
+     "id": "REQ-D2C6579F",
+     "narrative": "Como operador quiero que los diagramas de arquitectura y flujo de la vista Help se muestren visualmente renderizados (flowchart, sequenceDiagram) en lugar de mostrar el codigo fuente Mermaid en texto plano, para poder entender la arquitectura y flujos sin conocer la sintaxis.",
+     "owner": "Operador",
+     "phase": "P2",
+     "pii_guard": {
+      "channel": "ascii",
+      "free_text_public_plane": "redacted",
+      "mode": "structural",
+      "redactions": 0,
+      "warning_acknowledged": true
+     },
+     "priority": "normal",
+     "project": "Zeus-protocol",
+     "relayed_by": "Arquitecto",
+     "sdd_role": "seed_only_architect_authors_spec",
+     "status": "done",
+     "title": "UX: Renderizar diagramas Mermaid en la vista Help",
+     "type": "requirement",
+     "reconcile_note": "Reconciliado: entregado bajo AC33 (PERMANENTE, SPEC-0086) que cita REQ-D2C6579F."
+    },
+    "idempotency_key": "arquitecto:reconcile:req-d2c6579f"
+   }
+  }
+ ]
+}

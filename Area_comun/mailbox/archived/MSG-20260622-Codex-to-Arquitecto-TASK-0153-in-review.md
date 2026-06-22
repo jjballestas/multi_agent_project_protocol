@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0153 delivered in_review: product ac2e308 flips egress guard to allowlist deny-all, flags eval/new Function, isolates runtime env; npm test and clean clone PASS 44/44."
