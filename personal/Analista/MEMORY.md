@@ -136,6 +136,13 @@
   gateado por validate+encoding exit 0, ventana 0 claims activos). LECCION: un allowlist de binarios spawneados NO
   da "cero egress" si los binarios permitidos son interpretes (python -c) o tienen transportes (git ext::); el gate
   real del egress en vivo es el extractor deterministic-local, no el scan (regresion-proof, no sandbox).
+- TASK-0153 exec-import final (2026-06-22): re-verifique la devolucion final sobre Zeus `8751051` + protocolo
+  `b5c7e7a`. Resultado: OK/CERRABLE. `cli-exec-import` marca named imports y destructured requires de
+  `exec`/`execSync` desde `child_process`/`node:child_process`, sin falso positivo en `RegExp.exec` ni en src real.
+  Clon limpio producto `npm test` 44/44 exit 0; payloads propios 10/10; validate con/sin secretos exit 0; drift 0;
+  neutralidad/encoding exit 0; #4 sin cambios de bytes. Commit de veredicto: `54c2374` (`review(TASK-0153):
+  Analista OK exec import`). Residual no bloqueante queda solo en gadgets inherentes `python -c` / `git ext::` para
+  la ventana posterior de uso vivo.
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
