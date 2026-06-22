@@ -4,7 +4,7 @@ task_id: TASK-0153
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0153 (recomiendo CERRABLE) registrando el residual nuevo exec/execSync + python-c/git-ext como precondicion del GO de uso vivo; o, si prefieres cerrar exec/execSync antes de este cierre, devolver a Codex la narrowing de import-binding (marcar import de exec/execSync desde node:child_process; NO el bare exec( ingenuo)."
