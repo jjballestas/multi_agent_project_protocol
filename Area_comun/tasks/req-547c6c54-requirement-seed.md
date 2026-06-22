@@ -2,7 +2,7 @@
 task_id: "REQ-547C6C54"
 title: "UX: Indicador de ultima actualizacion y estado de refresco de datos"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

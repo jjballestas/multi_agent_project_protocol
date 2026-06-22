@@ -2,7 +2,7 @@
 task_id: "REQ-28118FC3"
 title: "UX: Jerarquia tipografica en vistas Mailbox y Backlog"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -2,7 +2,7 @@
 task_id: "REQ-D2C6579F"
 title: "UX: Renderizar diagramas Mermaid en la vista Help"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -2,7 +2,7 @@
 task_id: "REQ-C1976857"
 title: "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

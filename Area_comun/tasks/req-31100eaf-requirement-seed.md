@@ -2,7 +2,7 @@
 task_id: "REQ-31100EAF"
 title: "carga de requerimiento por archivo"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

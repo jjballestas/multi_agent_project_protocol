@@ -2,7 +2,7 @@
 task_id: "REQ-9AF54A75"
 title: "UX: Filtros en Ledger #4 por actor y tipo de evento"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

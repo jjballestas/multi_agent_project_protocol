@@ -2,7 +2,7 @@
 task_id: "REQ-B97838C6"
 title: "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

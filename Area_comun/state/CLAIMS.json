@@ -3784,6 +3784,30 @@
             "updated_at": "2026-06-22T06:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260622-Arquitecto-reconcile-reqs",
+            "expires_at": "2026-06-22T15:31:00Z",
+            "notes": "Reconciliar 9 REQ ya entregados bajo AC permanente de SPEC-0086 -> done.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/req-28118fc3-requirement-seed.md",
+                "Area_comun/tasks/req-31100eaf-requirement-seed.md",
+                "Area_comun/tasks/req-3e31293f-requirement-seed.md",
+                "Area_comun/tasks/req-4120b017-requirement-seed.md",
+                "Area_comun/tasks/req-547c6c54-requirement-seed.md",
+                "Area_comun/tasks/req-9af54a75-requirement-seed.md",
+                "Area_comun/tasks/req-b97838c6-requirement-seed.md",
+                "Area_comun/tasks/req-c1976857-requirement-seed.md",
+                "Area_comun/tasks/req-d2c6579f-requirement-seed.md"
+            ],
+            "started_at": "2026-06-22T12:31:00Z",
+            "status": "released",
+            "task_id": "RECONCILE-REQS",
+            "updated_at": "2026-06-22T12:31:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260622-Arquitecto-register-ingv2",
             "expires_at": "2026-06-22T04:30:00Z",
             "notes": "Registrar gobernado REQ ingestion v2 (priority high, supersede REQ-31100EAF) por orden del operador (#1). Autoro SPEC con prioridad.",

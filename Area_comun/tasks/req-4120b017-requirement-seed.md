@@ -2,7 +2,7 @@
 task_id: "REQ-4120B017"
 title: "UX: Tooltips explicativos en badges de la barra de integridad"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

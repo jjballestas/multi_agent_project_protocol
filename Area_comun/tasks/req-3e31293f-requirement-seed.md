@@ -2,7 +2,7 @@
 task_id: "REQ-3E31293F"
 title: "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -7,40 +7,10 @@
             "title": "UX: Boton Nueva historia/requisito no resetea el formulario del Intake"
         },
         {
-            "id": "REQ-28118FC3",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Jerarquia tipografica en vistas Mailbox y Backlog"
-        },
-        {
-            "id": "REQ-31100EAF",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "carga de requerimiento por archivo"
-        },
-        {
-            "id": "REQ-3E31293F",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Tooltips en codigos RF-N y acronimos tecnicos en todas las vistas"
-        },
-        {
             "id": "REQ-40EC863F",
             "owner": "Operador",
             "status": "proposed",
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
-        },
-        {
-            "id": "REQ-4120B017",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Tooltips explicativos en badges de la barra de integridad"
-        },
-        {
-            "id": "REQ-547C6C54",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Indicador de ultima actualizacion y estado de refresco de datos"
         },
         {
             "id": "REQ-6D80DB17",
@@ -55,34 +25,10 @@
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
         },
         {
-            "id": "REQ-9AF54A75",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Filtros en Ledger #4 por actor y tipo de evento"
-        },
-        {
-            "id": "REQ-B97838C6",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Backlog Kanban - colapsar columnas vacias y mostrar contenido de done"
-        },
-        {
-            "id": "REQ-C1976857",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina"
-        },
-        {
             "id": "REQ-CEB7F585",
             "owner": "Operador",
             "status": "proposed",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + sele"
-        },
-        {
-            "id": "REQ-D2C6579F",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "UX: Renderizar diagramas Mermaid en la vista Help"
         },
         {
             "id": "REQ-D642E4D8",
