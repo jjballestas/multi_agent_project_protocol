@@ -633,7 +633,7 @@
         {
             "id": "TASK-0165",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: Panel Operar-Agentes Q2 consola/compositor de prompts (mailbox_send + hilo) (SPEC-0088)"
         },
         {

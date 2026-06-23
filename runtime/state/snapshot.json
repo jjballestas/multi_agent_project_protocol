@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0a033a00058605abe41c3ab4b36f27545f04ae76704d4319572a8950c2203cb6",
+  "canonical_hash": "10c454646552f60d32492a3e6dd27b193ebe1768548dfcc8a8e12fde2105bb4b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -171,6 +171,7 @@
       "CLAIM-20260623-Codex-TASK-0164-msg-fix": 1,
       "CLAIM-20260624-Arquitecto-archive-0164": 1,
       "CLAIM-20260624-Arquitecto-changes-0164": 1,
+      "CLAIM-20260624-Arquitecto-changes-0165": 1,
       "CLAIM-20260624-Arquitecto-changes2-0164": 1,
       "CLAIM-20260624-Arquitecto-close-0164": 1,
       "CLAIM-20260624-Arquitecto-register-0165": 1,
@@ -333,14 +334,14 @@
       "TASK-0162": 16,
       "TASK-0163": 10,
       "TASK-0164": 27,
-      "TASK-0165": 12,
+      "TASK-0165": 14,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 843,
+    "events_applied": 846,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -485,6 +486,9 @@
       "arquitecto:changes-0164:claim-acquire": 1436,
       "arquitecto:changes-0164:claim-release": 1438,
       "arquitecto:changes-0164:status": 1437,
+      "arquitecto:changes-0165:claim-acquire": 1515,
+      "arquitecto:changes-0165:claim-release": 1517,
+      "arquitecto:changes-0165:status": 1516,
       "arquitecto:changes2-0158:claim-acquire": 1263,
       "arquitecto:changes2-0158:claim-release": 1265,
       "arquitecto:changes2-0158:status": 1264,
@@ -1187,5 +1191,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1514
+  "up_to_seq": 1517
 }

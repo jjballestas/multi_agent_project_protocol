@@ -5565,6 +5565,22 @@
             "updated_at": "2026-06-24T00:12:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-changes-0165",
+            "expires_at": "2026-06-24T07:00:00Z",
+            "notes": "TASK-0165 in_review->changes_requested (Analista CAMBIO): (1) mailbox_send genera MSG con requires_response invalido (rr=true sin question -> el validador lo rechaza); (2) el hilo filtra PII (redaccion incompleta). Fix los dos slips.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-changes-0165",
+                "Area_comun/state/TASK_INDEX.json#TASK-0165",
+                "Area_comun/tasks/TASK-0165-codex-panel-operar-agentes-q2-consola-prompts.md",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0165"
+            ],
+            "started_at": "2026-06-24T01:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0165",
+            "updated_at": "2026-06-24T01:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-changes2-0164",
             "expires_at": "2026-06-24T07:00:00Z",
             "notes": "TASK-0164 in_review->changes_requested v2 (Analista CAMBIO): tail-torn + tail+concurrencia OK, pero un torn en MEDIO (con linea valida DESPUES) hace que el reparo DESCARTE la valida-posterior. Fix: distinguir TAIL-torn (truncar la cola parcial, seguro) de MID-file torn con valida-after (corrupcion real -> FAIL-CLOSED/rechazar, no truncar datos validos). Vector negativo obligatorio: middle_torn_valid_after.",
