@@ -2,7 +2,7 @@
 task_id: TASK-0161
 title: "Proyecto-front (RF-14): re-subir archivo ya ingerido no rompe (auto-push idempotente=no-op) + extractor reporta causa especifica + robusto ante latencia local (precarga + timeout no clavado) (AC66-AC68, SPEC-0086)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
