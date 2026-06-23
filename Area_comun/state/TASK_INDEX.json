@@ -243,6 +243,44 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "el worker se registra fuera del config atestado (en un registro de workers de producto), con su propia clave, apagado por defecto; el alta no cambia el genesis ni el registro de agentes firmantes; el uso vivo del worker exige un permiso aparte.",
+            "author": "Operador",
+            "candidate_pii_screening": {
+                "channel": "ascii",
+                "detector_version": "pii-screen-v1",
+                "finding_count": 0,
+                "finding_types": [],
+                "findings": [],
+                "guaranteed": false,
+                "mode": "best_effort"
+            },
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-4a88ecffc4-requirement-seed.md",
+            "id": "REQ-4A88ECFFC4",
+            "narrative": "Como operador, quiero dar de alta desde el front un worker de producto (del tipo Extractor) y enlazarlo a un modelo de lenguaje (endpoint y nombre del modelo local), para sumar capacidades sin tocar el nucleo ni la firma del ledger.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "source_provenance": {
+                "candidate_pre_edit_hash": "76bac2c7c56a8eca5e98df5a6bee090de60d927efa8040ec7462c862d8510969",
+                "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
+                "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
+            },
+            "status": "proposed",
+            "title": "Registrar un worker de producto y enlazarlo a un modelo",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La barra de integridad o el pie de cada seccion debe mostrar hace cuanto se refresco el dato (ej: 'actualizado hace 30s'). Durante una carga activa debe mostrarse un spinner o indicador de progreso sutil. Si los datos son stale (mas de N segundos sin actualizar) el indicador debe cambiar de estado visualmente.",
             "author": "Operador",
             "endorsement": "none",

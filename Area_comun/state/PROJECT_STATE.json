@@ -49,6 +49,12 @@
             "title": "Intake: cerrar el ciclo en la app (auto commit+push del cambio gobernado)"
         },
         {
+            "id": "REQ-4A88ECFFC4",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Registrar un worker de producto y enlazarlo a un modelo"
+        },
+        {
             "id": "REQ-547C6C54",
             "owner": "Operador",
             "status": "done",

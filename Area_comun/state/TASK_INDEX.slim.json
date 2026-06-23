@@ -10,6 +10,14 @@
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
+            "id": "REQ-4A88ECFFC4",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Registrar un worker de producto y enlazarlo a un modelo"
+        },
+        {
             "id": "REQ-68896287BC",
             "owner": "Operador",
             "phase": "P2",
