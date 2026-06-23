@@ -4601,6 +4601,24 @@
             "updated_at": "2026-06-23T15:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-close-0160",
+            "expires_at": "2026-06-23T22:00:00Z",
+            "notes": "Close TASK-0160 in_review->done (checker Arquitecto, maker=Codex): Zeus a3c5f26 node --test clon limpio 52/52, AC64 (acceptanceIntent opcional al extraer, requerido al aprobar -- behavior-tests) + AC65 (PII label alineado/llano, ack duro), #4 byte-id, gates exit 0; Analista OK/CERRABLE (PII ack duro, candidatas no-ledger, cero al ledger).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0160-codex-intake-extract-acceptanceintent-pii-label.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T16:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T16:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-register-0157",
             "expires_at": "2026-06-23T18:00:00Z",
             "notes": "Register TASK-0157 (Intake v3 file-mode + cards + auto-push, AC55-AC58) as ready for Codex; spawned from extraction request TASK-EXTRACT-DC0E283672 (operator UX feedback captured via governed Intake).",

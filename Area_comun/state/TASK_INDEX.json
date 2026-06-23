@@ -1799,7 +1799,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): subida-para-extraer no exige acceptanceIntent + PII label alineado (AC64-AC65 SPEC-0086)",
             "type": "product"
         },

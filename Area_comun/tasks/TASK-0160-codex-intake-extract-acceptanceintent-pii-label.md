@@ -2,7 +2,7 @@
 task_id: TASK-0160
 title: "Proyecto-front (RF-14): la subida-para-EXTRAER no debe exigir acceptanceIntent (desbloquea extraccion, alinea AC55) + alinear/limpiar la confirmacion de PII (AC64-AC65, SPEC-0086)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
