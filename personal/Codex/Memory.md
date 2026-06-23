@@ -4,6 +4,16 @@ Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend 
 
 ## Latest Session Note
 
+- TASK-0159 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `bc8346d fix(intake): surface file extraction candidates`. File-mode Intake now hides the direct
+  `EXECUTE SUBMIT_INTENT` button, places `Proyecto destino` first inside the file section, shows a processing
+  state while extraction runs, renders extraction/write/0-candidate errors in red, and derives the ingestion note
+  and file accept list from the loaded config instead of hardcoded `.md/.txt`. The server now honors
+  `file-ingestion.runtime.json` local-vlm endpoint/model fields at the extractor top level and records
+  `completed-empty` with an explicit no-candidates reason. Evidence so far: `node --check public/app.js
+  src/server.js tests/staticContract.test.js`, product `git diff --check`, product `npm test` PASS 52/52, and
+  local smoke on port 4190 confirmed the live server reads gitignored `file-ingestion.runtime.json` with
+  extractor enabled/local-vlm/loopback and real allowed extensions.
 - TASK-0158 CAMBIO3 neutrality fix landed in `D:/Agentes/multi_agent_project_protocol`:
   `91f7a0b fix(connectors): remove SQL Server s9 instance env default`. The live s9 verifier no longer hardcodes an
   instance-specific env file path under `connectors/`; it accepts `--env` or `SQLSERVER_S9_ENV_FILE` and fails closed

@@ -1786,7 +1786,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): Intake v3 fixes UX + fix 0-candidatas (AC59-AC63 SPEC-0086)",
             "type": "product"
         },

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3278df53eb45e503c8a7c73caeafa5be25c9c387b6dae1f0f627b459145910e7",
+  "canonical_hash": "1fba9719989a09ffb8911975aa3fa057800046af0ae278494181a3455d68e5ee",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -137,6 +137,7 @@
       "CLAIM-20260623-Codex-TASK-0158-fix3-delivery": 1,
       "CLAIM-20260623-Codex-TASK-0158-fix3-neutrality": 1,
       "CLAIM-20260623-Codex-TASK-0158-mailbox-fix": 1,
+      "CLAIM-20260623-Codex-TASK-0159": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -243,13 +244,13 @@
       "TASK-0156": 10,
       "TASK-0157": 10,
       "TASK-0158": 27,
-      "TASK-0159": 2,
+      "TASK-0159": 5,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 629,
+    "events_applied": 633,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -735,6 +736,10 @@
       "codex:task0151:claim-release": 1101,
       "codex:task0151:in-progress": 1099,
       "codex:task0151:in-review": 1100,
+      "codex:task0159:deliver:claim-release": 1304,
+      "codex:task0159:deliver:in-review": 1303,
+      "codex:task0159:start:claim": 1301,
+      "codex:task0159:start:ready-to-in-progress": 1302,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -885,5 +890,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1300
+  "up_to_seq": 1304
 }
