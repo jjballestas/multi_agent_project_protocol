@@ -14,7 +14,7 @@ from typing import Any
 
 try:
     from .context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from .eventlog import EventWriter, LEDGER_LOCK_PATH, STATE_DIR, canonical_hash, ledger_file_lock
+    from .eventlog import EventWriter, LEDGER_LOCK_PATH, LOG_PATH, STATE_DIR, canonical_hash, ledger_file_lock, truncate_torn_jsonl_tail
     from .protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -28,7 +28,7 @@ try:
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from eventlog import EventWriter, LEDGER_LOCK_PATH, STATE_DIR, canonical_hash, ledger_file_lock
+    from eventlog import EventWriter, LEDGER_LOCK_PATH, LOG_PATH, STATE_DIR, canonical_hash, ledger_file_lock, truncate_torn_jsonl_tail
     from protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -854,6 +854,10 @@ def ensure_clean_replay_base(root: Path, events: list[dict[str, Any]]) -> None:
         raise IntentApplyError(f"protocol state drift exists before submit_intent: {paths}; write a fresh genesis first")
 
 
+def repair_torn_event_tail(root: Path) -> dict[str, Any] | None:
+    return truncate_torn_jsonl_tail(root / LOG_PATH)
+
+
 def submit_intent(
     root: Path,
     actor_id: str,
@@ -877,6 +881,7 @@ def submit_intent(
     key = idempotency_key(actor_id, normalized)
 
     with ledger_file_lock(root):
+        log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)
         existing = existing_idempotent_event(writer, key)
         if existing is not None:
@@ -898,6 +903,7 @@ def submit_intent(
                     "genesis_event": None,
                     "intent": normalized,
                     "materialization": materialization,
+                    "log_repair": log_repair,
                     "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
                     "task_files_updated": task_files_updated,
                     "drift": drift_after,
@@ -949,6 +955,7 @@ def submit_intent(
                 "genesis_event": (genesis_result or {}).get("event"),
                 "intent": normalized,
                 "materialization": materialization,
+                "log_repair": log_repair,
                 "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
                 "task_files_updated": task_files_updated,
                 "drift": drift_after,
@@ -989,6 +996,7 @@ def submit_intents(
     tx_key = transaction_idempotency_key(actor_id, normalized_intents, transaction_key)
     ensure_actor_enabled(root, actor_id)
     with ledger_file_lock(root):
+        log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)
         existing = existing_events_for_keys(writer, keys)
         if existing:
@@ -1022,6 +1030,7 @@ def submit_intents(
                     "genesis_event": None,
                     "intents": normalized_intents,
                     "materialization": materialization,
+                    "log_repair": log_repair,
                     "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
                     "task_files_updated": list(dict.fromkeys(task_files_updated)),
                     "drift": drift_after,
@@ -1093,6 +1102,7 @@ def submit_intents(
                 },
                 "intents": normalized_intents,
                 "materialization": materialization,
+                "log_repair": log_repair,
                 "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
                 "task_files_updated": list(dict.fromkeys(task_files_updated)),
                 "drift": drift_after,

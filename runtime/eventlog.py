@@ -60,6 +60,53 @@ def read_jsonl_torn_safe(path: Path) -> list[dict[str, Any]]:
     return events
 
 
+def truncate_torn_jsonl_tail(path: Path) -> dict[str, Any] | None:
+    """Remove an invalid JSONL tail so future appends stay visible to torn-safe readers."""
+    if not path.exists():
+        return None
+
+    valid_end = 0
+    offset = 0
+    line_number = 0
+    data = path.read_bytes()
+    for raw_line in data.splitlines(keepends=True):
+        line_number += 1
+        next_offset = offset + len(raw_line)
+        stripped = raw_line.strip()
+        if not stripped:
+            valid_end = next_offset
+            offset = next_offset
+            continue
+        try:
+            decoded = raw_line.decode("utf-8-sig" if offset == 0 else "utf-8")
+            event = json.loads(decoded)
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            with path.open("r+b") as handle:
+                handle.truncate(valid_end)
+                handle.flush()
+                os.fsync(handle.fileno())
+            return {
+                "path": str(path),
+                "line": line_number,
+                "truncated_bytes": len(data) - valid_end,
+                "valid_bytes": valid_end,
+            }
+        if not isinstance(event, dict):
+            with path.open("r+b") as handle:
+                handle.truncate(valid_end)
+                handle.flush()
+                os.fsync(handle.fileno())
+            return {
+                "path": str(path),
+                "line": line_number,
+                "truncated_bytes": len(data) - valid_end,
+                "valid_bytes": valid_end,
+            }
+        valid_end = next_offset
+        offset = next_offset
+    return None
+
+
 def atomic_append_jsonl(path: Path, event: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"

@@ -443,6 +443,36 @@ def case_concurrent_submit_intents_keep_linear_chain() -> None:
         assert protocol_state_drift(root)["has_drift"] is False
 
 
+def case_torn_jsonl_tail_is_repaired_before_append() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-torn-tail-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        log_path = root / "runtime/state/events.jsonl"
+        before = read_jsonl_torn_safe(log_path)
+        assert len(before) == 1, before
+        with log_path.open("ab") as handle:
+            handle.write(b'{"seq":999,"type":"intent.applied"')
+
+        result = submit_intent(
+            root,
+            "Codex",
+            {"claim": {"op": "release", "claim_id": CLAIM_ID, "idempotency_key": "tx-fixture:torn-tail-release"}},
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+
+        assert result["applied"] is True, result
+        assert result["log_repair"], result
+        events = read_jsonl_torn_safe(log_path)
+        assert len(events) == 2, events
+        assert events[-1]["idempotency_key"] == "tx-fixture:torn-tail-release", events[-1]
+        config = read_json(root / "protocol.config.json")
+        chain = validate_chain(events, config, root=root)
+        assert chain["valid"] is True, chain
+        assert events[-1]["prev_hash"] == compute_event_prev_hash(events[-1], str(events[-2]["prev_hash"]))
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
 def case_powershell_wrappers_parity_if_available() -> None:
     shell = shutil.which("pwsh") or shutil.which("powershell")
     if not shell:
@@ -513,6 +543,7 @@ def main() -> int:
         case_transaction_idempotent_retry_does_not_duplicate,
         case_claim_rows_allow_distinct_and_reject_same,
         case_concurrent_submit_intents_keep_linear_chain,
+        case_torn_jsonl_tail_is_repaired_before_append,
         case_powershell_wrappers_parity_if_available,
     ]
     failures = []
