@@ -4503,6 +4503,24 @@
             "updated_at": "2026-06-23T01:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-close-0158",
+            "expires_at": "2026-06-23T09:00:00Z",
+            "notes": "Close TASK-0158 in_review->done (checker Arquitecto, maker=Codex): s9 verde tras 4 ciclos (Analista atrapo 259-catalogo, 208-tabla-inexistente, yo neutralidad nova). s9 vivo reproducible: SELECT ok, DML 229 + DDL 262 permission_denied_on_principal contra tabla real descubierta; #4 byte-id, config enabled:false, gates exit 0; Analista OK/CERRABLE.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T03:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T03:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-register-0157",
             "expires_at": "2026-06-23T18:00:00Z",
             "notes": "Register TASK-0157 (Intake v3 file-mode + cards + auto-push, AC55-AC58) as ready for Codex; spawned from extraction request TASK-EXTRACT-DC0E283672 (operator UX feedback captured via governed Intake).",
