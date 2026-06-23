@@ -4658,6 +4658,25 @@
             "updated_at": "2026-06-23T04:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-register-0160",
+            "expires_at": "2026-06-23T21:00:00Z",
+            "notes": "Register TASK-0160 (extraccion no exige acceptanceIntent + PII label alineado, AC64-AC65) ready for Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0160-codex-intake-extract-acceptanceintent-pii-label.md",
+                "Area_comun/specs/SPEC-0086-proyecto-front-mvp-single-operator.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T15:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T15:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Codex-TASK-0157",
             "expires_at": "2026-06-23T04:00:00Z",
             "notes": "Corrected released TASK-0157 initial claim scope after validator row-selector failure.",

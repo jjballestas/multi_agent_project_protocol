@@ -481,6 +481,21 @@ producto/dominio en el core neutral.
   con causa (modelo vacio, timeout), se reporta como ERROR visible (AC62), no como panel silenciosamente vacio. Repro
   documentado: con el server vivo (runtime override + Ollama), subir un .md multi-historia (p.ej.
   `historias_panel_operar_agentes.md`) -> aparecen N tarjetas candidatas. #4 byte-identica; off-by-default intacto.
+- **AC64 - La subida-para-EXTRAER NO exige acceptanceIntent (alinea AC55) [PERMANENTE; REQ intake-ux-feedback-3].**
+  En el flujo de carga por archivo, la peticion de EXTRACCION (que crea la TASK-EXTRACT) NO requiere
+  `acceptanceIntent` ni los demas campos de requisito: solo archivo + proyecto (+ ack de PII). El `acceptanceIntent`
+  (y titulo/narrativa) se exige unicamente al APROBAR una candidata (post-extraccion), porque vienen del archivo o
+  los propone el modelo (coherente con AC55: no se piden campos antes de la carga). Hoy `sanitizeFileExtractionUpload`
+  llama `validateHonestRequirementField("acceptanceIntent", ...)` y bloquea la extraccion con "acceptanceIntent is
+  required" -> se corrige: acceptanceIntent OPCIONAL en la subida-para-extraer; sigue REQUERIDO en
+  `sanitizeCandidate` (aprobacion). Behavior-test: extraer con acceptanceIntent vacio -> OK (no 400); aprobar una
+  candidata sin acceptanceIntent -> sigue rechazando. Carry AC43 gate PII + candidatas no-ledger.
+- **AC65 - La confirmacion de PII se ve ALINEADA y legible [PERMANENTE; REQ intake-ux-feedback-3].**
+  El control de confirmacion de PII (checkbox + etiqueta) se renderiza ALINEADO y legible: el checkbox alineado al
+  inicio del texto, el texto envuelve limpio (sin desbordes ni solapes). La redaccion es clara para el operador (la
+  jerga tecnica tipo "escribe via runtime/submit_intent.py como relay acotado" se simplifica a lenguaje llano, sin
+  perder el sentido: confirmo que revise PII y que esta accion se ejecuta de forma gobernada). Behavior-test: el
+  nodo del checkbox y su label estan asociados (htmlFor/anidado) y el contenedor aplica la alineacion esperada.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
