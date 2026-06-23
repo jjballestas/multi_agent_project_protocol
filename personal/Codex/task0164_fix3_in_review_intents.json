@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-in-review-v2:20260623T230200Z",
+  "intents": [
+    {
+      "idempotency_key": "Codex:TASK-0164:fix3-task-in-review:20260623T230200Z",
+      "task_status": {
+        "task_id": "TASK-0164",
+        "from": "in_progress",
+        "to": "in_review"
+      }
+    },
+    {
+      "idempotency_key": "Codex:TASK-0164:fix3-release-main:20260623T230200Z",
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3"
+      }
+    },
+    {
+      "idempotency_key": "Codex:TASK-0164:fix3-release-delivery:20260623T230200Z",
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-delivery"
+      }
+    }
+  ]
+}

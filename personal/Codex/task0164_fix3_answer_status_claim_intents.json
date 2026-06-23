@@ -1,0 +1,24 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-answer-status-claim:20260623T231000Z",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-status",
+          "owner": "Codex",
+          "task_id": "TASK-0164",
+          "status": "active",
+          "started_at": "2026-06-23T23:10:00Z",
+          "updated_at": "2026-06-23T23:10:00Z",
+          "expires_at": "2026-06-24T00:10:00Z",
+          "notes": "Correct consumed CAMBIO2 mailbox status after moving it to answered.",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-answer-status",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md"
+          ]
+        }
+      }
+    }
+  ]
+}

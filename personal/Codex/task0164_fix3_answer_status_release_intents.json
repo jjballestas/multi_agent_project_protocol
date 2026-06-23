@@ -1,0 +1,12 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-answer-status-release:20260623T231200Z",
+  "intents": [
+    {
+      "idempotency_key": "Codex:TASK-0164:fix3-answer-status-release-claim:20260623T231200Z",
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-status"
+      }
+    }
+  ]
+}

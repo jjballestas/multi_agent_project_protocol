@@ -1,0 +1,12 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-answer-consumed-release:20260623T230800Z",
+  "intents": [
+    {
+      "idempotency_key": "Codex:TASK-0164:fix3-answer-consumed-release-claim:20260623T230800Z",
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-consumed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-delivery-claim:20260623T225200Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-delivery",
+        "owner": "Codex",
+        "task_id": "TASK-0164",
+        "status": "active",
+        "started_at": "2026-06-23T22:52:00Z",
+        "updated_at": "2026-06-23T22:52:00Z",
+        "expires_at": "2026-06-24T02:52:00Z",
+        "notes": "Delivery artifacts for TASK-0164 CAMBIO2 mid-log torn-record fix.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-delivery",
+          "Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-3.md",
+          "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0164-fix3-in-review.md",
+          "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md",
+          "personal/Codex/Memory.md"
+        ]
+      }
+    }
+  ]
+}

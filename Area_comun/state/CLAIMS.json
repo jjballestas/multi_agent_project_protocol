@@ -5435,9 +5435,55 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-06-23T22:43:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0164",
             "updated_at": "2026-06-23T22:43:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-consumed",
+            "expires_at": "2026-06-24T00:05:00Z",
+            "notes": "Move consumed Arquitecto CAMBIO2 directive to answered after TASK-0164 fix3 delivery is ledger-backed.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-answer-consumed",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md"
+            ],
+            "started_at": "2026-06-23T23:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T23:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-status",
+            "expires_at": "2026-06-24T00:10:00Z",
+            "notes": "Correct consumed CAMBIO2 mailbox status after moving it to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-answer-status",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md"
+            ],
+            "started_at": "2026-06-23T23:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T23:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-delivery",
+            "expires_at": "2026-06-24T02:52:00Z",
+            "notes": "Delivery artifacts for TASK-0164 CAMBIO2 mid-log torn-record fix.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-3.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0164-fix3-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-23T22:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T22:52:00Z"
         },
         {
             "claim_id": "CLAIM-20260623-Codex-TASK-0164-gitignore",

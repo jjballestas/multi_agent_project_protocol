@@ -1,0 +1,25 @@
+{
+  "idempotency_key": "Codex:TASK-0164:fix3-answer-consumed-claim:20260623T230500Z",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3-answer-consumed",
+          "owner": "Codex",
+          "task_id": "TASK-0164",
+          "status": "active",
+          "started_at": "2026-06-23T23:05:00Z",
+          "updated_at": "2026-06-23T23:05:00Z",
+          "expires_at": "2026-06-24T00:05:00Z",
+          "notes": "Move consumed Arquitecto CAMBIO2 directive to answered after TASK-0164 fix3 delivery is ledger-backed.",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3-answer-consumed",
+            "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md"
+          ]
+        }
+      }
+    }
+  ]
+}

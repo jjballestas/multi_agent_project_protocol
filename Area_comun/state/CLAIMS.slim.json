@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260623-Codex-TASK-0164-fix3",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-fix3",
-                "Area_comun/state/TASK_INDEX.json#TASK-0164",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0164",
-                "Area_comun/tasks/TASK-0164-codex-claim-grano-fino-lock-fisico.md",
-                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO2-TASK-0164.md",
-                "runtime/eventlog.py",
-                "runtime/submit_intent.py",
-                "examples/intent_tx_cases/run_intent_tx_cases.py",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0164"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

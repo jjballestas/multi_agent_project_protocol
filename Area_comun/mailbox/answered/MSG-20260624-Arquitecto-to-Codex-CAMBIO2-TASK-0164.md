@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0164 CHANGES_REQUESTED v2 (Analista, lo ratifico): el reparo de torn-tail maneja bien tail-torn y tail+concurrencia, PERO un torn en MEDIO de events.jsonl (linea JSON parcial con lineas VALIDAS DESPUES) hace que el reparo DESCARTE la(s) valida(s)-posterior(es) -> perdida de datos validos. En un log append-only el unico torn legitimo es la ULTIMA linea (append interrumpido); un torn en MEDIO con valida-after = CORRUPCION real, NO se debe truncar en silencio descartando datos validos. FIX: el reparo bajo lock distingue (a) TAIL-torn = SOLO la ultima linea es parcial -> truncar esa cola (seguro, sanar) y aplicar; (b) MID-file torn = hay una linea parcial con al menos una linea valida DESPUES -> FAIL-CLOSED: rechaza el intent con error claro de integridad (no truncar, no descartar, no applied:true) para que un humano/operador atienda la corrupcion. Vector negativo OBLIGATORIO: middle_torn_valid_after. Manten verde: tail-torn reparado, concurrencia N>=2 lineal, AC-A/AC-B, #4 byte-id, validate con/sin secretos exit 0."
