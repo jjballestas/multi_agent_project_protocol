@@ -2,7 +2,7 @@
 task_id: TASK-0159
 title: "Proyecto-front (RF-14): Intake v3 fixes de UX + fix '0 candidatas' -- Execute oculto en modo archivo, selector de proyecto primero, indicador de procesamiento, errores en rojo, tarjetas visibles tras extraer (AC59-AC63, SPEC-0086)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
