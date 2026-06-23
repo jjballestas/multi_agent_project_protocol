@@ -496,6 +496,28 @@ producto/dominio en el core neutral.
   jerga tecnica tipo "escribe via runtime/submit_intent.py como relay acotado" se simplifica a lenguaje llano, sin
   perder el sentido: confirmo que revise PII y que esta accion se ejecuta de forma gobernada). Behavior-test: el
   nodo del checkbox y su label estan asociados (htmlFor/anidado) y el contenedor aplica la alineacion esperada.
+- **AC66 - Re-subir un archivo ya ingerido NO rompe el flujo: auto-commit-push idempotente = no-op exitoso [PERMANENTE; REQ intake-ux-feedback-4].**
+  Cuando el operador re-sube el MISMO archivo, el `submit_intent` es idempotente (la TASK-EXTRACT ya existe) y no
+  produce cambios staged; hoy `commitAndPushSubmitIntentOutputs` lanza 409 "auto commit push has no staged
+  submit_intent output changes" -> bloquea el flujo y la extraccion nunca corre. Se corrige: si no hay cambios
+  staged (re-submit idempotente), el auto-push lo trata como NO-OP EXITOSO (no error), devolviendo el taskId de la
+  TASK-EXTRACT existente para que el front PROCEDA a la extraccion. Re-subir un archivo ya ingerido re-ejecuta la
+  extraccion. Behavior-test: re-submit del mismo archivo -> sin 409, taskId devuelto, extraccion procede (git
+  mockeado: diff limpio -> no-op success, no throw).
+- **AC67 - El fallo del extractor reporta la CAUSA ESPECIFICA, no "extractor failed" generico [PERMANENTE; REQ intake-ux-feedback-4].**
+  Hoy cualquier excepcion no-ClientError cae al catch generico `reason: "extractor failed"` (server.js ~1615), y el
+  timeout (AbortController.abort -> AbortError en `callLocalVlm`) se ve igual que cualquier otro error. Se corrige:
+  el estado/`reason` y el mensaje rojo del front distinguen la causa -> timeout ("modelo excedio Ns"), error HTTP del
+  endpoint, respuesta no parseable a JSON, firma/clave, etc. El operador ve POR QUE fallo. Behavior-test: abort ->
+  reason de timeout con el valor de ms; respuesta HTTP !ok -> reason de error de endpoint; basura -> reason de parseo.
+- **AC68 - Extractor robusto ante la latencia del modelo local: precarga + timeout no clavado-bajo [PERMANENTE; REQ intake-ux-feedback-4].**
+  El modelo local es lento (carga en frio ~10s + generacion ~10s); un timeout fijo bajo (10s) o un tope de clamp
+  estrecho (30s) hace fallar la extraccion sin que el contenido sea el problema (mismo principio que el contexto no
+  debe quedar fijo). Se corrige: (a) PRECARGA del modelo (keep_alive en la peticion y/o warm-up al arrancar el
+  server) para que la carga en frio no consuma el presupuesto por-llamada; (b) timeout configurable GENEROSO para
+  local-vlm (subir/quitar el tope de 30s del clamp; permitir, p.ej., hasta varios minutos) y/o por-segmento, de modo
+  que la lentitud del modelo no se confunda con un fallo. Off-by-default + loopback intactos (AC52). Behavior-test:
+  config con timeout > 30s se respeta (clamp ya no lo recorta a 30s); la peticion local-vlm incluye keep_alive.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano

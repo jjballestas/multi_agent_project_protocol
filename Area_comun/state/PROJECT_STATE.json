@@ -505,6 +505,12 @@
             "title": "Proyecto-front (RF-14): subida-para-extraer no exige acceptanceIntent + PII label alineado (AC64-AC65 SPEC-0086)"
         },
         {
+            "id": "TASK-0161",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): re-submit idempotente=no-op + extractor causa especifica + robusto latencia (AC66-AC68 SPEC-0086)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",
