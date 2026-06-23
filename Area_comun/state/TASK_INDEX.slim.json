@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-11A2A57C",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Routing por hash URL en la navegacion lateral del front RF-1..RF-14"
+        },
+        {
             "id": "REQ-269EBF78",
             "owner": "Operador",
             "phase": "P2",

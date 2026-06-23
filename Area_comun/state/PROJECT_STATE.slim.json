@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-11A2A57C",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Routing por hash URL en la navegacion lateral del front RF-1..RF-14"
+        },
+        {
             "id": "REQ-269EBF78",
             "owner": "Operador",
             "status": "proposed",
