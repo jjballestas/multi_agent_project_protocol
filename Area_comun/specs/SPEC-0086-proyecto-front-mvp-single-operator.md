@@ -538,6 +538,15 @@ producto/dominio en el core neutral.
   panel -> la tarjeta refleja el nuevo estado (o sale del listado de pendientes). Behavior-test: aprobar una
   candidata -> su status pasa a approved y el panel ya no la muestra como pending; descartar -> discarded. Carry
   AC43 (gate PII) + candidatas no-ledger + AC17 (sin segundo escritor).
+- **AC72 - Colision de ledger (canal ocupado) = mensaje AMABLE, nunca el error crudo [PERMANENTE; REQ intake-ux-feedback-6].**
+  Cuando una escritura gobernada del front choca con un claim activo de otro escritor (contencion del ledger: el
+  submit_intent devuelve "claim acquire overlaps active claim" u otro error de contencion), el operador NO debe ver
+  el comando crudo ni el traceback de Python: (a) el SERVER detecta el error de contencion y devuelve un error
+  limpio y tipado (p.ej. 409 ledger-busy/retry-later) SIN exponer el argv/comando ni el stacktrace; (b) el FRONT lo
+  mapea a un mensaje amable tipo "Canal ocupado, intente mas tarde" (en rojo/aviso), idealmente con opcion de
+  reintentar. Aplica a todas las escrituras gobernadas del front (aprobar candidata, requirement-intake, kickoff).
+  Behavior-test: respuesta de submit_intent con error de claim-overlap -> el server responde error tipado de
+  contencion (sin comando/traceback) y el front muestra el mensaje amable, no el dump crudo.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
