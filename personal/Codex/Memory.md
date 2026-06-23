@@ -4,6 +4,21 @@ Last updated: 2026-06-23 Europe/Madrid, after TASK-0162 candidate cards UX produ
 
 ## Latest Session Note
 
+- TASK-0163 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `d1de0c1 fix(intake): sanitize ledger busy errors`. The server now converts submit_intent claim contention
+  failures into a typed sanitized 409 `{ error: "ledger-busy", code: "ledger-busy", retryable: true }` response
+  without exposing argv or traceback, and other submit_intent CLI failures return a sanitized generic body. The
+  front maps that typed error to `Canal ocupado, intente mas tarde` for requirement intake, file extraction writes,
+  and candidate approval. Protocol delivery commit `coord(TASK-0163): deliver ledger busy UX fix`
+  moved TASK-0163 to `in_review`, released Codex claims, moved the consumed Arquitecto GO to answered, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0163-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0163-codex-to-arquitecto-1.md`. Evidence: `node --check` for `src/server.js`, `public/app.js`,
+  `tests/staticContract.test.js`; product `git diff --check`; product `npm test` PASS 57/57; local smoke on port
+  4201 for `/healthz` plus `/api/protocol/observe`; clean-clone Zeus `npm test` PASS 57/57 after one transient
+  first-run readiness flake in `local-vlm extractor is loopback-only, chunked, robust, and non-ledger`. A first smoke
+  attempt failed because `PORT` was not set for the spawned server; rerun with `PORT=4201` passed. Final protocol
+  evidence before delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false
+  up_to_seq 1388.
 - TASK-0162 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `1b97c6b fix(intake): surface candidate card status`. Candidate cards now show local and server-side approval
   blockers visibly on the card, "Usar tarjeta" synchronizes the radio/control to typed mode, and approval/discard

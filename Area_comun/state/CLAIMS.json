@@ -5222,6 +5222,63 @@
             "updated_at": "2026-06-23T17:30:46Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0163",
+            "expires_at": "2026-06-23T23:00:00Z",
+            "notes": "Implement TASK-0163 ledger-busy friendly message in Zeus-protocol and prepare delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0163",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0163",
+                "Area_comun/tasks/TASK-0163-codex-ledger-busy-friendly-message.md",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0163.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T17:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0163",
+            "updated_at": "2026-06-23T17:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0163-delivery",
+            "expires_at": "2026-06-23T23:20:00Z",
+            "notes": "Deliver TASK-0163 handoff, mailbox coordination, and in_review transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0163",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0163",
+                "Area_comun/tasks/TASK-0163-codex-ledger-busy-friendly-message.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0163-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0163.md",
+                "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0163.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0163-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T17:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0163",
+            "updated_at": "2026-06-23T17:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0163-mailbox-fix",
+            "expires_at": "2026-06-23T18:15:00Z",
+            "notes": "Fix TASK-0163 handoff mailbox compact question field required by validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0163-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T17:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0163",
+            "updated_at": "2026-06-23T17:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

@@ -2,7 +2,7 @@
 task_id: TASK-0163
 title: "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje AMABLE 'Canal ocupado, intente mas tarde', nunca el comando crudo ni el traceback (AC72, SPEC-0086)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

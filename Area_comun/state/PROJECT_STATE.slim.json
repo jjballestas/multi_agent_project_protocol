@@ -39,7 +39,7 @@
         {
             "id": "TASK-0163",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)"
         },
         {

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c25cf4e944b2c0bf59acdca422beedbd034a77467529a53502fbd5becd65e7c0",
+  "canonical_hash": "6e7990159b71e32a95e70feddc20ca990278bbd179e2fa2e779b32e9330ef98d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -153,6 +153,9 @@
       "CLAIM-20260623-Codex-TASK-0160-go-answer": 1,
       "CLAIM-20260623-Codex-TASK-0161": 1,
       "CLAIM-20260623-Codex-TASK-0161-mailbox-fix": 1,
+      "CLAIM-20260623-Codex-TASK-0163": 1,
+      "CLAIM-20260623-Codex-TASK-0163-delivery": 1,
+      "CLAIM-20260623-Codex-TASK-0163-mailbox-fix": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -274,14 +277,14 @@
       "TASK-0160": 10,
       "TASK-0161": 8,
       "TASK-0162": 16,
-      "TASK-0163": 2,
+      "TASK-0163": 7,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 709,
+    "events_applied": 717,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -812,6 +815,14 @@
       "codex:task0161:mailbox-fix-release": 1356,
       "codex:task0161:ready-to-in-progress": 1352,
       "codex:task0161:release": 1354,
+      "codex:task0163-ledger-busy:claim": 1381,
+      "codex:task0163-ledger-busy:delivery-claim": 1384,
+      "codex:task0163-ledger-busy:in-progress-to-in-review": 1385,
+      "codex:task0163-ledger-busy:ready-to-in-progress": 1382,
+      "codex:task0163-ledger-busy:release-delivery-claim": 1386,
+      "codex:task0163-ledger-busy:release-impl-claim": 1383,
+      "codex:task0163-mailbox-question-fix:claim": 1387,
+      "codex:task0163-mailbox-question-fix:release": 1388,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -997,5 +1008,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1380
+  "up_to_seq": 1388
 }
