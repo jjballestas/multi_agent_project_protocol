@@ -117,6 +117,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Cada tarjeta de accion gobernada muestra una descripcion de una linea (maximo 80 caracteres) debajo del titulo y encima del tipo de intent. La descripcion es texto estatico visible siempre, no requiere hover. El texto describe el caso de uso en lenguaje del operador, no el nombre tecnico del intent. Ejemplo: SDD task podria decir Prepara una tarea nueva a partir de una SPEC existente, GO/response podria decir Autoriza o responde un bloqueo activo. La adicion de estas descripciones no cambia el tamano de las tarjetas de forma significativa.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-16bdaa88-requirement-seed.md",
+            "id": "REQ-16BDAA88",
+            "narrative": "Como operador, quiero que cada tarjeta de accion gobernada en la vista Operate muestre una linea de descripcion corta directamente visible (sin hover ni tooltip), para saber de un vistazo para que sirve cada accion sin tener que ir al Help a consultar la diferencia entre SDD task, GO/response, Agent run y Validation gate.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Descripcion corta inline en cada accion gobernada de Operate RF-5..RF-10",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "el prompt se envia como un mensaje gobernado al mailbox (destino: el agente elegido, canal ASCII, texto sensible redactado); el front muestra el hilo de conversacion (mi prompt mas las respuestas del agente) leyendo el mailbox; ningun mensaje escribe estado ni ledger fuera de submit_intent.",
             "author": "Operador",
             "endorsement": "none",
