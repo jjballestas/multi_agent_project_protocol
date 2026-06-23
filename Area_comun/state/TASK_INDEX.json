@@ -367,6 +367,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "En la vista Mailbox el KPI Open Mailbox tiene fondo o borde de acento cuando su valor es mayor a 0. En la vista Backlog el KPI Open Tasks tiene el mismo tratamiento. En las vistas Help y Projects los KPIs se muestran en modo compacto o reducido ya que no son accionables desde esas vistas. El KPI Ledger SEQ no tiene tratamiento especial por vista. En ninguna vista los KPIs desaparecen, solo cambia su jerarquia visual relativa.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-524372e9-requirement-seed.md",
+            "id": "REQ-524372E9",
+            "narrative": "Como operador, quiero que los 4 KPIs de la cabecera (Ledger SEQ, Open Mailbox, Active Claims, Open Tasks) resalten o adapten su presentacion segun la vista activa, para que al estar en Mailbox el KPI de Open Mailbox sea el prominente y en Backlog destaquen Open Tasks, en lugar de tener los 4 siempre con el mismo peso visual.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: KPIs de cabecera contextuales segun la vista activa",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La barra de integridad o el pie de cada seccion debe mostrar hace cuanto se refresco el dato (ej: 'actualizado hace 30s'). Durante una carga activa debe mostrarse un spinner o indicador de progreso sutil. Si los datos son stale (mas de N segundos sin actualizar) el indicador debe cambiar de estado visualmente.",
             "author": "Operador",
             "endorsement": "none",

@@ -31,6 +31,12 @@
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
         },
         {
+            "id": "REQ-524372E9",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: KPIs de cabecera contextuales segun la vista activa"
+        },
+        {
             "id": "REQ-68896287BC",
             "owner": "Operador",
             "status": "proposed",
