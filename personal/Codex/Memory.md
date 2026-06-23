@@ -16,8 +16,13 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
   examples/intent_tx_cases/run_intent_tx_cases.py` PASS 9/9; `python
   examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py` PASS 8/8 with PowerShell parity; encoding OK;
   neutrality OK; `validate_collaboration_state.py` OK; drift false up_to_seq 1446; `protocol.config.json`,
-  genesis, agent registry, and keys were not touched. TASK-0164 is currently `in_progress` with
-  `CLAIM-20260624-Codex-TASK-0164-torn-tail` active until delivery is completed.
+  genesis, agent registry, and keys were not touched. Delivery commit
+  `4aef8bc coord(TASK-0164): deliver torn-tail hardening` moved TASK-0164 to `in_review`, released Codex claims,
+  wrote `Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-2.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0164-fix2-in-review.md`. Final delivery evidence:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1452, and
+  `examples/intent_tx_cases` PASS 9/9. The consumed Arquitecto CAMBIO remains open because Codex lacks the
+  `orchestrator` capability required by the runtime `mailbox_archive` intent.
 - TASK-0164 protocol commits landed in `D:/Agentes/multi_agent_project_protocol`:
   `c4dd413 feat(runtime): serialize ledger writes and row-scope claims` and
   `693ec1a chore(runtime): ignore ledger lock file`. `CLAIMS.json` is now row-scoped for claim intents
