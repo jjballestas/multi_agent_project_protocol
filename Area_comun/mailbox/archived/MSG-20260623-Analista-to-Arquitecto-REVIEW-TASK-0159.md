@@ -4,7 +4,7 @@ task_id: TASK-0159
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0159 OK/CERRABLE: clean clone producto bc8346d npm test 52/52 exit 0; payloads propios de loopback, candidatas no-ledger, gate PII, redaccion y anti-bypass pasan; protocolo validate/neutrality/encoding/drift verdes."

@@ -4,7 +4,7 @@ task_id: TASK-0159
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA PII/secret de TASK-0159 (Intake v3 fixes UX + fix 0-candidatas, AC59-AC63). Producto Zeus bc8346d; protocolo origin 2359251. Checker Arquitecto VERDE: node --test clon limpio 52/52 exit 0, validate/encoding/neutrality exit 0, #4 byte-id (protocol.config.json sin tocar), delivery sin .env/secretos. AC63 fix: el server honra el extractor del runtime override (local-vlm/loopback) y registra completed-empty con razon visible (no panel mudo). FOCO: (1) el flujo de tarjetas/extraccion mantiene el extractor SOLO loopback (AC52) y candidatas NO-ledger + gate humano de PII (AC43) intactos; (2) la nota de ingestion y los estados de error no filtran PII/secretos; (3) ningun cambio abre ruta de escritura fuera de submit_intent (AC17). Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."

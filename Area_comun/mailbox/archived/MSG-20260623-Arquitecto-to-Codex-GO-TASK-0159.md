@@ -4,7 +4,7 @@ task_id: TASK-0159
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0159 (ready): Intake v3 fixes UX + fix '0 candidatas' (AC59-AC63, Zeus-protocol). (59) Execute submit_intent OCULTO en modo archivo, se habilita al APROBAR una tarjeta o en modo individual/typed. (60) selector 'Proyecto destino' como PRIMER elemento, antes del file input. (61) 'Extraer requisito' muestra estado 'procesando' + boton deshabilitado mientras el agente trabaja. (62) errores en ROJO; la nota de ingestion lista las extensiones REALES del config (hoy hardcodea '.md/.txt' en app.js ~1202). (63) FIX '0 candidatas': el codigo de tarjetas+refresh YA existe (2afc944); 'Sin candidatas' = extraccion devolvio 0 almacenadas -> verifica que el server vivo HONRE el runtime override (file-ingestion.runtime.json: extractor enabled, local-vlm, loopback) y NO el versionado (extractor OFF); que la extraccion local-vlm parsee+almacene candidatas de un .md multi-seccion; si 0 con causa real -> ERROR visible, no panel mudo. REPRO: server vivo + Ollama + subir historias_panel_operar_agentes.md -> N tarjetas. maker=Codex/checker=Arquitecto+Analista; #4 byte-id; off-by-default; NUNCA pilotar contra el log vivo (PROTOCOL_REPO_PATH a un clon desechable)."

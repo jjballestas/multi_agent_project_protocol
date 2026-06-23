@@ -4,7 +4,7 @@ task_id: TASK-0159
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0159 entregada a in_review: commit producto bc8346d, AC59-AC63 implementados, tests producto 52/52 y gates protocolo verdes."
