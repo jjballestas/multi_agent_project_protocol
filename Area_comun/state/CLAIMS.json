@@ -4641,6 +4641,28 @@
             "updated_at": "2026-06-23T00:16:19Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0158-fix-s9",
+            "expires_at": "2026-06-24T00:00:00Z",
+            "notes": "Rework TASK-0158 s9 DML vector per changes_requested: use ordinary table permission-denied evidence and refresh sanitized artifact.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "connectors/sqlserver_readonly/s9_verify_live.py",
+                "Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T00:40:02Z",
+            "status": "active",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T00:40:02Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Codex-TASK-0158-mailbox-fix",
             "expires_at": "2026-06-23T01:19:07Z",
             "notes": "Fix TASK-0158 delivery mailbox metadata required by validator.",

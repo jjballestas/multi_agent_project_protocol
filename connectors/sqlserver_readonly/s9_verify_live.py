@@ -32,6 +32,14 @@ def error_summary(exc: BaseException) -> dict[str, str]:
     return {"class": exc.__class__.__name__, "code": code[:40]}
 
 
+def rejection_kind(error_code: str) -> str:
+    if error_code in {"229", "262"}:
+        return "permission_denied_on_principal"
+    if error_code == "259":
+        return "system_catalog_protection"
+    return "other_server_rejection"
+
+
 def rejected_by_server(exc: BaseException) -> bool:
     text = " ".join(str(item) for item in getattr(exc, "args", ()) or [str(exc)]).lower()
     markers = [
@@ -46,18 +54,27 @@ def rejected_by_server(exc: BaseException) -> bool:
     return any(marker in text for marker in markers)
 
 
-def run_vector(connector: Any, vector: str, sql: str) -> dict[str, Any]:
+def run_vector(connector: Any, vector_type: str, operation: str, sql: str) -> dict[str, Any]:
     try:
         connector.execute_unclassified_for_s9(sql)
     except Exception as exc:  # noqa: BLE001 - the artifact records sanitized server rejection class.
         summary = error_summary(exc)
         return {
-            "vector": vector,
+            "type": vector_type,
+            "operation": operation,
             "server_rejected": rejected_by_server(exc),
             "error_class": summary["class"],
             "error_code": summary["code"],
+            "rejection_kind": rejection_kind(summary["code"]),
         }
-    return {"vector": vector, "server_rejected": False, "error_class": "none", "error_code": ""}
+    return {
+        "type": vector_type,
+        "operation": operation,
+        "server_rejected": False,
+        "error_class": "none",
+        "error_code": "",
+        "rejection_kind": "not_rejected",
+    }
 
 
 def main() -> int:
@@ -77,14 +94,18 @@ def main() -> int:
     if len(rows) < 1:
         raise SystemExit("s9 SELECT returned no rows")
 
-    dml_sql = env.get("SQLSERVER_S9_DML_SQL") or "UPDATE sys.objects SET name = name WHERE 1 = 0"
+    dml_sql = env.get("SQLSERVER_S9_DML_SQL") or "DELETE FROM catalog.records WHERE 1 = 0"
     ddl_sql = env.get("SQLSERVER_S9_DDL_SQL") or "CREATE TABLE connector_s9_denied_probe (id INT NOT NULL)"
     vectors = [
-        run_vector(connector, "DML", dml_sql),
-        run_vector(connector, "DDL", ddl_sql),
+        run_vector(connector, "DML", "DELETE ordinary_table_zero_rows", dml_sql),
+        run_vector(connector, "DDL", "CREATE TABLE", ddl_sql),
     ]
     if not all(item["server_rejected"] for item in vectors):
         raise SystemExit("s9 write vectors were not rejected by the server")
+    if vectors[0]["rejection_kind"] != "permission_denied_on_principal":
+        raise SystemExit("s9 DML vector did not prove principal permission denial")
+    if vectors[1]["rejection_kind"] != "permission_denied_on_principal":
+        raise SystemExit("s9 DDL vector did not prove principal permission denial")
 
     artifact = {
         "schema_version": "sqlserver_readonly_s9.v1",

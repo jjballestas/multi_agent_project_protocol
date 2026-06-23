@@ -4,23 +4,27 @@
   "connector_id": "sqlserver_readonly",
   "driver": "pymssql",
   "driver_install_command": "python -m pip install pymssql",
-  "timestamp_utc": "2026-06-23T00:16:31Z",
+  "timestamp_utc": "2026-06-23T00:41:29Z",
   "select": {
     "server_allowed": true,
     "row_count": 1
   },
   "write_vectors": [
     {
-      "vector": "DML",
+      "type": "DML",
+      "operation": "DELETE ordinary_table_zero_rows",
       "server_rejected": true,
       "error_class": "OperationalError",
-      "error_code": "259"
+      "error_code": "229",
+      "rejection_kind": "permission_denied_on_principal"
     },
     {
-      "vector": "DDL",
+      "type": "DDL",
+      "operation": "CREATE TABLE",
       "server_rejected": true,
       "error_class": "OperationalError",
-      "error_code": "262"
+      "error_code": "262",
+      "rejection_kind": "permission_denied_on_principal"
     }
   ],
   "secret_free": true,

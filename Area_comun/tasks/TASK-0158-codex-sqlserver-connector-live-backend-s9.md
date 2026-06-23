@@ -2,7 +2,7 @@
 task_id: TASK-0158
 title: "Connector SQL Server read-only: backend VIVO (driver real, env gitignored) + verificacion s9 SERVER-SIDE (SELECT ok + escritura rechazada por el servidor, prueba negativa registrada) -- cumple AC8/AC11 SPEC-0083, DECISION-0041; off-by-default"
 type: connector
-status: changes_requested
+status: in_progress
 owner: Codex
 phase: P2
 priority: high
