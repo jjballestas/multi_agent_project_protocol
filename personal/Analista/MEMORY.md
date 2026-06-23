@@ -271,3 +271,16 @@
   mailbox/open inbound a Analista (REVIEW/REVISAR del Arquitecto) -> pasada adversarial -> entrego.
 - (Historico: trio off-pilot v1.9.1-1.9.3, Carril A activacion #4, satelite protocol_research DECISION-0035 --
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
+## Ultima pasada (2026-06-24)
+- TASK-0164 v2: CAMBIO-REQUERIDO, veredicto commiteado en `78d4868`
+  (`review(TASK-0164): Analista requires middle torn guard`). Ancla protocolo `232dcc3`, fix2 `92ece27`,
+  producto Zeus `4faacd1`. Clon limpio Zeus `npm test`: corrida 1 exit 1 por AC50 readiness (`server did not
+  become ready` aunque imprimio listening), corrida 2 exit 0 57/57. Protocolo limpio: row_scoped_claim_cases 8/8,
+  intent_tx_cases 9/9, validate sin secretos exit 0; repo vivo validate con secretos exit 0; drift 0, chain valida,
+  neutrality/encoding exit 0, #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. PASA tail final reparado y tail+concurrencia:
+  dos writers concurrentes tras cola parcial -> returncodes [0,0], un `log_repair`, 5 eventos visibles, prev_hash
+  lineal, drift false. SLIP nuevo: torn en medio seguido por linea JSON valida posterior (`before` + partial broken
+  + `after`) hace que `truncate_torn_jsonl_tail` trunque desde el prefijo y DESCARTE la linea valida `after`.
+  Incumple "truncar SOLO la ultima linea parcial" y "no descartar eventos validos"; pedir fail-hard o cuarentena
+  cuando la linea invalida no sea la ultima linea no vacia.
