@@ -5376,9 +5376,47 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "started_at": "2026-06-23T21:28:35Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0164",
             "updated_at": "2026-06-23T21:28:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-answer-go",
+            "expires_at": "2026-06-23T22:22:01Z",
+            "notes": "Move consumed TASK-0164 GO to answered after delivery ledger transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-answer-go",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0164.md",
+                "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0164.md"
+            ],
+            "started_at": "2026-06-23T21:52:01Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T21:52:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-delivery",
+            "expires_at": "2026-06-24T01:50:47Z",
+            "notes": "TASK-0164 delivery artifacts, memory, and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-gitignore",
+                "Area_comun/state/TASK_INDEX.json#TASK-0164",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0164",
+                "Area_comun/tasks/TASK-0164-codex-claim-grano-fino-lock-fisico.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0164-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0164.md",
+                "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0164.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-23T21:50:47Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T21:50:47Z"
         },
         {
             "claim_id": "CLAIM-20260623-Codex-TASK-0164-gitignore",
@@ -5390,9 +5428,23 @@
                 ".gitignore"
             ],
             "started_at": "2026-06-23T21:46:37Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0164",
             "updated_at": "2026-06-23T21:46:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-msg-fix",
+            "expires_at": "2026-06-23T22:22:35Z",
+            "notes": "Fix TASK-0164 handoff mailbox requested_action metadata.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-msg-fix",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0164-in-review.md"
+            ],
+            "started_at": "2026-06-23T21:52:35Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T21:52:35Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0164 (ready): CAMBIO DE NUCLEO bajo #4 ratificado (DECISION-0059). (1) Agrega Area_comun/state/CLAIMS.json a ROW_SCOPED_LEDGER_PATHS (runtime/submit_intent.py ~63) y cambia required_scopes del kind claim (~565) de ['CLAIMS.json'] a ['CLAIMS.json#<claim-id>'] -> claims con claim-id distinto NO solapan (scope_covers ~123-127 ya soporta selector). (2) Los claim-scopes del FRONT (Zeus src/server.js, CLAIM-FRONT-...) y de los agentes ya NO listan runtime/state/events.jsonl ni snapshot.json (solo recursos logicos por-fila + ficheros concretos). (3) CLAVE #4: submit_intent toma un LOCK DE ARCHIVO (cross-platform, p.ej. runtime/state/.ledger.lock) alrededor de leer-head->validar->append->materializar, RE-LEYENDO el head tras adquirir el lock -> dos escritores concurrentes se serializan por ms sin bifurcar la cadena. #4 byte-identica (NO tocar protocol.config.json/genesis/registry/keys; sin re-genesis). Neutralidad total. checker=Arquitecto + PASADA ADVERSARIAL DEL ANALISTA con prueba de DOS escritores CONCURRENTES (cadena valida + drift 0 + sin fork)."

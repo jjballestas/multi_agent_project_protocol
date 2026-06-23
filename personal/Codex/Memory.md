@@ -1,9 +1,33 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0162 candidate cards UX product commit.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0164 fine-grained claims and ledger lock implementation.
 
 ## Latest Session Note
 
+- TASK-0164 protocol commits landed in `D:/Agentes/multi_agent_project_protocol`:
+  `c4dd413 feat(runtime): serialize ledger writes and row-scope claims` and
+  `693ec1a chore(runtime): ignore ledger lock file`. `CLAIMS.json` is now row-scoped for claim intents
+  (`CLAIMS.json#<claim-id>`), bare `CLAIMS.json` remains whole-file compatibility scope, and `submit_intent`
+  / `submit_intents` serialize idempotency lookup, validation, append, materialization, snapshot write, and
+  drift check under `runtime/state/.ledger.lock` after re-reading state/head inside the lock. Python and
+  PowerShell validators understand claim-row selectors, row-scope goldens cover distinct/same/bare-vs-row
+  cases, and intent transaction goldens include claim-row behavior plus a two-process concurrent submit chain
+  test. Product commit in `D:/Agentes/Zeus/Zeus-protocol`: `4faacd1 fix(intake): row-scope front claims`.
+  The front now emits `Area_comun/state/CLAIMS.json#<claim-id>` for generated claims, does not list runtime
+  materialization paths in claim scopes, and overlays/commits matching protocol runtime files in clean-clone
+  write fixtures. Evidence so far: py_compile PASS for changed protocol Python files; row_scoped_claim_cases
+  PASS 8/8 with PowerShell parity; intent_tx_cases PASS 8/8; protocol encoding OK, neutrality OK,
+  `validate_collaboration_state.py` OK, drift false up_to_seq 1425 before delivery artifact claims; product
+  `node --check src/server.js tests/staticContract.test.js` OK; product `npm test` PASS 57/57; targeted product
+  reruns for `submit_intent contention|intake endpoint rejects` and `auto commit push lands only exact` PASS.
+  `protocol.config.json`, genesis, registry, keys, and capabilities were not touched. The first full product
+  test after the initial protocol commit failed because the fixture overlaid `submit_intent.py` without the
+  matching `eventlog.py`; adding runtime/eventlog plus a fixture overlay commit fixed it, and the final full
+  run passed. Protocol delivery moved TASK-0164 to `in_review`, released all Codex TASK-0164 claims, moved the
+  consumed Arquitecto GO to `Area_comun/mailbox/answered/`, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0164-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-1.md`. Final protocol evidence before delivery
+  commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1435.
 - TASK-0163 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `d1de0c1 fix(intake): sanitize ledger busy errors`. The server now converts submit_intent claim contention
   failures into a typed sanitized 409 `{ error: "ledger-busy", code: "ledger-busy", retryable: true }` response

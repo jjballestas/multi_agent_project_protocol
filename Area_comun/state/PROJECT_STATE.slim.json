@@ -63,7 +63,7 @@
         {
             "id": "TASK-0164",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Nucleo: claims de grano fino (CLAIMS.json por-fila) + serializacion fisica del event-log (lock) (DECISION-0059)"
         },
         {
