@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c32d70cebfaf0b007713d1c2d431c8bfe90631224148b2cce6d6a6170fe7d8ab",
+  "canonical_hash": "5fcdd3cd2c1fe3d43504ec3ea8f7461c1718a55141d968c94e4686713aeae506",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -166,6 +166,7 @@
       "CLAIM-20260623-Codex-TASK-0164-gitignore": 1,
       "CLAIM-20260623-Codex-TASK-0164-msg-fix": 1,
       "CLAIM-20260624-Arquitecto-changes-0164": 1,
+      "CLAIM-20260624-Arquitecto-changes2-0164": 1,
       "CLAIM-20260624-Codex-TASK-0164-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0164-mailbox-fix": 1,
       "CLAIM-20260624-Codex-TASK-0164-torn-tail": 1,
@@ -314,14 +315,14 @@
       "TASK-0161": 8,
       "TASK-0162": 16,
       "TASK-0163": 10,
-      "TASK-0164": 16,
+      "TASK-0164": 18,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 802,
+    "events_applied": 805,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -452,6 +453,9 @@
       "arquitecto:changes2-0158:claim-acquire": 1263,
       "arquitecto:changes2-0158:claim-release": 1265,
       "arquitecto:changes2-0158:status": 1264,
+      "arquitecto:changes2-0164:claim-acquire": 1474,
+      "arquitecto:changes2-0164:claim-release": 1476,
+      "arquitecto:changes2-0164:status": 1475,
       "arquitecto:changes3-0158:claim-acquire": 1270,
       "arquitecto:changes3-0158:claim-release": 1272,
       "arquitecto:changes3-0158:status": 1271,
@@ -1127,5 +1131,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1473
+  "up_to_seq": 1476
 }
