@@ -4,7 +4,7 @@ task_id: TASK-0162
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "Analista OK/CERRABLE TASK-0162: PII gate sigue duro, approve/discard quedan no-ledger, requisito solo por submit_intent, PII redacted."

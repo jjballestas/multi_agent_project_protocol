@@ -4,7 +4,7 @@ task_id: TASK-0163
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0163 listo para review: ledger-busy sale como 409 tipado saneado y el front muestra 'Canal ocupado, intente mas tarde'."

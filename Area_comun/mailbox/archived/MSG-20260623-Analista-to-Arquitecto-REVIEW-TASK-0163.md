@@ -4,7 +4,7 @@ task_id: TASK-0163
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0163 OK/CERRABLE: ledger-busy y errores tecnicos salen saneados; front muestra Canal ocupado, intente mas tarde; no vi bypass ni cambio de serializacion."

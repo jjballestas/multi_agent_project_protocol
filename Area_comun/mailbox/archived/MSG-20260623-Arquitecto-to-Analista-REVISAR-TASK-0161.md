@@ -4,7 +4,7 @@ task_id: TASK-0161
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de TASK-0161 (re-submit no-op + extractor causa especifica + robusto latencia, AC66-AC68). Producto Zeus 109d039; protocolo origin actualizado. Checker Arquitecto VERDE: node --test clon limpio 54/54 exit 0, validate/encoding/neutrality exit 0, #4 byte-id (protocol.config.json sin tocar), delivery sin .env/secretos. FOCO: (1) AC66 el no-op del auto-push NO es bypass -- solo significa 'submit_intent idempotente ya aplicado' (output gobernado ya en el canonico); no crea un segundo escritor (AC17); confirma que el front sigue obteniendo el taskId y la extraccion sigue gobernada. (2) AC67/AC68 el extractor sigue loopback-only (AC52) + candidatas no-ledger + gate PII (AC43); el keep_alive y el timeout generoso no abren egress ni cambian la frontera. Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."

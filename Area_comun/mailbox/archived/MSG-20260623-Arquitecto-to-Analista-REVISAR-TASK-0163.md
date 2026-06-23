@@ -4,7 +4,7 @@ task_id: TASK-0163
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de TASK-0163 (canal ocupado -> mensaje amable, AC72). Producto Zeus d1de0c1; protocolo origin actualizado. Checker Arquitecto VERDE: node --test clon limpio 57/57 exit 0, validate/encoding/neutrality exit 0, #4 byte-id (protocol.config.json sin tocar), delivery sin .env/secretos. AC72: server responde 409 ledger-busy TIPADO y SANEADO ante contencion de claim (sin argv/traceback); front mapea a 'Canal ocupado, intente mas tarde' en intake/extraccion/aprobacion. FOCO: (1) confirma que el body de error que llega al cliente NO incluye el comando/argv ni el stacktrace de submit_intent (saneado) en el caso ledger-busy NI en otros errores tecnicos; (2) la serializacion del ledger (DECISION-0020) NO cambia -- solo el mensaje; no se relaja ningun gate ni se abre bypass (AC17). Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."

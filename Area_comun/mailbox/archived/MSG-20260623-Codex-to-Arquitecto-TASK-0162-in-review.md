@@ -4,7 +4,7 @@ task_id: TASK-0162
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0162 delivered to in_review: candidate card errors visible, mode radio synced, approval/discard refreshes Intake after non-ledger status update."

@@ -4,7 +4,7 @@ task_id: TASK-0161
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "Analista OK/CERRABLE TASK-0161: re-submit no-op no bypass, reasons saneados, loopback/PII carry verdes."

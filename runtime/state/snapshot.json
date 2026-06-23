@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "86cc5261e6332546e545b2d83b3fe379956c18b97770010856f2146136301bcd",
+  "canonical_hash": "c5f0a9011191fcd7cb891a8e8cf7e370ac453dde81fca797f3c8cce87d298afa",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -121,6 +121,7 @@
       "CLAIM-20260623-Arquitecto-archive-0158": 1,
       "CLAIM-20260623-Arquitecto-archive-0159": 1,
       "CLAIM-20260623-Arquitecto-archive-0160": 1,
+      "CLAIM-20260623-Arquitecto-archive-016x": 1,
       "CLAIM-20260623-Arquitecto-changes-0158": 1,
       "CLAIM-20260623-Arquitecto-changes2-0158": 1,
       "CLAIM-20260623-Arquitecto-changes3-0158": 1,
@@ -183,6 +184,9 @@
       "MSG-20260622-Arquitecto-to-Operador-ESTADO-cola-vacia": 1,
       "MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0157": 1,
       "MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0159": 1,
+      "MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0161": 1,
+      "MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0162": 1,
+      "MSG-20260623-Analista-to-Arquitecto-REVIEW-TASK-0163": 1,
       "MSG-20260623-Analista-to-Arquitecto-TASK-0158-review": 1,
       "MSG-20260623-Analista-to-Arquitecto-TASK-0158-v2-review": 1,
       "MSG-20260623-Analista-to-Arquitecto-TASK-0158-v3-review": 1,
@@ -193,6 +197,9 @@
       "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0158-v3": 1,
       "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0159": 1,
       "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0160": 1,
+      "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0161": 1,
+      "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0162": 1,
+      "MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0163": 1,
       "MSG-20260623-Arquitecto-to-Codex-CAMBIO-TASK-0158": 1,
       "MSG-20260623-Arquitecto-to-Codex-CAMBIO2-TASK-0158": 1,
       "MSG-20260623-Arquitecto-to-Codex-CAMBIO3-TASK-0158": 1,
@@ -206,6 +213,9 @@
       "MSG-20260623-Codex-to-Arquitecto-TASK-0158-in-review": 1,
       "MSG-20260623-Codex-to-Arquitecto-TASK-0159-in-review": 1,
       "MSG-20260623-Codex-to-Arquitecto-TASK-0160-in-review": 1,
+      "MSG-20260623-Codex-to-Arquitecto-TASK-0161-in-review": 1,
+      "MSG-20260623-Codex-to-Arquitecto-TASK-0162-in-review": 1,
+      "MSG-20260623-Codex-to-Arquitecto-TASK-0163-in-review": 1,
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
@@ -278,14 +288,14 @@
       "TASK-0160": 10,
       "TASK-0161": 8,
       "TASK-0162": 16,
-      "TASK-0163": 9,
+      "TASK-0163": 10,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 720,
+    "events_applied": 731,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -393,6 +403,17 @@
       "arquitecto:archive-0160:ASK-0160-veredicto": 1329,
       "arquitecto:archive-0160:claim-acquire": 1328,
       "arquitecto:archive-0160:claim-release": 1332,
+      "arquitecto:archive-016x:0": 1393,
+      "arquitecto:archive-016x:1": 1394,
+      "arquitecto:archive-016x:2": 1395,
+      "arquitecto:archive-016x:3": 1396,
+      "arquitecto:archive-016x:4": 1397,
+      "arquitecto:archive-016x:5": 1398,
+      "arquitecto:archive-016x:6": 1399,
+      "arquitecto:archive-016x:7": 1400,
+      "arquitecto:archive-016x:8": 1401,
+      "arquitecto:archive-016x:claim-acquire": 1392,
+      "arquitecto:archive-016x:claim-release": 1402,
       "arquitecto:author-0130:claim-acquire": 781,
       "arquitecto:author-0130:claim-release": 783,
       "arquitecto:author-0130:task-upsert-ready": 782,
@@ -1012,5 +1033,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1391
+  "up_to_seq": 1402
 }

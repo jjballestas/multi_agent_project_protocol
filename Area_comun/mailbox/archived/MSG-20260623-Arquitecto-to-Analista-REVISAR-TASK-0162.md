@@ -4,7 +4,7 @@ task_id: TASK-0162
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA de TASK-0162 (UX tarjetas candidatas AC69-AC71). Producto Zeus 1b97c6b; protocolo origin actualizado. Checker Arquitecto VERDE: node --test clon limpio 55/55 exit 0, validate/encoding/neutrality exit 0, #4 byte-id (protocol.config.json sin tocar), delivery sin .env/secretos. AC69 error de aprobacion VISIBLE en la tarjeta (candidate-card-error), AC70 Usar-tarjeta sincroniza el radio intake-input-mode a typed, AC71 approval/discard actualizan el store NO-ledger + refrescan el Intake. FOCO: confirma que (1) el gate HUMANO de PII sigue DURO al aprobar (AC43) -- el error visible no relaja la condicion; (2) marcar approved/discarded en el store NO mete la candidata al ledger (sigue no-ledger) y el requisito gobernado se crea SOLO por submit_intent (AC17, sin segundo escritor); (3) candidatas siguen sin filtrar PII en planos publicables. Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."

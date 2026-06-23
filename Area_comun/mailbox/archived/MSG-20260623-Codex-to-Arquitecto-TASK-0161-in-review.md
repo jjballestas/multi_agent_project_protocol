@@ -4,7 +4,7 @@ task_id: TASK-0161
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0161 delivered to in_review: re-submit no-op, specific extractor failure reasons, local-vlm keep_alive and generous timeout."
