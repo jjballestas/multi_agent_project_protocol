@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "2229680f5752e4b6b99d361d448a9c20792f1c2c9bdf85114405bcec02bc3450",
+  "canonical_hash": "c37c00cb9e8ec3f4205f447850da5ee9fb86abd7edb8e4caf81d5405039f5248",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -141,6 +141,9 @@
       "CLAIM-20260623-Codex-TASK-0158-fix3-neutrality": 1,
       "CLAIM-20260623-Codex-TASK-0158-mailbox-fix": 1,
       "CLAIM-20260623-Codex-TASK-0159": 1,
+      "CLAIM-20260623-Codex-TASK-0160": 1,
+      "CLAIM-20260623-Codex-TASK-0160-delivery": 1,
+      "CLAIM-20260623-Codex-TASK-0160-go-answer": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -252,13 +255,13 @@
       "TASK-0157": 10,
       "TASK-0158": 27,
       "TASK-0159": 8,
-      "TASK-0160": 2,
+      "TASK-0160": 7,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 645,
+    "events_applied": 653,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -901,14 +904,22 @@
       "ledger-op:auto-claim:TASK-0153:CLAIM-20260622-Codex-TASK-0153:task-status": 1127,
       "ledger-op:auto-claim:TASK-0156:CLAIM-20260622-Codex-TASK-0156:claim-acquire": 1204,
       "ledger-op:auto-claim:TASK-0156:CLAIM-20260622-Codex-TASK-0156:task-status": 1205,
+      "ledger-op:auto-claim:TASK-0160:CLAIM-20260623-Codex-TASK-0160:claim-acquire": 1317,
+      "ledger-op:auto-claim:TASK-0160:CLAIM-20260623-Codex-TASK-0160:task-status": 1318,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:claim-release": 1117,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:task-status": 1116,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152:claim-release": 1113,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152:task-status": 1112,
-      "protocol-state:regenesis-ref:b230d9a4503cb3736d256f019c737f73e3b37e4b60264781471610bcf27af954": 673
+      "protocol-state:regenesis-ref:b230d9a4503cb3736d256f019c737f73e3b37e4b60264781471610bcf27af954": 673,
+      "task-0160-delivery-claim": 1319,
+      "task-0160-go-answer-claim": 1323,
+      "task-0160-release-delivery-claim": 1322,
+      "task-0160-release-go-answer-claim": 1324,
+      "task-0160-release-main-claim": 1321,
+      "task-0160-status-in-review": 1320
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1316
+  "up_to_seq": 1324
 }

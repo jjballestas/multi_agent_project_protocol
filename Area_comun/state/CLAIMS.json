@@ -4935,6 +4935,52 @@
             "updated_at": "2026-06-23T12:28:53Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0160",
+            "expires_at": "2026-06-24T23:59:59Z",
+            "notes": "TASK-0160 product implementation in D:/Agentes/Zeus/Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0160",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0160",
+                "Area_comun/tasks/TASK-0160-codex-intake-extract-acceptanceintent-pii-label.md"
+            ],
+            "started_at": "2026-06-23T13:36:32Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T13:36:32Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0160-delivery",
+            "expires_at": "2026-06-24T23:59:59Z",
+            "notes": "TASK-0160 delivery artifacts and mailbox response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0160-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0160-in-review.md"
+            ],
+            "started_at": "2026-06-23T13:56:51Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T13:56:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0160-go-answer",
+            "expires_at": "2026-06-24T23:59:59Z",
+            "notes": "Move consumed TASK-0160 GO to answered after ledger-backed delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0160.md",
+                "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0160.md"
+            ],
+            "started_at": "2026-06-23T13:57:59Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T13:57:59Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-DC0E283672",
             "expires_at": "2026-06-22T18:31:06.453Z",
             "notes": "Front file-intake extraction relay claim.",

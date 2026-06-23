@@ -15,7 +15,7 @@
         {
             "id": "TASK-0160",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): subida-para-extraer no exige acceptanceIntent + PII label alineado (AC64-AC65 SPEC-0086)"
         }
     ],

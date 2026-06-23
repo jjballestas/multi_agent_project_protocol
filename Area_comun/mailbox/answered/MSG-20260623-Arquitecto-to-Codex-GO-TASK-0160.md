@@ -4,7 +4,7 @@ task_id: TASK-0160
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0160 (ready): 2 fixes en Zeus-protocol. (AC64, BLOQUEANTE) la subida-para-EXTRAER NO debe exigir acceptanceIntent -- src/server.js sanitizeFileExtractionUpload (~864) llama validateHonestRequirementField('acceptanceIntent',...) y bloquea con 'acceptanceIntent is required'; quita esa exigencia (acceptanceIntent OPCIONAL al extraer, vacio permitido), pero MANTENLO REQUERIDO en sanitizeCandidate (~993, aprobacion de candidata); sigue exigiendo proyecto + ack PII para extraer (AC55: no se piden campos antes de la carga; vienen del archivo/modelo). (AC65) alinea/limpia la confirmacion de PII -- public/app.js ~1215 confirm-box: checkbox alineado al inicio, texto que envuelve limpio (CSS), y redaccion en lenguaje llano (simplifica 'escribe via runtime/submit_intent.py como relay acotado' -> 'esta accion se ejecuta de forma gobernada'), label asociado al input; el ack sigue OBLIGATORIO (AC43, solo cambia texto+alineacion). maker=Codex/checker=Arquitecto+Analista; #4 byte-id; carry AC16/17/43/51-63; NUNCA pilotar contra el log vivo (clon desechable)."

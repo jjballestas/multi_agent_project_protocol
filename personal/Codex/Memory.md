@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend rework v3 delivery.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0160 intake extraction acceptanceIntent/PII label delivery.
 
 ## Latest Session Note
 
+- TASK-0160 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a3c5f26 fix(intake): allow empty extraction acceptance intent`. File extraction upload no longer requires
+  `acceptanceIntent` in `sanitizeFileExtractionUpload`, while candidate approval still rejects an empty
+  `acceptanceIntent` through the governed intake path. The PII acknowledgement label is associated with its
+  checkbox, rewritten in plain language, and aligned for clean wrapping. Evidence: `node --check src/server.js
+  public/app.js tests/staticContract.test.js`, product `git diff --check`, product `npm test` PASS 52/52,
+  clean-clone Zeus `npm test` PASS 52/52, and local smoke on port 4192 for `/healthz` plus
+  `/api/protocol/observe`. Protocol evidence before delivery artifacts: encoding OK, neutrality OK,
+  `validate_collaboration_state.py` OK, drift false up_to_seq 1318; after acquiring the delivery claim,
+  drift false up_to_seq 1319. The current validator has no `--with-secrets` flag. No live canonical pilot was
+  run.
 - TASK-0159 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `bc8346d fix(intake): surface file extraction candidates`. File-mode Intake now hides the direct
   `EXECUTE SUBMIT_INTENT` button, places `Proyecto destino` first inside the file section, shows a processing
