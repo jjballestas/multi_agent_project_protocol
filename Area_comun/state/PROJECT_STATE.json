@@ -163,6 +163,12 @@
             "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1"
         },
         {
+            "id": "REQ-A54DAD73",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox"
+        },
+        {
             "id": "REQ-B65E7802",
             "owner": "Operador",
             "status": "done",

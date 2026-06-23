@@ -773,6 +773,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Se agrega un nuevo intent kind mailbox_send al runtime/submit_intent con campos: from fijo Operador, to seleccionable entre agentes registrados, type seleccionable entre los tipos validos del Operador (INFO CHANGES DECISION REVIEW), taskId opcional, y body en texto libre ASCII. En el front aparece una nueva accion gobernada en Operate (o un boton Nuevo mensaje en la cabecera del Mailbox) que prepara y ejecuta este intent con el flujo dry_run -> confirmar -> enviado-atestado [DOC-REDACTED] al de Intake. El mensaje resultante queda en el mailbox open del destinatario como cualquier otro mensaje del protocolo. No se puede falsificar el from ni usar tipos de mensaje exclusivos de agentes. El envio fallido muestra el error sin limpiar el borrador.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-a54dad73-requirement-seed.md",
+            "id": "REQ-A54DAD73",
+            "narrative": "Como operador, quiero poder escribir y enviar mensajes a agentes (Arquitecto, Codex) directamente desde el front sin usar la terminal ni editar archivos a mano, ya que el canal Operador como from ya existe en el protocolo (19 mensajes previos con tipos INFO, CHANGES, DECISION, REVIEW) pero hoy no hay ninguna accion gobernada ni UI para emitirlos desde la consola.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 1,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
             "author": "Operador",
             "delivered_by": "TASK-0138",
