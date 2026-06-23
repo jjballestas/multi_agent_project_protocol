@@ -4,6 +4,18 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
 
 ## Latest Session Note
 
+- TASK-0164 CAMBIO2 rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `434b2e9 fix(runtime): fail closed on mid-log torn records`. `truncate_torn_jsonl_tail` now distinguishes the
+  only safe repair case (invalid JSONL at the tail with no later valid event records) from mid-file corruption. If an
+  invalid/non-dict JSONL record has a valid event record after it, submit fails closed with a clear integrity error,
+  leaves `events.jsonl` byte-intact, and writes no new event. The new golden
+  `case_middle_torn_jsonl_with_valid_after_fails_closed` covers `[valid, torn, valid]` rejection and preserves the
+  previous tail repair and concurrent linear-chain cases. Evidence before this memory update: py_compile OK for
+  `runtime/eventlog.py`, `runtime/submit_intent.py`, and `examples/intent_tx_cases/run_intent_tx_cases.py`;
+  `examples/intent_tx_cases` PASS 10/10; `examples/row_scoped_claim_cases` PASS 8/8 with PowerShell parity; encoding
+  OK; neutrality OK; `validate_collaboration_state.py` OK; drift false up_to_seq 1478. The current validator still
+  has no `--with-secrets` flag. Product repo `D:/Agentes/Zeus/Zeus-protocol` had clean status at startup and was not
+  changed.
 - TASK-0164 changes_requested rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `92ece27 fix(runtime): repair torn event log tail before append`. `submit_intent` / `submit_intents` now inspect
   `runtime/state/events.jsonl` inside the ledger file lock before idempotency lookup, validation, append, and
