@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ae4955c0ea3b589f18bd87dcf689c4c679fa9a38fbc2863019f58e4a82fb515d",
+  "canonical_hash": "f8eaeb0c1bcd08b04fa8dcdeb40c27367dcf9b506755ae6fc02a3a3073ba802b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -166,6 +166,9 @@
       "CLAIM-20260623-Codex-TASK-0164-gitignore": 1,
       "CLAIM-20260623-Codex-TASK-0164-msg-fix": 1,
       "CLAIM-20260624-Arquitecto-changes-0164": 1,
+      "CLAIM-20260624-Codex-TASK-0164-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0164-mailbox-fix": 1,
+      "CLAIM-20260624-Codex-TASK-0164-torn-tail": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -304,14 +307,14 @@
       "TASK-0161": 8,
       "TASK-0162": 16,
       "TASK-0163": 10,
-      "TASK-0164": 13,
+      "TASK-0164": 16,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 775,
+    "events_applied": 781,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -817,8 +820,14 @@
       "codex:task-0158-fix3:claim-release": 1277,
       "codex:task-0158-fix3:in-progress-to-in-review": 1276,
       "codex:task-0158-fix3:status-in-progress": 1274,
+      "codex:task-0164:mailbox-fix:claim-acquire": 1451,
+      "codex:task-0164:mailbox-fix:claim-release": 1452,
       "codex:task-0164:torn-tail:claim-acquire": 1445,
+      "codex:task-0164:torn-tail:claim-release": 1449,
+      "codex:task-0164:torn-tail:delivery-claim-acquire": 1447,
+      "codex:task-0164:torn-tail:delivery-claim-release": 1450,
       "codex:task-0164:torn-tail:status-in-progress": 1446,
+      "codex:task-0164:torn-tail:status-in-review": 1448,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -1090,5 +1099,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1446
+  "up_to_seq": 1452
 }
