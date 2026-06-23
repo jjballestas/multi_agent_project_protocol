@@ -571,6 +571,12 @@
             "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)"
         },
         {
+            "id": "TASK-0164",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Nucleo: claims de grano fino (CLAIMS.json por-fila) + serializacion fisica del event-log (lock) (DECISION-0059)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",

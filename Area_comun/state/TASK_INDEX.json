@@ -2114,6 +2114,21 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0164-codex-claim-grano-fino-lock-fisico.md",
+            "id": "TASK-0164",
+            "linked_decisions": [
+                "DECISION-0059"
+            ],
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Nucleo: claims de grano fino (CLAIMS.json por-fila) + serializacion fisica del event-log (lock) (DECISION-0059)",
+            "type": "protocol"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
