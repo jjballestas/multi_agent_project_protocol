@@ -1,6 +1,6 @@
 # DECISION-0059 - Claims de grano fino (por-fila) + serializacion fisica del event-log
 
-- **Estado:** proposed (requiere ratificacion del operador; cambia comportamiento del nucleo bajo #4).
+- **Estado:** accepted (ratificada por el operador 2026-06-23; cambia comportamiento del nucleo bajo #4, lock fisico).
 - **Fecha:** 2026-06-23
 - **Autor:** Arquitecto. **Maker propuesto:** Codex. **Checker:** Arquitecto + pasada Analista (foco concurrencia/#4).
 - **Relacionada:** DECISION-0020 (anti-colision), DECISION-0022 (runtime-authoritative), AC72/SPEC-0086 (mensaje canal-ocupado).

@@ -4723,6 +4723,20 @@
             "updated_at": "2026-06-23T20:22:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-decision-0059",
+            "expires_at": "2026-06-24T03:00:00Z",
+            "notes": "Register DECISION-0059 accepted (claim grano fino + lock fisico).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-06-23T21:00:00Z",
+            "status": "released",
+            "task_id": "DECISION-0059",
+            "updated_at": "2026-06-23T21:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-register-0157",
             "expires_at": "2026-06-23T18:00:00Z",
             "notes": "Register TASK-0157 (Intake v3 file-mode + cards + auto-push, AC55-AC58) as ready for Codex; spawned from extraction request TASK-EXTRACT-DC0E283672 (operator UX feedback captured via governed Intake).",
