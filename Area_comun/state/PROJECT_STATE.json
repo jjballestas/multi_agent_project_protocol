@@ -145,6 +145,12 @@
             "title": "Intake: limpiar el formulario y confirmar claramente tras un submit exitoso"
         },
         {
+            "id": "REQ-DCFB1AA7",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Indicador vivo/dormido y boton activar/detener por agente"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "status": "done",

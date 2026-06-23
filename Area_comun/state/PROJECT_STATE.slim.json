@@ -25,6 +25,12 @@
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {
+            "id": "REQ-DCFB1AA7",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Indicador vivo/dormido y boton activar/detener por agente"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "status": "proposed",

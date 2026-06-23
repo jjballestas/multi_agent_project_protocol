@@ -652,6 +652,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "el front muestra el estado real de cada runtime (vivo, dormido, ultimo latido); un boton activa el runtime del agente o lo detiene; la accion solo aplica a agentes registrados y conocidos, nunca a un comando arbitrario; activar un agente no le concede autoridad de riesgo.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-dcfb1aa7-requirement-seed.md",
+            "id": "REQ-DCFB1AA7",
+            "narrative": "Como operador, quiero ver en el front si cada agente esta vivo o dormido, con su ultimo latido, y poder activarlo o detenerlo, para saber si mi trabajo sera atendido y poner a trabajar al agente que necesito.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Indicador vivo/dormido y boton activar/detener por agente",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
             "author": "Operador",
             "delivered_by": "TASK-0137",
