@@ -4,6 +4,23 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
 
 ## Latest Session Note
 
+- TASK-0165 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `1493f86 feat(front): add governed agent prompt console`. The Operate view now includes an "Operar Agentes"
+  console with a real agent combo sourced from `agent_registry` plus product workers, prompt textarea, PII
+  acknowledgement, governed send state, and a read-only mailbox thread by selected agent. The server adds the
+  executable governed `mailbox-send` action: it rejects client actor/intents, validates the target agent, redacts
+  the prompt to ASCII public text, writes only `Area_comun/mailbox/open/MSG-*.md` with `from: Operador`,
+  `relayed_by: Arquitecto`, `operator_directive: true`, file-scoped claim coverage, and participates in the
+  existing auto commit/push path when enabled. `protocol.config.json`, live capabilities, wake/stop behavior, and
+  signer registry were not touched. Evidence before protocol delivery: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK, product `git diff --check` OK, `npm test` PASS 58/58, local smoke on port 4210
+  OK for `/healthz` and `/api/protocol/observe` with roster `Arquitecto,Codex,Analista,Extractor`. Protocol delivery
+  moved TASK-0165 to `in_review`, released all Codex TASK-0165 claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-in-review.md`, and moved the consumed
+  Arquitecto GO to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit: encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, and drift false up_to_seq 1514. The current validator still
+  has no `--with-secrets` flag.
 - TASK-0164 CAMBIO2 rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `434b2e9 fix(runtime): fail closed on mid-log torn records`. `truncate_torn_jsonl_tail` now distinguishes the
   only safe repair case (invalid JSONL at the tail with no later valid event records) from mid-file corruption. If an

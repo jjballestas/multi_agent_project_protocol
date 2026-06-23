@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0165 (ready): panel Operar-Agentes Q2 = consola/compositor de prompts agente-a-agente en Zeus-protocol (SPEC-0088 AC1-AC6). AC1 vista con combo de agente (del agent_registry) + caja de prompt + Enviar. AC2 Enviar = accion gobernada SERVER-SIDE mailbox_send: el server compone un MSG mailbox (from:Operador, relayed_by:Arquitecto, to:<agente>, type:DIRECTIVE/QUESTION, operator_directive:true, cuerpo=prompt) y lo escribe+commit+push (auto-commit-push AC58); NO segundo escritor (AC17); el front NO escribe el archivo directo. AC3 PII+ASCII en el prompt (AC16). AC4 vista de HILO read-only: lee mailbox open+archived filtrado por el agente, muestra prompt+respuestas en orden. AC5 estado de envio + error amable AC72. AC6 off-by-default, #4 byte-id, despertar runtime=Q1 fuera de alcance. El claim del MSG usa grano fino (CLAIMS.json#<id>, ya en el nucleo). maker=Codex/checker=Arquitecto+Analista. NUNCA pilotar contra el log vivo (clon desechable)."

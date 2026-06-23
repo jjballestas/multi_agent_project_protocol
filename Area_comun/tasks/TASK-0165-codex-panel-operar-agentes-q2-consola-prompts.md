@@ -2,7 +2,7 @@
 task_id: TASK-0165
 title: "Proyecto-front: Panel Operar-Agentes Q2 -- consola/compositor de prompts agente-a-agente (accion gobernada mailbox_send + vista de hilo) (SPEC-0088, AC1-AC6)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

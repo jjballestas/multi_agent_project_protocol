@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1404863a2ff42daa9b106c660f95b4b0a4c69d1491e5824c4ecb5adc199fd7eb",
+  "canonical_hash": "0a033a00058605abe41c3ab4b36f27545f04ae76704d4319572a8950c2203cb6",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -333,14 +333,14 @@
       "TASK-0162": 16,
       "TASK-0163": 10,
       "TASK-0164": 27,
-      "TASK-0165": 2,
+      "TASK-0165": 12,
       "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 833,
+    "events_applied": 843,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -880,6 +880,16 @@
       "codex:task-0164:torn-tail:delivery-claim-release": 1450,
       "codex:task-0164:torn-tail:status-in-progress": 1446,
       "codex:task-0164:torn-tail:status-in-review": 1448,
+      "codex:task-0165:claim-acquire": 1505,
+      "codex:task-0165:claim-acquire-delivery": 1508,
+      "codex:task-0165:claim-acquire-go-answered": 1513,
+      "codex:task-0165:claim-acquire-ui": 1507,
+      "codex:task-0165:claim-release-delivery": 1512,
+      "codex:task-0165:claim-release-go-answered": 1514,
+      "codex:task-0165:claim-release-main": 1510,
+      "codex:task-0165:claim-release-ui": 1511,
+      "codex:task-0165:status-in-progress": 1506,
+      "codex:task-0165:status-in-review": 1509,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -1177,5 +1187,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1504
+  "up_to_seq": 1514
 }
