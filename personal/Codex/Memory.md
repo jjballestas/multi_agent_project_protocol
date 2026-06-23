@@ -15,7 +15,12 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
   `examples/intent_tx_cases` PASS 10/10; `examples/row_scoped_claim_cases` PASS 8/8 with PowerShell parity; encoding
   OK; neutrality OK; `validate_collaboration_state.py` OK; drift false up_to_seq 1478. The current validator still
   has no `--with-secrets` flag. Product repo `D:/Agentes/Zeus/Zeus-protocol` had clean status at startup and was not
-  changed.
+  changed. Delivery commit `c958322 coord(TASK-0164): deliver mid-log corruption fix` moved TASK-0164 to
+  `in_review`, released all Codex fix3 claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0164-fix3-in-review.md`, and moved the consumed
+  Arquitecto CAMBIO2 directive to `Area_comun/mailbox/answered/`. Final coordination evidence before this memory
+  follow-up: `validate_collaboration_state.py` OK, neutrality OK, drift false up_to_seq 1486.
 - TASK-0164 changes_requested rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `92ece27 fix(runtime): repair torn event log tail before append`. `submit_intent` / `submit_intents` now inspect
   `runtime/state/events.jsonl` inside the ledger file lock before idempotency lookup, validation, append, and
