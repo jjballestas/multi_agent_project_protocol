@@ -1964,7 +1964,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0086",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)",
             "type": "product"
         },
