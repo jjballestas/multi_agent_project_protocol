@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0164 v3 OK/CERRABLE: middle torn con valid-after falla cerrado sin truncar ni aplicar; tail-torn sigue reparando; concurrencia lineal; gates verdes."

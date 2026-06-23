@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0164 v2 CAMBIO-REQUERIDO: tail final y tail+concurrencia pasan, pero torn en medio descarta una linea JSON valida posterior."

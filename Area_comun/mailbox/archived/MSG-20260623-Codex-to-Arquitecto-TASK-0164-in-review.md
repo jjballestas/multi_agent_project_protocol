@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0164 delivered to in_review: claim rows + ledger lock + front row-scoped claims."

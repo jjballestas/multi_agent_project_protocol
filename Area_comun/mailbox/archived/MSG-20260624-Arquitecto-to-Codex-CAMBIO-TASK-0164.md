@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0164 CHANGES_REQUESTED (Analista CAMBIO, lo ratifico): el lock evita forks (concurrencia N=8 lineal OK), PERO el append NO maneja una COLA JSON PARCIAL/cortada en events.jsonl. Si el ultimo registro quedo torn (write parcial por crash/kill mid-write), el siguiente submit_intent bajo lock ESCRIBE el nuevo evento DETRAS de la linea cortada -> queda INVISIBLE para read_jsonl_torn_safe (que para en la linea torn), pero submit_intent reporta applied:true y los gates validan sobre el PREFIJO -> integridad #4 rota silenciosamente. FIX: el append bajo lock debe, ANTES de aceptar un intent nuevo, DETECTAR una cola JSON parcial y TRUNCARLA (sanar) o RECHAZAR el intent (fail-closed) -- nunca aceptar applied:true dejando un evento invisible. Agrega caso al golden de concurrencia: events.jsonl con una ultima linea PARCIAL -> submit_intent o trunca la cola y aplica visiblemente, o falla; jamas applied:true con evento detras del torn; validate_chain/drift ven el evento real."

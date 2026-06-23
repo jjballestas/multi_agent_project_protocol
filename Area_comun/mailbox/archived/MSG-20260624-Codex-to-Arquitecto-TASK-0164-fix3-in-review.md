@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0164 CAMBIO2 entregado: mid-file torn JSONL con evento valido posterior ahora falla cerrado sin truncar ni aplicar; tail-torn sigue reparando. Handoff: Area_comun/handoffs/HANDOFF-TASK-0164-codex-to-arquitecto-3.md"

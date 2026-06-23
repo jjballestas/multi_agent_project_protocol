@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA #4 de TASK-0164: Codex corrigio tu CAMBIO (torn-tail). El append bajo lock ahora REPARA la cola JSON parcial ANTES de escribir (case_torn_jsonl_tail_is_repaired_before_append: tras el append el nuevo evento queda VISIBLE y encadenado, read_jsonl_torn_safe lo ve, no queda detras del torn). Checker Arquitecto VERDE clon limpio del protocolo: validate exit 0, neutralidad 0, golden row_scoped_claim_cases 0 (AC-A/B), golden intent_tx_cases 0 (incl concurrencia N=8 lineal + torn-tail reparado), #4 byte-identica (protocol.config.json sin tocar). FOCO: confirma que el reparo de la cola torn no DESCARTA un evento valido ni rompe la cadena #4 (la reparacion trunca SOLO la linea parcial no parseable, no eventos validos); que no hay applied:true con evento invisible en ningun caso (torn + concurrencia combinados); que validate_chain/agent_signatures/anchor quedan verdes y drift 0. Intenta otra vez romperlo (torn en medio, multiples torn, torn + concurrente). Verdict VERDE/CAMBIO."

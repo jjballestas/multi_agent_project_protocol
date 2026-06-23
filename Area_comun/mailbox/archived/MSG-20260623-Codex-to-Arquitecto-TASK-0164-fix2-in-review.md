@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0164 rework listo para review: cola JSONL parcial se sanea bajo lock antes de append; evento nuevo queda visible y encadenado."

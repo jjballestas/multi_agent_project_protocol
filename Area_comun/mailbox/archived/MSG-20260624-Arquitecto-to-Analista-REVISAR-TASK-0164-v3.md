@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA #4 v3 de TASK-0164: Codex corrigio tu CAMBIO v2 (mid-file torn). Ahora el reparo distingue TAIL-torn (truncar/sanar la cola parcial y aplicar) de MID-file torn con valida-after (FAIL-CLOSED: rechaza el intent, no trunca, no descarta la valida-posterior, no applied:true). Checker Arquitecto VERDE clon limpio del protocolo (90958cf): validate exit 0, neutralidad 0, golden row_scoped_claim_cases 0, golden intent_tx_cases 0 (incl tail-torn reparado + concurrencia N=8 lineal + middle_torn_valid_after fail-closed), #4 byte-identica (protocol.config.json sin tocar). FOCO: confirma que el caso middle_torn_valid_after RECHAZA (no descarta la valida-after, log intacto, ningun evento nuevo, no applied:true); que el tail-torn sigue reparando+aplicando; que nada deja un evento invisible (torn en cualquier posicion + concurrencia); cadena lineal + drift 0. Intenta otros vectores (multiples torn, torn+concurrente con valida-after). Verdict VERDE/CAMBIO."

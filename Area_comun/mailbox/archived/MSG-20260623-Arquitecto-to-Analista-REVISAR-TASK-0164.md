@@ -4,7 +4,7 @@ task_id: TASK-0164
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA ADVERSARIAL #4 de TASK-0164 (claims grano fino + lock fisico del event-log, DECISION-0059) -- CAMBIO DE NUCLEO. Protocolo origin actualizado; front Zeus 4faacd1. Checker Arquitecto VERDE en CLON LIMPIO del protocolo (745a678): validate con/sin secretos exit 0, encoding/neutralidad 0, golden row_scoped_claim_cases (8: filas distintas no chocan, misma fila si, bare-vs-row compat), golden intent_tx_cases (8 incl case_concurrent_submit_intents_keep_linear_chain: DOS submit_intent concurrentes -> ambos returncode 0, events.jsonl 5 eventos, validate_chain valido, prev_hash LINEAL sin fork, drift 0), #4 byte-identica (protocol.config.json/genesis/registry/keys SIN tocar). FOCO ADVERSARIAL: intenta PROVOCAR un fork de cadena #4 con escritores concurrentes (mas de 2, timing agresivo, o matar un proceso a media escritura) y demuestra que el LOCK (runtime/state/.ledger.lock, msvcrt/fcntl) + la re-lectura de head lo IMPIDE; confirma que validate_chain/agent_signatures/anchor quedan verdes y drift 0; que el grano fino NO debilita la anti-colision (DECISION-0020) -- dos claims sobre la MISMA fila siguen rechazandose; y que la compat (scope bare CLAIMS.json) no abre un hueco. Verdict VERDE/CAMBIO."
