@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-07DD94CE",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Busqueda y filtro por texto en la vista Artifacts RF-3"
+        },
+        {
             "id": "REQ-0873A67C",
             "owner": "Operador",
             "status": "done",

@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-07DD94CE",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "UX: Busqueda y filtro por texto en la vista Artifacts RF-3"
+        },
+        {
             "id": "REQ-11A2A57C",
             "owner": "Operador",
             "phase": "P2",

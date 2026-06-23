@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "Al escribir en el campo de busqueda solo se muestran los items cuyo ID o nombre contenga el texto ingresado (case-insensitive). El filtro actua sin necesidad de pulsar Enter. Al borrar el campo se restauran todos los items. El campo muestra un placeholder que indica como usarlo. El contador de cada seccion (ej: decisions 59) refleja el numero de items visibles tras el filtro.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-07dd94ce-requirement-seed.md",
+            "id": "REQ-07DD94CE",
+            "narrative": "Como operador, quiero un campo de busqueda por texto libre en la vista Artifacts que filtre en tiempo real las listas de decisions, specs, tasks, handoffs y reports, para encontrar un artefacto especifico sin tener que recorrer visualmente listas de 58 a 80 items.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Busqueda y filtro por texto en la vista Artifacts RF-3",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Al pulsar el boton: titulo vacio, narrativa vacia, intencion de aceptacion vacia, proyecto destino en valor por defecto, checkbox PII desmarcado, wizard en paso 1, sin resultados de preview ni submit anteriores visibles.",
             "author": "Operador",
             "endorsement": "none",
