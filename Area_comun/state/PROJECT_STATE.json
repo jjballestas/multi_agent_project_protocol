@@ -505,6 +505,12 @@
             "title": "Proyecto-front (RF-14): subida-para-extraer no exige acceptanceIntent + PII label alineado (AC64-AC65 SPEC-0086)"
         },
         {
+            "id": "TASK-EXTRACT-1F5C13A7B5",
+            "owner": "Arquitecto",
+            "status": "ready",
+            "title": "Extraction request from historias_panel_operar_agentes.md"
+        },
+        {
             "id": "TASK-EXTRACT-DC0E283672",
             "owner": "Arquitecto",
             "status": "done",

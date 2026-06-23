@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "49695d92ae397ffb49674726f77fbc2fd7ef67681211972860fe255aa3924a3c",
+  "canonical_hash": "4beb3496abcbd27862088e8791855fc51d57180894483ee48f0a30d2e10003c4",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -261,12 +261,13 @@
       "TASK-0158": 27,
       "TASK-0159": 8,
       "TASK-0160": 10,
+      "TASK-EXTRACT-1F5C13A7B5": 3,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 661,
+    "events_applied": 664,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -779,6 +780,9 @@
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
+      "front:file-extraction:1F5C13A7B5": 1334,
+      "front:file-extraction:1F5C13A7B5:claim-acquire": 1333,
+      "front:file-extraction:1F5C13A7B5:claim-release": 1335,
       "front:file-extraction:DC0E283672": 1221,
       "front:file-extraction:DC0E283672:claim-acquire": 1220,
       "front:file-extraction:DC0E283672:claim-release": 1222,
@@ -934,5 +938,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1332
+  "up_to_seq": 1335
 }

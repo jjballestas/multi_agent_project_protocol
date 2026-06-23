@@ -5018,6 +5018,22 @@
             "updated_at": "2026-06-23T13:57:59Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
+            "expires_at": "2026-06-23T16:11:20.685Z",
+            "notes": "Front file-intake extraction relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/task-extract-1f5c13a7b5-file-intake.md"
+            ],
+            "started_at": "2026-06-23T16:01:20.685Z",
+            "status": "released",
+            "task_id": "TASK-EXTRACT-1F5C13A7B5",
+            "updated_at": "2026-06-23T16:01:20.685Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-DC0E283672",
             "expires_at": "2026-06-22T18:31:06.453Z",
             "notes": "Front file-intake extraction relay claim.",

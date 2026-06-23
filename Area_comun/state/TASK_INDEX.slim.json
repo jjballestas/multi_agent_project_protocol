@@ -16,6 +16,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-EXTRACT-1F5C13A7B5",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Extraction request from historias_panel_operar_agentes.md"
         }
     ],
     "view": "task_index.slim"
