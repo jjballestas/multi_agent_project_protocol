@@ -217,6 +217,12 @@
             "title": "Indicador vivo/dormido y boton activar/detener por agente"
         },
         {
+            "id": "REQ-E782911A",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Compositor de mensajes del Operador a agentes desde el Mailbox del front RF-2"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "status": "done",
