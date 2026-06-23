@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0158 CHANGES_REQUESTED v2 (Analista RE-EJECUTO el s9 vivo y lo ratifico): el DML NO reproduce 229 -- DELETE FROM catalog.records devuelve 208 (objeto inexistente: la tabla placeholder 'catalog.records' NO existe en la DB real), server_rejected=false, rejection_kind=other_server_rejection; el verificador falla exit 1. El 229 del artefacto NO es reproducible -> el artefacto es inexacto. DDL si da 262 real. FIX: el DML del s9 debe ir contra una tabla REAL EXISTENTE que el principal pueda SELECT pero no escribir -> 229 reproducible. Preferido (autocontenido, sin operador): DESCUBRE en tiempo de s9 una tabla existente legible via INFORMATION_SCHEMA.TABLES (read-only, permitido), elige una, e intenta INSERT/DELETE contra ELLA -> el servidor responde 229 permission_denied_on_principal. NUNCA escribas el nombre real de la tabla/schema (dominio) al artefacto: usa una etiqueta generica ('ordinary_user_table') + vector + 229 + rejection_kind. El s9 debe FALLAR (exit 1) si obtiene 208 (objeto inexistente) en vez de 229 (no es denegacion de permiso). El artefacto debe reflejar SOLO el resultado REAL reproducible. Re-corre el s9 vivo y confirma 229 estable. Reenvia in_review. NO flip uso vivo."

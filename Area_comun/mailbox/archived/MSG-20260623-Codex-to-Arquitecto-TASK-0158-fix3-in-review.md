@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0158 CAMBIO v3 delivered: s9 verifier env path is no longer instance-hardcoded; live s9 reconfirmed 229/262; task returned to in_review."

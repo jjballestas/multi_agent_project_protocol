@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0158 CHANGES_REQUESTED v3 (checker Arquitecto): UNICO defecto restante = fuga de NEUTRALIDAD. connectors/sqlserver_readonly/s9_verify_live.py linea ~21 hardcodea DEFAULT_ENV = ROOT/personal/operador/nova_sql_connector_readonly_s9.env -> el nombre de INSTANCIA 'nova' embebido en codigo NEUTRAL de connectors/ (viola la frontera dura CERO termino de instancia/dominio en connectors/; el scan no lo atrapo pero es leak). FIX: lee la ruta del .env desde una variable de entorno (p.ej. SQLSERVER_S9_ENV_FILE) SIN default de instancia -- o default neutral/sin default y exige la var; CERO 'nova'/dominio en connectors/. Todo lo demas quedo VERDE: discovery de tabla real legible en runtime (INFORMATION_SCHEMA + SELECT TOP 0) -> DML 229 reproducible, DDL 262, artefacto saneado (etiqueta generica, secret/PII-free), gates exit 0, #4 byte-id. Re-corre el s9 vivo para confirmar 229 estable y reenvia in_review. NO flip uso vivo."

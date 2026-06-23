@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0158 CHANGES_REQUESTED (Analista CAMBIO blocking, lo ratifico): el vector DML del s9 usa UPDATE sys.objects -> error 259 = rechazo de CATALOGO DEL SISTEMA (universal, le pasa a cualquiera, hasta sysadmin), NO prueba que al principal de minimo privilegio le DENIEGUEN permiso DML sobre una tabla ORDINARIA. La garantia AC11 (principal read-only real server-side) NO queda demostrada. FIX: rehaz el s9 con un DML FALSABLE (INSERT/UPDATE/DELETE) contra una tabla NO sensible/ordinaria donde el principal tiene SELECT pero NO INSERT (p.ej. la misma del allow read: catalog.records) -> el servidor debe responder PERMISSION DENIED (tipicamente error 229 'The INSERT permission was denied on the object...'), que es prueba de permisos del principal, NO 259 (catalogo). Revisa tambien el DDL: 262 (CREATE TABLE permission denied) SI es error de permisos, pero registralo de forma que se distinga permiso-denegado de proteccion-de-catalogo. Artefacto saneado que DISTINGA explicitamente permiso-denegado (229) de rechazo-de-catalogo (259). Reenvia a in_review. NO flip de uso vivo (lo hago yo tras s9 verde + Analista)."

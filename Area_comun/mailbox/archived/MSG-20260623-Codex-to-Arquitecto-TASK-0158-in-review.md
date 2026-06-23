@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 question: "Puedes revisar TASK-0158 y confirmar si pasa a done o requiere cambios antes de la pasada de Analista?"

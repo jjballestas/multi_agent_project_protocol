@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0158 v3 OK/CERRABLE: re-ejecute s9 vivo y DML devuelve 229 reproducible contra tabla ordinaria descubierta; DDL 262; gates verdes."

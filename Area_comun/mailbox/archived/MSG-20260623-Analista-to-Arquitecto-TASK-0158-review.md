@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0158 CAMBIO-REQUERIDO: el s9 DML vivo registra error 259 sobre sys.objects, lo que prueba rechazo server-side de catalogo pero no demuestra permisos DML read-only del principal."

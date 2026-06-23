@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA PII/secret/egress de TASK-0158 (connector SQL Server backend vivo read-only + s9 server-side, AC11/DECISION-0041). Ancla: protocolo origin 61dc165. Checker Arquitecto VERDE: #4 byte-identica (protocol.config.json sin tocar), connectors.config.json 4 entries enabled:false (off-by-default), connector.py lee credenciales del env GITIGNORED (no hardcode; password=env['SQLSERVER_PASSWORD']), validate/encoding/neutrality/golden connector_sqlserver_readonly_cases todos exit 0. FOCO: (1) el ARTEFACTO Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json es PII-free + SECRET-free de verdad (cero credenciales, cero nombres de schema/tabla/dominio; solo driver+vector+clase/codigo de error: SELECT row_count 1, DML rechazado server 259, DDL rechazado server 262); (2) el backend vivo NO concede autoridad de escritura -- el clasificador read-only queda DELANTE y el SERVIDOR deniega DML/DDL (defensa en profundidad real, no solo cliente); (3) egress: la conexion solo va al SQLSERVER_HOST del env (DB local), sin otra ruta. Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."

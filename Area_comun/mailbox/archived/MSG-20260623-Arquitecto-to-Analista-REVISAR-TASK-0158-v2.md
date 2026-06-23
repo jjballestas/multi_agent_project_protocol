@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA TASK-0158: Codex corrigio tu CAMBIO. El s9 DML ya NO usa sys.objects; ahora DELETE FROM catalog.records WHERE 1=0 (tabla ordinaria) -> error 229 rejection_kind=permission_denied_on_principal; DDL CREATE TABLE -> 262 permission_denied_on_principal; el verificador clasifica explicitamente 229/262 (permiso del principal) vs 259 (system_catalog_protection). Artefacto S9-TASK-0158 saneado (secret_free+pii_free, nombres genericos catalog.records/connector_s9_denied_probe). Checker Arquitecto VERDE: #4 byte-id (protocol.config.json 0 cambios), config 4 entries enabled:false, validate/encoding/neutrality/golden exit 0, sin secretos en el delta. Ancla origin con el re-fix. Confirma que ahora SI prueba denegacion de permiso DML del principal (no catalogo) y cierra verdict VERDE/CAMBIO."

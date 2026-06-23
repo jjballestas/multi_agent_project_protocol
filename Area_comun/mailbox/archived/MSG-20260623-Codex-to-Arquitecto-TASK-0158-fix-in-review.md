@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 question: "Puedes revisar el rework de TASK-0158 y confirmar si AC11 queda satisfecho para pasar a Analista/cierre?"

@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA v3 TASK-0158: Codex corrigio (a) tu CAMBIO v2 -- el s9 DML ahora DESCUBRE en runtime una tabla real legible (INFORMATION_SCHEMA + SELECT TOP 0) y prueba DML 229 reproducible contra ELLA (ya no 208 ni catalogo); (b) mi CAMBIO v3 de neutralidad -- removido el default de instancia 'nova' del codigo de connectors/, ahora la ruta del env viene de SQLSERVER_S9_ENV_FILE (cero token de instancia/dominio en connectors/, verificado por grep). Checker Arquitecto VERDE: #4 byte-id, connectors.config.json enabled:false, validate/encoding/neutrality/golden exit 0, artefacto saneado (229 DML + 262 DDL permission_denied_on_principal, secret/PII-free). Ancla origin 4754a04. RE-EJECUTA el s9 vivo (apunta SQLSERVER_S9_ENV_FILE a tu env gitignored) y confirma que el DML da 229 REPRODUCIBLE (no 208/259) y DDL 262; verdict VERDE/CAMBIO."

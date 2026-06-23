@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0158 (ready): connector SQL Server backend VIVO read-only + s9 SERVER-SIDE (DECISION-0041, AC11 SPEC-0083). El operador provisiono un SQL Server LOCAL con login de MINIMO PRIVILEGIO; credenciales en personal/operador/nova_sql_connector_readonly_s9.env (GITIGNORED, *.env). (1) instala driver real (pymssql pip preferido; documenta el comando), (2) open_live() conecta read-only leyendo el env (NUNCA hardcodear creds), clasificador classify_readonly_sql queda DELANTE, (3) pobla connectors.config.json (entry sqlserver_readonly enabled:false VERSIONADO; live solo via connectors.runtime.json gitignored, espejo AC58), (4) s9: SELECT permitido devuelve filas + intento de ESCRITURA rechazado POR EL SERVIDOR (>=1 DML + >=1 DDL saltando el clasificador cliente -> error de permisos server-side) -> prueba negativa registrada en Area_comun/artifacts/ PII-free y SECRET-free (solo vector+clase de error; CERO credenciales/nombres de dominio). OFF-by-default, #4 byte-identica (protocol.config.json sin tocar), validate con/sin secretos exit 0, neutralidad+encoding 0. NO flipees uso vivo (lo hace el Arquitecto tras s9 verde + Analista). Si el driver no instala -> blocked con la pregunta concreta."

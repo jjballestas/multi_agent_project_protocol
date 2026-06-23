@@ -4,7 +4,7 @@ task_id: TASK-0158
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0158 v2 CAMBIO: el rerun s9 vivo no reproduce DML 229; DELETE catalog.records devuelve 208 objeto inexistente y el verificador falla exit 1."
