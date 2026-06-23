@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend rework v2 delivery.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend rework v3 delivery.
 
 ## Latest Session Note
 
+- TASK-0158 CAMBIO3 neutrality fix landed in `D:/Agentes/multi_agent_project_protocol`:
+  `91f7a0b fix(connectors): remove SQL Server s9 instance env default`. The live s9 verifier no longer hardcodes an
+  instance-specific env file path under `connectors/`; it accepts `--env` or `SQLSERVER_S9_ENV_FILE` and fails closed
+  with a clear error if neither is provided. The refreshed sanitized artifact records live SELECT row_count=1, DML
+  `DELETE ordinary_user_table_zero_rows` rejected with 229, and DDL `CREATE TABLE` rejected with 262, both
+  `permission_denied_on_principal`. Evidence before delivery commit: connectors token grep for
+  `nova|budget|treasury|paycontrol|accounting` no matches, py_compile OK, golden
+  `connector_sqlserver_readonly_cases` PASS, live s9 PASS via gitignored operator env, encoding OK, neutrality OK,
+  `validate_collaboration_state.py` OK, drift false up_to_seq 1278, and no active claims. Delivery wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-4.md`, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-fix3-in-review.md`, moved TASK-0158 back to
+  `in_review`, and released the fix3 Codex claims. No live-use flip was made; `connectors.config.json` remains
+  `enabled:false`.
 - TASK-0158 CAMBIO2 rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `a4b4b3d fix(connectors): discover SQL Server s9 DML table`. The live s9 verifier now discovers a readable
   ordinary base table at runtime via `INFORMATION_SCHEMA.TABLES`, validates `SELECT TOP 0`, executes the DML
