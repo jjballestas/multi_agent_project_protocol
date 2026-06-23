@@ -18,6 +18,14 @@
             "title": "Registrar un worker de producto y enlazarlo a un modelo"
         },
         {
+            "id": "REQ-520BBC1888",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
+        },
+        {
             "id": "REQ-68896287BC",
             "owner": "Operador",
             "phase": "P2",

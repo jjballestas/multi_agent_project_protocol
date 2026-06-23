@@ -55,6 +55,12 @@
             "title": "Registrar un worker de producto y enlazarlo a un modelo"
         },
         {
+            "id": "REQ-520BBC1888",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
+        },
+        {
             "id": "REQ-547C6C54",
             "owner": "Operador",
             "status": "done",
