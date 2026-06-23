@@ -40,6 +40,37 @@ def rejection_kind(error_code: str) -> str:
     return "other_server_rejection"
 
 
+def quote_sqlserver_identifier(value: Any) -> str:
+    text = str(value or "")
+    if not text:
+        raise ValueError("empty SQL Server identifier")
+    return "[" + text.replace("]", "]]") + "]"
+
+
+def discover_readable_table(connector: Any) -> str | None:
+    rows = connector.read_unclassified_for_s9(
+        """
+        SELECT TABLE_SCHEMA, TABLE_NAME
+        FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_TYPE = 'BASE TABLE'
+          AND TABLE_SCHEMA NOT IN ('sys', 'INFORMATION_SCHEMA')
+        ORDER BY TABLE_SCHEMA, TABLE_NAME
+        """
+    )
+    for row in rows:
+        schema = row.get("TABLE_SCHEMA") or row.get("table_schema")
+        table = row.get("TABLE_NAME") or row.get("table_name")
+        if not schema or not table:
+            continue
+        qualified = f"{quote_sqlserver_identifier(schema)}.{quote_sqlserver_identifier(table)}"
+        try:
+            connector.read_unclassified_for_s9(f"SELECT TOP 0 * FROM {qualified}")
+        except Exception:
+            continue
+        return qualified
+    return None
+
+
 def rejected_by_server(exc: BaseException) -> bool:
     text = " ".join(str(item) for item in getattr(exc, "args", ()) or [str(exc)]).lower()
     markers = [
@@ -94,10 +125,20 @@ def main() -> int:
     if len(rows) < 1:
         raise SystemExit("s9 SELECT returned no rows")
 
-    dml_sql = env.get("SQLSERVER_S9_DML_SQL") or "DELETE FROM catalog.records WHERE 1 = 0"
+    dml_sql = env.get("SQLSERVER_S9_DML_SQL")
+    if dml_sql:
+        dml_operation = "DELETE operator_supplied_existing_table"
+    else:
+        discovered_table = discover_readable_table(connector)
+        if discovered_table is None:
+            raise SystemExit(
+                "s9 could not discover a readable base table; provide SQLSERVER_S9_DML_SQL against an existing table"
+            )
+        dml_sql = f"DELETE FROM {discovered_table} WHERE 1 = 0"
+        dml_operation = "DELETE ordinary_user_table_zero_rows"
     ddl_sql = env.get("SQLSERVER_S9_DDL_SQL") or "CREATE TABLE connector_s9_denied_probe (id INT NOT NULL)"
     vectors = [
-        run_vector(connector, "DML", "DELETE ordinary_table_zero_rows", dml_sql),
+        run_vector(connector, "DML", dml_operation, dml_sql),
         run_vector(connector, "DDL", "CREATE TABLE", ddl_sql),
     ]
     if not all(item["server_rejected"] for item in vectors):

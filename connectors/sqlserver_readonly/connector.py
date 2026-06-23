@@ -54,6 +54,12 @@ class LivePymssqlBackend:
         cursor.execute(query)
         self.connection.commit()
 
+    def execute_unclassified_read(self, query: str) -> list[dict[str, Any]]:
+        cursor = self.connection.cursor(as_dict=True)
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        return [dict(row) for row in rows]
+
 
 class SqlServerReadOnlyConnector(Connector):
     def __init__(
@@ -93,6 +99,11 @@ class SqlServerReadOnlyConnector(Connector):
         if not isinstance(self.backend, LivePymssqlBackend):
             raise ConnectorDisabledError("live backend not configured")
         self.backend.execute_unclassified(operation)
+
+    def read_unclassified_for_s9(self, operation: str) -> list[dict[str, Any]]:
+        if not isinstance(self.backend, LivePymssqlBackend):
+            raise ConnectorDisabledError("live backend not configured")
+        return self.backend.execute_unclassified_read(operation)
 
 
 def _parse_bool(value: str | None, *, default: bool = False) -> bool:

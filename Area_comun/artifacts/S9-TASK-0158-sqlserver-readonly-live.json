@@ -4,7 +4,7 @@
   "connector_id": "sqlserver_readonly",
   "driver": "pymssql",
   "driver_install_command": "python -m pip install pymssql",
-  "timestamp_utc": "2026-06-23T00:41:29Z",
+  "timestamp_utc": "2026-06-23T01:00:22Z",
   "select": {
     "server_allowed": true,
     "row_count": 1
@@ -12,7 +12,7 @@
   "write_vectors": [
     {
       "type": "DML",
-      "operation": "DELETE ordinary_table_zero_rows",
+      "operation": "DELETE ordinary_user_table_zero_rows",
       "server_rejected": true,
       "error_class": "OperationalError",
       "error_code": "229",
