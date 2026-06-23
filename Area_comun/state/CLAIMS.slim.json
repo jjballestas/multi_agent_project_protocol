@@ -1,24 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260623-Codex-TASK-0158-fix2-s9",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0158",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0158",
-                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
-                "connectors/sqlserver_readonly/s9_verify_live.py",
-                "Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json",
-                "Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-3.md",
-                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-fix2-in-review.md",
-                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-CAMBIO2-TASK-0158.md",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0158"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

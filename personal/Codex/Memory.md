@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend implementation commit.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend rework v2 delivery.
 
 ## Latest Session Note
 
+- TASK-0158 CAMBIO2 rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `a4b4b3d fix(connectors): discover SQL Server s9 DML table`. The live s9 verifier now discovers a readable
+  ordinary base table at runtime via `INFORMATION_SCHEMA.TABLES`, validates `SELECT TOP 0`, executes the DML
+  negative vector against that real table, and persists only the generic operation label
+  `DELETE ordinary_user_table_zero_rows`. `208` remains an invalid/other server rejection and does not satisfy the
+  s9; DML must prove error `229`, and DDL must prove error `262`, both classified as
+  `permission_denied_on_principal`. The refreshed sanitized artifact
+  `Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json` records the real reproducible 229/262 evidence
+  without credentials or real schema/table names. Evidence before delivery: py_compile for connector/verifier/golden
+  OK, `python examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py` PASS, live s9
+  PASS using a temporary gitignored `connectors.runtime.json`, encoding OK, neutrality OK,
+  `validate_collaboration_state.py` OK, and drift false up_to_seq 1267. Delivery commit
+  `coord(TASK-0158): deliver SQL Server s9 rework v2` moved TASK-0158 to `in_review`, released
+  `CLAIM-20260623-Codex-TASK-0158-fix2-s9`, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-3.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-fix2-in-review.md`. No live-use flip was made;
+  `connectors.config.json` remains `enabled:false`.
 - TASK-0158 changes_requested rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `31e0f23 fix(connectors): prove SQL Server DML permission denial`. The live s9 verifier no longer uses system
   catalog DML as its default negative vector; it records each write vector with `type`, `operation`,
