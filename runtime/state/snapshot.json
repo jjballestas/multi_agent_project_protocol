@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1a32155f3eadc4ebddf93a95bdb223466b5765d05068bf063a5e0f7873abac9f",
+  "canonical_hash": "803f19226b599e5222cb2bab120f01b9535433aae3e65f5c76f24a7bc51d261d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -131,6 +131,8 @@
       "CLAIM-20260623-Codex-TASK-0158-expanded": 1,
       "CLAIM-20260623-Codex-TASK-0158-fix-s9": 1,
       "CLAIM-20260623-Codex-TASK-0158-fix2-s9": 1,
+      "CLAIM-20260623-Codex-TASK-0158-fix3-delivery": 1,
+      "CLAIM-20260623-Codex-TASK-0158-fix3-neutrality": 1,
       "CLAIM-20260623-Codex-TASK-0158-mailbox-fix": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -223,13 +225,13 @@
       "TASK-0155": 12,
       "TASK-0156": 10,
       "TASK-0157": 10,
-      "TASK-0158": 20,
+      "TASK-0158": 24,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 601,
+    "events_applied": 607,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -649,6 +651,12 @@
       "codex:task-0158-fix2-s9:claim-acquire": 1266,
       "codex:task-0158-fix2-s9:claim-release": 1269,
       "codex:task-0158-fix2-s9:in-progress-to-in-review": 1268,
+      "codex:task-0158-fix3-delivery:claim-acquire": 1275,
+      "codex:task-0158-fix3-delivery:claim-release": 1278,
+      "codex:task-0158-fix3:claim-acquire": 1273,
+      "codex:task-0158-fix3:claim-release": 1277,
+      "codex:task-0158-fix3:in-progress-to-in-review": 1276,
+      "codex:task-0158-fix3:status-in-progress": 1274,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -837,5 +845,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1272
+  "up_to_seq": 1278
 }

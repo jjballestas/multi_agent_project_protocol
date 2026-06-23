@@ -4,7 +4,7 @@
   "connector_id": "sqlserver_readonly",
   "driver": "pymssql",
   "driver_install_command": "python -m pip install pymssql",
-  "timestamp_utc": "2026-06-23T01:00:22Z",
+  "timestamp_utc": "2026-06-23T01:10:50Z",
   "select": {
     "server_allowed": true,
     "row_count": 1

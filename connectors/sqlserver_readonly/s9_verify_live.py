@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -18,8 +19,8 @@ from connectors.sqlserver_readonly import load_connector_from_config, live_env
 
 
 CONFIG = ROOT / "connectors" / "connectors.config.json"
-DEFAULT_ENV = ROOT / "personal" / "operador" / "nova_sql_connector_readonly_s9.env"
 DEFAULT_ARTIFACT = ROOT / "Area_comun" / "artifacts" / "S9-TASK-0158-sqlserver-readonly-live.json"
+ENV_FILE_VAR = "SQLSERVER_S9_ENV_FILE"
 
 
 def error_summary(exc: BaseException) -> dict[str, str]:
@@ -110,11 +111,17 @@ def run_vector(connector: Any, vector_type: str, operation: str, sql: str) -> di
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run live SQL Server s9 read-only verification.")
-    parser.add_argument("--env", default=str(DEFAULT_ENV), help="Path to the gitignored SQLSERVER_*.env file.")
+    parser.add_argument(
+        "--env",
+        default=os.environ.get(ENV_FILE_VAR),
+        help=f"Path to the gitignored SQLSERVER_*.env file. Defaults to ${ENV_FILE_VAR}.",
+    )
     parser.add_argument("--config", default=str(CONFIG), help="Connector config path.")
     parser.add_argument("--connector-id", default="sqlserver_readonly", help="Live connector id.")
     parser.add_argument("--artifact", default=str(DEFAULT_ARTIFACT), help="Sanitized artifact output path.")
     args = parser.parse_args()
+    if not args.env:
+        raise SystemExit(f"s9 env file path is required via --env or {ENV_FILE_VAR}")
 
     env = live_env(args.env)
     connector = load_connector_from_config(Path(args.config), args.connector_id, backend=None)
