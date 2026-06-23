@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0164 fine-grained claims and ledger lock implementation.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening implementation.
 
 ## Latest Session Note
 
+- TASK-0164 changes_requested rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `92ece27 fix(runtime): repair torn event log tail before append`. `submit_intent` / `submit_intents` now inspect
+  `runtime/state/events.jsonl` inside the ledger file lock before idempotency lookup, validation, append, and
+  materialization; an invalid JSONL tail is truncated to the last valid line and reported as `log_repair`, so a
+  new event is never accepted behind an invisible torn record. `runtime/eventlog.py` adds
+  `truncate_torn_jsonl_tail`, and `examples/intent_tx_cases` now covers a partial final JSON line followed by a
+  claim release: the repaired append is visible to `read_jsonl_torn_safe`, chain validation stays valid, and drift
+  stays false. Evidence before delivery coordination: `python -m py_compile runtime/eventlog.py
+  runtime/submit_intent.py examples/intent_tx_cases/run_intent_tx_cases.py` OK; `python
+  examples/intent_tx_cases/run_intent_tx_cases.py` PASS 9/9; `python
+  examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py` PASS 8/8 with PowerShell parity; encoding OK;
+  neutrality OK; `validate_collaboration_state.py` OK; drift false up_to_seq 1446; `protocol.config.json`,
+  genesis, agent registry, and keys were not touched. TASK-0164 is currently `in_progress` with
+  `CLAIM-20260624-Codex-TASK-0164-torn-tail` active until delivery is completed.
 - TASK-0164 protocol commits landed in `D:/Agentes/multi_agent_project_protocol`:
   `c4dd413 feat(runtime): serialize ledger writes and row-scope claims` and
   `693ec1a chore(runtime): ignore ledger lock file`. `CLAIMS.json` is now row-scoped for claim intents
