@@ -61,6 +61,12 @@
             "title": "Boton \"Enviar al Arquitecto\" en el Intake"
         },
         {
+            "id": "REQ-CD4CE3F1",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Agrupacion temporal y filtros en la bandeja Mailbox RF-2"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "status": "in_progress",

@@ -776,6 +776,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Los mensajes answered y archived se muestran agrupados bajo encabezados de fecha colapsables. El filtro por direccion muestra solo los mensajes de la direccion seleccionada. Cada grupo colapsado muestra el contador de mensajes que contiene. El grupo del periodo actual (hoy, esta semana) aparece expandido por defecto. Al seleccionar un filtro el agrupamiento temporal se mantiene sobre el subconjunto filtrado.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-cd4ce3f1-requirement-seed.md",
+            "id": "REQ-CD4CE3F1",
+            "narrative": "Como operador, quiero que la bandeja Mailbox agrupe los mensajes answered y archived por periodos de tiempo (hoy, esta semana, este mes, anteriores) y tenga un filtro por direccion de mensaje (Codex a Claude / Claude a Codex), para orientarme rapidamente en 120 mensajes sin tener que recorrer el scroll completo.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Agrupacion temporal y filtros en la bandeja Mailbox RF-2",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "- Antes de crear, el operador elige el MODO: (a) \"Nueva historia digitada\" -> muestra los campos actuales; (b) \"Por carga de archivo\" -> flujo de archivo. En AMBOS modos se validan los campos obligatorios antes de EXECUTE (sin enviar con vacios/placeholder).- Modo archivo: se sube un .md/.txt SIN formato definido; el sistema extrae las historias/casos de uso y genera 1..N requisitos candidatos a partir del contenido.- Los candidatos se muestran en una PESTANA/panel de REVISION donde el operador valida o edita cada uno hasta dejarlo con el formato requerido (titulo + narrativa + intencion + proyecto).- Solo los candidatos VALIDADOS se envian (EXECUTE gobernado) y aterrizan como semillas para SPEC; nada se envia sin validacion del operador.- Se mantienen las guardas: contenido como dato INERTE (nunca ejecutado), PII structural guard + ASCII sobre el texto extraido, allowlist de tipo + limite de tamano, OFF/gated.",
             "author": "Operador",
             "endorsement": "none",
