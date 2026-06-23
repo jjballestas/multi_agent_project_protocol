@@ -192,6 +192,69 @@
   drift 0, neutralidad/encoding y #4 byte-identica verdes. Veredicto + MSG rr=true commiteados y pusheados en
   `85f70d6` (`review(TASK-0157): Analista OK egress PII`). Residuales no bloqueantes: auto-push es egress real a
   `origin` si operador activa override; PII sigue best-effort estructural; scan estatico no es sandbox.
+- TASK-0158 (SQL Server read-only backend vivo + s9 server-side): CAMBIO-REQUERIDO sobre protocolo `61dc165`
+  (veredicto commiteado y pusheado en `a1537c6`). Clon limpio protocolo: golden connector 8/8 exit 0,
+  validate exit 0, neutrality/encoding exit 0, drift 0 `up_to_seq=1255`; clon limpio Zeus HEAD local `2afc944`
+  `npm test` 50/50 exit 0 (no habia commit de producto citado para esta tarea). PASA: artefacto s9 secret/PII-free,
+  off-by-default, clasificador delante del backend, sin escrituras ledger/eventos, egress solo `pymssql.connect`
+  a `SQLSERVER_HOST`. BLOQUEO: el DML default del s9 es `UPDATE sys.objects SET name = name WHERE 1 = 0` y el
+  artefacto registra error `259`, compatible con rechazo de actualizacion de catalogo del sistema, NO prueba
+  permiso DML denegado sobre una tabla/probe ordinaria. Pedi re-ejecutar s9 con INSERT/UPDATE falsable y artefacto
+  saneado que distinga permission denied de rechazo por catalogo antes de cerrar/flippear uso vivo.
+- TASK-0158 v2 (rework s9): CAMBIO-REQUERIDO otra vez, commiteado y pusheado en `9b28efd`. Ancla protocolo
+  `90eea65`, rework `31e0f23`, producto clone limpio `2afc944` `npm test` 50/50 exit 0. Gates protocolo con/sin
+  secretos exit 0, neutralidad/encoding/golden 8/8 exit 0, #4 byte-identica. Hallazgo: re-ejecute s9 vivo con env
+  gitignored del operador y config temporal fuera del repo (`C:/tmp/analista-s9-connectors.runtime.json` habilitando
+  solo `sqlserver_readonly`); `s9_verify_live.py` exit 1 porque el DML no fue rechazo de permisos: `DELETE FROM
+  catalog.records WHERE 1 = 0` devolvio `ProgrammingError` code `208` (objeto inexistente), `server_rejected=false`,
+  `rejection_kind=other_server_rejection`; DDL si dio `262 permission_denied_on_principal`. El artefacto commiteado
+  que declara DML `229` no es reproducible contra el env vivo actual. Pedi no cerrar ni flippear hasta usar una
+  tabla/probe ordinaria existente o `SQLSERVER_S9_DML_SQL` gitignored reproducible que demuestre DML `229`, no `208`.
+- TASK-0158 v3 (2026-06-23): OK/CERRABLE, commiteado y pusheado en `aee5deb`. Ancla protocolo REVIEW `8af01fd`,
+  rework citado `4754a04`, producto Zeus sin commit nuevo citado pero gateado en clon limpio `2afc944` con `npm test`
+  50/50 exit 0. Re-ejecute s9 vivo con env gitignored del operador y config temporal fuera del repo: exit 0, SELECT
+  row_count=1, DML contra tabla ordinaria descubierta en runtime devuelve `229 permission_denied_on_principal`, DDL
+  devuelve `262 permission_denied_on_principal`. Gates protocolo con/sin secretos exit 0, drift 0 up_to_seq=1278,
+  neutralidad/encoding exit 0, golden connector 8/8 exit 0, #4 byte-identica. Residual: s9 prueba el principal y DB
+  viva actuales; el flip read-only sigue siendo accion del Arquitecto bajo GO, no mia.
+- TASK-0159 (2026-06-23): OK/CERRABLE, veredicto commiteado y pusheado en `3a396cc`. Ancla producto
+  `bc8346db385d53d68ce0e92d89307e1e6796bb5b`; protocolo de instruccion `036114c`; handoff/checker citaba
+  `2359251`. Clon limpio producto `npm test` 52/52 exit 0. Payloads propios: loopback-only acepta
+  `127.0.0.1`/`https://localhost` y rechaza decimal/octal/hex/external/suffix/userinfo/IPv4-mapped/HTTPS-IP;
+  extraccion deterministic-local crea candidatas solo en store OS tmp, no en `TASK_INDEX`; aprobacion sin
+  `piiReviewed` da 409; aprobacion con PII estructural redacta NIT/SQL; `actorId`/`intents`/route state y execute
+  no permitido no devuelven 200. UI extraida de `public/app.js`: nota usa extensiones reales, completed-empty/failed
+  renderizan error rojo y candidato HTML queda escapado. Gates protocolo con/sin secretos exit 0, drift 0
+  `up_to_seq=1304`, neutralidad/encoding exit 0, #4 byte-identica antes del veredicto. Residuales: PII best-effort,
+  loopback guard no es sandbox, razones de error futuras deben seguir server-bounded.
+- TASK-0160 (2026-06-23): OK/CERRABLE, veredicto commiteado y pusheado en `0801c12`. Ancla producto `a3c5f26`
+  + protocolo `d8892f8`. Clon limpio producto `npm test` 52/52 exit 0; targeted behavior file-ingestion/local-vlm/
+  candidate-approval exit 0. Payloads propios contra servidor temporal + protocolo clonado: `piiAcknowledged=false`
+  al extraer da 409, `acceptanceIntent=""` con PII ack da 200 y crea `TASK-EXTRACT-*` triage/ready, extractor sin
+  consentimiento da 409, con consentimiento da 200 y no mete candidatas en `TASK_INDEX`, aprobacion de candidata sin
+  `piiReviewed` da 409. Targeted test cubre candidata firmada sin `acceptanceIntent` -> 400. Gates protocolo con/sin
+  secretos exit 0, drift 0 `up_to_seq=1324`, neutralidad/encoding exit 0, #4 `protocol.config.json` byte-identica.
+  Residuales: PII best-effort; loopback guard no es sandbox; mi payload deterministic-local devolvio extraction
+  failed/cero candidatas pero probo no-ledger y consentimiento.
+- TASK-0161 (2026-06-23): OK/CERRABLE, veredicto commiteado y pusheado en `92d5f1a`. Ancla producto
+  `109d03976e526ffe01aad512756d22aa1a9a892f` + protocolo `e02df27467d3be37870a5b0e2aa1131fb56005a6`.
+  Clon limpio producto: primera corrida `npm test` timeout exit 124 a 184s; segunda exit 0 54/54. Targeted behavior
+  `auto commit push treats|local-vlm extractor reports|candidate review stays|local-vlm extractor is loopback-only`
+  exit 0 4/4. Payload propio black-box contra server temporal + protocolo clonado: re-submit del mismo archivo
+  devuelve `noop=true`, `landed=true`, `primaryOutputId` estable, sin commit/push nuevo (HEAD y remote iguales);
+  extraccion posterior sigue gobernada y `networkEgress=loopback-only`; HTTP 503 con cuerpo secret/PII/SQL queda
+  saneado a `local-vlm endpoint returned HTTP 503`; timeout 600000ms + `keep_alive=45m`; matriz loopback rechaza
+  decimal/octal/hex/externos/sufijos/IPv4-mapped/leading-zero y acepta localhost/127.* /[::1]/https localhost.
+  Gates protocolo con/sin secretos exit 0, drift 0, neutralidad/encoding exit 0. Residuales: PII best-effort,
+  loopback-only no es sandbox; primer `npm test` fue timeout local pero repeticion completa verde.
+- TASK-0162 (2026-06-23): OK/CERRABLE, veredicto commiteado y pusheado en `962eb6b`. Ancla producto
+  `1b97c6bb39e54de8e28301f5885f8347385c8813` + protocolo `b3f8b7c4fc241cc9665a2b9a578840b990b454cb`.
+  Clon limpio producto `npm test` exit 0 55/55; targeted `candidate review stays outside the ledger|AC69-AC71`
+  exit 0 2/2. Payload propio black-box contra server temporal + protocolo clonado: approve sin `piiReviewed`
+  devuelve 409; approve con PII revisada devuelve 200 por `submit_intent`; discard devuelve 200; candidatas
+  `CAND-*` no entran en `TASK_INDEX`; requisito publicado redacted; drift false. Gates protocolo con/sin secretos
+  exit 0, drift 0 `up_to_seq=1374`, neutralidad/encoding exit 0, #4 byte-identica antes del veredicto. Residuales:
+  PII best-effort; AC69/AC70 no son pixel-perfect; store no-ledger depende de firma/provenance ya cubierta.
 
 ## Lecciones no-obvias (persisten)
 - **CLON LIMPIO + EXIT CODE + corro la suite YO (no asumo al maker).** Reproduzco en un tmp en C:, no in-place.
@@ -271,8 +334,32 @@
   mailbox/open inbound a Analista (REVIEW/REVISAR del Arquitecto) -> pasada adversarial -> entrego.
 - (Historico: trio off-pilot v1.9.1-1.9.3, Carril A activacion #4, satelite protocol_research DECISION-0035 --
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
-## Ultima pasada (2026-06-24)
-- TASK-0164 v2: CAMBIO-REQUERIDO, veredicto commiteado en `78d4868`
+
+## Ultima pasada (2026-06-23)
+- TASK-0163 (ledger-busy friendly message AC72): OK/CERRABLE. Producto `d1de0c1`, protocolo ancla
+  `e668cd0`; veredicto commiteado y pusheado en `c270ee4` (`review(TASK-0163): Analista OK ledger busy`).
+  Clon limpio producto `npm test` exit 0, 57/57; targeted behavior AC72/no-bypass/file/candidate/intake exit 0,
+  6/6. Payloads propios sobre funciones extraidas: 6 familias de contencion (`claim acquire overlaps active
+  claim`, `overlaps active claim`, `active claim`, `ledger busy`, `concurrent ledger`, `contention`) dieron
+  body saneado `{error:"ledger-busy", code:"ledger-busy", retryable:true}` y front `Canal ocupado, intente mas
+  tarde`; 3 errores tecnicos con traceback/comando/secret/path dieron `{error:"submit_intent failed"}` sin fuga.
+  Gates protocolo con/sin secretos exit 0, drift 0 `up_to_seq=1388`, neutralidad/encoding exit 0, `protocol.config.json`
+  byte-identico sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
+  Residual no bloqueante: matcher amplio de "active claim" puede clasificar un error ambiguo como ledger-busy;
+  no filtra argv/traceback ni abre bypass, solo reduce diagnostico publico.
+- TASK-0164 (2026-06-23): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `e3ada6b`
+  (`review(TASK-0164): Analista requires torn write hardening`). Ancla protocolo implementacion `745a678`,
+  instruccion `346dd00`, producto Zeus `4faacd1`. Clon limpio Zeus `npm test` exit 0, 57/57; protocolo limpio
+  row_scoped_claim_cases 8/8 exit 0, intent_tx_cases 8/8 exit 0, validate sin secretos exit 0; repo vivo validate
+  con secretos exit 0, neutralidad/encoding exit 0, chain/agent_signatures/anchor validos y drift 0 `up_to_seq=1435`,
+  `protocol.config.json` byte-identico sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
+  PASA concurrencia normal N=8: 8 procesos `submit_intent.py --intents` sobre 8 tareas/claims distintos -> todos
+  returncode 0, 17 eventos esperados/leidos, prev_hash lineal, drift 0, todas las tareas in_progress. SLIP nuevo:
+  al simular cola JSON parcial en `runtime/state/events.jsonl` (`{"seq":999`) y luego ejecutar `submit_intent`, la
+  llamada devuelve `applied:true`/`event_seq=2`, pero `read_jsonl_torn_safe` sigue leyendo solo el prefijo (1 evento),
+  el nuevo evento queda invisible pegado a la cola rota, `TASK_INDEX` no cambia y `validate_chain`/drift quedan verdes
+  sobre el prefijo. Requiere hardening: bajo lock detectar/truncar cola rota o fallar duro antes de reportar exito.
+- TASK-0164 v2 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `78d4868`
   (`review(TASK-0164): Analista requires middle torn guard`). Ancla protocolo `232dcc3`, fix2 `92ece27`,
   producto Zeus `4faacd1`. Clon limpio Zeus `npm test`: corrida 1 exit 1 por AC50 readiness (`server did not
   become ready` aunque imprimio listening), corrida 2 exit 0 57/57. Protocolo limpio: row_scoped_claim_cases 8/8,
@@ -284,3 +371,15 @@
   + `after`) hace que `truncate_torn_jsonl_tail` trunque desde el prefijo y DESCARTE la linea valida `after`.
   Incumple "truncar SOLO la ultima linea parcial" y "no descartar eventos validos"; pedir fail-hard o cuarentena
   cuando la linea invalida no sea la ultima linea no vacia.
+- TASK-0164 v3 (2026-06-24): OK/CERRABLE, veredicto commiteado y pusheado en `d3fa46a`
+  (`review(TASK-0164): Analista OK mid torn v3`). Ancla protocolo citada `90958cf`, fix3 `434b2e9`, producto Zeus
+  `4faacd1` (la instruccion v3 no cito commit de producto nuevo; use el ultimo anclado para TASK-0164). Clon limpio
+  Zeus `npm test` exit 0, 57/57; protocolo limpio row_scoped_claim_cases 8/8, intent_tx_cases 10/10, validate sin
+  secretos exit 0; repo vivo validate con secretos exit 0; neutrality/encoding exit 0; drift vivo 0 `up_to_seq=1486`;
+  #4 `protocol.config.json` byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Payloads propios: middle torn JSON + valid-after -> falla cerrado, bytes intactos, valid-after preservado, evento
+  nuevo ausente; middle non-object `[]` + valid-after -> idem; tail-torn final -> `applied=true`, `log_repair`,
+  evento visible, chain valid, drift false; tail-torn + 4 writers concurrentes -> returncodes `[0,0,0,0]`, un solo
+  repair, 10 eventos visibles, prev_hash lineal, drift false; mid-torn + 2 writers concurrentes -> returncodes
+  `[1,1]`, error de integridad, bytes intactos, sin claims nuevos. Residual: `read_jsonl_torn_safe` sigue leyendo
+  prefijo ante corrupcion media, pero el writer `submit_intent` ya no cierra falso porque falla cerrado bajo lock.
