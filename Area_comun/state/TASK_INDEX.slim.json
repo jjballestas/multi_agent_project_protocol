@@ -18,6 +18,14 @@
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
+            "id": "REQ-9442785DD6",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Indicador vivo/dormido y boton activar/detener por agente"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "phase": "P2",
