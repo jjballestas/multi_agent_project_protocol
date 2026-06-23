@@ -4467,6 +4467,24 @@
             "updated_at": "2026-06-23T03:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-changes3-0158",
+            "expires_at": "2026-06-23T09:00:00Z",
+            "notes": "TASK-0158 in_review->changes_requested v3 (checker Arquitecto): fuga de neutralidad -- s9_verify_live.py hardcodea DEFAULT_ENV con el nombre de instancia 'nova' (personal/operador/nova_sql_connector_readonly_s9.env) en codigo neutral de connectors/. Fix: leer la ruta del env desde una variable de entorno (p.ej. SQLSERVER_S9_ENV_FILE) sin default de instancia (o default neutral); CERO 'nova'/dominio en connectors/. Lo demas verde (discovery de tabla real, gates, artefacto saneado 229/262, #4 byte-id).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T03:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T03:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-close-0157",
             "expires_at": "2026-06-23T05:00:00Z",
             "notes": "Close TASK-0157 in_review->done (checker Arquitecto, maker=Codex): Zeus 2afc944 reproducido VERDE en clon limpio (node --test exit 0), AC55-AC58 fieles, #4 byte-identica (protocol.config.json sin tocar), validate con/sin secretos exit 0, drift 0; Analista OK/CERRABLE (AC58 auto-push no es 2do escritor, off-by-default intacto, sin fuga secretos/PII; carry AC52/43/16).",
