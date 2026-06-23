@@ -4449,6 +4449,24 @@
             "updated_at": "2026-06-23T02:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-changes2-0158",
+            "expires_at": "2026-06-23T09:00:00Z",
+            "notes": "TASK-0158 in_review->changes_requested (Analista CAMBIO v2): el s9 vivo NO reproduce DML 229; DELETE catalog.records -> 208 objeto inexistente (placeholder no existe en la DB real), server_rejected=false. Fix: DML contra tabla REAL existente (descubierta via INFORMATION_SCHEMA, sin filtrar nombre de dominio al artefacto) -> 229 reproducible; el s9 debe FALLAR si obtiene 208 (no es denegacion de permiso). Artefacto refleja el resultado REAL reproducible.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T03:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T03:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-close-0157",
             "expires_at": "2026-06-23T05:00:00Z",
             "notes": "Close TASK-0157 in_review->done (checker Arquitecto, maker=Codex): Zeus 2afc944 reproducido VERDE en clon limpio (node --test exit 0), AC55-AC58 fieles, #4 byte-identica (protocol.config.json sin tocar), validate con/sin secretos exit 0, drift 0; Analista OK/CERRABLE (AC58 auto-push no es 2do escritor, off-by-default intacto, sin fuga secretos/PII; carry AC52/43/16).",
