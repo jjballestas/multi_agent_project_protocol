@@ -473,6 +473,40 @@ def case_torn_jsonl_tail_is_repaired_before_append() -> None:
         assert protocol_state_drift(root)["has_drift"] is False
 
 
+def case_middle_torn_jsonl_with_valid_after_fails_closed() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-middle-torn-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        log_path = root / "runtime/state/events.jsonl"
+        before_bytes = log_path.read_bytes()
+        before_events = read_jsonl_torn_safe(log_path)
+        assert len(before_events) == 1, before_events
+        valid_after = {**before_events[0], "seq": 999, "idempotency_key": "tx-fixture:valid-after-torn"}
+        with log_path.open("ab") as handle:
+            handle.write(b'{"seq":998,"type":"intent.applied"\n')
+            handle.write(json.dumps(valid_after, ensure_ascii=False, sort_keys=True).encode("utf-8") + b"\n")
+        corrupted_bytes = log_path.read_bytes()
+
+        try:
+            submit_intent(
+                root,
+                "Codex",
+                {"claim": {"op": "release", "claim_id": CLAIM_ID, "idempotency_key": "tx-fixture:middle-torn"}},
+                timestamp=TIMESTAMP,
+                commit=COMMIT,
+            )
+        except Exception as exc:
+            assert "invalid JSONL line" in str(exc), exc
+            assert "refusing to truncate mid-file corruption" in str(exc), exc
+        else:
+            raise AssertionError("middle torn JSONL with valid event after it must fail closed")
+
+        assert log_path.read_bytes() == corrupted_bytes
+        assert event_count(root) == len(before_events)
+        assert b"tx-fixture:middle-torn" not in log_path.read_bytes()
+        assert before_bytes in corrupted_bytes
+
+
 def case_powershell_wrappers_parity_if_available() -> None:
     shell = shutil.which("pwsh") or shutil.which("powershell")
     if not shell:
@@ -544,6 +578,7 @@ def main() -> int:
         case_claim_rows_allow_distinct_and_reject_same,
         case_concurrent_submit_intents_keep_linear_chain,
         case_torn_jsonl_tail_is_repaired_before_append,
+        case_middle_torn_jsonl_with_valid_after_fails_closed,
         case_powershell_wrappers_parity_if_available,
     ]
     failures = []

@@ -60,12 +60,16 @@ def read_jsonl_torn_safe(path: Path) -> list[dict[str, Any]]:
     return events
 
 
+class EventLogIntegrityError(RuntimeError):
+    pass
+
+
 def truncate_torn_jsonl_tail(path: Path) -> dict[str, Any] | None:
     """Remove an invalid JSONL tail so future appends stay visible to torn-safe readers."""
     if not path.exists():
         return None
 
-    valid_end = 0
+    records: list[dict[str, Any]] = []
     offset = 0
     line_number = 0
     data = path.read_bytes()
@@ -74,36 +78,46 @@ def truncate_torn_jsonl_tail(path: Path) -> dict[str, Any] | None:
         next_offset = offset + len(raw_line)
         stripped = raw_line.strip()
         if not stripped:
-            valid_end = next_offset
+            records.append({"valid": True, "end": next_offset, "blank": True})
             offset = next_offset
             continue
         try:
             decoded = raw_line.decode("utf-8-sig" if offset == 0 else "utf-8")
             event = json.loads(decoded)
         except (UnicodeDecodeError, json.JSONDecodeError):
-            with path.open("r+b") as handle:
-                handle.truncate(valid_end)
-                handle.flush()
-                os.fsync(handle.fileno())
-            return {
-                "path": str(path),
-                "line": line_number,
-                "truncated_bytes": len(data) - valid_end,
-                "valid_bytes": valid_end,
-            }
+            records.append({"valid": False, "line": line_number, "end": next_offset, "blank": False})
+            offset = next_offset
+            continue
         if not isinstance(event, dict):
-            with path.open("r+b") as handle:
-                handle.truncate(valid_end)
-                handle.flush()
-                os.fsync(handle.fileno())
-            return {
-                "path": str(path),
-                "line": line_number,
-                "truncated_bytes": len(data) - valid_end,
-                "valid_bytes": valid_end,
-            }
-        valid_end = next_offset
+            records.append({"valid": False, "line": line_number, "end": next_offset, "blank": False})
+            offset = next_offset
+            continue
+        records.append({"valid": True, "end": next_offset, "blank": False})
         offset = next_offset
+
+    valid_end = 0
+    for index, record in enumerate(records):
+        if record["valid"]:
+            valid_end = int(record["end"])
+            continue
+        has_later_valid_event = any(
+            later["valid"] and not later.get("blank", False) for later in records[index + 1 :]
+        )
+        if has_later_valid_event:
+            raise EventLogIntegrityError(
+                f"event log integrity error: invalid JSONL line {record['line']} has valid event records after it; "
+                "refusing to truncate mid-file corruption"
+            )
+        with path.open("r+b") as handle:
+            handle.truncate(valid_end)
+            handle.flush()
+            os.fsync(handle.fileno())
+        return {
+            "path": str(path),
+            "line": record["line"],
+            "truncated_bytes": len(data) - valid_end,
+            "valid_bytes": valid_end,
+        }
     return None
 
 
