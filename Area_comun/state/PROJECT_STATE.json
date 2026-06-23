@@ -85,6 +85,12 @@
             "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
         },
         {
+            "id": "REQ-7857CDE9",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14"
+        },
+        {
             "id": "REQ-829CBFCE",
             "owner": "Operador",
             "status": "cancelled",

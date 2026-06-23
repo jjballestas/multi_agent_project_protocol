@@ -424,6 +424,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "El modal ocupa al menos 80% del viewport. Las textareas de Narrativa e Intencion de aceptacion tienen rows minimo 8 y se ven completas sin scroll interno. El wizard de 4 pasos y los botones Preview dry_run y EXECUTE SUBMIT_INTENT son visibles sin scrollear el modal. Al confirmar o cancelar el modal se cierra y el panel Intake muestra el requisito recien creado en Mis requisitos. El estado del formulario se conserva si el operador cierra sin enviar.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-7857cde9-requirement-seed.md",
+            "id": "REQ-7857CDE9",
+            "narrative": "Como operador, quiero que al hacer click en Nueva historia/requisito se abra un modal fullscreen en lugar de usar el panel lateral derecho actual, para tener mas espacio al escribir narrativa e intencion de aceptacion sin hacer scroll dentro del formulario.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "El boton debe mostrar su etiqueta en una sola linea sin saltos de texto, tener altura consistente con los demas elementos de la fila, y respetar el sistema de estilos de la consola. Puede incluir un icono + antes del texto para reforzar su funcion de creacion.",
             "author": "Operador",
             "endorsement": "none",

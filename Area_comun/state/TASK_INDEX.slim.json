@@ -34,6 +34,14 @@
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
+            "id": "REQ-7857CDE9",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14"
+        },
+        {
             "id": "REQ-885632826E",
             "owner": "Operador",
             "phase": "P2",
