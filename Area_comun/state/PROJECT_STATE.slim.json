@@ -115,6 +115,12 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
+            "id": "TASK-0165",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: Panel Operar-Agentes Q2 consola/compositor de prompts (mailbox_send + hilo) (SPEC-0088)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",

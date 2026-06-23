@@ -2345,6 +2345,19 @@
             "type": "protocol"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0165-codex-panel-operar-agentes-q2-consola-prompts.md",
+            "id": "TASK-0165",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0088",
+            "status": "ready",
+            "title": "Proyecto-front: Panel Operar-Agentes Q2 consola/compositor de prompts (mailbox_send + hilo) (SPEC-0088)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
