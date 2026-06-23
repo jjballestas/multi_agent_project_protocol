@@ -4,6 +4,23 @@ Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend 
 
 ## Latest Session Note
 
+- TASK-0158 changes_requested rework implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `31e0f23 fix(connectors): prove SQL Server DML permission denial`. The live s9 verifier no longer uses system
+  catalog DML as its default negative vector; it records each write vector with `type`, `operation`,
+  `error_code`, `error_class`, and `rejection_kind`, and hard-fails unless both DML and DDL prove
+  `permission_denied_on_principal`. The refreshed sanitized artifact
+  `Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json` now records DML `DELETE ordinary_table_zero_rows`
+  rejected server-side with error `229` and DDL `CREATE TABLE` rejected with error `262`, both classified as
+  principal permission denial; no credentials or sensitive table names are in the artifact. Evidence before this
+  memory update: live s9 PASS using a one-shot process env override for the real ordinary table DML, `python -m
+  py_compile` for connector/verifier/golden OK, `python examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py`
+  PASS, encoding OK, neutrality OK, `validate_collaboration_state.py` OK, and drift false up_to_seq 1260. Delivery
+  commit `coord(TASK-0158): deliver SQL Server s9 rework` wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-fix-in-review.md`, moved TASK-0158 back to
+  `in_review`, and released `CLAIM-20260623-Codex-TASK-0158-fix-s9`. Final protocol evidence before this memory
+  amendment: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1262, and
+  golden `connector_sqlserver_readonly_cases` PASS.
 - TASK-0158 protocol implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `e61f0ae feat(connectors): add SQL Server live readonly backend`. The SQL Server connector now has a
   real `pymssql` live backend loaded from gitignored `SQLSERVER_*` env values, keeps
