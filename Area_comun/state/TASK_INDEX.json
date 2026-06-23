@@ -701,6 +701,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "Las tarjetas del kanban muestran un chip de prioridad con color diferenciado: high en amarillo/naranja, normal en gris neutro. El estado de la tarjeta tiene un color semantico consistente con los badges de la barra de integridad. Las tarjetas con prioridad high tienen una marca visual (borde izquierdo o badge) que las distingue incluso en la columna done. El estilo de los chips es coherente con el sistema de badges existente en la app (mismo border-radius, fuente, escala).",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-a4b9fe80-requirement-seed.md",
+            "id": "REQ-A4B9FE80",
+            "narrative": "Como operador, quiero que las tarjetas del kanban en Backlog muestren el estado (proposed, ready, in_progress, in_review, done) y la prioridad (normal, high) como chips o badges con color en lugar de texto plano gris, para distinguir de un vistazo las tarjetas urgentes o activas sin leer el texto de cada una.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
             "author": "Operador",
             "delivered_by": "TASK-0138",

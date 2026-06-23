@@ -145,6 +145,12 @@
             "title": "UX: Filtros en Ledger #4 por actor y tipo de evento"
         },
         {
+            "id": "REQ-A4B9FE80",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1"
+        },
+        {
             "id": "REQ-B65E7802",
             "owner": "Operador",
             "status": "done",

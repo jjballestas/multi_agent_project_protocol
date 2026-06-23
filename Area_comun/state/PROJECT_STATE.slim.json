@@ -61,6 +61,12 @@
             "title": "Boton \"Enviar al Arquitecto\" en el Intake"
         },
         {
+            "id": "REQ-A4B9FE80",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1"
+        },
+        {
             "id": "REQ-CD4CE3F1",
             "owner": "Operador",
             "status": "proposed",
