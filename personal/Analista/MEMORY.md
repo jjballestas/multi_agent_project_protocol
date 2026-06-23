@@ -336,6 +336,19 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-23)
+- TASK-0165 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `8e163cf`
+  (`review(TASK-0165): Analista requires mailbox prompt hardening`). Ancla producto `1493f86` + protocolo
+  `7d1199020a4245ee7d743ac8623449bc3d273a5a`. Clon limpio producto `npm test`: corrida 1 exit 1 por fallo
+  ajeno local-vlm `127.0.0.5 must be accepted`, corrida 2 exit 0 58/58. Payloads propios contra servidor temporal:
+  dry-run `mailbox-send` exit 200, `noPiiAck=409`, `badAgent=400`, `actorInjection=400`, `intentsInjection=400`;
+  actor server-side `Arquitecto`, `directLedgerWrites:false`, transaction solo claim acquire/release file-scoped y
+  `mailboxWrites`. SLIP bloqueante 1: el MSG generado tiene `requires_response: true` sin `requested_action` ni
+  `question`; al materializarlo en copia limpia, `validate_collaboration_state.py --root <tmp>` sale 1. SLIP
+  bloqueante 2: `public/app.js::redactRequirementText` usado por `buildAgentThread` no redacta email/telefono/
+  documento/nombre propio aunque el backend `redactPublicText` si cubre esa familia; payload propio dejo visibles
+  `persona@example.com`, `+57 300 123 4567`, `cedula 123456789` y `Juan Perez`. Gates protocolo con/sin secretos
+  exit 0, drift 0 `up_to_seq=1514`, neutralidad/encoding exit 0, #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0163 (ledger-busy friendly message AC72): OK/CERRABLE. Producto `d1de0c1`, protocolo ancla
   `e668cd0`; veredicto commiteado y pusheado en `c270ee4` (`review(TASK-0163): Analista OK ledger busy`).
   Clon limpio producto `npm test` exit 0, 57/57; targeted behavior AC72/no-bypass/file/candidate/intake exit 0,
