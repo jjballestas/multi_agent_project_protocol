@@ -261,6 +261,44 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "el prompt se envia como un mensaje gobernado al mailbox (destino: el agente elegido, canal ASCII, texto sensible redactado); el front muestra el hilo de conversacion (mi prompt mas las respuestas del agente) leyendo el mailbox; ningun mensaje escribe estado ni ledger fuera de submit_intent.",
+            "author": "Operador",
+            "candidate_pii_screening": {
+                "channel": "ascii",
+                "detector_version": "pii-screen-v1",
+                "finding_count": 0,
+                "finding_types": [],
+                "findings": [],
+                "guaranteed": false,
+                "mode": "best_effort"
+            },
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-68896287bc-requirement-seed.md",
+            "id": "REQ-68896287BC",
+            "narrative": "Como operador, quiero seleccionar un agente (Arquitecto, Codex, Analista o un worker) de un combo y enviarle un prompt escrito, y ver su respuesta dentro del front, para dirigir a los agentes sin abrir VS Code ni la terminal.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "source_provenance": {
+                "candidate_pre_edit_hash": "d172a65982d5f7c15f31a2e55b6c2f8e5c022c27dede7c244d64420505ff2871",
+                "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
+                "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
+            },
+            "status": "proposed",
+            "title": "Consola de prompts agente-a-agente desde el front",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Tras un commit nuevo al repo, el servidor deberia detectar el cambio (via git poll o watcher) y actualizar el estado canonico que sirve a la UI sin requerir reinicio manual. El Ledger SEQ, backlog y artefactos deben reflejar el nuevo HEAD automaticamente.",
             "author": "Operador",
             "endorsement": "none",

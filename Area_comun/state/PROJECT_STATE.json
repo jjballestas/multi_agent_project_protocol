@@ -55,6 +55,12 @@
             "title": "Bug: el Intake crea un requerimiento fantasma desde texto de ejemplo/placeholder"
         },
         {
+            "id": "REQ-68896287BC",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Consola de prompts agente-a-agente desde el front"
+        },
+        {
             "id": "REQ-6D80DB17",
             "owner": "Operador",
             "status": "done",

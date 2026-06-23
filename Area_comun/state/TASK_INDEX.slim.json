@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-68896287BC",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Consola de prompts agente-a-agente desde el front"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "phase": "P2",
