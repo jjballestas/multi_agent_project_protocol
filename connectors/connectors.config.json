@@ -26,6 +26,31 @@
       }
     },
     {
+      "id": "sqlserver_readonly",
+      "kind": "sqlserver_readonly",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false,
+        "access": {
+          "allow": {
+            "schemas": [
+              "connector"
+            ],
+            "objects": [
+              "connector.probe"
+            ]
+          }
+        },
+        "live_connection": {
+          "principal_least_privilege_required": true,
+          "operator_go_required": true,
+          "s9_verification_required": true
+        }
+      }
+    },
+    {
       "id": "fixture-git-ro",
       "kind": "git_readonly",
       "enabled": false,

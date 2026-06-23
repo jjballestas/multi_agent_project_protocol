@@ -19,3 +19,4 @@ secrets/
 # Connector / operator credentials -- NEVER commit secrets (hard boundary, AGENTS.md s4)
 *.env
 personal/operador/*.env
+connectors/*.runtime.json

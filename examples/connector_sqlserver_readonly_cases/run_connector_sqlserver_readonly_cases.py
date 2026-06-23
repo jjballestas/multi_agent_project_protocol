@@ -7,6 +7,7 @@ import ast
 import hashlib
 import json
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -15,7 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from connectors.framework import ConnectorDisabledError, ReadOnlyDeniedError
-from connectors.sqlserver_readonly import FixtureBackend, load_connector_from_config
+from connectors.sqlserver_readonly import FixtureBackend, load_connector_from_config, resolve_config_path
 
 
 CONFIG = ROOT / "connectors" / "connectors.config.json"
@@ -141,6 +142,61 @@ def case_ac5_off_by_default() -> dict[str, Any]:
     raise AssertionError("live path did not fail closed")
 
 
+def case_ac5_runtime_override_preferred() -> dict[str, Any]:
+    with tempfile.TemporaryDirectory() as raw_dir:
+        base = Path(raw_dir)
+        config = base / "connectors.config.json"
+        runtime = base / "connectors.runtime.json"
+        config.write_text(
+            json.dumps(
+                {
+                    "schema_version": "connectors.config.v1",
+                    "connectors": [
+                        {
+                            "id": "sqlserver_readonly",
+                            "kind": "sqlserver_readonly",
+                            "enabled": False,
+                            "trust_boundary": {
+                                "read_only": True,
+                                "grants_no_authority": True,
+                                "persists_outputs": False,
+                                "access": {"allow": {"schemas": ["connector"], "objects": ["connector.probe"]}},
+                                "live_connection": {"principal_least_privilege_required": True},
+                            },
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        runtime.write_text(
+            json.dumps(
+                {
+                    "schema_version": "connectors.config.v1",
+                    "connectors": [
+                        {
+                            "id": "sqlserver_readonly",
+                            "kind": "sqlserver_readonly",
+                            "enabled": True,
+                            "trust_boundary": {
+                                "read_only": True,
+                                "grants_no_authority": True,
+                                "persists_outputs": False,
+                                "access": {"allow": {"schemas": ["connector"], "objects": ["connector.probe"]}},
+                                "live_connection": {"principal_least_privilege_required": True},
+                            },
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        assert resolve_config_path(config) == runtime
+        c = load_connector_from_config(config, "sqlserver_readonly", backend=FixtureBackend({"SELECT 1": [{"ok": 1}]}))
+        assert c.enabled is True
+    return {"case": "AC11-runtime-override-preferred", "status": "pass"}
+
+
 def case_ac6_genesis_config_separate() -> dict[str, Any]:
     protocol_config = json.loads((ROOT / "protocol.config.json").read_text(encoding="utf-8-sig"))
     assert "connectors" not in protocol_config
@@ -164,6 +220,7 @@ def main() -> int:
         case_ac3_negative_vectors(),
         case_ac4_no_authority_gate(),
         case_ac5_off_by_default(),
+        case_ac5_runtime_override_preferred(),
         case_ac6_genesis_config_separate(),
         case_ac7_pii_like_not_persisted(),
     ]

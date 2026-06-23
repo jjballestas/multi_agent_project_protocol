@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "782aa824123e8821e7847067dfb3c033238aeab8b2512136d9907db8b5760752",
+  "canonical_hash": "6814a32d1df820817448e20eadf232df213183ea627568c21ce3727c60f33144",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -123,6 +123,7 @@
       "CLAIM-20260623-Arquitecto-register-0158": 1,
       "CLAIM-20260623-Codex-TASK-0157": 1,
       "CLAIM-20260623-Codex-TASK-0157B": 1,
+      "CLAIM-20260623-Codex-TASK-0158": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -214,13 +215,13 @@
       "TASK-0155": 12,
       "TASK-0156": 10,
       "TASK-0157": 10,
-      "TASK-0158": 2,
+      "TASK-0158": 5,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 574,
+    "events_applied": 578,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -540,6 +541,10 @@
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
       "codex-carril-a-monitor-release-2026-06-19T15:33:55Z": 688,
       "codex-cron-executor-config:release": 1103,
+      "codex-task-0158-claim-20260623b": 1246,
+      "codex-task-0158-claim-expanded-new-20260623": 1249,
+      "codex-task-0158-claim-release-for-expand-20260623": 1248,
+      "codex-task-0158-status-in-progress-20260623b": 1247,
       "codex:TASK-0149:claim-acquire": 1065,
       "codex:TASK-0149:claim-release": 1068,
       "codex:TASK-0149:status-in-progress": 1066,
@@ -801,5 +806,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1245
+  "up_to_seq": 1249
 }

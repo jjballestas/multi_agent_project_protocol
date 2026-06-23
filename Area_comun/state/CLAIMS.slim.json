@@ -1,5 +1,28 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0158-expanded",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0158",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0158",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "connectors/sqlserver_readonly/connector.py",
+                "connectors/sqlserver_readonly/__init__.py",
+                "connectors/sqlserver_readonly/s9_verify_live.py",
+                "connectors/framework/readonly.py",
+                "connectors/connectors.config.json",
+                "examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py",
+                ".gitignore",
+                "Area_comun/artifacts/",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0158"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

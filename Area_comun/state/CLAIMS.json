@@ -4549,6 +4549,57 @@
             "updated_at": "2026-06-23T00:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0158",
+            "expires_at": "2026-06-23T04:12:44Z",
+            "notes": "TASK-0158 SQL Server read-only live backend and s9 server-side verification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0158",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0158",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "connectors/sqlserver_readonly/connector.py",
+                "connectors/framework/readonly.py",
+                "connectors/connectors.config.json",
+                "examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py",
+                "Area_comun/artifacts/",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T00:12:44Z",
+            "status": "released",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T00:12:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0158-expanded",
+            "expires_at": "2026-06-23T04:16:19Z",
+            "notes": "TASK-0158 expanded scope for gitignore, live verifier, artifact and delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0158",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0158",
+                "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+                "connectors/sqlserver_readonly/connector.py",
+                "connectors/sqlserver_readonly/__init__.py",
+                "connectors/sqlserver_readonly/s9_verify_live.py",
+                "connectors/framework/readonly.py",
+                "connectors/connectors.config.json",
+                "examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py",
+                ".gitignore",
+                "Area_comun/artifacts/",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T00:16:19Z",
+            "status": "active",
+            "task_id": "TASK-0158",
+            "updated_at": "2026-06-23T00:16:19Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-DC0E283672",
             "expires_at": "2026-06-22T18:31:06.453Z",
             "notes": "Front file-intake extraction relay claim.",

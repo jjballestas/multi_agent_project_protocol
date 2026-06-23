@@ -1,0 +1,28 @@
+{
+  "schema_version": "sqlserver_readonly_s9.v1",
+  "task_id": "TASK-0158",
+  "connector_id": "sqlserver_readonly",
+  "driver": "pymssql",
+  "driver_install_command": "python -m pip install pymssql",
+  "timestamp_utc": "2026-06-23T00:16:31Z",
+  "select": {
+    "server_allowed": true,
+    "row_count": 1
+  },
+  "write_vectors": [
+    {
+      "vector": "DML",
+      "server_rejected": true,
+      "error_class": "OperationalError",
+      "error_code": "259"
+    },
+    {
+      "vector": "DDL",
+      "server_rejected": true,
+      "error_class": "OperationalError",
+      "error_code": "262"
+    }
+  ],
+  "secret_free": true,
+  "pii_free": true
+}
