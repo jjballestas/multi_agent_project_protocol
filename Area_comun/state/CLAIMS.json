@@ -5447,6 +5447,24 @@
             "updated_at": "2026-06-23T21:52:35Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-changes-0164",
+            "expires_at": "2026-06-24T06:00:00Z",
+            "notes": "TASK-0164 in_review->changes_requested: Analista CAMBIO. Concurrencia N=8 lineal OK, pero una cola JSON PARCIAL/cortada en events.jsonl permite submit_intent applied:true con evento INVISIBLE (detras de la linea cortada) y gates verdes sobre el prefijo. El append bajo lock debe DETECTAR/TRUNCAR/RECHAZAR una cola parcial antes de aceptar un intent nuevo.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0164-codex-claim-grano-fino-lock-fisico.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T00:12:00Z",
+            "status": "released",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-24T00:12:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
