@@ -54,7 +54,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Proyecto-front (RF-14): re-submit idempotente=no-op + extractor causa especifica + robusto latencia (AC66-AC68 SPEC-0086)"
         },
         {

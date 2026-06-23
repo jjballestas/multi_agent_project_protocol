@@ -518,6 +518,26 @@ producto/dominio en el core neutral.
   local-vlm (subir/quitar el tope de 30s del clamp; permitir, p.ej., hasta varios minutos) y/o por-segmento, de modo
   que la lentitud del modelo no se confunda con un fallo. Off-by-default + loopback intactos (AC52). Behavior-test:
   config con timeout > 30s se respeta (clamp ya no lo recorta a 30s); la peticion local-vlm incluye keep_alive.
+- **AC69 - "Aprobar" una candidata: el bloqueo por PII-no-revisada se muestra VISIBLE en la tarjeta [PERMANENTE; REQ intake-ux-feedback-5].**
+  Hoy `submitCandidateApproval` exige el check "PII revisada" de la tarjeta; si falta, escribe el error solo en el
+  preview JSON (que el operador no mira) y vuelve -> "Aprobar no hace nada". Se corrige: cuando falta el check de PII
+  (o cualquier validacion de la candidata), el error se muestra VISIBLE en/junto a la tarjeta (rojo), de modo que el
+  operador vea por que no avanzo y que debe marcar "PII revisada". El boton sigue gobernado (submit_intent + gate
+  PII AC43). Behavior-test: aprobar sin PII-revisada -> error visible en la tarjeta (no solo en el preview); con
+  PII-revisada -> procede.
+- **AC70 - "Usar tarjeta" sincroniza el SELECTOR de modo, no solo la seccion [PERMANENTE; REQ intake-ux-feedback-5].**
+  `selectCandidateDraft` puebla el formulario typed y llama `applyIntakeInputMode("typed")`, pero el RADIO/selector de
+  modo no queda sincronizado -> el operador tiene que cambiarlo a manual a mano o "pone problemas". Se corrige: al
+  usar una tarjeta, el control de modo (radio `intake-input-mode`) queda marcado en typed/manual de forma consistente
+  con la seccion mostrada; sin pasos manuales. Behavior-test: click en "Usar tarjeta" -> el radio de modo queda en
+  typed y la seccion typed visible, estado consistente.
+- **AC71 - Tras enviar/aprobar una candidata, su ESTADO cambia y el panel se refresca [PERMANENTE; REQ intake-ux-feedback-5].**
+  Hoy `submitCandidateApproval` no refresca el panel de candidatas tras un envio exitoso -> la tarjeta sigue
+  "pending" en el listado. Se corrige: tras una aprobacion (o descarte) exitosa, (a) el servidor marca la candidata
+  con su nuevo estado en el store no-ledger (approved/discarded) de forma idempotente, y (b) el front refresca el
+  panel -> la tarjeta refleja el nuevo estado (o sale del listado de pendientes). Behavior-test: aprobar una
+  candidata -> su status pasa a approved y el panel ya no la muestra como pending; descartar -> discarded. Carry
+  AC43 (gate PII) + candidatas no-ledger + AC17 (sin segundo escritor).
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
