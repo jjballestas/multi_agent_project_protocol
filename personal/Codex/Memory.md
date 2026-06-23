@@ -14,6 +14,12 @@ Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend 
   src/server.js tests/staticContract.test.js`, product `git diff --check`, product `npm test` PASS 52/52, and
   local smoke on port 4190 confirmed the live server reads gitignored `file-ingestion.runtime.json` with
   extractor enabled/local-vlm/loopback and real allowed extensions.
+  Protocol delivery commit `28effe9 coord(TASK-0159): deliver intake UX fixes` moved TASK-0159 to
+  `in_review`, released `CLAIM-20260623-Codex-TASK-0159`, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0159-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0159-in-review.md`. Final protocol evidence
+  before the delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false
+  up_to_seq 1304. The original GO remains open because `mailbox_archive` requires `orchestrator`.
 - TASK-0158 CAMBIO3 neutrality fix landed in `D:/Agentes/multi_agent_project_protocol`:
   `91f7a0b fix(connectors): remove SQL Server s9 instance env default`. The live s9 verifier no longer hardcodes an
   instance-specific env file path under `connectors/`; it accepts `--env` or `SQLSERVER_S9_ENV_FILE` and fails closed
