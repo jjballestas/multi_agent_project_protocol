@@ -9,6 +9,7 @@ Thumbs.db
 
 # Runtime execution traces (local audit; deterministic per run, regenerable)
 runtime/runs/
+runtime/state/.ledger.lock
 
 # Repo-local transient temp dirs: runtime write-path staging/backups + golden test fixtures.
 # Sweep legacy root-level leftovers and this parent with scripts/clean_workspace_temp.py.

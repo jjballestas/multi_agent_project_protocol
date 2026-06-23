@@ -15,6 +15,15 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "task_id": "TASK-0164"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-gitignore",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-gitignore",
+                ".gitignore"
+            ],
+            "task_id": "TASK-0164"
         }
     ],
     "schema_version": "1.0",

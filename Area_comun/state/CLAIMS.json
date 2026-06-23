@@ -5381,6 +5381,20 @@
             "updated_at": "2026-06-23T21:28:35Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0164-gitignore",
+            "expires_at": "2026-06-24T01:46:37Z",
+            "notes": "TASK-0164 ledger lock ignore scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260623-Codex-TASK-0164-gitignore",
+                ".gitignore"
+            ],
+            "started_at": "2026-06-23T21:46:37Z",
+            "status": "active",
+            "task_id": "TASK-0164",
+            "updated_at": "2026-06-23T21:46:37Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
