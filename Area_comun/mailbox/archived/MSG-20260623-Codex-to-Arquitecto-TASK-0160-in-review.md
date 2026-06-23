@@ -4,7 +4,7 @@ task_id: TASK-0160
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0160 entregada a in_review: extraction acepta acceptanceIntent vacio; aprobacion de candidata lo sigue requiriendo; PII label alineado."

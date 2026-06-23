@@ -4,7 +4,7 @@ task_id: TASK-0160
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "Analista TASK-0160: OK/CERRABLE; acceptanceIntent ya no bloquea extraccion, PII ack sigue duro, candidatas siguen no-ledger."

@@ -4493,6 +4493,25 @@
             "updated_at": "2026-06-23T15:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-archive-0160",
+            "expires_at": "2026-06-23T22:00:00Z",
+            "notes": "Archive resolved TASK-0160 messages after close.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260623-Analista-to-Arquitecto-TASK-0160-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0160.md",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0160-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Analista-to-Arquitecto-TASK-0160-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Arquitecto-to-Analista-REVISAR-TASK-0160.md",
+                "Area_comun/mailbox/archived/MSG-20260623-Codex-to-Arquitecto-TASK-0160-in-review.md"
+            ],
+            "started_at": "2026-06-23T16:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0160",
+            "updated_at": "2026-06-23T16:55:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Arquitecto-changes-0158",
             "expires_at": "2026-06-23T08:00:00Z",
             "notes": "TASK-0158 in_review->changes_requested: Analista CAMBIO (blocking). El DML del s9 usa UPDATE sys.objects -> error 259 (rechazo de catalogo del sistema, universal), NO prueba denegacion de permiso DML del principal read-only sobre tabla ordinaria. Rehacer s9 con DML falsable (INSERT/UPDATE) contra tabla no sensible donde el principal tiene SELECT pero no INSERT -> esperar permission-denied (229) server-side; artefacto saneado que distinga permiso-denegado de rechazo-de-catalogo.",

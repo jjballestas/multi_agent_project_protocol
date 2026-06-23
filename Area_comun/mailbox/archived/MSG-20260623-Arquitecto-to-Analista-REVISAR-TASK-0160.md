@@ -4,7 +4,7 @@ task_id: TASK-0160
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA PII de TASK-0160 (extraccion no exige acceptanceIntent + PII label alineado, AC64-AC65). Producto Zeus a3c5f26; protocolo origin actualizado. Checker Arquitecto VERDE: node --test clon limpio 52/52 exit 0 (incl behavior-tests AC64: extraer acceptanceIntent vacio -> OK, aprobar candidata sin el -> 400 'acceptanceIntent is required'), validate/encoding/neutrality exit 0, #4 byte-id (protocol.config.json sin tocar). FOCO: confirma que el ACK DE PII SIGUE OBLIGATORIO para extraer/aprobar (AC43, solo se simplifico el TEXTO 'esta accion se ejecuta de forma gobernada' + alineacion, no la condicion); que aflojar acceptanceIntent en la extraccion NO debilita el gate de PII ni mete candidatas al ledger sin aprobacion; extractor sigue loopback/no-ledger; sin segundo escritor (AC17). Verdict VERDE/CAMBIO; el cron del Analista dispara por type REVIEW."
