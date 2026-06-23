@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6814a32d1df820817448e20eadf232df213183ea627568c21ce3727c60f33144",
+  "canonical_hash": "53633a2c34339c530540a7222f087cb3a29f9674e490fed5703abd8b04bdedec",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -124,6 +124,9 @@
       "CLAIM-20260623-Codex-TASK-0157": 1,
       "CLAIM-20260623-Codex-TASK-0157B": 1,
       "CLAIM-20260623-Codex-TASK-0158": 1,
+      "CLAIM-20260623-Codex-TASK-0158-delivery": 1,
+      "CLAIM-20260623-Codex-TASK-0158-expanded": 1,
+      "CLAIM-20260623-Codex-TASK-0158-mailbox-fix": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -215,13 +218,13 @@
       "TASK-0155": 12,
       "TASK-0156": 10,
       "TASK-0157": 10,
-      "TASK-0158": 5,
+      "TASK-0158": 8,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 578,
+    "events_applied": 584,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -542,9 +545,15 @@
       "codex-carril-a-monitor-release-2026-06-19T15:33:55Z": 688,
       "codex-cron-executor-config:release": 1103,
       "codex-task-0158-claim-20260623b": 1246,
+      "codex-task-0158-claim-delivery-20260623": 1251,
+      "codex-task-0158-claim-delivery-release-20260623-noarchive": 1253,
       "codex-task-0158-claim-expanded-new-20260623": 1249,
+      "codex-task-0158-claim-expanded-release-for-delivery-20260623": 1250,
       "codex-task-0158-claim-release-for-expand-20260623": 1248,
+      "codex-task-0158-mailbox-fix-claim-20260623": 1254,
+      "codex-task-0158-mailbox-fix-release-20260623": 1255,
       "codex-task-0158-status-in-progress-20260623b": 1247,
+      "codex-task-0158-status-in-review-20260623-noarchive": 1252,
       "codex:TASK-0149:claim-acquire": 1065,
       "codex:TASK-0149:claim-release": 1068,
       "codex:TASK-0149:status-in-progress": 1066,
@@ -806,5 +815,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1249
+  "up_to_seq": 1255
 }

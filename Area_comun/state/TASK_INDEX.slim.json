@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Connector SQL Server read-only: backend VIVO (driver real, env gitignored) + verificacion s9 SERVER-SIDE (AC8/AC11 SPEC-0083, DECISION-0041); off-by-default"
         }
     ],

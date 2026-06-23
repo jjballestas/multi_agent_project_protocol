@@ -1,9 +1,29 @@
 # Codex Memory
 
-Last updated: 2026-06-22 Europe/Madrid, after TASK-0155 AC52 strict loopback rework product commit.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0158 SQL Server live backend implementation commit.
 
 ## Latest Session Note
 
+- TASK-0158 protocol implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `e61f0ae feat(connectors): add SQL Server live readonly backend`. The SQL Server connector now has a
+  real `pymssql` live backend loaded from gitignored `SQLSERVER_*` env values, keeps
+  `classify_readonly_sql` in front of normal reads, resolves `connectors.runtime.json` before the versioned
+  off-by-default config, and ships a non-CI s9 verifier. `connectors/connectors.config.json` includes
+  `sqlserver_readonly` with `enabled:false`; `.gitignore` excludes `connectors/*.runtime.json`. The live s9
+  verifier installed `pymssql` with `python -m pip install pymssql`, used a temporary runtime override for
+  the run, then removed it. Sanitized artifact:
+  `Area_comun/artifacts/S9-TASK-0158-sqlserver-readonly-live.json` records SELECT row_count=1 and server-side
+  rejection of DML/DDL vectors with `OperationalError` codes 259/262, without credentials or schema/table
+  names. Evidence before this memory update: `python -m py_compile` for connector/verifier/golden OK,
+  `python examples/connector_sqlserver_readonly_cases/run_connector_sqlserver_readonly_cases.py` PASS,
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1249. The validator
+  still does not support `--with-secrets`. Delivery commit `coord(TASK-0158): deliver SQL Server connector s9`
+  moved TASK-0158 to `in_review`, released the Codex claim, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0158-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0158-codex-to-arquitecto-1.md`. Final protocol evidence before this
+  memory follow-up: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq
+  1255, and golden `connector_sqlserver_readonly_cases` PASS. Codex could not archive the original GO because
+  `mailbox_archive` requires `orchestrator`; the original GO remains open with `requires_response:false`.
 - TASK-0157 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `2afc944 feat(intake): streamline file extraction flow`. File-mode Intake now opens a dedicated section with
   the file selector and `Extraer requisito` action before typed fields, runs the existing governed extraction
