@@ -14,7 +14,7 @@ from typing import Any
 
 try:
     from .context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from .eventlog import EventWriter, STATE_DIR, canonical_hash
+    from .eventlog import EventWriter, LEDGER_LOCK_PATH, STATE_DIR, canonical_hash, ledger_file_lock
     from .protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -28,7 +28,7 @@ try:
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from eventlog import EventWriter, STATE_DIR, canonical_hash
+    from eventlog import EventWriter, LEDGER_LOCK_PATH, STATE_DIR, canonical_hash, ledger_file_lock
     from protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -61,6 +61,7 @@ INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narr
 PROJECT_NARRATIVE_FIELDS = {"next_actions", "risks", "open_questions"}
 MAILBOX_MESSAGE_ID_RE = re.compile(r"^MSG-[A-Za-z0-9._-]+$")
 ROW_SCOPED_LEDGER_PATHS = {
+    "Area_comun/state/CLAIMS.json",
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/PROJECT_STATE.json",
 }
@@ -138,7 +139,8 @@ def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
     state_dir = root / STATE_DIR
     backup_dir = temp_root / "state"
     if state_dir.exists():
-        shutil.copytree(state_dir, backup_dir)
+        lock_name = LEDGER_LOCK_PATH.name
+        shutil.copytree(state_dir, backup_dir, ignore=lambda _dir, names: [lock_name] if lock_name in names else [])
         return temp_root, backup_dir
     return temp_root, None
 
@@ -146,10 +148,23 @@ def snapshot_runtime_state(root: Path) -> RuntimeStateBackup:
 def restore_runtime_state(root: Path, backup: RuntimeStateBackup) -> None:
     temp_root, backup_dir = backup
     state_dir = root / STATE_DIR
+    lock_path = root / LEDGER_LOCK_PATH
     if state_dir.exists():
-        shutil.rmtree(state_dir)
+        for child in state_dir.iterdir():
+            if child == lock_path:
+                continue
+            if child.is_dir():
+                shutil.rmtree(child)
+            else:
+                child.unlink()
     if backup_dir is not None and backup_dir.exists():
-        shutil.copytree(backup_dir, state_dir)
+        state_dir.mkdir(parents=True, exist_ok=True)
+        for child in backup_dir.iterdir():
+            destination = state_dir / child.name
+            if child.is_dir():
+                shutil.copytree(child, destination)
+            else:
+                shutil.copy2(child, destination)
     remove_root_temp_dir(temp_root)
 
 
@@ -562,7 +577,7 @@ def required_scopes(normalized: dict[str, Any], state: dict[str, Any]) -> list[s
             scopes.append(task_file)
         return scopes
     if kind == "claim":
-        return ["Area_comun/state/CLAIMS.json"]
+        return [f"Area_comun/state/CLAIMS.json#{normalized['claim_id']}"]
     if kind == "decision":
         return ["Area_comun/state/PROJECT_STATE.json"]
     if kind == "project_narrative":
@@ -859,26 +874,79 @@ def submit_intent(
     ensure_event_state_config_valid(root)
     normalized = normalize_intent(intent)
     ensure_actor_enabled(root, actor_id)
-    writer = EventWriter(root)
     key = idempotency_key(actor_id, normalized)
-    existing = existing_idempotent_event(writer, key)
-    if existing is not None:
-        state_before = load_state(root)
+
+    with ledger_file_lock(root):
+        writer = EventWriter(root)
+        existing = existing_idempotent_event(writer, key)
+        if existing is not None:
+            state_before = load_state(root)
+            file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
+            runtime_backup = snapshot_runtime_state(root)
+            try:
+                materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+                task_files_updated = apply_file_side_effects(root, normalized, state_before)
+                runtime_snapshot = writer.write_snapshot()
+                drift_after = protocol_state_drift(root)
+                if drift_after.get("has_drift"):
+                    raise IntentApplyError(f"protocol state drift remains after submit_intent retry: {drift_after.get('entries')}")
+                cleanup_runtime_state_backup(runtime_backup)
+                return {
+                    "applied": True,
+                    "deduped": True,
+                    "event": existing,
+                    "genesis_event": None,
+                    "intent": normalized,
+                    "materialization": materialization,
+                    "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
+                    "task_files_updated": task_files_updated,
+                    "drift": drift_after,
+                }
+            except Exception as exc:
+                restore_files(root, file_backup)
+                restore_runtime_state(root, runtime_backup)
+                if isinstance(exc, IntentError):
+                    raise
+                raise IntentApplyError(str(exc)) from exc
+
+        state_before = validate_intent(root, actor_id, normalized)
         file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
         runtime_backup = snapshot_runtime_state(root)
         try:
-            materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+            events_before = writer.events()
+            ensure_clean_replay_base(root, events_before)
+            genesis_result = None
+            if not has_protocol_genesis(events_before):
+                genesis_result = write_genesis_reference(
+                    root,
+                    actor_id=actor_id,
+                    timestamp=timestamp,
+                    commit=commit,
+                    idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
+                )
+                writer = EventWriter(root)
+
+            payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
+            event = writer.append_event(
+                event_type="intent.applied",
+                aggregate_id=aggregate_id_for(normalized),
+                actor_id=actor_id,
+                idempotency_key=key,
+                payload=payload,
+                ts=timestamp,
+            )
+            snapshot = current_protocol_snapshot(root)
+            materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
             task_files_updated = apply_file_side_effects(root, normalized, state_before)
             runtime_snapshot = writer.write_snapshot()
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
-                raise IntentApplyError(f"protocol state drift remains after submit_intent retry: {drift_after.get('entries')}")
+                raise IntentApplyError(f"protocol state drift remains after submit_intent: {drift_after.get('entries')}")
             cleanup_runtime_state_backup(runtime_backup)
             return {
                 "applied": True,
-                "deduped": True,
-                "event": existing,
-                "genesis_event": None,
+                "event": event,
+                "genesis_event": (genesis_result or {}).get("event"),
                 "intent": normalized,
                 "materialization": materialization,
                 "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
@@ -891,57 +959,6 @@ def submit_intent(
             if isinstance(exc, IntentError):
                 raise
             raise IntentApplyError(str(exc)) from exc
-
-    state_before = validate_intent(root, actor_id, normalized)
-    file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
-    runtime_backup = snapshot_runtime_state(root)
-    try:
-        events_before = writer.events()
-        ensure_clean_replay_base(root, events_before)
-        genesis_result = None
-        if not has_protocol_genesis(events_before):
-            genesis_result = write_genesis_reference(
-                root,
-                actor_id=actor_id,
-                timestamp=timestamp,
-                commit=commit,
-                idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
-            )
-            writer = EventWriter(root)
-
-        payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
-        event = writer.append_event(
-            event_type="intent.applied",
-            aggregate_id=aggregate_id_for(normalized),
-            actor_id=actor_id,
-            idempotency_key=key,
-            payload=payload,
-            ts=timestamp,
-        )
-        snapshot = current_protocol_snapshot(root)
-        materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
-        task_files_updated = apply_file_side_effects(root, normalized, state_before)
-        runtime_snapshot = writer.write_snapshot()
-        drift_after = protocol_state_drift(root)
-        if drift_after.get("has_drift"):
-            raise IntentApplyError(f"protocol state drift remains after submit_intent: {drift_after.get('entries')}")
-        cleanup_runtime_state_backup(runtime_backup)
-        return {
-            "applied": True,
-            "event": event,
-            "genesis_event": (genesis_result or {}).get("event"),
-            "intent": normalized,
-            "materialization": materialization,
-            "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
-            "task_files_updated": task_files_updated,
-            "drift": drift_after,
-        }
-    except Exception as exc:
-        restore_files(root, file_backup)
-        restore_runtime_state(root, runtime_backup)
-        if isinstance(exc, IntentError):
-            raise
-        raise IntentApplyError(str(exc)) from exc
 
 
 def submit_intents(
@@ -971,37 +988,109 @@ def submit_intents(
         raise IntentValidationError("transaction contains duplicate intent idempotency keys")
     tx_key = transaction_idempotency_key(actor_id, normalized_intents, transaction_key)
     ensure_actor_enabled(root, actor_id)
-    writer = EventWriter(root)
-    existing = existing_events_for_keys(writer, keys)
-    if existing:
-        if len(existing) != len(keys):
-            raise IntentApplyError("partial transaction idempotency state exists; refusing to continue")
-        state_before = load_state(root)
-        side_effect_paths: list[str] = []
-        for normalized in normalized_intents:
-            side_effect_paths.extend(files_for_backup(normalized, state_before))
-        file_backup = snapshot_files(root, [*protocol_file_paths(), *side_effect_paths])
+    with ledger_file_lock(root):
+        writer = EventWriter(root)
+        existing = existing_events_for_keys(writer, keys)
+        if existing:
+            if len(existing) != len(keys):
+                raise IntentApplyError("partial transaction idempotency state exists; refusing to continue")
+            state_before = load_state(root)
+            side_effect_paths: list[str] = []
+            for normalized in normalized_intents:
+                side_effect_paths.extend(files_for_backup(normalized, state_before))
+            file_backup = snapshot_files(root, [*protocol_file_paths(), *side_effect_paths])
+            runtime_backup = snapshot_runtime_state(root)
+            try:
+                materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+                task_files_updated: list[str] = []
+                for normalized in normalized_intents:
+                    task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
+                runtime_snapshot = writer.write_snapshot()
+                drift_after = protocol_state_drift(root)
+                if drift_after.get("has_drift"):
+                    raise IntentApplyError(f"protocol state drift remains after submit_intents retry: {drift_after.get('entries')}")
+                cleanup_runtime_state_backup(runtime_backup)
+                return {
+                    "applied": True,
+                    "deduped": True,
+                    "transaction": {
+                        "idempotency_key": tx_key,
+                        "intent_count": len(normalized_intents),
+                        "event_keys": keys,
+                    },
+                    "events": [existing[key] for key in keys],
+                    "genesis_event": None,
+                    "intents": normalized_intents,
+                    "materialization": materialization,
+                    "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
+                    "task_files_updated": list(dict.fromkeys(task_files_updated)),
+                    "drift": drift_after,
+                }
+            except Exception as exc:
+                restore_files(root, file_backup)
+                restore_runtime_state(root, runtime_backup)
+                if isinstance(exc, IntentError):
+                    raise
+                raise IntentApplyError(str(exc)) from exc
+
+        _, states_before = validate_transaction(root, actor_id, normalized_intents, timestamp=timestamp, commit=commit)
+        task_file_paths: list[str] = []
+        for normalized, state_before in zip(normalized_intents, states_before):
+            task_file_paths.extend(files_for_backup(normalized, state_before))
+        file_backup = snapshot_files(root, [*protocol_file_paths(), *task_file_paths])
         runtime_backup = snapshot_runtime_state(root)
         try:
-            materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
+            events_before = writer.events()
+            ensure_clean_replay_base(root, events_before)
+            genesis_result = None
+            if not has_protocol_genesis(events_before):
+                genesis_result = write_genesis_reference(
+                    root,
+                    actor_id=actor_id,
+                    timestamp=timestamp,
+                    commit=commit,
+                    idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
+                )
+                writer = EventWriter(root)
+
+            events: list[dict[str, Any]] = []
+            for index, normalized in enumerate(normalized_intents, start=1):
+                payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
+                payload["transaction"] = {
+                    "idempotency_key": tx_key,
+                    "index": index,
+                    "count": len(normalized_intents),
+                }
+                events.append(
+                    writer.append_event(
+                        event_type="intent.applied",
+                        aggregate_id=aggregate_id_for(normalized),
+                        actor_id=actor_id,
+                        idempotency_key=keys[index - 1],
+                        payload=payload,
+                        ts=timestamp,
+                    )
+                )
+
+            snapshot = current_protocol_snapshot(root)
+            materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
             task_files_updated: list[str] = []
-            for normalized in normalized_intents:
+            for normalized, state_before in zip(normalized_intents, states_before):
                 task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
             runtime_snapshot = writer.write_snapshot()
             drift_after = protocol_state_drift(root)
             if drift_after.get("has_drift"):
-                raise IntentApplyError(f"protocol state drift remains after submit_intents retry: {drift_after.get('entries')}")
+                raise IntentApplyError(f"protocol state drift remains after submit_intents: {drift_after.get('entries')}")
             cleanup_runtime_state_backup(runtime_backup)
             return {
                 "applied": True,
-                "deduped": True,
+                "events": events,
+                "genesis_event": (genesis_result or {}).get("event"),
                 "transaction": {
                     "idempotency_key": tx_key,
                     "intent_count": len(normalized_intents),
                     "event_keys": keys,
                 },
-                "events": [existing[key] for key in keys],
-                "genesis_event": None,
                 "intents": normalized_intents,
                 "materialization": materialization,
                 "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
@@ -1014,77 +1103,6 @@ def submit_intents(
             if isinstance(exc, IntentError):
                 raise
             raise IntentApplyError(str(exc)) from exc
-
-    _, states_before = validate_transaction(root, actor_id, normalized_intents, timestamp=timestamp, commit=commit)
-    task_file_paths: list[str] = []
-    for normalized, state_before in zip(normalized_intents, states_before):
-        task_file_paths.extend(files_for_backup(normalized, state_before))
-    file_backup = snapshot_files(root, [*protocol_file_paths(), *task_file_paths])
-    runtime_backup = snapshot_runtime_state(root)
-    try:
-        events_before = writer.events()
-        ensure_clean_replay_base(root, events_before)
-        genesis_result = None
-        if not has_protocol_genesis(events_before):
-            genesis_result = write_genesis_reference(
-                root,
-                actor_id=actor_id,
-                timestamp=timestamp,
-                commit=commit,
-                idempotency_key=f"protocol-state:genesis-ref:{actor_id}:{timestamp}",
-            )
-            writer = EventWriter(root)
-
-        events: list[dict[str, Any]] = []
-        for index, normalized in enumerate(normalized_intents, start=1):
-            payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
-            payload["transaction"] = {
-                "idempotency_key": tx_key,
-                "index": index,
-                "count": len(normalized_intents),
-            }
-            events.append(
-                writer.append_event(
-                    event_type="intent.applied",
-                    aggregate_id=aggregate_id_for(normalized),
-                    actor_id=actor_id,
-                    idempotency_key=keys[index - 1],
-                    payload=payload,
-                    ts=timestamp,
-                )
-            )
-
-        snapshot = current_protocol_snapshot(root)
-        materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
-        task_files_updated: list[str] = []
-        for normalized, state_before in zip(normalized_intents, states_before):
-            task_files_updated.extend(apply_file_side_effects(root, normalized, state_before))
-        runtime_snapshot = writer.write_snapshot()
-        drift_after = protocol_state_drift(root)
-        if drift_after.get("has_drift"):
-            raise IntentApplyError(f"protocol state drift remains after submit_intents: {drift_after.get('entries')}")
-        cleanup_runtime_state_backup(runtime_backup)
-        return {
-            "applied": True,
-            "events": events,
-            "genesis_event": (genesis_result or {}).get("event"),
-            "transaction": {
-                "idempotency_key": tx_key,
-                "intent_count": len(normalized_intents),
-                "event_keys": keys,
-            },
-            "intents": normalized_intents,
-            "materialization": materialization,
-            "runtime_snapshot": {"up_to_seq": runtime_snapshot.get("up_to_seq")},
-            "task_files_updated": list(dict.fromkeys(task_files_updated)),
-            "drift": drift_after,
-        }
-    except Exception as exc:
-        restore_files(root, file_backup)
-        restore_runtime_state(root, runtime_backup)
-        if isinstance(exc, IntentError):
-            raise
-        raise IntentApplyError(str(exc)) from exc
 
 
 def load_intent_from_args(args: argparse.Namespace) -> dict[str, Any]:

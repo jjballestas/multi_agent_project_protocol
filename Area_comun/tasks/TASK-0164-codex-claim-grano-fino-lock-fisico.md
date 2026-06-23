@@ -2,7 +2,7 @@
 task_id: TASK-0164
 title: "Nucleo: claims de grano fino (CLAIMS.json por-fila #<claim-id>) + serializacion fisica del event-log (lock) -- desbloquea operador-vs-agente sin bifurcar el chain #4 (DECISION-0059)"
 type: protocol
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

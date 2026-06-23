@@ -61,6 +61,30 @@ CASES = [
         "valid": False,
     },
     {
+        "name": "claims_distinct_rows_ok",
+        "claims": [
+            claim("A", "Claude", ["Area_comun/state/CLAIMS.json#CLAIM-row-scope-A"]),
+            claim("B", "Codex", ["Area_comun/state/CLAIMS.json#CLAIM-row-scope-B"]),
+        ],
+        "valid": True,
+    },
+    {
+        "name": "claims_same_row_conflict",
+        "claims": [
+            claim("A", "Claude", ["Area_comun/state/CLAIMS.json#CLAIM-row-scope-A"]),
+            claim("B", "Codex", ["Area_comun/state/CLAIMS.json#CLAIM-row-scope-A"]),
+        ],
+        "valid": False,
+    },
+    {
+        "name": "claims_bare_vs_row_conflict",
+        "claims": [
+            claim("A", "Claude", ["Area_comun/state/CLAIMS.json"]),
+            claim("B", "Codex", ["Area_comun/state/CLAIMS.json#CLAIM-row-scope-B"]),
+        ],
+        "valid": False,
+    },
+    {
         "name": "invalid_selector",
         "claims": [
             claim("A", "Claude", ["Area_comun/state/TASK_INDEX.json#not-a-task"]),

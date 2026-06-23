@@ -7,10 +7,12 @@ import hashlib
 import hmac
 import json
 import os
+import sys
+from contextlib import contextmanager
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, Iterator
 
 
 EVENT_SCHEMA_VERSION = "1.0"
@@ -18,6 +20,7 @@ TRACE_ID_VERSION = "trace.v1"
 UNAUTHENTICATED_EVENT = "security.unauthenticated_event"
 LOG_PATH = Path("runtime") / "state" / "events.jsonl"
 SNAPSHOT_PATH = Path("runtime") / "state" / "snapshot.json"
+LEDGER_LOCK_PATH = Path("runtime") / "state" / ".ledger.lock"
 ARCHIVE_DIR = Path("runtime") / "state" / "archives"
 STATE_DIR = Path("runtime") / "state"
 SECRET_DIRS = {"secrets", ".protocol-secrets"}
@@ -64,6 +67,32 @@ def atomic_append_jsonl(path: Path, event: dict[str, Any]) -> None:
         handle.write(payload)
         handle.flush()
         os.fsync(handle.fileno())
+
+
+@contextmanager
+def ledger_file_lock(root: Path) -> Iterator[None]:
+    """Serialize event-log writers across processes before reading chain head."""
+    lock_path = root.resolve() / LEDGER_LOCK_PATH
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("a+b") as handle:
+        if sys.platform == "win32":
+            import msvcrt
+
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+            try:
+                yield
+            finally:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 def canonical_json(payload: Any) -> str:

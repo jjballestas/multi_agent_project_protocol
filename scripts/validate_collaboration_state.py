@@ -74,7 +74,9 @@ SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 TASK_ROW_SELECTOR_PATTERN = re.compile(r"^(TASK-\d{4}|REQ-[0-9A-Fa-f]+)$")
 PROJECT_STATE_SELECTOR_PATTERN = re.compile(r"^(active_tasks/(TASK-\d{4}|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$")
+CLAIM_ROW_SELECTOR_PATTERN = re.compile(r"^CLAIM-[A-Za-z0-9._-]+$")
 ROW_SCOPED_LEDGER_SELECTORS = {
+    "Area_comun/state/CLAIMS.json": CLAIM_ROW_SELECTOR_PATTERN,
     "Area_comun/state/TASK_INDEX.json": TASK_ROW_SELECTOR_PATTERN,
     "Area_comun/state/PROJECT_STATE.json": PROJECT_STATE_SELECTOR_PATTERN,
 }
@@ -817,11 +819,6 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
                         continue
                     left_scope = normalize_scope_path(str(left_scope))
                     right_scope = normalize_scope_path(str(right_scope))
-                    if (
-                        split_scope(left_scope)[0] == "Area_comun/state/CLAIMS.json"
-                        or split_scope(right_scope)[0] == "Area_comun/state/CLAIMS.json"
-                    ):
-                        continue
                     if split_scope(left_scope)[0].startswith("Area_comun/mailbox/") or split_scope(right_scope)[0].startswith(
                         "Area_comun/mailbox/"
                     ):

@@ -15,8 +15,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from runtime.eventlog import read_jsonl_torn_safe  # noqa: E402
-from runtime.protocol_replay import protocol_state_drift, write_genesis_reference  # noqa: E402
+from runtime.eventlog import compute_event_prev_hash, read_jsonl_torn_safe  # noqa: E402
+from runtime.protocol_replay import protocol_state_drift, validate_chain, write_genesis_reference  # noqa: E402
 from runtime.regenesis import regenesis  # noqa: E402
 from runtime.submit_intent import IntentError, submit_intent, submit_intents  # noqa: E402
 
@@ -54,20 +54,31 @@ def protocol_config() -> dict[str, Any]:
                     "id": "Codex",
                     "enabled": True,
                     "capabilities": ["implementer", "orchestrator", "reviewer", "test_engineer"],
+                },
+                {
+                    "id": "Arquitecto",
+                    "enabled": True,
+                    "capabilities": ["implementer", "orchestrator", "reviewer", "test_engineer"],
                 }
             ],
         },
         "event_auth": {"enabled": False},
-        "event_state": {"enabled": True, "materialize": True, "enforce": False, "authoritative": False},
+        "event_state": {
+            "enabled": True,
+            "materialize": True,
+            "enforce": False,
+            "authoritative": False,
+            "chain_enabled": True,
+        },
         "domain_neutrality": {"enabled": True, "denylist": [], "scan_globs": [], "exempt_globs": []},
         "state_invariants": [{"path": "status", "equals": "active"}],
     }
 
 
-def task(task_id: str = TASK_ID, status: str = "in_progress") -> dict[str, Any]:
+def task(task_id: str = TASK_ID, status: str = "in_progress", owner: str = "Codex") -> dict[str, Any]:
     return {
         "id": task_id,
-        "owner": "Codex",
+        "owner": owner,
         "status": status,
         "type": "implementation",
         "priority": "normal",
@@ -83,17 +94,17 @@ def task(task_id: str = TASK_ID, status: str = "in_progress") -> dict[str, Any]:
     }
 
 
-def claim(status: str = "active") -> dict[str, Any]:
+def claim(status: str = "active", claim_id: str = CLAIM_ID, task_id: str = TASK_ID, owner: str = "Codex") -> dict[str, Any]:
     return {
-        "claim_id": CLAIM_ID,
-        "task_id": TASK_ID,
-        "owner": "Codex",
+        "claim_id": claim_id,
+        "task_id": task_id,
+        "owner": owner,
         "status": status,
         "scope": [
-            f"Area_comun/tasks/{TASK_ID}.md",
-            f"Area_comun/state/TASK_INDEX.json#{TASK_ID}",
+            f"Area_comun/tasks/{task_id}.md",
+            f"Area_comun/state/TASK_INDEX.json#{task_id}",
             f"Area_comun/state/TASK_INDEX.json#{NEXT_TASK_ID}",
-            f"Area_comun/state/PROJECT_STATE.json#active_tasks/{TASK_ID}",
+            f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
             f"Area_comun/state/PROJECT_STATE.json#active_tasks/{NEXT_TASK_ID}",
             "Area_comun/state/CLAIMS.json",
             "Area_comun/state/PROJECT_STATE.json",
@@ -138,11 +149,39 @@ def build_fixture(root: Path, *, status: str = "in_progress", genesis: bool = Tr
         write_genesis_reference(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
 
 
+def build_two_ready_fixture(root: Path) -> None:
+    write_json(root / "protocol.config.json", protocol_config())
+    task_a = task(TASK_ID, "ready", "Codex")
+    task_b = task(NEXT_TASK_ID, "ready", "Arquitecto")
+    write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": [task_a, task_b]})
+    write_json(
+        root / "Area_comun/state/PROJECT_STATE.json",
+        {
+            "status": "active",
+            "decisions": [],
+            "active_tasks": [
+                {"id": TASK_ID, "owner": "Codex", "status": "ready", "title": task_a["title"]},
+                {"id": NEXT_TASK_ID, "owner": "Arquitecto", "status": "ready", "title": task_b["title"]},
+            ],
+        },
+    )
+    write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": []})
+    write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
+    write(root / "Area_comun/tasks" / f"{TASK_ID}.md", f"---\nid: {TASK_ID}\nstatus: ready\n---\n\n# Fixture A\n")
+    write(root / "Area_comun/tasks" / f"{NEXT_TASK_ID}.md", f"---\nid: {NEXT_TASK_ID}\nstatus: ready\n---\n\n# Fixture B\n")
+    write(root / "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md", "# Human report\n")
+    for folder in ("open", "answered", "archived"):
+        write(root / "Area_comun/mailbox" / folder / ".gitkeep", "\n")
+    write(root / "runtime/turn_schema.json", (ROOT / "runtime/turn_schema.json").read_text(encoding="utf-8-sig"))
+    write_genesis_reference(root, actor_id="Codex", timestamp=TIMESTAMP, commit=COMMIT)
+
+
 def state_bytes(root: Path) -> dict[str, bytes]:
     return {
         path.relative_to(root).as_posix(): path.read_bytes()
         for path in sorted(root.rglob("*"))
-        if path.is_file()
+        if path.is_file() and path.name != ".ledger.lock"
     }
 
 
@@ -176,6 +215,27 @@ def acquire_status_release_intents() -> list[dict[str, Any]]:
             }
         },
         {"claim": {"op": "release", "claim_id": CLAIM_ID, "idempotency_key": "tx-fixture:claim-release-after-acquire"}},
+    ]
+
+
+def acquire_and_start_intents(task_id: str, claim_id: str, owner: str) -> list[dict[str, Any]]:
+    new_claim = claim("active", claim_id=claim_id, task_id=task_id, owner=owner)
+    new_claim["scope"] = [
+        f"Area_comun/state/CLAIMS.json#{claim_id}",
+        f"Area_comun/state/TASK_INDEX.json#{task_id}",
+        f"Area_comun/state/PROJECT_STATE.json#active_tasks/{task_id}",
+        f"Area_comun/tasks/{task_id}.md",
+    ]
+    return [
+        {"claim": {"op": "acquire", "claim": new_claim, "idempotency_key": f"tx-fixture:{claim_id}:acquire"}},
+        {
+            "task_status": {
+                "task_id": task_id,
+                "from": "ready",
+                "to": "in_progress",
+                "idempotency_key": f"tx-fixture:{claim_id}:start",
+            }
+        },
     ]
 
 
@@ -280,6 +340,109 @@ def case_transaction_idempotent_retry_does_not_duplicate() -> None:
         assert [event["seq"] for event in first["events"]] == [event["seq"] for event in second["events"]]
 
 
+def case_claim_rows_allow_distinct_and_reject_same() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-claim-rows-") as temp:
+        root = Path(temp)
+        build_two_ready_fixture(root)
+        submit_intents(
+            root,
+            "Codex",
+            acquire_and_start_intents(TASK_ID, "CLAIM-row-submit-A", "Codex"),
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+        submit_intent(
+            root,
+            "Arquitecto",
+            {
+                "claim": {
+                    "op": "acquire",
+                    "claim": claim("active", "CLAIM-row-submit-B", NEXT_TASK_ID, "Arquitecto")
+                    | {"scope": ["Area_comun/state/CLAIMS.json#CLAIM-row-submit-B"]},
+                    "idempotency_key": "tx-fixture:claim-row-b",
+                }
+            },
+            timestamp=TIMESTAMP,
+            commit=COMMIT,
+        )
+        try:
+            submit_intent(
+                root,
+                "Arquitecto",
+                {
+                    "claim": {
+                        "op": "acquire",
+                        "claim": claim("active", "CLAIM-row-submit-C", NEXT_TASK_ID, "Arquitecto")
+                        | {"scope": ["Area_comun/state/CLAIMS.json#CLAIM-row-submit-A"]},
+                        "idempotency_key": "tx-fixture:claim-row-c",
+                    }
+                },
+                timestamp=TIMESTAMP,
+                commit=COMMIT,
+            )
+        except IntentError:
+            pass
+        else:
+            raise AssertionError("claim acquire on an active claim row did not fail")
+
+
+def case_concurrent_submit_intents_keep_linear_chain() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-concurrent-chain-") as temp:
+        root = Path(temp)
+        build_two_ready_fixture(root)
+        envelopes = [
+            {
+                "actor_id": "Codex",
+                "timestamp": TIMESTAMP,
+                "commit": COMMIT,
+                "intents": acquire_and_start_intents(TASK_ID, "CLAIM-concurrent-A", "Codex"),
+            },
+            {
+                "actor_id": "Arquitecto",
+                "timestamp": "2026-06-08T00:00:01Z",
+                "commit": COMMIT,
+                "intents": acquire_and_start_intents(NEXT_TASK_ID, "CLAIM-concurrent-B", "Arquitecto"),
+            },
+        ]
+        paths = []
+        for index, envelope in enumerate(envelopes):
+            path = root / f"concurrent-{index}.json"
+            write_json(path, envelope)
+            paths.append(path)
+        procs = [
+            subprocess.Popen(
+                [
+                    sys.executable,
+                    str(ROOT / "runtime/submit_intent.py"),
+                    "--root",
+                    str(root),
+                    "--intents",
+                    str(path),
+                    "--output",
+                    "-",
+                ],
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            for path in paths
+        ]
+        outputs = [proc.communicate(timeout=20) for proc in procs]
+        for proc, output in zip(procs, outputs):
+            assert proc.returncode == 0, output[0] + output[1]
+        events = read_jsonl_torn_safe(root / "runtime/state/events.jsonl")
+        assert len(events) == 5, events
+        config = read_json(root / "protocol.config.json")
+        chain = validate_chain(events, config, root=root)
+        assert chain["valid"] is True, chain
+        for previous, current in zip(events, events[1:]):
+            assert current["prev_hash"] == compute_event_prev_hash(current, str(previous["prev_hash"]))
+        task_index = read_json(root / "Area_comun/state/TASK_INDEX.json")
+        statuses = {item["id"]: item["status"] for item in task_index["tasks"]}
+        assert statuses == {TASK_ID: "in_progress", NEXT_TASK_ID: "in_progress"}, statuses
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
 def case_powershell_wrappers_parity_if_available() -> None:
     shell = shutil.which("pwsh") or shutil.which("powershell")
     if not shell:
@@ -348,6 +511,8 @@ def main() -> int:
         case_transaction_rolls_back_on_materialization_failure,
         case_regenesis_clears_drift_and_allows_submit_intent,
         case_transaction_idempotent_retry_does_not_duplicate,
+        case_claim_rows_allow_distinct_and_reject_same,
+        case_concurrent_submit_intents_keep_linear_chain,
         case_powershell_wrappers_parity_if_available,
     ]
     failures = []

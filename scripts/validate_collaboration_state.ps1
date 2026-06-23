@@ -12,6 +12,7 @@ $script:ReviewedTaskStatuses = @("in_review", "review_approved", "qa_pending", "
 $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
 $script:RowScopedLedgerSelectors = @{
+    "Area_comun/state/CLAIMS.json" = "^CLAIM-[A-Za-z0-9._-]+$"
     "Area_comun/state/TASK_INDEX.json" = "^(TASK-\d{4}|REQ-[0-9A-Fa-f]+)$"
     "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/(TASK-\d{4}|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
 }
@@ -934,7 +935,6 @@ if ($claims -and $claims.claims) {
                     if (-not $leftScope -or -not $rightScope) { continue }
                     $leftParts = Split-Scope ([string]$leftScope)
                     $rightParts = Split-Scope ([string]$rightScope)
-                    if ($leftParts.Path -eq "Area_comun/state/CLAIMS.json" -or $rightParts.Path -eq "Area_comun/state/CLAIMS.json") { continue }
                     if ($leftParts.Path -like "Area_comun/mailbox/*" -or $rightParts.Path -like "Area_comun/mailbox/*") { continue }
                     if (Test-ScopeEntriesOverlap -LeftScope ([string]$leftScope) -RightScope ([string]$rightScope)) {
                         Fail "Overlapping active claims: $($left.claim_id) and $($right.claim_id) both scope '$leftScope' / '$rightScope'"
