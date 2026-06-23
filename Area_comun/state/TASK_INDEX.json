@@ -473,6 +473,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "al presionar, el requisito se registra por submit_intent y llega al canonico, y el Arquitecto recibe la notificacion por el mailbox y se activa si estaba dormido; el front indica que el requisito fue tomado.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-95b96d25-requirement-seed.md",
+            "id": "REQ-95B96D25",
+            "narrative": "Como operador, cuando monto un requisito en el Intake, quiero un boton que lo registre y ademas avise o despierte al Arquitecto, para que lo tome enseguida sin que yo tenga que hacer push manual ni esperar el sondeo.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Boton \"Enviar al Arquitecto\" en el Intake",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "",
             "author": "Operador",
             "endorsement": "none",

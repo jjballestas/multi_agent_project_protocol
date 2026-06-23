@@ -25,6 +25,12 @@
             "title": "Indicador vivo/dormido y boton activar/detener por agente"
         },
         {
+            "id": "REQ-95B96D25",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Boton \"Enviar al Arquitecto\" en el Intake"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "status": "in_progress",
