@@ -1765,6 +1765,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0158-codex-sqlserver-connector-live-backend-s9.md",
+            "id": "TASK-0158",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0083",
+            "status": "ready",
+            "title": "Connector SQL Server read-only: backend VIVO (driver real, env gitignored) + verificacion s9 SERVER-SIDE (AC8/AC11 SPEC-0083, DECISION-0041); off-by-default",
+            "type": "connector"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

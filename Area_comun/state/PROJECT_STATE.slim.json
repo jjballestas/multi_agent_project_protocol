@@ -11,6 +11,12 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0158",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Connector SQL Server read-only: backend VIVO (driver real, env gitignored) + verificacion s9 SERVER-SIDE (AC8/AC11 SPEC-0083, DECISION-0041); off-by-default"
         }
     ],
     "next_actions": [

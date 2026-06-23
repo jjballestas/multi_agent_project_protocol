@@ -139,6 +139,20 @@ ruta de uso vivo, no ejercida aqui.
   `scan_domain_neutrality.py` limpio incluyendo `connectors/`.
 - **AC10 - Gates verdes.** `validate_collaboration_state.py --root .` (drift B.3 = 0) + `scan_encoding.py`
   + `scan_domain_neutrality.py` + el nuevo `connector_sqlserver_readonly_cases` cableado en CI.
+- **AC11 - Uso vivo s9: backend vivo read-only + verificacion SERVER-SIDE (cumple AC8; DECISION-0041) [GO del operador].**
+  Cierra la precondicion diferida de AC8. (a) **Backend vivo:** `open_live()` deja de ser stub y conecta con un
+  driver real (pymssql/pyodbc) leyendo los parametros desde un `.env`/secret GITIGNORED (host/port/db/usuario de
+  minimo privilegio/password/encrypt) -- NUNCA credenciales ni nombres de dominio en codigo/artefactos commiteados.
+  El clasificador `classify_readonly_sql` (deny DML/DDL client-side) permanece DELANTE del backend (defensa en
+  profundidad). (b) **s9 server-side:** una verificacion sustantiva contra la DB real prueba que (i) un `SELECT`
+  permitido devuelve filas, (ii) un intento de **ESCRITURA lo rechaza EL SERVIDOR** (>=1 vector DML + >=1 DDL ->
+  error de permisos server-side, no solo el clasificador cliente) -> **prueba negativa objetiva registrada** en un
+  artefacto PII-free y secret-free (sin credenciales, sin nombres de schema/tabla del dominio). (c) **Off-by-default
+  intacto:** el registro versionado (`connectors.config.json`) sigue `enabled:false`; el uso vivo se activa SOLO por
+  override runtime gitignored (`connectors.runtime.json`), espejo del patron AC58. (d) #4 byte-identica
+  (`protocol.config.json` sin tocar). Behavior/evidencia: SELECT vivo ok + rechazo server-side de DML y DDL
+  registrado; sin override -> fail-closed (sin conexion); `scan_domain_neutrality` limpio (los terminos de dominio
+  viven solo en el env gitignored). maker=Codex / checker=Arquitecto + pasada Analista (PII/secret/egress).
 
 ## test_plan
 
