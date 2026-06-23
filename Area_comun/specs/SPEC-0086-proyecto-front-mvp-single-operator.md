@@ -452,6 +452,35 @@ producto/dominio en el core neutral.
   push NO es un segundo escritor: solo propaga el output ya escrito por submit_intent (carry AC17/no-bypass).
   Behavior-test: override presente+enabled -> el submit dispara commit+push (git mockeado); override ausente -> sin
   push (off); el config versionado sigue `enabled:false`.
+- **AC59 - En modo carga-por-archivo el boton "Execute submit_intent" esta OCULTO [PERMANENTE; REQ intake-ux-feedback-2].**
+  El boton "Execute submit_intent" (envio individual de UN requisito) NO se muestra en el modo carga-por-archivo
+  mientras el flujo es extraer-tarjetas. Solo se habilita (a) al hacer click en una tarjeta candidata y APROBAR ese
+  requisito (la accion de aprobar de la tarjeta es la que envia), o (b) en el modo individual/typed explicito. Asi el
+  operador no presiona el boton equivocado en el flujo por archivo. Behavior-test: en modo file sin tarjeta
+  seleccionada -> el boton Execute NO esta presente/visible; al aprobar una tarjeta o en modo typed -> disponible.
+- **AC60 - El selector de PROYECTO DESTINO es el primer elemento de la carga por archivo [PERMANENTE; REQ intake-ux-feedback-2].**
+  En la seccion de carga por archivo, el selector de "Proyecto destino" se renderiza como PRIMER div, ANTES del
+  selector de archivos. Behavior-test: en el orden del DOM de la seccion file, el selector de proyecto precede al
+  input de archivo.
+- **AC61 - "Extraer requisito" muestra un INDICADOR DE PROCESAMIENTO [PERMANENTE; REQ intake-ux-feedback-2].**
+  Al presionar "Extraer requisito", como el agente tarda, el front muestra un estado visible de "procesando" (spinner
+  o texto) y deshabilita el boton hasta que la extraccion responde, para que el operador no crea que no pasa nada.
+  Behavior-test: al disparar la extraccion el estado pasa a procesando + boton deshabilitado; al volver, se limpia.
+- **AC62 - Errores en ROJO + aviso de ingestion fiel [PERMANENTE; REQ intake-ux-feedback-2].**
+  Los mensajes de error (extraccion fallida, archivo rechazado, sin candidatas con causa) se muestran en ROJO/estado
+  de error visible, no como texto neutro. El aviso de ingestion refleja las EXTENSIONES REALES y maxBytes del config
+  cargado (no el literal hardcodeado ".md/.txt"). Behavior-test: una respuesta de error pinta el estado rojo; el
+  aviso lista las extensiones del config vivo.
+- **AC63 - "Extraer requisito" muestra las candidatas como TARJETAS end-to-end (fix 0-candidatas) [PERMANENTE; REQ intake-ux-feedback-2].**
+  Tras una extraccion exitosa las candidatas aparecen como TARJETAS VISIBLES sin accion manual extra (refresh real del
+  panel de candidatas). Se diagnostica y corrige el caso "Sin candidatas" sobre un .md valido multi-seccion: (a) el
+  server vivo HONRA el override runtime (file-ingestion.runtime.json -> extractor enabled, provider local-vlm,
+  endpoint loopback) -- si el proceso corre con el config versionado el extractor queda OFF; (b) la extraccion
+  local-vlm PARSEA y ALMACENA candidatas de un documento con varias historias (carry AC53 parseo robusto + AC51
+  troceado + AC52 egress loopback + AC43 gate PII + candidatas no-ledger); (c) si la extraccion produce 0 candidatas
+  con causa (modelo vacio, timeout), se reporta como ERROR visible (AC62), no como panel silenciosamente vacio. Repro
+  documentado: con el server vivo (runtime override + Ollama), subir un .md multi-historia (p.ej.
+  `historias_panel_operar_agentes.md`) -> aparecen N tarjetas candidatas. #4 byte-identica; off-by-default intacto.
 - **AC16 - Guarda PII ESTRUCTURAL + ASCII (pasada del Analista).** La guarda NO depende de un detector
   automatico (TASK-0118/DEF-PII = `proposed`, no existe aun): (a) separar la intencion-en-lenguaje-llano
   (plano publicable) del payload sensible; (b) redactar/marcar el texto libre en todo plano
