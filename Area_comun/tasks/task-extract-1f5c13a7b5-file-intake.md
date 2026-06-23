@@ -1,6 +1,6 @@
 ---
 task_id: "TASK-EXTRACT-1F5C13A7B5"
-title: "Extraction request from historias_panel_operar_agentes.md"
+title: "Extraction request from historias_panel_operar_agentes_p2.md"
 type: "triage"
 status: ready
 owner: "Arquitecto"
@@ -19,11 +19,11 @@ question_to_resolve: "Which candidate stories or use cases should be proposed fr
 closure_criterion: "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state."
 ---
 
-# TASK-EXTRACT-1F5C13A7B5 - Extraction request from historias_panel_operar_agentes.md
+# TASK-EXTRACT-1F5C13A7B5 - Extraction request from historias_panel_operar_agentes_p2.md
 
 ## Source
 
-- file_name: historias_panel_operar_agentes.md
+- file_name: historias_panel_operar_agentes_p2.md
 - sha256: 4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2
 - bytes: 3993
 - store_locator: os-tmp/zeus-protocol-file-intake/4e/4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2/payload.bin
