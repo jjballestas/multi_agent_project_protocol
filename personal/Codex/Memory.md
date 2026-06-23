@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-06-23 Europe/Madrid, after TASK-0160 intake extraction acceptanceIntent/PII label delivery.
+Last updated: 2026-06-23 Europe/Madrid, after TASK-0162 candidate cards UX product commit.
 
 ## Latest Session Note
 
+- TASK-0162 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `1b97c6b fix(intake): surface candidate card status`. Candidate cards now show local and server-side approval
+  blockers visibly on the card, "Usar tarjeta" synchronizes the radio/control to typed mode, and approval/discard
+  success refreshes the intake panel after the server updates the non-ledger candidate store. Evidence so far:
+  `node --check public/app.js src/server.js tests/staticContract.test.js`, product `git diff --check`, product
+  `npm test` PASS 55/55, local smoke on port 4197 for `/healthz` plus `/api/protocol/observe`, clean-clone Zeus
+  `npm test` PASS 55/55 after one transient first-run readiness flake in `auto commit push lands only exact
+  submit_intent outputs on a test remote`. Protocol delivery moved TASK-0162 to `in_review`, released all Codex
+  TASK-0162 claims (including a malformed intermediate delivery claim repaired through a second scoped claim),
+  moved the consumed Arquitecto GO to `Area_comun/mailbox/answered/`, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0162-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0162-codex-to-arquitecto-1.md`. Final protocol evidence before delivery
+  commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, and drift false up_to_seq 1374. The
+  current validator has no `--with-secrets` flag.
 - TASK-0161 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `109d039 fix(intake): harden file extraction resubmit`. Auto commit+push now treats clean staged output after an
   idempotent governed re-submit as a successful no-op and returns the primary output id, allowing file extraction to

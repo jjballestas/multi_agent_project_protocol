@@ -54,7 +54,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): UX tarjetas candidatas -- Aprobar visible + Usar-tarjeta sync modo + estado/refresh tras enviar (AC69-AC71 SPEC-0086)"
         },
         {

@@ -2,7 +2,7 @@
 task_id: TASK-0162
 title: "Proyecto-front (RF-14): UX de tarjetas candidatas -- Aprobar muestra el bloqueo de PII visible, Usar tarjeta sincroniza el selector de modo, y al enviar la candidata cambia de estado + refresca (AC69-AC71, SPEC-0086)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

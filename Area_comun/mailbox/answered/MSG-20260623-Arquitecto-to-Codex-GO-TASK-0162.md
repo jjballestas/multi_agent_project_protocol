@@ -4,7 +4,7 @@ task_id: TASK-0162
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0162 (ready): UX de tarjetas candidatas en Zeus-protocol (AC69-AC71). La extraccion YA genera tarjetas; arregla la UX de aprobar/usar/estado. (AC69) submitCandidateApproval (public/app.js ~1516) exige candidateDraft.piiReviewed; si falta escribe el error SOLO en #intake-preview (no visible) y vuelve -> 'Aprobar no hace nada'; muestra ese bloqueo VISIBLE en/junto a la tarjeta (rojo) para que el operador sepa que debe marcar 'PII revisada'. (AC70) selectCandidateDraft (~1501) llama applyIntakeInputMode('typed') pero NO sincroniza el radio intake-input-mode -> sincronizalo (radio en typed/manual consistente con la seccion), sin paso manual. (AC71) submitCandidateApproval NO refresca el panel tras aprobar -> la candidata sigue pending; el servidor debe marcar la candidata approved/discarded en el store NO-ledger (idempotente) y el front refresca -> la tarjeta refleja el nuevo estado o sale de pendientes. Carry AC16/17/43/51-68 (gate PII humano, candidatas no-ledger, no segundo escritor). maker=Codex/checker=Arquitecto+Analista; #4 byte-id; NUNCA pilotar contra el log vivo (clon desechable)."
