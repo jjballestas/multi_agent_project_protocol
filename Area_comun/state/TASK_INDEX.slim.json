@@ -50,6 +50,14 @@
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
         },
         {
+            "id": "TASK-0163",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "phase": "P2",

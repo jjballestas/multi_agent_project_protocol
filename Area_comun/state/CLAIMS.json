@@ -4788,6 +4788,24 @@
             "updated_at": "2026-06-23T19:18:00Z"
         },
         {
+            "claim_id": "CLAIM-20260623-Arquitecto-register-0163",
+            "expires_at": "2026-06-24T02:00:00Z",
+            "notes": "Register TASK-0163 (canal ocupado -> mensaje amable intente mas tarde, AC72) ready for Codex; depends_on TASK-0162.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0163-codex-ledger-busy-friendly-message.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T19:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0163",
+            "updated_at": "2026-06-23T19:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260623-Codex-TASK-0157",
             "expires_at": "2026-06-23T04:00:00Z",
             "notes": "Corrected released TASK-0157 initial claim scope after validator row-selector failure.",

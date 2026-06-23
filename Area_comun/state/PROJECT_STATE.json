@@ -541,6 +541,12 @@
             "title": "Proyecto-front (RF-14): UX tarjetas candidatas -- Aprobar visible + Usar-tarjeta sync modo + estado/refresh tras enviar (AC69-AC71 SPEC-0086)"
         },
         {
+            "id": "TASK-0163",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",

@@ -1955,6 +1955,20 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "depends_on": "TASK-0162",
+            "file": "Area_comun/tasks/TASK-0163-codex-ledger-busy-friendly-message.md",
+            "id": "TASK-0163",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): colision de ledger (canal ocupado) -> mensaje amable, no el error crudo (AC72 SPEC-0086)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
