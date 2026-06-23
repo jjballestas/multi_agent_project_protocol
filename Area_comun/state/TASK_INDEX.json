@@ -69,6 +69,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "el prompt se envia como un mensaje gobernado al mailbox (destino: el agente elegido, canal ASCII, texto sensible redactado); el front muestra el hilo de conversacion (mi prompt mas las respuestas del agente) leyendo el mailbox; ningun mensaje escribe estado ni ledger fuera de submit_intent.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-269ebf78-requirement-seed.md",
+            "id": "REQ-269EBF78",
+            "narrative": "Como operador, quiero seleccionar un agente (Arquitecto, Codex, Analista o un worker) de un combo y enviarle un prompt escrito, y ver su respuesta dentro del front, para dirigir a los agentes sin abrir VS Code ni la terminal.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Consola de prompts agente-a-agente desde el front",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "En tarjetas del Mailbox: el asunto del mensaje debe ser prominente (mayor tamano o peso), el identificador MSG-... debe aparecer en texto secundario (mas pequeno, menor contraste). En tarjetas del Backlog: el titulo de la tarea es lo primero, el REQ-ID en formato secundario debajo.",
             "author": "Operador",
             "endorsement": "none",

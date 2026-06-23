@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-269EBF78",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Consola de prompts agente-a-agente desde el front"
+        },
+        {
             "id": "REQ-68896287BC",
             "owner": "Operador",
             "status": "proposed",
