@@ -91,6 +91,12 @@
             "title": "UX: Boton Nueva historia/requisito con mal estilo visual en Intake"
         },
         {
+            "id": "REQ-885632826E",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Boton \"Enviar al Arquitecto\" en el Intake"
+        },
+        {
             "id": "REQ-9442785DD6",
             "owner": "Operador",
             "status": "proposed",

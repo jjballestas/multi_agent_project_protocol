@@ -26,6 +26,14 @@
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
+            "id": "REQ-885632826E",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "Boton \"Enviar al Arquitecto\" en el Intake"
+        },
+        {
             "id": "REQ-9442785DD6",
             "owner": "Operador",
             "phase": "P2",

@@ -435,6 +435,51 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "al presionar, el requisito se registra por submit_intent y llega al canonico, y el Arquitecto recibe la notificacion por el mailbox y se activa si estaba dormido; el front indica que el requisito fue tomado.",
+            "author": "Operador",
+            "candidate_pii_screening": {
+                "channel": "ascii",
+                "detector_version": "pii-screen-v1",
+                "finding_count": 1,
+                "finding_types": [
+                    "proper_name"
+                ],
+                "findings": [
+                    {
+                        "count": 1,
+                        "type": "proper_name"
+                    }
+                ],
+                "guaranteed": false,
+                "mode": "best_effort"
+            },
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-885632826e-requirement-seed.md",
+            "id": "REQ-885632826E",
+            "narrative": "Como operador, cuando monto un requisito en el Intake, quiero un boton que lo registre y ademas avise o despierte al Arquitecto, para que lo tome enseguida sin que yo tenga que hacer push manual ni esperar el sondeo.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "source_provenance": {
+                "candidate_pre_edit_hash": "8c33afe77dc3b6f43089e5b6656e2ad409b170d7edb39222feec36e3b78166a2",
+                "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
+                "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
+            },
+            "status": "proposed",
+            "title": "Boton \"Enviar al Arquitecto\" en el Intake",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "el front muestra el estado real de cada runtime (vivo, dormido, ultimo latido); un boton activa el runtime del agente o lo detiene; la accion solo aplica a agentes registrados y conocidos, nunca a un comando arbitrario; activar un agente no le concede autoridad de riesgo.",
             "author": "Operador",
             "candidate_pii_screening": {
