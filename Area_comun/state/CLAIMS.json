@@ -5057,9 +5057,25 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-23T16:39:07Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0161",
             "updated_at": "2026-06-23T16:39:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260623-Codex-TASK-0161-mailbox-fix",
+            "expires_at": "2026-06-24T23:59:00Z",
+            "notes": "Fix TASK-0161 handoff mailbox schema after validator finding.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0161-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-23T16:50:42Z",
+            "status": "released",
+            "task_id": "TASK-0161",
+            "updated_at": "2026-06-23T16:50:42Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

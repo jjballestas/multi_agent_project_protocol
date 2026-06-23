@@ -1,0 +1,11 @@
+﻿{
+    "intents":  [
+                    {
+                        "claim":  {
+                                      "op":  "release",
+                                      "claim_id":  "CLAIM-20260623-Codex-TASK-0161-mailbox-fix",
+                                      "idempotency_key":  "codex:task0161:mailbox-fix-release"
+                                  }
+                    }
+                ]
+}

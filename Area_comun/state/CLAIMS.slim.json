@@ -1,26 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260623-Codex-TASK-0161",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0161",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0161",
-                "Area_comun/tasks/TASK-0161-codex-intake-resubmit-extractor-robust.md",
-                "Area_comun/mailbox/open/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0161.md",
-                "Area_comun/mailbox/answered/MSG-20260623-Arquitecto-to-Codex-GO-TASK-0161.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0161-codex-to-arquitecto-1.md",
-                "Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0161-in-review.md",
-                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
-                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
-                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0161"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

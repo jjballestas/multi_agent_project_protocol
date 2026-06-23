@@ -4,6 +4,20 @@ Last updated: 2026-06-23 Europe/Madrid, after TASK-0160 intake extraction accept
 
 ## Latest Session Note
 
+- TASK-0161 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `109d039 fix(intake): harden file extraction resubmit`. Auto commit+push now treats clean staged output after an
+  idempotent governed re-submit as a successful no-op and returns the primary output id, allowing file extraction to
+  proceed against the existing TASK-EXTRACT. The local-vlm extractor now keeps the model alive with `keep_alive`,
+  allows configurable multi-minute timeouts, records specific failure reasons for timeout/HTTP/parse errors, and
+  stores failures as extraction state instead of collapsing them to a generic reason. Evidence so far:
+  `node --check src/server.js public/app.js tests/staticContract.test.js`, product `git diff --check`, targeted
+  AC66/AC67 tests PASS, product `npm test` PASS 54/54, clean-clone Zeus `npm test` PASS 54/54, and local smoke on
+  port 4194 for `/healthz` plus `/api/protocol/observe`. No live Ollama/operator-file repro was run in this session.
+  Protocol delivery moved TASK-0161 to `in_review`, released Codex claims, moved the consumed Arquitecto GO to
+  `Area_comun/mailbox/answered/`, opened
+  `Area_comun/mailbox/open/MSG-20260623-Codex-to-Arquitecto-TASK-0161-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0161-codex-to-arquitecto-1.md`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, and drift false up_to_seq 1356.
 - TASK-0160 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a3c5f26 fix(intake): allow empty extraction acceptance intent`. File extraction upload no longer requires
   `acceptanceIntent` in `sanitizeFileExtractionUpload`, while candidate approval still rejects an empty
