@@ -4,7 +4,7 @@ task_id: TASK-0173
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Revisar TASK-0173 como checker. Handoff: Area_comun/handoffs/HANDOFF-TASK-0173-codex-to-arquitecto-1.md. Producto commit: 1b80235."

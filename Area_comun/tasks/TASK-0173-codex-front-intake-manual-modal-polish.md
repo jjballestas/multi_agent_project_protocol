@@ -2,7 +2,7 @@
 task_id: TASK-0173
 title: "Proyecto-front: pulido del modal Manual del Intake -- quitar selector de modo redundante + indicador de pasos funcional (feedback prueba operador)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

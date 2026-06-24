@@ -2651,7 +2651,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0092",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: pulido modal Manual del Intake (selector redundante + pasos funcionales)",
             "type": "product"
         },

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a71f6a1bfb9b0bea28593d9314d1a772ef107c0c7720da648abb06fdf0ace41c",
+  "canonical_hash": "55c6f05bb0f4cb536489cdf40c75c9ac1922de381d41ec8b226d28902291d57b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -191,6 +191,7 @@
       "CLAIM-20260624-Arquitecto-close-0170": 1,
       "CLAIM-20260624-Arquitecto-close-0171": 1,
       "CLAIM-20260624-Arquitecto-close-0172": 1,
+      "CLAIM-20260624-Arquitecto-close-0173": 1,
       "CLAIM-20260624-Arquitecto-close-extract-1f5c": 1,
       "CLAIM-20260624-Arquitecto-decision-0060": 1,
       "CLAIM-20260624-Arquitecto-go-0167": 1,
@@ -374,6 +375,7 @@
       "MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix4-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix5-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0172-in-review": 1,
+      "MSG-20260624-Codex-to-Arquitecto-TASK-0173-in-review": 1,
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
@@ -477,7 +479,7 @@
       "TASK-0170": 7,
       "TASK-0171": 15,
       "TASK-0172": 41,
-      "TASK-0173": 7,
+      "TASK-0173": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -485,7 +487,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1169,
+    "events_applied": 1173,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -850,6 +852,10 @@
       "arquitecto:close-0172:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0172-in-review": 1828,
       "arquitecto:close-0172:done": 1817,
       "arquitecto:close-0172:rel": 1829,
+      "arquitecto:close-0173:acq": 1841,
+      "arquitecto:close-0173:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0173-in-review": 1843,
+      "arquitecto:close-0173:done": 1842,
+      "arquitecto:close-0173:rel": 1844,
       "arquitecto:close-extract-1f5c:claim-acquire-v2": 1595,
       "arquitecto:close-extract-1f5c:claim-release-v2": 1597,
       "arquitecto:close-extract-1f5c:status-done-v2": 1596,
@@ -1658,5 +1664,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1840
+  "up_to_seq": 1844
 }
