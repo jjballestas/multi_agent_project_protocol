@@ -4,6 +4,37 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implem
 
 ## Latest Session Note
 
+- TASK-0171 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `f6dc8a5 feat(front): register product workers`. The product server now exposes a bounded
+  `/api/protocol/product-workers/register` dry_run/execute path that writes new product workers only to the
+  gitignored `extractors.runtime.json` override, generates an Ed25519 product keypair with the private key under
+  gitignored `.secrets/workers`, returns only public key material to the client, keeps workers disabled/off by
+  default, and rejects duplicate ids, extra fields, type-confusion payloads, unsafe ids, and non-loopback endpoints
+  with 400 before writing. `loadProductWorkers()` now overlays the runtime worker registry on the versioned master.
+  Product evidence before this memory update: `node --check src/server.js public/app.js tests/staticContract.test.js`
+  OK, product `git diff --check` OK, targeted `node --test --test-name-pattern "TASK-0171"
+  tests/staticContract.test.js` PASS 2/2, full product `npm test` PASS 74/74 after one 244s timeout rerun, and local
+  smoke on port 4230 OK for `/healthz` plus `/api/protocol/observe`. The TASK-0171 AC4 behavior test hashed
+  `protocol.config.json`, `runtime/state/events.jsonl`, and `runtime/state/snapshot.json` before and after execute
+  and proved byte-identical protocol/#4 state. Protocol delivery is still in progress under
+  `CLAIM-20260624-Codex-TASK-0171`. Protocol delivery later moved TASK-0171 to `in_review`, released the claim,
+  wrote `Area_comun/handoffs/HANDOFF-TASK-0171-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0171.md`. Final protocol evidence:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1706.
+- TASK-0170 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `3c92824 coord(TASK-0170): reconcile delivered requirements`. Codex claimed TASK-0170 via
+  `runtime/submit_intent.py`, moved it `ready -> in_progress`, marked the 15 delivered requirement seeds
+  `proposed -> done` (REQ-07DD94CE, REQ-11A2A57C, REQ-16BDAA88, REQ-524372E9, REQ-7857CDE9,
+  REQ-A4B9FE80, REQ-CD4CE3F1, REQ-9442785DD6, REQ-DCFB1AA7, REQ-885632826E, REQ-95B96D25,
+  REQ-269EBF78, REQ-68896287BC, REQ-A54DAD73, REQ-E782911A), then moved TASK-0170 to `in_review` and
+  released the claim via submit_intent. REQ-4A88ECFFC4, REQ-520BBC1888, and TASK-0118 remained
+  `proposed`. Delivery wrote `Area_comun/handoffs/HANDOFF-TASK-0170-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0170-in-review.md`, and moved the consumed
+  GO to `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0170.md`. Evidence before the
+  memory update: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4
+  byte-identica up_to_seq 1695. `validate_collaboration_state.py --help` still exposes no `--with-secrets`
+  flag. No product repo changes were made.
 - TASK-0169 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `967a92d fix(validator): accept task extract row selectors`. The Python and PowerShell collaboration validators
   now accept row-scoped selectors for `TASK-EXTRACT-<hex>` in both `TASK_INDEX.json#...` and

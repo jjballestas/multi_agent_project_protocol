@@ -6692,6 +6692,35 @@
             "updated_at": "2026-06-24T13:56:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0171",
+            "expires_at": "2026-06-25T00:00:00Z",
+            "notes": "Implement TASK-0171 product-worker registration in Zeus-protocol, with bounded product writes and no protocol ledger/#4 mutation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0171",
+                "Area_comun/state/TASK_INDEX.json#TASK-0171",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0171",
+                "Area_comun/tasks/TASK-0171-codex-front-alta-worker-producto.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0171.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0171.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0171-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/.gitignore",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "D:/Agentes/Zeus/Zeus-protocol/extractors.config.json",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0171",
+            "updated_at": "2026-06-24T00:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

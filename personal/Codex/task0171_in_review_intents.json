@@ -1,0 +1,16 @@
+{
+  "idempotency_key": "Codex:TASK-0171:in_review:20260624T010000Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0171",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260624-Codex-TASK-0171"
+    }
+  ]
+}
