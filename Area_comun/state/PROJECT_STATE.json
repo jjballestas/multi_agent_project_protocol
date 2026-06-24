@@ -25,6 +25,12 @@
             "title": "UX: Descripcion corta inline en cada accion gobernada de Operate RF-5..RF-10"
         },
         {
+            "id": "REQ-1C7B4275",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
+        },
+        {
             "id": "REQ-269EBF78",
             "owner": "Operador",
             "status": "done",

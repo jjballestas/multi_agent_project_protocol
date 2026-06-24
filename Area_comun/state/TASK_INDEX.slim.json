@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-1C7B4275",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
+        },
+        {
             "id": "REQ-3F85B44C",
             "owner": "Operador",
             "phase": "P2",
