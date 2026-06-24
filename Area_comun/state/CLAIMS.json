@@ -5905,6 +5905,20 @@
             "updated_at": "2026-06-24T08:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-reporte-cierre",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "Reporte humano de cierre de proceso (CLAUDE.md regla 7). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-reporte-cierre",
+                "Area_comun/reports/REPORTE-20260624-front-completo-y-hardening-0166.md"
+            ],
+            "started_at": "2026-06-24T12:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T12:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-review-0166-analista",
             "expires_at": "2026-06-24T14:00:00Z",
             "notes": "Send governed REVIEW request to Analista for TASK-0166 (SPEC-0089 AC1-AC6). Claim file-scoped (DECISION-0059).",
