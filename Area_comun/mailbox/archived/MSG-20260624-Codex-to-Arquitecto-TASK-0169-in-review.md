@@ -4,7 +4,7 @@ task_id: TASK-0169
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0169 entregada a in_review: validador acepta TASK-EXTRACT-* en selectores de fila con golden."

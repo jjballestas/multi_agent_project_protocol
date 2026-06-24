@@ -2,7 +2,7 @@
 task_id: TASK-0169
 title: "Validador: alinear los regex de selectores de fila con submit_intent (aceptar ids TASK-EXTRACT-* en TASK_INDEX y active_tasks) + golden"
 type: implementation
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal
