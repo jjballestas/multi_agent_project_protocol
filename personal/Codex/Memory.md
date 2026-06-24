@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 round 3 layout fix product commit.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0173 product commit.
 
 ## Latest Session Note
 
+- TASK-0173 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `1b80235 fix(intake): polish manual modal steps`. The Manual Intake modal no longer renders the redundant
+  modal-local Manual/Archivo radio group; the header mode selector remains the single mode chooser. The passive
+  step indicator now reflects the governed wizard flow: Capturar for compose, Preview after dry_run, Confirmar while
+  execute is being submitted, and Resultado after an attested execute response. Permanent coverage
+  `TASK-0173 manual modal has no redundant mode radios and advances passive steps` verifies the modal has no
+  redundant radios and the derived step states advance. Evidence before this memory update: `node --check
+  public/app.js src/server.js tests/staticContract.test.js` OK, product `git diff --check -- public/app.js
+  tests/staticContract.test.js` OK, targeted `npm test -- --test-name-pattern "TASK-0173|TASK-0172 AC3"` PASS 3/3,
+  full product `npm test` PASS 86/86 after one 424s timeout rerun, local smoke on port 4242 OK for `/healthz` plus
+  `/api/protocol/actions`, and clean-clone product `npm test` PASS 86/86. Protocol delivery moved TASK-0173 to
+  `in_review`, released Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0173-codex-to-arquitecto-1.md`,
+  opened `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0173-in-review.md`, moved the consumed GO
+  to `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0173.md`, and committed with message
+  `coord(TASK-0173): deliver manual modal polish`. Final protocol evidence before delivery commit: encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1840.
 - TASK-0172 round 5 harness fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `9835ffe test(intake): allocate free harness ports`. `tests/staticContract.test.js::startServer()` now obtains an
   ephemeral free loopback port via `net.Server.listen(0)` before spawning `src/server.js`, replacing the prior

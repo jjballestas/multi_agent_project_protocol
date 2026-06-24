@@ -1,0 +1,36 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0173",
+          "task_id": "TASK-0173",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0173",
+            "Area_comun/state/TASK_INDEX.json#TASK-0173",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0173",
+            "Area_comun/tasks/TASK-0173-codex-front-intake-manual-modal-polish.md",
+            "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+          ],
+          "started_at": "2026-06-24T19:00:00Z",
+          "updated_at": "2026-06-24T19:00:00Z",
+          "expires_at": "2026-06-25T00:00:00Z",
+          "status": "active",
+          "notes": "TASK-0173 intake manual modal polish: remove redundant mode radios and advance passive step indicator."
+        },
+        "idempotency_key": "codex:0173:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0173",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:0173:in-progress"
+      }
+    }
+  ]
+}

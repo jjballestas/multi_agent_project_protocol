@@ -1,0 +1,28 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0173-delivery",
+          "task_id": "TASK-0173",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0173-delivery",
+            "Area_comun/handoffs/HANDOFF-TASK-0173-codex-to-arquitecto-1.md",
+            "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0173-in-review.md",
+            "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0173.md",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0173.md",
+            "personal/Codex/Memory.md"
+          ],
+          "started_at": "2026-06-24T19:30:00Z",
+          "updated_at": "2026-06-24T19:30:00Z",
+          "expires_at": "2026-06-25T00:00:00Z",
+          "status": "active",
+          "notes": "TASK-0173 delivery: handoff, mailbox response, consumed GO move, and Codex memory update."
+        },
+        "idempotency_key": "codex:0173:delivery-claim"
+      }
+    }
+  ]
+}
