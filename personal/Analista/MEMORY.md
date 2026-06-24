@@ -336,6 +336,19 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0165 v4 (2026-06-24): OK/CERRABLE, veredicto commiteado en `5ca009c`
+  (`review(TASK-0165): Analista OK v4 thread PII`). Ancla producto `ea7304f` + protocolo
+  `8a5c90c6ae7152dd512b86a70f2ecdac14eba096`. Clon limpio producto `npm test`: primera corrida timeout local
+  exit 124 a 184s; segunda corrida exit 0, 61/61. Test nuevo v4 honesto: `assert.doesNotMatch` por literal exacto
+  y `assert.match` para tokens `[PHONE-REDACTED]` / `[ADDR-REDACTED]`. Payload propio `buildAgentThread` +
+  `redactRequirementText`: `Tel +1 (415) 555-2671`, `Tel (+57) (300) 555-7788`, `telefono (601) 555-7788 ext 9`,
+  `Phone +44 (020) 5555 7788`, `Cra 7 # 12-34 Bogota`, `Cl 45 # 7-89 Medellin`, `KR 7 12 34 Bogota`,
+  `Carrera 11 # 22-33 Cali`, `Calle 10 No 20-30 Piso 3`, `Av. Siempre Viva 742 piso 2` no filtran literales;
+  tokens phone/addr presentes. Carry AC17 `mailbox-send` contra servidor temporal: `noPiiAck=409`,
+  `badAgent=400`, `actorInjection=400`, `intentsInjection=400`, `routeState=400`. Gates protocolo con/sin secretos
+  exit 0, drift 0 `up_to_seq=1535`, neutralidad/encoding exit 0, #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no bloqueantes: nombre propio
+  libre y fragmentos sueltos tipo `#45-67` quedan para DEF-PII (TASK-0118); PII best-effort estructural.
 - TASK-0165 v3 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `037877d`
   (`review(TASK-0165): Analista requires thread PII v3 hardening`). Ancla producto `41bf1a2` +
   protocolo `a51d0c7a158d766c77b6827fd89fdb460312c78d`. Clon limpio producto `npm test` exit 0, 60/60.
