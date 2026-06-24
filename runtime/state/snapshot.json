@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b76cc9f694e1273a9d7c5423ce377176121efe1a055c99fbcf699ae26329645e",
+  "canonical_hash": "46b86d14bd971ebd967e348ba354fadfb7924d3ddf929581634a6d46d480f4ac",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -330,6 +330,7 @@
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
+      "REQ-01193FD6": 3,
       "REQ-07DD94CE": 4,
       "REQ-0873A67C": 4,
       "REQ-11A2A57C": 4,
@@ -435,7 +436,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1069,
+    "events_applied": 1072,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1236,6 +1237,9 @@
       "front:mailbox-archive:A94C2BA4": 1074,
       "front:mailbox-archive:A94C2BA4:claim-acquire": 1073,
       "front:mailbox-archive:A94C2BA4:claim-release": 1075,
+      "front:requirement-intake:01193FD6": 1742,
+      "front:requirement-intake:01193FD6:claim-acquire": 1741,
+      "front:requirement-intake:01193FD6:claim-release": 1743,
       "front:requirement-intake:07DD94CE": 1454,
       "front:requirement-intake:07DD94CE:claim-acquire": 1453,
       "front:requirement-intake:07DD94CE:claim-release": 1455,
@@ -1508,5 +1512,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1740
+  "up_to_seq": 1743
 }

@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-01193FD6",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-06 Intake: eliminar selector de modo y lista de candidatas de la vista standalone de extracci"
+        },
+        {
             "id": "REQ-1C7B4275",
             "owner": "Operador",
             "status": "proposed",
