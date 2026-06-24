@@ -4,6 +4,17 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product 
 
 ## Latest Session Note
 
+- TASK-0168 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `f596863 fix(runtime): allow architect triage closes`. `runtime/submit_intent.py::task_status_capability`
+  now extends the existing owner-only lightweight close rule from `analysis` to `analysis`, `triage`, and
+  `extraction`, preserving implementer requirements for third-party triage and non-lightweight product tasks plus
+  unchanged reviewer/qa paths. `examples/analysis_close_cases/run_tests.py` now covers 8 deterministic cases,
+  including own triage/extraction allowed, triage-not-owner denied to implementer, product-owned still implementer,
+  and reviewer/qa paths unchanged. Evidence before this memory update: `python -m py_compile
+  runtime/submit_intent.py examples/analysis_close_cases/run_tests.py` OK, `python
+  examples/analysis_close_cases/run_tests.py` PASS 8/8, encoding OK, neutrality OK,
+  `validate_collaboration_state.py` OK, drift false up_to_seq 1587. The validator still exposes no
+  `--with-secrets` flag; #4 byte-identica was evidenced by equal drift hot/replay hashes.
 - TASK-0166 changes_requested fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cab246c fix(runtime): reject invalid runtime liveness inputs`. Runtime control now rejects an `agentId` whose raw
   value would be changed by control-character/non-ASCII/trim normalization before allowlist lookup, so
