@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Golden cases for DECISION-0032: architect/orchestrator closes its own analysis-tasks.
+"""Golden cases for DECISION-0032/0060: architect/orchestrator closes own lightweight tasks.
 
-The architect (orchestrator) must be able to advance/close ITS OWN type==analysis tasks to
-in_review/done/blocked WITHOUT an implementer/qa capability. Every other task type, and analysis
-tasks NOT owned by the actor, keep requiring implementer. Deterministic, no I/O.
+The architect (orchestrator) must be able to advance/close ITS OWN type in
+{analysis, triage, extraction} tasks to in_review/done/blocked WITHOUT an implementer/qa capability.
+Every other task type, and lightweight tasks NOT owned by the actor, keep requiring implementer.
+Deterministic, no I/O.
 """
 from __future__ import annotations
 
@@ -52,11 +53,36 @@ def gc_4_analysis_not_owner_still_requires_implementer() -> None:
     assert cap("in_progress", "in_review", state("analysis", "Claude"), "Codex") == {"implementer"}
 
 
+def gc_5_architect_closes_own_triage_and_extraction_to_done() -> None:
+    # DECISION-0060: own triage/extraction tasks get the same lightweight close rule as analysis.
+    assert cap("in_progress", "done", state("triage", "Arquitecto"), "Arquitecto") == {"orchestrator", "architect"}
+    assert cap("in_progress", "done", state("extraction", "Arquitecto"), "Arquitecto") == {"orchestrator", "architect"}
+
+
+def gc_6_triage_not_owner_still_requires_implementer() -> None:
+    # Triage task NOT owned by the actor: no relaxation, still implementer.
+    assert cap("in_progress", "done", state("triage", "Arquitecto"), "Codex") == {"implementer"}
+
+
+def gc_7_product_owned_by_actor_still_requires_implementer() -> None:
+    # Product task owned by the actor: no relaxation by ownership alone.
+    assert cap("in_progress", "done", state("product", "Arquitecto"), "Arquitecto") == {"implementer"}
+
+
+def gc_8_reviewer_and_qa_paths_stay_unchanged() -> None:
+    assert cap("in_review", "done", state("triage", "Arquitecto"), "Arquitecto") == {"reviewer"}
+    assert cap("qa_pending", "done", state("extraction", "Arquitecto"), "Arquitecto") == {"qa"}
+
+
 CASES = {
     "GC-1": gc_1_architect_advances_own_analysis_to_in_review,
     "GC-2": gc_2_architect_closes_own_analysis_to_done,
     "GC-3": gc_3_non_analysis_still_requires_implementer,
     "GC-4": gc_4_analysis_not_owner_still_requires_implementer,
+    "GC-5": gc_5_architect_closes_own_triage_and_extraction_to_done,
+    "GC-6": gc_6_triage_not_owner_still_requires_implementer,
+    "GC-7": gc_7_product_owned_by_actor_still_requires_implementer,
+    "GC-8": gc_8_reviewer_and_qa_paths_stay_unchanged,
 }
 
 

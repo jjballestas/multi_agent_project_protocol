@@ -2,7 +2,7 @@
 task_id: TASK-0168
 title: "Runtime: extender task_status_capability (DECISION-0060) -- architect/orchestrator cierra sus triage/extraction-tasks propias; golden + neutralidad"
 type: implementation
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

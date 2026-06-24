@@ -535,12 +535,13 @@ def task_status_capability(normalized: dict[str, Any], state: dict[str, Any], ac
         return {"reviewer"}
     if from_status == "qa_pending" and to_status in {"qa_failed", "architect_review", "done"}:
         return {"qa"}
-    # DECISION-0032: the architect/orchestrator can advance/close ITS OWN analysis-tasks
+    # DECISION-0032/0060: the architect/orchestrator can advance/close ITS OWN
+    # analysis/triage/extraction tasks
     # (in_review/done/blocked) without an implementer/qa, since an analysis deliverable has no
-    # separate implementer-vs-reviewer split. Only applies to type==analysis owned by the actor;
-    # every other task type keeps requiring implementer below.
+    # separate implementer-vs-reviewer split. Only applies to these lightweight task types owned
+    # by the actor; every other task type keeps requiring implementer below.
     task_type = str(task.get("type") or "")
-    if task_type == "analysis" and actor_owns_task and to_status in {"in_review", "done", "blocked"}:
+    if task_type in {"analysis", "triage", "extraction"} and actor_owns_task and to_status in {"in_review", "done", "blocked"}:
         return {"orchestrator", "architect"}
     if to_status in {"in_review", "done", "blocked"}:
         return {"implementer"}
