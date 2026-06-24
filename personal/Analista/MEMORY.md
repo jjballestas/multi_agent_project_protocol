@@ -336,6 +336,74 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0172 gate 9835ffe (2026-06-24): OK/CERRABLE, veredicto commiteado y pusheado en `c423bf4`
+  (`review(TASK-0172): Analista OK gate harness`). Ancla producto
+  `9835ffe55ad5049863207d053bfd94c6a91681f8`; protocolo REVIEW/head
+  `a21682d683e5c449f31b3acbea8a9ead5731d0ee`. Clon limpio producto `npm test`: primera invocacion mia
+  quedo cortada por timeout local exit 124 a 364s; con timeout suficiente, corrida 1 exit 0 85/85 en 379635 ms
+  y corrida 2 exit 0 85/85 en 439931 ms. Targeted `TASK-0172|candidate review` exit 0 13/13. Payload propio
+  front: 10 familias PII redactadas (email, telefonos US/CO, direccion calle/cra, doc, cuenta, NIT, razon social,
+  SQL), gate flag `piiReviewed=false` preservado, carpetas/uploader/standalone/rows=8 pasan. Gates protocolo:
+  validate con secrets exit 0, validate sin secrets en clon exit 0, drift 0 `up_to_seq=1815`,
+  neutralidad/encoding exit 0, #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual no bloqueante: suite estable
+  pero lenta en Windows; PII sigue best-effort estructural/DEF-PII, sin fuga nueva en familias exigidas.
+- TASK-0172 final 967f5cb (2026-06-24): CAMBIO-REQUERIDO por gate obligatorio, aunque PII/fronteras pasan.
+  Veredicto commiteado y pusheado en `2b2478e` (`review(TASK-0172): Analista blocks final npm gate`). Ancla
+  producto `967f5cbfb396e808df674850f965c386ddd5b9a3`; protocolo REVIEW final `e4858714575e834924cefcc7978782e7a564986d`.
+  Clon limpio producto: primera corrida `npm test` timeout exit 124 a 304s; rerun 1 exit 1, 84/85, fallo
+  `candidate review...` por `listen EACCES 127.0.0.1:5040`; rerun 2 exit 1, 84/85, fallo `runtime control...`
+  por readiness en `127.0.0.1:5060`. Targeted `npm test -- --test-name-pattern "TASK-0172|candidate review"`
+  exit 0, 13/13. Payload propio PII contra `/api/protocol/actions` y `/api/protocol/intake-candidates`: email,
+  telefono, direccion y documentos ausentes; tokens email/phone/addr presentes. `piiReviewed:false` -> 409;
+  extractor disabled -> 403; no nueva ruta de escritura ni activacion implicita. Gates protocolo con/sin secretos
+  exit 0; drift 0 `up_to_seq=1800`; neutralidad/encoding exit 0; #4 byte-identica sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Leccion: aunque el fix sustantivo cierre,
+  si la instruccion gatea por `npm test` EXIT, una flake/readiness no verde bloquea cierre hasta corrida full verde
+  o hardening del harness.
+- TASK-0172 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `1cc3ba0`
+  (`review(TASK-0172): Analista requires candidate PII redaction`). Ancla producto
+  `a4e0b50492a91ecbbc60c4e1e75085e5e05550da`; protocolo citado `009efe1250c522b7d200bf1a83f000e2e015b618`;
+  REVIEW materializado en `db368d46e9229b1ab7f3c2270473a46a400501b5`. Clon limpio producto `npm test`
+  exit 0, 81/81. RC-01/02/03/05/06 pasan y no halle nueva ruta de escritura ni activacion implicita del
+  extractor; commit producto toca solo `public/app.js`, `public/styles.css`, `tests/staticContract.test.js`.
+  Gate de aprobacion de candidata exige `piiReviewed` local + server-side. SLIP bloqueante: el modelo publico
+  `GET /api/protocol/actions -> safeguards.candidateReview.candidates` devuelve `title`, `narrative` y
+  `acceptance_intent` desde `normalizeStoredCandidate` con solo `ascii(stripControl(...))`, sin redaccion;
+  payload propio con `persona@example.com`, `+1 (415) 555-2671`, `Calle 10 No 20-30` y `cedula 123456789`
+  salio con todos los literales presentes. Pedido: redactar campos publicos de candidatas/prellenado y anadir
+  test negativo permanente. Gates protocolo: validate vivo exit 0; validate sin secretos en clon `009efe1`
+  exit 0; drift vivo 0 `up_to_seq=1767`; neutrality/encoding exit 0; #4 `protocol.config.json` byte-identico
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- TASK-0171 fix cb7ce0a (2026-06-24): OK/CERRABLE, veredicto commiteado en `f7e5c93`
+  (`review(TASK-0171): Analista OK private key ACL fix`). Ancla producto `cb7ce0a`; protocolo citado
+  `1e3a4e7`; REVIEW materializado en `62bd09d`; gates vivos corridos en `01586e8`.
+  Clon limpio producto `npm test`: primera corrida timeout local exit 124 a 304s; rerun exit 0, 74/74.
+  Payloads propios: dry_run 200 sin runtime config; execute 200, respuesta/registry sin `BEGIN PRIVATE KEY`,
+  privada real en `.secrets/workers`; `icacls` de la clave mostro solo `JBALL_PC\johnb:(F)`, sin Everyone,
+  BUILTIN\Users ni Authenticated Users; fallo de `icacls` forzado con `PATH=""` -> 500
+  `PRIVATE_KEY_PROTECTION_FAILED`, privada borrada y registry no creado. Negativos top-extra, worker-extra,
+  id array/traversal/space, endpoint decimal/externo/IPv4-mapped, provider invalido, missing-confirm y duplicate
+  -> 400/409 segun corresponde. Gates protocolo: validate con secretos exit 0; validate sin secretos en clon
+  `1e3a4e7` exit 0; drift vivo 0 `up_to_seq=1743`; neutralidad/encoding exit 0; #4
+  `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual no bloqueante: POSIX 0600
+  verificado por lectura de codigo, no por ejecucion en esta plataforma Windows.
+- TASK-0171 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `197498f`
+  (`review(TASK-0171): Analista requires private key mode`). Ancla producto
+  `f6dc8a56a801a50c6624517c835580d46d432199`; protocolo citado por instruccion
+  `0c24550aebc39498d69a04e37e2a206bccf73ccd`; REVIEW materializado en protocolo `2d31a4b`.
+  Clon limpio producto `npm test`: primera corrida timeout local exit 124 a 244s; rerun exit 0, 74/74.
+  Payloads propios contra servidor temporal + protocolo clonado: dry_run 200 sin escribir; execute 200 escribe
+  solo `extractors.runtime.json` de producto con `enabled:false`, `publicKeyPem`, sin `PRIVATE KEY` en respuesta,
+  registry ni logs; `protocol.config.json`/events/snapshot byte-identicos; `agent_registry`/`signature_config`
+  sin worker; no submit_intent. Negativos top-extra, worker-extra, type-confusion por campo, id traversal/space,
+  endpoint externo/decimal/userinfo/IPv4-mapped/https-127, provider invalido, duplicate y missing-confirm -> 400/409
+  sin escribir. SLIP bloqueante: la instruccion de review exigia privada gitignored con mode 0600, pero en Windows
+  `fs.stat(private).mode & 0o777` dio `666`; no cierro AC2 mientras el gate afirma 0600. Gates protocolo:
+  validate con secretos exit 0; validate sin secretos en clon `2d31a4b` exit 0; validate clon citado `0c24550`
+  exit 0; drift vivo 0 `up_to_seq=1708`; neutralidad/encoding exit 0; #4 `protocol.config.json` byte-identico
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0166 r5 58c713c (2026-06-24): OK/CERRABLE, veredicto commiteado en `4e7d88a`
   (`review(TASK-0166): Analista OK runtime action guard`). Ancla producto
   `58c713c7a3de594958fc2d7e712e37c0a30361ce`; protocolo citado por instruccion `7aa3385`
