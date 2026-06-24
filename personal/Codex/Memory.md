@@ -4,6 +4,16 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
 
 ## Latest Session Note
 
+- TASK-0165 v3 PII-thread fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `41bf1a2 fix(front): redact agent thread pii patterns`. `public/app.js::redactRequirementText`, used by
+  `buildAgentThread`, now redacts enumerable public-plane PII patterns for email, phone, document/id, long account,
+  and address with explicit marker tokens, while documenting AC16 honestly as best-effort pattern redaction with free
+  proper names remaining residual DEF-PII. `tests/staticContract.test.js` adds a deterministic thread-render test that
+  proves those literals are not exposed without relying on SQL masking. Evidence before this memory update:
+  `node --check public/app.js src/server.js tests/staticContract.test.js` OK, product `git diff --check` OK, and
+  product `npm test` PASS 60/60 after one 124s timeout on the first full run. Protocol pre-delivery evidence:
+  encoding OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1525; neutrality command exited 0 with no
+  extra stdout. Delivery artifacts and final re-review transition are still pending in this session.
 - TASK-0165 changes_requested product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cf13e7f fix(front): validate mailbox prompt messages`. The governed `mailbox-send` writer now emits
   operator-directive prompt messages with `requires_response: false`, avoiding validator-invalid

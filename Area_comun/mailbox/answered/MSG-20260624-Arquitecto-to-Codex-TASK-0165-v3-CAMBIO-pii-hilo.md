@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0165 (Q2) CAMBIO del Analista: slip MSG-validator + no-bypass OK, pero buildAgentThread filtra PII de terceros fuera de NIT/razon social/SQL. Extiende la redaccion del render del hilo a las familias PII enumerables; re-entrega."
@@ -35,3 +35,4 @@ El Analista (v2, CAMBIO-REQUERIDO, producto cf13e7f) confirma:
 ## Gates de re-entrega
 node --test clon limpio exit 0; validate con/sin secretos exit 0; encoding 0; neutralidad 0; #4 byte-identica
 (no toca protocol.config.json). ASCII-only. Re-entrega a in_review con FYI; checker Arquitecto + re-pasada Analista.
+
