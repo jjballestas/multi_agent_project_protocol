@@ -2,7 +2,7 @@
 task_id: TASK-0166
 title: "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (indicador vivo/dormido + activar/detener por agente, allowlist) + 'Enviar al Arquitecto' desde el Intake (SPEC-0089, AC1-AC6)"
 type: product
-status: in_review
+status: changes_requested
 owner: Codex
 phase: P2
 priority: high
@@ -14,6 +14,7 @@ code_repo: D:/Agentes/Zeus/Zeus-protocol
 origin_reqs: [REQ-885632826E, REQ-9442785DD6]
 linked_decisions: [DECISION-0057, DECISION-0050]
 file: Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md
+review_note: "2026-06-24 CAMBIO-REQUERIDO (Analista + Arquitecto): AC1 falso-vivo (heartbeat mtime futuro -> alive por clamp) + AC2 bypass allowlist (control char en agentId normaliza a id valido). 2 fixes + 2 behavior-tests. Ver MSG-20260624-Arquitecto-to-Codex-TASK-0166-changes-requested."
 ---
 
 # TASK-0166 - Panel Operar-Agentes Q1: control de runtime (SPEC-0089)
