@@ -741,7 +741,7 @@
         {
             "id": "TASK-0174",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Proyecto-front: quitar indicador de pasos del modal de Intake"
         },
         {

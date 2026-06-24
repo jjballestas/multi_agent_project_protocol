@@ -4,7 +4,7 @@ task_id: TASK-0174
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0174: quitar del modal de Intake el indicador de pasos (div.steps con span.step '1 Capturar/2 Preview/3 Confirmar/4 Resultado', ~1585-1589) + la logica/CSS huerfana (setIntakeStep/.steps/.step). El flujo gobernado RF-14 y sus botones/estados NO cambian. Actualizar/retirar el behavior-test de avance de pasos por uno que afirme que el indicador ya no se renderiza. node --test clon limpio exit 0; #4 byte-identica; sin nueva ruta de escritura. Reentregar a in_review."

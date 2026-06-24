@@ -2688,7 +2688,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0092",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Proyecto-front: quitar indicador de pasos del modal de Intake",
             "type": "product"
         },

@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0173 product commit.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0174 product commit.
 
 ## Latest Session Note
 
+- TASK-0174 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `e445630 fix(intake): remove modal step indicator`. The Manual Intake modal no longer renders the passive
+  `1 Capturar / 2 Preview / 3 Confirmar / 4 Resultado` step indicator; orphaned step CSS and `setIntakeStep`
+  calls were removed while preserving the governed RF-14 preview/execute flow and badges. Permanent coverage
+  `TASK-0174 manual modal has no redundant mode radios and no passive step indicator` verifies the modal does
+  not render step markup, step logic, or step CSS. Evidence before this memory update: `node --check public/app.js
+  src/server.js tests/staticContract.test.js` OK, product `git diff --check -- public/app.js public/styles.css
+  tests/staticContract.test.js` OK, targeted `npm test -- --test-name-pattern "TASK-0174|TASK-0172 AC3"` PASS 3/3,
+  full product `npm test` PASS 86/86, local smoke on port 4244 OK for `/healthz` plus `/api/protocol/actions`,
+  and clean-clone product `npm test` PASS 86/86. Protocol delivery commit
+  `coord(TASK-0174): deliver intake step removal` moved TASK-0174 to `in_review`, released Codex claims,
+  wrote `Area_comun/handoffs/HANDOFF-TASK-0174-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review.md`, and moved the consumed GO
+  to `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0174.md`. Final protocol evidence
+  before delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4
+  byte-identica up_to_seq 1864.
 - TASK-0173 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `1b80235 fix(intake): polish manual modal steps`. The Manual Intake modal no longer renders the redundant
   modal-local Manual/Archivo radio group; the header mode selector remains the single mode chooser. The passive

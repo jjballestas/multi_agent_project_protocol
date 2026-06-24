@@ -7428,9 +7428,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-24T22:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0174",
             "updated_at": "2026-06-24T22:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0174-delivery",
+            "expires_at": "2026-06-25T22:20:00Z",
+            "notes": "Delivery coordination for TASK-0174 handoff, mailbox response, and consumed GO move.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0174-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0174-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0174.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0174.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T22:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0174",
+            "updated_at": "2026-06-24T22:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0174-go-answer",
+            "expires_at": "2026-06-25T22:35:00Z",
+            "notes": "Move consumed TASK-0174 GO to answered after in_review ledger delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0174-go-answer",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0174.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0174.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T22:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0174",
+            "updated_at": "2026-06-24T22:35:00Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
