@@ -1,0 +1,19 @@
+{
+  "idempotency_key": "Codex:TASK-0171:fix-release-claims:20260624T000003Z",
+  "intents": [
+    {
+      "claim": {
+        "idempotency_key": "Codex:TASK-0171:fix-release-ac2:20260624T000003Z",
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0171-fix-ac2"
+      }
+    },
+    {
+      "claim": {
+        "idempotency_key": "Codex:TASK-0171:fix-release-delivery:20260624T000003Z",
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0171-fix-delivery"
+      }
+    }
+  ]
+}

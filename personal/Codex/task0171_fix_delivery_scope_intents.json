@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0171:fix-delivery-scope:20260624T000000Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260624-Codex-TASK-0171-fix-delivery",
+        "owner": "Codex",
+        "task_id": "TASK-0171",
+        "status": "active",
+        "started_at": "2026-06-24T00:00:00Z",
+        "updated_at": "2026-06-24T00:00:00Z",
+        "expires_at": "2026-06-25T00:00:00Z",
+        "notes": "Deliver TASK-0171 AC2 fix handoff and mailbox response.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0171-fix-delivery",
+          "Area_comun/handoffs/HANDOFF-TASK-0171-codex-to-arquitecto-2.md",
+          "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review.md",
+          "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0171-changes.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    }
+  ]
+}

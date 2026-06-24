@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implementation.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0171 AC2 private-key protection fix.
 
 ## Latest Session Note
 
+- TASK-0171 AC2 fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `cb7ce0a fix(worker): restrict private key ACL`. Product-worker private-key persistence now writes under the
+  server-controlled `.secrets/workers` root, keeps POSIX permissions at `0600`, and on Windows runs `icacls` through
+  `execFileAsync` with fixed args to remove inherited/world groups and grant the current process user full control.
+  If private-key protection fails, the server deletes the private key and returns a controlled
+  `PRIVATE_KEY_PROTECTION_FAILED` error before writing the runtime worker registry. The TASK-0171 behavior test now
+  verifies the private key is not world-accessible on the platform running the suite: POSIX checks `mode & 0o077 ===
+  0`; Windows inspects the resulting ACL instead of asserting a false `0600` mode. Evidence before this memory
+  update: `node --check src/server.js tests/staticContract.test.js public/app.js` OK, product `git diff --check` OK,
+  targeted `node --test --test-name-pattern "TASK-0171" tests/staticContract.test.js` PASS 2/2, full product
+  `npm test` PASS 74/74 after one pre-allowlist failure and one local-vlm readiness failure on the first full run,
+  smoke on port 4232 OK for `/healthz` plus `/api/protocol/observe`, and clean-clone product `npm test` PASS 74/74.
+  Protocol delivery moved TASK-0171 back to `in_review`, released fix claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0171-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review.md`, and moved the consumed
+  changes-requested message to `Area_comun/mailbox/answered/`. Protocol evidence before delivery amend: encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1717.
 - TASK-0171 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `f6dc8a5 feat(front): register product workers`. The product server now exposes a bounded
   `/api/protocol/product-workers/register` dry_run/execute path that writes new product workers only to the
