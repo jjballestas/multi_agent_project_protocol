@@ -336,6 +336,17 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0166 r5 58c713c (2026-06-24): OK/CERRABLE, veredicto commiteado en `4e7d88a`
+  (`review(TASK-0166): Analista OK runtime action guard`). Ancla producto
+  `58c713c7a3de594958fc2d7e712e37c0a30361ce`; protocolo citado por instruccion `7aa3385`
+  (mensaje REVIEW materializado en `ada79b8`). Clon limpio producto `npm test` exit 0, 72/72. Payloads propios
+  contra servidor temporal + protocolo clonado en `7aa3385`: `agentId` array/object/number/bool/null/space/control/
+  ZWJ/lowercase/unknown -> 400 sin heartbeat; `action` array/object/number/bool/null/unknown/uppercase -> 400 sin
+  heartbeat; positivos exactos `activate`/`stop` -> 200 con heartbeat creado/eliminado. No encontre escape nuevo
+  bloqueante. Residual no bloqueante: `action` string con whitespace externo se normaliza por `trim()` y ejecuta la
+  enum cerrada; no amplia acciones ni comando arbitrario. Gates protocolo: validate con secretos exit 0; validate
+  secretless en clon `ada79b8` exit 0; drift vivo 0 `up_to_seq=1637`; neutralidad/encoding exit 0; #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0166 fix3 a1d4491 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `2279361`
   (`review(TASK-0166): Analista requires action type guard`). Ancla producto
   `a1d4491fc00f86ffdb3c3fce73de0d6ca9d366ae`; instruccion REVIEW en protocolo
