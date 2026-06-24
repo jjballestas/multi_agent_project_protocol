@@ -96,6 +96,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0173",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Proyecto-front: pulido modal Manual del Intake (selector redundante + pasos funcionales)"
         }
     ],
     "view": "task_index.slim"

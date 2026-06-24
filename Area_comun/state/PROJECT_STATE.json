@@ -727,6 +727,12 @@
             "title": "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092)"
         },
         {
+            "id": "TASK-0173",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: pulido modal Manual del Intake (selector redundante + pasos funcionales)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

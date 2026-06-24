@@ -2643,6 +2643,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0173-codex-front-intake-manual-modal-polish.md",
+            "id": "TASK-0173",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0092",
+            "status": "ready",
+            "title": "Proyecto-front: pulido modal Manual del Intake (selector redundante + pasos funcionales)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
