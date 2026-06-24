@@ -85,9 +85,59 @@ CASES = [
         "valid": False,
     },
     {
+        "name": "task_extract_selector_ok",
+        "claims": [
+            claim(
+                "A",
+                "Claude",
+                [
+                    "Area_comun/state/TASK_INDEX.json#TASK-EXTRACT-DC0E283672",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-EXTRACT-DC0E283672",
+                ],
+            ),
+        ],
+        "valid": True,
+    },
+    {
+        "name": "task_and_req_selectors_still_ok",
+        "claims": [
+            claim(
+                "A",
+                "Claude",
+                [
+                    "Area_comun/state/TASK_INDEX.json#TASK-0100",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0100",
+                ],
+            ),
+            claim(
+                "B",
+                "Codex",
+                [
+                    "Area_comun/state/TASK_INDEX.json#REQ-AB12CD34",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-AB12CD34",
+                ],
+            ),
+        ],
+        "valid": True,
+    },
+    {
         "name": "invalid_selector",
         "claims": [
             claim("A", "Claude", ["Area_comun/state/TASK_INDEX.json#not-a-task"]),
+        ],
+        "valid": False,
+    },
+    {
+        "name": "malformed_task_selector_still_invalid",
+        "claims": [
+            claim(
+                "A",
+                "Claude",
+                [
+                    "Area_comun/state/TASK_INDEX.json#TASK-12",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/FOO-1",
+                ],
+            ),
         ],
         "valid": False,
     },

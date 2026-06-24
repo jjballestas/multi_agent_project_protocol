@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "20f8a4b2ee95234972ae5cebdfa3aed4332654a5b2e028014c74f366eed211f4",
+  "canonical_hash": "57a27fb6be4e2711d050465f2556eb625c9e106eb3944d03dd6c92a1a9b66e12",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -402,7 +402,7 @@
       "TASK-0166": 39,
       "TASK-0167": 10,
       "TASK-0168": 9,
-      "TASK-0169": 2,
+      "TASK-0169": 4,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -410,7 +410,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 990,
+    "events_applied": 992,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1309,6 +1309,7 @@
       "intent:Codex:claim:9019b2a03d948893c561fe199be1fcc06504ad30970eb5557b8ae79bff80f246": 849,
       "intent:Codex:claim:95582467df44e77b3b29987d989901be598061345bf001695f1a6805dcc6b78b": 1529,
       "intent:Codex:claim:96a9b02a22c5272b47f148a6f94a007fa2423f32113b058eeda033d15a8481a5": 1426,
+      "intent:Codex:claim:9942dc7b2c22da3330c45202e50e6961df48a32f55439edaa131ad941e6c1514": 1662,
       "intent:Codex:claim:9b4b38657f64a94073d716f89397b51875a7a6d91fa141fdb8454747ee0ee355": 786,
       "intent:Codex:claim:9cb4d43c979c6629c0259f1858bddae821cc1ff60b686a5c51cc3ba4a4b3780e": 1518,
       "intent:Codex:claim:a616d2c4f59e34ba2764ec773f5f6a589fd478e00eb5377138c8ef6dab97e8b1": 869,
@@ -1365,6 +1366,7 @@
       "intent:Codex:task_status:d015b1db85f1cc18f34184543f4a8eae86aebfc0f4069368719d5ef02d2117c0": 807,
       "intent:Codex:task_status:d912395dfd8ffc5dceb8ecf007d774f3cb542bbfdb68c5e3bb5aa412a19de213": 828,
       "intent:Codex:task_status:dbe49d6618736532d59e7a09023981fc82fb0ad258b84c952d8d78ed9b55609a": 1577,
+      "intent:Codex:task_status:eec95717d6045e6bb97fc6998b35aa4373d26dca6d1f8c757d93dca72bf25015": 1663,
       "ledger-op:TASK-0162:claim-answer-go": 1371,
       "ledger-op:TASK-0162:claim-delivery2": 1367,
       "ledger-op:TASK-0162:claim-mailbox-fix": 1373,
@@ -1404,5 +1406,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1661
+  "up_to_seq": 1663
 }

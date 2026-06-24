@@ -117,7 +117,7 @@
         {
             "id": "TASK-0169",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden"
         }
     ],

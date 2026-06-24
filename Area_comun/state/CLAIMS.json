@@ -6502,6 +6502,27 @@
             "updated_at": "2026-06-24T11:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0169",
+            "expires_at": "2026-06-25T00:00:00Z",
+            "notes": "TASK-0169 validator selector regex implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0169",
+                "Area_comun/state/TASK_INDEX.json#TASK-0169",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0169",
+                "Area_comun/tasks/TASK-0169-codex-validator-selector-task-extract.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T13:08:26Z",
+            "status": "active",
+            "task_id": "TASK-0169",
+            "updated_at": "2026-06-24T13:08:26Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

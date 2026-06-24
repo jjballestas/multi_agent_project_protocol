@@ -158,7 +158,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden"
         }
     ],

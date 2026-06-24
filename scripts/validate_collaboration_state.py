@@ -72,8 +72,10 @@ LIGHTWEIGHT_SDD_FIELDS = [
 PROFILE_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-TASK_ROW_SELECTOR_PATTERN = re.compile(r"^(TASK-\d{4}|REQ-[0-9A-Fa-f]+)$")
-PROJECT_STATE_SELECTOR_PATTERN = re.compile(r"^(active_tasks/(TASK-\d{4}|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$")
+TASK_ROW_SELECTOR_PATTERN = re.compile(r"^(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)$")
+PROJECT_STATE_SELECTOR_PATTERN = re.compile(
+    r"^(active_tasks/(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
+)
 CLAIM_ROW_SELECTOR_PATTERN = re.compile(r"^CLAIM-[A-Za-z0-9._-]+$")
 ROW_SCOPED_LEDGER_SELECTORS = {
     "Area_comun/state/CLAIMS.json": CLAIM_ROW_SELECTOR_PATTERN,

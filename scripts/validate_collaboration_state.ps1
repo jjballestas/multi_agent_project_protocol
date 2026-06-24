@@ -13,8 +13,8 @@ $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria"
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
 $script:RowScopedLedgerSelectors = @{
     "Area_comun/state/CLAIMS.json" = "^CLAIM-[A-Za-z0-9._-]+$"
-    "Area_comun/state/TASK_INDEX.json" = "^(TASK-\d{4}|REQ-[0-9A-Fa-f]+)$"
-    "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/(TASK-\d{4}|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
+    "Area_comun/state/TASK_INDEX.json" = "^(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)$"
+    "Area_comun/state/PROJECT_STATE.json" = "^(active_tasks/(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
 }
 $script:ValidAdoptionTiers = @("coordination", "runtime")
 $script:RuntimeTierRequiredPaths = @(
