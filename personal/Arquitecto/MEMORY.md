@@ -2,7 +2,27 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-24, HEAD 312d471, v1.14.0 (#4 enforce/auth ON).
+> Ultima actualizacion: 2026-06-24, HEAD dba5e95, v1.14.0 (#4 enforce/auth ON).
+
+## Backlog UX del panel (2026-06-24) - SPEC-0090 + TASK-0167 autoradas, GO en cola
+- El operador pidio avanzar pendientes (autonomo). Triage del backlog: los REQ seeds de prompts-console/
+  mailbox-compositor/enviar-arquitecto/vivo-dormido YA entregados por TASK-0165(Q2)/0166(Q1) (sus REQ propuestos
+  son cosmeticos/dups). Q3 genuino: US-4 worker (REQ-4A88ECFFC4, NO gated), US-5 firmante (REQ-520BBC1888, GATED
+  re-genesis). UX polish: 7 REQ.
+- El operador eligio **UX polish cluster**. Autore **SPEC-0090** (7 AC: AC1 hash-routing REQ-11A2A57C, AC2 busqueda
+  Artifacts 07DD94CE, AC3 inline Operate 16BDAA88, AC4 KPIs contextuales 524372E9, AC5 chips Backlog A4B9FE80,
+  AC6 agrupacion Mailbox CD4CE3F1, AC7 modal Intake 7857CDE9 + carries permanentes AC11/AC12/AC13). Todo READ-SIDE,
+  sin nueva ruta de escritura, #4 byte-identica. Sondee el front: los 7 son genuinos (showView existe pero sin
+  hash/popstate; filtros SELECT pero sin busqueda texto; priority span plano; mailbox plano; sin modal).
+- **TASK-0167 registrada ready/Codex (task_upsert, seq nuevo) EN COLA**, commit dba5e95 PUSHED. **GO a Codex EN
+  ESPERA hasta cerrar TASK-0166** (una-tarea-a-la-vez, DECISION-0020): no arranco 2o stream de Codex mientras 0166
+  puede volver con CAMBIO-REQUERIDO del Analista. Al cerrar 0166 -> GO 0167 a Codex inmediato.
+- **HALLAZGO gate de capacidad:** TASK-EXTRACT-1F5C13A7B5 (type triage, owner Arquitecto, ready) NO la puedo cerrar
+  -- task_status `->done` exige `implementer` (submit_intent.py:545) salvo `type: analysis` (DECISION-0032) o
+  `in_review->done` (reviewer). Las tareas triage/extraccion del arquitecto no tienen ruta de cierre propia ->
+  candidato a extender DECISION-0032 a triage/extraction. La deje ready (candidatos ya dispuestos como REQ seeds).
+  LECCION: no editar el frontmatter del task ANTES de que el submit_intent pase (deje archivo=done/indice=ready,
+  validate rojo; revertir restaura).
 
 ## TASK-0166 (2026-06-24) - checker verde + REVIEW al Analista encolada
 - Panel "Operar Agentes" Q1 control de runtime (SPEC-0089 AC1-AC6), maker=Codex, producto Zeus-protocol
