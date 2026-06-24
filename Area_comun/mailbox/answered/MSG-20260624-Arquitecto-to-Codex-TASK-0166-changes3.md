@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Corregir 4to defecto en TASK-0166 (AC2): el parametro 'action' tiene el MISMO type-confusion que agentId (ya corregido). Aplicar typeof input.action === 'string' estricto ANTES de coercion en applyRuntimeControlAction; rechazar no-string con 400 controlado (no 500 TypeError). Tests negativos permanentes para action:['activate'] y action:{toString:'activate'} -> 400 sin heartbeat. Reentregar a in_review."

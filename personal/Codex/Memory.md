@@ -4,6 +4,21 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implem
 
 ## Latest Session Note
 
+- TASK-0166 changes_requested round 4 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `58c713c fix(runtime): reject non-string runtime actions`. `applyRuntimeControlAction` now rejects any
+  non-string `action` before coercion, so arrays, objects, numbers, booleans, and null return controlled 400 and
+  never create a heartbeat. The permanent runtime-control behavior test covers `action: ["activate"]`,
+  `action: {toString: "activate"}`, and additional non-string values while preserving activate/stop string happy
+  paths. Evidence before this memory update: `node --check src/server.js public/app.js tests/staticContract.test.js`
+  OK, product `git diff --check` OK, targeted `node --test --test-name-pattern "runtime control"
+  tests/staticContract.test.js` PASS 2/2, full product `npm test` PASS 72/72 after one 184s timeout rerun, and local
+  smoke on port 4173 OK for `/healthz`; `/api/protocol/observe` returned 200 but the smoke projection expected a
+  legacy `source` property, so the projection command exited nonzero after the response. Protocol delivery moved
+  TASK-0166 back to `in_review`, released Codex fix4 claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-4.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0166-fix4-in-review.md`, and moved the consumed
+  Arquitecto changes3 message to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery amend:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1635.
 - TASK-0167 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `e4fe7aa feat(front): add ux polish cluster`. The front now implements SPEC-0090 AC1-AC7 as read-side UX:
   hash routing/deep links with invalid-hash fallback, live Artifacts search, inline Operate action descriptions,
