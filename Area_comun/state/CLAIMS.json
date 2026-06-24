@@ -6250,6 +6250,20 @@
             "updated_at": "2026-06-24T17:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-review-0172gate",
+            "expires_at": "2026-06-25T00:00:00Z",
+            "notes": "Gate re-review to Analista for TASK-0172 (9835ffe port hardening, stable exit 0). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-review-0172gate",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0172-gate.md"
+            ],
+            "started_at": "2026-06-24T18:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T18:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Codex-TASK-0164-delivery",
             "expires_at": "2026-06-24T23:59:00Z",
             "notes": "TASK-0164 delivery artifacts for torn-tail hardening review.",
