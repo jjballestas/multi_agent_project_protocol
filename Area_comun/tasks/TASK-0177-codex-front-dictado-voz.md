@@ -2,7 +2,7 @@
 task_id: TASK-0177
 title: "Proyecto-front: dictado por voz (microfono) en narrativa e intencion del Intake (REQ-003AE958, SPEC-0093)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

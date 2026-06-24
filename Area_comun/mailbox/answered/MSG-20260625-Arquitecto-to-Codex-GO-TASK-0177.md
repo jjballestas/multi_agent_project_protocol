@@ -4,7 +4,7 @@ task_id: TASK-0177
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0177 (SPEC-0093, REQ-003AE958): icono de microfono en la esquina inferior derecha de los textarea Narrativa e Intencion del Intake (modal Manual + tarjeta); presionar -> captura por voz (Web Speech API SpeechRecognition) -> texto al textarea; FRONTERA EGRESS: off-by-default, primera captura exige confirmar AVISO de egress (audio puede ir a servicio externo del navegador), degradacion limpia si no hay soporte; el dictado solo llena el textarea (NO submit_intent, texto redactado en el submit). behavior-test por AC; node --test clon limpio exit 0; #4 byte-identica. Reentregar a in_review."

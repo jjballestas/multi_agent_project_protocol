@@ -4,6 +4,23 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0174 product commit.
 
 ## Latest Session Note
 
+- TASK-0177 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `96eb019 feat(intake): add voice dictation controls`. The Intake manual modal and candidate/review textareas now
+  expose `Mic` controls for narrative and acceptance-intent dictation through the browser Web Speech API, require a
+  first-use egress confirmation before starting recognition, toggle to `Stop` while listening, degrade disabled with
+  a tooltip when unsupported, and only write recognized text into the textarea before the existing governed
+  submit/redaction path. Permanent coverage `TASK-0177 voice dictation is textarea-only with egress opt-in and no
+  submit path` verifies the egress notice, Web Speech support gate, no voice submit/fetch path, textarea-only
+  append, CSS placement, unsupported state, and Mic/Stop state. Evidence before protocol delivery: `node --check
+  public/app.js src/server.js tests/staticContract.test.js` OK, product `git diff --check -- public/app.js
+  public/styles.css tests/staticContract.test.js` OK, targeted `npm test -- --test-name-pattern "TASK-0177|TASK-0172
+  round3|TASK-0174"` PASS 6/6, full product `npm test` PASS 88/88, local smoke on port 4250 OK for `/healthz` plus
+  `/api/protocol/actions`, and clean-clone product `npm test` PASS 88/88. Protocol delivery moved TASK-0177 to
+  `in_review`, released the Codex claim, wrote `Area_comun/handoffs/HANDOFF-TASK-0177-codex-to-arquitecto-1.md`,
+  opened `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review.md`, and moved the consumed
+  GO to `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0177.md`. Final protocol evidence
+  before delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false /
+  #4 byte-identica `up_to_seq` 1917.
 - REQ-C1EDD835 reconciliation was completed after TASK-0176 closed the approved-pagination feature. Codex used
   `runtime/submit_intent.py` to claim the file-scoped requirement rows, move `REQ-C1EDD835` from `proposed` to
   `done`, release the reconciliation claim, then claim and move the consumed GO message to
