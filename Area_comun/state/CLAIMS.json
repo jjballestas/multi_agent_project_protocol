@@ -5673,6 +5673,23 @@
             "updated_at": "2026-06-24T01:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-decision-0060",
+            "expires_at": "2026-06-24T15:00:00Z",
+            "notes": "Register DECISION-0060 (architect closes own triage/extraction tasks) + TASK-0168 (gate implementation) ready/Codex. Claim file-scoped (DECISION-0059).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-decision-0060",
+                "Area_comun/state/TASK_INDEX.json#TASK-0168",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0060-architect-cierra-triage-extraction-tasks.md",
+                "Area_comun/tasks/TASK-0168-codex-gate-triage-extraction-close.md"
+            ],
+            "started_at": "2026-06-24T08:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0168",
+            "updated_at": "2026-06-24T08:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-register-0165",
             "expires_at": "2026-06-24T07:00:00Z",
             "notes": "Register TASK-0165 (panel Operar-Agentes Q2 consola de prompts, SPEC-0088) ready for Codex. Claim GRANO FINO (DECISION-0059).",

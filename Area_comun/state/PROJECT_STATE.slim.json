@@ -127,6 +127,12 @@
             "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)"
         },
         {
+            "id": "TASK-0168",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Runtime: extender task_status_capability (DECISION-0060) -- architect cierra triage/extraction propias; golden + neutralidad"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",

@@ -2389,6 +2389,18 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0168-codex-gate-triage-extraction-close.md",
+            "id": "TASK-0168",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Runtime: extender task_status_capability (DECISION-0060) -- architect cierra triage/extraction propias; golden + neutralidad",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
