@@ -639,7 +639,7 @@
         {
             "id": "TASK-0166",
             "owner": "Codex",
-            "status": "changes_requested",
+            "status": "in_review",
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)"
         },
         {

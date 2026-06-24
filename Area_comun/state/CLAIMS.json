@@ -6029,6 +6029,46 @@
             "updated_at": "2026-06-24T02:39:09.328394Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0166-fix",
+            "expires_at": "2026-06-24T16:00:01Z",
+            "notes": "Fix TASK-0166 changes_requested: future heartbeat fail-safe and exact agentId allowlist validation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0166-fix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0166",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0166",
+                "Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0166-changes-requested.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0166-changes-requested.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-2.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T12:00:01Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T12:00:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0166-fix-delivery",
+            "expires_at": "2026-06-24T16:10:00Z",
+            "notes": "Create TASK-0166 fix delivery handoff and Codex-to-Arquitecto review message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0166-fix-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0166-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T12:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T12:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Codex-TASK-0166-mailbox-fix",
             "expires_at": "2026-06-25T00:00:00Z",
             "notes": "Fix TASK-0166 mailbox metadata after delivery validation.",

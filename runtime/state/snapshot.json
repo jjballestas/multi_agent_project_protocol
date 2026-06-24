@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4664f78ea4f896a473efaaababc4785467a67ece02bf71948f2f6f557325d4ea",
+  "canonical_hash": "07fae13302eab73c40416d03e63f62229a0cb19767f4bc23a3ce67a42d417aeb",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -360,7 +360,7 @@
       "TASK-0163": 10,
       "TASK-0164": 27,
       "TASK-0165": 28,
-      "TASK-0166": 13,
+      "TASK-0166": 19,
       "TASK-0167": 2,
       "TASK-0168": 2,
       "TASK-EXTRACT-1F5C13A7B5": 3,
@@ -369,7 +369,7 @@
       "none": 2,
       "protocol-state": 1
     },
-    "events_applied": 904,
+    "events_applied": 910,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1172,6 +1172,8 @@
       "intent:Codex:claim:34c2b6634c2a91702bbba05b33e039e01c6877a7d3770d23ee9a358004357611": 1427,
       "intent:Codex:claim:402faff956b4f17665c8e01fe1bce701eec46b7cdfa8358d825ea1971beb64f9": 1431,
       "intent:Codex:claim:46518f1e436e697eba9d0cde9f97a4d5f655f7ad1d09d30f2c8bed03501c04a3": 798,
+      "intent:Codex:claim:484097109c216c133492bb3b7f8b2bd9cb3037e047202ea7af2ace5857370bd5": 1580,
+      "intent:Codex:claim:4872086aabbafa67cf912268f204be1467b0245de9c12c8ea37ec4bd2cc7dd16": 1578,
       "intent:Codex:claim:4a821546ca60270b686b9823707ecdb969e341e0abc2eeddc3e778ca82af52b1": 1226,
       "intent:Codex:claim:4e54edb0a56652c12958edf05aebbba218074bfe32d51436574f710254f590ba": 1520,
       "intent:Codex:claim:54a81dbf9f6d1d1dd19f53f66663f678e6d9c588c5d708849b4435c00c3c54fa": 830,
@@ -1195,6 +1197,7 @@
       "intent:Codex:claim:b6dad5e1e8ac793c0410ef32b60e058f7b94955646a334ae5ace6002010ae6f6": 1228,
       "intent:Codex:claim:b8245de0a1f5132a3861894f054f23c1dbbdfa82e3e04a8ee903d96e626f8e75": 1433,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
+      "intent:Codex:claim:be5e17c73672995be2749e777a30613ea533ab5ad9b1e63f8014e7c425cba57d": 1576,
       "intent:Codex:claim:bef13b0e12b904b8d232183cf56cc03adc8cce70677349a6edd8b32391fa2465": 819,
       "intent:Codex:claim:bfd9669d36784cd40c5ba8695fe2148a5166e23c407b802388531ddf899a8262": 1524,
       "intent:Codex:claim:c6b8b6eefcc780cef4bfc09545885444506d19cd52d2b0cc1a4adb68e2fae144": 1479,
@@ -1202,6 +1205,7 @@
       "intent:Codex:claim:ccd92287f74aad01fc8dddc3be9d157b82f418af86e9ab22fd37cb49c091835b": 1197,
       "intent:Codex:claim:dc10085b163778673cdd88f8bb5edc0887c5fc74774352628be815d6561bfd01": 1485,
       "intent:Codex:claim:dc8a35aeeb78f550cb8141df3c7c7fd7023cdcaec73597475c72f4bfd02fe193": 1365,
+      "intent:Codex:claim:dd48bf9addc859e1614d2c4c58414c75cc918c88e9abc19164ea726da3590ae9": 1581,
       "intent:Codex:claim:df078943138fa4f2414dda60ffa5f8a1063e8ade46d5950d08163bbd1aaf9381": 859,
       "intent:Codex:claim:e1dd466f1d2dcf75acd68d601d78614a2e8c8b748f548c5f327263894d82070a": 1434,
       "intent:Codex:claim:e2d110d62eeb4b461544220480253bb1e0144e77a3f285ad17a781b97d508940": 1429,
@@ -1228,6 +1232,7 @@
       "intent:Codex:task_status:9367f315bf1a461122f2cd2bbfebbdd16ccfbba7457be91ee0b5bb093431438e": 787,
       "intent:Codex:task_status:9f649a7b5517ff8ca3a728466e0e42f350f45b5882419d6cbba8e1dcf4d15a07": 818,
       "intent:Codex:task_status:a5800cb2d86d32323a7499207dbc5162098b63a601156e3f2cdb788a6130d665": 899,
+      "intent:Codex:task_status:a64567dd870971d34645c83c81b8958355fd7165d9a3625ed05875a165d7e94c": 1579,
       "intent:Codex:task_status:a980982dc2865d71815ae1780f69edc3c6211e9e96201dd2bcdb4b9156bcc4d0": 1193,
       "intent:Codex:task_status:afbaf078efcfa3a0a0e8a6874e2381de144ccb6049fb32b46c30da3de775c189": 1527,
       "intent:Codex:task_status:b12c204de57578978a54f68f0f930cc191b08421b05f5e97c1b98bea17e1584b": 1195,
@@ -1238,6 +1243,7 @@
       "intent:Codex:task_status:ceff998f2b876f33b7010ad60641b6dc7fc2f38144d0cef0f143815b907cb143": 1428,
       "intent:Codex:task_status:d015b1db85f1cc18f34184543f4a8eae86aebfc0f4069368719d5ef02d2117c0": 807,
       "intent:Codex:task_status:d912395dfd8ffc5dceb8ecf007d774f3cb542bbfdb68c5e3bb5aa412a19de213": 828,
+      "intent:Codex:task_status:dbe49d6618736532d59e7a09023981fc82fb0ad258b84c952d8d78ed9b55609a": 1577,
       "ledger-op:TASK-0162:claim-answer-go": 1371,
       "ledger-op:TASK-0162:claim-delivery2": 1367,
       "ledger-op:TASK-0162:claim-mailbox-fix": 1373,
@@ -1277,5 +1283,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1575
+  "up_to_seq": 1581
 }

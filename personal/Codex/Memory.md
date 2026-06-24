@@ -4,6 +4,20 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product 
 
 ## Latest Session Note
 
+- TASK-0166 changes_requested fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `cab246c fix(runtime): reject invalid runtime liveness inputs`. Runtime control now rejects an `agentId` whose raw
+  value would be changed by control-character/non-ASCII/trim normalization before allowlist lookup, so
+  `Codex\u0000` returns 400 without activation. Heartbeat mtimes more than a small future-skew tolerance now fail
+  closed to `dormant` with no false-alive status. Added behavior tests for the control-char bypass and future mtime
+  heartbeat case. Evidence before this memory update: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK, targeted `node --test --test-name-pattern "runtime control"
+  tests/staticContract.test.js` PASS 2/2, product `npm test` PASS 64/64, product `git diff --check` OK, clean-clone
+  product `npm test` PASS 64/64, and local smoke on port 4220 OK for `/healthz` plus `/api/protocol/observe`.
+  Protocol delivery moved TASK-0166 back to `in_review`, released Codex fix claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0166-fix-in-review.md`, and moved the consumed
+  Arquitecto changes-requested message to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery
+  commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1581.
 - TASK-0166 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `560d291 feat(front): add governed runtime control`. The Operate panel now shows per-agent runtime state derived
   from heartbeat mtime with fail-safe dormant behavior, exposes server-side allowlisted activate/stop controls for
