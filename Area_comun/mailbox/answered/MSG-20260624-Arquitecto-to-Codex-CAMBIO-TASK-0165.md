@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0165 CHANGES_REQUESTED (Analista, lo ratifico): 2 slips. SLIP 1 mailbox_send genera un MSG con rr INVALIDO: si pone rr=verdadero sin un campo question, el validador lo rechaza ('requires response but has no question'). FIX: el MSG que compone mailbox_send debe ser valido -> o bien rr=falso (un prompt operator_directive normal no exige respuesta formal), o si quieres rr=true incluye un campo question coherente; nunca generar rr=true sin question. SLIP 2 el HILO filtra PII: la vista de hilo (renderAgentThread/buildAgentThread) muestra el contenido del mailbox sin redaccion COMPLETA -> aplica la misma redaccion PII (AC16) al render del hilo como al compose (texto libre redactado en el plano visible; ASCII). FIX ambos + behavior-tests: (1) mailbox_send produce un MSG que PASA el validador (rr coherente); (2) un mensaje con patrones PII en el hilo se muestra REDACTADO. Manten verde: node --test clon limpio exit 0, #4 byte-id, carry AC17 no-bypass. Reenvia in_review."

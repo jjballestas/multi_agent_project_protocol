@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0165:fix-delivery-claim:20260624T001000Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260624-Codex-TASK-0165-fix-delivery",
+        "owner": "Codex",
+        "task_id": "TASK-0165",
+        "status": "active",
+        "started_at": "2026-06-24T00:10:00Z",
+        "updated_at": "2026-06-24T00:10:00Z",
+        "expires_at": "2026-06-24T04:10:00Z",
+        "notes": "Delivery artifacts for TASK-0165 changes_requested mailbox-send validity and thread PII fix.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0165-fix-delivery",
+          "Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-2.md",
+          "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-fix-in-review.md",
+          "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-CAMBIO-TASK-0165.md",
+          "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-CAMBIO-TASK-0165.md",
+          "personal/Codex/Memory.md"
+        ]
+      }
+    }
+  ]
+}

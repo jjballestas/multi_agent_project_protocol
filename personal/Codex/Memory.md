@@ -4,6 +4,22 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
 
 ## Latest Session Note
 
+- TASK-0165 changes_requested product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `cf13e7f fix(front): validate mailbox prompt messages`. The governed `mailbox-send` writer now emits
+  operator-directive prompt messages with `requires_response: false`, avoiding validator-invalid
+  `requires_response:true` without `question`. Behavior coverage now checks the generated mailbox message through
+  `scripts/validate_collaboration_state.py` in a cloned protocol fixture, preserves AC17 no-bypass rejection, and
+  strengthens the agent thread PII case so NIT, legal-name, and SQL references are redacted from rendered thread
+  data. Product evidence before this memory update: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK, product `git diff --check` OK, targeted mailbox/local-vlm rerun PASS 53/53,
+  and full `npm test` PASS 59/59 after one transient first-run readiness failure in the known local-vlm test.
+  Clean-clone product `npm test` PASS 59/59 and local smoke on port 4212 PASS for `/healthz` plus
+  `/api/protocol/observe`. Protocol delivery moved TASK-0165 back to `in_review`, released Codex TASK-0165 fix
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-fix-in-review.md`, and moved the consumed
+  Arquitecto CAMBIO directive to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1523. The current
+  validator still has no `--with-secrets` flag.
 - TASK-0165 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `1493f86 feat(front): add governed agent prompt console`. The Operate view now includes an "Operar Agentes"
   console with a real agent combo sourced from `agent_registry` plus product workers, prompt textarea, PII

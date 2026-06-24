@@ -158,7 +158,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "changes_requested",
+            "status": "in_review",
             "title": "Proyecto-front: Panel Operar-Agentes Q2 consola/compositor de prompts (mailbox_send + hilo) (SPEC-0088)"
         },
         {
