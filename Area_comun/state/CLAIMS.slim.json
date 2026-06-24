@@ -1,5 +1,44 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0175",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0175",
+                "Area_comun/state/TASK_INDEX.json#TASK-0175",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0175",
+                "Area_comun/tasks/TASK-0175-codex-reconcile-rc-us4-reqs.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-EE0CA804",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-EE0CA804",
+                "Area_comun/tasks/req-ee0ca804-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-3F85B44C",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-3F85B44C",
+                "Area_comun/tasks/req-3f85b44c-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-E0606D12",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-E0606D12",
+                "Area_comun/tasks/req-e0606d12-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-FA303A81",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-FA303A81",
+                "Area_comun/tasks/req-fa303a81-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-1C7B4275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-1C7B4275",
+                "Area_comun/tasks/req-1c7b4275-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-B6146E35",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-B6146E35",
+                "Area_comun/tasks/req-b6146e35-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-E6B404D5",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-E6B404D5",
+                "Area_comun/tasks/req-e6b404d5-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-01193FD6",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-01193FD6",
+                "Area_comun/tasks/req-01193fd6-requirement-seed.md",
+                "Area_comun/state/TASK_INDEX.json#REQ-4A88ECFFC4",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-4A88ECFFC4",
+                "Area_comun/tasks/req-4a88ecffc4-requirement-seed.md"
+            ],
+            "task_id": "TASK-0175"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -1,40 +1,16 @@
 {
     "active_tasks": [
         {
-            "id": "REQ-01193FD6",
+            "id": "REQ-003AE958",
             "owner": "Operador",
             "status": "proposed",
-            "title": "RC-06 Intake: eliminar selector de modo y lista de candidatas de la vista standalone de extracci"
-        },
-        {
-            "id": "REQ-1C7B4275",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
-        },
-        {
-            "id": "REQ-3F85B44C",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-02 Intake: dashboard de carpetas en pantalla principal"
-        },
-        {
-            "id": "REQ-4A88ECFFC4",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "Registrar un worker de producto y enlazarlo a un modelo"
+            "title": "Dictado de narrativa y de intencio de aceptacion"
         },
         {
             "id": "REQ-520BBC1888",
             "owner": "Operador",
             "status": "proposed",
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
-        },
-        {
-            "id": "REQ-B6146E35",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
         },
         {
             "id": "REQ-C1EDD835",
@@ -47,30 +23,6 @@
             "owner": "Operador",
             "status": "in_progress",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
-        },
-        {
-            "id": "REQ-E0606D12",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
-        },
-        {
-            "id": "REQ-E6B404D5",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-05 Intake: modal por archivo solo uploader sin lista de candidatas"
-        },
-        {
-            "id": "REQ-EE0CA804",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-01 Intake: barra de control unificada en header de seccion"
-        },
-        {
-            "id": "REQ-FA303A81",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
         },
         {
             "id": "TASK-0118",
@@ -87,7 +39,7 @@
         {
             "id": "TASK-0175",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)"
         },
         {

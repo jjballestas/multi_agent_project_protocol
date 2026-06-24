@@ -44,6 +44,30 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "acceptance_intent": "se acepta la opcion cuando se realicen las pruebas presionando el icono de captura de audio se pueda dictar lo correspondiente y se procese y se muestre el texto en el text area correspondiente",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-003ae958-requirement-seed.md",
+            "id": "REQ-003AE958",
+            "narrative": "yo como operador requiero que la narrativa de los intake individuales y la intencion de aceptacion puedan habilitar la captura atravez del microfono. debe aparecer en la esquina inferior derecha de cada text area un icono como un microfono que permita la captura por voz",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Dictado de narrativa y de intencio de aceptacion",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "1. NO radios de modo en la vista de extraccion por archivo. 2. NO listado de candidatas. 3. Solo uploader y estados de procesamiento. 4. Candidatas aparecen en carpeta Pendientes tras completar proceso.",
             "author": "Operador",
             "endorsement": "none",
@@ -63,7 +87,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-06 Intake: eliminar selector de modo y lista de candidatas de la vista standalone de extracci",
             "type": "requirement"
         },
@@ -184,7 +208,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo",
             "type": "requirement"
         },
@@ -307,7 +331,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-02 Intake: dashboard de carpetas en pantalla principal",
             "type": "requirement"
         },
@@ -420,7 +444,7 @@
                 "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
                 "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
             },
-            "status": "proposed",
+            "status": "done",
             "title": "Registrar un worker de producto y enlazarlo a un modelo",
             "type": "requirement"
         },
@@ -888,7 +912,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo",
             "type": "requirement"
         },
@@ -1152,7 +1176,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito",
             "type": "requirement"
         },
@@ -1176,7 +1200,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-05 Intake: modal por archivo solo uploader sin lista de candidatas",
             "type": "requirement"
         },
@@ -1224,7 +1248,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-01 Intake: barra de control unificada en header de seccion",
             "type": "requirement"
         },
@@ -1248,7 +1272,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito",
             "type": "requirement"
         },
@@ -2700,7 +2724,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)",
             "type": "implementation"
         },
