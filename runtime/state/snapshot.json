@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cbab3fe8911d1c85fad50e15826dbb202ed9f0738c01d83f9ddb68637594da46",
+  "canonical_hash": "1a559a83d065ef9730e37e23bcf15b56e99c782111d62bbcd91641a527fd747e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -171,6 +171,7 @@
       "CLAIM-20260623-Codex-TASK-0164-msg-fix": 1,
       "CLAIM-20260624-Arquitecto-0166-changes": 1,
       "CLAIM-20260624-Arquitecto-0166-changes2": 1,
+      "CLAIM-20260624-Arquitecto-0166-changes3": 1,
       "CLAIM-20260624-Arquitecto-TASK-0165-close": 3,
       "CLAIM-20260624-Arquitecto-TASK-0166-promo": 1,
       "CLAIM-20260624-Arquitecto-archive-0164": 1,
@@ -373,8 +374,8 @@
       "TASK-0163": 10,
       "TASK-0164": 27,
       "TASK-0165": 28,
-      "TASK-0166": 28,
-      "TASK-0167": 3,
+      "TASK-0166": 30,
+      "TASK-0167": 5,
       "TASK-0168": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -383,7 +384,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 944,
+    "events_applied": 949,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -479,6 +480,9 @@
       "arquitecto:0166-changes2:claim-acquire": 1601,
       "arquitecto:0166-changes2:claim-release": 1603,
       "arquitecto:0166-changes2:status": 1602,
+      "arquitecto:0166-changes3:acq": 1618,
+      "arquitecto:0166-changes3:rel": 1620,
+      "arquitecto:0166-changes3:status": 1619,
       "arquitecto:0166-changes:claim-acquire": 1573,
       "arquitecto:0166-changes:claim-release": 1575,
       "arquitecto:0166-changes:status-changes-requested": 1574,
@@ -1013,6 +1017,8 @@
       "codex:task-0165:claim-release-ui": 1511,
       "codex:task-0165:status-in-progress": 1506,
       "codex:task-0165:status-in-review": 1509,
+      "codex:task-0167:claim:start": 1616,
+      "codex:task-0167:status:in_progress": 1617,
       "codex:task-0168:claim-acquire": 1586,
       "codex:task-0168:claim-release": 1590,
       "codex:task-0168:delivery-claim-acquire": 1588,
@@ -1331,5 +1337,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1615
+  "up_to_seq": 1620
 }

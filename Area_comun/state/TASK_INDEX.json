@@ -2371,7 +2371,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0089",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)",
             "type": "product"
         },
@@ -2384,7 +2384,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0090",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)",
             "type": "product"
         },

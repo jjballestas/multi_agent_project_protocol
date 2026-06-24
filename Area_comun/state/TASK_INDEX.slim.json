@@ -158,7 +158,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)"
         },
         {
@@ -166,7 +166,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)"
         }
     ],
