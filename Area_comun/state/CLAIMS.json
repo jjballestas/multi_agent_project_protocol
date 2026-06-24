@@ -7671,6 +7671,20 @@
             "updated_at": "2026-06-25T00:55:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-review-0177",
+            "expires_at": "2026-06-25T05:00:00Z",
+            "notes": "Gatekeeper REVIEW to Analista for TASK-0177 (96eb019 voice dictation egress). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Arquitecto-review-0177",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177.md"
+            ],
+            "started_at": "2026-06-25T01:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0177",
+            "updated_at": "2026-06-25T01:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-TASK-0177",
             "expires_at": "2026-06-25T05:34:51Z",
             "notes": "Implement TASK-0177 voice dictation in Zeus-protocol and deliver to in_review.",
