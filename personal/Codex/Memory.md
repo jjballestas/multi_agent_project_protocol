@@ -11,9 +11,14 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
   proper names remaining residual DEF-PII. `tests/staticContract.test.js` adds a deterministic thread-render test that
   proves those literals are not exposed without relying on SQL masking. Evidence before this memory update:
   `node --check public/app.js src/server.js tests/staticContract.test.js` OK, product `git diff --check` OK, and
-  product `npm test` PASS 60/60 after one 124s timeout on the first full run. Protocol pre-delivery evidence:
-  encoding OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1525; neutrality command exited 0 with no
-  extra stdout. Delivery artifacts and final re-review transition are still pending in this session.
+  product `npm test` PASS 60/60 after one 124s timeout on the first full run. Protocol delivery commit
+  `177b8da coord(TASK-0165): deliver pii thread redaction fix` moved TASK-0165 back to `in_review`, released Codex
+  v3 claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-v3-in-review.md`, and moved the consumed
+  Arquitecto v3 CAMBIO directive to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK with one FYI warning for the new non-response
+  handoff message, and drift false up_to_seq 1529. `validate_collaboration_state.py --help` still shows no
+  `--with-secrets` flag.
 - TASK-0165 changes_requested product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cf13e7f fix(front): validate mailbox prompt messages`. The governed `mailbox-send` writer now emits
   operator-directive prompt messages with `requires_response: false`, avoiding validator-invalid
