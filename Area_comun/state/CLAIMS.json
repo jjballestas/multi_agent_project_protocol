@@ -7636,6 +7636,20 @@
             "updated_at": "2026-06-25T00:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-go-reconcile-c1edd835",
+            "expires_at": "2026-06-25T04:00:00Z",
+            "notes": "GO reconcile REQ-C1EDD835 to Codex. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Arquitecto-go-reconcile-c1edd835",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-c1edd835.md"
+            ],
+            "started_at": "2026-06-25T00:58:00Z",
+            "status": "released",
+            "task_id": "REQ-C1EDD835",
+            "updated_at": "2026-06-25T00:58:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-reg-0177-0178",
             "expires_at": "2026-06-25T04:00:00Z",
             "notes": "Register TASK-0177 (dictado) + TASK-0178 (consola arquitecto PENDIENTE) + GO-0177. File-scoped.",
