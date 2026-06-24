@@ -5565,6 +5565,23 @@
             "updated_at": "2026-06-24T11:18:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-0171-changes",
+            "expires_at": "2026-06-24T20:00:00Z",
+            "notes": "TASK-0171 CAMBIO-REQUERIDO (Analista: private key mode 0600 not portable to Windows). Handoff a Codex. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-0171-changes",
+                "Area_comun/state/TASK_INDEX.json#TASK-0171",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0171",
+                "Area_comun/tasks/TASK-0171-codex-front-alta-worker-producto.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0171-changes.md"
+            ],
+            "started_at": "2026-06-24T14:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0171",
+            "updated_at": "2026-06-24T14:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-TASK-0165-close",
             "notes": "Close TASK-0165 (Q2) done + archive Q2 review cycle (Analista v4 OK/CERRABLE).",
             "owner": "Arquitecto",

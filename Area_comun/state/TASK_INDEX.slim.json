@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: alta de worker de producto enlazado a un modelo (US-4, SPEC-0091)"
         }
     ],

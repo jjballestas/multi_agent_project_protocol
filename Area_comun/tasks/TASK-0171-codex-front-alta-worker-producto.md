@@ -2,7 +2,7 @@
 task_id: TASK-0171
 title: "Proyecto-front: alta de worker de producto enlazado a un modelo (US-4, SPEC-0091 AC1-AC6) -- fuera del config atestado, off-by-default, sin tocar #4/genesis/firmantes"
 type: product
-status: in_review
+status: changes_requested
 owner: Codex
 phase: P2
 priority: normal
