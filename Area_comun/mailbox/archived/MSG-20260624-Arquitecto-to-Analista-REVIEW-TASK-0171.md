@@ -4,7 +4,7 @@ task_id: TASK-0171
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revisar TASK-0171 (alta de worker de producto, SPEC-0091) sobre el commit producto f6dc8a5 desde clon limpio; foco adversarial en las fronteras: AC4 no toca #4/genesis/firmantes (protocol.config.json byte-identica, sin submit_intent, sin firmante nuevo), AC2 privada del worker NUNCA al cliente ni a git, AC5 write acotado/validado sin type-confusion, AC3 off-by-default. Emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

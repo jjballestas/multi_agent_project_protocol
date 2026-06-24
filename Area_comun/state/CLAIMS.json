@@ -5825,6 +5825,34 @@
             "updated_at": "2026-06-24T13:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-close-0171",
+            "expires_at": "2026-06-24T21:00:00Z",
+            "notes": "Close TASK-0171 (US-4) in_review->done + archive 0171 MSGs. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-close-0171",
+                "Area_comun/state/TASK_INDEX.json#TASK-0171",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0171",
+                "Area_comun/tasks/TASK-0171-codex-front-alta-worker-producto.md",
+                "Area_comun/mailbox/open/MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171-fix-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171-fix-OK.md",
+                "Area_comun/mailbox/open/MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171-fix.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171-fix.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review.md"
+            ],
+            "started_at": "2026-06-24T15:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0171",
+            "updated_at": "2026-06-24T15:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-decision-0060",
             "expires_at": "2026-06-24T15:00:00Z",
             "notes": "Register DECISION-0060 (architect closes own triage/extraction tasks) + TASK-0168 (gate implementation) ready/Codex. Claim file-scoped (DECISION-0059).",
@@ -6821,6 +6849,26 @@
             "status": "released",
             "task_id": "TASK-0171",
             "updated_at": "2026-06-24T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172",
+            "expires_at": "2026-06-25T23:59:59Z",
+            "notes": "Implement TASK-0172 Intake redesign in Zeus-protocol.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-24T15:41:49Z",
+            "status": "active",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T15:41:49Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

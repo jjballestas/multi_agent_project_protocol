@@ -4,7 +4,7 @@ task_id: TASK-0171
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0171 si no necesitas otra voz; mi veredicto sobre cb7ce0a es OK -> CERRABLE."

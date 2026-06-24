@@ -4,7 +4,7 @@ task_id: TASK-0171
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-revisar TASK-0171 sobre el commit producto cb7ce0a desde clon limpio; verificar que la privada del worker queda restringida de forma REAL y verificable en la plataforma corriendo (POSIX 0600; Windows ACL solo usuario actual, sin Everyone/Users/Authenticated) y que el exec de icacls esta acotado; confirmar que las demas fronteras siguen intactas. Emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

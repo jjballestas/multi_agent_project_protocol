@@ -4,7 +4,7 @@ task_id: TASK-0171
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0171 AC2 corregido: privada POSIX 0600 + Windows ACL real; reentregado a in_review."
 context_refs:

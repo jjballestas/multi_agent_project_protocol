@@ -4,7 +4,7 @@ task_id: TASK-0171
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0171 en review: alta gobernada de worker de producto fuera de #4"

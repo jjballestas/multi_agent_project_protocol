@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "28652ac1853f1f377130869104ea2b86ef2b8b431d09d68c6f6718bb15870c88",
+  "canonical_hash": "aa963d299fdfb4716950bb6e71c5254ab6845004e3e9bce6b818d8a6faab1cfa",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -185,6 +185,7 @@
       "CLAIM-20260624-Arquitecto-close-0168": 1,
       "CLAIM-20260624-Arquitecto-close-0169b": 1,
       "CLAIM-20260624-Arquitecto-close-0170": 1,
+      "CLAIM-20260624-Arquitecto-close-0171": 1,
       "CLAIM-20260624-Arquitecto-close-extract-1f5c": 1,
       "CLAIM-20260624-Arquitecto-decision-0060": 1,
       "CLAIM-20260624-Arquitecto-go-0167": 1,
@@ -299,6 +300,8 @@
       "MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0166-fix-cambio-requerido": 1,
       "MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0166-fix3-cambio-requerido": 1,
       "MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0166-r5-ok": 1,
+      "MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171": 1,
+      "MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171-fix-OK": 1,
       "MSG-20260624-Analista-to-Arquitecto-TASK-0165-review": 1,
       "MSG-20260624-Analista-to-Arquitecto-TASK-0165-v2-review": 1,
       "MSG-20260624-Analista-to-Arquitecto-TASK-0165-v3-review": 1,
@@ -307,6 +310,8 @@
       "MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-fix": 1,
       "MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-fix3": 1,
       "MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-r5": 1,
+      "MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171": 1,
+      "MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171-fix": 1,
       "MSG-20260624-Arquitecto-to-Analista-REVISAR-TASK-0164-v2": 1,
       "MSG-20260624-Arquitecto-to-Analista-REVISAR-TASK-0164-v3": 1,
       "MSG-20260624-Arquitecto-to-Analista-REVISAR-TASK-0165": 1,
@@ -328,6 +333,8 @@
       "MSG-20260624-Codex-to-Arquitecto-TASK-0168-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0169-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0170-in-review": 1,
+      "MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review": 1,
+      "MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review": 1,
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
@@ -429,8 +436,8 @@
       "TASK-0168": 9,
       "TASK-0169": 9,
       "TASK-0170": 7,
-      "TASK-0171": 13,
-      "TASK-0172": 2,
+      "TASK-0171": 15,
+      "TASK-0172": 4,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -438,7 +445,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1075,
+    "events_applied": 1086,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -768,6 +775,15 @@
       "arquitecto:close-0170:arch": 1698,
       "arquitecto:close-0170:done": 1697,
       "arquitecto:close-0170:rel": 1699,
+      "arquitecto:close-0171:acq": 1749,
+      "arquitecto:close-0171:arch:MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171": 1752,
+      "arquitecto:close-0171:arch:MSG-20260624-Analista-to-Arquitecto-REVIEW-TASK-0171-fix-OK": 1751,
+      "arquitecto:close-0171:arch:MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171": 1754,
+      "arquitecto:close-0171:arch:MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0171-fix": 1753,
+      "arquitecto:close-0171:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0171-fix-in-review": 1755,
+      "arquitecto:close-0171:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0171-in-review": 1756,
+      "arquitecto:close-0171:done": 1750,
+      "arquitecto:close-0171:rel": 1757,
       "arquitecto:close-extract-1f5c:claim-acquire-v2": 1595,
       "arquitecto:close-extract-1f5c:claim-release-v2": 1597,
       "arquitecto:close-extract-1f5c:status-done-v2": 1596,
@@ -1221,6 +1237,7 @@
       "codex:task0163-ledger-busy:release-impl-claim": 1383,
       "codex:task0163-mailbox-question-fix:claim": 1387,
       "codex:task0163-mailbox-question-fix:release": 1388,
+      "codex:task0172:ready-to-in-progress": 1748,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -1434,6 +1451,7 @@
       "intent:Codex:claim:dc8a35aeeb78f550cb8141df3c7c7fd7023cdcaec73597475c72f4bfd02fe193": 1365,
       "intent:Codex:claim:dd48bf9addc859e1614d2c4c58414c75cc918c88e9abc19164ea726da3590ae9": 1581,
       "intent:Codex:claim:df078943138fa4f2414dda60ffa5f8a1063e8ade46d5950d08163bbd1aaf9381": 859,
+      "intent:Codex:claim:e072cc296957aedcc402cb11061b23c40162f90a220eae68a358cbf37bee81f1": 1747,
       "intent:Codex:claim:e1dd466f1d2dcf75acd68d601d78614a2e8c8b748f548c5f327263894d82070a": 1434,
       "intent:Codex:claim:e2d110d62eeb4b461544220480253bb1e0144e77a3f285ad17a781b97d508940": 1429,
       "intent:Codex:claim:e3c5bd9eba34cb32c38a818c28fd854dc4fc90f678bb98e51fd1ccc476eeb376": 1430,
@@ -1517,5 +1535,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1746
+  "up_to_seq": 1757
 }
