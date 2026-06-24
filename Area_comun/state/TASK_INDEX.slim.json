@@ -26,6 +26,14 @@
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {
+            "id": "REQ-EE0CA804",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "RC-01 Intake: barra de control unificada en header de seccion"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "phase": "P2",

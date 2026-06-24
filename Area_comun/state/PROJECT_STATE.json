@@ -229,6 +229,12 @@
             "title": "Compositor de mensajes del Operador a agentes desde el Mailbox del front RF-2"
         },
         {
+            "id": "REQ-EE0CA804",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-01 Intake: barra de control unificada en header de seccion"
+        },
+        {
             "id": "REQ-FB27AF72",
             "owner": "Operador",
             "status": "done",

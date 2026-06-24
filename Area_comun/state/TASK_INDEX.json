@@ -1037,6 +1037,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "1. El header de Intake muestra todo en una fila: [RF-14 badge] [Intake] [subtitulo] [espacio] [Modo: radio-Manual label-Manual | radio-Archivo label-Archivo | btn-Nueva-historia] [btn-Refresh]. 2. Cada radio esta inmediatamente antes de su label (sin separacion). 3. Los radios son solo indicadores de modo; no lanzan ningun formulario al hacer click. 4. El boton Nueva historia/requisito es el unico punto de entrada al wizard/modal. 5. El boton Refresh queda al extremo derecho fuera del bloque de modo. Referencia visual: prototipo HTML adjunto seccion header.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-ee0ca804-requirement-seed.md",
+            "id": "REQ-EE0CA804",
+            "narrative": "Como operador quiero que la fila del header de la seccion Intake concentre en una sola linea: el [[DOC-REDACTED]] RF-14, el titulo, el subtitulo, los radios de modo (Manual / Por archivo) cada uno junto a su etiqueta, el boton Nueva historia/requisito y el boton Refresh; para reducir el espacio ocupado y tener el control de la seccion siempre visible sin necesidad de scroll.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 1,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "RC-01 Intake: barra de control unificada en header de seccion",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
             "author": "Operador",
             "delivered_by": "TASK-0137",
