@@ -739,6 +739,12 @@
             "title": "Proyecto-front: pulido modal Manual del Intake (selector redundante + pasos funcionales)"
         },
         {
+            "id": "TASK-0174",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: quitar indicador de pasos del modal de Intake"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
