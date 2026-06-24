@@ -4,7 +4,7 @@ task_id: TASK-0167
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0167 (SPEC-0090 AC1-AC7): front UX polish cluster en Zeus-protocol -- hash routing, busqueda Artifacts, descripcion inline Operate, KPIs contextuales, chips Backlog, agrupacion Mailbox, modal Intake; todo read-side (prueba negativa: ninguna mejora emite submit_intent ni muta mailbox/ledger); behavior-test por AC; carries AC11/AC12/AC13; node --test clon limpio exit 0, #4 byte-identica; reentregar a in_review."

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1a559a83d065ef9730e37e23bcf15b56e99c782111d62bbcd91641a527fd747e",
+  "canonical_hash": "4a095808c5cb6cbc95a7f4dbefb2e3ffb08f33ce52a78a93916c44af7ec08ce1",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -202,6 +202,9 @@
       "CLAIM-20260624-Codex-TASK-0166-fix3": 1,
       "CLAIM-20260624-Codex-TASK-0166-fix3-answered": 1,
       "CLAIM-20260624-Codex-TASK-0166-fix3-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0167": 1,
+      "CLAIM-20260624-Codex-TASK-0167-answer-status-fix": 1,
+      "CLAIM-20260624-Codex-TASK-0167-delivery-artifacts": 1,
       "CLAIM-20260624-Codex-TASK-0168": 1,
       "CLAIM-20260624-Codex-TASK-0168-delivery": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -375,7 +378,7 @@
       "TASK-0164": 27,
       "TASK-0165": 28,
       "TASK-0166": 30,
-      "TASK-0167": 5,
+      "TASK-0167": 8,
       "TASK-0168": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -384,7 +387,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 949,
+    "events_applied": 955,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1017,8 +1020,14 @@
       "codex:task-0165:claim-release-ui": 1511,
       "codex:task-0165:status-in-progress": 1506,
       "codex:task-0165:status-in-review": 1509,
+      "codex:task-0167:claim:answer-status-fix": 1625,
+      "codex:task-0167:claim:delivery-artifacts": 1621,
+      "codex:task-0167:claim:release-answer-status-fix": 1626,
+      "codex:task-0167:claim:release-delivery-artifacts": 1624,
+      "codex:task-0167:claim:release-main": 1623,
       "codex:task-0167:claim:start": 1616,
       "codex:task-0167:status:in_progress": 1617,
+      "codex:task-0167:status:in_review": 1622,
       "codex:task-0168:claim-acquire": 1586,
       "codex:task-0168:claim-release": 1590,
       "codex:task-0168:delivery-claim-acquire": 1588,
@@ -1337,5 +1346,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1620
+  "up_to_seq": 1626
 }

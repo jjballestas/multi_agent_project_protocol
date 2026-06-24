@@ -1,9 +1,24 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product implementation.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implementation.
 
 ## Latest Session Note
 
+- TASK-0167 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `e4fe7aa feat(front): add ux polish cluster`. The front now implements SPEC-0090 AC1-AC7 as read-side UX:
+  hash routing/deep links with invalid-hash fallback, live Artifacts search, inline Operate action descriptions,
+  contextual KPI accent/compact state, Backlog status/priority chips with high-priority marking, Mailbox answered/
+  archived date grouping plus direction filter, and a fullscreen Intake modal with rows>=8 textareas and unchanged
+  governed RF-14 execution. Negative coverage confirms the new read-side helpers do not emit `submit_intent`, call
+  `actions/submit`, or mutate files. Product evidence: `node --check public/app.js src/server.js
+  tests/staticContract.test.js` OK, `git diff --check` OK, targeted `node --test --test-name-pattern
+  "TASK-0167|each nav" tests/staticContract.test.js` PASS 9/9, full product `npm test` PASS 72/72, local smoke on
+  port 4226 OK for `/healthz` and `/api/protocol/observe`. Protocol delivery moved TASK-0167 to `in_review`,
+  released Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0167-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0167-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md` with status `answered`. Final
+  protocol evidence before delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK,
+  drift false / #4 byte-identica up_to_seq 1626.
 - TASK-0166 changes_requested round 3 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a1d4491 fix(runtime): reject non-string runtime agent ids`. `sanitizeRuntimeControlAgentId` now rejects any
   non-string `agentId` before coercion, so JSON arrays like `["Codex"]`, numbers, objects, and booleans return 400

@@ -2,7 +2,7 @@
 task_id: TASK-0167
 title: "Proyecto-front: UX polish cluster -- hash routing + busqueda Artifacts + descripcion inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake (SPEC-0090, AC1-AC7)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

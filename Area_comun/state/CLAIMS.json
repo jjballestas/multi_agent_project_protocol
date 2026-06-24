@@ -6273,9 +6273,40 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "started_at": "2026-06-24T11:30:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0167",
             "updated_at": "2026-06-24T11:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0167-answer-status-fix",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "Fix consumed GO mailbox frontmatter status after moving it to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0167-answer-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md"
+            ],
+            "started_at": "2026-06-24T13:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0167",
+            "updated_at": "2026-06-24T13:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0167-delivery-artifacts",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "Delivery artifacts for TASK-0167 handoff, mailbox notice, and consumed GO archive.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0167-delivery-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0167-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0167-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md"
+            ],
+            "started_at": "2026-06-24T12:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0167",
+            "updated_at": "2026-06-24T12:45:00Z"
         },
         {
             "claim_id": "CLAIM-20260624-Codex-TASK-0168",
