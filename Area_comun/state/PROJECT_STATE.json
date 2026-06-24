@@ -637,6 +637,12 @@
             "title": "Proyecto-front: Panel Operar-Agentes Q2 consola/compositor de prompts (mailbox_send + hilo) (SPEC-0088)"
         },
         {
+            "id": "TASK-0166",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",

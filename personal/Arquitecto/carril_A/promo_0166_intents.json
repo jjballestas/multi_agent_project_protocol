@@ -1,0 +1,57 @@
+{
+ "intents": [
+  {
+   "claim": {
+    "op": "acquire",
+    "claim": {
+     "claim_id": "CLAIM-20260624-Arquitecto-TASK-0166-promo",
+     "task_id": "TASK-0166",
+     "owner": "Arquitecto",
+     "scope": [
+      "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-TASK-0166-promo",
+      "Area_comun/state/TASK_INDEX.json#TASK-0166",
+      "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0166",
+      "Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md",
+      "Area_comun/specs/SPEC-0089-panel-operar-agentes-q1-control-runtime.md",
+      "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0166-q1-control-runtime.md"
+     ],
+     "started_at": "2026-06-24T04:02:00Z",
+     "updated_at": "2026-06-24T04:02:00Z",
+     "status": "active",
+     "notes": "Promote SPEC-0089 + TASK-0166 (Q1 control runtime) + GO Codex."
+    },
+    "idempotency_key": "arq:promo-0166:acq"
+   }
+  },
+  {
+   "task_upsert": {
+    "task": {
+     "id": "TASK-0166",
+     "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)",
+     "type": "product",
+     "status": "ready",
+     "owner": "Codex",
+     "phase": "P2",
+     "priority": "high",
+     "spec_id": "SPEC-0089",
+     "maker": "Codex",
+     "checker": "Arquitecto",
+     "code_repo": "D:/Agentes/Zeus/Zeus-protocol",
+     "linked_decisions": [
+      "DECISION-0057",
+      "DECISION-0050"
+     ],
+     "file": "Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md"
+    },
+    "idempotency_key": "arq:promo-0166:upsert"
+   }
+  },
+  {
+   "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260624-Arquitecto-TASK-0166-promo",
+    "idempotency_key": "arq:promo-0166:rel"
+   }
+  }
+ ]
+}
