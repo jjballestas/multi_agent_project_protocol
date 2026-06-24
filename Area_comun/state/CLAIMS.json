@@ -6154,6 +6154,20 @@
             "updated_at": "2026-06-24T15:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-review-0172",
+            "expires_at": "2026-06-24T22:00:00Z",
+            "notes": "Gatekeeper REVIEW to Analista for TASK-0172 (a4e0b50 intake redesign boundaries). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-review-0172",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0172.md"
+            ],
+            "started_at": "2026-06-24T16:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T16:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Codex-TASK-0164-delivery",
             "expires_at": "2026-06-24T23:59:00Z",
             "notes": "TASK-0164 delivery artifacts for torn-tail hardening review.",
