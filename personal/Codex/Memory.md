@@ -4,6 +4,20 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product 
 
 ## Latest Session Note
 
+- TASK-0166 changes_requested round 3 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a1d4491 fix(runtime): reject non-string runtime agent ids`. `sanitizeRuntimeControlAgentId` now rejects any
+  non-string `agentId` before coercion, so JSON arrays like `["Codex"]`, numbers, objects, and booleans return 400
+  before allowlist lookup and write no heartbeat. The permanent runtime-control behavior test covers those non-string
+  cases, confirms dormant status remains dormant, and keeps the exact string happy path green. Evidence before this
+  memory update: `node --check src/server.js public/app.js tests/staticContract.test.js` OK, targeted
+  `node --test --test-name-pattern "runtime control" tests/staticContract.test.js` PASS 2/2, product `npm test` PASS
+  64/64, product `git diff --check` OK, clean-clone product `npm test` PASS 64/64, and local smoke on port 4224 OK
+  for `/healthz` plus `/api/protocol/observe`. Protocol claim/status had been moved to TASK-0166 `in_progress` via
+  submit_intent seq 1604-1605 with drift false. Protocol delivery moved TASK-0166 back to `in_review`, released all
+  Codex fix3 claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0166-fix3-in-review.md`, and moved the consumed
+  Arquitecto changes2 message to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1611.
 - TASK-0168 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `f596863 fix(runtime): allow architect triage closes`. `runtime/submit_intent.py::task_status_capability`
   now extends the existing owner-only lightweight close rule from `analysis` to `analysis`, `triage`, and

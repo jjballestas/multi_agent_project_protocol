@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cd9a9d7aaa43a56abb0da0e2e6ad1583cfe027276e12c330049f17c515c7d292",
+  "canonical_hash": "a4d34562ad3dce36f298ea00dbe2c89c05412d9995e50dcdd0ae30b71ad4aca7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -196,6 +196,9 @@
       "CLAIM-20260624-Codex-TASK-0165-v3-fix": 1,
       "CLAIM-20260624-Codex-TASK-0165-v4": 1,
       "CLAIM-20260624-Codex-TASK-0165-v4-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0166-fix3": 1,
+      "CLAIM-20260624-Codex-TASK-0166-fix3-answered": 1,
+      "CLAIM-20260624-Codex-TASK-0166-fix3-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0168": 1,
       "CLAIM-20260624-Codex-TASK-0168-delivery": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -368,7 +371,7 @@
       "TASK-0163": 10,
       "TASK-0164": 27,
       "TASK-0165": 28,
-      "TASK-0166": 22,
+      "TASK-0166": 27,
       "TASK-0167": 2,
       "TASK-0168": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -378,7 +381,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 932,
+    "events_applied": 940,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -883,6 +886,14 @@
       "codex-task-0158-mailbox-fix-release-20260623": 1255,
       "codex-task-0158-status-in-progress-20260623b": 1247,
       "codex-task-0158-status-in-review-20260623-noarchive": 1252,
+      "codex:0166-fix3-answered:claim-acquire": 1610,
+      "codex:0166-fix3-answered:claim-release": 1611,
+      "codex:0166-fix3-delivery:claim-acquire": 1606,
+      "codex:0166-fix3-delivery:claim-release": 1609,
+      "codex:0166-fix3:claim-acquire": 1604,
+      "codex:0166-fix3:claim-release": 1608,
+      "codex:0166-fix3:status-in-progress": 1605,
+      "codex:0166-fix3:status-in-review": 1607,
       "codex:TASK-0149:claim-acquire": 1065,
       "codex:TASK-0149:claim-release": 1068,
       "codex:TASK-0149:status-in-progress": 1066,
@@ -1314,5 +1325,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1603
+  "up_to_seq": 1611
 }

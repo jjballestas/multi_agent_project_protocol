@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Corregir 3er defecto en TASK-0166 (AC2): agentId no-string (p.ej. array JSON de 1 elemento) se coerciona y activa un runtime. Endurecer sanitizeRuntimeControlAgentId con type-check estricto typeof value === 'string' ANTES de cualquier coercion; agregar behavior-test negativo PERMANENTE agentId:['Codex'] (y otros no-string) -> 400 sin heartbeat. Reentregar a in_review."
