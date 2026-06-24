@@ -7003,6 +7003,61 @@
             "updated_at": "2026-06-24T17:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix3",
+            "expires_at": "2026-06-25T17:10:00Z",
+            "notes": "TASK-0172 round 3 layout fix implementation. File-scoped.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-24T17:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix3-delivery",
+            "expires_at": "2026-06-25T17:45:00Z",
+            "notes": "TASK-0172 round 3 delivery: handoff, mailbox response, consumed-message move, memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix3-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-3.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix3-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes2.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes2.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T17:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix3-evidence-amend",
+            "expires_at": "2026-06-25T18:05:00Z",
+            "notes": "Amend TASK-0172 round 3 evidence with clean-clone npm test.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix3-evidence-amend",
+                "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-3.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix3-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T18:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T18:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

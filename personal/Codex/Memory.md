@@ -1,9 +1,24 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 candidate public-model PII fix.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 round 3 layout fix product commit.
 
 ## Latest Session Note
 
+- TASK-0172 round 3 layout fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `95af6ed fix(intake): clean round three layout`. The Intake main panel no longer renders the inline
+  `intake-extraction-standalone`; file upload is only in `intake-file-modal`. Any Intake cancel now closes modals
+  and resets `#intake-file`, `data-file-extraction-status`, and the file accept button. Approved/discarded candidate
+  cards no longer render the PII checkbox or Approve/Usar tarjeta/Descartar action block; only pending cards do.
+  Manual, review-modal, and card narrative/acceptance textareas now use `rows="8"`. Evidence before this memory
+  update: `node --check public/app.js tests/staticContract.test.js src/server.js` OK, product `git diff --check` OK,
+  targeted `node --test --test-name-pattern "TASK-0172|candidate review" tests/staticContract.test.js` PASS 11/11,
+  full product `npm test` PASS 84/84 after one 304s timeout rerun, clean-clone product `npm test` PASS 84/84, and
+  local smoke on port 4238 OK for `/healthz` plus `/api/protocol/actions`. Protocol delivery commit
+  `coord(TASK-0172): deliver round three layout fix` moved TASK-0172 to `in_review`, released all Codex
+  TASK-0172 fix3 claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix3-in-review.md`, and moved the consumed
+  Arquitecto changes2 message to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1787.
 - TASK-0172 changes-requested fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `9f1f772 fix(intake): redact public candidate model`. The public candidate model now redacts candidate
   `title`, `narrative`, and `acceptance_intent` with `redactPublicText` before serving
