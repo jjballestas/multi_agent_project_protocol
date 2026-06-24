@@ -4,7 +4,7 @@ task_id: TASK-0176
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0176 (REQ-C1EDD835): en la carpeta Aprobados del Intake mostrar por defecto los ultimos 3 requisitos aprobados + un boton 'Ver mas' que despliega los demas con paginacion (paginas de tamano fijo). Read-side, conteo/orden del estado real, PII redactada, sin nueva ruta de escritura. behavior-test; AC del cluster RC + fronteras intactas; node --test clon limpio exit 0; #4 byte-identica. Reentregar a in_review."

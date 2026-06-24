@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b9d7cfe80c348aaf62117b2f742e26671b74db9d2d0d44220e5b44617c0e0fe6",
+  "canonical_hash": "8691c47f93880948da20c8a14d4b09a6c7f3c62e6ee84577a2432d50559df0e5",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -269,6 +269,10 @@
       "CLAIM-20260624-Codex-TASK-0175": 1,
       "CLAIM-20260624-Codex-TASK-0175-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0175-postdelivery": 1,
+      "CLAIM-20260624-Codex-TASK-0176": 1,
+      "CLAIM-20260624-Codex-TASK-0176-answer-go": 1,
+      "CLAIM-20260624-Codex-TASK-0176-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0176-mailbox-fix": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -493,7 +497,7 @@
       "TASK-0173": 9,
       "TASK-0174": 7,
       "TASK-0175": 7,
-      "TASK-0176": 2,
+      "TASK-0176": 8,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -501,7 +505,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1213,
+    "events_applied": 1223,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1126,6 +1130,16 @@
       "codex-task-0158-mailbox-fix-release-20260623": 1255,
       "codex-task-0158-status-in-progress-20260623b": 1247,
       "codex-task-0158-status-in-review-20260623-noarchive": 1252,
+      "codex-task-0176-answer-go-claim-20260624": 1891,
+      "codex-task-0176-answer-go-release-20260624": 1892,
+      "codex-task-0176-claim-20260624": 1885,
+      "codex-task-0176-claim-release-20260624": 1889,
+      "codex-task-0176-delivery-claim-20260624": 1887,
+      "codex-task-0176-delivery-claim-release-20260624": 1890,
+      "codex-task-0176-mailbox-fix-claim-20260624": 1893,
+      "codex-task-0176-mailbox-fix-release-20260624": 1894,
+      "codex-task-0176-status-in-progress-20260624": 1886,
+      "codex-task-0176-status-in-review-20260624": 1888,
       "codex:0166-fix3-answered:claim-acquire": 1610,
       "codex:0166-fix3-answered:claim-release": 1611,
       "codex:0166-fix3-delivery:claim-acquire": 1606,
@@ -1718,5 +1732,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1884
+  "up_to_seq": 1894
 }
