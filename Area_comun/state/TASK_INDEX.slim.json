@@ -58,6 +58,14 @@
             "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
         },
         {
+            "id": "REQ-E6B404D5",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "RC-05 Intake: modal por archivo solo uploader sin lista de candidatas"
+        },
+        {
             "id": "REQ-EE0CA804",
             "owner": "Operador",
             "phase": "P2",

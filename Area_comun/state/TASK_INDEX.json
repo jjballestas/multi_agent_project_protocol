@@ -1109,6 +1109,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "1. Solo zona de drop con formatos aceptados. 2. Estado procesando amarillo. 3. Estado OK verde con nombre y cantidad de candidatas. 4. Error rojo con descripcion del error. 5. Boton Aceptar solo en estado OK. 6. Al Aceptar el modal cierra y las candidatas aparecen en carpeta Pendientes. Ref prototipo HTML seccion modal archivo.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-e6b404d5-requirement-seed.md",
+            "id": "REQ-E6B404D5",
+            "narrative": "Como operador quiero que el modal en modo Archivo muestre unicamente la zona de drop del archivo, los estados procesando/ok/error y el boton Aceptar tras exito; sin mostrar formulario manual ni lista de candidatas; para tener un flujo de ingesta por archivo limpio y sin duplicacion de informacion.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "RC-05 Intake: modal por archivo solo uploader sin lista de candidatas",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "El Mailbox muestra un boton Nuevo mensaje o compositor inline que permite seleccionar el agente destinatario (Arquitecto, Codex, Analista), escribir el cuerpo del mensaje en texto libre, opcionalmente asociar el mensaje a una tarea existente (taskId), y elegir el tipo de mensaje (DIRECTIVE, GO, ACK u OPERATOR_NOTE). El envio se ejecuta como una accion gobernada via submit_intent con un nuevo intent kind mailbox_send (o el equivalente canonico que defina el Arquitecto), firmado por Operador como from y el agente elegido como to. El mensaje queda registrado en el ledger atestado como cualquier otro evento. El compositor no permite editar mensajes ya enviados ni suplantar el from de otro agente. El campo de texto tiene al menos 6 rows visibles. El envio fallido muestra el error real sin limpiar el borrador.",
             "author": "Operador",
             "endorsement": "none",
