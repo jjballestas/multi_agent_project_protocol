@@ -1,6 +1,12 @@
 {
     "active_tasks": [
         {
+            "id": "REQ-3F85B44C",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-02 Intake: dashboard de carpetas en pantalla principal"
+        },
+        {
             "id": "REQ-4A88ECFFC4",
             "owner": "Operador",
             "status": "proposed",
