@@ -1,0 +1,26 @@
+{
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0172",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:0172-fix5:in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5",
+        "idempotency_key": "codex:0172-fix5:release-code"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-delivery",
+        "idempotency_key": "codex:0172-fix5:release-delivery"
+      }
+    }
+  ]
+}

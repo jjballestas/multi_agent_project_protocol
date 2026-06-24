@@ -1,0 +1,25 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-answer",
+          "task_id": "TASK-0172",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5-answer",
+            "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md"
+          ],
+          "started_at": "2026-06-24T19:00:00Z",
+          "updated_at": "2026-06-24T19:00:00Z",
+          "expires_at": "2026-06-24T23:00:00Z",
+          "status": "active",
+          "notes": "Move consumed TASK-0172 round 5 Arquitecto message to answered after in_review ledger delivery."
+        },
+        "idempotency_key": "codex:0172-fix5-answer:claim"
+      }
+    }
+  ]
+}

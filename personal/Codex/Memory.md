@@ -4,6 +4,18 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 round 3 layout fix produ
 
 ## Latest Session Note
 
+- TASK-0172 round 5 harness fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `9835ffe test(intake): allocate free harness ports`. `tests/staticContract.test.js::startServer()` now obtains an
+  ephemeral free loopback port via `net.Server.listen(0)` before spawning `src/server.js`, replacing the prior
+  random `4300..5299` port selection that caused flaky `EACCES`/readiness failures in clean-clone `node --test`.
+  Evidence before this memory update: `node --check public/app.js src/server.js tests/staticContract.test.js` OK,
+  product `git diff --check -- tests/staticContract.test.js` OK, full product `npm test` PASS 85/85, and local
+  clean-clone `npm test` PASS 85/85. Protocol delivery moved TASK-0172 back to `in_review`, released all round 5
+  Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-5.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix5-in-review.md`, moved the consumed
+  Arquitecto changes4 message to `Area_comun/mailbox/answered/`, and committed with message
+  `coord(TASK-0172): deliver round five harness fix`. Final protocol evidence before delivery commit: encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica up_to_seq 1811.
 - TASK-0172 round 4 width fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `967f5cb fix(intake): widen candidate fields`. Candidate-card and candidate-review labels now lay out as
   grid rows, and their textareas, inputs, and selects use `width: 100%` with `box-sizing: border-box`; candidate

@@ -7162,6 +7162,70 @@
             "updated_at": "2026-06-24T17:33:05Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5",
+            "expires_at": "2026-06-24T23:00:00Z",
+            "notes": "TASK-0172 round 5 harness hardening: replace random test-server port with real free port.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-24T18:28:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T18:28:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-answer",
+            "expires_at": "2026-06-24T23:00:00Z",
+            "notes": "Move consumed TASK-0172 round 5 Arquitecto message to answered after in_review ledger delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5-answer",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md"
+            ],
+            "started_at": "2026-06-24T19:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T19:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-delivery",
+            "expires_at": "2026-06-24T23:00:00Z",
+            "notes": "TASK-0172 round 5 delivery artifacts, mailbox response, consumed-message move, and Codex memory update.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-5.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix5-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T18:36:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T18:36:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-memory",
+            "expires_at": "2026-06-24T23:00:00Z",
+            "notes": "Golden-memory update after TASK-0172 round 5 protocol delivery commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T19:08:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T19:08:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

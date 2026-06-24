@@ -1,0 +1,28 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix5-delivery",
+          "task_id": "TASK-0172",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix5-delivery",
+            "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-5.md",
+            "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix5-in-review.md",
+            "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md",
+            "personal/Codex/Memory.md"
+          ],
+          "started_at": "2026-06-24T18:36:00Z",
+          "updated_at": "2026-06-24T18:36:00Z",
+          "expires_at": "2026-06-24T23:00:00Z",
+          "status": "active",
+          "notes": "TASK-0172 round 5 delivery artifacts, mailbox response, consumed-message move, and Codex memory update."
+        },
+        "idempotency_key": "codex:0172-fix5-delivery:claim"
+      }
+    }
+  ]
+}

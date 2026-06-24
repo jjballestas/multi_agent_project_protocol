@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Endurecer el harness de tests para que npm test sea confiablemente exit 0 en clon limpio (el Analista bloquea el cierre por flaky EACCES de puerto). Causa: tests/staticContract.test.js::startServer (~3110) usa `const port = 4300 + Math.floor(Math.random()*1000)` -> puerto aleatorio que colisiona / cae en puerto reservado -> 'listen EACCES 127.0.0.1:5040' y 'server did not become ready'. Fix: asignar un puerto LIBRE de verdad -- helper getFreePort() (crear un net.Server en listen(0), leer address().port, cerrarlo, usar ese puerto para el child), o equivalente; aplicarlo en startServer (y donde aplique). Reentregar a in_review con una corrida full verde en clon limpio (node --test exit 0)."
