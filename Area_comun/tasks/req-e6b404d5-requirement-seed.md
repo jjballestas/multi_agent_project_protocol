@@ -2,7 +2,7 @@
 task_id: "REQ-E6B404D5"
 title: "RC-05 Intake: modal por archivo solo uploader sin lista de candidatas"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

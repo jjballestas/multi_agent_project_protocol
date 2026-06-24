@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1afc114ca3fe6eff824342826d64a32261e1038ba82803ff1169ef8877bdfd69",
+  "canonical_hash": "b9d7cfe80c348aaf62117b2f742e26671b74db9d2d0d44220e5b44617c0e0fe6",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -266,6 +266,9 @@
       "CLAIM-20260624-Codex-TASK-0174": 1,
       "CLAIM-20260624-Codex-TASK-0174-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0174-go-answer": 1,
+      "CLAIM-20260624-Codex-TASK-0175": 1,
+      "CLAIM-20260624-Codex-TASK-0175-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0175-postdelivery": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -489,7 +492,7 @@
       "TASK-0172": 41,
       "TASK-0173": 9,
       "TASK-0174": 7,
-      "TASK-0175": 4,
+      "TASK-0175": 7,
       "TASK-0176": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -498,7 +501,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1207,
+    "events_applied": 1213,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1169,7 +1172,13 @@
       "codex:0173:release-code": 1837,
       "codex:0173:release-delivery": 1838,
       "codex:0175:claim": 1865,
+      "codex:0175:delivery-claim": 1879,
       "codex:0175:in-progress": 1866,
+      "codex:0175:in-review": 1880,
+      "codex:0175:postdelivery-claim": 1883,
+      "codex:0175:release-delivery": 1882,
+      "codex:0175:release-main": 1881,
+      "codex:0175:release-postdelivery": 1884,
       "codex:0175:req-done:REQ-01193FD6": 1874,
       "codex:0175:req-done:REQ-1C7B4275": 1871,
       "codex:0175:req-done:REQ-3F85B44C": 1868,
@@ -1709,5 +1718,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1878
+  "up_to_seq": 1884
 }

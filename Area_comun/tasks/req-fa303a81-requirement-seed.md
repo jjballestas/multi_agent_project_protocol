@@ -2,7 +2,7 @@
 task_id: "REQ-FA303A81"
 title: "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

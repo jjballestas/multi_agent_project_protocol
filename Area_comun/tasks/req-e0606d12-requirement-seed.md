@@ -2,7 +2,7 @@
 task_id: "REQ-E0606D12"
 title: "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

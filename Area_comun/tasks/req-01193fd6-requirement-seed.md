@@ -2,7 +2,7 @@
 task_id: "REQ-01193FD6"
 title: "RC-06 Intake: eliminar selector de modo y lista de candidatas de la vista standalone de extracci"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

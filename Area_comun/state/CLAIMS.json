@@ -7507,9 +7507,43 @@
                 "Area_comun/tasks/req-4a88ecffc4-requirement-seed.md"
             ],
             "started_at": "2026-06-24T22:10:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0175",
             "updated_at": "2026-06-24T22:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0175-delivery",
+            "expires_at": "2026-06-25T02:00:00Z",
+            "notes": "TASK-0175 delivery handoff, mailbox response, consumed GO move, and memory update.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0175-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0175-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0175-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0175.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0175.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T22:18:00Z",
+            "status": "released",
+            "task_id": "TASK-0175",
+            "updated_at": "2026-06-24T22:18:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0175-postdelivery",
+            "expires_at": "2026-06-25T02:00:00Z",
+            "notes": "TASK-0175 post-delivery consumed GO move and Codex memory update.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0175-postdelivery",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0175.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0175.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T22:28:00Z",
+            "status": "released",
+            "task_id": "TASK-0175",
+            "updated_at": "2026-06-24T22:28:00Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

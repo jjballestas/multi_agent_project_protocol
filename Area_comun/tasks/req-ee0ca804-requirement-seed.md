@@ -2,7 +2,7 @@
 task_id: "REQ-EE0CA804"
 title: "RC-01 Intake: barra de control unificada en header de seccion"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

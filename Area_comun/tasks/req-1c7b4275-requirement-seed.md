@@ -2,7 +2,7 @@
 task_id: "REQ-1C7B4275"
 title: "RC-04 Intake: modal revision prellenada para candidatas de archivo"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

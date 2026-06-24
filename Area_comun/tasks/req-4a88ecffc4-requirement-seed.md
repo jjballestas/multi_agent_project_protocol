@@ -2,7 +2,7 @@
 task_id: "REQ-4A88ECFFC4"
 title: "Registrar un worker de producto y enlazarlo a un modelo"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

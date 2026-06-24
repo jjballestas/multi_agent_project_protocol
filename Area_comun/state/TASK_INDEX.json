@@ -2724,7 +2724,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)",
             "type": "implementation"
         },

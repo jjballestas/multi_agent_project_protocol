@@ -2,7 +2,7 @@
 task_id: "REQ-3F85B44C"
 title: "RC-02 Intake: dashboard de carpetas en pantalla principal"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"
