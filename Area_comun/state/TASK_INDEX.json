@@ -2396,7 +2396,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
+            "status": "done",
             "title": "Runtime: extender task_status_capability (DECISION-0060) -- architect cierra triage/extraction propias; golden + neutralidad",
             "type": "implementation"
         },
@@ -2448,7 +2448,7 @@
             "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2",
             "source_store_kind": "os_tmp_outside_attested_dataset",
             "source_store_locator": "os-tmp/zeus-protocol-file-intake/4e/4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2/payload.bin",
-            "status": "ready",
+            "status": "done",
             "title": "Extraction request from historias_panel_operar_agentes.md",
             "type": "triage"
         },

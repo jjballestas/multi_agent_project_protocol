@@ -5690,6 +5690,22 @@
             "updated_at": "2026-06-24T01:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-close-0168",
+            "expires_at": "2026-06-24T16:00:00Z",
+            "notes": "Close TASK-0168 (gate DECISION-0060) in_review->done after green checker. Claim file-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-close-0168",
+                "Area_comun/state/TASK_INDEX.json#TASK-0168",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0168",
+                "Area_comun/tasks/TASK-0168-codex-gate-triage-extraction-close.md"
+            ],
+            "started_at": "2026-06-24T10:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0168",
+            "updated_at": "2026-06-24T10:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-decision-0060",
             "expires_at": "2026-06-24T15:00:00Z",
             "notes": "Register DECISION-0060 (architect closes own triage/extraction tasks) + TASK-0168 (gate implementation) ready/Codex. Claim file-scoped (DECISION-0059).",
@@ -5719,6 +5735,19 @@
             "status": "released",
             "task_id": "TASK-0168",
             "updated_at": "2026-06-24T10:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Arquitecto-prune-badclaim",
+            "expires_at": "2026-06-24T16:00:00Z",
+            "notes": "Prune the close-extract claim whose TASK-EXTRACT active_tasks/TASK_INDEX row selectors the validator regex rejects (submit_intent accepted them; inconsistency). Coarse CLAIMS.json scope.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-24T10:47:00Z",
+            "status": "released",
+            "task_id": "TASK-EXTRACT-1F5C13A7B5",
+            "updated_at": "2026-06-24T10:47:00Z"
         },
         {
             "claim_id": "CLAIM-20260624-Arquitecto-register-0165",

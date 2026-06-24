@@ -2,7 +2,7 @@
 task_id: "TASK-EXTRACT-1F5C13A7B5"
 title: "Extraction request from historias_panel_operar_agentes_p2.md"
 type: "triage"
-status: ready
+status: done
 owner: "Arquitecto"
 phase: "P2"
 priority: "normal"
