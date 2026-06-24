@@ -336,6 +336,21 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0166 fix3 a1d4491 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `2279361`
+  (`review(TASK-0166): Analista requires action type guard`). Ancla producto
+  `a1d4491fc00f86ffdb3c3fce73de0d6ca9d366ae`; instruccion REVIEW en protocolo
+  `07c3ad622cbefe04120cd897513af3b8113123ec` cita protocolo `9f3cded58e9305bd7926a46c54092f85286d3c0a`.
+  Clon limpio producto `npm test`: corrida 1 exit 1 por flake de readiness local-vlm (`listening` impreso pero
+  `/healthz` no listo a tiempo), corrida 2 exit 0, 64/64. Payloads propios contra servidor temporal + protocolo
+  clonado en `9f3cded`: `agentId` array single, objeto, numero, bool, null, array anidado, leading space, ZWJ,
+  control char, duplicate-key ultimo malo y extra key -> 400 sin heartbeat; heartbeat ausente/stale/futuro -> dormant;
+  happy exact -> 200/alive. SLIP nuevo bloqueante: `{"agentId":"Codex","action":["activate"]}` devuelve 200, crea
+  `Codex.heartbeat` y deja `Codex.status=alive`, porque `applyRuntimeControlAction` aun hace
+  `ascii(stripControl(input?.action || "")).trim()` y `String(["activate"]) == "activate"`. `action` objeto devuelve
+  500 TypeError publico. Pedido: `typeof input.action === "string"` antes de coercion + tests negativos permanentes
+  para array/object. Gates protocolo: validate con secretos exit 0; validate secretless en clon exit 0; drift vivo 0
+  `up_to_seq=1617`; neutralidad/encoding exit 0; #4 byte-identica sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0166 fix cab246c (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `228c70e`
   (`review(TASK-0166): Analista requires runtime agentId type guard`). Ancla producto
   `cab246cc48facb8b8dc6af52ca5a80ac4eddf766` + protocolo citado por instruccion `a2ed687`. Clon limpio producto
