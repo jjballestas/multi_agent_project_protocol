@@ -13,12 +13,6 @@
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
         },
         {
-            "id": "REQ-C1EDD835",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "Agupacion de Opcion de requerimientos aprobados"
-        },
-        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "status": "in_progress",

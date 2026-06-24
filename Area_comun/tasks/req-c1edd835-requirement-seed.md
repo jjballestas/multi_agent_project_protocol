@@ -2,7 +2,7 @@
 task_id: "REQ-C1EDD835"
 title: "Agupacion de Opcion de requerimientos aprobados"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -7671,6 +7671,37 @@
             "updated_at": "2026-06-25T00:55:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-answer-go-c1edd835",
+            "expires_at": "2026-06-25T00:33:13Z",
+            "notes": "Move consumed REQ-C1EDD835 reconciliation GO to answered after ledger-backed status flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-answer-go-c1edd835",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-c1edd835.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-c1edd835.md"
+            ],
+            "started_at": "2026-06-24T23:33:13Z",
+            "status": "released",
+            "task_id": "REQ-C1EDD835",
+            "updated_at": "2026-06-24T23:33:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-reconcile-c1edd835",
+            "expires_at": "2026-06-25T01:32:49Z",
+            "notes": "Reconcile delivered REQ-C1EDD835 to done after TASK-0176 closure. File-scoped.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-reconcile-c1edd835",
+                "Area_comun/state/TASK_INDEX.json#REQ-C1EDD835",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-C1EDD835",
+                "Area_comun/tasks/req-c1edd835-requirement-seed.md"
+            ],
+            "started_at": "2026-06-24T23:32:49Z",
+            "status": "released",
+            "task_id": "REQ-C1EDD835",
+            "updated_at": "2026-06-24T23:32:49Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
