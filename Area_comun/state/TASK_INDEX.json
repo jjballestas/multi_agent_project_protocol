@@ -2384,7 +2384,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0090",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)",
             "type": "product"
         },

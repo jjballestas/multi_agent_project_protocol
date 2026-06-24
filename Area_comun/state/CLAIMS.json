@@ -5724,6 +5724,22 @@
             "updated_at": "2026-06-24T01:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-close-0167",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "Close TASK-0167 (front UX cluster) in_review->done after green checker (72/72, no-write negative).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-close-0167",
+                "Area_comun/state/TASK_INDEX.json#TASK-0167",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0167",
+                "Area_comun/tasks/TASK-0167-codex-front-ux-polish-cluster.md"
+            ],
+            "started_at": "2026-06-24T11:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0167",
+            "updated_at": "2026-06-24T11:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-close-0168",
             "expires_at": "2026-06-24T16:00:00Z",
             "notes": "Close TASK-0168 (gate DECISION-0060) in_review->done after green checker. Claim file-scoped.",

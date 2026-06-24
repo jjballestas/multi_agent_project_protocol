@@ -119,12 +119,6 @@
             "owner": "Codex",
             "status": "changes_requested",
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)"
-        },
-        {
-            "id": "TASK-0167",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)"
         }
     ],
     "next_actions": [
