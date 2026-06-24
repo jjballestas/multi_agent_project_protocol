@@ -335,7 +335,21 @@
 - (Historico: trio off-pilot v1.9.1-1.9.3, Carril A activacion #4, satelite protocol_research DECISION-0035 --
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
-## Ultima pasada (2026-06-23)
+## Ultima pasada (2026-06-24)
+- TASK-0165 v2 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `450fada`
+  (`review(TASK-0165): Analista requires thread PII hardening`). Ancla producto `cf13e7f8ad570f3e1ee375df4491bc50a8faab4b`
+  + protocolo `e1c2666e0140ecf4e12916bef2181093132f9c32`. Clon limpio producto `npm test` exit 0, 59/59.
+  Execute propio `mailbox-send` contra servidor temporal + protocolo clonado: HTTP 200/applied true, MSG generado
+  `requires_response:false`, `operator_directive:true`, sin raw NIT/razon social, y `validate_collaboration_state.py
+  --root <tmp>` exit 0. Payloads negativos: `noPiiAck=409`, `badAgent=400`, `actorInjection=400`,
+  `intentsInjection=400`, `routeState=400`. Gates protocolo con/sin secretos exit 0, drift 0 `up_to_seq=1523`,
+  neutralidad/encoding exit 0, #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Bloqueo: el hilo read-only sigue filtrando
+  PII fuera de NIT/razon social/SQL; `buildAgentThread` deja visibles email, telefono, documento, nombre propio,
+  cuenta numerica larga y direccion cuando no hay SQL que los tape por accidente. Pedi devolver a Codex para unificar
+  `redactRequirementText` con la familia del backend y anadir controles positivos por familia.
+
+## Pasada anterior (2026-06-23)
 - TASK-0165 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `8e163cf`
   (`review(TASK-0165): Analista requires mailbox prompt hardening`). Ancla producto `1493f86` + protocolo
   `7d1199020a4245ee7d743ac8623449bc3d273a5a`. Clon limpio producto `npm test`: corrida 1 exit 1 por fallo
