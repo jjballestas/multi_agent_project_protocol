@@ -2,7 +2,41 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-24, HEAD 97baf45, v1.14.0 (#4 enforce/auth ON).
+> Ultima actualizacion: 2026-06-25, HEAD ef3ec32, v1.14.0 (#4 enforce/auth ON). **CHECKPOINT PRE-CEREMONIA US-5.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD ef3ec32; Zeus 127383f) -- POR INICIAR CEREMONIA US-5 (re-genesis REAL) <<<
+- **GUARDADO POR ORDEN DEL OPERADOR antes de iniciar US-5, por si la sesion se reinicia a media ceremonia.**
+- **PROXIMO PASO INMEDIATO: ceremonia US-5 (REQ-520BBC1888) = alta REAL de un agente FIRMANTE del ledger via
+  re-genesis-boundary.** El operador eligio (de 3 opciones) la "ceremonia re-genesis REAL contigo presente" (NO
+  el flujo front de proponer; NO la opcion separada). Es la operacion MAS delicada del #4. AUN NO se ha tocado
+  nada del config; estamos en la fase de PREPARAR la ceremonia. **FALTA DECIDIR CON EL OPERADOR: que agente se
+  agrega** (candidato historico: "Disenador", id=Disenador, backend preset claude, rol disenador, keypair propio;
+  ver personal/operador/15_Asistente_PROMPT-disenador.md) -- NO asumir, preguntar.
+- **MECANICA de la ceremonia (de DECISION-0058 + runbook personal/Arquitecto/carril_A/CEREMONIA-extractor-runbook.md
+  y la activacion #4 de TASK-0117):** agregar un firmante CAMBIA protocol.config.json (agent_registry.agents +
+  event_state.signature_config.public_keys `<id>:v1`->pubkey Ed25519 + tool_policy.policies). Eso INVALIDA
+  chain.genesis (prev_hash = canonical_hash del config PINNED) -> EXIGE re-genesis-boundary. PASOS: (a) generar
+  keypair Ed25519 del agente (privada en D:/Agentes/protocol-secrets/, NUNCA al repo); (b) en COPIA LIMPIA en C:
+  (D: se re-trunca), operador PRESENTE, ventana propia: editar config + `python runtime/regenesis.py --actor-id
+  Arquitecto --timestamp <ISO> --commit <short>` (re-escribe genesis desde hot state, re-snapshot, verifica
+  drift_after==0); (c) verificar drift 0 + validate con/SIN secretos exit 0 + chain/firmas/anclaje validos; (d)
+  commit + push; (e) ROLLBACK ARMADO (flags #4->false / restaurar config previo) si algo falla. NUNCA pilotar
+  contra el log vivo sin copia desechable (DECISION-0045). El clasificador BLOQUEA editar el config-#4 -> permiso
+  Bash/regla del operador.
+- **DIFERIDO (NO tocar hasta despues):** REQ-003AE958 (dictado por voz, post-US-5 por orden del operador);
+  REQ-C1EDD835 reconcile a done (post-ceremonia; el feature ya entregado por TASK-0176; requirement->done exige
+  Codex/implementer; NO correr Codex durante la re-genesis = estado debe estar quieto).
+- **FRONT VIVO:** lo lance YO en http://127.0.0.1:4173 (Zeus HEAD 127383f, default config = auto-commit-push OFF,
+  PROTOCOL_REPO_PATH=D:). Mate el server viejo del operador (PID 161128) que daba el 400 de notifyArchitect (su
+  proceso era pre-TASK-0166). "Enviar al Arquitecto" YA funciona (verificado 200 + runtimeWake). Background task
+  bw1o9r7zh. Si reinicio sesion, el server quiza siga vivo o no -> re-lanzar si el operador lo pide.
+- **HOY CERRADO (HEAD ef3ec32):** US-4 (TASK-0171 worker reg + ACL Windows) + cluster RC (TASK-0172, 5 rondas:
+  entrega/PII-leak/layout x2/port-harness) + TASK-0173 (pulido modal manual) + TASK-0174 (quitar pasos) + TASK-0175
+  (reconciliar 9 REQ entregados) + TASK-0176 (paginacion aprobados, REQ-C1EDD835). DECISION-0060 + reportes +
+  memoria. validate 0, drift 0, 0 claims activos. El Analista cazo multiples fronteras reales (US-4 ACL, RC PII
+  leak, RC gate flaky) -- maker!=checker!=Analista probado a fondo.
+- **BACKLOG proposed restante:** REQ-520BBC1888 (US-5, ceremonia ahora), REQ-003AE958 (dictado, diferido),
+  REQ-C1EDD835 (reconcile diferido). TASK-0118 (DEF-PII) diferida.
 
 ## CLUSTER RC DONE 2026-06-24 (HEAD b6d41fb; Zeus 9835ffe) -- listo para prueba final del operador
 - TASK-0172 (rediseno Intake RC-01..RC-06) DONE tras **5 RONDAS**: R1 entrega; R2 PII (el Analista cazo un leak
