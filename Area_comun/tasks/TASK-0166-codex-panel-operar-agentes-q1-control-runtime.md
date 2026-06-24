@@ -2,7 +2,7 @@
 task_id: TASK-0166
 title: "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (indicador vivo/dormido + activar/detener por agente, allowlist) + 'Enviar al Arquitecto' desde el Intake (SPEC-0089, AC1-AC6)"
 type: product
-status: in_review
+status: changes_requested
 owner: Codex
 phase: P2
 priority: high

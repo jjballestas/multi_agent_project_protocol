@@ -5531,6 +5531,23 @@
             "updated_at": "2026-06-24T08:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-0166-changes2",
+            "expires_at": "2026-06-24T16:00:00Z",
+            "notes": "TASK-0166 CAMBIO-REQUERIDO 3a ronda (Analista agentId type guard). Handoff a Codex. Claim file-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-0166-changes2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0166",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0166",
+                "Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0166-changes2.md"
+            ],
+            "started_at": "2026-06-24T10:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T10:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-TASK-0165-close",
             "notes": "Close TASK-0165 (Q2) done + archive Q2 review cycle (Analista v4 OK/CERRABLE).",
             "owner": "Arquitecto",
