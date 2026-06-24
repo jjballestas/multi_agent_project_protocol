@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Corregir TASK-0172 (frontera PII RC-04): el modelo publico de candidatas filtra PII al cliente. Redactar title/narrative/acceptance_intent con redactPublicText en normalizeStoredCandidate (y en el modelo que sirve /api/protocol/actions safeguards.candidateReview.candidates + /api/protocol/intake-candidates) ANTES de llegar al cliente. Agregar test negativo PERMANENTE: candidata almacenada con email, telefono con parentesis, direccion y documento -> el JSON del cliente y el prellenado del modal de revision NO contienen los literales. Reentregar a in_review."

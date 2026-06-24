@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0171 AC2 private-key protection fix.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 candidate public-model PII fix.
 
 ## Latest Session Note
 
+- TASK-0172 changes-requested fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `9f1f772 fix(intake): redact public candidate model`. The public candidate model now redacts candidate
+  `title`, `narrative`, and `acceptance_intent` with `redactPublicText` before serving
+  `/api/protocol/actions` safeguards and `/api/protocol/intake-candidates`; internal approval reads keep the
+  unredacted stored model so extractor signature/provenance validation remains intact. `redactPublicText` now also
+  covers parenthesized phone forms and common address prefixes (`Calle`, `Carrera`, `Av`, `Cra`, `Cl`, `Kr`).
+  Permanent coverage seeds a candidate with email, parenthesized phone, address, and document literals, verifies both
+  public JSON surfaces omit those literals and contain redaction markers, and verifies the review modal prefill still
+  comes from the public candidate draft. Evidence before protocol delivery: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK, product `git diff --check` OK, targeted `candidate review` PASS 2/2, targeted
+  `TASK-0172|candidate review` PASS 8/8, full product `npm test` PASS 81/81, local smoke on port 4236 OK for
+  `/healthz` plus `/api/protocol/actions`, and clean-clone product `npm test` PASS 81/81. Protocol delivery is being
+  completed under `CLAIM-20260624-Codex-TASK-0172-fix` and
+  `CLAIM-20260624-Codex-TASK-0172-fix-delivery`.
 - TASK-0172 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a4e0b50 feat(front): redesign intake section`. The Intake surface now has the SPEC-0092 RC-01..RC-06
   presentation redesign: unified RF-14 header controls, four derived folders, manual modal, file-upload-only modal,

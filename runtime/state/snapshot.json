@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "70f1ed57d3f986a2d755625069b8a59673ff9558fdbf51f501d7232230933787",
+  "canonical_hash": "799348ebca80a1c8ba3bc6296177e97589d5147eb4e3b2fd002a6443bb3d5b94",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -237,6 +237,8 @@
       "CLAIM-20260624-Codex-TASK-0172-consume-go": 1,
       "CLAIM-20260624-Codex-TASK-0172-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0172-encoding-fix": 1,
+      "CLAIM-20260624-Codex-TASK-0172-fix": 1,
+      "CLAIM-20260624-Codex-TASK-0172-fix-delivery": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -443,7 +445,7 @@
       "TASK-0169": 9,
       "TASK-0170": 7,
       "TASK-0171": 15,
-      "TASK-0172": 11,
+      "TASK-0172": 15,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -451,7 +453,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1099,
+    "events_applied": 1105,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1046,6 +1048,12 @@
       "codex:0166-fix4:claim-release": 1634,
       "codex:0166-fix4:status-in-review": 1633,
       "codex:0166-fix4d:status-in-progress": 1631,
+      "codex:0172-fix-delivery:claim": 1773,
+      "codex:0172-fix:claim": 1771,
+      "codex:0172-fix:in-progress": 1772,
+      "codex:0172-fix:in-review": 1774,
+      "codex:0172-fix:release-code": 1775,
+      "codex:0172-fix:release-delivery": 1776,
       "codex:TASK-0149:claim-acquire": 1065,
       "codex:TASK-0149:claim-release": 1068,
       "codex:TASK-0149:status-in-progress": 1066,
@@ -1554,5 +1562,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1770
+  "up_to_seq": 1776
 }

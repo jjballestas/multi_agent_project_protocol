@@ -1,0 +1,37 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix",
+          "task_id": "TASK-0172",
+          "owner": "Codex",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix",
+            "Area_comun/state/TASK_INDEX.json#TASK-0172",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+            "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+            "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+            "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+            "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+          ],
+          "started_at": "2026-06-24T16:45:00Z",
+          "updated_at": "2026-06-24T16:45:00Z",
+          "expires_at": "2026-06-24T22:00:00Z",
+          "status": "active",
+          "notes": "TASK-0172 changes_requested fix: redact public candidate model PII and add permanent negative tests."
+        },
+        "idempotency_key": "codex:0172-fix:claim"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0172",
+        "from": "changes_requested",
+        "to": "in_progress",
+        "idempotency_key": "codex:0172-fix:in-progress"
+      }
+    }
+  ]
+}
