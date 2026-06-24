@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0165:v4-in-review:20260624T123000Z",
+  "intents": [
+    {
+      "task_status": {
+        "idempotency_key": "Codex:TASK-0165:v4-task-in-review:20260624T123000Z",
+        "task_id": "TASK-0165",
+        "from": "in_progress",
+        "to": "in_review"
+      }
+    },
+    {
+      "claim": {
+        "idempotency_key": "Codex:TASK-0165:v4-claim-release:20260624T123000Z",
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0165-v4"
+      }
+    },
+    {
+      "claim": {
+        "idempotency_key": "Codex:TASK-0165:v4-delivery-claim-release:20260624T123000Z",
+        "op": "release",
+        "claim_id": "CLAIM-20260624-Codex-TASK-0165-v4-delivery"
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "TASK-0165 (Q2) CAMBIO v4 del Analista: el hilo ya tapa lo nuevo, pero AUN filtra dos variantes tratables de familias ya prometidas: telefono-con-parentesis y direccion-abreviada. Cierra esas dos y re-entrega; es el ultimo tramo de cobertura de patron (no es DEF-PII)."

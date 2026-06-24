@@ -1,0 +1,29 @@
+{
+  "idempotency_key": "Codex:TASK-0165:v4-delivery-claim:20260624T122000Z",
+  "intents": [
+    {
+      "claim": {
+        "idempotency_key": "Codex:TASK-0165:v4-delivery-claim-acquire:20260624T122000Z",
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260624-Codex-TASK-0165-v4-delivery",
+          "owner": "Codex",
+          "task_id": "TASK-0165",
+          "status": "active",
+          "started_at": "2026-06-24T12:20:00Z",
+          "updated_at": "2026-06-24T12:20:00Z",
+          "expires_at": "2026-06-24T16:00:00Z",
+          "notes": "Delivery artifacts for TASK-0165 v4 phone/address redaction fix.",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0165-v4-delivery",
+            "Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-4.md",
+            "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-v4-in-review.md",
+            "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0165-v4-CAMBIO-pii-tel-dir.md",
+            "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0165-v4-CAMBIO-pii-tel-dir.md",
+            "personal/Codex/Memory.md"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -5838,6 +5838,44 @@
             "updated_at": "2026-06-24T00:33:48Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0165-v4",
+            "expires_at": "2026-06-24T16:00:00Z",
+            "notes": "Fix TASK-0165 v4 phone parentheses and abbreviated address redaction variants.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0165-v4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0165",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0165",
+                "Area_comun/tasks/TASK-0165-codex-panel-operar-agentes-q2-consola-prompts.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0165-v4-CAMBIO-pii-tel-dir.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0165",
+            "updated_at": "2026-06-24T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0165-v4-delivery",
+            "expires_at": "2026-06-24T16:00:00Z",
+            "notes": "Delivery artifacts for TASK-0165 v4 phone/address redaction fix.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0165-v4-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-4.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-v4-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0165-v4-CAMBIO-pii-tel-dir.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0165-v4-CAMBIO-pii-tel-dir.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T12:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0165",
+            "updated_at": "2026-06-24T12:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

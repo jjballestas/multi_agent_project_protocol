@@ -4,6 +4,19 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening impl
 
 ## Latest Session Note
 
+- TASK-0165 v4 PII-thread fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `ea7304f fix(front): redact phone and address variants`. `public/app.js::redactRequirementText` now treats
+  parenthesized phone prefixes/area codes and common abbreviated street forms (`Cra`, `Cl`, `Kr`) as covered
+  public-plane redaction patterns, while the AC16 note keeps free names and loose address fragments as residual
+  DEF-PII. `tests/staticContract.test.js` adds positive thread-render coverage for the exact v4 vectors and checks
+  both literal absence and marker-token presence. Evidence before this memory update: `node --check public/app.js
+  src/server.js tests/staticContract.test.js` OK, product `git diff --check` OK, and product `npm test` PASS 61/61.
+  Clean-clone product `npm test` PASS 61/61. Protocol delivery moved TASK-0165 back to `in_review`, released all
+  Codex v4 claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-4.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0165-v4-in-review.md`, and moved the consumed v4
+  Arquitecto directive to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit: encoding
+  OK, neutrality OK, `validate_collaboration_state.py` OK with one pre-existing FYI warning for the previous v3
+  non-response handoff message, and drift false / #4 byte-identica up_to_seq 1535.
 - TASK-0165 v3 PII-thread fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `41bf1a2 fix(front): redact agent thread pii patterns`. `public/app.js::redactRequirementText`, used by
   `buildAgentThread`, now redacts enumerable public-plane PII patterns for email, phone, document/id, long account,
