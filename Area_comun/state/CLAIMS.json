@@ -6518,9 +6518,42 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-24T13:08:26Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0169",
             "updated_at": "2026-06-24T13:08:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0169-answer-go",
+            "expires_at": "2026-06-25T00:00:00Z",
+            "notes": "Mark consumed TASK-0169 GO answered after delivery ledger transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0169-answer-go",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0169.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0169.md"
+            ],
+            "started_at": "2026-06-24T13:10:49Z",
+            "status": "released",
+            "task_id": "TASK-0169",
+            "updated_at": "2026-06-24T13:10:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0169-delivery",
+            "expires_at": "2026-06-25T00:00:00Z",
+            "notes": "TASK-0169 delivery handoff and mailbox coordination.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0169-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0169-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0169-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0169.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0169.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T13:10:04Z",
+            "status": "released",
+            "task_id": "TASK-0169",
+            "updated_at": "2026-06-24T13:10:04Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

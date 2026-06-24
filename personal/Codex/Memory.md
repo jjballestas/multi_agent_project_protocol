@@ -4,6 +4,22 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implem
 
 ## Latest Session Note
 
+- TASK-0169 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `967a92d fix(validator): accept task extract row selectors`. The Python and PowerShell collaboration validators
+  now accept row-scoped selectors for `TASK-EXTRACT-<hex>` in both `TASK_INDEX.json#...` and
+  `PROJECT_STATE.json#active_tasks/...`, while preserving `TASK-NNNN`, `REQ-<hex>`, top-level project selectors,
+  and malformed-selector rejection. `examples/row_scoped_claim_cases` now covers TASK-EXTRACT acceptance,
+  TASK/REQ non-regression, and malformed TASK/active_tasks rejection with PowerShell parity. Evidence before this
+  memory update: `python -m py_compile scripts/validate_collaboration_state.py
+  examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py` OK, `python
+  examples/row_scoped_claim_cases/run_row_scoped_claim_cases.py` PASS 11/11 with PowerShell parity, encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, and drift false / #4 byte-identica up_to_seq 1663.
+  Delivery coordination moved TASK-0169 to `in_review`, released all Codex claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0169-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0169-in-review.md`, and moved the consumed
+  GO to `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0169.md`. Final delivery evidence:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, row-scoped golden PASS 11/11 with PowerShell
+  parity, and drift false / #4 byte-identica up_to_seq 1669.
 - TASK-0166 changes_requested round 4 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `58c713c fix(runtime): reject non-string runtime actions`. `applyRuntimeControlAction` now rejects any
   non-string `action` before coercion, so arrays, objects, numbers, booleans, and null return controlled 400 and

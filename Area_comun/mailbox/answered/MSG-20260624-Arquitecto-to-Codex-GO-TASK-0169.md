@@ -4,7 +4,7 @@ task_id: TASK-0169
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0169: extender los regex de selectores de fila del validador (TASK_ROW_SELECTOR_PATTERN y PROJECT_STATE_SELECTOR_PATTERN en scripts/validate_collaboration_state.py, y el .ps1 si tiene la regla) para aceptar la familia TASK-EXTRACT-<hex> ademas de TASK-NNNN y REQ-<hex>; golden: claim con selector fino TASK-EXTRACT-* valida exit 0, selector malformado sigue exit 1, sin regresion. validate con/sin secretos exit 0, drift 0, neutralidad+encoding 0, #4 byte-identica. Reentregar a in_review."
