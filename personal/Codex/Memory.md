@@ -4,6 +4,19 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0172 round 3 layout fix produ
 
 ## Latest Session Note
 
+- TASK-0172 round 4 width fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `967f5cb fix(intake): widen candidate fields`. Candidate-card and candidate-review labels now lay out as
+  grid rows, and their textareas, inputs, and selects use `width: 100%` with `box-sizing: border-box`; candidate
+  and review textareas also keep a 180px minimum height with vertical resize. Permanent CSS contract coverage was
+  added for the full-width card fields. Evidence before this memory update: `node --check public/app.js
+  tests/staticContract.test.js src/server.js` OK, product `git diff --check` OK, targeted
+  `node --test --test-name-pattern "TASK-0172|candidate review" tests/staticContract.test.js` PASS 12/12, full
+  product `npm test` PASS 85/85, clean-clone product `npm test` PASS 85/85, and local smoke on port 4240 OK for
+  `/healthz` plus `/api/protocol/actions`. Protocol delivery moved TASK-0172 back to `in_review`, released fix4
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-4.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix4-in-review.md`, and moved the consumed
+  Arquitecto changes3 message to `Area_comun/mailbox/answered/`. Protocol delivery commit message:
+  `coord(TASK-0172): deliver round four width fix`.
 - TASK-0172 round 3 layout fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `95af6ed fix(intake): clean round three layout`. The Intake main panel no longer renders the inline
   `intake-extraction-standalone`; file upload is only in `intake-file-modal`. Any Intake cancel now closes modals

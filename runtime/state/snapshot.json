@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0457af74c4ed827e4f83ca5259dcc4adf33a5cfa4e421a2ae5993ce731edc184",
+  "canonical_hash": "984104a9255f512e10353436d263e67f53215edeaf061d24676b8b87b50157ab",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -244,6 +244,9 @@
       "CLAIM-20260624-Codex-TASK-0172-fix3": 1,
       "CLAIM-20260624-Codex-TASK-0172-fix3-delivery": 1,
       "CLAIM-20260624-Codex-TASK-0172-fix3-evidence-amend": 1,
+      "CLAIM-20260624-Codex-TASK-0172-fix4": 1,
+      "CLAIM-20260624-Codex-TASK-0172-fix4-delivery": 1,
+      "CLAIM-20260624-Codex-TASK-0172-fix4-mailbox-warning": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -450,7 +453,7 @@
       "TASK-0169": 9,
       "TASK-0170": 7,
       "TASK-0171": 15,
-      "TASK-0172": 24,
+      "TASK-0172": 29,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -458,7 +461,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1119,
+    "events_applied": 1127,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1275,6 +1278,14 @@
       "codex:task0163-ledger-busy:release-impl-claim": 1383,
       "codex:task0163-mailbox-question-fix:claim": 1387,
       "codex:task0163-mailbox-question-fix:release": 1388,
+      "codex:task0172-round4:changes-to-in-progress": 1792,
+      "codex:task0172-round4:claim-acquire": 1791,
+      "codex:task0172-round4:claim-release": 1795,
+      "codex:task0172-round4:delivery-claim-acquire": 1793,
+      "codex:task0172-round4:delivery-claim-release": 1796,
+      "codex:task0172-round4:in-progress-to-in-review": 1794,
+      "codex:task0172-round4:mailbox-warning-claim-acquire": 1797,
+      "codex:task0172-round4:mailbox-warning-claim-release": 1798,
       "codex:task0172:claim-release": 1760,
       "codex:task0172:consume-go-claim": 1762,
       "codex:task0172:consume-go-claim-release": 1763,
@@ -1581,5 +1592,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1790
+  "up_to_seq": 1798
 }

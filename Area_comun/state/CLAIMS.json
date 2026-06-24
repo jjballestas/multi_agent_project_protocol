@@ -7075,6 +7075,62 @@
             "updated_at": "2026-06-24T18:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix4",
+            "expires_at": "2026-06-24",
+            "notes": "TASK-0172 round 4 candidate-card full-width field fix.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T17:21:22Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:21:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix4-delivery",
+            "expires_at": "2026-06-24",
+            "notes": "TASK-0172 round 4 delivery handoff and mailbox close.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix4-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-4.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix4-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes3.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes3.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T17:31:52Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:31:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-fix4-mailbox-warning",
+            "expires_at": "2026-06-24",
+            "notes": "Add context refs to TASK-0172 round 4 handoff mailbox message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-fix4-mailbox-warning",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-fix4-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-24T17:33:05Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:33:05Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
