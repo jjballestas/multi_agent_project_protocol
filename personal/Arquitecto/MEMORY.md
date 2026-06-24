@@ -2,7 +2,31 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD ef3ec32, v1.14.0 (#4 enforce/auth ON). **CHECKPOINT PRE-CEREMONIA US-5.**
+> Ultima actualizacion: 2026-06-25, HEAD f11b561, v1.14.0 (#4 enforce/auth ON). **CHECKPOINT PRE-CEREMONIA US-5.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD f11b561; Zeus 1b80235) -- US-5 RECONSIDERADO + cierre del dia <<<
+- **US-5 RECONSIDERADO (operador):** el ENSAYO de re-genesis (clon limpio C:/rg-us5, descartado, vivo NUNCA tocado)
+  revelo que agregar un firmante #4 da "genesis mismatch" -- el chain.genesis@seq672 ancla al hash del config
+  PINNED; cambiarlo lo rompe; regenesis.py solo re-basa el protocol-state genesis (drift 0) NO el chain.genesis.
+  Agregar firmante = re-genesis-boundary COMPLETO (sellar cadena + eventlog fresco, como T0). El operador eligio
+  RECONSIDERAR: el Disenador (como el Extractor, CEREMONIA-extractor-runbook) NO escribe el #4 ledger -> NO
+  necesita clave #4 -> agente de PRODUCTO (clave producto, off-config, US-4), SIN re-genesis. US-5 RESUELTO POR
+  DISENO: principio "firmante #4 = ceremonia, no toggle" confirmado (el guard funciona); la ceremonia queda
+  reservada para escritores reales del ledger. NO se agrego ningun firmante; #4 epoca 1.14.0 INTACTA.
+- **VISION NOVA (operador, FUTURO, NO esta sesion):** fabrica multi-agente para NOVA (producto municipal/
+  financiero, evolucion de Budget). ~11 roles (Domain/PO, Legacy Analyst, Solution Architect, DB/Migration,
+  Backend, Frontend UX, AI/MCP, Security, QA, DevOps, Docs). Modelo del Arquitecto: gobernanza #4 LEAN
+  (architect/implementer/reviewer firman) + constructores especializados = agentes de PRODUCTO (sin re-genesis por
+  especialidad). Stack: VS2026/.NET10/SQLServer2025/React+TS+Vite/MCP/OIDC+JWT/Docker+CI/OTel. CAPTURADO EN
+  TASK-0178 (atestado).
+- **CONSOLA DEL ARQUITECTO = TASK-0178 (PROPOSED, PENDIENTE por orden del operador):** interface en el front para
+  hablar conmigo EN VIVO (operador escribe, yo muestro/reporto, mi runtime se ACTIVA), reemplazando VS Code. NO el
+  mailbox. Es un PUENTE de runtime del Arquitecto (wrapper interactivo + streaming UI) = la palanca "front como
+  supervisor". DISENAR la proxima ventana, NO hoy.
+- **FINANDO HOY (orden operador):** REQ-003AE958 dictado por voz = TASK-0177 (SPEC-0093, microfono Web Speech API
+  en narrativa/intencion, FRONTERA EGRESS opt-in/aviso/off-by-default, texto redactado en submit; maker=Codex/
+  checker=Arquitecto+Analista por el egress) GO'd; REQ-C1EDD835 (paginacion, entregada TASK-0176) reconcile a done
+  GO'd a Codex. Ambos en cola de Codex. Tras entrega: checker (+Analista en el dictado) -> cerrar.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD ef3ec32; Zeus 127383f) -- POR INICIAR CEREMONIA US-5 (re-genesis REAL) <<<
 - **GUARDADO POR ORDEN DEL OPERADOR antes de iniciar US-5, por si la sesion se reinicia a media ceremonia.**
