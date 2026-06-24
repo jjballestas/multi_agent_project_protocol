@@ -18,7 +18,8 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0167 UX polish product implem
   `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0167-in-review.md`, and moved the consumed GO to
   `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md` with status `answered`. Final
   protocol evidence before delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK,
-  drift false / #4 byte-identica up_to_seq 1626.
+  drift false / #4 byte-identica up_to_seq 1626. Protocol delivery commit:
+  `cb178f8 coord(TASK-0167): deliver ux polish cluster`.
 - TASK-0166 changes_requested round 3 product fix landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a1d4491 fix(runtime): reject non-string runtime agent ids`. `sanitizeRuntimeControlAgentId` now rejects any
   non-string `agentId` before coercion, so JSON arrays like `["Codex"]`, numbers, objects, and booleans return 400
