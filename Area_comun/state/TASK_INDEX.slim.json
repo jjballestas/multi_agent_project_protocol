@@ -120,6 +120,14 @@
             "priority": "normal",
             "status": "ready",
             "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)"
+        },
+        {
+            "id": "TASK-0176",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Proyecto-front: carpeta Aprobados ultimos 3 + ver mas paginado (REQ-C1EDD835)"
         }
     ],
     "view": "task_index.slim"

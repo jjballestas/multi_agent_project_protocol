@@ -2705,6 +2705,19 @@
             "type": "implementation"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0176-codex-front-approved-pagination.md",
+            "id": "TASK-0176",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0092",
+            "status": "ready",
+            "title": "Proyecto-front: carpeta Aprobados ultimos 3 + ver mas paginado (REQ-C1EDD835)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
