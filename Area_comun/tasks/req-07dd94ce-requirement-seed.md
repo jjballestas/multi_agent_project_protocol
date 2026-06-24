@@ -2,7 +2,7 @@
 task_id: "REQ-07DD94CE"
 title: "UX: Busqueda y filtro por texto en la vista Artifacts RF-3"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -2,7 +2,7 @@
 task_id: "REQ-A54DAD73"
 title: "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

@@ -2,7 +2,7 @@
 task_id: "REQ-7857CDE9"
 title: "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

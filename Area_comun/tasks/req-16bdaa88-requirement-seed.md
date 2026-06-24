@@ -2,7 +2,7 @@
 task_id: "REQ-16BDAA88"
 title: "UX: Descripcion corta inline en cada accion gobernada de Operate RF-5..RF-10"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

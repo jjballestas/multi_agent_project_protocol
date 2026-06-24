@@ -2,7 +2,7 @@
 task_id: "REQ-269EBF78"
 title: "Consola de prompts agente-a-agente desde el front"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

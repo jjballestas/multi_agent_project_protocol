@@ -2,7 +2,7 @@
 task_id: "REQ-9442785DD6"
 title: "Indicador vivo/dormido y boton activar/detener por agente"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

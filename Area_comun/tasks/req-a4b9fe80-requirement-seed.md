@@ -2,7 +2,7 @@
 task_id: "REQ-A4B9FE80"
 title: "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

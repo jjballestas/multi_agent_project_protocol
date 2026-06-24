@@ -3,7 +3,7 @@
         {
             "id": "REQ-07DD94CE",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Busqueda y filtro por texto en la vista Artifacts RF-3"
         },
         {
@@ -15,19 +15,19 @@
         {
             "id": "REQ-11A2A57C",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Routing por hash URL en la navegacion lateral del front RF-1..RF-14"
         },
         {
             "id": "REQ-16BDAA88",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Descripcion corta inline en cada accion gobernada de Operate RF-5..RF-10"
         },
         {
             "id": "REQ-269EBF78",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
@@ -81,7 +81,7 @@
         {
             "id": "REQ-524372E9",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: KPIs de cabecera contextuales segun la vista activa"
         },
         {
@@ -99,7 +99,7 @@
         {
             "id": "REQ-68896287BC",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Consola de prompts agente-a-agente desde el front"
         },
         {
@@ -111,7 +111,7 @@
         {
             "id": "REQ-7857CDE9",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14"
         },
         {
@@ -129,19 +129,19 @@
         {
             "id": "REQ-885632826E",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Boton \"Enviar al Arquitecto\" en el Intake"
         },
         {
             "id": "REQ-9442785DD6",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Indicador vivo/dormido y boton activar/detener por agente"
         },
         {
             "id": "REQ-95B96D25",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Boton \"Enviar al Arquitecto\" en el Intake"
         },
         {
@@ -159,13 +159,13 @@
         {
             "id": "REQ-A4B9FE80",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1"
         },
         {
             "id": "REQ-A54DAD73",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox"
         },
         {
@@ -189,7 +189,7 @@
         {
             "id": "REQ-CD4CE3F1",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Agrupacion temporal y filtros en la bandeja Mailbox RF-2"
         },
         {
@@ -219,13 +219,13 @@
         {
             "id": "REQ-DCFB1AA7",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Indicador vivo/dormido y boton activar/detener por agente"
         },
         {
             "id": "REQ-E782911A",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Compositor de mensajes del Operador a agentes desde el Mailbox del front RF-2"
         },
         {
@@ -663,7 +663,7 @@
         {
             "id": "TASK-0170",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Reconciliar backlog: marcar done los 15 REQ ya entregados por TASK-0165/0166/0167"
         },
         {

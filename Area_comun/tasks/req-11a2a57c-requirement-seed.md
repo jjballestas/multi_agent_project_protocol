@@ -2,7 +2,7 @@
 task_id: "REQ-11A2A57C"
 title: "Routing por hash URL en la navegacion lateral del front RF-1..RF-14"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

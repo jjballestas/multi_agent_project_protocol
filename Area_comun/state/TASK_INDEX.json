@@ -63,7 +63,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Busqueda y filtro por texto en la vista Artifacts RF-3",
             "type": "requirement"
         },
@@ -112,7 +112,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Routing por hash URL en la navegacion lateral del front RF-1..RF-14",
             "type": "requirement"
         },
@@ -136,7 +136,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Descripcion corta inline en cada accion gobernada de Operate RF-5..RF-10",
             "type": "requirement"
         },
@@ -160,7 +160,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Consola de prompts agente-a-agente desde el front",
             "type": "requirement"
         },
@@ -410,7 +410,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: KPIs de cabecera contextuales segun la vista activa",
             "type": "requirement"
         },
@@ -490,7 +490,7 @@
                 "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
                 "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
             },
-            "status": "proposed",
+            "status": "done",
             "title": "Consola de prompts agente-a-agente desde el front",
             "type": "requirement"
         },
@@ -539,7 +539,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Modal fullscreen para formulario de nueva historia/requisito en Intake RF-14",
             "type": "requirement"
         },
@@ -633,7 +633,7 @@
                 "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
                 "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
             },
-            "status": "proposed",
+            "status": "done",
             "title": "Boton \"Enviar al Arquitecto\" en el Intake",
             "type": "requirement"
         },
@@ -671,7 +671,7 @@
                 "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
                 "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
             },
-            "status": "proposed",
+            "status": "done",
             "title": "Indicador vivo/dormido y boton activar/detener por agente",
             "type": "requirement"
         },
@@ -695,7 +695,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Boton \"Enviar al Arquitecto\" en el Intake",
             "type": "requirement"
         },
@@ -768,7 +768,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Chips visuales de estado y prioridad en tarjetas del Backlog RF-1",
             "type": "requirement"
         },
@@ -792,7 +792,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox",
             "type": "requirement"
         },
@@ -891,7 +891,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "UX: Agrupacion temporal y filtros en la bandeja Mailbox RF-2",
             "type": "requirement"
         },
@@ -1008,7 +1008,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Indicador vivo/dormido y boton activar/detener por agente",
             "type": "requirement"
         },
@@ -1032,7 +1032,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "Compositor de mensajes del Operador a agentes desde el Mailbox del front RF-2",
             "type": "requirement"
         },
@@ -2420,7 +2420,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Reconciliar backlog: marcar done los 15 REQ ya entregados por TASK-0165/0166/0167",
             "type": "implementation"
         },

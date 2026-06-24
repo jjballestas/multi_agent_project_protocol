@@ -2,7 +2,7 @@
 task_id: "REQ-885632826E"
 title: "Boton \"Enviar al Arquitecto\" en el Intake"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

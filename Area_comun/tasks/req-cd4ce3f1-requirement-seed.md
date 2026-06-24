@@ -2,7 +2,7 @@
 task_id: "REQ-CD4CE3F1"
 title: "UX: Agrupacion temporal y filtros en la bandeja Mailbox RF-2"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

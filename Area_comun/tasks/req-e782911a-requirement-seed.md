@@ -2,7 +2,7 @@
 task_id: "REQ-E782911A"
 title: "Compositor de mensajes del Operador a agentes desde el Mailbox del front RF-2"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

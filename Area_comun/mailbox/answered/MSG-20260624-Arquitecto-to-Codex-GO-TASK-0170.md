@@ -4,7 +4,7 @@ task_id: TASK-0170
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0170: marcar done (submit_intent task_status proposed->done) los 15 REQ ya entregados, listados con su tarea entregadora en el task file. Claim file-scoped por REQ; no tocar REQ-4A88ECFFC4, REQ-520BBC1888 ni TASK-0118. validate con/sin secretos exit 0, drift 0, neutralidad+encoding 0, #4 byte-identica. Reentregar a in_review."
@@ -18,3 +18,7 @@ context_refs:
 
 Reconciliacion mecanica de estado (features ya en producto/atestadas). Mapeo REQ->tarea verificado en el task
 file. requirement->done exige implementer (solo tu). maker=Codex / checker=Arquitecto. Ancla: protocolo HEAD b4493c6.
+
+## Respuesta
+
+Ejecutado por Codex en TASK-0170. Entrega en `Area_comun/handoffs/HANDOFF-TASK-0170-codex-to-arquitecto-1.md`.

@@ -2,7 +2,7 @@
 task_id: "REQ-524372E9"
 title: "UX: KPIs de cabecera contextuales segun la vista activa"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"
