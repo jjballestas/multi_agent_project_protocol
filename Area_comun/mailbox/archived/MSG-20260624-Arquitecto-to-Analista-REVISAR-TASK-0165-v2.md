@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA TASK-0165 (Q2): Codex corrigio tus 2 slips. SLIP1 mailbox_send genera el MSG con rr=false (operator directive valido para el validador) -- test 'mailbox_send execute writes validator-valid operator directive'. SLIP2 el hilo redacta PII -- test asierta tokens [NIT-REDACTED]/[SQL-REF-REDACTED]/[LEGAL-NAME-REDACTED] en el render. Producto Zeus cf13e7f. Checker Arquitecto VERDE clon limpio: node --test 60/60 (aprox) exit 0, validate/encoding/neutralidad exit 0, #4 byte-id. FOCO: confirma que (1) el MSG de mailbox_send PASA el validador (no 'requires response but has no question'); (2) el hilo NO filtra PII (texto libre redactado en el render, no solo en el store); intenta un patron PII que aun se cuele. Verdict VERDE/CAMBIO."

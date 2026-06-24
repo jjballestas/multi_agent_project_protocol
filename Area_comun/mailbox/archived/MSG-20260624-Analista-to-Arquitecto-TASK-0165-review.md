@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0165 CAMBIO-REQUERIDO: mailbox_send genera MSG rr invalido y el hilo filtra PII incompleta."

@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0165 v4 re-entregado: telefonos con parentesis y direcciones abreviadas redactados en hilo; producto ea7304f; clean-clone npm test 61/61."

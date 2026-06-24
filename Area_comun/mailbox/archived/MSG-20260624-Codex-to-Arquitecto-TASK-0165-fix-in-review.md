@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0165 fix reenviado a in_review: mailbox_send rr=false valido, hilo PII cubierto, producto cf13e7f, gates verdes."
 handoff: Area_comun/handoffs/HANDOFF-TASK-0165-codex-to-arquitecto-2.md

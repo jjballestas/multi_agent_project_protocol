@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: FYI
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0165 v3 re-entregado: buildAgentThread redacta email/telefono/documento/cuenta/direccion por patron; producto 41bf1a2; gates verdes."
 context_refs:

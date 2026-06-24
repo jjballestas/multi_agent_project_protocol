@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA v3 TASK-0165 (Q2): Codex extendio la redaccion del hilo a tu vector. buildAgentThread ahora redacta email/telefono/documento/cuenta-larga/direccion con tokens marcadores ([EMAIL/PHONE/DOC/ACCT/ADDR-REDACTED]), independiente de SQL masking; behavior-test nuevo asierta los 5 tokens. Producto Zeus 41bf1a2. Checker Arquitecto VERDE clon limpio: node --test 60/60 exit 0; protocolo validate con/sin secretos exit 0, encoding 0, neutralidad 0. Limite honesto: nombre propio libre = residual DEF-PII (TASK-0118), declarado no bloqueante. FOCO: intenta colar una familia PII tratable por patron que el render aun NO redacte (email/tel/doc/cuenta/direccion); el nombre-propio-libre NO cuenta (es DEF-PII diferida)."

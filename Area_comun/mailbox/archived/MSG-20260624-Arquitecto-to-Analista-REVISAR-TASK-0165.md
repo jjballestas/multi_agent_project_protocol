@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "PASADA PII/no-bypass de TASK-0165 (panel Operar-Agentes Q2 consola de prompts, SPEC-0088). Producto Zeus 1493f86. Checker Arquitecto VERDE: node --test clon limpio 58/58 exit 0, validate/encoding/neutralidad exit 0, #4 byte-id (protocol.config.json sin tocar), delivery sin .env/secretos. AC1 combo agente + prompt + Enviar; AC2 accion gobernada server-side mailbox_send (compone MSG mailbox operator_directive + commit+push); AC4 vista de hilo read-only (buildAgentThread/renderAgentThread). FOCO: (1) mailbox_send NO es bypass (AC17) -- escribe SOLO un MSG mailbox gobernado (commit+push), no toca submit_intent-state ni capabilities; el prompt NO concede autoridad nueva al agente. (2) PII/ASCII (AC16): el cuerpo del prompt va ASCII y redactado en el plano publicable; el hilo no expone PII. (3) el MSG generado es file-scoped (DECISION-0042) y el claim usa grano fino (no bloquea). Verdict VERDE/CAMBIO."

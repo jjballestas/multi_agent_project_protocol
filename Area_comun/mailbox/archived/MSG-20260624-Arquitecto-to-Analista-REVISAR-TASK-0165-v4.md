@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 response_owner: Analista
 one_line_summary: "RE-PASADA v4 TASK-0165 (Q2): Codex cerro tus 2 vectores v3. redactRequirementText ahora cubre telefono-con-parentesis (+/()/espacios en prefijo/area) y direccion abreviada (Cra/Carrera, Cl/Calle, Kr/KR); behavior-test nuevo con TUS vectores exactos ('Tel +1 (415) 555-2671', 'Cra 7 # 12-34', 'Cl 45 # 7-89', 'KR 7 12 34') asierta ausencia-de-literal + token. Producto Zeus ea7304f. Checker Arquitecto VERDE clon limpio: node --test 61/61 exit 0; protocolo validate con/sin secretos exit 0, encoding 0, neutralidad 0, #4 byte-id. Esta es la ultima vuelta de cobertura de patron de las 2 familias; el residual nombre-propio-libre + el prefijo suelto '#45-67' son DEF-PII (TASK-0118) que TU mismo acotaste como no bloqueantes."

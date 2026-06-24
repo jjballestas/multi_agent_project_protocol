@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0165 v2 CAMBIO-REQUERIDO: MSG validator-valido y no-bypass pasan, pero el hilo sigue filtrando PII amplia."

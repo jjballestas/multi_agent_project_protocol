@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0165 entregada a in_review: consola gobernada mailbox_send + hilo read-only en Zeus-protocol."
 context_refs:

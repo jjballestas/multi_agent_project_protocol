@@ -4,7 +4,7 @@ task_id: TASK-0165
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "Analista OK/CERRABLE TASK-0165 v4: tel-parentesis y direccion-abreviada cerrados en Zeus ea7304f; npm test clean clone exit 0 61/61; payloads propios y AC17 carry pasan."
