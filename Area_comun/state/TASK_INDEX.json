@@ -2376,6 +2376,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0167-codex-front-ux-polish-cluster.md",
+            "id": "TASK-0167",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0090",
+            "status": "ready",
+            "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

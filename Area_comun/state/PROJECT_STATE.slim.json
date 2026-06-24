@@ -121,6 +121,12 @@
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)"
         },
         {
+            "id": "TASK-0167",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: UX polish cluster (hash routing + busqueda Artifacts + inline Operate + KPIs contextuales + chips Backlog + agrupacion Mailbox + modal Intake) (SPEC-0090)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "ready",
