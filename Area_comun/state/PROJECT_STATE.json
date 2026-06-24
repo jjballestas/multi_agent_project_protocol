@@ -721,6 +721,12 @@
             "title": "Proyecto-front: alta de worker de producto enlazado a un modelo (US-4, SPEC-0091)"
         },
         {
+            "id": "TASK-0172",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -2630,6 +2630,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+            "id": "TASK-0172",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0092",
+            "status": "ready",
+            "title": "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
