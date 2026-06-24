@@ -5633,6 +5633,23 @@
             "updated_at": "2026-06-24T17:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-0172-changes4",
+            "expires_at": "2026-06-24T23:59:00Z",
+            "notes": "TASK-0172 round 5 (test harness port hardening for npm test gate). Handoff a Codex. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-0172-changes4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0172",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0172",
+                "Area_comun/tasks/TASK-0172-codex-front-intake-redesign.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-TASK-0172-changes4.md"
+            ],
+            "started_at": "2026-06-24T17:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-TASK-0165-close",
             "notes": "Close TASK-0165 (Q2) done + archive Q2 review cycle (Analista v4 OK/CERRABLE).",
             "owner": "Arquitecto",

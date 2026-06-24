@@ -2638,7 +2638,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0092",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092)",
             "type": "product"
         },

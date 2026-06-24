@@ -75,7 +75,7 @@
         {
             "id": "TASK-0172",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092)"
         }
     ],
