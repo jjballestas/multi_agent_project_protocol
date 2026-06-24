@@ -2,7 +2,24 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-19, HEAD e68dca7, v1.11.0.
+> Ultima actualizacion: 2026-06-24, HEAD 312d471, v1.14.0 (#4 enforce/auth ON).
+
+## TASK-0166 (2026-06-24) - checker verde + REVIEW al Analista encolada
+- Panel "Operar Agentes" Q1 control de runtime (SPEC-0089 AC1-AC6), maker=Codex, producto Zeus-protocol
+  commit 560d291. Codex la dejo in_review.
+- **Pasada de checker (Arquitecto) VERDE desde clon limpio:** node --test 63/63 (sin flake local-vlm),
+  targeted 9/9, WRITE REAL camino feliz (activate Arquitecto->heartbeat en disco->alive; stop->removido->
+  dormant; leccion TASK-0133), allowlist niega arbitrary/traversal/injection + action invalida + clave extra
+  (400 sin ejecucion, cero archivos parasitos), validate exit 0, drift 0, neutralidad/encoding exit 0.
+- **El operador eligio activar al Analista** (DoD nombra pasada independiente del Analista). El runtime del
+  Analista YA estaba vivo (cron pid 161808, polling 300s). Encole MSG-20260624-Arquitecto-to-Analista-REVIEW-
+  TASK-0166 (type REVIEW, rr=true, requested_action, autocontenido con mi evidencia + 4 focos) via submit_intent
+  (claim file-scoped, seq 1565) + commit 312d471 PUSHED. LECCION: el cron Analista tiene un stop-detector regex
+  (detener|parar|para|stop + Analista|cron|monitor en misma linea) -> NO usar esas palabras juntas en el cuerpo.
+- **PENDIENTE:** el Analista emite artefacto ANALISTA-*-veredicto.md + MSG to:Arquitecto rr=true (OK->CERRABLE o
+  CAMBIO-REQUERIDO) y commitea/pushea como Analista. Con su OK->CERRABLE: yo (reviewer) cierro TASK-0166
+  in_review->done via submit_intent (libero claim en el mismo paso) + archivo el ciclo. Si CAMBIO-REQUERIDO:
+  handoff a Codex.
 
 ## Carril A Presupuesto/tesis (2026-06-19) - PROMOVIDO v1.10.0 (e56b027)
 - **PROMOVIDO** (GO operador + OK Codex + cross-check asistente): DECISION-0039 (activacion #4) + SPEC-0081
