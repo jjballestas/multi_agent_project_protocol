@@ -2,7 +2,7 @@
 task_id: TASK-0175
 title: "Reconciliar backlog: marcar done los 9 REQ ya entregados por TASK-0171 (US-4) y TASK-0172 (cluster RC)"
 type: implementation
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

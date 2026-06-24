@@ -4,7 +4,7 @@ task_id: TASK-0174
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 requested_action: "Revisar TASK-0174 en producto commit e445630 y handoff HANDOFF-TASK-0174-codex-to-arquitecto-1.md; maker=Codex, checker=Arquitecto."

@@ -40,30 +40,6 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
-            "id": "TASK-0174",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Proyecto-front: quitar indicador de pasos del modal de Intake"
-        },
-        {
-            "id": "TASK-0175",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)"
-        },
-        {
-            "id": "TASK-0176",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "Proyecto-front: carpeta Aprobados ultimos 3 + ver mas paginado (REQ-C1EDD835)"
         }
     ],
     "view": "task_index.slim"

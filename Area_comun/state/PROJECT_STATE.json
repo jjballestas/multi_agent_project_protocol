@@ -747,19 +747,19 @@
         {
             "id": "TASK-0174",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: quitar indicador de pasos del modal de Intake"
         },
         {
             "id": "TASK-0175",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)"
         },
         {
             "id": "TASK-0176",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: carpeta Aprobados ultimos 3 + ver mas paginado (REQ-C1EDD835)"
         },
         {

@@ -2,7 +2,7 @@
 task_id: TASK-0176
 title: "Proyecto-front: carpeta Aprobados muestra los ultimos 3 + 'ver mas' con paginacion (REQ-C1EDD835)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

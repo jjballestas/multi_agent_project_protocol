@@ -2,7 +2,7 @@
 task_id: TASK-0174
 title: "Proyecto-front: quitar el indicador de pasos (1 Capturar..4 Resultado) del modal de Intake (decision del operador en prueba)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal

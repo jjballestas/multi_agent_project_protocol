@@ -7608,6 +7608,34 @@
             "updated_at": "2026-06-24T21:59:28Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-close-batch",
+            "expires_at": "2026-06-25T03:00:00Z",
+            "notes": "Close TASK-0174/0175/0176 (verified) + archive MSGs. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Arquitecto-close-batch",
+                "Area_comun/state/TASK_INDEX.json#TASK-0174",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0174",
+                "Area_comun/tasks/TASK-0174-codex-front-remove-intake-steps.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0175",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0175",
+                "Area_comun/tasks/TASK-0175-codex-reconcile-rc-us4-reqs.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0176",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0176",
+                "Area_comun/tasks/TASK-0176-codex-front-approved-pagination.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0175-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Codex-to-Arquitecto-TASK-0175-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0176-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260624-Codex-to-Arquitecto-TASK-0176-in-review.md"
+            ],
+            "started_at": "2026-06-25T00:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0176",
+            "updated_at": "2026-06-25T00:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
