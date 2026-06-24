@@ -34,6 +34,14 @@
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {
+            "id": "REQ-E0606D12",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
+        },
+        {
             "id": "REQ-EE0CA804",
             "owner": "Operador",
             "phase": "P2",

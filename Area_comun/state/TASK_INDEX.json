@@ -1037,6 +1037,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "1. Barra de modo: etiqueta + radio+label Manual contiguos + divisor + radio+label Archivo contiguos, todo en una fila. 2. Proyecto y titulo en grid 2 columnas. 3. Narrativa y Intencion full-width. 4. [ADDR-REDACTED]. 5. Footer: meta firmante izquierda, Cancelar y Preview derecha. 6. Al ejecutar Submit el requisito queda en estado borrador. 7. El modo del header se preselecciona en el modal.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-e0606d12-requirement-seed.md",
+            "id": "REQ-E0606D12",
+            "narrative": "Como operador quiero que el modal de nueva historia en modo Manual muestre barra de modo en una fila (radio+label Manual | radio+label Archivo), campos proyecto y titulo en grid 2 columnas, narrativa, intencion de aceptacion y [ADDR-REDACTED]; y que los requisitos creados por este flujo queden en estado Borrador; para tener un flujo de captura manual limpio y sin ambiguedad de estado inicial.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 2,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "El Mailbox muestra un boton Nuevo mensaje o compositor inline que permite seleccionar el agente destinatario (Arquitecto, Codex, Analista), escribir el cuerpo del mensaje en texto libre, opcionalmente asociar el mensaje a una tarea existente (taskId), y elegir el tipo de mensaje (DIRECTIVE, GO, ACK u OPERATOR_NOTE). El envio se ejecuta como una accion gobernada via submit_intent con un nuevo intent kind mailbox_send (o el equivalente canonico que defina el Arquitecto), firmado por Operador como from y el agente elegido como to. El mensaje queda registrado en el ledger atestado como cualquier otro evento. El compositor no permite editar mensajes ya enviados ni suplantar el from de otro agente. El campo de texto tiene al menos 6 rows visibles. El envio fallido muestra el error real sin limpiar el borrador.",
             "author": "Operador",
             "endorsement": "none",
