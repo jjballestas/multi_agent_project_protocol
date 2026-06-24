@@ -81,8 +81,14 @@
         {
             "id": "TASK-0174",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Proyecto-front: quitar indicador de pasos del modal de Intake"
+        },
+        {
+            "id": "TASK-0175",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)"
         }
     ],
     "next_actions": [

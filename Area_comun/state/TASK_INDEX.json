@@ -2688,9 +2688,21 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0092",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Proyecto-front: quitar indicador de pasos del modal de Intake",
             "type": "product"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0175-codex-reconcile-rc-us4-reqs.md",
+            "id": "TASK-0175",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Reconciliar backlog: marcar done los 9 REQ entregados (US-4 + cluster RC)",
+            "type": "implementation"
         },
         {
             "author": "Operador",
