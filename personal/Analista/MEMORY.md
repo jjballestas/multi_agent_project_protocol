@@ -336,6 +336,19 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0166 fix cab246c (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado en `228c70e`
+  (`review(TASK-0166): Analista requires runtime agentId type guard`). Ancla producto
+  `cab246cc48facb8b8dc6af52ca5a80ac4eddf766` + protocolo citado por instruccion `a2ed687`. Clon limpio producto
+  `npm test` exit 0, 64/64. Payload propio contra server temporal + protocolo clonado en `a2ed687`: heartbeat
+  futuro +10 anos -> dormant; stale 10 min -> dormant; leading/trailing space, control chars, lowercase, non-ASCII,
+  ZWJ e internal-space -> 400 sin heartbeat; control positivo `Codex` exacto -> 200/alive. SLIP nuevo bloqueante:
+  JSON `{ "agentId": ["Codex"], "action": "activate" }` devuelve 200, crea `Codex.heartbeat` y deja
+  `Codex.status=alive`, porque `sanitizeRuntimeControlAgentId` hace `String(value || "")` antes del lookup y
+  `String(["Codex"]) == "Codex"`. Pedido: type check estricto `typeof value === "string"` antes de coercion/lookup
+  + test negativo permanente `agentId: ["Codex"]`. Gates protocolo: validate con secretos exit 0; validate
+  secretless en clon `a2ed687` exit 0; drift vivo 0 `up_to_seq=1591`; neutralidad/encoding exit 0; #4
+  `protocol.config.json` byte-identico durante pasada sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0165 v4 (2026-06-24): OK/CERRABLE, veredicto commiteado en `5ca009c`
   (`review(TASK-0165): Analista OK v4 thread PII`). Ancla producto `ea7304f` + protocolo
   `8a5c90c6ae7152dd512b86a70f2ecdac14eba096`. Clon limpio producto `npm test`: primera corrida timeout local
