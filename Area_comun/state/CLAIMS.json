@@ -5724,6 +5724,22 @@
             "updated_at": "2026-06-24T01:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-close-0166",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "Close TASK-0166 (Q1 control runtime) in_review->done after Analista OK->CERRABLE r5 (4 escapes hardened) + checker verde.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-close-0166",
+                "Area_comun/state/TASK_INDEX.json#TASK-0166",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0166",
+                "Area_comun/tasks/TASK-0166-codex-panel-operar-agentes-q1-control-runtime.md"
+            ],
+            "started_at": "2026-06-24T12:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T12:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-close-0167",
             "expires_at": "2026-06-24T18:00:00Z",
             "notes": "Close TASK-0167 (front UX cluster) in_review->done after green checker (72/72, no-write negative).",
