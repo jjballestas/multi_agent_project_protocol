@@ -845,6 +845,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "1. Titulo del modal: Revisar requisito REQ-XXXXXXXX. 2. Radio Archivo bloqueado + chip [ADDR-REDACTED]. 3. [ADDR-REDACTED]. 4. Campos prellenados desde la candidata. 5. Tras Submit la tarjeta cambia estado a aprobado. Ref prototipo HTML seccion modal review.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-b6146e35-requirement-seed.md",
+            "id": "REQ-B6146E35",
+            "narrative": "Como operador quiero que al pulsar Revisar sobre una candidata de la carpeta Pendientes el modal se abra con titulo Revisar requisito REQ-ID, modo bloqueado en Archivo, y todos los campos prellenados con los datos de la candidata; para verificar, editar y aprobar sin redigitar el contenido extraido por el Extractor.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 2,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "La vista Mailbox muestra los mensajes con su estado (open/answered/archived) y marca los consumidos;un boton \"archivar\" por mensaje emite el cambio de estado (open->archived + status del frontmatter)via submit_intent (relay ACOTADO, builder server-side), NUNCA edita el mailbox directo. Mismadisciplina anti-impersonacion que el intake: extiende el conjunto de acciones permitidas del relay a\"mailbox-archive\" con forma estricta y PRUEBA NEGATIVA permanente (no reabrir el 403). Resultadoatestado e idempotente; vista read-only salvo el archive gobernado. (Extiende DECISION-0052: nuevointent acotado, no nuevo escritor.)",
             "author": "Operador",
             "delivered_by": "TASK-0138",

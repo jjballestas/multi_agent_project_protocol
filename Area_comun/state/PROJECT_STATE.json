@@ -181,6 +181,12 @@
             "title": "Accion gobernada mailbox_send: compositor de mensajes Operador a agentes desde Operate/Mailbox"
         },
         {
+            "id": "REQ-B6146E35",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
+        },
+        {
             "id": "REQ-B65E7802",
             "owner": "Operador",
             "status": "done",

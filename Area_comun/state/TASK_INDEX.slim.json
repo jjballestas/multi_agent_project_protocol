@@ -34,6 +34,14 @@
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
         },
         {
+            "id": "REQ-B6146E35",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "phase": "P2",
