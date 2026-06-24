@@ -2413,6 +2413,18 @@
             "type": "implementation"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0170-codex-reconcile-delivered-reqs.md",
+            "id": "TASK-0170",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Reconciliar backlog: marcar done los 15 REQ ya entregados por TASK-0165/0166/0167",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -5906,6 +5906,23 @@
             "updated_at": "2026-06-24T12:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-reg-0170",
+            "expires_at": "2026-06-24T19:00:00Z",
+            "notes": "Register + GO TASK-0170 (reconcile 15 delivered REQs to done) to Codex. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-reg-0170",
+                "Area_comun/state/TASK_INDEX.json#TASK-0170",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0170",
+                "Area_comun/tasks/TASK-0170-codex-reconcile-delivered-reqs.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0170.md"
+            ],
+            "started_at": "2026-06-24T13:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0170",
+            "updated_at": "2026-06-24T13:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-register-0165",
             "expires_at": "2026-06-24T07:00:00Z",
             "notes": "Register TASK-0165 (panel Operar-Agentes Q2 consola de prompts, SPEC-0088) ready for Codex. Claim GRANO FINO (DECISION-0059).",

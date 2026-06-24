@@ -661,6 +661,12 @@
             "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden"
         },
         {
+            "id": "TASK-0170",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Reconciliar backlog: marcar done los 15 REQ ya entregados por TASK-0165/0166/0167"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
