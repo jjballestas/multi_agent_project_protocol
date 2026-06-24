@@ -336,6 +336,17 @@
   ya superados; #4 paso de OFF a ON en el vivo entre junio 14 y 20.)
 
 ## Ultima pasada (2026-06-24)
+- TASK-0165 v3 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `037877d`
+  (`review(TASK-0165): Analista requires thread PII v3 hardening`). Ancla producto `41bf1a2` +
+  protocolo `a51d0c7a158d766c77b6827fd89fdb460312c78d`. Clon limpio producto `npm test` exit 0, 60/60.
+  Test nuevo honesto: asierta ausencia de literal y presencia de tokens, no solo token-presence. AC17 carry
+  en servidor temporal: `noPiiAck=409`, `badAgent=400`, `actorInjection=400`, `intentsInjection=400`,
+  `routeState=400`. Payloads propios `buildAgentThread`: email, telefono simple, doc etiquetado, cuenta/IBAN y
+  direccion literal pasan; pero `Tel +1 (415) 555-2671`, `Tel (+57) (300) 555-7788`, `Cra 7 # 12-34 Bogota`,
+  `Cl 45 # 7-89 Medellin` y `KR 7 12 34 Bogota` quedan visibles completos. Gates protocolo con/sin secretos exit
+  0, drift 0 `up_to_seq=1529`, neutralidad/encoding exit 0, #4 byte-identica sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual nombre-propio libre no usado como
+  bloqueo; los slips son familias tel/direccion tratables por patron.
 - TASK-0165 v2 (2026-06-24): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `450fada`
   (`review(TASK-0165): Analista requires thread PII hardening`). Ancla producto `cf13e7f8ad570f3e1ee375df4491bc50a8faab4b`
   + protocolo `e1c2666e0140ecf4e12916bef2181093132f9c32`. Clon limpio producto `npm test` exit 0, 59/59.
