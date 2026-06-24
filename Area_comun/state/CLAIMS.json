@@ -5740,6 +5740,20 @@
             "updated_at": "2026-06-24T08:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-go-0167",
+            "expires_at": "2026-06-24T18:00:00Z",
+            "notes": "GO TASK-0167 (front UX polish cluster) to Codex, parallel to Analista 0166 review. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-go-0167",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0167.md"
+            ],
+            "started_at": "2026-06-24T11:12:00Z",
+            "status": "released",
+            "task_id": "TASK-0167",
+            "updated_at": "2026-06-24T11:12:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Arquitecto-go-0168",
             "expires_at": "2026-06-24T16:00:00Z",
             "notes": "GO TASK-0168 to Codex (gate triage/extraction, DECISION-0060). Claim file-scoped (DECISION-0059).",
