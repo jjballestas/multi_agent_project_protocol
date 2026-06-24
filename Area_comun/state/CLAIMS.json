@@ -5829,6 +5829,20 @@
             "updated_at": "2026-06-24T10:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-review-0166fix3",
+            "expires_at": "2026-06-24T17:00:00Z",
+            "notes": "Gatekeeper REVIEW to Analista for TASK-0166 fix3 (a1d4491). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-review-0166fix3",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0166-fix3.md"
+            ],
+            "started_at": "2026-06-24T11:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0166",
+            "updated_at": "2026-06-24T11:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Codex-TASK-0164-delivery",
             "expires_at": "2026-06-24T23:59:00Z",
             "notes": "TASK-0164 delivery artifacts for torn-tail hardening review.",
