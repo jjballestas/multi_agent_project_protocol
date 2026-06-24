@@ -37,6 +37,12 @@
             "title": "RC-04 Intake: modal revision prellenada para candidatas de archivo"
         },
         {
+            "id": "REQ-C1EDD835",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Agupacion de Opcion de requerimientos aprobados"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "status": "in_progress",

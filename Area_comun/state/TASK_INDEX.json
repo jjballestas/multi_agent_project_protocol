@@ -968,6 +968,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "se aprueba el requisito si en la opcion de requerimientos aprobados se visualizan los ultimos 3 requerimeintos hay una opcion de ver mas y que al presionar ver mas aparezcan los otros requisitos aprobados con una paginacion cadaa paginas",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-c1edd835-requirement-seed.md",
+            "id": "REQ-C1EDD835",
+            "narrative": "yo como operador queiro que en la opcion de requerimientos aprobados mostrar los 3 ultimos y una opcion de ver mas para que no se tenga que estar haciendo scroll teniendo cargados todos los requerimientos aprobados. si el usuario desaea ver otros presiona el boton vermas y le muestra los demasy con una paginacion cada 10 registros",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "Agupacion de Opcion de requerimientos aprobados",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Los mensajes answered y archived se muestran agrupados bajo encabezados de fecha colapsables. El filtro por direccion muestra solo los mensajes de la direccion seleccionada. Cada grupo colapsado muestra el contador de mensajes que contiene. El grupo del periodo actual (hoy, esta semana) aparece expandido por defecto. Al seleccionar un filtro el agrupamiento temporal se mantiene sobre el subconjunto filtrado.",
             "author": "Operador",
             "endorsement": "none",

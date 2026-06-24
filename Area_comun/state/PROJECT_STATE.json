@@ -211,6 +211,12 @@
             "title": "UX: Refrescar datos automaticamente al navegar entre secciones sin recargar la pagina"
         },
         {
+            "id": "REQ-C1EDD835",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "Agupacion de Opcion de requerimientos aprobados"
+        },
+        {
             "id": "REQ-CD4CE3F1",
             "owner": "Operador",
             "status": "done",
