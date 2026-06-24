@@ -14,7 +14,12 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product 
   runtime/submit_intent.py examples/analysis_close_cases/run_tests.py` OK, `python
   examples/analysis_close_cases/run_tests.py` PASS 8/8, encoding OK, neutrality OK,
   `validate_collaboration_state.py` OK, drift false up_to_seq 1587. The validator still exposes no
-  `--with-secrets` flag; #4 byte-identica was evidenced by equal drift hot/replay hashes.
+  `--with-secrets` flag; #4 byte-identica was evidenced by equal drift hot/replay hashes. Protocol delivery
+  commit `eeb9456 coord(TASK-0168): deliver capability gate` moved TASK-0168 to `in_review`, released Codex
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0168-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0168-in-review.md`. Final delivery evidence:
+  encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1591 with hot/replay
+  hashes equal.
 - TASK-0166 changes_requested fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cab246c fix(runtime): reject invalid runtime liveness inputs`. Runtime control now rejects an `agentId` whose raw
   value would be changed by control-character/non-ASCII/trim normalization before allowlist lookup, so
