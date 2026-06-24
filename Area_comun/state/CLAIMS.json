@@ -6219,6 +6219,20 @@
             "updated_at": "2026-06-24T16:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260624-Arquitecto-review-0172final",
+            "expires_at": "2026-06-24T23:30:00Z",
+            "notes": "Final gatekeeper REVIEW to Analista for TASK-0172 (967f5cb: PII redaction + layout rounds). File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Arquitecto-review-0172final",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Analista-REVIEW-TASK-0172-final.md"
+            ],
+            "started_at": "2026-06-24T17:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T17:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260624-Codex-TASK-0164-delivery",
             "expires_at": "2026-06-24T23:59:00Z",
             "notes": "TASK-0164 delivery artifacts for torn-tail hardening review.",
