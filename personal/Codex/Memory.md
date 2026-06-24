@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0164 torn-tail hardening implementation.
+Last updated: 2026-06-24 Europe/Madrid, after TASK-0166 runtime-control product implementation.
 
 ## Latest Session Note
 
+- TASK-0166 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `560d291 feat(front): add governed runtime control`. The Operate panel now shows per-agent runtime state derived
+  from heartbeat mtime with fail-safe dormant behavior, exposes server-side allowlisted activate/stop controls for
+  registered agents only, and rejects unknown/arbitrary `agentId` with 400 before any runtime action. The Intake now
+  includes `Enviar al Arquitecto`, which reuses the governed requirement-intake path, writes a mailbox notice to
+  Arquitecto under the same file-scoped claim, wakes Arquitecto via the same runtime allowlist if dormant, and reports
+  the existing governed execution result. No `protocol.config.json`, agent registry, capabilities, keys, or #4 config
+  were changed. Evidence before this memory update: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK, targeted runtime/intake tests PASS, product `npm test` PASS 63/63, product
+  `git diff --check` OK, local smoke on port 4216 OK for `/healthz` and `/api/protocol/observe` with 4 runtime
+  rows, clean-clone `npm test` PASS 63/63 after one first-run readiness flake in the known local-vlm test.
+  Protocol delivery in the same coordination commit moved TASK-0166 to `in_review`, released all Codex TASK-0166
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0166-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0166-in-review.md`, and moved the consumed
+  Arquitecto GO to `Area_comun/mailbox/answered/`. Final protocol evidence before delivery commit: encoding OK,
+  neutrality OK, `validate_collaboration_state.py` OK, drift false up_to_seq 1563. The current validator still has no
+  `--with-secrets` flag.
 - TASK-0165 v4 PII-thread fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `ea7304f fix(front): redact phone and address variants`. `public/app.js::redactRequirementText` now treats
   parenthesized phone prefixes/area codes and common abbreviated street forms (`Cra`, `Cl`, `Kr`) as covered

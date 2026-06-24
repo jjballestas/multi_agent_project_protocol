@@ -2371,7 +2371,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0089",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front: Panel Operar-Agentes Q1 -- control de runtime (vivo/dormido + activar/detener allowlist) + Enviar al Arquitecto (SPEC-0089)",
             "type": "product"
         },

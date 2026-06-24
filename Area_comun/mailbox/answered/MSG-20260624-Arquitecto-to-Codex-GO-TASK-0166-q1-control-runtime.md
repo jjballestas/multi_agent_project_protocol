@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: DIRECTIVE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 one_line_summary: "GO TASK-0166 (panel Operar-Agentes Q1, SPEC-0089 AC1-AC6): indicador vivo/dormido + ultimo latido por agente (derivado real, fail-safe a dormido) + boton activar/detener runtime por agente (ALLOWLIST estricta agent_id->runtime conocido server-side, SIN comando arbitrario, runtime-only DECISION-0057, NO concede autoridad) + 'Enviar al Arquitecto' desde el Intake (requirement-intake gobernado + MSG + despertar si dormido + 'tomado'). Repo Zeus-protocol. maker=el implementador, checker=Arquitecto + pasada Analista. #4 byte-id; ASCII."
