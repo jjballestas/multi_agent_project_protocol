@@ -2742,6 +2742,29 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0177-codex-front-dictado-voz.md",
+            "id": "TASK-0177",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0093",
+            "status": "ready",
+            "title": "Proyecto-front: dictado por voz en narrativa e intencion del Intake (REQ-003AE958, SPEC-0093)",
+            "type": "product"
+        },
+        {
+            "file": "Area_comun/tasks/TASK-0178-arquitecto-consola-arquitecto-PENDIENTE.md",
+            "id": "TASK-0178",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)",
+            "type": "design"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

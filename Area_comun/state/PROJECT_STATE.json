@@ -763,6 +763,18 @@
             "title": "Proyecto-front: carpeta Aprobados ultimos 3 + ver mas paginado (REQ-C1EDD835)"
         },
         {
+            "id": "TASK-0177",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: dictado por voz en narrativa e intencion del Intake (REQ-003AE958, SPEC-0093)"
+        },
+        {
+            "id": "TASK-0178",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

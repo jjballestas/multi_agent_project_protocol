@@ -29,6 +29,18 @@
             "owner": "Codex",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0177",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: dictado por voz en narrativa e intencion del Intake (REQ-003AE958, SPEC-0093)"
+        },
+        {
+            "id": "TASK-0178",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
         }
     ],
     "next_actions": [
