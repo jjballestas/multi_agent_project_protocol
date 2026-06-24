@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Devolver TASK-0172 a Codex: el modelo publico de candidatas debe redactar title/narrative/acceptance_intent antes de alimentar el modal de revision; anadir test negativo con email, telefono, direccion y documento en candidata almacenada."

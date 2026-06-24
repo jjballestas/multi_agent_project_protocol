@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 related_handoff: Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-4.md
 one_line_summary: "TASK-0172 round 4 entregado: campos de candidate-card/review full-width, commit producto 967f5cb, tests verdes."

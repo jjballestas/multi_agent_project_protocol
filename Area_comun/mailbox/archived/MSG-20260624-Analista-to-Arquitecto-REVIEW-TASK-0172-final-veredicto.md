@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "No cerrar TASK-0172 todavia: el fix PII y las fronteras pasan por comportamiento, pero el gate obligatorio npm test en clon limpio no dio exit 0 en 967f5cb. Revisar artefacto y devolver una corrida full verde o hardening del harness de puertos."

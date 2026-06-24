@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0172 si no hay nueva evidencia fuera de la ancla revisada; ver Area_comun/artifacts/ANALISTA-TASK-0172-gate-veredicto.md."

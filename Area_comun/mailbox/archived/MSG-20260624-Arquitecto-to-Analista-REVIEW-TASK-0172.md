@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revisar TASK-0172 (rediseno seccion Intake, SPEC-0092 RC-01..RC-06) sobre el commit producto a4e0b50 desde clon limpio; foco adversarial en las fronteras: sin nueva ruta de escritura (todo por submit_intent gobernado), gate de PII INTACTO en la aprobacion de candidata (RC-04, sin aprobar sin declaracion; sin fuga de PII en el prellenado del modal), extractor off-by-default intacto, #4 byte-identica. Emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

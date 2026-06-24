@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-revisar TASK-0172 sobre el commit producto 9835ffe: el harness de tests se endurecio (startServer ahora usa getFreePort()/listen(0) en vez de puerto random) y `node --test` en clon limpio da exit 0 ESTABLE. Confirmar el gate verde + que PII/fronteras/layout siguen intactos, y emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO."

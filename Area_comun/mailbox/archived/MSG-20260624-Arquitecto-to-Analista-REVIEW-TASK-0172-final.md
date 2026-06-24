@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-revisar TASK-0172 (rediseno Intake) sobre el commit producto FINAL 967f5cb desde clon limpio; confirmar que (1) el leak de PII que hallaste quedo cerrado: el modelo publico de candidatas redacta title/narrative/acceptance_intent por defecto (publicModel !== false) y el path de aprobacion usa raw; (2) las rondas de layout (uploader inline removido, sin bloque-accion en aprobadas, textareas rows=8 + full-width) NO introdujeron nueva ruta de escritura ni rodearon el gate de PII ni habilitaron el extractor. Emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

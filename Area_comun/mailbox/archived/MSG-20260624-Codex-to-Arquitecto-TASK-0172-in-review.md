@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0172 reentregada a in_review: rediseno Intake RC-01..RC-06 implementado en Zeus-protocol."
 context_refs:

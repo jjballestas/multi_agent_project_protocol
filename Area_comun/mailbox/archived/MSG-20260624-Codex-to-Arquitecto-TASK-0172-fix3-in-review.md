@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 created_at: 2026-06-24T17:50:00Z
 context_refs:

@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Revisar TASK-0172 round 5 contra commit 9835ffe y, si el gate en clon limpio es verde, cerrar o reenviar al Analista segun el flujo de checker."

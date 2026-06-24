@@ -2,7 +2,7 @@
 task_id: TASK-0172
 title: "Proyecto-front: rediseno de la seccion Intake (RC-01..RC-06, SPEC-0092) -- header bar + dashboard de carpetas + modales (manual/archivo/revision); preserva RF-14 gobernado, gate de PII y off-by-default"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal
