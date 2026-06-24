@@ -4,7 +4,7 @@ task_id: TASK-0167
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0167 entregada a in_review: UX polish cluster en Zeus-protocol."
 context_refs:

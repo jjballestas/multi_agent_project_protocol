@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0166 fix4 entregado: action no-string -> 400 controlado sin heartbeat; producto 58c713c."
 context_refs:

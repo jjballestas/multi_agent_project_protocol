@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0166 si tu criterio coincide: mi veredicto r5 es OK->CERRABLE sobre producto 58c713c y protocolo citado 7aa3385."

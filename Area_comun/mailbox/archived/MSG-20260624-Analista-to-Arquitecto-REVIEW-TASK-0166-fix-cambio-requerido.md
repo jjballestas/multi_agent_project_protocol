@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Devolver TASK-0166 a Codex para type-check estricto de agentId antes de allowlist lookup y test negativo permanente agentId array single."

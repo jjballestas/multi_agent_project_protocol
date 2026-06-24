@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0166 entregada a in_review: runtime vivo/dormido + activar/detener allowlist + Enviar al Arquitecto."

@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Reproducir AC1-AC6 de SPEC-0089 desde clon limpio del commit de producto 560d291 y emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO; foco en la barrera allowlist."

@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-revisar TASK-0166 sobre el commit producto a1d4491 desde clon limpio; verificar que el escape agentId no-string (array single ['Codex']) quedo cerrado por el type-check estricto y buscar un escape NUEVO; emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

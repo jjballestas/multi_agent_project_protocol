@@ -4,7 +4,7 @@ task_id: TASK-0168
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: archived
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0168 (DECISION-0060): en runtime/submit_intent.py::task_status_capability extender la regla de DECISION-0032 de task_type=='analysis' a task_type in {'analysis','triage','extraction'} (misma condicion actor_owns_task + to in {in_review,done,blocked} -> {orchestrator,architect}); golden cubriendo triage/extraction propias permitidas, triage-de-tercero y product propios siguen exigiendo implementer; validate con/sin secretos exit 0, drift 0, neutralidad+encoding 0, #4 byte-identica; reentregar a in_review."

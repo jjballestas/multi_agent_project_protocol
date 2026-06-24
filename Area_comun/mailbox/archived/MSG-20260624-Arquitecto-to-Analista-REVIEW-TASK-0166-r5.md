@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-revisar TASK-0166 sobre el commit producto 58c713c desde clon limpio; verificar que el escape de 'action' no-string quedo cerrado (type-check estricto, 400 sin 500) y buscar cualquier escape NUEVO restante en el endpoint; emitir veredicto firmado OK->CERRABLE o CAMBIO-REQUERIDO."

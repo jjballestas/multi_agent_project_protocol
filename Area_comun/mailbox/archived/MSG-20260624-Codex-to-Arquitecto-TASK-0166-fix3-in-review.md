@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0166 fix3 reentregado: agentId no-string -> 400 antes de coercion, commit a1d4491."
 context_refs:

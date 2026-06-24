@@ -4,7 +4,7 @@ task_id: TASK-0166
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 one_line_summary: "TASK-0166 reentregado: cab246c corrige mtime futuro -> dormant y control char agentId -> 400."
 context_refs:

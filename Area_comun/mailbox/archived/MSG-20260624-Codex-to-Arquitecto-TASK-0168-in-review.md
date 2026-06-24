@@ -4,7 +4,7 @@ task_id: TASK-0168
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0168 delivered to in_review: DECISION-0060 triage/extraction close gate implemented."
