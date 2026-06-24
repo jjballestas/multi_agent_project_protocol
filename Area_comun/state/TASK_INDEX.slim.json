@@ -152,6 +152,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
+        },
+        {
+            "id": "TASK-0169",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden"
         }
     ],
     "view": "task_index.slim"

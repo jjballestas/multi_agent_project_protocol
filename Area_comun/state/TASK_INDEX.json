@@ -2401,6 +2401,18 @@
             "type": "implementation"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0169-codex-validator-selector-task-extract.md",
+            "id": "TASK-0169",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden",
+            "type": "implementation"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

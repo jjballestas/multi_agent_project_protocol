@@ -655,6 +655,12 @@
             "title": "Runtime: extender task_status_capability (DECISION-0060) -- architect cierra triage/extraction propias; golden + neutralidad"
         },
         {
+            "id": "TASK-0169",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Validador: alinear regex de selectores de fila con submit_intent (aceptar TASK-EXTRACT-*) + golden"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
