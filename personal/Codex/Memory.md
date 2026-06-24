@@ -4,6 +4,23 @@ Last updated: 2026-06-24 Europe/Madrid, after TASK-0171 AC2 private-key protecti
 
 ## Latest Session Note
 
+- TASK-0172 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a4e0b50 feat(front): redesign intake section`. The Intake surface now has the SPEC-0092 RC-01..RC-06
+  presentation redesign: unified RF-14 header controls, four derived folders, manual modal, file-upload-only modal,
+  candidate review modal with Archivo locked and PII gate preserved, and a cleaned standalone extraction area that
+  does not show mode radios or inline candidate lists. No new direct ledger writer was added; writes remain on the
+  existing governed `/api/protocol/actions/submit` path, file intake remains off-by-default, and candidate approval
+  still requires PII review. Evidence before this memory update: `node --check public/app.js src/server.js
+  tests/staticContract.test.js` OK, product `git diff --check` OK, targeted `node --test --test-name-pattern
+  "TASK-0172" tests/staticContract.test.js` PASS 7/7, targeted regression `AC48|AC55|AC59|TASK-0172` PASS 10/10,
+  full product `npm test` PASS 81/81 after one earlier failed run while adjusting static tests, clean-clone product
+  `npm test` PASS 81/81, and local smoke on port 4234 OK for `/healthz` plus `/api/protocol/observe`. Protocol delivery commit `coord(TASK-0172): deliver intake redesign`
+  moved TASK-0172 to `in_review`, released Codex claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, `validate_collaboration_state.py` OK, drift false / #4 byte-identica
+  up_to_seq 1765.
 - TASK-0171 AC2 fix product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `cb7ce0a fix(worker): restrict private key ACL`. Product-worker private-key persistence now writes under the
   server-controlled `.secrets/workers` root, keeps POSIX permissions at `0600`, and on Windows runs `icacls` through

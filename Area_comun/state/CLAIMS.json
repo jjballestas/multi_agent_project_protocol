@@ -6866,9 +6866,56 @@
                 "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
             ],
             "started_at": "2026-06-24T15:41:49Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0172",
             "updated_at": "2026-06-24T15:41:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-consume-go",
+            "expires_at": "2026-06-25T23:59:59Z",
+            "notes": "Move consumed TASK-0172 GO to answered after delivery ledger transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-consume-go",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md"
+            ],
+            "started_at": "2026-06-24T16:00:42Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T16:00:42Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-delivery",
+            "expires_at": "2026-06-25T23:59:59Z",
+            "notes": "Deliver TASK-0172 handoff, mailbox response, and memory update.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0172-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260624-Codex-to-Arquitecto-TASK-0172-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-24T15:59:32Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T15:59:32Z"
+        },
+        {
+            "claim_id": "CLAIM-20260624-Codex-TASK-0172-encoding-fix",
+            "expires_at": "2026-06-25T23:59:59Z",
+            "notes": "Fix UTF-8 BOM introduced while moving consumed GO to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260624-Codex-TASK-0172-encoding-fix",
+                "Area_comun/mailbox/answered/MSG-20260624-Arquitecto-to-Codex-GO-TASK-0172.md"
+            ],
+            "started_at": "2026-06-24T16:01:21Z",
+            "status": "released",
+            "task_id": "TASK-0172",
+            "updated_at": "2026-06-24T16:01:21Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

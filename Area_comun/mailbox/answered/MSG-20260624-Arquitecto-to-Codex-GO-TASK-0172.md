@@ -4,7 +4,7 @@ task_id: TASK-0172
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0172 (SPEC-0092 AC1-AC6): rediseno UX de la seccion Intake -- header con barra de control unificada, dashboard de 4 carpetas, modal modo Manual, modal revision de candidata prellenado, modal de carga por archivo solo-uploader, y limpieza de la vista de extraccion. FRONTERAS (prueba negativa): sin nueva ruta de escritura (todo por submit_intent gobernado), gate de PII intacto en la aprobacion de candidata, extractor off-by-default intacto, #4 byte-identica. behavior-test por AC; carries AC11/AC12/AC13; node --test clon limpio exit 0. Reentregar a in_review."
