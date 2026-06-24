@@ -1085,6 +1085,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "1. La barra de modo ocupa una fila: etiqueta Modo de captura, luego radio+label Manual contiguos, divisor vertical, radio+label Archivo contiguos. 2. Proyecto y titulo en grid 2 columnas. 3. Narrativa full-width. 4. Intencion de aceptacion full-width. 5. [ADDR-REDACTED]. 6. Footer: meta firmante a la izquierda, Cancelar y Preview a la derecha. 7. Al completar el wizard y ejecutar Submit, el requisito se crea en estado borrador. 8. El modo seleccionado en el header se refleja en el modal al abrirse. Referencia visual: prototipo HTML adjunto seccion modal form-manual.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-fa303a81-requirement-seed.md",
+            "id": "REQ-FA303A81",
+            "narrative": "Como operador quiero que el modal de nueva historia/requisito en modo Manual muestre: barra de modo en una fila (radio+label Manual | radio+label Archivo), proyecto+titulo en grid 2 columnas, narrativa, intencion de aceptacion y [ADDR-REDACTED]; y que los requisitos creados por este flujo queden en estado Borrador (no Pendiente aprobacion); para tener un flujo de captura manual limpio y sin ambiguedad de estado inicial.",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 2,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "Hay un item Help en la nav; al abrirlo muestra una guia detallada y navegable: que es la consola,observar vs operar, submit_intent (escritor unico), dry_run vs execute/confirmacion, atestacion #4,las vistas, el intake, el pipeline SDD, y un glosario. Reusa el contenido de docs/MANUAL-operador.mdcomo fuente. Honesto: refleja lo que la app HACE hoy, incluidas sus limitaciones (no documenta lo queno existe). Read-only: la vista no escribe estado. Conforme al design-system (dark-first, AC13).",
             "author": "Operador",
             "delivered_by": "TASK-0137",

@@ -31,6 +31,12 @@
             "title": "RC-01 Intake: barra de control unificada en header de seccion"
         },
         {
+            "id": "REQ-FA303A81",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "RC-03 Intake: modal modo Manual con formulario para nuevo requisito"
+        },
+        {
             "id": "TASK-0118",
             "owner": "Codex",
             "status": "proposed",
