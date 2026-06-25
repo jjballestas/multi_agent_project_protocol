@@ -7834,6 +7834,24 @@
             "updated_at": "2026-06-25T14:00:30Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-register-0182",
+            "expires_at": "2026-06-25T23:00:00Z",
+            "notes": "Register TASK-0182 (deuda tecnica: robustecer la duracion del full-suite de Zeus para que el gate node --test complete bajo el cap del harness del revisor) as ready for Codex. Nace de la decision del operador al cerrar TASK-0181. Solo test-infra; no cambia produccion ni baja cobertura. maker=Codex / checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T13:51:00Z",
+            "status": "released",
+            "task_id": "TASK-0182",
+            "updated_at": "2026-06-25T13:51:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-review-0177",
             "expires_at": "2026-06-25T05:00:00Z",
             "notes": "Gatekeeper REVIEW to Analista for TASK-0177 (96eb019 voice dictation egress). File-scoped.",

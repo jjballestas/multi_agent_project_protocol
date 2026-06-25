@@ -799,6 +799,12 @@
             "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)"
         },
         {
+            "id": "TASK-0182",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: robustecer/aislar el full-suite de Zeus para que el gate node --test complete bajo el cap del harness del revisor (deuda tecnica)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

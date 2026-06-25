@@ -2829,6 +2829,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md",
+            "id": "TASK-0182",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front: robustecer/aislar el full-suite de Zeus para que el gate node --test complete bajo el cap del harness del revisor (deuda tecnica)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

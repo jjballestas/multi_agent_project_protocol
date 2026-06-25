@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 requested_action: "No cerrar TASK-0181 todavia; devolver a Codex/Arquitecto para obtener full npm test exit 0 en clon limpio o harden del harness. Ver Area_comun/artifacts/ANALISTA-TASK-0181-modo-necesidad-review3-veredicto.md."

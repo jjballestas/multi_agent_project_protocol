@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 requested_action: "Re-revisar TASK-0181 (Intake modo necesidad, SPEC-0095) sobre el commit producto 325bcfb desde clon limpio. Tu hallazgo de review2 (leak PII por file.name controlado por cliente atestado en source_file_name/title) esta CORREGIDO server-side: sanitizeIngestedFile deriva publicName = source-<sha12><extension> y title + source_file_name ahora usan publicName; el nombre crudo del cliente NUNCA se atesta (queda solo en el store no-ledger). Verificalo por comportamiento: intenta colar PII por file.name (y por otra metadata controlada por cliente: mimeType, title) al artefacto atestado. Ademas el AC3-ter PERMANENTE quedo agregado (POST con file.name PII -> no aparece en intents/events; aparece source-<12hex>; drift 0). Y el full npm test en clon limpio dio exit 0 en mi pasada (ver abajo). Emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO."
