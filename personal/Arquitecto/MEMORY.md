@@ -2,9 +2,25 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 37cf877 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CERRADA done (seq 1996, 6de1722). GO a Codex para reconciliar REQ-7095D30A->done. TASK-0182 (deuda full-suite) abierta ready. Espero que Codex reconcilie el REQ.**
+> Ultima actualizacion: 2026-06-25, HEAD 1f1ad8f (PUSHED), v1.14.0 (#4 enforce/auth ON). **MODO NECESIDAD COMPLETO: TASK-0181 done + REQ-7095D30A done (Codex reconcilio, yo pushee su commit 5dce30a). TASK-0182 (deuda full-suite) ready esperando GO del operador. Cola limpia.**
 
-## >>> RESUME 2026-06-25 (HEAD 37cf877) -- TASK-0181 CERRADA; GO reconcile REQ a Codex; TASK-0182 abierta <<<
+## >>> RESUME 2026-06-25 (HEAD 1f1ad8f) -- MODO NECESIDAD COMPLETO (TASK-0181 + REQ done); TASK-0182 ready <<<
+- **CICLO COMPLETO:** TASK-0181 (Intake modo necesidad, SPEC-0095) **done** (close seq 1996, 6de1722) + **REQ-7095D30A
+  done** (Codex reconcilio via submit_intent seq 2000-2003, commit 5dce30a). Codex commiteo pero su cron murio antes
+  del push -> **yo (orquestador) pushee 5dce30a** + archive su FYI (1f1ad8f). validate exit 0, drift 0, 0 claims.
+- **3 rondas de revision (resumen):** R1 checker verde -> Analista CAMBIO (full exit1 + duda PII file.text). R2 Codex
+  AC3-bis (file.text) + estabiliza -> checker verde -> Analista CAMBIO con HALLAZGO REAL: file.name controlado por
+  cliente atestaba PII en source_file_name/title (mi checker + AC3-bis lo pasaron por alto). R3 Codex fix server-side
+  (publicName=source-<sha12><ext>) + AC3-ter -> checker verde (325bcfb full 93/93) -> Analista CONFIRMA PII; unico
+  residual = full npm test timeout 604s en SU harness (duracion, no fallo). **Operador decidio cerrar + abrir deuda.**
+- **TASK-0182 (ready/Codex):** deuda tecnica = robustecer/aislar el full-suite de Zeus (<300s bajo cap del revisor;
+  atacar causa: tests subproceso auto-commit-push/local-vlm/candidate-review dominan wall-clock; NO mas timeouts).
+  Codex confirmo que NO la arranco (espera GO). **PENDIENTE OPERADOR: decidir GO de TASK-0182.**
+- **open/ mailbox:** solo MSG-Arquitecto-to-Analista-REVIEW3-RESPONSE (FYI rr=false, lo consume el Analista).
+- **LECCION checker:** mutar TODOS los campos controlados por cliente en fronteras PII (no solo el body) [[checker-test-real-write-path]].
+- **PERMISO Bash(*) en .claude/settings.local.json [[permission-auto-exec]]. FLOOR skills Fase1 aun gateado.**
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 37cf877) -- TASK-0181 CERRADA; GO reconcile REQ a Codex; TASK-0182 abierta <<<
 - **TASK-0181 (Intake modo necesidad, SPEC-0095) CERRADA in_review->done** (close via submit_intent seq 1996,
   commit 6de1722 PUSHED). Checker Arquitecto verde clon limpio 325bcfb (targeted 4/4 AC3-bis+AC3-ter, full
   node --test 93/93 exit 0). **Analista review3 CONFIRMO la frontera PII** (file.name/mimeType/title sin fuga;
