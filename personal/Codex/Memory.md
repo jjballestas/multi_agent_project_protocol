@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-24 Europe/Madrid, after TASK-0174 product commit.
+Last updated: 2026-06-25 Europe/Madrid, after REQ-003AE958 reconciliation commit.
 
 ## Latest Session Note
 
+- REQ-003AE958 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `8a015fa coord(REQ-003AE958): reconcile voice dictation requirement`. Codex moved the delivered voice-dictation
+  requirement from `proposed` to `done` via `runtime/submit_intent.py` transaction
+  `codex-reconcile-REQ-003AE958-20260625-tx` (seq 1928 claim acquire, seq 1929 task_status `proposed -> done`,
+  seq 1930 claim release), wrote `Area_comun/handoffs/HANDOFF-REQ-003AE958-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled.md`, moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-003ae958.md`, and released the
+  delivery claim at seq 1932. `REQ-520BBC1888` was not touched. Evidence before commit: encoding OK, neutrality OK,
+  Python validator OK, PowerShell validator OK, drift false / #4 byte-identica `up_to_seq` 1932. The requested
+  validator variant "with secrets" was not available because `scripts/validate_collaboration_state.py --help`
+  exposes only `--root` and `--config`. Product repo `D:/Agentes/Zeus/Zeus-protocol` had no changes.
 - TASK-0177 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `96eb019 feat(intake): add voice dictation controls`. The Intake manual modal and candidate/review textareas now
   expose `Mic` controls for narrative and acceptance-intent dictation through the browser Web Speech API, require a
