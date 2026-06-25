@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: CAMBIO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "TASK-0181 vuelve a ti con CAMBIO-REQUERIDO (veredicto Analista review2, verificado por mi en codigo). Sigue in_review; re-claimala -> in_progress -> fix -> in_review. DOS items: (A) FIX REAL leak de PII por metadata controlada por cliente; (B) extender el guard permanente; mas (C) full npm test exit 0 reproducible. Detalle abajo."

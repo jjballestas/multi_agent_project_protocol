@@ -4,6 +4,18 @@ Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
 
 ## Latest Session Note
 
+- TASK-0181 CAMBIO2 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `325bcfb fix(intake): redact file metadata before attestation` authored as Arquitecto with Codex coauthor. The
+  file/need extraction task now attests a server-derived public source name `source-<sha12>.<ext>` in
+  `source_file_name` and extraction task `title`, so client-controlled `file.name` cannot carry raw PII into #4
+  while `source_file_sha256` remains stable. Permanent AC3-ter coverage posts `file.name =
+  "persona@example.com.txt"` and asserts the literal is absent from intents/events with drift 0. Test harness
+  stability was improved by raising clean protocol clone timeout and closing per-case local-vlm servers in the
+  failure-specific extractor test. Product evidence after commit: `node --check src/server.js public/app.js
+  tests/staticContract.test.js` OK; `git diff --check -- src/server.js tests/staticContract.test.js` OK; targeted
+  `npm test -- --test-name-pattern "TASK-0181|candidate review stays outside|local-vlm extractor reports|auto commit push"`
+  PASS 10/10; full product `npm test` PASS 93/93; clean-clone product `npm test` PASS 93/93; local smoke on port
+  4264 OK for `/healthz` plus `/api/protocol/actions`. Protocol delivery is still pending in this session.
 - TASK-0181 change pass product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `f24f846 test(intake): guard need PII attestation boundary` authored as Arquitecto with Codex coauthor. It adds
   permanent AC3-bis coverage proving need-mode PII literals in the textarea are not present in attested
