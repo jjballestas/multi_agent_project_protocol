@@ -2,9 +2,33 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 5f93546 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 in_review, PARQUEADA (operador cierra VS Code para instalar Visual Studio).**
+> Ultima actualizacion: 2026-06-25, HEAD 33c8dd6 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CAMBIO->Codex (Analista bloqueo); en cola de Codex.**
 
-## >>> RESUME 2026-06-25 (HEAD 5f93546) -- cerrar TASK-0181 (operador cerro VS Code; mi sesion termino) <<<
+## >>> RESUME 2026-06-25 (HEAD 33c8dd6) -- TASK-0181 CAMBIO a Codex (Analista CAMBIO-REQUERIDO) <<<
+- **El Analista dio CAMBIO-REQUERIDO sobre TASK-0181; lo devolvi a Codex con CAMBIO preciso (commit 33c8dd6).
+  TASK-0181 sigue in_review (Codex re-claimara -> in_progress -> fix -> in_review). Cron Codex VIVO -> tomara el
+  CAMBIO. Al reanudar: monitorear la re-entrega, re-checar clon limpio, Analista re-revisa, cerrar.**
+- **Dos motivos del Analista y mi analisis (verificado en codigo, NO relevado a ciegas):**
+  1. **PII (frontera de atestacion):** el Analista vio el texto crudo de la necesidad en file.text del submit. PERO
+     verifique: submitNeedExtraction -> /api/protocol/actions/submit con payload.file -> buildRequirementIntakeIntents
+     (server.js:712) enruta a buildFileExtractionIntents, que atesta SOLO source_file_sha256 (NUNCA el texto crudo),
+     IGUAL que el modo archivo (server.js byte-identico, Analista aprobo TASK-0180). El texto crudo del body es el
+     INSUMO al screening + store no-ledger; redaccion/hard-gate al APROBAR (AC43). => YA es correcto; falta solo un
+     TEST-GUARD que lo pruebe. Aclare SPEC-0095 + agregue AC3-bis PERMANENTE (test: necesidad con PII -> intents con
+     sha256 y SIN literales crudos).
+  2. **Full node --test exit 1 (86/91):** los 5 que fallan (local-vlm extractor, candidate review stays outside, 3x
+     auto commit push) son TIMEOUTS de subproceso 60-113s bajo carga, NO regresion (PROBADO: diff 3b2d49a->2d7e805
+     solo app.js(need)/styles.css/+test; esos 5 + su codigo byte-identicos al clon TASK-0180 donde pasaron 90/90;
+     app.js no toca esos caminos; server.js sin cambios). Pero el gate exige verde.
+- **CAMBIO pedido a Codex (MSG-Arquitecto-to-Codex-CAMBIO-TASK-0181 en open):** (A) agregar el behavior-test AC3-bis
+  (frontera PII); (B) estabilizar esos 5 tests (subir timeouts internos / serializar git-subproceso) de modo que
+  node --test clon limpio de exit 0 reproducible; reproducir full verde antes de re-entregar. Checker Arquitecto sobre
+  2d7e805 estaba VERDE (targeted, no-egress, sin server.js, Co-Author OK) -- la re-entrega traera nuevo SHA.
+- **Checker desde clon limpio: el full-suite de Zeus es INESTABLE bajo carga concurrente (execs Analista/crones +
+  mis runs) -> los tests de subproceso expiran. Correr el full en VENTANA QUIETA (sin execs) o tras estabilizar.**
+- **DEUDA TECNICA confirmada:** robustecer/aislar los tests de subproceso del full-suite (parte del CAMBIO-B).
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 5f93546) -- (historico) parqueo pre-CAMBIO <<<
 - **El operador cerro VS Code (instalando Visual Studio) -> mi runtime Arquitecto TERMINO. Crones Codex/Analista
   son procesos detached: SIGUEN VIVOS. Al REANUDAR (reabrir VS Code / nueva sesion), arrancar en frio y CERRAR
   TASK-0181.** Estado durable: HEAD 5f93546 pushed, TASK-0181 in_review, 0 claims, validate exit 0, sin estado a
