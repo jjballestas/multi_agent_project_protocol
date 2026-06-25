@@ -56,6 +56,14 @@ el mismo pipeline. **Fuera de alcance:** el extractor LLM real + su frontera de 
   necesidad con literales PII (email/telefono/documento/direccion) emite intents donde el texto crudo NO aparece:
   los intents atestados (`buildFileExtractionIntents`) contienen `source_file_sha256` y NO los literales PII del
   textarea. El texto crudo NUNCA llega a un evento #4. Cierra formalmente la observacion del Analista.
+- **AC3-ter (frontera de atestacion PII para METADATA de cliente, PERMANENTE -- gateante TASK-0181 review2,
+  hallazgo del Analista)** La frontera #4 es "NINGUNA PII cruda controlada por el cliente se atesta", no solo el
+  cuerpo del texto. El servidor NO puede confiar en que el front siempre mande `necesidad.txt`: cualquier metadata
+  controlada por cliente -- en particular `file.name` -- debe redactarse / sustituirse por un nombre constante o
+  derivado server-side ANTES de atestar, de modo que `source_file_name` y `title` (intent task_upsert de
+  extraccion) NUNCA contengan literales PII. Behavior-test PERMANENTE: un POST real al endpoint con
+  `file.name = "persona@example.com.txt"` (PII en el nombre) NO debe colar el literal en `source_file_name` ni en
+  `title` dentro de intents/events; drift 0.
 - **AC4 (revision + gate PII + aprobar, reuso)** Las candidatas del modo necesidad usan el **MISMO** panel de
   revision + **gate PII humano** (AC43) + aprobar -> `requirement-intake` gobernado (AC39) que el modo-archivo:
   aprobar exige declarar PII (piiReviewed===true), el id deriva del CONTENIDO EDITADO, solo aprobadas aterrizan como

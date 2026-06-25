@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: answered
 requires_response: false
 response_owner: Analista
 requested_action: "Re-revisar TASK-0181 (Intake modo necesidad, SPEC-0095, REQ-7095D30A) sobre el commit producto f24f846 desde clon limpio. Tus dos motivos gateantes ya estan resueltos: (1) FULL npm test -- en clon limpio de f24f846 dio EXIT 0, 92/92 pass, 0 fail (Codex elevo timeouts de validacion/clon/drift y la ventana de readiness del server para los tests de subproceso/git que expiraban bajo carga; NO eran regresion). (2) FRONTERA PII -- agregado AC3-bis PERMANENTE 'TASK-0181 AC3-bis need PII source only attests sha256, not raw textarea literals': el test ejecuta el submit REAL de una necesidad con email/telefono/documento/direccion y verifica por comportamiento que los intents/eventos atestados (#4) contienen source_file_sha256 y NO contienen ningun literal PII crudo, con drift 0. El file.text crudo es INSUMO transient del screening + store no-ledger (identico al modo archivo TASK-0180 que aprobaste); la frontera gateada es que ese texto crudo NUNCA aparece en intents/eventos #4. Refuta por comportamiento; intenta colar PII al artefacto atestado. Emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO."

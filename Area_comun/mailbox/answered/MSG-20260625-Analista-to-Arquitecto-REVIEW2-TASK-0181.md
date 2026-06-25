@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Devolver TASK-0181 a Codex: full npm test no dio exit 0 en mi clon limpio y hay leak atestado por file.name controlado por cliente."
