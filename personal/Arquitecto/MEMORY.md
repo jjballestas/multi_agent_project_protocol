@@ -2,7 +2,29 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 1f1ad8f (PUSHED), v1.14.0 (#4 enforce/auth ON). **MODO NECESIDAD COMPLETO: TASK-0181 done + REQ-7095D30A done (Codex reconcilio, yo pushee su commit 5dce30a). TASK-0182 (deuda full-suite) ready esperando GO del operador. Cola limpia.**
+> Ultima actualizacion: 2026-06-26, HEAD c4abf8c (PUSHED), v1.14.0 (#4 enforce/auth ON). **MODO NECESIDAD COMPLETO (TASK-0181+REQ done). TASK-0182 (deuda full-suite) EN CAMBIO: Codex aislo el tier lento OK pero ci.yml corre el default que SKIPPEA los guards de seguridad; devuelto a Codex a fin de que la CI corra el suite completo.**
+
+## >>> RESUME 2026-06-26 (HEAD c4abf8c) -- TASK-0182 CAMBIO: CI ciega a los guards de seguridad <<<
+- **TASK-0182 (deuda full-suite, GO del operador) -- CAMBIO-REQUERIDO acotado (1 item).** Codex entrego Zeus
+  **6b2b37c** "test(intake): isolate slow subprocess suite": aislo 16 tests lentos tras `ZEUS_RUN_SLOW_TESTS=1`
+  (`npm run test:slow`); default `npm test` baja a ~2.5s (77 pass/16 skip). Cero codigo de produccion, Co-Author OK.
+  Checker clon limpio: default exit 0; **test:slow 93/93 exit 0** (cobertura intacta, solo reubicada).
+- **HALLAZGO (CAMBIO):** `.github/workflows/ci.yml` corre `npm test` (el default que SKIPPEA los 16) -> entre los
+  skippeados estan **AC3-bis/AC3-ter** (frontera PII, guards PERMANENTES) + impersonacion-intake + file-ingestion
+  gating + candidate-review PII-gate + no-egress local-vlm + bounds auto-commit-push. La CI automatizada quedo
+  CIEGA a la frontera PII -> viola AC3 ("tier lento ejecutable EN CI"). El cap 604s era del harness INTERACTIVO del
+  revisor; GH Actions NO lo tiene. FIX pedido: CI corre el suite COMPLETO (ci.yml -> `npm run test:slow` o script
+  `test:ci` con el flag), manteniendo `npm test` rapido. Devuelto a Codex (commit c4abf8c, MSG CAMBIO en open).
+- **PROXIMO PASO:** monitorear re-entrega de Codex. Re-checar clon limpio: ci.yml corre los 93 (no 77/16) + `npm
+  test` sigue rapido + test:slow 93/93. Si verde -> cerrar in_review->done (no requiere Analista; es deuda
+  test-infra, checker=Arquitecto). Cerrar via submit_intent en ventana segura.
+- **LECCION colision cron:** el cron duerme 300s entre rondas; pid-file stale + sin heartbeat reciente NO = muerto.
+  Verificar el proceso real (`codex_mailbox_cron.ps1` en Get-CimInstance) ANTES de relanzar; lance un duplicado
+  (148244) que choco con el original vivo (161592) -> LOOP_ERROR; lo mate y restaure el pid-file. [[agent-activation-lifecycle]]
+- **LECCION checker:** un aislamiento de tests "verde" puede ESCONDER que el gate ya no corre los guards de
+  seguridad -> verificar QUE corre el gate (default vs CI vs slow), no solo el exit 0. [[checker-test-real-write-path]]
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 1f1ad8f) -- MODO NECESIDAD COMPLETO (TASK-0181 + REQ done); TASK-0182 ready <<<
 
 ## >>> RESUME 2026-06-25 (HEAD 1f1ad8f) -- MODO NECESIDAD COMPLETO (TASK-0181 + REQ done); TASK-0182 ready <<<
 - **CICLO COMPLETO:** TASK-0181 (Intake modo necesidad, SPEC-0095) **done** (close seq 1996, 6de1722) + **REQ-7095D30A
