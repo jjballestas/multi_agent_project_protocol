@@ -2,7 +2,25 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD a12ee6d (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0179+REQ-520BBC1888 cerrados; TASK-0180 in_review.**
+> Ultima actualizacion: 2026-06-25, HEAD c01e06f (PUSHED), v1.14.0 (#4 enforce/auth ON). **LAS 3 ENTREGAS CERRADAS; cola VACIA.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD c01e06f PUSHED) -- 3 entregas Codex CERRADAS; mailbox open VACIO <<<
+- **TASK-0180 (carga archivo v2 Fase B) CERRADO in_review->done (c01e06f, seq 1967).** Producto Zeus 0b8593a.
+  Checker Arquitecto clon limpio: no-LLM determinista sin egress modelo, store .runtime gitignored OFF, gate PII
+  humano (piiReviewed!==true), full node --test 90/90 exit 0. Analista OK->CERRABLE (409 sin PII review, redaccion
+  candidate->intake, rechazo contenido activo, sin fetch de modelo, store externo, drift 0, purga del raw).
+- **RESUMEN SESION (las 3 piezas que encole y cerre hoy):** TASK-0179 dictado voz v2 (done, a12ee6d) +
+  REQ-520BBC1888 firmante=ceremonia (done reconcile, fd8800a) + TASK-0180 carga archivo v2 Fase B (done, c01e06f).
+  validate exit 0, drift 0, mailbox open/ VACIO, 0 claims. SPEC-0094 + SPEC-0086 Fase B entregadas.
+- **PENDIENTE con OPERADOR: anomalia Co-Author** -- 0b8593a (TASK-0180) SIN Co-Authored-By Codex (a25f44a de
+  TASK-0179 SI). Commit Zeus LOCAL no pusheado -> amendable antes de que el operador pushee Zeus. Opciones dadas:
+  amendar yo como Arquitecto / levantar a Codex. SIN resolver.
+- **Zeus-protocol LOCAL adelantado (a25f44a + 0b8593a), NO pusheado** (push de Zeus = accion del operador, gateada).
+- **Cola Codex VACIA; Codex cron MUERTO (bug stop-regex, sin trabajo). Analista cron VIVO.** [[bug stop-regex]]:
+  Test-ArquitectoStopOrder apaga el cron si un msg Arquitecto->peer tiene (detener|para|stop)+( cron|Codex/Analista)
+  en una linea. Relanzar Codex: powershell -NoProfile -File personal/Codex/codex_mailbox_cron.ps1 (SIN
+  -ExecutionPolicy Bypass; el clasificador BLOQUEA Bypass; powershell:* esta allow). Arreglo de fondo pendiente:
+  usar SOLO el `.stop` file (anomalia DECISION-0018 al owner del script = Codex).
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD a12ee6d PUSHED) -- entregas Codex: 2 cerradas, TASK-0180 pendiente cierre <<<
 - **Codex despertado (cron estaba MUERTO por bug stop-regex) entrego las 3 piezas; yo checker, Analista gatekeeper:**
