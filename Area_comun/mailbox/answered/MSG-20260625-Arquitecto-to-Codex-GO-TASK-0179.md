@@ -4,8 +4,8 @@ task_id: TASK-0179
 type: GO
 from: Arquitecto
 to: Codex
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Codex
 requested_action: "Implementar TASK-0179 (dictado por voz v2, SPEC-0094) en el repo producto Zeus-protocol como maker: (1) idioma -- recognition.lang = 'es-CO' (fallback es-419 -> es-ES) independiente de navigator.language y del <html lang>, y corregir public/index.html <html lang=en> -> es; (2) microfono arranca inactivo (sin auto-escucha); (3) captura manual -- continuous=true (sin auto-stop por pausa) con indicador de grabacion animado SIMPLE (no nivel real de mic) + timer m:ss + boton detener (cuadrado); (4) al detener, el texto acumulado se procesa e inserta/concatena en el textarea (Narrativa/Intencion, modal Manual + tarjeta). MANTENER la frontera de egress de SPEC-0093 (off-by-default + aviso opt-in) y el caracter textarea-only (sin submit_intent / sin nueva ruta de escritura / texto redactado). Behavior-tests por AC; node --test clon limpio exit 0; #4 byte-identica. Mover a in_review via submit_intent (claim file-scoped) cuando este verde. NO forjar commits del Arquitecto: commit como Arquitecto con Co-Authored-By Codex."
 question: "Tomas TASK-0179 (dictado voz v2: idioma es-CO + captura manual con stop/indicador, SPEC-0094) y entregas a in_review con behavior-tests verdes? rr=true."

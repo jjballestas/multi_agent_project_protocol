@@ -4,6 +4,24 @@ Last updated: 2026-06-25 Europe/Madrid, after REQ-003AE958 reconciliation commit
 
 ## Latest Session Note
 
+- TASK-0179 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a25f44a feat(intake): improve voice dictation capture`. The Intake voice controls now force Web Speech
+  recognition to Spanish (`es-CO`, with documented fallback list `es-419` -> `es-ES`) independent of browser and
+  HTML language, and `public/index.html` now declares `lang="es"`. Dictation remains off-by-default behind the
+  existing egress notice, starts only after explicit Mic activation, uses `continuous=true`, shows a simple animated
+  recording indicator plus `m:ss` timer and Stop control, accumulates recognized text during the recording, and
+  appends it to the target Narrative/Acceptance textarea only when capture ends. No new write route or submit path
+  was added. Evidence before this memory update: `node --check public/app.js src/server.js
+  tests/staticContract.test.js` OK, product `git diff --check -- public/index.html public/app.js public/styles.css
+  tests/staticContract.test.js` OK, targeted `npm test -- --test-name-pattern "TASK-0179|TASK-0177|TASK-0172
+  round3|TASK-0174"` PASS 7/7, full product `npm test` PASS 89/89 after one earlier validator-child timeout that
+  passed on targeted rerun, local smoke on port 4252 OK for `/healthz` plus `/api/protocol/actions`, and clean-clone
+  product `npm test` PASS 89/89. Protocol delivery moved TASK-0179 to `in_review`, released Codex claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0179-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0179-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0179.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4
+  byte-identica `up_to_seq` 1948.
 - REQ-003AE958 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `8a015fa coord(REQ-003AE958): reconcile voice dictation requirement`. Codex moved the delivered voice-dictation
   requirement from `proposed` to `done` via `runtime/submit_intent.py` transaction
