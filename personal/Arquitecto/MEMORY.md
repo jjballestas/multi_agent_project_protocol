@@ -2,7 +2,34 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 604b4d4 (PUSHED), v1.14.0 (#4 enforce/auth ON). **NUEVO GO TASK-0181 (REQ-7095D30A) en cola de Codex.**
+> Ultima actualizacion: 2026-06-25, HEAD 5f93546 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 in_review, PARQUEADA (operador cierra VS Code para instalar Visual Studio).**
+
+## >>> RESUME 2026-06-25 (HEAD 5f93546) -- cerrar TASK-0181 (operador cerro VS Code; mi sesion termino) <<<
+- **El operador cerro VS Code (instalando Visual Studio) -> mi runtime Arquitecto TERMINO. Crones Codex/Analista
+  son procesos detached: SIGUEN VIVOS. Al REANUDAR (reabrir VS Code / nueva sesion), arrancar en frio y CERRAR
+  TASK-0181.** Estado durable: HEAD 5f93546 pushed, TASK-0181 in_review, 0 claims, validate exit 0, sin estado a
+  medias.
+- **TASK-0181 (Intake modo necesidad, SPEC-0095, REQ-7095D30A) -- LISTA PARA CIERRE salvo veredicto Analista:**
+  - **Checker Arquitecto YA VERDE** clon limpio Zeus 2d7e805 (Co-Author Codex OK; modo necesidad OFF-by-default;
+    reuso voz TASK-0179; fuente inerte necesidad.txt -> consumidor determinista no-LLM sin egress modelo; sin
+    server.js; targeted PASS; AC1-AC4 con asserts sustantivos).
+  - **HALLAZGO full-suite (NO bloquea, NO es regresion):** node --test full dio 5 fallos (local-vlm extractor,
+    candidate review stays outside, 3x auto commit push) = TIMEOUTS de subproceso 60-113s bajo CARGA (exec Analista
+    + crones). **PROBADO no-regresion:** diff 3b2d49a(TASK-0180)->2d7e805 solo toca app.js(need)/styles.css/+test
+    0181; esos 5 tests y su codigo son BYTE-IDENTICOS al clon TASK-0180 donde pasaron 90/90; app.js NO toca
+    auto-push/local-vlm/candidate-review; server.js sin cambios. PENDIENTE opcional: re-correr los 5 en VENTANA
+    QUIETA (clon scratchpad/zeus-0181-check, sin execs concurrentes) para verlos verdes y documentar el caveat.
+  - **PENDIENTE veredicto Analista** (estaba mid-exec EXEC_START 16:42 corriendo su propio full-suite lento;
+    MSG-Analista-to-Arquitecto-REVIEW-TASK-0181 aterrizara en open/). Si OK->CERRABLE -> cerrar in_review->done
+    (CLOSE-0181 claim file-scoped -> task_status -> release) + answered + commit/push + memoria. Si CAMBIO por algo
+    REAL (no los 5 timeouts) -> regresar a Codex.
+  - **DESPUES del cierre:** GO reconcile REQ-7095D30A->done a CODEX (requirement->done exige implementer). Stop-regex:
+    NO 'para...Codex' en una linea. Relanzar cron Codex si murio (powershell -NoProfile -File
+    personal/Codex/codex_mailbox_cron.ps1 SIN -ExecutionPolicy Bypass + limpiar lock huerfano).
+- **DEUDA TECNICA a reportar:** el full-suite de Zeus se vuelve inestable bajo carga (tests subproceso
+  auto-commit-push/local-vlm/candidate-review timeoutean). Candidata a tarea de robustecer/aislar esos tests.
+
+## >>> CHECKPOINT 2026-06-25 (HEAD 604b4d4 PUSHED) -- GO TASK-0181: Intake modo necesidad <<<
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD 604b4d4 PUSHED) -- GO TASK-0181: Intake modo necesidad <<<
 - **NUEVO REQ-7095D30A (operador via intake) -> SPEC-0095 + TASK-0181 ready/Codex, GO emitido (seq 1975).** Tercer
