@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0179 dictado por voz v2; veredicto OK/CERRABLE; #4 ON).
+> Ultima actualizacion: 2026-06-25 (TASK-0180 file intake v2 Fase B; veredicto OK/CERRABLE; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,24 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0180 (2026-06-25): OK/CERRABLE, veredicto commiteado en `57320df`
+  (`review(TASK-0180): Analista OK file intake phase B`). Ancla producto
+  `0b8593ae5044a16764a665dc291dd1e0eed22e1c` (`feat(intake): add deterministic file candidate review`)
+  y protocolo de instruccion `5a9fe5f`. Clon limpio producto `npm test` exit 0, 90/90.
+  Payload propio sobre servidor temporal con protocolo tmp `5a9fe5f`, store externo, config temporal
+  `enabled=true` y preload que hacia fallar cualquier `globalThis.fetch`: upload execute 200,
+  extraction deterministic-local 200, `candidateCount=1`, `egress.boundary=none_deterministic_no_llm`,
+  `networkEgress=false`; aprobar sin `piiReviewed` -> 409; editar con `<script>` + `piiReviewed=true`
+  -> 400 active content; editar con email/telefono/direccion/documento + `piiReviewed=true` -> 200,
+  seed `REQ-E61698065B` sin literales y con tokens `[EMAIL-REDACTED]`, `[PHONE-REDACTED]`,
+  `[ADDR-REDACTED]`, `[DOC-REDACTED]`, mas hashes de procedencia. Raw upload existia antes de aprobar
+  y desaparecio tras terminal aprobado; candidata externa queda `approved`. Gates protocolo:
+  validate vivo exit 0, validate sin secretos en clon `5a9fe5f` exit 0, drift vivo 0 `up_to_seq=1964`,
+  drift tmp con candidatas/store externo 0 `up_to_seq=1970`, neutralidad/encoding exit 0, #4
+  `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no bloqueantes:
+  monkeypatch cubrio `fetch`; `http.request`/`net.connect` se descartan por inspeccion de rama determinista
+  y diff, no por monkeypatch. Purga probada en aprobado; descartado usa el mismo `markCandidateStatus`.
 - TASK-0179 (2026-06-25): OK/CERRABLE, veredicto commiteado y pusheado en `c7fcf09`
   (`review(TASK-0179): Analista OK voice egress v2`). Ancla producto
   `a25f44a` (`feat(intake): improve voice dictation capture`) y protocolo canonico `c4dd79b`
