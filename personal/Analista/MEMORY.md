@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-22 (serie front intake/carga-por-archivo v2; #4 ON en vivo; epoca 1.14.0).
+> Ultima actualizacion: 2026-06-25 (TASK-0177 dictado por voz; veredicto OK/CERRABLE; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,20 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0177 (2026-06-25): OK/CERRABLE, veredicto commiteado y pusheado en `9752697`
+  (`review(TASK-0177): Analista OK voice dictation`). Ancla producto
+  `96eb019c5697512282afe6155979d2678cca7157`; protocolo citado por instruccion
+  `d0a1795af5099525048c666df9053623810367aa`; REVIEW materializado en protocolo `e7ca646`.
+  Clon limpio producto `npm test` exit 0, 88/88. Payloads propios: sin aceptar aviso -> no start ni texto;
+  aceptar aviso -> start una vez, transcript al textarea y evento input; segundo click -> stop sin segunda
+  captura; sin soporte renderizado como disabled -> no confirm/no start; funciones de voz sin `fetch`,
+  `actions/submit`, `submit_intent` ni escrituras; diff toca solo `public/app.js`, `public/styles.css` y
+  `tests/staticContract.test.js`; `src/server.js` intacto; payload dictado con email/telefono/direccion/cedula
+  sale redactado por `buildRequirementIntakePayload`. Gates protocolo con secretos exit 0, sin secretos en clon
+  `d0a1795` exit 0, drift 0, neutralidad/encoding exit 0, #4 byte-identica sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no bloqueantes:
+  `egressRequired=true` aunque unsupported+disabled, y si SpeechRecognition desaparece entre render/click se
+  muestra aviso antes de deshabilitar; no abren captura ni escritura. Recomendacion OK->CERRABLE.
 - Deltas SOTA para SPEC-0078: DELTA-1 (KV-cache, 2602.16284) y DELTA-2 (Focus, 2601.07190)
   MAL-ATRIBUIDOS; convergencia 2-2 con Codex (factibilidad). Recogida por el arquitecto.
 - #3 cost-attribution (SPEC-0079/DECISION-0033): veredicto GO-con-un-cambio (tag cost_unit/cost_schema
