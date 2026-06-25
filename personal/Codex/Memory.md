@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-06-25 Europe/Madrid, after REQ-7095D30A reconciliation.
+Last updated: 2026-06-26 Europe/Madrid, after TASK-0182 CI change.
 
 ## Latest Session Note
 
+- TASK-0182 CAMBIO product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `a6b830c ci(test): run full suite in automation`. GitHub Actions now runs `npm run test:ci`, which delegates to
+  `npm run test:slow` and sets `ZEUS_RUN_SLOW_TESTS=1`, so CI executes the full 93-test suite including the slow
+  security/boundary guards. `npm test` remains the fast local/reviewer gate with 77 pass / 16 skip. README documents
+  the split. No production file (`src/server.js` / `public/app.js`) was changed. Evidence before delivery:
+  `node --check src/server.js public/app.js tests/staticContract.test.js` OK; `git diff --check -- .github/workflows/ci.yml package.json README.md`
+  OK; `npm test` PASS 77/93 with 16 slow skips in ~1.3s; `npm run test:ci` PASS 93/93 in ~962s after one earlier
+  904s harness timeout. Protocol delivery commit `coord(TASK-0182): redeliver CI full-suite gate` wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0182-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0182-cambio-in-review.md`, moved the consumed CAMBIO
+  to answered, released Codex claim `CLAIM-20260626-Codex-TASK-0182-cambio-ci`, and left TASK-0182 in `in_review`.
+  Final protocol evidence before delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell
+  validator OK, drift false / #4 byte-identica `up_to_seq` 2012.
 - TASK-0182 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `6b2b37c test(intake): isolate slow subprocess suite`. The default `npm test`/`node --test` gate now keeps
   subprocess-heavy protocol write-real cases in a separate slow tier by marking them with `slowTest`; default

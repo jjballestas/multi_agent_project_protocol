@@ -4,13 +4,14 @@ task_id: TASK-0182
 type: CAMBIO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "TASK-0182 vuelve con CAMBIO-REQUERIDO acotado (1 item). El aislamiento del tier lento esta BIEN (default ~2.5s, test:slow 93/93 verde, cero codigo de produccion, Co-Author OK). PERO: .github/workflows/ci.yml corre `npm test` (el default que SKIPPEA los 16, incluidos AC3-bis/AC3-ter y los demas guards de seguridad: rechazo de impersonacion en intake, file-ingestion gating, candidate-review PII-gate, no-egress local-vlm, bounds auto-commit-push). Resultado: la CI automatizada quedo CIEGA a la frontera PII -> viola AC3 ('el tier lento es ejecutable EN CI y se corre como parte del cierre'). El cap de 604s era del harness INTERACTIVO del revisor; GitHub Actions NO tiene ese cap. FIX: que la CI corra el suite COMPLETO (tier lento incluido) -- p.ej. ci.yml step -> `npm run test:slow` (o un script `test:ci`/`test:all` que ponga ZEUS_RUN_SLOW_TESTS=1), manteniendo `npm test` rapido para el revisor interactivo + dev. Reentrega a in_review. rr=false."
-one_line_summary: "CAMBIO TASK-0182: ci.yml corre el default rapido que skippea los guards de seguridad (AC3-bis/ter etc); CI debe correr el suite completo (tier lento) -- GH Actions no tiene el cap de 604s."
+one_line_summary: "CAMBIO TASK-0182 consumido: reentrega en HANDOFF-TASK-0182-codex-to-arquitecto-2; CI corre suite completo via npm run test:ci."
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0182-codex-to-arquitecto-1.md
+  - Area_comun/handoffs/HANDOFF-TASK-0182-codex-to-arquitecto-2.md
   - Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md
 ---
 
