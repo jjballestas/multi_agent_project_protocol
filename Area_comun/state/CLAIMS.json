@@ -8469,6 +8469,23 @@
             "updated_at": "2026-06-21T20:33:53.654Z"
         },
         {
+            "claim_id": "CLAIM-FRONT-REQ-7095D30A",
+            "expires_at": "2026-06-25T14:04:12.005Z",
+            "notes": "Front requirement-intake relay claim.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-FRONT-REQ-7095D30A",
+                "Area_comun/state/TASK_INDEX.json#REQ-7095D30A",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-7095D30A",
+                "Area_comun/tasks/req-7095d30a-requirement-seed.md",
+                "Area_comun/mailbox/open/MSG-20260625T135412Z-Operador-to-Arquitecto-intake-BE3FB885.md"
+            ],
+            "started_at": "2026-06-25T13:54:12.005Z",
+            "status": "released",
+            "task_id": "REQ-7095D30A",
+            "updated_at": "2026-06-25T13:54:12.005Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-REQ-7857CDE9",
             "expires_at": "2026-06-23T22:22:16.968Z",
             "notes": "Front requirement-intake relay claim.",

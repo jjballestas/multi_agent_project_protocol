@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "tasks": [
         {
+            "id": "REQ-7095D30A",
+            "owner": "Operador",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "proposed",
+            "title": "registro de requerimientos por dictado"
+        },
+        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "phase": "P2",

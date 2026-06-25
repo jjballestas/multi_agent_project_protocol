@@ -133,6 +133,12 @@
             "title": "UX: El sitio no refleja cambios nuevos del protocolo sin reiniciar el servidor"
         },
         {
+            "id": "REQ-7095D30A",
+            "owner": "Operador",
+            "status": "proposed",
+            "title": "registro de requerimientos por dictado"
+        },
+        {
             "id": "REQ-7857CDE9",
             "owner": "Operador",
             "status": "done",

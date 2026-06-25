@@ -616,6 +616,30 @@
             "type": "requirement"
         },
         {
+            "acceptance_intent": "esta opcion se aceptara cuando:1.permita al usuario dictar las necesidades se pueda capturar la informacion en el textarea 2.permita al usuario dictar las necesidades se pueda capturar la informacion en el texto area 3.la necesidad capturada se puede enviar al extractor 4.el extractor convierta estas necesidades en requerimientos formalmente constituidos 5.el usuario los pueda aceptar rechazar enviar al instructor como actualmente se hace con las opciones que se generan desde la carga de requerimiento por archivos.",
+            "author": "Operador",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/req-7095d30a-requirement-seed.md",
+            "id": "REQ-7095D30A",
+            "narrative": "yo como operador quiero tener una opcion en la cual pueda dictar o escribir una necesidad luego esta necesidad seria enviada al extractor asi como se envia en este momento la carga por archivos y lo reciba el extractor y convierta la necesidad en requerimientos.la opcion de necesidad estaria al lado de la opcion manual en el panel inicial de intake y se lanzaria de igual forma en un formulario aparte que tendria un text area grande con la opcion de capturar por microfono como las mismas funcinalidades que el mic de la opcion de requerimiento manual.pero tendria la seccion de botoness como la de los requerimientos por archivo",
+            "owner": "Operador",
+            "phase": "P2",
+            "pii_guard": {
+                "channel": "ascii",
+                "free_text_public_plane": "redacted",
+                "mode": "structural",
+                "redactions": 0,
+                "warning_acknowledged": true
+            },
+            "priority": "normal",
+            "project": "Zeus-protocol",
+            "relayed_by": "Arquitecto",
+            "sdd_role": "seed_only_architect_authors_spec",
+            "status": "proposed",
+            "title": "registro de requerimientos por dictado",
+            "type": "requirement"
+        },
+        {
             "acceptance_intent": "El modal ocupa al menos 80% del viewport. Las textareas de Narrativa e Intencion de aceptacion tienen rows minimo 8 y se ven completas sin scroll interno. El wizard de 4 pasos y los botones Preview dry_run y EXECUTE SUBMIT_INTENT son visibles sin scrollear el modal. Al confirmar o cancelar el modal se cierra y el panel Intake muestra el requisito recien creado en Mis requisitos. El estado del formulario se conserva si el operador cierra sin enviar.",
             "author": "Operador",
             "endorsement": "none",
