@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0177 dictado por voz; veredicto OK/CERRABLE; #4 ON).
+> Ultima actualizacion: 2026-06-25 (TASK-0179 dictado por voz v2; veredicto OK/CERRABLE; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,25 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0179 (2026-06-25): OK/CERRABLE, veredicto commiteado y pusheado en `c7fcf09`
+  (`review(TASK-0179): Analista OK voice egress v2`). Ancla producto
+  `a25f44a` (`feat(intake): improve voice dictation capture`) y protocolo canonico `c4dd79b`
+  (`coord(TASK-0179): deliver voice dictation v2`). Clon limpio producto `npm test` exit 0,
+  89/89. Payloads propios sobre guard de voz extraido: `confirm=false` no construye
+  reconocedor, no inicia captura, no cambia textarea ni llama fetch; `confirm=true` crea una
+  sola instancia, `lang=es-CO`, `continuous=true`, `interimResults=false`; segundo click hace
+  stop manual y `onend` inserta una vez el transcript acumulado en textarea con evento `input`.
+  Path de voz no invoca fetch/media/socket; diff no agrega `getUserMedia`, Web Audio,
+  WebSocket/EventSource/sendBeacon/XMLHttpRequest ni nueva ruta de escritura, y toca solo
+  `public/index.html`, `public/app.js`, `public/styles.css`, `tests/staticContract.test.js`.
+  Payload dictado con email/telefono/direccion/documento queda redactado por
+  `buildRequirementIntakePayload`. Gates protocolo: validate vivo exit 0, validate secretless
+  en `c4dd79b` exit 0, drift 0 `up_to_seq=1956`, neutralidad/encoding exit 0, #4
+  `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no
+  bloqueantes: captura sostenida envia mas audio por sesion pero queda cubierta por el mismo
+  aviso opt-in; si el soporte desaparece entre render y click, el codigo puede pedir confirm
+  antes de deshabilitar, pero no captura ni escribe.
 - TASK-0177 (2026-06-25): OK/CERRABLE, veredicto commiteado y pusheado en `9752697`
   (`review(TASK-0177): Analista OK voice dictation`). Ancla producto
   `96eb019c5697512282afe6155979d2678cca7157`; protocolo citado por instruccion
