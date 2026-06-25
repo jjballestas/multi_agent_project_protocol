@@ -2,9 +2,28 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 33c8dd6 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CAMBIO->Codex (Analista bloqueo); en cola de Codex.**
+> Ultima actualizacion: 2026-06-25, HEAD 58ea6d2 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 re-entregada (f24f846); checker Arquitecto VERDE; re-REVIEW al Analista enviado; espero veredicto para cerrar.**
 
-## >>> RESUME 2026-06-25 (HEAD 33c8dd6) -- TASK-0181 CAMBIO a Codex (Analista CAMBIO-REQUERIDO) <<<
+## >>> RESUME 2026-06-25 (HEAD 58ea6d2) -- TASK-0181 re-checada VERDE, re-REVIEW al Analista <<<
+- **Codex resolvio el CAMBIO.** Producto Zeus **f24f846** "test(intake): guard need PII attestation boundary"
+  (Autor Arquitecto, Co-Authored-By Codex). MSG Codex changes-in-review recibido y movido a answered/.
+- **Checker Arquitecto VERDE (clon limpio Zeus @ f24f846, ventana quieta):** targeted TASK-0181 PASS 3/3 (incl.
+  AC3-bis: postea PII real y verifica intents/eventos con source_file_sha256 SIN literales crudos + drift 0);
+  **full `node --test` EXIT 0, 92/92 pass, 0 fail.** Codex estabilizo los 5 timeouts de subproceso (subio timeouts
+  de validacion/clon/drift + ventana readiness). Co-Author OK; sin cambios en src/server.js.
+  LECCION: el full tarda >10min y node `&` se DESPRENDE del task del harness -> correr en background con log +
+  marker FULL_EXIT y esperar via Monitor; NO confiar en el exit del wrapper `&` (reporta 0 prematuro).
+- **Re-REVIEW al Analista enviado** (MSG-Arquitecto-to-Analista-REVIEW2-TASK-0181 en open/, commit 58ea6d2 PUSHED):
+  ambos motivos gateantes (full exit1 + PII cruda en file.text) resueltos; pido veredicto OK->CERRABLE o CAMBIO.
+- **PROXIMO PASO:** recoger el veredicto del Analista en open/. Si OK->CERRABLE: cerrar TASK-0181 in_review->done
+  (claim file-scoped CLOSE-0181 via submit_intent -> task_status -> release) en ventana segura (0 claims, sin peer
+  mid-exec); answered + commit/push + memoria; luego GO a Codex para reconciliar REQ-7095D30A->done (requirement->
+  done exige implementer=Codex). Si CAMBIO real -> regresar a Codex.
+- **PERMISO (2026-06-25):** el operador autorizo TODO Bash sin prompt -> anadi `Bash(*)` al allow de
+  .claude/settings.json ([[permission-auto-exec]]); barreras vigentes (ask reset/rebase, deny force-push/secretos);
+  clasificador sigue bloqueando externos/destructivos. (Coherente con el modo bypassPermissions de la CLI.)
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 33c8dd6) -- TASK-0181 CAMBIO a Codex (Analista CAMBIO-REQUERIDO) <<<
 - **ENTORNO (decision operador): la proxima sesion del Arquitecto corre desde la CLI con `claude
   --dangerously-skip-permissions` (modo bypassPermissions) = SIN prompts de autorizacion (bash/shell/edits/git) y
   SIN deny rules.** El operador cierra VS Code para instalar Visual Studio y orquesta desde la terminal. NO correr
