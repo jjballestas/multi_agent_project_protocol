@@ -2,7 +2,7 @@
 task_id: "REQ-7095D30A"
 title: "registro de requerimientos por dictado"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

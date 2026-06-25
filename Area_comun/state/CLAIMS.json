@@ -7866,6 +7866,43 @@
             "updated_at": "2026-06-25T01:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-REQ-7095D30A-delivery",
+            "expires_at": "2026-06-25T20:25:00Z",
+            "notes": "Publish reconciliation handoff, response message, and mark consumed GO answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-REQ-7095D30A-delivery",
+                "Area_comun/handoffs/HANDOFF-REQ-7095D30A-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-REQ-7095D30A-reconciled.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-REQ-7095D30A.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-REQ-7095D30A.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T19:25:00Z",
+            "status": "released",
+            "task_id": "REQ-7095D30A",
+            "updated_at": "2026-06-25T19:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-REQ-7095D30A-reconcile",
+            "expires_at": "2026-06-25T20:24:00Z",
+            "notes": "Reconcile delivered requirement REQ-7095D30A after TASK-0181 closure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-REQ-7095D30A-reconcile",
+                "Area_comun/state/TASK_INDEX.json#REQ-7095D30A",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-7095D30A",
+                "Area_comun/tasks/req-7095d30a-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T19:24:00Z",
+            "status": "released",
+            "task_id": "REQ-7095D30A",
+            "updated_at": "2026-06-25T19:24:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-TASK-0177",
             "expires_at": "2026-06-25T05:34:51Z",
             "notes": "Implement TASK-0177 voice dictation in Zeus-protocol and deliver to in_review.",

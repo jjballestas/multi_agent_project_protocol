@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "TASK-0181 quedo CERRADA in_review->done (close seq 1996, commit 6de1722). Reconcilia el requirement REQ-7095D30A a done via submit_intent (requirement->done exige implementer=Codex). Es el ultimo paso del modo necesidad. rr=false."

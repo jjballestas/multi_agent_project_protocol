@@ -1,0 +1,10 @@
+{
+  "idempotency_key": "Codex:REQ-7095D30A:delivery-release:20260625T192600Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260625-Codex-REQ-7095D30A-delivery"
+    }
+  ]
+}

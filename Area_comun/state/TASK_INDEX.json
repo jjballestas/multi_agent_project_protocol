@@ -635,7 +635,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "proposed",
+            "status": "done",
             "title": "registro de requerimientos por dictado",
             "type": "requirement"
         },
