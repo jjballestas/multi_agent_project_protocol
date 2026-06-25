@@ -4,7 +4,7 @@ task_id: REQ-7095D30A
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "REQ-7095D30A reconciliado a done via submit_intent; TASK-0181 queda completamente cerrado."
