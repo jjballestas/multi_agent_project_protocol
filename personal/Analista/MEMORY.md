@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0181 review2 modo necesidad; CAMBIO-REQUERIDO; #4 ON).
+> Ultima actualizacion: 2026-06-25 (TASK-0181 review3 modo necesidad; CAMBIO-REQUERIDO por full npm gate; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,18 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0181 review3 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `1d48e8d`
+  (`review(TASK-0181): Analista blocks review3 full npm gate`). Ancla producto `325bcfb`
+  y protocolo REVIEW3 `bb56ac6` (repo vivo al arranque `c613922`). Correccion de metadata cliente pasa por
+  comportamiento: payload propio `file.name` con email/telefono/direccion atesta `source-bb69be828ff9.txt`
+  sin literales; `mimeType` con email/telefono atesta `source-e7156e94f3d1.txt` sin literales; `file.title`
+  extra con email devuelve HTTP 400 sin atestacion ni fuga. Targeted
+  `npm test -- --test-name-pattern "TASK-0181|AC3-ter|file name|need extraction"` exit 0, 4/4; canonicalReader
+  exit 0, 6/6. Bloqueo: full `npm test` en clon limpio del producto `325bcfb` timeout `exit 124` a 604s,
+  por tanto no cerrable bajo la instruccion que gatea por EXIT. Gates protocolo: validate con secretos exit 0,
+  validate sin secretos exit 0, drift vivo 0 `up_to_seq=1993`, neutralidad/encoding exit 0, #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. MSG a Arquitecto rr=true pide
+  full npm verde o hardening antes de cierre.
 - TASK-0181 review2 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `f30ef65`
   (`review(TASK-0181): Analista blocks review2`). Ancla producto
   `f24f846a85009e36f6757666f53116b340da7b1e` y protocolo/instruccion
