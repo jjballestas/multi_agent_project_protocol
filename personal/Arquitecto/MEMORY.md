@@ -2,7 +2,30 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 67cc782 (PUSHED), v1.14.0 (#4 enforce/auth ON). **3 GO en cola de Codex.**
+> Ultima actualizacion: 2026-06-25, HEAD a12ee6d (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0179+REQ-520BBC1888 cerrados; TASK-0180 in_review.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD a12ee6d PUSHED) -- entregas Codex: 2 cerradas, TASK-0180 pendiente cierre <<<
+- **Codex despertado (cron estaba MUERTO por bug stop-regex) entrego las 3 piezas; yo checker, Analista gatekeeper:**
+  1. **TASK-0179 (dictado voz v2) CERRADO in_review->done (a12ee6d).** Producto Zeus a25f44a (Co-Author Codex OK).
+     Checker Arquitecto clon limpio: AC1-AC4 es-CO + captura manual continuous Stop/timer/indicador + append; full
+     node --test exit 0; diff solo presentacion sin server.js/fetch/socket. Analista OK->CERRABLE (egress opt-in
+     intacto, validate con/sin secretos exit 0, drift 0, #4 byte-identica). Mensajes a answered. seq 1964.
+  2. **REQ-520BBC1888 RECONCILE->done (Codex, fd8800a).** Resuelto por diseno (firmante=ceremonia, no toggle).
+  3. **TASK-0180 (carga archivo v2 Fase B) in_review -- FALTA CERRAR.** Producto Zeus **0b8593a**. Checker
+     Arquitecto clon limpio VERDE: targeted no-LLM determinista PASS (DETERMINISTIC_FILE_CONSUMER, provider
+     deterministic-local, maxCandidates 1, marcador none_deterministic_no_llm, rama determinista SIN
+     fetch/localVlm/http/net, browser sin modelo); store .runtime/file-candidates gitignored OFF-by-default; gate
+     PII humano DURO (server.js:1432 piiReviewed!==true -> bloqueado); full node --test 90/90 exit 0.
+     **PENDIENTE: pasada del Analista (foco gate PII + no-egress) -> luego cierro in_review->done.**
+- **ANOMALIA DECISION-0018 (TASK-0180):** 0b8593a SIN `Co-Authored-By: Codex` (TASK-0179 si lo tenia). Viola DoD/
+  GO (atribucion honesta). Commit LOCAL no pusheado -> amendable. Pendiente: decidir con operador (amendar como
+  Arquitecto anadiendo el trailer, o levantar a Codex). NO bloquea funcionalidad.
+- **BUG cron stop-regex (DECISION-0018):** Test-ArquitectoStopOrder (codex/analista_mailbox_cron.ps1 ~167) apaga
+  el cron si un msg Arquitecto->peer tiene (detener|para|stop|...)+( cron|monitor|Codex/Analista) en UNA linea.
+  Mi GO-TASK-0179 ("boton detener/stop") MATO el cron de Codex 2 veces (12:52, 14:30). Relanzo sin
+  -ExecutionPolicy Bypass (el clasificador BLOQUEA esa bandera; powershell:* esta allow). Arreglo de fondo: usar
+  SOLO el `.stop` file. Codex cron AHORA MUERTO (sin trabajo pendiente; relanzar si hay CAMBIO). Analista cron VIVO.
+  Al redactar msgs a un peer, EVITAR stop-word + (cron|monitor|peer) en la misma linea.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD 67cc782 PUSHED) -- 3 GO encolados a Codex (revision de pendientes) <<<
 - **Revise los pendientes con el operador; decidio avanzar 2 (+ el dictado ya en curso). En cola de Codex (cron
