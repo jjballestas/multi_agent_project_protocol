@@ -7941,6 +7941,22 @@
             "updated_at": "2026-06-24T23:33:13Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-coauthor-anomaly-0b8593a",
+            "expires_at": "2026-06-25T16:00:00+02:00",
+            "notes": "Responder anomalia de atribucion de commit producto TASK-0180 sin cambio de ledger de tarea.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-coauthor-anomaly-0b8593a",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-ANOMALIA-coauthor-0b8593a.md",
+                "Area_comun/mailbox/archived/MSG-20260625-Arquitecto-to-Codex-ANOMALIA-coauthor-0b8593a.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-ANOMALIA-coauthor-0b8593a-fyi.md"
+            ],
+            "started_at": "2026-06-25T15:00:00+02:00",
+            "status": "released",
+            "task_id": "TASK-0180",
+            "updated_at": "2026-06-25T15:00:00+02:00"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-reconcile-REQ-003AE958",
             "expires_at": "2026-06-25T02:13:40Z",
             "notes": "Reconcile delivered voice dictation requirement after TASK-0177 closure.",

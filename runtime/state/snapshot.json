@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "53e4267010b20714d7f6fc9401afaf4eb99ecf855be67e2b4014439ac4ccaca7",
+  "canonical_hash": "18f92265c835a270d29033dd56a7b05d135a847cecc8c11d5794d60102dcafa9",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -529,7 +529,7 @@
       "TASK-0177": 8,
       "TASK-0178": 1,
       "TASK-0179": 8,
-      "TASK-0180": 12,
+      "TASK-0180": 14,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -537,7 +537,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1296,
+    "events_applied": 1298,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1191,6 +1191,7 @@
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
       "codex-carril-a-monitor-release-2026-06-19T15:33:55Z": 688,
+      "codex-claim-coauthor-anomaly-20260625-acquire": 1968,
       "codex-cron-executor-config:release": 1103,
       "codex-reconcile-REQ-003AE958-claim-acquire": 1928,
       "codex-reconcile-REQ-003AE958-claim-release": 1930,
@@ -1202,6 +1203,7 @@
       "codex-reconcile-REQ-520BBC1888-delivery-claim-acquire": 1960,
       "codex-reconcile-REQ-520BBC1888-delivery-claim-release": 1961,
       "codex-reconcile-REQ-520BBC1888-task-status-done": 1958,
+      "codex-release-coauthor-anomaly-20260625-release": 1969,
       "codex-task-0158-claim-20260623b": 1246,
       "codex-task-0158-claim-delivery-20260623": 1251,
       "codex-task-0158-claim-delivery-release-20260623-noarchive": 1253,
@@ -1837,5 +1839,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1967
+  "up_to_seq": 1969
 }
