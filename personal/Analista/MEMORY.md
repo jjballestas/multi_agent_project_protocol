@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0181 modo necesidad; CAMBIO-REQUERIDO; #4 ON).
+> Ultima actualizacion: 2026-06-25 (TASK-0181 review2 modo necesidad; CAMBIO-REQUERIDO; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0181 review2 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `f30ef65`
+  (`review(TASK-0181): Analista blocks review2`). Ancla producto
+  `f24f846a85009e36f6757666f53116b340da7b1e` y protocolo/instruccion
+  `58ea6d2df63b141321068b11b1870f9d2a92ec85`. Clon limpio producto:
+  `npm test` exit 124 por timeout externo a 604s; rerun `npm test -- --test-reporter=tap`
+  exit 124 a 904s; `node --test tests/staticContract.test.js` exit 124 a 244s.
+  Targeted `TASK-0181` exit 0, 2/2; AC3-bis ampliado con familias PII en `file.text`
+  exit 0, 1/1. Escape nuevo falsable: mutar el POST real a `file.name =
+  "persona@example.com.txt"` hace que el email quede atestado en `source_file_name` y
+  `title` dentro de `intents/events`; el front de necesidad fija `necesidad.txt`, pero
+  el endpoint no debe confiar en metadata controlada por cliente si la garantia es no colar
+  PII al artefacto #4. Gates protocolo: validate con secretos exit 0, validate sin secretos
+  exit 0, drift vivo 0 `up_to_seq=1987`, neutralidad/encoding exit 0, #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  MSG a Arquitecto rr=true pidiendo devolver a Codex para estabilizar full suite y
+  redacted/constant server-side de `file.name`.
 - TASK-0181 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `0d63b98`
   (`review(TASK-0181): Analista requires need intake fixes`). Ancla producto
   `2d7e80535f52f6e71dd1bf9b0a6425d1d7325195` (`feat(intake): add need extraction mode`)
