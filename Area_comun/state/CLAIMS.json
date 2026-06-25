@@ -8139,6 +8139,47 @@
             "updated_at": "2026-06-25T13:31:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-TASK-0182",
+            "expires_at": "2026-06-26T19:35:00Z",
+            "notes": "TASK-0182: harden Zeus full node --test duration without reducing coverage or raising timeouts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0182",
+                "Area_comun/state/TASK_INDEX.json#TASK-0182",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0182",
+                "Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0182.md",
+                "D:/Agentes/Zeus/Zeus-protocol/package.json",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T19:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0182",
+            "updated_at": "2026-06-25T19:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-TASK-0182-delivery",
+            "expires_at": "2026-06-26T20:05:00Z",
+            "notes": "TASK-0182 delivery handoff, Arquitecto mailbox notice, and consumed GO answer.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0182-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0182-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0182-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0182.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0182.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T20:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0182",
+            "updated_at": "2026-06-25T20:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-answer-go-c1edd835",
             "expires_at": "2026-06-25T00:33:13Z",
             "notes": "Move consumed REQ-C1EDD835 reconciliation GO to answered after ledger-backed status flip.",

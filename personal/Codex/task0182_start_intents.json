@@ -1,0 +1,37 @@
+{
+  "idempotency_key": "Codex:TASK-0182:start:20260625T193500Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260625-Codex-TASK-0182",
+        "owner": "Codex",
+        "task_id": "TASK-0182",
+        "status": "active",
+        "started_at": "2026-06-25T19:35:00Z",
+        "updated_at": "2026-06-25T19:35:00Z",
+        "expires_at": "2026-06-26T19:35:00Z",
+        "notes": "TASK-0182: harden Zeus full node --test duration without reducing coverage or raising timeouts.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0182",
+          "Area_comun/state/TASK_INDEX.json#TASK-0182",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0182",
+          "Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md",
+          "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0182.md",
+          "D:/Agentes/Zeus/Zeus-protocol/package.json",
+          "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+          "D:/Agentes/Zeus/Zeus-protocol/README.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0182",
+      "from": "ready",
+      "to": "in_progress"
+    }
+  ]
+}

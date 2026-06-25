@@ -4,6 +4,18 @@ Last updated: 2026-06-25 Europe/Madrid, after REQ-7095D30A reconciliation.
 
 ## Latest Session Note
 
+- TASK-0182 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `6b2b37c test(intake): isolate slow subprocess suite`. The default `npm test`/`node --test` gate now keeps
+  subprocess-heavy protocol write-real cases in a separate slow tier by marking them with `slowTest`; default
+  wall-clock observed after the change was 1.918s, 2.468s, and 2.650s across three consecutive runs. The moved tier
+  remains executable with `ZEUS_RUN_SLOW_TESTS=1 node --test` (or the `test:slow` wrapper) and includes the PII
+  attestation, no-bypass, no-egress, local-vlm, candidate-review, runtime-control, mailbox-send, file-ingestion, and
+  auto-commit-push behavior checks. No production file (`src/server.js` / `public/app.js`) was changed.
+  Protocol delivery for TASK-0182 moved the task to `in_review`, released Codex claims, moved the consumed GO to
+  answered, opened `MSG-20260625-Codex-to-Arquitecto-TASK-0182-in-review.md`, and wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0182-codex-to-arquitecto-1.md`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4 byte-identica
+  `up_to_seq` 2010.
 - REQ-7095D30A reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol` with message
   `coord(REQ-7095D30A): reconcile need intake requirement`. Codex processed
   `MSG-20260625-Arquitecto-to-Codex-GO-reconcile-REQ-7095D30A.md` after TASK-0181 was closed by Arquitecto, moved

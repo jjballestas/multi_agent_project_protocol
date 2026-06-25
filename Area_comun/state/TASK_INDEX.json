@@ -2837,7 +2837,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0086",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front: robustecer/aislar el full-suite de Zeus para que el gate node --test complete bajo el cap del harness del revisor (deuda tecnica)",
             "type": "product"
         },
