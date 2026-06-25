@@ -7724,6 +7724,25 @@
             "updated_at": "2026-06-25T00:55:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-register-0179",
+            "expires_at": "2026-06-25T16:49:45Z",
+            "notes": "Register TASK-0179 (dictado por voz v2: idioma es-CO + captura manual con stop + indicador, SPEC-0094) as ready for Codex; follow-up of TASK-0177 from operator session feedback (capturaba en ingles + UX de captura manual).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0179-codex-front-dictado-voz-idioma-captura.md",
+                "Area_comun/specs/SPEC-0094-front-dictado-voz-v2-idioma-captura.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T10:49:45Z",
+            "status": "released",
+            "task_id": "TASK-0179",
+            "updated_at": "2026-06-25T10:49:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-review-0177",
             "expires_at": "2026-06-25T05:00:00Z",
             "notes": "Gatekeeper REVIEW to Analista for TASK-0177 (96eb019 voice dictation egress). File-scoped.",

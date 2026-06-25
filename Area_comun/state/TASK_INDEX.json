@@ -2765,6 +2765,19 @@
             "type": "design"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0179-codex-front-dictado-voz-idioma-captura.md",
+            "id": "TASK-0179",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0094",
+            "status": "ready",
+            "title": "Proyecto-front: dictado por voz v2 -- idioma es-CO + captura manual con stop + indicador de grabacion (SPEC-0094)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
