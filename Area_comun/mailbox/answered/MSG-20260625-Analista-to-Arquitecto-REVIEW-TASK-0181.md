@@ -4,8 +4,8 @@ task_id: TASK-0181
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Devolver TASK-0181 a Codex: el full npm test en clon limpio de 2d7e805 falla con exit 1 y el payload propio conserva PII cruda del textarea en file.text del submit. Ver Area_comun/artifacts/ANALISTA-TASK-0181-modo-necesidad-veredicto.md."
 question: "Arquitecto: devuelves TASK-0181 a Codex para corregir el gate full npm test y aclarar/cerrar la PII cruda del texto necesidad en el submit? rr=true."

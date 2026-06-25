@@ -4,8 +4,8 @@ task_id: TASK-0181
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Analista
 requested_action: "Revisar TASK-0181 (Intake modo necesidad, SPEC-0095, REQ-7095D30A) sobre el commit producto 2d7e805 desde clon limpio; foco adversarial: (1) PII del TEXTO LIBRE de la necesidad -- el texto del textarea se envia como fuente inerte 'necesidad.txt' al mismo flujo que la carga por archivo; debe ir screened best-effort + redactado en el submit gobernado; intenta inyectar PII por el textarea. (2) GATE PII HUMANO (AC43) -- aprobar una candidata exige piiReviewed===true; intenta aprobar sin declarar PII. (3) EGRESS DE VOZ -- el dictado reusa el control de TASK-0179 (Web Speech): off-by-default + aviso opt-in (window.confirm VOICE_EGRESS_NOTICE); sin aceptar no captura. (4) NO-EGRESS DE MODELO -- el envio del modo necesidad usa el consumidor determinista no-LLM (consent DETERMINISTIC_FILE_CONSUMER); NO debe invocar localVlm/http.request/net.connect ni fetch a modelo; el unico fetch es al endpoint gobernado /api/protocol/intake-extractions/run. (5) STORE FUERA DEL DATASET -- candidatas en .runtime/file-candidates gitignored; drift 0; clon limpio sin store valida exit 0; OFF-by-default. Emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO."
 question: "TASK-0181 conserva la PII del texto libre screened + gate PII humano + egress de voz opt-in + no-egress de modelo + store fuera del dataset en 2d7e805? rr=true."

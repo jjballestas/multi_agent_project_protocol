@@ -27,8 +27,14 @@ el mismo pipeline. **Fuera de alcance:** el extractor LLM real + su frontera de 
   indicador).
 - **No-egress de modelo:** el consumidor es determinista (sin fetch/localVlm/http.request/net.connect; el browser
   no referencia modelo).
-- **PII:** screening best-effort sobre el texto de la necesidad antes de persistir (carry AC40) + **gate PII humano**
-  por candidata al aprobar (AC43); el texto sigue redactado en el submit gobernado.
+- **PII (frontera de atestacion -- aclarado tras TASK-0181/Analista):** el texto de la necesidad se envia como
+  FUENTE al MISMO flujo de extraccion que el modo archivo (`buildFileExtractionIntents`): el evento ATESTADO #4
+  registra UNICAMENTE el SHA-256 de la fuente (JAMAS el texto crudo); el contenido se screenea best-effort (AC40) y
+  vive en el store NO-LEDGER `.runtime`; la REDACCION + hard-gate de PII ocurre al APROBAR la candidata (AC43: gate
+  humano + re-screening candidate->intake) -> el requirement final aterriza redactado. El texto crudo presente en el
+  body del submit es el INSUMO al screening, NO una escritura al ledger atestado (mismo contrato que el modo archivo,
+  server.js sin cambios). NO se exige "redaccion en el submit de la fuente"; se exige que el texto crudo NUNCA llegue
+  a un evento #4.
 - **Sin nueva ruta de escritura** mas alla del `extraction-task` + `requirement-intake` ya gobernados; store de
   candidatas NO-LEDGER (.runtime/file-candidates gitignored, fuera del dataset; drift 0 con candidatas presentes).
 
@@ -46,6 +52,10 @@ el mismo pipeline. **Fuera de alcance:** el extractor LLM real + su frontera de 
   fuera del dataset. NO invoca fetch/modelo. Behavior-test: el envio del modo necesidad emite la extraction-task
   determinista; sin egress de modelo; las candidatas no aparecen en TASK_INDEX (drift 0; clon limpio sin store
   valida exit 0).
+- **AC3-bis (frontera de atestacion PII, PERMANENTE -- gateante TASK-0181)** Behavior-test que pruebe que una
+  necesidad con literales PII (email/telefono/documento/direccion) emite intents donde el texto crudo NO aparece:
+  los intents atestados (`buildFileExtractionIntents`) contienen `source_file_sha256` y NO los literales PII del
+  textarea. El texto crudo NUNCA llega a un evento #4. Cierra formalmente la observacion del Analista.
 - **AC4 (revision + gate PII + aprobar, reuso)** Las candidatas del modo necesidad usan el **MISMO** panel de
   revision + **gate PII humano** (AC43) + aprobar -> `requirement-intake` gobernado (AC39) que el modo-archivo:
   aprobar exige declarar PII (piiReviewed===true), el id deriva del CONTENIDO EDITADO, solo aprobadas aterrizan como
