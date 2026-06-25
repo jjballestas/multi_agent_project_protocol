@@ -2,7 +2,7 @@
 task_id: TASK-0180
 title: "Proyecto-front (RF-14): carga por archivo v2 FASE B - store no-ledger de candidatas + panel de revision + gate humano de PII + consumidor minimo NO-LLM (archivo entero = 1 candidato editable) (AC42 rama-archivo, AC43, AC44; SPEC-0086 ext10; DECISION-0056; REQ-D642E4D8)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

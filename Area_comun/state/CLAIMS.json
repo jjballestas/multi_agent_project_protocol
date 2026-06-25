@@ -7836,6 +7836,60 @@
             "updated_at": "2026-06-25T11:50:29Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-TASK-0180",
+            "expires_at": "2026-06-25T19:56:02Z",
+            "notes": "TASK-0180 product implementation claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0180",
+                "Area_comun/state/TASK_INDEX.json#TASK-0180",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0180",
+                "Area_comun/tasks/TASK-0180-codex-file-intake-v2-faseB.md",
+                "D:/Agentes/Zeus/Zeus-protocol/.gitignore",
+                "D:/Agentes/Zeus/Zeus-protocol/file-ingestion.config.json",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js"
+            ],
+            "started_at": "2026-06-25T11:56:02Z",
+            "status": "released",
+            "task_id": "TASK-0180",
+            "updated_at": "2026-06-25T11:56:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-TASK-0180-delivery",
+            "expires_at": "2026-06-25T14:17:28Z",
+            "notes": "TASK-0180 delivery artifacts and memory claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0180-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0180-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0180-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0180.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0180.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-25T12:17:28Z",
+            "status": "released",
+            "task_id": "TASK-0180",
+            "updated_at": "2026-06-25T12:17:28Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-TASK-0180-msgfix",
+            "expires_at": "2026-06-25T12:48:39Z",
+            "notes": "Fix TASK-0180 delivery mailbox metadata for validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-TASK-0180-msgfix",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0180-in-review.md"
+            ],
+            "started_at": "2026-06-25T12:18:39Z",
+            "status": "released",
+            "task_id": "TASK-0180",
+            "updated_at": "2026-06-25T12:18:39Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-answer-go-c1edd835",
             "expires_at": "2026-06-25T00:33:13Z",
             "notes": "Move consumed REQ-C1EDD835 reconciliation GO to answered after ledger-backed status flip.",

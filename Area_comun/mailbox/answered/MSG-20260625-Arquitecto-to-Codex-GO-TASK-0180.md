@@ -4,7 +4,7 @@ task_id: TASK-0180
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Implementar TASK-0180 (carga por archivo v2 FASE B, SPEC-0086 AC42 rama-archivo + AC43 + AC44; DECISION-0056; REQ-D642E4D8) en Zeus-protocol como maker, OFF-by-default, continuando TASK-0150 (Fase A). FASE B NO enciende el agente extractor (eso es Fase C): el productor de candidatas es un consumidor determinista NO-LLM (archivo entero = 1 candidato editable). Entregar: (1) consumidor minimo NO-LLM que consume la extraction-task de Fase A sin importar SDK de modelo ni abrir socket a host de LLM; (2) store NO-LEDGER de candidatas (gitignored, fuera del dataset, ciclo de vida que NO es task_status; drift 0 con candidatas presentes; clon limpio sin store valida exit 0); (3) panel de revision en el front (listar/editar/aprobar/descartar por candidata, read/edit local sin SDK/fetch de modelo); (4) gate HUMANO DURO de PII por candidata (aprobar exige declarar PII-revisada; re-screening en candidate->intake; id del requirement deriva del CONTENIDO EDITADO; solo aprobadas pasan por el requirement-intake existente AC39); (5) estados de extraccion explicitos + purga del raw al estado terminal + TTL huerfanos + procedencia PII-free determinista (AC44). #4 epoca 1.14.0 byte-identica; validate con/sin secretos exit 0; drift 0; behavior-tests permanentes; node --test clon limpio exit 0. Mover a in_review via submit_intent (claim file-scoped) cuando este verde. NO forjar commits del Arquitecto (Co-Authored-By Codex)."

@@ -1,9 +1,28 @@
 # Codex Memory
 
-Last updated: 2026-06-25 Europe/Madrid, after REQ-003AE958 reconciliation commit.
+Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
 
 ## Latest Session Note
 
+- TASK-0180 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `0b8593a feat(intake): add deterministic file candidate review`. Fase B now pins the versioned file-intake config
+  OFF by default with a deterministic-local, one-candidate, no-LLM consumer; the UI calls the deterministic consumer
+  consent (`DETERMINISTIC_FILE_CONSUMER`), candidate review state exposes `.runtime/file-candidates` as the
+  gitignored no-ledger store, deterministic extraction reports `none_deterministic_no_llm`, and candidate terminal
+  states persist `approved_at` while purging the raw upload. `.runtime/` is gitignored in the same product commit.
+  Permanent coverage `TASK-0180 file intake phase B uses a deterministic no-LLM candidate consumer` verifies
+  off-by-default config, one-candidate deterministic provider, no model endpoint in the browser, no network egress
+  in the deterministic branch, and the gitignored store. Evidence before memory update: `node --check src/server.js
+  public/app.js tests/staticContract.test.js` OK, product `git diff --check -- .gitignore file-ingestion.config.json
+  src/server.js public/app.js tests/staticContract.test.js` OK, targeted `npm test -- --test-name-pattern
+  "TASK-0180|file intake creates extraction tasks"` PASS, full product `npm test` PASS 90/90, and local smoke on
+  port 4254 OK for `/healthz` plus `/api/protocol/actions`.
+  Protocol delivery moved TASK-0180 to `in_review`, released Codex claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0180-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0180-in-review.md`, moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0180.md`, and committed with message
+  `coord(TASK-0180): deliver file intake phase B`. Final protocol evidence before delivery commit: encoding OK,
+  neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4 byte-identica `up_to_seq` 1956.
 - TASK-0179 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a25f44a feat(intake): improve voice dictation capture`. The Intake voice controls now force Web Speech
   recognition to Spanish (`es-CO`, with documented fallback list `es-419` -> `es-ES`) independent of browser and

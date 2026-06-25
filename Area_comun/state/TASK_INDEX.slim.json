@@ -46,7 +46,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B -- store no-ledger de candidatas + panel de revision + gate humano de PII + consumidor minimo NO-LLM (AC42 rama-archivo, AC43, AC44; SPEC-0086; DECISION-0056; REQ-D642E4D8)"
         }
     ],
