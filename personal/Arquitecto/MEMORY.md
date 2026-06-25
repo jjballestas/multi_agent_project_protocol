@@ -2,9 +2,28 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 4fd7275 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CAMBIO2->Codex: el Analista hallo leak PII REAL por file.name (atestado en source_file_name/title); verificado por mi en codigo; devuelto a Codex con fix server-side + AC3-ter. Codex cron tomo el CAMBIO2 (19:13).**
+> Ultima actualizacion: 2026-06-25, HEAD bb56ac6 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181: Codex corrigio el leak file.name (325bcfb); checker Arquitecto VERDE (full 93/93 + AC3-ter); REVIEW3 al Analista enviado; espero veredicto para cerrar.**
 
-## >>> RESUME 2026-06-25 (HEAD 4fd7275) -- TASK-0181 CAMBIO2 a Codex (leak PII file.name, hallazgo Analista) <<<
+## >>> RESUME 2026-06-25 (HEAD bb56ac6) -- TASK-0181 fix file.name VERDE, REVIEW3 al Analista <<<
+- **Codex corrigio el leak (Zeus 325bcfb "fix(intake): redact file metadata before attestation"):**
+  `sanitizeIngestedFile` deriva `publicName = source-<sha12><ext>`; `title` (server.js:826) y `source_file_name`
+  (837) usan `publicName`, NO `upload.name`; el nombre crudo del cliente queda solo en el store/purge no-ledger,
+  NUNCA en intents/events. Verifique que no quede otro `upload.name` en builders atestados.
+- **Checker Arquitecto VERDE (clon limpio Zeus @ 325bcfb, ventana quieta tras EXEC_EXIT de Codex):** targeted
+  TASK-0181 PASS 4/4 incl. AC3-bis (file.text) y **AC3-ter** (POST con `file.name=persona@example.com.txt` -> email
+  NO en intents/events; aparece `source-<12hex>.txt`; drift 0); **full `node --test` EXIT 0, 93/93 pass, 0 fail.**
+  Co-Author OK. El timeout de review2 del Analista era flake ambiental bajo carga (yo verde en ventana quieta).
+- **REVIEW3 al Analista enviado** (MSG-Arquitecto-to-Analista-REVIEW3-TASK-0181 en open/, commit bb56ac6 PUSHED).
+  Codex changes2 movido a answered. TASK-0181 in_review.
+- **PROXIMO PASO:** recoger veredicto del Analista. Si OK->CERRABLE: cerrar TASK-0181 in_review->done (claim
+  file-scoped CLOSE-0181 via submit_intent -> task_status -> release) en ventana segura (0 claims, sin peer
+  mid-exec); answered + commit/push + memoria; luego GO a Codex reconcile REQ-7095D30A->done. Si CAMBIO -> a Codex.
+- **LECCION checker:** AC3-bis solo cubrio file.text; el Analista atrapo file.name. Al verificar fronteras PII,
+  mutar TODOS los campos controlados por cliente (file.name/mimeType/title), no solo el body ([[checker-test-real-write-path]]).
+- **PERMISO (2026-06-25):** operador autorizo TODO Bash -> `Bash(*)` en .claude/settings.local.json (personal/gitignored)
+  ([[permission-auto-exec]]); barreras vigentes ask reset/rebase, deny force-push/secretos.
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 4fd7275) -- TASK-0181 CAMBIO2 a Codex (leak PII file.name, hallazgo Analista) <<<
 - **El Analista (review2) dio CAMBIO-REQUERIDO con un hallazgo NUEVO Y REAL que mi checker y AC3-bis PASARON POR
   ALTO:** un POST real con `file.name = "persona@example.com.txt"` atesta el email crudo en `source_file_name`
   (server.js:837) y en `title` (server.js:826 `Extraction request from ${upload.name}`) dentro de intents/events #4.
