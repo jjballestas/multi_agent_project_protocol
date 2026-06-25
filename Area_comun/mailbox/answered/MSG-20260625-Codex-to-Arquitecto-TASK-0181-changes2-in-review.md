@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 created_at: 2026-06-25T13:41:00Z
 one_line_summary: "TASK-0181 CAMBIO2 listo: metadata file.name PII ya no se atesta; AC3-ter y full npm test clean-clone PASS."
