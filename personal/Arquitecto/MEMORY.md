@@ -2,7 +2,30 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 6de3035 (PUSHED), v1.14.0 (#4 enforce/auth ON). **GO TASK-0179 emitido.**
+> Ultima actualizacion: 2026-06-25, HEAD 67cc782 (PUSHED), v1.14.0 (#4 enforce/auth ON). **3 GO en cola de Codex.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD 67cc782 PUSHED) -- 3 GO encolados a Codex (revision de pendientes) <<<
+- **Revise los pendientes con el operador; decidio avanzar 2 (+ el dictado ya en curso). En cola de Codex (cron
+  vivo), maker=Codex/checker=Arquitecto+Analista, gates verdes clon limpio:**
+  1. **TASK-0179** (SPEC-0094) dictado por voz v2 -- idioma es-CO + captura manual con stop/indicador. Ver
+     checkpoint previo.
+  2. **TASK-0180 ready/Codex (SPEC-0086 AC42 rama-archivo/AC43/AC44, DECISION-0056, REQ-D642E4D8):** carga por
+     archivo v2 **FASE B**. Fase A (TASK-0150, done) ya dio el plumbing (upload server NO-MODELO-egress + screening
+     PII + store fuera del dataset + SHA-256 + emit extraction-task + selector de modo). Fase B = panel de revision
+     de candidatas + **gate HUMANO DURO de PII** (AC43, aprobar exige declarar PII-revisada; id deriva del contenido
+     editado; solo aprobadas pasan por el requirement-intake AC39) + estados/purga/procedencia (AC44) + **consumidor
+     minimo NO-LLM** (archivo entero = 1 candidato editable) que cierra el flujo archivo de extremo a extremo SIN
+     encender el extractor. **Fase C (agente extractor real = ventana de modelo + endurecimiento AC45/AC46 allowlist
+     deny-all sobre todo src/**) NO esta en esta tarea, queda gateada.** Store de candidatas NO-LEDGER/gitignored,
+     estado NO es task_status, drift 0 con candidatas presentes, clon limpio sin store valida exit 0.
+  3. **REQ-520BBC1888 -> RECONCILE a done** (GO a Codex; requirement->done exige implementer=Codex). Resuelto por
+     DISENO (US-5): firmante #4 = ceremonia (re-genesis-boundary), no toggle; garantizado por el guard TASK-0086 +
+     el ensayo US-5 (genesis mismatch). Sin codigo nuevo. Operador confirmo cerrarlo.
+- **PENDIENTES que QUEDAN tras esto:** TASK-0118 (DEF-PII, diferida/gated al publicar dataset); TASK-0178
+  (consola del Arquitecto en el front, diseno mio cuando el operador lo pida; captura vision NOVA); REQ-D642E4D8
+  Fase C (extractor LLM, gateada). El operador dejo TASK-0118 y TASK-0178 para despues.
+- **GATES:** los 3 registros/GO con validate exit 0, drift 0, seq 1942. submit_intent transacciones atomicas
+  REGISTER-0179/0180 (claim file-scoped->task_upsert->release); GOs/reconcile como msgs open rr=true a Codex.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD 6de3035 PUSHED) -- GO TASK-0179 dictado voz v2 (en cola de Codex) <<<
 - **TASK-0179 ready/Codex (SPEC-0094), GO emitido (MSG open a Codex), commit 6de3035 pusheado a main.** Follow-up
