@@ -482,7 +482,7 @@
                 "extraction_task_id": "TASK-EXTRACT-1F5C13A7B5",
                 "source_file_sha256": "4eb704a9a9ad3344226cc8bdc1c9b2ec215385416abe8aa792a44a384507c2d2"
             },
-            "status": "proposed",
+            "status": "done",
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle",
             "type": "requirement"
         },

@@ -4,7 +4,7 @@ task_id: REQ-520BBC1888
 type: RECONCILE
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Reconciliar REQ-520BBC1888 (proposed -> done) via submit_intent (task_upsert con status done; claim file-scoped sobre Area_comun/state/*.json + Area_comun/tasks/req-520bbc1888-requirement-seed.md + runtime/state/*). Justificacion: la intencion de aceptacion ('el alta efectiva de un agente firmante exige ceremonia de re-genesis con provisioning de clave y aprobacion del operador; nunca un toggle') YA SE CUMPLE por el mecanismo #4 existente -- el guard TASK-0086 (authoritative=>enforce=>materialize=>enabled) rechaza un firmante sin ceremonia, y el ensayo US-5 (2026-06-25, clon limpio descartado, vivo NUNCA tocado) confirmo que agregar un firmante da genesis mismatch y exige re-genesis-boundary completo. No hay codigo nuevo: entregado por el diseno/mecanismo vigente. Atribucion relay honesto author=Operador/relayed_by=Arquitecto; #4 byte-identica; validate exit 0; drift 0. Confirmado por el operador en sesion 2026-06-25."

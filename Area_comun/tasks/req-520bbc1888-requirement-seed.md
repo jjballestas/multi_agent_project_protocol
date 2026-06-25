@@ -2,7 +2,7 @@
 task_id: "REQ-520BBC1888"
 title: "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"

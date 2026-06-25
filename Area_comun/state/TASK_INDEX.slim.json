@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "tasks": [
         {
-            "id": "REQ-520BBC1888",
-            "owner": "Operador",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "proposed",
-            "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
-        },
-        {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
             "phase": "P2",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "37c8baf1e6bdd8afc46a52c6d604bb20ded8f9908e7bf359084b6b56403cd56f",
+  "canonical_hash": "5321913a9591fe3d3e7c06ac4a515b0cd8eb3675f63e44314aaa06db04a00464",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -288,6 +288,8 @@
       "CLAIM-20260625-Codex-answer-go-c1edd835": 1,
       "CLAIM-20260625-Codex-reconcile-REQ-003AE958": 1,
       "CLAIM-20260625-Codex-reconcile-REQ-003AE958-delivery": 1,
+      "CLAIM-20260625-Codex-reconcile-REQ-520BBC1888": 1,
+      "CLAIM-20260625-Codex-reconcile-REQ-520BBC1888-delivery": 1,
       "CLAIM-20260625-Codex-reconcile-c1edd835": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -432,7 +434,7 @@
       "REQ-4120B017": 4,
       "REQ-444E0DE5": 4,
       "REQ-4A88ECFFC4": 4,
-      "REQ-520BBC1888": 3,
+      "REQ-520BBC1888": 6,
       "REQ-524372E9": 4,
       "REQ-547C6C54": 4,
       "REQ-643B160A": 4,
@@ -533,7 +535,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1285,
+    "events_applied": 1290,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1187,6 +1189,11 @@
       "codex-reconcile-REQ-003AE958-delivery-claim-acquire": 1931,
       "codex-reconcile-REQ-003AE958-delivery-claim-release": 1932,
       "codex-reconcile-REQ-003AE958-task-status-done": 1929,
+      "codex-reconcile-REQ-520BBC1888-claim-acquire": 1957,
+      "codex-reconcile-REQ-520BBC1888-claim-release": 1959,
+      "codex-reconcile-REQ-520BBC1888-delivery-claim-acquire": 1960,
+      "codex-reconcile-REQ-520BBC1888-delivery-claim-release": 1961,
+      "codex-reconcile-REQ-520BBC1888-task-status-done": 1958,
       "codex-task-0158-claim-20260623b": 1246,
       "codex-task-0158-claim-delivery-20260623": 1251,
       "codex-task-0158-claim-delivery-release-20260623-noarchive": 1253,
@@ -1822,5 +1829,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1956
+  "up_to_seq": 1961
 }

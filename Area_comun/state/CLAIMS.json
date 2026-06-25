@@ -7938,6 +7938,41 @@
             "updated_at": "2026-06-25T00:14:03Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-reconcile-REQ-520BBC1888",
+            "expires_at": "2026-06-25T14:21:00Z",
+            "notes": "Reconcile delivered REQ-520BBC1888 to done by existing #4 ceremony mechanism and operator-confirmed US-5 evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-reconcile-REQ-520BBC1888",
+                "Area_comun/state/TASK_INDEX.json#REQ-520BBC1888",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-520BBC1888",
+                "Area_comun/tasks/req-520bbc1888-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T12:21:00Z",
+            "status": "released",
+            "task_id": "REQ-520BBC1888",
+            "updated_at": "2026-06-25T12:21:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-reconcile-REQ-520BBC1888-delivery",
+            "expires_at": "2026-06-25T14:22:00Z",
+            "notes": "Delivery artifacts and consumed-message answer for REQ-520BBC1888 reconciliation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-reconcile-REQ-520BBC1888-delivery",
+                "Area_comun/handoffs/HANDOFF-REQ-520BBC1888-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-REQ-520BBC1888-reconciled.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-RECONCILE-REQ-520BBC1888.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-RECONCILE-REQ-520BBC1888.md"
+            ],
+            "started_at": "2026-06-25T12:22:00Z",
+            "status": "released",
+            "task_id": "REQ-520BBC1888",
+            "updated_at": "2026-06-25T12:22:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-reconcile-c1edd835",
             "expires_at": "2026-06-25T01:32:49Z",
             "notes": "Reconcile delivered REQ-C1EDD835 to done after TASK-0176 closure. File-scoped.",

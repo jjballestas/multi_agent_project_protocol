@@ -99,7 +99,7 @@
         {
             "id": "REQ-520BBC1888",
             "owner": "Operador",
-            "status": "proposed",
+            "status": "done",
             "title": "Proponer un agente que firma el ledger inicia una ceremonia, no un toggle"
         },
         {
