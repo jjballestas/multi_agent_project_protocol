@@ -2,7 +2,17 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 2f315ce (PUSHED), v1.14.0 (#4 enforce/auth ON). **3 entregas + anomalia Co-Author CERRADAS; cola VACIA; Codex cron VIVO.**
+> Ultima actualizacion: 2026-06-25, HEAD 604b4d4 (PUSHED), v1.14.0 (#4 enforce/auth ON). **NUEVO GO TASK-0181 (REQ-7095D30A) en cola de Codex.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD 604b4d4 PUSHED) -- GO TASK-0181: Intake modo necesidad <<<
+- **NUEVO REQ-7095D30A (operador via intake) -> SPEC-0095 + TASK-0181 ready/Codex, GO emitido (seq 1975).** Tercer
+  modo de Intake "Necesidad" (dictar/escribir) junto a Manual y Por archivo: textarea grande + dictado de voz
+  (REUSO TASK-0179) + botonera modo-archivo; la necesidad va al MISMO consumidor determinista no-LLM de TASK-0180
+  -> candidatas -> panel revision + gate PII humano -> requirement-intake gobernado. **Decision operador: motor
+  DETERMINISTA no-LLM (ya, 1 candidata); extractor LLM Fase C FUERA de alcance** (hereda 1..N al encender Fase C).
+  Es una nueva SUPERFICIE DE ENTRADA (textarea/voz) al pipeline ya entregado. maker=Codex / checker=Arquitecto +
+  Analista (PII texto libre + egress voz opt-in + no-egress modelo + store fuera dataset). REQ-7095D30A sigue
+  proposed (reconcile a done al entregar TASK-0181). Codex cron VIVO -> tomara el GO.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD 2f315ce PUSHED) -- anomalia Co-Author resuelta + reconcile; Codex relanzado <<<
 - **Anomalia Co-Author (TASK-0180) RESUELTA:** Codex amendo el commit de producto Zeus **0b8593a -> 3b2d49a**
