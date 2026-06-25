@@ -32,6 +32,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
+        },
+        {
+            "id": "TASK-0181",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)"
         }
     ],
     "view": "task_index.slim"

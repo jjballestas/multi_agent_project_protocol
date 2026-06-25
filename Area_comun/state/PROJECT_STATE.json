@@ -793,6 +793,12 @@
             "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B -- store no-ledger de candidatas + panel de revision + gate humano de PII + consumidor minimo NO-LLM (AC42 rama-archivo, AC43, AC44; SPEC-0086; DECISION-0056; REQ-D642E4D8)"
         },
         {
+            "id": "TASK-0181",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

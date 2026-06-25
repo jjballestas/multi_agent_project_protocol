@@ -2815,6 +2815,20 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0181-codex-front-intake-modo-necesidad.md",
+            "id": "TASK-0181",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spawned_from": "REQ-7095D30A",
+            "spec_id": "SPEC-0095",
+            "status": "ready",
+            "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

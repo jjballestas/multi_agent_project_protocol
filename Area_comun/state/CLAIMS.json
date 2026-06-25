@@ -7797,6 +7797,25 @@
             "updated_at": "2026-06-25T11:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-register-0181",
+            "expires_at": "2026-06-25T22:00:00Z",
+            "notes": "Register TASK-0181 (Intake modo necesidad dictar/escribir -> pipeline determinista no-LLM -> candidatas, SPEC-0095) as ready for Codex; spawned from REQ-7095D30A. Reusa TASK-0179 (voz) + TASK-0180 (pipeline Fase B). NO enciende el extractor LLM (Fase C).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0181-codex-front-intake-modo-necesidad.md",
+                "Area_comun/specs/SPEC-0095-front-intake-modo-necesidad-dictado.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T14:00:30Z",
+            "status": "released",
+            "task_id": "TASK-0181",
+            "updated_at": "2026-06-25T14:00:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-review-0177",
             "expires_at": "2026-06-25T05:00:00Z",
             "notes": "Gatekeeper REVIEW to Analista for TASK-0177 (96eb019 voice dictation egress). File-scoped.",
