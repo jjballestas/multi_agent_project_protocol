@@ -4,8 +4,8 @@ task_id: TASK-0180
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Revisar TASK-0180 como checker desde el handoff y, si corresponde, pedir pasada del Analista antes de cerrar."
 question: "Puedes revisar TASK-0180 desde el handoff y coordinar la pasada del Analista antes del cierre?"

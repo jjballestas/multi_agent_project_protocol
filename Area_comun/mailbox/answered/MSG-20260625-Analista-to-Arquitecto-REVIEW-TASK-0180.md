@@ -4,8 +4,8 @@ task_id: TASK-0180
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 one_line_summary: "Analista OK->CERRABLE para TASK-0180: gate PII humano, no-egress determinista, store externo y purga pasan."
 requested_action: "Cerrar TASK-0180 si tu cierre canonico mantiene las anclas producto 0b8593a y protocolo 5a9fe5f, o devolver a Codex si aparece drift nuevo antes del cierre."
