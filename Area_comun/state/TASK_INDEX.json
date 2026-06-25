@@ -2750,7 +2750,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0093",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: dictado por voz en narrativa e intencion del Intake (REQ-003AE958, SPEC-0093)",
             "type": "product"
         },

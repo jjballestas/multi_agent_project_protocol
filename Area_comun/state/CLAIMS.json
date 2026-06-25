@@ -7608,6 +7608,28 @@
             "updated_at": "2026-06-24T21:59:28Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-close-0177",
+            "expires_at": "2026-06-25T05:00:00Z",
+            "notes": "Close TASK-0177 (dictado) + archive MSGs. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Arquitecto-close-0177",
+                "Area_comun/state/TASK_INDEX.json#TASK-0177",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0177",
+                "Area_comun/tasks/TASK-0177-codex-front-dictado-voz.md",
+                "Area_comun/mailbox/open/MSG-20260625-Analista-to-Arquitecto-TASK-0177-dictado-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260625-Analista-to-Arquitecto-TASK-0177-dictado-OK.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177.md",
+                "Area_comun/mailbox/archived/MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review.md"
+            ],
+            "started_at": "2026-06-25T01:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0177",
+            "updated_at": "2026-06-25T01:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-close-batch",
             "expires_at": "2026-06-25T03:00:00Z",
             "notes": "Close TASK-0174/0175/0176 (verified) + archive MSGs. File-scoped.",

@@ -4,7 +4,7 @@ task_id: TASK-0177
 type: REVIEW
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revisar TASK-0177 (dictado por voz en el Intake, SPEC-0093) sobre el commit producto 96eb019 desde clon limpio; foco adversarial en la FRONTERA DE EGRESS: el dictado usa Web Speech API (puede enviar audio a un servicio externo del navegador). Confirmar que es off-by-default + opt-in con AVISO de egress en la primera captura, degrada limpio si no hay soporte, es textarea-only (NO emite submit_intent / sin nueva ruta de escritura) y el texto sigue redactado en el submit gobernado. Emitir veredicto OK->CERRABLE o CAMBIO-REQUERIDO."

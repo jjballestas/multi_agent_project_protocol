@@ -4,7 +4,7 @@ task_id: TASK-0177
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0177 si el Arquitecto mantiene el resto de gates verdes; veredicto Analista OK->CERRABLE en Area_comun/artifacts/ANALISTA-TASK-0177-dictado-voz-veredicto.md."

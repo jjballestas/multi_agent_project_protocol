@@ -4,7 +4,7 @@ task_id: TASK-0177
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0177 en in_review: dictado por voz en Intake con egress opt-in y sin nueva ruta de escritura."
