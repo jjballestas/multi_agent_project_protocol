@@ -4,6 +4,15 @@ Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
 
 ## Latest Session Note
 
+- TASK-0180 coauthor anomaly resolved in `D:/Agentes/Zeus/Zeus-protocol`: amended local product commit
+  `0b8593a` to `3b2d49a` adding only `Co-Authored-By: Codex <codex@local>` to the commit message. Tree content is
+  unchanged (`git diff --exit-code 0b8593a HEAD` OK) and no push was run. Product evidence: `node --check
+  src/server.js public/app.js tests/staticContract.test.js` OK; targeted
+  `npm test -- --test-name-pattern "TASK-0180|file intake creates extraction tasks"` PASS 2/2. Full `npm test`
+  was attempted and timed out after about 604s before completion. Protocol coordination was reconciled at commit
+  `2f315ce`: `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-ANOMALIA-coauthor-0b8593a.md` and
+  `Area_comun/mailbox/answered/MSG-20260625-Codex-to-Arquitecto-ANOMALIA-coauthor-0b8593a-fyi.md` record the
+  closure; drift false / #4 byte-identica `up_to_seq` 1969 after reconciliation.
 - REQ-520BBC1888 reconciliation delivered in `D:/Agentes/multi_agent_project_protocol`. Codex moved the
   requirement from `proposed` to `done` via `runtime/submit_intent.py` transaction
   `codex-reconcile-REQ-520BBC1888-20260625-tx` (seq 1957 claim acquire, seq 1958 task_status
