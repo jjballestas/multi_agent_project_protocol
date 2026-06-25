@@ -2,9 +2,34 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD 58ea6d2 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 re-entregada (f24f846); checker Arquitecto VERDE; re-REVIEW al Analista enviado; espero veredicto para cerrar.**
+> Ultima actualizacion: 2026-06-25, HEAD 4fd7275 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CAMBIO2->Codex: el Analista hallo leak PII REAL por file.name (atestado en source_file_name/title); verificado por mi en codigo; devuelto a Codex con fix server-side + AC3-ter. Codex cron tomo el CAMBIO2 (19:13).**
 
-## >>> RESUME 2026-06-25 (HEAD 58ea6d2) -- TASK-0181 re-checada VERDE, re-REVIEW al Analista <<<
+## >>> RESUME 2026-06-25 (HEAD 4fd7275) -- TASK-0181 CAMBIO2 a Codex (leak PII file.name, hallazgo Analista) <<<
+- **El Analista (review2) dio CAMBIO-REQUERIDO con un hallazgo NUEVO Y REAL que mi checker y AC3-bis PASARON POR
+  ALTO:** un POST real con `file.name = "persona@example.com.txt"` atesta el email crudo en `source_file_name`
+  (server.js:837) y en `title` (server.js:826 `Extraction request from ${upload.name}`) dentro de intents/events #4.
+  `sanitizeIngestedFile` (~1478) solo valida basename seguro, NO redacta PII. **LO VERIFIQUE EN CODIGO antes de
+  relevarlo: es real.** La frontera #4 es "cero PII cruda controlada por cliente", no solo `file.text`; el server no
+  puede confiar en que el front siempre mande `necesidad.txt`. (LECCION checker: AC3-bis solo cubrio file.text;
+  falto mutar file.name -- al re-checar, MUTAR file.name tambien.)
+- **El otro motivo del Analista (full npm test no exit 0, timeout 124) es el FLAKE AMBIENTAL ya conocido:** YO obtuve
+  full 92/92 exit 0 en clon limpio ventana quieta; el Analista timeouteo bajo carga. No regresion. Como (A) exige
+  cambio de codigo igual, se resuelve con la re-corrida; si persiste como flake puro -> escalar deuda tecnica al
+  operador, no bloquear indefinido.
+- **DEVUELTO a Codex (commit 4fd7275 PUSHED):** MSG-Arquitecto-to-Codex-CAMBIO2-TASK-0181 (open) + **SPEC-0095
+  AC3-ter PERMANENTE agregado** (metadata de cliente, esp. file.name, redactada/constante server-side antes de
+  atestar; behavior-test: file.name con PII no cuela en source_file_name/title; drift 0). Veredicto+mi REVIEW2
+  movidos a answered. TASK-0181 sigue in_review (Codex re-claima -> in_progress -> fix). Codex cron VIVO, EXEC_START
+  19:13:34 sobre CAMBIO2.
+- **AL REANUDAR / proximo paso:** monitorear re-entrega de Codex. Re-checar clon limpio: targeted + AC3-bis +
+  **AC3-ter (mutar file.name con PII)** + full npm test exit 0 en ventana quieta + Co-Author. Si verde -> REVIEW al
+  Analista; tras Analista OK -> cerrar in_review->done (CLOSE-0181 via submit_intent) en ventana segura -> GO Codex
+  reconcile REQ-7095D30A->done.
+- **PERMISO (2026-06-25):** operador autorizo TODO Bash sin prompt -> `Bash(*)` en .claude/settings.local.json
+  (personal/gitignored, NO en el compartido) ([[permission-auto-exec]]); barreras vigentes ask reset/rebase, deny
+  force-push/secretos; clasificador sigue bloqueando externos/destructivos.
+
+## >>> RESUME-PREV 2026-06-25 (HEAD 58ea6d2) -- TASK-0181 re-checada VERDE, re-REVIEW al Analista <<<
 - **Codex resolvio el CAMBIO.** Producto Zeus **f24f846** "test(intake): guard need PII attestation boundary"
   (Autor Arquitecto, Co-Authored-By Codex). MSG Codex changes-in-review recibido y movido a answered/.
 - **Checker Arquitecto VERDE (clon limpio Zeus @ f24f846, ventana quieta):** targeted TASK-0181 PASS 3/3 (incl.
