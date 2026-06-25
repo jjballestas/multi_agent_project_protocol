@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0181 CAMBIO resuelto: AC3-bis PII/#4 guard agregado y full node --test estable en clon limpio; queda en in_review para checker."
