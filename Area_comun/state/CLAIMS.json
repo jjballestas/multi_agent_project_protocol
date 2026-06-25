@@ -7743,6 +7743,24 @@
             "updated_at": "2026-06-25T10:49:45Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-register-0180",
+            "expires_at": "2026-06-25T17:05:00Z",
+            "notes": "Register TASK-0180 (carga por archivo v2 FASE B: panel de revision + gate PII humano + consumidor minimo NO-LLM, SPEC-0086 AC42/AC43/AC44) as ready for Codex; follows TASK-0150 (Fase A) for REQ-D642E4D8. NO enciende el extractor (Fase C).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0180-codex-file-intake-v2-faseB.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T11:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0180",
+            "updated_at": "2026-06-25T11:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-review-0177",
             "expires_at": "2026-06-25T05:00:00Z",
             "notes": "Gatekeeper REVIEW to Analista for TASK-0177 (96eb019 voice dictation egress). File-scoped.",

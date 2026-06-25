@@ -29,6 +29,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Proyecto-front: dictado por voz v2 -- idioma es-CO + captura manual con stop + indicador de grabacion (SPEC-0094)"
+        },
+        {
+            "id": "TASK-0180",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B -- store no-ledger de candidatas + panel de revision + gate humano de PII + consumidor minimo NO-LLM (AC42 rama-archivo, AC43, AC44; SPEC-0086; DECISION-0056; REQ-D642E4D8)"
         }
     ],
     "next_actions": [

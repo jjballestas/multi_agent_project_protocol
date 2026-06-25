@@ -2778,6 +2778,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0180-codex-file-intake-v2-faseB.md",
+            "id": "TASK-0180",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0086",
+            "status": "ready",
+            "title": "Proyecto-front (RF-14): carga por archivo v2 FASE B -- store no-ledger de candidatas + panel de revision + gate humano de PII + consumidor minimo NO-LLM (AC42 rama-archivo, AC43, AC44; SPEC-0086; DECISION-0056; REQ-D642E4D8)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
