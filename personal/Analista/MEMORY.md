@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0180 file intake v2 Fase B; veredicto OK/CERRABLE; #4 ON).
+> Ultima actualizacion: 2026-06-25 (TASK-0181 modo necesidad; CAMBIO-REQUERIDO; #4 ON).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0181 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `0d63b98`
+  (`review(TASK-0181): Analista requires need intake fixes`). Ancla producto
+  `2d7e80535f52f6e71dd1bf9b0a6425d1d7325195` (`feat(intake): add need extraction mode`)
+  y protocolo/instruccion `5f9354619e0b1e604eb12331daf8f5c8da08b388`. Clon limpio producto
+  `npm test` exit 1, 91 tests, 86 pass, 5 fail: `intake endpoint rejects impersonation...`
+  killed by SIGTERM during validator, `file ingestion...` 502 != 200, `local-vlm extractor reports...`
+  502 != 200, `candidate review stays outside...` 502 != 200, `auto commit push lands...` 502 != 200.
+  Targeted `TASK-0181|file intake|TASK-0179|TASK-0177` exit 0, 8/8; targeted `candidate review stays
+  outside` exit 1 por validator child killed. Payload propio `buildFileRequirementPayload` con email,
+  telefono, direccion y documento en texto necesidad conserva literales crudos en `file.text` del body
+  `/api/protocol/actions/submit`; acceptanceIntent si redacta. Voice opt-in/off-by-default pasa por
+  `deriveVoiceDictationControl` + `toggleVoiceDictation`; no-egress de modelo pasa por inspeccion de
+  `submitNeedExtraction`; PII gate humano pasa parcial por builder/codigo local pero no cierro por full
+  suite roja. Gates protocolo: validate vivo exit 0, validate sin secretos en clon `5f93546` exit 0,
+  drift vivo 0 `up_to_seq=1979`, neutralidad/encoding exit 0, #4 byte-identica sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`. MSG a Arquitecto rr=true
+  pidiendo devolver a Codex.
 - TASK-0180 (2026-06-25): OK/CERRABLE, veredicto commiteado en `57320df`
   (`review(TASK-0180): Analista OK file intake phase B`). Ancla producto
   `0b8593ae5044a16764a665dc291dd1e0eed22e1c` (`feat(intake): add deterministic file candidate review`)
