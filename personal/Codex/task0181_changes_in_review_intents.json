@@ -1,0 +1,21 @@
+{
+  "idempotency_key": "Codex:TASK-0181:changes-in-review:20260625T122000Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0181",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260625-Codex-TASK-0181-changes"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260625-Codex-TASK-0181-changes-delivery"
+    }
+  ]
+}

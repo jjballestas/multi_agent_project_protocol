@@ -4,6 +4,21 @@ Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
 
 ## Latest Session Note
 
+- TASK-0181 change pass product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `f24f846 test(intake): guard need PII attestation boundary` authored as Arquitecto with Codex coauthor. It adds
+  permanent AC3-bis coverage proving need-mode PII literals in the textarea are not present in attested
+  `buildFileExtractionIntents` outputs/events and only `source_file_sha256` crosses the #4 boundary. It also
+  hardens slow subprocess-heavy product tests by raising validator/clone/drift timeouts and server readiness wait,
+  making the full gate stable under load. Product evidence after commit: `node --check public/app.js src/server.js
+  tests/staticContract.test.js` OK; `git diff --check -- tests/staticContract.test.js` OK; targeted
+  `npm test -- --test-name-pattern "TASK-0181|candidate review stays outside|local-vlm extractor reports|auto commit push"`
+  PASS 9/9; full product `npm test` PASS 92/92; clean-clone product `npm test` PASS 92/92; local smoke on port 4262
+  OK for `/healthz` plus `/api/protocol/actions`. Protocol delivery moved TASK-0181 back to `in_review`, released
+  Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0181-codex-to-arquitecto-2.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0181-changes-in-review.md`, and moved the consumed
+  CAMBIO to `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-CAMBIO-TASK-0181.md`. Final protocol
+  evidence before delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift
+  false / #4 byte-identica `up_to_seq` 1987.
 - TASK-0181 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `2d7e805 feat(intake): add need extraction mode` authored as Arquitecto with Codex coauthor. Intake now exposes
   OFF-by-default `Necesidad` alongside Manual/Archivo, with a dedicated textarea using the existing SPEC-0094 voice

@@ -1,0 +1,10 @@
+{
+  "idempotency_key": "Codex:TASK-0181:answered-status-release:20260625T122600Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260625-Codex-TASK-0181-answered-status"
+    }
+  ]
+}
