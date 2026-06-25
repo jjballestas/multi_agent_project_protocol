@@ -2,7 +2,24 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD c01e06f (PUSHED), v1.14.0 (#4 enforce/auth ON). **LAS 3 ENTREGAS CERRADAS; cola VACIA.**
+> Ultima actualizacion: 2026-06-25, HEAD 2f315ce (PUSHED), v1.14.0 (#4 enforce/auth ON). **3 entregas + anomalia Co-Author CERRADAS; cola VACIA; Codex cron VIVO.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD 2f315ce PUSHED) -- anomalia Co-Author resuelta + reconcile; Codex relanzado <<<
+- **Anomalia Co-Author (TASK-0180) RESUELTA:** Codex amendo el commit de producto Zeus **0b8593a -> 3b2d49a**
+  (trailer Co-Authored-By Codex anadido, MISMO arbol verificado git diff vacio, SIN push). Verificado por mi.
+- **RECONCILE seq 1969:** Codex aplico un claim acquire+release (CLAIM-...coauthor-anomaly, net 0 claims) por la
+  correccion PERO su cron MURIO antes de commitear (lock huerfano, sin EXEC_EXIT; el codex exec si "succeeded"
+  15:09 + validate OK). Yo (orchestrator) reconcilie: commitee el evento completo de Codex (2f315ce, validate exit
+  0, 0 claims), archive anomalia+FYI, limpie el lock huerfano. (Codex no pudo archivar el msg: requiere capability
+  orchestrator = mia.)
+- **Codex cron RELANZADO y VIVO** (15:16:44, heartbeat, sin lock, idle; mailbox open/ VACIO). Auto-apaga a 7 rondas
+  idle (~35min) por diseno. Relanzar: powershell -NoProfile -File personal/Codex/codex_mailbox_cron.ps1 (SIN
+  -ExecutionPolicy Bypass). LECCION: al redactar msg a Codex EVITAR "para...Codex" en una linea (mi 1er msg de
+  anomalia tripeo la stop-regex con "para anadir...Codex"; lo reescribi a "a fin de"). [[bug stop-regex]] pendiente
+  de arreglo de fondo (usar solo `.stop` file).
+- **CIERRE TOTAL DE LA SESION:** TASK-0179 (a12ee6d) + REQ-520BBC1888 (fd8800a) + TASK-0180 (c01e06f) done; anomalia
+  Co-Author resuelta (3b2d49a) + reconcile (2f315ce). validate exit 0, drift 0, mailbox VACIO, 0 claims. Zeus-protocol
+  LOCAL adelantado (a25f44a + 3b2d49a) NO pusheado = accion del operador.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD c01e06f PUSHED) -- 3 entregas Codex CERRADAS; mailbox open VACIO <<<
 - **TASK-0180 (carga archivo v2 Fase B) CERRADO in_review->done (c01e06f, seq 1967).** Producto Zeus 0b8593a.
