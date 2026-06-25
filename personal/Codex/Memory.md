@@ -15,7 +15,13 @@ Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
   tests/staticContract.test.js` OK; `git diff --check -- src/server.js tests/staticContract.test.js` OK; targeted
   `npm test -- --test-name-pattern "TASK-0181|candidate review stays outside|local-vlm extractor reports|auto commit push"`
   PASS 10/10; full product `npm test` PASS 93/93; clean-clone product `npm test` PASS 93/93; local smoke on port
-  4264 OK for `/healthz` plus `/api/protocol/actions`. Protocol delivery is still pending in this session.
+  4264 OK for `/healthz` plus `/api/protocol/actions`. Protocol delivery commit
+  `e169666 coord(TASK-0181): deliver metadata attestation fix` moved TASK-0181 back to `in_review`, released Codex
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0181-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0181-changes2-in-review.md`, and moved the
+  consumed CAMBIO2 to `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-CAMBIO2-TASK-0181.md`.
+  Final protocol evidence before delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell
+  validator OK, drift false / #4 byte-identica `up_to_seq` 1993.
 - TASK-0181 change pass product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `f24f846 test(intake): guard need PII attestation boundary` authored as Arquitecto with Codex coauthor. It adds
   permanent AC3-bis coverage proving need-mode PII literals in the textarea are not present in attested
