@@ -2,7 +2,7 @@
 task_id: TASK-0179
 title: "Proyecto-front: dictado por voz v2 -- idioma es-CO + captura manual con stop + indicador de grabacion (SPEC-0094)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

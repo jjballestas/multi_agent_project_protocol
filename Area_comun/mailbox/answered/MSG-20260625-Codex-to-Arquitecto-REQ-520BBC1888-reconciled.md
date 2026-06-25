@@ -4,7 +4,7 @@ task_id: REQ-520BBC1888
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 one_line_summary: "REQ-520BBC1888 reconciled to done; no product code change."
 context_refs:

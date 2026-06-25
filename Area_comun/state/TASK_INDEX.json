@@ -2773,7 +2773,7 @@
             "phase": "P2",
             "priority": "high",
             "spec_id": "SPEC-0094",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: dictado por voz v2 -- idioma es-CO + captura manual con stop + indicador de grabacion (SPEC-0094)",
             "type": "product"
         },

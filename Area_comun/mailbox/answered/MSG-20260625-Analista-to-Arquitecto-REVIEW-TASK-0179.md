@@ -4,8 +4,8 @@ task_id: TASK-0179
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
-requires_response: true
+status: answered
+requires_response: false
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0179 solo si el cierre del Arquitecto conserva los mismos anchors y gates verdes; ver Area_comun/artifacts/ANALISTA-TASK-0179-voice-egress-veredicto.md."
 question: "Confirmas cierre de TASK-0179 con el veredicto Analista OK->CERRABLE y sin ampliar alcance? rr=true."

@@ -777,7 +777,7 @@
         {
             "id": "TASK-0179",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: dictado por voz v2 -- idioma es-CO + captura manual con stop + indicador de grabacion (SPEC-0094)"
         },
         {

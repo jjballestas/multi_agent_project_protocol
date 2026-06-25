@@ -7630,6 +7630,24 @@
             "updated_at": "2026-06-25T01:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-close-0179",
+            "expires_at": "2026-06-25T20:00:00Z",
+            "notes": "Close TASK-0179 in_review->done (checker Arquitecto, maker=Codex). Dictado voz v2 (SPEC-0094): idioma es-CO + captura manual continuous con Stop/timer/indicador + append al detener. Checker clon limpio a25f44a: targeted AC1-AC4 + carry TASK-0177 PASS, full node --test exit 0 (90/90... wait 89/89 producto), diff solo presentacion sin server.js/fetch/socket. Analista OK->CERRABLE (egress opt-in/off-by-default intacto, validate con/sin secretos exit 0, drift 0, #4 byte-identica).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0179-codex-front-dictado-voz-idioma-captura.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T12:33:40Z",
+            "status": "released",
+            "task_id": "TASK-0179",
+            "updated_at": "2026-06-25T12:33:40Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-close-batch",
             "expires_at": "2026-06-25T03:00:00Z",
             "notes": "Close TASK-0174/0175/0176 (verified) + archive MSGs. File-scoped.",
