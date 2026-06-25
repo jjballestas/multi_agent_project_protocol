@@ -2,7 +2,22 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD f11b561, v1.14.0 (#4 enforce/auth ON). **CHECKPOINT PRE-CEREMONIA US-5.**
+> Ultima actualizacion: 2026-06-25, HEAD 6de3035 (PUSHED), v1.14.0 (#4 enforce/auth ON). **GO TASK-0179 emitido.**
+
+## >>> CHECKPOINT 2026-06-25 (HEAD 6de3035 PUSHED) -- GO TASK-0179 dictado voz v2 (en cola de Codex) <<<
+- **TASK-0179 ready/Codex (SPEC-0094), GO emitido (MSG open a Codex), commit 6de3035 pusheado a main.** Follow-up
+  de TASK-0177: el operador probo el dictado por voz y captura bien en INGLES pero mal en ESPANOL. **Causa raiz:**
+  en Zeus-protocol public/app.js `recognition.lang = document.documentElement.lang || navigator.language || "es-ES"`
+  y public/index.html declara `<html lang="en">` (primer termino) -> reconocedor en ingles. Scope (decidido con el
+  operador): AC1 idioma `es-CO` (fallback es-419->es-ES) independiente del navegador + index.html lang->es; AC2
+  micro arranca inactivo; AC3 captura manual `continuous=true` (sin auto-stop por pausa) + indicador animado SIMPLE
+  (operador eligio NO nivel real de mic) + timer m:ss + boton detener; AC4 al detener procesa->textarea. Carries:
+  egress off-by-default+aviso (SPEC-0093 AC3) y textarea-only/sin submit_intent (AC4) INTACTOS; frontera no cambia
+  (indicador simple = sin getUserMedia/Web Audio extra). maker=Codex/checker=Arquitecto clon limpio + PASADA DEL
+  ANALISTA (captura sostenida = mas audio pero mismo control). PENDIENTE: Codex implementa->in_review; yo checker
+  clon limpio; Analista veredicto; yo cierro in_review->done. NO forjar commits de Arquitecto (Co-Author Codex).
+- **GATES al emitir:** validate exit 0 (con el GO open rr=true a Codex), drift 0, seq 1939. Transaccion atomica
+  REGISTER-0179 (claim acquire file-scoped -> task_upsert -> release) via submit_intent.
 
 ## >>> CHECKPOINT 2026-06-25 (HEAD f11b561; Zeus 1b80235) -- US-5 RECONSIDERADO + cierre del dia <<<
 - **US-5 RECONSIDERADO (operador):** el ENSAYO de re-genesis (clon limpio C:/rg-us5, descartado, vivo NUNCA tocado)
