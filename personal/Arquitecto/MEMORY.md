@@ -2,9 +2,28 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-25, HEAD bb56ac6 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181: Codex corrigio el leak file.name (325bcfb); checker Arquitecto VERDE (full 93/93 + AC3-ter); REVIEW3 al Analista enviado; espero veredicto para cerrar.**
+> Ultima actualizacion: 2026-06-25, HEAD 37cf877 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CERRADA done (seq 1996, 6de1722). GO a Codex para reconciliar REQ-7095D30A->done. TASK-0182 (deuda full-suite) abierta ready. Espero que Codex reconcilie el REQ.**
 
-## >>> RESUME 2026-06-25 (HEAD bb56ac6) -- TASK-0181 fix file.name VERDE, REVIEW3 al Analista <<<
+## >>> RESUME 2026-06-25 (HEAD 37cf877) -- TASK-0181 CERRADA; GO reconcile REQ a Codex; TASK-0182 abierta <<<
+- **TASK-0181 (Intake modo necesidad, SPEC-0095) CERRADA in_review->done** (close via submit_intent seq 1996,
+  commit 6de1722 PUSHED). Checker Arquitecto verde clon limpio 325bcfb (targeted 4/4 AC3-bis+AC3-ter, full
+  node --test 93/93 exit 0). **Analista review3 CONFIRMO la frontera PII** (file.name/mimeType/title sin fuga;
+  publicName=source-<sha12><ext> server-side). Unico residual = full npm test exit124 a 604s en el harness del
+  Analista = DURACION, no fallo (yo verde en ventana quieta).
+- **DECISION DEL OPERADOR (live, AskUserQuestion): "Cerrar ahora + tarea de deuda".** Cerre con la corrida canonica
+  full exit 0 como evidencia de gate + abri **TASK-0182** (ready/Codex, deuda tecnica): robustecer/aislar el
+  full-suite de Zeus para que `node --test` complete <300s bajo el cap del harness del revisor (ATACAR LA CAUSA:
+  tests de subproceso auto-commit-push/local-vlm/candidate-review dominan wall-clock; NO subir mas timeouts -- subir
+  timeouts en TASK-0181 EVITO fallos pero ALARGO el total). spec_id SPEC-0086, sin AC permanente de producto.
+  Registrada via task_upsert seq ~1997-1999. Activacion (GO) la define el operador; Codex no la arranca sin GO.
+- **GO a Codex enviado** (MSG-Arquitecto-to-Codex-GO-reconcile-REQ-7095D30A en open): reconciliar REQ-7095D30A->done
+  (requirement->done exige implementer=Codex). Respondi al Analista (agradeci el hallazgo file.name; verdict+REVIEW3
+  a answered). commit 37cf877 PUSHED.
+- **PROXIMO PASO:** monitorear que Codex reconcilie REQ-7095D30A->done (cierra el modo necesidad). Cola: TASK-0182
+  ready (espera GO del operador). FLOOR skills Fase1 aun gateado. Verificar al reanudar: REQ done en el index.
+- **PERMISO Bash(*) en .claude/settings.local.json ([[permission-auto-exec]]).**
+
+## >>> RESUME-PREV 2026-06-25 (HEAD bb56ac6) -- TASK-0181 fix file.name VERDE, REVIEW3 al Analista <<<
 - **Codex corrigio el leak (Zeus 325bcfb "fix(intake): redact file metadata before attestation"):**
   `sanitizeIngestedFile` deriva `publicName = source-<sha12><ext>`; `title` (server.js:826) y `source_file_name`
   (837) usan `publicName`, NO `upload.name`; el nombre crudo del cliente queda solo en el store/purge no-ledger,
