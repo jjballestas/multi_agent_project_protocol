@@ -7686,6 +7686,23 @@
             "updated_at": "2026-06-25T00:58:00Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-mailbox-cleanup2",
+            "expires_at": "2026-06-25T05:00:00Z",
+            "notes": "Archive resolved reconcile handoffs. File-scoped.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Arquitecto-mailbox-cleanup2",
+                "Area_comun/mailbox/open/MSG-20260624T213940Z-Operador-to-Arquitecto-intake-49C9FC7D.md",
+                "Area_comun/mailbox/archived/MSG-20260624T213940Z-Operador-to-Arquitecto-intake-49C9FC7D.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled.md",
+                "Area_comun/mailbox/archived/MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled.md"
+            ],
+            "started_at": "2026-06-25T01:45:00Z",
+            "status": "released",
+            "task_id": "REQ-003AE958",
+            "updated_at": "2026-06-25T01:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-reg-0177-0178",
             "expires_at": "2026-06-25T04:00:00Z",
             "notes": "Register TASK-0177 (dictado) + TASK-0178 (consola arquitecto PENDIENTE) + GO-0177. File-scoped.",

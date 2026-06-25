@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3bf32edc9f205e6ec5024e5c43fcd22278912ffbaa9d2b66f281f894a1912d8d",
+  "canonical_hash": "130963c3148832cc7d7ce640580f4b210a798fe01379073a2db76a6abb3cf7d2",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -277,6 +277,7 @@
       "CLAIM-20260625-Arquitecto-close-batch": 1,
       "CLAIM-20260625-Arquitecto-go-reconcile-003ae958": 1,
       "CLAIM-20260625-Arquitecto-go-reconcile-c1edd835": 1,
+      "CLAIM-20260625-Arquitecto-mailbox-cleanup2": 1,
       "CLAIM-20260625-Arquitecto-reg-0177-0178": 1,
       "CLAIM-20260625-Arquitecto-review-0177": 1,
       "CLAIM-20260625-Codex-TASK-0177": 1,
@@ -403,13 +404,15 @@
       "MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0175-in-review": 1,
       "MSG-20260624-Codex-to-Arquitecto-TASK-0176-in-review": 1,
+      "MSG-20260624T213940Z-Operador-to-Arquitecto-intake-49C9FC7D": 1,
       "MSG-20260625-Analista-to-Arquitecto-TASK-0177-dictado-OK": 1,
       "MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177": 1,
+      "MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1,
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
-      "REQ-003AE958": 7,
+      "REQ-003AE958": 8,
       "REQ-01193FD6": 4,
       "REQ-07DD94CE": 4,
       "REQ-0873A67C": 4,
@@ -524,7 +527,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1261,
+    "events_applied": 1265,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -721,6 +724,10 @@
       "arquitecto:changes3-0158:claim-acquire": 1270,
       "arquitecto:changes3-0158:claim-release": 1272,
       "arquitecto:changes3-0158:status": 1271,
+      "arquitecto:cleanup2:acq": 1933,
+      "arquitecto:cleanup2:arch:MSG-20260624T213940Z-Operador-to-Arquitecto-intake-49C9FC7D": 1934,
+      "arquitecto:cleanup2:arch:MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1935,
+      "arquitecto:cleanup2:rel": 1936,
       "arquitecto:close-0128:claim-acquire": 762,
       "arquitecto:close-0128:claim-release": 764,
       "arquitecto:close-0128:status-done": 763,
@@ -1789,5 +1796,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1932
+  "up_to_seq": 1936
 }

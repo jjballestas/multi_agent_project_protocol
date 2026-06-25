@@ -5,7 +5,7 @@ type: DIRECTIVE
 from: Operador
 relayed_by: Arquitecto
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 operator_directive: true

@@ -4,7 +4,7 @@ task_id: REQ-003AE958
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: archived
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "REQ-003AE958 reconciled to done after TASK-0177 closure."
