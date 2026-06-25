@@ -5,6 +5,13 @@
 > Ultima actualizacion: 2026-06-25, HEAD 33c8dd6 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TASK-0181 CAMBIO->Codex (Analista bloqueo); en cola de Codex.**
 
 ## >>> RESUME 2026-06-25 (HEAD 33c8dd6) -- TASK-0181 CAMBIO a Codex (Analista CAMBIO-REQUERIDO) <<<
+- **ENTORNO (decision operador): la proxima sesion del Arquitecto corre desde la CLI con `claude
+  --dangerously-skip-permissions` (modo bypassPermissions) = SIN prompts de autorizacion (bash/shell/edits/git) y
+  SIN deny rules.** El operador cierra VS Code para instalar Visual Studio y orquesta desde la terminal. NO correr
+  dos sesiones de Arquitecto en paralelo (anti-colision). En bypass, el bloqueo de `powershell -ExecutionPolicy
+  Bypass` NO aplica -> aun asi relanzar crones SIN esa bandera por higiene (powershell -NoProfile -File
+  personal/Codex/codex_mailbox_cron.ps1). Cautela: el bypass auto-ejecuta TODO; sigue gateando por EXIT CODE y
+  respetando DECISION-0020 (no escribir ledger con peer mid-exec) por disciplina, no por el harness.
 - **El Analista dio CAMBIO-REQUERIDO sobre TASK-0181; lo devolvi a Codex con CAMBIO preciso (commit 33c8dd6).
   TASK-0181 sigue in_review (Codex re-claimara -> in_progress -> fix -> in_review). Cron Codex VIVO -> tomara el
   CAMBIO. Al reanudar: monitorear la re-entrega, re-checar clon limpio, Analista re-revisa, cerrar.**
