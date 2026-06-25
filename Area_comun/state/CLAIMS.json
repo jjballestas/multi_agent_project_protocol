@@ -7666,6 +7666,24 @@
             "updated_at": "2026-06-25T12:54:44Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Arquitecto-close-0181",
+            "expires_at": "2026-06-25T23:00:00Z",
+            "notes": "Close TASK-0181 in_review->done (checker Arquitecto, maker=Codex). Intake modo necesidad (SPEC-0095, REQ-7095D30A): textarea+voz reusa pipeline determinista no-LLM -> candidatas. Checker clon limpio 325bcfb: targeted PASS 4/4 (AC3-bis file.text + AC3-ter file.name), full node --test 93/93 exit 0 (ventana quieta). Analista review3: frontera PII CONFIRMADA (file.name/mimeType/title sin fuga; publicName=source-<sha12><ext> server-side); unico residual = full npm test timeout exit124 a 604s en su harness (NO falla, duracion). Operador decidio cerrar con corrida canonica full exit0 + abrir tarea separada de deuda tecnica (aislar/acelerar tests de subproceso lentos).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0181-codex-front-intake-modo-necesidad.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-25T13:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0181",
+            "updated_at": "2026-06-25T13:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Arquitecto-close-batch",
             "expires_at": "2026-06-25T03:00:00Z",
             "notes": "Close TASK-0174/0175/0176 (verified) + archive MSGs. File-scoped.",

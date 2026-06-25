@@ -2824,7 +2824,7 @@
             "priority": "normal",
             "spawned_from": "REQ-7095D30A",
             "spec_id": "SPEC-0095",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)",
             "type": "product"
         },

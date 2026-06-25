@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260625-Arquitecto-close-0181","task_id":"TASK-0181","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0181-codex-front-intake-modo-necesidad.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-25T13:50:00Z","updated_at":"2026-06-25T13:50:00Z","expires_at":"2026-06-25T23:00:00Z","status":"active","notes":"Close TASK-0181 in_review->done (checker Arquitecto, maker=Codex). Intake modo necesidad (SPEC-0095, REQ-7095D30A): textarea+voz reusa pipeline determinista no-LLM -> candidatas. Checker clon limpio 325bcfb: targeted PASS 4/4 (AC3-bis file.text + AC3-ter file.name), full node --test 93/93 exit 0 (ventana quieta). Analista review3: frontera PII CONFIRMADA (file.name/mimeType/title sin fuga; publicName=source-<sha12><ext> server-side); unico residual = full npm test timeout exit124 a 604s en su harness (NO falla, duracion). Operador decidio cerrar con corrida canonica full exit0 + abrir tarea separada de deuda tecnica (aislar/acelerar tests de subproceso lentos)."},"idempotency_key":"arquitecto:close-0181:claim-acquire"} },
+    { "task_status": { "task_id":"TASK-0181","from":"in_review","to":"done","idempotency_key":"arquitecto:close-0181:status-done"} },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260625-Arquitecto-close-0181","idempotency_key":"arquitecto:close-0181:claim-release"} }
+  ]
+}
