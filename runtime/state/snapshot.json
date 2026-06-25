@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "541a34c4250428e70f0f70ea069cee11b01682b7041b55f328ddf63e2433d943",
+  "canonical_hash": "3bf32edc9f205e6ec5024e5c43fcd22278912ffbaa9d2b66f281f894a1912d8d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -281,6 +281,8 @@
       "CLAIM-20260625-Arquitecto-review-0177": 1,
       "CLAIM-20260625-Codex-TASK-0177": 1,
       "CLAIM-20260625-Codex-answer-go-c1edd835": 1,
+      "CLAIM-20260625-Codex-reconcile-REQ-003AE958": 1,
+      "CLAIM-20260625-Codex-reconcile-REQ-003AE958-delivery": 1,
       "CLAIM-20260625-Codex-reconcile-c1edd835": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -407,7 +409,7 @@
       "PROJECT_STATE": 1,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
-      "REQ-003AE958": 4,
+      "REQ-003AE958": 7,
       "REQ-01193FD6": 4,
       "REQ-07DD94CE": 4,
       "REQ-0873A67C": 4,
@@ -522,7 +524,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1256,
+    "events_applied": 1261,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1161,6 +1163,11 @@
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
       "codex-carril-a-monitor-release-2026-06-19T15:33:55Z": 688,
       "codex-cron-executor-config:release": 1103,
+      "codex-reconcile-REQ-003AE958-claim-acquire": 1928,
+      "codex-reconcile-REQ-003AE958-claim-release": 1930,
+      "codex-reconcile-REQ-003AE958-delivery-claim-acquire": 1931,
+      "codex-reconcile-REQ-003AE958-delivery-claim-release": 1932,
+      "codex-reconcile-REQ-003AE958-task-status-done": 1929,
       "codex-task-0158-claim-20260623b": 1246,
       "codex-task-0158-claim-delivery-20260623": 1251,
       "codex-task-0158-claim-delivery-release-20260623-noarchive": 1253,
@@ -1782,5 +1789,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 1927
+  "up_to_seq": 1932
 }

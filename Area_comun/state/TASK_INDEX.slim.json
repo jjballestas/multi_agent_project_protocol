@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "tasks": [
         {
-            "id": "REQ-003AE958",
-            "owner": "Operador",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "proposed",
-            "title": "Dictado de narrativa y de intencio de aceptacion"
-        },
-        {
             "id": "REQ-520BBC1888",
             "owner": "Operador",
             "phase": "P2",

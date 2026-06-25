@@ -4,7 +4,7 @@ task_id: REQ-003AE958
 type: ACTION
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Reconciliar REQ-003AE958 a done: submit_intent task_status from proposed to done (el dictado por voz se entrego y cerro en TASK-0177). Claim file-scoped (TASK_INDEX.json#REQ-003AE958, PROJECT_STATE.json#active_tasks/REQ-003AE958, su seed). NO tocar REQ-520BBC1888 (US-5). validate con/sin secretos exit 0, drift 0."

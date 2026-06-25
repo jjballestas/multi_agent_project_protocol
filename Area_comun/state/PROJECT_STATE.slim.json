@@ -1,12 +1,6 @@
 {
     "active_tasks": [
         {
-            "id": "REQ-003AE958",
-            "owner": "Operador",
-            "status": "proposed",
-            "title": "Dictado de narrativa y de intencio de aceptacion"
-        },
-        {
             "id": "REQ-520BBC1888",
             "owner": "Operador",
             "status": "proposed",

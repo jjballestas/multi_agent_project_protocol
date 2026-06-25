@@ -7757,6 +7757,39 @@
             "updated_at": "2026-06-24T23:33:13Z"
         },
         {
+            "claim_id": "CLAIM-20260625-Codex-reconcile-REQ-003AE958",
+            "expires_at": "2026-06-25T02:13:40Z",
+            "notes": "Reconcile delivered voice dictation requirement after TASK-0177 closure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-reconcile-REQ-003AE958",
+                "Area_comun/state/TASK_INDEX.json#REQ-003AE958",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-003AE958",
+                "Area_comun/tasks/req-003ae958-requirement-seed.md"
+            ],
+            "started_at": "2026-06-25T00:13:40Z",
+            "status": "released",
+            "task_id": "REQ-003AE958",
+            "updated_at": "2026-06-25T00:13:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260625-Codex-reconcile-REQ-003AE958-delivery",
+            "expires_at": "2026-06-25T02:14:03Z",
+            "notes": "Delivery artifacts and GO answer for REQ-003AE958 reconciliation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260625-Codex-reconcile-REQ-003AE958-delivery",
+                "Area_comun/handoffs/HANDOFF-REQ-003AE958-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled.md",
+                "Area_comun/mailbox/open/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-003ae958.md",
+                "Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-reconcile-003ae958.md"
+            ],
+            "started_at": "2026-06-25T00:14:03Z",
+            "status": "released",
+            "task_id": "REQ-003AE958",
+            "updated_at": "2026-06-25T00:14:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260625-Codex-reconcile-c1edd835",
             "expires_at": "2026-06-25T01:32:49Z",
             "notes": "Reconcile delivered REQ-C1EDD835 to done after TASK-0176 closure. File-scoped.",

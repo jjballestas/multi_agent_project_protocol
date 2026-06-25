@@ -2,7 +2,7 @@
 task_id: "REQ-003AE958"
 title: "Dictado de narrativa y de intencio de aceptacion"
 type: "requirement"
-status: proposed
+status: done
 owner: "Operador"
 phase: "P2"
 priority: "normal"
