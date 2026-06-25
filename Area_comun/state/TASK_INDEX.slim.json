@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_review",
             "title": "Proyecto-front: Intake modo necesidad (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)"
         }
     ],

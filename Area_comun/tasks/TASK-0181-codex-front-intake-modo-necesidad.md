@@ -2,7 +2,7 @@
 task_id: TASK-0181
 title: "Proyecto-front: Intake modo 'necesidad' (dictar/escribir) -> mismo pipeline determinista no-LLM -> candidatas (SPEC-0095, REQ-7095D30A)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

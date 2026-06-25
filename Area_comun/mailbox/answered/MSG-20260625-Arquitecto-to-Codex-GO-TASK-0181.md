@@ -4,7 +4,7 @@ task_id: TASK-0181
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Implementar TASK-0181 (Intake modo 'necesidad', SPEC-0095, REQ-7095D30A) en Zeus-protocol como maker, OFF-by-default. Es una nueva SUPERFICIE DE ENTRADA (textarea + voz) al pipeline de extraccion YA entregado de la carga por archivo (TASK-0180); NO enciende el extractor LLM (Fase C). Entregar: (1) AC1 modo 'Necesidad' en el selector del Intake junto a Manual y Por archivo (carry AC42; obligatorios validados; design-system AC13); (2) AC2 formulario aparte con textarea grande + el control de dictado por voz REUTILIZADO de TASK-0179/SPEC-0094 (locale es-CO, captura sostenida con su control de finalizacion manual + timer + indicador, egress opt-in/off-by-default + aviso); texto escrito o dictado llena el textarea; (3) AC3 botonera estilo modo-archivo 'Extraer': el texto del textarea va como FUENTE inerte (screened best-effort PII) al MISMO consumidor determinista no-LLM (provider deterministic-local, none_deterministic_no_llm, sin fetch/localVlm/http/net) -> candidatas en el store NO-LEDGER .runtime/file-candidates gitignored (drift 0; clon limpio sin store valida exit 0); (4) AC4 revision + gate PII humano (piiReviewed===true) + aprobar -> requirement-intake gobernado (AC39), REUSANDO el panel/flujo de TASK-0180; id del requirement deriva del contenido editado; descartar purga el raw. Carries verdes: egress de voz off-by-default + aviso, no-egress de modelo, store fuera del dataset + drift 0, #4 byte-identica, AC11/AC12/AC13. behavior-tests por AC; node --test clon limpio exit 0. Mover a in_review via submit_intent (claim file-scoped) con gates verdes. Commit como Arquitecto + Co-Authored-By Codex."

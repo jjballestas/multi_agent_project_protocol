@@ -4,6 +4,22 @@ Last updated: 2026-06-25 Europe/Madrid, after TASK-0180 product commit.
 
 ## Latest Session Note
 
+- TASK-0181 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
+  `2d7e805 feat(intake): add need extraction mode` authored as Arquitecto with Codex coauthor. Intake now exposes
+  OFF-by-default `Necesidad` alongside Manual/Archivo, with a dedicated textarea using the existing SPEC-0094 voice
+  dictation control (`es-CO`, manual Stop/timer/indicator and egress opt-in), and routes the written/dictated text
+  as inert `necesidad.txt` source through the existing deterministic no-LLM file-candidate pipeline using
+  `DETERMINISTIC_FILE_CONSUMER`. Candidate review/PII gate/approval reuse the TASK-0180 flow. Evidence so far:
+  `node --check public/app.js src/server.js tests/staticContract.test.js` OK; product `git diff --check` OK;
+  targeted `npm test -- --test-name-pattern "TASK-0181|file intake|TASK-0179|TASK-0177"` PASS 8/8; targeted
+  candidate-review rerun PASS 2/2; local smoke on port 4260 OK for `/healthz` plus `/api/protocol/actions`. Full
+  `npm test` was attempted and timed out after about 904s before completion. Protocol delivery moved TASK-0181 to
+  `in_review`, released the Codex claim, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0181-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260625-Codex-to-Arquitecto-TASK-0181-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260625-Arquitecto-to-Codex-GO-TASK-0181.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4
+  byte-identica `up_to_seq` 1979.
 - TASK-0180 coauthor anomaly resolved in `D:/Agentes/Zeus/Zeus-protocol`: amended local product commit
   `0b8593a` to `3b2d49a` adding only `Co-Authored-By: Codex <codex@local>` to the commit message. Tree content is
   unchanged (`git diff --exit-code 0b8593a HEAD` OK) and no push was run. Product evidence: `node --check
