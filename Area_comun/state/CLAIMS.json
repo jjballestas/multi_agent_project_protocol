@@ -8367,6 +8367,24 @@
             "updated_at": "2026-06-26T13:11:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-close-0186",
+            "expires_at": "2026-06-26T22:00:00Z",
+            "notes": "Close TASK-0186 in_review->done (Consola del Arquitecto pieza 2 = UI conversacional + streaming, SPEC-0099/DECISION-0062; maker=Codex, checker=Arquitecto). Checker clon limpio Zeus 2176f5b: 3 UI tests sustantivos PASS; gate rapido 80/98 (18 slow skip) exit 0; full test:ci en VENTANA QUIETA 98/98 0 fail exit 0 (la 1a corrida dio 9 fallos 502 por carga concurrente con Codex mid-exec; re-corrida limpia verde, NO regresion). AC1-AC6: vista architect routeada+1-sola-vista (AC12/AC13), estado HONESTO derivado (disabled->desactivado, alive->send, dormant->open; AC11), no-bypass (endpoints solo del puente; doesNotMatch writeFile/events.jsonl/actions-submit), sesion+finalizar, streaming incremental con texto redactado, solo public/* (sin server.js). Co-Author Codex. Pieza 3 (auditoria endurecida) = GO posterior.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T16:26:00Z",
+            "status": "released",
+            "task_id": "TASK-0186",
+            "updated_at": "2026-06-26T16:26:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Arquitecto-consola-arq-f1",
             "expires_at": "2026-06-26T17:00:00Z",
             "notes": "Ratify DECISION-0062 (proposed->accepted) + register TASK-0185 ready/Codex (Consola del Arquitecto pieza 1 = proceso-puente, SPEC-0098). Operador ratifico el puente interactivo persistente.",
