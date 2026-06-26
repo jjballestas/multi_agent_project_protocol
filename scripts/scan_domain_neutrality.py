@@ -136,6 +136,8 @@ def main() -> int:
     exempt_globs = neutrality.get("exempt_globs") or []
     if (root / "connectors").exists() and "connectors/**" not in scan_globs:
         scan_globs = [*scan_globs, "connectors/**"]
+    if (root / "skills").exists() and "skills/**" not in scan_globs:
+        scan_globs = [*scan_globs, "skills/**"]
     terms = [
         *compile_terms(denylist, "domain"),
         *compile_terms(configured_identity_terms(config), "identity"),

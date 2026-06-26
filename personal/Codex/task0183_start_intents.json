@@ -1,0 +1,41 @@
+{
+  "idempotency_key": "Codex:TASK-0183:start:20260626T013700Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260626-Codex-TASK-0183",
+        "owner": "Codex",
+        "task_id": "TASK-0183",
+        "status": "active",
+        "started_at": "2026-06-26T01:37:00Z",
+        "updated_at": "2026-06-26T01:37:00Z",
+        "expires_at": "2026-06-26T05:37:00Z",
+        "notes": "Implement TASK-0183 neutral skills registry and read-only cold-start loader.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json",
+          "Area_comun/state/TASK_INDEX.json#TASK-0183",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0183",
+          "Area_comun/tasks/TASK-0183-codex-skills-mechanism-coldstart-loader.md",
+          "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0183.md",
+          "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0183.md",
+          "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0183-in-review.md",
+          "Area_comun/handoffs/HANDOFF-TASK-0183-codex-to-arquitecto-1.md",
+          "skills/",
+          "examples/skills_loader_cases/",
+          "scripts/scan_domain_neutrality.py",
+          ".github/workflows/ci.yml",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0183",
+      "from": "ready",
+      "to": "in_progress"
+    }
+  ]
+}

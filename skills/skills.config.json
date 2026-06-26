@@ -1,0 +1,18 @@
+{
+  "schema_version": "skills.config.v1",
+  "skills": [
+    {
+      "id": "neutral-mechanism-example",
+      "title": "Neutral mechanism example",
+      "neutral_core": true,
+      "path": "skills/neutral-mechanism-example.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
+    }
+  ]
+}

@@ -8358,6 +8358,32 @@
             "updated_at": "2026-06-26T00:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0183",
+            "expires_at": "2026-06-26T05:37:00Z",
+            "notes": "Implement TASK-0183 neutral skills registry and read-only cold-start loader.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0183",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0183",
+                "Area_comun/tasks/TASK-0183-codex-skills-mechanism-coldstart-loader.md",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0183.md",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0183.md",
+                "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0183-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0183-codex-to-arquitecto-1.md",
+                "skills/",
+                "examples/skills_loader_cases/",
+                "scripts/scan_domain_neutrality.py",
+                ".github/workflows/ci.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T01:37:00Z",
+            "status": "active",
+            "task_id": "TASK-0183",
+            "updated_at": "2026-06-26T01:37:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

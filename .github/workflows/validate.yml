@@ -151,6 +151,9 @@ jobs:
       - name: Run connector CI read-only cases
         run: python examples/connector_ci_cases/run_connector_ci_cases.py
 
+      - name: Run skills loader cases
+        run: python examples/skills_loader_cases/run_skills_loader_cases.py
+
       - name: Run runtime instantiation cases
         run: python examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py
 
