@@ -2876,7 +2876,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0098",
-            "status": "in_review",
+            "status": "done",
             "title": "Consola del Arquitecto pieza 1: proceso-puente gobernado (sesion viva + streaming, no-bypass, runtime-only, sesion unica, off-by-default) (SPEC-0098, DECISION-0062)",
             "type": "product"
         },

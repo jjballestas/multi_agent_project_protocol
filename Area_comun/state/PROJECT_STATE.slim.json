@@ -11,12 +11,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
-        },
-        {
-            "id": "TASK-0185",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Consola del Arquitecto pieza 1: proceso-puente gobernado (sesion viva + streaming, no-bypass, runtime-only, sesion unica, off-by-default) (SPEC-0098, DECISION-0062)"
         }
     ],
     "next_actions": [
