@@ -4,7 +4,7 @@ task_id: TASK-0184
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Revisar TASK-0184 y cerrar maker!=checker si la evidencia y el alcance SPEC-0097 AC1-AC6 son correctos."

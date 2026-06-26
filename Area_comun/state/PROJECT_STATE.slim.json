@@ -17,12 +17,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
-        },
-        {
-            "id": "TASK-0184",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)"
         }
     ],
     "next_actions": [

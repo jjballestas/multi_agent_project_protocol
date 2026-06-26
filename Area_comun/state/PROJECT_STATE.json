@@ -813,7 +813,7 @@
         {
             "id": "TASK-0184",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)"
         },
         {

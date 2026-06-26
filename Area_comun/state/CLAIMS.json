@@ -8331,6 +8331,24 @@
             "updated_at": "2026-06-26T01:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-close-0184",
+            "expires_at": "2026-06-26T08:00:00Z",
+            "notes": "Close TASK-0184 in_review->done (FLOOR skills Fase 1 pieza 2 = 3 skills de contenido, SPEC-0097; maker=Codex, checker=Arquitecto). Checker clon limpio d589318 (longpaths): shell minimo profiles/financiero_presupuesto (manifest valido, sin politica de dominio) + 3 skills genericas conformes (ddl-conventions/business-rule-vs-legacy/migration-verification, neutral_core:false) + 3 entradas en skills.config.json off-by-default (registry neutral); golden examples/skills_loader_cases 6/6 (incl AC6 profile-skills-load-under-profile loaded 3); validate exit 0 SIN secretos + drift 0; encoding/neutrality exit 0; protocol.config.json byte-identico (genesis/#4 intactos); loader +2 = endurecimiento legitimo (exige neutral_core:false en frontmatter de skill de perfil); Co-Author Codex. AC1-AC6 cumplidos. CON ESTO skills Fase 1 (mecanismo + contenido) COMPLETA.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0184-codex-skills-fase1-pieza2-tres-skills.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T02:03:00Z",
+            "status": "released",
+            "task_id": "TASK-0184",
+            "updated_at": "2026-06-26T02:03:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Arquitecto-register-0184",
             "expires_at": "2026-06-26T07:00:00Z",
             "notes": "Register TASK-0184 ready/Codex (FLOOR skills Fase 1 pieza 2 = 3 skills de contenido en profiles/financiero_presupuesto/skills/ sobre el mecanismo TASK-0183, SPEC-0097). Gobernada por DECISION-0061 (sin decision nueva). Operador dio GO pieza 2.",
