@@ -1,26 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260626-Codex-TASK-0184",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json#TASK-0184",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0184",
-                "Area_comun/tasks/TASK-0184-codex-skills-fase1-pieza2-tres-skills.md",
-                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0184.md",
-                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0184.md",
-                "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0184-in-review.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0184-codex-to-arquitecto-1.md",
-                "skills/skills.config.json",
-                "profiles/financiero_presupuesto/",
-                "examples/skills_loader_cases/",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0184"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

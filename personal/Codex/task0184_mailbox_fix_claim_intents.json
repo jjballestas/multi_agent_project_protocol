@@ -1,0 +1,25 @@
+﻿{
+    "idempotency_key":  "Codex:TASK-0184:mailbox-fix-claim:20260626T020128Z",
+    "intents":  [
+                    {
+                        "claim":  {
+                                      "claim_id":  "CLAIM-20260626-Codex-TASK-0184-MAILBOX-FIX",
+                                      "owner":  "Codex",
+                                      "task_id":  "TASK-0184",
+                                      "status":  "active",
+                                      "started_at":  "2026-06-26T02:01:28Z",
+                                      "updated_at":  "2026-06-26T02:01:28Z",
+                                      "expires_at":  "2026-06-26T02:31:28Z",
+                                      "notes":  "Fix TASK-0184 handoff mailbox validation fields.",
+                                      "scope":  [
+                                                    "Area_comun/state/CLAIMS.json",
+                                                    "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0184-in-review.md",
+                                                    "runtime/state/events.jsonl",
+                                                    "runtime/state/snapshot.json"
+                                                ]
+                                  },
+                        "op":  "acquire",
+                        "type":  "claim"
+                    }
+                ]
+}

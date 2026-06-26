@@ -4,7 +4,7 @@ task_id: TASK-0184
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0184 (FLOOR skills Fase 1 PIEZA 2 = 3 skills de CONTENIDO; ready). Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = PROTOCOLO. Usa el mecanismo de TASK-0183 (loader + registro). CONTENIDO al PERFIL (profiles/financiero_presupuesto/skills/), NO al core. Crea el shell MINIMO del perfil (manifest + skills/) SIN politica de dominio. 3 skills: ddl-conventions, business-rule-vs-legacy, migration-verification (procedimientos genericos). Registralas en skills/skills.config.json (profile/path, enabled:false, trust_boundary). Golden: cargar las 3 via el loader. DoD = SPEC-0097 AC1-AC6. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."

@@ -1,0 +1,26 @@
+﻿{
+    "idempotency_key":  "Codex:TASK-0184:answer-go-claim:20260626T020045Z",
+    "intents":  [
+                    {
+                        "claim":  {
+                                      "claim_id":  "CLAIM-20260626-Codex-TASK-0184-GO-ANSWER",
+                                      "owner":  "Codex",
+                                      "task_id":  "TASK-0184",
+                                      "status":  "active",
+                                      "started_at":  "2026-06-26T02:00:45Z",
+                                      "updated_at":  "2026-06-26T02:00:45Z",
+                                      "expires_at":  "2026-06-26T02:30:45Z",
+                                      "notes":  "Move consumed TASK-0184 GO to answered after delivery ledger is backed.",
+                                      "scope":  [
+                                                    "Area_comun/state/CLAIMS.json",
+                                                    "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0184.md",
+                                                    "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0184.md",
+                                                    "runtime/state/events.jsonl",
+                                                    "runtime/state/snapshot.json"
+                                                ]
+                                  },
+                        "op":  "acquire",
+                        "type":  "claim"
+                    }
+                ]
+}

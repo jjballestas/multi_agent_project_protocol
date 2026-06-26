@@ -1,0 +1,13 @@
+﻿{
+    "idempotency_key":  "Codex:TASK-0184:mailbox-ascii-release:20260626T020257Z",
+    "intents":  [
+                    {
+                        "op":  "release",
+                        "claim_id":  "CLAIM-20260626-Codex-TASK-0184-MAILBOX-ASCII",
+                        "task_id":  "TASK-0184",
+                        "type":  "claim",
+                        "owner":  "Codex",
+                        "updated_at":  "2026-06-26T02:02:57Z"
+                    }
+                ]
+}

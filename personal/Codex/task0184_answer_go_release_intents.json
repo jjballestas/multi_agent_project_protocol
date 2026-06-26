@@ -1,0 +1,13 @@
+﻿{
+    "idempotency_key":  "Codex:TASK-0184:answer-go-release:20260626T020059Z",
+    "intents":  [
+                    {
+                        "op":  "release",
+                        "claim_id":  "CLAIM-20260626-Codex-TASK-0184-GO-ANSWER",
+                        "task_id":  "TASK-0184",
+                        "type":  "claim",
+                        "owner":  "Codex",
+                        "updated_at":  "2026-06-26T02:00:59Z"
+                    }
+                ]
+}

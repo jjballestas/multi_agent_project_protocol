@@ -4,6 +4,24 @@ Last updated: 2026-06-26 Europe/Madrid, after TASK-0182 CI change.
 
 ## Latest Session Note
 
+- TASK-0184 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `d589318 feat(skills): add profile procedure skills`. The protocol now has the minimal
+  `profiles/financiero_presupuesto/` shell with `profile.manifest.json` plus three off-by-default profile skills:
+  `ddl-conventions`, `business-rule-vs-legacy`, and `migration-verification`. The core registry
+  `skills/skills.config.json` references them with `enabled:false`, profile containment, and read-only/no-authority
+  trust boundaries. The loader now fails closed unless profile skill frontmatter declares `neutral_core:false`, and
+  `examples/skills_loader_cases/run_skills_loader_cases.py` includes an AC6 golden that enables only those three
+  skills in a fixture, loads them deterministically, and verifies they remain under the profile path. Evidence before
+  commit: `python -m py_compile skills/loader.py examples/skills_loader_cases/run_skills_loader_cases.py` OK; skills
+  loader golden PASS; encoding OK; domain neutrality OK; Python validator OK; PowerShell validator OK; diff check OK;
+  drift false / #4 byte-identica `up_to_seq` 2031. `protocol.config.json` and chain genesis were not changed.
+  Protocol delivery commit `coord(TASK-0184): deliver profile skills` moved TASK-0184 to `in_review`, released
+  Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0184-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0184-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0184.md`. Final protocol evidence before
+  delivery commit: skills golden PASS, encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift
+  false / #4 byte-identica `up_to_seq` 2037. A follow-up ASCII-only mailbox field fix was recorded through
+  short-lived Codex claims, leaving drift false / #4 byte-identica `up_to_seq` 2039.
 - TASK-0183 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `e316d9e feat(skills): add read-only cold-start loader`. The protocol now has neutral `skills/` machinery:
   `skills/skills.config.json` outside `protocol.config.json`, disabled-by-default skill entries, inert governed
