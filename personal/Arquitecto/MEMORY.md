@@ -15,9 +15,18 @@
   Repo=Zeus. maker=Codex / checker=Arquitecto.
 - **Secuencia consola-arq:** pieza 1 = proceso-puente (EN CURSO) -> pieza 2 = consola UI + streaming -> pieza 3 =
   auditoria endurecida (posteriores, una a la vez).
-- **PROXIMO PASO:** monitorear entrega de TASK-0185 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`)
-  AC1-AC6 (off-by-default, no-bypass prueba negativa, runtime-only+stop, sesion unica, streaming+PII, gates). Si
-  verde -> cerrar (checker=Arquitecto). Repo Zeus -> push del producto sigue siendo accion del operador.
+- **INCIDENTE stop-regex (RESUELTO):** mi GO TASK-0185 original tenia "stop"/"para" + "Codex" en la linea
+  `requested_action` -> el cron de Codex lo leyo como orden de cese y SE DETUVO (13:50:28 "Arquitecto stop order
+  detected; exiting") ANTES de tomar la tarea. Regex exacta (Test-ArquitectoStopOrder, codex_mailbox_cron.ps1:162):
+  `(?i)\b(detener|deten|parar|para|stop|standdown|stand-down)\b.*\b(cron|monitor|monitoreo|Codex)\b` en la MISMA
+  linea (escanea summary+requested_action+content de los MSG Arquitecto->Codex en open/). FIX: reescribi el GO
+  (stop->cese, detener/detiene->finalizar, para->a fin de) hasta grep-limpio (commit e0e7d8f) y relance el cron
+  (pid 111828, 14:48:21) -> tomo el GO de inmediato (EXEC_START 14:48:24), sin re-detenerse. **LECCION reforzada:
+  NUNCA poner detener/deten/parar/para/stop/standdown en la MISMA linea que Codex/cron/monitor en un MSG a Codex;
+  ojo con "para" (comun en espanol) y "stop". Verificar el GO con ese grep ANTES de commitear.** [[semi-auto-collaboration-pattern]]
+- **PROXIMO PASO:** monitorear entrega de TASK-0185 a in_review (Codex EN CURSO, pid 113892 exec). Re-checar clon
+  limpio (`git -c core.longpaths=true`) AC1-AC6 (off-by-default, no-bypass prueba negativa, runtime-only+cese,
+  sesion unica, streaming+PII, gates). Si verde -> cerrar (checker=Arquitecto). Repo Zeus -> push = accion operador.
 - **Zeus-protocol PUSHEADO** (operador, 2026-06-26): origin/main == local == 8c746ea (en sync; incluye 6b2b37c/
   a6b830c/8c746ea). El push de Zeus es accion del operador (clasificador me bloquea push externo); cuando Codex
   entregue TASK-0185 (Zeus) ese commit nuevo tambien lo pushea el operador.
