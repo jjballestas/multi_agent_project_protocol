@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-06-26 Europe/Madrid, after TASK-0182 CI change.
+Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- REQ-D642E4D8 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `ca008e8 coord(REQ-D642E4D8): reconcile file intake requirement`. Codex processed
+  `MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md`, moved REQ-D642E4D8 from `in_progress` to
+  `done` via `runtime/submit_intent.py` transaction `Codex:REQ-D642E4D8:reconcile-done:20260626T000000Z`
+  (seq 2043 claim acquire, seq 2044 task_status `in_progress -> done`, seq 2045 claim release), claimed/released
+  delivery artifacts at seq 2046/2047, fixed the consumed GO status under a short-lived claim at seq 2048/2049,
+  wrote `Area_comun/handoffs/HANDOFF-REQ-D642E4D8-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-REQ-D642E4D8-reconciled.md`, and moved the consumed GO
+  to `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md`. No product code
+  changed; `D:/Agentes/Zeus/Zeus-protocol` stayed clean. Evidence before commit: encoding OK, neutrality OK,
+  Python validator OK, PowerShell validator OK, drift false / #4 byte-identica `up_to_seq` 2049.
 - TASK-0184 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `d589318 feat(skills): add profile procedure skills`. The protocol now has the minimal
   `profiles/financiero_presupuesto/` shell with `profile.manifest.json` plus three off-by-default profile skills:
