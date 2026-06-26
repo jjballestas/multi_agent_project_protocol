@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260626-Arquitecto-decision-0062","task_id":"DECISION-0062","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/decisions/DECISION-0062-consola-arquitecto-puente-interactivo.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-26T11:12:00Z","updated_at":"2026-06-26T11:12:00Z","expires_at":"2026-06-26T17:00:00Z","status":"active","notes":"Register DECISION-0062 PROPOSED (consola del Arquitecto: puente interactivo persistente Operador<->Arquitecto; no-bypass, runtime-only, sesion unica, off-by-default, auditoria+guarda PII; codigo en Zeus, gobernanza en protocolo). Avance de TASK-0178; el operador eligio el enfoque persistente. Requiere RATIFICACION humana antes de SPEC/tasks."},"idempotency_key":"arquitecto:decision-0062:claim-acquire"} },
+    { "decision": { "decision_id":"DECISION-0062","title":"Consola del Arquitecto - puente interactivo PERSISTENTE Operador<->Arquitecto (canal vivo, gobernado no-bypass, runtime-only, off-by-default)","status":"proposed","idempotency_key":"arquitecto:decision-0062:decision"} },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260626-Arquitecto-decision-0062","idempotency_key":"arquitecto:decision-0062:claim-release"} }
+  ]
+}
