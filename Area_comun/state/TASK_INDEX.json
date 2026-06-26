@@ -2920,6 +2920,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0189-codex-consola-arquitecto-remediacion.md",
+            "id": "TASK-0189",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0102",
+            "status": "ready",
+            "title": "Remediacion consola del Arquitecto: audit redacta solo texto libre (timestamp intacto) + cleanup robusto del launcher (lock+inner en SIGTERM/stop) (SPEC-0102)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
