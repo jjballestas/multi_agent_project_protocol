@@ -835,6 +835,12 @@
             "title": "Consola del Arquitecto pieza 3: auditoria endurecida (store controlado + guarda PII, acotado, nunca al #4) (SPEC-0100, DECISION-0062)"
         },
         {
+            "id": "TASK-0188",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Launcher del runtime del Arquitecto (command del puente): contrato stdin->turno->stdout, inner configurable, identidad existente, no-bypass, instancia unica, off-by-default (SPEC-0101, DECISION-0063)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

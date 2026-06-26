@@ -2907,6 +2907,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0188-codex-launcher-runtime-arquitecto.md",
+            "id": "TASK-0188",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0101",
+            "status": "ready",
+            "title": "Launcher del runtime del Arquitecto (command del puente): contrato stdin->turno->stdout, inner configurable, identidad existente, no-bypass, instancia unica, off-by-default (SPEC-0101, DECISION-0063)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -1,8 +1,8 @@
 ---
 decision_id: DECISION-0063
 title: Launcher del runtime del Arquitecto VIVO (lo que el puente hace spawn) - gobernado, identidad existente, no-bypass, off-by-default, operador presente
-status: proposed
-ratified_at: null
+status: accepted
+ratified_at: 2026-06-26
 date: 2026-06-26
 deciders: [operador humano, Arquitecto]
 supersedes: []
@@ -13,10 +13,11 @@ phase: P2
 
 # DECISION-0063 - Launcher del runtime del Arquitecto vivo
 
-> PROPUESTA. El operador dio GO a "activar el uso de la consola" y eligio CONSTRUIR EL LAUNCHER (SDD). La consola
-> (DECISION-0062) ya tiene puente+UI+auditoria, pero el puente hace `spawn(config.command)` y **no existe aun un
-> comando que lance un Arquitecto interactivo**. Esta decision gobierna ese launcher. Requiere RATIFICACION humana
-> (corre un agente de IA VIVO que puede dirigir el protocolo). Codigo en Zeus-protocol; gobernanza aqui. NO toca #4.
+> ACCEPTED (operador ratifico 2026-06-26). El operador dio GO a "activar el uso de la consola" y eligio CONSTRUIR
+> EL LAUNCHER (SDD). La consola (DECISION-0062) ya tiene puente+UI+auditoria, pero el puente hace
+> `spawn(config.command)` y no existia un comando que lance un Arquitecto interactivo. Implementacion = SPEC-0101 +
+> TASK-0188 (maker=Codex / checker=Arquitecto). La ACTIVACION VIVA real es un paso final con el operador presente.
+> Codigo en Zeus-protocol; gobernanza aqui. NO toca #4.
 
 ## Contexto
 
