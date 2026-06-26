@@ -4,7 +4,28 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD e3b87a2) -- consola Arquitecto PIEZA 2 (UI) GO a Codex <<<
+## >>> RESUME 2026-06-26 (HEAD 7e922c8) -- consola Arquitecto PIEZA 2 (UI) CERRADA <<<
+- **TASK-0186 (consola del Arquitecto pieza 2 = UI conversacional + streaming) CERRADA in_review->done** (close
+  submit_intent seq ~2075, commit 7e922c8; incluyo commit local de Codex 014eb4f que pushee yo). Checker=Arquitecto.
+- **Entrega (Codex Zeus 2176f5b "add architect console UI"):** solo public/* (app.js+262/index.html+10/styles.css+105)
+  + tests +94; SIN server.js (reusa endpoints del puente de pieza 1). Vista architect routeada + cliente que mapea
+  open/send/stop/status/stream a los endpoints gobernados + EventSource + estado derivado.
+- **Checker VERDE clon limpio 2176f5b:** 3 UI tests sustantivos (AC1 routeada+1-vista, AC3 estado honesto derivado
+  disabled/alive/dormant, AC2 endpoints-solo + doesNotMatch writeFile/events.jsonl/actions-submit = no-bypass, AC4
+  client maps, AC5 stream incremental + redaccion); gate rapido 80/98 exit 0; **full test:ci VENTANA QUIETA 98/98
+  0 fail exit 0**. Co-Author OK.
+- **LECCION (flake por carga, importante):** la 1a corrida de test:ci dio **9 fallos 502** (AC3-bis/ter, local-vlm,
+  impersonation, etc.) porque la corri con **Codex MID-EXEC** -> contencion de CPU -> el subproceso submit_intent
+  del server devolvio 502. NO regresion (TASK-0186 solo public/*; re-corrida limpia 98/98). REGLA: correr test:ci
+  SOLO con 0 peers mid-exec (sin lock, exec gone); el full-suite es fragil bajo carga (deuda TASK-0182).
+  [[checker-test-real-write-path]]
+- **SIGUIENTE consola-arq (gateado, GO operador):** pieza 3 = auditoria endurecida (store controlado + guarda PII).
+  NO arrancar sin GO. Con piezas 1+2, la consola del Arquitecto ya es funcional (puente + UI), off-by-default.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto ahora 2176f5b).
+- **NOTA Codex usage limit:** Codex topo su limite de uso (~15:46, reset 16:52); reintento OK tras limpiar seen.json.
+  Si recurre, es accion del operador (creditos en chatgpt.com/codex). [[agent-activation-lifecycle]]
+
+## >>> RESUME-PREV 2026-06-26 (HEAD e3b87a2) -- consola Arquitecto PIEZA 2 (UI) GO a Codex <<<
 - **Zeus-protocol PUSHEADO por el operador** (HEAD producto d9f57de, en sync). Cuando Codex entregue TASK-0186, ese
   commit Zeus tambien lo pushea el operador.
 - **Operador dio GO a pieza 2.** Autore SPEC-0099 + TASK-0186 (ready/Codex) -- SIN decision nueva (cubierta por
