@@ -2,7 +2,7 @@
 task_id: TASK-0185
 title: "Consola del Arquitecto pieza 1: proceso-puente gobernado (sesion viva + streaming, no-bypass, runtime-only, sesion unica, off-by-default) (SPEC-0098, DECISION-0062)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

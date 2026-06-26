@@ -4,6 +4,21 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0185 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `d9f57de feat(architect): add runtime bridge`.
+  The product now ships the Architect console bridge piece 1: versioned `architect-bridge.config.json` is
+  `enabled:false`; gitignored runtime overrides are `architect-bridge.runtime.json`/`.local.json`; server endpoints
+  expose status/open/send/SSE stream/stop under `/api/protocol/architect-bridge*`; the bridge keeps one live session
+  per server process, reuses an existing session, honors operator stop, redacts streamed/audited text best-effort,
+  and stores minimal audit outside #4 under `.runtime/architect-bridge/`. Product evidence before protocol delivery:
+  `node --check src/server.js` OK; `node --check tests/staticContract.test.js` OK; `git diff --check` OK; `npm test`
+  PASS 77/95 with 18 slow skips; targeted slow `ZEUS_RUN_SLOW_TESTS=1 node --test --test-name-pattern
+  "TASK-0185|src-wide egress"` PASS 4/4; full `npm run test:ci` PASS 95/95; smoke on port 4270 OK for `/healthz`
+  and disabled bridge status. Protocol delivery moved TASK-0185 to `in_review`, released Codex claims, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0185-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0185-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0185.md`. Final protocol evidence before
+  commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4 byte-identica
+  `up_to_seq` 2062; `protocol.config.json`/genesis diff empty.
 - REQ-D642E4D8 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `ca008e8 coord(REQ-D642E4D8): reconcile file intake requirement`. Codex processed
   `MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md`, moved REQ-D642E4D8 from `in_progress` to
@@ -14,7 +29,8 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-REQ-D642E4D8-reconciled.md`, and moved the consumed GO
   to `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md`. No product code
   changed; `D:/Agentes/Zeus/Zeus-protocol` stayed clean. Evidence before commit: encoding OK, neutrality OK,
-  Python validator OK, PowerShell validator OK, drift false / #4 byte-identica `up_to_seq` 2049.
+  Python validator OK, PowerShell validator OK, drift false / #4 byte-identica `up_to_seq` 2049. Memory commit:
+  `ccfb7bd chore(personal): update Codex memory after REQ-D642E4D8`.
 - TASK-0184 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `d589318 feat(skills): add profile procedure skills`. The protocol now has the minimal
   `profiles/financiero_presupuesto/` shell with `profile.manifest.json` plus three off-by-default profile skills:

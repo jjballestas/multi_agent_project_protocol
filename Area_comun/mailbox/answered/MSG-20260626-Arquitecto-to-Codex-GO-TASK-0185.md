@@ -4,7 +4,7 @@ task_id: TASK-0185
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0185 (Consola del Arquitecto PIEZA 1 = proceso-puente, slice minimo; ready). DECISION-0062 ratificada. Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = Zeus-protocol. Construir el proceso-puente que mantiene UNA sesion viva del runtime del Arquitecto + endpoints del front (abrir/estado/enviar/stream/finalizar) + streaming de su salida. INVARIANTES DUROS: no-bypass (toda mutacion via submit_intent; sin ruta de escritura al ledger; prueba negativa permanente), runtime-only (solo lanza/relanza/finaliza la sesion; nunca identidad/llaves/registro; orden de cese del operador respetada), sesion unica (anti-colision), off-by-default (registro fuera del config pinned). DoD = SPEC-0098 AC1-AC6. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."
