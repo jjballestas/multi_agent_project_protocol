@@ -2946,6 +2946,19 @@
             "type": "protocol"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0191-codex-harness-experimento-h1h3.md",
+            "id": "TASK-0191",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0104",
+            "status": "ready",
+            "title": "Harness de experimento H1-H3: inyeccion A1/A2/A3 (solo copia desechable) + medicion deteccion/FPR/sobrecoste + verificador externo + reporte mapeado al pre-registro (SPEC-0104)",
+            "type": "protocol"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
