@@ -16,7 +16,12 @@
   pendientes de numero final del operador; freeze=commit). (b) **DECISION-0064 PROPOSED** (UI fork Hermes, contrato
   /api/governance/*, gateada: NO arrancar build F1+ hasta congelar la medicion; F0 fork/seams es segura). commit
   378cba7 PUSHED, validate exit 0.
-- **PROXIMO PASO (camino critico TFM):** el operador confirma umbrales del pre-registro -> FREEZE -> cutover A2
+- **>>> PRE-REGISTRO CONGELADO (FROZEN v1.0, commit c64f2b8, sha256 1ae10e05...).** Umbrales confirmados (operador
+  delego en Arquitecto; justificados por principio/requisito): H1 deteccion=100% TODOS los vectores + AC2>=99% +
+  **FPR=0** (verificador determinista); H2 Dlatencia mediana<=50ms/p95<=200ms + Dstore<=4KB/evento + Dtokens<=5%
+  (cotas por requisito: turno=segundos, firma hashes-no-texto); H3 acuerdo externo=100% + match clon-limpio (0046).
+  Tras freeze NO se cambian umbrales antes de medir; cambio => v2.0 nueva y solo antes de mirar resultados.
+- **PROXIMO PASO (camino critico TFM, ya con pre-registro congelado):** cutover A2
   (Ed25519 vivo) -> generar dataset -> inyectar A1/A2/A3 + medir coste + verificador externo -> redactar. La
   MEDICION = experimento deliberado (numeros), distinta de construir (instrumento). Construir Zeus = el INSTRUMENTO,
   no la medicion (correccion clave que el operador necesitaba).
