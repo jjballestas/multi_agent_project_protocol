@@ -4,7 +4,7 @@ task_id: REQ-D642E4D8
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "REQ-D642E4D8 reconciliado a done via submit_intent; handoff listo."
