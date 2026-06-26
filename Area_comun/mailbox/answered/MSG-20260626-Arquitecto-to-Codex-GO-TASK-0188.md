@@ -4,7 +4,7 @@ task_id: TASK-0188
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0188 (Launcher del runtime del Arquitecto = el command que el puente hace spawn; ready). DECISION-0063 ratificada. Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = Zeus-protocol. Construir un wrapper de larga vida (p.ej. scripts/architect-runtime-launcher.mjs): lee mensajes por stdin (uno por turno), invoca el inner-runtime CONFIGURABLE (el CLI del Arquitecto via env/config; en tests un STUB determinista, NO un Arquitecto real), emite la salida por stdout line-buffered (alimenta el streaming del puente), proceso de larga vida con contexto entre turnos. INVARIANTES: identidad EXISTENTE (no crea ni reconfigura identidad/llaves/registro; pasa el entorno existente), no-bypass (no importa escritores del ledger; no escribe Area_comun/state ni events.jsonl; ledger byte-identico con stub), instancia unica (lock/PID; un 2o no arranca), cese limpio (SIGTERM o cierre de stdin finaliza inner+launcher sin huerfanos), off-by-default (integra como command del puente; README de como configurarlo de cara al uso vivo = paso del operador presente). DoD = SPEC-0101 AC1-AC7. Correr test:ci en ventana quieta. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."

@@ -4,6 +4,16 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0188 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `6220833 feat(architect): add runtime launcher`.
+  The product now ships `scripts/architect-runtime-launcher.mjs`, an off-by-default bridge command wrapper that
+  requires `ARCHITECT_RUNTIME_COMMAND`, keeps one long-lived inner runtime, forwards stdin turns to it, streams
+  stdout/stderr back line-buffered, enforces a PID lock, passes the existing environment through, and fails closed
+  without a configured inner. Tests use `tests/fixtures/architect-runtime-stub.mjs` only; no real Architect runtime
+  is invoked. README documents the operator-present live configuration path through `architect-bridge.runtime.json`.
+  Product evidence before commit: `node --check` OK for launcher, stub, tests, server, and app; `git diff --check`
+  OK; targeted TASK-0188/bridge tests PASS 9 plus 4 slow skips; `npm test` PASS 86/106 with 20 slow skips;
+  `npm run test:ci` PASS 106/106; smoke on port 4289 OK for `/healthz`, disabled architect bridge status, and
+  architect console HTML.
 - TASK-0187 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `a4e4a88 feat(architect): harden bridge audit`.
   The Architect bridge audit now writes session-scoped JSONL under `.runtime/architect-bridge/sessions/`, persists
   open/input/output/stop events with session/timestamp/type, redacts enumerable PII families including email,

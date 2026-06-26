@@ -2,7 +2,7 @@
 task_id: TASK-0188
 title: "Launcher del runtime del Arquitecto (command del puente): contrato stdin->turno->stdout, inner configurable, identidad existente, no-bypass, instancia unica, off-by-default (SPEC-0101, DECISION-0063)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
