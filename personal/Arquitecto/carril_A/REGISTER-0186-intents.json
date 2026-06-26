@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260626-Arquitecto-register-0186","task_id":"TASK-0186","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/specs/SPEC-0099-consola-arquitecto-ui-streaming.md","Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-26T13:12:00Z","updated_at":"2026-06-26T13:12:00Z","expires_at":"2026-06-26T19:00:00Z","status":"active","notes":"Register TASK-0186 ready/Codex (Consola del Arquitecto pieza 2 = UI conversacional + streaming, SPEC-0099). Gobernada por DECISION-0062 (sin decision nueva). Operador dio GO pieza 2."},"idempotency_key":"arquitecto:register-0186:claim-acquire"} },
+    { "task_upsert": { "task":{"id":"TASK-0186","title":"Consola del Arquitecto pieza 2: UI conversacional + streaming en el front (consume el puente; routeada, honesta, no-bypass) (SPEC-0099, DECISION-0062)","status":"ready","owner":"Codex","type":"product","phase":"P2","priority":"normal","spec_id":"SPEC-0099","maker":"Codex","checker":"Arquitecto","file":"Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md"},"idempotency_key":"arquitecto:register-0186:task-upsert"} },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260626-Arquitecto-register-0186","idempotency_key":"arquitecto:register-0186:claim-release"} }
+  ]
+}

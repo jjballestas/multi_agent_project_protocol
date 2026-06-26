@@ -2881,6 +2881,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md",
+            "id": "TASK-0186",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0099",
+            "status": "ready",
+            "title": "Consola del Arquitecto pieza 2: UI conversacional + streaming en el front (consume el puente; routeada, honesta, no-bypass) (SPEC-0099, DECISION-0062)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
