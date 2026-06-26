@@ -35,7 +35,17 @@
   firma actor_auth Ed25519 + golden + prueba negativa atribucion-cruzada + secret-indep, off-by-default,
   maker=Codex/checker=Arquitecto); (iii) agendar la ventana de riesgo (operador presente) para el flip + rollback.
   Nota: si camino B, emitir pre-registro v2.0 fijando "atestacion medida = actor_auth Ed25519" ANTES de generar dataset.
-- **PROXIMO PASO (camino critico TFM, ya con pre-registro congelado+atestado):** cutover A2
+- **A2 CAMINO B: SDD EMITIDA (operador eligio B + GO).** DECISION-0065 accepted + SPEC-0103 + TASK-0190 ready/Codex
+  + GO (commit de0220d PUSHED, validate exit 0). TASK-0190 = core (`runtime/`): submit_intent firma actor_auth
+  Ed25519 con la privada del actor (de protocol-secrets), **off-by-default** (flag event_state.actor_auth_enforce);
+  golden + prueba negativa atribucion-cruzada + secret-indep (0046); CAMINO OFF byte-identico (lo usan todos los
+  agentes; un bug rompe el ledger vivo); NO toca genesis/#4/config. La ACTIVACION viva (flip) = ventana del operador
+  aparte (DECISION-0039 §5). maker=Codex/checker=Arquitecto.
+- **PROXIMO PASO:** monitorear entrega de TASK-0190. Re-checar clon limpio CON y SIN secretos: OFF byte-identico +
+  ON firma/verifica/rechaza-cruzada + secret-indep + drift 0. Si verde -> cerrar. ENTONCES: (1) pre-registro v2.0
+  (atestacion medida = actor_auth Ed25519); (2) agendar ventana de riesgo del FLIP con operador presente; (3)
+  generar dataset -> medir H1-H3. Hermes (DECISION-0064) sigue parqueada post-TFM.
+- **PROXIMO PASO HISTORICO (camino critico TFM, ya con pre-registro congelado+atestado):** cutover A2
   (Ed25519 vivo) -> generar dataset -> inyectar A1/A2/A3 + medir coste + verificador externo -> redactar. La
   MEDICION = experimento deliberado (numeros), distinta de construir (instrumento). Construir Zeus = el INSTRUMENTO,
   no la medicion (correccion clave que el operador necesitaba).
