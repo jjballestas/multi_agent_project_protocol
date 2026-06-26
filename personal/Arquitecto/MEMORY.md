@@ -53,8 +53,14 @@
   AC2-AC6 seed-reproducible); validate exit 0. **AC1 CRITICO CONFIRMADO EN VIVO:** correr el golden dejo
   runtime/state/events.jsonl BYTE-IDENTICO (mismo sha256) -> nunca toca el #4 vivo (LIVE_GUARD_PATHS+hash_live_guard).
   Aparato listo; la corrida real es posterior (flip A2 + dataset). DECISION-0066 accepted, SPEC-0104.
-- **>>> ESTADO TFM camino critico:** pre-registro v2.0 FROZEN+atestado ✅; mecanismo A2 construido off-by-default ✅
-  (TASK-0190); harness en construccion (TASK-0191). **FALTA tras harness:** runbook del FLIP (preparar) -> ventana
+- **RUNBOOK FLIP A2 LISTO** (`personal/operador/TFM/RUNBOOK-FLIP-A2.md`, commit 5b1f741). HALLAZGO CRITICO: el flip
+  NO es un flag-toggle -- el flag `actor_auth_enforce` vive SOLO en protocol.config.json y genesis=hash(config) ->
+  encenderlo EXIGE **RE-GENESIS** (`runtime/regenesis.py`, como la activacion #4). El runbook: ensayo en copia
+  desechable OBLIGATORIO (DECISION-0045) -> flip vivo con operador presente (editar config + regenesis + verify
+  drift0/validate + prueba viva actor_auth.ed25519) -> decision de epoca (DECISION-0047) -> rollback = flag false +
+  regenesis. Una sola ventana de riesgo (no combinar con real_invoker/SA).
+- **>>> ESTADO TFM camino critico:** pre-registro v2.0 FROZEN+atestado ✅; mecanismo A2 off-by-default ✅ (TASK-0190);
+  harness ✅ (TASK-0191); runbook flip ✅. **FALTA (todo del operador presente / ejecucion):** ventana
   de riesgo del operador (flip actor_auth_enforce) -> generar dataset -> EJECUTAR harness -> H1-H3 vs umbrales ->
   redactar. Hermes (DECISION-0064) parqueada post-TFM.
 - **>>> (historico):** pre-registro v1.0 FROZEN+atestado (#4 seq 2124) ✅; mecanismo A2 construido
