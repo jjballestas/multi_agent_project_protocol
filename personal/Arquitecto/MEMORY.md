@@ -2,7 +2,26 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-26, HEAD 6be9fd0 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TODO CERRADO: modo necesidad (TASK-0181+REQ) done + TASK-0182 (deuda full-suite) done. Cola vacia. Zeus a6b830c LOCAL (push al remote = accion operador).**
+> Ultima actualizacion: 2026-06-26, HEAD efe8abf (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 ARRANCADA: operador dio GO; autore DECISION-0061 + SPEC-0096 + TASK-0183 (ready) + GO a Codex (pieza 1 = mecanismo). Modo necesidad + TASK-0182 cerrados. Zeus a6b830c LOCAL (push=operador).**
+
+## >>> RESUME 2026-06-26 (HEAD efe8abf) -- FLOOR skills Fase 1 GO: mecanismo (pieza 1) a Codex <<<
+- **Operador dio GO a skills Fase 1.** Fork resuelto via AskUserQuestion: modelo de digestion = **loader
+  cold-start READ-ONLY** (una skill = doc gobernado que el agente LEE en frio; el loader no actua/no escribe).
+- **SDD autorado (DECISION primero, regla CLAUDE.md 2) y registrado (submit_intent seq ~2016-2019, commit efe8abf
+  PUSHED):** DECISION-0061 (skills gobernadas: capa neutral `skills/` espejo de `connectors/`; registro
+  `skills/skills.config.json` FUERA del config pinned, off-by-default; loader cold-start read-only; no concede
+  autoridad; contenido de dominio SOLO en `profiles/`; no toca #4) + SPEC-0096 (mecanismo, AC1-AC6) + **TASK-0183
+  ready/Codex** (pieza 1 = MECANISMO) + **GO a Codex enviado**.
+- **Secuencia FLOOR skills:** pieza 1 = MECANISMO (TASK-0183, EN CURSO) -> pieza 2 = 3 skills neutrales de
+  CONTENIDO (convenciones DDL / regla-negocio-vs-legacy / verificacion-migracion en
+  `profiles/financiero_presupuesto/skills/`, GO POSTERIOR tras cerrar la pieza 1).
+- **PROXIMO PASO:** monitorear que Codex tome el GO (cron 161592 vivo) y entregue TASK-0183 a in_review. Re-checar
+  clon limpio (AC1-AC6: registro fuera config + loader read-only determinista + no importa escritores + neutralidad
+  + fail-closed + golden + CI). Si verde -> cerrar in_review->done (es protocolo, checker=Arquitecto). Repo =
+  PROTOCOLO (no Zeus). Las decisiones se registran via submit_intent intent `decision`.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD a6b830c; clasificador bloquea externo).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 6be9fd0) -- TASK-0182 CERRADA; cola vacia <<<
 
 ## >>> RESUME 2026-06-26 (HEAD 6be9fd0) -- TASK-0182 CERRADA; cola vacia <<<
 - **TASK-0182 (deuda full-suite) CERRADA in_review->done** (close via submit_intent seq ~2013, commit 6be9fd0;
