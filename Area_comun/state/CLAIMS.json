@@ -9021,6 +9021,26 @@
             "updated_at": "2026-06-26T12:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-a2-camino-b",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Register DECISION-0065 accepted (A2 vivo Camino B: submit_intent firma actor_auth Ed25519, off-by-default) + TASK-0190 ready/Codex (SPEC-0103). Operador eligio Camino B. Build off-by-default; activacion viva = ventana del operador aparte.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0065-actor-auth-ed25519-submit-intent.md",
+                "Area_comun/specs/SPEC-0103-actor-auth-ed25519-submit-intent.md",
+                "Area_comun/tasks/TASK-0190-codex-actor-auth-ed25519-submit-intent.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T00:52:00Z",
+            "status": "released",
+            "task_id": "TASK-0190",
+            "updated_at": "2026-06-27T00:52:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-attest-prereg",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Atestar en #4 el sha256 del pre-registro H1-H3 FROZEN v1.0 ANTES de medir (ancla la fecha de freeze; DECISION-0039).",

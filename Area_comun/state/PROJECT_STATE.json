@@ -847,6 +847,12 @@
             "title": "Remediacion consola del Arquitecto: audit redacta solo texto libre (timestamp intacto) + cleanup robusto del launcher (lock+inner en SIGTERM/stop) (SPEC-0102)"
         },
         {
+            "id": "TASK-0190",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Core: submit_intent firma actor_auth Ed25519 (A2 vivo, Camino B) off-by-default + golden + prueba negativa atribucion-cruzada + secret-indep (SPEC-0103, DECISION-0065)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -927,7 +933,8 @@
         "DECISION-0061",
         "DECISION-0062",
         "DECISION-0063",
-        "DECISION-0064"
+        "DECISION-0064",
+        "DECISION-0065"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

@@ -16,6 +16,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
+        },
+        {
+            "id": "TASK-0190",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "Core: submit_intent firma actor_auth Ed25519 (A2 vivo, Camino B) off-by-default + golden + prueba negativa atribucion-cruzada + secret-indep (SPEC-0103, DECISION-0065)"
         }
     ],
     "view": "task_index.slim"
