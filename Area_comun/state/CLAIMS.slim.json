@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260627-Codex-TASK-0190",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Codex-TASK-0190",
-                "Area_comun/state/TASK_INDEX.json#TASK-0190",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0190",
-                "Area_comun/tasks/TASK-0190-codex-actor-auth-ed25519-submit-intent.md",
-                "runtime/",
-                "examples/",
-                "scripts/",
-                ".github/workflows/",
-                "protocol.config.template.json"
-            ],
-            "task_id": "TASK-0190"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

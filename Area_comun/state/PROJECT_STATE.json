@@ -849,7 +849,7 @@
         {
             "id": "TASK-0190",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Core: submit_intent firma actor_auth Ed25519 (A2 vivo, Camino B) off-by-default + golden + prueba negativa atribucion-cruzada + secret-indep (SPEC-0103, DECISION-0065)"
         },
         {

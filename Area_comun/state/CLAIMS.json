@@ -9090,9 +9090,26 @@
                 "protocol.config.template.json"
             ],
             "started_at": "2026-06-27T00:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0190",
             "updated_at": "2026-06-27T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0190-delivery",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "TASK-0190 delivery handoff and mailbox close.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Codex-TASK-0190-delivery",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0190-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0190.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0190.md"
+            ],
+            "started_at": "2026-06-27T00:01:00Z",
+            "status": "released",
+            "task_id": "TASK-0190",
+            "updated_at": "2026-06-27T00:01:00Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
