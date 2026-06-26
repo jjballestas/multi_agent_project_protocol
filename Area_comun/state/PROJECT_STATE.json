@@ -811,6 +811,12 @@
             "title": "FLOOR skills Fase 1 pieza 1: mecanismo de skills (registro fuera del config pinned + loader cold-start READ-ONLY), neutral, off-by-default (SPEC-0096)"
         },
         {
+            "id": "TASK-0184",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

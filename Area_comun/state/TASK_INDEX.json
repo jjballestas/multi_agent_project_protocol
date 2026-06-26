@@ -2855,6 +2855,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0184-codex-skills-fase1-pieza2-tres-skills.md",
+            "id": "TASK-0184",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0097",
+            "status": "ready",
+            "title": "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

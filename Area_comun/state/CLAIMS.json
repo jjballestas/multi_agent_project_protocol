@@ -8331,6 +8331,25 @@
             "updated_at": "2026-06-26T01:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-register-0184",
+            "expires_at": "2026-06-26T07:00:00Z",
+            "notes": "Register TASK-0184 ready/Codex (FLOOR skills Fase 1 pieza 2 = 3 skills de contenido en profiles/financiero_presupuesto/skills/ sobre el mecanismo TASK-0183, SPEC-0097). Gobernada por DECISION-0061 (sin decision nueva). Operador dio GO pieza 2.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/specs/SPEC-0097-skills-fase1-pieza2-tres-skills-contenido.md",
+                "Area_comun/tasks/TASK-0184-codex-skills-fase1-pieza2-tres-skills.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T01:41:00Z",
+            "status": "released",
+            "task_id": "TASK-0184",
+            "updated_at": "2026-06-26T01:41:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Arquitecto-register-skills-f1",
             "expires_at": "2026-06-26T06:00:00Z",
             "notes": "Register FLOOR skills Fase 1: DECISION-0061 (skills gobernadas, registro fuera del config pinned + loader cold-start read-only, neutral, off-by-default, no concede autoridad, no toca #4) + TASK-0183 ready/Codex (mecanismo pieza 1, SPEC-0096). Operador dio GO skills Fase 1 (modelo digestion=loader cold-start read-only).",
