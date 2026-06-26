@@ -2,7 +2,24 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-26, HEAD 63dd4c9 (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 PIEZA 1 (mecanismo) CERRADA done (TASK-0183). Pieza 2 (3 skills de contenido) = GO posterior. Modo necesidad + TASK-0182 cerrados. Zeus a6b830c LOCAL (push=operador).**
+> Ultima actualizacion: 2026-06-26, HEAD 7a45a8d (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1: pieza 1 (mecanismo) DONE; pieza 2 (3 skills contenido) GO emitido a Codex (TASK-0184 ready, SPEC-0097). Espero entrega. Zeus a6b830c LOCAL (push=operador).**
+
+## >>> RESUME 2026-06-26 (HEAD 7a45a8d) -- skills Fase 1 pieza 2 GO: 3 skills de contenido <<<
+- **Operador dio GO a pieza 2.** Autore SPEC-0097 + TASK-0184 (ready/Codex) -- SIN decision nueva (ya cubierta por
+  DECISION-0061). Registrado (submit_intent) + GO a Codex (commit 7a45a8d PUSHED). validate exit 0.
+- **Alcance pieza 2 (SPEC-0097):** 3 skills de CONTENIDO sobre el mecanismo de TASK-0183 (ddl-conventions /
+  business-rule-vs-legacy / migration-verification = procedimientos GENERICOS), contenido en
+  `profiles/financiero_presupuesto/skills/` (NO core, regla neutralidad). El perfil NO existia -> crea un SHELL
+  MINIMO (manifest + skills/) SIN politica de dominio (la fase "perfil financiero" completa es POSTERIOR, fuera de
+  alcance). Registradas en skills/skills.config.json (profile/path, enabled:false); registry core sigue NEUTRAL.
+  Golden carga las 3 via el loader. maker=Codex / checker=Arquitecto. Repo=PROTOCOLO.
+- **PROXIMO PASO:** monitorear entrega de TASK-0184 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`):
+  shell minimo sin dominio + 3 docs conformes + registry neutral + loader las resuelve (golden) + neutralidad/encoding
+  exit 0 + validate exit 0 sin secretos + config/genesis intactos. Si verde -> cerrar (checker=Arquitecto, sin
+  Analista). Con eso skills Fase 1 queda COMPLETA (mecanismo + contenido).
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD a6b830c; clasificador bloquea externo).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 63dd4c9) -- skills Fase 1 pieza 1 (mecanismo) CERRADA <<<
 
 ## >>> RESUME 2026-06-26 (HEAD 63dd4c9) -- skills Fase 1 pieza 1 (mecanismo) CERRADA <<<
 - **TASK-0183 (FLOOR skills Fase 1 pieza 1 = MECANISMO) CERRADA in_review->done** (close submit_intent seq ~2024,
