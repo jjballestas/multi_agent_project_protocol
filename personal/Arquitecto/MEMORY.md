@@ -18,7 +18,9 @@
 - **PROXIMO PASO:** monitorear entrega de TASK-0185 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`)
   AC1-AC6 (off-by-default, no-bypass prueba negativa, runtime-only+stop, sesion unica, streaming+PII, gates). Si
   verde -> cerrar (checker=Arquitecto). Repo Zeus -> push del producto sigue siendo accion del operador.
-- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD 8c746ea + lo que entregue Codex en TASK-0185).
+- **Zeus-protocol PUSHEADO** (operador, 2026-06-26): origin/main == local == 8c746ea (en sync; incluye 6b2b37c/
+  a6b830c/8c746ea). El push de Zeus es accion del operador (clasificador me bloquea push externo); cuando Codex
+  entregue TASK-0185 (Zeus) ese commit nuevo tambien lo pushea el operador.
 
 ## >>> RESUME-PREV 2026-06-26 (HEAD 6d4c30a) -- (a) REQ-D642E4D8 done; (c) DECISION-0062 consola Arquitecto PROPOSED <<<
 - **(a) REQ-D642E4D8 -> done** (cabo suelto de carga-por-archivo-v2; Codex reconcilio via submit_intent, commits
