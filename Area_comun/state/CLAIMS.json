@@ -8379,7 +8379,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-26T01:37:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0183",
             "updated_at": "2026-06-26T01:37:00Z"
         },

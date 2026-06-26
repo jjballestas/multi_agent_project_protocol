@@ -4,7 +4,7 @@ task_id: TASK-0183
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0183 (FLOOR skills Fase 1 PIEZA 1 = el MECANISMO; ready). Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = PROTOCOLO (capa neutral `skills/`, espejo de `connectors/`). Construir: registro `skills/skills.config.json` FUERA del config pinned (off-by-default) + skill=doc gobernado + loader cold-start DETERMINISTA y READ-ONLY + golden `examples/skills_loader_cases` + cobertura neutralidad + CI. DoD = SPEC-0096 AC1-AC6. NO tocar protocol.config.json/genesis/#4. Las 3 skills de contenido son la PIEZA 2 (GO posterior); esta tarea es SOLO el mecanismo. maker=Codex / checker=Arquitecto. rr=false."
