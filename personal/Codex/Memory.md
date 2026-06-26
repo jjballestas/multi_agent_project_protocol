@@ -4,6 +4,14 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0190 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `d8bb869 feat(runtime): add actor auth ed25519`. The runtime now keeps the default submit_intent path at
+  `actor_auth.method=not_enforced_phase2` unless `event_state.actor_auth_enforce` is explicitly true, and the ON path
+  signs intent events with Ed25519 using actor private keys outside the repo while replay/validation verifies with
+  public keys only. Permanent coverage was added in `examples/actor_auth_ed25519_cases` for ON signing, OFF
+  byte-identical behavior, cross-attribution rejection, secret-independent verification, and fail-closed missing
+  private keys. CI runs the new golden. Live `protocol.config.json` and genesis were not changed; TASK-0190 is still
+  in progress until delivery ledger/handoff is closed.
 - TASK-0189 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `b5675e5 fix(architect): harden audit and cleanup`.
   The Architect bridge audit now redacts only free-text audit fields (`text`/`message`) and preserves structural
   fields such as `timestamp`, `sessionId`, `kind`, and `stream`. Bridge stop now closes stdin and waits for the
