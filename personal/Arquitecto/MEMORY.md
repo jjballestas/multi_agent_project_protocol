@@ -4,7 +4,26 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 4159224) -- VERDAD DE VERSION sincronizada (AGENTS<->config<->CHANGELOG) <<<
+## >>> RESUME 2026-06-26 (HEAD 6605fba) -- TASK-0189 remediacion CERRADA; consola SIN defectos, lista para activacion real <<<
+- **TASK-0189 (remediacion consola) CERRADA in_review->done** (close submit_intent, commit 6605fba; incluyo commits
+  Codex e4e6f7d/9760d71 pusheados). Checker=Arquitecto. Zeus b5675e5 "harden audit and cleanup".
+- **Checker VERDE:** targeted 4/4 + full **test:ci VENTANA QUIETA 109/109 exit 0** + **SMOKE VIVO confirma ambos fixes:**
+  (1) audit timestamp **ISO INTACTO** (`2026-06-26T..Z`, ya no [PHONE-REDACTED]); texto redactado por familia
+  (`output[key]=["message","text"].includes(key)?redact:value`); (2) tras stop: **lock REMOVIDO + 0 huerfanos +
+  OPEN POSTERIOR arranca** (launcher maneja SIGTERM->cleanup+kill inner). Sin regresion. Co-Author OK.
+- **>>> CONSOLA DEL ARQUITECTO COMPLETA Y SIN DEFECTOS:** puente(0185)+UI(0186)+auditoria(0187)+launcher(0188)+
+  remediacion(0189). DECISION-0062/0063 entregadas. COLA VACIA.
+- **FALTA SOLO la ACTIVACION VIVA REAL (paso del operador presente, NO tarea Codex):** seguir
+  `personal/operador/RUNBOOK-activacion-consola-arquitecto.md` -> definir el inner-runtime REAL del Arquitecto +
+  architect-bridge.runtime.json (enabled:true + command/args ABSOLUTOS) + arrancar front + open. **RELEVO DE ROL:**
+  al revivir Arquitecto por Zeus, ESA sesion es EL Arquitecto y esta CLI pasa a ASISTENTE (resuelve sesion unica).
+- **LECCION clave reforzada:** el SMOKE VIVO atrapa lo que los tests verdes esconden (los 2 defectos pasaron tests
+  pero el smoke los destapo; cwd-prod!=cwd-test, stdin.end!=kill, redaccion sobre campos estructurales). Para piezas
+  con proceso/IO real: SIEMPRE smoke vivo en ventana quieta ademas del test:ci. [[checker-test-real-write-path]]
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (acumula b5675e5 + previos). Verdad de version ya sincronizada
+  (AGENTS v1.17.0 + epoca 1.14.0 pinned; CHANGELOG [1.17.0]).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 4159224) -- VERDAD DE VERSION sincronizada (AGENTS<->config<->CHANGELOG) <<<
 - **Operador: arreglar la verdad de version (audit-first = coherencia=credibilidad).** Hecho (commit 4159224 PUSHED,
   encoding/neutralidad/validate exit 0). Incoherencia era: AGENTS.md "Released v1.5.0" (stale/falso), config 1.14.0,
   CHANGELOG 1.16.0. Fix segun DECISION-0047 (DOS EJES): epoca=`protocol_version` (config, PINNED 1.14.0 bajo #4,
