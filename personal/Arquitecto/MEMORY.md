@@ -4,7 +4,24 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 27a11da) -- consola Arquitecto PIEZA 1 (proceso-puente) CERRADA <<<
+## >>> RESUME 2026-06-26 (HEAD e3b87a2) -- consola Arquitecto PIEZA 2 (UI) GO a Codex <<<
+- **Zeus-protocol PUSHEADO por el operador** (HEAD producto d9f57de, en sync). Cuando Codex entregue TASK-0186, ese
+  commit Zeus tambien lo pushea el operador.
+- **Operador dio GO a pieza 2.** Autore SPEC-0099 + TASK-0186 (ready/Codex) -- SIN decision nueva (cubierta por
+  DECISION-0062). Registrado + GO a Codex (commit e3b87a2 PUSHED), validate exit 0.
+- **Alcance pieza 2 (SPEC-0099):** vista "Consola Arquitecto" en el front (Zeus) que consume el proceso-puente de
+  TASK-0185 (endpoints status/open/send/stop/stream-SSE): conversacion + salida en streaming + control
+  abrir/estado/finalizar + indicador de estado DERIVADO del status real. INVARIANTES: solo endpoints gobernados
+  (no-bypass), estado HONESTO (disabled -> UI honesta, no fantasma; AC11), routeada+conformidad-diseno (AC12/AC13),
+  streaming sin fuga PII. maker=Codex / checker=Arquitecto. Repo=Zeus.
+- **CUIDADO stop-regex (de nuevo):** el GO casi dispara por el endpoint `/stop` + "Codex" en la linea
+  requested_action; lo reescribi (status/open/send/**finalizar**/stream-SSE) y grep-verifique antes de commitear.
+  REGLA: el endpoint `/stop` cuenta como \bstop\b -> no nombrarlo en una linea con Codex. [[semi-auto-collaboration-pattern]]
+- **PROXIMO PASO:** monitorear entrega de TASK-0186 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`)
+  AC1-AC6 (routeada, no-bypass, estado honesto disabled, sesion+finalizar, streaming+PII, gates test:ci). Si verde
+  -> cerrar (checker=Arquitecto). Pieza 3 (auditoria endurecida) = GO posterior.
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 27a11da) -- consola Arquitecto PIEZA 1 (proceso-puente) CERRADA <<<
 - **TASK-0185 (consola del Arquitecto pieza 1 = proceso-puente) CERRADA in_review->done** (close submit_intent
   seq ~2063, commit 27a11da; incluyo commits locales de Codex 75098b8/e4d24d0 que pushee yo). Checker=Arquitecto.
 - **Entrega (Codex Zeus d9f57de "feat(architect): add runtime bridge"):** `architect-bridge.config.json`
