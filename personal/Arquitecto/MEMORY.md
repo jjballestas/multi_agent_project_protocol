@@ -46,11 +46,13 @@
 - **(1) PRE-REGISTRO v2.0 FROZEN+ATESTADO** (operativo): `personal/operador/TFM/PRE-REGISTRO-H1-H3-v2.md`, sha256
   e8277cc7..., commit bea7d14, atestado en #4 (seq ~2139); hereda v1.0 (1ae10e05...); unico cambio = atestacion
   medida = actor_auth Ed25519 (Camino B). Supersede a v1.0 como operativo.
-- **(3) HARNESS SDD EMITIDA:** DECISION-0066 accepted + SPEC-0104 + TASK-0191 ready/Codex + GO (commit 90e00e7).
-  Aparato de medicion H1-H3 en `research/experiment_h1h3/`: inyeccion A1/A2/A3 (seeded) reusando golden negativos +
-  deteccion/FPR/sobrecoste(con-vs-sin-#4) + verificador externo solo-publicas + reporte mapeado a umbrales v2.0.
-  FRONTERA DURA (AC1): solo copia desechable, NUNCA el #4 vivo (DECISION-0045, guard+prueba negativa). Construye
-  sobre fixtures (no requiere flip A2 ni dataset real). maker=Codex/checker=Arquitecto. Esperando entrega.
+- **(3) HARNESS H1-H3 CONSTRUIDO + CERRADO (TASK-0191 done, commit d8029ef).** Codex entrego 5f2d246
+  "feat(research): add H1-H3 experiment harness" en `research/experiment_h1h3/harness.py` (298) + golden
+  `examples/experiment_h1h3_cases` + CI. Vectores A1(alter/delete/insert/reorder)+A2(atribucion-cruzada)+A3
+  (rollback/equivocacion). CHECKER VERDE clon limpio ruta corta: golden 2/2 (AC1-AC6 disposable-thresholds +
+  AC2-AC6 seed-reproducible); validate exit 0. **AC1 CRITICO CONFIRMADO EN VIVO:** correr el golden dejo
+  runtime/state/events.jsonl BYTE-IDENTICO (mismo sha256) -> nunca toca el #4 vivo (LIVE_GUARD_PATHS+hash_live_guard).
+  Aparato listo; la corrida real es posterior (flip A2 + dataset). DECISION-0066 accepted, SPEC-0104.
 - **>>> ESTADO TFM camino critico:** pre-registro v2.0 FROZEN+atestado ✅; mecanismo A2 construido off-by-default ✅
   (TASK-0190); harness en construccion (TASK-0191). **FALTA tras harness:** runbook del FLIP (preparar) -> ventana
   de riesgo del operador (flip actor_auth_enforce) -> generar dataset -> EJECUTAR harness -> H1-H3 vs umbrales ->
