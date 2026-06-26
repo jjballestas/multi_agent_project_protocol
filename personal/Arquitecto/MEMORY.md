@@ -4,7 +4,23 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 0253f85) -- DECISION-0062 RATIFICADA; consola Arquitecto pieza 1 GO a Codex <<<
+## >>> RESUME 2026-06-26 (HEAD 27a11da) -- consola Arquitecto PIEZA 1 (proceso-puente) CERRADA <<<
+- **TASK-0185 (consola del Arquitecto pieza 1 = proceso-puente) CERRADA in_review->done** (close submit_intent
+  seq ~2063, commit 27a11da; incluyo commits locales de Codex 75098b8/e4d24d0 que pushee yo). Checker=Arquitecto.
+- **Entrega (Codex Zeus d9f57de "feat(architect): add runtime bridge"):** `architect-bridge.config.json`
+  (enabled:false + operatorPresentRequired) + runtime overrides gitignored + src/server.js +175 (manager + endpoints
+  /api/protocol/architect-bridge status/open/send/stop/stream-SSE) + tests +132.
+- **Checker VERDE clon limpio d9f57de:** 2 bridge tests sustantivos + full **test:ci 95/95 0 skip exit 0** (bridge
+  corre no-skip). AC1-AC6: off-by-default+403 fail-closed; no-bypass (TASK_INDEX/events byte-identicos; noLedgerWriter);
+  runtime-only spawn + **cese honrado** (stop->dormant, send-tras-stop 409); **sesion unica** (2o open=mismo
+  sessionId); streaming SSE con **PII redactada** (stream + audit.jsonl sin persona@example.com); Co-Author OK.
+- **INCIDENTE stop-regex previo (resuelto):** el GO original detuvo el cron de Codex (stop+Codex en una linea);
+  reescrito (cese/finalizar) + cron relanzado; ver detalle en RESUME-PREV. [[semi-auto-collaboration-pattern]]
+- **SIGUIENTE consola-arq (gateado, GO operador):** pieza 2 = consola UI conversacional + transporte streaming en
+  el front; pieza 3 = auditoria endurecida. NO arrancar sin GO.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto ahora d9f57de; el push es accion del operador).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 0253f85) -- DECISION-0062 RATIFICADA; consola Arquitecto pieza 1 GO a Codex <<<
 - **Operador RATIFICO DECISION-0062** (consola del Arquitecto, puente interactivo persistente). La marque
   accepted (submit_intent) + autore **SPEC-0098** + **TASK-0185** (ready/Codex, pieza 1 = proceso-puente, slice
   minimo) + GO a Codex. commit 0253f85 PUSHED, validate exit 0.
