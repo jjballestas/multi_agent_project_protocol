@@ -2,7 +2,7 @@
 task_id: TASK-0190
 title: "Core: submit_intent firma actor_auth Ed25519 (A2 vivo, Camino B) off-by-default + golden + prueba negativa atribucion-cruzada + secret-indep (SPEC-0103, DECISION-0065)"
 type: protocol
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

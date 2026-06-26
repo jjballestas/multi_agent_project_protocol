@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import hmac
 import json
@@ -29,6 +30,14 @@ SECRET_DIRS = {"secrets", ".protocol-secrets"}
 # NOT mutate the materialized state, so the canonical state hash is secret-independent.
 EVENT_AUTH_UNVERIFIABLE_REASONS = {"unresolved_key", "missing_key"}
 EVENT_AUTH_TAMPER_REASONS = {"invalid_signature", "missing_signature"}
+ACTOR_AUTH_TAMPER_REASONS = {
+    "invalid_signature",
+    "keyid_mismatch",
+    "missing_keyid",
+    "missing_signature",
+    "unknown_keyid",
+    "unsupported_method",
+}
 
 
 class EventLogError(RuntimeError):
@@ -210,6 +219,128 @@ def anchor_config(config: dict[str, Any] | None) -> dict[str, Any]:
 
 def attestation_signing_payload(subject_digest: str, predicate: dict[str, Any]) -> bytes:
     return (str(subject_digest) + "\n" + canonical_json(predicate)).encode("utf-8")
+
+
+def actor_auth_enforce_enabled(config: dict[str, Any] | None) -> bool:
+    event_state = (config or {}).get("event_state")
+    return isinstance(event_state, dict) and event_state.get("actor_auth_enforce") is True
+
+
+def actor_auth_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    event_state = (config or {}).get("event_state")
+    if not isinstance(event_state, dict):
+        return {}
+    value = event_state.get("actor_auth_config")
+    return value if isinstance(value, dict) else {}
+
+
+def actor_keyid(actor: str, config: dict[str, Any] | None) -> str:
+    cfg = actor_auth_config(config)
+    keyids = cfg.get("keyids")
+    if isinstance(keyids, dict) and str(keyids.get(actor) or "").strip():
+        return str(keyids[actor])
+    return {"Arquitecto": "arquitecto:v1", "Codex": "codex:v1", "Analista": "analista:v1"}.get(actor, f"{actor}:v1")
+
+
+def actor_auth_signable_event(event: dict[str, Any]) -> dict[str, Any]:
+    payload = deepcopy(event)
+    payload.pop("actor_auth", None)
+    payload.pop("event_auth", None)
+    payload.pop("prev_hash", None)
+    payload.pop("deduped", None)
+    return payload
+
+
+def actor_auth_message(event: dict[str, Any]) -> bytes:
+    return canonical_json(actor_auth_signable_event(event)).encode("utf-8")
+
+
+def actor_auth_private_key_path(actor: str, keyid: str, config: dict[str, Any], *, root: Path) -> Path:
+    cfg = actor_auth_config(config)
+    files = cfg.get("private_key_files")
+    configured = files.get(actor) if isinstance(files, dict) else None
+    if configured is None and isinstance(files, dict):
+        configured = files.get(keyid)
+    if configured is not None:
+        raw = Path(str(configured))
+    else:
+        base = Path(str(cfg.get("secret_root") or "D:/Agentes/protocol-secrets"))
+        raw = base / f"{keyid.replace(':', '-')}.pem"
+    if not raw.is_absolute():
+        raw = root / raw
+    resolved = raw.resolve()
+    allowed_roots = [Path("D:/Agentes/protocol-secrets").resolve()]
+    configured_root = cfg.get("secret_root")
+    if configured_root:
+        allowed_roots.append(Path(str(configured_root)).resolve())
+    if configured is not None:
+        allowed_roots.append(root.resolve())
+    if not any(resolved == allowed or allowed in resolved.parents for allowed in allowed_roots):
+        raise EventLogError("actor_auth private key path outside allowed roots")
+    return resolved
+
+
+def actor_public_keys(config: dict[str, Any] | None) -> dict[str, str]:
+    event_state = (config or {}).get("event_state")
+    sig_config = event_state.get("signature_config") if isinstance(event_state, dict) else {}
+    keys = sig_config.get("public_keys") if isinstance(sig_config, dict) else {}
+    return {str(key): str(value) for key, value in (keys or {}).items()} if isinstance(keys, dict) else {}
+
+
+def sign_actor_auth(event: dict[str, Any], config: dict[str, Any], *, root: Path) -> dict[str, str]:
+    try:
+        from cryptography.hazmat.primitives import serialization  # type: ignore
+    except ImportError as exc:
+        raise EventLogError("cryptography package is required for actor_auth Ed25519 signing") from exc
+    actor = str(event.get("actor") or "")
+    keyid = actor_keyid(actor, config)
+    private_key_path = actor_auth_private_key_path(actor, keyid, config, root=root)
+    if not private_key_path.exists():
+        raise EventLogError(f"actor_auth private signing key missing for actor: {actor}")
+    key = serialization.load_pem_private_key(private_key_path.read_bytes(), password=None)
+    signature = key.sign(actor_auth_message(event))
+    return {"method": "ed25519", "keyid": keyid, "sig": base64.b64encode(signature).decode("ascii")}
+
+
+def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None) -> dict[str, Any]:
+    auth = event.get("actor_auth")
+    if not isinstance(auth, dict):
+        return {"valid": False, "reason": "unsupported_method"}
+    method = str(auth.get("method") or "")
+    if method == "not_enforced_phase2":
+        return {"valid": True, "reason": "not_enforced_phase2"}
+    if method != "ed25519":
+        return {"valid": False, "reason": "unsupported_method"}
+    keyid = str(auth.get("keyid") or "")
+    if not keyid:
+        return {"valid": False, "reason": "missing_keyid"}
+    actor = str(event.get("actor") or "")
+    if keyid != actor_keyid(actor, config):
+        return {"valid": False, "reason": "keyid_mismatch"}
+    signature = str(auth.get("sig") or "")
+    if not signature:
+        return {"valid": False, "reason": "missing_signature"}
+    public_key_text = actor_public_keys(config).get(keyid)
+    if not public_key_text:
+        return {"valid": False, "reason": "unknown_keyid"}
+    try:
+        from cryptography.exceptions import InvalidSignature  # type: ignore
+        from cryptography.hazmat.primitives import serialization  # type: ignore
+        from cryptography.hazmat.primitives.asymmetric import ed25519  # type: ignore
+        raw_signature = base64.b64decode(signature, validate=True)
+        key_text = public_key_text.strip()
+        if "BEGIN PUBLIC KEY" in key_text:
+            key = serialization.load_pem_public_key(key_text.encode("ascii"))
+        else:
+            key = ed25519.Ed25519PublicKey.from_public_bytes(base64.b64decode(key_text, validate=True))
+        if not isinstance(key, ed25519.Ed25519PublicKey):
+            return {"valid": False, "reason": "invalid_signature"}
+        key.verify(raw_signature, actor_auth_message(event))
+        return {"valid": True, "reason": "valid"}
+    except InvalidSignature:
+        return {"valid": False, "reason": "invalid_signature"}
+    except Exception:
+        return {"valid": False, "reason": "invalid_signature"}
 
 
 def event_head_digest(event: dict[str, Any]) -> str:
@@ -521,6 +652,7 @@ def replay_events(
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
         auth_result = verify_event_auth(event, config, root=root)
+        actor_auth_result = verify_actor_auth(event, config)
         if (
             auth_result.get("valid") is not True
             and str(auth_result.get("reason")) not in EVENT_AUTH_UNVERIFIABLE_REASONS
@@ -531,6 +663,18 @@ def replay_events(
                     "aggregate_id": aggregate_id,
                     "event": UNAUTHENTICATED_EVENT,
                     "reason": auth_result.get("reason"),
+                    "actor": event.get("actor"),
+                }
+            )
+            state["events_applied"] = int(state["events_applied"]) + 1
+            continue
+        if actor_auth_result.get("valid") is not True and str(actor_auth_result.get("reason")) in ACTOR_AUTH_TAMPER_REASONS:
+            state["rejections"].append(
+                {
+                    "seq": event.get("seq"),
+                    "aggregate_id": aggregate_id,
+                    "event": "security.invalid_actor_auth",
+                    "reason": actor_auth_result.get("reason"),
                     "actor": event.get("actor"),
                 }
             )
@@ -672,9 +816,13 @@ class EventWriter:
             "ts": str(ts or utc_now()),
         }
         config = read_protocol_config(self.root)
+        if actor_auth is None and actor_auth_enforce_enabled(config):
+            event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
         if chain_enabled(config):
             previous_hash = self.chain_anchor(config)
             event["seq"] = self.next_seq()
+            if actor_auth is None and actor_auth_enforce_enabled(config):
+                event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
         if observability_enabled(config):
             event["trace_id"] = event_trace_id(event)
         if chain_enabled(config):

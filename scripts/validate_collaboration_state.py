@@ -18,7 +18,7 @@ TOOLS_ROOT = Path(__file__).resolve().parents[1]
 if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
-from runtime.eventlog import EventLogError, assert_snapshot_matches, events_in_log_order, runtime_state_has_content
+from runtime.eventlog import EventLogError, assert_snapshot_matches, events_in_log_order, runtime_state_has_content, verify_actor_auth
 from runtime.protocol_replay import (
     ProtocolMaterializationError,
     drift_paths,
@@ -906,6 +906,18 @@ def validate_eventlog_agent_signatures(root: Path, config: dict[str, Any] | None
         validation.fail(f"Runtime event log agent signatures invalid: {result.get('findings')}")
 
 
+def validate_eventlog_actor_auth(root: Path, config: dict[str, Any] | None, validation: Validation) -> None:
+    if not runtime_state_has_content(root):
+        return
+    findings = []
+    for event in events_in_log_order(root):
+        result = verify_actor_auth(event, config)
+        if result.get("valid") is not True:
+            findings.append({"seq": event.get("seq"), "actor": event.get("actor"), "reason": result.get("reason")})
+    if findings:
+        validation.fail(f"Runtime event log actor_auth invalid: {findings}")
+
+
 def validate_eventlog_anchors(root: Path, config: dict[str, Any] | None, validation: Validation) -> None:
     if not runtime_state_has_content(root):
         return
@@ -994,6 +1006,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_handoffs(root, validation)
     validate_eventlog_snapshot(root, validation)
     validate_eventlog_chain(root, config, validation)
+    validate_eventlog_actor_auth(root, config, validation)
     validate_eventlog_agent_signatures(root, config, validation)
     validate_eventlog_anchors(root, config, validation)
     validate_protocol_state_drift(root, config, validation)

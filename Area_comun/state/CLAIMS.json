@@ -9074,6 +9074,27 @@
             "updated_at": "2026-06-27T00:34:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0190",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "TASK-0190 actor_auth Ed25519 off-by-default implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Codex-TASK-0190",
+                "Area_comun/state/TASK_INDEX.json#TASK-0190",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0190",
+                "Area_comun/tasks/TASK-0190-codex-actor-auth-ed25519-submit-intent.md",
+                "runtime/",
+                "examples/",
+                "scripts/",
+                ".github/workflows/",
+                "protocol.config.template.json"
+            ],
+            "started_at": "2026-06-27T00:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0190",
+            "updated_at": "2026-06-27T00:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
