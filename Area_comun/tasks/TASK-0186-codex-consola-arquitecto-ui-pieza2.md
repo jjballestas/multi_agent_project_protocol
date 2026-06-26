@@ -2,7 +2,7 @@
 task_id: TASK-0186
 title: "Consola del Arquitecto pieza 2: UI conversacional + streaming en el front (consume el puente; routeada, honesta, no-bypass) (SPEC-0099, DECISION-0062)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

@@ -8683,6 +8683,52 @@
             "updated_at": "2026-06-26T12:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0186",
+            "expires_at": "2026-06-26T23:30:00Z",
+            "notes": "Implement TASK-0186 Architect console UI in Zeus-protocol; consume governed bridge endpoints only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0186",
+                "Area_comun/state/TASK_INDEX.json#TASK-0186",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0186",
+                "Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0186.md",
+                "D:/Agentes/Zeus/Zeus-protocol/public/app.js",
+                "D:/Agentes/Zeus/Zeus-protocol/public/index.html",
+                "D:/Agentes/Zeus/Zeus-protocol/public/styles.css",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T15:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0186",
+            "updated_at": "2026-06-26T15:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0186-delivery",
+            "expires_at": "2026-06-26T23:59:00Z",
+            "notes": "Deliver TASK-0186 handoff, mailbox, in_review transition and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0186-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0186",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0186",
+                "Area_comun/tasks/TASK-0186-codex-consola-arquitecto-ui-pieza2.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0186-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0186-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0186.md",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0186.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T16:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0186",
+            "updated_at": "2026-06-26T16:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

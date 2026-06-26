@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1f7dbee867010c591366f39b0b51aee8a83e2f31c3ccc8673a023ad3fc448309",
+  "canonical_hash": "55f0b37aa15c75b14868906866422fd5afd05926e206ffa423505527e51c4327",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -320,6 +320,8 @@
       "CLAIM-20260626-Codex-TASK-0182-cambio-ci": 1,
       "CLAIM-20260626-Codex-TASK-0185": 1,
       "CLAIM-20260626-Codex-TASK-0185-delivery": 1,
+      "CLAIM-20260626-Codex-TASK-0186": 1,
+      "CLAIM-20260626-Codex-TASK-0186-delivery": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -565,7 +567,7 @@
       "TASK-0183": 8,
       "TASK-0184": 14,
       "TASK-0185": 8,
-      "TASK-0186": 2,
+      "TASK-0186": 6,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -573,7 +575,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1397,
+    "events_applied": 1403,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -619,6 +621,12 @@
       "Codex:TASK-0185:delivery-status-in-review:20260626": 2060,
       "Codex:TASK-0185:release-delivery-claim:20260626": 2062,
       "Codex:TASK-0185:release-main-claim:20260626": 2061,
+      "Codex:TASK-0186:claim-release-for-delivery-expand:20260626T161000Z": 2071,
+      "Codex:TASK-0186:claim:20260626T153000Z": 2069,
+      "Codex:TASK-0186:delivery-claim-release:20260626T162500Z": 2074,
+      "Codex:TASK-0186:delivery-claim:20260626T161000Z": 2072,
+      "Codex:TASK-0186:in-progress-to-in-review:20260626T162500Z": 2073,
+      "Codex:TASK-0186:ready-to-in-progress:20260626T153000Z": 2070,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -1974,5 +1982,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2068
+  "up_to_seq": 2074
 }

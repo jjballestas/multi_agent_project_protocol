@@ -4,7 +4,7 @@ task_id: TASK-0186
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0186 (Consola del Arquitecto PIEZA 2 = UI conversacional + streaming; ready). Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = Zeus-protocol. Construir la vista 'Consola Arquitecto' routeada que consume el proceso-puente de TASK-0185 (endpoints /api/protocol/architect-bridge: status/open/send/finalizar/stream-SSE): caja de conversacion con la salida del Arquitecto en streaming, control abrir/estado/finalizar, indicador de estado DERIVADO del status real. INVARIANTES: la UI llama SOLO a esos endpoints gobernados (no-bypass, sin escritura directa al ledger), estado HONESTO (con el puente disabled la consola muestra 'no disponible', nunca consola fantasma; AC11 permanente), routeada + conformidad-diseno (AC12/AC13 permanentes), streaming incremental sin fuga de PII. DoD = SPEC-0099 AC1-AC6. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."
