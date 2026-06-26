@@ -4,7 +4,23 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 6ea4cf7) -- activar consola: DECISION-0063 launcher PROPOSED (ratificar) <<<
+## >>> RESUME 2026-06-26 (HEAD aacb9c1) -- DECISION-0063 RATIFICADA; launcher GO a Codex (TASK-0188) <<<
+- **Operador RATIFICO DECISION-0063.** La marque accepted + autore **SPEC-0101** + **TASK-0188** (ready/Codex) + GO
+  trigger-free a Codex (commit aacb9c1 PUSHED), validate exit 0.
+- **TASK-0188 (launcher del runtime del Arquitecto = el command que el puente hace spawn):** wrapper de larga vida
+  (Zeus, p.ej. scripts/architect-runtime-launcher.mjs): stdin(mensaje)->turno->stdout(line-buffered streaming),
+  inner-runtime CONFIGURABLE (CLI del Arquitecto via env; tests con STUB), identidad EXISTENTE (no crea llaves),
+  no-bypass (no escribe ledger), instancia unica (lock/PID), cese limpio (SIGTERM/cierre stdin), off-by-default.
+  maker=Codex/checker=Arquitecto. AC1-AC7 (test:ci en ventana quieta).
+- **PROXIMO PASO:** monitorear entrega de TASK-0188 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`,
+  test:ci VENTANA QUIETA). Si verde -> cerrar. **TRAS CERRAR: la ACTIVACION VIVA real = paso final con el operador
+  presente** (poner el inner-runtime real del Arquitecto + enabled:true + command/args en architect-bridge.runtime.json
+  gitignored, arrancar el front, abrir sesion) COORDINANDO sesion unica (yo corro en esta CLI -> no solapar 2 Arquitectos).
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD a4e4a88 + lo que entregue TASK-0188). Codex usage-limit puede recurrir.
+- **LECCION stop-regex (3a vez):** el GO casi dispara por "para" ("para el streaming"/"para uso vivo") + Codex; reescrito
+  a "alimenta"/"de cara al". SIEMPRE grep-verificar el GO antes de commitear. [[semi-auto-collaboration-pattern]]
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 6ea4cf7) -- activar consola: DECISION-0063 launcher PROPOSED (ratificar) <<<
 - **Operador dio GO a "activar el uso de la consola" + eligio CONSTRUIR EL LAUNCHER (SDD).** Hallazgo: el puente
   hace spawn(config.command) pero **no existe un comando que lance un Arquitecto interactivo** (los crons son de
   mailbox). Por eso "uso vivo" exige construir el launcher.
