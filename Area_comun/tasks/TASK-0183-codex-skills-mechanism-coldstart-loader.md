@@ -2,7 +2,7 @@
 task_id: TASK-0183
 title: "FLOOR skills Fase 1 pieza 1: mecanismo de skills (registro fuera del config pinned + loader cold-start READ-ONLY), neutral, off-by-default (SPEC-0096)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: normal
