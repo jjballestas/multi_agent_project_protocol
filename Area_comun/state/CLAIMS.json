@@ -8403,6 +8403,24 @@
             "updated_at": "2026-06-26T16:28:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-close-0188",
+            "expires_at": "2026-06-27T00:00:00Z",
+            "notes": "Close TASK-0188 in_review->done (launcher del runtime del Arquitecto, SPEC-0101/DECISION-0063; maker=Codex, checker=Arquitecto). Checker clon limpio Zeus 6220833: 5 tests sustantivos PASS; full test:ci VENTANA QUIETA 106/106 0 fail exit 0. AC1-AC7: contrato stdin->turno->stdout line-buffered con inner STUB (larga vida, 2 turnos en orden); inner CONFIGURABLE por env (sin inner=exit1 'ARCHITECT_RUNTIME_COMMAND is required'); identidad EXISTENTE por env (no crea llaves/registro); no-bypass (no importa writers, ledger byte-identico; el unico writeFile es el lockfile); instancia unica (lock/PID) + cese limpio por stdin; off-by-default + README documenta el command. Co-Author Codex. **CON ESTO la consola del Arquitecto (puente+UI+auditoria+launcher) esta lista; la ACTIVACION VIVA real = paso final con operador presente (inner real + enabled:true en architect-bridge.runtime.json + front, coordinando sesion unica).**",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0188-codex-launcher-runtime-arquitecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T16:31:00Z",
+            "status": "released",
+            "task_id": "TASK-0188",
+            "updated_at": "2026-06-26T16:31:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Arquitecto-consola-arq-f1",
             "expires_at": "2026-06-26T17:00:00Z",
             "notes": "Ratify DECISION-0062 (proposed->accepted) + register TASK-0185 ready/Codex (Consola del Arquitecto pieza 1 = proceso-puente, SPEC-0098). Operador ratifico el puente interactivo persistente.",
