@@ -8388,6 +8388,59 @@
             "updated_at": "2026-06-26T00:47:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Codex-REQ-D642E4D8-answered-fix",
+            "expires_at": "2026-06-26T11:38:36Z",
+            "notes": "Fix consumed GO mailbox status after move to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-REQ-D642E4D8-answered-fix",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T11:08:36Z",
+            "status": "released",
+            "task_id": "REQ-D642E4D8",
+            "updated_at": "2026-06-26T11:08:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260626-Codex-REQ-D642E4D8-delivery",
+            "expires_at": "2026-06-26T12:07:34Z",
+            "notes": "Delivery artifacts and mailbox close for REQ-D642E4D8 reconciliation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-REQ-D642E4D8-delivery",
+                "Area_comun/handoffs/HANDOFF-REQ-D642E4D8-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-REQ-D642E4D8-reconciled.md",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T11:07:34Z",
+            "status": "released",
+            "task_id": "REQ-D642E4D8",
+            "updated_at": "2026-06-26T11:07:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260626-Codex-REQ-D642E4D8-reconcile",
+            "expires_at": "2026-06-26T12:07:10Z",
+            "notes": "Reconcile delivered file-intake v2 requirement after all implementation tasks closed.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-REQ-D642E4D8-reconcile",
+                "Area_comun/state/TASK_INDEX.json#REQ-D642E4D8",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/REQ-D642E4D8",
+                "Area_comun/tasks/req-d642e4d8-requirement-seed.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T11:07:10Z",
+            "status": "released",
+            "task_id": "REQ-D642E4D8",
+            "updated_at": "2026-06-26T11:07:10Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Codex-TASK-0182-cambio-ci",
             "expires_at": "2026-06-26T23:59:00Z",
             "notes": "TASK-0182 cambio requerido - CI runs full slow-inclusive suite while npm test remains fast.",

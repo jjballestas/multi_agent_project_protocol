@@ -249,7 +249,7 @@
         {
             "id": "REQ-D642E4D8",
             "owner": "Operador",
-            "status": "in_progress",
+            "status": "done",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo"
         },
         {

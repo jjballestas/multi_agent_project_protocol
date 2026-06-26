@@ -4,7 +4,7 @@ task_id: REQ-D642E4D8
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "Reconcilia REQ-D642E4D8 (Carga por archivo v2: extraccion asistida + panel de revision + selector de modo) a done via submit_intent (requirement->done exige implementer=Codex). Quedo in_progress (delivered_by TASK-0150 Fase A) pero TODO su alcance esta entregado y cerrado: extractor (TASK-0152/0155), candidatas no-ledger + panel de revision + gate PII (TASK-0151/0162/0180), selector de modo + UX (TASK-0157/0172) y el modo necesidad (TASK-0181). Es un cabo suelto de reconcile, igual que REQ-7095D30A. rr=false."

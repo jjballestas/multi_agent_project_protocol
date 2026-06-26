@@ -1126,7 +1126,7 @@
             "project": "Zeus-protocol",
             "relayed_by": "Arquitecto",
             "sdd_role": "seed_only_architect_authors_spec",
-            "status": "in_progress",
+            "status": "done",
             "supersedes": "REQ-31100EAF",
             "title": "Carga por archivo v2: extraccion asistida de historias/casos de uso + pestana de revision + selector de modo",
             "type": "requirement"
