@@ -13,7 +13,13 @@ Last updated: 2026-06-26 Europe/Madrid, after TASK-0182 CI change.
   Evidence before commit: `python -m py_compile skills/loader.py examples/skills_loader_cases/run_skills_loader_cases.py scripts/scan_domain_neutrality.py`
   OK; skills loader golden PASS; domain neutrality OK; diff check OK; encoding OK; Python validator OK; PowerShell
   validator OK; drift false / #4 byte-identica `up_to_seq` 2021. `protocol.config.json` and chain genesis were
-  not changed. TASK-0183 remains `in_progress` until delivery handoff/status-release is completed.
+  not changed. Protocol delivery commit `a10e79f coord(TASK-0183): deliver skills loader` moved TASK-0183 to
+  `in_review`, released Codex claim `CLAIM-20260626-Codex-TASK-0183`, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0183-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0183-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0183.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, skills golden PASS, Python validator OK, PowerShell validator OK,
+  drift false / #4 byte-identica `up_to_seq` 2023.
 - TASK-0182 CAMBIO product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a6b830c ci(test): run full suite in automation`. GitHub Actions now runs `npm run test:ci`, which delegates to
   `npm run test:slow` and sets `ZEUS_RUN_SLOW_TESTS=1`, so CI executes the full 93-test suite including the slow
