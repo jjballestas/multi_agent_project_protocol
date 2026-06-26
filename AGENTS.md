@@ -8,7 +8,13 @@
 > shipped masters for new projects are the `*.template.*` files; this `AGENTS.md` and the
 > canonical `Area_comun/state/*.json` are **this project's live instance**.
 >
-> Last updated: 2026-06-13 · Maintainer: Claude (architect) + human owner. Released version: v1.5.0.
+> Last updated: 2026-06-26 · Maintainer: Arquitecto (architect) + human owner.
+> **Versioning has two axes (DECISION-0047, epoch versioning under #4):** the **release** line is tracked in the
+> CHANGELOG — latest **v1.17.0**; the live instance **`protocol_version` (epoch) is `1.14.0`, PINNED** because under
+> the #4 chain the genesis hash binds `protocol.config.json`, so a real bump needs a coordinated
+> re-genesis-boundary. Releases/capabilities advance in the CHANGELOG and in registries kept **outside** the pinned
+> config; the epoch only moves at a re-genesis. So `protocol.config.json` = `1.14.0` and CHANGELOG top = `1.17.0` is
+> coherent by design, not a mismatch.
 
 ## 0. How to Start
 

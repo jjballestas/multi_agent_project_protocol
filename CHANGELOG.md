@@ -13,6 +13,30 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.17.0] - 2026-06-26
+> Note: capabilities shipped; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
+> DECISION-0047) -- no config change, no re-genesis. New registries (skills) live **outside** `protocol.config.json`.
+
+### Added
+- **Skills mechanism, FLOOR skills Fase 1 (DECISION-0061 / SPEC-0096 / TASK-0183).** New domain-neutral `skills/`
+  layer mirroring `connectors/`: a registry `skills/skills.config.json` **outside** `protocol.config.json`
+  (off-by-default per skill) + a deterministic, READ-ONLY cold-start loader. A skill is a governed doc the agent
+  reads at cold-start to acquire a procedure; the loader grants no authority, imports no ledger/event-log writers,
+  and rejects domain content placed in the neutral core (fail-closed). `scan_domain_neutrality` covers `skills/**`;
+  CI runs `examples/skills_loader_cases`. Genesis/#4 untouched.
+- **Three neutral profile skills, FLOOR skills Fase 1 pieza 2 (DECISION-0061 / SPEC-0097 / TASK-0184).** Minimal
+  `profiles/financiero_presupuesto/` shell hosting `ddl-conventions`, `business-rule-vs-legacy`, and
+  `migration-verification` skill docs (content in the profile, never the core), registered off-by-default; the
+  loader resolves them under the profile path. No domain policy added to the core.
+
+### Added (governance; implementation in the Zeus-protocol product repo, DECISION-0050)
+- **Architect console (DECISION-0062) and its runtime launcher (DECISION-0063).** Live Operator<->Architect console:
+  a persistent runtime bridge + conversational UI with streaming + hardened, redacted audit (outside #4) + a
+  launcher (the bridge's spawned command) running an interactive Architect with its **existing** identity. Hard
+  invariants: no-bypass (every state mutation still goes through `submit_intent`), runtime-only (never reconfigures
+  identity/keys/registry), single session, off-by-default + operator-present, PII-redacted audit that never reaches
+  the #4 event log. Code/tests live in `Zeus-protocol`; only the governance (DECISIONs/SPECs) is recorded here.
+
 ## [1.16.0] - 2026-06-22
 > Note: capability documented; the live instance `protocol_version` stays **1.14.0** under #4 (epoch
 > versioning, DECISION-0047) -- no config change, no re-genesis.
@@ -102,7 +126,10 @@ for what counts as MAJOR / MINOR / PATCH here.
   `chain_manifest.json`. **TASK-0117 done.** Enforced lesson: no #4 pilot/ceremony ever runs against the
   live log again — always a throwaway copy.
 
-## [Unreleased]
+## [1.13.0] - 2026-06-19
+> Correction (2026-06-26): this block was previously mislabeled `## [Unreleased]` while sitting between [1.14.0] and
+> [1.12.0]. Its content shipped in the live instance pre-#4 (chain still OFF). Numbered here to restore CHANGELOG
+> order and version truth (audit-first coherence); no content was changed.
 
 ### Added
 - **TASK-0120 implementation (SPEC-0082):** `event_auth` HMAC secrets can now be resolved from
