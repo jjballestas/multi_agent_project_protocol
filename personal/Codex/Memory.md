@@ -15,6 +15,15 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   Ed25519 cases PASS 5/5; encoding OK; domain neutrality OK; Python validator OK; PowerShell validator OK;
   drift false / #4 byte-identica `up_to_seq` 2148. TASK-0191 is still in progress pending delivery handoff,
   mailbox close, claim release and in_review transition.
+- TASK-0191 delivery commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `72c1fc8 coord(TASK-0191): deliver H1-H3 harness`. The task is now `in_review`, Codex claims
+  `CLAIM-20260627-Codex-TASK-0191`, `CLAIM-20260627-Codex-TASK-0191-code`, and
+  `CLAIM-20260627-Codex-TASK-0191-delivery` are released, GO
+  `MSG-20260627-Arquitecto-to-Codex-GO-TASK-0191.md` is answered, and
+  `MSG-20260627-Codex-to-Arquitecto-TASK-0191-in-review.md` plus
+  `HANDOFF-TASK-0191-codex-to-arquitecto-1.md` are open/ready for Arquitecto review. Final delivery evidence:
+  encoding OK, neutrality OK, H1-H3 golden PASS 2/2, Python validator OK, PowerShell validator OK, drift false /
+  #4 byte-identica `up_to_seq` 2153.
 - TASK-0190 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `d8bb869 feat(runtime): add actor auth ed25519`. The runtime now keeps the default submit_intent path at
   `actor_auth.method=not_enforced_phase2` unless `event_state.actor_auth_enforce` is explicitly true, and the ON path
