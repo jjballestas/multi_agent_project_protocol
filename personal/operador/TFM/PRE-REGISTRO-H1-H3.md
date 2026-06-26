@@ -1,8 +1,11 @@
 # Pre-registro H1–H3 — Atestación de autoría en un protocolo multi-agente (TFM)
 
-> Estado: **DRAFT para congelar** (v0 del operador + Arquitecto, 2026-06-27). Se considera **FROZEN** cuando
-> el operador confirma los umbrales de §5 y se commitea; tras el freeze **no se cambian** hipótesis, métricas ni
-> umbrales antes de medir (regla anti-post-hoc; corazón de un trabajo audit-first).
+> Estado: **FROZEN v1.0 — 2026-06-27.** Umbrales de §5 confirmados (el operador delegó la fijación en el
+> Arquitecto; justificación por principio/requisito en §5, no por inspección de resultados). El freeze es el
+> commit de git que introduce este estado (fecha+hash inmutables = la marca de pre-registro). **Tras el freeze NO
+> se cambian** hipótesis, métricas ni umbrales antes de medir (regla anti-post-hoc; corazón de un trabajo
+> audit-first). Si el operador discrepa de un umbral, se emite una **v2.0 nueva** (con su fecha), nunca se edita
+> esta v1.0 — pero solo es válido cambiarlos ANTES de mirar cualquier resultado.
 > Referencias de fondo: DECISION-0029 (firmantes cruzados), DECISION-0039 (activación gateada + A1–A4 + AC2/AC3),
 > DECISION-0046 (replay secret-independiente), DECISION-0040 (GATE-DATASET / sin PII).
 
@@ -65,16 +68,33 @@ esto, cualquier número posterior es post-hoc — justo lo que un trabajo sobre 
 | Acuerdo externo | veredictos idénticos verificador-externo / total | H3 |
 | Match clon-limpio | hash canónico (con secretos) == (sin secretos) | H3 |
 
-## 5. Umbrales PRE-COMPROMETIDOS (a confirmar por el operador antes del freeze)
+## 5. Umbrales PRE-COMPROMETIDOS (CONFIRMADOS — FROZEN v1.0)
 
-> Propuestos por el Arquitecto; **el operador fija el número final**. Una vez congelados, no se mueven.
+> Fijados por el Arquitecto por delegación del operador. **Justificados por principio/requisito, no por inspección
+> de resultados** (no se ha medido nada). Congelados: no se mueven antes de medir.
 
-- **H1 — confirmada si:** detección = **100 %** en TODOS los vectores (A1, A2, A3) [binario, AC3] **Y** salud
-  AC2 ≥ **99 %** **Y** FPR ≤ **1 %**. Refutada si algún vector evade detección, o FPR > 1 %, o salud < 99 %.
-- **H2 — confirmada si:** Δlatencia mediana ≤ **[OPERADOR: p.ej. 50 ms/evento]** y p95 ≤ **[p.ej. 150 ms]**;
-  Δalmacenamiento ≤ **[p.ej. 2 KB/evento]**; Δtokens ≤ **[p.ej. 5 %]**. Refutada si excede los acotados.
-- **H3 — confirmada si:** acuerdo externo = **100 %** **Y** match clon-limpio = **sí** (DECISION-0046).
-  Refutada si el verificador externo difiere en algún veredicto o el hash no casa.
+- **H1 — CONFIRMADA si:**
+  - **Detección = 100 %** en TODOS los vectores (A1, A2, A3). *Justificación:* AC3 es **binario** (DECISION-0039);
+    un mecanismo de seguridad que deja pasar UNA sola falsificación está roto. No negociable.
+  - **Salud AC2 ≥ 99 %** (instrumento bien formado en runs legítimos). *Justificación:* umbral ya fijado en
+    DECISION-0039 §3.
+  - **FPR = 0 %** sobre el dataset legítimo (ningún evento legítimo rechazado). *Justificación:* el verificador es
+    **determinista** (cripto); una firma/cadena correcta SIEMPRE verifica (DECISION-0046 lo hizo
+    secret-independiente), así que cualquier rechazo falso es un **defecto**, no ruido — la barra honesta es 0.
+  - **Refutada si:** algún vector evade detección, **o** FPR > 0, **o** salud < 99 %.
+- **H2 — CONFIRMADA si** (cotas por requisito de uso, no por peek):
+  - **Δlatencia: mediana ≤ 50 ms/evento y p95 ≤ 200 ms/evento.** *Justificación:* un turno de agente dura
+    **segundos**; el firmado/encadenado es una op cripto local que debe ser <1 % del turno → imperceptible en el
+    lazo interactivo.
+  - **Δalmacenamiento ≤ 4 KB/evento.** *Justificación:* lo que #4 añade por evento es firma Ed25519 (64 B) +
+    hashes (32 B c/u) + envoltura JSON; 4 KB es holgado y mantiene un dataset de miles de eventos en orden de MB.
+  - **Δtokens ≤ 5 %.** *Justificación:* #4 firma **hashes, no texto** (DECISION-0033/0040: cero payload nuevo),
+    así que el sobrecoste de tokens por la atestación es ≈ 0; 5 % es un techo generoso para el plumbing de medición.
+  - **Refutada si:** se excede cualquiera de las tres cotas.
+- **H3 — CONFIRMADA si:** **acuerdo externo = 100 %** (verdicto idéntico del verificador externo con solo claves
+  públicas) **Y** **match clon-limpio = sí** (hash canónico con secretos == sin secretos, DECISION-0046).
+  *Justificación:* binario/principal — si un tercero no llega al mismo veredicto, la atestación no es externamente
+  verificable. **Refutada si:** difiere algún veredicto **o** el hash no casa.
 
 ## 6. Procedimiento de medición (qué se EJECUTA, en orden)
 
@@ -109,8 +129,11 @@ limitaciones. **Reportar también los fallos** (vectores no detectados, FPR>0, s
   reproducible** (no juicio de un agente).
 - **A4 fuera de alcance.** No se afirma seguridad contra operador malicioso / bizantino / identidad del modelo.
 
-## 9. Freeze
+## 9. Freeze — EJECUTADO
 
-Este documento se congela en su commit (fecha + hash inmutables = la marca de pre-registro). Opcional (refuerzo
-audit-first): registrar su hash en el ledger #4 para atestar la fecha de freeze ANTES de medir. Tras el freeze,
-cualquier cambio se hace en un documento NUEVO con su propia fecha, nunca editando éste.
+**FROZEN v1.0 el 2026-06-27.** La marca de pre-registro es el **commit de git** que introduce este estado
+(fecha + hash de commit inmutables, en el repo empujado a origin). El `sha256` del contenido congelado se registra
+en el mensaje de ese commit como auto-certificación. Refuerzo audit-first opcional pendiente: atestar ese `sha256`
+en el ledger #4 como parte del setup de medición (antes de generar el dataset), para anclar la fecha de freeze en
+la cadena. Tras este freeze, cualquier cambio = documento NUEVO (v2.0) con su fecha; jamás se edita esta v1.0, y
+solo es legítimo cambiar umbrales ANTES de mirar resultados.
