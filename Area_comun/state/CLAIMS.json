@@ -9057,6 +9057,24 @@
             "updated_at": "2026-06-27T00:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-close-0190",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Close TASK-0190 in_review->done (core: submit_intent firma actor_auth Ed25519 off-by-default, SPEC-0103/DECISION-0065; maker=Codex, checker=Arquitecto). Checker: eventlog.py PURAMENTE ADITIVO (0 lineas borradas); sign_actor_auth gated por actor_auth_enforce_enabled (call site eventlog:819) -> CAMINO OFF byte-identico (config vivo flag ausente=OFF; genesis intacto). Golden examples/actor_auth_ed25519_cases 5/5 (AC1 firma, AC2 off-byte-identico, AC3 atribucion-cruzada RECHAZADA, AC4 secret-indep verify + sign-without-secret fail-closed) reproducible en clon limpio RUTA CORTA. validate exit 0 CON y SIN secretos (secret-indep, 0046); vivo validate exit 0 + drift 0; encoding/neutralidad exit 0. AC1-AC6 cumplidos. LECCION: el golden crea temp dirs anidados -> en Windows clonar a RUTA CORTA (MAX_PATH); pasa en vivo (D: corto) y CI Linux. La ACTIVACION VIVA (flip del flag) = ventana del operador aparte; NO encendida.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0190-codex-actor-auth-ed25519-submit-intent.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T00:54:00Z",
+            "status": "released",
+            "task_id": "TASK-0190",
+            "updated_at": "2026-06-27T00:54:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-decision-0064",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0064 PROPOSED (UI fork de Hermes MIT = cliente del single-writer; contrato /api/governance/*; reuso gobernanza zeus; licencia; GATEADO a post-TFM). Plan del operador en personal/operador/Hermes/. Parqueada para Fase B; no activar las fases de build hasta congelar la medicion del TFM.",

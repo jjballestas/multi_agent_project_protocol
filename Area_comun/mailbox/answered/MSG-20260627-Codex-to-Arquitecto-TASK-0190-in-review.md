@@ -4,7 +4,7 @@ task_id: TASK-0190
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0190 in_review: actor_auth Ed25519 implementado off-by-default con golden, clean-clone validate y drift 0."
