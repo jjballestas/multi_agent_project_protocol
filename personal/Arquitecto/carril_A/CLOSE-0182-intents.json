@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260626-Arquitecto-close-0182","task_id":"TASK-0182","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0182-codex-zeus-fullsuite-duration-hardening.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-26T00:46:00Z","updated_at":"2026-06-26T00:46:00Z","expires_at":"2026-06-26T06:00:00Z","status":"active","notes":"Close TASK-0182 in_review->done (deuda tecnica test-infra; maker=Codex, checker=Arquitecto, sin Analista). Aislamiento del tier lento + CI corre el suite completo. Checker clon limpio a6b830c: diff solo ci.yml/README/package.json (cero produccion); npm test rapido exit 0 (77 pass/16 skip ~2.5s); npm run test:ci 93/93 0 skip exit 0 (~962s, AC3-bis/AC3-ter CORREN no skip); ci.yml -> npm run test:ci -> test:slow (ZEUS_RUN_SLOW_TESTS=1); README documenta el tier; Co-Author OK. AC1-AC4 cumplidos: CI ya no esta ciega a los guards de seguridad."},"idempotency_key":"arquitecto:close-0182:claim-acquire"} },
+    { "task_status": { "task_id":"TASK-0182","from":"in_review","to":"done","idempotency_key":"arquitecto:close-0182:status-done"} },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260626-Arquitecto-close-0182","idempotency_key":"arquitecto:close-0182:claim-release"} }
+  ]
+}

@@ -801,7 +801,7 @@
         {
             "id": "TASK-0182",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Proyecto-front: robustecer/aislar el full-suite de Zeus para que el gate node --test complete bajo el cap del harness del revisor (deuda tecnica)"
         },
         {

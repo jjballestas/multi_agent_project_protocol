@@ -4,7 +4,7 @@ task_id: TASK-0182
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 one_line_summary: "TASK-0182 CAMBIO reentregado: CI corre npm run test:ci/full slow suite; npm test sigue rapido."
 context_refs:
