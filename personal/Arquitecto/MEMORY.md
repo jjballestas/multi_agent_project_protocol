@@ -2,7 +2,27 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-26, HEAD 7a45a8d (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1: pieza 1 (mecanismo) DONE; pieza 2 (3 skills contenido) GO emitido a Codex (TASK-0184 ready, SPEC-0097). Espero entrega. Zeus a6b830c LOCAL (push=operador).**
+> Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
+
+## >>> RESUME 2026-06-26 (HEAD 39a483b) -- skills Fase 1 COMPLETA (mecanismo + 3 skills) <<<
+- **TASK-0184 (skills Fase 1 pieza 2 = 3 skills de contenido) CERRADA in_review->done** (close submit_intent
+  seq ~2040, commit 39a483b; incluyo commits locales de Codex d589318/c1bd7d2 que pushee yo). Checker=Arquitecto.
+- **Entrega (Codex d589318):** shell MINIMO `profiles/financiero_presupuesto/` (manifest valido, stack vacio, SIN
+  politica de dominio) + 3 skills genericas conformes (`ddl-conventions`/`business-rule-vs-legacy`/
+  `migration-verification`, `neutral_core:false`) + 3 entradas en `skills/skills.config.json` off-by-default
+  (registry core NEUTRAL) + golden extendido + loader +2 (endurecimiento legitimo: exige neutral_core:false en
+  frontmatter de skill de perfil).
+- **Checker VERDE clon limpio d589318 (longpaths):** golden 6/6 (incl AC6 profile-skills-load-under-profile loaded
+  3); validate exit 0 SIN secretos + drift 0; encoding/neutralidad exit 0; protocol.config.json byte-identico
+  (genesis/#4 intactos); Co-Author OK. AC1-AC6 cumplidos.
+- **>>> skills Fase 1 COMPLETA (mecanismo + contenido). COLA VACIA.** open/ mailbox: solo
+  MSG-Arquitecto-to-Analista-REVIEW3-RESPONSE (FYI rr=false). Tareas cerradas esta sesion: 0181, 0182, 0183, 0184
+  (+ REQ-7095D30A). Monitoreo reactivo.
+- **SIGUIENTE (gateado, sin GO):** "perfil financiero" COMPLETO (docs/prompts/politica de dominio) es fase
+  POSTERIOR -- el shell minimo solo hospeda las skills. Cualquier nueva pieza espera GO del operador.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD a6b830c; clasificador bloquea externo).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 7a45a8d) -- skills Fase 1 pieza 2 GO: 3 skills de contenido <<<
 
 ## >>> RESUME 2026-06-26 (HEAD 7a45a8d) -- skills Fase 1 pieza 2 GO: 3 skills de contenido <<<
 - **Operador dio GO a pieza 2.** Autore SPEC-0097 + TASK-0184 (ready/Codex) -- SIN decision nueva (ya cubierta por
