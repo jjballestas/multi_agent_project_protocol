@@ -2,7 +2,7 @@
 task_id: TASK-0189
 title: "Remediacion consola del Arquitecto: audit redacta solo texto libre (timestamp intacto) + cleanup robusto del launcher (lock+inner en SIGTERM/stop) (SPEC-0102)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

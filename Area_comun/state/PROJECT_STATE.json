@@ -843,7 +843,7 @@
         {
             "id": "TASK-0189",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Remediacion consola del Arquitecto: audit redacta solo texto libre (timestamp intacto) + cleanup robusto del launcher (lock+inner en SIGTERM/stop) (SPEC-0102)"
         },
         {

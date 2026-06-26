@@ -11,12 +11,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
-        },
-        {
-            "id": "TASK-0189",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Remediacion consola del Arquitecto: audit redacta solo texto libre (timestamp intacto) + cleanup robusto del launcher (lock+inner en SIGTERM/stop) (SPEC-0102)"
         }
     ],
     "next_actions": [

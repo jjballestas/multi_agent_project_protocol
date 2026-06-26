@@ -4,7 +4,7 @@ task_id: TASK-0189
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 one_line_summary: "TASK-0189 entregada a in_review: audit estructural intacto + cleanup robusto launcher/bridge."
 context_refs:
