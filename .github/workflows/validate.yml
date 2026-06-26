@@ -208,6 +208,9 @@ jobs:
       - name: Run attestation negative cases
         run: python examples/attestation_negative_cases/run_attestation_negative_cases.py
 
+      - name: Run H1-H3 experiment harness cases
+        run: python examples/experiment_h1h3_cases/run_experiment_h1h3_cases.py
+
       - name: Run read-only enforcement cases
         run: python examples/readonly_enforcement_cases/run_readonly_enforcement_cases.py
 

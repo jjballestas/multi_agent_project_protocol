@@ -2,7 +2,7 @@
 task_id: TASK-0191
 title: "Harness de experimento H1-H3: inyeccion A1/A2/A3 (solo copia desechable) + medicion deteccion/FPR/sobrecoste + verificador externo + reporte mapeado al pre-registro (SPEC-0104)"
 type: protocol
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

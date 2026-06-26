@@ -9166,6 +9166,43 @@
             "updated_at": "2026-06-27T00:01:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0191",
+            "expires_at": "2026-06-28T12:00:00Z",
+            "notes": "TASK-0191 harness H1-H3 implementation in research/experiment_h1h3; protocol state via runtime only.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0191",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0191",
+                "Area_comun/tasks/TASK-0191-codex-harness-experimento-h1h3.md",
+                "research/experiment_h1h3/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T12:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0191",
+            "updated_at": "2026-06-27T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0191-code",
+            "expires_at": "2026-06-28T12:00:00Z",
+            "notes": "Supplemental file-scoped claim for TASK-0191 harness code and CI paths.",
+            "owner": "Codex",
+            "scope": [
+                ".github/workflows/validate.yml",
+                "examples/experiment_h1h3_cases/",
+                "research/experiment_h1h3/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-27T12:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0191",
+            "updated_at": "2026-06-27T12:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
