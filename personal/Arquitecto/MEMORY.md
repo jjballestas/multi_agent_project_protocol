@@ -4,7 +4,27 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD a314343) -- consola Arquitecto PIEZA 3 (auditoria) GO a Codex <<<
+## >>> RESUME 2026-06-26 (HEAD 60ca67d) -- consola del Arquitecto COMPLETA (puente+UI+auditoria) <<<
+- **TASK-0187 (pieza 3 = auditoria endurecida) CERRADA in_review->done** (close submit_intent seq ~2089, commit
+  60ca67d; incluyo commits Codex bb88a72/befbdcc que pushee yo). Checker=Arquitecto.
+- **Entrega (Codex Zeus a4e4a88 "harden bridge audit"):** README+11 (retencion) + server.js+57 + tests+75; `.runtime/`
+  gitignored.
+- **Checker VERDE clon limpio a4e4a88:** 3 tests sustantivos + full **test:ci VENTANA QUIETA 101/101 0 fail exit 0**.
+  AC1-AC6: store por sesion `sessions/<id>.jsonl` (ciclo open/input/output/stop + sessionId/timestamp); redaccion PII
+  ROBUSTA 6 familias (email/telefono/documento/direccion/NIT/cuenta -> [X-REDACTED], sin literales); acotado
+  length<=200 (MAX_EVENTS_PER_SESSION=200); NUNCA al #4 (byte-identidad ledger; no importa escritores); disabled->no
+  store; README documenta retencion. Co-Author OK.
+- **>>> CONSOLA DEL ARQUITECTO COMPLETA: pieza 1 (proceso-puente TASK-0185) + pieza 2 (UI TASK-0186) + pieza 3
+  (auditoria TASK-0187). DECISION-0062 entera entregada.** Off-by-default, no-bypass, runtime-only, sesion unica,
+  streaming, auditoria redactada fuera del #4. COLA VACIA.
+- **LECCION reforzada:** el exec de Codex puede seguir vivo ~17min POST-entrega (in_review+0claims pero lock
+  presente) -> esperar EXEC_EXIT/lock-release antes de correr test:ci (sino flake 502 por carga). [[checker-test-real-write-path]]
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto a4e4a88; acumula 2176f5b+a4e4a88). Codex usage-limit
+  puede recurrir (su cuenta).
+- **SIGUIENTE (gateado, sin GO):** onboard del agente del puente/uso vivo de la consola = GO posterior + operador
+  presente (es activar un proceso que dirige al Arquitecto; off-by-default hoy). Fabrica NOVA = futuro.
+
+## >>> RESUME-PREV 2026-06-26 (HEAD a314343) -- consola Arquitecto PIEZA 3 (auditoria) GO a Codex <<<
 - **Operador dio GO a pieza 3.** Autore SPEC-0100 + TASK-0187 (ready/Codex) -- SIN decision nueva (DECISION-0062).
   Registrado + GO trigger-free (grep-verificado) a Codex (commit a314343 PUSHED), validate exit 0.
 - **Alcance pieza 3 (SPEC-0100):** endurecer el audit minimo de pieza 1 -> store controlado en
