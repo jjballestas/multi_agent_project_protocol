@@ -20,7 +20,13 @@
   (+ REQ-7095D30A). Monitoreo reactivo.
 - **SIGUIENTE (gateado, sin GO):** "perfil financiero" COMPLETO (docs/prompts/politica de dominio) es fase
   POSTERIOR -- el shell minimo solo hospeda las skills. Cualquier nueva pieza espera GO del operador.
-- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD a6b830c; clasificador bloquea externo).
+- **AYUDA ACTUALIZADA (operador pidio):** manual del operador del front (`Zeus-protocol/docs/MANUAL-operador.md`,
+  fuente de la vista Help via /api/help/manual) -> agregue **seccion 7.2 "Dictar o escribir una necesidad"**
+  (modo Necesidad TASK-0181: textarea+voz -> mismo pipeline determinista no-LLM -> candidatas -> gate PII; frontera
+  de atestacion: texto crudo nunca al #4, solo sha256, metadata redactada) + bullet en s9. Help tests 9/9, fast gate
+  exit 0, helpCoverage intacto. Commit Zeus **8c746ea** (Arquitecto, doc dirigido por operador), LOCAL.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD ahora **8c746ea**; antes a6b830c+6b2b37c; clasificador
+  bloquea externo).
 
 ## >>> RESUME-PREV 2026-06-26 (HEAD 7a45a8d) -- skills Fase 1 pieza 2 GO: 3 skills de contenido <<<
 
