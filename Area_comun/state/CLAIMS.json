@@ -8440,6 +8440,23 @@
             "updated_at": "2026-06-26T11:12:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-decision-0063",
+            "expires_at": "2026-06-26T23:00:00Z",
+            "notes": "Register DECISION-0063 PROPOSED (launcher del runtime del Arquitecto vivo que el puente hace spawn; identidad existente, no-bypass, off-by-default, operador presente, sesion unica, cese+auditoria). GO del operador a construir el launcher (SDD); requiere RATIFICACION humana antes de SPEC/tasks (corre un agente IA vivo).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0063-launcher-runtime-arquitecto-vivo.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T16:29:00Z",
+            "status": "released",
+            "task_id": "DECISION-0063",
+            "updated_at": "2026-06-26T16:29:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Arquitecto-register-0184",
             "expires_at": "2026-06-26T07:00:00Z",
             "notes": "Register TASK-0184 ready/Codex (FLOOR skills Fase 1 pieza 2 = 3 skills de contenido en profiles/financiero_presupuesto/skills/ sobre el mecanismo TASK-0183, SPEC-0097). Gobernada por DECISION-0061 (sin decision nueva). Operador dio GO pieza 2.",
