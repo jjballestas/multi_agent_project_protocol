@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fdbe4916d478e70ffc520727dbd26957d7b74cc6496682ee95ff8f1fcca9350f",
+  "canonical_hash": "14b53343d479583814031906e6c68049d0d4cf29b74d828a53a4f8e501e2382d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -308,6 +308,7 @@
       "CLAIM-20260626-Arquitecto-close-0182": 1,
       "CLAIM-20260626-Arquitecto-close-0183": 1,
       "CLAIM-20260626-Arquitecto-close-0184": 1,
+      "CLAIM-20260626-Arquitecto-consola-arq-f1": 1,
       "CLAIM-20260626-Arquitecto-decision-0062": 1,
       "CLAIM-20260626-Arquitecto-register-0184": 1,
       "CLAIM-20260626-Arquitecto-register-skills-f1": 1,
@@ -335,7 +336,7 @@
       "DECISION-0059": 2,
       "DECISION-0060": 1,
       "DECISION-0061": 1,
-      "DECISION-0062": 2,
+      "DECISION-0062": 3,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
@@ -559,6 +560,7 @@
       "TASK-0182": 9,
       "TASK-0183": 8,
       "TASK-0184": 14,
+      "TASK-0185": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -566,7 +568,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1381,
+    "events_applied": 1385,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -980,6 +982,10 @@
       "arquitecto:close-extract-1f5c:claim-acquire-v2": 1595,
       "arquitecto:close-extract-1f5c:claim-release-v2": 1597,
       "arquitecto:close-extract-1f5c:status-done-v2": 1596,
+      "arquitecto:consola-arq-f1:claim-acquire": 2053,
+      "arquitecto:consola-arq-f1:claim-release": 2056,
+      "arquitecto:consola-arq-f1:decision-accepted": 2054,
+      "arquitecto:consola-arq-f1:task-upsert": 2055,
       "arquitecto:decision-0057:claim-acquire": 1138,
       "arquitecto:decision-0057:claim-release": 1140,
       "arquitecto:decision-0057:record": 1139,
@@ -1951,5 +1957,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2052
+  "up_to_seq": 2056
 }

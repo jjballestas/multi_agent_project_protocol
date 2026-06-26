@@ -1,8 +1,8 @@
 ---
 decision_id: DECISION-0062
 title: Consola del Arquitecto - puente interactivo PERSISTENTE Operador<->Arquitecto (canal vivo, gobernado no-bypass, runtime-only, off-by-default)
-status: proposed
-ratified_at: null
+status: accepted
+ratified_at: 2026-06-26
 date: 2026-06-26
 deciders: [operador humano, Arquitecto]
 supersedes: []
@@ -13,10 +13,10 @@ phase: P2
 
 # DECISION-0062 - Consola del Arquitecto (puente interactivo persistente)
 
-> PROPUESTA. El operador eligio el enfoque "puente interactivo persistente" (GO 2026-06-26, avance de
-> TASK-0178). Requiere RATIFICACION humana por su magnitud (proceso de larga vida que dirige al Arquitecto en
-> vivo). Gobernanza/SPEC en el protocolo (dataset); codigo en Zeus-protocol (producto), unidireccional
-> (DECISION-0050). NO toca #4 (registro de activacion fuera del config pinned).
+> ACCEPTED (operador ratifico 2026-06-26). El operador eligio el enfoque "puente interactivo persistente"
+> (avance de TASK-0178). Gobernanza/SPEC en el protocolo (dataset); codigo en Zeus-protocol (producto),
+> unidireccional (DECISION-0050). NO toca #4 (registro de activacion fuera del config pinned). Implementacion =
+> SPEC-0098 + tareas por pieza (maker=Codex / checker=Arquitecto).
 
 ## Contexto
 
