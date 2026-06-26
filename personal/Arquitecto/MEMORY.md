@@ -4,7 +4,30 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 2d3bfe4) -- launcher CERRADO; consola lista, falta ACTIVACION VIVA con operador <<<
+## >>> RESUME 2026-06-26 (HEAD aa74b14) -- runbook activacion + SMOKE VIVO: 2 defectos hallados <<<
+- **Operador: el relevo de rol esta claro** -- al revivir Arquitecto via Zeus, ESA sesion es EL Arquitecto y la CLI
+  actual pasa a ASISTENTE (resuelve sesion unica por relevo, no por bloqueo). Zeus ya pusheado por el operador (6220833).
+- **Cree el RUNBOOK** de activacion viva: `personal/operador/RUNBOOK-activacion-consola-arquitecto.md` (commit aa74b14
+  PUSHED): config gitignored, stub-smoke primero, activacion real (inner real), relevo de rol, cese/desactivacion,
+  invariantes, troubleshooting. **RUTAS ABSOLUTAS obligatorias** (el puente spawnea con cwd=repo PROTOCOLO, no Zeus;
+  el launcher spawnea el inner con ese cwd -> relativas fallan en vivo aunque en tests funcionaban con cwd=Zeus).
+- **SMOKE VIVO con STUB (clon z188, front en :4299):** la consola FUNCIONA end-to-end -- status(dormant)->open(alive,
+  sessionId)->send(ok)->stream SSE (status/input/output por turno; **mensaje del operador redactado** `[redacted
+  operator message]`; sesion persistente turn-1/turn-2)->stop(dormant)->send-tras-stop 409. Limpie todo (orphans 0,
+  server down, repos reales intactos).
+- **2 DEFECTOS REALES hallados en vivo (los tests no los vieron: stdin.end limpio + cwd=Zeus):**
+  1. **AUDIT timestamp CORRUPTO (TASK-0187):** el redactor PII se come la FECHA -> `"timestamp":"[PHONE-REDACTED]T20:37:..Z"`
+     (2026-06-26 matchea familia telefono). redactPublicText se aplica a campos estructurales; debe redactar SOLO
+     texto libre, no timestamp/sessionId/kind.
+  2. **CLEANUP no robusto (TASK-0188):** tras stop / muerte del parent, el **lock del launcher persiste** y procesos
+     **huerfanos** (el cleanup solo corre en stdin-close, no en el kill del puente/SIGKILL). RIESGO: lock stale ->
+     el proximo open no puede spawnear (single-instance). Mas serio para uso repetido.
+- **PROXIMO PASO / RECOMENDACION:** antes de la activacion REAL conviene una tarea de remediacion (TASK-0189) que
+  arregle ambos: (a) audit redacta solo texto libre (timestamp intacto); (b) launcher limpia lock+inner en bridge-stop/
+  SIGTERM/parent-death. Es decision del operador: GO remediacion ya, o activar real igual (defectos no bloquean uso
+  basico pero degradan auditoria y single-instance). [[checker-test-real-write-path]] (live smoke atrapa lo que el test miente).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 2d3bfe4) -- launcher CERRADO; consola lista, falta ACTIVACION VIVA con operador <<<
 - **TASK-0188 (launcher del runtime del Arquitecto) CERRADA in_review->done** (close submit_intent, commit 2d3bfe4;
   incluyo commits Codex 03d4bf2/51e537d que pushee yo). Checker=Arquitecto.
 - **Entrega (Codex Zeus 6220833):** `scripts/architect-runtime-launcher.mjs` (129) + stub fixture + 5 tests + README.
