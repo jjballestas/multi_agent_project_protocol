@@ -4,7 +4,24 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 60ca67d) -- consola del Arquitecto COMPLETA (puente+UI+auditoria) <<<
+## >>> RESUME 2026-06-26 (HEAD 6ea4cf7) -- activar consola: DECISION-0063 launcher PROPOSED (ratificar) <<<
+- **Operador dio GO a "activar el uso de la consola" + eligio CONSTRUIR EL LAUNCHER (SDD).** Hallazgo: el puente
+  hace spawn(config.command) pero **no existe un comando que lance un Arquitecto interactivo** (los crons son de
+  mailbox). Por eso "uso vivo" exige construir el launcher.
+- **Autore DECISION-0063 PROPOSED** (registrada submit_intent, commit 6ea4cf7 PUSHED): launcher = wrapper de larga
+  vida (Zeus) que el puente hace spawn; contrato stdin(mensaje operador)->turno Arquitecto->stdout(streaming);
+  **identidad EXISTENTE** (no crea/reconfigura llaves; no es alta de agente), **no-bypass** (mutaciones via
+  submit_intent), runtime de Arquitecto = dependencia de entorno en el runtime config gitignored, **off-by-default**
+  + operador presente, **sesion unica** + AVISO (no dos Arquitectos en paralelo; ojo mi sesion actual VS Code/CLI),
+  cese honrado, auditoria redactada fuera #4. Codigo Zeus / gobernanza protocolo.
+- **PENDIENTE OPERADOR: RATIFICAR DECISION-0063** antes de autorar SPEC-0101 + TASK-0188 (el launcher). Tras
+  ratificar: SDD pieza -> Codex implementa -> checker -> y la ACTIVACION VIVA real es un paso final con el operador
+  presente (poner runtime config con command/args + arrancar front + abrir sesion).
+- **CAVEAT sesion unica:** yo (Arquitecto) corro en esta sesion CLI; activar la consola viva abriria un 2o
+  Arquitecto. Coordinar con el operador para no solapar.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto a4e4a88).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 60ca67d) -- consola del Arquitecto COMPLETA (puente+UI+auditoria) <<<
 - **TASK-0187 (pieza 3 = auditoria endurecida) CERRADA in_review->done** (close submit_intent seq ~2089, commit
   60ca67d; incluyo commits Codex bb88a72/befbdcc que pushee yo). Checker=Arquitecto.
 - **Entrega (Codex Zeus a4e4a88 "harden bridge audit"):** README+11 (retencion) + server.js+57 + tests+75; `.runtime/`
