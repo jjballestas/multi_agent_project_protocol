@@ -4,6 +4,16 @@ Last updated: 2026-06-26 Europe/Madrid, after TASK-0182 CI change.
 
 ## Latest Session Note
 
+- TASK-0183 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `e316d9e feat(skills): add read-only cold-start loader`. The protocol now has neutral `skills/` machinery:
+  `skills/skills.config.json` outside `protocol.config.json`, disabled-by-default skill entries, inert governed
+  skill documents, and `skills/loader.py` resolving enabled skills deterministically in memory while rejecting
+  malformed trust boundaries, wrong locations, and domain-denylist terms in core skills. CI now runs
+  `examples/skills_loader_cases/run_skills_loader_cases.py`, and `scan_domain_neutrality.py` includes `skills/**`.
+  Evidence before commit: `python -m py_compile skills/loader.py examples/skills_loader_cases/run_skills_loader_cases.py scripts/scan_domain_neutrality.py`
+  OK; skills loader golden PASS; domain neutrality OK; diff check OK; encoding OK; Python validator OK; PowerShell
+  validator OK; drift false / #4 byte-identica `up_to_seq` 2021. `protocol.config.json` and chain genesis were
+  not changed. TASK-0183 remains `in_progress` until delivery handoff/status-release is completed.
 - TASK-0182 CAMBIO product commit landed in `D:/Agentes/Zeus/Zeus-protocol`:
   `a6b830c ci(test): run full suite in automation`. GitHub Actions now runs `npm run test:ci`, which delegates to
   `npm run test:slow` and sets `ZEUS_RUN_SLOW_TESTS=1`, so CI executes the full 93-test suite including the slow
