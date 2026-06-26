@@ -8313,6 +8313,26 @@
             "updated_at": "2026-06-26T00:46:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Arquitecto-register-skills-f1",
+            "expires_at": "2026-06-26T06:00:00Z",
+            "notes": "Register FLOOR skills Fase 1: DECISION-0061 (skills gobernadas, registro fuera del config pinned + loader cold-start read-only, neutral, off-by-default, no concede autoridad, no toca #4) + TASK-0183 ready/Codex (mecanismo pieza 1, SPEC-0096). Operador dio GO skills Fase 1 (modelo digestion=loader cold-start read-only).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0061-skills-registry-coldstart-loader.md",
+                "Area_comun/specs/SPEC-0096-skills-mechanism-coldstart-loader.md",
+                "Area_comun/tasks/TASK-0183-codex-skills-mechanism-coldstart-loader.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T00:47:00Z",
+            "status": "released",
+            "task_id": "TASK-0183",
+            "updated_at": "2026-06-26T00:47:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260626-Codex-TASK-0182-cambio-ci",
             "expires_at": "2026-06-26T23:59:00Z",
             "notes": "TASK-0182 cambio requerido - CI runs full slow-inclusive suite while npm test remains fast.",

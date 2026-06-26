@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ce06cff5a101ebea7434c137d551d816dd5fe04280338e0af13a1dfa18974fbe",
+  "canonical_hash": "f29137324d414d84d7ced0afbe04f20ad5f154f145be2c8c0494d04377054876",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -306,6 +306,7 @@
       "CLAIM-20260625-Codex-reconcile-REQ-520BBC1888-delivery": 1,
       "CLAIM-20260625-Codex-reconcile-c1edd835": 1,
       "CLAIM-20260626-Arquitecto-close-0182": 1,
+      "CLAIM-20260626-Arquitecto-register-skills-f1": 1,
       "CLAIM-20260626-Codex-TASK-0182-cambio-ci": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -326,6 +327,7 @@
       "DECISION-0058": 2,
       "DECISION-0059": 2,
       "DECISION-0060": 1,
+      "DECISION-0061": 1,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
@@ -547,6 +549,7 @@
       "TASK-0180": 14,
       "TASK-0181": 17,
       "TASK-0182": 9,
+      "TASK-0183": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -554,7 +557,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1344,
+    "events_applied": 1348,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1173,6 +1176,10 @@
       "arquitecto:register-ingv2:claim-acquire": 1079,
       "arquitecto:register-ingv2:claim-release": 1081,
       "arquitecto:register-ingv2:task-upsert": 1080,
+      "arquitecto:register-skills-f1:claim-acquire": 2016,
+      "arquitecto:register-skills-f1:claim-release": 2019,
+      "arquitecto:register-skills-f1:decision": 2017,
+      "arquitecto:register-skills-f1:task-upsert": 2018,
       "arquitecto:rego-0138-neutralidad:claim-acquire": 884,
       "arquitecto:rego-0138-neutralidad:claim-release": 885,
       "arquitecto:reporte-cierre:acq": 1657,
@@ -1902,5 +1909,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2015
+  "up_to_seq": 2019
 }

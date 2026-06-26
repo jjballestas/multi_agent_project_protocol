@@ -2842,6 +2842,19 @@
             "type": "product"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0183-codex-skills-mechanism-coldstart-loader.md",
+            "id": "TASK-0183",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "spec_id": "SPEC-0096",
+            "status": "ready",
+            "title": "FLOOR skills Fase 1 pieza 1: mecanismo de skills (registro fuera del config pinned + loader cold-start READ-ONLY), neutral, off-by-default (SPEC-0096)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

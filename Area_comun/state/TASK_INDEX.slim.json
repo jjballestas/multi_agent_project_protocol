@@ -24,6 +24,14 @@
             "priority": "normal",
             "status": "proposed",
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
+        },
+        {
+            "id": "TASK-0183",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "FLOOR skills Fase 1 pieza 1: mecanismo de skills (registro fuera del config pinned + loader cold-start READ-ONLY), neutral, off-by-default (SPEC-0096)"
         }
     ],
     "view": "task_index.slim"
