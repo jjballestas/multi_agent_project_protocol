@@ -43,7 +43,19 @@
   off-byte-id/AC3 atribucion-cruzada RECHAZADA/AC4 secret-indep+sign-sin-secreto-fail-closed) reproducible clon
   limpio ruta corta; validate exit 0 CON y SIN secretos; genesis intacto; drift 0. AC1-AC6.
   LECCION: el golden anida temp dirs -> en Windows clonar a RUTA CORTA (C:/t/...) por MAX_PATH; pasa en vivo+CI Linux.
-- **>>> ESTADO TFM camino critico:** pre-registro FROZEN+atestado (#4 seq 2124) ✅; mecanismo A2 construido
+- **(1) PRE-REGISTRO v2.0 FROZEN+ATESTADO** (operativo): `personal/operador/TFM/PRE-REGISTRO-H1-H3-v2.md`, sha256
+  e8277cc7..., commit bea7d14, atestado en #4 (seq ~2139); hereda v1.0 (1ae10e05...); unico cambio = atestacion
+  medida = actor_auth Ed25519 (Camino B). Supersede a v1.0 como operativo.
+- **(3) HARNESS SDD EMITIDA:** DECISION-0066 accepted + SPEC-0104 + TASK-0191 ready/Codex + GO (commit 90e00e7).
+  Aparato de medicion H1-H3 en `research/experiment_h1h3/`: inyeccion A1/A2/A3 (seeded) reusando golden negativos +
+  deteccion/FPR/sobrecoste(con-vs-sin-#4) + verificador externo solo-publicas + reporte mapeado a umbrales v2.0.
+  FRONTERA DURA (AC1): solo copia desechable, NUNCA el #4 vivo (DECISION-0045, guard+prueba negativa). Construye
+  sobre fixtures (no requiere flip A2 ni dataset real). maker=Codex/checker=Arquitecto. Esperando entrega.
+- **>>> ESTADO TFM camino critico:** pre-registro v2.0 FROZEN+atestado ✅; mecanismo A2 construido off-by-default ✅
+  (TASK-0190); harness en construccion (TASK-0191). **FALTA tras harness:** runbook del FLIP (preparar) -> ventana
+  de riesgo del operador (flip actor_auth_enforce) -> generar dataset -> EJECUTAR harness -> H1-H3 vs umbrales ->
+  redactar. Hermes (DECISION-0064) parqueada post-TFM.
+- **>>> (historico):** pre-registro v1.0 FROZEN+atestado (#4 seq 2124) ✅; mecanismo A2 construido
   off-by-default ✅. **FALTA:** (1) pre-registro v2.0 (atestacion medida = actor_auth Ed25519); (2) **FLIP** del flag
   actor_auth_enforce = VENTANA DE RIESGO del operador presente (DECISION-0039 §5, separada de real_invoker/SA,
   rollback=flag a false); (3) generar dataset; (4) HARNESS de experimento (inyectar A1/A2/A3 + medir coste +
