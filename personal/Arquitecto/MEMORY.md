@@ -4,7 +4,23 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 2dd3e3f) -- GO remediacion consola (TASK-0189): audit timestamp + cleanup launcher <<<
+## >>> RESUME 2026-06-26 (HEAD 4159224) -- VERDAD DE VERSION sincronizada (AGENTS<->config<->CHANGELOG) <<<
+- **Operador: arreglar la verdad de version (audit-first = coherencia=credibilidad).** Hecho (commit 4159224 PUSHED,
+  encoding/neutralidad/validate exit 0). Incoherencia era: AGENTS.md "Released v1.5.0" (stale/falso), config 1.14.0,
+  CHANGELOG 1.16.0. Fix segun DECISION-0047 (DOS EJES): epoca=`protocol_version` (config, PINNED 1.14.0 bajo #4,
+  NO se toca) vs release=CHANGELOG.
+- **Cambios:** (1) AGENTS.md cabecera reescrita: release v1.17.0 + epoca 1.14.0 PINNED, explica que
+  config=1.14.0 y CHANGELOG=1.17.0 es coherente por diseno (no mismatch); maintainer Claude->Arquitecto, fecha
+  2026-06-26. (2) CHANGELOG: nueva entrada **[1.17.0] 2026-06-26** (skills mechanism DECISION-0061 + 3 profile skills
+  + consola del Arquitecto governance DECISION-0062/0063, con nota epoca-pinned). (3) Corregido **[Unreleased] mal
+  ubicado** (estaba entre 1.14.0 y 1.12.0 con contenido YA shipeado) -> renumerado **[1.13.0]** con nota de
+  transparencia; orden del CHANGELOG ahora limpio. **protocol.config.json NO tocado** (1.14.0 pinned).
+- **ANTI-COLISION:** commitee solo AGENTS.md+CHANGELOG.md por rutas explicitas mientras Codex estaba mid-exec en
+  TASK-0189 (su ledger sin commitear en working tree); no toque su trabajo (DECISION-0020).
+- **Sigue pendiente:** entrega de TASK-0189 (remediacion consola; Codex mid-exec) -> re-checar + repetir smoke ->
+  cerrar. Espera combinada blz97samt activa.
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 2dd3e3f) -- GO remediacion consola (TASK-0189): audit timestamp + cleanup launcher <<<
 - **Operador dio GO a la remediacion.** Autore SPEC-0102 + TASK-0189 (ready/Codex, priority HIGH) + GO trigger-free
   (commit 2dd3e3f PUSHED), validate exit 0. Gobernada por DECISION-0062/0063 (sin decision nueva).
 - **TASK-0189 corrige los 2 defectos del smoke vivo:** (1) audit redacta SOLO texto libre (timestamp/sessionId/kind/
