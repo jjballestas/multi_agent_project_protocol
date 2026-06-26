@@ -4,6 +4,14 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0189 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `b5675e5 fix(architect): harden audit and cleanup`.
+  The Architect bridge audit now redacts only free-text audit fields (`text`/`message`) and preserves structural
+  fields such as `timestamp`, `sessionId`, `kind`, and `stream`. Bridge stop now closes stdin and waits for the
+  launcher to exit before escalating, and the launcher closes/removes its lock while terminating the inner runtime
+  on cleanup. Permanent coverage was added for structural audit fields, lock/inner cleanup, and open-after-stop.
+  Product evidence before commit: `node --check` OK for server, launcher, tests and stub; `git diff --check` OK;
+  targeted TASK-0189/0188/0187/0185 tests PASS; `npm test` PASS 87/109 with 22 slow skips; `npm run test:ci` PASS
+  109/109; local smoke on port 4292 OK for `/healthz`, disabled architect bridge status, and architect console HTML.
 - TASK-0188 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `6220833 feat(architect): add runtime launcher`.
   The product now ships `scripts/architect-runtime-launcher.mjs`, an off-by-default bridge command wrapper that
   requires `ARCHITECT_RUNTIME_COMMAND`, keeps one long-lived inner runtime, forwards stdin turns to it, streams

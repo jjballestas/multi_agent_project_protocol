@@ -4,7 +4,7 @@ task_id: TASK-0189
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0189 (remediacion consola del Arquitecto, ready, priority high). Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = Zeus-protocol. Corrige 2 defectos hallados en el smoke vivo: (1) AUDIT timestamp corrupto -- el redactor PII se aplica a campos estructurales y se come la fecha (`timestamp` queda `[PHONE-REDACTED]T..Z`); fix: redactar SOLO texto libre (text/contenido), NUNCA timestamp/sessionId/kind/stream. (2) CLEANUP no robusto del launcher -- tras el cese de la sesion o muerte del parent, el lock persiste y quedan procesos huerfanos (el cleanup solo corre en cierre por stdin); fix: el launcher remueve lock + termina el inner ante SIGTERM y stdin-close, y el cese del puente termina al launcher disparando su cleanup (SIGTERM/graceful, kill duro solo tras timeout), sin inner huerfano ni lock stale, de modo que un open POSTERIOR vuelva a arrancar. DoD = SPEC-0102 AC1-AC5. Correr test:ci en ventana quieta. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."

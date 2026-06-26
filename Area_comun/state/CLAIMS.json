@@ -8942,6 +8942,67 @@
             "updated_at": "2026-06-26T00:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0189",
+            "expires_at": "2026-06-27T12:00:00Z",
+            "notes": "Implement TASK-0189 Zeus-protocol remediation: audit redacts only free text; launcher/bridge cleanup removes lock and terminates inner on SIGTERM/stop.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0189",
+                "Area_comun/state/TASK_INDEX.json#TASK-0189",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0189",
+                "Area_comun/tasks/TASK-0189-codex-consola-arquitecto-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md",
+                "Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0189-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0189-codex-to-arquitecto-1.md",
+                "D:/Agentes/Zeus/Zeus-protocol/src/server.js",
+                "D:/Agentes/Zeus/Zeus-protocol/scripts/architect-runtime-launcher.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/staticContract.test.js",
+                "D:/Agentes/Zeus/Zeus-protocol/tests/fixtures/architect-runtime-stub.mjs",
+                "D:/Agentes/Zeus/Zeus-protocol/README.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0189",
+            "updated_at": "2026-06-26T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0189-go-answered",
+            "expires_at": "2026-06-26T13:35:00Z",
+            "notes": "Move consumed TASK-0189 GO to answered after delivery ledger is backed.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0189-go-answered",
+                "Area_comun/mailbox/open/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T12:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0189",
+            "updated_at": "2026-06-26T12:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260626-Codex-TASK-0189-go-status-fix",
+            "expires_at": "2026-06-26T13:40:00Z",
+            "notes": "Fix consumed GO frontmatter status after moving it to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0189-go-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-26T12:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0189",
+            "updated_at": "2026-06-26T12:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
