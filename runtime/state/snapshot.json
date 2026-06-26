@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "341422a62b5e00c9bc4a60be73dad1ce9d00639cc216b9b3ea373b6335be42f5",
+  "canonical_hash": "ae4e55a91e6631db8ca657dc40d926685738fa59f4941a25728171b9cdad3bfe",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -335,12 +335,13 @@
       "CLAIM-20260626-Codex-TASK-0189-go-status-fix": 1,
       "CLAIM-20260627-Arquitecto-a2-camino-b": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg": 1,
+      "CLAIM-20260627-Arquitecto-attest-prereg-v2": 1,
       "CLAIM-20260627-Arquitecto-close-0190": 1,
       "CLAIM-20260627-Arquitecto-decision-0064": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
-      "DECISION-0039": 1,
+      "DECISION-0039": 2,
       "DECISION-0045": 1,
       "DECISION-0046": 1,
       "DECISION-0047": 1,
@@ -467,7 +468,7 @@
       "MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177": 1,
       "MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1,
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
-      "PROJECT_STATE": 2,
+      "PROJECT_STATE": 3,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
       "REQ-003AE958": 8,
@@ -598,7 +599,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1467,
+    "events_applied": 1470,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -794,6 +795,9 @@
       "arquitecto:archive-016x:8": 1401,
       "arquitecto:archive-016x:claim-acquire": 1392,
       "arquitecto:archive-016x:claim-release": 1402,
+      "arquitecto:attest-prereg-v2:claim-acquire": 2139,
+      "arquitecto:attest-prereg-v2:claim-release": 2141,
+      "arquitecto:attest-prereg-v2:narrative": 2140,
       "arquitecto:attest-prereg:claim-acquire": 2123,
       "arquitecto:attest-prereg:claim-release": 2125,
       "arquitecto:attest-prereg:narrative": 2124,
@@ -2069,5 +2073,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2138
+  "up_to_seq": 2141
 }
