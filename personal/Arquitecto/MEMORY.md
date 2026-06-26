@@ -4,7 +4,27 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD aacb9c1) -- DECISION-0063 RATIFICADA; launcher GO a Codex (TASK-0188) <<<
+## >>> RESUME 2026-06-26 (HEAD 2d3bfe4) -- launcher CERRADO; consola lista, falta ACTIVACION VIVA con operador <<<
+- **TASK-0188 (launcher del runtime del Arquitecto) CERRADA in_review->done** (close submit_intent, commit 2d3bfe4;
+  incluyo commits Codex 03d4bf2/51e537d que pushee yo). Checker=Arquitecto.
+- **Entrega (Codex Zeus 6220833):** `scripts/architect-runtime-launcher.mjs` (129) + stub fixture + 5 tests + README.
+- **Checker VERDE clon limpio 6220833:** 5 tests + full **test:ci VENTANA QUIETA 106/106 exit 0**. AC1-AC7: contrato
+  stdin->turno->stdout line-buffered (larga vida, 2 turnos con STUB); inner CONFIGURABLE por env (ARCHITECT_RUNTIME_
+  COMMAND/ARGS; sin inner=exit1); identidad EXISTENTE por env (ARCHITECT_EXISTING_IDENTITY; no crea llaves/registro);
+  no-bypass (no importa writers, ledger byte-identico; unico writeFile=lockfile); instancia unica (lock/PID) + cese
+  limpio por stdin; off-by-default + README. Co-Author OK.
+- **>>> CONSOLA DEL ARQUITECTO COMPLETA EN CODIGO: puente (0185) + UI (0186) + auditoria (0187) + launcher (0188).
+  DECISION-0062 + DECISION-0063 entregadas. COLA VACIA.**
+- **FALTA: ACTIVACION VIVA (paso del operador presente), NO una tarea Codex.** Pasos: (1) el operador define el
+  inner-runtime REAL del Arquitecto (CLI que corre un turno leyendo stdin, emitiendo stdout) en env/runtime config;
+  (2) `architect-bridge.runtime.json` (gitignored, en Zeus) con enabled:true + operatorPresentRequired:true +
+  command (node scripts/architect-runtime-launcher.mjs) + args, y ARCHITECT_RUNTIME_COMMAND/ARGS apuntando al inner;
+  (3) arrancar el front (npm start) con ARCHITECT_BRIDGE_CONFIG_PATH; (4) abrir vista Consola Arquitecto -> open ->
+  send. **COORDINAR SESION UNICA: yo corro en esta CLI; no tener 2 Arquitectos en paralelo.** El flag NUNCA se
+  commitea (off-by-default).
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto 6220833). Codex usage-limit puede recurrir.
+
+## >>> RESUME-PREV 2026-06-26 (HEAD aacb9c1) -- DECISION-0063 RATIFICADA; launcher GO a Codex (TASK-0188) <<<
 - **Operador RATIFICO DECISION-0063.** La marque accepted + autore **SPEC-0101** + **TASK-0188** (ready/Codex) + GO
   trigger-free a Codex (commit aacb9c1 PUSHED), validate exit 0.
 - **TASK-0188 (launcher del runtime del Arquitecto = el command que el puente hace spawn):** wrapper de larga vida
