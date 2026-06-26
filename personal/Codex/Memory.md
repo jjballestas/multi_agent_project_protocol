@@ -11,7 +11,12 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   public keys only. Permanent coverage was added in `examples/actor_auth_ed25519_cases` for ON signing, OFF
   byte-identical behavior, cross-attribution rejection, secret-independent verification, and fail-closed missing
   private keys. CI runs the new golden. Live `protocol.config.json` and genesis were not changed; TASK-0190 is still
-  in progress until delivery ledger/handoff is closed.
+  delivered via `858aed3 coord(TASK-0190): deliver actor auth ed25519`, which moved TASK-0190 to `in_review`,
+  released Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0190-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0190-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0190.md`. Evidence before delivery:
+  encoding OK, neutrality OK, actor_auth golden PASS 5/5, Python validator OK, PowerShell validator OK, clean clone
+  without secrets validator OK + golden PASS, drift false / #4 byte-identica `up_to_seq` 2135.
 - TASK-0189 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `b5675e5 fix(architect): harden audit and cleanup`.
   The Architect bridge audit now redacts only free-text audit fields (`text`/`message`) and preserves structural
   fields such as `timestamp`, `sessionId`, `kind`, and `stream`. Bridge stop now closes stdin and waits for the
