@@ -4,7 +4,27 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 6605fba) -- TASK-0189 remediacion CERRADA; consola SIN defectos, lista para activacion real <<<
+## >>> RESUME 2026-06-27 (HEAD 378cba7) -- TFM: pre-registro H1-H3 + DECISION-0064 (UI Hermes, gateada post-TFM) <<<
+- **Contexto operador (dos visiones):** (1) TFM academico = atestacion #4 medida; (2) herramienta multi-agente
+  real = Zeus-protocol, y AHORA investiga forkear **Hermes Workspace (MIT)** para la UI ("su UI sobre tu
+  metodologia"; plan en personal/operador/Hermes/). MI OPINION: el plan Hermes es solido (UI=cliente del
+  single-writer, lee slim/escribe via submit_intent), PERO las dos visiones optimizan distinto -> **secuenciar:
+  TFM PRIMERO (freeze+measure), Hermes DESPUES (build+iterate)**; no contaminar la medicion con un build grande.
+  El TFM NO necesita Hermes (el dataset = cutover Ed25519, no UI).
+- **HECHO:** (a) **PRE-REGISTRO H1-H3** en `personal/operador/TFM/PRE-REGISTRO-H1-H3.md` (DRAFT a congelar;
+  H1 deteccion/AC3+AC2+FPR, H2 sobrecoste, H3 verificacion externa/secret-indep; A1-A4; umbrales PRE-comprometidos
+  pendientes de numero final del operador; freeze=commit). (b) **DECISION-0064 PROPOSED** (UI fork Hermes, contrato
+  /api/governance/*, gateada: NO arrancar build F1+ hasta congelar la medicion; F0 fork/seams es segura). commit
+  378cba7 PUSHED, validate exit 0.
+- **PROXIMO PASO (camino critico TFM):** el operador confirma umbrales del pre-registro -> FREEZE -> cutover A2
+  (Ed25519 vivo) -> generar dataset -> inyectar A1/A2/A3 + medir coste + verificador externo -> redactar. La
+  MEDICION = experimento deliberado (numeros), distinta de construir (instrumento). Construir Zeus = el INSTRUMENTO,
+  no la medicion (correccion clave que el operador necesitaba).
+- **PENDIENTE:** definir/decidir con el operador el cutover A2 (es ventana de riesgo gobernada, DECISION-0039 §5,
+  operador presente, rollback) + un harness de experimento (runner que inyecta ataques + cronometra). Hermes Fase B
+  parqueada (DECISION-0064 proposed).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 6605fba) -- TASK-0189 remediacion CERRADA; consola SIN defectos, lista para activacion real <<<
 - **TASK-0189 (remediacion consola) CERRADA in_review->done** (close submit_intent, commit 6605fba; incluyo commits
   Codex e4e6f7d/9760d71 pusheados). Checker=Arquitecto. Zeus b5675e5 "harden audit and cleanup".
 - **Checker VERDE:** targeted 4/4 + full **test:ci VENTANA QUIETA 109/109 exit 0** + **SMOKE VIVO confirma ambos fixes:**
