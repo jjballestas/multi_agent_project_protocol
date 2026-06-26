@@ -35,8 +35,20 @@
   firma actor_auth Ed25519 + golden + prueba negativa atribucion-cruzada + secret-indep, off-by-default,
   maker=Codex/checker=Arquitecto); (iii) agendar la ventana de riesgo (operador presente) para el flip + rollback.
   Nota: si camino B, emitir pre-registro v2.0 fijando "atestacion medida = actor_auth Ed25519" ANTES de generar dataset.
-- **A2 CAMINO B: SDD EMITIDA (operador eligio B + GO).** DECISION-0065 accepted + SPEC-0103 + TASK-0190 ready/Codex
-  + GO (commit de0220d PUSHED, validate exit 0). TASK-0190 = core (`runtime/`): submit_intent firma actor_auth
+- **A2 CAMINO B: MECANISMO CONSTRUIDO + CERRADO (TASK-0190 done, commit 79e7a7c).** Codex entrego d8bb869
+  "feat(runtime): add actor auth ed25519" en el core (runtime/eventlog.py +148 PURAMENTE ADITIVO, validate +15,
+  golden actor_auth_ed25519_cases, CI, flag en el TEMPLATE off; config vivo NO tocado=flag ausente=OFF).
+  CHECKER VERDE: sign_actor_auth gated por actor_auth_enforce_enabled (eventlog:819) -> CAMINO OFF byte-identico
+  (CONFIRMADO EN VIVO: mi propio close salio actor_auth=not_enforced_phase2+HMAC); golden 5/5 (AC1 firma/AC2
+  off-byte-id/AC3 atribucion-cruzada RECHAZADA/AC4 secret-indep+sign-sin-secreto-fail-closed) reproducible clon
+  limpio ruta corta; validate exit 0 CON y SIN secretos; genesis intacto; drift 0. AC1-AC6.
+  LECCION: el golden anida temp dirs -> en Windows clonar a RUTA CORTA (C:/t/...) por MAX_PATH; pasa en vivo+CI Linux.
+- **>>> ESTADO TFM camino critico:** pre-registro FROZEN+atestado (#4 seq 2124) ✅; mecanismo A2 construido
+  off-by-default ✅. **FALTA:** (1) pre-registro v2.0 (atestacion medida = actor_auth Ed25519); (2) **FLIP** del flag
+  actor_auth_enforce = VENTANA DE RIESGO del operador presente (DECISION-0039 §5, separada de real_invoker/SA,
+  rollback=flag a false); (3) generar dataset; (4) HARNESS de experimento (inyectar A1/A2/A3 + medir coste +
+  verificador externo) = lo unico nuevo a construir para medir; (5) medir H1-H3 vs umbrales; (6) redactar.
+- **(historico) A2 SDD emitida:** DECISION-0065 accepted + SPEC-0103 + TASK-0190 (commit de0220d). TASK-0190 = core (`runtime/`): submit_intent firma actor_auth
   Ed25519 con la privada del actor (de protocol-secrets), **off-by-default** (flag event_state.actor_auth_enforce);
   golden + prueba negativa atribucion-cruzada + secret-indep (0046); CAMINO OFF byte-identico (lo usan todos los
   agentes; un bug rompe el ledger vivo); NO toca genesis/#4/config. La ACTIVACION viva (flip) = ventana del operador
