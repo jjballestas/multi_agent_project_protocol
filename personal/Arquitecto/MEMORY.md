@@ -2,7 +2,27 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-26, HEAD efe8abf (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 ARRANCADA: operador dio GO; autore DECISION-0061 + SPEC-0096 + TASK-0183 (ready) + GO a Codex (pieza 1 = mecanismo). Modo necesidad + TASK-0182 cerrados. Zeus a6b830c LOCAL (push=operador).**
+> Ultima actualizacion: 2026-06-26, HEAD 63dd4c9 (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 PIEZA 1 (mecanismo) CERRADA done (TASK-0183). Pieza 2 (3 skills de contenido) = GO posterior. Modo necesidad + TASK-0182 cerrados. Zeus a6b830c LOCAL (push=operador).**
+
+## >>> RESUME 2026-06-26 (HEAD 63dd4c9) -- skills Fase 1 pieza 1 (mecanismo) CERRADA <<<
+- **TASK-0183 (FLOOR skills Fase 1 pieza 1 = MECANISMO) CERRADA in_review->done** (close submit_intent seq ~2024,
+  commit 63dd4c9; incluyo los 4 commits locales de Codex e316d9e/02b8f79/a10e79f/ce6da8d que quedaron sin pushear
+  -> los pushee). Repo = PROTOCOLO. Checker=Arquitecto (sin Analista).
+- **Entrega (Codex e316d9e):** capa neutral `skills/` (espejo connectors/): `skills/skills.config.json` FUERA del
+  config pinned (schema skills.config.v1, off-by-default) + `skills/loader.py` (loader cold-start DETERMINISTA +
+  READ-ONLY, no importa escritores ledger/event-log, exige uno de neutral_core|profile, valida contencion de ruta
+  core vs profiles/<perfil>/skills, rechaza dominio en core) + skill-doc inerte + golden
+  `examples/skills_loader_cases` + neutralidad cubre `skills/**` + CI corre el golden.
+- **Checker VERDE clon limpio a10e79f (longpaths):** golden 5/5 (AC1-AC5); validate exit 0 SIN secretos + drift 0;
+  encoding/neutrality exit 0; CI cubre golden; **protocol.config.json byte-identico (genesis/#4 intactos)**;
+  Co-Author OK. AC1-AC6 cumplidos. LECCION: clon del protocolo en Windows necesita `git -c core.longpaths=true`
+  (fixtures profundos en examples/ revientan MAX_PATH).
+- **SIGUIENTE (gateado, GO del operador):** FLOOR skills **Fase 1 pieza 2 = 3 skills de CONTENIDO** (convenciones
+  DDL / regla-negocio-vs-legacy / verificacion-migracion) en `profiles/financiero_presupuesto/skills/`, usando el
+  mecanismo ya entregado. NO arrancar sin GO.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD a6b830c; clasificador bloquea externo).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD efe8abf) -- FLOOR skills Fase 1 GO: mecanismo (pieza 1) a Codex <<<
 
 ## >>> RESUME 2026-06-26 (HEAD efe8abf) -- FLOOR skills Fase 1 GO: mecanismo (pieza 1) a Codex <<<
 - **Operador dio GO a skills Fase 1.** Fork resuelto via AskUserQuestion: modelo de digestion = **loader
