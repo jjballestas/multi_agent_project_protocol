@@ -9021,6 +9021,23 @@
             "updated_at": "2026-06-26T12:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-decision-0064",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Register DECISION-0064 PROPOSED (UI fork de Hermes MIT = cliente del single-writer; contrato /api/governance/*; reuso gobernanza zeus; licencia; GATEADO a post-TFM). Plan del operador en personal/operador/Hermes/. Parqueada para Fase B; no activar las fases de build hasta congelar la medicion del TFM.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0064-ui-fork-hermes.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T00:34:00Z",
+            "status": "released",
+            "task_id": "DECISION-0064",
+            "updated_at": "2026-06-27T00:34:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
