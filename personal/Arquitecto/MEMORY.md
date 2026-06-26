@@ -4,7 +4,20 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD aa74b14) -- runbook activacion + SMOKE VIVO: 2 defectos hallados <<<
+## >>> RESUME 2026-06-26 (HEAD 2dd3e3f) -- GO remediacion consola (TASK-0189): audit timestamp + cleanup launcher <<<
+- **Operador dio GO a la remediacion.** Autore SPEC-0102 + TASK-0189 (ready/Codex, priority HIGH) + GO trigger-free
+  (commit 2dd3e3f PUSHED), validate exit 0. Gobernada por DECISION-0062/0063 (sin decision nueva).
+- **TASK-0189 corrige los 2 defectos del smoke vivo:** (1) audit redacta SOLO texto libre (timestamp/sessionId/kind/
+  stream intactos; AC1 timestamp ISO valido + texto redactado por familias); (2) cleanup robusto del launcher (lock+
+  inner ante SIGTERM y stdin-close; el cese del puente dispara cleanup, sin huerfanos ni lock stale; AC3 open
+  posterior arranca). maker=Codex/checker=Arquitecto. test:ci en ventana quieta.
+- **PROXIMO PASO:** monitorear entrega de TASK-0189. Re-checar clon limpio + **repetir el smoke vivo** (config stub,
+  rutas absolutas, front en puerto libre) confirmando: timestamp del audit ISO intacto + tras stop no queda lock/
+  orphan + open posterior arranca. Si verde -> cerrar. ENTONCES la consola queda lista para activacion REAL (paso del
+  operador presente con el inner real, segun personal/operador/RUNBOOK-activacion-consola-arquitecto.md).
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (acumula lo de TASK-0189 al entregar). Codex usage-limit puede recurrir.
+
+## >>> RESUME-PREV 2026-06-26 (HEAD aa74b14) -- runbook activacion + SMOKE VIVO: 2 defectos hallados <<<
 - **Operador: el relevo de rol esta claro** -- al revivir Arquitecto via Zeus, ESA sesion es EL Arquitecto y la CLI
   actual pasa a ASISTENTE (resuelve sesion unica por relevo, no por bloqueo). Zeus ya pusheado por el operador (6220833).
 - **Cree el RUNBOOK** de activacion viva: `personal/operador/RUNBOOK-activacion-consola-arquitecto.md` (commit aa74b14
