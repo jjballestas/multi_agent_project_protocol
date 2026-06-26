@@ -13,7 +13,13 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   Product evidence before commit: `node --check` OK for launcher, stub, tests, server, and app; `git diff --check`
   OK; targeted TASK-0188/bridge tests PASS 9 plus 4 slow skips; `npm test` PASS 86/106 with 20 slow skips;
   `npm run test:ci` PASS 106/106; smoke on port 4289 OK for `/healthz`, disabled architect bridge status, and
-  architect console HTML.
+  architect console HTML. Protocol delivery commit `03d4bf2 coord(TASK-0188): deliver architect runtime launcher`
+  moved TASK-0188 to `in_review`, released `CLAIM-20260626-Codex-TASK-0188`, wrote
+  `Area_comun/handoffs/HANDOFF-TASK-0188-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0188-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0188.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4
+  byte-identica `up_to_seq` 2102; `protocol.config.json`/genesis diff empty.
 - TASK-0187 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `a4e4a88 feat(architect): harden bridge audit`.
   The Architect bridge audit now writes session-scoped JSONL under `.runtime/architect-bridge/sessions/`, persists
   open/input/output/stop events with session/timestamp/type, redacts enumerable PII families including email,
