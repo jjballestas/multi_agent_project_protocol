@@ -39,7 +39,16 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=True), encoding="utf-8")
 
 
-def write_skill(path: Path, skill_id: str, title: str, version: str, body: str, *, neutral_core: bool = True) -> None:
+def write_skill(
+    path: Path,
+    skill_id: str,
+    title: str,
+    version: str,
+    body: str,
+    *,
+    neutral_core: bool = True,
+    profile: str | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     frontmatter = [
         "---",
@@ -49,6 +58,9 @@ def write_skill(path: Path, skill_id: str, title: str, version: str, body: str, 
     ]
     if neutral_core:
         frontmatter.append("neutral_core: true")
+    else:
+        frontmatter.append(f"profile: {profile}")
+        frontmatter.append("neutral_core: false")
     frontmatter.append("---")
     path.write_text("\n".join(frontmatter) + f"\n\n{body}\n", encoding="utf-8")
 
@@ -73,6 +85,13 @@ def registry_entry(skill_id: str, path: str, *, enabled: bool, title: str | None
             "persists_outputs": False,
         },
     }
+
+
+def profile_registry_entry(skill_id: str, path: str, *, title: str) -> dict[str, Any]:
+    entry = registry_entry(skill_id, path, enabled=True, title=title)
+    entry["neutral_core"] = False
+    entry["profile"] = "financiero_presupuesto"
+    return entry
 
 
 def case_ac1_registry_outside_protocol_config() -> dict[str, Any]:
@@ -207,6 +226,41 @@ def case_ac5_fail_closed_missing_and_malformed() -> dict[str, Any]:
         shutil.rmtree(root, ignore_errors=True)
 
 
+def case_ac6_profile_skills_load_under_profile() -> dict[str, Any]:
+    registry = json.loads((ROOT / "skills" / "skills.config.json").read_text(encoding="utf-8"))
+    profile_ids = {"ddl-conventions", "business-rule-vs-legacy", "migration-verification"}
+    configured = {item["id"]: item for item in registry["skills"] if item.get("id") in profile_ids}
+    assert set(configured) == profile_ids
+    assert all(item.get("enabled") is False for item in configured.values())
+    assert all(item.get("neutral_core") is False for item in configured.values())
+    assert all(item.get("profile") == "financiero_presupuesto" for item in configured.values())
+
+    patched = json.loads(json.dumps(registry))
+    patched["skills"] = [item for item in patched["skills"] if item.get("id") in profile_ids]
+    for item in patched["skills"]:
+        item["enabled"] = True
+
+    root = fixture_root()
+    try:
+        shutil.copytree(ROOT / "profiles" / "financiero_presupuesto", root / "profiles" / "financiero_presupuesto")
+        write_json(root / "skills" / "skills.config.json", patched)
+
+        first = load_skills(root)
+        second = load_skills(root)
+        assert first == second
+        loaded = {item["id"]: item for item in first["skills"]}
+        assert set(loaded) == profile_ids
+        for skill_id, item in loaded.items():
+            assert item["profile"] == "financiero_presupuesto"
+            assert item["neutral_core"] is False
+            assert item["path"].startswith("profiles/financiero_presupuesto/skills/")
+            assert item["procedure"]
+            assert configured[skill_id]["path"] == item["path"]
+        return {"case": "AC6-profile-skills-load-under-profile", "status": "pass", "loaded": 3}
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def main() -> int:
     cases = [
         case_ac1_registry_outside_protocol_config(),
@@ -214,6 +268,7 @@ def main() -> int:
         case_ac3_no_authority_no_writes(),
         case_ac4_domain_content_rejected_in_core(),
         case_ac5_fail_closed_missing_and_malformed(),
+        case_ac6_profile_skills_load_under_profile(),
     ]
     print(json.dumps({"schema_version": "skills_loader_cases.v1", "cases": cases}, indent=2, ensure_ascii=True))
     return 0

@@ -13,6 +13,48 @@
         "grants_no_authority": true,
         "persists_outputs": false
       }
+    },
+    {
+      "id": "ddl-conventions",
+      "title": "DDL conventions",
+      "neutral_core": false,
+      "profile": "financiero_presupuesto",
+      "path": "profiles/financiero_presupuesto/skills/ddl-conventions.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
+    },
+    {
+      "id": "business-rule-vs-legacy",
+      "title": "Business rule vs legacy behavior",
+      "neutral_core": false,
+      "profile": "financiero_presupuesto",
+      "path": "profiles/financiero_presupuesto/skills/business-rule-vs-legacy.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
+    },
+    {
+      "id": "migration-verification",
+      "title": "Migration verification",
+      "neutral_core": false,
+      "profile": "financiero_presupuesto",
+      "path": "profiles/financiero_presupuesto/skills/migration-verification.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
     }
   ]
 }

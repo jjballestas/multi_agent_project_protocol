@@ -186,6 +186,8 @@ def _validate_metadata(
             raise SkillLoaderError(f"{skill_id}: neutral core skill must not declare profile")
     elif metadata.get("profile") != profile:
         raise SkillLoaderError(f"{skill_id}: frontmatter profile mismatch")
+    elif metadata.get("neutral_core", "").lower() != "false":
+        raise SkillLoaderError(f"{skill_id}: profile skill must declare neutral_core:false")
 
 
 def _reject_core_domain_terms(root: Path, path: Path, text: str) -> None:

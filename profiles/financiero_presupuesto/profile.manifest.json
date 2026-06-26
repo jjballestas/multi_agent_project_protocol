@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "financiero_presupuesto",
+  "profile_version": "0.1.0",
+  "title": "Financiero Presupuesto",
+  "description": "Minimal profile shell for reusable procedural skills hosted outside the neutral core.",
+  "requires_protocol_version": ">=1.0.0 <2.0.0",
+  "stack": [],
+  "provides": {
+    "docs": [],
+    "templates": [],
+    "prompts": [],
+    "skills": [
+      "skills/ddl-conventions.skill.md",
+      "skills/business-rule-vs-legacy.skill.md",
+      "skills/migration-verification.skill.md"
+    ]
+  },
+  "adds_boundaries": [],
+  "adds_quality_gates": [],
+  "adds_human_approval_points": [],
+  "depends_on_profiles": [],
+  "maintainer": "Codex",
+  "neutrality_note": "Nothing in this profile leaks domain/stack terms into the protocol core or its *.template.* masters."
+}

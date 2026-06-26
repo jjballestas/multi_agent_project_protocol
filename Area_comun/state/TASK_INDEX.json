@@ -2863,7 +2863,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "SPEC-0097",
-            "status": "ready",
+            "status": "in_progress",
             "title": "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)",
             "type": "product"
         },

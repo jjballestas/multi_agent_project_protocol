@@ -2,7 +2,7 @@
 task_id: TASK-0184
 title: "FLOOR skills Fase 1 pieza 2: 3 skills de CONTENIDO (DDL / regla-negocio-vs-legacy / verificacion-migracion) en profiles/financiero_presupuesto/skills/ (SPEC-0097)"
 type: product
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal
