@@ -4,7 +4,23 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 6d4c30a) -- (a) REQ-D642E4D8 done; (c) DECISION-0062 consola Arquitecto PROPOSED <<<
+## >>> RESUME 2026-06-26 (HEAD 0253f85) -- DECISION-0062 RATIFICADA; consola Arquitecto pieza 1 GO a Codex <<<
+- **Operador RATIFICO DECISION-0062** (consola del Arquitecto, puente interactivo persistente). La marque
+  accepted (submit_intent) + autore **SPEC-0098** + **TASK-0185** (ready/Codex, pieza 1 = proceso-puente, slice
+  minimo) + GO a Codex. commit 0253f85 PUSHED, validate exit 0.
+- **Pieza 1 (TASK-0185, SPEC-0098 AC1-AC6):** proceso-puente en Zeus-protocol que mantiene UNA sesion viva del
+  runtime del Arquitecto + endpoints front (abrir/estado/enviar/stream SSE/detener) + streaming. INVARIANTES:
+  no-bypass (toda mutacion via submit_intent, prueba negativa permanente), runtime-only (espejo DECISION-0057,
+  stop honrado), sesion unica, off-by-default (registro fuera del config pinned), guarda PII (chat no al #4).
+  Repo=Zeus. maker=Codex / checker=Arquitecto.
+- **Secuencia consola-arq:** pieza 1 = proceso-puente (EN CURSO) -> pieza 2 = consola UI + streaming -> pieza 3 =
+  auditoria endurecida (posteriores, una a la vez).
+- **PROXIMO PASO:** monitorear entrega de TASK-0185 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`)
+  AC1-AC6 (off-by-default, no-bypass prueba negativa, runtime-only+stop, sesion unica, streaming+PII, gates). Si
+  verde -> cerrar (checker=Arquitecto). Repo Zeus -> push del producto sigue siendo accion del operador.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol al remote (HEAD 8c746ea + lo que entregue Codex en TASK-0185).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 6d4c30a) -- (a) REQ-D642E4D8 done; (c) DECISION-0062 consola Arquitecto PROPOSED <<<
 - **(a) REQ-D642E4D8 -> done** (cabo suelto de carga-por-archivo-v2; Codex reconcilio via submit_intent, commits
   ca008e8/ccfb7bd; los pushee yo en 6d4c30a). LOOSE END menor: `M personal/Codex/Memory.md` sin commitear (archivo
   del peer; no lo toco).
