@@ -829,6 +829,12 @@
             "title": "Consola del Arquitecto pieza 2: UI conversacional + streaming en el front (consume el puente; routeada, honesta, no-bypass) (SPEC-0099, DECISION-0062)"
         },
         {
+            "id": "TASK-0187",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Consola del Arquitecto pieza 3: auditoria endurecida (store controlado + guarda PII, acotado, nunca al #4) (SPEC-0100, DECISION-0062)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

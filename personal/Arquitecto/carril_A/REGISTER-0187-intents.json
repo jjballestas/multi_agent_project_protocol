@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260626-Arquitecto-register-0187","task_id":"TASK-0187","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/specs/SPEC-0100-consola-arquitecto-auditoria-endurecida.md","Area_comun/tasks/TASK-0187-codex-consola-arquitecto-auditoria-pieza3.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-26T16:27:00Z","updated_at":"2026-06-26T16:27:00Z","expires_at":"2026-06-26T22:00:00Z","status":"active","notes":"Register TASK-0187 ready/Codex (Consola del Arquitecto pieza 3 = auditoria endurecida, SPEC-0100). Gobernada por DECISION-0062. Operador dio GO pieza 3."},"idempotency_key":"arquitecto:register-0187:claim-acquire"} },
+    { "task_upsert": { "task":{"id":"TASK-0187","title":"Consola del Arquitecto pieza 3: auditoria endurecida (store controlado + guarda PII, acotado, nunca al #4) (SPEC-0100, DECISION-0062)","status":"ready","owner":"Codex","type":"product","phase":"P2","priority":"normal","spec_id":"SPEC-0100","maker":"Codex","checker":"Arquitecto","file":"Area_comun/tasks/TASK-0187-codex-consola-arquitecto-auditoria-pieza3.md"},"idempotency_key":"arquitecto:register-0187:task-upsert"} },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260626-Arquitecto-register-0187","idempotency_key":"arquitecto:register-0187:claim-release"} }
+  ]
+}
