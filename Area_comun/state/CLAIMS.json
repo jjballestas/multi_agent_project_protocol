@@ -9180,7 +9180,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-27T12:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0191",
             "updated_at": "2026-06-27T12:00:00Z"
         },
@@ -9198,9 +9198,31 @@
                 "Area_comun/state/CLAIMS.json"
             ],
             "started_at": "2026-06-27T12:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0191",
             "updated_at": "2026-06-27T12:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0191-delivery",
+            "expires_at": "2026-06-28T12:00:00Z",
+            "notes": "TASK-0191 delivery handoff, mailbox response, GO archive, in_review transition and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0191",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0191",
+                "Area_comun/tasks/TASK-0191-codex-harness-experimento-h1h3.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0191-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0191-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0191.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0191.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T12:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0191",
+            "updated_at": "2026-06-27T12:40:00Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
