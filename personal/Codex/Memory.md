@@ -18,7 +18,8 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0185-in-review.md`, and moved the consumed GO to
   `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0185.md`. Final protocol evidence before
   commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4 byte-identica
-  `up_to_seq` 2062; `protocol.config.json`/genesis diff empty.
+  `up_to_seq` 2062; `protocol.config.json`/genesis diff empty. Protocol delivery commit:
+  `75098b8 coord(TASK-0185): deliver architect bridge`.
 - REQ-D642E4D8 reconciliation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `ca008e8 coord(REQ-D642E4D8): reconcile file intake requirement`. Codex processed
   `MSG-20260626-Arquitecto-to-Codex-GO-reconcile-REQ-D642E4D8.md`, moved REQ-D642E4D8 from `in_progress` to
