@@ -21,7 +21,21 @@
   **FPR=0** (verificador determinista); H2 Dlatencia mediana<=50ms/p95<=200ms + Dstore<=4KB/evento + Dtokens<=5%
   (cotas por requisito: turno=segundos, firma hashes-no-texto); H3 acuerdo externo=100% + match clon-limpio (0046).
   Tras freeze NO se cambian umbrales antes de medir; cambio => v2.0 nueva y solo antes de mirar resultados.
-- **PROXIMO PASO (camino critico TFM, ya con pre-registro congelado):** cutover A2
+- **PRE-REGISTRO ATESTADO EN #4** (seq 2124, project_narrative append a next_actions, encadenado+HMAC, ts
+  2026-06-27T00:50:00Z, sha256 1ae10e05... anclado; commit d50f1df). La fecha de freeze ya no se puede retrodatar.
+- **MINI-PLAN CUTOVER A2 escrito** (`personal/operador/TFM/MINI-PLAN-CUTOVER-A2.md`, commit 003e8e8). HALLAZGO
+  CLAVE: el cutover A2 **NO es un flag-flip**. El Ed25519 por agente lo produce `llm_turn_wrapper` (evento
+  `agent.attestation`, gateado por agent_signatures_enabled) via el `orchestrator` con real_invoker/SA; PERO los
+  agentes escriben por cron->CLI->`submit_intent`, que NO firma actor_auth (default not_enforced_phase2 + HMAC).
+  Falta una PIEZA para cablear Ed25519 al camino de escritura real. **Dos caminos:** A (orquestador/real_invoker =
+  ventana de mayor riesgo, separada de #4 por DECISION-0039 §5) vs **B (submit_intent firma actor_auth Ed25519 =
+  minimo, alineado con el modelo cron; RECOMENDADO)**. Precondicion ya cumplida (publicas provisionadas, privadas
+  en protocol-secrets).
+- **DECISIONES DEL OPERADOR pendientes:** (i) camino A vs B (recomiendo B); (ii) GO a la pieza SDD (submit_intent
+  firma actor_auth Ed25519 + golden + prueba negativa atribucion-cruzada + secret-indep, off-by-default,
+  maker=Codex/checker=Arquitecto); (iii) agendar la ventana de riesgo (operador presente) para el flip + rollback.
+  Nota: si camino B, emitir pre-registro v2.0 fijando "atestacion medida = actor_auth Ed25519" ANTES de generar dataset.
+- **PROXIMO PASO (camino critico TFM, ya con pre-registro congelado+atestado):** cutover A2
   (Ed25519 vivo) -> generar dataset -> inyectar A1/A2/A3 + medir coste + verificador externo -> redactar. La
   MEDICION = experimento deliberado (numeros), distinta de construir (instrumento). Construir Zeus = el INSTRUMENTO,
   no la medicion (correccion clave que el operador necesitaba).
