@@ -4,6 +4,15 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0187 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `a4e4a88 feat(architect): harden bridge audit`.
+  The Architect bridge audit now writes session-scoped JSONL under `.runtime/architect-bridge/sessions/`, persists
+  open/input/output/stop events with session/timestamp/type, redacts enumerable PII families including email,
+  phone, document, address, NIT and account, bounds retention to the latest 200 events per session, and keeps the
+  disabled bridge from creating an audit store. Product evidence before protocol delivery: `node --check
+  src/server.js tests/staticContract.test.js` OK; `git diff --check` OK; `npm test` PASS 81/101 with 20 slow skips;
+  targeted slow `ZEUS_RUN_SLOW_TESTS=1 node --test --test-name-pattern "TASK-0187|TASK-0185 architect bridge"`
+  PASS 6/6; full `npm run test:ci` PASS 101/101; smoke on port 4281 OK for `/healthz`, disabled bridge status,
+  and architect bridge client asset.
 - TASK-0186 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `2176f5b feat(front): add architect console UI`.
   The front now has a routed `Consola Arquitecto` view with a conversation log, bridge-derived status badge,
   open/send/stop/status controls, SSE client wiring, disabled/off-by-default honest state, and permanent behavior

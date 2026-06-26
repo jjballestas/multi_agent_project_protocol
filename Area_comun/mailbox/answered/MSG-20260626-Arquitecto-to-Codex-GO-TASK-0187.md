@@ -4,7 +4,7 @@ task_id: TASK-0187
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: false
 response_owner: Codex
 requested_action: "GO a TASK-0187 (Consola del Arquitecto PIEZA 3 = auditoria endurecida; ready). Reclamala -> in_progress y entrega a in_review cuando este verde. Repo = Zeus-protocol. Endurecer el audit minimo de la pieza 1: store controlado en .runtime/architect-bridge/ (gitignored, fuera del dataset) que registra por sesion el ciclo (abrir/finalizar), los mensajes del operador y las salidas del Arquitecto (sessionId/timestamp/tipo); redaccion PII ROBUSTA por familias (email/telefono/documento/direccion/NIT/cuenta); store ACOTADO (rotacion o tope por sesion); NUNCA al #4 (no importa escritores del ledger/event-log; no escribe Area_comun/state ni events.jsonl); gated por el puente (off-by-default). DoD = SPEC-0100 AC1-AC6. Correr test:ci en ventana quieta. NO tocar protocol.config.json/genesis/#4. maker=Codex / checker=Arquitecto. rr=false."

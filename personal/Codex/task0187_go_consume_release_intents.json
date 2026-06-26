@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "Codex:TASK-0187:consume-go-release:20260626T000300Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260626-Codex-TASK-0187-consume-go",
+      "task_id": "TASK-0187",
+      "owner": "Codex",
+      "updated_at": "2026-06-26T00:03:00Z"
+    }
+  ]
+}

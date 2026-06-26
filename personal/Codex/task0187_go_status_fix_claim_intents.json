@@ -1,0 +1,25 @@
+{
+  "idempotency_key": "Codex:TASK-0187:go-status-fix-claim:20260626T000400Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260626-Codex-TASK-0187-go-status-fix",
+        "owner": "Codex",
+        "task_id": "TASK-0187",
+        "status": "active",
+        "started_at": "2026-06-26T00:04:00Z",
+        "updated_at": "2026-06-26T00:04:00Z",
+        "expires_at": "2026-06-26T00:20:00Z",
+        "notes": "Fix consumed TASK-0187 GO frontmatter status after moving to answered.",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260626-Codex-TASK-0187-go-status-fix",
+          "Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0187.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ]
+      }
+    }
+  ]
+}
