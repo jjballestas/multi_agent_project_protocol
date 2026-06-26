@@ -12,7 +12,13 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   src/server.js tests/staticContract.test.js` OK; `git diff --check` OK; `npm test` PASS 81/101 with 20 slow skips;
   targeted slow `ZEUS_RUN_SLOW_TESTS=1 node --test --test-name-pattern "TASK-0187|TASK-0185 architect bridge"`
   PASS 6/6; full `npm run test:ci` PASS 101/101; smoke on port 4281 OK for `/healthz`, disabled bridge status,
-  and architect bridge client asset.
+  and architect bridge client asset. Protocol delivery commit
+  `bb88a72 coord(TASK-0187): deliver architect audit hardening` moved TASK-0187 to `in_review`, released Codex
+  claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0187-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0187-in-review.md`, and moved the consumed GO to
+  `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0187.md`. Final protocol evidence before
+  delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false / #4
+  byte-identica `up_to_seq` 2088; `protocol.config.json`/genesis diff empty.
 - TASK-0186 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `2176f5b feat(front): add architect console UI`.
   The front now has a routed `Consola Arquitecto` view with a conversation log, bridge-derived status badge,
   open/send/stop/status controls, SSE client wiring, disabled/off-by-default honest state, and permanent behavior
