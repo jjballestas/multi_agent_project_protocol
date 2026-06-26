@@ -4,7 +4,24 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 39a483b) -- skills Fase 1 COMPLETA (mecanismo + 3 skills) <<<
+## >>> RESUME 2026-06-26 (HEAD 6d4c30a) -- (a) REQ-D642E4D8 done; (c) DECISION-0062 consola Arquitecto PROPOSED <<<
+- **(a) REQ-D642E4D8 -> done** (cabo suelto de carga-por-archivo-v2; Codex reconcilio via submit_intent, commits
+  ca008e8/ccfb7bd; los pushee yo en 6d4c30a). LOOSE END menor: `M personal/Codex/Memory.md` sin commitear (archivo
+  del peer; no lo toco).
+- **(c) TASK-0178 (consola del Arquitecto) AVANZADA:** el operador eligio el enfoque **puente interactivo
+  PERSISTENTE** (no spawn-por-mensaje ni observabilidad-primero). Autore **DECISION-0062 PROPOSED** (registrada
+  submit_intent, commit 6d4c30a PUSHED): puente de runtime de larga vida que mantiene una sesion VIVA del
+  Arquitecto + streaming a la UI; invariantes = **no-bypass** (toda mutacion via submit_intent), **runtime-only**
+  (espejo DECISION-0057; nunca identidad/llaves/registro; honra stop), **sesion unica** (anti-colision),
+  **off-by-default** + operador presente + registro fuera del config pinned, **auditoria + guarda PII**
+  (DECISION-0040; el chat NO al #4), repos DECISION-0050 (codigo en Zeus, gobernanza en protocolo). SDD por pieza
+  tras ratificar: (i) proceso-puente, (ii) consola UI + streaming, (iii) auditoria. maker=Codex/checker=Arquitecto.
+- **PENDIENTE OPERADOR: RATIFICAR DECISION-0062** (proposed) antes de autorar SPEC + tasks. Tambien sigue
+  pendiente: push de Zeus-protocol al remote (HEAD 8c746ea).
+- **Fuera de alcance DECISION-0062:** consolas vivas para Codex/Analista; fabrica NOVA (~11 roles, futuro);
+  multi-tenant; alta/baja de agente (RF-9 re-genesis).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 39a483b) -- skills Fase 1 COMPLETA (mecanismo + 3 skills) <<<
 - **TASK-0184 (skills Fase 1 pieza 2 = 3 skills de contenido) CERRADA in_review->done** (close submit_intent
   seq ~2040, commit 39a483b; incluyo commits locales de Codex d589318/c1bd7d2 que pushee yo). Checker=Arquitecto.
 - **Entrega (Codex d589318):** shell MINIMO `profiles/financiero_presupuesto/` (manifest valido, stack vacio, SIN
