@@ -4,7 +4,21 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
-## >>> RESUME 2026-06-26 (HEAD 7e922c8) -- consola Arquitecto PIEZA 2 (UI) CERRADA <<<
+## >>> RESUME 2026-06-26 (HEAD a314343) -- consola Arquitecto PIEZA 3 (auditoria) GO a Codex <<<
+- **Operador dio GO a pieza 3.** Autore SPEC-0100 + TASK-0187 (ready/Codex) -- SIN decision nueva (DECISION-0062).
+  Registrado + GO trigger-free (grep-verificado) a Codex (commit a314343 PUSHED), validate exit 0.
+- **Alcance pieza 3 (SPEC-0100):** endurecer el audit minimo de pieza 1 -> store controlado en
+  `.runtime/architect-bridge/` (gitignored, fuera del dataset): por sesion, ciclo (abrir/finalizar)+mensajes
+  operador+salidas Arquitecto (sessionId/timestamp/tipo); **redaccion PII robusta por familias** (email/telefono/
+  documento/direccion/NIT/cuenta; prueba negativa PERMANENTE); **acotado** (rotacion/tope); **nunca al #4** (no
+  importa escritores, no escribe state/events); gated por el puente (off-by-default). maker=Codex/checker=Arquitecto.
+- **PROXIMO PASO:** monitorear entrega de TASK-0187 a in_review. Re-checar clon limpio (`git -c core.longpaths=true`)
+  AC1-AC6; **correr test:ci en VENTANA QUIETA** (sin peers mid-exec; el full-suite flakea 502 bajo carga). Si verde
+  -> cerrar (checker=Arquitecto). CON ESTO la consola del Arquitecto (puente+UI+auditoria) queda COMPLETA.
+- **PENDIENTE OPERADOR:** push de Zeus-protocol (HEAD producto 2176f5b + lo que entregue TASK-0187). Codex usage
+  limit puede recurrir (su cuenta).
+
+## >>> RESUME-PREV 2026-06-26 (HEAD 7e922c8) -- consola Arquitecto PIEZA 2 (UI) CERRADA <<<
 - **TASK-0186 (consola del Arquitecto pieza 2 = UI conversacional + streaming) CERRADA in_review->done** (close
   submit_intent seq ~2075, commit 7e922c8; incluyo commit local de Codex 014eb4f que pushee yo). Checker=Arquitecto.
 - **Entrega (Codex Zeus 2176f5b "add architect console UI"):** solo public/* (app.js+262/index.html+10/styles.css+105)
