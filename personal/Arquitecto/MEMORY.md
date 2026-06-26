@@ -2,9 +2,28 @@
 
 > Runbook in-repo del Arquitecto (DECISION-0026: actualizar tras cada commit). Cronologia completa en la
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
-> Ultima actualizacion: 2026-06-26, HEAD c4abf8c (PUSHED), v1.14.0 (#4 enforce/auth ON). **MODO NECESIDAD COMPLETO (TASK-0181+REQ done). TASK-0182 (deuda full-suite) EN CAMBIO: Codex aislo el tier lento OK pero ci.yml corre el default que SKIPPEA los guards de seguridad; devuelto a Codex a fin de que la CI corra el suite completo.**
+> Ultima actualizacion: 2026-06-26, HEAD 6be9fd0 (PUSHED), v1.14.0 (#4 enforce/auth ON). **TODO CERRADO: modo necesidad (TASK-0181+REQ) done + TASK-0182 (deuda full-suite) done. Cola vacia. Zeus a6b830c LOCAL (push al remote = accion operador).**
 
-## >>> RESUME 2026-06-26 (HEAD c4abf8c) -- TASK-0182 CAMBIO: CI ciega a los guards de seguridad <<<
+## >>> RESUME 2026-06-26 (HEAD 6be9fd0) -- TASK-0182 CERRADA; cola vacia <<<
+- **TASK-0182 (deuda full-suite) CERRADA in_review->done** (close via submit_intent seq ~2013, commit 6be9fd0;
+  incluyo la re-entrega de Codex a703575 que quedo sin pushear -> la pushee yo). Deuda test-infra: checker=Arquitecto,
+  SIN Analista. validate exit 0, 0 claims.
+- **Solucion final (Zeus a6b830c):** `npm test` = gate RAPIDO (default, skip 16, ~2.5s) para revisor interactivo+dev;
+  `npm run test:slow`/`test:ci` (ZEUS_RUN_SLOW_TESTS=1) = suite COMPLETO 93; **ci.yml corre `npm run test:ci`** ->
+  los guards de seguridad (AC3-bis/ter PII + impersonacion + PII-gate + no-egress + auto-commit-push) SE GATEAN en
+  GitHub Actions (sin el cap interactivo 604s). Checker clon limpio: npm test exit 0 (77/16); **test:ci 93/93 0 skip
+  exit 0** (AC3-bis/ter CORREN); cero codigo de produccion; README documenta el tier; Co-Author OK. AC1-AC4 cumplidos.
+- **PENDIENTE OPERADOR (su accion):** push del repo producto **Zeus-protocol** al remote (HEAD local a6b830c; el
+  clasificador bloquea push a remoto externo -> lo hace el operador). Commits Zeus de la sesion: 6b2b37c (aislamiento)
+  + a6b830c (CI full-suite). Co-Author Codex en ambos.
+- **COLA VACIA.** open/ mailbox: solo MSG-Arquitecto-to-Analista-REVIEW3-RESPONSE (FYI rr=false). FLOOR skills Fase1
+  aun gateado (sin GO). Monitoreo reactivo.
+- **LECCIONES sesion:** (1) checker debe verificar QUE corre el gate (default vs CI vs slow), no solo exit 0 -- un
+  aislamiento "verde" escondia que CI dejo de correr los guards [[checker-test-real-write-path]]; (2) cron duerme 300s,
+  pid-file stale != muerto; verificar proceso real antes de relanzar [[agent-activation-lifecycle]]; (3) PERMISO Bash(*)
+  en settings.local.json [[permission-auto-exec]].
+
+## >>> RESUME-PREV 2026-06-26 (HEAD c4abf8c) -- TASK-0182 CAMBIO: CI ciega a los guards de seguridad <<<
 - **TASK-0182 (deuda full-suite, GO del operador) -- CAMBIO-REQUERIDO acotado (1 item).** Codex entrego Zeus
   **6b2b37c** "test(intake): isolate slow subprocess suite": aislo 16 tests lentos tras `ZEUS_RUN_SLOW_TESTS=1`
   (`npm run test:slow`); default `npm test` baja a ~2.5s (77 pass/16 skip). Cero codigo de produccion, Co-Author OK.
