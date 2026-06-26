@@ -4,7 +4,7 @@ task_id: TASK-0191
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 created_at: 2026-06-27
 one_line_summary: "TASK-0191 entregada a in_review: harness H1-H3 reproducible en research/experiment_h1h3 con goldens y CI."

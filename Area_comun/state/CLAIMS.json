@@ -9091,6 +9091,24 @@
             "updated_at": "2026-06-27T00:54:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-close-0191",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Close TASK-0191 in_review->done (harness experimento H1-H3, SPEC-0104/DECISION-0066; maker=Codex, checker=Arquitecto). Checker clon limpio 5f2d246 (ruta corta): vectores A1(alter/delete/insert/reorder)+A2(atribucion-cruzada, reusa AC3-6)+A3(rollback/equivocacion); golden examples/experiment_h1h3_cases 2/2 (AC1-AC6 disposable-thresholds + AC2-AC6 seed-reproducible); validate exit 0. AC1 CRITICO CONFIRMADO EN VIVO: tras correr el golden, runtime/state/events.jsonl byte-identico (mismo sha256) -> NUNCA toca el #4 vivo (LIVE_GUARD_PATHS + hash_live_guard; DECISION-0045). research/experiment_h1h3/ neutral; no toca core/genesis. Co-Author. Aparato de medicion listo; la corrida real es posterior (flip A2 + dataset, paso del operador).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0191-codex-harness-experimento-h1h3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T00:57:00Z",
+            "status": "released",
+            "task_id": "TASK-0191",
+            "updated_at": "2026-06-27T00:57:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-decision-0064",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0064 PROPOSED (UI fork de Hermes MIT = cliente del single-writer; contrato /api/governance/*; reuso gobernanza zeus; licencia; GATEADO a post-TFM). Plan del operador en personal/operador/Hermes/. Parqueada para Fase B; no activar las fases de build hasta congelar la medicion del TFM.",
