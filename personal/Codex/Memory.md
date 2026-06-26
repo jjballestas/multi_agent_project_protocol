@@ -12,6 +12,12 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   Product evidence before commit: `node --check` OK for server, launcher, tests and stub; `git diff --check` OK;
   targeted TASK-0189/0188/0187/0185 tests PASS; `npm test` PASS 87/109 with 22 slow skips; `npm run test:ci` PASS
   109/109; local smoke on port 4292 OK for `/healthz`, disabled architect bridge status, and architect console HTML.
+  Protocol delivery commit `e4e6f7d coord(TASK-0189): deliver architect console remediation` moved TASK-0189 to
+  `in_review`, released Codex claims, wrote `Area_comun/handoffs/HANDOFF-TASK-0189-codex-to-arquitecto-1.md`,
+  opened `Area_comun/mailbox/open/MSG-20260626-Codex-to-Arquitecto-TASK-0189-in-review.md`, and moved the consumed
+  GO to `Area_comun/mailbox/answered/MSG-20260626-Arquitecto-to-Codex-GO-TASK-0189.md`. Final protocol evidence
+  before delivery commit: encoding OK, neutrality OK, Python validator OK, PowerShell validator OK, drift false /
+  #4 byte-identica `up_to_seq` 2116; `protocol.config.json`/genesis diff empty.
 - TASK-0188 product commit landed in `D:/Agentes/Zeus/Zeus-protocol`: `6220833 feat(architect): add runtime launcher`.
   The product now ships `scripts/architect-runtime-launcher.mjs`, an off-by-default bridge command wrapper that
   requires `ARCHITECT_RUNTIME_COMMAND`, keeps one long-lived inner runtime, forwards stdin turns to it, streams
