@@ -4,6 +4,17 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0191 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `5f2d246 feat(research): add H1-H3 experiment harness`. The protocol now ships
+  `research/experiment_h1h3/` with a reproducible H1-H3 research harness that operates only on disposable
+  root-local fixtures, injects deterministic seeded A1/A2/A3 vectors, reports TPR/FPR/AC2 health, estimates
+  with-#4 vs without-#4 overhead, runs a secret-independent external verifier path, and emits JSON/MD reports
+  mapped to pre-registration thresholds. CI includes `examples/experiment_h1h3_cases/run_experiment_h1h3_cases.py`,
+  which proves live root guard hashes remain byte-identical and same seed/K results are reproducible. Evidence before
+  implementation commit: py_compile OK; H1-H3 golden PASS 2/2; attestation negative cases PASS 6/6; actor_auth
+  Ed25519 cases PASS 5/5; encoding OK; domain neutrality OK; Python validator OK; PowerShell validator OK;
+  drift false / #4 byte-identica `up_to_seq` 2148. TASK-0191 is still in progress pending delivery handoff,
+  mailbox close, claim release and in_review transition.
 - TASK-0190 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `d8bb869 feat(runtime): add actor auth ed25519`. The runtime now keeps the default submit_intent path at
   `actor_auth.method=not_enforced_phase2` unless `event_state.actor_auth_enforce` is explicitly true, and the ON path
