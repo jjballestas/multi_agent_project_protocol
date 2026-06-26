@@ -4,7 +4,7 @@ task_id: TASK-0187
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 response_owner: Arquitecto
 one_line_summary: "TASK-0187 entregada a in_review: auditoria endurecida consola Arquitecto."

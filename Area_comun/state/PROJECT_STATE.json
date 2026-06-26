@@ -831,7 +831,7 @@
         {
             "id": "TASK-0187",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Consola del Arquitecto pieza 3: auditoria endurecida (store controlado + guarda PII, acotado, nunca al #4) (SPEC-0100, DECISION-0062)"
         },
         {
