@@ -891,8 +891,14 @@
         {
             "id": "TASK-0197",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis F1b - vistas Decisiones/Ledger/Handoffs (read-only)"
+        },
+        {
+            "id": "TASK-0198",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis F1c - vista Artifacts (read-only)"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

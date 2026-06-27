@@ -9038,6 +9038,39 @@
             "updated_at": "2026-06-27T14:41:38Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-close0197",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Cerrar TASK-0197 F1b (checker verde).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0197-codex-zeus-aegis-f1b-views.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T16:07:30Z",
+            "status": "released",
+            "task_id": "TASK-0197",
+            "updated_at": "2026-06-27T16:07:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Arq-task0198",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Crear TASK-0198 (F1c) ready/Codex + GO.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T16:09:50Z",
+            "status": "released",
+            "task_id": "TASK-0198",
+            "updated_at": "2026-06-27T16:09:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-a2-camino-b",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0065 accepted (A2 vivo Camino B: submit_intent firma actor_auth Ed25519, off-by-default) + TASK-0190 ready/Codex (SPEC-0103). Operador eligio Camino B. Build off-by-default; activacion viva = ventana del operador aparte.",

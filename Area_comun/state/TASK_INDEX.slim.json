@@ -26,12 +26,12 @@
             "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
         },
         {
-            "id": "TASK-0197",
+            "id": "TASK-0198",
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
-            "title": "Zeus-Aegis F1b - vistas Decisiones/Ledger/Handoffs (read-only)"
+            "status": "ready",
+            "title": "Zeus-Aegis F1c - vista Artifacts (read-only)"
         }
     ],
     "view": "task_index.slim"
