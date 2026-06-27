@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1be6b320916f7f1345b55ed7611230e53331c17f4cd0324c4fc81d29772406c0",
+  "canonical_hash": "76b47799e83c78e4e5e52ab5fb3917d2707f229c4964bcf67797c19179e2d1d7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -336,6 +336,7 @@
       "CLAIM-20260627-Analista-TASK-0194-review": 1,
       "CLAIM-20260627-Analista-TASK-0199-gate1": 1,
       "CLAIM-20260627-Analista-TASK-0199-release-scope": 1,
+      "CLAIM-20260627-Analista-TASK-0201-regate1": 1,
       "CLAIM-20260627-Arq-close0197": 1,
       "CLAIM-20260627-Arq-close0198": 1,
       "CLAIM-20260627-Arq-task0198": 1,
@@ -659,7 +660,7 @@
       "TASK-0198": 9,
       "TASK-0199": 4,
       "TASK-0200": 4,
-      "TASK-0201": 2,
+      "TASK-0201": 3,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -667,7 +668,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1622,
+    "events_applied": 1624,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -721,6 +722,8 @@
       "Codex:TASK-0186:ready-to-in-progress:20260626T153000Z": 2070,
       "analista:task-0194-review:claim-acquire": 2215,
       "analista:task-0194-review:claim-release": 2216,
+      "analista:task-0201-regate1:claim-acquire": 2294,
+      "analista:task-0201-regate1:claim-release": 2295,
       "arq:arch-go-0194": 2232,
       "arq:arch-rv-0194": 2233,
       "arq:close-0117-flip4:acq": 674,
@@ -2293,5 +2296,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2293
+  "up_to_seq": 2295
 }
