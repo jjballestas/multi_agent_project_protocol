@@ -19,6 +19,13 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   diff empty. TASK-0192 remains `in_progress` under active claim
   `CLAIM-20260627-Codex-TASK-0192-ledger4` pending delivery handoff, GO answer, claim release, and in_review
   transition.
+- TASK-0192 delivery commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `fdf7b74 coord(TASK-0192): deliver actor auth override`. The task is now `in_review`, Codex claims are released,
+  the consumed GO is answered at `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0192.md`,
+  and the review handoff/message are `Area_comun/handoffs/HANDOFF-TASK-0192-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0192-in-review.md`. Final evidence before
+  delivery commit: actor_auth golden PASS 6/6; encoding OK; neutrality OK; Python validator OK; PowerShell validator
+  OK; drift false / #4 byte-identica `up_to_seq` 2174.
 - TASK-0191 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `5f2d246 feat(research): add H1-H3 experiment harness`. The protocol now ships
   `research/experiment_h1h3/` with a reproducible H1-H3 research harness that operates only on disposable
