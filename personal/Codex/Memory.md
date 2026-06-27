@@ -18,8 +18,15 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   6/6; event_auth secret resolution PASS 8/8; replay secret independent PASS 3/3; encoding OK; neutrality OK;
   Python validator OK with the pre-existing TASK-0193 mailbox context_refs warning; PowerShell validator OK with
   the same warning; drift false / #4 byte-identica `up_to_seq` 2203; `protocol.config.json` and genesis diff empty.
-  TASK-0195 remains `in_progress` under active claims pending delivery handoff, GO answer, in_review transition and
-  claim release.
+  Delivery commit landed as `6f17156 coord(TASK-0195): deliver event auth override`: TASK-0195 is `in_review`,
+  Codex claims are released, the consumed GO moved to
+  `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0195-event-auth-override.md`, and
+  `Area_comun/handoffs/HANDOFF-TASK-0195-codex-to-arquitecto-1.md` plus
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0195-in-review.md` are ready for Arquitecto review.
+  Final delivery evidence: encoding OK after a short BOM fix on the answered GO, neutrality OK, Python validator OK
+  with the same pre-existing TASK-0193 mailbox warning, PowerShell validator OK with the same warning, drift false /
+  #4 byte-identica `up_to_seq` 2210, and `git diff --check` PASS with only the known CRLF normalization warning for
+  `runtime/state/snapshot.json`.
 - TASK-0193 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `f87317c feat(f0): import Hermes v2.3.0 baseline`
   authored as Arquitecto with Codex co-author, per GO. The repo now has Hermes Workspace v2.3.0 imported under
   `vendor/hermes-2.3.0` from tag object `0218dbafce50fa69ba9ce045e2c8a3f5383bd1db` / commit
