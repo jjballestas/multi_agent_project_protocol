@@ -9083,6 +9083,24 @@
             "updated_at": "2026-06-27T19:44:43Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-0202-0203",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Cerrar TASK-0202 (V4 checker verde) + crear TASK-0203 (GATE1 final).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0202-codex-zeus-aegis-v4-pii-structural.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T20:27:54Z",
+            "status": "released",
+            "task_id": "TASK-0202",
+            "updated_at": "2026-06-27T20:27:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arq-close0197",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "Cerrar TASK-0197 F1b (checker verde).",

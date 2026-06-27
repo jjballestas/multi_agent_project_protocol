@@ -3141,9 +3141,25 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "spec_id": "SPEC-0107",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis V4 PII por construccion: id/path estructurados + preview seguro + test permanente",
             "type": "integration"
+        },
+        {
+            "author": "Arquitecto",
+            "created_at": "2026-06-27",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/TASK-0203-analista-gate1-final.md",
+            "id": "TASK-0203",
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-Aegis",
+            "relayed_by": "Arquitecto",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)",
+            "type": "review"
         },
         {
             "author": "Operador",

@@ -2,7 +2,7 @@
 task_id: TASK-0202
 title: "Zeus-Aegis V4 PII por CONSTRUCCION (no regex): id/path estructurados sin texto libre + preview seguro + test negativo permanente (SPEC-0107, GATE 1)"
 type: integration
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
