@@ -38,6 +38,8 @@ ACTOR_AUTH_TAMPER_REASONS = {
     "unknown_keyid",
     "unsupported_method",
 }
+ACTOR_AUTH_RUNTIME_CONFIG_ENV = "EVENT_STATE_RUNTIME_CONFIG_PATH"
+ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT = "event-state.runtime.json"
 
 
 class EventLogError(RuntimeError):
@@ -221,21 +223,63 @@ def attestation_signing_payload(subject_digest: str, predicate: dict[str, Any]) 
     return (str(subject_digest) + "\n" + canonical_json(predicate)).encode("utf-8")
 
 
-def actor_auth_enforce_enabled(config: dict[str, Any] | None) -> bool:
-    event_state = (config or {}).get("event_state")
-    return isinstance(event_state, dict) and event_state.get("actor_auth_enforce") is True
+def actor_auth_runtime_config_path(root: Path) -> Path:
+    configured = os.environ.get(ACTOR_AUTH_RUNTIME_CONFIG_ENV)
+    if configured:
+        path = Path(configured)
+        resolved = path.resolve() if path.is_absolute() else (root / path).resolve()
+        if not path.is_absolute() and resolved != root.resolve() and root.resolve() not in resolved.parents:
+            raise EventLogError("actor_auth runtime override path outside repository root")
+        return resolved
+    return (root / ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT).resolve()
 
 
-def actor_auth_config(config: dict[str, Any] | None) -> dict[str, Any]:
-    event_state = (config or {}).get("event_state")
-    if not isinstance(event_state, dict):
+def actor_auth_runtime_override(root: Path | None = None) -> dict[str, Any]:
+    if root is None:
         return {}
+    path = actor_auth_runtime_config_path(root)
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except Exception as exc:
+        raise EventLogError(f"invalid actor_auth runtime override: {path}") from exc
+    if not isinstance(payload, dict):
+        raise EventLogError("actor_auth runtime override must be a JSON object")
+    event_state = payload.get("event_state")
+    if event_state is None:
+        return {}
+    if not isinstance(event_state, dict):
+        raise EventLogError("actor_auth runtime override event_state must be an object")
+    allowed = {"actor_auth_enforce", "actor_auth_config"}
+    unsupported = sorted(str(key) for key in event_state if key not in allowed)
+    if unsupported:
+        raise EventLogError(f"actor_auth runtime override contains unsupported event_state keys: {', '.join(unsupported)}")
+    return event_state
+
+
+def actor_auth_event_state(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
+    event_state = (config or {}).get("event_state")
+    merged = dict(event_state) if isinstance(event_state, dict) else {}
+    merged.pop("actor_auth_enforce", None)
+    merged.pop("actor_auth_config", None)
+    merged.update(actor_auth_runtime_override(root))
+    return merged
+
+
+def actor_auth_enforce_enabled(config: dict[str, Any] | None, root: Path | None = None) -> bool:
+    event_state = actor_auth_event_state(config, root)
+    return event_state.get("actor_auth_enforce") is True
+
+
+def actor_auth_config(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
+    event_state = actor_auth_event_state(config, root)
     value = event_state.get("actor_auth_config")
     return value if isinstance(value, dict) else {}
 
 
-def actor_keyid(actor: str, config: dict[str, Any] | None) -> str:
-    cfg = actor_auth_config(config)
+def actor_keyid(actor: str, config: dict[str, Any] | None, root: Path | None = None) -> str:
+    cfg = actor_auth_config(config, root)
     keyids = cfg.get("keyids")
     if isinstance(keyids, dict) and str(keyids.get(actor) or "").strip():
         return str(keyids[actor])
@@ -256,7 +300,7 @@ def actor_auth_message(event: dict[str, Any]) -> bytes:
 
 
 def actor_auth_private_key_path(actor: str, keyid: str, config: dict[str, Any], *, root: Path) -> Path:
-    cfg = actor_auth_config(config)
+    cfg = actor_auth_config(config, root)
     files = cfg.get("private_key_files")
     configured = files.get(actor) if isinstance(files, dict) else None
     if configured is None and isinstance(files, dict):
@@ -293,7 +337,7 @@ def sign_actor_auth(event: dict[str, Any], config: dict[str, Any], *, root: Path
     except ImportError as exc:
         raise EventLogError("cryptography package is required for actor_auth Ed25519 signing") from exc
     actor = str(event.get("actor") or "")
-    keyid = actor_keyid(actor, config)
+    keyid = actor_keyid(actor, config, root)
     private_key_path = actor_auth_private_key_path(actor, keyid, config, root=root)
     if not private_key_path.exists():
         raise EventLogError(f"actor_auth private signing key missing for actor: {actor}")
@@ -302,7 +346,7 @@ def sign_actor_auth(event: dict[str, Any], config: dict[str, Any], *, root: Path
     return {"method": "ed25519", "keyid": keyid, "sig": base64.b64encode(signature).decode("ascii")}
 
 
-def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None) -> dict[str, Any]:
+def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
     auth = event.get("actor_auth")
     if not isinstance(auth, dict):
         return {"valid": False, "reason": "unsupported_method"}
@@ -315,7 +359,7 @@ def verify_actor_auth(event: dict[str, Any], config: dict[str, Any] | None) -> d
     if not keyid:
         return {"valid": False, "reason": "missing_keyid"}
     actor = str(event.get("actor") or "")
-    if keyid != actor_keyid(actor, config):
+    if keyid != actor_keyid(actor, config, root):
         return {"valid": False, "reason": "keyid_mismatch"}
     signature = str(auth.get("sig") or "")
     if not signature:
@@ -652,7 +696,7 @@ def replay_events(
         event_type = str(event.get("type") or "")
         aggregate_id = str(event.get("aggregate_id") or "")
         auth_result = verify_event_auth(event, config, root=root)
-        actor_auth_result = verify_actor_auth(event, config)
+        actor_auth_result = verify_actor_auth(event, config, root)
         if (
             auth_result.get("valid") is not True
             and str(auth_result.get("reason")) not in EVENT_AUTH_UNVERIFIABLE_REASONS
@@ -816,12 +860,12 @@ class EventWriter:
             "ts": str(ts or utc_now()),
         }
         config = read_protocol_config(self.root)
-        if actor_auth is None and actor_auth_enforce_enabled(config):
+        if actor_auth is None and actor_auth_enforce_enabled(config, self.root):
             event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
         if chain_enabled(config):
             previous_hash = self.chain_anchor(config)
             event["seq"] = self.next_seq()
-            if actor_auth is None and actor_auth_enforce_enabled(config):
+            if actor_auth is None and actor_auth_enforce_enabled(config, self.root):
                 event["actor_auth"] = sign_actor_auth(event, config, root=self.root)
         if observability_enabled(config):
             event["trace_id"] = event_trace_id(event)

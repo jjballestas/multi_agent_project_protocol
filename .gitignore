@@ -21,3 +21,4 @@ secrets/
 *.env
 personal/operador/*.env
 connectors/*.runtime.json
+event-state.runtime.json

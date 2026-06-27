@@ -98,11 +98,6 @@
     "authoritative": false,
     "slim_views_enabled": false,
     "chain_enabled": false,
-    "actor_auth_enforce": false,
-    "actor_auth_config": {
-      "secret_root": "D:/Agentes/protocol-secrets",
-      "keyids": {}
-    },
     "agent_signatures_enabled": false,
     "signature_backend": "local-ed25519",
     "signature_config": {

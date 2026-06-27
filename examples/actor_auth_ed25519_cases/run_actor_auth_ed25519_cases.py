@@ -49,7 +49,7 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def config(*, enforce: bool, keyid: str = "codex-test-key", public_key: str | None = None) -> dict[str, Any]:
-    return {
+    payload = {
         "schema_version": "1.0",
         "protocol_version": "1.14.0",
         "adoption_tier": "runtime",
@@ -61,11 +61,6 @@ def config(*, enforce: bool, keyid: str = "codex-test-key", public_key: str | No
             "authoritative": True,
             "slim_views_enabled": False,
             "chain_enabled": False,
-            "actor_auth_enforce": enforce,
-            "actor_auth_config": {
-                "private_key_files": {"Codex": "secrets/codex.pem"},
-                "keyids": {"Codex": keyid},
-            },
             "agent_signatures_enabled": False,
             "signature_config": {
                 "backend": "local-ed25519",
@@ -76,10 +71,25 @@ def config(*, enforce: bool, keyid: str = "codex-test-key", public_key: str | No
         "agent_registry": {"enabled": True, "agents": [{"id": "Codex", "enabled": True, "capabilities": ["implementer"]}]},
         "state_invariants": [{"path": "status", "equals": "active"}],
     }
+    return payload
+
+
+def actor_auth_override(*, enforce: bool, keyid: str = "codex-test-key") -> dict[str, Any]:
+    return {
+        "event_state": {
+            "actor_auth_enforce": enforce,
+            "actor_auth_config": {
+                "private_key_files": {"Codex": "secrets/codex.pem"},
+                "keyids": {"Codex": keyid},
+            },
+        }
+    }
 
 
 def seed_repo(root: Path, *, enforce: bool, with_secret: bool = True, public_key: str | None = None) -> None:
-    write_json(root / "protocol.config.json", config(enforce=enforce, public_key=public_key))
+    write_json(root / "protocol.config.json", config(enforce=False, public_key=public_key))
+    if enforce:
+        write_json(root / "event-state.runtime.json", actor_auth_override(enforce=True))
     write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": []})
     write_json(root / "Area_comun/state/PROJECT_STATE.json", {"status": "active", "decisions": [], "active_tasks": []})
     write_json(root / "Area_comun/state/CLAIMS.json", {"schema_version": "1.0", "claims": []})
@@ -113,7 +123,7 @@ def case_submit_intent_signs() -> tuple[str, bool, str]:
         result = submit_intent(root, "Codex", intent(), timestamp="2026-06-27T00:00:00Z")
         auth = result["event"]["actor_auth"]
         ok = auth.get("method") == "ed25519" and auth.get("keyid") == "codex-test-key"
-        return "AC1-submit-intent-signs", ok and verify_actor_auth(result["event"], config(enforce=True))["valid"], str(auth)
+        return "AC1-submit-intent-signs", ok and verify_actor_auth(result["event"], config(enforce=False), root)["valid"], str(auth)
     finally:
         remove_root_temp_dir(root)
 
@@ -121,11 +131,7 @@ def case_submit_intent_signs() -> tuple[str, bool, str]:
 def case_off_byte_identical() -> tuple[str, bool, str]:
     roots = [make_root_temp_dir(ROOT, ".actor-auth-off-a-"), make_root_temp_dir(ROOT, ".actor-auth-off-b-")]
     try:
-        write_json(roots[0] / "protocol.config.json", {key: value for key, value in config(enforce=False).items() if key != "event_state"})
-        cfg = config(enforce=False)
-        cfg["event_state"].pop("actor_auth_enforce", None)
-        cfg["event_state"].pop("actor_auth_config", None)
-        write_json(roots[0] / "protocol.config.json", cfg)
+        write_json(roots[0] / "protocol.config.json", config(enforce=False))
         write_json(roots[1] / "protocol.config.json", config(enforce=False))
         event_a = EventWriter(roots[0]).append_event(event_type="intent.applied", aggregate_id="TASK-0001", actor_id="Codex", payload={"x": 1}, ts="2026-06-27T00:00:00Z")
         event_b = EventWriter(roots[1]).append_event(event_type="intent.applied", aggregate_id="TASK-0001", actor_id="Codex", payload={"x": 1}, ts="2026-06-27T00:00:00Z")
@@ -143,7 +149,7 @@ def case_cross_attribution_rejected() -> tuple[str, bool, str]:
             result = submit_intent(root, "Codex", intent(), timestamp="2026-06-27T00:00:00Z")
         except IntentError:
             return "AC3-cross-attribution-rejected", True, "write rejected"
-        auth_result = verify_actor_auth(result["event"], config(enforce=True, public_key=public_b64(OTHER_KEY)))
+        auth_result = verify_actor_auth(result["event"], config(enforce=False, public_key=public_b64(OTHER_KEY)), root)
         return "AC3-cross-attribution-rejected", auth_result["valid"] is False, str(auth_result)
     finally:
         remove_root_temp_dir(root)
@@ -176,6 +182,27 @@ def case_sign_without_secret_fails() -> tuple[str, bool, str]:
         remove_root_temp_dir(root)
 
 
+def case_runtime_override_flip_clean() -> tuple[str, bool, str]:
+    root = make_root_temp_dir(ROOT, ".actor-auth-override-flip-")
+    try:
+        seed_repo(root, enforce=False)
+        before = (root / "protocol.config.json").read_bytes()
+        write_json(root / "event-state.runtime.json", actor_auth_override(enforce=True))
+        result = submit_intent(root, "Codex", intent(), timestamp="2026-06-27T00:00:00Z")
+        after = (root / "protocol.config.json").read_bytes()
+        drift = protocol_state_drift(root)
+        auth = result["event"]["actor_auth"]
+        ok = (
+            before == after
+            and auth.get("method") == "ed25519"
+            and verify_actor_auth(result["event"], config(enforce=False), root)["valid"] is True
+            and drift.get("has_drift") is False
+        )
+        return "AC5-runtime-override-flip-clean", ok, json.dumps({"auth": auth, "drift": drift}, sort_keys=True)
+    finally:
+        remove_root_temp_dir(root)
+
+
 def main() -> int:
     cases = [
         case_submit_intent_signs,
@@ -183,6 +210,7 @@ def main() -> int:
         case_cross_attribution_rejected,
         case_secret_independent_verify,
         case_sign_without_secret_fails,
+        case_runtime_override_flip_clean,
     ]
     results = [case() for case in cases]
     print(json.dumps({"actor_auth_ed25519_cases.v1": [{"name": name, "ok": ok, "detail": detail} for name, ok, detail in results]}, indent=2, sort_keys=True))

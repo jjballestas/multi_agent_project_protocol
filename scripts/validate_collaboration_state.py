@@ -911,7 +911,7 @@ def validate_eventlog_actor_auth(root: Path, config: dict[str, Any] | None, vali
         return
     findings = []
     for event in events_in_log_order(root):
-        result = verify_actor_auth(event, config)
+        result = verify_actor_auth(event, config, root)
         if result.get("valid") is not True:
             findings.append({"seq": event.get("seq"), "actor": event.get("actor"), "reason": result.get("reason")})
     if findings:
