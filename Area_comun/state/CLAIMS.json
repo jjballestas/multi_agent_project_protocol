@@ -9038,6 +9038,34 @@
             "updated_at": "2026-06-27T14:41:38Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Analista-TASK-0199-gate1",
+            "expires_at": "2026-06-28T23:59:59Z",
+            "notes": "Analista adversarial GATE 1 review for Zeus-Aegis F1 read-only panel.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/artifacts/ANALISTA-TASK-0199-gate1-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260627-Analista-to-Arquitecto-TASK-0199-gate1-review.md"
+            ],
+            "started_at": "2026-06-27T17:40:46Z",
+            "status": "released",
+            "task_id": "TASK-0199",
+            "updated_at": "2026-06-27T17:40:46Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Analista-TASK-0199-release-scope",
+            "expires_at": "2026-06-28T23:59:59Z",
+            "notes": "Temporary release-scope claim for Analista TASK-0199 review closeout.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Analista-TASK-0199-gate1",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Analista-TASK-0199-release-scope"
+            ],
+            "started_at": "2026-06-27T17:58:45Z",
+            "status": "released",
+            "task_id": "TASK-0199",
+            "updated_at": "2026-06-27T17:58:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arq-close0197",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "Cerrar TASK-0197 F1b (checker verde).",
