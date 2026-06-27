@@ -897,8 +897,14 @@
         {
             "id": "TASK-0198",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis F1c - vista Artifacts (read-only)"
+        },
+        {
+            "id": "TASK-0199",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "GATE 1 - review adversarial del panel read-only F1 de Zeus-Aegis"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

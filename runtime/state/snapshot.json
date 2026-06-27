@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8f27ad16437e321d9b309283bd260a0cd81f2fc9a30e3cde9180db764616d056",
+  "canonical_hash": "f7279861ee82ba9b1ab4afb2aaa7399e6657ff92ef8ccf2ba6f57e44ff0fb8a5",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -335,7 +335,9 @@
       "CLAIM-20260626-Codex-TASK-0189-go-status-fix": 1,
       "CLAIM-20260627-Analista-TASK-0194-review": 1,
       "CLAIM-20260627-Arq-close0197": 1,
+      "CLAIM-20260627-Arq-close0198": 1,
       "CLAIM-20260627-Arq-task0198": 1,
+      "CLAIM-20260627-Arq-task0199": 1,
       "CLAIM-20260627-Arquitecto-a2-camino-b": 1,
       "CLAIM-20260627-Arquitecto-a2-override": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg": 1,
@@ -648,7 +650,8 @@
       "TASK-0195": 9,
       "TASK-0196": 8,
       "TASK-0197": 11,
-      "TASK-0198": 7,
+      "TASK-0198": 9,
+      "TASK-0199": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -656,7 +659,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1602,
+    "events_applied": 1608,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -737,6 +740,8 @@
       "arq:close0196b:rel": 2244,
       "arq:close0197:acq": 2260,
       "arq:close0197:rel": 2262,
+      "arq:close0198:acq": 2274,
+      "arq:close0198:rel": 2276,
       "arq:closeboth:acq": 730,
       "arq:closeboth:done124": 732,
       "arq:closeboth:done125": 731,
@@ -779,8 +784,12 @@
       "arq:task0197:rel": 2247,
       "arq:task0197:upsert": 2246,
       "arq:task0198:acq": 2263,
+      "arq:task0198:done": 2275,
       "arq:task0198:rel": 2265,
       "arq:task0198:upsert": 2264,
+      "arq:task0199:acq": 2277,
+      "arq:task0199:rel": 2279,
+      "arq:task0199:upsert": 2278,
       "arq:upd0124:acq": 716,
       "arq:upd0124:rel": 718,
       "arq:upd0124:reupsert-pathfix": 717,
@@ -2262,5 +2271,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2273
+  "up_to_seq": 2279
 }
