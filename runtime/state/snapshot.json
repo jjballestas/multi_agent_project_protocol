@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8afc060c066d23519b26d05eaf6887590b8a453111bad25d7060804836dbe87c",
+  "canonical_hash": "33ad90b94bca0974266f1622d99625e3a46d3ef68b5b21402382cb407cf2ae60",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -333,6 +333,7 @@
       "CLAIM-20260626-Codex-TASK-0189": 1,
       "CLAIM-20260626-Codex-TASK-0189-go-answered": 1,
       "CLAIM-20260626-Codex-TASK-0189-go-status-fix": 1,
+      "CLAIM-20260627-Analista-TASK-0194-review": 1,
       "CLAIM-20260627-Arquitecto-a2-camino-b": 1,
       "CLAIM-20260627-Arquitecto-a2-override": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg": 1,
@@ -632,7 +633,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1544,
+    "events_applied": 1545,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -685,6 +686,7 @@
       "Codex:TASK-0186:in-progress-to-in-review:20260626T162500Z": 2073,
       "Codex:TASK-0186:ready-to-in-progress:20260626T153000Z": 2070,
       "analista:task-0194-review:claim-acquire": 2215,
+      "analista:task-0194-review:claim-release": 2216,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -2180,5 +2182,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2215
+  "up_to_seq": 2216
 }

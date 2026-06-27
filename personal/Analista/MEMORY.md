@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-25 (TASK-0181 review3 modo necesidad; CAMBIO-REQUERIDO por full npm gate; #4 ON).
+> Ultima actualizacion: 2026-06-27 (TASK-0194 review Zeus-Aegis/baseline; CAMBIO-REQUERIDO; Analista ya firma #4).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,20 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0194 (2026-06-27): CAMBIO-REQUERIDO / BLOQUEANTE antes de continuar como esta.
+  Veredicto commiteado en `2ef8ed6` (`review(TASK-0194): Analista blocks baseline continuation`), con claim
+  Analista firmado en #4 (`seq 2215`, `event_auth` analista-hmac:v1, `actor_auth` analista:v1) y release posterior
+  `seq 2216`. Ancla protocolo viva `5366a459053995df3216b4ac00d6057e09d0ab0d`; DECISION-0064 `b8c78aa`;
+  razonamiento alcance `5be3c85`; baseline citado por GO `8943756`/seq `2191-2193`; baseline canonico mas nuevo
+  `9d96a95`/seq `2213` (core `1124fe5`). Hallazgo principal: TASK-0194/GO cita baseline viejo ya supersedido y
+  falta `dataset_start_seq` + stop rule para excluir/predeclarar eventos Ed25519 pre-baseline. Zeus-protocol clean
+  clone `b5675e5213f04b7bbd19aa3ff0160a54b747afcf` `npm test` exit 0 (109 tests, 87 pass, 22 skipped).
+  Zeus-Aegis F0 clean clone `f87317cf9c7491793d7e7b79c6a0e53249bed46a`: root sin `package.json`; vendor
+  `npm test` sin deps exit 1 (`vitest` no reconocido); tras `corepack pnpm install --frozen-lockfile`, `npm test`
+  exit 1 con 24 fallos. Gates protocolo: validate con/sin secretos exit 0, drift 0, neutrality/encoding exit 0,
+  #4 `protocol.config.json` byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Pedido a Arquitecto rr=true: fijar baseline canonico unico, `dataset_start_seq`/stop rule y resolver o waivar
+  explicitamente Gate 0 rojo antes de seguir generando/midiendo.
 - TASK-0181 review3 (2026-06-25): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `1d48e8d`
   (`review(TASK-0181): Analista blocks review3 full npm gate`). Ancla producto `325bcfb`
   y protocolo REVIEW3 `bb56ac6` (repo vivo al arranque `c613922`). Correccion de metadata cliente pasa por
