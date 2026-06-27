@@ -10130,6 +10130,60 @@
             "updated_at": "2026-06-27T18:23:49Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0202",
+            "expires_at": "2026-06-27T14:00:00Z",
+            "notes": "Implement TASK-0202 V4 PII structural fix in Zeus-Aegis and deliver handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0202",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0202",
+                "Area_comun/tasks/TASK-0202-codex-zeus-aegis-v4-pii-structural.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0202",
+            "updated_at": "2026-06-27T12:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0202-answer-go",
+            "expires_at": "2026-06-27T13:15:00Z",
+            "notes": "Move consumed TASK-0202 GO to answered after delivery ledger is backed.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0202-v4-pii.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0202-v4-pii.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T12:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0202",
+            "updated_at": "2026-06-27T12:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0202-delivery",
+            "expires_at": "2026-06-27T14:00:00Z",
+            "notes": "Prepare TASK-0202 delivery handoff and mailbox coordination.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0202-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0202-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0202-v4-pii.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0202-v4-pii.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T12:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0202",
+            "updated_at": "2026-06-27T12:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

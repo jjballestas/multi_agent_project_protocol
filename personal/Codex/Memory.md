@@ -4,6 +4,22 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0202 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `91e6b3f fix(governance): make artifact pii structural`,
+  authored as Arquitecto with Codex co-author. `/api/governance/artifacts` now builds served artifact `id` and `path`
+  from a typed prefix plus `sha256(raw)[:10]`, never from the raw filename tail, and `preview` is reduced to safe
+  metadata (`kind`, `task`, `date`, `hash`) without body free text. Permanent coverage adds the V4 negative fixture
+  with email, `Juan Perez`, `Maria-Garcia`, and a heading/body boundary. Evidence before delivery: `node --check`
+  OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; targeted governance vitest PASS 8/8; root `npm
+  test` PASS 80 files / 541 tests; `git diff --check` PASS with only CRLF normalization warnings. Known caveats:
+  full upstream `tsc --noEmit` remains red on pre-existing Hermes debt, and an attempted local dev smoke on port 4310
+  did not expose `/api/governance/artifacts` within 45s, so F0 `npm test` remains the closure gate.
+  Protocol delivery in the same session moved TASK-0202 to `in_review`, released all Codex TASK-0202 claims, moved the
+  consumed GO to `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0202-v4-pii.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0202-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0202-codex-to-arquitecto-1.md`. Final protocol evidence before delivery commit:
+  encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact mailbox warning, drift false /
+  #4 byte-identica `up_to_seq` 2306, and `git diff --check` PASS with only the known CRLF normalization warning for
+  `runtime/state/snapshot.json`.
 - TASK-0200 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `de7548b fix(governance): remediate gate one findings`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now makes ledger attestation green only when both protocol
   validation and drift are green, redacts artifact id/path/kind/preview with email/phone/id/person-name coverage, adds

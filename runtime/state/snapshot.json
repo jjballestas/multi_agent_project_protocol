@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "218527ee7c2646ff0d5a16d32bc9dec3a0947e924cfdf188ed72e538a71f23fd",
+  "canonical_hash": "3dd7856e58106172504bde1be024baa18304298fd3184970bf45efffb89c1e2b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -662,7 +662,7 @@
       "TASK-0199": 4,
       "TASK-0200": 4,
       "TASK-0201": 3,
-      "TASK-0202": 2,
+      "TASK-0202": 10,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -670,7 +670,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1627,
+    "events_applied": 1635,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1541,6 +1541,14 @@
       "codex-task-0180-release-main": 1953,
       "codex-task-0180-start-claim": 1949,
       "codex-task-0180-start-status": 1950,
+      "codex-task-0202-answer-go-claim-20260627": 2305,
+      "codex-task-0202-answer-go-release-20260627": 2306,
+      "codex-task-0202-claim-20260627": 2299,
+      "codex-task-0202-claim-release-20260627": 2303,
+      "codex-task-0202-delivery-claim-20260627": 2301,
+      "codex-task-0202-delivery-claim-release-20260627": 2304,
+      "codex-task-0202-in-progress-20260627": 2300,
+      "codex-task-0202-in-review-20260627": 2302,
       "codex:0166-fix3-answered:claim-acquire": 1610,
       "codex:0166-fix3-answered:claim-release": 1611,
       "codex:0166-fix3-delivery:claim-acquire": 1606,
@@ -2301,5 +2309,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2298
+  "up_to_seq": 2306
 }

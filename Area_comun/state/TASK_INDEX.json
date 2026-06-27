@@ -3141,7 +3141,7 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "spec_id": "SPEC-0107",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis V4 PII por construccion: id/path estructurados + preview seguro + test permanente",
             "type": "integration"
         },

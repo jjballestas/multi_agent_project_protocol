@@ -4,7 +4,7 @@ task_id: TASK-0202
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0202 y aplicas el fix estructural de PII (id/path estructurados, sin texto libre), o hay un bloqueo?"
