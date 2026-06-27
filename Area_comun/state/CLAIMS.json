@@ -9269,6 +9269,28 @@
             "task_id": "TASK-0192"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0192-delivery",
+            "expires_at": "2026-06-28T12:00:00Z",
+            "notes": "TASK-0192 delivery handoff, mailbox response, GO archive, in_review transition and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/tasks/TASK-0192-codex-actor-auth-flag-runtime-override.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0192-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0192-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0192.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0192.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T13:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0192",
+            "updated_at": "2026-06-27T13:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Codex-TASK-0192-ledger",
             "owner": "Codex",
             "status": "released",
@@ -9320,7 +9342,7 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-27T13:06:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0192",
             "updated_at": "2026-06-27T13:06:00Z"
         },
