@@ -14,6 +14,15 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   538 tests; `node --check` OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; `corepack pnpm build` PASS;
   local smoke on port 3000 returned HTTP 200 for `/api/governance/decisions`, `/handoffs`, `/ledger`, and `/governance`;
   `git diff --check` PASS with only CRLF normalization warnings.
+  Protocol delivery commit landed as `bfd8d4d coord(TASK-0197): deliver Zeus-Aegis F1b`: TASK-0197 is `in_review`,
+  Codex claims are released, the consumed GO moved to
+  `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0197-f1b-views.md`, and
+  `Area_comun/handoffs/HANDOFF-TASK-0197-codex-to-arquitecto-1.md` plus
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0197-in-review.md` are ready for review. Final
+  protocol evidence before delivery commit: encoding OK, neutrality OK, Python validator OK with the pre-existing
+  TASK-0193 compact mailbox warning, PowerShell validator OK with the same warning, drift false / #4 byte-identica
+  `up_to_seq` 2259, and `git diff --check` PASS with only the known CRLF normalization warning for
+  `runtime/state/snapshot.json`.
 - TASK-0196 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `75273cb feat(governance): add read-only F1a panel`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only F1a governance routes
   `/api/governance/{health,state,backlog,mailbox}` that read canonical protocol data through `git show` /
