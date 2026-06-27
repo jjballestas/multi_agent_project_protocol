@@ -33,9 +33,17 @@
 - **RUNBOOK FLIP A2 v2 reescrito** (override; sin re-genesis): crear event-state.runtime.json (enabled+actor_auth_config
   con private_key_files/keyids) -> validate exit 0 -> prueba viva ed25519 -> rollback=borrar override. Cada runtime
   de agente necesita ver el mismo override para firmar.
-- **>>> LISTO PARA EL FLIP VIVO (operador presente):** todo construido+ensayado. Pasos: crear override -> validate
-  -> prueba viva -> generar dataset -> harness -> H1-H3 vs umbrales -> redactar. Es el unico paso que falta y es
-  trivial+reversible.
+- **>>> FLIP A2 EJECUTADO EN VIVO (operador presente, 2026-06-27, commit cac4e94).** Cree el override
+  `event-state.runtime.json` (gitignored, raiz del repo: actor_auth_enforce=true + actor_auth_config con
+  private_key_files de protocol-secrets + keyids). Marcador de activacion via submit_intent -> **los 3 eventos
+  salieron `actor_auth: ed25519 keyid arquitecto:v1`** + validate exit 0 + config byte-identico (chain.genesis
+  intacto). **A2 ESTA ON: los turnos vivos se firman Ed25519 (no-repudio por agente).** El override NO se commitea
+  (gitignored, off-by-default por diseno). ROLLBACK = borrar event-state.runtime.json.
+- **IMPLICACION:** desde ahora TODO submit_intent (yo, y Codex/Analista cuando corran -- mismo repo root, ven el
+  override + tienen sus privadas) se firma Ed25519. El dataset del TFM nace cruzado-firmado desde aqui.
+- **PROXIMO (camino critico, ya solo EJECUCION):** generar el DATASET (turnos gobernados reales >=2 agentes, ya
+  ed25519) -> correr el HARNESS (TASK-0191, sobre copia: inyectar A1/A2/A3 + deteccion/FPR/sobrecoste + verificador
+  externo) -> comparar con umbrales del pre-registro v2.0 -> redactar. Hermes (DECISION-0064) parqueada post-TFM.
 
 ## >>> RESUME 2026-06-27 (HEAD 378cba7) -- TFM: pre-registro H1-H3 + DECISION-0064 (UI Hermes, gateada post-TFM) <<<
 - **Contexto operador (dos visiones):** (1) TFM academico = atestacion #4 medida; (2) herramienta multi-agente
