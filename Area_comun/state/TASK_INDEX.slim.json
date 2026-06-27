@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)"
         }
     ],

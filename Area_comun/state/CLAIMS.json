@@ -9490,9 +9490,43 @@
                 ".github/workflows/validate.yml"
             ],
             "started_at": "2026-06-27T12:10:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0195",
             "updated_at": "2026-06-27T12:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0195-delivery",
+            "expires_at": "2026-06-28T12:30:00Z",
+            "notes": "Deliver TASK-0195 handoff, mailbox response, and release claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0195",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0195",
+                "Area_comun/tasks/TASK-0195-codex-event-auth-runtime-override.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0195-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0195-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0195-event-auth-override.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0195-event-auth-override.md"
+            ],
+            "started_at": "2026-06-27T12:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0195",
+            "updated_at": "2026-06-27T12:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0195-encoding-fix",
+            "expires_at": "2026-06-28T12:55:00Z",
+            "notes": "Fix answered GO encoding to ASCII/UTF-8 without BOM.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0195-event-auth-override.md"
+            ],
+            "started_at": "2026-06-27T12:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0195",
+            "updated_at": "2026-06-27T12:55:00Z"
         },
         {
             "claim_id": "CLAIM-20260627-Codex-TASK-0195-event-auth-override",
@@ -9510,7 +9544,7 @@
                 "Area_comun/specs/SPEC-0106-event-auth-runtime-override.md"
             ],
             "started_at": "2026-06-27T12:02:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0195",
             "updated_at": "2026-06-27T12:02:00Z"
         },

@@ -4,7 +4,7 @@ task_id: TASK-0195
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0195 y la implementas, o hay algun bloqueo para entregar los AC1-AC6 (event_auth via override, chain intacta)?"

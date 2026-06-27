@@ -3019,7 +3019,7 @@
             "project": "multi_agent_project_protocol",
             "relayed_by": "Arquitecto",
             "spec_id": "SPEC-0106",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)",
             "type": "protocol"
         },
