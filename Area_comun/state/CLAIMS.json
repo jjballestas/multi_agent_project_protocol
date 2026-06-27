@@ -9352,6 +9352,21 @@
             "updated_at": "2026-06-27T13:10:44Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-task0196",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Crear TASK-0196 (F1a panel read-only) ready/Codex + GO.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T15:29:44Z",
+            "status": "released",
+            "task_id": "TASK-0196",
+            "updated_at": "2026-06-27T15:29:44Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Codex-TASK-0190",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "TASK-0190 actor_auth Ed25519 off-by-default implementation.",

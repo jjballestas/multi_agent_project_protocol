@@ -883,6 +883,12 @@
             "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)"
         },
         {
+            "id": "TASK-0196",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis F1a - panel SOLO-LECTURA: contrato /api/governance/* + vistas Estado(salud)/Backlog/Mailbox"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
