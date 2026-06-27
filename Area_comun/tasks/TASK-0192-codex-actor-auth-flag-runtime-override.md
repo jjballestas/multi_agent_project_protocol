@@ -2,7 +2,7 @@
 task_id: TASK-0192
 title: "Core: mover actor_auth_enforce/actor_auth_config a un runtime override fuera del config pinned (flip A2 sin romper chain.genesis) (SPEC-0105, DECISION-0067)"
 type: protocol
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

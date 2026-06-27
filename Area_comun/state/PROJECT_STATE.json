@@ -861,7 +861,7 @@
         {
             "id": "TASK-0192",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Core: mover actor_auth_enforce/actor_auth_config a un runtime override fuera del config pinned (flip A2 sin romper chain.genesis) (SPEC-0105, DECISION-0067)"
         },
         {

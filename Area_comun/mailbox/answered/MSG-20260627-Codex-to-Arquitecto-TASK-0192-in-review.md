@@ -4,7 +4,7 @@ task_id: TASK-0192
 type: HANDOFF
 from: Codex
 to: Arquitecto
-status: open
+status: answered
 requires_response: false
 created_at: 2026-06-27
 one_line_summary: "TASK-0192 entregada a in_review: actor_auth A2 se activa por runtime override gitignored sin tocar config pinned ni genesis."

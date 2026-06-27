@@ -9129,6 +9129,24 @@
             "updated_at": "2026-06-27T00:57:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-close-0192",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Close TASK-0192 in_review->done (mover flag A2 a runtime override, SPEC-0105/DECISION-0067; maker=Codex, checker=Arquitecto). Flag REMOVIDO de config/template; se lee de event-state.runtime.json gitignored (env EVENT_STATE_RUNTIME_CONFIG_PATH; path-safe; allowed keys actor_auth_enforce/actor_auth_config). Golden 6/6 incl AC5-runtime-override-flip-clean. RE-ENSAYO DEFINITIVO en clon limpio: activar por override -> submit_intent real emite actor_auth ed25519 (keyid arquitecto:v1) + validate exit 0 (SIN genesis mismatch) + protocol.config.json BYTE-IDENTICO (chain.genesis intacto) + rollback (quitar override) exit 0. Resuelve el fallo del ensayo previo (flag-en-config rompia la cadena). Co-Author. EL FLIP A2 AHORA ES CAMBIO DE RUNTIME LIMPIO (sin re-genesis).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0192-codex-actor-auth-flag-runtime-override.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T00:59:00Z",
+            "status": "released",
+            "task_id": "TASK-0192",
+            "updated_at": "2026-06-27T00:59:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-decision-0064",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0064 PROPOSED (UI fork de Hermes MIT = cliente del single-writer; contrato /api/governance/*; reuso gobernanza zeus; licencia; GATEADO a post-TFM). Plan del operador en personal/operador/Hermes/. Parqueada para Fase B; no activar las fases de build hasta congelar la medicion del TFM.",
