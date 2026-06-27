@@ -4,6 +4,21 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0192 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `5257276 feat(runtime): move actor auth flag to override`. The actor_auth A2 enable/config now resolves from
+  gitignored `event-state.runtime.json` or `EVENT_STATE_RUNTIME_CONFIG_PATH`; `protocol.config.json` and
+  `protocol.config.template.json` no longer carry `actor_auth_enforce` / `actor_auth_config`, preserving the
+  pinned chain genesis during a flip. `runtime/eventlog.py` merges the runtime override only for actor_auth,
+  ignores stale pinned actor_auth fields, fails closed on malformed override files, signs via the override when
+  present, and verifies with the same root-aware keyid path. `runtime/README.md` documents the override contract.
+  The actor_auth golden now covers override signing, OFF byte-identical behavior, cross-attribution rejection,
+  secret-independent verification, fail-closed missing private key, and the critical clean flip where writing the
+  override signs Ed25519 while leaving `protocol.config.json` byte-identical and drift false. Evidence before
+  commit: py_compile OK; actor_auth golden PASS 6/6; encoding OK; domain neutrality OK; Python validator OK;
+  PowerShell validator OK; drift false / #4 byte-identica `up_to_seq` 2170; `protocol.config.json` and genesis
+  diff empty. TASK-0192 remains `in_progress` under active claim
+  `CLAIM-20260627-Codex-TASK-0192-ledger4` pending delivery handoff, GO answer, claim release, and in_review
+  transition.
 - TASK-0191 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `5f2d246 feat(research): add H1-H3 experiment harness`. The protocol now ships
   `research/experiment_h1h3/` with a reproducible H1-H3 research harness that operates only on disposable
