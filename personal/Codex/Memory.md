@@ -4,6 +4,20 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0205 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `d83a08e fix(governance): harden read-only endpoints`,
+  authored as Arquitecto with Codex co-author. Zeus-Aegis now enforces bearer auth on `/api/governance/*` when
+  `GOVERNANCE_API_TOKEN` or `HERMES_API_TOKEN` is configured, keeps documented loopback local-open mode when unset,
+  rejects unsafe governance query/ref/path values before canonical reads, applies a basic per-client read rate limit,
+  and has e2e bridge coverage for all read-only endpoints plus 401, traversal rejection, and write rejection.
+  Evidence before delivery: `node --check server-entry.js` OK; `node --check scripts/zeus-aegis-f0-test.mjs` OK;
+  targeted governance vitest PASS; root `npm test` PASS; `git diff --check` PASS with CRLF normalization warnings only.
+  Protocol delivery commit `coord(TASK-0205): deliver Zeus-Aegis F4a security` moved TASK-0205 to
+  `in_review`, released Codex claims, moved the consumed GO to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0205-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0205-codex-to-arquitecto-1.md`. Final protocol evidence: encoding OK,
+  neutrality OK, Python validator OK with the pre-existing TASK-0193 compact mailbox warning, drift false /
+  #4 byte-identica `up_to_seq` 2340, and `git diff --check` PASS with only the known `runtime/state/snapshot.json`
+  CRLF warning.
 - TASK-0204 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `8c29b58 feat(governance): add f3 read-only dashboard`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only `/api/governance/projects` with
   path-free project entities and `/api/governance/metrics` with canonical task/status, signature-method, signer,

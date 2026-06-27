@@ -10314,6 +10314,80 @@
             "updated_at": "2026-06-27T23:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0205-delivery",
+            "expires_at": "2026-06-27T23:25:33Z",
+            "notes": "Deliver TASK-0205 handoff, mailbox response, GO answer and memory after product commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0205",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0205",
+                "Area_comun/tasks/TASK-0205-codex-zeus-aegis-f4a-security.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-f4a-security.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-f4a-security.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0205-in-review.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0205-codex-to-arquitecto-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-27T21:25:33Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-27T21:25:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0205-f4a",
+            "expires_at": "2026-06-28T03:17:09Z",
+            "notes": "Implement TASK-0205 F4a security hardening in Zeus-Aegis: token auth, path traversal guard, rate limit and bridge e2e.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0205",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0205",
+                "Area_comun/tasks/TASK-0205-codex-zeus-aegis-f4a-security.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-f4a-security.md",
+                "D:/Agentes/Zeus/Zeus-Aegis"
+            ],
+            "started_at": "2026-06-27T21:17:09Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-27T21:17:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0205-go-answer",
+            "expires_at": "2026-06-27T21:56:56Z",
+            "notes": "Move consumed TASK-0205 GO to answered after in_review ledger delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-f4a-security.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-f4a-security.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T21:26:56Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-27T21:26:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0205-msgfix",
+            "expires_at": "2026-06-27T21:58:16Z",
+            "notes": "Fix TASK-0205 review mailbox metadata for validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0205-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T21:28:16Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-27T21:28:16Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-task0203-analista",
             "expires_at": "2026-06-28",
             "notes": "Analista adversarial final GATE 1 review for TASK-0203.",

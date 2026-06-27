@@ -4,7 +4,7 @@ task_id: TASK-0205
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0205 y entregas el endurecimiento (auth/path-traversal/rate-limit/e2e), o hay un bloqueo?"

@@ -3193,7 +3193,7 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "spec_id": "SPEC-0107",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis F4a - endurecimiento read-only: auth + path-traversal + rate-limit + e2e",
             "type": "integration"
         },
