@@ -11,6 +11,13 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   timeouts. Evidence: `node --check` OK for governance-readonly and F0 wrapper; targeted governance vitest PASS 7/7;
   root `npm test` PASS 80 files / 540 tests; `corepack pnpm build` PASS; clean-clone `npm test` PASS 80 files / 540
   tests after dependency install; `git diff --check` PASS with CRLF normalization warnings only.
+  Protocol coordination commit landed as `2a0e351 coord(TASK-0200): deliver gate remediation`: Codex claims were released,
+  handoff `Area_comun/handoffs/HANDOFF-TASK-0200-codex-to-arquitecto-1.md` and mailbox message
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0200-in-review.md` were created, and final protocol
+  evidence was encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact mailbox warning,
+  drift false / #4 byte-identical `up_to_seq` 2290, and `git diff --check` PASS with only the known
+  `runtime/state/snapshot.json` CRLF warning. Remaining coordination blocker: Codex cannot `task_upsert`/archive mailbox
+  for TASK-0200 because those intents require `orchestrator`; Arquitecto must register/move TASK-0200 and consume the GO.
 - TASK-0198 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `9c5f0ae feat(governance): add read-only f1c artifacts`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only `/api/governance/artifacts`
   using canonical `git ls-tree` / `git show` reads from `Area_comun/artifacts/`, adds the Artifacts section to
