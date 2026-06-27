@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cb93deb8d6e79e3611cc997887c1f372d3c6f27b39242b07ff4a7b4ffe96fbc8",
+  "canonical_hash": "f1fd87841c0a505c9c4fdce5fc6fa47547c8e70cf30bd96c213745407ef99076",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -634,7 +634,7 @@
       "TASK-0193": 12,
       "TASK-0194": 3,
       "TASK-0195": 9,
-      "TASK-0196": 2,
+      "TASK-0196": 6,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -642,7 +642,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1566,
+    "events_applied": 1570,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1574,6 +1574,10 @@
       "codex:TASK-0166:mailbox-fix-claim": 1562,
       "codex:TASK-0166:mailbox-fix-release": 1563,
       "codex:TASK-0166:ready-to-in-progress": 1557,
+      "codex:TASK-0196:f1a:claim-acquire": 2238,
+      "codex:TASK-0196:f1a:claim-release": 2241,
+      "codex:TASK-0196:f1a:in-progress-to-in-review": 2240,
+      "codex:TASK-0196:f1a:ready-to-in-progress": 2239,
       "codex:answer-go-c1edd835:claim": 1912,
       "codex:answer-go-c1edd835:release": 1913,
       "codex:cron-executor-config:claim-acquire": 1102,
@@ -2212,5 +2216,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2237
+  "up_to_seq": 2241
 }

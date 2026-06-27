@@ -9692,6 +9692,28 @@
             "updated_at": "2026-06-27T12:02:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0196-f1a",
+            "expires_at": "2026-06-28",
+            "notes": "TASK-0196 F1a read-only governance panel implementation in Zeus-Aegis.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0196",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0196",
+                "Area_comun/tasks/TASK-0196-codex-zeus-aegis-f1a-panel-readonly.md",
+                "Area_comun/specs/SPEC-0107-zeus-aegis-f1-panel-readonly.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0196-f1a-panel.md",
+                "Area_comun/handoffs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-Aegis/"
+            ],
+            "started_at": "2026-06-27T15:31:50Z",
+            "status": "released",
+            "task_id": "TASK-0196",
+            "updated_at": "2026-06-27T15:31:50Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

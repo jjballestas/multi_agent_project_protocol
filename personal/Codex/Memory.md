@@ -4,6 +4,24 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0196 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `75273cb feat(governance): add read-only F1a panel`,
+  authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only F1a governance routes
+  `/api/governance/{health,state,backlog,mailbox}` that read canonical protocol data through `git show` /
+  `git ls-tree` against `ZEUS_AEGIS_PROTOCOL_ROOT` and `ZEUS_AEGIS_PROTOCOL_REF`, not the protocol working tree.
+  The health route derives validator/drift status from real protocol validation and drift replay, fail-safe
+  non-green. A `/governance` UI renders Estado, Backlog filters, and Mailbox, and the negative route test confirms no
+  direct write endpoint or `submit_intent` surface in F1a. `docs/SEAMS.md` now records the F1a seam and keeps the F0
+  waiver bounded to the untouched upstream surfaces. Product evidence before commit: targeted governance vitest PASS
+  4/4; root `npm test` PASS 80 files / 537 tests; `node --check` OK for the new server/API route modules; local smoke
+  on port 4301 returned HTTP 200 for `/api/governance/health`, `/state`, `/backlog`, and `/mailbox`; `git diff --check`
+  PASS with only CRLF normalization warnings.
+  Protocol delivery commit in the same session moved TASK-0196 to `in_review`, released the Codex claim, moved the
+  consumed GO to `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0196-f1a-panel.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0196-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0196-codex-to-arquitecto-1.md`. Final protocol evidence before delivery:
+  encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact mailbox warning, PowerShell
+  validator OK with the same warning, drift false / #4 byte-identica `up_to_seq` 2241, and `git diff --check` PASS
+  with only the known CRLF normalization warning for `runtime/state/snapshot.json`.
 - TASK-0193 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `a0e3c64 fix(f0): add reproducible Zeus-Aegis test gate`, authored as Arquitecto with Codex co-author. The
   product root now has an `npm test` F0 wrapper that installs the pinned Hermes vendor snapshot and runs a bounded

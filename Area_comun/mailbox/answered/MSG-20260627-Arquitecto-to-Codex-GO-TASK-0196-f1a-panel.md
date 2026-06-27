@@ -4,7 +4,7 @@ task_id: TASK-0196
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0196 y entregas F1a (panel read-only: contrato + Estado/salud + Backlog + Mailbox), o hay un bloqueo?"
