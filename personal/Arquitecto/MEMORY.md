@@ -18,10 +18,14 @@
   del config pinned, como connectors/skills.config.json).
 - **FLIP EN PAUSA. Repo vivo INTACTO** (flag ausente=OFF, validate exit 0); copia+secretos copiados ELIMINADOS;
   nunca toque el vivo.
-- **REMEDIACION recomendada (GO operador pendiente):** mover `actor_auth_enforce`+`actor_auth_config` a un **runtime
-  override gitignored FUERA de protocol.config.json** (espejo file-ingestion.runtime.json), mergeado al leer; asi el
-  flip es cambio de runtime (sin tocar config/chain.genesis; cadena continua; sin re-genesis). Pequena SDD a Codex
-  (corrige TASK-0190). Tras eso, flip limpio + runbook simplificado.
+- **REMEDIACION EMITIDA (operador GO):** DECISION-0067 accepted + SPEC-0105 + TASK-0192 ready/Codex high + GO
+  (commit c1acf6f). Mover `actor_auth_enforce`+`actor_auth_config` a runtime override gitignored FUERA del config
+  (espejo file-ingestion.runtime.json); lectores mergean override; quitar flag de config/template. AC2 CRITICO:
+  activar por override NO cambia config -> chain.genesis intacto -> submit_intent ed25519 + validate exit 0 (sin
+  genesis mismatch) + drift 0, SIN re-genesis. Path de firma de TASK-0190 intacto. maker=Codex/checker=Arquitecto.
+- **PLAN (operador): tras la entrega de Codex, RE-ENSAYAMOS el flip** (ahora por override, debe quedar validate
+  exit 0 + chain intacta). Si verde -> flip vivo con operador presente (ya es cambio de runtime, sin re-genesis) ->
+  generar dataset -> harness -> H1-H3. Esperando TASK-0192.
 
 ## >>> RESUME 2026-06-27 (HEAD 378cba7) -- TFM: pre-registro H1-H3 + DECISION-0064 (UI Hermes, gateada post-TFM) <<<
 - **Contexto operador (dos visiones):** (1) TFM academico = atestacion #4 medida; (2) herramienta multi-agente
