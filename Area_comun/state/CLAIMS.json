@@ -9147,6 +9147,21 @@
             "updated_at": "2026-06-27T18:02:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-task0201",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Crear TASK-0201 (re-GATE1) + GO.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T19:42:57Z",
+            "status": "released",
+            "task_id": "TASK-0201",
+            "updated_at": "2026-06-27T19:42:57Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-a2-camino-b",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0065 accepted (A2 vivo Camino B: submit_intent firma actor_auth Ed25519, off-by-default) + TASK-0190 ready/Codex (SPEC-0103). Operador eligio Camino B. Build off-by-default; activacion viva = ventana del operador aparte.",

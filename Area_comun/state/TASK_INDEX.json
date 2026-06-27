@@ -3112,6 +3112,22 @@
             "type": "integration"
         },
         {
+            "author": "Arquitecto",
+            "created_at": "2026-06-27",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/TASK-0201-analista-regate1-review.md",
+            "id": "TASK-0201",
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-Aegis",
+            "relayed_by": "Arquitecto",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "re-GATE 1 - review del panel read-only F1 remediado",
+            "type": "review"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
