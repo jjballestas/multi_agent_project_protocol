@@ -23,6 +23,12 @@
             "owner": "Analista",
             "status": "ready",
             "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
+        },
+        {
+            "id": "TASK-0195",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)"
         }
     ],
     "next_actions": [

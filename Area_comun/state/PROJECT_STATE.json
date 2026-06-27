@@ -877,6 +877,12 @@
             "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
         },
         {
+            "id": "TASK-0195",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -960,7 +966,8 @@
         "DECISION-0064",
         "DECISION-0065",
         "DECISION-0066",
-        "DECISION-0067"
+        "DECISION-0067",
+        "DECISION-0068"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

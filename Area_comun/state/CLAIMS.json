@@ -9147,6 +9147,21 @@
             "updated_at": "2026-06-27T00:59:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-dec0068-task0195",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Ratificar DECISION-0068 (event_auth via override) + crear TASK-0195 ready/Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T14:26:27Z",
+            "status": "released",
+            "task_id": "DECISION-0068",
+            "updated_at": "2026-06-27T14:26:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-decision-0064",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0064 PROPOSED (UI fork de Hermes MIT = cliente del single-writer; contrato /api/governance/*; reuso gobernanza zeus; licencia; GATEADO a post-TFM). Plan del operador en personal/operador/Hermes/. Parqueada para Fase B; no activar las fases de build hasta congelar la medicion del TFM.",
