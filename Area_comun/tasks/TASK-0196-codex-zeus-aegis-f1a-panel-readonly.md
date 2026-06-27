@@ -2,7 +2,7 @@
 task_id: TASK-0196
 title: "Zeus-Aegis F1a - panel SOLO-LECTURA: contrato /api/governance/* (health/state/backlog/mailbox) + vistas Estado(salud)/Backlog/Mailbox (SPEC-0107, DECISION-0064)"
 type: integration
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

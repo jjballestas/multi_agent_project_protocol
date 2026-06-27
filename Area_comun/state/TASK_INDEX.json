@@ -3037,8 +3037,26 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "spec_id": "SPEC-0107",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis F1a - panel SOLO-LECTURA: contrato /api/governance/* + vistas Estado(salud)/Backlog/Mailbox",
+            "type": "integration"
+        },
+        {
+            "author": "Arquitecto",
+            "checker": "Arquitecto",
+            "created_at": "2026-06-27",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/TASK-0197-codex-zeus-aegis-f1b-views.md",
+            "id": "TASK-0197",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-Aegis",
+            "relayed_by": "Arquitecto",
+            "spec_id": "SPEC-0107",
+            "status": "ready",
+            "title": "Zeus-Aegis F1b - vistas Decisiones/Ledger/Handoffs (read-only)",
             "type": "integration"
         },
         {

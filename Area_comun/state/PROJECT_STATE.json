@@ -885,8 +885,14 @@
         {
             "id": "TASK-0196",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis F1a - panel SOLO-LECTURA: contrato /api/governance/* + vistas Estado(salud)/Backlog/Mailbox"
+        },
+        {
+            "id": "TASK-0197",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis F1b - vistas Decisiones/Ledger/Handoffs (read-only)"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
