@@ -4,6 +4,25 @@
 > memoria auto (`memory/project-state-snapshot.md`). Aqui = estado vigente + reglas + lecciones, conciso.
 > Ultima actualizacion: 2026-06-26, HEAD 39a483b (PUSHED), v1.14.0 (#4 enforce/auth ON). **FLOOR skills Fase 1 COMPLETA: pieza 1 (mecanismo, TASK-0183) + pieza 2 (3 skills contenido, TASK-0184) DONE. Cola vacia. Zeus a6b830c LOCAL (push=operador).**
 
+## >>> RESUME 2026-06-27 -- ENSAYO FLIP A2: HALLAZGO BLOQUEANTE (flag en config rompe la cadena); flip EN PAUSA <<<
+- **El operador quiso hacer el flip A2; ENSAYE en copia desechable PRIMERO (DECISION-0045) y BIEN QUE LO HICE.**
+  En la copia: editar `event_state.actor_auth_enforce=true` + `actor_auth_config` (privadas reales de
+  protocol-secrets via private_key_files + keyids arquitecto:v1/codex:v1/analista:v1) + copiar HMAC secrets
+  (`secrets/eventauth-*.key`, RELATIVOS al root) -> **la firma A2 FUNCIONA** (submit_intent emitio
+  `actor_auth:{keyid:arquitecto:v1,method:ed25519,sig}`); regenesis.py dio drift 0.
+- **PERO validate exit 1: "Runtime event log chain invalid: genesis mismatch".** RAIZ: `validate_chain` ancla el
+  **chain.genesis** (seq 0) a `canonical_hash(protocol.config.json)`; cambiar el config rompe ese ancla;
+  `regenesis.py` solo arregla el genesis de ESTADO (drift), NO el chain.genesis; NO hay tool para re-anclar la
+  cadena sin arrancar una nueva (boundary T0 bespoke). => **encender el flag editando el config ROMPE LA CADENA.**
+  El flag-en-config (SPEC-0103/TASK-0190) fue error de diseno MIO: contradice DECISION-0047 (lo flippeable va FUERA
+  del config pinned, como connectors/skills.config.json).
+- **FLIP EN PAUSA. Repo vivo INTACTO** (flag ausente=OFF, validate exit 0); copia+secretos copiados ELIMINADOS;
+  nunca toque el vivo.
+- **REMEDIACION recomendada (GO operador pendiente):** mover `actor_auth_enforce`+`actor_auth_config` a un **runtime
+  override gitignored FUERA de protocol.config.json** (espejo file-ingestion.runtime.json), mergeado al leer; asi el
+  flip es cambio de runtime (sin tocar config/chain.genesis; cadena continua; sin re-genesis). Pequena SDD a Codex
+  (corrige TASK-0190). Tras eso, flip limpio + runbook simplificado.
+
 ## >>> RESUME 2026-06-27 (HEAD 378cba7) -- TFM: pre-registro H1-H3 + DECISION-0064 (UI Hermes, gateada post-TFM) <<<
 - **Contexto operador (dos visiones):** (1) TFM academico = atestacion #4 medida; (2) herramienta multi-agente
   real = Zeus-protocol, y AHORA investiga forkear **Hermes Workspace (MIT)** para la UI ("su UI sobre tu
