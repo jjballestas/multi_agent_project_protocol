@@ -4,6 +4,22 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0195 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `affb5cd feat(runtime): allow event auth override`. The runtime override reader is now generalized to
+  `event_state` while preserving the existing `EVENT_STATE_RUNTIME_CONFIG_PATH` / `event-state.runtime.json`
+  contract. It still admits `actor_auth_enforce` and `actor_auth_config`, and now also admits only
+  `event_auth.keys`; malformed override shapes fail closed. `agent_auth_config` / `signing_secret` merge
+  override `event_auth.keys` over the pinned config by actor, so a local Analista HMAC key can be added or
+  removed without touching `protocol.config.json` or chain genesis. `runtime/README.md` documents the combined
+  override contract, and CI now runs `examples/event_auth_runtime_override_cases/`, covering Analista
+  event_auth+actor_auth signing, config/genesis byte stability with drift false, no-override missing-key behavior,
+  rollback, secret-independent replay, and malformed-override fail-closed behavior. Evidence before commit:
+  py_compile OK; event_auth runtime override golden PASS 6/6; runtime_event_auth PASS 5/5; actor_auth golden PASS
+  6/6; event_auth secret resolution PASS 8/8; replay secret independent PASS 3/3; encoding OK; neutrality OK;
+  Python validator OK with the pre-existing TASK-0193 mailbox context_refs warning; PowerShell validator OK with
+  the same warning; drift false / #4 byte-identica `up_to_seq` 2203; `protocol.config.json` and genesis diff empty.
+  TASK-0195 remains `in_progress` under active claims pending delivery handoff, GO answer, in_review transition and
+  claim release.
 - TASK-0193 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `f87317c feat(f0): import Hermes v2.3.0 baseline`
   authored as Arquitecto with Codex co-author, per GO. The repo now has Hermes Workspace v2.3.0 imported under
   `vendor/hermes-2.3.0` from tag object `0218dbafce50fa69ba9ce045e2c8a3f5383bd1db` / commit
