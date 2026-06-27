@@ -10059,9 +10059,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-06-27T18:03:01Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0200",
             "updated_at": "2026-06-27T18:03:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0200-delivery",
+            "expires_at": "2026-06-28T18:23:49Z",
+            "notes": "TASK-0200 delivery artifacts and GO answer.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/handoffs/HANDOFF-TASK-0200-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0200-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0200-gate1-remediation.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0200-gate1-remediation.md",
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T18:23:49Z",
+            "status": "released",
+            "task_id": "TASK-0200",
+            "updated_at": "2026-06-27T18:23:49Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
