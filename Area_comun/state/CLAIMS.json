@@ -9147,6 +9147,24 @@
             "updated_at": "2026-06-27T00:59:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-close0195-rebaseline",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Cerrar TASK-0195 (checker verde) + re-atestar measurement baseline.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0195-codex-event-auth-runtime-override.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T14:38:59Z",
+            "status": "released",
+            "task_id": "TASK-0195",
+            "updated_at": "2026-06-27T14:38:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-dec0068-task0195",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "Ratificar DECISION-0068 (event_auth via override) + crear TASK-0195 ready/Codex.",
