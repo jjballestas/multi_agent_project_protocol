@@ -9137,6 +9137,23 @@
             "updated_at": "2026-06-27T16:23:30Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-f1done-f3",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Atestar F1/GATE1 cerrable + crear TASK-0204 (F3).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T20:48:20Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T20:48:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arq-task0198",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "Crear TASK-0198 (F1c) ready/Codex + GO.",

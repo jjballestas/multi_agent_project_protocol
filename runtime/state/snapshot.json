@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "bf59be9b2fb9ee532c6e64b9eaeff689159085eb7d891ff23d65a57b1135b548",
+  "canonical_hash": "66dc56869da919880ba96580a4276f1e1efd976b68e72c171661cb2e0fac13a0",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -340,6 +340,7 @@
       "CLAIM-20260627-Arq-0202-0203": 1,
       "CLAIM-20260627-Arq-close0197": 1,
       "CLAIM-20260627-Arq-close0198": 1,
+      "CLAIM-20260627-Arq-f1done-f3": 1,
       "CLAIM-20260627-Arq-task0198": 1,
       "CLAIM-20260627-Arq-task0199": 1,
       "CLAIM-20260627-Arq-task0200": 1,
@@ -529,7 +530,7 @@
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
       "MSG-20260627-Analista-to-Arquitecto-TASK-0194-review": 1,
       "MSG-20260627-Arquitecto-to-Analista-GO-TASK-0194-adversarial-review": 1,
-      "PROJECT_STATE": 8,
+      "PROJECT_STATE": 9,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
       "REQ-003AE958": 8,
@@ -666,6 +667,7 @@
       "TASK-0201": 3,
       "TASK-0202": 12,
       "TASK-0203": 2,
+      "TASK-0204": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -673,7 +675,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1641,
+    "events_applied": 1645,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -779,6 +781,9 @@
       "arq:dec49:acq": 710,
       "arq:dec49:rec": 711,
       "arq:dec49:rel": 712,
+      "arq:f1-cerrable:narrative": 2314,
+      "arq:f1done-f3:acq": 2313,
+      "arq:f1done-f3:rel": 2316,
       "arq:promo-0166:acq": 1553,
       "arq:promo-0166:rel": 1555,
       "arq:promo-0166:upsert": 1554,
@@ -821,6 +826,7 @@
       "arq:task0202:rel": 2298,
       "arq:task0202:upsert": 2297,
       "arq:task0203:upsert": 2309,
+      "arq:task0204:upsert": 2315,
       "arq:upd0124:acq": 716,
       "arq:upd0124:rel": 718,
       "arq:upd0124:reupsert-pathfix": 717,
@@ -2318,5 +2324,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2312
+  "up_to_seq": 2316
 }

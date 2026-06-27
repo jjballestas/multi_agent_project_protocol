@@ -931,6 +931,12 @@
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
         },
         {
+            "id": "TASK-0204",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis F3 read-only: selector multi-proyecto + dashboard de metricas"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -1043,7 +1049,8 @@
         "DATASET_START_SEQ = primer evento elegible con seq ESTRICTAMENTE MAYOR que esta atestacion de baseline. EXCLUSION (V2): TODO evento con seq menor o igual al seq de esta atestacion queda FUERA del corpus medido (es construccion del aparato: flips A2, re-baselines, Camino B, habilitacion del 3er firmante). El numero concreto de dataset_start_seq se registra al aplicar esta transaccion.",
         "ELEGIBILIDAD: turnos gobernados cruzado-firmados (actor_auth Ed25519) por agentes registrados, PII-free. STOP-RULE (V4): la ventana se cierra en el PRIMER momento en que se alcanzan 500 eventos elegibles desde dataset_start_seq; si una transaccion atomica sobrepasa 500, inclusion determinista de esa transaccion completa. PROHIBIDO mirar metricas/gates H1-H3 antes de cerrar la ventana; el monitor SOLO cuenta eventos elegibles, no observa salud/latencia/composicion.",
         "COMPROMISO audit-first: el CORE no cambia hasta el fin de la medicion (el fix del build de Zeus-Aegis es PRODUCTO, no core; no afecta el aparato). INDEPENDENCIA (V3): este baseline y el cierre de ventana deben ser revisados por un tercero (Analista/Codex) antes de mirar resultados. REPRESENTATIVIDAD (V5): al reportar, estratificar el corpus por agente/tipo de intent/tarea/producto-vs-protocolo.",
-        "TFM DATASET_START_SEQ CONCRETO = 2221 (primer evento elegible; el baseline canonico unico se atesto hasta seq 2220). Corpus medido = los primeros 500 eventos elegibles (turnos gobernados cruzado-firmados Ed25519, PII-free) con seq >= 2221. Todo evento con seq <= 2220 EXCLUIDO (construccion del aparato)."
+        "TFM DATASET_START_SEQ CONCRETO = 2221 (primer evento elegible; el baseline canonico unico se atesto hasta seq 2220). Corpus medido = los primeros 500 eventos elegibles (turnos gobernados cruzado-firmados Ed25519, PII-free) con seq >= 2221. Todo evento con seq <= 2220 EXCLUIDO (construccion del aparato).",
+        "Zeus-Aegis F1 (panel read-only) COMPLETO; GATE 1 CERRABLE por review adversarial independiente del Analista (3 rondas: TASK-0199 cambio-requerido -> TASK-0201 V3/V6/V1/V2/V5 ok solo V4 -> TASK-0203 V4 cerrado por CONSTRUCCION, 6 vectores PASA incl. escapes nuevos). 7 vistas read-only, lectura canonica, salud+atestacion honesta (no-verde si validate rojo), PII-safe por construccion (id/path/preview sin texto libre), gate F0 npm test exit 0 estable. Producto Zeus-Aegis 91e6b3f. Siguiente: F3 read-only. F2 (Operate) sigue gateado post-TFM."
     ],
     "open_questions": [],
     "phase": {
