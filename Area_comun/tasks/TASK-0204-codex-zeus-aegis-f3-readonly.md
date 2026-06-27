@@ -2,7 +2,7 @@
 task_id: TASK-0204
 title: "Zeus-Aegis F3 (read-only): selector multi-proyecto + dashboard de metricas/coste read-only (DECISION-0064 F3.3/F3.4, DECISION-0050)"
 type: integration
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

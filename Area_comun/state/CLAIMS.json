@@ -9101,6 +9101,24 @@
             "updated_at": "2026-06-27T20:27:54Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-0204-0205",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Cerrar TASK-0204 (F3 checker verde) + crear TASK-0205 (F4a).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0204-codex-zeus-aegis-f3-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T21:11:55Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T21:11:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arq-close0197",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "Cerrar TASK-0197 F1b (checker verde).",
