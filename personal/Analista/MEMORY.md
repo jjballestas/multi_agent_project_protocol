@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0199 (2026-06-27): CAMBIO-REQUERIDO / GATE 1 no cerrable. Veredicto commiteado en
+  `b4b50e6` (`review(TASK-0199): Analista blocks gate1`) con claim Analista firmado en #4
+  (`seq 2280`, release final `seq 2282-2283`; claim auxiliar `seq 2281` usado para cubrir release-scope
+  por no haber incluido inicialmente la fila de CLAIMS). Ancla protocolo `1fbb7ba8749476bdc4277cd2146a464e9a36d214`;
+  producto Zeus-Aegis `9c5f0ae0ecb82e3c5bdce2eca43cbeb58e0ae1f6`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-1e5185d14cc64c0abad926e706e45c9a`.
+  Full `npm test` en clean clone salio exit 1 dos veces: primera por timeout de `governance-readonly`, segunda
+  por 4 fallos (governance timeout, files timeout, mcp presets timeout, mcp presets source `user-file` vs `seed`).
+  Suite F1 aislada `npm exec -- vitest run src/server/governance-readonly.test.ts --reporter=dot` desde vendor
+  salio exit 0, 5/5. V1 no encontro route write surface en `/api/governance/*`; V2 canonico sostuvo
+  (dirty worktree no cambio `getGovernanceState`). Bloqueos falsables: V3 `getGovernanceLedger` devuelve
+  `attestation=verified` con `validate_collaboration_state` rojo y drift verde; V4 `getGovernanceArtifacts`
+  fuga PII en `id`/`path` (`john.doe@example.com`) y nombre en preview (`Juan Perez`). Gates protocolo vivos:
+  validate exit 0, scan_encoding exit 0, scan_domain_neutrality exit 0, drift 0 `up_to_seq=2283`, #4
+  `protocol.config.json` byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  MSG a Arquitecto rr=true pide devolver a maker o waiver explicito.
 - TASK-0194 (2026-06-27): CAMBIO-REQUERIDO / BLOQUEANTE antes de continuar como esta.
   Veredicto commiteado en `2ef8ed6` (`review(TASK-0194): Analista blocks baseline continuation`), con claim
   Analista firmado en #4 (`seq 2215`, `event_auth` analista-hmac:v1, `actor_auth` analista:v1) y release posterior
