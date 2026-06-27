@@ -29,8 +29,9 @@ razonamiento si tiene grietas.**
    engram rechazado; gentle-ai/Dots inspiracion). Commit accepted: b8c78aa.
 2. **Mi razonamiento de alcance** (que construir Zeus-Aegis cae DENTRO del pre-registro v2.0 FROZEN porque el corpus
    seccion 6.2 es agnostico de dominio y H1/H2/H3 miden el mecanismo #4). En el commit 5be3c85 / memoria.
-3. **El measurement baseline** atestado en #4 (seq 2191-2193, commit 8943756): core 10ff5ab, A2 vivo, pins
-   eventlog/validator/config, prereg v2.0 sha, N=500.
+3. **El measurement baseline CANONICO UNICO** atestado en #4 (supersede 8943756/seq 2191-2193 Y 9d96a95/seq 2213):
+   core e1dc631, A2 + 3 firmantes, pins finales, prereg v2.0 sha, N=500, dataset_start_seq=2221, stop-rule. (Tu
+   review V2/V4 forzo este canon unico; corregido.)
 
 ## Vectores (estan detallados en la tarea, V1-V7). Los mas calientes:
 

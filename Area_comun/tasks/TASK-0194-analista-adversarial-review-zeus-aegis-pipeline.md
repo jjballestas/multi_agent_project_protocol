@@ -27,7 +27,8 @@ file: Area_comun/tasks/TASK-0194-analista-adversarial-review-zeus-aegis-pipeline
    `/api/governance/*`; fases F0->F4; gate F2 post-TFM; engram rechazado; gentle-ai/Dots solo inspiracion).
 2. **Mi razonamiento de ALCANCE del pre-registro** (commit 5be3c85): que construir Zeus-Aegis cae DENTRO del
    pre-registro v2.0 FROZEN porque el corpus (seccion 6.2) es agnostico de dominio y H1/H2/H3 miden el MECANISMO #4.
-3. **El MEASUREMENT BASELINE atestado** (#4 seq 2191-2193, commit 8943756): core en 10ff5ab, A2 vivo, pins, N=500.
+3. **El MEASUREMENT BASELINE CANONICO UNICO** (supersede 8943756/seq 2191-2193 Y 9d96a95/seq 2213): core e1dc631,
+   A2 + 3 firmantes, pins finales, N=500, dataset_start_seq=2221, stop-rule. (Reemitido tras tu review V2/V4.)
 
 ## Vectores adversariales (presiona cada uno; default = sospecha)
 

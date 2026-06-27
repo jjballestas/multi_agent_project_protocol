@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "33ad90b94bca0974266f1622d99625e3a46d3ef68b5b21402382cb407cf2ae60",
+  "canonical_hash": "0e6b6a0c2e0ee0b301739d4a87a2734066135999bb48c25d4224d7472358d430",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -338,6 +338,7 @@
       "CLAIM-20260627-Arquitecto-a2-override": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg-v2": 1,
+      "CLAIM-20260627-Arquitecto-canon-baseline": 1,
       "CLAIM-20260627-Arquitecto-close-0190": 1,
       "CLAIM-20260627-Arquitecto-close-0191": 1,
       "CLAIM-20260627-Arquitecto-close-0192": 1,
@@ -348,6 +349,7 @@
       "CLAIM-20260627-Arquitecto-flip-a2": 1,
       "CLAIM-20260627-Arquitecto-harness-h1h3": 1,
       "CLAIM-20260627-Arquitecto-measure-baseline": 1,
+      "CLAIM-20260627-Arquitecto-start-seq": 1,
       "CLAIM-20260627-Arquitecto-task-0194": 1,
       "CLAIM-20260627-Codex-TASK-0191": 1,
       "CLAIM-20260627-Codex-TASK-0191-code": 1,
@@ -389,7 +391,7 @@
       "DECISION-0063": 3,
       "DECISION-0064": 4,
       "DECISION-0065": 2,
-      "DECISION-0066": 2,
+      "DECISION-0066": 4,
       "DECISION-0067": 1,
       "DECISION-0068": 2,
       "MAILBOX-ARCHIVE": 8,
@@ -497,7 +499,7 @@
       "MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177": 1,
       "MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1,
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
-      "PROJECT_STATE": 6,
+      "PROJECT_STATE": 8,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
       "REQ-003AE958": 8,
@@ -623,7 +625,7 @@
       "TASK-0190": 10,
       "TASK-0191": 9,
       "TASK-0192": 12,
-      "TASK-0193": 5,
+      "TASK-0193": 6,
       "TASK-0194": 3,
       "TASK-0195": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -633,7 +635,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1545,
+    "events_applied": 1552,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -844,6 +846,9 @@
       "arquitecto:author-0130:claim-acquire": 781,
       "arquitecto:author-0130:claim-release": 783,
       "arquitecto:author-0130:task-upsert-ready": 782,
+      "arquitecto:canon-baseline:claim-acquire": 2217,
+      "arquitecto:canon-baseline:claim-release": 2220,
+      "arquitecto:canon-baseline:narrative": 2218,
       "arquitecto:changes-0158:claim-acquire": 1256,
       "arquitecto:changes-0158:claim-release": 1258,
       "arquitecto:changes-0158:status": 1257,
@@ -1384,9 +1389,13 @@
       "arquitecto:review-0172gate:rel": 1815,
       "arquitecto:review-0177:acq": 1918,
       "arquitecto:review-0177:rel": 1919,
+      "arquitecto:start-seq:claim-acquire": 2221,
+      "arquitecto:start-seq:claim-release": 2223,
+      "arquitecto:start-seq:narrative": 2222,
       "arquitecto:task-0131:claim-acquire": 793,
       "arquitecto:task-0131:claim-release-for-codex": 795,
       "arquitecto:task-0131:upsert-in-progress": 794,
+      "arquitecto:task0193:changes-requested": 2219,
       "arquitecto:task0193:upsert-ready": 2183,
       "arquitecto:task0194:claim-acquire": 2194,
       "arquitecto:task0194:claim-release": 2196,
@@ -2182,5 +2191,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2216
+  "up_to_seq": 2223
 }
