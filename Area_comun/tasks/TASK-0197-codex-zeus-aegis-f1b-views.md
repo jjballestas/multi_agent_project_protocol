@@ -2,7 +2,7 @@
 task_id: TASK-0197
 title: "Zeus-Aegis F1b - vistas Decisiones + Ledger/atestacion + Handoffs (read-only) + endpoints /api/governance/{decisions,handoffs,ledger} (SPEC-0107)"
 type: integration
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6a4675e6bc3097d7745773b0a990a45eb864524b0b345f70ab563a6b8a986f87",
+  "canonical_hash": "b7b8caeb2c493a240f80ecc64d996eb87d3b77081da411b5894ef69a8323bc89",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -372,6 +372,11 @@
       "CLAIM-20260627-Codex-TASK-0195-delivery": 1,
       "CLAIM-20260627-Codex-TASK-0195-encoding-fix": 1,
       "CLAIM-20260627-Codex-TASK-0195-event-auth-override": 1,
+      "CLAIM-20260627-Codex-TASK-0197-delivery": 1,
+      "CLAIM-20260627-Codex-TASK-0197-f1b": 1,
+      "CLAIM-20260627-Codex-TASK-0197-f1bB": 1,
+      "CLAIM-20260627-Codex-TASK-0197-f1bC": 1,
+      "CLAIM-20260627-Codex-TASK-0197-f1bD": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -637,7 +642,7 @@
       "TASK-0194": 3,
       "TASK-0195": 9,
       "TASK-0196": 8,
-      "TASK-0197": 2,
+      "TASK-0197": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -645,7 +650,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1576,
+    "events_applied": 1588,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1825,6 +1830,18 @@
       "codex:task0189:go-status-fix-release": 2116,
       "codex:task0189:in-progress-to-in-review": 2111,
       "codex:task0189:ready-to-in-progress": 2110,
+      "codex:task0197-delivery:claim": 2257,
+      "codex:task0197-delivery:release": 2259,
+      "codex:task0197-f1b:claim": 2248,
+      "codex:task0197-f1b:ready-to-in-progress": 2249,
+      "codex:task0197-f1b:release-for-scope-fix": 2250,
+      "codex:task0197-f1bB:claim": 2251,
+      "codex:task0197-f1bB:release-for-route-scope": 2252,
+      "codex:task0197-f1bC:claim": 2253,
+      "codex:task0197-f1bC:release-for-final-scope": 2254,
+      "codex:task0197-f1bD:claim": 2255,
+      "codex:task0197-f1bD:release-for-delivery": 2256,
+      "codex:task0197:in-progress-to-in-review": 2258,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -2225,5 +2242,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2247
+  "up_to_seq": 2259
 }

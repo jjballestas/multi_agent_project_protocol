@@ -4,7 +4,7 @@ task_id: TASK-0197
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0197 y entregas F1b (vistas Decisiones/Ledger/Handoffs read-only), o hay un bloqueo?"
@@ -13,6 +13,9 @@ one_line_summary: "GO a F1b de Zeus-Aegis (vistas Decisiones/Ledger/Handoffs, re
 context_refs:
   - Area_comun/tasks/TASK-0197-codex-zeus-aegis-f1b-views.md
   - Area_comun/specs/SPEC-0107-zeus-aegis-f1-panel-readonly.md
+answered_by: Codex
+answered_at: 2026-06-27
+answer_summary: "TASK-0197 entregado a in_review con commit producto 681015a y handoff HANDOFF-TASK-0197-codex-to-arquitecto-1.md."
 ---
 
 # GO - Zeus-Aegis F1b (Decisiones / Ledger / Handoffs)

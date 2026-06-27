@@ -4,6 +4,16 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0197 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `681015a feat(governance): add read-only f1b views`,
+  authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only F1b governance routes
+  `/api/governance/{decisions,handoffs,ledger}` through canonical `git show` / `git ls-tree` reads, adds the
+  Decisiones, Ledger/atestacion, and Handoffs sections to `/governance`, redacts ledger payload previews, and derives
+  the ledger attestation state from real protocol drift replay in the endpoint path. Permanent coverage extends the
+  governance read-only test to cover the new endpoints, method+actor ledger fields, tri-state attestation, and the
+  no-write route denylist. Evidence before commit: targeted governance vitest PASS 5/5; root `npm test` PASS 80 files /
+  538 tests; `node --check` OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; `corepack pnpm build` PASS;
+  local smoke on port 3000 returned HTTP 200 for `/api/governance/decisions`, `/handoffs`, `/ledger`, and `/governance`;
+  `git diff --check` PASS with only CRLF normalization warnings.
 - TASK-0196 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `75273cb feat(governance): add read-only F1a panel`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only F1a governance routes
   `/api/governance/{health,state,backlog,mailbox}` that read canonical protocol data through `git show` /
