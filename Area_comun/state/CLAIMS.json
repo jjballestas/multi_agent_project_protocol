@@ -9396,6 +9396,45 @@
             "updated_at": "2026-06-27T13:06:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0193-delivery",
+            "expires_at": "2026-06-28T13:31:00Z",
+            "notes": "TASK-0193 delivery handoff, mailbox, GO answer, and memory update.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Codex-TASK-0193-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0193-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0193-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0193-zeus-aegis-f0.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0193-zeus-aegis-f0.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T13:31:00Z",
+            "status": "released",
+            "task_id": "TASK-0193",
+            "updated_at": "2026-06-27T13:31:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0193-f0",
+            "expires_at": "2026-06-28T13:00:00Z",
+            "notes": "TASK-0193 F0 implementation claim; product repo D:/Agentes/Zeus/Zeus-Aegis.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260627-Codex-TASK-0193-f0",
+                "Area_comun/state/TASK_INDEX.json#TASK-0193",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0193",
+                "Area_comun/tasks/TASK-0193-codex-zeus-aegis-f0-fork-seams.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0193-zeus-aegis-f0.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T13:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0193",
+            "updated_at": "2026-06-27T13:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

@@ -2,7 +2,7 @@
 task_id: TASK-0193
 title: "Zeus-Aegis F0 - fork & seams & inventario (DECISION-0064): importar Hermes v2.3.0, correr vanilla, documentar seams + inventario de reuso (informe, sin UI todavia)"
 type: discovery
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

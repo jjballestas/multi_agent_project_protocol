@@ -4,7 +4,7 @@ task_id: TASK-0193
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0193 y arrancas F0 (importar Hermes v2.3.0, correr vanilla, seams + inventario), o hay algun bloqueo para entregar GATE 0?"

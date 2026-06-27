@@ -4,6 +4,18 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0193 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `f87317c feat(f0): import Hermes v2.3.0 baseline`
+  authored as Arquitecto with Codex co-author, per GO. The repo now has Hermes Workspace v2.3.0 imported under
+  `vendor/hermes-2.3.0` from tag object `0218dbafce50fa69ba9ce045e2c8a3f5383bd1db` / commit
+  `15fa9cd706f5c04e4db288fb958e21d10fc776da`, root `LICENSE` preserving the Hermes MIT notice, and F0 docs
+  `docs/SEAMS.md` plus `docs/REUSE-INVENTORY.md`. Branch `vendor/hermes-2.3.0` points at the import commit.
+  Product evidence before commit: `node --check vendor/hermes-2.3.0/server-entry.js` OK; `corepack pnpm
+  approve-builds --all` + `corepack pnpm install --frozen-lockfile` OK after the first install failed closed on
+  ignored build scripts; Vite started on `127.0.0.1:3000` against bounded local stubs for `:8642` and `:9119`, with
+  gateway/dashboard HTTP 200 and app probe logging zero-fork capabilities. Caveats documented in `docs/SEAMS.md`:
+  `hermes` CLI is not installed on this Windows host, `uvx` build of `hermes-agent` failed on a locked file,
+  `/api/sessions` against the stub returned dashboard-index 404, `tsc --noEmit` is red in the vanilla upstream
+  snapshot, and `git diff --cached --check` is red only on upstream vendor whitespace.
 - TASK-0192 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `5257276 feat(runtime): move actor auth flag to override`. The actor_auth A2 enable/config now resolves from
   gitignored `event-state.runtime.json` or `EVENT_STATE_RUNTIME_CONFIG_PATH`; `protocol.config.json` and
