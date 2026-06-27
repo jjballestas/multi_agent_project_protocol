@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0b8fa2989b88cb42a3dabc9fb9931c4c3b3904073d55846e12a94db52dfa0cdd",
+  "canonical_hash": "8afc060c066d23519b26d05eaf6887590b8a453111bad25d7060804836dbe87c",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -623,7 +623,7 @@
       "TASK-0191": 9,
       "TASK-0192": 12,
       "TASK-0193": 5,
-      "TASK-0194": 2,
+      "TASK-0194": 3,
       "TASK-0195": 9,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -632,7 +632,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1543,
+    "events_applied": 1544,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -684,6 +684,7 @@
       "Codex:TASK-0186:delivery-claim:20260626T161000Z": 2072,
       "Codex:TASK-0186:in-progress-to-in-review:20260626T162500Z": 2073,
       "Codex:TASK-0186:ready-to-in-progress:20260626T153000Z": 2070,
+      "analista:task-0194-review:claim-acquire": 2215,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -2179,5 +2180,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2214
+  "up_to_seq": 2215
 }

@@ -1,5 +1,18 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260627-Analista-TASK-0194-review",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/artifacts/ANALISTA-TASK-0194-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260627-Analista-to-Arquitecto-TASK-0194-review.md",
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0194"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
