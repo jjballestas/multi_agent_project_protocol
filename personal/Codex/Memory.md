@@ -16,6 +16,14 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   `hermes` CLI is not installed on this Windows host, `uvx` build of `hermes-agent` failed on a locked file,
   `/api/sessions` against the stub returned dashboard-index 404, `tsc --noEmit` is red in the vanilla upstream
   snapshot, and `git diff --cached --check` is red only on upstream vendor whitespace.
+- TASK-0193 protocol delivery commit landed in `D:/Agentes/multi_agent_project_protocol`:
+  `bc37e2c coord(TASK-0193): deliver Zeus-Aegis F0`. TASK-0193 is `in_review`, Codex claims
+  `CLAIM-20260627-Codex-TASK-0193-f0` and `CLAIM-20260627-Codex-TASK-0193-delivery` are released, the consumed GO
+  moved to `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0193-zeus-aegis-f0.md`, and
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0193-in-review.md` plus
+  `Area_comun/handoffs/HANDOFF-TASK-0193-codex-to-arquitecto-1.md` are ready for Arquitecto review. Final protocol
+  evidence before delivery commit: encoding OK, neutrality OK, Python validator OK with one compact-mailbox
+  context_refs warning for the new review message, drift false / #4 byte-identica `up_to_seq` 2190.
 - TASK-0192 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `5257276 feat(runtime): move actor auth flag to override`. The actor_auth A2 enable/config now resolves from
   gitignored `event-state.runtime.json` or `EVENT_STATE_RUNTIME_CONFIG_PATH`; `protocol.config.json` and
