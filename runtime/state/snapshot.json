@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cd3daf123c574589e062b4d59c60aef55b40852c9da3623ac608cfb105c41e53",
+  "canonical_hash": "f352ec9f0ffc31592d2577331990720060444e0d3b9477fc0cc004982fe03989",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -334,6 +334,7 @@
       "CLAIM-20260626-Codex-TASK-0189-go-answered": 1,
       "CLAIM-20260626-Codex-TASK-0189-go-status-fix": 1,
       "CLAIM-20260627-Arquitecto-a2-camino-b": 1,
+      "CLAIM-20260627-Arquitecto-a2-override": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg": 1,
       "CLAIM-20260627-Arquitecto-attest-prereg-v2": 1,
       "CLAIM-20260627-Arquitecto-close-0190": 1,
@@ -369,6 +370,7 @@
       "DECISION-0064": 2,
       "DECISION-0065": 1,
       "DECISION-0066": 1,
+      "DECISION-0067": 1,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE-20260620": 2,
       "MAILBOX-HYGIENE-20260620-RESUME": 1,
@@ -599,6 +601,7 @@
       "TASK-0189": 9,
       "TASK-0190": 10,
       "TASK-0191": 9,
+      "TASK-0192": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -606,7 +609,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1485,
+    "events_applied": 1489,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -746,6 +749,10 @@
       "arquitecto:a2-camino-b:claim-release": 2129,
       "arquitecto:a2-camino-b:decision": 2127,
       "arquitecto:a2-camino-b:task-upsert": 2128,
+      "arquitecto:a2-override:claim-acquire": 2157,
+      "arquitecto:a2-override:claim-release": 2160,
+      "arquitecto:a2-override:decision": 2158,
+      "arquitecto:a2-override:task-upsert": 2159,
       "arquitecto:archive-0157:analista-verdict": 1241,
       "arquitecto:archive-0157:claim-acquire": 1237,
       "arquitecto:archive-0157:claim-release": 1242,
@@ -2095,5 +2102,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2156
+  "up_to_seq": 2160
 }

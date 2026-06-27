@@ -2959,6 +2959,19 @@
             "type": "protocol"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0192-codex-actor-auth-flag-runtime-override.md",
+            "id": "TASK-0192",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "spec_id": "SPEC-0105",
+            "status": "ready",
+            "title": "Core: mover actor_auth_enforce/actor_auth_config a un runtime override fuera del config pinned (flip A2 sin romper chain.genesis) (SPEC-0105, DECISION-0067)",
+            "type": "protocol"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
