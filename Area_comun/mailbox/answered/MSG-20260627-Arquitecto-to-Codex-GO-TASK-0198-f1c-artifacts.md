@@ -4,7 +4,7 @@ task_id: TASK-0198
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0198 y entregas F1c (vista Artifacts read-only), o hay un bloqueo?"

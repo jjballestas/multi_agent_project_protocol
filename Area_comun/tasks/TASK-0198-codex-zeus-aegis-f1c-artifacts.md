@@ -2,7 +2,7 @@
 task_id: TASK-0198
 title: "Zeus-Aegis F1c - vista Artifacts (read-only) + endpoint /api/governance/artifacts; cierra el panel read-only de F1 (SPEC-0107)"
 type: integration
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

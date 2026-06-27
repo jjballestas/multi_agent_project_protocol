@@ -4,6 +4,15 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0198 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `9c5f0ae feat(governance): add read-only f1c artifacts`,
+  authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only `/api/governance/artifacts`
+  using canonical `git ls-tree` / `git show` reads from `Area_comun/artifacts/`, adds the Artifacts section to
+  `/governance` with text filtering and bounded/redacted previews, extends the F1 denylist coverage, and records in
+  `docs/SEAMS.md` that Intake RF-14 and Operate remain deferred to gated F2 writer-path work. Evidence before
+  delivery: `node --check` OK for the new/changed governance TS route/server/test files, targeted governance vitest
+  PASS 5/5, root `npm test` PASS 80 files / 538 tests, `corepack pnpm build` PASS, smoke on port 4305 returned HTTP
+  200 for `/api/governance/artifacts` and `/governance`, and `git diff --check` PASS with only expected CRLF
+  normalization warnings.
 - TASK-0197 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `681015a feat(governance): add read-only f1b views`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only F1b governance routes
   `/api/governance/{decisions,handoffs,ledger}` through canonical `git show` / `git ls-tree` reads, adds the

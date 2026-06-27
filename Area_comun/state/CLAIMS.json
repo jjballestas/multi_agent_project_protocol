@@ -9912,6 +9912,63 @@
             "updated_at": "2026-06-27T13:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0198-delivery",
+            "expires_at": "2026-06-27T22:18:19Z",
+            "notes": "Entrega TASK-0198: handoff, mensaje de revision y cierre de GO consumido.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0198",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0198",
+                "Area_comun/tasks/TASK-0198-codex-zeus-aegis-f1c-artifacts.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0198-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0198-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0198-f1c-artifacts.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0198-f1c-artifacts.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T16:18:19Z",
+            "status": "released",
+            "task_id": "TASK-0198",
+            "updated_at": "2026-06-27T16:18:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0198-f1c",
+            "expires_at": "2026-06-27T22:11:52Z",
+            "notes": "Implementar Zeus-Aegis F1c read-only artifacts y entregar handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0198",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0198",
+                "Area_comun/tasks/TASK-0198-codex-zeus-aegis-f1c-artifacts.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0198-f1c-artifacts.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T16:11:52Z",
+            "status": "released",
+            "task_id": "TASK-0198",
+            "updated_at": "2026-06-27T16:11:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0198-msg-fix",
+            "expires_at": "2026-06-27T17:19:33Z",
+            "notes": "Fix validator-required requested_action on TASK-0198 review message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0198-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T16:19:33Z",
+            "status": "released",
+            "task_id": "TASK-0198",
+            "updated_at": "2026-06-27T16:19:33Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

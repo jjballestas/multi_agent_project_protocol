@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4c49f2c1f9f7d04494566c9c308ccdd9e37dca2b9ad12d4452a54b914b83753a",
+  "canonical_hash": "8f27ad16437e321d9b309283bd260a0cd81f2fc9a30e3cde9180db764616d056",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -379,6 +379,9 @@
       "CLAIM-20260627-Codex-TASK-0197-f1bB": 1,
       "CLAIM-20260627-Codex-TASK-0197-f1bC": 1,
       "CLAIM-20260627-Codex-TASK-0197-f1bD": 1,
+      "CLAIM-20260627-Codex-TASK-0198-delivery": 1,
+      "CLAIM-20260627-Codex-TASK-0198-f1c": 1,
+      "CLAIM-20260627-Codex-TASK-0198-msg-fix": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
@@ -645,7 +648,7 @@
       "TASK-0195": 9,
       "TASK-0196": 8,
       "TASK-0197": 11,
-      "TASK-0198": 2,
+      "TASK-0198": 7,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -653,7 +656,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1594,
+    "events_applied": 1602,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1746,6 +1749,14 @@
       "codex:task-0193-build-fix:delivery-claim-release": 2229,
       "codex:task-0193-build-fix:status-in-progress": 2225,
       "codex:task-0193-build-fix:status-in-review": 2227,
+      "codex:task-0198:claim-acquire:20260627": 2266,
+      "codex:task-0198:claim-release:20260627": 2270,
+      "codex:task-0198:delivery-claim-acquire:20260627": 2268,
+      "codex:task-0198:delivery-claim-release:20260627": 2271,
+      "codex:task-0198:in-progress-to-in-review:20260627": 2269,
+      "codex:task-0198:msg-fix-claim-acquire:20260627": 2272,
+      "codex:task-0198:msg-fix-claim-release:20260627": 2273,
+      "codex:task-0198:ready-to-in-progress:20260627": 2267,
       "codex:task0121-connector-readonly:claim": 689,
       "codex:task0121-connector-readonly:claim-release": 692,
       "codex:task0121-connector-readonly:in-progress-to-in-review": 691,
@@ -2251,5 +2262,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2265
+  "up_to_seq": 2273
 }
