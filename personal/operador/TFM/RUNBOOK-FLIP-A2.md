@@ -1,91 +1,87 @@
-# RUNBOOK — Flip A2 (encender actor_auth Ed25519 en turnos vivos)
+# RUNBOOK — Flip A2 (encender actor_auth Ed25519 en turnos vivos) — v2 (por RUNTIME OVERRIDE)
 
-> Autor: Arquitecto · 2026-06-27 · Para: operador. Gobierna: DECISION-0065 (mecanismo) + DECISION-0039 §5 (ventana
-> de riesgo) + DECISION-0045 (nunca pilotar contra el log vivo; ensayar en copia) + DECISION-0047 (época/genesis).
-> Es el paso de ACTIVACIÓN del cutover A2 del TFM. **Con el operador presente. NO autónomo.**
+> Autor: Arquitecto · v2 2026-06-27 (reescrito tras TASK-0192). Gobierna: DECISION-0065/0067 (mecanismo +
+> override) + DECISION-0045 (ensayo en copia) + DECISION-0046 (secret-indep). **Con el operador presente.**
+> **v1 OBSOLETA:** el ensayo (DECISION-0045) demostro que el flag-en-config rompia `chain.genesis`; TASK-0192 lo
+> movio a un **runtime override fuera del config pinned**, asi que **el flip YA NO es un re-genesis** — es un
+> cambio de runtime limpio. Verificado en re-ensayo: override -> `actor_auth ed25519` + validate exit 0 +
+> `protocol.config.json` byte-identico (chain.genesis intacto).
 
-## 0. Naturaleza: NO es un flag-toggle, es un RE-GÉNESIS-BOUNDARY
+## 0. Naturaleza: cambio de RUNTIME (no toca config ni genesis)
 
-Verificado: el flag `event_state.actor_auth_enforce` vive **solo en `protocol.config.json`** (sin override de
-runtime), y el **genesis = `canonical_hash(protocol.config.json)`**. Por tanto **editar el flag cambia el hash del
-config → invalida `chain.genesis`** salvo que se reescriba el genesis con **`runtime/regenesis.py`** (mismo
-mecanismo que la activación #4, DECISION-0045). Es decir: el flip es una **ceremonia de re-génesis-boundary**, no
-un toggle. Trátalo como tal: ensayo en copia + operador presente + rollback armado + una sola ventana de riesgo.
+Encender A2 = **crear el archivo gitignored `event-state.runtime.json`** (override). NO se edita
+`protocol.config.json` -> `canonical_hash(config)` no cambia -> `chain.genesis` intacto -> **sin re-genesis**,
+cadena continua, el dataset abarca el flip sin discontinuidad. Apagar = borrar el override.
 
-## 1. Precondición (ya cumplida)
+## 1. Precondicion (cumplida)
 
-- Mecanismo A2 construido off-by-default (TASK-0190; camino OFF byte-idéntico verificado).
-- Claves: públicas Ed25519 en `signature_config.public_keys`; privadas por agente en `D:/Agentes/protocol-secrets/`.
-- Pre-registro v2.0 FROZEN + atestado (#4), atestación medida = `actor_auth` Ed25519.
-- Harness de medición listo (TASK-0191).
-- **NO combinar** con `real_invoker`/`supervised_autonomy` ni cambios de `authoritative` (DECISION-0039 §5: un solo
-  multiplicador por ventana).
+- TASK-0190 (firma A2) + TASK-0192 (override) cerradas. Publicas en `signature_config.public_keys`
+  (keyids `arquitecto:v1`/`codex:v1`/`analista:v1`); privadas en `D:/Agentes/protocol-secrets/`
+  (`*-ed25519-private.pem`); HMAC secrets en `<repo>/secrets/eventauth-*.key`.
+- Pre-registro v2.0 FROZEN+atestado; harness listo. NO combinar con real_invoker/SA (DECISION-0039 §5).
 
-## 2. ENSAYO EN COPIA DESECHABLE — OBLIGATORIO ANTES DEL VIVO (DECISION-0045)
+## 2. ENSAYO EN COPIA — recomendado (ya validado por el Arquitecto)
 
-> Nunca el primer flip sobre el log vivo. Ensaya el ciclo completo en una copia y solo entonces hazlo en vivo.
-
-```bash
-# clon limpio a RUTA CORTA (Windows MAX_PATH; lección TASK-0190)
-git -c core.longpaths=true clone D:/Agentes/multi_agent_project_protocol C:/t/flipA2
-cd C:/t/flipA2
-# (provisionar acceso a las privadas como en el vivo, o usar fixtures)
-```
-En la copia, ejecutar los pasos 3–5 completos + el rollback (paso 6) y confirmar: validate exit 0, drift 0, los
-turnos llevan `actor_auth.ed25519`, y el rollback restaura el estado dormido. Si algo falla → diagnosticar en frío;
-NO tocar el vivo hasta que el ensayo sea verde end-to-end.
+> El Arquitecto ya re-ensayo el flip por override en clon limpio (verde). Re-ensayar de nuevo es opcional pero
+> barato; si lo haces, clona a RUTA CORTA (MAX_PATH) y copia `secrets/` + usa `protocol-secrets` (abs).
 
 ## 3. Flip en VIVO (operador presente)
 
-1. **Backup/punto de retorno:** anota el HEAD de git y el `canonical_hash` actual del config; confirma working
-   tree limpio, `validate` exit 0, drift 0 (estado de partida sano).
-2. **Editar el config:** en `protocol.config.json`, `event_state.actor_auth_enforce` → **true** (y completar
-   `event_state.actor_auth_config` si el ensayo mostró que hace falta: rutas de privadas por agente, keyids).
-3. **Re-génesis** (re-ancla el genesis al nuevo hash del config; preserva el event-log):
-   ```bash
-   python runtime/regenesis.py --actor-id Arquitecto --timestamp <UTC ISO> --commit flip-a2-regenesis
+1. **Estado de partida sano:** `git status` limpio relevante; `validate` exit 0; drift 0; anota HEAD.
+2. **Crear el override** en la raiz del repo: **`event-state.runtime.json`** (gitignored; NO commitear):
+   ```json
+   {
+     "event_state": {
+       "actor_auth_enforce": true,
+       "actor_auth_config": {
+         "secret_root": "D:/Agentes/protocol-secrets",
+         "keyids": { "Arquitecto": "arquitecto:v1", "Codex": "codex:v1", "Analista": "analista:v1" },
+         "private_key_files": {
+           "Arquitecto": "D:/Agentes/protocol-secrets/arquitecto-ed25519-private.pem",
+           "Codex": "D:/Agentes/protocol-secrets/codex-ed25519-private.pem",
+           "Analista": "D:/Agentes/protocol-secrets/analista-ed25519-private.pem"
+         }
+       }
+     }
+   }
    ```
-   Verificar en la salida: `drift_before` → `drift_after = 0`.
-4. **Decisión de época (DECISION-0047):** el re-génesis es un cambio de época. Decide si bumpear `protocol_version`
-   para marcar la época A2 (recomendado, p.ej. una MINOR nueva) o dejarlo; reconciliar AGENTS.md ↔ config ↔
-   CHANGELOG si bumpeas (la verdad de versión ya está sincronizada).
+   (El runtime lo lee por defecto en `event-state.runtime.json`, o via `EVENT_STATE_RUNTIME_CONFIG_PATH`.)
+3. **NADA de editar el config ni regenesis.** El flip ya esta hecho (el override existe).
 
-## 4. Verificación post-flip (gates)
+## 4. Verificacion post-flip (gates)
 
-- `python scripts/validate_collaboration_state.py` → exit 0 (con y sin secretos en clon limpio).
-- drift 0; `chain.genesis` nuevo coherente; `event_auth` HMAC + anchor siguen ON.
-- **Prueba viva de A2:** emitir un `submit_intent` real (p.ej. un `project_narrative` o un claim no-op) y confirmar
-  que el evento lleva `actor_auth: {method:"ed25519", keyid:<actor>, sig:...}` **verificable con la pública**.
-- Confirmar que **otro agente** (Codex/Analista), al escribir su próximo turno, también firma Ed25519 (cada runtime
-  accede a SU privada). Si un agente no tiene su privada accesible → su `append_event` falla-closed: provisionar y
-  reintentar.
+- `python scripts/validate_collaboration_state.py` -> **exit 0** (sin "genesis mismatch"); drift 0; `chain.genesis`
+  intacto; `protocol.config.json` byte-identico al de antes.
+- **Prueba viva A2:** emitir un `submit_intent` real (claim no-op o project_narrative) y confirmar que el evento
+  lleva `actor_auth:{method:"ed25519", keyid:<actor>, sig}` verificable con la publica.
+- Confirmar que **cada agente** firma con SU privada en su proximo turno; si a uno le falta la privada accesible,
+  su `append_event` falla-closed -> provisionar y reintentar.
+- **Importante:** cada runtime de agente debe tener el MISMO override activo (o `EVENT_STATE_RUNTIME_CONFIG_PATH`
+  apuntando al mismo archivo) para firmar; coordinar que crones/wrappers lo vean.
 
-## 5. A partir de aquí (el experimento)
+## 5. A partir de aqui (el experimento)
 
-Con A2 vivo: generar el **dataset** (N≥500 turnos, ≥2 agentes, sin PII) → correr el **harness** (TASK-0191) sobre
-una **copia** del dataset (inyección A1/A2/A3 + detección/FPR/sobrecoste + verificador externo) → comparar con los
-umbrales del **pre-registro v2.0** → redactar.
+A2 vivo -> generar el **dataset** (N>=500 turnos, >=2 agentes, sin PII) -> correr el **harness** (TASK-0191) sobre
+una **copia** del dataset (inyeccion A1/A2/A3 + deteccion/FPR/sobrecoste + verificador externo) -> comparar con los
+umbrales del **pre-registro v2.0** -> redactar.
 
-## 6. ROLLBACK armado
+## 6. ROLLBACK (trivial)
 
-- **Reverso:** `event_state.actor_auth_enforce` → **false** (revertir el config) + `python runtime/regenesis.py
-  --actor-id Arquitecto --timestamp <UTC> --commit rollback-a2-regenesis` → drift 0.
-- Resultado: los turnos vuelven a `not_enforced_phase2` + HMAC (integridad/cadena/ancla **siguen vivas**); los
-  eventos ya firmados con Ed25519 quedan en la historia (no se pierden). Reversible.
-- **Criterio de aborto:** si tras el flip `validate` se pone rojo, `append_event` falla por privada ausente, o
-  drift ≠ 0 → ejecutar el rollback, diagnosticar en frío, reintentar (idealmente re-ensayando en copia).
+- **Borrar `event-state.runtime.json`** (o poner `actor_auth_enforce:false`) -> los turnos vuelven a
+  `not_enforced_phase2` + HMAC (integridad/cadena/ancla siguen vivas); los eventos ya firmados Ed25519 quedan en la
+  historia. `validate` exit 0. Reversible, sin re-genesis, sin perder historia.
+- **Aborto:** si tras crear el override `validate` se pone rojo o `append_event` falla por privada ausente ->
+  borrar el override, diagnosticar en frio, reintentar.
 
-## 7. Resumen de comandos (vivo, con operador presente)
+## 7. Resumen (vivo, operador presente)
 
 ```bash
-# 0. estado sano
-git rev-parse HEAD; python scripts/validate_collaboration_state.py; echo exit=$?
-# 1. editar protocol.config.json: event_state.actor_auth_enforce=true   (editor)
-# 2. re-génesis
-python runtime/regenesis.py --actor-id Arquitecto --timestamp 2026-06-27T..:..:00Z --commit flip-a2-regenesis
-# 3. verificar
-python scripts/validate_collaboration_state.py; echo exit=$?     # esperado 0, drift 0
-# 4. prueba viva A2: un submit_intent y revisar actor_auth.method==ed25519
-# 5. commit del flip (config + genesis + state) con rutas explícitas, y push
-# ROLLBACK si hace falta: flag=false + regenesis + validate
+# 0. sano
+python scripts/validate_collaboration_state.py; echo exit=$?            # 0, drift 0
+# 1. crear event-state.runtime.json (override de §3)  [NO commitear]
+# 2. verificar
+python scripts/validate_collaboration_state.py; echo exit=$?            # 0, SIN genesis mismatch
+# 3. prueba viva: un submit_intent y revisar actor_auth.method==ed25519
+# 4. (NO se commitea el override ni se toca el config/genesis)
+# ROLLBACK: rm event-state.runtime.json ; validate
 ```

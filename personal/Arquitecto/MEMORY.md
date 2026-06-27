@@ -23,9 +23,19 @@
   (espejo file-ingestion.runtime.json); lectores mergean override; quitar flag de config/template. AC2 CRITICO:
   activar por override NO cambia config -> chain.genesis intacto -> submit_intent ed25519 + validate exit 0 (sin
   genesis mismatch) + drift 0, SIN re-genesis. Path de firma de TASK-0190 intacto. maker=Codex/checker=Arquitecto.
-- **PLAN (operador): tras la entrega de Codex, RE-ENSAYAMOS el flip** (ahora por override, debe quedar validate
-  exit 0 + chain intacta). Si verde -> flip vivo con operador presente (ya es cambio de runtime, sin re-genesis) ->
-  generar dataset -> harness -> H1-H3. Esperando TASK-0192.
+- **TASK-0192 CERRADA (commit b430e14):** flag A2 movido a runtime override `event-state.runtime.json` gitignored
+  (env EVENT_STATE_RUNTIME_CONFIG_PATH; removido de config/template). Golden 6/6 (incl AC5-runtime-override-flip-clean).
+  **RE-ENSAYO DEFINITIVO VERDE (clon limpio fresco):** crear el override -> submit_intent real emite
+  `actor_auth:ed25519 keyid arquitecto:v1` + validate exit 0 (SIN genesis mismatch) + protocol.config.json
+  byte-identico (chain.genesis intacto) + rollback (borrar override) exit 0. **EL FLIP A2 YA ES CAMBIO DE RUNTIME
+  LIMPIO, sin re-genesis.** (Hubo un hipo: Codex no-op'o el GO 1a vez por sobre-cautela; lo relance quitando de
+  seen.json y lo tomo.) [[semi-auto-collaboration-pattern]]
+- **RUNBOOK FLIP A2 v2 reescrito** (override; sin re-genesis): crear event-state.runtime.json (enabled+actor_auth_config
+  con private_key_files/keyids) -> validate exit 0 -> prueba viva ed25519 -> rollback=borrar override. Cada runtime
+  de agente necesita ver el mismo override para firmar.
+- **>>> LISTO PARA EL FLIP VIVO (operador presente):** todo construido+ensayado. Pasos: crear override -> validate
+  -> prueba viva -> generar dataset -> harness -> H1-H3 vs umbrales -> redactar. Es el unico paso que falta y es
+  trivial+reversible.
 
 ## >>> RESUME 2026-06-27 (HEAD 378cba7) -- TFM: pre-registro H1-H3 + DECISION-0064 (UI Hermes, gateada post-TFM) <<<
 - **Contexto operador (dos visiones):** (1) TFM academico = atestacion #4 medida; (2) herramienta multi-agente
