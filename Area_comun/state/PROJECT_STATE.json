@@ -865,6 +865,12 @@
             "title": "Core: mover actor_auth_enforce/actor_auth_config a un runtime override fuera del config pinned (flip A2 sin romper chain.genesis) (SPEC-0105, DECISION-0067)"
         },
         {
+            "id": "TASK-0193",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis F0 - fork & seams & inventario (DECISION-0064): importar Hermes v2.3.0, correr vanilla, documentar seams + inventario de reuso"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "898cae7a2951ee55b67ea53ba68a7e7d90579c04dfd3a00d928f9cf76b43ae00",
+  "canonical_hash": "ecedd913ea7ea0d26180009f4c55a6e83fa6740394f6195662f81e6d50933790",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -341,6 +341,7 @@
       "CLAIM-20260627-Arquitecto-close-0191": 1,
       "CLAIM-20260627-Arquitecto-close-0192": 1,
       "CLAIM-20260627-Arquitecto-decision-0064": 1,
+      "CLAIM-20260627-Arquitecto-decision-0064-task-0193": 1,
       "CLAIM-20260627-Arquitecto-flip-a2": 1,
       "CLAIM-20260627-Arquitecto-harness-h1h3": 1,
       "CLAIM-20260627-Codex-TASK-0191": 1,
@@ -375,7 +376,7 @@
       "DECISION-0061": 1,
       "DECISION-0062": 3,
       "DECISION-0063": 3,
-      "DECISION-0064": 2,
+      "DECISION-0064": 4,
       "DECISION-0065": 2,
       "DECISION-0066": 1,
       "DECISION-0067": 1,
@@ -610,6 +611,7 @@
       "TASK-0190": 10,
       "TASK-0191": 9,
       "TASK-0192": 12,
+      "TASK-0193": 1,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -617,7 +619,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1509,
+    "events_applied": 1513,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1083,6 +1085,9 @@
       "arquitecto:consola-arq-f1:claim-release": 2056,
       "arquitecto:consola-arq-f1:decision-accepted": 2054,
       "arquitecto:consola-arq-f1:task-upsert": 2055,
+      "arquitecto:dec0064-task0193:claim-acquire": 2181,
+      "arquitecto:dec0064-task0193:claim-release": 2184,
+      "arquitecto:dec0064:accepted": 2182,
       "arquitecto:decision-0057:claim-acquire": 1138,
       "arquitecto:decision-0057:claim-release": 1140,
       "arquitecto:decision-0057:record": 1139,
@@ -1357,6 +1362,7 @@
       "arquitecto:task-0131:claim-acquire": 793,
       "arquitecto:task-0131:claim-release-for-codex": 795,
       "arquitecto:task-0131:upsert-in-progress": 794,
+      "arquitecto:task0193:upsert-ready": 2183,
       "arquitecto:triage:claim-acquire": 1158,
       "arquitecto:triage:claim-release": 1164,
       "arquitecto:triage:req-0873a67c": 1162,
@@ -2130,5 +2136,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2180
+  "up_to_seq": 2184
 }

@@ -9164,6 +9164,21 @@
             "updated_at": "2026-06-27T00:34:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-decision-0064-task-0193",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Ratificar DECISION-0064 (Zeus-Aegis fork Hermes) + crear TASK-0193 F0 ready/Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T12:37:04Z",
+            "status": "released",
+            "task_id": "DECISION-0064",
+            "updated_at": "2026-06-27T12:37:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-flip-a2",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Marcador de activacion A2 (flip por override). Primer evento firmado Ed25519 del dataset vivo.",
