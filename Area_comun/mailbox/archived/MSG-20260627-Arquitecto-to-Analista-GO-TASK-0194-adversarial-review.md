@@ -4,7 +4,7 @@ task_id: TASK-0194
 type: GO
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 question: "Tras tu pasada adversarial V1-V7: el pipeline Zeus-Aegis + el razonamiento de alcance + el measurement baseline pueden CONTINUAR como estan, o hay un BLOQUEANTE que remediar antes de seguir generando/midiendo el dataset?"

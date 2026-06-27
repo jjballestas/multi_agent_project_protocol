@@ -4,7 +4,7 @@ task_id: TASK-0194
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 question: "Confirmas que devuelves el pipeline a cambio requerido para fijar baseline canonico unico, dataset_start_seq/stop rule y resolver o waivar explicitamente el Gate 0 rojo de Zeus-Aegis?"

@@ -18,14 +18,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
         },
         {
-            "id": "TASK-0193",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Zeus-Aegis F0 - fork & seams & inventario (DECISION-0064): importar Hermes v2.3.0, correr vanilla, documentar seams + inventario de reuso"
-        },
-        {
             "id": "TASK-0194",
             "owner": "Analista",
             "phase": "P2",
