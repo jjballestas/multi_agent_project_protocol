@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4e0764eaae947742b46ec70ef77f72c13fa93e63a57540788a5ab38273275bfa",
+  "canonical_hash": "898cae7a2951ee55b67ea53ba68a7e7d90579c04dfd3a00d928f9cf76b43ae00",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -341,6 +341,7 @@
       "CLAIM-20260627-Arquitecto-close-0191": 1,
       "CLAIM-20260627-Arquitecto-close-0192": 1,
       "CLAIM-20260627-Arquitecto-decision-0064": 1,
+      "CLAIM-20260627-Arquitecto-flip-a2": 1,
       "CLAIM-20260627-Arquitecto-harness-h1h3": 1,
       "CLAIM-20260627-Codex-TASK-0191": 1,
       "CLAIM-20260627-Codex-TASK-0191-code": 1,
@@ -375,7 +376,7 @@
       "DECISION-0062": 3,
       "DECISION-0063": 3,
       "DECISION-0064": 2,
-      "DECISION-0065": 1,
+      "DECISION-0065": 2,
       "DECISION-0066": 1,
       "DECISION-0067": 1,
       "MAILBOX-ARCHIVE": 8,
@@ -483,7 +484,7 @@
       "MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177": 1,
       "MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1,
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
-      "PROJECT_STATE": 3,
+      "PROJECT_STATE": 4,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
       "REQ-003AE958": 8,
@@ -616,7 +617,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1506,
+    "events_applied": 1509,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1104,6 +1105,9 @@
       "arquitecto:decision-0064:claim-acquire": 2120,
       "arquitecto:decision-0064:claim-release": 2122,
       "arquitecto:decision-0064:decision": 2121,
+      "arquitecto:flip-a2:acq": 2178,
+      "arquitecto:flip-a2:narr": 2179,
+      "arquitecto:flip-a2:rel": 2180,
       "arquitecto:go-0167:acq": 1614,
       "arquitecto:go-0167:rel": 1615,
       "arquitecto:go-0168:claim-acquire": 1584,
@@ -2126,5 +2130,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2177
+  "up_to_seq": 2180
 }

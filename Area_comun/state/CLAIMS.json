@@ -9164,6 +9164,22 @@
             "updated_at": "2026-06-27T00:34:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-flip-a2",
+            "expires_at": "2026-06-27T06:00:00Z",
+            "notes": "Marcador de activacion A2 (flip por override). Primer evento firmado Ed25519 del dataset vivo.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T01:00:00Z",
+            "status": "released",
+            "task_id": "DECISION-0065",
+            "updated_at": "2026-06-27T01:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-harness-h1h3",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0066 accepted (harness experimento H1-H3, inyeccion solo copia desechable) + TASK-0191 ready/Codex (SPEC-0104). Aparato de medicion del TFM; construye sobre fixtures; no toca el #4 vivo.",
