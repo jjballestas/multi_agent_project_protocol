@@ -28,7 +28,7 @@ razonamiento si tiene grietas.**
 1. **DECISION-0064** (Zeus-Aegis = fork Hermes cliente del single-writer; fases F0->F4; F2 gateado post-TFM;
    engram rechazado; gentle-ai/Dots inspiracion). Commit accepted: b8c78aa.
 2. **Mi razonamiento de alcance** (que construir Zeus-Aegis cae DENTRO del pre-registro v2.0 FROZEN porque el corpus
-   §6.2 es agnostico de dominio y H1/H2/H3 miden el mecanismo #4). En el commit 5be3c85 / memoria.
+   seccion 6.2 es agnostico de dominio y H1/H2/H3 miden el mecanismo #4). En el commit 5be3c85 / memoria.
 3. **El measurement baseline** atestado en #4 (seq 2191-2193, commit 8943756): core 10ff5ab, A2 vivo, pins
    eventlog/validator/config, prereg v2.0 sha, N=500.
 

@@ -26,7 +26,7 @@ file: Area_comun/tasks/TASK-0194-analista-adversarial-review-zeus-aegis-pipeline
 1. **DECISION-0064** (UI operador = fork Hermes "Zeus-Aegis", cliente del single-writer; contrato
    `/api/governance/*`; fases F0->F4; gate F2 post-TFM; engram rechazado; gentle-ai/Dots solo inspiracion).
 2. **Mi razonamiento de ALCANCE del pre-registro** (commit 5be3c85): que construir Zeus-Aegis cae DENTRO del
-   pre-registro v2.0 FROZEN porque el corpus (§6.2) es agnostico de dominio y H1/H2/H3 miden el MECANISMO #4.
+   pre-registro v2.0 FROZEN porque el corpus (seccion 6.2) es agnostico de dominio y H1/H2/H3 miden el MECANISMO #4.
 3. **El MEASUREMENT BASELINE atestado** (#4 seq 2191-2193, commit 8943756): core en 10ff5ab, A2 vivo, pins, N=500.
 
 ## Vectores adversariales (presiona cada uno; default = sospecha)
@@ -40,7 +40,7 @@ file: Area_comun/tasks/TASK-0194-analista-adversarial-review-zeus-aegis-pipeline
   CRITICO: el baseline se atesto **DESPUES de existir ya 16 eventos Ed25519**, no en cero. Es eso un olor post-hoc?
   Debio re-congelarse (v3.0) en el commit post-cutover ANTES del primer evento firmado? Cuantifica el dano (si lo hay).
 - **V3 Independencia / conflicto de interes.** Arquitecto = sujeto (firma) + autor del pipeline + atestador del
-  baseline. La §8 del pre-registro ya declara "sujeto=medidor"; el baseline lo mitiga o lo agrava? Que harias
+  baseline. La seccion 8 del pre-registro ya declara "sujeto=medidor"; el baseline lo mitiga o lo agrava? Que harias
   distinto para que un tercero lo crea?
 - **V4 N=500 y regla de parada.** 500 esta justificado/potenciado? La regla es ">=500" con un MONITOR que vigila el
   conteo -> riesgo de optional-stopping/peeking? Define el problema si existe.
