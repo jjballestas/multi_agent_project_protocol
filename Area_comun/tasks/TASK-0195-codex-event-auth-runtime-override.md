@@ -2,7 +2,7 @@
 task_id: TASK-0195
 title: "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis) (SPEC-0106, DECISION-0068)"
 type: protocol
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

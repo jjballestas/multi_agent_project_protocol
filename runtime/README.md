@@ -70,11 +70,11 @@ El subproceso recibe el prompt por stdin y debe devolver por stdout un JSON de t
 mutar estado, y mantiene 1 turno = 1 commit. Las credenciales del CLI pertenecen al entorno local
 del adoptante; no se commitean. La autonomia multi-turno no queda habilitada por este wrapper.
 
-## Runtime override para actor_auth
-`event_state.actor_auth_enforce` y `event_state.actor_auth_config` no pertenecen al
-`protocol.config.json` pinned. Para ensayar o activar la firma `actor_auth` se usa el override
-gitignored `event-state.runtime.json`, o la ruta indicada por `EVENT_STATE_RUNTIME_CONFIG_PATH`.
-El archivo admite solo:
+## Runtime override para autenticacion de eventos
+`event_state.actor_auth_enforce`, `event_state.actor_auth_config` y las altas locales de
+`event_auth.keys` no pertenecen al `protocol.config.json` pinned. Para ensayar o activar esas
+credenciales se usa el override gitignored `event-state.runtime.json`, o la ruta indicada por
+`EVENT_STATE_RUNTIME_CONFIG_PATH`. El archivo admite solo:
 
 ```json
 {
@@ -84,14 +84,24 @@ El archivo admite solo:
       "secret_root": "D:/Agentes/protocol-secrets",
       "keyids": {},
       "private_key_files": {}
+    },
+    "event_auth": {
+      "keys": {
+        "Analista": {
+          "key_id": "analista-hmac:v1",
+          "secret_file": "secrets/eventauth-analista.key"
+        }
+      }
     }
   }
 }
 ```
 
-Sin override el camino queda OFF (`not_enforced_phase2`). Un override malformado falla cerrado.
-Las claves privadas siguen fuera del repo y `protocol.config.json` no se toca, preservando el
-genesis de cadena.
+Sin override, `actor_auth` queda OFF (`not_enforced_phase2`) y `event_auth.keys` usa solo el
+mapeo del config pinned. Las entradas `event_auth.keys` del override se mergean sobre el config y
+ganan por actor; solo se admite esa subclave. Un override malformado falla cerrado. Las claves
+privadas y HMAC siguen fuera del repo y `protocol.config.json` no se toca, preservando el genesis
+de cadena.
 
 ## Principios (no negociables, DECISION-0009)
 Ficheros = fuente de verdad. 1 turno = 1 commit. Gate por turno + rollback. Gates humanos como

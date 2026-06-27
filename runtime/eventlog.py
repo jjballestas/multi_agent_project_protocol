@@ -38,8 +38,10 @@ ACTOR_AUTH_TAMPER_REASONS = {
     "unknown_keyid",
     "unsupported_method",
 }
-ACTOR_AUTH_RUNTIME_CONFIG_ENV = "EVENT_STATE_RUNTIME_CONFIG_PATH"
-ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT = "event-state.runtime.json"
+EVENT_STATE_RUNTIME_CONFIG_ENV = "EVENT_STATE_RUNTIME_CONFIG_PATH"
+EVENT_STATE_RUNTIME_CONFIG_DEFAULT = "event-state.runtime.json"
+ACTOR_AUTH_RUNTIME_CONFIG_ENV = EVENT_STATE_RUNTIME_CONFIG_ENV
+ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT = EVENT_STATE_RUNTIME_CONFIG_DEFAULT
 
 
 class EventLogError(RuntimeError):
@@ -223,39 +225,61 @@ def attestation_signing_payload(subject_digest: str, predicate: dict[str, Any]) 
     return (str(subject_digest) + "\n" + canonical_json(predicate)).encode("utf-8")
 
 
-def actor_auth_runtime_config_path(root: Path) -> Path:
-    configured = os.environ.get(ACTOR_AUTH_RUNTIME_CONFIG_ENV)
+def event_state_runtime_config_path(root: Path) -> Path:
+    configured = os.environ.get(EVENT_STATE_RUNTIME_CONFIG_ENV)
     if configured:
         path = Path(configured)
         resolved = path.resolve() if path.is_absolute() else (root / path).resolve()
         if not path.is_absolute() and resolved != root.resolve() and root.resolve() not in resolved.parents:
-            raise EventLogError("actor_auth runtime override path outside repository root")
+            raise EventLogError("event_state runtime override path outside repository root")
         return resolved
-    return (root / ACTOR_AUTH_RUNTIME_CONFIG_DEFAULT).resolve()
+    return (root / EVENT_STATE_RUNTIME_CONFIG_DEFAULT).resolve()
 
 
-def actor_auth_runtime_override(root: Path | None = None) -> dict[str, Any]:
+def actor_auth_runtime_config_path(root: Path) -> Path:
+    return event_state_runtime_config_path(root)
+
+
+def event_state_runtime_override(root: Path | None = None) -> dict[str, Any]:
     if root is None:
         return {}
-    path = actor_auth_runtime_config_path(root)
+    path = event_state_runtime_config_path(root)
     if not path.exists():
         return {}
     try:
         payload = json.loads(path.read_text(encoding="utf-8-sig"))
     except Exception as exc:
-        raise EventLogError(f"invalid actor_auth runtime override: {path}") from exc
+        raise EventLogError(f"invalid event_state runtime override: {path}") from exc
     if not isinstance(payload, dict):
-        raise EventLogError("actor_auth runtime override must be a JSON object")
+        raise EventLogError("event_state runtime override must be a JSON object")
     event_state = payload.get("event_state")
     if event_state is None:
         return {}
     if not isinstance(event_state, dict):
-        raise EventLogError("actor_auth runtime override event_state must be an object")
-    allowed = {"actor_auth_enforce", "actor_auth_config"}
+        raise EventLogError("event_state runtime override event_state must be an object")
+    allowed = {"actor_auth_enforce", "actor_auth_config", "event_auth"}
     unsupported = sorted(str(key) for key in event_state if key not in allowed)
     if unsupported:
-        raise EventLogError(f"actor_auth runtime override contains unsupported event_state keys: {', '.join(unsupported)}")
+        raise EventLogError(f"event_state runtime override contains unsupported event_state keys: {', '.join(unsupported)}")
+    event_auth = event_state.get("event_auth")
+    if event_auth is not None:
+        if not isinstance(event_auth, dict):
+            raise EventLogError("event_state runtime override event_auth must be an object")
+        allowed_event_auth = {"keys"}
+        unsupported_event_auth = sorted(str(key) for key in event_auth if key not in allowed_event_auth)
+        if unsupported_event_auth:
+            raise EventLogError(
+                f"event_state runtime override event_auth contains unsupported keys: {', '.join(unsupported_event_auth)}"
+            )
+        keys = event_auth.get("keys")
+        if keys is not None and not isinstance(keys, dict):
+            raise EventLogError("event_state runtime override event_auth.keys must be an object")
     return event_state
+
+
+def actor_auth_runtime_override(root: Path | None = None) -> dict[str, Any]:
+    override = event_state_runtime_override(root)
+    return {key: value for key, value in override.items() if key in {"actor_auth_enforce", "actor_auth_config"}}
 
 
 def actor_auth_event_state(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
@@ -501,8 +525,25 @@ def event_auth_enabled(config: dict[str, Any] | None) -> bool:
     return isinstance(event_auth, dict) and event_auth.get("enabled") is True
 
 
-def agent_auth_config(config: dict[str, Any], actor: str) -> dict[str, Any]:
-    event_auth = config.get("event_auth") or {}
+def event_auth_runtime_config(config: dict[str, Any] | None, root: Path | None = None) -> dict[str, Any]:
+    config_event_auth = (config or {}).get("event_auth")
+    merged = dict(config_event_auth) if isinstance(config_event_auth, dict) else {}
+    override = event_state_runtime_override(root)
+    override_event_auth = override.get("event_auth")
+    if isinstance(override_event_auth, dict):
+        for key, value in override_event_auth.items():
+            if key == "keys" and isinstance(value, dict):
+                current = merged.get("keys")
+                keys = dict(current) if isinstance(current, dict) else {}
+                keys.update(value)
+                merged["keys"] = keys
+            else:
+                merged[key] = value
+    return merged
+
+
+def agent_auth_config(config: dict[str, Any], actor: str, *, root: Path | None = None) -> dict[str, Any]:
+    event_auth = event_auth_runtime_config(config, root)
     merged: dict[str, Any] = {}
     for agent in ((config.get("agent_registry") or {}).get("agents") or []):
         if isinstance(agent, dict) and str(agent.get("id") or "") == actor and isinstance(agent.get("auth"), dict):
@@ -573,12 +614,12 @@ def resolve_event_auth_secret(auth: dict[str, Any], *, root: Path | None, config
 
 
 def signing_secret(config: dict[str, Any], actor: str, *, root: Path | None = None) -> str | None:
-    auth = agent_auth_config(config, actor)
+    auth = agent_auth_config(config, actor, root=root)
     return resolve_event_auth_secret(auth, root=root, config=config)
 
 
-def signing_key_id(config: dict[str, Any], actor: str) -> str:
-    auth = agent_auth_config(config, actor)
+def signing_key_id(config: dict[str, Any], actor: str, *, root: Path | None = None) -> str:
+    auth = agent_auth_config(config, actor, root=root)
     return str(auth.get("key_id") or f"{actor}:local")
 
 
@@ -600,11 +641,11 @@ def sign_event(event: dict[str, Any], config: dict[str, Any], *, root: Path | No
     secret = signing_secret(config, actor, root=root)
     if not secret:
         raise EventLogError(f"event auth signing key missing for actor: {actor}")
-    auth = agent_auth_config(config, actor)
+    auth = agent_auth_config(config, actor, root=root)
     signed = dict(event)
     signed["event_auth"] = {
         "method": str(auth.get("method") or (config.get("event_auth") or {}).get("method") or "hmac-sha256"),
-        "key_id": signing_key_id(config, actor),
+        "key_id": signing_key_id(config, actor, root=root),
         "signature": event_signature(signed, secret),
     }
     if str(auth.get("issuer") or "").strip():

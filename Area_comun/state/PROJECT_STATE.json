@@ -879,7 +879,7 @@
         {
             "id": "TASK-0195",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Core: event_auth.keys legibles desde runtime override (anadir firmante Analista sin re-genesis)"
         },
         {
