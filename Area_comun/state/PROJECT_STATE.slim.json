@@ -23,6 +23,12 @@
             "owner": "Analista",
             "status": "ready",
             "title": "GATE 1 - review adversarial del panel read-only F1 de Zeus-Aegis"
+        },
+        {
+            "id": "TASK-0200",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis GATE 1 remediation: V3 atestacion honesta, V4 PII todos los campos, V6 gate npm test fiable"
         }
     ],
     "next_actions": [
