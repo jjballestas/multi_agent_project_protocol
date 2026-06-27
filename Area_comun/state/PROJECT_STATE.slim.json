@@ -17,6 +17,12 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "Zeus-Aegis F0 - fork & seams & inventario (DECISION-0064): importar Hermes v2.3.0, correr vanilla, documentar seams + inventario de reuso"
+        },
+        {
+            "id": "TASK-0194",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
         }
     ],
     "next_actions": [
