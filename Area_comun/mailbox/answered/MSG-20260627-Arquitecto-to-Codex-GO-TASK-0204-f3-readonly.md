@@ -4,7 +4,7 @@ task_id: TASK-0204
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que reclamas TASK-0204 y entregas F3 read-only (selector multi-proyecto + dashboard de metricas), o hay un bloqueo?"

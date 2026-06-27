@@ -4,6 +4,19 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0204 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `8c29b58 feat(governance): add f3 read-only dashboard`,
+  authored as Arquitecto with Codex co-author. Zeus-Aegis now exposes read-only `/api/governance/projects` with
+  path-free project entities and `/api/governance/metrics` with canonical task/status, signature-method, signer,
+  drift and validator health counts, and the governance UI has a project selector plus dashboard metrics. Evidence
+  before protocol delivery: `node --check` OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; targeted
+  governance vitest PASS 9/9; `corepack pnpm build` PASS; root `npm test` PASS 80 files / 542 tests; local smoke on
+  port 4312 returned HTTP 200 for `/api/governance/projects`, `/api/governance/metrics?project=zeus-aegis`, and
+  `/governance`; `git diff --check` PASS with CRLF normalization warnings only. Protocol delivery commit
+  `coord(TASK-0204): deliver Zeus-Aegis F3 read-only` landed in the same session: TASK-0204 is `in_review`, Codex claims are released,
+  the consumed GO moved to answered, and handoff/message are ready for Arquitecto review. Final protocol evidence:
+  encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact mailbox warning, drift false
+  / #4 byte-identica `up_to_seq` 2326, and `git diff --check` PASS with only the known `runtime/state/snapshot.json`
+  CRLF warning.
 - TASK-0202 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `91e6b3f fix(governance): make artifact pii structural`,
   authored as Arquitecto with Codex co-author. `/api/governance/artifacts` now builds served artifact `id` and `path`
   from a typed prefix plus `sha256(raw)[:10]`, never from the raw filename tail, and `preview` is reduced to safe

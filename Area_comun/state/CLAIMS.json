@@ -10219,6 +10219,83 @@
             "updated_at": "2026-06-27T12:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0204-delivery",
+            "expires_at": "2026-06-28T23:05:00Z",
+            "notes": "Deliver TASK-0204 handoff, mailbox response, consumed GO move, and memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0204",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0204",
+                "Area_comun/tasks/TASK-0204-codex-zeus-aegis-f3-readonly.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0204-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0204-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0204-f3-readonly.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0204-f3-readonly.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T23:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T23:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0204-f3",
+            "expires_at": "2026-06-28T21:05:00Z",
+            "notes": "Implement Zeus-Aegis F3 read-only projects and metrics.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0204",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0204",
+                "Area_comun/tasks/TASK-0204-codex-zeus-aegis-f3-readonly.md",
+                "D:/Agentes/Zeus/Zeus-Aegis/src/",
+                "D:/Agentes/Zeus/Zeus-Aegis/tests/",
+                "D:/Agentes/Zeus/Zeus-Aegis/docs/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T21:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T21:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0204-go-answer",
+            "expires_at": "2026-06-28T23:14:00Z",
+            "notes": "Move consumed TASK-0204 GO to answered after delivery ledger is in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0204-f3-readonly.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0204-f3-readonly.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T23:14:00Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T23:14:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260627-Codex-TASK-0204-validator-fix",
+            "expires_at": "2026-06-28T23:20:00Z",
+            "notes": "Fix TASK-0204 review mailbox metadata for validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0204-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T23:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0204",
+            "updated_at": "2026-06-27T23:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-task0203-analista",
             "expires_at": "2026-06-28",
             "notes": "Analista adversarial final GATE 1 review for TASK-0203.",
