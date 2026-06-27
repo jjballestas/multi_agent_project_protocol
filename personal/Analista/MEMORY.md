@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-27 (TASK-0194 review Zeus-Aegis/baseline; CAMBIO-REQUERIDO; Analista ya firma #4).
+> Ultima actualizacion: 2026-06-27 (TASK-0201 re-GATE1 Zeus-Aegis; CAMBIO-REQUERIDO; V4 artifact-name PII slip).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0201 re-GATE1 (2026-06-27): CAMBIO-REQUERIDO / GATE 1 no cerrable. Veredicto commiteado en
+  `6a21845` (`review(TASK-0201): Analista blocks regate1`) con claim Analista firmado en #4
+  (`seq 2294` acquire, `seq 2295` release). Ancla protocolo/instruccion `45c90a7697b1f1ed89649a4894c77976bee26244`;
+  producto Zeus-Aegis `de7548b35c941a28c3def79a2650b107961271e5`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-1166132c0ff24a05b32336979f76383c`.
+  Full `npm test` en clean clone salio exit 0 dos veces; segunda corrida reporto 80 files / 540 tests.
+  V1 read-only y V2 canonical read pasan por probes propios; V3 validate/drift family pasa
+  (`red/green`, `green/red`, `red/red` -> failed; `green/green` -> verified); V5 auth fields y gates #4 pasan.
+  Bloqueo falsable: V4 sigue filtrando nombres personales en artifacts; filename
+  `john.doe@example.com Juan Perez Maria-Garcia` + body con heading antes de nombre devuelve `Maria-Garcia` crudo
+  en id/path/preview y deja `Perez` en preview por regex que cruza heading/salto de linea. Gates protocolo:
+  validate con secretos exit 0, validate sin secretos en clone exit 0, drift 0 `up_to_seq=2295`, neutrality/encoding
+  exit 0, `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. MSG a Arquitecto rr=true pide devolver a
+  Codex para hardening de redaccion de nombres en id/path/preview antes de cierre.
 - TASK-0199 (2026-06-27): CAMBIO-REQUERIDO / GATE 1 no cerrable. Veredicto commiteado en
   `b4b50e6` (`review(TASK-0199): Analista blocks gate1`) con claim Analista firmado en #4
   (`seq 2280`, release final `seq 2282-2283`; claim auxiliar `seq 2281` usado para cubrir release-scope
