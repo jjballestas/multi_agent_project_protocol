@@ -2,7 +2,7 @@
 task_id: TASK-0205
 title: "Zeus-Aegis F4a - endurecimiento del panel read-only: auth token + path-traversal + rate-limit en /api/governance/* + tests e2e del puente (DECISION-0064 F4.1/F4.2)"
 type: integration
-status: in_review
+status: changes_requested
 owner: Codex
 phase: P2
 priority: high
