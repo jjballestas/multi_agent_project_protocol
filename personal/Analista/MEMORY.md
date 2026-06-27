@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0203 GATE1 final (2026-06-27): OK/CERRABLE. Veredicto commiteado en `678ff84`
+  (`review(TASK-0203): Analista OK gate1 final`) con claim Analista firmado en #4
+  (`seq 2311` acquire, `seq 2312` release). Ancla protocolo/instruccion
+  `e82c91aae8689bec693c03b7f782d6ddb288637c`; producto Zeus-Aegis
+  `91e6b3f3e91c507ff321fad34d1250532730ec7d`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-3143fc0cf4244eafa31551d17989e0cc`.
+  Full `npm test` en clean clone salio exit 0. Probe propio V4 confirmo id/path/preview estructurales
+  sin email/nombres/texto libre para caso exacto `john.doe@example.com` + `Juan Perez` + `Maria-Garcia`
+  + heading; escapes nuevos con nombres con guion y prefijo desconocido tambien pasaron
+  (`ANALISTA-TASK-9998-3ab6d4145a`, `ARTIFACT-42cc3dd5ad`). V1/V2/V3/V5/V6 pasan:
+  endpoint family read-only, canonical read por `git show <ref>`, atestacion `red/green|green/red|red/red`
+  -> failed y `green/green` -> verified, auth fields `ed25519`/`hmac-sha256`. Gates protocolo:
+  validate con secretos exit 0, validate sin secretos en clone exit 0, drift 0 `up_to_seq=2312`,
+  neutrality/encoding exit 0, `protocol.config.json` sin diff contra HEAD y working sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`. MSG a Arquitecto rr=true pide
+  confirmar cierre de GATE 1.
 - TASK-0201 re-GATE1 (2026-06-27): CAMBIO-REQUERIDO / GATE 1 no cerrable. Veredicto commiteado en
   `6a21845` (`review(TASK-0201): Analista blocks regate1`) con claim Analista firmado en #4
   (`seq 2294` acquire, `seq 2295` release). Ancla protocolo/instruccion `45c90a7697b1f1ed89649a4894c77976bee26244`;
