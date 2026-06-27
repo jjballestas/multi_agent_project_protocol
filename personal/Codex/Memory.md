@@ -13,7 +13,14 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   tests remain outside the F0 green claim until fixed, removed, or separately waived before any later governance
   dependency. Evidence: local root `npm test` PASS (`79` files / `533` tests); clean local clone root `npm test` PASS
   with exit 0; `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` and
-  `node --check vendor/hermes-2.3.0/server-entry.js` OK. TASK-0193 protocol delivery is still pending in this session.
+  `node --check vendor/hermes-2.3.0/server-entry.js` OK. Protocol delivery commit landed as
+  `676dabe coord(TASK-0193): deliver build remediation`: TASK-0193 is back in `in_review`, Codex claims are released,
+  the consumed GO moved to `Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0193-fix-build.md`,
+  and the review artifacts are `Area_comun/handoffs/HANDOFF-TASK-0193-codex-to-arquitecto-build-fix.md` plus
+  `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0193-build-fix-in-review.md`. Final protocol evidence
+  before delivery commit: encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact
+  mailbox warning, PowerShell validator OK with the same warning, drift false / #4 byte-identica `up_to_seq` 2229, and
+  `git diff --check` PASS with only the known CRLF normalization warning for `runtime/state/snapshot.json`.
 - TASK-0195 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `affb5cd feat(runtime): allow event auth override`. The runtime override reader is now generalized to
   `event_state` while preserving the existing `EVENT_STATE_RUNTIME_CONFIG_PATH` / `event-state.runtime.json`
