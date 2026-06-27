@@ -4,6 +4,16 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0193 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `a0e3c64 fix(f0): add reproducible Zeus-Aegis test gate`, authored as Arquitecto with Codex co-author. The
+  product root now has an `npm test` F0 wrapper that installs the pinned Hermes vendor snapshot and runs a bounded
+  reproducibility suite through `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`. The vendor snapshot now records
+  the pnpm build-script allowlist in `pnpm-workspace.yaml`, preventing clean installs from failing on ignored
+  build scripts. `docs/SEAMS.md` documents the bounded F0 waiver: 11 upstream Hermes test files / 24 failing upstream
+  tests remain outside the F0 green claim until fixed, removed, or separately waived before any later governance
+  dependency. Evidence: local root `npm test` PASS (`79` files / `533` tests); clean local clone root `npm test` PASS
+  with exit 0; `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` and
+  `node --check vendor/hermes-2.3.0/server-entry.js` OK. TASK-0193 protocol delivery is still pending in this session.
 - TASK-0195 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `affb5cd feat(runtime): allow event auth override`. The runtime override reader is now generalized to
   `event_state` while preserving the existing `EVENT_STATE_RUNTIME_CONFIG_PATH` / `event-state.runtime.json`

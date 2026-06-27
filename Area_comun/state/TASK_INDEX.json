@@ -2984,7 +2984,7 @@
             "priority": "high",
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
-            "status": "changes_requested",
+            "status": "in_review",
             "title": "Zeus-Aegis F0 - fork & seams & inventario (DECISION-0064): importar Hermes v2.3.0, correr vanilla, documentar seams + inventario de reuso",
             "type": "discovery"
         },
