@@ -26,6 +26,8 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
   `Area_comun/mailbox/open/MSG-20260627-Codex-to-Arquitecto-TASK-0192-in-review.md`. Final evidence before
   delivery commit: actor_auth golden PASS 6/6; encoding OK; neutrality OK; Python validator OK; PowerShell validator
   OK; drift false / #4 byte-identica `up_to_seq` 2174.
+- Follow-up coordination commit `c9da07d coord(TASK-0192): remove consumed GO from open mailbox` staged the deletion
+  side of the GO move so the consumed TASK-0192 GO exists only under `Area_comun/mailbox/answered/`.
 - TASK-0191 implementation commit landed in `D:/Agentes/multi_agent_project_protocol`:
   `5f2d246 feat(research): add H1-H3 experiment harness`. The protocol now ships
   `research/experiment_h1h3/` with a reproducible H1-H3 research harness that operates only on disposable
