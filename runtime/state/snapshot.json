@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8692c6b8c7f84bc688bb620e643e62768aefdd991bd4ca552751fbd670acfec0",
+  "canonical_hash": "afbb3270e46e15ec5818ba6a72a5462c1ccf99c1025af43048d8ef558646334f",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -344,6 +344,7 @@
       "CLAIM-20260627-Arquitecto-decision-0064-task-0193": 1,
       "CLAIM-20260627-Arquitecto-flip-a2": 1,
       "CLAIM-20260627-Arquitecto-harness-h1h3": 1,
+      "CLAIM-20260627-Arquitecto-measure-baseline": 1,
       "CLAIM-20260627-Codex-TASK-0191": 1,
       "CLAIM-20260627-Codex-TASK-0191-code": 1,
       "CLAIM-20260627-Codex-TASK-0191-delivery": 1,
@@ -380,7 +381,7 @@
       "DECISION-0063": 3,
       "DECISION-0064": 4,
       "DECISION-0065": 2,
-      "DECISION-0066": 1,
+      "DECISION-0066": 2,
       "DECISION-0067": 1,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE-20260620": 2,
@@ -487,7 +488,7 @@
       "MSG-20260625-Arquitecto-to-Analista-REVIEW-TASK-0177": 1,
       "MSG-20260625-Codex-to-Arquitecto-REQ-003AE958-reconciled": 1,
       "MSG-20260625-Codex-to-Arquitecto-TASK-0177-in-review": 1,
-      "PROJECT_STATE": 4,
+      "PROJECT_STATE": 5,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
       "REQ-003AE958": 8,
@@ -621,7 +622,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1519,
+    "events_applied": 1522,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1149,6 +1150,9 @@
       "arquitecto:mailbox-cleanup:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0167-in-review": 1654,
       "arquitecto:mailbox-cleanup:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0168-in-review": 1655,
       "arquitecto:mailbox-cleanup:rel": 1656,
+      "arquitecto:measure-baseline:claim-acquire": 2191,
+      "arquitecto:measure-baseline:claim-release": 2193,
+      "arquitecto:measure-baseline:narrative": 2192,
       "arquitecto:promote-0132:claim-acquire": 802,
       "arquitecto:promote-0132:claim-release": 804,
       "arquitecto:promote-0132:task-upsert-ready": 803,
@@ -2144,5 +2148,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2190
+  "up_to_seq": 2193
 }

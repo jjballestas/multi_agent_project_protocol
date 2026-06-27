@@ -9215,6 +9215,22 @@
             "updated_at": "2026-06-27T00:56:00Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arquitecto-measure-baseline",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Fijar y atestar el measurement baseline (commit core + A2 vivo + N=500) antes de generar/medir el dataset.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-27T13:04:27Z",
+            "status": "released",
+            "task_id": "DECISION-0066",
+            "updated_at": "2026-06-27T13:04:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Codex-TASK-0190",
             "expires_at": "2026-06-28T00:00:00Z",
             "notes": "TASK-0190 actor_auth Ed25519 off-by-default implementation.",
