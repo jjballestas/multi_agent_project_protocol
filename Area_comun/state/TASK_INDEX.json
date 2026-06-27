@@ -3128,6 +3128,24 @@
             "type": "review"
         },
         {
+            "author": "Arquitecto",
+            "checker": "Arquitecto",
+            "created_at": "2026-06-27",
+            "endorsement": "none",
+            "file": "Area_comun/tasks/TASK-0202-codex-zeus-aegis-v4-pii-structural.md",
+            "id": "TASK-0202",
+            "maker": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "Zeus-Aegis",
+            "relayed_by": "Arquitecto",
+            "spec_id": "SPEC-0107",
+            "status": "ready",
+            "title": "Zeus-Aegis V4 PII por construccion: id/path estructurados + preview seguro + test permanente",
+            "type": "integration"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

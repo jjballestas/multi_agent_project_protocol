@@ -9179,6 +9179,21 @@
             "updated_at": "2026-06-27T19:42:57Z"
         },
         {
+            "claim_id": "CLAIM-20260627-Arq-task0202",
+            "expires_at": "2026-06-28T00:00:00Z",
+            "notes": "Crear TASK-0202 (V4 PII estructural) + GO.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json"
+            ],
+            "started_at": "2026-06-27T20:02:24Z",
+            "status": "released",
+            "task_id": "TASK-0202",
+            "updated_at": "2026-06-27T20:02:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260627-Arquitecto-a2-camino-b",
             "expires_at": "2026-06-27T06:00:00Z",
             "notes": "Register DECISION-0065 accepted (A2 vivo Camino B: submit_intent firma actor_auth Ed25519, off-by-default) + TASK-0190 ready/Codex (SPEC-0103). Operador eligio Camino B. Build off-by-default; activacion viva = ventana del operador aparte.",

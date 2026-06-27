@@ -919,6 +919,12 @@
             "title": "re-GATE 1 - review del panel read-only F1 remediado"
         },
         {
+            "id": "TASK-0202",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis V4 PII por construccion: id/path estructurados + preview seguro + test permanente"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
