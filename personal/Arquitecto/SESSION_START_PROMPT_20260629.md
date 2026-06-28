@@ -43,13 +43,21 @@ F4a auth/path-traversal/rate-limit endurecido. **F2 (Operate/write-through) GATE
 - **Aclaracion gateway/marca:** los comandos `HERMES_API_URL`/`hermes setup`/`hermes gateway run`/install NousResearch son el
   binario REAL = KEEP (renombrar = deshonesto/roto). Cablear el gateway SI contaminaria TFM; panel read-only NO contamina.
 
-## FOCO AL REANUDAR: COLA VACIA. Preguntar al operador que sigue.
-Candidatos restantes del fork (operador decide; SDD Codex maker / Arquitecto checker / Analista adversarial donde aplique):
-1. **Reusar el conductor de Hermes** para lanzar/parar agentes desde la UI (en vez de crons a mano). Necesita mini-diseno de
-   frontera primero (cruza el gate post-TFM? lanzar runtime != writer-path al ledger). Hermes ya tiene `conductor-spawn/stop.ts` + hooks.
-3. **Retirar bloat:** aislar/quitar el subsistema de juego 3D (three/fiber/rapier) + Electron. Solapa con la familia de los 24 fallos (no-panel).
-5. **F3 chat** (shim runtime), **F3.5 PWA/movil**, **F4.3 versionado/CHANGELOG del fork**.
-- F2 sigue gateado post-TFM. NO tocar core del protocolo ni baseline congelado.
+## FOCO AL REANUDAR: 2 TAREAS ENCOLADAS (usabilidad del panel). Relanzar crons + GO.
+El operador eligio "entender/observar la metodologia" con el panel. Decidido: NO recortar Hermes (destruiria el
+reuso, DECISION-0064; el operador lo confirmo) y NO arrancar NOVA todavia (gateado PII/DB; el fork sirve de proyecto
+primario read-only sin contaminar). El panel FUNCIONA pero es lento y las vistas no son usables -> 2 SDD READY:
+- **TASK-0209 (high, ready/Codex):** performance del panel -- cachear validate/drift (health 7.8s) + acelerar /state
+  (>30s timeout) a <2s, preservando el chip HONESTO (derivado de validacion real, no hardcodeado).
+- **TASK-0210 (high, ready/Codex):** UX de las 6 vistas (Backlog/Mailbox/Artifacts/Decisiones/Ledger-atestacion/
+  Handoffs) -- acordeones COLAPSADOS por defecto + recientes+"mostrar mas"; filtros legibles (combos honran tema
+  oscuro -- hoy texto gris ilegible); Mailbox con filtros; Artifacts con combo por tipo.
+Ambas read-only, no contaminan TFM. Maker Codex / checker Arquitecto -- **verificar con RENDER HEADLESS + screenshot**
+(Playwright + chrome del sistema via NODE_PATH al vendor; ver [[checker-verify-rendered-not-just-text]]).
+Secuencia: relanzar cron Codex (pedir permiso al operador) -> GO TASK-0209 -> checker -> GO TASK-0210 -> checker.
+
+Candidatos POSTERIORES del fork (operador decide): reusar conductor Hermes (lanzar agentes desde UI; mini-diseno de
+frontera primero); retirar bloat 3D+Electron; F3 chat/PWA; F4.3 versionado. F2 (operate) gateado post-TFM. NOVA gateado PII/DB.
 
 ## Lecciones/gotchas de la sesion (memoria)
 - submit_intent: task file necesita frontmatter YAML; mailbox GO/handoff necesita `status:`+folder casan; rr=true exige
