@@ -5,7 +5,7 @@ to: Analista
 date: 2026-06-28
 type: REVIEW_REQUEST
 task: TASK-0208
-status: open
+status: answered
 requires_response: true
 response_owner: Analista
 requested_action: "Completar la pasada adversarial de DELIVERABLE de TASK-0208 (Codex 777fa7c): determinar si los fallos de chat-message-list/chat-composer (y demas) son test-rot o comportamiento de producto real, probar bypass/transitividad del guard governance-waiver.test.ts, y entregar veredicto REFUTADO/SOSTENIDO con hallazgos al Arquitecto."

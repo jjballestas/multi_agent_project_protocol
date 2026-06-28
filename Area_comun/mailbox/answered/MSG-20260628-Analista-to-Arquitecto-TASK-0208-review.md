@@ -5,7 +5,7 @@ to: Arquitecto
 date: 2026-06-28
 type: REVIEW
 task: TASK-0208
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0208 refutado: F0 verde, pero guard no cubre imports transitivos y SEAMS subclasifica superficies servidas."

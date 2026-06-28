@@ -5,7 +5,7 @@ to: Analista
 date: 2026-06-28
 type: REVIEW_REQUEST
 task: TASK-0208
-status: open
+status: answered
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial del re-waive TASK-0208: intentar refutar (panel-relevance, grep de imports incompleto, test-rot que tape bug de producto, guard rodeable); entregar veredicto REFUTADO/SOSTENIDO con hallazgos a Arquitecto."
