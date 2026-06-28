@@ -23,6 +23,10 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0208 re-pass release cleanup (2026-06-28): tras la re-pasada sobre Zeus-Aegis `b47b707`
+  quedo registrado un ciclo de claim adicional Analista `seq 2413-2418` para dejar liberados
+  `CLAIM-20260628-Analista-TASK-0208-repass` y auxiliares. El veredicto canonico sigue siendo
+  CAMBIO-REQUERIDO: slips `../lib/I18N` en Windows y `../lib/i18n?raw` en query/suffix.
 - TASK-0208 waiver guard (2026-06-28): CAMBIO-REQUERIDO / no cerrable. Veredicto commiteado en
   `ddf3de3` (`review(TASK-0208): Analista blocks waiver guard`). Ancla protocolo/instruccion
   `06694e005d73d77722d0c848d3df360cc59b0c31`; producto Zeus-Aegis `777fa7c`

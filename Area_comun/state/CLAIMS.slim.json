@@ -1,16 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass",
-            "owner": "Analista",
-            "task_id": "TASK-0208"
-        },
-        {
-            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass-release",
-            "owner": "Analista",
-            "task_id": "TASK-0208"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

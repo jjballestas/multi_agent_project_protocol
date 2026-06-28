@@ -10440,14 +10440,29 @@
         {
             "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass",
             "owner": "Analista",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0208"
         },
         {
             "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass-release",
             "owner": "Analista",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0208"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass-release2",
+            "expires_at": "2026-06-29T23:59:59Z",
+            "notes": "Auxiliary claim to release TASK-0208 re-pass claims.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T15:06:03Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T15:06:03Z"
         },
         {
             "claim_id": "CLAIM-20260628-Analista-TASK-0208-review",
