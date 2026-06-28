@@ -13,7 +13,14 @@ Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
   `server-entry.js`, `scripts/governance-bridge-smoke.mjs`, and `scripts/zeus-aegis-f0-test.mjs`; clean-dist
   proof removed `vendor/hermes-2.3.0/dist` and reran the literal `corepack pnpm --dir . governance:smoke`
   from the vendor directory with exit 0 after `pnpm build`; root `npm test` PASS 82 files / 553 tests;
-  product `git diff --check` PASS with CRLF normalization warnings only.
+  product `git diff --check` PASS with CRLF normalization warnings only. Protocol commit
+  `acfedf8 coord(TASK-0209): deliver smoke gate fix` moved TASK-0209 back to `in_review`, released all Codex
+  TASK-0209 review-fix claims, moved the consumed review message to answered, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0209-review-fix-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0209-codex-to-arquitecto-2.md`. Final protocol evidence before commit:
+  encoding OK, neutrality OK, validator OK with the pre-existing TASK-0193 compact-mailbox warning plus
+  existing non-response archive suggestion, drift false / #4 byte-identica `up_to_seq` 2474, and
+  `git diff --check` PASS with the known `runtime/state/snapshot.json` CRLF warning.
 - TASK-0209 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `3f8461e fix(governance): cache panel health and state`,
   authored as Arquitecto with Codex co-author. `/api/governance/health` now caches real validate/drift results
   by canonical HEAD with a 45s TTL, preserves `checkedAt`, and supports explicit `?refresh=1`; the UI shows
