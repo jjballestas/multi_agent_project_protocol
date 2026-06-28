@@ -2,7 +2,7 @@
 task_id: TASK-0209
 title: "Zeus-Aegis: performance del panel governance (cachear validate/drift, acelerar /state) (DECISION-0064)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -58,14 +58,6 @@
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
         },
         {
-            "id": "TASK-0209",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Zeus-Aegis: performance del panel governance (cachear validate/drift, acelerar /state) (DECISION-0064)"
-        },
-        {
             "id": "TASK-0210",
             "owner": "Codex",
             "phase": "P2",

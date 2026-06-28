@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-close-0209",
+          "task_id": "TASK-0209",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0209-codex-zeus-aegis-panel-performance.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T02:00:00Z",
+          "updated_at": "2026-06-29T02:00:00Z",
+          "expires_at": "2026-06-29T08:00:00Z",
+          "status": "active",
+          "notes": "Close TASK-0209 in_review->done (checker Arquitecto, maker=Codex). Performance del panel governance (Zeus-Aegis 9ad1fad). Cache de health (validate/drift real, TTL 45s, invalidacion por HEAD, ?refresh=1 re-corre real) + cache de state (TTL 60s) + UI Verified-Ns-ago + Refresh. Checker: health cacheado 19ms, refresh real ~3s, state cacheado 30ms, chip honesto (validateExitCode:0 real, tri-estado, no hardcodeado), f0-test 553 PASS. Regresion isolada vs HEAD~1: chip unknown del render = PRE-EXISTENTE (dev sin gateway), NO de 0209. Review adversarial Analista (TASK-0211): V1-V4 SOSTIENEN; unico bloqueo AC3 (governance:smoke no reproducible en clon limpio por dist/ gitignored) REMEDIADO por Codex (pregovernance:smoke=pnpm build, self-contained) -> tras rm dist el comando literal sale exit 0 reconstruyendo (1 ECONNRESET transitorio del smoke harness pre-existente, self-heal en retry). Sin writer-path; core/baseline TFM intactos."
+        },
+        "idempotency_key": "arquitecto:close-0209:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0209",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0209:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-close-0209",
+        "idempotency_key": "arquitecto:close-0209:claim-release"
+      }
+    }
+  ]
+}
