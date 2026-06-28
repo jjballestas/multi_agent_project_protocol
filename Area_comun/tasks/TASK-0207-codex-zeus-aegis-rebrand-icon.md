@@ -2,7 +2,7 @@
 task_id: TASK-0207
 title: "Zeus-Aegis: rebrand visible Hermes->Zeus-Aegis + icono propio (DECISION-0064)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: medium

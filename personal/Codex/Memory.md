@@ -4,6 +4,32 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0207 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `01b2002 feat(brand): rebrand visible Zeus-Aegis surfaces`,
+  authored as Arquitecto with Codex co-author. The vendored Hermes front now shows Zeus-Aegis Workspace on root title,
+  login, onboarding, welcome/empty, mobile setup, dashboard/header, and settings brand surfaces; gateway-facing labels
+  are neutral Agent Gateway while `HERMES_API_URL`, `HERMES_API_TOKEN`, package names, import paths, and
+  `hermes gateway run` remain unchanged. The Zeus-Aegis aegis/lightning mark is wired into manifest/icon slots
+  including favicon, apple-touch, claude-icon 192/512, logo-icon, claude-avatar, and compatibility HermesWorld assets.
+  Evidence before protocol delivery: `node --check server-entry.js` OK; `node --check scripts/zeus-aegis-f0-test.mjs`
+  OK; root `npm test` PASS 81 files / 546 tests; `corepack pnpm --dir vendor/hermes-2.3.0 governance:smoke` PASS;
+  local Vite smoke on `127.0.0.1:4317` via system Chrome showed title `Zeus-Aegis Workspace`, body includes
+  `Zeus-Aegis`, and no `Hermes Workspace` / `Hermes Agent` in the root onboarding sample. `git diff --check` passed
+  with CRLF normalization warnings only.
+  Protocol delivery commit `a0d24de coord(TASK-0207): deliver Zeus-Aegis rebrand` moved TASK-0207 to `in_review`,
+  released all Codex TASK-0207 claims, moved the consumed GO to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0207-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0207-codex-to-arquitecto-1.md`. Final protocol evidence before amend:
+  encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact-mailbox warning, drift
+  false / #4 byte-identica `up_to_seq` 2389, and `git diff --check` PASS with only the known
+  `runtime/state/snapshot.json` CRLF warning.
+- Protocol commit `8181dd4 coord(TASK-0206): answer consumed GO` moved the consumed
+  `MSG-20260628-Arquitecto-to-Codex-GO-TASK-0206.md` from open to answered after TASK-0206 was already delivered
+  to `in_review`. The short-lived Codex claim `CLAIM-20260628-Codex-answer-TASK-0206-GO` was acquired/released
+  through `runtime/submit_intent.py`; final drift was false at `up_to_seq` 2378. Validation evidence before commit:
+  encoding OK, neutrality OK, Python validator OK with the pre-existing TASK-0193 compact-mailbox warning, and
+  `git diff --check` PASS with only the known `runtime/state/snapshot.json` CRLF warning. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` stayed clean and untouched; TASK-0206 product work remains in
+  `D:/Agentes/Zeus/Zeus-Aegis` commit `b9a8a28`.
 - TASK-0206 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `b9a8a28 fix(dev): make Hermes scripts Windows-safe`, authored as Arquitecto with Codex co-author. The vendored
   Hermes scripts `dev`, `start`, `start:dev`, and `electron:dev` now use `cross-env`; `cross-env` is recorded as a
