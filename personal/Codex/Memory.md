@@ -4,6 +4,17 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0206 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `b9a8a28 fix(dev): make Hermes scripts Windows-safe`, authored as Arquitecto with Codex co-author. The vendored
+  Hermes scripts `dev`, `start`, `start:dev`, and `electron:dev` now use `cross-env`; `cross-env` is recorded as a
+  direct devDependency in `package.json` and `pnpm-lock.yaml`; `docs/SEAMS.md` documents the intentional Windows
+  dev-script fork delta. Evidence before protocol delivery: `node --check server-entry.js` OK; `node --check
+  scripts/zeus-aegis-f0-test.mjs` OK; frozen install OK; vendor `corepack pnpm test` PASS 81 files / 546 tests; root
+  `npm test` PASS 81 files / 546 tests; `pnpm dev --host 127.0.0.1` served `/governance` HTTP 200 through `cross-env`;
+  `pnpm start:dev --host 127.0.0.1` served `/governance` HTTP 200 through `cross-env`; `pnpm electron:dev` invoked
+  `cross-env NODE_ENV=development electron .` and then failed on pre-existing Electron runtime debt, not Windows env
+  syntax. Protocol delivery handoff is `Area_comun/handoffs/HANDOFF-TASK-0206-codex-to-arquitecto-1.md`; review
+  message is `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0206-in-review.md`.
 - TASK-0205 changes_requested remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `d106b95 fix(governance): stabilize security gate`, authored as Arquitecto with Codex co-author. The F0 gate no
   longer boots the full server in `governance-security.test.ts`; it keeps direct auth/path/rate-limit coverage and

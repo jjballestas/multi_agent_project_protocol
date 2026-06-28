@@ -2,7 +2,7 @@
 task_id: TASK-0206
 title: "Zeus-Aegis: dev script Windows-safe (cross-env) - fix pnpm dev en Windows (DECISION-0064)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

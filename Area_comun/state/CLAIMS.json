@@ -10573,6 +10573,70 @@
             "updated_at": "2026-06-28T01:03:00Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0206",
+            "expires_at": "2026-06-28T23:59:00Z",
+            "notes": "Implement TASK-0206 Zeus-Aegis Windows-safe dev scripts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0206",
+                "Area_comun/state/TASK_INDEX.json#TASK-0206",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0206",
+                "Area_comun/tasks/TASK-0206-codex-zeus-aegis-dev-script-windows-safe.md"
+            ],
+            "started_at": "2026-06-28T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0206",
+            "updated_at": "2026-06-28T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0206-delivery",
+            "expires_at": "2026-06-28T23:59:00Z",
+            "notes": "Deliver TASK-0206 handoff and mailbox coordination.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0206-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0206",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0206",
+                "Area_comun/tasks/TASK-0206-codex-zeus-aegis-dev-script-windows-safe.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0206-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0206-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0206.md",
+                "Area_comun/mailbox/archived/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0206.md"
+            ],
+            "started_at": "2026-06-28T00:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0206",
+            "updated_at": "2026-06-28T00:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0206-encoding",
+            "expires_at": "2026-06-28T23:59:00Z",
+            "notes": "ASCII hygiene for consumed TASK-0206 GO message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0206-encoding",
+                "Area_comun/mailbox/open/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0206.md"
+            ],
+            "started_at": "2026-06-28T00:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0206",
+            "updated_at": "2026-06-28T00:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0206-encoding2",
+            "expires_at": "2026-06-28T23:59:00Z",
+            "notes": "Final ASCII hygiene for consumed TASK-0206 GO message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0206-encoding2",
+                "Area_comun/mailbox/open/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0206.md"
+            ],
+            "started_at": "2026-06-28T00:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0206",
+            "updated_at": "2026-06-28T00:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

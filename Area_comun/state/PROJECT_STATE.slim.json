@@ -45,7 +45,7 @@
         {
             "id": "TASK-0206",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis: dev script Windows-safe (cross-env) - fix pnpm dev en Windows (DECISION-0064)"
         },
         {
