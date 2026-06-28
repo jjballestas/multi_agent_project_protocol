@@ -53,7 +53,8 @@
       "Bash(powershell -NoProfile -File scripts/validate_collaboration_state.ps1:*)",
       "Bash(powershell -NoProfile -File scripts\\validate_collaboration_state.ps1:*)",
       "Bash(powershell -NoProfile -File scripts/new_instance.ps1:*)",
-      "Bash(powershell -NoProfile -File scripts\\new_instance.ps1:*)"
+      "Bash(powershell -NoProfile -File scripts\\new_instance.ps1:*)",
+      "Bash(taskkill:*)"
     ],
     "ask": [
       "Bash(git reset:*)",
