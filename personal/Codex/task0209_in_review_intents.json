@@ -1,0 +1,19 @@
+{
+  "idempotency_key": "codex:task0209-panel-performance:in-review-tx",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0209",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260629-Codex-TASK-0209",
+      "task_id": "TASK-0209",
+      "owner": "Codex",
+      "updated_at": "2026-06-29T00:45:00Z"
+    }
+  ]
+}

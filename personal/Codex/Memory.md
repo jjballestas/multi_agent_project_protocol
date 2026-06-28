@@ -4,6 +4,22 @@ Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
 
 ## Latest Session Note
 
+- TASK-0209 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `3f8461e fix(governance): cache panel health and state`,
+  authored as Arquitecto with Codex co-author. `/api/governance/health` now caches real validate/drift results
+  by canonical HEAD with a 45s TTL, preserves `checkedAt`, and supports explicit `?refresh=1`; the UI shows
+  "Verified Ns ago" plus a Refresh button. `/api/governance/state` now caches the canonical slim state snapshot
+  by HEAD with a 60s TTL. Permanent coverage proves cached health reuses the real `checkedAt` and keeps
+  validator/drift tri-state honesty. Product evidence before protocol delivery: `node --check` OK for
+  `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; root `npm test` PASS 82 files / 553 tests;
+  `governance:smoke` PASS; measured direct helper timings: health forced refresh 2807ms, health cached 25ms,
+  state cold 50ms, state cached 23ms, validator green and drift green; `git diff --check` PASS with CRLF
+  normalization warnings only. Protocol delivery moved TASK-0209 to `in_review`, released
+  `CLAIM-20260629-Codex-TASK-0209`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0209-in-review.md`, and added handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0209-codex-to-arquitecto-1.md`. Final protocol evidence before delivery
+  commit: encoding OK, neutrality OK, validator OK with the pre-existing TASK-0193 compact-mailbox warning plus
+  existing non-response archive suggestion, drift false / #4 byte-identica `up_to_seq` 2457, and `git diff --check`
+  PASS with the known `runtime/state/snapshot.json` CRLF warning.
 - TASK-0208 REVIEW3 fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `8d2ff50 test(f0): decode waiver guard specifiers`, authored as Arquitecto with Codex co-author.
   `governance-waiver.test.ts` now decodes import specifiers with `decodeURIComponent` before stripping
