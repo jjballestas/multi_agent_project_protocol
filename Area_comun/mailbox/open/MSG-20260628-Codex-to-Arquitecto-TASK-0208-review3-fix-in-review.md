@@ -9,6 +9,7 @@ status: open
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Review TASK-0208 REVIEW3 fix and coordinate Analista re-pass; close only if maker/checker/adversarial gates pass."
+question: "Puedes revisar la entrega REVIEW3 y coordinar el re-pass final de Analista para cerrar TASK-0208 si el guard queda sostenido?"
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-4.md
   - D:/Agentes/Zeus/Zeus-Aegis@8d2ff50

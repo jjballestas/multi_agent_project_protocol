@@ -15,7 +15,12 @@ Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
   and `scripts/zeus-aegis-f0-test.mjs`; targeted waiver guard PASS 1 file / 6 tests; root `npm test`
   PASS 82 files / 552 tests; `governance:smoke` PASS; product `git diff --check` PASS with CRLF
   normalization warnings only. Protocol delivery handoff prepared:
-  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-4.md`.
+  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-4.md`. Arquitecto concurrently committed
+  the main protocol reconciliation as `e1c1170`; Codex then committed `781f574 fix(TASK-0208): add
+  review3 response question` to add the missing compact mailbox `question` field and release the
+  short-lived message-fix claim. Final protocol evidence before `781f574`: encoding OK, neutrality OK,
+  validator OK with the pre-existing TASK-0193 compact-mailbox warning, drift false / #4 byte-identica
+  `up_to_seq` 2440, and `git diff --check` PASS with the known `runtime/state/snapshot.json` CRLF warning.
 - TASK-0208 REVIEW2 fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `52f0d5e test(f0): normalize waiver guard imports`, authored as Arquitecto with Codex co-author.
   `governance-waiver.test.ts` now strips `?` / `#` suffixes from import specifiers before path resolution,

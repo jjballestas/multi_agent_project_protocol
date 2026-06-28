@@ -10999,6 +10999,22 @@
             "updated_at": "2026-06-28T18:16:00Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0208-review3-message-question",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Add compact mailbox question field required by validator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-review3-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T18:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T18:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260628-Codex-answer-TASK-0206-GO",
             "expires_at": "2026-06-29T00:00:00Z",
             "notes": "Move consumed TASK-0206 GO to answered after delivered ledger state.",
