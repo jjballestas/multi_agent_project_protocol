@@ -961,6 +961,18 @@
             "title": "Zeus-Aegis: afinar el waiver de los 24 fallos upstream (per-archivo, justificado, enforced) (DECISION-0064)"
         },
         {
+            "id": "TASK-0209",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis: performance del panel governance (cachear validate/drift, acelerar /state) (DECISION-0064)"
+        },
+        {
+            "id": "TASK-0210",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis: UX de las vistas del panel (desplegables colapsadas, recientes+mostrar mas, filtros legibles) (DECISION-0064)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
