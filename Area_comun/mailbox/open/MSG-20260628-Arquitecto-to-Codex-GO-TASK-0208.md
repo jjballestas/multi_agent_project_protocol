@@ -15,7 +15,7 @@ Codex: arranca **TASK-0208** (maker). Spec autocontenido (con triage + evidencia
 `Area_comun/tasks/TASK-0208-codex-zeus-aegis-upstream-waiver-sharpen.md`.
 
 Decision del operador: NO arreglar los 24 (test-rot upstream en superficies no-panel) -> **re-waive
-afinado**. Entregable: (1) `docs/SEAMS.md` §F0 Test Waiver como tabla por-archivo (11, conteos=24/68,
+afinado**. Entregable: (1) `docs/SEAMS.md` F0 Test Waiver como tabla por-archivo (11, conteos=24/68,
 categoria, independencia del panel + triggers de re-evaluacion); (2) `excludedUpstreamFiles` anotado
 por archivo (misma lista de 11); (3) **guard enforced**: un test en el run f0 verde que FALLA si el
 panel governance importa una superficie waiveada (fail-closed; incluir prueba de que rompe al forzar un
