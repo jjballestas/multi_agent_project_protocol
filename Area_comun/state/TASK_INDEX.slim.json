@@ -62,7 +62,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "changes_requested",
+            "status": "in_review",
             "title": "Zeus-Aegis F4a - endurecimiento read-only: auth + path-traversal + rate-limit + e2e"
         }
     ],

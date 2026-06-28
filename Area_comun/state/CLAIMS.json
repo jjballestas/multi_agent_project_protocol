@@ -10423,6 +10423,118 @@
             "updated_at": "2026-06-27T20:34:30Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-answer-bom-fix",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Remove UTF-8 BOM introduced while marking consumed TASK-0205 GO answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-answer-bom-fix",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T01:02:00Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-28T01:02:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-answer-go-status",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Mark consumed TASK-0205 GO as answered after delivery ledger.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-answer-go-status",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T01:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-28T01:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-fix-changes",
+            "owner": "Codex",
+            "status": "released",
+            "task_id": "TASK-0205"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-fix-changes-2",
+            "owner": "Codex",
+            "status": "released",
+            "task_id": "TASK-0205"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-fix-changes-3",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Exact-scope claim for TASK-0205 changes_requested rework.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-fix-changes",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-fix-changes-2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-fix-changes-3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0205",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0205",
+                "Area_comun/tasks/TASK-0205-codex-zeus-aegis-f4a-security.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0205-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0205-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-security.test.ts",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.ts"
+            ],
+            "started_at": "2026-06-28T00:43:00Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-28T00:43:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-fix-changes-4",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Supplemental product-file scope for TASK-0205 non-gate smoke script.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-fix-changes-4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0205",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0205",
+                "Area_comun/tasks/TASK-0205-codex-zeus-aegis-f4a-security.md",
+                "Area_comun/mailbox/open/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "Area_comun/mailbox/answered/MSG-20260627-Arquitecto-to-Codex-GO-TASK-0205-fix-changes.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0205-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0205-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-security.test.ts",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.ts",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/governance-bridge-smoke.mjs",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/package.json"
+            ],
+            "started_at": "2026-06-28T00:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-28T00:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0205-message-fix",
+            "expires_at": "2026-06-29T00:00:00Z",
+            "notes": "Fix TASK-0205 review mailbox schema requested_action.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260628-Codex-TASK-0205-message-fix",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0205-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T01:03:00Z",
+            "status": "released",
+            "task_id": "TASK-0205",
+            "updated_at": "2026-06-28T01:03:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

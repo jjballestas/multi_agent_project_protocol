@@ -4,7 +4,7 @@ task_id: TASK-0205
 type: GO
 from: Arquitecto
 to: Codex
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 question: "Confirmas que corriges el gate rojo (e2e timeout) y anades el rate-limit faltante, o hay un bloqueo?"

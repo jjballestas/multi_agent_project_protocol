@@ -4,6 +4,21 @@ Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
 
 ## Latest Session Note
 
+- TASK-0205 changes_requested remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `d106b95 fix(governance): stabilize security gate`, authored as Arquitecto with Codex co-author. The F0 gate no
+  longer boots the full server in `governance-security.test.ts`; it keeps direct auth/path/rate-limit coverage and
+  verifies the server entrypoint still wires auth, method rejection, traversal rejection, and 429 rate-limit handling.
+  The full bridge boot check moved to non-gate `npm --prefix vendor/hermes-2.3.0 run governance:smoke` via
+  `scripts/governance-bridge-smoke.mjs`. Evidence before delivery: `node --check server-entry.js` OK;
+  `node --check scripts/governance-bridge-smoke.mjs` OK; targeted governance-security vitest PASS 4/4; root
+  `npm test` PASS twice, both 81 files / 546 tests; non-gate governance smoke PASS; `git diff --check` PASS with
+  CRLF normalization warnings only. Protocol delivery in the same session moved TASK-0205 back to `in_review`,
+  released Codex claims, moved the consumed changes-requested GO to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0205-fix-in-review.md` with handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0205-codex-to-arquitecto-2.md`. Final protocol evidence: encoding OK,
+  neutrality OK, Python validator OK with the pre-existing TASK-0193 compact-mailbox warning, drift false /
+  #4 byte-identica `up_to_seq` 2359, and `git diff --check` PASS with only the known `runtime/state/snapshot.json`
+  CRLF warning.
 - TASK-0205 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `d83a08e fix(governance): harden read-only endpoints`,
   authored as Arquitecto with Codex co-author. Zeus-Aegis now enforces bearer auth on `/api/governance/*` when
   `GOVERNANCE_API_TOKEN` or `HERMES_API_TOKEN` is configured, keeps documented loopback local-open mode when unset,
