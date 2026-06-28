@@ -2,7 +2,7 @@
 task_id: TASK-0208
 title: "Zeus-Aegis: afinar el waiver de los 24 fallos upstream (per-archivo, justificado, enforced) (DECISION-0064)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: medium

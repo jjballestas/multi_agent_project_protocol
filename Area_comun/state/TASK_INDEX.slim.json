@@ -62,7 +62,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "medium",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis: afinar el waiver de los 24 fallos upstream (per-archivo, justificado, enforced) (DECISION-0064)"
         }
     ],

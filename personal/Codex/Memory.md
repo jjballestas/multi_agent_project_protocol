@@ -1,9 +1,30 @@
 # Codex Memory
 
-Last updated: 2026-06-28 Europe/Madrid, after TASK-0207 review fix.
+Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 product commit.
 
 ## Latest Session Note
 
+- TASK-0208 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `777fa7c test(f0): enforce governance waiver boundary`, authored as Arquitecto with Codex co-author.
+  The F0 upstream test waiver is now file-scoped in `docs/SEAMS.md` with 11 rows, 24/68 counts,
+  categories, governance-panel independence notes, and re-evaluation triggers. `excludedUpstreamFiles`
+  in `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` is annotated per file without changing the
+  excluded list. New `src/server/governance-waiver.test.ts` enforces that governance panel files do not
+  import waived upstream surfaces. Evidence before protocol delivery: `node --check` OK for
+  `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; targeted waiver guard PASS; fail-closed proof
+  by temporarily importing `../lib/i18n` in `src/routes/governance.tsx` failed with
+  `src/routes/governance.tsx imports ../lib/i18n (src/lib/i18n)`, then the forced import was reverted and
+  the guard passed again; root `npm test` PASS 82 files / 547 tests; first `governance:smoke` attempt
+  timed out, immediate rerun PASS; `git diff --check` PASS with CRLF normalization warnings only. Protocol
+  delivery commit `coord(TASK-0208): deliver waiver guard` moved TASK-0208 to `in_review`, released
+  `CLAIM-20260628-Codex-TASK-0208`, opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-in-review.md`, and added handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-1.md`. The consumed GO could not be archived by
+  Codex because `mailbox_archive` is orchestrator-only; a combined delivery transaction failed with
+  `actor Codex lacks required capability: orchestrator`. Protocol evidence before commit: validator OK with
+  the pre-existing TASK-0193 compact-mailbox warning, drift false / #4 byte-identica `up_to_seq` 2404, and
+  `git diff --check` PASS with only the known `runtime/state/snapshot.json` CRLF warning. Encoding scan remains
+  red on pre-existing non-ASCII in Arquitecto-authored TASK-0208 GO/adversarial messages.
 - TASK-0207 review fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `a60164d fix(brand): replace remaining raster Hermes assets`, authored as Arquitecto with Codex co-author.
   The remaining splash/avatar raster assets now render Zeus-Aegis: `claude-avatar.webp`,

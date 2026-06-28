@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "Codex:TASK-0208:delivery:20260628T135000Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0208",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "mailbox_archive",
+      "message_id": "MSG-20260628-Arquitecto-to-Codex-GO-TASK-0208",
+      "author": "Codex",
+      "relayed_by": "Codex",
+      "endorsement": "none",
+      "idempotency_key": "Codex:TASK-0208:archive-go:20260628T135000Z"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260628-Codex-TASK-0208",
+      "task_id": "TASK-0208",
+      "owner": "Codex",
+      "updated_at": "2026-06-28T13:50:00Z"
+    }
+  ]
+}

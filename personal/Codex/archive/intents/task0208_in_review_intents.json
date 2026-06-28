@@ -1,0 +1,19 @@
+{
+  "idempotency_key": "Codex:TASK-0208:in-review:20260628T135300Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0208",
+      "from": "in_progress",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260628-Codex-TASK-0208",
+      "task_id": "TASK-0208",
+      "owner": "Codex",
+      "updated_at": "2026-06-28T13:53:00Z"
+    }
+  ]
+}

@@ -10769,6 +10769,28 @@
             "updated_at": "2026-06-28T14:50:05Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Codex-TASK-0208",
+            "expires_at": "2026-06-29T13:33:24Z",
+            "notes": "TASK-0208 implementation: sharpen Zeus-Aegis upstream F0 test waiver and enforce governance-panel independence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0208",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0208",
+                "Area_comun/tasks/TASK-0208-codex-zeus-aegis-upstream-waiver-sharpen.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0208.md",
+                "Area_comun/mailbox/answered/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0208.md",
+                "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T13:33:24Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T13:33:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260628-Codex-answer-TASK-0206-GO",
             "expires_at": "2026-06-29T00:00:00Z",
             "notes": "Move consumed TASK-0206 GO to answered after delivered ledger state.",
