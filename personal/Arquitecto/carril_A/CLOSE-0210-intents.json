@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-close-0210",
+          "task_id": "TASK-0210",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0210-codex-zeus-aegis-panel-views-ux.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T03:00:00Z",
+          "updated_at": "2026-06-29T03:00:00Z",
+          "expires_at": "2026-06-29T09:00:00Z",
+          "status": "active",
+          "notes": "Close TASK-0210 in_review->done (checker Arquitecto, maker=Codex). UX observe del panel (Zeus-Aegis 324a563): 6 acordeones colapsados por defecto (Backlog/Mailbox/Artifacts/Decisiones/Ledger/Handoffs) con conteo+chevron+localStorage, recientes en bloques de 10 + Mostrar mas, selects legibles tema-oscuro (option con tokens), Mailbox con filtros (folder/from/to/type/texto), Artifacts con combo por tipo. Checker render headless independiente (dev :3210): 6 secciones colapsadas+expanden, 6 selects color rgb(255,230,203) sobre rgb(4,28,28) legibles, Mailbox 4 filtros+texto, Artifacts combo+texto; screenshots 0210_default_collapsed/filters_expanded. Gates: f0-test exit 0 (554), governance:smoke exit 0 (self-contained), read-only (diff solo governance.tsx UI+test+SEAMS+png, sin endpoints/submit_intent). AC2 recientes+mostrar-mas por codigo/tests (no evidenciable con 0 datos en clon sin gateway). Chip unknown/0-datos = PRE-EXISTENTE (load todo-o-nada + 503 endpoints no-governance), no de 0210; follow-up opcional notificado. Core/baseline TFM intactos."
+        },
+        "idempotency_key": "arquitecto:close-0210:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0210",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0210:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-close-0210",
+        "idempotency_key": "arquitecto:close-0210:claim-release"
+      }
+    }
+  ]
+}

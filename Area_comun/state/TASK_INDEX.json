@@ -3263,7 +3263,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis: UX de las vistas del panel (desplegables colapsadas, recientes+mostrar mas, filtros legibles) (DECISION-0064)",
             "type": "product"
         },

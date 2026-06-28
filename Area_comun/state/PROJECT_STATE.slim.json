@@ -43,12 +43,6 @@
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
         },
         {
-            "id": "TASK-0210",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis: UX de las vistas del panel (desplegables colapsadas, recientes+mostrar mas, filtros legibles) (DECISION-0064)"
-        },
-        {
             "id": "TASK-0211",
             "owner": "Analista",
             "status": "ready",
