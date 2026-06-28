@@ -1,0 +1,25 @@
+{
+  "idempotency_key": "Codex:TASK-0207:review-fix-close-via-blocked:20260628T150200Z",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0207",
+      "from": "in_progress",
+      "to": "blocked"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0207",
+      "from": "blocked",
+      "to": "in_review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260628-Codex-TASK-0207-review-fix",
+      "task_id": "TASK-0207",
+      "owner": "Codex",
+      "updated_at": "2026-06-28T15:02:00Z"
+    }
+  ]
+}

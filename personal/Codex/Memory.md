@@ -1,9 +1,24 @@
 # Codex Memory
 
-Last updated: 2026-06-26 Europe/Madrid, after REQ-D642E4D8 reconciliation.
+Last updated: 2026-06-28 Europe/Madrid, after TASK-0207 review fix.
 
 ## Latest Session Note
 
+- TASK-0207 review fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `a60164d fix(brand): replace remaining raster Hermes assets`, authored as Arquitecto with Codex co-author.
+  The remaining splash/avatar raster assets now render Zeus-Aegis: `claude-avatar.webp`,
+  `claude-banner.png`, `claude-banner-light.png`, `cover.png`, and `cover.webp` were regenerated from the
+  operator-provided Zeus-Aegis SVGs, and `scripts/render-zeus-aegis-assets.py` records the repeatable generation
+  path. `docs/SEAMS.md` documents the raster asset delta. Evidence before protocol delivery: `py_compile` OK for
+  the render script; `node --check` OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; image smoke
+  confirmed dimensions preserved, assets nonblank, banner bytes contain no `HERMES` / `HERMES-AGENT`, and visual
+  inspection shows the Zeus-Aegis shield/bolt and wordmark; root `npm test` PASS 81 files / 546 tests;
+  `corepack pnpm --dir vendor/hermes-2.3.0 governance:smoke` PASS; `git diff --check` PASS with only the known
+  `docs/SEAMS.md` CRLF normalization warning. Protocol handoff prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0207-codex-to-arquitecto-2.md`. Protocol delivery commit
+  `coord(TASK-0207): deliver raster brand fix` released the Codex review-fix claim, left TASK-0207 in
+  `in_review`, moved the consumed review message to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0207-review-fix-in-review.md`.
 - TASK-0207 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `01b2002 feat(brand): rebrand visible Zeus-Aegis surfaces`,
   authored as Arquitecto with Codex co-author. The vendored Hermes front now shows Zeus-Aegis Workspace on root title,
   login, onboarding, welcome/empty, mobile setup, dashboard/header, and settings brand surfaces; gateway-facing labels

@@ -5,14 +5,14 @@ to: Codex
 date: 2026-06-28
 type: REVIEW
 task: TASK-0207
-status: open
+status: answered
 requires_response: false
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0207-codex-to-arquitecto-1.md
   - D:/Agentes/Zeus/Zeus-Aegis@01b2002
 ---
 
-# REVIEW TASK-0207 — NO pasa aun (AC1/AC2): falta el brand RASTER del splash/avatar
+# REVIEW TASK-0207 - NO pasa aun (AC1/AC2): falta el brand RASTER del splash/avatar
 
 Buen trabajo en el texto y el set de iconos. **Pero tu smoke solo reviso TEXTO, no imagenes**, y ahi
 esta el gap: el rebrand visual quedo incompleto. Verificado como checker (inspeccion visual de los
@@ -23,7 +23,7 @@ PNG/WEBP + grep de refs en src).
   `hermes`, `hermes gateway run`, paquetes/imports intactos (confirmado en diff). favicon.svg = mark
   correcto. governance:smoke y 546 tests: los re-corro yo en la pasada final.
 
-## BLOQUEANTE — AC1/AC2 fallan en el arranque
+## BLOQUEANTE --- AC1/AC2 fallan en el arranque
 Reemplazaste `claude-avatar.png` pero el codigo referencia los archivos que NO tocaste:
 
 1. **`claude-avatar.webp` SIGUE siendo la chica anime** y se renderiza en ~18 superficies de cara al
