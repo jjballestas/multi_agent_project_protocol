@@ -32,19 +32,22 @@ Estoy autorizado a Bash sin pedir permiso. **Permisos nuevos:** `Bash(taskkill:*
 ## Dataset TFM
 - **142/500 elegibles** (Ed25519, seq>=2221; Arq 56 / Codex 78 / Analista 8 = 3 firmantes). Baseline canonico unico
   atestado (DATASET_START_SEQ=2221, N=500, stop-rule, pre-registro v2.0 FROZEN). Core congelado hasta fin de medicion.
-- **PUNTO DE INFLEXION:** el build read-only que queda NO llena los 358 restantes. Para llegar a 500 (y desbloquear
-  F2): recomendado **construir NOVA-Budget** (app real gobernada = coordinacion real = llena el dataset).
+- **PUNTO DE INFLEXION:** el build read-only que queda NO llena los 358 restantes por si solo (decision de como
+  llegar a 500 = mas adelante; NO ahora).
 
-## NOVA-Budget (lo que sigue -- el operador lo quiere arrancar)
-- El operador TIENE el diseno de DB listo y quiere construir NOVA-Budget (app de presupuesto). Es la instancia
-  aplicada que llena el dataset.
-- **GATE PII (DECISION-0040, app financiera):** esquema/diseno de DB (estructura) = PII-free -> puede ir al ledger
-  gobernado; datos financieros reales = PII -> NUNCA al ledger (DB de la app, connector read-only DECISION-0048).
-- **Camino:** DECISION (NOVA-Budget instancia aplicada; repo D:/Agentes/Zeus/NOVA-Budget; postura PII) proposed ->
-  GO operador -> git-init repo producto -> ingerir el diseno de DB como 1er handover gobernado (PII-free) -> SDD
-  (Codex maker / Arquitecto checker via submit_intent).
-- El operador pidio ACLARAR dudas antes de fijar postura PII + modo de arranque. PROXIMO: resolver esas dudas ->
-  redactar la DECISION.
+## FOCO AL REANUDAR: AJUSTAR EL FORK (Zeus-Aegis). NOVA-Budget = STAND-BY.
+- **Decision del operador (2026-06-28): NO arrancar NOVA-Budget todavia.** "El fork necesita ajustes." NOVA queda
+  en stand-by (el diseno de DB existe pero NO se ingiere aun; no redactar la DECISION de NOVA hasta nuevo GO).
+- **PROXIMO: preguntar al operador QUE ajustes quiere en el fork** y priorizar. Candidatos conocidos (sugerir, el
+  operador decide):
+  1. **dev script Windows-safe** (bug REAL ya visto): `pnpm dev` falla en Windows por `NODE_OPTIONS="..." vite dev`
+     (sintaxis Unix). Fix: `cross-env` en vendor/hermes-2.3.0/package.json -> tarea SDD a Codex (producto).
+  2. **Reusar el conductor de Hermes** para lanzar/parar agentes desde la UI (en vez de crons a mano).
+  3. Retirar bloat: aislar/quitar el subsistema de juego 3D (three/fiber/rapier) + empaquetado Electron.
+  4. Resolver o re-waivar los 24 fallos upstream de Hermes (estaban "antes de F1/F2"; F1 ya cerrado con waiver).
+  5. F3 chat (F3.1/3.2 shim runtime), F3.5 PWA/movil, F4.3 versionado/CHANGELOG del fork.
+- Todo ajuste de producto = repo Zeus-Aegis, SDD Codex maker / Arquitecto checker, genera dataset igual. F2 sigue
+  gateado post-TFM. NO tocar el core del protocolo ni el baseline congelado.
 
 ## Parqueado
 - Hermes/Zeus-Aegis: F2 (post-TFM), F3 chat (F3.1/3.2, no read-only), F3.5 PWA, F4.3 versionado, F4.4 DECISION final.
