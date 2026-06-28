@@ -23,6 +23,16 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0208 re-pass2 waiver guard (2026-06-28): REFUTADO / CAMBIO-REQUERIDO quedo canonico en
+  `b835fd0` (`review(TASK-0208 r3): Analista refuta percent-encoding (teorico) -> Codex ultima ronda`).
+  Ancla protocolo `cad710c`; producto Zeus-Aegis `52f0d5e112329db67aa469364bdd6b1b93359ba8`.
+  Full `npm test` en clon limpio `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-4ee60e6ad2744822ba93180de5e77ae8`
+  salio exit 0. Slips previos `../lib/I18N` y `../lib/i18n?raw` pasan: ambos producen violacion permanente.
+  Probes propios tambien pasan para case+query, slash/double-slash/dot-segment, index, alias `@/`, `src/`,
+  dynamic import y require. Bloqueo nuevo: percent-encoded segment `../lib/%69%31%38%6e` y explicito
+  `../lib/%69%31%38%6e.ts` devuelven `[]` en `collectGovernanceWaiverViolations`; probe nativo ESM confirma
+  que `./%69%31%38%6e.mjs` resuelve a `i18n.mjs`. Gates protocolo: validate/encoding/neutrality exit 0,
+  drift 0 `up_to_seq=2430`, #4 byte-identica. Arquitecto respondio y abrio REVIEW3 a Codex; no cerrable.
 - TASK-0208 re-pass release cleanup (2026-06-28): tras la re-pasada sobre Zeus-Aegis `b47b707`
   quedo registrado un ciclo de claim adicional Analista `seq 2413-2418` para dejar liberados
   `CLAIM-20260628-Analista-TASK-0208-repass` y auxiliares. El veredicto canonico sigue siendo

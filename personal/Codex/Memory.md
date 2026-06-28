@@ -4,6 +4,18 @@ Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
 
 ## Latest Session Note
 
+- TASK-0208 REVIEW3 fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `8d2ff50 test(f0): decode waiver guard specifiers`, authored as Arquitecto with Codex co-author.
+  `governance-waiver.test.ts` now decodes import specifiers with `decodeURIComponent` before stripping
+  query/hash suffixes, with try/catch fallback for invalid encoding. Permanent regressions cover
+  `../lib/%69%31%38%6e.ts` and `../lib/%69%31%38%6e?raw`, both resolving to the waived `src/lib/i18n`
+  boundary in the guard. `docs/SEAMS.md` records that percent-encoded relative imports are theoretical
+  for this build because Vite/esbuild do not decode them in relative specifiers; the guard still covers
+  them as defense-in-depth. Evidence before protocol delivery: `node --check` OK for `server-entry.js`
+  and `scripts/zeus-aegis-f0-test.mjs`; targeted waiver guard PASS 1 file / 6 tests; root `npm test`
+  PASS 82 files / 552 tests; `governance:smoke` PASS; product `git diff --check` PASS with CRLF
+  normalization warnings only. Protocol delivery handoff prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-4.md`.
 - TASK-0208 REVIEW2 fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `52f0d5e test(f0): normalize waiver guard imports`, authored as Arquitecto with Codex co-author.
   `governance-waiver.test.ts` now strips `?` / `#` suffixes from import specifiers before path resolution,
