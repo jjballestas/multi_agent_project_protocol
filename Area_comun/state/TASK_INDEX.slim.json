@@ -56,14 +56,6 @@
             "priority": "high",
             "status": "ready",
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
-        },
-        {
-            "id": "TASK-0207",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "in_review",
-            "title": "Zeus-Aegis: rebrand visible Hermes->Zeus-Aegis + icono propio (DECISION-0064)"
         }
     ],
     "view": "task_index.slim"
