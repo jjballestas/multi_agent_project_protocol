@@ -41,6 +41,18 @@
             "owner": "Analista",
             "status": "ready",
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
+        },
+        {
+            "id": "TASK-0206",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis: dev script Windows-safe (cross-env) - fix pnpm dev en Windows (DECISION-0064)"
+        },
+        {
+            "id": "TASK-0207",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Zeus-Aegis: rebrand visible Hermes->Zeus-Aegis + icono propio (DECISION-0064)"
         }
     ],
     "next_actions": [

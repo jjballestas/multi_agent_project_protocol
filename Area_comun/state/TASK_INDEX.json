@@ -3198,6 +3198,34 @@
             "type": "integration"
         },
         {
+            "created_at": "2026-06-28",
+            "file": "Area_comun/tasks/TASK-0206-codex-zeus-aegis-dev-script-windows-safe.md",
+            "id": "TASK-0206",
+            "linked_decisions": [
+                "DECISION-0064"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Zeus-Aegis: dev script Windows-safe (cross-env) - fix pnpm dev en Windows (DECISION-0064)",
+            "type": "product"
+        },
+        {
+            "created_at": "2026-06-28",
+            "file": "Area_comun/tasks/TASK-0207-codex-zeus-aegis-rebrand-icon.md",
+            "id": "TASK-0207",
+            "linked_decisions": [
+                "DECISION-0064"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "ready",
+            "title": "Zeus-Aegis: rebrand visible Hermes->Zeus-Aegis + icono propio (DECISION-0064)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
