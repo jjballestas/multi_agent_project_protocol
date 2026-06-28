@@ -10486,6 +10486,33 @@
             "updated_at": "2026-06-28T15:53:09Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass3b",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0208"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass3b-release",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0208"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass3b-release2",
+            "expires_at": "2026-06-29T23:59:59Z",
+            "notes": "Auxiliary claim to release malformed TASK-0208 repass3b claims.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T16:24:01Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T16:24:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260628-Analista-TASK-0208-review",
             "owner": "Analista",
             "status": "released",
@@ -10587,6 +10614,24 @@
             "status": "released",
             "task_id": "TASK-0207",
             "updated_at": "2026-06-28T19:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Arquitecto-close-0208",
+            "expires_at": "2026-06-29T02:30:00Z",
+            "notes": "Close TASK-0208 in_review->done (re-waive afinado de 24 fallos upstream; maker=Codex, checker=Arquitecto, adversarial=Analista). Triple respaldo. Codex 8d2ff50 (decode specifiers) tras 3 rondas de refutacion adversarial: (1) bypass transitivo -> guard BFS del grafo; (2) case-variant Windows + query/suffix -> normalize toLowerCase+strip; (3) percent-encoding -> decodeURIComponent. Guard caza 12+ vectores con regresiones permanentes. SEAMS per-archivo honesto (superficies servidas = producto-servido/no-certificado/fix-or-prune, no test-rot inocuo). Checker reprodujo: guard 6/6, exploit transitivo real cazado, f0-test 82/552 verde. Analista SOSTENIDO/CERRABLE en repass3b. ANOMALIA Codex: entregas rr=true sin question bloquearon el canonico 2x (notificada).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0208-codex-zeus-aegis-upstream-waiver-sharpen.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T22:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T22:30:00Z"
         },
         {
             "claim_id": "CLAIM-20260628-Codex-TASK-0205-answer-bom-fix",
