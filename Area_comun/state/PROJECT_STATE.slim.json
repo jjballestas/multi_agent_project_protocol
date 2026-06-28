@@ -43,12 +43,6 @@
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
         },
         {
-            "id": "TASK-0206",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis: dev script Windows-safe (cross-env) - fix pnpm dev en Windows (DECISION-0064)"
-        },
-        {
             "id": "TASK-0207",
             "owner": "Codex",
             "status": "ready",

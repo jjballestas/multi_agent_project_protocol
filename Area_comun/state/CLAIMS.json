@@ -10461,6 +10461,26 @@
             "updated_at": "2026-06-28T16:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Arquitecto-close-0206",
+            "expires_at": "2026-06-28T22:08:00Z",
+            "notes": "Close TASK-0206 in_review->done (Zeus-Aegis dev script Windows-safe; maker=Codex Zeus b9a8a28, checker=Arquitecto). Checker reprodujo independiente: AC1 pnpm dev->HTTP 200 /governance sin env manual (real run), AC2/3 4 scripts cross-env + devDep ^7.0.3 + lockfile + instalado, AC4 SEAMS delta, AC5 node scripts/zeus-aegis-f0-test.mjs EXIT 0 81 files/546 tests pass. Archivar GO-0206 + delivery; promover GO-0207 (rebrand+icono).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0206-codex-zeus-aegis-dev-script-windows-safe.md",
+                "Area_comun/mailbox/answered/MSG-20260628-Codex-to-Arquitecto-TASK-0206-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260628-Arquitecto-to-Codex-GO-TASK-0207.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T18:08:00Z",
+            "status": "released",
+            "task_id": "TASK-0206",
+            "updated_at": "2026-06-28T18:08:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260628-Codex-TASK-0205-answer-bom-fix",
             "expires_at": "2026-06-29T00:00:00Z",
             "notes": "Remove UTF-8 BOM introduced while marking consumed TASK-0205 GO answered.",
