@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "610e101ee2076f18c8041c8b94845c4c4789c75bef0fc0c58641ed57f0236fdc",
+  "canonical_hash": "09975c403bbb6cfc820a597161ece8e6547d506c7f109ebe06b9eb1d39809fc7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -690,7 +690,7 @@
       "TASK-0205": 27,
       "TASK-0206": 12,
       "TASK-0207": 16,
-      "TASK-0208": 28,
+      "TASK-0208": 32,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -698,7 +698,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1755,
+    "events_applied": 1759,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2155,9 +2155,13 @@
       "intent:Analista:claim:4aeb074291ce1f4ca81d68dc7ff9f84a1304df2f623f41bdac0286d34ed1e949": 2283,
       "intent:Analista:claim:808b86df27db4a96b4f46095faf2d470c68ad1adcc7a184d4d11f0513bc4bc64": 2405,
       "intent:Analista:claim:879475fb096ae6c4a8f2683c802c61ac8180ac0244daed185b9fbf91eec952bc": 2418,
+      "intent:Analista:claim:95ed47dc27813254bd3b21373b75f42d65235e9cd3b5e5ed1eb1550ec6c93fcb": 2429,
       "intent:Analista:claim:97c1f7d330a051ef29e91384dc341f7a276d4f885740065cd9ae5e4d79e5cebc": 2415,
+      "intent:Analista:claim:9e573fd96c0b2c62d1d7a6423926809eb603cbc9efaaff786cc586e38389eade": 2427,
       "intent:Analista:claim:a2a047bc60dd1d55582795282e8d381fe8cf05db5c6afeff412d3f6653e0964a": 2282,
       "intent:Analista:claim:a40defe2d6a9f9f12ef2334b3cb585d8151c06811af971f0c2e0e99f1fb2cd10": 2417,
+      "intent:Analista:claim:b3eee295023441c828dbd4a6bcbcae4f51e6a9ec9237e3cd95b13c0a43b0ab4b": 2428,
+      "intent:Analista:claim:c7389ac75212aa0e387181fe1ed3106687ebed05135ebb497ceb15e432b0c972": 2430,
       "intent:Analista:claim:dc6d25a6c49d109ab7d9fcaee996c2a1006eb84dac671cbfffaa05536506da13": 2414,
       "intent:Analista:claim:defa2a61fc1d5fa376d8ad62e593532b8c551d3ef24ca6467ed903ef6404b260": 2406,
       "intent:Codex:claim:0238a72a88d38668828568860123cf10c85dd648f2a84a0994f1518b3d84660a": 2134,
@@ -2457,5 +2461,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2426
+  "up_to_seq": 2430
 }
