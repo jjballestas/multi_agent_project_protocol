@@ -1,9 +1,28 @@
 # Codex Memory
 
-Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 product commit.
+Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 review-fix product commit.
 
 ## Latest Session Note
 
+- TASK-0208 review-fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `b47b707 test(f0): harden waiver guard transitively`, authored as Arquitecto with Codex co-author.
+  `governance-waiver.test.ts` now walks first-party import graphs from governance entrypoints and blocks
+  direct, alias, dynamic, require, barrel/re-export, and transitive reachability to waived surfaces. It also
+  includes the Analista transitive vector as a synthetic regression. `docs/SEAMS.md` now classifies served
+  product surfaces honestly as not F0-certified/fix-or-prune, including `chat-message-list` as 1 UI-behavior
+  + 2 API/export-missing, and the F0 wrapper comments match the revised categories. Evidence before protocol
+  delivery: `node --check` OK for `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; targeted waiver
+  guard PASS 2 tests; fail-closed proof by temporarily adding
+  `governance.tsx -> governance-waiver-transitive.ts -> ../lib/i18n` failed with
+  `src/routes/governance-waiver-transitive.ts reaches ../lib/i18n (src/lib/i18n)`, then the probe was reverted
+  and the guard passed; first root `npm test` hit transient Vitest `ERR_IPC_CHANNEL_CLOSED` after many tests,
+  immediate rerun PASS 82 files / 548 tests; `governance:smoke` PASS; `git diff --check` PASS with CRLF
+  normalization warnings only. Protocol evidence before delivery: encoding OK, neutrality OK, validator OK with
+  the pre-existing TASK-0193 compact-mailbox warning, drift false / #4 byte-identica `up_to_seq` 2410. Protocol
+  delivery commit `coord(TASK-0208): deliver review fix` moved TASK-0208 back to `in_review`, released
+  `CLAIM-20260628-Codex-TASK-0208-review-fix`, opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-review-fix-in-review.md`, and added handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-2.md`.
 - TASK-0208 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `777fa7c test(f0): enforce governance waiver boundary`, authored as Arquitecto with Codex co-author.
   The F0 upstream test waiver is now file-scoped in `docs/SEAMS.md` with 11 rows, 24/68 counts,

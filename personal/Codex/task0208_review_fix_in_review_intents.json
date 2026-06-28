@@ -1,0 +1,23 @@
+{
+  "idempotency_key": "Codex:TASK-0208:review-fix-in-review:20260628T164800Z",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0208",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "Codex:TASK-0208:review-fix-status-in-review:20260628T164800Z"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260628-Codex-TASK-0208-review-fix",
+        "task_id": "TASK-0208",
+        "owner": "Codex",
+        "updated_at": "2026-06-28T16:48:00Z",
+        "idempotency_key": "Codex:TASK-0208:review-fix-release:20260628T164800Z"
+      }
+    }
+  ]
+}
