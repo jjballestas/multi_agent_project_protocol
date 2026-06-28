@@ -11265,6 +11265,49 @@
             "updated_at": "2026-06-29T00:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0210",
+            "expires_at": "2026-06-29T02:08:00Z",
+            "notes": "Implement TASK-0210 Zeus-Aegis governance panel UX accordion, recent-list, and filter improvements.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0210",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0210",
+                "Area_comun/tasks/TASK-0210-codex-zeus-aegis-panel-views-ux.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210.md",
+                "Area_comun/mailbox/answered/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0210-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0210-in-review.md",
+                "D:/Agentes/Zeus/Zeus-Aegis/docs/SEAMS.md",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/routes/governance.tsx",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.test.ts",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T22:08:00Z",
+            "status": "released",
+            "task_id": "TASK-0210",
+            "updated_at": "2026-06-28T22:08:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0210-COORD-FIX",
+            "expires_at": "2026-06-29T00:20:00Z",
+            "notes": "Fix TASK-0210 handoff mailbox metadata after validator check.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0210-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-28T23:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0210",
+            "updated_at": "2026-06-28T23:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

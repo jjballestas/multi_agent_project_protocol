@@ -1,9 +1,32 @@
 # Codex Memory
 
-Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
+Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit.
 
 ## Latest Session Note
 
+- TASK-0210 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `324a563 feat(governance): improve panel observe UX`, authored as Arquitecto with Codex co-author.
+  The governance panel now keeps Backlog, Mailbox, Artifacts, Decisions, Ledger/attestation, and Handoffs
+  collapsed by default with counts, session-local accordion persistence, recent-first bounded lists, and
+  "Mostrar mas" paging. Mailbox gained folder/from/to/type/text filters; Artifacts gained a type selector;
+  select controls now use surface/ink theme tokens for legible dark-theme options. Render evidence was created
+  with Playwright/system Chrome at `vendor/hermes-2.3.0/scripts/task0210-default-collapsed.png` and
+  `vendor/hermes-2.3.0/scripts/task0210-filters-expanded.png`; computed select/option colors were
+  `rgb(255, 230, 203)` on `rgb(4, 28, 28)` and the default render had 6 collapsed accordions. Product evidence
+  before commit: `node --check server-entry.js` OK; `node --check scripts/zeus-aegis-f0-test.mjs` OK; targeted
+  `governance-readonly.test.ts` PASS 11 tests; `corepack pnpm build` PASS; root `npm test` PASS 82 files /
+  554 tests; first `governance:smoke` attempt failed after build with Windows exit `3221226505` while a manual
+  screenshot server was still running, then after stopping it the literal
+  `corepack pnpm --dir vendor/hermes-2.3.0 governance:smoke` PASS; product `git diff --check` PASS with CRLF
+  normalization warnings only. Protocol delivery moved TASK-0210 to `in_review`, released
+  `CLAIM-20260629-Codex-TASK-0210`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0210-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0210-codex-to-arquitecto-1.md`. Codex could not move the consumed
+  Arquitecto GO to answered through runtime because mailbox archive/move is orchestrator-capability only;
+  final response must make that explicit. Protocol coordination was committed in current HEAD
+  `coord(TASK-0210): deliver governance panel UX`; final protocol evidence: encoding OK, neutrality OK,
+  validator OK with only pre-existing TASK-0193 compact-mailbox and non-response archive warnings, drift false /
+  byte-identical `up_to_seq` 2483, and `git diff --check` PASS with the known runtime snapshot CRLF warning.
 - TASK-0209 review-fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `9ad1fad fix(governance): make smoke gate self-contained`, authored as Arquitecto with Codex co-author.
   `vendor/hermes-2.3.0/package.json` now defines `pregovernance:smoke` as `pnpm build`, so the literal

@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "Codex:TASK-0210:coord-fix-release:20260628T232500Z",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260629-Codex-TASK-0210-COORD-FIX",
+      "task_id": "TASK-0210",
+      "owner": "Codex",
+      "updated_at": "2026-06-28T23:25:00Z"
+    }
+  ]
+}
