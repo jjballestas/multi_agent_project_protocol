@@ -41,12 +41,6 @@
             "owner": "Analista",
             "status": "ready",
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
-        },
-        {
-            "id": "TASK-0205",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis F4a - endurecimiento read-only: auth + path-traversal + rate-limit + e2e"
         }
     ],
     "next_actions": [
