@@ -3268,6 +3268,20 @@
             "type": "product"
         },
         {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0211-analista-review-0209-panel-performance.md",
+            "id": "TASK-0211",
+            "linked_decisions": [
+                "DECISION-0064"
+            ],
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)",
+            "type": "review"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

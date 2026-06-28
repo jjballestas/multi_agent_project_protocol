@@ -53,6 +53,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "Zeus-Aegis: UX de las vistas del panel (desplegables colapsadas, recientes+mostrar mas, filtros legibles) (DECISION-0064)"
+        },
+        {
+            "id": "TASK-0211",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)"
         }
     ],
     "next_actions": [

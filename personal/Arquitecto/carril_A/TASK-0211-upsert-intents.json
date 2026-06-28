@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260629-Arquitecto-author-0211","task_id":"TASK-0211","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0211-analista-review-0209-panel-performance.md","Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-29T01:30:00Z","updated_at":"2026-06-29T01:30:00Z","expires_at":"2026-06-29T06:00:00Z","status":"active","notes":"Author TASK-0211 (ready, reviewer=Analista): revision adversarial de TASK-0209 (cache del panel). Operador pidio la mirada del Analista. checker=Arquitecto, author_under_review=Codex."},"idempotency_key":"arquitecto:author-0211:claim-acquire"} },
+    { "task_upsert": { "task": { "id":"TASK-0211","title":"Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)","type":"review","status":"ready","owner":"Analista","phase":"P2","priority":"high","linked_decisions":["DECISION-0064"],"created_at":"2026-06-29","file":"Area_comun/tasks/TASK-0211-analista-review-0209-panel-performance.md" }, "idempotency_key":"arquitecto:author-0211:task-upsert-ready" } },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260629-Arquitecto-author-0211","idempotency_key":"arquitecto:author-0211:claim-release"} }
+  ]
+}

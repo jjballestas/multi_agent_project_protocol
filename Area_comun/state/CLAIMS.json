@@ -11113,6 +11113,25 @@
             "updated_at": "2026-06-28T14:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-author-0211",
+            "expires_at": "2026-06-29T06:00:00Z",
+            "notes": "Author TASK-0211 (ready, reviewer=Analista): revision adversarial de TASK-0209 (cache del panel). Operador pidio la mirada del Analista. checker=Arquitecto, author_under_review=Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0211-analista-review-0209-panel-performance.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T01:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0211",
+            "updated_at": "2026-06-29T01:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Codex-TASK-0209",
             "expires_at": "2026-06-30T00:00:00Z",
             "notes": "TASK-0209 implementation: cache governance health and state snapshots while preserving read-only honest status.",
