@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0208 waiver guard (2026-06-28): CAMBIO-REQUERIDO / no cerrable. Veredicto commiteado en
+  `ddf3de3` (`review(TASK-0208): Analista blocks waiver guard`). Ancla protocolo/instruccion
+  `06694e005d73d77722d0c848d3df360cc59b0c31`; producto Zeus-Aegis `777fa7c`
+  (`test(f0): enforce governance waiver boundary`); clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-58d6b07d70c64d0f9b2468e401f0e9f5`.
+  Full `npm test` en clean clone salio exit 0 (82 files / 547 tests). Corrida propia de los 11 excluidos
+  salio exit 1 con 24 failed / 44 passed / 68, lista y conteo casan. Hallazgo bloqueante 1: el guard
+  `governance-waiver.test.ts` detecta import directo a `../lib/i18n` (exit 1) pero no transitive import:
+  `governance.tsx -> governance-waiver-transitive.ts -> ../lib/i18n` deja el guard verde (exit 0).
+  Hallazgo bloqueante 2: SEAMS sigue subclasificando como non-panel/test-rot superficies servidas por el
+  producto (`chat-message-list`, `chat-composer-context-controls`, `context-usage`, `swarm2-screen`);
+  en `chat-message-list` al menos un assert es comportamiento UI real (tool-only messages quedan adjuntos
+  al ultimo assistant text) y no solo Windows EPERM. Gates protocolo: validate con secretos exit 0,
+  validate sin secretos en clone exit 0, drift 0 `up_to_seq=2408`, neutrality/encoding exit 0,
+  `protocol.config.json` sin diff sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. MSG a Arquitecto rr=true pide
+  devolver a Codex para hardening transitivo/barrel y reclasificacion honesta de superficies servidas.
 - TASK-0203 GATE1 final (2026-06-27): OK/CERRABLE. Veredicto commiteado en `678ff84`
   (`review(TASK-0203): Analista OK gate1 final`) con claim Analista firmado en #4
   (`seq 2311` acquire, `seq 2312` release). Ancla protocolo/instruccion

@@ -10438,6 +10438,18 @@
             "updated_at": "2026-06-28T14:32:00Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass",
+            "owner": "Analista",
+            "status": "active",
+            "task_id": "TASK-0208"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-repass-release",
+            "owner": "Analista",
+            "status": "active",
+            "task_id": "TASK-0208"
+        },
+        {
             "claim_id": "CLAIM-20260628-Analista-TASK-0208-review",
             "owner": "Analista",
             "status": "released",
