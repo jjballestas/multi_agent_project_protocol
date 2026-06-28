@@ -4,6 +4,16 @@ Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
 
 ## Latest Session Note
 
+- TASK-0209 review-fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `9ad1fad fix(governance): make smoke gate self-contained`, authored as Arquitecto with Codex co-author.
+  `vendor/hermes-2.3.0/package.json` now defines `pregovernance:smoke` as `pnpm build`, so the literal
+  `corepack pnpm --dir vendor/hermes-2.3.0 governance:smoke` builds `dist/server/server.js` before running
+  `scripts/governance-bridge-smoke.mjs` and no longer depends on residual ignored `dist/`. `docs/SEAMS.md`
+  records the clean-clone smoke gate contract. Evidence before protocol delivery: `node --check` OK for
+  `server-entry.js`, `scripts/governance-bridge-smoke.mjs`, and `scripts/zeus-aegis-f0-test.mjs`; clean-dist
+  proof removed `vendor/hermes-2.3.0/dist` and reran the literal `corepack pnpm --dir . governance:smoke`
+  from the vendor directory with exit 0 after `pnpm build`; root `npm test` PASS 82 files / 553 tests;
+  product `git diff --check` PASS with CRLF normalization warnings only.
 - TASK-0209 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`: `3f8461e fix(governance): cache panel health and state`,
   authored as Arquitecto with Codex co-author. `/api/governance/health` now caches real validate/drift results
   by canonical HEAD with a 45s TTL, preserves `checkedAt`, and supports explicit `?refresh=1`; the UI shows

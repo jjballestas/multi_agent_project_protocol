@@ -11174,6 +11174,79 @@
             "updated_at": "2026-06-29T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0209-review-answer",
+            "expires_at": "2026-06-29T01:00:00Z",
+            "notes": "Move consumed TASK-0209 review message to answered after review-fix delivery ledger.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-REVIEW-TASK-0209.md",
+                "Area_comun/mailbox/answered/MSG-20260629-Arquitecto-to-Codex-REVIEW-TASK-0209.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T00:34:00Z",
+            "status": "released",
+            "task_id": "TASK-0209",
+            "updated_at": "2026-06-29T00:34:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0209-review-fix",
+            "expires_at": "2026-06-29T04:10:00Z",
+            "notes": "Remediate TASK-0209 review finding: make governance:smoke reproducible from a clean clone without preexisting dist.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0209",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0209",
+                "Area_comun/tasks/TASK-0209-codex-zeus-aegis-panel-performance.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-REVIEW-TASK-0209.md",
+                "Area_comun/mailbox/answered/MSG-20260629-Arquitecto-to-Codex-REVIEW-TASK-0209.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0209-codex-to-arquitecto-2.md",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/package.json",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/governance-bridge-smoke.mjs",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/docs/SEAMS.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T00:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0209",
+            "updated_at": "2026-06-29T00:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0209-review-fix-docs",
+            "expires_at": "2026-06-29T04:10:00Z",
+            "notes": "Add TASK-0209 review-fix documentation path to active Codex scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "D:/Agentes/Zeus/Zeus-Aegis/docs/SEAMS.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T00:12:00Z",
+            "status": "released",
+            "task_id": "TASK-0209",
+            "updated_at": "2026-06-29T00:12:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0209-review-fix-message",
+            "expires_at": "2026-06-29T04:10:00Z",
+            "notes": "Add TASK-0209 review-fix delivery mailbox path to active Codex scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0209-review-fix-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T00:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0209",
+            "updated_at": "2026-06-29T00:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
