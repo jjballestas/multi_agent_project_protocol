@@ -10423,6 +10423,27 @@
             "updated_at": "2026-06-27T20:34:30Z"
         },
         {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-release",
+            "expires_at": "2026-06-29T23:59:59Z",
+            "notes": "Auxiliary claim to release malformed direct claim row.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-28T14:32:00Z",
+            "status": "released",
+            "task_id": "TASK-0208",
+            "updated_at": "2026-06-28T14:32:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260628-Analista-TASK-0208-review",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0208"
+        },
+        {
             "claim_id": "CLAIM-20260628-Arq-close0205",
             "expires_at": "2026-06-29T00:00:00Z",
             "notes": "Cerrar TASK-0205 F4a v2 (checker verde: gate estable + rate-limit).",
