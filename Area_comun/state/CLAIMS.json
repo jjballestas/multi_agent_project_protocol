@@ -11113,6 +11113,26 @@
             "updated_at": "2026-06-28T14:40:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Analista-TASK-0211-release",
+            "expires_at": "2026-06-29T23:59:59Z",
+            "notes": "Auxiliary claim to release TASK-0211 review claims.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Analista-TASK-0211-review",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Analista-TASK-0211-release"
+            ],
+            "started_at": "2026-06-28T21:24:05Z",
+            "status": "released",
+            "task_id": "TASK-0211",
+            "updated_at": "2026-06-28T21:24:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Analista-TASK-0211-review",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0211"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-author-0211",
             "expires_at": "2026-06-29T06:00:00Z",
             "notes": "Author TASK-0211 (ready, reviewer=Analista): revision adversarial de TASK-0209 (cache del panel). Operador pidio la mirada del Analista. checker=Arquitecto, author_under_review=Codex.",
