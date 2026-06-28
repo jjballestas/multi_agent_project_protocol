@@ -1,0 +1,10 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260628-Codex-TASK-0208-review2-message-fix",
+    "task_id": "TASK-0208",
+    "owner": "Codex",
+    "updated_at": "2026-06-28T17:48:00Z",
+    "idempotency_key": "Codex:TASK-0208:review2-message-fix-release:20260628T174800Z"
+  }
+}

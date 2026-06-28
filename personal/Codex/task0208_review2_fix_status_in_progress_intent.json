@@ -1,0 +1,6 @@
+{
+  "type": "task_status",
+  "task_id": "TASK-0208",
+  "from": "in_review",
+  "to": "in_progress"
+}

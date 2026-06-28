@@ -1,0 +1,8 @@
+{
+  "task_status": {
+    "task_id": "TASK-0208",
+    "from": "in_review",
+    "to": "in_progress",
+    "idempotency_key": "Codex:TASK-0208:review2-fix-status-in-progress:20260628T171900Z"
+  }
+}

@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 review-fix product commit.
+Last updated: 2026-06-28 Europe/Madrid, after TASK-0208 REVIEW2 fix delivery.
 
 ## Latest Session Note
 
+- TASK-0208 REVIEW2 fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `52f0d5e test(f0): normalize waiver guard imports`, authored as Arquitecto with Codex co-author.
+  `governance-waiver.test.ts` now strips `?` / `#` suffixes from import specifiers before path resolution,
+  compares resolved first-party modules to waived surfaces case-insensitively, and keeps permanent regressions for
+  `../lib/I18N` and `../lib/i18n?raw`. Evidence before protocol delivery: `node --check` OK for
+  `server-entry.js` and `scripts/zeus-aegis-f0-test.mjs`; targeted waiver guard PASS 4 tests; first root
+  `npm test` hit transient Vitest `ERR_IPC_CHANNEL_CLOSED`, immediate rerun PASS 82 files / 550 tests;
+  `governance:smoke` PASS; product `git diff --check` PASS with CRLF normalization warnings only. Protocol
+  delivery moved TASK-0208 back to `in_review`, released Codex REVIEW2 claims, moved the consumed REVIEW2 message to
+  answered after delivery ledger, opened
+  `Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-review2-fix-in-review.md`, and added handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0208-codex-to-arquitecto-3.md`. Protocol commit:
+  current `coord(TASK-0208): deliver review2 fix` HEAD. Protocol evidence before commit: encoding OK,
+  neutrality OK, validator OK with the pre-existing TASK-0193 compact-mailbox warning, drift false / #4
+  byte-identica `up_to_seq` 2426, and `git diff --check` PASS with the known `runtime/state/snapshot.json` CRLF
+  warning.
 - TASK-0208 review-fix product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `b47b707 test(f0): harden waiver guard transitively`, authored as Arquitecto with Codex co-author.
   `governance-waiver.test.ts` now walks first-party import graphs from governance entrypoints and blocks
