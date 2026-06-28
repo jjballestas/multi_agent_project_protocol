@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-label="Zeus-Aegis">
+  <!-- aegis glyph (shield + bolt) -->
+  <g transform="translate(20,18)">
+    <path d="M72 6 L132 28 V78 C132 116 104 142 72 156 C40 142 12 116 12 78 V28 Z"
+          fill="none" stroke="#1f6feb" stroke-width="7" stroke-linejoin="round" opacity="0.95"/>
+    <path d="M58 40 L58 86 L70 86 L70 120 L100 70 L83 70 L100 40 Z"
+          fill="#1f6feb" stroke="#0d1117" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="176" y="116" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+        font-size="92" font-weight="800" letter-spacing="2" fill="#1430b8">ZEUS-AEGIS</text>
+</svg>
