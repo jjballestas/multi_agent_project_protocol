@@ -4,6 +4,25 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0218 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `fd26831 feat(governance): add card detail modal`, authored as Arquitecto with Codex co-author. The governance
+  panel now opens a generic read-only detail modal on double-click for Backlog, Mailbox, Artifacts, Decisions and
+  Handoffs, with `role=dialog`, `aria-modal`, focus trap, Esc/backdrop/`Cerrar (Esc)` close paths, and focus return
+  to the source card. Canonical read seams now provide full redacted bodies for mailbox, artifacts, decisions and
+  handoffs while preserving existing PII redaction and GET-only surfaces. Render evidence was created with system
+  Chrome at `vendor/hermes-2.3.0/scripts/task0218-*-modal-open.png`,
+  `vendor/hermes-2.3.0/scripts/task0218-*-modal-closed.png`, plus
+  `vendor/hermes-2.3.0/scripts/task0218-render-evidence.json` covering all five sections. Product evidence before
+  commit: `node --check server-entry.js` OK; `node --check scripts/zeus-aegis-f0-test.mjs` OK; targeted
+  `governance-readonly.test.ts` PASS 13 tests; `corepack pnpm build` PASS; root `corepack pnpm --dir
+  vendor/hermes-2.3.0 test` PASS 82 files / 556 tests; `governance:smoke` PASS; `git diff --check` PASS with CRLF
+  normalization warnings only. Protocol delivery moved TASK-0218 to `in_review`, released
+  `CLAIM-20260629-Codex-TASK-0218`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0218-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0218-codex-to-arquitecto-1.md`. Final protocol evidence before commit:
+  encoding OK, neutrality OK, validator OK with only pre-existing non-response mailbox warnings, drift false /
+  byte-identical `up_to_seq` 2614. Codex attempted to move the consumed TASK-0218 GO after delivery, but
+  `mailbox_archive` requires orchestrator capability, so the GO remains open for Arquitecto hygiene.
 - TASK-0217 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `8f444cd fix(governance): unify backlog task source`, authored as Arquitecto with Codex co-author.
   `getGovernanceBacklog()` now reads the full canonical `Area_comun/state/TASK_INDEX.json`, matching
