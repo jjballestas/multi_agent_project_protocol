@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0220 review Engram v3 honesty (2026-06-29): NO-GO. Veredicto canonico en `ca4d9ba`
+  (`review(TASK-0220): Analista blocks Engram v3`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0220-veredicto.md`, MSG
+  `MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0220`. Ancla protocolo
+  `0401ade20bc370e30fb8938564e558548c498fe7`; claim Analista seq 2641 acquire / 2642 release. Bloqueo
+  principal: los drafts v2 citados por la GO (`personal/Arquitecto/DRAFT-DECISION-engram-memory-backend-v2.md`
+  y `personal/Arquitecto/PATCH-engram-observation-intent-v2.md`) no existen en HEAD canonico, solo como
+  untracked working tree, por lo que no son base promovible. Bloqueo sustantivo adicional: fila B rotulada
+  "B-PII / cero-prosa" aun sobre-afirma; la spec cierra prosa libre en `scope`/`task_id`/`supersedes`, pero
+  `topic_key`/`supersedes` slug aceptan PII semantica corta tipo `nit-900123456`, residual que el propio
+  borrador declara disciplinario. Recomendacion: materializar drafts en canonico y renombrar B a
+  cero-prosa o implementar guard estructural de PII corta. Protocolo clean clone `0401ade`: validate,
+  neutrality, encoding, drift exit 0; drift `up_to_seq=2640`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Vivo post-release: validate,
+  neutrality, encoding, drift exit 0; drift `up_to_seq=2642`. Zeus-protocol no tenia commit citado por la
+  instruccion; clone de control HEAD `b5675e5213f04b7bbd19aa3ff0160a54b747afcf`, `npm test` exit 0
+  (109 tests, 87 pass, 22 skipped).
 - TASK-0219 review Engram integration (2026-06-29): NO-GO tal cual. Veredicto en
   `Area_comun/artifacts/ANALISTA-TASK-0219-veredicto.md`; MSG
   `MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0219`. Ancla protocolo
