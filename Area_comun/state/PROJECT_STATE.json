@@ -1027,6 +1027,12 @@
             "title": "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche"
         },
         {
+            "id": "TASK-0220",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

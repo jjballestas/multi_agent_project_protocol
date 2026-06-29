@@ -3398,6 +3398,21 @@
             "type": "review"
         },
         {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0220-analista-adversarial-review-engram-v3-honesty.md",
+            "id": "TASK-0220",
+            "linked_decisions": [
+                "DECISION-0020",
+                "DECISION-0040"
+            ],
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)",
+            "type": "review"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

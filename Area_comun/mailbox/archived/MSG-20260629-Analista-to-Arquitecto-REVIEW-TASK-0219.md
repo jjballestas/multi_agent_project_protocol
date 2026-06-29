@@ -4,7 +4,7 @@ task_id: TASK-0219
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0219 Engram review: NO-GO tal cual; bloqueantes B/C/D/E/H y activacion Tier 1 no estructural."

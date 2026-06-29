@@ -4,7 +4,7 @@ task_id: TASK-0219
 type: GO
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 question: "Tras tu refutacion adversarial A-H de la propuesta Engram (DRAFT-DECISION + PATCH): GO / NO-GO / GO-CON-CONDICIONES? Enumera bloqueantes."
