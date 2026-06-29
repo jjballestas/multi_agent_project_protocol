@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "af4c4fd772eee8acd926e18fa7dfb56f4750ca287302903182b47a68e2631f19",
+  "canonical_hash": "a40ceb0600e5995895c6c1b493392383d60ba1a7911c7f9c8ec728c8cfc43102",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -783,7 +783,7 @@
       "TASK-0216": 8,
       "TASK-0217": 7,
       "TASK-0218": 9,
-      "TASK-0219": 3,
+      "TASK-0219": 5,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -791,7 +791,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1959,
+    "events_applied": 1961,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -867,6 +867,8 @@
       "analista:task-0194-review:claim-release": 2216,
       "analista:task-0201-regate1:claim-acquire": 2294,
       "analista:task-0201-regate1:claim-release": 2295,
+      "analista:task-0219:claim-acquire": 2631,
+      "analista:task-0219:claim-release": 2632,
       "arq:0202-0203:acq": 2307,
       "arq:0202-0203:rel": 2310,
       "arq:0204-0205:acq": 2327,
@@ -2754,5 +2756,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2630
+  "up_to_seq": 2632
 }

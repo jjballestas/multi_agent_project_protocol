@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-27 (TASK-0201 re-GATE1 Zeus-Aegis; CAMBIO-REQUERIDO; V4 artifact-name PII slip).
+> Ultima actualizacion: 2026-06-29 (TASK-0219 Engram integration review; NO-GO por PII/title, dos fases bridge, reconstruccion no probada, map-id disciplinario y patch no probado).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,68 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0219 review Engram integration (2026-06-29): NO-GO tal cual. Veredicto en
+  `Area_comun/artifacts/ANALISTA-TASK-0219-veredicto.md`; MSG
+  `MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0219`. Ancla protocolo
+  `e96ac4121ecc4de3ac61610c3712acef2d8c5508`; instruccion materializada en `825ca6f`; Engram fuente
+  primaria clone `44faeee1fb4fabdee4ba9619df55af485f3d06eb`; protocolo clean clone
+  `C:/Users/johnb/AppData/Local/Temp/protocol-review-0219-ab92b4cf67514b5cadc43d7dbc85b39e`; Engram clone
+  `C:/Users/johnb/AppData/Local/Temp/engram-src-50c7eedc473642dea2eb6f2493087b62`. Fuentes: Go/SQLite/MCP
+  confirmado (`README.md:28-35`, `README.md:120-129`); campos observation incluyen title/content/project/
+  scope/topic_key (`DOCS.md:46`, `DOCS.md:136`); scope no es privacidad (`docs/TEAM-USAGE.md:22-30`,
+  `111-116`); SQLite local y chunks gzip confirmados (`README.md:150-165`, `DOCS.md:1115-1138`). Bloqueantes:
+  `title` sigue libre/PII y blacklist de cuerpo burlable; `engram_bridge` post-commit crea brecha de dos fases;
+  no existe importador markdown->Engram para promesa de indice reconstruible; `map-<id>` es convencion sin
+  enforcement actor->project; frontera Engram!=ledger es disciplinaria; patch debe probar gate en single y
+  `--intents` con rollback, zero-drift, replay no-op y decision fall-through. Producto Zeus-protocol/npm test:
+  N/A porque TASK-0219 no cita commit de producto. Gates: validate vivo exit 0; validate clean clone sin secretos
+  exit 0; encoding/neutrality exit 0; drift 0 `up_to_seq=2632`; #4 `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Claim acquire/release Analista seq
+  2631/2632.
+- TASK-0215 review TASK-0213 attested ceremony (2026-06-29): CAMBIO-REQUERIDO. Veredicto canonico en
+  `f4031e2` (`review(TASK-0215): Analista blocks attested ceremony`). Ancla protocolo/instruccion
+  `3d7da2eeae13524150106f6fcd8120c3e119c3d3`; commit bajo review protocolo
+  `d2d19e26bb46498723f37265cc7de10c50153064`; clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/protocol-review-0215-235089e9f6a74572b7d829e9c3c6894b`.
+  Golden oficial `python scripts/test_attested_instancing.py` salio exit 0. Producto obligatorio
+  `D:/Agentes/Zeus/Zeus-protocol` no contenia `d2d19e2`: `git checkout d2d19e2` salio exit 1, por tanto
+  `npm test` no aplico en ese repo. Bloqueo V2 falsable: en instancia generada con `event_state.enforce=true`
+  y `actor_auth_enforce=true`, si `event-state.runtime.json` mapea `agent-worker` al keyid/private/HMAC de
+  `agent-a`, `submit_intent --actor-id agent-worker` sale exit 0 y escribe evento `actor=agent-worker` firmado
+  con `agent-a:v1`; falta binding estricto actor->keyid/HMAC. Bloqueo V1: `keygen_agent.py --secret-dir
+  <absolute external-secrets> --output -` sale exit 0, crea PEM/HMAC fuera de `protocol-secrets/` y devuelve
+  esas rutas. V3/V4/V5 sostienen: clone sin secretos validate exit 0 y no firma bajo enforce; pineados
+  `eventlog.py`/validador/`protocol.config.json` byte-identicos; instancia con drift 0 y enforce off.
+  Gates protocolo: validate/encoding/neutrality exit 0; drift 0 `up_to_seq=2517`; #4 `protocol.config.json`
+  byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Review claim
+  liberado via seq 2515-2517.
+- TASK-0211 review TASK-0209 panel performance (2026-06-28): CAMBIO-REQUERIDO. Veredicto canonico en
+  `c329a03` (`review(TASK-0211): Analista requires smoke reproducibility`). Ancla protocolo/instruccion
+  `e9c59f4e0760abc0417703996f4bcfbcc68a7afa`; producto Zeus-Aegis
+  `3f8461e31de06fa8ea2720a3ced0b77dcc6224c7`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-0211-dd2e231681f844c79de937b5d925d2b0`.
+  Full `npm test` salio exit 0. V1-V4 del cache sostienen: `forceRefresh` con validate roto -> red,
+  TTL expirado -> red, metrics -> red, ledger override red/green -> failed, state cache invalida por HEAD,
+  10 rutas governance + UI sin writer-path. Bloqueo falsable: `corepack pnpm --dir vendor/hermes-2.3.0
+  governance:smoke` en clean clone tras `npm test` salio exit 1 por falta de `dist/server/server.js`; tras
+  `corepack pnpm --dir vendor/hermes-2.3.0 build`, el mismo smoke salio exit 0. Gates protocolo:
+  validate con/sin secretos, encoding, neutrality exit 0; drift 0 hasta seq 2464; `protocol.config.json`
+  byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- TASK-0208 re-pass3b final (2026-06-28): SOSTENIDO / OK->CERRABLE. Veredicto quedo canonico en
+  `4cb39f5` (`close(TASK-0208 done): re-waive afinado 24 fallos upstream - triple respaldo (3 rondas adversariales)`)
+  junto con cierre del Arquitecto. Ancla protocolo de instruccion `c75518c`; producto Zeus-Aegis
+  `8d2ff50aee5a8aed869567d6e6f667168cfb5d3d`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-79e6d1a1f6974e839423fb4b50cca714`.
+  Full `npm test` en clean clone salio exit 0; guard limpio `governance-waiver.test.ts` salio exit 0
+  (6/6); mutacion real `src/routes/governance.tsx` con `import '../lib/%69%31%38%6e.ts'` salio exit 1
+  y reporto `src/routes/governance.tsx reaches ../lib/%69%31%38%6e.ts (src/lib/i18n)`. Probes propios:
+  percent bare/ext/query, case+query, alias `@/`, `src/`, dot segments, dynamic import, `require`,
+  re-export, child/index y encoded slash/dotdot dieron violacion. Residuales declarados no bloqueantes:
+  guard estatico/literal no cubre specifiers computados/ofuscados; chat/context-usage/swarm siguen como
+  producto servido no F0-certificado hasta fix o poda. Gates corridos: validate/encoding/neutrality exit 0,
+  staged-snapshot sin secretos exit 0, drift 0 observado en submit_intent up_to_seq 2446 antes del cierre
+  Arquitecto. Durante la pasada, el Arquitecto materializo cierre TASK-0208 en `4cb39f5` y origin/main quedo
+  en ese commit con mi artefacto y MSG incluidos.
 - TASK-0208 re-pass2 waiver guard (2026-06-28): REFUTADO / CAMBIO-REQUERIDO quedo canonico en
   `b835fd0` (`review(TASK-0208 r3): Analista refuta percent-encoding (teorico) -> Codex ultima ronda`).
   Ancla protocolo `cad710c`; producto Zeus-Aegis `52f0d5e112329db67aa469364bdd6b1b93359ba8`.
