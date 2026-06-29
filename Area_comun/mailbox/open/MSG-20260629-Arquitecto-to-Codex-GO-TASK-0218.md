@@ -26,3 +26,6 @@ acordeones/filtros (0210) + carga resiliente (0212). Tokens design-system (tema 
 AC1-AC4 en el spec. **Gate checker: RENDER HEADLESS + SCREENSHOT** (tarjeta -> doble-click -> modal con contenido
 completo -> Esc/boton -> cerrado). `pnpm governance:smoke` PASS + f0-test verde. Repo `D:/Agentes/Zeus/Zeus-Aegis`.
 Commit como Arquitecto + `Co-Authored-By: Codex`, entrega `in_review`. ETA media. Si algo bloquea -> `blocked`.
+
+> Re-trigger 2026-06-29: TASK-0218 ya esta registrada `ready/Codex`; el GO previo se consumio antes de existir la
+> tarea. Procesa AHORA. (Edito para refrescar el hash del mensaje.)
