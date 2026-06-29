@@ -991,6 +991,12 @@
             "title": "Ceremonia de instanciacion atestada: keygen por firmante + roster (firmantes/workers + binding LLM) en new_instance.py (DECISION-0069, SPEC-0108)"
         },
         {
+            "id": "TASK-0214",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Agregador read-only de estadisticas por agente y por peon (ledger + runlogs + provenance) (DECISION-0070, SPEC-0109)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -1076,7 +1082,8 @@
         "DECISION-0066",
         "DECISION-0067",
         "DECISION-0068",
-        "DECISION-0069"
+        "DECISION-0069",
+        "DECISION-0070"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

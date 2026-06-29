@@ -11246,6 +11246,26 @@
             "updated_at": "2026-06-29T05:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-register-0070",
+            "expires_at": "2026-06-29T12:00:00Z",
+            "notes": "Register DECISION-0070 accepted (modulo de estadisticas por agente/peon, read-only, ratificado por adelantado) + TASK-0214 ready/Codex (SPEC-0109, agregador read-only). GO se enviara tras cerrar TASK-0213 (dimension peon depende de su provenance). maker=Codex/checker=Arquitecto.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0070-per-agent-peon-metrics.md",
+                "Area_comun/specs/SPEC-0109-per-agent-peon-metrics-aggregator.md",
+                "Area_comun/tasks/TASK-0214-codex-per-agent-peon-metrics-aggregator.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T06:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0214",
+            "updated_at": "2026-06-29T06:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Codex-TASK-0209",
             "expires_at": "2026-06-30T00:00:00Z",
             "notes": "TASK-0209 implementation: cache governance health and state snapshots while preserving read-only honest status.",
