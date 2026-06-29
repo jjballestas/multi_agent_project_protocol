@@ -23,6 +23,19 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0224 review report redactor (2026-06-29): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en `6a7a4b6`
+  (`review(TASK-0224): Analista blocks report redactor`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0224-report-redactor-veredicto.md`, MSG
+  `MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0224`. Ancla protocolo bajo review
+  `14c197351de83362dd2a2eeba06280f716e6d267`; implementacion `17ab889`; claim Analista seq 2679 acquire /
+  2680 release. Gates: clean clone protocolo `14c1973` py_compile/golden/validate/neutrality/encoding/drift exit 0;
+  vivo validate/neutrality/encoding/drift exit 0; Zeus-protocol control clone HEAD `b2b2395` `npm test` exit 0
+  (109 tests, 87 pass, 22 skipped); #4 `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Hallazgo bloqueante falsable: el regex de
+  `inject_report_metadata` quita `- **Fecha:**` y `- **Dataset status:**`, pero deja stale metadata historica real
+  sin negrita (`- Date: 2020-01-01`, `- Updated: 2020-01-01`) junto al nuevo `Updated`; existen reportes canonicos
+  con `- Date:` en `Area_comun/reports/*.md`. Recomendacion: ampliar normalizador/golden a `Date/Fecha/Updated/
+  Actualizado/Dataset actualizado/Dataset status` sin negrita antes de cierre.
 - TASK-0221 review Engram v3 final (2026-06-29): GO-PROMOVER-OFF. Veredicto canonico en `af95847`
   (`review(TASK-0221): Analista OK Engram v3`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0221-veredicto.md`, MSG
