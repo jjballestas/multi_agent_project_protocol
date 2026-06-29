@@ -4,6 +4,17 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0214 was implemented and then closed by Arquitecto in protocol commit
+  `fc468d5 close(TASK-0214 done): agregador read-only de estadisticas por agente/peon`. Delivery added
+  `scripts/agent_metrics.py`, `scripts/test_agent_metrics.py`, and `examples/agent_metrics_cases/`. The aggregator
+  is read-only, emits `{por_agente, por_peon, por_tarea}`, reads `runtime/state/events.jsonl` plus runlogs through
+  `runtime/metrics.py`, attributes author/review tokens from runlog agent vs checker, and populates `por_peon` from
+  `provenance_metadata` when present. Evidence run by Codex before close: `py_compile` OK; `python
+  scripts/test_agent_metrics.py` PASS; `python scripts/agent_metrics.py --check-readonly` PASS with
+  `byte_identical=true`; encoding OK; domain-neutrality OK; validator OK with pre-existing mailbox warnings; drift
+  false / byte-identical `up_to_seq` 2521. Codex moved TASK-0214 to `in_review` and released
+  `CLAIM-20260629-Codex-TASK-0214`; Arquitecto then checked and closed TASK-0214 to `done` in the same HEAD. The
+  consumed GO remains open because Codex lacks orchestrator capability for `mailbox_archive`.
 - TASK-0213 protocol implementation commit landed in this repo as `feat(instancing): add attested ceremony`,
   authored as Arquitecto with Codex co-author. Added `scripts/keygen_agent.py`,
   extended `scripts/new_instance.py --tier attested --roster`, and added
