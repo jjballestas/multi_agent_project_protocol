@@ -4,6 +4,25 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0213 protocol implementation commit landed in this repo as `feat(instancing): add attested ceremony`,
+  authored as Arquitecto with Codex co-author. Added `scripts/keygen_agent.py`,
+  extended `scripts/new_instance.py --tier attested --roster`, and added
+  `scripts/test_attested_instancing.py`. The ceremony generates signer Ed25519/HMAC secrets under
+  instance-local `protocol-secrets/`, commits public keys in the generated instance config, registers signer and
+  keyless worker roster entries with `llm_preset`, creates `personal/<id>/`, signs genesis, then leaves
+  `event_state.enforce=false` and `actor_auth_enforce=false`. Generated configs keep
+  `adoption_tier: "runtime"` plus `attested_instancing.enabled: true` so the existing pinned validator remains
+  untouched under DECISION-0069. Evidence: `py_compile` OK for the three scripts; attested golden PASS at
+  `C:\t\att0213-golden-final`; generated instance validate OK; clone-without-secrets validate OK; keyless worker
+  submit rejected under actor-auth enforcement; encoding OK; neutrality OK; validator OK with only pre-existing
+  mailbox warnings; drift false / byte-identical `up_to_seq` 2504. Pinned hub hashes unchanged:
+  `runtime/eventlog.py` `59A8AE8764AC327598BA2DA4759E7CBC75EA46B0CDE214A636518A3A9A70DEDD`,
+  validator `EB04799F266DEBAFB13A61F7F5E673F5D831683B18532BB8807F12DAFD65C5AB`,
+  `protocol.config.json` `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`,
+  `event-state.runtime.json` `B9706842F32E30B4A3054C65BF5F26A7A327567BDDB885438ED7FEDFA05111CF`.
+  Protocol delivery moved TASK-0213 to `in_review`, released `CLAIM-20260629-Codex-TASK-0213`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0213-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0213-codex-to-arquitecto-1.md`.
 - TASK-0212 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `e6ba07a fix(governance): load panel endpoints resiliently`, authored as Arquitecto with Codex co-author.
   `governance.tsx` now reads each `/api/governance/*` endpoint through scoped safe fetches and

@@ -11,9 +11,11 @@ import argparse
 import json
 import re
 import shutil
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 
 PLACEHOLDER_RE = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
@@ -37,6 +39,7 @@ GATE_SCRIPT_FILES = [
     "measure_context_cost.py",
     "prune_state.py",
     "prune_state.ps1",
+    "keygen_agent.py",
 ]
 
 COPIED_DIRS = [
@@ -145,9 +148,18 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--tier",
-        choices=("coordination", "runtime"),
+        choices=("coordination", "runtime", "attested"),
         default="coordination",
         help="Adoption tier for the generated instance. Default: coordination.",
+    )
+    parser.add_argument(
+        "--roster",
+        default=None,
+        help=(
+            "JSON file for attested tier. Shape: "
+            "{\"agents\":[{\"id\":\"agent-a\",\"role\":\"architect\",\"tier\":\"signer\","
+            "\"llm_preset\":\"default\"}]}"
+        ),
     )
     return parser.parse_args()
 
@@ -280,6 +292,241 @@ def copy_runtime_tier_files(source: Path, target: Path) -> None:
     write_runtime_ci_workflow(target)
 
 
+def ensure_protocol_secrets_gitignored(target: Path) -> None:
+    gitignore = target / ".gitignore"
+    lines = []
+    if gitignore.exists():
+        lines = gitignore.read_text(encoding="utf-8-sig").splitlines()
+    required = ["protocol-secrets/", ".protocol-secrets/"]
+    changed = False
+    for item in required:
+        if item not in lines:
+            lines.append(item)
+            changed = True
+    if changed or not gitignore.exists():
+        gitignore.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def load_roster(args: argparse.Namespace) -> list[dict[str, str]]:
+    if args.roster:
+        payload = read_json(Path(args.roster))
+        agents = payload.get("agents") if isinstance(payload, dict) else None
+    else:
+        agents = [
+            {"id": args.architect, "role": "architect", "tier": "signer", "llm_preset": "architect"},
+            {"id": args.implementer, "role": "implementer", "tier": "signer", "llm_preset": "implementer"},
+            {"id": args.human_owner, "role": "human_owner", "tier": "worker", "llm_preset": "human"},
+        ]
+    if not isinstance(agents, list) or not agents:
+        raise ValueError("attested tier roster requires a non-empty agents list")
+    normalized: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for item in agents:
+        if not isinstance(item, dict):
+            raise ValueError("each roster agent must be an object")
+        agent_id = str(item.get("id") or "").strip()
+        role = str(item.get("role") or "worker").strip()
+        tier = str(item.get("tier") or "").strip().lower()
+        llm_preset = str(item.get("llm_preset") or "").strip()
+        if not agent_id:
+            raise ValueError("each roster agent requires id")
+        if tier not in {"signer", "worker"}:
+            raise ValueError(f"roster agent {agent_id} tier must be signer or worker")
+        if not llm_preset:
+            raise ValueError(f"roster agent {agent_id} requires llm_preset")
+        if agent_id in seen:
+            raise ValueError(f"duplicate roster agent id: {agent_id}")
+        seen.add(agent_id)
+        normalized.append({"id": agent_id, "role": role, "tier": tier, "llm_preset": llm_preset})
+    return normalized
+
+
+def read_instance_config(target: Path) -> dict[str, Any]:
+    config = read_json(target / "protocol.config.json")
+    if not isinstance(config, dict):
+        raise ValueError("generated protocol.config.json is not an object")
+    return config
+
+
+def write_instance_config(target: Path, config: dict[str, Any]) -> None:
+    (target / "protocol.config.json").write_text(
+        json.dumps(config, indent=2, ensure_ascii=True, sort_keys=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def signer_keyid(agent_id: str) -> str:
+    return f"{slug_for_config(agent_id)}:v1"
+
+
+def slug_for_config(value: str) -> str:
+    cleaned = "".join(ch.lower() if ch.isalnum() else "-" for ch in value.strip())
+    cleaned = "-".join(part for part in cleaned.split("-") if part)
+    if not cleaned:
+        raise ValueError("agent id must contain at least one alphanumeric character")
+    return cleaned
+
+
+def run_keygen(target: Path, source: Path, agent_id: str) -> dict[str, Any]:
+    keyid = signer_keyid(agent_id)
+    cmd = [
+        sys.executable,
+        str(target / "scripts" / "keygen_agent.py"),
+        "--root",
+        str(target),
+        "--agent-id",
+        agent_id,
+        "--keyid",
+        keyid,
+        "--output",
+        "-",
+    ]
+    result = subprocess.run(cmd, cwd=str(target), text=True, capture_output=True, check=False)
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or f"keygen failed for {agent_id}")
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"keygen returned invalid JSON for {agent_id}") from exc
+
+
+def write_attested_override(target: Path, signers: dict[str, dict[str, Any]], *, actor_auth_enforce: bool) -> None:
+    keyids = {agent_id: info["keyid"] for agent_id, info in sorted(signers.items())}
+    private_key_files = {agent_id: info["private_key_file"] for agent_id, info in sorted(signers.items())}
+    event_auth_keys = {agent_id: info["event_auth"] for agent_id, info in sorted(signers.items())}
+    override = {
+        "event_state": {
+            "actor_auth_enforce": actor_auth_enforce,
+            "actor_auth_config": {
+                "secret_root": "protocol-secrets",
+                "keyids": keyids,
+                "private_key_files": private_key_files,
+            },
+            "event_auth": {"keys": event_auth_keys},
+        }
+    }
+    (target / "event-state.runtime.json").write_text(
+        json.dumps(override, indent=2, ensure_ascii=True, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def apply_attested_config(target: Path, roster: list[dict[str, str]], signers: dict[str, dict[str, Any]]) -> None:
+    config = read_instance_config(target)
+    runtime = config.setdefault("runtime", {})
+    runtime["enabled"] = True
+    presets = runtime.setdefault("llm_cli_presets", {})
+    for agent in roster:
+        preset = agent["llm_preset"]
+        presets.setdefault(preset, {"command": preset})
+
+    # Keep the generated instance validator-compatible without changing the hub validator:
+    # attested is a ceremony on top of the existing runtime tier.
+    config["adoption_tier"] = "runtime"
+    config["agent_registry"] = {
+        "enabled": True,
+        "routing_policy": "weighted_least_loaded_deterministic",
+        "agents": [
+            {
+                "id": agent["id"],
+                "role": agent["role"],
+                "tier": agent["tier"],
+                "llm_preset": agent["llm_preset"],
+                "adapter": "human" if agent["role"] == "human_owner" else "llm",
+                "enabled": True,
+                "capabilities": ["human_owner"] if agent["role"] == "human_owner" else (
+                    ["orchestrator", "reviewer"] if agent["role"] == "architect" else ["implementer"]
+                ),
+            }
+            for agent in roster
+        ],
+    }
+    event_auth = config.setdefault("event_auth", {})
+    event_auth.update({"enabled": True, "method": "hmac-sha256", "issuer": "local-runtime", "audience": "runtime-event-log"})
+    secret_dirs = event_auth.setdefault("secret_dirs", [])
+    if "protocol-secrets" not in secret_dirs:
+        secret_dirs.append("protocol-secrets")
+    event_state = config.setdefault("event_state", {})
+    event_state.update(
+        {
+            "enabled": True,
+            "materialize": True,
+            "enforce": False,
+            "authoritative": False,
+            "chain_enabled": True,
+            "agent_signatures_enabled": True,
+            "signature_backend": "local-ed25519",
+        }
+    )
+    signature_config = event_state.setdefault("signature_config", {})
+    signature_config["backend"] = "local-ed25519"
+    signature_config["public_keys"] = {info["keyid"]: info["public_key"] for info in signers.values()}
+    config["attested_instancing"] = {
+        "enabled": True,
+        "provenance_metadata": {
+            "author_agent": "real worker or signer id responsible for the produced work",
+            "model": "runtime LLM/model preset used for the produced work",
+            "submitted_by": "signer id that attests and submits the ledger event",
+        },
+        "roster": roster,
+    }
+    write_instance_config(target, config)
+
+
+def create_roster_personal_areas(target: Path, roster: list[dict[str, str]]) -> None:
+    for agent in roster:
+        area = target / "personal" / agent["id"]
+        area.mkdir(parents=True, exist_ok=True)
+        (area / ".gitkeep").write_text("\n", encoding="utf-8")
+        (area / "LLM_PRESET.md").write_text(
+            f"# LLM preset\n\n- agent_id: {agent['id']}\n- llm_preset: {agent['llm_preset']}\n",
+            encoding="utf-8",
+        )
+
+
+def run_regenesis_for_attested_instance(target: Path, signer_id: str) -> None:
+    # Sign the genesis boundary, then return the final override to off-by-default.
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(target / "runtime" / "regenesis.py"),
+            "--root",
+            str(target),
+            "--actor-id",
+            signer_id,
+            "--timestamp",
+            "1970-01-01T00:00:00Z",
+            "--commit",
+            "attested-instance-genesis",
+            "--idempotency-key",
+            "attested-instance:genesis",
+            "--output",
+            "-",
+        ],
+        cwd=str(target),
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or "attested instance regenesis failed")
+
+
+def configure_attested_instance(source: Path, target: Path, args: argparse.Namespace) -> None:
+    copy_runtime_tier_files(source, target)
+    ensure_protocol_secrets_gitignored(target)
+    roster = load_roster(args)
+    signer_ids = [agent["id"] for agent in roster if agent["tier"] == "signer"]
+    if not signer_ids:
+        raise ValueError("attested tier requires at least one signer")
+    signers = {agent_id: run_keygen(target, source, agent_id) for agent_id in signer_ids}
+    apply_attested_config(target, roster, signers)
+    create_roster_personal_areas(target, roster)
+    write_attested_override(target, signers, actor_auth_enforce=True)
+    run_regenesis_for_attested_instance(target, signer_ids[0])
+    write_attested_override(target, signers, actor_auth_enforce=False)
+
+
 def render_text(text: str, replacements: dict[str, str], source_path: Path) -> str:
     missing = sorted({match.group(1) for match in PLACEHOLDER_RE.finditer(text)} - replacements.keys())
     if missing:
@@ -408,6 +655,8 @@ def main() -> int:
         create_personal_areas(target, args)
         if args.tier == "runtime":
             copy_runtime_tier_files(source, target)
+        elif args.tier == "attested":
+            configure_attested_instance(source, target, args)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(

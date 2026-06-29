@@ -2,7 +2,7 @@
 task_id: TASK-0213
 title: "Ceremonia de instanciacion atestada: keygen por firmante + roster (firmantes/workers + binding LLM) en new_instance.py (DECISION-0069, SPEC-0108)"
 type: protocol
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high
