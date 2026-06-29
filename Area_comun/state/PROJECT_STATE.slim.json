@@ -53,12 +53,6 @@
             "owner": "Analista",
             "status": "ready",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
-        },
-        {
-            "id": "TASK-0217",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)"
         }
     ],
     "next_actions": [

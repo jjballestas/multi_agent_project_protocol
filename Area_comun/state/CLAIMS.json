@@ -11506,6 +11506,24 @@
             "updated_at": "2026-06-29T14:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-close-0217",
+            "expires_at": "2026-06-29T20:00:00Z",
+            "notes": "Close TASK-0217 in_review->done (checker Arquitecto, maker=Codex). Fix Backlog 0 vs Dashboard (Zeus-Aegis 8f444cd): getGovernanceBacklog() ahora lee TASK_INDEX.json (full), igual que getGovernanceMetrics -> mismo universo. Checker VERDE: endpoints backlog=171 == metrics (done157+ready7+cancelled4+proposed2+in_review1=171); RENDER HEADLESS confirma Dashboard Tasks 171 == Backlog 171 (171 visible tasks, tarjetas reales); el Backlog 0 inicial era transitorio de hydration de vite dev. Read-only (diff 1-linea + test + png, sin writer-path). Acordeones/filtros de 0210 + carga resiliente de 0212 preservados.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0217-codex-zeus-aegis-backlog-consistency.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T14:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0217",
+            "updated_at": "2026-06-29T14:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-register-0069",
             "expires_at": "2026-06-29T11:00:00Z",
             "notes": "Register DECISION-0069 accepted (ceremonia de instanciacion atestada: roster por instancia firmantes/workers + binding LLM, keygen solo firmantes, invariante de frontera, provenance; guardrail TFM) + TASK-0213 ready/Codex (SPEC-0108). Operador ratifico. maker=Codex/checker=Arquitecto. PII diferido (ref DECISION-0040).",
