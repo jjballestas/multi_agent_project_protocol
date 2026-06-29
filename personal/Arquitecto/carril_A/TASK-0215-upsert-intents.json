@@ -1,0 +1,7 @@
+{
+  "intents": [
+    { "claim": { "op":"acquire","claim":{"claim_id":"CLAIM-20260629-Arquitecto-author-0215","task_id":"TASK-0215","owner":"Arquitecto","scope":["Area_comun/state/CLAIMS.json","Area_comun/state/PROJECT_STATE.json","Area_comun/state/TASK_INDEX.json","Area_comun/tasks/TASK-0215-analista-review-0213-attested-ceremony.md","Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215.md","runtime/state/events.jsonl","runtime/state/snapshot.json"],"started_at":"2026-06-29T06:30:00Z","updated_at":"2026-06-29T06:30:00Z","expires_at":"2026-06-29T12:00:00Z","status":"active","notes":"Author TASK-0215 (review, ready/Analista): revision adversarial de TASK-0213 (ceremonia atestada, sensible a seguridad). Operador pidio coordinar con Analista. checker=Arquitecto, author_under_review=Codex."},"idempotency_key":"arquitecto:author-0215:claim-acquire"} },
+    { "task_upsert": { "task": { "id":"TASK-0215","title":"Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)","type":"review","status":"ready","owner":"Analista","phase":"P2","priority":"high","linked_decisions":["DECISION-0069"],"created_at":"2026-06-29","file":"Area_comun/tasks/TASK-0215-analista-review-0213-attested-ceremony.md" }, "idempotency_key":"arquitecto:author-0215:task-upsert-ready" } },
+    { "claim": { "op":"release","claim_id":"CLAIM-20260629-Arquitecto-author-0215","idempotency_key":"arquitecto:author-0215:claim-release"} }
+  ]
+}

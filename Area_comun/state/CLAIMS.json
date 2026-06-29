@@ -11171,6 +11171,25 @@
             "updated_at": "2026-06-29T03:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-author-0215",
+            "expires_at": "2026-06-29T12:00:00Z",
+            "notes": "Author TASK-0215 (review, ready/Analista): revision adversarial de TASK-0213 (ceremonia atestada, sensible a seguridad). Operador pidio coordinar con Analista. checker=Arquitecto, author_under_review=Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0215-analista-review-0213-attested-ceremony.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T06:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0215",
+            "updated_at": "2026-06-29T06:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-close-0209",
             "expires_at": "2026-06-29T08:00:00Z",
             "notes": "Close TASK-0209 in_review->done (checker Arquitecto, maker=Codex). Performance del panel governance (Zeus-Aegis 9ad1fad). Cache de health (validate/drift real, TTL 45s, invalidacion por HEAD, ?refresh=1 re-corre real) + cache de state (TTL 60s) + UI Verified-Ns-ago + Refresh. Checker: health cacheado 19ms, refresh real ~3s, state cacheado 30ms, chip honesto (validateExitCode:0 real, tri-estado, no hardcodeado), f0-test 553 PASS. Regresion isolada vs HEAD~1: chip unknown del render = PRE-EXISTENTE (dev sin gateway), NO de 0209. Review adversarial Analista (TASK-0211): V1-V4 SOSTIENEN; unico bloqueo AC3 (governance:smoke no reproducible en clon limpio por dist/ gitignored) REMEDIADO por Codex (pregovernance:smoke=pnpm build, self-contained) -> tras rm dist el comando literal sale exit 0 reconstruyendo (1 ECONNRESET transitorio del smoke harness pre-existente, self-heal en retry). Sin writer-path; core/baseline TFM intactos.",

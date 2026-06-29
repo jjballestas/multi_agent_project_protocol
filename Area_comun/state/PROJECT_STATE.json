@@ -997,6 +997,12 @@
             "title": "Agregador read-only de estadisticas por agente y por peon (ledger + runlogs + provenance) (DECISION-0070, SPEC-0109)"
         },
         {
+            "id": "TASK-0215",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

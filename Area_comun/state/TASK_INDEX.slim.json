@@ -80,6 +80,14 @@
             "priority": "high",
             "status": "ready",
             "title": "Agregador read-only de estadisticas por agente y por peon (ledger + runlogs + provenance) (DECISION-0070, SPEC-0109)"
+        },
+        {
+            "id": "TASK-0215",
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
         }
     ],
     "view": "task_index.slim"
