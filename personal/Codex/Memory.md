@@ -4,6 +4,23 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0217 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `8f444cd fix(governance): unify backlog task source`, authored as Arquitecto with Codex co-author.
+  `getGovernanceBacklog()` now reads the full canonical `Area_comun/state/TASK_INDEX.json`, matching
+  `getGovernanceMetrics()` so Dashboard task totals and Backlog counts come from the same task universe.
+  Permanent coverage in `governance-readonly.test.ts` asserts backlog task count equals metrics total and
+  replaces the stale TASK-0196 mailbox fixture expectation with a current open-message contract. Render
+  evidence with system Chrome: `vendor/hermes-2.3.0/scripts/task0217-backlog-populated.png`, showing Backlog
+  expanded with 171 visible tasks. Product evidence before commit: `node --check server-entry.js` OK;
+  `node --check scripts/zeus-aegis-f0-test.mjs` OK; targeted `governance-readonly.test.ts` PASS 12 tests;
+  root `corepack pnpm --dir vendor/hermes-2.3.0 test` PASS 82 files / 555 tests; `governance:smoke` PASS;
+  product `git diff --check` PASS with CRLF normalization warnings only. Protocol delivery moved TASK-0217 to
+  `in_review`, released `CLAIM-20260629-Codex-TASK-0217`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0217-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0217-codex-to-arquitecto-1.md`. Final protocol evidence before commit:
+  encoding OK, neutrality OK, validator OK with only pre-existing non-response mailbox warnings, drift false /
+  byte-identical `up_to_seq` 2601. Codex could not move the consumed Arquitecto GO to answered because
+  `mailbox_archive` requires orchestrator capability.
 - TASK-0216 is delivered to `in_review` in this protocol repo. Added `skills/delegate-to-worker.skill.md`,
   registered `delegate-to-worker` in `skills/skills.config.json` with `enabled:false`, and added
   `scripts/test_skills_loader.py` as a read-only loader golden. The skill is neutral/ASCII, grants no authority,

@@ -2,7 +2,7 @@
 task_id: TASK-0217
 title: "Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)"
 type: product
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

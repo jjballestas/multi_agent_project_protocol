@@ -3362,7 +3362,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)",
             "type": "product"
         },

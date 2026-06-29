@@ -63,7 +63,7 @@
         {
             "id": "TASK-0217",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)"
         }
     ],
