@@ -11271,6 +11271,24 @@
             "updated_at": "2026-06-29T04:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-close-0213",
+            "expires_at": "2026-06-29T17:00:00Z",
+            "notes": "Close TASK-0213 in_review->done (checker Arquitecto, maker=Codex; operador instruyo cerrar). Ceremonia de instanciacion atestada (keygen por firmante + new_instance --tier attested + roster firmantes/workers + verificacion portable). Ronda 1 (d2d19e2) bloqueada por Analista (TASK-0215): V2 worker keyless escribe bajo enforce con keyid de firmante, V1 keygen --secret-dir escapa protocol-secrets. FIX Codex (346490a): V1 keygen restringido a protocol-secrets; V2 guard write-time en runtime/submit_intent.py (bajo enforce solo tier=signer puede bindear material de firma; keyid debe ser el propio del actor) -> el worker ya NO puede escribir con clave ajena; 2 regresiones permanentes en test_attested_instancing.py. CHECKER Arquitecto VERDE: golden+regresiones PASS, enc/neutral/validate 0, GUARDRAIL INTACTO (5 pineados byte-identicos verificados). NOTA: Codex modifico runtime/submit_intent.py (writer, NO pineado) para el guard -> los 5 pineados medidos siguen byte-identicos, el core de atestacion medido (eventlog/validador/config/override/prereg) intacto. Re-pasada formal del Analista NO re-corrida (operador instruyo cerrar); sustituida por verificacion independiente del Arquitecto de las 2 regresiones + guardrail. Defensa-en-profundidad verify-time (binding en eventlog/validador, PINEADOS) queda como follow-up post-ventana. enforce nace OFF.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0213-codex-instancing-attestation-ceremony.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T11:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0213",
+            "updated_at": "2026-06-29T11:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-close-0214",
             "expires_at": "2026-06-29T17:00:00Z",
             "notes": "Close TASK-0214 in_review->done (checker Arquitecto, maker=Codex). Agregador read-only scripts/agent_metrics.py: por_agente (calidad done/rechazadas/tasa, tiempo lead/cycle, tokens autoria-vs-revision), por_peon (cuando exista provenance), por_tarea. Checker: corre OK + JSON valido; AC5 READ-ONLY verificado por mi (5 pineados + events.jsonl byte-identicos antes/despues); golden test PASS; neutralidad limpia. DECISION-0070/SPEC-0109.",
