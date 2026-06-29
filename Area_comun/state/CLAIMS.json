@@ -11729,6 +11729,22 @@
             "updated_at": "2026-06-29T15:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-close-0224-cr",
+            "expires_at": "2026-06-30T23:59:59Z",
+            "notes": "ratifico NO-GO Analista; in_review->changes_requested",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Arquitecto-close-0224-cr"
+            ],
+            "started_at": "2026-06-29T21:47:17Z",
+            "status": "released",
+            "task_id": "TASK-0224",
+            "updated_at": "2026-06-29T21:47:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-dataset-lote-panel",
             "owner": "Arquitecto",
             "status": "released",

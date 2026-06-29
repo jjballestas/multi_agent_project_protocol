@@ -87,7 +87,7 @@
         {
             "id": "TASK-0224",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "changes_requested",
             "title": "Fix redactor de reportes: bug de fechas + hora (updated) + estado dataset recontado X/500"
         },
         {
