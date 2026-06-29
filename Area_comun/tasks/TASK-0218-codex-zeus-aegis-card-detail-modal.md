@@ -2,7 +2,7 @@
 task_id: TASK-0218
 title: "Zeus-Aegis: doble-click en tarjeta (Backlog/Mailbox/Artifacts/Decisiones/Handoffs) abre detalle completo; Esc o boton Cerrar vuelve (DECISION-0064)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -3376,7 +3376,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "done",
             "title": "Zeus-Aegis: doble-click en tarjeta (Backlog/Mailbox/Artifacts/Decisiones/Handoffs) abre detalle completo; Esc o boton Cerrar vuelve (DECISION-0064)",
             "type": "product"
         },

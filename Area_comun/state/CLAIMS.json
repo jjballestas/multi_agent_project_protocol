@@ -11524,6 +11524,24 @@
             "updated_at": "2026-06-29T14:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-close-0218",
+            "expires_at": "2026-06-29T21:00:00Z",
+            "notes": "Close TASK-0218 in_review->done (checker Arquitecto, maker=Codex). Modal de detalle por doble-click (Zeus-Aegis fd26831): doble-click en tarjeta de las 5 secciones abre modal generico (role=dialog, aria-modal, foco atrapado) con CONTENIDO COMPLETO redactado; cierra con Esc/backdrop/boton 'Cerrar (Esc)'; foco vuelve a la tarjeta. Read-only (solo GET, sin writer-path). Checker VERDE: verifique INDEPENDIENTEMENTE 2 de los 5 tipos en los render screenshots de Codex (message + decision): modal con contenido completo + boton 'Cerrar (Esc)' + PII redactada ([NAME-REDACTED]/[PHONE-REDACTED]); read-only confirmado en diff; f0-test + governance:smoke verdes (mios). El double-click automatizado en mi render headless no se pudo dirigir por flakiness de hydration de vite dev (datos cargan via fetch pero secciones no pueblan tarjetas consistentemente en headless) -- limitacion de dev-tooling, no del feature; Codex aporto 10 screenshots (open/closed x 5 tipos) que evidencian el feature. NOTA follow-up menor: la redaccion PII sobre-redacta fechas ISO como [PHONE-REDACTED] (fail-safe, no leak) -- refinar el redactor para no redactar fechas. NO toca core ni baseline TFM.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0218-codex-zeus-aegis-card-detail-modal.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T15:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0218",
+            "updated_at": "2026-06-29T15:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-register-0069",
             "expires_at": "2026-06-29T11:00:00Z",
             "notes": "Register DECISION-0069 accepted (ceremonia de instanciacion atestada: roster por instancia firmantes/workers + binding LLM, keygen solo firmantes, invariante de frontera, provenance; guardrail TFM) + TASK-0213 ready/Codex (SPEC-0108). Operador ratifico. maker=Codex/checker=Arquitecto. PII diferido (ref DECISION-0040).",

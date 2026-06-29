@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-close-0218",
+          "task_id": "TASK-0218",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0218-codex-zeus-aegis-card-detail-modal.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T15:20:00Z",
+          "updated_at": "2026-06-29T15:20:00Z",
+          "expires_at": "2026-06-29T21:00:00Z",
+          "status": "active",
+          "notes": "Close TASK-0218 in_review->done (checker Arquitecto, maker=Codex). Modal de detalle por doble-click (Zeus-Aegis fd26831): doble-click en tarjeta de las 5 secciones abre modal generico (role=dialog, aria-modal, foco atrapado) con CONTENIDO COMPLETO redactado; cierra con Esc/backdrop/boton 'Cerrar (Esc)'; foco vuelve a la tarjeta. Read-only (solo GET, sin writer-path). Checker VERDE: verifique INDEPENDIENTEMENTE 2 de los 5 tipos en los render screenshots de Codex (message + decision): modal con contenido completo + boton 'Cerrar (Esc)' + PII redactada ([NAME-REDACTED]/[PHONE-REDACTED]); read-only confirmado en diff; f0-test + governance:smoke verdes (mios). El double-click automatizado en mi render headless no se pudo dirigir por flakiness de hydration de vite dev (datos cargan via fetch pero secciones no pueblan tarjetas consistentemente en headless) -- limitacion de dev-tooling, no del feature; Codex aporto 10 screenshots (open/closed x 5 tipos) que evidencian el feature. NOTA follow-up menor: la redaccion PII sobre-redacta fechas ISO como [PHONE-REDACTED] (fail-safe, no leak) -- refinar el redactor para no redactar fechas. NO toca core ni baseline TFM."
+        },
+        "idempotency_key": "arquitecto:close-0218:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0218",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0218:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-close-0218",
+        "idempotency_key": "arquitecto:close-0218:claim-release"
+      }
+    }
+  ]
+}

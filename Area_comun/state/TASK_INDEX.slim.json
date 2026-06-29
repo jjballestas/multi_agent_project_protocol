@@ -72,14 +72,6 @@
             "priority": "high",
             "status": "ready",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
-        },
-        {
-            "id": "TASK-0218",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Zeus-Aegis: doble-click en tarjeta (Backlog/Mailbox/Artifacts/Decisiones/Handoffs) abre detalle completo; Esc o boton Cerrar vuelve (DECISION-0064)"
         }
     ],
     "view": "task_index.slim"
