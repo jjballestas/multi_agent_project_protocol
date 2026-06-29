@@ -993,7 +993,7 @@
         {
             "id": "TASK-0214",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Agregador read-only de estadisticas por agente y por peon (ledger + runlogs + provenance) (DECISION-0070, SPEC-0109)"
         },
         {

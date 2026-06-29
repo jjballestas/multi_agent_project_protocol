@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e2b570eed497216c078a22a3f658038490c95d7d8d7845476d3cf1735f671e59",
+  "canonical_hash": "6a1859f03cba0d42db65c09bac6cf40a7a3e16014e8f6bac72c9793cab2b4c1e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -422,6 +422,7 @@
       "CLAIM-20260629-Arquitecto-close-0209": 1,
       "CLAIM-20260629-Arquitecto-close-0210": 1,
       "CLAIM-20260629-Arquitecto-close-0212": 1,
+      "CLAIM-20260629-Arquitecto-close-0214": 1,
       "CLAIM-20260629-Arquitecto-register-0069": 1,
       "CLAIM-20260629-Arquitecto-register-0070": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -708,7 +709,7 @@
       "TASK-0211": 6,
       "TASK-0212": 8,
       "TASK-0213": 6,
-      "TASK-0214": 2,
+      "TASK-0214": 8,
       "TASK-0215": 8,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -717,7 +718,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1846,
+    "events_applied": 1853,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1280,6 +1281,9 @@
       "arquitecto:close-0212:claim-acquire": 2494,
       "arquitecto:close-0212:claim-release": 2496,
       "arquitecto:close-0212:status-done": 2495,
+      "arquitecto:close-0214:claim-acquire": 2522,
+      "arquitecto:close-0214:claim-release": 2524,
+      "arquitecto:close-0214:status-done": 2523,
       "arquitecto:close-batch:acq": 1895,
       "arquitecto:close-batch:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0174-in-review": 1899,
       "arquitecto:close-batch:arch:MSG-20260624-Codex-to-Arquitecto-TASK-0175-in-review": 1900,
@@ -2292,6 +2296,7 @@
       "intent:Codex:claim:3abea325b3531bdeafb4829e9e1841d75ab2d87f06ab8616c9fe1df5781fd1f6": 2437,
       "intent:Codex:claim:3ae762f83844c6352b22b56abbdb4ea33581093f0cd6c820ba903435c375885a": 2352,
       "intent:Codex:claim:3b039b082eafae733631bbe9c37f0469e98756ba82a53de8a4b7cd10cb48dc50": 2388,
+      "intent:Codex:claim:3c4c09fde362ab616fb04f278693aec99752a9281ca95b0bd9999c32c9a20ce3": 2518,
       "intent:Codex:claim:3d11eb835be0e053ae16f70dad107c525d8469a3b0fc6a9b650f0802510b804e": 2324,
       "intent:Codex:claim:3edf66a04ce5ad27779f09a7d7c54a1d97d813b7424788dabe078db8684ea849": 2099,
       "intent:Codex:claim:3f8ce055f3ffb3bc5f3668bdbd6815cad1e42e72545a39996cbb65035872014a": 2483,
@@ -2388,6 +2393,7 @@
       "intent:Codex:claim:c096d958f23d3fdd252e1001cafe8f5f45f4c4551a784cd3abb4d8ae8244dbba": 2203,
       "intent:Codex:claim:c15a5b9a52ae95dc2b169db3dbb483572552a2272a6245ade7b4dc6c64fbf5f1": 2030,
       "intent:Codex:claim:c27337a3b7c27ea965e24bf4d179d073fa72bad856561ec47c04cd2d48a66ccc": 2375,
+      "intent:Codex:claim:c2c0fc36d08c0014771cc66fe9ff7cc181e37fd566f148fb2f3375a33b34d723": 2521,
       "intent:Codex:claim:c3b06b11fb73849c8410c9fe70fd298f05b14726d2eba0411a74678dde67ca00": 2171,
       "intent:Codex:claim:c3ccda3278c8f84c58e42c329f4a85d0aa5bd3d04461c0d32db88201dd8a0245": 1669,
       "intent:Codex:claim:c3dfbe61254c6aa0566a77a11fb22cae2a7da82c9c345056b7799eed5e3ad3b6": 2173,
@@ -2454,6 +2460,8 @@
       "intent:Codex:task_status:0959d54d9a26dafc21fa415f6f9aa3a5c6224abe133a557e1682238ea730af06": 2131,
       "intent:Codex:task_status:0a352a1d36e6ba5c3a719cce856758e1435e752d8f470b7fc05c1aa9a4e29885": 2347,
       "intent:Codex:task_status:0e16514fffc0cc62dbc1019e997289bf58163f6ff241e83c53df3b6aaed74657": 2166,
+      "intent:Codex:task_status:1040a8d779c760fc8cfed14c1547096b13084fa46b84572917d9e56ea6f50c6d": 2520,
+      "intent:Codex:task_status:11b85430d350ba46d20fa3273d76db9898d2c08b4d54bb93fa1a2743cdec9259": 2519,
       "intent:Codex:task_status:132d54da9da60f284ea6674da9a2d4c1173008534a65f00eaa416651621e6d47": 898,
       "intent:Codex:task_status:15e42aeff3252605152dbce59d351820cb774eb6eaac4eefd66afc319882ca24": 2186,
       "intent:Codex:task_status:1820953b7d2b62a0c493b13bfa38bafc3982596cd33e797144975949ece70018": 2202,
@@ -2567,5 +2575,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2517
+  "up_to_seq": 2524
 }

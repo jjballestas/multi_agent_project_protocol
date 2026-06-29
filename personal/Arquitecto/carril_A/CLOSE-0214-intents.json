@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-close-0214",
+          "task_id": "TASK-0214",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0214-codex-per-agent-peon-metrics-aggregator.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T11:25:00Z",
+          "updated_at": "2026-06-29T11:25:00Z",
+          "expires_at": "2026-06-29T17:00:00Z",
+          "status": "active",
+          "notes": "Close TASK-0214 in_review->done (checker Arquitecto, maker=Codex). Agregador read-only scripts/agent_metrics.py: por_agente (calidad done/rechazadas/tasa, tiempo lead/cycle, tokens autoria-vs-revision), por_peon (cuando exista provenance), por_tarea. Checker: corre OK + JSON valido; AC5 READ-ONLY verificado por mi (5 pineados + events.jsonl byte-identicos antes/despues); golden test PASS; neutralidad limpia. DECISION-0070/SPEC-0109."
+        },
+        "idempotency_key": "arquitecto:close-0214:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0214",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0214:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-close-0214",
+        "idempotency_key": "arquitecto:close-0214:claim-release"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 task_id: TASK-0214
 title: "Agregador read-only de estadisticas por agente y por peon (ledger + runlogs + provenance) (DECISION-0070, SPEC-0109)"
 type: protocol
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high

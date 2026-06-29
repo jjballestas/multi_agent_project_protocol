@@ -11271,6 +11271,24 @@
             "updated_at": "2026-06-29T04:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-close-0214",
+            "expires_at": "2026-06-29T17:00:00Z",
+            "notes": "Close TASK-0214 in_review->done (checker Arquitecto, maker=Codex). Agregador read-only scripts/agent_metrics.py: por_agente (calidad done/rechazadas/tasa, tiempo lead/cycle, tokens autoria-vs-revision), por_peon (cuando exista provenance), por_tarea. Checker: corre OK + JSON valido; AC5 READ-ONLY verificado por mi (5 pineados + events.jsonl byte-identicos antes/despues); golden test PASS; neutralidad limpia. DECISION-0070/SPEC-0109.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0214-codex-per-agent-peon-metrics-aggregator.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T11:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0214",
+            "updated_at": "2026-06-29T11:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-register-0069",
             "expires_at": "2026-06-29T11:00:00Z",
             "notes": "Register DECISION-0069 accepted (ceremonia de instanciacion atestada: roster por instancia firmantes/workers + binding LLM, keygen solo firmantes, invariante de frontera, provenance; guardrail TFM) + TASK-0213 ready/Codex (SPEC-0108). Operador ratifico. maker=Codex/checker=Arquitecto. PII diferido (ref DECISION-0040).",
@@ -11498,6 +11516,31 @@
             "status": "released",
             "task_id": "TASK-0213",
             "updated_at": "2026-06-29T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0214",
+            "expires_at": "2026-06-29T13:15:10Z",
+            "notes": "Implement TASK-0214 read-only agent metrics aggregator.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0214",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0214",
+                "Area_comun/tasks/TASK-0214-codex-per-agent-peon-metrics-aggregator.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214.md",
+                "Area_comun/mailbox/answered/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0214-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0214-in-review.md",
+                "scripts/agent_metrics.py",
+                "scripts/test_agent_metrics.py",
+                "examples/agent_metrics_cases/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T09:15:10Z",
+            "status": "released",
+            "task_id": "TASK-0214",
+            "updated_at": "2026-06-29T09:15:10Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
