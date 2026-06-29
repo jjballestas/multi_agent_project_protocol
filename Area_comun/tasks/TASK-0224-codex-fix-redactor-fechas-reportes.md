@@ -2,7 +2,7 @@
 task_id: TASK-0224
 title: "Fix redactor de reportes: bug de fechas + todo reporte lleva hora (updated) + estado dataset recontado X/500"
 type: build
-status: changes_requested
+status: in_review
 owner: Codex
 phase: P2
 priority: high

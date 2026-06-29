@@ -771,7 +771,10 @@ def inject_report_metadata(text: str, *, updated: str, dataset_line: str) -> str
     inserted = False
     skip_next_blank = False
     for line in lines:
-        if re.match(r"^-\s+\*\*?(Fecha|Date|Actualizado|Updated|Dataset actualizado|Dataset status):\*\*?", line):
+        if re.match(
+            r"^-\s+(?:\*\*)?(Fecha|Date|Actualizado|Updated|Dataset actualizado|Dataset status):(?:\*\*)?",
+            line,
+        ):
             skip_next_blank = False
             continue
         output.append(line)

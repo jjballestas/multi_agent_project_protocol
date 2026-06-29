@@ -1,9 +1,25 @@
-# Codex Memory
+﻿# Codex Memory
 
-Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit.
+Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0224 remediation commit `fix(reports): normalize plain metadata` moved TASK-0224 back to
+  `in_review` and released `CLAIM-20260629-Codex-TASK-0224-remediation`. The report normalizer now removes
+  stale report metadata with or without bold markers, including historical plain `- Date:`, `- Updated:` and
+  `- Dataset status:` lines. Golden coverage in `examples/human_guide_cases/run_human_guide_cases.py` asserts
+  the plain family is normalized to exactly one canonical `- **Updated:**` line. Evidence sample:
+  `personal/Codex/TASK-0224-remediation-sample-report.md`, generated from
+  `Area_comun/reports/REPORT-20260605-release-v0.2.0.md`, shows `- **Updated:** 2026-06-29T12:34:56Z` and
+  `465/500` dataset status at generation time. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0224-codex-to-arquitecto-2.md`; mailbox:
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-remediation-in-review.md`. Evidence before
+  commit: `py_compile` PASS; human guide/report golden PASS; encoding PASS; neutrality PASS;
+  `validate_collaboration_state` PASS with existing warning for
+  `MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0224.md` missing `context_refs` plus expected non-response FYI
+  archive suggestion; drift false / byte-identical `up_to_seq=2687`; `git diff --check` PASS with the known
+  `runtime/state/snapshot.json` CRLF warning. The consumed Arquitecto GO remains open because
+  `mailbox_archive` is orchestrator-only for Codex.
 - TASK-0224 is delivered to `in_review` in this protocol repo. `scripts/generate_human_guide.py` now has a
   `--mode report` normalizer that injects `Updated` with time and a recalculated dataset `X/500` line using
   eligible events `seq>=2221 AND intent.applied AND ed25519`, with per-agent breakdown. It removes stale

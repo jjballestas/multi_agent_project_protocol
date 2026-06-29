@@ -12237,6 +12237,29 @@
             "updated_at": "2026-06-29T12:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0224-remediation",
+            "expires_at": "2026-06-30T23:59:59Z",
+            "notes": "Remediate TASK-0224 changes_requested: plain report metadata cleanup golden and sample evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Codex-TASK-0224-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                "scripts/generate_human_guide.py",
+                "examples/human_guide_cases/run_human_guide_cases.py",
+                "personal/Codex/TASK-0224-remediation-sample-report.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0224-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-remediation-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T21:53:41Z",
+            "status": "released",
+            "task_id": "TASK-0224",
+            "updated_at": "2026-06-29T21:53:41Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

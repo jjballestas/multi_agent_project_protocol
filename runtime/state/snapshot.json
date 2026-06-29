@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "acf1286c3f561a03be4163c790a683a5f311a3c9f4ae715c4b0328c5ca414e1d",
+  "canonical_hash": "3ea870cd710b210decd1f1b73b308a3b7649de152b1b08fc95dd6be38cb24557",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -443,6 +443,7 @@
       "CLAIM-20260629-Arquitecto-register-0216-0217": 1,
       "CLAIM-20260629-Arquitecto-register-0218": 1,
       "CLAIM-20260629-Codex-TASK-0218": 1,
+      "CLAIM-20260629-Codex-TASK-0224-remediation": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -805,7 +806,7 @@
       "TASK-0221": 7,
       "TASK-0222": 3,
       "TASK-0223": 2,
-      "TASK-0224": 10,
+      "TASK-0224": 13,
       "TASK-0225": 1,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -814,7 +815,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2012,
+    "events_applied": 2016,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2237,6 +2238,10 @@
       "codex:task0209-panel-performance:ready-to-in-progress": 2455,
       "codex:task0213-attested-instancing:claim-acquire": 2501,
       "codex:task0213-attested-instancing:ready-to-in-progress": 2502,
+      "codex:task0224-remediation:changes-requested-to-in-progress": 2685,
+      "codex:task0224-remediation:claim-acquire": 2684,
+      "codex:task0224-remediation:claim-release": 2687,
+      "codex:task0224-remediation:in-progress-to-in-review": 2686,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -2830,5 +2835,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2683
+  "up_to_seq": 2687
 }

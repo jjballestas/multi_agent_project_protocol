@@ -290,6 +290,26 @@ def main() -> int:
         if "Arquitecto:" not in report_text or "Codex:" not in report_text:
             raise AssertionError("dataset per-agent breakdown was not injected")
 
+        plain_report_md = temp_root / "REPORT-plain.md"
+        plain_report_out = temp_root / "REPORT-plain.out.md"
+        write(
+            plain_report_md,
+            "# Reporte humano - formato plano\n\n"
+            "- Date: 2026-06-05\n"
+            "- Updated: 2026-06-05T00:00:00Z\n"
+            "- Dataset status: 1/500 stale.\n\n"
+            "## Resultado\n\n"
+            "Contenido.\n",
+        )
+        run_report(plain_report_md, plain_report_out)
+        plain_report_text = plain_report_out.read_text(encoding="utf-8")
+        if "- Date:" in plain_report_text or "- Dataset status:" in plain_report_text:
+            raise AssertionError("plain stale report metadata was not removed")
+        if plain_report_text.count("- **Updated:**") != 1:
+            raise AssertionError("plain report metadata normalization duplicated Updated")
+        if "- **Updated:** 2026-06-29T12:34:56Z" not in plain_report_text:
+            raise AssertionError("plain report updated timestamp with time was not injected")
+
         print("OK: human guide generator cases passed.")
         return 0
 
