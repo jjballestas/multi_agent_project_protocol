@@ -12260,6 +12260,44 @@
             "updated_at": "2026-06-29T21:53:41Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Arquitecto-archive-directiva",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "archivar directiva resuelta",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260629T233338Z-Operador-to-Arquitecto-DIRECTIVA-gates-push-higiene.md",
+                "Area_comun/mailbox/archived/MSG-20260629T233338Z-Operador-to-Arquitecto-DIRECTIVA-gates-push-higiene.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Arquitecto-archive-directiva"
+            ],
+            "started_at": "2026-06-29T23:44:24Z",
+            "status": "released",
+            "task_id": "OPS-GATES-PUSH-20260629",
+            "updated_at": "2026-06-29T23:44:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260630-Arquitecto-mailbox-higiene",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "higiene mailbox directiva operador",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0224.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0224.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-REVIEW-TASK-0224.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-REVIEW-TASK-0224.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0224-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0224-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Codex-to-Arquitecto-TASK-0224-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-REVIEW-RESPONSE-TASK-0221.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-REVIEW-RESPONSE-TASK-0221.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Arquitecto-mailbox-higiene"
+            ],
+            "started_at": "2026-06-29T23:39:10Z",
+            "status": "released",
+            "task_id": "OPS-GATES-PUSH-20260629",
+            "updated_at": "2026-06-29T23:39:10Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
