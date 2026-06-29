@@ -76,6 +76,27 @@ def test_keygen(repo: Path, work: Path) -> None:
         cwd=repo,
     )
     assert_fails(second, "keygen idempotency")
+    external = work / "external-secrets"
+    escape = run(
+        [
+            sys.executable,
+            str(repo / "scripts" / "keygen_agent.py"),
+            "--root",
+            str(root),
+            "--agent-id",
+            "escape-agent",
+            "--keyid",
+            "escape-agent:v1",
+            "--secret-dir",
+            str(external),
+            "--output",
+            "-",
+        ],
+        cwd=repo,
+    )
+    assert_fails(escape, "keygen external secret-dir")
+    if external.exists():
+        raise AssertionError("keygen external secret-dir wrote outside protocol-secrets")
 
 
 def test_attested_instance(repo: Path, work: Path) -> None:
@@ -190,6 +211,39 @@ def test_attested_instance(repo: Path, work: Path) -> None:
         cwd=target,
     )
     assert_fails(worker_result, "worker keyless submit")
+    events_path = target / "runtime" / "state" / "events.jsonl"
+    events_before = events_path.read_bytes()
+    override = json.loads((target / "event-state.runtime.json").read_text(encoding="utf-8"))
+    override["event_state"]["actor_auth_config"]["keyids"]["agent-worker"] = "agent-a:v1"
+    override["event_state"]["actor_auth_config"]["private_key_files"]["agent-worker"] = override["event_state"][
+        "actor_auth_config"
+    ]["private_key_files"]["agent-a"]
+    override["event_state"]["event_auth"]["keys"]["agent-worker"] = override["event_state"]["event_auth"]["keys"][
+        "agent-a"
+    ]
+    write_json(target / "event-state.runtime.json", override)
+    cross_bound = run(
+        [
+            sys.executable,
+            str(target / "runtime" / "submit_intent.py"),
+            "--root",
+            str(target),
+            "--actor-id",
+            "agent-worker",
+            "--timestamp",
+            "1970-01-01T00:00:02Z",
+            "--commit",
+            "negative-cross-bound",
+            "--intent",
+            str(negative_path),
+            "--output",
+            "-",
+        ],
+        cwd=target,
+    )
+    assert_fails(cross_bound, "worker cross-bound signer submit")
+    if events_path.read_bytes() != events_before:
+        raise AssertionError("worker cross-bound signer submit changed events.jsonl")
 
 
 def parse_args() -> argparse.Namespace:

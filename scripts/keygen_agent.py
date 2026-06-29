@@ -41,10 +41,14 @@ def parse_args() -> argparse.Namespace:
 
 
 def resolve_secret_dir(root: Path, value: str) -> Path:
+    allowed_root = (root / "protocol-secrets").resolve()
     path = Path(value)
     if not path.is_absolute():
         path = root / path
-    return path.resolve()
+    resolved = path.resolve()
+    if resolved != allowed_root and allowed_root not in resolved.parents:
+        raise ValueError("--secret-dir must resolve under <root>/protocol-secrets")
+    return resolved
 
 
 def write_secret(path: Path, data: bytes, *, force: bool) -> None:

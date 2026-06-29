@@ -4,6 +4,22 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0213 review fix is delivered back to `in_review` after Arquitecto/Analista change request. Changes:
+  `scripts/keygen_agent.py` now rejects `--secret-dir` outside `<root>/protocol-secrets`; `runtime/submit_intent.py`
+  adds a write-time attested actor/key binding guard without touching pinned `runtime/eventlog.py` or the validator;
+  `scripts/test_attested_instancing.py` covers external secret-dir rejection and worker cross-binding
+  signer/HMAC rejection with `events.jsonl` byte-identical. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0213-codex-to-arquitecto-2.md`; mailbox:
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0213-review-fix-in-review.md`. Evidence before
+  commit: `py_compile` PASS; `python scripts/test_attested_instancing.py --work C:\t\att0213-reviewfix-final`
+  PASS; encoding OK; neutrality OK; validator OK with only pre-existing mailbox warnings; drift false /
+  byte-identical `up_to_seq` 2528. Pinned hashes preserved:
+  `runtime/eventlog.py` `59A8AE8764AC327598BA2DA4759E7CBC75EA46B0CDE214A636518A3A9A70DEDD`,
+  validator `EB04799F266DEBAFB13A61F7F5E673F5D831683B18532BB8807F12DAFD65C5AB`,
+  `protocol.config.json` `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`,
+  `event-state.runtime.json` `B9706842F32E30B4A3054C65BF5F26A7A327567BDDB885438ED7FEDFA05111CF`,
+  pre-registro v2 `E8277CC7D52F015C6F9396F3D4261CB8C3F0F7A331B3E865CD76F418028A5E6D`. Consumed REVIEW
+  message remains open because Codex cannot perform orchestrator-only mailbox archive.
 - TASK-0214 was implemented and then closed by Arquitecto in protocol commit
   `fc468d5 close(TASK-0214 done): agregador read-only de estadisticas por agente/peon`. Delivery added
   `scripts/agent_metrics.py`, `scripts/test_agent_metrics.py`, and `examples/agent_metrics_cases/`. The aggregator

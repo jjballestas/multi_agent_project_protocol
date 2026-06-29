@@ -14,7 +14,19 @@ from typing import Any
 
 try:
     from .context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from .eventlog import EventWriter, LEDGER_LOCK_PATH, LOG_PATH, STATE_DIR, canonical_hash, ledger_file_lock, truncate_torn_jsonl_tail
+    from .eventlog import (
+        EventWriter,
+        LEDGER_LOCK_PATH,
+        LOG_PATH,
+        STATE_DIR,
+        actor_auth_config,
+        actor_auth_enforce_enabled,
+        actor_keyid,
+        canonical_hash,
+        event_auth_runtime_config,
+        ledger_file_lock,
+        truncate_torn_jsonl_tail,
+    )
     from .protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -28,7 +40,19 @@ try:
     from .temp_paths import make_root_temp_dir, remove_root_temp_dir
 except ImportError:  # pragma: no cover - direct script execution
     from context import active_claims, has_capability, load_agent_registry, load_state, tasks_by_id
-    from eventlog import EventWriter, LEDGER_LOCK_PATH, LOG_PATH, STATE_DIR, canonical_hash, ledger_file_lock, truncate_torn_jsonl_tail
+    from eventlog import (
+        EventWriter,
+        LEDGER_LOCK_PATH,
+        LOG_PATH,
+        STATE_DIR,
+        actor_auth_config,
+        actor_auth_enforce_enabled,
+        actor_keyid,
+        canonical_hash,
+        event_auth_runtime_config,
+        ledger_file_lock,
+        truncate_torn_jsonl_tail,
+    )
     from protocol_replay import (
         PROTOCOL_STATE_PATHS,
         apply_intent_event,
@@ -728,6 +752,61 @@ def ensure_actor_enabled(root: Path, actor_id: str) -> None:
         raise IntentValidationError(f"actor not registered/enabled: {actor_id}")
 
 
+def binding_slug(value: str) -> str:
+    cleaned = "".join(ch.lower() if ch.isalnum() else "-" for ch in value.strip())
+    cleaned = "-".join(part for part in cleaned.split("-") if part)
+    if not cleaned:
+        raise IntentValidationError("actor id must contain at least one alphanumeric character")
+    return cleaned
+
+
+def registry_agent(registry: dict[str, Any], actor_id: str) -> dict[str, Any]:
+    agents = registry.get("agents") if isinstance(registry, dict) else []
+    if not isinstance(agents, list):
+        return {}
+    for agent in agents:
+        if isinstance(agent, dict) and str(agent.get("id") or "") == actor_id:
+            return agent
+    return {}
+
+
+def ensure_attested_actor_key_binding(root: Path, actor_id: str) -> None:
+    config_path = root.resolve() / "protocol.config.json"
+    if not config_path.exists():
+        return
+    config = read_json(config_path)
+    if not actor_auth_enforce_enabled(config, root):
+        return
+    if not isinstance(config.get("attested_instancing"), dict) or config["attested_instancing"].get("enabled") is not True:
+        return
+
+    registry = load_agent_registry(root)
+    agent = registry_agent(registry, actor_id)
+    tier = str(agent.get("tier") or "").strip().lower()
+    auth_cfg = actor_auth_config(config, root)
+    keyids = auth_cfg.get("keyids") if isinstance(auth_cfg.get("keyids"), dict) else {}
+    private_files = auth_cfg.get("private_key_files") if isinstance(auth_cfg.get("private_key_files"), dict) else {}
+    event_auth_keys = event_auth_runtime_config(config, root).get("keys")
+    if not isinstance(event_auth_keys, dict):
+        event_auth_keys = {}
+
+    if tier != "signer":
+        if actor_id in keyids or actor_id in private_files or actor_id in event_auth_keys:
+            raise IntentValidationError(f"actor {actor_id} is not a signer and cannot bind signing material")
+        return
+
+    slug = binding_slug(actor_id)
+    expected_actor_keyid = f"{slug}:v1"
+    if actor_keyid(actor_id, config, root) != expected_actor_keyid:
+        raise IntentValidationError(f"actor_auth keyid for {actor_id} must be {expected_actor_keyid}")
+    event_auth = event_auth_keys.get(actor_id)
+    if not isinstance(event_auth, dict):
+        raise IntentValidationError(f"event_auth key missing for actor: {actor_id}")
+    expected_event_keyid = f"{slug}-hmac:v1"
+    if str(event_auth.get("key_id") or "") != expected_event_keyid:
+        raise IntentValidationError(f"event_auth key_id for {actor_id} must be {expected_event_keyid}")
+
+
 def ensure_event_state_config_valid(root: Path) -> None:
     config_path = root.resolve() / "protocol.config.json"
     if not config_path.exists():
@@ -879,6 +958,7 @@ def submit_intent(
     ensure_event_state_config_valid(root)
     normalized = normalize_intent(intent)
     ensure_actor_enabled(root, actor_id)
+    ensure_attested_actor_key_binding(root, actor_id)
     key = idempotency_key(actor_id, normalized)
 
     with ledger_file_lock(root):
@@ -996,6 +1076,7 @@ def submit_intents(
         raise IntentValidationError("transaction contains duplicate intent idempotency keys")
     tx_key = transaction_idempotency_key(actor_id, normalized_intents, transaction_key)
     ensure_actor_enabled(root, actor_id)
+    ensure_attested_actor_key_binding(root, actor_id)
     with ledger_file_lock(root):
         log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)
