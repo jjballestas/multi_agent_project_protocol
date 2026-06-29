@@ -2,7 +2,7 @@
 task_id: TASK-0216
 title: "Skill gobernada 'delegate-to-worker': convencion de delegacion jefe->peon con verify+firma del jefe (DECISION-0069/0061, SPEC-0110)"
 type: protocol
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

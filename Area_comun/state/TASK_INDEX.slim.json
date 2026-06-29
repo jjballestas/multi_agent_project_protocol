@@ -74,14 +74,6 @@
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
         },
         {
-            "id": "TASK-0216",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Skill gobernada 'delegate-to-worker': convencion de delegacion jefe->peon con verify+firma del jefe (DECISION-0069/0061, SPEC-0110)"
-        },
-        {
             "id": "TASK-0217",
             "owner": "Codex",
             "phase": "P2",
