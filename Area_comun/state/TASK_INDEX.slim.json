@@ -96,6 +96,38 @@
             "priority": "high",
             "status": "ready",
             "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
+        },
+        {
+            "id": "TASK-0222",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1"
+        },
+        {
+            "id": "TASK-0223",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "ready",
+            "title": "Zeus-Aegis: vista Instanciar-proyecto (read-only, prepara comando atestado, NO ejecuta)"
+        },
+        {
+            "id": "TASK-0224",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "in_review",
+            "title": "Fix redactor de reportes: bug de fechas + hora (updated) + estado dataset recontado X/500"
+        },
+        {
+            "id": "TASK-0225",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "ready",
+            "title": "Construir Arquitecto-cron (mailbox processor); lanzamiento real lo hace el operador"
         }
     ],
     "view": "task_index.slim"

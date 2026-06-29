@@ -4,6 +4,20 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0224 is delivered to `in_review` in this protocol repo. `scripts/generate_human_guide.py` now has a
+  `--mode report` normalizer that injects `Updated` with time and a recalculated dataset `X/500` line using
+  eligible events `seq>=2221 AND intent.applied AND ed25519`, with per-agent breakdown. It removes stale
+  date-only report metadata before inserting the canonical lines. Permanent coverage was added to
+  `examples/human_guide_cases/run_human_guide_cases.py`, and sample evidence was generated at
+  `personal/Codex/TASK-0224-sample-report.md` showing `Updated: 2026-06-29T12:34:56Z` and `453/500`
+  at generation time. Evidence: `py_compile` PASS; human guide/report golden PASS; neutrality PASS;
+  `git diff --check` PASS for touched implementation/test/evidence files; drift false / byte-identical
+  `up_to_seq=2675`. Full encoding and validator remain blocked by the consumed Arquitecto GO message
+  `MSG-20260629-Arquitecto-to-Codex-GO-TASK-0224.md` (non-ASCII body and missing `response_owner` while open).
+  Codex attempted `mailbox_archive` after delivery, but runtime rejected it because Codex lacks orchestrator
+  capability. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0224-codex-to-arquitecto-1.md`; mailbox:
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-in-review.md`.
 - TASK-0218 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `fd26831 feat(governance): add card detail modal`, authored as Arquitecto with Codex co-author. The governance
   panel now opens a generic read-only detail modal on double-click for Backlog, Mailbox, Artifacts, Decisions and

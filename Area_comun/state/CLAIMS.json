@@ -11537,6 +11537,22 @@
             "task_id": "TASK-0221"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-cleanup",
+            "expires_at": "2026-06-30T23:59:59Z",
+            "notes": "liberar claims lote panel",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Arquitecto-lote-panel-batch",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Arquitecto-lote-panel-v2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Arquitecto-dataset-lote-panel",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Arquitecto-cleanup"
+            ],
+            "started_at": "2026-06-29T20:26:23Z",
+            "status": "released",
+            "task_id": "CLEANUP",
+            "updated_at": "2026-06-29T20:26:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-close-0209",
             "expires_at": "2026-06-29T08:00:00Z",
             "notes": "Close TASK-0209 in_review->done (checker Arquitecto, maker=Codex). Performance del panel governance (Zeus-Aegis 9ad1fad). Cache de health (validate/drift real, TTL 45s, invalidacion por HEAD, ?refresh=1 re-corre real) + cache de state (TTL 60s) + UI Verified-Ns-ago + Refresh. Checker: health cacheado 19ms, refresh real ~3s, state cacheado 30ms, chip honesto (validateExitCode:0 real, tri-estado, no hardcodeado), f0-test 553 PASS. Regresion isolada vs HEAD~1: chip unknown del render = PRE-EXISTENTE (dev sin gateway), NO de 0209. Review adversarial Analista (TASK-0211): V1-V4 SOSTIENEN; unico bloqueo AC3 (governance:smoke no reproducible en clon limpio por dist/ gitignored) REMEDIADO por Codex (pregovernance:smoke=pnpm build, self-contained) -> tras rm dist el comando literal sale exit 0 reconstruyendo (1 ECONNRESET transitorio del smoke harness pre-existente, self-heal en retry). Sin writer-path; core/baseline TFM intactos.",
@@ -11681,6 +11697,12 @@
             "updated_at": "2026-06-29T15:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-dataset-lote-panel",
+            "owner": "Arquitecto",
+            "status": "released",
+            "task_id": "TASK-0222"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-decision-0071",
             "notes": "Registrar DECISION-0071 accepted (Engram capability OFF; matriz honesta; tras GO-PROMOVER-OFF del Analista).",
             "owner": "Arquitecto",
@@ -11690,6 +11712,42 @@
             ],
             "status": "released",
             "task_id": "DECISION-0071"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Arquitecto-lote-panel-batch",
+            "expires_at": "2026-06-30T23:59:59Z",
+            "notes": "Registro lote panel 0223-0225.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0223",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0223",
+                "Area_comun/tasks/TASK-0223-codex-zeus-aegis-vista-instanciar-proyecto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0225",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0225",
+                "Area_comun/tasks/TASK-0225-codex-construir-arquitecto-cron.md"
+            ],
+            "started_at": "2026-06-29T20:24:52Z",
+            "status": "released",
+            "task_id": "TASK-0223",
+            "updated_at": "2026-06-29T20:24:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Arquitecto-lote-panel-v2",
+            "expires_at": "2026-06-30T23:59:59Z",
+            "notes": "Registro lote panel cierre dataset.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md"
+            ],
+            "started_at": "2026-06-29T20:19:53Z",
+            "status": "released",
+            "task_id": "TASK-0222",
+            "updated_at": "2026-06-29T20:19:53Z"
         },
         {
             "claim_id": "CLAIM-20260629-Arquitecto-mailbox-archive-0629",
@@ -12104,6 +12162,31 @@
             "status": "released",
             "task_id": "TASK-0218",
             "updated_at": "2026-06-29T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Codex-TASK-0224",
+            "expires_at": "2026-06-29T18:00:00Z",
+            "notes": "Implement TASK-0224 report redactor updated timestamp and dataset recounted X/500 with per-agent breakdown.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260629-Codex-TASK-0224",
+                "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0224.md",
+                "Area_comun/mailbox/answered/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0224.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0224-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-in-review.md",
+                "personal/Codex/Memory.md",
+                "scripts/generate_human_guide.py",
+                "scripts/test_generate_human_guide.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0224",
+            "updated_at": "2026-06-29T12:00:00Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

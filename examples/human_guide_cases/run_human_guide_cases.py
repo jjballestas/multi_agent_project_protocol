@@ -181,6 +181,25 @@ def run_check(input_path: Path, output_path: Path, *, kind: str, expect_success:
     )
 
 
+def run_report(input_path: Path, output_path: Path) -> None:
+    run_command(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--root",
+            str(ROOT),
+            "--mode",
+            "report",
+            "--updated",
+            "2026-06-29T12:34:56Z",
+            "--in",
+            str(input_path),
+            "--out",
+            str(output_path),
+        ]
+    )
+
+
 def main() -> int:
     with root_temp_dir(ROOT, ".human-guide-cases-") as temp_root:
         live_md = temp_root / "HUMAN_GUIDE.md"
@@ -249,6 +268,27 @@ def main() -> int:
             run_generator(live_md, live_b, kind="live")
             if ps_html.read_bytes() != live_b.read_bytes():
                 raise AssertionError("PowerShell wrapper output differs from Python output")
+
+        report_md = temp_root / "REPORT.md"
+        report_out = temp_root / "REPORT.out.md"
+        write(
+            report_md,
+            "# Reporte humano - ejemplo\n\n"
+            "- **Fecha:** 2026-06-29\n"
+            "- **Dataset actualizado:** 1/500 stale.\n\n"
+            "## Resultado\n\n"
+            "Contenido.\n",
+        )
+        run_report(report_md, report_out)
+        report_text = report_out.read_text(encoding="utf-8")
+        if "- **Fecha:**" in report_text:
+            raise AssertionError("stale date-only report metadata was not removed")
+        if "- **Updated:** 2026-06-29T12:34:56Z" not in report_text:
+            raise AssertionError("report updated timestamp with time was not injected")
+        if "Dataset actualizado:" not in report_text or "/500 elegibles" not in report_text:
+            raise AssertionError("dataset X/500 status was not injected")
+        if "Arquitecto:" not in report_text or "Codex:" not in report_text:
+            raise AssertionError("dataset per-agent breakdown was not injected")
 
         print("OK: human guide generator cases passed.")
         return 0

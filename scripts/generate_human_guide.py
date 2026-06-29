@@ -10,6 +10,7 @@ import json
 import re
 import sys
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
@@ -48,6 +49,8 @@ REQUIRED_FRONTMATTER = (
     "actualizado",
 )
 VALID_ADOPTION_TIERS = {"coordination", "runtime"}
+DATASET_TARGET = 500
+DATASET_MIN_SEQ = 2221
 
 SECTION_RE = re.compile(r"^##\s+(\d+)\.\s+(.+?)\s*$")
 META_RE = re.compile(
@@ -724,12 +727,79 @@ def generate(input_path: Path, *, root: Path, kind: str) -> str:
     return render_html(document)
 
 
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def dataset_status(root: Path) -> tuple[int, dict[str, int]]:
+    events_path = root / "runtime" / "state" / "events.jsonl"
+    counts: dict[str, int] = {}
+    if not events_path.exists():
+        return 0, counts
+    for line in events_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if int(event.get("seq") or 0) < DATASET_MIN_SEQ:
+            continue
+        if event.get("type") != "intent.applied" or event.get("applied") is not True:
+            continue
+        actor_auth = event.get("actor_auth")
+        if not isinstance(actor_auth, dict) or actor_auth.get("method") != "ed25519":
+            continue
+        actor = str(event.get("actor") or "unknown").strip() or "unknown"
+        counts[actor] = counts.get(actor, 0) + 1
+    return sum(counts.values()), dict(sorted(counts.items()))
+
+
+def dataset_status_line(root: Path) -> str:
+    total, counts = dataset_status(root)
+    breakdown = ", ".join(f"{actor}: {count}" for actor, count in counts.items()) or "sin eventos elegibles"
+    return (
+        f"- **Dataset actualizado:** {total}/{DATASET_TARGET} elegibles "
+        f"(seq>={DATASET_MIN_SEQ} AND intent.applied AND ed25519; {breakdown})."
+    )
+
+
+def inject_report_metadata(text: str, *, updated: str, dataset_line: str) -> str:
+    normalized = normalize_newlines(text)
+    lines = normalized.split("\n")
+    output: list[str] = []
+    inserted = False
+    skip_next_blank = False
+    for line in lines:
+        if re.match(r"^-\s+\*\*?(Fecha|Date|Actualizado|Updated|Dataset actualizado|Dataset status):\*\*?", line):
+            skip_next_blank = False
+            continue
+        output.append(line)
+        if not inserted and line.startswith("# "):
+            output.extend(["", f"- **Updated:** {updated}", dataset_line])
+            inserted = True
+            skip_next_blank = True
+            continue
+        if skip_next_blank:
+            skip_next_blank = False
+    if not inserted:
+        output = [f"- **Updated:** {updated}", dataset_line, ""] + output
+    return "\n".join(output).rstrip() + "\n"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate deterministic HUMAN_GUIDE HTML.")
     parser.add_argument("--root", default=".", help="Repository or instance root for protocol.config.json fallback.")
     parser.add_argument("--in", dest="input_path", required=True, help="Input HUMAN_GUIDE markdown path.")
     parser.add_argument("--out", dest="output_path", help="Output HTML path. Defaults to input with .html suffix.")
     parser.add_argument("--check", action="store_true", help="Validate and fail if output HTML differs.")
+    parser.add_argument(
+        "--mode",
+        choices=("guide", "report"),
+        default="guide",
+        help="Generate a human guide HTML or normalize a markdown report header.",
+    )
+    parser.add_argument("--updated", help="Report updated timestamp. Defaults to current UTC time.")
     parser.add_argument(
         "--kind",
         choices=("auto", "template", "example", "live"),
@@ -749,11 +819,20 @@ def main() -> int:
     if not output_path.is_absolute():
         output_path = (Path.cwd() / output_path).resolve()
 
-    try:
-        rendered = generate(input_path, root=root, kind=args.kind)
-    except GuideError as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
+    if args.mode == "report":
+        try:
+            source = input_path.read_text(encoding="utf-8-sig")
+        except OSError as exc:
+            print(f"ERROR: cannot read report: {input_path} ({exc})", file=sys.stderr)
+            return 1
+        updated = args.updated or utc_timestamp()
+        rendered = inject_report_metadata(source, updated=updated, dataset_line=dataset_status_line(root))
+    else:
+        try:
+            rendered = generate(input_path, root=root, kind=args.kind)
+        except GuideError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
 
     rendered_bytes = rendered.encode("utf-8")
     if args.check:
