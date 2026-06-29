@@ -1,0 +1,63 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-register-0069",
+          "task_id": "TASK-0213",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/decisions/DECISION-0069-instancing-attestation-ceremony.md",
+            "Area_comun/specs/SPEC-0108-instancing-attestation-ceremony.md",
+            "Area_comun/tasks/TASK-0213-codex-instancing-attestation-ceremony.md",
+            "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0213.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T05:00:00Z",
+          "updated_at": "2026-06-29T05:00:00Z",
+          "expires_at": "2026-06-29T11:00:00Z",
+          "status": "active",
+          "notes": "Register DECISION-0069 accepted (ceremonia de instanciacion atestada: roster por instancia firmantes/workers + binding LLM, keygen solo firmantes, invariante de frontera, provenance; guardrail TFM) + TASK-0213 ready/Codex (SPEC-0108). Operador ratifico. maker=Codex/checker=Arquitecto. PII diferido (ref DECISION-0040)."
+        },
+        "idempotency_key": "arquitecto:register-0069:claim-acquire"
+      }
+    },
+    {
+      "decision": {
+        "decision_id": "DECISION-0069",
+        "title": "Ceremonia de instanciacion atestada -- roster por instancia (firmantes + workers keyless + binding LLM), keygen solo a firmantes, invariante de frontera; con guardrail de congelacion del core medido (TFM)",
+        "status": "accepted",
+        "idempotency_key": "arquitecto:register-0069:decision"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": {
+          "id": "TASK-0213",
+          "title": "Ceremonia de instanciacion atestada: keygen por firmante + roster (firmantes/workers + binding LLM) en new_instance.py (DECISION-0069, SPEC-0108)",
+          "type": "protocol",
+          "status": "ready",
+          "owner": "Codex",
+          "phase": "P2",
+          "priority": "high",
+          "linked_decisions": ["DECISION-0069"],
+          "created_at": "2026-06-29",
+          "file": "Area_comun/tasks/TASK-0213-codex-instancing-attestation-ceremony.md"
+        },
+        "idempotency_key": "arquitecto:register-0069:task-upsert-0213"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-register-0069",
+        "idempotency_key": "arquitecto:register-0069:claim-release"
+      }
+    }
+  ]
+}

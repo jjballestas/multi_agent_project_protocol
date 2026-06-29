@@ -47,6 +47,12 @@
             "owner": "Analista",
             "status": "ready",
             "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)"
+        },
+        {
+            "id": "TASK-0213",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "Ceremonia de instanciacion atestada: keygen por firmante + roster (firmantes/workers + binding LLM) en new_instance.py (DECISION-0069, SPEC-0108)"
         }
     ],
     "next_actions": [

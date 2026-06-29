@@ -3296,6 +3296,20 @@
             "type": "product"
         },
         {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0213-codex-instancing-attestation-ceremony.md",
+            "id": "TASK-0213",
+            "linked_decisions": [
+                "DECISION-0069"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Ceremonia de instanciacion atestada: keygen por firmante + roster (firmantes/workers + binding LLM) en new_instance.py (DECISION-0069, SPEC-0108)",
+            "type": "protocol"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
