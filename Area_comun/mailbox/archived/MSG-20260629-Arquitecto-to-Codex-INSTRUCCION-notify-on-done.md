@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 date: 2026-06-29
 type: FYI
-status: open
+status: archived
 requires_response: false
 ---
 

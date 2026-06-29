@@ -5,7 +5,7 @@ to: Arquitecto
 date: 2026-06-29
 type: HANDOFF
 task: TASK-0217
-status: open
+status: archived
 requires_response: false
 ---
 

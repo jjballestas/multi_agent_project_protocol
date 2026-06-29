@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "989893793b33c0f54a44cd5fdab6bee938e5f8057546f7beee25c093974b23f7",
+  "canonical_hash": "af4c4fd772eee8acd926e18fa7dfb56f4750ca287302903182b47a68e2631f19",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -610,11 +610,16 @@
       "MSG-20260629-Analista-to-Arquitecto-TASK-0215-review": 1,
       "MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211": 1,
       "MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215": 1,
+      "MSG-20260629-Arquitecto-to-Analista-INSTRUCCION-notify-on-done": 1,
       "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0209": 1,
       "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210": 1,
       "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0212": 1,
       "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0213": 1,
       "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214": 1,
+      "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0216": 1,
+      "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0217": 1,
+      "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0218": 1,
+      "MSG-20260629-Arquitecto-to-Codex-INSTRUCCION-notify-on-done": 1,
       "MSG-20260629-Arquitecto-to-Codex-REVIEW-TASK-0213": 1,
       "MSG-20260629-Codex-to-Arquitecto-TASK-0209-in-review": 1,
       "MSG-20260629-Codex-to-Arquitecto-TASK-0209-review-fix-in-review": 1,
@@ -623,6 +628,9 @@
       "MSG-20260629-Codex-to-Arquitecto-TASK-0213-in-review": 1,
       "MSG-20260629-Codex-to-Arquitecto-TASK-0213-review-fix-in-review": 1,
       "MSG-20260629-Codex-to-Arquitecto-TASK-0214-in-review": 1,
+      "MSG-20260629-Codex-to-Arquitecto-TASK-0216-in-review": 1,
+      "MSG-20260629-Codex-to-Arquitecto-TASK-0217-in-review": 1,
+      "MSG-20260629-Codex-to-Arquitecto-TASK-0218-in-review": 1,
       "PROJECT_STATE": 9,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
@@ -774,7 +782,8 @@
       "TASK-0215": 8,
       "TASK-0216": 8,
       "TASK-0217": 7,
-      "TASK-0218": 7,
+      "TASK-0218": 9,
+      "TASK-0219": 3,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -782,7 +791,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 1946,
+    "events_applied": 1959,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2396,6 +2405,19 @@
       "intent:Analista:claim:dc6d25a6c49d109ab7d9fcaee996c2a1006eb84dac671cbfffaa05536506da13": 2414,
       "intent:Analista:claim:defa2a61fc1d5fa376d8ad62e593532b8c551d3ef24ca6467ed903ef6404b260": 2406,
       "intent:Analista:claim:fe9de8a8ee2b5628b23740431d35dacb7e023b388e99a74fd351267ed65d00b3": 2461,
+      "intent:Arquitecto:claim:1a44a8a9123e8f189b72aabaff2d0cafb54ee0ec81be9da223d44069aab0b8b4": 2630,
+      "intent:Arquitecto:claim:4eb3ad69bbe96dd4628eb43222310eddc51ed5f1c6fae72062f41cc988a26323": 2627,
+      "intent:Arquitecto:claim:6c0874b8b4a8738a820aaf020a5780de3dc10e34856441256e1764475b4e9dd0": 2618,
+      "intent:Arquitecto:claim:f240ac673b4642587fa3b74c3744e3b7307c3fff1174208596c119df847cf36f": 2628,
+      "intent:Arquitecto:mailbox_archive:49e86527294ed47a52917858bf1bd6bdee09e33970e110e12da0bdb2c6be8893": 2620,
+      "intent:Arquitecto:mailbox_archive:4d5dd25de4bea829688c4f8ff4379c2259761edaf4214b4d18c277c8857162f4": 2623,
+      "intent:Arquitecto:mailbox_archive:6aafd08c8e96b9a2bdf4a8782ad761ea0719008865b074409ead1283f95c600e": 2621,
+      "intent:Arquitecto:mailbox_archive:7662b22ab5df4158c0bd41f38074d862750b972204b6b98f33b2ddee916e058d": 2622,
+      "intent:Arquitecto:mailbox_archive:95d6eb3c7717bba6cfe7173710dee657e36f4783a735568a1046f2e3ee608d6f": 2626,
+      "intent:Arquitecto:mailbox_archive:ba7e7202f40712b94e75efa85445884646a1c2542b0ed0d34e590855057b1b91": 2619,
+      "intent:Arquitecto:mailbox_archive:d15cc8722e73e0fb153e05a4b1e5909426d6024123e9868b35599b88f97fd2aa": 2625,
+      "intent:Arquitecto:mailbox_archive:de60d2babcc354b08699f8e9b9a2b979f1d75d8bec7df3ce8ac8eee361bd640b": 2624,
+      "intent:Arquitecto:task_upsert:f7cf34c2446dfd26138fb0dfc42d17a8699fc3230c0c2acaa33976a260bfcfb0": 2629,
       "intent:Codex:TASK-0213-review-fix-claim-release-v3": 2528,
       "intent:Codex:TASK-0213-review-fix-status-in-review-v3": 2527,
       "intent:Codex:claim:0238a72a88d38668828568860123cf10c85dd648f2a84a0994f1518b3d84660a": 2134,
@@ -2732,5 +2754,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2617
+  "up_to_seq": 2630
 }

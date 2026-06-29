@@ -5,7 +5,7 @@ to: Codex
 date: 2026-06-29
 type: GO
 task: TASK-0218
-status: open
+status: archived
 requires_response: false
 ---
 

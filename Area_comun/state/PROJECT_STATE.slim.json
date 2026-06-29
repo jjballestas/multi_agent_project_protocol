@@ -53,6 +53,12 @@
             "owner": "Analista",
             "status": "ready",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
+        },
+        {
+            "id": "TASK-0219",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche"
         }
     ],
     "next_actions": [

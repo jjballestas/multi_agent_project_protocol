@@ -3,7 +3,7 @@ message_id: MSG-20260629-Arquitecto-to-Analista-INSTRUCCION-notify-on-done
 type: FYI
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: false
 ---
 

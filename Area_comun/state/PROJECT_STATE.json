@@ -1021,6 +1021,12 @@
             "title": "Zeus-Aegis: doble-click en tarjeta (Backlog/Mailbox/Artifacts/Decisiones/Handoffs) abre detalle completo; Esc o boton Cerrar vuelve (DECISION-0064)"
         },
         {
+            "id": "TASK-0219",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
