@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-close-0212",
+          "task_id": "TASK-0212",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/tasks/TASK-0212-codex-zeus-aegis-panel-resilient-load.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T04:00:00Z",
+          "updated_at": "2026-06-29T04:00:00Z",
+          "expires_at": "2026-06-29T10:00:00Z",
+          "status": "active",
+          "notes": "Close TASK-0212 in_review->done (checker Arquitecto, maker=Codex). Carga resiliente del panel (Zeus-Aegis e6ba07a): load() por-endpoint con readEndpoint+Promise.allSettled; cada respuesta valida puebla solo su estado; fallo aislado deja aviso sin blanquear; chips Validator/Drift/Verified derivados solo de /api/governance/health. CHECKER DECISIVO en clon SIN gateway (reproducia unknown/0): tras reload el panel muestra Validator green, Drift green, Verified 20s ago, Seq 2493, Active tasks 9, Tasks 166, Ledger 200, Signers 3 (Analista/Arquitecto/Codex), secciones Backlog 9/Mailbox 40/Artifacts 91/Decisiones 68/Ledger 80/Handoffs PESE a 503 de auth-check/provider-usage. Screenshot 0212_checker_after.png. AC3 cubierto por screenshot de fallo inyectado de Codex (mailbox 503 degrada solo su seccion). Gates: f0-test exit 0 + governance:smoke exit 0; read-only (diff solo governance.tsx UI+test+2png). NOTA: en vite dev el primer paint SSR muestra unknown por hydration mismatch hasta que el cliente regenera/reload (artefacto dev-mode, no del fix; los datos SI pueblan). Core/baseline TFM intactos."
+        },
+        "idempotency_key": "arquitecto:close-0212:claim-acquire"
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0212",
+        "from": "in_review",
+        "to": "done",
+        "idempotency_key": "arquitecto:close-0212:status-done"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-close-0212",
+        "idempotency_key": "arquitecto:close-0212:claim-release"
+      }
+    }
+  ]
+}

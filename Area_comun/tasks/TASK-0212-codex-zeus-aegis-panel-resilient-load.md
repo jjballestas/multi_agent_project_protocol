@@ -2,7 +2,7 @@
 task_id: TASK-0212
 title: "Zeus-Aegis: carga resiliente del panel governance (por-endpoint, tolerante a fallos de endpoints no-governance) (DECISION-0064)"
 type: product
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high
