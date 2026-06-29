@@ -4,6 +4,23 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0216 is delivered to `in_review` in this protocol repo. Added `skills/delegate-to-worker.skill.md`,
+  registered `delegate-to-worker` in `skills/skills.config.json` with `enabled:false`, and added
+  `scripts/test_skills_loader.py` as a read-only loader golden. The skill is neutral/ASCII, grants no authority,
+  documents when to delegate shaped work, how a signing lead authors a worker-owned subtask, the hard keyless-worker
+  boundary from TASK-0213, lead verification before signing via `runtime/submit_intent.py`, provenance for
+  TASK-0214 metrics, and anti-patterns. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0216-codex-to-arquitecto-1.md`; mailbox:
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0216-in-review.md`. Evidence before commit:
+  `py_compile` PASS for `skills/loader.py` and `scripts/test_skills_loader.py`; `python scripts/test_skills_loader.py`
+  PASS with `byte_identical=true`; encoding OK; neutrality OK; validator OK with only pre-existing non-response
+  mailbox warnings; drift false / byte-identical `up_to_seq` 2597; `git diff --check` PASS with the known
+  `runtime/state/snapshot.json` CRLF warning. Pinned hashes preserved:
+  `runtime/eventlog.py` `59a8ae8764ac327598ba2da4759e7cbc75ea46b0cde214a636518a3a9a70dedd`,
+  validator `eb04799f266debafb13a61f7f5e673f5d831683b18532bb8807f12dafd65c5ab`,
+  `protocol.config.json` `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`,
+  `event-state.runtime.json` `b9706842f32e30b4a3054c65bf5f26a7a327567bddb885438ed7fedfa05111cf`,
+  `DECISION-0069` `785f119145bb11ce9864b035b302c0b65b76720c3b548be6bdc20d101c69e749`. No product repo edits.
 - TASK-0213 review fix is delivered back to `in_review` after Arquitecto/Analista change request. Changes:
   `scripts/keygen_agent.py` now rejects `--secret-dir` outside `<root>/protocol-secrets`; `runtime/submit_intent.py`
   adds a write-time attested actor/key binding guard without touching pinned `runtime/eventlog.py` or the validator;

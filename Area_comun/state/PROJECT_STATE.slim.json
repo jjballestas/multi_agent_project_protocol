@@ -57,7 +57,7 @@
         {
             "id": "TASK-0216",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Skill gobernada 'delegate-to-worker': convencion de delegacion jefe->peon con verify+firma del jefe (DECISION-0069/0061, SPEC-0110)"
         },
         {

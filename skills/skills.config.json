@@ -15,6 +15,19 @@
       }
     },
     {
+      "id": "delegate-to-worker",
+      "title": "Delegate to worker",
+      "neutral_core": true,
+      "path": "skills/delegate-to-worker.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
+    },
+    {
       "id": "ddl-conventions",
       "title": "DDL conventions",
       "neutral_core": false,
