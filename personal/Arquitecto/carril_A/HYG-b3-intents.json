@@ -1,0 +1,144 @@
+{
+ "intents": [
+  {
+   "claim": {
+    "op": "acquire",
+    "claim": {
+     "claim_id": "CLAIM-20260629-Arq-hyg-b3",
+     "task_id": "MAILBOX-HYGIENE",
+     "owner": "Arquitecto",
+     "scope": [
+      "Area_comun/state/CLAIMS.json",
+      "Area_comun/state/PROJECT_STATE.json",
+      "Area_comun/state/TASK_INDEX.json",
+      "runtime/state/events.jsonl",
+      "runtime/state/snapshot.json",
+      "Area_comun/mailbox/open/MSG-20260628-Codex-to-Arquitecto-TASK-0208-review3-fix-in-review.md",
+      "Area_comun/mailbox/archived/MSG-20260628-Codex-to-Arquitecto-TASK-0208-review3-fix-in-review.md",
+      "Area_comun/mailbox/open/MSG-20260629-Analista-to-Arquitecto-TASK-0211-review.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Analista-to-Arquitecto-TASK-0211-review.md",
+      "Area_comun/mailbox/open/MSG-20260629-Analista-to-Arquitecto-TASK-0215-review.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Analista-to-Arquitecto-TASK-0215-review.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0209.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0209.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0212.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0212.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0213.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0213.md",
+      "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214.md",
+      "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214.md"
+     ],
+     "started_at": "2026-06-29T11:55:00Z",
+     "updated_at": "2026-06-29T11:55:00Z",
+     "expires_at": "2026-06-29T17:00:00Z",
+     "status": "active",
+     "notes": "Higiene mailbox lote 3: archivar 10 resueltos."
+    },
+    "idempotency_key": "arq:hygb3:claim"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260628-Codex-to-Arquitecto-TASK-0208-review3-fix-in-review",
+    "author": "Codex",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:00"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Analista-to-Arquitecto-TASK-0211-review",
+    "author": "Analista",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:01"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Analista-to-Arquitecto-TASK-0215-review",
+    "author": "Analista",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:02"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Analista-GO-TASK-0211",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:03"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Analista-GO-TASK-0215",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:04"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0209",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:05"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0210",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:06"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0212",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:07"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0213",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:08"
+   }
+  },
+  {
+   "mailbox_archive": {
+    "message_id": "MSG-20260629-Arquitecto-to-Codex-GO-TASK-0214",
+    "author": "Arquitecto",
+    "relayed_by": "Arquitecto",
+    "endorsement": "none",
+    "idempotency_key": "arq:hygb3:09"
+   }
+  },
+  {
+   "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260629-Arq-hyg-b3",
+    "idempotency_key": "arq:hygb3:rel"
+   }
+  }
+ ]
+}
