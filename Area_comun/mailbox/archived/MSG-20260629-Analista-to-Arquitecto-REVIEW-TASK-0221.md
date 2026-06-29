@@ -4,7 +4,7 @@ task_id: TASK-0221
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "TASK-0221 veredicto GO-PROMOVER-OFF: las 3 correcciones minimas de la ronda 2 cierran honestamente contra 77dfa0f."

@@ -1125,7 +1125,8 @@
         "DECISION-0067",
         "DECISION-0068",
         "DECISION-0069",
-        "DECISION-0070"
+        "DECISION-0070",
+        "DECISION-0071"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

@@ -4,7 +4,7 @@ task_id: TASK-0221
 type: GO
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 canonical_protocol_commit: 77dfa0f64c738b6be5d57d89fb44de4d601c98ed

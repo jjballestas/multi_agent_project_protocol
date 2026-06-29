@@ -11422,6 +11422,22 @@
             "task_id": "TASK-0220"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-archive-engram-r3",
+            "notes": "Higiene cierre ciclo Engram round-3.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0221.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-GO-TASK-0221.md",
+                "Area_comun/mailbox/open/MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0221.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Analista-to-Arquitecto-REVIEW-TASK-0221.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Analista-REVIEW-RESPONSE-TASK-0220.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Arquitecto-to-Analista-REVIEW-RESPONSE-TASK-0220.md"
+            ],
+            "status": "released",
+            "task_id": "TASK-0221"
+        },
+        {
             "claim_id": "CLAIM-20260629-Arquitecto-author-0211",
             "expires_at": "2026-06-29T06:00:00Z",
             "notes": "Author TASK-0211 (ready, reviewer=Analista): revision adversarial de TASK-0209 (cache del panel). Operador pidio la mirada del Analista. checker=Arquitecto, author_under_review=Codex.",
@@ -11663,6 +11679,17 @@
             "status": "released",
             "task_id": "TASK-0218",
             "updated_at": "2026-06-29T15:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260629-Arquitecto-decision-0071",
+            "notes": "Registrar DECISION-0071 accepted (Engram capability OFF; matriz honesta; tras GO-PROMOVER-OFF del Analista).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "status": "released",
+            "task_id": "DECISION-0071"
         },
         {
             "claim_id": "CLAIM-20260629-Arquitecto-mailbox-archive-0629",
