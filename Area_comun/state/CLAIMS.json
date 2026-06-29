@@ -11587,6 +11587,25 @@
             "updated_at": "2026-06-29T12:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260629-Arquitecto-register-0218",
+            "expires_at": "2026-06-29T20:00:00Z",
+            "notes": "Author TASK-0218 ready/Codex (Zeus-Aegis: doble-click en tarjeta -> modal de detalle completo, Esc/boton Cerrar). Pedido del operador. maker=Codex/checker=Arquitecto. Read-only, PII-redactado.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0218-codex-zeus-aegis-card-detail-modal.md",
+                "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0218.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T14:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0218",
+            "updated_at": "2026-06-29T14:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260629-Codex-TASK-0209",
             "expires_at": "2026-06-30T00:00:00Z",
             "notes": "TASK-0209 implementation: cache governance health and state snapshots while preserving read-only honest status.",
