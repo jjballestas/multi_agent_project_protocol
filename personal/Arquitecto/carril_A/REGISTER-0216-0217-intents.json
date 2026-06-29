@@ -1,0 +1,51 @@
+{
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260629-Arquitecto-register-0216-0217",
+          "task_id": "TASK-0216",
+          "owner": "Arquitecto",
+          "scope": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/specs/SPEC-0110-delegate-to-worker-skill.md",
+            "Area_comun/tasks/TASK-0216-codex-delegate-to-worker-skill.md",
+            "Area_comun/tasks/TASK-0217-codex-zeus-aegis-backlog-consistency.md",
+            "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0216.md",
+            "Area_comun/mailbox/open/MSG-20260629-Arquitecto-to-Codex-GO-TASK-0217.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-29T12:30:00Z",
+          "updated_at": "2026-06-29T12:30:00Z",
+          "expires_at": "2026-06-29T18:00:00Z",
+          "status": "active",
+          "notes": "Author TASK-0216 (skill delegate-to-worker, SPEC-0110, DECISION-0069/0061) + TASK-0217 (Zeus-Aegis backlog 0 vs dashboard, fuente inconsistente slim/full). Ambas ready/Codex, maker=Codex/checker=Arquitecto. Operador pidio la skill con maker/checker + reporto el bug del backlog."
+        },
+        "idempotency_key": "arquitecto:register-0216-0217:claim-acquire"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": { "id":"TASK-0216","title":"Skill gobernada 'delegate-to-worker': convencion de delegacion jefe->peon con verify+firma del jefe (DECISION-0069/0061, SPEC-0110)","type":"protocol","status":"ready","owner":"Codex","phase":"P2","priority":"high","linked_decisions":["DECISION-0069","DECISION-0061"],"created_at":"2026-06-29","file":"Area_comun/tasks/TASK-0216-codex-delegate-to-worker-skill.md" },
+        "idempotency_key": "arquitecto:register-0216-0217:upsert-0216"
+      }
+    },
+    {
+      "task_upsert": {
+        "task": { "id":"TASK-0217","title":"Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)","type":"product","status":"ready","owner":"Codex","phase":"P2","priority":"high","linked_decisions":["DECISION-0064"],"created_at":"2026-06-29","file":"Area_comun/tasks/TASK-0217-codex-zeus-aegis-backlog-consistency.md" },
+        "idempotency_key": "arquitecto:register-0216-0217:upsert-0217"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260629-Arquitecto-register-0216-0217",
+        "idempotency_key": "arquitecto:register-0216-0217:claim-release"
+      }
+    }
+  ]
+}

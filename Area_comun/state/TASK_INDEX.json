@@ -3338,6 +3338,35 @@
             "type": "review"
         },
         {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0216-codex-delegate-to-worker-skill.md",
+            "id": "TASK-0216",
+            "linked_decisions": [
+                "DECISION-0069",
+                "DECISION-0061"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Skill gobernada 'delegate-to-worker': convencion de delegacion jefe->peon con verify+firma del jefe (DECISION-0069/0061, SPEC-0110)",
+            "type": "protocol"
+        },
+        {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0217-codex-zeus-aegis-backlog-consistency.md",
+            "id": "TASK-0217",
+            "linked_decisions": [
+                "DECISION-0064"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Zeus-Aegis: Backlog muestra 0 pese a Dashboard Tasks>0 -- fuente inconsistente (slim vs full) + render del backlog (DECISION-0064)",
+            "type": "product"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
