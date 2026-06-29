@@ -4,6 +4,29 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0210 protocol delivery commit
 
 ## Latest Session Note
 
+- TASK-0212 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `e6ba07a fix(governance): load panel endpoints resiliently`, authored as Arquitecto with Codex co-author.
+  `governance.tsx` now reads each `/api/governance/*` endpoint through scoped safe fetches and
+  `Promise.allSettled`; a failed endpoint records a section-specific unavailable warning while successful
+  health/state/backlog/mailbox/artifacts/decisions/ledger/handoffs/projects/metrics responses still populate
+  their own chips and sections. The health chips remain derived only from `/api/governance/health`, so
+  `/api/auth-check` 503 without gateway no longer blanks Validator/Drift/Verified. Permanent coverage in
+  `governance-readonly.test.ts` blocks the old `Governance read failed` all-or-nothing pattern. Render
+  evidence was created with system Chrome and no gateway:
+  `vendor/hermes-2.3.0/scripts/task0212-resilient-after-wait.png` (auth-check 503 while Validator/Drift green)
+  and `vendor/hermes-2.3.0/scripts/task0212-injected-mailbox-failure.png` (mailbox 503 injected while health,
+  tasks and ledger events stay populated). Product evidence before commit: `node --check server-entry.js` OK;
+  `node --check scripts/zeus-aegis-f0-test.mjs` OK; targeted `governance-readonly.test.ts` PASS 12 tests;
+  `corepack pnpm build` PASS; root `npm test` PASS 82 files / 555 tests; `governance:smoke` PASS; product
+  `git diff --check` PASS with CRLF normalization warnings only. Protocol delivery moved TASK-0212 to
+  `in_review`, released `CLAIM-20260629-Codex-TASK-0212`, opened
+  `Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0212-in-review.md`, added handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0212-codex-to-arquitecto-1.md`, and committed protocol coordination as
+  `coord(TASK-0212): deliver resilient governance load`. Final protocol evidence before commit:
+  encoding OK, neutrality OK, validator OK with only pre-existing TASK-0193 compact-mailbox and non-response
+  archive warnings, drift false / byte-identical `up_to_seq` 2493, and `git diff --check` PASS with the known
+  runtime snapshot CRLF warning. Codex did not move the consumed Arquitecto GO to answered because
+  `mailbox_archive` requires orchestrator capability.
 - TASK-0210 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `324a563 feat(governance): improve panel observe UX`, authored as Arquitecto with Codex co-author.
   The governance panel now keeps Backlog, Mailbox, Artifacts, Decisions, Ledger/attestation, and Handoffs
