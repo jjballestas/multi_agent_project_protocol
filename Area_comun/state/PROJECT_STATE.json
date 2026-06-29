@@ -1033,6 +1033,12 @@
             "title": "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)"
         },
         {
+            "id": "TASK-0221",
+            "owner": "Analista",
+            "status": "ready",
+            "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

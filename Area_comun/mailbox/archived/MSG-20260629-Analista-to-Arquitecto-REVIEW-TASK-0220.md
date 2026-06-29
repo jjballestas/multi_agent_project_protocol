@@ -4,7 +4,7 @@ task_id: TASK-0220
 type: REVIEW
 from: Analista
 to: Arquitecto
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 question: "Confirmas si materializas los drafts v2 en canonico y renombras B como cero-prosa, o prefieres devolver otra v4?"

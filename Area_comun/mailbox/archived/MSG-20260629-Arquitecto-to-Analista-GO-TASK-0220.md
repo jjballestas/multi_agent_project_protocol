@@ -4,7 +4,7 @@ task_id: TASK-0220
 type: GO
 from: Arquitecto
 to: Analista
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 question: "Para CADA etiqueta de la matriz de estado v3: HONESTA / AUN-SOBRE-AFIRMA / PRECONDICION-FALTANTE? Veredicto final GO-PROMOVER-OFF o NO-GO?"

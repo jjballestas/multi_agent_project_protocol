@@ -3413,6 +3413,21 @@
             "type": "review"
         },
         {
+            "created_at": "2026-06-29",
+            "file": "Area_comun/tasks/TASK-0221-analista-adversarial-review-engram-v3-final.md",
+            "id": "TASK-0221",
+            "linked_decisions": [
+                "DECISION-0020",
+                "DECISION-0040"
+            ],
+            "owner": "Analista",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO",
+            "type": "review"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
