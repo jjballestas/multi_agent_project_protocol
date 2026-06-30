@@ -3469,7 +3469,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Fix redactor de reportes: bug de fechas + hora (updated) + estado dataset recontado X/500",
             "type": "build"
         },

@@ -12260,6 +12260,26 @@
             "updated_at": "2026-06-29T21:53:41Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Analista-TASK-0224-remediation-review",
+            "expires_at": "2026-06-30T23:59:00Z",
+            "notes": "Adversarial re-review of TASK-0224 remediation.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Analista-TASK-0224-remediation-review",
+                "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                "Area_comun/artifacts/ANALISTA-TASK-0224-remediacion-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0224-remediacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-29T23:59:00Z",
+            "status": "released",
+            "task_id": "TASK-0224",
+            "updated_at": "2026-06-29T23:59:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Arquitecto-archive-directiva",
             "expires_at": "2026-07-01T23:59:59Z",
             "notes": "archivar directiva resuelta",

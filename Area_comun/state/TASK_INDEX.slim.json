@@ -114,14 +114,6 @@
             "title": "Zeus-Aegis: vista Instanciar-proyecto (read-only, prepara comando atestado, NO ejecuta)"
         },
         {
-            "id": "TASK-0224",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "Fix redactor de reportes: bug de fechas + hora (updated) + estado dataset recontado X/500"
-        },
-        {
             "id": "TASK-0225",
             "owner": "Codex",
             "phase": "P2",
