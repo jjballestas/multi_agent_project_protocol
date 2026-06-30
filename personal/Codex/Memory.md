@@ -1,9 +1,17 @@
 # Codex Memory
 
-Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
+Last updated: 2026-06-30 Europe/Madrid, after TASK-0225 classifier remediation.
 
 ## Latest Session Note
 
+- TASK-0225 remediation updated `personal/Arquitecto/arquitecto_cron.ps1` so `Get-WsSnapshot` no longer requires
+  `project` to classify relevant WS tasks. Relevance now accepts `TASK-02xx`, `REQ-ZEUS*`, WS/REQ-ZEUS/Zeus/Aegis/cron
+  title markers, or known project values as optional signals. Added permanent `-RunClassifierSelfTest` coverage for
+  `TASK-02xx in_review` without `project`, WS/REQ-ZEUS `in_review` without `project`, and a `ready` candidate not being
+  promoted while any relevant `in_review` exists. Dry-run now detects `TASK-0225` and `TASK-0227` in review and returns
+  `decision=review_or_ratify` with `ledger_write=false`. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0225-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0225-remediation-2-in-review.md`.
 - TASK-0227 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `15c52fb fix(governance): tighten f1 read-only tests`. It keeps F1 routes read-only while allowing guarded
   display-only `submit_intent` text in the mailbox archive helper. The boundary test still rejects route

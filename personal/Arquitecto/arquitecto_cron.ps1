@@ -3,7 +3,8 @@ param(
     [int]$MaxNoOperatorRounds = 7,
     [string]$AgentExe = "",
     [string]$ReasoningEffort = "medium",
-    [switch]$DryRunOnce
+    [switch]$DryRunOnce,
+    [switch]$RunClassifierSelfTest
 )
 
 # arquitecto_cron.ps1 -- runtime headless del Arquitecto para orquestar GOAL-REQ-ZEUS-001.
@@ -174,33 +175,33 @@ function Test-OperatorStopOrder {
     return $false
 }
 
-function Get-WsSnapshot {
-    $taskIndexPath = Join-Path $Root "Area_comun\state\TASK_INDEX.json"
-    $mailboxPath = Join-Path $Root "Area_comun\mailbox\open"
-    $tasks = @()
-    if (Test-Path -LiteralPath $taskIndexPath) {
-        $doc = Get-Content -LiteralPath $taskIndexPath -Raw -Encoding UTF8 | ConvertFrom-Json
-        $tasks = @($doc.tasks | Where-Object {
-            ($_.project -in @("Zeus-protocol", "Zeus-Aegis", "multi_agent_project_protocol")) -and
-            (
-                ($_.id -match "^TASK-02") -or
-                ($_.title -match "(?i)(Zeus|WS|REQ-ZEUS|Aegis|cron)")
-            )
-        } | Sort-Object id)
-    }
-    $inReview = @($tasks | Where-Object { $_.status -eq "in_review" })
-    $ready = @($tasks | Where-Object { $_.status -eq "ready" })
-    $codexActive = @($tasks | Where-Object { $_.owner -eq "Codex" -and $_.status -eq "in_progress" })
-    $openMessages = 0
-    if (Test-Path -LiteralPath $mailboxPath) {
-        $openMessages = @(Get-ChildItem -LiteralPath $mailboxPath -File -Filter "MSG-*.md").Count
-    }
+function Test-WsTask {
+    param($Task)
+    $id = [string]$Task.id
+    $title = [string]$Task.title
+    $project = [string]$Task.project
+
+    return (
+        ($id -match "^TASK-02") -or
+        ($id -match "^REQ-ZEUS") -or
+        ($title -match "(?i)(Zeus|WS|REQ-ZEUS|Aegis|cron)") -or
+        ($project -in @("Zeus-protocol", "Zeus-Aegis", "multi_agent_project_protocol"))
+    )
+}
+
+function New-WsSnapshot {
+    param([object[]]$Tasks, [int]$OpenMessages)
+    $relevantTasks = @($Tasks | Where-Object { Test-WsTask -Task $_ } | Sort-Object id)
+    $inReview = @($relevantTasks | Where-Object { $_.status -eq "in_review" })
+    $ready = @($relevantTasks | Where-Object { $_.status -eq "ready" })
+    $codexActive = @($relevantTasks | Where-Object { $_.owner -eq "Codex" -and $_.status -eq "in_progress" })
+
     [ordered]@{
         utc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
         in_review = @($inReview | Select-Object -First 5 id, owner, title, status)
         ready = @($ready | Select-Object -First 5 id, owner, title, status)
         codex_in_progress = @($codexActive | Select-Object id, title, status)
-        open_mailbox_messages = $openMessages
+        open_mailbox_messages = $OpenMessages
         decision = if ($inReview.Count -gt 0) {
             "review_or_ratify"
         } elseif ($ready.Count -gt 0 -and $codexActive.Count -eq 0) {
@@ -209,6 +210,71 @@ function Get-WsSnapshot {
             "no_action"
         }
     }
+}
+
+function Test-WsClassifier {
+    $cases = @(
+        [pscustomobject]@{
+            name = "task02_in_review_without_project"
+            tasks = @(
+                [pscustomobject]@{ id = "TASK-0299"; owner = "Codex"; title = "Classifier review candidate"; status = "in_review" },
+                [pscustomobject]@{ id = "TASK-0300"; owner = "Codex"; title = "Next ready candidate"; status = "ready" }
+            )
+            expectedDecision = "review_or_ratify"
+            expectedInReview = 1
+        },
+        [pscustomobject]@{
+            name = "req_zeus_ws_in_review_without_project"
+            tasks = @(
+                [pscustomobject]@{ id = "REQ-ZEUS-WS-TEST"; owner = "Arquitecto"; title = "WS review candidate"; status = "in_review" }
+            )
+            expectedDecision = "review_or_ratify"
+            expectedInReview = 1
+        },
+        [pscustomobject]@{
+            name = "ready_not_promoted_when_relevant_in_review_exists"
+            tasks = @(
+                [pscustomobject]@{ id = "TASK-0298"; owner = "Codex"; title = "Ready candidate"; status = "ready" },
+                [pscustomobject]@{ id = "TASK-0297"; owner = "Codex"; title = "Review candidate"; status = "in_review" }
+            )
+            expectedDecision = "review_or_ratify"
+            expectedInReview = 1
+        }
+    )
+    $results = @()
+    foreach ($case in $cases) {
+        $snapshot = New-WsSnapshot -Tasks $case.tasks -OpenMessages 0
+        $passed = (($snapshot.decision -eq $case.expectedDecision) -and ($snapshot.in_review.Count -eq $case.expectedInReview))
+        $results += [ordered]@{
+            name = $case.name
+            passed = $passed
+            decision = $snapshot.decision
+            in_review_count = $snapshot.in_review.Count
+        }
+    }
+    $failed = @($results | Where-Object { -not $_.passed })
+    [ordered]@{
+        classifier_self_test = if ($failed.Count -eq 0) { "PASS" } else { "FAIL" }
+        tests = $results
+    } | ConvertTo-Json -Depth 8
+    if ($failed.Count -gt 0) {
+        exit 1
+    }
+}
+
+function Get-WsSnapshot {
+    $taskIndexPath = Join-Path $Root "Area_comun\state\TASK_INDEX.json"
+    $mailboxPath = Join-Path $Root "Area_comun\mailbox\open"
+    $tasks = @()
+    if (Test-Path -LiteralPath $taskIndexPath) {
+        $doc = Get-Content -LiteralPath $taskIndexPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $tasks = @($doc.tasks)
+    }
+    $openMessages = 0
+    if (Test-Path -LiteralPath $mailboxPath) {
+        $openMessages = @(Get-ChildItem -LiteralPath $mailboxPath -File -Filter "MSG-*.md").Count
+    }
+    New-WsSnapshot -Tasks $tasks -OpenMessages $openMessages
 }
 
 function Get-CyclePrompt {
@@ -281,6 +347,11 @@ $($snapshot | ConvertTo-Json -Depth 8)
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
+
+if ($RunClassifierSelfTest) {
+    Test-WsClassifier
+    exit 0
+}
 
 if ($DryRunOnce) {
     $snapshot = Get-WsSnapshot

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "2a9a01fc2cf5dd054a3568b53c4ff762ed22e0f6d94979fb85ad2211110eb910",
+  "canonical_hash": "55adf76df3ba49d56d1c9bef5facbeba76971a8f07caa8be9c79458ced382d05",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -841,7 +841,7 @@
       "TASK-0222": 3,
       "TASK-0223": 2,
       "TASK-0224": 16,
-      "TASK-0225": 5,
+      "TASK-0225": 7,
       "TASK-0226": 20,
       "TASK-0227": 8,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -851,7 +851,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2087,
+    "events_applied": 2089,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2612,6 +2612,7 @@
       "intent:Codex:claim:1ff6f92d9f3b77e2565685de94b120f6f61f7e8d52413efc708d41c7b87108d6": 2724,
       "intent:Codex:claim:200c7d1a04059164f98a51e17854844e9dc0c27cfa8005184442c9fafb6392c1": 775,
       "intent:Codex:claim:215917a6a460501ec42303edb9230ed3f0fda71478438f993429c0a3561f1c64": 2170,
+      "intent:Codex:claim:2172056a2b569305c045f81a599e0bc4aaa3e10416f412078d5dfd4f269697c2": 2760,
       "intent:Codex:claim:22dcccf9d45699f37545caf1b67e9d8dff6d82973fdd329dd6f764f55a0da59b": 2033,
       "intent:Codex:claim:256e77d0e9740881f26c4416163a441f25b677d24633702e59a9bbdd1e98947b": 2043,
       "intent:Codex:claim:258589e1e8f83d4773c6a350f0eff5de80e2df8cc09b5f1c152e8fa935346445": 2389,
@@ -2694,6 +2695,7 @@
       "intent:Codex:claim:83daca177f48ef69b8fcb06fe83eac81209831b17c8c56a2b9b531f6e8e18274": 2404,
       "intent:Codex:claim:8539f41a9023d0baf4b54c48d5803845fede38ac18fe34dce5ec8c98f420e10d": 2007,
       "intent:Codex:claim:865993bb1ec901ab4f9c9bc8748dcaab6b5febfd262931dfd2d2a6fa57910e58": 2317,
+      "intent:Codex:claim:870a770bce3f41e7cc1ceff44f2ecea862eb73ccf12d9d6222995ccad89474ad": 2759,
       "intent:Codex:claim:885f452c7445ca3918e6958b8a4d8fe1c4d50078c01d5d1a7ae799674394140b": 2708,
       "intent:Codex:claim:887f258adc0ab397f1b3ed4ee270fc4e3b7bbe39cceb40623bc54dfc20e1ca53": 2354,
       "intent:Codex:claim:88a8bcd6267c7f4cac02d6a6ea52f98e251b9522fe6111b10431e09e2f44c277": 2210,
@@ -2942,5 +2944,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2758
+  "up_to_seq": 2760
 }

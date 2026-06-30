@@ -1,0 +1,13 @@
+﻿{
+    "idempotency_key":  "Codex:TASK-0225:remediation-2-release:20260630T114500Z",
+    "intents":  [
+                    {
+                        "type":  "claim",
+                        "op":  "release",
+                        "claim_id":  "CLAIM-20260630-Codex-TASK-0225-remediation-2",
+                        "task_id":  "TASK-0225",
+                        "owner":  "Codex",
+                        "updated_at":  "2026-06-30T11:43:26Z"
+                    }
+                ]
+}

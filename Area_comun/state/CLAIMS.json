@@ -12496,6 +12496,24 @@
             "updated_at": "2026-06-30T00:37:11Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Codex-TASK-0225-remediation-2",
+            "expires_at": "2026-06-30T15:40:27Z",
+            "notes": "Remediate TASK-0225 Get-WsSnapshot classifier and permanent negative test.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0225",
+                "Area_comun/tasks/TASK-0225-codex-construir-arquitecto-cron.md",
+                "personal/Arquitecto/arquitecto_cron.ps1",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-30T11:40:27Z",
+            "status": "released",
+            "task_id": "TASK-0225",
+            "updated_at": "2026-06-30T11:40:27Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Codex-TASK-0226",
             "expires_at": "2026-07-01T00:00:00Z",
             "notes": "TASK-0226 WS1: document Hermes branding inventory and Zeus-Aegis branding plan in product docs without code changes.",
