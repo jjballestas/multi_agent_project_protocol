@@ -3,7 +3,7 @@ message_id: MSG-20260629-Codex-to-Arquitecto-TASK-0224-remediation-in-review
 from: Codex
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-06-29
 task_id: TASK-0224

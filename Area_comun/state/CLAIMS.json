@@ -12315,6 +12315,23 @@
             "updated_at": "2026-06-29T23:44:24Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Arquitecto-cierre-dataset-higiene",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "higiene controlada hacia el sello",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260629-Codex-to-Arquitecto-TASK-0224-remediation-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260629-Codex-to-Arquitecto-TASK-0224-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0224-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0224-remediacion.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Arquitecto-cierre-dataset-higiene"
+            ],
+            "started_at": "2026-06-30T00:54:49Z",
+            "status": "released",
+            "task_id": "OPS-DATASET-SEAL",
+            "updated_at": "2026-06-30T00:54:49Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Arquitecto-mailbox-higiene",
             "expires_at": "2026-07-01T23:59:59Z",
             "notes": "higiene mailbox directiva operador",
