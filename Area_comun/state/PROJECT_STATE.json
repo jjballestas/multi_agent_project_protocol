@@ -1059,7 +1059,7 @@
         {
             "id": "TASK-0225",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "Construir Arquitecto-cron (mailbox processor); lanzamiento real lo hace el operador"
         },
         {

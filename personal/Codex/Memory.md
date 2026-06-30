@@ -4,6 +4,20 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0225 implementation commit landed in protocol repo:
+  `a1cecb2 feat(cron): add arquitecto headless harness`. It adds
+  `personal/Arquitecto/arquitecto_cron.ps1` and `personal/Arquitecto/ARQUITECTO_CRON_RUNBOOK.md`. The harness
+  mirrors the existing Codex/Analista crons with `.protocol-tmp/arquitecto_cron` pid/log/seen/lock/stop/runs
+  state, configurable interval, hidden runtime execution, prompt passed through stdin from
+  `personal/Arquitecto/arquitecto_cron.prompt.txt`, operator stop-order auto-exit, and a `-DryRunOnce` mode that
+  reads state/mailbox and classifies the cycle without ledger writes. Evidence before commit: PowerShell parser OK,
+  `-DryRunOnce` exit 0 with `ledger_write=false`, encoding OK, neutrality OK, validator OK with only pre-existing
+  mailbox warnings, drift false / byte-identical `up_to_seq=2709`, and `git diff --check` PASS with the known
+  runtime snapshot CRLF warning. TASK-0225 was moved to `in_review`, claims
+  `CLAIM-20260630-Codex-TASK-0225` plus `CLAIM-20260630-Codex-TASK-0225-delivery` were released via
+  `runtime/submit_intent.py`, and delivery artifacts are
+  `Area_comun/handoffs/HANDOFF-TASK-0225-codex-to-arquitecto-1.md` plus
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0225-in-review.md`.
 - TASK-0226 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `4644455 docs(branding): add ws1 inventory plan`. It adds `docs/BRANDING-PLAN-WS1.md`, a document-only
   WS1 inventory and plan for Zeus-Aegis branding. It covers user-visible Hermes/HERMES surfaces in docs,

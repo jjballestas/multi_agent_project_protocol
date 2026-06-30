@@ -1,32 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260630-Codex-TASK-0225",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Codex-TASK-0225",
-                "Area_comun/state/TASK_INDEX.json#TASK-0225",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0225",
-                "Area_comun/tasks/TASK-0225-codex-construir-arquitecto-cron.md",
-                "personal/Arquitecto/arquitecto_cron.ps1",
-                "personal/Arquitecto/arquitecto_cron.prompt.txt",
-                "personal/Arquitecto/ARQUITECTO_CRON_RUNBOOK.md",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0225"
-        },
-        {
-            "claim_id": "CLAIM-20260630-Codex-TASK-0225-delivery",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Codex-TASK-0225-delivery",
-                "Area_comun/handoffs/HANDOFF-TASK-0225-codex-to-arquitecto-1.md",
-                "Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0225-in-review.md",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0225"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
