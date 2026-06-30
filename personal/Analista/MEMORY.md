@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-30 (TASK-0226 WS1 branding; NO-GO por npm test exit 1 en clean clone).
+> Ultima actualizacion: 2026-06-30 (TASK-0226 WS1 remediation; GO/CERRABLE bajo gate DOC-ONLY).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0226 WS1 remediation re-review (2026-06-30): GO/CERRABLE bajo gate DOC-ONLY. Veredicto canonico en
+  `266e4af` (`review(TASK-0226): Analista OK WS1 remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0226-remediacion-veredicto.md`, MSG
+  `MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0226-remediacion`. Ancla protocolo/instruccion
+  `fc1955e650abdbeb8af9641e5142f107b2da6549`; producto Zeus-Aegis
+  `055c95653921c1d5c95cdb5d1bf2a510331837b3`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-0226-remed-2d7d9b501bd04276a258658789d07980`;
+  clean clone protocolo `C:/Users/johnb/AppData/Local/Temp/protocol-review-0226-remed-2e1acf48843b4ee9925ac7e4c01541fb`.
+  Confirmado: commit producto doc-only (`M docs/BRANDING-PLAN-WS1.md`), `git diff --check` exit 0, residual D4
+  concreto en `vendor/hermes-2.3.0/THIRD-PARTY-NOTICES.md` con entrada `hermes-agent (NousResearch)` si WS3
+  redistribuye binario/imagen/instalador/offline artifact. Gates protocolo vivo y clean: validate,
+  scan_domain_neutrality, scan_encoding exit 0; drift final vivo `has_drift=false up_to_seq=2729`; clean
+  `has_drift=false up_to_seq=2727`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. `npm test` producto clean timeout exit
+  124 a 363s; declarado residual no bloqueante por instruccion DOC-ONLY/NOVA DECISION-0006 y transferido a
+  TASK-0227. Claim Analista acquire seq 2728, release seq 2729.
 - TASK-0226 WS1 branding inventory (2026-06-30): CAMBIO-REQUERIDO / NO-GO. Veredicto en
   `Area_comun/artifacts/ANALISTA-TASK-0226-ws1-branding-veredicto.md`, MSG
   `MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0226-ws1`. Ancla protocolo durante review
