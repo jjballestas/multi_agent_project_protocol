@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-30 (TASK-0226 WS1 remediation; GO/CERRABLE bajo gate DOC-ONLY).
+> Ultima actualizacion: 2026-06-30 (TASK-0225 Arquitecto-cron; NO-GO).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,40 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0225 Arquitecto-cron review (2026-06-30): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `9d0bcc0` (`review(TASK-0225): Analista blocks Arquitecto cron`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0225-arquitecto-cron-veredicto.md`, MSG
+  `MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0225-arquitecto-cron`. Ancla protocolo HEAD
+  `4e9fd4dcefc6eb67da8b35323e81866dca59e14c`; implementacion `a1cecb275d853f64cdaa4701d65cc50dc8e685af`;
+  delivery `15c02b2787850b81e8835c7a3d02481e0fda39d7`; producto Zeus-protocol no tenia commit citado,
+  control clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`, `npm test` exit 0 (109 tests, 87 pass,
+  22 skipped). Bloqueo falsable: dry-run canonico en clean clone `15c02b2` exit 0 y `ledger_write=false`,
+  pero con `TASK-0225` y `TASK-0226` `in_review` en TASK_INDEX devolvio `ws_snapshot.in_review=[]` y
+  `decision=promote_one_ready_task`. Payload propio confirmo causa: `Get-WsSnapshot` filtra por
+  `project` obligatorio; una tarea `TASK-0299`/`REQ-ZEUS WS` `in_review` sin `project` da `in_review=0`,
+  mientras la misma con `project=multi_agent_project_protocol` o `Zeus-protocol` da `review_or_ratify`.
+  Gates protocolo vivo y clean clone: validate, scan_domain_neutrality, scan_encoding exit 0; drift vivo
+  `has_drift=false up_to_seq=2752`, clean `has_drift=false up_to_seq=2746`; `protocol.config.json`
+  sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
+- OPS-MEDICION-H1-H3 (2026-06-30): GO/CERRABLE. Veredicto canonico en `1ddf249`
+  (`review(OPS-MEDICION): Analista OK H1-H3 measurement`), artefacto
+  `Area_comun/artifacts/ANALISTA-medicion-H1-H3-veredicto.md`, MSG
+  `MSG-20260630-Analista-to-Arquitecto-REVIEW-medicion-H1-H3`. Ancla protocolo/instruccion
+  `333e1693879fce9dc592c53f2cf55736f672abd3`; corpus sellado `TFM-dataset-N500`
+  `e3646ae01fff1f59a5d7882bfd7c8d744ff1c5f9`; `protocol.config.json` sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`. Reproduccion limpia en
+  `C:/Users/johnb/AppData/Local/Temp/analista-medicion-h1h3-cceb1aabf84d441b9f3494ff504bb71c`:
+  H1 detection exit 0 (450/450; A1 200, A2 200, A3 50; 0 evasions), H1 FPR/AC2 exit 0
+  (FPR 0/500, AC2 500/500), H2 exit 0 (delta mediana 1.5186 ms, p95 3.2708 ms, store
+  0.42254 KB/ev, tokens 0.0%), H3 exit 0 (acuerdo 1.0, hash interno/externo
+  `dd2fd60eef525589f0ed8f1d581f45bfed584ab3ba2b3dc6c5624fbbbcc10ff0`, Ed25519 public-only
+  500/500). Producto Zeus-protocol no tenia commit citado; gate general ejecutado en clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-protocol-review-medicion-8785d154c92a46fdb61ea1286ad7c9b9`,
+  HEAD `b2b2395da39090109db6de2dc50726dbaab1a11e`, `npm test` exit 0 (109 tests, 87 pass,
+  22 skipped). Gates protocolo: validate con/sin secretos, scan_domain_neutrality, scan_encoding
+  exit 0; drift final `has_drift=false up_to_seq=2731`. Residuales no bloqueantes: A3 se sostiene
+  como genesis/chain-hash efectivo porque el corpus tiene 0 `chain.anchor`; tokens 0% es estructural/
+  by-design, no telemetria empirica. Claim Analista acquire/release seq 2730/2731; push a origin/main OK.
 - TASK-0226 WS1 remediation re-review (2026-06-30): GO/CERRABLE bajo gate DOC-ONLY. Veredicto canonico en
   `266e4af` (`review(TASK-0226): Analista OK WS1 remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0226-remediacion-veredicto.md`, MSG
