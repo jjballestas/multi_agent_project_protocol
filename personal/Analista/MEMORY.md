@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-29 (TASK-0221 Engram v3 final review; GO-PROMOVER-OFF, 3 correcciones honestas contra 77dfa0f).
+> Ultima actualizacion: 2026-06-30 (TASK-0224 remediacion report redactor; OK/CERRABLE en 6fb6116).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0224 re-review remediacion (2026-06-30): OK/CERRABLE. Veredicto canonico en `6fb6116`
+  (`review(TASK-0224): Analista OK remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0224-remediacion-veredicto.md`, MSG
+  `MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0224-remediacion`. Ancla protocolo/instruccion
+  `004cb0ab2b7b1533dd6cac2862248dddab526b46`; commit bajo review `7bfc15f3bb4704648dc556a455cfff11d24423a4`;
+  producto control Zeus-protocol `b2b2395` (la instruccion no cito commit de producto especifico). Claim Analista
+  `CLAIM-20260630-Analista-TASK-0224-remediation-review`: acquire seq 2698; review_approved seq 2699; release
+  seq 2700. Confirmado por comportamiento: `inject_report_metadata` limpia familia plana EN/ES (`Date`, `Updated`,
+  `Fecha`, `Actualizado`, `Dataset status`, `Dataset actualizado`), familia con negrita, variantes con espacios y
+  caso sin cabecera; reporte real `REPORT-20260605-release-v0.2.0.md` con `- Date: 2026-06-05` genera solo
+  `- **Updated:** 2026-06-29T12:34:56Z` + dataset `477/500`. Gates: py_compile exit 0; golden human guide exit 0;
+  clean clone protocolo `7bfc15f` validate/neutrality/encoding/golden exit 0; vivo validate/encoding/neutrality
+  exit 0; drift 0 `up_to_seq=2700`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; clean clone producto `b2b2395` `npm test`
+  exit 0 (109 tests, 87 pass, 22 skipped). Residual no bloqueante: normalizador solo cubre las seis familias de
+  metadata conocidas, no cualquier clave arbitraria.
 - TASK-0224 review report redactor (2026-06-29): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en `6a7a4b6`
   (`review(TASK-0224): Analista blocks report redactor`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0224-report-redactor-veredicto.md`, MSG
