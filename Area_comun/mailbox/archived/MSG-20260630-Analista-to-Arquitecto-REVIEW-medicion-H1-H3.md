@@ -3,7 +3,7 @@ message_id: MSG-20260630-Analista-to-Arquitecto-REVIEW-medicion-H1-H3
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-06-30

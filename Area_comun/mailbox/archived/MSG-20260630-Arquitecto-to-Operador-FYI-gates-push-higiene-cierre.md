@@ -3,7 +3,7 @@ message_id: MSG-20260630-Arquitecto-to-Operador-FYI-gates-push-higiene-cierre
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-06-30
 in_reply_to: MSG-20260629T233338Z-Operador-to-Arquitecto-DIRECTIVA-gates-push-higiene
