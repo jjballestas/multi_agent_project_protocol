@@ -3484,7 +3484,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "medium",
-            "status": "ready",
+            "status": "in_progress",
             "title": "Construir Arquitecto-cron (mailbox processor); lanzamiento real lo hace el operador",
             "type": "build"
         },

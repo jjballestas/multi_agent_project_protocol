@@ -12334,6 +12334,42 @@
             "updated_at": "2026-06-30T00:08:49Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Codex-TASK-0225",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "Build Arquitecto cron harness, prompt wiring, runbook, dry-run evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Codex-TASK-0225",
+                "Area_comun/state/TASK_INDEX.json#TASK-0225",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0225",
+                "Area_comun/tasks/TASK-0225-codex-construir-arquitecto-cron.md",
+                "personal/Arquitecto/arquitecto_cron.ps1",
+                "personal/Arquitecto/arquitecto_cron.prompt.txt",
+                "personal/Arquitecto/ARQUITECTO_CRON_RUNBOOK.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-30T00:34:14Z",
+            "status": "active",
+            "task_id": "TASK-0225",
+            "updated_at": "2026-06-30T00:34:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260630-Codex-TASK-0225-delivery",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "TASK-0225 delivery handoff and mailbox coordination.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Codex-TASK-0225-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0225-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0225-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-06-30T00:37:11Z",
+            "status": "active",
+            "task_id": "TASK-0225",
+            "updated_at": "2026-06-30T00:37:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Codex-TASK-0226",
             "expires_at": "2026-07-01T00:00:00Z",
             "notes": "TASK-0226 WS1: document Hermes branding inventory and Zeus-Aegis branding plan in product docs without code changes.",
