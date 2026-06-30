@@ -1063,6 +1063,12 @@
             "title": "Construir Arquitecto-cron (mailbox processor); lanzamiento real lo hace el operador"
         },
         {
+            "id": "TASK-0226",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "REQ-ZEUS WS1: inventario hermes en Zeus-Aegis + plan de branding white-label"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
