@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "21cdcd99b9e5a6074df6ab9a822c98a6d1abb90f00179e2a7038b6e44252174f",
+  "canonical_hash": "be7ac715ea6b77c34748a15e41de39f44d1f03f5f6499c3456096c606e390add",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -667,6 +667,7 @@
       "MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0224-remediacion": 1,
       "OPS-DATASET-SEAL": 1,
       "OPS-GATES-PUSH-20260629": 2,
+      "OPS-MEDICION-H1-H3-20260630": 2,
       "PROJECT_STATE": 9,
       "PRUNE-JUNK": 1,
       "RECONCILE-REQS": 1,
@@ -835,7 +836,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2058,
+    "events_applied": 2060,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -909,6 +910,8 @@
       "analista-task0203-claim-release": 2312,
       "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
       "analista:TASK-0226-remediation-review:claim-release": 2729,
+      "analista:ops-medicion-h1-h3:claim-acquire": 2730,
+      "analista:ops-medicion-h1-h3:claim-release": 2731,
       "analista:task-0194-review:claim-acquire": 2215,
       "analista:task-0194-review:claim-release": 2216,
       "analista:task-0201-regate1:claim-acquire": 2294,
@@ -2897,5 +2900,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2729
+  "up_to_seq": 2731
 }
