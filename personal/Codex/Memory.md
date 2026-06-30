@@ -4,6 +4,18 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0226 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `055c956 docs(branding): anchor hermes-agent notice path`. It is doc-only and updates
+  `docs/BRANDING-PLAN-WS1.md` to anchor the concrete WS3 MIT notice destination
+  `vendor/hermes-2.3.0/THIRD-PARTY-NOTICES.md` for a dedicated `hermes-agent (NousResearch)` entry if WS3
+  redistributes `hermes-agent` as a bundled binary, container image, installer payload, or offline artifact.
+  Product doc gate: `git diff --check -- docs/BRANDING-PLAN-WS1.md` PASS with Git's LF-to-CRLF warning. Full
+  product `npm test` is intentionally excluded from this WS1 doc-only remediation gate by Arquitecto GO / NOVA
+  DECISION-0006; known F1/read-only failures are tracked in TASK-0227. Protocol delivery artifacts prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0226-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0226-remediation-in-review.md`. Protocol
+  coordination commit `coord(TASK-0226): redeliver branding remediation` moves TASK-0226 back to `in_review`
+  and releases `CLAIM-20260630-Codex-TASK-0226-remediation` via `runtime/submit_intent.py`.
 - TASK-0225 implementation commit landed in protocol repo:
   `a1cecb2 feat(cron): add arquitecto headless harness`. It adds
   `personal/Arquitecto/arquitecto_cron.ps1` and `personal/Arquitecto/ARQUITECTO_CRON_RUNBOOK.md`. The harness
