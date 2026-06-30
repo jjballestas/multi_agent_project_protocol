@@ -12460,6 +12460,30 @@
             "updated_at": "2026-06-30T00:08:49Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Codex-TASK-0222",
+            "expires_at": "2026-06-30T17:30:00Z",
+            "notes": "Implement TASK-0222 Zeus-Aegis stats view read-only F1.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0222-vista-stats.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0222-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0222-in-review.md",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/",
+                "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/tests/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-06-30T11:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0222",
+            "updated_at": "2026-06-30T11:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Codex-TASK-0225",
             "expires_at": "2026-07-01T23:59:59Z",
             "notes": "Build Arquitecto cron harness, prompt wiring, runbook, dry-run evidence.",

@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-06-30 Europe/Madrid, after TASK-0225 classifier remediation.
+Last updated: 2026-06-30 Europe/Madrid, after TASK-0222 product commit.
 
 ## Latest Session Note
 
+- TASK-0222 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `ff82538 feat(governance): expose stats dataset progress`. The governance stats view remains F1 read-only and now
+  shows the frozen TFM dataset chip `500/500` from tag `TFM-dataset-N500:runtime/state/events.jsonl` using
+  `seq>=2221 AND intent.applied AND actor_auth.method==ed25519`, with tag `TFM-dataset-N500` and per-agent
+  breakdown. `/api/governance/agent-metrics` now returns `dataset {current,target,minSeq,frozenTag,breakdown}` in
+  the same read-only endpoint that already serves token/run stats. Product evidence before commit: `node --check
+  server-entry.js` PASS; `corepack pnpm build` PASS; targeted `governance-readonly.test.ts` PASS 14 tests; full
+  `npm test` PASS 82 files / 557 tests; `git diff --check` PASS with CRLF normalization warnings only. Clean-clone
+  render evidence: `C:/t/task0222-zeus-aegis-clean/task0222-stats-render-ff82538.png`, endpoint HTTP 200 with
+  dataset `500/500` and breakdown `Analista=52, Arquitecto=253, Codex=195`. Protocol delivery moved TASK-0222 to
+  `in_review`, released `CLAIM-20260630-Codex-TASK-0222`, added
+  `Area_comun/handoffs/HANDOFF-TASK-0222-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0222-in-review.md`. Final protocol evidence:
+  encoding OK, neutrality OK, validator OK with only pre-existing mailbox warnings, drift false / byte-identical
+  `up_to_seq=2764`. Codex attempted to archive the consumed GO, but `mailbox_archive` still requires orchestrator
+  capability for Codex, so the GO remains open for Arquitecto hygiene.
 - TASK-0225 remediation updated `personal/Arquitecto/arquitecto_cron.ps1` so `Get-WsSnapshot` no longer requires
   `project` to classify relevant WS tasks. Relevance now accepts `TASK-02xx`, `REQ-ZEUS*`, WS/REQ-ZEUS/Zeus/Aegis/cron
   title markers, or known project values as optional signals. Added permanent `-RunClassifierSelfTest` coverage for

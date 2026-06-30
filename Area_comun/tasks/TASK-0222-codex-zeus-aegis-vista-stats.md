@@ -2,7 +2,7 @@
 task_id: TASK-0222
 title: "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1"
 type: build
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high
