@@ -128,6 +128,14 @@
             "priority": "high",
             "status": "changes_requested",
             "title": "REQ-ZEUS WS1: inventario hermes en Zeus-Aegis + plan de branding white-label"
+        },
+        {
+            "id": "TASK-0227",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
         }
     ],
     "view": "task_index.slim"

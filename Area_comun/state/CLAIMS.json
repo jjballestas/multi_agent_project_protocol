@@ -12355,6 +12355,22 @@
             "updated_at": "2026-06-29T23:39:10Z"
         },
         {
+            "claim_id": "CLAIM-20260630-Arquitecto-reqzeus-0227",
+            "expires_at": "2026-07-01T23:59:59Z",
+            "notes": "registrar fix npm test producto",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-Arquitecto-reqzeus-0227"
+            ],
+            "started_at": "2026-06-30T01:06:22Z",
+            "status": "released",
+            "task_id": "TASK-0227",
+            "updated_at": "2026-06-30T01:06:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-Arquitecto-reqzeus-ws1",
             "expires_at": "2026-07-01T23:59:59Z",
             "notes": "registrar WS1 REQ-ZEUS",
