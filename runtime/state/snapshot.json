@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "26d3d6730b0b25a7d45b483d2a8489ed2f22a1c739aae50a9c1dbfe43d6b29bf",
+  "canonical_hash": "21cdcd99b9e5a6074df6ab9a822c98a6d1abb90f00179e2a7038b6e44252174f",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -444,6 +444,7 @@
       "CLAIM-20260629-Arquitecto-register-0218": 1,
       "CLAIM-20260629-Codex-TASK-0218": 1,
       "CLAIM-20260629-Codex-TASK-0224-remediation": 1,
+      "CLAIM-20260630-Analista-TASK-0226-remediation-review": 1,
       "CLAIM-20260630-Arquitecto-archive-directiva": 1,
       "CLAIM-20260630-Arquitecto-cierre-dataset-higiene": 1,
       "CLAIM-20260630-Arquitecto-mailbox-higiene": 1,
@@ -825,7 +826,7 @@
       "TASK-0223": 2,
       "TASK-0224": 16,
       "TASK-0225": 5,
-      "TASK-0226": 13,
+      "TASK-0226": 14,
       "TASK-0227": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -834,7 +835,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2056,
+    "events_applied": 2058,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -906,6 +907,8 @@
       "Codex:TASK-0209:review-fix-status-in-review:20260629T003200Z": 2469,
       "analista-task0203-claim-acquire-v2": 2311,
       "analista-task0203-claim-release": 2312,
+      "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
+      "analista:TASK-0226-remediation-review:claim-release": 2729,
       "analista:task-0194-review:claim-acquire": 2215,
       "analista:task-0194-review:claim-release": 2216,
       "analista:task-0201-regate1:claim-acquire": 2294,
@@ -2894,5 +2897,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2727
+  "up_to_seq": 2729
 }
