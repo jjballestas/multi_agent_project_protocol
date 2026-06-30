@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-30 (TASK-0224 remediacion report redactor; OK/CERRABLE en 6fb6116).
+> Ultima actualizacion: 2026-06-30 (TASK-0226 WS1 branding; NO-GO por npm test exit 1 en clean clone).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0226 WS1 branding inventory (2026-06-30): CAMBIO-REQUERIDO / NO-GO. Veredicto en
+  `Area_comun/artifacts/ANALISTA-TASK-0226-ws1-branding-veredicto.md`, MSG
+  `MSG-20260630-Analista-to-Arquitecto-REVIEW-TASK-0226-ws1`. Ancla protocolo durante review
+  `15c02b2787850b81e8835c7a3d02481e0fda39d7`; instruccion REVIEW materializada desde
+  `Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0226-ws1.md`; producto
+  Zeus-Aegis `4644455e9a0527b8d7eebe7b92efd77d5f9a3dba`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/zeus-aegis-review-0226-12828a40f00241b4a89d23ec50bcb0a9`.
+  El commit producto es document-only (`A docs/BRANDING-PLAN-WS1.md`) y `git diff --check` sale 0; el
+  documento cubre inventario hermes, shim superficial `ZEUS_* -> HERMES_* -> CLAUDE_*`, no renombrar
+  binarios/appId/updater, purga Hermesworld/NousResearch y preservacion MIT. Bloqueo falsable: `npm test`
+  en clean clone sale exit 1; fallan `src/server/governance-readonly.test.ts` por timeout en lectura de
+  artifacts/decisions/handoffs/ledger y por `submit_intent` en UI. Bajo la instruccion, gatea por EXIT y no
+  es cerrable aunque parezca preexistente. Gates protocolo vivos y clean clone sin secretos: validate,
+  scan_encoding y scan_domain_neutrality exit 0; drift #4 false `up_to_seq=2716`; `protocol.config.json`
+  sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`. Claim Analista
+  `CLAIM-20260630-Analista-TASK-0226-ws1-review` seq 2714 acquire, seq 2716 release; TASK-0226 movido
+  `in_review -> changes_requested`.
 - TASK-0224 re-review remediacion (2026-06-30): OK/CERRABLE. Veredicto canonico en `6fb6116`
   (`review(TASK-0224): Analista OK remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0224-remediacion-veredicto.md`, MSG
