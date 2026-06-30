@@ -1071,7 +1071,7 @@
         {
             "id": "TASK-0227",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
         },
         {

@@ -4,6 +4,21 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0227 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `15c52fb fix(governance): tighten f1 read-only tests`. It keeps F1 routes read-only while allowing guarded
+  display-only `submit_intent` text in the mailbox archive helper. The boundary test still rejects route
+  `submit_intent.py`/`Area_comun/state/` references, write HTTP methods, and any `fetch(...submit_intent...)`,
+  and now requires each UI `submit_intent` mention to sit near a "NO escribe el ledger"/no-writer guard.
+  The slow governance canonical-read test now performs independent reads in parallel and uses a 30s timeout.
+  Evidence before product commit: targeted `governance-readonly.test.ts` PASS 13 tests; product `npm test` PASS
+  82 files / 556 tests; `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` PASS; product
+  `git diff --check` PASS with CRLF normalization warnings only. Protocol coordination commit
+  `coord(TASK-0227): deliver f1 boundary fix` moved TASK-0227 to `in_review`, released Codex claims,
+  added `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0227-in-review.md`. Final protocol evidence:
+  encoding OK, neutrality OK, validator OK with only pre-existing FYI mailbox warnings, drift false /
+  byte-identical `up_to_seq=2758`. Codex attempted to archive the consumed Arquitecto GO after delivery, but
+  `mailbox_archive` still requires orchestrator capability for Codex; the GO remains open for Arquitecto hygiene.
 - TASK-0226 done-flip completed in protocol commit `coord(TASK-0226): close branding ws1`:
   `runtime/submit_intent.py` transaction
   `codex:task0226:done-flip-tx` acquired and released `CLAIM-20260630-Codex-TASK-0226-done-flip` and moved
