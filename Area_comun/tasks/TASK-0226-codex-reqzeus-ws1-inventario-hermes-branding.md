@@ -2,7 +2,7 @@
 task_id: TASK-0226
 title: "REQ-ZEUS WS1: inventario de 'hermes' en Zeus-Aegis + plan de branding white-label"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

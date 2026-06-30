@@ -4,6 +4,15 @@ Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0226 done-flip completed in protocol commit `coord(TASK-0226): close branding ws1`:
+  `runtime/submit_intent.py` transaction
+  `codex:task0226:done-flip-tx` acquired and released `CLAIM-20260630-Codex-TASK-0226-done-flip` and moved
+  TASK-0226 `review_approved -> done` at seq 2750-2752, drift false / byte-identical `up_to_seq=2752`.
+  Evidence after the flip: encoding OK, neutrality OK, validator OK with only pre-existing FYI mailbox warnings,
+  and drift false. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched; TASK-0226 product work
+  remains in `D:/Agentes/Zeus/Zeus-Aegis` commit `055c956`. Codex attempted to archive the consumed Arquitecto
+  ACTION message after the ledger-backed closure, but `mailbox_archive` still requires orchestrator capability for
+  Codex; the message remains open for Arquitecto hygiene.
 - TASK-0226 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `055c956 docs(branding): anchor hermes-agent notice path`. It is doc-only and updates
   `docs/BRANDING-PLAN-WS1.md` to anchor the concrete WS3 MIT notice destination

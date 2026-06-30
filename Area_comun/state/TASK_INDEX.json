@@ -3498,7 +3498,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "review_approved",
+            "status": "done",
             "title": "REQ-ZEUS WS1: inventario hermes en Zeus-Aegis + plan de branding white-label",
             "type": "build"
         },
