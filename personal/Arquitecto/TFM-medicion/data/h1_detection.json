@@ -1,0 +1,98 @@
+{
+  "schema": "tfm_h1_detection.v1",
+  "generated_utc": "2026-06-30T01:28:49Z",
+  "corpus": "personal\\Arquitecto\\TFM-medicion\\corpus\\events.jsonl",
+  "config": "personal\\Arquitecto\\TFM-medicion\\corpus\\protocol.config.json",
+  "dataset_start_seq": 2221,
+  "k_per_subtype": 50,
+  "eligible_total": 500,
+  "eligible_breakdown": {
+    "Analista": 52,
+    "Arquitecto": 253,
+    "Codex": 195
+  },
+  "baseline_corpus_clean": true,
+  "baseline_detail": {
+    "chain": {
+      "detected": false,
+      "reason": "chain_valid"
+    },
+    "actor_auth": {
+      "detected": false,
+      "reason": "actor_auth_all_valid"
+    },
+    "anchor": {
+      "detected": false,
+      "reason": "anchor_intact"
+    }
+  },
+  "per_vector": {
+    "A1": {
+      "injected": 200,
+      "detected": 200,
+      "tpr": 1.0,
+      "evasions": [],
+      "per_subtype": {
+        "payload_alteration": {
+          "injected": 50,
+          "detected": 50
+        },
+        "event_deletion": {
+          "injected": 50,
+          "detected": 50
+        },
+        "event_insertion": {
+          "injected": 50,
+          "detected": 50
+        },
+        "event_reordering": {
+          "injected": 50,
+          "detected": 50
+        }
+      }
+    },
+    "A2": {
+      "injected": 200,
+      "detected": 200,
+      "tpr": 1.0,
+      "evasions": [],
+      "per_subtype": {
+        "cross_attribution": {
+          "injected": 50,
+          "detected": 50
+        },
+        "cross_attribution_forged_keyid": {
+          "injected": 50,
+          "detected": 50
+        },
+        "foreign_keyid": {
+          "injected": 50,
+          "detected": 50
+        },
+        "invalid_signature": {
+          "injected": 50,
+          "detected": 50
+        }
+      }
+    },
+    "A3": {
+      "injected": 50,
+      "detected": 50,
+      "tpr": 1.0,
+      "evasions": [],
+      "per_subtype": {
+        "anchor_rollback": {
+          "injected": 50,
+          "detected": 50
+        }
+      }
+    }
+  },
+  "totals": {
+    "injected": 450,
+    "detected": 450
+  },
+  "threshold_s5": "detection == 100% en TODOS los vectores (binario, AC3)",
+  "all_vectors_tpr_100": true,
+  "verdict_detection": "CONFIRMADA"
+}

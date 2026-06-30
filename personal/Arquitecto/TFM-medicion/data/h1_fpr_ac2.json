@@ -1,0 +1,30 @@
+{
+  "schema": "tfm_h1_fpr_ac2.v1",
+  "generated_utc": "2026-06-30T01:28:58Z",
+  "corpus": "personal\\Arquitecto\\TFM-medicion\\corpus\\events.jsonl",
+  "eligible_total": 500,
+  "eligible_breakdown": {
+    "Analista": 52,
+    "Arquitecto": 253,
+    "Codex": 195
+  },
+  "fpr": {
+    "false_rejections_actor_auth": [],
+    "chain_false_reject": false,
+    "chain_reason": "chain valid",
+    "replay_tamper_rejections_eligible": [],
+    "count": 0,
+    "fpr": 0.0,
+    "threshold_s5": "== 0%",
+    "pass": true
+  },
+  "ac2_health": {
+    "denominator_authorship_relevant": 500,
+    "numerator_verifiable_ed25519": 500,
+    "rate": 1.0,
+    "threshold_s5": ">= 99%",
+    "pass": true
+  },
+  "verdict_fpr": "CONFIRMADA",
+  "verdict_ac2": "CONFIRMADA"
+}

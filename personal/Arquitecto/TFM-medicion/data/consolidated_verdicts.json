@@ -1,0 +1,43 @@
+{
+  "schema": "tfm_consolidated_verdicts.v1",
+  "generated_utc": "2026-06-30T01:31:19Z",
+  "corpus": {
+    "tag": "TFM-dataset-N500",
+    "commit": "e3646ae01fff1f59a5d7882bfd7c8d744ff1c5f9",
+    "eligible_total": 500,
+    "breakdown": {
+      "Arquitecto": 253,
+      "Codex": 195,
+      "Analista": 52
+    }
+  },
+  "H1": {
+    "verdict": "CONFIRMADA",
+    "detection_tpr_all_vectors": true,
+    "attacks_injected": 450,
+    "attacks_detected": 450,
+    "per_vector_tpr": {
+      "A1": 1.0,
+      "A2": 1.0,
+      "A3": 1.0
+    },
+    "fpr": 0.0,
+    "ac2": 1.0,
+    "thresholds": "detection=100% AND FPR=0% AND AC2>=99%"
+  },
+  "H2": {
+    "verdict": "CONFIRMADA",
+    "delta_latency_median_ms": 1.6032,
+    "delta_latency_p95_ms": 2.2782,
+    "delta_storage_kb_per_ev": 0.42254,
+    "delta_tokens_pct": 0.0,
+    "thresholds": "lat med<=50ms AND p95<=200ms; store<=4KB/ev; tokens<=5%"
+  },
+  "H3": {
+    "verdict": "CONFIRMADA",
+    "agreement_rate": 1.0,
+    "clean_clone_hash_match": true,
+    "ed25519_verifiable": 500,
+    "thresholds": "agreement=100% AND clean-clone hash match"
+  }
+}

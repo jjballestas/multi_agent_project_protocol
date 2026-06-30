@@ -1,0 +1,38 @@
+{
+  "schema": "tfm_h3_external_verify.v1",
+  "generated_utc": "2026-06-30T01:29:31Z",
+  "internal_root": "C:\\Users\\johnb\\AppData\\Local\\Temp\\claude\\D--Agentes-multi-agent-project-protocol\\67d47105-c265-478b-9697-14e7b974249b\\scratchpad\\internal-with-secrets",
+  "external_root_clean_clone": "C:\\Users\\johnb\\AppData\\Local\\Temp\\claude\\D--Agentes-multi-agent-project-protocol\\67d47105-c265-478b-9697-14e7b974249b\\scratchpad\\clean-clone-tag",
+  "eligible_total": 500,
+  "eligible_breakdown_clean_clone": {
+    "Analista": 52,
+    "Arquitecto": 253,
+    "Codex": 195
+  },
+  "agreement": {
+    "eligible_compared": 500,
+    "agree": 500,
+    "rate": 1.0,
+    "disagreements": [],
+    "threshold_s5": "== 100%",
+    "pass": true
+  },
+  "clean_clone_hash_match": {
+    "internal_state_canonical_hash": "dd2fd60eef525589f0ed8f1d581f45bfed584ab3ba2b3dc6c5624fbbbcc10ff0",
+    "external_state_canonical_hash": "dd2fd60eef525589f0ed8f1d581f45bfed584ab3ba2b3dc6c5624fbbbcc10ff0",
+    "match": true,
+    "threshold_s5": "match == si",
+    "pass": true
+  },
+  "ed25519_public_only_verification": {
+    "verifiable_signatures_clean_clone": 500,
+    "of_total": 500,
+    "all_valid": true,
+    "event_auth_reasons_clean_clone": {
+      "unresolved_key": 448,
+      "missing_key": 52
+    },
+    "note": "En el clon limpio las firmas Ed25519 (actor_auth) verifican con SOLO las publicas del config. El HMAC (event_auth) sin secreto se clasifica unverifiable (unresolved_key/missing_key) por DECISION-0046, NO como tamper: por eso el hash de estado es identico con y sin secretos."
+  },
+  "verdict_h3": "CONFIRMADA"
+}

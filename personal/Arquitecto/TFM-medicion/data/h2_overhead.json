@@ -1,0 +1,51 @@
+{
+  "schema": "tfm_h2_overhead.v1",
+  "generated_utc": "2026-06-30T01:29:17Z",
+  "corpus": "personal\\Arquitecto\\TFM-medicion\\corpus\\events.jsonl",
+  "eligible_total": 500,
+  "storage": {
+    "n": 500,
+    "delta_bytes_mean": 432.68,
+    "delta_bytes_median": 437.0,
+    "delta_bytes_p95": 437.0,
+    "delta_bytes_max": 437,
+    "mean_event_bytes_with_chain4": 1365.17,
+    "mean_event_bytes_without_chain4": 932.49,
+    "delta_kb_per_event_mean": 0.42254,
+    "threshold_s5_kb": 4,
+    "pass": true
+  },
+  "latency": {
+    "n": 500,
+    "repeats_per_event": 5,
+    "method": "min-of-R per event; delta = (verify_ed25519 + verify_hmac + recompute_prev_hash) - baseline_noop",
+    "with_chain4_ms_median": 1.6038,
+    "with_chain4_ms_p95": 2.2789,
+    "without_chain4_ms_median": 0.0005,
+    "delta_ms_median": 1.6032,
+    "delta_ms_p95": 2.2782,
+    "delta_ms_mean": 1.6388,
+    "delta_ms_max": 5.088,
+    "threshold_s5_median_ms": 50,
+    "threshold_s5_p95_ms": 200,
+    "pass_median": true,
+    "pass_p95": true
+  },
+  "tokens": {
+    "delta_tokens_pct": 0.0,
+    "threshold_s5_pct": 5,
+    "pass": true,
+    "ledger_in_coldstart_globs": false,
+    "coldstart_globs": [
+      "AGENTS.md",
+      "Area_comun/README.md",
+      "Area_comun/protocol/TASK_PROTOCOL.md",
+      "Area_comun/state/PROJECT_STATE.slim.json",
+      "Area_comun/state/TASK_INDEX.slim.json",
+      "Area_comun/state/CLAIMS.slim.json"
+    ],
+    "rationale": "#4 firma HASHES no texto (DECISION-0033/0040); actor_auth/event_auth/prev_hash viven en el ledger (runtime/state/events.jsonl) que NO esta en coldstart_globs, luego no entra al contexto del agente. El contexto de coordinacion (cold-start + slim views) es identico con o sin #4 -> delta de tokens de coordinacion = 0 por construccion.",
+    "limitation": "No existe una traza de tokens reales atribuible al campo de firma (agent_token_usage.py mide tokens de sesion del agente, no del campo actor_auth). El 0% es estructural/by-design, no una medicion empirica de un delta no-cero reducido a 0 (declarado en s.8)."
+  },
+  "verdict_h2": "CONFIRMADA"
+}
