@@ -1,0 +1,22 @@
+{
+  "idempotency_key": "codex:task0226-reqzeus-ws1:deliver-tx",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0226",
+      "from": "in_progress",
+      "to": "in_review",
+      "idempotency_key": "codex:task0226-reqzeus-ws1:in-progress-to-in-review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260630-Codex-TASK-0226",
+      "task_id": "TASK-0226",
+      "owner": "Codex",
+      "status": "released",
+      "notes": "TASK-0226 WS1 delivered: product document committed, handoff and mailbox delivery created.",
+      "idempotency_key": "codex:task0226-reqzeus-ws1:claim-release"
+    }
+  ]
+}

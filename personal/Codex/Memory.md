@@ -1,9 +1,26 @@
-﻿# Codex Memory
+# Codex Memory
 
 Last updated: 2026-06-29 Europe/Madrid, after TASK-0224 remediation commit.
 
 ## Latest Session Note
 
+- TASK-0226 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `4644455 docs(branding): add ws1 inventory plan`. It adds `docs/BRANDING-PLAN-WS1.md`, a document-only
+  WS1 inventory and plan for Zeus-Aegis branding. It covers user-visible Hermes/HERMES surfaces in docs,
+  source UI copy, onboarding/setup, gateway detection, env vars, Electron packaging, installer URLs, and
+  brand assets; defines the superficial WS3 plan with `ZEUS_*` aliases over `HERMES_*`/`CLAUDE_*` fallbacks;
+  lists assets to purge including Hermesworld and product-identity NousResearch/logo usage; preserves
+  Hermes Workspace/hermes-agent MIT NOTICE/LICENSE; and states that binaries, commands, `appId`, updater
+  identity, internal identifiers, and the vendor path are not renamed in the superficial pass. Product evidence:
+  `git diff --check -- docs/BRANDING-PLAN-WS1.md` PASS. Full product `npm test` FAILED with one existing F1
+  read-only contract failure in `src/server/governance-readonly.test.ts` (`ui` contains `submit_intent` in the
+  mailbox archive helper), unrelated to this document-only change. Protocol evidence at this point: encoding OK,
+  neutrality OK, validator OK with pre-existing open-mailbox warnings, drift false / byte-identical
+  `up_to_seq=2705`. Protocol coordination commit `coord(TASK-0226): deliver branding ws1 plan`
+  moved TASK-0226 to `in_review`, released `CLAIM-20260630-Codex-TASK-0226`, opened
+  `Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0226-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0226-codex-to-arquitecto-1.md`. The consumed Arquitecto GO remains open
+  because Codex lacks orchestrator capability for `mailbox_archive`.
 - TASK-0224 remediation commit `fix(reports): normalize plain metadata` moved TASK-0224 back to
   `in_review` and released `CLAIM-20260629-Codex-TASK-0224-remediation`. The report normalizer now removes
   stale report metadata with or without bold markers, including historical plain `- Date:`, `- Updated:` and

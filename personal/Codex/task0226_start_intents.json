@@ -1,0 +1,40 @@
+{
+  "idempotency_key": "codex:task0226-reqzeus-ws1:start-tx",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "idempotency_key": "codex:task0226-reqzeus-ws1:claim-acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260630-Codex-TASK-0226",
+          "task_id": "TASK-0226",
+          "owner": "Codex",
+          "status": "active",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260630-Codex-TASK-0226",
+            "Area_comun/state/TASK_INDEX.json#TASK-0226",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0226",
+            "Area_comun/tasks/TASK-0226-codex-reqzeus-ws1-inventario-hermes-branding.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0226-codex-to-arquitecto-1.md",
+            "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0226-ws1.md",
+            "Area_comun/mailbox/open/MSG-20260630-Codex-to-Arquitecto-TASK-0226-in-review.md",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-06-30T00:00:00Z",
+          "updated_at": "2026-06-30T00:00:00Z",
+          "expires_at": "2026-07-01T00:00:00Z",
+          "notes": "TASK-0226 WS1: document Hermes branding inventory and Zeus-Aegis branding plan in product docs without code changes."
+        }
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0226",
+        "from": "ready",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0226-reqzeus-ws1:ready-to-in-progress"
+      }
+    }
+  ]
+}
