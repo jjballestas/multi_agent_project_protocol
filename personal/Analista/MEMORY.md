@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0227 F1 boundary; NO-GO).
+> Ultima actualizacion: 2026-07-01 (TASK-0222 vista stats; NO-GO).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,24 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0222 vista Estadisticas (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `8fd4d2e` (`review(TASK-0222): Analista blocks stats view`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0222-vista-stats-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0222-vista-stats`. Ancla protocolo/instruccion
+  `3c39541655fe5540b3042e1ff50cd5443506a630`; producto Zeus-Aegis
+  `ff82538f31abb45cc4314fd396051a81e62dfe24`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0222-zeus-aegis-c86962bd130948cd9612e9afa8ab5be5`; clean clone
+  protocolo `C:/Users/johnb/AppData/Local/Temp/analista-0222-protocol-cee01171f623430591f78ee615aa1dc6`.
+  Bloqueo falsable: `npm test` en clean clone producto sale EXIT 1; falla
+  `src/server/governance-readonly.test.ts` en `exposes token stats and frozen dataset progress through the
+  read-only stats endpoint` por timeout a 30000 ms. Targeted vitest con `--testTimeout=60000` tambien EXIT 1
+  porque el test declara timeout interno 30000 ms. Endpoint/render pasan funcionalmente: HTTP 200,
+  dataset `500/500`, tag `TFM-dataset-N500`, minSeq `2221`, breakdown Analista 52 / Arquitecto 253 /
+  Codex 195, screenshot local `task0222-analista-stats-render.png`. F1 read-only de superficie cambiada sin
+  write-path nuevo en diff. Gates protocolo vivo y clean: validate, neutrality, encoding exit 0; drift 0
+  `up_to_seq=2795`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Recomendacion: devolver a Codex
+  para hacer verde el full clean-clone gate antes de cierre.
 - TASK-0227 F1 boundary (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `88d0568` (`review(TASK-0227): Analista blocks F1 boundary`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-f1-boundary-veredicto.md`, MSG
