@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0225 Arquitecto-cron remediacion-2; GO).
+> Ultima actualizacion: 2026-07-01 (TASK-0227 F1 boundary; NO-GO).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 F1 boundary (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `88d0568` (`review(TASK-0227): Analista blocks F1 boundary`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-f1-boundary-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-f1-boundary`. Ancla protocolo citada
+  `9e0206e48b66227a9165a2970d9f717d51b0953f`; protocolo vivo durante review
+  `245e521f1420f87614a59bc640ca219a87899a44`; producto Zeus-Aegis
+  `15c52fb134ee21cc9d716af8f9d8a9c7aba0e741`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0227-zeus-aegis-31a2123de8544283adf546a486497d3e`.
+  `npm test` exit 0 (82 files, 556 tests) y test F1 canonico exit 0. Bloqueo falsable:
+  el guard F1 falla para write-paths reales con `method: POST` with backtick quotes, `const m='POST';
+  fetch(...,{method:m})`, `method:'post'` lowercase, y `axios.post(...)`: todos salieron exit 0 en
+  test dirigido mutado. Controles positivos si sostienen: `fetch(...,{method:'POST'})` literal y
+  `submit_intent` sin guard local salen exit 1. Gates protocolo vivo y clean `9e0206e`: validate,
+  scan_domain_neutrality, scan_encoding exit 0; drift vivo `has_drift=false up_to_seq=2791`, clean
+  `has_drift=false up_to_seq=2758`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Recomendacion: devolver a Codex
+  para ampliar el guard F1 por familia y anadir negativos permanentes.
 - TASK-0225 Arquitecto-cron remediacion-2 (2026-07-01): GO/CERRABLE. Veredicto canonico en
   `e2fd73d` (`review(TASK-0225): Analista OK remediation 2`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0225-remediacion-2-veredicto.md`, MSG
