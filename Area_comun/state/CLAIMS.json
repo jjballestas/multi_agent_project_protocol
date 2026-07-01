@@ -12744,6 +12744,21 @@
             "updated_at": "2026-07-01T01:06:00Z"
         },
         {
+            "claim_id": "CLAIM-20260701-archive-stale-0222go-arquitecto",
+            "expires_at": "2026-07-01T12:00:00Z",
+            "notes": "Archivar GO-0222 consumido (Codex no pudo, sin orchestrator cap) para desatascar el cron.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-archive-stale-0222go-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0222-vista-stats.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0222-vista-stats.md"
+            ],
+            "started_at": "2026-07-01T09:44:51Z",
+            "status": "released",
+            "task_id": "OPS-UNJAM-CODEX-20260701",
+            "updated_at": "2026-07-01T09:44:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-ratify0225-promote0228-arquitecto",
             "expires_at": "2026-07-01T08:00:00Z",
             "notes": "Ratifica 0225 (GO Analista) + promueve 0228 WS5.",
