@@ -4,6 +4,15 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0222 done-flip completed in the protocol commit for this delivery.
+  `runtime/submit_intent.py` transaction
+  `codex:task0222:done-flip-tx` acquired and released
+  `CLAIM-20260701-Codex-TASK-0222-done-flip` and moved TASK-0222 `review_approved -> done` at seq 2892-2894.
+  Evidence after the flip: encoding OK, neutrality command exit 0, validator OK, drift false / byte-identical
+  `up_to_seq=2894`. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched; TASK-0222 product work
+  remains in `D:/Agentes/Zeus/Zeus-Aegis` commits `ff82538`, `a68eb34`, and final evidence commit `3b25b8b`.
+  The consumed Arquitecto ACTION message remains open because `mailbox_archive` still requires orchestrator
+  capability for Codex.
 - TASK-0235 delivered to `in_review` in the protocol repo. `personal/Codex/codex_mailbox_cron.ps1` and
   `personal/Analista/analista_mailbox_cron.ps1` now create per-exec leases with PID + process start-time UTC,
   cmdline hash, owner, message id, deadline, monotonic heartbeat, and `stop_after_current_turn`; they self-heal

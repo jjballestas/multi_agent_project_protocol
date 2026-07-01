@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "92b7c44c6be601f3b6beb016c18acb150d66277b311f1c9378345557a10da78e",
+        "replay_hash": "92b7c44c6be601f3b6beb016c18acb150d66277b311f1c9378345557a10da78e",
+        "up_to_seq": 2894
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "SdejVM9s66qj8MdAXhQbU5GXFkfBl9GpTGjFsTMSN/aDwdgxerN6tvcZib1duVxFg5+QdkEEqQKJRGBpQjqiAw=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 27,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "59acf6e57f3a62ab439c0fe45510745d53fe7c4a0eda855836578734b41c16f3"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:ad841b8f8fdb0f8e7bb983977bc41eef0569c4857a2af9e94fcc01a821121d62",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T18:52:35Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0222:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T18:52:35Z",
+                                "status": "active",
+                                "task_id": "TASK-0222",
+                                "updated_at": "2026-07-01T18:52:35Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0222"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "095472adb328f4b541f42ec418da8e7e47131140386d1500bb1b5a28d5b4e22d",
+            "seq": 2892,
+            "ts": "2026-07-01T18:52:35Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "LmvnGH3b2xs4erIuApRexPuzpoG/6M+KCq9DI9D0n2m2/0i0NWdHE2H29yxt9IQLkwUVVTcjxuV2SxyOnKfmAw=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 28,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "6a57d3ba9391d5a1bd4151c31f566136aa8a437b719907f1d4e20a60e187a653"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:9f602048617e877ae46732af17bde23a3feeb3b54bbf1a3165e7b335027f4e62",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T18:52:35Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0222:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "87ac4c51e3df8a3998f650c21a7c41ae701d1337c1f4bee1294dc7d6bd6093d7",
+            "seq": 2893,
+            "ts": "2026-07-01T18:52:35Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "GGa9p2SHA4+z/ZlK/l7E0DuUp7Whj+N3jHuADSlKIRJ2ZB+9KB6aA3kfDC0jqt+Vg1QDzMgEo++W2suH0NL+DA=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 29,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "f0726ed7bbe13ccddbe19c8cb18f3ba5e6f81cc782500a8aa277d9c7807639f9"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:8d266696bc8a623d8ee494d2da03a3bf4aac77208eb28e02e862077996cdb97f",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T18:52:35Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0222:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T18:52:35Z",
+                                "status": "released",
+                                "task_id": "TASK-0222",
+                                "updated_at": "2026-07-01T18:52:35Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0222"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "64ea10344d52fb981482d937f8598dd150824b2b843d2d11e7d2692f90926369",
+            "seq": 2894,
+            "ts": "2026-07-01T18:52:35Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T18:52:35Z",
+                "status": "active",
+                "task_id": "TASK-0222",
+                "updated_at": "2026-07-01T18:52:35Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0222"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0222",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T18:52:35Z",
+                "status": "released",
+                "task_id": "TASK-0222",
+                "updated_at": "2026-07-01T18:52:35Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0222-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0222"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "387c7fde13193f42228c0b473e43797b05290d5392e199243edd6fb66bb8b39a",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2894
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2894
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:ad841b8f8fdb0f8e7bb983977bc41eef0569c4857a2af9e94fcc01a821121d62",
+            "intent:Codex:task_status:9f602048617e877ae46732af17bde23a3feeb3b54bbf1a3165e7b335027f4e62",
+            "intent:Codex:claim:8d266696bc8a623d8ee494d2da03a3bf4aac77208eb28e02e862077996cdb97f"
+        ],
+        "idempotency_key": "codex:task0222:done-flip-tx",
+        "intent_count": 3
+    }
+}
