@@ -2,7 +2,7 @@
 task_id: TASK-0225
 title: "Construir Arquitecto-cron headless (orquestador del GOAL-REQ-ZEUS-001); lanzamiento real lo hace el operador"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -1,9 +1,17 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0223 product commit.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0225 done-flip commit.
 
 ## Latest Session Note
 
+- TASK-0225 done-flip completed in the protocol commit `coord(TASK-0225): close arquitecto cron`.
+  `runtime/submit_intent.py` transaction `codex:task0225:done-flip-tx` acquired and released
+  `CLAIM-20260701-Codex-TASK-0225-done-flip` and moved TASK-0225 `review_approved -> done` at seq 2812-2814.
+  Evidence after the flip: encoding OK, neutrality OK, validator OK with only pre-existing non-response mailbox
+  warnings, and drift false / byte-identical `up_to_seq=2814`. Product repo `D:/Agentes/Zeus/Zeus-protocol` was
+  clean and untouched. Codex attempted to archive the consumed Arquitecto ACTION message after ledger-backed closure,
+  but `mailbox_archive` still requires orchestrator capability for Codex; the message remains open for Arquitecto
+  hygiene.
 - TASK-0222 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `a68eb34 fix(governance): bound stats token scan`. The stats endpoint no longer shells out to
   `scripts/agent_token_usage.py` for the hot cron-log aggregate; it scans bounded 128 KiB tails of
