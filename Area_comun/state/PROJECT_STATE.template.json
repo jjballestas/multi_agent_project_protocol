@@ -11,6 +11,7 @@
   "agents": {
     "architect": "{{AGENT_ARCHITECT}}",
     "implementer": "{{AGENT_IMPLEMENTER}}",
+    "analyst": "{{AGENT_ANALYST}}",
     "human_owner": "{{HUMAN_OWNER}}"
   },
   "source_of_truth": "AGENTS.md",

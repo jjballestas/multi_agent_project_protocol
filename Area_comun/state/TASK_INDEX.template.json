@@ -4,7 +4,7 @@
   "updated_by": "{{UPDATED_BY}}",
   "legend": {
     "status": ["proposed", "ready", "claimed", "in_progress", "in_review", "done", "blocked", "cancelled"],
-    "owner": ["{{AGENT_ARCHITECT}}", "{{AGENT_IMPLEMENTER}}", "{{HUMAN_OWNER}}"],
+    "owner": ["{{AGENT_ARCHITECT}}", "{{AGENT_IMPLEMENTER}}", "{{AGENT_ANALYST}}", "{{HUMAN_OWNER}}"],
     "priority": ["low", "normal", "high", "critical"],
     "phase": ["{{PHASE_ID}}"]
   },

@@ -4,6 +4,17 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 remediation product comm
 
 ## Latest Session Note
 
+- TASK-0228 implementation is delivered to `in_review` in the protocol commit for this delivery. `scripts/new_instance.py` now requires `--analyst` and
+  renders four participants (`architect`, `implementer`, `analyst`, `human_owner`) into generated instances;
+  templates now include the analyst in `protocol.config`, `PROJECT_STATE.agents`, `TASK_INDEX.legend.owner`, tool
+  policy, and personal-area creation. NOVA was updated in place at `D:/Agentes/Zeus/NOVA` with `Analista` in
+  `agent_roles`, `PROJECT_STATE.agents`, `TASK_INDEX.legend.owner`, `personal/Analista/.gitkeep`, and
+  `Area_comun/decisions/DECISION-0007-rol-analista-checker.md` for `NOVA-ARQ-001` maker!=checker. NOVA is not a git
+  repo, so those are workspace changes, not a product commit. Evidence: `py_compile` PASS; NOVA validator PASS; temp
+  generated coordination instance with four participants PASS; synthetic `owner: Analista` task validates PASS;
+  protocol encoding PASS, neutrality PASS, validator PASS with only pre-existing non-response FYI archive warnings,
+  drift false / byte-identical `up_to_seq=2825`. Codex attempted to archive the consumed GO after delivery, but
+  `mailbox_archive` still requires orchestrator capability for Codex.
 - TASK-0227 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `88091b1 test(governance): cover f1 write path variants`. The F1 read-only boundary test now centralizes
   `GOVERNANCE_FORBIDDEN_WRITE_PATTERNS`, scans UI governance calls for any `method:` on `/api/governance/*`

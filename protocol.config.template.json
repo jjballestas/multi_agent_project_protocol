@@ -8,6 +8,7 @@
   "agent_roles": {
     "architect": "{{AGENT_ARCHITECT}}",
     "implementer": "{{AGENT_IMPLEMENTER}}",
+    "analyst": "{{AGENT_ANALYST}}",
     "human_owner": "{{HUMAN_OWNER}}"
   },
   "quality_gates": ["{{QUALITY_GATES}}"],
@@ -120,7 +121,8 @@
     "default": "deny",
     "agent_policies": {
       "{{AGENT_ARCHITECT}}": "policy.architect",
-      "{{AGENT_IMPLEMENTER}}": "policy.implementer"
+      "{{AGENT_IMPLEMENTER}}": "policy.implementer",
+      "{{AGENT_ANALYST}}": "policy.analyst"
     },
     "policies": {
       "policy.architect": {
@@ -152,6 +154,16 @@
             "capabilities": ["implementer"],
             "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json", ".github/workflows/validate.yml"],
             "actions": ["local_write"]
+          }
+        ]
+      },
+      "policy.analyst": {
+        "allow": [
+          {
+            "tool": "local.shell",
+            "capabilities": ["reviewer"],
+            "scope": ["Area_comun/", "examples/", "runtime/", "scripts/", "protocol.config.json", "protocol.config.template.json"],
+            "actions": ["read", "local_exec"]
           }
         ]
       }

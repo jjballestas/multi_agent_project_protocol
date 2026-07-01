@@ -113,6 +113,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--project-description", required=True)
     parser.add_argument("--architect", required=True)
     parser.add_argument("--implementer", required=True)
+    parser.add_argument("--analyst", required=True, help="Independent analyst/checker participant.")
     parser.add_argument("--human-owner", required=True)
     parser.add_argument("--phase-id", required=True)
     parser.add_argument("--phase-name", required=True)
@@ -315,6 +316,7 @@ def load_roster(args: argparse.Namespace) -> list[dict[str, str]]:
         agents = [
             {"id": args.architect, "role": "architect", "tier": "signer", "llm_preset": "architect"},
             {"id": args.implementer, "role": "implementer", "tier": "signer", "llm_preset": "implementer"},
+            {"id": args.analyst, "role": "analyst", "tier": "signer", "llm_preset": "analyst"},
             {"id": args.human_owner, "role": "human_owner", "tier": "worker", "llm_preset": "human"},
         ]
     if not isinstance(agents, list) or not agents:
@@ -585,6 +587,7 @@ def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]
     agent_roles = (
         f"- `{args.architect}`: Architect / orchestrator.\n"
         f"- `{args.implementer}`: Implementation specialist.\n"
+        f"- `{args.analyst}`: Independent analyst / checker.\n"
         f"- `{args.human_owner}`: Human owner."
     )
     return {
@@ -597,6 +600,7 @@ def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]
         "PHASE_GOAL": args.phase_goal,
         "AGENT_ARCHITECT": args.architect,
         "AGENT_IMPLEMENTER": args.implementer,
+        "AGENT_ANALYST": args.analyst,
         "HUMAN_OWNER": args.human_owner,
         "PROTOCOL_VERSION": protocol_version,
         "LAST_UPDATED": today,
@@ -623,7 +627,7 @@ def create_personal_areas(target: Path, args: argparse.Namespace) -> None:
     Created with a .gitkeep so the directory persists in git when empty. <id> matches the
     participant identifier used in the agent registry / agents block.
     """
-    participants = [args.architect, args.implementer, args.human_owner]
+    participants = [args.architect, args.implementer, args.analyst, args.human_owner]
     seen: set[str] = set()
     for participant in participants:
         pid = str(participant).strip()
