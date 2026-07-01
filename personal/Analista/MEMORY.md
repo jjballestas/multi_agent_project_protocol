@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 remediacion-4 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `6014596` (`review(TASK-0227): Analista blocks remediation 4`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-4-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-4`. Ancla protocolo vivo al claim
+  `c4c15be075aaaea81c53bd06695caed9f6efa663`; instruccion REVIEW materializada en
+  `2a881e6db3e1e9910ee747525494053676fc08db`; producto citado
+  `534b95eaaf952be81c635aedab528e6663041e1e`. Nota de ancla: `D:/Agentes/Zeus/Zeus-protocol` no contiene
+  `534b95e`; el commit existe en `D:/Agentes/Zeus/Zeus-Aegis`. Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0227-rem4-0977876a2d4e48c89be806b704728d22/zeus-aegis`:
+  `npm test` EXIT 0 (82 files / 559 tests; `governance-readonly.test.ts` 16 tests). Probe propio del guard F1
+  acotado EXIT 1: los tres negativos de rem-3 pasan (`fetch` con opts local sin tipo, `new Request`, y
+  `axios.request` posicional), pero `const opts: RequestInit = { method: 'POST' }; fetch('/api/governance/state',
+  opts)` sale `matched=false`. Veredicto: con DECISION-0079 actual, objeto local tipado con method literal sigue
+  dentro de la familia enumerable prometida; pedir fix o acotar explicitamente la decision. Gates protocolo:
+  validate/neutrality/encoding EXIT 0, drift false `up_to_seq=2886`, `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0222 remediacion stats (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `3eea590` (`review(TASK-0222): Analista blocks stats remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0222-remediacion-veredicto.md`, MSG
