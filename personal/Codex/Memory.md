@@ -4,6 +4,20 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0228 done-flip.
 
 ## Latest Session Note
 
+- TASK-0227 remediation-3 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `19ebd48 test(governance): catch f1 write variants`. The F1 read-only guard now rejects the four additional
+  Analista escapes: `fetch(..., { method })`, `fetch(..., { ['method']: 'POST' })`,
+  `axios.request({ url, method: 'POST' })`, and `axios({ url, method })`, while preserving the previous escapes and
+  display-only `submit_intent.py` allowance near explicit no-writer copy. Two slow canonical-read tests now have 60s
+  per-test budgets so clean environments do not false-timeout without relaxing assertions. Evidence before product
+  commit and redelivery: `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` PASS; targeted
+  `governance-readonly.test.ts` PASS 16 tests; local product `npm test` PASS 82 files / 559 tests in 265.08s; clean
+  clone `C:/Users/johnb/AppData/Local/Temp/codex-0227-rem3-zeus-aegis-clean` `npm test` PASS 82 files / 559 tests,
+  exit 0; `git diff --check` PASS with only the LF-to-CRLF warning. Protocol delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-3.md` and
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-3-in-review.md`; runtime delivery
+  moved TASK-0227 back to `in_review` and released `CLAIM-20260701-Codex-TASK-0227-remediation-3-v3`. Protocol
+  coordination commit for this delivery is `coord(TASK-0227): redeliver f1 remediation`.
 - TASK-0228 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0228:done-flip-tx` acquired and released `CLAIM-20260701-Codex-TASK-0228-done-flip` and moved
   TASK-0228 `review_approved -> done` at seq 2846-2848. The first submit call timed out while still running

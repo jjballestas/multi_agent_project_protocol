@@ -1,0 +1,187 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "1a11a5b8a3576323cd27761a697315bda30879384a08b4180f12e542c1d29092",
+        "replay_hash": "1a11a5b8a3576323cd27761a697315bda30879384a08b4180f12e542c1d29092",
+        "up_to_seq": 2857
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "bMW08GvrS4E/vnEW7N5v+t0PrzUbOfUD6aJPQvkENzD7gPBOXHNW5IzJWFdhoailuEz3+Lg6qvuWoe+yJmG9Cw=="
+            },
+            "aggregate_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "8f41d55469227b9fd9ba23c8ecdc8d65be651da3975f5e3782a0a8ea152725a1"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-3-scope-release-v3",
+            "payload": {
+                "commit": "task0227-remediation-3-scope",
+                "intent_type": "claim",
+                "timestamp": "2026-07-01T17:58:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-3-scope-v3-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "b96a811d6397deb0c6a7132ebd9175c7d8cfd9a73c1e2b0818d9471ea86989b1",
+            "seq": 2856,
+            "ts": "2026-07-01T17:58:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "R9a+zKTTOehAY/mOWCsqFCtbUM42yCiyDEf+e+aHCFfKMXE7gBCvPSGvjNaDVZx52eezNMtQYox45wOypMl8Dg=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 15,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "cd53633672a5321999e9e7214d71a2e20facc38b73e7a97add55d8daae2c7d65"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-3-scope-acquire-v3",
+            "payload": {
+                "commit": "task0227-remediation-3-scope",
+                "intent_type": "claim",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T17:58:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-3-scope-v3-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Remediacion-3 TASK-0227 delivery artifacts after product fix and clean-clone npm test.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-3.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-3-in-review.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T15:34:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0227",
+                                "updated_at": "2026-07-01T17:58:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0227"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "bb5ee73173e668a76b98b1d4a17cab4d963a6b73bee3f519bc74b160a387fb32",
+            "seq": 2857,
+            "ts": "2026-07-01T17:58:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+            "idempotency_key": "codex:task0227:remediation-3-scope-release-v3",
+            "kind": "claim",
+            "op": "release"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Remediacion-3 TASK-0227 delivery artifacts after product fix and clean-clone npm test.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-3.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-3-in-review.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T15:34:00Z",
+                "status": "active",
+                "task_id": "TASK-0227",
+                "updated_at": "2026-07-01T17:58:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+            "idempotency_key": "codex:task0227:remediation-3-scope-acquire-v3",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0227"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "9f09c5500689353db63964c93c50902c5dc8cac194ceb725cbc3304de0f4285e",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2857
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2857
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "codex:task0227:remediation-3-scope-release-v3",
+            "codex:task0227:remediation-3-scope-acquire-v3"
+        ],
+        "idempotency_key": "codex:task0227:remediation-3-scope-v3-tx",
+        "intent_count": 2
+    }
+}

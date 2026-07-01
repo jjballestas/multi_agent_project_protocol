@@ -1,0 +1,38 @@
+{
+  "idempotency_key": "codex:task0227:remediation-3-scope-v2-tx",
+  "intents": [
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+        "idempotency_key": "codex:task0227:remediation-3-scope-release-v2"
+      }
+    },
+    {
+      "claim": {
+        "op": "acquire",
+        "claim": {
+          "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+          "owner": "Codex",
+          "task_id": "TASK-0227",
+          "status": "active",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-3-v3",
+            "Area_comun/state/TASK_INDEX.json#TASK-0227",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+            "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+            "Area_comun/handoffs/",
+            "Area_comun/mailbox/open/",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-07-01T15:34:00Z",
+          "updated_at": "2026-07-01T17:57:00Z",
+          "expires_at": "2026-07-01T23:59:00Z",
+          "notes": "Remediacion-3 TASK-0227 delivery artifacts after product fix and clean-clone npm test."
+        },
+        "idempotency_key": "codex:task0227:remediation-3-scope-acquire-v2"
+      }
+    }
+  ]
+}
