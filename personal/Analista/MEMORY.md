@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0222 remediacion; NO-GO por npm test full EXIT 1).
+> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-5; NO-GO por claves string-literal method/url).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 remediacion-5 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `71787c4` (`review(TASK-0227): Analista blocks remediation 5`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-5-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-5`. Ancla protocolo/instruccion
+  `7953df12150c69d7f48c417252303c45ba4cc405`; producto citado `bbf84e714e2bff4b29fba325fa0e7a20192a1df6`.
+  Nota de ancla: `D:/Agentes/Zeus/Zeus-protocol` no contiene `bbf84e7`; el commit existe en
+  `D:/Agentes/Zeus/Zeus-Aegis`. Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0227-rem5-c0552dd117574b13865b1e18159c7c5b/zeus-aegis`:
+  `corepack pnpm --dir vendor/hermes-2.3.0 test` EXIT 0 (suite full verde; `governance-readonly.test.ts`
+  16 tests). Probe propio del guard F1 EXIT 1: el caso rem-4 tipado `const opts: RequestInit = { method:
+  'POST' }; fetch('/api/governance/state', opts)` y previos pasan, pero las claves string-literal dentro de
+  objeto literal enumerable salen `matched=false`: `fetch(..., { "method": "POST" })`, `const opts:
+  RequestInit = { "method": "POST" }; fetch(..., opts)`, `fetch(new Request(..., { "method": "POST" }))`,
+  `axios.request(..., { "method": "POST" })`, y `axios({ "url": "/api/governance/state", method: "POST" })`.
+  Gates protocolo vivo y clean validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2900`;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0222 remediacion-2 (2026-07-01): GO/CERRABLE. Veredicto canonico en `7741923`
   (`review(TASK-0222): Analista OK remediation 2`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0222-remediacion-2-veredicto.md`, MSG
