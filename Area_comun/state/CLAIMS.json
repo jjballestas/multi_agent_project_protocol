@@ -12974,6 +12974,21 @@
             "updated_at": "2026-07-01T09:44:51Z"
         },
         {
+            "claim_id": "CLAIM-20260701-decision0079-f1ac-arquitecto",
+            "expires_at": "2026-07-01T20:00:00Z",
+            "notes": "Registro DECISION-0079 (acota AC F1 de TASK-0227, scope product).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-decision0079-f1ac-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0079-acota-ac-f1-guard-estatico-readonly.md"
+            ],
+            "started_at": "2026-07-01T16:27:44Z",
+            "status": "released",
+            "task_id": "TASK-0227",
+            "updated_at": "2026-07-01T16:27:44Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-mbhyg-b1",
             "expires_at": "2026-07-01T20:00:00Z",
             "notes": "higiene lote 1",

@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260701-decision0079-f1ac-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0227",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-decision0079-f1ac-arquitecto",
+          "Area_comun/state/PROJECT_STATE.json",
+          "Area_comun/decisions/DECISION-0079-acota-ac-f1-guard-estatico-readonly.md"
+        ],
+        "started_at": "2026-07-01T16:27:44Z",
+        "updated_at": "2026-07-01T16:27:44Z",
+        "expires_at": "2026-07-01T20:00:00Z",
+        "notes": "Registro DECISION-0079 (acota AC F1 de TASK-0227, scope product)."
+      }
+    },
+    {
+      "type": "decision",
+      "decision_id": "DECISION-0079"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-decision0079-f1ac-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0227",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-decision0079-f1ac-arquitecto",
+          "Area_comun/state/PROJECT_STATE.json",
+          "Area_comun/decisions/DECISION-0079-acota-ac-f1-guard-estatico-readonly.md"
+        ],
+        "updated_at": "2026-07-01T16:27:44Z"
+      }
+    }
+  ]
+}
