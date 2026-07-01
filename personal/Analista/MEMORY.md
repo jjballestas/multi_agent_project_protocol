@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-3; NO-GO por slips F1 nuevos).
+> Ultima actualizacion: 2026-07-01 (TASK-0222 remediacion; NO-GO por npm test full EXIT 1).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,20 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0222 remediacion stats (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `3eea590` (`review(TASK-0222): Analista blocks stats remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0222-remediacion-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0222-remediacion`. Ancla protocolo/instruccion
+  `b942389b0243ab7a4085689af6b157bdeb1bbaa8`; producto Zeus-Aegis
+  `a68eb34297d81a77a92c0d8fb378933f3f2796f6`; clon limpio producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0222-remed-zeus-aegis-52ac4b8230a944329a51e0eb6c1dd714`.
+  `npm test` en clon limpio EXIT 1: el test de stats ya no hace timeout (`exposes token stats...` visible en
+  943 ms), pero la suite full termina con `Unhandled Rejection: Error: Channel closed` /
+  `ERR_IPC_CHANNEL_CLOSED`; gate de cierre sigue rojo por exit-code. Targeted stats EXIT 0 (1142 ms) y targeted
+  F1/stats/read-only EXIT 0. Payload propio del scanner: cola 128 KiB respeta bound (token viejo fuera de cola no
+  suma), multilinea dentro de 4 lineas suma, multilinea a 5 lineas se ignora, dataset sigue `500/500`.
+  Gates protocolo vivo y clean validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2871` post-claim;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0227 remediacion-3 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `bda1278` (`review(TASK-0227): Analista blocks remediation 3`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-3-veredicto.md`, MSG
