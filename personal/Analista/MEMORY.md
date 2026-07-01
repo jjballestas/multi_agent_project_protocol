@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-5; NO-GO por claves string-literal method/url).
+> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-6; NO-GO por axios const-local).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,24 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 remediacion-6 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `733f217` (`review(TASK-0227): Analista blocks remediation 6`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-6-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-6`. Ancla protocolo vivo
+  `96493b8c2a7e2e075930a386485f0f7d7aab5e50`; instruccion REVIEW materializada por `d5aeb1c`;
+  producto citado por handoff `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `b58e6abeaa86e8bddad06f2f4906f6de3ea1851c`. Nota de ancla: la orden generica nombra
+  `Zeus-protocol`, pero `b58e6ab` no existe alli; existe en `Zeus-Aegis`. Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0227-rem6-cfe668d6bbda4030b8c16835c764284c/zeus-aegis`:
+  `corepack pnpm --dir vendor/hermes-2.3.0 test` EXIT 0 (82 files / 559 tests) y targeted
+  `governance-readonly.test.ts` EXIT 0 (16/16). Los 5 casos rem-5 ahora dan `matched=true`, y tambien
+  las claves literal/simple/quoted/computed en `fetch`, `const opts` para fetch, `new Request`, `axios(...)`
+  inline y `axios.request(...,{...})` inline. Probe propio EXIT 1 por slips nuevos dentro del AC literal/local:
+  `const cfg = { "method": "POST" }; axios.request('/api/governance/state', cfg)` matched=false y
+  `const cfg = { "url": "/api/governance/state", "method": "POST" }; axios(cfg)` matched=false. Gates protocolo
+  vivo y clean validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2904` antes de claim y `2906`
+  tras claim/release; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0227 remediacion-5 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `71787c4` (`review(TASK-0227): Analista blocks remediation 5`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-5-veredicto.md`, MSG
