@@ -3439,7 +3439,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1",
             "type": "build"
         },

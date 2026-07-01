@@ -73,12 +73,6 @@
             "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
         },
         {
-            "id": "TASK-0222",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1"
-        },
-        {
             "id": "TASK-0227",
             "owner": "Codex",
             "status": "in_review",
