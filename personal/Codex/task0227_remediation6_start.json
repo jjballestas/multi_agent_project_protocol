@@ -1,0 +1,39 @@
+{
+  "idempotency_key": "codex:task0227:remediation6-start-tx-v2",
+  "intents": [
+    {
+      "claim": {
+        "op": "acquire",
+        "idempotency_key": "codex:task0227:remediation6-claim-acquire-v3",
+        "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-6",
+        "owner": "Codex",
+        "task_id": "TASK-0227",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-6",
+          "Area_comun/state/TASK_INDEX.json#TASK-0227",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+          "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+          "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-6.md",
+          "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-6-in-review.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T20:30:00Z",
+        "updated_at": "2026-07-01T20:30:00Z",
+        "expires_at": "2026-07-01T23:59:00Z",
+        "notes": "TASK-0227 remediation-6 final F1 literal quoted method/url guard."
+        }
+      }
+    },
+    {
+      "task_status": {
+        "task_id": "TASK-0227",
+        "from": "in_review",
+        "to": "in_progress",
+        "idempotency_key": "codex:task0227:remediation6-in-review-to-in-progress-v3"
+      }
+    }
+  ]
+}

@@ -4,6 +4,24 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0227 remediation-6 final product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `b58e6ab test(governance): cover quoted f1 write keys`. The F1 static read-only guard now centralizes
+  literal object key matching for `method`/`url` across unquoted, quoted, and computed literal keys, and adds
+  permanent negative coverage for the rem-6 escapes: quoted-method `fetch` inline, typed `RequestInit` local
+  options, `new Request`, `axios.request(url, cfg)`, and quoted-url `axios({ ... })`. Product evidence:
+  `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` PASS; targeted
+  `governance-readonly.test.ts` PASS 16 tests; local product `corepack pnpm --dir vendor/hermes-2.3.0 test`
+  PASS 82 files / 559 tests; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/codex-0227-rem6-zeus-aegis-clean-b58e6ab` `npm test` PASS 82 files /
+  559 tests. Delivery artifacts prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-6.md` and
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-6-in-review.md`. Runtime
+  delivery moved TASK-0227 back to `in_review` and released
+  `CLAIM-20260701-Codex-TASK-0227-remediation-6` at seq 2903-2904. Protocol evidence after delivery:
+  encoding OK, neutrality exit 0, validator OK, drift false / byte-identical `up_to_seq=2904`. Codex attempted
+  to archive the consumed Arquitecto ACTION after ledger-backed delivery, but `mailbox_archive` still requires
+  orchestrator capability for Codex; the message remains open for Arquitecto hygiene. Protocol coordination
+  commit message: `coord(TASK-0227): redeliver final f1 remediation`.
 - TASK-0227 remediation-5 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `bbf84e7 test(governance): catch typed f1 options object`. The F1 static read-only guard now catches the
   DECISION-0079 local const options variant with a TypeScript annotation, including
