@@ -1,0 +1,135 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "359acbf3f069e6d9367cf9e7b03663406af8e774ce7142b6f888b9500b2be73b",
+        "replay_hash": "359acbf3f069e6d9367cf9e7b03663406af8e774ce7142b6f888b9500b2be73b",
+        "up_to_seq": 2872
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "jY6qHtMcOotI1UaIX0fAS3acMziOESFg6s7kxqE6inYS6n2LReNE2toCtmfOwSthZ9Kw9Q7BMr57sDpB95dmDg=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 16,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "c701921c5fce988cfc279311c9cd0e9c48af1ed936cc12514970ed625617b04c"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:5013508bd44a577cff1b916761495cfddf342bf02fe91e26104a4fcbc7d26fe8",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T19:24:14Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:task0222:remediation2-claim-only",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "TASK-0222 remediation-2: deterministic full npm test evidence in clean clone while preserving stats fix.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0222-remediacion-2.md",
+                                    "D:/Agentes/Zeus/Zeus-Aegis",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T19:24:14Z",
+                                "status": "active",
+                                "task_id": "TASK-0222",
+                                "updated_at": "2026-07-01T19:24:14Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0222"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "d4a663898e7b7947c5d41b4f4a5951b688ebd09ed70b9e7111b608637bcc8bc7",
+            "seq": 2872,
+            "ts": "2026-07-01T19:24:14Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "TASK-0222 remediation-2: deterministic full npm test evidence in clean clone while preserving stats fix.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0222",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+                    "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0222-remediacion-2.md",
+                    "D:/Agentes/Zeus/Zeus-Aegis",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T19:24:14Z",
+                "status": "active",
+                "task_id": "TASK-0222",
+                "updated_at": "2026-07-01T19:24:14Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0222"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "5b56e220a087c7079464879f181f3a28342481b64e779c162eee005c3d0fc5d6",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2872
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2872
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:5013508bd44a577cff1b916761495cfddf342bf02fe91e26104a4fcbc7d26fe8"
+        ],
+        "idempotency_key": "codex:task0222:remediation2-claim-only",
+        "intent_count": 1
+    }
+}

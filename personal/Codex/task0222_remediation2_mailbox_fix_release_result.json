@@ -1,0 +1,109 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "1a7cd32fb2ab57ce3c4004036513db439bd13bcb5d0347a1bc582cc178f2188f",
+        "replay_hash": "1a7cd32fb2ab57ce3c4004036513db439bd13bcb5d0347a1bc582cc178f2188f",
+        "up_to_seq": 2877
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "i1krDOOPjTJoKmY8g3t7ThywRgGkIW0EhsMmhE04Eb9EgrWye5Za0hvPnZ/iNTZDQbt7K8lG7tL1eupefGBuCQ=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 21,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "1621caedd29e2ad53b056810fa5048c6f23265f8c915571404a8cd1ea403c940"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:a875668fc3b6ee1d7b301b8b46ae2cbc91df451269f7f4fafbe2d1774d925147",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T19:49:00Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:task0222:remediation2-mailbox-fix-release",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-mailbox-fix",
+                                "owner": "Codex",
+                                "status": "released",
+                                "task_id": "TASK-0222",
+                                "updated_at": "2026-07-01T19:49:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-mailbox-fix",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0222"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "7050da5a7c3e2ae271faf295183e418023f615c570f8c0518893ff9c3506c0a5",
+            "seq": 2877,
+            "ts": "2026-07-01T19:49:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-mailbox-fix",
+                "owner": "Codex",
+                "status": "released",
+                "task_id": "TASK-0222",
+                "updated_at": "2026-07-01T19:49:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-mailbox-fix",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0222"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "f1a1b0282d54ff5f53ffc260d3913e68c212f1d953a919e3306f169fd0e9e371",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2877
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2877
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:a875668fc3b6ee1d7b301b8b46ae2cbc91df451269f7f4fafbe2d1774d925147"
+        ],
+        "idempotency_key": "codex:task0222:remediation2-mailbox-fix-release",
+        "intent_count": 1
+    }
+}

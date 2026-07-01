@@ -4,6 +4,18 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0222 remediation-2 product evidence landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `3b25b8b test(governance): attest stats suite stability` (empty evidence commit; no code change needed after
+  environmental worker cleanup). Codex stopped stale local `node` workers, confirmed product `git diff --check` PASS,
+  local `corepack pnpm --dir vendor/hermes-2.3.0 test` PASS 82 files / 559 tests, and clean clone
+  `C:/Users/johnb/AppData/Local/Temp/codex-0222-rem2-zeus-aegis-clean` `npm test` PASS twice consecutively:
+  run 1 PASS 82 files / 559 tests, run 2 PASS 82 files / 559 tests. The stats fix from `a68eb34` remains unchanged.
+  Protocol coordination commit `coord(TASK-0222): redeliver stats suite evidence` added
+  `Area_comun/handoffs/HANDOFF-TASK-0222-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-2-in-review.md`, and released
+  Codex claims. Codex could not archive the consumed Arquitecto ACTION because `mailbox_archive` still requires
+  orchestrator capability for Codex. Protocol gates before commit: encoding OK, neutrality exit 0, validator OK,
+  drift false / byte-identical `up_to_seq=2877`.
 - TASK-0227 remediation-4 final product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `534b95e test(governance): cover final f1 write variants`. The F1 static read-only guard now has permanent
   negative coverage for the three DECISION-0079 enumerable signatures from the rem-3 verdict:

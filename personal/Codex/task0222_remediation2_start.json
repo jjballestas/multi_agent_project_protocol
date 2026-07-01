@@ -1,0 +1,50 @@
+{
+  "idempotency_key": "codex:task0222:remediation2-start-tx-v2",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+        "owner": "Codex",
+        "task_id": "TASK-0222",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+          "Area_comun/state/TASK_INDEX.json#TASK-0222",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0222",
+          "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+          "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0222-remediacion-2.md",
+          "D:/Agentes/Zeus/Zeus-Aegis",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T19:24:14Z",
+        "updated_at": "2026-07-01T19:24:14Z",
+        "expires_at": "2026-07-01T23:59:00Z",
+        "notes": "TASK-0222 remediation-2: deterministic full npm test evidence in clean clone while preserving stats fix."
+      },
+      "idempotency_key": "codex:task0222:remediation2-v2-claim-acquire"
+    },
+    {
+      "type": "task_upsert",
+      "task": {
+        "created_at": "2026-06-29",
+        "file": "Area_comun/tasks/TASK-0222-codex-zeus-aegis-vista-stats.md",
+        "id": "TASK-0222",
+        "linked_decisions": [
+          "DECISION-0064",
+          "DECISION-0070",
+          "DECISION-0040"
+        ],
+        "owner": "Codex",
+        "phase": "P2",
+        "priority": "high",
+        "status": "in_progress",
+        "title": "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1",
+        "type": "build"
+      },
+      "idempotency_key": "codex:task0222:remediation2-v2-task-upsert-in-progress"
+    }
+  ]
+}

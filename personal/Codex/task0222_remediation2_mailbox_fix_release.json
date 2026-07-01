@@ -1,0 +1,16 @@
+{
+  "idempotency_key": "codex:task0222:remediation2-mailbox-fix-release",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-mailbox-fix",
+        "owner": "Codex",
+        "task_id": "TASK-0222",
+        "status": "released",
+        "updated_at": "2026-07-01T19:49:00Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "970f99541fcfbbe6767b6aa7a2c98001bb92c4e0aeb91524e59fc4fc8e597972",
+        "replay_hash": "970f99541fcfbbe6767b6aa7a2c98001bb92c4e0aeb91524e59fc4fc8e597972",
+        "up_to_seq": 2873
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "3YNDsFsFdt8n+OS08Ulp46aKWrzyAYH1L1JIH19ubyODNS+JQ9hfE/4NnM2o/25/1rZTjWD9HiTYWEPvz4ZoCw=="
+            },
+            "aggregate_id": "TASK-0222",
+            "aggregate_version": 17,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "6fb3c9dc0b12dbe501528fdb1721feef764b473be14c791ed4fac1df9f9863ec"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:887fb755daad0d92ec3707bc0b8797053c9a60b30e53fccf3a6ddf9f74783daa",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "TASK-0222",
+                "timestamp": "2026-07-01T19:37:00Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:task0222:remediation2-delivery-claim-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Delivery artifacts for TASK-0222 remediation-2 evidence redelivery.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0222-codex-to-arquitecto-3.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-2-in-review.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T19:37:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0222",
+                                "updated_at": "2026-07-01T19:37:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0222"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "10d93de36876601f89926c285af876657e4e494fe77d5be6a914e909eca94ff6",
+            "seq": 2873,
+            "ts": "2026-07-01T19:37:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Delivery artifacts for TASK-0222 remediation-2 evidence redelivery.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+                    "Area_comun/handoffs/HANDOFF-TASK-0222-codex-to-arquitecto-3.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-2-in-review.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T19:37:00Z",
+                "status": "active",
+                "task_id": "TASK-0222",
+                "updated_at": "2026-07-01T19:37:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0222"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "32a31a2d93fe365030512458ba4b6af7207847fdd9ceebb1e9f6fc59367826a2",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2873
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2873
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:887fb755daad0d92ec3707bc0b8797053c9a60b30e53fccf3a6ddf9f74783daa"
+        ],
+        "idempotency_key": "codex:task0222:remediation2-delivery-claim-tx",
+        "intent_count": 1
+    }
+}

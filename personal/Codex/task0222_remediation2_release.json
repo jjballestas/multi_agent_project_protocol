@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "codex:task0222:remediation2-release-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-v2",
+        "owner": "Codex",
+        "task_id": "TASK-0222",
+        "status": "released",
+        "updated_at": "2026-07-01T19:45:00Z"
+      }
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation-2-delivery",
+        "owner": "Codex",
+        "task_id": "TASK-0222",
+        "status": "released",
+        "updated_at": "2026-07-01T19:45:00Z"
+      }
+    }
+  ]
+}
