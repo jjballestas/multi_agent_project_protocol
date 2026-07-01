@@ -13511,6 +13511,24 @@
             "updated_at": "2026-07-01T12:20:02Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Arquitecto-TASK-0229-promote",
+            "expires_at": "2026-07-02T06:00:00Z",
+            "notes": "Release tras promover TASK-0229 a ready.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-TASK-0229-promote",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T22:26:30Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-01T22:26:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-r2-blk01",
             "expires_at": "2026-07-02T06:00:00Z",
             "notes": "higiene r2 blk01",
