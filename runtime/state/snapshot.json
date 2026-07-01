@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "24653c2b6acb8f99d8ae74327c2140935dcb8d08bd0ad4236cc3848dfe05af8d",
+  "canonical_hash": "2ff89b68390de50ac3f03516ce8f50d91e90d08ea59198f7f3efab69e99a8187",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -457,6 +457,7 @@
       "CLAIM-20260701-Codex-DECISION-0078-fix": 1,
       "CLAIM-20260701-Codex-TASK-0223": 1,
       "CLAIM-20260701-Codex-TASK-0227-remediation-3-v3": 2,
+      "CLAIM-20260701-Codex-TASK-0227-remediation-4": 1,
       "CLAIM-20260701-Codex-TASK-0228": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -880,7 +881,7 @@
       "TASK-0224": 19,
       "TASK-0225": 13,
       "TASK-0226": 20,
-      "TASK-0227": 18,
+      "TASK-0227": 21,
       "TASK-0228": 11,
       "TASK-0229": 1,
       "TASK-0230": 1,
@@ -895,7 +896,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2194,
+    "events_applied": 2198,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2350,6 +2351,10 @@
       "codex:task0227:remediation-3-scope-acquire-v3": 2857,
       "codex:task0227:remediation-3-scope-release-v3": 2856,
       "codex:task0227:remediation-3-status-v3": 2855,
+      "codex:task0227:remediation-4-claim-acquire": 2866,
+      "codex:task0227:remediation-4-claim-release": 2869,
+      "codex:task0227:remediation-4-in-progress-to-in-review": 2868,
+      "codex:task0227:remediation-4-in-review-to-in-progress": 2867,
       "codex:task0227:remediation2-deliver:release": 2821,
       "codex:task0227:remediation2-deliver:status": 2820,
       "codex:validator-anomaly-etapa6:claim": 772,
@@ -3093,5 +3098,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 2865
+  "up_to_seq": 2869
 }

@@ -12916,6 +12916,26 @@
             "updated_at": "2026-07-01T17:58:00Z"
         },
         {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+            "expires_at": "2026-07-01T23:59:00Z",
+            "notes": "Remediacion-4 FINAL TASK-0227: add permanent static negatives for DECISION-0079 enumerable F1 guard signatures.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-4.md",
+                "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-4-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T18:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0227",
+            "updated_at": "2026-07-01T18:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-Codex-TASK-0228",
             "expires_at": "2026-07-01T16:47:24Z",
             "notes": "Implement TASK-0228 WS5 NOVA Analista registration and four-agent instancing wrapper.",

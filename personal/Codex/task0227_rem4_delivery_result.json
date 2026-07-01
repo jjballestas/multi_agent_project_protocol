@@ -1,0 +1,144 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "0d4428a4396d25eefc7c3073055663659c9b44a00ac9079a37cf750fac11a95e",
+        "replay_hash": "0d4428a4396d25eefc7c3073055663659c9b44a00ac9079a37cf750fac11a95e",
+        "up_to_seq": 2869
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "ikBTRNvLOL+bXXtOeWN3LHRX+0lyJOmHgIi4C3OvkCqUS3aqitQDG+F/4zkRdrL+8uemn3ihh92uW9x8liNUDA=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 21,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "3973654483d06e4ec6a6d4d7203027ba0102c2f7938ac379de6932798fe90cdd"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-4-in-progress-to-in-review",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T19:10:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-4-delivery-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "in_review"
+                    }
+                }
+            },
+            "prev_hash": "6c6bd698b707eb0bdf517981e059b08a666a29fe2082099d658f4680b30d5592",
+            "seq": 2868,
+            "ts": "2026-07-01T19:10:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "DTwp6TiHb426/3oWZEAPN8nzGat90NcqK7Fn7NFwnkh2PIF6DvC3WaPDqSrM+7CC8dMphWL+S2gPWuyLGWRGDQ=="
+            },
+            "aggregate_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "3f9ffd9b4acfa634f66e82da8b1908a8ff7d1e199ba8c9e7407a243e62846108"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-4-claim-release",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "timestamp": "2026-07-01T19:10:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-4-delivery-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "63ad007629d3ddb174eb5ed16070ba039690b352feaf678d8543e25577d27a4b",
+            "seq": 2869,
+            "ts": "2026-07-01T19:10:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "from": "in_progress",
+            "idempotency_key": "codex:task0227:remediation-4-in-progress-to-in-review",
+            "kind": "task_status",
+            "task_id": "TASK-0227",
+            "to": "in_review"
+        },
+        {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+            "idempotency_key": "codex:task0227:remediation-4-claim-release",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "c6fd8cdf5c979152da566a1332c0b7055a48cd5ea44bac77718c8c11bd3a050d",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2869
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2869
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0227:remediation-4-in-progress-to-in-review",
+            "codex:task0227:remediation-4-claim-release"
+        ],
+        "idempotency_key": "codex:task0227:remediation-4-delivery-tx",
+        "intent_count": 2
+    }
+}

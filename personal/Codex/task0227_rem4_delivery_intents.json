@@ -1,0 +1,20 @@
+{
+  "idempotency_key": "codex:task0227:remediation-4-delivery-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0227",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:task0227:remediation-4-in-progress-to-in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+        "idempotency_key": "codex:task0227:remediation-4-claim-release"
+      }
+    }
+  ]
+}

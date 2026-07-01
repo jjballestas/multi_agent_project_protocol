@@ -4,6 +4,17 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0227 remediation-4 final product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `534b95e test(governance): cover final f1 write variants`. The F1 static read-only guard now has permanent
+  negative coverage for the three DECISION-0079 enumerable signatures from the rem-3 verdict:
+  local `fetch('/api/governance/*', opts)` options objects with `method`, `fetch(new Request(..., { method }))`,
+  and positional `axios.request('/api/governance/*', { method })`. Evidence before protocol delivery:
+  `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` PASS; targeted
+  `governance-readonly.test.ts` PASS 16 tests; local product `npm test` PASS 82 files / 559 tests; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/codex-0227-rem4-zeus-aegis-clean` `npm test` PASS 82 files / 559 tests;
+  `git diff --check` PASS with only Git's LF-to-CRLF warning. Delivery artifacts prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-4.md` and
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-4-in-review.md`.
 - TASK-0224 done-flip completed in protocol commit `coord(TASK-0224): close report redactor`.
   `runtime/submit_intent.py` transaction `codex:task0224:done-flip-tx` acquired and released
   `CLAIM-20260701-Codex-TASK-0224-done-flip` and moved TASK-0224 `review_approved -> done` at seq 2860-2862.

@@ -1,0 +1,189 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "b55b225c3a124818fa6c5c75470ece6d336a5f40b83fcafca84e781acabc738a",
+        "replay_hash": "b55b225c3a124818fa6c5c75470ece6d336a5f40b83fcafca84e781acabc738a",
+        "up_to_seq": 2867
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "QO6Uj5RB99hRebbxTEnStEvE2jIgNbrIWYaf+Cj+jMmVTuu2EahQ5mS8nXMLXxMDQFmVz20qhKmk/+KyWhIXDw=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 19,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "5f931fc97727787c4c9c7392e78a752ad63917350775893bed2cf9b09f8c7f13"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-4-claim-acquire",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T18:22:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-4-start-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Remediacion-4 FINAL TASK-0227: add permanent static negatives for DECISION-0079 enumerable F1 guard signatures.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-4.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-4-in-review.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T18:20:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0227",
+                                "updated_at": "2026-07-01T18:20:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0227"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "942c3118cee13f762d960818bd511f1bdf5f1659a4e220df2b0803a27c380de0",
+            "seq": 2866,
+            "ts": "2026-07-01T18:22:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "ltFIn82Kmbwsa+CG4P0wVEZ2Igw7/aRwIcAFDVc9fu8Q0y1mFwwonJ3ZiUOPpBUravlL9kv/1NHJAk+LzV3mCA=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 20,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "5476616fa2fde7bb81b70cf6576d85f18cfc46a259c564e05ba9d4cba99e73ba"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation-4-in-review-to-in-progress",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T18:22:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation-4-start-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_review",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "4886c29c45884e4217fc10fb4760800053d71effe2d05340575074777fb91737",
+            "seq": 2867,
+            "ts": "2026-07-01T18:22:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Remediacion-4 FINAL TASK-0227: add permanent static negatives for DECISION-0079 enumerable F1 guard signatures.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-4",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-4.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-4-in-review.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T18:20:00Z",
+                "status": "active",
+                "task_id": "TASK-0227",
+                "updated_at": "2026-07-01T18:20:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-4",
+            "idempotency_key": "codex:task0227:remediation-4-claim-acquire",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0227"
+        },
+        {
+            "from": "in_review",
+            "idempotency_key": "codex:task0227:remediation-4-in-review-to-in-progress",
+            "kind": "task_status",
+            "task_id": "TASK-0227",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "c3df18f17767d98d47d2b21e9f33ace1b97264a7a29d1edd156a514ee1ea1c2f",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2867
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2867
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0227:remediation-4-claim-acquire",
+            "codex:task0227:remediation-4-in-review-to-in-progress"
+        ],
+        "idempotency_key": "codex:task0227:remediation-4-start-tx",
+        "intent_count": 2
+    }
+}
