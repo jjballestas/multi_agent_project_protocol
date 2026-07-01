@@ -1,0 +1,58 @@
+{
+  "idempotency_key": "codex:task0227:done-flip-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0227",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0227",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+          "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T21:10:11Z",
+        "updated_at": "2026-07-01T21:10:11Z",
+        "expires_at": "2026-07-01T23:59:00Z",
+        "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review."
+      },
+      "idempotency_key": "codex:task0227:done-flip-claim-acquire"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0227",
+      "from": "review_approved",
+      "to": "done",
+      "idempotency_key": "codex:task0227:review-approved-to-done"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0227",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0227",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+          "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T21:10:11Z",
+        "updated_at": "2026-07-01T21:10:11Z",
+        "expires_at": "2026-07-01T23:59:00Z",
+        "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review."
+      },
+      "idempotency_key": "codex:task0227:done-flip-claim-release"
+    }
+  ]
+}

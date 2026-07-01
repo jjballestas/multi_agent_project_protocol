@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0227 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0227:done-flip-tx` acquired and released `CLAIM-20260701-Codex-TASK-0227-done-flip` and moved
+  TASK-0227 `review_approved -> done` at seq 2910-2912. Evidence after the flip: encoding OK, neutrality command
+  exit 0, validator OK, drift false / byte-identical `up_to_seq=2912`. Product repo `D:/Agentes/Zeus/Zeus-protocol`
+  was clean and untouched; TASK-0227 product work remains in `D:/Agentes/Zeus/Zeus-Aegis` commit `b58e6ab`.
+  Protocol coordination commit message: `coord(TASK-0227): close f1 boundary fix`. The consumed Arquitecto ACTION
+  message remains open because `mailbox_archive` requires orchestrator capability.
 - TASK-0227 remediation-6 final product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `b58e6ab test(governance): cover quoted f1 write keys`. The F1 static read-only guard now centralizes
   literal object key matching for `method`/`url` across unquoted, quoted, and computed literal keys, and adds

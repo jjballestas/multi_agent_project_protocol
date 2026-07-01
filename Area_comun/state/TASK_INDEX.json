@@ -3512,7 +3512,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "review_approved",
+            "status": "done",
             "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)",
             "type": "build"
         },

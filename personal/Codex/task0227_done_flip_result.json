@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "5661759c70f35bfa09bcc1b7a41eaaef4b45b114bc68788e9315224421c066c2",
+        "replay_hash": "5661759c70f35bfa09bcc1b7a41eaaef4b45b114bc68788e9315224421c066c2",
+        "up_to_seq": 2912
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "2gNsw8T80H7DPlCUU/lyR5Bd6bH32Ijf0tUely2Hs14dEhPiSD6xTZlOa4hPvyQ8uv8MDP3HM+FYoeLHcBQfDA=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 39,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "6c0f9e6ade55be83a09eef5ec05acad79e70c539fbcfca87eb2a912666dfdb55"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:4386e37dc62845bdda62672da0ad64b12c82feeb333963cf50e003da4d0b3bdc",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T21:10:11Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0227:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T21:10:11Z",
+                                "status": "active",
+                                "task_id": "TASK-0227",
+                                "updated_at": "2026-07-01T21:10:11Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0227"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "1043c36851b88f346197be50416169ad744e4153551eb6f485e07f58d03db3e2",
+            "seq": 2910,
+            "ts": "2026-07-01T21:10:11Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "F83MEyY6NXrMpND3tDttk+x0lPdgXlxsF/SOmpQFlTO+GdqMI+O5eAlHgv5PdbmTnchcN9+g0GT+k8ebP+P2CQ=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 40,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "0706ef78a80c81a86615ca1ea67714e766e7f4b90c0614ab8d395aef2eecc479"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:d924d813667bde46f7c187c28a188f9731a6966321d55d89e1b96f95273ed4e2",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T21:10:11Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0227:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "9298f2bd93b62dee76df12d2db89bbc7cfa1f4de894946a3d12013a46ed0e64b",
+            "seq": 2911,
+            "ts": "2026-07-01T21:10:11Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "8HcdyGzvPtrC+njRO9KeVaf3JqQ8kEASIF1I8uCZYB2DV+cXxLoHENOufIRMRPwSB8Tpf/DLhA/LAL4EEc72Bg=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 41,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "31da438ffe7945ca07f73587cf7e0a0a9b135172f3346fd29a236fb4fe251410"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:d579c7baf42a8fbd1b97456a7b3600c7e2119ec730768d26eeeb0258a711b057",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T21:10:11Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0227:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T21:10:11Z",
+                                "status": "released",
+                                "task_id": "TASK-0227",
+                                "updated_at": "2026-07-01T21:10:11Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0227"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "8fb4d8009ef618bd2f3763020747558da0cebe7faea21ffe9b2920fdd3b5c155",
+            "seq": 2912,
+            "ts": "2026-07-01T21:10:11Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T21:10:11Z",
+                "status": "active",
+                "task_id": "TASK-0227",
+                "updated_at": "2026-07-01T21:10:11Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0227"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0227",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Arquitecto checker ratification and Analista review.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T21:10:11Z",
+                "status": "released",
+                "task_id": "TASK-0227",
+                "updated_at": "2026-07-01T21:10:11Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0227"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "93c205b617df421473c85088f0dbd7525ce4fcc16f338ed98b5af08eec690a35",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2912
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2912
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:4386e37dc62845bdda62672da0ad64b12c82feeb333963cf50e003da4d0b3bdc",
+            "intent:Codex:task_status:d924d813667bde46f7c187c28a188f9731a6966321d55d89e1b96f95273ed4e2",
+            "intent:Codex:claim:d579c7baf42a8fbd1b97456a7b3600c7e2119ec730768d26eeeb0258a711b057"
+        ],
+        "idempotency_key": "codex:task0227:done-flip-tx",
+        "intent_count": 3
+    }
+}
