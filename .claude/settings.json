@@ -55,7 +55,8 @@
       "Bash(powershell -NoProfile -File scripts/new_instance.ps1:*)",
       "Bash(powershell -NoProfile -File scripts\\new_instance.ps1:*)",
       "Bash(taskkill:*)",
-      "Bash(powershell -NoProfile -File personal/*.ps1:*)"
+      "Bash(powershell -NoProfile -File personal/*.ps1:*)",
+      "Bash(powershell -NoProfile -File personal/*/*.ps1:*)"
     ],
     "ask": [
       "Bash(git reset:*)",
