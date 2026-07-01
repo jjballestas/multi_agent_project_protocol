@@ -274,8 +274,10 @@ function Test-ArquitectoStopOrder {
         $content = Get-Content -LiteralPath $response.FullName -Raw -Encoding UTF8
         $requested = Get-Field -Content $content -Name "requested_action"
         $summary = Get-Field -Content $content -Name "one_line_summary"
-        $text = "$summary`n$requested`n$content"
-        if ($text -match "(?i)\b(detener|deten|parar|para|stop|standdown|stand-down)\b.*\b(cron|monitor|monitoreo|Analista)\b") {
+        # DIRECTIVA operador: SOLO el token exacto STOP_JOB detiene al agente (sin ambiguedades).
+        # Case-sensitive y solo en summary/requested_action (no en el body, para no tripear con menciones).
+        $text = "$summary`n$requested"
+        if ($text -cmatch "\bSTOP_JOB\b") {
             return $true
         }
     }
