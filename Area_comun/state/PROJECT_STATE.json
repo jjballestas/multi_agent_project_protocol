@@ -1125,7 +1125,7 @@
         {
             "id": "TASK-0236",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana"
         },
         {
@@ -1229,7 +1229,8 @@
         "DECISION-0075",
         "DECISION-0076",
         "DECISION-0077",
-        "DECISION-0079"
+        "DECISION-0079",
+        "DECISION-0080"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
