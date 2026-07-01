@@ -158,7 +158,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "proposed",
+            "status": "ready",
             "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)"
         }
     ],
