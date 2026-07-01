@@ -73,12 +73,6 @@
             "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
         },
         {
-            "id": "TASK-0227",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
-        },
-        {
             "id": "TASK-0229",
             "owner": "Codex",
             "status": "proposed",

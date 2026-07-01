@@ -73,3 +73,24 @@ misma clase (inline, shorthand, computed, typed const, y ahora claves string-lit
 Racional: el riesgo residual es NULO (el backend rechaza toda escritura con independencia del lint); las formas de
 clave literal son un conjunto finito y decidible que rem-6 completa; lo dinamico es indecidible y su persecucion es
 ROI negativo. **Con el GO de rem-6, TASK-0227 se cierra contra este AC final y NO hay rem-7.**
+
+## Amendment 2 - 2026-07-01 (operador GO tras 7o NO-GO) - LINEA CONVERGENTE DEFINITIVA: SOLO INLINE
+
+El amendment 1 incluyo "const local" en alcance, pero eso fue un error de diseno: `const x = { method };
+call(url, x)` requiere seguir la variable (analisis de flujo de datos) y por tanto NO CONVERGE -- cada ronda aparece
+una nueva indireccion (rem-6 cubrio `const opts; fetch(url, opts)` pero escapo `const cfg; axios.request(url, cfg)`,
+y tras eso vendria `const b = cfg; axios(b)`, etc., sin fin). Se corrige la frontera a la unica linea que converge:
+
+- **EN alcance (el guard DEBE atrapar): SOLO el objeto de opciones LITERAL ESCRITO INLINE en el propio call** --
+  `fetch(url, { method })`, `axios(url, { method })`, `axios.request(url, { method })`, `new Request(url, { method })`
+  y `axios({ url, method })` con el objeto literal `{...}` en el sitio de la llamada, clave `method`/`url` en toda
+  forma literal (unquoted, quoted, computada literal).
+- **FUERA de alcance, DEFINITIVO (converge, cero dataflow): CUALQUIER indireccion por variable/const** -- fetch O
+  axios -- (`const x = {...}; call(url, x)`), alias multinivel, y todo lo dinamico. Queda cubierto por el
+  **endpoint backend read-only** (rechazo estructural, test verde) + code review.
+
+Nota: el guard entregado en rem-6 (`b58e6ab`) ya CUMPLE este AC (cubre todo el inline + algo de const-local por
+herencia de rem-5; over-coverage es aceptable). Por tanto **TASK-0227 se cierra contra este AC inline-only**: el
+Analista verifico que todo lo inline queda atrapado y `npm test` sale EXIT 0; los unicos escapes (const-local axios)
+quedan FUERA por esta decision. El Analista mismo ofrecio "acotar el AC antes de cerrar" como opcion valida en su
+veredicto rem-6. **Riesgo residual NULO. Cierre definitivo, sin mas rondas de guard.**

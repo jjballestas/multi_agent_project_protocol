@@ -2,7 +2,7 @@
 task_id: TASK-0227
 title: "Zeus-Aegis: diagnosticar y arreglar fallos pre-existentes de npm test (timeout governance-readonly + boundary F1/submit_intent)"
 type: build
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: high
