@@ -12966,6 +12966,22 @@
             "updated_at": "2026-07-01T00:42:25Z"
         },
         {
+            "claim_id": "CLAIM-20260701-ratify0228-arq",
+            "expires_at": "2026-07-01T20:00:00Z",
+            "notes": "ratifica 0228 GO Analista",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-ratify0228-arq",
+                "Area_comun/state/TASK_INDEX.json#TASK-0228",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0228",
+                "Area_comun/tasks/TASK-0228-reqzeus-ws5-alta-analista-nova.md"
+            ],
+            "started_at": "2026-07-01T14:00:11Z",
+            "status": "released",
+            "task_id": "TASK-0228",
+            "updated_at": "2026-07-01T14:00:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-register-0235-arquitecto",
             "expires_at": "2026-07-01T16:00:00Z",
             "notes": "Registra TASK-0235 exec-lease hardening (spec gate Analista).",

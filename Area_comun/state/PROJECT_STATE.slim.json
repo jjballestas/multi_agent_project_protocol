@@ -85,12 +85,6 @@
             "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
         },
         {
-            "id": "TASK-0228",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
-        },
-        {
             "id": "TASK-0229",
             "owner": "Codex",
             "status": "proposed",
