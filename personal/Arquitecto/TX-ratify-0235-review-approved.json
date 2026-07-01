@@ -1,0 +1,58 @@
+{
+  "idempotency_key": "arq:task0235:ratify-review-approved-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Arquitecto-TASK-0235-ratify",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0235",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Arquitecto-TASK-0235-ratify",
+          "Area_comun/state/TASK_INDEX.json#TASK-0235",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+          "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T21:43:10Z",
+        "updated_at": "2026-07-01T21:43:10Z",
+        "expires_at": "2026-07-02T02:00:00Z",
+        "notes": "Ratifica review_approved tras GO/CERRABLE del Analista (dos slips arreglados, sin regresion)."
+      },
+      "idempotency_key": "arq:task0235:ratify-claim-acquire"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0235",
+      "from": "in_review",
+      "to": "review_approved",
+      "idempotency_key": "arq:task0235:in-review-to-review-approved"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Arquitecto-TASK-0235-ratify",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0235",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Arquitecto-TASK-0235-ratify",
+          "Area_comun/state/TASK_INDEX.json#TASK-0235",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+          "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T21:43:10Z",
+        "updated_at": "2026-07-01T21:43:10Z",
+        "expires_at": "2026-07-02T02:00:00Z",
+        "notes": "Release tras ratificar TASK-0235 a review_approved."
+      },
+      "idempotency_key": "arq:task0235:ratify-claim-release"
+    }
+  ]
+}
