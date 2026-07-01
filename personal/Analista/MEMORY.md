@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0222 vista stats; NO-GO).
+> Ultima actualizacion: 2026-07-01 (TASK-0228 AC corregido; NO-GO por clean canonical gate).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0228 WS5 AC corregido (2026-07-01): CAMBIO-REQUERIDO / NO-GO de cierre canonico. Veredicto en
+  `6fdc06a` (`review(TASK-0228): Analista blocks corrected AC on clean gate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-ac-corregido-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0228-ws5-ac-corregido`. Ancla protocolo/instruccion
+  `8d9b87185f6397801f8a3160d4536dded4213a78`; implementacion bajo review `7353070`; producto control
+  `Zeus-protocol` clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`; clean clone protocolo/producto en
+  `C:/Users/johnb/AppData/Local/Temp/analista-0228-ac-review-4993debf951f490687d48d6d8094b3bd`. Sustantivo
+  TASK-0228 PASA contra AC honesto: coordination instancia valida con 4 participantes/personales; TASK sintetica
+  `owner: Analista` valida exit 0; decisiones 0072/0073/0077 existen; maker!=checker queda disciplinario no
+  gateado; attested valida con 3 signers (`Arquitecto`, `Codex`, `Analista`) + `human_owner` worker. Bloqueo:
+  clean clone canonico `8d9b871` falla `python scripts/validate_collaboration_state.py` exit 1 por mismatch ajeno
+  `TASK-0223` (`TASK_INDEX=done`, task file=`review_approved`). Vivo validate/neutrality/encoding exit 0 solo por
+  cambio local no commiteado en TASK-0223; no usable como ancla. `npm test` producto exit 0 (109 tests, 87 pass,
+  22 skipped); drift clean/live false `up_to_seq=2842`; `protocol.config.json` sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
 - TASK-0228 WS5 alta Analista NOVA (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `619f419` (`review(TASK-0228): Analista blocks WS5`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-veredicto.md`, MSG
