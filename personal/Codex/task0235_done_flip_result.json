@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "a0cb05c73c87e34d06cabee91b3e08c73b6ca5e375757cb7afe284f9f3161ab4",
+        "replay_hash": "a0cb05c73c87e34d06cabee91b3e08c73b6ca5e375757cb7afe284f9f3161ab4",
+        "up_to_seq": 2926
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "8yi4WdF4SScU/LHT1c/I8UhJTaBDuI7vGTkonk+f4CgkOfy18bW5KP+/8JfmiX5Wypci76Yd6aj/HZxqNTb/CA=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 21,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "1b08c953913a45b0a9614410c6a952e88c05ad45494bbdcfd5835db6b6b307e0"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:56555fc0e5fab646f6df1e81991c3b97a8fb6f284e557725626c413bb05f6617",
+            "payload": {
+                "commit": "codex:task0235-done-flip",
+                "intent_type": "claim",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T21:45:39Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0235:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO/CERRABLE and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T21:45:39Z",
+                                "status": "active",
+                                "task_id": "TASK-0235",
+                                "updated_at": "2026-07-01T21:45:39Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0235"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "957f2f1cbab776dbb17b923eed061fa48d5ce048673fe37a615a87d4daf89602",
+            "seq": 2924,
+            "ts": "2026-07-01T21:45:39Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "qMfnHCTy5yg+BhAMJA2R+JpkhmPWZ8gdlCiW99bmTwpYnZEW9DUKGCuS/O5gEZxtqyWB1ZXQ99hV1RjQCfd4Dg=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 22,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "f6d6cf153d22dc5162a392713d9b2b98e3f4b55489efe058bf05395cc473a567"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:da458599487275ec023fe13444d4bafce8ba98f286233de3e92018bbb046ef37",
+            "payload": {
+                "commit": "codex:task0235-done-flip",
+                "intent_type": "task_status",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T21:45:39Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0235:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "b60518a67336ce925cd0f9acf8e2a5a56132068b768f3eda7c7e5cf60c9fcb8c",
+            "seq": 2925,
+            "ts": "2026-07-01T21:45:39Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "qOvrBuHeA/Oao6DfvSP4pCdPJPzOaOIAUijxDtL4pVOqyD1R8NSUM/VFK+0YesACLuxpvCCXJVrQr54pb/98BA=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 23,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "f54d3b09061023663e3bbe73201698972f40f37a0482c8aa51f293f92edb6dd2"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:93404a87f3631361d846d5f18509d667dea7f12531c64e458ad1da1a8769254d",
+            "payload": {
+                "commit": "codex:task0235-done-flip",
+                "intent_type": "claim",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T21:45:39Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0235:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO/CERRABLE and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T21:45:39Z",
+                                "status": "released",
+                                "task_id": "TASK-0235",
+                                "updated_at": "2026-07-01T21:45:39Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0235"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "b02ea4da690a5302fc1f437a35eeddb0ea0e3d9ef67bea34acee4ce2cf397149",
+            "seq": 2926,
+            "ts": "2026-07-01T21:45:39Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO/CERRABLE and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T21:45:39Z",
+                "status": "active",
+                "task_id": "TASK-0235",
+                "updated_at": "2026-07-01T21:45:39Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0235"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0235",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO/CERRABLE and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T21:45:39Z",
+                "status": "released",
+                "task_id": "TASK-0235",
+                "updated_at": "2026-07-01T21:45:39Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0235-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0235"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "51c2c3716c8387faa74286982196445dc8b1773c4f7cf7e6459863309ea75f27",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2926
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2926
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:56555fc0e5fab646f6df1e81991c3b97a8fb6f284e557725626c413bb05f6617",
+            "intent:Codex:task_status:da458599487275ec023fe13444d4bafce8ba98f286233de3e92018bbb046ef37",
+            "intent:Codex:claim:93404a87f3631361d846d5f18509d667dea7f12531c64e458ad1da1a8769254d"
+        ],
+        "idempotency_key": "codex:task0235:done-flip-tx",
+        "intent_count": 3
+    }
+}
