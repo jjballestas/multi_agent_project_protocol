@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0228 AC corregido; NO-GO por clean canonical gate).
+> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-3; NO-GO por slips F1 nuevos).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 remediacion-3 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `bda1278` (`review(TASK-0227): Analista blocks remediation 3`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-3-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-3`. Ancla REVIEW/protocolo
+  `77a90ad331c69d90517f1670bd9c8431f6522864`; commit producto citado
+  `19ebd48d0f5b57ea96ba181410a04066695870bd`. Nota de ancla: `D:/Agentes/Zeus/Zeus-protocol`
+  no contiene `19ebd48` tras fetch; el commit existe en `D:/Agentes/Zeus/Zeus-Aegis`, y ahi se ejecuto
+  el clon limpio `C:/Users/johnb/AppData/Local/Temp/analista-0227-rem3-aegis-b2da77cc7d1c48f88208ce86f051aa9f`.
+  `npm test` producto EXIT 0; `governance-readonly.test.ts` 16 tests pasa. Los cuatro escapes de rem-2
+  pasan: `fetch` method variable/template/lowercase/shorthand/computed literal y `axios.post`,
+  `axios.request({url,method})`, `axios({url,method})`. Bloqueo nuevo falsable por probe propio del guard:
+  `const opts={method:'POST'}; fetch('/api/governance/state', opts)` matched=false,
+  `fetch(new Request('/api/governance/state', {method:'POST'}))` matched=false, y
+  `axios.request('/api/governance/state', {method:'POST'})` matched=false. Gates protocolo vivo y clean:
+  validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2862`; `protocol.config.json` sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`. Recomendacion: remediacion-4
+  con esos tres negativos permanentes o AC F1 acotado formalmente.
 - TASK-0227 remediacion-2 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `b2e2e39` (`review(TASK-0227): Analista blocks remediation 2`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-2-veredicto.md`, MSG
