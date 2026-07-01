@@ -27,6 +27,24 @@ description: >-
 - Una tarea ya entregada (su commit `deliver` existe) pero su GO sigue en `mailbox/open/` y NO esta en `.seen.json`
   -> el cron la re-dispara y se vuelve a atascar.
 
+### 1b. Caso MAS COMUN (visto 3x el 2026-07-01): exec de REVIEW muerto -> lock huerfano pre-deadline
+El exec de review del Analista (OpenAI Codex CLI) **muere ~10min** en reviews Zeus-Aegis pesados (clone+npm test);
+NO es deadline (ExecTimeoutSeconds=3600) sino muerte real del proceso (crash/recursos). Deja el `.lock`/`.lease`
+huerfano. **El self-heal actual solo limpia si el lease VENCIO (deadline pasado), NO si el PID murio antes** -> el
+lock bloquea la cola hasta 1h. Sintoma: lock mtime de hace >10min, EXEC_START sin EXEC_EXIT, `tasklist //FI "PID eq
+<pid>"` = 0 (muerto). **DESTRABE MANUAL (mi autoridad):** confirma PID muerto y `rm -f
+.protocol-tmp/<peer>_mailbox_cron/*.lock` (+ lease si aplica); el mensaje NO suele quedar `seen` (murio antes) -> el
+cron lo re-EXEC solo; el reintento suele completar. Esto es exactamente lo que **TASK-0235** debe cerrar
+estructuralmente (self-heal por PID-muerto-pre-deadline). Para no volar el evento en silencio: arma un watcher del
+lock (emite si mtime >13min) ademas del monitor de entregas.
+
+### 1c. STOP_JOB (directiva operador 2026-07-01): el token de parada ya NO es ambiguo
+Los harnesses ahora se detienen SOLO con el token exacto `STOP_JOB` (`-cmatch "\bSTOP_JOB\b"` en summary/
+requested_action). El regex viejo (`detener|deten|parar|para|stop|standdown` + peer) quedo retirado -- se
+auto-disparaba con "para" preposicion y con la tarea 0235 (contiene "stop marker"). **Se activa al RELANZAR el cron
+con el harness nuevo** (committeado en affe347); hasta entonces el cron vivo usa el harness viejo -> sigue el footgun
+en tus mensajes al peer hasta el redespliegue.
+
 ## 2. Diagnostico (read-only)
 ```
 tail -12 .protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.log      # LOCKED skip / LOOP_ERROR?
