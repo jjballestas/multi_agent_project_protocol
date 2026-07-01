@@ -3657,6 +3657,30 @@
             "type": "docs"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+            "id": "TASK-0235",
+            "linked_decisions": [
+                "DECISION-0057",
+                "DECISION-0018",
+                "DECISION-0022"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)",
+            "type": "build"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

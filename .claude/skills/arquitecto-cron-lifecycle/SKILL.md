@@ -49,6 +49,21 @@ python -c "open('.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.prompt.v3
 ```
 Solo borrar el archivo `.lock` NO alcanza si el proceso viejo sigue vivo reteniendo el prompt file: hay que matar el proceso.
 
+### 3b. Pinpoint del holder cuando el zombie esta HUERFANO (no bajo el arbol del cron)
+Si `taskkill //PID <cron_pid> //T` NO destraba (el zombie colgaba de otro padre muerto) y no hay `handle.exe`/`openfiles`,
+y hay muchos procesos huerfanos (no matar a ciegas: romperia el panel/otros peers), usa el **Windows Restart Manager**
+(`rstrtmgr.dll` via python: RmStartSession/RmRegisterResources/RmGetList) para pinpoint EXACTO los PIDs que retienen
+el `prompt.v3.txt`/`.lock`, e itera `taskkill //PID <holder> //T //F` hasta `HOLDERS: none`, respetando el cron vivo y
+el cron del checker. Script forense: `personal/Arquitecto/who_locks.py` (o equivalente en scratchpad).
+
+### 3c. NO automatizar el barrido (gate Analista NO-GO)
+El barrido de zombies es **intervencion manual-forense de emergencia con confirmacion**, NO politica automatica.
+Motivo (veredicto Analista `ANALISTA-OPS-CRON-ZOMBIE-POLICY-veredicto`): Restart Manager prueba POSESION de handle,
+NO que el proceso sea zombie -> automatizarlo puede **matar trabajo vivo, incluido el del checker**. El barrido seguro
+requiere primero el **contrato exec-lease** (heartbeat/deadline + kill solo por lease VENCIDO + exclusiones + dry-run +
+deny-kill de submit_intent/git/npm + post-kill validate) -> **TASK-0235**. Hasta que 0235 este cerrada: solo manual, con
+exclusion de la propia sesion y del exec del checker.
+
 ## 4. Relanzar el cron
 - Comando estandar (params default, Interval 300), con `run_in_background: true`:
   - Codex:    `powershell -NoProfile -File personal/Codex/codex_mailbox_cron.ps1`

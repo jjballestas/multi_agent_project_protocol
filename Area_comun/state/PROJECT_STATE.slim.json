@@ -125,6 +125,12 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
+        },
+        {
+            "id": "TASK-0235",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)"
         }
     ],
     "next_actions": [
