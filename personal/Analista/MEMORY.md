@@ -23,6 +23,35 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0223 vista Instanciar-proyecto (2026-07-01): GO/CERRABLE. Veredicto canonico en
+  `cd67775` (`review(TASK-0223): Analista OK instancing view`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0223-vista-instanciar-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0223-vista-instanciar`. Ancla protocolo/instruccion
+  `7c65448967f9e4253eec234945d48660ae371a92`; producto Zeus-Aegis
+  `4ff95d929e41c13c04750c2ebed1947978724896`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0223-zeus-aegis-9b29a374d46a4b03be4800b25584cf01`;
+  clean clone protocolo `C:/Users/johnb/AppData/Local/Temp/analista-0223-protocol-3bd9adae194940e6aba48a9c669f57f0`.
+  `npm test` producto exit 0; payloads propios contra `buildInstancePlan`/guard exit 0 (5 familias);
+  render `/governance` exit 0 con screenshot `task0223-analista-instancing-render.png`, guard visible
+  "El panel NO escribe el ledger", `no ejecuta new_instance.py`, 0 writes a `/api/governance`. Gates protocolo
+  vivo y clean `7c65448`: validate, scan_domain_neutrality, scan_encoding exit 0; drift vivo
+  `has_drift=false up_to_seq=2811`, clean `has_drift=false up_to_seq=2804`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual no bloqueante:
+  Playwright uso Chrome del sistema porque el browser empaquetado no estaba instalado; F1 sigue copy-only.
+- OPS-CRON-ZOMBIE-POLICY (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `78a4b36` (`review(OPS-CRON-ZOMBIE-POLICY): Analista blocks zombie sweep`), artefacto
+  `Area_comun/artifacts/ANALISTA-OPS-CRON-ZOMBIE-POLICY-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-cron-zombie-policy`. Ancla instruccion/propuesta
+  `ba617c6` (`personal/Arquitecto/DISCUSSION-cron-zombie-policy.md`); protocolo vivo durante review
+  `7c65448967f9e4253eec234945d48660ae371a92`; producto Zeus-protocol sin commit citado en instruccion,
+  control clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`, `npm test` exit 0 (109 tests, 87 pass,
+  22 skipped). Bloqueo falsable: Restart Manager prueba holder de handle, no liveness; la propuesta dice
+  excluir "exec legitimamente en curso" pero no define lease/heartbeat/start-time/owner verificable, por lo que
+  puede matar trabajo lento pero vivo y el exec del checker. Gates protocolo vivo y clean `ba617c6`: validate,
+  neutrality, encoding exit 0; drift vivo `has_drift=false up_to_seq=2806`, clean `has_drift=false up_to_seq=2804`;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Recomendacion: volver a borrador; permitir solo intervencion manual de emergencia con dry-run, PID+start-time,
+  exclusion de checker y confirmacion humana hasta que exista contrato de lease verificable.
 - TASK-0222 vista Estadisticas (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `8fd4d2e` (`review(TASK-0222): Analista blocks stats view`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0222-vista-stats-veredicto.md`, MSG
