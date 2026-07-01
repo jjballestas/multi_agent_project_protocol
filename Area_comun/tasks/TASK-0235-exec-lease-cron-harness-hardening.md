@@ -2,7 +2,7 @@
 task_id: TASK-0235
 title: "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)"
 type: build
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

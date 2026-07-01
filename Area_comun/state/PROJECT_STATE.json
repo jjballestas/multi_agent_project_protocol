@@ -1113,7 +1113,7 @@
         {
             "id": "TASK-0235",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)"
         },
         {

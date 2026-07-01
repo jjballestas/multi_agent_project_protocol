@@ -1,0 +1,199 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "b9dcc85e3a8403ea5f9156022ebcafed9fe45224de8b097fa61543bcfacc8ca9",
+        "replay_hash": "b9dcc85e3a8403ea5f9156022ebcafed9fe45224de8b097fa61543bcfacc8ca9",
+        "up_to_seq": 2882
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "ln199MvZSAraOFI6gnW10RuDFbUXtGUF+xUrlTNeRqrQi65yZGXiOwWy+M4Vc5l1gcsNeJ5HHISVi+Y98hW9Dw=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "4f288ad892c80dd36572541f9c99117bef1cb34f565c78a5db6ec177b60a35c4"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0235:start:claim",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T00:00:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "intent-tx:Codex:e4937c2b729747ce47cc43069c6cd604b712ef1188d399347a5506824e024665",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+                                "expires_at": "2026-07-01T12:00:00Z",
+                                "notes": "Implement TASK-0235 exec-lease hardening for cron harnesses and safe zombie sweep.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-GO-TASK-0235-exec-lease.md",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0235-codex-to-arquitecto-1.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0235-in-review.md",
+                                    "personal/Codex/codex_mailbox_cron.ps1",
+                                    "personal/Analista/analista_mailbox_cron.ps1",
+                                    "scripts/sweep_cron_zombies.py",
+                                    "scripts/test_exec_lease_harness.py",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T00:00:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0235",
+                                "updated_at": "2026-07-01T00:00:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0235"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "bc66af2be730ad569f39c6aed423a55e146e5762f92eef5f12df7e1264ed77fd",
+            "seq": 2881,
+            "ts": "2026-07-01T00:00:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "KO7MUWd0k69e2pSIZmyv4zrrBuHd96FHV3GtTuLWZRmuxRSalz0522WkmdT6Ifiolfe4KQEng2XIc114pPXyBQ=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 8,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "fd3987e21b45b7763c50bc856d936ed71f7c35394ce257abe5ea66796b2a8ee4"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0235:start:status",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T00:00:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "intent-tx:Codex:e4937c2b729747ce47cc43069c6cd604b712ef1188d399347a5506824e024665",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "ready",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "d41a528b29ded9f5f6ad82b181abbecbace7ca05fa80fc79248f583f18e822c4",
+            "seq": 2882,
+            "ts": "2026-07-01T00:00:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+                "expires_at": "2026-07-01T12:00:00Z",
+                "notes": "Implement TASK-0235 exec-lease hardening for cron harnesses and safe zombie sweep.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                    "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-GO-TASK-0235-exec-lease.md",
+                    "Area_comun/handoffs/HANDOFF-TASK-0235-codex-to-arquitecto-1.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0235-in-review.md",
+                    "personal/Codex/codex_mailbox_cron.ps1",
+                    "personal/Analista/analista_mailbox_cron.ps1",
+                    "scripts/sweep_cron_zombies.py",
+                    "scripts/test_exec_lease_harness.py",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T00:00:00Z",
+                "status": "active",
+                "task_id": "TASK-0235",
+                "updated_at": "2026-07-01T00:00:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+            "idempotency_key": "codex:task0235:start:claim",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0235"
+        },
+        {
+            "from": "ready",
+            "idempotency_key": "codex:task0235:start:status",
+            "kind": "task_status",
+            "task_id": "TASK-0235",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "180c81fe0f9a9968e17f00c5c661f1aff112c024bd60d08f685ab47c72b8ff0d",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2882
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2882
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0235:start:claim",
+            "codex:task0235:start:status"
+        ],
+        "idempotency_key": "intent-tx:Codex:e4937c2b729747ce47cc43069c6cd604b712ef1188d399347a5506824e024665",
+        "intent_count": 2
+    }
+}

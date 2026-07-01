@@ -1,0 +1,144 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "c37223450d1bfb4dd693bf0cf0d35b2d5f1aa768ddabbe2fcca11c31cfc787e1",
+        "replay_hash": "c37223450d1bfb4dd693bf0cf0d35b2d5f1aa768ddabbe2fcca11c31cfc787e1",
+        "up_to_seq": 2884
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "R5IpF/Z0pCWItXORiJFPcDflZC0XFRsUxZNP4gX6u1FdOnRK9yVMBLdMZE9cIuLT6VCxgrtGAVZhcjvO4vIfBQ=="
+            },
+            "aggregate_id": "TASK-0235",
+            "aggregate_version": 9,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "b2241d80c6c3b028bef729b9a5395c8a31af61a5489ec16dc35ee60eab8bc84f"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0235:deliver:status",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0235",
+                "timestamp": "2026-07-01T00:00:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "intent-tx:Codex:d99910ca9c559c280ec61dcbc12a56009095ff6db64bfd2f477399a590bdb9e8",
+                    "index": 1
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "in_review"
+                    }
+                }
+            },
+            "prev_hash": "5617e62ca4280af11375688299b9d94d339b6e80df4f5f41c0dd7407097e3898",
+            "seq": 2883,
+            "ts": "2026-07-01T00:00:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "uSk52CoM3QgGkUU8pcDz+vanOsRDZuqy/ASBMcFWXjgVbcPhnqfvWtaDLeluEfClLxHd38jTl37vI35guG7rCw=="
+            },
+            "aggregate_id": "CLAIM-20260701-Codex-TASK-0235",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "6fcca60c0d756d0d1bfc712173f3f1a969b67b70f0ca3eac1f9356eb954ed8b2"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0235:deliver:release",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "timestamp": "2026-07-01T00:00:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "intent-tx:Codex:d99910ca9c559c280ec61dcbc12a56009095ff6db64bfd2f477399a590bdb9e8",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "501c69fea624fe26c03ce84c443718008dd0f2a3e33cba570fa6cba218906b39",
+            "seq": 2884,
+            "ts": "2026-07-01T00:00:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "from": "in_progress",
+            "idempotency_key": "codex:task0235:deliver:status",
+            "kind": "task_status",
+            "task_id": "TASK-0235",
+            "to": "in_review"
+        },
+        {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+            "idempotency_key": "codex:task0235:deliver:release",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "364268cf76ffcb970775ea7b996283fb137b51ce5aec1307d6ab763bbdce6279",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2884
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2884
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0235:deliver:status",
+            "codex:task0235:deliver:release"
+        ],
+        "idempotency_key": "intent-tx:Codex:d99910ca9c559c280ec61dcbc12a56009095ff6db64bfd2f477399a590bdb9e8",
+        "intent_count": 2
+    }
+}

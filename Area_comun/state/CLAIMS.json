@@ -13067,6 +13067,31 @@
             "updated_at": "2026-07-01T16:05:23Z"
         },
         {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0235",
+            "expires_at": "2026-07-01T12:00:00Z",
+            "notes": "Implement TASK-0235 exec-lease hardening for cron harnesses and safe zombie sweep.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0235",
+                "Area_comun/state/TASK_INDEX.json#TASK-0235",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0235",
+                "Area_comun/tasks/TASK-0235-exec-lease-cron-harness-hardening.md",
+                "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-GO-TASK-0235-exec-lease.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0235-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0235-in-review.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "scripts/sweep_cron_zombies.py",
+                "scripts/test_exec_lease_harness.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0235",
+            "updated_at": "2026-07-01T00:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-archive-stale-0222go-arquitecto",
             "expires_at": "2026-07-01T12:00:00Z",
             "notes": "Archivar GO-0222 consumido (Codex no pudo, sin orchestrator cap) para desatascar el cron.",

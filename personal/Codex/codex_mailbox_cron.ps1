@@ -1,7 +1,8 @@
 param(
     [int]$IntervalSeconds = 300,
     [int]$MaxNoArquitectoRounds = 7,
-    [string]$CodexExe = ""
+    [string]$CodexExe = "",
+    [int]$ExecTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,6 +13,7 @@ $LogPath = Join-Path $RuntimeDir "codex_mailbox_cron.log"
 $PidPath = Join-Path $RuntimeDir "codex_mailbox_cron.pid"
 $StopPath = Join-Path $RuntimeDir "codex_mailbox_cron.stop"
 $LockPath = Join-Path $RuntimeDir "codex_mailbox_cron.lock"
+$LeasePath = Join-Path $RuntimeDir "codex_mailbox_cron.exec-lease.json"
 $PromptPath = Join-Path $RuntimeDir "codex_mailbox_cron.prompt.v3.txt"
 $SeenPath = Join-Path $RuntimeDir "codex_mailbox_cron.seen.json"
 $RunsDir = Join-Path $RuntimeDir "runs"
@@ -32,6 +34,115 @@ function Write-Log {
         Write-Utf8NoBom -Path $LogPath -Content ($current + $line)
     } else {
         Write-Utf8NoBom -Path $LogPath -Content $line
+    }
+}
+
+function Get-ProcessStartTimeUtc {
+    param([System.Diagnostics.Process]$Process)
+    try {
+        return $Process.StartTime.ToUniversalTime().ToString("o")
+    } catch {
+        return ""
+    }
+}
+
+function Get-CmdlineHash {
+    param([string]$Text)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+        return ([System.BitConverter]::ToString($sha.ComputeHash($bytes)) -replace "-", "").ToLowerInvariant()
+    } finally {
+        $sha.Dispose()
+    }
+}
+
+function Write-ExecLease {
+    param(
+        [System.Diagnostics.Process]$Process,
+        [string]$MessageName,
+        [string[]]$Arguments,
+        [DateTime]$DeadlineUtc
+    )
+    $cmdline = "$($Process.StartInfo.FileName) $($Arguments -join ' ')"
+    $lease = [ordered]@{
+        schema_version = 1
+        owner = "Codex"
+        task_or_msg_id = $MessageName
+        pid = $Process.Id
+        process_start_time_utc = Get-ProcessStartTimeUtc -Process $Process
+        cmdline_hash = Get-CmdlineHash -Text $cmdline
+        cmdline = $cmdline
+        started_at = (Get-Date).ToUniversalTime().ToString("o")
+        deadline = $DeadlineUtc.ToString("o")
+        heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
+        shutdown_policy = "stop_after_current_turn"
+    }
+    Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+}
+
+function Update-ExecLeaseHeartbeat {
+    if (-not (Test-Path -LiteralPath $LeasePath)) {
+        return
+    }
+    try {
+        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $lease.heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
+        Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+    } catch {
+        Write-Log "LEASE_HEARTBEAT_FAIL error=$($_.Exception.Message)"
+    }
+}
+
+function Test-LeaseProcessMatches {
+    param($Lease)
+    if (-not $Lease -or -not $Lease.pid -or -not $Lease.process_start_time_utc) {
+        return $false
+    }
+    try {
+        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction Stop
+        $started = $process.StartTime.ToUniversalTime().ToString("o")
+        return ($started -eq [string]$Lease.process_start_time_utc)
+    } catch {
+        return $false
+    }
+}
+
+function Clear-StaleCronLockIfSafe {
+    if (-not (Test-Path -LiteralPath $LockPath)) {
+        return
+    }
+    if (-not (Test-Path -LiteralPath $LeasePath)) {
+        return
+    }
+    try {
+        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
+        if ([DateTime]::UtcNow -le $deadline) {
+            return
+        }
+        if (Test-LeaseProcessMatches -Lease $lease) {
+            return
+        }
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
+        Write-Log "SELF_HEAL_STALE_LOCK owner=Codex pid=$($lease.pid) message=$($lease.task_or_msg_id)"
+    } catch {
+        Write-Log "SELF_HEAL_FAIL error=$($_.Exception.Message)"
+    }
+}
+
+function Stop-ExpiredLeaseProcess {
+    param($Lease)
+    if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
+        return
+    }
+    try {
+        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction Stop
+        Write-Log "DEADLINE_KILL pid=$($Lease.pid) message=$($Lease.task_or_msg_id)"
+        Stop-Process -Id $process.Id -Force -ErrorAction Stop
+    } catch {
+        Write-Log "DEADLINE_KILL_FAIL pid=$($Lease.pid) error=$($_.Exception.Message)"
     }
 }
 
@@ -168,6 +279,7 @@ function Test-ArquitectoStopOrder {
 
 function Invoke-CodexForMessage {
     param([System.IO.FileInfo]$Message)
+    Clear-StaleCronLockIfSafe
     if (Test-Path -LiteralPath $LockPath) {
         Write-Log "LOCKED skip $($Message.Name)"
         return
@@ -219,9 +331,22 @@ Modo ejecutor obligatorio:
             "--skip-git-repo-check",
             "-"
         )
+        $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
         $process = Start-Process -FilePath $codexPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $PromptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
-        $process.WaitForExit()
+        while (-not $process.WaitForExit(1000)) {
+            Update-ExecLeaseHeartbeat
+            if (Test-Path -LiteralPath $StopPath) {
+                Write-Log "Stop marker detected; waiting for current exec pid=$($process.Id)"
+            }
+            if ([DateTime]::UtcNow -gt $deadlineUtc) {
+                $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+                Stop-ExpiredLeaseProcess -Lease $lease
+                $process.WaitForExit()
+                break
+            }
+        }
         Write-Log "EXEC_EXIT code=$($process.ExitCode) message=$($Message.Name)"
         $seen = Read-Seen
         $seen[$Message.Name] = Get-MessageSignature -Message $Message
@@ -234,6 +359,9 @@ Modo ejecutor obligatorio:
     } finally {
         if (Test-Path -LiteralPath $LockPath) {
             Remove-Item -LiteralPath $LockPath -Force
+        }
+        if (Test-Path -LiteralPath $LeasePath) {
+            Remove-Item -LiteralPath $LeasePath -Force
         }
     }
 }

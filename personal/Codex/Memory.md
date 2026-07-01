@@ -4,6 +4,18 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0235 delivered to `in_review` in the protocol repo. `personal/Codex/codex_mailbox_cron.ps1` and
+  `personal/Analista/analista_mailbox_cron.ps1` now create per-exec leases with PID + process start-time UTC,
+  cmdline hash, owner, message id, deadline, monotonic heartbeat, and `stop_after_current_turn`; they self-heal
+  expired locks only when the leased PID no longer matches by start-time, enforce `ExecTimeoutSeconds`, and release
+  lock/lease in `finally`. `scripts/sweep_cron_zombies.py` is dry-run by default, requires `--kill`, uses a global
+  sweeper lock, excludes non-target/checker owners, denies dangerous cmdlines and dirty active-claim routes, rechecks
+  under lock, and runs validate/drift/encoding post-kill. Evidence: Python compile PASS, PowerShell parser PASS for
+  both harnesses, `python scripts/test_exec_lease_harness.py` PASS, sweeper dry-run PASS, encoding PASS, neutrality
+  PASS, validator PASS, drift false / byte-identical `up_to_seq=2884`. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0235-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0235-in-review.md`. The product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0235 scope is protocol cron infrastructure.
 - TASK-0222 remediation-2 product evidence landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `3b25b8b test(governance): attest stats suite stability` (empty evidence commit; no code change needed after
   environmental worker cleanup). Codex stopped stale local `node` workers, confirmed product `git diff --check` PASS,
