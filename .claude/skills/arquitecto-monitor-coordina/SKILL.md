@@ -13,36 +13,45 @@ description: >-
 # Arquitecto -- monitor + coordinacion reactiva de peers
 
 > El Arquitecto no puede lanzar crons PowerShell (deny del harness), asi que coordina desde la sesion via un
-> MONITOR sobre origin/main. Los crons de Codex/Analista corren y COMMITEAN+PUSHEAN al arbol compartido; el
-> monitor despierta al Arquitecto con cada push de peer, y este reacciona. No hagas polling manual: arma el
-> monitor y segui trabajando; los eventos llegan solos.
+> MONITOR. **CRITICO (leccion 2026-07-01): vigila el HEAD LOCAL, NO `origin/main`.** Los crons de Codex/Analista
+> corren y COMMITEAN al arbol COMPARTIDO pero **muchas veces NO pushean** -- sus entregas quedan como commits
+> locales que un watcher de origin NUNCA ve. Un monitor sobre origin te da FALSA cobertura: solo caza pushes, y
+> aca el push es la excepcion. Vigilar el HEAD local (mas los MSG `*-to-Arquitecto-*` nuevos en el mailbox) dispara
+> en el instante en que el peer entrega, sin depender del push. Tu tambien pusheas sus commits locales al reaccionar.
 
-## 1. El monitor (comando exacto, con SELF-FILTER)
-`Monitor` tool, `persistent:false`, `timeout_ms:3600000` (1h; menos re-arms en vacio). Vigila origin/main y emite
-SOLO commits de peers -- **ignora los propios** (los del Arquitecto llevan `Co-Authored-By: Claude Opus` en el
-cuerpo; los de Codex/Analista NO). Asi re-armar en cualquier momento NO se auto-dispara con tus pushes:
+## 1. El monitor (comando exacto: HEAD LOCAL + entregas, con SELF-FILTER)
+`Monitor` tool, `persistent:false`, `timeout_ms:3600000` (1h; menos re-arms en vacio). Vigila el **HEAD local** y las
+entregas nuevas; emite SOLO actividad de peers -- **ignora los propios** commits (los del Arquitecto llevan
+`Co-Authored-By: Claude Opus` en el cuerpo; los de Codex/Analista NO). Asi re-armar NO se auto-dispara con tus commits:
 ```bash
 cd /d/Agentes/multi_agent_project_protocol
-base=$(git rev-parse origin/main)
+base=$(git rev-parse HEAD)
+seen=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista)-to-Arquitecto" | sort)
 while true; do
-  git fetch origin main -q 2>/dev/null || true
-  cur=$(git rev-parse origin/main 2>/dev/null)
+  cur=$(git rev-parse HEAD 2>/dev/null)
+  msg=""
   if [ "$cur" != "$base" ]; then
-    peer=""
     for c in $(git rev-list --reverse ${base}..${cur} 2>/dev/null); do
       if ! git log -1 "$c" --format='%b' 2>/dev/null | grep -q "Co-Authored-By: Claude Opus"; then
-        peer="${peer}$(git log -1 "$c" --oneline 2>/dev/null)
+        msg="${msg}COMMIT $(git log -1 "$c" --oneline 2>/dev/null)
 "
       fi
     done
-    if [ -n "$peer" ]; then echo "=== PEER ACTIVITY ==="; printf '%s' "$peer"; break; fi
     base=$cur
   fi
-  sleep 45
+  now=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista)-to-Arquitecto" | sort)
+  newf=$(comm -13 <(printf '%s\n' "$seen") <(printf '%s\n' "$now") 2>/dev/null)
+  if [ -n "$newf" ]; then msg="${msg}NEW-DELIVERY:
+${newf}
+"; fi
+  seen="$now"
+  if [ -n "$msg" ]; then echo "=== PEER ACTIVITY (local tree) ==="; printf '%s' "$msg"; break; fi
+  sleep 30
 done
 ```
-Al recibir el evento: coordina, y **re-arma** el monitor (termina la ronda con un nuevo Monitor). Con el self-filter,
-re-armar tras cada push es seguro; sin el, re-armabas antes de pushear y el watcher se disparaba con tu propio commit.
+Al recibir el evento: `git fetch` + coordina + **pushea el commit local del peer** (si no lo pusheo) + **re-arma** el
+monitor. Con el self-filter, re-armar tras tus commits es seguro. Un watcher de `origin/main` es el ERROR historico:
+te hace depender de que el operador te diga "revisa" porque no ves las entregas locales sin pushear.
 
 ## 2. Reglas de reaccion (que hacer con cada senal de peer)
 En cada wake: `git fetch` + `git merge --ff-only origin/main` (los peers commitean al arbol compartido; tu HEAD
