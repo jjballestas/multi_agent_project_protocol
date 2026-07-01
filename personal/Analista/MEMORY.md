@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0228 WS5 HEAD limpio (2026-07-01): GO/CERRABLE. Veredicto canonico en `12ea5d3`
+  (`review(TASK-0228): Analista OK clean head`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-head-limpio-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0228-ws5-head-limpio`. Ancla protocolo/instruccion
+  `a0de55a3fd8eba26d7c8cdc96967a538944e09fa`; implementacion bajo review `7353070`; producto control
+  `Zeus-protocol` clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`; clean clone protocolo en
+  `C:/Users/johnb/AppData/Local/Temp/analista-0228-protocol-headlimpio-40433666df5b4a77bcc9ee3553d0210e`.
+  Clean clone protocolo validate/neutrality/encoding exit 0; drift `has_drift=false up_to_seq=2842`;
+  `protocol.config.json` sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
+  Producto `npm test` exit 0 (109 tests, 87 pass, 22 skipped). Sustantivo TASK-0228 PASA: coordination
+  instancia valida con 4 participantes/personales; TASK sintetica `owner: Analista` valida exit 0; probe
+  `owner: Intruso` tambien valida exit 0 y queda declarado como no-gateado; decisiones 0072/0073/0077 existen;
+  maker!=checker queda disciplinario; attested valida con 3 public keys (`arquitecto:v1`, `codex:v1`,
+  `analista:v1`) mas `human_owner` sin signer. Recomendacion: Arquitecto puede cerrar si no hay cambio posterior
+  fuera de la ancla.
 - TASK-0228 WS5 AC corregido (2026-07-01): CAMBIO-REQUERIDO / NO-GO de cierre canonico. Veredicto en
   `6fdc06a` (`review(TASK-0228): Analista blocks corrected AC on clean gate`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-ac-corregido-veredicto.md`, MSG
