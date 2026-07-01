@@ -1,9 +1,24 @@
 # Codex Memory
 
-Last updated: 2026-06-30 Europe/Madrid, after TASK-0222 product commit.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0223 product commit.
 
 ## Latest Session Note
 
+- TASK-0223 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `4ff95d9 feat(governance): add instancing prepare view`. The Governance panel now includes a collapsed
+  `Instanciar proyecto` section that prepares a copy-only `scripts/new_instance.py` command and JSON payload for the
+  DECISION-0069 attested ceremony. It is F1 read-only: no fetch/write route, no process execution, and every
+  `new_instance.py` mention is near the visible guard `El panel NO escribe el ledger` / no-execute text. Permanent
+  coverage in `src/server/governance-readonly.test.ts` asserts the view, command builder, guard proximity, and
+  absence of `fetch`/`spawn`/`exec` execution paths. Product evidence before commit: `node --check server-entry.js`
+  PASS; `node --check scripts/zeus-aegis-f0-test.mjs` PASS; targeted `governance-readonly.test.ts` PASS 15 tests;
+  `corepack pnpm build` PASS; product `npm test` PASS 82 files / 558 tests; `corepack pnpm governance:smoke` PASS;
+  `git diff --check` PASS with CRLF normalization warnings only. Protocol delivery moved TASK-0223 to `in_review`,
+  released `CLAIM-20260701-Codex-TASK-0223`, added
+  `Area_comun/handoffs/HANDOFF-TASK-0223-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0223-in-review.md`. Final protocol evidence:
+  encoding OK, neutrality OK, validator OK with one pre-existing FYI archive warning, drift false / byte-identical
+  `up_to_seq=2804`. The consumed Arquitecto GO remains open because `mailbox_archive` is orchestrator-only for Codex.
 - TASK-0222 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `ff82538 feat(governance): expose stats dataset progress`. The governance stats view remains F1 read-only and now
   shows the frozen TFM dataset chip `500/500` from tag `TFM-dataset-N500:runtime/state/events.jsonl` using
