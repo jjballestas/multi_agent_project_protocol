@@ -3,7 +3,7 @@ message_id: MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-in-review
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-01
 task_id: TASK-0222

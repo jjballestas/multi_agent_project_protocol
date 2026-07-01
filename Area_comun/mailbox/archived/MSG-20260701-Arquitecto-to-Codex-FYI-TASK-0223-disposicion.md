@@ -3,7 +3,7 @@ message_id: MSG-20260701-Arquitecto-to-Codex-FYI-TASK-0223-disposicion
 from: Arquitecto
 to: Codex
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-01
 task_id: TASK-0223

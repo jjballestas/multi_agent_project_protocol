@@ -3,7 +3,7 @@ message_id: MSG-20260630-Arquitecto-to-Operador-PLAN-REQ-ZEUS-001-reconciliado
 from: Arquitecto
 to: Operador
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-06-30

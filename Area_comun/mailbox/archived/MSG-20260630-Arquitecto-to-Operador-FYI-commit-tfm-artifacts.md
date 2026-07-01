@@ -3,7 +3,7 @@ message_id: MSG-20260630-Arquitecto-to-Operador-FYI-commit-tfm-artifacts
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-06-30
 task_id: OPS-COMMIT-TFM-ARTIFACTS-20260630

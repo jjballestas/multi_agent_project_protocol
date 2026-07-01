@@ -12790,6 +12790,24 @@
             "updated_at": "2026-07-01T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0223-done-flip",
+            "expires_at": "2026-07-01T23:59:00Z",
+            "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0223-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0223",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0223",
+                "Area_comun/tasks/TASK-0223-codex-zeus-aegis-vista-instanciar-proyecto.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T15:02:40Z",
+            "status": "released",
+            "task_id": "TASK-0223",
+            "updated_at": "2026-07-01T15:02:40Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-Codex-TASK-0225-done-flip",
             "expires_at": "2026-07-01T23:59:00Z",
             "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
@@ -12865,6 +12883,52 @@
             "status": "released",
             "task_id": "OPS-UNJAM-CODEX-20260701",
             "updated_at": "2026-07-01T09:44:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260701-mbhyg-b1",
+            "expires_at": "2026-07-01T20:00:00Z",
+            "notes": "higiene lote 1",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-mbhyg-b1",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0225-remediacion-2.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0225-remediacion-2.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0227-f1-boundary.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Analista-REVIEW-TASK-0227-f1-boundary.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0223-vista-instanciar.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Codex-GO-TASK-0223-vista-instanciar.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Operador-FYI-commit-tfm-artifacts.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Operador-FYI-commit-tfm-artifacts.md",
+                "Area_comun/mailbox/open/MSG-20260630-Arquitecto-to-Operador-PLAN-REQ-ZEUS-001-reconciliado.md",
+                "Area_comun/mailbox/archived/MSG-20260630-Arquitecto-to-Operador-PLAN-REQ-ZEUS-001-reconciliado.md"
+            ],
+            "started_at": "2026-07-01T13:02:31Z",
+            "status": "released",
+            "task_id": "OPS-MBHYG",
+            "updated_at": "2026-07-01T13:02:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260701-mbhyg-b5",
+            "expires_at": "2026-07-01T20:00:00Z",
+            "notes": "higiene lote 5",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-mbhyg-b5",
+                "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0227-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0227-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-FYI-TASK-0223-disposicion.md",
+                "Area_comun/mailbox/archived/MSG-20260701-Arquitecto-to-Codex-FYI-TASK-0223-disposicion.md",
+                "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-GO-TASK-0228-ws5-alta-analista.md",
+                "Area_comun/mailbox/archived/MSG-20260701-Arquitecto-to-Codex-GO-TASK-0228-ws5-alta-analista.md",
+                "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260701-Codex-to-Arquitecto-TASK-0222-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0223-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260701-Codex-to-Arquitecto-TASK-0223-in-review.md"
+            ],
+            "started_at": "2026-07-01T13:02:31Z",
+            "status": "released",
+            "task_id": "OPS-MBHYG",
+            "updated_at": "2026-07-01T13:02:31Z"
         },
         {
             "claim_id": "CLAIM-20260701-ratify0223-arquitecto",

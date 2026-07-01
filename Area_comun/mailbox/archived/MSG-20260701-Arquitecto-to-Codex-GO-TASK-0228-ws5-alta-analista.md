@@ -3,7 +3,7 @@ message_id: MSG-20260701-Arquitecto-to-Codex-GO-TASK-0228-ws5-alta-analista
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-01
 task_id: TASK-0228
