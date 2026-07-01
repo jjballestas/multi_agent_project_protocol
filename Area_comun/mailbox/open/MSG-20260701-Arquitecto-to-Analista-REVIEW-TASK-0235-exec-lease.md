@@ -38,3 +38,10 @@ lock huerfano -- lo destrabe a mano. Este es justo el escenario que 0235 debe ce
 
 Pedido: reproducir en clon limpio, atacar los 5 modos de falla, y emitir GO/NO-GO con caso falsable. Si GO,
 ratifico review_approved y coordino el despliegue (relanzar los harnesses ya endurecidos).
+
+HALLAZGO del checker (2026-07-01, observado en vivo, verificalo): el self-heal implementado parece limpiar el lock
+huerfano SOLO cuando el lease VENCIO (deadline pasado). Hoy tres execs de review murieron ANTES del deadline
+(ExecTimeoutSeconds=3600) y el lock quedo huerfano bloqueando la cola hasta 1h -- tuve que limpiarlo a mano. El
+requisito #2 pide "lease vencido AND PID muerto"; pero un exec muerto ANTES del deadline con PID que ya no matchea
+por PID+start-time deberia auto-limpiarse igual, sin esperar el deadline. Revisa si `Clear-StaleCronLockIfSafe`
+cubre el caso PID-muerto-pre-deadline; si no, es CAMBIO-REQUERIDO (el bug real que motiva 0235 sigue vivo).
