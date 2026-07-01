@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "f3f6f2c78c75a8225d6d6b25ec22438929db865d4229996440d57f53469dc622",
+        "replay_hash": "f3f6f2c78c75a8225d6d6b25ec22438929db865d4229996440d57f53469dc622",
+        "up_to_seq": 2862
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "dD49sk5Eb1IKIMsgFLbBl9csK/9ymD0G/+GIsxH8tde2jiKNAOWqna5tZa2xiR7buUmTzm6yl3R+MAVvfuRyBQ=="
+            },
+            "aggregate_id": "TASK-0224",
+            "aggregate_version": 17,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "84a2cc4c966135e22ee4f29503d4866a7063b140a7f36c288045c198f4d7be52"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:b6bd1279fb1e4065fe968de400f55d3489944650085499a5a4074241dc8a5cdf",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0224",
+                "timestamp": "2026-07-01T16:00:43Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0224:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0224-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                                    "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T16:00:43Z",
+                                "status": "active",
+                                "task_id": "TASK-0224",
+                                "updated_at": "2026-07-01T16:00:43Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0224"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "5d6b37cac62c372f577ddb4892f7898ebc9adab8c571628814a482f89b33a867",
+            "seq": 2860,
+            "ts": "2026-07-01T16:00:43Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "8qQHXIlTXjm141X25UVfI3TvByD9TzN0+AgPZkEVO4nVZcB1C+nMC+nYoWJHetLGrZF0nNOEAC6aVGjTcVjoDQ=="
+            },
+            "aggregate_id": "TASK-0224",
+            "aggregate_version": 18,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "3df25ae4d52310b5cd0f5953a6ad7ed0d86e2cf91265c689da2484cce8054038"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:bd4ec35017e7eb4b0a50805e4f568c78422deadc025cc91eeff02d7eaa3dd533",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0224",
+                "timestamp": "2026-07-01T16:00:43Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0224:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "5992dc9329cb59355037d128fa61b3bead9abfc352885e6c90380f794983e14a",
+            "seq": 2861,
+            "ts": "2026-07-01T16:00:43Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "IohNB2mx/ZaCULWXcexzMJqVAJp4+Q8ZoS9D3ED1wdYRpNyNCeYJQn8T1G4o2B40Sj5b1e1geq6nMEiFaE37DQ=="
+            },
+            "aggregate_id": "TASK-0224",
+            "aggregate_version": 19,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "1b2ee825195fc929435bff308660b9625f4fb00be7231e1393f35a572b7fee23"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:0032fee78086ef541bb141b4f953745935acae0fc333b40109e1f1a0fe2150dc",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0224",
+                "timestamp": "2026-07-01T16:00:43Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0224:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0224-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                                    "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T16:00:43Z",
+                                "status": "released",
+                                "task_id": "TASK-0224",
+                                "updated_at": "2026-07-01T16:00:43Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0224"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "e7169a8e2e9915189510081763ebf9dfc1bf469f78ace10d5b60cf5bf4e8be5c",
+            "seq": 2862,
+            "ts": "2026-07-01T16:00:43Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0224-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                    "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T16:00:43Z",
+                "status": "active",
+                "task_id": "TASK-0224",
+                "updated_at": "2026-07-01T16:00:43Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0224"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0224",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0224-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0224",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0224",
+                    "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T16:00:43Z",
+                "status": "released",
+                "task_id": "TASK-0224",
+                "updated_at": "2026-07-01T16:00:43Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0224-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0224"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "f71a1c7ad22ad2b22a8efee38500c6c0cf633e640bdc9b3c98fc1f2a450f53a2",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2862
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2862
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0224-codex-fix-redactor-fechas-reportes.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:b6bd1279fb1e4065fe968de400f55d3489944650085499a5a4074241dc8a5cdf",
+            "intent:Codex:task_status:bd4ec35017e7eb4b0a50805e4f568c78422deadc025cc91eeff02d7eaa3dd533",
+            "intent:Codex:claim:0032fee78086ef541bb141b4f953745935acae0fc333b40109e1f1a0fe2150dc"
+        ],
+        "idempotency_key": "codex:task0224:done-flip-tx",
+        "intent_count": 3
+    }
+}

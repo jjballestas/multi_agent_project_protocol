@@ -1,9 +1,14 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0228 done-flip.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0224 done-flip completed in protocol commit `coord(TASK-0224): close report redactor`.
+  `runtime/submit_intent.py` transaction `codex:task0224:done-flip-tx` acquired and released
+  `CLAIM-20260701-Codex-TASK-0224-done-flip` and moved TASK-0224 `review_approved -> done` at seq 2860-2862.
+  Evidence after the flip: encoding OK, neutrality command exit 0, validator OK, drift false / byte-identical
+  `up_to_seq=2862`. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched.
 - TASK-0227 remediation-3 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `19ebd48 test(governance): catch f1 write variants`. The F1 read-only guard now rejects the four additional
   Analista escapes: `fetch(..., { method })`, `fetch(..., { ['method']: 'POST' })`,
