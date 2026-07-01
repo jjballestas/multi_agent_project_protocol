@@ -53,6 +53,36 @@ Al recibir el evento: `git fetch` + coordina + **pushea el commit local del peer
 monitor. Con el self-filter, re-armar tras tus commits es seguro. Un watcher de `origin/main` es el ERROR historico:
 te hace depender de que el operador te diga "revisa" porque no ves las entregas locales sin pushear.
 
+## 1b. SEGUNDO monitor OBLIGATORIO: watchdog de salud de execs (falla silenciosa)
+El monitor de entregas SOLO dispara cuando hay salida (commit/MSG). **Un exec colgado o muerto NO produce nada ->
+el monitor calla -> no te enteras salvo que el operador lo note.** Arma SIEMPRE un segundo monitor `persistent:true`
+que detecta el cuelgue por **lock retenido + run-log CONGELADO** (un exec vivo escribe a su `runs/*.err.log`; uno
+colgado lo congela -- senal de vida robusta que distingue "colgado" de "lento-pero-vivo", no mata trabajo bueno):
+```bash
+cd /d/Agentes/multi_agent_project_protocol
+declare -A alerted
+while true; do
+  for peer in codex analista; do
+    dir=".protocol-tmp/${peer}_mailbox_cron"; lock="$dir/${peer}_mailbox_cron.lock"
+    if [ -f "$lock" ]; then
+      newest=$(ls -t "$dir"/runs/*.err.log 2>/dev/null | head -1)
+      if [ -n "$newest" ]; then
+        age=$(( $(date +%s) - $(stat -c %Y "$newest") ))
+        if [ "$age" -gt 480 ]; then
+          if [ "${alerted[$peer]}" != "1" ]; then
+            echo "=== HUNG-EXEC $(date '+%H:%M:%S') ==="; echo "$peer: lock retenido + run-log CONGELADO ${age}s -> exec colgado/muerto; who_locks + destrabar."; alerted[$peer]=1
+          fi
+        else alerted[$peer]=0; fi
+      fi
+    else alerted[$peer]=0; fi
+  done
+  sleep 60
+done
+```
+Emite una vez por episodio (flag `alerted`) y se resetea cuando el lock se va o el log vuelve fresco. Junto con el de
+entregas cubre los DOS desenlaces de un exec: entrega (commit/MSG) o cuelgue (silencioso). El fix PERMANENTE del
+cuelgue es TASK-0236/0237 (harness + hang-proof del npm test); el watchdog es el control compensatorio mientras tanto.
+
 ## 2. Reglas de reaccion (que hacer con cada senal de peer)
 En cada wake: `git fetch` + `git merge --ff-only origin/main` (los peers commitean al arbol compartido; tu HEAD
 local puede ir detras de origin). Luego, segun la senal:

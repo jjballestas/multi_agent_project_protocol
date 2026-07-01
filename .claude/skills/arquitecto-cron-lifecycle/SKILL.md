@@ -92,6 +92,28 @@ exclusion de la propia sesion y del exec del checker.
 - El **cron del Arquitecto** (`personal/Arquitecto/arquitecto_cron.ps1`) NO se lanza desde una sesion interactiva del
   Arquitecto: activarlo obliga a stand-down (un escritor a la vez).
 
+### 4b. REDESPLIEGUE completo del harness (deploy de una version nueva del .ps1)
+Cuando el `.ps1` en HEAD es una version nueva (p.ej. 0235/0236 mergeados) pero los loops VIVOS corren el codigo
+viejo, hay que **teardown + relanzar** (el codigo se carga al arrancar):
+1. **Teardown de TODOS los loops** (puede haber DUPLICADOS: verlo es la mitad del bug): `taskkill //PID <p> //T //F`
+   a cada loop, mata sus exec trees, y `rm` los `*.lock` + `*.exec-lease.json` stale de ambos peers.
+2. **Verifica que quedaron abajo por el LOG** (mtime congelado = down), NO por una query de procesos.
+3. **Relanza UNA sola instancia por peer** (s.4). En modo-auto el launch se deniega -> handoff al operador.
+4. Confirma en el log el `mailbox cron started` + heartbeat, y que el harness nuevo esta activo (STOP_JOB, self-heal).
+
+### 4c. Gotchas del destrabe/redespliegue (aprendidos 2026-07-02)
+- **KILL de ARBOL, no de un pid:** un exec colgado tiene hijos (esbuild/node/cmd/powershell). `taskkill //PID <p> //T //F`
+  (arbol) por CADA holder; un `Stop-Process` de un solo pid deja el arbol vivo reteniendo handles.
+- **who_locks.py se auto-matchea:** tu propio powershell que corre la query contiene `mailbox_cron.ps1` en su
+  command-line -> aparece como "holder"/"loop" (falso positivo, pid cambia cada vez). Fuente de verdad = el LOG
+  del cron (frozen=down), no la query de procesos.
+- **Prompt compartido:** con el harness previo a 0236, un exec colgado retiene `prompt.v3.txt` COMPARTIDO -> el loop
+  no puede lanzar otro exec (LOOP_ERROR). Por eso hay que matar el arbol, no solo `rm` el lock. (0236 lo arregla con
+  prompt por-exec.)
+- **Diferir un GO** (que el cron lo skipee sin borrarlo): la firma seen es `Name|Length|LastWriteTimeUtc.Ticks`;
+  igualala EXACTA (computala con powershell: `$f.Name+'|'+$f.Length+'|'+$f.LastWriteTimeUtc.Ticks`). Un valor custom
+  NO sirve (el cron lo ve como "cambio" y re-procesa).
+
 ## 5. Post-destrabe (higiene que evita el re-cuelgue)
 - **Archiva el GO consumido** que re-disparaba el cuelgue: Codex no puede (`mailbox_archive` exige capability
   `orchestrator`); lo hace el Arquitecto via `submit_intent mailbox_archive` (claim file-scoped open+archived). Ver
