@@ -75,7 +75,7 @@
         {
             "id": "TASK-0229",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "blocked",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
         },
         {
@@ -97,6 +97,12 @@
             "title": "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets"
         },
         {
+            "id": "TASK-0233",
+            "owner": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS7] Verificacion e2e en VM limpia: checklist licencias MIT + cero hermes visible + cero PII"
+        },
+        {
             "id": "TASK-0234",
             "owner": "Arquitecto",
             "status": "proposed",
@@ -111,7 +117,7 @@
         {
             "id": "TASK-0237",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         }
     ],

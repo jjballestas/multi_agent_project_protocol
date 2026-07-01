@@ -13543,9 +13543,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-02T00:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0229",
             "updated_at": "2026-07-02T00:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+            "expires_at": "2026-07-03T00:25:00Z",
+            "notes": "Implement TASK-0237 hang-proof npm test in Zeus-Aegis so clean-clone gates terminate bounded.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237",
+                "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                "D:/Agentes/Zeus/Zeus-Aegis",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T00:25:00Z",
+            "status": "active",
+            "task_id": "TASK-0237",
+            "updated_at": "2026-07-02T00:25:00Z"
         },
         {
             "claim_id": "CLAIM-20260702-mbhyg-r2-blk01",
@@ -13822,6 +13841,22 @@
             "status": "released",
             "task_id": "OPS-MBHYG",
             "updated_at": "2026-07-02T00:27:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-register-0233-arquitecto",
+            "expires_at": "2026-07-02T05:26:27Z",
+            "notes": "Release tras registrar TASK-0233.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-register-0233-arquitecto",
+                "Area_comun/state/TASK_INDEX.json#TASK-0233",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0233",
+                "Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md"
+            ],
+            "started_at": "2026-07-01T23:26:27Z",
+            "status": "released",
+            "task_id": "TASK-0233",
+            "updated_at": "2026-07-01T23:26:27Z"
         },
         {
             "claim_id": "CLAIM-20260702-register-0236-0237-arquitecto",
