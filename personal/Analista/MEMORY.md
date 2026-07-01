@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0227 remediacion-2 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `b2e2e39` (`review(TASK-0227): Analista blocks remediation 2`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-2-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-2`. Ancla REVIEW
+  `f7c92ba`, redelivery protocolo `464b479b4b3c5a46ca064a8f31871fafb97f1208`, protocolo HEAD
+  `b73aa9004da544c911ff7fdf76dc78dd70ce5ce2`, producto Zeus-Aegis `88091b1ee299734fa860ad9229556575f312eb38`.
+  Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0227-product-b3b7af714ad64b2a9e421a5b295e164b`:
+  `npm test` EXIT 124 a 604s; targeted vitest governance-readonly EXIT 124 a 304s. Los 4 escapes previos pasan
+  (method variable, template method, lowercase method, axios.post), pero probe propio sobre
+  `GOVERNANCE_FORBIDDEN_WRITE_PATTERNS` salio EXIT 1 por slips nuevos: `fetch(..., { method })`,
+  `fetch(..., { ['method']: 'POST' })`, `axios.request({ url, method: 'POST' })`, y
+  `axios({ url, method })`. Clean clone protocolo validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2848`;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. El workspace
+  vivo no fue ancla; validate vivo salia rojo por cambio local ajeno en `CLAIM-20260701-Codex-DECISION-0078`
+  con selector invalido.
 - TASK-0228 WS5 HEAD limpio (2026-07-01): GO/CERRABLE. Veredicto canonico en `12ea5d3`
   (`review(TASK-0228): Analista OK clean head`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-head-limpio-veredicto.md`, MSG
