@@ -12812,6 +12812,23 @@
             "updated_at": "2026-07-01T20:21:31Z"
         },
         {
+            "claim_id": "CLAIM-20260701-Analista-TASK-0227-remediacion-6-review",
+            "expires_at": "2026-07-01T23:01:20Z",
+            "notes": "Adversarial review of TASK-0227 remediation 6.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-6-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0227-remediacion-6.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T21:01:20Z",
+            "status": "released",
+            "task_id": "TASK-0227",
+            "updated_at": "2026-07-01T21:01:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-Arquitecto-TASK-0222-ratify",
             "expires_at": "2026-07-01T23:59:00Z",
             "notes": "Release tras ratificar TASK-0222 a review_approved.",
