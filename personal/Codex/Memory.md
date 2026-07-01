@@ -2120,6 +2120,14 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   active Codex claims. Commit: `c0efaaf chore(mailbox): archive Codex stand-down`.
 - Startup files were refreshed so the next Codex session reads both `personal/Codex/STARTUP_PROMPT.md` and
   this memory before acting.
+- TASK-0229 product implementation commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `980445c feat(branding):
+  add zeus env aliases`. It adds superficial Zeus branding/env aliases only: `ZEUS_API_URL`/`ZEUS_API_TOKEN`
+  precedence with `HERMES_*`/`CLAUDE_*` fallback, `ZEUS_PASSWORD` fallback, Zeus onboarding copy, and targeted
+  env-alias tests. Internal package/app IDs/binaries were not renamed and NOTICE remains untouched.
+- TASK-0237 product implementation commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `b3d863a test(governance):
+  bound zeus aegis npm test`. It routes root `npm test` through a bounded Node harness with `CI=1`, keeps vitest
+  in `run` mode with hard per-test/hook/teardown timeouts, disables file parallelism, uses a single threads pool to
+  avoid the observed fork IPC closure path, and kills the spawned process tree on hard timeout.
 
 ## Useful Fresh-Session Commands
 

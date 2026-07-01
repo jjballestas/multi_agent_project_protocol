@@ -158,7 +158,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         }
     ],

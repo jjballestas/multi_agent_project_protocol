@@ -2,7 +2,7 @@
 task_id: TASK-0237
 title: "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
 type: build
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

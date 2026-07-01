@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ad2cb228f7b19795495d321536c5decea5ef91b71dfe354e11a4131e9604fd60",
+  "canonical_hash": "edf2268aea2d073c8406e539d8eec19bff56b883e6be5776c5f4d4a09c9788d5",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -461,6 +461,8 @@
       "CLAIM-20260701-Codex-TASK-0228": 1,
       "CLAIM-20260701-Codex-TASK-0235": 1,
       "CLAIM-20260702-Codex-TASK-0229": 1,
+      "CLAIM-20260702-Codex-TASK-0237": 1,
+      "CLAIM-20260702-Codex-TASK-0237-artifacts": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -953,7 +955,7 @@
       "TASK-0234": 1,
       "TASK-0235": 23,
       "TASK-0236": 4,
-      "TASK-0237": 4,
+      "TASK-0237": 6,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -961,7 +963,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2357,
+    "events_applied": 2361,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2952,6 +2954,7 @@
       "intent:Codex:claim:290eda757d525b238137c63ef490d604191886678f36a9249fabbea15abe5bdf": 2085,
       "intent:Codex:claim:299b5ebbc2db89620ea425f171d10a0bbdfbb146a40d5d0f788d0ff059724874": 1229,
       "intent:Codex:claim:29c6e34d4e5ad7d18dfc3c4ce4c2becdf91a673b7e66533095306489bb6f4aa2": 1483,
+      "intent:Codex:claim:2c130d892b78174ee41a10839cf4e9804044bd9951785341c55adb1809225703": 3032,
       "intent:Codex:claim:2fe618af7ef12cdfee7a63bbe3ad44854b45d667addcc05762aaf5b2fa04696f": 2805,
       "intent:Codex:claim:31a1a8e9fb42d22de76ddf39045cf781c781e1166bff212e1b9c0b69db72436c": 2321,
       "intent:Codex:claim:327da2cc0864720c77db36afa401fe26b5aacb47ba993876775196018aa2ddc7": 1712,
@@ -3028,6 +3031,7 @@
       "intent:Codex:claim:7cf14753117e824f0790e0b34f84ea8825a0975fda979b3e728589e8e9d403c8": 1424,
       "intent:Codex:claim:7df93edb02dc6d874e38493f9db8920be2ff68fac7982fbab8aea360d8a8d957": 1987,
       "intent:Codex:claim:7fbc642492cc44700d81f250ae7b8e913411a5b2b765a8b16914be9af6a09001": 2374,
+      "intent:Codex:claim:8018e6f115182dc7e8f1b939726523a1715759a2997364a826ff4d7f2b3e782c": 3031,
       "intent:Codex:claim:8197dcbae5864f1f443abb8f21a376ce324c48287075856b91926dee0468bdc0": 2373,
       "intent:Codex:claim:82e40d24ae7230bdfb85e90c33bf4df69c4d36864bb30a4e6093ae1e3a247a3d": 2848,
       "intent:Codex:claim:835a7174434d647757b791bdadaebe4b8a9976f0836eb7942f14bf508d588144": 774,
@@ -3064,6 +3068,7 @@
       "intent:Codex:claim:9fe0230b1216763a5e7a0a3fa090d0561e35860d845ed00e4f8f61dcdd876136": 2385,
       "intent:Codex:claim:a15a5bd15c6f0243b6d6bb28e486e9b6a7f82ad40c70a8f94c575a3d584d0028": 2874,
       "intent:Codex:claim:a3339dbd4ee6d62ba7d8f6e3910c5f2aa20f8ec9fe8a1b5f03bed3b5f9274b79": 2038,
+      "intent:Codex:claim:a4472a05da7e60b478d11d23427874805973f5cb6b3a36e8ab3038d735de966a": 3029,
       "intent:Codex:claim:a44d351cf46551430400f7579221a3cbe882c8a99abdf6e535db423b8a6b9123": 2852,
       "intent:Codex:claim:a5f13d29f3fcaa052ddab743a9119ec8230973f890827e515e092cfb604f528f": 1664,
       "intent:Codex:claim:a602481a0d37e5001ac4fc81c7087d58ca668dcbdb73ea24c972acc365094a91": 1666,
@@ -3249,6 +3254,7 @@
       "intent:Codex:task_status:c4cb435e49f8276613b3480eabe50a2471e74d8e8330f5cbdae7ae4e133bde6b": 2725,
       "intent:Codex:task_status:cbf5cfe61d25ba2c8a03c0c4410d1bd9179952660cfae271a82de75370e1863c": 2205,
       "intent:Codex:task_status:cc0c2f8ef7520c3ff5f76b6338bfc7a73b80f4de360db1666d1dd1ea4447f628": 1227,
+      "intent:Codex:task_status:cd38fa259d44b317ef95b8c19edcf80e4634916da56965b26333a99362b52d11": 3030,
       "intent:Codex:task_status:ce63848769000eb016d26d8581a374933c7301307ca1bdfa79b6f70a1ea6ec01": 947,
       "intent:Codex:task_status:ceff998f2b876f33b7010ad60641b6dc7fc2f38144d0cef0f143815b907cb143": 1428,
       "intent:Codex:task_status:cf38b9763ae2262647878af7474fc6520aa54634bbfc2a99c1025dabec92e1f0": 1705,
@@ -3322,5 +3328,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3028
+  "up_to_seq": 3032
 }

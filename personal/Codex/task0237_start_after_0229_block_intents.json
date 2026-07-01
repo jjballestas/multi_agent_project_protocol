@@ -1,0 +1,49 @@
+{
+  "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0229",
+      "from": "in_progress",
+      "to": "blocked",
+      "idempotency_key": "codex:task0229:block-on-0237-gate"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260702-Codex-TASK-0229",
+      "idempotency_key": "codex:task0229:release-for-0237"
+    },
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+        "owner": "Codex",
+        "task_id": "TASK-0237",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237",
+          "Area_comun/state/TASK_INDEX.json#TASK-0237",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+          "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+          "D:/Agentes/Zeus/Zeus-Aegis",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T00:25:00Z",
+        "updated_at": "2026-07-02T00:25:00Z",
+        "expires_at": "2026-07-03T00:25:00Z",
+        "notes": "Implement TASK-0237 hang-proof npm test in Zeus-Aegis so clean-clone gates terminate bounded."
+      },
+      "idempotency_key": "codex:task0237:claim-acquire"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0237",
+      "from": "ready",
+      "to": "in_progress",
+      "idempotency_key": "codex:task0237:ready-to-in-progress"
+    }
+  ]
+}

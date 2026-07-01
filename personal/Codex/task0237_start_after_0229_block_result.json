@@ -1,0 +1,284 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "3c32395d56440c9fd2974d292d68ca1401bd940dd391d09a63082828ca80b9af",
+        "replay_hash": "3c32395d56440c9fd2974d292d68ca1401bd940dd391d09a63082828ca80b9af",
+        "up_to_seq": 3025
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "sVwjbqkONq8+1a65o01vrAIFJ70Jn3TXpEUJ1IczOFW4s+4I4cmGaQ0j6ynifary5hjaUgBJB3ZSbIXaHfhfAA=="
+            },
+            "aggregate_id": "TASK-0229",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "247a96542d08ddd760d52e8f1df24661393dc0d32fb1e20aae4041f2d4fe180e"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:dab32e8e4c325dd9636ae5d03e01245234901b759ad2e94de30c9cfbcc08bed5",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "task_status",
+                "task_id": "TASK-0229",
+                "timestamp": "2026-07-02T00:25:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "blocked"
+                    }
+                }
+            },
+            "prev_hash": "c7680543ccb2b2c51c2fe3e8f7e0b273c0a6173dd9519d52e8e4fb8f4496d695",
+            "seq": 3022,
+            "ts": "2026-07-02T00:25:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "wZOam7EcR/EDeG9YUfSr/xs7YTbcogIhOaftcdxaPIwEAPwRckMQ5NRoRSeL94zPXk+HwAdtxhm/YnVDmsHQAg=="
+            },
+            "aggregate_id": "CLAIM-20260702-Codex-TASK-0229",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "cdca32da38bc1e30eb32ed665bf926492856128490d0a3ce054d5a1a306509e0"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:6512d872cd59a182e0b6d4211bdcf8cc1f378995ee6d9c0b4a3009e4effb25b0",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "claim",
+                "timestamp": "2026-07-02T00:25:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0229",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "f66478b4f8c19f8425d38629abbbc07decc40aa3587daba839f6631cd21e7bb5",
+            "seq": 3023,
+            "ts": "2026-07-02T00:25:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "vL075Sv40EW+YR7O6Iix0tLfeLcZC/XQwXaoEOSV5pLCDzppGD0kweV1RUyRDns2tMr3pN7fp8oKydXLS9w9BA=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 3,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "fc76d05461b29d7ceb772f2b51b14fda79b1fabb11ad888ce654388f8e59a67a"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:338a0beaf0204c9db98442a3f45a453744664cb2f9f885f7745895e860764301",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "claim",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T00:25:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+                                "expires_at": "2026-07-03T00:25:00Z",
+                                "notes": "Implement TASK-0237 hang-proof npm test in Zeus-Aegis so clean-clone gates terminate bounded.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                                    "D:/Agentes/Zeus/Zeus-Aegis",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T00:25:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0237",
+                                "updated_at": "2026-07-02T00:25:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0237"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "86ffb400514098d3e389fc8264f979d7dd451a943dfe953e3a5a78eeecdefde8",
+            "seq": 3024,
+            "ts": "2026-07-02T00:25:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "GOMzPzyViT2oQQLOvUtUGo9zRxp/oLBk5EAxjkFCjab2a9jraxbLGt9iOqRfqOnvnN6Yzq3U6O/qxHc0fhmVBg=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 4,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "75a978d6495513701b887e9e49bdc725727e6afa401a582e5aa1bdb24005c895"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:713cc849fef2cbd8c76e546273142ac203d7e2a45f969cb6f3343bd9275680ff",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "task_status",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T00:25:00Z",
+                "transaction": {
+                    "count": 4,
+                    "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+                    "index": 4
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "ready",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "3934fe58b0b7fc54d1f63a2552f30c76b30543737e2ce0b7daea935ba20d94d0",
+            "seq": 3025,
+            "ts": "2026-07-02T00:25:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "from": "in_progress",
+            "kind": "task_status",
+            "task_id": "TASK-0229",
+            "to": "blocked"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229",
+            "kind": "claim",
+            "op": "release"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+                "expires_at": "2026-07-03T00:25:00Z",
+                "notes": "Implement TASK-0237 hang-proof npm test in Zeus-Aegis so clean-clone gates terminate bounded.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                    "D:/Agentes/Zeus/Zeus-Aegis",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T00:25:00Z",
+                "status": "active",
+                "task_id": "TASK-0237",
+                "updated_at": "2026-07-02T00:25:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0237"
+        },
+        {
+            "from": "ready",
+            "kind": "task_status",
+            "task_id": "TASK-0237",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "6456309ec2d90fbc4047dcb1545cd63c453835e350be7fab08e01da0d6f6d430",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3025
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3025
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+        "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:task_status:dab32e8e4c325dd9636ae5d03e01245234901b759ad2e94de30c9cfbcc08bed5",
+            "intent:Codex:claim:6512d872cd59a182e0b6d4211bdcf8cc1f378995ee6d9c0b4a3009e4effb25b0",
+            "intent:Codex:claim:338a0beaf0204c9db98442a3f45a453744664cb2f9f885f7745895e860764301",
+            "intent:Codex:task_status:713cc849fef2cbd8c76e546273142ac203d7e2a45f969cb6f3343bd9275680ff"
+        ],
+        "idempotency_key": "codex:task0237:start-after-0229-block-tx",
+        "intent_count": 4
+    }
+}

@@ -2,7 +2,7 @@
 task_id: TASK-0229
 title: "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
 type: build
-status: ready
+status: blocked
 owner: Codex
 phase: P2
 priority: high
