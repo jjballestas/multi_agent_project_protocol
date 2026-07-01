@@ -4,6 +4,15 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0223 product commit.
 
 ## Latest Session Note
 
+- TASK-0222 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `a68eb34 fix(governance): bound stats token scan`. The stats endpoint no longer shells out to
+  `scripts/agent_token_usage.py` for the hot cron-log aggregate; it scans bounded 128 KiB tails of
+  `.protocol-tmp/*/runs/*.err.log` directly in the read-only server path and keeps the interactive session
+  transcript merge, dataset chip, endpoint shape, and F1 read-only contract intact. Evidence before commit:
+  `node --check server-entry.js` PASS; targeted stats test PASS in 1.6s; product `npm test` PASS 82 files /
+  558 tests with stats AC test 3.3s; `corepack pnpm build` PASS; `git diff --check` PASS with CRLF
+  normalization warning only. Protocol delivery still needs handoff/mailbox/status release after this memory
+  refresh.
 - TASK-0223 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `4ff95d9 feat(governance): add instancing prepare view`. The Governance panel now includes a collapsed
   `Instanciar proyecto` section that prepares a copy-only `scripts/new_instance.py` command and JSON payload for the

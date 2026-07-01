@@ -1,0 +1,23 @@
+{
+  "idempotency_key": "Codex:TASK-0222:remediation-delivery:20260701T003000Z",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0222",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:task0222:remediation-deliver:status"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260701-Codex-TASK-0222-remediation",
+        "task_id": "TASK-0222",
+        "owner": "Codex",
+        "updated_at": "2026-07-01T00:30:00Z",
+        "idempotency_key": "codex:task0222:remediation-deliver:release"
+      }
+    }
+  ]
+}
