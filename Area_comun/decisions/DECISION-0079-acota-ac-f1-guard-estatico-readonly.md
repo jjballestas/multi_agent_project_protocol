@@ -54,3 +54,22 @@ Se **acota formalmente el AC F1** de TASK-0227 asi:
 - Documenta la frontera para futuras instancias: el read-only del panel es una **propiedad del backend**, no del
   lint del front; el lint es complemento.
 - Neutralidad de dominio intacta: esta decision es `scope: product` (Zeus-Aegis), no toca el nucleo del protocolo.
+
+## Amendment 2026-07-01 (operador GO tras 6 rondas) - FRONTERA FINAL, familia CERRADA
+
+Tras seis rondas de revision adversarial (rem-1..rem-5), cada una hallando una nueva forma sintactica de la
+misma clase (inline, shorthand, computed, typed const, y ahora claves string-literal `"method"`/`"url"`), se
+**cierra formalmente y de forma DEFINITIVA** el alcance del guard estatico F1:
+
+- **EN alcance (el guard DEBE atrapar): claves literales `method`/`url` en TODA su forma literal** -- identificador
+  sin comillas (`method:`), string literal con comillas (`"method":`, `'method':`) y clave computada literal
+  (`['method']`) -- dentro de un objeto de opciones inline, `const` local (tipado o no), `new Request(...)`,
+  `axios(...)`, `axios.<verbo>()` y `axios.request(url, cfg)`. rem-6 debe cerrar la clase de claves con comillas.
+- **FUERA de alcance, DEFINITIVO (no habra mas rondas de guard):** cualquier construccion que requiera analisis
+  de flujo de datos o resolucion dinamica -- `method`/`url` desde variable no rastreable, alias multinivel
+  (`const b = opts; fetch(url, b)`), claves template/computadas dinamicas, helpers opacos. Estas quedan cubiertas
+  por el **endpoint backend read-only** (rechazo estructural, test verde) + code review.
+
+Racional: el riesgo residual es NULO (el backend rechaza toda escritura con independencia del lint); las formas de
+clave literal son un conjunto finito y decidible que rem-6 completa; lo dinamico es indecidible y su persecucion es
+ROI negativo. **Con el GO de rem-6, TASK-0227 se cierra contra este AC final y NO hay rem-7.**
