@@ -128,6 +128,54 @@
             "priority": "high",
             "status": "in_review",
             "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
+        },
+        {
+            "id": "TASK-0228",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
+        },
+        {
+            "id": "TASK-0229",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
+        },
+        {
+            "id": "TASK-0230",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS2] Bootstrapper: auto-instalacion + ciclo de vida (gateway+backend+config) en Electron main"
+        },
+        {
+            "id": "TASK-0231",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS4] Backend de modelos por defecto (D3) + bloqueo PII + spike peones (repo sandbox aparte)"
+        },
+        {
+            "id": "TASK-0232",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets"
+        },
+        {
+            "id": "TASK-0234",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "low",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
         }
     ],
     "view": "task_index.slim"

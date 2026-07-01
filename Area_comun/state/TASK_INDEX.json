@@ -3517,6 +3517,146 @@
             "type": "build"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0228-reqzeus-ws5-alta-analista-nova.md",
+            "id": "TASK-0228",
+            "linked_decisions": [
+                "DECISION-0072",
+                "DECISION-0073",
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+            "id": "TASK-0229",
+            "linked_decisions": [
+                "DECISION-0076",
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+            "id": "TASK-0230",
+            "linked_decisions": [
+                "DECISION-0074",
+                "DECISION-0075",
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS2] Bootstrapper: auto-instalacion + ciclo de vida (gateway+backend+config) en Electron main",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0231-reqzeus-ws4-backend-modelos-peones.md",
+            "id": "TASK-0231",
+            "linked_decisions": [
+                "DECISION-0074",
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS4] Backend de modelos por defecto (D3) + bloqueo PII + spike peones (repo sandbox aparte)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0232-reqzeus-ws35-instalador.md",
+            "id": "TASK-0232",
+            "linked_decisions": [
+                "DECISION-0075",
+                "DECISION-0076",
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md",
+            "id": "TASK-0234",
+            "linked_decisions": [
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "low",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte",
+            "type": "docs"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

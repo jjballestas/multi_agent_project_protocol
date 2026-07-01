@@ -12681,6 +12681,33 @@
             "updated_at": "2026-06-30T11:59:07Z"
         },
         {
+            "claim_id": "CLAIM-20260630-reqzeus-adopcion-backlog-arquitecto",
+            "expires_at": "2026-07-01T06:00:00Z",
+            "notes": "Adopcion REQ-ZEUS-001 (DECISION-0077) + backlog TASK-0228..0234.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-reqzeus-adopcion-backlog-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0077-reqzeus-adopcion-meta-producto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0228",
+                "Area_comun/tasks/TASK-0228-reqzeus-ws5-alta-analista-nova.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0230",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0231",
+                "Area_comun/tasks/TASK-0231-reqzeus-ws4-backend-modelos-peones.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0232",
+                "Area_comun/tasks/TASK-0232-reqzeus-ws35-instalador.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md"
+            ],
+            "started_at": "2026-07-01T00:34:13Z",
+            "status": "released",
+            "task_id": "REQ-ZEUS-001",
+            "updated_at": "2026-07-01T00:34:13Z"
+        },
+        {
             "claim_id": "CLAIM-20260630-reqzeus-d1d5-decisions-arquitecto",
             "expires_at": "2026-06-30T22:00:00Z",
             "notes": "Registro D1-D5 como DECISION-0072..0076 (scope product) por directiva OPS-115242Z.",

@@ -1075,6 +1075,42 @@
             "title": "Zeus-Aegis: npm test verde (timeout governance-readonly + boundary F1/submit_intent)"
         },
         {
+            "id": "TASK-0228",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
+        },
+        {
+            "id": "TASK-0229",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
+        },
+        {
+            "id": "TASK-0230",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS2] Bootstrapper: auto-instalacion + ciclo de vida (gateway+backend+config) en Electron main"
+        },
+        {
+            "id": "TASK-0231",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS4] Backend de modelos por defecto (D3) + bloqueo PII + spike peones (repo sandbox aparte)"
+        },
+        {
+            "id": "TASK-0232",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets"
+        },
+        {
+            "id": "TASK-0234",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
@@ -1167,7 +1203,8 @@
         "DECISION-0073",
         "DECISION-0074",
         "DECISION-0075",
-        "DECISION-0076"
+        "DECISION-0076",
+        "DECISION-0077"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",
