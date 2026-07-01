@@ -12681,6 +12681,25 @@
             "updated_at": "2026-06-30T11:59:07Z"
         },
         {
+            "claim_id": "CLAIM-20260630-reqzeus-d1d5-decisions-arquitecto",
+            "expires_at": "2026-06-30T22:00:00Z",
+            "notes": "Registro D1-D5 como DECISION-0072..0076 (scope product) por directiva OPS-115242Z.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260630-reqzeus-d1d5-decisions-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0072-reqzeus-d1-gobernanza-tiered.md",
+                "Area_comun/decisions/DECISION-0073-reqzeus-d2-una-instancia-por-proyecto.md",
+                "Area_comun/decisions/DECISION-0074-reqzeus-d3-backend-modelos-hibrido.md",
+                "Area_comun/decisions/DECISION-0075-reqzeus-d4-hermes-agent-mit.md",
+                "Area_comun/decisions/DECISION-0076-reqzeus-d5-rebranding-superficial.md"
+            ],
+            "started_at": "2026-07-01T00:26:56Z",
+            "status": "released",
+            "task_id": "REQ-ZEUS-001",
+            "updated_at": "2026-07-01T00:26:56Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
