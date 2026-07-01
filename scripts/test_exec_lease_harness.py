@@ -58,6 +58,34 @@ def test_dead_process_cleans_only() -> None:
         assert decision["reason"] == "process_dead"
 
 
+def test_kill_mode_cleanup_only_removes_lock_and_lease() -> None:
+    with make_root() as tmp:
+        root = Path(tmp)
+        lease_path = root / ".protocol-tmp/codex_mailbox_cron/codex_mailbox_cron.exec-lease.json"
+        lock_path = root / ".protocol-tmp/codex_mailbox_cron/codex_mailbox_cron.lock"
+        write_json(lease_path, base_lease())
+        lock_path.write_text("locked\n", encoding="ascii")
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/sweep_cron_zombies.py"),
+                "--root",
+                str(root),
+                "--owner",
+                IMPLEMENTER,
+                "--kill",
+            ],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert proc.returncode == 0, proc.stderr + proc.stdout
+        output = json.loads(proc.stdout)
+        assert output["decisions"][0]["action"] == "cleanup_only"
+        assert not lock_path.exists()
+        assert not lease_path.exists()
+
+
 def test_owner_and_checker_exclusions() -> None:
     with make_root() as tmp:
         root = Path(tmp)
@@ -91,12 +119,24 @@ def test_harnesses_contain_required_exec_lease_contract() -> None:
         assert "finally" in text
 
 
+def test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup() -> None:
+    for rel in (f"personal/{IMPLEMENTER}/codex_mailbox_cron.ps1", f"personal/{REVIEWER}/analista_mailbox_cron.ps1"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        start = text.index("function Clear-StaleCronLockIfSafe")
+        end = text.index("function Stop-ExpiredLeaseProcess", start)
+        body = text[start:end]
+        assert body.index("Test-LeaseProcessMatches") < body.index("[DateTime]::Parse")
+        assert "pre_deadline" in body
+
+
 def main() -> int:
     tests = [
         test_dead_process_cleans_only,
+        test_kill_mode_cleanup_only_removes_lock_and_lease,
         test_owner_and_checker_exclusions,
         test_dry_run_is_default,
         test_harnesses_contain_required_exec_lease_contract,
+        test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup,
     ]
     for test in tests:
         test()

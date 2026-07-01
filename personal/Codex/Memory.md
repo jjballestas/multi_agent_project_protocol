@@ -4,6 +4,20 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0235 remediation redelivery completed in the protocol repo. The cron harness self-heal now removes lock+lease
+  as soon as the leased PID no longer matches by PID+start-time, even before deadline, while still leaving a matching
+  live process alone. `scripts/sweep_cron_zombies.py --kill` now materializes `cleanup_only` by deleting lock+lease
+  after recheck under the sweeper lock, or exits non-zero if cleanup cannot be proven. Added regression coverage for
+  both NO-GO slips in `scripts/test_exec_lease_harness.py`. Runtime delivery moved TASK-0235 `in_progress ->
+  in_review` and released `CLAIM-20260701-Codex-TASK-0235-remediation` at seq 2917-2918. Evidence: py_compile PASS;
+  PowerShell parser PASS for Codex and Analista cron harnesses; `python scripts/test_exec_lease_harness.py` PASS 6
+  tests; `git diff --check` PASS; encoding PASS; neutrality command exit 0; validator OK; drift false /
+  byte-identical `up_to_seq=2918`. Handoff:
+  `Area_comun/handoffs/HANDOFF-TASK-0235-codex-to-arquitecto-2.md`; mailbox:
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0235-remediation-in-review.md`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0235 is protocol cron infrastructure. The
+  consumed Arquitecto ACTION remains open because `mailbox_archive` requires orchestrator capability for Codex; the
+  response message is ledger-backed.
 - TASK-0227 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0227:done-flip-tx` acquired and released `CLAIM-20260701-Codex-TASK-0227-done-flip` and moved
   TASK-0227 `review_approved -> done` at seq 2910-2912. Evidence after the flip: encoding OK, neutrality command

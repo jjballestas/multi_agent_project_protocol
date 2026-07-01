@@ -122,16 +122,14 @@ function Clear-StaleCronLockIfSafe {
     }
     try {
         $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-        $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
-        if ([DateTime]::UtcNow -le $deadline) {
-            return
-        }
         if (Test-LeaseProcessMatches -Lease $lease) {
             return
         }
+        $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
         Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
-        Write-Log "SELF_HEAL_STALE_LOCK owner=Analista pid=$($lease.pid) message=$($lease.task_or_msg_id)"
+        $deadlineState = if ([DateTime]::UtcNow -le $deadline) { "pre_deadline" } else { "expired" }
+        Write-Log "SELF_HEAL_STALE_LOCK owner=Analista pid=$($lease.pid) message=$($lease.task_or_msg_id) state=$deadlineState"
     } catch {
         Write-Log "SELF_HEAL_FAIL error=$($_.Exception.Message)"
     }

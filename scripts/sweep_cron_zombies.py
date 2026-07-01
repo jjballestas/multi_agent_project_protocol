@@ -131,6 +131,21 @@ def validate_after_kill(root: Path) -> dict[str, int]:
     return {name: run(cmd, root).returncode for name, cmd in commands.items()}
 
 
+def lock_path_for_lease(lease_path: Path) -> Path:
+    name = lease_path.name.replace(".exec-lease.json", ".lock")
+    return lease_path.with_name(name)
+
+
+def cleanup_dead_lease(lease_path: Path) -> list[str]:
+    removed: list[str] = []
+    for path in (lock_path_for_lease(lease_path), lease_path):
+        if not path.exists():
+            continue
+        path.unlink()
+        removed.append(str(path))
+    return removed
+
+
 def decision_for_lease(root: Path, lease_path: Path, target_owner: str, checker_owner: str) -> dict:
     lease = json.loads(lease_path.read_text(encoding="utf-8-sig"))
     result = {
@@ -188,8 +203,28 @@ def main() -> int:
     killed = []
     with global_lock(root):
         decisions = [decision_for_lease(root, path, args.owner, args.checker_owner) for path in lease_paths]
+        cleaned = []
+        cleanup_errors = []
         if args.kill:
             for decision in decisions:
+                if decision["action"] == "cleanup_only":
+                    refreshed = decision_for_lease(root, Path(decision["lease"]), args.owner, args.checker_owner)
+                    if refreshed["action"] != "cleanup_only":
+                        decision.update({"action": "skip", "reason": "recheck_changed:" + refreshed["reason"]})
+                        continue
+                    try:
+                        removed = cleanup_dead_lease(Path(decision["lease"]))
+                    except OSError as exc:
+                        decision.update({"action": "error", "reason": f"cleanup_failed:{exc}"})
+                        cleanup_errors.append(str(exc))
+                        continue
+                    if not removed:
+                        decision.update({"action": "error", "reason": "cleanup_failed:no_files_removed"})
+                        cleanup_errors.append(str(decision["lease"]))
+                        continue
+                    decision["removed"] = removed
+                    cleaned.extend(removed)
+                    continue
                 if decision["action"] != "kill":
                     continue
                 refreshed = decision_for_lease(root, Path(decision["lease"]), args.owner, args.checker_owner)
@@ -200,9 +235,19 @@ def main() -> int:
                 killed.append(decision["pid"])
             post = validate_after_kill(root) if killed else {}
         else:
+            cleaned = []
+            cleanup_errors = []
             post = {}
-    output = {"mode": "kill" if args.kill else "dry-run", "decisions": decisions, "killed": killed, "post_validate": post}
+    output = {
+        "mode": "kill" if args.kill else "dry-run",
+        "decisions": decisions,
+        "killed": killed,
+        "cleaned": cleaned,
+        "post_validate": post,
+    }
     print(json.dumps(output, indent=2, ensure_ascii=False))
+    if cleanup_errors:
+        return 3
     if killed and any(code != 0 for code in post.values()):
         return 2
     return 0
