@@ -1077,7 +1077,7 @@
         {
             "id": "TASK-0228",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
         },
         {

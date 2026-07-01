@@ -2,7 +2,7 @@
 task_id: TASK-0228
 title: "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

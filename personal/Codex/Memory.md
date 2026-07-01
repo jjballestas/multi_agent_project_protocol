@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 remediation product commit.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0228 done-flip.
 
 ## Latest Session Note
 
+- TASK-0228 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0228:done-flip-tx` acquired and released `CLAIM-20260701-Codex-TASK-0228-done-flip` and moved
+  TASK-0228 `review_approved -> done` at seq 2846-2848. The first submit call timed out while still running
+  after seq 2847; after waiting for it to finish, it materialized seq 2848 and wrote
+  `personal/Codex/task0228_done_flip_result.json` with drift false. Evidence after the flip: encoding OK,
+  neutrality command exit 0, validator OK, drift false / byte-identical `up_to_seq=2848`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched.
 - TASK-0228 implementation is delivered to `in_review` in the protocol commit for this delivery. `scripts/new_instance.py` now requires `--analyst` and
   renders four participants (`architect`, `implementer`, `analyst`, `human_owner`) into generated instances;
   templates now include the analyst in `protocol.config`, `PROJECT_STATE.agents`, `TASK_INDEX.legend.owner`, tool
