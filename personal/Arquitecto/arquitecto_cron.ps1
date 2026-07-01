@@ -19,9 +19,9 @@ $LogPath = Join-Path $RuntimeDir "arquitecto_cron.log"
 $PidPath = Join-Path $RuntimeDir "arquitecto_cron.pid"
 $StopPath = Join-Path $RuntimeDir "arquitecto_cron.stop"
 $LockPath = Join-Path $RuntimeDir "arquitecto_cron.lock"
+$LeasePath = Join-Path $RuntimeDir "arquitecto_cron.exec-lease.json"
 $SeenPath = Join-Path $RuntimeDir "arquitecto_cron.seen.json"
 $PromptSourcePath = Join-Path $PSScriptRoot "arquitecto_cron.prompt.txt"
-$PromptRuntimePath = Join-Path $RuntimeDir "arquitecto_cron.prompt.txt"
 $RunsDir = Join-Path $RuntimeDir "runs"
 $StartedAtUtc = [DateTime]::UtcNow
 $NoOperatorRounds = 0
@@ -41,6 +41,164 @@ function Write-Log {
     } else {
         Write-Utf8NoBom -Path $LogPath -Content $line
     }
+}
+
+function Get-ProcessStartTimeUtc {
+    param([System.Diagnostics.Process]$Process)
+    try {
+        return $Process.StartTime.ToUniversalTime().ToString("o")
+    } catch {
+        return ""
+    }
+}
+
+function Get-CmdlineHash {
+    param([string]$Text)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+        return ([System.BitConverter]::ToString($sha.ComputeHash($bytes)) -replace "-", "").ToLowerInvariant()
+    } finally {
+        $sha.Dispose()
+    }
+}
+
+function Write-ExecLease {
+    param(
+        [System.Diagnostics.Process]$Process,
+        [string]$MessageName,
+        [string[]]$Arguments,
+        [DateTime]$DeadlineUtc
+    )
+    $cmdline = "$($Process.StartInfo.FileName) $($Arguments -join ' ')"
+    $lease = [ordered]@{
+        schema_version = 1
+        owner = "Arquitecto"
+        task_or_msg_id = $MessageName
+        pid = $Process.Id
+        process_start_time_utc = Get-ProcessStartTimeUtc -Process $Process
+        cmdline_hash = Get-CmdlineHash -Text $cmdline
+        cmdline = $cmdline
+        started_at = (Get-Date).ToUniversalTime().ToString("o")
+        deadline = $DeadlineUtc.ToString("o")
+        heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
+        shutdown_policy = "stop_after_current_turn"
+    }
+    Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+}
+
+function Update-ExecLeaseHeartbeat {
+    if (-not (Test-Path -LiteralPath $LeasePath)) {
+        return
+    }
+    try {
+        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $lease.heartbeat_monotonic = [System.Diagnostics.Stopwatch]::GetTimestamp()
+        Write-Utf8NoBom -Path $LeasePath -Content (($lease | ConvertTo-Json -Depth 8) + "`n")
+    } catch {
+        Write-Log "LEASE_HEARTBEAT_FAIL error=$($_.Exception.Message)"
+    }
+}
+
+function Test-LeaseProcessMatches {
+    param($Lease)
+    if (-not $Lease -or -not $Lease.pid -or -not $Lease.process_start_time_utc) {
+        return $false
+    }
+    try {
+        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction Stop
+        $started = $process.StartTime.ToUniversalTime().ToString("o")
+        return ($started -eq [string]$Lease.process_start_time_utc)
+    } catch {
+        return $false
+    }
+}
+
+function Stop-LeaseProcessTree {
+    param($Lease, [string]$Reason)
+    if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
+        return $false
+    }
+    $cmdline = [string]$Lease.cmdline
+    if ($cmdline -match "(?i)(submit_intent|git(\.exe)?\s|npm(\.cmd)?\s+test|vitest|validate_collaboration_state)") {
+        Write-Log "TREE_KILL_DENY pid=$($Lease.pid) reason=deny_cmdline message=$($Lease.task_or_msg_id)"
+        return $false
+    }
+    try {
+        Write-Log "TREE_KILL pid=$($Lease.pid) reason=$Reason message=$($Lease.task_or_msg_id)"
+        $taskkill = Start-Process -FilePath "taskkill.exe" -ArgumentList @("/PID", [string]$Lease.pid, "/T", "/F") -WindowStyle Hidden -Wait -PassThru
+        return ($taskkill.ExitCode -eq 0)
+    } catch {
+        Write-Log "TREE_KILL_FAIL pid=$($Lease.pid) error=$($_.Exception.Message)"
+        return $false
+    }
+}
+
+function Clear-StaleCronLockIfSafe {
+    if (-not (Test-Path -LiteralPath $LockPath)) {
+        return
+    }
+    if (-not (Test-Path -LiteralPath $LeasePath)) {
+        return
+    }
+    try {
+        $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $matches = Test-LeaseProcessMatches -Lease $lease
+        $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
+        if ($matches) {
+            if ([DateTime]::UtcNow -le $deadline) {
+                return
+            }
+            if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) {
+                return
+            }
+        }
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
+        $deadlineState = if ([DateTime]::UtcNow -le $deadline) { "pre_deadline" } else { "expired" }
+        Write-Log "SELF_HEAL_STALE_LOCK owner=Arquitecto pid=$($lease.pid) message=$($lease.task_or_msg_id) state=$deadlineState"
+    } catch {
+        Write-Log "SELF_HEAL_FAIL error=$($_.Exception.Message)"
+    }
+}
+
+function Stop-ExpiredLeaseProcess {
+    param($Lease)
+    [void](Stop-LeaseProcessTree -Lease $Lease -Reason "deadline")
+}
+
+function Test-ExistingCronInstance {
+    if (-not (Test-Path -LiteralPath $PidPath)) {
+        return $false
+    }
+    try {
+        $pidText = (Get-Content -LiteralPath $PidPath -Raw -Encoding ASCII).Trim()
+        if (-not $pidText) {
+            return $false
+        }
+        $existing = Get-Process -Id ([int]$pidText) -ErrorAction Stop
+        if ($existing.Id -eq $PID) {
+            return $false
+        }
+        $pidInfoPath = "$PidPath.json"
+        if (Test-Path -LiteralPath $pidInfoPath) {
+            $info = Get-Content -LiteralPath $pidInfoPath -Raw -Encoding UTF8 | ConvertFrom-Json
+            $started = $existing.StartTime.ToUniversalTime().ToString("o")
+            return ($started -eq [string]$info.process_start_time_utc)
+        }
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+function Write-CronPid {
+    Set-Content -LiteralPath $PidPath -Value $PID -Encoding ASCII
+    $info = [ordered]@{
+        pid = $PID
+        process_start_time_utc = (Get-Process -Id $PID).StartTime.ToUniversalTime().ToString("o")
+    }
+    Write-Utf8NoBom -Path "$PidPath.json" -Content (($info | ConvertTo-Json -Depth 4) + "`n")
 }
 
 function Get-Field {
@@ -167,8 +325,7 @@ function Test-OperatorStopOrder {
         $content = Get-Content -LiteralPath $message.FullName -Raw -Encoding UTF8
         $requested = Get-Field -Content $content -Name "requested_action"
         $summary = Get-Field -Content $content -Name "one_line_summary"
-        $text = "$summary`n$requested`n$content"
-        if ($text -match "(?i)\b(detener|deten|parar|para|stop|standdown|stand-down)\b.*\b(cron|monitor|monitoreo|Arquitecto)\b") {
+        if (($requested.Trim() -ceq "STOP_JOB") -or ($summary.Trim() -ceq "STOP_JOB")) {
             return $true
         }
     }
@@ -299,6 +456,7 @@ function Invoke-ArquitectoCycle {
     $stamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
     $stdoutPath = Join-Path $RunsDir "$stamp-arquitecto.out.log"
     $stderrPath = Join-Path $RunsDir "$stamp-arquitecto.err.log"
+    $promptRuntimePath = Join-Path $RunsDir "$stamp-arquitecto.prompt.txt"
     $processable = @(Get-ProcessableArquitectoMessages | Select-Object -ExpandProperty Name)
     $snapshot = Get-WsSnapshot
     $cyclePrompt = @"
@@ -310,7 +468,7 @@ $($processable -join "`n")
 SNAPSHOT DRY-READ DEL HARNESS:
 $($snapshot | ConvertTo-Json -Depth 8)
 "@
-    Write-Utf8NoBom -Path $PromptRuntimePath -Content $cyclePrompt
+    Write-Utf8NoBom -Path $promptRuntimePath -Content $cyclePrompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp arquitecto-cycle`n"
 
     try {
@@ -327,9 +485,19 @@ $($snapshot | ConvertTo-Json -Depth 8)
         } else {
             $execArgs = @()
         }
-        $process = Start-Process -FilePath $agentPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $PromptRuntimePath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $deadlineUtc = [DateTime]::UtcNow.AddSeconds($IntervalSeconds)
+        $process = Start-Process -FilePath $agentPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptRuntimePath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        Write-ExecLease -Process $process -MessageName "arquitecto-cycle" -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id)"
-        $process.WaitForExit()
+        while (-not $process.WaitForExit(1000)) {
+            Update-ExecLeaseHeartbeat
+            if ([DateTime]::UtcNow -gt $deadlineUtc) {
+                $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
+                Stop-ExpiredLeaseProcess -Lease $lease
+                $process.WaitForExit()
+                break
+            }
+        }
         Write-Log "EXEC_EXIT code=$($process.ExitCode)"
         $seen = Read-Seen
         foreach ($message in Get-ProcessableArquitectoMessages) {
@@ -341,6 +509,9 @@ $($snapshot | ConvertTo-Json -Depth 8)
     } finally {
         if (Test-Path -LiteralPath $LockPath) {
             Remove-Item -LiteralPath $LockPath -Force
+        }
+        if (Test-Path -LiteralPath $LeasePath) {
+            Remove-Item -LiteralPath $LeasePath -Force
         }
     }
 }
@@ -366,7 +537,12 @@ if ($DryRunOnce) {
     exit 0
 }
 
-Set-Content -LiteralPath $PidPath -Value $PID -Encoding ASCII
+Clear-StaleCronLockIfSafe
+if (Test-ExistingCronInstance) {
+    Write-Log "INSTANCE_ALREADY_RUNNING pid_file=$PidPath; exiting."
+    exit 0
+}
+Write-CronPid
 if (Test-Path -LiteralPath $StopPath) {
     Remove-Item -LiteralPath $StopPath -Force
 }

@@ -4,6 +4,17 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0236 delivered to `in_review` in the current protocol delivery commit. The three cron
+  harnesses now use per-exec prompt files under `runs/`, enforce single live instance by PID + process start-time,
+  clean dead-PID stale locks before deadline, tree-kill matching expired leases with `taskkill /PID /T /F` while
+  denying protected command lines, and require exact `STOP_JOB` equality instead of contains matching. Arquitecto
+  cron now has the same exec-lease lifecycle as Codex/Analista. Evidence: `py_compile` PASS; PowerShell parser PASS
+  for Codex, Analista and Arquitecto harnesses; `python scripts/test_exec_lease_harness.py` PASS 9 tests; `git diff
+  --check` PASS for touched files; encoding PASS; neutrality command exit 0; validator OK; drift false /
+  byte-identical `up_to_seq=3041`. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0236-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0236 is protocol cron infrastructure.
 - TASK-0235 remediation redelivery completed in the protocol repo. The cron harness self-heal now removes lock+lease
   as soon as the leased PID no longer matches by PID+start-time, even before deadline, while still leaving a matching
   live process alone. `scripts/sweep_cron_zombies.py --kill` now materializes `cleanup_only` by deleting lock+lease

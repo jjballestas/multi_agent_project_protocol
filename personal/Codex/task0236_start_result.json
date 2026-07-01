@@ -1,0 +1,193 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "514c1b1339dfb0105af932d50d55856fbe0340ee387c8558a3255fcf3b5010c1",
+        "replay_hash": "514c1b1339dfb0105af932d50d55856fbe0340ee387c8558a3255fcf3b5010c1",
+        "up_to_seq": 3037
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "H+4Vnd3ZvBmH1Y9aSNhOMAdOiWm5W4wGHH3gdcbv3TBBjNtqtyl8FKviy54+Qt1ySVkHQlY4PklujKwRWNT2BA=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 5,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "95e4ac97d61e591c66aa5a1d6ef8b764f73f94224f1ca86dc5eef71349cf616d"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:c7d7e1815795d518c11f519b7f818dc0de68693c805bf81c5474abfbc720c538",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T02:10:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0236:start-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+                                "expires_at": "2026-07-03T02:10:00Z",
+                                "notes": "Implement TASK-0236 cron harness remediation: per-exec prompts, tree-kill deadline cleanup, single-instance guard, orphan lease enforcement, and exact stop-order matching.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                                    "personal/Codex/codex_mailbox_cron.ps1",
+                                    "personal/Analista/analista_mailbox_cron.ps1",
+                                    "personal/Arquitecto/arquitecto_cron.ps1",
+                                    "scripts/sweep_cron_zombies.py",
+                                    "scripts/test_exec_lease_harness.py",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T02:10:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0236",
+                                "updated_at": "2026-07-02T02:10:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0236"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "9cda75005dab61bc01851c9cf583bd5c0754f592ecf9cd2291ee5a23aec4ebea",
+            "seq": 3036,
+            "ts": "2026-07-02T02:10:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "6xxOuSDqchXqlsUIxSodyqUHhCBvPp+1juW/Pu+EE4rQ0WQZ0ha14CsORDv/xj0qONVI/CVmfRs5xhyNQ4eeBg=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 6,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "a64f1b110182c57c960a754f718543d734634266ebc646a74207a916d6dc19ee"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:d564fd0345c9ae6be8dea24223997e5ec309b91c848e3d3d58254e84a8e01da2",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T02:10:00Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0236:start-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "ready",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "c77740f14bfb897d585ee21859f8332df80956f17e97f5e0b275b2073538051c",
+            "seq": 3037,
+            "ts": "2026-07-02T02:10:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+                "expires_at": "2026-07-03T02:10:00Z",
+                "notes": "Implement TASK-0236 cron harness remediation: per-exec prompts, tree-kill deadline cleanup, single-instance guard, orphan lease enforcement, and exact stop-order matching.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                    "personal/Codex/codex_mailbox_cron.ps1",
+                    "personal/Analista/analista_mailbox_cron.ps1",
+                    "personal/Arquitecto/arquitecto_cron.ps1",
+                    "scripts/sweep_cron_zombies.py",
+                    "scripts/test_exec_lease_harness.py",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T02:10:00Z",
+                "status": "active",
+                "task_id": "TASK-0236",
+                "updated_at": "2026-07-02T02:10:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0236"
+        },
+        {
+            "from": "ready",
+            "kind": "task_status",
+            "task_id": "TASK-0236",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "b82573e34fc2eb36f420d87292dc2b8a8a52bc5ba1ab0105ea840c7b604d62d2",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3037
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3037
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:c7d7e1815795d518c11f519b7f818dc0de68693c805bf81c5474abfbc720c538",
+            "intent:Codex:task_status:d564fd0345c9ae6be8dea24223997e5ec309b91c848e3d3d58254e84a8e01da2"
+        ],
+        "idempotency_key": "codex:task0236:start-tx",
+        "intent_count": 2
+    }
+}

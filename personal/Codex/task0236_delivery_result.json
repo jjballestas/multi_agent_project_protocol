@@ -1,0 +1,191 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "186f820173b78f771d8933f9e9c5dab0032299cfdaae9e4b3b6f39a6a78cbf23",
+        "replay_hash": "186f820173b78f771d8933f9e9c5dab0032299cfdaae9e4b3b6f39a6a78cbf23",
+        "up_to_seq": 3041
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "0D9YaRhjQYGfTf9N4D2uY1HJTy4mRsgonMlhKUh2qb+km2mdq+JZ2Zt7zH6QYjgb2imG0MQ3fbDeahV4dI+BBw=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 8,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "a45a146ad6f72ccf66503eb5d1c26eca9fb2889a174e151b6608ee090666fd33"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:29ae40847cafc366050319e21d6dae57624b7644675ff64574ee01c25b694730",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T02:55:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:delivery-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "in_review"
+                    }
+                }
+            },
+            "prev_hash": "06e3d72be5b33691a4ad9046002f04eda9d183f685df1e176fd2225aa4f04213",
+            "seq": 3039,
+            "ts": "2026-07-02T02:55:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "BuoB9dhD4tv7+mR/RUYR5WPmE9eAjPzyUPw46YUuPCRnCwDV4aIsyihRcuxszBvN0Ac7dyJQhbWc0i4DSE0DBw=="
+            },
+            "aggregate_id": "CLAIM-20260702-Codex-TASK-0236",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "f647f0684dca053cf1eeb03e7a0ccbc5eb25cd234a387c5036be37ad3832be9c"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:528c0826150deb4a6ecc007edc1395488acf05532b1f286f10baf566cd71fcec",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "timestamp": "2026-07-02T02:55:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:delivery-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "25cc470505377ffc65cd03c76500abd4668c3dac48832c78252edea445a9f6cc",
+            "seq": 3040,
+            "ts": "2026-07-02T02:55:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "PCmaUxqEWUKmx3i0MCktLkbLiIYq4M/CcqFV09IC4ruzdwTJt+f24O/xSjVoVc+jsmNkicro9DuzaIq9sSQJCA=="
+            },
+            "aggregate_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "6952b0f6502a66bb48a859980cae07badcad7ea03cc8a27d2ac0d9163090abd3"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:a709dc2dd10580a9e3440ee7055cadde4c3993a43f1a4d73685525784066ebd6",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "timestamp": "2026-07-02T02:55:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:delivery-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "b3e90b46c86a8d53348c195c269ab88a25166180950fd62f9392702b4c855afa",
+            "seq": 3041,
+            "ts": "2026-07-02T02:55:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "from": "in_progress",
+            "kind": "task_status",
+            "task_id": "TASK-0236",
+            "to": "in_review"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+            "kind": "claim",
+            "op": "release"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "c70e853d49d1ea4243027eeb5ab7220d36d087263d239b3cf35fe396b1052510",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3041
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3041
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:task_status:29ae40847cafc366050319e21d6dae57624b7644675ff64574ee01c25b694730",
+            "intent:Codex:claim:528c0826150deb4a6ecc007edc1395488acf05532b1f286f10baf566cd71fcec",
+            "intent:Codex:claim:a709dc2dd10580a9e3440ee7055cadde4c3993a43f1a4d73685525784066ebd6"
+        ],
+        "idempotency_key": "codex:task0236:delivery-tx",
+        "intent_count": 3
+    }
+}

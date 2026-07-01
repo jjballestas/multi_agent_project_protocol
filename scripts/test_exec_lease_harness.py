@@ -106,27 +106,62 @@ def test_dry_run_is_default() -> None:
     assert json.loads(proc.stdout)["mode"] == "dry-run"
 
 
+HARNESS_RELS = (
+    f"personal/{IMPLEMENTER}/codex_mailbox_cron.ps1",
+    f"personal/{REVIEWER}/analista_mailbox_cron.ps1",
+    f"personal/{CHECKER}/arquitecto_cron.ps1",
+)
+
+
 def test_harnesses_contain_required_exec_lease_contract() -> None:
-    for rel in (f"personal/{IMPLEMENTER}/codex_mailbox_cron.ps1", f"personal/{REVIEWER}/analista_mailbox_cron.ps1"):
+    for rel in HARNESS_RELS:
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert "exec-lease.json" in text
         assert "process_start_time_utc" in text
         assert "cmdline_hash" in text
         assert "heartbeat_monotonic" in text
         assert "Clear-StaleCronLockIfSafe" in text
-        assert "Stop marker detected; waiting for current exec" in text
+        if "arquitecto_cron" not in rel:
+            assert "Stop marker detected; waiting for current exec" in text
         assert "Stop-ExpiredLeaseProcess" in text
         assert "finally" in text
 
 
 def test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup() -> None:
-    for rel in (f"personal/{IMPLEMENTER}/codex_mailbox_cron.ps1", f"personal/{REVIEWER}/analista_mailbox_cron.ps1"):
+    for rel in HARNESS_RELS:
         text = (ROOT / rel).read_text(encoding="utf-8")
         start = text.index("function Clear-StaleCronLockIfSafe")
         end = text.index("function Stop-ExpiredLeaseProcess", start)
         body = text[start:end]
         assert body.index("Test-LeaseProcessMatches") < body.index("[DateTime]::Parse")
         assert "pre_deadline" in body
+
+
+def test_harnesses_use_per_exec_prompt_files() -> None:
+    for rel in HARNESS_RELS:
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert '.prompt.txt"' not in text.split("function Invoke-", 1)[0].replace("arquitecto_cron.prompt.txt", "")
+        assert "Join-Path $RunsDir" in text and ".prompt.txt" in text
+        assert "-RedirectStandardInput $prompt" in text
+
+
+def test_harnesses_use_tree_kill_and_single_instance_guard() -> None:
+    for rel in HARNESS_RELS:
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert "taskkill.exe" in text
+        assert '"/T"' in text
+        assert '"/F"' in text
+        assert "Test-ExistingCronInstance" in text
+        assert "Write-CronPid" in text
+        assert "INSTANCE_ALREADY_RUNNING" in text
+
+
+def test_stop_order_requires_exact_line_not_contains() -> None:
+    for rel in HARNESS_RELS:
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert '-cmatch "\\bSTOP_JOB\\b"' not in text
+        assert "-match \"(?i)\\b(detener" not in text
+        assert '-ceq "STOP_JOB"' in text
 
 
 def main() -> int:
@@ -137,6 +172,9 @@ def main() -> int:
         test_dry_run_is_default,
         test_harnesses_contain_required_exec_lease_contract,
         test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup,
+        test_harnesses_use_per_exec_prompt_files,
+        test_harnesses_use_tree_kill_and_single_instance_guard,
+        test_stop_order_requires_exact_line_not_contains,
     ]
     for test in tests:
         test()

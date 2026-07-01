@@ -13566,9 +13566,26 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-02T02:10:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0236",
             "updated_at": "2026-07-02T02:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+            "expires_at": "2026-07-03T02:45:00Z",
+            "notes": "Prepare TASK-0236 delivery handoff and mailbox notification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0236-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T02:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0236",
+            "updated_at": "2026-07-02T02:45:00Z"
         },
         {
             "claim_id": "CLAIM-20260702-Codex-TASK-0237",

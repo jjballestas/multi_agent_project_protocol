@@ -1,0 +1,130 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "47c11b3f4e8e5201a1063c8ba10e08e1f71fd6893fd5ec37a0dc20f0908bc0e6",
+        "replay_hash": "47c11b3f4e8e5201a1063c8ba10e08e1f71fd6893fd5ec37a0dc20f0908bc0e6",
+        "up_to_seq": 3038
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "lz5F1PK90gzyGL0agOJlXP4Tx4UJmBxcNaGODAeRSEkQAO4apwGMOstBU7l5eLsMRq/uyzF5Q7u/TfIzh9C0CQ=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "9c9cb9c52957941258be15c29ed4d058f0a0bd2d937c69fb87e6e41fdfffaaae"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:2a71eb4cb1dda54b7e27502e922226357ef9dbad2de9b003b2d2a51d8ca6d54d",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T02:45:00Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:task0236:artifact-claim-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+                                "expires_at": "2026-07-03T02:45:00Z",
+                                "notes": "Prepare TASK-0236 delivery handoff and mailbox notification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-artifacts",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0236-codex-to-arquitecto-1.md",
+                                    "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T02:45:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0236",
+                                "updated_at": "2026-07-02T02:45:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0236"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "7ba42a54284695310806a264e1ce21d5422b3303dadf88b05658b8869432d271",
+            "seq": 3038,
+            "ts": "2026-07-02T02:45:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+                "expires_at": "2026-07-03T02:45:00Z",
+                "notes": "Prepare TASK-0236 delivery handoff and mailbox notification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-artifacts",
+                    "Area_comun/handoffs/HANDOFF-TASK-0236-codex-to-arquitecto-1.md",
+                    "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T02:45:00Z",
+                "status": "active",
+                "task_id": "TASK-0236",
+                "updated_at": "2026-07-02T02:45:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0236"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "7d178a0c532dcc52f12b14449fc07f1460c72ba92af64801dadd00efdeeeab2b",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3038
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3038
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:2a71eb4cb1dda54b7e27502e922226357ef9dbad2de9b003b2d2a51d8ca6d54d"
+        ],
+        "idempotency_key": "codex:task0236:artifact-claim-tx",
+        "intent_count": 1
+    }
+}

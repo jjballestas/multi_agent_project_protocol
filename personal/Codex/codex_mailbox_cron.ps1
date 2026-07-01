@@ -14,7 +14,6 @@ $PidPath = Join-Path $RuntimeDir "codex_mailbox_cron.pid"
 $StopPath = Join-Path $RuntimeDir "codex_mailbox_cron.stop"
 $LockPath = Join-Path $RuntimeDir "codex_mailbox_cron.lock"
 $LeasePath = Join-Path $RuntimeDir "codex_mailbox_cron.exec-lease.json"
-$PromptPath = Join-Path $RuntimeDir "codex_mailbox_cron.prompt.v3.txt"
 $SeenPath = Join-Path $RuntimeDir "codex_mailbox_cron.seen.json"
 $RunsDir = Join-Path $RuntimeDir "runs"
 $StartedAtUtc = [DateTime]::UtcNow
@@ -108,6 +107,26 @@ function Test-LeaseProcessMatches {
     }
 }
 
+function Stop-LeaseProcessTree {
+    param($Lease, [string]$Reason)
+    if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
+        return $false
+    }
+    $cmdline = [string]$Lease.cmdline
+    if ($cmdline -match "(?i)(submit_intent|git(\.exe)?\s|npm(\.cmd)?\s+test|vitest|validate_collaboration_state)") {
+        Write-Log "TREE_KILL_DENY pid=$($Lease.pid) reason=deny_cmdline message=$($Lease.task_or_msg_id)"
+        return $false
+    }
+    try {
+        Write-Log "TREE_KILL pid=$($Lease.pid) reason=$Reason message=$($Lease.task_or_msg_id)"
+        $taskkill = Start-Process -FilePath "taskkill.exe" -ArgumentList @("/PID", [string]$Lease.pid, "/T", "/F") -WindowStyle Hidden -Wait -PassThru
+        return ($taskkill.ExitCode -eq 0)
+    } catch {
+        Write-Log "TREE_KILL_FAIL pid=$($Lease.pid) error=$($_.Exception.Message)"
+        return $false
+    }
+}
+
 function Clear-StaleCronLockIfSafe {
     if (-not (Test-Path -LiteralPath $LockPath)) {
         return
@@ -117,10 +136,16 @@ function Clear-StaleCronLockIfSafe {
     }
     try {
         $lease = Get-Content -LiteralPath $LeasePath -Raw -Encoding UTF8 | ConvertFrom-Json
-        if (Test-LeaseProcessMatches -Lease $lease) {
-            return
-        }
+        $matches = Test-LeaseProcessMatches -Lease $lease
         $deadline = [DateTime]::Parse([string]$lease.deadline).ToUniversalTime()
+        if ($matches) {
+            if ([DateTime]::UtcNow -le $deadline) {
+                return
+            }
+            if (-not (Stop-LeaseProcessTree -Lease $lease -Reason "orphan_expired")) {
+                return
+            }
+        }
         Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
         Remove-Item -LiteralPath $LeasePath -Force -ErrorAction SilentlyContinue
         $deadlineState = if ([DateTime]::UtcNow -le $deadline) { "pre_deadline" } else { "expired" }
@@ -132,16 +157,41 @@ function Clear-StaleCronLockIfSafe {
 
 function Stop-ExpiredLeaseProcess {
     param($Lease)
-    if (-not (Test-LeaseProcessMatches -Lease $Lease)) {
-        return
+    [void](Stop-LeaseProcessTree -Lease $Lease -Reason "deadline")
+}
+
+function Test-ExistingCronInstance {
+    if (-not (Test-Path -LiteralPath $PidPath)) {
+        return $false
     }
     try {
-        $process = Get-Process -Id ([int]$Lease.pid) -ErrorAction Stop
-        Write-Log "DEADLINE_KILL pid=$($Lease.pid) message=$($Lease.task_or_msg_id)"
-        Stop-Process -Id $process.Id -Force -ErrorAction Stop
+        $pidText = (Get-Content -LiteralPath $PidPath -Raw -Encoding ASCII).Trim()
+        if (-not $pidText) {
+            return $false
+        }
+        $existing = Get-Process -Id ([int]$pidText) -ErrorAction Stop
+        if ($existing.Id -eq $PID) {
+            return $false
+        }
+        $pidInfoPath = "$PidPath.json"
+        if (Test-Path -LiteralPath $pidInfoPath) {
+            $info = Get-Content -LiteralPath $pidInfoPath -Raw -Encoding UTF8 | ConvertFrom-Json
+            $started = $existing.StartTime.ToUniversalTime().ToString("o")
+            return ($started -eq [string]$info.process_start_time_utc)
+        }
+        return $true
     } catch {
-        Write-Log "DEADLINE_KILL_FAIL pid=$($Lease.pid) error=$($_.Exception.Message)"
+        return $false
     }
+}
+
+function Write-CronPid {
+    Set-Content -LiteralPath $PidPath -Value $PID -Encoding ASCII
+    $info = [ordered]@{
+        pid = $PID
+        process_start_time_utc = (Get-Process -Id $PID).StartTime.ToUniversalTime().ToString("o")
+    }
+    Write-Utf8NoBom -Path "$PidPath.json" -Content (($info | ConvertTo-Json -Depth 4) + "`n")
 }
 
 function Get-Field {
@@ -269,8 +319,7 @@ function Test-ArquitectoStopOrder {
         $summary = Get-Field -Content $content -Name "one_line_summary"
         # DIRECTIVA operador: SOLO el token exacto STOP_JOB detiene al agente (sin ambiguedades).
         # Case-sensitive y solo en summary/requested_action (no en el body, para no tripear con menciones).
-        $text = "$summary`n$requested"
-        if ($text -cmatch "\bSTOP_JOB\b") {
+        if (($requested.Trim() -ceq "STOP_JOB") -or ($summary.Trim() -ceq "STOP_JOB")) {
             return $true
         }
     }
@@ -291,6 +340,7 @@ function Invoke-CodexForMessage {
     $safeName = [IO.Path]::GetFileNameWithoutExtension($Message.Name)
     $stdoutPath = Join-Path $RunsDir "$stamp-$safeName.out.log"
     $stderrPath = Join-Path $RunsDir "$stamp-$safeName.err.log"
+    $promptPath = Join-Path $RunsDir "$stamp-$safeName.prompt.txt"
     $messageRelative = $Message.FullName.Substring($Root.Length + 1).Replace("\", "/")
 
 $prompt = @"
@@ -316,7 +366,7 @@ Modo ejecutor obligatorio:
 6. Responder o mover a answered el GO/mensaje consumido solo despues de que el ledger respalde la entrega.
 7. Si no hay tarea ejecutable para Codex, no-op con cierre concreto. La parada a 7 rondas sin novedad sigue valida. No activar uso vivo ni cron nuevo sin GO explicito.
 "@
-    Write-Utf8NoBom -Path $PromptPath -Content $prompt
+    Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
 
     try {
@@ -332,7 +382,7 @@ Modo ejecutor obligatorio:
             "-"
         )
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
-        $process = Start-Process -FilePath $codexPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $PromptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $codexPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         while (-not $process.WaitForExit(1000)) {
@@ -368,7 +418,12 @@ Modo ejecutor obligatorio:
 
 New-Item -ItemType Directory -Force -Path $RuntimeDir | Out-Null
 New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
-Set-Content -LiteralPath $PidPath -Value $PID -Encoding ASCII
+Clear-StaleCronLockIfSafe
+if (Test-ExistingCronInstance) {
+    Write-Log "INSTANCE_ALREADY_RUNNING pid_file=$PidPath; exiting."
+    exit 0
+}
+Write-CronPid
 if (Test-Path -LiteralPath $StopPath) {
     Remove-Item -LiteralPath $StopPath -Force
 }

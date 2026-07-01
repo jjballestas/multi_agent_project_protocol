@@ -3732,7 +3732,7 @@
                 "TASK-0235"
             ],
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana",
             "type": "build"
         },

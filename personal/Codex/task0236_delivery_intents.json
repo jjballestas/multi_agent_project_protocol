@@ -1,0 +1,24 @@
+{
+  "idempotency_key": "codex:task0236:delivery-tx",
+  "intents": [
+    {
+      "type": "task_status",
+      "task_id": "TASK-0236",
+      "from": "in_progress",
+      "to": "in_review",
+      "idempotency_key": "codex:task0236:in-progress-to-in-review"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260702-Codex-TASK-0236",
+      "idempotency_key": "codex:task0236:release-main"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260702-Codex-TASK-0236-artifacts",
+      "idempotency_key": "codex:task0236:release-artifacts"
+    }
+  ]
+}
