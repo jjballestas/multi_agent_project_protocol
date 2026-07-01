@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0227 remediacion-6; NO-GO por axios const-local).
+> Ultima actualizacion: 2026-07-01 (TASK-0235 remediacion; OK/CERRABLE exec-lease).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0235 remediacion exec-lease (2026-07-01): OK/CERRABLE. Veredicto canonico en `8529cfe`
+  (`review(TASK-0235): Analista OK remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0235-remediacion-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0235-remediacion`. Ancla protocolo que materializa la
+  instruccion `3ba2f11dc689f41b4f428c9d2ea8acd68a280868`; implementacion bajo review
+  `bcd14081f0ef7723a1a7396dde742b403060550d`; producto control `Zeus-protocol`
+  `b2b2395da39090109db6de2dc50726dbaab1a11e`. Clean clone producto `npm test` EXIT 0 (109 tests, 87 pass,
+  22 skipped). Clean clone protocolo: py_compile, parser PowerShell, `test_exec_lease_harness.py` EXIT 0 (6/6),
+  validate/neutrality/encoding EXIT 0 y drift false `up_to_seq=2918`. Probes propios: PID muerto pre-deadline
+  en `Clear-StaleCronLockIfSafe` Codex y Analista deja `lock_exists=false`, `lease_exists=false` y log
+  `SELF_HEAL_STALE_LOCK ... state=pre_deadline`; `sweep_cron_zombies.py --kill` con lease vencido/proceso muerto
+  devuelve EXIT 0, `action=cleanup_only`, y borra lock+lease. No-regresion probada: dry-run no borra, owner/checker
+  exclusion, lease no vencido, PID-reuse guard, deny-list `npm test`, y token unico `STOP_JOB` en summary/
+  requested_action (broad `stop/para` no activa). Gates vivos validate/neutrality/encoding EXIT 0, drift false
+  `up_to_seq=2920`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0235 exec-lease hardening (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `ca479f8` (`review(TASK-0235): Analista blocks exec lease`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0235-exec-lease-veredicto.md`, MSG
