@@ -106,14 +106,6 @@
             "title": "Zeus-Aegis: vista Estadisticas (stats) completa: costo tokens por agente + chip progreso dataset X/500, read-only F1"
         },
         {
-            "id": "TASK-0223",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "in_review",
-            "title": "Zeus-Aegis: vista Instanciar-proyecto (read-only, prepara comando atestado, NO ejecuta)"
-        },
-        {
             "id": "TASK-0227",
             "owner": "Codex",
             "phase": "P2",

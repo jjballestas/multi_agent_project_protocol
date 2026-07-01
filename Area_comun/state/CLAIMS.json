@@ -12823,6 +12823,22 @@
             "updated_at": "2026-07-01T09:44:51Z"
         },
         {
+            "claim_id": "CLAIM-20260701-ratify0223-arquitecto",
+            "expires_at": "2026-07-01T16:00:00Z",
+            "notes": "Ratifica 0223 (GO Analista).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260701-ratify0223-arquitecto",
+                "Area_comun/state/TASK_INDEX.json#TASK-0223",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0223",
+                "Area_comun/tasks/TASK-0223-codex-zeus-aegis-vista-instanciar-proyecto.md"
+            ],
+            "started_at": "2026-07-01T12:35:12Z",
+            "status": "released",
+            "task_id": "TASK-0223",
+            "updated_at": "2026-07-01T12:35:12Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-ratify0225-promote0228-arquitecto",
             "expires_at": "2026-07-01T08:00:00Z",
             "notes": "Ratifica 0225 (GO Analista) + promueve 0228 WS5.",
