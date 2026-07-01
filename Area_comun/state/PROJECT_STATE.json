@@ -1059,7 +1059,7 @@
         {
             "id": "TASK-0225",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "Construir Arquitecto-cron (mailbox processor); lanzamiento real lo hace el operador"
         },
         {
@@ -1077,7 +1077,7 @@
         {
             "id": "TASK-0228",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "[REQ-ZEUS-001][WS5] Alta del Analista en NOVA + decision mapeo rol->agente + wrapper new_instance(4 firmantes)"
         },
         {
