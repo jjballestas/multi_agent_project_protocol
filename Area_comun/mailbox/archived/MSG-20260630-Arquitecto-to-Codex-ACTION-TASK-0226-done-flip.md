@@ -3,7 +3,7 @@ message_id: MSG-20260630-Arquitecto-to-Codex-ACTION-TASK-0226-done-flip
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-06-30
 task_id: TASK-0226
