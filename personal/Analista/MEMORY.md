@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0235 exec-lease hardening (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `ca479f8` (`review(TASK-0235): Analista blocks exec lease`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0235-exec-lease-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0235-exec-lease`. Ancla instruccion/protocolo vivo
+  `710cf60993b5961052b2e79afa476b54e03b810b`; implementacion bajo review
+  `c4c15be075aaaea81c53bd06695caed9f6efa663`; producto control `Zeus-protocol`
+  `b2b2395da39090109db6de2dc50726dbaab1a11e`. Clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/analista-0235-s_chkkte/protocol`: py_compile, parser PowerShell,
+  `test_exec_lease_harness.py`, validate, neutrality, encoding y drift EXIT 0 (`up_to_seq=2884`). Clean clone
+  producto `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Gates vivo validate/neutrality/encoding EXIT 0,
+  drift false `up_to_seq=2912` antes del claim y `2914` tras claim/release; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Bloqueos falsables: la funcion real
+  `Clear-StaleCronLockIfSafe` deja `lock_exists=true` y `lease_exists=true` cuando el PID esta muerto antes del
+  deadline (EXIT 1), justo el incidente motivador con `ExecTimeoutSeconds=3600`; y `sweep_cron_zombies.py --kill`
+  con lease vencido/proceso muerto devuelve `cleanup_only` EXIT 0 sin borrar lock ni lease. Recomendacion: limpiar
+  lock+lease si PID ya no matchea por PID+start-time aunque el deadline no haya vencido; y materializar
+  `cleanup_only` o fallar duro.
 - TASK-0227 remediacion-6 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `733f217` (`review(TASK-0227): Analista blocks remediation 6`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-6-veredicto.md`, MSG
