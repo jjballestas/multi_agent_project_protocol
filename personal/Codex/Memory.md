@@ -2128,6 +2128,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   bound zeus aegis npm test`. It routes root `npm test` through a bounded Node harness with `CI=1`, keeps vitest
   in `run` mode with hard per-test/hook/teardown timeouts, disables file parallelism, uses a single threads pool to
   avoid the observed fork IPC closure path, and kills the spawned process tree on hard timeout.
+- TASK-0237 protocol delivery commit exists: `7fd0d50 coord(TASK-0237): deliver hang proof npm test`. It moved
+  TASK-0229 `in_progress -> blocked` and released its claim so TASK-0237 could be prioritized, moved TASK-0237
+  `ready -> in_progress -> in_review`, released Codex claims, added
+  `Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-in-review.md`. Codex could not archive the
+  consumed Arquitecto GO because `mailbox_archive` requires orchestrator capability.
 
 ## Useful Fresh-Session Commands
 
