@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-01 (TASK-0235 remediacion; OK/CERRABLE exec-lease).
+> Ultima actualizacion: 2026-07-02 (TASK-0235 cron policy A/B; NO-GO canonico por validate secretless rojo).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0235 cron policy A/B (2026-07-02): CAMBIO-REQUERIDO / NO-GO de cierre canonico. Veredicto canonico en
+  `30e694c` (`review(TASK-0235): Analista blocks cron policy AB canon`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0235-cron-policy-AB-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-cron-policy-AB`. Ancla REVIEW/protocolo
+  `cc1dac4a411217d5e0291e73d27fefe37c7b9f3e`; documento
+  `personal/Arquitecto/DISCUSSION-cron-zombie-policy.md`; TASK-0235 ya cerrada como implementacion de exec-lease.
+  Producto no citado por la instruccion; control clean clone `Zeus-protocol`
+  `b2b2395da39090109db6de2dc50726dbaab1a11e`, `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Sustantivo A/B
+  PASA con condiciones: no matar por Restart Manager, solo lease vencido PID+start-time, dry-run, re-check bajo
+  lock, owner target unico, checker-owner explicito, deny-list, dirty-claimed-route guard y post-kill
+  validate/drift/encoding. Probes propios: lease viva futura -> `lease_not_expired`; lease Analista mientras se barre
+  Codex -> `owner_not_target`; owner/checker Analista -> `checker_owner_excluded`. Bloqueo canonico: clean clone
+  protocolo `cc1dac4` validate sin secretos EXIT 1 por mismatches `TASK-0229` index blocked vs file ready y
+  `TASK-0237` index in_progress vs file ready; vivo validate EXIT 0 por cambios locales ajenos. Drift clean false
+  `up_to_seq=3028`; drift vivo false `up_to_seq=3032`; neutrality/encoding EXIT 0; `protocol.config.json` sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
 - TASK-0235 remediacion exec-lease (2026-07-01): OK/CERRABLE. Veredicto canonico en `8529cfe`
   (`review(TASK-0235): Analista OK remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0235-remediacion-veredicto.md`, MSG
