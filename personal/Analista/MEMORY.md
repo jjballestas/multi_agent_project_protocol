@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0228 WS5 alta Analista NOVA (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `619f419` (`review(TASK-0228): Analista blocks WS5`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0228-ws5-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0228-ws5`. Ancla instruccion/protocolo
+  `f7c92ba394f0284f9b80ed9e3ac5e3035a353830`; implementacion bajo review `7353070`
+  (`feat(instancing): add analyst participant to new instances`); producto Zeus-protocol sin commit citado,
+  control clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`; clean clone review
+  `C:/Users/johnb/AppData/Local/Temp/analista-0228-review-303773e8c6de4cf684bcd81b3576fc50`.
+  `npm test` producto exit 0; `new_instance.py --tier coordination` exit 0 y generated NOVA valida exit 0 con
+  4 agentes/personales; TASK sintetica `owner: Analista` valida exit 0. Bloqueo falsable: probe `owner: Intruso`
+  tambien valida exit 0, y probe `owner: Codex` + `reviewer: Codex` valida exit 0 aunque
+  `allow_self_review:false`; por tanto maker!=checker queda declarativo/no gateado. Ademas no encontre decision
+  canonica que cite `NOVA-ARQ-001` fuera de tarea/GO/REVIEW. Riesgo declarado: `--tier attested` crea 4 agentes
+  pero solo 3 signers (`human_owner` worker), asi que "4 firmantes" necesita aclaracion. Gates protocolo vivo y
+  clean `7353070`: validate, neutrality, encoding exit 0; drift vivo `has_drift=false up_to_seq=2842`, clean
+  `has_drift=false up_to_seq=2825`; `protocol.config.json` sha256
+  `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
 - TASK-0223 vista Instanciar-proyecto (2026-07-01): GO/CERRABLE. Veredicto canonico en
   `cd67775` (`review(TASK-0223): Analista OK instancing view`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0223-vista-instanciar-veredicto.md`, MSG
