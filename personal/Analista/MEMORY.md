@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-06-30 (TASK-0225 Arquitecto-cron; NO-GO).
+> Ultima actualizacion: 2026-07-01 (TASK-0225 Arquitecto-cron remediacion-2; GO).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0225 Arquitecto-cron remediacion-2 (2026-07-01): GO/CERRABLE. Veredicto canonico en
+  `e2fd73d` (`review(TASK-0225): Analista OK remediation 2`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0225-remediacion-2-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0225-remediacion-2`. Ancla protocolo/instruccion
+  `349a8cac40d3fdfaa7ccf463769db1526b3d6766`; implementacion bajo review `8385868`
+  (`fix(TASK-0225): repair ws snapshot classifier`); producto Zeus-protocol sin commit citado en la
+  instruccion, control clean clone `b2b2395da39090109db6de2dc50726dbaab1a11e`, `npm test` exit 0
+  (109 tests, 87 pass, 22 skipped). Clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/analista-0225-review-1089e690106144bcbb9ff5d19a2a088f/protocol`:
+  `-RunClassifierSelfTest` exit 0 (3/3), `-DryRunOnce` exit 0 con `ledger_write=false`,
+  `ws_snapshot.in_review=[TASK-0222,TASK-0225,TASK-0227]` y `decision=review_or_ratify`. Payloads propios
+  extraidos por AST sobre `Test-WsTask` + `New-WsSnapshot` exit 0 (6/6): TASK-02xx sin project, REQ-ZEUS sin
+  project, titulo WS sin project, project conocido, ready no relevante no promueve, ready relevante promueve
+  solo sin reviews. Gates protocolo vivo y clean: validate, scan_domain_neutrality, scan_encoding exit 0;
+  drift vivo/clean `has_drift=false up_to_seq=2775`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual no bloqueante: clasificador
+  heuristico amplio puede contar falsos positivos, pero falla conservador (review/espera, no promocion falsa).
 - TASK-0225 Arquitecto-cron review (2026-06-30): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `9d0bcc0` (`review(TASK-0225): Analista blocks Arquitecto cron`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0225-arquitecto-cron-veredicto.md`, MSG
