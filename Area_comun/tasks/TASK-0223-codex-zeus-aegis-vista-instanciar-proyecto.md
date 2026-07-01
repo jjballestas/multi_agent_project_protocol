@@ -2,7 +2,7 @@
 task_id: TASK-0223
 title: "Zeus-Aegis: vista Instanciar-proyecto (read-only, prepara comando atestado, NO ejecuta)"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: medium
