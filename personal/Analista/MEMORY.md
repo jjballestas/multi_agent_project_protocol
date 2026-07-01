@@ -23,6 +23,20 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0222 remediacion-2 (2026-07-01): GO/CERRABLE. Veredicto canonico en `7741923`
+  (`review(TASK-0222): Analista OK remediation 2`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0222-remediacion-2-veredicto.md`, MSG
+  `MSG-20260701-Analista-to-Arquitecto-REVIEW-TASK-0222-remediacion-2`. Ancla protocolo REVIEW/HEAD
+  `e44e08f5f0c9b1e6294ce5002c9a4dfbb4b35bca`; producto citado en handoff
+  `D:/Agentes/Zeus/Zeus-Aegis` commit `3b25b8b9f6b7a1a0520f02d10e8f9394c80a7627`; clon limpio
+  `C:/Users/johnb/AppData/Local/Temp/analista-0222-rem2-cd68c18135414a2f80b86767ee2ae228/zeus-aegis`.
+  Nota de ancla: la orden generica nombraba `Zeus-protocol`, pero ese repo no contiene `3b25b8b`; el commit existe
+  en `Zeus-Aegis`, que es el `product_repo` canonico de la tarea. `npm test` en clon limpio EXIT 0 dos veces
+  consecutivas (82 files / 559 tests; run 2 duration 138.34 s); targeted stats/F1 EXIT 0 (4 passed, stats 1103 ms).
+  Probes propios del parser de tokens y guard F1 EXIT 0: cola 128 KiB, token viejo fuera de cola excluido,
+  multilinea dentro de 4 lineas suma, multilinea despues de 4 se ignora, y familia F1 cubierta bloqueada.
+  Gates protocolo vivo y clean validate/neutrality/encoding EXIT 0; drift false `up_to_seq=2888` tras claim/release;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0227 remediacion-4 (2026-07-01): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `6014596` (`review(TASK-0227): Analista blocks remediation 4`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0227-remediacion-4-veredicto.md`, MSG
