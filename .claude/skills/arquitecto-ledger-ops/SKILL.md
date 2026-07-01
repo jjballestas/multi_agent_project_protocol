@@ -1,0 +1,73 @@
+---
+name: arquitecto-ledger-ops
+description: >-
+  Preflight checklist y recetas exactas para operaciones gobernadas del Arquitecto en
+  multi_agent_project_protocol (este repo, escritor-unico VIVO). USAR ANTES de: cualquier
+  runtime/submit_intent.py (task_upsert / task_status / claim / decision / mailbox_archive),
+  antes de soltar un mensaje GO/REVIEW en Area_comun/mailbox/open/, antes de pedir review a un
+  peer (Codex/Analista), y antes de commitear estado/ledger. Evita los fallos recurrentes:
+  claim plano que pierde scope, mensajes no-ASCII, requires_response sin response_owner,
+  pedir review sin commitear (HEAD rojo en clean clone), drift por apply a medias, y el
+  footgun de stop-order que apaga los crons. Trigger words: submit_intent, GO, REVIEW, claim,
+  task_upsert, task_status, mailbox, cerrar tarea, ledger, dataset, registrar tarea.
+---
+
+# Arquitecto — operaciones gobernadas del ledger (preflight)
+
+Fuente de verdad: `AGENTS.md` (s.7), `personal/Arquitecto/STARTUP_PROMPT.md`, DECISION-0020/0022/0038/0040.
+Este skill es el **checklist activo** de esas reglas. Si algo entra en conflicto, mandan esos docs.
+
+## 0. Cold-start primero (no te saltes esto)
+Antes de la primera escritura: lee `personal/Arquitecto/STARTUP_PROMPT.md` + `MEMORY.md`, mira
+`git log --oneline -8` + `git status`, y `CLAIMS.json`. Escritor unico VIVO: **editar
+`Area_comun/state/*.json` a mano = drift HARD-FAIL**. TODA transicion via `submit_intent --actor-id Arquitecto`.
+
+## 1. Mensajes de mailbox (GO / REVIEW / cualquier MSG-*.md)
+ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
+- **ASCII puro.** Nada de acentos, `—`, `→`, `≥`, `∧`, comillas tipograficas. Usa `->`, `>=`, `AND`, `-`.
+- **`requires_response: true` EXIGE `response_owner: <destinatario>`** (y, para el validador clasico,
+  `requested_action` y/o `question`). Sin `response_owner` -> `validate_collaboration_state.py` exit 1.
+- **type que el cron del peer reconoce:** Codex acepta `GO/REQUEST/ACTION/HANDOFF/REVIEW/QUESTION/DECISION`;
+  **Analista acepta `REVIEW/REQUEST/ACTION/QUESTION/DECISION` (NO "GO")**. O pon `requested_action` no vacio.
+- **FOOTGUN stop-order:** el cron se AUTO-DETIENE si una linea contiene una palabra-stop
+  `(detener|deten|parar|para|stop|standdown|stand-down)` junto a `(cron|monitor|monitoreo|<Peer>)`.
+  NUNCA escribas "para Codex", "parar el cron", etc. **Evita "para" en todo el mensaje.**
+- **GATEA TU PROPIO MENSAJE** antes de seguir: `python scripts/validate_collaboration_state.py` exit 0
+  Y `python scripts/scan_encoding.py` exit 0. `scan_encoding` cubre `open/` Y `archived/`.
+
+## 2. submit_intent — recetas que funcionan a la primera
+- **Claim acquire: SIEMPRE anidado** bajo la clave `claim`, nunca plano (plano se materializa perdiendo
+  `scope`, bug en `runtime/protocol_replay.py:821`):
+  `{"type":"claim","op":"acquire","claim":{"claim_id":...,"owner":"Arquitecto","task_id":...,"status":"active","scope":[...],"started_at":ts,"updated_at":ts,"expires_at":...}}`
+- **El `scope` del claim DEBE incluir su propia fila `CLAIMS.json#<claim_id>`** o no podras liberarlo
+  (release exige scope sobre `CLAIMS.json#<claim_id>`).
+- **Scope con FRAGMENTO, no archivo entero:** para `task_upsert`/`task_status` el scope necesita
+  `Area_comun/state/TASK_INDEX.json#TASK-XXXX` y `Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-XXXX`
+  (mas el `.md` de la tarea). `task_status` reescribe el `.md` -> incluye `Area_comun/tasks/TASK-XXXX-*.md`.
+- **El `.md` de la tarea necesita frontmatter YAML con `status:`** y campo `file:` o el apply falla
+  ("task file has no status field"). Crea el `.md` ANTES del claim (artifacts-before-claim, DECISION-0020 #1).
+- **Secuenciar en submits separados** (acquire -> upsert -> release) es mas robusto que un solo `--intents`
+  cuando hay dependencia claim->write; si usas `--intents`, valida el ordenamiento.
+- **`--actor-id Arquitecto`, `--timestamp` UTC real, `--commit $(git rev-parse HEAD)`** en cada llamada.
+
+## 3. Recuperacion de drift (apply a medias)
+Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
+`python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`
+re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 antes de reintentar.
+
+## 4. Pedir review / cerrar (maker != checker)
+- **COMMITEA el saneamiento ANTES de pedir review.** El peer valida con **clean clone de HEAD**; si tus
+  correcciones estan solo en el working tree, HEAD sale rojo y el peer bloquea (con razon).
+- Stage EXPLICITO por path (nunca `git add -A`: barre `personal/`). Snapshot consistente, gates verdes por
+  **exit code** (no por grep: `grep ERROR` da exit 0 al matchear y NO frena).
+- Verifica el arbol commiteado: `git ls-tree HEAD <ruta>`, `git show HEAD:<msg>` tiene `response_owner`, etc.
+- Cierre en dos partes: Codex `in_progress->in_review`; Arquitecto reproduce suites/goldens y `in_review->done`.
+- **Tras CADA commit: actualiza memoria (DECISION-0026) + push si verde.**
+
+## 5. Re-disparar un cron sobre un mensaje ya "seen"
+El cron marca cada MSG con firma `nombre|longitud|mtime`. Para que reprocese: cambia la longitud del MSG, o
+borra su entrada en `.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.seen.json` (limpio, sin tocar git).
+
+## Checklist de una linea (pega mentalmente antes de actuar)
+ASCII? · response_owner? · type valido para el peer? · sin "para"+peer? · claim anidado + scope#self + fragmentos? ·
+.md con status/file? · validate+encoding exit 0? · committeado antes de pedir review? · gateado por exit-code?
