@@ -12808,6 +12808,25 @@
             "updated_at": "2026-07-01T12:32:14Z"
         },
         {
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-2",
+            "expires_at": "2026-07-01T05:00:00Z",
+            "notes": "Remediate TASK-0227 F1 guard escapes reported by Analista.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                "Area_comun/mailbox/open/MSG-20260701-Arquitecto-to-Codex-ACTION-TASK-0227-remediacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-01T01:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0227",
+            "updated_at": "2026-07-01T01:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260701-archive-stale-0222go-arquitecto",
             "expires_at": "2026-07-01T12:00:00Z",
             "notes": "Archivar GO-0222 consumido (Codex no pudo, sin orchestrator cap) para desatascar el cron.",

@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0225 done-flip commit.
+Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 remediation product commit.
 
 ## Latest Session Note
 
+- TASK-0227 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `88091b1 test(governance): cover f1 write path variants`. The F1 read-only boundary test now centralizes
+  `GOVERNANCE_FORBIDDEN_WRITE_PATTERNS`, scans UI governance calls for any `method:` on `/api/governance/*`
+  regardless of single/double/backtick literal, case, or variable value, and rejects `axios.post/put/patch/delete`
+  shorthand plus `axios({ url, method })` / `axios({ method, url })`. Permanent coverage asserts the four Analista
+  escapes plus axios config variants go red while display-only `submit_intent.py` text near the local no-writer guard
+  remains allowed. Evidence before product commit: `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`
+  PASS; targeted `governance-readonly.test.ts` PASS 16 tests; focused gateway/MCP test subset PASS 21 tests;
+  product `git diff --check` PASS with CRLF normalization warning only. Full product
+  `corepack pnpm --dir vendor/hermes-2.3.0 test` was attempted twice and failed outside TASK-0227's touched surface
+  with Vitest `ERR_IPC_CHANNEL_CLOSED` after many suites, while the targeted remediation suite stayed green.
+  Protocol coordination commit `coord(TASK-0227): redeliver f1 guard remediation` moved TASK-0227 back to
+  `in_review`, released `CLAIM-20260701-Codex-TASK-0227-remediation-2`, added
+  `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-2.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-2-in-review.md`.
+  Protocol evidence before commit: encoding OK, neutrality OK, validator OK with two pre-existing non-response
+  mailbox archive warnings, drift false / byte-identical `up_to_seq=2821`.
 - TASK-0225 done-flip completed in the protocol commit `coord(TASK-0225): close arquitecto cron`.
   `runtime/submit_intent.py` transaction `codex:task0225:done-flip-tx` acquired and released
   `CLAIM-20260701-Codex-TASK-0225-done-flip` and moved TASK-0225 `review_approved -> done` at seq 2812-2814.

@@ -1,0 +1,24 @@
+{
+  "idempotency_key": "Codex:TASK-0227:remediation2-delivery:20260701T011500Z",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0227",
+        "from": "in_progress",
+        "to": "in_review",
+        "notes": "Codex redelivery after F1 write-path guard remediation; see handoff 2.",
+        "idempotency_key": "codex:task0227:remediation2-deliver:status"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-2",
+        "task_id": "TASK-0227",
+        "owner": "Codex",
+        "updated_at": "2026-07-01T01:15:00Z",
+        "idempotency_key": "codex:task0227:remediation2-deliver:release"
+      }
+    }
+  ]
+}
