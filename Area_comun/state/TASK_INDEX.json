@@ -3559,7 +3559,7 @@
                 "REQ-ZEUS-001"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'",
             "type": "build"
         },
@@ -3678,6 +3678,54 @@
             "reviewer": "Analista",
             "status": "done",
             "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+            "id": "TASK-0236",
+            "linked_decisions": [
+                "DECISION-0057",
+                "DECISION-0018",
+                "DECISION-0022"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001",
+                "TASK-0235"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+            "id": "TASK-0237",
+            "linked_decisions": [
+                "DECISION-0077"
+            ],
+            "linked_reqs": [
+                "REQ-ZEUS-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001",
+                "TASK-0236"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1",
             "type": "build"
         },
         {

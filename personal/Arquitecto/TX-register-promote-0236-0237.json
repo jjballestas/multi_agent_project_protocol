@@ -1,0 +1,103 @@
+{
+  "idempotency_key": "arq:register-promote-0236-0237:tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-register-0236-0237-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0236",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-register-0236-0237-arquitecto",
+          "Area_comun/state/TASK_INDEX.json#TASK-0236",
+          "Area_comun/state/TASK_INDEX.json#TASK-0237",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+          "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+          "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+        ],
+        "started_at": "2026-07-01T23:15:00Z",
+        "updated_at": "2026-07-01T23:15:00Z",
+        "expires_at": "2026-07-02T06:00:00Z",
+        "notes": "Registra+promueve TASK-0236 (harness 4-fixes, remediacion 0235) y TASK-0237 (hang-proof npm test Zeus-Aegis)."
+      }
+    },
+    {
+      "type": "task_upsert",
+      "task": {
+        "id": "TASK-0236",
+        "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana",
+        "status": "proposed",
+        "owner": "Codex",
+        "type": "build",
+        "phase": "P2",
+        "priority": "high",
+        "reviewer": "Analista",
+        "checker": "Arquitecto",
+        "project": "multi_agent_project_protocol",
+        "relates_to": ["REQ-ZEUS-001", "TASK-0235"],
+        "linked_decisions": ["DECISION-0057", "DECISION-0018", "DECISION-0022"],
+        "linked_reqs": ["REQ-ZEUS-001"],
+        "file": "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md"
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0236",
+      "from": "proposed",
+      "to": "ready",
+      "idempotency_key": "arq:task0236:proposed-to-ready"
+    },
+    {
+      "type": "task_upsert",
+      "task": {
+        "id": "TASK-0237",
+        "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1",
+        "status": "proposed",
+        "owner": "Codex",
+        "type": "build",
+        "phase": "P2",
+        "priority": "high",
+        "reviewer": "Analista",
+        "checker": "Arquitecto",
+        "project": "multi_agent_project_protocol",
+        "relates_to": ["REQ-ZEUS-001", "TASK-0236"],
+        "linked_decisions": ["DECISION-0077"],
+        "linked_reqs": ["REQ-ZEUS-001"],
+        "file": "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0237",
+      "from": "proposed",
+      "to": "ready",
+      "idempotency_key": "arq:task0237:proposed-to-ready"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260702-register-0236-0237-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0236",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-register-0236-0237-arquitecto",
+          "Area_comun/state/TASK_INDEX.json#TASK-0236",
+          "Area_comun/state/TASK_INDEX.json#TASK-0237",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+          "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+          "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+        ],
+        "started_at": "2026-07-01T23:15:00Z",
+        "updated_at": "2026-07-01T23:15:00Z",
+        "expires_at": "2026-07-02T06:00:00Z",
+        "notes": "Release tras registrar+promover 0236 y 0237."
+      }
+    }
+  ]
+}

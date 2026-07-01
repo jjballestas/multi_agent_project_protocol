@@ -1083,7 +1083,7 @@
         {
             "id": "TASK-0229",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
         },
         {
@@ -1115,6 +1115,18 @@
             "owner": "Codex",
             "status": "done",
             "title": "[INFRA] Contrato exec-lease en harnesses de crons: self-heal de locks huerfanos + kill por deadline + barrido seguro (spec del gate Analista)"
+        },
+        {
+            "id": "TASK-0236",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana"
+        },
+        {
+            "id": "TASK-0237",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
