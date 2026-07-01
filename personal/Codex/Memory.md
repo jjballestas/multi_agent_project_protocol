@@ -4,6 +4,23 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0224 done-flip.
 
 ## Latest Session Note
 
+- TASK-0227 remediation-5 product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `bbf84e7 test(governance): catch typed f1 options object`. The F1 static read-only guard now catches the
+  DECISION-0079 local const options variant with a TypeScript annotation, including
+  `const opts: RequestInit = { method: 'POST' }; fetch('/api/governance/state', opts)`, while preserving the
+  existing negative variants and display-only `submit_intent.py` allowance. Evidence before protocol delivery:
+  `node --check vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs` PASS; targeted
+  `governance-readonly.test.ts` PASS 16 tests; local product `corepack pnpm --dir vendor/hermes-2.3.0 test`
+  PASS 82 files / 559 tests; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/codex-0227-rem5-zeus-aegis-clean-bcc9430d` `npm test` PASS 82 files / 559
+  tests. A prior clean-clone rerun attempted to reuse an undeleted temp directory and failed before installing
+  dependencies (`vitest` not found); the unique clean clone above is the valid post-commit evidence. Protocol
+  coordination commit for this delivery (`coord(TASK-0227): redeliver typed options remediation`) added
+  `Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-5.md`, opened
+  `Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-5-in-review.md`, moved TASK-0227
+  through the remediation claim transaction back to `in_review`, and released
+  `CLAIM-20260701-Codex-TASK-0227-remediation-5`. Final protocol evidence before commit: encoding OK, neutrality
+  exit 0, validator OK, drift false / byte-identical `up_to_seq=2898`.
 - TASK-0222 done-flip completed in the protocol commit for this delivery.
   `runtime/submit_intent.py` transaction
   `codex:task0222:done-flip-tx` acquired and released

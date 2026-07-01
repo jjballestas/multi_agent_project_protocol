@@ -1,0 +1,40 @@
+{
+  "idempotency_key": "codex:task0227:remediation5-delivery-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0227",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:task0227:remediation5-in-progress-to-in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "idempotency_key": "codex:task0227:remediation5-claim-release",
+        "claim": {
+          "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-5",
+          "owner": "Codex",
+          "task_id": "TASK-0227",
+          "status": "released",
+          "scope": [
+            "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-5",
+            "Area_comun/state/TASK_INDEX.json#TASK-0227",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+            "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+            "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-5.md",
+            "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-5-in-review.md",
+            "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.test.ts",
+            "runtime/state/events.jsonl",
+            "runtime/state/snapshot.json"
+          ],
+          "started_at": "2026-07-01T19:41:59Z",
+          "updated_at": "2026-07-01T20:01:57Z",
+          "expires_at": "2026-07-01T23:59:00Z",
+          "notes": "TASK-0227 remediation-5 delivered to in_review after product commit bbf84e7 and green local/clean-clone gates."
+        }
+      }
+    }
+  ]
+}

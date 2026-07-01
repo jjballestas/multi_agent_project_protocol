@@ -1,0 +1,193 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "afc19e749ec28dd272c41038741d35485e3f62d7d1d7558d77293ed87399ab74",
+        "replay_hash": "afc19e749ec28dd272c41038741d35485e3f62d7d1d7558d77293ed87399ab74",
+        "up_to_seq": 2896
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "sPuOSndXNp0WI9ZJZWSlp9NPeuL8bKl0i9JJKS5Ksi/7/rxWILhGC+ZJKNlHaso7PxdbD0uaVxhGkT0a1kCkAg=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 24,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "dc03a1397e4401be16d9476807969f13196f59cb59d979c3ed5f888952e4de54"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation5-claim-acquire-v2",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "claim",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T19:41:59Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation5-start-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-5",
+                                "expires_at": "2026-07-01T23:59:00Z",
+                                "notes": "TASK-0227 remediation-5: local const RequestInit options with literal method passed to governance fetch.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-5",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-5.md",
+                                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-5-in-review.md",
+                                    "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs",
+                                    "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.test.ts",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T19:41:59Z",
+                                "status": "active",
+                                "task_id": "TASK-0227",
+                                "updated_at": "2026-07-01T19:41:59Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-5",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0227"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "a4895f0ef949f199e4bc53f3e1aa8b3c33666ea9b40f175eb02a7d165c881b89",
+            "seq": 2895,
+            "ts": "2026-07-01T19:41:59Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "TCgIQZdOycRIfgWL2BjpONk6F7i0zRClGaoxeba5e0aNlkP3/YhjBIyQQsswqs2RrfztQE2/6cUKr1TyadvABA=="
+            },
+            "aggregate_id": "TASK-0227",
+            "aggregate_version": 25,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "dc9ea68a723688d07295ad29827784d98650343486325a34de4efe523afbc8a9"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0227:remediation5-in-review-to-in-progress-v2",
+            "payload": {
+                "commit": "worktree",
+                "intent_type": "task_status",
+                "task_id": "TASK-0227",
+                "timestamp": "2026-07-01T19:41:59Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0227:remediation5-start-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_review",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "32d1b9121ccaa750937633dd193edbd5e1074991367ee5649adcb7bbbc4202f2",
+            "seq": 2896,
+            "ts": "2026-07-01T19:41:59Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-5",
+                "expires_at": "2026-07-01T23:59:00Z",
+                "notes": "TASK-0227 remediation-5: local const RequestInit options with literal method passed to governance fetch.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-TASK-0227-remediation-5",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0227",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0227",
+                    "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md",
+                    "Area_comun/handoffs/HANDOFF-TASK-0227-codex-to-arquitecto-5.md",
+                    "Area_comun/mailbox/open/MSG-20260701-Codex-to-Arquitecto-TASK-0227-remediation-5-in-review.md",
+                    "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs",
+                    "D:/Agentes/Zeus/Zeus-Aegis/vendor/hermes-2.3.0/src/server/governance-readonly.test.ts",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T19:41:59Z",
+                "status": "active",
+                "task_id": "TASK-0227",
+                "updated_at": "2026-07-01T19:41:59Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-TASK-0227-remediation-5",
+            "idempotency_key": "codex:task0227:remediation5-claim-acquire-v2",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0227"
+        },
+        {
+            "from": "in_review",
+            "idempotency_key": "codex:task0227:remediation5-in-review-to-in-progress-v2",
+            "kind": "task_status",
+            "task_id": "TASK-0227",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "f0d1025f8cec134f3c19386bb6e8a97d0b4aa02b9e22e64c68c4320fe8b1748d",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2896
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2896
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0227-codex-zeus-aegis-npm-test-f1-boundary.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0227:remediation5-claim-acquire-v2",
+            "codex:task0227:remediation5-in-review-to-in-progress-v2"
+        ],
+        "idempotency_key": "codex:task0227:remediation5-start-tx",
+        "intent_count": 2
+    }
+}
