@@ -1,3 +1,8 @@
+> **>>> SUPERADO (2026-07-02) — NO USAR.** Numeracion vieja (DECISION-0001..0005 en NOVA, TASK-ZEUS-*).
+> El mapa de backlog VIGENTE es `personal/Arquitecto/PLAN-REQ-ZEUS-001-reconciliado.md` + `DECISION-0077`
+> (adopcion) + `DECISION-0072..0076` (D1-D5, scope:product). Tareas en TASK-02xx (0229 en adelante), NO TASK-ZEUS.
+> Se conserva solo como historico.
+
 # REQ-ZEUS-001 — Mapa de backlog (gobernado en el HUB)
 
 > Gobernanza en el hub (aporta al dataset hasta sellar N=500). Codigo de producto en `D:\Agentes\Zeus\Zeus-Aegis`.
