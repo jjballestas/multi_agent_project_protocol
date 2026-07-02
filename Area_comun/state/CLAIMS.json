@@ -13511,6 +13511,23 @@
             "updated_at": "2026-07-01T12:20:02Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0229-allowlist-review",
+            "expires_at": "2026-07-02T15:57:21Z",
+            "notes": "Adversarial final gate of TASK-0229 DECISION-0082 allowlist.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Analista-TASK-0229-allowlist-review",
+                "Area_comun/artifacts/ANALISTA-TASK-0229-allowlist-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-allowlist-OK.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T13:57:21Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T13:57:21Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-2-review",
             "expires_at": "2026-07-02T07:19:06Z",
             "notes": "Adversarial re-gate of TASK-0229 remediation branding #2.",
