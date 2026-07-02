@@ -131,6 +131,16 @@ local puede ir detras de origin). Luego, segun la senal:
   Claude Opus` los descarta (verificado: tus commits lo llevan, los de Codex/Analista no).
 - **2+ timeouts seguidos con crons vivos** = cron atascado (lock/proceso huerfano). NO es "nada que hacer": diagnostica
   y destraba -> skill `arquitecto-cron-lifecycle`.
+- **SILENT-REFUSAL (leccion 2026-07-03):** una tarea que queda en `in_review` con tu ACTION/GO marcada *seen* en el
+  `<peer>_mailbox_cron.seen.json` pero SIN reentrega (status no avanza, no hay commit de fix) NO significa "peer
+  trabajando". El heartbeat (`processable=0`) y el pid-vivo MIENTEN aqui: el peer YA ejecuto y se NEGO. Revisa
+  `.protocol-tmp/<peer>_mailbox_cron/runs/*.err.log` (el ultimo por mtime) -> ahi esta el motivo. Caso real: Codex
+  se nego a remediar TASK-0240 ~1h porque el Analista dejo un claim con scope wildcard `["*"]`
+  (`CLAIM-...-wild-release`) que bloqueaba toda edicion compartida; salio sin commit y el monitor de entregas nunca
+  disparo (no hubo salida). FIX: (1) resuelve el bloqueo real (aqui el claim wildcard se libero solo despues;
+  si no, es anomalia DECISION-0018 a senalar/resolver); (2) **des-seen** la ACTION en el `seen.json` del peer
+  (skill `arquitecto-cron-lifecycle` s.5) para que el cron la reprocese. Regla: si el monitor timea sobre una
+  remediacion en vuelo, mira el err.log del peer ANTES de asumir que sigue trabajando.
 - **Arbol compartido:** peers commitean aqui; `git merge --ff-only` cada wake; `git pull --rebase --autostash` si el
   push sale non-ff. Vi gates en rojo TRANSITORIO por un peer a mitad de escritura -> re-correr hasta verde.
 - **Trigger diferido:** si el operador pide "promover X luego de que Codex termine su cola", vigila via el monitor
