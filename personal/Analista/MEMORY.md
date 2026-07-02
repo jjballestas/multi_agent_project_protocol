@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (reviews huerfanas 0194/0199/0201/0203/0211/0215; cierre formal confirmado).
+> Ultima actualizacion: 2026-07-02 (TASK-0229 WS3 branding NO-GO por cadenas Hermes visibles).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0229 WS3 branding white-label (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `7d15fa6` (`review(TASK-0229): Analista blocks WS3 branding`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-ws3-branding-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-ws3-branding-NOGO`. Ancla protocolo
+  `ab120827f36cc5fd6d5fbc9975318b19e0f6fd3a`; producto canonico `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `ea3f52ce30abefe266b81661189d6d7864d69cb3` (incluye branding `980445cd7a3d0662040da72181fb285a4c003cb6`).
+  Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0229-ws3-6feea6e1392a4806840fdf1817f905e0/zeus-aegis`.
+  `npm test` EXIT 0 (wrapper 376.1 s, 83 files / 562 tests en tramo vendor); `corepack pnpm --dir
+  vendor/hermes-2.3.0 build` EXIT 0; probe propio Vitest alias HERMES fallback URL/dashboard/password sin ZEUS EXIT 0
+  (2/2). Bloqueo falsable: `git grep -n -I "Hermes Agent|Hermes Workspace|HERMES_API_URL|hermes setup|hermes gateway run"
+  -- vendor/hermes-2.3.0/src` devuelve multiples cadenas visibles, entre ellas
+  `src/components/connection-startup-screen.tsx:28/361/366`, `src/components/onboarding/setup-step-content.tsx:135`,
+  `src/components/mobile-hamburger-menu.tsx:226`, `src/screens/mcp/mcp-screen.tsx:62` y
+  `src/screens/skills/skills-screen.tsx:465`; `electron/server-bundle.cjs` versionado tambien contiene textos visibles
+  Hermes. Gates protocolo live y clean-protocol: validate/neutrality/encoding EXIT 0, drift false `up_to_seq=3104`,
+  #4 sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - Reviews huerfanas 0194/0199/0201/0203/0211/0215 (2026-07-02): OK/CERRABLE para cierre formal
   administrativo a `done`. Veredicto canonico en `25c0a09` (`review: Analista confirms orphan review
   closures`), artefacto `Area_comun/artifacts/ANALISTA-reviews-huerfanas-cierre-formal-veredicto.md`,
