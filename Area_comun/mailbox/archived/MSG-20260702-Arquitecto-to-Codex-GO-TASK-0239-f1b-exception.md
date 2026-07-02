@@ -3,7 +3,7 @@ message_id: MSG-20260702-Arquitecto-to-Codex-GO-TASK-0239-f1b-exception
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-02
 context_refs:
