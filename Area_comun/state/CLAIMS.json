@@ -13689,6 +13689,24 @@
             "updated_at": "2026-07-02T12:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-remediation-branding",
+            "expires_at": "2026-07-02T09:09:25Z",
+            "notes": "TASK-0229 branding remediation delivered to in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-remediation-branding",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md"
+            ],
+            "started_at": "2026-07-02T03:09:25Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T03:27:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229-resume3",
             "expires_at": "2026-07-03T12:10:00Z",
             "notes": "Resume and deliver TASK-0229 WS3 branding implementation in Zeus-Aegis.",

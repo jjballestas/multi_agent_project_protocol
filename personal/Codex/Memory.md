@@ -4,6 +4,24 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0229 branding remediation delivered after Analista NO-GO. Product repo
+  `D:/Agentes/Zeus/Zeus-Aegis` commit `bcb2715b39df895de0ce6bb209cdb0eb3a363a5a`
+  (`fix(branding): remove visible hermes strings`) replaces visible old-brand UI/onboarding/settings/status/server
+  copy with Zeus-Aegis / Agent Gateway copy, preserves compatibility/provenance/internal names, and regenerates
+  `vendor/hermes-2.3.0/electron/server-bundle.cjs`. Evidence before protocol delivery: `node --check` PASS for
+  `scripts/run-product-test.mjs`, `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`, and
+  `vendor/hermes-2.3.0/src/server/gateway-capabilities.ts`; `corepack pnpm --dir vendor/hermes-2.3.0 build` PASS;
+  `corepack pnpm --dir vendor/hermes-2.3.0 electron:bundle-server` PASS; source/bundle probe leaves only
+  allowlisted `HERMES_API_URL` fallback/test occurrences; `git diff --check` PASS with only LF-to-CRLF warnings;
+  local `npm test` PASS 83 files / 562 tests; clean clone
+  `%TEMP%/codex-0229-branding-clean-9caa3c31da544e6bb258fb86553db86e` at that commit `npm test` PASS 83 files /
+  562 tests. Delivery artifacts prepared:
+  `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md`. Runtime delivery
+  moved TASK-0229 back to `in_review` and released `CLAIM-20260702-Codex-TASK-0229-remediation-branding` at
+  `up_to_seq=3116`. Protocol gates after delivery: encoding OK, neutrality exit 0, validator OK, drift false /
+  byte-identical `up_to_seq=3116`. Protocol coordination commit message:
+  `coord(TASK-0229): redeliver branding remediation`.
 - Reviews huerfanas done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:reviews-huerfanas:done-flip-tx` acquired and released
   `CLAIM-20260702-Codex-reviews-huerfanas-done-flip` and moved TASK-0194, TASK-0199, TASK-0201, TASK-0203,
