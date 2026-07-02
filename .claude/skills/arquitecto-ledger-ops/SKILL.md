@@ -81,6 +81,16 @@ re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 a
 El cron marca cada MSG con firma `nombre|longitud|mtime`. Para que reprocese: cambia la longitud del MSG, o
 borra su entrada en `.protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.seen.json` (limpio, sin tocar git).
 
+### 5b. El Analista ABORTA+marca-seen si el canonico esta ROJO (leccion 2026-07-02)
+El harness del Analista **pre-gatea en validate VERDE** antes de ejecutar una review: si el canonico esta rojo
+(p.ej. un peer a medio entregar -> `TASK-XXXX status mismatch index vs file` + `Handoff-release violation: owner
+sigue con claim activo`), **ABORTA la review Y marca el MSG como seen** -> NO reintenta solo, y el trabajo queda
+silenciosamente sin hacer (visto con el relay del pivote mientras Codex entregaba 0229). REGLAS: (1) **rutea reviews
+al Analista SOLO con el ledger VERDE** (`validate_collaboration_state.py` exit 0), no durante una entrega de peer a
+medias; (2) si aborto por rojo, cuando el canonico vuelva verde **des-seen** su entrada en el `seen.json` para que
+reintente; (3) su reporte de aborto ("que Arquitecto/Codex deje el canonico verde y libere/cierre TASK-XXXX") es la
+senal -> destraba el ledger (espera el commit del peer o cierra tu la transicion) y luego des-seen.
+
 ## Checklist de una linea (pega mentalmente antes de actuar)
 ASCII? · response_owner? · type valido para el peer? · sin "para"+peer? · claim anidado + scope#self + fragmentos? ·
 .md con status/file? · validate+encoding exit 0? · committeado antes de pedir review? · gateado por exit-code?
