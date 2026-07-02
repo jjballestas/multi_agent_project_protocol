@@ -106,6 +106,27 @@ local puede ir detras de origin). Luego, segun la senal:
 - Tras cada commit: actualiza memoria (DECISION-0026).
 
 ## 4. Gotchas aprendidos
+- **EL MONITOR ASYNC NO BASTA SOLO -- AUTO-POLL al inicio de CADA turno (leccion 2026-07-02):** un monitor armado y
+  vivo puede NO despertar la sesion cuando la entrega del peer cae en la ventana en que la sesion esta IDLE esperando
+  input del usuario (el bash en background no se agenda / la notificacion no fuerza un turno). Sintoma real: entrega
+  del Analista 03:17, monitor armado ~03:10 aun corriendo con 0 output, no desperto; el operador tuvo que preguntar
+  "como va". La logica del monitor estaba bien (verificada a mano: base->ve los commits peer, pasan self-filter).
+  FIX durable: **red PRIMARIA = auto-poll barato al empezar cada turno** (`git log --oneline -3`, `git status -sb`,
+  `ls Area_comun/mailbox/open/`, estado de la tarea en vuelo); el monitor es RESPALDO. Cuando la sesion tiene
+  actividad el monitor SI dispara (verificado con el done-flip 0237 y la entrega 0229); el hueco es solo la ventana
+  idle. Nunca reportes "en curso" sin antes auto-pollear el HEAD real.
+- **VERIFICA LIVENESS DEL PEER ANTES Y DESPUES DE RUTEAR (leccion 2026-07-02, el operador la cazo):** rutear un
+  GO/REVIEW/ACTION a un peer cuyo cron YA se auto-termino (7 rondas sin respuesta, ver arquitecto-cron-lifecycle
+  s.1d) NO hace NADA: el mensaje queda en `open/` sin procesar y tu crees que el peer trabaja. Sintoma real: rutee
+  REVIEW-0229 + REQUEST-cierres al Analista 04:08 pero su cron habia muerto 03:43 -> nada avanzo hasta que el
+  operador pregunto 04:34. FIX: antes de soltar un mensaje a un peer, `tasklist //FI "PID eq $(cat
+  .protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.pid)" //NH | grep -ci powershell` = 1 y `*.log` con
+  heartbeat reciente (no `limit reached; exiting`); si esta muerto, RELANZA primero. El auto-poll de cada turno
+  incluye liveness de AMBOS peers, no solo git/open.
+- **El WATCHDOG (s.1b) caza AMBOS: exec colgado (lock + log congelado) Y cron-MUERTO-con-pendientes** (pid no vivo +
+  >=1 `Arquitecto-to-<Peer>` en open/ fuera de su seen.json). Un cron gracefully-exited NO tiene lock -> el watchdog
+  viejo (solo lock) era CIEGO a la muerte graceful; la v2 chequea pid-liveness + pendientes. Idle-sin-pendientes no
+  alarma.
 - **Auto-ruido:** sin el self-filter, el monitor se dispara con tus propios commits. El filtro `Co-Authored-By:
   Claude Opus` los descarta (verificado: tus commits lo llevan, los de Codex/Analista no).
 - **2+ timeouts seguidos con crons vivos** = cron atascado (lock/proceso huerfano). NO es "nada que hacer": diagnostica

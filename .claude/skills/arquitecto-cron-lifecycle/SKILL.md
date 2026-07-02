@@ -47,6 +47,25 @@ Evolucion: (1) regex viejo `(detener|deten|parar|para|stop)`+peer -> se auto-dis
 tumbo el cron de Codex el 2026-07-02); (3) fix v2 (TASK-0236, desplegado) `-ceq` igualdad exacta -> footgun muerto.
 Si un cron corre un harness pre-0236, vuelve a aplicar la cautela vieja hasta redesplegar.
 
+### 1d. AUTO-EXIT por limite de rondas sin respuesta (MUERTE GRACEFUL, no es jam) -- y la regla de oro de liveness
+El cron se AUTO-TERMINA solo tras `max_no_arquitecto_rounds` (=7) ciclos sin un mensaje nuevo del Arquitecto:
+`No Arquitecto response limit reached; exiting.` en su `*.log`. Es apagado GRACEFUL por diseno (ahorro), NO un
+cuelgue: pid muerto, SIN lock, log limpio. Visto 2x el 2026-07-02 (Codex ~03:17, Analista ~03:43).
+- **CONSECUENCIA CRITICA (leccion 2026-07-02, el operador la cazo dos veces):** si le RUTEAS un mensaje a un peer
+  cuyo cron YA se auto-termino, **no pasa NADA** -- el mensaje queda en `open/` sin procesar y tu crees que el peer
+  esta trabajando. Peor: el monitor de entregas calla (no hay entrega) y el watchdog viejo NO lo veia (solo cazaba
+  execs colgados = lock + log congelado; un cron gracefully-exited no tiene lock -> punto ciego total).
+- **REGLA DE ORO -- verifica LIVENESS antes y despues de rutear:** ANTES de soltar un GO/REVIEW/ACTION a un peer,
+  confirma que su cron esta vivo (`tasklist //FI "PID eq $(cat .protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.pid)" //NH | grep -ci powershell`
+  = 1, y el `*.log` con heartbeat reciente, NO `limit reached; exiting`). Si esta muerto, **relanza PRIMERO** y luego
+  routea (o routea y relanza acto seguido). Incluye la liveness de AMBOS peers en el auto-poll de cada turno.
+- **El WATCHDOG debe cazar el cron-MUERTO-con-pendientes, no solo el exec colgado:** por cada peer, si el pid NO
+  esta vivo Y hay >=1 mensaje `Arquitecto-to-<Peer>` en `open/` fuera de su `*.seen.json` -> ALERTA "DEAD-CRON,
+  relanzar". (Version desplegada en `arquitecto-monitor-coordina` s.1b.) Un cron idle que se auto-terminó SIN
+  pendientes no es alarma (relanzalo cuando tengas trabajo para el).
+- Relanzar: `powershell -NoProfile -File personal/<Peer>/<peer>_mailbox_cron.ps1` (run_in_background). Al arrancar
+  procesa la cola de `open/` que no este en su `seen.json`.
+
 ## 2. Diagnostico (read-only)
 ```
 tail -12 .protocol-tmp/<peer>_mailbox_cron/<peer>_mailbox_cron.log      # LOCKED skip / LOOP_ERROR?
