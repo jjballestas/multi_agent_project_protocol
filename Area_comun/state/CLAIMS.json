@@ -13640,6 +13640,23 @@
             "updated_at": "2026-07-02T02:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+            "expires_at": "2026-07-03T00:25:00Z",
+            "notes": "Create TASK-0237 remediation handoff and delivery mailbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T00:25:00Z",
+            "status": "active",
+            "task_id": "TASK-0237",
+            "updated_at": "2026-07-02T00:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
             "expires_at": "2026-07-03T00:11:20Z",
             "notes": "Remediate TASK-0237 vendor npm test watchdog tree kill and bounded exit evidence.",

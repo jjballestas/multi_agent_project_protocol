@@ -1,6 +1,18 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0237"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
             "owner": "Codex",
             "scope": [
