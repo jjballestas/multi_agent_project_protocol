@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0229 remediacion branding #2 NO-GO por residuos Hermes visibles en src+bundle).
+> Ultima actualizacion: 2026-07-02 (TASK-0229 remediacion branding #3 NO-GO por residuos Hermes user-facing en links/mensajes publicos).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0229 remediacion branding #3 (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `28b20f2` (`review(TASK-0229): Analista blocks branding remediation 3`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-3-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-3-NOGO`. Ancla protocolo
+  `2e3900c80a2ce831b0c7c7dbdb19d9b59a447154`; producto `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `1b047d3b4d601351090b95fe53641aa8946769dc`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-rem3-aegis-f661c42c78eb46b58cc655e1c0232f95`.
+  `npm test` EXIT 0 (83 files / 562 tests); `zeus-env-aliases.test.ts` EXIT 0 (3/3); build EXIT 0;
+  `electron:bundle-server` EXIT 0; no package/appId/binario rename diff detectado; MIT license intacta.
+  Bloqueo falsable: grep residual `hermes` sigue devolviendo user-facing no allowlist en links renderizados y
+  mensajes publicos de error/help: `src/routes/early-access.tsx`, `src/screens/playground/hermes-world-landing.tsx`,
+  `src/server/claude-agent.ts`, `src/server/gateway-capabilities.ts`, `src/routes/api/mcp/$name.logs.ts`,
+  `src/routes/api/mcp/discover.ts`, `src/routes/api/swarm-dispatch.ts`, con copias en
+  `electron/server-bundle.cjs` (ej. `137158-137161`, `260996`, `274304`, `281149`, `282140`). Gates protocolo
+  live y clean: validate/neutrality/encoding EXIT 0; drift false `up_to_seq=3140`; #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0229 remediacion branding #2 (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   commit de review `review(TASK-0229): Analista blocks branding remediation 2`, artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-2-veredicto.md`, MSG
