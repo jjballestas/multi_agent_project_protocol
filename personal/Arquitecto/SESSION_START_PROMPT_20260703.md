@@ -9,11 +9,15 @@ ARRANQUE EN FRIO (lee en orden, no asumas):
 4. Area_comun/state/{PROJECT_STATE,TASK_INDEX,CLAIMS}.json + Area_comun/mailbox/open/ (~4 mensajes vivos).
 5. git fetch + git log --oneline -8 + git status (HEAD real; arbol COMPARTIDO; los peers commitean-a-veces-sin-pushear; `git merge --ff-only origin/main`).
 
-ESTADO VIGENTE (re-confirma via git; HEAD de referencia cc1dac4, 2026-07-02 01:32 local):
+ESTADO VIGENTE (re-confirma via git; ACTUALIZADO 2026-07-02 ~16:05 local, HEAD ref 95b9146; lo de mas abajo con HEAD 37cbd5d/cc1dac4 quedo SUPERADO):
 - FONDO INTOCABLE: Dataset SELLADO N=500 (tag TFM-dataset-N500 -> e3646ae); H1-H3 CONFIRMADAS. NO generar eventos "para el dataset". NO tocar los 5 pineados / v1.14.0 / #4. NO activar F2/re-genesis sin GO operador.
-- FOCO = REQ-ZEUS-001 (productizar Zeus-Aegis, D:\Agentes\Zeus\Zeus-Aegis). Adoptado: DECISION-0077 + D1-D5 (0072-0076). Plan vigente: PLAN-REQ-ZEUS-001-reconciliado.md. SUPERADOS: PLAN-cierre-dataset-lote-panel.md, REQZEUS-backlog-map.md.
-- PIPELINE (02:48, HEAD 37cbd5d): **DONE: 0222 0223 0224 0225 0226 0227 (DECISION-0079) 0228 0235 0236 (harness 5 fixes, DEPLEGADO).** **EN RE-GATE: 0237 (hang-proof npm test) -- NO-GO por watchdog vendor -> Codex remedio (ea3f52c: tree-kill + exit124) -> RE-RUTEADO al Analista (espero veredicto).** **0229 (WS3) = BLOCKED** (work en producto 980445c; re-habilitar cuando 0237 cierre). **proposed: 0230[WS2] 0231[WS4] 0232[WS3.5] 0233[WS7 owner Analista] 0234[WS10].** **DECISION-0080** (politica A/B execs colgados) registrada.
-- MAILBOX: higienizado, open/=3 vivos (REVIEW-0237-remediacion, entrega-rem-0237, GO-0229 diferido). El resto archivado.
+- FOCO = REQ-ZEUS-001 (productizar Zeus-Aegis, D:\Agentes\Zeus\Zeus-Aegis). Adoptado: DECISION-0077 + D1-D5 (0072-0076). Plan vigente: PLAN-REQ-ZEUS-001-reconciliado.md.
+- **PIPELINE CONGELADO por el operador (directiva ~14:56)** hasta su directiva post-ronda-2 del pivote: NO promover/cancelar tareas. UNICA excepcion autorizada: cerrar 0229.
+- PIPELINE: **DONE: 0222-0228, 0235, 0236, 0237.** Reviews huerfanas cerradas (0194/0199/0200/0201/0203/0211/0215 done). Canceladas: 0219/0220/0221 (Engram) + 0118 (DEF-PII). Re-encolada: 0178. **0229 (WS3 branding) = review_approved -> done-flip ruteado a Codex** (cierre WS3 tras 5 rondas de whack-a-mole resuelto por DECISION-0082 = branding user-visible acotado a superficie renderizada + allowlist etiquetada). **CONGELADO: 0230[WS2] 0231[WS4] 0232[WS3.5] 0233[WS7] 0234[WS10].**
+- **DECISIONES nuevas de la sesion:** DECISION-0081 (ruta unica de memoria = REQ-MEMORIA-HIBRIDA; Engram CERRADO, supersede 0071), DECISION-0082 (branding user-visible del gate WS3).
+- **PIVOTE publicar-para-ser-citado (canal directo del operador, pre-decision, NO toca ledger):** v1 ronda 1 Analista=CAMBIO-REQUERIDO; v2 -> ronda 2 relayada al Analista (EN VUELO, veredicto a ANALISTA-pivote-v2-veredicto.md + respuesta al Operador). Formalizacion (directiva+DECISION) la da el operador tras ronda 2.
+- MAILBOX: higienizado 2026-07-02 (open/ 38->4 vivos, 35 consumidos archivados en 6 lotes).
+- LECCIONES nuevas en skills: monitor async no basta -> auto-poll+liveness por turno (monitor-coordina s.4); cron auto-exit 7 rondas=muerte graceful, verificar liveness antes de rutear, watchdog v3 caza cron-muerto (cron-lifecycle s.1d); ->done exige implementer=Codex, Analista aborta+marca-seen review si canonico rojo (ledger-ops); higiene en BACKGROUND + ventana verificada aparte (mailbox-hygiene s.4b).
 
 EN VUELO (trabajo con dueño, esperando):
 - **0237** -> Codex construyendo. Al entregar -> REVIEW al Analista (con repro del cuelgue). GO -> ratifico + done-flip. Con 0237 verde, RE-HABILITO 0229 (nuevo GO o unblock).
