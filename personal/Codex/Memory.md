@@ -4,6 +4,14 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0229 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0229:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0229-done-flip` and moved
+  TASK-0229 `review_approved -> done` at seq 3212-3214. Evidence after the flip: encoding OK, neutrality command
+  exit 0, validator OK, drift false / byte-identical `up_to_seq=3214`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched; TASK-0229 product work remains in
+  `D:/Agentes/Zeus/Zeus-Aegis` commit `72984b0`. Protocol coordination commit message:
+  `coord(TASK-0229): close branding ws3`. The consumed Arquitecto ACTION message remains open because Codex does
+  not have the orchestrator-only mailbox archive capability.
 - TASK-0229 DECISION-0082 allowlist delivery product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`:
   `72984b0 docs(branding): add decision 0082 hermes allowlist`. It adds
   `docs/DECISION-0082-HERMES-ALLOWLIST.md`, generated from
