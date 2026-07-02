@@ -11,7 +11,7 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `CLAIM-20260702-Codex-higiene-personal-fyi` was acquired/released through `runtime/submit_intent.py` at
   seq 3242-3243. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. Evidence before commit:
   encoding OK, neutrality command exit 0, validator OK with hygiene warnings only, drift false / byte-identical
-  `up_to_seq=3243`.
+  `up_to_seq=3243`. Coordination commit: `c436a8e mailbox(FYI): close Codex personal hygiene`.
 - Personal area hygiene completed for the 2026-07-02 operator ACTION. Root `personal/Codex/` now keeps only
   `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and active `codex_mailbox_cron.ps1`; consumed transaction JSONs
   moved under `archive/intents/2026-06-19-to-2026-07-02/`, obsolete monitor runtime files/scripts under
