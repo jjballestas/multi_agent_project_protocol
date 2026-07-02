@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (higiene personal/Analista: claims JSON consumidos archivados).
+> Ultima actualizacion: 2026-07-02 (TASK-0239 re-gate actor remediation OK/CERRABLE).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0239 re-gate actor remediation (2026-07-02): OK/CERRABLE. Veredicto canonico en `8643955`
+  (`review(TASK-0239): Analista OK actor remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0239-exception-recorded-veredicto.md`, MSG rr
+  `Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0239-actor-OK.md`.
+  Ancla protocolo REVIEW `f2c972db70232b9e2e188aa503ad30fd4c1cf0c8`; implementacion remediacion
+  `bc9cc8d84927f32837cdfc9ee5cdc301f6115aaa`; producto control `D:/Agentes/Zeus/Zeus-protocol`
+  commit `b2b2395da39090109db6de2dc50726dbaab1a11e`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/analista-0239-regate-4e5782fe3e0744f39477b13da4b70d2b`.
+  `npm test` producto EXIT 0 (109 tests, 87 pass, 22 skipped); `python scripts/test_exception_recorded.py`
+  EXIT 0 (6/6); `python scripts/test_intake_gate.py` EXIT 0 (12/12); py_compile EXIT 0; PowerShell
+  validator EXIT 0. F-0239-01 cerrado: actor ajeno rechaza en single submit y transaccion good+bad sin append
+  parcial; actor list/dict/int/bool/NUL rechaza; actor exacto emite `exception.recorded` con actor payload/evento
+  igual al caller. Rechazos base y R5 TASK-0238 sin regresion; validate/neutrality/encoding live y clean EXIT 0;
+  drift false `up_to_seq=3315`; `protocol.config.json` SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residual no bloqueante: `require_text`
+  normaliza por `str(...).strip()`, pero el guard de actor cierra las formas probadas.
 - TASK-0238 R5 re-gate (2026-07-02): OK/CERRABLE. Veredicto canonico en `992b5ef`
   (`review(TASK-0238): Analista OK R5 regate`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0238-r5-regate-veredicto.md`, MSG rr
