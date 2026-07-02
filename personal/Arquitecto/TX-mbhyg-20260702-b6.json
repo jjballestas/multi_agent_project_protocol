@@ -1,0 +1,94 @@
+{
+ "idempotency_key": "arq:mbhyg-20260702-b6",
+ "intents": [
+  {
+   "type": "claim",
+   "op": "acquire",
+   "claim": {
+    "claim_id": "CLAIM-20260702-mbhyg-b6-arquitecto",
+    "owner": "Arquitecto",
+    "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+    "scope": [
+     "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-b6-arquitecto",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-branding-3-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-branding-3-in-review.md"
+    ],
+    "started_at": "2026-07-02T13:20:00Z",
+    "updated_at": "2026-07-02T13:20:00Z",
+    "expires_at": "2026-07-02T20:00:00Z",
+    "notes": "Higiene mailbox lote 6: archiva 5 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
+    "status": "active"
+   }
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review",
+   "author": "Codex",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review",
+   "author": "Codex",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review",
+   "author": "Codex",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review",
+   "author": "Codex",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-branding-3-in-review",
+   "author": "Codex",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "claim",
+   "op": "release",
+   "claim": {
+    "claim_id": "CLAIM-20260702-mbhyg-b6-arquitecto",
+    "owner": "Arquitecto",
+    "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+    "scope": [
+     "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-b6-arquitecto",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review.md",
+     "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-branding-3-in-review.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-branding-3-in-review.md"
+    ],
+    "started_at": "2026-07-02T13:20:00Z",
+    "updated_at": "2026-07-02T13:20:00Z",
+    "expires_at": "2026-07-02T20:00:00Z",
+    "notes": "Higiene mailbox lote 6: archiva 5 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
+    "status": "released"
+   }
+  }
+ ]
+}
