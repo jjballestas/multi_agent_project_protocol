@@ -54,11 +54,14 @@ Borrador completo listo en CONSENTIMIENTO-EMPLEADOS-BORRADOR.md con las marcas:
 3. Punto 7 (retencion de datos crudos atribuibles): 12 o 24 meses post-estudio —
    RECOMENDADA 24 (cubre auditoria del estudio ago-dic + margen).
 
-## Paso legal (recomendacion firme, no opcional en la practica)
+## Paso legal (IMPRESCINDIBLE)
 
-Revision de ~30 minutos del borrador con abogado laboral/de datos local (Ley 1581
-de 2012, habeas data; relacion laboral + datos personales) ANTES de la primera
-firma. Barato, y es la diferencia entre estudio publicable y demanda evitable.
+Revision de ~30 minutos del borrador con abogado laboral/de datos ANTES de la
+primera firma. JURISDICCION DUAL (anadido 2026-07-02, operador en Espana +
+empleado en Colombia): la revision debe cubrir Ley 1581 de 2012 (Colombia,
+habeas data) Y RGPD (UE 2016/679, responsable del tratamiento en Espana),
+incluida la transferencia internacional de datos Colombia-Espana. Barato, y es
+la diferencia entre estudio publicable y demanda evitable.
 
 ## Que pasa cuando el Operador decida
 

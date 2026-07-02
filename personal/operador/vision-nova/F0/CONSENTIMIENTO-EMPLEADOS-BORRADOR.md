@@ -1,8 +1,11 @@
 # Consentimiento informado y autorizacion de tratamiento de datos - Estudio Nova Budget
 
-BORRADOR v0.1 (paquete F0). Tres decisiones marcadas [DECIDE EL OPERADOR].
-RECOMENDACION FIRME: revision de 30 minutos con abogado laboral/de datos local
-(Ley 1581 de 2012, habeas data, Colombia) ANTES de la primera firma.
+BORRADOR v0.2 (paquete F0; decisiones del operador 2026-07-02 aplicadas).
+JURISDICCION DUAL: el Participante trabaja desde Colombia (Ley 1581 de 2012,
+habeas data) y el responsable del tratamiento opera desde Espana (RGPD, Reglamento
+UE 2016/679). Aplican AMBAS normativas. REVISION LEGAL IMPRESCINDIBLE (~30 min)
+con abogado laboral/de datos que cubra las dos jurisdicciones ANTES de la primera
+firma, incluida la transferencia internacional de datos Colombia-Espana.
 
 ---
 
@@ -88,12 +91,16 @@ bajo los mismos limites de los puntos 3, 5 y 7.
 No participar, o retirar el consentimiento despues (efecto hacia adelante), NO
 afecta tu empleo, salario ni asignacion de trabajo.
 
-### 10. Autorizacion de tratamiento de datos (Ley 1581 de 2012)
+### 10. Autorizacion de tratamiento de datos (Ley 1581 de 2012 + RGPD)
 
 El Participante AUTORIZA al Empleador a tratar los datos descritos en el punto 2
-con la finalidad del punto 4, bajo los limites de los puntos 3, 5, 6 y 7. Derechos
-de conocer, actualizar, rectificar y revocar: [canal interno / correo del
-responsable de tratamiento].
+con la finalidad del punto 4, bajo los limites de los puntos 3, 5, 6 y 7. Dado que
+el responsable del tratamiento opera desde Espana y el Participante desde Colombia,
+esta autorizacion cubre expresamente la TRANSFERENCIA INTERNACIONAL de los datos
+del punto 2 a Espana, y el tratamiento queda sujeto a AMBAS normativas: Ley 1581
+de 2012 (Colombia) y RGPD (UE 2016/679). Derechos del Participante bajo ambas
+(conocer/acceso, actualizar/rectificar, revocar/supresion, limitacion del
+tratamiento): [canal interno / correo del responsable de tratamiento].
 
 ### 11. Firma y acuse
 
