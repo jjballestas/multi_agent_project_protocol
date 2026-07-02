@@ -13,6 +13,13 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   PowerShell parser PASS, encoding OK, neutrality exit 0, Python and PowerShell validators OK, drift false /
   byte-identical `up_to_seq=3340`, and `protocol.config.json` unchanged. Product repo
   `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0240 is protocol validator work.
+- TASK-0240 delivery commit landed in the protocol repo:
+  `08b00ec coord(TASK-0240): deliver trailer gate`. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0240-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0240-in-review.md`. Runtime delivery moved
+  TASK-0240 `in_progress -> in_review` and released `CLAIM-20260702-Codex-TASK-0240` at seq 3341-3342.
+  Evidence after delivery: `python scripts/test_trailers.py` PASS 8 cases, encoding OK, neutrality exit 0,
+  validator OK, drift false / byte-identical `up_to_seq=3342`.
 - TASK-0239 done-flip executed by Codex via runtime transaction `codex:task0239:done-flip-tx`: acquired and
   released `CLAIM-20260702-Codex-TASK-0239-done-flip` and moved TASK-0239 `review_approved -> done` at seq
   3321-3323 after Arquitecto checker ratification. Protocol commit: `65095ee coord(TASK-0239): close done
