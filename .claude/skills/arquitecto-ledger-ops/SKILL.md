@@ -29,9 +29,12 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   `requested_action` y/o `question`). Sin `response_owner` -> `validate_collaboration_state.py` exit 1.
 - **type que el cron del peer reconoce:** Codex acepta `GO/REQUEST/ACTION/HANDOFF/REVIEW/QUESTION/DECISION`;
   **Analista acepta `REVIEW/REQUEST/ACTION/QUESTION/DECISION` (NO "GO")**. O pon `requested_action` no vacio.
-- **FOOTGUN stop-order:** el cron se AUTO-DETIENE si una linea contiene una palabra-stop
-  `(detener|deten|parar|para|stop|standdown|stand-down)` junto a `(cron|monitor|monitoreo|<Peer>)`.
-  NUNCA escribas "para Codex", "parar el cron", etc. **Evita "para" en todo el mensaje.**
+- **FOOTGUN stop-order (RESUELTO 2026-07-02 con el harness de TASK-0236):** el detector de corte ahora es
+  IGUALDAD EXACTA: el cron solo se detiene si `requested_action.Trim()` (o `one_line_summary`) es EXACTAMENTE
+  `STOP_JOB`. Ya puedes MENCIONAR "STOP_JOB"/stop/parada/para/kill libremente en el cuerpo/campos -> **ya NO hay
+  footgun** con el harness desplegado. (Historico: el `-cmatch`/contains viejo auto-detenia el cron si una linea
+  tenia una palabra-stop `(detener|deten|parar|para|stop)` junto a `(cron|monitor|<Peer>)`; asi "para Codex" o
+  mencionar STOP_JOB tumbaban el cron. Si algun cron corre un harness pre-0236, vuelve a aplicar la regla vieja.)
 - **GATEA TU PROPIO MENSAJE** antes de seguir: `python scripts/validate_collaboration_state.py` exit 0
   Y `python scripts/scan_encoding.py` exit 0. `scan_encoding` cubre `open/` Y `archived/`.
 
@@ -61,7 +64,10 @@ re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 a
 - Stage EXPLICITO por path (nunca `git add -A`: barre `personal/`). Snapshot consistente, gates verdes por
   **exit code** (no por grep: `grep ERROR` da exit 0 al matchear y NO frena).
 - Verifica el arbol commiteado: `git ls-tree HEAD <ruta>`, `git show HEAD:<msg>` tiene `response_owner`, etc.
-- Cierre en dos partes: Codex `in_progress->in_review`; Arquitecto reproduce suites/goldens y `in_review->done`.
+- Cierre en dos partes: Codex `in_progress->in_review`; Arquitecto ratifica `in_review->review_approved` (checker).
+  **El flip final `review_approved->done` exige capability `implementer` -> lo hace CODEX, NO el Arquitecto**
+  (submit_intent con actor Arquitecto sobre un `task_status ...->done` es rechazado: "lacks capability implementer").
+  Por eso el Arquitecto rutea un ACTION done-flip a Codex tras ratificar; no intenta cerrarlo el mismo.
 - **Tras CADA commit: actualiza memoria (DECISION-0026) + push si verde.**
 
 ## 5. Re-disparar un cron sobre un mensaje ya "seen"

@@ -38,12 +38,14 @@ cron lo re-EXEC solo; el reintento suele completar. Esto es exactamente lo que *
 estructuralmente (self-heal por PID-muerto-pre-deadline). Para no volar el evento en silencio: arma un watcher del
 lock (emite si mtime >13min) ademas del monitor de entregas.
 
-### 1c. STOP_JOB (directiva operador 2026-07-01): el token de parada ya NO es ambiguo
-Los harnesses ahora se detienen SOLO con el token exacto `STOP_JOB` (`-cmatch "\bSTOP_JOB\b"` en summary/
-requested_action). El regex viejo (`detener|deten|parar|para|stop|standdown` + peer) quedo retirado -- se
-auto-disparaba con "para" preposicion y con la tarea 0235 (contiene "stop marker"). **Se activa al RELANZAR el cron
-con el harness nuevo** (committeado en affe347); hasta entonces el cron vivo usa el harness viejo -> sigue el footgun
-en tus mensajes al peer hasta el redespliegue.
+### 1c. STOP_JOB: token de parada por IGUALDAD EXACTA (desplegado 2026-07-02 con TASK-0236)
+Los harnesses se detienen SOLO si `requested_action.Trim()` (o `one_line_summary`) es EXACTAMENTE `STOP_JOB`
+(`-ceq "STOP_JOB"`, igualdad, NO contains). **Ya NO hay footgun: puedes MENCIONAR "STOP_JOB"/stop/parada/para en
+el cuerpo o campos sin detener el cron.** Solo un mensaje cuyo requested_action SEA la orden literal detiene al agente.
+Evolucion: (1) regex viejo `(detener|deten|parar|para|stop)`+peer -> se auto-disparaba con "para" preposicion;
+(2) fix v1 (affe347) `-cmatch "\bSTOP_JOB\b"` (contains) -> AUN tumbaba el cron al solo MENCIONAR STOP_JOB (footgun-2,
+tumbo el cron de Codex el 2026-07-02); (3) fix v2 (TASK-0236, desplegado) `-ceq` igualdad exacta -> footgun muerto.
+Si un cron corre un harness pre-0236, vuelve a aplicar la cautela vieja hasta redesplegar.
 
 ## 2. Diagnostico (read-only)
 ```
