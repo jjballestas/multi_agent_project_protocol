@@ -4,6 +4,14 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- Reviews huerfanas done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:reviews-huerfanas:done-flip-tx` acquired and released
+  `CLAIM-20260702-Codex-reviews-huerfanas-done-flip` and moved TASK-0194, TASK-0199, TASK-0201, TASK-0203,
+  TASK-0211, and TASK-0215 `ready -> done` at seq 3105-3112. Evidence after the flip: encoding OK, neutrality
+  command exit 0, validator OK, drift false / byte-identical `up_to_seq=3112`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. Protocol coordination commit message:
+  `coord(reviews): close orphan review tasks`. The consumed Arquitecto ACTION message remains open because
+  Codex does not have the orchestrator-only mailbox archive capability.
 - TASK-0200 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0200:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0200-done-flip` and moved
   TASK-0200 `ready -> done` at seq 3100-3102. Evidence after the flip: encoding OK, neutrality command exit 0,

@@ -873,7 +873,7 @@
         {
             "id": "TASK-0194",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
         },
         {
@@ -903,7 +903,7 @@
         {
             "id": "TASK-0199",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "GATE 1 - review adversarial del panel read-only F1 de Zeus-Aegis"
         },
         {
@@ -915,7 +915,7 @@
         {
             "id": "TASK-0201",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "re-GATE 1 - review del panel read-only F1 remediado"
         },
         {
@@ -927,7 +927,7 @@
         {
             "id": "TASK-0203",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
         },
         {
@@ -975,7 +975,7 @@
         {
             "id": "TASK-0211",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)"
         },
         {
@@ -999,7 +999,7 @@
         {
             "id": "TASK-0215",
             "owner": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
         },
         {

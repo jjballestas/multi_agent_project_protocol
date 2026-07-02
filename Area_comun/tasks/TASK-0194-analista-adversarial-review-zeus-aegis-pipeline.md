@@ -2,7 +2,7 @@
 task_id: TASK-0194
 title: "Revision ADVERSARIAL (Analista) del pipeline Zeus-Aegis (DECISION-0064) + razonamiento de alcance pre-registro + measurement baseline"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high

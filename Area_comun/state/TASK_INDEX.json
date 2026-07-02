@@ -3005,7 +3005,7 @@
             "project": "multi_agent_project_protocol",
             "relayed_by": "Arquitecto",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline",
             "type": "review"
         },
@@ -3093,7 +3093,7 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "GATE 1 - review adversarial del panel read-only F1 de Zeus-Aegis",
             "type": "review"
         },
@@ -3127,7 +3127,7 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "re-GATE 1 - review del panel read-only F1 remediado",
             "type": "review"
         },
@@ -3161,7 +3161,7 @@
             "project": "Zeus-Aegis",
             "relayed_by": "Arquitecto",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "done",
             "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)",
             "type": "review"
         },
@@ -3281,7 +3281,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)",
             "type": "review"
         },
@@ -3337,7 +3337,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "done",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)",
             "type": "review"
         },

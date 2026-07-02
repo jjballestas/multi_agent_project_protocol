@@ -2,7 +2,7 @@
 task_id: TASK-0199
 title: "GATE 1 - review ADVERSARIAL (Analista) del panel read-only completo de Zeus-Aegis (F1: 7 vistas)"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high

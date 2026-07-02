@@ -2,7 +2,7 @@
 task_id: TASK-0215
 title: "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high

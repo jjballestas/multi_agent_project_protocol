@@ -10,54 +10,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0194",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Revision ADVERSARIAL del pipeline Zeus-Aegis (DECISION-0064) + alcance pre-registro + measurement baseline"
-        },
-        {
-            "id": "TASK-0199",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "GATE 1 - review adversarial del panel read-only F1 de Zeus-Aegis"
-        },
-        {
-            "id": "TASK-0201",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "re-GATE 1 - review del panel read-only F1 remediado"
-        },
-        {
-            "id": "TASK-0203",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "GATE 1 final - confirmar V4 cerrado (PII estructural)"
-        },
-        {
-            "id": "TASK-0211",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)"
-        },
-        {
-            "id": "TASK-0215",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
-        },
-        {
             "id": "TASK-0229",
             "owner": "Codex",
             "phase": "P2",

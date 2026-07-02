@@ -2,7 +2,7 @@
 task_id: TASK-0201
 title: "re-GATE 1 - review ADVERSARIAL (Analista) del panel read-only F1 REMEDIADO (verifica V3/V4/V6 + confirma V1/V2/V5)"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high

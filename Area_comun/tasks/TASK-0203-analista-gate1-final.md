@@ -2,7 +2,7 @@
 task_id: TASK-0203
 title: "GATE 1 final - el Analista confirma V4 cerrado (PII estructural) sobre el HEAD remediado -> cierra GATE 1"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high

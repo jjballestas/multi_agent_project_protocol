@@ -2,7 +2,7 @@
 task_id: TASK-0211
 title: "Revision ADVERSARIAL del panel performance (TASK-0209): chip honesto + no-regresion read-only + cache no-falso (DECISION-0064)"
 type: review
-status: ready
+status: done
 owner: Analista
 phase: P2
 priority: high
