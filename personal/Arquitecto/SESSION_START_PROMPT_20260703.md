@@ -9,6 +9,13 @@ Codex = implementa. Analista = checker adversarial (gate en clon limpio). operad
 actor_id ledger = "Arquitecto". Escritor unico VIVO del ledger (submit_intent). DECISION-0038: narracion MINIMA.
 
 ## COLD-START (lee en orden, verifica, no asumas)
+0. **LEASE DE INSTANCIA UNICA (directiva Operador 2026-07-03, resolucion-dual-sesion):** lee
+   `personal/Arquitecto/.session-lease`. Si existe con `last_heartbeat_ts` FRESCO (< 30 min) y
+   `session_id` ajeno -> HAY OTRA SESION ARQUITECTO VIVA: NO coordines, NO escribas rutas compartidas,
+   consulta al Operador por mailbox y espera. Si esta vencido o no existe: escribe TU lease
+   (session_id nonce + session_start_ts + prompt + last_heartbeat_ts) y REFRESCA el heartbeat en cada
+   turno (parte del auto-poll). Al cerrar sesion ordenadamente, borra tu lease. El archivo esta en
+   .gitignore (estado runtime local, no se commitea).
 1. `memory/MEMORY.md` + `memory/project-state-snapshot.md` (bloque tope mas reciente = estado real).
 2. Dispara skill **arquitecto-ledger-ops** ANTES de tocar el ledger. Skills del Arquitecto: ledger-ops,
    cron-lifecycle, mailbox-hygiene, monitor-coordina, pipeline-vision-nova. Global: session-checkpoint. USALAS.

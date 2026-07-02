@@ -28,6 +28,7 @@ event-state.runtime.json
 # sealed tag). Not part of the protocol core; kept out of the shared tree (DECISION-0016).
 .agents/
 personal/Arquitecto/TX-*.json
+personal/Arquitecto/.session-lease
 personal/Arquitecto/.hyg_ts
 personal/Arquitecto/.mbhyg_ts
 personal/Arquitecto/*.out
