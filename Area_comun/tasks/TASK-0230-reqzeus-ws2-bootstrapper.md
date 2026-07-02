@@ -1,6 +1,6 @@
 ---
 task_id: TASK-0230
-title: "[REQ-ZEUS-001][WS2] Bootstrapper: auto-instalacion + ciclo de vida (gateway+backend+config) en Electron main"
+title: "[VISION-NOVA][F2.1] new_instance de nova-budget desde tag v1.18.0 + perfil de instancia (arm/mode + taxonomia de riesgo) [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
 status: proposed
 owner: Codex
@@ -10,13 +10,13 @@ created_at: 2026-06-30
 reviewer: Analista
 checker: Arquitecto
 project: multi_agent_project_protocol
-relates_to: [REQ-ZEUS-001]
-linked_decisions: [DECISION-0074, DECISION-0075, DECISION-0077]
+relates_to: [REQ-ZEUS-001, GOAL-VISION-NOVA-001]
+linked_decisions: [DECISION-0074, DECISION-0075, DECISION-0077, DECISION-0083]
 linked_reqs: [REQ-ZEUS-001]
 file: Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md
 ---
 
-# TASK-0230 - [REQ-ZEUS-001][WS2] Bootstrapper (auto-instalacion + lifecycle)
+# TASK-0230 - [VISION-NOVA][F2.1] new_instance nova-budget (re-alcance DECISION-0083)
 
 - **Owner build:** Codex - **Review:** Analista - **Checker:** Arquitecto
 - **Repo producto:** `D:/Agentes/Zeus/Zeus-Aegis`. Dep: D3 (0074), D4 (0075). Reusa `autoStartGateway` existente.

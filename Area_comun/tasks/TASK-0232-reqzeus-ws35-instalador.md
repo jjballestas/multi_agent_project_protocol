@@ -1,6 +1,6 @@
 ---
 task_id: TASK-0232
-title: "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets"
+title: "[VISION-NOVA][F2.3] Harness distribuido pull -> escribir -> push inmediato (claims visibles entre clones) + hosting privado de la instancia [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
 status: proposed
 owner: Codex
@@ -10,13 +10,13 @@ created_at: 2026-06-30
 reviewer: Analista
 checker: Arquitecto
 project: multi_agent_project_protocol
-relates_to: [REQ-ZEUS-001]
-linked_decisions: [DECISION-0075, DECISION-0076, DECISION-0077]
+relates_to: [REQ-ZEUS-001, GOAL-VISION-NOVA-001]
+linked_decisions: [DECISION-0075, DECISION-0076, DECISION-0077, DECISION-0083]
 linked_reqs: [REQ-ZEUS-001]
 file: Area_comun/tasks/TASK-0232-reqzeus-ws35-instalador.md
 ---
 
-# TASK-0232 - [REQ-ZEUS-001][WS3.5] Instalador + empaquetado
+# TASK-0232 - [VISION-NOVA][F2.3] Harness distribuido (re-alcance DECISION-0083)
 
 - **Owner build:** Codex (DevOps) - **Review:** Analista - **Checker:** Arquitecto
 - **Repo producto:** `D:/Agentes/Zeus/Zeus-Aegis`. Dep: WS2 (0230), WS3 (0229).

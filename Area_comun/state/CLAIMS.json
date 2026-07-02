@@ -14312,6 +14312,27 @@
             "updated_at": "2026-07-02T06:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-f02-decision0083-arquitecto",
+            "expires_at": "2026-07-02T21:00:00Z",
+            "notes": "F0.2 completada.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-f02-decision0083-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/decisions/DECISION-0083-vision-nova-supersede-fork-realcance.md",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+                "Area_comun/tasks/TASK-0231-reqzeus-ws4-backend-modelos-peones.md",
+                "Area_comun/tasks/TASK-0232-reqzeus-ws35-instalador.md",
+                "Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md"
+            ],
+            "started_at": "2026-07-02T17:10:00Z",
+            "status": "released",
+            "task_id": "GOAL-VISION-NOVA-001",
+            "updated_at": "2026-07-02T17:10:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-b1-arquitecto",
             "expires_at": "2026-07-02T20:00:00Z",
             "notes": "Higiene mailbox lote 1: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "dd6f9367c12f7bed8071672315f0a4138a8c7329667042c6876ffae94b2a245a",
+  "canonical_hash": "7fc6d83cde3e27ebac90d3a2c24f9f39fc99af2bc5e370d750cef672078f5504",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -512,6 +512,8 @@
       "DECISION-0080": 1,
       "DECISION-0081": 1,
       "DECISION-0082": 1,
+      "DECISION-0083": 1,
+      "GOAL-VISION-NOVA-001": 2,
       "MAILBOX-ARCHIVE": 8,
       "MAILBOX-HYGIENE": 5,
       "MAILBOX-HYGIENE-20260620": 2,
@@ -1015,11 +1017,11 @@
       "TASK-0227": 41,
       "TASK-0228": 11,
       "TASK-0229": 69,
-      "TASK-0230": 1,
-      "TASK-0231": 1,
-      "TASK-0232": 1,
-      "TASK-0233": 3,
-      "TASK-0234": 1,
+      "TASK-0230": 2,
+      "TASK-0231": 2,
+      "TASK-0232": 2,
+      "TASK-0233": 4,
+      "TASK-0234": 2,
       "TASK-0235": 25,
       "TASK-0236": 14,
       "TASK-0237": 16,
@@ -1030,7 +1032,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2553,
+    "events_applied": 2561,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2738,6 +2740,7 @@
       "intent:Analista:claim:defa2a61fc1d5fa376d8ad62e593532b8c551d3ef24ca6467ed903ef6404b260": 2406,
       "intent:Analista:claim:fe9de8a8ee2b5628b23740431d35dacb7e023b388e99a74fd351267ed65d00b3": 2461,
       "intent:Arquitecto:claim:0076e413773e147e6531c44244f19913face90d34a345f966fd0e0b93e6a6c82": 2832,
+      "intent:Arquitecto:claim:02725fe21b52ce0efedebd7a756a8721cb8762cf952eae0e059470e33d37ce35": 3232,
       "intent:Arquitecto:claim:02b7345355818da8bf1c284cdb25fd6bd4a7bf88e5a6edbb39cf53feef30d2f1": 2826,
       "intent:Arquitecto:claim:0924110a611f661d7a760659259a4a7062d3784338c797d62c247511c9f48b2c": 2809,
       "intent:Arquitecto:claim:0f033111c57ca8b1def559469c8903ed7219ccd61b2efc8decb42b602c64a4de": 2891,
@@ -2832,6 +2835,7 @@
       "intent:Arquitecto:claim:aae1aa47370d19ee26611e3a5c1bbcb4cfd00adf655dffd6dbc47d2e6f9a3abf": 2652,
       "intent:Arquitecto:claim:ae3e68535ef5724fbb49b1eb7935e52f0978643b907a61ba49ba3732187be7f3": 3061,
       "intent:Arquitecto:claim:b22b57a3a6910236be934ee2412c23c7b8fdec41fc1131ddcb7d491fd2158ba9": 2721,
+      "intent:Arquitecto:claim:b2f2f2fba59f9a5a0d40a07d2170ff4356f65cad0e4b1370af15eb1ae80f8ff3": 3225,
       "intent:Arquitecto:claim:b5967d974b55ecd2e7c6fae793e577edc94585e7d0b61873e94dcac703f5eec0": 3183,
       "intent:Arquitecto:claim:b5df5bffca1405eaa740c58cea10747c05d8a3b6a4b94101bc0bdf3c871f5c4e": 2678,
       "intent:Arquitecto:claim:b7a3eaa69c9c3674799307b8260f170766d3e6b41ac8c1bdc50c67b86c61e9d7": 2661,
@@ -2882,6 +2886,7 @@
       "intent:Arquitecto:decision:27af9bd20bb70d76ddb7c910dc4be02f61a2c007f4e1d97291ea3c4cfc78f491": 3089,
       "intent:Arquitecto:decision:8fa6a4d6331b7a0c691deed59137bd9616e642b88eb7e1dc33ff7a588f698708": 3142,
       "intent:Arquitecto:decision:99bb452613c45fc1a8d03f339e3078d0c2bb09161f2f362796056578435f7065": 2780,
+      "intent:Arquitecto:decision:9aa62f02e6fdcd85d288903069be901e6dd29da445cb71febf8f354b102c2c32": 3226,
       "intent:Arquitecto:decision:9c2539630b695fd007aa63b2625483384a883f034989b230ae81cf0f6e941004": 3034,
       "intent:Arquitecto:decision:9ca44573901dd1a4590d4ef82829740e5e649e41e43b9c56dde7d44fb9672781": 2779,
       "intent:Arquitecto:decision:ac745644333965669f0080ff75e05957d2506e0227f1204e0d1c150acf4dc639": 2653,
@@ -3083,6 +3088,7 @@
       "intent:Arquitecto:task_status:f68ea0b51d0f3b311b0d6c66c6477e11eabb260e32e555e31e9e84779b4d1e00": 2922,
       "intent:Arquitecto:task_status:f94f95fe9b9c8916b6b895222bb09392cc115f96da5f850f36a1020e41332b92": 2844,
       "intent:Arquitecto:task_upsert:08e01ff19395700fc0d35369be2158f458b4a650a85eb0a11d3a42d5589bc201": 2665,
+      "intent:Arquitecto:task_upsert:098e24dca85643d6f6b81cca3e2d909f339f5d1b5af4ab7d70131a5063b1505e": 3227,
       "intent:Arquitecto:task_upsert:269b477ceec77331c9c920fb39dfe5bf8cb232ccf1ac7f012710ea8e4840607c": 2702,
       "intent:Arquitecto:task_upsert:3b5734f13f980b1717cc95b423535f17d6134b738648ac5ec743b248a1d8d55b": 2786,
       "intent:Arquitecto:task_upsert:46e7021016ea3730e7327ad0f714fa98df1d332e63dbef59b7a8b9af46112778": 2666,
@@ -3091,6 +3097,9 @@
       "intent:Arquitecto:task_upsert:69e9cfcb91c4cd4890c8ba3aa76411bc0ff245c902ad51598fb678ddbc8051dc": 2787,
       "intent:Arquitecto:task_upsert:6eb7b21ae4801f7bb4372c0a0e5acadc3de35fbd175ee2c6107ccc0952824639": 2664,
       "intent:Arquitecto:task_upsert:79cb8d1bf08034914844940bc6679ab81e18ec9a2bd0970ef4fb446bff28d5a5": 3017,
+      "intent:Arquitecto:task_upsert:7a0212275c3556a25c90b3fb08863e7c109a88dceac9ac645dd51817b9862d2a": 3230,
+      "intent:Arquitecto:task_upsert:811cf3820578e4dfc6755559e49cacb11c41a4ac234a1243b730843e66f0f079": 3228,
+      "intent:Arquitecto:task_upsert:8952a9651a595164a58439916355bb1f54acea72eaed2ff7304b100c1b98f986": 3231,
       "intent:Arquitecto:task_upsert:8c03179b08d258bf3f8da1b2c3306e0dc6f5d11bb7457e18bebea16d7e2828b9": 3019,
       "intent:Arquitecto:task_upsert:abc495557c400c235d1835275ade5b03b503efab90073a097cfa6c719da64ef8": 2722,
       "intent:Arquitecto:task_upsert:b228bf5e54dd22f29385baa0eda798ece999a7265ec92ab31161122d70419868": 2810,
@@ -3099,6 +3108,7 @@
       "intent:Arquitecto:task_upsert:df0327ff1bb4f28de9c2945b60ca45096a230f0a2cbc82d35cf38f285835bdfd": 2639,
       "intent:Arquitecto:task_upsert:edb019f0d3294fbea6588c8808d2ffb3d05f9e2cf7b8ce929a94657e8fc0636c": 2789,
       "intent:Arquitecto:task_upsert:ee800dfac739625c9b58c6f4e56d3c56bdee8c15c2019cb9ddfa53fdff9b12c0": 2644,
+      "intent:Arquitecto:task_upsert:f7a926db26b357c21f7d26ef9c4ec0e3604ea920e040cf5b996d33016ab1c2dc": 3229,
       "intent:Arquitecto:task_upsert:f7cf34c2446dfd26138fb0dfc42d17a8699fc3230c0c2acaa33976a260bfcfb0": 2629,
       "intent:Arquitecto:task_upsert:fbe8d6bf076e2cc9e1d37fa87c45d8dbdf5fe0061d5e2397176ba006be4ec30f": 2662,
       "intent:Arquitecto:task_upsert:fd0f6cbb529361f18835f1e956adee936db2cf0c12c1a392eeab1cab1354b2f1": 3027,
@@ -3587,5 +3597,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3224
+  "up_to_seq": 3232
 }

@@ -1090,31 +1090,31 @@
             "id": "TASK-0230",
             "owner": "Codex",
             "status": "proposed",
-            "title": "[REQ-ZEUS-001][WS2] Bootstrapper: auto-instalacion + ciclo de vida (gateway+backend+config) en Electron main"
+            "title": "[VISION-NOVA][F2.1] new_instance de nova-budget desde tag v1.18.0 + perfil de instancia (arm/mode + taxonomia de riesgo) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
             "id": "TASK-0231",
             "owner": "Codex",
             "status": "proposed",
-            "title": "[REQ-ZEUS-001][WS4] Backend de modelos por defecto (D3) + bloqueo PII + spike peones (repo sandbox aparte)"
+            "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
             "id": "TASK-0232",
             "owner": "Codex",
             "status": "proposed",
-            "title": "[REQ-ZEUS-001][WS3.5] Instalador electron-builder firmado (Windows) + desinstalacion limpia + gate de purga de assets"
+            "title": "[VISION-NOVA][F2.3] Harness distribuido pull -> escribir -> push inmediato (claims visibles entre clones) + hosting privado de la instancia [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
             "id": "TASK-0233",
             "owner": "Analista",
             "status": "proposed",
-            "title": "[REQ-ZEUS-001][WS7] Verificacion e2e en VM limpia: checklist licencias MIT + cero hermes visible + cero PII"
+            "title": "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
             "id": "TASK-0234",
             "owner": "Arquitecto",
             "status": "proposed",
-            "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
+            "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
             "id": "TASK-0235",
@@ -1232,7 +1232,8 @@
         "DECISION-0079",
         "DECISION-0080",
         "DECISION-0081",
-        "DECISION-0082"
+        "DECISION-0082",
+        "DECISION-0083"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

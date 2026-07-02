@@ -1,6 +1,6 @@
 ---
 task_id: TASK-0233
-title: "[REQ-ZEUS-001][WS7] Verificacion e2e en VM limpia: checklist licencias MIT + cero hermes visible + cero PII"
+title: "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: verify
 status: proposed
 owner: Analista
@@ -10,14 +10,14 @@ created_at: 2026-07-02
 reviewer: Arquitecto
 checker: Arquitecto
 project: multi_agent_project_protocol
-relates_to: [REQ-ZEUS-001]
-linked_decisions: [DECISION-0075, DECISION-0076, DECISION-0077]
+relates_to: [REQ-ZEUS-001, GOAL-VISION-NOVA-001]
+linked_decisions: [DECISION-0075, DECISION-0076, DECISION-0077, DECISION-0083]
 linked_reqs: [REQ-ZEUS-001]
 depends_on: [TASK-0226, TASK-0229, TASK-0230, TASK-0231, TASK-0232]
 file: Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md
 ---
 
-# TASK-0233 - [REQ-ZEUS-001][WS7] Verificacion e2e en VM limpia
+# TASK-0233 - [VISION-NOVA][F2.2] Verificacion e2e distribuida (re-alcance DECISION-0083)
 
 - **Owner (maker):** Analista - **Review:** Arquitecto - **Checker:** Arquitecto. maker != checker.
 - **Precondicion:** el alta del Analista como participante (TASK-0228, WS5) YA se cumplio. Deps de workstream:
