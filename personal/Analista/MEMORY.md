@@ -1406,3 +1406,17 @@
   scan_domain_neutrality exit 0; scan_encoding exit 0; drift 0 `up_to_seq=3214`; `protocol.config.json`
   sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; Zeus-protocol clean clone
   `npm test` en `b2b2395` exit 0, 87 pass/22 skipped.
+- TASK-0238 (2026-07-02): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en `5ee5beb`
+  (`review(TASK-0238): Analista requires intake exception hardening`). Ancla protocolo `66b9401`, implementacion
+  `0efe196`, deliver `17c5973`; artefacto `Area_comun/artifacts/ANALISTA-TASK-0238-intake-gate-veredicto.md`;
+  MSG rr a Arquitecto `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-intake.md`. R0/R1 pasan: `TASK-0238`
+  sin intake valida en todos los estados enforced probados, `TASK-0239` sin intake falla en estados enforced y
+  `proposed` queda exento; HEAD limpio valida verde con 176 tareas pre-boundary sin intake exentas. N1-N4 y N6
+  missing-intake pasan; pin #4 preservado con sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; gates clean/vivo validate, encoding,
+  neutrality exit 0; drift vivo 0 `up_to_seq=3268`; Zeus clean clone `npm test` en `b2b2395` exit 0, 87 pass/22
+  skipped. Bloqueante F-0238-01: R5 no esta hard-gateado; `TASK-0239 ready` con `intake_exempt: true` y
+  `exception_ref: 999`, sin evento `exception.recorded`, valida verde en Python y PowerShell, y `submit_intent`
+  acepta `proposed->ready` dejando estado `ready`. Pedir remediacion: validar evento existente kind
+  `intake_exempt` + `task_id` coincidente en Python validator, PowerShell validator y runtime; agregar negativos
+  para ref inexistente, kind incorrecto y task incorrecto, mas positivo con evento real.
