@@ -1,5 +1,26 @@
 # INSUMOS PRD-03 - Decisiones que solo el Operador puede tomar (paquete F0, parte d)
 
+## RESUELTO (respuestas del Operador, 2026-07-02, sesion Asesor)
+
+- Insumo 1 (dataset publico): **COMPLETO SEUDONIMIZADO** (opcion ii). El Operador
+  elige maxima reproducibilidad sobre la recomendacion de agregado. Implicaciones
+  aplicadas: el consentimiento (punto 6) incluye ADVERTENCIA EXPRESA de riesgo de
+  re-identificacion en equipo pequeno que el empleado acepta al firmar; la revision
+  legal de 30 min pasa de recomendada a IMPRESCINDIBLE; el pre-registro (F3.4)
+  declara "eventos por tarea con etiqueta de rol" como nivel de publicacion; la
+  redaccion PII pre-publicacion (CB.1) gana peso.
+- Insumo 2a (no-consentimiento): **exclusion solo del dataset publicado**; el
+  empleado trabaja exactamente igual (punto 9 resuelto).
+- Insumo 2b (retencion de crudos atribuibles): **24 meses** post-estudio, luego
+  eliminacion o anonimizacion irreversible (punto 7 resuelto).
+
+PRD-03 queda DESBLOQUEADO: F3.1 (politica de medicion) puede redactarse con estas
+elecciones cuando toque F3.
+
+---
+
+Contexto original de la peticion (conservado como provenance):
+
 Estas 2 entradas BLOQUEAN PRD-03 (estudio pre-registrado): sin ellas no se puede
 redactar la politica de medicion (F3.1) ni sellar el pre-registro (F3.4).
 

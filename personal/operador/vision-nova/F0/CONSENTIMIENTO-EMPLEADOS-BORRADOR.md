@@ -49,22 +49,24 @@ incondicional durante la vigencia del estudio y sobre los datos recogidos en el.
 
 ### 6. Que se publicaria
 
-[DECIDE EL OPERADOR - opciones:
- (i) AGREGADO (recomendada): solo metricas agregadas por tarea/fase, SIN
-     identificadores de persona ni de rol individual; los eventos crudos NO salen.
- (ii) COMPLETO SEUDONIMIZADO: eventos por tarea con etiqueta de rol (dev-1, dev-2).
-     ADVERTENCIA: en un equipo pequeno la seudonimizacion es debil — quien conozca
-     la empresa puede mapear roles a nombres.
- (iii) DUAL: agregado publico + corpus completo retenido en privado para auditoria.]
+[DECISION DEL OPERADOR 2026-07-02] Se publicaria el dataset COMPLETO SEUDONIMIZADO:
+eventos a nivel de tarea con etiqueta de rol (por ejemplo dev-1, dev-2), sin nombres
+ni datos de contacto. El contenido del punto 3 (pantalla, teclado, comunicaciones
+privadas) NUNCA forma parte del dataset.
 
-El Participante conocera la opcion elegida ANTES de firmar; cambiarla despues
-requiere nuevo consentimiento.
+ADVERTENCIA QUE EL PARTICIPANTE ACEPTA EXPRESAMENTE: en un equipo pequeno, una
+persona que conozca la empresa podria inferir que rol corresponde a que persona
+(riesgo de re-identificacion). Precisamente por eso los compromisos de los puntos
+5 (no uso punitivo), 7 (retencion y acceso) y 8 (disputa) son incondicionales.
+
+Cambiar el nivel de publicacion despues de la firma requiere nuevo consentimiento.
 
 ### 7. Retencion y acceso
 
-- Datos crudos atribuibles: se conservan [DECIDE EL OPERADOR: 12 / 24 meses
-  (recomendado: 24, cubre el estudio + auditoria)] desde el cierre del estudio;
-  despues se eliminan o se anonimizan de forma irreversible.
+- Datos crudos atribuibles: se conservan 24 MESES desde el cierre del estudio
+  [DECISION DEL OPERADOR 2026-07-02]; despues se eliminan o se anonimizan de
+  forma irreversible. (Nota: lo ya publicado bajo el punto 6 no puede retirarse;
+  la retencion aplica al corpus crudo interno.)
 - Acceso a datos crudos: solo el operador del estudio y el auditor tecnico.
 - Cada Participante puede CONSULTAR SUS PROPIOS DATOS en cualquier momento y
   solicitar correccion de errores de atribucion.
@@ -78,12 +80,10 @@ ninguna consecuencia negativa.
 
 ### 9. Si decides no participar
 
-[DECIDE EL OPERADOR - opciones:
- (i) EXCLUSION DEL DATASET PUBLICADO (recomendada, "opcion sana"): trabajas
-     exactamente igual, con las mismas herramientas; tus tareas simplemente se
-     EXCLUYEN del dataset publicado y de todo reporte externo.
- (ii) EXCLUSION TOTAL DEL ESTUDIO: tus tareas no entran ni al analisis interno
-     (reduce la muestra; declarado en el pre-registro).]
+[DECISION DEL OPERADOR 2026-07-02] Trabajas exactamente igual, con las mismas
+herramientas y flujo; tus tareas simplemente se EXCLUYEN del dataset publicado y
+de todo reporte externo. Solo se usan en el analisis interno de la metodologia,
+bajo los mismos limites de los puntos 3, 5 y 7.
 
 No participar, o retirar el consentimiento despues (efecto hacia adelante), NO
 afecta tu empleo, salario ni asignacion de trabajo.
