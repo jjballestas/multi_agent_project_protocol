@@ -4,6 +4,13 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0238 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0238:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0238-done-flip` and moved
+  TASK-0238 `review_approved -> done` at seq 3279-3281. Evidence after the flip: encoding OK, neutrality command
+  exit 0, validator OK with existing mailbox hygiene warning only, drift false / byte-identical `up_to_seq=3281`.
+  Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0238 is protocol
+  infrastructure. Protocol coordination commit: `1004261 coord(TASK-0238): close intake gate`. The consumed
+  Arquitecto ACTION message remains open because Codex does not have orchestrator-only mailbox archive capability.
 - TASK-0238 R5 remediation completed and redelivered. Implementation commit:
   `076193d fix(intake): require recorded exception for exemptions`; delivery commit:
   `a87ae6b coord(TASK-0238): redeliver r5 remediation`. The remediation removes the disabled-event-state bypass in
