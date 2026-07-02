@@ -107,12 +107,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
-        },
-        {
-            "id": "TASK-0237",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         }
     ],
     "next_actions": [
