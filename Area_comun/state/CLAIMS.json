@@ -15539,6 +15539,29 @@
             "updated_at": "2026-07-02T23:03:23Z"
         },
         {
+            "claim_id": "CLAIM-20260703-hyg-dualsesion-arquitecto",
+            "expires_at": "2026-07-03T06:00:00Z",
+            "notes": "Higiene ciclo dual-sesion (5 consumidos, acuse Operador 1eb1764).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-hyg-dualsesion-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Operador-FYI-anomalia-dual-sesion-arquitecto.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Operador-FYI-anomalia-dual-sesion-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-ACTION-resolucion-dual-sesion.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-ACTION-resolucion-dual-sesion.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Operador-FYI-standdown-sesion-anterior.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Operador-FYI-standdown-sesion-anterior.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Operador-FYI-lease-instancia-unica.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Operador-FYI-lease-instancia-unica.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-FYI-acuse-cierre-dual-sesion.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-FYI-acuse-cierre-dual-sesion.md"
+            ],
+            "started_at": "2026-07-02T23:15:03Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260703",
+            "updated_at": "2026-07-02T23:15:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg0240-b1-arquitecto",
             "expires_at": "2026-07-03T05:00:00Z",
             "notes": "Higiene ciclo 0240 lote 1.",
