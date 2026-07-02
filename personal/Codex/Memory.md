@@ -2226,6 +2226,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-3.md`, opened
   `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md`, moved
   TASK-0229 back to `in_review`, and released Codex claims via runtime seq 3122-3124.
+- TASK-0229 third remediation product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `1b047d3 fix(branding):
+  remediate visible Hermes copy`. It performs exhaustive visible-copy remediation for Hermes/Hermes Workspace
+  strings in `vendor/hermes-2.3.0/src/**`, preserves compatibility/internal/provenance/test/generated residues,
+  regenerates `vendor/hermes-2.3.0/electron/server-bundle.cjs`, and keeps upstream-compatible aliases for internal
+  exported names. Product gates passed: build, bundle regeneration, root `npm test` 83/83 files and 562/562 tests,
+  and clean clone `npm test` with the same counts.
 
 ## Useful Fresh-Session Commands
 
