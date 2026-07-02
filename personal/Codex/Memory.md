@@ -2241,6 +2241,16 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Current Repository State
 
+- TASK-0240 remediation protocol commit exists: `db47854 fix(validation): parse final commit trailers`; the
+  personal memory follow-up is the latest `chore(personal): record TASK-0240 remediation` commit. The remediation commit
+  fixes F-0240-01 by parsing `Task-Id`, `Fixes-Task`, and `Ops-Reason` only from the final commit-message
+  trailer section, adds the permanent N5 regression for an intermediate `Task-Id` paragraph followed by
+  body text, returns TASK-0240 to `in_review`, releases Codex claims, adds
+  `Area_comun/handoffs/HANDOFF-TASK-0240-codex-to-arquitecto-2.md`, and opens
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0240-remediation-in-review.md`. Evidence:
+  `python scripts/test_trailers.py` 9 cases OK, Python and PowerShell validators OK, encoding and
+  domain-neutrality scans OK, drift false at seq 3356, and product `npm test` in
+  `D:/Agentes/Zeus/Zeus-protocol` OK (109 tests, 87 pass, 22 skipped). No product code changed.
 - Latest observed HEAD before this refresh: `823b5b9 chore(personal): renombra areas a la identidad nueva (personal/Claude->Arquitecto, personal/Claude-analista->Analista)`.
 - v1.9.3 is published and the OFF-PILOT trio is closed: TASK-0100, TASK-0095, and TASK-0096 are done.
 - Identity reform is live: use `Arquitecto` for the architect/orchestrator and `Analista` for the independent
