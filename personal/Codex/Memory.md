@@ -4,6 +4,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0239 done-flip executed by Codex via runtime transaction `codex:task0239:done-flip-tx`: acquired and
+  released `CLAIM-20260702-Codex-TASK-0239-done-flip` and moved TASK-0239 `review_approved -> done` at seq
+  3321-3323 after Arquitecto checker ratification. Evidence before protocol commit: encoding OK, neutrality
+  command exit 0, collaboration validator OK, drift false / byte-identical `up_to_seq=3323`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because the requested action was a protocol
+  done-flip.
 - TASK-0239 actor remediation implementation commit `bc9cc8d fix(runtime): bind exception actor to caller` rejects
   `exception` intents when public payload `actor` differs from signed caller `actor_id`, including transaction
   submits, and adds permanent negative coverage in `scripts/test_exception_recorded.py`.
