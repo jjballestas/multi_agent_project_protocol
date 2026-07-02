@@ -141,6 +141,17 @@ local puede ir detras de origin). Luego, segun la senal:
   si no, es anomalia DECISION-0018 a senalar/resolver); (2) **des-seen** la ACTION en el `seen.json` del peer
   (skill `arquitecto-cron-lifecycle` s.5) para que el cron la reprocese. Regla: si el monitor timea sobre una
   remediacion en vuelo, mira el err.log del peer ANTES de asumir que sigue trabajando.
+- **DUAL-SESION ARQUITECTO (leccion 2026-07-03, directiva Operador resolucion-dual-sesion):** dos sesiones
+  interactivas del Arquitecto pueden quedar vivas a la vez (la vieja con monitores armados sigue reaccionando
+  cuando el operador ya arranco la nueva). Son INVISIBLES entre si: ambas firman actor_id Arquitecto y sus
+  commits llevan Co-Authored-By: Claude, asi que el SELF-FILTER de ambos monitores descarta los commits de la
+  otra -> colision silenciosa (higiene/promociones/GOs duplicados). GUARD OBLIGATORIO: al arrancar, verificar
+  `personal/Arquitecto/.session-lease` (si hay lease FRESCO <30min de otro session_id -> NO coordinar, consultar
+  al Operador); escribir/refrescar el lease propio en cada turno como parte del auto-poll; borrarlo al cerrar.
+  Mitigacion si la dualidad ya ocurrio: particion de carriles via CLAIMS del ledger (unico mutex efectivo entre
+  sesiones con la misma firma) + FYI al Operador para que ordene el stand-down de una (discriminador por
+  session_start_ts). NO re-emitir GOs/higiene que la otra ya emitio: verificar CLAIMS.json + git log ANTES de
+  cada escritura compartida.
 - **Arbol compartido:** peers commitean aqui; `git merge --ff-only` cada wake; `git pull --rebase --autostash` si el
   push sale non-ff. Vi gates en rojo TRANSITORIO por un peer a mitad de escritura -> re-correr hasta verde.
 - **Trigger diferido:** si el operador pide "promover X luego de que Codex termine su cola", vigila via el monitor
