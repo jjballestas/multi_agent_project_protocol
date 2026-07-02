@@ -3,7 +3,7 @@ message_id: MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-cit
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-02
 context_refs:

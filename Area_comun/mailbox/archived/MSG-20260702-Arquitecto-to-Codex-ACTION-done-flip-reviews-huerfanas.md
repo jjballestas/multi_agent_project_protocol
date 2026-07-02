@@ -3,7 +3,7 @@ message_id: MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-02
 context_refs:

@@ -1,0 +1,105 @@
+{
+ "idempotency_key": "arq:mbhyg-20260702-b2",
+ "intents": [
+  {
+   "type": "claim",
+   "op": "acquire",
+   "claim": {
+    "claim_id": "CLAIM-20260702-mbhyg-b2-arquitecto",
+    "owner": "Arquitecto",
+    "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+    "scope": [
+     "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-b2-arquitecto",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0200-done-flip.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0200-done-flip.md",
+     "Area_comun/mailbox/open/MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Operador-to-Analista-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Analista-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-ws3-branding.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-ws3-branding.md"
+    ],
+    "started_at": "2026-07-02T13:20:00Z",
+    "updated_at": "2026-07-02T13:20:00Z",
+    "expires_at": "2026-07-02T20:00:00Z",
+    "notes": "Higiene mailbox lote 2: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
+    "status": "active"
+   }
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas",
+   "author": "Arquitecto",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0200-done-flip",
+   "author": "Arquitecto",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado",
+   "author": "Analista",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Operador-to-Analista-REVIEW-pivote-publicar-citado",
+   "author": "Operador",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-citado",
+   "author": "Arquitecto",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "mailbox_archive",
+   "message_id": "MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-ws3-branding",
+   "author": "Arquitecto",
+   "relayed_by": "Arquitecto",
+   "endorsement": "none"
+  },
+  {
+   "type": "claim",
+   "op": "release",
+   "claim": {
+    "claim_id": "CLAIM-20260702-mbhyg-b2-arquitecto",
+    "owner": "Arquitecto",
+    "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+    "scope": [
+     "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-b2-arquitecto",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-done-flip-reviews-huerfanas.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0200-done-flip.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0200-done-flip.md",
+     "Area_comun/mailbox/open/MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Operador-to-Analista-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Analista-REVIEW-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-citado.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-publicar-citado.md",
+     "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-ws3-branding.md",
+     "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-ws3-branding.md"
+    ],
+    "started_at": "2026-07-02T13:20:00Z",
+    "updated_at": "2026-07-02T13:20:00Z",
+    "expires_at": "2026-07-02T20:00:00Z",
+    "notes": "Higiene mailbox lote 2: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
+    "status": "released"
+   }
+  }
+ ]
+}

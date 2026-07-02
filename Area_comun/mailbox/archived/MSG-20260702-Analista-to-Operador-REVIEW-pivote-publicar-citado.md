@@ -3,7 +3,7 @@ message_id: MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado
 from: Analista
 to: Operador
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-02
