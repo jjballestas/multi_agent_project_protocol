@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0229 WS3 branding NO-GO por cadenas Hermes visibles).
+> Ultima actualizacion: 2026-07-02 (TASK-0229 remediacion branding #2 NO-GO por residuos Hermes visibles en src+bundle).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0229 remediacion branding #2 (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  commit de review `review(TASK-0229): Analista blocks branding remediation 2`, artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-2-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-2-NOGO`. Ancla protocolo
+  `735e9a45aa8ad02bf5fd56514823239211ae85af`; producto `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `c9eb971480fa5eecc9c50cf0329e6676921007bb`; clon limpio producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-rem2-aegis-171993b6308741fd873bc6b10215f1f2/zeus-aegis`.
+  `npm test` EXIT 0 (83 files / 562 tests); `zeus-env-aliases.test.ts` EXIT 0 (3/3); `corepack pnpm --dir
+  vendor/hermes-2.3.0 build` EXIT 0; diff package/appId/binarios relevante vacio. Bloqueo falsable:
+  `git grep -n -I -i "hermes" -- vendor/hermes-2.3.0/src vendor/hermes-2.3.0/electron/server-bundle.cjs`
+  sigue devolviendo cadenas user-facing no allowlist, por ejemplo `Spawning a Hermes swarm worker`,
+  `Detected Hermes profiles`, `Hermes config`, `Build a scheduled Hermes task`, `Hermes Realm`,
+  `Hermes Sigil`, `Could not load Hermes configuration` y copias en `electron/server-bundle.cjs`.
+  Gates protocolo vivo y clean: validate/neutrality/encoding EXIT 0; drift false `up_to_seq=3124` antes
+  de claim y `3126` tras claim/release; #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0229 remediacion branding (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `9699cf0` (`review(TASK-0229): Analista blocks branding remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-veredicto.md`, MSG
