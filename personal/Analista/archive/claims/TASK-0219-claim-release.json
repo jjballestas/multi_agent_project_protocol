@@ -1,0 +1,12 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260629-Analista-TASK-0219-review",
+    "task_id": "TASK-0219",
+    "owner": "Analista",
+    "status": "released",
+    "updated_at": "2026-06-29T23:20:00Z",
+    "notes": "TASK-0219 adversarial review delivered: NO-GO."
+  },
+  "idempotency_key": "analista:task-0219:claim-release"
+}

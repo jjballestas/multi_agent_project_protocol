@@ -1,0 +1,17 @@
+{
+    "scope":  [
+                  "Area_comun/state/CLAIMS.json#CLAIM-20260628-Analista-TASK-0208-review",
+                  "Area_comun/artifacts/",
+                  "Area_comun/mailbox/open/MSG-20260628-Analista-to-Arquitecto-TASK-0208-review.md"
+              ],
+    "type":  "claim",
+    "started_at":  "2026-06-28T14:30:07Z",
+    "notes":  "Revision adversarial TASK-0208 deliverable waiver guard.",
+    "updated_at":  "2026-06-28T14:30:07Z",
+    "owner":  "Analista",
+    "expires_at":  "2026-06-29T23:59:59Z",
+    "claim_id":  "CLAIM-20260628-Analista-TASK-0208-review",
+    "task_id":  "TASK-0208",
+    "status":  "active",
+    "op":  "acquire"
+}

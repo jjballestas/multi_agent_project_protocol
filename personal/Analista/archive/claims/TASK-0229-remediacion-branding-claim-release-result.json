@@ -1,0 +1,87 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "3aaae3337620b06cddd4638644a835c24ac62a62586c93630c0257a789ed0243",
+        "replay_hash": "3aaae3337620b06cddd4638644a835c24ac62a62586c93630c0257a789ed0243",
+        "up_to_seq": 3118
+    },
+    "event": {
+        "actor": "Analista",
+        "actor_auth": {
+            "keyid": "analista:v1",
+            "method": "ed25519",
+            "sig": "3pFQUaYSlS6MmH+9Qivbnb20o8u9+K4ZoVpO/hZVu2PLesLpIzZWlq++H8juGXc3piQ2Xk/6Hs2AA3Kpi/nMDg=="
+        },
+        "aggregate_id": "TASK-0229",
+        "aggregate_version": 23,
+        "applied": true,
+        "event_auth": {
+            "audience": "runtime-event-log",
+            "issuer": "local-runtime",
+            "key_id": "analista-hmac:v1",
+            "method": "hmac-sha256",
+            "signature": "487b7e9d09b06987e86080f6aaa671a3853ff47ce65442ef62a4c2f10e82d459"
+        },
+        "event_schema_version": "1.0",
+        "fencing_token": null,
+        "idempotency_key": "analista:task-0229-remediacion-branding:claim-release",
+        "payload": {
+            "commit": "a99a2b5aeccf697810b7fec5f280ea5f79520569",
+            "intent_type": "claim",
+            "task_id": "TASK-0229",
+            "timestamp": "2026-07-02T03:53:30Z",
+            "transitions": {
+                "claims": [
+                    {
+                        "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+                        "notes": "TASK-0229 remediation branding adversarial re-gate delivered: NO-GO.",
+                        "op": "release",
+                        "owner": "Analista",
+                        "status": "released",
+                        "task_id": "TASK-0229",
+                        "updated_at": "2026-07-02T03:53:30Z"
+                    }
+                ]
+            }
+        },
+        "prev_hash": "b05122be9c2d9da8e270cb29081f7d21d2f5281df1a231af598243ceb442c690",
+        "seq": 3118,
+        "ts": "2026-07-02T03:53:30Z",
+        "type": "intent.applied"
+    },
+    "genesis_event": null,
+    "intent": {
+        "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+        "idempotency_key": "analista:task-0229-remediacion-branding:claim-release",
+        "kind": "claim",
+        "notes": "TASK-0229 remediation branding adversarial re-gate delivered: NO-GO.",
+        "op": "release",
+        "owner": "Analista",
+        "status": "released",
+        "task_id": "TASK-0229",
+        "updated_at": "2026-07-02T03:53:30Z"
+    },
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "f5e54b9e8a1ee741ce83bc9191580b232d6dff3020e41cc88f7b010d03916ada",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3118
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3118
+    },
+    "task_files_updated": []
+}

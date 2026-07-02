@@ -1,0 +1,115 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "9d41c9c3beb186689ad6af55f35f1a7e2d8802567ce3db2c896fbbd19e5b34fb",
+        "replay_hash": "9d41c9c3beb186689ad6af55f35f1a7e2d8802567ce3db2c896fbbd19e5b34fb",
+        "up_to_seq": 3117
+    },
+    "event": {
+        "actor": "Analista",
+        "actor_auth": {
+            "keyid": "analista:v1",
+            "method": "ed25519",
+            "sig": "bADO0gmo1Yi/B/4Q+1tZRcKCZ+labBbqBk/FX4eAaFdN0oxsqE+TJRjSO3SWl4/bEmDxok3qwsCdBGk3i7IyDw=="
+        },
+        "aggregate_id": "TASK-0229",
+        "aggregate_version": 22,
+        "applied": true,
+        "event_auth": {
+            "audience": "runtime-event-log",
+            "issuer": "local-runtime",
+            "key_id": "analista-hmac:v1",
+            "method": "hmac-sha256",
+            "signature": "03a2eb21bf7324d17426a81239801005509d41bd241a2ac7fee59b31d651a58e"
+        },
+        "event_schema_version": "1.0",
+        "fencing_token": null,
+        "idempotency_key": "analista:task-0229-remediacion-branding:claim-acquire",
+        "payload": {
+            "commit": "a99a2b5aeccf697810b7fec5f280ea5f79520569",
+            "intent_type": "claim",
+            "task_id": "TASK-0229",
+            "timestamp": "2026-07-02T03:50:38Z",
+            "transitions": {
+                "claims": [
+                    {
+                        "claim": {
+                            "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+                            "expires_at": "2026-07-02T05:50:38Z",
+                            "notes": "Adversarial re-gate of TASK-0229 remediation branding.",
+                            "owner": "Analista",
+                            "scope": [
+                                "Area_comun/state/CLAIMS.json",
+                                "Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-veredicto.md",
+                                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-NOGO.md",
+                                "runtime/state/events.jsonl",
+                                "runtime/state/snapshot.json"
+                            ],
+                            "started_at": "2026-07-02T03:50:38Z",
+                            "status": "active",
+                            "task_id": "TASK-0229",
+                            "updated_at": "2026-07-02T03:50:38Z"
+                        },
+                        "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+                        "op": "acquire",
+                        "owner": "Analista",
+                        "task_id": "TASK-0229"
+                    }
+                ]
+            }
+        },
+        "prev_hash": "fc7540d49f189f9965f6b61900d8c6a97202657d62359662e475de41138ea3be",
+        "seq": 3117,
+        "ts": "2026-07-02T03:50:38Z",
+        "type": "intent.applied"
+    },
+    "genesis_event": null,
+    "intent": {
+        "claim": {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+            "expires_at": "2026-07-02T05:50:38Z",
+            "notes": "Adversarial re-gate of TASK-0229 remediation branding.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-NOGO.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T03:50:38Z",
+            "status": "active",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T03:50:38Z"
+        },
+        "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+        "idempotency_key": "analista:task-0229-remediacion-branding:claim-acquire",
+        "kind": "claim",
+        "op": "acquire",
+        "owner": "Analista",
+        "task_id": "TASK-0229"
+    },
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "09abdb22372dd196eb9052d5ab769d5db943a0d35a21c05eef14767e9273eb6d",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3117
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3117
+    },
+    "task_files_updated": []
+}

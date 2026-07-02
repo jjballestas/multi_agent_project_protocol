@@ -1,0 +1,24 @@
+{
+    "intents":  [
+                    {
+                        "updated_at":  "2026-06-28T14:32:34Z",
+                        "owner":  "Analista",
+                        "task_id":  "TASK-0208",
+                        "type":  "claim",
+                        "status":  "released",
+                        "claim_id":  "CLAIM-20260628-Analista-TASK-0208-review",
+                        "notes":  "Veredicto adversarial TASK-0208 entregado.",
+                        "op":  "release"
+                    },
+                    {
+                        "updated_at":  "2026-06-28T14:32:34Z",
+                        "owner":  "Analista",
+                        "task_id":  "TASK-0208",
+                        "type":  "claim",
+                        "status":  "released",
+                        "claim_id":  "CLAIM-20260628-Analista-TASK-0208-release",
+                        "notes":  "Auxiliary release after claim cleanup.",
+                        "op":  "release"
+                    }
+                ]
+}

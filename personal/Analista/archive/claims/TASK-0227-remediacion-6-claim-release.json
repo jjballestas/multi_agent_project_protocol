@@ -1,0 +1,12 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260701-Analista-TASK-0227-remediacion-6-review",
+    "task_id": "TASK-0227",
+    "owner": "Analista",
+    "status": "released",
+    "updated_at": "2026-07-01T21:09:00Z",
+    "notes": "TASK-0227 remediation 6 adversarial review delivered: NO-GO."
+  },
+  "idempotency_key": "analista:task-0227-remediacion-6:claim-release"
+}

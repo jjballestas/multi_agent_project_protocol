@@ -1,0 +1,20 @@
+{
+    "claim":  {
+                  "scope":  [
+                                "Area_comun/state/CLAIMS.json",
+                                "runtime/state/events.jsonl",
+                                "runtime/state/snapshot.json"
+                            ],
+                  "updated_at":  "2026-06-28T14:32:00Z",
+                  "started_at":  "2026-06-28T14:32:00Z",
+                  "notes":  "Auxiliary claim to release malformed direct claim row.",
+                  "owner":  "Analista",
+                  "expires_at":  "2026-06-29T23:59:59Z",
+                  "claim_id":  "CLAIM-20260628-Analista-TASK-0208-release",
+                  "task_id":  "TASK-0208",
+                  "status":  "active"
+              },
+    "op":  "acquire",
+    "claim_id":  "CLAIM-20260628-Analista-TASK-0208-release",
+    "type":  "claim"
+}

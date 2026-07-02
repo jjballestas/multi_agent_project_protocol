@@ -1,0 +1,12 @@
+{
+  "claim": {
+    "op": "release",
+    "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+    "task_id": "TASK-0229",
+    "owner": "Analista",
+    "status": "released",
+    "updated_at": "2026-07-02T03:53:30Z",
+    "notes": "TASK-0229 remediation branding adversarial re-gate delivered: NO-GO."
+  },
+  "idempotency_key": "analista:task-0229-remediacion-branding:claim-release"
+}
