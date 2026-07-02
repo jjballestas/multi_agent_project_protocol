@@ -1,9 +1,16 @@
 # Codex Memory
 
-Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0240 done-flip.
 
 ## Latest Session Note
 
+- TASK-0240 done-flip completed in protocol commit `8acc2f6 coord(TASK-0240): close trailer gate`.
+  Runtime transaction `codex:task0240:done-flip-tx` acquired and released
+  `CLAIM-20260703-Codex-TASK-0240-done-flip` and moved TASK-0240 `review_approved -> done` at seq 3360-3362.
+  Evidence after flip: encoding OK, domain-neutrality command exit 0, collaboration validator OK, drift false /
+  byte-identical `up_to_seq=3362`; product repo `D:/Agentes/Zeus/Zeus-protocol` remained clean and untouched,
+  with `npm test` PASS 109 tests (87 pass, 22 skipped) and `node --check public/app.js src/server.js` OK.
+  Consumed Arquitecto ACTION message remains open because Codex cannot run orchestrator-only mailbox archive.
 - TASK-0240 implementation commit landed in the protocol repo:
   `6360569 feat(validation): build commit trailer gate`. It builds the inactive commit-trailer validator for
   governed routes (`Area_comun/**`, `runtime/**`, `scripts/**`, `protocol.config.json`) with exact
