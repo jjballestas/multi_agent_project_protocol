@@ -5,8 +5,9 @@ status: accepted
 date: 2026-06-29
 deciders: [operador humano (aprobado 2026-06-29), Arquitecto]
 supersedes: []
-superseded_by: []
-relates_to: [DECISION-0016, DECISION-0020, DECISION-0022, DECISION-0026, DECISION-0040, DECISION-0050]
+superseded_by: [DECISION-0081]
+status_note: "SUPERSEDED por DECISION-0081 (2026-07-02): ruta Engram CERRADA por completo, capability OFF permanente, tareas ENG-* sin efecto. Documento conservado como historia + audit trail adversarial. No es gobierno vivo."
+relates_to: [DECISION-0016, DECISION-0020, DECISION-0022, DECISION-0026, DECISION-0040, DECISION-0050, DECISION-0081]
 phase: P2
 capability_state: OFF (mechanism specified, not merged; PATCH = SPEC hasta merge+tests)
 canonical_protocol_commit: 77dfa0f64c738b6be5d57d89fb44de4d601c98ed
