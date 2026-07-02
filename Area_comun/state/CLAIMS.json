@@ -14227,6 +14227,20 @@
             "updated_at": "2026-07-02T00:11:20Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-higiene-personal-fyi",
+            "expires_at": "2026-07-03T00:00:00Z",
+            "notes": "Responder FYI de higiene del area personal Codex.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-higiene-personal-fyi",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Operador-FYI-higiene-area-personal.md"
+            ],
+            "started_at": "2026-07-02T17:55:43Z",
+            "status": "released",
+            "task_id": "MSG-20260702-Operador-to-Codex-ACTION-higiene-area-personal",
+            "updated_at": "2026-07-02T17:55:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-reviews-huerfanas-done-flip",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Implementer done-flip for six orphan Analista review tasks after confirmed/ratiified closure.",

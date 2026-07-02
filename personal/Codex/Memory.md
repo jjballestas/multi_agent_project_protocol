@@ -4,6 +4,14 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- 2026-07-02 hygiene ACTION reply completed. Codex verified `personal/Codex/` root remains limited to
+  `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and `codex_mailbox_cron.ps1`, with consumed intents/prompts/
+  reports/runtime artifacts under `archive/`. Opened
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Operador-FYI-higiene-area-personal.md`; claim
+  `CLAIM-20260702-Codex-higiene-personal-fyi` was acquired/released through `runtime/submit_intent.py` at
+  seq 3242-3243. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. Evidence before commit:
+  encoding OK, neutrality command exit 0, validator OK with hygiene warnings only, drift false / byte-identical
+  `up_to_seq=3243`.
 - Personal area hygiene completed for the 2026-07-02 operator ACTION. Root `personal/Codex/` now keeps only
   `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and active `codex_mailbox_cron.ps1`; consumed transaction JSONs
   moved under `archive/intents/2026-06-19-to-2026-07-02/`, obsolete monitor runtime files/scripts under
