@@ -137,6 +137,12 @@ class ExceptionRecordedTests(unittest.TestCase):
         with self.assertRaisesRegex(IntentValidationError, "task not found"):
             self.submit(exception_payload("EXC-missing-task", task_id="TASK-9999"))
 
+    def test_rejects_actor_mismatch(self) -> None:
+        payload = exception_payload("EXC-actor-mismatch")
+        payload["actor"] = "other_agent"
+        with self.assertRaisesRegex(IntentValidationError, "actor must match caller"):
+            self.submit(payload)
+
     def test_round_trip_two_events_listable_by_task_with_zero_drift(self) -> None:
         self.submit(exception_payload("EXC-assist", kind="assist"))
         self.submit(exception_payload("EXC-arbitration", kind="arbitration"))

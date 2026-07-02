@@ -532,6 +532,13 @@ def normalize_exception_payload(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def ensure_exception_actor_matches_caller(normalized: dict[str, Any], actor_id: str) -> None:
+    if normalized.get("kind") != "exception":
+        return
+    if str(normalized.get("actor") or "") != actor_id:
+        raise IntentValidationError("exception.actor must match caller actor_id")
+
+
 def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
     kind, payload = parse_intent(intent)
     common = {"kind": kind}
@@ -1237,6 +1244,7 @@ def submit_intent(
     normalized = normalize_intent(intent)
     ensure_actor_enabled(root, actor_id)
     ensure_attested_actor_key_binding(root, actor_id)
+    ensure_exception_actor_matches_caller(normalized, actor_id)
     key = idempotency_key(actor_id, normalized)
 
     with ledger_file_lock(root):
@@ -1349,12 +1357,14 @@ def submit_intents(
 
     ensure_event_state_config_valid(root)
     normalized_intents = [normalize_intent(intent) for intent in intents]
+    ensure_actor_enabled(root, actor_id)
+    ensure_attested_actor_key_binding(root, actor_id)
+    for normalized in normalized_intents:
+        ensure_exception_actor_matches_caller(normalized, actor_id)
     keys = transaction_event_keys(actor_id, normalized_intents)
     if len(set(keys)) != len(keys):
         raise IntentValidationError("transaction contains duplicate intent idempotency keys")
     tx_key = transaction_idempotency_key(actor_id, normalized_intents, transaction_key)
-    ensure_actor_enabled(root, actor_id)
-    ensure_attested_actor_key_binding(root, actor_id)
     with ledger_file_lock(root):
         log_repair = repair_torn_event_tail(root)
         writer = EventWriter(root)

@@ -1,5 +1,19 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0239-actor-remediation",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0239-actor-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0239",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0239",
+                "Area_comun/tasks/TASK-0239-visionnova-f1b-exception-recorded.md",
+                "runtime/submit_intent.py",
+                "scripts/test_exception_recorded.py"
+            ],
+            "task_id": "TASK-0239"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
