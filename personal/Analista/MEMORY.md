@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0239 re-gate actor remediation OK/CERRABLE).
+> Ultima actualizacion: 2026-07-02 (TASK-0240 trailer gate NO-GO).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0240 trailer gate (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en `aac12e6`
+  (`review(TASK-0240): Analista blocks trailer parser`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0240-trailers-veredicto.md`, MSG rr
+  `Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0240-trailers-NOGO.md`.
+  Ancla protocolo REVIEW `ae016274d547c2c3ae9d77c1c5e32da08a425451`; implementacion
+  `6360569`; entrega `08b00ec`; producto control `D:/Agentes/Zeus/Zeus-protocol`
+  commit `b2b2395da39090109db6de2dc50726dbaab1a11e`. Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0240-product-4f9b6aec7b0a445abc36389f5318671e`;
+  `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/analista-0240-protocol-707ca64ec143438f8a0d0498577ab34a`;
+  `test_trailers`, Python validator, PowerShell validator, neutrality y encoding EXIT 0. F-2 pasa:
+  `commit_trailers` no esta activo, `protocol.config.json` byte-identico SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`, drift false `up_to_seq=3348`
+  tras claim/release. Bloqueante F-0240-01: una linea exacta `Task-Id: TASK-0240` en un parrafo no final,
+  seguida por otro parrafo, pasa `validate_commit_trailers` sin errores; SPEC B.1 exige trailers git en la
+  ultima seccion. Pedir parser de trailers finales y test negativo permanente.
 - TASK-0239 re-gate actor remediation (2026-07-02): OK/CERRABLE. Veredicto canonico en `8643955`
   (`review(TASK-0239): Analista OK actor remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0239-exception-recorded-veredicto.md`, MSG rr
