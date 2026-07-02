@@ -75,7 +75,7 @@
         {
             "id": "TASK-0229",
             "owner": "Codex",
-            "status": "blocked",
+            "status": "ready",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
         },
         {
