@@ -2,7 +2,7 @@
 task_id: TASK-0238
 title: "[VISION-NOVA][F1.1] Gate de intake determinista (validador pre-ready ps1+python + runtime hard-gate + templates)"
 type: build
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high

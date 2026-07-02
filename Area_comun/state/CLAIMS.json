@@ -14931,6 +14931,22 @@
             "updated_at": "2026-07-02T00:47:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-promote-f1a-arquitecto",
+            "expires_at": "2026-07-02T21:30:00Z",
+            "notes": "Promocion F1-A completada.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-promote-f1a-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0238-visionnova-f1a-gate-intake.md"
+            ],
+            "started_at": "2026-07-02T18:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0238",
+            "updated_at": "2026-07-02T18:15:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-register-0233-arquitecto",
             "expires_at": "2026-07-02T05:26:27Z",
             "notes": "Release tras registrar TASK-0233.",
