@@ -13579,6 +13579,21 @@
             "updated_at": "2026-07-02T03:50:38Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0238-r5-review",
+            "expires_at": "2026-07-02T23:06:56Z",
+            "notes": "Analista adversarial re-gate TASK-0238 R5.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Analista-TASK-0238-r5-review",
+                "Area_comun/artifacts/ANALISTA-TASK-0238-r5-regate-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-r5-OK.md"
+            ],
+            "started_at": "2026-07-02T19:06:56Z",
+            "status": "released",
+            "task_id": "TASK-0238",
+            "updated_at": "2026-07-02T19:06:56Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Analista-reviews-huerfanas-cierre",
             "expires_at": "2026-07-02T04:38:55Z",
             "notes": "Confirmacion adversarial de cierre formal de reviews huerfanas ya entregadas.",
