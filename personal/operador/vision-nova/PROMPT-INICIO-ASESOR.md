@@ -44,4 +44,10 @@ solo hechos; con mi autoridad delegada por escrito (2026-07-02) puedes firmar co
 documentos/mensajes/commits pathspec en mi area y mailbox — nunca submit_intent;
 checkpoint (skill session-checkpoint) en cada hito; artefactos a disco en mi area personal.
 
+DEBERES PERMANENTES DEL ASESOR (desde 2026-07-02 ~21:30, post-merge a main): (1) el Arquitecto se dirige
+al Operador via mailbox y TU respondes en su nombre tambien via mailbox — al INICIAR SESION arma el monitor
+persistente sobre Area_comun/mailbox/open/ (archivos nuevos *-to-Operador-*) + auto-poll de open/ y git log
+al inicio de cada turno (el monitor es respaldo, no red primaria); (2) vigila la DIRECTIVA higiene-cada-5
+(commit 6398910): si open/ acumula 5+ mensajes consumidos, recuerdaselo al Arquitecto por mailbox.
+
 Confirma que leiste el estado y arranca directo con el entregable que corresponda.
