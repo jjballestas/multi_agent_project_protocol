@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0229 remediacion branding #3 NO-GO por residuos Hermes user-facing en links/mensajes publicos).
+> Ultima actualizacion: 2026-07-02 (higiene personal/Analista: claims JSON consumidos archivados).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,53 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- Higiene area personal (2026-07-02): commit `d77ee98` (`chore(personal): archive Analista claim drafts`)
+  archiva 15 JSON de claims consumidos en `personal/Analista/archive/claims/`. Conservados como vigentes:
+  `MEMORY.md`, `STARTUP_PROMPT.md`, `README.md` y `analista_mailbox_cron.ps1`. FYI de cierre:
+  `Area_comun/mailbox/open/MSG-20260702-Analista-to-Operador-FYI-higiene-area-personal.md`.
+- TASK-0229 allowlist DECISION-0082 gate final (2026-07-02): OK/CERRABLE. Veredicto canonico en `4a1ead0`
+  (`review(TASK-0229): Analista OK allowlist gate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-allowlist-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-allowlist-OK`. Ancla instruccion protocolo
+  `3f1cedf0`; HEAD protocolo revisado `77b62e9d28df568213e6f71a4e95b74f88a1a238`; producto canonico
+  `D:/Agentes/Zeus/Zeus-Aegis` commit `72984b09f0ec2f29ec8ba75e3660b94a8db80bb3`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-allowlist-aegis-5318c8e0fdc44c04983eb04df122b02f`.
+  `npm test` EXIT 0; `corepack pnpm --dir vendor/hermes-2.3.0 build` EXIT 0; `electron:bundle-server`
+  EXIT 0. `git grep -n -I -i hermes -- vendor/hermes-2.3.0/src vendor/hermes-2.3.0/electron/server-bundle.cjs`
+  dio 892 hits y la allowlist `docs/DECISION-0082-HERMES-ALLOWLIST.md` cubre 892/892 (missing 0, extra 0,
+  duplicados 0). Los 3 hits previos estan a Zeus (`provider-wizard.tsx:657`, `hermes-world-embed.tsx:12`,
+  `claude-update.ts:34`); patrones historicos user-facing solo dejaron `expected hermes-workspace` en test
+  fixture. Gates protocolo vivo y clean: validate/neutrality/encoding EXIT 0; drift false `up_to_seq=3208`
+  tras claim/release; #4 sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- TASK-0229 remediacion branding #5 bajo DECISION-0082 (2026-07-02): CAMBIO-REQUERIDO / NO-GO.
+  Veredicto canonico en `51de440` (`review(TASK-0229): Analista blocks branding remediation 5`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-5-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-5-NOGO`. Ancla instruccion
+  protocolo `ccfbc00d25aead1604f2b54a37135d2a0c20d2ed`; HEAD protocolo al iniciar review
+  `79651c74d40a89d444c0a75de40f78e2a7f2b7d1`; producto canonico `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `3c8c08420182073fdfde01ed953abd3ec20ba02f`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-rem5-aegis-971135bb8dd2487bb70960b80188002e/zeus-aegis`.
+  `npm test` EXIT 0 (83 files / 562 tests); build EXIT 0; `electron:bundle-server` tras build EXIT 0; direct
+  bundle sin build previo EXIT 1 por `dist/server/server.js` ausente (residual no bloqueante). Los tres hits
+  exactos de ronda 4 pasan: `provider-wizard.tsx` ya no contiene `hermes`, `source=hermes-workspace` no aparece
+  en embed/bundle, y `claude-update.ts` expone `zeus-aegis-workspace` como expected repo. Bloqueo falsable:
+  DECISION-0082 exige allowlist etiquetada por cada hit Hermes restante y no encontre tal artefacto/lista en repo
+  ni handoff; sin esa carga de prueba no puedo validar que no haya etiquetas falsas ni que todos los restantes sean
+  identificador/import/comentario/dev-log/test-fixture/licencia-provenance/env-shim. Gates protocolo live y clean:
+  validate/neutrality/encoding EXIT 0; drift false `up_to_seq=3155` tras claim/release; #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Pivote "publicar para ser citado" (2026-07-02): CAMBIO-REQUERIDO, no NO-GO. Veredicto en commit
+  `79651c7` (`review: Analista verdict on publishing pivot`), artefacto
+  `Area_comun/artifacts/ANALISTA-pivote-publicar-citado-veredicto.md`, MSG
+  `Area_comun/mailbox/open/MSG-20260702-Analista-to-Operador-REVIEW-pivote-publicar-citado.md`.
+  Ancla protocolo `756477e683a94f6eca803bb0b02f662893554f8b`; sin producto canonico porque la instruccion
+  de pivote no cita repo/commit de producto. Gates: validate live EXIT 0, validate secretless clone EXIT 0,
+  scan_domain_neutrality EXIT 0, scan_encoding EXIT 0, drift false `up_to_seq=3153`, `protocol.config.json`
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fuentes verificadas: Hinds/NoLabs
+  2026-01-21 y NIST CAISI 2026-02-17 confirman anclas; Gartner confirma demanda macro; IETF AAT, nono/Sigstore
+  y Agent Receipts/Pipelock/Microsoft AGT debilitan el claim amplio de unicidad. HP1/HP3/HP4 pasan con
+  estrechamiento; HP2 parcial; HP5 no concedida por calendario/TFM/spec extraction. Cambio pedido:
+  Semana 0 TFM/PII/licencia, claim estrecho, reproduccion externa antes de MCP/Action, kill criteria falsables.
 - TASK-0229 remediacion branding #4 scope DECISION-0082 (2026-07-02): CAMBIO-REQUERIDO / NO-GO.
   Veredicto canonico en `406bb57` (`review(TASK-0229): Analista blocks scoped branding remediation 4`),
   artefacto `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-4-scope-veredicto.md`, MSG
@@ -1343,3 +1390,16 @@
   repair, 10 eventos visibles, prev_hash lineal, drift false; mid-torn + 2 writers concurrentes -> returncodes
   `[1,1]`, error de integridad, bytes intactos, sin claims nuevos. Residual: `read_jsonl_torn_safe` sigue leyendo
   prefijo ante corrupcion media, pero el writer `submit_intent` ya no cierra falso porque falla cerrado bajo lock.
+- Pivote v2 publicar-para-ser-citado (2026-07-02): CAMBIO-REQUERIDO, veredicto commiteado y pusheado en
+  `33802db` (`review(pivote-v2): Analista requires prereg hardening`). Ancla protocolo `d0afaa2`; instruccion
+  `MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-v2-ronda2`; artefacto
+  `Area_comun/artifacts/ANALISTA-pivote-v2-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-pivote-v2-ronda2.md`. Resultado: el marco de dos carriles pasa
+  como direccion, pero no es sellable todavia. Bloqueantes: politica de medicion de empleados/no uso punitivo,
+  eventos firmados para ayudas/excepciones/suspensiones/arbitrajes, trailers `Task-Id` y `Fixes-Task`
+  bloqueantes, taxonomia D1-D4 ampliada, presupuesto medido <=1 dia/semana para Carril B, DECISION que
+  supersede fork/re-alcance 0230/0232/0233/0234, spike DSSE/in-toto/Rekor, y sellado completo del
+  pre-registro con hash+seq antes de Nova Budget. Gates: validate vivo exit 0; secretless clean clone exit 0;
+  scan_domain_neutrality exit 0; scan_encoding exit 0; drift 0 `up_to_seq=3214`; `protocol.config.json`
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; Zeus-protocol clean clone
+  `npm test` en `b2b2395` exit 0, 87 pass/22 skipped.
