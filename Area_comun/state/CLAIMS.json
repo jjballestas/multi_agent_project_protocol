@@ -13511,6 +13511,23 @@
             "updated_at": "2026-07-01T12:20:02Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0229-remediacion-branding-review",
+            "expires_at": "2026-07-02T05:50:38Z",
+            "notes": "Adversarial re-gate of TASK-0229 remediation branding.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-NOGO.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T03:50:38Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T03:50:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Analista-reviews-huerfanas-cierre",
             "expires_at": "2026-07-02T04:38:55Z",
             "notes": "Confirmacion adversarial de cierre formal de reviews huerfanas ya entregadas.",
