@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e0d08e668a405a0599bc94c1adc843196b173737c61bf2cf2eac57082d4fd155",
+  "canonical_hash": "36ce941e6e3378f49b26ab81f278683f0b8a8eb7805e1d0f9003680e3f822cd9",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1056,7 +1056,7 @@
       "TASK-0237": 16,
       "TASK-0238": 25,
       "TASK-0239": 27,
-      "TASK-0240": 6,
+      "TASK-0240": 8,
       "TASK-0241": 1,
       "TASK-0242": 1,
       "TASK-0243": 1,
@@ -1068,7 +1068,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2669,
+    "events_applied": 2671,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2578,6 +2578,8 @@
       "codex:task0239:actor-release-implementation": 3314,
       "codex:task0239:actor-status-in-review": 3313,
       "codex:task0240:claim-acquire": 3339,
+      "codex:task0240:claim-release": 3342,
+      "codex:task0240:in-progress-to-in-review": 3341,
       "codex:task0240:ready-to-in-progress": 3340,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -3741,5 +3743,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3340
+  "up_to_seq": 3342
 }
