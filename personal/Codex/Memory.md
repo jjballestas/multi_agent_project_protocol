@@ -4,6 +4,20 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0238 R5 remediation completed and redelivered. Implementation commit:
+  `076193d fix(intake): require recorded exception for exemptions`; delivery commit:
+  `a87ae6b coord(TASK-0238): redeliver r5 remediation`. The remediation removes the disabled-event-state bypass in
+  the Python/PowerShell validators, makes `runtime/submit_intent.py` require a real `exception.recorded` event for
+  `intake_exempt`, and adds N5b coverage across validator py, validator ps1, and submit_intent. Clean-clone
+  implementation gate at `076193d`: `python scripts/test_intake_gate.py` PASS 12 tests, encoding OK, neutrality exit
+  0, validator OK with existing mailbox hygiene warning only, drift false / byte-identical `up_to_seq=3270`,
+  `protocol.config.json` unchanged. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0238-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-r5-in-review.md`. Runtime delivery moved
+  TASK-0238 back to `in_review` and released `CLAIM-20260702-Codex-TASK-0238-r5-remediation` at `up_to_seq=3273`.
+  Final local gates after delivery: `test_intake_gate` PASS 12 tests, encoding OK, neutrality exit 0, validator OK
+  with existing mailbox hygiene warning only, drift false / byte-identical `up_to_seq=3273`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because this remediation is protocol infrastructure.
 - TASK-0238 implementation commit landed: `0efe196 feat(intake): enforce deterministic ready gate`. It adds the
   live intake boundary in `Area_comun/protocol/INTAKE_GATE.json` with `start_task_id=TASK-0238`, enforces complete
   `intake` blocks for post-boundary tasks in Python and PowerShell validators, hard-gates `proposed -> ready` in
