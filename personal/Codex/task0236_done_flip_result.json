@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "9bcce61db303f8bf1b335215f5176ac1b7d3d57a6d27275c3b080d6815b7f334",
+        "replay_hash": "9bcce61db303f8bf1b335215f5176ac1b7d3d57a6d27275c3b080d6815b7f334",
+        "up_to_seq": 3053
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "UjXH1DGH4LiDffQwZ7hzbhxP18hPNp+ynY4wJGXJwBf+PdLDp4tDCIrz5in1o3eWhbetq/eTBB1Gcjm8QbtvBg=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 12,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "da94cd56aeabdc6d1420211b19557c90378f705eb6ab276093e07b17619353df"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:7c461acd58c234018f0408b88d32cda967db602cb630c404c095ab3ef3507686",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T03:10:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T03:10:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0236",
+                                "updated_at": "2026-07-02T03:10:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0236"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "2edb9e60742c7e78a8853360915204c4fd46bc6326a2aa1607c5d639ee52da04",
+            "seq": 3051,
+            "ts": "2026-07-02T03:10:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "bK6xqX4HWIjzs4YG/2mfD4cACU60p4juem6GDaBzYHM1h2KQZNtEzk4sDsUpB4SIZGx61E62s7grMA1eflLxDQ=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 13,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "a39a3d5f9fb564d24dfec99fa20eb8153c56ad63d112f0a0bf7bf13d2e5f7b3b"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:b796ea15d067027edd0b4ced7453140937b63745ed8b5a1bc3ce24521edb9db0",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T03:10:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "da771ee6f958991ad690a6fb75bac238bed6d11573d576dea290ebb4a77110ee",
+            "seq": 3052,
+            "ts": "2026-07-02T03:10:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "xXtruQeGVSkhhfPW7aq8qIohecXMHipNQdqFQ0xQfm3BzQ5BsCATFjFgAYZVIjzekWv9CO/+Y1kKWI7f8wx1Dw=="
+            },
+            "aggregate_id": "TASK-0236",
+            "aggregate_version": 14,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "1c68afb1f78f7be607cd58486baff4f2275950f28754f72c32d142fc95a83ccf"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:e1e35b051eefe5e76270ffd517650f9c6d2cbdf6f39dd5d42c8afdba0437122a",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0236",
+                "timestamp": "2026-07-02T03:10:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0236:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T03:10:00Z",
+                                "status": "released",
+                                "task_id": "TASK-0236",
+                                "updated_at": "2026-07-02T03:10:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0236"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "08dba059050b11a32ec8bf348fcb2d03f120e4a0a71d1b3fd7ce972c5f159747",
+            "seq": 3053,
+            "ts": "2026-07-02T03:10:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T03:10:00Z",
+                "status": "active",
+                "task_id": "TASK-0236",
+                "updated_at": "2026-07-02T03:10:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0236"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0236",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                    "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T03:10:00Z",
+                "status": "released",
+                "task_id": "TASK-0236",
+                "updated_at": "2026-07-02T03:10:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0236"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "e242880b5b43fcd8c40eb583b8412de88daac422940e2fd15c997325162404a2",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3053
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3053
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:7c461acd58c234018f0408b88d32cda967db602cb630c404c095ab3ef3507686",
+            "intent:Codex:task_status:b796ea15d067027edd0b4ced7453140937b63745ed8b5a1bc3ce24521edb9db0",
+            "intent:Codex:claim:e1e35b051eefe5e76270ffd517650f9c6d2cbdf6f39dd5d42c8afdba0437122a"
+        ],
+        "idempotency_key": "codex:task0236:done-flip-tx",
+        "intent_count": 3
+    }
+}

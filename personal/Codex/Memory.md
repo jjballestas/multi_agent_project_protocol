@@ -4,6 +4,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0236 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0236:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0236-done-flip` and moved
+  TASK-0236 `review_approved -> done` at seq 3051-3053. Evidence after the flip: encoding OK, neutrality command
+  exit 0, validator OK, drift false / byte-identical `up_to_seq=3053`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched; TASK-0236 was protocol cron infrastructure. The consumed
+  Arquitecto ACTION message remains open because `mailbox_archive` requires orchestrator capability for Codex.
 - TASK-0237 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
   `ea3f52c fix(governance): hard exit vendor test watchdog`. The vendor `npm --prefix vendor/hermes-2.3.0 test`
   watchdog now uses synchronous Windows `taskkill /T /F` and exits 124 directly after the deadline kill, so a

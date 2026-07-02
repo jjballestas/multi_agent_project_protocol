@@ -1125,7 +1125,7 @@
         {
             "id": "TASK-0236",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana"
         },
         {

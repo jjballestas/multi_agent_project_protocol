@@ -13604,6 +13604,24 @@
             "updated_at": "2026-07-02T02:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0236-done-flip",
+            "expires_at": "2026-07-02T23:59:00Z",
+            "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0236-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0236",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0236",
+                "Area_comun/tasks/TASK-0236-remediacion-0235-harness-prompt-por-exec-tree-kill-instancia-unica.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T03:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0236",
+            "updated_at": "2026-07-02T03:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0237",
             "expires_at": "2026-07-03T00:25:00Z",
             "notes": "Implement TASK-0237 hang-proof npm test in Zeus-Aegis so clean-clone gates terminate bounded.",
