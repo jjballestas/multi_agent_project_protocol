@@ -13609,6 +13609,31 @@
             "updated_at": "2026-07-02T20:11:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0240-release",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0240"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0240-review",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0240"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0240-wild-release",
+            "expires_at": "2026-07-03T23:59:59Z",
+            "notes": "Auxiliary claim to release malformed TASK-0240 claims.",
+            "owner": "Analista",
+            "scope": [
+                "*"
+            ],
+            "started_at": "2026-07-02T21:06:05Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T21:06:05Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Analista-reviews-huerfanas-cierre",
             "expires_at": "2026-07-02T04:38:55Z",
             "notes": "Confirmacion adversarial de cierre formal de reviews huerfanas ya entregadas.",
