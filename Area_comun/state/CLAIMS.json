@@ -14369,6 +14369,52 @@
             "updated_at": "2026-07-02T17:30:30Z"
         },
         {
+            "claim_id": "CLAIM-20260702-hyg-f1-b1-arquitecto",
+            "expires_at": "2026-07-02T21:30:00Z",
+            "notes": "Higiene F1 lote 1 completado.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-hyg-f1-b1-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Operador-FYI-F0.2-DECISION-0083.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Operador-FYI-F0.2-DECISION-0083.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-ACTION-orden-F1-registro-backlog.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-ACTION-orden-F1-registro-backlog.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-ACTION-respuesta-hallazgos-F1.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-ACTION-respuesta-hallazgos-F1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-FYI-cortafuegos-asesor.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-FYI-cortafuegos-asesor.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Operador-FYI-F1-registro-crons.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Operador-FYI-F1-registro-crons.md"
+            ],
+            "started_at": "2026-07-02T18:05:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T18:05:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-hyg-f1-b2-arquitecto",
+            "expires_at": "2026-07-02T21:30:00Z",
+            "notes": "Higiene F1 lote 2 completado.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-hyg-f1-b2-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-ACTION-higiene-mailbox-cada-5.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-ACTION-higiene-mailbox-cada-5.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-FYI-acuse-F1-registro.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-FYI-acuse-F1-registro.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-pivote-v2-ronda2.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-pivote-v2-ronda2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Operador-FYI-higiene-area-personal.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Operador-FYI-higiene-area-personal.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Codex-ACTION-higiene-area-personal.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Codex-ACTION-higiene-area-personal.md"
+            ],
+            "started_at": "2026-07-02T18:07:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T18:07:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-b1-arquitecto",
             "expires_at": "2026-07-02T20:00:00Z",
             "notes": "Higiene mailbox lote 1: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",

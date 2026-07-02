@@ -3,7 +3,7 @@ message_id: MSG-20260702-Operador-to-Arquitecto-FYI-acuse-F1-registro
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-02
 context_refs:

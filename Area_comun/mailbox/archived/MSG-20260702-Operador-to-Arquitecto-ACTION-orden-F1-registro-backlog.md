@@ -3,7 +3,7 @@ message_id: MSG-20260702-Operador-to-Arquitecto-ACTION-orden-F1-registro-backlog
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-02

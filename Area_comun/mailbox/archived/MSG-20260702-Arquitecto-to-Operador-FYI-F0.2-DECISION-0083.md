@@ -3,7 +3,7 @@ message_id: MSG-20260702-Arquitecto-to-Operador-FYI-F0.2-DECISION-0083
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-02
 context_refs:
