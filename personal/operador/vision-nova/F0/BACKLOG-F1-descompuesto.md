@@ -6,13 +6,13 @@ Estado: entregable del Asesor. El Arquitecto lo registra como tareas TASK-02xx
 finales los asigna el Arquitecto con el siguiente numero libre del indice.
 
 Auditoria previa (asesor): los PRDs son estrategicos, NO ejecutables; NO soltar
-agentes contra PRDs directamente — solo contra estas tareas con DoD testable.
+agentes contra PRDs directamente -- solo contra estas tareas con DoD testable.
 
 ## Secuencia recomendada (v2, corregida por hallazgos F-1/F-2 del Arquitecto 2026-07-02)
 
 F1-A -> F1-B -> F1-C-construccion (cadena Codex, de a una)
 F1-E (harnesses con trailer + envelope) es PRECONDICION DURA de la ACTIVACION de
-F1-C (trailer_start_seq posterior al despliegue de F1-E; hallazgo F-2 — la version
+F1-C (trailer_start_seq posterior al despliegue de F1-E; hallazgo F-2 -- la version
 v1 de esta secuencia tenia la dependencia invertida).
 en paralelo: F1-D y la parte doctrinal de F1-E (no bloquean a Codex)
 cierre: F1-F (mini-DECISION, incluye clausula pin-anclado-al-tag de F-3) + F1-G
@@ -26,7 +26,7 @@ F1.6 (aprendizajes-externos, timebox 2d) SOLO si hay holgura; nunca camino criti
 - Owner: Codex. Spec: SPEC-F1-gate-intake.md (v0.2: incluye R0 anti-retroactividad).
 - Alcance: reglas R0-R6 en validador (ps1 + python) y runtime (task_status hard-gate);
   bloque intake en templates; examples/minimal_instance actualizado. CONDICION DE
-  PROMOCION (F-1): implementar con `intake_start` — las tareas pre-existentes quedan
+  PROMOCION (F-1): implementar con `intake_start` -- las tareas pre-existentes quedan
   exentas; sin R0 el HEAD actual (177 tareas sin intake) pone el ledger rojo.
 - DoD (testable):
   1. Los 6 casos negativos y 5 positivos del SPEC s.4 implementados como tests
@@ -105,7 +105,7 @@ F1.6 (aprendizajes-externos, timebox 2d) SOLO si hay holgura; nunca camino criti
   TFM quedan anclados al tag TFM-dataset-N500 (codigo de medicion congelado ahi,
   H3 reproducible contra el tag); el validador/runtime VIVOS evolucionan
   legitimamente hacia v1.18.0. Que F1-A/B/C editen validate_collaboration_state.py
-  y eventlog.py NO viola el invariante — y deja de ser implicito.
+  y eventlog.py NO viola el invariante -- y deja de ser implicito.
 - DoD: DECISION registrada via submit_intent, gates verdes, relates_to
   GOAL-VISION-NOVA-001 + DECISION-0083; clausula pin-anclado-al-tag incluida.
 

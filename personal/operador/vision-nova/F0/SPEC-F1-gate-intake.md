@@ -34,12 +34,12 @@ exception_ref: "<seq del evento exception.recorded que autoriza la exencion>"
 
 ## 2. Reglas de validacion (hard-gate en validador + runtime)
 
-- R0 (ARRANQUE, anti-retroactividad — hallazgo F-1 del Arquitecto 2026-07-02): la
+- R0 (ARRANQUE, anti-retroactividad -- hallazgo F-1 del Arquitecto 2026-07-02): la
   adopcion registra un `intake_start` (boundary determinista: ultimo TASK-id
   existente al adoptar, o seq del ledger; mecanismo exacto lo elige la
   implementacion). R1-R5 aplican SOLO a tareas registradas DESPUES de ese boundary;
   las tareas pre-existentes (177 a fecha del hallazgo) quedan EXENTAS de por vida
-  — mismo patron que `trailer_start_seq` en SPEC-F1-exception-trailers. Sin R0,
+  -- mismo patron que `trailer_start_seq` en SPEC-F1-exception-trailers. Sin R0,
   activar R1 pone validate exit!=0 sobre HEAD y el ledger queda rojo.
 - R1: tarea POSTERIOR a `intake_start` con status en {ready, claimed, in_progress,
   in_review, done} SIN bloque `intake` completo y valido => `validate` exit != 0.

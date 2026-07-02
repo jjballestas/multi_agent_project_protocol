@@ -1,4 +1,4 @@
-# Vision Nova — carpeta de control del Operador
+# Vision Nova -- carpeta de control del Operador
 
 > Creada 2026-07-02 con el GO del operador. Los tres HTML se abren directo en el navegador
 > (doble clic; autocontenidos, sin red).

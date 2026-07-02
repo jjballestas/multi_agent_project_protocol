@@ -18,7 +18,7 @@ Fecha: __________. Vigencia: duracion del estudio (estimada jul-2026 a dic-2026)
 
 El Empleador va a desarrollar software interno (suite Nova, empezando por Nova
 Budget) usando una metodologia de trabajo con agentes de IA. Queremos MEDIR SI LA
-METODOLOGIA FUNCIONA — no evaluar a las personas. El estudio esta pre-registrado:
+METODOLOGIA FUNCIONA -- no evaluar a las personas. El estudio esta pre-registrado:
 las metricas y reglas se fijan y sellan ANTES de empezar, para que nadie (tampoco
 el Empleador) pueda moverlas despues.
 
