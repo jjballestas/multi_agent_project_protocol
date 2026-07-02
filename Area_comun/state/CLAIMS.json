@@ -15411,6 +15411,60 @@
             "updated_at": "2026-07-01T23:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0240-delivery",
+            "expires_at": "2026-07-03T01:16:36Z",
+            "notes": "TASK-0240 remediation delivery artifacts and coordination message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0240-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0240-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0240-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0240-trailer-section-remediacion.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T22:16:36Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T22:16:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0240-remediation",
+            "expires_at": "2026-07-03T01:13:13Z",
+            "notes": "TASK-0240 remediation F-0240-01: final trailer section parser and regression test.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0240-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0240",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0240",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/test_trailers.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T22:13:13Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T22:13:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0240-taskfile-sync",
+            "expires_at": "2026-07-02T23:21:57Z",
+            "notes": "Synchronize TASK-0240 task file status after interrupted submit side effect.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0240-taskfile-sync",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T22:21:56Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T22:21:56Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

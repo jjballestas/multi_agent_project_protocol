@@ -284,9 +284,23 @@ def task_ids(index: dict[str, Any] | None) -> set[str]:
     }
 
 
+TRAILER_LINE_PATTERN = re.compile(r"^[A-Za-z0-9-]+: .+$")
+
+
 def trailer_values(message: str) -> dict[str, list[str]]:
     trailers: dict[str, list[str]] = {}
-    for line in message.splitlines():
+    lines = message.splitlines()
+    while lines and not lines[-1].strip():
+        lines.pop()
+    if not lines:
+        return trailers
+    block_start = len(lines) - 1
+    while block_start > 0 and lines[block_start - 1].strip():
+        block_start -= 1
+    final_block = lines[block_start:]
+    if not final_block or not all(TRAILER_LINE_PATTERN.fullmatch(line) for line in final_block):
+        return trailers
+    for line in final_block:
         for key in ("Task-Id", "Fixes-Task", "Ops-Reason"):
             if line.startswith(f"{key}:"):
                 trailers.setdefault(key, []).append(line)

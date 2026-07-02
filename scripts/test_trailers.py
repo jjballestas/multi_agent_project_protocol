@@ -85,6 +85,14 @@ def main() -> int:
         "without Ops-Reason",
     )
     case(
+        "N5 Task-Id outside final trailer block",
+        lambda repo: (
+            write(repo, "scripts/tool.py", "print('x')\n"),
+            commit(repo, "feat: governed", "Task-Id: TASK-0240\n\nextra paragraph after trailer-looking line"),
+        )[-1],
+        "without exact Task-Id",
+    )
+    case(
         "P1 governed commit with Task-Id",
         lambda repo: (write(repo, "scripts/tool.py", "print('x')\n"), commit(repo, "feat: governed", "Task-Id: TASK-0240"))[-1],
         None,
@@ -112,7 +120,7 @@ def main() -> int:
         lambda repo: (write(repo, "personal/worker/note.md", "x\n"), commit(repo, "feat: personal"))[-1],
         None,
     )
-    print("OK: trailer validation tests passed (8 cases).")
+    print("OK: trailer validation tests passed (9 cases).")
     return 0
 
 
