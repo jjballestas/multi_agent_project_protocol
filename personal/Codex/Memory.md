@@ -4,6 +4,19 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0229 remediation #5 product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `3c8c084 fix(branding):
+  clear final user-facing Hermes hits`. It fixes the three DECISION-0082 user-facing residues named by
+  Arquitecto/Analista: setup UI command now renders `zeus`, ZeusWorld embed uses `source=zeus-aegis-workspace`,
+  and update-center public expected-repo copy now says `zeus-aegis-workspace`; compatibility aliases retain legacy
+  repo names. `vendor/hermes-2.3.0/electron/server-bundle.cjs` was regenerated from source. Product evidence:
+  `corepack pnpm --dir vendor/hermes-2.3.0 build` PASS, `corepack pnpm --dir vendor/hermes-2.3.0
+  electron:bundle-server` PASS, exact residue probe for the three reported strings PASS with 0 hits,
+  `git diff --check` PASS with only LF-to-CRLF warnings, and root `npm test` PASS 83/83 files and 562/562 tests
+  after an initial 180s harness timeout followed by a bounded PASS at 187.8s. Protocol delivery commit:
+  `103fe1b coord(TASK-0229): deliver final branding remediation`; it added
+  `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-5.md`, opened
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-5-in-review.md`, released the
+  TASK-0229 remediation 5 claims, and left TASK-0229 in_review.
 - TASK-0229 branding remediation delivered after Analista NO-GO. Product repo
   `D:/Agentes/Zeus/Zeus-Aegis` commit `bcb2715b39df895de0ce6bb209cdb0eb3a363a5a`
   (`fix(branding): remove visible hermes strings`) replaces visible old-brand UI/onboarding/settings/status/server
