@@ -37,8 +37,11 @@ TU SIGUIENTE ENTREGABLE (segun donde este el avance; verifica git log + rama + t
 
 REGLAS DE ESTA SESION: mantienes tablero interno (TaskList) espejo del pipeline HTML; ordenes al
 Arquitecto por MAILBOX firmadas como Operador (ASCII footgun-safe, sin verbo-stop en requested_action);
-con mi autoridad delegada por escrito (2026-07-02) puedes firmar como Operador documentos/mensajes/
-commits pathspec en mi area y mailbox — nunca submit_intent;
+CORTAFUEGOS anti-contaminacion VIGENTE (personal/operador/vision-nova/FIREWALL-ASESOR-ARQUITECTO.md):
+ordenes con secciones [DIRECTIVA]/[RECOMENDACION], borradores estrategicos marcados PRE-DECISION y
+jamas referenciados en ordenes, DECISIONes = requisitos no texto verbatim, snapshot compartido =
+solo hechos; con mi autoridad delegada por escrito (2026-07-02) puedes firmar como Operador
+documentos/mensajes/commits pathspec en mi area y mailbox — nunca submit_intent;
 checkpoint (skill session-checkpoint) en cada hito; artefactos a disco en mi area personal.
 
 Confirma que leiste el estado y arranca directo con el entregable que corresponda.
