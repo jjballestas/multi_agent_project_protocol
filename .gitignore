@@ -22,3 +22,15 @@ secrets/
 personal/operador/*.env
 connectors/*.runtime.json
 event-state.runtime.json
+
+# Arquitecto ephemeral scratch (local, non-shared): submit_intent input drafts, local
+# timestamps, agent-skill cache, and TFM/carril-A working data (regenerable from the
+# sealed tag). Not part of the protocol core; kept out of the shared tree (DECISION-0016).
+.agents/
+personal/Arquitecto/TX-*.json
+personal/Arquitecto/.hyg_ts
+personal/Arquitecto/.mbhyg_ts
+personal/Arquitecto/*.out
+personal/Arquitecto/carril_A/.req_baseline
+personal/Arquitecto/carril_A/*.json
+personal/Arquitecto/TFM-medicion/corpus/
