@@ -13987,6 +13987,69 @@
             "updated_at": "2026-07-02T00:27:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-mbhyg3-blk01",
+            "expires_at": "2026-07-02T08:00:00Z",
+            "notes": "higiene actual blk01",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg3-blk01",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0236-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0236-OK.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-cron-policy-AB.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-cron-policy-AB.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0236-harness.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0236-harness.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0237-hang-proof.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0237-hang-proof.md"
+            ],
+            "started_at": "2026-07-02T00:45:00Z",
+            "status": "released",
+            "task_id": "OPS-MBHYG",
+            "updated_at": "2026-07-02T00:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-mbhyg3-blk02",
+            "expires_at": "2026-07-02T08:00:00Z",
+            "notes": "higiene actual blk02",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg3-blk02",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-cron-policy-AB.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-cron-policy-AB.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0236-done-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0236-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0237-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0237-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0236-harness-remediacion-0235.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0236-harness-remediacion-0235.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0237-hang-proof-npm-test.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0237-hang-proof-npm-test.md"
+            ],
+            "started_at": "2026-07-02T00:46:00Z",
+            "status": "released",
+            "task_id": "OPS-MBHYG",
+            "updated_at": "2026-07-02T00:46:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-mbhyg3-blk03",
+            "expires_at": "2026-07-02T08:00:00Z",
+            "notes": "higiene actual blk03",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg3-blk03",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0236-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0237-in-review.md"
+            ],
+            "started_at": "2026-07-02T00:47:00Z",
+            "status": "released",
+            "task_id": "OPS-MBHYG",
+            "updated_at": "2026-07-02T00:47:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-register-0233-arquitecto",
             "expires_at": "2026-07-02T05:26:27Z",
             "notes": "Release tras registrar TASK-0233.",
