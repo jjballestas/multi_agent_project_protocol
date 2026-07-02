@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "7af27188895596a4b7e62072335a14d889b4d64a2468cea86a596673114535ed",
+        "replay_hash": "7af27188895596a4b7e62072335a14d889b4d64a2468cea86a596673114535ed",
+        "up_to_seq": 3077
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "s4G1LpEqwcLeBmfglhbwkYz5Efxlm2CDW+i19aepHwfmKwNYacBPn95ecqRe+fx+abW0/WwLe1JtiKN2+pC5BQ=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 14,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "e4afa6a2cadb6018063c25edf64250901567b13e3ed76a7e4df497ad863e9a31"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:68f5c047251147ba7ecf6a2966b3287d09fcf65d4137313cf0b920257b31962e",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T01:38:12Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0237:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T01:38:12Z",
+                                "status": "active",
+                                "task_id": "TASK-0237",
+                                "updated_at": "2026-07-02T01:38:12Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0237"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "36ae0c62a6e3a785562a69899b0b4ab225b5c5eec7a3ff6ba33ff3c6106f2578",
+            "seq": 3075,
+            "ts": "2026-07-02T01:38:12Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "08K1wV2dOLKMBPrYAUot+eXrQAmy7vBAP/sJVzVQsc47jDbbb9fvzjqgTJ8hhbeTym3JbylHN+5eZnCrN2fCBw=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 15,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "e4377ed927f324f685098a4bdb31a4469c9ee23e4d1548e5bbfb915ab786d930"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:31ab5ebaeb1b546b214744c85fe878b5a1ce6bae256554d45d5967f10b42d3c1",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T01:38:12Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0237:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "review_approved",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "9176111164338f5fb3e0d36cc8c3934abc9176c6b2f22a3982012780fbe6b51b",
+            "seq": 3076,
+            "ts": "2026-07-02T01:38:12Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "9fno+WE32yeXBPk1i6iJDH135EMZcYvzgUysoj9FQ819gjWCCCrZCWAofIVm1pjwHAmqv6WX34W7z9deP72aBg=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 16,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "5d26b759f5cb2ebf0e2e93243868727c5dbce5005ffb1a1f93e6f8ea97402038"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:dc07f1b2f34a09caa39e42eb8df5d1c579440983f69c807cc359bdae66e17a90",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T01:38:12Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0237:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T01:38:12Z",
+                                "status": "released",
+                                "task_id": "TASK-0237",
+                                "updated_at": "2026-07-02T01:38:12Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0237"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "06644e9f6eed096bc16c7faccf61fa1c159e4249b385c07b5586f6dc23826999",
+            "seq": 3077,
+            "ts": "2026-07-02T01:38:12Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T01:38:12Z",
+                "status": "active",
+                "task_id": "TASK-0237",
+                "updated_at": "2026-07-02T01:38:12Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0237"
+        },
+        {
+            "from": "review_approved",
+            "kind": "task_status",
+            "task_id": "TASK-0237",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T01:38:12Z",
+                "status": "released",
+                "task_id": "TASK-0237",
+                "updated_at": "2026-07-02T01:38:12Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0237"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "c4c031f9e1b51be92cee025c6111844447c1f0dfa3455754e30093717c58361e",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3077
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3077
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:68f5c047251147ba7ecf6a2966b3287d09fcf65d4137313cf0b920257b31962e",
+            "intent:Codex:task_status:31ab5ebaeb1b546b214744c85fe878b5a1ce6bae256554d45d5967f10b42d3c1",
+            "intent:Codex:claim:dc07f1b2f34a09caa39e42eb8df5d1c579440983f69c807cc359bdae66e17a90"
+        ],
+        "idempotency_key": "codex:task0237:done-flip-tx",
+        "intent_count": 3
+    }
+}
