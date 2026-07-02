@@ -1,0 +1,11 @@
+{
+  "idempotency_key": "codex:decision0078:claim-release-only-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "release",
+      "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+      "idempotency_key": "codex:decision0078:claim-release-only"
+    }
+  ]
+}

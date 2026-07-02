@@ -1,0 +1,90 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "5a59728d05dc2d531dc8e3fbdf595169c96885b02130ca8f2da6b0735f4de3fb",
+        "replay_hash": "5a59728d05dc2d531dc8e3fbdf595169c96885b02130ca8f2da6b0735f4de3fb",
+        "up_to_seq": 2850
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "vvX+rU/CLOlMOEpilQTs00Z3pNyyC65nWcmViejm8AHAlY4Ukpx+yZKlqdQ95ovjqlk3doFLQyUgYVVGymN5AQ=="
+            },
+            "aggregate_id": "CLAIM-20260701-Codex-DECISION-0078",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "31f7444d722c3e3e5cd373f71e2e152af15ccee735048fc84239084302e345d2"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:d9101efdb956c274b7f6b3cc0f9c8a1e4833676ba5b8d4f4bf59a00d7b8c8f06",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-07-01T14:31:00Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:decision0078:claim-release-only-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "b1c01308037c6826739b5f94762166b284ad5ce0f19f0dabd19dbe4da3533c7a",
+            "seq": 2850,
+            "ts": "2026-07-01T14:31:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "711da780522b4fe0d7911673d2ac87d33945c47c407eee7dacc51645c11b2f79",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2850
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2850
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:d9101efdb956c274b7f6b3cc0f9c8a1e4833676ba5b8d4f4bf59a00d7b8c8f06"
+        ],
+        "idempotency_key": "codex:decision0078:claim-release-only-tx",
+        "intent_count": 1
+    }
+}

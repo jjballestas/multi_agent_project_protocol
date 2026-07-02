@@ -4,6 +4,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- Personal area hygiene completed for the 2026-07-02 operator ACTION. Root `personal/Codex/` now keeps only
+  `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and active `codex_mailbox_cron.ps1`; consumed transaction JSONs
+  moved under `archive/intents/2026-06-19-to-2026-07-02/`, obsolete monitor runtime files/scripts under
+  `archive/runtime/2026-06-19-monitors/`, old prompt/report/sample artifacts under `archive/prompts/`,
+  `archive/reports/`, and `archive/artifacts/`. Protocol drift before hygiene was false at `up_to_seq=3214`;
+  no ledger action was used because the request was scoped to Codex personal area.
 - TASK-0229 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0229:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0229-done-flip` and moved
   TASK-0229 `review_approved -> done` at seq 3212-3214. Evidence after the flip: encoding OK, neutrality command

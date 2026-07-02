@@ -1,0 +1,7 @@
+{
+    "type":  "task_status",
+    "task_id":  "TASK-0229",
+    "from":  "in_review",
+    "to":  "in_progress",
+    "idempotency_key":  "codex:task0229:allowlist-inreview-to-inprogress-solo"
+}

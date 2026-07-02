@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "codex:decision0078:claim-acquire-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+        "owner": "Codex",
+        "task_id": "DECISION-0078",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078",
+          "Area_comun/state/PROJECT_STATE.json#decisions/DECISION-0078",
+          "Area_comun/decisions/",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-01T14:18:30Z",
+        "updated_at": "2026-07-01T14:18:30Z",
+        "expires_at": "2026-07-01T16:00:00Z",
+        "notes": "Registrar decision propuesta para pre-medicion A/B/C de peones con contrato de asignacion y metrica completa."
+      },
+      "idempotency_key": "codex:decision0078:claim-acquire"
+    }
+  ]
+}

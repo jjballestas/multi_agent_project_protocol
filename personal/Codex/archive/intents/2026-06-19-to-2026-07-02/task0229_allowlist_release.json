@@ -1,0 +1,10 @@
+{
+    "type":  "claim",
+    "op":  "release",
+    "claim_id":  "CLAIM-20260702-Codex-TASK-0229-allowlist",
+    "owner":  "Codex",
+    "task_id":  "TASK-0229",
+    "status":  "released",
+    "updated_at":  "2026-07-02T13:19:10Z",
+    "idempotency_key":  "codex:task0229:allowlist-claim-release"
+}

@@ -1,0 +1,10 @@
+{
+    "type":  "claim",
+    "op":  "release",
+    "claim_id":  "CLAIM-20260702-Codex-TASK-0229-status-file-fix",
+    "owner":  "Codex",
+    "task_id":  "TASK-0229",
+    "status":  "released",
+    "updated_at":  "2026-07-02T13:20:06Z",
+    "idempotency_key":  "codex:task0229:status-file-fix-release"
+}

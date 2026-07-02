@@ -1,0 +1,262 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "659b963a3edcbe62ca094fdfa321df18c4d7639fc11c08507cefd12165822d08",
+        "replay_hash": "659b963a3edcbe62ca094fdfa321df18c4d7639fc11c08507cefd12165822d08",
+        "up_to_seq": 2853
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "Hwr4urRJtkAxhKk5aaYO+t97bWJQZ4i1NhwHb/r3CS/doKr62clShzfFyIH1w/irzRiWSGRPK+GAROkG/XF4Cg=="
+            },
+            "aggregate_id": "DECISION-0078",
+            "aggregate_version": 2,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "945cfa2e13a08a636e91f7a7d635a8b5d04bca7549c8bb3e05bae3c308076378"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:e8bcff0741f815f1aaabb8817d952df097bfee1fe8b3ee38a65f79aae10a3f0c",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "DECISION-0078",
+                "timestamp": "2026-07-01T14:36:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:decision0078:claim-scope-fix-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+                                "expires_at": "2026-07-01T16:00:00Z",
+                                "notes": "Repair invalid row selector in released DECISION-0078 claim scope.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078-fix",
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T14:36:00Z",
+                                "status": "active",
+                                "task_id": "DECISION-0078",
+                                "updated_at": "2026-07-01T14:36:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "DECISION-0078"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "b42758ae2a45a7fd275edeea040ea70ba96069be6aa5b98e121e5b381717c2dd",
+            "seq": 2851,
+            "ts": "2026-07-01T14:36:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "nZgZfRVzR53Wc9odh8rtOY4cpAaq+OJdsgNEDbdwKI6K99c77GchskQKCjmRmVyspD8If7J8sXtkQJm0fZhpDQ=="
+            },
+            "aggregate_id": "DECISION-0078",
+            "aggregate_version": 3,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "070839f7ed035a583bac1084911fac3b354a53ea76be29690f63b8232d6a3cfd"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:a44d351cf46551430400f7579221a3cbe882c8a99abdf6e535db423b8a6b9123",
+            "payload": {
+                "intent_type": "claim",
+                "task_id": "DECISION-0078",
+                "timestamp": "2026-07-01T14:36:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:decision0078:claim-scope-fix-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+                                "expires_at": "2026-07-01T16:00:00Z",
+                                "notes": "Registrar decision propuesta para pre-medicion A/B/C de peones con contrato de asignacion y metrica completa.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078",
+                                    "Area_comun/state/PROJECT_STATE.json",
+                                    "Area_comun/decisions/",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-01T14:18:30Z",
+                                "status": "released",
+                                "task_id": "DECISION-0078",
+                                "updated_at": "2026-07-01T14:36:00Z"
+                            },
+                            "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "DECISION-0078"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "64269ef11d8b402fff5da4f55ba1d52e493471ef37091c2a07ce8db73b94a3e6",
+            "seq": 2852,
+            "ts": "2026-07-01T14:36:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "sBqiuzLw6lxXgCXJliTg0tBKquX7DMiigyTFN/dRzB8MJ8y7d7FCf/L0zZf1f8fhwR/xR+oUbUsAJFufyAkxAw=="
+            },
+            "aggregate_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+            "aggregate_version": 1,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "5d5b473c225e078d6e81ded7d0fb72e7460e7b82994c60d657c9d8d3ea9c4078"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:1c6b785c580378f06229db3587f2ad7e88ee19b5612cd62dcc626af31a5276f4",
+            "payload": {
+                "intent_type": "claim",
+                "timestamp": "2026-07-01T14:36:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:decision0078:claim-scope-fix-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+                            "op": "release"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "5b90b7c8ece31e2e14be10a4474f3af64d4e635cdc9863ed9ec92ce8eddbff33",
+            "seq": 2853,
+            "ts": "2026-07-01T14:36:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+                "expires_at": "2026-07-01T16:00:00Z",
+                "notes": "Repair invalid row selector in released DECISION-0078 claim scope.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078-fix",
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T14:36:00Z",
+                "status": "active",
+                "task_id": "DECISION-0078",
+                "updated_at": "2026-07-01T14:36:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "DECISION-0078"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+                "expires_at": "2026-07-01T16:00:00Z",
+                "notes": "Registrar decision propuesta para pre-medicion A/B/C de peones con contrato de asignacion y metrica completa.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260701-Codex-DECISION-0078",
+                    "Area_comun/state/PROJECT_STATE.json",
+                    "Area_comun/decisions/",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-01T14:18:30Z",
+                "status": "released",
+                "task_id": "DECISION-0078",
+                "updated_at": "2026-07-01T14:36:00Z"
+            },
+            "claim_id": "CLAIM-20260701-Codex-DECISION-0078",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "DECISION-0078"
+        },
+        {
+            "claim_id": "CLAIM-20260701-Codex-DECISION-0078-fix",
+            "kind": "claim",
+            "op": "release"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "91a4f01db03627f5b58cd4c5010a6630a40c0a292a2204ee852e29ef1dba5784",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 2853
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 2853
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:e8bcff0741f815f1aaabb8817d952df097bfee1fe8b3ee38a65f79aae10a3f0c",
+            "intent:Codex:claim:a44d351cf46551430400f7579221a3cbe882c8a99abdf6e535db423b8a6b9123",
+            "intent:Codex:claim:1c6b785c580378f06229db3587f2ad7e88ee19b5612cd62dcc626af31a5276f4"
+        ],
+        "idempotency_key": "codex:decision0078:claim-scope-fix-tx",
+        "intent_count": 3
+    }
+}
