@@ -83,6 +83,22 @@ ROW_SCOPED_LEDGER_SELECTORS = {
     "Area_comun/state/PROJECT_STATE.json": PROJECT_STATE_SELECTOR_PATTERN,
 }
 VALID_ADOPTION_TIERS = {"coordination", "runtime"}
+INTAKE_ENFORCED_STATUSES = {
+    "ready",
+    "claimed",
+    "in_progress",
+    "in_review",
+    "changes_requested",
+    "review_approved",
+    "qa_pending",
+    "qa_failed",
+    "architect_review",
+    "done",
+}
+INTAKE_TYPES = {"feature", "fix", "infra", "doc", "research"}
+INTAKE_RISKS = {"low", "medium", "high"}
+INTAKE_ESTIMATES = {"S", "M", "L"}
+INTAKE_PLACEHOLDERS = {"", "tbd", "todo", "n/a", "na", "...", "none"}
 RUNTIME_TIER_REQUIRED_PATHS = [
     "runtime",
     "runtime/turn_schema.json",
@@ -182,6 +198,143 @@ def parse_task_markdown(path: Path) -> dict[str, Any]:
     if current_section:
         metadata["sections"][current_section] = section_lines
     return metadata
+
+
+def task_numeric_id(task_id: Any) -> int | None:
+    match = re.fullmatch(r"TASK-(\d{4})", str(task_id or "").strip())
+    return int(match.group(1)) if match else None
+
+
+def intake_gate_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    gate = (config or {}).get("intake_gate")
+    return gate if isinstance(gate, dict) else {}
+
+
+def effective_intake_gate_config(root: Path, config: dict[str, Any] | None) -> dict[str, Any]:
+    gate = intake_gate_config(config)
+    live_path = root / "Area_comun" / "protocol" / "INTAKE_GATE.json"
+    if live_path.exists():
+        loaded = read_json_file(live_path, Validation())
+        if isinstance(loaded, dict):
+            gate = loaded
+    return gate
+
+
+def intake_start_number(root: Path, config: dict[str, Any] | None) -> int | None:
+    gate = effective_intake_gate_config(root, config)
+    value = gate.get("start_task_id") or gate.get("intake_start_task_id")
+    return task_numeric_id(value)
+
+
+def intake_gate_enabled(root: Path, config: dict[str, Any] | None) -> bool:
+    return effective_intake_gate_config(root, config).get("enabled") is True
+
+
+def is_post_intake_start(root: Path, task_id: Any, config: dict[str, Any] | None) -> bool:
+    start = intake_start_number(root, config)
+    current = task_numeric_id(task_id)
+    if start is None or current is None:
+        return False
+    return current > start
+
+
+def parse_frontmatter_mapping(path: Path, block_name: str) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    if not lines or lines[0].strip() != "---":
+        return None
+    block: dict[str, Any] | None = None
+    current_key: str | None = None
+    in_block = False
+    for line in lines[1:]:
+        if line.strip() == "---":
+            break
+        if re.match(r"^[A-Za-z_][A-Za-z0-9_]*\s*:", line):
+            key, raw_value = line.split(":", 1)
+            in_block = key == block_name
+            if in_block:
+                block = {}
+                current_key = None
+            continue
+        if not in_block or block is None:
+            continue
+        item_match = re.match(r"^\s{2}([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$", line)
+        if item_match:
+            current_key = item_match.group(1)
+            raw = item_match.group(2).strip()
+            block[current_key] = [] if raw == "" else parse_frontmatter_value(raw)
+            continue
+        list_match = re.match(r"^\s{4}-\s*(.*?)\s*$", line)
+        if list_match and current_key:
+            value = parse_frontmatter_value(list_match.group(1))
+            current = block.setdefault(current_key, [])
+            if not isinstance(current, list):
+                current = [current]
+                block[current_key] = current
+            current.append(value)
+    return block
+
+
+def has_intake_value(value: Any) -> bool:
+    if isinstance(value, str):
+        return value.strip().lower() not in INTAKE_PLACEHOLDERS
+    if isinstance(value, list):
+        return bool(value) and all(has_intake_value(item) for item in value)
+    return value is not None
+
+
+def exception_recorded_exists(root: Path, task_id: str, exception_ref: Any) -> bool:
+    ref = str(exception_ref or "").strip()
+    if not ref:
+        return False
+    config = read_json_file(root / "protocol.config.json", Validation())
+    if isinstance(config, dict) and not event_state_enabled(config):
+        return True
+    events_path = root / "runtime" / "state" / "events.jsonl"
+    if not events_path.exists():
+        return False
+    for line in events_path.read_text(encoding="utf-8-sig").splitlines():
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        if (
+            str(event.get("type") or "") == "exception.recorded"
+            and str(event.get("seq") or "") == ref
+            and str(payload.get("kind") or "") == "intake_exempt"
+            and str(payload.get("task_id") or "") == task_id
+        ):
+            return True
+    return False
+
+
+def validate_intake_block(root: Path, task_id: str, task_path: Path, validation: Validation) -> None:
+    intake = parse_frontmatter_mapping(task_path, "intake")
+    if not isinstance(intake, dict):
+        validation.fail(f"Task {task_id} missing intake block")
+        return
+    if intake.get("intake_exempt") is True:
+        if not exception_recorded_exists(root, task_id, intake.get("exception_ref")):
+            validation.fail(f"Task {task_id} intake_exempt requires valid exception_ref")
+        return
+    required_fields = ["type", "goal", "acceptance", "verification_cmd", "scope_routes", "out_of_scope", "risk", "estimate"]
+    for field in required_fields:
+        if not has_intake_value(intake.get(field)):
+            validation.fail(f"Task {task_id} intake field invalid or empty: {field}")
+    if intake.get("type") not in INTAKE_TYPES:
+        validation.fail(f"Task {task_id} intake.type out of range: {intake.get('type')}")
+    if intake.get("risk") not in INTAKE_RISKS:
+        validation.fail(f"Task {task_id} intake.risk out of range: {intake.get('risk')}")
+    if intake.get("estimate") not in INTAKE_ESTIMATES:
+        validation.fail(f"Task {task_id} intake.estimate out of range: {intake.get('estimate')}")
+    acceptance = intake.get("acceptance")
+    verification = intake.get("verification_cmd")
+    if isinstance(acceptance, list) and acceptance and not (isinstance(verification, list) and verification):
+        validation.fail(f"Task {task_id} intake.acceptance requires verification_cmd")
 
 
 def get_task_field(task: dict[str, Any], parsed_markdown: dict[str, Any], field: str) -> Any | None:
@@ -716,6 +869,32 @@ def validate_sdd(
             validation.warn(f"Task {task_id} has unrecognized type: {task_type}")
 
 
+def validate_intake_gate(
+    root: Path,
+    index: dict[str, Any] | None,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not index or not intake_gate_enabled(root, config):
+        return
+    if intake_start_number(root, config) is None:
+        validation.fail("intake_gate.enabled requires intake_gate.start_task_id")
+        return
+    for task in as_list(index.get("tasks")):
+        if not isinstance(task, dict):
+            continue
+        task_id = str(task.get("id") or "<unknown>")
+        status = str(task.get("status") or "").strip()
+        if status not in INTAKE_ENFORCED_STATUSES:
+            continue
+        if not is_post_intake_start(root, task_id, config):
+            continue
+        task_file = task.get("file") or task.get("task_file")
+        if not task_file:
+            continue
+        validate_intake_block(root, task_id, root / str(task_file), validation)
+
+
 def validate_mailbox(root: Path, validation: Validation) -> None:
     mailbox_root = root / "Area_comun" / "mailbox"
     for state in ("open", "answered", "archived"):
@@ -995,6 +1174,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_adopted_profiles(root, state if isinstance(state, dict) else None, config, validation)
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
     validate_sdd(root, index if isinstance(index, dict) else None, config, validation)
+    validate_intake_gate(root, index if isinstance(index, dict) else None, config, validation)
     validate_mailbox(root, validation)
     validate_reports(root, validation)
     validate_claims(claims if isinstance(claims, dict) else None, validation)

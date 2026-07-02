@@ -1,5 +1,37 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0238-f1a",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0238-f1a",
+                "Area_comun/state/TASK_INDEX.json#TASK-0238",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0238",
+                "Area_comun/tasks/TASK-0238-visionnova-f1a-gate-intake.md",
+                "runtime/submit_intent.py",
+                "runtime/protocol_replay.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "AGENTS.template.md",
+                "Area_comun/tasks/TASK.template.md",
+                "examples/minimal_instance/"
+            ],
+            "task_id": "TASK-0238"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0238-f1a-extra",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0238-f1a-extra",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "Area_comun/protocol/",
+                "scripts/",
+                "examples/minimal_instance/"
+            ],
+            "task_id": "TASK-0238"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -31,6 +31,21 @@ test_plan:
 closure_criteria:
   - Objective condition for done.
 
+# Required before ready for tasks created after intake_gate.start_task_id.
+intake:
+  type: feature | fix | infra | doc | research
+  goal: One-line outcome.
+  acceptance:
+    - Verifiable criterion.
+  verification_cmd:
+    - Exact command or gate.
+  scope_routes:
+    - Relative path or route.
+  out_of_scope:
+    - Explicit non-goal.
+  risk: low | medium | high
+  estimate: S | M | L
+
 # Lightweight SDD fields for discovery/analysis/review/documentation/triage.
 objective: One sentence objective.
 expected_output: Concrete output.

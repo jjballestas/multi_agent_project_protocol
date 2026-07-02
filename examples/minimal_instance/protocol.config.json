@@ -10,6 +10,11 @@
   },
   "quality_gates": ["validator_green"],
   "human_approval_points": ["critical_boundary_change"],
+  "intake_gate": {
+    "enabled": true,
+    "start_task_id": "TASK-0001",
+    "enforcement": "post_start_ready_requires_intake"
+  },
   "state_invariants": [
     {
       "path": "status",
@@ -18,4 +23,3 @@
     }
   ]
 }
-

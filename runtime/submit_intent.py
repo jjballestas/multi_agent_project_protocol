@@ -89,6 +89,10 @@ ROW_SCOPED_LEDGER_PATHS = {
     "Area_comun/state/TASK_INDEX.json",
     "Area_comun/state/PROJECT_STATE.json",
 }
+INTAKE_TYPES = {"feature", "fix", "infra", "doc", "research"}
+INTAKE_RISKS = {"low", "medium", "high"}
+INTAKE_ESTIMATES = {"S", "M", "L"}
+INTAKE_PLACEHOLDERS = {"", "tbd", "todo", "n/a", "na", "...", "none"}
 
 
 class IntentError(RuntimeError):
@@ -109,6 +113,106 @@ FileBackup = dict[str, bytes | None]
 
 def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def task_numeric_id(task_id: Any) -> int | None:
+    match = re.fullmatch(r"TASK-(\d{4})", str(task_id or "").strip())
+    return int(match.group(1)) if match else None
+
+
+def intake_gate_config(root: Path) -> dict[str, Any]:
+    live_path = root / "Area_comun" / "protocol" / "INTAKE_GATE.json"
+    if live_path.exists():
+        gate = read_json(live_path)
+        return gate if isinstance(gate, dict) else {}
+    path = root / "protocol.config.json"
+    if not path.exists():
+        return {}
+    gate = (read_json(path) or {}).get("intake_gate")
+    return gate if isinstance(gate, dict) else {}
+
+
+def intake_gate_applies(root: Path, task_id: str) -> bool:
+    gate = intake_gate_config(root)
+    if gate.get("enabled") is not True:
+        return False
+    start = task_numeric_id(gate.get("start_task_id") or gate.get("intake_start_task_id"))
+    current = task_numeric_id(task_id)
+    return start is not None and current is not None and current > start
+
+
+def parse_frontmatter_value(value: str) -> Any:
+    value = value.strip().strip("\"'")
+    lowered = value.lower()
+    if lowered == "true":
+        return True
+    if lowered == "false":
+        return False
+    return value
+
+
+def parse_frontmatter_mapping(path: Path, block_name: str) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    if not lines or lines[0].strip() != "---":
+        return None
+    block: dict[str, Any] | None = None
+    current_key: str | None = None
+    in_block = False
+    for line in lines[1:]:
+        if line.strip() == "---":
+            break
+        if re.match(r"^[A-Za-z_][A-Za-z0-9_]*\s*:", line):
+            key, _raw_value = line.split(":", 1)
+            in_block = key == block_name
+            if in_block:
+                block = {}
+                current_key = None
+            continue
+        if not in_block or block is None:
+            continue
+        item_match = re.match(r"^\s{2}([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$", line)
+        if item_match:
+            current_key = item_match.group(1)
+            raw = item_match.group(2).strip()
+            block[current_key] = [] if raw == "" else parse_frontmatter_value(raw)
+            continue
+        list_match = re.match(r"^\s{4}-\s*(.*?)\s*$", line)
+        if list_match and current_key:
+            current = block.setdefault(current_key, [])
+            if not isinstance(current, list):
+                current = [current]
+                block[current_key] = current
+            current.append(parse_frontmatter_value(list_match.group(1)))
+    return block
+
+
+def has_intake_value(value: Any) -> bool:
+    if isinstance(value, str):
+        return value.strip().lower() not in INTAKE_PLACEHOLDERS
+    if isinstance(value, list):
+        return bool(value) and all(has_intake_value(item) for item in value)
+    return value is not None
+
+
+def validate_intake_for_ready(root: Path, task_id: str, task_file: str) -> None:
+    intake = parse_frontmatter_mapping(root / task_file, "intake")
+    if not isinstance(intake, dict):
+        raise IntentValidationError(f"task {task_id} cannot move to ready without intake block")
+    if intake.get("intake_exempt") is True:
+        if not str(intake.get("exception_ref") or "").strip():
+            raise IntentValidationError(f"task {task_id} intake_exempt requires exception_ref")
+        return
+    for field in ("type", "goal", "acceptance", "verification_cmd", "scope_routes", "out_of_scope", "risk", "estimate"):
+        if not has_intake_value(intake.get(field)):
+            raise IntentValidationError(f"task {task_id} intake field invalid or empty: {field}")
+    if intake.get("type") not in INTAKE_TYPES:
+        raise IntentValidationError(f"task {task_id} intake.type out of range: {intake.get('type')}")
+    if intake.get("risk") not in INTAKE_RISKS:
+        raise IntentValidationError(f"task {task_id} intake.risk out of range: {intake.get('risk')}")
+    if intake.get("estimate") not in INTAKE_ESTIMATES:
+        raise IntentValidationError(f"task {task_id} intake.estimate out of range: {intake.get('estimate')}")
 
 
 def canonical_json_text(payload: dict[str, Any]) -> str:
@@ -677,6 +781,11 @@ def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any], state
             raise IntentValidationError(
                 f"stale task_status.from for {normalized['task_id']}: expected {task.get('status')}, found {normalized['from']}"
             )
+        if normalized["from"] == "proposed" and normalized["to"] == "ready" and intake_gate_applies(root, normalized["task_id"]):
+            task_file = task_file_for(state, normalized["task_id"])
+            if not task_file:
+                raise IntentValidationError(f"task {normalized['task_id']} cannot move to ready without task file")
+            validate_intake_for_ready(root, normalized["task_id"], task_file)
     elif kind == "task_upsert":
         if not actor_has_any(registry, actor_id, {"orchestrator"}):
             raise IntentValidationError(f"actor {actor_id} lacks required capability: orchestrator")

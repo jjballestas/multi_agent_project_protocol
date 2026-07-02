@@ -8,6 +8,11 @@ $ErrorActionPreference = "Stop"
 $script:ImplementableTaskTypes = @("implementation", "refactor", "integration", "migration", "security", "release")
 $script:LightweightTaskTypes = @("discovery", "analysis", "review", "documentation", "triage")
 $script:ImplementableSddStatuses = @("ready", "claimed", "in_progress", "in_review", "changes_requested", "review_approved", "qa_pending", "qa_failed", "architect_review", "done")
+$script:IntakeEnforcedStatuses = @("ready", "claimed", "in_progress", "in_review", "changes_requested", "review_approved", "qa_pending", "qa_failed", "architect_review", "done")
+$script:IntakeTypes = @("feature", "fix", "infra", "doc", "research")
+$script:IntakeRisks = @("low", "medium", "high")
+$script:IntakeEstimates = @("S", "M", "L")
+$script:IntakePlaceholders = @("", "tbd", "todo", "n/a", "na", "...", "none")
 $script:ReviewedTaskStatuses = @("in_review", "review_approved", "qa_pending", "architect_review", "done")
 $script:FullSddFields = @("spec_id", "execution_pipeline", "acceptance_criteria", "linked_decisions", "test_plan", "closure_criteria")
 $script:LightweightSddFields = @("objective", "expected_output", "question_to_resolve", "closure_criterion")
@@ -281,6 +286,152 @@ function Test-PreSddTask {
         return $true
     }
     return $false
+}
+
+function Get-TaskNumericId {
+    param([object]$TaskId)
+    $text = [string]$TaskId
+    if ($text -match '^TASK-(\d{4})$') {
+        return [int]$Matches[1]
+    }
+    return $null
+}
+
+function Test-IntakeGateEnabled {
+    param([string]$Root, [object]$Config)
+    $livePath = Join-Path $Root "Area_comun/protocol/INTAKE_GATE.json"
+    if (Test-Path -LiteralPath $livePath) {
+        try {
+            $liveGate = Get-Content -Raw -LiteralPath $livePath | ConvertFrom-Json
+            return [bool]$liveGate.enabled
+        } catch {
+        }
+    }
+    return ($Config -and ($Config.PSObject.Properties.Name -contains "intake_gate") -and $Config.intake_gate.enabled)
+}
+
+function Get-IntakeStartNumber {
+    param([string]$Root, [object]$Config)
+    $livePath = Join-Path $Root "Area_comun/protocol/INTAKE_GATE.json"
+    if (Test-Path -LiteralPath $livePath) {
+        try {
+            $liveGate = Get-Content -Raw -LiteralPath $livePath | ConvertFrom-Json
+            return Get-TaskNumericId $liveGate.start_task_id
+        } catch {
+        }
+    }
+    if (-not $Config -or -not ($Config.PSObject.Properties.Name -contains "intake_gate")) {
+        return $null
+    }
+    $value = $Config.intake_gate.start_task_id
+    if (-not $value) { $value = $Config.intake_gate.intake_start_task_id }
+    return Get-TaskNumericId $value
+}
+
+function Test-PostIntakeStart {
+    param([object]$TaskId, [object]$Config)
+    $start = Get-IntakeStartNumber -Root $resolvedRoot -Config $Config
+    $current = Get-TaskNumericId $TaskId
+    return ($null -ne $start -and $null -ne $current -and $current -gt $start)
+}
+
+function ConvertFrom-FrontmatterMapping {
+    param([string]$Path, [string]$BlockName)
+    if (-not (Test-Path -LiteralPath $Path)) { return $null }
+    $lines = @(Get-Content -LiteralPath $Path)
+    if ($lines.Count -eq 0 -or $lines[0].Trim() -ne "---") { return $null }
+    $block = $null
+    $currentKey = $null
+    $inBlock = $false
+    foreach ($line in $lines[1..($lines.Count - 1)]) {
+        if ($line.Trim() -eq "---") { break }
+        if ($line -match '^([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$') {
+            $inBlock = ($Matches[1] -eq $BlockName)
+            if ($inBlock) {
+                $block = @{}
+                $currentKey = $null
+            }
+            continue
+        }
+        if (-not $inBlock -or $null -eq $block) { continue }
+        if ($line -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*):\s*(.*?)\s*$') {
+            $currentKey = $Matches[1]
+            $raw = $Matches[2].Trim()
+            if ($raw) { $block[$currentKey] = ConvertFrom-FrontmatterValue $raw } else { $block[$currentKey] = @() }
+            continue
+        }
+        if ($line -match '^\s{4}-\s*(.*?)\s*$' -and $currentKey) {
+            $value = ConvertFrom-FrontmatterValue $Matches[1]
+            if ($block[$currentKey] -isnot [array]) { $block[$currentKey] = @($block[$currentKey]) }
+            $block[$currentKey] = @($block[$currentKey]) + $value
+        }
+    }
+    return $block
+}
+
+function Test-IntakeValue {
+    param([object]$Value)
+    if ($Value -is [string]) {
+        return ($script:IntakePlaceholders -notcontains $Value.Trim().ToLower())
+    }
+    if ($Value -is [array]) {
+        if ($Value.Count -eq 0) { return $false }
+        foreach ($item in $Value) {
+            if (-not (Test-IntakeValue $item)) { return $false }
+        }
+        return $true
+    }
+    return $null -ne $Value
+}
+
+function Test-ExceptionRecordedExists {
+    param([string]$Root, [string]$TaskId, [object]$ExceptionRef)
+    $ref = ([string]$ExceptionRef).Trim()
+    if (-not $ref) { return $false }
+    $configPath = Join-Path $Root "protocol.config.json"
+    if (Test-Path -LiteralPath $configPath) {
+        try {
+            $localConfig = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+            if (-not (Test-EventStateEnabled -Config $localConfig)) { return $true }
+        } catch {
+        }
+    }
+    $eventsPath = Join-Path $Root "runtime/state/events.jsonl"
+    if (-not (Test-Path -LiteralPath $eventsPath)) { return $false }
+    foreach ($line in Get-Content -LiteralPath $eventsPath) {
+        if (-not $line.Trim()) { continue }
+        try { $event = $line | ConvertFrom-Json } catch { continue }
+        if ($event.type -eq "exception.recorded" -and [string]$event.seq -eq $ref -and $event.payload.kind -eq "intake_exempt" -and $event.payload.task_id -eq $TaskId) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Validate-IntakeBlock {
+    param([string]$Root, [string]$TaskId, [string]$TaskPath)
+    $intake = ConvertFrom-FrontmatterMapping -Path $TaskPath -BlockName "intake"
+    if ($null -eq $intake) {
+        Fail "Task $TaskId missing intake block"
+        return
+    }
+    if ($intake.intake_exempt -eq $true) {
+        if (-not (Test-ExceptionRecordedExists -Root $Root -TaskId $TaskId -ExceptionRef $intake.exception_ref)) {
+            Fail "Task $TaskId intake_exempt requires valid exception_ref"
+        }
+        return
+    }
+    foreach ($field in @("type", "goal", "acceptance", "verification_cmd", "scope_routes", "out_of_scope", "risk", "estimate")) {
+        if (-not (Test-IntakeValue $intake[$field])) {
+            Fail "Task $TaskId intake field invalid or empty: $field"
+        }
+    }
+    if ($script:IntakeTypes -notcontains $intake.type) { Fail "Task $TaskId intake.type out of range: $($intake.type)" }
+    if ($script:IntakeRisks -notcontains $intake.risk) { Fail "Task $TaskId intake.risk out of range: $($intake.risk)" }
+    if ($script:IntakeEstimates -notcontains $intake.estimate) { Fail "Task $TaskId intake.estimate out of range: $($intake.estimate)" }
+    if (($intake.acceptance -is [array]) -and $intake.acceptance.Count -gt 0 -and -not (($intake.verification_cmd -is [array]) -and $intake.verification_cmd.Count -gt 0)) {
+        Fail "Task $TaskId intake.acceptance requires verification_cmd"
+    }
 }
 
 function Test-SpecIdExists {
@@ -884,6 +1035,21 @@ if ($index -and $index.tasks) {
 }
 
 Validate-Sdd -Root $resolvedRoot -Index $index -Config $config
+
+if (Test-IntakeGateEnabled -Root $resolvedRoot -Config $config) {
+    if ($null -eq (Get-IntakeStartNumber -Root $resolvedRoot -Config $config)) {
+        Fail "intake_gate.enabled requires intake_gate.start_task_id"
+    } elseif ($index -and $index.tasks) {
+        foreach ($task in @($index.tasks)) {
+            if ($script:IntakeEnforcedStatuses -notcontains $task.status) { continue }
+            if (-not (Test-PostIntakeStart -TaskId $task.id -Config $config)) { continue }
+            $taskFile = $task.file
+            if (-not $taskFile) { $taskFile = $task.task_file }
+            if (-not $taskFile) { continue }
+            Validate-IntakeBlock -Root $resolvedRoot -TaskId ([string]$task.id) -TaskPath (Join-Path $resolvedRoot $taskFile)
+        }
+    }
+}
 
 $mailboxRoot = Join-Path $resolvedRoot "Area_comun/mailbox"
 foreach ($mailboxState in @("open", "answered", "archived")) {

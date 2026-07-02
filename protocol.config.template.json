@@ -219,6 +219,11 @@
     "enforcement": "new_implementable_tasks",
     "adopted_at": "2026-06-05"
   },
+  "intake_gate": {
+    "enabled": false,
+    "start_task_id": "TASK-0000",
+    "enforcement": "post_start_ready_requires_intake"
+  },
   "state_invariants": [
     {
       "path": "status",
