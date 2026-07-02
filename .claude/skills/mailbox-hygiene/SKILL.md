@@ -62,7 +62,25 @@ Manten en `open/` solo lo **accionable o en espera de respuesta**. Escribe la as
    `--actor-id Arquitecto --timestamp <ISO> --commit $(git rev-parse HEAD)`.
 3. Efecto: el archivo se mueve `open -> archived` (transicion registrada en el ledger).
 4. **Lote:** varios MSG resueltos en un solo `submit_intent --intents {"intents":[...]}` (uno por MSG).
+   El intent lleva accountability: `{"type":"mailbox_archive","message_id":"<id sin .md>","author":"<from del MSG>","relayed_by":"Arquitecto","endorsement":"none"}`.
 Ver la receta base y los gotchas en `arquitecto-ledger-ops`.
+
+### 4b. EJECUTAR la higiene sin romper nada (lecciones 2026-07-02, aprendidas a golpes)
+- **VENTANA IDLE de verdad, verificada en paso SEPARADO:** ANTES de disparar un lote, comprueba en un comando
+  aparte: 0 claims de peers, `git status` sin state a medias de peer, y NINGUN peer con lock (exec). **Si algo no
+  esta limpio, ABORTA -- no dispares.** (Error real: correr el check y el submit_intent en el mismo comando y
+  archivar mientras Codex entregaba -> working tree interleaved.) Si YA quedo interleaved con una entrega de peer:
+  el submit_intent es atomico (validate se mantiene VERDE); deja que el peer commitee (su commit hornea tus
+  archive-events en los state files compartidos) y luego TU commiteas los movimientos `open->archived` que el peer
+  no stageo (si no, HEAD queda inconsistente para clon limpio: snapshot dice archivado pero los .md siguen en open/).
+- **CORRE LOS LOTES EN BACKGROUND** (`run_in_background`) o con timeout largo, **NUNCA en foreground** con el tool:
+  el submit_intent re-replaya el event log creciendo (~30-60s/lote) y el tool corta a 2min -> mata el lote a mitad
+  (half-apply). Lotes de ~6. Gatea `validate` VERDE despues de cada lote.
+- **RECUPERACION si un lote se corto:** `validate` VERDE => submit_intent revirtio o completo atomico (sin drift);
+  mira que MSG siguen en `open/` (los no-archivados) y commitea los movimientos+state de los lotes YA aplicados
+  como snapshot consistente; re-corre los faltantes en BACKGROUND. Nunca commitees un state a medio aplicar.
+- **Commit:** stage explicito de `Area_comun/mailbox` + `Area_comun/state` + `runtime/state` (los movimientos y el
+  ledger juntos = snapshot consistente), gate `validate`+`scan_encoding` exit 0, push.
 
 ## 5. Peers: detectar y senalar (DECISION-0018), no tocar
 Si Codex/Analista ven un mensaje stale (respondido pero sigue en open/), un estado que contradice el mailbox,
