@@ -7,6 +7,32 @@
   ajustada por DECISION-0083 (brazo C = fase condicional; sandbox como ensayo)
 - regla de oro: PARALELO y fuera del camino critico F1->F4; cero impacto en el gate 30-jul
 
+## 0. PRECONDICION DURA (directiva del Operador 2026-07-02)
+
+**LA PRUEBA NO SE LANZA hasta que el software engineering este listo:**
+
+1. TASK-0238 (gate de intake determinista, F1-A) = DONE con GO del Analista. Es la
+   maquinaria que produce requerimientos MEDIBLES; sin ella los peones reciben
+   ordenes ambiguas y generan codigo basura, y el spike calibraria el contrato
+   contra entradas malas (confounder que invalida hasta lo exploratorio).
+2. CADA tarea del spike pasa EL MISMO gate de intake antes de delegarse: bloque
+   intake completo (goal 1-linea, acceptance verificable por comando,
+   verification_cmd, scope_routes, out_of_scope, risk, estimate) sin placeholders.
+   El contrato de asignacion (s.3) se construye SOBRE ese bloque: si una tarea no
+   pasa intake, no es elegible para peon. Punto.
+3. Recomendado ademas: F1-D (taxonomia de defectos) disponible para clasificar lo
+   que el peon rompa con las mismas categorias del estudio.
+
+Lo UNICO permitido antes de eso: el setup tecnico de s.2 (instalar Ollama + modelos
++ sandbox vacio). Instalar herramientas no es lanzar la prueba.
+
+Ventana natural: F1-A cierra dentro de F1 (objetivo ~18-jul) -> el spike corre
+entre el cierre de F1 y el arranque del Sprint 1, o en paralelo a F2/F3 si hay
+holgura del Operador. Sigue siendo exploratorio (s.1); Q1 confirmatoria = F6.1.
+Bonus metodologico: los peones seran el PRIMER CONSUMIDOR real del gate de intake
+-- si el bloque intake basta para que un modelo 7B produzca salida no-basura, el
+gate esta bien disenado (prueba de fuego de F1-A gratis).
+
 ## 1. Que da y que NO da este spike (honestidad primero)
 
 - SI da: peones FUNCIONANDO esta semana; contrato de asignacion calibrado con datos
@@ -48,6 +74,8 @@ PROVENANCE: peon=<modelo>, prompt_id=<archivo>, ts=<ISO>, rutas=<tocadas>, gates
 ```
 
 ## 4. Tanda de ensayo (5 tareas B + 3 tareas A, elegibles segun 0078)
+
+GATEADA por s.0: ninguna tarea se delega sin bloque intake completo y validado.
 
 Solo tareas acotadas, repetitivas, gate-verificables (scaffolding de tests,
 transformaciones mecanicas, fixtures, runbooks iniciales, reemplazos de texto).
