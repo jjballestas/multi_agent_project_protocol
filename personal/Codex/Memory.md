@@ -4,6 +4,15 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0238 implementation commit landed: `0efe196 feat(intake): enforce deterministic ready gate`. It adds the
+  live intake boundary in `Area_comun/protocol/INTAKE_GATE.json` with `start_task_id=TASK-0238`, enforces complete
+  `intake` blocks for post-boundary tasks in Python and PowerShell validators, hard-gates `proposed -> ready` in
+  `runtime/submit_intent.py`, updates task templates and `examples/minimal_instance`, and adds
+  `scripts/test_intake_gate.py` with 11 regression cases covering P1-P5 and N1-N6. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because this task is protocol infrastructure. Delivery
+  artifacts prepared: `Area_comun/handoffs/HANDOFF-TASK-0238-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-in-review.md`; runtime delivery moved
+  TASK-0238 to `in_review` and released all Codex TASK-0238 claims at seq 3265-3268.
 - 2026-07-02 hygiene ACTION reply completed. Codex verified `personal/Codex/` root remains limited to
   `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and `codex_mailbox_cron.ps1`, with consumed intents/prompts/
   reports/runtime artifacts under `archive/`. Opened

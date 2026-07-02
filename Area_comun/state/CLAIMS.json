@@ -14227,6 +14227,21 @@
             "updated_at": "2026-07-02T00:11:20Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0238-delivery",
+            "expires_at": "2026-07-02T20:21:43Z",
+            "notes": "TASK-0238 delivery handoff and mailbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0238-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0238-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-in-review.md"
+            ],
+            "started_at": "2026-07-02T18:21:43Z",
+            "status": "released",
+            "task_id": "TASK-0238",
+            "updated_at": "2026-07-02T18:21:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0238-f1a",
             "expires_at": "2026-07-03T00:09:51Z",
             "notes": "TASK-0238 F1-A intake gate implementation.",
@@ -14245,7 +14260,7 @@
                 "examples/minimal_instance/"
             ],
             "started_at": "2026-07-02T18:09:51Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0238",
             "updated_at": "2026-07-02T18:09:51Z"
         },
@@ -14263,7 +14278,7 @@
                 "examples/minimal_instance/"
             ],
             "started_at": "2026-07-02T18:13:53Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0238",
             "updated_at": "2026-07-02T18:13:53Z"
         },
