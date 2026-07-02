@@ -14333,6 +14333,28 @@
             "updated_at": "2026-07-02T17:10:30Z"
         },
         {
+            "claim_id": "CLAIM-20260702-f1-registro-arquitecto",
+            "expires_at": "2026-07-02T21:30:00Z",
+            "notes": "Registro backlog F1 completado.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-f1-registro-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0238-visionnova-f1a-gate-intake.md",
+                "Area_comun/tasks/TASK-0239-visionnova-f1b-exception-recorded.md",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+                "Area_comun/tasks/TASK-0242-visionnova-f1e-envelope-fixloop.md",
+                "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md",
+                "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md"
+            ],
+            "started_at": "2026-07-02T17:30:00Z",
+            "status": "released",
+            "task_id": "GOAL-VISION-NOVA-001",
+            "updated_at": "2026-07-02T17:30:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-b1-arquitecto",
             "expires_at": "2026-07-02T20:00:00Z",
             "notes": "Higiene mailbox lote 1: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",

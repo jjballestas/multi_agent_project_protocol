@@ -3775,6 +3775,160 @@
             "type": "build"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0238-visionnova-f1a-gate-intake.md",
+            "id": "TASK-0238",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.1] Gate de intake determinista (validador pre-ready ps1+python + runtime hard-gate + templates)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0239-visionnova-f1b-exception-recorded.md",
+            "id": "TASK-0239",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.2] Evento firmado exception.recorded (intent nuevo en submit_intent + doctrina U1-U3)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+            "id": "TASK-0240",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task en el validador (V1-V5)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+            "id": "TASK-0241",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.4] Taxonomia de defectos D1-D4 ampliada + severidad del checker + subconteo declarado",
+            "type": "docs"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0242-visionnova-f1e-envelope-fixloop.md",
+            "id": "TASK-0242",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5-harness] Envelope de handoff 7 campos + fix-loop pre-commit (cosecha gentle-ai nivel A)",
+            "type": "build"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md",
+            "id": "TASK-0243",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag",
+            "type": "docs"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+            "id": "TASK-0244",
+            "linked_decisions": [
+                "DECISION-0083"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)",
+            "type": "docs"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

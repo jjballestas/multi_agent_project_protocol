@@ -35,7 +35,7 @@ y quedan corregidos EN LA FUENTE:
 [RECOMENDACION] La redaccion concreta de las correcciones en SPECs/backlog es juicio
 del asesor: puedes refinarla con Codex mientras se cumplan los requisitos (R0
 determinista, activacion F1-C post-F1-E, config pineado byte-identico). Si al
-implementar aparece un mecanismo mejor de boundary que id/seq, adelante — se
+implementar aparece un mecanismo mejor de boundary que id/seq, adelante - se
 documenta en la tarea, sin nueva orden.
 
 Nota de proceso: esta revision-contra-ledger antes de ejecutar es EXACTAMENTE la

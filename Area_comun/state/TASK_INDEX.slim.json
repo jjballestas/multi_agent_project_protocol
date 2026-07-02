@@ -48,6 +48,62 @@
             "priority": "low",
             "status": "proposed",
             "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
+        },
+        {
+            "id": "TASK-0238",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.1] Gate de intake determinista (validador pre-ready ps1+python + runtime hard-gate + templates)"
+        },
+        {
+            "id": "TASK-0239",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.2] Evento firmado exception.recorded (intent nuevo en submit_intent + doctrina U1-U3)"
+        },
+        {
+            "id": "TASK-0240",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task en el validador (V1-V5)"
+        },
+        {
+            "id": "TASK-0241",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.4] Taxonomia de defectos D1-D4 ampliada + severidad del checker + subconteo declarado"
+        },
+        {
+            "id": "TASK-0242",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5-harness] Envelope de handoff 7 campos + fix-loop pre-commit (cosecha gentle-ai nivel A)"
+        },
+        {
+            "id": "TASK-0243",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "medium",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag"
+        },
+        {
+            "id": "TASK-0244",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
         }
     ],
     "view": "task_index.slim"

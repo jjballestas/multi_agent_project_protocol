@@ -1135,6 +1135,48 @@
             "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         },
         {
+            "id": "TASK-0238",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.1] Gate de intake determinista (validador pre-ready ps1+python + runtime hard-gate + templates)"
+        },
+        {
+            "id": "TASK-0239",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.2] Evento firmado exception.recorded (intent nuevo en submit_intent + doctrina U1-U3)"
+        },
+        {
+            "id": "TASK-0240",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task en el validador (V1-V5)"
+        },
+        {
+            "id": "TASK-0241",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.4] Taxonomia de defectos D1-D4 ampliada + severidad del checker + subconteo declarado"
+        },
+        {
+            "id": "TASK-0242",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5-harness] Envelope de handoff 7 campos + fix-loop pre-commit (cosecha gentle-ai nivel A)"
+        },
+        {
+            "id": "TASK-0243",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag"
+        },
+        {
+            "id": "TASK-0244",
+            "owner": "Arquitecto",
+            "status": "proposed",
+            "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
