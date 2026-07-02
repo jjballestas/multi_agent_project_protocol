@@ -68,6 +68,13 @@ re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 a
   **El flip final `review_approved->done` exige capability `implementer` -> lo hace CODEX, NO el Arquitecto**
   (submit_intent con actor Arquitecto sobre un `task_status ...->done` es rechazado: "lacks capability implementer").
   Por eso el Arquitecto rutea un ACTION done-flip a Codex tras ratificar; no intenta cerrarlo el mismo.
+- **CUALQUIER `->done` exige implementer = Codex, sea cual sea el owner/type de la tarea (leccion 2026-07-02):** al
+  cerrar tareas type `review` propias del Analista (p.ej. cierre de reviews huerfanas), NI el Analista (type review
+  no esta en el set owner-closeable de submit_intent.py: solo `analysis/triage/extraction` cierran por owner) NI el
+  Arquitecto (sin implementer) pueden flip `ready->done` -> ambos reciben rechazo. Cadena correcta: el Analista
+  CONFIRMA el cierre (mailbox), el Arquitecto lo ratifica, y **Codex ejecuta el `->done`** (unico con implementer).
+  El Arquitecto SI puede `->cancelled` (probado), pero NO `->done`. Si necesitas cerrar reviews a done, rutea ACTION
+  done-flip a Codex citando la confirmacion del Analista.
 - **Tras CADA commit: actualiza memoria (DECISION-0026) + push si verde.**
 
 ## 5. Re-disparar un cron sobre un mensaje ya "seen"
