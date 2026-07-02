@@ -15,8 +15,8 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `Area_comun/handoffs/HANDOFF-TASK-0239-codex-to-arquitecto-2.md` and
   `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0239-actor-remediation-in-review.md`;
   runtime delivery moved TASK-0239 back to `in_review` and released Codex actor-remediation claims at seq
-  3313-3315. Product repo `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0239 is
-  protocol runtime work.
+  3313-3315. Protocol delivery commit: `a9c0d76 coord(TASK-0239): deliver actor remediation`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0239 is protocol runtime work.
 - TASK-0239 delivered to `in_review` in protocol commit `HEAD feat(runtime): record governed exceptions`.
   It adds the governed `exception` intent to `runtime/submit_intent.py`, emitting signed/chained
   `exception.recorded` events without mutating hot protocol state; validates closed enums, unique
