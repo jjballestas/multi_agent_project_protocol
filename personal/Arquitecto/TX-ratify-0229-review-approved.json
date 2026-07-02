@@ -1,0 +1,52 @@
+{
+  "idempotency_key": "arq:task0229:ratify-review-approved-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Arquitecto-TASK-0229-ratify",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0229",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-TASK-0229-ratify",
+          "Area_comun/state/TASK_INDEX.json#TASK-0229",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+          "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md"
+        ],
+        "started_at": "2026-07-02T14:00:00Z",
+        "updated_at": "2026-07-02T14:00:00Z",
+        "expires_at": "2026-07-02T20:00:00Z",
+        "notes": "Ratifica review_approved TASK-0229 (GO/CERRABLE Analista bajo DECISION-0082: allowlist 892/892, 3 hits a Zeus, npm test/build/bundle EXIT 0, gates verdes). Orden del operador cerrar 0229."
+      }
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0229",
+      "from": "in_review",
+      "to": "review_approved",
+      "idempotency_key": "arq:task0229:in-review-to-review-approved"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Arquitecto-TASK-0229-ratify",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0229",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-TASK-0229-ratify",
+          "Area_comun/state/TASK_INDEX.json#TASK-0229",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+          "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md"
+        ],
+        "started_at": "2026-07-02T14:00:00Z",
+        "updated_at": "2026-07-02T14:00:00Z",
+        "expires_at": "2026-07-02T20:00:00Z",
+        "notes": "Release tras ratificar TASK-0229."
+      }
+    }
+  ]
+}

@@ -3563,7 +3563,7 @@
                 "REQ-ZEUS-001"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'",
             "type": "build"
         },
