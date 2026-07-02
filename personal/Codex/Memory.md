@@ -12,7 +12,9 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because this task is protocol infrastructure. Delivery
   artifacts prepared: `Area_comun/handoffs/HANDOFF-TASK-0238-codex-to-arquitecto-1.md` and
   `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-in-review.md`; runtime delivery moved
-  TASK-0238 to `in_review` and released all Codex TASK-0238 claims at seq 3265-3268.
+  TASK-0238 to `in_review` and released all Codex TASK-0238 claims at seq 3265-3268. Protocol delivery commit:
+  `17c5973 coord(TASK-0238): deliver intake gate`. Follow-up memory-only commit recorded this delivery in
+  `personal/Codex/Memory.md`.
 - 2026-07-02 hygiene ACTION reply completed. Codex verified `personal/Codex/` root remains limited to
   `README.md`, `STARTUP_PROMPT.md`, `Memory.md`, and `codex_mailbox_cron.ps1`, with consumed intents/prompts/
   reports/runtime artifacts under `archive/`. Opened
