@@ -72,6 +72,11 @@ mensaje antes de aseverar.
   de Carril A: dije "event_auth no existe" y era falso; lo corregi yo mismo).
 - Aviso: un mensaje compact en `Area_comun/mailbox/open/` (to: Operador o Arquitecto segun a quien sirva),
   con requested_action apuntando al artefacto.
+- **Severidad por hallazgo (Area_comun/protocol/DEFECT_TAXONOMY.md, TASK-0241):** etiqueto cada hallazgo
+  de review con CRITICAL / WARNING-real / WARNING-theoretical / SUGGESTION. Regla del uso normal: "si el
+  uso normal lo dispara, es real". Un NO-GO cita al menos un CRITICAL o WARNING-real con repro;
+  WARNING-theoretical y SUGGESTION NO bloquean (se registran). Cuando la instancia mide calidad, el
+  veredicto etiqueta ademas la clase D1-D4 y subcategoria S1-S7 del defecto.
 
 ## HIGIENE DE CANAL Y ENTREGA (lecciones DECISION-0018 - no repetir)
 

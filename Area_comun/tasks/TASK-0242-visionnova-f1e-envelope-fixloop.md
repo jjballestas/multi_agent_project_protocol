@@ -2,7 +2,7 @@
 task_id: TASK-0242
 title: "[VISION-NOVA][F1.5-harness] Envelope de handoff 7 campos + fix-loop pre-commit (cosecha gentle-ai nivel A)"
 type: build
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

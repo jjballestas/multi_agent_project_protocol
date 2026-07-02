@@ -60,7 +60,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-02 22:05",
+  updated_at: "2026-07-03 01:15",
   updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
@@ -71,10 +71,10 @@ const PIPELINE = {
     { id:"F1", title:"Núcleo doctrinal (HUB) — PRD-01", window:"Sem 1–2 · jul 3–18", items:[
       { id:"F1.1", t:"[TASK-0238] Gate de intake determinista (checklist por tipo + estados + validador pre-ready)", st:"hecho", ev:"TASK-0238 DONE (done-flip Codex 1004261). Ciclo: entrega 0efe196 → NO-GO Analista F-0238-01 (R5 no fail-closed) → remediación 076193d (R5 verifica exception.recorded real en py+ps1+submit_intent, +test N5b) → re-gate OK Analista → ratificado aab9cfb. R0 en INTAKE_GATE.json, pin byte-identico" },
       { id:"F1.2", t:"[TASK-0239] Registro de excepciones auditado (evento firmado exception.recorded)", st:"hecho", ev:"TASK-0239 DONE (done-flip 65095ee). Ciclo: entrega -> NO-GO F-0239-01 (payload actor != caller firmante, mis-attribution U2) -> remediacion (actor atado al caller + test) -> re-gate OK -> ratificado 812d1e5. Habilita el puente R5 de 0238" },
-      { id:"F1.3", t:"[TASK-0240] Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"en_curso", ev:"TASK-0240 ready + GO Codex (89d07d5); intake valido. CONSTRUYE ahora; ACTIVACION del trailer_start_seq DIFERIDA hasta F1.5h/TASK-0242 desplegado (F-2 anti-DoS)" },
-      { id:"F1.4", t:"[TASK-0241] Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"pendiente", ev:"TASK-0241 registrada (proposed, commit 93c10e8); owner Arquitecto + gate Analista" },
+      { id:"F1.3", t:"[TASK-0240] Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"hecho", ev:"TASK-0240 DONE (done-flip Codex 8acc2f6). Ciclo: entrega db47854 -> NO-GO F-0240-01 (parser contaba Task-Id fuera de la seccion final de trailers) -> remediacion -> re-gate OK Analista 160cc8e -> ratificado 663a8ea. ACTIVACION del trailer_start_seq sigue DIFERIDA hasta F1.5h/TASK-0242 desplegado (F-2 anti-DoS)" },
+      { id:"F1.4", t:"[TASK-0241] Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"en_curso", ev:"TASK-0241 in_progress (claim Arquitecto 2026-07-03); DEFECT_TAXONOMY.md v1.0 redactado (D1-D4 + S1-S7 + severidad + subconteo + mesa 10/10) + prompt checker actualizado; gate Analista pendiente" },
       { id:"F1.5", t:"[TASK-0243] Mini-DECISION identidad anti-vibecoding registrada", st:"pendiente", ev:"TASK-0243 registrada (proposed, commit 93c10e8); incluye clausula pin-anclado-al-tag" },
-      { id:"F1.5h", t:"[TASK-0242] Envelope handoff 7 campos + fix-loop re-juicio pre-commit (harnesses) [alta: orden operador 2026-07-02]", st:"pendiente", ev:"TASK-0242 registrada (proposed, commit 93c10e8); su despliegue ACTIVA F1.3/trailers (hallazgo F-2)" },
+      { id:"F1.5h", t:"[TASK-0242] Envelope handoff 7 campos + fix-loop re-juicio pre-commit (harnesses) [alta: orden operador 2026-07-02]", st:"en_curso", ev:"TASK-0242 ready + GO Codex (89bce74); Codex claim activo, in_progress 2026-07-03 ~01:00. Su despliegue ACTIVA F1.3/trailers (F-2)" },
       { id:"F1.6", t:"Aprendizajes-externos: extracción de reglas (timebox 2d, paralelo) [sin TASK: actividad timebox]", st:"pendiente", ev:"" },
       { id:"F1.7", t:"[TASK-0244] RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"pendiente", ev:"TASK-0244 registrada (proposed, commit 93c10e8); v1.18.0=linea release, epoch PINNED intocable" }
     ]},

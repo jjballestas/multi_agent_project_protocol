@@ -15483,6 +15483,62 @@
             "updated_at": "2026-07-02T22:21:56Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0242",
+            "expires_at": "2026-07-03T05:00:04Z",
+            "notes": "Implement TASK-0242 envelope handoff and fix-loop harness doctrine.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0242",
+                "Area_comun/state/TASK_INDEX.json#TASK-0242",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0242",
+                "Area_comun/tasks/TASK-0242-visionnova-f1e-envelope-fixloop.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/TASK_PROTOCOL.template.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1"
+            ],
+            "started_at": "2026-07-02T23:00:04Z",
+            "status": "active",
+            "task_id": "TASK-0242",
+            "updated_at": "2026-07-02T23:00:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0242-templates",
+            "expires_at": "2026-07-03T05:02:02Z",
+            "notes": "Update task handoff template envelope references for TASK-0242.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0242-templates",
+                "Area_comun/protocol/TASK_TEMPLATE.md",
+                "examples/minimal_instance/Area_comun/protocol/TASK_TEMPLATE.md",
+                "examples/minimal_sdd_instance/Area_comun/protocol/TASK_TEMPLATE.md",
+                "examples/full_runtime_instance/Area_comun/protocol/TASK_TEMPLATE.md",
+                "examples/generated_minimal_instance/Area_comun/protocol/TASK_TEMPLATE.md",
+                "examples/dotnet_enterprise_instance/Area_comun/protocol/TASK_TEMPLATE.md"
+            ],
+            "started_at": "2026-07-02T23:02:02Z",
+            "status": "active",
+            "task_id": "TASK-0242",
+            "updated_at": "2026-07-02T23:02:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-arquitecto-0241-taxonomia",
+            "expires_at": "2026-07-03T06:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0241-taxonomia",
+                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0241",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+                "Area_comun/protocol/DEFECT_TAXONOMY.md",
+                "personal/Analista/STARTUP_PROMPT.md"
+            ],
+            "started_at": "2026-07-02T23:03:23Z",
+            "status": "active",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-02T23:03:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg0240-b1-arquitecto",
             "expires_at": "2026-07-03T05:00:00Z",
             "notes": "Higiene ciclo 0240 lote 1.",
