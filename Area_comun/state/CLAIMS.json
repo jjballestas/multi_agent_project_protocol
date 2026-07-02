@@ -15465,6 +15465,22 @@
             "updated_at": "2026-07-02T22:21:56Z"
         },
         {
+            "claim_id": "CLAIM-20260703-ratify-0240-arquitecto",
+            "expires_at": "2026-07-03T04:00:00Z",
+            "notes": "done.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-ratify-0240-arquitecto",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md"
+            ],
+            "started_at": "2026-07-03T00:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-03T00:30:30Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
