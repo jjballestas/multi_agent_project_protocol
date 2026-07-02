@@ -15429,6 +15429,24 @@
             "updated_at": "2026-07-02T22:16:36Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0240-done-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Implementer done-flip after Analista GO and Arquitecto checker ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0240-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0240",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0240",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T22:45:45Z",
+            "status": "released",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T22:45:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0240-remediation",
             "expires_at": "2026-07-03T01:13:13Z",
             "notes": "TASK-0240 remediation F-0240-01: final trailer section parser and regression test.",
