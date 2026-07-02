@@ -23,6 +23,22 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0229 remediacion branding (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `9699cf0` (`review(TASK-0229): Analista blocks branding remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-NOGO`. Ancla protocolo
+  `a99a2b5aeccf697810b7fec5f280ea5f79520569`; producto Zeus-Aegis
+  `bcb2715b39df895de0ce6bb209cdb0eb3a363a5a`; clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-rem-branding-75b26ccc78bb49d687ce99891074b581/zeus-aegis`.
+  `npm test` EXIT 0 (83 files / 562 tests); `corepack pnpm --dir vendor/hermes-2.3.0 exec vitest run
+  src/server/zeus-env-aliases.test.ts` EXIT 0 (3/3); `corepack pnpm --dir vendor/hermes-2.3.0 build` EXIT 0;
+  no-rename diff de `package.json` y `electron-builder.config.cjs` EXIT 0. Bloqueo falsable: `src/**` y
+  `electron/server-bundle.cjs` siguen exponiendo cadenas Hermes visibles fuera de allowlist, entre ellas
+  `Hermes updated`, `Hermes Dashboard`, `Hermes Kanban`, `HermesWorld`, `hermes gateway restart`, `hermes --gateway`,
+  `~/.hermes` y `NousResearch/hermes-agent`; conteo probe: `HermesWorld: 359`, `Hermes Dashboard: 27`,
+  `Hermes Kanban: 22`, `~/.hermes: 64`. Gates protocolo live/clean validate/neutrality/encoding EXIT 0, drift false
+  (`up_to_seq=3118` live tras claim/release, `3116` clean), #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 - TASK-0229 WS3 branding white-label (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `7d15fa6` (`review(TASK-0229): Analista blocks WS3 branding`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0229-ws3-branding-veredicto.md`, MSG
