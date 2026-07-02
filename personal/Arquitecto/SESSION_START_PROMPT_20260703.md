@@ -4,12 +4,17 @@ actor_id del ledger = "Arquitecto". REGLA PRIMORDIAL (DECISION-0038): narracion 
 
 ARRANQUE EN FRIO (lee en orden, no asumas):
 1. memory/MEMORY.md (indice) + memory/project-state-snapshot.md + personal/Arquitecto/MEMORY.md (bloques mas nuevos primero: "REDESPLIEGUE + REMEDIACION JAMS 2026-07-02").
-2. Dispara el skill arquitecto-ledger-ops ANTES de tocar el ledger. 4 skills del Arquitecto: arquitecto-ledger-ops, arquitecto-cron-lifecycle, mailbox-hygiene, arquitecto-monitor-coordina. Skill global: session-checkpoint (guardar estado). USALAS.
+2. Dispara el skill arquitecto-ledger-ops ANTES de tocar el ledger. 5 skills del Arquitecto: arquitecto-ledger-ops, arquitecto-cron-lifecycle, mailbox-hygiene, arquitecto-monitor-coordina, arquitecto-pipeline-vision-nova (mantener el tablero HTML del operador). Skill global: session-checkpoint. USALAS. Lee tambien personal/operador/vision-nova/ (RFC + PRDs + pipeline-vision-nova.html).
 3. AGENTS.md (s.0,s.7) + CLAUDE.md.
 4. Area_comun/state/{PROJECT_STATE,TASK_INDEX,CLAIMS}.json + Area_comun/mailbox/open/ (~4 mensajes vivos).
 5. git fetch + git log --oneline -8 + git status (HEAD real; arbol COMPARTIDO; los peers commitean-a-veces-sin-pushear; `git merge --ff-only origin/main`).
 
-ESTADO VIGENTE (re-confirma via git; ACTUALIZADO 2026-07-02 ~16:05 local, HEAD ref 95b9146; lo de mas abajo con HEAD 37cbd5d/cc1dac4 quedo SUPERADO):
+ESTADO VIGENTE (re-confirma via git; ACTUALIZADO 2026-07-02 ~18:10 local, HEAD ref ~c2c788e). NUEVO FOCO = VISION NOVA:
+- **NUEVA FASE VISION NOVA (montada por el operador):** personal/operador/vision-nova/ = RFC + 5 PRDs + `pipeline-vision-nova.html` (TABLERO VIVO que MANTIENE EL ARQUITECTO via skill arquitecto-pipeline-vision-nova; 'hecho' solo con evidencia + sello de hora; F0-F6 + Carril B todo pendiente; GATE DURO Sprint 1 = 2026-07-30).
+- **PIVOTE ronda 2 = CAMBIO-REQUERIDO** (Analista, ANALISTA-pivote-v2-veredicto.md): 8 bloqueantes (politica medicion empleados / eventos firmados excepciones / trailers bloqueantes / taxonomia D1-D4 / presupuesto medido Carril B / DECISION supersede fork+re-alcance 0230-0234 / spike DSSE-Rekor / sellado pre-registro hash+seq).
+- **SIGUIENTE ACCION CONCRETA:** el tablero esta en F0.1='Directiva del operador' (pendiente). Cuando el operador la emita -> el Arquitecto redacta F0.2 = DECISION-hub que supersede el fork (0077) + re-alcanza 0230-0234 + arquitectura repos, INCORPORANDO los 8 bloqueantes. Hasta entonces: HOLD, solo mantener el tablero con evidencia.
+- **Higiene areas personales (ordenes operador):** Analista DONE (FYI); Codex PENDIENTE. Los crons de peers SI procesan mensajes Operador-to-<peer> (no requieren relay).
+- (historico ~16:05, HEAD 95b9146; lo de mas abajo con HEAD 37cbd5d/cc1dac4 SUPERADO):
 - FONDO INTOCABLE: Dataset SELLADO N=500 (tag TFM-dataset-N500 -> e3646ae); H1-H3 CONFIRMADAS. NO generar eventos "para el dataset". NO tocar los 5 pineados / v1.14.0 / #4. NO activar F2/re-genesis sin GO operador.
 - FOCO = REQ-ZEUS-001 (productizar Zeus-Aegis, D:\Agentes\Zeus\Zeus-Aegis). Adoptado: DECISION-0077 + D1-D5 (0072-0076). Plan vigente: PLAN-REQ-ZEUS-001-reconciliado.md.
 - **PIPELINE CONGELADO por el operador (directiva ~14:56)** hasta su directiva post-ronda-2 del pivote: NO promover/cancelar tareas. UNICA excepcion autorizada: cerrar 0229.
