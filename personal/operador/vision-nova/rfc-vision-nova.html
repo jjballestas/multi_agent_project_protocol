@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RFC — Visión Nova: metodología employee-ready + evidencia publicable</title>
+<style>
+  :root{--ink:#1a1a1a;--mut:#666;--line:#ddd;--acc:#0f6e56;--warn:#993c1d;--bg:#fafaf8;--card:#fff}
+  body{font-family:Segoe UI,system-ui,sans-serif;color:var(--ink);background:var(--bg);margin:0;line-height:1.55}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 24px 80px}
+  h1{font-size:26px;margin:.2em 0}h2{font-size:19px;margin:1.6em 0 .4em;border-bottom:2px solid var(--acc);padding-bottom:4px}
+  h3{font-size:15px;margin:1.1em 0 .3em}
+  .meta{color:var(--mut);font-size:13px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:10px 0}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+  th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+  th{background:#f0efe9}
+  .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:999px;margin-right:6px}
+  .ok{background:#e1f5ee;color:#085041}.no{background:#faece7;color:#712b13}.gate{background:#faeeda;color:#633806}
+  code{background:#f0efe9;padding:1px 5px;border-radius:4px;font-size:12.5px}
+  .quote{border-left:4px solid var(--acc);padding:8px 14px;background:#f2f7f5;font-style:italic;margin:10px 0}
+  ul{margin:.3em 0 .6em}li{margin:.25em 0}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>RFC — Visión Nova</h1>
+<div class="meta">Metodología employee-ready + evidencia publicable · Autor: Operador (John Ballestas), redactado por el asesor con autoridad delegada · 2026-07-02 · Estado: <b>APROBADO POR EL OPERADOR</b> (GO 2026-07-02) · Formalización en ledger: pendiente (DECISION en el hub)</div>
+
+<h2>1. Contexto y motivación</h2>
+<div class="card">
+<ul>
+<li><b>La empresa es el objetivo real.</b> El operador tiene una empresa con empleados desarrolladores <b>en otro país</b> y necesita construir la suite <b>Nova</b> (Budget → Accounting → Payroll → Treasury, software financiero) usando su metodología de gobierno multi-agente.</li>
+<li><b>El fork Hermes (Zeus-Aegis) está muerto</b> como producto: 1.094 archivos ajenos vs 13 propios, treadmill de upstream, y contradecía la identidad. No se compite contra Claude Code / Codex / VS Code / Antigravity.</li>
+<li><b>El activo diferencial</b> (validado por 2 rondas adversariales internas + 5 externas, 0 NO-GO): la única implementación de referencia <i>operativa</i> del ciclo completo multi-agente (task→claim→delivery→review adversarial→close) con checker independiente, corpus longitudinal real (3.200+ eventos atestados) y mediciones pre-registradas.</li>
+<li><b>El TFM no es formal</b> — la publicación no depende de ninguna universidad.</li>
+<li><b>Identidad de producto (frase canónica ratificada):</b> <i>"para desarrolladores profesionales — y para profesionalizar a quien construye software con IA sin serlo."</i></li>
+</ul>
+</div>
+
+<h2>2. Decisión: dos carriles con prioridad explícita</h2>
+<div class="card">
+<p><span class="tag ok">CARRIL A — PRINCIPAL</span> <b>Metodología lista para empleados + Nova Budget como piloto instrumentado.</b> Doctrina primero, instancia limpia distribuible, estudio pre-registrado (Q1–Q5). El retorno económico principal del sistema.</p>
+<p><span class="tag gate">CARRIL B — SECUNDARIO, GATEADO</span> <b>"Publicar para ser reproducido"</b>: paquete reproducible + spike DSSE/Rekor + outreach institucional. Presupuesto duro: ≤1 día/semana del operador, con pausa automática si lo excede. El resultado modal aceptado sin eufemismos: credibilidad y capital de carrera.</p>
+<p><b>Regla de subordinación:</b> si en una semana el Carril B compite con un gate del Carril A, gana el A.</p>
+</div>
+
+<h2>3. Arquitectura de repos y modo distribuido</h2>
+<div class="card">
+<table>
+<tr><th>Pieza</th><th>Rol</th><th>Regla</th></tr>
+<tr><td><b>Hub</b> (multi_agent_project_protocol)</td><td><b>Casa viva de la HERRAMIENTA</b> (core, templates, runtime, validadores, new_instance/upgrade_instance, versionado SemVer) + <b>archivo inmutable</b> de las eras (corpus atestado, dataset sellado, sagas de producto)</td><td>Los "poderes" de la metodología se desarrollan SIEMPRE aquí. El gobierno de producto no vuelve aquí. Probablemente privado para siempre.</td></tr>
+<tr><td><b>Instancias Nova</b> (nova-budget, …)</td><td>Consumidoras por versión: nacen de un <b>release tag</b> vía <code>new_instance.py</code>, con su propio ledger e historia CERO; coordination-tier (D1)</td><td>Nunca desarrollan features del tool; las piden. Suben de versión con <code>upgrade_instance.py</code>.</td></tr>
+<tr><td><b>Spec-repo público</b> (futuro, Carril B)</td><td>Vitrina de distribución: "minimum public reference profile" (schema + verifier + threat model + instancia ejemplo), Apache-2.0, inglés</td><td>A término se vuelve el home público del tool. Nova NO lo espera.</td></tr>
+</table>
+<p><b>Modo distribuido (empleados en otro país):</b> cada persona/agente trabaja en su <b>clon</b> de la instancia; GitHub es el bus y el punto de serialización (push gana/pierde); el mailbox es merge-free por diseño; disciplina <b>pull→escribir→push inmediato</b> para claims (un claim no pusheado es invisible). La cadena atestada distribuida queda declarada como limitación/feature futura del hub — coordination-tier la evita.</p>
+</div>
+
+<h2>4. Secuencia: doctrina primero, instancia después</h2>
+<div class="card">
+<p>Es obligado por las propias reglas del sistema: (1) las features nunca se desarrollan en Nova (acoplamiento unidireccional, DECISION-0035/0049/0050); (2) la instancia nace de un release — si la doctrina no está en él, tocaría upgradear a mitad del estudio, contaminándolo; (3) para que "la metodología reduce defectos" signifique la metodología <i>completa</i>, la doctrina opera desde la tarea 1.</p>
+<table>
+<tr><th>Entra al core antes del release v1.18.0 (núcleo, ~días)</th><th>NO entra (superficie/perfil)</th></tr>
+<tr><td>Gate determinista de intake (checklist de obligatorios por tipo genérico + estados + validador pre-ready)</td><td>Panel de intake, wizard, dictado, briefs UI, medidor visual</td></tr>
+<tr><td>Registro de excepciones auditado (eventos firmados)</td><td>Engineering Quality Panel (el gate corre como script)</td></tr>
+<tr><td>Trailers bloqueantes <code>Task-Id:</code> / <code>Fixes-Task:</code></td><td>Etiquetas arm/mode del estudio → <b>perfil de la instancia</b> (neutralidad del core)</td></tr>
+<tr><td>Mini-DECISION identidad anti-vibecoding</td><td>Generador de documentos desde briefs</td></tr>
+</table>
+<p><b>Memoria híbrida NO es prerequisito</b> (es derivada y reconstruible por diseño → retro-instalable a costo cero; la instancia nace con historia cero). Llega como v1.19.0 en agosto vía <code>upgrade_instance</code> — estrenando además el flujo de upgrade con una feature real.</p>
+</div>
+
+<h2>5. Medición pre-registrada (Q1–Q5)</h2>
+<div class="card">
+<table>
+<tr><th>Pregunta</th><th>Evidencia</th><th>Fuerza esperada</th></tr>
+<tr><td><b>Q1</b> ¿Los peones reducen costo?</td><td>tokens del firmante por tarea, A vs B bajo gobierno completo; regla: adoptar si mediana(B) ≤ 0.6×A y kickback &lt;20%</td><td><b>Fuerte</b> (fase 1, agosto)</td></tr>
+<tr><td><b>Q2</b> ¿La metodología reduce defectos?</td><td>Escapes post-GO por tarea (ITT) + <b>conteo mecanístico</b>: defectos concretos que el checker atrapó y el gate no</td><td>Mecanística sí; estadística según n</td></tr>
+<tr><td><b>Q3</b> ¿El gobierno aumenta calidad?</td><td>Retrabajo/NO-GOs — descriptiva (before/after confundido con aprendizaje)</td><td>Descriptiva</td></tr>
+<tr><td><b>Q4</b> Contraste gobierno ligero vs completo</td><td>Asignación por tarea (hash+semilla, ITT), solo criticidad media/baja, parada de seguridad, nulo pre-decidido, <b>condicional a la aritmética del backlog</b> + regla de adopción</td><td>Factible; probablemente bajo poder</td></tr>
+<tr><td><b>Q5</b> ¿La memoria híbrida reduce costo y acelera el arranque en frío?</td><td>Tokens de contexto por sesión fría + tiempo a primera acción gobernada; antes/después del upgrade v1.19.0 (la curva debe aplanarse pese al crecimiento del corpus). <code>measure_context_cost.py</code> ya existe</td><td>Objetiva, antes/después</td></tr>
+</table>
+<p><b>Sellado:</b> el pre-registro completo (métricas, semilla, taxonomía D1–D4 ampliada, reglas de parada, política de excepciones) se sella con hash <b>anclado externamente</b> (OpenTimestamps/DOI — el sello en el propio ledger ata a todos menos al operador) ANTES de la primera asignación. Fuerza declarada: caso de estudio industrial instrumentado, no RCT.</p>
+</div>
+
+<h2>6. Gobernanza requerida</h2>
+<div class="card">
+<ul>
+<li><b>DECISION en el hub</b> (último acto de gobierno de producto aquí): supersede la parte fork de DECISION-0077, ajusta DECISION-0078 (brazo C → fase condicional), re-alcanza 0230/0232/0233/0234 hacia employee-ready/Nova, y fija la arquitectura de repos de §3.</li>
+<li><b>Política interna de medición de empleados</b>: consentimiento/acuse, no-uso punitivo individual, retención, acceso, canal de disputa, y la decisión dataset-público-agregado vs completo.</li>
+<li><b>Presupuesto Carril B medido</b> con stop automático (bloqueante nº 5 del Analista).</li>
+<li>Los 8 bloqueantes del veredicto ronda 2 del Analista quedan absorbidos en los PRDs (ver <code>prds-vision-nova.html</code>).</li>
+</ul>
+</div>
+
+<h2>7. Alternativas consideradas y rechazadas</h2>
+<div class="card">
+<table>
+<tr><th>Alternativa</th><th>Por qué NO</th></tr>
+<tr><td>Continuar el fork Hermes como producto</td><td>Deuda de mantenimiento perpetua con la app de otro; 1.094:13; contradice la identidad; compite contra los grandes.</td></tr>
+<tr><td>Migrar el hub a un repo limpio</td><td>La cadena atestada no es movible (prev_hash+génesis); es el prior art. El hub archiva historia y sigue siendo casa del tool.</td></tr>
+<tr><td>Memoria híbrida como prerequisito del sprint 1</td><td>Es derivada/reconstruible por diseño → posponerla es gratis, adelantarla es pagar dos veces. Va con fecha (agosto).</td></tr>
+<tr><td>Implementar los REQs completos (paneles/UI) antes de Nova</td><td>El núcleo metodológico da el 90% del valor doctrinal en días; las superficies esperan usuarios.</td></tr>
+<tr><td>Una tercera ronda de discusión (v3)</td><td>Meta-hallazgo de la ronda 2: el proceso de gobierno del pivote ya era el mayor consumidor de la atención del operador. Se formaliza y se construye.</td></tr>
+<tr><td>Carril B como apuesta principal / "estándar propio"</td><td>Hinds=nono (aliado=competidor con funding); ventana incierta; para una persona el complemento escaso es corpus+referencia+expertise, no la spec.</td></tr>
+</table>
+</div>
+
+<h2>8. Riesgos principales</h2>
+<div class="card">
+<ul>
+<li><b>R7 Adopción interna falla</b> — la metodología debe estar "aburrida de confiable" antes de los empleados (SLO interno como gate de arranque; onboarding ≤1 día).</li>
+<li><b>R8 La presión de entrega corrompe el estudio</b> — válvula de presión pre-registrada; publicar el período completo.</li>
+<li><b>R9 La atención del operador es el cuello</b> — gate de calendario duro: <b>sprint 1 = 30 de julio; si algo se atrasa se recorta alcance, nunca la fecha</b>.</li>
+<li><b>R6 nolabs/nono absorbe el diseño sin atribución</b> — DOI/fechas antes del contacto; petición decidida de antemano (perfil multi-agente OpenSSF, no PR de plomería).</li>
+</ul>
+</div>
+
+<h2>9. Provenance adversarial</h2>
+<div class="card">
+<p>v1 → ronda 1: Analista (CAMBIO-REQUERIDO) + 5 externos. v2 → ronda 2: Analista (CAMBIO-REQUERIDO, 8 bloqueantes) + 4 externos únicos (Copilot≡Gemini duplicados). 0 NO-GO en 11 veredictos. Panel de diseño experimental (5 agentes) con ataque interno propio (fixes F1–F7). Documentos fuente: <code>personal/operador/pivote/DISCUSSION-pivote-v2-publicar-para-ser-citado.md</code>, <code>Area_comun/artifacts/ANALISTA-pivote-v2-veredicto.md</code>, <code>D:/Jball/data/*Adversarial*.text</code>.</p>
+<div class="quote">La evidencia más fuerte de que la metodología funciona no es ningún documento: es Nova Budget shippeando.</div>
+</div>
+
+</div></body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PIPELINE — Visión Nova (actualizable)</title>
+<style>
+  :root{--ink:#1a1a1a;--mut:#666;--line:#ddd;--bg:#fafaf8;--card:#fff;
+        --ok:#1d9e75;--okbg:#e1f5ee;--oktx:#085041;
+        --cur:#ef9f27;--curbg:#faeeda;--curtx:#633806;
+        --pen:#b4b2a9;--penbg:#f1efe8;--pentx:#5f5e5a;
+        --blk:#e24b4a;--blkbg:#fcebeb;--blktx:#791f1f}
+  body{font-family:Segoe UI,system-ui,sans-serif;color:var(--ink);background:var(--bg);margin:0;line-height:1.45}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 24px 80px}
+  h1{font-size:24px;margin:.1em 0}
+  .meta{color:var(--mut);font-size:13px}
+  .stamp{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:14px 0;display:flex;gap:24px;flex-wrap:wrap;align-items:center;font-size:13.5px}
+  .stamp b{font-size:15px}
+  .gatebox{background:#fcebeb;border:2px solid var(--blk);color:var(--blktx);border-radius:10px;padding:10px 16px;margin:10px 0;font-weight:600}
+  .bar{height:10px;border-radius:5px;background:var(--penbg);overflow:hidden;margin:6px 0 2px}
+  .bar>div{height:100%;background:var(--ok)}
+  .phase{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+  .phase h2{font-size:16px;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline}
+  .phase h2 .win{font-size:12px;color:var(--mut);font-weight:400}
+  .it{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
+  .it:last-child{border-bottom:none}
+  .st{flex:0 0 86px;text-align:center;font-size:11px;font-weight:700;padding:2px 0;border-radius:999px}
+  .st.hecho{background:var(--okbg);color:var(--oktx)}
+  .st.en_curso{background:var(--curbg);color:var(--curtx)}
+  .st.pendiente{background:var(--penbg);color:var(--pentx)}
+  .st.bloqueado{background:var(--blkbg);color:var(--blktx)}
+  .id{flex:0 0 44px;color:var(--mut);font-family:Consolas,monospace;font-size:12px}
+  .tt{flex:1}
+  .ev{flex:0 0 auto;max-width:220px;color:var(--mut);font-size:11.5px;font-family:Consolas,monospace;text-align:right}
+  .it.hecho .tt{text-decoration:line-through;color:var(--mut)}
+  .kpis{display:flex;gap:12px;margin:10px 0}
+  .kpi{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:center}
+  .kpi b{font-size:22px;display:block}
+  .kpi span{font-size:12px;color:var(--mut)}
+</style>
+</head>
+<body><div class="wrap">
+<h1>PIPELINE — Visión Nova</h1>
+<div class="meta">Documento vivo. Lo actualiza el <b>Arquitecto</b> editando SOLO el bloque <code>PIPELINE-DATA</code> (skill <code>arquitecto-pipeline-vision-nova</code>): estado + evidencia (hash de commit / artefacto) + sello de hora. Nunca se marca "hecho" sin evidencia — anti falso-verde.</div>
+
+<div class="stamp" id="stamp"></div>
+<div class="gatebox">⏱ GATE DURO — SPRINT 1 NOVA BUDGET: <span id="gatedate"></span>. Si algo se atrasa, se recorta alcance del núcleo, NUNCA la fecha.</div>
+<div class="kpis" id="kpis"></div>
+<div id="phases"></div>
+
+<script>
+/* ============================================================
+   ===============  PIPELINE-DATA-START  ======================
+   El Arquitecto edita SOLO este bloque. Reglas:
+   - st: "pendiente" | "en_curso" | "hecho" | "bloqueado"
+   - ev: evidencia OBLIGATORIA para "hecho" (commit corto, tag,
+         ruta de artefacto o veredicto). "en_curso" puede llevar nota.
+   - updated_at: SIEMPRE hora local real al editar. updated_by: quien edita.
+   - No se agregan/borran items sin orden del Operador; re-alcances
+     se anotan en el título con [re-alcance: motivo].
+   ============================================================ */
+const PIPELINE = {
+  updated_at: "2026-07-02 18:45",
+  updated_by: "Asesor (creacion del tablero)",
+  sprint1_date: "2026-07-30",
+  phases: [
+    { id:"F0", title:"Formalización (HUB)", window:"Sem 1 · jul 3–11", items:[
+      { id:"F0.1", t:"Directiva del operador (dos carriles, roadmap, gate 30-jul)", st:"pendiente", ev:"" },
+      { id:"F0.2", t:"DECISION hub: supersede fork (0077) + ajusta 0078 + re-alcanza 0230/0232/0233/0234 + arquitectura de repos", st:"pendiente", ev:"" }
+    ]},
+    { id:"F1", title:"Núcleo doctrinal (HUB) — PRD-01", window:"Sem 1–2 · jul 3–18", items:[
+      { id:"F1.1", t:"Gate de intake determinista (checklist por tipo + estados + validador pre-ready)", st:"pendiente", ev:"" },
+      { id:"F1.2", t:"Registro de excepciones auditado (evento firmado exception.recorded)", st:"pendiente", ev:"" },
+      { id:"F1.3", t:"Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"pendiente", ev:"" },
+      { id:"F1.4", t:"Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"pendiente", ev:"" },
+      { id:"F1.5", t:"Mini-DECISION identidad anti-vibecoding registrada", st:"pendiente", ev:"" },
+      { id:"F1.6", t:"Aprendizajes-externos: extracción de reglas (timebox 2d, paralelo)", st:"pendiente", ev:"" },
+      { id:"F1.7", t:"RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"pendiente", ev:"" }
+    ]},
+    { id:"F2", title:"Instancia nova-budget distribuida — PRD-02", window:"Sem 3 · jul 21–25", items:[
+      { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"pendiente", ev:"" },
+      { id:"F2.2", t:"Prueba distribuida: clon limpio opera 1 tarea completa solo vía Git", st:"pendiente", ev:"" },
+      { id:"F2.3", t:"Harness pull→escribir→push inmediato (claims visibles entre clones)", st:"pendiente", ev:"" },
+      { id:"F2.4", t:"Perfil de instancia (arm/mode + taxonomía de riesgo) + hosting privado", st:"pendiente", ev:"" },
+      { id:"F2.5", t:"Runbook onboarding remoto (objetivo ≤1 día)", st:"pendiente", ev:"" }
+    ]},
+    { id:"F3", title:"Estudio pre-registrado — PRD-03", window:"Sem 3–4 · jul 21–29", items:[
+      { id:"F3.1", t:"Política de medición de empleados (consentimiento, no-punitivo, retención, disputa)", st:"pendiente", ev:"" },
+      { id:"F3.2", t:"Aritmética del backlog + condicionalidad de Q4 + regla de adopción", st:"pendiente", ev:"" },
+      { id:"F3.3", t:"Instrumentación: cost.attributed automático + defect.reported + study_metrics.py", st:"pendiente", ev:"" },
+      { id:"F3.4", t:"SELLADO pre-registro Q1–Q5 con ancla externa (OpenTimestamps/DOI)", st:"pendiente", ev:"" }
+    ]},
+    { id:"F4", title:"SPRINT 1 NOVA BUDGET", window:"30 de julio — GATE DURO", items:[
+      { id:"F4.1", t:"Onboarding de empleados completado", st:"pendiente", ev:"" },
+      { id:"F4.2", t:"Sprint 1 arranca — primera tarea gobernada de Nova Budget", st:"pendiente", ev:"" }
+    ]},
+    { id:"F5", title:"Memoria híbrida (HUB, paralelo) — PRD-04", window:"Agosto", items:[
+      { id:"F5.1", t:"Fase 0: inventario + política hot/cold (sobre nova-budget)", st:"pendiente", ev:"" },
+      { id:"F5.2", t:"Fase 1: indexador SQLite derivado + FTS + rebuild round-trip verde", st:"pendiente", ev:"" },
+      { id:"F5.3", t:"RELEASE v1.19.0 → upgrade_instance nova-budget (estrena flujo upgrade)", st:"pendiente", ev:"" },
+      { id:"F5.4", t:"Q5 activa: measure_context_cost antes/después del upgrade", st:"pendiente", ev:"" }
+    ]},
+    { id:"F6", title:"Estudio en marcha — evidencia", window:"Ago–Dic", items:[
+      { id:"F6.1", t:"Fase 1 peones: A vs B bajo gobierno completo (≥15 tareas/brazo) → Q1", st:"pendiente", ev:"" },
+      { id:"F6.2", t:"Fase 2: contraste ligero/completo (condicional a F3.2) → Q2/Q4", st:"pendiente", ev:"" },
+      { id:"F6.3", t:"Interim de seguridad (8 semanas)", st:"pendiente", ev:"" }
+    ]},
+    { id:"CB", title:"Carril B (gateado, ≤1 día/semana) — PRD-05", window:"cuando el Carril A lo permita", items:[
+      { id:"CB.1", t:"Semana 0: PII/redacción corpus + licencias + endorsement arXiv", st:"pendiente", ev:"" },
+      { id:"CB.2", t:"Spike DSSE/in-toto/Rekor (compatibilidad génesis/replay)", st:"pendiente", ev:"" },
+      { id:"CB.3", t:"Paquete reproducible (externo lo verifica en 5–10 comandos)", st:"pendiente", ev:"" },
+      { id:"CB.4", t:"Outreach institucional (OpenSSF/IETF) + contacto Hinds (petición única)", st:"pendiente", ev:"" },
+      { id:"CB.5", t:"Preprint (gate: CB.3 verificado por un externo)", st:"pendiente", ev:"" }
+    ]}
+  ]
+};
+/* ===============  PIPELINE-DATA-END  ======================== */
+
+function render(){
+  const all = PIPELINE.phases.flatMap(p=>p.items);
+  const n = s => all.filter(i=>i.st===s).length;
+  document.getElementById('stamp').innerHTML =
+    `<span>Actualizado: <b>${PIPELINE.updated_at}</b></span><span>por: <b>${PIPELINE.updated_by}</b></span>`+
+    `<span style="flex:1;min-width:160px"><div class="bar"><div style="width:${Math.round(100*n('hecho')/all.length)}%"></div></div>`+
+    `<span style="font-size:11.5px;color:var(--mut)">${n('hecho')}/${all.length} hechas</span></span>`;
+  document.getElementById('gatedate').textContent = PIPELINE.sprint1_date;
+  document.getElementById('kpis').innerHTML =
+    `<div class="kpi"><b style="color:var(--oktx)">${n('hecho')}</b><span>hechas</span></div>`+
+    `<div class="kpi"><b style="color:var(--curtx)">${n('en_curso')}</b><span>en curso</span></div>`+
+    `<div class="kpi"><b style="color:var(--pentx)">${n('pendiente')}</b><span>pendientes</span></div>`+
+    `<div class="kpi"><b style="color:var(--blktx)">${n('bloqueado')}</b><span>bloqueadas</span></div>`;
+  document.getElementById('phases').innerHTML = PIPELINE.phases.map(p=>{
+    const done = p.items.filter(i=>i.st==='hecho').length;
+    return `<div class="phase"><h2>${p.title} <span class="win">${p.window} · ${done}/${p.items.length}</span></h2>`+
+      p.items.map(i=>`<div class="it ${i.st}"><span class="st ${i.st}">${i.st.replace('_',' ')}</span>`+
+        `<span class="id">${i.id}</span><span class="tt">${i.t}</span><span class="ev">${i.ev||''}</span></div>`).join('')+
+      `</div>`;
+  }).join('');
+}
+render();
+</script>
+</div></body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PRDs — Visión Nova (detallados por entregable)</title>
+<style>
+  :root{--ink:#1a1a1a;--mut:#666;--line:#ddd;--acc:#534ab7;--bg:#fafaf8;--card:#fff}
+  body{font-family:Segoe UI,system-ui,sans-serif;color:var(--ink);background:var(--bg);margin:0;line-height:1.5}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 24px 80px}
+  h1{font-size:25px;margin:.2em 0}
+  .meta{color:var(--mut);font-size:13px;margin-bottom:20px}
+  .prd{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:10px;padding:18px 22px;margin:16px 0}
+  .prd h2{font-size:18px;margin:0 0 2px}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:10px}
+  h3{font-size:13.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--acc);margin:12px 0 4px}
+  ul{margin:.2em 0 .4em;padding-left:22px}li{margin:.22em 0;font-size:14px}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0}
+  th,td{border:1px solid var(--line);padding:5px 9px;text-align:left}th{background:#f0efe9}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .p0{background:#fcebeb;color:#791f1f}.p1{background:#faeeda;color:#633806}.p2{background:#e6f1fb;color:#0c447c}.gated{background:#f1efe8;color:#444}
+  code{background:#f0efe9;padding:1px 5px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body><div class="wrap">
+<h1>PRDs — Visión Nova</h1>
+<div class="meta">Cinco entregables, cada uno con alcance acotado textualmente (anti scope-creep). Fuentes: REQs de <code>requerimientos-futuros/</code> + veredicto Analista ronda 2 (8 bloqueantes absorbidos) + panel de diseño experimental. 2026-07-02.</div>
+
+<div class="prd">
+<h2>PRD-01 · Núcleo doctrinal → release v1.18.0 <span class="tag p0">P0 · Sem 1–2</span></h2>
+<div class="sub">Owner build: Codex · Review: Analista · Repo: HUB (la metodología) · Fuente: REQ intake-profesional v0.2.0 §7/§23 + REQ anti-vibecoding v0.2.0 + bloqueantes 2/3/4 del Analista</div>
+<h3>Objetivo</h3>
+<ul><li>Que la metodología fuerce disciplina de ingeniería ANTES de instanciar Nova: ningún trabajo no-trivial arranca sin requisitos mínimos, toda excepción queda auditada, toda pieza de trabajo es trazable.</li></ul>
+<h3>Alcance (y NADA más)</h3>
+<ul>
+<li><b>Gate de intake determinista:</b> checklist de obligatorios por tipo de trabajo genérico (feature / bug / refactor / arquitectura / agente) en templates de tarea; estados <code>missing/asked/answered/assumed/confirmed/not_applicable/blocked</code>; el validador impide <code>ready</code> con obligatorios en <code>missing/asked</code>; fórmula de completitud calculada, jamás estimada por LLM.</li>
+<li><b>Registro de excepciones auditado:</b> evento firmado <code>exception.recorded</code> (quién, qué gate, motivo, cuándo); "sin registro no hay excepción: hay violación". Incluye ayudas/des-atascos/suspensiones (bloqueante 2).</li>
+<li><b>Trailers bloqueantes:</b> <code>Task-Id:</code> obligatorio en todo commit; <code>Fixes-Task:</code> obligatorio en <code>type:fix|revert|hotfix</code> (validador rechaza; bloqueante 3).</li>
+<li><b>Taxonomía de defectos D1–D4 ampliada</b> con subcategorías (requisito mal entendido, deuda de arquitectura, performance, UX/soporte, integración, conciliación tardía) + sección de subconteo esperado (bloqueante 4).</li>
+<li><b>Mini-DECISION identidad</b> anti-vibecoding registrada (declaración + proporcionalidad + excepción-registrada).</li>
+<li>Reglas útiles extraídas de <code>aprendizajes-agentes-externos</code> (timebox 2 días, paralelo, owner Arquitecto) que quepan en el mismo release.</li>
+</ul>
+<h3>NO-alcance (explícito)</h3>
+<ul><li>Panel de intake, wizard, dictado, briefs con UI, Engineering Quality Panel (UI), generador de documentos. Etiquetas del estudio (arm/mode) — van al perfil de la instancia, no al core (neutralidad).</li></ul>
+<h3>Criterios de aceptación</h3>
+<ul><li>Tarea sin obligatorios completos no pasa a ready (test negativo). Commit sin trailer rechazado (test negativo). Excepción genera evento firmado verificable. Core sigue pasando scan de neutralidad. Release v1.18.0 etiquetado + CHANGELOG. Gates verdes en clon limpio.</li></ul>
+</div>
+
+<div class="prd">
+<h2>PRD-02 · Instancia nova-budget distribuida <span class="tag p0">P0 · Sem 3</span></h2>
+<div class="sub">Owner: Arquitecto (instanciación) + Codex (harness) · Review: Analista · Repo: nuevo <code>nova-budget</code> (privado) · Fuente: debate modo-distribuido + D1/D2 (NOVA) + 0233/0234 re-alcanzadas</div>
+<h3>Objetivo</h3>
+<ul><li>Una instancia limpia, clonable y operable por empleados remotos SOLO vía Git — sin carpeta compartida y sin tocar el hub jamás.</li></ul>
+<h3>Alcance</h3>
+<ul>
+<li><code>new_instance.py</code> desde el tag v1.18.0 (timebox 1 día — el tiempo real ES dato de transferibilidad).</li>
+<li><b>Prueba distribuida:</b> clonar la instancia en carpeta/máquina limpia y completar 1 tarea entera (claim→entrega→review→done) solo con push/pull.</li>
+<li><b>Harness distribuido:</b> pull→escribir→push INMEDIATO para claims/estado (un claim no pusheado es invisible); reintento ante push rechazado.</li>
+<li>Perfil de instancia: etiquetas <code>arm/governance_mode</code>, taxonomía de riesgo (alto=siempre gobierno completo), coordination-tier (D1).</li>
+<li>Hosting GitHub privado + permisos + runbook de onboarding remoto (instalar Git+Python+CLI agente+llaves; objetivo ≤1 día).</li>
+</ul>
+<h3>NO-alcance</h3><ul><li>Atestación #4 distribuida (limitación declarada; feature futura del hub). Los otros tres Nova (esperan a que Budget demuestre el flujo).</li></ul>
+<h3>Criterios de aceptación</h3>
+<ul><li>Un no-autor completa el ciclo de 1 tarea desde clon limpio sin ayuda síncrona. Claims visibles entre clones en &lt;1 min tras adquisición. Onboarding documentado y cronometrado.</li></ul>
+</div>
+
+<div class="prd">
+<h2>PRD-03 · Estudio pre-registrado (Q1–Q5) <span class="tag p0">P0 · Sem 3–4, corre hasta dic</span></h2>
+<div class="sub">Owner diseño: Operador+Asesor · Instrumentación: Codex · Review: Analista · Repos: hub (tooling) + nova-budget (datos) · Fuente: panel experimental (F1–F7) + bloqueantes 1/5/8 + hallazgos ClaudeAI r2</div>
+<h3>Objetivo</h3>
+<ul><li>Que Nova produzca evidencia pre-registrada de: Q1 peones→costo, Q2 metodología→defectos, Q3 gobierno→calidad (descriptiva), Q4 contraste ligero/completo (condicional), Q5 memoria híbrida→arranque en frío.</li></ul>
+<h3>Alcance</h3>
+<ul>
+<li><b>Política de medición de empleados</b> (bloqueante 1): consentimiento/acuse, no-uso punitivo, retención, acceso, disputa + decisión dataset-público agregado-vs-completo.</li>
+<li><b>Aritmética del backlog:</b> contar tareas elegibles ANTES de sellar; si pool &lt; umbral, Q4 se degrada a observacional (pre-decidido) + <b>regla de adopción</b> de Q4.</li>
+<li><b>Métricas confirmatorias:</b> C1 tokens firmante/tarea (emisión automática bloqueante), C2 kickback (definición única), C3' escapes post-GO ITT (corte censurado), C4 <b>costo total de proceso por tarea</b> (el denominador) + Q2 mecanística co-primaria.</li>
+<li><b>Instrumentación (~3.5 días-agente):</b> <code>cost.attributed</code> automático por task_id, <code>defect.reported</code>, <code>manual.intervention</code>, <code>study_metrics.py</code> determinista con golden.</li>
+<li><b>Sellado con ancla EXTERNA</b> (OpenTimestamps/DOI) del pre-registro completo + seq de inicio (bloqueante 8) — el sello interno ata a todos menos al operador.</li>
+<li>HP6 operacionalizada: ventanas hands-off pre-registradas; empleados registran bloqueos como eventos; métrica = bloqueos-resueltos-sin-autor.</li>
+</ul>
+<h3>NO-alcance</h3><ul><li>Brazo C (crítico LLM) — pre-registrado como Fase 3 condicional, no se corre. Claims de causalidad generalizable (fuerza declarada: caso de estudio industrial instrumentado).</li></ul>
+<h3>Criterios de aceptación</h3>
+<ul><li>Pre-registro sellado y anclado externamente ANTES de la primera asignación. Todas las métricas derivables del ledger+git+CI sin input manual (excepto <code>manual.intervention</code>, reportado aparte). Parada de seguridad y válvula de presión operativas. Nulo pre-decidido por escrito.</li></ul>
+</div>
+
+<div class="prd">
+<h2>PRD-04 · Memoria híbrida Fase 0–1 → v1.19.0 + upgrade <span class="tag p1">P1 · Agosto</span></h2>
+<div class="sub">Owner: Codex · Review: Analista · Repo: HUB → upgrade en nova-budget · Fuente: REQ memoria-hibrida v0.3.0 (ruta única, Engram absorbido, DECISION-0081)</div>
+<h3>Objetivo</h3>
+<ul><li>Arranque en frío barato y búsqueda para instancias que crecen — construido contra la instancia viva de Nova, y estrenando el flujo release→upgrade con una feature real.</li></ul>
+<h3>Alcance</h3>
+<ul>
+<li>Fase 0: inventario + política hot/cold inicial (sobre nova-budget, no sobre el hub).</li>
+<li>Fase 1: indexador SQLite <b>derivado y reconstruible</b> (artifacts + edges + FTS5 — verificado: el Python del operador ya trae FTS5, cero instalación) + comandos <code>build/query/check-drift</code> + test de rebuild.</li>
+<li>Release v1.19.0 + <code>upgrade_instance.py</code> en nova-budget.</li>
+<li><b>Medición Q5 activa:</b> <code>measure_context_cost.py</code> corriendo desde el día 1 de la instancia (baseline), comparación antes/después del upgrade.</li>
+</ul>
+<h3>NO-alcance</h3><ul><li>Archivo frío real (Fase 2–3), embeddings, stubs, UI de búsqueda — según evidencia y demanda. Las 17 tablas del modelo objetivo (MVP = 4).</li></ul>
+<h3>Criterios de aceptación</h3>
+<ul><li>DB borrada se reconstruye idéntica desde git+ledger (test round-trip — la lección Engram: reconstruible se DEMUESTRA). Curva de costo de arranque documentada pre/post. Cero escritura fuera de submit_intent/archivos canónicos.</li></ul>
+</div>
+
+<div class="prd">
+<h2>PRD-05 · Carril B: paquete público reproducible <span class="tag gated">GATEADO · ≤1 día/semana</span></h2>
+<div class="sub">Owner: Operador+Asesor (agentes producen) · Fuente: pivote v2 §8 re-baselineado + veredictos r2 · Regla: pausa automática si excede presupuesto (bloqueante 5)</div>
+<h3>Objetivo</h3>
+<ul><li>Prior art fechado y verificable por terceros — "publicar para ser <b>reproducido</b>, atacado y usado como referencia" (la cita llega sola si el paquete aguanta).</li></ul>
+<h3>Alcance (en orden, cada paso gatea el siguiente)</h3>
+<ul>
+<li><b>Semana 0:</b> revisión PII/secretos del corpus + manifest de redacción + licencias día 1 (core Apache-2.0, dataset CC-BY, marca reservada) + endorsement arXiv + claims estrechos.</li>
+<li><b>Spike DSSE/in-toto/Rekor</b> (bloqueante 7): compatibilidad con génesis/replay ANTES de prometer interop; prototipo 1 día.</li>
+<li><b>Paquete reproducible:</b> dataset + verifier offline + threat model (incluido lo no-cubierto: colusión, claves, operador-raíz) + overhead por tarea. Gate: un externo lo verifica en 5–10 comandos.</li>
+<li><b>Outreach institucional:</b> perfil multi-agente en OpenSSF / comentarios al draft IETF (no el inbox de Hinds); petición única decidida de antemano; verificar nombre de su empresa en fuente primaria ese día.</li>
+<li><b>Preprint</b> (systems/experience paper, related work completo: BlockA2A, Verifiability-First, PROV-AGENT, IETF AAT, nono, Agent Receipts) — con la evidencia de Nova cuando exista.</li>
+</ul>
+<h3>Kill/persevere</h3>
+<ul><li>Señales 30/60/90 días (mecánicas). Decisión mes 6 (interacción técnica sustantiva o mantenimiento pasivo). Mes 12: 1 instancia externa o 1 piloto auditora. Mes 18: 2 instancias o la transferibilidad EXTERNA se declara no probada. Resultado modal aceptado: credibilidad + carrera.</li></ul>
+</div>
+
+</div></body></html>
