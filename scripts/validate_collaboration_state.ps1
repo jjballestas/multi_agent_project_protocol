@@ -929,6 +929,49 @@ print(json.dumps(protocol_state_drift(Path(os.environ["EVENTLOG_INSTANCE_ROOT"])
     }
 }
 
+function Validate-CommitTrailers {
+    param(
+        [string]$Root,
+        [object]$Index,
+        [object]$Config
+    )
+    $toolsRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    $oldToolsRoot = $env:EVENTLOG_TOOLS_ROOT
+    $oldInstanceRoot = $env:EVENTLOG_INSTANCE_ROOT
+    $env:EVENTLOG_TOOLS_ROOT = $toolsRoot
+    $env:EVENTLOG_INSTANCE_ROOT = $Root
+    $pythonSnippet = @'
+import json
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(os.environ["EVENTLOG_TOOLS_ROOT"]) / "scripts"))
+from validate_collaboration_state import Validation, read_json_file, validate_commit_trailers
+
+root = Path(os.environ["EVENTLOG_INSTANCE_ROOT"])
+validation = Validation()
+config_path = root / "protocol.config.json"
+config = read_json_file(config_path, validation) if config_path.exists() else {}
+index_path = root / "Area_comun" / "state" / "TASK_INDEX.json"
+index = read_json_file(index_path, validation) if index_path.exists() else {}
+validate_commit_trailers(root, index, config, validation)
+print(json.dumps({"errors": validation.errors}, ensure_ascii=True))
+'@
+    try {
+        $output = $pythonSnippet | python -
+        $result = $output | ConvertFrom-Json
+        foreach ($error in @($result.errors)) {
+            Fail $error
+        }
+    } catch {
+        Fail "commit_trailers validation failed: $($_.Exception.Message)"
+    } finally {
+        $env:EVENTLOG_TOOLS_ROOT = $oldToolsRoot
+        $env:EVENTLOG_INSTANCE_ROOT = $oldInstanceRoot
+    }
+}
+
 $script:Errors = [System.Collections.Generic.List[string]]::new()
 $script:Warnings = [System.Collections.Generic.List[string]]::new()
 
@@ -1135,6 +1178,7 @@ if (Test-Path -LiteralPath $handoffDir) {
         }
     }
 }
+Validate-CommitTrailers -Root $resolvedRoot -Index $index -Config $config
 
 Validate-EventLogSnapshot -Root $resolvedRoot
 Validate-ProtocolStateDrift -Root $resolvedRoot -Config $config

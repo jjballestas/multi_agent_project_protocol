@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -99,6 +100,16 @@ INTAKE_TYPES = {"feature", "fix", "infra", "doc", "research"}
 INTAKE_RISKS = {"low", "medium", "high"}
 INTAKE_ESTIMATES = {"S", "M", "L"}
 INTAKE_PLACEHOLDERS = {"", "tbd", "todo", "n/a", "na", "...", "none"}
+GOVERNED_TRAILER_PATHS = (
+    "Area_comun/",
+    "runtime/",
+    "scripts/",
+    "protocol.config.json",
+)
+TASK_TRAILER_PATTERN = re.compile(r"^Task-Id: (TASK-\d{4}|none)$")
+FIXES_TRAILER_PATTERN = re.compile(r"^Fixes-Task: TASK-\d{4}$")
+OPS_REASON_TRAILER_PATTERN = re.compile(r"^Ops-Reason: .{1,120}$")
+FIX_SUBJECT_PATTERN = re.compile(r"^(fix|revert|hotfix)(\(|:|!)")
 RUNTIME_TIER_REQUIRED_PATHS = [
     "runtime",
     "runtime/turn_schema.json",
@@ -218,6 +229,120 @@ def effective_intake_gate_config(root: Path, config: dict[str, Any] | None) -> d
         if isinstance(loaded, dict):
             gate = loaded
     return gate
+
+
+def commit_trailer_gate_config(root: Path, config: dict[str, Any] | None) -> dict[str, Any]:
+    gate = (config or {}).get("commit_trailers")
+    if not isinstance(gate, dict):
+        gate = {}
+    live_path = root / "Area_comun" / "protocol" / "COMMIT_TRAILERS.json"
+    if live_path.exists():
+        loaded = read_json_file(live_path, Validation())
+        if isinstance(loaded, dict):
+            gate = loaded
+    return gate
+
+
+def commit_trailer_gate_enabled(root: Path, config: dict[str, Any] | None) -> bool:
+    gate = commit_trailer_gate_config(root, config)
+    if gate.get("enabled") is not True:
+        return False
+    start_commit = str(gate.get("start_commit") or "").strip()
+    start_seq = gate.get("trailer_start_seq")
+    return bool(start_commit or isinstance(start_seq, int))
+
+
+def git_lines(root: Path, args: list[str]) -> list[str]:
+    completed = subprocess.run(
+        ["git", "-C", str(root), *args],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
+    )
+    return completed.stdout.splitlines()
+
+
+def git_text(root: Path, args: list[str]) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(root), *args],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
+    )
+    return completed.stdout
+
+
+def task_ids(index: dict[str, Any] | None) -> set[str]:
+    if not index:
+        return set()
+    return {
+        str(task.get("id"))
+        for task in as_list(index.get("tasks"))
+        if isinstance(task, dict) and re.fullmatch(r"TASK-\d{4}", str(task.get("id") or ""))
+    }
+
+
+def trailer_values(message: str) -> dict[str, list[str]]:
+    trailers: dict[str, list[str]] = {}
+    for line in message.splitlines():
+        for key in ("Task-Id", "Fixes-Task", "Ops-Reason"):
+            if line.startswith(f"{key}:"):
+                trailers.setdefault(key, []).append(line)
+    return trailers
+
+
+def touches_governed_path(root: Path, commit: str) -> bool:
+    try:
+        paths = git_lines(root, ["diff-tree", "--no-commit-id", "--name-only", "-r", commit])
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return False
+    return any(path == "protocol.config.json" or path.startswith(GOVERNED_TRAILER_PATHS[:3]) for path in paths)
+
+
+def validate_commit_trailers(
+    root: Path,
+    index: dict[str, Any] | None,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    if not commit_trailer_gate_enabled(root, config):
+        return
+    gate = commit_trailer_gate_config(root, config)
+    start_commit = str(gate.get("start_commit") or "").strip()
+    if not start_commit:
+        validation.fail("commit_trailers.enabled requires start_commit until trailer_start_seq activation is wired")
+        return
+    try:
+        commits = git_lines(root, ["rev-list", "--reverse", f"{start_commit}..HEAD"])
+    except (FileNotFoundError, subprocess.CalledProcessError) as exc:
+        validation.fail(f"commit_trailers could not scan git history from {start_commit}: {exc}")
+        return
+    known_tasks = task_ids(index)
+    for commit in commits:
+        if not touches_governed_path(root, commit):
+            continue
+        subject = git_text(root, ["show", "-s", "--format=%s", commit]).strip()
+        message = git_text(root, ["show", "-s", "--format=%B", commit])
+        trailers = trailer_values(message)
+        task_lines = trailers.get("Task-Id", [])
+        if len(task_lines) != 1 or not TASK_TRAILER_PATTERN.fullmatch(task_lines[0]):
+            validation.fail(f"commit_trailers: {commit[:12]} touches governed routes without exact Task-Id trailer")
+            continue
+        task_value = task_lines[0].split(": ", 1)[1]
+        if task_value != "none" and task_value not in known_tasks:
+            validation.fail(f"commit_trailers: {commit[:12]} references unknown Task-Id {task_value}")
+        if task_value == "none" and not any(OPS_REASON_TRAILER_PATTERN.fullmatch(line) for line in trailers.get("Ops-Reason", [])):
+            validation.fail(f"commit_trailers: {commit[:12]} uses Task-Id: none without Ops-Reason")
+        fixes_lines = trailers.get("Fixes-Task", [])
+        if FIX_SUBJECT_PATTERN.match(subject):
+            if len(fixes_lines) != 1 or not FIXES_TRAILER_PATTERN.fullmatch(fixes_lines[0]):
+                validation.fail(f"commit_trailers: {commit[:12]} is fix/revert/hotfix without exact Fixes-Task trailer")
+            else:
+                fixes_task = fixes_lines[0].split(": ", 1)[1]
+                if fixes_task not in known_tasks:
+                    validation.fail(f"commit_trailers: {commit[:12]} references unknown Fixes-Task {fixes_task}")
 
 
 def intake_start_number(root: Path, config: dict[str, Any] | None) -> int | None:
@@ -1172,6 +1297,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     validate_tasks(root, index if isinstance(index, dict) else None, validation)
     validate_sdd(root, index if isinstance(index, dict) else None, config, validation)
     validate_intake_gate(root, index if isinstance(index, dict) else None, config, validation)
+    validate_commit_trailers(root, index if isinstance(index, dict) else None, config, validation)
     validate_mailbox(root, validation)
     validate_reports(root, validation)
     validate_claims(claims if isinstance(claims, dict) else None, validation)

@@ -1,5 +1,25 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0240",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0240",
+                "Area_comun/state/TASK_INDEX.json#TASK-0240",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0240",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/test_trailers.py",
+                "examples/trailer_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0240-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0240-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0240"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

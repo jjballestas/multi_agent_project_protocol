@@ -2,7 +2,7 @@
 task_id: TASK-0240
 title: "[VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task en el validador (V1-V5)"
 type: build
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

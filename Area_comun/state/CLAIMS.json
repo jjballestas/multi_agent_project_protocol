@@ -14440,6 +14440,30 @@
             "updated_at": "2026-07-02T19:33:42Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0240",
+            "expires_at": "2026-07-03T20:47:40Z",
+            "notes": "TASK-0240 implementation: blocking commit trailers scanner built inactive until F1-E activation boundary.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0240",
+                "Area_comun/state/TASK_INDEX.json#TASK-0240",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0240",
+                "Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "scripts/test_trailers.py",
+                "examples/trailer_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0240-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0240-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T20:47:40Z",
+            "status": "active",
+            "task_id": "TASK-0240",
+            "updated_at": "2026-07-02T20:47:40Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-higiene-personal-fyi",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Responder FYI de higiene del area personal Codex.",
