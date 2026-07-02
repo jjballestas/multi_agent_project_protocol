@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0238 R5 re-gate (2026-07-02): OK/CERRABLE. Veredicto canonico en `992b5ef`
+  (`review(TASK-0238): Analista OK R5 regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0238-r5-regate-veredicto.md`, MSG rr
+  `Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-r5-OK.md`.
+  Ancla protocolo revisada en clon limpio `8df7e62f7ee38867cc5b4354753e0a5f0941fb84`; implementacion
+  `076193dc2209cb915d3b453bb734cadf459c9160`; coord `a87ae6b`; producto de control
+  `D:/Agentes/Zeus/Zeus-protocol` commit `b2b2395da39090109db6de2dc50726dbaab1a11e`; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/analista-0238-r5-1dca9fff677942d4b97e28342968c286`.
+  `npm test` producto EXIT 0 (109 tests, 87 pass, 22 skipped); `python scripts/test_intake_gate.py`
+  EXIT 0 (12/12). F-0238-01 cerrado: `intake_exempt:true` con `exception_ref:999` sin evento rechaza
+  en Python validator, PowerShell validator y `submit_intent`, dejando `TASK_INDEX` en `proposed`; wrong kind,
+  wrong task y wrong type tambien rechazan. R0/R1 status family sin regresion; protocol.config SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; validate/neutrality/encoding EXIT 0;
+  drift false `up_to_seq=3275`. Residual: positivo futuro con evento real queda para TASK-0239/F1-B; probes
+  sinteticos sin firma activan actor-auth/snapshot, por eso aisle el matcher con `exception_recorded_exists`.
 - Post-commit memoria higiene (2026-07-02): commit `16e62ab` (`chore(personal): record Analista hygiene closure`)
   dejo canonico el FYI de cierre al Operador y esta memoria. Gates previos: `validate_collaboration_state.py`
   EXIT 0 con warning archivable de FYI; `scan_encoding.py` EXIT 0.
