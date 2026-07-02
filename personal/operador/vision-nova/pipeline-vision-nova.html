@@ -60,8 +60,8 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-02 21:31",
-  updated_by: "Operador (via Asesor) — ids TASK en títulos de F1 + alta F1.5h/TASK-0242 (orden operador; estados/evidencia del Arquitecto intactos)",
+  updated_at: "2026-07-02 22:05",
+  updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
     { id:"F0", title:"Formalización (HUB)", window:"Sem 1 · jul 3–11", items:[
@@ -70,8 +70,8 @@ const PIPELINE = {
     ]},
     { id:"F1", title:"Núcleo doctrinal (HUB) — PRD-01", window:"Sem 1–2 · jul 3–18", items:[
       { id:"F1.1", t:"[TASK-0238] Gate de intake determinista (checklist por tipo + estados + validador pre-ready)", st:"hecho", ev:"TASK-0238 DONE (done-flip Codex 1004261). Ciclo: entrega 0efe196 → NO-GO Analista F-0238-01 (R5 no fail-closed) → remediación 076193d (R5 verifica exception.recorded real en py+ps1+submit_intent, +test N5b) → re-gate OK Analista → ratificado aab9cfb. R0 en INTAKE_GATE.json, pin byte-identico" },
-      { id:"F1.2", t:"[TASK-0239] Registro de excepciones auditado (evento firmado exception.recorded)", st:"en_curso", ev:"TASK-0239 ready + GO Codex (commit 1aa984d); bloque intake valido (primer uso del gate 0238). Construye exception.recorded SPEC PARTE A" },
-      { id:"F1.3", t:"[TASK-0240] Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"pendiente", ev:"TASK-0240 registrada (proposed, commit 93c10e8); ACTIVACION gateada por F1.5h/TASK-0242" },
+      { id:"F1.2", t:"[TASK-0239] Registro de excepciones auditado (evento firmado exception.recorded)", st:"hecho", ev:"TASK-0239 DONE (done-flip 65095ee). Ciclo: entrega -> NO-GO F-0239-01 (payload actor != caller firmante, mis-attribution U2) -> remediacion (actor atado al caller + test) -> re-gate OK -> ratificado 812d1e5. Habilita el puente R5 de 0238" },
+      { id:"F1.3", t:"[TASK-0240] Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"en_curso", ev:"TASK-0240 ready + GO Codex (89d07d5); intake valido. CONSTRUYE ahora; ACTIVACION del trailer_start_seq DIFERIDA hasta F1.5h/TASK-0242 desplegado (F-2 anti-DoS)" },
       { id:"F1.4", t:"[TASK-0241] Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"pendiente", ev:"TASK-0241 registrada (proposed, commit 93c10e8); owner Arquitecto + gate Analista" },
       { id:"F1.5", t:"[TASK-0243] Mini-DECISION identidad anti-vibecoding registrada", st:"pendiente", ev:"TASK-0243 registrada (proposed, commit 93c10e8); incluye clausula pin-anclado-al-tag" },
       { id:"F1.5h", t:"[TASK-0242] Envelope handoff 7 campos + fix-loop re-juicio pre-commit (harnesses) [alta: orden operador 2026-07-02]", st:"pendiente", ev:"TASK-0242 registrada (proposed, commit 93c10e8); su despliegue ACTIVA F1.3/trailers (hallazgo F-2)" },
