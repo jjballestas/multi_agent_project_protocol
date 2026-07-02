@@ -14336,6 +14336,21 @@
             "updated_at": "2026-07-02T18:45:21Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0239-actor-delivery",
+            "expires_at": "2026-07-02T22:11:06Z",
+            "notes": "TASK-0239 actor remediation delivery artifacts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0239-actor-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0239-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0239-actor-remediation-in-review.md"
+            ],
+            "started_at": "2026-07-02T20:11:06Z",
+            "status": "released",
+            "task_id": "TASK-0239",
+            "updated_at": "2026-07-02T20:11:06Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0239-actor-remediation",
             "expires_at": "2026-07-03T00:00:11Z",
             "notes": "Remediate TASK-0239 actor attribution slip F-0239-01.",
@@ -14349,7 +14364,7 @@
                 "scripts/test_exception_recorded.py"
             ],
             "started_at": "2026-07-02T20:00:11Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0239",
             "updated_at": "2026-07-02T20:00:11Z"
         },

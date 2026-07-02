@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d19d5cf7badac1e26d5672646c351aa8b75425605ccdb2c0376c344d8ff5bd9f",
+  "canonical_hash": "6b4d39a0d9f5b6daa261dce1581af6c9152bc58d0680bedf8584cd85989c5e24",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1047,7 +1047,7 @@
       "TASK-0236": 14,
       "TASK-0237": 16,
       "TASK-0238": 25,
-      "TASK-0239": 15,
+      "TASK-0239": 19,
       "TASK-0240": 1,
       "TASK-0241": 1,
       "TASK-0242": 1,
@@ -1060,7 +1060,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2640,
+    "events_applied": 2644,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2564,6 +2564,9 @@
       "codex:task0237:delivery-artifacts-v3-claim-release": 3050,
       "codex:task0237:remediation-v3-claim-release": 3049,
       "codex:task0237:remediation-v3-in-progress-to-in-review": 3048,
+      "codex:task0239:actor-release-delivery": 3315,
+      "codex:task0239:actor-release-implementation": 3314,
+      "codex:task0239:actor-status-in-review": 3313,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -3334,6 +3337,7 @@
       "intent:Codex:claim:78a64a8134ea71b682374ea92ddc4979b97feed2620f111f0374a3a36fbb25c7": 2761,
       "intent:Codex:claim:7975fee2d8efa67a64fb35a6ae07de3229d0b609e7696c38e7bc7b9ccfe48533": 2525,
       "intent:Codex:claim:7993a39d25b417aba063341c17d8556d6a9aa5d8944237bfe3f7828ff7055162": 1171,
+      "intent:Codex:claim:7a405e2cca6d918eae4d2dbcffa803f04d9512b0eefe8c867edfe583d816bd45": 3312,
       "intent:Codex:claim:7a98f6f96336a41057b24c983e94d796f4f11ef41428ae4abf13ff6d92cc82d4": 2846,
       "intent:Codex:claim:7c461acd58c234018f0408b88d32cda967db602cb630c404c095ab3ef3507686": 3051,
       "intent:Codex:claim:7cf14753117e824f0790e0b34f84ea8825a0975fda979b3e728589e8e9d403c8": 1424,
@@ -3704,5 +3708,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3311
+  "up_to_seq": 3315
 }
