@@ -1,6 +1,6 @@
 param(
     [int]$IntervalSeconds = 300,
-    [int]$MaxNoArquitectoRounds = 7,
+    [int]$MaxNoArquitectoRounds = 15,
     [string]$CodexExe = "",
     [int]$ExecTimeoutSeconds = 3600
 )

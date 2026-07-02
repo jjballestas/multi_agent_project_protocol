@@ -1,6 +1,6 @@
 param(
     [int]$IntervalSeconds = 300,
-    [int]$MaxNoOperatorRounds = 7,
+    [int]$MaxNoOperatorRounds = 15,
     [string]$AgentExe = "",
     [string]$ReasoningEffort = "medium",
     [switch]$DryRunOnce,
