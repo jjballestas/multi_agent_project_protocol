@@ -2,7 +2,7 @@
 task_id: TASK-0239
 title: "[VISION-NOVA][F1.2] Evento firmado exception.recorded (intent nuevo en submit_intent + doctrina U1-U3)"
 type: build
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: high
