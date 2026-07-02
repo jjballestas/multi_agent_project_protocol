@@ -7,12 +7,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0229",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
-        },
-        {
             "id": "TASK-0230",
             "owner": "Codex",
             "status": "proposed",
