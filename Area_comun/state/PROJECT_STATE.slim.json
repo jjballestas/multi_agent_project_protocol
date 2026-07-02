@@ -109,15 +109,9 @@
             "title": "[REQ-ZEUS-001][WS10] Runbooks de instalacion/operacion para empleados y soporte"
         },
         {
-            "id": "TASK-0236",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana"
-        },
-        {
             "id": "TASK-0237",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[REQ-ZEUS-001] Hang-proof del npm test en Zeus-Aegis: vitest run sin watch + testTimeout duro + teardown que mata esbuild/node + CI=1"
         }
     ],

@@ -2,7 +2,7 @@
 task_id: TASK-0236
 title: "[INFRA] Remediacion de TASK-0235: prompt por-exec + deadline-kill de arbol + guard de instancia unica + enforcement de lease huerfana"
 type: build
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: high
