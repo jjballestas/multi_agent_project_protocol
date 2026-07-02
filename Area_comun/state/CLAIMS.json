@@ -14460,6 +14460,35 @@
             "updated_at": "2026-07-02T13:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-mbhyg-postf0-arquitecto",
+            "expires_at": "2026-07-02T21:00:00Z",
+            "notes": "Higiene mailbox post-F0 completada.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-postf0-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-allowlist-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-allowlist-OK.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-allowlist.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0229-allowlist.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-v2-ronda2.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-relay-pivote-v2-ronda2.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0229-allowlist-decision0082.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0229-allowlist-decision0082.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0229-done-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0229-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-allowlist-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0229-allowlist-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Analista-ACTION-higiene-area-personal.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Analista-ACTION-higiene-area-personal.md",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-ACTION-relay-review-pivote-v2.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-ACTION-relay-review-pivote-v2.md"
+            ],
+            "started_at": "2026-07-02T16:41:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T16:41:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-r2-blk01",
             "expires_at": "2026-07-02T06:00:00Z",
             "notes": "higiene r2 blk01",
