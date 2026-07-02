@@ -4,6 +4,16 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0240 done-flip.
 
 ## Latest Session Note
 
+- TASK-0242 implementation commit landed in the protocol repo:
+  `fd0d059 feat(protocol): add handoff envelope fix loop`. It adds the seven-field final handoff envelope
+  doctrine to `Area_comun/protocol/TASK_PROTOCOL.md`, updates `Area_comun/protocol/TASK_TEMPLATE.md` and the
+  shipped example task templates, and hardens the Codex/Analista cron prompts with envelope, fix-loop, and
+  governed commit-trailer instructions. Evidence before commit: protocol encoding OK, domain-neutrality exit 0,
+  protocol validator OK after materializing interleaved peer events, drift false at `up_to_seq=3385`, product
+  `npm test` PASS 109 tests (87 pass, 22 skipped), and product `node --check public/app.js src/server.js` OK.
+  Delivery to `in_review` is still pending because Arquitecto concurrently opened active TASK-0241 ledger/events
+  and uncommitted shared changes under `CLAIM-20260703-arquitecto-0241-taxonomia`; Codex must not capture or
+  overwrite those peer changes.
 - TASK-0240 done-flip completed in protocol commit `8acc2f6 coord(TASK-0240): close trailer gate`.
   Runtime transaction `codex:task0240:done-flip-tx` acquired and released
   `CLAIM-20260703-Codex-TASK-0240-done-flip` and moved TASK-0240 `review_approved -> done` at seq 3360-3362.
