@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0237 hang-proof npm test; NO-GO por watchdog vendor no acotado).
+> Ultima actualizacion: 2026-07-02 (TASK-0236 harness remediation; OK/CERRABLE).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,20 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0236 harness remediation (2026-07-02): OK/CERRABLE. Veredicto canonico en `27f4950`
+  (`review(TASK-0236): Analista OK harness remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0236-harness-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0236-OK`. Ancla protocolo bajo review
+  `3523ecb`; producto de control `D:/Agentes/Zeus/Zeus-protocol` clean clone commit
+  `b2b2395da39090109db6de2dc50726dbaab1a11e` (la instruccion no cito commit de producto distinto).
+  Producto `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Clean clone protocolo: validate EXIT 0,
+  neutrality EXIT 0, encoding EXIT 0, drift false `up_to_seq=3041`, #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Vivo: validate/neutrality/encoding/drift
+  EXIT 0, drift false `up_to_seq=3043`. `python scripts/test_exec_lease_harness.py` EXIT 0 (9/9);
+  py_compile y parser PowerShell de Codex/Analista/Arquitecto EXIT 0. Vectores: prompt por exec, tree-kill
+  `/T /F`, instancia unica, lease huerfana vencida, stop exacto y regresiones de 0235 pasan. Residual declarado:
+  tests de harness mayoritariamente estructurales, no end-to-end con `codex exec` real colgado, pero cubren los
+  contratos del jam.
 - TASK-0237 hang-proof npm test Zeus-Aegis (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `1d7e569` (`review(TASK-0237): Analista blocks hang proof`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0237-hang-proof-veredicto.md`, MSG
