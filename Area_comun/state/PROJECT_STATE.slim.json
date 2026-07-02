@@ -39,7 +39,7 @@
         {
             "id": "TASK-0238",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[VISION-NOVA][F1.1] Gate de intake determinista (validador pre-ready ps1+python + runtime hard-gate + templates)"
         },
         {

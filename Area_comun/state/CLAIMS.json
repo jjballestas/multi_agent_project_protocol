@@ -14298,7 +14298,7 @@
                 "scripts/test_intake_gate.py"
             ],
             "started_at": "2026-07-02T18:45:21Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0238",
             "updated_at": "2026-07-02T18:45:21Z"
         },
