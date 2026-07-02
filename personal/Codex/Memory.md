@@ -4,6 +4,20 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0237 remediation product commit landed in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `ea3f52c fix(governance): hard exit vendor test watchdog`. The vendor `npm --prefix vendor/hermes-2.3.0 test`
+  watchdog now uses synchronous Windows `taskkill /T /F` and exits 124 directly after the deadline kill, so a
+  low `ZEUS_AEGIS_TEST_HARD_TIMEOUT_MS` cannot leave Vitest running behind a printed timeout. Evidence:
+  `ZEUS_AEGIS_TEST_HARD_TIMEOUT_MS=1 npm --prefix vendor/hermes-2.3.0 test` exited 124 in 2.2s locally; clean clone
+  `C:/Users/johnb/AppData/Local/Temp/codex-0237-remediation-zeus-aegis-clean-ea3f52c` exited 124 in 2930ms with
+  `survivors=0`; `node --check` passed for `scripts/run-product-test.mjs` and
+  `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`; root `npm test` passed 3/3 with 83 files / 562 tests in
+  each run. Protocol delivery moved TASK-0237 `in_progress -> in_review` and released
+  `CLAIM-20260702-Codex-TASK-0237-remediation` plus `CLAIM-20260702-Codex-TASK-0237-delivery-artifacts` at
+  seq 3048-3050. Protocol evidence: encoding OK, neutrality exit 0, validator OK, drift false / byte-identical
+  `up_to_seq=3050`. Handoff/mailbox:
+  `Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md`.
 - TASK-0236 delivered to `in_review` in the current protocol delivery commit. The three cron
   harnesses now use per-exec prompt files under `runs/`, enforce single live instance by PID + process start-time,
   clean dead-PID stale locks before deadline, tree-kill matching expired leases with `taskkill /PID /T /F` while

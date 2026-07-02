@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1a93b8941cadec3b4d67b39d9dbc15626e044047c07ce2808e2b25970d46ad81",
+  "canonical_hash": "a8322e5feed926ca5d3068bc1a350664bfc0a966b8c9f67c09cc94e202cd5f0c",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -465,6 +465,8 @@
       "CLAIM-20260702-Codex-TASK-0236-artifacts": 1,
       "CLAIM-20260702-Codex-TASK-0237": 1,
       "CLAIM-20260702-Codex-TASK-0237-artifacts": 1,
+      "CLAIM-20260702-Codex-TASK-0237-delivery-artifacts": 1,
+      "CLAIM-20260702-Codex-TASK-0237-remediation": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -958,7 +960,7 @@
       "TASK-0234": 1,
       "TASK-0235": 25,
       "TASK-0236": 11,
-      "TASK-0237": 9,
+      "TASK-0237": 10,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -966,7 +968,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2376,
+    "events_applied": 2379,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2453,6 +2455,9 @@
       "codex:task0235:deliver:status": 2883,
       "codex:task0235:start:claim": 2881,
       "codex:task0235:start:status": 2882,
+      "codex:task0237:delivery-artifacts-v3-claim-release": 3050,
+      "codex:task0237:remediation-v3-claim-release": 3049,
+      "codex:task0237:remediation-v3-in-progress-to-in-review": 3048,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -3346,5 +3351,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3047
+  "up_to_seq": 3050
 }

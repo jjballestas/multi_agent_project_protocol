@@ -1,0 +1,185 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "c2e6bb6f037145a16d57fb07dde277ef58028d2e3a525a55ec7062dd4ee28a1e",
+        "replay_hash": "c2e6bb6f037145a16d57fb07dde277ef58028d2e3a525a55ec7062dd4ee28a1e",
+        "up_to_seq": 3043
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "TvRk/tpyhOX4Q5KRYvvoofND5Ajb0bkznKHzy7A7lXW0hWIY3hQ0U+3CMo9QhiiV+1EPJ6MeXTtX7/6Qma19BQ=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "a7b41869bc25f90d2f11915a93d7034790f3a098e3429f82c39d9184cbd75373"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:bfb0981bf657399d50df93053904bf508754d9afd7cdaf813779d5b07b0c9006",
+            "payload": {
+                "commit": "codex-task0237-remediation-start",
+                "intent_type": "claim",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T00:11:20Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0237:remediation-start-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
+                                "expires_at": "2026-07-03T00:11:20Z",
+                                "notes": "Remediate TASK-0237 vendor npm test watchdog tree kill and bounded exit evidence.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-remediation",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                                    "D:/Agentes/Zeus/Zeus-Aegis",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T00:11:20Z",
+                                "status": "active",
+                                "task_id": "TASK-0237",
+                                "updated_at": "2026-07-02T00:11:20Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0237"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "66ce2b6325e9c6f3c39342d81c39522dfa645920e01f755a791050a17ec8be0c",
+            "seq": 3042,
+            "ts": "2026-07-02T00:11:20Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "EZ+p/p82mVx8QDz5r9K92aqsiRX6d8nO0igsT6INL3QUOnhE4MofJmHvfu4o0H8u7iIE5lNFvT+0ELG3AhpGBA=="
+            },
+            "aggregate_id": "TASK-0237",
+            "aggregate_version": 8,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "ae5148674f29b4166b1cf71c71773ef063b3fa85f9d26dcf36608789cae4cd3a"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:16a7d08ae0b4d243f8875a1947da0ff7157f9ffdb5c0c33752be434c1f4e6a02",
+            "payload": {
+                "commit": "codex-task0237-remediation-start",
+                "intent_type": "task_status",
+                "task_id": "TASK-0237",
+                "timestamp": "2026-07-02T00:11:20Z",
+                "transaction": {
+                    "count": 2,
+                    "idempotency_key": "codex:task0237:remediation-start-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_review",
+                        "to": "in_progress"
+                    }
+                }
+            },
+            "prev_hash": "ae2367af995cb4d8834c892ef063722e6accf58c5fb1e1e5aeb1720beddf7f4f",
+            "seq": 3043,
+            "ts": "2026-07-02T00:11:20Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
+                "expires_at": "2026-07-03T00:11:20Z",
+                "notes": "Remediate TASK-0237 vendor npm test watchdog tree kill and bounded exit evidence.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-remediation",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0237",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0237",
+                    "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md",
+                    "D:/Agentes/Zeus/Zeus-Aegis",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T00:11:20Z",
+                "status": "active",
+                "task_id": "TASK-0237",
+                "updated_at": "2026-07-02T00:11:20Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0237"
+        },
+        {
+            "from": "in_review",
+            "kind": "task_status",
+            "task_id": "TASK-0237",
+            "to": "in_progress"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "76421f71327acaebbb48029fda97d7d144b090e056dfbb61412482524f8fb5fc",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3043
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3043
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0237-zeus-aegis-hang-proof-npm-test.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:bfb0981bf657399d50df93053904bf508754d9afd7cdaf813779d5b07b0c9006",
+            "intent:Codex:task_status:16a7d08ae0b4d243f8875a1947da0ff7157f9ffdb5c0c33752be434c1f4e6a02"
+        ],
+        "idempotency_key": "codex:task0237:remediation-start-tx",
+        "intent_count": 2
+    }
+}

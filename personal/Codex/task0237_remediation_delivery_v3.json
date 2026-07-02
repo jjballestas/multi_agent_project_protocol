@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "codex:task0237:remediation-delivery-v3-tx",
+  "intents": [
+    {
+      "task_status": {
+        "task_id": "TASK-0237",
+        "from": "in_progress",
+        "to": "in_review",
+        "idempotency_key": "codex:task0237:remediation-v3-in-progress-to-in-review"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260702-Codex-TASK-0237-remediation",
+        "idempotency_key": "codex:task0237:remediation-v3-claim-release"
+      }
+    },
+    {
+      "claim": {
+        "op": "release",
+        "claim_id": "CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+        "idempotency_key": "codex:task0237:delivery-artifacts-v3-claim-release"
+      }
+    }
+  ]
+}

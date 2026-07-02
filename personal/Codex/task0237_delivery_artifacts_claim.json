@@ -1,0 +1,27 @@
+{
+  "idempotency_key": "codex:task0237:delivery-artifacts-claim-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+        "owner": "Codex",
+        "task_id": "TASK-0237",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0237-delivery-artifacts",
+          "Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-2.md",
+          "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T00:25:00Z",
+        "updated_at": "2026-07-02T00:25:00Z",
+        "expires_at": "2026-07-03T00:25:00Z",
+        "notes": "Create TASK-0237 remediation handoff and delivery mailbox."
+      },
+      "idempotency_key": "codex:task0237:delivery-artifacts-claim-acquire"
+    }
+  ]
+}
