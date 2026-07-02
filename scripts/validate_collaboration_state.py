@@ -288,9 +288,6 @@ def exception_recorded_exists(root: Path, task_id: str, exception_ref: Any) -> b
     ref = str(exception_ref or "").strip()
     if not ref:
         return False
-    config = read_json_file(root / "protocol.config.json", Validation())
-    if isinstance(config, dict) and not event_state_enabled(config):
-        return True
     events_path = root / "runtime" / "state" / "events.jsonl"
     if not events_path.exists():
         return False

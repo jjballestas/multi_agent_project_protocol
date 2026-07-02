@@ -14283,6 +14283,26 @@
             "updated_at": "2026-07-02T18:13:53Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0238-r5-remediation",
+            "expires_at": "2026-07-02T22:45:22Z",
+            "notes": "Remediate TASK-0238 R5 fail-closed exception_ref hard gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0238-r5-remediation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0238",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0238",
+                "Area_comun/tasks/TASK-0238-visionnova-f1a-gate-intake.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/validate_collaboration_state.ps1",
+                "runtime/submit_intent.py",
+                "scripts/test_intake_gate.py"
+            ],
+            "started_at": "2026-07-02T18:45:21Z",
+            "status": "active",
+            "task_id": "TASK-0238",
+            "updated_at": "2026-07-02T18:45:21Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-higiene-personal-fyi",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Responder FYI de higiene del area personal Codex.",

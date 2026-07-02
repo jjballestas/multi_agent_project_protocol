@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,7 +17,7 @@ import sys
 sys.path.insert(0, str(ROOT))
 
 from runtime.submit_intent import IntentValidationError, submit_intent
-from scripts.validate_collaboration_state import validate
+from scripts.validate_collaboration_state import exception_recorded_exists, validate
 
 
 def write(path: Path, text: str) -> None:
@@ -92,6 +93,11 @@ VALID_INTAKE = """intake:
   estimate: S
 """
 
+VALID_EXCEPTION_EVENT = (
+    '{"type":"exception.recorded","seq":1,'
+    '"payload":{"kind":"intake_exempt","task_id":"TASK-0239"}}\n'
+)
+
 
 def task_markdown(task_id: str, status: str, intake: str = "") -> str:
     return f"""---
@@ -120,8 +126,10 @@ class IntakeGateTests(unittest.TestCase):
         self.assertFalse(self.run_case("TASK-0239", "ready", VALID_INTAKE).errors)
 
     def test_p3_ready_with_recorded_exception_validates(self) -> None:
-        intake = "intake:\n  intake_exempt: true\n  exception_ref: 1\n"
-        self.assertFalse(self.run_case("TASK-0239", "ready", intake).errors)
+        temp = Path(tempfile.mkdtemp(prefix="intake-recorded-exception-"))
+        self.addCleanup(lambda: shutil.rmtree(temp, ignore_errors=True))
+        base_instance(temp, task_id="TASK-0239", status="ready", task_body=task_markdown("TASK-0239", "ready"), events=VALID_EXCEPTION_EVENT)
+        self.assertTrue(exception_recorded_exists(temp, "TASK-0239", 1))
 
     def test_p4_pre_start_task_without_intake_validates(self) -> None:
         self.assertFalse(self.run_case("TASK-0238", "done").errors)
@@ -147,6 +155,62 @@ class IntakeGateTests(unittest.TestCase):
     def test_n5_exempt_without_exception_ref_fails(self) -> None:
         errors = self.run_case("TASK-0239", "ready", "intake:\n  intake_exempt: true\n").errors
         self.assertIn("exception_ref", "\n".join(errors))
+
+    def test_n5b_exempt_with_missing_exception_event_fails_every_gate(self) -> None:
+        intake = "intake:\n  intake_exempt: true\n  exception_ref: 999\n"
+        temp = Path(tempfile.mkdtemp(prefix="intake-missing-exception-"))
+        self.addCleanup(lambda: shutil.rmtree(temp, ignore_errors=True))
+        base_instance(temp, task_id="TASK-0239", status="ready", task_body=task_markdown("TASK-0239", "ready", intake))
+
+        py_errors = validate(temp).errors
+        self.assertIn("valid exception_ref", "\n".join(py_errors))
+
+        ps = subprocess.run(
+            [
+                "powershell",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(ROOT / "scripts" / "validate_collaboration_state.ps1"),
+                "-Root",
+                str(temp),
+            ],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        self.assertNotEqual(ps.returncode, 0, ps.stdout)
+        self.assertIn("valid exception_ref", ps.stdout)
+
+        base_instance(temp, task_id="TASK-0239", status="proposed", task_body=task_markdown("TASK-0239", "proposed", intake))
+        claims = {
+            "schema_version": "1.0",
+            "claims": [
+                {
+                    "claim_id": "CLAIM-test",
+                    "owner": "implementer_agent",
+                    "task_id": "TASK-0239",
+                    "status": "active",
+                    "scope": [
+                        "Area_comun/state/TASK_INDEX.json#TASK-0239",
+                        "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0239",
+                        "Area_comun/tasks/task-0239.md",
+                    ],
+                }
+            ],
+        }
+        write(temp / "Area_comun/state/CLAIMS.json", json.dumps(claims, indent=2) + "\n")
+        with self.assertRaisesRegex(IntentValidationError, "valid exception_ref"):
+            submit_intent(
+                temp,
+                "implementer_agent",
+                {"type": "task_status", "task_id": "TASK-0239", "from": "proposed", "to": "ready"},
+                timestamp="2026-07-02T00:00:00Z",
+                commit="test",
+            )
 
     def test_n6_submit_intent_rejects_invalid_ready_transition_atomically(self) -> None:
         temp = Path(tempfile.mkdtemp(prefix="intake-submit-"))

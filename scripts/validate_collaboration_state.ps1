@@ -388,14 +388,6 @@ function Test-ExceptionRecordedExists {
     param([string]$Root, [string]$TaskId, [object]$ExceptionRef)
     $ref = ([string]$ExceptionRef).Trim()
     if (-not $ref) { return $false }
-    $configPath = Join-Path $Root "protocol.config.json"
-    if (Test-Path -LiteralPath $configPath) {
-        try {
-            $localConfig = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
-            if (-not (Test-EventStateEnabled -Config $localConfig)) { return $true }
-        } catch {
-        }
-    }
     $eventsPath = Join-Path $Root "runtime/state/events.jsonl"
     if (-not (Test-Path -LiteralPath $eventsPath)) { return $false }
     foreach ($line in Get-Content -LiteralPath $eventsPath) {

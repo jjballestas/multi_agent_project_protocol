@@ -196,13 +196,38 @@ def has_intake_value(value: Any) -> bool:
     return value is not None
 
 
+def exception_recorded_exists(root: Path, task_id: str, exception_ref: Any) -> bool:
+    ref = str(exception_ref or "").strip()
+    if not ref:
+        return False
+    events_path = root / "runtime" / "state" / "events.jsonl"
+    if not events_path.exists():
+        return False
+    for line in events_path.read_text(encoding="utf-8-sig").splitlines():
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        if (
+            str(event.get("type") or "") == "exception.recorded"
+            and str(event.get("seq") or "") == ref
+            and str(payload.get("kind") or "") == "intake_exempt"
+            and str(payload.get("task_id") or "") == task_id
+        ):
+            return True
+    return False
+
+
 def validate_intake_for_ready(root: Path, task_id: str, task_file: str) -> None:
     intake = parse_frontmatter_mapping(root / task_file, "intake")
     if not isinstance(intake, dict):
         raise IntentValidationError(f"task {task_id} cannot move to ready without intake block")
     if intake.get("intake_exempt") is True:
-        if not str(intake.get("exception_ref") or "").strip():
-            raise IntentValidationError(f"task {task_id} intake_exempt requires exception_ref")
+        if not exception_recorded_exists(root, task_id, intake.get("exception_ref")):
+            raise IntentValidationError(f"task {task_id} intake_exempt requires valid exception_ref")
         return
     for field in ("type", "goal", "acceptance", "verification_cmd", "scope_routes", "out_of_scope", "risk", "estimate"):
         if not has_intake_value(intake.get(field)):
