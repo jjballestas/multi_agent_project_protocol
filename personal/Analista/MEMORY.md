@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0236 harness remediation; OK/CERRABLE).
+> Ultima actualizacion: 2026-07-02 (TASK-0237 remediation re-gate; OK/CERRABLE).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0237 remediacion re-gate vendor watchdog (2026-07-02): OK/CERRABLE. Veredicto canonico en
+  `a9eebcc` (`review(TASK-0237): Analista OK vendor watchdog remediation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0237-remediacion-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-remediacion-OK`. Ancla protocolo bajo review
+  `37cbd5dbc28c96a031f45037fc3609a047a7f82e`; producto canonico `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `ea3f52ce30abefe266b81661189d6d7864d69cb3`; `ea3f52c` no existe en `Zeus-protocol` y si en `Zeus-Aegis`.
+  Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0237-rem-9b40d4523603470c8fba9b5a7ec68a57/zeus-aegis`.
+  Root `npm test` en clon limpio: exit 0 en tres corridas consecutivas (83 files / 562 tests; wrapper total
+  793.2 s). Vendor watchdog `ZEUS_AEGIS_TEST_HARD_TIMEOUT_MS=1 npm --prefix vendor/hermes-2.3.0 test` exit 124
+  en 2.2 s y `RUNNER_SURVIVORS=0` para node/npm/pnpm/cmd/esbuild bajo el clon. Probe de fallo real:
+  Vitest intencional `expect(1).toBe(2)` exit 1 en 7.1 s. Gates protocolo live y secretless:
+  validate/neutrality/encoding EXIT 0, drift false `up_to_seq=3071`, `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales declarados: timeout de 1 ms
+  puede dispararse durante preparacion del runner, pero el comando canonico sale 124 acotado y no deja arbol vivo;
+  exclusiones upstream preexistentes quedan fuera de TASK-0237.
 - TASK-0236 harness remediation (2026-07-02): OK/CERRABLE. Veredicto canonico en `27f4950`
   (`review(TASK-0236): Analista OK harness remediation`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0236-harness-veredicto.md`, MSG
