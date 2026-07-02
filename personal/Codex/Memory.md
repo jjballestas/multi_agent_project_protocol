@@ -4,6 +4,17 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0229 delivered to `in_review`. Product implementation remains `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `980445c feat(branding): add zeus env aliases`: Zeus-Aegis visible branding/setup copy, `ZEUS_*` env aliases
+  with `HERMES_*`/`CLAUDE_*` compatibility shims, and no internal binary/package/appId rename. Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-in-review.md`. Evidence: product
+  `node --check` PASS for `scripts/run-product-test.mjs`,
+  `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`, and
+  `vendor/hermes-2.3.0/src/server/gateway-capabilities.ts`; product `git diff --check` PASS; local `npm test`
+  PASS 83 files / 562 tests; clean clone
+  `%TEMP%/codex-0229-zeus-aegis-clean-6a75cc6d9fd3427ab9aec19985fabc4d` at `980445c` `npm test` PASS 83 files /
+  562 tests. Runtime delivery moved TASK-0229 to `in_review` and released Codex claims at `up_to_seq=3087`.
 - TASK-0237 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0237:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0237-done-flip` and moved
   TASK-0237 `review_approved -> done` at seq 3075-3077. Evidence after the flip: encoding OK, neutrality command

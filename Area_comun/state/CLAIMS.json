@@ -13596,6 +13596,42 @@
             "updated_at": "2026-07-02T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-delivery-artifacts",
+            "expires_at": "2026-07-03T12:20:00Z",
+            "notes": "Prepare TASK-0229 delivery handoff and coordination mailbox message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-delivery-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T12:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T12:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-resume3",
+            "expires_at": "2026-07-03T12:10:00Z",
+            "notes": "Resume and deliver TASK-0229 WS3 branding implementation in Zeus-Aegis.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-resume3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "D:/Agentes/Zeus/Zeus-Aegis",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T12:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T12:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0236",
             "expires_at": "2026-07-03T02:10:00Z",
             "notes": "Implement TASK-0236 cron harness remediation: per-exec prompts, tree-kill deadline cleanup, single-instance guard, orphan lease enforcement, and exact stop-order matching.",

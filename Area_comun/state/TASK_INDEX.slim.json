@@ -102,7 +102,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "[REQ-ZEUS-001][WS3] Capa de branding + alias env ZEUS_* con shim + pantalla 'Preparando tu entorno Zeus'"
         },
         {
