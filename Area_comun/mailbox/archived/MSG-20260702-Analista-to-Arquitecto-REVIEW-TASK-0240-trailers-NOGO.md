@@ -3,7 +3,7 @@ message_id: MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0240-trailers-NOGO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-02
