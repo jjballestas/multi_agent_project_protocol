@@ -4,6 +4,12 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0200 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
+  `codex:task0200:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0200-done-flip` and moved
+  TASK-0200 `ready -> done` at seq 3100-3102. Evidence after the flip: encoding OK, neutrality command exit 0,
+  validator OK, drift false / byte-identical `up_to_seq=3102`. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. The consumed Arquitecto ACTION message remains open
+  because Codex does not have the orchestrator-only mailbox archive capability.
 - TASK-0229 delivered to `in_review`. Product implementation remains `D:/Agentes/Zeus/Zeus-Aegis` commit
   `980445c feat(branding): add zeus env aliases`: Zeus-Aegis visible branding/setup copy, `ZEUS_*` env aliases
   with `HERMES_*`/`CLAUDE_*` compatibility shims, and no internal binary/package/appId rename. Delivery artifacts:
@@ -15,6 +21,7 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   PASS 83 files / 562 tests; clean clone
   `%TEMP%/codex-0229-zeus-aegis-clean-6a75cc6d9fd3427ab9aec19985fabc4d` at `980445c` `npm test` PASS 83 files /
   562 tests. Runtime delivery moved TASK-0229 to `in_review` and released Codex claims at `up_to_seq=3087`.
+  Protocol coordination commit: `e96f085 coord(TASK-0229): deliver branding aliases`.
 - TASK-0237 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0237:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0237-done-flip` and moved
   TASK-0237 `review_approved -> done` at seq 3075-3077. Evidence after the flip: encoding OK, neutrality command

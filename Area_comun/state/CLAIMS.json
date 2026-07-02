@@ -13618,6 +13618,24 @@
             "updated_at": "2026-07-02T02:06:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+            "expires_at": "2026-07-02T23:59:00Z",
+            "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0200",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+                "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T12:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0200",
+            "updated_at": "2026-07-02T12:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Implement TASK-0229 WS3 branding, ZEUS_* env aliases with compatibility shim, and Zeus preparation screen in Zeus-Aegis.",

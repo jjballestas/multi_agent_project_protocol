@@ -909,7 +909,7 @@
         {
             "id": "TASK-0200",
             "owner": "Codex",
-            "status": "ready",
+            "status": "done",
             "title": "Zeus-Aegis GATE 1 remediation: V3 atestacion honesta, V4 PII todos los campos, V6 gate npm test fiable"
         },
         {

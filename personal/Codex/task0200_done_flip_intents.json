@@ -1,0 +1,58 @@
+{
+  "idempotency_key": "codex:task0200:done-flip-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0200",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0200",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+          "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T12:00:00Z",
+        "updated_at": "2026-07-02T12:00:00Z",
+        "expires_at": "2026-07-02T23:59:00Z",
+        "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification."
+      },
+      "idempotency_key": "codex:task0200:done-flip-claim-acquire"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0200",
+      "from": "ready",
+      "to": "done",
+      "idempotency_key": "codex:task0200:ready-to-done"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0200",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0200",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+          "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T12:00:00Z",
+        "updated_at": "2026-07-02T12:00:00Z",
+        "expires_at": "2026-07-02T23:59:00Z",
+        "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification."
+      },
+      "idempotency_key": "codex:task0200:done-flip-claim-release"
+    }
+  ]
+}

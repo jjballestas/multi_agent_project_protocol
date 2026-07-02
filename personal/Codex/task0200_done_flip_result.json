@@ -1,0 +1,273 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "c723a6ee4973acdf44462d177d8c4337bec2b64694458f781157564c255ad8b3",
+        "replay_hash": "c723a6ee4973acdf44462d177d8c4337bec2b64694458f781157564c255ad8b3",
+        "up_to_seq": 3102
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "nGbEqRlzjIud3PuYEppY/sLDecEq8T5J7MyX4ugYQCnP5lB9M7ZaFHoc+F/2W3M8FP3hFFmm2xnIx1OlxHj2DA=="
+            },
+            "aggregate_id": "TASK-0200",
+            "aggregate_version": 5,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "ed61b7310acb50bd475926241c5dfaa4f29464be2e2576a2036588d39d608876"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:b8a834f616670627e6254c56fbddab2ebb4bc8b1d857dab28ba905f94ba324d8",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0200",
+                "timestamp": "2026-07-02T12:00:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0200:done-flip-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0200",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+                                    "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T12:00:00Z",
+                                "status": "active",
+                                "task_id": "TASK-0200",
+                                "updated_at": "2026-07-02T12:00:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0200"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "3e2c97acaba8c93ae1665a397e035759dbce97a3791d343eec5bc4a09dbf5057",
+            "seq": 3100,
+            "ts": "2026-07-02T12:00:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "OY94p6I3pWSYM2GAjaZQ09PdDMOtW0BN7zXn5OdTKXOyXWxux65OV/BA6oWEAYrTmXR2Alf0YmcA+tjnNrhcDw=="
+            },
+            "aggregate_id": "TASK-0200",
+            "aggregate_version": 6,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "8f929bd66e5a187a6372cf61e8f7e045b1a1e463970e31f6cd499b41a05fb918"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:task_status:0a0fe1390becf2d6fcdef005053f9489c953ce00ffe8876da9e3cf1b833e65b3",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "task_status",
+                "task_id": "TASK-0200",
+                "timestamp": "2026-07-02T12:00:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0200:done-flip-tx",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "ready",
+                        "to": "done"
+                    }
+                }
+            },
+            "prev_hash": "6392829e49a32c20f856d78093a5ccaca1506f577633f5d7a8b3b5c479cf3fbc",
+            "seq": 3101,
+            "ts": "2026-07-02T12:00:00Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "onS/Y8dmn+l1v9mG568tbGmj6C7sau08Q+so3hQn9zr+DMldUxpnXw33TV66D/1+ON5nM+SqaU53VM4+81p2AQ=="
+            },
+            "aggregate_id": "TASK-0200",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "2a49da0ca2abfeff285dca24d4d9d4a50c636795820f858dd2aa19eb6aadfe6f"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "intent:Codex:claim:a11d06493b50f947578e0687495483963ec5bcce8134b4a63ffaaa9d3d072a8d",
+            "payload": {
+                "commit": "pending",
+                "intent_type": "claim",
+                "task_id": "TASK-0200",
+                "timestamp": "2026-07-02T12:00:00Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0200:done-flip-tx",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                                "expires_at": "2026-07-02T23:59:00Z",
+                                "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0200",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+                                    "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T12:00:00Z",
+                                "status": "released",
+                                "task_id": "TASK-0200",
+                                "updated_at": "2026-07-02T12:00:00Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0200"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "a2af68ebe918307b99f561f3b2347e8525d0326e5ab5a8a3966d50f459da8aa3",
+            "seq": 3102,
+            "ts": "2026-07-02T12:00:00Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0200",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+                    "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T12:00:00Z",
+                "status": "active",
+                "task_id": "TASK-0200",
+                "updated_at": "2026-07-02T12:00:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0200"
+        },
+        {
+            "from": "ready",
+            "kind": "task_status",
+            "task_id": "TASK-0200",
+            "to": "done"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+                "expires_at": "2026-07-02T23:59:00Z",
+                "notes": "Implementer done-flip after TASK-0201 re-GATE and TASK-0203 final verification.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0200-done-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0200",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0200",
+                    "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T12:00:00Z",
+                "status": "released",
+                "task_id": "TASK-0200",
+                "updated_at": "2026-07-02T12:00:00Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0200-done-flip",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0200"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "ad4c89f32e92412d0a7478a0a21c8a306110b1ecf62702c4033fc00999f6d78c",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3102
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3102
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0200-codex-zeus-aegis-gate1-remediation.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "intent:Codex:claim:b8a834f616670627e6254c56fbddab2ebb4bc8b1d857dab28ba905f94ba324d8",
+            "intent:Codex:task_status:0a0fe1390becf2d6fcdef005053f9489c953ce00ffe8876da9e3cf1b833e65b3",
+            "intent:Codex:claim:a11d06493b50f947578e0687495483963ec5bcce8134b4a63ffaaa9d3d072a8d"
+        ],
+        "idempotency_key": "codex:task0200:done-flip-tx",
+        "intent_count": 3
+    }
+}

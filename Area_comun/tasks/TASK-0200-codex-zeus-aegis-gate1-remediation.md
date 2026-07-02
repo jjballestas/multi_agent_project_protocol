@@ -2,7 +2,7 @@
 task_id: TASK-0200
 title: "Zeus-Aegis GATE 1 remediation: V3 atestacion honesta (no falso-verde), V4 PII en todos los campos servidos, V6 gate npm test fiable en clon limpio (SPEC-0107)"
 type: integration
-status: ready
+status: done
 owner: Codex
 phase: P2
 priority: high
