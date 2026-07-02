@@ -14524,6 +14524,67 @@
             "updated_at": "2026-07-02T18:07:30Z"
         },
         {
+            "claim_id": "CLAIM-20260702-hyg0238-b1-arquitecto",
+            "expires_at": "2026-07-02T22:30:00Z",
+            "notes": "Higiene ciclo 0238 lote 1.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-hyg0238-b1-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-intake.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-intake.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-r5-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0238-r5-OK.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0238-intake.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0238-intake.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0238-r5-regate.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0238-r5-regate.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0238-done-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0238-done-flip.md"
+            ],
+            "started_at": "2026-07-02T19:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T19:20:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-hyg0238-b2-arquitecto",
+            "expires_at": "2026-07-02T22:30:00Z",
+            "notes": "Higiene ciclo 0238 lote 2.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-hyg0238-b2-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0238-r5-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0238-r5-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0238-f1a-intake.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-GO-TASK-0238-f1a-intake.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0238-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0238-r5-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0238-r5-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Operador-FYI-higiene-area-personal.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Operador-FYI-higiene-area-personal.md"
+            ],
+            "started_at": "2026-07-02T19:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T19:20:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-hyg0238-b3-arquitecto",
+            "expires_at": "2026-07-02T22:30:00Z",
+            "notes": "Higiene ciclo 0238 lote 3.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-hyg0238-b3-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Operador-to-Arquitecto-ACTION-recordatorio-higiene-0238.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Operador-to-Arquitecto-ACTION-recordatorio-higiene-0238.md"
+            ],
+            "started_at": "2026-07-02T19:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T19:20:30Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-mbhyg-b1-arquitecto",
             "expires_at": "2026-07-02T20:00:00Z",
             "notes": "Higiene mailbox lote 1: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
