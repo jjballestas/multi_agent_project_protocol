@@ -62,7 +62,12 @@ Un commit es fix/revert/hotfix si su subject matchea
 
 - V1: el validador escanea los commits desde un `trailer_start_seq`/commit de arranque
   registrado en la DECISION de adopcion (los commits historicos quedan EXENTOS; no se
-  reescribe historia).
+  reescribe historia). PRECONDICION DE ACTIVACION (hallazgo F-2 del Arquitecto
+  2026-07-02): `trailer_start_seq` se fija en un punto POSTERIOR al despliegue de
+  F1-E (harnesses de Codex/Analista y flujo del Arquitecto emitiendo trailers).
+  Activar V2-V5 con harnesses sin actualizar = auto-DoS del ledger (cada commit de
+  peer falla validate); PROHIBIDO. La implementacion de F1-C puede construirse antes,
+  pero el boundary de activacion espera a F1-E.
 - V2: commit posterior al arranque que toca rutas gobernadas (Area_comun/**, runtime/**,
   scripts/**, protocol.config.json) sin trailer `Task-Id:` valido => validate exit != 0.
 - V3: commit fix/revert/hotfix sin `Fixes-Task:` valido => exit != 0. `Fixes-Task`

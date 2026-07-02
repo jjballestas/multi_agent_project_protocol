@@ -8,22 +8,29 @@ finales los asigna el Arquitecto con el siguiente numero libre del indice.
 Auditoria previa (asesor): los PRDs son estrategicos, NO ejecutables; NO soltar
 agentes contra PRDs directamente — solo contra estas tareas con DoD testable.
 
-## Secuencia recomendada
+## Secuencia recomendada (v2, corregida por hallazgos F-1/F-2 del Arquitecto 2026-07-02)
 
-F1-A -> F1-B -> F1-C (cadena Codex, de a una; B y C comparten runtime/validador)
-en paralelo: F1-D y F1-E (Arquitecto/doctrina, no bloquean a Codex)
-cierre: F1-F (mini-DECISION) + F1-G (release v1.18.0)
+F1-A -> F1-B -> F1-C-construccion (cadena Codex, de a una)
+F1-E (harnesses con trailer + envelope) es PRECONDICION DURA de la ACTIVACION de
+F1-C (trailer_start_seq posterior al despliegue de F1-E; hallazgo F-2 — la version
+v1 de esta secuencia tenia la dependencia invertida).
+en paralelo: F1-D y la parte doctrinal de F1-E (no bloquean a Codex)
+cierre: F1-F (mini-DECISION, incluye clausula pin-anclado-al-tag de F-3) + F1-G
+(release v1.18.0, sin tocar el epoch: F-4)
 F1.6 (aprendizajes-externos, timebox 2d) SOLO si hay holgura; nunca camino critico.
 
 ---
 
 ## F1-A [F1.1] Gate de intake determinista
 
-- Owner: Codex. Spec: SPEC-F1-gate-intake.md (v0.1 adjunta al paquete F0).
-- Alcance: regla R1-R6 en validador (ps1 + python) y runtime (task_status hard-gate);
-  bloque intake en templates; examples/minimal_instance actualizado.
+- Owner: Codex. Spec: SPEC-F1-gate-intake.md (v0.2: incluye R0 anti-retroactividad).
+- Alcance: reglas R0-R6 en validador (ps1 + python) y runtime (task_status hard-gate);
+  bloque intake en templates; examples/minimal_instance actualizado. CONDICION DE
+  PROMOCION (F-1): implementar con `intake_start` — las tareas pre-existentes quedan
+  exentas; sin R0 el HEAD actual (177 tareas sin intake) pone el ledger rojo.
 - DoD (testable):
-  1. Los 6 casos negativos y 3 positivos del SPEC s.4 implementados como tests; verdes.
+  1. Los 6 casos negativos y 5 positivos del SPEC s.4 implementados como tests
+     (incluye P4 exencion historica y P5 HEAD real valida verde); verdes.
   2. Transicion proposed->ready via submit_intent con intake invalido = rechazo
      atomico (exit != 0, sin drift).
   3. Los 3 gates (validate + encoding + neutralidad) verdes en CLON LIMPIO de HEAD.
@@ -44,9 +51,13 @@ F1.6 (aprendizajes-externos, timebox 2d) SOLO si hay holgura; nunca camino criti
 
 ## F1-C [F1.3] Trailers bloqueantes Task-Id / Fixes-Task
 
-- Owner: Codex. Spec: SPEC-F1-exception-trailers.md PARTE B.
+- Owner: Codex. Spec: SPEC-F1-exception-trailers.md PARTE B (v0.2: V1 con
+  precondicion de activacion).
 - Alcance: escaneo de rango de commits en el validador (V1-V5), trailer_start_seq
-  registrado, allowlist ops (`Task-Id: none` + `Ops-Reason`).
+  registrado, allowlist ops (`Task-Id: none` + `Ops-Reason`). CONDICION DE
+  ACTIVACION (F-2): la construccion puede avanzar, pero `trailer_start_seq` solo se
+  fija DESPUES de que F1-E despliegue los harnesses con trailer; activar antes
+  auto-DoSea el ledger (commits de peers/Arquitecto sin trailer fallarian validate).
 - DoD (testable):
   1. Los 8 casos B.3 (4 negativos + 4 positivos) como tests sobre repo fixture; verdes.
   2. El propio repo valida verde con commits historicos exentos (arranque declarado).
@@ -90,16 +101,25 @@ F1.6 (aprendizajes-externos, timebox 2d) SOLO si hay holgura; nunca camino criti
 - Owner: Arquitecto (redaccion corta; ya existe draft en el area del operador,
   REQs Zeus-Aegis v0.2.0). Registra la identidad (interrogacion de requisitos +
   quality panel + excepciones auditadas via F1-B) como decision de doctrina.
+- Incluye la CLAUSULA PIN-ANCLADO-AL-TAG (F-3): los 5 pineados byte-identicos del
+  TFM quedan anclados al tag TFM-dataset-N500 (codigo de medicion congelado ahi,
+  H3 reproducible contra el tag); el validador/runtime VIVOS evolucionan
+  legitimamente hacia v1.18.0. Que F1-A/B/C editen validate_collaboration_state.py
+  y eventlog.py NO viola el invariante — y deja de ser implicito.
 - DoD: DECISION registrada via submit_intent, gates verdes, relates_to
-  GOAL-VISION-NOVA-001 + DECISION-0083.
+  GOAL-VISION-NOVA-001 + DECISION-0083; clausula pin-anclado-al-tag incluida.
 
 ## F1-G [F1.7] RELEASE v1.18.0
 
 - Owner: Arquitecto. Cierra F1: version SemVer + CHANGELOG + tag. Este tag es el
   que consume F2.1 (new_instance nova-budget).
+- ACLARACION (F-4): v1.18.0 es LINEA DE RELEASE (eje CHANGELOG de DECISION-0047);
+  el epoch `protocol_version` de protocol.config.json permanece 1.14.0 PINNED
+  (genesis #4). PROHIBIDO tocar protocol.config.json en esta tarea.
 - DoD: CHANGELOG actualizado; tag v1.18.0 sobre commit con los 3 gates verdes en
   clon limpio; templates sincronizados con las reglas nuevas (intake/exception/
-  trailers/envelope); FYI al operador.
+  trailers/envelope); protocol.config.json byte-identico (sha 2e35f26e...);
+  FYI al operador.
 
 ---
 

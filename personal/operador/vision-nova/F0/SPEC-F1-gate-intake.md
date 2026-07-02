@@ -34,8 +34,16 @@ exception_ref: "<seq del evento exception.recorded que autoriza la exencion>"
 
 ## 2. Reglas de validacion (hard-gate en validador + runtime)
 
-- R1: tarea con status en {ready, claimed, in_progress, in_review, done} SIN bloque
-  `intake` completo y valido => `validate` exit != 0. `proposed` puede carecer de el.
+- R0 (ARRANQUE, anti-retroactividad — hallazgo F-1 del Arquitecto 2026-07-02): la
+  adopcion registra un `intake_start` (boundary determinista: ultimo TASK-id
+  existente al adoptar, o seq del ledger; mecanismo exacto lo elige la
+  implementacion). R1-R5 aplican SOLO a tareas registradas DESPUES de ese boundary;
+  las tareas pre-existentes (177 a fecha del hallazgo) quedan EXENTAS de por vida
+  — mismo patron que `trailer_start_seq` en SPEC-F1-exception-trailers. Sin R0,
+  activar R1 pone validate exit!=0 sobre HEAD y el ledger queda rojo.
+- R1: tarea POSTERIOR a `intake_start` con status en {ready, claimed, in_progress,
+  in_review, done} SIN bloque `intake` completo y valido => `validate` exit != 0.
+  `proposed` puede carecer de el.
 - R2: campo vacio, placeholder ("TBD", "todo", "n/a", "...") o enum fuera de rango
   => invalido.
 - R3: cada item de `acceptance` debe tener al menos un `verification_cmd` asociado
@@ -57,7 +65,10 @@ el core del lifecycle (cambio compatible, no breaking).
 ## 4. Casos de prueba minimos (DoD de F1.1)
 
 Positivos: (P1) proposed sin intake valida; (P2) ready con intake completo valida;
-(P3) ready con intake_exempt + exception_ref valido valida.
-Negativos: (N1) ready sin intake; (N2) goal vacio; (N3) acceptance con "TBD";
-(N4) risk fuera de enum; (N5) intake_exempt sin exception_ref; (N6) transicion
-proposed->ready via submit_intent con intake invalido (rechazo atomico).
+(P3) ready con intake_exempt + exception_ref valido valida; (P4) tarea PRE-EXISTENTE
+(anterior a intake_start) en done/in_review SIN intake valida (R0); (P5) HEAD real
+del repo valida verde con la regla activa (equivale a P4 a escala 177).
+Negativos (todos sobre tareas posteriores a intake_start): (N1) ready sin intake;
+(N2) goal vacio; (N3) acceptance con "TBD"; (N4) risk fuera de enum; (N5)
+intake_exempt sin exception_ref; (N6) transicion proposed->ready via submit_intent
+con intake invalido (rechazo atomico).
