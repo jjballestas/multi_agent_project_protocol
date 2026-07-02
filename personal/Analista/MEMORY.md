@@ -23,6 +23,9 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- Post-commit memoria higiene (2026-07-02): commit `16e62ab` (`chore(personal): record Analista hygiene closure`)
+  dejo canonico el FYI de cierre al Operador y esta memoria. Gates previos: `validate_collaboration_state.py`
+  EXIT 0 con warning archivable de FYI; `scan_encoding.py` EXIT 0.
 - Higiene area personal (2026-07-02): commit `d77ee98` (`chore(personal): archive Analista claim drafts`)
   archiva 15 JSON de claims consumidos en `personal/Analista/archive/claims/`. Conservados como vigentes:
   `MEMORY.md`, `STARTUP_PROMPT.md`, `README.md` y `analista_mailbox_cron.ps1`. FYI de cierre:
