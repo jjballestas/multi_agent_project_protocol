@@ -1467,3 +1467,17 @@
   acepta `proposed->ready` dejando estado `ready`. Pedir remediacion: validar evento existente kind
   `intake_exempt` + `task_id` coincidente en Python validator, PowerShell validator y runtime; agregar negativos
   para ref inexistente, kind incorrecto y task incorrecto, mas positivo con evento real.
+- TASK-0240 re-gate (2026-07-03): OK/CERRABLE, veredicto commiteado y pusheado en `160cc8e`
+  (`review(TASK-0240): Analista OK trailer section regate`). Ancla protocolo `165b036`, remediacion `db47854`,
+  producto control `b2b2395`. Artefacto `Area_comun/artifacts/ANALISTA-TASK-0240-trailer-section-regate-veredicto.md`;
+  MSG rr a Arquitecto `MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0240-trailer-section-regate.md`.
+  Clon limpio Zeus `npm test` exit 0, 109 tests, 87 pass, 22 skipped. Clon limpio protocolo validate exit 0,
+  test_trailers exit 0, PowerShell validate exit 0, encoding exit 0. Vivo: validate Python/PowerShell exit 0,
+  test_trailers exit 0 (9 casos), scan_encoding exit 0, scan_domain_neutrality exit 0; drift 0
+  `up_to_seq=3356`; chain valid `checked_events=2684`; `protocol.config.json` vivo sin `commit_trailers`, sin
+  `Area_comun/protocol/COMMIT_TRAILERS.json`, sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Payloads propios: `Task-Id` intermedio + cuerpo posterior falla `without exact Task-Id`; `Fixes-Task`
+  intermedio falla `without exact Fixes-Task`; `Ops-Reason` intermedio con `Task-Id: none` final falla
+  `without Ops-Reason`; texto libre y case variant no cuentan; unknown task/fix fallan; ops allowlist,
+  personal exempt y `fix!` positivo pasan. Residual no bloqueante: parser acepta bloque final `Key: value`
+  generico y solo consume claves permitidas; no deja contar lineas intermedias.
