@@ -1,0 +1,51 @@
+{
+  "idempotency_key": "arq:decision0082:branding-scope-ws3-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-decision0082-branding-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0229",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-decision0082-branding-arquitecto",
+          "Area_comun/state/PROJECT_STATE.json",
+          "Area_comun/decisions/DECISION-0082-branding-user-visible-scope-ws3.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T06:30:00Z",
+        "updated_at": "2026-07-02T06:30:00Z",
+        "expires_at": "2026-07-02T12:00:00Z",
+        "notes": "Registra DECISION-0082 (definicion de branding user-visible para el gate de WS3/TASK-0229; gate por allowlist etiquetada, no cero-grep). Eleccion explicita del operador."
+      }
+    },
+    {
+      "type": "decision",
+      "decision_id": "DECISION-0082"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260702-decision0082-branding-arquitecto",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0229",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-decision0082-branding-arquitecto",
+          "Area_comun/state/PROJECT_STATE.json",
+          "Area_comun/decisions/DECISION-0082-branding-user-visible-scope-ws3.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-02T06:30:00Z",
+        "updated_at": "2026-07-02T06:30:00Z",
+        "expires_at": "2026-07-02T12:00:00Z",
+        "notes": "Release tras registrar DECISION-0082."
+      }
+    }
+  ]
+}
