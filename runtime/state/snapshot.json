@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3be1963b1e47b272d05ca3a5cd7cf9903b09838d29b81fbf9b0c7267a89d4126",
+  "canonical_hash": "427f23186f4811d8bd93771b5250cda2dcd7441e4f6457bd09de3e2eee0cea7e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -970,7 +970,7 @@
       "TASK-0226": 20,
       "TASK-0227": 41,
       "TASK-0228": 11,
-      "TASK-0229": 55,
+      "TASK-0229": 57,
       "TASK-0230": 1,
       "TASK-0231": 1,
       "TASK-0232": 1,
@@ -986,7 +986,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2482,
+    "events_applied": 2484,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2660,6 +2660,7 @@
       "intent:Analista:claim:04328a7f27457480731174306db3db268d30d51b33d0e0753ceabaf1b40d66f9": 2516,
       "intent:Analista:claim:1724c23ea1dc5660abb1ec55d6248237b952466fe1bb833ec9136561392d7003": 2416,
       "intent:Analista:claim:1ffc5f8bd43ec27e9da3d680d3fc7b1c9647818f2467a147f818f869b47f7c65": 2413,
+      "intent:Analista:claim:26cf5fdd8d5a9d8a9d5eb8e8a79aaf0f3a2f6127e42b363af06ada4de740fab6": 3155,
       "intent:Analista:claim:26fcbc7ca18af061626eead2b49cd4028df11725e8095bb73323e3b405e6862b": 2442,
       "intent:Analista:claim:396f81c296c383416a00bd51f8baf081bda3b1a4079939889d83aa1f1a8de840": 2407,
       "intent:Analista:claim:3c7694bb67a16cbef5c223db4c1cde5ce02315ea1d2fb1af298e86d3ecc07805": 2513,
@@ -2669,6 +2670,7 @@
       "intent:Analista:claim:4aeb074291ce1f4ca81d68dc7ff9f84a1304df2f623f41bdac0286d34ed1e949": 2283,
       "intent:Analista:claim:4c5de1b88b06cd1fde1bf12030f668dda8ab2b9aea2476d0795788cd00950d7a": 2463,
       "intent:Analista:claim:56903caca3ca58cb763974026d1b0b6617a909fb41a54581f5a506f53ce84b31": 2514,
+      "intent:Analista:claim:56d78b0dca8565ec34b86e4f0a44d6526c7439c67e5ae4a069b41523ba42396a": 3154,
       "intent:Analista:claim:5c3dbaf945b4cecae82ea74c733c02e3121778ae8aac204161448dc2d772edcc": 2512,
       "intent:Analista:claim:5f7dc17745b2cd1da2e5f3c8016f5308f6391f3a76ef0356a5a774c5feae7e25": 2464,
       "intent:Analista:claim:77a11d155b7d2ecb69f38fdce571a73fa41d06dcdaffb82f7e27ff172d37eb7a": 2517,
@@ -3472,5 +3474,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3153
+  "up_to_seq": 3155
 }
