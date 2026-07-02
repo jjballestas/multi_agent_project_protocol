@@ -4,6 +4,21 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0229 DECISION-0082 allowlist delivery product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `72984b0 docs(branding): add decision 0082 hermes allowlist`. It adds
+  `docs/DECISION-0082-HERMES-ALLOWLIST.md`, generated from
+  `git grep -n -I -i hermes -- vendor/hermes-2.3.0/src vendor/hermes-2.3.0/electron/server-bundle.cjs` at product
+  HEAD, with 892 remaining hits listed as `path:line`, DECISION-0082 label, no-render proof line, and excerpt.
+  Product evidence before protocol delivery: `node --check` PASS for `scripts/run-product-test.mjs`,
+  `vendor/hermes-2.3.0/scripts/zeus-aegis-f0-test.mjs`, and
+  `vendor/hermes-2.3.0/src/server/gateway-capabilities.ts`; `git diff --check` PASS; `npm test` PASS 83 files /
+  562 tests. Protocol artifacts prepared:
+  `Area_comun/artifacts/ALLOWLIST-TASK-0229-decision0082-hermes-hits.md`,
+  `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-6.md`, and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-allowlist-in-review.md`. Protocol
+  coordination commit in current HEAD: `coord(TASK-0229): deliver decision 0082 allowlist`; it released Codex
+  claims, left TASK-0229 in_review for maker!=checker, and recorded protocol gates green (encoding, neutrality,
+  validator, drift false / byte-identical).
 - TASK-0229 remediation #5 product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `3c8c084 fix(branding):
   clear final user-facing Hermes hits`. It fixes the three DECISION-0082 user-facing residues named by
   Arquitecto/Analista: setup UI command now renders `zeus`, ZeusWorld embed uses `source=zeus-aegis-workspace`,

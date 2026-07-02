@@ -13723,6 +13723,28 @@
             "updated_at": "2026-07-02T00:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-allowlist",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Deliver DECISION-0082 labeled allowlist for remaining TASK-0229 Hermes hits.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-allowlist",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "Area_comun/artifacts/ALLOWLIST-TASK-0229-decision0082-hermes-hits.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-6.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-allowlist-in-review.md",
+                "D:/Agentes/Zeus/Zeus-Aegis",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T13:12:53Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T13:12:53Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229-cleanup-malformed-claim-and-mailbox",
             "notes": "Cleanup malformed claim scope and mailbox status for TASK-0229 delivery.",
             "owner": "Codex",
@@ -13990,6 +14012,22 @@
             "updated_at": "2026-07-02T12:10:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-status-file-fix",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Fix TASK-0229 task file status side effect to match TASK_INDEX in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-status-file-fix",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T13:19:40Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T13:19:40Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0236",
             "expires_at": "2026-07-03T02:10:00Z",
             "notes": "Implement TASK-0236 cron harness remediation: per-exec prompts, tree-kill deadline cleanup, single-instance guard, orphan lease enforcement, and exact stop-order matching.",
@@ -14221,6 +14259,31 @@
             "status": "released",
             "task_id": "TASK-0229",
             "updated_at": "2026-07-02T06:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-mbhyg-b1-arquitecto",
+            "expires_at": "2026-07-02T20:00:00Z",
+            "notes": "Higiene mailbox lote 1: archiva 6 MSG consumidos (0237/huerfanas/pivote-v1/0229-branding-rounds).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-mbhyg-b1-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-remediacion-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-remediacion-OK.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0237-remediacion.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REVIEW-TASK-0237-remediacion.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0237-done-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Codex-ACTION-TASK-0237-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Codex-to-Arquitecto-TASK-0237-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-reviews-huerfanas-cierre-formal.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Analista-to-Arquitecto-REVIEW-reviews-huerfanas-cierre-formal.md",
+                "Area_comun/mailbox/open/MSG-20260702-Arquitecto-to-Analista-REQUEST-cierre-formal-reviews-huerfanas.md",
+                "Area_comun/mailbox/archived/MSG-20260702-Arquitecto-to-Analista-REQUEST-cierre-formal-reviews-huerfanas.md"
+            ],
+            "started_at": "2026-07-02T13:20:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260702",
+            "updated_at": "2026-07-02T13:20:00Z"
         },
         {
             "claim_id": "CLAIM-20260702-mbhyg-r2-blk01",
