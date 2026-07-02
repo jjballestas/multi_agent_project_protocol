@@ -13594,6 +13594,21 @@
             "updated_at": "2026-07-02T19:06:56Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-TASK-0239-actor-regate",
+            "expires_at": "2026-07-02T23:10:00Z",
+            "notes": "Analista adversarial re-gate TASK-0239 actor remediation.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Analista-TASK-0239-actor-regate",
+                "Area_comun/artifacts/ANALISTA-TASK-0239-exception-recorded-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0239-actor-OK.md"
+            ],
+            "started_at": "2026-07-02T20:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0239",
+            "updated_at": "2026-07-02T20:11:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Analista-reviews-huerfanas-cierre",
             "expires_at": "2026-07-02T04:38:55Z",
             "notes": "Confirmacion adversarial de cierre formal de reviews huerfanas ya entregadas.",
