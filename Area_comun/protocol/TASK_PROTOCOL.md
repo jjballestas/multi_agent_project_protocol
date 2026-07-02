@@ -152,6 +152,45 @@ be treated as implementable by the architect and should use full SDD.
   written but the state not transitioned (claim still `active`, status still `in_progress`), that is an
   anomaly to be notified and completed, not a valid delivery.
 
+### Final Handoff Envelope
+
+Every task delivery handoff and final implementer/checker report uses this seven-field envelope as the
+final text of the turn:
+
+```text
+task_id: TASK-XXXX
+status: in_review | done | blocked | change_required | no_op
+executive_summary: One to three ASCII sentences with the result.
+artifacts:
+  - path_or_commit: exact path, message id or commit hash
+gates:
+  - command: exact command
+    result: PASS | FAIL | NOT_RUN
+next_recommended: One concrete next action, or "none".
+risks: Residual risks or "none".
+```
+
+The envelope is text in the final report or handoff artifact; it is never a tool call, hidden function
+payload or implicit UI state. It must cite exact artifacts and gate results so a cold reviewer can verify
+the claim without prior chat context. `gates` records exit-code-backed commands where possible; if a gate
+was not run, the entry says `NOT_RUN` and explains why.
+
+### Fix-loop before closure commit
+
+After a checker issues `NO-GO`, `change_required` or equivalent blocking review, the owner performs a
+bounded fix-loop before the closure/delivery commit:
+
+1. Apply the remediation in the claimed scope.
+2. Re-run the affected gates.
+3. Re-judge the fixed result against the original acceptance criteria and the checker finding before
+   writing the delivery handoff.
+4. Repeat at most two remediation iterations for the same finding set.
+5. If the same finding class survives two iterations, stop and escalate to the human owner with one
+   concrete question or decision request.
+
+The delivery handoff for a remediation must include the re-judgement in the `executive_summary` or
+`risks` field and must preserve maker/checker separation.
+
 ### Anomaly notification (DECISION-0018)
 
 An agent that detects an anomaly or inconsistency in another participant's work or in shared state

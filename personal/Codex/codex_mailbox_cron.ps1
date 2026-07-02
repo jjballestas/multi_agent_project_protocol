@@ -362,9 +362,11 @@ Modo ejecutor obligatorio:
 2. Si hay GO a Codex asociado a una tarea owner=Codex status=ready y Codex no tiene otra tarea in_progress activa, tomar UNA tarea: claim file-scoped via runtime/submit_intent.py, task_status ready->in_progress via submit_intent e implementar el codigo requerido en D:/Agentes/Zeus/Zeus-protocol.
 3. Si Codex ya tiene claim in_progress, continuar esa implementacion hasta entregar; no quedarse en lectura, resumen ni ACTION_REQUIRED.
 4. Ejecutar gates aplicables del producto (node --check, npm test, smoke cuando exista) y del protocolo (validate, drift, #4 byte-identica cuando aplique).
-5. Entregar como implementer: commit de producto explicito, handoff autocontenido en Area_comun/handoffs/, mensaje Codex->Arquitecto en Area_comun/mailbox/open/, task_status in_progress->in_review y release de claim via submit_intent. No auto-cerrar a done: maker!=checker.
+5. Entregar como implementer: commit explicito, handoff autocontenido en Area_comun/handoffs/, mensaje Codex->Arquitecto en Area_comun/mailbox/open/, task_status in_progress->in_review y release de claim via submit_intent. No auto-cerrar a done: maker!=checker. Todo commit que toque rutas gobernadas debe emitir trailers finales: Task-Id: <TASK-XXXX> y, si corrige un hallazgo, Fixes-Task: <TASK-XXXX>. Si el commit es solo coordinacion sin tarea, usar Ops-Reason: <motivo>.
 6. Responder o mover a answered el GO/mensaje consumido solo despues de que el ledger respalde la entrega.
-7. Si no hay tarea ejecutable para Codex, no-op con cierre concreto. La parada a 7 rondas sin novedad sigue valida. No activar uso vivo ni cron nuevo sin GO explicito.
+7. Tras un NO-GO/change_required del checker, ejecutar fix-loop antes del commit de cierre: remediar, re-ejecutar gates afectados, re-juzgar contra criterios de aceptacion y hallazgo, maximo 2 iteraciones; si persiste la misma clase de hallazgo, escalar al operador con una pregunta concreta.
+8. La salida final del turno y todo handoff de entrega deben terminar con el envelope textual de 7 campos (no tool call): task_id, status, executive_summary, artifacts, gates, next_recommended, risks. Usar ASCII y citar commits/rutas/comandos exactos.
+9. Si no hay tarea ejecutable para Codex, no-op con cierre concreto. La parada a 7 rondas sin novedad sigue valida. No activar uso vivo ni cron nuevo sin GO explicito.
 "@
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"

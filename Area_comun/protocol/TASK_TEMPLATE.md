@@ -69,6 +69,27 @@ Documents, decisions, specs and assumptions needed to execute without prior conv
 ## entregables
 Verifiable outputs with exact paths.
 
+## handoff_envelope
+Use this seven-field envelope as the final text of every delivery handoff or final task report.
+The envelope is text, never a tool call.
+
+```text
+task_id: TASK-XXXX
+status: in_review | done | blocked | change_required | no_op
+executive_summary: One to three ASCII sentences with the result.
+artifacts:
+  - path_or_commit: exact path, message id or commit hash
+gates:
+  - command: exact command
+    result: PASS | FAIL | NOT_RUN
+next_recommended: One concrete next action, or "none".
+risks: Residual risks or "none".
+```
+
+After a checker NO-GO/change_required, run a bounded fix-loop before the closure/delivery commit:
+remediate, re-run affected gates, re-judge against acceptance criteria and the finding, repeat at most
+two iterations, then escalate to the human owner if the same finding class survives.
+
 ## SDD
 - `spec_id`:
 - `execution_pipeline`:

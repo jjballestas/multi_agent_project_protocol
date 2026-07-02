@@ -380,16 +380,22 @@ Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-005
    nunca el literal requires_response dos-puntos true en el cuerpo):
    - un ARTEFACTO en Area_comun/artifacts/ANALISTA-<tarea>-<tema>-veredicto.md (voz/firma Analista, ancla
      canonica, reproduccion con exit codes, tabla vector-por-vector PASA/SLIPS falsable, residuales declarados,
-     RECOMENDACION DE CIERRE OK->CERRABLE o CAMBIO-REQUERIDO).
+     RECOMENDACION DE CIERRE OK->CERRABLE o CAMBIO-REQUERIDO). El veredicto debe terminar con el envelope
+     textual de 7 campos (no tool call): task_id, status, executive_summary, artifacts, gates, next_recommended,
+     risks.
    - un MSG en Area_comun/mailbox/open/ to: Arquitecto type: REVIEW con requires_response (rr=true) que SIEMPRE
      incluya one_line_summary + requested_action + question (el validador EXIGE requested_action en mensajes rr;
      un veredicto sin requested_action deja el canonico ROJO).
 6. COMMIT de tu veredicto (para que quede en canonico, no untracked): anti-colision primero (que Arquitecto/Codex
    no tengan claim activo sobre las rutas ni entrega a medias; si la hay, espera y reintenta el proximo disparo).
    Stagea RUTAS EXPLICITAS (tu artefacto + tu MSG), gatea por validate exit 0 + scan_encoding exit 0, commitea
-   como Analista y git push origin main. NO commitees archivos de personal/Arquitecto ni personal/Codex.
+   como Analista y git push origin main. Todo commit que toque rutas gobernadas debe emitir trailers finales:
+   Task-Id: <TASK-XXXX> y, si corrige un hallazgo, Fixes-Task: <TASK-XXXX>. Si el commit es solo coordinacion sin
+   tarea, usar Ops-Reason: <motivo>. NO commitees archivos de personal/Arquitecto ni personal/Codex.
 7. MEMORIA (DECISION-0026): tras el commit, actualiza personal/Analista/MEMORY.md con el contexto del veredicto.
-8. Si no hay instruccion REVIEW pendiente para ti, no-op con cierre concreto (heartbeat). No implementes, no
+8. Si emites CAMBIO-REQUERIDO/NO-GO, declara el fix-loop esperado: remediacion, gates afectados, re-juicio previo
+   al commit de cierre, maximo 2 iteraciones antes de escalar al operador.
+9. Si no hay instruccion REVIEW pendiente para ti, no-op con cierre concreto (heartbeat). No implementes, no
    muto estado, no enciendas nada vivo. La parada a 7 rondas sin novedad sigue valida.
 "@
     Write-Utf8NoBom -Path $promptPath -Content $prompt

@@ -92,3 +92,8 @@ Concrete questions. Use "none" if there are no blockers.
 ## notas_de_ejecucion
 Short execution log from the owner.
 ```
+
+Delivery handoffs and final task reports must end with the seven-field textual envelope:
+`task_id`, `status`, `executive_summary`, `artifacts`, `gates`, `next_recommended`, `risks`.
+The envelope is final text, never a tool call. After a checker NO-GO/change_required, remediate,
+re-run affected gates, re-judge the result, and repeat at most two iterations before human escalation.
