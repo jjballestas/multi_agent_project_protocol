@@ -45,16 +45,22 @@ gate esta bien disenado (prueba de fuego de F1-A gratis).
   La medicion confirmatoria (>=15 tareas/brazo, tareas reales Nova Budget, gobierno
   completo) sigue siendo F6.1 post-sello.
 
-## 2. Setup (30-60 min, maquina del Operador)
+## 2. Setup (30-60 min, maquina del Operador) -- HECHO
 
-1. Instalar Ollama (https://ollama.com/download, Windows).
-2. `ollama pull qwen2.5-coder:7b` (peon principal segun D3). Opcional segundo peon:
-   `ollama pull deepseek-coder:6.7b`.
+**ESTADO 2026-07-02: CUMPLIDO (confirmacion del Operador: Ollama instalado y
+modelos descargados).** Queda pendiente del setup solo el punto 3 (sandbox git
+local vacio), 5 minutos, puede hacerse al lanzar el spike. Los modelos exactos
+disponibles se anotan en la columna provenance de la hoja de registro (s.5) al
+delegar la primera tarea.
+
+1. ~~Instalar Ollama~~ HECHO.
+2. ~~Descargar modelos~~ HECHO (D3 sugeria qwen2.5-coder:7b principal; el que
+   este descargado se registra como peon=<modelo> en provenance).
 3. Sandbox: `D:/Agentes/Zeus/piloto-peones/` (ruta ya reservada por DECISION-0074/0078).
    `git init` local, SIN remoto, SIN conexion al hub. Estructura: `tareas/`,
-   `entregas/`, `registro/`.
-4. Verificacion: `ollama run qwen2.5-coder:7b "escribe un test pytest para una
-   funcion suma"` responde coherente.
+   `entregas/`, `registro/`. (PENDIENTE, 5 min.)
+4. Verificacion rapida al lanzar: `ollama run <modelo> "escribe un test pytest
+   para una funcion suma"` responde coherente.
 
 ## 3. Contrato de asignacion (plantilla; los 9 puntos de DECISION-0078 son ley)
 
