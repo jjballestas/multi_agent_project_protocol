@@ -5,7 +5,7 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0235 cron policy A/B; NO-GO canonico por validate secretless rojo).
+> Ultima actualizacion: 2026-07-02 (TASK-0237 hang-proof npm test; NO-GO por watchdog vendor no acotado).
 
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
@@ -23,6 +23,21 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0237 hang-proof npm test Zeus-Aegis (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
+  `1d7e569` (`review(TASK-0237): Analista blocks hang proof`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0237-hang-proof-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0237-NOGO`. Ancla protocolo
+  `cf84aa06f98dcf371e47c035b0c7ebe4e60a9ba2`; producto canonico `D:/Agentes/Zeus/Zeus-Aegis`
+  commit `b3d863a9889c67274590232959eeb07ac324a548`; `b3d863a` no existe en `Zeus-protocol` (cat-file exit
+  128) y si en `Zeus-Aegis` (exit 0). Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0237-aegis-c38fe58fa1f14ee6b89c1cfe45d3dd3a/zeus-aegis`.
+  `npm test` en clon limpio paso 3/3: exit 0 en 258.6s, 129.4s y 216.8s (83 files / 562 tests). Root watchdog
+  `ZEUS_AEGIS_ROOT_TEST_HARD_TIMEOUT_MS=1 npm test` exit 124 en 1.2s. Bloqueo falsable: vendor watchdog
+  `ZEUS_AEGIS_TEST_HARD_TIMEOUT_MS=1 npm --prefix vendor/hermes-2.3.0 test` no termino dentro de 120s; el log
+  muestra `zeus-aegis-f0-test: hard timeout after 1ms` pero Vitest siguio ejecutando tests. Bug real no enmascarado:
+  test inyectado con `expect(1).toBe(2)` via `vitest run` exit 1 en 7.0s. Gates protocolo live y secretless:
+  validate/neutrality/encoding EXIT 0, drift false (`up_to_seq=3041` live, `3032` secretless), `protocol.config.json`
+  sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
 - TASK-0235 cron policy A/B (2026-07-02): CAMBIO-REQUERIDO / NO-GO de cierre canonico. Veredicto canonico en
   `30e694c` (`review(TASK-0235): Analista blocks cron policy AB canon`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0235-cron-policy-AB-veredicto.md`, MSG
