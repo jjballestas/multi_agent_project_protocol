@@ -60,8 +60,8 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-02 20:20",
-  updated_by: "Operador (via Asesor) — alta item F6.0 por orden del operador",
+  updated_at: "2026-07-02 21:10",
+  updated_by: "Operador (via Asesor) — F1.1 al día con el ledger (ciclo review completo)",
   sprint1_date: "2026-07-30",
   phases: [
     { id:"F0", title:"Formalización (HUB)", window:"Sem 1 · jul 3–11", items:[
@@ -69,7 +69,7 @@ const PIPELINE = {
       { id:"F0.2", t:"DECISION hub: supersede fork (0077) + ajusta 0078 + re-alcanza 0230/0232/0233/0234 + arquitectura de repos", st:"hecho", ev:"DECISION-0083, commit 0569f7b (rama vision-nova); re-alcance 0230->F2.1/0231->F6.1/0232->F2.3/0233->F2.2/0234->F2.5" }
     ]},
     { id:"F1", title:"Núcleo doctrinal (HUB) — PRD-01", window:"Sem 1–2 · jul 3–18", items:[
-      { id:"F1.1", t:"Gate de intake determinista (checklist por tipo + estados + validador pre-ready)", st:"pendiente", ev:"TASK-0238 registrada (proposed, commit 93c10e8); promocion tras higiene Codex + R0/intake_start" },
+      { id:"F1.1", t:"Gate de intake determinista (checklist por tipo + estados + validador pre-ready)", st:"en_curso", ev:"TASK-0238 review_approved (ratificación aab9cfb): entrega 0efe196 (R0 en INTAKE_GATE.json, R1-R5 en 2 validadores + hard-gate submit_intent, 11 tests, clon limpio verde) → NO-GO Analista F-0238-01 → remediación → re-gate OK (992b5ef). Falta done-flip Codex" },
       { id:"F1.2", t:"Registro de excepciones auditado (evento firmado exception.recorded)", st:"pendiente", ev:"TASK-0239 registrada (proposed, commit 93c10e8)" },
       { id:"F1.3", t:"Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"pendiente", ev:"TASK-0240 registrada (proposed, commit 93c10e8); ACTIVACION gateada por F1-E/TASK-0242" },
       { id:"F1.4", t:"Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"pendiente", ev:"TASK-0241 registrada (proposed, commit 93c10e8)" },

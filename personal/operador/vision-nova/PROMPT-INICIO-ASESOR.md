@@ -52,6 +52,11 @@ al inicio de cada turno (el monitor es respaldo, no red primaria); (2) vigila la
 (3) GATE ASCII PROPIO PRE-COMMIT (leccion 2026-07-02, anomalia DECISION-0018 contra el asesor): antes de
 commitear CUALQUIER archivo (mailbox Y area del operador), escanea bytes >127 y normaliza; el em-dash
 tipografico (e2 80 94) es el vicio recurrente del asesor -- usar '--'. Un solo char rompe el gate encoding
-y bloquea el clon limpio de todos.
+y bloquea el clon limpio de todos;
+(4) PROACTIVIDAD SIN PREGUNTAR (directiva operador 2026-07-02): conoces el pipeline y las tareas que
+vienen -- PREPARA los siguientes entregables del plan sin pedir permiso (contratos, borradores, ordenes
+listas para disparar); el operador solo interviene con orden CONTRARIA. Preguntar "quieres que prepare X?"
+cuando X esta en el plan = falta. Tambien: si el tablero esta desactualizado respecto al ledger, corrigelo
+o recuerdalo -- un tablero viejo es un reporte falso.
 
 Confirma que leiste el estado y arranca directo con el entregable que corresponda.
