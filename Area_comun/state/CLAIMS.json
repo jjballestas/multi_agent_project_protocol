@@ -13511,6 +13511,23 @@
             "updated_at": "2026-07-01T12:20:02Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Analista-reviews-huerfanas-cierre",
+            "expires_at": "2026-07-02T04:38:55Z",
+            "notes": "Confirmacion adversarial de cierre formal de reviews huerfanas ya entregadas.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/artifacts/ANALISTA-reviews-huerfanas-cierre-formal-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260702-Analista-to-Arquitecto-REVIEW-reviews-huerfanas-cierre-formal.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T02:38:55Z",
+            "status": "released",
+            "task_id": "REVIEWS-HUERFANAS-0194-0199-0201-0203-0211-0215",
+            "updated_at": "2026-07-02T02:38:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Arquitecto-TASK-0229-promote",
             "expires_at": "2026-07-02T06:00:00Z",
             "notes": "Release tras promover TASK-0229 a ready.",

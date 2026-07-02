@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "98f2f06b33ac2e5ed46ab7f753caaf1f62a5760113d33c23b8bf1c1b290f4d4f",
+  "canonical_hash": "b83388e8c18ee174a687dff4fea835a4db18738023be55760445d1139c29e6ea",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -856,6 +856,7 @@
       "REQ-FA303A81": 4,
       "REQ-FB27AF72": 4,
       "REQ-ZEUS-001": 4,
+      "REVIEWS-HUERFANAS-0194-0199-0201-0203-0211-0215": 2,
       "TASK-0117": 3,
       "TASK-0118": 1,
       "TASK-0121": 5,
@@ -982,7 +983,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2431,
+    "events_applied": 2433,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -1058,6 +1059,8 @@
       "analista:TASK-0226-remediation-review:claim-release": 2729,
       "analista:ops-medicion-h1-h3:claim-acquire": 2730,
       "analista:ops-medicion-h1-h3:claim-release": 2731,
+      "analista:reviews-huerfanas-cierre:claim-acquire": 3103,
+      "analista:reviews-huerfanas-cierre:claim-release": 3104,
       "analista:task-0194-review:claim-acquire": 2215,
       "analista:task-0194-review:claim-release": 2216,
       "analista:task-0201-regate1:claim-acquire": 2294,
@@ -3417,5 +3420,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3102
+  "up_to_seq": 3104
 }
