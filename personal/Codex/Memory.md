@@ -2217,6 +2217,15 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `Area_comun/handoffs/HANDOFF-TASK-0237-codex-to-arquitecto-1.md`, and opened
   `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0237-in-review.md`. Codex could not archive the
   consumed Arquitecto GO because `mailbox_archive` requires orchestrator capability.
+- TASK-0229 second remediation product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`: `c9eb971 Remediate
+  Zeus-Aegis branding residues`. It removed the requested exact visible residues from
+  `vendor/hermes-2.3.0/src/**` and regenerated `vendor/hermes-2.3.0/electron/server-bundle.cjs`; residue probe
+  returned `COUNT=0`, product `npm test` passed 83/83 files and 562/562 tests, and clean clone
+  `C:\Users\johnb\AppData\Local\Temp\codex-0229-rem2-zeus-aegis-clean-c9eb971` also passed the same test suite.
+- TASK-0229 protocol delivery commit exists: `coord(TASK-0229): deliver branding remediation`. It added
+  `Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-3.md`, opened
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md`, moved
+  TASK-0229 back to `in_review`, and released Codex claims via runtime seq 3122-3124.
 
 ## Useful Fresh-Session Commands
 

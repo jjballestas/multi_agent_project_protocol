@@ -1,0 +1,137 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "b93aefb65ec086ac74380929ac60a84e7c7a49f83aeef00c308dd875303e5cbf",
+        "replay_hash": "b93aefb65ec086ac74380929ac60a84e7c7a49f83aeef00c308dd875303e5cbf",
+        "up_to_seq": 3121
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "L/wdLg24ofQiGam94ftAWVULcqdO1SrGxqnyw/p79A474sL3SXUhILE2451diXEiitOYaUPXeKdXLEif5v8KBg=="
+            },
+            "aggregate_id": "TASK-0229",
+            "aggregate_version": 26,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "c075b2ff9616ab67624c835614465b275c8544bc23da7e3beedb47ab6673d99f"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0229:remediation2-delivery-claim-acquire",
+            "payload": {
+                "commit": "258c288a0766afe699f426f96ec90d9572248d56",
+                "intent_type": "claim",
+                "task_id": "TASK-0229",
+                "timestamp": "2026-07-02T04:51:29Z",
+                "transaction": {
+                    "count": 1,
+                    "idempotency_key": "codex:task0229:remediation2-delivery-claim-tx",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                                "expires_at": "2026-07-03T04:51:29Z",
+                                "notes": "Delivery artifacts for TASK-0229 second branding remediation.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                                    "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-3.md",
+                                    "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+                                    "personal/Codex/Memory.md",
+                                    "personal/Codex/task0229_remediation2_delivery_claim.json",
+                                    "personal/Codex/task0229_remediation2_delivery_claim_result.json",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-02T04:51:29Z",
+                                "status": "active",
+                                "task_id": "TASK-0229",
+                                "updated_at": "2026-07-02T04:51:29Z"
+                            },
+                            "claim_id": "CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0229"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "42c5647820888b9dc2825b36e3855233051d5c19660cf6767e5dbb57fb4f238b",
+            "seq": 3121,
+            "ts": "2026-07-02T04:51:29Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                "expires_at": "2026-07-03T04:51:29Z",
+                "notes": "Delivery artifacts for TASK-0229 second branding remediation.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                    "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-3.md",
+                    "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-2-in-review.md",
+                    "personal/Codex/Memory.md",
+                    "personal/Codex/task0229_remediation2_delivery_claim.json",
+                    "personal/Codex/task0229_remediation2_delivery_claim_result.json",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-02T04:51:29Z",
+                "status": "active",
+                "task_id": "TASK-0229",
+                "updated_at": "2026-07-02T04:51:29Z"
+            },
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+            "idempotency_key": "codex:task0229:remediation2-delivery-claim-acquire",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0229"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "ad8b5a7a55b4060444ea1247ed9a1f79a4e2391dd019a9a010771d372c275123",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3121
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3121
+    },
+    "task_files_updated": [],
+    "transaction": {
+        "event_keys": [
+            "codex:task0229:remediation2-delivery-claim-acquire"
+        ],
+        "idempotency_key": "codex:task0229:remediation2-delivery-claim-tx",
+        "intent_count": 1
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "idempotency_key":  "codex:task0229:remediation2-deliver-in-review-tx",
+    "intents":  [
+                    {
+                        "task_status":  {
+                                            "from":  "in_progress",
+                                            "task_id":  "TASK-0229",
+                                            "to":  "in_review"
+                                        },
+                        "idempotency_key":  "codex:task0229:remediation2-in-progress-to-in-review"
+                    },
+                    {
+                        "idempotency_key":  "codex:task0229:remediation2-claim-release",
+                        "claim":  {
+                                      "op":  "release",
+                                      "claim_id":  "CLAIM-20260702-Codex-TASK-0229-remediation-branding-2",
+                                      "owner":  "Codex",
+                                      "task_id":  "TASK-0229"
+                                  }
+                    },
+                    {
+                        "idempotency_key":  "codex:task0229:remediation2-delivery-claim-release",
+                        "claim":  {
+                                      "op":  "release",
+                                      "claim_id":  "CLAIM-20260702-Codex-TASK-0229-delivery-remediation-2",
+                                      "owner":  "Codex",
+                                      "task_id":  "TASK-0229"
+                                  }
+                    }
+                ]
+}
