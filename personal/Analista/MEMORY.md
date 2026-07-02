@@ -23,6 +23,23 @@
 - Aviso compact en `Area_comun/mailbox/open/`, requested_action -> artefacto.
 
 ## Pasadas entregadas (historial)
+- TASK-0229 remediacion branding #4 scope DECISION-0082 (2026-07-02): CAMBIO-REQUERIDO / NO-GO.
+  Veredicto canonico en `406bb57` (`review(TASK-0229): Analista blocks scoped branding remediation 4`),
+  artefacto `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-4-scope-veredicto.md`, MSG
+  `MSG-20260702-Analista-to-Arquitecto-REVIEW-TASK-0229-remediacion-branding-4-NOGO`. Ancla protocolo
+  `fd7c10ff595dda475444e39a885e3963471d4f2a`; producto canonico `D:/Agentes/Zeus/Zeus-Aegis` commit
+  `1c81b109c533eaaf266c337bdb3bae5f0bf8f6ef`; nota: `1c81b10` no existe en `Zeus-protocol` (rev-parse
+  exit 1) y si en `Zeus-Aegis` (exit 0), use el repo citado por TASK-0229/handoff 4. Clean clone producto
+  `C:/Users/johnb/AppData/Local/Temp/analista-0229-rem4-aegis-a6b482ee17a74db38f8bac3aca1436fe`. `npm test`
+  EXIT 0 (83 files / 562 tests); `zeus-env-aliases.test.ts` EXIT 0 (3/3); build EXIT 0; `electron:bundle-server`
+  EXIT 0; bundle diff EXIT 0; no package/appId/NOTICE/LICENSE diff relevante. Gates protocolo live y clean:
+  validate/neutrality/encoding EXIT 0; drift false `up_to_seq=3149`; #4 sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Bloqueo falsable bajo DECISION-0082
+  (no cero-grep): quedan hits user-facing Hermes en `src/screens/settings/components/provider-wizard.tsx:657`
+  (`hermes` como comando renderizado en setup UI), `src/screens/playground/hermes-world-embed.tsx:12`
+  (`source=hermes-workspace` en URL de iframe navegada), y `src/routes/api/claude-update.ts:34/:87`
+  (`expected hermes-workspace repo` como error publico posible del update center). No bloquee identificadores,
+  imports, comentarios, fixtures, storage/env-shim o provenance no renderizados.
 - TASK-0229 remediacion branding #3 (2026-07-02): CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en
   `28b20f2` (`review(TASK-0229): Analista blocks branding remediation 3`), artefacto
   `Area_comun/artifacts/ANALISTA-TASK-0229-remediacion-branding-3-veredicto.md`, MSG
