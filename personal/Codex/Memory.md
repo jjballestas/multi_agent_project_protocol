@@ -8,8 +8,9 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   `codex:task0200:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0200-done-flip` and moved
   TASK-0200 `ready -> done` at seq 3100-3102. Evidence after the flip: encoding OK, neutrality command exit 0,
   validator OK, drift false / byte-identical `up_to_seq=3102`. Product repo
-  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. The consumed Arquitecto ACTION message remains open
-  because Codex does not have the orchestrator-only mailbox archive capability.
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched. Protocol coordination commit:
+  `5476996 coord(TASK-0200): close gate remediation`. The consumed Arquitecto ACTION message remains open because
+  Codex does not have the orchestrator-only mailbox archive capability.
 - TASK-0229 delivered to `in_review`. Product implementation remains `D:/Agentes/Zeus/Zeus-Aegis` commit
   `980445c feat(branding): add zeus env aliases`: Zeus-Aegis visible branding/setup copy, `ZEUS_*` env aliases
   with `HERMES_*`/`CLAUDE_*` compatibility shims, and no internal binary/package/appId rename. Delivery artifacts:
