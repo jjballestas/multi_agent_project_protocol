@@ -14336,6 +14336,44 @@
             "updated_at": "2026-07-02T18:45:21Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0239-delivery-artifacts",
+            "expires_at": "2026-07-03T19:40:00Z",
+            "notes": "TASK-0239 delivery artifacts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0239-delivery-artifacts",
+                "Area_comun/handoffs/HANDOFF-TASK-0239-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0239-in-review.md"
+            ],
+            "started_at": "2026-07-02T19:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0239",
+            "updated_at": "2026-07-02T19:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0239-exception-recorded",
+            "expires_at": "2026-07-03T19:33:42Z",
+            "notes": "TASK-0239 exception.recorded implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0239-exception-recorded",
+                "Area_comun/state/TASK_INDEX.json#TASK-0239",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0239",
+                "Area_comun/tasks/TASK-0239-visionnova-f1b-exception-recorded.md",
+                "runtime/submit_intent.py",
+                "runtime/protocol_replay.py",
+                "runtime/eventlog.py",
+                "scripts/validate_collaboration_state.py",
+                "scripts/test_exception_recorded.py",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/TASK_PROTOCOL.template.md"
+            ],
+            "started_at": "2026-07-02T19:33:42Z",
+            "status": "released",
+            "task_id": "TASK-0239",
+            "updated_at": "2026-07-02T19:33:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-higiene-personal-fyi",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Responder FYI de higiene del area personal Codex.",

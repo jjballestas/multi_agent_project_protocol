@@ -972,6 +972,20 @@ def current_protocol_snapshot(root: Path) -> dict[str, Any]:
     return replay_protocol_state(all_events(root), root=root)
 
 
+def exception_recorded_events(root: Path, task_id: str | None = None) -> list[dict[str, Any]]:
+    """Return exception.recorded events, optionally filtered by task_id."""
+    selected: list[dict[str, Any]] = []
+    task_filter = str(task_id or "").strip()
+    for event in all_events(root):
+        if event.get("type") != "exception.recorded":
+            continue
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        if task_filter and str(payload.get("task_id") or "") != task_filter:
+            continue
+        selected.append(event)
+    return selected
+
+
 def canonical_json_text(payload: dict[str, Any]) -> str:
     return json.dumps(payload, indent=4, ensure_ascii=True, sort_keys=True) + "\n"
 

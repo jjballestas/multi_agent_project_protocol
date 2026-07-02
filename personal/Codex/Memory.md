@@ -4,6 +4,21 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0239 delivered to `in_review` in protocol commit `HEAD feat(runtime): record governed exceptions`.
+  It adds the governed `exception` intent to `runtime/submit_intent.py`, emitting signed/chained
+  `exception.recorded` events without mutating hot protocol state; validates closed enums, unique
+  `exception_id`, existing task references, ASCII 1-3 line summaries, and `publishable=true`; adds
+  `runtime.protocol_replay.exception_recorded_events(root, task_id)`; documents U1-U3/U2 public listing in
+  `Area_comun/protocol/TASK_PROTOCOL.md`; and adds `scripts/test_exception_recorded.py`. Live round-trip
+  events were recorded for TASK-0239 at seq 3304 (`EXC-20260702-TASK-0239-assist`) and seq 3305
+  (`EXC-20260702-TASK-0239-arbitration`). Delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0239-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0239-in-review.md`. Runtime delivery moved
+  TASK-0239 `in_progress -> in_review` and released Codex claims at seq 3307-3309. Evidence before commit:
+  `python scripts/test_exception_recorded.py` PASS 5 tests, `python scripts/test_intake_gate.py` PASS 12 tests,
+  py_compile PASS for touched Python, encoding OK, neutrality exit 0, Python and PowerShell validators OK,
+  drift false / byte-identical `up_to_seq=3309`, and `protocol.config.json` unchanged. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0239 is protocol runtime work.
 - TASK-0238 done-flip completed in the protocol repo. `runtime/submit_intent.py` transaction
   `codex:task0238:done-flip-tx` acquired and released `CLAIM-20260702-Codex-TASK-0238-done-flip` and moved
   TASK-0238 `review_approved -> done` at seq 3279-3281. Evidence after the flip: encoding OK, neutrality command

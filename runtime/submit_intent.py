@@ -81,9 +81,32 @@ VALID_TASK_STATUSES = {
     "blocked",
     "cancelled",
 }
-INTENT_TYPES = {"task_status", "task_upsert", "claim", "decision", "project_narrative", "protocol_prune", "mailbox_archive"}
+INTENT_TYPES = {
+    "task_status",
+    "task_upsert",
+    "claim",
+    "decision",
+    "project_narrative",
+    "protocol_prune",
+    "mailbox_archive",
+    "exception",
+}
 PROJECT_NARRATIVE_FIELDS = {"next_actions", "risks", "open_questions"}
 MAILBOX_MESSAGE_ID_RE = re.compile(r"^MSG-[A-Za-z0-9._-]+$")
+EXCEPTION_ID_RE = re.compile(r"^EXC-[A-Za-z0-9._-]+$")
+EXCEPTION_KINDS = {
+    "manual_intervention",
+    "assist",
+    "arbitration",
+    "suspension",
+    "scope_change",
+    "intake_exempt",
+    "risk_reclass",
+    "budget_overrun",
+    "other",
+}
+EXCEPTION_CHANNELS = {"chat", "call", "mailbox", "in_person", "other"}
+EXCEPTION_IMPACTS = {"none", "time", "scope", "quality"}
 ROW_SCOPED_LEDGER_PATHS = {
     "Area_comun/state/CLAIMS.json",
     "Area_comun/state/TASK_INDEX.json",
@@ -352,6 +375,8 @@ def parse_intent(intent: dict[str, Any]) -> tuple[str, dict[str, Any]]:
         if explicit_type not in INTENT_TYPES:
             raise IntentValidationError(f"unsupported intent type: {explicit_type}")
         payload = {key: value for key, value in intent.items() if key not in {"type", "idempotency_key"}}
+        if "idempotency_key" in intent:
+            payload["idempotency_key"] = intent["idempotency_key"]
         return explicit_type, payload
     keys = [key for key in INTENT_TYPES if key in intent]
     if len(keys) != 1:
@@ -443,6 +468,70 @@ def mailbox_archive_accountability(payload: dict[str, Any]) -> dict[str, str]:
     return {"author": author, "relayed_by": relayed_by, "endorsement": endorsement}
 
 
+def require_ascii_text(payload: dict[str, Any], key: str) -> str:
+    value = require_text(payload, key)
+    try:
+        value.encode("ascii")
+    except UnicodeEncodeError as exc:
+        raise IntentValidationError(f"{key} must be ASCII") from exc
+    return value
+
+
+def normalize_nullable_text(payload: dict[str, Any], key: str) -> str | None:
+    value = payload.get(key)
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
+
+
+def normalize_exception_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    allowed = {
+        "exception_id",
+        "kind",
+        "task_id",
+        "actor",
+        "beneficiary",
+        "summary",
+        "channel",
+        "impact",
+        "publishable",
+        "idempotency_key",
+    }
+    unsupported = sorted(key for key in payload if key not in allowed)
+    if unsupported:
+        raise IntentValidationError(f"exception contains unsupported fields: {', '.join(unsupported)}")
+    exception_id = require_text(payload, "exception_id")
+    if not EXCEPTION_ID_RE.fullmatch(exception_id):
+        raise IntentValidationError("exception.exception_id must match EXC-[A-Za-z0-9._-]+")
+    kind = require_text(payload, "kind")
+    if kind not in EXCEPTION_KINDS:
+        raise IntentValidationError(f"exception.kind out of range: {kind}")
+    channel = require_text(payload, "channel")
+    if channel not in EXCEPTION_CHANNELS:
+        raise IntentValidationError(f"exception.channel out of range: {channel}")
+    impact = require_text(payload, "impact")
+    if impact not in EXCEPTION_IMPACTS:
+        raise IntentValidationError(f"exception.impact out of range: {impact}")
+    summary = require_ascii_text(payload, "summary")
+    if len([line for line in summary.splitlines() if line.strip()]) > 3:
+        raise IntentValidationError("exception.summary must be 1-3 lines")
+    publishable = payload.get("publishable")
+    if publishable is not True:
+        raise IntentValidationError("exception.publishable must be true")
+    return {
+        "exception_id": exception_id,
+        "exception_kind": kind,
+        "task_id": normalize_nullable_text(payload, "task_id"),
+        "actor": require_text(payload, "actor"),
+        "beneficiary": normalize_nullable_text(payload, "beneficiary"),
+        "summary": summary,
+        "channel": channel,
+        "impact": impact,
+        "publishable": True,
+    }
+
+
 def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
     kind, payload = parse_intent(intent)
     common = {"kind": kind}
@@ -512,6 +601,9 @@ def normalize_intent(intent: dict[str, Any]) -> dict[str, Any]:
             **mailbox_archive_accountability(payload),
         }
 
+    if kind == "exception":
+        return {**common, **normalize_exception_payload(payload)}
+
     decision_id = str(payload.get("decision_id") or payload.get("id") or "").strip()
     if not decision_id:
         raise IntentValidationError("decision_id is required")
@@ -530,7 +622,7 @@ def aggregate_id_for(normalized: dict[str, Any]) -> str:
         return "PROJECT_STATE"
     if normalized.get("kind") == "protocol_prune":
         return "protocol-prune"
-    for key in ("task_id", "decision_id", "claim_id", "message_id"):
+    for key in ("task_id", "decision_id", "claim_id", "message_id", "exception_id"):
         value = str(normalized.get(key) or "").strip()
         if value:
             return value
@@ -549,6 +641,8 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
         payload["task_id"] = normalized["task_id"]
     if normalized.get("message_id"):
         payload["message_id"] = normalized["message_id"]
+    if normalized.get("exception_id"):
+        payload["exception_id"] = normalized["exception_id"]
 
     kind = normalized["kind"]
     if kind == "task_status":
@@ -588,7 +682,32 @@ def event_payload_for(normalized: dict[str, Any], *, timestamp: str, commit: str
             "relayed_by": normalized["relayed_by"],
             "endorsement": normalized["endorsement"],
         }
+    elif kind == "exception":
+        payload = {
+            key: deepcopy(normalized[key])
+            for key in (
+                "exception_id",
+                "task_id",
+                "actor",
+                "beneficiary",
+                "summary",
+                "channel",
+                "impact",
+                "publishable",
+            )
+        }
+        payload["kind"] = normalized["exception_kind"]
+        payload["intent_type"] = "exception"
+        payload["timestamp"] = timestamp
+        if commit:
+            payload["commit"] = commit
     return payload
+
+
+def event_type_for(normalized: dict[str, Any]) -> str:
+    if normalized["kind"] == "exception":
+        return "exception.recorded"
+    return "intent.applied"
 
 
 def transaction_idempotency_key(actor_id: str, normalized_intents: list[dict[str, Any]], explicit_key: str | None = None) -> str:
@@ -611,7 +730,7 @@ def existing_events_for_keys(writer: EventWriter, keys: list[str]) -> dict[str, 
         if not seq:
             continue
         for event in events:
-            if int(event.get("seq") or 0) == int(seq) and event.get("type") == "intent.applied":
+            if int(event.get("seq") or 0) == int(seq) and event.get("type") in {"intent.applied", "exception.recorded"}:
                 found = dict(event)
                 found["deduped"] = True
                 result[key] = found
@@ -747,7 +866,26 @@ def required_scopes(normalized: dict[str, Any], state: dict[str, Any]) -> list[s
         return scopes
     if kind == "mailbox_archive":
         return list(mailbox_archive_paths(str(normalized.get("message_id") or "")))
+    if kind == "exception":
+        return []
     return []
+
+
+def exception_id_exists(root: Path, exception_id: str) -> bool:
+    events_path = root / LOG_PATH
+    if not events_path.exists():
+        return False
+    for line in events_path.read_text(encoding="utf-8-sig").splitlines():
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        if event.get("type") == "exception.recorded" and str(payload.get("exception_id") or "") == exception_id:
+            return True
+    return False
 
 
 def actor_claims_for_intent(state: dict[str, Any], actor_id: str, normalized: dict[str, Any]) -> list[dict[str, Any]]:
@@ -855,6 +993,12 @@ def validate_intent(root: Path, actor_id: str, normalized: dict[str, Any], state
                 raise IntentValidationError("mailbox_archive path escapes Area_comun/mailbox")
         if not open_exists and not archived_exists:
             raise IntentValidationError(f"mailbox message not found in open or archived: {normalized['message_id']}")
+    elif kind == "exception":
+        if exception_id_exists(root, normalized["exception_id"]):
+            raise IntentValidationError(f"exception_id already exists: {normalized['exception_id']}")
+        task_id = normalized.get("task_id")
+        if task_id and task_id not in tasks_by_id(state):
+            raise IntentValidationError(f"task not found: {task_id}")
     elif kind == "claim":
         if not actor_has_any(registry, actor_id, {"implementer", "orchestrator", "reviewer"}):
             raise IntentValidationError(f"actor {actor_id} lacks required claim capability")
@@ -1149,7 +1293,7 @@ def submit_intent(
 
             payload = event_payload_for(normalized, timestamp=timestamp, commit=commit)
             event = writer.append_event(
-                event_type="intent.applied",
+                event_type=event_type_for(normalized),
                 aggregate_id=aggregate_id_for(normalized),
                 actor_id=actor_id,
                 idempotency_key=key,
@@ -1287,10 +1431,10 @@ def submit_intents(
                     "count": len(normalized_intents),
                 }
                 events.append(
-                    writer.append_event(
-                        event_type="intent.applied",
-                        aggregate_id=aggregate_id_for(normalized),
-                        actor_id=actor_id,
+                        writer.append_event(
+                            event_type=event_type_for(normalized),
+                            aggregate_id=aggregate_id_for(normalized),
+                            actor_id=actor_id,
                         idempotency_key=keys[index - 1],
                         payload=payload,
                         ts=timestamp,

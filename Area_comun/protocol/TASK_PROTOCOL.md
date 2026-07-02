@@ -219,6 +219,43 @@ already route every ledger transition through `submit_intent` before the flip, b
 any remaining manual edit hard-fails; the switch is a synchronized re-genesis + flip with a rehearsed
 rollback (disable the two flags to return to shadow).
 
+### Exception Events
+
+`runtime/submit_intent.py` also accepts an `exception` intent. A valid submission appends an
+`exception.recorded` event to the signed event log and chain without mutating task, claim or project hot
+state. The payload is structured and publishable:
+
+```json
+{
+  "type": "exception",
+  "exception_id": "EXC-XXXX",
+  "kind": "manual_intervention",
+  "task_id": "TASK-XXXX",
+  "actor": "Codex",
+  "beneficiary": null,
+  "summary": "ASCII summary, no PII.",
+  "channel": "mailbox",
+  "impact": "time",
+  "publishable": true
+}
+```
+
+Allowed `kind` values are `manual_intervention`, `assist`, `arbitration`, `suspension`,
+`scope_change`, `intake_exempt`, `risk_reclass`, `budget_overrun` and `other`. Allowed `channel`
+values are `chat`, `call`, `mailbox`, `in_person` and `other`. Allowed `impact` values are `none`,
+`time`, `scope` and `quality`. `exception_id` is unique, `summary` is ASCII-only and one to three
+lines, and a non-null `task_id` must exist.
+
+Use rules:
+
+- U1: Any employee or agent assistance, unblock, defect arbitration, sprint suspension or risk
+  reclassification is recorded as `exception.recorded`. What is not recorded does not exist for the
+  study.
+- U2: The public study report lists the `exception.recorded` events for the period by id, kind,
+  task_id, actor, beneficiary, channel, impact and summary. The operator may arbitrate, but the trace
+  remains publishable.
+- U3: An intake exemption requires a previous `exception.recorded` event with `kind=intake_exempt`.
+
 ### Claim Before Shared Draft
 
 An agent must create or update an active claim **before** creating, editing or leaving any draft in
