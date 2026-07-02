@@ -2,7 +2,7 @@
 task_id: TASK-0239
 title: "[VISION-NOVA][F1.2] Evento firmado exception.recorded (intent nuevo en submit_intent + doctrina U1-U3)"
 type: build
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high
@@ -14,6 +14,25 @@ relates_to: [GOAL-VISION-NOVA-001]
 linked_decisions: [DECISION-0083]
 linked_reqs: [GOAL-VISION-NOVA-001]
 file: Area_comun/tasks/TASK-0239-visionnova-f1b-exception-recorded.md
+intake:
+  type: infra
+  goal: Anadir el intent firmado exception.recorded a submit_intent (schema A.1) + doctrina U1-U3.
+  acceptance:
+    - submit_intent rechaza kind fuera de enum, summary no-ASCII, exception_id duplicado y task_id inexistente.
+    - Round-trip de 2 eventos reales (assist + arbitration) con replay drift cero y listables por task_id.
+    - Regla U2 (listado publicable) documentada en TASK_PROTOCOL con scan_encoding verde.
+  verification_cmd:
+    - python scripts/test_exception_recorded.py
+    - python scripts/validate_collaboration_state.py
+    - python scripts/scan_encoding.py
+  scope_routes:
+    - runtime/submit_intent.py
+    - Area_comun/protocol/TASK_PROTOCOL.md
+  out_of_scope:
+    - budget_overrun auto-pause queda en Carril B, fuera de F1.
+    - protocol.config.json permanece pineado e intocable.
+  risk: medium
+  estimate: M
 ---
 
 # TASK-0239 - [VISION-NOVA][F1.2] Evento firmado exception.recorded
