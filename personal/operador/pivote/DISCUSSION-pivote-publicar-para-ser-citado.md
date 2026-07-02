@@ -1,3 +1,9 @@
+> **[SUPERSEDIDA 2026-07-02 por v2]** Esta version (v1) recibio ronda 1 adversarial: CAMBIO-REQUERIDO del
+> Analista (`Area_comun/artifacts/ANALISTA-pivote-publicar-citado-veredicto.md`) + 5 revisiones externas
+> (ClaudeAI/Copilot/Gemini/OpenAI/ZAI), todas CAMBIO-REQUERIDO. Version vigente:
+> `DISCUSSION-pivote-v2-publicar-para-ser-citado.md` (misma carpeta), que ademas incorpora la nueva vision
+> del Operador (empresa + suite Nova + TFM no formal) y el pre-registro de medicion Q1-Q4. Historico.
+
 # DISCUSSION -- Pivote estrategico "Publicar para ser citado" (hipotesis para validacion adversarial)
 
 Autor: Asesor del Operador. Fecha: 2026-07-02. Para: revision ADVERSARIAL (Analista, via Arquitecto).
