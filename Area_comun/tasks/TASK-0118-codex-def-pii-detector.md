@@ -2,7 +2,7 @@
 id: TASK-0118
 title: DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)
 type: security
-status: proposed
+status: cancelled
 owner: Codex
 phase: P2
 priority: normal

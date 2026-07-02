@@ -2,7 +2,7 @@
 task_id: TASK-0220
 title: "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)"
 type: review
-status: ready
+status: cancelled
 owner: Analista
 phase: P2
 priority: high

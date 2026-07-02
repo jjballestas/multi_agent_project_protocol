@@ -2,20 +2,12 @@
     "schema_version": "1.0",
     "tasks": [
         {
-            "id": "TASK-0118",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "proposed",
-            "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)"
-        },
-        {
             "id": "TASK-0178",
             "owner": "Arquitecto",
             "phase": "P2",
             "priority": "normal",
             "status": "proposed",
-            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)"
+            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
             "id": "TASK-0194",
@@ -72,30 +64,6 @@
             "priority": "high",
             "status": "ready",
             "title": "Revision ADVERSARIAL de la ceremonia de instanciacion atestada (TASK-0213): keygen/firma/secretos/guardrail (DECISION-0069)"
-        },
-        {
-            "id": "TASK-0219",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche"
-        },
-        {
-            "id": "TASK-0220",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)"
-        },
-        {
-            "id": "TASK-0221",
-            "owner": "Analista",
-            "phase": "P2",
-            "priority": "high",
-            "status": "ready",
-            "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
         },
         {
             "id": "TASK-0229",

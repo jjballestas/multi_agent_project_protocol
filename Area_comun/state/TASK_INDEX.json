@@ -1888,7 +1888,7 @@
             "phase": "P2",
             "priority": "normal",
             "spec_id": "none",
-            "status": "proposed",
+            "status": "cancelled",
             "title": "DEF-PII - detector de PII real / exporter del plano publicable (condicion antes de captura viva #2/#3) (DECISION-0040)",
             "type": "security"
         },
@@ -2784,8 +2784,12 @@
             "owner": "Arquitecto",
             "phase": "P2",
             "priority": "normal",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "REQ-ZEUS-001"
+            ],
             "status": "proposed",
-            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto)",
+            "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001",
             "type": "design"
         },
         {
@@ -3393,7 +3397,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "cancelled",
             "title": "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche",
             "type": "review"
         },
@@ -3408,7 +3412,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "cancelled",
             "title": "Segunda ronda adversarial Engram (v3 honesta): atacar la HONESTIDAD y COMPLETITUD de las etiquetas de la matriz de estado (no re-litigar lo aceptado ABIERTO/DISCIPLINARIO)",
             "type": "review"
         },
@@ -3423,7 +3427,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "cancelled",
             "title": "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO",
             "type": "review"
         },

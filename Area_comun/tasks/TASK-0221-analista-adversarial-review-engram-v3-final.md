@@ -2,7 +2,7 @@
 task_id: TASK-0221
 title: "Tercera ronda adversarial Engram (v3 canonica): confirmar las 3 correcciones de la ronda 2 (canonicalidad + relabel B honesto) -> GO-PROMOVER-OFF o NO-GO"
 type: review
-status: ready
+status: cancelled
 owner: Analista
 phase: P2
 priority: high

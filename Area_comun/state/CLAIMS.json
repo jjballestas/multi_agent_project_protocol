@@ -13577,6 +13577,47 @@
             "updated_at": "2026-07-02T01:28:00Z"
         },
         {
+            "claim_id": "CLAIM-20260702-Arquitecto-cancel-huerfanas",
+            "expires_at": "2026-07-02T08:00:00Z",
+            "notes": "Release tras cancelar 0219/0220/0221/0118.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-cancel-huerfanas",
+                "Area_comun/state/TASK_INDEX.json#TASK-0219",
+                "Area_comun/state/TASK_INDEX.json#TASK-0220",
+                "Area_comun/state/TASK_INDEX.json#TASK-0221",
+                "Area_comun/state/TASK_INDEX.json#TASK-0118",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0219",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0220",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0221",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0118",
+                "Area_comun/tasks/TASK-0219-analista-adversarial-review-engram-integration.md",
+                "Area_comun/tasks/TASK-0220-analista-adversarial-review-engram-v3-honesty.md",
+                "Area_comun/tasks/TASK-0221-analista-adversarial-review-engram-v3-final.md",
+                "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md"
+            ],
+            "started_at": "2026-07-02T02:04:00Z",
+            "status": "released",
+            "task_id": "TASK-0219",
+            "updated_at": "2026-07-02T02:04:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Arquitecto-requeue-0178",
+            "expires_at": "2026-07-02T08:00:00Z",
+            "notes": "Release tras re-encolar TASK-0178.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-requeue-0178",
+                "Area_comun/state/TASK_INDEX.json#TASK-0178",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0178",
+                "Area_comun/tasks/TASK-0178-arquitecto-consola-arquitecto-PENDIENTE.md"
+            ],
+            "started_at": "2026-07-02T02:06:00Z",
+            "status": "released",
+            "task_id": "TASK-0178",
+            "updated_at": "2026-07-02T02:06:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229",
             "expires_at": "2026-07-03T00:00:00Z",
             "notes": "Implement TASK-0229 WS3 branding, ZEUS_* env aliases with compatibility shim, and Zeus preparation screen in Zeus-Aegis.",

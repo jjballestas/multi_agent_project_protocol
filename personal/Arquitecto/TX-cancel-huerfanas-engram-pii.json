@@ -1,0 +1,67 @@
+{
+  "idempotency_key": "arq:cancel-huerfanas-0219-0220-0221-0118-tx",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Arquitecto-cancel-huerfanas",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0219",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-cancel-huerfanas",
+          "Area_comun/state/TASK_INDEX.json#TASK-0219",
+          "Area_comun/state/TASK_INDEX.json#TASK-0220",
+          "Area_comun/state/TASK_INDEX.json#TASK-0221",
+          "Area_comun/state/TASK_INDEX.json#TASK-0118",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0219",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0220",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0221",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0118",
+          "Area_comun/tasks/TASK-0219-analista-adversarial-review-engram-integration.md",
+          "Area_comun/tasks/TASK-0220-analista-adversarial-review-engram-v3-honesty.md",
+          "Area_comun/tasks/TASK-0221-analista-adversarial-review-engram-v3-final.md",
+          "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md"
+        ],
+        "started_at": "2026-07-02T02:04:00Z",
+        "updated_at": "2026-07-02T02:04:00Z",
+        "expires_at": "2026-07-02T08:00:00Z",
+        "notes": "Cancela huerfanas: 0219/0220/0221 (Engram, ruta cerrada por DECISION-0081) + 0118 (DEF-PII, dataset TFM sellado, ventana de captura viva cerrada)."
+      }
+    },
+    { "type": "task_status", "task_id": "TASK-0219", "from": "ready", "to": "cancelled", "idempotency_key": "arq:task0219:cancel", "reason": "Engram = ruta CERRADA por DECISION-0081 (supersede 0071). El veredicto adversarial entregado (ANALISTA-TASK-0219-veredicto.md) queda como historia; la tarea de gate ya no aplica." },
+    { "type": "task_status", "task_id": "TASK-0220", "from": "ready", "to": "cancelled", "idempotency_key": "arq:task0220:cancel", "reason": "Engram = ruta CERRADA por DECISION-0081. Veredicto ANALISTA-TASK-0220 conservado como historia; gate no aplica." },
+    { "type": "task_status", "task_id": "TASK-0221", "from": "ready", "to": "cancelled", "idempotency_key": "arq:task0221:cancel", "reason": "Engram = ruta CERRADA por DECISION-0081. Veredicto ANALISTA-TASK-0221 conservado como historia; gate no aplica." },
+    { "type": "task_status", "task_id": "TASK-0118", "from": "proposed", "to": "cancelled", "idempotency_key": "arq:task0118:cancel", "reason": "DEF-PII era condicion previa a captura viva #2/#3 / publicacion del dataset. Dataset TFM SELLADO en N=500 (tag TFM-dataset-N500); la ventana de captura viva quedo cerrada. PII se sostiene como control disciplinario. Si revive, se re-expresa en la ruta unica REQ-MEMORIA-HIBRIDA (DECISION-0081)." },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260702-Arquitecto-cancel-huerfanas",
+        "owner": "Arquitecto",
+        "task_id": "TASK-0219",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260702-Arquitecto-cancel-huerfanas",
+          "Area_comun/state/TASK_INDEX.json#TASK-0219",
+          "Area_comun/state/TASK_INDEX.json#TASK-0220",
+          "Area_comun/state/TASK_INDEX.json#TASK-0221",
+          "Area_comun/state/TASK_INDEX.json#TASK-0118",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0219",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0220",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0221",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0118",
+          "Area_comun/tasks/TASK-0219-analista-adversarial-review-engram-integration.md",
+          "Area_comun/tasks/TASK-0220-analista-adversarial-review-engram-v3-honesty.md",
+          "Area_comun/tasks/TASK-0221-analista-adversarial-review-engram-v3-final.md",
+          "Area_comun/tasks/TASK-0118-codex-def-pii-detector.md"
+        ],
+        "started_at": "2026-07-02T02:04:00Z",
+        "updated_at": "2026-07-02T02:04:00Z",
+        "expires_at": "2026-07-02T08:00:00Z",
+        "notes": "Release tras cancelar 0219/0220/0221/0118."
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 task_id: TASK-0219
 title: "Revision ADVERSARIAL (refutacion) de la propuesta de integracion de Engram: frontera ledger/memoria, PII/GATE-DATASET (0040), single-writer (0020), correccion del parche"
 type: review
-status: ready
+status: cancelled
 owner: Analista
 phase: P2
 priority: high
