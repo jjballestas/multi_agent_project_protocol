@@ -4,6 +4,15 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
 
 ## Latest Session Note
 
+- TASK-0240 implementation commit landed in the protocol repo:
+  `6360569 feat(validation): build commit trailer gate`. It builds the inactive commit-trailer validator for
+  governed routes (`Area_comun/**`, `runtime/**`, `scripts/**`, `protocol.config.json`) with exact
+  `Task-Id`, `Fixes-Task`, and `Ops-Reason` checks, leaves activation unset until F1-E, adds PowerShell parity
+  through the Python implementation, and adds `scripts/test_trailers.py` with the 8 B.3 cases. Evidence before
+  commit: `python scripts/test_trailers.py` PASS 8 cases, `python -m py_compile` PASS for touched Python,
+  PowerShell parser PASS, encoding OK, neutrality exit 0, Python and PowerShell validators OK, drift false /
+  byte-identical `up_to_seq=3340`, and `protocol.config.json` unchanged. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` was clean and untouched because TASK-0240 is protocol validator work.
 - TASK-0239 done-flip executed by Codex via runtime transaction `codex:task0239:done-flip-tx`: acquired and
   released `CLAIM-20260702-Codex-TASK-0239-done-flip` and moved TASK-0239 `review_approved -> done` at seq
   3321-3323 after Arquitecto checker ratification. Protocol commit: `65095ee coord(TASK-0239): close done
