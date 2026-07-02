@@ -13774,6 +13774,22 @@
             "task_id": "TASK-0229"
         },
         {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-remediation-4-msgfix",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Fix TASK-0229 remediation 4 mailbox validator question.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-remediation-4-msgfix",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T11:28:08Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T11:28:08Z"
+        },
+        {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229-remediation-branding",
             "expires_at": "2026-07-02T09:09:25Z",
             "notes": "TASK-0229 branding remediation delivered to in_review.",
@@ -13862,6 +13878,43 @@
             "status": "released",
             "task_id": "TASK-0229",
             "updated_at": "2026-07-02T05:31:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-remediation-branding-4",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "TASK-0229 final scoped branding remediation under DECISION-0082.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-remediation-branding-4",
+                "Area_comun/state/TASK_INDEX.json#TASK-0229",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0229",
+                "Area_comun/tasks/TASK-0229-reqzeus-ws3-branding-alias-pantalla.md",
+                "D:/Agentes/Zeus/Zeus-Aegis",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T10:59:33Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T10:59:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260702-Codex-TASK-0229-remediation-branding-4-delivery",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Delivery artifacts for TASK-0229 DECISION-0082 scoped remediation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260702-Codex-TASK-0229-remediation-branding-4-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0229-codex-to-arquitecto-4.md",
+                "Area_comun/mailbox/open/MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-02T11:23:06Z",
+            "status": "released",
+            "task_id": "TASK-0229",
+            "updated_at": "2026-07-02T11:23:06Z"
         },
         {
             "claim_id": "CLAIM-20260702-Codex-TASK-0229-resume3",

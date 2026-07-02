@@ -2232,6 +2232,16 @@ Last updated: 2026-07-01 Europe/Madrid, after TASK-0227 done-flip.
   regenerates `vendor/hermes-2.3.0/electron/server-bundle.cjs`, and keeps upstream-compatible aliases for internal
   exported names. Product gates passed: build, bundle regeneration, root `npm test` 83/83 files and 562/562 tests,
   and clean clone `npm test` with the same counts.
+- TASK-0229 final DECISION-0082 scoped remediation product commit exists in `D:/Agentes/Zeus/Zeus-Aegis`:
+  `1c81b10 fix: finish scoped Zeus branding remediation`. It rebrands the remaining rendered/user-facing Hermes
+  links, CLI/help/error copy, MCP fallback UI text, cron error copy, and tmux worker exit message to ZeusAegis,
+  updates the affected test, and regenerates `vendor/hermes-2.3.0/electron/server-bundle.cjs`. Product gates
+  passed: `corepack pnpm --dir vendor/hermes-2.3.0 build`, `corepack pnpm --dir vendor/hermes-2.3.0
+  electron:bundle-server`, and root `npm test` 83/83 files and 562/562 tests.
+- TASK-0229 final protocol delivery is in current HEAD: it moved TASK-0229 back to `in_review`, released the
+  Codex remediation/delivery/msgfix claims, added `HANDOFF-TASK-0229-codex-to-arquitecto-4.md`, opened
+  `MSG-20260702-Codex-to-Arquitecto-TASK-0229-remediation-4-in-review.md`, and left protocol validate,
+  encoding scan, domain-neutrality scan, and runtime drift green.
 
 ## Useful Fresh-Session Commands
 
