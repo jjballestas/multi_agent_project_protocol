@@ -2,7 +2,7 @@
 task_id: TASK-0240
 title: "[VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task en el validador (V1-V5)"
 type: build
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high
@@ -14,6 +14,25 @@ relates_to: [GOAL-VISION-NOVA-001]
 linked_decisions: [DECISION-0083]
 linked_reqs: [GOAL-VISION-NOVA-001]
 file: Area_comun/tasks/TASK-0240-visionnova-f1c-trailers-bloqueantes.md
+intake:
+  type: infra
+  goal: Escaneo de trailers Task-Id / Fixes-Task en el validador (V1-V5) con trailer_start_seq registrado.
+  acceptance:
+    - Los 8 casos B.3 (4 negativos + 4 positivos) como tests sobre repo fixture pasan.
+    - El repo valida verde con los commits historicos exentos por el arranque declarado.
+    - Un commit de prueba sin trailer hace fallar validate de forma reproducible y se revierte.
+  verification_cmd:
+    - python scripts/test_trailers.py
+    - python scripts/validate_collaboration_state.py
+    - python scripts/scan_encoding.py
+  scope_routes:
+    - scripts/validate_collaboration_state.py
+    - scripts/validate_collaboration_state.ps1
+  out_of_scope:
+    - Activar el trailer_start_seq antes del despliegue de F1-E (TASK-0242) queda prohibido (auto-DoS).
+    - protocol.config.json permanece pineado e intocable.
+  risk: medium
+  estimate: M
 ---
 
 # TASK-0240 - [VISION-NOVA][F1.3] Trailers bloqueantes Task-Id / Fixes-Task
