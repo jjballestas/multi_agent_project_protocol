@@ -15735,6 +15735,52 @@
             "updated_at": "2026-07-03T13:56:20Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0234-done-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Done flip TASK-0234 review_approved->done after Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0234-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md"
+            ],
+            "started_at": "2026-07-03T15:20:22Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T15:20:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0234-doneflip-answered-status",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Set consumed TASK-0234 ACTION mailbox status to answered after move.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0234-doneflip-answered-status",
+                "Area_comun/mailbox/answered/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0234-done-flip.md"
+            ],
+            "started_at": "2026-07-03T15:24:30Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T15:24:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0234-doneflip-response",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Respond to TASK-0234 done-flip ACTION and move consumed message to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0234-doneflip-response",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0234-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0234-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0234-done-flip.md"
+            ],
+            "started_at": "2026-07-03T15:21:57Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T15:21:57Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0234-inreview-flip",
             "expires_at": "2026-07-03T23:59:00Z",
             "notes": "Flip TASK-0234 in_progress->in_review after Arquitecto delivery commit 64d44ad.",
