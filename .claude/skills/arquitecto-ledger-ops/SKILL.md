@@ -68,6 +68,15 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   (ruta FULL, no fragmento) + el `.md` de la decision.
 - **Clean clone en Windows:** `git clone -c core.longpaths=true` o el checkout muere por MAX_PATH
   ("Filename too long") y validate da 128 sin ser un fallo real del ledger.
+- **`task_upsert` modifica PROJECT_STATE ADEMAS de TASK_INDEX** (2026-07-03, drift real): al commitear un
+  registro de tarea, stagea SIEMPRE `Area_comun/state/PROJECT_STATE.json` + `.slim.json` junto con
+  `TASK_INDEX.json` + `.slim.json` + events + snapshot. Omitir PROJECT_STATE deja el working tree con drift:
+  validate LIVE verde (el tree tiene los cambios) pero HEAD en CLON LIMPIO rojo -> el Analista pre-gatea en
+  clon limpio y ABORTA la review (silent-refusal legitimo). Verifica `git status Area_comun/state/` LIMPIO
+  antes de pedir review. Fix si ya paso: commitea PROJECT_STATE + des-seen la review del Analista.
+- **NO uses subject `fix(`/`revert(`/`hotfix(` en commits gobernados** salvo que incluyas `Fixes-Task:` (el
+  gate de trailers lo exige; me mordio 2x). Usa `chore(`/`state(`/`coord(`/`tasks(` para correcciones que no
+  son remediacion de una tarea concreta. Ver s.2c.
 
 ### 2c. Gate de trailers ACTIVO (desde 2026-07-03, COMMIT_TRAILERS.json) -- muerde al Arquitecto
 Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runtime/state/**) DEBE:
