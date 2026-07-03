@@ -5,7 +5,25 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-02 (TASK-0240 trailer gate NO-GO).
+> Ultima actualizacion: 2026-07-03 (TASK-0230 Aegis re-gate NO-GO).
+
+## Ultima actualizacion 2026-07-03 - TASK-0230 Aegis re-gate NO-GO
+- TASK-0230 DECISION-0085 Aegis re-gate: CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en commit
+  `525b73e` (`review(TASK-0230): Analista blocks Aegis regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0230-aegis-regate-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-NOGO.md`.
+  Ancla protocolo HEAD `5f385b5`, instruccion `2a68508`, re-deliver `89b15d1`; producto
+  `D:/Agentes/Zeus/Zeus-protocol` commit `e7c6da4`; instancia `D:/Agentes/Zeus/NOVA/Aegis` commit
+  `ab2b6a2335c5cdb973a77bc955010dfce2bd7dce`; source tag `v1.18.0` -> `c9a4423`.
+- Gates: clean clone producto `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); payload propio
+  `createNewInstance` EXIT 0 para dry-run pin `v1.18.0`, write real en tmp, destino existente, ref
+  inexistente, nombres invalidos y DoR feature/product. Hub vivo y clean: validate/encoding/neutrality
+  EXIT 0, drift false `up_to_seq=3507`, `protocol.config.json` byte-identico a tag. Aegis:
+  validate/encoding/neutrality EXIT 0, drift false `up_to_seq=3457`, config byte-identica.
+- Bloqueantes falsables: F-0230-AEGIS-01 el handoff vigente aun cita `D:/Agentes/Zeus/nova-budget`;
+  F-0230-AEGIS-02 `instance.profile.json` conserva `operatingProfile.arm=budget` aunque Aegis queda como
+  instancia-metodologia neutral de suite bajo DECISION-0085. Fix-loop: Codex remedia, gates afectados,
+  re-juicio Analista antes de cierre; maximo 2 iteraciones antes de operador.
 
 ## Ultima actualizacion 2026-07-03 - TASK-0241 taxonomia OK
 - TASK-0241 taxonomia D1-D4 + S1-S7: OK/CERRABLE. Veredicto en
