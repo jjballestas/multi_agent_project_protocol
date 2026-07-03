@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "nombre": "schema_medicion",
+    "version": "v-piloto-0",
+    "referencia": "NOVA-ESTUDIO-002 s.3 (Protocolo de medicion)",
+    "estado": "DRAFT: CONGELA en el sello Etapa 1 (<=08-jul) tras el piloto GOAL-P1",
+    "nota": "Fuente unica de columnas y enums. Congelar el schema = editar SOLO este archivo (no el codigo). Al congelar: subir version, registrar sha256 en el sello.",
+    "nota_peones": "orchestration_mode/peones_n/peon_revivals_n/peon_modelos + tokens_peones miden el uso de peones (directiva operador 2026-07-03). tokens_peones es SUBSET ya contado en las cubetas dev/checker (NO sumar aparte; informativo, EXCLUIDO de confirmatorias, como tokens_cache_reads). ADVERTENCIA DE DISENO: los peones son una VARIABLE distinta de la 'gobernanza atestada' (el tratamiento aditivo baseline-vs-gobernado); usarlos dentro del brazo gobernado los convierte en un confound de Q1/Q4 -> deben quedar como dimension EXPLICITA (orchestration_mode) y/o correrse como su propio contraste (fase peones F6, mono-vs-peones bajo gobierno completo)."
+  },
+  "campos_apertura_obligatorios": [
+    "tarea_id", "brazo", "par_id", "estimate_previo_SML", "criticidad", "fecha_commit_estimate"
+  ],
+  "columnas": [
+    {"n": "tarea_id",                          "fase": "apertura", "tipo": "str"},
+    {"n": "brazo",                             "fase": "apertura", "tipo": "enum", "enum": ["baseline", "gobernado", "gobernado_ligero", "gobernado_completo"]},
+    {"n": "familia",                           "fase": "apertura", "tipo": "str"},
+    {"n": "subfamilia",                        "fase": "apertura", "tipo": "str"},
+    {"n": "par_id",                            "fase": "apertura", "tipo": "str", "na_ok": true},
+    {"n": "rol_en_par",                        "fase": "apertura", "tipo": "enum", "enum": ["miembro", "primera_unidad", "fundacion", "calibracion", "no_par", "overhead_fijo", "frontera_fix"]},
+    {"n": "orden_en_familia",                  "fase": "apertura", "tipo": "int"},
+    {"n": "criticidad",                        "fase": "apertura", "tipo": "str"},
+    {"n": "estimate_previo_SML",               "fase": "apertura", "tipo": "enum", "enum": ["S", "M", "L"]},
+    {"n": "fecha_commit_estimate",             "fase": "apertura", "tipo": "date"},
+
+    {"n": "fecha_inicio",                      "fase": "cierre", "tipo": "date"},
+    {"n": "fecha_fin",                         "fase": "cierre", "tipo": "date"},
+    {"n": "estado_final",                      "fase": "cierre", "tipo": "enum", "enum": ["done", "abandonada", "truncada", "bloqueada"]},
+    {"n": "motivo_abandono_o_bloqueo",         "fase": "cierre", "tipo": "str"},
+    {"n": "tiempo_pared_h",                    "fase": "cierre", "tipo": "float"},
+    {"n": "tiempo_espera_gate_h",              "fase": "cierre", "tipo": "float"},
+    {"n": "sesiones_n",                        "fase": "cierre", "tipo": "int"},
+    {"n": "sesiones_ids",                      "fase": "cierre", "tipo": "str"},
+    {"n": "sesion_contaminada",                "fase": "cierre", "tipo": "bool"},
+    {"n": "leyo_codigo_hermano",               "fase": "cierre", "tipo": "bool"},
+    {"n": "spec_prepagado",                    "fase": "cierre", "tipo": "bool"},
+
+    {"n": "orchestration_mode",                "fase": "cierre", "tipo": "enum", "enum": ["mono", "peones", "mixto", "NA"]},
+    {"n": "peones_n",                          "fase": "cierre", "tipo": "int"},
+    {"n": "peon_revivals_n",                   "fase": "cierre", "tipo": "int"},
+    {"n": "peon_modelos",                      "fase": "cierre", "tipo": "str"},
+
+    {"n": "modelo_llm_y_version",              "fase": "cierre", "tipo": "str"},
+    {"n": "fuente_tokens",                     "fase": "cierre", "tipo": "str"},
+    {"n": "tokens_dev",                        "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_adversarial_informal",       "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_checker_formal",             "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_coordinacion_gobierno",      "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_cache_reads",                "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_peones",                     "fase": "cierre", "tipo": "int"},
+    {"n": "tokens_total_atribuibles",          "fase": "cierre", "tipo": "int"},
+
+    {"n": "reworks_n",                         "fase": "cierre", "tipo": "int"},
+    {"n": "secuencia_veredictos",              "fase": "cierre", "tipo": "str"},
+    {"n": "observaciones_emitidas_n",          "fase": "cierre", "tipo": "int"},
+    {"n": "observaciones_registradas_con_dueno_n", "fase": "cierre", "tipo": "int"},
+    {"n": "hallazgos_criticos_n",              "fase": "cierre", "tipo": "int"},
+    {"n": "hallazgos_menores_n",               "fase": "cierre", "tipo": "int"},
+    {"n": "throws_alcanzables_n",              "fase": "cierre", "tipo": "int"},
+    {"n": "throws_testeados_n",                "fase": "cierre", "tipo": "int"},
+    {"n": "paridad_exec_vs_endpoint",          "fase": "cierre", "tipo": "enum", "enum": ["pass", "fail", "NA"]},
+    {"n": "paridad_dbsfinanciero_vs_snjdc",    "fase": "cierre", "tipo": "enum", "enum": ["pass", "fail", "na", "NA"]},
+    {"n": "evidencia_real_adjunta",            "fase": "cierre", "tipo": "bool"},
+    {"n": "spec_devuelto_por_forma_n",         "fase": "cierre", "tipo": "int"},
+
+    {"n": "defectos_post_n",                   "fase": "cierre", "tipo": "int"},
+    {"n": "dias_exposicion_defectos",          "fase": "cierre", "tipo": "int"},
+    {"n": "ventana_defectos_truncada",         "fase": "cierre", "tipo": "bool"},
+    {"n": "correlation_task_id",               "fase": "cierre", "tipo": "str"},
+    {"n": "tag_incidente_maquinaria",          "fase": "cierre", "tipo": "enum", "enum": ["regimen", "arranque", "incidente", "NA"]},
+    {"n": "notas_confound",                    "fase": "cierre", "tipo": "str"}
+  ]
+}

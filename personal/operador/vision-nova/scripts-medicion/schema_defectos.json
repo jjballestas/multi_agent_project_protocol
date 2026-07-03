@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "nombre": "schema_defectos",
+    "version": "v-piloto-0",
+    "referencia": "NOVA-ESTUDIO-002 s.6 (Defectos)",
+    "estado": "DRAFT: CONGELA en el sello Etapa 1 (<=08-jul)",
+    "nota": "Una fila por defecto post-entrega, imputado a la tarea de ORIGEN, clasificado con DEFECT_TAXONOMY v1.0."
+  },
+  "campos_apertura_obligatorios": [
+    "tarea_id_origen", "fecha_descubrimiento", "taxonomia", "severidad", "detector", "clase"
+  ],
+  "columnas": [
+    {"n": "tarea_id_origen",     "fase": "apertura", "tipo": "str"},
+    {"n": "fecha_descubrimiento","fase": "apertura", "tipo": "date"},
+    {"n": "taxonomia",           "fase": "apertura", "tipo": "enum", "enum": ["D1", "D2", "D3", "D4"]},
+    {"n": "severidad",           "fase": "apertura", "tipo": "str"},
+    {"n": "detector",            "fase": "apertura", "tipo": "enum", "enum": ["gate_determinista", "adversarial_informal", "checker_formal", "operador_uso_real", "herencia_gobernada"]},
+    {"n": "paridad_detector",    "fase": "apertura", "tipo": "bool"},
+    {"n": "clase",               "fase": "apertura", "tipo": "enum", "enum": ["a", "b"]},
+    {"n": "dias_exposicion",     "fase": "cierre",   "tipo": "int"},
+    {"n": "tareas_downstream_n", "fase": "cierre",   "tipo": "int"}
+  ]
+}
