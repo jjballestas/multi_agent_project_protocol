@@ -57,6 +57,14 @@
    P3.1 fuera de Q4 como pattern-setter). COSECHA aplicada a SELLO s.5: F-NOVA-01 confirma readonly con
    SELECT/VIEW-DEF pero SIN EXECUTE -> existencia verificable YA (sin GRANT), paridad requiere GRANT EXECUTE.
    Gate formal = Analista (pendiente). Siguientes rondas NOVA-DEV: pool Q4 en orden de sorteo + pares al final.
+   RONDAS 2-3 (P3-002 CDP, P3-003 RP): AMBAS LIMPIAS en mi revision -- aislamiento gemelos OK (P3.2/P3.3
+   separadas de hermanos baseline P4.2/P4.3; ajustes 08/09/11/12 fuera de alcance), Q4-condicional correcto,
+   coherencia cross-SPEC (P3-003 reusa B-01 de P3-002), compensaciones de brechas BD = senal de calidad no confound.
+   GO-CONTINUA enviado al Arquitecto (89d926f, orden operador "manten al Arquitecto trabajando"): sigue P3-004
+   Obligation -> P3-005 Payment -> pool Q4 no-P3, sin reposo. NOTAS DE ESTUDIO ruteadas: P3-005 Payment = ALTA
+   (frontera Treasury) FUERA de Q4 (solo descriptiva, regla criticidad sellada); P4.4 = media DENTRO de Q4.
+   Tally: 3/7 pool Q4 revisadas limpias. Advertencia al operador: SPECs acumulan decisiones de dominio
+   (objeto min-15, default SECOP) marcadas como preguntas -> resolver al construir (se mide la coordinacion).
 2. **F3 / medicion:** mi SELLO ETAPA 1 (draft listo, se sella <=08-jul, llenar placeholders + sorteo
    NIST) + scripts al hub (ruteado) + Operador abre GOAL-P1 (piloto baseline). LA MEDICION NO HA
    ARRANCADO AUN (F1/F2 = infraestructura, no desarrollo medido).
