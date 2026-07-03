@@ -50,22 +50,6 @@
             "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0241",
-            "owner": "Arquitecto",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F1.4] Taxonomia de defectos D1-D4 ampliada + severidad del checker + subconteo declarado"
-        },
-        {
-            "id": "TASK-0242",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F1.5-harness] Envelope de handoff 7 campos + fix-loop pre-commit (cosecha gentle-ai nivel A)"
-        },
-        {
             "id": "TASK-0243",
             "owner": "Arquitecto",
             "phase": "P2",

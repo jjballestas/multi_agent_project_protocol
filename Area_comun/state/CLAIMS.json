@@ -15574,6 +15574,25 @@
             "updated_at": "2026-07-03T00:05:21Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
+            "expires_at": "2026-07-03T06:00:00Z",
+            "notes": "Ratificacion doble 0241+0242 (checker) tras OK/CERRABLE del Analista.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-ratify-0241-0242",
+                "Area_comun/state/TASK_INDEX.json#TASK-0241",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0242",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0242",
+                "Area_comun/tasks/TASK-0242-visionnova-f1e-envelope-fixloop.md"
+            ],
+            "started_at": "2026-07-03T00:47:51Z",
+            "status": "released",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-03T00:47:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg-dualsesion-arquitecto",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Higiene ciclo dual-sesion (5 consumidos, acuse Operador 1eb1764).",
