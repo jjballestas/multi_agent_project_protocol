@@ -137,6 +137,15 @@ Items dependientes de hardening entran SOLO por enmienda fechada con entrega com
 Asignacion ligero/completo: hash + ancla externa, ESTRATIFICADA por familia/tamano, sellada aqui
 (s.6). REGLA DURA: si el Sprint 1 no ejecuta >=10, Q4 se reporta SUBPOTENCIADO (no se rellena).
 
+NOTA DE VERIFICACION (cosecha NOVA-DEV F-NOVA-01, commit ff68ee8): el conector readonly
+`nova_sql_connector_readonly_s9` tiene SELECT/VIEW DEFINITION pero NO EXECUTE (Msg 229). Por tanto la
+verificacion de EXISTENCIA de cada proc/vista de este pool (OBJECT_DEFINITION/sys.objects) es realizable
+YA sin GRANT EXECUTE -> los `[LLENAR-AL-SELLAR: proc existe]` se completan al sellar por existencia. Las
+pruebas de PARIDAD (ejecutar el proc/Get_*) requieren GRANT EXECUTE al rol de verificacion (pendiente del
+Operador, checklist s.12). P3.1 NO pertenece a este pool (es primera_unidad/pattern-setter, excluida del
+contraste central; su patron congelado = aprobacion-via-proc + gateway tipado + saldo-de-vista, no el
+supuesto temporal de autorizacion B-05).
+
 ---
 
 ## 6. Sorteo con ancla externa (anti semilla-moldeable)

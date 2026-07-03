@@ -52,6 +52,11 @@
    producto aun; Nova-X LAZY). ENLACE: su verificacion de cada campo contra la BD real de 01_Sources
    produce la evidencia readonly (proc/vista existe) que mi SELLO s.5 tiene como [LLENAR-AL-SELLAR] ->
    COSECHAR al entregar para enumerar el pool Q4. Mi tarea: revision adversarial cuando entregue.
+   RONDA 1 ENTREGADA (ff68ee8): informe adversarial + SPEC-NOVA-P3-001 (P3.1 Initial Budget Draft).
+   Revision Asesor = LIMPIA (unificacion plantillas OK, aislamiento OK, pool Q4 identico a mi SELLO s.5,
+   P3.1 fuera de Q4 como pattern-setter). COSECHA aplicada a SELLO s.5: F-NOVA-01 confirma readonly con
+   SELECT/VIEW-DEF pero SIN EXECUTE -> existencia verificable YA (sin GRANT), paridad requiere GRANT EXECUTE.
+   Gate formal = Analista (pendiente). Siguientes rondas NOVA-DEV: pool Q4 en orden de sorteo + pares al final.
 2. **F3 / medicion:** mi SELLO ETAPA 1 (draft listo, se sella <=08-jul, llenar placeholders + sorteo
    NIST) + scripts al hub (ruteado) + Operador abre GOAL-P1 (piloto baseline). LA MEDICION NO HA
    ARRANCADO AUN (F1/F2 = infraestructura, no desarrollo medido).
