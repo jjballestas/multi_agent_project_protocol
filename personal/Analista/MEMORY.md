@@ -5,7 +5,25 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-03 (TASK-0234 re-juicio runbook fix-loop 1/2 NO-GO).
+> Ultima actualizacion: 2026-07-03 (TASK-0234 re-juicio 2/2 OK/CERRABLE).
+
+## Ultima actualizacion 2026-07-03 - TASK-0234 re-juicio 2/2 OK/CERRABLE
+- TASK-0234 F2.5 runbook onboarding remoto, fix-loop 2/2: OK/CERRABLE. Veredicto canonico en commit
+  `cf2f845` (`review(TASK-0234): Analista OK runbook rejuicio2`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0234-runbook-onboarding-rejuicio2-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0234-rejuicio2-OK.md`.
+  Ancla REVIEW `20f2d75`; remediacion doc-only `d7804ac`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); hub validate con
+  secretos EXIT 0; clean clone sin `secrets/` validate/encoding/neutrality EXIT 0; drift false
+  `up_to_seq=3605`; `protocol.config.json` byte-identico entre `d7804ac`, HEAD y tag `c9a4423`, blob
+  `81cf406e...`, canonical stdin hash `70d4c027...`, SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: F-0234-01 cerrado. `tx-claim.json` parsea con claim acquire + ready->claimed + claimed->in_progress;
+  `tx-deliver.json` parsea con in_progress->in_review + claim release con scope; ejemplos sustituidos de handoff
+  y mailbox son validator-valid; cierre declara reviewer para `in_review->review_approved` e implementer para
+  `review_approved->done`. Residual no bloqueante: employee-run real queda como replica posterior, fuera de
+  TASK-0234.
 
 ## Ultima actualizacion 2026-07-03 - TASK-0234 re-juicio runbook fix-loop 1/2 NO-GO
 - TASK-0234 F2.5 runbook onboarding remoto, fix-loop 1/2: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto
