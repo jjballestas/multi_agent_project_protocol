@@ -1553,3 +1553,21 @@
   `up_to_seq=3436`; chain valid `checked_events=2764`; Zeus-protocol clean clone `npm test` en `b2b2395`
   exit 0, 109 tests, 87 pass, 22 skipped. Residuales no bloqueantes: no habia commit nuevo de producto
   citado; `scope_routes` de TASK-0243 conserva una ruta antigua de 0230 pero el archivo real fue anotado.
+- TASK-0230 (2026-07-03): OK/CERRABLE, veredicto commiteado y pusheado en `0295468`
+  (`review(TASK-0230): Analista OK new instance`). Ancla protocolo
+  `8b215daf6c3820e427036a23d40994a565af0ba3`, producto
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`, instancia NOVA
+  `172edcb53d18ac6568a61c42b10f644cf9fb9ed9`, source tag `v1.18.0` ->
+  `c9a442354bb5002b4df3a21e581ef1e891029c58`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0230-new-instance-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-new-instance-OK.md`. Clon limpio Zeus-protocol
+  `npm test` exit 0, 112 tests, 90 pass, 22 skipped. Payloads propios: default dry-run usa `v1.18.0`
+  y no escribe; write real en tmp crea configs `.agents` commiteadas y commit de instancia desde tag; segundo
+  write falla por destino existente; nombres invalidos/escape fallan cerrado; ref inexistente falla cerrado;
+  DoR acepta none explicito y rechaza missing/placeholder/arrays vacios; `priority` requerido tambien en no
+  feature/product. Instancia `D:/Agentes/Zeus/NOVA` valida exit 0, encoding/neutrality exit 0, drift 0
+  `up_to_seq=3457`. Hub vivo y clon limpio: validate exit 0, encoding/neutrality exit 0, drift 0
+  `up_to_seq=3502`, chain valid `checked_events=2830`, `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no bloqueantes:
+  CLI acepta `--source-ref HEAD` si se fuerza explicitamente; grep global de la instancia encuentra menciones
+  heredadas del instalador prohibido solo como prohibicion, no en configs/artefactos generados.
