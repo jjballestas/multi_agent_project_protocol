@@ -2363,6 +2363,11 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
   `D:/Agentes/Zeus/NOVA/Aegis`, and `.agents/{Codex,Arquitecto,Analista}/config.json` point at that
   workspace root. Product gates re-run: `npm test` in `D:/Agentes/Zeus/Zeus-protocol` passed 112 tests
   (90 pass, 22 skipped); Aegis validator, encoding, and domain-neutrality gates passed.
+- TASK-0230 DECISION-0085 protocol re-delivery commit exists: `89b15d1 coord(TASK-0230): re-deliver
+  Aegis layout`. It updated the TASK-0230 handoff and Codex->Arquitecto delivery message to the final
+  `D:/Agentes/Zeus/NOVA/Aegis` route, recorded the released restructure claim through
+  `runtime/submit_intent.py` seq 3506-3507, and left TASK-0230 in `in_review` for maker!=checker
+  re-gate.
 - TASK-0240 remediation protocol commit exists: `db47854 fix(validation): parse final commit trailers`; the
   personal memory follow-up is the latest `chore(personal): record TASK-0240 remediation` commit. The remediation commit
   fixes F-0240-01 by parsing `Task-Id`, `Fixes-Task`, and `Ops-Reason` only from the final commit-message
