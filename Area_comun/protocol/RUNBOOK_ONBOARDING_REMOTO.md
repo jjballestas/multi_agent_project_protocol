@@ -66,21 +66,81 @@ git add Area_comun/state/ runtime/state/ Area_comun/tasks/<TASK>-*.md
 git commit -m "claim(<TASK>): ..."   # y Task-Id: <TASK> en el parrafo final si el gate de trailers esta activo
 git push
 
-# 3. Trabaja el entregable. ENTREGA: escribe el handoff + mueve a in_review
-#    (task_status in_progress->in_review) y RELEASE del claim, en una tx atomica:
+# 3a. Escribe el HANDOFF autocontenido (ejemplo minimo validator-valid) ANTES de la tx (artifacts-before-claim):
+cat > Area_comun/handoffs/HANDOFF-<TASK>-<id>-to-<checker>-1.md <<'MD'
+---
+handoff_id: HANDOFF-<TASK>-<id>-to-<checker>-1
+task_id: <TASK>
+from: <id>
+to: <checker>
+date: 2026-01-01
+status: for_review
+requires_response: no
+acceptance_criteria_verified: yes
+tests_run:
+  - python scripts/validate_collaboration_state.py
+spec_deviations:
+  - none
+decisions_referenced:
+  - none
+---
+# Handoff <TASK>
+## 1. Minimal Context / ## 2. What Was Done / ## 4. Acceptance Criteria Verified / ## 7. Requested Action
+(contenido real; el turno termina con el envelope 7 campos como TEXTO FINAL, nunca un tool call)
+MD
+
+# 3b. ENTREGA: task_status in_progress->in_review + RELEASE del claim, en UNA tx atomica. tx-deliver.json COMPLETO:
+cat > /tmp/tx-deliver.json <<'JSON'
+{"idempotency_key":"tx-<id>-deliver-<TASK>","intents":[
+ {"type":"task_status","task_id":"<TASK>","from":"in_progress","to":"in_review","timestamp":"<ISO-UTC>"},
+ {"type":"claim","op":"release","claim":{
+   "claim_id":"CLAIM-<fecha>-<id>-<TASK>","owner":"<id>","task_id":"<TASK>","status":"released",
+   "scope":["Area_comun/state/CLAIMS.json#CLAIM-<fecha>-<id>-<TASK>",
+            "Area_comun/state/TASK_INDEX.json#<TASK>",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/<TASK>",
+            "Area_comun/tasks/<TASK>-*.md"],
+   "started_at":"<ISO-UTC>","updated_at":"<ISO-UTC>","expires_at":"<ISO-UTC+Nh>"}}
+]}
+JSON
 python runtime/submit_intent.py --actor-id <id> --timestamp "<ISO-UTC>" \
   --commit "$(git rev-parse HEAD)" --intents /tmp/tx-deliver.json --output -
-#    tx-deliver.json = [{task_status in_progress->in_review},{claim op:release ...}]
-git add Area_comun/... && git commit -m "deliver(<TASK>): ..." && git push   # PUSH inmediato
+git add Area_comun/state/ runtime/state/ Area_comun/tasks/<TASK>-*.md Area_comun/handoffs/ && \
+  git commit -m "deliver(<TASK>): ..." && git push   # PUSH inmediato (Task-Id: <TASK> en el parrafo final)
 
-# 4. El checker hace pull, revisa, y su veredicto (GO/NO-GO) vuelve por pull en Area_comun/mailbox/.
-#    Con GO, el cierre review_approved->done lo ejecuta quien tenga capability implementer.
+# 3c. AVISA por mailbox (ejemplo minimo validator-valid; requires_response:true EXIGE response_owner):
+cat > Area_comun/mailbox/open/MSG-<fecha>-<id>-to-<checker>-<TASK>-in-review.md <<'MD'
+---
+message_id: MSG-<fecha>-<id>-to-<checker>-<TASK>-in-review
+from: <id>
+to: <checker>
+type: REVIEW
+status: open
+requires_response: true
+response_owner: <checker>
+created_at: 2026-01-01
+one_line_summary: "<TASK> entregada a in_review; gate adversarial."
+requested_action: "Revisa <TASK> en clon limpio y emite GO/NO-GO."
+question: "GO o NO-GO sobre <TASK>?"
+---
+# REVIEW <TASK>
+(cuerpo)
+MD
+git add Area_comun/mailbox/open/ && git commit -m "mailbox(REVIEW): <id> -> <checker> <TASK>" && git push
+
+# 4. CIERRE: el checker hace pull, revisa, y su veredicto vuelve por pull (in_review->review_approved lo hace el
+#    CHECKER con capability reviewer). El flip FINAL review_approved->done exige capability IMPLEMENTER: lo ejecuta
+#    el implementer (NO el checker ni un owner sin implementer). OWNERSHIP: si TU no eres implementer, rutea un
+#    ACTION al implementer para el done-flip; no intentes el ->done tu mismo (submit_intent lo rechaza: "lacks
+#    capability implementer"). Ejemplo del flip final:
+#    intents=[{"type":"task_status","task_id":"<TASK>","from":"review_approved","to":"done","timestamp":"<ISO-UTC>"}]
 ```
 
 Regla anti-colision: escribe el ledger solo en ventana segura (peer sin lock en
 `.protocol-tmp/*/*.lock`, tree sin half-write) y pushea INMEDIATO; nunca dejes cambios de ledger
 sin pushear mientras otro clon opera. NUNCA hagas `git checkout` de `runtime/state/*` mientras un
-peer escribe (corrompe el event log).
+peer escribe (corrompe el event log). Gatea el PUSH en `validate_collaboration_state.py` exit 0
+POST-commit; con el gate de trailers activo, `Task-Id: <TASK>` va en el MISMO parrafo final que
+`Co-Authored-By` (o `Task-Id: none` + `Ops-Reason:` para commits de coordinacion).
 
 ### 3.2 Harness distribuido (F2.3) y ciclo e2e (F2.2) -- rutas y comandos falsables
 
