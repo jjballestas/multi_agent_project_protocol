@@ -6,11 +6,12 @@
 > mailbox -> el Arquitecto la hornea en el campo de la SPEC. Se mide la coordinacion, asi que
 > resolverlas en lote antes/al arrancar Sprint 1 reduce idas y vueltas.
 >
-> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-4: P3-001/002/003/004). El Asesor lo actualiza
-> cada ronda. Fuente: Area_comun/specs/nova/ (HEAD 5f29030).
-> Ronda 4 (P3-004 Obligation): SIN nuevas decisiones de dominio (DD-01 autorizacion reafirmada). El
-> circuito radicacion/liquidacion/causacion (Post_Voucher + retenciones) se DIFIERE a GOAL-P5/hardening
-> (no es decision de dominio; ver seccion 3).
+> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-5: P3-001..005, FAMILIA P3 COMPLETA). El Asesor lo
+> actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD b78d542).
+> Ronda 4 (P3-004 Obligation) y ronda 5 (P3-005 Payment): SIN nuevas decisiones de dominio (DD-01
+> autorizacion reafirmada). P3-005 es criticidad ALTA / frontera Treasury -> FUERA del pool Q4 (solo
+> descriptiva). El egreso real (banco/retenciones/comprobante) y el circuito radicacion/liquidacion se
+> DIFIEREN a GOAL-P5/hardening (no son decisiones de dominio; ver seccion 3).
 
 ## 1. Decisiones de dominio (TU resuelves)
 
@@ -41,6 +42,9 @@ no se confundan con lo de arriba:
 - B-01/B-02 (P3-004): NO existen procs go-forward de radicacion/liquidacion/causacion
   (`Create_Radication`/`Liquidate_Radication`/`Post_Voucher`) ni retenciones -> circuito PayControl
   (GOAL-P5) + hardening; P3-004 solo enlaza el documento fuente por el puente existente, no lo crea.
+- B-01..B-05 (P3-005 Payment, frontera Treasury): el egreso real (banco/medio/retenciones/comprobante),
+  las notas de tesoreria, la numeracion por series (hoy MAX+1) y la guarda de vigencia abierta del egreso
+  -> TODO Tesoreria/PayControl go-forward (GOAL-P5) + hardening. P3-005 cubre solo el CONTROL PRESUPUESTAL.
 
 ## 4. GRANT EXECUTE (accion del Operador, no es decision de dominio)
 

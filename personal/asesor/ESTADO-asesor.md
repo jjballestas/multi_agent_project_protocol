@@ -63,8 +63,14 @@
    GO-CONTINUA enviado al Arquitecto (89d926f, orden operador "manten al Arquitecto trabajando"): sigue P3-004
    Obligation -> P3-005 Payment -> pool Q4 no-P3, sin reposo. NOTAS DE ESTUDIO ruteadas: P3-005 Payment = ALTA
    (frontera Treasury) FUERA de Q4 (solo descriptiva, regla criticidad sellada); P4.4 = media DENTRO de Q4.
-   Tally: 3/7 pool Q4 revisadas limpias. Advertencia al operador: SPECs acumulan decisiones de dominio
-   (objeto min-15, default SECOP) marcadas como preguntas -> resolver al construir (se mide la coordinacion).
+   Advertencia al operador: SPECs acumulan decisiones de dominio (objeto min-15, default SECOP) marcadas
+   como preguntas -> resolver al construir (se mide la coordinacion). TRACKER VIVO en
+   personal/operador/vision-nova/DECISIONES-DOMINIO-PENDIENTES-nova.md (DD-01 auth, DD-02 objeto, DD-03 SECOP).
+   RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
+   RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
+   aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
+   egreso real (banco/retenciones/comprobante) a Tesoreria/PayControl. TALLY POOL Q4 revisado = 3 unidades
+   (P3.2/P3.3/P3.4); faltan del pool: P4.4, P2.3, P6.3, Get_*_List. P3.1 y P3.5 fuera de pool (pattern-setter / ALTA).
 2. **F3 / medicion:** mi SELLO ETAPA 1 (draft listo, se sella <=08-jul, llenar placeholders + sorteo
    NIST) + scripts al hub (ruteado) + Operador abre GOAL-P1 (piloto baseline). LA MEDICION NO HA
    ARRANCADO AUN (F1/F2 = infraestructura, no desarrollo medido).
