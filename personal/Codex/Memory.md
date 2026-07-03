@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0240 done-flip.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Latest Session Note
 
+- TASK-0241 and TASK-0242 done-flips completed in protocol commit
+  `cba7d71 coord(TASK-0241 TASK-0242): close done flips`. Runtime transaction
+  `codex:task0241-0242:doneflip:tx-20260703` acquired/released
+  `CLAIM-20260703-Codex-TASK-0241-0242-done-flip` and moved TASK-0241 `review_approved -> done` at seq 3407
+  and TASK-0242 `review_approved -> done` at seq 3408. Response message
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0241-0242-doneflip-done.md` was added; its
+  file-scoped claim was acquired/released at seq 3410-3411. Evidence before commit: protocol encoding OK,
+  domain-neutrality command exit 0, collaboration validator OK, drift false / byte-identical at
+  `up_to_seq=3411`; product `D:/Agentes/Zeus/Zeus-protocol` `node --check public/app.js`, `node --check
+  src/server.js`, and `npm test` PASS 109 tests (87 pass, 22 skipped). Product repo stayed clean. Unrelated
+  peer/operator untracked files under personal areas were left untouched.
 - TASK-0241 implementer in_review flip completed in protocol working tree. Runtime transaction
   `codex:task0241:inreview-flip-tx-20260703` acquired/released
   `CLAIM-20260703-Codex-TASK-0241-inreview-flip` and moved TASK-0241 `in_progress -> in_review` at seq
