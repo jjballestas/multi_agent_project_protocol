@@ -2356,6 +2356,13 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Current Repository State
 
+- TASK-0230 DECISION-0085 restructure product/instance commit exists in `D:/Agentes/Zeus/NOVA/Aegis`:
+  `ab2b6a2 chore(instance): relocate governance instance to Aegis`. The NOVA umbrella
+  `D:/Agentes/Zeus/NOVA` is now a flat directory without `.git`; the only repository below it is
+  `D:/Agentes/Zeus/NOVA/Aegis/.git`. The Aegis instance profile now declares path
+  `D:/Agentes/Zeus/NOVA/Aegis`, and `.agents/{Codex,Arquitecto,Analista}/config.json` point at that
+  workspace root. Product gates re-run: `npm test` in `D:/Agentes/Zeus/Zeus-protocol` passed 112 tests
+  (90 pass, 22 skipped); Aegis validator, encoding, and domain-neutrality gates passed.
 - TASK-0240 remediation protocol commit exists: `db47854 fix(validation): parse final commit trailers`; the
   personal memory follow-up is the latest `chore(personal): record TASK-0240 remediation` commit. The remediation commit
   fixes F-0240-01 by parsing `Task-Id`, `Fixes-Task`, and `Ops-Reason` only from the final commit-message
