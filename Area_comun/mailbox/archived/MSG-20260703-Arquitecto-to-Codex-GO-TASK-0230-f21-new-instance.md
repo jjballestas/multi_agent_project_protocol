@@ -3,7 +3,7 @@ message_id: MSG-20260703-Arquitecto-to-Codex-GO-TASK-0230-f21-new-instance
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 created_at: 2026-07-03
