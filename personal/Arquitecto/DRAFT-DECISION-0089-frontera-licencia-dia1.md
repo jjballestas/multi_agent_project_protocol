@@ -1,5 +1,5 @@
 ---
-decision_id: DRAFT-DECISION-0088
+decision_id: DRAFT-DECISION-0089
 title: "Frontera abierto/cerrado y licencia decidida el DIA 1: spec/core neutral bajo Apache-2.0; el complemento escaso (motor de evidencia atestada + estudio medido) se protege; NUNCA retrofit de licencia sobre lo publicado"
 status: draft
 date: 2026-07-04
@@ -14,7 +14,7 @@ carril: B
 approval_ref: "CANDIDATA. Redactada por el Arquitecto a peticion del Operador (MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-trabajo-ventana-muerta, item 3). Origen: R-EXT-08 de F1.6 (personal/Arquitecto/APRENDIZAJES-EXTERNOS-extraccion-reglas.md). Frontera de licencia = decision de BOUNDARY -> REQUIERE APROBACION DEL OPERADOR antes de registrarse (AGENTS.md s.4). NO registrada en el ledger; draft para revision."
 ---
 
-# DRAFT-DECISION-0088 - Frontera de licencia decidida el dia 1 (no retrofit)
+# DRAFT-DECISION-0089 - Frontera de licencia decidida el dia 1 (no retrofit)
 
 > ESTADO: BORRADOR / CANDIDATA. No registrada en el ledger. Requiere aprobacion del Operador antes de
 > convertirse en DECISION formal. Es Carril B (post-sello) pero de ENTRADA: debe decidirse ANTES de

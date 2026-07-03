@@ -1,5 +1,5 @@
 ---
-decision_id: DRAFT-DECISION-0089
+decision_id: DRAFT-DECISION-0090
 title: "Posicionamiento (linea roja): la propuesta de Aegis es ATESTACION criptografica del ciclo multi-agente, NO observabilidad/telemetria; la distincion se mantiene explicita en todo material publicable"
 status: draft
 date: 2026-07-04
@@ -7,14 +7,14 @@ deciders: [operador humano, Arquitecto]
 supersedes: []
 supersedes_partial: []
 superseded_by: []
-relates_to: [DRAFT-DECISION-0088, DECISION-0087, DECISION-0022, DECISION-0050, GOAL-VISION-NOVA-001]
+relates_to: [DRAFT-DECISION-0089, DECISION-0087, DECISION-0022, DECISION-0050, GOAL-VISION-NOVA-001]
 phase: P2
 scope: positioning
 carril: B
 approval_ref: "CANDIDATA. Redactada por el Arquitecto a peticion del Operador (MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-trabajo-ventana-muerta, item 3). Origen: R-EXT-07 de F1.6. Es posicionamiento del material publicable, NO cambio de doctrina interna. REQUIERE aprobacion del Operador antes de registrarse. NO registrada en el ledger; draft para revision."
 ---
 
-# DRAFT-DECISION-0089 - Linea roja: atestacion != observabilidad
+# DRAFT-DECISION-0090 - Linea roja: atestacion != observabilidad
 
 > ESTADO: BORRADOR / CANDIDATA. No registrada en el ledger. Requiere aprobacion del Operador. Es Carril B
 > (posicionamiento del spec/preprint/material comercial). NO cambia la doctrina interna: el core ya HACE
@@ -53,7 +53,7 @@ observabilidad", diluyendo exactamente el diferenciador.
 
 - Es posicionamiento del material EXTERNO; no altera el core ni ninguna capability. El core ya cumple los
   tres criterios del punto 3.
-- Interactua con DRAFT-DECISION-0088 (que se publica) y con R-EXT-01 (mapping Plan/Generation/Approval de
+- Interactua con DRAFT-DECISION-0089 (que se publica) y con R-EXT-01 (mapping Plan/Generation/Approval de
   Hinds) y R-EXT-06 (mapping SOC2/ISO): el mapping a estandares externos NO diluye la linea roja, la
   vocaliza en su idioma.
 - Nota interna: el gap de que el hub no tiene un intent de atestacion de PRIMERA CLASE (un
