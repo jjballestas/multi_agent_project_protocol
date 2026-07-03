@@ -125,6 +125,15 @@
    declarada. El Arquitecto las hornea sin prisa (con la remediacion THROW o en ventana muerta); DD-02 toca
    criterio falsable -> viaja en el proximo gate. Tracker marcado RESUELTA (ruteada). Ya no hay decisiones de
    dominio abiertas del lote NOVA-DEV actual (nuevas rondas de SPECs podrian traer mas).
+   SUB-LOOP THROW/db_verified_at CERRADO: OK/CERRABLE (070b533). Cadena completa: flag sistemico (mio) ->
+   GO operador -> audit amplio hallo slips reales en los 5 (el 1er gate solo vio P4-004) -> reatribucion
+   opcion b (mi steer, preserva codigos con fuente) -> slip 50212 corregido (5669665) -> Analista amplio la
+   verificacion a definiciones de triggers -> TODOS los codigos transitive confirmados en BD. db_verified_at
+   cierra para P3-001..005. TASK-0246 GATE-VERIFICADA DE PUNTA A PUNTA (core F-0246-01/02 + db_verified_at),
+   sin escalar (dentro del limite de iter). Doble evidencia tesis (checker formal > informal; alcance del gate
+   importa). RUTEADO al Arquitecto (eedc3ea): pipeline como PANEL DE CONTROL COMPLETO (agregar NOVA-DEV+GOAL-P1,
+   refrescar F3.3/F3.4, notar DD resueltas) -- directiva operador "todo en el pipeline". TASK-0246 sigue
+   in_progress; falta solo pares gobernados (bloqueados hasta 17-jul).
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
