@@ -1,13 +1,13 @@
 ---
 task_id: TASK-0233
 title: "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]"
-type: verify
+type: build
 status: ready
-owner: Analista
+owner: Codex
 phase: P2
 priority: high
 created_at: 2026-07-02
-reviewer: Arquitecto
+reviewer: Analista
 checker: Arquitecto
 project: multi_agent_project_protocol
 relates_to: [REQ-ZEUS-001, GOAL-VISION-NOVA-001]
@@ -40,9 +40,12 @@ intake:
 
 # TASK-0233 - [VISION-NOVA][F2.2] Verificacion e2e distribuida (re-alcance DECISION-0083/0085)
 
-- **Owner (maker):** Analista - **Review:** Arquitecto - **Checker:** Arquitecto. maker != checker.
+- **Owner (maker):** Codex - **Review:** Analista - **Checker:** Arquitecto. maker != checker.
+- **RE-ASIGNACION 2026-07-03 (owner Analista -> Codex):** el backlog asignaba owner=Analista, pero el Analista
+  es CHECKER-ONLY por identidad (maker != checker, directiva del operador reforzada); se nego correctamente a
+  ser maker. Resolucion: **Codex construye la demostracion e2e (maker)**, el **Analista la verifica
+  adversarialmente (checker)**. Ver FYI al operador. La e2e sigue siendo la prueba de transferibilidad.
 - **Instancia:** `D:/Agentes/Zeus/NOVA/Aegis` (DECISION-0085). **Deps:** F2.1 (0230, done) + F2.3 (0232, harness distribuido).
-- **Precondicion:** el alta del Analista como participante (TASK-0228) YA se cumplio.
 
 ## Alcance (re-alcance DECISION-0083; body viejo de e2e Zeus-Aegis SUPERADO)
 Verificacion e2e DISTRIBUIDA de la instancia Aegis: un CLON LIMPIO (como lo veria un empleado/agente que

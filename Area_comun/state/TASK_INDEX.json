@@ -3665,7 +3665,7 @@
             "linked_reqs": [
                 "REQ-ZEUS-001"
             ],
-            "owner": "Analista",
+            "owner": "Codex",
             "phase": "P2",
             "priority": "high",
             "project": "multi_agent_project_protocol",
@@ -3673,10 +3673,10 @@
                 "REQ-ZEUS-001",
                 "GOAL-VISION-NOVA-001"
             ],
-            "reviewer": "Arquitecto",
+            "reviewer": "Analista",
             "status": "ready",
             "title": "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]",
-            "type": "verify"
+            "type": "build"
         },
         {
             "checker": "Arquitecto",

@@ -16175,6 +16175,22 @@
             "updated_at": "2026-07-03T02:03:51Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-reassign-0233",
+            "expires_at": "2026-07-03T21:00:00Z",
+            "notes": "Reasigna owner 0233 Analista->Codex (Analista checker-only).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-reassign-0233",
+                "Area_comun/state/TASK_INDEX.json#TASK-0233",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0233",
+                "Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md"
+            ],
+            "started_at": "2026-07-03T12:35:54Z",
+            "status": "released",
+            "task_id": "TASK-0233",
+            "updated_at": "2026-07-03T12:35:54Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-upsert-0245",
             "expires_at": "2026-07-03T18:00:00Z",
             "notes": "Encola TASK-0245 (watchdogs exportables) proposed.",
