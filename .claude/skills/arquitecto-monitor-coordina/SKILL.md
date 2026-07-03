@@ -152,6 +152,15 @@ local puede ir detras de origin). Luego, segun la senal:
   sesiones con la misma firma) + FYI al Operador para que ordene el stand-down de una (discriminador por
   session_start_ts). NO re-emitir GOs/higiene que la otra ya emitio: verificar CLAIMS.json + git log ANTES de
   cada escritura compartida.
+- **REGLA 15-MIN por tarea demorada (directiva operador 2026-07-03):** BASELINE = una tarea normal del loop
+  demora 6-9 min en promedio; una tarea/peticion ruteada que lleve >15 min sin entrega ni respuesta es ANOMALIA
+  -> revision de analisis OBLIGATORIA, no espera pasiva. Es un disparador POR TAREA (evento), NO un polling
+  periodico. Deteccion (watchdog v3.1, 3 formas de la demora): (a) peticion Arquitecto-to-peer >900s sin entrar
+  al seen.json; (b) peticion *seen* >900s SIN respuesta NI commit del peer (silent-refusal); (c) claim activo
+  retenido >900s sin exec corriendo. Analisis al disparar: tail del ultimo `runs/*.err.log` del peer (su
+  ENVELOPE FINAL suele decir que espera o por que se nego -- leerlo PRIMERO: asi se cazo la espera-cruzada de
+  claims 0241/0242), seen.json, CLAIMS.json activos, status de la tarea; remedio tipico = destrabar el bloqueo
+  (claim/lock) + des-seen para re-disparar.
 - **Arbol compartido:** peers commitean aqui; `git merge --ff-only` cada wake; `git pull --rebase --autostash` si el
   push sale non-ff. Vi gates en rojo TRANSITORIO por un peer a mitad de escritura -> re-correr hasta verde.
 - **Trigger diferido:** si el operador pide "promover X luego de que Codex termine su cola", vigila via el monitor
