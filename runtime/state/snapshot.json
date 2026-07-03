@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6dd38eaca9169df3c88aeb7ff4c5f701680876cef599a2e4026314e812eb0642",
+  "canonical_hash": "12f11a4614d26c3f2b21acb32ea96c9acc3e2a625625f1467f9c9d2ce23f041d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1098,7 +1098,7 @@
       "TASK-0241": 17,
       "TASK-0242": 12,
       "TASK-0243": 19,
-      "TASK-0244": 14,
+      "TASK-0244": 19,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1106,7 +1106,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2795,
+    "events_applied": 2800,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2644,11 +2644,16 @@
       "codex:task0243:doneflip-response-msg-claim-acquire-20260703": 3443,
       "codex:task0243:doneflip-response-msg-claim-release-20260703": 3444,
       "codex:task0243:review-approved-to-done-20260703": 3441,
+      "codex:task0244:done-flip-claim-acquire-20260703": 3467,
+      "codex:task0244:done-flip-claim-release-20260703": 3469,
+      "codex:task0244:doneflip-response-msg-claim-acquire-20260703": 3470,
+      "codex:task0244:doneflip-response-msg-claim-release-20260703": 3471,
       "codex:task0244:in-progress-to-in-review-20260703": 3460,
       "codex:task0244:inreview-flip-claim-acquire-20260703": 3459,
       "codex:task0244:inreview-flip-claim-release-20260703": 3461,
       "codex:task0244:response-msg-claim-acquire-20260703": 3462,
       "codex:task0244:response-msg-claim-release-20260703": 3463,
+      "codex:task0244:review-approved-to-done-20260703": 3468,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -3905,5 +3910,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3466
+  "up_to_seq": 3471
 }

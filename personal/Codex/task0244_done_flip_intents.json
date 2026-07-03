@@ -1,0 +1,58 @@
+{
+  "idempotency_key": "codex:task0244:done-flip-tx-20260703",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0244-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0244",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0244",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+          "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T02:07:27Z",
+        "updated_at": "2026-07-03T02:07:27Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Implementer done-flip after Analista OK and Arquitecto checker ratification."
+      },
+      "idempotency_key": "codex:task0244:done-flip-claim-acquire-20260703"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0244",
+      "from": "review_approved",
+      "to": "done",
+      "idempotency_key": "codex:task0244:review-approved-to-done-20260703"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0244-done-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0244",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-done-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0244",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+          "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T02:07:27Z",
+        "updated_at": "2026-07-03T02:07:27Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Implementer done-flip after Analista OK and Arquitecto checker ratification."
+      },
+      "idempotency_key": "codex:task0244:done-flip-claim-release-20260703"
+    }
+  ]
+}
