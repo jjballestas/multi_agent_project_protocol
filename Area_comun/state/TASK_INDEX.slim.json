@@ -24,6 +24,14 @@
             "priority": "medium",
             "status": "proposed",
             "title": "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)"
+        },
+        {
+            "id": "TASK-0246",
+            "owner": "Arquitecto",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
         }
     ],
     "view": "task_index.slim"
