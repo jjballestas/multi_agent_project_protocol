@@ -86,6 +86,12 @@
    dejaron pasar) -> evidencia anecdotica. VALOR-ADD ruteado al Arquitecto (RECOMENDACION, no-firmante via
    Operador): generalizar la re-verificacion de THROW a las 9 SPECs (riesgo sistemico, mismos codigos escritos
    desde PRES no desde procs). Remediacion = del Arquitecto (fix-loop max 2 iter). Yo espero el re-juicio.
+   FIX-LOOP 1 (9b5563c): AMBOS hallazgos remediados correctamente -- q4_membership P3-001 FUERA / P3-002/003
+   CONDICIONAL (alineado al sello); P4-004 con THROW REALES (50265 efecto!=reintegro, 50264 tope; NO 50256/50254;
+   OBJECT_DEFINITION verificado readonly). PERO mi generalizacion NO se tomo: los THROW de las otras SPECs
+   (50277/50150/50115/50134/50187) siguen sin re-verificar vs procs desplegados. Riesgo ACOTADO por el gancho
+   sellado "RE-VERIFICAR al construir" (peor caso: lo corrige el maker en Sprint 1). Decision dejada al operador
+   (pasada amplia ahora vs red de build-time). Espero re-juicio del Analista.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
