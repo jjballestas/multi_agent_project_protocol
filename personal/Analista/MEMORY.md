@@ -7,6 +7,24 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-02 (TASK-0240 trailer gate NO-GO).
 
+## Ultima actualizacion 2026-07-03 - TASK-0241 taxonomia OK
+- TASK-0241 taxonomia D1-D4 + S1-S7: OK/CERRABLE. Veredicto en
+  `Area_comun/artifacts/ANALISTA-TASK-0241-taxonomia-veredicto.md`; MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0241-taxonomia-OK.md`.
+  Ancla protocolo `d5b426e4191729c3f8a8763984e20998f5566aed`; implementacion `ded4972`;
+  flip review `40ae114`; producto control `D:/Agentes/Zeus/Zeus-protocol` commit
+  `b2b2395da39090109db6de2dc50726dbaab1a11e`.
+- Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0241-product-54facf6978364a05b8b070c11d543dae`;
+  `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/analista-0241-protocol-61049c06007743dfb4fc10ecb8dc584b`;
+  validate/encoding/neutrality EXIT 0; vivo validate/encoding/neutrality EXIT 0; drift false
+  `up_to_seq=3401`; `protocol.config.json` diff contra HEAD EXIT 0 y sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Vectores: S2-S7 cubren los 6 huecos pivote-v2; anti-cajon-de-sastre prohibe S1 por defecto;
+  subconteo esperado declara 6 fuentes y cota inferior; severidad en doc y STARTUP_PROMPT; mesa 10/10
+  parseada con D1-D4/S1-S7 exactos; neutralidad verde. Residual no bloqueante: prompt embebido del cron
+  queda como seguimiento operativo de TASK-0242, no bloqueo de la taxonomia documental.
+
 ## Ultima actualizacion 2026-07-03 - TASK-0242 envelope fix-loop OK
 - TASK-0242 envelope/fix-loop gate: OK/CERRABLE. Veredicto preparado en
   `Area_comun/artifacts/ANALISTA-TASK-0242-envelope-fixloop-veredicto.md`; MSG rr a Arquitecto
