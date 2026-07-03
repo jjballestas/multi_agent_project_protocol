@@ -4,6 +4,19 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Latest Session Note
 
+- TASK-0230 product implementation landed in `D:/Agentes/Zeus/Zeus-protocol` commit
+  `e7c6da4 feat(instance): add nova budget bootstrapper`. It adds `scripts/new-instance.mjs` with dry-run by
+  default, explicit `--write`, pinned source ref `v1.18.0`, target containment under `D:/Agentes/Zeus`, temp
+  staging plus final rename, instance profile generation, committed Git-adapter agent configs, and instance
+  TASK_TEMPLATE DoR v2 extension/anti-empty validation. The command created `D:/Agentes/Zeus/nova-budget` from
+  tag `v1.18.0` source commit `c9a442354bb5002b4df3a21e581ef1e891029c58`; instance commit:
+  `172edcb53d18ac6568a61c42b10f644cf9fb9ed9 chore(instance): configure nova-budget`. Product evidence:
+  `node --check scripts/new-instance.mjs`, `node --check tests/staticContract.test.js`, dry-run PASS, write PASS,
+  `node --check public/app.js`, `node --check src/server.js`, and `npm test` PASS 112 tests (90 pass, 22
+  skipped). Delivery artifacts prepared: `Area_comun/handoffs/HANDOFF-TASK-0230-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0230-in-review.md`. Existing v1.18.0 history
+  mentions the forbidden installer as a prohibition; generated configs do not contain or enable it, and the
+  script does not execute it.
 - TASK-0244 done-flip completed in protocol working tree. Runtime transaction
   `codex:task0244:done-flip-tx-20260703` acquired/released
   `CLAIM-20260703-Codex-TASK-0244-done-flip` and moved TASK-0244 `review_approved -> done` at seq
