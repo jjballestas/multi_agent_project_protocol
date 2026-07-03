@@ -139,6 +139,16 @@
    52). Listos para congelar a v1.0 en el sello. Watch-note despejado sin anomalia (archivo la ACTION consumida
    legitimamente; NO archivo mis 2 directivas frescas). Inputs del sello que faltan: estimates S/M/L + GRANT
    EXECUTE (operador) + corpus GOAL-P1 + sorteo/T/NIST/sha256 el dia del sello (<=08-jul).
+   DEBATE NOMBRES AEGIS (2026-07-03, con el operador): CONVERGIDO. Aegis = MARCA de la METODOLOGIA (palabra
+   neutra, no rompe neutralidad); instancia por proyecto = carpeta/repo `aegis/` (convencion como .git, sin
+   ambiguedad); producto/front = Zeus-Aegis; productos dominio = Nova-X; namespace skills = `aegis:` (via
+   loader DECISION-0061, no renombrar archivos); scripts SIN tocar. Hub = "Aegis-core". El operador CONFIRMO
+   OPCION (i) MARCA-SOLO: NO se toca `project_name` en protocol.config.json (genesis-bound, linea 5) -> CERO
+   re-genesis, CERO riesgo sobre N=500/#4 (dataset sellado inmutable; rename es ortogonal a lo medido, solo se
+   anota procedencia). i18n del core/templates/spec para publicar = Carril B (post-sello, acotado a superficie
+   publicada, no todo el repo). SECUENCIA acordada: Arquitecto termina primero las 2 DIRECTIVAs (hornear DD +
+   pipeline) EN VENTANA MUERTA, LUEGO redacta la DECISION de nombres Aegis; el reloj real (GOAL-P1 3-8 jul +
+   estimates) es del operador y NO debe eclipsarse. Yo ruteo la DECISION Aegis cuando cierren las 2 DIRECTIVAs.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
