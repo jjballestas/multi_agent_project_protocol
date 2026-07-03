@@ -134,6 +134,11 @@
    importa). RUTEADO al Arquitecto (eedc3ea): pipeline como PANEL DE CONTROL COMPLETO (agregar NOVA-DEV+GOAL-P1,
    refrescar F3.3/F3.4, notar DD resueltas) -- directiva operador "todo en el pipeline". TASK-0246 sigue
    in_progress; falta solo pares gobernados (bloqueados hasta 17-jul).
+   4a ACTION HECHA (d0807e0 higiene): el Arquitecto EMPLAZO los scripts al hub (personal/Arquitecto/
+   TFM-medicion/corpus/medicion/) -- verificado mi version exacta (52 cols, 5 peones, motor identico, README
+   52). Listos para congelar a v1.0 en el sello. Watch-note despejado sin anomalia (archivo la ACTION consumida
+   legitimamente; NO archivo mis 2 directivas frescas). Inputs del sello que faltan: estimates S/M/L + GRANT
+   EXECUTE (operador) + corpus GOAL-P1 + sorteo/T/NIST/sha256 el dia del sello (<=08-jul).
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
