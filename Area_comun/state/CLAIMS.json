@@ -15485,7 +15485,7 @@
         {
             "claim_id": "CLAIM-20260703-Codex-TASK-0242",
             "expires_at": "2026-07-03T05:00:04Z",
-            "notes": "Implement TASK-0242 envelope handoff and fix-loop harness doctrine.",
+            "notes": "Delivered TASK-0242 envelope handoff and fix-loop harness doctrine to in_review.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0242",
@@ -15498,14 +15498,14 @@
                 "personal/Analista/analista_mailbox_cron.ps1"
             ],
             "started_at": "2026-07-02T23:00:04Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0242",
-            "updated_at": "2026-07-02T23:00:04Z"
+            "updated_at": "2026-07-03T00:06:00Z"
         },
         {
             "claim_id": "CLAIM-20260703-Codex-TASK-0242-templates",
             "expires_at": "2026-07-03T05:02:02Z",
-            "notes": "Update task handoff template envelope references for TASK-0242.",
+            "notes": "Delivered TASK-0242 task template envelope updates to in_review.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0242-templates",
@@ -15517,9 +15517,9 @@
                 "examples/dotnet_enterprise_instance/Area_comun/protocol/TASK_TEMPLATE.md"
             ],
             "started_at": "2026-07-02T23:02:02Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0242",
-            "updated_at": "2026-07-02T23:02:02Z"
+            "updated_at": "2026-07-03T00:06:00Z"
         },
         {
             "claim_id": "CLAIM-20260703-arquitecto-0241-taxonomia",

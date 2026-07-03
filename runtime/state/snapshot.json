@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fc2be691ac585958f0138ddf09702472b1dea6b1848340e108512d0e1652cb9a",
+  "canonical_hash": "3c91b615ca059c6c244c398cdbf11b0836607022ff1b9a72ad8bd30f2648de8e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1076,7 +1076,7 @@
       "TASK-0239": 27,
       "TASK-0240": 25,
       "TASK-0241": 6,
-      "TASK-0242": 7,
+      "TASK-0242": 10,
       "TASK-0243": 1,
       "TASK-0244": 1,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -1086,7 +1086,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2722,
+    "events_applied": 2725,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2604,6 +2604,9 @@
       "codex:task0240:in-progress-to-in-review": 3341,
       "codex:task0240:ready-to-in-progress": 3340,
       "codex:task0240:review-approved-to-done": 3361,
+      "codex:task0242:in-progress-to-in-review-20260703": 3394,
+      "codex:task0242:release-main-claim-20260703": 3395,
+      "codex:task0242:release-template-claim-20260703": 3396,
       "codex:task0242:start": 3380,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -3812,5 +3815,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3393
+  "up_to_seq": 3396
 }
