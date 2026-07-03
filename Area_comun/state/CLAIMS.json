@@ -16076,6 +16076,22 @@
             "updated_at": "2026-07-03T11:37:02Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-promote-0233",
+            "expires_at": "2026-07-03T21:00:00Z",
+            "notes": "F2.2: promover 0233 proposed->ready (body re-alcanzado + intake), REQUEST a Analista (owner).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-promote-0233",
+                "Area_comun/state/TASK_INDEX.json#TASK-0233",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0233",
+                "Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md"
+            ],
+            "started_at": "2026-07-03T12:18:17Z",
+            "status": "released",
+            "task_id": "TASK-0233",
+            "updated_at": "2026-07-03T12:18:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0230",
             "expires_at": "2026-07-03T20:00:00Z",
             "notes": "Ratificacion 0230 (checker) tras OK/CERRABLE Analista fix-loop 1 (Aegis DECISION-0085).",
