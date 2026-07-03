@@ -33,5 +33,24 @@ file: Area_comun/tasks/TASK-0231-reqzeus-ws4-backend-modelos-peones.md
 - Si se corre el spike: va en `D:/Agentes/Zeus/piloto-peones`, cero escritura al repo medido; reporte de medicion.
 - Gate Analista (seguridad): GO. maker!=checker.
 
+## Medicion del uso de peones y regla de aislamiento (directiva Operador 2026-07-03)
+- **Medicion (descriptiva):** el diseno declara `orchestration_mode` POR TAREA (enum mono|peones|mixto|NA)
+  y captura los 5 campos peon del schema de medicion (congela en sello Etapa 1, <=08-jul):
+  `orchestration_mode`, `peones_n` (int), `peon_revivals_n` (int; los peones REVIVEN por memoria hibrida),
+  `peon_modelos` (str; p.ej. qwen2.5-coder:7b, deepseek-coder:6.7b), `tokens_peones` (int).
+  **Contabilidad dura:** `tokens_peones` es SUBSET ya contado en las cubetas dev/checker (informativo,
+  EXCLUIDO de toda confirmatoria, mismo trato que tokens_cache_reads) -> NO se suma aparte, no doble-contar.
+- **Regla de aislamiento (invariante del estudio):** los peones son una VARIABLE distinta del tratamiento
+  aditivo (el tratamiento medido es la GOBERNANZA ATESTADA, no la orquestacion). En el contraste central
+  (baseline mono vs gobernado mono) el brazo gobernado se mantiene MONO-orquestado; si aparece un peon se
+  REGISTRA (descriptivo via `orchestration_mode`) pero NO convierte el brazo en 'tratamiento peones'. El
+  EFECTO de los peones se mide SOLO en esta fase F6 (mono-vs-peones bajo gobierno completo -> Q1), aislado,
+  con `orchestration_mode` declarado por tarea y pool PROPIO (no se solapa con las unidades del contraste
+  central). Meter peones en el brazo gobernado del estudio central cambia DOS cosas a la vez (gobierno +
+  orquestacion) y confunde Q1/Q4: prohibido.
+- **DoD adicional:** el diseno de F6 declara `orchestration_mode` por tarea, captura los 5 campos peon, y
+  respeta el aislamiento intra-estudio (pool propio, no solapa el contraste central). Modelos peon candidatos
+  instalados en Ollama: qwen2.5-coder:3b/7b y deepseek-coder:6.7b.
+
 ## Handoff
 Autocontenida. Ambiguedad -> blocked + 1 pregunta concreta.
