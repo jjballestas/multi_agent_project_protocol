@@ -119,6 +119,12 @@
    falsables reales y debilitaria las SPECs como artefactos medidos. Remediacion = Arquitecto (fix-loop max 2).
    LECCION META: hasta el gate formal tiene punto ciego por alcance; el audit amplio (recomendado por operador)
    lo cazo. Doble evidencia para la tesis. Yo espero la remediacion.
+   DECISIONES DE DOMINIO RESUELTAS por el operador (2026-07-03) y RUTEADAS al Arquitecto (MSG DIRECTIVA-
+   decisiones-dominio-nova): DD-01 (a) ACEPTADO supuesto auth Sprint 1 + BR-C4 post-Sprint-1 (aplica a las 5
+   SPECs P3-001..005); DD-02 objeto RP NORMADO a min 20 chars (cambia legacy 15); DD-03 SECOP vacio = 'N/A'
+   declarada. El Arquitecto las hornea sin prisa (con la remediacion THROW o en ventana muerta); DD-02 toca
+   criterio falsable -> viaja en el proximo gate. Tracker marcado RESUELTA (ruteada). Ya no hay decisiones de
+   dominio abiertas del lote NOVA-DEV actual (nuevas rondas de SPECs podrian traer mas).
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el

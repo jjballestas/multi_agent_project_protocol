@@ -21,13 +21,17 @@
 > descriptiva). El egreso real (banco/retenciones/comprobante) y el circuito radicacion/liquidacion se
 > DIFIEREN a GOAL-P5/hardening (no son decisiones de dominio; ver seccion 3).
 
+> RESUELTAS 2026-07-03 por el Operador (DD-01/02/03) y ruteadas al Arquitecto para hornear en las SPECs
+> (MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-decisiones-dominio-nova). NOTA: DD-01 (autorizacion) aplica
+> a las 5 SPECs de aprobacion P3-001..005 (el supuesto recurre en P3-004/005), no solo a 001/002/003.
+
 ## 1. Decisiones de dominio (TU resuelves)
 
 | ID | SPEC / campo | Pregunta | Contexto / comportamiento legacy | Opciones | TU RESOLUCION | Estado |
 |---|---|---|---|---|---|---|
-| DD-01 | P3-001/002/003, campo 2 (usuario) | Modelo de autorizacion para Sprint 1: mientras NO exista la matriz por operacion (BR-C4), ?se acepta el supuesto "cualquier usuario autenticado con rol presupuesto captura/aprueba/emite"? | La matriz por operacion (emitir != aprobar != anular, maestro s.08-C) aun no esta sembrada en BD (brecha NOVA-PRES-001 s.6 B-05). La SPEC declara el supuesto temporal con via de salida: policy por operacion via BR-C4 post-Sprint-1. | (a) Aceptar el supuesto para Sprint 1 + confirmar que BR-C4 entra post-Sprint-1. (b) Exigir separacion minima ya (p.ej. aprobar requiere rol distinto de capturar) antes de construir. | _[pendiente]_ | ABIERTA |
-| DD-02 | P3-003, alcance p.3 y restr. 6d | El "objeto" del compromiso (RP): ?se norma el minimo de 15 caracteres del legacy, se cambia, o se relaja? | Legacy exige >=15 chars en el objeto del RP. La SPEC lo marca "decidir si norma" (B-04). | (a) Mantener >=15 como norma. (b) Otro minimo (indicar N). (c) Solo "no vacio", sin minimo. | _[pendiente]_ | ABIERTA |
-| DD-03 | P3-003, restr. 6d | Referencia SECOP vacia: ?cual es el valor por defecto documentado? | El legacy usaba el centinela magico '0' (sin significado) -> prohibido replicarlo. La SPEC exige un default documentado. | (a) Permitir null/vacio explicito (campo opcional). (b) Marca "N/A" declarada. (c) Hacer SECOP obligatorio cuando aplique (indicar cuando). | _[pendiente]_ | ABIERTA |
+| DD-01 | P3-001/002/003, campo 2 (usuario) | Modelo de autorizacion para Sprint 1: mientras NO exista la matriz por operacion (BR-C4), ?se acepta el supuesto "cualquier usuario autenticado con rol presupuesto captura/aprueba/emite"? | La matriz por operacion (emitir != aprobar != anular, maestro s.08-C) aun no esta sembrada en BD (brecha NOVA-PRES-001 s.6 B-05). La SPEC declara el supuesto temporal con via de salida: policy por operacion via BR-C4 post-Sprint-1. | (a) Aceptar el supuesto para Sprint 1 + confirmar que BR-C4 entra post-Sprint-1. (b) Exigir separacion minima ya (p.ej. aprobar requiere rol distinto de capturar) antes de construir. | **(a)** ACEPTADO el supuesto para Sprint 1 + BR-C4 (policy por operacion) CONFIRMADA post-Sprint-1 | RESUELTA (ruteada al Arquitecto) |
+| DD-02 | P3-003, alcance p.3 y restr. 6d | El "objeto" del compromiso (RP): ?se norma el minimo de 15 caracteres del legacy, se cambia, o se relaja? | Legacy exige >=15 chars en el objeto del RP. La SPEC lo marca "decidir si norma" (B-04). | (a) Mantener >=15 como norma. (b) Otro minimo (indicar N). (c) Solo "no vacio", sin minimo. | **NORMADO a min. 20 chars** (cambia el legacy de 15; ajustar validacion de aplicacion) | RESUELTA (ruteada al Arquitecto) |
+| DD-03 | P3-003, restr. 6d | Referencia SECOP vacia: ?cual es el valor por defecto documentado? | El legacy usaba el centinela magico '0' (sin significado) -> prohibido replicarlo. La SPEC exige un default documentado. | (a) Permitir null/vacio explicito (campo opcional). (b) Marca "N/A" declarada. (c) Hacer SECOP obligatorio cuando aplique (indicar cuando). | **(b) "N/A" declarada** (jamas el '0' legacy) | RESUELTA (ruteada al Arquitecto) |
 
 ## 2. Supuestos ya declarados con via de salida (solo CONFIRMAR)
 
