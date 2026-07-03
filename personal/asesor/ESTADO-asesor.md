@@ -52,8 +52,11 @@
 3. Sprint 1 gobernado: 30-jul (gate duro).
 
 ## Mis entregables (todos en personal/operador/vision-nova/)
-- HECHO: scripts-medicion/ (medicion_ledger.py + schema_medicion.json [52 cols, 5 campos peones +
-  par_id na_ok] + schema_defectos.json + README). Journal append-only -> vista materializada. Probados.
+- HECHO Y COMMITEADO (11fddf4, 2026-07-03): scripts-medicion/ (medicion_ledger.py + schema_medicion.json
+  [52 cols, 5 campos peones + par_id na_ok] + schema_defectos.json + README). Journal append-only -> vista
+  materializada. Smoke re-verificado verde ciclo completo (OPEN/UPDATE/CLOSE/verificar/sha256 incl. peones).
+  README corregido 47->52 cols. ANTES estaban solo en disco (sin commitear); ahora en git, atestables.
+  Listos para congelar a v1.0 en el sello Etapa 1.
 - HECHO: SELLO-ETAPA-1-nova-budget-DRAFT.md (pre-registro; placeholders [LLENAR-AL-SELLAR]).
 - HECHO: separacion de memoria (esta area personal/asesor/ + alta ruteada).
 
