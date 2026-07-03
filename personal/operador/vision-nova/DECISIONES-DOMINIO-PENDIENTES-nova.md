@@ -6,10 +6,12 @@
 > mailbox -> el Arquitecto la hornea en el campo de la SPEC. Se mide la coordinacion, asi que
 > resolverlas en lote antes/al arrancar Sprint 1 reduce idas y vueltas.
 >
-> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-7: P3-001..005 + P4-004 + P6-003). El Asesor lo
-> actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD b678221).
-> Ronda 7 (P6-003 OpenTelemetry, pool Q4, infra transversal): LIMPIA, sin nuevas decisiones de dominio.
-> Aislamiento OK (excluye el reporte de negocio P2.2 baseline). N/A a la enumeracion s.5 (no consume BD).
+> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-8: P3-001..005 + P4-004 + P6-003 + P2-004). El Asesor
+> lo actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD e6cd82b).
+> Ronda 8 (P2-004 Get_*_List BR-C3, miembro gobernado de PAR-D + fabrica Q4): LIMPIA, sin nuevas decisiones
+> de dominio. Aislamiento PAR-D ejemplar (excluye reporte agregado P2.2, exposicion incidental reconocida,
+> simetria spec_prepagado). OBSERVACION DE ESTUDIO (no es decision de dominio, va al SELLO): los ~4 Get_*_List
+> son un cluster casi isomorfo load-bearing para n>=10 -> Q4 declara n efectivo reducido (ver SELLO s.5).
 > Ronda 6 (P4-004 Apply_Obligation_Adjustment, pool Q4, aislamiento CRITICO): LIMPIA, sin nuevas
 > decisiones de dominio. Aislamiento ejemplar (excluye territorios baseline P4.1/P4.2/P4.3, leyo_codigo_hermano=NO,
 > verificacion dedicada en el gate). Hardening: anulacion de acto de ajuste sin validacion aguas abajo (B-02).

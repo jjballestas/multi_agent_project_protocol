@@ -137,6 +137,18 @@ Items dependientes de hardening entran SOLO por enmienda fechada con entrega com
 Asignacion ligero/completo: hash + ancla externa, ESTRATIFICADA por familia/tamano, sellada aqui
 (s.6). REGLA DURA: si el Sprint 1 no ejecuta >=10, Q4 se reporta SUBPOTENCIADO (no se rellena).
 
+NOTA DE INDEPENDENCIA (cosecha NOVA-DEV ronda 8, SPEC-NOVA-P2-004, commit e6cd82b): los items #7..N
+(Get_*_List de BR-C3) son una FAMILIA CASI ISOMORFA (~4 tareas: Availability/Commitment/Obligation/
+Payment List; mismo patron de lectura 15-param sobre distintas vistas de saldo). Son LOAD-BEARING para
+n>=10 (6 unidades nombradas + 4 Get_*_List = 10). REGLA DE ANALISIS SELLADA: se tratan como CLUSTER
+CORRELACIONADO en Q4; el n EFECTIVO independiente es < 10 (aleatorizar ligero/completo sobre 4 tareas de
+la misma forma prueba la misma forma 4 veces). La estratificacion por familia (s.6) equilibra la ASIGNACION,
+no la correlacion; Q4 declara el n efectivo reducido (anti-sobreventa). El Get_*_List cumple DOBLE ROL
+(miembro gobernado de PAR-D en Q3 + fabrica en Q4): NO es doble-conteo, son contrastes pre-registrados
+distintos (Q3 descriptivo/cota vs Q4 causal ligero/completo); su fase SPEC se excluye del delta (simetria
+con el spec_prepagado de P2.2). Los procs Get_*_List NO existen aun (se crean); su paridad se verifica
+contra las VISTAS existentes (readonly), sin GRANT EXECUTE.
+
 NOTA DE VERIFICACION (cosecha NOVA-DEV F-NOVA-01, commit ff68ee8): el conector readonly
 `nova_sql_connector_readonly_s9` tiene SELECT/VIEW DEFINITION pero NO EXECUTE (Msg 229). Por tanto la
 verificacion de EXISTENCIA de cada proc/vista de este pool (OBJECT_DEFINITION/sys.objects) es realizable

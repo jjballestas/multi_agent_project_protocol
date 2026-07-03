@@ -66,6 +66,11 @@
    Advertencia al operador: SPECs acumulan decisiones de dominio (objeto min-15, default SECOP) marcadas
    como preguntas -> resolver al construir (se mide la coordinacion). TRACKER VIVO en
    personal/operador/vision-nova/DECISIONES-DOMINIO-PENDIENTES-nova.md (DD-01 auth, DD-02 objeto, DD-03 SECOP).
+   RONDAS 6-8 LIMPIAS: P4-004 (aislamiento CRITICO impecable, excluye P4.1/P4.2/P4.3 baseline), P6-003
+   (OTel infra, borde con reporte P2.2 baseline OK; OTel = telemetria operacional != medicion del ledger),
+   P2-004 (Get_*_List, miembro gobernado PAR-D + fabrica Q4). CATCH CLAVE cosechado al SELLO s.5: los ~4
+   Get_*_List son CLUSTER casi isomorfo load-bearing para n>=10 -> Q4 declara n efectivo reducido; doble rol
+   PAR-D/Q4 NO es confound (contrastes pre-registrados distintos). POOL Q4 revisado 6/7 (falta P2.3 UI expl).
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
