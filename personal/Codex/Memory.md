@@ -4,6 +4,17 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0240 done-flip.
 
 ## Latest Session Note
 
+- TASK-0242 delivered to `in_review` in protocol commit `550c9ad coord(TASK-0242): deliver envelope fix loop`.
+  Delivery added `Area_comun/handoffs/HANDOFF-TASK-0242-codex-to-arquitecto-1.md`,
+  opened `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0242-in-review.md`, moved
+  TASK-0242 `in_progress -> in_review`, and released both Codex TASK-0242 claims through runtime transaction
+  `codex:task0242:deliver-in-review-tx-20260703` at seq 3394-3396. Implementation remains commit
+  `fd0d059 feat(protocol): add handoff envelope fix loop`. Evidence before delivery commit: product
+  `npm test` PASS 109 tests (87 pass, 22 skipped), product `node --check public/app.js` and
+  `node --check src/server.js` PASS, protocol encoding OK, domain-neutrality exit 0, protocol validator OK,
+  drift false / byte-identical at `up_to_seq=3396`, and committed `protocol.config.json` object hash unchanged
+  from `fd0d059` to current HEAD (`70d4c027a35b9d7d406bdfbe1cfcd427f203fc14`). Unrelated peer/operator
+  untracked files were left untouched.
 - TASK-0242 implementation commit landed in the protocol repo:
   `fd0d059 feat(protocol): add handoff envelope fix loop`. It adds the seven-field final handoff envelope
   doctrine to `Area_comun/protocol/TASK_PROTOCOL.md`, updates `Area_comun/protocol/TASK_TEMPLATE.md` and the
