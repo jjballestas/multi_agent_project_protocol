@@ -77,6 +77,15 @@
    (a) miembros GOBERNADOS de pares (post-17-jul, heredan patron congelado P4.1); (b) GATE FORMAL del Analista
    sobre TASK-0246 (mis revisiones = asesoria, no la gobernanza). DECISIONES DE DOMINIO estables en 3
    (DD-01 auth/DD-02 objeto/DD-03 SECOP) -> listas para resolver en lote con el operador.
+   GATE FORMAL ANALISTA = CAMBIO-REQUERIDO (9a2c211): F-0246-01 (q4_membership ausente en P3-001/002/003,
+   previas a mi GO, sin back-fill) + F-0246-02 (P4-004 exige THROW 50256/50254 pero el proc desplegado
+   Apply_Obligation_Adjustment emite 50265, verificado por el Analista via readonly). AMBOS los PASO POR ALTO
+   mi revision de asesor. LECCION CLAVE: mis revisiones son design + study-integrity, NO sustituyen la
+   VERIFICACION EMPIRICA contra la BD desplegada (no tengo readonly en esta sesion). Este NO-GO es DEMOSTRACION
+   EN VIVO de la tesis del estudio (checker formal atrapo un bug de falsabilidad que las revisiones informales
+   dejaron pasar) -> evidencia anecdotica. VALOR-ADD ruteado al Arquitecto (RECOMENDACION, no-firmante via
+   Operador): generalizar la re-verificacion de THROW a las 9 SPECs (riesgo sistemico, mismos codigos escritos
+   desde PRES no desde procs). Remediacion = del Arquitecto (fix-loop max 2 iter). Yo espero el re-juicio.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
