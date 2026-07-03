@@ -25,6 +25,25 @@
   parseada con D1-D4/S1-S7 exactos; neutralidad verde. Residual no bloqueante: prompt embebido del cron
   queda como seguimiento operativo de TASK-0242, no bloqueo de la taxonomia documental.
 
+## Ultima actualizacion 2026-07-03 - TASK-0244 release v1.18.0 OK
+- TASK-0244 release v1.18.0: OK/CERRABLE. Veredicto canonico en commit `461342b`
+  (`review(TASK-0244): Analista OK release 1180`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0244-release-1180-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0244-release-OK.md`.
+  Ancla protocolo REVIEW `d0529a4d512d67405a02aefaf7be296966ada675`; tag `v1.18.0` apunta al commit
+  `c9a442354bb5002b4df3a21e581ef1e891029c58`; trailer gate activo en
+  `Area_comun/protocol/COMMIT_TRAILERS.json` con `start_commit cd3642d`.
+- Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0244-6345365ad5c341689bfbc1beed189e2b/zeus-product`
+  sobre `b2b2395da39090109db6de2dc50726dbaab1a11e`; `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped).
+  Clean clone protocolo tag `c9a4423` y HEAD `d0529a4`: validate/encoding/neutrality EXIT 0; vivo
+  validate/encoding/neutrality EXIT 0; `test_trailers` EXIT 0 (9 casos); drift false `up_to_seq=3463`;
+  chain valid `checked_events=2791`; `protocol.config.json` byte-identico a `TFM-dataset-N500`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Vectores: CHANGELOG cubre TASK-0238/0239/0240/0241/0242/0243; tag y mensaje pin-epoch correctos;
+  templates sync en AGENTS.template s.6.1-6.4, HANDOFF_TEMPLATE, TASK_TEMPLATE y TASK_PROTOCOL; commit
+  trailers post-activacion finales en `c87103c` y `d0529a4`. Residual no bloqueante: la instruccion REVIEW
+  no cito commit de producto nuevo; use Zeus-protocol `b2b2395` como control, no como ancla de aceptacion.
+
 ## Ultima actualizacion 2026-07-03 - TASK-0242 envelope fix-loop OK
 - TASK-0242 envelope/fix-loop gate: OK/CERRABLE. Veredicto preparado en
   `Area_comun/artifacts/ANALISTA-TASK-0242-envelope-fixloop-veredicto.md`; MSG rr a Arquitecto
