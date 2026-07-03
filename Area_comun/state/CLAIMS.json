@@ -15483,6 +15483,39 @@
             "updated_at": "2026-07-02T22:21:56Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0241-0242-done-flip",
+            "expires_at": "2026-07-03T02:52:56Z",
+            "notes": "Done-flip TASK-0241 and TASK-0242 after Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-0242-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0241",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0242",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0242",
+                "Area_comun/tasks/TASK-0242-visionnova-f1e-envelope-fixloop.md"
+            ],
+            "started_at": "2026-07-03T00:52:55Z",
+            "status": "released",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-03T00:52:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0241-0242-doneflip-response",
+            "expires_at": "2026-07-03T01:53:34Z",
+            "notes": "Response message for TASK-0241 and TASK-0242 done-flips.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-0242-doneflip-response",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0241-0242-doneflip-done.md"
+            ],
+            "started_at": "2026-07-03T00:53:34Z",
+            "status": "released",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-03T00:53:34Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0241-inreview-flip",
             "expires_at": "2026-07-03T23:59:00Z",
             "notes": "Implementer in_review flip requested by Arquitecto after delivery commit ded4972 and released owner claim.",

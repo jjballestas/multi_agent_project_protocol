@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c677cb33351326b08bc0690658decc1a61b0476a3d37e450a6f9b239eaca661e",
+  "canonical_hash": "e268450560a0f1c555a0caffef070c70f51e6bac261c994af1b00687c0c88160",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -472,6 +472,8 @@
       "CLAIM-20260703-Codex-TASK-0240-delivery": 1,
       "CLAIM-20260703-Codex-TASK-0240-remediation": 1,
       "CLAIM-20260703-Codex-TASK-0240-taskfile-sync": 1,
+      "CLAIM-20260703-Codex-TASK-0241-0242-done-flip": 1,
+      "CLAIM-20260703-Codex-TASK-0241-0242-doneflip-response": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1075,8 +1077,8 @@
       "TASK-0238": 25,
       "TASK-0239": 27,
       "TASK-0240": 25,
-      "TASK-0241": 14,
-      "TASK-0242": 11,
+      "TASK-0241": 17,
+      "TASK-0242": 12,
       "TASK-0243": 1,
       "TASK-0244": 1,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -1086,7 +1088,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2734,
+    "events_applied": 2740,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2604,11 +2606,17 @@
       "codex:task0240:in-progress-to-in-review": 3341,
       "codex:task0240:ready-to-in-progress": 3340,
       "codex:task0240:review-approved-to-done": 3361,
+      "codex:task0241-0242:doneflip-response:claim-acquire": 3410,
+      "codex:task0241-0242:doneflip-response:claim-release": 3411,
+      "codex:task0241-0242:doneflip:claim-acquire": 3406,
+      "codex:task0241-0242:doneflip:claim-release": 3409,
+      "codex:task0241:doneflip:status-done": 3407,
       "codex:task0241:in-progress-to-in-review-20260703": 3398,
       "codex:task0241:inreview-flip-claim-acquire-20260703": 3397,
       "codex:task0241:inreview-flip-claim-release-20260703": 3399,
       "codex:task0241:response-msg-claim-acquire-20260703": 3400,
       "codex:task0241:response-msg-claim-release-20260703": 3401,
+      "codex:task0242:doneflip:status-done": 3408,
       "codex:task0242:in-progress-to-in-review-20260703": 3394,
       "codex:task0242:release-main-claim-20260703": 3395,
       "codex:task0242:release-template-claim-20260703": 3396,
@@ -3824,5 +3832,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3405
+  "up_to_seq": 3411
 }

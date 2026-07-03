@@ -2,7 +2,7 @@
 task_id: TASK-0241
 title: "[VISION-NOVA][F1.4] Taxonomia de defectos D1-D4 ampliada + severidad del checker + subconteo declarado"
 type: docs
-status: review_approved
+status: done
 owner: Arquitecto
 phase: P2
 priority: medium
