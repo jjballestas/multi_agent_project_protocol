@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0232 distributed harness delivery.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0233 done-flip.
 
 ## Latest Session Note
 
+- TASK-0233 done-flip completed after Arquitecto ACTION
+  `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0233-done-flip`. Local fetch/materialization brought the
+  Arquitecto ratification into the hot state: TASK-0233 `in_review -> review_approved` at seq 3585 and
+  TASK-0234 promotion state at seq 3586, with drift restored to false before Codex acted. Runtime transaction
+  `intent-tx:Codex:8183375476825bee2e00cd872df5fcd2125fdb556fafcd62542c1ca0a6aa3333` acquired/released
+  `CLAIM-20260703-Codex-TASK-0233-done-flip` and moved TASK-0233 `review_approved -> done` at seq 3587-3589.
+  Response message `MSG-20260703-Codex-to-Arquitecto-TASK-0233-doneflip-done.md` was added and registered via
+  runtime seq 3590-3591. Protocol commit `fd8c23e coord(TASK-0233): close done flip` includes the done flip,
+  response message, runtime events/snapshot, and the materialized TASK-0234 promotion state from existing
+  Arquitecto events. Evidence before commit: Zeus-protocol `node --check public/app.js; node --check
+  src/server.js` PASS, `npm test` PASS 112 tests (90 pass, 22 skipped), protocol encoding OK, domain-neutrality
+  exit 0, validator OK with unrelated non-response mailbox archive warning only, and drift false /
+  byte-identical at `up_to_seq=3591`. Unrelated `.claude/settings.json` and peer/operator personal files were
+  left untouched.
 - TASK-0233 delivered to `in_review`. Aegis instance commit
   `814365a7 test(instance): add distributed e2e task cycle` adds
   `scripts/distributed_e2e_task_cycle.py`, a reproducible clean-clone Git-only proof that registers disposable
