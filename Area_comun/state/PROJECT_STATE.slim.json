@@ -35,12 +35,6 @@
             "owner": "Arquitecto",
             "status": "proposed",
             "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
-        },
-        {
-            "id": "TASK-0244",
-            "owner": "Arquitecto",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
         }
     ],
     "next_actions": [

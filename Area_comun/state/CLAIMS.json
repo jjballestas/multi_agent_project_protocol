@@ -15778,6 +15778,22 @@
             "updated_at": "2026-07-03T01:23:02Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-ratify-0244",
+            "expires_at": "2026-07-03T10:00:00Z",
+            "notes": "Ratificacion 0244 (checker) tras OK/CERRABLE Analista 461342b; cierre F1.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-ratify-0244",
+                "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md"
+            ],
+            "started_at": "2026-07-03T02:03:51Z",
+            "status": "released",
+            "task_id": "TASK-0244",
+            "updated_at": "2026-07-03T02:03:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg-0241-0242-b1",
             "expires_at": "2026-07-03T08:00:00Z",
             "notes": "Higiene ciclo 0241/0242.",
