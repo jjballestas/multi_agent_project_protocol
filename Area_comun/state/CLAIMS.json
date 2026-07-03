@@ -16055,6 +16055,22 @@
             "updated_at": "2026-07-03T11:25:57Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-ratify-0232",
+            "expires_at": "2026-07-03T20:00:00Z",
+            "notes": "Ratificacion 0232 (checker) tras OK/CERRABLE Analista (harness distribuido F2.3).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-ratify-0232",
+                "Area_comun/state/TASK_INDEX.json#TASK-0232",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0232",
+                "Area_comun/tasks/TASK-0232-reqzeus-ws35-instalador.md"
+            ],
+            "started_at": "2026-07-03T12:07:34Z",
+            "status": "released",
+            "task_id": "TASK-0232",
+            "updated_at": "2026-07-03T12:07:34Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Ratificacion doble 0241+0242 (checker) tras OK/CERRABLE del Analista.",

@@ -18,14 +18,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0232",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "medium",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F2.3] Harness distribuido pull -> escribir -> push inmediato (claims visibles entre clones) + hosting privado de la instancia [re-alcance: pivote Vision Nova, DECISION-0083]"
-        },
-        {
             "id": "TASK-0233",
             "owner": "Analista",
             "phase": "P2",
