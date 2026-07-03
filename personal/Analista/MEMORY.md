@@ -1647,3 +1647,18 @@
   `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Residuales no bloqueantes:
   CLI acepta `--source-ref HEAD` si se fuerza explicitamente; grep global de la instancia encuentra menciones
   heredadas del instalador prohibido solo como prohibicion, no en configs/artefactos generados.
+- TASK-0234 (2026-07-03): CAMBIO-REQUERIDO/NO CERRABLE, veredicto commiteado en `75741ad`
+  (`review(TASK-0234): Analista requests runbook remediation`). Ancla protocolo
+  `e8bb127457e0e74e4d96df13d7390cb9aec84f47`; entrega doc citada `64d44ad`;
+  producto sin commit citado por la instruccion, por lo que el clon limpio de Zeus-protocol se probo en
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0234-runbook-onboarding-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0234-runbook-onboarding-veredicto.md`.
+  Gates: Zeus-protocol clean clone `npm test` exit 0, 112 tests, 90 pass, 22 skipped; hub validate con
+  secretos exit 0; clean clone sin `secrets/` validate exit 0; encoding/neutrality exit 0; drift 0
+  `up_to_seq=3601` antes del claim del veredicto; `protocol.config.json` byte-identico entre 64d44ad y HEAD,
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Bloqueantes:
+  F-0234-01 falta comando/payload minimo de `submit_intent` para claim/status/handoff/cierre; F-0234-02 falta
+  ruta/comando falsable del harness F2.3 y ciclo e2e F2.2. Fix-loop: remediar, re-gatear validate con/sin
+  secretos, drift 0, domain, encoding, #4 byte-identica y re-juicio Analista; maximo 2 iteraciones antes de
+  escalar al operador.
