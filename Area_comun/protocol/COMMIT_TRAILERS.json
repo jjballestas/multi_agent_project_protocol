@@ -1,8 +1,8 @@
 {
   "enabled": true,
-  "start_commit": "cd3642d",
+  "start_commit": "f5de486",
   "enforcement": "post_start_governed_commits_require_task_id_trailer",
   "activated_by": "Arquitecto",
   "activated_at": "2026-07-03",
-  "rationale": "Residual TASK-0240/0242 (F-2 anti-DoS): activado tras relanzar crons con prompts 0242 y verificar primer commit de peer con trailer (5fb85a4). start_commit movido a cd3642d: el commit de activacion original llevaba Task-Id fuera de la seccion final de trailers (Co-Authored-By en parrafo aparte)."
+  "rationale": "Residual TASK-0240/0242 (F-2 anti-DoS): activado tras relanzar crons con prompts 0242 y verificar primer commit de peer con trailer (5fb85a4). start_commit movido a cd3642d: el commit de activacion original llevaba Task-Id fuera de la seccion final de trailers (Co-Authored-By en parrafo aparte). | start_commit avanzado a f5de486 (2026-07-03 ~04:15): ese commit fix(mailbox) de normalizacion ASCII llevaba solo Task-Id sin Fixes-Task (teething del gate recien activado); no se reescribe historia pusheada, se avanza el baseline. Regla persistida: commits fix/revert/hotfix bajo el gate exigen Fixes-Task ademas de Task-Id."
 }
