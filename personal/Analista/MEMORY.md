@@ -5,7 +5,26 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-03 (TASK-0230 Aegis re-gate NO-GO).
+> Ultima actualizacion: 2026-07-03 (TASK-0230 Aegis fix-loop 1 OK).
+
+## Ultima actualizacion 2026-07-03 - TASK-0230 Aegis fix-loop 1 OK
+- TASK-0230 DECISION-0085 Aegis fix-loop 1: OK/CERRABLE. Veredicto canonico en commit
+  `2187b64` (`review(TASK-0230): Analista OK Aegis fixloop`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0230-aegis-fixloop1-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-fixloop1-OK.md`.
+  Ancla protocolo `5554ef64a2310290e6f5efa797a5ceba099c6237`; instruccion REVIEW `bb15212`;
+  producto `D:/Agentes/Zeus/Zeus-protocol` commit `e7c6da482a1e819507af37de77b9cd46712fb8c8`;
+  instancia `D:/Agentes/Zeus/NOVA/Aegis` commit `518b2e58efeb6ae084fa43f0cdee0c7de63f5d35`;
+  source tag `v1.18.0` -> `c9a442354bb5002b4df3a21e581ef1e891029c58`.
+- Gates: clean clone producto `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); payload propio
+  `createNewInstance` EXIT 0 para dry-run pin `v1.18.0`, write real en tmp, destino existente, ref
+  inexistente, nombres invalidos y DoR feature/product; hub vivo y clean validate/encoding/neutrality EXIT 0,
+  drift false `up_to_seq=3532`; Aegis validate/encoding/neutrality EXIT 0, drift false `up_to_seq=3457`;
+  `protocol.config.json` sin diff contra tag en hub y Aegis.
+- Resultado: F-0230-AEGIS-01 cerrado porque el handoff vigente nombra `aegis@NOVA/Aegis` como identidad final
+  y deja `nova-budget` solo como bootstrap historico; F-0230-AEGIS-02 cerrado porque
+  `operatingProfile.arm=nova-suite`. Residual no bloqueante: historico/eventos pueden retener `nova-budget`
+  como provenance, no identidad viva.
 
 ## Ultima actualizacion 2026-07-03 - TASK-0230 Aegis re-gate NO-GO
 - TASK-0230 DECISION-0085 Aegis re-gate: CAMBIO-REQUERIDO / NO-GO. Veredicto canonico en commit
