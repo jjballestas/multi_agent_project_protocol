@@ -15676,6 +15676,22 @@
             "updated_at": "2026-07-03T00:47:51Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-ratify-0243",
+            "expires_at": "2026-07-03T08:00:00Z",
+            "notes": "Ratificacion 0243 (checker) tras OK/CERRABLE Analista a70f4f5.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-ratify-0243",
+                "Area_comun/state/TASK_INDEX.json#TASK-0243",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0243",
+                "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md"
+            ],
+            "started_at": "2026-07-03T01:23:02Z",
+            "status": "released",
+            "task_id": "TASK-0243",
+            "updated_at": "2026-07-03T01:23:02Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg-0241-0242-b1",
             "expires_at": "2026-07-03T08:00:00Z",
             "notes": "Higiene ciclo 0241/0242.",

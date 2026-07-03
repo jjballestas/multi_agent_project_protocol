@@ -37,12 +37,6 @@
             "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0243",
-            "owner": "Arquitecto",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag"
-        },
-        {
             "id": "TASK-0244",
             "owner": "Arquitecto",
             "status": "proposed",
