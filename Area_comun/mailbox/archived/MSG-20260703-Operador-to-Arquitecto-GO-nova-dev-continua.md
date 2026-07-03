@@ -3,7 +3,7 @@ message_id: MSG-20260703-Operador-to-Arquitecto-GO-nova-dev-continua
 from: Operador
 to: Arquitecto
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-03
 context_refs:

@@ -3,7 +3,7 @@ message_id: MSG-20260703-Arquitecto-to-Analista-REQUEST-TASK-0246-throw-audit-tr
 from: Arquitecto
 to: Analista
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-03

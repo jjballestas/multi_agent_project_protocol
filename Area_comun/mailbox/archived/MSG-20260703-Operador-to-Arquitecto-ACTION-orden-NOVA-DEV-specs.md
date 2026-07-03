@@ -3,7 +3,7 @@ message_id: MSG-20260703-Operador-to-Arquitecto-ACTION-orden-NOVA-DEV-specs
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-03
 context_refs:

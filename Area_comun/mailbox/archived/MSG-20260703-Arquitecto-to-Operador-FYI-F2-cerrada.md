@@ -3,7 +3,7 @@ message_id: MSG-20260703-Arquitecto-to-Operador-FYI-F2-cerrada
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-03

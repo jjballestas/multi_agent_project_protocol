@@ -3,7 +3,7 @@ message_id: MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-throw-audit-pro
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-03
