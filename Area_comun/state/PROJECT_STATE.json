@@ -1167,7 +1167,7 @@
         {
             "id": "TASK-0243",
             "owner": "Arquitecto",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag"
         },
         {
@@ -1275,7 +1275,8 @@
         "DECISION-0080",
         "DECISION-0081",
         "DECISION-0082",
-        "DECISION-0083"
+        "DECISION-0083",
+        "DECISION-0084"
     ],
     "description": "Protocolo multiagente generico y reutilizable. Este repo se gestiona a si mismo (dogfooding) con su propio protocolo. Primera instancia aplicada: bot_spot_ai_strategy_pack.",
     "domain_critical_boundaries": "El nucleo del protocolo permanece NEUTRAL DE DOMINIO (sin terminos de negocio/trading, sin secretos). Cambios incompatibles requieren decision + aprobacion humana.",

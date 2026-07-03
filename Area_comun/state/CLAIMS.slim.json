@@ -1,5 +1,21 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260703-arquitecto-0243-decision0084",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0243-decision0084",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0243",
+                "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md",
+                "Area_comun/decisions/DECISION-0084-identidad-antivibecoding-dor-pin-tag.md",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0243"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

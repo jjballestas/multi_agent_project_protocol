@@ -3,7 +3,7 @@ message_id: MSG-20260703-Arquitecto-to-Codex-GO-TASK-0242-f1e-envelope
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-03
 context_refs:

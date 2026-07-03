@@ -15607,6 +15607,26 @@
             "updated_at": "2026-07-03T00:05:21Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-0243-decision0084",
+            "expires_at": "2026-07-03T08:00:00Z",
+            "notes": "F1-F: DECISION-0084 + promocion 0243 + anotacion 0230 (directiva dae40ac).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0243-decision0084",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0243",
+                "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md",
+                "Area_comun/decisions/DECISION-0084-identidad-antivibecoding-dor-pin-tag.md",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T01:01:38Z",
+            "status": "active",
+            "task_id": "TASK-0243",
+            "updated_at": "2026-07-03T01:01:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Ratificacion doble 0241+0242 (checker) tras OK/CERRABLE del Analista.",
@@ -15624,6 +15644,52 @@
             "status": "released",
             "task_id": "TASK-0241",
             "updated_at": "2026-07-03T00:47:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-hyg-0241-0242-b1",
+            "expires_at": "2026-07-03T08:00:00Z",
+            "notes": "Higiene ciclo 0241/0242.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-hyg-0241-0242-b1",
+                "Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0241-taxonomia-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0241-taxonomia-OK.md",
+                "Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0242-envelope-fixloop-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0242-envelope-fixloop-OK.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0241-taxonomia.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0241-taxonomia.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0242-envelope-fixloop.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0242-envelope-fixloop.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0241-inreview-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0241-inreview-flip.md"
+            ],
+            "started_at": "2026-07-03T00:57:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260703",
+            "updated_at": "2026-07-03T00:57:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-hyg-0241-0242-b2",
+            "expires_at": "2026-07-03T08:00:00Z",
+            "notes": "Higiene ciclo 0241/0242.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-hyg-0241-0242-b2",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-ACTION-doneflip-0241-0242.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Codex-ACTION-doneflip-0241-0242.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-GO-TASK-0242-f1e-envelope.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Codex-GO-TASK-0242-f1e-envelope.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0241-0242-doneflip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0241-0242-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0241-in-review-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0241-in-review-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0242-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0242-in-review.md"
+            ],
+            "started_at": "2026-07-03T00:57:43Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260703",
+            "updated_at": "2026-07-03T00:57:43Z"
         },
         {
             "claim_id": "CLAIM-20260703-hyg-dualsesion-arquitecto",

@@ -18,6 +18,19 @@ file: Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md
 
 # TASK-0230 - [VISION-NOVA][F2.1] new_instance nova-budget (re-alcance DECISION-0083)
 
+## Extension intake v2 del template de instancia (DECISION-0084; directiva Operador dae40ac)
+
+El TASK_TEMPLATE de la instancia nova-budget EXTIENDE el bloque intake del hub con los campos
+v2 de la Definition of Ready (anexo A de DECISION-0084; detalle en
+personal/operador/vision-nova/CHECKLIST-DEFINITION-OF-READY-V2.md s.3):
+- `priority: P1|P2|P3` (todo tipo).
+- Para `type: feature|product` (obligatorios): `target_user` (1 linea), `functional_scope`
+  (1-3 lineas), `assets_inputs` (lista | "ninguno"), `tech_constraints` (lista | "ninguna"),
+  `risks_list` (lista >=1 | "ninguno declarado").
+- REGLA ANTI-VACIO: "ninguno"/"ninguna" EXPLICITO vale; campo AUSENTE no vale; placeholder
+  (TBD) invalido (R2). El enforcement estructural vive en la INSTANCIA (o v1.19 futura); el
+  validador del hub NO cambia en F1.
+
 - **Owner build:** Codex - **Review:** Analista - **Checker:** Arquitecto
 - **Repo producto:** `D:/Agentes/Zeus/Zeus-Aegis`. Dep: D3 (0074), D4 (0075). Reusa `autoStartGateway` existente.
 
