@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "eb7f78faa5ba6152f824603f3eac5eaf96d1864bbb9a4a69de3b24331184d21b",
+  "canonical_hash": "1b34ac4c63577256874261f7685a7e6db7e2ed2a5145d24e3f99090ac5f589dc",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1122,7 +1122,7 @@
       "TASK-0231": 2,
       "TASK-0232": 19,
       "TASK-0233": 21,
-      "TASK-0234": 12,
+      "TASK-0234": 16,
       "TASK-0235": 25,
       "TASK-0236": 14,
       "TASK-0237": 16,
@@ -1141,7 +1141,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2930,
+    "events_applied": 2934,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2875,6 +2875,7 @@
       "intent:Analista:claim:431fee9190ef205334bdeeff29e20942c065779ca6b761a5d968ba43a14dacee": 3207,
       "intent:Analista:claim:4338194ba6b0cc52473ad3e468a3784033822c9e508e38fa52c5e4d175cf4b26": 2408,
       "intent:Analista:claim:43be5094d074fb66b0b7af0b16974ca82f3a8b87470dc539be444464ea3423c7": 2441,
+      "intent:Analista:claim:480c29b500aa4b557d9ed6413edde209ac1e40d3f5182f9589a58edef17b9bda": 3603,
       "intent:Analista:claim:49e8426ea246ff2ef1e86ed7061b6f273f86cd8fc1c720e5b5ff3329cec2cfd6": 3208,
       "intent:Analista:claim:4a31d475e5d6c14d92f89e51b41e3ba0f0d2f17d511463c59f5f731e144d81c0": 2462,
       "intent:Analista:claim:4aeb074291ce1f4ca81d68dc7ff9f84a1304df2f623f41bdac0286d34ed1e949": 2283,
@@ -2883,8 +2884,10 @@
       "intent:Analista:claim:56d78b0dca8565ec34b86e4f0a44d6526c7439c67e5ae4a069b41523ba42396a": 3154,
       "intent:Analista:claim:5c3dbaf945b4cecae82ea74c733c02e3121778ae8aac204161448dc2d772edcc": 2512,
       "intent:Analista:claim:5f7dc17745b2cd1da2e5f3c8016f5308f6391f3a76ef0356a5a774c5feae7e25": 2464,
+      "intent:Analista:claim:60682ffb505ff1c117862ab21470d70b5d22d7c213d89fb3f019aca3716f36c6": 3604,
       "intent:Analista:claim:62276023bdac2739f7a08028b2dcff299bcf05da38d790cecd888ecec7bcbb5f": 3344,
       "intent:Analista:claim:63a6897b4c75ccac3374653d6bec0b98826257f441184baaec45698add7758fc": 3346,
+      "intent:Analista:claim:7694ae02c407aad2df6aba1c3ad8eaf7fdb3d40ce378bbb494a4f2c9125c5ef4": 3602,
       "intent:Analista:claim:77a11d155b7d2ecb69f38fdce571a73fa41d06dcdaffb82f7e27ff172d37eb7a": 2517,
       "intent:Analista:claim:808b86df27db4a96b4f46095faf2d470c68ad1adcc7a184d4d11f0513bc4bc64": 2405,
       "intent:Analista:claim:879475fb096ae6c4a8f2683c802c61ac8180ac0244daed185b9fbf91eec952bc": 2418,
@@ -2903,6 +2906,7 @@
       "intent:Analista:claim:bca3e1c75d9486791f22a6e7558d43279a7a4d4466d836e9ded1e61c0b4e9d38": 3347,
       "intent:Analista:claim:c7389ac75212aa0e387181fe1ed3106687ebed05135ebb497ceb15e432b0c972": 2430,
       "intent:Analista:claim:ca43200e7687f49f697973bf3e277f3b88175adf2246706bc7a0f5d17007abb9": 2443,
+      "intent:Analista:claim:d4e0c6d3415405fbc3fb6c58214b9291ef562c04d97a56e0f27c2cceeef523af": 3605,
       "intent:Analista:claim:dc6d25a6c49d109ab7d9fcaee996c2a1006eb84dac671cbfffaa05536506da13": 2414,
       "intent:Analista:claim:de932ea463c52bafd3485e499e5420a10fc0736903319a1c23e0e26b7d9b07b9": 3316,
       "intent:Analista:claim:defa2a61fc1d5fa376d8ad62e593532b8c551d3ef24ca6467ed903ef6404b260": 2406,
@@ -4075,5 +4079,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3601
+  "up_to_seq": 3605
 }

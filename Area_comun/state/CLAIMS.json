@@ -15411,6 +15411,26 @@
             "updated_at": "2026-07-01T23:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Analista-TASK-0234-review",
+            "owner": "Analista",
+            "status": "released",
+            "task_id": "TASK-0234"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Analista-TASK-0234-review-release-helper",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Helper claim to release TASK-0234 Analista review claim.",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Analista-TASK-0234-review",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Analista-TASK-0234-review-release-helper"
+            ],
+            "started_at": "2026-07-03T14:29:58Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T14:29:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230",
             "expires_at": "2026-07-04T23:59:59Z",
             "notes": "TASK-0230 delivered to in_review.",
