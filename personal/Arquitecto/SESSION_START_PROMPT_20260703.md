@@ -62,6 +62,12 @@ epoch v1.14.0 PINNED, #4. protocol.config.json byte-identico SIEMPRE.
   NO = "peer trabajando" -> revisa `.protocol-tmp/<peer>_mailbox_cron/runs/*.err.log`; puede haberse negado por un
   claim bloqueante (vi un claim wildcard `["*"]` del Analista frenar a Codex ~1h). FIX: resuelve el bloqueo +
   des-seen la ACTION.
+- **REGLA 15-MIN (directiva operador 2026-07-03):** BASELINE = una tarea normal del loop demora 6-9 min en
+  promedio; si una tarea/peticion ruteada lleva >15 min sin entrega ni respuesta es ANOMALIA -> revision de
+  analisis obligatoria (err.log del peer + seen.json + CLAIMS activos + envelope final + status), no espera
+  pasiva. Es POR TAREA demorada (evento), NO polling periodico. Watchdog v3.1 la detecta: peticion >900s sin
+  procesar / seen sin respuesta-ni-commit / claim retenido sin exec. El envelope final del peer suele DECIR
+  que espera (leerlo primero: asi se cazo la espera-cruzada de claims 0241/0242).
 - **CRONS:** `MaxNoArquitectoRounds`=15 (subido de 7). Relanzar: `powershell -NoProfile -File
   personal/<peer>/<peer>_mailbox_cron.ps1` (gateado por el clasificador; si deniega, handoff al operador). taskkill
   //T //F permitido. Verifica liveness (pid + heartbeat, no "limit reached") ANTES de rutear.
