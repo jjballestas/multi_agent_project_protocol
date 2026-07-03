@@ -102,8 +102,13 @@
    especifico" -> el defecto es SISTEMICO (mismo metodo en las 9 SPECs), no solo P4-004. UPGRADE de mi
    recomendacion: hacer la pasada amplia de THROW AHORA -- costo cero de agenda (TASK-0246 in_progress; pares
    gobernados bloqueados hasta 17-jul = ventana muerta) + costo bajo (OBJECT_DEFINITION readonly doc-only).
-   Recomendacion firme ruteada/en open/. WATCH higiene: la ACTION scripts-medicion-hub y mi RECOMENDACION-THROW
-   siguen VIVAS (no consumidas); no deben archivarse. TASK-0246 permanece in_progress por directiva del operador.
+   Recomendacion firme ruteada/en open/. WATCH higiene: la ACTION scripts-medicion-hub sigue VIVA (no
+   consumida); no debe archivarse. TASK-0246 permanece in_progress por directiva del operador.
+   RESUELTO (5fdfb39): el Arquitecto CONSUMIO mi recomendacion de open/ y ruteo el AUDIT DEFINITIVO de THROW
+   al Analista (REQUEST rr=true), scopeado a los 5 procs de aprobacion P3-001..005 (los unicos con THROW de
+   proc; excluye correctamente P6-003/P2-004/P2-003 sin procs; P4-004 ya alineado). El operador dio GO firme
+   pero YA ERA REDUNDANTE -> NO envie mi GO (evito ruido). El gap sistemico se cierra DENTRO del gate (Analista
+   verifica por OBJECT_DEFINITION). Espero el resultado del audit. Mi RECOMENDACION-THROW en open/ = consumida.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
