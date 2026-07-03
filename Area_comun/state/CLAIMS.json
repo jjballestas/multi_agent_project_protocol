@@ -16293,6 +16293,31 @@
             "updated_at": "2026-07-03T10:34:51Z"
         },
         {
+            "claim_id": "CLAIM-20260703-hyg-f2-b3",
+            "expires_at": "2026-07-03T20:00:00Z",
+            "notes": "Higiene ciclo F2.1 (6 consumidos).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-hyg-f2-b3",
+                "Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-fixloop1-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0230-aegis-fixloop1-OK.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0230-rejuicio-aegis.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0230-rejuicio-aegis.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Operador-FYI-trailers-A-confirmado.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Operador-FYI-trailers-A-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0230-aegis-remediation-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0230-aegis-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0230-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0230-in-review.md"
+            ],
+            "started_at": "2026-07-03T11:50:56Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260703",
+            "updated_at": "2026-07-03T11:50:56Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg0240-b1-arquitecto",
             "expires_at": "2026-07-03T05:00:00Z",
             "notes": "Higiene ciclo 0240 lote 1.",
