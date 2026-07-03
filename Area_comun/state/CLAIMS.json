@@ -16875,6 +16875,31 @@
             "updated_at": "2026-07-03T22:17:21Z"
         },
         {
+            "claim_id": "CLAIM-20260704-archive-ciclo-regate-arquitecto",
+            "expires_at": "2026-07-04T01:30:00Z",
+            "notes": "Archiva el ciclo de re-gate DD (REVIEW+NOGO+re-juicio+OK, resuelto OK-CERRABLE), la DIRECTIVA ventana-muerta (ejecutada 3/3) y el FYI piloto (leido). open/ queda vacio.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-archive-ciclo-regate-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-consolidado-dd-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-consolidado-dd-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-rejuicio-1-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-rejuicio-1-OK.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0246-regate-consolidado-dd.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0246-regate-consolidado-dd.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0246-regate-rejuicio-1.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0246-regate-rejuicio-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-trabajo-ventana-muerta.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-trabajo-ventana-muerta.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-FYI-piloto-medicion-arranca.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-FYI-piloto-medicion-arranca.md"
+            ],
+            "started_at": "2026-07-03T22:53:41Z",
+            "status": "released",
+            "task_id": "OPS-HIGIENE-MAILBOX-20260704b",
+            "updated_at": "2026-07-03T22:53:41Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

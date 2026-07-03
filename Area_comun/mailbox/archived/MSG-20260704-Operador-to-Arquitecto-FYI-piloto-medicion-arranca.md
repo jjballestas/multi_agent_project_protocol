@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-FYI-piloto-medicion-arranca
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:
