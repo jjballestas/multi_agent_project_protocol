@@ -114,6 +114,18 @@
   n EFECTIVO reducido; doble rol PAR-D/Q4 NO es confound (contrastes pre-registrados distintos).
 - Tracker de decisiones de dominio + separacion de memoria (esta area) + alta ruteada.
 
+## Asiento de coordinacion del build de Nova (regla del Arquitecto 2026-07-04, 96ebae2)
+- **AHORA (ventana del estudio, hasta sello/30-jul): asiento = HUB.** El brazo gobernado es el TRATAMIENTO
+  medido -> su atestacion debe estar en el MISMO #4 que la medicion + sello, en un solo asiento. Meter
+  NOVA/Aegis a mitad del estudio = costura de cross-atestacion antes del sello (viola regla de oro del sello).
+- **Codigo siempre = NOVA/Nova-Budget; estudio/medicion/sello/#4 siempre = HUB.** Workflow VS Code del
+  Operador: abre Nova-Budget para codigo + coordina desde el hub (sin multi-root).
+- **POST-sello: migra a NOVA/Aegis** (instancia operativa del equipo). Regla dual cross-atestacion: hub =
+  #4 del estudio/meta + sello; NOVA/Aegis = #4 operativo del build; el journal del hub registra el sha256
+  de la atestacion de Aegis por gate. ELEGANTE (study-relevant): esa migracion ES la evidencia de
+  transferibilidad (la replica employee-run pre-registrada) -> arquitectura y estudio se alinean. Enmienda
+  corta a DECISION-0050/0085 pendiente (Arquitecto redacta).
+
 ## Contexto real del negocio (clave)
 Objetivo real = Nova Budget/Accounting/Payroll/Treasury para la EMPRESA del operador, employee-ready.
 Stack: Clean Architecture .NET 10 (Api/Application/Domain/Infrastructure/Mcp/Contracts) + React/TS/Vite
