@@ -1518,3 +1518,19 @@
   `without Ops-Reason`; texto libre y case variant no cuentan; unknown task/fix fallan; ops allowlist,
   personal exempt y `fix!` positivo pasan. Residual no bloqueante: parser acepta bloque final `Key: value`
   generico y solo consume claves permitidas; no deja contar lineas intermedias.
+- TASK-0243 (2026-07-03): OK/CERRABLE, veredicto commiteado en `a70f4f5`
+  (`review(TASK-0243): Analista OK decision 0084`). Ancla protocolo
+  `b37b9a31b64641fb19fc96552477cec769e2c03d`, entrega `f3f91b3f410564331c435417366538a47d2fd806`,
+  producto control `b2b2395da39090109db6de2dc50726dbaab1a11e`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0243-decision0084-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0243-decision0084-OK.md`. DECISION-0084 pasa:
+  evento `intent_type=decision` seq 3427, relates_to GOAL-VISION-NOVA-001 + DECISION-0083,
+  clausula pin-anclado-al-tag con los 5 pineados anclados a `TFM-dataset-N500`, `protocol.config.json`
+  byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`,
+  10 puntos DoR verbatim de `dae40ac`, mapa 6/10 v1 honesto y regla anti-vacio. TASK-0230 anota
+  `priority`, `target_user`, `functional_scope`, `assets_inputs`, `tech_constraints`, `risks_list`
+  para feature/product; hub intacto: validator no cambio y TASK-0238 sigue done. Gates: validate vivo
+  con secretos exit 0; validate clon limpio sin secretos exit 0; encoding/neutrality exit 0; drift 0
+  `up_to_seq=3436`; chain valid `checked_events=2764`; Zeus-protocol clean clone `npm test` en `b2b2395`
+  exit 0, 109 tests, 87 pass, 22 skipped. Residuales no bloqueantes: no habia commit nuevo de producto
+  citado; `scope_routes` de TASK-0243 conserva una ruta antigua de 0230 pero el archivo real fue anotado.
