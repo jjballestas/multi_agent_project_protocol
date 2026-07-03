@@ -98,6 +98,12 @@
    (gobernado): el re-juicio re-verifico SOLO los THROW de P4-004; los de otras SPECs cierran sin verificar-al-
    spec (red = gancho RE-VERIFICAR al construir; paridad EXECUTE diferida a producto). TASK-0246 CERRABLE;
    espero cierre del Arquitecto + registro del residual P2-004. Decision pasada-amplia-THROW sigue abierta.
+   ROOT CAUSE ADMITIDA por el Arquitecto en su wrap-up: "genere THROWs de la familia PRES-03, no del proc
+   especifico" -> el defecto es SISTEMICO (mismo metodo en las 9 SPECs), no solo P4-004. UPGRADE de mi
+   recomendacion: hacer la pasada amplia de THROW AHORA -- costo cero de agenda (TASK-0246 in_progress; pares
+   gobernados bloqueados hasta 17-jul = ventana muerta) + costo bajo (OBJECT_DEFINITION readonly doc-only).
+   Recomendacion firme ruteada/en open/. WATCH higiene: la ACTION scripts-medicion-hub y mi RECOMENDACION-THROW
+   siguen VIVAS (no consumidas); no deben archivarse. TASK-0246 permanece in_progress por directiva del operador.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
