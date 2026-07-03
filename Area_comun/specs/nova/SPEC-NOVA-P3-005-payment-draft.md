@@ -11,6 +11,7 @@
 - q4_membership: **FUERA** (criticidad ALTA, frontera Treasury/Pagos -> por la regla de criticidad sellada NO entra al contraste causal Q4; se especifica igual, solo descriptiva)
 - isolation: familia P3 gobernada sin hermano baseline; manifiesto de archivos leidos = PRES-07 (+PRES-06 herencia); leyo_codigo_hermano = NO
 - db_verified_at: objetos de NOVA-PRES-07 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
+- throw_source (verificado OBJECT_DEFINITION + PRES-07): **PROC-DIRECTO** `Approve_Payment_Draft` = 50180-50187 (regla de oro = 50187) [confirmado en OBJECT_DEFINITION; el proc NO emite 50188-50190]. **TRIGGER/CHECK durante la transaccion** (NO en la def directa del proc): 50188-50190 (coherencias de vigencia/pertenencia de Payment_Draft(_Line), PRES-07 s.3.1), 54257 (trigger de `Payment_Order_Budget_Line`: obligacion de la misma vigencia que la orden).
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
 - stack (obligatorio): React+TS+Vite (front sin SQL) / ASP.NET Core .NET 10 en capas + NOVA.Mcp / SQL Server 2025 via SPs con gateways tipados / OpenTelemetry / ProblemDetails. Anti-patrones PROHIBIDOS: WebForms/PageMethods, DataTable entre capas, DLLs manuales, capa DATABASE generica, secretos en .config, centinelas -99.
 
@@ -30,7 +31,7 @@ TEMPORAL: usuario autenticado con rol presupuesto; policy por operacion (BR-C4) 
 
 ## 3. Alcance definido
 1. Crear/editar el borrador (`Budget.Payment_Draft(_Line)`) en draft -> canal: DML tipado del gateway (NOVA-PRES-07 s.5 fila "Crear/editar").
-2. Herencia desde la obligacion: cada linea del pago pertenece a una linea de obligacion (RN-03, THROW 50186/50188-50190), hereda vigencia/rubro/fuente/BPIN.
+2. Herencia desde la obligacion: cada linea del pago pertenece a una linea de obligacion (RN-03, THROW 50186 proc-directo; 50188-50190 triggers de coherencia del borrador), hereda vigencia/rubro/fuente/BPIN.
 3. Transicion `draft -> ready_to_approve`.
 4. Aprobar el pago presupuestal (control presupuestal + materializar la orden) -> canal UNICO: `Budget.Approve_Payment_Draft(@draft,@user[,@number])`; devuelve `payment_order_id, payment_number`.
 5. Descartar borrador -> `discarded`.
@@ -46,7 +47,7 @@ TEMPORAL: usuario autenticado con rol presupuesto; policy por operacion (BR-C4) 
 ## 5. Contenido / assets definidos
 - **BD (RE-VERIFICAR contra la desplegada):**
   - Tablas: `Budget.Payment_Draft`, `Budget.Payment_Draft_Line` (schema/127), `treasury.Payment_Order`, `treasury.Payment_Order_Budget_Line` (EL pago presupuestal; `paid_amount`/`reversed_amount`, origen tipificado). (`Budget.Payment/Payment_Line` fueron ELIMINADAS -- no existen.)
-  - Proc: `Budget.Approve_Payment_Draft(@payment_draft_id, @approved_by_user_id, @payment_number=NULL)` (bloqueo sobre borrador+lineas de obligacion+pagos; THROW 50180-50190; materializa `Payment_Order` 'G' source_module_code='budget_payment_draft').
+  - Proc: `Budget.Approve_Payment_Draft(@payment_draft_id, @approved_by_user_id, @payment_number=NULL)` (bloqueo sobre borrador+lineas de obligacion+pagos; THROW PROC-DIRECTO 50180-50187 -- ver throw_source; 50188-50190 son triggers de Payment_Draft; materializa `Payment_Order` 'G' source_module_code='budget_payment_draft').
   - Numeracion: `MAX(TRY_CONVERT(int, payment_number))+1` por vigencia bajo bloqueo (el egreso NO usa `Document_Series` hoy, B-04).
   - Vistas: `vw_Payment_Obligation_Validation` (pre-validacion del 50187), `vw_Obligation_Line_Balance`, `vw_Payment_Amount_Validation`, `vw_Payment_Order`/`vw_Payment_Line`.
 - **API:** `POST /api/budget/payment-drafts`, `PUT/PATCH .../{id}/lines`, `POST .../{id}/validate` (previsualiza via `vw_Payment_Obligation_Validation`), `POST .../{id}/ready`, `POST /api/budget/payment-drafts/{id}/approve` (invoca el proc; retorna payment_order_id/number), `POST .../{id}/discard`, `GET`. DTOs 1:1; ProblemDetails.
