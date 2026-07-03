@@ -15500,6 +15500,24 @@
             "updated_at": "2026-07-03T08:40:48Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-done-flip",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Done-flip TASK-0230 after Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0230",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0230",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-done-flip.md"
+            ],
+            "started_at": "2026-07-03T11:30:45Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T11:30:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230-prune-invalid-claims",
             "expires_at": "2026-07-04T00:00:00Z",
             "notes": "Prune malformed released route correction claims created during TASK-0230 route correction.",

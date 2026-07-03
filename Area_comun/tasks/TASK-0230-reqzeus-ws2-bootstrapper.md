@@ -2,7 +2,7 @@
 task_id: TASK-0230
 title: "[VISION-NOVA][F2.1] new_instance de nova-budget desde tag v1.18.0 + perfil de instancia (arm/mode + taxonomia de riesgo) [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high
