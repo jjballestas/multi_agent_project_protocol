@@ -31,7 +31,7 @@ approval_ref: "Naming publico de la metodologia = identidad; aprobado por el Ope
 2. **Familia de nombres (convencion de habla para desambiguar):**
    - **Aegis-core** = el HUB, la fuente canonica de la metodologia (este repositorio). Se dice
      "Aegis-core" o "el hub" para la fuente.
-   - **`aegis/`** = la instancia de la metodologia aplicada a un proyecto (carpeta/repo). Convencion
+   - **`Aegis/`** = la instancia de la metodologia aplicada a un proyecto (carpeta/repo). Convencion
      reconocible tipo `.git`/`node_modules`: el nombre se repite en cada proyecto y significa "la capa
      Aegis aplicada aqui". Ya existe `NOVA/Aegis` (la instancia aegis de la suite Nova).
    - **Zeus-Aegis** = el PRODUCTO/front (la app que operaria/observaria la metodologia).
@@ -58,12 +58,12 @@ approval_ref: "Naming publico de la metodologia = identidad; aprobado por el Ope
    cadena atestada. Por eso el rename es MARCA-SOLO y ORTOGONAL a lo medido: el dataset es historia
    inmutable; la marca solo anota procedencia. **H1-H3 y el N=500 NO se tocan.** El id tecnico del config
    permanece; 'Aegis' vive fuera del config (README, docs publicados, spec de referencia, namespace de
-   skills, carpetas de instancia `aegis/`).
+   skills, carpetas de instancia `Aegis/`).
 
 6. **Relacion con DECISION-0085.** Esta DECISION ACLARA/eleva el uso de 'Aegis': en 0085 'Aegis' nombra la
    INSTANCIA de metodologia de la suite Nova (`NOVA/Aegis`); aqui 'Aegis' se eleva a MARCA de la
    metodologia entera. No hay contradiccion: `NOVA/Aegis` sigue siendo "la instancia aegis de Nova", que
-   es exactamente el patron de nombre `aegis/` de esta decision.
+   es exactamente el patron de nombre `Aegis/` de esta decision.
 
 7. **i18n (publicacion) = programa de CARRIL B, post-sello.** Traducir a INGLES la superficie PUBLICADA
    (core neutral + `*.template.*` + README + spec de referencia) NO es cosmetico: es un programa acotado
