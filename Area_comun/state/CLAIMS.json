@@ -16148,7 +16148,7 @@
         {
             "claim_id": "CLAIM-20260703-arquitecto-promote-0234",
             "expires_at": "2026-07-03T22:00:00Z",
-            "notes": "F2.5: promover 0234 proposed->in_progress + runbook onboarding remoto (doc del Arquitecto).",
+            "notes": "Entrega 0234 completa (64d44ad); release para flip in_review por Codex.",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-promote-0234",
@@ -16157,10 +16157,10 @@
                 "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md",
                 "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
             ],
-            "started_at": "2026-07-03T14:01:33Z",
-            "status": "active",
+            "started_at": "2026-07-03T14:05:02Z",
+            "status": "released",
             "task_id": "TASK-0234",
-            "updated_at": "2026-07-03T14:01:33Z"
+            "updated_at": "2026-07-03T14:05:02Z"
         },
         {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0230",
