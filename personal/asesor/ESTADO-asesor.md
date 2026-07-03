@@ -2,180 +2,119 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-03 (tarde, F2 COMPLETA + separacion de memoria hecha).
+> Ultima actualizacion: 2026-07-03 (noche, ciclo NOVA-DEV cerrado + decisiones dominio + decision nombres Aegis).
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
-  Participante NO-FIRMANTE (alta REGISTRADA: DECISION-0086, commit 26ac919, 2026-07-03; id `asesor`,
-  cero capabilities de ledger, canal=mailbox firmado Operador, area personal/asesor/, agent_registry NO tocado).
+  Participante NO-FIRMANTE (alta REGISTRADA: DECISION-0086, commit 26ac919; id `asesor`, cero
+  capabilities de ledger, canal=mailbox firmado Operador, area personal/asesor/, agent_registry NO tocado).
 - CANAL: ordenes/respuestas al Arquitecto SOLO por MAILBOX (MSG-YYYYMMDD-Operador-to-Arquitecto-*)
   firmado como Operador, commit con pathspec explicito + push. NUNCA submit_intent, NUNCA paste-ready.
-- CARRIL (directiva operador 2026-07-03): NO actuar como Arquitecto. Tablero, crons y procesos son
-  suyos -> los SENALO/RUTEO por mailbox, no los edito/opero. Stall = diagnostico LIGERO + nudge por
-  mailbox, sin operar crons ni leer process trees. (Me sali del carril antes: edite el tablero,
-  diagnostique el cron a fondo -> corregido.)
-- GATE ASCII PRE-COMMIT BLOQUEANTE: escaneo bytes>127 y ABORTO el commit si hay (no solo aviso;
-  patron `python -c '...sys.exit(1 if bad)' || { echo ABORTA; exit 1; }`). Acentos/em-dash son mi
-  vicio (paso 3 veces hoy). El gate bloqueante YA me salvo una vez (cazo un acento, aborto). Uso.
-- TRAILERS opcion A (persistida en COMMIT_TRAILERS.json, campo operator_advisor_rule): mis commits
-  llevan Task-Id: none + Ops-Reason: coordinacion-asesor-mailbox (o Task-Id: TASK-XXXX) + Co-Authored-By,
-  en el parrafo final sin lineas en blanco entre trailers. Mi self-filter del monitor caza el Ops-Reason.
+- CARRIL: NO actuar como Arquitecto. Tablero, crons y procesos son suyos -> los SENALO/RUTEO por
+  mailbox, no los edito/opero (excepcion: la PRESENTACION del pipeline -acordeon- la edite bajo orden
+  directa del operador; su DATA jamas). Stall = diagnostico LIGERO + nudge, sin operar crons ni process trees.
+- GATE ASCII PRE-COMMIT BLOQUEANTE: escaneo bytes>127 y ABORTO el commit si hay (patron
+  `python -c '...sys.exit(1 if bad)' || { echo ABORTA; exit 1; }`). Acentos/em-dash son mi vicio; el gate
+  bloqueante YA me salvo 2 veces esta sesion (cazo "genere"/"especifico" con acento, aborto). Uso siempre.
+- TRAILERS opcion A (COMMIT_TRAILERS.json, operator_advisor_rule): Task-Id: none + Ops-Reason:
+  coordinacion-asesor-mailbox + Co-Authored-By, parrafo final sin lineas en blanco. Mi self-filter del monitor caza el Ops-Reason.
 - CORTAFUEGOS: ordenes [DIRECTIVA]/[RECOMENDACION]; PRE-DECISION jamas se referencia; DECISIONes =
   requisitos no verbatim; snapshot compartido = solo hechos.
 - PROACTIVIDAD SIN PREGUNTAR: preparo el siguiente entregable de cada gate; solo orden contraria frena.
-- LECCION watchdog (falso-jam 2026-07-03): NO llamar jam por DURACION en tareas pesadas conocidas
-  (e2e/harness corren 35+ min legitimo). Solo jam con firma real: err.log de hang, lease vencida, sin
-  heartbeat. Los node/esbuild huerfanos NO son conclusivos (persisten entre builds).
+- LECCION CLAVE (validada esta sesion): mis revisiones son DESIGN + STUDY-INTEGRITY, NO sustituyen la
+  VERIFICACION EMPIRICA contra la BD desplegada (no tengo readonly aqui; el Analista si). El gate formal
+  cazo 2 bugs de falsabilidad que mi revision informal dejo pasar -> es la TESIS DEL ESTUDIO en vivo
+  (checker formal > informal) y ademas el ALCANCE del gate importa (un gate estrecho tiene punto ciego).
+- LECCION watchdog (falso-jam): NO llamar jam por DURACION en tareas pesadas conocidas (e2e/harness 35+
+  min legitimo). Solo jam con firma real: err.log de hang, lease vencida, sin heartbeat.
+- MINIMIZAR CHURN: no commitear ESTADO por cada micro-evento del monitor; capturar el estado RESUELTO de
+  cada hilo. Mailbox: no re-enviar directivas ya en open/ (el peer las consume).
 
 ## Deberes al arrancar
 1. AUTO-POLL: git fetch/pull, git log -8, ls Area_comun/mailbox/open/, pendientes TASK_INDEX.
-2. Arma MONITOR persistente sobre origin/main con SELF-FILTER por trailer (salta commits con
-   "Ops-Reason: coordinacion-asesor"): PIPELINE de peers + *-to-Operador-* nuevos + stall 30min.
+2. Arma MONITOR persistente sobre origin/main con SELF-FILTER por trailer (salta "Ops-Reason:
+   coordinacion-asesor"): commits de peers (PIPELINE + *-to-Operador-*) + stall 30min.
 3. Auto-poll de cada turno = red primaria; monitor = respaldo.
 
-## Estado del proyecto (2026-07-03 tarde)
-- **F1 (nucleo doctrinal) CERRADO 7/7** (v1.18.0 tageada, gate de trailers activo, epoch 1.14.0 pineado).
-- **F2 (instancia distribuida) COMPLETA 4/4:** 0230 (instancia Aegis en D:/Agentes/Zeus/NOVA/Aegis) +
-  0232 (harness distribuido) + 0233 (e2e) + 0234 (runbook, cerro en fix-loop 2/2). Todas con ciclo
-  adversarial real. DECISION-0085: NOVA/ paraguas + Aegis instancia-metodologia NEUTRAL (arm nova-suite)
-  + NOVA/Nova-X productos LAZY. Atestacion del estudio se queda en el HUB.
-- **Pendientes backlog VN:** TASK-0231 (F6.1 peones, proposed) + TASK-0245 (watchdogs->skills, proposed).
-  No urgentes.
-- **Arquitecto REINICIO sesion** (2026-07-03 tarde) tras cerrar F2. Su cold-start debe tomar del mailbox:
-  mi alta de Asesor + la orden NOVA-DEV + la de emplazar scripts de medicion.
+## Estado del proyecto (2026-07-03 noche)
+- **F1 (nucleo doctrinal) CERRADO 7/7** (v1.18.0, gate de trailers activo, epoch 1.14.0 PINEADO).
+- **F2 (instancia distribuida) COMPLETA 4/4** (instancia Aegis en D:/Agentes/Zeus/NOVA/Aegis, harness, e2e,
+  runbook). DECISION-0085: NOVA/ paraguas + Aegis instancia-metodologia NEUTRAL + NOVA/Nova-X productos LAZY.
+- **NOVA-DEV (TASK-0246) = TANDA ACTUAL COMPLETA Y GATEADA DE PUNTA A PUNTA.** 9 SPECs gobernadas (informe
+  adversarial + familia P3 P3-001..005 + pool Q4 P4-004/P2-004/P2-003/P6-003), formato unificado NOVA-SPEC-T-001
+  + intake-v2/DoR, aislamiento intra-par declarado y verificado. Gate Analista OK/CERRABLE en core (F-0246-01
+  q4_membership + F-0246-02 THROW) + db_verified_at (audit de THROW cerrado, 070b533). Sigue in_progress por
+  directiva del operador. FALTA solo: **miembros GOBERNADOS de pares** (bloqueados por diseno hasta 17-jul;
+  heredan el patron congelado de P4.1 cuando arranque el miembro baseline).
+- **4a ACTION HECHA:** el Arquitecto EMPLAZO mis scripts-medicion al hub
+  (personal/Arquitecto/TFM-medicion/corpus/medicion/) -- version correcta verificada (52 cols, 5 peones, motor
+  identico). Listos para congelar a v1.0 en el sello.
+- **Pendientes backlog VN (no urgentes):** TASK-0231 (F6.1 peones) + TASK-0245 (watchdogs->skills), proposed.
 
-## SIGUIENTE (el pivote a producto + medicion)
-1. **NOVA-DEV = TASK-0246** (proposed, owner Arquitecto, checker Analista; registrada 93c7448 2026-07-03):
-   revision adversarial del paquete Ingenas + SPECs gobernadas Sprint 1 (RES-000..012 + arquitectura
-   obligatoria .NET10/React + SPEC-T-001 UNIFICADA con intake-v2/DoR). Alcance SOLO brazo gobernado,
-   aislamiento intra-par (no lee fuentes baseline). SPECs al hub Area_comun/specs/nova/ (NO crea repo
-   producto aun; Nova-X LAZY). ENLACE: su verificacion de cada campo contra la BD real de 01_Sources
-   produce la evidencia readonly (proc/vista existe) que mi SELLO s.5 tiene como [LLENAR-AL-SELLAR] ->
-   COSECHAR al entregar para enumerar el pool Q4. Mi tarea: revision adversarial cuando entregue.
-   RONDA 1 ENTREGADA (ff68ee8): informe adversarial + SPEC-NOVA-P3-001 (P3.1 Initial Budget Draft).
-   Revision Asesor = LIMPIA (unificacion plantillas OK, aislamiento OK, pool Q4 identico a mi SELLO s.5,
-   P3.1 fuera de Q4 como pattern-setter). COSECHA aplicada a SELLO s.5: F-NOVA-01 confirma readonly con
-   SELECT/VIEW-DEF pero SIN EXECUTE -> existencia verificable YA (sin GRANT), paridad requiere GRANT EXECUTE.
-   Gate formal = Analista (pendiente). Siguientes rondas NOVA-DEV: pool Q4 en orden de sorteo + pares al final.
-   RONDAS 2-3 (P3-002 CDP, P3-003 RP): AMBAS LIMPIAS en mi revision -- aislamiento gemelos OK (P3.2/P3.3
-   separadas de hermanos baseline P4.2/P4.3; ajustes 08/09/11/12 fuera de alcance), Q4-condicional correcto,
-   coherencia cross-SPEC (P3-003 reusa B-01 de P3-002), compensaciones de brechas BD = senal de calidad no confound.
-   GO-CONTINUA enviado al Arquitecto (89d926f, orden operador "manten al Arquitecto trabajando"): sigue P3-004
-   Obligation -> P3-005 Payment -> pool Q4 no-P3, sin reposo. NOTAS DE ESTUDIO ruteadas: P3-005 Payment = ALTA
-   (frontera Treasury) FUERA de Q4 (solo descriptiva, regla criticidad sellada); P4.4 = media DENTRO de Q4.
-   Advertencia al operador: SPECs acumulan decisiones de dominio (objeto min-15, default SECOP) marcadas
-   como preguntas -> resolver al construir (se mide la coordinacion). TRACKER VIVO en
-   personal/operador/vision-nova/DECISIONES-DOMINIO-PENDIENTES-nova.md (DD-01 auth, DD-02 objeto, DD-03 SECOP).
-   RONDAS 6-8 LIMPIAS: P4-004 (aislamiento CRITICO impecable, excluye P4.1/P4.2/P4.3 baseline), P6-003
-   (OTel infra, borde con reporte P2.2 baseline OK; OTel = telemetria operacional != medicion del ledger),
-   P2-004 (Get_*_List, miembro gobernado PAR-D + fabrica Q4). CATCH CLAVE cosechado al SELLO s.5: los ~4
-   Get_*_List son CLUSTER casi isomorfo load-bearing para n>=10 -> Q4 declara n efectivo reducido; doble rol
-   PAR-D/Q4 NO es confound (contrastes pre-registrados distintos).
-   RONDA 9 (P2-003 UI exploracion): LIMPIA, cierra POOL Q4. NOVA-DEV TANDA ACTUAL COMPLETA = 9 SPECs
-   (familia P3 P3.1-3.5 + pool Q4: P4.4/P2.3/P6.3/Get_*_List, n=10 nominal / n efectivo<10 sellado). Las 9
-   revisadas limpias por el Asesor; aislamiento intacto en todas (gemelos P4.x, PAR-D, borde P2.2). FALTAN:
-   (a) miembros GOBERNADOS de pares (post-17-jul, heredan patron congelado P4.1); (b) GATE FORMAL del Analista
-   sobre TASK-0246 (mis revisiones = asesoria, no la gobernanza). DECISIONES DE DOMINIO estables en 3
-   (DD-01 auth/DD-02 objeto/DD-03 SECOP) -> listas para resolver en lote con el operador.
-   GATE FORMAL ANALISTA = CAMBIO-REQUERIDO (9a2c211): F-0246-01 (q4_membership ausente en P3-001/002/003,
-   previas a mi GO, sin back-fill) + F-0246-02 (P4-004 exige THROW 50256/50254 pero el proc desplegado
-   Apply_Obligation_Adjustment emite 50265, verificado por el Analista via readonly). AMBOS los PASO POR ALTO
-   mi revision de asesor. LECCION CLAVE: mis revisiones son design + study-integrity, NO sustituyen la
-   VERIFICACION EMPIRICA contra la BD desplegada (no tengo readonly en esta sesion). Este NO-GO es DEMOSTRACION
-   EN VIVO de la tesis del estudio (checker formal atrapo un bug de falsabilidad que las revisiones informales
-   dejaron pasar) -> evidencia anecdotica. VALOR-ADD ruteado al Arquitecto (RECOMENDACION, no-firmante via
-   Operador): generalizar la re-verificacion de THROW a las 9 SPECs (riesgo sistemico, mismos codigos escritos
-   desde PRES no desde procs). Remediacion = del Arquitecto (fix-loop max 2 iter). Yo espero el re-juicio.
-   FIX-LOOP 1 (9b5563c): AMBOS hallazgos remediados correctamente -- q4_membership P3-001 FUERA / P3-002/003
-   CONDICIONAL (alineado al sello); P4-004 con THROW REALES (50265 efecto!=reintegro, 50264 tope; NO 50256/50254;
-   OBJECT_DEFINITION verificado readonly). PERO mi generalizacion NO se tomo: los THROW de las otras SPECs
-   (50277/50150/50115/50134/50187) siguen sin re-verificar vs procs desplegados. Riesgo ACOTADO por el gancho
-   sellado "RE-VERIFICAR al construir" (peor caso: lo corrige el maker en Sprint 1). Decision dejada al operador
-   (pasada amplia ahora vs red de build-time). Espero re-juicio del Analista.
-   RE-JUICIO ANALISTA = OK / CERRABLE (50cb3fd): F-0246-01/02 remediados falsable, sin escape nuevo.
-   q4_membership GATE-CONFIRMADO por probe en toda la familia (P3-001 FUERA, P3-002/003/004 CONDICIONAL,
-   P3-005 FUERA, P4-004 DENTRO) = mi clasificacion pool Q4 (SELLO s.5) ATESTADA por el gate. RESIDUAL
-   (gobernado): el re-juicio re-verifico SOLO los THROW de P4-004; los de otras SPECs cierran sin verificar-al-
-   spec (red = gancho RE-VERIFICAR al construir; paridad EXECUTE diferida a producto). TASK-0246 CERRABLE;
-   espero cierre del Arquitecto + registro del residual P2-004. Decision pasada-amplia-THROW sigue abierta.
-   ROOT CAUSE ADMITIDA por el Arquitecto en su wrap-up: "genere THROWs de la familia PRES-03, no del proc
-   especifico" -> el defecto es SISTEMICO (mismo metodo en las 9 SPECs), no solo P4-004. UPGRADE de mi
-   recomendacion: hacer la pasada amplia de THROW AHORA -- costo cero de agenda (TASK-0246 in_progress; pares
-   gobernados bloqueados hasta 17-jul = ventana muerta) + costo bajo (OBJECT_DEFINITION readonly doc-only).
-   Recomendacion firme ruteada/en open/. WATCH higiene: la ACTION scripts-medicion-hub sigue VIVA (no
-   consumida); no debe archivarse. TASK-0246 permanece in_progress por directiva del operador.
-   RESUELTO (5fdfb39): el Arquitecto CONSUMIO mi recomendacion de open/ y ruteo el AUDIT DEFINITIVO de THROW
-   al Analista (REQUEST rr=true), scopeado a los 5 procs de aprobacion P3-001..005 (los unicos con THROW de
-   proc; excluye correctamente P6-003/P2-004/P2-003 sin procs; P4-004 ya alineado). El operador dio GO firme
-   pero YA ERA REDUNDANTE -> NO envie mi GO (evito ruido). El gap sistemico se cierra DENTRO del gate (Analista
-   verifica por OBJECT_DEFINITION). Espero el resultado del audit. Mi RECOMENDACION-THROW en open/ = consumida.
-   AUDIT RESULTADO = CAMBIO-REQUERIDO (af461a7): VALIDO la preocupacion sistemica -- slips en los 5 P3 SPECs.
-   El PRIMER gate formal habia dado OK porque solo reviso P4-004 (punto ciego por alcance estrecho). MATIZ:
-   distinto a P4-004 (codigo inexistente 50256); aqui los codigos regla-de-oro PASAN todos (50277/50150/50115/
-   50134/50187) y los slips son PERIFERICOS (catalogo/triggers de linea/numeracion) REALES pero mal atribuidos
-   al Approve_* directo en vez de a los procs llamados/triggers del INSERT de linea. NO revierte el gate core
-   (F-0246-01/02 siguen OK); solo el gancho db_verified_at no cierra. MI STEER (calidad de estudio): remediar
-   por REATRIBUCION (tabla transitive Approve_*->proc/trigger->THROW), NO por borrado -- borrar quitaria criterios
-   falsables reales y debilitaria las SPECs como artefactos medidos. Remediacion = Arquitecto (fix-loop max 2).
-   LECCION META: hasta el gate formal tiene punto ciego por alcance; el audit amplio (recomendado por operador)
-   lo cazo. Doble evidencia para la tesis. Yo espero la remediacion.
-   DECISIONES DE DOMINIO RESUELTAS por el operador (2026-07-03) y RUTEADAS al Arquitecto (MSG DIRECTIVA-
-   decisiones-dominio-nova): DD-01 (a) ACEPTADO supuesto auth Sprint 1 + BR-C4 post-Sprint-1 (aplica a las 5
-   SPECs P3-001..005); DD-02 objeto RP NORMADO a min 20 chars (cambia legacy 15); DD-03 SECOP vacio = 'N/A'
-   declarada. El Arquitecto las hornea sin prisa (con la remediacion THROW o en ventana muerta); DD-02 toca
-   criterio falsable -> viaja en el proximo gate. Tracker marcado RESUELTA (ruteada). Ya no hay decisiones de
-   dominio abiertas del lote NOVA-DEV actual (nuevas rondas de SPECs podrian traer mas).
-   SUB-LOOP THROW/db_verified_at CERRADO: OK/CERRABLE (070b533). Cadena completa: flag sistemico (mio) ->
-   GO operador -> audit amplio hallo slips reales en los 5 (el 1er gate solo vio P4-004) -> reatribucion
-   opcion b (mi steer, preserva codigos con fuente) -> slip 50212 corregido (5669665) -> Analista amplio la
-   verificacion a definiciones de triggers -> TODOS los codigos transitive confirmados en BD. db_verified_at
-   cierra para P3-001..005. TASK-0246 GATE-VERIFICADA DE PUNTA A PUNTA (core F-0246-01/02 + db_verified_at),
-   sin escalar (dentro del limite de iter). Doble evidencia tesis (checker formal > informal; alcance del gate
-   importa). RUTEADO al Arquitecto (eedc3ea): pipeline como PANEL DE CONTROL COMPLETO (agregar NOVA-DEV+GOAL-P1,
-   refrescar F3.3/F3.4, notar DD resueltas) -- directiva operador "todo en el pipeline". TASK-0246 sigue
-   in_progress; falta solo pares gobernados (bloqueados hasta 17-jul).
-   4a ACTION HECHA (d0807e0 higiene): el Arquitecto EMPLAZO los scripts al hub (personal/Arquitecto/
-   TFM-medicion/corpus/medicion/) -- verificado mi version exacta (52 cols, 5 peones, motor identico, README
-   52). Listos para congelar a v1.0 en el sello. Watch-note despejado sin anomalia (archivo la ACTION consumida
-   legitimamente; NO archivo mis 2 directivas frescas). Inputs del sello que faltan: estimates S/M/L + GRANT
-   EXECUTE (operador) + corpus GOAL-P1 + sorteo/T/NIST/sha256 el dia del sello (<=08-jul).
-   DEBATE NOMBRES AEGIS (2026-07-03, con el operador): CONVERGIDO. Aegis = MARCA de la METODOLOGIA (palabra
-   neutra, no rompe neutralidad); instancia por proyecto = carpeta/repo `aegis/` (convencion como .git, sin
-   ambiguedad); producto/front = Zeus-Aegis; productos dominio = Nova-X; namespace skills = `aegis:` (via
-   loader DECISION-0061, no renombrar archivos); scripts SIN tocar. Hub = "Aegis-core". El operador CONFIRMO
-   OPCION (i) MARCA-SOLO: NO se toca `project_name` en protocol.config.json (genesis-bound, linea 5) -> CERO
-   re-genesis, CERO riesgo sobre N=500/#4 (dataset sellado inmutable; rename es ortogonal a lo medido, solo se
-   anota procedencia). i18n del core/templates/spec para publicar = Carril B (post-sello, acotado a superficie
-   publicada, no todo el repo). SECUENCIA acordada: Arquitecto termina primero las 2 DIRECTIVAs (hornear DD +
-   pipeline) EN VENTANA MUERTA, LUEGO redacta la DECISION de nombres Aegis; el reloj real (GOAL-P1 3-8 jul +
-   estimates) es del operador y NO debe eclipsarse. Yo ruteo la DECISION Aegis cuando cierren las 2 DIRECTIVAs.
-   RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
-   RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
-   aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
-   egreso real (banco/retenciones/comprobante) a Tesoreria/PayControl. TALLY POOL Q4 revisado = 3 unidades
-   (P3.2/P3.3/P3.4); faltan del pool: P4.4, P2.3, P6.3, Get_*_List. P3.1 y P3.5 fuera de pool (pattern-setter / ALTA).
-2. **F3 / medicion:** mi SELLO ETAPA 1 (draft listo, se sella <=08-jul, llenar placeholders + sorteo
-   NIST) + scripts al hub (ruteado) + Operador abre GOAL-P1 (piloto baseline). LA MEDICION NO HA
-   ARRANCADO AUN (F1/F2 = infraestructura, no desarrollo medido).
-3. Sprint 1 gobernado: 30-jul (gate duro).
+## Trabajo en vuelo (con dueno)
+- **Arquitecto (ventana muerta, su carril) - 2 DIRECTIVAs vivas en open/:**
+  1. HORNEAR DD-01/02/03 en las SPECs (ver "Decisiones durables"); DD-02 toca criterio falsable -> viaja en un gate.
+  2. PIPELINE AL DIA (directiva "todo en el pipeline para controlar"): anadir NOVA-DEV/TASK-0246 + GOAL-P1,
+     refrescar F3.3 (instrumentacion, scripts 11fddf4) y F3.4 (sellado draft + checklist inputs), notar DD resueltas.
+  Secuencia acordada: termina estas 2, LUEGO redacta la DECISION de nombres Aegis (yo la ruteo al cerrar las 2).
+- **Operador (EL RELOJ REAL, no eclipsar):** abrir **GOAL-P1** (piloto baseline, corre 3-8 jul, alimenta el
+  corpus del sello) + emitir **estimates S/M/L** de las ~10 unidades Q4 (<=08-jul, antes del sorteo). GRANT
+  EXECUTE (<=14-jul, no bloquea el sello).
+- **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; rutear la DECISION Aegis cuando
+  cierren las 2 DIRECTIVAs; vigilar que el sello (08-jul) no se quede sin inputs.
 
-## Mis entregables (todos en personal/operador/vision-nova/)
-- HECHO Y COMMITEADO (11fddf4, 2026-07-03): scripts-medicion/ (medicion_ledger.py + schema_medicion.json
-  [52 cols, 5 campos peones + par_id na_ok] + schema_defectos.json + README). Journal append-only -> vista
-  materializada. Smoke re-verificado verde ciclo completo (OPEN/UPDATE/CLOSE/verificar/sha256 incl. peones).
-  README corregido 47->52 cols. ANTES estaban solo en disco (sin commitear); ahora en git, atestables.
-  Listos para congelar a v1.0 en el sello Etapa 1.
-- HECHO: SELLO-ETAPA-1-nova-budget-DRAFT.md (pre-registro; placeholders [LLENAR-AL-SELLAR]).
-- HECHO: separacion de memoria (esta area personal/asesor/ + alta ruteada).
+## SIGUIENTE (hitos)
+1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
+   schema/scripts/corpus/enumeracion Q4/sorteo. Inputs que faltan: GOAL-P1 corrido + estimates S/M/L (operador),
+   scripts ya emplazados (hecho), sorteo NIST + T + sha256 (dia del sello). GRANT EXECUTE para paridad (<=14-jul).
+2. **17-jul:** miembros gobernados de pares (desbloqueo por congelamiento baseline).
+3. **30-jul:** gate duro Sprint 1.
+4. **Carril B (post-sello, gateado):** ejecucion de la marca Aegis en la superficie publicada + i18n del
+   core/templates/spec. LA MEDICION NO HA ARRANCADO (F1/F2/NOVA-DEV = infraestructura, no desarrollo medido).
+
+## Decisiones durables de esta sesion (2026-07-03)
+- **DECISIONES DE DOMINIO resueltas por el operador + RUTEADAS (MSG DIRECTIVA-decisiones-dominio-nova),
+  a hornear en las SPECs por el Arquitecto:**
+  - DD-01 (autorizacion, las 5 SPECs P3-001..005): (a) ACEPTADO el supuesto temporal (usuario autenticado con
+    rol presupuesto captura/aprueba/emite) para Sprint 1; BR-C4 (policy por operacion) CONFIRMADA post-Sprint-1.
+  - DD-02 (P3-003, objeto del RP): NORMADO a min. 20 caracteres (cambia el legacy de 15). Toca criterio falsable.
+  - DD-03 (P3-003, referencia SECOP vacia): default = marca 'N/A' declarada; jamas el centinela '0' legacy.
+  - Tracker: personal/operador/vision-nova/DECISIONES-DOMINIO-PENDIENTES-nova.md (todas RESUELTA/ruteada).
+- **DECISION DE NOMBRES AEGIS (debatida y CONVERGIDA con el operador; opcion (i) MARCA-SOLO confirmada):**
+  - **Aegis** = MARCA de la METODOLOGIA (palabra neutra, NO rompe neutralidad de dominio, citable p/ publicar).
+  - Instancia por proyecto = carpeta/repo **`aegis/`** (convencion tipo `.git`, sin ambiguedad; ya existe NOVA/Aegis).
+  - Producto/front = **Zeus-Aegis**; productos de dominio = **Nova-X** (Nova-Budget/Treasury/...).
+  - Namespace de skills en el CLI = **`aegis:`** (como `anthropic-skills:`), VIA LOADER (DECISION-0061),
+    NO renombrar archivo por archivo. **Scripts SIN tocar** (no se ven como skills; costo/riesgo alto por CI/crons/#4).
+  - Hub = **"Aegis-core"**. Convencion de habla: "Aegis-core/hub" = fuente canonica vs "la instancia aegis de <proyecto>".
+  - **OPCION (i) MARCA-SOLO:** NO se toca `project_name` en protocol.config.json (genesis-bound, linea 5) ->
+    CERO re-genesis, CERO riesgo sobre N=500/cadena #4 (dataset sellado inmutable; el rename es ORTOGONAL a lo
+    medido, solo se anota procedencia). H1-H3 no se tocan.
+  - **i18n del core/templates/spec para publicar = Carril B** (post-sello, acotado a la superficie publicada,
+    NO todo el repo; el dogfooding en espanol no se publica). NO es cosmetico -> es un programa Carril B.
+  - PENDIENTE: la DECISION formal de nombres la redacta el Arquitecto DESPUES de las 2 DIRECTIVAs; yo la ruteo.
+    Detalle de implementacion para el loader: resolucion cuando coexistan skills `aegis:` del hub y de la instancia.
+
+## Mis entregables (todos versionados)
+- scripts-medicion/ (medicion_ledger.py + schema_medicion.json [52 cols, 5 campos peones + par_id na_ok] +
+  schema_defectos.json + README): commiteados (11fddf4), smoke verde ciclo completo, EMPLAZADOS al hub por el
+  Arquitecto (personal/Arquitecto/TFM-medicion/corpus/medicion/). Listos para congelar a v1.0 en el sello.
+- SELLO-ETAPA-1-nova-budget-DRAFT.md (pre-registro; placeholders [LLENAR-AL-SELLAR]). COSECHAS aplicadas:
+  s.5 = verificacion de EXISTENCIA readonly es posible ya (F-NOVA-01; paridad requiere GRANT EXECUTE);
+  NOTA DE INDEPENDENCIA = los ~4 Get_*_List son CLUSTER casi isomorfo load-bearing para n>=10 -> Q4 declara
+  n EFECTIVO reducido; doble rol PAR-D/Q4 NO es confound (contrastes pre-registrados distintos).
+- Tracker de decisiones de dominio + separacion de memoria (esta area) + alta ruteada.
 
 ## Contexto real del negocio (clave)
 Objetivo real = Nova Budget/Accounting/Payroll/Treasury para la EMPRESA del operador, employee-ready.
 Stack: Clean Architecture .NET 10 (Api/Application/Domain/Infrastructure/Mcp/Contracts) + React/TS/Vite
 + SQL Server 2025 + OpenTelemetry; anti-patrones prohibidos (WebForms, DataTable entre capas, DLLs
 manuales, secretos en .config, centinelas -99). Requisitos = RES-000..012 (brechas s.08 de NOVA-PRES-000);
-SPECs desde NOVA-SPEC-T-001 v1.1. Todo en D:/Agentes/Ingenas/Budget/. Composicion del equipo: 12 roles
--> 4 firmantes (Operador=dominio, Arquitecto=arquitectura+docs, Codex=maker, Analista=security+QA checker);
-Legacy Analyst sin firmante = eslabon debil de atestacion.
+SPECs desde NOVA-SPEC-T-001 v1.1. FUENTE DE VERDAD del diseno = D:/Agentes/Ingenas/Budget/ (paquete del
+operador, FUERA del hub): NOVA_GOAL, NOVA_Arquitectura, NOVA_PRES_00..12, NOVA_SPEC_Plantilla, NOVA_ESTUDIO_*;
+BD/legacy en 01_Sources. El hub Area_comun/specs/nova/ guarda la DERIVACION gobernada (SPECs), no el diseno-fuente.
+Composicion del equipo: 12 roles -> 4 firmantes (Operador=dominio, Arquitecto=arquitectura+docs, Codex=maker,
+Analista=security+QA checker); Legacy Analyst sin firmante = eslabon debil de atestacion.
 
 ## Que afirma / NO afirma el estudio (delimitacion sellada)
 Da: instrumentacion + Q4 causal (ligero-vs-completo) + serie honesta de calidad (checker formal atrapa
@@ -185,6 +124,6 @@ el checker FORMAL atestado). Veredicto de compra se difiere a replica employee-r
 Peones: se mide el USO (5 campos), su EFECTO solo en F6 aislado (no confundir el contraste central).
 
 ## Pendientes del operador (recordar con tacto)
-Abrir GOAL-P1 (fila 6-campos); GRANT EXECUTE; sandbox mutadores (<=14-jul); estimates S/M/L (<=08-jul);
-revision legal del consentimiento. F1.6 (aprendizajes-externos, extraccion de reglas) pendiente, paralelo,
-NO es entregable del Asesor.
+Abrir GOAL-P1 (piloto, 3-8 jul, EL RELOJ); estimates S/M/L (<=08-jul); GRANT EXECUTE + sandbox mutadores
+(<=14-jul); revision legal del consentimiento. F1.6 (aprendizajes-externos, extraccion de reglas) pendiente,
+paralelo, NO es entregable del Asesor.
