@@ -15431,6 +15431,20 @@
             "updated_at": "2026-07-03T14:29:58Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Arquitecto-DECISION-0086",
+            "expires_at": "2026-07-03T17:49:47Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Arquitecto-DECISION-0086",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0086-alta-asesor-no-firmante.md"
+            ],
+            "started_at": "2026-07-03T15:49:47Z",
+            "status": "released",
+            "task_id": "DECISION-0086",
+            "updated_at": "2026-07-03T15:49:47Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230",
             "expires_at": "2026-07-04T23:59:59Z",
             "notes": "TASK-0230 delivered to in_review.",
