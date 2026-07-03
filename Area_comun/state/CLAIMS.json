@@ -15589,6 +15589,40 @@
             "updated_at": "2026-07-03T00:06:00Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0243-done-flip",
+            "expires_at": "2026-07-03T03:27:48Z",
+            "notes": "Implementer done-flip after Arquitecto ratification and Analista OK.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0243-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0243",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0243",
+                "Area_comun/tasks/TASK-0243-visionnova-f1f-decision-antivibecoding.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T01:27:48Z",
+            "status": "released",
+            "task_id": "TASK-0243",
+            "updated_at": "2026-07-03T01:27:48Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0243-doneflip-response-msg",
+            "expires_at": "2026-07-03T03:28:53Z",
+            "notes": "Register Codex response message for TASK-0243 done-flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0243-doneflip-response-msg",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0243-doneflip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T01:28:53Z",
+            "status": "released",
+            "task_id": "TASK-0243",
+            "updated_at": "2026-07-03T01:28:53Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0243-inreview-flip",
             "expires_at": "2026-07-04T01:07:39Z",
             "notes": "Implementer capability flip for TASK-0243 in_progress to in_review after Arquitecto delivery commit f3f91b3.",

@@ -4,6 +4,15 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Latest Session Note
 
+- TASK-0243 done-flip completed in protocol working tree. Runtime transaction
+  `codex:task0243:done-flip-tx-20260703` acquired/released
+  `CLAIM-20260703-Codex-TASK-0243-done-flip` and moved TASK-0243 `review_approved -> done` at seq 3440-3442.
+  Response message `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0243-doneflip-done.md` was
+  added and registered by claim transaction `codex:task0243:doneflip-response-msg-claim-tx-20260703` at seq
+  3443-3444. Evidence before commit: protocol encoding OK, domain-neutrality command exit 0, collaboration
+  validator OK, drift false / byte-identical at `up_to_seq=3444`; product `D:/Agentes/Zeus/Zeus-protocol`
+  `node --check public/app.js`, `node --check src/server.js`, and `npm test` PASS 109 tests (87 pass, 22
+  skipped). Product repo stayed clean. Unrelated peer/operator untracked files were left untouched.
 - TASK-0243 in_review flip completed in protocol commit
   `0f18a1b coord(TASK-0243): flip to in review`. Runtime transaction
   `codex:task0243:inreview-flip-tx-20260703` acquired/released

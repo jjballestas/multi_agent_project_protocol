@@ -2,7 +2,7 @@
 task_id: TASK-0243
 title: "[VISION-NOVA][F1.5] Mini-DECISION identidad anti-vibecoding + clausula pin-anclado-al-tag"
 type: docs
-status: review_approved
+status: done
 owner: Arquitecto
 phase: P2
 priority: medium
