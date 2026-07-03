@@ -15693,7 +15693,7 @@
         {
             "claim_id": "CLAIM-20260703-arquitecto-0244-release",
             "expires_at": "2026-07-03T10:00:00Z",
-            "notes": "F1-G release v1.18.0 (CHANGELOG + tag + templates sync).",
+            "notes": "Entrega 0244 completa (c9a4423 + tag v1.18.0 + clon limpio 3/3); release para flip in_review.",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0244-release",
@@ -15703,10 +15703,10 @@
                 "CHANGELOG.md",
                 "AGENTS.template.md"
             ],
-            "started_at": "2026-07-03T01:32:34Z",
-            "status": "active",
+            "started_at": "2026-07-03T01:41:59Z",
+            "status": "released",
             "task_id": "TASK-0244",
-            "updated_at": "2026-07-03T01:32:34Z"
+            "updated_at": "2026-07-03T01:41:59Z"
         },
         {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",

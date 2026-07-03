@@ -1,19 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260703-arquitecto-0244-release",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0244-release",
-                "Area_comun/state/TASK_INDEX.json#TASK-0244",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
-                "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
-                "CHANGELOG.md",
-                "AGENTS.template.md"
-            ],
-            "task_id": "TASK-0244"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
