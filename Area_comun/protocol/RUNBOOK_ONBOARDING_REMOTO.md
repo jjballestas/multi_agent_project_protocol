@@ -34,17 +34,64 @@ employee-run pre-registrada, posterior a este doc.
 
 ## 3. Operar 1 tarea completa (ciclo distribuido, solo via Git)
 
-Usa el ciclo pull -> escribir -> push INMEDIATO (harness distribuido de la instancia):
-1. `git pull` (trae claims/estado de otros clones).
-2. **Claim** la tarea via submit_intent (ventana segura: sin claim de peer sobre tus rutas).
-3. `git push` INMEDIATO (tu claim se hace visible a los otros clones; evita colision).
-4. Trabaja el entregable; **entrega** a in_review (submit_intent) + handoff autocontenido + envelope
-   7 campos como texto final del turno.
-5. `git push` inmediato. El checker hace pull, revisa, y su veredicto vuelve por pull.
-6. Con GO, el cierre a done ocurre por el flujo gobernado (implementer), coordinado solo via Git.
+Usa el ciclo pull -> escribir -> push INMEDIATO. Cada transicion del ledger va por
+`submit_intent`, nunca editando `Area_comun/state/*.json` a mano.
 
-Regla anti-colision: escribe el ledger solo en ventana segura (peer sin lock, tree sin half-write)
-y pushea inmediato; nunca dejes cambios de ledger sin pushear mientras otro clon opera.
+### 3.1 Comandos concretos (copy-paste, ajusta <id>/<TASK>/rutas)
+
+```bash
+# 0. Sincroniza
+git pull --rebase --autostash
+
+# 1. CLAIM (ventana segura: sin claim de peer sobre tus rutas). El claim va ANIDADO bajo "claim",
+#    y su scope DEBE incluir su propia fila CLAIMS.json#<claim_id> + los fragmentos que tocas.
+cat > /tmp/tx-claim.json <<'JSON'
+{"idempotency_key":"tx-<id>-claim-<TASK>","intents":[
+ {"type":"claim","op":"acquire","claim":{
+   "claim_id":"CLAIM-<fecha>-<id>-<TASK>","owner":"<id>","task_id":"<TASK>","status":"active",
+   "scope":["Area_comun/state/CLAIMS.json#CLAIM-<fecha>-<id>-<TASK>",
+            "Area_comun/state/TASK_INDEX.json#<TASK>",
+            "Area_comun/state/PROJECT_STATE.json#active_tasks/<TASK>",
+            "Area_comun/tasks/<TASK>-*.md"],
+   "started_at":"<ISO-UTC>","updated_at":"<ISO-UTC>","expires_at":"<ISO-UTC+Nh>"}},
+ {"type":"task_status","task_id":"<TASK>","from":"ready","to":"claimed","timestamp":"<ISO-UTC>"},
+ {"type":"task_status","task_id":"<TASK>","from":"claimed","to":"in_progress","timestamp":"<ISO-UTC>"}
+]}
+JSON
+python runtime/submit_intent.py --actor-id <id> --timestamp "<ISO-UTC>" \
+  --commit "$(git rev-parse HEAD)" --intents /tmp/tx-claim.json --output -
+
+# 2. PUSH INMEDIATO (tu claim se hace visible a los otros clones)
+git add Area_comun/state/ runtime/state/ Area_comun/tasks/<TASK>-*.md
+git commit -m "claim(<TASK>): ..."   # y Task-Id: <TASK> en el parrafo final si el gate de trailers esta activo
+git push
+
+# 3. Trabaja el entregable. ENTREGA: escribe el handoff + mueve a in_review
+#    (task_status in_progress->in_review) y RELEASE del claim, en una tx atomica:
+python runtime/submit_intent.py --actor-id <id> --timestamp "<ISO-UTC>" \
+  --commit "$(git rev-parse HEAD)" --intents /tmp/tx-deliver.json --output -
+#    tx-deliver.json = [{task_status in_progress->in_review},{claim op:release ...}]
+git add Area_comun/... && git commit -m "deliver(<TASK>): ..." && git push   # PUSH inmediato
+
+# 4. El checker hace pull, revisa, y su veredicto (GO/NO-GO) vuelve por pull en Area_comun/mailbox/.
+#    Con GO, el cierre review_approved->done lo ejecuta quien tenga capability implementer.
+```
+
+Regla anti-colision: escribe el ledger solo en ventana segura (peer sin lock en
+`.protocol-tmp/*/*.lock`, tree sin half-write) y pushea INMEDIATO; nunca dejes cambios de ledger
+sin pushear mientras otro clon opera. NUNCA hagas `git checkout` de `runtime/state/*` mientras un
+peer escribe (corrompe el event log).
+
+### 3.2 Harness distribuido (F2.3) y ciclo e2e (F2.2) -- rutas y comandos falsables
+
+- Harness pull->write->push de la instancia: `scripts/distributed_git_harness.py` (en el repo de la
+  instancia). Test: `python scripts/test_distributed_git_harness.py` (PASS = claim de un clon visible
+  en otro tras pull).
+- Ciclo e2e distribuido de una tarea completa (register->claim->deliver->review->done solo via Git):
+  `python scripts/distributed_e2e_task_cycle.py --remote <ruta-remoto-bare> --keep-workdir`
+  (PASS = la tarea recorre el ciclo completo entre clones sin colision).
+- Verifica siempre en clon limpio: `git clone -c core.longpaths=true <remoto> <tmp>` y en el clon
+  `python scripts/validate_collaboration_state.py` exit 0.
 
 ## 4. Troubleshooting
 
