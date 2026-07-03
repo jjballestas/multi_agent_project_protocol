@@ -6,8 +6,11 @@
 > mailbox -> el Arquitecto la hornea en el campo de la SPEC. Se mide la coordinacion, asi que
 > resolverlas en lote antes/al arrancar Sprint 1 reduce idas y vueltas.
 >
-> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-3: P3-001/002/003). El Asesor lo actualiza
-> cada ronda. Fuente: Area_comun/specs/nova/ (HEAD 1371f2c).
+> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-4: P3-001/002/003/004). El Asesor lo actualiza
+> cada ronda. Fuente: Area_comun/specs/nova/ (HEAD 5f29030).
+> Ronda 4 (P3-004 Obligation): SIN nuevas decisiones de dominio (DD-01 autorizacion reafirmada). El
+> circuito radicacion/liquidacion/causacion (Post_Voucher + retenciones) se DIFIERE a GOAL-P5/hardening
+> (no es decision de dominio; ver seccion 3).
 
 ## 1. Decisiones de dominio (TU resuelves)
 
@@ -35,6 +38,9 @@ no se confundan con lo de arriba:
 - B-01/RN-10 (P3-003): la BD no fuerza fecha del RP >= fecha del CDP -> validacion en caso de uso;
   solicitar elevar al proc.
 - `is_current` -> 2026 cerrada / arranque 2027 (transversal): item de hardening ALTA.
+- B-01/B-02 (P3-004): NO existen procs go-forward de radicacion/liquidacion/causacion
+  (`Create_Radication`/`Liquidate_Radication`/`Post_Voucher`) ni retenciones -> circuito PayControl
+  (GOAL-P5) + hardening; P3-004 solo enlaza el documento fuente por el puente existente, no lo crea.
 
 ## 4. GRANT EXECUTE (accion del Operador, no es decision de dominio)
 
