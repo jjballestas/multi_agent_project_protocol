@@ -52,16 +52,17 @@
 - **Pendientes backlog VN (no urgentes):** TASK-0231 (F6.1 peones) + TASK-0245 (watchdogs->skills), proposed.
 
 ## Trabajo en vuelo (con dueno)
-- **Arquitecto (ventana muerta, su carril) - 2 DIRECTIVAs vivas en open/:**
-  1. HORNEAR DD-01/02/03 en las SPECs (ver "Decisiones durables"); DD-02 toca criterio falsable -> viaja en un gate.
-  2. PIPELINE AL DIA (directiva "todo en el pipeline para controlar"): anadir NOVA-DEV/TASK-0246 + GOAL-P1,
-     refrescar F3.3 (instrumentacion, scripts 11fddf4) y F3.4 (sellado draft + checklist inputs), notar DD resueltas.
-  Secuencia acordada: termina estas 2, LUEGO redacta la DECISION de nombres Aegis (yo la ruteo al cerrar las 2).
+- **2 DIRECTIVAs previas CERRADAS Y VERIFICADAS por el Asesor:** (1) DD-01/02/03 horneadas en las SPECs
+  (01f05db; verificado: DD-01 confirmado, DD-02 objeto min 20 chars con 400 si <20, DD-03 SECOP='N/A');
+  (2) pipeline al dia (2320acd; F4.0 NOVA-DEV + F3.0 GOAL-P1 anadidos, F3.3/F3.4 refrescados con evidencia =
+  panel de control completo). SEGUIMIENTO suelto: DD-02 toca criterio falsable -> debe viajar en un gate del lote.
+- **Arquitecto (ventana muerta, su carril):** REDACTAR la DECISION formal de nombres Aegis -- RUTEADA por el
+  Asesor (MSG DIRECTIVA-redacta-decision-nombres-aegis, 8eb966d). Solo fija direccion; ejecucion = Carril B post-sello.
 - **Operador (EL RELOJ REAL, no eclipsar):** abrir **GOAL-P1** (piloto baseline, corre 3-8 jul, alimenta el
   corpus del sello) + emitir **estimates S/M/L** de las ~10 unidades Q4 (<=08-jul, antes del sorteo). GRANT
   EXECUTE (<=14-jul, no bloquea el sello).
-- **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; rutear la DECISION Aegis cuando
-  cierren las 2 DIRECTIVAs; vigilar que el sello (08-jul) no se quede sin inputs.
+- **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; revisar la DECISION Aegis cuando
+  la redacte; vigilar que el sello (08-jul) no se quede sin inputs del operador.
 
 ## SIGUIENTE (hitos)
 1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
