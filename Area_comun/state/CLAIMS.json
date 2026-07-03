@@ -15609,7 +15609,7 @@
         {
             "claim_id": "CLAIM-20260703-arquitecto-0243-decision0084",
             "expires_at": "2026-07-03T08:00:00Z",
-            "notes": "F1-F: DECISION-0084 + promocion 0243 + anotacion 0230 (directiva dae40ac).",
+            "notes": "Entrega 0243 completa (f3f91b3); release para flip in_review por Codex.",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0243-decision0084",
@@ -15621,10 +15621,10 @@
                 "runtime/state/events.jsonl",
                 "runtime/state/snapshot.json"
             ],
-            "started_at": "2026-07-03T01:01:38Z",
-            "status": "active",
+            "started_at": "2026-07-03T01:04:35Z",
+            "status": "released",
             "task_id": "TASK-0243",
-            "updated_at": "2026-07-03T01:01:38Z"
+            "updated_at": "2026-07-03T01:04:35Z"
         },
         {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
