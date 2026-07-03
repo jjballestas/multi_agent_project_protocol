@@ -53,6 +53,22 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   cuando hay dependencia claim->write; si usas `--intents`, valida el ordenamiento.
 - **`--actor-id Arquitecto`, `--timestamp` UTC real, `--commit $(git rev-parse HEAD)`** en cada llamada.
 
+### 2b. Lecciones 2026-07-03 (fallos reales, no repetir)
+- **TODO `task_status` exige claim ACTIVO del actor** que cubra `TASK_INDEX.json#<id>` +
+  `PROJECT_STATE.json#active_tasks/<id>` + el `.md` de la tarea -- tambien las RATIFICACIONES
+  (in_review->review_approved). Sin claim: "ERROR: no active claim for actor covers this intent".
+  Patron: tx atomica claim-acquire -> task_status(s) -> claim-release.
+- **`in_progress->in_review` exige capability `implementer`** para type docs/build (solo
+  analysis/triage/extraction son owner-closeable, DECISION-0032/0060). Tareas docs propias del
+  Arquitecto: el flip a in_review lo ejecuta CODEX via ACTION (igual que los done-flips).
+- **El archivo `--intents` es un OBJETO** `{"idempotency_key": "...", "intents": [...]}`, NO un
+  array plano ("ERROR: transaction JSON must be an object").
+- **Intent `decision`** = `{"type":"decision","decision_id":"DECISION-XXXX"}` con el `.md` de la
+  decision YA creado (artifacts-before-claim) y claim que incluya `Area_comun/state/PROJECT_STATE.json`
+  (ruta FULL, no fragmento) + el `.md` de la decision.
+- **Clean clone en Windows:** `git clone -c core.longpaths=true` o el checkout muere por MAX_PATH
+  ("Filename too long") y validate da 128 sin ser un fallo real del ledger.
+
 ## 3. Recuperacion de drift (apply a medias)
 Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
 `python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`

@@ -27,14 +27,25 @@ Dataset TFM SELLADO N=500 (tag TFM-dataset-N500->e3646ae), H1-H3, 5 pineados byt
 validate_collaboration_state.py, protocol.config.json sha 2E35..., event-state.runtime.json, snapshot.json),
 epoch v1.14.0 PINNED, #4. protocol.config.json byte-identico SIEMPRE.
 
-## QUE ESTOY HACIENDO (foco: VISION NOVA, fase F1 = nucleo doctrinal v1.18.0)
-7 tareas TASK-0238..0244 [VISION-NOVA][F1.x] bajo DECISION-0083 (F0.2: supersede parcial fork 0077 + re-alcance
-0230-0234). Cadena de a UNA:
-- **F1-A 0238 intake gate = DONE. F1-B 0239 exception.recorded = DONE. F1-C 0240 trailers = review_approved/cierre
-  en curso** (GO Analista, done-flip a Codex). Faltan: 0241 (F1-D taxonomia D1-D4, owner MIO + gate Analista),
-  0242 (F1-E harnesses envelope+fixloop), 0243 (F1-F mini-DECISION anti-vibecoding), 0244 (F1-G release v1.18.0).
-- Tablero vivo `personal/operador/vision-nova/pipeline-vision-nova.html` (skill pipeline-vision-nova). SPECs en
-  personal/operador/vision-nova/F0/. GATE DURO Sprint 1 = 2026-07-30.
+## QUE ESTOY HACIENDO (actualizado 2026-07-03 ~03:50: F1 EN CIERRE, v1.18.0 TAGEADA)
+7 tareas TASK-0238..0244 [VISION-NOVA][F1.x] bajo DECISION-0083. **0238..0243 = DONE** (ciclos completos con
+gate Analista; DECISION-0084 registrada con anexo DoR 10 puntos + pin-anclado-al-tag). **0244 (release) =
+entregada**: CHANGELOG v1.18.0 + templates sync + **tag v1.18.0 pusheado** (c9a4423, clon limpio 3/3 con
+`-c core.longpaths=true`); flip in_review en cola de Codex. CRONS relanzados ~03:40 con prompts 0242
+(envelope+fixloop+trailers): Codex 143816 / Analista 105264.
+- PENDIENTE EN VUELO: flip 0244 -> verificar trailer Task-Id en el commit de Codex -> ACTIVAR trailers
+  (crear Area_comun/protocol/COMMIT_TRAILERS.json {enabled:true, start_commit:<post-relanzamiento>}; el
+  validador exige start_commit) -> REVIEW 0244 al Analista -> GO -> ratifico CON claim -> done-flip ->
+  F1 CERRADO -> FYI operador (draft en personal/Arquitecto/DRAFT-FYI-release-v1180.md; relanzamiento YA
+  hecho, ajustarlo) -> session-checkpoint. Despues: ordenes F2 + NOVA-DEV del asesor (hold expira con F1).
+- Tablero vivo `personal/operador/vision-nova/pipeline-vision-nova.html` (skill pipeline-vision-nova).
+  GATE DURO Sprint 1 = 2026-07-30.
+- LECCIONES ledger de hoy (volcar a skill ledger-ops cuando el operador apruebe la edicion): todo task_status
+  exige claim activo del actor sobre TASK_INDEX#id + PROJECT_STATE#active_tasks/id + .md; in_review flip
+  exige implementer para type docs (ACTION a Codex); --intents = objeto {"idempotency_key","intents"};
+  intent decision exige claim con PROJECT_STATE.json full + .md preexistente.
+- REGLA 15-MIN vigente (baseline 6-9 min): tarea ruteada >15 min sin entrega/respuesta -> analisis
+  (err.log/seen/claims/envelope). Watchdog v3.1 + monitor de entregas: re-armar en cada wake.
 
 ## COMO LO HAGO (loop semi-auto, sin que el operador me empuje)
 - **MONITOR + AUTO-POLL:** armo el Monitor (skill monitor-coordina) sobre HEAD local + MSG de peers con SELF-FILTER
