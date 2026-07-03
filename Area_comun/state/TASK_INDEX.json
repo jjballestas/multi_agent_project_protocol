@@ -3674,7 +3674,7 @@
                 "GOAL-VISION-NOVA-001"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]",
             "type": "build"
         },
