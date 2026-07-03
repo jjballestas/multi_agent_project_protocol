@@ -4,6 +4,13 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0230 Aegis remediation delive
 
 ## Latest Session Note
 
+- TASK-0230 done-flip completed after Arquitecto ACTION
+  `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-done-flip`. Protocol commit
+  `8351099 coord(TASK-0230): close done flip` moves TASK-0230 `review_approved -> done` via runtime seq 3537,
+  releases `CLAIM-20260703-Codex-TASK-0230-done-flip` via seq 3538, and moves the consumed ACTION message to
+  `Area_comun/mailbox/answered/`. Evidence: `python scripts/scan_encoding.py --root .` OK,
+  `python scripts/scan_domain_neutrality.py --root .` exit 0, `python scripts/validate_collaboration_state.py --root .`
+  OK with unrelated FYI archive warning only, and drift false / byte-identical at `up_to_seq=3538`.
 - TASK-0230 Aegis remediation completed after Arquitecto ACTION
   `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-remediacion-aegis`. Instance commit
   `518b2e58 fix(instance): align Aegis suite arm` in `D:/Agentes/Zeus/NOVA/Aegis` changes
