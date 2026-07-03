@@ -27,9 +27,9 @@ APRUEBA materializando el detalle definitivo inmutable, sirviendose EXCLUSIVAMEN
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto** (secretaria de hacienda): captura y edita el borrador (draft), lo marca
 ready_to_approve y ejecuta la aprobacion. La matriz de autorizacion por operacion aun NO esta sembrada en BD
-(brecha NOVA-PRES-001 s.6 B-05; maestro s.08-C: emitir != aprobar != anular). SUPUESTO TEMPORAL declarado:
-cualquier usuario autenticado del modulo con rol presupuesto puede capturar y aprobar; se sustituye por policy por
-operacion cuando exista la matriz (BR-C4, preasignada al gobernado post-Sprint-1).
+(brecha NOVA-PRES-001 s.6 B-05; maestro s.08-C: emitir != aprobar != anular). CONFIRMADO por el Operador (DD-01),
+aceptado para Sprint 1: cualquier usuario autenticado del modulo con rol presupuesto puede capturar y aprobar;
+policy por operacion via BR-C4 CONFIRMADA post-Sprint-1.
 
 ## 3. Alcance definido
 1. Crear la cabecera del acto (`Initial_Budget`) y su borrador (`Initial_Budget_Draft`) -> canal: DML tipado del gateway (NOVA-PRES-02 s.5 fila "Crear").

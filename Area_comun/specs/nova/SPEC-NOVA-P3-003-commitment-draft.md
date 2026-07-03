@@ -26,13 +26,13 @@ saldo disponible de la linea del CDP y numera por serie segun regimen.
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto** (ordenador del gasto / delegado): captura el borrador del RP (con beneficiario y
 solicitante reales de `Core.Entity`), lo envia a aprobacion y lo aprueba. Matriz de autorizacion por operacion no
-sembrada (NOVA-PRES-001 s.6 B-05). SUPUESTO TEMPORAL: usuario autenticado con rol presupuesto; policy por
-operacion (BR-C4) post-Sprint-1. Numeracion asignada por la BD.
+sembrada (NOVA-PRES-001 s.6 B-05). CONFIRMADO por el Operador (DD-01), aceptado para Sprint 1: usuario autenticado
+con rol presupuesto; policy por operacion via BR-C4 CONFIRMADA post-Sprint-1. Numeracion asignada por la BD.
 
 ## 3. Alcance definido
 1. Crear/editar el borrador (`Commitment_Draft(_Line)`) en draft -> canal: DML tipado del gateway (NOVA-PRES-05 s.5 fila "Crear/editar").
 2. Herencia desde el CDP: al elegir el CDP (con saldo), pre-poblar las lineas del CDP con saldo en el borrador (conveniencia legacy util, B-03); cada linea del RP DEBE pertenecer a una linea del CDP (RN-02).
-3. Capturar beneficiario y solicitante (terceros reales), objeto (min. 15 chars como en legacy -- decidir si norma), tipo de vigencia (1/2/3), referencia SECOP.
+3. Capturar beneficiario y solicitante (terceros reales), objeto (min. 20 chars, norma del Operador DD-02; 400 ProblemDetails si <20), tipo de vigencia (1/2/3), referencia SECOP (vacia -> 'N/A', DD-03).
 4. Transicion `draft -> ready_to_approve`.
 5. Aprobar (perfeccionar el RP) -> canal UNICO: `Budget.Approve_Commitment_Draft(@draft,@user[,@code])`.
 6. Descartar borrador -> `discarded`.
@@ -62,7 +62,7 @@ operacion (BR-C4) post-Sprint-1. Numeracion asignada por la BD.
   - (a) La APROBACION es SOLO `Approve_Commitment_Draft`; la app nunca escribe `Commitment(_Line)` ni recalcula la regla de oro/saldo del CDP; captura = DML tipado del gateway.
   - (b) Herencia estricta del CDP: cada linea del RP pertenece a una linea del CDP del borrador (RN-02, THROW 50114); hereda ancla rubro-fuente + BPIN; no imputa combinaciones que el CDP no traiga.
   - (c) **B-01 (Alta) / RN-10:** la fecha del compromiso >= fecha del CDP NO la fuerza la BD (ni proc ni triggers) -> validacion DURA en el caso de uso; registrar solicitud de elevar al proc (hardening). Declarar el limite.
-  - (d) Beneficiario y solicitante obligatorios (terceros reales `Core.Entity`); objeto no vacio (min. 15 chars: decidir si norma, B-04); SECOP vacio -> valor por defecto documentado (no el `'0'` magico legacy sin significado).
+  - (d) Beneficiario y solicitante obligatorios (terceros reales `Core.Entity`); objeto min. 20 chars (norma del Operador DD-02; la validacion de aplicacion rechaza <20 con 400 ProblemDetails); SECOP vacio -> default 'N/A' declarada (decision del Operador DD-03); jamas el `'0'` magico legacy sin significado.
   - (e) Solo rubros auxiliares de gasto; misma vigencia que el CDP; vigencia abierta; catalogos validos (THROW 50210/50211/50091-50094/50212).
   - (f) Numeracion por serie de la BD dentro de la transaccion; la UI no propone numero. Saldo del RP siempre por `vw_Commitment_Line_Balance` (nunca columna acumuladora); el reintegro 14 libera RP (RN-09).
   - (g) Toda mutacion: correlation id + usuario real + THROW traducido a ProblemDetails.

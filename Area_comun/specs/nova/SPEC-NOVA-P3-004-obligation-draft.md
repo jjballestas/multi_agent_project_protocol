@@ -26,8 +26,8 @@ linea del compromiso y numera por serie.
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto** (causacion): captura el borrador de obligacion (beneficiario/solicitante reales de
 `Core.Entity`, uso contable, documento fuente por puente), lo envia a aprobacion y lo aprueba. Matriz de
-autorizacion por operacion no sembrada (B-05 de Doc 01). SUPUESTO TEMPORAL: usuario autenticado con rol
-presupuesto; policy por operacion (BR-C4) post-Sprint-1. Numeracion por la BD.
+autorizacion por operacion no sembrada (B-05 de Doc 01). CONFIRMADO por el Operador (DD-01), aceptado para Sprint 1:
+usuario autenticado con rol presupuesto; policy por operacion via BR-C4 CONFIRMADA post-Sprint-1. Numeracion por la BD.
 
 ## 3. Alcance definido
 1. Crear/editar el borrador (`Obligation_Draft(_Line)`) en draft -> canal: DML tipado del gateway (NOVA-PRES-06 s.5 fila "Crear/editar").

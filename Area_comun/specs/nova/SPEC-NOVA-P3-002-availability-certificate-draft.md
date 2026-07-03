@@ -25,9 +25,9 @@ rubro-fuente no excede la apropiacion vigente menos el CDP ya emitido) y numera 
 
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto** (ordenador del gasto / su delegado): captura el borrador, previsualiza la validacion
-y emite. Matriz de autorizacion por operacion aun no sembrada en BD (NOVA-PRES-001 s.6 B-05). SUPUESTO TEMPORAL:
-usuario autenticado con rol presupuesto puede capturar y emitir; se sustituye por policy por operacion (BR-C4)
-post-Sprint-1. La numeracion la asigna la BD; el usuario nunca propone numero.
+y emite. Matriz de autorizacion por operacion aun no sembrada en BD (NOVA-PRES-001 s.6 B-05). CONFIRMADO por el
+Operador (DD-01), aceptado para Sprint 1: usuario autenticado con rol presupuesto puede capturar y emitir; policy
+por operacion via BR-C4 CONFIRMADA post-Sprint-1. La numeracion la asigna la BD; el usuario nunca propone numero.
 
 ## 3. Alcance definido
 1. Crear/editar el borrador (`Availability_Certificate_Draft(_Line)`) en estado draft -> canal: DML tipado del gateway (NOVA-PRES-04 s.5 fila "Crear/editar").

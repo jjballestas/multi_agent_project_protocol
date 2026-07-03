@@ -26,8 +26,9 @@ presupuestales (el pago presupuestal ES la linea del egreso, `Treasury.Payment_O
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto / Tesoreria** (ordenacion del pago presupuestal): captura el borrador de pago,
 lo envia a aprobacion y lo aprueba (control presupuestal). El egreso REAL (banco, retenciones, comprobante) es del
-circuito Tesoreria/PayControl (fuera de alcance, B-01). Matriz de autorizacion por operacion no sembrada. SUPUESTO
-TEMPORAL: usuario autenticado con rol presupuesto; policy por operacion (BR-C4) post-Sprint-1. Numeracion por la BD.
+circuito Tesoreria/PayControl (fuera de alcance, B-01). Matriz de autorizacion por operacion no sembrada.
+CONFIRMADO por el Operador (DD-01), aceptado para Sprint 1: usuario autenticado con rol presupuesto; policy por
+operacion via BR-C4 CONFIRMADA post-Sprint-1. Numeracion por la BD.
 
 ## 3. Alcance definido
 1. Crear/editar el borrador (`Budget.Payment_Draft(_Line)`) en draft -> canal: DML tipado del gateway (NOVA-PRES-07 s.5 fila "Crear/editar").
