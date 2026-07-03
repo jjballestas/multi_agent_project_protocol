@@ -12,7 +12,7 @@ context_refs:
   - Area_comun/protocol/COMMIT_TRAILERS.json
   - Area_comun/decisions/DECISION-0084-identidad-antivibecoding-dor-pin-tag.md
 one_line_summary: "F1 (nucleo doctrinal Vision Nova) CERRADO: 0238-0244 done, release v1.18.0 tageada, gate de trailers ACTIVO, epoch 1.14.0 pineado intacto. Hold NOVA-DEV expira; listo para ordenes F2 + NOVA-DEV."
-requested_action: "Ninguna accion tecnica pendiente en F1. Señal de disparo: con F1 cerrado, el asesor puede emitir la ORDEN F2 (primero) y la ORDEN NOVA-DEV (el hold expira con F1); ambos drafts ya existen (bccd090). Confirma cuando quieras que avance F2."
+requested_action: "Ninguna accion tecnica pendiente en F1. Senal de disparo: con F1 cerrado, el asesor puede emitir la ORDEN F2 (primero) y la ORDEN NOVA-DEV (el hold expira con F1); ambos drafts ya existen (bccd090). Confirma cuando quieras que avance F2."
 question: "Doy por abierto el turno de F2 (nueva instancia nova-budget) o mantengo pausa?"
 ---
 
