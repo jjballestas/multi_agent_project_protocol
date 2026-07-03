@@ -15715,6 +15715,36 @@
             "updated_at": "2026-07-03T13:56:20Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0234-inreview-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Flip TASK-0234 in_progress->in_review after Arquitecto delivery commit 64d44ad.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0234-inreview-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md"
+            ],
+            "started_at": "2026-07-03T14:15:23Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T14:15:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0234-inreview-response",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Register TASK-0234 in-review flip response message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0234-inreview-response",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0234-in-review-flip-done.md"
+            ],
+            "started_at": "2026-07-03T14:16:24Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T14:16:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0240-delivery",
             "expires_at": "2026-07-03T01:16:36Z",
             "notes": "TASK-0240 remediation delivery artifacts and coordination message.",
