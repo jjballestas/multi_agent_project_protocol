@@ -69,6 +69,24 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
 - **Clean clone en Windows:** `git clone -c core.longpaths=true` o el checkout muere por MAX_PATH
   ("Filename too long") y validate da 128 sin ser un fallo real del ledger.
 
+### 2c. Gate de trailers ACTIVO (desde 2026-07-03, COMMIT_TRAILERS.json) -- muerde al Arquitecto
+Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runtime/state/**) DEBE:
+- Llevar `Task-Id: TASK-XXXX` (o `Task-Id: none` + `Ops-Reason: <motivo>` para coordinacion sin tarea)
+  en la SECCION FINAL de trailers. **`Task-Id:` y `Co-Authored-By:` van en el MISMO parrafo final,
+  sin blank line entre ellos** -- un salto de linea deja el Task-Id fuera del bloque de trailers que el
+  parser lee (F-0240-01) -> "touches governed routes without exact Task-Id trailer".
+- Si el subject empieza con `fix(`/`revert(`/`hotfix(` (FIX_SUBJECT_PATTERN), EXIGE ADEMAS
+  `Fixes-Task: TASK-XXXX` -> si no, "is fix/revert/hotfix without exact Fixes-Task trailer". Para evitarlo
+  en commits que no corrigen una tarea, usa subject `chore(`/`coord(`/`tasks(` en vez de `fix(`.
+- **GATEA EL PUSH en validate POST-commit** (no solo pre-commit): un commit con trailer malo se crea igual;
+  corre `validate` DESPUES del commit y antes del push. Si sale rojo, el commit ya existe -> corrige en un
+  commit nuevo (o, si es teething del gate recien activado, avanza `start_commit` de COMMIT_TRAILERS.json
+  al commit ofensor -- rev-list start..HEAD lo excluye -- documentando el motivo; NO reescribas historia
+  pusheada).
+- El gate se activa creando `Area_comun/protocol/COMMIT_TRAILERS.json` {enabled:true, start_commit:<sha>}
+  (fuera del config pineado). Solo tras relanzar los harnesses de peers con prompts que emiten trailers
+  (F-2 anti-DoS) y verificar 1 commit de peer con trailer.
+
 ## 3. Recuperacion de drift (apply a medias)
 Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
 `python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`
