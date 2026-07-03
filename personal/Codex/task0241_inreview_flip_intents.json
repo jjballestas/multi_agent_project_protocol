@@ -1,0 +1,58 @@
+{
+  "idempotency_key": "codex:task0241:inreview-flip-tx-20260703",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0241",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0241",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+          "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T00:15:11Z",
+        "updated_at": "2026-07-03T00:15:11Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Implementer in_review flip requested by Arquitecto after delivery commit ded4972 and released owner claim."
+      },
+      "idempotency_key": "codex:task0241:inreview-flip-claim-acquire-20260703"
+    },
+    {
+      "type": "task_status",
+      "task_id": "TASK-0241",
+      "from": "in_progress",
+      "to": "in_review",
+      "idempotency_key": "codex:task0241:in-progress-to-in-review-20260703"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+        "owner": "Codex",
+        "task_id": "TASK-0241",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+          "Area_comun/state/TASK_INDEX.json#TASK-0241",
+          "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+          "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T00:15:11Z",
+        "updated_at": "2026-07-03T00:15:11Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Implementer in_review flip requested by Arquitecto after delivery commit ded4972 and released owner claim."
+      },
+      "idempotency_key": "codex:task0241:inreview-flip-claim-release-20260703"
+    }
+  ]
+}

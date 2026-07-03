@@ -15483,6 +15483,40 @@
             "updated_at": "2026-07-02T22:21:56Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Implementer in_review flip requested by Arquitecto after delivery commit ded4972 and released owner claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-inreview-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0241",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
+                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T00:15:11Z",
+            "status": "released",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-03T00:15:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0241-response-msg",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Register and release the TASK-0241 in_review flip response message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0241-response-msg",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0241-in-review-flip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T00:18:00Z",
+            "status": "released",
+            "task_id": "TASK-0241",
+            "updated_at": "2026-07-03T00:18:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0242",
             "expires_at": "2026-07-03T05:00:04Z",
             "notes": "Delivered TASK-0242 envelope handoff and fix-loop harness doctrine to in_review.",
