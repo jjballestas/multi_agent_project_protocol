@@ -28,19 +28,6 @@
                 "examples/dotnet_enterprise_instance/Area_comun/protocol/TASK_TEMPLATE.md"
             ],
             "task_id": "TASK-0242"
-        },
-        {
-            "claim_id": "CLAIM-20260703-arquitecto-0241-taxonomia",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0241-taxonomia",
-                "Area_comun/tasks/TASK-0241-visionnova-f1d-taxonomia-defectos.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0241",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0241",
-                "Area_comun/protocol/DEFECT_TAXONOMY.md",
-                "personal/Analista/STARTUP_PROMPT.md"
-            ],
-            "task_id": "TASK-0241"
         }
     ],
     "schema_version": "1.0",

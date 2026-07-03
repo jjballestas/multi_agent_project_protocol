@@ -15524,6 +15524,7 @@
         {
             "claim_id": "CLAIM-20260703-arquitecto-0241-taxonomia",
             "expires_at": "2026-07-03T06:00:00Z",
+            "notes": "Entrega 0241 completa en ded4972; release para desbloquear entrega 0242 de Codex; flip in_review va por ACTION a Codex (capability implementer).",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-0241-taxonomia",
@@ -15533,10 +15534,10 @@
                 "Area_comun/protocol/DEFECT_TAXONOMY.md",
                 "personal/Analista/STARTUP_PROMPT.md"
             ],
-            "started_at": "2026-07-02T23:03:23Z",
-            "status": "active",
+            "started_at": "2026-07-02T23:04:00Z",
+            "status": "released",
             "task_id": "TASK-0241",
-            "updated_at": "2026-07-02T23:03:23Z"
+            "updated_at": "2026-07-03T00:05:21Z"
         },
         {
             "claim_id": "CLAIM-20260703-hyg-dualsesion-arquitecto",
