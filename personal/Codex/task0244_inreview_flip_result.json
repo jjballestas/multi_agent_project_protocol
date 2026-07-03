@@ -1,0 +1,276 @@
+{
+    "applied": true,
+    "drift": {
+        "authoritative": true,
+        "enabled": true,
+        "enforced": true,
+        "entries": [],
+        "has_drift": false,
+        "hot_hash": "d6e304f0f572b8235bf659267e22bb669041db9ecb95fa6b0f912af754738517",
+        "replay_hash": "d6e304f0f572b8235bf659267e22bb669041db9ecb95fa6b0f912af754738517",
+        "up_to_seq": 3461
+    },
+    "events": [
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "8wajOeVRBDir5qzbs4TEBjPBLJ5l5xnEkAw+bViHoV+aZayB/RxFt22Cgw/8HVN+F8RzotyTB6mI+l+V1iG9Ag=="
+            },
+            "aggregate_id": "TASK-0244",
+            "aggregate_version": 7,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "e092c34c45123a5e780bec4d044b6f33d97da5a009bf80cbcb0cb3a62b1bd025"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0244:inreview-flip-claim-acquire-20260703",
+            "payload": {
+                "commit": "5fe2e621766dc882244488a237dd262df55f471a",
+                "intent_type": "claim",
+                "task_id": "TASK-0244",
+                "timestamp": "2026-07-03T01:46:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0244:inreview-flip-tx-20260703",
+                    "index": 1
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                                "expires_at": "2026-07-03T23:59:00Z",
+                                "notes": "Implementer in_review flip requested by Arquitecto after release commit c9a4423, pushed tag v1.18.0, clean-clone gates, and released owner claim.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                                    "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-03T01:46:59Z",
+                                "status": "active",
+                                "task_id": "TASK-0244",
+                                "updated_at": "2026-07-03T01:46:59Z"
+                            },
+                            "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                            "op": "acquire",
+                            "owner": "Codex",
+                            "task_id": "TASK-0244"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "697aa741e1b64e6037db052e566d6487ff526e2d5d38ecb570e23d991369adfd",
+            "seq": 3459,
+            "ts": "2026-07-03T01:46:59Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "M1D4Cgz/GWJwO3vZK4d1eZa0FYSZs96QUjWoRaKB8w1QqeGNQE22hb8XbkBQJ22OD4ZmcHryKKAiiOx6F6g6Cg=="
+            },
+            "aggregate_id": "TASK-0244",
+            "aggregate_version": 8,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "d28586e3ca10eeba9e4612009351ca8ced73eacb15a545f64b7fc353b47dd8b3"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0244:in-progress-to-in-review-20260703",
+            "payload": {
+                "commit": "5fe2e621766dc882244488a237dd262df55f471a",
+                "intent_type": "task_status",
+                "task_id": "TASK-0244",
+                "timestamp": "2026-07-03T01:46:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0244:inreview-flip-tx-20260703",
+                    "index": 2
+                },
+                "transitions": {
+                    "task_status": {
+                        "from": "in_progress",
+                        "to": "in_review"
+                    }
+                }
+            },
+            "prev_hash": "6102c8ce1e25875a6ba539102ffc26c7c77c3ca35ba88852899eb5fafb76ce2a",
+            "seq": 3460,
+            "ts": "2026-07-03T01:46:59Z",
+            "type": "intent.applied"
+        },
+        {
+            "actor": "Codex",
+            "actor_auth": {
+                "keyid": "codex:v1",
+                "method": "ed25519",
+                "sig": "paGhMrQ2e2f5J/2toRcpteW5Cjayc3UjrbnTuYvXIAkNCsQkHo2M2uYH0zW2PyUDqpB7MhSWiXSlkVHPs3/zCA=="
+            },
+            "aggregate_id": "TASK-0244",
+            "aggregate_version": 9,
+            "applied": true,
+            "event_auth": {
+                "audience": "runtime-event-log",
+                "issuer": "local-runtime",
+                "key_id": "codex-hmac:v1",
+                "method": "hmac-sha256",
+                "signature": "1cf6efb99a1a48071954e84fc6d393683b04dba937689da31d39a0f7bfa89780"
+            },
+            "event_schema_version": "1.0",
+            "fencing_token": null,
+            "idempotency_key": "codex:task0244:inreview-flip-claim-release-20260703",
+            "payload": {
+                "commit": "5fe2e621766dc882244488a237dd262df55f471a",
+                "intent_type": "claim",
+                "task_id": "TASK-0244",
+                "timestamp": "2026-07-03T01:46:59Z",
+                "transaction": {
+                    "count": 3,
+                    "idempotency_key": "codex:task0244:inreview-flip-tx-20260703",
+                    "index": 3
+                },
+                "transitions": {
+                    "claims": [
+                        {
+                            "claim": {
+                                "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                                "expires_at": "2026-07-03T23:59:00Z",
+                                "notes": "Implementer in_review flip requested by Arquitecto after release commit c9a4423, pushed tag v1.18.0, clean-clone gates, and released owner claim.",
+                                "owner": "Codex",
+                                "scope": [
+                                    "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                                    "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                                    "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+                                    "runtime/state/events.jsonl",
+                                    "runtime/state/snapshot.json"
+                                ],
+                                "started_at": "2026-07-03T01:46:59Z",
+                                "status": "released",
+                                "task_id": "TASK-0244",
+                                "updated_at": "2026-07-03T01:46:59Z"
+                            },
+                            "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                            "op": "release",
+                            "owner": "Codex",
+                            "task_id": "TASK-0244"
+                        }
+                    ]
+                }
+            },
+            "prev_hash": "f483de572b25d5701cc742e4d2d8fcbf89ae3b6dc67497ac03eebc1106c3299b",
+            "seq": 3461,
+            "ts": "2026-07-03T01:46:59Z",
+            "type": "intent.applied"
+        }
+    ],
+    "genesis_event": null,
+    "intents": [
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                "expires_at": "2026-07-03T23:59:00Z",
+                "notes": "Implementer in_review flip requested by Arquitecto after release commit c9a4423, pushed tag v1.18.0, clean-clone gates, and released owner claim.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                    "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-03T01:46:59Z",
+                "status": "active",
+                "task_id": "TASK-0244",
+                "updated_at": "2026-07-03T01:46:59Z"
+            },
+            "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+            "idempotency_key": "codex:task0244:inreview-flip-claim-acquire-20260703",
+            "kind": "claim",
+            "op": "acquire",
+            "owner": "Codex",
+            "task_id": "TASK-0244"
+        },
+        {
+            "from": "in_progress",
+            "idempotency_key": "codex:task0244:in-progress-to-in-review-20260703",
+            "kind": "task_status",
+            "task_id": "TASK-0244",
+            "to": "in_review"
+        },
+        {
+            "claim": {
+                "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                "expires_at": "2026-07-03T23:59:00Z",
+                "notes": "Implementer in_review flip requested by Arquitecto after release commit c9a4423, pushed tag v1.18.0, clean-clone gates, and released owner claim.",
+                "owner": "Codex",
+                "scope": [
+                    "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                    "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                    "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                    "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+                    "runtime/state/events.jsonl",
+                    "runtime/state/snapshot.json"
+                ],
+                "started_at": "2026-07-03T01:46:59Z",
+                "status": "released",
+                "task_id": "TASK-0244",
+                "updated_at": "2026-07-03T01:46:59Z"
+            },
+            "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+            "idempotency_key": "codex:task0244:inreview-flip-claim-release-20260703",
+            "kind": "claim",
+            "op": "release",
+            "owner": "Codex",
+            "task_id": "TASK-0244"
+        }
+    ],
+    "log_repair": null,
+    "materialization": {
+        "canonical_hash": "0e3ddf7325b954d842c15f3b82ebe5041bad0377fe173315aa00731f0926d96e",
+        "materialized": true,
+        "paths": [
+            "Area_comun/state/CLAIMS.json",
+            "Area_comun/state/CLAIMS.slim.json",
+            "Area_comun/state/PROJECT_STATE.json",
+            "Area_comun/state/PROJECT_STATE.slim.json",
+            "Area_comun/state/TASK_INDEX.json",
+            "Area_comun/state/TASK_INDEX.slim.json"
+        ],
+        "up_to_seq": 3461
+    },
+    "runtime_snapshot": {
+        "up_to_seq": 3461
+    },
+    "task_files_updated": [
+        "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md"
+    ],
+    "transaction": {
+        "event_keys": [
+            "codex:task0244:inreview-flip-claim-acquire-20260703",
+            "codex:task0244:in-progress-to-in-review-20260703",
+            "codex:task0244:inreview-flip-claim-release-20260703"
+        ],
+        "idempotency_key": "codex:task0244:inreview-flip-tx-20260703",
+        "intent_count": 3
+    }
+}

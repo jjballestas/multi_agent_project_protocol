@@ -1,0 +1,47 @@
+{
+  "idempotency_key": "codex:task0244:response-msg-claim-tx-20260703",
+  "intents": [
+    {
+      "type": "claim",
+      "op": "acquire",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0244-response-msg",
+        "owner": "Codex",
+        "task_id": "TASK-0244",
+        "status": "active",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-response-msg",
+          "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0244-in-review-flip-done.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T01:48:45Z",
+        "updated_at": "2026-07-03T01:48:45Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Register Codex response message for TASK-0244 in_review flip."
+      },
+      "idempotency_key": "codex:task0244:response-msg-claim-acquire-20260703"
+    },
+    {
+      "type": "claim",
+      "op": "release",
+      "claim": {
+        "claim_id": "CLAIM-20260703-Codex-TASK-0244-response-msg",
+        "owner": "Codex",
+        "task_id": "TASK-0244",
+        "status": "released",
+        "scope": [
+          "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-response-msg",
+          "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0244-in-review-flip-done.md",
+          "runtime/state/events.jsonl",
+          "runtime/state/snapshot.json"
+        ],
+        "started_at": "2026-07-03T01:48:45Z",
+        "updated_at": "2026-07-03T01:48:45Z",
+        "expires_at": "2026-07-03T23:59:00Z",
+        "notes": "Register Codex response message for TASK-0244 in_review flip."
+      },
+      "idempotency_key": "codex:task0244:response-msg-claim-release-20260703"
+    }
+  ]
+}

@@ -4,6 +4,16 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Latest Session Note
 
+- TASK-0244 in_review flip completed. Runtime transaction
+  `codex:task0244:inreview-flip-tx-20260703` acquired/released
+  `CLAIM-20260703-Codex-TASK-0244-inreview-flip` and moved TASK-0244 `in_progress -> in_review` at seq
+  3459-3461 after Arquitecto release delivery `c9a4423` and pushed tag `v1.18.0`. Response message
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0244-in-review-flip-done.md` was added and
+  registered by claim transaction `codex:task0244:response-msg-claim-tx-20260703` at seq 3462-3463. Evidence
+  before commit: product `node --check public/app.js`, `node --check src/server.js`, and `npm test` PASS 109
+  tests (87 pass, 22 skipped); protocol encoding OK, domain-neutrality command exit 0, collaboration validator
+  OK, drift false / byte-identical at `up_to_seq=3463`. Product repo stayed clean. Unrelated peer/operator
+  dirty files were left untouched.
 - TASK-0243 done-flip completed in protocol working tree. Runtime transaction
   `codex:task0243:done-flip-tx-20260703` acquired/released
   `CLAIM-20260703-Codex-TASK-0243-done-flip` and moved TASK-0243 `review_approved -> done` at seq 3440-3442.

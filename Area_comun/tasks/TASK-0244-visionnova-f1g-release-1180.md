@@ -2,7 +2,7 @@
 task_id: TASK-0244
 title: "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
 type: docs
-status: in_progress
+status: in_review
 owner: Arquitecto
 phase: P2
 priority: high

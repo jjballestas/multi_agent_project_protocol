@@ -39,7 +39,7 @@
         {
             "id": "TASK-0244",
             "owner": "Arquitecto",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
         }
     ],

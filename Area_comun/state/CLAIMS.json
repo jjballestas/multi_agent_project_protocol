@@ -15653,6 +15653,40 @@
             "updated_at": "2026-07-03T01:08:53Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Implementer in_review flip requested by Arquitecto after release commit c9a4423, pushed tag v1.18.0, clean-clone gates, and released owner claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-inreview-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0244",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0244",
+                "Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T01:46:59Z",
+            "status": "released",
+            "task_id": "TASK-0244",
+            "updated_at": "2026-07-03T01:46:59Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0244-response-msg",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Register Codex response message for TASK-0244 in_review flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0244-response-msg",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0244-in-review-flip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T01:48:45Z",
+            "status": "released",
+            "task_id": "TASK-0244",
+            "updated_at": "2026-07-03T01:48:45Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-0241-taxonomia",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Entrega 0241 completa en ded4972; release para desbloquear entrega 0242 de Codex; flip in_review va por ACTION a Codex (capability implementer).",
