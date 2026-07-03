@@ -16261,6 +16261,22 @@
             "updated_at": "2026-07-03T13:51:07Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-ratify-0234",
+            "expires_at": "2026-07-03T23:00:00Z",
+            "notes": "Ratificacion 0234 (checker) tras OK/CERRABLE Analista re-juicio 2/2 (runbook F2.5). Cierra F2.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-ratify-0234",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md"
+            ],
+            "started_at": "2026-07-03T15:12:47Z",
+            "status": "released",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T15:12:47Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Ratificacion doble 0241+0242 (checker) tras OK/CERRABLE del Analista.",

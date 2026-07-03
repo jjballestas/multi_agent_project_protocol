@@ -13,12 +13,6 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
-            "id": "TASK-0234",
-            "owner": "Arquitecto",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
-        },
-        {
             "id": "TASK-0245",
             "owner": "Codex",
             "status": "proposed",

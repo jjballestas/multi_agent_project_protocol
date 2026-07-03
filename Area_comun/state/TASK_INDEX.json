@@ -3698,7 +3698,7 @@
                 "GOAL-VISION-NOVA-001"
             ],
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]",
             "type": "docs"
         },
