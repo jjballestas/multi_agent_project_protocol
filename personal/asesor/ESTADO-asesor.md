@@ -2,7 +2,9 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-03 (noche, ciclo NOVA-DEV cerrado + decisiones dominio + decision nombres Aegis).
+> Ultima actualizacion: 2026-07-04 (cierre de sesion; NOVA-DEV gate-atestado e2e, DD baseline OK, piloto de
+> medicion validado -smoke-, DECISION-0087 nombres Aegis, regla asiento-coordinacion hub/Aegis, estimates Q4
+> resueltos). PROXIMA SESION: rutear arranque del build de GOAL-P1 (ver ">> PROXIMA SESION - PRIMERA ACCION").
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
@@ -69,8 +71,15 @@
   ejemplo (tokens=12000, fecha_fin=08-jul futuro), NO el build real. FALTA: correr el BUILD real de GOAL-P1
   (3-8 jul, tarea de dev) y re-medir con numeros reales -> ESE journal se congela. Heads-up al Arquitecto
   ruteado (dbd9ab4: atesta el sha256 REAL, no el smoke). Yo coordino la recaptura. GRANT EXECUTE (<=14-jul).
-- **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; revisar la DECISION Aegis cuando
-  la redacte; vigilar que el sello (08-jul) no se quede sin inputs del operador.
+- **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
+  se quede sin inputs del operador.
+
+## >> PROXIMA SESION - PRIMERA ACCION (ordenado por el operador al cerrar 2026-07-04)
+**RUTEAR al Arquitecto el ARRANQUE DEL BUILD de GOAL-P1:** que ACTIVE al maker (Codex) + CONFIRME/cree el
+repo de producto NOVA/Nova-Budget (LAZY, D:/Agentes/Zeus/NOVA/Nova-Budget) + lo apunte a NOVA-GOAL-001
+(fundacion tecnica, brazo baseline). Recordar: asiento de coordinacion = HUB (regla 96ebae2); el Operador
+abre Nova-Budget para codigo + coordina desde el hub. Luego el Operador mide el build real con
+medir-goalp1.ps1 (NO el smoke) -> ese journal se congela en el sello. Codigo = de Codex/Arquitecto, no mio.
 
 ## SIGUIENTE (hitos)
 1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
@@ -101,8 +110,10 @@
     medido, solo se anota procedencia). H1-H3 no se tocan.
   - **i18n del core/templates/spec para publicar = Carril B** (post-sello, acotado a la superficie publicada,
     NO todo el repo; el dogfooding en espanol no se publica). NO es cosmetico -> es un programa Carril B.
-  - PENDIENTE: la DECISION formal de nombres la redacta el Arquitecto DESPUES de las 2 DIRECTIVAs; yo la ruteo.
-    Detalle de implementacion para el loader: resolucion cuando coexistan skills `aegis:` del hub y de la instancia.
+  - HECHO: DECISION-0087 registrada (bc95ad3 + forma 18499e4: instancia = `Aegis/` capitalizada). Fija la
+    DIRECCION. La EJECUCION (adoptar la marca + namespacing `aegis:` en el loader + i18n) es Carril B POST-SELLO.
+  - PREFIJO `aegis:` EN EL CLI: NO visible aun (decidido, no ejecutado). Hoy las skills muestran nombres planos;
+    el prefijo aparece cuando se implemente el namespacing via loader (Carril B). Scripts sin tocar.
 
 ## Mis entregables (todos versionados)
 - scripts-medicion/ (medicion_ledger.py + schema_medicion.json [52 cols, 5 campos peones + par_id na_ok] +
