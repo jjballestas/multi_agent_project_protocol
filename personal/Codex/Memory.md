@@ -1,9 +1,24 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0230 Aegis remediation delivery.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0232 distributed harness delivery.
 
 ## Latest Session Note
 
+- TASK-0232 delivered to `in_review`. Aegis instance commit
+  `82e49f5842f9a9b76b1844dc433f56896f5db430 feat(instance): add distributed git harness` adds
+  `scripts/distributed_git_harness.py` and `scripts/test_distributed_git_harness.py`. The harness configures a
+  private bare remote outside the hub, runs clone A pull/safe-window -> submit_intent claim write -> immediate
+  commit+push, and proves clone B sees the claim after pull. Evidence run:
+  `python scripts/distributed_git_harness.py --remote D:/Agentes/Zeus/remotes/Aegis-task0232b.git` PASS with
+  private proof commit `b2b10b75c44833cf00ff56f1eb1b8c73dccaf2be`, `claim_visible=true`, submit seq 3458, and
+  clone drift false at up_to_seq 3458. Aegis origin now points to `D:/Agentes/Zeus/remotes/Aegis-task0232b.git`
+  instead of the hub. Protocol delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0232-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0232-in-review.md`; runtime moved TASK-0232
+  `in_progress -> in_review` and released Codex claims through seq 3547. Gates: Aegis py_compile, harness unit,
+  harness proof, encoding, neutrality, validate, and drift PASS; Zeus-protocol `npm test` PASS 112 tests (90 pass,
+  22 skipped) and `node --check public/app.js src/server.js` PASS; hub encoding, neutrality, validate, and drift
+  PASS with unrelated mailbox FYI archive warning only.
 - TASK-0230 done-flip completed after Arquitecto ACTION
   `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-done-flip`. Protocol commit
   `8351099 coord(TASK-0230): close done flip` moves TASK-0230 `review_approved -> done` via runtime seq 3537,

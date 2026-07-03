@@ -2,7 +2,7 @@
 task_id: TASK-0232
 title: "[VISION-NOVA][F2.3] Harness distribuido pull -> escribir -> push inmediato (claims visibles entre clones) + hosting privado de la instancia [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: medium
