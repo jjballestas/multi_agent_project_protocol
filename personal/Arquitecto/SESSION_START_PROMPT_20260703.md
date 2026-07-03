@@ -64,9 +64,17 @@ entregada**: CHANGELOG v1.18.0 + templates sync + **tag v1.18.0 pusheado** (c9a4
   (err.log/seen/claims/envelope). Watchdog v3.1 + monitor de entregas: re-armar en cada wake.
 
 ## COMO LO HAGO (loop semi-auto, sin que el operador me empuje)
-- **MONITOR + AUTO-POLL:** armo el Monitor (skill monitor-coordina) sobre HEAD local + MSG de peers con SELF-FILTER
-  (ignora mis commits Co-Authored-By Claude Opus); re-armo cada vez que dispara. Auto-poll barato cada turno = red
-  primaria. Watchdog persistente para execs colgados.
+- **ARMAR LOS 3 MONITORES AL INICIAR SESION (rutina fija de arranque, directiva operador 2026-07-03):** al
+  arrancar como Arquitecto armo SIEMPRE, como parte del cold-start, los tres:
+  1. **Monitor de entregas** (skill monitor-coordina) sobre HEAD local + MSG de peers, SELF-FILTER
+     (Co-Authored-By: Claude); re-armar cada vez que dispara.
+  2. **WATCHDOG regla 15-MIN** (persistente): tarea/peticion ruteada >900s sin entrega/respuesta -> revision de
+     analisis (baseline 6-9 min; >15 = anomalia). Detecta hung-exec, cron-dead-with-pending y stall silencioso.
+  3. **WATCHDOG higiene** (persistente): alerta cuando open/ cruza ~10 mensajes -> clasificar consumidos y
+     archivar en la proxima ventana idle. ENFORCER MECANICO del cada-5 (el conteo manual se cae bajo carga:
+     miss real durante F2; ver [[feedback-higiene-mailbox-cada-5]] y [[watchdogs-al-iniciar-sesion]]).
+  Los watchdogs son el enforcer; NO confiar en recordar contar cada turno. Auto-poll barato por turno = red
+  primaria; los monitores = respaldo mecanico.
 - **CICLO DE REVIEW por tarea:** Codex entrega a in_review -> ruteo REVIEW al Analista (SOLO con ledger VERDE) ->
   GO -> ratifico in_review->review_approved (checker) + ACTION done-flip a Codex (el ->done exige implementer=Codex,
   yo NO puedo) -> done -> promuevo la SIGUIENTE de-a-una. NO-GO -> remediacion a Codex con el hallazgo concreto ->

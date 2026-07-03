@@ -83,6 +83,37 @@ Emite una vez por episodio (flag `alerted`) y se resetea cuando el lock se va o 
 entregas cubre los DOS desenlaces de un exec: entrega (commit/MSG) o cuelgue (silencioso). El fix PERMANENTE del
 cuelgue es TASK-0236/0237 (harness + hang-proof del npm test); el watchdog es el control compensatorio mientras tanto.
 
+## 1c. TERCER monitor OBLIGATORIO: watchdog de higiene de mailbox (enforcer del cada-5)
+La regla de higiene cada-5 es DISCIPLINA DE MODELO y se cae bajo carga alta (F2 2026-07-03: cascadas rapidas +
+peers en exec -> el auto-poll por turno degenera a "vigilar el bloqueo actual" y suelta el conteo de consumidos;
+open/ acumulo 19 sin higiene y el operador lo noto). El fix durable es un ENFORCER MECANICO: un watchdog persistente
+que alerta cuando `open/` cruza un umbral, para clasificar consumidos + archivar en la proxima ventana idle:
+```bash
+cd /d/Agentes/multi_agent_project_protocol
+alerted=0
+while true; do
+  n=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -c "MSG-")
+  if [ "$n" -ge 10 ]; then
+    if [ "$alerted" != "1" ]; then
+      echo "=== MAILBOX-ACUMULADO $(date '+%H:%M:%S') ==="; echo "open/ tiene $n mensajes (umbral 10). Clasifica consumidos vs vivos y corre higiene (mailbox_archive) en la proxima ventana idle (peers sin lock)."; alerted=1
+    fi
+  else alerted=0; fi
+  sleep 120
+done
+```
+No archives desde el watchdog (semantica: "consumido" la decides tu); solo ALERTA. Al dispararse, clasifica y corre
+`mailbox_archive` (skill mailbox-hygiene) en ventana idle (peers sin lock + tree sin half-write peer). Umbral 10 es
+proxy mecanico del cada-5-consumidos.
+
+## 1d. ARMAR LOS 3 MONITORES AL INICIAR SESION (directiva operador 2026-07-03)
+Al arrancar como Arquitecto, arma SIEMPRE los tres como parte del cold-start: (1) monitor de entregas (s.1),
+(2) watchdog 15-min/salud-execs (s.1b, ampliado a stall silencioso), (3) watchdog de higiene de mailbox (s.1c).
+Los watchdogs son el ENFORCER; el auto-poll por turno es red primaria pero se cae bajo carga -> los monitores
+mecanicos lo respaldan. **Exportabilidad:** estos watchdogs deben poder EXPORTARSE al instanciar la metodologia
+(un Aegis/instancia recien creada arma los mismos en el arranque de sus agentes) -> item de diseno: portarlos a la
+capa neutral `skills/` (DECISION-0061, exportable via new_instance) o al agent-runbook del TASK_TEMPLATE de instancia.
+Ver [[watchdogs-al-iniciar-sesion]].
+
 ## 2. Reglas de reaccion (que hacer con cada senal de peer)
 En cada wake: `git fetch` + `git merge --ff-only origin/main` (los peers commitean al arbol compartido; tu HEAD
 local puede ir detras de origin). Luego, segun la senal:
