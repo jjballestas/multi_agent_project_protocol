@@ -16427,6 +16427,35 @@
             "updated_at": "2026-07-03T11:50:56Z"
         },
         {
+            "claim_id": "CLAIM-20260703-hyg-f2-b4",
+            "expires_at": "2026-07-03T21:00:00Z",
+            "notes": "Higiene ciclo F2.2/F2.3 (8 consumidos).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-hyg-f2-b4",
+                "Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0232-harness-distribuido-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0232-harness-distribuido-OK.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Analista-REQUEST-TASK-0233-e2e-distribuida.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Analista-REQUEST-TASK-0233-e2e-distribuida.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0232-harness-distribuido.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0232-harness-distribuido.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-GO-TASK-0232-f23-harness-distribuido.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Codex-GO-TASK-0232-f23-harness-distribuido.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Operador-FYI-0233-reasignacion-owner.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Arquitecto-to-Operador-FYI-0233-reasignacion-owner.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0232-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Codex-to-Arquitecto-TASK-0232-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-DECISION-0233-owner-codex-maker.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-DECISION-0233-owner-codex-maker.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-ACTION-nudge-jam-0233-codex.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-ACTION-nudge-jam-0233-codex.md"
+            ],
+            "started_at": "2026-07-03T13:17:58Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260703",
+            "updated_at": "2026-07-03T13:17:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg0240-b1-arquitecto",
             "expires_at": "2026-07-03T05:00:00Z",
             "notes": "Higiene ciclo 0240 lote 1.",
