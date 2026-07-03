@@ -3924,7 +3924,7 @@
                 "GOAL-VISION-NOVA-001"
             ],
             "reviewer": "Analista",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)",
             "type": "docs"
         },

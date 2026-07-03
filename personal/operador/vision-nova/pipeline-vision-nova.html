@@ -60,7 +60,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-03 03:02",
+  updated_at: "2026-07-03 03:36",
   updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
@@ -73,10 +73,10 @@ const PIPELINE = {
       { id:"F1.2", t:"[TASK-0239] Registro de excepciones auditado (evento firmado exception.recorded)", st:"hecho", ev:"TASK-0239 DONE (done-flip 65095ee). Ciclo: entrega -> NO-GO F-0239-01 (payload actor != caller firmante, mis-attribution U2) -> remediacion (actor atado al caller + test) -> re-gate OK -> ratificado 812d1e5. Habilita el puente R5 de 0238" },
       { id:"F1.3", t:"[TASK-0240] Trailers bloqueantes Task-Id / Fixes-Task en validador", st:"hecho", ev:"TASK-0240 DONE (done-flip Codex 8acc2f6). Ciclo: entrega db47854 -> NO-GO F-0240-01 (parser contaba Task-Id fuera de la seccion final de trailers) -> remediacion -> re-gate OK Analista 160cc8e -> ratificado 663a8ea. ACTIVACION del trailer_start_seq sigue DIFERIDA hasta F1.5h/TASK-0242 desplegado (F-2 anti-DoS)" },
       { id:"F1.4", t:"[TASK-0241] Taxonomía defectos D1–D4 ampliada + subconteo declarado", st:"hecho", ev:"TASK-0241 DONE (done-flip Codex cba7d71). DEFECT_TAXONOMY.md v1.0 (D1-D4 + S1-S7 + severidad + subconteo + mesa 10/10) + prompt checker; OK/CERRABLE Analista 8317b1c; residual: puntero severidad en prompt cron = seguimiento 0242" },
-      { id:"F1.5", t:"[TASK-0243] Mini-DECISION identidad anti-vibecoding registrada", st:"en_curso", ev:"TASK-0243 in_progress (claim Arquitecto 03:10); DECISION-0084 redactada (identidad + anexo DoR 10 puntos directiva dae40ac + pin-anclado-al-tag) + anotacion 0230/F2.1; gate Analista pendiente" },
+      { id:"F1.5", t:"[TASK-0243] Mini-DECISION identidad anti-vibecoding registrada", st:"hecho", ev:"TASK-0243 DONE (done-flip Codex 916d53c). DECISION-0084 registrada (seq 3427: identidad + anexo DoR 10 puntos dae40ac + pin-anclado-al-tag) + anotacion intake-v2 en 0230/F2.1; OK/CERRABLE Analista a70f4f5 (#4 byte-identico verificado)" },
       { id:"F1.5h", t:"[TASK-0242] Envelope handoff 7 campos + fix-loop re-juicio pre-commit (harnesses) [alta: orden operador 2026-07-02]", st:"hecho", ev:"TASK-0242 DONE (done-flip Codex cba7d71). Envelope 7 campos + fix-loop en TASK_PROTOCOL + prompts cron; OK/CERRABLE Analista 40d3360 (clon limpio npm test EXIT 0, sin activacion implicita de trailers). ACTIVACION trailer_start_seq = paso explicito separado PENDIENTE + relanzar crons con prompts nuevos" },
       { id:"F1.6", t:"Aprendizajes-externos: extracción de reglas (timebox 2d, paralelo) [sin TASK: actividad timebox]", st:"pendiente", ev:"" },
-      { id:"F1.7", t:"[TASK-0244] RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"pendiente", ev:"TASK-0244 registrada (proposed, commit 93c10e8); v1.18.0=linea release, epoch PINNED intocable" }
+      { id:"F1.7", t:"[TASK-0244] RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"en_curso", ev:"TASK-0244 in_progress (claim Arquitecto ~03:35); CHANGELOG v1.18.0 + sync AGENTS.template (s.6.1-6.4) + HANDOFF_TEMPLATE redactados; falta clon limpio + tag + gate Analista. Trailers: COMMIT_TRAILERS.json tras relanzar crons (gate operador)" }
     ]},
     { id:"F2", title:"Instancia nova-budget distribuida — PRD-02", window:"Sem 3 · jul 21–25", items:[
       { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"pendiente", ev:"" },

@@ -13,6 +13,35 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.18.0] - 2026-07-03
+> Note: release line only; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
+> DECISION-0047) -- `protocol.config.json` byte-identical, no re-genesis. F1 doctrine core of the Vision Nova
+> phase (DECISION-0083); new gates live in registries **outside** the pinned config.
+
+### Added
+- **Deterministic intake gate (TASK-0238).** Tasks created after the declared start (`INTAKE_GATE.json`, outside
+  the pinned config: `start_task_id` anti-retroactivity boundary) require a valid frontmatter `intake` block
+  (type/goal/acceptance/verification_cmd/scope_routes/out_of_scope/risk/estimate) to transition to `ready`.
+  Enforced in both validators and the `submit_intent` hard-gate; fail-closed on `intake_exempt` claims (R5
+  verifies a real `exception.recorded` event).
+- **Audited exception events (TASK-0239).** Signed `exception.recorded` event (kinds: manual_intervention, assist,
+  arbitration, suspension, scope_change, intake_exempt) with the payload actor bound to the signing caller
+  (anti mis-attribution).
+- **Blocking commit trailers (TASK-0240).** Validator scans `Task-Id:` / `Fixes-Task:` trailers in the final
+  trailer section of commits after the declared start (`COMMIT_TRAILERS.json`, outside the pinned config).
+  Shipped DISABLED; activation is an explicit separate step after harnesses emit trailers (anti self-DoS).
+- **Defect taxonomy D1-D4 + S1-S7 + checker severity (TASK-0241).** `Area_comun/protocol/DEFECT_TAXONOMY.md`:
+  detection-channel classes D1-D4, nature subcategories S1-S7, severity scale CRITICAL / WARNING-real /
+  WARNING-theoretical / SUGGESTION with the normal-use rule, declared undercount section, and a 10/10
+  historical-defect desk test.
+- **Handoff envelope + fix-loop (TASK-0242).** 7-field handoff envelope (task_id/status/executive_summary/
+  artifacts/gates/next_recommended/risks) as final turn text (never a tool call) in TASK_PROTOCOL + templates;
+  post NO-GO fix-loop (remediate + mandatory re-judgement, max 2 iterations, then escalate) in agent harnesses.
+- **Anti-vibecoding identity doctrine (DECISION-0084, TASK-0243).** Requirements interrogation + quality panel +
+  audited exceptions as the methodology's identity; Definition of Ready annex (operator's 10-point checklist,
+  v1 intake covers 6/10, v2 product fields land in instance templates with the anti-empty rule); pin-anchored-
+  to-tag clause (the 5 byte-identical pins anchor to the sealed study tag; the live validator evolves).
+
 ## [1.17.0] - 2026-06-26
 > Note: capabilities shipped; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
 > DECISION-0047) -- no config change, no re-genesis. New registries (skills) live **outside** `protocol.config.json`.

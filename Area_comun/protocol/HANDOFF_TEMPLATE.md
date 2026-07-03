@@ -63,3 +63,9 @@ Concrete pending questions.
 ## 10. Pointers
 Task, spec, decisions and deliverables.
 ```
+
+## Envelope rule (v1.18.0)
+
+The delivery turn that publishes a handoff ends with the 7-field textual envelope (task_id,
+status, executive_summary, artifacts, gates, next_recommended, risks) as the FINAL TEXT of
+the turn, never a tool call. See `TASK_PROTOCOL.md` (handoff envelope + fix-loop).

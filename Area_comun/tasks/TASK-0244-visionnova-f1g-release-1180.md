@@ -2,7 +2,7 @@
 task_id: TASK-0244
 title: "[VISION-NOVA][F1.7] RELEASE v1.18.0 (CHANGELOG + tag; SIN bumpear epoch pineado)"
 type: docs
-status: proposed
+status: in_progress
 owner: Arquitecto
 phase: P2
 priority: high
@@ -14,6 +14,29 @@ relates_to: [GOAL-VISION-NOVA-001]
 linked_decisions: [DECISION-0083]
 linked_reqs: [GOAL-VISION-NOVA-001]
 file: Area_comun/tasks/TASK-0244-visionnova-f1g-release-1180.md
+intake:
+  type: doc
+  goal: Release v1.18.0 (CHANGELOG + tag SemVer sobre commit verde en clon limpio) SIN bumpear el epoch pineado; templates sincronizados con las reglas F1.
+  acceptance:
+    - CHANGELOG.md actualizado a v1.18.0 con las entradas F1 (intake gate, exception.recorded, trailers, taxonomia, envelope+fixloop, DECISION-0084).
+    - Tag v1.18.0 creado sobre commit con los 3 gates verdes en clon limpio.
+    - Templates (.template.*) sincronizados con intake / exception / trailers / envelope.
+    - protocol.config.json byte-identico (epoch 1.14.0 PINNED, DECISION-0047).
+    - FYI al operador con el tag y el estado de activacion de trailers.
+  verification_cmd:
+    - python scripts/validate_collaboration_state.py
+    - python scripts/scan_encoding.py
+    - python scripts/scan_domain_neutrality.py
+  scope_routes:
+    - CHANGELOG.md
+    - AGENTS.template.md
+    - Area_comun/protocol/
+  out_of_scope:
+    - NO bumpear protocol_version/epoch ni tocar protocol.config.json (re-genesis coordinada unica via DECISION-0047).
+    - La activacion del trailer_start_seq es un paso explicito SEPARADO (COMMIT_TRAILERS.json tras relanzar crons con prompts 0242), no parte del tag.
+    - No relanza crons (gate de permisos del operador).
+  risk: medium
+  estimate: M
 ---
 
 # TASK-0244 - [VISION-NOVA][F1.7] RELEASE v1.18.0

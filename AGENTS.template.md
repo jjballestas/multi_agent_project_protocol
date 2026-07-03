@@ -94,6 +94,38 @@ The task status must match in two places:
 - `Area_comun/tasks/TASK-XXXX-*.md`
 - `Area_comun/state/TASK_INDEX.json`
 
+### 6.1 Intake gate (Definition of Ready, v1.18.0)
+
+Tasks created after the declared start (`Area_comun/protocol/INTAKE_GATE.json`, a registry
+outside the pinned config, with `start_task_id` as the anti-retroactivity boundary) require a
+valid frontmatter `intake` block to transition to `ready`: `type`, `goal`, `acceptance` (>=1
+verifiable), `verification_cmd` (>=1 exact command), `scope_routes`, `out_of_scope` (>=1),
+`risk` (low|medium|high), `estimate` (S|M|L). Placeholders (TBD) are invalid; an explicit
+"none" counts, an absent field does not. Instances may extend the block with product fields
+(e.g. target_user, functional_scope, assets_inputs, tech_constraints, risks_list, priority)
+in their own templates. Exemptions require a real audited `exception.recorded` event
+(kind `intake_exempt`); the gate is fail-closed.
+
+### 6.2 Audited exceptions
+
+Every deviation from the normal flow (manual intervention, assist, arbitration, suspension,
+scope change, intake exemption) is recorded as a signed `exception.recorded` event whose
+payload actor is bound to the signing caller. There are no informal exceptions.
+
+### 6.3 Commit trailers (linkage; activation is an explicit step)
+
+When the trailer gate is active (`Area_comun/protocol/COMMIT_TRAILERS.json`, outside the
+pinned config, with a declared `start_commit`), every commit after the start carries a final
+trailer section with `Task-Id: TASK-XXXX` (and `Fixes-Task: TASK-XXXX` when it remedies a
+finding). Activate only after all agent harnesses emit trailers, or the gate DoSes the ledger.
+
+### 6.4 Handoff envelope + fix-loop
+
+Every delivery/handoff turn ends with a 7-field textual envelope (task_id, status,
+executive_summary, artifacts, gates, next_recommended, risks) as the FINAL TEXT of the turn,
+never a tool call. After a checker NO-GO: remediate, re-run affected gates, re-judge against
+the acceptance criteria and the finding (max 2 iterations, then escalate to the human owner).
+
 ## 7. Collaboration Protocol
 
 - Work is decomposed into small, verifiable, assignable tasks.
