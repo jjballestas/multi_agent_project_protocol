@@ -3,7 +3,7 @@ message_id: MSG-20260703-Arquitecto-to-Analista-REVIEW-TASK-0234-runbook-onboard
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-03

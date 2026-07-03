@@ -3,7 +3,7 @@ message_id: MSG-20260703-Operador-to-Arquitecto-FYI-retracta-nudge-jam-0233
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-03
 context_refs:
