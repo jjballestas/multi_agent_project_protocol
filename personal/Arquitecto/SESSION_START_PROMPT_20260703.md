@@ -57,7 +57,10 @@ epoch v1.14.0 PINNED, #4. protocol.config.json byte-identico SIEMPRE.
   EXPLICITO por path (nunca git add -A). Commitear ANTES de pedir review. submit_intent en BACKGROUND (re-replay
   crece). Ventana idle verificada (0 claims peer + sin lock + state limpio) antes de escribir el ledger.
 - **HIGIENE mailbox cada-5** ([[feedback-higiene-mailbox-cada-5]]): 5+ consumidos en open/ -> lote de archive
-  (mailbox_archive, lotes <=5, ventana idle, background). open/ solo vivos.
+  (mailbox_archive, lotes <=5, ventana idle, background). open/ solo vivos. **El CONTEO de consumidos es parte
+  del AUTO-POLL de cada turno** (miss 2026-07-03: el trigger dependia de memoria y el operador tuvo que
+  pedir la higiene); >=5 -> encolar el lote ESE turno; si un peer tiene lock, waiter en background que
+  dispara el lote al liberarse.
 - **SILENT-REFUSAL** ([[arquitecto-monitor-coordina]] s.4): tarea in_review con ACTION *seen* pero sin reentrega
   NO = "peer trabajando" -> revisa `.protocol-tmp/<peer>_mailbox_cron/runs/*.err.log`; puede haberse negado por un
   claim bloqueante (vi un claim wildcard `["*"]` del Analista frenar a Codex ~1h). FIX: resuelve el bloqueo +
