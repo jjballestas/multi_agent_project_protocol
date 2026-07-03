@@ -92,6 +92,12 @@
    (50277/50150/50115/50134/50187) siguen sin re-verificar vs procs desplegados. Riesgo ACOTADO por el gancho
    sellado "RE-VERIFICAR al construir" (peor caso: lo corrige el maker en Sprint 1). Decision dejada al operador
    (pasada amplia ahora vs red de build-time). Espero re-juicio del Analista.
+   RE-JUICIO ANALISTA = OK / CERRABLE (50cb3fd): F-0246-01/02 remediados falsable, sin escape nuevo.
+   q4_membership GATE-CONFIRMADO por probe en toda la familia (P3-001 FUERA, P3-002/003/004 CONDICIONAL,
+   P3-005 FUERA, P4-004 DENTRO) = mi clasificacion pool Q4 (SELLO s.5) ATESTADA por el gate. RESIDUAL
+   (gobernado): el re-juicio re-verifico SOLO los THROW de P4-004; los de otras SPECs cierran sin verificar-al-
+   spec (red = gancho RE-VERIFICAR al construir; paridad EXECUTE diferida a producto). TASK-0246 CERRABLE;
+   espero cierre del Arquitecto + registro del residual P2-004. Decision pasada-amplia-THROW sigue abierta.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
