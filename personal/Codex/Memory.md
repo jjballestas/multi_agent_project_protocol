@@ -16,7 +16,11 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
   skipped). Delivery artifacts prepared: `Area_comun/handoffs/HANDOFF-TASK-0230-codex-to-arquitecto-1.md` and
   `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0230-in-review.md`. Existing v1.18.0 history
   mentions the forbidden installer as a prohibition; generated configs do not contain or enable it, and the
-  script does not execute it.
+  script does not execute it. Protocol delivery commit `af58e10 coord(TASK-0230): deliver nova budget instance`
+  moved TASK-0230 `in_progress -> in_review`, released Codex claims, and recorded the handoff/mailbox response.
+  Protocol evidence before delivery commit: encoding OK, domain-neutrality exit 0, drift false/byte-identical at
+  `up_to_seq=3488`; validator was blocked by unrelated existing commit-trailer failure on operator commit
+  `55b17af19772` plus an unrelated mailbox hygiene warning.
 - TASK-0244 done-flip completed in protocol working tree. Runtime transaction
   `codex:task0244:done-flip-tx-20260703` acquired/released
   `CLAIM-20260703-Codex-TASK-0244-done-flip` and moved TASK-0244 `review_approved -> done` at seq
