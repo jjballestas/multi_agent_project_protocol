@@ -79,6 +79,21 @@ Ver la receta base y los gotchas en `arquitecto-ledger-ops`.
 - **RECUPERACION si un lote se corto:** `validate` VERDE => submit_intent revirtio o completo atomico (sin drift);
   mira que MSG siguen en `open/` (los no-archivados) y commitea los movimientos+state de los lotes YA aplicados
   como snapshot consistente; re-corre los faltantes en BACKGROUND. Nunca commitees un state a medio aplicar.
+- **NUNCA `git checkout runtime/state/*` / `Area_comun/state/*` mientras un peer esta en EXEC (leccion 2026-07-03,
+  colision real):** si un lote de higiene half-aplico (submit_intent cortado a 2min: events appendidos, snapshot
+  detras, moves incompletos) y quieres revertir, VERIFICA PRIMERO que ningun peer tenga lock. Si Codex/Analista
+  esta escribiendo (submit_intent del flip de otra tarea), tu `git checkout events.jsonl` REVIERTE los eventos del
+  peer -> corrompe el event log y deja TASK_INDEX inconsistente con events (validate rojo). Me paso: colisiono con
+  el flip de 0234 de Codex. FIX seguro: si el half-apply es TUYO y esta SIN COMMITEAR y ningun peer escribe,
+  `git checkout` de los state files restaura HEAD limpio; si un peer esta en exec, ESPERA a que termine y commitee
+  (su commit es la fuente de verdad), luego re-haces tu higiene desde el HEAD sincronizado. El re-materialize
+  (`materialize_from_event_log_if_enabled`) es NO-OP si la instancia viva no tiene materialize enabled -> no
+  cuentes con el para recuperar; usa git checkout (con la guarda de peer-lock) o espera al peer.
+- **NO higienices JUSTO DESPUES de rutear un REVIEW a un peer (leccion 2026-07-03):** la higiene deja el working
+  tree con drift (events/CLAIMS modificados, snapshot detras) hasta que commiteas; si el peer EXEC su review en esa
+  ventana, ABORTA (su gate detecta el drift, silent-refusal; err.log "snapshot mismatch / drift detected"). La
+  higiene va COMMITEADA Y PUSHEADA (HEAD limpio) ANTES o BIEN SEPARADA de rutear reviews. Preferir higiene
+  INTERACTIVA con commit inmediato en ventana idle sin peer-exec inminente (p.ej. POST-cierre de tarea).
 - **Commit:** stage explicito de `Area_comun/mailbox` + `Area_comun/state` + `runtime/state` (los movimientos y el
   ledger juntos = snapshot consistente), gate `validate`+`scan_encoding` exit 0, push.
 
