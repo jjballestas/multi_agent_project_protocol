@@ -27,7 +27,23 @@ Dataset TFM SELLADO N=500 (tag TFM-dataset-N500->e3646ae), H1-H3, 5 pineados byt
 validate_collaboration_state.py, protocol.config.json sha 2E35..., event-state.runtime.json, snapshot.json),
 epoch v1.14.0 PINNED, #4. protocol.config.json byte-identico SIEMPRE.
 
-## QUE ESTOY HACIENDO (actualizado 2026-07-03 ~03:50: F1 EN CIERRE, v1.18.0 TAGEADA)
+## QUE ESTOY HACIENDO (actualizado 2026-07-03 ~04:19: F1 CERRADO 7/7; ARRANCA F2 + NOVA-DEV)
+**F1 CERRADO COMPLETO** (0238..0244 done, release v1.18.0 -> tag 2e36eb55, gate de trailers ACTIVO, epoch
+1.14.0 pineado, crons relanzados con prompts 0242). HEAD ~34bfb02. **La proxima sesion ARRANCA con 2 ordenes
+[DIRECTIVA] del operador ya en Area_comun/mailbox/open/ (requires_response:false):**
+- **ORDEN F2** (MSG-...-orden-F2-instancia): promover DE A UNA 0230[F2.1 new_instance nova-budget desde tag
+  v1.18.0 + extension intake-v2/DoR en su template] -> 0232[F2.3 harness distribuido] -> 0233[F2.2 e2e
+  distribuida, owner Analista] -> 0234[F2.5 runbook]. COSECHA GENTLE-AI NIVEL B (configs commiteadas=Git es
+  el adapter; dry-run+write-atomico en new_instance; PROHIBIDO gentle-ai install). Ventana 21-25 jul, entrega
+  PROTEGIDA. Cada una con intake valido (gate 0238). Tablero F2.x con evidencia.
+- **ORDEN NOVA-DEV** (MSG-...-orden-NOVA-DEV-specs): registrar tarea (intake, owner Arquitecto) = revision
+  adversarial del paquete Ingenas (D:/Agentes/Ingenas/Budget/02_Analysis/Arquitectura/) + generar SPECs
+  gobernadas Sprint 1 con NOVA-SPEC-T-001 unificada con intake-v2/DoR. ALCANCE SOLO brazo GOBERNADO (P3, pool
+  Q4, BR-C4, miembros gobernados de pares); NO tocar unidades BASELINE (aislamiento intra-par). Entregable:
+  SPECs + informe adversarial + FYI operador.
+Verificar ambas contra el ledger antes de ejecutar; F2 PRIMERO (la instancia), luego NOVA-DEV en paralelo.
+
+## (historico) QUE ESTABA HACIENDO ~03:50: F1 EN CIERRE, v1.18.0 TAGEADA
 7 tareas TASK-0238..0244 [VISION-NOVA][F1.x] bajo DECISION-0083. **0238..0243 = DONE** (ciclos completos con
 gate Analista; DECISION-0084 registrada con anexo DoR 10 puntos + pin-anclado-al-tag). **0244 (release) =
 entregada**: CHANGELOG v1.18.0 + templates sync + **tag v1.18.0 pusheado** (c9a4423, clon limpio 3/3 con
