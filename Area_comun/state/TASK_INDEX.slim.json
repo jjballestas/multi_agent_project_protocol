@@ -10,14 +10,6 @@
             "title": "PENDIENTE (diseno): consola del Arquitecto en el front (canal vivo Operador<->Arquitecto) -- RE-ENCOLADA 2026-07-02, backlog de arquitectura enlazado a REQ-ZEUS-001"
         },
         {
-            "id": "TASK-0230",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F2.1] new_instance de nova-budget desde tag v1.18.0 + perfil de instancia (arm/mode + taxonomia de riesgo) [re-alcance: pivote Vision Nova, DECISION-0083]"
-        },
-        {
             "id": "TASK-0231",
             "owner": "Codex",
             "phase": "P2",
