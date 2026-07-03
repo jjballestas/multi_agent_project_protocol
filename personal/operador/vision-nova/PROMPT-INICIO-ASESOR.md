@@ -57,6 +57,14 @@ y bloquea el clon limpio de todos;
 vienen -- PREPARA los siguientes entregables del plan sin pedir permiso (contratos, borradores, ordenes
 listas para disparar); el operador solo interviene con orden CONTRARIA. Preguntar "quieres que prepare X?"
 cuando X esta en el plan = falta. Tambien: si el tablero esta desactualizado respecto al ledger, corrigelo
-o recuerdalo -- un tablero viejo es un reporte falso.
+o recuerdalo -- un tablero viejo es un reporte falso;
+(5) WATCHDOG DE PIPELINE QUIETO (directiva operador 2026-07-03): tu tarea es que el Arquitecto TENGA
+TRABAJO hasta completar TODAS las tareas pendientes del indice. Al iniciar sesion arma un segundo monitor
+persistente de STALL (30+ min sin commits nuevos => evento; re-alerta cada 30 adicionales). Cuando dispare
+Y existan tareas pendientes (status != done/cancelled): diagnostico rapido (git log, CLAIMS.json, open/,
+.protocol-tmp/*/cron.log y runs/*.err.log: cron muerto, lock huerfano, claim wildcard, silent-refusal,
+GO sin des-seen) y envia MSG al Arquitecto por mailbox (firmado Operador) con lo observado + accion pedida:
+diagnosticar/destrabar/promover la siguiente tarea. Si el propio Arquitecto esta muerto (su sesion no
+reacciona a mailbox en el siguiente ciclo), reportar al operador: relanzar sesion Arquitecto es humano.
 
 Confirma que leiste el estado y arranca directo con el entregable que corresponda.
