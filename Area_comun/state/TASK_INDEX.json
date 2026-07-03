@@ -3641,7 +3641,7 @@
                 "GOAL-VISION-NOVA-001"
             ],
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "[VISION-NOVA][F2.3] Harness distribuido pull -> escribir -> push inmediato (claims visibles entre clones) + hosting privado de la instancia [re-alcance: pivote Vision Nova, DECISION-0083]",
             "type": "build"
         },

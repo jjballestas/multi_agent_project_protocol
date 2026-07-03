@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "731ec8dc8677581e078fad12a2c0d4c9e7f8b299675f2e4b5d013f163faf4cda",
+  "canonical_hash": "a07b5424689b5d36144ca159fa7c0c635ec729d5833a60f95b2289ee95647d02",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1111,7 +1111,7 @@
       "TASK-0229": 69,
       "TASK-0230": 41,
       "TASK-0231": 2,
-      "TASK-0232": 14,
+      "TASK-0232": 19,
       "TASK-0233": 4,
       "TASK-0234": 2,
       "TASK-0235": 25,
@@ -1132,7 +1132,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 2887,
+    "events_applied": 2892,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2635,6 +2635,11 @@
       "codex:task0229:remediation2-in-review-to-in-progress-v3": 3120,
       "codex:task0230:aegis-remediation:inprogress-20260703": 3509,
       "codex:task0230:aegis-remediation:inreview-20260703": 3510,
+      "codex:task0232:action-answer-claim-acquire-20260703": 3562,
+      "codex:task0232:action-answer-claim-release-20260703": 3563,
+      "codex:task0232:done-flip-claim-acquire-20260703": 3559,
+      "codex:task0232:done-flip-claim-release-20260703": 3561,
+      "codex:task0232:review-approved-to-done-20260703": 3560,
       "codex:task0235:deliver:release": 2884,
       "codex:task0235:deliver:status": 2883,
       "codex:task0235:start:claim": 2881,
@@ -4023,5 +4028,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3558
+  "up_to_seq": 3563
 }
