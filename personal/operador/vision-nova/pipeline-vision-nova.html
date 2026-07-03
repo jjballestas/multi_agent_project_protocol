@@ -73,7 +73,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-03 17:28",
+  updated_at: "2026-07-03 22:55",
   updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
@@ -99,12 +99,14 @@ const PIPELINE = {
       { id:"F2.5", t:"Runbook onboarding remoto (objetivo ≤1 día)", st:"hecho", ev:"TASK-0234 DONE (done-flip Codex b6f5c15). RUNBOOK_ONBOARDING_REMOTO.md v1.0 (onboarding en frio: clonar instancia->configurar agente->validar->operar 1 tarea via Git puro con comandos concretos submit_intent + handoff/mailbox validator-valid + harness F2.3/e2e F2.2 + DoD <=1 dia HP6). OK Analista re-juicio 2/2 (fix-loop). Transferibilidad FUERTE = aqui + replica employee-run. **F2 CERRADO 4/4**" }
     ]},
     { id:"F3", title:"Estudio pre-registrado — PRD-03", window:"Sem 3–4 · jul 21–29", items:[
+      { id:"F3.0", t:"GOAL-P1: fundación técnica + piloto de medición BASELINE (sln, React+TS+Vite, capas .NET, health/OpenAPI/ProblemDetails/correlation-id+task_id, architecture tests, CI)", st:"pendiente", ev:"Ventana 3-8 jul; su medicion_journal.csv alimenta el corpus del sello (F3.4). Abrir = accion del operador (fila 6 campos + estimates + GRANT EXECUTE)" },
       { id:"F3.1", t:"Política de medición de empleados (consentimiento, no-punitivo, retención, disputa)", st:"pendiente", ev:"" },
       { id:"F3.2", t:"Aritmética del backlog + condicionalidad de Q4 + regla de adopción", st:"pendiente", ev:"" },
-      { id:"F3.3", t:"Instrumentación: cost.attributed automático + defect.reported + study_metrics.py", st:"pendiente", ev:"" },
-      { id:"F3.4", t:"SELLADO pre-registro Q1–Q5 con ancla externa (OpenTimestamps/DOI)", st:"pendiente", ev:"" }
+      { id:"F3.3", t:"Instrumentación: cost.attributed automático + defect.reported + study_metrics.py", st:"en_curso", ev:"scripts-medicion commiteados (medicion_ledger.py + schema_medicion 52 cols con 5 campos peones + schema_defectos, commit 11fddf4, smoke verde) + EMPLAZADOS al corpus del hub (personal/Arquitecto/TFM-medicion/corpus/medicion/, gitignored, ACTION-emplaza-scripts hecha). Pendiente: congelar a v1.0 en el sello Etapa 1" },
+      { id:"F3.4", t:"SELLADO pre-registro Q1–Q5 con ancla externa (OpenTimestamps/DOI)", st:"en_curso", ev:"SELLO-ETAPA-1-nova-budget-DRAFT.md listo; sella <=08-jul. Checklist inputs pendientes: estimates S/M/L de ~10 unidades Q4 (operador <=08-jul), GRANT EXECUTE para paridad (operador <=14-jul, no bloquea), scripts emplazados+congelados, corpus GOAL-P1, sorteo NIST + sha256. DD-01/02/03 RESUELTAS (3093d6a)" }
     ]},
     { id:"F4", title:"SPRINT 1 NOVA BUDGET", window:"30 de julio — GATE DURO", items:[
+      { id:"F4.0", t:"NOVA-DEV [TASK-0246]: revisión adversarial paquete Ingenas + SPECs gobernadas Sprint 1 (prerequisito del arranque)", st:"en_curso", ev:"9 SPECs en Area_comun/specs/nova/: familia P3 (P3-001 Initial Budget / P3-002 CDP / P3-003 Commitment / P3-004 Obligation / P3-005 Payment) + pool Q4 (P4-004 Apply_Obligation_Adjustment / P2-004 Get_*_List BR-C3 / P2-003 UI exploración / P6-003 OpenTelemetry) + informe adversarial. Formato unificado NOVA-SPEC-T-001+intake-v2/DoR, aislamiento por unidad. Gate Analista OK/CERRABLE (F-0246-01/02 re-juicio) + sub-loop db_verified_at THROW verificado end-to-end por OBJECT_DEFINITION (proc-directo Approve_* + triggers/CHECK/numeración, veredicto triggers-OK). DD-01/02/03 horneadas (01f05db; tracker 3093d6a). FALTA: miembros gobernados de pares (post-17-jul, bloqueados por congelamiento del patrón baseline). TASK-0246 in_progress" },
       { id:"F4.1", t:"Onboarding de empleados completado", st:"pendiente", ev:"" },
       { id:"F4.2", t:"Sprint 1 arranca — primera tarea gobernada de Nova Budget", st:"pendiente", ev:"" }
     ]},
