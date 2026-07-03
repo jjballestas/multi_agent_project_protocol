@@ -16915,6 +16915,24 @@
             "updated_at": "2026-07-03T23:07:45Z"
         },
         {
+            "claim_id": "CLAIM-20260704-arquitecto-dec-0089-0090",
+            "expires_at": "2026-07-04T03:30:00Z",
+            "notes": "Registra DECISION-0089 (licencia Apache-2.0 dia-1) y DECISION-0090 (atestacion!=observabilidad), aprobadas por el Operador 2026-07-04.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-arquitecto-dec-0089-0090",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0089-frontera-licencia-dia1-apache2.md",
+                "Area_comun/decisions/DECISION-0090-atestacion-no-observabilidad.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T23:26:25Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-03T23:26:25Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-arquitecto-decision0088",
             "expires_at": "2026-07-04T03:00:00Z",
             "notes": "Registra DECISION-0088 (asiento coordinacion escalonado; enmienda aclaratoria 0050 #5).",
