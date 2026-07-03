@@ -6,12 +6,13 @@
 > mailbox -> el Arquitecto la hornea en el campo de la SPEC. Se mide la coordinacion, asi que
 > resolverlas en lote antes/al arrancar Sprint 1 reduce idas y vueltas.
 >
-> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-8: P3-001..005 + P4-004 + P6-003 + P2-004). El Asesor
-> lo actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD e6cd82b).
-> Ronda 8 (P2-004 Get_*_List BR-C3, miembro gobernado de PAR-D + fabrica Q4): LIMPIA, sin nuevas decisiones
-> de dominio. Aislamiento PAR-D ejemplar (excluye reporte agregado P2.2, exposicion incidental reconocida,
-> simetria spec_prepagado). OBSERVACION DE ESTUDIO (no es decision de dominio, va al SELLO): los ~4 Get_*_List
-> son un cluster casi isomorfo load-bearing para n>=10 -> Q4 declara n efectivo reducido (ver SELLO s.5).
+> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-9: P3-001..005 + P4-004 + P6-003 + P2-004 + P2-003;
+> POOL Q4 COMPLETO). El Asesor lo actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD c4c9e44).
+> Ronda 9 (P2-003 UI exploracion, cierra pool Q4): LIMPIA, sin nuevas decisiones de dominio. Frontend puro,
+> consume endpoints genericos, no reimplementa read models baseline P2.1/P2.2. Calibra taxonomia D1-D4.
+> ESTADO NOVA-DEV: tanda actual COMPLETA (9 SPECs: familia P3 + pool Q4 n=10 nominal). Faltan miembros
+> gobernados de pares (post-17-jul) + el GATE FORMAL del Analista sobre TASK-0246. DECISIONES DE DOMINIO
+> ESTABLES EN 3 (DD-01/02/03) tras las 9 rondas -> listas para resolver en lote.
 > Ronda 6 (P4-004 Apply_Obligation_Adjustment, pool Q4, aislamiento CRITICO): LIMPIA, sin nuevas
 > decisiones de dominio. Aislamiento ejemplar (excluye territorios baseline P4.1/P4.2/P4.3, leyo_codigo_hermano=NO,
 > verificacion dedicada en el gate). Hardening: anulacion de acto de ajuste sin validacion aguas abajo (B-02).

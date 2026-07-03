@@ -70,7 +70,13 @@
    (OTel infra, borde con reporte P2.2 baseline OK; OTel = telemetria operacional != medicion del ledger),
    P2-004 (Get_*_List, miembro gobernado PAR-D + fabrica Q4). CATCH CLAVE cosechado al SELLO s.5: los ~4
    Get_*_List son CLUSTER casi isomorfo load-bearing para n>=10 -> Q4 declara n efectivo reducido; doble rol
-   PAR-D/Q4 NO es confound (contrastes pre-registrados distintos). POOL Q4 revisado 6/7 (falta P2.3 UI expl).
+   PAR-D/Q4 NO es confound (contrastes pre-registrados distintos).
+   RONDA 9 (P2-003 UI exploracion): LIMPIA, cierra POOL Q4. NOVA-DEV TANDA ACTUAL COMPLETA = 9 SPECs
+   (familia P3 P3.1-3.5 + pool Q4: P4.4/P2.3/P6.3/Get_*_List, n=10 nominal / n efectivo<10 sellado). Las 9
+   revisadas limpias por el Asesor; aislamiento intacto en todas (gemelos P4.x, PAR-D, borde P2.2). FALTAN:
+   (a) miembros GOBERNADOS de pares (post-17-jul, heredan patron congelado P4.1); (b) GATE FORMAL del Analista
+   sobre TASK-0246 (mis revisiones = asesoria, no la gobernanza). DECISIONES DE DOMINIO estables en 3
+   (DD-01 auth/DD-02 objeto/DD-03 SECOP) -> listas para resolver en lote con el operador.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
