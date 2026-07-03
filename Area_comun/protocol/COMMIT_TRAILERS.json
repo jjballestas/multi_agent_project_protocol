@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "start_commit": "5fb85a4",
+  "enforcement": "post_start_governed_commits_require_task_id_trailer",
+  "activated_by": "Arquitecto",
+  "activated_at": "2026-07-03",
+  "rationale": "Residual TASK-0240/0242 (F-2 anti-DoS): activado tras relanzar crons con prompts 0242 y verificar primer commit de peer con trailer (5fb85a4)."
+}
