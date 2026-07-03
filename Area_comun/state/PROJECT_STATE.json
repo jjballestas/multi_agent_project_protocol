@@ -1107,7 +1107,7 @@
         {
             "id": "TASK-0233",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {

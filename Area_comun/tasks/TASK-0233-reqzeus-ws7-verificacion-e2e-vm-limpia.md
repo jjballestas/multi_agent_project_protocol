@@ -2,7 +2,7 @@
 task_id: TASK-0233
 title: "[VISION-NOVA][F2.2] Verificacion e2e distribuida: un clon limpio opera 1 tarea completa solo via Git [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

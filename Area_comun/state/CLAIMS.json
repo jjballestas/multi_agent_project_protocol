@@ -15685,6 +15685,36 @@
             "updated_at": "2026-07-03T12:39:34Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0233-done-flip",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Done-flip TASK-0233 review_approved->done after Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0233-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0233",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0233",
+                "Area_comun/tasks/TASK-0233-reqzeus-ws7-verificacion-e2e-vm-limpia.md"
+            ],
+            "started_at": "2026-07-03T13:54:46Z",
+            "status": "released",
+            "task_id": "TASK-0233",
+            "updated_at": "2026-07-03T13:54:46Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0233-doneflip-response",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "notes": "Register TASK-0233 done-flip response message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0233-doneflip-response",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0233-doneflip-done.md"
+            ],
+            "started_at": "2026-07-03T13:56:20Z",
+            "status": "released",
+            "task_id": "TASK-0233",
+            "updated_at": "2026-07-03T13:56:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0240-delivery",
             "expires_at": "2026-07-03T01:16:36Z",
             "notes": "TASK-0240 remediation delivery artifacts and coordination message.",
