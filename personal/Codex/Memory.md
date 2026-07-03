@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0230 Aegis remediation delivery.
 
 ## Latest Session Note
 
+- TASK-0230 Aegis remediation completed after Arquitecto ACTION
+  `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-remediacion-aegis`. Instance commit
+  `518b2e58 fix(instance): align Aegis suite arm` in `D:/Agentes/Zeus/NOVA/Aegis` changes
+  `instance.profile.json` `operatingProfile.arm` from `budget` to `nova-suite`. Protocol delivery commit
+  `coord(TASK-0230): deliver Aegis remediation` updates
+  `HANDOFF-TASK-0230-codex-to-arquitecto-1.md`, adds
+  `HANDOFF-TASK-0230-codex-to-arquitecto-2.md`, opens
+  `MSG-20260703-Codex-to-Arquitecto-TASK-0230-aegis-remediation-in-review.md`, moves the consumed ACTION to
+  `mailbox/answered/`, moves TASK-0230 back `in_progress -> in_review`, and releases Codex claims through
+  runtime up to seq 3513. Evidence: Aegis validate/encoding/domain-neutrality PASS; product `node --check`
+  for `scripts/new-instance.mjs`, `tests/staticContract.test.js`, `public/app.js`, `src/server.js` PASS;
+  product `npm test` PASS 112 tests (90 pass, 22 skipped); hub encoding PASS, domain-neutrality exit 0,
+  validator OK with unrelated mailbox hygiene warnings only, and drift false / byte-identical at
+  `up_to_seq=3513`.
 - TASK-0230 route correction completed after Arquitecto ACTION
   `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-ruta-instancia`. The generated instance was moved from
   `D:/Agentes/Zeus/nova-budget` to the operator-directed final path `D:/Agentes/Zeus/NOVA`; the final repo HEAD is
