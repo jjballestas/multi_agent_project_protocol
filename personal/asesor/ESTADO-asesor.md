@@ -125,7 +125,7 @@ medir-goalp1.ps1 (NO el smoke) -> ese journal se congela en el sello. Codigo = d
   n EFECTIVO reducido; doble rol PAR-D/Q4 NO es confound (contrastes pre-registrados distintos).
 - Tracker de decisiones de dominio + separacion de memoria (esta area) + alta ruteada.
 
-## Asiento de coordinacion del build de Nova (regla del Arquitecto 2026-07-04, 96ebae2)
+## Asiento de coordinacion del build de Nova (DECISION-0088, 512e35c; enmienda a 0050 #5)
 - **AHORA (ventana del estudio, hasta sello/30-jul): asiento = HUB.** El brazo gobernado es el TRATAMIENTO
   medido -> su atestacion debe estar en el MISMO #4 que la medicion + sello, en un solo asiento. Meter
   NOVA/Aegis a mitad del estudio = costura de cross-atestacion antes del sello (viola regla de oro del sello).
@@ -134,8 +134,9 @@ medir-goalp1.ps1 (NO el smoke) -> ese journal se congela en el sello. Codigo = d
 - **POST-sello: migra a NOVA/Aegis** (instancia operativa del equipo). Regla dual cross-atestacion: hub =
   #4 del estudio/meta + sello; NOVA/Aegis = #4 operativo del build; el journal del hub registra el sha256
   de la atestacion de Aegis por gate. ELEGANTE (study-relevant): esa migracion ES la evidencia de
-  transferibilidad (la replica employee-run pre-registrada) -> arquitectura y estudio se alinean. Enmienda
-  corta a DECISION-0050/0085 pendiente (Arquitecto redacta).
+  transferibilidad (la replica employee-run pre-registrada) -> arquitectura y estudio se alinean.
+  FORMALIZADO en DECISION-0088 (512e35c): meta/estudio/metodologia canonica = hub SIEMPRE (nunca migra);
+  governance operativa del producto = su instancia Aegis/ tras adoptar; migracion post-sello, dual cross-atest.
 
 ## Contexto real del negocio (clave)
 Objetivo real = Nova Budget/Accounting/Payroll/Treasury para la EMPRESA del operador, employee-ready.
