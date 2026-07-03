@@ -9,6 +9,7 @@
 - owner_maker: agente desarrollador de la instancia gobernada (Sprint 1); repo producto Nova-Budget
 - checker: Analista (adversarial, contexto limpio, estructuralmente independiente; recibe SPEC + diff + BD readonly, NO la conversacion del maker)
 - arm: gobernado - family: P3 - unit: P3.1 (alcance CONGELADO, no se redefine sin enmienda fechada del Operador)
+- q4_membership: **FUERA** (primera unidad de la familia, alcance congelado; NO enumerada en el pool Q4 del estudio -- es el opener del brazo gobernado, no item del contraste causal Q4)
 - isolation: sin hermano baseline (familia P3 es gobernada completa); igual se declara manifiesto de archivos leidos + columna leyo_codigo_hermano = NO
 - db_verified_at: la SPEC cita objetos verificados en NOVA-PRES-02 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada al construir (OBJECT_DEFINITION/sys.objects) -- ver F-NOVA-01
 - attestation: sha256 de esta SPEC atestado via intent del hub en el gate del estudio

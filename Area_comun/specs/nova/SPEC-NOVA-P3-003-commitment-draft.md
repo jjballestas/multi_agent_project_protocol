@@ -7,7 +7,8 @@
 - spec_id: SPEC-NOVA-P3-003 - task_id (hub): TASK-0246
 - owner_maker: agente desarrollador de la instancia gobernada (Sprint 1); repo producto Nova-Budget
 - checker: Analista (adversarial, contexto limpio, SPEC + diff + BD readonly)
-- arm: gobernado - family: P3 - unit: P3.3 (elegible al pool Q4 por criticidad media si su DEC esta cerrada al sello Etapa 2)
+- arm: gobernado - family: P3 - unit: P3.3
+- q4_membership: **CONDICIONAL** (criticidad media; entra al pool Q4 si su DEC esta cerrada al sello Etapa 2)
 - isolation: sin hermano baseline en P3; manifiesto de archivos leidos + leyo_codigo_hermano = NO
 - db_verified_at: objetos de NOVA-PRES-05 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio

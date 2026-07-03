@@ -25,7 +25,7 @@ El usuario de presupuesto REINTEGRA (disminuye) el valor de una o varias lineas 
 de ajuste tipo 14, aplicado atomicamente via `Budget.Apply_Obligation_Adjustment`, que valida bajo bloqueo que el
 reintegro no excede el saldo no pagado de la linea y LIBERA saldo del compromiso padre.
 - Fuente: NOVA-PRES-03 s.1/s.3/s.4 (RN-08/RN-09) + s.5 (Contrato, fila reintegro 14) + NOVA-PRES-06 RN-07.
-- Calidad: falsable. Bien: "reintegrar mas que (obligacion - pagado) es rechazado con THROW 50264/50265; un reintegro valido crea el acto 'G' numerado por serie y el saldo del compromiso aumenta (se libera) en la vista".
+- Calidad: falsable. Bien: "reintegrar mas que (obligacion - pagado) es rechazado con THROW 50264; un efecto distinto de reintegro con THROW 50265; un reintegro valido crea el acto 'G' numerado por serie y el saldo del compromiso aumenta (se libera) en la vista".
 
 ## 2. Usuario objetivo definido
 Rol **Gestion de presupuesto** (ajustes de ejecucion): prepara el acto (selecciona lineas de obligacion y montos a
@@ -51,7 +51,7 @@ preparacion/simulacion vive en la aplicacion; aplicar es atomico (el acto se apl
 - **BD (RE-VERIFICAR contra la desplegada):**
   - Cabecera: `Budget.Budget_Adjustment` (unica por vigencia+adjustment_code; tipo contra `Budget_Movement_Type`; series computadas; trigger vigencia abierta 50212 + cascada de anulacion).
   - Detalle: `Budget.Obligation_Line_Adjustment` (SOLO reintegro 14; un efecto por fila; monto >=0; triggers 50160-50163 incl. no reducir por debajo de lo pagado).
-  - Proc: `Budget.Apply_Obligation_Adjustment(@fiscal_year_id, @adjustment_date, @description, @created_by_user_id, @lines, @adjustment_code=NULL)` (schema/141; XACT_ABORT; THROW 50250-50258, 50264/50265).
+  - Proc: `Budget.Apply_Obligation_Adjustment(@fiscal_year_id, @adjustment_date, @description, @created_by_user_id, @lines, @adjustment_code=NULL)` (schema/141; XACT_ABORT). THROW REALES (OBJECT_DEFINITION verificado readonly en DbsFinanciero): 50250, 50251, 50252, 50253, 50255, 50257, 50258, 50264, 50265 -- efecto distinto de reintegro (effect_code != counter_credit) = **50265**; tope obligacion-pagado = **50264**. El proc NO emite 50254 ni 50256 (F-NOVA-01: se cita la definicion real, no la familia generica de PRES-03).
   - TVP: `Budget.Chain_Adjustment_Line_List` (obligation_line_id, effect=14, amount).
   - Numeracion: `Allocate_Document_Number` (serie comun `''` / SGR `G` segun fuentes de las lineas).
   - Vistas: `vw_Obligation_Line_Balance` (tope = obligacion - pagado neto), `vw_Commitment_Line_Balance` (views/140: el reintegro 14 LIBERA compromiso), `vw_Budget_Adjustment`.
@@ -64,34 +64,34 @@ preparacion/simulacion vive en la aplicacion; aplicar es atomico (el acto se apl
 - Heredadas: 10 reglas de NOVA-GOAL-001 + maestro-P1..P6 + stack del preambulo.
 - Propias:
   - (a) La aplicacion es SOLO `Apply_Obligation_Adjustment`; la app nunca escribe `Obligation_Line_Adjustment`/`Budget_Adjustment` ni recalcula topes/saldos; captura del acto = preparacion + TVP tipada.
-  - (b) SOLO tipo 14 (reintegro, contracredito de obligacion); acto HOMOGENEO (RN-03, THROW 50256); no mezclar con otros tipos.
-  - (c) Tope RN-08: reintegro <= obligacion - pagado (THROW 50264/50265); RN-09: la obligacion solo se disminuye; el reintegro libera el compromiso (views/140). No reducir por debajo de lo pagado (triggers 50160-50163).
-  - (d) Vigencia abierta (RN-01, THROW 50212/50250/50251); lineas activas de la vigencia (RN-02, 50252-50255); regimen homogeneo (RN-05, 50257); codigo unico por vigencia (RN-10, 50258).
+  - (b) SOLO tipo 14 (reintegro = contracredito de obligacion); toda linea debe ser efecto reintegro. Un efecto distinto de reintegro (effect_code != counter_credit) -> **THROW 50265** (verificado en el proc real; NO 50256).
+  - (c) Tope RN-08: reintegro <= obligacion - pagado (**THROW 50264**); RN-09: la obligacion solo se disminuye; el reintegro libera el compromiso (views/140). No reducir por debajo de lo pagado (triggers 50160-50163).
+  - (d) Vigencia abierta (RN-01, THROW 50250/50251); lineas activas de la vigencia (RN-02, 50252/50253/50255); regimen homogeneo (RN-05, 50257); codigo unico por vigencia (RN-10, 50258).
   - (e) Numeracion por serie de la BD dentro de la transaccion; la UI no propone numero. Saldos siempre por vista (nunca acumuladores). Vigencia explicita.
   - (f) NO borrador compartido: el acto se aplica completo o falla completo (atomicidad del proc; corrige el hallazgo legacy de inserciones a medias).
-  - (g) Toda mutacion: correlation id + usuario real + THROW 50250-50265 traducido a ProblemDetails con mensaje de negocio.
+  - (g) Toda mutacion: correlation id + usuario real + THROW del proc (50250-50253, 50255, 50257, 50258, 50264, 50265) traducido a ProblemDetails con mensaje de negocio.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un acto tipo 14 cuyas lineas reintegran <= (obligacion - pagado) por linea, **cuando** aplico, **entonces** `Apply_Obligation_Adjustment` crea la cabecera 'G' con numero de serie (comun/SGR), inserta el detalle 14 y devuelve id/codigo/tipo/regimen; el saldo de la obligacion baja y el del compromiso sube en las vistas.
-2. **Dado** un reintegro que EXCEDE (obligacion - pagado) en alguna linea, **cuando** aplico, **entonces** ProblemDetails del THROW **50264/50265** y no se aplica nada (atomico).
-3. **Dado** un acto que mezcla el tipo 14 con otro efecto, **cuando** aplico, **entonces** THROW **50256** (acto no homogeneo).
-4. **Dado** una linea de obligacion inexistente/inactiva/de otra vigencia, **cuando** la referencio, **entonces** THROW **50252-50255**.
-5. **Dado** una vigencia cerrada, **cuando** intento aplicar, **entonces** THROW **50212/50250**.
+2. **Dado** un reintegro que EXCEDE (obligacion - pagado) en alguna linea, **cuando** aplico, **entonces** ProblemDetails del THROW **50264** y no se aplica nada (atomico).
+3. **Dado** un acto con una linea de efecto distinto de reintegro (effect_code != counter_credit), **cuando** aplico, **entonces** THROW **50265**.
+4. **Dado** una linea de obligacion inexistente/inactiva/de otra vigencia, **cuando** la referencio, **entonces** THROW **50252/50253/50255** (segun el chequeo; el proc no emite 50254).
+5. **Dado** una vigencia cerrada/inexistente, **cuando** intento aplicar, **entonces** THROW **50250/50251**.
 6. **Dado** un codigo de acto duplicado en la vigencia, **cuando** aplico con override, **entonces** THROW **50258**.
 7. **Dado** el reintegro aplicado, **entonces** `vw_Commitment_Line_Balance` refleja el saldo del compromiso LIBERADO (aumentado) por el reintegro 14 (sin recalculo en C#).
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo del acto -> TVP `Chain_Adjustment_Line_List`; homogeneidad del efecto (solo 14); traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable; el paso de TVP es via gateway tipado (no DataTable como contrato).
-- **Integracion vs DbsFinanciero:** criterio 1 (reintegro happy: acto + liberacion de compromiso), un caso por THROW (50264/50265, 50256, 50252-50255, 50212, 50258), criterio 7 (liberacion del compromiso por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
+- **Integracion vs DbsFinanciero:** criterio 1 (reintegro happy: acto + liberacion de compromiso), un caso por THROW real del proc (50265 efecto!=reintegro, 50264 tope, 50252/50253/50255 linea, 50250/50251 vigencia, 50257 regimen, 50258 codigo), criterio 7 (liberacion del compromiso por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
 - **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- que NO toque 01-04/08/09/11/12 ni anule actos) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256. VERIFICACION DE AISLAMIENTO: el manifiesto declara que NO se implemento ni copio codigo de P4.1/P4.2/P4.3 (baseline).
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |
 |---|---|---|
 | Implementar de paso los ajustes de CDP/compromiso (08/09/11/12) | CONTAMINACION intra-par (territorio baseline P4.2/P4.3) | Campo 4 los excluye; el adversarial + manifiesto de aislamiento lo verifican (punto 9) |
-| Reintegrar por encima de obligacion-pagado | Saldo inconsistente | RN-08/THROW 50264/50265 bajo bloqueo; la app no recalcula (6a/6c) |
-| Aplicar acto no homogeneo | Mezcla de efectos | RN-03/THROW 50256 (6b) |
+| Reintegrar por encima de obligacion-pagado | Saldo inconsistente | RN-08/THROW 50264 bajo bloqueo; la app no recalcula (6a/6c) |
+| Linea con efecto distinto de reintegro | Mezcla de efectos | THROW 50265 del proc real (6b) |
 | Recalcular topes/saldos o liberacion del compromiso en C# | Divergencia con la BD | Prohibido (6a/6e); el adversarial lo busca (punto 2) |
 | Pasar las lineas como DataTable | Viola regla 5 del GOAL | TVP via gateway tipado (restriccion stack); architecture test |
 | Intentar anular el acto sin validar aguas abajo (B-02) | Saldos negativos aguas abajo | Anulacion fuera de alcance (campo 4); SPEC separada con validacion |
