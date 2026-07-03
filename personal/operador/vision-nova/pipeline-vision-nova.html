@@ -60,8 +60,8 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-03 11:44",
-  updated_by: "Operador (via Asesor)",
+  updated_at: "2026-07-03 13:38",
+  updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
     { id:"F0", title:"Formalización (HUB)", window:"Sem 1 · jul 3–11", items:[
@@ -79,9 +79,9 @@ const PIPELINE = {
       { id:"F1.7", t:"[TASK-0244] RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"hecho", ev:"TASK-0244 DONE (done-flip Codex df3c9d5). Tag v1.18.0 -> 2e36eb55 (c9a4423); CHANGELOG + templates sync; OK/CERRABLE Analista 461342b (clon limpio 3/3, config byte-identico 2E35F26E, epoch 1.14.0). Gate de trailers ACTIVO (COMMIT_TRAILERS.json cd3642d, crons relanzados con prompts 0242). F1 CERRADO 7/7" }
     ]},
     { id:"F2", title:"Instancia nova-budget distribuida — PRD-02", window:"Sem 3 · jul 21–25", items:[
-      { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"en_curso", ev:"[TASK-0230] entregada+Analista OK sobre layout FLAT (af58e10; review 0295468) desde tag v1.18.0 (source c9a4423). Bootstrapper new-instance.mjs en Zeus-protocol (e7c6da4: dry-run+--write, temp/rename atomico, pin al tag). instance.profile.json + .agents/{Codex,Arquitecto,Analista}/config.json + TASK_TEMPLATE intake-v2/DoR. RE-ALCANCE por DECISION-0085 (c64f03e, aprobada operador): layout canonico = NOVA/ paraguas + NOVA/Aegis (instancia-metodologia neutral) + NOVA/Nova-X (productos, prefijo Nova- obligatorio). La instancia se REUBICA de NOVA/nova-budget -> NOVA/Aegis; el OK del Analista sobre flat NO cierra 0230, se RE-GATEA sobre NOVA/Aegis. Pendiente: reubicacion + re-review" },
+      { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"hecho", ev:"TASK-0230 DONE (done-flip Codex 8351099). Instancia Aegis en D:/Agentes/Zeus/NOVA/Aegis (DECISION-0085 layout paraguas: NOVA/ carpeta plana + Aegis instancia neutral + Nova-X productos lazy) desde tag v1.18.0; arm=nova-suite; gentle-ai nivel B (configs commiteadas, dry-run+atomico, sin Engram). Ciclo: build flat -> re-alcance 0085 -> restructura a Aegis -> re-gate NO-GO (F-0230-AEGIS-01/02) -> remediacion fix-loop 1 -> OK/CERRABLE Analista (aegis-fixloop1) -> ratificado" },
       { id:"F2.2", t:"Prueba distribuida: clon limpio opera 1 tarea completa solo vía Git", st:"pendiente", ev:"" },
-      { id:"F2.3", t:"Harness pull→escribir→push inmediato (claims visibles entre clones)", st:"pendiente", ev:"" },
+      { id:"F2.3", t:"Harness pull→escribir→push inmediato (claims visibles entre clones)", st:"en_curso", ev:"TASK-0232 ready + GO Codex; body re-alcanzado a F2.3 (harness distribuido de la instancia Aegis + hosting privado; body viejo instalador electron superado) con intake valido" },
       { id:"F2.4", t:"Perfil de instancia (arm/mode + taxonomía de riesgo) + hosting privado", st:"pendiente", ev:"" },
       { id:"F2.5", t:"Runbook onboarding remoto (objetivo ≤1 día)", st:"pendiente", ev:"" }
     ]},
