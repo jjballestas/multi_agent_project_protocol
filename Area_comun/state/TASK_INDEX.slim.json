@@ -30,7 +30,7 @@
             "owner": "Arquitecto",
             "phase": "P2",
             "priority": "high",
-            "status": "proposed",
+            "status": "in_progress",
             "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
         }
     ],

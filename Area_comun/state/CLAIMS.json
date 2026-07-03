@@ -15460,6 +15460,21 @@
             "updated_at": "2026-07-03T15:56:34Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Arquitecto-TASK-0246-exec",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Arquitecto-TASK-0246-exec",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md"
+            ],
+            "started_at": "2026-07-03T16:03:31Z",
+            "status": "active",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-03T16:03:31Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0230",
             "expires_at": "2026-07-04T23:59:59Z",
             "notes": "TASK-0230 delivered to in_review.",

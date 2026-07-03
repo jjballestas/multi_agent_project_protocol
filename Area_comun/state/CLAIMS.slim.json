@@ -1,5 +1,17 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260703-Arquitecto-TASK-0246-exec",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Arquitecto-TASK-0246-exec",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md"
+            ],
+            "task_id": "TASK-0246"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
