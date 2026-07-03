@@ -29,6 +29,11 @@
   min legitimo). Solo jam con firma real: err.log de hang, lease vencida, sin heartbeat.
 - MINIMIZAR CHURN: no commitear ESTADO por cada micro-evento del monitor; capturar el estado RESUELTO de
   cada hilo. Mailbox: no re-enviar directivas ya en open/ (el peer las consume).
+- ANTI-COLISION EN ARBOL COMPARTIDO (leccion 2026-07-04): comparto working tree con el Arquitecto; su
+  submit_intent en curso (enforce+authoritative ON, materialize) materializa state en el arbol comun ANTES
+  del commit atomico -> aparece como ` M CLAIMS.json` sin commitear. ANTES de commitear: `git status --short
+  Area_comun/state/` -> si hay half-written peer state, ESPERAR a que aterrice (DECISION-0020). Yo staging-
+  explicito (solo mis rutas) me protege de clobber, pero igual reviso. NO es anomalia: es su op en vuelo.
 
 ## Deberes al arrancar
 1. AUTO-POLL: git fetch/pull, git log -8, ls Area_comun/mailbox/open/, pendientes TASK_INDEX.
@@ -58,9 +63,12 @@
   panel de control completo). SEGUIMIENTO suelto: DD-02 toca criterio falsable -> debe viajar en un gate del lote.
 - **Arquitecto (ventana muerta, su carril):** REDACTAR la DECISION formal de nombres Aegis -- RUTEADA por el
   Asesor (MSG DIRECTIVA-redacta-decision-nombres-aegis, 8eb966d). Solo fija direccion; ejecucion = Carril B post-sello.
-- **Operador (EL RELOJ REAL, no eclipsar):** abrir **GOAL-P1** (piloto baseline, corre 3-8 jul, alimenta el
-  corpus del sello) + emitir **estimates S/M/L** de las ~10 unidades Q4 (<=08-jul, antes del sorteo). GRANT
-  EXECUTE (<=14-jul, no bloquea el sello).
+- **Operador (EL RELOJ REAL, no eclipsar):** estimates Q4 RESUELTOS (6 M + 4 S, ESTIMATES-Q4-para-sorteo.md).
+  GOAL-P1: **maquinaria de medicion VALIDADA (smoke, 2026-07-04)** -- el Operador corrio abrir/actualizar/cerrar/
+  verificar con el helper medir-goalp1.ps1 (verificar OK, 3 eventos); PERO la fila es SMOKE con valores de
+  ejemplo (tokens=12000, fecha_fin=08-jul futuro), NO el build real. FALTA: correr el BUILD real de GOAL-P1
+  (3-8 jul, tarea de dev) y re-medir con numeros reales -> ESE journal se congela. Heads-up al Arquitecto
+  ruteado (dbd9ab4: atesta el sha256 REAL, no el smoke). Yo coordino la recaptura. GRANT EXECUTE (<=14-jul).
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; revisar la DECISION Aegis cuando
   la redacte; vigilar que el sello (08-jul) no se quede sin inputs del operador.
 
