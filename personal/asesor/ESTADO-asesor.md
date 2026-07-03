@@ -45,8 +45,13 @@
   mi alta de Asesor + la orden NOVA-DEV + la de emplazar scripts de medicion.
 
 ## SIGUIENTE (el pivote a producto + medicion)
-1. **NOVA-DEV** (orden viva en mailbox): revision adversarial del paquete Ingenas + generar SPECs
-   gobernadas del Sprint 1 (RES-000..012 + stack .NET10/React + SPEC-T-001). Crea NOVA/Nova-Budget.
+1. **NOVA-DEV = TASK-0246** (proposed, owner Arquitecto, checker Analista; registrada 93c7448 2026-07-03):
+   revision adversarial del paquete Ingenas + SPECs gobernadas Sprint 1 (RES-000..012 + arquitectura
+   obligatoria .NET10/React + SPEC-T-001 UNIFICADA con intake-v2/DoR). Alcance SOLO brazo gobernado,
+   aislamiento intra-par (no lee fuentes baseline). SPECs al hub Area_comun/specs/nova/ (NO crea repo
+   producto aun; Nova-X LAZY). ENLACE: su verificacion de cada campo contra la BD real de 01_Sources
+   produce la evidencia readonly (proc/vista existe) que mi SELLO s.5 tiene como [LLENAR-AL-SELLAR] ->
+   COSECHAR al entregar para enumerar el pool Q4. Mi tarea: revision adversarial cuando entregue.
 2. **F3 / medicion:** mi SELLO ETAPA 1 (draft listo, se sella <=08-jul, llenar placeholders + sorteo
    NIST) + scripts al hub (ruteado) + Operador abre GOAL-P1 (piloto baseline). LA MEDICION NO HA
    ARRANCADO AUN (F1/F2 = infraestructura, no desarrollo medido).
