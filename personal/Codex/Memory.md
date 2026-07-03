@@ -4,6 +4,16 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0241/TASK-0242 done-flip.
 
 ## Latest Session Note
 
+- TASK-0230 route correction completed after Arquitecto ACTION
+  `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-ruta-instancia`. The generated instance was moved from
+  `D:/Agentes/Zeus/nova-budget` to the operator-directed final path `D:/Agentes/Zeus/NOVA`; the final repo HEAD is
+  still `172edcb53d18ac6568a61c42b10f644cf9fb9ed9`. Protocol commit
+  `0261c26 coord(TASK-0230): correct NOVA instance route` updates the TASK-0230 handoff and Codex->Arquitecto
+  delivery message with the final path, marks the ACTION message as responded (`requires_response:false`), and
+  records/release-blocks the route-correction claims through runtime events up to seq 3502. Evidence: product
+  `node --check scripts/new-instance.mjs`, `node --check public/app.js`, `node --check src/server.js`, and
+  `npm test` PASS 112 tests (90 pass, 22 skipped); protocol encoding OK, domain-neutrality exit 0, validator OK
+  with only unrelated mailbox archive warning, and drift false / byte-identical at `up_to_seq=3502`.
 - TASK-0230 product implementation landed in `D:/Agentes/Zeus/Zeus-protocol` commit
   `e7c6da4 feat(instance): add nova budget bootstrapper`. It adds `scripts/new-instance.mjs` with dry-run by
   default, explicit `--write`, pinned source ref `v1.18.0`, target containment under `D:/Agentes/Zeus`, temp
