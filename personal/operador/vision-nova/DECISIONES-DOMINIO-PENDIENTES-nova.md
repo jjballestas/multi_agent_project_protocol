@@ -6,8 +6,11 @@
 > mailbox -> el Arquitecto la hornea en el campo de la SPEC. Se mide la coordinacion, asi que
 > resolverlas en lote antes/al arrancar Sprint 1 reduce idas y vueltas.
 >
-> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-5: P3-001..005, FAMILIA P3 COMPLETA). El Asesor lo
-> actualiza cada ronda. Fuente: Area_comun/specs/nova/ (HEAD b78d542).
+> Ultima actualizacion: 2026-07-03 (rondas NOVA-DEV 1-6: P3-001..005 + P4-004). El Asesor lo actualiza
+> cada ronda. Fuente: Area_comun/specs/nova/ (HEAD b384924).
+> Ronda 6 (P4-004 Apply_Obligation_Adjustment, pool Q4, aislamiento CRITICO): LIMPIA, sin nuevas
+> decisiones de dominio. Aislamiento ejemplar (excluye territorios baseline P4.1/P4.2/P4.3, leyo_codigo_hermano=NO,
+> verificacion dedicada en el gate). Hardening: anulacion de acto de ajuste sin validacion aguas abajo (B-02).
 > Ronda 4 (P3-004 Obligation) y ronda 5 (P3-005 Payment): SIN nuevas decisiones de dominio (DD-01
 > autorizacion reafirmada). P3-005 es criticidad ALTA / frontera Treasury -> FUERA del pool Q4 (solo
 > descriptiva). El egreso real (banco/retenciones/comprobante) y el circuito radicacion/liquidacion se
