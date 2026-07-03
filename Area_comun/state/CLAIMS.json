@@ -16856,6 +16856,25 @@
             "updated_at": "2026-07-03T00:30:30Z"
         },
         {
+            "claim_id": "CLAIM-20260704-archive-3-directivas-arquitecto",
+            "expires_at": "2026-07-04T01:00:00Z",
+            "notes": "Archivar 3 DIRECTIVAs del Operador ya actionadas (DD horneadas 01f05db, pipeline al dia 2320acd, DECISION-0087 bc95ad3). requires_response false. Higiene gobernada.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-archive-3-directivas-arquitecto",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-decisiones-dominio-nova.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-decisiones-dominio-nova.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-pipeline-al-dia-control-total.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-pipeline-al-dia-control-total.md",
+                "Area_comun/mailbox/open/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-redacta-decision-nombres-aegis.md",
+                "Area_comun/mailbox/archived/MSG-20260703-Operador-to-Arquitecto-DIRECTIVA-redacta-decision-nombres-aegis.md"
+            ],
+            "started_at": "2026-07-03T22:17:21Z",
+            "status": "released",
+            "task_id": "OPS-HIGIENE-MAILBOX-20260704",
+            "updated_at": "2026-07-03T22:17:21Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
