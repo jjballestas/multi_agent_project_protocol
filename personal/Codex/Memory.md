@@ -1,9 +1,20 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 in_review flip.
+Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0234 done-flip completed after Arquitecto ACTION
+  `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0234-done-flip`. Codex moved TASK-0234
+  `review_approved -> done` and released `CLAIM-20260703-Codex-TASK-0234-done-flip` via
+  `runtime/submit_intent.py` seq 3609-3611, registered response/move coordination through claims seq
+  3612-3615, moved the consumed ACTION to `Area_comun/mailbox/answered/`, and committed the governed
+  snapshot as `b6f5c15 coord(TASK-0234): close done flip`. Evidence before commit: Zeus-protocol
+  `node --check public/app.js; node --check src/server.js` PASS, `npm test` PASS 112 tests (90 pass,
+  22 skipped), protocol encoding OK, domain-neutrality exit 0, validator OK with unrelated non-response
+  mailbox archive warning only, and drift false / byte-identical at `up_to_seq=3615`. Product repo stayed
+  clean; unrelated `.claude/settings.json`, peer/operator personal files, and new operator/Arquitecto
+  mailbox inputs were left untouched.
 - TASK-0234 in_review flip completed after Arquitecto ACTION
   `MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0234-inreview-flip`. Initial drift from unmaterialized
   peer events was repaired by runtime materialization before Codex acted. Codex then moved TASK-0234
