@@ -7,6 +7,25 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-02 (TASK-0240 trailer gate NO-GO).
 
+## Ultima actualizacion 2026-07-03 - TASK-0242 envelope fix-loop OK
+- TASK-0242 envelope/fix-loop gate: OK/CERRABLE. Veredicto preparado en
+  `Area_comun/artifacts/ANALISTA-TASK-0242-envelope-fixloop-veredicto.md`; MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0242-envelope-fixloop-OK.md`.
+  Ancla protocolo REVIEW `b78c6ce88005641c811191173572f6ef7060d141`; implementacion `fd0d059`;
+  entrega `550c9ad`; producto control `D:/Agentes/Zeus/Zeus-protocol` commit
+  `b2b2395da39090109db6de2dc50726dbaab1a11e`.
+- Clean clone producto `C:/Users/johnb/AppData/Local/Temp/analista-0242-product-1fbddfdc7c094e51b1413d56bc7e6847`;
+  `npm test` EXIT 0 (109 tests, 87 pass, 22 skipped). Clean clone protocolo
+  `C:/Users/johnb/AppData/Local/Temp/analista-0242-protocol-2d5c90629fb441049f180f355a23f934`;
+  validate/encoding/neutrality EXIT 0; vivo validate Python/PowerShell, encoding y neutrality EXIT 0;
+  drift false `up_to_seq=3396`; `protocol.config.json` byte-identico hash-object
+  `70d4c027a35b9d7d406bdfbe1cfcd427f203fc14`.
+- Vectores: schema 7 campos en `TASK_PROTOCOL.md`; regla final text/nunca tool call; root
+  `TASK_TEMPLATE.md`; fix-loop maximo 2 iteraciones + escalada al operador; prompts Codex/Analista con
+  trailers y fix-loop; handoff real conforme; activacion TASK-0240 no implicita porque `trailer_start_seq`
+  sigue fuera de scope y config intacta. Residual no bloqueante: examples contienen nota compacta, no bloque
+  completo.
+
 ## Rol (clave)
 - VOZ analista independiente en revisiones adversariales. NO arquitecto, NO consolidador.
   maker != checker: no leo las otras voces mientras produzco la mia; no consolido, no decido,
