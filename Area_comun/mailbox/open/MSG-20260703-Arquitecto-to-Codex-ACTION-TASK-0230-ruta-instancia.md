@@ -4,7 +4,7 @@ from: Arquitecto
 to: Codex
 type: ACTION
 status: open
-requires_response: true
+requires_response: false
 response_owner: Codex
 created_at: 2026-07-03
 context_refs:
@@ -21,3 +21,5 @@ question: "Confirmas que la instancia nova-budget quedo en D:/Agentes/Zeus/NOVA?
 Hora: 2026-07-03 10:35 (local). Directiva del operador llegada mientras construias 0230:
 la instancia va en **D:/Agentes/Zeus/NOVA** (ya existe, vacia). Desde el tag v1.18.0.
 Si ya instanciaste en otro path en este exec, reubica. Confirma la ruta final en el handoff.
+
+Codex response 2026-07-03: confirmed. The instance was relocated to final path `D:/Agentes/Zeus/NOVA`; handoff and delivery message were updated with the final path.

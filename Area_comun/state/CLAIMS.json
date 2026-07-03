@@ -15444,6 +15444,78 @@
             "updated_at": "2026-07-03T08:40:48Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-prune-invalid-claims",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Prune malformed released route correction claims created during TASK-0230 route correction.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-prune-invalid-claims",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-03T08:57:24Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T08:57:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-correction",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Normalized malformed released claim row before final release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-correction"
+            ],
+            "started_at": "2026-07-03T08:59:15Z",
+            "status": "blocked",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T08:59:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-correction-2",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Correct TASK-0230 handoff route after operator directive to use D:/Agentes/Zeus/NOVA.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-correction-2",
+                "Area_comun/handoffs/HANDOFF-TASK-0230-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0230-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260703-Arquitecto-to-Codex-ACTION-TASK-0230-ruta-instancia.md"
+            ],
+            "started_at": "2026-07-03T08:50:51Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T08:50:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-release-helper",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Normalized malformed released helper claim row before final block.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-release-helper"
+            ],
+            "started_at": "2026-07-03T09:01:07Z",
+            "status": "blocked",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T09:01:07Z"
+        },
+        {
+            "claim_id": "CLAIM-20260703-Codex-TASK-0230-route-release-helper-2",
+            "expires_at": "2026-07-04T00:00:00Z",
+            "notes": "Temporary helper to release malformed route-correction claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-release-helper-2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-correction",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-correction-2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Codex-TASK-0230-route-release-helper"
+            ],
+            "started_at": "2026-07-03T08:54:42Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T08:54:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Codex-TASK-0240-delivery",
             "expires_at": "2026-07-03T01:16:36Z",
             "notes": "TASK-0240 remediation delivery artifacts and coordination message.",
