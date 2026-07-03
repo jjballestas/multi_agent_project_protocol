@@ -15882,6 +15882,23 @@
             "updated_at": "2026-07-03T01:41:59Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-decision0085",
+            "expires_at": "2026-07-03T16:00:00Z",
+            "notes": "Registra DECISION-0085 (layout suite Nova; enmienda 0050).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-decision0085",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0085-nova-suite-layout-paraguas-aegis-productos.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-03T09:40:02Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T09:40:02Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-promote-0230",
             "expires_at": "2026-07-03T14:00:00Z",
             "notes": "F2.1: promover 0230 proposed->ready + intake block, GO a Codex.",
