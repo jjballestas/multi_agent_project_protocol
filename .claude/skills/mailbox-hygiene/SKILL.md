@@ -3,7 +3,8 @@ name: mailbox-hygiene
 description: >-
   Como todos los agentes (Arquitecto/Codex/Analista) mantienen limpio el canal Area_comun/mailbox:
   escribir mensajes bien formados, NO dejar mensajes resueltos en open/, y archivar los consumidos de
-  forma gobernada. USAR al: escribir un GO/REVIEW/FYI/HANDOFF, cerrar una tarea, responder un mensaje,
+  forma gobernada. USAR al: ENTREGAR UN REPORTE/HANDOFF AL OPERADOR (regla dura 2026-07-04: cada reporte
+  = checkpoint de higiene), escribir un GO/REVIEW/FYI/HANDOFF, cerrar una tarea, responder un mensaje,
   o cuando open/ acumula mensajes ya respondidos/entregados/superados. Reglas duras: ASCII puro;
   requires_response exige response_owner; claim de mailbox SOLO file-scoped a MSG-*.md (nunca dir-level);
   archivar (mailbox_archive) exige capability orchestrator (solo el Arquitecto); los peers senalan
@@ -43,10 +44,22 @@ description: >-
 - No listes en el `scope` un MSG que aun no existe (artifacts-before-claim, #1).
 
 ## 3. Cuando archivar (triggers de higiene)
+
+> **REGLA DURA DEL OPERADOR (2026-07-04): CADA REPORTE = CHECKPOINT DE HIGIENE.** Cada vez que entregas
+> un reporte/handoff al operador (o cierras un turno con salida visible), ANTES o JUNTO con ese reporte
+> haces una PASADA de higiene: clasifica `open/` (consumidos vs vivos) y archiva los consumidos. NO es
+> opcional ni depende del umbral cada-5/watchdog>=10 (esos son la red de respaldo que se cae bajo carga;
+> el reporte es el trigger DETERMINISTA que no se te vuela). El reporte solo se entrega DESPUES de dejar
+> `open/` con solo lo accionable, o -- si la ventana NO es segura (peer en exec/lock, ver s.4b) -- el
+> reporte DECLARA EXPLICITAMENTE los N consumidos que quedan pendientes de archivar y por que
+> (drift-abort). Nunca entregues un reporte dejando consumidos en `open/` SIN decirlo. Un `open/` sucio
+> tras un reporte es un reporte falso del panel del operador.
+
 Archiva un MSG de `open/` cuando quede **resuelto**:
 - **Respondido:** su respuesta ya existe (el `response_owner` contesto).
 - **GO/ACTION consumido:** la tarea que ordenaba ya se entrego (existe su commit `deliver`).
-- **REVIEW resuelto:** el veredicto (GO/NO-GO) ya se emitio y se actuo.
+- **REVIEW resuelto:** el veredicto (GO/NO-GO) ya se emitio y se actuo (incluye el MSG de solicitud Y el
+  MSG de veredicto de la ronda cerrada).
 - **FYI/HANDOFF informativo:** ya leido, sin accion pendiente.
 - **Superado:** una ronda/mensaje mas nuevo lo reemplaza (p.ej. remediation-2 supera la entrega original).
 Manten en `open/` solo lo **accionable o en espera de respuesta**. Escribe la asercion (el "archivado") solo
@@ -108,6 +121,7 @@ dir-claiman el mailbox, **no** archivan (no tienen orchestrator), **no** arregla
 - Actualiza memoria (DECISION-0026). Los mensajes de FYI de cierre van **despues** del archivado, no antes.
 
 ## Checklist de una linea
+**Antes de CADA reporte: pasada de higiene (clasifico open/ + archivo consumidos, o declaro los pendientes).** ·
 Escribo: ASCII? response_owner? type valido para el peer? sin corte+peer? gateado exit 0? ·
 Archivo (solo Arq): mensaje resuelto? claim file-scoped open+archived+#self? message_id seguro? orchestrator? ·
 Peer: stale? -> senalo al owner (DECISION-0018), no toco.
