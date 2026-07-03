@@ -2,9 +2,11 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-04 (cierre de sesion; NOVA-DEV gate-atestado e2e, DD baseline OK, piloto de
-> medicion validado -smoke-, DECISION-0087 nombres Aegis, regla asiento-coordinacion hub/Aegis, estimates Q4
-> resueltos). PROXIMA SESION: rutear arranque del build de GOAL-P1 (ver ">> PROXIMA SESION - PRIMERA ACCION").
+> Ultima actualizacion: 2026-07-04 (sesion de arranque de build; DIRECTIVA de arranque de GOAL-P1 RUTEADA
+> al Arquitecto -commit d55cfc9-; DECISION-0088 ya REGISTRADA por el Arquitecto -512e35c- formaliza el asiento
+> escalonado hub/Aegis. Base previa: NOVA-DEV gate-atestado e2e, DD baseline OK, piloto de medicion validado
+> -smoke-, DECISION-0087 nombres Aegis, estimates Q4 resueltos). AHORA: reactivo, esperando confirmacion del
+> Arquitecto (repo Nova-Budget + Codex activo + tarea baseline -> NOVA-GOAL-001) y el build real para cosechar medicion.
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
@@ -74,12 +76,14 @@
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
   se quede sin inputs del operador.
 
-## >> PROXIMA SESION - PRIMERA ACCION (ordenado por el operador al cerrar 2026-07-04)
-**RUTEAR al Arquitecto el ARRANQUE DEL BUILD de GOAL-P1:** que ACTIVE al maker (Codex) + CONFIRME/cree el
-repo de producto NOVA/Nova-Budget (LAZY, D:/Agentes/Zeus/NOVA/Nova-Budget) + lo apunte a NOVA-GOAL-001
-(fundacion tecnica, brazo baseline). Recordar: asiento de coordinacion = HUB (regla 96ebae2); el Operador
-abre Nova-Budget para codigo + coordina desde el hub. Luego el Operador mide el build real con
-medir-goalp1.ps1 (NO el smoke) -> ese journal se congela en el sello. Codigo = de Codex/Arquitecto, no mio.
+## >> PRIMERA ACCION EJECUTADA (2026-07-04, commit d55cfc9)
+**RUTEADO al Arquitecto el ARRANQUE DEL BUILD de GOAL-P1** (MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-
+arranque-build-goalp1, requires_response=Arquitecto): ACTIVA Codex + CONFIRMA/crea repo NOVA/Nova-Budget
+(LAZY, D:/Agentes/Zeus/NOVA/Nova-Budget, codigo sin governance) + apunta a NOVA-GOAL-001 (fundacion tecnica,
+brazo baseline). Asiento de coordinacion = HUB (DECISION-0088, ya registrada 512e35c). Codigo = Codex/Arquitecto.
+**ESPERANDO RESPUESTA:** (a) ruta repo confirmada; (b) Codex activo si/no; (c) id(s) tarea baseline en el hub.
+Luego el Operador mide el build REAL con medir-goalp1.ps1 (NO el smoke) -> journal se congela en el sello.
+**REACTIVO A SEGUIR:** cosechar la medicion de GOAL-P1 cuando corra; vigilar que el sello (08-jul) no se quede sin inputs.
 
 ## SIGUIENTE (hitos)
 1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
