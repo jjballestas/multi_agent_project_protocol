@@ -15445,6 +15445,20 @@
             "updated_at": "2026-07-03T15:49:47Z"
         },
         {
+            "claim_id": "CLAIM-20260703-Arquitecto-DECISION-0087",
+            "expires_at": "2026-07-03T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-Arquitecto-DECISION-0087",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0087-nombres-aegis-marca-metodologia.md"
+            ],
+            "started_at": "2026-07-03T21:44:17Z",
+            "status": "released",
+            "task_id": "DECISION-0087",
+            "updated_at": "2026-07-03T21:44:17Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-Arquitecto-TASK-0246",
             "expires_at": "2026-07-03T18:30:00Z",
             "owner": "Arquitecto",
