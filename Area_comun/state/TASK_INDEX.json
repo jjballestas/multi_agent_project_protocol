@@ -3929,6 +3929,30 @@
             "type": "docs"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0245-watchdogs-operativos-skill-neutral-exportable.md",
+            "id": "TASK-0245",
+            "linked_decisions": [
+                "DECISION-0061",
+                "DECISION-0085"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "DECISION-0061"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

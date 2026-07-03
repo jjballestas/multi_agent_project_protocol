@@ -16022,6 +16022,22 @@
             "updated_at": "2026-07-03T02:03:51Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-upsert-0245",
+            "expires_at": "2026-07-03T18:00:00Z",
+            "notes": "Encola TASK-0245 (watchdogs exportables) proposed.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-upsert-0245",
+                "Area_comun/state/TASK_INDEX.json#TASK-0245",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0245",
+                "Area_comun/tasks/TASK-0245-watchdogs-operativos-skill-neutral-exportable.md"
+            ],
+            "started_at": "2026-07-03T10:51:03Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-03T10:51:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-hyg-0241-0242-b1",
             "expires_at": "2026-07-03T08:00:00Z",
             "notes": "Higiene ciclo 0241/0242.",
