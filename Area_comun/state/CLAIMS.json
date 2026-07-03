@@ -15777,6 +15777,22 @@
             "updated_at": "2026-07-03T01:41:59Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-promote-0230",
+            "expires_at": "2026-07-03T14:00:00Z",
+            "notes": "F2.1: promover 0230 proposed->ready + intake block, GO a Codex.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-promote-0230",
+                "Area_comun/state/TASK_INDEX.json#TASK-0230",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0230",
+                "Area_comun/tasks/TASK-0230-reqzeus-ws2-bootstrapper.md"
+            ],
+            "started_at": "2026-07-03T08:26:38Z",
+            "status": "released",
+            "task_id": "TASK-0230",
+            "updated_at": "2026-07-03T08:26:38Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0241-0242",
             "expires_at": "2026-07-03T06:00:00Z",
             "notes": "Ratificacion doble 0241+0242 (checker) tras OK/CERRABLE del Analista.",
