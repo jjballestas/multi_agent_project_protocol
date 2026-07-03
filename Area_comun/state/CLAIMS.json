@@ -16900,6 +16900,21 @@
             "updated_at": "2026-07-03T22:53:41Z"
         },
         {
+            "claim_id": "CLAIM-20260704-archive-request-asiento-arq",
+            "expires_at": "2026-07-04T02:00:00Z",
+            "notes": "Archiva la REQUEST del asiento (respondida por MSG-...-FYI-asiento 96ebae2).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-archive-request-asiento-arq",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-REQUEST-asiento-coordinacion-build-nova.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-REQUEST-asiento-coordinacion-build-nova.md"
+            ],
+            "started_at": "2026-07-03T23:07:45Z",
+            "status": "released",
+            "task_id": "OPS-HIGIENE-MAILBOX-20260704c",
+            "updated_at": "2026-07-03T23:07:45Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
