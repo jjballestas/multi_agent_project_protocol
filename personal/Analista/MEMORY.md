@@ -5,7 +5,28 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-03 (TASK-0233 e2e distribuida OK).
+> Ultima actualizacion: 2026-07-03 (TASK-0234 re-juicio runbook fix-loop 1/2 NO-GO).
+
+## Ultima actualizacion 2026-07-03 - TASK-0234 re-juicio runbook fix-loop 1/2 NO-GO
+- TASK-0234 F2.5 runbook onboarding remoto, fix-loop 1/2: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto
+  canonico en commit `b10bffc` (`review(TASK-0234): Analista keeps runbook NOGO`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0234-runbook-onboarding-rejuicio-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0234-rejuicio-NOGO.md`.
+  Ancla REVIEW `9e90a02`; remediacion revisada `645cb78`; entrega previa `64d44ad`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`; Aegis para rutas F2.3/F2.2
+  `814365a702ff45752bb68f7b68b9506b41ffafa4`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); hub validate con
+  secretos EXIT 0; clean clone sin `secrets/` validate/encoding/neutrality EXIT 0; drift false
+  `up_to_seq=3605`; `protocol.config.json` byte-identico entre `645cb78` y HEAD, blob
+  `70d4c027a35b9d7d406bdfbe1cfcd427f203fc14`, SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: F-0234-02 mayormente cerrado (rutas/comandos F2.3/F2.2 existen; F2.3 test EXIT 0). F-0234-01
+  sigue abierto en alcance reducido: `tx-claim.json` ya es concreto, pero `tx-deliver.json` queda como
+  pseudo-lista, falta ejemplo minimo de handoff/mailbox validator-valid y falta comando/payload o aclaracion de
+  ownership para cierre `review_approved->done`. Fix-loop esperado iteracion 2/2 antes de cierre; maximo 2
+  iteraciones antes de operador. Residual: e2e F2.2 en clon Aegis con bare tmp y `--keep-workdir` no completo
+  antes de 304 s y los procesos hijos fueron detenidos; no se uso como bloqueo doc-only, pero queda como riesgo
+  operativo si ese comando pretende ser smoke test rapido.
 
 ## Ultima actualizacion 2026-07-03 - TASK-0233 e2e distribuida OK
 - TASK-0233 F2.2 e2e distribuida Aegis: OK/CERRABLE. Veredicto canonico en commit
