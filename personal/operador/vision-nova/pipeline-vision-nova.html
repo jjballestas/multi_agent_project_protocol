@@ -18,9 +18,21 @@
   .gatebox{background:#fcebeb;border:2px solid var(--blk);color:var(--blktx);border-radius:10px;padding:10px 16px;margin:10px 0;font-weight:600}
   .bar{height:10px;border-radius:5px;background:var(--penbg);overflow:hidden;margin:6px 0 2px}
   .bar>div{height:100%;background:var(--ok)}
-  .phase{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
-  .phase h2{font-size:16px;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline}
-  .phase h2 .win{font-size:12px;color:var(--mut);font-weight:400}
+  .phase{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+  .phase>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:10px;font-size:16px;font-weight:600;padding:14px 18px;user-select:none}
+  .phase>summary::-webkit-details-marker{display:none}
+  .phase>summary::before{content:"";flex:0 0 auto;width:0;height:0;border-left:6px solid var(--mut);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s;align-self:center}
+  .phase[open]>summary::before{transform:rotate(90deg)}
+  .phase>summary:hover{background:var(--bg)}
+  .phase .ph-title{flex:1}
+  .phase .win{font-size:12px;color:var(--mut);font-weight:400;text-align:right;flex:0 0 auto}
+  .phase.full>summary{background:var(--okbg);color:var(--oktx)}
+  .phase.full>summary::before{border-left-color:var(--ok)}
+  .phase.full .win{color:var(--oktx)}
+  .ph-body{padding:2px 18px 12px}
+  .tools{display:flex;gap:8px;margin:6px 0 2px;justify-content:flex-end}
+  .tools button{font:inherit;font-size:12.5px;color:var(--mut);background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 12px;cursor:pointer}
+  .tools button:hover{background:var(--bg);color:var(--ink)}
   .it{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
   .it:last-child{border-bottom:none}
   .st{flex:0 0 86px;text-align:center;font-size:11px;font-weight:700;padding:2px 0;border-radius:999px}
@@ -46,6 +58,7 @@
 <div class="stamp" id="stamp"></div>
 <div class="gatebox">⏱ GATE DURO — SPRINT 1 NOVA BUDGET: <span id="gatedate"></span>. Si algo se atrasa, se recorta alcance del núcleo, NUNCA la fecha.</div>
 <div class="kpis" id="kpis"></div>
+<div class="tools"><button id="expandAll">Expandir todo</button><button id="collapseDone">Colapsar hechas</button></div>
 <div id="phases"></div>
 
 <script>
@@ -133,11 +146,18 @@ function render(){
     `<div class="kpi"><b style="color:var(--blktx)">${n('bloqueado')}</b><span>bloqueadas</span></div>`;
   document.getElementById('phases').innerHTML = PIPELINE.phases.map(p=>{
     const done = p.items.filter(i=>i.st==='hecho').length;
-    return `<div class="phase"><h2>${p.title} <span class="win">${p.window} · ${done}/${p.items.length}</span></h2>`+
+    const full = done===p.items.length;
+    return `<details class="phase${full?' full':''}"${full?'':' open'}>`+
+      `<summary><span class="ph-title">${p.title}</span>`+
+      `<span class="win">${p.window} · ${done}/${p.items.length}${full?' (completa)':''}</span></summary>`+
+      `<div class="ph-body">`+
       p.items.map(i=>`<div class="it ${i.st}"><span class="st ${i.st}">${i.st.replace('_',' ')}</span>`+
         `<span class="id">${i.id}</span><span class="tt">${i.t}</span><span class="ev">${i.ev||''}</span></div>`).join('')+
-      `</div>`;
+      `</div></details>`;
   }).join('');
+  const phaseEls = () => document.querySelectorAll('#phases > details.phase');
+  document.getElementById('expandAll').onclick = () => phaseEls().forEach(d=>d.open=true);
+  document.getElementById('collapseDone').onclick = () => phaseEls().forEach(d=>{ if(d.classList.contains('full')) d.open=false; });
 }
 render();
 </script>
