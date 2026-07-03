@@ -60,7 +60,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-03 14:12",
+  updated_at: "2026-07-03 16:02",
   updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
@@ -80,10 +80,10 @@ const PIPELINE = {
     ]},
     { id:"F2", title:"Instancia nova-budget distribuida — PRD-02", window:"Sem 3 · jul 21–25", items:[
       { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"hecho", ev:"TASK-0230 DONE (done-flip Codex 8351099). Instancia Aegis en D:/Agentes/Zeus/NOVA/Aegis (DECISION-0085 layout paraguas: NOVA/ carpeta plana + Aegis instancia neutral + Nova-X productos lazy) desde tag v1.18.0; arm=nova-suite; gentle-ai nivel B (configs commiteadas, dry-run+atomico, sin Engram). Ciclo: build flat -> re-alcance 0085 -> restructura a Aegis -> re-gate NO-GO (F-0230-AEGIS-01/02) -> remediacion fix-loop 1 -> OK/CERRABLE Analista (aegis-fixloop1) -> ratificado" },
-      { id:"F2.2", t:"Prueba distribuida: clon limpio opera 1 tarea completa solo vía Git", st:"en_curso", ev:"TASK-0233 ready + REQUEST al Analista (owner/maker; Arquitecto checker); body re-alcanzado a F2.2 (e2e distribuida: clon limpio opera 1 tarea completa via Git con el harness F2.3; body viejo e2e Zeus-Aegis superado) con intake valido. Deps 0230/0232 done" },
+      { id:"F2.2", t:"Prueba distribuida: clon limpio opera 1 tarea completa solo vía Git", st:"hecho", ev:"TASK-0233 DONE (done-flip Codex). e2e distribuida: clon limpio registra->reclama->entrega->review->cierra a done SOLO via Git pull/push contra remoto privado Aegis (script distributed_e2e_task_cycle.py). Owner REASIGNADO Analista->Codex (Analista checker-only, operador ratifico); OK/CERRABLE Analista (clon limpio, sin slips). PRUEBA EL MECANISMO (transferibilidad fuerte cold va en F2.5)" },
       { id:"F2.3", t:"Harness pull→escribir→push inmediato (claims visibles entre clones)", st:"hecho", ev:"TASK-0232 DONE (done-flip Codex a781645). Harness distribuido de la instancia Aegis (distributed_git_harness.py + test) + remoto privado Aegis-task0232b.git; pull->write->push inmediato, claim visible en clon B. OK/CERRABLE Analista 7547972 (clon limpio, sin CRITICAL/WARNING-real)" },
       { id:"F2.4", t:"Perfil de instancia (arm/mode + taxonomía de riesgo) + hosting privado", st:"pendiente", ev:"" },
-      { id:"F2.5", t:"Runbook onboarding remoto (objetivo ≤1 día)", st:"pendiente", ev:"" }
+      { id:"F2.5", t:"Runbook onboarding remoto (objetivo ≤1 día)", st:"en_curso", ev:"TASK-0234 in_progress (claim Arquitecto); RUNBOOK_ONBOARDING_REMOTO.md v1.0 redactado (onboarding en frio: clonar instancia->configurar agente->validar->operar 1 tarea via Git puro + troubleshooting + DoD objetivo <=1 dia HP6). Aqui va la transferibilidad FUERTE (agente no-constructor opera; medicion=replica employee-run). Flip in_review + gate Analista pendiente" }
     ]},
     { id:"F3", title:"Estudio pre-registrado — PRD-03", window:"Sem 3–4 · jul 21–29", items:[
       { id:"F3.1", t:"Política de medición de empleados (consentimiento, no-punitivo, retención, disputa)", st:"pendiente", ev:"" },

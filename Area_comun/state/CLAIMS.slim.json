@@ -1,5 +1,18 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260703-arquitecto-promote-0234",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-promote-0234",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md",
+                "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
+            ],
+            "task_id": "TASK-0234"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

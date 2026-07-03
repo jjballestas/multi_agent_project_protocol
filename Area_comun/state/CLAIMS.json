@@ -16146,6 +16146,23 @@
             "updated_at": "2026-07-03T12:18:17Z"
         },
         {
+            "claim_id": "CLAIM-20260703-arquitecto-promote-0234",
+            "expires_at": "2026-07-03T22:00:00Z",
+            "notes": "F2.5: promover 0234 proposed->in_progress + runbook onboarding remoto (doc del Arquitecto).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260703-arquitecto-promote-0234",
+                "Area_comun/state/TASK_INDEX.json#TASK-0234",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0234",
+                "Area_comun/tasks/TASK-0234-reqzeus-ws10-runbooks.md",
+                "Area_comun/protocol/RUNBOOK_ONBOARDING_REMOTO.md"
+            ],
+            "started_at": "2026-07-03T14:01:33Z",
+            "status": "active",
+            "task_id": "TASK-0234",
+            "updated_at": "2026-07-03T14:01:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260703-arquitecto-ratify-0230",
             "expires_at": "2026-07-03T20:00:00Z",
             "notes": "Ratificacion 0230 (checker) tras OK/CERRABLE Analista fix-loop 1 (Aegis DECISION-0085).",

@@ -2,7 +2,7 @@
 task_id: TASK-0234
 title: "[VISION-NOVA][F2.5] Runbook de onboarding remoto de empleados (objetivo <=1 dia, medido; alimenta HP6) [re-alcance: pivote Vision Nova, DECISION-0083]"
 type: docs
-status: proposed
+status: in_progress
 owner: Arquitecto
 phase: P2
 priority: low
