@@ -109,6 +109,16 @@
    proc; excluye correctamente P6-003/P2-004/P2-003 sin procs; P4-004 ya alineado). El operador dio GO firme
    pero YA ERA REDUNDANTE -> NO envie mi GO (evito ruido). El gap sistemico se cierra DENTRO del gate (Analista
    verifica por OBJECT_DEFINITION). Espero el resultado del audit. Mi RECOMENDACION-THROW en open/ = consumida.
+   AUDIT RESULTADO = CAMBIO-REQUERIDO (af461a7): VALIDO la preocupacion sistemica -- slips en los 5 P3 SPECs.
+   El PRIMER gate formal habia dado OK porque solo reviso P4-004 (punto ciego por alcance estrecho). MATIZ:
+   distinto a P4-004 (codigo inexistente 50256); aqui los codigos regla-de-oro PASAN todos (50277/50150/50115/
+   50134/50187) y los slips son PERIFERICOS (catalogo/triggers de linea/numeracion) REALES pero mal atribuidos
+   al Approve_* directo en vez de a los procs llamados/triggers del INSERT de linea. NO revierte el gate core
+   (F-0246-01/02 siguen OK); solo el gancho db_verified_at no cierra. MI STEER (calidad de estudio): remediar
+   por REATRIBUCION (tabla transitive Approve_*->proc/trigger->THROW), NO por borrado -- borrar quitaria criterios
+   falsables reales y debilitaria las SPECs como artefactos medidos. Remediacion = Arquitecto (fix-loop max 2).
+   LECCION META: hasta el gate formal tiene punto ciego por alcance; el audit amplio (recomendado por operador)
+   lo cazo. Doble evidencia para la tesis. Yo espero la remediacion.
    RONDAS 4-5 (P3-004 Obligation, P3-005 Payment): AMBAS LIMPIAS. FAMILIA P3 COMPLETA 5/5 (presupuesto->CDP->
    RP->obligacion->pago). P3-005 marcada q4_membership=FUERA (ALTA/Treasury) segun mi GO -> el Arquitecto
    aplico mi nota de estudio. Disciplina de frontera: P3-004 difiere radicacion a GOAL-P5; P3-005 difiere el
