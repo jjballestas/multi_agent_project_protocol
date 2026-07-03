@@ -60,7 +60,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-03 10:57",
+  updated_at: "2026-07-03 11:44",
   updated_by: "Operador (via Asesor)",
   sprint1_date: "2026-07-30",
   phases: [
@@ -79,7 +79,7 @@ const PIPELINE = {
       { id:"F1.7", t:"[TASK-0244] RELEASE v1.18.0 + CHANGELOG (gates verdes en clon limpio)", st:"hecho", ev:"TASK-0244 DONE (done-flip Codex df3c9d5). Tag v1.18.0 -> 2e36eb55 (c9a4423); CHANGELOG + templates sync; OK/CERRABLE Analista 461342b (clon limpio 3/3, config byte-identico 2E35F26E, epoch 1.14.0). Gate de trailers ACTIVO (COMMIT_TRAILERS.json cd3642d, crons relanzados con prompts 0242). F1 CERRADO 7/7" }
     ]},
     { id:"F2", title:"Instancia nova-budget distribuida — PRD-02", window:"Sem 3 · jul 21–25", items:[
-      { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"en_curso", ev:"[TASK-0230] ENTREGADA, in_review (af58e10). Instancia en D:/Agentes/Zeus/NOVA/nova-budget (ratificada operador, anidada) desde tag v1.18.0 (source c9a4423). Bootstrapper new-instance.mjs en Zeus-protocol (e7c6da4: dry-run+--write, temp/rename atomico, valida target bajo Zeus, pin al tag). instance.profile.json (arm budget, mode governed-instance, engramInstallAllowed:false) + .agents/{Codex,Arquitecto,Analista}/config.json + TASK_TEMPLATE intake-v2/DoR. Anomalia: handoff con path stale (Zeus/nova-budget) -> correccion ruteada + gate Analista contra ruta real. Pendiente: veredicto Analista" },
+      { id:"F2.1", t:"new_instance desde tag v1.18.0 (timebox 1 día; el tiempo real es dato)", st:"en_curso", ev:"[TASK-0230] entregada+Analista OK sobre layout FLAT (af58e10; review 0295468) desde tag v1.18.0 (source c9a4423). Bootstrapper new-instance.mjs en Zeus-protocol (e7c6da4: dry-run+--write, temp/rename atomico, pin al tag). instance.profile.json + .agents/{Codex,Arquitecto,Analista}/config.json + TASK_TEMPLATE intake-v2/DoR. RE-ALCANCE por DECISION-0085 (c64f03e, aprobada operador): layout canonico = NOVA/ paraguas + NOVA/Aegis (instancia-metodologia neutral) + NOVA/Nova-X (productos, prefijo Nova- obligatorio). La instancia se REUBICA de NOVA/nova-budget -> NOVA/Aegis; el OK del Analista sobre flat NO cierra 0230, se RE-GATEA sobre NOVA/Aegis. Pendiente: reubicacion + re-review" },
       { id:"F2.2", t:"Prueba distribuida: clon limpio opera 1 tarea completa solo vía Git", st:"pendiente", ev:"" },
       { id:"F2.3", t:"Harness pull→escribir→push inmediato (claims visibles entre clones)", st:"pendiente", ev:"" },
       { id:"F2.4", t:"Perfil de instancia (arm/mode + taxonomía de riesgo) + hosting privado", st:"pendiente", ev:"" },
