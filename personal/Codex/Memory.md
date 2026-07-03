@@ -14,8 +14,9 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0232 distributed harness deli
   clone drift false at up_to_seq 3458. Aegis origin now points to `D:/Agentes/Zeus/remotes/Aegis-task0232b.git`
   instead of the hub. Protocol delivery artifacts:
   `Area_comun/handoffs/HANDOFF-TASK-0232-codex-to-arquitecto-1.md` and
-  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0232-in-review.md`; runtime moved TASK-0232
-  `in_progress -> in_review` and released Codex claims through seq 3547. Gates: Aegis py_compile, harness unit,
+  `Area_comun/mailbox/open/MSG-20260703-Codex-to-Arquitecto-TASK-0232-in-review.md`; protocol delivery commit
+  `1b6c7f5 coord(TASK-0232): deliver distributed harness` moved TASK-0232 `in_progress -> in_review` and released
+  Codex claims through seq 3547. Gates: Aegis py_compile, harness unit,
   harness proof, encoding, neutrality, validate, and drift PASS; Zeus-protocol `npm test` PASS 112 tests (90 pass,
   22 skipped) and `node --check public/app.js src/server.js` PASS; hub encoding, neutrality, validate, and drift
   PASS with unrelated mailbox FYI archive warning only.
