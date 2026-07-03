@@ -76,9 +76,10 @@ con rol presupuesto; policy por operacion via BR-C4 CONFIRMADA post-Sprint-1. Nu
 6. **Dado** una cabecera sin beneficiario o sin solicitante, **cuando** intento crear, **entonces** violacion FK NOT NULL / rechazo del caso de uso (RN-03).
 7. **Dado** la seleccion de un CDP con saldo, **cuando** creo el borrador con pre-poblado, **entonces** el borrador trae las lineas del CDP con saldo (herencia B-03), editables a la baja.
 8. **Dado** el saldo del RP tras aprobar, **entonces** `vw_Commitment_Line_Balance` = committed + creditos(11) - contracreditos(12) - obligado_neto (sin recalculo en C#).
+9. **Dado** un RP con objeto de 19 caracteres o menos (norma del Operador DD-02, min. 20 chars), **cuando** intento crear o actualizar el borrador, **entonces** la validacion de APLICACION lo rechaza con **400 ProblemDetails** y NO invoca la aprobacion en BD (criterio falsable: la norma vive en el caso de uso, no en el proc).
 
 ## 8. Pruebas / gates definidos
-- **Unit:** mapeo DTO->parametros del proc; maquina de estados; herencia de lineas del CDP; enforcement RN-10 (fecha) y RN-03 (terceros) en el caso de uso; traduccion THROW->ProblemDetails.
+- **Unit:** mapeo DTO->parametros del proc; maquina de estados; herencia de lineas del CDP; enforcement RN-10 (fecha), RN-03 (terceros) y objeto min-20 chars (DD-02, criterio 9) en el caso de uso; traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable.
 - **Integracion vs DbsFinanciero:** criterio 1 (aprobacion happy: serie + herencia), un caso por THROW (50115, 50114, 50109-50111, 50210/50211, 50091), criterio 5 (rechazo fecha via caso de uso), criterio 7 (herencia de lineas), criterio 8 (saldo RP por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
 - **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 5=paridad, 9=fuera de alcance -- NO anular, NO tocar 11/12) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.

@@ -99,7 +99,7 @@ policy por operacion via BR-C4 CONFIRMADA post-Sprint-1.
 | Recalcular cuadre/saldo en C# "para la UI" | Divergencia silenciosa con la BD (pecado capital del ambito) | Prohibido (restriccion 6c/6d); el adversarial lo busca (punto 2); pre-validacion solo con las vistas |
 | Aprobar copiando filas sin el proc | Rompe la unica frontera transaccional | Restriccion 6a; el adversarial verifica que approve == invocar `Approve_Initial_Budget_Draft` |
 | `is_current` apunta a 2026 cerrada (B-02) | Defaults de vigencia enganosos | Vigencia explicita en UI (6f); arranque 2027 y correccion de is_current = hardening, fuera de alcance |
-| Matriz de autorizacion por operacion ausente (B-05) | emitir/aprobar sin separacion de permisos | Supuesto temporal declarado (campo 2); policy por operacion via BR-C4 post-Sprint-1 |
+| Matriz de autorizacion por operacion ausente (B-05) | emitir/aprobar sin separacion de permisos | Confirmado por el Operador para Sprint 1 (DD-01, campo 2): usuario autenticado con rol presupuesto captura/aprueba/emite; policy por operacion via BR-C4 post-Sprint-1 |
 | Aplazamientos en el modelo pero sin proc (B-03) | Tentacion de "completarlo" en C# | Fuera de alcance explicito (campo 4); no se parchea en aplicacion |
 | Skew GOAL vs BD (F-NOVA-01) | Declarar brecha inexistente | RE-verificar cada objeto contra la BD desplegada al construir (preambulo db_verified_at) |
 
