@@ -1,3 +1,7 @@
+> MOVIDO (2026-07-03): el prompt de arranque del Asesor vive ahora en su area propia:
+> **personal/asesor/PROMPT-INICIO-ASESOR.md** (v4), que lee **personal/asesor/ESTADO-asesor.md**.
+> Lanza la sesion de Asesor desde esa ruta. Este archivo (v3) queda como redirect historico.
+
 # Prompt de inicio -- sesion ASESOR (Vision Nova) -- v3 (cierre 2026-07-03)
 
 > v3 SUPERSEDE la v2. Estado congelado al reinicio de sesion del 2026-07-03 (F1 7/8,
