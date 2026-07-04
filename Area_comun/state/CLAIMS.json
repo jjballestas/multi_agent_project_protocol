@@ -17673,6 +17673,28 @@
             "updated_at": "2026-07-04T11:37:00Z"
         },
         {
+            "claim_id": "CLAIM-20260704T114400Z-Arquitecto-mailbox-higiene-5",
+            "expires_at": "2026-07-04T12:14:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T114400Z-Arquitecto-mailbox-higiene-5",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Operador-CONFIRMA-sello-atestado-camino-optimo.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Operador-CONFIRMA-sello-atestado-camino-optimo.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-ANOMALIA-decision0091-committeada-por-asesor-drift.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-ANOMALIA-decision0091-committeada-por-asesor-drift.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-ejecuta-sello-ahora-supersede-standdown.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-ejecuta-sello-ahora-supersede-standdown.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-sorteo-verificado-camino-optimo-no-standdown.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-sorteo-verificado-camino-optimo-no-standdown.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-stand-down-control-costo.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-stand-down-control-costo.md"
+            ],
+            "started_at": "2026-07-04T11:44:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T11:44:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
