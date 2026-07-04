@@ -1990,3 +1990,18 @@
   exit 0; encoding/domain exit 0; drift 0 `up_to_seq=3718`; chain valid `checked_events=3046`; #4 byte-identica
   sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop: remediar loader/contrato
   ubicacion, forma canonica y gate producto; re-juicio Analista antes de cierre, maximo 2 iteraciones.
+- TASK-0249 re-juicio fix-loop 1 (2026-07-04): CAMBIO-REQUERIDO/NO CERRABLE, veredicto commiteado y
+  pusheado en `fc32362` (`review(TASK-0249): Analista requires instrumentation fixes`). Ancla protocolo
+  `5bf2e70`; producto Nova-Budget N/A porque el REVIEW canonico cita `Producto commit citable: NINGUNO`
+  y ordena no ejecutar producto. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0249-f33-instrumentacion-rejuicio-1-veredicto.md`; MSG rr a
+  Arquitecto `MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0249-f33-instrumentacion-rejuicio-1-NOGO.md`.
+  Suite canonica de instrumentacion en clon limpio exit 0 (5 tests), pero bloquean dos slips nuevos:
+  F-0249-02 `cost_attributed` acepta `prompt_tokens=100 completion_tokens=50 no cumulative field` y escribe
+  `tokens_total_atribuibles=100` aunque no hay cumulativo leido; F-0249-03 Q3 `mediana_pareada_delta` cambia
+  de `-20` a `20` al invertir el orden de filas del mismo par baseline=100/gobernado=80. Gates: validate
+  clean/vivo exit 0; encoding clean/vivo exit 0; domain clean/vivo exit 0; drift clean/vivo 0
+  `up_to_seq=3861`; chain valid `checked_events=3189`; #4 byte-identica sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop esperado: parser de err.log
+  debe fallar cerrado sin cumulativo explicito y Q3 debe calcular delta por brazo, no por orden CSV; re-juicio
+  Analista previo a cierre, maximo 2 iteraciones.
