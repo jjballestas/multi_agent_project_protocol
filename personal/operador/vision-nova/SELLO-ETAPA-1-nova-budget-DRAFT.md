@@ -19,10 +19,13 @@ Este sello pre-registra el diseno confirmatorio ANTES de ver resultados, para qu
 defendible (anti-HARKing, anti semilla-moldeable). Ancla externa del sello y del sorteo:
 
 - **T (timestamp del commit de sello):** `cbc1ee2d6a344d4db5b69c2f7823cc0bc0aa8b0c` / `2026-07-04T03:52:25Z`
-  (commit que introdujo la s.6.1 completa: par_ids + estimates + algoritmo). Semilla y resultado del
-  sorteo: [LLENAR-AL-SELLAR, deben ser POSTERIORES a T].
-- **Semilla del sorteo:** primer pulso del **NIST Randomness Beacon** posterior a T
-  (fallback: hash del primer bloque Bitcoin posterior a T). [LLENAR-AL-SELLAR: pulseIndex + valor].
+  (commit que introdujo la s.6.1 completa: par_ids + estimates + algoritmo).
+- **Semilla del sorteo:** primer pulso del **NIST Randomness Beacon** (chain 2) posterior a T. **pulseIndex
+  1844242, timeStamp 2026-07-04T03:53:00.000Z** (el pulso previo, 1844241, es 2026-07-04T03:52:00.000Z,
+  ANTERIOR a T; 1844242 es el primero ESTRICTAMENTE posterior). `outputValue` (semilla usada en el
+  algoritmo, s.6.1):
+  `9CD3E6A0B366DFD164BA63C18CAE7D09B1CD76867DAD8912AEA1061D41E95226A2B0FCB937542D1DC80BC49AA00FE562B030866E9B1706CD76A26A6E5C7379EF`.
+  Verificable por terceros en `https://beacon.nist.gov/beacon/2.0/chain/2/pulse/1844242`.
 - **Atestacion:** sha256 de este documento + del manifiesto de corpus, registrado via
   `submit_intent` en el hub. [LLENAR-AL-SELLAR: idempotency_key + seq].
 
@@ -43,12 +46,12 @@ uno + un hash de manifiesto (sha256 del listado ordenado `path  sha256`). Proced
 | NOVA_ESTUDIO_Particion_Baseline_vs_Gobernado.md | ef1e56e7c1b950559d8e3952231662040a1008999baf6002eb28d7671b2e2a41 | FINAL |
 | NOVA_ESTUDIO_Protocolo_Medicion.md | de38530acfd927bb9c4683224a85863ca8b6ae85de5b8cd0ab09c172185969b1 | FINAL |
 | NOVA_ESTUDIO_Anexo_Diseno_Completo.json | 4a52ff58f1363f005ee8daaa72800cad065a3d0da3408422fb4c4a59be835c7c | FINAL |
-| schema_medicion.json (v1.0 congelado) | [LLENAR-AL-SELLAR: recomputar tras freeze v1.0; v-piloto=7f9289705981966a69bcbaa9c79324e90333f6bedd74befbaa34f034e11f7626] | dia-de |
-| schema_defectos.json (v1.0 congelado) | [LLENAR-AL-SELLAR: recomputar tras freeze v1.0; v-piloto=ec1569ffd8be7278ba61e6d09ff62931c89930257636ab7ca9cc535353aa66cb] | dia-de |
+| schema_medicion.json (v1.0 congelado, 2026-07-04) | 700565a206d7066fdb08e48abceed249014569937c86ac202b3d0f57b154c23e | **FINAL (v1.0)** |
+| schema_defectos.json (v1.0 congelado, 2026-07-04) | 737fd4f5c379b9e96ceb160891ba6117a4d589d96fb8f5b0c612f1e74e36e8dd | **FINAL (v1.0)** |
 | medicion_ledger.py (scripts nueva-fila/cerrar-fila) | 3e92cca5962f88ff3e77286e263ea20d2b5f461e6555454fec776c99e5595344 | FINAL |
-| este SELLO-ETAPA-1 (auto-hash tras congelar) | [LLENAR-AL-SELLAR: auto-hash tras llenar todo] | dia-de |
+| este SELLO-ETAPA-1 (auto-hash tras congelar) | [SE COMPUTA AL FINAL, tras este ultimo commit del doc -- ver DECISION del sello para el valor atestado] | dia-de |
 | medicion_journal.csv del piloto GOAL-P1 (fila REAL cerrada+atestada+ratificada) | d2a13216c29b4572ce91a8d3569c3fbbd197be3ff27c372f43a1cf4d719ae2f5 | **FINAL (REAL, ratificado)** |
-| **HASH DE MANIFIESTO** | **[LLENAR-AL-SELLAR: recomputar sobre las 8 filas finales; ensayo 8-filas=7cb8a6b36580c67b4020a69aa7ecb6b3c7e59722725b0054cfac407f386b4e3b]** | dia-de |
+| **HASH DE MANIFIESTO** | **SE COMPUTA sobre las 9 filas finales -- ver DECISION del sello para el valor atestado y el archivo CORPUS-MANIFEST-etapa1.txt** | dia-de |
 
 NOTA: el codigo de producto Nova-Budget YA EXISTE (GOAL-P1 done, commit 02f5d5a); su primer snapshot atestado
 es el journal REAL de GOAL-P1 (fila d2a13216, tokens_total_atribuibles=165844, degradacion ex-ante). El corpus
@@ -189,7 +192,30 @@ supuesto temporal de autorizacion B-05).
    Desviarse = enmienda fechada con causa; cada par anulado registra QUE trigger lo mato.
 5. DISJUNCION DURA: cada tarea se implementa UNA vez en UN brazo; los pares caen COMPLETOS.
 
-Resultado del sorteo (asignacion por unidad): [LLENAR-AL-SELLAR: tabla unidad -> ligero/completo].
+**Resultado del sorteo (asignacion por unidad, SELLADO):** semilla = pulso NIST 1844242 (s.0). Computado
+con el algoritmo exacto de s.6.1 (orden alfabetico, `h=SHA-256(tarea_id+"|"+semilla)`, `h[0] mod 2`):
+
+| tarea_id | h (SHA-256 completo) | h[0] | asignacion |
+|---|---|---|---|
+| NB-BRC3-1 | `9dced029a19554937646ce2c25e15b801c4c9ca1a730a386890f6eae20755039` | `0x9d` (157, impar) | **ligero** |
+| NB-BRC3-2 | `11bdb4bc209380bb2767c103c16cb198e093f7cd42fe65c213b26913fe254b33` | `0x11` (17, impar) | **ligero** |
+| NB-BRC3-3 | `1b1409e62cc5f540ff63ac7762f653f1b461b97c38702339be93ba0e34ece7bd` | `0x1b` (27, impar) | **ligero** |
+| NB-BRC3-4 | `3c8db091612154effa41a63997ad3873d2a9085ac20521eb5954b0c9a223f7a4` | `0x3c` (60, par) | **completo** |
+| NB-P2-3 | `7e36c48811198e8edebffe379a1d2fe4ff742cdcecec1a7f94f283590717e3b2` | `0x7e` (126, par) | **completo** |
+| NB-P3-2 | `6b23a918406abc4550d826dd537426a5642e9dc62d63ea0080811f106faeb4e4` | `0x6b` (107, impar) | **ligero** |
+| NB-P3-3 | `4906ca958436ab3ffe149e02f008d604e0cdd65ec4bf9b7f117e5a5f9d22fc6e` | `0x49` (73, impar) | **ligero** |
+| NB-P3-4 | `ff050df100b0b50891c5938b32239072a3647bfe05630ffaf2eb102772f3b7cb` | `0xff` (255, impar) | **ligero** |
+| NB-P4-4 | `e5b20665ed3a42c06c97e44a1c758778f5a618e9ad637b218f5b4c22fe8adc50` | `0xe5` (229, impar) | **ligero** |
+| NB-P6-3 | `111503133d717f5a12be246ef19e3892ae2661ce02c0339c5f0d20bbbb5a9620` | `0x11` (17, impar) | **ligero** |
+
+**Reporte por estrato (honesto, sin corregir, s.6.1 paso 3):**
+- Estrato S (BR-C3 cluster, n=4): 1 completo (NB-BRC3-4) / 3 ligero (NB-BRC3-1/2/3).
+- Estrato M (diversas, n=6): 1 completo (NB-P2-3) / 5 ligero (NB-P3-2, NB-P3-3, NB-P3-4, NB-P4-4, NB-P6-3)
+  -- desbalance 5-1 real por azar de la semilla. Se REPORTA sin corregir (regla ex-ante de s.6.1 paso 3:
+  n=6 es insuficiente para forzar paridad sin introducir un criterio ad-hoc post-semilla).
+
+**Total global: 2 completo (NB-BRC3-4, NB-P2-3) / 8 ligero, de 10 unidades.** Resultado FINAL, verificable
+por terceros recomputando con la semilla publicada arriba.
 
 ### 6.1 Artefacto PRE-COMMIT del sorteo (par_ids + estimates + algoritmo + timestamp)
 
@@ -346,16 +372,16 @@ secciones 1/3/4/6/10/12 de este documento, para lectura rapida del operador.
 
 ---
 
-## 12. Checklist del dia del sello (08-jul)
+## 12. Checklist del sello (ejecutado 2026-07-04, adelantado del 08-jul por DIRECTIVA del Operador)
 
-- [ ] Piloto GOAL-P1 corrido (3-8 jul); su medicion_journal.csv en el corpus.
-- [ ] schema_medicion/defectos congelados a v1.0 (sha256 registrado).
-- [ ] Estimates S/M/L de las ~10 unidades emitidos por el Operador ANTES del sorteo.
-- [ ] Enumeracion Q4 verificada UNA A UNA contra el conector readonly (s.5 completa).
-- [ ] Commit de sello (T) con par_ids + estimates + algoritmo + timestamp.
-- [ ] Pulso NIST Beacon posterior a T capturado -> sorteo ejecutado -> tabla de asignacion (s.6).
-- [ ] sha256 del manifiesto de corpus (s.1) + de este documento, registrados via submit_intent del hub.
-- [ ] GRANT EXECUTE resuelto; mecanismo sandbox de mutadores decidido (<=14-jul, no bloquea el sello).
+- [x] Piloto GOAL-P1 corrido (2026-07-03/04); su `medicion_journal.csv` (fila real) en el corpus.
+- [x] schema_medicion/defectos congelados a v1.0 (sha256 registrado en s.1).
+- [x] Estimates S/M/L de las 10 unidades emitidos por el Operador ANTES del sorteo (`ESTIMATES-Q4-para-sorteo.md`, 2026-07-03).
+- [x] Enumeracion Q4 verificada UNA A UNA contra el conector readonly (s.5 completa).
+- [x] Commit de sello (T) con par_ids + estimates + algoritmo + timestamp (`cbc1ee2`, s.0/s.6.1).
+- [x] Pulso NIST Beacon posterior a T capturado -> sorteo ejecutado -> tabla de asignacion (s.6, pulso 1844242).
+- [ ] sha256 del manifiesto de corpus (s.1) + de este documento, registrados via submit_intent del hub -- EN CURSO (siguiente paso).
+- [x] GRANT EXECUTE resuelto; mecanismo sandbox de mutadores decidido (sellado 2026-07-04, adelantado <=14-jul).
 
 ---
 
