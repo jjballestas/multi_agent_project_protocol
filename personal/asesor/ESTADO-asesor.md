@@ -67,7 +67,12 @@ monitor + auto-poll. 3 HILOS EN VUELO esperando al Arquitecto:**
 3. **LINEA ROJA reafirmada:** NO construir unidades del pool Q4 (P2.3, P2-004, P3.2/3.3/3.4, P4.1-4.4, P6.3)
    pre-30-jul (rompe contraste irreversible). Codex idle tras 0252/P3.1 = estado CORRECTO por diseno.
 
-**CONSENTIMIENTO EMPLEADOS: CONVERGIO (v5.0) -- LISTO PARA LEGAL.** Revisiones adversariales v1->v5: de 3
+**CONSENTIMIENTO EMPLEADOS: ENVIADO A LEGAL (2026-07-04) -- hilo cerrado de mi lado; espera turnaround de legal.**
+P3.1: el Arquitecto CORRIGIO mi lectura -- P3.1 NO es baseline; el sello (DECISION-0091 s.3.3) la clasifica
+GOBERNADO/Sprint-1 (excluida de Q4 != baseline; fue error mio de framing). Recomende OPCION 3 (esperar Sprint 1,
+NO construir): no desviar el sello por evitar idle; sin necesidad real; Codex idle tras 0252 = correcto por
+diseno. Warn contra Opcion 2 (reclasificar = alteracion post-hoc del pre-registro). PENDIENTE decision operador.
+**CONSENTIMIENTO EMPLEADOS: CONVERGIO (v5.0) -- LISTO PARA LEGAL (historico).** Revisiones adversariales v1->v5: de 3
 criticos + varios altos a CERO hallazgos. v5 cerro los 2 flujos de procesadores (A metricas Microsoft/AWS / B
 contenido-codigo-prompts Anthropic) + re-confirmacion en 2 pasos + Considerando 33. Cerre mi pasada adversarial.
 Quedan 2 NOTAS DE CONCIENCIA (no defectos del form, gobernanza INGENAS): codigo como IP/confidencialidad a
