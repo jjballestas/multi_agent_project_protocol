@@ -18,7 +18,9 @@ brazo, pares, pool Q4, plan de analisis. Los campos [LLENAR-AL-SELLAR] se comple
 Este sello pre-registra el diseno confirmatorio ANTES de ver resultados, para que el estudio sea
 defendible (anti-HARKing, anti semilla-moldeable). Ancla externa del sello y del sorteo:
 
-- **T (timestamp del commit de sello):** [LLENAR-AL-SELLAR: commit hash + ISO-8601 UTC].
+- **T (timestamp del commit de sello):** `cbc1ee2d6a344d4db5b69c2f7823cc0bc0aa8b0c` / `2026-07-04T03:52:25Z`
+  (commit que introdujo la s.6.1 completa: par_ids + estimates + algoritmo). Semilla y resultado del
+  sorteo: [LLENAR-AL-SELLAR, deben ser POSTERIORES a T].
 - **Semilla del sorteo:** primer pulso del **NIST Randomness Beacon** posterior a T
   (fallback: hash del primer bloque Bitcoin posterior a T). [LLENAR-AL-SELLAR: pulseIndex + valor].
 - **Atestacion:** sha256 de este documento + del manifiesto de corpus, registrado via
@@ -231,12 +233,12 @@ Resultado del sorteo (asignacion por unidad): [LLENAR-AL-SELLAR: tabla unidad ->
 4. Verificable por terceros: cualquiera puede recomputar `h` con la semilla publicada (NIST Beacon) y
    los `tarea_id` de esta tabla, y reproducir la tabla de asignacion resultante byte a byte.
 
-**Timestamp T:** el commit que introduce esta tabla 6.1 completa (par_ids + estimates + algoritmo) es T.
-Se registra el hash exacto + ISO-8601 UTC en el CHANGELOG/memoria del Arquitecto inmediatamente despues
-de commitear (no puede autoreferenciarse dentro del propio commit); el commit-hash se cita ademas en la
-atestacion sha256 del hub (`submit_intent` type `decision`) junto con el sha256 de este documento, de modo
-que T queda anclado externamente en el ledger del hub, no solo en el mensaje de commit. **[LLENAR-AL-SELLAR:
-hash+ISO de T se copian aqui en cuanto el commit exista -- ver nota operativa en personal/Arquitecto/.]**
+**Timestamp T = `cbc1ee2d6a344d4db5b69c2f7823cc0bc0aa8b0c` / `2026-07-04T03:52:25Z`** (commit que introdujo
+esta tabla 6.1 completa: par_ids + estimates + algoritmo, ver s.0). Queda anclado externamente cuando
+se registre via `submit_intent` type `decision` (sha256 de este documento + este hash) en el ledger del
+hub -- pendiente de ejecutar como parte del checklist s.12 (no bloquea seguir completando el resto del
+sello). Desde este momento, la semilla que se use para el sorteo DEBE ser de un pulso NIST posterior a
+este timestamp; una semilla anterior invalida el sorteo (seria pre-T, manipulable).
 
 ---
 
