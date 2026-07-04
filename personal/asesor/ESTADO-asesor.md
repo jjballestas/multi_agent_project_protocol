@@ -30,6 +30,20 @@ vivo: guard de seguridad bloqueo lectura de produccion sin autorizacion). Dejo 2
 OPERADOR DECIDIO: (b) ESPERAR a F3.3 (P2 abre auto-instrumentado; proposed en cola, NO manual); (c) DIFERIR la
 verificacion PAR-2 a 15-jul (procs Annul_* son brechas B-04 conocidas, hoy ausentes; no autoriza readonly ahora).
 Rutee la respuesta (a5323ba).
+**GRANT EXECUTE del estudio (item #2 operador) DEFINIDO y RUTEADO (7bd3ea4):** el operador creo el script
+sandbox-grant-execute.sql (paquete fuente FUERA del hub, D:/Agentes/Ingenas/Budget/.../DATA/): rol
+budget_sandbox_verifier sobre DbsFinanciero_SANDBOX, superficie IDENTICA baseline/gobernado (15 EXEC procs +
+89 SELECT vistas + 1 dep Security.Permission) = no confound. Revision adversarial mia: diseno correcto
+(sandbox no prod, simetrico, fail-closed rol). Rutee a Codex (via Arquitecto) cablear el harness de paridad
+exec-vs-endpoint al sandbox con ese rol (reemplaza readonly_s9) + hardening guard DB_NAME() recomendado +
+notas: Annul_* por enmienda fechada cuando existan (PAR-2 difiere), reset sandbox entre corridas. El operador
+ejecuta el GRANT de su parte.
+**CONSENTIMIENTO EMPLEADOS (item #1 operador):** revision adversarial hecha (personal/operador/legal/
+CONSENTIMIENTO-EMPLEADOS-NOVA.docx). 3 CRITICOS (C1 Responsable sin identificar; C2 contradiccion
+retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificable SPEC-0079 C3) + 3 ALTOS
+(A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
+A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
+Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
 **EN VUELO -- WATCH (no rutear):** el Analista BLOQUEO TASK-0249 (F-0249-01: gate propio de instrumentacion
 falla en clon limpio por fixtures schema_medicion.json no commiteados en el ancla). Es REPRODUCIBILIDAD /
 implementacion, NO diseno ni integridad-de-estudio -> fix-loop 1/2 del Arquitecto+Codex; NO lo rateo (mi SPEC
