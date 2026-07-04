@@ -30,7 +30,13 @@ vivo: guard de seguridad bloqueo lectura de produccion sin autorizacion). Dejo 2
 OPERADOR DECIDIO: (b) ESPERAR a F3.3 (P2 abre auto-instrumentado; proposed en cola, NO manual); (c) DIFERIR la
 verificacion PAR-2 a 15-jul (procs Annul_* son brechas B-04 conocidas, hoy ausentes; no autoriza readonly ahora).
 Rutee la respuesta (a5323ba).
-**GRANT EXECUTE del estudio (item #2 operador) DEFINIDO y RUTEADO (7bd3ea4):** el operador creo el script
+**GRANT EXECUTE del estudio (item #2 operador) EJECUTADO Y VALIDADO (df34ec3) -- CERRADO por adelantado
+(<=14-jul):** el operador corrio el GRANT en DbsFinanciero_SANDBOX: 105 permisos en el rol
+budget_sandbox_verifier (15 EXECUTE procs Budget.* + 90 SELECT = 89 vistas + Security.Permission); guard
+DB_NAME() NOT LIKE '%SANDBOX%' anadido y PROBADO (aborto 51011 contra prod antes de otorgar); smoke OK;
+script sin secretos. CORRECCION de login: el harness usa nova_budget_verifier (NO nova_sandbox_verifier que
+sugeri; ya estaba en .env sellado) -> rutee la correccion a Codex (supersede el FYI previo). Historico:
+**GRANT EXECUTE del estudio DEFINIDO y RUTEADO (7bd3ea4):** el operador creo el script
 sandbox-grant-execute.sql (paquete fuente FUERA del hub, D:/Agentes/Ingenas/Budget/.../DATA/): rol
 budget_sandbox_verifier sobre DbsFinanciero_SANDBOX, superficie IDENTICA baseline/gobernado (15 EXEC procs +
 89 SELECT vistas + 1 dep Security.Permission) = no confound. Revision adversarial mia: diseno correcto
