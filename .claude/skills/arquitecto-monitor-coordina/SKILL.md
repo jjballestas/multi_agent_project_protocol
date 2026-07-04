@@ -24,8 +24,12 @@ description: >-
 entregas nuevas; emite SOLO actividad de peers -- **ignora los propios** commits (los del Arquitecto llevan
 `Co-Authored-By: Claude <modelo>` en el cuerpo; los de Codex/Analista NO). **IGNORA TODOS los modelos Claude
 (Opus AND Fable), no solo Opus** -- leccion dual-sesion 2026-07-03: la OTRA sesion Arquitecto puede correr en
-otro modelo (Fable 5) y su firma es `Claude Fable`; un self-filter solo-Opus reacciona a esa sesion. Asi re-armar
-NO se auto-dispara con tus commits ni con los de una sesion Arquitecto hermana:
+otro modelo (Fable 5) y su firma es `Claude Fable`; un self-filter solo-Opus reacciona a esa sesion. **IGNORA
+TAMBIEN al ASESOR** (leccion 2026-07-04): sus commits llevan `Co-Authored-By: asesor <asesor@nova.local>` (NO el
+trailer Claude) y/o subject `checkpoint(asesor)` -> sin filtrarlo, sus checkpoints frecuentes disparan ruido. El
+filtro cubre `Co-Authored-By: Claude (Opus|Fable)` OR `Co-Authored-By: asesor` OR subject `^checkpoint\(asesor\)`
+(por eso el grep lee `%s%n%b` = subject+body, no solo `%b`). Asi re-armar NO se auto-dispara con tus commits, ni
+con los de una sesion Arquitecto hermana, ni con los del asesor:
 ```bash
 cd /d/Agentes/multi_agent_project_protocol
 base=$(git rev-parse HEAD)
@@ -35,7 +39,8 @@ while true; do
   msg=""
   if [ "$cur" != "$base" ]; then
     for c in $(git rev-list --reverse ${base}..${cur} 2>/dev/null); do
-      if ! git log -1 "$c" --format='%b' 2>/dev/null | grep -qE "Co-Authored-By: Claude (Opus|Fable)"; then
+      body=$(git log -1 "$c" --format='%s%n%b' 2>/dev/null)
+      if ! echo "$body" | grep -qE "Co-Authored-By: Claude (Opus|Fable)|Co-Authored-By: asesor|^checkpoint\(asesor\)"; then
         msg="${msg}COMMIT $(git log -1 "$c" --oneline 2>/dev/null)
 "
       fi
