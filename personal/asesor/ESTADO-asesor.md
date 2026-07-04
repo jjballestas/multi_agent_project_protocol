@@ -76,18 +76,26 @@
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
   se quede sin inputs del operador.
 
-## >> MODO DEBATE TOTAL 2026-07-04 - TODO PAUSADO (nada aplicado; orden del operador)
-El operador declaro MODO DEBATE TOTAL: retire/pause TODAS las coordinaciones ruteadas esta sesion (FYI consolidado
-de pausa 39fd498; open/ limpio salvo el FYI de pausa + el FYI-asiento del Arquitecto). Verificado que el Arquitecto
-NO actuo (su ultimo commit = DECISION-0089/0090, anterior a mis rutas) -> NADA materializado. NO reanudar sin orden
-explicita del operador ("rutea/ejecuta esto"). Lo de abajo es MATERIAL DE DEBATE, no estado ejecutado:
-1. **ARRANQUE BUILD GOAL-P1 (RETIRADO):** activar Codex + repo NOVA/Nova-Budget + apuntar a NOVA-GOAL-001. Asiento =
-   HUB (DECISION-0088). Remoto que dio el operador: https://github.com/jjballestas/Nova-Budget.git (existe, VACIO).
-   Cuando se reanude: operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello. HOY PAUSADO.
-2. **SEMANTICA CHECKER GOAL-P1 (RETIRADO del mailbox):** mi ruling era B (baseline fiel, checker vivo = adversarial
-   informal, checker_formal=0; valor de A ya sellado en frontera P1 26-29 jul -> FRONTERA-FIX + ensayo en categoria
-   propia). El operador clico B en el panel del Arquitecto, PERO en modo debate total la DIRECTIVA de mailbox se
-   retiro; no reanudar el build sin orden. Correccion vigente: Analista-checker-FORMAL = solo tareas gobernadas post-30-jul.
+## >> DEBATE CERRADO - BUILD REANUDADO 2026-07-04 (orden explicita del operador: "a trabajar el goal")
+El operador cerro el debate y ORDENO: metodologia se mantiene + incluir la skill codegen + arrancar el goal hasta
+terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 39fd498). Estoy en modo COORDINAR
+(monitor activo). Esperando respuesta del Arquitecto: ruta repo + Codex activo + id tarea baseline + id tarea skill + confirm checker B.
+1. **METODOLOGIA AS-IS (decidido, sin cambio):** firmantes = Operador(dominio)/Arquitecto(arq+docs)/Codex(maker)/
+   Analista(security+QA checker). NO se separan roles en mas firmantes: los ~10 roles del GOAL colapsan sobre los 4
+   con ROL ACTIVO EXPLICITO por artefacto; maker!=checker DURO (Codex hace, Analista verifica; nunca auto-verificacion).
+2. **ARRANQUE BUILD GOAL-P1 (RUTEADO, reanudado):** activa Codex maker + repo Nova-Budget
+   (https://github.com/jjballestas/Nova-Budget.git existe VACIO; clon D:/Agentes/Zeus/NOVA/Nova-Budget, solo codigo)
+   + apunta a NOVA-GOAL-001 (P1 fundacion: NOVA.sln 7 proy + nova-web + health/OpenAPI/PD/correlation + arch-tests + CI).
+   Asiento=HUB (DECISION-0088). Luego operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello.
+3. **CHECKER GOAL-P1 = OPCION B (ruteado):** fila medida = Codex maker + adversarial informal + arch-tests/CI, checker_formal=0
+   (fiel al schema sellado). Escrutinio formal de P1 = frontera read-only 26-29 jul -> FRONTERA-FIX. Analista-checker-FORMAL
+   = solo gobernadas post-30-jul.
+4. **SKILL codegen-triage (APROBADA por operador, ruteada):** tarea gobernada Codex-maker/Analista-checker; 2 capas
+   (neutral codegen-vs-frontera + recetas instancia Nova); la usa Codex desde P1/P2. codegen!=peon (determinista, cero-tokens,
+   NO tratamiento; simetrico por par). Diseno en personal/asesor/DRAFT-skill-codegen-triage.md.
+5. **PENDIENTE PARA EL SELLO (NO sellado ahora):** clarificacion codegen!=peon en la def del brazo baseline = INPUT del
+   sello 08-jul; el operador la confirma al sellar. NO rutear su sello hasta entonces.
+6. **PEONES:** siguen POST-SELLO / F6 (DECISION-0078 + TASK-0231); no se dan de alta; herramienta bajo contrato. No ahora.
 3. **DOMINIO NOVA-BUDGET ABSORBIDO** (brief durable 042eb72, personal/asesor/NOVA-BUDGET-brief-dominio.md):
    cadena de gasto (Aprop->CDP->RP->OBL->Pago, 4 reglas de oro en procs SQL), Clean Arch .NET 10, NO green-field
    (BD endurecida + reconciliada al centavo; hibrido 2024-26 fiel / 2027 limpio), ~45-55% del build = superficies
