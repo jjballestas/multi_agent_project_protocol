@@ -5,7 +5,7 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 ## Latest Session Note
 
 - TASK-0245 remediation 1 delivered to `in_review` in protocol commit
-  `736a998 fix(TASK-0245): make skill loader gate reproducible`. It removes ignored local
+  `75fd96f fix(TASK-0245): make skill loader gate reproducible`. It removes ignored local
   `event-state.runtime.json` from `scripts/test_skills_loader.py` watched paths so the loader gate is
   reproducible from a clean clone, adds `Area_comun/handoffs/HANDOFF-TASK-0245-codex-to-arquitecto-2.md`,
   opens `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-remediation-1-in-review.md`,
