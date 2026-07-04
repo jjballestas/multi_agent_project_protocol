@@ -4,6 +4,18 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 remediation 1 delivery.
 
 ## Latest Session Note
 
+- TASK-0251 done-flip completed after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip`. Codex moved TASK-0251
+  `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0251-done-flip` via runtime seq
+  3962-3964, then moved the consumed ACTION to
+  `Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip.md`, opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-done-flip-done.md`, and released the
+  mailbox claim at seq 3966. Evidence: Nova-Budget `dotnet test NOVA.sln` PASS 23 tests with known NU1903
+  Microsoft.OpenApi warning, `npm test --prefix apps/nova-web` PASS 1 test, protocol encoding OK,
+  domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=3966`. Backlog noted from Arquitecto:
+  `Page` is not sent to the execution-report proc/gateway yet, only `page_size`, so real multi-page
+  navigation remains a separate non-blocking item. Unrelated protocol dirty paths and Nova-Budget untracked
+  `docs/documentacion-tecnica/` were left untouched.
 - TASK-0251 remediation 1 delivered after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-remediacion-1`. Product commit
   `9d9e744 fix: avoid duplicate execution report pagination` removes the second C# `Skip/Take` pass from

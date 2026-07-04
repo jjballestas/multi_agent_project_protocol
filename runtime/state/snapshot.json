@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "5e0f9e54f59d30ad0dba3609a92765c455f0417c1cf6c2820adb775c6fe30b33",
+  "canonical_hash": "7e5f248dd4a5e4378264ab70af6fd5c3e87cb3da179f07a89d9c94963f02f7c1",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1310,7 +1310,7 @@
       "TASK-0248": 20,
       "TASK-0249": 29,
       "TASK-0250": 20,
-      "TASK-0251": 23,
+      "TASK-0251": 28,
       "TASK-0252": 2,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
@@ -1319,7 +1319,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3290,
+    "events_applied": 3295,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2911,6 +2911,11 @@
       "codex:task0248:release-delivery:20260704": 3716,
       "codex:task0248:release-go-answer:20260704": 3718,
       "codex:task0248:release-main:20260704": 3715,
+      "codex:task0251:done-flip-claim-acquire": 3962,
+      "codex:task0251:done-flip-claim-release": 3964,
+      "codex:task0251:done-flip-mailbox-claim-acquire": 3965,
+      "codex:task0251:done-flip-mailbox-claim-release": 3966,
+      "codex:task0251:review-approved-to-done": 3963,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -4613,5 +4618,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3961
+  "up_to_seq": 3966
 }

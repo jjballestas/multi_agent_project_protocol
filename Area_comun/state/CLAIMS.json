@@ -17651,6 +17651,42 @@
             "updated_at": "2026-07-04T14:54:37Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-done-flip",
+            "expires_at": "2026-07-05T15:35:17Z",
+            "notes": "Implementer done-flip after Arquitecto review_approved ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0251",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0251",
+                "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T15:35:17Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:35:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-done-flip-mailbox",
+            "expires_at": "2026-07-05T15:36:27Z",
+            "notes": "Answer consumed TASK-0251 done-flip ACTION after ledger-backed done status.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-done-flip-mailbox",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-done-flip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T15:36:27Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:37:34Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0251-impl",
             "expires_at": "2026-07-04T15:30:34Z",
             "notes": "Normalize malformed TASK-0251 implementation claim scope.",
