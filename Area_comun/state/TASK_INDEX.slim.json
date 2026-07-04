@@ -22,7 +22,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "medium",
-            "status": "proposed",
+            "status": "ready",
             "title": "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)"
         },
         {

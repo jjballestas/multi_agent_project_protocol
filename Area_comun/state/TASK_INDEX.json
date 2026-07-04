@@ -3948,7 +3948,7 @@
                 "DECISION-0061"
             ],
             "reviewer": "Analista",
-            "status": "proposed",
+            "status": "ready",
             "title": "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)",
             "type": "feature"
         },
