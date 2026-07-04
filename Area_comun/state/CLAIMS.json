@@ -17699,6 +17699,39 @@
             "updated_at": "2026-07-04T14:56:18Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-remediation-1",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Normalized released TASK-0251 remediation 1 claim scope after malformed retry.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-remediation-1",
+                "Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-remediacion-1.md"
+            ],
+            "started_at": "2026-07-04T15:14:26Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:18:39Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-remediation-1-cleanup",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Cleanup properly scoped TASK-0251 remediation 1 delivery claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-remediation-1-cleanup",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-remediation-1",
+                "Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-remediacion-1.md"
+            ],
+            "started_at": "2026-07-04T15:15:48Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:15:48Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0251-validator-cleanup",
             "expires_at": "2026-07-04T15:59:50Z",
             "notes": "Fix TASK-0251 validator cleanup for consumed GO and malformed claim scope.",

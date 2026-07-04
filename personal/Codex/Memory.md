@@ -1,9 +1,21 @@
 # Codex Memory
 
-Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
+Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 remediation 1 delivery.
 
 ## Latest Session Note
 
+- TASK-0251 remediation 1 delivered after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-remediacion-1`. Product commit
+  `9d9e744 fix: avoid duplicate execution report pagination` removes the second C# `Skip/Take` pass from
+  `BudgetExecutionReportService` after `@page_size` is sent to `Budget.Get_Budget_Execution_Report`, and adds a
+  unit test with a page-size-limited gateway that catches the prior double-window behavior. Protocol commit
+  `29a3445 fix(TASK-0251): deliver pagination remediation` adds
+  `Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-2.md`, opens
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md`, moves the
+  consumed ACTION to answered, and releases remediation claims through runtime seq 3958. Evidence:
+  `dotnet test NOVA.sln` PASS 23 tests with known NU1903 Microsoft.OpenApi warning, `npm test --prefix apps/nova-web`
+  PASS 1 test, protocol encoding OK, domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=3958`.
+  Live DbsFinanciero parity remains pending because no credentials/EXECUTE verifier were available.
 - TASK-0251 delivered to `in_review`; protocol delivery commit `7bfdfcb coord(TASK-0251): deliver execution
   report`. Nova-Budget product commit `fa4ad82 feat: add budget execution report`
   implements `GET /api/budget/execution-report`, application query/service, contracts, production
