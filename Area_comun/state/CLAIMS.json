@@ -18317,6 +18317,21 @@
             "updated_at": "2026-07-04T14:38:54Z"
         },
         {
+            "claim_id": "CLAIM-20260704T151826Z-Arquitecto-TASK-0251-ratify",
+            "expires_at": "2026-07-04T15:48:26Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T151826Z-Arquitecto-TASK-0251-ratify",
+                "Area_comun/state/TASK_INDEX.json#TASK-0251",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0251",
+                "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md"
+            ],
+            "started_at": "2026-07-04T15:18:26Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:18:26Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

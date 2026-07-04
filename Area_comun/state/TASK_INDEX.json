@@ -4086,7 +4086,7 @@
                 "DECISION-0091"
             ],
             "reviewer": "adversarial-informal-sesion-separada",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado",
             "type": "feature"
         },

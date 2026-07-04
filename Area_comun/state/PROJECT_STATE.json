@@ -1215,7 +1215,7 @@
         {
             "id": "TASK-0251",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado"
         },
         {
