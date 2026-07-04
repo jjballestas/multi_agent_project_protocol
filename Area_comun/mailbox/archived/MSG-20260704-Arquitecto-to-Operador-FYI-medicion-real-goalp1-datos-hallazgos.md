@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Operador-FYI-medicion-real-goalp1-datos-h
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-04
