@@ -15,7 +15,7 @@ linked_decisions: [DECISION-0088, DECISION-0050, DECISION-0085, DECISION-0084]
 linked_reqs: []
 file: Area_comun/tasks/TASK-0247-nova-goalp1-fundacion-tecnica-nova-budget.md
 intake:
-  type: build
+  type: infra
   goal: Levantar la FUNDACION TECNICA de Nova-Budget (GOAL-P1, primer item del backlog NOVA-GOAL-001): el esqueleto gobernado y las barandas, sin verticales de negocio. Es el piloto de medicion del brazo BASELINE (excluido del contraste). Codigo en el repo propio Nova-Budget (fuera del hub, DECISION-0050); governance/coordinacion en el HUB durante la ventana del estudio (DECISION-0088). El contrato de build son los docs de D:/Agentes/Ingenas/Budget/02_Analysis/Arquitectura (NOVA_GOAL_Desarrollo_Aplicacion, NOVA_PROMPT_Arranque_Agente_Desarrollo, apendice .NET10).
   target_user: El equipo de desarrollo de Nova-Budget (agentes NOVA) y el Operador que opera/mide el piloto.
   acceptance:
