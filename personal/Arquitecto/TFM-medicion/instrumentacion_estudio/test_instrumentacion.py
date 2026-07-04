@@ -8,7 +8,7 @@ import tempfile
 import instrumentacion
 import study_metrics
 
-SCHEMA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "corpus", "medicion")
+SCHEMA_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 
 
 def read_rows(path):
@@ -69,7 +69,8 @@ def test_metrics_golden_and_q3_guard(tmp):
 
 
 def test_event_log_off_by_default_unchanged(tmp):
-    event_log = os.path.join(os.path.dirname(os.path.dirname(__file__)), "corpus", "runtime", "state", "events.jsonl")
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
+    event_log = os.path.join(repo_root, "runtime", "state", "events.jsonl")
     before = open(event_log, "rb").read()
     after = open(event_log, "rb").read()
     assert before == after

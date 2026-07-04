@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "856b1b9bcc6907a932c7c7875a3ba5d5b0c79276c53d59d517591f0023c1c38c",
+  "canonical_hash": "01b1f850de12c0d44ac8f721bef68df1a4679f3956755e8137b370dee5bc370e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1269,7 +1269,7 @@
       "TASK-0246": 11,
       "TASK-0247": 14,
       "TASK-0248": 20,
-      "TASK-0249": 15,
+      "TASK-0249": 17,
       "TASK-0250": 1,
       "TASK-0251": 1,
       "TASK-EXTRACT-1F5C13A7B5": 6,
@@ -1279,7 +1279,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3188,
+    "events_applied": 3190,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -4004,11 +4004,13 @@
       "intent:Codex:claim:6621ce1342d5b57926d37f1916067c6f851bf28134c18ce2704cd31ae77e230c": 796,
       "intent:Codex:claim:6691e2712e8f51c51241e1983c886cdfc58cd03d018da346264bbc1cc37083f5": 3379,
       "intent:Codex:claim:67377ef6f59cf97234fc8dc358883248ccd86316e3d8cd35410f5777af6f55f6": 3214,
+      "intent:Codex:claim:68aabb83a09ba6705f23bd358312e3831f827e82f1a1474b2dc7a33b55403f31": 3860,
       "intent:Codex:claim:68bbf3e975118973ab379d188b080da9f5a2b2cd22866c34348bbc4bfcaf162c": 897,
       "intent:Codex:claim:68c5cc027271c1337e2b8102682de30a29daf50f86a180d69c88e38d55520581": 2367,
       "intent:Codex:claim:68cfdc94d6ff307bbe0131bc73c586066c02c7ba127e66de1383a729dcbce83b": 2387,
       "intent:Codex:claim:68f5c047251147ba7ecf6a2966b3287d09fcf65d4137313cf0b920257b31962e": 3075,
       "intent:Codex:claim:6960d889cf41cb20a824e6f4350048098fe8babed84387689d3c74208a948716": 2004,
+      "intent:Codex:claim:6964b737a9be13b4830fd71cfc3a01b934eb927fcd6030e2e64a76a2843c2e4d": 3861,
       "intent:Codex:claim:6ada348828bb7c36ba9091389b9fad9815fa7ee009b36287ae8ab081efc402b8": 3134,
       "intent:Codex:claim:6aeb23534c6b08adedcc699866396d331a2d4fc1e3d8f3d88a8ca1adf52aa6dd": 3268,
       "intent:Codex:claim:6b80b6d8e89fce484d404c745be06e9a7ee38c8bed8fc5816ca66527e56d3d29": 2371,
@@ -4471,5 +4473,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3859
+  "up_to_seq": 3861
 }

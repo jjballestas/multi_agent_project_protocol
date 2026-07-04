@@ -17310,6 +17310,23 @@
             "updated_at": "2026-07-04T12:14:52Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-cleanclone-fix",
+            "expires_at": "2026-07-04T13:20:58Z",
+            "notes": "Add clean-clone fixtures and refresh TASK-0249 delivery evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-cleanclone-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0249-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-in-review.md",
+                "personal/Arquitecto/TFM-medicion/instrumentacion_estudio/",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-04T12:20:58Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:20:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0249-delivery",
             "expires_at": "2026-07-04T16:12:37Z",
             "notes": "Deliver TASK-0249 handoff and consume GO after ledger flip.",

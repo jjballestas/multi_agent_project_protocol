@@ -1,0 +1,14 @@
+{
+  "campos_apertura_obligatorios": ["tarea_id_origen", "fecha_descubrimiento", "taxonomia", "severidad", "detector", "clase"],
+  "columnas": [
+    {"n": "tarea_id_origen", "tipo": "str"},
+    {"n": "fecha_descubrimiento", "tipo": "date"},
+    {"n": "taxonomia", "tipo": "enum", "enum": ["D1", "D2", "D3", "D4"]},
+    {"n": "severidad", "tipo": "str"},
+    {"n": "detector", "tipo": "enum", "enum": ["gate_determinista", "adversarial_informal", "checker_formal", "operador_uso_real", "herencia_gobernada"]},
+    {"n": "paridad_detector", "tipo": "bool"},
+    {"n": "clase", "tipo": "enum", "enum": ["a", "b"]},
+    {"n": "dias_exposicion", "tipo": "int"},
+    {"n": "tareas_downstream_n", "tipo": "int"}
+  ]
+}
