@@ -17645,6 +17645,20 @@
             "updated_at": "2026-07-04T04:52:46Z"
         },
         {
+            "claim_id": "CLAIM-20260704T050716Z-Arquitecto-mailbox-higiene-4",
+            "expires_at": "2026-07-04T05:37:16Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T050716Z-Arquitecto-mailbox-higiene-4",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0245-done-flip-done.md"
+            ],
+            "started_at": "2026-07-04T05:07:16Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T05:07:16Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
