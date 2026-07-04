@@ -4,6 +4,27 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0250 delivered to `in_review` after fix-loop 1. Product commit
+  `f2be4e8 feat: add budget parameters read model` adds the Nova-Budget read model endpoints
+  `/api/budget/parameters/accounts`, `/funding-sources`, `/account-funding-sources`, `/investment-projects`, and
+  `/document-series`; DTOs and application gateway contracts; a production `SqlBudgetParametersGateway` over
+  canonical `Budget.vw_*` reads; ProblemDetails query validation; explicit document-series view-gap reporting; front
+  fetches for all five endpoint families with vigencia/is_active filters; and unit, integration, and architecture
+  coverage. Fix-loop 1 removed the in-memory production gateway and added the API-consuming UI after Arquitecto's
+  NO-GO `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-remediacion-1`. Evidence: clean-clone front pre-UI gate PASS at
+  `C:/Users/johnb/AppData/Local/Temp/nova-budget-clean-7bbd86a6670e4ffa9f43434b1dfb3bec`, `dotnet test NOVA.sln`
+  PASS 15 tests with known NU1903 Microsoft.OpenApi warning, `npm test --prefix apps/nova-web` PASS 1 test, and
+  API smoke on port 5088 PASS (`/healthz` 200, accounts 200 with `1101`, invalid fiscal_year_id 400) before SQL gateway replacement,
+  plus clean-clone post-fix front PASS at `C:/Users/johnb/AppData/Local/Temp/nova-budget-clean-17a50a83fe4c477e9d1ad0e63f47251c`. Protocol
+  moved TASK-0250 `ready -> in_progress -> in_review`, released Codex claims through runtime seq 3911, moved the
+  consumed Arquitecto GO to `Area_comun/mailbox/answered/`, added
+  `Area_comun/handoffs/HANDOFF-TASK-0250-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md`. Protocol delivery commit:
+  `fix(TASK-0250): remediate parameters read model`. Protocol gates passed: encoding OK,
+  domain-neutrality exit 0, validator OK, drift false at `up_to_seq=3913`. Live DbsFinanciero view
+  parity was not executed in this session; separate-session adversarial review must verify deployed `vw_*` objects.
+  Unrelated `.claude/settings.json`, peer/operator personal paths, protocol untracked sandbox task, and Nova-Budget
+  untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0249 done-flip completed in protocol commit `coord(TASK-0249): close done flip` after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip`. Codex moved TASK-0249
   `review_approved -> done` via runtime seq 3874, released Codex done-flip claims through seq 3882,

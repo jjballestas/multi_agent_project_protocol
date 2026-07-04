@@ -17471,6 +17471,101 @@
             "updated_at": "2026-07-04T12:52:32Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250",
+            "expires_at": "2026-07-04T19:48:04Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250",
+                "Area_comun/state/TASK_INDEX.json#TASK-0250",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0250",
+                "Area_comun/tasks/TASK-0250-p21-read-model-parametros.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Api/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Application/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Contracts/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Infrastructure/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/apps/nova-web/src/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/tests/"
+            ],
+            "started_at": "2026-07-04T13:48:04Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T13:48:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-answer-bom-fix",
+            "expires_at": "2026-07-04T14:59:23Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-answer-bom-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0250-p21-read-model.md"
+            ],
+            "started_at": "2026-07-04T13:59:23Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T13:59:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-answer-status-fix",
+            "expires_at": "2026-07-04T14:57:12Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-answer-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0250-p21-read-model.md"
+            ],
+            "started_at": "2026-07-04T13:57:12Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T13:57:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-delivery",
+            "expires_at": "2026-07-04T15:54:13Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0250-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0250-p21-read-model.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0250-p21-read-model.md"
+            ],
+            "started_at": "2026-07-04T13:54:13Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T13:54:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-product-hash-fix",
+            "expires_at": "2026-07-04T15:11:13Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-product-hash-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0250-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-04T14:11:13Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:11:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-remediation-delivery",
+            "expires_at": "2026-07-04T16:04:56Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-remediation-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0250-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-remediacion-1.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-04T14:04:56Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:04:56Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-nova-budget-front-harness-msg",
             "expires_at": "2026-07-05T00:00:00Z",
             "notes": "Deliver Nova-Budget front test harness foundation-completion message.",
