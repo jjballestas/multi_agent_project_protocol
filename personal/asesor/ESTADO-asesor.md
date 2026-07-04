@@ -76,16 +76,18 @@
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
   se quede sin inputs del operador.
 
-## >> HILOS DE LA SESION 2026-07-04 (todos RUTEADOS; esperando respuestas del Arquitecto)
-1. **ARRANQUE BUILD GOAL-P1** (d55cfc9, req_resp): ACTIVA Codex + repo NOVA/Nova-Budget + apunta a NOVA-GOAL-001
-   (fundacion tecnica, brazo baseline). Asiento = HUB (DECISION-0088, 512e35c). REMOTO CONFIRMADO por el operador:
-   https://github.com/jjballestas/Nova-Budget.git (existe, VACIO; ruteado FYI 19cd60a). Espero: ruta repo + Codex
-   activo + id tarea baseline. Luego operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello.
-2. **SEMANTICA CHECKER GOAL-P1 = OPCION B** (fe83c84, resuelto): el Arquitecto cazo conflicto real (schema sellado
-   baseline=>checker_formal=0 vs mi fraseo Analista-checker). Ruling: B (baseline fiel, checker vivo = adversarial
-   informal, checker_formal=0). El valor de A ya esta sellado: frontera P1 read-only 26-29 jul -> FRONTERA-FIX +
-   ensayo de maquinaria gobernada en categoria propia fuera de Q1. Corregi mi DIRECTIVA (Analista-checker-FORMAL =
-   solo tareas gobernadas post-30-jul). Operador clico B en el panel del Arquitecto.
+## >> MODO DEBATE TOTAL 2026-07-04 - TODO PAUSADO (nada aplicado; orden del operador)
+El operador declaro MODO DEBATE TOTAL: retire/pause TODAS las coordinaciones ruteadas esta sesion (FYI consolidado
+de pausa 39fd498; open/ limpio salvo el FYI de pausa + el FYI-asiento del Arquitecto). Verificado que el Arquitecto
+NO actuo (su ultimo commit = DECISION-0089/0090, anterior a mis rutas) -> NADA materializado. NO reanudar sin orden
+explicita del operador ("rutea/ejecuta esto"). Lo de abajo es MATERIAL DE DEBATE, no estado ejecutado:
+1. **ARRANQUE BUILD GOAL-P1 (RETIRADO):** activar Codex + repo NOVA/Nova-Budget + apuntar a NOVA-GOAL-001. Asiento =
+   HUB (DECISION-0088). Remoto que dio el operador: https://github.com/jjballestas/Nova-Budget.git (existe, VACIO).
+   Cuando se reanude: operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello. HOY PAUSADO.
+2. **SEMANTICA CHECKER GOAL-P1 (RETIRADO del mailbox):** mi ruling era B (baseline fiel, checker vivo = adversarial
+   informal, checker_formal=0; valor de A ya sellado en frontera P1 26-29 jul -> FRONTERA-FIX + ensayo en categoria
+   propia). El operador clico B en el panel del Arquitecto, PERO en modo debate total la DIRECTIVA de mailbox se
+   retiro; no reanudar el build sin orden. Correccion vigente: Analista-checker-FORMAL = solo tareas gobernadas post-30-jul.
 3. **DOMINIO NOVA-BUDGET ABSORBIDO** (brief durable 042eb72, personal/asesor/NOVA-BUDGET-brief-dominio.md):
    cadena de gasto (Aprop->CDP->RP->OBL->Pago, 4 reglas de oro en procs SQL), Clean Arch .NET 10, NO green-field
    (BD endurecida + reconciliada al centavo; hibrido 2024-26 fiel / 2027 limpio), ~45-55% del build = superficies
