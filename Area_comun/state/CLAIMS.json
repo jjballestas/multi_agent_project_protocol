@@ -17026,6 +17026,22 @@
             "updated_at": "2026-07-04T01:29:05Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-product-hash-fix",
+            "expires_at": "2026-07-04T03:01:15Z",
+            "notes": "Refresh TASK-0248 delivery references after product commit amend for exact trailers.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-product-hash-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0248-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0248-remediation-1-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-04T02:01:15Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T02:01:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0248-remediation-1",
             "expires_at": "2026-07-04T05:53:36Z",
             "notes": "Remediate TASK-0248 Analista NO-GO findings F-0248-01..03.",

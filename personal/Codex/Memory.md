@@ -5,7 +5,7 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 ## Latest Session Note
 
 - TASK-0248 remediation fix-loop 1 delivered to `in_review`. Product commit
-  `4ea8271 fix: add Nova web test gate` adds `npm test` for `apps/nova-web` via typecheck and passes in a
+  `af790be fix: add Nova web test gate` adds `npm test` for `apps/nova-web` via typecheck and passes in a
   clean local clone after `npm install --prefix apps/nova-web`. Protocol commit
   `ce1a549 fix(TASK-0248): remediate codegen triage findings` registers neutral `codegen-triage` in
   `skills/skills.config.json` at `skills/codegen-triage.skill.md`, aligns the output shape to
