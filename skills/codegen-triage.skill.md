@@ -1,11 +1,8 @@
 ---
-name: codegen-triage
-description: >-
-  Decide, before implementation, whether a requested change may be produced by
-  deterministic generation or must be written by the accountable signer at the
-  boundary. Use for scaffolding, templates, repeated artifacts, contract-driven
-  clients, mechanical mapping, and any task where the maker is considering
-  generated output.
+skill_id: codegen-triage
+title: Codegen triage
+version: 0.1.0
+neutral_core: true
 ---
 
 # Codegen Triage

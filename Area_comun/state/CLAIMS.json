@@ -16967,6 +16967,35 @@
             "updated_at": "2026-07-04T01:21:05Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-answer-action-1",
+            "expires_at": "2026-07-04T02:56:54Z",
+            "notes": "Move consumed TASK-0248 remediation ACTION to answered after delivery ledger.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-answer-action-1",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-remediacion-1.md"
+            ],
+            "started_at": "2026-07-04T01:56:54Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:56:54Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-answer-status-fix",
+            "expires_at": "2026-07-04T02:57:51Z",
+            "notes": "Fix answered folder message status after consuming TASK-0248 ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-answer-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-remediacion-1.md"
+            ],
+            "started_at": "2026-07-04T01:57:51Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:57:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0248-delivery",
             "expires_at": "2026-07-05T23:59:59Z",
             "notes": "Register TASK-0248 delivery handoff and mailbox message.",
@@ -16995,6 +17024,31 @@
             "status": "released",
             "task_id": "TASK-0248",
             "updated_at": "2026-07-04T01:29:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-remediation-1",
+            "expires_at": "2026-07-04T05:53:36Z",
+            "notes": "Remediate TASK-0248 Analista NO-GO findings F-0248-01..03.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0248",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0248",
+                "Area_comun/tasks/TASK-0248-skill-codegen-triage.md",
+                "skills/skills.config.json",
+                "skills/codegen-triage.skill.md",
+                ".claude/skills/codegen-triage/SKILL.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0248-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0248-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-remediacion-1.md",
+                "personal/Codex/Memory.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/"
+            ],
+            "started_at": "2026-07-04T01:53:36Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:53:36Z"
         },
         {
             "claim_id": "CLAIM-20260704-archive-3-directivas-arquitecto",
