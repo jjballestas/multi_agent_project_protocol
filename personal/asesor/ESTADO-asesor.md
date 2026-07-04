@@ -112,6 +112,12 @@ terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 
 5. **PENDIENTE PARA EL SELLO (NO sellado ahora):** clarificacion codegen!=peon en la def del brazo baseline = INPUT del
    sello 08-jul; el operador la confirma al sellar. NO rutear su sello hasta entonces.
 6. **PEONES:** siguen POST-SELLO / F6 (DECISION-0078 + TASK-0231); no se dan de alta; herramienta bajo contrato. No ahora.
+8. **SPECs P2 ENTREGADAS Y VERIFICADAS (b3607910):** el Arquitecto entrego 4 SPECs P2 (P2-001 reporte ejecucion
+   spec_prepagado/PAR-D anclado, P2-002 parametros, P2-003 UI shell, P2-004 Get_*_List BR-C3). Verifique study-integrity:
+   FIELES + con los 3 hallazgos del piloto horneados -> adversarial-separado (SESION SEPARADA, contexto limpio, dev!=
+   adversarial, tokens_adversarial_informal taggeados; en tabla de riesgos como DoR), checker_formal=0, spec_prepagado,
+   correlation+task_id, y mi deuda GOAL-P1 (harness test del front) como BLOQUEANTE del front P2. Son PREP post-sello (dev
+   medido de P2 NO abre pre-sello). Iran a review del Analista. Sin gap que rutear.
 7. **DIRECTIVA PERMANENTE "Arquitecto no idle" (1c33540):** mantener la cola del Arquitecto llena. Ruteada cola: (1)
    arranque+registro GOAL-P1+skill; (2) coordinar+gatear P1 con Codex + cerrar fila-piloto; (3) prep/ensayo del sello
    08-jul (manifiesto corpus + sha256 + dry-run submit_intent + validar schema v1.0); (4) preparar SPECs P2.1/P2.2
