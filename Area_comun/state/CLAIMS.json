@@ -17561,6 +17561,38 @@
             "updated_at": "2026-07-04T04:48:12Z"
         },
         {
+            "claim_id": "CLAIM-20260704T045246Z-Arquitecto-mailbox-higiene-3",
+            "expires_at": "2026-07-04T05:22:46Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T045246Z-Arquitecto-mailbox-higiene-3",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-2-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-2-OK.md",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-skill-watchdogs-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-skill-watchdogs-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-rejuicio-1.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-rejuicio-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-rejuicio-2.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-rejuicio-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-skill-watchdogs.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0245-skill-watchdogs.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Operador-FYI-cierre-turno-sello-tarea0245.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Operador-FYI-cierre-turno-sello-tarea0245.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0245-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-remediation-1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0245-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-profundiza-cola-sello-e-infra.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-profundiza-cola-sello-e-infra.md"
+            ],
+            "started_at": "2026-07-04T04:52:46Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T04:52:46Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
