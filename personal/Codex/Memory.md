@@ -4,6 +4,20 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0248 remediation fix-loop 1 delivered to `in_review`. Product commit
+  `4ea8271 fix: add Nova web test gate` adds `npm test` for `apps/nova-web` via typecheck and passes in a
+  clean local clone after `npm install --prefix apps/nova-web`. Protocol commit
+  `ce1a549 fix(TASK-0248): remediate codegen triage findings` registers neutral `codegen-triage` in
+  `skills/skills.config.json` at `skills/codegen-triage.skill.md`, aligns the output shape to
+  `{camino, razon, gate, banderas}`, adds handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0248-codex-to-arquitecto-2.md`, opens
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0248-remediation-1-in-review.md`, moves the
+  consumed Arquitecto ACTION to `Area_comun/mailbox/answered/`, returns TASK-0248 to `in_review`, and releases
+  Codex claims through runtime seq 3726. Evidence: skills loader cases PASS, custom loader probe enabling only
+  codegen-triage PASS, Nova-Budget `npm test` PASS, clean clone `npm install` + `npm test` PASS, `dotnet build
+  NOVA.sln` PASS with known NU1903 Microsoft.OpenApi warning, `dotnet test NOVA.sln` PASS 9 tests with same
+  warning after rerun, protocol encoding OK, domain-neutrality exit 0, validator OK with unrelated FYI warnings,
+  and drift false / byte-identical at `up_to_seq=3726`. Unrelated dirty paths were left untouched.
 - TASK-0248 delivered to `in_review`. Protocol commit
   `407905e feat(TASK-0248): deliver codegen triage skill` adds neutral skill
   `.claude/skills/codegen-triage/SKILL.md`, handoff
