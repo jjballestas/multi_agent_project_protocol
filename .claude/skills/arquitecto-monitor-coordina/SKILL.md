@@ -23,11 +23,13 @@ description: >-
 `Monitor` tool, `persistent:false`, `timeout_ms:3600000` (1h; menos re-arms en vacio). Vigila el **HEAD local** y las
 entregas nuevas; emite SOLO actividad de peers -- **ignora los propios** commits (los del Arquitecto llevan
 `Co-Authored-By: Claude <modelo>` en el cuerpo; los de Codex/Analista NO). **IGNORA TODOS los modelos Claude
-(Opus AND Fable), no solo Opus** -- leccion dual-sesion 2026-07-03: la OTRA sesion Arquitecto puede correr en
-otro modelo (Fable 5) y su firma es `Claude Fable`; un self-filter solo-Opus reacciona a esa sesion. **IGNORA
+(Opus AND Fable AND Sonnet), no solo Opus** -- leccion dual-sesion 2026-07-03: la OTRA sesion Arquitecto puede
+correr en otro modelo (Fable 5) y su firma es `Claude Fable`; un self-filter solo-Opus reacciona a esa sesion.
+Ampliado 2026-07-04: una sesion en Sonnet 5 firma `Claude Sonnet 5`, y el filtro viejo (solo Opus|Fable) SI
+disparaba con los propios commits de esa sesion (falso positivo verificado). **IGNORA
 TAMBIEN al ASESOR** (leccion 2026-07-04): sus commits llevan `Co-Authored-By: asesor <asesor@nova.local>` (NO el
 trailer Claude) y/o subject `checkpoint(asesor)` -> sin filtrarlo, sus checkpoints frecuentes disparan ruido. El
-filtro cubre `Co-Authored-By: Claude (Opus|Fable)` OR `Co-Authored-By: asesor` OR subject `^checkpoint\(asesor\)`
+filtro cubre `Co-Authored-By: Claude (Opus|Fable|Sonnet)` OR `Co-Authored-By: asesor` OR subject `^checkpoint\(asesor\)`
 (por eso el grep lee `%s%n%b` = subject+body, no solo `%b`). Asi re-armar NO se auto-dispara con tus commits, ni
 con los de una sesion Arquitecto hermana, ni con los del asesor:
 ```bash
@@ -40,7 +42,7 @@ while true; do
   if [ "$cur" != "$base" ]; then
     for c in $(git rev-list --reverse ${base}..${cur} 2>/dev/null); do
       body=$(git log -1 "$c" --format='%s%n%b' 2>/dev/null)
-      if ! echo "$body" | grep -qE "Co-Authored-By: Claude (Opus|Fable)|Co-Authored-By: asesor|^checkpoint\(asesor\)"; then
+      if ! echo "$body" | grep -qE "Co-Authored-By: Claude (Opus|Fable|Sonnet)|Co-Authored-By: asesor|^checkpoint\(asesor\)"; then
         msg="${msg}COMMIT $(git log -1 "$c" --oneline 2>/dev/null)
 "
       fi
