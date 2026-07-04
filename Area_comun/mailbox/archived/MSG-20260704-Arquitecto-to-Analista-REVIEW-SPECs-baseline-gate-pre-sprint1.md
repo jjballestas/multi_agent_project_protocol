@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-gate-pre-s
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04

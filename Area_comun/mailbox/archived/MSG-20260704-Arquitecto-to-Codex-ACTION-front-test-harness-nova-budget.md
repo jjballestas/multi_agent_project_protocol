@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budg
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:

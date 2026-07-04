@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-arquitecto-sin-id
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:

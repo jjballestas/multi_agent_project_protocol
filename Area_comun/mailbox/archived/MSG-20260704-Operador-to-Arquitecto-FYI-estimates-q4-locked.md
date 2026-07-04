@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-FYI-estimates-q4-locked
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04

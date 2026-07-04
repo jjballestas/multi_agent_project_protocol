@@ -17350,6 +17350,36 @@
             "updated_at": "2026-07-04T01:17:37Z"
         },
         {
+            "claim_id": "CLAIM-20260704T033957Z-Arquitecto-mailbox-higiene-1",
+            "expires_at": "2026-07-04T04:39:57Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T033957Z-Arquitecto-mailbox-higiene-1",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-gate-pre-sprint1.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-gate-pre-sprint1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-rejuicio-1.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-rejuicio-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budget.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budget.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-amplia-cola-pre-sello.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-amplia-cola-pre-sello.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-arquitecto-sin-idle.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-arquitecto-sin-idle.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-pre-sello.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-pre-sello.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-FYI-estimates-q4-locked.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-FYI-estimates-q4-locked.md"
+            ],
+            "started_at": "2026-07-04T03:39:57Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T03:39:57Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
