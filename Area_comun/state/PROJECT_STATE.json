@@ -1203,7 +1203,7 @@
         {
             "id": "TASK-0249",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)"
         },
         {

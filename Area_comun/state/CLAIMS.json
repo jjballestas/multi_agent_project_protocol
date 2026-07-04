@@ -17279,6 +17279,83 @@
             "updated_at": "2026-07-04T01:53:36Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249",
+            "expires_at": "2026-07-04T20:07:34Z",
+            "notes": "Implement TASK-0249 F3.3 instrumentation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249",
+                "Area_comun/state/TASK_INDEX.json#TASK-0249",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0249",
+                "Area_comun/tasks/TASK-0249-f33-instrumentacion-medicion-estudio.md",
+                "personal/Arquitecto/TFM-medicion/"
+            ],
+            "started_at": "2026-07-04T12:07:34Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:07:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-answered-status",
+            "expires_at": "2026-07-04T13:14:52Z",
+            "notes": "Set consumed GO status to answered after move.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-answered-status",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md"
+            ],
+            "started_at": "2026-07-04T12:14:52Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:14:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-delivery",
+            "expires_at": "2026-07-04T16:12:37Z",
+            "notes": "Deliver TASK-0249 handoff and consume GO after ledger flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0249-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md"
+            ],
+            "started_at": "2026-07-04T12:12:37Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:12:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-encoding-fix",
+            "expires_at": "2026-07-04T13:15:51Z",
+            "notes": "Fix answered GO ASCII encoding.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-encoding-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md"
+            ],
+            "started_at": "2026-07-04T12:15:51Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:15:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-go-answer",
+            "expires_at": "2026-07-04T13:13:49Z",
+            "notes": "Move consumed TASK-0249 GO to answered after in_review ledger flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-go-answer",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0249-f33-instrumentacion.md"
+            ],
+            "started_at": "2026-07-04T12:13:49Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:13:49Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-nova-budget-front-harness-msg",
             "expires_at": "2026-07-05T00:00:00Z",
             "notes": "Deliver Nova-Budget front test harness foundation-completion message.",
