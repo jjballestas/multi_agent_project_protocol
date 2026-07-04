@@ -2,11 +2,12 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-04 (sesion de arranque de build; DIRECTIVA de arranque de GOAL-P1 RUTEADA
-> al Arquitecto -commit d55cfc9-; DECISION-0088 ya REGISTRADA por el Arquitecto -512e35c- formaliza el asiento
-> escalonado hub/Aegis. Base previa: NOVA-DEV gate-atestado e2e, DD baseline OK, piloto de medicion validado
-> -smoke-, DECISION-0087 nombres Aegis, estimates Q4 resueltos). AHORA: reactivo, esperando confirmacion del
-> Arquitecto (repo Nova-Budget + Codex activo + tarea baseline -> NOVA-GOAL-001) y el build real para cosechar medicion.
+> Ultima actualizacion: 2026-07-04 ~06:30Z (FIN DE SESION DE BUILD -- ver seccion ">> FIN DE SESION"). Se
+> construyo Nova-Budget de cero: GOAL-P1 (construido+medido+atestado+ratificado sha256 d2a13216) + skill
+> codegen-triage (viva) + 14 SPECs baseline ATESTADO + sandbox mutadores construido+sellado (P4.x READY) +
+> estimates Q4 LOCKED + TASK-0245 (watchdogs->skill) APROBADA. SELLO ETAPA 1 = 100% PRE-ARMADO (falta solo la
+> semilla NIST + atestacion el 08-jul). BUILD+PREP COMPLETO. PROXIMO EVENTO REAL: sello 08-jul. AHORA: watch;
+> pendiente la decision del operador sobre stand-down del Arquitecto (mi recomendacion: parar hasta el sello).
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
@@ -83,7 +84,7 @@ post-sello; tooling Vite/dotnet-new SI se uso en scaffold) + 14 SPECs (P2/P3/P4/
 Analista rejuicio-2) + sandbox mutadores (construido por operador + sellado, RESET verificado, P4.x READY) +
 estimates Q4 LOCKED (6M+4S). SELLO ETAPA 1 = 100% PRE-ARMADO: manifiesto+sha256, s.5 Q4 existencia, s.6.1
 sorteo PRE-COMMIT (par_ids+estimates+algoritmo+T=commit cbc1ee2 2026-07-04T03:52:25Z), s.11.1 calendario;
-FALTA SOLO la semilla NIST posterior a T + atestacion sha256 el 08-jul. TASK-0245 (watchdogs->skill neutral exportable) APROBADA por Analista (fix-loop 2 iters, sin escalar) -> deepened cola 100%% COMPLETA.
+FALTA SOLO la semilla NIST posterior a T + atestacion sha256 el 08-jul. TASK-0245 (watchdogs->skill neutral exportable) APROBADA por Analista (fix-loop 2 iters, sin escalar) -> deepened cola 100pct COMPLETA.
 PENDIENTE OPERADOR: (a) ratificar el reporte humano (REPORT-20260704-...-ciclo.md; lo revise: EXACTO, con hora;
 sugerencia menor opcional = anadir frase de delimitacion explicita 'infra+piloto, no resultados de estudio, GOAL-P1
 excluido del contraste'); (b) P3(c) pre-diseno cross-atestacion+i18n = relleno, no bloquea. PROXIMO EVENTO REAL:
