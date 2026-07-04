@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 remediation 1 delivery.
+Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
 
 ## Latest Session Note
 
@@ -10,7 +10,8 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 remediation 1 delivery.
   3962-3964, then moved the consumed ACTION to
   `Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip.md`, opened
   `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-done-flip-done.md`, and released the
-  mailbox claim at seq 3966. Evidence: Nova-Budget `dotnet test NOVA.sln` PASS 23 tests with known NU1903
+  mailbox claim at seq 3966. Protocol commit: `71b88e8 coord(TASK-0251): close done flip`. Evidence:
+  Nova-Budget `dotnet test NOVA.sln` PASS 23 tests with known NU1903
   Microsoft.OpenApi warning, `npm test --prefix apps/nova-web` PASS 1 test, protocol encoding OK,
   domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=3966`. Backlog noted from Arquitecto:
   `Page` is not sent to the execution-report proc/gateway yet, only `page_size`, so real multi-page
