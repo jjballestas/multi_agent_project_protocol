@@ -5,7 +5,239 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-03 (TASK-0234 re-juicio 2/2 OK/CERRABLE).
+> Ultima actualizacion: 2026-07-04 (TASK-0245 re-juicio 1 session-watchdogs CAMBIO-REQUERIDO).
+
+## Ultima actualizacion 2026-07-04 - TASK-0245 re-juicio 1 session-watchdogs CAMBIO-REQUERIDO
+- TASK-0245 re-juicio 1 de F-0245-01: F-0245-01 queda CERRADO por comportamiento en clon limpio, pero
+  mantuve CAMBIO-REQUERIDO / NO CERRABLE bajo el contrato de ejecucion porque el gate producto obligatorio
+  no queda canonico/verde. Veredicto en commit `a1b944d` (`review(TASK-0245): Analista blocks watchdog
+  regate`), artefacto `Area_comun/artifacts/ANALISTA-TASK-0245-skill-watchdogs-rejuicio-1-veredicto.md`,
+  MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-1-NOGO.md`.
+  Ancla protocolo REVIEW `d5f22eb`; remediacion `75fd96f`; HEAD limpio pedido `7a5dfe7`.
+- Resultado hub: `python scripts/test_skills_loader.py` EXIT 0 en clon limpio; `examples/skills_loader_cases`
+  EXIT 0 con AC7; probe propia habilitando solo `session-watchdogs` EXIT 0; `new_instance` + loader probe
+  EXIT 0; validate/encoding/domain EXIT 0; drift false `up_to_seq=3804`; `protocol.config.json`
+  byte-identico contra `75fd96f`, `7a5dfe7`, `d5f22eb`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Bloqueo remanente: la orden de ejecucion exigia Nova-Budget checkout del commit citado + `npm test` en raiz
+  gateado por EXIT; no habia commit de producto citado, y el control en clon limpio sobre HEAD local
+  `e3a03a8cf3334c2a84bf54e964319dd08b953b45` dio EXIT `-4058` por ausencia de `package.json`.
+  `apps/nova-web` si paso `npm ci` + `npm test` (1/1), pero no lo trate como sustituto canonico sin instruccion
+  corregida. Fix-loop: Arquitecto corrige gate/ancla producto o declara explicitamente alcance sin producto
+  raiz; re-juicio 2 antes de cierre.
+
+## Ultima actualizacion 2026-07-04 - TASK-0245 session-watchdogs CAMBIO-REQUERIDO
+- TASK-0245 review formal de skill neutral exportable `session-watchdogs`: CAMBIO-REQUERIDO / NO CERRABLE.
+  Veredicto canonico en commit `28532b0` (`review(TASK-0245): Analista blocks watchdog skill gate`),
+  artefacto `Area_comun/artifacts/ANALISTA-TASK-0245-skill-watchdogs-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-skill-watchdogs-NOGO.md`.
+  Ancla protocolo REVIEW `984361d`; implementacion citada `6a1cd56`; no hubo producto citable por instruccion
+  canonica (alcance hub `skills/`, `scripts/new_instance.py`, `examples/`).
+- Resultado: skill, registro off-by-default, parametrizacion sin literales del dogfooding, export via
+  `new_instance`, loader probe en instancia generada y `examples/skills_loader_cases` PASAN. Bloqueo:
+  `python scripts/test_skills_loader.py` en clon limpio sale EXIT 1 por `event-state.runtime.json` ausente,
+  aunque el handoff lo declaro PASS.
+- Gates: validate/encoding/domain clean clone EXIT 0; examples/skills_loader_cases EXIT 0; new_instance+loader
+  probe EXIT 0; drift false `up_to_seq=3794`; chain valid `checked_events=3122`; `protocol.config.json`
+  byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop:
+  hacer reproducible el gate de loader o acotarlo canonicamente y pedir re-juicio.
+
+## Ultima actualizacion 2026-07-04 - TASK-0246 baseline SPECs re-juicio 2 OK/CERRABLE
+- TASK-0246 re-juicio 2 de baseline de 14 SPECs NOVA: OK/CERRABLE con alcance canonico 100% documental.
+  Veredicto canonico en commit `a8b5eb7` (`review(TASK-0246): Analista OK specs baseline regate 2`),
+  artefacto `Area_comun/artifacts/ANALISTA-TASK-0246-specs-baseline-rejuicio-2-veredicto.md`, MSG rr a
+  Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-2-OK.md`.
+  Ancla protocolo revisada `1ec4582`; instruccion REVIEW `e328524`; remediacion documental `386dca7`.
+- Resultado: 14 SPECs, `cache-confound`, sandbox P4-004 (`sandbox`, `14-jul`, `<=14-jul`),
+  q4_membership, correlation+task_id y checker_formal=0 PASAN. No ejecute gate de producto porque la
+  instruccion canonica corregida declara alcance documental y no cita commit de Nova-Budget.
+- Gates: validate vivo EXIT 0; validate/encoding/domain secretless clean clone EXIT 0; scan_domain_neutrality
+  EXIT 0; scan_encoding EXIT 0; drift false `up_to_seq=3774`; chain valid `checked_events=3102`;
+  `protocol.config.json` byte-identico contra `386dca7`, `e328524` y `2098e96`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Residual: producto Nova-Budget y BD quedan fuera de este cierre; si se requieren, deben ir en hilo separado
+  con commit/gate canonico citable.
+
+## Ultima actualizacion 2026-07-04 - TASK-0246 baseline SPECs re-juicio 1 CAMBIO-REQUERIDO
+- TASK-0246 re-juicio 1 de baseline de 14 SPECs NOVA: CAMBIO-REQUERIDO / NO CERRABLE por gate producto
+  no cerrable. Veredicto canonico en commit `c909a6d` (`review(TASK-0246): Analista blocks specs baseline
+  regate`), artefacto `Area_comun/artifacts/ANALISTA-TASK-0246-specs-baseline-rejuicio-1-veredicto.md`,
+  MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-1-NOGO.md`.
+  Ancla protocolo/instruccion `2098e96`; remediacion specs `386dca7`; producto no citado por la instruccion,
+  control en clon limpio con HEAD local `e3a03a8cf3334c2a84bf54e964319dd08b953b45`.
+- Resultado documental: F-0246-BG-01 cache-confound PASA en las 14 SPECs (`missing_cache=[]`);
+  F-0246-BG-02 PASA en P4-004 (`sandbox`, `14-jul`, `<=14-jul` presentes); q4_membership, correlation,
+  task_id y checker_formal=0 presentes en la familia.
+- Gates: validate vivo EXIT 0; validate/encoding/domain secretless clean clone EXIT 0; scan_domain_neutrality
+  EXIT 0; scan_encoding EXIT 0; drift false `up_to_seq=3763`; chain valid `checked_events=3091`;
+  `protocol.config.json` byte-identico contra `386dca7` y `2098e96`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Bloqueo: la orden de ejecucion exigia clonar Nova-Budget, checkout del commit citado y correr `npm test`
+  gateando por EXIT; no habia commit de producto citado, y `npm test` en raiz del clon limpio `e3a03a8` salio
+  EXIT `-4058` por ausencia de `package.json`. `apps/nova-web` si paso `npm ci` + `npm test` (1/1), pero no
+  lo trate como sustituto canonico sin instruccion corregida. Fix-loop: Arquitecto corrige gate/ancla producto
+  o agrega root `package.json`; re-juicio antes de cierre.
+
+## Ultima actualizacion 2026-07-04 - TASK-0246 baseline SPECs pre-Sprint 1 CAMBIO-REQUERIDO
+- TASK-0246 gate baseline de 14 SPECs NOVA pre-Sprint 1: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto canonico
+  en commit `a43c189` (`review(TASK-0246): Analista blocks specs baseline`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-specs-baseline-pre-sprint1-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-NOGO.md`.
+  Ancla protocolo revisada `45ab4fc`; instruccion REVIEW `673c259`.
+- Gates: validate vivo EXIT 0; validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0;
+  scan_encoding EXIT 0; drift false `up_to_seq=3763`; chain valid `checked_events=3091`;
+  `protocol.config.json` byte-identico contra `673c259` y `45ab4fc`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Producto Nova-Budget: la instruccion no cito commit de producto; probe de control en clon limpio uso HEAD local
+  `e3a03a8cf3334c2a84bf54e964319dd08b953b45`. `npm test` raiz EXIT -4058 por falta de `package.json`;
+  `apps/nova-web/npm test` antes de deps EXIT 1 por `tsc` ausente; `apps/nova-web/npm ci` EXIT 0 y `npm test`
+  posterior EXIT 0 (1/1).
+- Resultado: conteo 14 SPECs, formato NOVA-SPEC-T-001, q4_membership, citas BD plausibles/F-NOVA-01, aislamiento
+  y neutralidad pasan. Bloqueantes: F-0246-BG-01 `cache-confound` falta en P2-003, P2-004, P3-001..005, P4-004
+  y P6-003; F-0246-BG-02 P4-004 no declara `sandbox<=14-jul` aunque es mutador P4.x. Residual: `deuda front`
+  no aparece textual en las 14 SPECs, declarado como riesgo no bloqueante salvo que Arquitecto lo quiera por SPEC.
+
+## Ultima actualizacion 2026-07-04 - TASK-0248 re-juicio 2 OK/CERRABLE
+- TASK-0248 re-juicio 2 con gate producto corregido por Arquitecto: OK/CERRABLE. Veredicto canonico en commit
+  `c175b66` (`review(TASK-0248): Analista OK codegen triage regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0248-codegen-triage-rejuicio-2-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0248-rejuicio-2-OK.md`.
+  Ancla protocolo/instruccion `543b09c`; remediacion protocolo `ce1a549`; producto canonico de instruccion
+  `4ea82711e3c5354c2f126cfdff225226de6211c9`.
+- Gates: validate vivo EXIT 0; validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0;
+  scan_encoding EXIT 0; skills_loader_cases EXIT 0; test_skills_loader EXIT 0; probe propio loader/contrato
+  EXIT 0; drift false `up_to_seq=3749`; chain valid `checked_events=3077`; `protocol.config.json` sin diff
+  contra `543b09c`, sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Producto Nova-Budget en clon limpio checkout `4ea8271`: `dotnet build NOVA.sln` EXIT 0; `dotnet test
+  NOVA.sln --no-build` EXIT 0 (9/9); `apps/nova-web/npm ci` EXIT 0; `apps/nova-web/npm test` EXIT 0. El
+  `npm test` en raiz queda fuera del gate canonico corregido porque no hay `package.json` raiz por diseno.
+- Resultado: F-0248-01 loader gobernado PASA; F-0248-02 contrato `{camino, razon, gate, banderas}` y familia
+  de banderas PASA; F-0248-03 producto PASA con gate corregido. Residuales no bloqueantes: warning NU1903 de
+  `Microsoft.OpenApi`; handoff citaba `af790be` pero instruccion canonica cita `4ea8271`.
+
+## Ultima actualizacion 2026-07-04 - TASK-0248 re-juicio 1 CAMBIO-REQUERIDO
+- TASK-0248 fix-loop 1/2 codegen-triage: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto canonico en commit
+  `be69bfd` (`review(TASK-0248): Analista blocks codegen triage regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0248-codegen-triage-rejuicio-1-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0248-rejuicio-1-NOGO.md`.
+  Ancla protocolo/instruccion `07da113`; parent vivo al commitear `43dff28`; remediacion protocolo `ce1a549`;
+  producto citado `4ea82711e3c5354c2f126cfdff225226de6211c9` (handoff citaba `af790be`, discrepancia declarada).
+- Gates: validate vivo EXIT 0; validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0;
+  scan_encoding EXIT 0; loader_cases EXIT 0; probe loader propio EXIT 0; drift false `up_to_seq=3728`;
+  chain valid `checked_events=3056`; `protocol.config.json` byte-identico contra HEAD, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: F-0248-01 loader gobernado cerrado; F-0248-02 contrato `{camino, razon, gate, banderas}` cerrado.
+  Bloqueo F-0248-R1: en clon limpio Nova-Budget checkout `4ea8271`, `npm test` en raiz sale `-4058` por falta
+  de `package.json`; `apps/nova-web` pasa solo tras `npm ci` + `npm test`. Fix-loop esperado: remediar gate raiz
+  o corregir canonicamente la instruccion para acotar el gate a `apps/nova-web`.
+
+## Ultima actualizacion 2026-07-04 - TASK-0246 re-gate re-juicio 1 DD OK/CERRABLE
+- TASK-0246 fix-loop 1/2 del re-gate consolidado DD-01/DD-02/DD-03: OK/CERRABLE. Veredicto canonico en
+  commit `b0ac5ad` (`review(TASK-0246): Analista OK DD regate rejuicio1`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-regate-rejuicio-1-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-rejuicio-1-OK.md`.
+  Ancla protocolo/instruccion `e2d2987`; remediacion `34b7dac`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); validate vivo EXIT 0;
+  validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding EXIT 0; drift false
+  `up_to_seq=3670`; chain valid `checked_events=2998`; `protocol.config.json` byte-identico contra HEAD,
+  `34b7dac` y `v1.18.0`, sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: F-0246-DD01-STALE cerrado (P3-001 riesgo B-05 ya dice Confirmado por el Operador para Sprint 1);
+  F-0246-DD02-MISSING-AC cerrado (P3-003 seccion 7 tiene AC 9 ejecutable para objeto <=19 chars -> 400
+  ProblemDetails sin invocar aprobacion BD); DD-03 conserva N/A y prohibicion del centinela legacy 0. Residual:
+  no re-auditoria THROW por alcance documental.
+
+## Ultima actualizacion 2026-07-04 - TASK-0246 re-gate consolidado DD-01/DD-02/DD-03 CAMBIO-REQUERIDO
+- TASK-0246 re-gate documental de `Area_comun/specs/nova/` tras DD-01/DD-02/DD-03 horneadas:
+  CAMBIO-REQUERIDO / NO CERRABLE. Veredicto canonico en commit `a405def`
+  (`review(TASK-0246): Analista blocks consolidated DD regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-regate-consolidado-dd-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-regate-consolidado-dd-NOGO.md`.
+  Ancla protocolo/instruccion `4e42d64`; horneado DD `01f05db`; THROW/db_verified_at previo OK `070b533`;
+  producto control `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); validate vivo EXIT 0;
+  validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding EXIT 0; drift false
+  `up_to_seq=3670`; chain valid `checked_events=2998`; `protocol.config.json` byte-identico contra HEAD,
+  `01f05db`, `070b533` y `v1.18.0`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Bloqueantes: P3-001 conserva en riesgos `Supuesto temporal declarado (campo 2)`, contradiciendo DD-01
+  confirmado; P3-003 contiene DD-02 min 20 chars en alcance y restriccion 6d, pero no hay Given/When/Then
+  explicito en `## 7. Criterios de aceptacion` para objeto `<20` -> 400 ProblemDetails. DD-03 pasa con
+  `N/A` declarada y sin centinela `0`. Fix-loop esperado: remediacion documental y re-juicio antes de cierre.
+
+## Ultima actualizacion 2026-07-03 - TASK-0246 THROW triggers OK/CERRABLE
+- TASK-0246 verificacion ampliada por definiciones de triggers/catalogos/numeracion: OK/CERRABLE para
+  `db_verified_at` P3-001..005. Veredicto canonico en commit `070b533`
+  (`review(TASK-0246): Analista OK throw triggers`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-throw-audit-triggers-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-throw-audit-triggers-OK.md`.
+  Ancla protocolo `eedc3ea`; instruccion REQUEST `0506b4e`; remediacion `5669665`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); validate vivo EXIT 0;
+  validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding EXIT 0; drift false
+  `up_to_seq=3643`; chain valid `checked_events=2971`; `protocol.config.json` byte-identico contra
+  `5669665`, `0506b4e`, `eedc3ea` y `v1.18.0`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: P3-001 50054/50057-50062, P3-002 50066-50068/50076/50210-50212/50220-50223,
+  P3-003 50091-50094/50210-50212/50220-50223, P3-004 50116-50121/50210-50212/50220-50223,
+  y P3-005 50188-50190/54257 existen en los objetos fuente declarados. Residual: juicio readonly por
+  definicion de objetos, sin mutaciones BD.
+
+## Ultima actualizacion 2026-07-03 - TASK-0246 THROW re-atribuido CAMBIO-REQUERIDO
+- TASK-0246 re-audit opcion (b) transitive sobre commit `49689c4`: CAMBIO-REQUERIDO / NO CERRABLE por omision
+  puntual de `50212` en `throw_source` de P3-003/P3-004. Veredicto canonico en commit `b38722f`
+  (`review(TASK-0246): Analista blocks throw reattribution`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-throw-audit-reatribuido-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-throw-audit-reatribuido-NOGO.md`.
+  Ancla protocolo / REQUEST `2a0e89f`; remediacion `49689c4`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); validate vivo EXIT 0;
+  validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding EXIT 0; drift false
+  `up_to_seq=3643`; chain valid `checked_events=2971`; `protocol.config.json` byte-identico contra `49689c4`,
+  HEAD y `v1.18.0`, sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Resultado: P3-001/P3-002/P3-005 pasan re-atribucion, y P3-003/P3-004 pasan en rangos directos/numeracion/triggers
+  declarados. Bloqueo remanente: ambas SPEC citan `THROW 50212` en restricciones pero `throw_source` no lo lista;
+  SQL readonly confirma `50212` en `trg_commitment__validate_open_year` y `trg_obligation__validate_open_year`.
+  Fix-loop esperado: Arquitecto agrega esa fuente y pide re-juicio antes de cerrar `db_verified_at`.
+
+## Ultima actualizacion 2026-07-03 - TASK-0246 THROW audit procs CAMBIO-REQUERIDO
+- TASK-0246 audit aditivo de THROW P3-001..005: CAMBIO-REQUERIDO / NO CERRABLE para el gancho
+  `db_verified_at` de F-NOVA-01. Veredicto canonico en commit `af461a7`
+  (`review(TASK-0246): Analista blocks throw audit procs`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-throw-audit-procs-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-throw-audit-procs-NOGO.md`.
+  Ancla protocolo / REQUEST `5fdfb39edc2c292fb818e2bd4bfa1f567129525b`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8`.
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); validate vivo EXIT 0;
+  validate secretless clean clone EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding EXIT 0; drift false
+  `up_to_seq=3643`; chain valid `checked_events=2971`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Bloqueante nuevo: los 5 procs `Budget.Approve_*` existen, pero `OBJECT_DEFINITION` directo no contiene todos
+  los THROW citados por las SPECs. P3-001 falta `50054,50057-50062`; P3-002 falta `50066-50068,50076,50210-50212,50220-50223`;
+  P3-003 falta `50091-50094,50210,50211`; P3-004 falta `50116-50121,50210,50211`; P3-005 falta
+  `50188-50190,54257`. Si Arquitecto acepta semantica transitive, debe documentar `Approve_* -> proc llamado -> THROW`
+  con evidencia BD antes de re-juicio.
+
+## Ultima actualizacion 2026-07-03 - TASK-0246 NOVA-DEV lote specs CAMBIO-REQUERIDO
+- TASK-0246 lote NOVA-DEV Sprint 1: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto canonico en commit
+  `9a2c211` (`review(TASK-0246): Analista requires nova dev spec fixes`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-nova-dev-lote-specs-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-nova-dev-lote-specs.md`.
+  Ancla protocolo `acab21dc642474f9125ec5c0c6a00547c5990e4b`; producto control
+  `e7c6da482a1e819507af37de77b9cd46712fb8c8` (la instruccion no cito commit de producto nuevo).
+- Gates: Zeus-protocol clean clone `npm test` EXIT 0 (112 tests, 90 pass, 22 skipped); hub validate con
+  secretos EXIT 0; clean clone sin `secrets/` validate EXIT 0; scan_domain_neutrality EXIT 0; scan_encoding
+  EXIT 0; drift false `up_to_seq=3643`; chain valid `checked_events=2971`; `protocol.config.json`
+  byte-identico contra `acab21d`, git blob hash `70d4c027a35b9d7d406bdfbe1cfcd427f203fc14`, SHA256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Bloqueantes: F-0246-01 `q4_membership` ausente en `SPEC-NOVA-P3-001`, `SPEC-NOVA-P3-002`,
+  `SPEC-NOVA-P3-003`; F-0246-02 `SPEC-NOVA-P4-004` pide THROW `50256` y rango `50252-50255`, pero
+  `Budget.Apply_Obligation_Adjustment` real emite `50265` para efecto distinto de reintegro y no contiene
+  `50254` ni `50256`. Residual: procs `Get_*_List` faltan en BD pero estan declarados como "a crear"; no los
+  use como bloqueo salvo que Arquitecto los trate como cita de objeto existente.
 
 ## Ultima actualizacion 2026-07-03 - TASK-0234 re-juicio 2/2 OK/CERRABLE
 - TASK-0234 F2.5 runbook onboarding remoto, fix-loop 2/2: OK/CERRABLE. Veredicto canonico en commit
@@ -1701,3 +1933,30 @@
   ruta/comando falsable del harness F2.3 y ciclo e2e F2.2. Fix-loop: remediar, re-gatear validate con/sin
   secretos, drift 0, domain, encoding, #4 byte-identica y re-juicio Analista; maximo 2 iteraciones antes de
   escalar al operador.
+- TASK-0246 re-juicio fix-loop 1 (2026-07-03): OK/CERRABLE, veredicto commiteado y pusheado en `50cb3fd`
+  (`review(TASK-0246): Analista OK nova dev fix loop`). Ancla protocolo de instruccion `74185fd`, remediacion
+  `9b5563c`, producto control `e7c6da482a1e819507af37de77b9cd46712fb8c8`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-nova-dev-lote-specs-rejuicio-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260703-Analista-to-Arquitecto-REVIEW-TASK-0246-rejuicio-OK.md`. F-0246-01 pasa: P3-001 q4_membership
+  FUERA; P3-002/P3-003 CONDICIONAL; probe cubrio P3-004 CONDICIONAL, P3-005 FUERA, P4-004 DENTRO. F-0246-02
+  pasa: SQL readonly confirma `Budget.Apply_Obligation_Adjustment` con THROWs reales
+  `50250,50251,50252,50253,50255,50257,50258,50264,50265`, sin `50254/50256`; P4-004 ya espera 50264 para tope
+  y 50265 para efecto distinto de reintegro. Gates: validate con secretos exit 0; validate secretless clean clone
+  exit 0; domain/encoding exit 0; drift 0 `up_to_seq=3643`; chain valid `checked_events=2971`; #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; Zeus clean clone `npm test` exit 0,
+  112 tests, 90 pass, 22 skipped. Residual no bloqueante: P2-004 `Get_*_List` siguen ausentes en BD pero son
+  objetos a CREAR por BR-C3, no cita de existencia.
+- TASK-0248 (2026-07-04): CAMBIO-REQUERIDO/NO CERRABLE, veredicto commiteado y pusheado en `fb07efb`
+  (`review(TASK-0248): Analista requires codegen triage remediation`). Ancla protocolo
+  `4eddf483a1cf0b50f82102ab5a7a3fc23a0b999d`, producto Nova-Budget
+  `88af254b55f07e99aacd588d655a261f922bc399`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0248-skill-codegen-triage-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0248-skill-codegen-triage.md`. Neutralidad de capa neutral
+  y split de capas pasan, pero bloquean: F-0248-01 `codegen-triage` no carga por loader gobernado DECISION-0061
+  (`.claude/skills/...` fuera de ubicacion permitida y no registrado en `skills/skills.config.json`);
+  F-0248-02 forma de salida entregada `{path, reason, verifying_gate, red_flags}` no coincide con
+  `{camino, razon, gate, banderas}`; F-0248-03 `npm test` en clon limpio Nova-Budget raiz exit `-4058` y
+  `apps/nova-web` exit 1 por script `test` ausente. Gates: validate vivo exit 0; validate secretless clean clone
+  exit 0; encoding/domain exit 0; drift 0 `up_to_seq=3718`; chain valid `checked_events=3046`; #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop: remediar loader/contrato
+  ubicacion, forma canonica y gate producto; re-juicio Analista antes de cierre, maximo 2 iteraciones.
