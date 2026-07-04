@@ -4,6 +4,20 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0245 delivered to `in_review` in protocol commit
+  `6a1cd56 feat(TASK-0245): add neutral session watchdogs skill`. It adds neutral exportable skill
+  `skills/session-watchdogs.skill.md`, registers `session-watchdogs` off-by-default in
+  `skills/skills.config.json`, updates `scripts/new_instance.py` to copy `skills/`, adds AC7 loader coverage in
+  `examples/skills_loader_cases/run_skills_loader_cases.py`, opens
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-in-review.md`, adds
+  `Area_comun/handoffs/HANDOFF-TASK-0245-codex-to-arquitecto-1.md`, moves the consumed Arquitecto GO to
+  `Area_comun/mailbox/answered/`, moves TASK-0245 `ready -> in_progress -> in_review`, and releases Codex
+  claims through runtime seq 3794. Evidence: skills loader cases PASS, `scripts/test_skills_loader.py` PASS,
+  new_instance temp export plus loader enable probe PASS, py_compile PASS, protocol encoding OK,
+  domain-neutrality exit 0, validator OK, drift false at `up_to_seq=3794`, Nova-Budget `npm test` PASS, and
+  Nova-Budget `dotnet test NOVA.sln` PASS with known NU1903 Microsoft.OpenApi warning. Unrelated dirty paths in
+  `.claude/settings.json`, peer/operator personal areas, and Nova-Budget untracked `docs/documentacion-tecnica/`
+  were left untouched.
 - Nova-Budget front test harness foundation-completion delivered after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budget`. Product commit
   `e3a03a8 test: add Nova web harness` was pushed to `origin/main`; it changes `apps/nova-web` so `npm test`
