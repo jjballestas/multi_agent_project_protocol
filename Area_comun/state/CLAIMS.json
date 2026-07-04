@@ -17518,6 +17518,19 @@
             "updated_at": "2026-07-04T13:57:12Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-cleanup-scope",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Normalize invalid retry scope before release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-cleanup-scope"
+            ],
+            "started_at": "2026-07-04T14:33:59Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:33:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0250-delivery",
             "expires_at": "2026-07-04T15:54:13Z",
             "owner": "Codex",
@@ -17534,6 +17547,44 @@
             "updated_at": "2026-07-04T13:54:13Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-done-flip",
+            "owner": "Codex",
+            "status": "released",
+            "task_id": "TASK-0250"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-done-flip-proper",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Proper scoped done-flip TASK-0250 after retry.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-done-flip-proper",
+                "Area_comun/state/TASK_INDEX.json#TASK-0250",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0250",
+                "Area_comun/tasks/TASK-0250-p21-read-model-parametros.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-done-flip-done.md"
+            ],
+            "started_at": "2026-07-04T14:29:27Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:29:27Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-done-flip-scope",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Normalize invalid retry scope before release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-done-flip-scope"
+            ],
+            "started_at": "2026-07-04T14:33:59Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:33:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0250-product-hash-fix",
             "expires_at": "2026-07-04T15:11:13Z",
             "owner": "Codex",
@@ -17547,6 +17598,23 @@
             "status": "released",
             "task_id": "TASK-0250",
             "updated_at": "2026-07-04T14:11:13Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0250-release-all",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Release all TASK-0250 done-flip retry claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-release-all",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-done-flip",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-done-flip-scope",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-cleanup-scope",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0250-done-flip-proper"
+            ],
+            "started_at": "2026-07-04T14:31:06Z",
+            "status": "released",
+            "task_id": "TASK-0250",
+            "updated_at": "2026-07-04T14:31:06Z"
         },
         {
             "claim_id": "CLAIM-20260704-Codex-TASK-0250-remediation-delivery",

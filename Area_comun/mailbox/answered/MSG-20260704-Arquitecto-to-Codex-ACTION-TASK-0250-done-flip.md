@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-done-flip
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-04
 context_refs:

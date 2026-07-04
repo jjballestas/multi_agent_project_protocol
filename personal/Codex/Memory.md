@@ -4,6 +4,16 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0250 done-flip completed after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-done-flip`. Codex moved TASK-0250
+  `review_approved -> done` via runtime seq 3923 and released done-flip retry claims through seq 3933 after
+  normalizing two malformed retry claim scopes. Consumed ACTION moved to `Area_comun/mailbox/answered/` and
+  response message opened at `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-done-flip-done.md`.
+  Product gates: `dotnet test NOVA.sln` PASS 16 tests with known NU1903 Microsoft.OpenApi warning, and
+  `npm test --prefix apps/nova-web` PASS 1 test. Protocol gates: encoding OK, domain-neutrality exit 0,
+  validator OK with unrelated FYI archive warning, drift false at `up_to_seq=3933`. Residual non-blocking item:
+  live DbsFinanciero count parity still needs credentials. Unrelated `.claude/settings.json`, peer/operator
+  personal paths, sandbox task, and Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0250 delivered to `in_review` after fix-loop 1. Product commit
   `f2be4e8 feat: add budget parameters read model` adds the Nova-Budget read model endpoints
   `/api/budget/parameters/accounts`, `/funding-sources`, `/account-funding-sources`, `/investment-projects`, and
