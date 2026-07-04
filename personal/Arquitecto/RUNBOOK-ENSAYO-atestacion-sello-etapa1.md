@@ -111,9 +111,55 @@ capturabilidad de la medicion (el proposito del piloto), a horneAr en el schema 
   valores de arriba; ese sha256 es lo que se atesta. Pendiente la decision del Operador (degradacion + quien
   cierra), reportada en el mailbox 0ee5494.
 
+## 6. PREP CONSOLIDADO DEL SELLO (item 1 cola pre-sello, 2026-07-04 ~02:47Z) -- CAMINO CRITICO
+
+Completado el prep del sello (directiva DIRECTIVA-cola-pre-sello). **GAP-1 CERRADO: el journal REAL de
+GOAL-P1 ya existe y entra al manifiesto** (fila real cerrada+atestada+ratificada; sha256
+`d2a13216c29b4572ce91a8d3569c3fbbd197be3ff27c372f43a1cf4d719ae2f5`).
+
+### 6.1 Manifiesto de corpus COMPLETO (8 de 9; solo falta el freeze schema v1.0 dia-de)
+En `personal/Arquitecto/TFM-medicion/ENSAYO-CORPUS-MANIFEST-etapa1.txt`. Basename-keyed, ordenado.
+
+| Artefacto | sha256 (2026-07-04) | estado |
+|---|---|---|
+| NOVA_ESTUDIO_Anexo_Diseno_Completo.json | 4a52ff58f1363f005ee8daaa72800cad065a3d0da3408422fb4c4a59be835c7c | estable |
+| NOVA_ESTUDIO_Particion_Baseline_vs_Gobernado.md | ef1e56e7c1b950559d8e3952231662040a1008999baf6002eb28d7671b2e2a41 | estable |
+| NOVA_ESTUDIO_Protocolo_Medicion.md | de38530acfd927bb9c4683224a85863ca8b6ae85de5b8cd0ab09c172185969b1 | estable |
+| SELLO-ETAPA-1-nova-budget-DRAFT.md | 58424422c1ea2ca6bdcb120bb6e3f7a94d17e5ce075e42c880ff78a2b68b1a1e | cambia al [LLENAR] dia-de |
+| medicion_journal.csv (fila REAL GOAL-P1) | d2a13216c29b4572ce91a8d3569c3fbbd197be3ff27c372f43a1cf4d719ae2f5 | **REAL, atestado, ratificado** |
+| medicion_ledger.py | 3e92cca5962f88ff3e77286e263ea20d2b5f461e6555454fec776c99e5595344 | estable |
+| schema_defectos.json | ec1569ffd8be7278ba61e6d09ff62931c89930257636ab7ca9cc535353aa66cb | v-PILOTO -> freeze v1.0 dia-de |
+| schema_medicion.json | 7f9289705981966a69bcbaa9c79324e90333f6bedd74befbaa34f034e11f7626 | v-PILOTO -> freeze v1.0 dia-de |
+| **HASH DE MANIFIESTO (8 filas, ensayo)** | **7cb8a6b36580c67b4020a69aa7ecb6b3c7e59722725b0054cfac407f386b4e3b** | recomputa dia-de |
+
+Solo cambian el dia del sello: los 2 schema (freeze v-piloto->v1.0) + el SELLO (campos [LLENAR]). Los otros
+6 (3 NOVA_ESTUDIO + journal real + ledger) quedan FIJOS. El manifiesto real del 08-jul recomputa el hash.
+
+### 6.2 Intent CONSOLIDADO de atestacion (dry-run, vehiculo `decision`, GAP-5)
+El dia del sello, UN intent atomico registra el sello + el hash de manifiesto:
+```bash
+# 1) freeze schema v1.0 (editar JSON, subir version) -> recomputar manifiesto (9 filas)
+# 2) llenar [LLENAR] del SELLO (T, pulso NIST, sorteo, estimates operador) -> recomputar su sha256
+# 3) commitear sello + CORPUS-MANIFEST-etapa1.txt (rutas gobernadas: registro DECISION-00XX en Area_comun/decisions/)
+# 4) UN intent decision que ancla el hash de manifiesto + el sha256 del sello:
+python runtime/submit_intent.py --actor-id Arquitecto --timestamp "<T ISO-8601>" \
+  --commit "$(git rev-parse HEAD)" --intent-json '{"type":"decision","decision_id":"DECISION-00XX"}'
+# DECISION-00XX .md = el registro del sello: contiene el manifiesto (9 sha256 + hash de manifiesto) + el
+# sha256 del journal real GOAL-P1 (d2a13216...) + los 3 hallazgos del piloto horneados en el schema v1.0.
+```
+Dry-run: el intent `decision` normaliza OK (validado en s.3). Seq + idempotency_key resultantes -> [LLENAR] s.0 del sello.
+
+### 6.3 Freeze del schema v1.0 PRE-ARMADO (3 hallazgos del piloto horneados)
+Al congelar schema_medicion/defectos a v1.0 el dia-de, hornear (de s.5b):
+1. **tokens_total_atribuibles = moneda confirmatoria del brazo baseline** (desglose por cubeta NO viable con
+   codex-exec; solo el total cumulativo en stderr). Q4 total-vs-total INTACTO; Q1 degrada a total-marginal.
+2. **Mecanismo de captura lee `err.log` (stderr)**, no out.log. Anotar en el schema/runbook de captura.
+3. **adversarial-separado (P2+) habilita taggear tokens_adversarial_informal** (imposible en GOAL-P1 in-session);
+   cache no aislable -> ambos brazos MISMO runtime o declarar cache-confound (ya horneado en SPECs P2-001/002).
+
 ## 5. Estado
 
-ENSAYO COMPLETO + hallazgos del piloto GOAL-P1 incorporados (s.5b). Mecanismo probado end-to-end en seco:
-manifiesto reproducible + vehiculo `decision` dry-run-validado + gaps enumerados + capturabilidad de tokens
-resuelta (total-si / desglose-no, captura en stderr). El dia del sello = 1 commit (sello+manifiesto) + 1
-intent `decision`; el schema v1.0 sella tokens_total_atribuibles como moneda baseline. NADA sellado aun.
+ENSAYO + PREP CONSOLIDADO COMPLETOS (s.6). Manifiesto de 8/9 con el journal REAL de GOAL-P1 (GAP-1 cerrado);
+hash de manifiesto de ensayo `7cb8a6b3...`; intent `decision` consolidado dry-run-OK; freeze schema v1.0
+pre-armado con los 3 hallazgos. El dia del sello = freeze v1.0 + [LLENAR] SELLO + 1 commit + 1 intent
+`decision` atomico. NADA sellado aun; pre-armado para que el 08-jul sea limpio.
