@@ -3967,6 +3967,33 @@
             "type": "docs"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0247-nova-goalp1-fundacion-tecnica-nova-budget.md",
+            "id": "TASK-0247",
+            "linked_decisions": [
+                "DECISION-0088",
+                "DECISION-0050",
+                "DECISION-0085",
+                "DECISION-0084"
+            ],
+            "linked_reqs": [],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "NOVA-GOAL-001",
+                "DECISION-0088",
+                "DECISION-0050",
+                "DECISION-0085"
+            ],
+            "reviewer": "Arquitecto",
+            "status": "in_review",
+            "title": "[VISION-NOVA][NOVA-GOAL-001][GOAL-P1] Fundacion tecnica de Nova-Budget (sln + capas .NET 10 + apps/nova-web + architecture tests + infra transversal + CI). Piloto baseline (opcion B, checker_formal=0).",
+            "type": "build"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -23,6 +23,12 @@
             "owner": "Arquitecto",
             "status": "in_progress",
             "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
+        },
+        {
+            "id": "TASK-0247",
+            "owner": "Codex",
+            "status": "in_review",
+            "title": "[VISION-NOVA][NOVA-GOAL-001][GOAL-P1] Fundacion tecnica de Nova-Budget (sln + capas .NET 10 + apps/nova-web + architecture tests + infra transversal + CI). Piloto baseline (opcion B, checker_formal=0)."
         }
     ],
     "next_actions": [

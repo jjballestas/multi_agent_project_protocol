@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Codex-GO-TASK-0247-goalp1-fundacion
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-04
 context_refs:
