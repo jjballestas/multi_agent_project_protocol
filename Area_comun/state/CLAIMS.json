@@ -17659,6 +17659,20 @@
             "updated_at": "2026-07-04T05:07:16Z"
         },
         {
+            "claim_id": "CLAIM-20260704T113700Z-Arquitecto-DECISION-0091-atesta",
+            "expires_at": "2026-07-04T12:07:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T113700Z-Arquitecto-DECISION-0091-atesta",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0091-sello-etapa1-nova-budget.md"
+            ],
+            "started_at": "2026-07-04T11:37:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T11:37:00Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

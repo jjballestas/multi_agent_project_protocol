@@ -26,8 +26,11 @@ defendible (anti-HARKing, anti semilla-moldeable). Ancla externa del sello y del
   algoritmo, s.6.1):
   `9CD3E6A0B366DFD164BA63C18CAE7D09B1CD76867DAD8912AEA1061D41E95226A2B0FCB937542D1DC80BC49AA00FE562B030866E9B1706CD76A26A6E5C7379EF`.
   Verificable por terceros en `https://beacon.nist.gov/beacon/2.0/chain/2/pulse/1844242`.
-- **Atestacion:** sha256 de este documento + del manifiesto de corpus, registrado via
-  `submit_intent` en el hub. [LLENAR-AL-SELLAR: idempotency_key + seq].
+- **Atestacion:** sha256 de este documento (commit `14ecefa`, `46d3fc02...`) + del manifiesto de corpus
+  (`bf91b094...`), registrado via `submit_intent` (type `decision`, `DECISION-0091`) en el hub.
+  `idempotency_key`: `arquitecto-atesta-DECISION-0091-sello-etapa1-20260704T113700Z`; `seq: 3831`
+  (commit `eb30152`). Ver `Area_comun/decisions/DECISION-0091-sello-etapa1-nova-budget.md` para el
+  registro completo (corpus, schema v1.0, sorteo).
 
 ---
 
@@ -380,7 +383,7 @@ secciones 1/3/4/6/10/12 de este documento, para lectura rapida del operador.
 - [x] Enumeracion Q4 verificada UNA A UNA contra el conector readonly (s.5 completa).
 - [x] Commit de sello (T) con par_ids + estimates + algoritmo + timestamp (`cbc1ee2`, s.0/s.6.1).
 - [x] Pulso NIST Beacon posterior a T capturado -> sorteo ejecutado -> tabla de asignacion (s.6, pulso 1844242).
-- [ ] sha256 del manifiesto de corpus (s.1) + de este documento, registrados via submit_intent del hub -- EN CURSO (siguiente paso).
+- [x] sha256 del manifiesto de corpus (s.1) + de este documento, registrados via submit_intent del hub (DECISION-0091, seq 3831).
 - [x] GRANT EXECUTE resuelto; mecanismo sandbox de mutadores decidido (sellado 2026-07-04, adelantado <=14-jul).
 
 ---
