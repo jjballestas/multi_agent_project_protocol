@@ -5,7 +5,23 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-04 (TASK-0245 re-juicio 2 session-watchdogs OK/CERRABLE).
+> Ultima actualizacion: 2026-07-04 (TASK-0249 F3.3 instrumentacion CAMBIO-REQUERIDO).
+
+## Ultima actualizacion 2026-07-04 - TASK-0249 F3.3 instrumentacion CAMBIO-REQUERIDO
+- TASK-0249 gate formal de F3.3 instrumentacion del estudio: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto en
+  commit `f9bce44` (`review(TASK-0249): Analista blocks F3.3 instrumentation`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0249-f33-instrumentacion-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0249-f33-instrumentacion-NOGO.md`.
+  Ancla canonica revisada: protocolo REVIEW HEAD `2c6e847908416dbf41d7a14faa521df902fa8c1c`; implementacion
+  citada `a32ee61`; producto citable ninguno por instruccion canonica.
+- Resultado: F-0249-01 bloquea porque `python personal/Arquitecto/TFM-medicion/instrumentacion_estudio/test_instrumentacion.py`
+  en clon limpio sale EXIT 1 por `FileNotFoundError` buscando
+  `personal/Arquitecto/TFM-medicion/corpus/medicion/schema_medicion.json`, ruta no commiteada en el ancla.
+  Por tanto no queda probado canonicamente cost.attributed, defect.reported, manual.intervention ni el event-log
+  off-by-default. Gates hub en el ancla pasan: validate/encoding/domain EXIT 0, drift false `up_to_seq=3859`,
+  `protocol.config.json` byte-identico contra `a32ee61`.
+- Fix-loop esperado: Codex remedia fixtures/rutas reproducibles y pide re-juicio; maximo 2 iteraciones antes de
+  escalar si sobrevive la misma clase de hallazgo.
 
 ## Ultima actualizacion 2026-07-04 - TASK-0245 re-juicio 2 session-watchdogs OK/CERRABLE
 - TASK-0245 re-juicio 2 con ancla corregida sin producto en alcance: OK/CERRABLE. Veredicto en commit
