@@ -18,9 +18,10 @@
   redactada SOLO de docs COMPARTIDOS (NOVA-PRES-03 + NOVA-PRES-05) + el patron congelado declarado de P4.1; NO se
   lee la implementacion del hermano. Manifiesto: NOVA-PRES-03/05 + arquitectura + P4-001 (patron) + P4-004
   (plantilla). Riesgo: implementar los tipos del hermano (08/09) "de paso" = CONTAMINACION intra-par.
-- **PRECONDICION BLOQUEANTE (sandbox mutadores <=14-jul):** conector readonly sin EXECUTE (Msg 229); proc ESCRIBE
-  -> criterios un-runnable sin el SANDBOX SELLADO (backup+GRANT o BEGIN TRAN/EXEC/ROLLBACK), IDENTICO en ambos
-  brazos, <=14-jul (DECISION-0078). Sin el, DIFERIR.
+- **PRECONDICION: READY (sandbox mutadores sellado, adelantado <=14-jul).** Mecanismo construido y sellado por
+  el Operador (2026-07-04): ver `SANDBOX-MUTADORES-mecanismo-sellado.md` (BD `DbsFinanciero_SANDBOX` + rol
+  `budget_sandbox_verifier` con EXECUTE real, aislamiento verificado, IDENTICO en ambos brazos + RESET
+  obligatorio entre miembros/brazos, DECISION-0078). Ya NO bloquea la unidad.
 - **measurement:** cache-confound -> mismo runtime que su pareja de par o declarar; captura en err.log (stderr);
   tokens_total_atribuibles. checker_formal=0 baseline; en gobernado el checker formal cuenta.
 - **deuda GOAL-P1:** harness test front (apps/nova-web) verde en clon limpio antes de la UI de esta unidad.
@@ -131,7 +132,7 @@ Un contrato de mutacion atomico + su preparacion:
   aislamiento: ningun proyecto de esta unidad referencia los tipos/procs de CDP (08/09)**.
 - **Integracion vs DbsFinanciero (EN SANDBOX; EXECUTE via GRANT o TRAN/ROLLBACK):** criterio 1 (11 happy + baja del
   CDP padre), un caso por THROW ALCANZABLE (50262, 50263, 50256, 50250/51/50212, 50257) RE-VERIFICADO, criterio 3
-  (floor compromiso-obligado), criterio 8 (saldo por vista). **PRECONDICION: sandbox <=14-jul; sin el, DIFERIR.**
+  (floor compromiso-obligado), criterio 8 (saldo por vista). **PRECONDICION: READY (sandbox sellado; ver SANDBOX-MUTADORES-mecanismo-sellado.md).**
 - **Gate final:** APROBADO del adversarial informal en SESION SEPARADA (baseline) [+ checker FORMAL del Analista si
   el sorteo la asigna al gobernado] + arch tests + CI + **F-NOVA-01: cada THROW verificado contra el proc
   desplegado** + verificacion de AISLAMIENTO (manifiesto: no se leyo el hermano) + DoD con evidencia real + gates
@@ -143,7 +144,7 @@ Un contrato de mutacion atomico + su preparacion:
 | Citar 50256/50254 que el proc desplegado NO emite | Criterio falso (F-0246-02) | F-NOVA-01: RE-VERIFICAR contra OBJECT_DEFINITION |
 | Recalcular el saldo del RP (que netea obligado) en C# | Divergencia con la BD | Restriccion 6a/6d: leer `vw_Commitment_Line_Balance` |
 | Implementar los tipos 08/09 del hermano | CONTAMINACION intra-par PAR-1 | Restriccion 6g + architecture test de aislamiento; manifiesto |
-| Sandbox no listo <=14-jul | Criterios de mutacion un-runnable | Precondicion bloqueante; DIFERIR |
+| Sandbox no disponible al abrir el dev MEDIDO | Criterios de mutacion un-runnable | Mecanismo sellado READY desde 2026-07-04; si se degradara, DIFERIR |
 | No verificar el tope del 11 contra el saldo del CDP padre | Compromiso sobre CDP inexistente | Restriccion 6c: 50262 contra `vw_Commitment_Availability_Validation` |
 | adversarial en la misma sesion del maker | Contaminacion (tokens no separables) | DoR: adversarial en SESION SEPARADA |
 
@@ -151,6 +152,6 @@ Un contrato de mutacion atomico + su preparacion:
 **GOAL-P4** (ajustes de cadena), miembro de **PAR-1** (par FIRME, isomorfo con P4.2). **Pertenencia Q4: DENTRO**
 (miembro de par del contraste; criticidad media; proc existente S; 11=2 / 12=7 actos vivos). Severidad s.08:
 mutador de compromiso. Dependencias: GOAL-P1 + P4.1 (patron congelado) + `Apply_Commitment_Adjustment` (existe,
-RE-VERIFICAR THROW) + **SANDBOX mutadores <=14-jul (BLOQUEANTE)** + las vistas de saldo de compromiso/CDP.
+RE-VERIFICAR THROW) + **SANDBOX mutadores READY** (mecanismo sellado) + las vistas de saldo de compromiso/CDP.
 AISLAMIENTO PAR-1: leyo_codigo_hermano=NO; hereda SOLO el patron congelado de P4.1; el sorteo asigna baseline/
 gobernado; violacion = par CONTAMINADO. Desbloquea: los ajustes operativos de compromiso de la cadena.

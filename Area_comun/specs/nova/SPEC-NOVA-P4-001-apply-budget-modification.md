@@ -17,12 +17,12 @@
   es NO filtrar su patron/implementacion congelado a las unidades de contraste posteriores mas alla del patron
   declarado. Manifiesto de archivos leidos: NOVA-PRES-03/02 (docs de proceso) + arquitectura + GOAL. Plantilla
   estructural: SPEC-NOVA-P4-004.
-- **PRECONDICION BLOQUEANTE (sandbox mutadores <=14-jul):** el conector readonly `nova_sql_connector_readonly_s9`
-  NO tiene EXECUTE (Msg 229). Como `Apply_Budget_Modification` ESCRIBE, sus criterios (crear acto 'G' +
-  numeracion; cada THROW alcanzable; delta de la vista de saldo) NO se ejercen readonly. Requiere el MECANISMO
-  SANDBOX SELLADO (backup restaurado con GRANT EXECUTE al rol de verificacion, o BEGIN TRAN / EXEC / ROLLBACK
-  contra copia), IDENTICO en ambos brazos, listo <=14-jul (DECISION-0078; precedente DECISION-0041). SIN el
-  sandbox, los tests de mutacion son un-runnable y el patron a congelar no se valida -> la unidad se DIFIERE.
+- **PRECONDICION: READY (sandbox mutadores sellado, adelantado <=14-jul).** Mecanismo construido y sellado por
+  el Operador (2026-07-04): ver `SANDBOX-MUTADORES-mecanismo-sellado.md` (BD `DbsFinanciero_SANDBOX` + rol
+  `budget_sandbox_verifier` con EXECUTE real, aislamiento verificado, IDENTICO en ambos brazos + procedimiento
+  de RESET obligatorio entre miembros/brazos, DECISION-0078). Los criterios de mutacion (crear acto 'G' +
+  numeracion; cada THROW alcanzable; delta de la vista de saldo) corren contra `EXECUTE` real, no
+  `OBJECT_DEFINITION`. Ya NO bloquea la unidad.
 - **measurement:** cache-confound -> mismo runtime/tipo de sesion que su comparador o declarar; captura de tokens
   en err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 (baseline).
 - **deuda GOAL-P1:** harness test front (apps/nova-web) verde en clon limpio antes de la UI de esta unidad.
@@ -146,8 +146,7 @@ Un contrato de mutacion atomico + su preparacion en aplicacion:
 - **Integracion vs DbsFinanciero (EN SANDBOX; EXECUTE via GRANT o TRAN/ROLLBACK):** criterio 1 (adicion happy:
   acto 'G' + serie + delta de saldo), un caso por THROW ALCANZABLE (cuadre 50237/38, homogeneo 50236, no-neg/piso
   50241/42, vigencia 50230/31/50212, regimen 50240, codigo 50243) RE-VERIFICADO contra OBJECT_DEFINITION, criterio
-  8 (saldo por vista). **PRECONDICION: sandbox mutadores listo <=14-jul; sin el, la unidad se DIFIERE (no se
-  degrada a leer OBJECT_DEFINITION en silencio).**
+  8 (saldo por vista). **PRECONDICION: READY (sandbox mutadores sellado; ver SANDBOX-MUTADORES-mecanismo-sellado.md).**
 - **Gate final:** APROBADO del **adversarial informal de 12 puntos en SESION SEPARADA / contexto limpio** (dev !=
   adversarial) + arch tests + CI verde + **F-NOVA-01: cada THROW verificado falsable contra el proc desplegado** +
   DoD de NOVA-GOAL-001 con evidencia real (delta de saldo, ProblemDetails provocado por THROW, OpenAPI) + verde de
@@ -157,7 +156,7 @@ Un contrato de mutacion atomico + su preparacion en aplicacion:
 | Riesgo | Impacto | Mitigacion |
 |---|---|---|
 | Citar THROW documentado que el proc desplegado NO emite | Criterio falso (precedente F-0246-02) | F-NOVA-01: RE-VERIFICAR cada codigo contra OBJECT_DEFINITION antes de fijarlo |
-| Sandbox mutadores no listo <=14-jul | Criterios de mutacion un-runnable | Precondicion bloqueante declarada; la unidad se DIFIERE (DECISION-0078) |
+| Sandbox mutadores no disponible al abrir el dev MEDIDO | Criterios de mutacion un-runnable | Mecanismo sellado (SANDBOX-MUTADORES-mecanismo-sellado.md), READY desde 2026-07-04; si se degradara, la unidad se DIFIERE (DECISION-0078) |
 | Reimplementar cuadre/no-negatividad/saldo en C# | Divergencia con la BD (RN-04/06) | Restricciones 6a/6c/6d; adversarial punto 2; validar contra la vista |
 | Asignar numero de acto en UI/C# | Rompe la numeracion controlada | Restriccion 6e: solo `Allocate_Document_Number` |
 | Tratar aplazamiento en C# (gap sin proc) | Regla fuera del proc reimplementada | Restriccion 6g: gap declarado, no se parchea |
@@ -167,7 +166,7 @@ Un contrato de mutacion atomico + su preparacion en aplicacion:
 **GOAL-P4** (ajustes/mutadores), **PATTERN-SETTER de la familia de ajustes**, EXCLUIDA del contraste A/B.
 **Pertenencia Q4: FUERA** (primera_unidad congelada; su patron se congela al arrancar el miembro baseline de
 PAR-1). Severidad s.08: mutador de apropiacion (mueve el techo del gasto). Dependencias: GOAL-P1 (fundacion) +
-`Apply_Budget_Modification` (existe, verificado; RE-VERIFICAR THROW) + **SANDBOX mutadores <=14-jul (precondicion
-BLOQUEANTE)**. AISLAMIENTO: pattern-setter sin hermano baseline (leyo_codigo_hermano=NA); su patron congelado
+`Apply_Budget_Modification` (existe, verificado; RE-VERIFICAR THROW) + **SANDBOX mutadores READY** (mecanismo
+sellado, ver SANDBOX-MUTADORES-mecanismo-sellado.md). AISLAMIENTO: pattern-setter sin hermano baseline (leyo_codigo_hermano=NA); su patron congelado
 (Apply atomico + TVP + pre-validacion por vista + THROW->ProblemDetails + verificacion en sandbox) lo heredan
 P4.2/P4.3. Desbloquea: la familia de ajustes de la cadena (PAR-1) y las modificaciones de apropiacion operativas.

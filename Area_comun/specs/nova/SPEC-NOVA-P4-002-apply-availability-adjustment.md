@@ -20,10 +20,11 @@
   declarado de P4.1; NO se lee la implementacion del hermano ni su repo. Manifiesto de archivos leidos:
   NOVA-PRES-03/04 + arquitectura + P4-001 (patron) + P4-004 (plantilla estructural). Riesgo: implementar los
   tipos del hermano (11/12) "de paso" = CONTAMINACION intra-par -> par CONTAMINADO fuera del confirmatorio.
-- **PRECONDICION BLOQUEANTE (sandbox mutadores <=14-jul):** el conector `nova_sql_connector_readonly_s9` NO tiene
-  EXECUTE (Msg 229). Como este proc ESCRIBE, sus criterios (crear acto 'G' + numeracion; cada THROW; delta de la
-  vista de saldo) NO se ejercen readonly -> requiere el SANDBOX SELLADO (backup+GRANT EXECUTE o BEGIN TRAN/EXEC/
-  ROLLBACK), IDENTICO en ambos brazos, listo <=14-jul (DECISION-0078). Sin el, la unidad se DIFIERE.
+- **PRECONDICION: READY (sandbox mutadores sellado, adelantado <=14-jul).** Mecanismo construido y sellado por
+  el Operador (2026-07-04): ver `SANDBOX-MUTADORES-mecanismo-sellado.md` (BD `DbsFinanciero_SANDBOX` + rol
+  `budget_sandbox_verifier` con EXECUTE real, aislamiento verificado, IDENTICO en ambos brazos + RESET
+  obligatorio entre miembros/brazos, DECISION-0078). Los criterios (crear acto 'G' + numeracion; cada THROW;
+  delta de la vista de saldo) corren contra EXECUTE real. Ya NO bloquea la unidad.
 - **measurement:** cache-confound -> mismo runtime que su pareja de par (dinamica de cache comparable) o declarar;
   captura de tokens en err.log (stderr); desglose no capturable -> tokens_total_atribuibles. checker_formal=0 en
   el brazo baseline; en el gobernado el checker formal SI cuenta.
@@ -139,7 +140,7 @@ Un contrato de mutacion atomico + su preparacion:
   aislamiento: ningun proyecto de esta unidad referencia los tipos/procs de compromiso (11/12)**.
 - **Integracion vs DbsFinanciero (EN SANDBOX; EXECUTE via GRANT o TRAN/ROLLBACK):** criterio 1 (08 happy), un caso
   por THROW ALCANZABLE (50260, 50261, 50256, 50250/51/50212, 50257) RE-VERIFICADO, criterio 3 (floor real vs la
-  vista inflada), criterio 8 (saldo por vista). **PRECONDICION: sandbox <=14-jul; sin el, DIFERIR.**
+  vista inflada), criterio 8 (saldo por vista). **PRECONDICION: READY (sandbox sellado; ver SANDBOX-MUTADORES-mecanismo-sellado.md).**
 - **Gate final:** APROBADO del adversarial informal en SESION SEPARADA (baseline) [+ checker FORMAL del Analista
   si el sorteo la asigna al gobernado] + arch tests + CI + **F-NOVA-01: cada THROW verificado contra el proc
   desplegado** + verificacion de AISLAMIENTO (manifiesto: no se leyo el hermano) + DoD con evidencia real +
@@ -151,7 +152,7 @@ Un contrato de mutacion atomico + su preparacion:
 | Citar 50256/50254 que el proc desplegado NO emite | Criterio falso (F-0246-02) | F-NOVA-01: RE-VERIFICAR contra OBJECT_DEFINITION |
 | Usar la vista `_Line_Balance` (committed=0, B-01) para el floor | Saldo inflado, criterio 3 falso-verde | Restriccion 6d: previsualizar con `vw_Commitment_Availability_Validation` |
 | Implementar los tipos 11/12 del hermano | CONTAMINACION intra-par PAR-1 | Restriccion 6g + architecture test de aislamiento; manifiesto |
-| Sandbox no listo <=14-jul | Criterios de mutacion un-runnable | Precondicion bloqueante; DIFERIR |
+| Sandbox no disponible al abrir el dev MEDIDO | Criterios de mutacion un-runnable | Mecanismo sellado READY desde 2026-07-04; si se degradara, DIFERIR |
 | Recalcular topes/saldo en C# | Divergencia con la BD | Restricciones 6a/6c; adversarial punto 2 |
 | adversarial en la misma sesion del maker | Contaminacion (tokens no separables) | DoR: adversarial en SESION SEPARADA |
 
@@ -159,6 +160,6 @@ Un contrato de mutacion atomico + su preparacion:
 **GOAL-P4** (ajustes de cadena), miembro de **PAR-1** (par FIRME, isomorfo con P4.3). **Pertenencia Q4: DENTRO**
 (miembro de par del contraste; criticidad media; proc existente S; 08=10 / 09=7 actos vivos). Severidad s.08:
 mutador de disponibilidad. Dependencias: GOAL-P1 + P4.1 (patron congelado, arranca antes) + `Apply_Availability_
-Adjustment` (existe, RE-VERIFICAR THROW) + **SANDBOX mutadores <=14-jul (BLOQUEANTE)** + las vistas de saldo de CDP.
+Adjustment` (existe, RE-VERIFICAR THROW) + **SANDBOX mutadores READY** (mecanismo sellado) + las vistas de saldo de CDP.
 AISLAMIENTO PAR-1: leyo_codigo_hermano=NO; hereda SOLO el patron congelado de P4.1; el sorteo asigna baseline/
 gobernado; violacion de aislamiento = par CONTAMINADO. Desbloquea: los ajustes operativos de CDP de la cadena.
