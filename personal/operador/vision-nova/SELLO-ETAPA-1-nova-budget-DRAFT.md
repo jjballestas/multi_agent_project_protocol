@@ -136,13 +136,13 @@ ENUMERADO NOMINALMENTE demostrando n>=10 SIN items grupo-A:
 
 | # | Unidad | Criticidad | Verificacion readonly (vista/proc existe) |
 |---|---|---|---|
-| 1 | P4.4 Apply_Obligation_Adjustment | media | [LLENAR-AL-SELLAR: proc existe si/no] |
-| 2 | P3.2 Availability Draft | media (cond. DEC cerrada) | [LLENAR-AL-SELLAR] |
-| 3 | P3.3 Commitment Draft | media (cond. DEC cerrada) | [LLENAR-AL-SELLAR] |
-| 4 | P3.4 Obligation Draft | media (cond. DEC cerrada) | [LLENAR-AL-SELLAR] |
-| 5 | P2.3 UI de exploracion | baja (calibra taxonomia D1-D4) | [LLENAR-AL-SELLAR] |
-| 6 | P6.3 OpenTelemetry | baja | [LLENAR-AL-SELLAR] |
-| 7..N | Get_*_List de BR-C3 / DOC-11 sobre vistas existentes | baja (fabrica de tareas S) | [LLENAR-AL-SELLAR: enumerar UNO A UNO contra el conector readonly; cada vista verificada existente] |
+| 1 | P4.4 Apply_Obligation_Adjustment | media | SI -- verificado via conector readonly (NOVA-PRES-03/06, 2026-07-03); db_verified_at en SPEC-NOVA-P4-004 |
+| 2 | P3.2 Availability Draft | media (cond. DEC cerrada) | SI -- verificado readonly (NOVA-PRES-04, 2026-07-03); db_verified_at en SPEC-NOVA-P3-002 |
+| 3 | P3.3 Commitment Draft | media (cond. DEC cerrada) | SI -- verificado readonly (NOVA-PRES-05, 2026-07-03); db_verified_at en SPEC-NOVA-P3-003 |
+| 4 | P3.4 Obligation Draft | media (cond. DEC cerrada) | SI -- verificado readonly (NOVA-PRES-06, 2026-07-03); db_verified_at en SPEC-NOVA-P3-004 |
+| 5 | P2.3 UI de exploracion | baja (calibra taxonomia D1-D4) | N/A -- frontend, no consume BD directo; verifica contra contratos OpenAPI del vertical slice P1 (SPEC-NOVA-P2-003) |
+| 6 | P6.3 OpenTelemetry | baja | N/A -- infra, no consume objetos BD; verifica contra instrumentacion desplegada del vertical slice P1 (SPEC-NOVA-P6-003) |
+| 7..10 | Get_Availability_Certificate_List / Get_Commitment_List / Get_Obligation_List / Get_Payment_List (BR-C3) | baja (fabrica de tareas S) | SI -- las 4 vistas de saldo verificadas existentes via conector readonly (NOVA-PRES-11, 2026-07-03); db_verified_at en SPEC-NOVA-P2-004. Los procs Get_*_List AUN NO existen (se crean en Sprint 1); solo las vistas que consultan son readonly-verificadas. |
 
 Items dependientes de hardening entran SOLO por enmienda fechada con entrega comprometida.
 Asignacion ligero/completo: hash + ancla externa, ESTRATIFICADA por familia/tamano, sellada aqui
@@ -173,15 +173,70 @@ supuesto temporal de autorizacion B-05).
 
 ## 6. Sorteo con ancla externa (anti semilla-moldeable)
 
-1. Commit atestado (T) de: par_ids + estimates S/M/L + algoritmo + timestamp. [LLENAR-AL-SELLAR].
+1. Commit atestado (T) de: par_ids + estimates S/M/L + algoritmo + timestamp. **PRE-COMMIT LISTO (s.6.1
+   abajo); solo falta la semilla-del-dia.**
 2. Semilla = primer pulso NIST Beacon posterior a T (fallback: hash primer bloque BTC posterior a T).
 3. Asignacion ligero/completo = paridad del primer byte de SHA-256(unidad_id + semilla),
-   ESTRATIFICADA por familia/tamano. Verificable por terceros.
+   ESTRATIFICADA por familia/tamano. Verificable por terceros. Convencion EXACTA en s.6.1 (paso 2).
 4. ORDEN DE ARRANQUE SELLADO (anti supervivencia-endogena): P4.1 -> miembro PAR-1 -> miembro PAR-2.
    Desviarse = enmienda fechada con causa; cada par anulado registra QUE trigger lo mato.
 5. DISJUNCION DURA: cada tarea se implementa UNA vez en UN brazo; los pares caen COMPLETOS.
 
 Resultado del sorteo (asignacion por unidad): [LLENAR-AL-SELLAR: tabla unidad -> ligero/completo].
+
+### 6.1 Artefacto PRE-COMMIT del sorteo (par_ids + estimates + algoritmo + timestamp)
+
+> Preparado por el Arquitecto (DIRECTIVA operador 2026-07-04, profundiza-cola-sello-e-infra). Congela
+> TODO lo que no depende de la semilla; el UNICO pendiente-del-dia es la semilla NIST (paso 3 abajo).
+> Fuente de los 10 tarea_id/estimates: `ESTIMATES-Q4-para-sorteo.md` (LOCKEADOS por el Operador,
+> 2026-07-03; no se re-generan aqui, solo se incorporan con su tarea_id y par_id formales).
+
+**Tabla congelada (10 unidades, par_id + estrato + estimate, orden alfabetico por tarea_id):**
+
+| tarea_id | Unidad | familia | estrato | par_id | criticidad | estimate S/M/L |
+|---|---|---|---|---|---|---|
+| NB-BRC3-1 | Get_Availability_Certificate_List | BR-C3 | S (cluster) | PAR-D | baja | S |
+| NB-BRC3-2 | Get_Commitment_List | BR-C3 | S (cluster) | PAR-D | baja | S |
+| NB-BRC3-3 | Get_Obligation_List | BR-C3 | S (cluster) | PAR-D | baja | S |
+| NB-BRC3-4 | Get_Payment_List | BR-C3 | S (cluster) | PAR-D | baja | S |
+| NB-P2-3 | P2.3 UI de exploracion (shell) | P2 | M (diversa) | NA | baja | M |
+| NB-P3-2 | P3.2 Availability Draft / CDP | P3 | M (diversa) | NA | media (cond. DEC) | M |
+| NB-P3-3 | P3.3 Commitment Draft / RP | P3 | M (diversa) | NA | media (cond. DEC) | M |
+| NB-P3-4 | P3.4 Obligation Draft | P3 | M (diversa) | NA | media (cond. DEC) | M |
+| NB-P4-4 | P4.4 Apply_Obligation_Adjustment (reintegro 14) | P4 | M (diversa) | NA | media | M |
+| NB-P6-3 | P6.3 OpenTelemetry / Observabilidad | P6 | M (diversa) | NA | baja | M |
+
+- **par_id = PAR-D** para los 4 `Get_*_List` (doble rol sellado en s.5 NOTA DE INDEPENDENCIA: miembro
+  gobernado de PAR-D en Q3 + fabrica/cluster de tareas S en Q4). **par_id = NA** para las 6 unidades
+  restantes: no son miembro de ningun par Q3 (PAR-1/PAR-2 se resuelven aparte, s.3.2/s.4); son SOLO
+  pool Q4.
+- **Estratos:** M = 6 unidades diversas (una por familia/unidad distinta); S = las 4 `Get_*_List`
+  (cluster casi-isomorfo, n efectivo <10 declarado en s.5). El sorteo corre POR ESTRATO.
+- GOAL-P1, P2.1, P2.2 y P4.1 (fundacion/pattern-setter/PAR-D-baseline-anclado) **NO entran a este pool**
+  (s.3.2; excluidos del contraste). PAR-1/PAR-2 (miembro baseline-vs-gobernado) usan el ORDEN DE ARRANQUE
+  sellado de s.6 paso 4, no esta tabla.
+
+**Algoritmo (convencion EXACTA, fijada AHORA, antes de conocer la semilla):**
+
+1. Para cada `tarea_id` de la tabla, en ORDEN ALFABETICO (evita eleccion de orden post-hoc), computar
+   `h = SHA-256(tarea_id + "|" + semilla)` (concatenacion UTF-8 literal, separador `|`).
+2. Tomar el primer byte de `h` (`h[0]`, 0-255). Si `h[0] mod 2 == 0` -> asignacion **completo**
+   (gobierno completo); si `h[0] mod 2 == 1` -> asignacion **ligero** (gobierno ligero). Convencion
+   fija, sin discrecion el dia del sorteo.
+3. El sorteo corre POR ESTRATO (M y S por separado) solo para que la asignacion sea LEGIBLE por
+   estrato; el algoritmo del paso 2 NO se ajusta por estrato (mismo hash, misma regla de paridad en
+   ambos). **Declaracion ex-ante (anti-HARKing):** con n=6 y n=4 el paso 2 puede rendir un estrato
+   desbalanceado (p.ej. 5-1 o 4-0) por puro azar de la semilla; eso NO se re-sortea ni se fuerza a
+   50/50 -- se REPORTA como hallazgo honesto del sorteo (ver s.11 riesgo 1, Q3-pares/Q4 potencia).
+4. Verificable por terceros: cualquiera puede recomputar `h` con la semilla publicada (NIST Beacon) y
+   los `tarea_id` de esta tabla, y reproducir la tabla de asignacion resultante byte a byte.
+
+**Timestamp T:** el commit que introduce esta tabla 6.1 completa (par_ids + estimates + algoritmo) es T.
+Se registra el hash exacto + ISO-8601 UTC en el CHANGELOG/memoria del Arquitecto inmediatamente despues
+de commitear (no puede autoreferenciarse dentro del propio commit); el commit-hash se cita ademas en la
+atestacion sha256 del hub (`submit_intent` type `decision`) junto con el sha256 de este documento, de modo
+que T queda anclado externamente en el ledger del hub, no solo en el mensaje de commit. **[LLENAR-AL-SELLAR:
+hash+ISO de T se copian aqui en cuanto el commit exista -- ver nota operativa en personal/Arquitecto/.]**
 
 ---
 
@@ -261,6 +316,26 @@ peones, costo, calidad, defectos/trazas) y `schema_defectos.json` v1.0 (9 column
    fallo mas toxico restante.
 5. Veredictos baseline auto-reportados (pseudo-atestacion git): asimetria de calidad de dato entre
    brazos, declarada como limite, no corregible por diseno.
+
+---
+
+## 11.1 Calendario y triggers consolidado (sin decisiones nuevas; consolida fechas ya selladas arriba)
+
+| Fecha / ventana | Evento | Trigger / condicion | Fuente |
+|---|---|---|---|
+| 2026-07-03 a 08 | Piloto GOAL-P1 (fundacion) corre; unico item que abre antes del sello | Ya cerrado (done, journal real d2a13216) | s.3.2, s.1 |
+| <=2026-07-08 | SELLO Etapa 1: sorteo + atestacion sha256 | Commit T (s.6.1) + semilla NIST posterior a T | s.6, s.12 |
+| <=2026-07-14 | Sandbox de mutadores sellado (precondicion P4.x) | Construido y sellado (2026-07-04, adelantado); ver SANDBOX-MUTADORES-mecanismo-sellado.md | Area_comun/specs/nova/ |
+| <=2026-07-15 | PAR-2 (Annul_Availability_Certificate / Annul_Commitment) confirma o cae | nova-hardening entrega AMBOS procs verificados; si no, PAR-2 CAE completo | s.4 |
+| <=2026-07-17 | Miembro baseline PAR-1 inicia (P4.2 o P4.3, sorteo) | Tras P4.1 (patron congelado) | s.3.2 |
+| 2026-07-26 a 29 | Reconciliacion post-ventana (Analista, read-only) | Mapea commits/ramas del repo producto contra tarea_id; huerfanos = abandonada retroactiva | s.10 |
+| 2026-07-30 | Abre Sprint 1 gobernado (dev MEDIDO de P2/P3/P4 + Q4) | Piso minimo viable: P1 completa + miembro baseline PAR-1 (s.10); si no se cumple, STOP-total por SLA | s.4, s.10, s.12 |
+| Post-30-jul, contemporaneo | Q4 causal ligero-vs-completo ejecuta (n>=10 si el Sprint lo permite) | Asignacion de s.6.1 aplicada tras revelar semilla | s.5, s.6 |
+| Continuo desde 30-jul | SLA de gate: adversarial 48h, veredicto integracion 48h, 1 gracia 72h/ventana | STOP TOTAL si excede SLA post-gracia en 2 entregas seguidas | s.10 |
+| Post-sello (sin fecha fija) | Migracion Nova a instancia Aegis propia; cross-atestacion hub<->instancia | DECISION-0088 (asiento escalonado); pre-diseno en curso (P3 de esta cola) | DECISION-0088 |
+
+Ningun triger nuevo se introduce aqui; esta tabla solo reune fechas/condiciones YA selladas en las
+secciones 1/3/4/6/10/12 de este documento, para lectura rapida del operador.
 
 ---
 
