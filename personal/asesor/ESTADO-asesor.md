@@ -96,7 +96,10 @@ terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 
    total-vs-total INTACTO; Q1 degrada a total-marginal. (2) el adversarial de GOAL-P1 corrio DENTRO de la sesion de
    Codex -> tokens_adversarial no separable (refuerza P2 = sesion separada). (3) FOLLOW-UP P2 (no bloquea GOAL-P1): el
    total incluye cache no aislable -> ambos brazos MISMO tipo de sesion o declarar cache-confound; captura lee stderr.
-   ESPERANDO: sha256 atestado del Arquitecto -> aviso al operador para RATIFICAR.
+   **PILOTO CERRADO Y RATIFICADO (97fd09e):** fila real GOAL-P1 cerrada + atestada; sha256 journal =
+   d2a13216c29b4572ce91a8d3569c3fbbd197be3ff27c372f43a1cf4d719ae2f5 (anclado en #4 por el commit del Arquitecto).
+   Operador RATIFICO. Atestacion de primera clase VIAJA EN EL GATE DEL SELLO (08-jul), NO intent standalone (GAP-5).
+   El piloto de medicion CUMPLIO su proposito (valido captura end-to-end + surfaceo la degradacion de cubetas).
    **ADVERSARIAL-SEPARADO P2+ CONFIRMADO** y horneandose en SPECs P2.x (el Arquitecto ya documento hallazgos, ca548d08).
    **SKILL codegen-triage (TASK-0248):** entregada por Codex FIEL al diseno (banderas rojas ok), in_review, gate formal
    ruteado al Analista (51f7574c). SKILL.md viva en .claude/skills/codegen-triage/.
