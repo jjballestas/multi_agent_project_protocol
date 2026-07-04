@@ -18368,6 +18368,28 @@
             "updated_at": "2026-07-04T15:18:26Z"
         },
         {
+            "claim_id": "CLAIM-20260704T171408Z-Arquitecto-mailbox-higiene-8",
+            "expires_at": "2026-07-04T17:44:08Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T171408Z-Arquitecto-mailbox-higiene-8",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-cosecha-P2-capturada-standdown.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-cosecha-P2-capturada-standdown.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0251-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0251-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-INTEGRIDAD-cosecha-medicion-P2-faltante.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-INTEGRIDAD-cosecha-medicion-P2-faltante.md"
+            ],
+            "started_at": "2026-07-04T17:14:08Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T17:14:08Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

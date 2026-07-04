@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-INTEGRIDAD-cosecha-medicion-P2-f
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04
