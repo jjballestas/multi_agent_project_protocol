@@ -95,14 +95,17 @@
    POST-medicion (90%+ de Nova) = ultracode SELECTIVO-AMPLIO gatillado por dominio (compone >1 mutacion / cruza
    modulo / toca SESSION_CONTEXT-saldos / alimenta regulatorio). Magnitud = ANCHO -> pipeline barato, no esfuerzo
    por-tarea. "Superficie mecanica" solo si 1-proc/1-vista sin composicion. nova-hardening = ultracode paga pleno.
-5. **CODEGEN (aprobado por operador) + SKILL codegen-triage RUTEADA** (draft fd8b2ad, DIRECTIVA 9256bb7, req_resp):
-   codegen != peon -> LEGITIMO en ambos brazos incl GOAL-P1 (determinista, cero-tokens, un dev, NO tratamiento),
-   simetrico por par. Cero peones en brazos medidos SE MANTIENE. Skill en 2 capas (neutral + recetas instancia Nova),
-   owner Codex-maker/Analista-checker, gobierna Arquitecto. ACCION 2 pedida: SELLAR codegen!=peon en def del brazo
-   baseline antes del 08-jul. Espero: id tarea skill + confirmacion clarificacion sellada.
-6. **PEONES (aclarado, POST-SELLO):** NO se dan de alta (no participante, no area personal, no agent_registry); son
-   herramienta no-firmante que Codex opera bajo contrato de asignacion (DECISION-0078 PROPOSED, a ajustar+aprobar +
-   TASK-0231 F6, sandbox piloto-peones). Runbook = TEMP_Guia_Modelos_Peones (personal/ungobernado). NO ahora (reloj=sello).
+5. **CODEGEN / SKILL codegen-triage = DEBATE, NO APLICADO** (draft fd8b2ad queda como borrador; DIRECTIVA 9256bb7
+   RETIRADA por FYI 3292f86). El operador aclaro: el hilo peones/codegen/skill es DEBATE, no orden -> me pase
+   ruteando la skill+sello; los retire. Contenido del debate (SIN aplicar): codegen != peon (determinista, cero-tokens,
+   un dev, NO tratamiento) -> podria ser legitimo en ambos brazos, simetrico por par; skill en 2 capas (neutral +
+   recetas instancia Nova). NADA sellado, NADA creado. Espera orden explicita para actuar.
+6. **PEONES (DEBATE, aclarado):** NO se dan de alta (no participante, no area personal, no agent_registry); herramienta
+   no-firmante que Codex operaria bajo contrato (DECISION-0078 PROPOSED + TASK-0231 F6, sandbox piloto-peones). Runbook
+   = TEMP_Guia_Modelos_Peones (personal/ungobernado). POST-SELLO. Es DEBATE; no aplicar.
+7. **LECCION (2026-07-04):** cuando el operador dice "para debatir" / "es un debate", es DEBATE -> preparo DRAFTS en mi
+   area, pero NO ruteo DIRECTIVAs gobernadas al Arquitecto ni sello nada hasta orden explicita ("rutea/ejecuta esto").
+   NO usar AskUserQuestion para convertir un debate en go/no-go (eso me hizo enrutar de mas). Ver [[feedback-debate-no-rutear]].
 
 ## SIGUIENTE (hitos)
 1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
