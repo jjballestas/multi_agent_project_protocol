@@ -16947,6 +16947,56 @@
             "updated_at": "2026-07-04T01:11:58Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248",
+            "expires_at": "2026-07-05T23:59:59Z",
+            "notes": "Implement TASK-0248 skill codegen triage neutral layer plus Nova instance recipes.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248",
+                "Area_comun/state/TASK_INDEX.json#TASK-0248",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0248",
+                "Area_comun/tasks/TASK-0248-skill-codegen-triage.md",
+                ".claude/skills/codegen-triage/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/docs/codegen-triage/",
+                "Area_comun/handoffs/",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0248-skill-codegen-triage.md"
+            ],
+            "started_at": "2026-07-04T01:21:05Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:21:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-delivery",
+            "expires_at": "2026-07-05T23:59:59Z",
+            "notes": "Register TASK-0248 delivery handoff and mailbox message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0248-codex-to-analista-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0248-in-review.md"
+            ],
+            "started_at": "2026-07-04T01:26:09Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:26:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0248-go-answer",
+            "expires_at": "2026-07-05T23:59:59Z",
+            "notes": "Move consumed TASK-0248 GO to answered after delivery ledger transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0248-go-answer",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0248-skill-codegen-triage.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0248-skill-codegen-triage.md"
+            ],
+            "started_at": "2026-07-04T01:29:05Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T01:29:05Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-archive-3-directivas-arquitecto",
             "expires_at": "2026-07-04T01:00:00Z",
             "notes": "Archivar 3 DIRECTIVAs del Operador ya actionadas (DD horneadas 01f05db, pipeline al dia 2320acd, DECISION-0087 bc95ad3). requires_response false. Higiene gobernada.",
