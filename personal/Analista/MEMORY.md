@@ -5,7 +5,27 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-04 (TASK-0249 F3.3 instrumentacion CAMBIO-REQUERIDO).
+> Ultima actualizacion: 2026-07-04 (TASK-0249 F3.3 instrumentacion re-juicio 2 OK/CERRABLE).
+
+## Ultima actualizacion 2026-07-04 - TASK-0249 F3.3 instrumentacion re-juicio 2 OK/CERRABLE
+- TASK-0249 re-juicio 2/2 del fix-loop F-0249-02/F-0249-03: OK/CERRABLE. Veredicto en commit
+  `17d64b8` (`review(TASK-0249): Analista OK instrumentation regate 2`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0249-f33-instrumentacion-rejuicio-2-veredicto.md`, MSG rr a
+  Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0249-f33-instrumentacion-rejuicio-2-OK.md`.
+  Ancla canonica revisada: protocolo REVIEW HEAD `7be5cf1`; implementacion remediada `fc412b8`; producto
+  N/A por instruccion canonica ("Producto commit citable: NINGUNO", alcance 100% hub/instancia).
+- Resultado: F-0249-02 cerrado por comportamiento; payloads solo-parciales `prompt_tokens/completion_tokens`,
+  JSON OpenAI-like, lineas separadas y total no cumulativo fueron rechazados sin escribir CSV, mientras los
+  aliases cumulativos explicitos materializaron 321/322/323/324. F-0249-03 cerrado: dos pares con deltas
+  -20/+30 conservaron mediana 5.0 al invertir el orden de filas. Regresiones previas tambien pasan:
+  determinismo, defect.reported, manual.intervention overhead-only, Q4/Q5 sin causalidad, event-log
+  off-by-default.
+- Gates: test_instrumentacion EXIT 0 (7 tests), py_compile EXIT 0, payloads propios EXIT 0, validate clean/live
+  EXIT 0, encoding clean/live EXIT 0, domain clean/live EXIT 0, drift false `up_to_seq=3865`, chain valid
+  `checked_events=3193`, `protocol.config.json` byte-identico contra `fc412b8`, sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Residual: producto Nova-Budget no ejecutado porque la instruccion canonica lo excluye.
 
 ## Ultima actualizacion 2026-07-04 - TASK-0249 F3.3 instrumentacion CAMBIO-REQUERIDO
 - TASK-0249 gate formal de F3.3 instrumentacion del estudio: CAMBIO-REQUERIDO / NO CERRABLE. Veredicto en
