@@ -50,10 +50,28 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
-**EN VUELO -- WATCH (no rutear):** el Analista BLOQUEO TASK-0249 (F-0249-01: gate propio de instrumentacion
-falla en clon limpio por fixtures schema_medicion.json no commiteados en el ancla). Es REPRODUCIBILIDAD /
-implementacion, NO diseno ni integridad-de-estudio -> fix-loop 1/2 del Arquitecto+Codex; NO lo rateo (mi SPEC
-no esta implicada). Cuando F3.3 cierre su gate -> abre P2 -> cosecho la medicion. Watch puro hasta entonces.
+**F3.3 CERRADO** (Analista OK re-gate 2; fix-loop cazo F-0249-01/02/03 = reproducibilidad clon limpio =
+tesis del estudio en vivo). **P2.1 (TASK-0250) y P2.2 (TASK-0251) DONE** (primeras 2 unidades baseline; cada
+una fix-loop 1/2 real). P2.1: baseline/par_id=NA/M/reworks=1. P2.2: baseline/PAR-D anclado/spec_prepagado=true/
+M/reworks=1.
+
+**>> PAUSA 2026-07-04 (tarde) -- monitor DETENIDO por el operador ("continuamos luego"). AL RETOMAR: re-armar
+monitor + auto-poll. 3 HILOS EN VUELO esperando al Arquitecto:**
+1. **INTEGRIDAD (urgente, b8cb6b7):** P2.1/P2.2 DONE pero SIN fila de medicion (journal solo tiene GOAL-P1);
+   F3.3 se construyo y NO se corrio sobre ellas. Rutee cosecha urgente (err.log VOLATIL -> tokens baseline Q1
+   se pierden si se rota). Le pase los campos no-token reconstruidos de git. PENDIENTE su respuesta: existen los
+   err.log de P2.1/P2.2 o degradan a tokens=NA?
+2. **SECUENCIA (fb78b82):** pregunte si P3.1 (SPEC-NOVA-P3-001, pattern-setter EXCLUIDA del pool Q4) es
+   construible YA como unidad no-contraste, o ancla Sprint 1 (su decision de estudio) + confirma drenar TASK-0252
+   (harness paridad, baja) a Codex. PENDIENTE su veredicto.
+3. **LINEA ROJA reafirmada:** NO construir unidades del pool Q4 (P2.3, P2-004, P3.2/3.3/3.4, P4.1-4.4, P6.3)
+   pre-30-jul (rompe contraste irreversible). Codex idle tras 0252/P3.1 = estado CORRECTO por diseno.
+
+**CONSENTIMIENTO EMPLEADOS: CONVERGIO (v5.0) -- LISTO PARA LEGAL.** Revisiones adversariales v1->v5: de 3
+criticos + varios altos a CERO hallazgos. v5 cerro los 2 flujos de procesadores (A metricas Microsoft/AWS / B
+contenido-codigo-prompts Anthropic) + re-confirmacion en 2 pasos + Considerando 33. Cerre mi pasada adversarial.
+Quedan 2 NOTAS DE CONCIENCIA (no defectos del form, gobernanza INGENAS): codigo como IP/confidencialidad a
+Anthropic (Foco B del brief); supervision etica para apoyar Cons.33. NO edite el docx (operador revisa).
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
