@@ -53,6 +53,7 @@ COPIED_DIRS = [
     "Area_comun/artifacts",
     "Area_comun/contracts",
     "Area_comun/decisions",
+    "skills",
 ]
 
 RUNTIME_TIER_WORKFLOW = """name: Validate protocol instance

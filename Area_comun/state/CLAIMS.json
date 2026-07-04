@@ -16856,6 +16856,58 @@
             "updated_at": "2026-07-03T00:30:30Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245",
+            "expires_at": "2026-07-04T23:59:59Z",
+            "notes": "Implement TASK-0245 neutral session watchdogs skill export and loader/new_instance verification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245",
+                "Area_comun/state/TASK_INDEX.json#TASK-0245",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0245",
+                "Area_comun/tasks/TASK-0245-watchdogs-operativos-skill-neutral-exportable.md",
+                "skills/session-watchdogs.skill.md",
+                "skills/skills.config.json",
+                "examples/skills_loader_cases/run_skills_loader_cases.py",
+                "scripts/new_instance.py"
+            ],
+            "started_at": "2026-07-04T04:03:33Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:03:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-delivery",
+            "expires_at": "2026-07-04T23:59:59Z",
+            "notes": "Deliver TASK-0245 handoff and mailbox response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0245-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0245-watchdogs-skill-neutral.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0245-watchdogs-skill-neutral.md"
+            ],
+            "started_at": "2026-07-04T04:06:31Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:06:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-go-answer",
+            "expires_at": "2026-07-04T23:59:59Z",
+            "notes": "Move consumed TASK-0245 GO to answered after in_review ledger state.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-go-answer",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0245-watchdogs-skill-neutral.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0245-watchdogs-skill-neutral.md"
+            ],
+            "started_at": "2026-07-04T04:07:56Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:07:56Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0247",
             "expires_at": "2026-07-05T23:59:59Z",
             "notes": "TASK-0247 GOAL-P1 Nova-Budget foundation implementation.",

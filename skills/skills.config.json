@@ -2,6 +2,19 @@
   "schema_version": "skills.config.v1",
   "skills": [
     {
+      "id": "session-watchdogs",
+      "title": "Session watchdogs",
+      "neutral_core": true,
+      "path": "skills/session-watchdogs.skill.md",
+      "version": "0.1.0",
+      "enabled": false,
+      "trust_boundary": {
+        "read_only": true,
+        "grants_no_authority": true,
+        "persists_outputs": false
+      }
+    },
+    {
       "id": "codegen-triage",
       "title": "Codegen triage",
       "neutral_core": true,

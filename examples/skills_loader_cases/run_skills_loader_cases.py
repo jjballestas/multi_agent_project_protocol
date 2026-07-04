@@ -261,6 +261,56 @@ def case_ac6_profile_skills_load_under_profile() -> dict[str, Any]:
         shutil.rmtree(root, ignore_errors=True)
 
 
+def case_ac7_session_watchdogs_registered_neutral_and_exported() -> dict[str, Any]:
+    registry = json.loads((ROOT / "skills" / "skills.config.json").read_text(encoding="utf-8"))
+    entries = {item["id"]: item for item in registry["skills"]}
+    watchdog = entries["session-watchdogs"]
+    assert watchdog["enabled"] is False
+    assert watchdog["neutral_core"] is True
+    assert watchdog["path"] == "skills/session-watchdogs.skill.md"
+    assert watchdog["trust_boundary"] == {
+        "read_only": True,
+        "grants_no_authority": True,
+        "persists_outputs": False,
+    }
+
+    body = (ROOT / watchdog["path"]).read_text(encoding="utf-8")
+    forbidden_literals = [
+        "multi_agent_project_protocol",
+        "Arquitecto",
+        "Codex",
+        "Analista",
+        "Nova",
+        "Budget",
+        "/d/Agentes",
+        "D:/Agentes",
+    ]
+    for literal in forbidden_literals:
+        assert literal not in body
+    for placeholder in [
+        "<WORKSPACE_ROOT>",
+        "<MAILBOX_OPEN_DIR>",
+        "<STATE_DIR>",
+        "<RUNTIME_TMP_DIR>",
+        "<WORKER_IDS>",
+    ]:
+        assert placeholder in body
+
+    root = fixture_root()
+    try:
+        (root / "skills").mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "skills" / "loader.py", root / "skills" / "loader.py")
+        shutil.copy2(ROOT / watchdog["path"], root / watchdog["path"])
+        patched = {"schema_version": "skills.config.v1", "skills": [json.loads(json.dumps(watchdog))]}
+        patched["skills"][0]["enabled"] = True
+        write_json(root / "skills" / "skills.config.json", patched)
+        loaded = load_skills(root)
+        assert [item["id"] for item in loaded["skills"]] == ["session-watchdogs"]
+        return {"case": "AC7-session-watchdogs-registered-neutral-and-loads", "status": "pass"}
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def main() -> int:
     cases = [
         case_ac1_registry_outside_protocol_config(),
@@ -269,6 +319,7 @@ def main() -> int:
         case_ac4_domain_content_rejected_in_core(),
         case_ac5_fail_closed_missing_and_malformed(),
         case_ac6_profile_skills_load_under_profile(),
+        case_ac7_session_watchdogs_registered_neutral_and_exported(),
     ]
     print(json.dumps({"schema_version": "skills_loader_cases.v1", "cases": cases}, indent=2, ensure_ascii=True))
     return 0
