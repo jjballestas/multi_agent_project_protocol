@@ -4,6 +4,22 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0245 remediation 1 delivered to `in_review` in protocol commit
+  `736a998 fix(TASK-0245): make skill loader gate reproducible`. It removes ignored local
+  `event-state.runtime.json` from `scripts/test_skills_loader.py` watched paths so the loader gate is
+  reproducible from a clean clone, adds `Area_comun/handoffs/HANDOFF-TASK-0245-codex-to-arquitecto-2.md`,
+  opens `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-remediation-1-in-review.md`,
+  moves the consumed Arquitecto ACTION to `Area_comun/mailbox/answered/`, keeps TASK-0245 in `in_review`, and
+  releases Codex claims through runtime seq 3804. Evidence before commit: `python scripts/test_skills_loader.py`
+  PASS, `python examples/skills_loader_cases/run_skills_loader_cases.py` PASS,
+  `python scripts/scan_encoding.py --root .` PASS, `python scripts/scan_domain_neutrality.py --root .` PASS,
+  Python and PowerShell collaboration validators PASS, `python -m py_compile scripts/test_skills_loader.py
+  skills/loader.py scripts/new_instance.py` PASS, `new_instance.py` temp export plus loader probe enabling only
+  `session-watchdogs` PASS, drift false at `up_to_seq=3804`, protocol.config.json byte-identical,
+  Nova-Budget `apps/nova-web npm test` PASS, and Nova-Budget `dotnet test NOVA.sln` PASS with known NU1903
+  Microsoft.OpenApi warning. Root `npm test` in Nova-Budget failed because that directory has no `package.json`.
+  Unrelated `.claude/settings.json`, peer/operator personal paths, and Nova-Budget untracked
+  `docs/documentacion-tecnica/` were left untouched.
 - TASK-0245 delivered to `in_review` in protocol commit
   `6a1cd56 feat(TASK-0245): add neutral session watchdogs skill`. It adds neutral exportable skill
   `skills/session-watchdogs.skill.md`, registers `session-watchdogs` off-by-default in

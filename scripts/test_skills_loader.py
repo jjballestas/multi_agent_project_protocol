@@ -18,7 +18,6 @@ PINNED_HUB_PATHS = [
     "runtime/eventlog.py",
     "scripts/validate_collaboration_state.py",
     "protocol.config.json",
-    "event-state.runtime.json",
     "Area_comun/decisions/DECISION-0069-instancing-attestation-ceremony.md",
 ]
 

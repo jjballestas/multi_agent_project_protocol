@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04

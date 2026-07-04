@@ -16876,6 +16876,55 @@
             "updated_at": "2026-07-04T04:03:33Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-action-answer",
+            "expires_at": "2026-07-04T05:26:51Z",
+            "notes": "Move consumed TASK-0245 remediation ACTION to answered after delivery ledger state.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-action-answer",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T04:26:51Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:26:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-action-encoding-fix",
+            "expires_at": "2026-07-04T05:29:04Z",
+            "notes": "Remove UTF-8 BOM from answered TASK-0245 remediation ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-action-encoding-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T04:29:04Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:29:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-action-status-fix",
+            "expires_at": "2026-07-04T05:27:59Z",
+            "notes": "Fix answered folder status for consumed TASK-0245 remediation ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-action-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T04:27:59Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:27:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0245-delivery",
             "expires_at": "2026-07-04T23:59:59Z",
             "notes": "Deliver TASK-0245 handoff and mailbox response.",
@@ -16906,6 +16955,30 @@
             "status": "released",
             "task_id": "TASK-0245",
             "updated_at": "2026-07-04T04:07:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-remediation-1",
+            "expires_at": "2026-07-04T10:22:30Z",
+            "notes": "TASK-0245 remediation F-0245-01 clean-clone loader gate reproducibility.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0245",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0245",
+                "Area_comun/tasks/TASK-0245-watchdogs-operativos-skill-neutral-exportable.md",
+                "scripts/test_skills_loader.py",
+                "Area_comun/handoffs/HANDOFF-TASK-0245-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-remediacion-1.md",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T04:22:30Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T04:22:30Z"
         },
         {
             "claim_id": "CLAIM-20260704-Codex-TASK-0247",
