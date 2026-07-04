@@ -18405,6 +18405,76 @@
             "updated_at": "2026-07-04T23:17:32Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-answer-go",
+            "expires_at": "2026-07-05T00:33:38Z",
+            "notes": "Move consumed TASK-0252 GO to answered after delivery is ledger-backed.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-answer-go",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0252-harness-paridad.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0252-harness-paridad.md"
+            ],
+            "started_at": "2026-07-04T23:33:38Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-04T23:33:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-answer-status-fix",
+            "expires_at": "2026-07-05T00:35:41Z",
+            "notes": "Fix consumed GO status after moving to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-answer-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0252-harness-paridad.md"
+            ],
+            "started_at": "2026-07-04T23:35:41Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-04T23:35:41Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-delivery",
+            "expires_at": "2026-07-05T01:31:31Z",
+            "notes": "Deliver TASK-0252 handoff, mailbox response, status transition, and memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0252",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0252",
+                "Area_comun/tasks/TASK-0252-harness-paridad-exec-vs-endpoint-sandbox.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0252-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0252-harness-paridad.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0252-harness-paridad.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-04T23:31:31Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-04T23:31:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-exec",
+            "expires_at": "2026-07-05T05:27:27Z",
+            "notes": "Implement TASK-0252 harness paridad exec-vs-endpoint sandbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-exec",
+                "Area_comun/state/TASK_INDEX.json#TASK-0252",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0252",
+                "Area_comun/tasks/TASK-0252-harness-paridad-exec-vs-endpoint-sandbox.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/tests/NOVA.IntegrationTests",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Infrastructure",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Application",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/docs"
+            ],
+            "started_at": "2026-07-04T23:27:27Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-04T23:27:27Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

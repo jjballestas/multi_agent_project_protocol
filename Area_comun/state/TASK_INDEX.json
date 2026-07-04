@@ -4111,7 +4111,7 @@
                 "DECISION-0078"
             ],
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_review",
             "title": "[VISION-NOVA] Cablea el harness de paridad exec-vs-endpoint al sandbox (rol budget_sandbox_verifier)",
             "type": "feature"
         },

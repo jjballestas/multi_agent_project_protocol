@@ -4,6 +4,18 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
 
 ## Latest Session Note
 
+- TASK-0252 delivered to `in_review`. Product commit `dc04bd8 test: add budget parity harness` adds
+  `tests/NOVA.IntegrationTests/BudgetParityHarnessTests.cs` and `docs/budget-parity-harness.md` in
+  `D:/Agentes/Zeus/NOVA/Nova-Budget`. The harness records `paridad_exec_vs_endpoint` as pass/fail/NA,
+  requires the `budget_sandbox_verifier` sandbox path, refuses non-SANDBOX databases, resets the sealed
+  sandbox baseline before the direct exec arm and again before the endpoint arm, leaves Annul_* procedures
+  out of scope, and relays the DBA hardening recommendation for `IF DB_NAME() NOT LIKE '%SANDBOX%' THROW`.
+  Evidence after product commit: `dotnet test NOVA.sln` PASS 26 tests with known NU1903 Microsoft.OpenApi
+  warning; `npm test --prefix apps/nova-web` PASS. Live SQL parity stayed NA because no
+  secret-backed connection string or sealed-baseline reset SQL was present. Protocol delivery artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0252-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md`. Unrelated protocol dirty
+  paths and Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0251 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip`. Codex moved TASK-0251
   `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0251-done-flip` via runtime seq
