@@ -32,21 +32,32 @@ El corpus del sello = el conjunto de artefactos cuyo estado se congela. Se compu
 uno + un hash de manifiesto (sha256 del listado ordenado `path  sha256`). Procedimiento el 08-jul:
 `sha256sum <archivos> | sort > CORPUS-MANIFEST-etapa1.txt; sha256sum CORPUS-MANIFEST-etapa1.txt`.
 
-| Artefacto | sha256 |
-|---|---|
-| NOVA_ESTUDIO_Particion_Baseline_vs_Gobernado.md | [LLENAR-AL-SELLAR] |
-| NOVA_ESTUDIO_Protocolo_Medicion.md | [LLENAR-AL-SELLAR] |
-| NOVA_ESTUDIO_Anexo_Diseno_Completo.json | [LLENAR-AL-SELLAR] |
-| schema_medicion.json (v1.0 congelado) | [LLENAR-AL-SELLAR] |
-| schema_defectos.json (v1.0 congelado) | [LLENAR-AL-SELLAR] |
-| medicion_ledger.py (scripts nueva-fila/cerrar-fila) | [LLENAR-AL-SELLAR] |
-| este SELLO-ETAPA-1 (auto-hash tras congelar) | [LLENAR-AL-SELLAR] |
-| medicion_journal.csv del piloto GOAL-P1 (3-8 jul) | [LLENAR-AL-SELLAR] |
-| **HASH DE MANIFIESTO** | **[LLENAR-AL-SELLAR]** |
+> PRE-ARMADO por el Arquitecto (ensayo 2026-07-04, RUNBOOK-ENSAYO-atestacion-sello-etapa1.md s.6). Los 6
+> artefactos ESTABLES ya tienen su sha256 FINAL (no cambian). Solo se RECOMPUTAN el dia del sello: los 2
+> schema (freeze v-piloto->v1.0) + el auto-hash de ESTE SELLO (tras llenar) + el HASH DE MANIFIESTO.
 
-NOTA: el codigo de producto (NOVA/Nova-Budget) NO existe aun (lazy, DECISION-0085); su primer
-snapshot atestado es el de GOAL-P1 cuando arranque. El corpus del hub sigue separado del N=500
-sellado (Zeus-Protocol, FONDO INTOCABLE): son capas distintas, no se mezclan.
+| Artefacto | sha256 | estado |
+|---|---|---|
+| NOVA_ESTUDIO_Particion_Baseline_vs_Gobernado.md | ef1e56e7c1b950559d8e3952231662040a1008999baf6002eb28d7671b2e2a41 | FINAL |
+| NOVA_ESTUDIO_Protocolo_Medicion.md | de38530acfd927bb9c4683224a85863ca8b6ae85de5b8cd0ab09c172185969b1 | FINAL |
+| NOVA_ESTUDIO_Anexo_Diseno_Completo.json | 4a52ff58f1363f005ee8daaa72800cad065a3d0da3408422fb4c4a59be835c7c | FINAL |
+| schema_medicion.json (v1.0 congelado) | [LLENAR-AL-SELLAR: recomputar tras freeze v1.0; v-piloto=7f9289705981966a69bcbaa9c79324e90333f6bedd74befbaa34f034e11f7626] | dia-de |
+| schema_defectos.json (v1.0 congelado) | [LLENAR-AL-SELLAR: recomputar tras freeze v1.0; v-piloto=ec1569ffd8be7278ba61e6d09ff62931c89930257636ab7ca9cc535353aa66cb] | dia-de |
+| medicion_ledger.py (scripts nueva-fila/cerrar-fila) | 3e92cca5962f88ff3e77286e263ea20d2b5f461e6555454fec776c99e5595344 | FINAL |
+| este SELLO-ETAPA-1 (auto-hash tras congelar) | [LLENAR-AL-SELLAR: auto-hash tras llenar todo] | dia-de |
+| medicion_journal.csv del piloto GOAL-P1 (fila REAL cerrada+atestada+ratificada) | d2a13216c29b4572ce91a8d3569c3fbbd197be3ff27c372f43a1cf4d719ae2f5 | **FINAL (REAL, ratificado)** |
+| **HASH DE MANIFIESTO** | **[LLENAR-AL-SELLAR: recomputar sobre las 8 filas finales; ensayo 8-filas=7cb8a6b36580c67b4020a69aa7ecb6b3c7e59722725b0054cfac407f386b4e3b]** | dia-de |
+
+NOTA: el codigo de producto Nova-Budget YA EXISTE (GOAL-P1 done, commit 02f5d5a); su primer snapshot atestado
+es el journal REAL de GOAL-P1 (fila d2a13216, tokens_total_atribuibles=165844, degradacion ex-ante). El corpus
+del hub sigue separado del N=500 sellado (Zeus-Protocol, FONDO INTOCABLE): capas distintas, no se mezclan.
+
+**HALLAZGOS DEL PILOTO GOAL-P1 (para el freeze del schema v1.0):** (1) tokens_total_atribuibles = moneda
+confirmatoria del brazo baseline (el desglose por cubeta NO es capturable del runtime codex-exec; solo el total
+cumulativo en STDERR/err.log). Q4 total-vs-total INTACTO; Q1 degrada a total-marginal. (2) El mecanismo de
+captura lee err.log (no out.log). (3) tokens_adversarial_informal NO separable en GOAL-P1 (adversarial in-session);
+de P2 en adelante el adversarial es SESION SEPARADA -> taggable; cache no aislable -> ambos brazos MISMO runtime o
+declarar cache-confound. Al congelar schema v1.0 el 08-jul, hornear estos 3 puntos.
 
 ---
 
