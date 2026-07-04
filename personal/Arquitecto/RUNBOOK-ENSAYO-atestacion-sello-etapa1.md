@@ -90,8 +90,30 @@ python runtime/submit_intent.py --actor-id Arquitecto \
    nitidos conviene que el registro formal (DECISION-00XX) viva en `Area_comun/decisions/`. Decidir
    con el asesor/Operador al sellar (no ahora).
 
+## 5b. HALLAZGOS DEL PILOTO GOAL-P1 (2026-07-04, para el freeze del schema v1.0)
+
+El build REAL de GOAL-P1 corrio (Codex, TASK-0247 done, product commit 02f5d5a). Hallazgos de
+capturabilidad de la medicion (el proposito del piloto), a horneAr en el schema v1.0 al sellar:
+
+- **tokens: solo el TOTAL es capturable, NO el desglose por cubeta.** codex exec emite UN numero
+  cumulativo `tokens used` por sesion, en **STDERR** (`.protocol-tmp/codex_mailbox_cron/runs/*.err.log`,
+  NO en out.log) = ~165844 para el build de GOAL-P1. Las 4 cubetas (dev/adversarial_informal/checker_formal/
+  coordinacion_gobierno) NO se separan en la fuente, e incluye lecturas de contexto/cache. -> por la regla de
+  degradacion ex-ante sellada, colapsa a **tokens_total_atribuibles**. RECOMENDACION PARA EL FREEZE: sellar
+  tokens_total_atribuibles como la moneda confirmatoria del brazo baseline (el desglose fino no es viable con
+  este runtime). El mecanismo de captura (medir-goalp1.ps1) debe leer el **err.log**, no out.log.
+- **tokens_adversarial_informal NO separable en GOAL-P1** (el adversarial de 12 puntos corrio in-session del
+  maker). De P2 en adelante el adversarial es SESION SEPARADA (DIRECTIVA operador) -> ahi SI sera taggable.
+- **Capturables OK:** tiempo_pared (~12 min build, de EXEC_START/EXIT del cron log), sesiones_n, mono,
+  reworks_n=0, secuencia_veredictos=APROBADO, estado_final, fechas, brazo/par/criticidad/estimate.
+- **GAP-1 (journal ausente) CERRADO parcialmente:** el journal smoke se reseteo (archivado a .smoke.csv);
+  la fila REAL de GOAL-P1 se cierra cuando el Operador (o el Arquitecto por delegacion) corra el ciclo con los
+  valores de arriba; ese sha256 es lo que se atesta. Pendiente la decision del Operador (degradacion + quien
+  cierra), reportada en el mailbox 0ee5494.
+
 ## 5. Estado
 
-ENSAYO COMPLETO. Mecanismo probado end-to-end en seco: manifiesto reproducible + vehiculo `decision`
-dry-run-validado + gaps enumerados. El dia del sello = 1 commit (sello+manifiesto) + 1 intent
-`decision`. NADA sellado ni registrado en este ensayo.
+ENSAYO COMPLETO + hallazgos del piloto GOAL-P1 incorporados (s.5b). Mecanismo probado end-to-end en seco:
+manifiesto reproducible + vehiculo `decision` dry-run-validado + gaps enumerados + capturabilidad de tokens
+resuelta (total-si / desglose-no, captura en stderr). El dia del sello = 1 commit (sello+manifiesto) + 1
+intent `decision`; el schema v1.0 sella tokens_total_atribuibles como moneda baseline. NADA sellado aun.
