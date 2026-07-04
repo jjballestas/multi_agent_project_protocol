@@ -19,6 +19,7 @@
   NOVA_SPEC_Plantilla (s.4) -> exposicion INCIDENTAL via el doc del paquete, NO lectura de la fuente de la tarea
   baseline; esta SPEC no reusa su contenido ni su read model agregado. Su fase SPEC se excluye del delta (simetria
   con el spec_prepagado de P2.2, per NOVA_ESTUDIO_Particion s.2.2).
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: objetos de NOVA-PRES-11 (BD DbsFinanciero readonly 2026-07-03; las vistas de saldo se verificaron existentes via conector readonly en el sello); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
 - stack (obligatorio): React+TS+Vite (front sin SQL) / ASP.NET Core .NET 10 en capas + NOVA.Mcp / SQL Server 2025 via gateways tipados / OpenTelemetry / ProblemDetails. Anti-patrones PROHIBIDOS: WebForms/PageMethods, DataTable entre capas, DLLs manuales, capa DATABASE generica, secretos en .config, centinelas -99.

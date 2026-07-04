@@ -10,6 +10,7 @@
 - arm: gobernado - family: P3 - unit: P3.4
 - q4_membership: **CONDICIONAL** (criticidad media; entra al pool Q4 si su DEC esta cerrada al sello Etapa 2)
 - isolation: familia P3 gobernada sin hermano baseline; manifiesto de archivos leidos = PRES-06 (+PRES-05 herencia); leyo_codigo_hermano = NO
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: objetos de NOVA-PRES-06 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
 - throw_source (verificado OBJECT_DEFINITION + PRES-06 s.3.1): **PROC-DIRECTO** `Approve_Obligation_Draft` = 50128-50134 (regla de oro = 50134) [confirmado en OBJECT_DEFINITION]. **NUMERACION** (`Allocate_Document_Number`): 50220-50223. **TRIGGER/CHECK durante la transaccion** (NO en la def directa del proc; fuente = triggers de Obligation(_Line) per PRES-06 s.3.1): 50116-50121 (coherencia de cabecera: vigencia/uso/catalogos/compromiso), 50210/50211 (no ingreso / solo auxiliares en linea), 50212 (vigencia abierta, trigger trg_obligation__validate_open_year).
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio

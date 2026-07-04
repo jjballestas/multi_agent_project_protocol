@@ -10,6 +10,7 @@
 - arm: gobernado - family: P3 - unit: P3.2
 - q4_membership: **CONDICIONAL** (criticidad media; entra al pool Q4 si su DEC esta cerrada al sello Etapa 2)
 - isolation: sin hermano baseline en P3; manifiesto de archivos leidos + leyo_codigo_hermano = NO
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: objetos citados de NOVA-PRES-04 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada al construir (F-NOVA-01)
 - throw_source (verificado OBJECT_DEFINITION + PRES-04 s.4): **PROC-DIRECTO** `Approve_Availability_Certificate_Draft` = 50145-50150 (regla de oro = 50150) [confirmado en OBJECT_DEFINITION]. **NUMERACION** (proc llamado `Allocate_Document_Number`): 50220-50223. **TRIGGER/CHECK/CATALOGO durante la transaccion** (NO en la def directa del proc; fuente = triggers de Availability_Certificate(_Line) + catalogos per PRES-04 s.4): 50210/50211 (no ingreso / solo auxiliares), 50212 (vigencia abierta), 50066-50068 (catalogos estado/tipo/uso), 50076 (vigencia de linea).
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio

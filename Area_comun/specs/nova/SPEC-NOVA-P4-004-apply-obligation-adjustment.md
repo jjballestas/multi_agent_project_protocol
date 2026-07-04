@@ -16,6 +16,8 @@
   (Apply_Commitment_Adjustment) -- y la modificacion de apropiacion (01-04, P4.1 baseline) quedan FUERA de
   alcance. NO se leyo codigo/implementacion de ningun miembro baseline: `leyo_codigo_hermano = NO`. PRES-03 es
   documentacion de dominio compartida (los procs existen en la BD), no la fuente de la tarea baseline.
+- **PRECONDICION BLOQUEANTE (sandbox mutadores <=14-jul):** el conector readonly `nova_sql_connector_readonly_s9` NO tiene EXECUTE (Msg 229); como el proc ESCRIBE, sus criterios de mutacion NO se ejercen readonly -> requiere el SANDBOX SELLADO (backup+GRANT EXECUTE o BEGIN TRAN/EXEC/ROLLBACK), IDENTICO en ambos brazos, listo <=14-jul (DECISION-0078). Sin el, la unidad se DIFIERE.
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: objetos de NOVA-PRES-03/06 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
 - stack (obligatorio): React+TS+Vite (front sin SQL) / ASP.NET Core .NET 10 en capas + NOVA.Mcp / SQL Server 2025 via SPs con gateways tipados (incluye TVP) / OpenTelemetry / ProblemDetails. Anti-patrones PROHIBIDOS: WebForms/PageMethods, DataTable entre capas, DLLs manuales, capa DATABASE generica, secretos en .config, centinelas -99.

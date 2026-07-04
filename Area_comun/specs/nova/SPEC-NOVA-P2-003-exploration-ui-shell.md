@@ -10,6 +10,7 @@
 - arm: gobernado - unit: P2.3 (UI de exploracion)
 - q4_membership: **DENTRO** (criticidad BAJA; calibra la taxonomia de defectos D1-D4 del estudio -- tarea de bajo riesgo, alto valor de calibracion)
 - isolation: FRONTEND puro (React+TS). SIN backend read-model propio; SIN SQL; consume endpoints existentes de forma GENERICA. No reimplementa ni referencia los read models BASELINE P2.1 (parametros) ni P2.2 (reporte de ejecucion): es la CAPA DE PRESENTACION reutilizable, no su logica. Manifiesto de archivos leidos: NOVA-GOAL-001 + arquitectura (s.10 desacoplamiento frontend). leyo_codigo_hermano = NO.
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: N/A (frontend; no consume BD). El maker verifica contra los contratos OpenAPI del vertical slice P1.
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
 - stack (obligatorio): React + TypeScript + Vite; cliente generado desde OpenAPI; el frontend JAMAS accede a SQL ni duplica logica transaccional (regla 1/pre-validacion solo de formato). ProblemDetails renderizado como error de negocio. Anti-patrones PROHIBIDOS: logica de negocio critica en React, llamadas SQL desde el front, acoplar la UI a un endpoint concreto (debe ser generica/reutilizable).

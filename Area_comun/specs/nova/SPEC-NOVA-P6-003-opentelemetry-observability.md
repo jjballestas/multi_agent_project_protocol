@@ -10,6 +10,7 @@
 - arm: gobernado - unit: P6.3 (OpenTelemetry)
 - q4_membership: **DENTRO** (criticidad baja; enumerada nominalmente en el pool Q4)
 - isolation: item de POOL Q4 gobernado, transversal (infra); SIN hermano baseline y SIN solape con ninguna unidad baseline (no toca read models P2.1/P2.2 ni ajustes P4.x). Manifiesto de archivos leidos: NOVA_Architecture_ExperienciasGH.md (s.13) + NOVA-GOAL-001. leyo_codigo_hermano = NO.
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: N/A (SPEC de infra; no consume objetos BD). El maker verifica la instrumentacion contra el codigo desplegado del vertical slice P1.
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
 - stack (obligatorio): OpenTelemetry SDK .NET (traces/metrics/logs) sobre ASP.NET Core .NET 10; exportadores OTLP; correlation id propagado React+TS+Vite -> NOVA.Api -> NOVA.Application -> NOVA.Infrastructure -> NOVA.Mcp. Anti-patrones PROHIBIDOS: logs sin correlation id, secretos del endpoint OTLP en .config, instrumentacion que acopla dominio a infraestructura.

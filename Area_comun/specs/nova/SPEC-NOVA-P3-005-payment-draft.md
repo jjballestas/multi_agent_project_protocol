@@ -10,6 +10,7 @@
 - arm: gobernado - family: P3 - unit: P3.5
 - q4_membership: **FUERA** (criticidad ALTA, frontera Treasury/Pagos -> por la regla de criticidad sellada NO entra al contraste causal Q4; se especifica igual, solo descriptiva)
 - isolation: familia P3 gobernada sin hermano baseline; manifiesto de archivos leidos = PRES-07 (+PRES-06 herencia); leyo_codigo_hermano = NO
+- **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: objetos de NOVA-PRES-07 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada (F-NOVA-01)
 - throw_source (verificado OBJECT_DEFINITION + PRES-07): **PROC-DIRECTO** `Approve_Payment_Draft` = 50180-50187 (regla de oro = 50187) [confirmado en OBJECT_DEFINITION; el proc NO emite 50188-50190]. **TRIGGER/CHECK durante la transaccion** (NO en la def directa del proc): 50188-50190 (coherencias de vigencia/pertenencia de Payment_Draft(_Line), PRES-07 s.3.1), 54257 (trigger de `Payment_Order_Budget_Line`: obligacion de la misma vigencia que la orden).
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio
