@@ -30,7 +30,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "low",
-            "status": "proposed",
+            "status": "ready",
             "title": "[VISION-NOVA] Cablea el harness de paridad exec-vs-endpoint al sandbox (rol budget_sandbox_verifier)"
         }
     ],
