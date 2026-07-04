@@ -4,6 +4,16 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0247 done-flip completed after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0247-done-flip`. Codex moved TASK-0247
+  `review_approved -> done` via runtime seq 3705-3707, released
+  `CLAIM-20260704-Codex-TASK-0247-done-flip`, and moved both the consumed ACTION and the prior Codex
+  in-review handoff message to `Area_comun/mailbox/answered/`. Protocol commit:
+  `d1887d5 coord(TASK-0247): close done flip`. Evidence before commit: Nova-Budget `dotnet test NOVA.sln`
+  PASS 9 tests with known NU1903 warning for `Microsoft.OpenApi` 2.3.0, `npm run typecheck` PASS, protocol
+  encoding OK, domain-neutrality exit 0, validator OK with unrelated non-response FYI warnings only, and
+  drift false / byte-identical at `up_to_seq=3707`. Product repo had unrelated untracked
+  `docs/documentacion-tecnica/` and was left untouched.
 - TASK-0247 delivered to `in_review`. Product repo `D:/Agentes/Zeus/NOVA/Nova-Budget` was initialized with
   remote `https://github.com/jjballestas/Nova-Budget.git`, branch `main`, and pushed commit
   `02f5d5a feat: add Nova Budget technical foundation`. It adds `NOVA.sln`, the six required .NET 10 layers,
