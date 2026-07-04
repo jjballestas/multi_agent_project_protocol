@@ -17019,6 +17019,24 @@
             "updated_at": "2026-07-03T23:14:04Z"
         },
         {
+            "claim_id": "CLAIM-20260704-arquitecto-ratify0247",
+            "expires_at": "2026-07-04T05:00:00Z",
+            "notes": "Ratifica/atesta TASK-0247 GOAL-P1: deliverable verificado independiente (dotnet test 9/9 verde: 1 unit + 5 architecture + 3 integration; typecheck+smoke+adversarial informal APPROVED). Product commit Nova-Budget 02f5d5a. Opcion B baseline.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-arquitecto-ratify0247",
+                "Area_comun/state/TASK_INDEX.json#TASK-0247",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0247",
+                "Area_comun/tasks/TASK-0247-nova-goalp1-fundacion-tecnica-nova-budget.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T01:08:29Z",
+            "status": "released",
+            "task_id": "TASK-0247",
+            "updated_at": "2026-07-04T01:08:29Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-arquitecto-task0247",
             "expires_at": "2026-07-04T04:30:00Z",
             "notes": "Registra TASK-0247 GOAL-P1 fundacion tecnica Nova-Budget (ready, owner Codex; opcion B baseline; DECISION-0088 asiento hub).",
