@@ -17296,6 +17296,36 @@
             "updated_at": "2026-07-04T12:07:34Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-action-answer",
+            "expires_at": "2026-07-04T13:52:39Z",
+            "notes": "Answer consumed TASK-0249 done-flip action.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-action-answer",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip.md"
+            ],
+            "started_at": "2026-07-04T13:22:39Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T13:22:39Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-answer-status-fix",
+            "expires_at": "2026-07-04T13:55:24Z",
+            "notes": "TASK-0249 done-flip validation cleanup.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-answer-status-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip.md"
+            ],
+            "started_at": "2026-07-04T13:25:24Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T13:25:24Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0249-answered-status",
             "expires_at": "2026-07-04T13:14:52Z",
             "notes": "Set consumed GO status to answered after move.",
@@ -17344,17 +17374,34 @@
             "updated_at": "2026-07-04T12:12:37Z"
         },
         {
-            "claim_id": "CLAIM-20260704-Codex-TASK-0249-done-flip",
-            "expires_at": "2026-07-04T13:49:31Z",
-            "notes": "Done flip TASK-0249 after Arquitecto review_approved.",
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-done-cleanup",
+            "expires_at": "2026-07-04T13:50:33Z",
+            "notes": "Cleanup claim for TASK-0249 done flip and malformed prior claim release.",
             "owner": "Codex",
             "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-done-flip Area_comun/state/TASK_INDEX.json#TASK-0249 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0249 Area_comun/tasks/TASK-0249-f33-instrumentacion-medicion-estudio.md"
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-done-cleanup",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0249",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0249",
+                "Area_comun/tasks/TASK-0249-f33-instrumentacion-medicion-estudio.md"
             ],
-            "started_at": "2026-07-04T13:19:31Z",
-            "status": "active",
+            "started_at": "2026-07-04T13:20:33Z",
+            "status": "released",
             "task_id": "TASK-0249",
-            "updated_at": "2026-07-04T13:19:31Z"
+            "updated_at": "2026-07-04T13:20:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-done-flip",
+            "expires_at": "2026-07-04T13:55:24Z",
+            "notes": "TASK-0249 done-flip validation cleanup.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-done-flip"
+            ],
+            "started_at": "2026-07-04T13:25:24Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T13:25:24Z"
         },
         {
             "claim_id": "CLAIM-20260704-Codex-TASK-0249-encoding-fix",

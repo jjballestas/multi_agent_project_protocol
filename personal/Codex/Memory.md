@@ -4,6 +4,15 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0249 done-flip completed in protocol commit `coord(TASK-0249): close done flip` after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip`. Codex moved TASK-0249
+  `review_approved -> done` via runtime seq 3874, released Codex done-flip claims through seq 3882,
+  moved the consumed ACTION to `Area_comun/mailbox/answered/`, and opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-done-flip-done.md`. Evidence:
+  Nova-Budget `dotnet test NOVA.sln` PASS 9 tests with known NU1903 Microsoft.OpenApi warning,
+  Nova web `npm test` PASS 1 test, protocol encoding OK after BOM cleanup, domain-neutrality exit 0,
+  validator OK, and drift false at `up_to_seq=3882`. Unrelated `.claude/settings.json`,
+  peer/operator personal paths, and Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0249 remediation 2 delivered in protocol commit `fc412b8 fix(TASK-0249): remediate instrumentation findings`.
   It fixes F-0249-02 by making `read_errlog_tokens` accept only explicit cumulative fields
   (`tokens_total_atribuibles`, `tokens_total`, `cumulative_tokens`, `total_tokens_cumulative`) and reject

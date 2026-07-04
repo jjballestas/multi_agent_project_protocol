@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "f43fc26325b00e5d54b0e30f4c1df59a6f8ada2cca9edbda0f1848c49f0cec01",
+  "canonical_hash": "36ed7f2b68d850c6c622690ebf32904e592205f7df7bb3f075e32f49d4751144",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -490,6 +490,10 @@
       "CLAIM-20260704-Codex-TASK-0248-go-answer": 1,
       "CLAIM-20260704-Codex-TASK-0248-product-hash-fix": 1,
       "CLAIM-20260704-Codex-TASK-0248-remediation-1": 1,
+      "CLAIM-20260704-Codex-TASK-0249-action-answer": 1,
+      "CLAIM-20260704-Codex-TASK-0249-answer-status-fix": 1,
+      "CLAIM-20260704-Codex-TASK-0249-done-cleanup": 1,
+      "CLAIM-20260704-Codex-TASK-0249-done-flip": 2,
       "CLAIM-20260704T033957Z-Arquitecto-mailbox-higiene-1": 1,
       "CLAIM-20260704T035733Z-Arquitecto-mailbox-higiene-2": 1,
       "CLAIM-20260704T035952Z-Arquitecto-TASK-0245-promote": 1,
@@ -1271,7 +1275,7 @@
       "TASK-0246": 11,
       "TASK-0247": 14,
       "TASK-0248": 20,
-      "TASK-0249": 24,
+      "TASK-0249": 29,
       "TASK-0250": 1,
       "TASK-0251": 1,
       "TASK-0252": 2,
@@ -1282,7 +1286,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3201,
+    "events_applied": 3211,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2371,7 +2375,17 @@
       "codex-task-0202-delivery-claim-release-20260627": 2304,
       "codex-task-0202-in-progress-20260627": 2300,
       "codex-task-0202-in-review-20260627": 2302,
+      "codex-task0249-action-answer-claim": 3877,
+      "codex-task0249-action-answer-release": 3878,
+      "codex-task0249-answer-status-acquire": 3880,
+      "codex-task0249-answer-status-release": 3882,
       "codex-task0249-done-claim-acquire-v2": 3872,
+      "codex-task0249-done-cleanup-acquire": 3873,
+      "codex-task0249-done-status-v2": 3874,
+      "codex-task0249-fix-malformed-acquire": 3879,
+      "codex-task0249-fix-malformed-release": 3881,
+      "codex-task0249-release-cleanup-v2": 3876,
+      "codex-task0249-release-malformed-v2": 3875,
       "codex:0166-fix3-answered:claim-acquire": 1610,
       "codex:0166-fix3-answered:claim-release": 1611,
       "codex:0166-fix3-delivery:claim-acquire": 1606,
@@ -4487,5 +4501,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3872
+  "up_to_seq": 3882
 }

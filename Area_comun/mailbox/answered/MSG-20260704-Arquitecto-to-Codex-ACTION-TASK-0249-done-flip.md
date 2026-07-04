@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-done-flip
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-04
 context_refs:
@@ -17,3 +17,4 @@ question: ""
 
 Ratifique in_review->review_approved (rejuicio 2/2 del Analista, OK/CERRABLE: F-0249-01/02/03 cerrados).
 El flip a `done` exige capability `implementer`; ejecutalo tu.
+
