@@ -34,11 +34,15 @@
   min legitimo). Solo jam con firma real: err.log de hang, lease vencida, sin heartbeat.
 - MINIMIZAR CHURN: no commitear ESTADO por cada micro-evento del monitor; capturar el estado RESUELTO de
   cada hilo. Mailbox: no re-enviar directivas ya en open/ (el peer las consume).
-- ANTI-COLISION EN ARBOL COMPARTIDO (leccion 2026-07-04): comparto working tree con el Arquitecto; su
-  submit_intent en curso (enforce+authoritative ON, materialize) materializa state en el arbol comun ANTES
-  del commit atomico -> aparece como ` M CLAIMS.json` sin commitear. ANTES de commitear: `git status --short
-  Area_comun/state/` -> si hay half-written peer state, ESPERAR a que aterrice (DECISION-0020). Yo staging-
-  explicito (solo mis rutas) me protege de clobber, pero igual reviso. NO es anomalia: es su op en vuelo.
+- ANTI-COLISION EN ARBOL COMPARTIDO (leccion 2026-07-04, REFORZADA): comparto working tree + INDICE GIT con el
+  Arquitecto; su submit_intent en curso stagea archivos (decisions/, state/) en el INDICE COMPARTIDO antes de su
+  commit atomico. **ERROR QUE COMETI (568b8d4):** `git add <mifile>` + `git commit` SIN pathspec commitea el
+  INDICE COMPLETO -> arrastre su DECISION-0091 (sello) staged, quedo commiteada sin atestar en #4 = DRIFT (dato
+  intacto, recuperable via regenesis+submit_intent, pero ruido en su transaccion). **REGLA DURA:** SIEMPRE
+  `git commit -m "..." -- <pathspec>` (pathspec-limitado; commitea SOLO mi ruta, ignora lo staged por el peer).
+  NUNCA `git add`+`git commit` pelado en arbol compartido. Ademas ANTES: `git status --short` -> si hay archivos
+  con `^[AMD]` (staged) que NO son mios, o half-written peer state en Area_comun/state|decisions/, ESPERAR
+  (DECISION-0020). El staging-explicito NO basta; el pathspec en el COMMIT es lo que protege.
 
 ## Deberes al arrancar
 1. AUTO-POLL: git fetch/pull, git log -8, ls Area_comun/mailbox/open/, pendientes TASK_INDEX.
