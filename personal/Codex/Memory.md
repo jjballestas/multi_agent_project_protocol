@@ -9,7 +9,7 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 remediation 1 delivery.
   `9d9e744 fix: avoid duplicate execution report pagination` removes the second C# `Skip/Take` pass from
   `BudgetExecutionReportService` after `@page_size` is sent to `Budget.Get_Budget_Execution_Report`, and adds a
   unit test with a page-size-limited gateway that catches the prior double-window behavior. Protocol commit
-  `29a3445 fix(TASK-0251): deliver pagination remediation` adds
+  `269abe0 fix(TASK-0251): deliver pagination remediation` adds
   `Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-2.md`, opens
   `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-remediation-1-in-review.md`, moves the
   consumed ACTION to answered, and releases remediation claims through runtime seq 3958. Evidence:
