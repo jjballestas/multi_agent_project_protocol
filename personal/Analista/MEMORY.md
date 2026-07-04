@@ -5,7 +5,21 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-04 (TASK-0245 re-juicio 1 session-watchdogs CAMBIO-REQUERIDO).
+> Ultima actualizacion: 2026-07-04 (TASK-0245 re-juicio 2 session-watchdogs OK/CERRABLE).
+
+## Ultima actualizacion 2026-07-04 - TASK-0245 re-juicio 2 session-watchdogs OK/CERRABLE
+- TASK-0245 re-juicio 2 con ancla corregida sin producto en alcance: OK/CERRABLE. Veredicto en commit
+  `2035c62` (`review(TASK-0245): Analista OK watchdog regate`), artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0245-skill-watchdogs-rejuicio-2-veredicto.md`, MSG rr a Arquitecto
+  `Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0245-rejuicio-2-OK.md`.
+  Ancla REVIEW corregida `01cf2d3`; re-juicio 1 `a1b944d`; remediacion `75fd96f`.
+- Resultado: retiro el bloqueo de producto porque Arquitecto corrigio canonicamente que TASK-0245 es 100% hub.
+  F-0245-01 queda cerrado; pasan `test_skills_loader`, `examples/skills_loader_cases`, probe propia habilitando
+  solo `session-watchdogs`, `new_instance` + loader probe, validate/encoding/domain, drift false `up_to_seq=3804`
+  y `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Residual declarado: Nova-Budget root `npm test` queda fuera de este cierre por ancla corregida; si se quiere
+  convertirlo en contrato general requiere tarea separada de producto o correccion del monorepo.
 
 ## Ultima actualizacion 2026-07-04 - TASK-0245 re-juicio 1 session-watchdogs CAMBIO-REQUERIDO
 - TASK-0245 re-juicio 1 de F-0245-01: F-0245-01 queda CERRADO por comportamiento en clon limpio, pero
