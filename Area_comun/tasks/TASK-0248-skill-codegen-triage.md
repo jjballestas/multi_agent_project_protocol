@@ -2,7 +2,7 @@
 task_id: TASK-0248
 title: "[VISION-NOVA] Skill codegen-triage para Codex (2 capas: NEUTRAL decision codegen-vs-frontera exportable + recetas de INSTANCIA Nova). Gobernada: owner Codex-maker / checker Analista."
 type: feature
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high
