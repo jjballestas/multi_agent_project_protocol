@@ -4,6 +4,17 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0245 done-flip completed after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-done-flip`. Codex moved TASK-0245
+  `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0245-done-flip` through runtime seq
+  3820-3822, then opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-done-flip-done.md`, moved the consumed
+  ACTION to `Area_comun/mailbox/answered/`, and released mailbox/status claims through seq 3826. Protocol
+  commit: `bbff76d coord(TASK-0245): close done flip`. Evidence: Nova-Budget `apps/nova-web npm test` PASS,
+  Nova-Budget `dotnet test NOVA.sln` PASS 9 tests with known NU1903 Microsoft.OpenApi warning, protocol
+  encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=3826`, and
+  `protocol.config.json` diff clean. Unrelated `.claude/settings.json`, peer/operator personal paths, and
+  Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0245 remediation 1 delivered to `in_review` in protocol commit
   `75fd96f fix(TASK-0245): make skill loader gate reproducible`. It removes ignored local
   `event-state.runtime.json` from `scripts/test_skills_loader.py` watched paths so the loader gate is
