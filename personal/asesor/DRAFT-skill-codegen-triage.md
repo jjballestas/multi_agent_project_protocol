@@ -34,8 +34,10 @@ PROCEDIMIENTO (el firmante responsable de la tarea lo aplica; el decide porque e
 REGLA DE ORO: el ahorro solo existe si revisar/generar es mas barato que escribir con criterio. Una
 "superficie" es mecanica SOLO si es 1-fuente/1-salida sin secuencia de mutaciones ni dependencia con brecha.
 
-SALIDA de la skill: para la tarea -> {camino: codegen | frontera | (asistencia-autorizada si aplica),
-razon, gate que la verifica, banderas rojas detectadas}.
+SALIDA de la skill (nombres de campo en INGLES, capa neutral exportable/publicable): para la tarea ->
+{path: codegen | boundary, reason, verifying_gate, red_flags}. (La asistencia-autorizada/peon queda fuera
+del alcance inicial; el path es codegen-vs-boundary. Correccion F-0248-02: mi draft original uso nombres en
+espanol {camino, razon, gate, banderas} por error; la forma canonica es la inglesa, coherente con el SKILL.md.)
 
 ## CAPA DE INSTANCIA NOVA - recetas (el "como"; NO va en el core neutral)
 
