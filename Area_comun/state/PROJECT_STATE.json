@@ -1195,6 +1195,12 @@
             "title": "[VISION-NOVA][NOVA-GOAL-001][GOAL-P1] Fundacion tecnica de Nova-Budget (sln + capas .NET 10 + apps/nova-web + architecture tests + infra transversal + CI). Piloto baseline (opcion B, checker_formal=0)."
         },
         {
+            "id": "TASK-0248",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[VISION-NOVA] Skill codegen-triage para Codex (2 capas: NEUTRAL decision codegen-vs-frontera exportable + recetas de INSTANCIA Nova). Gobernada: owner Codex-maker / checker Analista."
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

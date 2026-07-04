@@ -23,6 +23,12 @@
             "owner": "Arquitecto",
             "status": "in_progress",
             "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
+        },
+        {
+            "id": "TASK-0248",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[VISION-NOVA] Skill codegen-triage para Codex (2 capas: NEUTRAL decision codegen-vs-frontera exportable + recetas de INSTANCIA Nova). Gobernada: owner Codex-maker / checker Analista."
         }
     ],
     "next_actions": [

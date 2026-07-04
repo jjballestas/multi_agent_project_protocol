@@ -17077,6 +17077,24 @@
             "updated_at": "2026-07-04T00:46:15Z"
         },
         {
+            "claim_id": "CLAIM-20260704-arquitecto-task0248",
+            "expires_at": "2026-07-04T05:30:00Z",
+            "notes": "Registra TASK-0248 skill codegen-triage (ready, owner Codex maker, checker Analista; gobernada, gate formal aplica).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-arquitecto-task0248",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0248-skill-codegen-triage.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T01:17:37Z",
+            "status": "released",
+            "task_id": "GOAL-VISION-NOVA-001",
+            "updated_at": "2026-07-04T01:17:37Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

@@ -3994,6 +3994,32 @@
             "type": "build"
         },
         {
+            "checker": "Analista",
+            "file": "Area_comun/tasks/TASK-0248-skill-codegen-triage.md",
+            "id": "TASK-0248",
+            "linked_decisions": [
+                "DECISION-0061",
+                "DECISION-0078",
+                "DECISION-0002"
+            ],
+            "linked_reqs": [],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "NOVA-GOAL-001",
+                "DECISION-0061",
+                "DECISION-0078",
+                "DECISION-0088"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[VISION-NOVA] Skill codegen-triage para Codex (2 capas: NEUTRAL decision codegen-vs-frontera exportable + recetas de INSTANCIA Nova). Gobernada: owner Codex-maker / checker Analista.",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
