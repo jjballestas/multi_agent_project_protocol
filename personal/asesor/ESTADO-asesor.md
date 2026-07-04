@@ -2,12 +2,14 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-04 ~06:30Z (FIN DE SESION DE BUILD -- ver seccion ">> FIN DE SESION"). Se
-> construyo Nova-Budget de cero: GOAL-P1 (construido+medido+atestado+ratificado sha256 d2a13216) + skill
-> codegen-triage (viva) + 14 SPECs baseline ATESTADO + sandbox mutadores construido+sellado (P4.x READY) +
-> estimates Q4 LOCKED + TASK-0245 (watchdogs->skill) APROBADA. SELLO ETAPA 1 = 100% PRE-ARMADO (falta solo la
-> semilla NIST + atestacion el 08-jul). BUILD+PREP COMPLETO. PROXIMO EVENTO REAL: sello 08-jul. AHORA: watch;
-> pendiente la decision del operador sobre stand-down del Arquitecto (mi recomendacion: parar hasta el sello).
+> Ultima actualizacion: 2026-07-04 ~14:00Z (CIERRE DE SESION). **SELLO ETAPA 1 EJECUTADO Y ATESTADO**
+> (DECISION-0091, #4 seq 3831; corpus congelado + schema v1.0 + sorteo pre-registrado corrido con semilla NIST
+> pulso 1844242 -- VERIFICADO independiente por el Asesor byte a byte: 2 completo / 8 ligero). Se construyo
+> Nova-Budget de cero: GOAL-P1 (done+medido+atestado sha256 d2a13216) + skill codegen-triage (viva) + 14 SPECs
+> baseline atestado + sandbox mutadores sellado (P4.x READY) + estimates Q4 locked + TASK-0245 aprobada.
+> HALLAZGO CLAVE: el sorteo 8/2 hace Q4 SUBPOTENCIADO (se declara poder efectivo, no se fuerza). CAMINO OPTIMO
+> routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
+> PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
@@ -81,7 +83,27 @@
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
   se quede sin inputs del operador.
 
-## >> FIN DE SESION 2026-07-04 ~06:10Z - BUILD+PREP COMPLETO, SELLO 100% PRE-ARMADO
+## >> PROXIMA SESION - BLOQUE DE TRABAJO (indicarselo al operador al arrancar)
+**EL SELLO ETAPA 1 YA ESTA HECHO Y ATESTADO** (DECISION-0091, #4 seq 3831; sorteo verificado). El pipeline esta en
+el CAMINO OPTIMO (no stand-down, confirmado por el Arquitecto). **BLOQUE DE TRABAJO = arrancar la instrumentacion
+y el dev medido post-sello.** Al arrancar, INDICALE AL OPERADOR este bloque, en orden:
+1. **MIS DELIVERABLES (carril diseno Asesor) -- PREPARAR YA:**
+   - **SPEC de F3.3** (instrumentacion): cost.attributed automatico por task_id (captura del total del stderr;
+     por-cubeta solo via sesion-separada; degradacion a total sellada) + defect.reported (evento validado vs
+     schema_defectos, con detector para la paridad) + manual.intervention + study_metrics.py (determinista con
+     golden; Q1-Q5 del plan s.7 del SELLO). Prior art: DECISION-0033 + SPEC-0079 (cost-attribution-por-handoff,
+     en .protocol-tmp/zc-proto/). -> Rutear al Arquitecto para que Codex la construya ANTES de que abra P2.
+   - **DRAFT de F3.2** (aritmetica del backlog + condicionalidad Q4 consolidada + regla de adopcion) para el
+     sello Etapa 2 (<=29-jul). RELEVANTE por el hallazgo: el sorteo 8/2 hace Q4 subpotenciado -> declarar poder efectivo.
+2. **COORDINAR el camino optimo (mailbox + monitor):** F3.3 build (Codex via Arquitecto) -> dev medido P2.1/P2.2
+   (ventana baseline 3-25 jul; Codex maker + adversarial SESION SEPARADA; abre con F3.3 listo o manual fallback) ->
+   PAR-2 condicional (monitor checkpoint hardening <=15-jul; procs Annul_*; si no llegan, PAR-2 cae).
+3. **COSECHAR la medicion** de cada unidad medida cuando corra; verificar integridad de estudio en cada gate.
+PENDIENTES DEL OPERADOR: GRANT EXECUTE <=14-jul (paridad de mutadores); revision legal del consentimiento.
+CALENDARIO: 14-jul GRANT EXECUTE + P4.1 | 15-jul checkpoint hardening (PAR-2) | 17-jul miembros gobernados de pares |
+25-jul cierre duro ventana baseline | 29-jul sello Etapa 2 | 30-jul Sprint 1 gobernado (gate duro).
+
+## >> CIERRE SESION 2026-07-04 - SELLO ETAPA 1 EJECUTADO Y ATESTADO (historico)
 Ciclo de build cerrado de punta a punta: GOAL-P1 (construido+medido+atestado+ratificado, sha256 d2a13216) +
 skill codegen-triage (viva, DECISION-0061, aun NO invocada como triage -- 1a ocasion = dev baseline P2.1/P2.2
 post-sello; tooling Vite/dotnet-new SI se uso en scaffold) + 14 SPECs (P2/P3/P4/P6, baseline ATESTADO por
