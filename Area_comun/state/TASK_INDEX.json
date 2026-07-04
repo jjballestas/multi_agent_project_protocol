@@ -4091,6 +4091,31 @@
             "type": "feature"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0252-harness-paridad-exec-vs-endpoint-sandbox.md",
+            "id": "TASK-0252",
+            "linked_decisions": [
+                "DECISION-0091",
+                "DECISION-0078"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "low",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "DECISION-0091",
+                "DECISION-0078"
+            ],
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[VISION-NOVA] Cablea el harness de paridad exec-vs-endpoint al sandbox (rol budget_sandbox_verifier)",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

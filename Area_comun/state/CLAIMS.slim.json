@@ -10,6 +10,14 @@
                 "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md"
             ],
             "task_id": "TASK-0246"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-done-flip",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-done-flip Area_comun/state/TASK_INDEX.json#TASK-0249 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0249 Area_comun/tasks/TASK-0249-f33-instrumentacion-medicion-estudio.md"
+            ],
+            "task_id": "TASK-0249"
         }
     ],
     "schema_version": "1.0",
