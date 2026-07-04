@@ -30,6 +30,20 @@ def test_cost_idempotent(tmp):
     assert rows[0]["tokens_dev"] == "NA"
 
 
+def test_cost_rejects_partial_errlog_without_cumulative(tmp):
+    err = os.path.join(tmp, "err.log")
+    open(err, "w", encoding="utf-8").write("prompt_tokens=100 completion_tokens=50\n")
+    out = os.path.join(tmp, "medicion.csv")
+    extra = {"brazo": "baseline", "par_id": "PAR-A", "estimate_previo_SML": "M", "criticidad": "alta", "fecha_commit_estimate": "2026-07-04", "rol_en_par": "miembro", "orchestration_mode": "mono"}
+    try:
+        instrumentacion.cost_attributed(out, SCHEMA_DIR, "NB-P2-1", ["s1"], err, extra)
+    except ValueError as exc:
+        assert "explicit cumulative token count" in str(exc)
+    else:
+        raise AssertionError("partial token err.log was accepted")
+    assert not os.path.exists(out)
+
+
 def test_defect_rejects_bad_enum(tmp):
     out = os.path.join(tmp, "defectos.csv")
     status, _ = instrumentacion.defect_reported(out, SCHEMA_DIR, "BAD", {"tarea_id_origen": "NB-P2-1", "fecha_descubrimiento": "2026-07-05", "taxonomia": "D9", "severidad": "alta", "detector": "checker_formal", "paridad_detector": "true", "clase": "b"})
@@ -68,6 +82,15 @@ def test_metrics_golden_and_q3_guard(tmp):
     assert a["q5"]["afirmacion_causal"] is False
 
 
+def test_q3_delta_uses_arm_not_csv_order(tmp):
+    baseline = {"tarea_id": "A", "brazo": "baseline", "par_id": "PAR-1", "rol_en_par": "miembro", "tokens_total_atribuibles": "100"}
+    governed = {"tarea_id": "B", "brazo": "gobernado", "par_id": "PAR-1", "rol_en_par": "miembro", "tokens_total_atribuibles": "80"}
+    forward = study_metrics.q3_pares([baseline, governed])
+    reversed_rows = study_metrics.q3_pares([governed, baseline])
+    assert forward["mediana_pareada_delta"] == -20
+    assert reversed_rows["mediana_pareada_delta"] == -20
+
+
 def test_event_log_off_by_default_unchanged(tmp):
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
     event_log = os.path.join(repo_root, "runtime", "state", "events.jsonl")
@@ -77,7 +100,7 @@ def test_event_log_off_by_default_unchanged(tmp):
 
 
 def main():
-    tests = [test_cost_idempotent, test_defect_rejects_bad_enum, test_manual_intervention_overhead_only, test_metrics_golden_and_q3_guard, test_event_log_off_by_default_unchanged]
+    tests = [test_cost_idempotent, test_cost_rejects_partial_errlog_without_cumulative, test_defect_rejects_bad_enum, test_manual_intervention_overhead_only, test_metrics_golden_and_q3_guard, test_q3_delta_uses_arm_not_csv_order, test_event_log_off_by_default_unchanged]
     with tempfile.TemporaryDirectory() as root:
         for test in tests:
             tmp = os.path.join(root, test.__name__)

@@ -7,7 +7,7 @@ import os
 import re
 
 NA = "NA"
-TOKEN_RE = re.compile(r"(?:tokens_total_atribuibles|tokens_total|tokens|total)[^0-9]*(\d+)", re.I)
+TOKEN_RE = re.compile(r"\b(?:tokens_total_atribuibles|tokens_total|cumulative_tokens|total_tokens_cumulative)\b[^0-9]*(\d+)", re.I)
 
 
 def rows(path):
@@ -58,13 +58,15 @@ def validate(col, value):
 
 def read_errlog_tokens(path):
     found = None
+    matches = []
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         for line in f:
             match = TOKEN_RE.search(line)
             if match:
                 found = int(match.group(1))
+                matches.append(match.group(0))
     if found is None:
-        raise ValueError("no cumulative token count found in err.log")
+        raise ValueError("no explicit cumulative token count found in err.log")
     return found
 
 

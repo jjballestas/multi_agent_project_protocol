@@ -17373,6 +17373,44 @@
             "updated_at": "2026-07-04T12:13:49Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-remediation-2",
+            "expires_at": "2026-07-04T18:48:17Z",
+            "notes": "TASK-0249 fix-loop 2 remediation for F-0249-02 and F-0249-03.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-remediation-2",
+                "personal/Arquitecto/TFM-medicion/instrumentacion_estudio/instrumentacion.py",
+                "personal/Arquitecto/TFM-medicion/instrumentacion_estudio/study_metrics.py",
+                "personal/Arquitecto/TFM-medicion/instrumentacion_estudio/test_instrumentacion.py",
+                "Area_comun/handoffs/HANDOFF-TASK-0249-codex-to-arquitecto-3.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-remediation-2-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-remediacion-2.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-remediacion-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T12:48:17Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:48:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0249-remediation-2-mailbox-fix",
+            "expires_at": "2026-07-04T13:52:32Z",
+            "notes": "Fix consumed TASK-0249 action mailbox status after move to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0249-remediation-2-mailbox-fix",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0249-remediacion-2.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T12:52:32Z",
+            "status": "released",
+            "task_id": "TASK-0249",
+            "updated_at": "2026-07-04T12:52:32Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-nova-budget-front-harness-msg",
             "expires_at": "2026-07-05T00:00:00Z",
             "notes": "Deliver Nova-Budget front test harness foundation-completion message.",

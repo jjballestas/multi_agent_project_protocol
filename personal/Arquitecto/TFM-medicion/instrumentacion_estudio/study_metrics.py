@@ -44,8 +44,10 @@ def q3_pares(medicion):
     for row in medicion:
         par_id = row.get("par_id", NA)
         if par_id != NA and row.get("rol_en_par") != "overhead_fijo":
-            pairs.setdefault(par_id, []).append(as_int(row, "tokens_total_atribuibles"))
-    deltas = [v[1] - v[0] for v in pairs.values() if len(v) == 2]
+            arm = row.get("brazo", NA)
+            if arm in ("baseline", "gobernado"):
+                pairs.setdefault(par_id, {})[arm] = as_int(row, "tokens_total_atribuibles")
+    deltas = [v["gobernado"] - v["baseline"] for v in pairs.values() if "baseline" in v and "gobernado" in v]
     return {"dot_plot_points": pairs, "mediana_pareada_delta": median(deltas) if deltas else NA, "statistical_inference": "RECHAZADO_POR_DISENO", "forbidden_outputs": ["p_value", "intervalo_confianza", "regresion"]}
 
 
