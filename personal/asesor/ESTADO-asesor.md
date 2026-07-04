@@ -83,7 +83,7 @@ post-sello; tooling Vite/dotnet-new SI se uso en scaffold) + 14 SPECs (P2/P3/P4/
 Analista rejuicio-2) + sandbox mutadores (construido por operador + sellado, RESET verificado, P4.x READY) +
 estimates Q4 LOCKED (6M+4S). SELLO ETAPA 1 = 100% PRE-ARMADO: manifiesto+sha256, s.5 Q4 existencia, s.6.1
 sorteo PRE-COMMIT (par_ids+estimates+algoritmo+T=commit cbc1ee2 2026-07-04T03:52:25Z), s.11.1 calendario;
-FALTA SOLO la semilla NIST posterior a T + atestacion sha256 el 08-jul. TASK-0245 (watchdogs->skill) en exec (Codex).
+FALTA SOLO la semilla NIST posterior a T + atestacion sha256 el 08-jul. TASK-0245 (watchdogs->skill neutral exportable) APROBADA por Analista (fix-loop 2 iters, sin escalar) -> deepened cola 100%% COMPLETA.
 PENDIENTE OPERADOR: (a) ratificar el reporte humano (REPORT-20260704-...-ciclo.md; lo revise: EXACTO, con hora;
 sugerencia menor opcional = anadir frase de delimitacion explicita 'infra+piloto, no resultados de estudio, GOAL-P1
 excluido del contraste'); (b) P3(c) pre-diseno cross-atestacion+i18n = relleno, no bloquea. PROXIMO EVENTO REAL:
