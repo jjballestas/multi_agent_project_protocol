@@ -4,6 +4,18 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- Nova-Budget front test harness foundation-completion delivered after Arquitecto ACTION
+  `MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budget`. Product commit
+  `e3a03a8 test: add Nova web harness` was pushed to `origin/main`; it changes `apps/nova-web` so `npm test`
+  runs typecheck plus Vitest, adds `src/App.test.tsx` smoke render coverage, and changes CI to run `npm test`
+  after `npm ci`. Evidence: local `npm test` PASS (typecheck + Vitest 1 file / 1 test); clean clone
+  `C:\Users\johnb\AppData\Local\Temp\nova-budget-clean-0377737a605548b69940f80965f9c781` with
+  `cd apps/nova-web && npm ci && npm test` PASS; `git push origin main` PASS. Delivery message
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-ACTION-front-test-harness-nova-budget-done.md`
+  was written under released claim `CLAIM-20260704-Codex-nova-budget-front-harness-msg` through runtime seq
+  3762-3763. Protocol gates after delivery: encoding OK, domain-neutrality exit 0, validator OK, drift false /
+  byte-identical at `up_to_seq=3763`. Unrelated protocol dirty paths and Nova-Budget untracked
+  `docs/documentacion-tecnica/` were left untouched.
 - TASK-0248 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0248-done-flip`. Codex moved TASK-0248
   `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0248-done-flip` via runtime seq 3753-3755,

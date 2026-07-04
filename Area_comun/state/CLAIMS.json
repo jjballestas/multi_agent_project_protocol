@@ -17102,6 +17102,20 @@
             "updated_at": "2026-07-04T01:53:36Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-nova-budget-front-harness-msg",
+            "expires_at": "2026-07-05T00:00:00Z",
+            "notes": "Deliver Nova-Budget front test harness foundation-completion message.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-nova-budget-front-harness-msg",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-ACTION-front-test-harness-nova-budget-done.md"
+            ],
+            "started_at": "2026-07-04T03:09:01Z",
+            "status": "released",
+            "task_id": "TASK-0247",
+            "updated_at": "2026-07-04T03:09:01Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-archive-0248-cierre-arq",
             "expires_at": "2026-07-04T06:30:00Z",
             "notes": "Archiva el cierre de 0248 (OK verdict + gate-corregido REVIEW). Ambas tareas done.",
