@@ -24,9 +24,16 @@ HEAD==origin limpio, mailbox/open vacio, sin drift. Hecho esta reactivacion:
   backlog reconciliado + condicionalidad Q4 (subpotenciado 2/8 con n efectivo<10 por cluster BR-C3) + regla de
   adopcion/transferibilidad Aegis. NO ruteado aun (para Etapa 2 <=29-jul; el MSG ya aviso que llega; evito churn).
 - MONITOR armado sobre origin/main con self-filter (salta mi Ops-Reason).
-**EN VUELO -- esperando respuesta del Arquitecto:** (a) id de la tarea F3.3 ruteada a Codex; (b) estado
-coordinacion dev medido P2; (c) confirmacion monitor PAR-2 armado. Cuando responda: ratificar/ajustar, NO
-correr tras su fix-loop (git fetch antes de rutear).
+**RESUELTO (esta reactivacion):** el Arquitecto respondio (a) F3.3 = TASK-0249 GO-eada a Codex (critical-path);
+(b) P2.1/P2.2 = TASK-0250/0251 proposed en cola detras de F3.3; (c) PAR-2 deadline trackeado (no verifico en
+vivo: guard de seguridad bloqueo lectura de produccion sin autorizacion). Dejo 2 preguntas al operador ->
+OPERADOR DECIDIO: (b) ESPERAR a F3.3 (P2 abre auto-instrumentado; proposed en cola, NO manual); (c) DIFERIR la
+verificacion PAR-2 a 15-jul (procs Annul_* son brechas B-04 conocidas, hoy ausentes; no autoriza readonly ahora).
+Rutee la respuesta (a5323ba).
+**EN VUELO -- WATCH (no rutear):** el Analista BLOQUEO TASK-0249 (F-0249-01: gate propio de instrumentacion
+falla en clon limpio por fixtures schema_medicion.json no commiteados en el ancla). Es REPRODUCIBILIDAD /
+implementacion, NO diseno ni integridad-de-estudio -> fix-loop 1/2 del Arquitecto+Codex; NO lo rateo (mi SPEC
+no esta implicada). Cuando F3.3 cierre su gate -> abre P2 -> cosecho la medicion. Watch puro hasta entonces.
 
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
