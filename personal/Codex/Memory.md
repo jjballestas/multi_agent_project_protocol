@@ -4,7 +4,8 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
-- TASK-0251 delivered to `in_review`. Nova-Budget product commit `fa4ad82 feat: add budget execution report`
+- TASK-0251 delivered to `in_review`; protocol delivery commit `7bfdfcb coord(TASK-0251): deliver execution
+  report`. Nova-Budget product commit `fa4ad82 feat: add budget execution report`
   implements `GET /api/budget/execution-report`, application query/service, contracts, production
   `SqlBudgetExecutionReportGateway` using `Microsoft.Data.SqlClient` and `CommandType.StoredProcedure` for
   `Budget.Get_Budget_Execution_Report`, validation/ProblemDetails, architecture isolation from document list
