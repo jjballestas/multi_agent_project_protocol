@@ -17230,6 +17230,24 @@
             "updated_at": "2026-07-04T01:08:29Z"
         },
         {
+            "claim_id": "CLAIM-20260704-arquitecto-ratify0248",
+            "expires_at": "2026-07-04T06:30:00Z",
+            "notes": "Ratifica TASK-0248 (skill codegen-triage) tras OK/CERRABLE del Analista re-juicio 2 (gate corregido, F-0248-01/02/03 pasan; clon limpio Nova-Budget 4ea8271 verde). Cierre en espanol (directiva operador).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-arquitecto-ratify0248",
+                "Area_comun/state/TASK_INDEX.json#TASK-0248",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0248",
+                "Area_comun/tasks/TASK-0248-skill-codegen-triage.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T02:23:12Z",
+            "status": "released",
+            "task_id": "TASK-0248",
+            "updated_at": "2026-07-04T02:23:12Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-arquitecto-task0247",
             "expires_at": "2026-07-04T04:30:00Z",
             "notes": "Registra TASK-0247 GOAL-P1 fundacion tecnica Nova-Budget (ready, owner Codex; opcion B baseline; DECISION-0088 asiento hub).",
