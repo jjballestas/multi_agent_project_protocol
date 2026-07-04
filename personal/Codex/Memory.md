@@ -4,6 +4,20 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0248 delivered to `in_review`. Protocol commit
+  `407905e feat(TASK-0248): deliver codegen triage skill` adds neutral skill
+  `.claude/skills/codegen-triage/SKILL.md`, handoff
+  `Area_comun/handoffs/HANDOFF-TASK-0248-codex-to-analista-1.md`, delivery message
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0248-in-review.md`, moves the consumed
+  Arquitecto GO to `Area_comun/mailbox/answered/`, moves TASK-0248 `ready -> in_progress -> in_review`, and
+  releases Codex claims through runtime seq 3718. Nova-Budget product commit
+  `88af254 docs: add Nova codegen triage recipes` adds the instance recipe layer at
+  `D:/Agentes/Zeus/NOVA/Nova-Budget/docs/codegen-triage/NOVA_INSTANCE_RECIPES.md`. Evidence: skills loader
+  cases PASS, neutral-path domain scan PASS, Nova-Budget `dotnet build NOVA.sln` PASS with known NU1903
+  Microsoft.OpenApi warning, `dotnet test NOVA.sln` PASS 9 tests with same known warning,
+  `npm run typecheck` PASS, `dotnet format --verify-no-changes` PASS with workspace load warning, protocol
+  encoding OK, domain-neutrality exit 0, validator OK with unrelated non-response FYI warnings only, and drift
+  false / byte-identical at `up_to_seq=3718`. Unrelated dirty paths were left untouched.
 - TASK-0247 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0247-done-flip`. Codex moved TASK-0247
   `review_approved -> done` via runtime seq 3705-3707, released
