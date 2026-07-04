@@ -17634,6 +17634,86 @@
             "updated_at": "2026-07-04T14:04:56Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-delivery",
+            "expires_at": "2026-07-04T17:54:37Z",
+            "notes": "TASK-0251 delivery handoff and mailbox response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0251-p22-reporte-ejecucion.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0251-p22-reporte-ejecucion.md"
+            ],
+            "started_at": "2026-07-04T14:54:37Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T14:54:37Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-impl",
+            "expires_at": "2026-07-04T15:30:34Z",
+            "notes": "Normalize malformed TASK-0251 implementation claim scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-impl",
+                "Area_comun/state/TASK_INDEX.json#TASK-0251",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0251",
+                "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget"
+            ],
+            "started_at": "2026-07-04T15:00:34Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T15:00:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-impl-scopefix",
+            "expires_at": "2026-07-04T20:49:35Z",
+            "notes": "Correct TASK-0251 claim scope for implementation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-impl-scopefix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0251",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0251",
+                "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget"
+            ],
+            "started_at": "2026-07-04T14:49:35Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T14:49:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-releasefix",
+            "expires_at": "2026-07-04T15:56:18Z",
+            "notes": "Release malformed TASK-0251 implementation claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-releasefix",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-impl"
+            ],
+            "started_at": "2026-07-04T14:56:18Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T14:56:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0251-validator-cleanup",
+            "expires_at": "2026-07-04T15:59:50Z",
+            "notes": "Fix TASK-0251 validator cleanup for consumed GO and malformed claim scope.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-validator-cleanup",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0251-impl",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-GO-TASK-0251-p22-reporte-ejecucion.md"
+            ],
+            "started_at": "2026-07-04T14:59:50Z",
+            "status": "released",
+            "task_id": "TASK-0251",
+            "updated_at": "2026-07-04T14:59:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-nova-budget-front-harness-msg",
             "expires_at": "2026-07-05T00:00:00Z",
             "notes": "Deliver Nova-Budget front test harness foundation-completion message.",

@@ -4,6 +4,20 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0251 delivered to `in_review`. Nova-Budget product commit `fa4ad82 feat: add budget execution report`
+  implements `GET /api/budget/execution-report`, application query/service, contracts, production
+  `SqlBudgetExecutionReportGateway` using `Microsoft.Data.SqlClient` and `CommandType.StoredProcedure` for
+  `Budget.Get_Budget_Execution_Report`, validation/ProblemDetails, architecture isolation from document list
+  contracts, and UI fetch/render for the report. Evidence: `dotnet test NOVA.sln` PASS 22 tests with known NU1903
+  Microsoft.OpenApi warning, `npm test --prefix apps/nova-web` PASS, clean clone front gate PASS after
+  `npm ci --prefix apps/nova-web` at
+  `C:\Users\johnb\AppData\Local\Temp\nova-budget-clean-73a4955e21d5491f91a1a124cd4ef2e6`, protocol encoding OK,
+  domain-neutrality exit 0, validator OK, drift false through seq 3953. Runtime moved TASK-0251
+  `ready -> in_progress -> in_review`, released Codex claims, moved the consumed GO to answered, added
+  `Area_comun/handoffs/HANDOFF-TASK-0251-codex-to-arquitecto-1.md`, and opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0251-in-review.md`. Live DbsFinanciero parity
+  was not run because no credentials/EXECUTE verifier were provided. Unrelated protocol dirty paths and
+  Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0250 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0250-done-flip`. Codex moved TASK-0250
   `review_approved -> done` via runtime seq 3923 and released done-flip retry claims through seq 3933 after
