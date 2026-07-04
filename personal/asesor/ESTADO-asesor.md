@@ -76,14 +76,33 @@
 - **Yo (reactivo):** cosechar la medicion de GOAL-P1 al sello cuando corra; vigilar que el sello (08-jul) no
   se quede sin inputs del operador.
 
-## >> PRIMERA ACCION EJECUTADA (2026-07-04, commit d55cfc9)
-**RUTEADO al Arquitecto el ARRANQUE DEL BUILD de GOAL-P1** (MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-
-arranque-build-goalp1, requires_response=Arquitecto): ACTIVA Codex + CONFIRMA/crea repo NOVA/Nova-Budget
-(LAZY, D:/Agentes/Zeus/NOVA/Nova-Budget, codigo sin governance) + apunta a NOVA-GOAL-001 (fundacion tecnica,
-brazo baseline). Asiento de coordinacion = HUB (DECISION-0088, ya registrada 512e35c). Codigo = Codex/Arquitecto.
-**ESPERANDO RESPUESTA:** (a) ruta repo confirmada; (b) Codex activo si/no; (c) id(s) tarea baseline en el hub.
-Luego el Operador mide el build REAL con medir-goalp1.ps1 (NO el smoke) -> journal se congela en el sello.
-**REACTIVO A SEGUIR:** cosechar la medicion de GOAL-P1 cuando corra; vigilar que el sello (08-jul) no se quede sin inputs.
+## >> HILOS DE LA SESION 2026-07-04 (todos RUTEADOS; esperando respuestas del Arquitecto)
+1. **ARRANQUE BUILD GOAL-P1** (d55cfc9, req_resp): ACTIVA Codex + repo NOVA/Nova-Budget + apunta a NOVA-GOAL-001
+   (fundacion tecnica, brazo baseline). Asiento = HUB (DECISION-0088, 512e35c). REMOTO CONFIRMADO por el operador:
+   https://github.com/jjballestas/Nova-Budget.git (existe, VACIO; ruteado FYI 19cd60a). Espero: ruta repo + Codex
+   activo + id tarea baseline. Luego operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello.
+2. **SEMANTICA CHECKER GOAL-P1 = OPCION B** (fe83c84, resuelto): el Arquitecto cazo conflicto real (schema sellado
+   baseline=>checker_formal=0 vs mi fraseo Analista-checker). Ruling: B (baseline fiel, checker vivo = adversarial
+   informal, checker_formal=0). El valor de A ya esta sellado: frontera P1 read-only 26-29 jul -> FRONTERA-FIX +
+   ensayo de maquinaria gobernada en categoria propia fuera de Q1. Corregi mi DIRECTIVA (Analista-checker-FORMAL =
+   solo tareas gobernadas post-30-jul). Operador clico B en el panel del Arquitecto.
+3. **DOMINIO NOVA-BUDGET ABSORBIDO** (brief durable 042eb72, personal/asesor/NOVA-BUDGET-brief-dominio.md):
+   cadena de gasto (Aprop->CDP->RP->OBL->Pago, 4 reglas de oro en procs SQL), Clean Arch .NET 10, NO green-field
+   (BD endurecida + reconciliada al centavo; hibrido 2024-26 fiel / 2027 limpio), ~45-55% del build = superficies
+   sobre procs existentes, brechas de verdad -> nova-hardening (regla 8).
+4. **VEREDICTO ULTRACODE** (panel adversarial 8 agentes, en transcript): NO en bloque; depende de 2 REGIMENES.
+   Ventana MEDIDA (3-30 jul, baseline+Q4) = mono-orquestador, ultracode PROHIBIDO (rompe Q1/Q4, irreversible).
+   POST-medicion (90%+ de Nova) = ultracode SELECTIVO-AMPLIO gatillado por dominio (compone >1 mutacion / cruza
+   modulo / toca SESSION_CONTEXT-saldos / alimenta regulatorio). Magnitud = ANCHO -> pipeline barato, no esfuerzo
+   por-tarea. "Superficie mecanica" solo si 1-proc/1-vista sin composicion. nova-hardening = ultracode paga pleno.
+5. **CODEGEN (aprobado por operador) + SKILL codegen-triage RUTEADA** (draft fd8b2ad, DIRECTIVA 9256bb7, req_resp):
+   codegen != peon -> LEGITIMO en ambos brazos incl GOAL-P1 (determinista, cero-tokens, un dev, NO tratamiento),
+   simetrico por par. Cero peones en brazos medidos SE MANTIENE. Skill en 2 capas (neutral + recetas instancia Nova),
+   owner Codex-maker/Analista-checker, gobierna Arquitecto. ACCION 2 pedida: SELLAR codegen!=peon en def del brazo
+   baseline antes del 08-jul. Espero: id tarea skill + confirmacion clarificacion sellada.
+6. **PEONES (aclarado, POST-SELLO):** NO se dan de alta (no participante, no area personal, no agent_registry); son
+   herramienta no-firmante que Codex opera bajo contrato de asignacion (DECISION-0078 PROPOSED, a ajustar+aprobar +
+   TASK-0231 F6, sandbox piloto-peones). Runbook = TEMP_Guia_Modelos_Peones (personal/ungobernado). NO ahora (reloj=sello).
 
 ## SIGUIENTE (hitos)
 1. **SELLO ETAPA 1 (<=08-jul) = reloj duro.** Draft listo (SELLO-ETAPA-1-nova-budget-DRAFT.md). Congela
