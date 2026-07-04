@@ -16950,6 +16950,24 @@
             "updated_at": "2026-07-03T23:14:04Z"
         },
         {
+            "claim_id": "CLAIM-20260704-arquitecto-task0247",
+            "expires_at": "2026-07-04T04:30:00Z",
+            "notes": "Registra TASK-0247 GOAL-P1 fundacion tecnica Nova-Budget (ready, owner Codex; opcion B baseline; DECISION-0088 asiento hub).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-arquitecto-task0247",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/tasks/TASK-0247-nova-goalp1-fundacion-tecnica-nova-budget.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T00:46:15Z",
+            "status": "released",
+            "task_id": "GOAL-VISION-NOVA-001",
+            "updated_at": "2026-07-04T00:46:15Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
