@@ -18,6 +18,9 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
   NOVA.sln` PASS with known NU1903 Microsoft.OpenApi warning, `dotnet test NOVA.sln` PASS 9 tests with same
   warning after rerun, protocol encoding OK, domain-neutrality exit 0, validator OK with unrelated FYI warnings,
   and drift false / byte-identical at `up_to_seq=3726`. Unrelated dirty paths were left untouched.
+  Follow-up protocol commit `2d9e23d chore(TASK-0248): refresh remediation handoff hash` refreshed the handoff,
+  mailbox delivery, memory, and runtime claim release after the Nova-Budget commit was amended to `af790be` with
+  exact final trailers; drift stayed false at `up_to_seq=3728`.
 - TASK-0248 delivered to `in_review`. Protocol commit
   `407905e feat(TASK-0248): deliver codegen triage skill` adds neutral skill
   `.claude/skills/codegen-triage/SKILL.md`, handoff
