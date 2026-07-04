@@ -4,6 +4,19 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0249 remediation 2 delivered in protocol commit `fc412b8 fix(TASK-0249): remediate instrumentation findings`.
+  It fixes F-0249-02 by making `read_errlog_tokens` accept only explicit cumulative fields
+  (`tokens_total_atribuibles`, `tokens_total`, `cumulative_tokens`, `total_tokens_cumulative`) and reject
+  partial-only err.log payloads without writing a measurement row. It fixes F-0249-03 by computing Q3 paired
+  deltas by arm as `gobernado - baseline`, invariant to CSV row order. Added adversarial tests for both.
+  Runtime released Codex claims through seq 3865, moved the consumed Arquitecto ACTION to answered, opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-remediation-2-in-review.md`, and added
+  `Area_comun/handoffs/HANDOFF-TASK-0249-codex-to-arquitecto-3.md`. Evidence before commit: instrumentation
+  tests PASS 7, py_compile PASS, Nova-Budget `dotnet test NOVA.sln` PASS 9 tests with known NU1903
+  Microsoft.OpenApi warning, Nova web `npm test` PASS 1 test, protocol encoding OK, domain-neutrality exit 0,
+  validator OK after claim release, drift false at `up_to_seq=3865`, and `protocol.config.json` byte-identical.
+  Unrelated `.claude/settings.json`, peer/operator personal paths, and Nova-Budget untracked
+  `docs/documentacion-tecnica/` were left untouched.
 - TASK-0249 delivered to `in_review` in protocol commit `a32ee61 feat(TASK-0249): add study instrumentation`.
   It adds tracked study instrumentation under `personal/Arquitecto/TFM-medicion/instrumentacion_estudio/`:
   `cost_attributed` from err.log with idempotency and NA bucket degradation, `defect_reported` validation
