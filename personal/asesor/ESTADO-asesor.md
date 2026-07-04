@@ -83,10 +83,13 @@ terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 
 1. **METODOLOGIA AS-IS (decidido, sin cambio):** firmantes = Operador(dominio)/Arquitecto(arq+docs)/Codex(maker)/
    Analista(security+QA checker). NO se separan roles en mas firmantes: los ~10 roles del GOAL colapsan sobre los 4
    con ROL ACTIVO EXPLICITO por artefacto; maker!=checker DURO (Codex hace, Analista verifica; nunca auto-verificacion).
-2. **ARRANQUE BUILD GOAL-P1 (RUTEADO, reanudado):** activa Codex maker + repo Nova-Budget
-   (https://github.com/jjballestas/Nova-Budget.git existe VACIO; clon D:/Agentes/Zeus/NOVA/Nova-Budget, solo codigo)
-   + apunta a NOVA-GOAL-001 (P1 fundacion: NOVA.sln 7 proy + nova-web + health/OpenAPI/PD/correlation + arch-tests + CI).
-   Asiento=HUB (DECISION-0088). Luego operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello.
+2. **ARRANQUE BUILD GOAL-P1 = HECHO (Codex en EXEC construyendo):** el Arquitecto registro **TASK-0247** (GOAL-P1
+   fundacion tecnica, owner Codex, opcion B checker_formal=0, ready), emitio GO a Codex, reapunto crons Codex(pid
+   148868, EN EXEC)+Analista(pid 66472, para DoD) a Nova-Budget (DECISION-0057). Codex hace git init + push del
+   scaffold a https://github.com/jjballestas/Nova-Budget.git (local D:/Agentes/Zeus/NOVA/Nova-Budget). Verifique el
+   task file + el GO: FIELES al diseno sellado, sin drift (P1 read-only, sin verticales, sin anti-patrones, gate =
+   arch-tests+CI+adversarial informal, NO auto-cierra). Circuito: Codex entrega in_review -> Arquitecto atesta sha256
+   -> operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello. PROXIMO HITO: Codex -> in_review.
 3. **CHECKER GOAL-P1 = OPCION B (ruteado):** fila medida = Codex maker + adversarial informal + arch-tests/CI, checker_formal=0
    (fiel al schema sellado). Escrutinio formal de P1 = frontera read-only 26-29 jul -> FRONTERA-FIX. Analista-checker-FORMAL
    = solo gobernadas post-30-jul.
