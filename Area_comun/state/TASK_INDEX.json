@@ -4020,6 +4020,31 @@
             "type": "feature"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0249-f33-instrumentacion-medicion-estudio.md",
+            "id": "TASK-0249",
+            "linked_decisions": [
+                "DECISION-0091",
+                "DECISION-0033"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "DECISION-0091",
+                "DECISION-0033"
+            ],
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

@@ -1201,6 +1201,12 @@
             "title": "[VISION-NOVA] Skill codegen-triage para Codex (2 capas: NEUTRAL decision codegen-vs-frontera exportable + recetas de INSTANCIA Nova). Gobernada: owner Codex-maker / checker Analista."
         },
         {
+            "id": "TASK-0249",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
