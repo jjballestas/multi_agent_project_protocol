@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-RESPUESTA-P2-espera-PAR2-difiere
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:

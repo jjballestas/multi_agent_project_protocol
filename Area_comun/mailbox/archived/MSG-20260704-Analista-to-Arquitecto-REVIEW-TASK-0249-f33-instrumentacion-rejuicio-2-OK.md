@@ -3,7 +3,7 @@ message_id: MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0249-f33-instrumenta
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04

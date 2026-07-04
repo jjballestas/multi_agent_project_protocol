@@ -3,7 +3,7 @@ message_id: MSG-20260704-Codex-to-Arquitecto-TASK-0249-done-flip-done
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:

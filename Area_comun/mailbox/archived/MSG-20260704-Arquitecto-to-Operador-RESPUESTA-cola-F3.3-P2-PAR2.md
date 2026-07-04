@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Operador-RESPUESTA-cola-F3.3-P2-PAR2
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-04
