@@ -17102,6 +17102,23 @@
             "updated_at": "2026-07-04T01:53:36Z"
         },
         {
+            "claim_id": "CLAIM-20260704-archive-0248-cierre-arq",
+            "expires_at": "2026-07-04T06:30:00Z",
+            "notes": "Archiva el cierre de 0248 (OK verdict + gate-corregido REVIEW). Ambas tareas done.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-archive-0248-cierre-arq",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0248-rejuicio-2-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0248-rejuicio-2-OK.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0248-gate-corregido-rejuicio-2.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-TASK-0248-gate-corregido-rejuicio-2.md"
+            ],
+            "started_at": "2026-07-04T02:27:29Z",
+            "status": "released",
+            "task_id": "OPS-HIGIENE-MAILBOX-20260704e",
+            "updated_at": "2026-07-04T02:27:29Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-archive-3-directivas-arquitecto",
             "expires_at": "2026-07-04T01:00:00Z",
             "notes": "Archivar 3 DIRECTIVAs del Operador ya actionadas (DD horneadas 01f05db, pipeline al dia 2320acd, DECISION-0087 bc95ad3). requires_response false. Higiene gobernada.",
