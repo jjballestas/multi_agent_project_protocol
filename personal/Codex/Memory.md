@@ -4,6 +4,20 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
 
 ## Latest Session Note
 
+- TASK-0249 delivered to `in_review` in protocol commit `a32ee61 feat(TASK-0249): add study instrumentation`.
+  It adds tracked study instrumentation under `personal/Arquitecto/TFM-medicion/instrumentacion_estudio/`:
+  `cost_attributed` from err.log with idempotency and NA bucket degradation, `defect_reported` validation
+  against schema_defectos v1.0 with malformed rows rejected, `manual_intervention` as overhead-only, and
+  deterministic `study_metrics.py` Q1-Q5 with Q3 inference guard. Runtime moved TASK-0249
+  `ready -> in_progress -> in_review`, released Codex claims through seq 3859, opened
+  `Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0249-in-review.md`, added
+  `Area_comun/handoffs/HANDOFF-TASK-0249-codex-to-arquitecto-1.md`, and moved the consumed Arquitecto GO to
+  `Area_comun/mailbox/answered/`. Evidence: instrumentation tests PASS 5, py_compile PASS, Nova-Budget
+  `dotnet test NOVA.sln` PASS 9 tests with known NU1903 Microsoft.OpenApi warning, Nova web `npm test` PASS
+  1 test, protocol encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=3859`,
+  and `protocol.config.json` byte-identical. Golden-memory follow-up commit records this note. Unrelated
+  `.claude/settings.json`, peer/operator personal
+  paths, and Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0245 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-done-flip`. Codex moved TASK-0245
   `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0245-done-flip` through runtime seq
