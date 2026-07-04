@@ -2,7 +2,7 @@
 task_id: TASK-0251
 title: "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado"
 type: feature
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: medium

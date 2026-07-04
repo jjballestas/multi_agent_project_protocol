@@ -4063,7 +4063,7 @@
                 "DECISION-0091"
             ],
             "reviewer": "adversarial-informal-sesion-separada",
-            "status": "proposed",
+            "status": "ready",
             "title": "[VISION-NOVA][P2.1] Read model de parametros (rubros/fuentes/rubro-fuente/BPIN/series) - dev BASELINE",
             "type": "feature"
         },
@@ -4086,7 +4086,7 @@
                 "DECISION-0091"
             ],
             "reviewer": "adversarial-informal-sesion-separada",
-            "status": "proposed",
+            "status": "ready",
             "title": "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado",
             "type": "feature"
         },
