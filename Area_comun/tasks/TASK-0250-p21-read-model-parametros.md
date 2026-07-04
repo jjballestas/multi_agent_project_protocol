@@ -2,7 +2,7 @@
 task_id: TASK-0250
 title: "[VISION-NOVA][P2.1] Read model de parametros (rubros/fuentes/rubro-fuente/BPIN/series) - dev BASELINE"
 type: feature
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: medium

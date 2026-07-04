@@ -4063,7 +4063,7 @@
                 "DECISION-0091"
             ],
             "reviewer": "adversarial-informal-sesion-separada",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[VISION-NOVA][P2.1] Read model de parametros (rubros/fuentes/rubro-fuente/BPIN/series) - dev BASELINE",
             "type": "feature"
         },
