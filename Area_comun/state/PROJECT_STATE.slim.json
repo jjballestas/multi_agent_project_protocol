@@ -19,12 +19,6 @@
             "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
         },
         {
-            "id": "TASK-0249",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)"
-        },
-        {
             "id": "TASK-0250",
             "owner": "Codex",
             "status": "proposed",

@@ -2,7 +2,7 @@
 task_id: TASK-0249
 title: "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)"
 type: feature
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: high
