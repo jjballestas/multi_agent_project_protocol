@@ -1179,7 +1179,7 @@
         {
             "id": "TASK-0245",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)"
         },
         {

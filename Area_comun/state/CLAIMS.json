@@ -16925,6 +16925,22 @@
             "updated_at": "2026-07-04T04:27:59Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-answer-status",
+            "expires_at": "2026-07-04T07:04:26Z",
+            "notes": "Fix consumed TASK-0245 ACTION mailbox status after move to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-answer-status",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-done-flip.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T05:04:26Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T05:04:26Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-Codex-TASK-0245-delivery",
             "expires_at": "2026-07-04T23:59:59Z",
             "notes": "Deliver TASK-0245 handoff and mailbox response.",
@@ -16940,6 +16956,42 @@
             "status": "released",
             "task_id": "TASK-0245",
             "updated_at": "2026-07-04T04:06:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-done-flip",
+            "expires_at": "2026-07-04T07:02:25Z",
+            "notes": "TASK-0245 done flip after Arquitecto ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0245",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0245",
+                "Area_comun/tasks/TASK-0245-watchdogs-operativos-skill-neutral-exportable.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T05:02:25Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T05:02:25Z"
+        },
+        {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0245-done-flip-mailbox",
+            "expires_at": "2026-07-04T07:02:58Z",
+            "notes": "TASK-0245 done flip mailbox confirmation and consumed ACTION move.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0245-done-flip-mailbox",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0245-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0245-done-flip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T05:02:58Z",
+            "status": "released",
+            "task_id": "TASK-0245",
+            "updated_at": "2026-07-04T05:02:58Z"
         },
         {
             "claim_id": "CLAIM-20260704-Codex-TASK-0245-go-answer",

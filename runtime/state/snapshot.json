@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fdef8a2184099b908fb68d64a823468a0b96e1f0b857b678958fa9820069ca25",
+  "canonical_hash": "37ec33d1a33c421b470891df4449c85d7e12a73ed073b5d89a03bfc9ceb25a84",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -475,6 +475,9 @@
       "CLAIM-20260703-Codex-TASK-0240-taskfile-sync": 1,
       "CLAIM-20260703-Codex-TASK-0241-0242-done-flip": 1,
       "CLAIM-20260703-Codex-TASK-0241-0242-doneflip-response": 1,
+      "CLAIM-20260704-Codex-TASK-0245-answer-status": 1,
+      "CLAIM-20260704-Codex-TASK-0245-done-flip": 1,
+      "CLAIM-20260704-Codex-TASK-0245-done-flip-mailbox": 1,
       "CLAIM-20260704-Codex-TASK-0247": 1,
       "CLAIM-20260704-Codex-TASK-0247-answer-go-status": 1,
       "CLAIM-20260704-Codex-TASK-0247-consume-go": 1,
@@ -1250,7 +1253,7 @@
       "TASK-0242": 12,
       "TASK-0243": 19,
       "TASK-0244": 19,
-      "TASK-0245": 25,
+      "TASK-0245": 29,
       "TASK-0246": 11,
       "TASK-0247": 14,
       "TASK-0248": 20,
@@ -1261,7 +1264,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3148,
+    "events_applied": 3155,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -2818,6 +2821,11 @@
       "codex:task0244:response-msg-claim-acquire-20260703": 3462,
       "codex:task0244:response-msg-claim-release-20260703": 3463,
       "codex:task0244:review-approved-to-done-20260703": 3468,
+      "codex:task0245:done-flip:answered-status-claim": 3825,
+      "codex:task0245:done-flip:answered-status-release": 3826,
+      "codex:task0245:done-flip:claim-acquire": 3820,
+      "codex:task0245:done-flip:mailbox-claim": 3823,
+      "codex:task0245:done-flip:mailbox-release": 3824,
       "codex:task0247:answer-go-status-claim": 3700,
       "codex:task0247:answer-go-status-release": 3701,
       "codex:task0247:consume-go-claim": 3698,
@@ -4398,6 +4406,8 @@
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152-AC45-guard:task-status": 1116,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152:claim-release": 1113,
       "ledger-op:handoff-release:TASK-0152:CLAIM-20260622-Codex-TASK-0152:task-status": 1112,
+      "ledger-op:handoff-release:TASK-0245:CLAIM-20260704-Codex-TASK-0245-done-flip:claim-release": 3822,
+      "ledger-op:handoff-release:TASK-0245:CLAIM-20260704-Codex-TASK-0245-done-flip:task-status": 3821,
       "ledger-op:task-0200-claim:TASK-0200:CLAIM-20260627-Codex-TASK-0200:claim-acquire": 2287,
       "ledger-op:task-0200-delivery:TASK-0200:CLAIM-20260627-Codex-TASK-0200-delivery:claim-acquire": 2288,
       "ledger-op:task-0200-release:TASK-0200:claim-release-delivery": 2289,
@@ -4413,5 +4423,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3819
+  "up_to_seq": 3826
 }

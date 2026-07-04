@@ -2,7 +2,7 @@
 task_id: TASK-0245
 title: "[VISION-NOVA][infra] Portar los watchdogs operativos a la capa neutral skills/ (exportable via new_instance)"
 type: feature
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: medium
