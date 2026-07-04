@@ -147,16 +147,18 @@ ENUMERADO NOMINALMENTE demostrando n>=10 SIN items grupo-A:
 | 7..10 | Get_Availability_Certificate_List / Get_Commitment_List / Get_Obligation_List / Get_Payment_List (BR-C3) | baja (fabrica de tareas S) | SI -- las 4 vistas de saldo verificadas existentes via conector readonly (NOVA-PRES-11, 2026-07-03); db_verified_at en SPEC-NOVA-P2-004. Los procs Get_*_List AUN NO existen (se crean en Sprint 1); solo las vistas que consultan son readonly-verificadas. |
 
 Items dependientes de hardening entran SOLO por enmienda fechada con entrega comprometida.
-Asignacion ligero/completo: hash + ancla externa, ESTRATIFICADA por familia/tamano, sellada aqui
-(s.6). REGLA DURA: si el Sprint 1 no ejecuta >=10, Q4 se reporta SUBPOTENCIADO (no se rellena).
+Asignacion ligero/completo: hash + ancla externa, por-unidad (reportada por estrato M/S, NO balanceada
+dentro de estrato), sellada aqui (s.6). REGLA DURA: si el Sprint 1 no ejecuta >=10, Q4 se reporta
+SUBPOTENCIADO (no se rellena).
 
 NOTA DE INDEPENDENCIA (cosecha NOVA-DEV ronda 8, SPEC-NOVA-P2-004, commit e6cd82b): los items #7..N
 (Get_*_List de BR-C3) son una FAMILIA CASI ISOMORFA (~4 tareas: Availability/Commitment/Obligation/
 Payment List; mismo patron de lectura 15-param sobre distintas vistas de saldo). Son LOAD-BEARING para
 n>=10 (6 unidades nombradas + 4 Get_*_List = 10). REGLA DE ANALISIS SELLADA: se tratan como CLUSTER
 CORRELACIONADO en Q4; el n EFECTIVO independiente es < 10 (aleatorizar ligero/completo sobre 4 tareas de
-la misma forma prueba la misma forma 4 veces). La estratificacion por familia (s.6) equilibra la ASIGNACION,
-no la correlacion; Q4 declara el n efectivo reducido (anti-sobreventa). El Get_*_List cumple DOBLE ROL
+la misma forma prueba la misma forma 4 veces). El reporte por estrato (s.6) organiza la LECTURA de la
+asignacion, no equilibra ni corrige la correlacion (el algoritmo es paridad por-unidad, no ajustada por
+estrato, s.6.1); Q4 declara el n efectivo reducido (anti-sobreventa). El Get_*_List cumple DOBLE ROL
 (miembro gobernado de PAR-D en Q3 + fabrica en Q4): NO es doble-conteo, son contrastes pre-registrados
 distintos (Q3 descriptivo/cota vs Q4 causal ligero/completo); su fase SPEC se excluye del delta (simetria
 con el spec_prepagado de P2.2). Los procs Get_*_List NO existen aun (se crean); su paridad se verifica
@@ -178,8 +180,11 @@ supuesto temporal de autorizacion B-05).
 1. Commit atestado (T) de: par_ids + estimates S/M/L + algoritmo + timestamp. **PRE-COMMIT LISTO (s.6.1
    abajo); solo falta la semilla-del-dia.**
 2. Semilla = primer pulso NIST Beacon posterior a T (fallback: hash primer bloque BTC posterior a T).
-3. Asignacion ligero/completo = paridad del primer byte de SHA-256(unidad_id + semilla),
-   ESTRATIFICADA por familia/tamano. Verificable por terceros. Convencion EXACTA en s.6.1 (paso 2).
+3. Asignacion ligero/completo = paridad del primer byte de SHA-256(unidad_id + semilla), POR-UNIDAD
+   (no ajustada por estrato); REPORTADA por estrato (M/S) para legibilidad, pero NO balanceada dentro de
+   estrato -- con n=6/n=4 el azar puede rendir un estrato desbalanceado (p.ej. 5-1 o 4-0) y eso se
+   REPORTA honesto, no se corrige ni se re-sortea. Verificable por terceros. Convencion EXACTA en s.6.1
+   (paso 2-3).
 4. ORDEN DE ARRANQUE SELLADO (anti supervivencia-endogena): P4.1 -> miembro PAR-1 -> miembro PAR-2.
    Desviarse = enmienda fechada con causa; cada par anulado registra QUE trigger lo mato.
 5. DISJUNCION DURA: cada tarea se implementa UNA vez en UN brazo; los pares caen COMPLETOS.
