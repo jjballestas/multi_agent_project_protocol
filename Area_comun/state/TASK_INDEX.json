@@ -4045,6 +4045,52 @@
             "type": "feature"
         },
         {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0250-p21-read-model-parametros.md",
+            "id": "TASK-0250",
+            "linked_decisions": [
+                "DECISION-0091"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "DECISION-0091"
+            ],
+            "reviewer": "adversarial-informal-sesion-separada",
+            "status": "proposed",
+            "title": "[VISION-NOVA][P2.1] Read model de parametros (rubros/fuentes/rubro-fuente/BPIN/series) - dev BASELINE",
+            "type": "feature"
+        },
+        {
+            "checker": "Arquitecto",
+            "file": "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md",
+            "id": "TASK-0251",
+            "linked_decisions": [
+                "DECISION-0091"
+            ],
+            "linked_reqs": [
+                "GOAL-VISION-NOVA-001"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "project": "multi_agent_project_protocol",
+            "relates_to": [
+                "GOAL-VISION-NOVA-001",
+                "DECISION-0091"
+            ],
+            "reviewer": "adversarial-informal-sesion-separada",
+            "status": "proposed",
+            "title": "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

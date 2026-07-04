@@ -23,6 +23,18 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[VISION-NOVA][F3.3] Instrumentacion del estudio: motor de medicion automatizado (cost.attributed + defect.reported + manual.intervention + study_metrics.py)"
+        },
+        {
+            "id": "TASK-0250",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][P2.1] Read model de parametros (rubros/fuentes/rubro-fuente/BPIN/series) - dev BASELINE"
+        },
+        {
+            "id": "TASK-0251",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[VISION-NOVA][P2.2] Reporte de ejecucion presupuestal (Get_Budget_Execution_Report) - dev BASELINE, miembro PAR-D anclado"
         }
     ],
     "next_actions": [

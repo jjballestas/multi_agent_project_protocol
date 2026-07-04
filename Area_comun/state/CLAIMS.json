@@ -17710,6 +17710,24 @@
             "updated_at": "2026-07-04T12:00:38Z"
         },
         {
+            "claim_id": "CLAIM-20260704T120550Z-Arquitecto-TASK-0250-0251-register",
+            "expires_at": "2026-07-04T12:35:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T120550Z-Arquitecto-TASK-0250-0251-register",
+                "Area_comun/state/TASK_INDEX.json#TASK-0250",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0250",
+                "Area_comun/tasks/TASK-0250-p21-read-model-parametros.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0251",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0251",
+                "Area_comun/tasks/TASK-0251-p22-reporte-ejecucion-presupuestal.md"
+            ],
+            "started_at": "2026-07-04T12:05:50Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T12:05:50Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
