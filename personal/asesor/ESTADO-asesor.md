@@ -83,13 +83,17 @@ terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 
 1. **METODOLOGIA AS-IS (decidido, sin cambio):** firmantes = Operador(dominio)/Arquitecto(arq+docs)/Codex(maker)/
    Analista(security+QA checker). NO se separan roles en mas firmantes: los ~10 roles del GOAL colapsan sobre los 4
    con ROL ACTIVO EXPLICITO por artefacto; maker!=checker DURO (Codex hace, Analista verifica; nunca auto-verificacion).
-2. **ARRANQUE BUILD GOAL-P1 = HECHO (Codex en EXEC construyendo):** el Arquitecto registro **TASK-0247** (GOAL-P1
-   fundacion tecnica, owner Codex, opcion B checker_formal=0, ready), emitio GO a Codex, reapunto crons Codex(pid
-   148868, EN EXEC)+Analista(pid 66472, para DoD) a Nova-Budget (DECISION-0057). Codex hace git init + push del
-   scaffold a https://github.com/jjballestas/Nova-Budget.git (local D:/Agentes/Zeus/NOVA/Nova-Budget). Verifique el
-   task file + el GO: FIELES al diseno sellado, sin drift (P1 read-only, sin verticales, sin anti-patrones, gate =
-   arch-tests+CI+adversarial informal, NO auto-cierra). Circuito: Codex entrega in_review -> Arquitecto atesta sha256
-   -> operador mide con medir-goalp1.ps1 (BUILD REAL, no smoke) -> journal al sello. PROXIMO HITO: Codex -> in_review.
+2. **GOAL-P1 ENTREGADO Y ATESTADO (TASK-0247 review_approved):** ciclo completo en una sesion. Codex construyo la
+   fundacion (commit producto **02f5d5a** pusheado a Nova-Budget main): NOVA.sln 6 capas + nova-web + 3 test proj +
+   5 architecture tests + health/OpenAPI/ProblemDetails/correlation-id(TASK-0247) + CI. GATE REAL: dotnet build PASS,
+   dotnet test **9/9** verde, npm typecheck PASS, smoke runtime OK, adversarial informal APPROVED (docs/adversarial-goalp1.md).
+   El Arquitecto VERIFICO INDEPENDIENTE (re-corrio dotnet test 9/9) + ratifico. Opcion B intacta (checker_formal=0).
+   Verifique la evidencia: entrega REAL, sin drift. Riesgo menor NU1903 (NuGet audit OpenApi 2.3.0, no bloquea).
+   **PENDIENTE OPERADOR:** medir el BUILD REAL con medir-goalp1.ps1 (no smoke) -> Arquitecto atesta sha256 -> corpus del sello.
+   **PREGUNTA ABIERTA (proposito del piloto):** confirmar que la CAPTURA de tokens/tiempos reales de la sesion Codex
+   funciono end-to-end; si hay hueco, corregir ANTES de las unidades medidas P2.x.
+   **NOTA integridad P2+:** el adversarial informal de las unidades MEDIDAS debe ser AGENTE SEPARADO en contexto limpio
+   (dev!=adversarial); GOAL-P1 ok (excluido + Arquitecto re-verifico), pero blindar el patron antes de P2.
 3. **CHECKER GOAL-P1 = OPCION B (ruteado):** fila medida = Codex maker + adversarial informal + arch-tests/CI, checker_formal=0
    (fiel al schema sellado). Escrutinio formal de P1 = frontera read-only 26-29 jul -> FRONTERA-FIX. Analista-checker-FORMAL
    = solo gobernadas post-30-jul.
