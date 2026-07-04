@@ -14,8 +14,10 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
   warning; `npm test --prefix apps/nova-web` PASS. Live SQL parity stayed NA because no
   secret-backed connection string or sealed-baseline reset SQL was present. Protocol delivery artifacts:
   `Area_comun/handoffs/HANDOFF-TASK-0252-codex-to-arquitecto-1.md` and
-  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md`. Unrelated protocol dirty
-  paths and Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md`; protocol commit
+  `2c7bc7a coord(TASK-0252): deliver parity harness` moved TASK-0252 to `in_review`, released Codex claims
+  through runtime seq 3986, and moved the consumed GO to answered. Unrelated protocol dirty paths and
+  Nova-Budget untracked `docs/documentacion-tecnica/` were left untouched.
 - TASK-0251 done-flip completed after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0251-done-flip`. Codex moved TASK-0251
   `review_approved -> done` and released `CLAIM-20260704-Codex-TASK-0251-done-flip` via runtime seq
