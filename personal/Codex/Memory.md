@@ -17,7 +17,7 @@ Last updated: 2026-07-03 Europe/Madrid, after TASK-0234 done flip.
   domain-neutrality exit 0, validator OK, drift false at `up_to_seq=3794`, Nova-Budget `npm test` PASS, and
   Nova-Budget `dotnet test NOVA.sln` PASS with known NU1903 Microsoft.OpenApi warning. Unrelated dirty paths in
   `.claude/settings.json`, peer/operator personal areas, and Nova-Budget untracked `docs/documentacion-tecnica/`
-  were left untouched.
+  were left untouched. Golden-memory follow-up commit: `7906834 chore(personal): record TASK-0245 delivery`.
 - Nova-Budget front test harness foundation-completion delivered after Arquitecto ACTION
   `MSG-20260704-Arquitecto-to-Codex-ACTION-front-test-harness-nova-budget`. Product commit
   `e3a03a8 test: add Nova web harness` was pushed to `origin/main`; it changes `apps/nova-web` so `npm test`
