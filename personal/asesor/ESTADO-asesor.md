@@ -96,6 +96,11 @@ terminar el desarrollo. Rutee DIRECTIVA consolidada 9e2f660 (supersede la pausa 
 5. **PENDIENTE PARA EL SELLO (NO sellado ahora):** clarificacion codegen!=peon en la def del brazo baseline = INPUT del
    sello 08-jul; el operador la confirma al sellar. NO rutear su sello hasta entonces.
 6. **PEONES:** siguen POST-SELLO / F6 (DECISION-0078 + TASK-0231); no se dan de alta; herramienta bajo contrato. No ahora.
+7. **DIRECTIVA PERMANENTE "Arquitecto no idle" (1c33540):** mantener la cola del Arquitecto llena. Ruteada cola: (1)
+   arranque+registro GOAL-P1+skill; (2) coordinar+gatear P1 con Codex + cerrar fila-piloto; (3) prep/ensayo del sello
+   08-jul (manifiesto corpus + sha256 + dry-run submit_intent + validar schema v1.0); (4) preparar SPECs P2.1/P2.2
+   (dev medido NO pre-sello). Mientras Codex codea, el Arquitecto avanza 3 y 4 en paralelo. Re-llenar la cola al cerrar
+   cada item. Ver [[feedback-arquitecto-no-idle]].
 3. **DOMINIO NOVA-BUDGET ABSORBIDO** (brief durable 042eb72, personal/asesor/NOVA-BUDGET-brief-dominio.md):
    cadena de gasto (Aprop->CDP->RP->OBL->Pago, 4 reglas de oro en procs SQL), Clean Arch .NET 10, NO green-field
    (BD endurecida + reconciliada al centavo; hibrido 2024-26 fiel / 2027 limpio), ~45-55% del build = superficies
