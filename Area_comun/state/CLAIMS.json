@@ -18184,6 +18184,26 @@
             "updated_at": "2026-07-04T14:18:35Z"
         },
         {
+            "claim_id": "CLAIM-20260704T143854Z-Arquitecto-mailbox-higiene-7",
+            "expires_at": "2026-07-04T15:08:54Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T143854Z-Arquitecto-mailbox-higiene-7",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0250-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-CORRECCION-login-harness-nova-budget-verifier.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-CORRECCION-login-harness-nova-budget-verifier.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-FYI-login-harness-paridad-sandbox.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-FYI-login-harness-paridad-sandbox.md"
+            ],
+            "started_at": "2026-07-04T14:38:54Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T14:38:54Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",

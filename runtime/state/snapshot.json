@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7e5a9bd878e523644a20136905925de20938776485e4e402ca4a1ef7809f1706",
+  "canonical_hash": "196b789982e92f21d4b5e3e167f6c6258231d2f50346c886b680dfea4df232bb",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -520,6 +520,7 @@
       "CLAIM-20260704T133310Z-Arquitecto-mailbox-higiene-6": 1,
       "CLAIM-20260704T134047Z-Arquitecto-TASK-0250-0251-promote": 1,
       "CLAIM-20260704T141835Z-Arquitecto-TASK-0250-ratify": 1,
+      "CLAIM-20260704T143854Z-Arquitecto-mailbox-higiene-7": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1079,9 +1080,12 @@
       "MSG-20260704-Codex-to-Arquitecto-TASK-0249-done-flip-done": 1,
       "MSG-20260704-Codex-to-Arquitecto-TASK-0249-in-review": 1,
       "MSG-20260704-Codex-to-Arquitecto-TASK-0249-remediation-2-in-review": 1,
+      "MSG-20260704-Codex-to-Arquitecto-TASK-0250-done-flip-done": 1,
+      "MSG-20260704-Codex-to-Arquitecto-TASK-0250-in-review": 1,
       "MSG-20260704-Operador-to-Arquitecto-ACTION-medicion-operador-opera-hallazgo-captura": 1,
       "MSG-20260704-Operador-to-Arquitecto-ACTION-sandbox-mutadores-construido-documentar-sellar": 1,
       "MSG-20260704-Operador-to-Arquitecto-ANOMALIA-decision0091-committeada-por-asesor-drift": 1,
+      "MSG-20260704-Operador-to-Arquitecto-CORRECCION-login-harness-nova-budget-verifier": 1,
       "MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-amplia-cola-pre-sello": 1,
       "MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cierra-fila-goalp1-degradacion-aceptada": 1,
       "MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-cola-F3.3-lista-no-idle": 1,
@@ -1097,6 +1101,7 @@
       "MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-stand-down-control-costo": 1,
       "MSG-20260704-Operador-to-Arquitecto-FYI-0248-idioma-defer-carril-b": 1,
       "MSG-20260704-Operador-to-Arquitecto-FYI-estimates-q4-locked": 1,
+      "MSG-20260704-Operador-to-Arquitecto-FYI-login-harness-paridad-sandbox": 1,
       "MSG-20260704-Operador-to-Arquitecto-FYI-piloto-medicion-arranca": 1,
       "MSG-20260704-Operador-to-Arquitecto-FYI-ratifica-fila-goalp1": 1,
       "MSG-20260704-Operador-to-Arquitecto-RECOMENDACION-remediacion-0248-idioma-y-gate-front": 1,
@@ -1309,11 +1314,11 @@
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
-      "none": 13,
+      "none": 14,
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3262,
+    "events_applied": 3268,
     "fencing_tokens": {},
     "idempotency_keys": {
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
@@ -3287,6 +3292,7 @@
       "intent:Arquitecto:claim:8fbc6cde7c38e8a948b03e24aa9009f8cc5e2f63bc78a9f2f0b3f1e7170d69f4": 2717,
       "intent:Arquitecto:claim:905ec09e7bf01ca178555a05cd7eeec0763b89cd23076f7bdcb2c2539b924f58": 3330,
       "intent:Arquitecto:claim:918a7839541a4042bba87e85557f74c6a064327aa13d7f6629dd57115ea7932b": 2638,
+      "intent:Arquitecto:claim:91b681c33536c3ac1f7181e3253f40272f4b5f894b48bca2f6bcf27cc742f3d8": 3939,
       "intent:Arquitecto:claim:9697124973200dbc226c5ee699b67a53f506855a2ff9628746e1b6c8a4062590": 3829,
       "intent:Arquitecto:claim:9707ee55c7840209aff2cd55065025aedc0d395d07c3c93a83e96f8989aa3c37": 3026,
       "intent:Arquitecto:claim:9934955810dbee0e06c1d9c4bd6b51a5c454ed33f004af62b878ce99d656fb27": 3644,
@@ -3365,6 +3371,7 @@
       "intent:Arquitecto:claim:d26b29f81d2ff89319baf51ccb9117fa55cb5b71fbd7b33c88f73fcdc7553f84": 3784,
       "intent:Arquitecto:claim:d2e1352cd20f0b0ba0f7d89183fab1a33c5ce9c74c135fc4241dec92b555699a": 2817,
       "intent:Arquitecto:claim:d32cba243273c4215c5e10babd0da3d97d59c07f28e8f7edff4b2d764e6a79f0": 2640,
+      "intent:Arquitecto:claim:d3a8deb875f36090950bb08e5954eee63ca42fed2076a4552300c2e0ba176e9b": 3934,
       "intent:Arquitecto:claim:d3d4712b2f9fd928e615f8a3030cc44f4da968bd07aae35d10e631112ec01f88": 3530,
       "intent:Arquitecto:claim:d4022932a134194ab3e5c79f491cc7f05b7fe15709333a0ceb545bd4ea2bb297": 3074,
       "intent:Arquitecto:claim:d426a6399636ba2327f7643f79c62300322fa14ddf313604fe9a7dc4ea54ff4c": 3633,
@@ -3499,6 +3506,7 @@
       "intent:Arquitecto:mailbox_archive:2d20327db6a075a74e608d4ffb72f8377fccdefdcd2d140fb37761daf1bff1ea": 3454,
       "intent:Arquitecto:mailbox_archive:2df73100f63f98690a8e1739647e40299d2999ea9b763aee70eb69a49bdd527e": 2967,
       "intent:Arquitecto:mailbox_archive:2e0b1f9ec1a8232d68d55aa95531fedab4b9280025e7440b82c0da8351711be0": 3673,
+      "intent:Arquitecto:mailbox_archive:2ea0c22008cb64faace7297b1df84341689bb520b299e16a40ce79030f489459": 3935,
       "intent:Arquitecto:mailbox_archive:2f4c7ed24e4956b63347c3940def0faf99f47ecc9ab440bcc83d5de151a428c5": 2978,
       "intent:Arquitecto:mailbox_archive:3081b8d7a472dc7f6b57b772c49d2b84ab2816db6c6b91538381bea16402ee8e": 3676,
       "intent:Arquitecto:mailbox_archive:30bcc6a8d565a3b6300ef5c1cf12397a939f4da58e34f34fc36a69d5f45663a7": 3654,
@@ -3524,6 +3532,7 @@
       "intent:Arquitecto:mailbox_archive:3f03ed8da5971f16a9facaae71087d15b7ddbe947dc783c25720c7871a5db067": 3647,
       "intent:Arquitecto:mailbox_archive:3fad6158ccea063df16dd107a1751ae275fb00fe1513428df9d5e6c09438956d": 3187,
       "intent:Arquitecto:mailbox_archive:3fbf6b7824d0d70c66dfb5c2e00a834aef4782e1c5f56c82b02c0f611d0fc4a5": 3582,
+      "intent:Arquitecto:mailbox_archive:40f904d3c4b6a1d01cd3e0e99fc4cb69bed6f0fb80b25af3cf5fef01fba42087": 3936,
       "intent:Arquitecto:mailbox_archive:4127a0f7f6a7d9f462b631c99a9d90fed5cbdbb48f0a4bf8c361d09027f08e49": 3170,
       "intent:Arquitecto:mailbox_archive:42c51712cfe8602af4c705b127d5bb35ed5749815ac2758318f36b4223cb989e": 3813,
       "intent:Arquitecto:mailbox_archive:4343637bac08b1e9c709e7449ffe4b670baeefc06ed833dccd917b4ab7a2690f": 3290,
@@ -3537,6 +3546,7 @@
       "intent:Arquitecto:mailbox_archive:478e3138e8264ffc41dd5cd61f07592bf30b6dd19b0fc7dc3caf3e063c127c53": 3247,
       "intent:Arquitecto:mailbox_archive:4798b96046aa345f5e80c47043482593d8ddd1e89f8bdd8370abd38701c9bcd9": 2950,
       "intent:Arquitecto:mailbox_archive:47ea7097f91c3ae3ebd6d8b5e23ef3ed510357a773c5421ac681cdfd6a08dba1": 3424,
+      "intent:Arquitecto:mailbox_archive:491a4569d5ad7e7a353bd8821494bac7c5b059318395e25601d293f8c83c0ee9": 3937,
       "intent:Arquitecto:mailbox_archive:49a56f47e98d1a5f1da78dcbf08fe20b85d1899d62bed9499a7b2b7a605a1023": 2986,
       "intent:Arquitecto:mailbox_archive:49e86527294ed47a52917858bf1bd6bdee09e33970e110e12da0bdb2c6be8893": 2620,
       "intent:Arquitecto:mailbox_archive:49f3ce0a7b3382567ed1602914e08bbcf617a40804632eadaf28e282e462109b": 3328,
@@ -3772,6 +3782,7 @@
       "intent:Arquitecto:mailbox_archive:ea44a47dc052eb921bb873d15acc677ae06ce348b39c64b36b279ded12455c69": 3388,
       "intent:Arquitecto:mailbox_archive:eaca051fc23d079027b00061f38574abcc92a2d23864508ba15706bae0d294bb": 3628,
       "intent:Arquitecto:mailbox_archive:ebbd4d344c3b52bf0649d30327dc1f87e48287bbbfb5e169a222bfb22b018cf3": 3889,
+      "intent:Arquitecto:mailbox_archive:ec85259933c66902f96e57fc43263681a59900c4abfab92a22ba61b3023ff51c": 3938,
       "intent:Arquitecto:mailbox_archive:ecf81eb279f3e91357a9d6dccb351eb8b5738de33c2cb8a8ae4e401b36693b38": 3779,
       "intent:Arquitecto:mailbox_archive:ed8fc32a42004d40615ea8cb9fc77425f65559a32a37103aa0e96794b9557209": 3519,
       "intent:Arquitecto:mailbox_archive:ee55f407952677f9fc79b655cc5ac84703423a86a3e0f23d8708706a67c10200": 3886,
@@ -4579,5 +4590,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 3933
+  "up_to_seq": 3939
 }
