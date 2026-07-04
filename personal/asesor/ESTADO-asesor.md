@@ -11,6 +11,23 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
+## >> REACTIVACION 2026-07-04 (tarde) -- entregables shipped, en vuelo
+Operador reactivo + directiva "no dejes al Arquitecto sin trabajo, trabaja rapido". Estado al reactivar:
+HEAD==origin limpio, mailbox/open vacio, sin drift. Hecho esta reactivacion:
+- **SPEC de diseno F3.3 ENTREGADA** (personal/asesor/DRAFT-SPEC-F3.3-instrumentacion.md): 3 eventos
+  (cost.attributed auto reusa SPEC-0079/DECISION-0033 + defect.reported vs schema_defectos + manual.intervention)
+  + study_metrics.py determinista Q1-Q5. Commit ffad74e.
+- **COLA PRIORIZADA SIN-IDLE ruteada** al Arquitecto (MSG-...-DIRECTIVA-cola-F3.3-lista-no-idle, ffad74e):
+  Q1 F3.3 a Codex (critical-path, spec lista) | Q2 dev medido P2.1/P2.2 en paralelo | Q3 monitor PAR-2 condicional
+  (<=15-jul) | Q4 backlog miembros gobernados (17-jul). Trabajar en paralelo, re-llenar al drenar.
+- **DRAFT F3.2 ENTREGADO** (personal/asesor/DRAFT-F3.2-sello-etapa2-backlog-Q4-adopcion.md, a913cc4): aritmetica
+  backlog reconciliado + condicionalidad Q4 (subpotenciado 2/8 con n efectivo<10 por cluster BR-C3) + regla de
+  adopcion/transferibilidad Aegis. NO ruteado aun (para Etapa 2 <=29-jul; el MSG ya aviso que llega; evito churn).
+- MONITOR armado sobre origin/main con self-filter (salta mi Ops-Reason).
+**EN VUELO -- esperando respuesta del Arquitecto:** (a) id de la tarea F3.3 ruteada a Codex; (b) estado
+coordinacion dev medido P2; (c) confirmacion monitor PAR-2 armado. Cuando responda: ratificar/ajustar, NO
+correr tras su fix-loop (git fetch antes de rutear).
+
 ## Identidad y reglas de operacion (no negociable)
 - Soy el ASESOR del Operador (John Ballestas), NO el Arquitecto (otra sesion, ejecuta el ledger).
   Participante NO-FIRMANTE (alta REGISTRADA: DECISION-0086, commit 26ac919; id `asesor`, cero
