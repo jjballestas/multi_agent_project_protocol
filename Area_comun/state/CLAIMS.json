@@ -16925,6 +16925,28 @@
             "updated_at": "2026-07-04T01:01:20Z"
         },
         {
+            "claim_id": "CLAIM-20260704-Codex-TASK-0247-done-flip",
+            "expires_at": "2026-07-05T23:59:59Z",
+            "notes": "Close TASK-0247 review_approved to done and move consumed done-flip coordination to answered.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704-Codex-TASK-0247-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0247",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0247",
+                "Area_comun/tasks/TASK-0247-nova-goalp1-fundacion-tecnica-nova-budget.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0247-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Arquitecto-to-Codex-ACTION-TASK-0247-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-TASK-0247-in-review.md",
+                "Area_comun/mailbox/answered/MSG-20260704-Codex-to-Arquitecto-TASK-0247-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-04T01:11:58Z",
+            "status": "released",
+            "task_id": "TASK-0247",
+            "updated_at": "2026-07-04T01:11:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260704-archive-3-directivas-arquitecto",
             "expires_at": "2026-07-04T01:00:00Z",
             "notes": "Archivar 3 DIRECTIVAs del Operador ya actionadas (DD horneadas 01f05db, pipeline al dia 2320acd, DECISION-0087 bc95ad3). requires_response false. Higiene gobernada.",

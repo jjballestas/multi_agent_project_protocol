@@ -2,7 +2,7 @@
 task_id: TASK-0247
 title: "[VISION-NOVA][NOVA-GOAL-001][GOAL-P1] Fundacion tecnica de Nova-Budget (sln + capas .NET 10 + apps/nova-web + architecture tests + infra transversal + CI). Piloto baseline (opcion B, checker_formal=0)."
 type: build
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high
