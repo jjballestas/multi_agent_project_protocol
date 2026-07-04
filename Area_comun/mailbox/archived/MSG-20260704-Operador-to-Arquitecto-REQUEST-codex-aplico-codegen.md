@@ -3,7 +3,7 @@ message_id: MSG-20260704-Operador-to-Arquitecto-REQUEST-codex-aplico-codegen
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-04

@@ -3,7 +3,7 @@ message_id: MSG-20260704-Arquitecto-to-Operador-RESPUESTA-codex-aplico-codegen
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-04
 context_refs:

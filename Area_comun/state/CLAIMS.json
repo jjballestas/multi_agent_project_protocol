@@ -17380,6 +17380,32 @@
             "updated_at": "2026-07-04T03:39:57Z"
         },
         {
+            "claim_id": "CLAIM-20260704T035733Z-Arquitecto-mailbox-higiene-2",
+            "expires_at": "2026-07-04T04:57:33Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260704T035733Z-Arquitecto-mailbox-higiene-2",
+                "Area_comun/mailbox/open/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-2-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Analista-to-Arquitecto-REVIEW-TASK-0246-specs-baseline-rejuicio-2-OK.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-CONFIRMA-baseline-specs-cerrado.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-CONFIRMA-baseline-specs-cerrado.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-rejuicio-2.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Analista-REVIEW-SPECs-baseline-rejuicio-2.md",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-codex-aplico-codegen.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-codex-aplico-codegen.md",
+                "Area_comun/mailbox/open/MSG-20260704-Codex-to-Arquitecto-ACTION-front-test-harness-nova-budget-done.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Codex-to-Arquitecto-ACTION-front-test-harness-nova-budget-done.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-ACTION-sandbox-mutadores-construido-documentar-sellar.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-ACTION-sandbox-mutadores-construido-documentar-sellar.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-REQUEST-codex-aplico-codegen.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-REQUEST-codex-aplico-codegen.md"
+            ],
+            "started_at": "2026-07-04T03:57:33Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-04T03:57:33Z"
+        },
+        {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",
             "expires_at": "2026-06-23T16:11:20.685Z",
             "notes": "Front file-intake extraction relay claim.",
