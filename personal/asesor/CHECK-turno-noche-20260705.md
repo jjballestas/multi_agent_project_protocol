@@ -26,12 +26,13 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [x] **PAR-2 condicional -> CONFIRMADO** + **enmienda fechada** del grant (+2 EXECUTE Annul) -- registrado en e9918a9.
   - [x] Filas de medicion **P2.1/P2.2 (seq 4-7)** presentes en `medicion_journal.csv`.
 
-- [~] **3. P4.1 -- RUTA CRITICA (EN CURSO)**  `TASK-0253 / SPEC-NOVA-P4-001 Apply_Budget_Modification`
-  - [x] GO-eada a Codex (4c78b62, baseline pattern-setter).
-  - [x] **Fila OPEN capturada** (journal seq 8, TASK-0253 baseline) -- disciplina OPEN/CLOSE respetada.
-  - [ ] Estado actual: **`in_review`** (Codex entrego; falta adversarial informal en sesion separada -> gate).
-  - [ ] **Fila CLOSE con `tokens_total_atribuibles` real** (pendiente hasta el done).
-  - [ ] Patron familia ajustes congelado (al arrancar PAR-1).
+- [!] **3. P4.1 -- RUTA CRITICA (BLOQUEADA, necesita al operador)**  `TASK-0253 / SPEC-NOVA-P4-001`
+  - [x] GO-eada a Codex (4c78b62) + **fila OPEN capturada** (journal seq 8).
+  - [x] Adversarial informal dio NO-GO (4 hallazgos: F-NOVA-01, saldo-por-vista, ProblemDetails generico, UI sin formulario).
+  - [x] Codex remedio 3 de 4 (saldo via vw_Initial_Budget_Line_Balance, ProblemDetails especifico, UI editable) -- Nova-Budget commit 00a3f47; dotnet test 35 PASS, npm PASS.
+  - [!] **BLOQUEADA en F-NOVA-01:** la verificacion de PARIDAD en vivo contra DbsFinanciero_SANDBOX **falla por credenciales** (SSPI error; faltan env vars). Codex no puede probar los 8 criterios Given/When/Then ni re-verificar los THROW contra el proc desplegado.
+  - **NECESITA DEL OPERADOR:** `NOVA_BUDGET_PARITY_CONNECTION_STRING` + `NOVA_BUDGET_SANDBOX_RESET_SQL` en el entorno de Codex (login `nova_budget_verifier`), O correr F-NOVA-01 desde un entorno con acceso `budget_sandbox_verifier`.
+  - [ ] Fila CLOSE + tokens / patron congelado -- BLOQUEADOS hasta resolver F-NOVA-01.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
   - Pendiente: arranca cuando P4.1 cierre y congele el patron.
