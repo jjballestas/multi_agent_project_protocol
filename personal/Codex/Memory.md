@@ -19,7 +19,10 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   `Budget.vw_Initial_Budget_Line_Balance`; DBA/operator must provide or reopen a sealed open fiscal year before the
   8 GWT mutation criteria can run. Handoff/message:
   `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-6.md` and
-  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md`.
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md`. Protocol
+  the protocol delivery commit records the blocked handoff, TASK-0253 status
+  back to `blocked`, and releases Codex claims through runtime seq 4092; it also includes Arquitecto mailbox hygiene
+  events/materialized moves that were already in the runtime log when Codex materialized the authoritative state.
 - TASK-0253 F-NOVA-01 retry-2 remains blocked after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-2`. VIEW DEFINITION is now visible:
   `DbsFinanciero_SANDBOX`, `role_member=1`, `view_def=1`, `exec_perm=1`, `proc_len=9412`. Exact THROW set found in
