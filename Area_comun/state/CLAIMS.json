@@ -616,6 +616,54 @@
             "updated_at": "2026-07-05T21:55:51Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0255-done-flip",
+            "expires_at": "2026-07-05T22:55:59Z",
+            "notes": "Normalize malformed released claim scope before final release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0255-done-flip"
+            ],
+            "started_at": "2026-07-05T22:25:59Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T22:25:59Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0255-done-flip-proper",
+            "expires_at": "2026-07-06T00:22:55Z",
+            "notes": "Proper file-scoped done-flip claim after malformed scope attempts.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0255-done-flip-proper",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0255-done-flip",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0255-done-flip-scopefix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0255-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0255-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0255-done-flip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T22:22:55Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T22:22:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0255-done-flip-scopefix",
+            "expires_at": "2026-07-05T22:56:51Z",
+            "notes": "Normalize malformed released claim scope before final release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0255-done-flip-scopefix"
+            ],
+            "started_at": "2026-07-05T22:26:51Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T22:26:51Z"
+        },
+        {
             "claim_id": "CLAIM-ARQ-TASK-0255-ratify-20260705",
             "expires_at": "2026-07-05T23:12:58Z",
             "owner": "Arquitecto",

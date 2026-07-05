@@ -4,6 +4,15 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0255 done-flip executed after Arquitecto ACTION
+  `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0255-done-flip.md`. Codex moved TASK-0255
+  `review_approved -> done` through runtime seq 4224, moved the consumed ACTION to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0255-done-flip-done.md`. During claim
+  acquisition, two malformed scope rows were created by a PowerShell JSON array issue
+  (`CLAIM-20260706-Codex-TASK-0255-done-flip`, `CLAIM-20260706-Codex-TASK-0255-done-flip-scopefix`);
+  both were normalized with single-row scopes at seq 4228-4229 and released at seq 4230-4231. No product
+  code changed. Product gates passed: `dotnet test NOVA.sln` PASS 56 tests with known NU1903 Microsoft.OpenApi
+  warning; `npm test --prefix apps/nova-web` PASS.
 - TASK-0255 final delivery supersedes the partial note below. Product commits in
   `D:/Agentes/Zeus/NOVA/Nova-Budget`: `9aff84d feat: add availability certificate annulment surface` and
   `edbc037 test: add annulment mutation evidence`. Full live evidence passed with User-scope env:
