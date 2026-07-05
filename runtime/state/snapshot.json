@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c9e5aa8dd8f4cd181fa3b7abbee2b00e080d64402d2f50cef5413e56858d3264",
+  "canonical_hash": "9b2fabbb110f3b105bd6f0288b5eeee1f1dfd73cd6e0b18f49810aa8dd6ccdb1",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -536,6 +536,7 @@
       "CLAIM-20260705-Arquitecto-hygiene-D": 1,
       "CLAIM-20260705-Arquitecto-hygiene-E": 1,
       "CLAIM-20260705-Arquitecto-hygiene-F": 1,
+      "CLAIM-20260705-Arquitecto-hygiene-G": 1,
       "CLAIM-20260705-Arquitecto-mailbox-hygiene-1": 1,
       "CLAIM-20260705-Arquitecto-mailbox-hygiene-2b": 1,
       "CLAIM-20260705-Arquitecto-mailbox-hygiene-3": 1,
@@ -1175,6 +1176,7 @@
       "MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-1-in-review": 1,
       "MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-2-in-review": 1,
       "MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review": 1,
+      "MSG-20260705-Codex-to-Arquitecto-TASK-0254-blocked": 1,
       "MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-P4.1-adversarial-ruta-critica-prioriza": 1,
       "MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-env-listas-relanza-codex-desbloquea-P4.1": 1,
       "MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-promueve-hallazgos-5-1-seguridad-DD01": 1,
@@ -1393,11 +1395,11 @@
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
-      "none": 24,
+      "none": 25,
       "protocol-prune": 2,
       "protocol-state": 1
     },
-    "events_applied": 3482,
+    "events_applied": 3485,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3358,6 +3360,7 @@
       "intent:Arquitecto:claim:67fff91e12c49123f09a44a40904a1edfa3d97cd7e786fd3cd267261d48a8254": 2701,
       "intent:Arquitecto:claim:68c6ef087835bf2073589a4762e9be2253f0875e39759fed23dd7caec0cbcb08": 3363,
       "intent:Arquitecto:claim:68ef30295562fab15a855f36e612e3719097fcf3a63895aa1f38bcbb0d59202e": 3961,
+      "intent:Arquitecto:claim:6b139ffb19f6aea5c0aca3afbf40ae62a38b1097b5cb1c62a1eb3232dcaea0df": 4154,
       "intent:Arquitecto:claim:6b57ee1d9e06c4668da7d88b7f34cdbb1394d72eed860d01a0c45964c427031f": 2697,
       "intent:Arquitecto:claim:6bb6a9b172b54150b63ce293df518219cf3acbf793d6a548468c259035b20757": 2643,
       "intent:Arquitecto:claim:6c0874b8b4a8738a820aaf020a5780de3dc10e34856441256e1764475b4e9dd0": 2618,
@@ -3520,6 +3523,7 @@
       "intent:Arquitecto:claim:d68b3674866de1b3cc9790ff554027cae94318ceb35d4e0fdfc9f62eb3c8d201": 2934,
       "intent:Arquitecto:claim:d759b0d499c8c5fae73ba79ce16f2458b0a367ac6d871a73955d615d1140bf4b": 2996,
       "intent:Arquitecto:claim:d7db53f34cc018b775542c1906fbaa263679efff2f0d3b95fa0b6b3c2ad84c89": 2660,
+      "intent:Arquitecto:claim:da740528f636361099622e7a241c9bd545232dfe2e66438359e4949677d5b38c": 4156,
       "intent:Arquitecto:claim:dc4c6d25a822e7643cfc4c6ebdd261680799142a8b5fadacf49c2ff7f1ebeffc": 3445,
       "intent:Arquitecto:claim:dd47831ae0e41d79dd7753981ae46a2e87628a5650aea65e86a84795ed1110f2": 3808,
       "intent:Arquitecto:claim:ddeaf646a1feccba16e833ecee39f580ae4e71f4d2e22ca3d7750fab5331a6c1": 3640,
@@ -3851,6 +3855,7 @@
       "intent:Arquitecto:mailbox_archive:a87fdd999046e6746c6af942a829d59f5cd8f30a9aa945fd71fe28ddf871dba2": 2635,
       "intent:Arquitecto:mailbox_archive:a8ca1493c35b9877b86ace74439733a52120052895e5ea783bda5a4a5974e4f7": 2840,
       "intent:Arquitecto:mailbox_archive:a9005972d56f6c7761b02748b6167277cb97868536cbf05f92dd84c88772e48b": 3733,
+      "intent:Arquitecto:mailbox_archive:a9039b3adbc945393ca26a9720e7ebb5be180b234a42668dd634379bb73602ce": 4155,
       "intent:Arquitecto:mailbox_archive:a9fc40dbe2f304e78c7d8a86d98228ae27c67fd6211b843c8e19272a9a8b1e12": 4069,
       "intent:Arquitecto:mailbox_archive:aa182b97a48033f80e667ea61d9a8e139ae70cfbe6c528e0f6299bbea86a729c": 3334,
       "intent:Arquitecto:mailbox_archive:aa533f0e456eac4de912b53f011b66df41d11ddf6401c5daf15c9191e9ba7e0a": 4066,
@@ -4883,5 +4888,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4153
+  "up_to_seq": 4156
 }

@@ -584,6 +584,17 @@ seleccion fue "pre-existencia + orden de dominio", no el resultado que producia.
 ventana baseline, GO inmediato). P4.3 (Apply_Commitment_Adjustment) queda como el miembro GOBERNADO de
 PAR-1, para su brazo en Sprint 1 (post-30-jul, bajo gobierno completo atestado).
 
+## 22. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - SELECT sobre Budget_Adjustment (F-NOVA-01 de P4.2/TASK-0254)
+
+**No reabre el sello; test-infra.** F-NOVA-01 de TASK-0254 (P4.2) fallo en vivo con SQL 229 (`SELECT`
+denegado sobre `Budget.Budget_Adjustment` dentro del flujo de `Apply_Availability_Adjustment`). El DBA
+otorgo `GRANT SELECT ON OBJECT::[Budget].[Budget_Adjustment] TO [budget_sandbox_verifier]`
+(`sandbox-grant-execute.sql` v1.5, re-ejecutado completo sin error). Validado con `nova_budget_verifier`:
+`HAS_PERMS_BY_NAME(...,'SELECT')=1`, `SELECT TOP 1` OK. Ademas corrio un smoke funcional real de
+`Apply_Availability_Adjustment` con TVP dentro de transaccion + `ROLLBACK` (movement_type 09, regimen
+cadena_sgr) -> `apply_availability_rollback_smoke_ok`, cero residuos (el primer intento cayo en THROW
+50261 por regla de negocio del contracredito, no por permisos -- confirma que el SQL 229 quedo resuelto).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
