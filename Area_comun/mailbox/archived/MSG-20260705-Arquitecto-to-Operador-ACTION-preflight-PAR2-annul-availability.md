@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Operador-ACTION-preflight-PAR2-annul-avai
 from: Arquitecto
 to: Operador
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-05

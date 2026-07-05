@@ -255,6 +255,28 @@
             "updated_at": "2026-07-05T21:35:11Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-L",
+            "expires_at": "2026-07-05T23:57:23Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-L",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-ACTION-preflight-PAR2-annul-availability.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-ACTION-preflight-PAR2-annul-availability.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-preflight-PAR2-hecho-THROW-completo.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-preflight-PAR2-hecho-THROW-completo.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-ENCARGO-PAR-2-baseline-surface.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-ENCARGO-PAR-2-baseline-surface.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-ENCARGO-PAR2-completo.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-ENCARGO-PAR2-completo.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md"
+            ],
+            "started_at": "2026-07-05T21:57:23Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T21:57:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-done-flip",
             "expires_at": "2026-07-05T20:47:22Z",
             "notes": "Final implementer done flip after checker review_approved.",
@@ -535,6 +557,24 @@
             "status": "released",
             "task_id": "TASK-0255",
             "updated_at": "2026-07-05T21:55:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0255-full-gwt",
+            "expires_at": "2026-07-06T01:57:13Z",
+            "notes": "Complete TASK-0255 mutation GWT after 50283 confirmation",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0255-full-gwt",
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0255-throw-50283-confirmado.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T21:57:13Z",
+            "status": "active",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T21:57:13Z"
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0255-impl",

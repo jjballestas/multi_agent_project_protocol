@@ -622,6 +622,30 @@ completo, el PRIMERO alfabeticamente gana la asignacion BASELINE** (`Annul_Avail
 sobre el proc de hardening ya construido y verificado por el DBA). `Annul_Commitment` queda como el
 miembro GOBERNADO de PAR-2, para su brazo en Sprint 1 (post-30-jul).
 
+## 24. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - Preflight AMPLIADO completo de PAR-2 + correccion de THROW real
+
+**No reabre el sello; test-infra, adelantado (ambos miembros).** El DBA hizo el preflight AMPLIADO
+COMPLETO de PAR-2 de una sola vez (leccion de TASK-0254 aplicada preventivamente, revisando el codigo
+real de los procs en vez de conceder permiso-por-permiso): `GRANT VIEW DEFINITION` sobre
+`Annul_Availability_Certificate` + `Annul_Commitment` + las 4 tablas de reverso
+(`Availability_Certificate_Reversal`/`_Line`, `Commitment_Reversal`/`_Line`); `GRANT SELECT` sobre 13
+tablas base (`Availability_Certificate`+`_Line`+`_Line_Adjustment` + 2 reverso; `Commitment`+`_Line`+
+`_Line_Adjustment` + 2 reverso; `Obligation`; `Core.Fiscal_Year`; `Core.Internal_Catalog`;
+`Security.[User]`). Sin TVP (no requiere `EXECUTE ON TYPE`); sin triggers en las tablas de reverso.
+Validado con smoke real (ROLLBACK) como `nova_budget_verifier`: `Annul_Availability_Certificate` sobre
+CDP 30 OK, `Annul_Commitment` sobre RP 87 OK, cero errores de permiso, 0 residuos.
+
+**CORRECCION DE FALSABILIDAD (2a vez en este proyecto -- refuerza F-0246-02):** el `OBJECT_DEFINITION`
+revelo un set de THROW MAS RICO que el smoke/encargo original (que citaba solo 50293/50281/50100,
+incompleto). **Sets REALES completos:**
+- `Annul_Availability_Certificate` (PAR-2 BASELINE) = **50100, 50280, 50281, 50282, 50283, 50284, 50285,
+  50286, 50287** (9 codigos).
+- `Annul_Commitment` (PAR-2 GOBERNADO, Sprint 1) = 50100, 50290, 50291, 50292, 50293, 50294, 50295,
+  50296, 50297 (9 codigos).
+
+SPEC-NOVA-P4-005 actualizada con el set completo real. F-NOVA-01 de TASK-0255 puede proceder sin
+round-trips de permisos (todos los permisos de lectura estan concedidos).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
