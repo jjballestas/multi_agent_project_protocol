@@ -3,7 +3,7 @@ message_id: MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-prioridad-post-PAR2-pr
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:

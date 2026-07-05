@@ -679,6 +679,26 @@
             "updated_at": "2026-07-05T22:12:58Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-mailbox-archive-20260706-0038",
+            "expires_at": "2026-07-05T23:40:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-final-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0255-final-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0255-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-0255-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-COORD-cierra-PAR2-y-reinicia-sesion.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-COORD-cierra-PAR2-y-reinicia-sesion.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-prioridad-post-PAR2-prep-sprint1.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-prioridad-post-PAR2-prep-sprint1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-archive-20260706-0038"
+            ],
+            "started_at": "2026-07-05T22:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T22:40:00Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
