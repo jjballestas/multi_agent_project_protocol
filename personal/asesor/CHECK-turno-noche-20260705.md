@@ -42,9 +42,11 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - PENDIENTE-TRIGGER (atestacion journal) = DISPARADO en b7c7147.
   - Nota de seguridad: el Arquitecto se auto-freno bien al intentar escribir la password a disco; el secreto quedo solo en la env var de usuario (canal acordado). Disciplina correcta.
 
-- [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
-  - Pendiente: arranca cuando P4.1 cierre y congele el patron.
-  - [x] **BD pre-flighteada** (no repite el round-trip de P4.1): el DBA otorgo VIEW DEFINITION sobre P4.2/P4.3 + tablas padre de sus triggers, y EXECUTE sobre el TVP Chain_Adjustment_Line_List. THROW reales enumerados (50259 ausente -> falsabilidad). Ruteado (f3c1e94) enmienda + input SPEC PAR-1.
+- [x] **4. Miembro baseline PAR-1 ARRANCADO** (TASK-0254, GO-eada 21:50)
+  - [x] **Sorteo resuelto (Opcion 1, mi recomendacion):** enmienda fechada s.21 con 3 strings candidatos transparentes -> **P4.2=baseline, P4.3=gobernado** (Sprint 1). Sin discrecion oculta.
+  - [x] **TASK-0254 = P4.2 Apply_Availability_Adjustment** (ajuste CDP), estimate S, brazo=baseline, par_id=PAR-1. OPEN capturado (J10). SPEC-NOVA-P4-002 cita THROW reales. Aislamiento critico declarado (no leer P4.3). Hereda patron P4.1.
+  - [x] **BD pre-flighteada** -> NO repite los round-trips de P4.1 (VIEW DEFINITION + TVP + THROW reales ya concedidos). Deberia cerrar mas rapido (S, sin saga de permisos).
+  - [ ] FALTA: ciclo (build -> adversarial con guard de procedencia -> F-NOVA-01 -> CLOSE + tokens).
 
 - [ ] **5. (Si sobro tiempo) Extra**
   - Superficie baseline PAR-2 (sobre los `Annul_*`) O avance de `TASK-0246`. Aun no.
