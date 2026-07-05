@@ -4,6 +4,16 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 blocked handof
 
 ## Latest Session Note
 
+- TASK-0253 F-NOVA-01 retry-2 remains blocked after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-2`. VIEW DEFINITION is now visible:
+  `DbsFinanciero_SANDBOX`, `role_member=1`, `view_def=1`, `exec_perm=1`, `proc_len=9412`. Exact THROW set found in
+  `Budget.Apply_Budget_Modification`: 50230,50231,50232,50233,50234,50235,50236,50237,50238,50239,50240,50241,
+  50242,50243. Trigger scan found `Budget.trg_budget_adjustment__validate_open_year` with 50212; 50065 was not
+  visible in the scanned definitions. The first live GWT execution is blocked by SQL error 229:
+  EXECUTE permission denied on object `Budget_Modification_Line_List`, so the verifier still cannot instantiate
+  the TVP. Product commit is `75913aa fix: rename budget SQL options`. Protocol artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-5.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-2-blocked.md`.
 - TASK-0253 F-NOVA-01 remains blocked after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01`. Codex can load the two User-scope env vars for
   commands without printing values; live sandbox context reaches `DbsFinanciero_SANDBOX` as login
