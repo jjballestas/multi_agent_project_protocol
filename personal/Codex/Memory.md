@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry blocked handoff.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 blocked handoff.
 
 ## Latest Session Note
 
+- TASK-0253 F-NOVA-01 remains blocked after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01`. Codex can load the two User-scope env vars for
+  commands without printing values; live sandbox context reaches `DbsFinanciero_SANDBOX` as login
+  `nova_budget_verifier`, `IS_ROLEMEMBER('budget_sandbox_verifier')=1`, and
+  `HAS_PERMS_BY_NAME('Budget.Apply_Budget_Modification','OBJECT','EXECUTE')=1`, but
+  `HAS_PERMS_BY_NAME(...,'VIEW DEFINITION')=0` and `OBJECT_DEFINITION` length is NULL. F-NOVA-01 still cannot
+  re-verify the exact deployed THROW set, so the 8 live criteria were not accepted. Product commit
+  `7cc845e fix: rename budget SQL options` remediates the non-blocking ReadOnlySqlOptions naming finding by
+  renaming it to `BudgetSqlOptions` and switching the config section to `BudgetSql`. Evidence:
+  `dotnet test NOVA.sln` PASS 35 tests with known NU1903 Microsoft.OpenApi warning;
+  `npm test --prefix apps/nova-web` PASS; `node --check apps\\nova-web\\src\\main.js` is not applicable/fails
+  because the app entrypoint is TypeScript `main.tsx`. Protocol artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-4.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-blocked.md`. Protocol commit
+  Protocol commit `fix(TASK-0253): record F-NOVA-01 permission block` keeps TASK-0253 `blocked`, releases Codex claims
+  through runtime seq 4054, and moves the consumed ACTION to answered.
 - TASK-0253 F-NOVA-01 retry remains blocked after Arquitecto ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry`. The two env vars are present in Windows
   User environment but not inherited in the Codex process; Codex loaded User-scope values for commands without
