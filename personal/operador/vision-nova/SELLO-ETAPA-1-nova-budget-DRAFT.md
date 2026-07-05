@@ -486,6 +486,30 @@ re-ejecutado completo sin error; doc `budget-parity-harness.md` actualizado por 
 de solo lectura (expone el texto del modulo, no anade EXECUTE/escritura) -- no cambia el conteo de 108
 EXECUTE+SELECT de s.14, es una categoria de permiso distinta.
 
+## 17. ENMIENDA FECHADA 2026-07-05T10:47Z (Arquitecto) - EXECUTE ON TYPE para TVPs (F-NOVA-01, adelanta PAR-1)
+
+**No reabre el sello; test-infra.** F-NOVA-01 avanzo hasta la ejecucion viva y encontro que instanciar la
+TVP `Budget.Budget_Modification_Line_List` (parametro de `Apply_Budget_Modification`) requiere permiso
+propio en SQL Server (`EXECUTE ON TYPE`, distinto de `EXECUTE` sobre el proc). El DBA otorgo:
+`GRANT EXECUTE ON TYPE::[Budget].[Budget_Modification_Line_List] TO [budget_sandbox_verifier]`, validado
+con `nova_budget_verifier` (`DECLARE @lines Budget.Budget_Modification_Line_List` OK, `TYPE_ID=260`).
+**Adelanto util:** el DBA tambien otorgo `EXECUTE ON TYPE::[Budget].[Chain_Adjustment_Line_List]`
+(la TVP de la familia de ajustes de cadena, P4.2/P4.3/PAR-1), anticipando el mismo bloqueo -- no
+bloqueante para P4.1, pero evita repetir este ciclo cuando arranque PAR-1. Script
+`sandbox-grant-execute.sql` linea 41.
+
+## 18. Registro de hallazgo (no bloqueante) - Autenticacion/autorizacion API Nova-Budget (GAP vs DD-01)
+
+**Confirmado por el Analista** (`Area_comun/artifacts/ANALISTA-HALLAZGO-AUTH-DD01-veredicto.md`, producto
+commit `6cb9016`): `Program.cs` no registra `AddAuthentication`/`AddAuthorization`/`UseAuthentication`/
+`UseAuthorization`/`[Authorize]`/`RequireAuthorization` en ninguna ruta. Alcance: los 8 endpoints
+presupuestales completos (parametros, reporte de ejecucion, modificacion de apropiacion), no solo P4.1.
+Clasificacion: GAP vs DD-01 (DD-01 acepto el piso "autenticado + rol", no "sin autenticacion"). Aceptable
+para dev en sandbox/local; **bloqueante antes de exponer la API fuera de un entorno controlado.** NO
+bloquea el cierre de TASK-0253 (cross-cutting, no especifico de P4.1) -- se registra como item de backlog
+security+QA separado, dueno = Codex (implementa autenticacion minima) + Analista (checker), prioridad a
+definir cuando abra el trabajo de hardening/Sprint 1 (no ruta critica pre-30-jul).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
