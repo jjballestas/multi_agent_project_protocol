@@ -37,7 +37,9 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
     - [x] **TASK-0253 -> in_review** (Codex pidio al Arquitecto rutear el adversarial informal 12-puntos en sesion separada).
     - [~] **Adversarial EN CURSO** (la RESPUESTA del Arquitecto aclara: la sesion adversarial corre ahora; el llenaba la espera con gobierno -- mi flag de stall era parcial: no estaba caido, iba lento tras la distraccion del bug de prune). F-NOVA-01 paso 8/8 GWT (delta +1.0000, 6 THROW negativos).
     - [!] **FLAG DE INTEGRIDAD (antes del CLOSE, 53cb25b):** tokens_dev=1,312,232 = ~3-4x P2.1/P2.2 -> inflado por la saga de permisos F-NOVA-01 (4 retries = teething de maquinaria, no dev). Al capturar CLOSE: tag_incidente_maquinaria=arranque + notas_confound (s.10 aislamiento teething), no leer como dev limpio de regimen.
-    - [ ] **FALTA:** adversarial GO -> P4.1 done + CLOSE (con tag teething) + patron congelado -> PAR-1 arranca (BD pre-flighteada, SPEC citando THROW reales).
+    - [x] **P4.1 CERRADA (review_approved).** CLOSE capturada (J9): tokens_dev=1,700,909 + adversarial 306,392 = total 2,007,301; **mi tag de teething aplicado** (arranque + notas_confound). reworks=3.
+    - [!] **HILO DE INTEGRIDAD (b7c7147):** la nota de CLOSE revela que se cazo un MOCK in-memory disfrazado de evidencia real (rem-3), 'mismo patron que TASK-0250'. El checker lo cazo en P4.1 (tesis del estudio OK) PERO P2.1 (TASK-0250) cerro con evidencia_real_adjunta=true SIN nota de mock -> pudo colarse. Rutee: verificar evidencia de P2.1 + guard sistemico de procedencia + aclarar paridad_exec_vs_endpoint=NA + cadencia de atestacion del journal (pendiente del operador, disparado).
+  - PENDIENTE-TRIGGER (atestacion journal) = DISPARADO en b7c7147.
   - Nota de seguridad: el Arquitecto se auto-freno bien al intentar escribir la password a disco; el secreto quedo solo en la env var de usuario (canal acordado). Disciplina correcta.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
