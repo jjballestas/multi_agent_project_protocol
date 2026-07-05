@@ -3,7 +3,7 @@ message_id: MSG-20260705-Operador-to-Arquitecto-INTEGRIDAD-P4.1-close-taggear-te
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-05
