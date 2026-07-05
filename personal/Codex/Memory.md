@@ -14,7 +14,7 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
   `dotnet test NOVA.sln` PASS 29 tests with known NU1903 Microsoft.OpenApi warning, local front npm ci+test PASS,
   clean clone `C:\Users\johnb\AppData\Local\Temp\nova-budget-clean-0252-20260705021414` PASS for dotnet/npm gates,
   protocol encoding OK, domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=3996`. Protocol
-  protocol delivery commit `a796589 fix(TASK-0252): deliver parity remediation` adds
+  protocol delivery commit `b7fff3e fix(TASK-0252): deliver parity remediation` adds
   `Area_comun/handoffs/HANDOFF-TASK-0252-codex-to-arquitecto-2.md`,
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-remediation-1-in-review.md`, and
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Analista-REVIEW-TASK-0252-remediation-1.md`; TASK-0252 is back
