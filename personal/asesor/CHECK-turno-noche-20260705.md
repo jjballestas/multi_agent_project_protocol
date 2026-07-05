@@ -40,6 +40,7 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
   - Pendiente: arranca cuando P4.1 cierre y congele el patron.
+  - [x] **BD pre-flighteada** (no repite el round-trip de P4.1): el DBA otorgo VIEW DEFINITION sobre P4.2/P4.3 + tablas padre de sus triggers, y EXECUTE sobre el TVP Chain_Adjustment_Line_List. THROW reales enumerados (50259 ausente -> falsabilidad). Ruteado (f3c1e94) enmienda + input SPEC PAR-1.
 
 - [ ] **5. (Si sobro tiempo) Extra**
   - Superficie baseline PAR-2 (sobre los `Annul_*`) O avance de `TASK-0246`. Aun no.
