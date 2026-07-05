@@ -1,6 +1,6 @@
 # Codex Memory
 
-Last updated: 2026-07-05 Europe/Madrid, after TASK-0252 done-flip delivery.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 delivery.
 
 ## Latest Session Note
 
@@ -9,7 +9,8 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0252 done-flip delivery.
   API `POST /api/budget/appropriation-modifications` plus `/validate`, SQL gateway through
   `Budget.Apply_Budget_Modification` with TVP `Budget.Budget_Modification_Line_List`, ProblemDetails for SQL
   THROW numbers, and nova-web preview wiring. Evidence: `dotnet test NOVA.sln` PASS 33 tests with known NU1903
-  Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS. Protocol delivery added
+  Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS. Protocol delivery commit
+  `7e5b2dc coord(TASK-0253): deliver appropriation baseline` added
   `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-1.md`, opened
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-in-review.md`, moved the consumed GO to
   answered, moved TASK-0253 `ready -> in_progress -> in_review`, and released Codex claims through runtime seq
