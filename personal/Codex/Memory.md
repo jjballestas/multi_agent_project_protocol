@@ -4,6 +4,20 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0253 remediation 2 delivered after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia`. Product commit
+  `25e18d1 test: version apply budget evidence harness` versions the missing F-NOVA-01 evidence in
+  `tests/NOVA.IntegrationTests/ApplyBudgetModificationEvidenceTests.cs` and commits the real sandbox grant/open-year
+  narrative in `docs/budget-parity-harness.md`. Evidence harness covers the 8 GWT case ids, returns NA when
+  `NOVA_BUDGET_PARITY_CONNECTION_STRING` or `NOVA_BUDGET_SANDBOX_RESET_SQL` are absent, and records result/THROW
+  evidence without secrets. Product gates: `dotnet test NOVA.sln` PASS 41 tests with known NU1903 Microsoft.OpenApi
+  warning; `npm test --prefix apps/nova-web` PASS. Protocol commit
+  `7798e33 fix(TASK-0253): deliver evidence remediation` adds
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-8.md`, opens
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-2-in-review.md`, moves the consumed
+  ACTION to answered, releases Codex claims through runtime seq 4120, and leaves TASK-0253 in_review. Protocol gates:
+  encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=4120`. CLOSE measurement row was not
+  written because it lives under `personal/Arquitecto/TFM-medicion`; handoff explicitly asks Arquitecto to capture it.
 - TASK-0253 retry-4 mailbox consumption completed after the in-review delivery was already recorded:
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4.md` was moved from `open/` to
   `answered/` with `status: answered`; Codex claim
