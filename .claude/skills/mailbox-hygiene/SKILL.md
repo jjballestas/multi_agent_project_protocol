@@ -1,16 +1,19 @@
 ---
 name: mailbox-hygiene
 description: >-
-  Como todos los agentes (Arquitecto/Codex/Analista) mantienen limpio el canal Area_comun/mailbox:
-  escribir mensajes bien formados, NO dejar mensajes resueltos en open/, y archivar los consumidos de
-  forma gobernada. USAR al: ENTREGAR UN REPORTE/HANDOFF AL OPERADOR (regla dura 2026-07-04: cada reporte
-  = checkpoint de higiene), escribir un GO/REVIEW/FYI/HANDOFF, cerrar una tarea, responder un mensaje,
-  o cuando open/ acumula mensajes ya respondidos/entregados/superados. Reglas duras: ASCII puro;
-  requires_response exige response_owner; claim de mailbox SOLO file-scoped a MSG-*.md (nunca dir-level);
-  archivar (mailbox_archive) exige capability orchestrator (solo el Arquitecto); los peers senalan
-  mensajes stale via DECISION-0018, no los tocan. Complementa arquitecto-ledger-ops y arquitecto-cron-lifecycle.
-  Trigger words: mailbox, higienizar, higiene, archivar, mailbox_archive, MSG, open, archived, mensaje
-  resuelto, consumido, stale, huerfano, response_owner, ASCII, canal limpio, GO consumido.
+  Como todos los agentes (Arquitecto/Codex/Analista) mantienen limpio el canal Area_comun/mailbox Y el
+  estado protocolar: escribir mensajes bien formados, NO dejar mensajes resueltos en open/, archivar los
+  consumidos de forma gobernada, Y correr la PODA (protocol_prune / prune_state.py) cuando este vencida.
+  USAR al: ENTREGAR UN REPORTE/HANDOFF AL OPERADOR (regla dura 2026-07-04, reforzada 2026-07-05: cada
+  reporte = checkpoint de higiene, ACOPLADO al mismo gate de commit, no un paso aparte que se olvida bajo
+  carga), escribir un GO/REVIEW/FYI/HANDOFF, cerrar una tarea, responder un mensaje, o cuando open/ acumula
+  mensajes ya respondidos/entregados/superados. Reglas duras: ASCII puro; requires_response exige
+  response_owner; claim de mailbox SOLO file-scoped a MSG-*.md (nunca dir-level); archivar (mailbox_archive)
+  exige capability orchestrator (solo el Arquitecto); los peers senalan mensajes stale via DECISION-0018, no
+  los tocan; la poda (`prune_state.py --check`) se corre en el MISMO checkpoint, no aparte. Complementa
+  arquitecto-ledger-ops y arquitecto-cron-lifecycle. Trigger words: mailbox, higienizar, higiene, archivar,
+  mailbox_archive, MSG, open, archived, mensaje resuelto, consumido, stale, huerfano, response_owner, ASCII,
+  canal limpio, GO consumido, poda, prune, protocol_prune, prune_state.
 ---
 
 # Mailbox hygiene -- canal limpio para todos los agentes
@@ -54,6 +57,44 @@ description: >-
 > reporte DECLARA EXPLICITAMENTE los N consumidos que quedan pendientes de archivar y por que
 > (drift-abort). Nunca entregues un reporte dejando consumidos en `open/` SIN decirlo. Un `open/` sucio
 > tras un reporte es un reporte falso del panel del operador.
+
+> **FALLO REAL 2026-07-05 (por que la regla de arriba se cae bajo carga, y como se corrige):** en una
+> cascada rapida de 7-8 ciclos bloqueo->grant-DBA->retry (F-NOVA-01 de TASK-0253), el Arquitecto emitio
+> reporte tras reporte sin correr NUNCA la higiene -- el operador tuvo que llamar la atencion 2 veces
+> ("por que debo picarte", "no estan los watchdog vivos"). Causa raiz: la regla vive como TEXTO en este
+> skill, sin ningun enforcer mecanico que la dispare antes de escribir el reporte; bajo presion (cada
+> mensaje del peer exige una accion inmediata), la atencion se va al contenido tecnico del bloqueo y la
+> higiene se trata como "tarea aparte, la hago despues" -- que nunca llega. Memoria previa
+> ([[feedback-higiene-mailbox-cada-5]]) YA registraba este mismo patron de fallo; volvio a pasar, prueba
+> de que "recordarlo" no basta bajo carga.
+> **FIX ESTRUCTURAL (no depende de la memoria, se acopla al mismo paso mecanico que ya vas a ejecutar):**
+> la clasificacion de higiene (open/ consumido vs vivo) va DENTRO del MISMO checklist de "gate antes de
+> commit" que usas para CUALQUIER escritura de mailbox (ver s.4b y `arquitecto-ledger-ops`), no como un
+> paso posterior separado. Concretamente: cada vez que vas a `git commit` algo que toca
+> `Area_comun/mailbox/` o `Area_comun/state/`, la MISMA pasada que corre `validate`+`scan_encoding` responde
+> tambien: "¿algo en `open/` quedo resuelto por este commit (una respuesta que acabo de escribir, un
+> veredicto que acabo de procesar)? -> archivalo en el MISMO submit_intent/commit, no en uno aparte".
+> Si la ventana no es segura (peer con lock), la higiene queda pendiente pero DECLARADA en el proximo
+> reporte -- nunca implicita. La poda (`prune_state.py --check`) se revisa en el MISMO punto (s.3b).
+
+### 3b. Poda del estado (protocol_prune / prune_state.py) -- mismo checkpoint que la higiene de mailbox
+`scripts/prune_state.py` archiva entradas terminales del estado "caliente" (tareas `done`, claims
+`released`) cuando cruzan un UMBRAL configurado en `protocol.config.json` (`done_ratio_hard`,
+`released_ratio_hard`; tambien hay un umbral de `cold_start_tokens`). **No es mantenimiento de cada commit,
+es de UMBRAL** -- pero revisar si esta vencida es tan barato como correr `--check`, asi que se hace en el
+MISMO checkpoint que la higiene de mailbox (mismo reporte, misma pasada), no en un ciclo aparte que se
+puede saltar:
+```
+python scripts/prune_state.py --check
+```
+Exit 0 = no hace falta podar todavia. Exit 1 con `PRUNE DUE: ...` = corre:
+```
+python scripts/prune_state.py --root . --actor-id Arquitecto --timestamp <ISO> --commit $(git rev-parse HEAD) --apply
+```
+Mismas reglas de ventana-idle y lock-contention que el resto de `submit_intent` (s.4b): si un peer tiene
+lock activo, el archivo del ledger puede estar tomado (`OSError: Resource deadlock avoided`) -- reintenta
+cuando el peer quede idle, no fuerces. Gatea `validate`+`scan_encoding` despues de aplicar, igual que
+cualquier otra transaccion gobernada, y commitea/pushea el resultado.
 
 Archiva un MSG de `open/` cuando quede **resuelto**:
 - **Respondido:** su respuesta ya existe (el `response_owner` contesto).
@@ -121,7 +162,9 @@ dir-claiman el mailbox, **no** archivan (no tienen orchestrator), **no** arregla
 - Actualiza memoria (DECISION-0026). Los mensajes de FYI de cierre van **despues** del archivado, no antes.
 
 ## Checklist de una linea
-**Antes de CADA reporte: pasada de higiene (clasifico open/ + archivo consumidos, o declaro los pendientes).** ·
+**Antes de CADA reporte (mismo gate que el commit, no un paso aparte): pasada de higiene (clasifico open/ +
+archivo consumidos, o declaro los pendientes) + `prune_state.py --check` (si PRUNE DUE, aplico en el mismo
+checkpoint).** ·
 Escribo: ASCII? response_owner? type valido para el peer? sin corte+peer? gateado exit 0? ·
 Archivo (solo Arq): mensaje resuelto? claim file-scoped open+archived+#self? message_id seguro? orchestrator? ·
 Peer: stale? -> senalo al owner (DECISION-0018), no toco.
