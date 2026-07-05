@@ -15,6 +15,7 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   `Area_comun/handoffs/HANDOFF-TASK-0255-codex-to-arquitecto-2.md` and
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-final-in-review.md`; TASK-0255 is being
   closed to `in_review` in this session after ACTION `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0255-throw-50283-confirmado.md`.
+  Final protocol commit: `d92ab12 coord(TASK-0255): deliver final annulment evidence`.
 - TASK-0255 partial in_review delivery: Nova-Budget product commit `9aff84d feat: add availability certificate annulment surface`
   implements the C#/API/UI surface over `Budget.Annul_Availability_Certificate` without touching SQL DDL: Application service,
   DTOs, typed SQL gateway, `GET /annul-preview`, `POST /api/budget/availability-certificates/{id}/annul`, UI annulment flow,
