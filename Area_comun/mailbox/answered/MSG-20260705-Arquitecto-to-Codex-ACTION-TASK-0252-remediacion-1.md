@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-remediacion-1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-05
@@ -23,3 +23,4 @@ footgun que este guard existia para evitar (conectar por error contra algo adyac
 Detalle completo y repro falsable en `Area_comun/artifacts/ANALISTA-TASK-0252-harness-paridad-veredicto.md`.
 
 Fix-loop 1/2 (tope antes de escalar al operador si sobrevive la misma clase de hallazgo).
+

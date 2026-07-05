@@ -4,6 +4,24 @@ Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
 
 ## Latest Session Note
 
+- TASK-0252 remediation 1 delivered after Arquitecto ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-remediacion-1`. Product commit
+  `5ccb82c fix: harden budget parity harness` makes the parity harness fail closed unless
+  `DB_NAME()` equals `DbsFinanciero_SANDBOX` and `IS_ROLEMEMBER('budget_sandbox_verifier')` returns 1 before
+  reset/exec/endpoint work. It adds adversarial coverage for substring-only sandbox names and missing/null role
+  membership, and documents the reproducible clean-clone front gate as
+  `npm ci --prefix apps/nova-web` plus `npm test --prefix apps/nova-web`. Evidence: local
+  `dotnet test NOVA.sln` PASS 29 tests with known NU1903 Microsoft.OpenApi warning, local front npm ci+test PASS,
+  clean clone `C:\Users\johnb\AppData\Local\Temp\nova-budget-clean-0252-20260705021414` PASS for dotnet/npm gates,
+  protocol encoding OK, domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=3996`. Protocol
+  protocol delivery commit `a796589 fix(TASK-0252): deliver parity remediation` adds
+  `Area_comun/handoffs/HANDOFF-TASK-0252-codex-to-arquitecto-2.md`,
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-remediation-1-in-review.md`, and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Analista-REVIEW-TASK-0252-remediation-1.md`; TASK-0252 is back
+  in `in_review` and Codex remediation claims are released. Live SQL parity remains NA because no secret-backed
+  connection string/reset SQL was provided. Nova-Budget still has pre-existing unstaged
+  `docs/budget-parity-harness.md` edits and untracked `docs/documentacion-tecnica/`; product commit staged only
+  the remediation hunks from the dirty doc file.
 - TASK-0252 delivered to `in_review`. Product commit `dc04bd8 test: add budget parity harness` adds
   `tests/NOVA.IntegrationTests/BudgetParityHarnessTests.cs` and `docs/budget-parity-harness.md` in
   `D:/Agentes/Zeus/NOVA/Nova-Budget`. The harness records `paridad_exec_vs_endpoint` as pass/fail/NA,
