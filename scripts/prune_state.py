@@ -72,6 +72,48 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=4, ensure_ascii=True) + "\n", encoding="utf-8")
 
 
+def archive_removed_entries(
+    archive_path: Path,
+    hot_entries: list[Any],
+    ids: set[str] | list[str],
+    field: str,
+    id_field: str,
+    actor: str,
+) -> int:
+    """Persist entries removed from the governed hot state into the (ungoverned,
+    convenience-mirror) *_ARCHIVE.json file, so their ids remain discoverable
+    (e.g. by validate_collaboration_state's commit_trailers check) after a
+    submit_intent-mode protocol_prune removes them from the live TASK_INDEX/CLAIMS.
+    This file is NOT part of PROTOCOL_STATE_PATHS / drift enforcement (DECISION-0022
+    only covers TASK_INDEX.json/PROJECT_STATE.json/CLAIMS.json); writing it directly
+    here is the same convention apply_prune_direct already used for non-runtime
+    instances, just also applied in submit_intent (runtime-authoritative) mode.
+    """
+    ids_set = {str(item) for item in ids if str(item)}
+    if not ids_set:
+        return 0
+    to_archive = [
+        entry
+        for entry in hot_entries
+        if isinstance(entry, dict) and str(entry.get(id_field) or "") in ids_set
+    ]
+    if not to_archive:
+        return 0
+    archive_doc = read_json(archive_path)
+    existing_ids = {str(entry.get(id_field)) for entry in archive_doc.get(field, []) if isinstance(entry, dict)}
+    archived_count = 0
+    for entry in to_archive:
+        entry_id = str(entry.get(id_field) or "")
+        if entry_id and entry_id not in existing_ids:
+            archive_doc.setdefault(field, []).append(entry)
+            existing_ids.add(entry_id)
+            archived_count += 1
+    if archived_count:
+        archive_doc["updated_by"] = actor
+        write_json(archive_path, archive_doc)
+    return archived_count
+
+
 def maintenance_config(root: Path) -> dict[str, Any]:
     config = read_json(root / "protocol.config.json")
     maintenance = dict(DEFAULT_CONFIG)
@@ -467,6 +509,23 @@ def apply_prune_via_submit_intent(
             commit=commit_ref,
             transaction_key=f"prune-state:{ts}:tx",
         )
+        if submit_result is not None and submit_result.get("applied"):
+            archive_removed_entries(
+                state_dir / "TASK_INDEX_ARCHIVE.json",
+                task_hot.get("tasks") or [],
+                task_ids,
+                "tasks",
+                "id",
+                actor,
+            )
+            archive_removed_entries(
+                state_dir / "CLAIMS_ARCHIVE.json",
+                claims_hot.get("claims") or [],
+                claim_ids,
+                "claims",
+                "claim_id",
+                actor,
+            )
 
     after = measure(root)["cold_start"]["total_tokens"]
     drift = protocol_state_drift(root)
