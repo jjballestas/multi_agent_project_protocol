@@ -35,7 +35,7 @@ con los de una sesion Arquitecto hermana, ni con los del asesor:
 ```bash
 cd /d/Agentes/multi_agent_project_protocol
 base=$(git rev-parse HEAD)
-seen=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista)-to-Arquitecto" | sort)
+seen=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista|Operador)-to-Arquitecto" | sort)
 while true; do
   cur=$(git rev-parse HEAD 2>/dev/null)
   msg=""
@@ -49,7 +49,7 @@ while true; do
     done
     base=$cur
   fi
-  now=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista)-to-Arquitecto" | sort)
+  now=$(ls Area_comun/mailbox/open/ 2>/dev/null | grep -E "(Codex|Analista|Operador)-to-Arquitecto" | sort)
   newf=$(comm -13 <(printf '%s\n' "$seen") <(printf '%s\n' "$now") 2>/dev/null)
   if [ -n "$newf" ]; then msg="${msg}NEW-DELIVERY:
 ${newf}
@@ -62,6 +62,16 @@ done
 Al recibir el evento: `git fetch` + coordina + **pushea el commit local del peer** (si no lo pusheo) + **re-arma** el
 monitor. Con el self-filter, re-armar tras tus commits es seguro. Un watcher de `origin/main` es el ERROR historico:
 te hace depender de que el operador te diga "revisa" porque no ves las entregas locales sin pushear.
+
+**CRITICO (leccion 2026-07-05): este monitor es SINGLE-SHOT -- se dispara UNA vez y muere.** A diferencia
+de los watchdogs 1b/1c (`persistent:true`), este NO sigue vivo tras notificar. Si procesas la notificacion
+(lees el mensaje, actuas, commiteas) pero NO vuelves a invocar `Monitor` con el mismo comando ANTES de
+pasar a esperar de nuevo, quedas ciego a la SIGUIENTE entrega hasta que el operador pregunte manualmente.
+El operador lo detecto 2 veces en una sola sesion. Regla dura: la ULTIMA accion de cada ciclo de reaccion
+(despues de commitear+pushear) es SIEMPRE re-armar este mismo monitor -- no lo dejes para "cuando tenga
+algo mas que hacer". Ademas, el filtro de nombres de archivo debe cubrir TAMBIEN `Operador-to-Arquitecto`
+(no solo Codex/Analista) -- una DIRECTIVA nueva del operador via Asesor/mailbox tambien debe despertarte,
+y el patron viejo (solo peers) era ciego a eso.
 
 ## 1b. SEGUNDO monitor OBLIGATORIO: watchdog de salud de execs (falla silenciosa)
 El monitor de entregas SOLO dispara cuando hay salida (commit/MSG). **Un exec colgado o muerto NO produce nada ->
