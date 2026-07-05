@@ -50,6 +50,18 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
+**>> ESTADO ACTUAL 2026-07-06 (leer primero; ambas sesiones -Asesor y Arquitecto- reinician por contexto):**
+Dev medido baseline avanzando: GOAL-P1 + P2.1 + P2.2 + **P4.1 (done, arranque, 2M tokens teething)** +
+**P4.2/PAR-1 baseline (done, LIMPIO 431k)** cerrados. **PISO MINIMO DEL 30-JUL CUMPLIDO** (P1 + miembro
+baseline PAR-1). EN CURSO: **PAR-2/TASK-0255** (Annul_Availability_Certificate, baseline, in_review) --
+pre-flight de BD completo (DBA, ambos miembros, sin saga), correccion de THROW ruteada (set real de 9:
+50100,50280-50287, b8f3855). PENDIENTES: cerrar PAR-2 (tag=arranque) + enmienda grant PAR-2 + refinamientos
+s.23 (isomorfos+procedencia, baja) + luego ventana baseline ~completa -> PREP Sprint 1 (F3.2 Etapa 2 +
+SPECs gobernado/Q4, escribir no construir; linea roja Q4). **DIRECTIVA operador 2026-07-06:** ALIMENTAR
+cada sesion `personal/asesor/EVIDENCIA-VIVA-metodologia.md` (aportes de la metodologia con traza; ver
+[[methodology-live-evidence]]). El Arquitecto REINICIA por contexto lleno (coord ruteada 60eb1bb); yo
+mantengo continuidad (CHECK + monitor de hitos dev_sig.py + evidencia). Monitor activo: b0ui9enn0.
+
 **>> PENDIENTE-TRIGGER (orden operador 2026-07-05):** AL CERRAR P4.1 (monitor detecta TASK-0253 -> done o
 fila CLOSE J9 en el journal) -> preguntar al Arquitecto por mailbox la CADENCIA DE ATESTACION del journal de
 medicion (por-unidad como GOAL-P1 sha256 d2a13216, vs por-checkpoint sello/reconciliacion). Contexto: el corpus
