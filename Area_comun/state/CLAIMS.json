@@ -18405,6 +18405,21 @@
             "updated_at": "2026-07-04T23:17:32Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-TASK-0252-ratify",
+            "expires_at": "2026-07-05T02:33:23Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-TASK-0252-ratify",
+                "Area_comun/state/TASK_INDEX.json#TASK-0252",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0252",
+                "Area_comun/tasks/TASK-0252-harness-paridad-exec-vs-endpoint-sandbox.md"
+            ],
+            "started_at": "2026-07-05T00:33:23Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-05T00:33:23Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Arquitecto-TASK-0253-register",
             "expires_at": "2026-07-05T02:19:51Z",
             "owner": "Arquitecto",

@@ -388,4 +388,39 @@ secciones 1/3/4/6/10/12 de este documento, para lectura rapida del operador.
 
 ---
 
+## 13. ENMIENDA FECHADA 2026-07-05T00:26Z (Arquitecto) - PAR-2 CONDICIONAL -> CONFIRMADO
+
+**No reabre el sello; registra el cumplimiento de la condicion ya sellada en s.4/s.11.1.**
+
+- **Trigger de caida NO se disparo.** La condicion sellada ("nova-hardening entrega AMBOS procs
+  verificados <=15-jul, s.4/s.11.1, fila `<=2026-07-15` de la tabla s.11.1") esta **CUMPLIDA y
+  ADELANTADA ~10 dias**: el DBA del Operador construyo `Budget.Annul_Availability_Certificate` +
+  `Budget.Annul_Commitment` (+ tablas de reverso `Availability_Certificate_Reversal/_Line`,
+  `Commitment_Reversal/_Line`, estado `'A'` via MERGE) en `DbsFinanciero_SANDBOX`, con 10/10 pruebas OK:
+  existencia, guarda bloqueante hijos-vivos (THROW **50293** anular-CDP-con-RP-activo / THROW **50283**
+  anular-RP-con-OBL-viva), camino feliz con cuadre CDP/RP, idempotencia, rollback forzado,
+  `SESSION_CONTEXT('tenant_id')` faltante. Smoke con `nova_budget_verifier` OK (ambos ejecutan y
+  devuelven los THROW de guarda esperados).
+- **PAR-2 flip: CONDICIONAL -> CONFIRMADO.** Fuente: FYI/DIRECTIVA del Operador
+  `MSG-20260705-Operador-to-Arquitecto-FYI-PAR2-hardening-entregado-confirmado.md`. Ya NO esta en
+  riesgo de caer (s.3.2 fila 110 / s.4 fila 130 quedan HISTORICAS -- su condicion se resolvio a
+  CONFIRMADO, no se re-escriben, esta enmienda es la fuente de verdad del estado actual).
+- **Enmienda del grant surface (dated, s.5):** `budget_sandbox_verifier` pasa de 105 a **107 permisos**
+  (17 EXECUTE + 90 SELECT), sumando las 2 lineas GRANT EXECUTE de `Annul_Availability_Certificate` /
+  `Annul_Commitment`. Superficie identica en ambos brazos (regla s.5), verificado por el Operador.
+- **Frontera (sin cambio):** los procs `Annul_*` son HARDENING de BD (fuera del estudio medido, regla 8).
+  La SUPERFICIE C#/API sobre ellos SI es la unidad MEDIDA (miembro baseline de PAR-2); **construible en
+  la ventana, EN COLA detras de P4.1 + el miembro baseline de PAR-1** (orden de arranque sellado s.4/s.6,
+  "P4.1 -> miembro PAR-1 -> miembro PAR-2"). NO se promueve antes que P4.1/PAR-1.
+- **Nota de dominio (study-relevant, no defecto):** tramo contable NO-OP en CDP/RP es CORRECTO (CDP/RP =
+  reserva presupuestal, no movimiento contable; el comprobante inverso solo aplica de
+  Obligacion/Pago hacia abajo); auditoria presupuestal (usuario+motivo+task_id) documentada por el DBA.
+- **THROW 50293/50283:** anotados para el mapeo a ProblemDetails cuando se construya la superficie C#
+  de PAR-2 (no antes).
+- **Confirmacion read-only del Analista (opcional, s.14 FYI del Operador):** NO despachada esta sesion
+  (P4.1 + TASK-0252 tienen prioridad; el hardening es maker=DBA auto-probado, aceptable por estar fuera
+  del estudio). Puede pedirse mas adelante sin bloquear la ruta critica.
+
+---
+
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
