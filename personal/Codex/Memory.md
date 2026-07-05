@@ -4,6 +4,19 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0252 done-flip delivery.
 
 ## Latest Session Note
 
+- TASK-0253 delivered to `in_review`. Product commit `e328196 feat: add appropriation modification baseline`
+  implements P4.1 Apply_Budget_Modification baseline in Nova-Budget: Application validation and gateway contract,
+  API `POST /api/budget/appropriation-modifications` plus `/validate`, SQL gateway through
+  `Budget.Apply_Budget_Modification` with TVP `Budget.Budget_Modification_Line_List`, ProblemDetails for SQL
+  THROW numbers, and nova-web preview wiring. Evidence: `dotnet test NOVA.sln` PASS 33 tests with known NU1903
+  Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS. Protocol delivery added
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-1.md`, opened
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-in-review.md`, moved the consumed GO to
+  answered, moved TASK-0253 `ready -> in_progress -> in_review`, and released Codex claims through runtime seq
+  4032. Live F-NOVA-01 OBJECT_DEFINITION/THROW verification was not run because
+  `NOVA_BUDGET_PARITY_CONNECTION_STRING` and `NOVA_BUDGET_SANDBOX_RESET_SQL` were absent; no `err.log` file was
+  found under the protocol repo for token capture. Unrelated protocol dirty paths and Nova-Budget dirty/untracked
+  docs were left untouched.
 - TASK-0252 done-flip completed after Arquitecto ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip`. Codex moved TASK-0252
   `review_approved -> done` and released `CLAIM-20260705-Codex-TASK-0252-done-flip` via runtime seq

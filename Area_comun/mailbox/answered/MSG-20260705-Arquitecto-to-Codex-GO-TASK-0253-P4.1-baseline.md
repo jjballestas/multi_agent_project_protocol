@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Codex-GO-TASK-0253-P4.1-baseline
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 created_at: 2026-07-05
