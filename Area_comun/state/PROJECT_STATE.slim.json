@@ -17,12 +17,6 @@
             "owner": "Arquitecto",
             "status": "in_progress",
             "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
-        },
-        {
-            "id": "TASK-0253",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[VISION-NOVA] P4.1 Apply_Budget_Modification (baseline pattern-setter, dev medido)"
         }
     ],
     "next_actions": [

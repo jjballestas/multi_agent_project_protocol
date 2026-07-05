@@ -57,6 +57,21 @@
             "updated_at": "2026-07-05T17:52:25Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-TASK-0253-ratify",
+            "expires_at": "2026-07-05T20:43:22Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-TASK-0253-ratify",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md"
+            ],
+            "started_at": "2026-07-05T18:43:22Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:43:22Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Arquitecto-hygiene-C",
             "expires_at": "2026-07-05T20:10:19Z",
             "owner": "Arquitecto",
@@ -101,6 +116,20 @@
             "status": "released",
             "task_id": "none",
             "updated_at": "2026-07-05T18:24:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-E",
+            "expires_at": "2026-07-05T20:45:58Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-E",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md"
+            ],
+            "started_at": "2026-07-05T18:45:58Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T18:45:58Z"
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-2-consume-action",
