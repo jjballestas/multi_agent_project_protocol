@@ -4,6 +4,16 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0254 done-flip executed after Arquitecto ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-done-flip.md`. Codex acquired
+  `CLAIM-20260705-Codex-TASK-0254-done-flip`, moved TASK-0254 `review_approved -> done`
+  through runtime seq 4182, marked the consumed ACTION answered, and opened
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-done-flip-done.md`.
+  No product code changed; accepted product commit remains `02e67d8 feat: add availability adjustment baseline`.
+  Gates passed: `dotnet test NOVA.sln` PASS 49 tests with known NU1903 Microsoft.OpenApi warning;
+  `npm test --prefix apps/nova-web` PASS; protocol encoding OK, domain-neutrality exit 0, validator OK, drift
+  false at `up_to_seq=4183` before the evidence-message fix claim. CLOSE measurement was already captured by
+  Arquitecto and was not touched.
 - TASK-0254 retry after DBA SELECT grant moved to in_review. Product commit remains
   `02e67d8 feat: add availability adjustment baseline`; no product code change was needed. Live evidence now
   passes with User-scope env loaded by the process:
