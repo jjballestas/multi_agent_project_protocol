@@ -423,4 +423,54 @@ secciones 1/3/4/6/10/12 de este documento, para lectura rapida del operador.
 
 ---
 
+## 14. ENMIENDA FECHADA 2026-07-05T10:13Z (Arquitecto) - Reset no-admin del sandbox (+1 grant)
+
+**No reabre el sello.** El DBA entrego `Budget.Reset_Sandbox_Mutator_Baseline` (test-infra, fuera del
+estudio medido), la pieza `NOVA_BUDGET_SANDBOX_RESET_SQL` que TASK-0253 (P4.1) necesitaba para F-NOVA-01.
+Revisado por el Asesor: guard `DB_NAME()` -> THROW 51011 (fail-closed) | non-admin, corre como
+`budget_sandbox_verifier` | `SESSION_CONTEXT('tenant_id')` obligatorio (THROW 50100) | scoped por
+`@task_id`/`@task_id_prefix`/`@artifact_code_prefix` (aisla, no arrasa) | restaura a estado PREVIO via
+`previous_*` (determinista) | `@dry_run` soportado | sin secretos en el script. Validado por el DBA
+(non-admin, `nova_budget_verifier`): reset por task_id, cuadre correcto, cero filas de reverso residual.
+**Grant surface: 107 -> 108** (18 EXECUTE + 90 SELECT; +1 `Reset_Sandbox_Mutator_Baseline`).
+
+## 15. Hallazgos del log de cambios (log-cambios.html, TASK-0247..0253) - registro con dueno (2026-07-05)
+
+**No reabre el sello.** El log de cambios (rol Documentador) registro 9 puntos como "Informacion
+pendiente". 2 se promueven de nota pasiva a hallazgo GOBERNADO CON DUENO (evita la fuga que Q2 mide):
+
+- **#8 (doc) / Auth-authz en endpoints presupuestales -- GAP vs DD-01, dueno = Analista (security+QA).**
+  Verificado directo en `Program.cs`: CERO wiring de autenticacion/autorizacion (sin `AddAuthentication`,
+  sin `AddAuthorization`, sin `[Authorize]`/`RequireAuthorization` en ninguna ruta) -- no es solo los
+  endpoints nuevos de P4.1, son los 8 endpoints de presupuesto completos. DD-01 acepto el supuesto
+  temporal "usuario AUTENTICADO con rol presupuesto" para Sprint 1 y difirio solo BR-C4 (policy fina
+  por-operacion) a post-Sprint-1 -- CERO autenticacion es MAS que lo diferido por DD-01 (falta el piso
+  minimo aceptado, no solo la policy fina). Clasificacion: GAP vs DD-01, no deferred-esperado. Aceptable
+  para dev en sandbox/local; bloqueante antes de exponer fuera de un entorno controlado. Owner=Analista
+  para confirmar alcance (aplica a los 8 endpoints, no solo P4.1) y registrar como hallazgo formal.
+- **#7 (doc) / Transiciones BudgetDocumentState + quien-ejecuta -- converge con #8, dueno = pattern-setter
+  (Arquitecto/Codex via P4.1).** "Que transiciones validas" es dominio; "quien puede ejecutarlas" es
+  autorizacion (misma raiz que #8). P4.1 (TASK-0253), como pattern-setter, establece el patron explicito
+  de transiciones-validas + quien-ejecuta que P4.2/P4.3 heredan.
+- **#5 (doc) / `ReadOnlySqlOptions` ahora respalda escritura real -- dueno = Codex (maker).** Confirmado
+  en `DependencyInjection.cs`: `SqlAppropriationModificationGateway` (mutador de TASK-0253) usa la MISMA
+  `ReadOnlySqlOptions.ConnectionString` que los gateways de solo-lectura. Nombre enganoso = footgun
+  (alguien podria asumir que esa conexion no puede escribir). Accion ya ruteada a Codex: renombrar
+  (p.ej. `BudgetSqlOptions`).
+- **Rubric del adversarial informal (12 puntos, `NOVA_SPEC_Plantilla_Requisitos.md` punto 7 "Estados y
+  permisos"): CONFIRMADO gap.** El punto 7 cubre autorizacion de DOMINIO (aprobar sin permiso, estado
+  invalido) pero NO explicita la seguridad de capa API/endpoint (autenticado + scope). Clarificacion
+  (gobernada por el Arquitecto, aplicable desde ahora): todo prompt de checker adversarial que revise una
+  SPEC con endpoints HTTP debe incluir un punto EXPLICITO de "auth de endpoint" (autenticacion +
+  autorizacion a nivel de transporte/API), separado del punto 7 de autorizacion de dominio -- no asumir
+  que el punto 7 lo cubre por transitividad.
+- **Resto (6 de 9, deuda/higiene/roadmap, sin dueno urgente):** #1/#2 doc (BudgetDocumentState transitions
+  detalle + esquema de persistencia completo) = deuda de documentacion esperada (Nova no es green-field;
+  modelar el esquema completo en C# violaria "la BD manda"); #3 doc (verticales `.gitkeep`) = roadmap,
+  GUARD: varios son pool Q4, quedan `.gitkeep` hasta su ventana sellada (linea roja no-pre-30-jul); #4/#6/#9
+  doc (RN-07/08/09 sin explicar, carpeta huerfana ExecutionReports, README desactualizado) = higiene
+  registrada, sin urgencia.
+
+---
+
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
