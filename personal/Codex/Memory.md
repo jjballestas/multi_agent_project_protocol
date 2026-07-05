@@ -4,6 +4,16 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0253 F-NOVA-01 retry-4 delivered to `in_review` after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4`. DBA opened fiscal_year_id=1/year=2026,
+  and live GWTs passed: valid addition line 230/269 amount 1.00 produced adjustment_id 111, code TASK-0253-GWT1,
+  movement_type 01, regime apropiacion_comun, and line 269 balance delta +1.0000 from
+  `Budget.vw_Initial_Budget_Line_Balance`; negatives returned 50238, 50236, 50241, 50230, 50240, and 50243.
+  Product commit remains `33adb5b fix: align appropriation SQL gateway with deployed proc`. Handoff/message:
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-7.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-4-in-review.md`.
+  Measurement CLOSE was not written because the requested script path under `instrumentacion_estudio` does not
+  exist; the available script is under `personal/Arquitecto/TFM-medicion/corpus/medicion/`.
 - TASK-0253 F-NOVA-01 retry-3 remains blocked after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3`. The prior TVP permission blocker is
   resolved: live SQL context reaches `DbsFinanciero_SANDBOX` as `nova_budget_verifier`,
