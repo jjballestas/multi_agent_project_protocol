@@ -4,6 +4,17 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0255 final delivery supersedes the partial note below. Product commits in
+  `D:/Agentes/Zeus/NOVA/Nova-Budget`: `9aff84d feat: add availability certificate annulment surface` and
+  `edbc037 test: add annulment mutation evidence`. Full live evidence passed with User-scope env:
+  `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter AnnulAvailabilityCertificateEvidenceTests`
+  PASS 3 tests, covering OBJECT_DEFINITION plus 8 mutation GWTs: happy CDP 180, guard 50283 CDP 1, tenant
+  50100, idempotency 50281, not found 50280, reason 50284, task_id 50285, invalid user 50287. Full product
+  gates passed: `dotnet test NOVA.sln` PASS 56 tests with known NU1903 Microsoft.OpenApi warning; `npm test
+  --prefix apps/nova-web` PASS. Final protocol artifacts are
+  `Area_comun/handoffs/HANDOFF-TASK-0255-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-final-in-review.md`; TASK-0255 is being
+  closed to `in_review` in this session after ACTION `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0255-throw-50283-confirmado.md`.
 - TASK-0255 partial in_review delivery: Nova-Budget product commit `9aff84d feat: add availability certificate annulment surface`
   implements the C#/API/UI surface over `Budget.Annul_Availability_Certificate` without touching SQL DDL: Application service,
   DTOs, typed SQL gateway, `GET /annul-preview`, `POST /api/budget/availability-certificates/{id}/annul`, UI annulment flow,
@@ -15,7 +26,8 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   50100, 50280, 50281, 50282, 50283, 50284, 50285, 50286, 50287. Important mismatch: deployed active-reservation guard is
   50283, not GO/spec expected 50293. Protocol handoff/message pending close in this same session:
   `Area_comun/handoffs/HANDOFF-TASK-0255-codex-to-arquitecto-1.md` and
-  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md`.
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md`. Partial protocol commit:
+  `4514615 coord(TASK-0255): deliver annulment partial review`.
 - TASK-0254 done-flip executed after Arquitecto ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-done-flip.md`. Codex acquired
   `CLAIM-20260705-Codex-TASK-0254-done-flip`, moved TASK-0254 `review_approved -> done`

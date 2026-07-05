@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d0df535848151e8260f16e6139ca0dd5ef6bf201bb06d121598c93cc50cc9188",
+  "canonical_hash": "3d64b5b0b43e005ed66b1f44c692e10295fd6a42ec46def91c2f3d848f620209",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1411,7 +1411,7 @@
       "TASK-0252": 25,
       "TASK-0253": 67,
       "TASK-0254": 32,
-      "TASK-0255": 11,
+      "TASK-0255": 15,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1419,7 +1419,7 @@
       "protocol-prune": 2,
       "protocol-state": 1
     },
-    "events_applied": 3542,
+    "events_applied": 3546,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4374,6 +4374,7 @@
       "intent:Codex:claim:5c15160a6b6ed49c872c62dbf4fd8ce1fb662fca91e597b246e6c461e23118b6": 2756,
       "intent:Codex:claim:5d077f155e8095e21cc0733260371872988fd8d64bc9c32c1ee93d9d2ddf152c": 3950,
       "intent:Codex:claim:5d5102b2e93549312b747be5ff02c0a18c0e574d6fed3c68f636ac01ce59be6a": 3921,
+      "intent:Codex:claim:5d84a8f929cfd153bf8807c530af5c81bcb93aec71cf359f6c83f6eb505f60f4": 4216,
       "intent:Codex:claim:5e094ae3a9ed54d6d5feee60a74013e2ace6cc006e06775e30665ab8611870c7": 3906,
       "intent:Codex:claim:5e17a1772884b408a8947720c7ea506b44678094a38b65ba6f3623dfbdbf5021": 1985,
       "intent:Codex:claim:5ea1078db69992a657734f98254a2c06b3a40e4b23f22958713d885bb2b7c24c": 1432,
@@ -4520,6 +4521,7 @@
       "intent:Codex:claim:a0cfb33a7e937bae7fc74972f12faf0cc116c1f942527ac640c598a0148327df": 3506,
       "intent:Codex:claim:a11d06493b50f947578e0687495483963ec5bcce8134b4a63ffaaa9d3d072a8d": 3102,
       "intent:Codex:claim:a15a5bd15c6f0243b6d6bb28e486e9b6a7f82ad40c70a8f94c575a3d584d0028": 2874,
+      "intent:Codex:claim:a3004c7ba798e8a0351ce7ce5ba5079a422846944c4380779a42f13069eb89f9": 4217,
       "intent:Codex:claim:a3339dbd4ee6d62ba7d8f6e3910c5f2aa20f8ec9fe8a1b5f03bed3b5f9274b79": 2038,
       "intent:Codex:claim:a3d7a8888b9362c877a8259a68cbd3e202b9989d5c85d72e2147cfa2a6a470f5": 3800,
       "intent:Codex:claim:a4472a05da7e60b478d11d23427874805973f5cb6b3a36e8ab3038d735de966a": 3029,
@@ -4564,6 +4566,7 @@
       "intent:Codex:claim:b9d18bdb5759b7be51b42ece7f831e10947ae30cc40b34a9118f3c21277cb943": 3137,
       "intent:Codex:claim:b9f80b5ddd85f13941fd6932a110af6bc2eea88309e676d31df2178c047fcd97": 3982,
       "intent:Codex:claim:ba17de8aac96505438c0bf4f0216441412c314baf0aff56669c7dbc59458d47d": 3273,
+      "intent:Codex:claim:ba5a1ae788795d496576b043f36fcbea74da0a31352dd8b101e9f1daef836f56": 4214,
       "intent:Codex:claim:bac5dc18a47b4c091f567ebb5ce809983dcf75bf6d6f6142345e243e8c5a4bcf": 827,
       "intent:Codex:claim:bb822cee0efda272e3a6bd7dbdf6b7e4bd0aaf885ef614eb4a36774d74a6c833": 4099,
       "intent:Codex:claim:bb890938c3ef34fe83ecf32a6348ee3f2695eb57e3f0fa18e35dfee4c9217590": 2712,
@@ -4960,10 +4963,11 @@
       "task-0253-fnova-bomfix-claim": 4053,
       "task-0253-fnova-bomfix-release": 4054,
       "task-0253-producthash-fix-claim": 4055,
-      "task-0253-producthash-fix-release": 4056
+      "task-0253-producthash-fix-release": 4056,
+      "task-0255-final-in-review-2026-07-05T22:02:38Z": 4215
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4213
+  "up_to_seq": 4217
 }
