@@ -46,8 +46,11 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [x] **Sorteo resuelto (Opcion 1, mi recomendacion):** enmienda fechada s.21 con 3 strings candidatos transparentes -> **P4.2=baseline, P4.3=gobernado** (Sprint 1). Sin discrecion oculta.
   - [x] **TASK-0254 = P4.2 Apply_Availability_Adjustment** (ajuste CDP), estimate S, brazo=baseline, par_id=PAR-1. OPEN capturado (J10). SPEC-NOVA-P4-002 cita THROW reales. Aislamiento critico declarado (no leer P4.3). Hereda patron P4.1.
   - [x] **BD pre-flighteada** -> NO repite los round-trips de P4.1 (VIEW DEFINITION + TVP + THROW reales ya concedidos). Deberia cerrar mas rapido (S, sin saga de permisos).
-  - [~] En ciclo: hit 1 gap de permiso (SELECT sobre TABLA Budget_Adjustment, no cubierta por SELECTs de vistas -> SQL 229) -> RESUELTO por DBA (+ smoke funcional real con TVP+rollback, distinguio THROW negocio 50261 de error permiso). Codex reintenta F-NOVA-01 con guard de procedencia. NO stall (1 retry vs los 4 de P4.1). Leccion horneada al ESTANDAR-DBA (SELECT tablas base, no solo vistas).
-  - [ ] FALTA: F-NOVA-01 pasa -> P4.2 CLOSE + tokens (menos teething que P4.1) -> luego PAR-2 baseline surface.
+  - [x] **P4.2 CERRADA (done) LIMPIA:** 0 reworks, 0 hallazgos adversarial (GO 1a pasada, SIN mock -> guard de procedencia funciono), 1 bloqueo de permiso (SELECT tabla Budget_Adjustment, resuelto). tokens=430,954 (vs 2M de P4.1). CLOSE J11.
+  - [x] **Tag = arranque CONFIRMADO** por operador (2661d76): pre-30-jul = arranque, no regimen (sello s.10). Convencion establecida para todas las unidades pre-30-jul. Correccion de fila seq 11 ruteada.
+
+## >> PISO MINIMO DEL 30-JUL: CUMPLIDO (P1 + miembro baseline PAR-1 en done). STOP-total resuelto.
+## >> SIGUIENTE: PAR-2 baseline surface (Annul_*; pre-flight ampliado con SELECT de tablas base). Luego ventana baseline ~completa -> prep Sprint 1 (F3.2 Etapa 2 + SPECs gobernado/Q4).
 
 - [ ] **5. (Si sobro tiempo) Extra**
   - Superficie baseline PAR-2 (sobre los `Annul_*`) O avance de `TASK-0246`. Aun no.
