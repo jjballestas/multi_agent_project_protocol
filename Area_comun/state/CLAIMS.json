@@ -19030,6 +19030,22 @@
             "updated_at": "2026-07-05T12:06:13Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-retry4-consume-action",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "Move consumed TASK-0253 retry-4 ACTION to answered after in_review delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-retry4-consume-action",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T12:28:45.5432789Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T12:28:45.5432789Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-retry4-delivery",
             "expires_at": "2026-07-06T23:59:59Z",
             "notes": "Deliver TASK-0253 retry-4 in-review evidence.",

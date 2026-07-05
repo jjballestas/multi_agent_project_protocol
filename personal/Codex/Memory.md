@@ -4,6 +4,11 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0253 retry-4 mailbox consumption completed after the in-review delivery was already recorded:
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4.md` was moved from `open/` to
+  `answered/` with `status: answered`; Codex claim
+  `CLAIM-20260705-Codex-TASK-0253-retry4-consume-action` was acquired and released through runtime seq 4099-4100.
+  Drift stayed false at `up_to_seq=4100`. TASK-0253 remains `in_review` for the adversarial checker.
 - TASK-0253 F-NOVA-01 retry-4 delivered to `in_review` after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-4`. DBA opened fiscal_year_id=1/year=2026,
   and live GWTs passed: valid addition line 230/269 amount 1.00 produced adjustment_id 111, code TASK-0253-GWT1,
