@@ -131,6 +131,12 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **2026-07-06 (Asesor):** +A7 (reinicio del Arquitecto por contexto lleno -> sesion fresca cerro PAR-2
   sin perder estado; CLOSE seq 14, tag=arranque, THROW 9-codigos aplicado, 0 reworks). PAR-2 done ->
   ventana baseline ~completa.
+- **2026-07-06 (Asesor, pre-registro):** refuerza A5 -- el operador pidio arrancar los MIEMBROS GOBERNADOS
+  ya (presion "no idle"). Verifique el sello (s.3.2/s.3.3): los gobernados son post-30-jul (Sprint 1); el
+  hito de 17-jul era el miembro BASELINE de PAR-1 (ya cumplido). DECLINE adelantarlos (romperia el
+  pre-registro) y corregi un error de mi propio calendario que decia "17-jul gobernados". El seal aguanto
+  la presion; la unica prep permitida (escribir SPEC-NOVA-P4-006) ya estaba hecha. Traza: SELLO s.3.3,
+  PIPELINE-cierre-baseline-sprint1.md nota A.
 - **2026-07-06 (Asesor, verificacion QA):** +A8 (defecto de acople cross-endpoint: THROW 50212
   mal-etiquetado por el switch compartido BudgetProcedureProblemDetails.Map; verificado independiente por el
   Asesor contra Program.cs:494-522; registrado por el Arquitecto como hallazgo formal QA #10 al Analista,

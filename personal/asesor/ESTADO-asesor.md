@@ -214,8 +214,10 @@ y el dev medido post-sello.** Al arrancar, INDICALE AL OPERADOR este bloque, en 
    PAR-2 condicional (monitor checkpoint hardening <=15-jul; procs Annul_*; si no llegan, PAR-2 cae).
 3. **COSECHAR la medicion** de cada unidad medida cuando corra; verificar integridad de estudio en cada gate.
 PENDIENTES DEL OPERADOR: GRANT EXECUTE <=14-jul (paridad de mutadores); revision legal del consentimiento.
-CALENDARIO: 14-jul GRANT EXECUTE + P4.1 | 15-jul checkpoint hardening (PAR-2) | 17-jul miembros gobernados de pares |
-25-jul cierre duro ventana baseline | 29-jul sello Etapa 2 | 30-jul Sprint 1 gobernado (gate duro).
+CALENDARIO (CORREGIDO 2026-07-06): 14-jul GRANT EXECUTE + P4.1 | 15-jul checkpoint hardening (PAR-2) |
+17-jul miembro BASELINE de PAR-1 (P4.2/P4.3 por sorteo; NO gobernados -- error previo, ver sello s.3.2/s.3.3) |
+25-jul cierre duro ventana baseline | 29-jul sello Etapa 2 | 30-jul Sprint 1 gobernado (miembros GOBERNADOS
+= post-30-jul, sello s.3.3; NO adelantables). Tracker vivo: personal/asesor/PIPELINE-cierre-baseline-sprint1.md.
 
 ## >> CIERRE SESION 2026-07-04 - SELLO ETAPA 1 EJECUTADO Y ATESTADO (historico)
 Ciclo de build cerrado de punta a punta: GOAL-P1 (construido+medido+atestado+ratificado, sha256 d2a13216) +
