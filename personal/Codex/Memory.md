@@ -1,9 +1,21 @@
 # Codex Memory
 
-Last updated: 2026-07-04 Europe/Madrid, after TASK-0251 done-flip delivery.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0252 done-flip delivery.
 
 ## Latest Session Note
 
+- TASK-0252 done-flip completed after Arquitecto ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip`. Codex moved TASK-0252
+  `review_approved -> done` and released `CLAIM-20260705-Codex-TASK-0252-done-flip` via runtime seq
+  4000-4002, then moved the consumed ACTION to
+  `Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip.md`, opened
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-done-flip-done.md`, and released the
+  mailbox claim at seq 4012. Evidence: Nova-Budget `dotnet test NOVA.sln` PASS 29 tests with known NU1903
+  Microsoft.OpenApi warning, `npm test --prefix apps/nova-web` PASS 1 test, protocol encoding OK,
+  domain-neutrality exit 0, validator OK, and drift false at `up_to_seq=4012`. Residual non-blocking item:
+  live SQL parity against DbsFinanciero_SANDBOX remains pending until `NOVA_BUDGET_PARITY_CONNECTION_STRING`
+  and `NOVA_BUDGET_SANDBOX_RESET_SQL` exist. Unrelated protocol dirty paths and Nova-Budget dirty/untracked
+  docs were left untouched.
 - TASK-0252 remediation 1 delivered after Arquitecto ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-remediacion-1`. Product commit
   `5ccb82c fix: harden budget parity harness` makes the parity harness fail closed unless
