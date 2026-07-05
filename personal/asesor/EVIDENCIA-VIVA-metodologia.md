@@ -106,6 +106,24 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   independiente en vez de ocultar). Caveat: el 50212 no es bloqueante (status/codigo crudo OK); es serie de
   calidad, no un critico.
 
+### A9. El GO informal de una unidad baseline dijo "0 bloqueantes" y una pasada adversarial cazo 3 huecos reales
+- **Fenomeno:** TASK-0255 (PAR-2 baseline, Annul_Availability_Certificate) cerro con GO adversarial
+  informal "0 hallazgos bloqueantes". Una pasada transversal posterior (change-monitor + verificacion del
+  Asesor contra el codigo real, product HEAD edbc037) surfaceo 3 huecos que el GO no marco: (1) lectura de
+  result-set con nombres de columna inciertos + default silencioso "A" en el gateway de produccion, NO
+  verificado con certeza contra el proc desplegado (el arnes de evidencia lee otra columna directa + deriva
+  el estado por JOIN a catalogo); (2) sin test de integracion HTTP con gateway falso para los 2 endpoints
+  nuevos; (3) el proc mutador aparece como literal en el frontend Y se omitio de la lista prohibida del
+  arch-test, rompiendo el patron de las 2 tareas previas.
+- **Traza:** SqlAvailabilityCertificateAnnulmentGateway.cs:54-64 vs AnnulAvailabilityCertificateEvidenceTests
+  .cs:380/390; ApiInfrastructureTests.cs (sin cobertura annul); LayeringTests.cs:73-75 + App.tsx:180,370.
+  Ruteado como senal DECISION-0018 al Arquitecto (registro como quality-data #11/#12/#13 + hornear criterios
+  correctivos en SPEC-NOVA-P4-006 gobernado, fix-forward, sin reabrir la unidad medida).
+- **Por que importa:** es el contraste central EN VIVO -- el GO informal (brazo baseline) deja pasar huecos
+  que una capa mas adversarial caza. Precision honesta: son NO-bloqueantes (el GO dijo "0 bloqueantes", no
+  "0 hallazgos"); NO contradice el GO, mide su ALCANCE. Quality-data del brazo baseline (Q2), fix-forward,
+  NO se reabre la unidad medida.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
@@ -119,7 +137,8 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   a2657d5; in-flight). Ademas verifique 3 hallazgos no-bloqueantes en TASK-0255 baseline (columnas de
   lectura inciertas con default silencioso, sin test HTTP con gateway falso para los 2 endpoints, omision
   del proc de mutacion en la lista prohibida del frontend) -- quality-data del brazo baseline, no reabrir la
-  unidad medida; pendiente decision del operador sobre rutearlos como #11+.
+  unidad medida. RUTEADOS (orden operador) como senal DECISION-0018 al Arquitecto = hallazgos #11/#12/#13
+  (registrar quality-data + hornear en SPEC-NOVA-P4-006 gobernado). Ver A9.
 - **2026-07-06 (Asesor, prep Sprint 1):** refuerza A5 -- el hueco conocido #8/auth (el baseline opera bajo
   supuesto DD-01 sin wiring de autorizacion real) NO se parcha retroactivamente sobre las unidades baseline
   YA CERRADAS Y MEDIDAS; se disena HACIA ADELANTE en el miembro gobernado (SPEC-NOVA-P4-006 s.6h,
