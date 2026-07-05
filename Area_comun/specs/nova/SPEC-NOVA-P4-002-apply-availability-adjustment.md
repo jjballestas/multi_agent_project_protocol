@@ -12,7 +12,8 @@
   DIRECTIVA operador 2026-07-04). En el brazo baseline el checker vivo ES el adversarial informal
   (checker_formal=0); en el brazo gobernado aplica ADEMAS el checker FORMAL del Analista. tokens_adversarial_
   informal taggeados a la sesion separada.
-- arm: **PAR-1 (asignado por el sorteo del sello)** - unit: P4.2 Apply_Availability_Adjustment (ajuste de CDP)
+- arm: **PAR-1 BASELINE** (sorteo del sello s.21 resuelto 2026-07-05: P4.2 = miembro baseline; P4.3 =
+  gobernado, Sprint 1) - unit: P4.2 Apply_Availability_Adjustment (ajuste de CDP)
 - q4_membership: **DENTRO** (miembro de par del contraste; criticidad media, proc existente S). [Declaracion
   explicita OBLIGATORIA -- F-0246-01 bloqueo P3 por omitirla.]
 - **isolation: CRITICA (PAR-1).** Isomorfo con P4.3 (Apply_Commitment_Adjustment). leyo_codigo_hermano = **NO**:
@@ -29,11 +30,15 @@
   captura de tokens en err.log (stderr); desglose no capturable -> tokens_total_atribuibles. checker_formal=0 en
   el brazo baseline; en el gobernado el checker formal SI cuenta.
 - **deuda GOAL-P1:** harness test front (apps/nova-web) verde en clon limpio antes de la UI de esta unidad.
-- **F-NOVA-01 (re-verificacion, CRITICA -- precedente F-0246-02):** el maker RE-VERIFICA el set EXACTO de THROW
-  del `Apply_Availability_Adjustment` DESPLEGADO via OBJECT_DEFINITION. La familia documentada 50250-50261 es de
-  PRES-03/schema-141; el proc hermano `Apply_Obligation_Adjustment` probo divergencia (50256->50265; 50254 no
-  existe). Codigos de MAYOR riesgo de diferir: **50256** (homogeneidad) y **50254**. NINGUN codigo se hornea en
-  un criterio falsable sin confirmarlo en la definicion desplegada.
+- **F-NOVA-01 (re-verificacion, CRITICA -- precedente F-0246-02 y P4.1/TASK-0253):** el DBA pre-flighteo la BD
+  (VIEW DEFINITION sobre `Apply_Availability_Adjustment` + `Availability_Certificate_Line_Adjustment`, enmienda
+  s.20 del sello) y RE-VERIFICO el set EXACTO de THROW contra `OBJECT_DEFINITION` desplegado: **50250, 50251,
+  50252, 50253, 50254, 50255, 50256, 50257, 50258, 50260, 50261** (**50259 NO existe -- set no contiguo,
+  confirma la tesis de falsabilidad**); trigger `trg_availability_line_adjustment__validate` -> **50083, 50084**.
+  El maker DEBE re-confirmar este set el mismo (no asumirlo sin verificar de nuevo contra el proc desplegado en
+  el momento de construir, por si hubo cambios), pero YA NO es especulativo -- es el set REAL enumerado por
+  el DBA. Precedente de P4.1: el harness de evidencia debe usar la clase SQL real (nunca un mock/Recording*
+  in-memory con resultados hardcodeados -- guard de procedencia adoptado tras TASK-0253, ver sello s.15).
 - db_verified_at: objetos de NOVA-PRES-03/04 (BD DbsFinanciero; proc schema/141; 435 CDP reconciliados); el maker
   RE-VERIFICA contra la BD desplegada (F-NOVA-01).
 - attestation: sha256 de esta SPEC via intent del hub en el gate del estudio.
@@ -87,10 +92,12 @@ Un contrato de mutacion atomico + su preparacion:
     hard-coded en la vista -> saldo INFLADO; el tope 50261 SI existe en el proc, el defecto es de la vista**) ->
     para el saldo REAL disponible del CDP en la previsualizacion usar **`vw_Commitment_Availability_Validation`**;
     `Budget.vw_Budget_Adjustment` (leer el acto).
-- **THROW (familia DOCUMENTADA 50250-50261; RE-VERIFICAR desplegado):** 50250/50251 vigencia inexistente/no-abierta
-  (+ trigger 50212); 50252-50255 linea (monto>0/efecto valido/existe-activa-vigencia); **50256 acto no homogeneo
-  (RIESGO de diferir -> 50265)**; 50257 regimen no homogeneo; 50258 codigo no unico; **50260 credito 08 > apropiacion
-  disponible**; **50261 contracredito 09 > (CDP - comprometido)**.
+- **THROW (set REAL confirmado por el DBA, sello s.20/s.21 -- NO el rango documentado sin verificar):** 50250/50251
+  vigencia inexistente/no-abierta (+ trigger `trg_availability_line_adjustment__validate` 50083/50084); 50252-50255
+  linea (monto>0/efecto valido/existe-activa-vigencia); **50256 acto no homogeneo**; 50257 regimen no homogeneo;
+  50258 codigo no unico; **50259 NO EXISTE en el proc desplegado (confirmado, NO citar como criterio falsable)**;
+  **50260 credito 08 > apropiacion disponible**; **50261 contracredito 09 > (CDP - comprometido)**. El maker
+  RE-CONFIRMA este set contra `OBJECT_DEFINITION` al construir (ya tiene el permiso VIEW DEFINITION).
 - **API:** `POST /api/budget/availability-certificates/{id}/adjustments` (aplica; body = tipo 08/09 + lineas +
   fecha + descripcion); ProblemDetails por THROW; devuelve id/code/type/regimen. `POST .../validate` previsualiza
   contra `vw_Commitment_Availability_Validation` (saldo real).
@@ -125,7 +132,7 @@ Un contrato de mutacion atomico + su preparacion:
    (RE-VERIFICAR) y nada se ajusta.
 3. **Dado** un contracredito 09 que dejaria el CDP bajo lo COMPROMETIDO, **entonces** THROW 50261 (RE-VERIFICAR),
    bajo lock; sin cambio. (Nota: el tope vive en el proc aunque la vista `_Line_Balance` muestre committed=0, B-01.)
-4. **Dado** un acto que mezcla 08 y 09 (no homogeneo), **entonces** THROW 50256 (RE-VERIFICAR; posible 50265).
+4. **Dado** un acto que mezcla 08 y 09 (no homogeneo), **entonces** THROW 50256 (confirmado real por el DBA).
 5. **Dado** una vigencia cerrada, **entonces** THROW 50250/50251 (o trigger 50212 en cabecera).
 6. **Dado** un acto que mezcla fuentes SGR y comunes, **entonces** THROW 50257 (regimen no homogeneo).
 7. **Dado** una linea que introduce un rubro-fuente-BPIN NO existente en el CDP, **entonces** se rechaza (B-04;
@@ -149,7 +156,8 @@ Un contrato de mutacion atomico + su preparacion:
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |
 |---|---|---|
-| Citar 50256/50254 que el proc desplegado NO emite | Criterio falso (F-0246-02) | F-NOVA-01: RE-VERIFICAR contra OBJECT_DEFINITION |
+| Citar un THROW que el proc desplegado NO emite (p.ej. 50259, confirmado ausente) | Criterio falso (F-0246-02) | F-NOVA-01: set REAL ya confirmado por el DBA (s.20/s.21); el maker re-confirma contra OBJECT_DEFINITION |
+| Mock/fixture in-memory disfrazado de evidencia F-NOVA-01 real | Criterio falso-verde no detectado (precedente TASK-0250/0253) | Guard de procedencia (sello s.15): el harness debe usar la clase SQL real, gateado por env vars, NA limpio sin credenciales -- el checker adversarial lo verifica explicitamente |
 | Usar la vista `_Line_Balance` (committed=0, B-01) para el floor | Saldo inflado, criterio 3 falso-verde | Restriccion 6d: previsualizar con `vw_Commitment_Availability_Validation` |
 | Implementar los tipos 11/12 del hermano | CONTAMINACION intra-par PAR-1 | Restriccion 6g + architecture test de aislamiento; manifiesto |
 | Sandbox no disponible al abrir el dev MEDIDO | Criterios de mutacion un-runnable | Mecanismo sellado READY desde 2026-07-04; si se degradara, DIFERIR |
