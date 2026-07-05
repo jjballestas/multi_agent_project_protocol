@@ -261,6 +261,41 @@
             "updated_at": "2026-07-05T18:36:45Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-blocked-delivery",
+            "expires_at": "2026-07-05T22:00:20Z",
+            "notes": "Record TASK-0254 blocked delivery artifacts and consume GO",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-blocked-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0254-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0254-P4.2-baseline.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0254-P4.2-baseline.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T20:00:20Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:00:20Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-impl",
+            "expires_at": "2026-07-05T23:50:53Z",
+            "notes": "Implement TASK-0254 P4.2 baseline in Nova-Budget",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-impl",
+                "Area_comun/state/TASK_INDEX.json#TASK-0254",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0254",
+                "Area_comun/tasks/TASK-0254-p4.2-apply-availability-adjustment-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0254-P4.2-baseline.md"
+            ],
+            "started_at": "2026-07-05T19:50:53Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T19:50:53Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

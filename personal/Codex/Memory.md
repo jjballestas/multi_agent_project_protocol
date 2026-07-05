@@ -4,6 +4,22 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0254 P4.2 baseline is blocked after product commit `02e67d8 feat: add availability adjustment baseline`
+  in `D:/Agentes/Zeus/NOVA/Nova-Budget`. It implements Application/Contracts/Infrastructure/API/UI for
+  `Budget.Apply_Availability_Adjustment`, real SQL evidence harness
+  `tests/NOVA.IntegrationTests/ApplyAvailabilityAdjustmentEvidenceTests.cs`, and architecture isolation checks.
+  Local product gates passed: `dotnet test NOVA.sln` PASS 49 tests with known NU1903 Microsoft.OpenApi warning;
+  `npm test --prefix apps/nova-web` PASS. Live F-NOVA-01 was blocked with User-scope env loaded:
+  `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter ApplyAvailabilityAdjustmentEvidenceTests`
+  FAIL SQL 229, `SELECT permission was denied on the object 'Budget_Adjustment', database
+  'DbsFinanciero_SANDBOX', schema 'Budget'`. Deployed THROW set was reconfirmed from `OBJECT_DEFINITION`:
+  50083, 50084, 50250, 50251, 50252, 50253, 50254, 50255, 50256, 50257, 50258, 50260, 50261; 50259 absent.
+  Protocol delivery commit records the blocked delivery with subject
+  `coord(TASK-0254): record availability baseline blocker`.
+  Protocol artifacts: `Area_comun/handoffs/HANDOFF-TASK-0254-codex-to-arquitecto-1.md`
+  and `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-blocked.md`; TASK-0254 moved
+  `ready -> in_progress -> blocked` via runtime seq 4149 and 4151, Codex claims released through seq 4153,
+  and the consumed GO moved to answered.
 - TASK-0253 done-flip completed after Arquitecto ACTION. Protocol close commit:
   `43e025f coord(TASK-0253): close final done flip`.
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-done-flip`. Codex acquired and released
