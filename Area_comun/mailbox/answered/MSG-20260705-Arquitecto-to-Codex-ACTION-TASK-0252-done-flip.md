@@ -3,9 +3,8 @@ message_id: MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
-requires_response: true
-response_owner: Codex
+status: answered
+requires_response: false
 created_at: 2026-07-05
 context_refs:
   - Area_comun/artifacts/ANALISTA-TASK-0252-remediation-1-veredicto.md

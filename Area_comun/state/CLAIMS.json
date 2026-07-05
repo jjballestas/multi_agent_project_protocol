@@ -18435,6 +18435,30 @@
             "updated_at": "2026-07-05T00:19:51Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-mailbox-hygiene-1",
+            "expires_at": "2026-07-05T02:36:18Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-mailbox-hygiene-1",
+                "Area_comun/mailbox/open/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-p31-espera-0252-drenada.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Arquitecto-to-Operador-RESPUESTA-p31-espera-0252-drenada.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-CONSULTA-p31-construible-y-drenar-0252.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-CONSULTA-p31-construible-y-drenar-0252.md",
+                "Area_comun/mailbox/open/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-reactivado-P4.1-ruta-critica.md",
+                "Area_comun/mailbox/archived/MSG-20260704-Operador-to-Arquitecto-DIRECTIVA-reactivado-P4.1-ruta-critica.md",
+                "Area_comun/mailbox/open/MSG-20260705-Analista-to-Arquitecto-REVIEW-TASK-0252-harness-paridad-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Analista-to-Arquitecto-REVIEW-TASK-0252-harness-paridad-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Analista-REVIEW-TASK-0252-harness-paridad.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Analista-REVIEW-TASK-0252-harness-paridad.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0252-in-review.md"
+            ],
+            "started_at": "2026-07-05T00:36:18Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T00:36:18Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0252-answer-go",
             "expires_at": "2026-07-05T00:33:38Z",
             "notes": "Move consumed TASK-0252 GO to answered after delivery is ledger-backed.",
@@ -18483,6 +18507,42 @@
             "status": "released",
             "task_id": "TASK-0252",
             "updated_at": "2026-07-04T23:31:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-done-flip",
+            "expires_at": "2026-07-06T00:35:24Z",
+            "notes": "Implementer done-flip after Arquitecto review_approved ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0252",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0252",
+                "Area_comun/tasks/TASK-0252-harness-paridad-exec-vs-endpoint-sandbox.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-05T00:35:24Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-05T00:35:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0252-done-flip-mailbox",
+            "expires_at": "2026-07-06T00:36:08Z",
+            "notes": "Answer consumed TASK-0252 done-flip ACTION after ledger-backed done status.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0252-done-flip-mailbox",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0252-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-done-flip-done.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-05T00:36:08Z",
+            "status": "released",
+            "task_id": "TASK-0252",
+            "updated_at": "2026-07-05T00:36:08Z"
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0252-exec",

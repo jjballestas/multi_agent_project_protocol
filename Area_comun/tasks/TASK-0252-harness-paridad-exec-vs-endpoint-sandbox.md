@@ -2,7 +2,7 @@
 task_id: TASK-0252
 title: "[VISION-NOVA] Cablea el harness de paridad exec-vs-endpoint al sandbox (rol budget_sandbox_verifier)"
 type: feature
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: low
