@@ -18787,6 +18787,22 @@
             "updated_at": "2026-07-05T10:15:51Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-producthash-fix",
+            "expires_at": "2026-07-06T23:59:59.000Z",
+            "notes": "Correct TASK-0253 product commit hash after product trailer amend.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-producthash-fix",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-4.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-blocked.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T10:36:36.038Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T10:36:36.038Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-1",
             "expires_at": "2026-07-06T23:59:59.000Z",
             "notes": "Remediate TASK-0253 adversarial NO-GO findings.",

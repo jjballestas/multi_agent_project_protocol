@@ -471,6 +471,21 @@ pendiente". 2 se promueven de nota pasiva a hallazgo GOBERNADO CON DUENO (evita 
   doc (RN-07/08/09 sin explicar, carpeta huerfana ExecutionReports, README desactualizado) = higiene
   registrada, sin urgencia.
 
+## 16. ENMIENDA FECHADA 2026-07-05T10:35Z (Arquitecto) - VIEW DEFINITION para F-NOVA-01 (grant, sin EXECUTE nuevo)
+
+**No reabre el sello; test-infra (fuera del estudio medido), como el reset s.14.** F-NOVA-01 de TASK-0253
+(P4.1) requeria leer `OBJECT_DEFINITION` del proc desplegado para re-verificar el set exacto de THROW; el
+login `nova_budget_verifier` no tenia permiso de lectura de definicion. El DBA otorgo, sobre el ROL
+`budget_sandbox_verifier` (no directo al login, preserva el modelo de permisos existente):
+`GRANT VIEW DEFINITION ON OBJECT::[Budget].[Apply_Budget_Modification]` +
+`GRANT VIEW DEFINITION ON OBJECT::[Budget].[Budget_Adjustment]` (esta ultima resuelve el trigger
+`trg_budget_adjustment__cascade_status` via su tabla padre, ya que SQL Server no acepta el grant directo
+sobre un trigger DML). Validado por el DBA con `nova_budget_verifier`: `OBJECT_DEFINITION` visible en ambos
+(9412 y 2009 caracteres), THROW 50230 y 50243 confirmados en el texto real. Script `sandbox-grant-execute.sql`
+re-ejecutado completo sin error; doc `budget-parity-harness.md` actualizado por el DBA. `VIEW DEFINITION` es
+de solo lectura (expone el texto del modulo, no anade EXECUTE/escritura) -- no cambia el conteo de 108
+EXECUTE+SELECT de s.14, es una categoria de permiso distinta.
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).

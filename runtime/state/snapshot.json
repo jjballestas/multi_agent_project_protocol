@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "fd4cdc52aa6fd6fed39e23b148a1602f986acf4c4f8e304bcd3faa8be12a214e",
+  "canonical_hash": "7fe34717fc87ffefec2d1fad3c0b8eb3c4c7f846c8f21fd42db39f978330460f",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -536,6 +536,7 @@
       "CLAIM-20260705-Codex-TASK-0253-F-NOVA-01-bomfix": 1,
       "CLAIM-20260705-Codex-TASK-0253-F-NOVA-01-final": 1,
       "CLAIM-20260705-Codex-TASK-0253-fnova01-retry": 1,
+      "CLAIM-20260705-Codex-TASK-0253-producthash-fix": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1343,7 +1344,7 @@
       "TASK-0250": 20,
       "TASK-0251": 28,
       "TASK-0252": 25,
-      "TASK-0253": 30,
+      "TASK-0253": 31,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1351,7 +1352,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3383,
+    "events_applied": 3385,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4733,10 +4734,12 @@
       "task-0253-fnova-blocked-artifacts-claim": 4051,
       "task-0253-fnova-blocked-artifacts-release": 4052,
       "task-0253-fnova-bomfix-claim": 4053,
-      "task-0253-fnova-bomfix-release": 4054
+      "task-0253-fnova-bomfix-release": 4054,
+      "task-0253-producthash-fix-claim": 4055,
+      "task-0253-producthash-fix-release": 4056
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4054
+  "up_to_seq": 4056
 }

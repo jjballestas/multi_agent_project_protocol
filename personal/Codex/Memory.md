@@ -11,7 +11,7 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 blocked handof
   `HAS_PERMS_BY_NAME('Budget.Apply_Budget_Modification','OBJECT','EXECUTE')=1`, but
   `HAS_PERMS_BY_NAME(...,'VIEW DEFINITION')=0` and `OBJECT_DEFINITION` length is NULL. F-NOVA-01 still cannot
   re-verify the exact deployed THROW set, so the 8 live criteria were not accepted. Product commit
-  `7cc845e fix: rename budget SQL options` remediates the non-blocking ReadOnlySqlOptions naming finding by
+  `75913aa fix: rename budget SQL options` remediates the non-blocking ReadOnlySqlOptions naming finding by
   renaming it to `BudgetSqlOptions` and switching the config section to `BudgetSql`. Evidence:
   `dotnet test NOVA.sln` PASS 35 tests with known NU1903 Microsoft.OpenApi warning;
   `npm test --prefix apps/nova-web` PASS; `node --check apps\\nova-web\\src\\main.js` is not applicable/fails
