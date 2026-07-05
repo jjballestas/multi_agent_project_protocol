@@ -4,6 +4,16 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0254 retry after DBA SELECT grant moved to in_review. Product commit remains
+  `02e67d8 feat: add availability adjustment baseline`; no product code change was needed. Live evidence now
+  passes with User-scope env loaded by the process:
+  `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter ApplyAvailabilityAdjustmentEvidenceTests`
+  PASS 2 tests, 0 skipped. Full gates also passed: `dotnet test NOVA.sln` PASS 49 tests with known NU1903
+  Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS. Protocol artifacts:
+  `Area_comun/handoffs/HANDOFF-TASK-0254-codex-to-arquitecto-2.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-retry-in-review.md`; consumed ACTION moved
+  to answered. CLOSE measurement was left explicit for Arquitecto because the target corpus is under
+  `personal/Arquitecto/TFM-medicion/`.
 - TASK-0254 P4.2 baseline is blocked after product commit `02e67d8 feat: add availability adjustment baseline`
   in `D:/Agentes/Zeus/NOVA/Nova-Budget`. It implements Application/Contracts/Infrastructure/API/UI for
   `Budget.Apply_Availability_Adjustment`, real SQL evidence harness

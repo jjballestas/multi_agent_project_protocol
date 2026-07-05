@@ -310,6 +310,100 @@
             "updated_at": "2026-07-05T19:50:53Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-prune-fix2",
+            "expires_at": "2026-07-05T20:53:33Z",
+            "notes": "Release malformed prune claim",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-prune-fix2",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-prune-malformed"
+            ],
+            "started_at": "2026-07-05T20:23:33Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:23:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-prune-malformed",
+            "expires_at": "2026-07-05T20:39:35Z",
+            "notes": "Normalize malformed prune claim scope",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-prune-malformed"
+            ],
+            "started_at": "2026-07-05T20:24:35Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:24:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-retry",
+            "expires_at": "2026-07-05T20:52:49Z",
+            "notes": "Normalize malformed released claim scope",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry"
+            ],
+            "started_at": "2026-07-05T20:22:49Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:22:49Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-retry-delivery",
+            "expires_at": "2026-07-05T22:18:34Z",
+            "notes": "Deliver TASK-0254 retry evidence and consume ACTION",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry-work",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry-scopefix",
+                "Area_comun/state/TASK_INDEX.json#TASK-0254",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0254",
+                "Area_comun/tasks/TASK-0254-p4.2-apply-availability-adjustment-baseline.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0254-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-retry-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-retry.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-retry.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T20:18:34Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:18:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-retry-scopefix",
+            "expires_at": "2026-07-05T21:16:01Z",
+            "notes": "Fix malformed retry claim scope",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry-scopefix",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry"
+            ],
+            "started_at": "2026-07-05T20:16:01Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:16:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0254-retry-work",
+            "expires_at": "2026-07-06T00:16:42Z",
+            "notes": "Retry TASK-0254 F-NOVA-01 after DBA SELECT grant",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0254-retry-work",
+                "Area_comun/state/TASK_INDEX.json#TASK-0254",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0254",
+                "Area_comun/tasks/TASK-0254-p4.2-apply-availability-adjustment-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-retry.md"
+            ],
+            "started_at": "2026-07-05T20:16:42Z",
+            "status": "released",
+            "task_id": "TASK-0254",
+            "updated_at": "2026-07-05T20:16:42Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

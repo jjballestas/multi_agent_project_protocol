@@ -282,7 +282,7 @@
             "priority": "high",
             "project": "multi_agent_project_protocol",
             "reviewer": "Analista",
-            "status": "blocked",
+            "status": "in_review",
             "title": "[VISION-NOVA] P4.2 Apply_Availability_Adjustment (miembro baseline PAR-1, dev medido)",
             "type": "feature"
         },
