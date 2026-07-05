@@ -4,7 +4,8 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
-- TASK-0253 done-flip completed after Arquitecto ACTION
+- TASK-0253 done-flip completed after Arquitecto ACTION. Protocol close commit:
+  `43e025f coord(TASK-0253): close final done flip`.
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-done-flip`. Codex acquired and released
   `CLAIM-20260705-Codex-TASK-0253-done-flip`, moved TASK-0253 `review_approved -> done` through runtime
   seq 4137-4138, moved the consumed ACTION to answered, and opened
