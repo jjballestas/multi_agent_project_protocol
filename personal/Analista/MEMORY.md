@@ -2025,3 +2025,19 @@
   `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop esperado: parser de err.log
   debe fallar cerrado sin cumulativo explicito y Q3 debe calcular delta por brazo, no por orden CSV; re-juicio
   Analista previo a cierre, maximo 2 iteraciones.
+- TASK-0252 (2026-07-05): CAMBIO-REQUERIDO/NO CERRABLE, veredicto commiteado y pusheado en `b3896e1`
+  (`review(TASK-0252): Analista requires parity harness fixes`). Ancla protocolo
+  `d2ab042600c54614ed42680866d69dc9d63dfa12`, producto Nova-Budget
+  `dc04bd8a820069de9fcce0879010a65b50057c56`. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0252-harness-paridad-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260705-Analista-to-Arquitecto-REVIEW-TASK-0252-harness-paridad-NOGO.md`. dotnet clean clone
+  `dotnet test NOVA.sln` exit 0 (26 tests, warning NU1903); `npm test --prefix apps/nova-web` raw exit 1
+  por falta de `tsc` en clon limpio, y tras `npm install --prefix apps/nova-web` exit 0 (1 test).
+  Payload adversarial propio agregado solo en clon temporal: base `DbsFinanciero_PRODUCTION_SANDBOX_COPY`
+  no lanza excepcion porque el guard usa `Contains("SANDBOX")`; caso mismatch devuelve `fail` y reset
+  `reset, exec, reset, endpoint`. Bloqueantes: F-0252-01 rol `budget_sandbox_verifier` no verificado por
+  SQL real (solo constante/texto), F-0252-02 guard de DB no exacto contra `DbsFinanciero_SANDBOX`, F-0252-03
+  gate npm crudo no reproducible sin instalar dependencias. Gates protocolo vivo/secretless validate,
+  encoding/domain exit 0; drift 0 `up_to_seq=3986`; chain valid `checked_events=3314`; #4 byte-identica
+  sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop: remediar rol real,
+  guard exacto y comando npm reproducible; re-juicio Analista previo a cierre, maximo 2 iteraciones.
