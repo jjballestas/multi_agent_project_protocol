@@ -4,6 +4,18 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0255 partial in_review delivery: Nova-Budget product commit `9aff84d feat: add availability certificate annulment surface`
+  implements the C#/API/UI surface over `Budget.Annul_Availability_Certificate` without touching SQL DDL: Application service,
+  DTOs, typed SQL gateway, `GET /annul-preview`, `POST /api/budget/availability-certificates/{id}/annul`, UI annulment flow,
+  ProblemDetails mapping, real live OBJECT_DEFINITION evidence harness, and PAR-2 isolation architecture test. Gates passed:
+  `dotnet test NOVA.sln` PASS 55 tests with known NU1903 Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS;
+  User-scope env live definition evidence `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter AnnulAvailabilityCertificateEvidenceTests`
+  PASS 2 tests. Live deployed proc signature is `@availability_certificate_id bigint`, `@annulled_by_user_id bigint`,
+  `@reason varchar(1000)`, `@reversal_date date = NULL`, `@task_id varchar(100) = NULL`; THROW set is
+  50100, 50280, 50281, 50282, 50283, 50284, 50285, 50286, 50287. Important mismatch: deployed active-reservation guard is
+  50283, not GO/spec expected 50293. Protocol handoff/message pending close in this same session:
+  `Area_comun/handoffs/HANDOFF-TASK-0255-codex-to-arquitecto-1.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md`.
 - TASK-0254 done-flip executed after Arquitecto ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0254-done-flip.md`. Codex acquired
   `CLAIM-20260705-Codex-TASK-0254-done-flip`, moved TASK-0254 `review_approved -> done`

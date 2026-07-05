@@ -2,7 +2,7 @@
 task_id: TASK-0255
 title: "[VISION-NOVA] PAR-2 Annul_Availability_Certificate (miembro baseline, superficie C# sobre hardening)"
 type: feature
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

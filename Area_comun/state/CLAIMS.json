@@ -515,6 +515,45 @@
             "updated_at": "2026-07-05T20:16:42Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0255-delivery",
+            "expires_at": "2026-07-05T23:54:20Z",
+            "notes": "Delivered TASK-0255 partial in_review and consumed GO",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0255-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0255-impl",
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0255-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0255-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0255-PAR2-baseline.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0255-PAR2-baseline.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T21:54:20Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T21:55:51Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0255-impl",
+            "expires_at": "2026-07-06T01:47:18Z",
+            "notes": "Implementation delivered to in_review",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0255-impl",
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0255-PAR2-baseline.md"
+            ],
+            "started_at": "2026-07-05T21:47:18Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T21:55:51Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
