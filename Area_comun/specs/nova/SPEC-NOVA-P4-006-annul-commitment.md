@@ -179,6 +179,25 @@ Un contrato de mutacion atomico (anulacion) + su preparacion, simetrico a P4-005
     ya tenga disponible (converge con el diseno de #7, mismo mecanismo para el resto del brazo gobernado).
     Test de arquitectura: el endpoint de anulacion DEBE tener el atributo/policy de autorizacion presente
     (mecanico, no solo revision manual).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (fix-forward de hallazgo #11, quality-data del hermano
+    baseline P4-005):** el gateway de produccion NO debe leer columnas del result-set del proc por fallback
+    encadenado de nombres (p.ej. intentar `reversal_id` y si falla `..._reversal_id`) ni caer en un DEFAULT
+    SILENCIOSO si la columna no aparece (p.ej. asumir estado `'A'` sin verificar). El nombre EXACTO de cada
+    columna leida se confirma contra `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc
+    DESPLEGADO antes de escribir el gateway, y el harness de evidencia F-NOVA-01 DEBE ejercitar el MISMO
+    camino de lectura que usa el gateway de produccion (mismos nombres de columna, mismo mecanismo de
+    derivacion de estado) -- no un camino de lectura alternativo (p.ej. JOIN a tabla de catalogo) que deje
+    sin verificar el codigo real de produccion.
+  - (j) **COBERTURA HTTP DE INTEGRACION (fix-forward de hallazgo #12):** cada endpoint mutador nuevo
+    (preview + anulacion) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` +
+    gateway FALSO inyectado) que ejercita ruta -> endpoint -> mapeo de comando -> gateway; no basta con
+    unitarias de la capa Application sin verificar el wiring HTTP completo.
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (fix-forward de hallazgo #13):** el test de arquitectura
+    `React_app_does_not_contain_sql_or_procedure_calls` (o su equivalente) DEBE incluir el nombre exacto
+    del proc de ESTA unidad (`Annul_Commitment`) en su lista de literales prohibidos para el frontend, igual
+    que ya cubre a `Apply_Budget_Modification`/`Apply_Availability_Adjustment`. Si el nombre del proc
+    mutador se exhibe como texto descriptivo en la UI (p.ej. etiqueta de auditoria), es una EXCEPCION
+    EXPLICITA que se documenta y se excluye puntualmente del test, nunca una omision silenciosa de la lista.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; +un negativo por THROW ALCANZABLE, re-verificado)
 > F-NOVA-01: cada negativo cita el THROW conocido o recien confirmado contra `OBJECT_DEFINITION`; el
@@ -205,6 +224,15 @@ Un contrato de mutacion atomico (anulacion) + su preparacion, simetrico a P4-005
    el diff, ni se referencia/lee su implementacion en el repo).
 9. **Dado** el harness de evidencia F-NOVA-01, **entonces** usa una clase SQL real (gateada por env vars,
    NA limpio sin credenciales) -- sin ningun mock/Recording* sustituyendo la evidencia.
+10. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+    confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado de nombres ni default silencioso; el
+    harness F-NOVA-01 ejercita el MISMO camino de lectura (fix-forward hallazgo #11).
+11. **Dado** los endpoints de preview y anulacion, **entonces** cada uno tiene al menos un test de
+    integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo ruta->
+    endpoint->comando->gateway (fix-forward hallazgo #12).
+12. **Dado** el test de arquitectura de aislamiento del frontend, **entonces** incluye `Annul_Commitment`
+    en su lista de literales prohibidos; si el nombre se exhibe como texto descriptivo en la UI, es una
+    excepcion explicita documentada, no una omision (fix-forward hallazgo #13).
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo de la solicitud de anulacion; traduccion THROW->ProblemDetails; enforcement de que la
@@ -234,6 +262,7 @@ Un contrato de mutacion atomico (anulacion) + su preparacion, simetrico a P4-005
 | Reimplementar la guarda RN-08 o el saldo en C# | Divergencia con la BD (RN-08) | Restricciones 6a/6b/6d; adversarial y checker formal verifican especificamente |
 | Fingir un posteo contable que el proc no hace (pendiente re-confirmar NO-OP para Compromiso) | Criterio falso si el DBA confirma que Compromiso SI difiere de CDP en el tramo contable | s.3: RE-CONFIRMAR con el DBA antes de fijar el criterio contable definitivo |
 | Checker formal y adversarial en la misma sesion, o compartiendo contexto con el maker | Contaminacion (tokens no separables, independencia comprometida) | DoR: checker formal del Analista en sesion/contexto estructuralmente independiente (SPEC+diff+BD readonly, no la conversacion del maker) |
+| Repetir los 3 huecos de calidad no-bloqueantes hallados en el hermano baseline P4-005 (quality-data #11/#12/#13, DECISION-0018 2026-07-06): lectura de columnas por adivinanza+default silencioso, cero test HTTP de integracion para los endpoints nuevos, omision del proc en la lista de aislamiento del frontend | Mismo patron de gaps de calidad no cazados por el GO informal, esta vez en el miembro gobernado con checker formal | Restricciones 6i/6j/6k + criterios 10/11/12 (fix-forward explicito, no parche retroactivo al baseline ya cerrado) |
 
 ## 10. Prioridad definida
 **GOAL-P4** (anulaciones de cadena, brecha B-04/RN-08 cerrada por hardening), miembro GOBERNADO de

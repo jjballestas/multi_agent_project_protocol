@@ -3,7 +3,7 @@ message_id: MSG-20260706-Operador-to-Arquitecto-DECISION0018-task0255-quality-da
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-06
