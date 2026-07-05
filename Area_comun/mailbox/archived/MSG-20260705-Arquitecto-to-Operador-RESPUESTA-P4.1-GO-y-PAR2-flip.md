@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Operador-RESPUESTA-P4.1-GO-y-PAR2-flip
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 response_owner: Operador
 created_at: 2026-07-05

@@ -3,7 +3,7 @@ message_id: MSG-20260705-Codex-to-Analista-REVIEW-TASK-0252-remediation-1
 from: Codex
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-05

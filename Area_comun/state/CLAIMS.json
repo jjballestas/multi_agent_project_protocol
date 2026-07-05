@@ -18459,6 +18459,28 @@
             "updated_at": "2026-07-05T00:36:18Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-mailbox-hygiene-2b",
+            "expires_at": "2026-07-05T02:39:10Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-mailbox-hygiene-2b",
+                "Area_comun/mailbox/open/MSG-20260705-Analista-to-Arquitecto-REVIEW-TASK-0252-remediation-1-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Analista-to-Arquitecto-REVIEW-TASK-0252-remediation-1-OK.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-FYI-PAR2-hardening-entregado-confirmado.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-FYI-PAR2-hardening-entregado-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-P4.1-GO-y-PAR2-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-P4.1-GO-y-PAR2-flip.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Analista-REVIEW-TASK-0252-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Analista-REVIEW-TASK-0252-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0252-done-flip-done.md"
+            ],
+            "started_at": "2026-07-05T00:39:09Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T00:39:09Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0252-answer-go",
             "expires_at": "2026-07-05T00:33:38Z",
             "notes": "Move consumed TASK-0252 GO to answered after delivery is ledger-backed.",
