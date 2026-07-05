@@ -4116,6 +4116,20 @@
             "type": "feature"
         },
         {
+            "checker": "adversarial-informal-subagent",
+            "created_at": "2026-07-05",
+            "file": "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+            "id": "TASK-0253",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "project": "multi_agent_project_protocol",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[VISION-NOVA] P4.1 Apply_Budget_Modification (baseline pattern-setter, dev medido)",
+            "type": "feature"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
