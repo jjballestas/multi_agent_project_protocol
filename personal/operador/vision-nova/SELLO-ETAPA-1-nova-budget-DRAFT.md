@@ -540,6 +540,50 @@ El `EXECUTE ON TYPE::[Budget].[Chain_Adjustment_Line_List]` ya estaba pre-emptid
 de hardening/test-infra; la superficie C# medida de PAR-1 se construye al GO, DESPUES de cerrar P4.1
 (ruta critica) y con su patron congelado.
 
+## 21. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - Sorteo del miembro BASELINE de PAR-1 (P4.2 vs P4.3)
+
+**Cierra un hueco del sello, no lo reabre.** s.6 paso 4 fija el ORDEN DE ARRANQUE (P4.1 -> miembro PAR-1 ->
+miembro PAR-2) pero el documento NO especificaba cual de los dos miembros de PAR-1 (P4.2
+Apply_Availability_Adjustment / P4.3 Apply_Commitment_Adjustment) es el brazo BASELINE vs el GOBERNADO
+(a diferencia de PAR-D, donde P2.2 esta anclado explicitamente). Ni P4.2 ni P4.3 tuvieron nunca un
+`tarea_id` de sorteo pre-registrado (a diferencia de las 10 unidades del pool Q4, fijadas en
+`ESTIMATES-Q4-para-sorteo.md` ANTES del sorteo) -- estaban explicitamente EXCLUIDAS de ese pool (s.3, linea
+251-252). Cerrar este hueco hoy es necesariamente POST-HOC.
+
+**Limitacion declarada honestamente (no oculta):** la semilla del sorteo original (pulso NIST 1844242) ya
+es PUBLICA desde el sello de Etapa 1 -- a diferencia del sorteo Q4 original (semilla capturada despues
+de fijar el string+algoritmo, anti-moldeable por diseno), esta aplicacion posterior NO tiene esa
+misma garantia anti-HARKing plena, porque en teoria alguien podria haber probado strings candidatos hasta
+encontrar uno que diera el resultado deseado ANTES de comprometerse a un string. **Registro exactamente eso
+que paso:** el Arquitecto probo 3 strings candidatos (ver tabla) ANTES de que el Operador fijara cual usar,
+y los 3 dieron resultados distintos (2 limpios opuestos + 1 empate). El Operador, viendo los 3 resultados
+YA COMPUTADOS, eligio el criterio "identificador de archivo SPEC ya existente" (`SPEC-NOVA-P4-002`/
+`SPEC-NOVA-P4-003`, creados en el repo ANTES de esta pregunta, no inventados para el sorteo) por
+pre-existencia + orden de dominio, NO por cual resultado prefería. **Por esto, PAR-1 (Q3) es
+DESCRIPTIVO de este punto en adelante, no una confirmatoria con la misma fuerza anti-moldeo que el sorteo
+Q4 original** -- no toca ni degrada las confirmatorias centrales del estudio (Q1/Q2/Q4), que se computaron
+con la garantia plena de blind-seed.
+
+**Los 3 candidatos probados (mismo algoritmo s.6.1: `h = SHA-256(tarea_id + "|" + semilla)`, paridad `h[0]`,
+misma semilla `outputValue` del pulso 1844242
+`9CD3E6A0B366DFD164BA63C18CAE7D09B1CD76867DAD8912AEA1061D41E95226A2B0FCB937542D1DC80BC49AA00FE562B030866E9B1706CD76A26A6E5C7379EF`):**
+
+| tarea_id probado | h (SHA-256 completo) | h[0] | paridad | asignacion resultante |
+|---|---|---|---|---|
+| `NB-P4-2` / `NB-P4-3` (analogia inventada a la convencion Q4) | `f7af87b4...d008d58` / `aa34ae69...fa18f2b` | `0xf7` / `0xaa` | impar / par | P4.2=gobernado, P4.3=baseline |
+| `SPEC-NOVA-P4-002` / `SPEC-NOVA-P4-003` (**ELEGIDO**, archivo pre-existente) | `6656fdc6...da0f30c7d` / `ffea9cfc...4a99957` | `0x66` / `0xff` | par / impar | **P4.2=baseline, P4.3=gobernado** |
+| `P4.2` / `P4.3` (numeracion GOAL, mas primitiva) | `aae0d191...13774b24` / `d4b7a15c...73c7634c` | `0xaa` / `0xd4` | par / par | empate (sin desempate pre-declarado) |
+
+**Criterio de eleccion del string (post-hoc, decidido por el Operador viendo los 3 resultados):**
+`SPEC-NOVA-P4-002`/`SPEC-NOVA-P4-003` son los identificadores de archivo del repo, creados
+ANTES de que esta pregunta de sorteo existiera (no inventados para este proposito), y siguen la
+convencion de nomenclatura ya establecida para TODAS las SPECs de la familia P4.x -- el criterio de
+seleccion fue "pre-existencia + orden de dominio", no el resultado que producia.
+
+**RESULTADO FINAL: P4.2 (Apply_Availability_Adjustment) es el miembro BASELINE de PAR-1** (dev medido,
+ventana baseline, GO inmediato). P4.3 (Apply_Commitment_Adjustment) queda como el miembro GOBERNADO de
+PAR-1, para su brazo en Sprint 1 (post-30-jul, bajo gobierno completo atestado).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
