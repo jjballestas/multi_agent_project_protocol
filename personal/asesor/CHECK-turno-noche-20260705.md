@@ -33,8 +33,9 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [~] **DESBLOQUEO COMPLETO** (ambos inputs de F-NOVA-01 resueltos):
     - [x] **`NOVA_BUDGET_SANDBOX_RESET_SQL`** -> `Budget.Reset_Sandbox_Mutator_Baseline` (revision Asesor PASA, cuadre validado). Grant 108.
     - [x] **`NOVA_BUDGET_PARITY_CONNECTION_STRING`** -> configurada en el ENTORNO DE USUARIO DE WINDOWS (secreto SOLO ahi, no en archivos; DBA valido conexion + reset dry_run OK sin mutar). Ruteado (575ee75).
-    - [x] **Arquitecto relanzo el cron + desbloqueo:** TASK-0253 blocked -> **in_progress** (el desbloqueo funciono; Codex corriendo F-NOVA-01 en vivo).
-    - [ ] **FALTA:** que F-NOVA-01 pase (8 criterios + THROW) -> P4.1 -> done con CLOSE + tokens (fila J9) + patron ajustes congelado para PAR-1.
+    - [x] **Desbloqueo funciono:** Codex conecta como nova_budget_verifier, rol OK, EXECUTE OK.
+    - [x] **2o bloqueo (VIEW DEFINITION) -> RESUELTO:** el verifier tenia EXECUTE pero no VIEW DEFINITION -> no podia leer OBJECT_DEFINITION del proc para re-verificar los THROW (falsabilidad). El DBA otorgo GRANT VIEW DEFINITION sobre Apply_Budget_Modification + Budget_Adjustment (resuelve el trigger via tabla padre), validado (def visible 9412/2009 chars, THROW 50230/50243 en el texto real). Grant script re-ejecutado. Arquitecto re-ruteo Codex (retry-2) con caution de falsabilidad (F-0246-02: no asumir que el set de THROW documentado es exacto).
+    - [ ] **FALTA:** que F-NOVA-01 pase (set de THROW re-verificado + 8 criterios) -> P4.1 -> done con CLOSE + tokens (J9) + patron congelado para PAR-1.
   - Nota de seguridad: el Arquitecto se auto-freno bien al intentar escribir la password a disco; el secreto quedo solo en la env var de usuario (canal acordado). Disciplina correcta.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
