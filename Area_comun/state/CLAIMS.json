@@ -102,6 +102,21 @@
             "updated_at": "2026-07-05T19:48:18Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-TASK-0255-register",
+            "expires_at": "2026-07-05T23:40:20Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-TASK-0255-register",
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md"
+            ],
+            "started_at": "2026-07-05T21:40:20Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T21:40:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Arquitecto-hygiene-C",
             "expires_at": "2026-07-05T20:10:19Z",
             "owner": "Arquitecto",

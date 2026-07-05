@@ -79,6 +79,12 @@
             "title": "[VISION-NOVA] P4.2 Apply_Availability_Adjustment (miembro baseline PAR-1, dev medido)"
         },
         {
+            "id": "TASK-0255",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[VISION-NOVA] PAR-2 Annul_Availability_Certificate (miembro baseline, superficie C# sobre hardening)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
