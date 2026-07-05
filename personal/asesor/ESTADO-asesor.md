@@ -50,6 +50,13 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
+**>> PENDIENTE-TRIGGER (orden operador 2026-07-05):** AL CERRAR P4.1 (monitor detecta TASK-0253 -> done o
+fila CLOSE J9 en el journal) -> preguntar al Arquitecto por mailbox la CADENCIA DE ATESTACION del journal de
+medicion (por-unidad como GOAL-P1 sha256 d2a13216, vs por-checkpoint sello/reconciliacion). Contexto: el corpus
+esta gitignored a proposito (.gitignore:37, atestado por manifiesto), pero las filas P2.1/P2.2/P4.1 no se ven
+atestadas por sha256 en el #4 aun -> confirmar si es diseno (checkpoint) o hueco (data local sin sellar). NO
+rutear antes del cierre de P4.1. Monitor activo: b0ui9enn0 (dev-hitos).
+
 **>> 2026-07-05 TURNO DE NOCHE del Arquitecto QUEUED (~6h, operador durmiendo):** rutee
 MSG-...-DIRECTIVA-turno-noche-cola-6h (4787c5b) -- cola ordenada+PRE-DECIDIDA para sesion fresca autonoma:
 (0) cutover+higiene+responde directivas; (1) cierra TASK-0252; (2) gobierno (PAR-2 flip+enmienda, filas P2);
