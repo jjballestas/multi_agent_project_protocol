@@ -132,6 +132,24 @@
             "updated_at": "2026-07-05T18:45:58Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-F",
+            "expires_at": "2026-07-05T20:50:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-F",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-INTEGRIDAD-mock-P2.1-guard-sistemico-y-atestacion.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-INTEGRIDAD-mock-P2.1-guard-sistemico-y-atestacion.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-integridad-mock-P2.1-guard.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-integridad-mock-P2.1-guard.md"
+            ],
+            "started_at": "2026-07-05T18:50:59Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T18:50:59Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-done-flip",
             "expires_at": "2026-07-05T20:47:22Z",
             "notes": "Final implementer done flip after checker review_approved.",
