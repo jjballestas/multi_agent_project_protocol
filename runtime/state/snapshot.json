@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "9b29e2fb496c8c6eca6a43951438afc6cc1011a2fb247fac8be539475a481d1f",
+  "canonical_hash": "092f03b9bcd7af55c083c2601b49c302025b8ba14046a0221a2f4824661e755e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -543,6 +543,7 @@
       "CLAIM-20260705-Codex-TASK-0253-F-NOVA-01-bomfix": 1,
       "CLAIM-20260705-Codex-TASK-0253-F-NOVA-01-final": 1,
       "CLAIM-20260705-Codex-TASK-0253-F-NOVA-01-retry-2": 1,
+      "CLAIM-20260705-Codex-TASK-0253-done-flip": 1,
       "CLAIM-20260705-Codex-TASK-0253-fnova01-retry": 1,
       "CLAIM-20260705-Codex-TASK-0253-producthash-fix": 1,
       "CLAIM-20260705-Codex-TASK-0253-remediation-2-consume-action": 1,
@@ -1382,7 +1383,7 @@
       "TASK-0250": 20,
       "TASK-0251": 28,
       "TASK-0252": 25,
-      "TASK-0253": 65,
+      "TASK-0253": 67,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1390,11 +1391,13 @@
       "protocol-prune": 2,
       "protocol-state": 1
     },
-    "events_applied": 3464,
+    "events_applied": 3467,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-release-2026-07-05T00:18:47.921Z": 3991,
+      "CLAIM-20260705-Codex-TASK-0253-done-flip-acquire": 4136,
+      "CLAIM-20260705-Codex-TASK-0253-done-flip-release": 4138,
       "Codex:TASK-0135:claim-release:20260620T211000Z": 862,
       "Codex:TASK-0135:in-progress-to-in-review:20260620T211000Z": 861,
       "Codex:TASK-0135:ready-to-in-progress:20260620T204500Z": 860,
@@ -1470,6 +1473,7 @@
       "TASK-0245-remediation-1-in-review-20260704": 3797,
       "TASK-0245-remediation-1-release-20260704": 3798,
       "TASK-0252-remediation-review-2026-07-05T00:18:26.930Z": 3990,
+      "TASK-0253-done-flip-status": 4137,
       "TASK-0253-fnova01-retry-blocked-status": 4045,
       "TASK-0253-fnova01-retry-claim": 4044,
       "TASK-0253-fnova01-retry-claim-release": 4046,
@@ -4858,5 +4862,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4135
+  "up_to_seq": 4138
 }

@@ -4,6 +4,15 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0253 done-flip completed after Arquitecto ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-done-flip`. Codex acquired and released
+  `CLAIM-20260705-Codex-TASK-0253-done-flip`, moved TASK-0253 `review_approved -> done` through runtime
+  seq 4137-4138, moved the consumed ACTION to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-done-flip-done.md`. Product gates:
+  `dotnet test NOVA.sln` PASS 41 tests with known NU1903 Microsoft.OpenApi warning; `npm test --prefix
+  apps/nova-web` PASS. Protocol gates: encoding OK, domain-neutrality exit 0, validator OK, drift false at
+  `up_to_seq=4138`. Product commit accepted by checker remains `a9246a5 fix: run appropriation evidence
+  against live sql`.
 - TASK-0253 remediation 3 delivered after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-3-mock-disfrazado`. Product commit
   `a9246a5 fix: run appropriation evidence against live sql` removes the in-memory
