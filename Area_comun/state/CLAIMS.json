@@ -85,6 +85,50 @@
             "updated_at": "2026-07-05T18:10:19Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-2-consume-action",
+            "expires_at": "2026-07-05T19:20:06Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-2-consume-action",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia.md"
+            ],
+            "started_at": "2026-07-05T18:20:06Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:20:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-2-delivery",
+            "expires_at": "2026-07-05T20:19:22Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-2-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-8.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-2-in-review.md"
+            ],
+            "started_at": "2026-07-05T18:19:22Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:19:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-2b",
+            "expires_at": "2026-07-05T20:14:14Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-2b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia.md"
+            ],
+            "started_at": "2026-07-05T18:14:14Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:14:14Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
