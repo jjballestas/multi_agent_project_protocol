@@ -85,6 +85,27 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   la propiedad de robustez/transferibilidad que sostiene el objetivo employee-ready (peones/agentes que
   reviven). Continuidad tambien sostenida por el Asesor (CHECK vivo + monitor) en paralelo.
 
+### A8. Un componente COMPARTIDO filtro un defecto cross-endpoint que los gates por-unidad no vieron
+- **Fenomeno:** el switch de mapeo THROW->ProblemDetails (`BudgetProcedureProblemDetails.Map`,
+  NOVA.Api/Program.cs) es UNICO y compartido por 3 verticales (Apply_Budget_Modification /
+  Apply_Availability_Adjustment / Annul_Availability_Certificate). El codigo SQL 50212 quedo SOLO en la
+  rama de disponibilidad (RN-A01, linea 500); la rama de apropiacion (RN-01, linea 513) ya no lo lista. Como
+  el switch evalua top-down, un 50212 disparado por el endpoint de apropiacion (via trigger de vigencia
+  compartido) sale con el titulo/businessRule de disponibilidad. HTTP 409 y sqlErrorNumber crudos
+  correctos; solo el texto legible y la etiqueta RN-xx mal atribuidos.
+- **Por que los gates por-unidad no lo vieron:** cada GO informal por-tarea (0253/0254/0255) mira SU
+  vertical; el defecto vive en el ACOPLE del componente compartido -> punto ciego de una revision
+  unit-scoped. Lo caza una pasada transversal (change-monitor + verificacion independiente).
+- **Respuesta gobernada (traza a2657d5):** verificado independiente (Arquitecto contra codigo real + Asesor
+  byte a byte) -> registrado como hallazgo formal QA #10 ruteado al Analista para veredicto independiente
+  (clon limpio, commit edbc037) -> documentado con transparencia total en el producto
+  (diccionario-datos.html, log-cambios.html), SIN parche silencioso; el fix (rama neutral para 50212 vs
+  duplicar el caso en RN-01 y RN-A01) diferido a decision de equipo. IN-FLIGHT: falta el veredicto del Analista.
+- **Por que importa:** extiende A1/A2 a una NUEVA CLASE de defecto -- ACOPLE cross-unidad, no solo evidencia
+  falseada/incompleta intra-unidad; y muestra el reflejo institucional (documentar + registrar + verificar
+  independiente en vez de ocultar). Caveat: el 50212 no es bloqueante (status/codigo crudo OK); es serie de
+  calidad, no un critico.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
@@ -92,6 +113,13 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **2026-07-06 (Asesor):** +A7 (reinicio del Arquitecto por contexto lleno -> sesion fresca cerro PAR-2
   sin perder estado; CLOSE seq 14, tag=arranque, THROW 9-codigos aplicado, 0 reworks). PAR-2 done ->
   ventana baseline ~completa.
+- **2026-07-06 (Asesor, verificacion QA):** +A8 (defecto de acople cross-endpoint: THROW 50212
+  mal-etiquetado por el switch compartido BudgetProcedureProblemDetails.Map; verificado independiente por el
+  Asesor contra Program.cs:494-522; registrado por el Arquitecto como hallazgo formal QA #10 al Analista,
+  a2657d5; in-flight). Ademas verifique 3 hallazgos no-bloqueantes en TASK-0255 baseline (columnas de
+  lectura inciertas con default silencioso, sin test HTTP con gateway falso para los 2 endpoints, omision
+  del proc de mutacion en la lista prohibida del frontend) -- quality-data del brazo baseline, no reabrir la
+  unidad medida; pendiente decision del operador sobre rutearlos como #11+.
 - **2026-07-06 (Asesor, prep Sprint 1):** refuerza A5 -- el hueco conocido #8/auth (el baseline opera bajo
   supuesto DD-01 sin wiring de autorizacion real) NO se parcha retroactivamente sobre las unidades baseline
   YA CERRADAS Y MEDIDAS; se disena HACIA ADELANTE en el miembro gobernado (SPEC-NOVA-P4-006 s.6h,
