@@ -616,6 +616,21 @@
             "updated_at": "2026-07-05T21:55:51Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-TASK-0255-ratify-20260705",
+            "expires_at": "2026-07-05T23:12:58Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0255",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0255",
+                "Area_comun/tasks/TASK-0255-par2-annul-availability-certificate-baseline.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-TASK-0255-ratify-20260705"
+            ],
+            "started_at": "2026-07-05T22:12:58Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-05T22:12:58Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
