@@ -92,3 +92,9 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **2026-07-06 (Asesor):** +A7 (reinicio del Arquitecto por contexto lleno -> sesion fresca cerro PAR-2
   sin perder estado; CLOSE seq 14, tag=arranque, THROW 9-codigos aplicado, 0 reworks). PAR-2 done ->
   ventana baseline ~completa.
+- **2026-07-06 (Asesor, prep Sprint 1):** refuerza A5 -- el hueco conocido #8/auth (el baseline opera bajo
+  supuesto DD-01 sin wiring de autorizacion real) NO se parcha retroactivamente sobre las unidades baseline
+  YA CERRADAS Y MEDIDAS; se disena HACIA ADELANTE en el miembro gobernado (SPEC-NOVA-P4-006 s.6h,
+  Annul_Commitment, commit 9bd3587), patron de auth real que hereda el resto del brazo gobernado. Traza: la
+  gobernanza prefiere el gap declarado + fix-forward antes que alterar post-hoc lo medido. Es la misma
+  disciplina de pre-registro de A5 aplicada a un gap tecnico, no solo al sorteo.
