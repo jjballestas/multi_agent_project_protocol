@@ -510,6 +510,18 @@ bloquea el cierre de TASK-0253 (cross-cutting, no especifico de P4.1) -- se regi
 security+QA separado, dueno = Codex (implementa autenticacion minima) + Analista (checker), prioridad a
 definir cuando abra el trabajo de hardening/Sprint 1 (no ruta critica pre-30-jul).
 
+## 19. ENMIENDA FECHADA 2026-07-05T12:02Z (Arquitecto) - Vigencia fiscal abierta en sandbox (postura de datos, F-NOVA-01)
+
+**No reabre el sello; postura de DATOS del sandbox (test-infra), no cambio de codigo/schema.** F-NOVA-01
+de TASK-0253 llego a ejecutar mutaciones reales pero `fiscal_year_id=1` (year 2026, la UNICA vigencia con
+lineas visibles en `vw_Initial_Budget_Line_Balance`) estaba `closed` -> THROW 50231 en todo intento. El DBA
+cambio en `DbsFinanciero_SANDBOX`: `fiscal_year_id=1, year=2026, status=open, is_current=1` (304 lineas
+activas, 297 positivas, `current_appropriation_amount=266396747818.84`). **No toco `Budget.Annual_Closing`**
+(no es un proc de dominio ejecutado, es una edicion directa de postura del sandbox, aceptable porque es
+test-infra fuera del estudio medido). Validado por el DBA con `nova_budget_verifier`: `Apply_Budget_Modification`
+con TVP real sobre 2 lineas activas, dentro de transaccion con `ROLLBACK`, cero residuo. Vigencia 2027 sigue
+`open` pero SIN lineas de saldo -- no sirve para F-NOVA-01, se usa 2026.
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).

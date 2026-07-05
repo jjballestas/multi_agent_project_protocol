@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8232a337f83a24e75aea521e16d23ca462149a9ece597b42d32e6bb0b71f58e4",
+  "canonical_hash": "b9f9752b5347b7c2afe50eb9c01497cd408cb05b8b47ce602169383782d95b0a",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1361,7 +1361,7 @@
       "TASK-0250": 20,
       "TASK-0251": 28,
       "TASK-0252": 25,
-      "TASK-0253": 48,
+      "TASK-0253": 50,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1369,7 +1369,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3421,
+    "events_applied": 3423,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -1443,6 +1443,7 @@
       "Codex:TASK-0209:review-fix-status-in-review:20260629T003200Z": 2469,
       "Codex:TASK-0253:release-repaired-retry3:2026-07-05T120837Z": 4092,
       "Codex:TASK-0253:retry3-blocked:2026-07-05T120613Z": 4089,
+      "Codex:TASK-0253:retry4-in-progress:2026-07-05T121501Z": 4094,
       "TASK-0245-remediation-1-in-review-20260704": 3797,
       "TASK-0245-remediation-1-release-20260704": 3798,
       "TASK-0252-remediation-review-2026-07-05T00:18:26.930Z": 3990,
@@ -4542,6 +4543,7 @@
       "intent:Codex:claim:f579591c20617d054383f4da71519dba76415c6681817c2ebfe26712e2d9309e": 1196,
       "intent:Codex:claim:f5e16dd6e894be8d7874d4367399d54ce3b978abc8d8d3f61be50b0633f96d1a": 4028,
       "intent:Codex:claim:f6c22e4a215153bb3785623edaf66e4ed3a096687b450ffcd57f87c22ad2c769": 2918,
+      "intent:Codex:claim:f70317e8714f657b8cd5b0d1f4e9cd0060868271f5d096d2bae1c73332312e03": 4093,
       "intent:Codex:claim:f7e0dc9d779933184eb0676936f19cbc69b1b70a2b00d0634ad66b4d34187935": 946,
       "intent:Codex:claim:f81e44e80d565b2ac67f386d1134a7580734d4ca19418d1ec5b84ca21a53c4be": 3902,
       "intent:Codex:claim:f9367a43736b0f7101ff1a0bcae9bc91c53803cc430b3062bc07f2f9182bb54e": 2190,
@@ -4794,5 +4796,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4092
+  "up_to_seq": 4094
 }
