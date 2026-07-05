@@ -50,6 +50,17 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
+**>> 2026-07-05 PAR-2 ASEGURADO (adelantado ~10 dias del 15-jul):** el DBA del Operador cerro la brecha
+B-04/RN-08 en sandbox -- Annul_Availability_Certificate + Annul_Commitment, 10/10 pruebas (guardas THROW
+50293 CDP / 50283 RP, cuadre, idempotencia, rollback, tenant), grant surface 107 (17 EXEC + 90 SELECT). Yo
+redacte la DRAFT-SPEC de hardening (1f666be) + el encargo detallado al DBA. Rutee (eaa4704) el flip PAR-2
+CONDICIONAL->CONFIRMADO + enmienda fechada del grant + nota contable-no-op (correcto: CDP/RP = reserva, no
+movimiento contable) + superficie C# de PAR-2 EN COLA detras de P4.1/PAR-1 (no salta ruta critica). PENDIENTE
+Arquitecto: registrar flip + enmienda + (opcional) confirmacion read-only Analista.
+**PIPELINE (2026-07-05):** Codex reactivado, en fix-loop de TASK-0252 (harness paridad; Analista NOGO: guard BD
+bypasseable + rol no verificado). Mi DIRECTIVA P4.1 (ruta critica, 862fa7f) ruteada, en open/ -- el Arquitecto
+probablemente cierra 0252 antes de GO-ear P4.1. WATCH: que P4.1 se GO-ee tras 0252 (piso minimo 30-jul).
+
 **F3.3 CERRADO** (Analista OK re-gate 2; fix-loop cazo F-0249-01/02/03 = reproducibilidad clon limpio =
 tesis del estudio en vivo). **P2.1 (TASK-0250) y P2.2 (TASK-0251) DONE** (primeras 2 unidades baseline; cada
 una fix-loop 1/2 real). P2.1: baseline/par_id=NA/M/reworks=1. P2.2: baseline/PAR-D anclado/spec_prepagado=true/
