@@ -147,6 +147,38 @@
             "updated_at": "2026-07-05T18:14:14Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-3",
+            "expires_at": "2026-07-05T20:36:06Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-3-mock-disfrazado.md"
+            ],
+            "started_at": "2026-07-05T18:36:06Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:36:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-3-delivery",
+            "expires_at": "2026-07-05T20:36:45Z",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-3-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-9.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-3-mock-disfrazado.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-3-mock-disfrazado.md"
+            ],
+            "started_at": "2026-07-05T18:36:45Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T18:36:45Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

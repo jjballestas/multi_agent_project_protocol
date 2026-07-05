@@ -4,6 +4,22 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
 
 ## Latest Session Note
 
+- TASK-0253 remediation 3 delivered after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-3-mock-disfrazado`. Product commit
+  `a9246a5 fix: run appropriation evidence against live sql` removes the in-memory
+  `RecordingAppropriationDatabase` evidence path: the eight F-NOVA-01 cases now run through
+  `ApplyBudgetModificationEvidenceHarness.FromEnvironment()` and `SqlApplyBudgetModificationEvidenceDatabase`
+  when the sandbox env is configured, with NA only when env vars are absent. The gateway now sets
+  `SESSION_CONTEXT tenant_id`, matches the deployed TVP metadata (`bigint`, `varchar(20)`, `decimal(19,4)`),
+  and reset accepts the real case id while preserving the group reset needed by the sealed baseline. Live evidence
+  gate passed with User-scope env loaded into the process: `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter ApplyBudgetModificationEvidenceTests`
+  PASS 2 tests. Full product gates: `dotnet test NOVA.sln` PASS 41 tests with known NU1903 Microsoft.OpenApi
+  warning; `npm test --prefix apps/nova-web` PASS. Protocol commit
+  `5fd9aca fix(TASK-0253): deliver live evidence remediation` adds
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-9.md`, opens
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md`, moves the
+  consumed ACTION to answered, releases Codex claims through runtime seq 4129, and leaves TASK-0253 in_review.
+  Protocol gates: encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=4129`.
 - TASK-0253 remediation 2 delivered after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia`. Product commit
   `25e18d1 test: version apply budget evidence harness` versions the missing F-NOVA-01 evidence in
