@@ -8,8 +8,10 @@ Last updated: 2026-07-06 Europe/Madrid, after TASK-0246 in_review flip.
   `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md`. Codex moved TASK-0246
   `in_progress -> in_review` through runtime seq 4246, moved the consumed ACTION to answered, and released
   claims through seq 4251. A malformed first claim scope from a PowerShell JSON array issue was pruned into
-  `CLAIMS_ARCHIVE.json` by Arquitecto maintenance at seq 4253 and then normalized in the archive so the validator
-  remains green. Protocol commit subject: `coord(TASK-0246): flip docs task to review`. No product code changed.
+  `CLAIMS_ARCHIVE.json` by Arquitecto maintenance at seq 4253; Arquitecto then normalized the hot row at
+  seq 4255-4256, and Codex removed the duplicate archived row so the validator remains green. Protocol commits:
+  `db739fc coord(TASK-0246): flip docs task to review` and follow-up `fix(TASK-0246): reconcile claim normalization`.
+  No product code changed.
   Protocol gates passed: `python scripts/validate_collaboration_state.py
   --root .` OK, `python scripts/scan_encoding.py --root .` OK, `python scripts/scan_domain_neutrality.py --root .`
   exit 0, drift false at `up_to_seq=4254`.

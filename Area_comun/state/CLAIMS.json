@@ -42,6 +42,25 @@
             "updated_at": "2026-07-05T23:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-in-review-flip",
+            "expires_at": "2026-07-06T00:22:00Z",
+            "notes": "Correccion Arquitecto (DECISION-0018): scope original de Codex era un solo string concatenado con espacios en vez de array -> invalid row selector en validate. Claim ya estaba released (terminal); se corrige el scope y se libera de nuevo, sin reescribir el evento historico original.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-in-review-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T23:14:26Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-05T23:22:00Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

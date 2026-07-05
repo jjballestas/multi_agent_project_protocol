@@ -25785,19 +25785,6 @@
             "updated_at": "2026-07-05T21:55:51Z"
         },
         {
-            "claim_id": "CLAIM-20260706-Codex-TASK-0246-in-review-flip",
-            "expires_at": "2026-07-06T01:14:26Z",
-            "notes": "Normalized malformed released claim row after PowerShell array serialization issue.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-in-review-flip"
-            ],
-            "started_at": "2026-07-05T23:14:26Z",
-            "status": "released",
-            "task_id": "TASK-0246",
-            "updated_at": "2026-07-05T23:14:26Z"
-        },
-        {
             "claim_id": "CLAIM-20260706-Codex-TASK-0246-in-review-flip-proper",
             "expires_at": "2026-07-06T01:15:13Z",
             "notes": "Proper claim for TASK-0246 in_review flip; includes malformed prior claim row for cleanup.",
