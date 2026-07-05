@@ -11,7 +11,7 @@
                 "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md"
             ],
             "started_at": "2026-07-03T16:03:31Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0246",
             "updated_at": "2026-07-03T16:03:31Z"
         },
@@ -206,6 +206,24 @@
             "status": "released",
             "task_id": "none",
             "updated_at": "2026-07-05T20:28:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-J",
+            "expires_at": "2026-07-05T22:37:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-J",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0254-done-flip-done.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-ausente-3h-cola-sin-idle.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-ausente-3h-cola-sin-idle.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESUMEN-ausente-3h-piso-minimo-cumplido.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESUMEN-ausente-3h-piso-minimo-cumplido.md"
+            ],
+            "started_at": "2026-07-05T20:37:02Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T20:37:02Z"
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-done-flip",
