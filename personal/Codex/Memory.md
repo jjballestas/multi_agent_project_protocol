@@ -15,7 +15,7 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   gate passed with User-scope env loaded into the process: `dotnet test tests/NOVA.IntegrationTests/NOVA.IntegrationTests.csproj --filter ApplyBudgetModificationEvidenceTests`
   PASS 2 tests. Full product gates: `dotnet test NOVA.sln` PASS 41 tests with known NU1903 Microsoft.OpenApi
   warning; `npm test --prefix apps/nova-web` PASS. Protocol commit
-  `5fd9aca fix(TASK-0253): deliver live evidence remediation` adds
+  `ea2d5a1 fix(TASK-0253): deliver live evidence remediation` adds
   `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-9.md`, opens
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md`, moves the
   consumed ACTION to answered, releases Codex claims through runtime seq 4129, and leaves TASK-0253 in_review.
