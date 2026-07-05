@@ -28,6 +28,9 @@
 ### 4. SUPERFICIE DE PERMISOS COMPLETA (la que pre-empte los round-trips) -- rol `budget_sandbox_verifier`
 - [ ] `GRANT EXECUTE` sobre cada proc nuevo/objetivo.
 - [ ] `GRANT SELECT` sobre cada vista que la superficie/paridad lee (incl. la vista de saldo).
+- [ ] `GRANT SELECT` sobre cada TABLA BASE que el proc/harness lee directamente (NO solo vistas) --
+      leccion P4.2: el proc leia `Budget.Budget_Adjustment` (tabla), no cubierta por los SELECT de vistas
+      -> SQL 229. Enumerar las tablas que el proc toca ademas de las vistas.
 - [ ] **`GRANT VIEW DEFINITION`** sobre cada proc cuyo THROW hay que re-verificar (F-NOVA-01 falsabilidad:
       leer `OBJECT_DEFINITION`/`sys.sql_modules`). **Este es el que falto en P4.1.** EXECUTE != VIEW DEFINITION.
 - [ ] **Triggers:** SQL Server NO acepta `GRANT VIEW DEFINITION` directo sobre un trigger DML -> se otorga
