@@ -30,9 +30,10 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [x] GO-eada a Codex (4c78b62) + **fila OPEN capturada** (journal seq 8).
   - [x] Adversarial informal dio NO-GO (4 hallazgos: F-NOVA-01, saldo-por-vista, ProblemDetails generico, UI sin formulario).
   - [x] Codex remedio 3 de 4 (saldo via vw_Initial_Budget_Line_Balance, ProblemDetails especifico, UI editable) -- Nova-Budget commit 00a3f47; dotnet test 35 PASS, npm PASS.
-  - [!] **BLOQUEADA en F-NOVA-01:** la verificacion de PARIDAD en vivo contra DbsFinanciero_SANDBOX **falla por credenciales** (SSPI error; faltan env vars). Codex no puede probar los 8 criterios Given/When/Then ni re-verificar los THROW contra el proc desplegado.
-  - **NECESITA DEL OPERADOR:** `NOVA_BUDGET_PARITY_CONNECTION_STRING` + `NOVA_BUDGET_SANDBOX_RESET_SQL` en el entorno de Codex (login `nova_budget_verifier`), O correr F-NOVA-01 desde un entorno con acceso `budget_sandbox_verifier`.
-  - [ ] Fila CLOSE + tokens / patron congelado -- BLOQUEADOS hasta resolver F-NOVA-01.
+  - [!] **BLOQUEADA en F-NOVA-01** (paridad en vivo). Necesitaba 2 inputs del operador:
+    - [x] **`NOVA_BUDGET_SANDBOX_RESET_SQL`** -> ENTREGADO: `Budget.Reset_Sandbox_Mutator_Baseline` (non-admin, guard DB_NAME, scoped por task_id, restaura a estado previo, cuadre validado RP491+CDP436). Revision Asesor: PASA. Grant 108. Ruteado al Arquitecto (d4570e7).
+    - [ ] **`NOVA_BUDGET_PARITY_CONNECTION_STRING`** (login nova_budget_verifier) en el entorno de Codex -> POR CONFIRMAR (era la otra mitad; el Arquitecto verifica).
+  - [ ] Cuando ambos esten -> desbloquear TASK-0253 -> Codex corre F-NOVA-01 -> CLOSE + tokens + patron congelado.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
   - Pendiente: arranca cuando P4.1 cierre y congele el patron.
