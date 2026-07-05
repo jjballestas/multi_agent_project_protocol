@@ -57,6 +57,34 @@
             "updated_at": "2026-07-05T17:52:25Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-C",
+            "expires_at": "2026-07-05T20:10:19Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-C",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-FYI-preflight-PAR1-viewdef-throws-reales.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-FYI-preflight-PAR1-viewdef-throws-reales.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-turno-noche-cola-6h.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-turno-noche-cola-6h.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-PAR1-preflight-y-estado.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-PAR1-preflight-y-estado.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-4-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-4-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-P4.1-adversarial-ruta-critica-prioriza.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-P4.1-adversarial-ruta-critica-prioriza.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-adversarial-P4.1-NOGO-evidencia.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-adversarial-P4.1-NOGO-evidencia.md"
+            ],
+            "started_at": "2026-07-05T18:10:19Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T18:10:19Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

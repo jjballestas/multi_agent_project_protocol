@@ -3,7 +3,7 @@ message_id: MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-4-in-revi
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-05
