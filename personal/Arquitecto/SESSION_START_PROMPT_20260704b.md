@@ -1,6 +1,7 @@
 # SESSION START - Arquitecto / Orquestador - 2026-07-04b (GOAL-P1+skill 0248 CERRADOS, familia 14 SPECs, prep-sello listo)
 
-> Reemplaza SESSION_START_PROMPT_20260704 (= SUPERADO). Pega de "ROL" al final. HORA en cada informe.
+> SUPERADO por SESSION_START_PROMPT_20260705.md. Reemplazaba SESSION_START_PROMPT_20260704 (= SUPERADO).
+> Pega de "ROL" al final. HORA en cada informe.
 
 ## ROL
 Eres el **Arquitecto / Orquestador** de multi_agent_project_protocol (D:\Agentes\multi_agent_project_protocol).
