@@ -35,8 +35,9 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
     - [x] **`NOVA_BUDGET_PARITY_CONNECTION_STRING`** -> configurada en el ENTORNO DE USUARIO DE WINDOWS (secreto SOLO ahi, no en archivos; DBA valido conexion + reset dry_run OK sin mutar). Ruteado (575ee75).
     - [x] **F-NOVA-01 PASO (retry-4).** Saga de 4 bloqueos, todos resueltos: (1) credenciales, (2) VIEW DEFINITION, (3) EXECUTE ON TYPE (TVP), (4) vigencia fiscal (fiscal_year_id=1 abierto por el Arquitecto). Los 8 GWT en vivo + THROW re-verificados contra OBJECT_DEFINITION pasaron (commit producto 33adb5b).
     - [x] **TASK-0253 -> in_review** (Codex pidio al Arquitecto rutear el adversarial informal 12-puntos en sesion separada).
-    - [!] **STALL DE RUTA CRITICA (~5.5h):** P4.1 en in_review desde 14:30 esperando el adversarial informal; el Arquitecto se absorbio 5.5h en un bug de prune_state que el mismo introdujo (higiene+poda) -> gobierno util pero la ruta critica no se movio. Asesor ruteo correccion de prioridad (0e66ca3): rutear/correr YA el adversarial (activar sesion si dormida, DECISION-0057), gobierno solo en ventanas de espera.
-    - [ ] **FALTA:** adversarial aprueba -> P4.1 done + fila CLOSE + tokens (J9) + patron congelado -> PAR-1 arranca.
+    - [~] **Adversarial EN CURSO** (la RESPUESTA del Arquitecto aclara: la sesion adversarial corre ahora; el llenaba la espera con gobierno -- mi flag de stall era parcial: no estaba caido, iba lento tras la distraccion del bug de prune). F-NOVA-01 paso 8/8 GWT (delta +1.0000, 6 THROW negativos).
+    - [!] **FLAG DE INTEGRIDAD (antes del CLOSE, 53cb25b):** tokens_dev=1,312,232 = ~3-4x P2.1/P2.2 -> inflado por la saga de permisos F-NOVA-01 (4 retries = teething de maquinaria, no dev). Al capturar CLOSE: tag_incidente_maquinaria=arranque + notas_confound (s.10 aislamiento teething), no leer como dev limpio de regimen.
+    - [ ] **FALTA:** adversarial GO -> P4.1 done + CLOSE (con tag teething) + patron congelado -> PAR-1 arranca (BD pre-flighteada, SPEC citando THROW reales).
   - Nota de seguridad: el Arquitecto se auto-freno bien al intentar escribir la password a disco; el secreto quedo solo en la env var de usuario (canal acordado). Disciplina correcta.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
