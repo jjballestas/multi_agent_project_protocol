@@ -9,6 +9,7 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   `CLAIM-20260705-Codex-TASK-0254-done-flip`, moved TASK-0254 `review_approved -> done`
   through runtime seq 4182, marked the consumed ACTION answered, and opened
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0254-done-flip-done.md`.
+  Protocol close commit: `5ad68a9 coord(TASK-0254): close final done flip`.
   No product code changed; accepted product commit remains `02e67d8 feat: add availability adjustment baseline`.
   Gates passed: `dotnet test NOVA.sln` PASS 49 tests with known NU1903 Microsoft.OpenApi warning;
   `npm test --prefix apps/nova-web` PASS; protocol encoding OK, domain-neutrality exit 0, validator OK, drift
