@@ -18638,17 +18638,17 @@
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-answer-status-fix",
-            "expires_at": "2026-07-06T23:59:59Z",
-            "notes": "Fix consumed GO status after move to answered.",
+            "expires_at": "2026-07-06T23:59:59.000Z",
+            "notes": "Fix consumed ACTION answered status after move.",
             "owner": "Codex",
             "scope": [
                 "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-answer-status-fix",
-                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-GO-TASK-0253-P4.1-baseline.md"
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-1.md"
             ],
-            "started_at": "2026-07-05T00:51:47Z",
+            "started_at": "2026-07-05T08:46:01.498Z",
             "status": "released",
             "task_id": "TASK-0253",
-            "updated_at": "2026-07-05T00:51:47Z"
+            "updated_at": "2026-07-05T08:46:01.498Z"
         },
         {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-consume-go",
@@ -18699,6 +18699,46 @@
             "status": "released",
             "task_id": "TASK-0253",
             "updated_at": "2026-07-05T00:42:11Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-1",
+            "expires_at": "2026-07-06T23:59:59.000Z",
+            "notes": "Remediate TASK-0253 adversarial NO-GO findings.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-1.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Application/Budget/AppropriationModifications/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Api/Program.cs",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Infrastructure/Budget/AppropriationModifications/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/src/NOVA.Contracts/Budget/AppropriationModifications/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/apps/nova-web/src/",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget/tests/"
+            ],
+            "started_at": "2026-07-05T08:36:41.915Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T08:36:41.915Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-1-delivery",
+            "expires_at": "2026-07-06T23:59:59.000Z",
+            "notes": "Deliver TASK-0253 remediation artifacts and consume ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-remediation-1-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-1.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-1.md"
+            ],
+            "started_at": "2026-07-05T08:42:40.074Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T08:42:40.074Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

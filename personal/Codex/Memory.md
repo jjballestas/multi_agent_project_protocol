@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 delivery.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 remediation 1 blocked handoff.
 
 ## Latest Session Note
 
+- TASK-0253 remediation 1 code is committed in Nova-Budget:
+  `00a3f47 fix: remediate appropriation modification baseline`. It remediates NO-GO items 2/3/4 and the minor
+  TASK-0251 copy-paste: `/validate` now reads balances through `Budget.vw_Initial_Budget_Line_Balance`, apply
+  results include resulting balances from the same view, documented SQL THROW numbers map to specific
+  ProblemDetails titles/business rules, API/unit tests cover THROW mapping and unbalanced transfer classification,
+  and the UI has operator-editable type/line/amount fields instead of a hardcoded payload. Evidence:
+  `dotnet test NOVA.sln` PASS 35 tests with known NU1903 Microsoft.OpenApi warning; `npm test --prefix
+  apps/nova-web` PASS. F-NOVA-01 live sandbox verification remains blocked, so protocol commit
+  `4788107 fix(TASK-0253): record blocked remediation evidence` moved TASK-0253 to `blocked`, released Codex
+  claims through runtime seq 4040, moved the consumed ACTION to answered, and opened
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-1-in-review.md` with the
+  concrete question for sandbox credentials or verifier execution. Direct evidence attempt:
+  `sqlcmd -S localhost -d DbsFinanciero_SANDBOX -E ...` failed with SSPI credential error, and
+  `NOVA_BUDGET_PARITY_CONNECTION_STRING` / `NOVA_BUDGET_SANDBOX_RESET_SQL` were absent. Protocol gates after
+  commit: encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=4040`. Unrelated
+  protocol dirty paths and Nova-Budget dirty/untracked docs remain untouched.
 - TASK-0253 delivered to `in_review`. Product commit `e328196 feat: add appropriation modification baseline`
   implements P4.1 Apply_Budget_Modification baseline in Nova-Budget: Application validation and gateway contract,
   API `POST /api/budget/appropriation-modifications` plus `/validate`, SQL gateway through
