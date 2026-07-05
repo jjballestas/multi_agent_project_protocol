@@ -33,7 +33,8 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [~] **DESBLOQUEO COMPLETO** (ambos inputs de F-NOVA-01 resueltos):
     - [x] **`NOVA_BUDGET_SANDBOX_RESET_SQL`** -> `Budget.Reset_Sandbox_Mutator_Baseline` (revision Asesor PASA, cuadre validado). Grant 108.
     - [x] **`NOVA_BUDGET_PARITY_CONNECTION_STRING`** -> configurada en el ENTORNO DE USUARIO DE WINDOWS (secreto SOLO ahi, no en archivos; DBA valido conexion + reset dry_run OK sin mutar). Ruteado (575ee75).
-    - [ ] **FALTA (Arquitecto):** relanzar el cron de Codex (los procesos abiertos no recargan env vars) -> desbloquear TASK-0253 (blocked->in_progress) -> F-NOVA-01 corre -> CLOSE + tokens + patron congelado.
+    - [x] **Arquitecto relanzo el cron + desbloqueo:** TASK-0253 blocked -> **in_progress** (el desbloqueo funciono; Codex corriendo F-NOVA-01 en vivo).
+    - [ ] **FALTA:** que F-NOVA-01 pase (8 criterios + THROW) -> P4.1 -> done con CLOSE + tokens (fila J9) + patron ajustes congelado para PAR-1.
   - Nota de seguridad: el Arquitecto se auto-freno bien al intentar escribir la password a disco; el secreto quedo solo en la env var de usuario (canal acordado). Disciplina correcta.
 
 - [ ] **4. Miembro baseline PAR-1 arrancado** (P4.2 o P4.3 segun el sello, <=17-jul)
