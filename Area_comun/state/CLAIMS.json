@@ -679,6 +679,20 @@
             "updated_at": "2026-07-05T22:12:58Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-archive-nul-fyi-20260706",
+            "expires_at": "2026-07-06T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-FYI-nul-junk-file.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-FYI-nul-junk-file.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-nul-fyi-20260706"
+            ],
+            "started_at": "2026-07-05T23:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-05T23:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-ARQ-archive-recordatorio-20260706",
             "expires_at": "2026-07-05T23:53:00Z",
             "owner": "Arquitecto",
