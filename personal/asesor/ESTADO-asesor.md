@@ -50,6 +50,14 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
+**>> 2026-07-05 TURNO DE NOCHE del Arquitecto QUEUED (~6h, operador durmiendo):** rutee
+MSG-...-DIRECTIVA-turno-noche-cola-6h (4787c5b) -- cola ordenada+PRE-DECIDIDA para sesion fresca autonoma:
+(0) cutover+higiene+responde directivas; (1) cierra TASK-0252; (2) gobierno (PAR-2 flip+enmienda, filas P2);
+(3) CICLO COMPLETO P4.1 ruta critica+captura OPEN/CLOSE; (4) miembro baseline PAR-1; (5) extra si sobra
+(superficie PAR-2 detras de P4.1, o TASK-0246). Pre-resueltas: P3.1=diferir, linea roja Q4, blocked-con-pregunta
+sin parar el turno, no inventar trabajo que rompa el sello. CHECK para el operador en personal/asesor/
+CHECK-turno-noche-20260705.md. AL RETOMAR: revisar el resumen *-to-Operador-* del Arquitecto + el CHECK.
+
 **>> 2026-07-05 PAR-2 ASEGURADO (adelantado ~10 dias del 15-jul):** el DBA del Operador cerro la brecha
 B-04/RN-08 en sandbox -- Annul_Availability_Certificate + Annul_Commitment, 10/10 pruebas (guardas THROW
 50293 CDP / 50283 RP, cuadre, idempotencia, rollback, tenant), grant surface 107 (17 EXEC + 90 SELECT). Yo
