@@ -3,7 +3,7 @@ message_id: MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-promueve-hallazgos-5-1
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-05

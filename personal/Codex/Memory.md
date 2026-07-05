@@ -1,9 +1,25 @@
 # Codex Memory
 
-Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 blocked handoff.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocked handoff.
 
 ## Latest Session Note
 
+- TASK-0253 F-NOVA-01 retry-3 remains blocked after ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3`. The prior TVP permission blocker is
+  resolved: live SQL context reaches `DbsFinanciero_SANDBOX` as `nova_budget_verifier`,
+  `IS_ROLEMEMBER('budget_sandbox_verifier')=1`, `HAS_PERMS_BY_NAME('Budget.Budget_Modification_Line_List','TYPE','EXECUTE')=1`,
+  `TYPE_ID=260`, and `DECLARE @tvp Budget.Budget_Modification_Line_List` succeeds. THROW visibility was rechecked:
+  50230-50243 plus 50212 are visible; 50065 remains not visible in the proc/visible trigger scan. Product commit
+  `33adb5b fix: align appropriation SQL gateway with deployed proc` fixes the deployed-proc contract mismatch found
+  during retry: gateway now sends TVP values `addition/reduction/credit/counter_credit` for public codes 01/02/03/04
+  and reads result columns `budget_adjustment_id/adjustment_code/movement_type_code/regime`. Gates:
+  `dotnet test NOVA.sln` PASS 39 tests with known NU1903 Microsoft.OpenApi warning; `npm test --prefix apps/nova-web`
+  PASS. First live mutation run is blocked because `Budget.Apply_Budget_Modification` returns 50231 for
+  `fiscal_year_id=1` (`fiscal_year=2026`), the only fiscal year visible through
+  `Budget.vw_Initial_Budget_Line_Balance`; DBA/operator must provide or reopen a sealed open fiscal year before the
+  8 GWT mutation criteria can run. Handoff/message:
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-6.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md`.
 - TASK-0253 F-NOVA-01 retry-2 remains blocked after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-2`. VIEW DEFINITION is now visible:
   `DbsFinanciero_SANDBOX`, `role_member=1`, `view_def=1`, `exec_perm=1`, `proc_len=9412`. Exact THROW set found in

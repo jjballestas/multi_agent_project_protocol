@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Analista-RESPUESTA-hallazgo-auth-registra
 from: Arquitecto
 to: Analista
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-05
 context_refs:

@@ -18450,6 +18450,58 @@
             "updated_at": "2026-07-05T10:08:16Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-A",
+            "expires_at": "2026-07-05T13:57:50Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-A",
+                "Area_comun/mailbox/open/MSG-20260705-Analista-to-Arquitecto-REVIEW-hallazgo-auth-endpoints-DD01.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Analista-to-Arquitecto-REVIEW-hallazgo-auth-endpoints-DD01.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Analista-ACTION-hallazgo-auth-endpoints-DD01.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Analista-ACTION-hallazgo-auth-endpoints-DD01.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Analista-RESPUESTA-hallazgo-auth-registrado.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Analista-RESPUESTA-hallazgo-auth-registrado.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-reset-env-hallazgos.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Arquitecto-to-Operador-RESPUESTA-reset-env-hallazgos.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-blocked.md"
+            ],
+            "started_at": "2026-07-05T11:57:50Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T11:57:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-B",
+            "expires_at": "2026-07-05T13:59:33Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-B",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-2-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-2-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-env-listas-relanza-codex-desbloquea-P4.1.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-env-listas-relanza-codex-desbloquea-P4.1.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-FYI-reset-sandbox-entregado-desbloquea-F-NOVA-01.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-FYI-reset-sandbox-entregado-desbloquea-F-NOVA-01.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-FYI-triage-otros-3-hallazgos-7-8-9.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-FYI-triage-otros-3-hallazgos-7-8-9.md",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-promueve-hallazgos-5-1-seguridad-DD01.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-promueve-hallazgos-5-1-seguridad-DD01.md"
+            ],
+            "started_at": "2026-07-05T11:59:33Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T11:59:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Arquitecto-mailbox-hygiene-1",
             "expires_at": "2026-07-05T02:36:18Z",
             "owner": "Arquitecto",
@@ -18809,6 +18861,44 @@
             "updated_at": "2026-07-05T10:15:51Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-fnova01-retry3",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "Repair malformed retry-3 claim scope, then release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-6.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget"
+            ],
+            "started_at": "2026-07-05T12:08:01Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T12:08:01Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-fnova01-retry3b",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "F-NOVA-01 retry 3 live sandbox verification and delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry3b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-6.md",
+                "D:/Agentes/Zeus/NOVA/Nova-Budget"
+            ],
+            "started_at": "2026-07-05T11:53:15Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T11:53:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-producthash-fix",
             "expires_at": "2026-07-06T23:59:59.000Z",
             "notes": "Correct TASK-0253 product commit hash after product trailer amend.",
@@ -18863,6 +18953,62 @@
             "status": "released",
             "task_id": "TASK-0253",
             "updated_at": "2026-07-05T08:42:40.074Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-retry3-cleanup",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "Cleanup TASK-0253 retry-3 blocked status and malformed claim.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-retry3-cleanup",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md"
+            ],
+            "started_at": "2026-07-05T12:04:09Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T12:04:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-retry3-delivery",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "Deliver TASK-0253 retry-3 blocked evidence and consume ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-retry3-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry3",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry3b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-6.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-3-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "Area_comun/mailbox/answered/MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry-3.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T12:01:12Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T12:01:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-retry3-status-block",
+            "expires_at": "2026-07-06T23:59:59Z",
+            "notes": "Set TASK-0253 retry-3 blocked status after fiscal-year blocker.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-retry3-status-block",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md"
+            ],
+            "started_at": "2026-07-05T12:06:13Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T12:06:13Z"
         },
         {
             "claim_id": "CLAIM-FRONT-FILE-EXTRACT-1F5C13A7B5",

@@ -3,7 +3,7 @@ message_id: MSG-20260705-Arquitecto-to-Analista-ACTION-hallazgo-auth-endpoints-D
 from: Arquitecto
 to: Analista
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-05
