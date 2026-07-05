@@ -648,4 +648,29 @@ round-trips de permisos (todos los permisos de lectura estan concedidos).
 
 ---
 
+## 25. ENMIENDA FECHADA 2026-07-06T00:24Z (Arquitecto) - PAR-2 BASELINE CERRADA (TASK-0255 done), grant de s.24 confirmado suficiente
+
+**No reabre el sello; cierra el loop de gobernanza que dejo abierto s.24.** TASK-0255 (PAR-2 baseline,
+`Annul_Availability_Certificate`) paso el ciclo completo: build de Codex -> checker adversarial informal
+independiente (GO limpio, 0 hallazgos bloqueantes, verificado contra codigo fuente real: guard de
+procedencia SQL real, aislamiento PAR-2 via `LayeringTests.cs`, los 9 THROW mapeados en `Program.cs`,
+8 GWT de mutacion versionados en `AnnulAvailabilityCertificateEvidenceTests.cs`, gates dotnet/npm PASS,
+UI real) -> Arquitecto ratifico `in_review -> review_approved` (submit_intent seq 4218-4220, drift 0) ->
+Codex ejecuto el done-flip (`review_approved -> done`).
+
+**El grant de s.24 (VIEW DEFINITION x6 + SELECT x13, ambos miembros pre-flighteados de una sola vez) se
+confirma SUFICIENTE en retrospectiva:** F-NOVA-01 de TASK-0255 corrio los 8 GWT de mutacion en vivo
+contra `DbsFinanciero_SANDBOX` SIN ningun round-trip adicional de permisos -- cero bloqueos SQL 229
+durante todo el ciclo de build+evidencia. Confirma la leccion de preflight AMPLIADO (aplicada desde
+P4.1/P4.2) como patron que se sostiene: pre-conceder sobre el codigo real de los procs, no permiso-por-
+permiso en vivo, elimina la saga de bloqueos vista en P4.1.
+
+**PAR-2 BASELINE queda formalmente cerrada.** `Annul_Commitment` (miembro GOBERNADO) queda diferido a
+Sprint 1 bajo gobierno completo, mismo patron congelado (guard de procedencia, aislamiento de par, mapeo
+THROW especifico, evidencia versionada, UI real) mas la superficie de auth que introduce el brazo
+gobernado (converge con el item #8/auth y #7 del backlog de seguridad, disenado como PREP de Sprint 1,
+NO como parche retroactivo a esta unidad baseline ya cerrada y medida).
+
+---
+
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
