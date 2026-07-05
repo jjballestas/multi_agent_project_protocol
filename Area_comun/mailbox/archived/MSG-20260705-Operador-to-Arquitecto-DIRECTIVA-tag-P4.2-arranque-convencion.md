@@ -3,7 +3,7 @@ message_id: MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-tag-P4.2-arranque-conv
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-05
 context_refs:

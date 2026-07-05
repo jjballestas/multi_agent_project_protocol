@@ -595,6 +595,33 @@ otorgo `GRANT SELECT ON OBJECT::[Budget].[Budget_Adjustment] TO [budget_sandbox_
 cadena_sgr) -> `apply_availability_rollback_smoke_ok`, cero residuos (el primer intento cayo en THROW
 50261 por regla de negocio del contracredito, no por permisos -- confirma que el SQL 229 quedo resuelto).
 
+## 23. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - Sorteo del miembro BASELINE de PAR-2 (Annul_Availability_Certificate vs Annul_Commitment)
+
+**Cierra un hueco identico al de PAR-1 (s.21), mismo tipo de gap.** PAR-2 = {Annul_Availability_Certificate,
+Annul_Commitment} (par CONDICIONAL->CONFIRMADO, s.13) tampoco especificaba cual miembro es BASELINE vs
+GOBERNADO. Aplicando la leccion de s.21 (no repetir el error de probar strings hasta que uno convenza):
+esta vez se uso DIRECTAMENTE el nombre REAL del objeto SQL (`Annul_Availability_Certificate` /
+`Annul_Commitment`, identificadores que existen en la BD desde ANTES de cualquier sorteo, el string mas
+primitivo posible, sin intervencion discrecional del Arquitecto) -- mismo algoritmo s.6.1, misma semilla
+(`outputValue` del pulso NIST 1844242).
+
+**Computo:**
+
+| tarea_id (nombre real del proc SQL) | h (SHA-256 completo) | h[0] | paridad |
+|---|---|---|---|
+| `Annul_Availability_Certificate` | `4490c32396c3c18edcf3573a23a6f2c38f9d808953ed988d3e6175e30eefcbb8` | `0x44` (68) | par |
+| `Annul_Commitment` | `d84b3d032f186a1a89bf00c12871f2c1c6e14a4cf5be65fef23d7e4f112d13c9` | `0xd8` (216) | par |
+
+**EMPATE** (ambos h[0] pares) -- a diferencia de PAR-1, este string SI produjo un resultado limpio en el
+sentido de no-discrecional, pero coincidio en paridad para ambos miembros, requiriendo una regla de
+desempate. El Operador, viendo el empate YA COMPUTADO, fijo la regla: **orden alfabetico del string
+completo, el PRIMERO alfabeticamente gana la asignacion BASELINE** (`Annul_Availability_Certificate` <
+`Annul_Commitment`, comparacion lexicografica estandar).
+
+**RESULTADO: Annul_Availability_Certificate es el miembro BASELINE de PAR-2** (dev medido, superficie C#
+sobre el proc de hardening ya construido y verificado por el DBA). `Annul_Commitment` queda como el
+miembro GOBERNADO de PAR-2, para su brazo en Sprint 1 (post-30-jul).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).

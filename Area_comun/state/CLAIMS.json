@@ -226,6 +226,20 @@
             "updated_at": "2026-07-05T20:37:02Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-hygiene-K",
+            "expires_at": "2026-07-05T23:35:11Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-hygiene-K",
+                "Area_comun/mailbox/open/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-tag-P4.2-arranque-convencion.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Operador-to-Arquitecto-DIRECTIVA-tag-P4.2-arranque-convencion.md"
+            ],
+            "started_at": "2026-07-05T21:35:11Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T21:35:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-done-flip",
             "expires_at": "2026-07-05T20:47:22Z",
             "notes": "Final implementer done flip after checker review_approved.",
