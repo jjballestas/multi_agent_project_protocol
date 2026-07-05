@@ -50,7 +50,14 @@ cut -d, -f1-6 personal/Arquitecto/TFM-medicion/corpus/medicion/medicion_journal.
   - [x] **Tag = arranque CONFIRMADO** por operador (2661d76): pre-30-jul = arranque, no regimen (sello s.10). Convencion establecida para todas las unidades pre-30-jul. Correccion de fila seq 11 ruteada.
 
 ## >> PISO MINIMO DEL 30-JUL: CUMPLIDO (P1 + miembro baseline PAR-1 en done). STOP-total resuelto.
-## >> SIGUIENTE: PAR-2 baseline surface (Annul_*; pre-flight ampliado con SELECT de tablas base). Luego ventana baseline ~completa -> prep Sprint 1 (F3.2 Etapa 2 + SPECs gobernado/Q4).
+## >> PAR-2 baseline surface EN CURSO (TASK-0255, Annul_Availability_Certificate, M, estimate baseline):
+- [x] Sorteo resuelto (s.23): Annul_Availability_Certificate=baseline (empate resuelto alfabetico; isomorfos M/M -> inofensivo). GO-eada, OPEN J13.
+- [x] **Pre-flight de BD HECHO Y COMPLETO** por el DBA (ambos miembros, adelantado): VIEW DEFINITION 2 Annul + 4 reverso; SELECT 13 tablas base (reviso codigo, todo de una); sin TVP/triggers; smoke real (CDP30/RP87 rollback, procedencia OK). NO repite la saga de P4.1.
+- [x] **CORRECCION falsabilidad (b8f3855):** el OBJECT_DEFINITION revela set THROW REAL mas rico (Availability=50100,50280-50287 = 9, no los 3 del smoke). Rutee: SPEC-NOVA-P4-005 cita el set completo + registra enmienda grant + F-NOVA-01 procede.
+- [ ] FALTA: build -> adversarial (guard procedencia) -> F-NOVA-01 (sin saga) -> CLOSE tag=arranque.
+- PENDIENTE operador (no bloquea): refinamientos s.23 (linea isomorfos + procedencia desempate).
+
+## >> Luego: ventana baseline ~completa -> prep Sprint 1 (F3.2 Etapa 2 + SPECs gobernado/Q4).
 
 - [ ] **5. (Si sobro tiempo) Extra**
   - Superficie baseline PAR-2 (sobre los `Annul_*`) O avance de `TASK-0246`. Aun no.
