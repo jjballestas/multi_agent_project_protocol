@@ -73,6 +73,12 @@
             "title": "[VISION-NOVA] P4.1 Apply_Budget_Modification (baseline pattern-setter, dev medido)"
         },
         {
+            "id": "TASK-0254",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[VISION-NOVA] P4.2 Apply_Availability_Adjustment (miembro baseline PAR-1, dev medido)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",
