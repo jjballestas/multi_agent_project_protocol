@@ -50,6 +50,15 @@ retencion-vs-publicacion; C3 sobredeclara anonimato vs seudonimo re-identificabl
 (A1 falta clausula no-evaluacion-desempeno = sesgo observador; A2 base legal RGPD empleado presumido no-libre;
 A3 sin procesadores/transferencia internacional) + medios/bajos. NO edite el docx (operador revisa primero).
 Brief legal mio en personal/asesor/BRIEF-revision-legal-consentimiento.md (d6b50c8).
+**>> CIERRE SESION 2026-07-06 (Asesor reinicia por contexto lleno). Arranca con PROMPT-INICIO-ASESOR.md v6.**
+VENTANA BASELINE ~COMPLETA (todas las unidades medidas done: GOAL-P1/P2.1/P2.2/P4.1/P4.2/PAR-2), PISO MINIMO
+30-JUL CUMPLIDO. Fase actual = PREP SPRINT 1 (Arquitecto escribe SPECs gobernado/Q4 + F3.2, NO construir;
+directiva b5cecc8). Enmienda grant PAR-2 s.25 hecha, SPEC-NOVA-P4-006 escrita. Recordatorio HTML ruteado al
+Arquitecto (pipeline-vision-nova.html). EVIDENCIA-VIVA-metodologia.md con A1-A7 (alimentar cada sesion,
+directiva operador). PENDIENTES OPERADOR: refinamientos s.23 (isomorfos+procedencia) + cadencia atestacion
+journal. BLOQUE PROXIMA SESION: coordinar prep Sprint 1 (no-idle) + mantener pipeline + recordar HTMLs +
+alimentar EVIDENCIA-VIVA. Monitor previo: b0ui9enn0 (re-armar). Ver PROMPT v6 para el detalle.
+
 **>> ESTADO ACTUAL 2026-07-06 (leer primero; ambas sesiones -Asesor y Arquitecto- reinician por contexto):**
 Dev medido baseline avanzando: GOAL-P1 + P2.1 + P2.2 + **P4.1 (done, arranque, 2M tokens teething)** +
 **P4.2/PAR-1 baseline (done, LIMPIO 431k)** cerrados. **PISO MINIMO DEL 30-JUL CUMPLIDO** (P1 + miembro
