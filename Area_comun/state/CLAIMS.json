@@ -18716,6 +18716,24 @@
             "updated_at": "2026-07-05T00:42:11Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Codex-TASK-0253-fnova01-retry",
+            "expires_at": "2026-07-06T00:00:00Z",
+            "notes": "F-NOVA-01 retry evidence and blocker response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Codex-TASK-0253-fnova01-retry",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-3.md",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-blocked.md"
+            ],
+            "started_at": "2026-07-05T10:15:51Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T10:15:51Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0253-remediation-1",
             "expires_at": "2026-07-06T23:59:59.000Z",
             "notes": "Remediate TASK-0253 adversarial NO-GO findings.",

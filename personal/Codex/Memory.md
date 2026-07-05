@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 remediation 1 blocked handoff.
+Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry blocked handoff.
 
 ## Latest Session Note
 
+- TASK-0253 F-NOVA-01 retry remains blocked after Arquitecto ACTION
+  `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-F-NOVA-01-retry`. The two env vars are present in Windows
+  User environment but not inherited in the Codex process; Codex loaded User-scope values for commands without
+  printing secrets. Live DB context reaches `DbsFinanciero_SANDBOX` and `IS_ROLEMEMBER('budget_sandbox_verifier')`
+  returns 1, but `HAS_PERMS_BY_NAME('Budget.Apply_Budget_Modification','OBJECT','VIEW DEFINITION')` returns 0,
+  `OBJECT_DEFINITION` length is NULL, and THROW probes cannot be falsified. Product commit
+  `6cb9016 fix: harden live parity reset harness` fixes the live reset harness by binding `@taskId='TASK-0253'`
+  and makes the NA env test deterministic by clearing/restoring process env vars. Evidence: `dotnet test NOVA.sln`
+  PASS 35 tests with known NU1903 Microsoft.OpenApi warning; `npm test --prefix apps/nova-web` PASS; protocol drift
+  false at `up_to_seq=4046`. Protocol handoff/message:
+  `Area_comun/handoffs/HANDOFF-TASK-0253-codex-to-arquitecto-3.md` and
+  `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-F-NOVA-01-retry-blocked.md`. TASK-0253 is
+  `blocked`; Codex retry claim is released. CLOSE measurement was not captured because P4.1 did not close.
 - TASK-0253 remediation 1 code is committed in Nova-Budget:
   `00a3f47 fix: remediate appropriation modification baseline`. It remediates NO-GO items 2/3/4 and the minor
   TASK-0251 copy-paste: `/validate` now reads balances through `Budget.vw_Initial_Budget_Line_Balance`, apply

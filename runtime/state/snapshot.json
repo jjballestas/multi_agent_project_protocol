@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cf3862c36088a82291201b4f3cfe4363832bd9f53355c067934e2342ffcef1f0",
+  "canonical_hash": "317b6ed966629c821c2729d0e43bd7ea242304e911860a425b80c55a5d4a599e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -532,6 +532,7 @@
       "CLAIM-20260705-Arquitecto-mailbox-hygiene-3": 1,
       "CLAIM-20260705-Codex-TASK-0252-done-flip": 1,
       "CLAIM-20260705-Codex-TASK-0252-done-flip-mailbox": 1,
+      "CLAIM-20260705-Codex-TASK-0253-fnova01-retry": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1339,7 +1340,7 @@
       "TASK-0250": 20,
       "TASK-0251": 28,
       "TASK-0252": 25,
-      "TASK-0253": 23,
+      "TASK-0253": 25,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1347,7 +1348,7 @@
       "protocol-prune": 1,
       "protocol-state": 1
     },
-    "events_applied": 3372,
+    "events_applied": 3375,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -1422,6 +1423,9 @@
       "TASK-0245-remediation-1-in-review-20260704": 3797,
       "TASK-0245-remediation-1-release-20260704": 3798,
       "TASK-0252-remediation-review-2026-07-05T00:18:26.930Z": 3990,
+      "TASK-0253-fnova01-retry-blocked-status": 4045,
+      "TASK-0253-fnova01-retry-claim": 4044,
+      "TASK-0253-fnova01-retry-claim-release": 4046,
       "analista-task0203-claim-acquire-v2": 2311,
       "analista-task0203-claim-release": 2312,
       "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
@@ -4723,5 +4727,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4043
+  "up_to_seq": 4046
 }
