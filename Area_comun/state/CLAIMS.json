@@ -18481,6 +18481,20 @@
             "updated_at": "2026-07-05T00:39:09Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-mailbox-hygiene-3",
+            "expires_at": "2026-07-05T02:41:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-mailbox-hygiene-3",
+                "Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0252-remediation-1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260705-Codex-to-Arquitecto-TASK-0252-remediation-1-in-review.md"
+            ],
+            "started_at": "2026-07-05T00:41:02Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-05T00:41:02Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Codex-TASK-0252-answer-go",
             "expires_at": "2026-07-05T00:33:38Z",
             "notes": "Move consumed TASK-0252 GO to answered after delivery is ledger-backed.",
