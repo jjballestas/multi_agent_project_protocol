@@ -522,6 +522,24 @@ test-infra fuera del estudio medido). Validado por el DBA con `nova_budget_verif
 con TVP real sobre 2 lineas activas, dentro de transaccion con `ROLLBACK`, cero residuo. Vigencia 2027 sigue
 `open` pero SIN lineas de saldo -- no sirve para F-NOVA-01, se usa 2026.
 
+## 20. ENMIENDA FECHADA 2026-07-05T~14:30Z (Arquitecto) - PAR-1 pre-flighteado (VIEW DEFINITION x4 + THROW reales)
+
+**No reabre el sello; test-infra, pre-emptivo (P4.2/P4.3 aun no arrancan).** El DBA otorgo, adelantandose
+al mismo bloqueo que sufrio P4.1: `GRANT VIEW DEFINITION` sobre `Apply_Availability_Adjustment` +
+`Apply_Commitment_Adjustment` + sus tablas padre de trigger (`Availability_Certificate_Line_Adjustment`,
+`Commitment_Line_Adjustment`) a `budget_sandbox_verifier`. Validado (`OBJECT_DEFINITION` visible, 8072/6468
+chars). **THROW REALES enumerados (para citar en las SPEC de PAR-1, NO un rango documentado sin
+verificar):**
+- `Apply_Availability_Adjustment`: 50250-50258, 50260, 50261 (**50259 AUSENTE** -- set no contiguo,
+  confirma la tesis de falsabilidad F-NOVA-01, precedente F-0246-02).
+- `Apply_Commitment_Adjustment`: 50250-50258, 50262, 50263.
+- `trg_availability_line_adjustment__validate`: 50083, 50084.
+- `trg_commitment_line_adjustment__validate`: 50099, 50100.
+
+El `EXECUTE ON TYPE::[Budget].[Chain_Adjustment_Line_List]` ya estaba pre-emptido (s.17). Frontera: pre-flight
+de hardening/test-infra; la superficie C# medida de PAR-1 se construye al GO, DESPUES de cerrar P4.1
+(ruta critica) y con su patron congelado.
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
