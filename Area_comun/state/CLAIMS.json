@@ -18435,6 +18435,21 @@
             "updated_at": "2026-07-05T00:19:51Z"
         },
         {
+            "claim_id": "CLAIM-20260705-Arquitecto-TASK-0253-unblock",
+            "expires_at": "2026-07-05T12:08:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260705-Arquitecto-TASK-0253-unblock",
+                "Area_comun/state/TASK_INDEX.json#TASK-0253",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0253",
+                "Area_comun/tasks/TASK-0253-p4.1-apply-budget-modification-baseline.md"
+            ],
+            "started_at": "2026-07-05T10:08:16Z",
+            "status": "released",
+            "task_id": "TASK-0253",
+            "updated_at": "2026-07-05T10:08:16Z"
+        },
+        {
             "claim_id": "CLAIM-20260705-Arquitecto-mailbox-hygiene-1",
             "expires_at": "2026-07-05T02:36:18Z",
             "owner": "Arquitecto",
