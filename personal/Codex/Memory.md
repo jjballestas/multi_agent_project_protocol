@@ -20,6 +20,8 @@ Last updated: 2026-07-05 Europe/Madrid, after TASK-0253 F-NOVA-01 retry-3 blocke
   `Area_comun/mailbox/open/MSG-20260705-Codex-to-Arquitecto-TASK-0253-remediation-3-in-review.md`, moves the
   consumed ACTION to answered, releases Codex claims through runtime seq 4129, and leaves TASK-0253 in_review.
   Protocol gates: encoding OK, domain-neutrality exit 0, validator OK, drift false at `up_to_seq=4129`.
+  Follow-up protocol commit `4313e7e chore(TASK-0253): align delivery references` updates the handoff and memory
+  references from the amended delivery hash to `ea2d5a1`.
 - TASK-0253 remediation 2 delivered after ACTION
   `MSG-20260705-Arquitecto-to-Codex-ACTION-TASK-0253-remediacion-2-evidencia`. Product commit
   `25e18d1 test: version apply budget evidence harness` versions the missing F-NOVA-01 evidence in
