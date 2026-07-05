@@ -54,7 +54,8 @@
   operan bajo el supuesto temporal DD-01 "usuario autenticado con rol presupuesto", SIN wiring real de
   auth -- gap registrado como hallazgo formal, dueno Analista, NO parcheado retroactivamente en el
   baseline porque alteraria artefactos ya medidos), este miembro GOBERNADO **SI incluye el wiring real de
-  autenticacion/autorizacion** como parte de su contrato (ver s.6 restriccion (h) y s.7 criterio 9). Esto
+  autenticacion/autorizacion** como parte de su contrato (ver s.6 restriccion (h) y s.7 criterio 6,
+  corregido F-0246-P4006-01: referencia previa a criterio 9 era erronea). Esto
   es DISENO/PREP ahora (esta SPEC se escribe, no se construye); la CONSTRUCCION del wiring ocurre cuando
   esta unidad se promueva en Sprint 1 (post-30-jul), igual que el resto del contrato. El patron de
   autorizacion aqui establecido (rol + [Authorize]/RequireAuthorization real, no solo supuesto documentado)

@@ -42,7 +42,7 @@
   modelo" y RES-012 (reportes regulatorios) declara "catalogos listos, generadores por construir" -- no
   finge cobertura que no tiene.
 
-## 3. Mapeo RES -> SPEC (contra `Area_comun/specs/nova/`, 12 SPECs existentes al momento de este informe)
+## 3. Mapeo RES -> SPEC (contra `Area_comun/specs/nova/`, 17 SPECs existentes al momento de este informe -- corregido F-0246-INF-01, conteo anterior de 12 era erroneo)
 
 | RES | Cobertura | Estado |
 |---|---|---|
@@ -59,7 +59,7 @@
 | RES-010 (PAC/ingresos) | ninguna | **gap, ya declarado "brecha de modelo" por el paquete** |
 | RES-011 (Ejecucion/consultas/libros) | P2-001 + P2-004 (listados) | parcial: libros oficiales sin SPEC |
 | RES-012 (Reportes regulatorios) | ninguna | **gap, ya declarado "por construir" por el paquete** |
-| transversal | P6-003 (OpenTelemetry) + F3.3 (instrumentacion) | requisitos de arquitectura, no de RES especifico |
+| transversal | P6-003 (OpenTelemetry) + F3.3 (instrumentacion) + P2-003 (shell de exploracion UI) | requisitos de arquitectura/UI, no de RES especifico |
 
 **Nota de alcance (no una omision):** los gaps de RES-006-anulacion/RES-007/RES-008-cascada/RES-009/RES-010/
 RES-011-libros/RES-012 caen FUERA del alcance acotado de TASK-0246 (`Alcance acotado`: miembros gobernados
