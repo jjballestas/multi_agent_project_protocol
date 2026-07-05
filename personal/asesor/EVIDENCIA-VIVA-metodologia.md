@@ -73,7 +73,22 @@ Aportes destacables ya demostrados, pero la prueba dura viene con la ventana med
 "La capa gobernada atrapo, de forma reproducible, evidencia falseada y sets de error incompletos que un
 proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo." (Con trazas atestadas.)
 
+### A7. La gobernanza atestada SOBREVIVIO al reinicio de una sesion de agente (contexto lleno), CERO perdida
+- **Fenomeno:** el Arquitecto agoto su contexto y REINICIO en sesion fresca a mitad de una unidad
+  (PAR-2/TASK-0255, in_review). La sesion fresca retomo y cerro la unidad sin perder estado.
+- **Evidencia:** la sesion vieja corrio guarda-estado (SESSION_START_PROMPT_2026-07-06) y Codex entrego la
+  evidencia final; la sesion FRESCA hizo cold-start (leyo mailbox + estado + CHECK del Asesor) y cerro PAR-2
+  APLICANDO los pendientes que estaban en el canal: THROW set completo de 9 (correccion b8f3855) + tag=
+  arranque (convencion). CLOSE seq 14: done, 0 reworks, GO 1a pasada. Nada se re-derivo ni se perdio.
+- **Por que importa:** demuestra que **la MEMORIA del trabajo es la gobernanza (mailbox + estado atestado +
+  CHECK), no el contexto del agente**. Un agente que se queda sin contexto y REVIVE no pierde el hilo. Es
+  la propiedad de robustez/transferibilidad que sostiene el objetivo employee-ready (peones/agentes que
+  reviven). Continuidad tambien sostenida por el Asesor (CHECK vivo + monitor) en paralelo.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
   tasks TASK-0250/0253/0254/0255, sello s.13/s.21/s.23, commits b8f3855 y anteriores.
+- **2026-07-06 (Asesor):** +A7 (reinicio del Arquitecto por contexto lleno -> sesion fresca cerro PAR-2
+  sin perder estado; CLOSE seq 14, tag=arranque, THROW 9-codigos aplicado, 0 reworks). PAR-2 done ->
+  ventana baseline ~completa.
