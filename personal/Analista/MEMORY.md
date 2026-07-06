@@ -7,6 +7,22 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
 
+## Ultima actualizacion 2026-07-06 - Hallazgo #14 tenant-isolation CONFIRMADO
+- Hallazgo #14 quality-data Q2 confirmado y registrado por Analista en commit `003f813`
+  (`review(hallazgo14): Analista confirms tenant isolation finding`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-hallazgo14-tenant-isolation-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-hallazgo14-tenant-isolation-CONFIRMADO.md`.
+- Ancla protocolo revisada `aa38f18ff01fdd678350d59d2a3dc7bf729096ee`; producto Nova-Budget en clon limpio
+  `edbc037be8ce8297fbf308f611eef8c84aeccbf0`. Resultado: `SqlAvailabilityAdjustmentGateway.GetBalancesAsync`
+  y las lecturas de `SqlAvailabilityCertificateAnnulmentGateway` setean `SESSION_CONTEXT('tenant_id')` pero no
+  filtran tenant; no hay evidencia versionada de RLS/vista que consuma `SESSION_CONTEXT`. SPEC-P4-006 6l/criterio
+  13 cubre el fix-forward correcto.
+- Gates: validate vivo EXIT 0; validate sin secretos en clon limpio EXIT 0; domain EXIT 0; encoding EXIT 0;
+  drift 0 `up_to_seq=4351`; `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; `dotnet test NOVA.sln --no-restore`
+  EXIT 0. Residual declarado: `npm test` raiz en producto EXIT `-4058` por ausencia de `package.json`, tratado
+  como residual de gate transversal porque la ACTION canonica dice SIN PRODUCTO EN ALCANCE.
+
 ## Ultima actualizacion 2026-07-06 - TASK-0246 informe/SPEC P4-006 NO-GO registrado
 - TASK-0246 review documental del informe adversarial + SPEC-NOVA-P4-006: primera pasada hallo dos slips
   falsables: F-0246-INF-01 (informe decia 12 SPECs, inventario canonico 17) y F-0246-P4006-01 (P4-006
