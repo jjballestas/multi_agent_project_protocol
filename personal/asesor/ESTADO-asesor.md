@@ -142,6 +142,11 @@ Anthropic (Foco B del brief); supervision etica para apoyar Cons.33. NO edite el
 - CORTAFUEGOS: ordenes [DIRECTIVA]/[RECOMENDACION]; PRE-DECISION jamas se referencia; DECISIONes =
   requisitos no verbatim; snapshot compartido = solo hechos.
 - PROACTIVIDAD SIN PREGUNTAR: preparo el siguiente entregable de cada gate; solo orden contraria frena.
+- **AUTORIZACION 2026-07-06 (terminar-el-trabajo):** el operador me autoriza a ASIGNAR tareas al Arquitecto
+  para llevar el trabajo (Aegis/REQs/Contabilidad) a termino -- no solo preparar/rutear, sino asignar sin
+  pedir permiso cada vez. Asigno para mantener el flujo; escalo al operador SOLO lo suyo (dominio/sello/riesgo
+  real) o los double-NO-GO pactados. Los guardrails no cambian (estudio medido en calendario sellado; core
+  pineado intocable; Sprint 1 prioridad dura desde 30-jul).
 - LECCION CLAVE (validada esta sesion): mis revisiones son DESIGN + STUDY-INTEGRITY, NO sustituyen la
   VERIFICACION EMPIRICA contra la BD desplegada (no tengo readonly aqui; el Analista si). El gate formal
   cazo 2 bugs de falsabilidad que mi revision informal dejo pasar -> es la TESIS DEL ESTUDIO en vivo
