@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline Asesor - Cierre baseline -> Sprint 1</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#17212b; --card2:#1d2a36; --line:#2a3b4a;
+    --ink:#e7eef5; --mut:#93a4b3; --accent:#5eb0ef;
+    --done:#1f9d61; --done-b:#2fd089;
+    --wip:#c9922b; --wip-b:#f0b74a;
+    --todo:#5a6b79; --todo-b:#8fa2b1;
+    --attn:#d1622f; --attn-b:#f5894f;
+    --seal:#8256c8; --seal-b:#b18cf0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px}
+  .wrap{max-width:1080px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:20px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--mut);font-size:13px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;
+    letter-spacing:.3px;white-space:nowrap;border:1px solid transparent}
+  .p-done{background:rgba(47,208,137,.14);color:var(--done-b);border-color:rgba(47,208,137,.35)}
+  .p-wip{background:rgba(240,183,74,.14);color:var(--wip-b);border-color:rgba(240,183,74,.35)}
+  .p-todo{background:rgba(143,162,177,.12);color:var(--todo-b);border-color:rgba(143,162,177,.3)}
+  .p-attn{background:rgba(245,137,79,.14);color:var(--attn-b);border-color:rgba(245,137,79,.4)}
+  .p-seal{background:rgba(177,140,240,.14);color:var(--seal-b);border-color:rgba(177,140,240,.4)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin-bottom:16px}
+  h2{font-size:15px;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--card2);color:var(--accent);border:1px solid var(--line);
+    border-radius:8px;padding:1px 8px;font-size:12px}
+  .note{color:var(--mut);font-size:12.5px;margin:-4px 0 12px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+  tr:last-child td{border-bottom:none}
+  td.k{color:var(--mut);white-space:nowrap;font-variant-numeric:tabular-nums}
+  code{background:var(--card2);border:1px solid var(--line);border-radius:5px;
+    padding:1px 5px;font-size:12px;color:#cfe3f5}
+  .st{width:1%;white-space:nowrap}
+  .hi{color:var(--ink);font-weight:600}
+  .foot{color:var(--mut);font-size:12px;margin-top:8px}
+  .bar{height:6px;border-radius:4px;background:var(--card2);overflow:hidden;margin:2px 0 14px}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--done),var(--done-b))}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Pipeline del Asesor &mdash; Cierre ventana baseline &rarr; Sprint 1</h1>
+  <div class="sub">Tracker de coordinacion (Vision Nova). Complementa el panel HTML del operador
+    (lo mantiene el Arquitecto). Fuente de fechas: SELLO-ETAPA-1 (s.3/s.4/s.10/s.11.1).
+    &middot; Ultima actualizacion: <b>2026-07-06 04:38</b> (local, UTC+2).</div>
+  <div class="legend">
+    <span class="pill p-done">DONE</span> hecho/verificado
+    <span class="pill p-wip">WIP</span> en curso
+    <span class="pill p-todo">TODO</span> pendiente
+    <span class="pill p-attn">ATENCION</span> decision/riesgo
+    <span class="pill p-seal">SELLADO</span> pre-registro, no tocar
+  </div>
+</header>
+
+<section>
+  <h2><span class="n">1</span> Calendario sellado <span class="pill p-done">baseline al dia</span></h2>
+  <div class="bar"><i style="width:62%"></i></div>
+  <table>
+    <tr><th class="k">Fecha</th><th>Evento</th><th class="st">Estado</th></tr>
+    <tr><td class="k">&le;08-jul</td><td>Sello Etapa 1 (sorteo + sha256) &mdash; <code>DECISION-0091</code> #4 seq 3831</td><td><span class="pill p-done">DONE</span> adelantado 04-jul</td></tr>
+    <tr><td class="k">&le;14-jul</td><td>Sandbox mutadores + GRANT EXECUTE</td><td><span class="pill p-done">DONE</span> 04-jul (df34ec3)</td></tr>
+    <tr><td class="k">&le;15-jul</td><td>PAR-2 confirma o cae</td><td><span class="pill p-done">DONE</span> CONFIRMADO 05-jul</td></tr>
+    <tr><td class="k">&le;17-jul</td><td>Miembro <span class="hi">BASELINE</span> de PAR-1 (P4.2/P4.3 por sorteo)</td><td><span class="pill p-done">DONE</span> P4.2 (TASK-0254)</td></tr>
+    <tr><td class="k">25-jul</td><td>Cierre <span class="hi">DURO</span> ventana baseline (no se extiende)</td><td><span class="pill p-wip">WIP</span> dev completo; falta sellado</td></tr>
+    <tr><td class="k">26-29-jul</td><td>Reconciliacion post-ventana (Analista read-only)</td><td><span class="pill p-todo">TODO</span> prep turnkey lista</td></tr>
+    <tr><td class="k">29-jul</td><td>Sello Etapa 2</td><td><span class="pill p-todo">TODO</span> bloqueado: reconciliacion + DEC P3.x</td></tr>
+    <tr><td class="k">30-jul</td><td>Abre <span class="hi">Sprint 1 gobernado</span> (gate duro; fin linea roja Q4)</td><td><span class="pill p-seal">SELLADO</span> piso minimo cumplido</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">2</span> Ventana baseline: DEV COMPLETO <span class="pill p-done">6/6</span></h2>
+  <div class="note">Las 6 unidades baseline de s.3.2, done y con evento en el journal (seq 1-14). Piso minimo viable CUMPLIDO.</div>
+  <table>
+    <tr><th>Unidad</th><th class="k">tarea</th><th>Rol</th><th class="st">Estado</th></tr>
+    <tr><td>GOAL-P1 (fundacion)</td><td class="k">GOAL-P1</td><td>excluida del contraste</td><td><span class="pill p-done">DONE</span> sha256 d2a13216</td></tr>
+    <tr><td>P2.1 read model parametros</td><td class="k">TASK-0250</td><td>fuera de contraste</td><td><span class="pill p-done">DONE</span></td></tr>
+    <tr><td>P2.2 reporte ejecucion</td><td class="k">TASK-0251</td><td>baseline ANCLADO PAR-D</td><td><span class="pill p-done">DONE</span></td></tr>
+    <tr><td>P4.1 Apply_Budget_Modification</td><td class="k">TASK-0253</td><td>pattern-setter (congela patron)</td><td><span class="pill p-done">DONE</span> teething 2M</td></tr>
+    <tr><td>PAR-1 = P4.2 Apply_Availability_Adjustment</td><td class="k">TASK-0254</td><td>miembro baseline</td><td><span class="pill p-done">DONE</span> limpio 431k</td></tr>
+    <tr><td>PAR-2 = Annul_Availability_Certificate</td><td class="k">TASK-0255</td><td>superficie API</td><td><span class="pill p-done">DONE</span> GO 0 bloqueantes</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Cierre DURO ventana baseline (25-jul) <span class="pill p-wip">integridad</span></h2>
+  <div class="note">El dev esta completo; el cierre es de SELLADO/integridad. Dueno: Arquitecto/Analista; el Asesor verifica.</div>
+  <table>
+    <tr><th class="k">#</th><th>Tarea</th><th class="st">Estado</th></tr>
+    <tr><td class="k">3.1</td><td>Resolver <code>token=NA</code> P2.1/P2.2 (err.log volatil) vs real</td><td><span class="pill p-done">DONE</span> corregido (d3b8ad6)</td></tr>
+    <tr><td class="k">3.2</td><td>Cadencia de atestacion del journal (per-unidad vs checkpoint)</td><td><span class="pill p-wip">WIP</span> recomendacion hibrida ruteada; hashlog creado</td></tr>
+    <tr><td class="k">3.3</td><td>Registrar quality-data #10 + #11/#12/#13 sin reabrir unidades</td><td><span class="pill p-wip">WIP</span> #11-13 horneados en P4-006; esperan Analista</td></tr>
+    <tr><td class="k">3.4</td><td>Aislamiento de teething (tag=arranque; incidentes -> OVERHEAD-FIJO)</td><td><span class="pill p-done">DONE</span></td></tr>
+    <tr><td class="k">3.5</td><td>Nada baseline a medio vuelo pasado 25-jul (no se extiende)</td><td><span class="pill p-done">DONE</span></td></tr>
+    <tr><td class="k">3.6</td><td>Prep reconciliacion 26-29 (commit/rama -> tarea_id)</td><td><span class="pill p-done">DONE</span> turnkey (ad6a389)</td></tr>
+    <tr><td class="k">3.7</td><td>Patron P4.1 congelado (lo heredan solo los gobernados)</td><td><span class="pill p-done">DONE</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">4</span> Coordinacion en vuelo</h2>
+  <table>
+    <tr><th>Item</th><th class="st">Estado</th></tr>
+    <tr><td>Senal DECISION-0018 #11/#12/#13 (huecos QA de TASK-0255)</td><td><span class="pill p-done">DONE</span> confirmados + horneados en P4-006 (6i/6j/6k)</td></tr>
+    <tr><td>Hallazgo #10 (50212 etiquetado cruzado)</td><td><span class="pill p-wip">WIP</span> registrado (a2657d5); Analista verifica</td></tr>
+    <tr><td>Cadencia de atestacion (recomendacion hibrida)</td><td><span class="pill p-wip">WIP</span> ruteada al Arquitecto</td></tr>
+    <tr><td>Adopcion 4R (gentle-ai) &mdash; debate APROBADO</td><td><span class="pill p-done">DONE</span> DECISION-0092 (9ca131b); A ahora / B a Sprint 1</td></tr>
+    <tr><td>REVIEW_CONTRACT.md + CARVE_OUTS.md (DECISION-0092 A)</td><td><span class="pill p-done">DONE</span> materializados (f25bf39)</td></tr>
+    <tr><td>Cola PREP Sprint 1 (ronda 2)</td><td><span class="pill p-wip">WIP</span> items 1+3 hechos; item 2 (hardening SPECs) en curso</td></tr>
+    <tr><td>TASK-0246 (informe adversarial NOVA-DEV)</td><td><span class="pill p-done">DONE</span> remediacion OK + done-flip</td></tr>
+    <tr><td>EVIDENCIA-VIVA metodologia (A1-A9)</td><td><span class="pill p-wip">WIP</span> alimentada cada sesion</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">5</span> Gate Sprint 1 gobernado (30-jul) <span class="pill p-seal">SELLADO</span></h2>
+  <div class="note">Miembros gobernados (P4.3, Annul_Commitment, PAR-D Get_*_List, familia P3, pool Q4) = post-30-jul (s.3.3).
+    NO se construyen antes (rompe el pre-registro). Unico permitido pre-30-jul: ESCRIBIR SPECs.</div>
+  <table>
+    <tr><th>Prep permitida pre-30-jul</th><th class="st">Estado</th></tr>
+    <tr><td>SPEC-NOVA-P4-006 (Annul_Commitment gobernado, auth real)</td><td><span class="pill p-done">DONE</span> (9bd3587)</td></tr>
+    <tr><td>Resto de SPECs Sprint 1 (P4.3 / P3.x / pool Q4 / BR-C3)</td><td><span class="pill p-done">DONE</span> escritas + hardening en curso</td></tr>
+    <tr><td>SPEC mecanismos diferidos DECISION-0092 B (lenses_required + profile Nova)</td><td><span class="pill p-done">DONE</span> (c40f870)</td></tr>
+    <tr><td>Sello Etapa 2 (draft F3.2)</td><td><span class="pill p-todo">TODO</span> bloqueado: reconciliacion + DEC P3.x</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">6</span> Pendientes del operador <span class="pill p-attn">tu decision</span></h2>
+  <table>
+    <tr><th>Item</th><th class="st">Estado</th></tr>
+    <tr><td>Cadencia de atestacion del journal (hibrido: hashlog per-unidad + anclaje #4 per-checkpoint)</td><td><span class="pill p-wip">WIP</span> ruteada (95d3e54); esperando respuesta Arquitecto</td></tr>
+    <tr><td>Refinamientos s.23 (nota de isomorfos, blindaje del desempate)</td><td><span class="pill p-done">DONE</span> aplicada por Arquitecto a s.21/s.23 (df6b4c9)</td></tr>
+    <tr><td>Alcance del MVP H6 (proveniencia DSSE/in-toto/Rekor) &mdash; rail de publicacion</td><td><span class="pill p-attn">ATENCION</span> pendiente de tu juicio (DECISION-0092 B.14)</td></tr>
+    <tr><td>DEC de dominio P3.x (desbloquea sello Etapa 2)</td><td><span class="pill p-attn">ATENCION</span> paquete preparado por el Arquitecto (52e52ed), a tu decision</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">7</span> Track paralelo Aegis <span class="pill p-wip">nuevo</span></h2>
+  <div class="note">Directiva operador e749c0a (06-30 jul). Aprovecha la ventana SIN romper el sello: lo MEDIDO se queda
+    en el hub; la gobernanza NUEVA de la suite Nova nace en la instancia Aegis (<code>D:/Agentes/Zeus/NOVA/Aegis</code>);
+    core pineado del hub intocable. Prioridad DURA desde 30-jul: Sprint 1 &gt; Contabilidad &gt; REQs (SLA sello).</div>
+  <table>
+    <tr><th class="k">#</th><th>Item</th><th class="st">Estado</th></tr>
+    <tr><td class="k">7.1</td><td>Corte gobernanza hub-&gt;Aegis: complemento formal DECISION-0088 + <span class="hi">verificar 3 firmantes</span> + e2e humo + <span class="hi">cross-atestacion dual cableada</span></td><td><span class="pill p-wip">WIP</span> firmantes AUTORIZADO por operador</td></tr>
+    <tr><td class="k">7.2</td><td>Cola 4 REQs (Aegis/Zeus-Aegis): anti-vibecoding -&gt; intake -&gt; memoria-hibrida (<span class="hi">supersede DECISION-0071</span>); aprendizajes-externos absorbidos con cita</td><td><span class="pill p-wip">WIP</span> paso 2 AUTORIZADO por operador</td></tr>
+    <tr><td class="k">7.3</td><td>Analisis migracion Contabilidad (Ingenas ~57 forms / ~34 tablas): mapa-&gt;casos, Access-&gt;SQL <code>Accounting</code>, S/M/L; insumo corpus Etapa 2</td><td><span class="pill p-todo">TODO</span> arranca de inmediato, desde Aegis</td></tr>
+    <tr><td class="k">7.4</td><td>Peones/tokens = contraste PRE-REGISTRADO de Etapa 2 sobre Contabilidad; triggers por <span class="hi">COMPLETITUD certificada</span> (no fecha); memoria-hibrida como tratamiento</td><td><span class="pill p-seal">SELLADO</span> diseno Etapa 2, NO Sprint 1</td></tr>
+    <tr><td class="k">7.5</td><td>Declaracion de trabajo paralelo en el reporte Etapa 1 (confound <span class="hi">arm-ORTOGONAL</span>, de fondo, no oculto)</td><td><span class="pill p-todo">TODO</span> blindaje de honestidad</td></tr>
+  </table>
+  <div class="foot">Refinamientos del Asesor (arm-ortogonalidad del confound, formalizar complemento 0088, cablear
+    cross-atestacion dual, sellar trigger-por-completitud) &mdash; entregados al Arquitecto por el operador
+    directamente. Recordatorio ruteado: al reiniciar sesion, el Arquitecto actualiza el HTML del operador con este track.</div>
+</section>
+
+<div class="foot">Nota A &mdash; correccion de calendario: "17-jul = miembros gobernados" era ERROR; el sello dice
+  17-jul = miembro BASELINE de PAR-1 (cumplido); los gobernados son Sprint 1, post-30-jul. Corregido aqui y en ESTADO-asesor.md.</div>
+</div>
+</body>
+</html>
