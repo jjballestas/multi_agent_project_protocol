@@ -199,6 +199,21 @@ Un contrato de mutacion atomico (anulacion) + su preparacion, simetrico a P4-005
     que ya cubre a `Apply_Budget_Modification`/`Apply_Availability_Adjustment`. Si el nombre del proc
     mutador se exhibe como texto descriptivo en la UI (p.ej. etiqueta de auditoria), es una EXCEPCION
     EXPLICITA que se documenta y se excluye puntualmente del test, nunca una omision silenciosa de la lista.
+  - (l) **AISLAMIENTO DE TENANT EN LECTURAS DE GATEWAY (fix-forward de hallazgo #14, seguridad ALTA;
+    verificado en codigo real):** toda query de LECTURA de un gateway (saldos, preview, conteos) DEBE
+    aislar por tenant de forma DEMOSTRABLE: o (i) filtra explicitamente `WHERE tenant_id = @tenant_id` (u
+    equivalente por celda), o (ii) la vista/RLS que consulta consume `SESSION_CONTEXT('tenant_id')`
+    verificado contra `OBJECT_DEFINITION` de la vista + existencia de `SECURITY POLICY`. NO basta con
+    `sp_set_session_context('tenant_id')` ANTES de la query si el objeto leido no lo consume -- ese es el
+    defecto exacto cazado en el baseline: `SqlAvailabilityAdjustmentGateway.GetBalancesAsync`
+    (`...:94-98`, `WHERE availability_certificate_line_id IN (...)` sin tenant) y las lecturas de
+    `SqlAvailabilityCertificateAnnulmentGateway` (`:137-142`, `:157-163`), sobre `vw_Commitment_
+    Availability_Validation`, que en las fuentes de referencia NO expone `tenant_id` ni consume
+    SESSION_CONTEXT y NO tiene RLS. Consecuencia del defecto (agravada por #5/auth): saldos enumerables
+    cross-tenant por IDs de linea. Como la vista no expone `tenant_id`, el fix NO es solo un WHERE: exige
+    cambiar la vista/camino de lectura o cablear RLS -- se decide con el DBA. La unidad GOBERNADA lo cablea
+    desde el inicio; NO se parchea retroactivo al baseline medido. Replica anotada a SPEC-NOVA-P4-003 y
+    SPEC-NOVA-P4-004 (la familia de ajustes consume la misma vista).
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; +un negativo por THROW ALCANZABLE, re-verificado)
 > F-NOVA-01: cada negativo cita el THROW conocido o recien confirmado contra `OBJECT_DEFINITION`; el
@@ -234,6 +249,11 @@ Un contrato de mutacion atomico (anulacion) + su preparacion, simetrico a P4-005
 12. **Dado** el test de arquitectura de aislamiento del frontend, **entonces** incluye `Annul_Commitment`
     en su lista de literales prohibidos; si el nombre se exhibe como texto descriptivo en la UI, es una
     excepcion explicita documentada, no una omision (fix-forward hallazgo #13).
+13. **Dado** dos tenants A y B con datos, **cuando** un llamador del tenant A consulta saldos/preview de
+    lineas del tenant B por sus IDs, **entonces** el gateway NO devuelve datos de B (query filtra tenant
+    o la vista/RLS lo enforcea, verificado contra `OBJECT_DEFINITION`) -- harness con caso NEGATIVO
+    cross-tenant explicito; una lectura que solo hace `sp_set_session_context` pero consulta un objeto que
+    no lo consume FALLA este criterio (fix-forward hallazgo #14, seguridad).
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo de la solicitud de anulacion; traduccion THROW->ProblemDetails; enforcement de que la
