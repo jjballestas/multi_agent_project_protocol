@@ -323,6 +323,23 @@
             "updated_at": "2026-07-06T21:58:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-response",
+            "expires_at": "2026-07-07T23:59:00Z",
+            "notes": "Hub response and memory for Aegis TASK-1203 done-flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1203-doneflip-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1203.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1203.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T22:51:00Z",
+            "status": "released",
+            "task_id": "TASK-1203",
+            "updated_at": "2026-07-06T22:51:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-hub-fixloop-response",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Hub response and memory for TASK-1203 fix-loop 1 delivery.",

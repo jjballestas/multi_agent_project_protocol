@@ -1,9 +1,18 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1203 fix-loop 1.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1203 done-flip.
 
 ## Latest Session Note
 
+- TASK-1203 done-flip executed after Arquitecto ACTION
+  `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1203.md`. In Aegis, commit
+  `139b6ccb coord(TASK-1203): close memdb done flip` moves TASK-1203 `review_approved -> done` through
+  runtime seq 3582 and releases Codex claims through seq 3588; commit `c03ce401 chore(TASK-1203): record
+  doneflip memory` records the Aegis golden memory update and releases the memory claim through seq 3590.
+  A malformed first doneflip claim scope from a PowerShell JSON array issue was normalized and released
+  in-ledger before commit. Aegis gates passed: validator OK, encoding OK, domain-neutrality exit 0, drift
+  false at `up_to_seq=3590`. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md`.
 - TASK-1203 fix-loop 1 delivered in Aegis after hub ACTION
   `MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11.md`. Aegis commit
   `ecc9d5d0 fix(TASK-1203): remediate memdb review findings` fixes case-insensitive `MEMORY*.md` memory
