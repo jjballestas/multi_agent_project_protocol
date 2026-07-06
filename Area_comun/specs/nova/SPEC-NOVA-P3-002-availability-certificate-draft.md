@@ -69,6 +69,17 @@ por operacion via BR-C4 CONFIRMADA post-Sprint-1. La numeracion la asigna la BD;
   - (e) Solo rubros auxiliares de gasto; vigencia abierta; catalogos validos (THROW 50210/50211/50212, 50066-50068).
   - (f) Numeracion por serie de la BD dentro de la transaccion; la UI no propone/reserva numero. Vigencia explicita.
   - (g) Toda mutacion: correlation id + usuario real + THROW traducido a ProblemDetails.
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Approve_Availability_Certificate_Draft` por fallback encadenado de
+    nombres ni caer en un DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna
+    se confirma contra `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO
+    antes de escribir el gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (ready/emitir/
+    discard) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO).
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend incluye `Approve_Availability_Certificate_Draft` en su lista de literales prohibidos.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un borrador ready_to_approve con lineas cuyo solicitado por rubro-fuente <= disponible, **cuando** emito, **entonces** `Approve_Availability_Certificate_Draft` inserta la cabecera 'G' con numero de serie asignado (P/G segun regimen), agrupa lineas por rubro-fuente-BPIN, marca el borrador `approved` y persiste `amount_in_words`.
@@ -79,12 +90,18 @@ por operacion via BR-C4 CONFIRMADA post-Sprint-1. La numeracion la asigna la BD;
 6. **Dado** un CDP con BPIN cuyo acumulado excederia el valor asignado del proyecto, **cuando** intento emitir, **entonces** el caso de uso lo rechaza validando `vw_Investment_Project_Detail_Balance` (B-02; 400 ProblemDetails) -- criterio que la BD hoy NO cubre y la aplicacion SI debe cubrir.
 7. **Dado** la previsualizacion, **entonces** `vw_Availability_Certificate_Draft_Line_Validation` marca `appropriation_balance_is_valid` por linea con los MISMOS numeros que el 50150 (paridad preview vs emision).
 8. **Dado** el disponible mostrado en UI, **entonces** proviene de `vw_Commitment_Availability_Validation` (no de la vista con committed=0) -- verificable comparando contra el saldo real con compromisos.
+9. **Dado** una cabecera o linea con catalogo de estado/tipo/uso invalido, **cuando** la capturo,
+   **entonces** THROW **50066-50068** (segun el catalogo violado).
+10. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+    confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso.
+11. **Dado** los endpoints mutadores (ready/emitir/discard), **entonces** cada uno tiene al menos un test
+    de integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo DTO->parametros del proc; maquina de estados draft/ready/approved/discarded; enforcement RN-07 (BPIN obligatorio) y B-02 (saldo BPIN) en el caso de uso; traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable.
 - **Integracion vs DbsFinanciero:** criterio 1 (emision happy: numero de serie + agrupacion), un caso por THROW (50150, 50146/50147/50145, 50210/50211, 50076), criterio 6 (rechazo BPIN via vista), criterio 7 (paridad preview vs 50150), criterio 8 (disponible real vs vista committed=0). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
-- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 5=paridad de numeros, 9=fuera de alcance respetado -- que NO intente anular ni tocar 08/09) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
+- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 5=paridad de numeros, 9=fuera de alcance respetado -- que NO intente anular ni tocar 08/09) + guard de procedencia + criterio 10 (lectura de columnas) + criterio 11 (test HTTP de integracion) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |

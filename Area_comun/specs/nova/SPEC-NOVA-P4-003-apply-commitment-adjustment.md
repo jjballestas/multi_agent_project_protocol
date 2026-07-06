@@ -107,6 +107,21 @@ Un contrato de mutacion atomico + su preparacion:
   - (f) Numeracion solo por `Allocate_Document_Number`; DTOs 1:1; THROW->ProblemDetails (RE-VERIFICADO); correlation
     id + task_id + usuario real.
   - (g) **AISLAMIENTO PAR-1:** NO tocar/leer los tipos 08/09 (CDP, P4.2) ni su implementacion.
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Apply_Commitment_Adjustment` por fallback encadenado de nombres ni caer
+    en un DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna se confirma
+    contra `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO antes de
+    escribir el gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura que el gateway de
+    produccion.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (preview + ajuste)
+    tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO inyectado)
+    que ejercita ruta -> endpoint -> mapeo de comando -> gateway.
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend DEBE incluir `Apply_Commitment_Adjustment` en su lista de literales prohibidos, igual que ya
+    cubre a `Apply_Budget_Modification`. Exhibicion como texto descriptivo en UI = excepcion explicita
+    documentada, nunca omision silenciosa.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; +un negativo por THROW ALCANZABLE, re-verificado)
 > F-NOVA-01: cada negativo cita el THROW documentado; el maker CONFIRMA el codigo exacto contra OBJECT_DEFINITION
@@ -124,19 +139,33 @@ Un contrato de mutacion atomico + su preparacion:
    lineas existentes).
 8. **Dado** cualquier acto, **entonces** el saldo se lee de la vista (formula RP netea obligado), NO recalculado en
    C#; NO toca los tipos 08/09 (aislamiento PAR-1, verificable en el diff).
+9. **Dado** una linea del ajuste con rubro-fuente-BPIN NO existente en el compromiso o inactiva/de otra
+   vigencia, **cuando** intento aprobar, **entonces** THROW **50252-50255** (segun el chequeo puntual,
+   RE-VERIFICAR contra `OBJECT_DEFINITION`).
+10. **Dado** un `adjustment_code` override duplicado en la vigencia, **cuando** aplico, **entonces**
+    THROW **50258**.
+11. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+    confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso; el harness
+    F-NOVA-01 ejercita el MISMO camino de lectura.
+12. **Dado** los endpoints de preview y ajuste, **entonces** cada uno tiene al menos un test de
+    integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo lineas -> Chain TVP; homogeneidad -> ProblemDetails; traduccion THROW; numeracion-solo-proc; que
   la previsualizacion use las vistas de saldo del RP + CDP padre.
 - **Architecture tests:** Api no accede SQL directo; React sin SQL; Mcp sin SQL; cero DataTable; **test de
-  aislamiento: ningun proyecto de esta unidad referencia los tipos/procs de CDP (08/09)**.
+  aislamiento: ningun proyecto de esta unidad referencia los tipos/procs de CDP (08/09)**; **test de
+  aislamiento del frontend: la lista de literales prohibidos incluye `Apply_Commitment_Adjustment`
+  (criterio 10)**.
 - **Integracion vs DbsFinanciero (EN SANDBOX; EXECUTE via GRANT o TRAN/ROLLBACK):** criterio 1 (11 happy + baja del
-  CDP padre), un caso por THROW ALCANZABLE (50262, 50263, 50256, 50250/51/50212, 50257) RE-VERIFICADO, criterio 3
-  (floor compromiso-obligado), criterio 8 (saldo por vista). **PRECONDICION: READY (sandbox sellado; ver SANDBOX-MUTADORES-mecanismo-sellado.md).**
+  CDP padre), un caso por THROW ALCANZABLE (50250-50258, 50262, 50263) RE-VERIFICADO (criterios 2-6,9,10),
+  criterio 3 (floor compromiso-obligado), criterio 8 (saldo por vista), **criterio 11 (lectura de columnas
+  confirmada, sin adivinanza)**, **criterio 12 (test HTTP de integracion con gateway falso por endpoint)**.
+  **PRECONDICION: READY (sandbox sellado; ver SANDBOX-MUTADORES-mecanismo-sellado.md).**
 - **Gate final:** APROBADO del adversarial informal en SESION SEPARADA (baseline) [+ checker FORMAL del Analista si
   el sorteo la asigna al gobernado] + arch tests + CI + **F-NOVA-01: cada THROW verificado contra el proc
-  desplegado** + verificacion de AISLAMIENTO (manifiesto: no se leyo el hermano) + DoD con evidencia real + gates
-  del hub verdes + atestacion sha256.
+  desplegado** + guard de procedencia (evidencia SQL real, sin mock) + verificacion de AISLAMIENTO (manifiesto:
+  no se leyo el hermano) + DoD con evidencia real + gates del hub verdes + atestacion sha256.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |
@@ -145,6 +174,7 @@ Un contrato de mutacion atomico + su preparacion:
 | Recalcular el saldo del RP (que netea obligado) en C# | Divergencia con la BD | Restriccion 6a/6d: leer `vw_Commitment_Line_Balance` |
 | Implementar los tipos 08/09 del hermano | CONTAMINACION intra-par PAR-1 | Restriccion 6g + architecture test de aislamiento; manifiesto |
 | Sandbox no disponible al abrir el dev MEDIDO | Criterios de mutacion un-runnable | Mecanismo sellado READY desde 2026-07-04; si se degradara, DIFERIR |
+| Repetir los huecos de calidad hallados en el hermano baseline PAR-2 (quality-data #11/#12/#13, DECISION-0018 2026-07-06): lectura de columnas por adivinanza+default silencioso, cero test HTTP de integracion, omision del proc en la lista de aislamiento del frontend | Mismo patron de gaps no cazados por el GO informal, esta vez en un miembro gobernado | Restricciones 6i/6j/6k + criterios 11/12 (fix-forward explicito, hereda P4-006) |
 | No verificar el tope del 11 contra el saldo del CDP padre | Compromiso sobre CDP inexistente | Restriccion 6c: 50262 contra `vw_Commitment_Availability_Validation` |
 | adversarial en la misma sesion del maker | Contaminacion (tokens no separables) | DoR: adversarial en SESION SEPARADA |
 

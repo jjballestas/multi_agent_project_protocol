@@ -14,6 +14,11 @@
 - **measurement (DIRECTIVA operador medicion-real 2026-07-04):** cache-confound -> ambos brazos MISMO runtime/tipo de sesion (cache comparable) o declarar el confound; captura de tokens = err.log (stderr); desglose por cubeta no capturable -> tokens_total_atribuibles. checker_formal=0 en el brazo baseline.
 - db_verified_at: la SPEC cita objetos verificados en NOVA-PRES-02 (BD DbsFinanciero readonly 2026-07-03); el maker RE-VERIFICA contra la BD desplegada al construir (OBJECT_DEFINITION/sys.objects) -- ver F-NOVA-01
 - throw_source (verificado OBJECT_DEFINITION + PRES-02 s.4): **PROC-DIRECTO** `Approve_Initial_Budget_Draft` = 50270-50278 (cuadre por fuente = 50277) [confirmado en OBJECT_DEFINITION por el Analista]. **TRIGGER/CHECK durante la transaccion** (NO en la def directa del proc; fuente = triggers de Initial_Budget/_Draft(_Line) per PRES-02 s.4): 50054 (catalogo doc soporte), 50057/50059 (vigencia), 50058/50062 (solo auxiliares), 50060/50061 (naturaleza ingreso/gasto). Estos disparan durante la captura/insert, no desde el Approve_*.
+- **NOTA F-NOVA-01 (mapeo incompleto, hardening pass 2026-07-06):** de los 9 codigos del rango
+  PROC-DIRECTO 50270-50278 solo 50277 (cuadre) esta mapeado a una regla de negocio verificable con
+  criterio de aceptacion propio. El maker DEBE mapear/RE-CONFIRMAR el resto (50270-50276, 50278) contra
+  `OBJECT_DEFINITION` antes de fijar los criterios finales; si algun codigo resulta inalcanzable desde
+  el flujo de esta SPEC, declararlo explicitamente (no dejarlo huerfano).
 - attestation: sha256 de esta SPEC atestado via intent del hub en el gate del estudio
 - stack (obligatorio, F-NOVA-03): React+TS+Vite (front sin SQL) / ASP.NET Core .NET 10 en capas NOVA.Api/Application/Domain/Infrastructure/Contracts + NOVA.Mcp / SQL Server 2025 via SPs con gateways tipados (EF Core/Dapper) / OpenTelemetry / errores de negocio = ProblemDetails. Anti-patrones PROHIBIDOS: WebForms/PageMethods, DataTable entre capas, DLLs manuales/HintPath, capa DATABASE generica, secretos en .config, centinelas -99.
 
@@ -76,6 +81,21 @@ policy por operacion via BR-C4 CONFIRMADA post-Sprint-1.
   - (e) Bloqueo income/expense por naturaleza del rubro viene de la BD (THROW 50060/50061), no del teclado; solo rubros auxiliares (THROW 50058/50062).
   - (f) Vigencia SIEMPRE explicita en la UI (F-NOVA-05: is_current apunta a 2026 cerrada).
   - (g) Toda mutacion: correlation id + usuario real (no usuario tecnico compartido) + THROW traducido a ProblemDetails (codigo + mensaje de negocio + campo culpable si se conoce).
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Approve_Initial_Budget_Draft` por fallback encadenado de nombres ni caer
+    en un DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna se confirma
+    contra `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO antes de
+    escribir el gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura que el gateway de
+    produccion.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (ready/approve/
+    discard) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO
+    inyectado) que ejercita ruta -> endpoint -> mapeo de comando -> gateway.
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend (crear si no existe aun para la familia P3) incluye `Approve_Initial_Budget_Draft` en su
+    lista de literales prohibidos. Exhibicion como texto descriptivo en UI = excepcion explicita
+    documentada, nunca omision silenciosa.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un borrador con Sigma ingresos = Sigma gastos por CADA fuente, **cuando** apruebo, **entonces** `Approve_Initial_Budget_Draft` materializa las lineas en `Initial_Budget_Line`, marca el borrador `approved` y sella usuario/fecha; el conteo de lineas definitivas = lineas activas del borrador (RN-06/RN-07; ref NOVA-PRES-02 s.3.3: borrador 2026 cuadra $54.697.000.000 ingreso = gasto).
@@ -87,12 +107,17 @@ policy por operacion via BR-C4 CONFIRMADA post-Sprint-1.
 7. **Dado** un borrador ya `approved`, **cuando** intento editar `approved_amount`, **entonces** se rechaza (inmutabilidad RN-07; todo cambio posterior es ajuste via Doc 03).
 8. **Dado** un segundo borrador editable activo para la misma cabecera, **cuando** lo creo, **entonces** violacion del indice unico filtrado (RN-02).
 9. **Dado** cualquier lectura de apropiacion vigente, **entonces** el valor coincide con `vw_Initial_Budget_Line_Balance` (formula 6 efectos), sin recalculo en C# (muestreo automatizado, tolerancia 0.01).
+10. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+    confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso; el harness
+    F-NOVA-01 ejercita el MISMO camino de lectura.
+11. **Dado** los endpoints mutadores (ready/approve/discard), **entonces** cada uno tiene al menos un test
+    de integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit (Domain/Application):** mapeo DTO->parametros del proc; maquina de estados draft/ready_to_approve/approved/discarded (transiciones validas e invalidas); traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain no depende de Infrastructure; Application no depende de ASP.NET; Api/Mcp sin SQL directo; cero DataTable en contratos.
 - **Integracion contra DbsFinanciero (BD real):** criterio 1 (aprobacion happy: cuadre por fuente -> materializa), y un caso por THROW alcanzable (50277, 50060/50061, 50058/50062, 50057/50059, 50054); criterio 9 (paridad de apropiacion vista vs endpoint). Nota EXECUTE: el conector readonly no ejecuta procs (Msg 229) -> el gate de paridad exige GRANT EXECUTE al rol de verificacion o SELECT a la `fn_*`/vista equivalente, documentado.
-- **Gate final:** veredicto APROBADO del Analista (checklist 12 puntos, enfasis en 2=reimplementacion prohibida, 3=DML directo, 4=cobertura THROW, 5=paridad) + DoD de NOVA-GOAL-001 con evidencia real (tests, OpenAPI, sin SQL desde React/MCP, docs curadas) + verde de los gates del hub (validate/encoding/neutralidad) sobre la SPEC + atestacion sha256.
+- **Gate final:** veredicto APROBADO del Analista (checklist 12 puntos, enfasis en 2=reimplementacion prohibida, 3=DML directo, 4=cobertura THROW, 5=paridad) + guard de procedencia (evidencia SQL real, sin mock) + criterio 10 (lectura de columnas confirmada) + criterio 11 (test HTTP de integracion) + DoD de NOVA-GOAL-001 con evidencia real (tests, OpenAPI, sin SQL desde React/MCP, docs curadas) + verde de los gates del hub (validate/encoding/neutralidad) sobre la SPEC + atestacion sha256.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |

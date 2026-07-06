@@ -75,6 +75,23 @@ preparacion/simulacion vive en la aplicacion; aplicar es atomico (el acto se apl
   - (e) Numeracion por serie de la BD dentro de la transaccion; la UI no propone numero. Saldos siempre por vista (nunca acumuladores). Vigencia explicita.
   - (f) NO borrador compartido: el acto se aplica completo o falla completo (atomicidad del proc; corrige el hallazgo legacy de inserciones a medias).
   - (g) Toda mutacion: correlation id + usuario real + THROW del proc (50250-50253, 50255, 50257, 50258, 50264, 50265) traducido a ProblemDetails con mensaje de negocio.
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Apply_Obligation_Adjustment` por fallback encadenado de nombres ni caer en
+    un DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna se confirma contra
+    `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO antes de escribir el
+    gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura que el gateway de produccion.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (preview +
+    reintegro) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO
+    inyectado) que ejercita ruta -> endpoint -> mapeo de comando -> gateway.
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend DEBE incluir `Apply_Obligation_Adjustment` en su lista de literales prohibidos. Exhibicion
+    como texto descriptivo en UI = excepcion explicita documentada, nunca omision silenciosa.
+  - **NOTA DE CONVERGENCIA (post-P4-006):** esta unidad hereda el supuesto temporal DD-01 (sin wiring
+    real de autorizacion), igual que el baseline. Antes de promover a Sprint 1, evaluar si esta unidad
+    debe adoptar el patron de autorizacion real de s.6h de SPEC-NOVA-P4-006 (converge #5/#7/#8), dado que
+    es brazo GOBERNADO y muta saldo de obligacion/compromiso.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un acto tipo 14 cuyas lineas reintegran <= (obligacion - pagado) por linea, **cuando** aplico, **entonces** `Apply_Obligation_Adjustment` crea la cabecera 'G' con numero de serie (comun/SGR), inserta el detalle 14 y devuelve id/codigo/tipo/regimen; el saldo de la obligacion baja y el del compromiso sube en las vistas.
@@ -84,12 +101,19 @@ preparacion/simulacion vive en la aplicacion; aplicar es atomico (el acto se apl
 5. **Dado** una vigencia cerrada/inexistente, **cuando** intento aplicar, **entonces** THROW **50250/50251**.
 6. **Dado** un codigo de acto duplicado en la vigencia, **cuando** aplico con override, **entonces** THROW **50258**.
 7. **Dado** el reintegro aplicado, **entonces** `vw_Commitment_Line_Balance` refleja el saldo del compromiso LIBERADO (aumentado) por el reintegro 14 (sin recalculo en C#).
+8. **Dado** un acto que mezcla fuentes SGR y comunes en las lineas de reintegro, **cuando** aplico,
+   **entonces** THROW **50257** (regimen no homogeneo).
+9. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+   confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso; el harness
+   F-NOVA-01 ejercita el MISMO camino de lectura.
+10. **Dado** los endpoints de preview y reintegro, **entonces** cada uno tiene al menos un test de
+    integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo del acto -> TVP `Chain_Adjustment_Line_List`; homogeneidad del efecto (solo 14); traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable; el paso de TVP es via gateway tipado (no DataTable como contrato).
-- **Integracion vs DbsFinanciero:** criterio 1 (reintegro happy: acto + liberacion de compromiso), un caso por THROW real del proc (50265 efecto!=reintegro, 50264 tope, 50252/50253/50255 linea, 50250/50251 vigencia, 50257 regimen, 50258 codigo), criterio 7 (liberacion del compromiso por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
-- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- que NO toque 01-04/08/09/11/12 ni anule actos) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256. VERIFICACION DE AISLAMIENTO: el manifiesto declara que NO se implemento ni copio codigo de P4.1/P4.2/P4.3 (baseline).
+- **Integracion vs DbsFinanciero:** criterio 1 (reintegro happy: acto + liberacion de compromiso), un caso por THROW real del proc (50265 efecto!=reintegro, 50264 tope, 50252/50253/50255 linea, 50250/50251 vigencia, 50257 regimen, 50258 codigo), criterio 7 (liberacion del compromiso por vista), **criterio 9 (lectura de columnas confirmada, sin adivinanza)**, **criterio 10 (test HTTP de integracion con gateway falso por endpoint)**. EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
+- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- que NO toque 01-04/08/09/11/12 ni anule actos) + guard de procedencia (evidencia SQL real, sin mock) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256. VERIFICACION DE AISLAMIENTO: el manifiesto declara que NO se implemento ni copio codigo de P4.1/P4.2/P4.3 (baseline); la lista de literales prohibidos del frontend incluye `Apply_Obligation_Adjustment`.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |
@@ -97,6 +121,7 @@ preparacion/simulacion vive en la aplicacion; aplicar es atomico (el acto se apl
 | Implementar de paso los ajustes de CDP/compromiso (08/09/11/12) | CONTAMINACION intra-par (territorio baseline P4.2/P4.3) | Campo 4 los excluye; el adversarial + manifiesto de aislamiento lo verifican (punto 9) |
 | Reintegrar por encima de obligacion-pagado | Saldo inconsistente | RN-08/THROW 50264 bajo bloqueo; la app no recalcula (6a/6c) |
 | Linea con efecto distinto de reintegro | Mezcla de efectos | THROW 50265 del proc real (6b) |
+| Repetir los huecos de calidad hallados en el hermano baseline PAR-2 (quality-data #11/#12/#13, DECISION-0018 2026-07-06): lectura de columnas por adivinanza+default silencioso, cero test HTTP de integracion, omision del proc en la lista de aislamiento del frontend | Mismo patron de gaps no cazados por el GO informal, esta vez en un miembro gobernado | Restricciones 6i/6j/6k + criterios 9/10 (fix-forward explicito, hereda P4-006) |
 | Recalcular topes/saldos o liberacion del compromiso en C# | Divergencia con la BD | Prohibido (6a/6e); el adversarial lo busca (punto 2) |
 | Pasar las lineas como DataTable | Viola regla 5 del GOAL | TVP via gateway tipado (restriccion stack); architecture test |
 | Intentar anular el acto sin validar aguas abajo (B-02) | Saldos negativos aguas abajo | Anulacion fuera de alcance (campo 4); SPEC separada con validacion |

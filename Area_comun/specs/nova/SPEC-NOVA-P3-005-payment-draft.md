@@ -67,20 +67,39 @@ operacion via BR-C4 CONFIRMADA post-Sprint-1. Numeracion por la BD.
   - (e) **B-03:** el proc deja `budget_payment_source_type`/`source_reference_*`/`created_by_user_id` en NULL; el caso de uso que orqueste debe poblarlos (o registrarse la solicitud de extender el proc) -- no dejar centinelas magicos.
   - (f) Numeracion del egreso por la BD (MAX+1 bajo bloqueo hoy; B-04 recomienda migrar a series -- registrar como hardening, no cambiar esquema en esta SPEC). Vigencia explicita; el egreso hoy no tiene guarda de vigencia abierta (B-05) -> validar vigencia abierta en el caso de uso y solicitar el trigger.
   - (g) Saldo de obligacion siempre por `vw_Obligation_Line_Balance` (netea paid-reversed). Toda mutacion: correlation id + usuario real + ProblemDetails.
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Approve_Payment_Draft` por fallback encadenado de nombres ni caer en un
+    DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna se confirma contra
+    `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO antes de escribir el
+    gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (ready/aprobar/
+    discard) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO).
+    Aunque esta unidad es criticidad ALTA/frontera Treasury (fuera del pool Q4), hereda el mismo patron
+    de rigor que el resto del brazo gobernado.
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend incluye `Approve_Payment_Draft` en su lista de literales prohibidos.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un borrador ready_to_approve cuyas lineas <= saldo de las lineas de obligacion, **cuando** apruebo, **entonces** `Approve_Payment_Draft` crea la `Payment_Order` 'G' (source_module_code='budget_payment_draft', metodo 'O', fondos 'SI', bank NULL) + las lineas presupuestales consolidadas por linea de obligacion, y retorna payment_order_id/payment_number.
 2. **Dado** un borrador con una linea que EXCEDE el saldo de su linea de obligacion (obligado neto - pagado neto), **cuando** intento aprobar, **entonces** ProblemDetails del THROW **50187** y no se materializa egreso.
-3. **Dado** un borrador inexistente/no ready/sin lineas/con linea fuera de la obligacion/numero duplicado, **cuando** intento aprobar, **entonces** THROW **50180-50186/50185** segun el caso.
+3. **Dado** un borrador inexistente/no ready/sin lineas/con linea fuera de la obligacion/numero duplicado, **cuando** intento aprobar, **entonces** THROW **50180-50186** segun el caso.
 4. **Dado** una obligacion de vigencia distinta a la orden, **cuando** intento aprobar, **entonces** THROW **54257**.
 5. **Dado** el egreso creado, **entonces** la UI declara que el pago bancario real (banco/retenciones/comprobante) es un paso Tesoreria posterior; el flujo NO postea comprobante ni calcula retenciones (verificable: el comprobante no existe tras aprobar).
 6. **Dado** el saldo tras pagar, **entonces** `vw_Obligation_Line_Balance` refleja paid-reversed sin recalculo en C#; el cuadre del egreso se lee de `vw_Payment_Amount_Validation`.
+7. **Dado** un borrador o linea de pago con incoherencia de vigencia/pertenencia (`Payment_Draft(_Line)`),
+   **cuando** lo capturo o intento aprobar, **entonces** THROW **50188-50190** (segun el chequeo puntual).
+8. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+   confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso.
+9. **Dado** los endpoints mutadores (ready/aprobar/discard), **entonces** cada uno tiene al menos un test
+   de integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo DTO->parametros del proc; maquina de estados; herencia de lineas de obligacion; enforcement de vigencia abierta (B-05) en el caso de uso; traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable.
 - **Integracion vs DbsFinanciero:** criterio 1 (aprobacion happy: crea Payment_Order + lineas), un caso por THROW (50187, 50180-50186, 54257), criterio 5 (sin comprobante/retenciones tras aprobar), criterio 6 (saldo por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
-- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- NO egreso real/retenciones/comprobante, NO notas, NO anular) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
+- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- NO egreso real/retenciones/comprobante, NO notas, NO anular) + guard de procedencia + criterio 8 (lectura de columnas) + criterio 9 (test HTTP de integracion) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |

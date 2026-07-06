@@ -69,8 +69,15 @@ bandera con/sin saldo. Orden y presentacion (miles de pesos) = capa de presentac
   - (b) **AISLAMIENTO:** NO consumir ni referenciar `Get_Budget_Execution_Report`/`fn_Budget_Execution_Report`/`vw_Budget_Execution_Movement` (territorio baseline P2.2); los listados son por DOCUMENTO, no el reporte agregado.
   - (c) Los procs Get_*_List siguen el patron del contrato de lectura (parametros tipados; sin THROW; resultset estable); la UI pagina/ordena en servidor sobre el resultset.
   - (d) Vigencia explicita (F-NOVA-05); con/sin saldo es un parametro; el disponible de CDP usa la vista correcta (recordar B-01 de PRES-04: si se muestra saldo de CDP, la vista de validacion adecuada es `vw_Commitment_Availability_Validation`).
-  - (e) DTOs 1:1 con el resultset (sin columnas inventadas ni omitidas); ProblemDetails en parametros invalidos.
+  - (e) DTOs 1:1 con el resultset (sin columnas inventadas ni omitidas); el nombre EXACTO de cada columna
+    leida se confirma contra `sys.dm_exec_describe_first_result_set` de cada `Get_*_List`/vista antes de
+    escribir el gateway, sin fallback encadenado de nombres ni default silencioso; ProblemDetails en
+    parametros invalidos.
   - (f) Correlation id en cada consulta (observabilidad; regla 8/DoD).
+  - (g) **COBERTURA HTTP DE INTEGRACION (hereda P4-006, adaptado a lectura):** cada endpoint `GET` nuevo
+    de esta unidad tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway
+    FALSO inyectado) que ejercita ruta -> endpoint -> mapeo de filtros -> gateway, ademas de la paridad
+    contra la vista real.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then)
 1. **Dado** el listado de CDP con bandera `con_saldo=true` y filtros de vigencia/fuente, **cuando** consulto, **entonces** recibo exactamente las filas de `vw_Availability_Certificate_Balance`/`_Line_Balance` con disponible > 0 que cumplen los filtros -- paridad total contra la vista (comparacion automatizada de filas/totales).

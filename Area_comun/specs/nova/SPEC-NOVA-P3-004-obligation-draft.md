@@ -68,6 +68,17 @@ usuario autenticado con rol presupuesto; policy por operacion via BR-C4 CONFIRMA
   - (e) El documento fuente se enlaza por PUENTE tipificado (`Radication_Obligation` u otro), no por FK polimorfica; `reference_type/number` es solo trazabilidad legacy (no logica).
   - (f) Solo rubros auxiliares de gasto; misma vigencia que el compromiso; vigencia abierta; catalogos validos (THROW 50210/50211/50116-50121/50212).
   - (g) Numeracion por serie de la BD; saldo de la obligacion siempre por `vw_Obligation_Line_Balance` (nunca acumulador; el reintegro 14 lo reduce). Toda mutacion: correlation id + usuario real + ProblemDetails.
+  - (h) **GUARD DE PROCEDENCIA:** el harness de evidencia F-NOVA-01 usa una clase SQL real, gateada
+    por env vars, NA limpio sin credenciales -- jamas un mock/Recording* in-memory (precedente TASK-0253).
+  - (i) **LECTURA DE RESULT-SET SIN ADIVINANZA (hereda P4-006):** el gateway de produccion NO debe leer
+    columnas del result-set de `Approve_Obligation_Draft` por fallback encadenado de nombres ni caer en
+    un DEFAULT SILENCIOSO si la columna no aparece. El nombre EXACTO de cada columna se confirma contra
+    `OBJECT_DEFINITION`/`sys.dm_exec_describe_first_result_set` del proc DESPLEGADO antes de escribir el
+    gateway; el harness F-NOVA-01 ejercita el MISMO camino de lectura.
+  - (j) **COBERTURA HTTP DE INTEGRACION (hereda P4-006):** cada endpoint mutador nuevo (ready/aprobar/
+    discard) tiene al menos un test de integracion HTTP real (`WebApplicationFactory` + gateway FALSO).
+  - (k) **LISTA DE AISLAMIENTO COMPLETA (hereda P4-006):** el test de arquitectura de aislamiento del
+    frontend incluye `Approve_Obligation_Draft` en su lista de literales prohibidos.
 
 ## 7. Criterios de aceptacion definidos (Given/When/Then; + un negativo por THROW alcanzable)
 1. **Dado** un borrador ready_to_approve cuyas lineas <= saldo de las lineas del compromiso, **cuando** apruebo, **entonces** `Approve_Obligation_Draft` inserta la cabecera 'G' con numero de serie, hereda ancla y BPIN, marca el borrador `approved`.
@@ -77,12 +88,18 @@ usuario autenticado con rol presupuesto; policy por operacion via BR-C4 CONFIRMA
 5. **Dado** una obligacion con fecha ANTERIOR a la del compromiso, **cuando** intento aprobar, **entonces** el caso de uso lo rechaza (RN-10/B-04, validacion de aplicacion; 400 ProblemDetails) -- la BD hoy NO lo cubre.
 6. **Dado** una cabecera sin beneficiario o sin enlace a documento fuente por puente, **cuando** intento crear/aprobar, **entonces** rechazo (RN-03; el puente es la trazabilidad go-forward).
 7. **Dado** el saldo tras aprobar, **entonces** `vw_Obligation_Line_Balance` = current_obligation - pagado neto (sin recalculo en C#); techo del pago.
+8. **Dado** una cabecera con uso/catalogo/compromiso incoherente (fuera de 50116), **cuando** la creo,
+   **entonces** THROW **50117-50121** (segun el chequeo puntual).
+9. **Dado** el gateway de produccion, **entonces** lee cada columna del result-set por el nombre EXACTO
+   confirmado contra `OBJECT_DEFINITION`, sin fallback encadenado ni default silencioso.
+10. **Dado** los endpoints mutadores (ready/aprobar/discard), **entonces** cada uno tiene al menos un test
+    de integracion HTTP (`WebApplicationFactory` + gateway falso) que verifica el wiring completo.
 
 ## 8. Pruebas / gates definidos
 - **Unit:** mapeo DTO->parametros del proc; maquina de estados; herencia de lineas del compromiso; enforcement RN-10 (fecha) y RN-03 (puente) en el caso de uso; traduccion THROW->ProblemDetails.
 - **Architecture tests:** Domain sin Infrastructure; Application sin ASP.NET; Api/Mcp sin SQL directo; cero DataTable.
 - **Integracion vs DbsFinanciero:** criterio 1 (aprobacion happy: serie + herencia), un caso por THROW (50134, 50128-50133, 50210/50211, 50116), criterio 5 (rechazo fecha via caso de uso), criterio 7 (saldo por vista). EXECUTE: conector readonly sin EXECUTE (Msg 229) -> GRANT EXECUTE al rol de verificacion o SELECT a la vista/fn equivalente, documentado.
-- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- NO radicar/liquidar/contabilizar, NO anular, NO tocar 14) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
+- **Gate final:** APROBADO del Analista (12 puntos, enfasis en 2=reimplementacion, 3=DML directo, 9=fuera de alcance -- NO radicar/liquidar/contabilizar, NO anular, NO tocar 14) + guard de procedencia + criterio 9 (lectura de columnas) + criterio 10 (test HTTP de integracion) + DoD de NOVA-GOAL-001 con evidencia real + verde de gates del hub + atestacion sha256.
 
 ## 9. Riesgos definidos
 | Riesgo | Impacto | Mitigacion |
