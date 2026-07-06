@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:

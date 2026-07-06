@@ -323,6 +323,37 @@
             "updated_at": "2026-07-06T21:58:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Arquitecto-mbhyg-1204window",
+            "expires_at": "2026-07-07T06:00:00Z",
+            "notes": "Mailbox hygiene: archive 9 consumed 1203-cycle/operador messages.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Arquitecto-mbhyg-1204window",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-doneflip-1102-1104-GO-1203.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Codex-ACTION-doneflip-1102-1104-GO-1203.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-retomar-1203-neutralidad-claim-corregido.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Codex-ACTION-retomar-1203-neutralidad-claim-corregido.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-FYI-1102-GO-cerrada-primera-unidad-antivibecoding.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-FYI-1102-GO-cerrada-primera-unidad-antivibecoding.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1203-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-1203-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-guia-julian-publicar-repo-aegis.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-guia-julian-publicar-repo-aegis.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-fixloop1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1203-fixloop1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-ACTION-repointar-aegis-nova-aegis-limpiar-fork.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-ACTION-repointar-aegis-nova-aegis-limpiar-fork.md"
+            ],
+            "started_at": "2026-07-06T23:11:36Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260707A",
+            "updated_at": "2026-07-06T23:11:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Golden memory follow-up after hub TASK-1203 done-flip response commit.",

@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Codex-ACTION-doneflip-1102-1104-GO-1203
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:
