@@ -124,6 +124,22 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   "0 hallazgos"); NO contradice el GO, mide su ALCANCE. Quality-data del brazo baseline (Q2), fix-forward,
   NO se reabre la unidad medida.
 
+### A10. El gate atrapo defectos incluso cuando el MAKER es el ORQUESTADOR (Aegis, cualitativo)
+- **Fenomeno:** el Arquitecto actuo como maker de las 2 primeras tareas de las iniciativas Aegis
+  (TASK-1201 [1002 F0 discovery de memoria], TASK-1101 [1001 t1 SPEC de interrogacion]). El checker
+  adversarial informal (sesion separada) cazo **13 defectos reales** en esas 2 entregas del propio
+  orquestador.
+- **Evidencia notable:** en TASK-1201 el checker la tumbo 2 veces (6 hallazgos) incluido un DEFECTO DE
+  REPRODUCIBILIDAD que el propio FIX re-introdujo, cazado AL BYTE; cerro GO 14/14 filas exactas. En
+  TASK-1101 (8 hallazgos, 2 fix-loops) el checker demostro con un CONTRAEJEMPLO NUMERICO que una regla de
+  frontera "no tenia dientes" -> ahora los tiene + hay un criterio de aceptacion que la testea con el
+  contraejemplo literal.
+- **Por que importa:** extiende maker!=checker a su caso MAS FUERTE -- no hay maker "confiable", el gate
+  funciona INCLUSO contra el orquestador. El patron fix-que-reintroduce-defecto cazado al byte es la
+  reproducibilidad-como-tesis en vivo (eco de F-0249/A2).
+- **Caveat:** es trabajo de PRODUCTO Aegis (paralelo, arm-ortogonal, NO el contraste medido de Etapa 1);
+  evidencia cualitativa fuerte, no confirmatoria cuantificada. Traza: Aegis 9e0b360e, hub 6cadc17.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
