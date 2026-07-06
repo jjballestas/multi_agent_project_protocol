@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 02:58 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 03:19 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -45,7 +45,7 @@ Piso minimo viable (P1 completa + miembro baseline PAR-1) = `[x]` CUMPLIDO.
 El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitecto/Analista; yo verifico.
 | # | Tarea | Dueno | Estado |
 |---|---|---|---|
-| 3.1 | Confirmar las 6 filas baseline con medicion completa; resolver token=NA (err.log volatil P2.1/P2.2) vs real | Arquitecto | `[!]` verificar -- hueco de tokens P2.1/P2.2 reportado |
+| 3.1 | Confirmar las 6 filas baseline con medicion completa; resolver token=NA (err.log volatil P2.1/P2.2) vs real | Arquitecto | `[x]` RESUELTO por el Arquitecto (tokens_total_atribuibles P2.1/P2.2 corregidos, d3b8ad6) |
 | 3.2 | **Resolver cadencia de atestacion del journal** (per-unidad vs checkpoint) -- ver seccion 4 y ask#1 | Arquitecto | `[~]` recomendacion HIBRIDA ruteada; esperando su respuesta |
 | 3.3 | Registrar quality-data del baseline sin reabrir unidades: #10 (50212) + #11/#12/#13 (TASK-0255) | Arquitecto/Analista | `[~]` #11-13 CONFIRMADOS + horneados en P4-006 (6i/6j/6k); #10 + los 3 esperan veredicto Analista |
 | 3.4 | Confirmar aislamiento de teething: toda unidad pre-30-jul tag=arranque; incidentes -> OVERHEAD-FIJO | Arquitecto | `[x]` convencion aplicada (P4.1 arranque, etc.) |
@@ -61,10 +61,11 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 | Senal DECISION-0018 #11/#12/#13 (3 huecos QA de TASK-0255 baseline) al Arquitecto | `[x]` CONFIRMADOS linea-por-linea + horneados en SPEC-NOVA-P4-006 (6i/6j/6k); ruteados al Analista |
 | Cadencia de atestacion del journal (ask#1) | `[~]` recomendacion hibrida ruteada al Arquitecto |
 | Hallazgo #10 (50212 etiquetado cruzado) | `[~]` Arquitecto lo registro (a2657d5); Analista verifica |
-| TASK-0246 (informe adversarial NOVA-DEV) | `[!]` Analista dio NOGO en el review; espera remediacion |
+| TASK-0246 (informe adversarial NOVA-DEV) | `[x]` remediacion OK (Analista) + done-flip (8c29bb3) |
 | FYI archivo basura `nul` | `[x]` limpiado por el Arquitecto (8321277) |
 | EVIDENCIA-VIVA (A1-A9) | `[~]` alimentada cada sesion (directiva operador) |
-| Adopcion 4R (gentle-ai): debate APROBADO por operador | `[~]` DIRECTIVA ruteada al Arquitecto: redactar DECISION + aplicar-ahora (naming lentes/contrato/carve-outs) + diferir cambios de gate a Sprint 1; fuente = DRAFT-revision-4r-decisiones-v1.md |
+| Adopcion 4R (gentle-ai): debate APROBADO | `[x]` DECISION-0092 registrada por el Arquitecto (9ca131b); seccion A aplicable-ahora + B diferida a Sprint 1 |
+| Cola no-idle del Arquitecto (re-llenado) | `[~]` DIRECTIVA ruteada: (1) actualizar HTML operador stale; (2) materializar contrato de salida/carve-outs de DECISION-0092 A; (3) prep reconciliacion 26-29; (4) prioridad TASK-0178 |
 
 ---
 
