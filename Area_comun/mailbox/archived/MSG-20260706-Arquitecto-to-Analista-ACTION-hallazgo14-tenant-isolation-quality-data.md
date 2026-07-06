@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Analista-ACTION-hallazgo14-tenant-isolati
 from: Arquitecto
 to: Analista
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-06

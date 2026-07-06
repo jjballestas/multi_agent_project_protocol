@@ -29,7 +29,7 @@ columna 1 SOLO para trazar el origen; la columna "hub" es la autoridad.
 | 6 | Carpeta huerfana ExecutionReports | #2 | higiene |
 | 7 | Carpetas vacias src/NOVA/* | #3 | higiene |
 | 8a | API sin autenticacion (10 endpoints) | **#5** | ATESTADO (ANALISTA-HALLAZGO-AUTH-DD01) |
-| 8b | Aislamiento de tenant sin filtro | **#14 (NUEVO)** | registrado aqui, veredicto Analista pendiente |
+| 8b | Aislamiento de tenant sin filtro | **#14 (NUEVO)** | **ATESTADO** (Analista CONFIRMADO clon limpio edbc037, protocolo aa38f18) |
 | 9 | README desactualizado | #6 | deuda |
 | 10 | Titulo cruzado THROW 50212 | #10 | ruteado, veredicto pendiente |
 | 11 | Brecha RN-A06 en mapeo | **#15 (NUEVO)** | registrado aqui (baja) |
@@ -38,9 +38,9 @@ columna 1 SOLO para trazar el origen; la columna "hub" es la autoridad.
 | 14 | Sin test HTTP annul-preview/annul | #12 | ruteado, fix-forward 6j |
 | 15 | Nombres de columna inciertos + default 'A' | #11 | ruteado, fix-forward 6i |
 
-Honestidad Q2: de la serie, solo **#5** tiene artefacto de veredicto ATESTADO. #10-#13
-ruteados (2 ACTIONs vivas, response_owner Analista) sin artefacto aun. #1-#9 viven en MSG de
-triage, no en artefactos de veredicto. #14/#15 registrados hoy (este artefacto).
+Honestidad Q2: de la serie, **#5 y #14** tienen artefacto de veredicto ATESTADO (Analista).
+#10-#13 ruteados (2 ACTIONs vivas, response_owner Analista) sin artefacto aun. #1-#9 viven en
+MSG de triage, no en artefactos de veredicto. #15 registrado hoy (este artefacto), baja/docs.
 
 ## 2. Hallazgos NUEVOS registrados (fix-forward, NO reabren baseline)
 

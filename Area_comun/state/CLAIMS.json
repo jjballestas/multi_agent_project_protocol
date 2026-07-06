@@ -80,6 +80,22 @@
             "updated_at": "2026-07-06T12:07:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-14ack",
+            "expires_at": "2026-07-06T17:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-14ack",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-ACTION-hallazgo14-tenant-isolation-quality-data.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-ACTION-hallazgo14-tenant-isolation-quality-data.md",
+                "Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-hallazgo14-tenant-isolation-CONFIRMADO.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Analista-to-Arquitecto-REVIEW-hallazgo14-tenant-isolation-CONFIRMADO.md"
+            ],
+            "started_at": "2026-07-06T15:30:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706H",
+            "updated_at": "2026-07-06T15:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-lote8",
             "expires_at": "2026-07-06T07:30:00Z",
             "owner": "Arquitecto",
