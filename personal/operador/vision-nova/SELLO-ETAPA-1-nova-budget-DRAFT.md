@@ -689,6 +689,29 @@ THROW especifico, evidencia versionada, UI real) mas la superficie de auth que i
 gobernado (converge con el item #8/auth y #7 del backlog de seguridad, disenado como PREP de Sprint 1,
 NO como parche retroactivo a esta unidad baseline ya cerrada y medida).
 
+## 26. ENMIENDA FECHADA 2026-07-06T03:05Z (Arquitecto) - Declaracion de trabajo paralelo ARM-ORTOGONAL (ventana 06-jul a 30-jul)
+
+**No reabre el sello; es la declaracion de limitacion honesta ordenada por el Operador (DIRECTIVA
+2026-07-06, commit 30a4252, seccion 5).** Durante la ventana 2026-07-06 a 2026-07-30 corre, en
+instancia SEPARADA (Aegis, `D:/Agentes/Zeus/NOVA/Aegis`, corte de gobernanza DECISION-0093):
+(a) la preparacion/implementacion de los REQs futuros (anti-vibecoding, intake profesional,
+memoria hibrida; DIRECTIVA seccion 2), y (b) el analisis de migracion de Contabilidad
+(DIRECTIVA seccion 3).
+
+**Declaracion arm-ortogonal (lo que el reporte de Etapa 1 debe afirmar textualmente):** ese
+trabajo paralelo es trabajo de FONDO y NO esta correlacionado con la asignacion ligero/completo
+de las unidades del pool Q4 -- la asignacion la fijo el sorteo sellado (s.12, s.21, s.23) ANTES
+de que esta cola paralela existiera, y ninguna unidad del pool Q4 ni de los pares gobernados se
+construye, adelanta o toca desde la cola paralela (linea roja del sello intacta hasta el
+30-jul). La ortogonalidad respecto de la aleatorizacion es lo que sostiene la simetria entre
+brazos: el trabajo paralelo puede afectar, a lo sumo, la DISPONIBILIDAD GLOBAL de los agentes
+(carga de fondo identica para ambos brazos), nunca a un brazo mas que al otro. Se declara como
+limitacion honesta del entorno de medicion, no se oculta.
+
+Trazabilidad: DIRECTIVA del Operador commit `30a4252`; corte de gobernanza DECISION-0093
+(commit `e951dba`); registro de cross-atestacion hub->Aegis
+(`Area_comun/artifacts/CROSS-ATESTACION-hub-aegis-registro.md`, Entrada 0 commit `635691d`).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).

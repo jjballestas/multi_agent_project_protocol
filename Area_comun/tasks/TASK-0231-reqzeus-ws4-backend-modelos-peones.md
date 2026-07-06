@@ -18,6 +18,13 @@ file: Area_comun/tasks/TASK-0231-reqzeus-ws4-backend-modelos-peones.md
 
 # TASK-0231 - [VISION-NOVA][F6.1] Fase peones (re-alcance DECISION-0083)
 
+> **RE-ALCANCE 2026-07-06 (DIRECTIVA Operador 30a4252 seccion 4):** F6.1 NO se corre como F6
+> sobre Presupuesto post-Sprint-1. El contraste peones se REDISENA dentro del sello de Etapa 2
+> (ver `Area_comun/artifacts/NOTA-DISENO-peones-vs-tokens-sello-etapa2.md`). Esta tarea queda
+> `proposed` como traza historica; no se activa antes del sello de Etapa 2. Asiento del diseno:
+> HUB (capa estudio, DECISION-0088 p.1 / DECISION-0093 p.1); ejecucion futura del brazo B:
+> gobernada desde Aegis.
+
 - **Owner build:** Codex - **Review:** Analista (seguridad/PII) - **Checker:** Arquitecto - Decision de backend: Operador.
 - **Repo producto:** `D:/Agentes/Zeus/Zeus-Aegis`. **Spike de peones en repo SANDBOX aparte** `D:/Agentes/Zeus/piloto-peones`. Dep: D3 (0074).
 
