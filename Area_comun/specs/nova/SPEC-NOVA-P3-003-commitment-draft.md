@@ -119,3 +119,21 @@ techo de la obligacion). Dependencias: GOAL-P1 (fundacion) + CDP operable (P3.2,
 saldo). NO depende de brecha de BD para el camino feliz (el proc y el 50115 existen y estan verificados); B-01/B-02
 se compensan/excluyen y se registran como hardening. Desbloquea: Obligation Draft (Doc 06, se expide con cargo a
 un RP).
+
+## ENMIENDA FECHADA 2026-07-06T04:52Z (Arquitecto) - Herencia de la guarda BR-C4 (Assert_Permission) en el proc REAL de captura
+
+Contexto: BR-C4 (matriz de autorizacion por operacion) fue entregada por el DBA y VERIFICADA
+independientemente en sandbox (sello Etapa 1 s.27): guarda real en aprobar/anular; en
+captura-de-borrador se probo con shim Authorize_*_Draft_Capture porque el proc real se
+construye en Sprint 1 bajo esta SPEC. Restriccion NUEVA (vinculante, se agrega a s.6):
+
+- El proc REAL de captura de borrador de esta unidad DEBE invocar Security.Assert_Permission
+  con el permission_code de su celda (documento x operacion draft_capture) ANTES de cualquier
+  mutacion -- HEREDA la guarda desplegada, NUNCA la reimplementa en el proc ni en C#.
+- Set THROW de la guarda: 50320-50324 (centralizado en Security.Assert_Permission; incluye
+  fail-closed 50320 si falta SESSION_CONTEXT). La superficie C#/API mapea estos codigos a
+  ProblemDetails especificos de ESTA superficie (leccion del hallazgo #10: sin etiquetado
+  cruzado entre superficies) y agrega el criterio negativo Given/When/Then correspondiente
+  en s.7 al construirse.
+- La verificacion F-NOVA-01 de esta unidad RE-VERIFICA por OBJECT_DEFINITION que el proc real
+  desplegado invoca Assert_Permission (el shim del DBA NO cuenta como evidencia del proc real).

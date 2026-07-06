@@ -60,3 +60,27 @@
 - nota: el gate PENDIENTE del runbook multi-clon (humo e2e entre DOS clones con llaves
   separadas por maquina) corre antes de la primera tarea real de Contabilidad; este humo
   probo la operatividad de los 3 firmantes en el clon canonico.
+
+### Entrada 2 - Gate e2e DOS CLONES VERDE (TASK-9302) - gate de apertura de Contabilidad CUMPLIDO
+- fecha_utc: 2026-07-06T04:55Z (hora local 06:55, UTC+2)
+- disparador: gate del runbook multi-clon s.5 ejecutado contra el remoto GitHub real
+  (git@github.com:jjballestas/Zeus-Aegis.git, rama aegis/main): ciclo TASK-9302 repartido --
+  upsert+build-flips en clon A (firmas Arquitecto/Codex), ratificacion in_review->
+  review_approved desde clon B FRESCO que solo posee la llave privada del Analista, done-flip
+  de vuelta en A; sincronizacion SOLO via git pull/push.
+- prueba negativa: intento de firma como Codex en el clon B FALLO ("actor_auth private
+  signing key missing") sin escribir estado -- separacion maker/checker por POSESION de llave.
+- verificacion: validate exit 0 en AMBOS clones tras el pull final; firmas de los 11 eventos
+  del gate verificadas VALIDAS desde el clon B (Codex x8, Analista x3).
+- HALLAZGO DE DISENO incorporado: los secretos HMAC de event_auth son DE LA INSTANCIA y deben
+  DISTRIBUIRSE a los clones autorizados (el operador los copio); secretos frescos por clon
+  rompen la paridad de replay (verificado: el clon B con secretos distintos rechazaba TODO el
+  replay historico como invalid_signature). Runbook multi-clon s.2 corregido en esta entrega.
+  Tambien: los slim views DEBEN commitearse con cada escritura de ledger o el clon par ve
+  drift (mordio una vez en este gate, corregido en b3cd5fc1).
+- aegis_commit: 8941efb1 (aegis/main)
+- head_seq: 3495
+- head_prev_hash: ce9bfc0f2dfae070505cc99d9fb30d6c9667aabdb4b42b54ae78f66f989761fa
+- sha256_events_jsonl: e9d8c1f84c48e4b270a1c25d38c73d13e6881f9dabb49c10c44af39bdfc62ac2
+- sha256_head_line: 8818097b8d183460727d0e0f3b7b8cd57a54a9b9b3eee49ea2b677821c2c2897
+- event_count: 2824 (seq 672..3495)

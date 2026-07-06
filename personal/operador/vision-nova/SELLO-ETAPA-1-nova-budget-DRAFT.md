@@ -712,6 +712,42 @@ Trazabilidad: DIRECTIVA del Operador commit `30a4252`; corte de gobernanza DECIS
 (commit `e951dba`); registro de cross-atestacion hub->Aegis
 (`Area_comun/artifacts/CROSS-ATESTACION-hub-aegis-registro.md`, Entrada 0 commit `635691d`).
 
+## 27. ENMIENDA FECHADA 2026-07-06T04:52Z (Arquitecto) - BR-C4 ENTREGADA Y VERIFICADA -> P3.2/P3.3/P3.4 elegibles pool Q4 -> n=10 CONFIRMADO
+
+**No reabre el sello; es el CUMPLIMIENTO de la condicion ya sellada (s.3: "P3.2/P3.3/P3.4
+elegibles Q4 SI su DEC cierra al sello Etapa 2") por la via de la opcion (b) que adjudico el
+Operador (MSG brc4-opcion-b, 2026-07-06): su DBA sembro la matriz de autorizacion por operacion
+(BR-C4: emitir != aprobar != anular) en `DbsFinanciero_SANDBOX`, ANTES del deadline 29-jul.**
+
+**Verificacion INDEPENDIENTE del Arquitecto contra lo DESPLEGADO (2026-07-06 ~04:50Z, sesion
+como `nova_budget_verifier` via EXECUTE AS, autorizada por el Operador):**
+- Los 6 procs REALES (`Approve_{Availability_Certificate,Commitment,Obligation}_Draft`,
+  `Annul_{Availability_Certificate,Commitment,Obligation}`) tienen la guarda
+  `Security.Assert_Permission` visible por OBJECT_DEFINITION como verificador: 6/6 GUARDA-OK.
+- Set THROW REAL desplegado == documentado: 50320-50324, centralizado en
+  `Security.Assert_Permission` (cruce lista-vs-lista; el rango sugerido 50300-50319 fue
+  correctamente descartado por el DBA por colision con Reset_Sandbox_Mutator_Baseline).
+- 9 permisos sembrados en `Security.Permission` + 9 roles por documento x operacion + mapeo
+  rol->permiso 1:1 POR CELDA (verificado en `Security.Role_Permission`): la matriz es
+  genuinamente por (documento x operacion), no roles gruesos.
+- Smoke vivo del guard real: FAIL-CLOSED sin SESSION_CONTEXT (THROW 50320); approve-only
+  (user 29) BLOQUEADO en annul (THROW 50324) y PASA approve (positivo real); no-access
+  (user 31) bloqueado en las 3 operaciones (THROW 50324 x3).
+- **Hallazgo MENOR de cobertura (no defecto, no bloquea):** las 4 identidades de prueba
+  sembradas son por-OPERACION (p.ej. user 29 tiene los 3 roles Approver CDP/RP/OBL), asi que
+  la separacion ENTRE documentos no quedo demostrada con identidad viva -- si quedo demostrada
+  ESTRUCTURALMENTE (mapeo 1:1 por celda). Recomendacion para el proximo smoke del DBA: 1
+  identidad cross-doc (aprueba CDP, sin permiso OBL).
+
+**Consecuencia sellada:** P3.2/P3.3/P3.4 MANTIENEN elegibilidad al pool Q4 -> **n=10
+CONFIRMADO** (la caida pre-declarada a n=7 NO se ejecuta). Nota de alcance para Sprint 1: la
+guarda es REAL en aprobar/anular; en captura-de-borrador el DBA la probo con shims
+`Authorize_*_Draft_Capture` porque los procs reales de captura se construyen en Sprint 1 --
+las SPECs P3-002/003/004 quedan enmendadas (misma fecha) exigiendo que los procs reales de
+captura invoquen `Security.Assert_Permission` (herencia de la guarda, no reimplementacion).
+Es hardening SIMETRICO para ambos brazos: no altera el contraste ni lo medido (regla 8: el
+dev gobernado no crea los procs).
+
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).

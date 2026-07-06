@@ -42,6 +42,34 @@
             "updated_at": "2026-07-06T03:23:14Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-lote8",
+            "expires_at": "2026-07-06T07:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-lote8",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-brc4-opcion-b-dba-encargo.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-brc4-opcion-b-dba-encargo.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-RESPUESTA-pendientes-vivos-brc4-orden-1001-1002.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-RESPUESTA-pendientes-vivos-brc4-orden-1001-1002.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-correccion-orden-1002-primero.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-correccion-orden-1002-primero.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-FYI-clonb-llaves-copiadas-continua-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-FYI-clonb-llaves-copiadas-continua-gate.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-brc4-entregado-registrar-enmienda.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-brc4-entregado-registrar-enmienda.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-LOTE-PENDIENTE-OPERADOR-corte-aegis-reqs.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-LOTE-PENDIENTE-OPERADOR-corte-aegis-reqs.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-aegis-remoto-branch-model.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-aegis-remoto-branch-model.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-brc4-tracking-confirmado-revision-encargo.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-brc4-tracking-confirmado-revision-encargo.md"
+            ],
+            "started_at": "2026-07-06T05:00:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706D",
+            "updated_at": "2026-07-06T05:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-postsmoke",
             "expires_at": "2026-07-06T06:02:00Z",
             "owner": "Arquitecto",
