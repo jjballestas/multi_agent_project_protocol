@@ -62,6 +62,18 @@ entregado con unidades enumerables, (c) sello de Etapa 2 firmado.
    `tokens_total_atribuibles` del firmante -- el ahorro se lee comparando el costo frontera
    entre brazos, no editando la moneda.
 
+## 4b. Pre-registro de PARTICIPANTES en el sello Etapa 2 (hueco 6 del onboarding remoto)
+
+Requisito estructural adicional (DIRECTIVA addendum onboarding-remoto, 2026-07-06): el sello
+de Etapa 2 DEBE NOMBRAR, antes de sellar, a los participantes, sus maquinas/clones y sus roles
+(maker/checker por unidad). Razon de study-integrity: un SEGUNDO humano operando Contabilidad
+(empleado remoto) es una VARIABLE del estudio -- los exception events (`assist`/
+`manual_intervention`) y el journal ya registran quien hizo que, pero la COMPOSICION del equipo
+debe estar pre-registrada, no descubierta a mitad de ventana. Decidirlo antes de sellar es
+gratis; a mitad de ventana seria enmienda. Incluye: id de cada participante, su identidad
+firmante (y si opera bajo identidad existente u propia -- ver bifurcacion del runbook s.8.4),
+su maquina/huso, y el reparto maker!=checker (separado fisicamente por posesion de llave).
+
 ## 5. Traza de re-alcance de TASK-0231 (F6.1)
 
 Por decision del Operador (DIRECTIVA 30a4252 seccion 4, update 2026-07-06): F6.1/peones NO se
