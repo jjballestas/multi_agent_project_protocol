@@ -12,10 +12,22 @@ context_refs:
   - Area_comun/artifacts/CROSS-ATESTACION-hub-aegis-registro.md
   - Area_comun/artifacts/NOTA-DISENO-peones-vs-tokens-sello-etapa2.md
   - Area_comun/artifacts/PAQUETE-DEC-DOMINIO-P3x-sello-etapa2.md
-one_line_summary: "LOTE acumulativo v2 (05:50): item 4 DRENADO con matiz (tu URL es el remote del repo de PRODUCTO; la instancia quedo publicada en rama aegis/main sin tocar el main del producto -- confirma el esquema). Siguen: (1) aprovisionar firmantes, (2) firmar DECISION-1001/1002, (3) adjudicar BR-C4."
-requested_action: "Drenar el lote cuando entres: (1) ejecutar el aprovisionador de firmantes en Aegis; (2) firmar DECISION-1001 y DECISION-1002; (3) adjudicar BR-C4 del paquete DEC P3.x; (4-drenado) confirmar el esquema de rama aegis/main para la instancia o pedir repo separado. Detalle y comandos exactos abajo."
-question: "Item 1 del lote (unico bloqueo real): ejecutas tu `python scripts/provision_local_signers.py` en D:/Agentes/Zeus/NOVA/Aegis (acuna secretos HMAC locales + override; frontera DECISION-0057, el classifier me lo nego con razon), o delegas explicitamente esa ejecucion puntual en mi para poder correr el humo e2e? Y del item 4: confirmas instancia en rama aegis/main del repo Zeus-Aegis, o prefieres repo GitHub separado (p.ej. NOVA-Aegis) como asume el runbook?"
+one_line_summary: "LOTE v3 (06:00): items 1, 2 y 4 DRENADOS (firmantes aprovisionados por ti + humo e2e VERDE con los 3 firmantes + DECISION-1001/1002 registradas + instancia publicada en aegis/main con Entrada 1 de cross-atestacion anclada). RESTANTE: (3) adjudicar BR-C4; opcional: preferencia repo-separado vs rama aegis/main."
+requested_action: "Unico pendiente de firma: adjudicar BR-C4 del paquete DEC P3.x (3 opciones con recomendacion en PAQUETE-DEC-DOMINIO-P3x-sello-etapa2.md). Opcional: confirmar rama aegis/main como canonica de la instancia o pedir repo separado."
+question: "Adjudicas BR-C4 (recomendacion: opcion a, confirmar que no cierra -> pool Q4 baja a n=7 sin sorpresa)?"
 ---
+
+## UPDATE v3 (06:00 local) - items 1, 2 y 4 DRENADOS
+
+- **Item 1 COMPLETO:** aprovisionaste los firmantes; corri el humo e2e TASK-9301 (ciclo
+  ready->done, 18 intents, 3 firmantes, firmas ed25519+HMAC verificadas validas, validate 0,
+  drift 0). Entrada 1 de cross-atestacion anclada en el hub.
+- **Item 2 COMPLETO:** DECISION-1001/1002 accepted con tu aprobacion interactiva y REGISTRADAS
+  en el ledger de Aegis (commit `3e9e90b8`, pusheado a aegis/main).
+- **Item 4 COMPLETO (ver RESPUESTA-aegis-remoto-branch-model):** instancia en rama `aegis/main`
+  del repo GitHub; `main` del remoto es la historia del repo de PRODUCTO (no auto-init), quedo
+  intacta. Pendiente opcional: tu preferencia repo-separado vs rama.
+- **RESTANTE del lote: solo item 3 (BR-C4).**
 
 # LOTE-PENDIENTE-OPERADOR (05:30 local, 2026-07-06) - v2 (update 05:50)
 
