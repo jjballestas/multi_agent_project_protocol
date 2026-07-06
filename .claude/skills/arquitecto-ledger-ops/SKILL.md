@@ -100,6 +100,15 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
 Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
 `python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`
 re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 antes de reintentar.
+- **REGENERAR EL SNAPSHOT tambien (2026-07-07, verificado 2x): re-materializar reconstruye los JSON de estado
+  (CLAIMS/TASK_INDEX/PROJECT_STATE) pero NO actualiza `runtime/state/snapshot.json` -> `up_to_seq` queda
+  desfasado del head del log y `validate` sale rojo con "snapshot mismatch: up_to_seq differs". Tras
+  re-materializar, SIEMPRE regenera el snapshot:**
+  `python -c "import sys; sys.path.insert(0,'.'); from pathlib import Path; from runtime.eventlog import rebuild_snapshot, write_snapshot; snap=rebuild_snapshot(Path('.')); write_snapshot(Path('.'), snap)"`
+  y recien ahi valida (val=0). Aplica igual en el timeout de submit_intent a mitad de tx (s.6).
+- **`scan_encoding` rojo TRANSITORIO por `runtime/memory/index.db`:** si corre un build de memdb (indexador
+  SQLite) y deja `index.db` (gitignored) a mitad del scan, el scan lo intenta abrir como texto y da rojo/
+  FileNotFoundError. No es un fallo real: `rm -f runtime/memory/index.db` y re-scan.
 
 ## 4. Pedir review / cerrar (maker != checker)
 - **COMMITEA el saneamiento ANTES de pedir review.** El peer valida con **clean clone de HEAD**; si tus
