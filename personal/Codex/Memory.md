@@ -15,6 +15,9 @@ Last updated: 2026-07-06 Europe/Madrid, after TASK-1102/TASK-1104 partitioned de
   Gates passed: `python scripts/test_memdb.py` PASS 11, `python scripts/scan_domain_neutrality.py --root .`
   PASS, `$env:PYTHONIOENCODING='utf-8'; python scripts/scan_encoding.py --root .` PASS,
   `python scripts/validate_collaboration_state.py --root .` PASS, and Aegis drift false at `up_to_seq=3568`.
+  Hub coordination commit `45401fc coord(TASK-1203): announce Aegis memdb delivery` records the delivery message
+  `Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1203-in-review.md`; hub gates passed:
+  encoding, domain-neutrality, validator OK with one unrelated stale-FYI warning, and drift false at `up_to_seq=4375`.
 - TASK-1102/TASK-1104 partitioned delivery after ACTIONs
   `MSG-20260706-Arquitecto-to-Codex-ACTION-1102-fixloop3-tests-ui-peritem-1104-drift.md` and
   `MSG-20260706-Arquitecto-to-Codex-ACTION-1102-estrategia-testci-particionado.md` completed. Product repo
