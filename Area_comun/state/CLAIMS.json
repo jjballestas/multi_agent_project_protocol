@@ -141,6 +141,20 @@
             "updated_at": "2026-07-06T00:32:00Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-archive-cola-refill-20260706",
+            "expires_at": "2026-07-06T02:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-no-idle-refill.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-no-idle-refill.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-cola-refill-20260706"
+            ],
+            "started_at": "2026-07-06T01:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T01:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-ARQ-archive-nogo-0246-20260706",
             "expires_at": "2026-07-06T00:45:00Z",
             "owner": "Arquitecto",
