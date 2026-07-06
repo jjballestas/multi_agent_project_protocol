@@ -124,6 +124,26 @@
             "updated_at": "2026-07-06T04:02:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-tarde",
+            "expires_at": "2026-07-06T17:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-tarde",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-mandato-aegis-mecanismo-etas.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-mandato-aegis-mecanismo-etas.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-final-remediation-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-1102-final-remediation-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-onboarding-remoto-checklist-huecos.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-onboarding-remoto-checklist-huecos.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-reconciliar-changelog-quality-series.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-reconciliar-changelog-quality-series.md"
+            ],
+            "started_at": "2026-07-06T15:25:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706G",
+            "updated_at": "2026-07-06T15:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-1102-action-delete-fix",
             "expires_at": "2026-07-06T12:40:11Z",
             "notes": "Stage consumed ACTION deletion from open mailbox.",
