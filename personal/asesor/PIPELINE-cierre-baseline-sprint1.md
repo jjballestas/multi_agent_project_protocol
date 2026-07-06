@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 01:46 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 02:08 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -46,8 +46,8 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 | # | Tarea | Dueno | Estado |
 |---|---|---|---|
 | 3.1 | Confirmar las 6 filas baseline con medicion completa; resolver token=NA (err.log volatil P2.1/P2.2) vs real | Arquitecto | `[!]` verificar -- hueco de tokens P2.1/P2.2 reportado |
-| 3.2 | **Resolver cadencia de atestacion del journal** (per-unidad vs checkpoint) -- ver seccion 4 y ask#1 | Arquitecto | `[!]` disparado, pendiente respuesta |
-| 3.3 | Registrar quality-data del baseline sin reabrir unidades: #10 (50212) + #11/#12/#13 (TASK-0255) | Arquitecto/Analista | `[~]` #10 en verificacion Analista; #11-13 ruteados (e22a190) |
+| 3.2 | **Resolver cadencia de atestacion del journal** (per-unidad vs checkpoint) -- ver seccion 4 y ask#1 | Arquitecto | `[~]` recomendacion HIBRIDA ruteada; esperando su respuesta |
+| 3.3 | Registrar quality-data del baseline sin reabrir unidades: #10 (50212) + #11/#12/#13 (TASK-0255) | Arquitecto/Analista | `[~]` #11-13 CONFIRMADOS + horneados en P4-006 (6i/6j/6k); #10 + los 3 esperan veredicto Analista |
 | 3.4 | Confirmar aislamiento de teething: toda unidad pre-30-jul tag=arranque; incidentes -> OVERHEAD-FIJO | Arquitecto | `[x]` convencion aplicada (P4.1 arranque, etc.) |
 | 3.5 | Confirmar que ninguna unidad baseline queda a medio vuelo pasado 25-jul (la ventana NO se extiende) | Arquitecto | `[x]` dev completo, nada en vuelo |
 | 3.6 | Preparar la reconciliacion 26-29: repo producto mapeable commit/rama/log -> tarea_id (huerfanos = abandonada + se publican) | Arquitecto -> Analista | `[ ]` pendiente (arranca 26-jul) |
@@ -58,9 +58,10 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 ## 4. Coordinacion en vuelo (ahora)
 | Item | Estado |
 |---|---|
-| Senal DECISION-0018 #11/#12/#13 (3 huecos QA de TASK-0255 baseline) al Arquitecto | `[~]` ruteada e22a190, esperando confirmacion |
+| Senal DECISION-0018 #11/#12/#13 (3 huecos QA de TASK-0255 baseline) al Arquitecto | `[x]` CONFIRMADOS linea-por-linea + horneados en SPEC-NOVA-P4-006 (6i/6j/6k); ruteados al Analista |
+| Cadencia de atestacion del journal (ask#1) | `[~]` recomendacion hibrida ruteada al Arquitecto |
 | Hallazgo #10 (50212 etiquetado cruzado) | `[~]` Arquitecto lo registro (a2657d5); Analista verifica |
-| TASK-0246 (informe adversarial NOVA-DEV) | `[~]` Arquitecto lo movio a in_review (5f04c4c) |
+| TASK-0246 (informe adversarial NOVA-DEV) | `[!]` Analista dio NOGO en el review; espera remediacion |
 | FYI archivo basura `nul` | `[x]` limpiado por el Arquitecto (8321277) |
 | EVIDENCIA-VIVA (A1-A9) | `[~]` alimentada cada sesion (directiva operador) |
 
