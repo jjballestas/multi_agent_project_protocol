@@ -118,6 +118,21 @@
             "updated_at": "2026-07-06T12:20:11Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-final-hub-response",
+            "expires_at": "2026-07-06T23:30:00Z",
+            "notes": "Hub response and memory for TASK-1102 final remediation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-final-hub-response",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-final-remediation-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T13:59:57Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T13:59:57Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-1102-hub-message",
             "expires_at": "2026-07-06T11:36:30Z",
             "notes": "TASK-1102 hub delivery message and memory recorded.",
@@ -131,6 +146,20 @@
             "status": "released",
             "task_id": "TASK-1102",
             "updated_at": "2026-07-06T11:06:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-memory-final",
+            "expires_at": "2026-07-06T23:45:00Z",
+            "notes": "Golden memory follow-up after hub TASK-1102 final response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T14:02:38Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T14:02:38Z"
         },
         {
             "claim_id": "CLAIM-20260706-Codex-TASK-1102-remediation-hub-close",
