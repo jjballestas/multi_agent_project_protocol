@@ -156,6 +156,21 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **Caveat:** trabajo de producto (RF-14/hub + Aegis), paralelo, cualitativo -- no el contraste medido de
   Etapa 1. Traza: re-gate b870af5 NO-GO, fix-loop 2/2 eaa1412 (escalada a operador si vuelve NO-GO).
 
+### A12. Los CANDADOS de study-integrity del humano-en-el-loop se verificaron bajo re-gate; el anti-patron se elimino
+- **Fenomeno:** tras 3 NO-GO de la capa de interrogacion (1001 t2), el operador (via Asesor) impuso 3 candados
+  al fix-loop 3: (1) fixtures NO-debilitados (el checker re-verifica que codifican el contrato corregido, no
+  gameados para pasar); (2) producto byte-identico salvo los cambios intencionales; (3) UI per-item (eliminar
+  el checkbox global que auto-generaba 13 confirmaciones = el rubber-stamp que el producto anti-vibecoding
+  existe para impedir).
+- **Evidencia (re-gate final GO, 968f6bf; TASK-1102/1104 review_approved):** los 3 candados PASS bajo
+  verificacion estatica + ejecucion de motor. El checker VERIFICO que el bloque de auto-confirmacion fue
+  ELIMINADO (13 checkboxes por item; la aprobacion global confirma solo su item). El fix NO pudo mover la
+  porteria (fixtures) ni re-introducir el anti-patron sin que el checker lo cazara.
+- **Por que importa:** cierra el loop caza->fix->verificacion-del-fix (extiende A11). Demuestra que un CANDADO
+  DE GOBERNANZA impuesto por el humano-en-el-loop tiene DIENTES bajo re-gate adversarial -- el producto
+  anti-vibecoding no envio su propio anti-patron. Es la metodologia protegiendo su tesis en el producto mismo.
+- **Caveat:** producto Aegis, paralelo, cualitativo. Traza: re-gate GO 968f6bf, 7973b5c.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
