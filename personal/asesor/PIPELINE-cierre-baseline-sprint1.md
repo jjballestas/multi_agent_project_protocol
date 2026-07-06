@@ -83,8 +83,8 @@ pre-registro). Lo unico permitido pre-30-jul = ESCRIBIR SPECs:
 ## 6. Pendientes del operador (sin fecha dura)
 | Item | Estado |
 |---|---|
-| Cadencia de atestacion del journal (ver ask#1: recomiendo hibrido -- hash-log commiteado per-unidad + anclaje #4 per-checkpoint) | `[!]` explicado; pendiente tu decision para rutear al Arquitecto |
-| Refinamientos s.23 (linea isomorfos + procedencia del desempate alfabetico PAR-2) | `[ ]` pendiente |
+| Cadencia de atestacion del journal (hibrido -- hash-log commiteado per-unidad + anclaje #4 per-checkpoint) | `[x]` RUTEADA al Arquitecto (95d3e54); esperando su respuesta |
+| Refinamientos s.23 (linea isomorfos + procedencia del desempate alfabetico PAR-2) | `[ ]` explicado al operador; pendiente decidir si se rutea al Arquitecto para enmienda |
 
 ---
 
