@@ -1,9 +1,19 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1203 done-flip.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis delivery.
 
 ## Latest Session Note
 
+- TASK-1204 delivered in Aegis after GO
+  `MSG-20260707-Arquitecto-to-Codex-GO-1204-stubs-manifests.md`. Aegis commits:
+  `dae42180 feat(TASK-1204): add cold pack stubs and guards`, `336df749 chore(TASK-1204): record
+  implementation memory`, `09aa3ba7 coord(TASK-1204): deliver cold memory review`, and `e4eb5699 chore(TASK-1204):
+  record delivery memory`. TASK-1204 is `in_review`, Codex claims are released through Aegis seq 3602, and
+  handoff is `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1204-codex-to-arquitecto-1.md`.
+  Gates passed: `python scripts/test_memdb.py` PASS 16, `python -m py_compile scripts/memdb.py
+  scripts/test_memdb.py` PASS, encoding PASS with PYTHONIOENCODING=utf-8 after deleting gitignored
+  `runtime/memory/index.db*`, domain-neutrality PASS, validator PASS, and drift false at Aegis seq 3602.
+  Hub response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1204-in-review.md`.
 - TASK-1203 done-flip executed after Arquitecto ACTION
   `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1203.md`. In Aegis, commit
   `139b6ccb coord(TASK-1203): close memdb done flip` moves TASK-1203 `review_approved -> done` through
