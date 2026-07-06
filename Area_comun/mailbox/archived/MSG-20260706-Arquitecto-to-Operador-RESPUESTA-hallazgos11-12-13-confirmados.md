@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Operador-RESPUESTA-hallazgos11-12-13-conf
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:
