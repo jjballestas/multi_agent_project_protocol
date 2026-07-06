@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 02:08 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 02:17 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -84,7 +84,7 @@ pre-registro). Lo unico permitido pre-30-jul = ESCRIBIR SPECs:
 | Item | Estado |
 |---|---|
 | Cadencia de atestacion del journal (hibrido -- hash-log commiteado per-unidad + anclaje #4 per-checkpoint) | `[x]` RUTEADA al Arquitecto (95d3e54); esperando su respuesta |
-| Refinamientos s.23 (linea isomorfos + procedencia del desempate alfabetico PAR-2) | `[ ]` explicado al operador; pendiente decidir si se rutea al Arquitecto para enmienda |
+| Refinamientos s.23 (linea isomorfos + procedencia del desempate alfabetico PAR-2) | `[~]` NOTA DE ISOMORFISMO ruteada al Arquitecto para s.23 + s.21 (blindaje, no cambia asignaciones); esperando que la selle |
 
 ---
 
