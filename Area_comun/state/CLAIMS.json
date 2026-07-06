@@ -42,6 +42,43 @@
             "updated_at": "2026-07-05T23:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-done-flip",
+            "expires_at": "2026-07-06T01:27:21Z",
+            "notes": "Done flip de TASK-0246 solicitado por Arquitecto tras review_approved.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T00:27:21Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:27:21Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-done-flip-msg",
+            "expires_at": "2026-07-06T01:27:52Z",
+            "notes": "Mailbox y memoria del done flip TASK-0246.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-done-flip-msg",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T00:27:52Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:27:52Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-0246-in-review-flip",
             "expires_at": "2026-07-06T00:22:00Z",
             "notes": "Correccion Arquitecto (DECISION-0018): scope original de Codex era un solo string concatenado con espacios en vez de array -> invalid row selector en validate. Claim ya estaba released (terminal); se corrige el scope y se libera de nuevo, sin reescribir el evento historico original.",
@@ -61,6 +98,21 @@
             "updated_at": "2026-07-05T23:22:00Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-TASK-0246-ratify-20260706",
+            "expires_at": "2026-07-06T01:23:16Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-TASK-0246-ratify-20260706"
+            ],
+            "started_at": "2026-07-06T00:23:16Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:23:16Z"
+        },
+        {
             "claim_id": "CLAIM-ARQ-archive-nogo-0246-20260706",
             "expires_at": "2026-07-06T00:45:00Z",
             "owner": "Arquitecto",
@@ -73,6 +125,28 @@
             "status": "released",
             "task_id": "TASK-0246",
             "updated_at": "2026-07-05T23:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-mailbox-archive2-20260706",
+            "expires_at": "2026-07-06T01:28:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-informe-specs.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-informe-specs.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-remediacion1.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-remediacion1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-cadencia-atestacion-journal.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-cadencia-atestacion-journal.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-nota-isomorfismo-s23-s21.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-nota-isomorfismo-s23-s21.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-archive2-20260706"
+            ],
+            "started_at": "2026-07-06T00:28:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:28:00Z"
         },
         {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",

@@ -3,7 +3,7 @@ message_id: MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-06

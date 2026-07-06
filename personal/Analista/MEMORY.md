@@ -5,7 +5,24 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-04 (TASK-0249 F3.3 instrumentacion re-juicio 2 OK/CERRABLE).
+> Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
+
+## Ultima actualizacion 2026-07-06 - TASK-0246 informe/SPEC P4-006 NO-GO registrado
+- TASK-0246 review documental del informe adversarial + SPEC-NOVA-P4-006: primera pasada hallo dos slips
+  falsables: F-0246-INF-01 (informe decia 12 SPECs, inventario canonico 17) y F-0246-P4006-01 (P4-006
+  referenciaba criterio 9 para auth; el correcto era criterio 6). Producto Nova-Budget N/A por instruccion
+  canonica docs-only.
+- Hub gates observados antes de la colision: validate vivo EXIT 0; clean clone hub validate EXIT 0;
+  clean clone encoding EXIT 0; domain vivo EXIT 0; drift false up_to_seq=4256; chain valid checked_events=3584;
+  `protocol.config.json` sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Colision: mientras preparaba el veredicto, Arquitecto corrigio los dos slips y luego registro el veredicto
+  NO-GO original en `3734019` con el artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-informe-specs-veredicto.md` y MSG
+  `Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-informe-specs-NOGO.md`.
+  Mi commit intermedio `d43431f` termino commiteando la remediacion documental, no el artefacto; no revertir
+  porque la remediacion es el fix canonico. Estado final de esta sesion: bloqueada por claim activo
+  `CLAIM-ARQ-archive-nogo-0246-20260706` y drift/snapshot mismatch mientras Arquitecto archiva/rutea
+  remediacion; no emitir nuevo OK hasta safe window y re-juicio sobre el REVIEW de remediacion.
 
 ## Ultima actualizacion 2026-07-04 - TASK-0249 F3.3 instrumentacion re-juicio 2 OK/CERRABLE
 - TASK-0249 re-juicio 2/2 del fix-loop F-0249-02/F-0249-03: OK/CERRABLE. Veredicto en commit
@@ -2041,3 +2058,15 @@
   encoding/domain exit 0; drift 0 `up_to_seq=3986`; chain valid `checked_events=3314`; #4 byte-identica
   sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`. Fix-loop: remediar rol real,
   guard exacto y comando npm reproducible; re-juicio Analista previo a cierre, maximo 2 iteraciones.
+- TASK-0246 remediacion 1 informe/P4-006 (2026-07-06): OK/CERRABLE, veredicto commiteado y pusheado en
+  `2fc9890` (`review(TASK-0246): Analista OK remediacion informe specs`). Ancla protocolo
+  `9c244712d7b8ad5937c59a549790f1a4f7778a4a`, remediacion documental `d43431f8`; producto Nova-Budget
+  N/A porque el REVIEW declara `SIN PRODUCTO EN ALCANCE` y no cita commit de producto. Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0246-informe-specs-remediacion1-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK.md`. F-0246-INF-01 pasa: inventario
+  `SPEC-NOVA-*.md` = 17, informe linea 45 declara 17 SPECs y fila transversal linea 62 incluye P2-003.
+  F-0246-P4006-01 pasa: P4-006 preambulo apunta a s.7 criterio 6 y deja nota de correccion de la referencia
+  previa a criterio 9. Gates en clean clone canonico: validate exit 0, encoding exit 0, domain exit 0, drift 0
+  `up_to_seq=4256`, #4 byte-identica sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+  Residual: working tree local estaba rojo por cambios ajenos/claim activa y snapshot mismatch no canonicos;
+  por eso la evidencia se tomo de clean clone de origin/main.

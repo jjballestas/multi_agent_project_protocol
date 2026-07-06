@@ -2,7 +2,7 @@
 task_id: TASK-0246
 title: "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)"
 type: docs
-status: in_review
+status: done
 owner: Arquitecto
 phase: P2
 priority: high

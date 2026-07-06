@@ -3,7 +3,7 @@ message_id: MSG-20260706-Operador-to-Arquitecto-ACTION-cadencia-atestacion-journ
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-06

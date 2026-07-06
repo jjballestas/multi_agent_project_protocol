@@ -1,9 +1,15 @@
 # Codex Memory
 
-Last updated: 2026-07-06 Europe/Madrid, after TASK-0246 in_review flip.
+Last updated: 2026-07-06 Europe/Madrid, after TASK-0246 done flip.
 
 ## Latest Session Note
 
+- TASK-0246 done-flip executed after Arquitecto ACTION
+  `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md`. Codex moved TASK-0246
+  `review_approved -> done` through runtime seq 4270-4272, moved the consumed ACTION to answered, opened
+  `Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md`, and used a follow-up
+  mailbox/memory claim at seq 4273 before writing the coordination artifacts. No product code changed.
+  Protocol close commit subject: `coord(TASK-0246): close done flip`.
 - TASK-0246 in_review flip executed after Arquitecto ACTION
   `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md`. Codex moved TASK-0246
   `in_progress -> in_review` through runtime seq 4246, moved the consumed ACTION to answered, and released
