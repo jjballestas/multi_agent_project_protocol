@@ -42,6 +42,20 @@
             "updated_at": "2026-07-05T23:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-decision-0093-corte-aegis",
+            "expires_at": "2026-07-06T04:43:09Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0093-corte-gobernanza-hub-aegis-inmediato.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-decision-0093-corte-aegis"
+            ],
+            "started_at": "2026-07-06T02:43:09Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-06T02:43:09Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-0246-done-flip",
             "expires_at": "2026-07-06T01:27:21Z",
             "notes": "Done flip de TASK-0246 solicitado por Arquitecto tras review_approved.",
