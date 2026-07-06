@@ -54,6 +54,26 @@ decisiones de dominio (ya clasificados asi por el Asesor, confirmado correcto en
 El paquete de "DEC de dominio P3.x" se reduce a UN item real (BR-C4 timing), ya enmarcado arriba con
 opciones + recomendacion. No hay decisiones de dominio nuevas escondidas en las SPECs ya escritas.
 
+## RESOLUCION DEL OPERADOR (2026-07-06, cierra el paquete)
+
+**BR-C4 = opcion (b)** (MSG-20260706-Operador-to-Arquitecto-ACTION-brc4-opcion-b-dba-encargo): el
+Operador tiene DBA y compromete el sembrado de la matriz de autorizacion por operacion en
+`DbsFinanciero_SANDBOX` con **deadline duro <= 29-jul**. Encargo del DBA redactado por el Asesor
+(`personal/asesor/DRAFT-ENCARGO-DBA-BR-C4-hardening.md`, espejo del encargo PAR-2 s.24); la fuente
+de dominio (tablas/procs/roles) la completan Operador + DBA.
+
+Gobernanza registrada por el Arquitecto:
+- P3.2/P3.3/P3.4 quedan con elegibilidad Q4 **CONDICIONAL** (n=10 condicional) hasta la entrega
+  verificada del DBA.
+- Al entregar VERIFICADO (criterios falsables del encargo): enmienda fechada del sello (formato
+  s.24/s.25) confirmando n=10.
+- **Auto-fallback pre-declarado:** si el 29-jul pasa sin entrega verificada, ejecuta la condicion YA
+  sellada (s.3) -> P3.2/P3.3/P3.4 caen del pool -> Q4 n=7 (opcion a), sin penalidad ni decision nueva.
+- Racional de limpieza: es ejecucion de una condicion ya sellada + hardening simetrico (el dev
+  gobernado no crea procs, regla 8) + decidida antes de datos de Sprint 1 (pre-registro limpio).
+- Tracking del deadline: memoria persistente del Arquitecto + prompt de arranque + panel del operador
+  (F3.2); punto de verificacion natural = ventana de reconciliacion 26..29-jul.
+
 task_id: TASK-0246
 status: prep-completo
 executive_summary: Paquete de decisiones de dominio P3.x preparado para el Operador. Un solo item genuinamente abierto (timing de cierre de BR-C4, con efecto directo en la pertenencia de P3.2/P3.3/P3.4 al pool Q4 segun regla ya sellada); DD-01/02/03 confirmadas resueltas y horneadas, sin marcadores pendientes en las SPECs.
