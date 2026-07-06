@@ -74,7 +74,7 @@
      se anotan en el título con [re-alcance: motivo].
    ============================================================ */
 const PIPELINE = {
-  updated_at: "2026-07-06 03:20",
+  updated_at: "2026-07-06 04:40",
   updated_by: "Arquitecto",
   sprint1_date: "2026-07-30",
   phases: [
@@ -122,6 +122,15 @@ const PIPELINE = {
       { id:"F6.1", t:"Fase 1 peones: A vs B bajo gobierno completo (≥15 tareas/brazo) → Q1", st:"pendiente", ev:"" },
       { id:"F6.2", t:"Fase 2: contraste ligero/completo (condicional a F3.2) → Q2/Q4", st:"pendiente", ev:"" },
       { id:"F6.3", t:"Interim de seguridad (8 semanas)", st:"pendiente", ev:"" }
+    ]},
+    { id:"AX", title:"Track AEGIS (paralelo, directiva 2026-07-06) — corte gobernanza + REQs + Contabilidad [orden Operador e749c0a]", window:"jul 6–30 (fondo; desde 30-jul Sprint 1 tiene prioridad DURA)", items:[
+      { id:"AX.1", t:"Corte de gobernanza hub→Aegis: complemento formal de DECISION-0088 (hub=Etapa 1 completa + protocolo neutral; Aegis=todo lo nuevo de la suite Nova)", st:"en_curso", ev:"[2026-07-06 04:40] DIRECTIVA e749c0a + plan/ETAs confirmados (263bf5b); redacción de la DECISIÓN complemento en curso esta sesión" },
+      { id:"AX.2", t:"Verificar 3 firmantes operativos en Aegis (llaves event_auth/actor_auth + capabilities maker/checker + e2e humo) + cablear cross-atestación dual (el #4 del hub registra sha256 de atestaciones Aegis por gate)", st:"en_curso", ev:"[2026-07-06 04:40] AUTORIZADO por el Operador (MSG-autoriza-aegis-firmantes-paso2); estaba bloqueado por el clasificador de permisos, autorización explícita recibida" },
+      { id:"AX.3", t:"DECISIONes de los 4 REQs futuros (orden: anti-vibecoding → intake → memoria-híbrida que SUPERSEDE DECISION-0071; aprendizajes-externos absorbidos con cita)", st:"pendiente", ev:"AUTORIZADO (mismo MSG); bloque dedicado 2-3h, ámbito de implementación Aegis/Zeus-Aegis, core pineado del hub PROHIBIDO" },
+      { id:"AX.4", t:"Implementación de los REQs en ámbito Aegis/Zeus-Aegis (post-DECISIONes; no son unidades medidas)", st:"pendiente", ev:"" },
+      { id:"AX.5", t:"Análisis de migración de Contabilidad (~57 formularios, ~34 tablas maco/Maco/Cont) gobernado desde Aegis — equivalente al análisis de Presupuesto, multi-sesión", st:"pendiente", ev:"Fuentes: D:/Agentes/Ingenas/Budget/. Insumo del corpus candidato del sello Etapa 2 (unidades enumerables + paridad definible)" },
+      { id:"AX.6", t:"Peones-vs-tokens: contraste candidato pre-registrado DENTRO del paquete de diseño del sello Etapa 2 (mono vs peones bajo gobierno completo; ventanas por COMPLETITUD CERTIFICADA, no por fecha) [re-alcance: TASK-0231/F6.1 se rediseña aquí por decisión del Operador 2026-07-06]", st:"en_curso", ev:"[2026-07-06 04:40] Nota de diseño en curso esta sesión; brazo gobernado Etapa 1 sigue MONO (línea roja del sello intacta)" },
+      { id:"AX.7", t:"Declaración de trabajo paralelo ARM-ORTOGONAL en el sello Etapa 1 (REQs + Contabilidad corren 06→30-jul en instancia separada, no correlacionado con la asignación ligero/completo de Q4)", st:"en_curso", ev:"[2026-07-06 04:40] Enmienda fechada al sello en curso esta sesión" }
     ]},
     { id:"CB", title:"Carril B (gateado, ≤1 día/semana) — PRD-05", window:"cuando el Carril A lo permita", items:[
       { id:"CB.1", t:"Semana 0: PII/redacción corpus + licencias + endorsement arXiv", st:"pendiente", ev:"" },
