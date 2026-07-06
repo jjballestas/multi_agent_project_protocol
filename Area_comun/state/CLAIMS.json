@@ -113,6 +113,20 @@
             "updated_at": "2026-07-06T00:23:16Z"
         },
         {
+            "claim_id": "CLAIM-ARQ-archive-0246-donedone-20260706",
+            "expires_at": "2026-07-06T01:32:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-0246-donedone-20260706"
+            ],
+            "started_at": "2026-07-06T00:32:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:32:00Z"
+        },
+        {
             "claim_id": "CLAIM-ARQ-archive-nogo-0246-20260706",
             "expires_at": "2026-07-06T00:45:00Z",
             "owner": "Arquitecto",
