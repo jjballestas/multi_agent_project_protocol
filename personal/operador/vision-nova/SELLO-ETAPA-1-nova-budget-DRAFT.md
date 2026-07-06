@@ -584,6 +584,14 @@ seleccion fue "pre-existencia + orden de dominio", no el resultado que producia.
 ventana baseline, GO inmediato). P4.3 (Apply_Commitment_Adjustment) queda como el miembro GOBERNADO de
 PAR-1, para su brazo en Sprint 1 (post-30-jul, bajo gobierno completo atestado).
 
+**NOTA DE ISOMORFISMO (blindaje del desempate, anadida 2026-07-06 por directiva del Operador):** P4.2 y
+P4.3 son S/S ISOMORFAS (ya declarado en s.4, tabla de pares), procs de ajuste EXISTENTES espejo, mismo
+patron "solo superficie API". En consecuencia, el desempate aplicado arriba -- aunque se resolvio DESPUES
+de conocer los 3 resultados candidatos y con la semilla ya publica -- es INTRASCENDENTE para el contraste:
+cualquiera que fuese el miembro baseline vs gobernado, la comparacion pareada no se sesga (no hay grado de
+libertad que la eleccion pueda explotar para favorecer un resultado). La regla la fijo el Operador
+(autoridad de dominio), no una discrecion del Arquitecto.
+
 ## 22. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - SELECT sobre Budget_Adjustment (F-NOVA-01 de P4.2/TASK-0254)
 
 **No reabre el sello; test-infra.** F-NOVA-01 de TASK-0254 (P4.2) fallo en vivo con SQL 229 (`SELECT`
@@ -621,6 +629,16 @@ completo, el PRIMERO alfabeticamente gana la asignacion BASELINE** (`Annul_Avail
 **RESULTADO: Annul_Availability_Certificate es el miembro BASELINE de PAR-2** (dev medido, superficie C#
 sobre el proc de hardening ya construido y verificado por el DBA). `Annul_Commitment` queda como el
 miembro GOBERNADO de PAR-2, para su brazo en Sprint 1 (post-30-jul).
+
+**NOTA DE ISOMORFISMO (blindaje del desempate, anadida 2026-07-06 por directiva del Operador):** los dos
+miembros de PAR-2 (`Annul_Availability_Certificate` / `Annul_Commitment`) son ISOMORFOS -- mismo estrato
+M/M, mismo patron "solo superficie API", procs espejo (anulacion de CDP vs anulacion de RP) con sets de
+THROW paralelos (50100 + 50280-50287 vs 50100 + 50290-50297), ambos construidos y verificados por el DBA
+con el mismo preflight ampliado (s.24). En consecuencia, el desempate alfabetico -- aunque se aplico
+DESPUES de conocer el empate y con la semilla ya publica -- es INTRASCENDENTE para el contraste: cualquiera
+que fuese el miembro baseline vs gobernado, la comparacion pareada no se sesga (no hay grado de libertad
+que la eleccion pueda explotar para favorecer un resultado). La regla la fijo el Operador (autoridad de
+dominio), no una discrecion del Arquitecto.
 
 ## 24. ENMIENDA FECHADA 2026-07-05 (Arquitecto) - Preflight AMPLIADO completo de PAR-2 + correccion de THROW real
 

@@ -233,6 +233,23 @@ def git_commit(corpus, paths, msg):
     subprocess.check_call(["git", "-C", root, "commit", "-m", msg])
 
 
+def hashlog_path(corpus):
+    # sidecar COMMITEADO (fuera de corpus/, que esta gitignored): sella el sha256
+    # del journal en el instante del cierre de cada unidad, sin submit_intent por unidad.
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(corpus))), "medicion_hashlog.csv")
+
+
+def append_hashlog(tabla, corpus, unit_id, close_ts, journal_sha256):
+    path = hashlog_path(corpus)
+    is_new = not os.path.exists(path)
+    with open(path, "a", newline="") as f:
+        w = csv.writer(f)
+        if is_new:
+            w.writerow(["tabla", "unit_id", "close_ts", "sha256_journal_at_close"])
+        w.writerow([tabla, unit_id, close_ts, journal_sha256])
+    return path
+
+
 def sha256_file(path):
     if not os.path.exists(path):
         return None
@@ -294,8 +311,22 @@ def do_write(args, op):
     jp = journal_path(tabla, corpus)
     print("OK %s seq=%d clave=%s -> %s" % (op, seq, clave, os.path.basename(jp)))
     print("vista re-materializada: %s (%d filas)" % (os.path.basename(vp), len(order)))
+    hp = None
+    if op == "CLOSE":
+        jh = sha256_file(jp)
+        close_ts = args.event_ts or datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        hp = append_hashlog(tabla, corpus, clave, close_ts, jh)
+        print("hashlog sellado: %s sha256_journal_at_close=%s" % (os.path.basename(hp), jh))
     if not args.no_commit:
-        git_commit(corpus, [jp, vp], "medicion(%s): %s %s seq=%d" % (tabla, op.lower(), clave, seq))
+        # corpus/ esta gitignored (journal/vista NO se commitean, por diseno); ese intento
+        # falla con proposito (git add rechaza rutas ignoradas) -- no debe impedir el commit
+        # SEPARADO del hashlog sidecar (hp), que SI esta fuera de corpus/ y SI se commitea.
+        try:
+            git_commit(corpus, [jp, vp], "medicion(%s): %s %s seq=%d" % (tabla, op.lower(), clave, seq))
+        except Exception as e:
+            sys.stderr.write("AVISO: commit de journal/vista omitido (corpus gitignored por diseno): %s\n" % e)
+        if hp:
+            git_commit(corpus, [hp], "medicion(hashlog): sella %s %s seq=%d sha256=%s" % (tabla, clave, seq, jh))
     if args.atestar:
         cmd_sha256(tabla, corpus)
 
