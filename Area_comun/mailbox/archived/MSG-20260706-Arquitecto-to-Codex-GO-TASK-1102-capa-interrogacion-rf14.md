@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Codex-GO-TASK-1102-capa-interrogacion-rf1
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:

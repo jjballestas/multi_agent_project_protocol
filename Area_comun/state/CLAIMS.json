@@ -42,6 +42,24 @@
             "updated_at": "2026-07-06T03:23:14Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-1102ciclo",
+            "expires_at": "2026-07-06T14:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-1102ciclo",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-GO-TASK-1102-capa-interrogacion-rf14.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Codex-GO-TASK-1102-capa-interrogacion-rf14.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-1102-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-brc4-GO-gate2clones-verde-orden-ejecutado.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-brc4-GO-gate2clones-verde-orden-ejecutado.md"
+            ],
+            "started_at": "2026-07-06T12:07:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706E",
+            "updated_at": "2026-07-06T12:07:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-lote8",
             "expires_at": "2026-07-06T07:30:00Z",
             "owner": "Arquitecto",
