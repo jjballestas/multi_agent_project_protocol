@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 03:19 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 04:01 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -65,7 +65,9 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 | FYI archivo basura `nul` | `[x]` limpiado por el Arquitecto (8321277) |
 | EVIDENCIA-VIVA (A1-A9) | `[~]` alimentada cada sesion (directiva operador) |
 | Adopcion 4R (gentle-ai): debate APROBADO | `[x]` DECISION-0092 registrada por el Arquitecto (9ca131b); seccion A aplicable-ahora + B diferida a Sprint 1 |
-| Cola no-idle del Arquitecto (re-llenado) | `[~]` DIRECTIVA ruteada: (1) actualizar HTML operador stale; (2) materializar contrato de salida/carve-outs de DECISION-0092 A; (3) prep reconciliacion 26-29; (4) prioridad TASK-0178 |
+| Cola no-idle del Arquitecto (ronda 1) | `[x]` DRENADA 4/4: HTML actualizado (f95d147), REVIEW_CONTRACT.md+CARVE_OUTS.md (f25bf39), reconciliacion turnkey (ad6a389), TASK-0178 |
+| Cola PREP Sprint 1 (ronda 2, escribir-no-construir) | `[~]` DIRECTIVA ruteada: (1) SPEC de mecanismos diferidos DECISION-0092 B; (2) hardening adversarial de SPECs Sprint-1; (3) paquete DEC dominio P3.x para el operador |
+| MURO DE VENTANA SELLADA | `[!]` casi todo lo pendiente es sellado-Sprint-1 (no construir) / bloqueado (Etapa 2) / requiere decision operador (H6 alcance, DEC P3.x) |
 
 ---
 
