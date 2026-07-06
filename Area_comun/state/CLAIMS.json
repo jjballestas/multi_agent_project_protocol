@@ -182,6 +182,35 @@
             "updated_at": "2026-07-06T15:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-1104-hub-response",
+            "expires_at": "2026-07-06T21:26:26Z",
+            "notes": "Hub response and memory for TASK-1102/TASK-1104 partitioned delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-1104-hub-response",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-1104-partitioned-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T20:26:26Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T20:26:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-1104-memory-final",
+            "expires_at": "2026-07-06T21:01:42Z",
+            "notes": "Golden memory follow-up after hub partitioned delivery commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-1104-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T20:31:42Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T20:31:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-1102-action-delete-fix",
             "expires_at": "2026-07-06T12:40:11Z",
             "notes": "Stage consumed ACTION deletion from open mailbox.",

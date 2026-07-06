@@ -1,9 +1,26 @@
 # Codex Memory
 
-Last updated: 2026-07-06 Europe/Madrid, after TASK-1102 final remediation.
+Last updated: 2026-07-06 Europe/Madrid, after TASK-1102/TASK-1104 partitioned delivery.
 
 ## Latest Session Note
 
+- TASK-1102/TASK-1104 partitioned delivery after ACTIONs
+  `MSG-20260706-Arquitecto-to-Codex-ACTION-1102-fixloop3-tests-ui-peritem-1104-drift.md` and
+  `MSG-20260706-Arquitecto-to-Codex-ACTION-1102-estrategia-testci-particionado.md` completed. Product repo
+  `D:/Agentes/Zeus/Zeus-protocol` commit `968f6bf fix(TASK-1104): preserve auto-commit trailers` changes
+  `buildAutoCommitMessage` to preserve newline-separated final trailers, so auto commits satisfy the hub trailer
+  gate (`Task-Id: none` plus `Ops-Reason` for coordination). Aegis coordination commit
+  `7d7144aa coord(TASK-1102): deliver partitioned gate evidence` releases
+  `CLAIM-20260706-Codex-TASK-1102-1104-fixloop3` and adds
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1102-codex-to-arquitecto-4.md`. Hub response is
+  `Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-1104-partitioned-in-review.md`; hub
+  coordination commit subject is `coord(TASK-1102): announce partitioned delivery`. Product gates passed:
+  `node --check src/intakeQuality.js src/server.js public/app.js`, `npm test` (124 tests: 102 pass,
+  22 skipped), and partitioned slow before-red tests by exit-code: `test harness isolates runtime config env`,
+  `Enviar al Arquitecto adds governed mailbox notice`, `submit_intent contention returns typed sanitized error`,
+  `candidate review stays outside the ledger`, `auto commit push lands only exact submit_intent outputs`. Aegis
+  gates passed: encoding/domain-neutrality/validator and drift false at `up_to_seq=3534`. Residual executor risk:
+  unrelated `TASK-0181 AC3-bis` still timed out individually at 183s with EPIPE after timeout in this executor.
 - TASK-1102 final remediation after ACTION
   `MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion2-final.md` delivered. Product repo
   `D:/Agentes/Zeus/Zeus-protocol` commit `e1566a1 fix(TASK-1102): complete intake quality remediation` fixes
