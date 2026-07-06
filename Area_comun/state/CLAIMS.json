@@ -124,6 +124,28 @@
             "updated_at": "2026-07-06T05:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-noche",
+            "expires_at": "2026-07-06T21:16:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-noche",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-ACK-hallazgo14-cerrado-serie-formal.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-ACK-hallazgo14-cerrado-serie-formal.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-ESCALACION-TASK-1102-doble-nogo.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-ESCALACION-TASK-1102-doble-nogo.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-LOTE2-PENDIENTE-onboarding-remoto-dba-identidad-anchor.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-LOTE2-PENDIENTE-onboarding-remoto-dba-identidad-anchor.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-reconciliacion-changelog-14-15-alias.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-reconciliacion-changelog-14-15-alias.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-adjudicaciones-1102-lote2.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-adjudicaciones-1102-lote2.md"
+            ],
+            "started_at": "2026-07-06T19:16:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706I",
+            "updated_at": "2026-07-06T19:16:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-postsmoke",
             "expires_at": "2026-07-06T06:02:00Z",
             "owner": "Arquitecto",

@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Operador-ESCALACION-TASK-1102-doble-nogo
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-06
