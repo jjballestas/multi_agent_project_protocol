@@ -1,9 +1,21 @@
 # Codex Memory
 
-Last updated: 2026-07-06 Europe/Madrid, after TASK-1102/TASK-1104 partitioned delivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1203 fix-loop 1.
 
 ## Latest Session Note
 
+- TASK-1203 fix-loop 1 delivered in Aegis after hub ACTION
+  `MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11.md`. Aegis commit
+  `ecc9d5d0 fix(TASK-1203): remediate memdb review findings` fixes case-insensitive `MEMORY*.md` memory
+  classification, adds real-repo `agent_memory` row coverage for the three personal memory files, asserts
+  specific CA5 drift errors per negative case, and upgrades CA11 to compare `memdb_allowlist.json`
+  regime-by-regime against SPEC-AEGIS-1002 s.8b. Aegis commit `75017e1f chore(TASK-1203): record fix-loop
+  memory` records the golden memory update. TASK-1203 is `in_review`, Codex claims are released through seq
+  3576, and handoff is
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1203-codex-to-arquitecto-2.md`. Gates passed:
+  `python scripts/test_memdb.py` PASS 11 tests, `python -m py_compile scripts/memdb.py scripts/test_memdb.py`
+  PASS, Aegis encoding/domain-neutrality/validator PASS, and Aegis drift false at seq 3576. Hub response is
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-fixloop1-in-review.md`.
 - TASK-1203 delivered in Aegis after ACTION
   `MSG-20260706-Arquitecto-to-Codex-ACTION-retomar-1203-neutralidad-claim-corregido.md`. Aegis implementation
   commit `c6cfbc7b feat(TASK-1203): deliver memdb indexer` fixes the neutrality finding by replacing

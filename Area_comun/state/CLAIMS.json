@@ -323,6 +323,21 @@
             "updated_at": "2026-07-06T21:58:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1203-hub-fixloop-response",
+            "expires_at": "2026-07-07T23:59:00Z",
+            "notes": "Hub response and memory for TASK-1203 fix-loop 1 delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1203-hub-fixloop-response",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-fixloop1-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T22:29:25Z",
+            "status": "released",
+            "task_id": "TASK-1203",
+            "updated_at": "2026-07-06T22:29:25Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

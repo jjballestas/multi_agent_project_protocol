@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d5fd7fd332f5154adf7d19624e667a8b60a29aa7678ecbf833f14fa164130b94",
+  "canonical_hash": "3b8113a0059fcafa19305bbbdda7c67e1873f4a8bdd7cd7876159aa24b1908bd",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1518,7 +1518,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-1102": 14,
-      "TASK-1203": 2,
+      "TASK-1203": 4,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1526,7 +1526,7 @@
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3704,
+    "events_applied": 3706,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2576,6 +2576,7 @@
       "arquitecto:upsert-0156:claim-acquire": 1201,
       "arquitecto:upsert-0156:claim-release": 1203,
       "arquitecto:upsert-0156:ready": 1202,
+      "claim-release-Codex-TASK-1203-hub-fixloop-response-20260707": 4377,
       "codex-carril-a-monitor-acquire-2026-06-19T15:30:53Z": 685,
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
@@ -4968,6 +4969,7 @@
       "intent:Codex:claim:fc9497b48032adc63222133c78d1131a233d6d25c3513d50eb59fb04ead597f9": 3135,
       "intent:Codex:claim:fcad8fa933ed536067ac758fcd7ca1181f48a060797b27dbfd6bc2a68497c648": 3081,
       "intent:Codex:claim:fd218cb88dafd168197a0754ba30391574e4ac36267e3ed54336d4513526f6af": 4160,
+      "intent:Codex:claim:fd4720d165d0205d0b3fac784737c6c0a7953389df772c4127c65eb8614f2f66": 4376,
       "intent:Codex:claim:fe96ec348c5c621f6b67b2ebabacdb908735973053e06d4b5016007dc49286fe": 3791,
       "intent:Codex:claim:fec90572d679221aa4dca869fa1a8a0f2be2221b13715c828749bc7d09f7ef66": 2594,
       "intent:Codex:claim:ff188760cdff07d1971ec0a08222b22cb32fed5566662f17f8c2e648a1789a2f": 3940,
@@ -5234,5 +5236,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4375
+  "up_to_seq": 4377
 }
