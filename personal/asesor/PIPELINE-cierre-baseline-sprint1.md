@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 04:01 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 04:24 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -66,8 +66,8 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 | EVIDENCIA-VIVA (A1-A9) | `[~]` alimentada cada sesion (directiva operador) |
 | Adopcion 4R (gentle-ai): debate APROBADO | `[x]` DECISION-0092 registrada por el Arquitecto (9ca131b); seccion A aplicable-ahora + B diferida a Sprint 1 |
 | Cola no-idle del Arquitecto (ronda 1) | `[x]` DRENADA 4/4: HTML actualizado (f95d147), REVIEW_CONTRACT.md+CARVE_OUTS.md (f25bf39), reconciliacion turnkey (ad6a389), TASK-0178 |
-| Cola PREP Sprint 1 (ronda 2, escribir-no-construir) | `[~]` DIRECTIVA ruteada: (1) SPEC de mecanismos diferidos DECISION-0092 B; (2) hardening adversarial de SPECs Sprint-1; (3) paquete DEC dominio P3.x para el operador |
-| MURO DE VENTANA SELLADA | `[!]` casi todo lo pendiente es sellado-Sprint-1 (no construir) / bloqueado (Etapa 2) / requiere decision operador (H6 alcance, DEC P3.x) |
+| Cola PREP Sprint 1 (ronda 2) | `[~]` item 1 (SPEC lenses_required+profile Nova, c40f870) e item 3 (paquete DEC P3.x, 52e52ed) HECHOS; item 2 (hardening SPECs Sprint-1) en curso (FYI e5d8f86) |
+| MURO DE VENTANA SELLADA -> RESUELTO | `[x]` el operador abrio el track paralelo Aegis (e749c0a): trabajo sustancial sin romper el sello. Ver seccion 7 |
 
 ---
 
@@ -89,6 +89,24 @@ pre-registro). Lo unico permitido pre-30-jul = ESCRIBIR SPECs:
 |---|---|
 | Cadencia de atestacion del journal (hibrido -- hash-log commiteado per-unidad + anclaje #4 per-checkpoint) | `[x]` RUTEADA al Arquitecto (95d3e54); esperando su respuesta |
 | Refinamientos s.23 (linea isomorfos + procedencia del desempate alfabetico PAR-2) | `[~]` NOTA DE ISOMORFISMO ruteada al Arquitecto para s.23 + s.21 (blindaje, no cambia asignaciones); esperando que la selle |
+
+---
+
+## 7. Track paralelo Aegis (06-30 jul, directiva operador e749c0a) -- NO toca lo medido
+Abierto por el operador para aprovechar la ventana SIN romper el sello (Etapa 1 intacta; lo MEDIDO se queda en
+el hub, gobernanza NUEVA de la suite Nova nace en la instancia Aegis `D:/Agentes/Zeus/NOVA/Aegis`; core
+pineado del hub intocable). Prioridad DURA desde 30-jul: Sprint 1 gobernado > Contabilidad > REQs (SLA sello).
+| # | Item | Estado |
+|---|---|---|
+| 7.1 | Corte gobernanza hub->Aegis: complemento formal de DECISION-0088 + 3 firmantes operativos + e2e humo + **cross-atestacion dual cableada** | `[~]` ruteado (INMEDIATO) |
+| 7.2 | Cola 4 REQs (ambito Aegis/Zeus-Aegis): anti-vibecoding -> intake -> memoria-hibrida (**supersede DECISION-0071**); aprendizajes-externos absorbidos con cita | `[ ]` DECISION primero, implementacion despues |
+| 7.3 | Analisis migracion Contabilidad (fuente Ingenas ~57 forms/~34 tablas maco/Cont): mapa->casos, Access->SQL `Accounting`, descomposicion S/M/L; **insumo corpus Etapa 2** | `[ ]` arranca de inmediato, gobernado desde Aegis |
+| 7.4 | Peones/tokens = contraste candidato PRE-REGISTRADO de Etapa 2 sobre Contabilidad; triggers por **COMPLETITUD certificada (no fecha)**; memoria-hibrida como tratamiento declarado | `[ ]` diseno en sello Etapa 2, NO Sprint 1; TASK-0231 no se activa en el hub |
+| 7.5 | Declaracion de trabajo paralelo en el reporte Etapa 1 (confound **arm-ORTOGONAL**, de fondo, no oculto) | `[ ]` blindaje de honestidad |
+
+**Refinamientos del Asesor** (arm-ortogonalidad del confound, formalizar complemento 0088, cablear
+cross-atestacion dual, sellar trigger-por-completitud): entregados al Arquitecto por el OPERADOR
+directamente. NO ruteados por el Asesor.
 
 ---
 
