@@ -12,7 +12,8 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1203 done-flip.
   A malformed first doneflip claim scope from a PowerShell JSON array issue was normalized and released
   in-ledger before commit. Aegis gates passed: validator OK, encoding OK, domain-neutrality exit 0, drift
   false at `up_to_seq=3590`. Hub response:
-  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md`.
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done.md`; hub commit
+  `97d3a06 coord: announce TASK-1203 done flip` uses `Task-Id: none` and `Ops-Reason` trailers.
 - TASK-1203 fix-loop 1 delivered in Aegis after hub ACTION
   `MSG-20260707-Arquitecto-to-Codex-ACTION-1203-nogo-agentmemory-ca11.md`. Aegis commit
   `ecc9d5d0 fix(TASK-1203): remediate memdb review findings` fixes case-insensitive `MEMORY*.md` memory

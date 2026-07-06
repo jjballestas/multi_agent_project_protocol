@@ -323,6 +323,20 @@
             "updated_at": "2026-07-06T21:58:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
+            "expires_at": "2026-07-07T23:59:00Z",
+            "notes": "Golden memory follow-up after hub TASK-1203 done-flip response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T22:52:34Z",
+            "status": "released",
+            "task_id": "TASK-1203",
+            "updated_at": "2026-07-06T22:52:34Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-response",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Hub response and memory for Aegis TASK-1203 done-flip.",
