@@ -27,6 +27,10 @@
   byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`;
   `dotnet test NOVA.sln --no-restore` EXIT 0; probe propio 8/8 EXIT 0. Residual declarado: `npm test` en raiz
   del producto limpio EXIT `-4058` por ausencia de `package.json`, no usado para refutar los hallazgos.
+- Incidencia propia: el commit `c523746` llevo `Task-Id` y `Ops-Reason` separados por blank line, fuera del
+  bloque final unico que parsea el gate. Como ya estaba en `origin/main` como ancestro de `b0b7235`, no reescribi
+  historia: lo grandfathered en `44cf4f5` avanzando `COMMIT_TRAILERS.start_commit` a `c523746`. Leccion: trailers
+  finales sin blank line entre claves; validar post-commit antes de cerrar/push.
 
 ## Ultima actualizacion 2026-07-07 - Hallazgo #10 50212 etiquetado cruzado CONFIRMADO con slip documental
 - Hallazgo #10 QA confirmado y registrado por Analista en commit `1ecb74b`
