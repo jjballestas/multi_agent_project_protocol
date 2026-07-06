@@ -5,7 +5,7 @@
 > COMPLEMENTA (no reemplaza) el panel del operador `personal/operador/vision-nova/pipeline-vision-nova.html`
 > (ese lo mantiene el Arquitecto). Este lo mantengo YO y lo actualizo a medida que las tareas avanzan.
 > Fuente de verdad de fechas = SELLO-ETAPA-1-nova-budget-DRAFT.md (s.3, s.4, s.10, s.11.1).
-> Ultima actualizacion: 2026-07-06 02:17 (local, UTC+2).
+> Ultima actualizacion: 2026-07-06 02:58 (local, UTC+2).
 
 ## Leyenda
 `[x]` hecho/verificado  |  `[~]` en curso  |  `[ ]` pendiente  |  `[!]` atencion/decision  |  `[S]` SELLADO (no tocar, pre-registro)
@@ -64,6 +64,7 @@ El dev esta completo; el cierre es de INTEGRIDAD. Dueno de la mayoria = Arquitec
 | TASK-0246 (informe adversarial NOVA-DEV) | `[!]` Analista dio NOGO en el review; espera remediacion |
 | FYI archivo basura `nul` | `[x]` limpiado por el Arquitecto (8321277) |
 | EVIDENCIA-VIVA (A1-A9) | `[~]` alimentada cada sesion (directiva operador) |
+| Adopcion 4R (gentle-ai): debate APROBADO por operador | `[~]` DIRECTIVA ruteada al Arquitecto: redactar DECISION + aplicar-ahora (naming lentes/contrato/carve-outs) + diferir cambios de gate a Sprint 1; fuente = DRAFT-revision-4r-decisiones-v1.md |
 
 ---
 
