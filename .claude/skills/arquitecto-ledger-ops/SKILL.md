@@ -134,6 +134,46 @@ medias; (2) si aborto por rojo, cuando el canonico vuelva verde **des-seen** su 
 reintente; (3) su reporte de aborto ("que Arquitecto/Codex deje el canonico verde y libere/cierre TASK-XXXX") es la
 senal -> destraba el ledger (espera el commit del peer o cierra tu la transicion) y luego des-seen.
 
+## 6. `submit_intent` timeoutea a mitad de transaccion (2026-07-06, real, 3 episodios en una sesion)
+Bajo contencion/carga (peers escribiendo el mismo `events.jsonl` casi simultaneamente), `submit_intent.py`
+puede timeoutear (30-100s) DESPUES de haber escrito uno o mas eventos `intent.applied` al log pero ANTES de
+completar TODOS los intents de la transaccion o sus EFECTOS DE ARCHIVO. Dos sintomas distintos:
+- **Falta un intent de la transaccion (tipicamente el `claim release` final):** `tail events.jsonl` muestra
+  los primeros N-1 intents aplicados pero no el ultimo. Fix: reenvia SOLO el intent faltante como
+  `--intent` standalone (no la transaccion completa -- reenviarla entera fallaria porque los primeros
+  intents ya se aplicaron, p.ej. "claim already active").
+- **El evento SI aplico pero el EFECTO DE ARCHIVO no ocurrio:** especifico de `mailbox_archive`. La logica
+  que mueve fisicamente el `.md` de `open/` a `archived/` (`apply_mailbox_side_effects` en
+  `submit_intent.py`) corre SOLO en el momento del submit original -- `materialize_from_event_log_if_
+  enabled()` (la funcion de re-materializacion) SOLO reconstruye los JSON de estado (CLAIMS/TASK_INDEX/
+  PROJECT_STATE), NO re-ejecuta efectos de archivo. Si el proceso muere despues de escribir el evento
+  `mailbox_archive` pero antes de mover el archivo, el ledger dice "archivado" y el disco dice "sigue en
+  open/" -- drift silencioso. Fix: mueve el archivo A MANO replicando la logica exacta (actualizar
+  `status: open` -> `status: archived` en el frontmatter del `.md`, luego mover el archivo de
+  `Area_comun/mailbox/open/` a `Area_comun/mailbox/archived/`) -- NUNCA reenvies el intent (fallaria con
+  "message not found in open" porque el evento ya dice archivado).
+- **Diagnostico generico:** tras cualquier timeout de `submit_intent`, SIEMPRE (1) `tail -N events.jsonl`
+  comparando los `intent_count` esperados de la transaccion contra los que realmente aparecen; (2)
+  re-materializar state (s.3 de este skill); (3) verificar el estado FISICO real (mailbox, claims activos)
+  contra lo que el log dice; (4) reenviar SOLO lo que falta.
+- **Causa raiz del timeout AUN no diagnosticada con certeza** (el lock `.ledger.lock` se probo LIBRE con un
+  probe manual `msvcrt.locking(LK_NBLCK)` durante uno de los hangs -- no es el lock file el que bloquea).
+  Candidato mas probable: I/O lento bajo escritura concurrente del arbol compartido. Mitigacion que
+  funciono: reintentar con timeout MUY generoso (90-100s) en vez de asumir deadlock indefinido.
+
+## 7. Cuando el CLASIFICADOR DE PERMISOS del harness bloquea una accion (2026-07-06, nuevo)
+El auto-mode classifier del harness puede bloquear una accion tuya que consideras legitima por precedente
+ya establecido (p.ej. avanzar `start_commit` de `COMMIT_TRAILERS.json` por un commit de un peer/asesor sin
+trailer -- mecanismo documentado y usado repetidamente en este mismo skill/archivo) o por ser claramente
+necesaria para la tarea (p.ej. verificar llaves/firmantes de OTRA instancia como parte de un corte de
+gobernanza pedido explicitamente por el operador). **La respuesta correcta es SIEMPRE parar y pedir
+autorizacion explicita** (via `AskUserQuestion` en sesion interactiva, o via mailbox si es asincrono) --
+**NUNCA buscar un comando alternativo que logre lo mismo sin el permiso** (el classifier puede no tener el
+contexto completo del precedente/historia; tu trabajo es darle ese contexto al operador para que decida,
+no rodear el bloqueo). Si el operador confirma, procede con la MISMA accion que fue bloqueada (no una
+alternativa "creativa"); si no confirma, deja la accion pendiente y sigue con el resto de la cola.
+
 ## Checklist de una linea (pega mentalmente antes de actuar)
 ASCII? · response_owner? · type valido para el peer? · sin "para"+peer? · claim anidado + scope#self + fragmentos? ·
-.md con status/file? · validate+encoding exit 0? · committeado antes de pedir review? · gateado por exit-code?
+.md con status/file? · validate+encoding exit 0? · committeado antes de pedir review? · gateado por exit-code? ·
+si el classifier bloquea, pido permiso -- no rodeo?
