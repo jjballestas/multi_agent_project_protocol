@@ -22,6 +22,10 @@
   `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`; `dotnet test NOVA.sln --no-restore`
   EXIT 0. Residual declarado: `npm test` raiz en producto EXIT `-4058` por ausencia de `package.json`, tratado
   como residual de gate transversal porque la ACTION canonica dice SIN PRODUCTO EN ALCANCE.
+- Incidencia propia: el commit `003f813` omitio `Task-Id: none` y dejo solo `Ops-Reason`; el gate quedo rojo
+  post-push. Remediado sin reescribir historia en `467b15b`, avanzando `COMMIT_TRAILERS.start_commit` a `0d3d182`
+  y dejando leccion explicita: commits de coordinacion sin tarea requieren exactamente `Task-Id: none` + `Ops-Reason`
+  en el bloque final.
 
 ## Ultima actualizacion 2026-07-06 - TASK-0246 informe/SPEC P4-006 NO-GO registrado
 - TASK-0246 review documental del informe adversarial + SPEC-NOVA-P4-006: primera pasada hallo dos slips
