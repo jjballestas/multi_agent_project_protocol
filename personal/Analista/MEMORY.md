@@ -1,4 +1,4 @@
-# MEMORY - Analista (voz analista; firma "Analista", antes "Claude-analista") - multi_agent_project_protocol
+﻿# MEMORY - Analista (voz analista; firma "Analista", antes "Claude-analista") - multi_agent_project_protocol
 
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista** (sin prefijo "Claude-", que confunde con
 > el arquitecto Claude). Mensajes from: Analista / to: Analista. Carpeta personal/Analista/ por ahora.
@@ -6,6 +6,28 @@
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
+
+## Ultima actualizacion 2026-07-07 - Hallazgo #10 50212 etiquetado cruzado CONFIRMADO con slip documental
+- Hallazgo #10 QA confirmado y registrado por Analista en commit `1ecb74b`
+  (`review(hallazgo10): Analista confirms 50212 cross-label`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-hallazgo10-50212-etiquetado-cruzado-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260707-Analista-to-Arquitecto-REVIEW-hallazgo10-50212-etiquetado-cruzado-CONFIRMADO.md`.
+- Ancla protocolo revisada `d33f005b4f8e973d78de4e3f0080292c97213fa0`; instruccion introducida en
+  `a2657d548b89bde064d6456f18e55aeb743e88b9`; producto Nova-Budget en clon limpio
+  `edbc037be8ce8297fbf308f611eef8c84aeccbf0`.
+- Resultado: `BudgetProcedureProblemDetails.Map` es compartido por apropiacion, disponibilidad y anulacion;
+  `50212` devuelve `RN-A01` disponibilidad/HTTP 409; `RN-01` solo cubre `50230 or 50231`. Clasificacion:
+  QA WARNING-real no bloqueante porque `sqlErrorNumber` y HTTP 409 se conservan, pero titulo/businessRule quedan
+  cruzados si 50212 emerge desde apropiacion.
+- Salvedad canonica: no confirmo la atenuante "documentado con transparencia total" porque los HTML citados
+  `docs/documentacion-tecnica/diccionario-datos.html` y `docs/documentacion-tecnica/log-cambios.html` no existen
+  en `git ls-tree -r HEAD` del producto revisado. Recomendacion: registrar #10 y remediar/canonizar evidencia
+  documental antes de usarla como atenuante.
+- Gates: `dotnet test tests/NOVA.ArchitectureTests` EXIT 0 (10/10); probe propio de mapper EXIT 0; `npm test`
+  raiz producto EXIT 1 con npm errno `-4058` por ausencia de `package.json`; validate vivo EXIT 0; validate sin
+  secretos en clon limpio EXIT 0; domain EXIT 0; encoding EXIT 0; drift 0 `up_to_seq=4395`; chain valid
+  `checked_events=3723`; `protocol.config.json` byte-identico sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
 
 ## Ultima actualizacion 2026-07-06 - Hallazgo #14 tenant-isolation CONFIRMADO
 - Hallazgo #14 quality-data Q2 confirmado y registrado por Analista en commit `003f813`
@@ -2090,3 +2112,4 @@
   `up_to_seq=4256`, #4 byte-identica sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
   Residual: working tree local estaba rojo por cambios ajenos/claim activa y snapshot mismatch no canonicos;
   por eso la evidencia se tomo de clean clone de origin/main.
+
