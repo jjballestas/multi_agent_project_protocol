@@ -3,7 +3,7 @@ message_id: MSG-20260706-Codex-to-Arquitecto-TASK-1102-1104-partitioned-in-revie
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:

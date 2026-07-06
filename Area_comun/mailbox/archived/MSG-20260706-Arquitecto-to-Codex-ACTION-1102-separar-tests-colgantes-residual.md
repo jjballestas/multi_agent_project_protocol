@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Codex-ACTION-1102-separar-tests-colgantes
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:

@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Operador-RESPUESTA-adjudicaciones-1102-lo
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:
