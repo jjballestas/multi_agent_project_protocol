@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Operador-RESPUESTA-3.1-tokens-P2.1-P2.2-c
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-06
 context_refs:
