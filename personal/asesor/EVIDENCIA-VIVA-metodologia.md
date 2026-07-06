@@ -140,6 +140,22 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **Caveat:** es trabajo de PRODUCTO Aegis (paralelo, arm-ortogonal, NO el contraste medido de Etapa 1);
   evidencia cualitativa fuerte, no confirmatoria cuantificada. Traza: Aegis 9e0b360e, hub 6cadc17.
 
+### A11. El checker cazo un GATE SIN DIENTES (vacuo por construccion) + refuto la coartada de entorno del maker
+- **Fenomeno:** en la implementacion de la capa de interrogacion (1001 t2, maker Codex), el re-gate cazo que
+  el propio GATE de calidad se habia vuelto VACUO: el candidato auto-fabricaba objective/scope/audience con
+  constantes + auto-aprobaba server-side -> **completeness 1.0 POR CONSTRUCCION** (pasaria todo); persistencia
+  del brief = codigo muerto (renderer sin escritores); statusFromValue auto-confirmaba todo con la approval
+  global -> B1/B2b inalcanzables en el flujo real.
+- **Por que importa (meta):** es el checker defendiendo la INTEGRIDAD DEL GATE MISMO -- caza que el maker
+  construyo un gate anti-vibecoding que no gateaba nada. Un gate vacuo es peor que no tener gate (da falsa
+  seguridad). Publication-relevant: el producto anti-vibecoding fallando su propio principio, cazado.
+- **Bonus -- refutacion de coartada de entorno:** el maker (Codex) alego un stall de submit_intent como causa
+  de tests rojos; el checker REPRODUJO que el stall no ocurre (los tests pasaron 140-345s) -> los rojos son
+  assertions reales del maker (aplana approval objeto->null; candidato con texto sensible escala sin camino).
+  El checker no acepto el "es el entorno", lo verifico.
+- **Caveat:** trabajo de producto (RF-14/hub + Aegis), paralelo, cualitativo -- no el contraste medido de
+  Etapa 1. Traza: re-gate b870af5 NO-GO, fix-loop 2/2 eaa1412 (escalada a operador si vuelve NO-GO).
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
