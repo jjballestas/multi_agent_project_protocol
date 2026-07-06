@@ -7,6 +7,27 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
 
+## Ultima actualizacion 2026-07-07 - Hallazgos #11/#12/#13 quality-data baseline CONFIRMADOS
+- Hallazgos #11/#12/#13 QA baseline confirmados y registrados por Analista en commit `c523746`
+  (`review(hallazgos): Analista confirms quality baseline 11-13`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-hallazgos11-12-13-quality-data-baseline-veredicto.md`; MSG rr a
+  Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260707-Analista-to-Arquitecto-REVIEW-hallazgos11-12-13-quality-data-baseline-CONFIRMADO.md`.
+- Ancla protocolo revisada `d0435bfb58d300613febe348d11bed4a2e827e70`; producto Nova-Budget en clon limpio
+  `edbc037be8ce8297fbf308f611eef8c84aeccbf0`; instruccion canonica
+  `MSG-20260706-Arquitecto-to-Analista-ACTION-hallazgos11-12-13-quality-data-baseline.md`.
+- Resultado: CONFIRMADO / NO BLOQUEANTE / no reabrir TASK-0255. #11: gateway de anulacion CDP lee result-set
+  con fallback de nombres y default silencioso `"A"`, mientras el harness SQL no ejercita el mismo camino.
+  #12: falta test HTTP WebApplicationFactory para la familia `annul-preview`/`annul`. #13: el arch-test React
+  omite `Annul_Availability_Certificate` aunque `App.tsx` lo contiene como literal descriptivo.
+- SPEC-NOVA-P4-006 queda adecuada como fix-forward: restricciones 6i/6j/6k, criterios 10/11/12 y riesgo
+  explicito cubren no repetir #11/#12/#13 en el miembro gobernado.
+- Gates: validate vivo EXIT 0; validate sin secretos en clon limpio EXIT 0; scan_domain_neutrality EXIT 0;
+  scan_encoding EXIT 0; drift 0 `up_to_seq=4395`; chain valid `checked_events=3723`; `protocol.config.json`
+  byte-identico sha256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`;
+  `dotnet test NOVA.sln --no-restore` EXIT 0; probe propio 8/8 EXIT 0. Residual declarado: `npm test` en raiz
+  del producto limpio EXIT `-4058` por ausencia de `package.json`, no usado para refutar los hallazgos.
+
 ## Ultima actualizacion 2026-07-07 - Hallazgo #10 50212 etiquetado cruzado CONFIRMADO con slip documental
 - Hallazgo #10 QA confirmado y registrado por Analista en commit `1ecb74b`
   (`review(hallazgo10): Analista confirms 50212 cross-label`). Artefacto:
