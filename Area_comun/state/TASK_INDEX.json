@@ -245,20 +245,6 @@
             "type": "build"
         },
         {
-            "checker": "Analista",
-            "created_at": "2026-07-03",
-            "file": "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
-            "id": "TASK-0246",
-            "owner": "Arquitecto",
-            "phase": "P2",
-            "priority": "high",
-            "project": "multi_agent_project_protocol",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[VISION-NOVA][NOVA-DEV] Revision adversarial del paquete Ingenas + generar SPECs gobernadas del Sprint 1 (brazo gobernado, NOVA-SPEC-T-001 unificada con intake-v2/DoR)",
-            "type": "docs"
-        },
-        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

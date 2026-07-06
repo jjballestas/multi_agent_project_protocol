@@ -25928,6 +25928,258 @@
             "status": "released",
             "task_id": "TASK-0255",
             "updated_at": "2026-07-05T22:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260705-232000-prune-arquitecto",
+            "expires_at": "2026-07-05",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-05T23:20:00Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-05T23:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Arquitecto-decision-0093-corte-aegis",
+            "expires_at": "2026-07-06T04:43:09Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0093-corte-gobernanza-hub-aegis-inmediato.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-decision-0093-corte-aegis"
+            ],
+            "started_at": "2026-07-06T02:43:09Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-06T02:43:09Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Arquitecto-mbhyg-postlote",
+            "expires_at": "2026-07-06T05:35:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Arquitecto-mbhyg-postlote",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-FYI-cola-prep-sprint1-cerrada-3de3.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-FYI-cola-prep-sprint1-cerrada-3de3.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-pickup-corte-aegis-plan-etas.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-pickup-corte-aegis-plan-etas.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-autoriza-aegis-firmantes-paso2-recuerda-html.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-autoriza-aegis-firmantes-paso2-recuerda-html.md"
+            ],
+            "started_at": "2026-07-06T03:35:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260706B",
+            "updated_at": "2026-07-06T03:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-done-flip",
+            "expires_at": "2026-07-06T01:27:21Z",
+            "notes": "Done flip de TASK-0246 solicitado por Arquitecto tras review_approved.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T00:27:21Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:27:21Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-done-flip-msg",
+            "expires_at": "2026-07-06T01:27:52Z",
+            "notes": "Mailbox y memoria del done flip TASK-0246.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-done-flip-msg",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T00:27:52Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:27:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-0246-in-review-flip",
+            "expires_at": "2026-07-06T00:22:00Z",
+            "notes": "Correccion Arquitecto (DECISION-0018): scope original de Codex era un solo string concatenado con espacios en vez de array -> invalid row selector en validate. Claim ya estaba released (terminal); se corrige el scope y se libera de nuevo, sin reescribir el evento historico original.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-0246-in-review-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-0246-in-review-flip.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-05T23:14:26Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-05T23:22:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-DECISION-0092-20260706",
+            "expires_at": "2026-07-06T02:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0092-adopcion-selectiva-4r-gentle-ai.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-DECISION-0092-20260706"
+            ],
+            "started_at": "2026-07-06T01:00:00Z",
+            "status": "released",
+            "task_id": "DECISION-0092",
+            "updated_at": "2026-07-06T01:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-TASK-0246-ratify-20260706",
+            "expires_at": "2026-07-06T01:23:16Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0246",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0246",
+                "Area_comun/tasks/TASK-0246-nova-dev-revision-adversarial-specs-sprint1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-TASK-0246-ratify-20260706"
+            ],
+            "started_at": "2026-07-06T00:23:16Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:23:16Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-archive-0246-donedone-20260706",
+            "expires_at": "2026-07-06T01:32:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Codex-to-Arquitecto-TASK-0246-done-flip-done.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-0246-donedone-20260706"
+            ],
+            "started_at": "2026-07-06T00:32:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:32:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-archive-cola-refill-20260706",
+            "expires_at": "2026-07-06T02:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-no-idle-refill.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-no-idle-refill.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-cola-refill-20260706"
+            ],
+            "started_at": "2026-07-06T01:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T01:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-archive-nogo-0246-20260706",
+            "expires_at": "2026-07-06T00:45:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-informe-specs-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-informe-specs-NOGO.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-archive-nogo-0246-20260706"
+            ],
+            "started_at": "2026-07-05T23:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-05T23:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-mailbox-archive2-20260706",
+            "expires_at": "2026-07-06T01:28:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-informe-specs.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-informe-specs.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-remediacion1.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Analista-REVIEW-TASK-0246-remediacion1.md",
+                "Area_comun/mailbox/open/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Analista-to-Arquitecto-REVIEW-TASK-0246-remediacion1-OK.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-cadencia-atestacion-journal.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-cadencia-atestacion-journal.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-nota-isomorfismo-s23-s21.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-nota-isomorfismo-s23-s21.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-archive2-20260706"
+            ],
+            "started_at": "2026-07-06T00:28:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T00:28:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-mailbox-hygiene3-20260706",
+            "expires_at": "2026-07-06T01:45:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-FYI-TASK0255-done-prep-sprint1-avance.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-FYI-TASK0255-done-prep-sprint1-avance.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-hallazgos11-12-13-confirmados.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-hallazgos11-12-13-confirmados.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-isomorfismo-y-cadencia.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-isomorfismo-y-cadencia.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-hygiene3-20260706"
+            ],
+            "started_at": "2026-07-06T00:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0255",
+            "updated_at": "2026-07-06T00:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-mailbox-hygiene4-20260706",
+            "expires_at": "2026-07-06T02:10:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-decision-adopcion-4r.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-decision-adopcion-4r.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-DECISION-0092-4r-registrada.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-DECISION-0092-4r-registrada.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-3.1-tokens-P2.1-P2.2-corregido.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-3.1-tokens-P2.1-P2.2-corregido.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-hygiene4-20260706"
+            ],
+            "started_at": "2026-07-06T01:10:00Z",
+            "status": "released",
+            "task_id": "DECISION-0092",
+            "updated_at": "2026-07-06T01:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-ARQ-mailbox-hygiene5-20260706",
+            "expires_at": "2026-07-06T03:25:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-prep-sprint1-no-idle.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-DIRECTIVA-cola-prep-sprint1-no-idle.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-FYI-cola-prep-sprint1-progreso.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-FYI-cola-prep-sprint1-progreso.md",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-cola-refill-4items.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Arquitecto-to-Operador-RESPUESTA-cola-refill-4items.md",
+                "Area_comun/mailbox/open/MSG-20260706-Operador-to-Arquitecto-ACTION-corte-aegis-cola-reqs-contabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260706-Operador-to-Arquitecto-ACTION-corte-aegis-cola-reqs-contabilidad.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-ARQ-mailbox-hygiene5-20260706"
+            ],
+            "started_at": "2026-07-06T02:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0246",
+            "updated_at": "2026-07-06T02:25:00Z"
         }
     ]
 }
