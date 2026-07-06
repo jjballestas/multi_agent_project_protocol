@@ -4,6 +4,19 @@ Last updated: 2026-07-06 Europe/Madrid, after TASK-0246 done flip.
 
 ## Latest Session Note
 
+- TASK-1102 remediation after NO-GO delivered. Product repo `D:/Agentes/Zeus/Zeus-protocol` commit
+  `b870af5 fix: harden intake quality gate` removes client-supplied `qualityExceptions`, derives RF-14 quality
+  briefs on the server from intake/candidate data, gates candidate approval, adds manual brief fields to the
+  Intake modal, and hardens `not_applicable`, unsupported work type, generic assumed item refs, and
+  `contenido_assets` monotonicity. Aegis coordination commit `1f4d3895 fix(TASK-1102): deliver quality gate
+  remediation` releases the remediation claim and adds
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1102-codex-to-arquitecto-2.md`. Hub response
+  message is `Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-remediation-in-review.md`;
+  consumed ACTION moved to answered. Gates passed: `node --check src/intakeQuality.js src/server.js public/app.js`,
+  `npm test` (122 tests: 100 pass, 22 skipped slow tier), `npm test -- tests/intakeQuality.test.js` (10 tests),
+  Aegis encoding/domain-neutrality/validator PASS and drift false at `up_to_seq=3522`. `npm run test:ci` and
+  focused slow intake endpoint remained blocked by timeout/stalled submit_intent subprocess in this environment.
+  Residual risk: brief.v1 JSON persistence is partial.
 - TASK-1102 delivered to in_review in the Aegis ledger after hub GO
   `MSG-20260706-Arquitecto-to-Codex-GO-TASK-1102-capa-interrogacion-rf14.md`. Product repo
   `D:/Agentes/Zeus/Zeus-protocol` commit `2d1f917 feat(TASK-1102): add intake quality gate` adds

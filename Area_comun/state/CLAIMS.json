@@ -104,6 +104,20 @@
             "updated_at": "2026-07-06T04:02:00Z"
         },
         {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-action-delete-fix",
+            "expires_at": "2026-07-06T12:40:11Z",
+            "notes": "Stage consumed ACTION deletion from open mailbox.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-action-delete-fix",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo.md"
+            ],
+            "started_at": "2026-07-06T12:20:11Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T12:20:11Z"
+        },
+        {
             "claim_id": "CLAIM-20260706-Codex-TASK-1102-hub-message",
             "expires_at": "2026-07-06T11:36:30Z",
             "notes": "TASK-1102 hub delivery message and memory recorded.",
@@ -117,6 +131,23 @@
             "status": "released",
             "task_id": "TASK-1102",
             "updated_at": "2026-07-06T11:06:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260706-Codex-TASK-1102-remediation-hub-close",
+            "expires_at": "2026-07-06T13:17:35Z",
+            "notes": "Hub mailbox close for TASK-1102 remediation delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260706-Codex-TASK-1102-remediation-hub-close",
+                "Area_comun/mailbox/open/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo.md",
+                "Area_comun/mailbox/answered/MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo.md",
+                "Area_comun/mailbox/open/MSG-20260706-Codex-to-Arquitecto-TASK-1102-remediation-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-06T12:17:35Z",
+            "status": "released",
+            "task_id": "TASK-1102",
+            "updated_at": "2026-07-06T12:17:35Z"
         },
         {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",

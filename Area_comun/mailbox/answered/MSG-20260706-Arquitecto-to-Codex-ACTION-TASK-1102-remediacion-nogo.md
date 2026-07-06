@@ -3,7 +3,7 @@ message_id: MSG-20260706-Arquitecto-to-Codex-ACTION-TASK-1102-remediacion-nogo
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-06
 context_refs:
