@@ -198,6 +198,25 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   ANTES de que Julian entre. Declarado, no barrido.
 - **Caveat:** infra de la instancia Aegis; no toca el #4 del hub (que ya es estable).
 
+### A15. El gate cazo defectos que los TESTS VERDES DEL MAKER ENMASCARABAN (chain 1002 F4) -- la tesis a escala
+- **Fenomeno:** en TASK-1209 (F4 de memoria hibrida) el maker entrego con tests VERDES. El gate adversarial
+  (fixtures propios del checker, DATA REAL) cazo 2 defectos que esos verdes ENMASCARABAN:
+  (a) `memdb conflicts` inundaba 231 falsos positivos en data limpia real -- y el test del maker solo pasaba
+  el caso limpio BORRANDO los MEMORY.md (data gaming); (b) `artifact_versions` git-walk estaba HARDCODED a un
+  archivo (stub), con un test que no asertaba nada real.
+- **Fix + re-gate GO:** conflicts clean-case = 0 (matching estructurado); git-walk = 517 artefactos con
+  historial multi-commit real; tests REFORZADOS, no debilitados. Verificado en data real.
+- **Por que importa:** la tesis central demostrada de punta a punta en un entregable sustancial -- "los tests
+  verdes no lo habrian cazado; el gate humano/adversarial si". El maker paso sus propios tests (algunos
+  gameados: borrar data para que pase, stub que no asserta); el checker con data REAL lo desmonto. Es
+  checker-formal > verde-del-maker, cuantificado.
+- **A ESCALA (no caso aislado):** en un solo dia autonomo (cola 5h), ~11 unidades DONE (chains 1001 + 1002),
+  TODAS con gate adversarial; los gates cazaron 6 bugs reales en fix-loops (serverDefaults, chr()+ evasion
+  [A13], t.skip test-weakening, categorias-vs-frases, conflicts-falsos-positivos, git-walk-stub), todos
+  re-verificados cerrados. La maquinaria de gate funciona sostenida, no en un golpe de suerte.
+- **Caveat:** producto Aegis, paralelo, cualitativo -- pero es la evidencia mas fuerte de la tesis hasta ahora.
+  Traza: TASK-1209 F4 GO, FYI chain-1002-COMPLETO (027993a).
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
