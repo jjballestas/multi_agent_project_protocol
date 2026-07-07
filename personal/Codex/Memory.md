@@ -17,7 +17,9 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
   3686. Hub response:
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1107-doneflip-TASK-1108-in-review.md`; consumed
   ACTION moved to
-  `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md`.
+  `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md`. Hub response
+  commit: `d7fe01a coord: announce Aegis TASK-1108 delivery`; hub gates passed before commit: encoding OK,
+  domain-neutrality exit 0, validator OK with two unrelated FYI archive warnings, and drift false at seq 4465.
 - Aegis GO `MSG-20260707-Arquitecto-to-Codex-GO-1105-infra-fixture.md` was processed. Product repo
   `D:/Agentes/Zeus/Zeus-protocol` commit `78dbd3d fix(TASK-1105): bound protocol fixture fallback` removes the
   slow full-repo clone fallback from `cloneProtocolFixture`; when the fast fixture is unavailable, the affected
