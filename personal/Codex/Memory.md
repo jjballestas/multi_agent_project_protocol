@@ -1,8 +1,15 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1205 done flip.
 
 ## Latest Session Note
+
+- Hub ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1205.md` was processed. In Aegis, TASK-1205 moved `review_approved -> done` via runtime seq 3734-3736, claim `CLAIM-20260707-Codex-TASK-1205-doneflip` was released, and no F4/t6 work was started. Aegis commits: `25d45a66 coord(TASK-1205): close cold pilot done flip` and `66ba5c09 chore(TASK-1205): record done flip memory`. Aegis gates passed: validator OK, encoding OK with `PYTHONIOENCODING=utf-8`, domain-neutrality OK, and drift false at seq 3736. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1205-doneflip-done.md`; consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1205.md`.
+
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
+
+## Previous Session Notes
 
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1109-GO-1205.md` was processed. TASK-1109
   was flipped `review_approved -> done`; TASK-1205 was delivered to `in_review` with claims released through

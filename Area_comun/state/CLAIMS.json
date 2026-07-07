@@ -786,6 +786,23 @@
             "updated_at": "2026-07-06T23:32:26Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1205-doneflip-hub-response",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Hub response and memory for Aegis TASK-1205 done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1205-doneflip-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1205.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1205.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1205-doneflip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T09:05:00Z",
+            "status": "released",
+            "task_id": "TASK-1205",
+            "updated_at": "2026-07-07T09:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1205-hub-deletefix",
             "expires_at": "2026-07-08T00:00:00Z",
             "notes": "Stage consumed ACTION deletion left after hub response commit.",
