@@ -28,6 +28,14 @@ READY (invariantes de patron, heredados de Presupuesto -- no dependen de la base
 - **Stack obligatorio:** React+TS+Vite (front sin SQL) / ASP.NET Core .NET (capas) + MCP / SQL Server via
   gateways tipados / OpenTelemetry / ProblemDetails. **Anti-patrones PROHIBIDOS:** WebForms/PageMethods,
   DataTable entre capas, DLLs manuales, capa DATABASE generica, secretos en .config, centinelas -99.
+- **Gates de patron (verdes por exit-code, heredados del baseline Presupuesto/GOAL-P1):** (a) `dotnet build`
+  limpio; (b) `dotnet test` = unit + **architecture tests** (los 5 arch tests del baseline: capas, sin
+  DataTable entre capas, front sin SQL, gateway tipado, sin anti-patrones) + integracion HTTP verde en
+  CLON LIMPIO; (c) **F-NOVA-01 real** (guard de procedencia con clase SQL gateada por env, NA limpio) +
+  al menos un NEGATIVO por THROW ALCANZABLE re-verificado contra `OBJECT_DEFINITION`; (d) neutralidad de
+  dominio + `scan_encoding` sobre la SPEC/artefactos del hub. Ningun mock/Recording* sustituye (c). El
+  CONTENIDO por-unidad de (b)/(c) (que arch test aplica, que THROW) ESPERA la base del DBA; el PATRON de
+  gates es fijo ahora.
 - **Checker:** Analista adversarial FORMAL (contexto limpio, recibe SPEC + diff + BD readonly, NO la
   conversacion del maker) ADEMAS del adversarial informal (subagente).
 - **Medicion/atestacion:** captura de tokens en err.log; sha256 de la SPEC via intent del hub; separar
