@@ -17,6 +17,9 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1106 fix-loop 1 Aegis redeliv
   passed: encoding OK, domain-neutrality OK, validator OK, and drift false at seq 3650. Hub response:
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review.md`; consumed ACTION
   moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-1106-nogo-serverdefaults-forge.md`.
+  Hub response commit `c6d6a77 coord(TASK-1106): announce docs mode fixloop` uses `Task-Id: none` plus
+  `Ops-Reason`; hub gates passed before that commit: encoding OK, domain-neutrality OK, validator OK, and drift
+  false at seq 4441.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1207-GO-1106.md` was processed.
   In Aegis, TASK-1207 was flipped `review_approved -> done`; TASK-1106 was claimed, implemented, delivered
   to `in_review`, and claim `CLAIM-20260707-Codex-TASK-1106-docs-mode` was released. Product commit in
