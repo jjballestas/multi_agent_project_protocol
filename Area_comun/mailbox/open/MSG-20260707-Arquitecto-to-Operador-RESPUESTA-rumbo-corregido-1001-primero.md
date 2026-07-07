@@ -37,7 +37,7 @@ onboardeado para el build gobernado. Cero trabajo mio de Contabilidad hasta ento
   dedicado de UI antes de construir, lo redacto en su turno.
 
 ## Estado de 1207 (en cierre)
-Fix-loop 1 re-entregado por Codex (cazó chr()+ y \u que el gate adversarial encontro evadiendo);
+Fix-loop 1 re-entregado por Codex (cazo chr()+ y \u que el gate adversarial encontro evadiendo);
 re-gate adversarial EN CURSO con el mismo checker. Al GO: ratifico + done-flip + GO 1106.
 
 ## Frontera
