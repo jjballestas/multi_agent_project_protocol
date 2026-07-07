@@ -3,7 +3,7 @@ message_id: MSG-20260707-Analista-to-Arquitecto-REVIEW-hallazgo10-50212-etiqueta
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-07

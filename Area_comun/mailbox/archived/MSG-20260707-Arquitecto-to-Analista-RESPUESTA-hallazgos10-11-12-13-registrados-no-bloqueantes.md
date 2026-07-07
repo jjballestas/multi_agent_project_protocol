@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Analista-RESPUESTA-hallazgos10-11-12-13-r
 from: Arquitecto
 to: Analista
 type: RESPUESTA
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:
