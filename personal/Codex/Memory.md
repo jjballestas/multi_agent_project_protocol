@@ -15,7 +15,8 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1109-done-TASK-1205-in-review.md`; consumed ACTION
   moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1109-GO-1205.md`. Hub
   commit: `6ae8af5 coord: announce Aegis TASK-1205 delivery`; hub gates passed before commit with two unrelated
-  FYI archive warnings and drift false at seq 4485.
+  FYI archive warnings and drift false at seq 4485. Follow-up hub memory commit `7d53116` recorded the response;
+  a deletefix claim then staged the consumed ACTION removal from `open/`.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1105-1109-nogo.md` was processed. TASK-1105
   was flipped `review_approved -> done` in Aegis, and TASK-1109 fix-loop 1 was redelivered to `in_review`.
   Product commit in `D:/Agentes/Zeus/Zeus-protocol`: `4ba443c fix(TASK-1109): cover canonical ambiguity phrases`.

@@ -786,6 +786,21 @@
             "updated_at": "2026-07-06T23:32:26Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1205-hub-deletefix",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Stage consumed ACTION deletion left after hub response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1205-hub-deletefix",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1109-GO-1205.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T05:53:55Z",
+            "status": "released",
+            "task_id": "TASK-1205",
+            "updated_at": "2026-07-07T05:53:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1205-hub-memory-final",
             "expires_at": "2026-07-08T00:00:00Z",
             "notes": "Golden memory follow-up after hub TASK-1205 response commit.",
