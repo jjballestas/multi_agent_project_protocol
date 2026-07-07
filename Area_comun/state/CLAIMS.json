@@ -323,6 +323,31 @@
             "updated_at": "2026-07-06T21:58:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-ARQ-MBHYGIENE-1",
+            "expires_at": "2026-07-07T18:00:00Z",
+            "notes": "Higiene mailbox: archivar 6 confirmaciones consumidas de Codex (1105/1109/1205 done, t6 flip, F4 delivery -- todas procesadas).",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-ARQ-MBHYGIENE-1",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-done-TASK-1109-fixloop1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1105-done-TASK-1109-fixloop1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-fixloop1-TASK-1109-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1105-fixloop1-TASK-1109-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1109-done-TASK-1205-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1109-done-TASK-1205-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1205-doneflip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1205-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1208-in-review-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1208-in-review-flip.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1209-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1209-in-review.md"
+            ],
+            "started_at": "2026-07-07T10:31:02Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-07T10:31:02Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Arquitecto-mbhyg-1204window",
             "expires_at": "2026-07-07T06:00:00Z",
             "notes": "Mailbox hygiene: archive 9 consumed 1203-cycle/operador messages.",

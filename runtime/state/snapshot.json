@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cb35ef670ae8cf2bb1c30d1afc2073a0212e3b754b6bfa06f21dbaf63b47ecbb",
+  "canonical_hash": "baa84596f4987662ebef9310674d4817ab8f3c7f19357d3edc27248b4356ec61",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -580,6 +580,7 @@
       "CLAIM-20260706-Codex-TASK-0255-done-flip": 2,
       "CLAIM-20260706-Codex-TASK-0255-done-flip-proper": 1,
       "CLAIM-20260706-Codex-TASK-0255-done-flip-scopefix": 2,
+      "CLAIM-20260707-ARQ-MBHYGIENE-1": 1,
       "CLAIM-20260707-Arquitecto-mbhyg-1204window": 1,
       "CLAIM-20260707-Arquitecto-mbhyg-b1of2": 1,
       "CLAIM-20260707-Arquitecto-mbhyg-b2of2": 1,
@@ -1346,18 +1347,24 @@
       "MSG-20260707-Arquitecto-to-Operador-RESPUESTA-pii-embeddings-formalizada": 1,
       "MSG-20260707-Arquitecto-to-Operador-RESPUESTA-repointado-nova-aegis-completo": 1,
       "MSG-20260707-Arquitecto-to-Operador-RESPUESTA-rumbo-corregido-1001-primero": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1105-done-TASK-1109-fixloop1-in-review": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1105-fixloop1-TASK-1109-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1105-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1106-doneflip-TASK-1107-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1107-doneflip-TASK-1108-in-review": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1109-done-TASK-1205-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1203-doneflip-done": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1203-fixloop1-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1204-in-review": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1205-doneflip-done": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1206-doneflip-TASK-1207-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1206-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1207-doneflip-TASK-1106-in-review": 1,
       "MSG-20260707-Codex-to-Arquitecto-TASK-1207-fixloop1-in-review": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1208-in-review-flip": 1,
+      "MSG-20260707-Codex-to-Arquitecto-TASK-1209-in-review": 1,
       "MSG-20260707-Operador-to-Arquitecto-ACTION-cola-5h-autonoma-no-idle": 1,
       "MSG-20260707-Operador-to-Arquitecto-ACTION-correccion-rumbo-contabilidad-la-hace-operador": 1,
       "MSG-20260707-Operador-to-Arquitecto-ACTION-guard-evasion-neutralidad-crlf-prereq-gate": 1,
@@ -1602,11 +1609,11 @@
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
-      "none": 30,
+      "none": 31,
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3834,
+    "events_applied": 3842,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -5404,6 +5411,14 @@
       "ledger-op:mbhyg:OPS-MAILBOX-HYGIENE-20260707E:CLAIM-20260707-Arquitecto-mbhyg-e:release": 4455,
       "ledger-op:mbhyg:OPS-MAILBOX-HYGIENE-20260707F:CLAIM-20260707-Arquitecto-mbhyg-f:acquire": 4466,
       "ledger-op:mbhyg:OPS-MAILBOX-HYGIENE-20260707F:CLAIM-20260707-Arquitecto-mbhyg-f:release": 4475,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:acquire": 4506,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch0": 4507,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch1": 4508,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch2": 4509,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch3": 4510,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch4": 4511,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:arch5": 4512,
+      "ledger-op:mbhygiene:none:CLAIM-20260707-ARQ-MBHYGIENE-1:release": 4513,
       "ledger-op:task-0200-claim:TASK-0200:CLAIM-20260627-Codex-TASK-0200:claim-acquire": 2287,
       "ledger-op:task-0200-delivery:TASK-0200:CLAIM-20260627-Codex-TASK-0200-delivery:claim-acquire": 2288,
       "ledger-op:task-0200-release:TASK-0200:claim-release-delivery": 2289,
@@ -5444,5 +5459,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4505
+  "up_to_seq": 4513
 }
