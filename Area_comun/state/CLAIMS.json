@@ -969,6 +969,37 @@
             "updated_at": "2026-07-07T00:57:52Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1209-hub-memory-final",
+            "expires_at": "2026-07-08T23:59:00Z",
+            "notes": "Golden memory after hub TASK-1209 response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1209-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T10:00:17Z",
+            "status": "released",
+            "task_id": "TASK-1209",
+            "updated_at": "2026-07-07T10:00:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1209-hub-response",
+            "expires_at": "2026-07-08T23:59:00Z",
+            "notes": "Hub response for Aegis TASK-1209 delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1209-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-GO-1209-F4-fts.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-GO-1209-F4-fts.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1209-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T09:57:15Z",
+            "status": "released",
+            "task_id": "TASK-1209",
+            "updated_at": "2026-07-07T09:57:15Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-hub-1105-1109-response",
             "expires_at": "2026-07-08T00:00:00Z",
             "notes": "Hub response for Aegis TASK-1105 fixloop and TASK-1109 delivery.",
