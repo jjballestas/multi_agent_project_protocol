@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Operador-FYI-hito-1002-casi-cerrado
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:

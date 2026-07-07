@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Operador-FYI-hito-cola5h-7-unidades-1001-
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:
