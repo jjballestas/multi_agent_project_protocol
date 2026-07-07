@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1209 done flip.
+
+## Latest Session Note
+
+- Hub ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1209.md` was processed. In Aegis, TASK-1209 moved `review_approved -> done` via runtime seq 3792, malformed intermediate doneflip claim `CLAIM-20260707-Codex-TASK-1209-doneflip` was normalized via seq 3798, and all Codex doneflip claims were released through seq 3799. Aegis commits: `37bab79a coord(TASK-1209): close F4 done flip` and `b22e49bc chore(TASK-1209): record done flip memory`. Aegis gates passed: validator OK, encoding OK, domain-neutrality OK, and drift false at seq 3799. Hub response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1209-doneflip-done.md`; consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1209.md`. Hub response commit: `5e0fff6 coord: announce Aegis TASK-1209 done flip`; hub gates passed before commit with four unrelated FYI archive warnings and drift false at seq 4523.
+
+## Previous Session Notes
+
 Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1208 done flip.
 
 ## Latest Session Note
