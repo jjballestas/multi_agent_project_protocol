@@ -12,6 +12,7 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis done flip.
   passed: validator OK, encoding OK, domain-neutrality exit 0, and drift false at `up_to_seq=3608`. Hub
   response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done.md`; consumed
   ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md`.
+  Hub response commit `45e6a26 coord: announce TASK-1204 done flip` uses `Task-Id: none` plus `Ops-Reason`.
 - TASK-1204 delivered in Aegis after GO
   `MSG-20260707-Arquitecto-to-Codex-GO-1204-stubs-manifests.md`. Aegis commits:
   `dae42180 feat(TASK-1204): add cold pack stubs and guards`, `336df749 chore(TASK-1204): record
