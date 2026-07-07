@@ -383,6 +383,35 @@
             "updated_at": "2026-07-07T00:42:10Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Arquitecto-mbhyg-b2of2",
+            "expires_at": "2026-07-07T10:00:00Z",
+            "notes": "Mailbox hygiene batch 2/2: consumed 1206/operador cycle.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Arquitecto-mbhyg-b2of2",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1206-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1206-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-guard-evasion-crlf-registrados.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-guard-evasion-crlf-registrados.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-repointado-nova-aegis-completo.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-repointado-nova-aegis-completo.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-ACTION-guard-evasion-neutralidad-crlf-prereq-gate.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-ACTION-guard-evasion-neutralidad-crlf-prereq-gate.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-ACTION-repointar-aegis-nova-aegis-limpiar-fork.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-ACTION-repointar-aegis-nova-aegis-limpiar-fork.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-FYI-aegis-main-borrado-desenredo-completo.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-FYI-aegis-main-borrado-desenredo-completo.md"
+            ],
+            "started_at": "2026-07-07T00:50:42Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260707D",
+            "updated_at": "2026-07-07T00:50:42Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Golden memory follow-up after hub TASK-1203 done-flip response commit.",

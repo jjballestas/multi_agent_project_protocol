@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:

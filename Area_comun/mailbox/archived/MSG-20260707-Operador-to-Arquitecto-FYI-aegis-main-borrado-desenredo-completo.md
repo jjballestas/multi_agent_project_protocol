@@ -3,7 +3,7 @@ message_id: MSG-20260707-Operador-to-Arquitecto-FYI-aegis-main-borrado-desenredo
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:

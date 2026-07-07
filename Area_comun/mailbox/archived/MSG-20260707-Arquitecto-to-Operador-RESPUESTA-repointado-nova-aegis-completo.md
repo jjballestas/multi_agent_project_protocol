@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Operador-RESPUESTA-repointado-nova-aegis-
 from: Arquitecto
 to: Operador
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-07
