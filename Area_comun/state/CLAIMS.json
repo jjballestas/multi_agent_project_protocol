@@ -983,6 +983,20 @@
             "updated_at": "2026-07-07T10:00:17Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1209-hub-memory-final2",
+            "expires_at": "2026-07-08T23:59:00Z",
+            "notes": "Final hub TASK-1209 memory wording correction.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1209-hub-memory-final2",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T10:06:56Z",
+            "status": "released",
+            "task_id": "TASK-1209",
+            "updated_at": "2026-07-07T10:06:56Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1209-hub-memory-hashfix",
             "expires_at": "2026-07-08T23:59:00Z",
             "notes": "Correct hub TASK-1209 response commit hash in memory.",
