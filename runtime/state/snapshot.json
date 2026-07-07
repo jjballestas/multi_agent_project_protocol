@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7da2c3268b4691425804256db5be03ccd526512ce5b17702e55d03cfee4b8f2b",
+  "canonical_hash": "9c3bb87c2ff7a9bde79fd10cef6fa53ed51e0f67e1549c7a1764bd146e88a950",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1569,7 +1569,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-1102": 14,
-      "TASK-1105": 4,
+      "TASK-1105": 6,
       "TASK-1106": 7,
       "TASK-1107": 2,
       "TASK-1203": 6,
@@ -1583,7 +1583,7 @@
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3790,
+    "events_applied": 3792,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2813,8 +2813,10 @@
       "codex:TASK-0196:f1a:ready-to-in-progress": 2239,
       "codex:answer-go-c1edd835:claim": 1912,
       "codex:answer-go-c1edd835:release": 1913,
+      "codex:claim-acquire:TASK-1105:hub-memory-final": 4462,
       "codex:claim-acquire:TASK-1105:hub-msgfix": 4460,
       "codex:claim-acquire:TASK-1105:hub-response": 4458,
+      "codex:claim-release:TASK-1105:hub-memory-final": 4463,
       "codex:claim-release:TASK-1105:hub-msgfix": 4461,
       "codex:claim-release:TASK-1105:hub-response": 4459,
       "codex:cron-executor-config:claim-acquire": 1102,
@@ -5377,5 +5379,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4461
+  "up_to_seq": 4463
 }

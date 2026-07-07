@@ -445,6 +445,20 @@
             "updated_at": "2026-07-07T02:25:15Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1105-hub-memory-final",
+            "expires_at": "2026-07-07T03:33:58Z",
+            "notes": "Golden memory follow-up after hub TASK-1105 response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1105-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T03:03:58Z",
+            "status": "released",
+            "task_id": "TASK-1105",
+            "updated_at": "2026-07-07T03:03:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1105-hub-msgfix",
             "expires_at": "2026-07-07T03:32:41Z",
             "notes": "Fix answered GO encoding after move.",
