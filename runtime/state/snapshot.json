@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "9c3bb87c2ff7a9bde79fd10cef6fa53ed51e0f67e1549c7a1764bd146e88a950",
+  "canonical_hash": "8daf47a571b98bc3e56f3529b573d84457e3a21e866afdca51383be7806f157a",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -587,6 +587,7 @@
       "CLAIM-20260707-Codex-TASK-1106-hub-memory-final": 1,
       "CLAIM-20260707-Codex-TASK-1106-hub-msgfix": 1,
       "CLAIM-20260707-Codex-TASK-1106-hub-response": 1,
+      "CLAIM-20260707-Codex-TASK-1108-hub-response": 1,
       "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final": 1,
       "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-response": 1,
       "CLAIM-20260707-Codex-TASK-1204-doneflip-hub-memory-final": 1,
@@ -1572,6 +1573,7 @@
       "TASK-1105": 6,
       "TASK-1106": 7,
       "TASK-1107": 2,
+      "TASK-1108": 1,
       "TASK-1203": 6,
       "TASK-1204": 6,
       "TASK-1206": 2,
@@ -1583,7 +1585,7 @@
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3792,
+    "events_applied": 3794,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2979,6 +2981,8 @@
       "codex:task-0218:claim-release": 2614,
       "codex:task-0218:status-in-progress": 2612,
       "codex:task-0218:status-in-review": 2613,
+      "codex:task-1108:hub-response-claim:20260707": 4464,
+      "codex:task-1108:hub-response-release:20260707": 4465,
       "codex:task-1203-doneflip-hub-memory-final:claim-acquire": 4380,
       "codex:task-1203-doneflip-hub-memory-final:claim-release": 4381,
       "codex:task-1203-doneflip-hub-response:claim-acquire": 4378,
@@ -5379,5 +5383,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4463
+  "up_to_seq": 4465
 }

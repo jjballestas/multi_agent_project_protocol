@@ -1,9 +1,23 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1107 Aegis delivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
 
 ## Latest Session Note
 
+- Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md` was processed. TASK-1107 moved
+  `review_approved -> done`; TASK-1108 moved `ready -> in_progress -> in_review`; Codex claims were released
+  through Aegis seq 3686. Product commit in `D:/Agentes/Zeus/Zeus-protocol`: `7968a6a feat(TASK-1108): add
+  exception registry model`. Aegis commits: `d55fc50f coord(TASK-1108): deliver exception registry` and
+  `b65ed704 chore(TASK-1108): record delivery memory`. Handoff:
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1108-codex-to-arquitecto-1.md`. Product gates
+  passed: `node --check src/intakeQuality.js src/exceptionRegistry.js tests/exceptionRegistry.test.js
+  tests/intakeQuality.test.js tests/qualityPanel.test.js`, focused `npm test -- tests/exceptionRegistry.test.js
+  tests/intakeQuality.test.js tests/qualityPanel.test.js` PASS 19/19, and full `npm test` PASS 137 total / 115
+  pass / 22 skipped. Aegis gates passed: encoding OK, domain-neutrality exit 0, validator OK, drift false at seq
+  3686. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1107-doneflip-TASK-1108-in-review.md`; consumed
+  ACTION moved to
+  `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md`.
 - Aegis GO `MSG-20260707-Arquitecto-to-Codex-GO-1105-infra-fixture.md` was processed. Product repo
   `D:/Agentes/Zeus/Zeus-protocol` commit `78dbd3d fix(TASK-1105): bound protocol fixture fallback` removes the
   slow full-repo clone fallback from `cloneProtocolFixture`; when the fast fixture is unavailable, the affected
