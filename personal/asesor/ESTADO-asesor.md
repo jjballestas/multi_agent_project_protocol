@@ -11,6 +11,47 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
+## >> ESTADO ACTUAL 2026-07-07 (LEER PRIMERO; supersede lo de abajo)
+**Pipeline vivo VISUAL: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html` (CARGARLO al arrancar; es el tablero).**
+
+- **ESTUDIO MEDIDO (baseline): CONGELADO y verde.** 6/6 unidades done (GOAL-P1, P2.1, P2.2, P4.1, PAR-1=P4.2,
+  PAR-2=Annul_Availability_Certificate); Nova-Budget estable en edbc037; listo para la reconciliacion 26-29-jul.
+  Calendario sellado INTACTO: 25-jul cierre duro, 26-29 reconciliacion (Analista), 29-jul sello Etapa 2,
+  30-jul Sprint 1 gobernado (gate duro, fin linea roja Q4). Nada del pool Q4 pre-30-jul.
+- **DESARROLLO DE PRODUCTO AEGIS: AMBOS CHAINS COMPLETOS (pausa natural).** 1001 (anti-vibecoding: interrogacion+
+  Quality Panel+excepciones) t1-t6 + 1002 (memoria hibrida: caliente/derivada/fria+FTS+contradicciones+runbook)
+  t1-t6+F4. ~11 unidades DONE con gate adversarial; los gates cazaron ~6 bugs reales (incl. F4 que desmonto
+  tests-verdes GAMEADOS = evidencia mas fuerte, A15). Enmienda PII de embeddings formalizada (opt-in, deny-by-default).
+- **PROXIMO BLOQUE GRANDE = CONTABILIDAD**, GATED en DOS inputs del OPERADOR: (a) Julian onboardeado (pubkey +
+  gate 2-clones); (b) la base de BD de Contabilidad que el operador prepara con el DBA (patron Presupuesto:
+  base solida, no green-field). El BUILD gobernado espera ambos; solo la PREP/esqueleto avanza.
+- **JULIAN HEREDIA (id `jheredia`, desarrollador10@ingenas.com) -- ROL CLARIFICADO (operador 2026-07-07):** se
+  agrega al equipo para EMPEZAR a trabajar CON la metodologia. NO es desarrollador principal -> se le DELEGAN
+  ciertas opciones/tareas para que desarrolle y USE la metodologia. El OPERADOR hace la parte PRINCIPAL del
+  desarrollo (como operador, como ahora) y DIRIGE el proyecto CON UN ASISTENTE (como hace conmigo). Julian es
+  la EVIDENCIA employee-run/transferibilidad (empleado real, guiado, produce trabajo gobernado -> "employee-
+  ready"). Onboarding: repo NOVA-Aegis listo; falta que Julian genere su par ed25519 y mande SU PUBLICA ->
+  el Arquitecto hace el re-genesis A2 del config de AEGIS (candado: NO el hub) + alta agent_registry ->
+  operador distribuye HMAC de instancia (fuera de banda) -> Julian escribe su override (llave minima, anchor
+  canonico-solo) -> gate e2e 2-clones verde -> arranca build de Contabilidad. Guia de trabajo redactada
+  (personal/asesor/GUIA-TRABAJO-julian-maker-contabilidad-aegis.md) + colocada gobernada en Aegis.
+- **REPO NOVA-Aegis (correccion):** el origin de la instancia apuntaba por error al FORK de Hermes (Zeus-Aegis);
+  RESUELTO -> instancia en `git@github.com:jjballestas/NOVA-Aegis.git` (rama main, verificado nada perdido,
+  fork limpio, validate verde). Zeus-Aegis queda reservado al producto-front. Deploy key SSH: ~/.ssh/NOVA-Aegis-key.
+- **MI MODO (autorizacion operador 2026-07-06 "terminar el trabajo"):** el Asesor ASIGNA tareas al Arquitecto
+  para llevar el desarrollo a termino (no solo prepara/rutea), sin pedir permiso cada vez; escala al operador
+  SOLO lo suyo (dominio/sello/legal/riesgo) o el doble-NO-GO pactado. Coordino re-gates (monitor dev_sig),
+  alimento EVIDENCIA-VIVA (voy A1-A15), mantengo el pipeline HTML. Guardrails intactos (estudio medido + genesis
+  hub NO se tocan; Sprint 1 prioridad dura desde 30-jul).
+- **DECISIONES/HITOS de la sesion:** DECISION-0092 (adopcion selectiva 4R gentle-ai: naming lentes R1-R4 +
+  contrato de salida + carve-outs + disjuncion-del-maker; comportamiento del gate diferido a Sprint 1) |
+  DECISION-0093 (corte gobernanza hub->Aegis) | quality-data #10-#14 registrados (50212, columnas silenciosas,
+  test HTTP, frontend, tenant) | gate-hardening 1105/1206(CRLF)/1207(anti-evasion) | enmienda s.27 BR-C4
+  (opcion b, Q4 n=10) | nota isomorfismo s.21/s.23 | cadencia atestacion (hibrido, hashlog) | politica PII embeddings.
+- **PENDIENTE DE TI (operador):** invitar a Julian a NOVA-Aegis + conseguir su pubkey (desbloquea Contabilidad).
+  Diferidos sin prisa: cadencia atestacion journal (respuesta Arquitecto), habilitar embeddings (bajo politica PII).
+- **Monitor activo:** dev_sig (self-filtrado). Arma los 2 watchdogs al iniciar si aplica.
+
 ## >> REACTIVACION 2026-07-04 (tarde) -- entregables shipped, en vuelo
 Operador reactivo + directiva "no dejes al Arquitecto sin trabajo, trabaja rapido". Estado al reactivar:
 HEAD==origin limpio, mailbox/open vacio, sin drift. Hecho esta reactivacion:

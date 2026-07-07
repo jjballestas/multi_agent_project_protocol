@@ -6,9 +6,12 @@
 > Pendiente: el Arquitecto la coloca gobernada en el repo Aegis (para que la descargues al clonar).
 
 ## 1. Quien eres en el equipo
-Eres **maker (implementer)** de las unidades de **Contabilidad** de la suite Nova, operando un **clon remoto**
-propio de la instancia Aegis desde tu maquina (Colombia, UTC-5). Tu identidad de firma es `jheredia:v1` (llave
-propia; ver setup). Tu trabajo se atesta con TU llave en el ledger de Aegis.
+Te integras al equipo para **aprender y usar la metodologia gobernada** trabajando en **tareas DELEGADAS** de
+la suite Nova (empezando por Contabilidad), operando un **clon remoto** propio de la instancia Aegis desde tu
+maquina (Colombia, UTC-5). Actuas como **maker (implementer) de las unidades que se te delegan** -- NO eres el
+desarrollador principal: el Operador (John) hace la parte principal del desarrollo y dirige el proyecto (con un
+asistente), y te va delegando opciones para que las construyas bajo la metodologia. Tu identidad de firma es
+`jheredia:v1` (llave propia; ver setup); tu trabajo se atesta con TU llave en el ledger de Aegis.
 
 - **Maker (tu):** construyes la unidad segun su SPEC-contrato.
 - **Checker (otra maquina, otra llave):** te revisa de forma adversarial. NUNCA te auto-verificas.
