@@ -522,6 +522,23 @@
             "updated_at": "2026-07-07T01:53:02Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1107-hub-response",
+            "expires_at": "2026-07-07T03:39:09Z",
+            "notes": "Hub response for Aegis TASK-1106 done flip and TASK-1107 delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1107-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1106-GO-1107.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1106-GO-1107.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-doneflip-TASK-1107-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T02:39:09Z",
+            "status": "released",
+            "task_id": "TASK-1107",
+            "updated_at": "2026-07-07T02:39:09Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Golden memory follow-up after hub TASK-1203 done-flip response commit.",
