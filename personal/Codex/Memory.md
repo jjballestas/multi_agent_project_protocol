@@ -16,7 +16,8 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1206 done flip and TASK-1207 
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1206-doneflip-TASK-1207-in-review.md`;
   consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md`.
   Hub drift was false after rematerializing pre-existing CLAIMS drift and before the response claim. The answered
-  ACTION was normalized back to ASCII after the move introduced a BOM/mojibake gate failure.
+  ACTION was normalized back to ASCII after the move introduced a BOM/mojibake gate failure. Hub response commit:
+  `9e0899b coord: announce Aegis TASK-1207 delivery`.
 - Aegis TASK-1206 delivered to `in_review` after hub GO
   `MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion.md`. Aegis commits:
   `764efb36 feat(TASK-1206): harden event log line endings`, `0699b646 fix(TASK-1206): make runtime
