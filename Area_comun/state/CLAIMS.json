@@ -969,6 +969,20 @@
             "updated_at": "2026-07-07T00:57:52Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1208-hub-memory-final",
+            "expires_at": "2026-07-08T23:59:00Z",
+            "notes": "Golden memory follow-up after hub TASK-1208 response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1208-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T10:26:00Z",
+            "status": "released",
+            "task_id": "TASK-1208",
+            "updated_at": "2026-07-07T10:26:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1208-hub-response",
             "expires_at": "2026-07-08T23:59:00Z",
             "notes": "Hub response for Aegis TASK-1208 in_review flip.",
