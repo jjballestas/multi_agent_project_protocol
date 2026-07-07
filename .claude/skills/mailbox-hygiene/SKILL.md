@@ -72,7 +72,7 @@ description: >-
 > commit" que usas para CUALQUIER escritura de mailbox (ver s.4b y `arquitecto-ledger-ops`), no como un
 > paso posterior separado. Concretamente: cada vez que vas a `git commit` algo que toca
 > `Area_comun/mailbox/` o `Area_comun/state/`, la MISMA pasada que corre `validate`+`scan_encoding` responde
-> tambien: "¿algo en `open/` quedo resuelto por este commit (una respuesta que acabo de escribir, un
+> tambien: "algo en `open/` quedo resuelto por este commit (una respuesta que acabo de escribir, un
 > veredicto que acabo de procesar)? -> archivalo en el MISMO submit_intent/commit, no en uno aparte".
 > Si la ventana no es segura (peer con lock), la higiene queda pendiente pero DECLARADA en el proximo
 > reporte -- nunca implicita. La poda (`prune_state.py --check`) se revisa en el MISMO punto (s.3b).
@@ -174,7 +174,7 @@ dir-claiman el mailbox, **no** archivan (no tienen orchestrator), **no** arregla
 ## Checklist de una linea
 **Antes de CADA reporte (mismo gate que el commit, no un paso aparte): pasada de higiene (clasifico open/ +
 archivo consumidos, o declaro los pendientes) + `prune_state.py --check` (si PRUNE DUE, aplico en el mismo
-checkpoint).** ·
-Escribo: ASCII? response_owner? type valido para el peer? sin corte+peer? gateado exit 0? ·
-Archivo (solo Arq): mensaje resuelto? claim file-scoped open+archived+#self? message_id seguro? orchestrator? ·
+checkpoint).** -
+Escribo: ASCII? response_owner? type valido para el peer? sin corte+peer? gateado exit 0? -
+Archivo (solo Arq): mensaje resuelto? claim file-scoped open+archived+#self? message_id seguro? orchestrator? -
 Peer: stale? -> senalo al owner (DECISION-0018), no toco.
