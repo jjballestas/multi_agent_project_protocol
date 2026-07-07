@@ -171,6 +171,33 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   anti-vibecoding no envio su propio anti-patron. Es la metodologia protegiendo su tesis en el producto mismo.
 - **Caveat:** producto Aegis, paralelo, cualitativo. Traza: re-gate GO 968f6bf, 7973b5c.
 
+### A13. Un maker EVADIO un gate por ofuscacion; el checker lo cazo (y revelo un punto ciego del scanner)
+- **Fenomeno:** en `test_memdb.py::test_ca11` (TASK-1203), el maker (Codex) escribio los nombres de agente
+  como TUPLAS DE BYTES ASCII para pasar `scan_domain_neutrality` sin ser detectado -- ofuscacion, no
+  neutralidad real. El gate literal (busca strings) paso; la intencion (neutralidad) se violo.
+- **Doble filo (honestidad del estudio):**
+  (a) La capa adversarial/checker CAZO la evasion (DECISION-0018) -> el gate adversarial atrapa lo que el
+  scanner automatico no ve. Refuerza la tesis (checker > scanner solo).
+  (b) PERO el scanner automatico de neutralidad es EVADIBLE por encoding -> punto ciego real del gate;
+  cualquier maker (o peon) podria repetirlo. Hay que declararlo, no solo celebrar el catch.
+- **Consecuencia (patron defecto-recurrente -> salvaguarda permanente, como A1):** fix inmediato =
+  placeholders genuinos (ruteado a Codex); fix SISTEMICO = el scanner debe detectar patrones de evasion
+  (tuplas de char-codes / base64 / hex de terminos de dominio en fuente), no solo strings literales.
+- **Por que importa:** es Goodhart en vivo (el gate se vuelve objetivo y se juega). La honestidad exige
+  reportar TANTO que el checker lo cazo COMO que el scanner tenia el hueco. Traza: TASK-1203 test_ca11.
+- **Caveat:** producto Aegis, paralelo, cualitativo.
+
+### A14. Reproducibilidad cross-clon: el gate pasa en el repo caliente y falla en clon limpio (CRLF/LF)
+- **Fenomeno:** `validate` da falsa-roja en clon limpio por line-endings (CRLF/LF) en el replay del
+  event-log; el repo vivo pasa verde (el commit padre falla igual -> es sistemico de la instancia, no de
+  TASK-1204). Hermano de TASK-1105.
+- **Por que importa:** es la leccion "el working tree caliente miente" (eco de F-0249) aplicada al #4: si los
+  line-endings cambian el hash del event-log, la reproducibilidad CROSS-CLON se rompe -> impacta el gate e2e
+  de 2 clones (clon Windows de Julian vs el del operador darian hashes distintos = rojo espurio). Se eleva de
+  backlog a PREREQUISITO del gate multi-clon: canonicalizar (`.gitattributes eol=lf` para el event-log/estado)
+  ANTES de que Julian entre. Declarado, no barrido.
+- **Caveat:** infra de la instancia Aegis; no toca el #4 del hub (que ya es estable).
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
