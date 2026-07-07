@@ -4,6 +4,20 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis done flip.
 
 ## Latest Session Note
 
+- Aegis TASK-1206 delivered to `in_review` after hub GO
+  `MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion.md`. Aegis commits:
+  `764efb36 feat(TASK-1206): harden event log line endings`, `0699b646 fix(TASK-1206): make runtime
+  snapshot clone stable`, `570c961e test(TASK-1206): support clean clone line ending check`,
+  `ea897b0c coord(TASK-1206): deliver line ending review`, and `9549323f chore(TASK-1206): record delivery
+  memory`. TASK-1206 is `in_review`, Codex claim released through Aegis seq 3617, and handoff is
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1206-codex-to-arquitecto-1.md`. Gates passed:
+  live line-ending regression, py_compile, encoding, domain-neutrality, validator, drift false at seq 3617,
+  config sha8 `2E35F26E`, plus clean clone `core.autocrlf=true` and `core.autocrlf=false` validate/line-ending/
+  encoding/neutrality/drift with identical hash
+  `78c83bceb10bfeec3b6fbcd4d52e37365ad8e2f5ae59bf1f51302574afb9c351`.
+  Hub announce commit `c9694bc coord: announce Aegis TASK-1206 delivery` opened
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1206-in-review.md` with `Task-Id: none`
+  and `Ops-Reason: announce Aegis TASK-1206 in_review delivery`; hub drift was false at seq 4401.
 - TASK-1204 done-flip executed after Arquitecto ACTION
   `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md`. In Aegis, commit
   `eeb73c97 coord(TASK-1204): close stubs manifests done flip` moves TASK-1204 `review_approved -> done`
