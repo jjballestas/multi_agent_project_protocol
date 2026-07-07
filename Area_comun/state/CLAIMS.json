@@ -631,6 +631,51 @@
             "updated_at": "2026-07-07T03:18:55Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1109-fixloop1-hub-response",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Hub response for Aegis TASK-1105 done flip and TASK-1109 fix-loop 1 redelivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1109-fixloop1-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1105-1109-nogo.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1105-1109-nogo.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-done-TASK-1109-fixloop1-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T05:18:34Z",
+            "status": "released",
+            "task_id": "TASK-1109",
+            "updated_at": "2026-07-07T05:18:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1109-hub-memory-amend",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Correct hub memory commit hash after trailer amend.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1109-hub-memory-amend",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T05:23:04Z",
+            "status": "released",
+            "task_id": "TASK-1109",
+            "updated_at": "2026-07-07T05:23:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1109-hub-memory-final",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Golden memory follow-up after hub TASK-1109 fix-loop response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1109-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T05:20:48Z",
+            "status": "released",
+            "task_id": "TASK-1109",
+            "updated_at": "2026-07-07T05:20:48Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final",
             "expires_at": "2026-07-07T23:59:00Z",
             "notes": "Golden memory follow-up after hub TASK-1203 done-flip response commit.",
