@@ -16,6 +16,9 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1207 fix-loop 1 Aegis redeliv
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1207-doneflip-TASK-1106-in-review.md`;
   consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1207-GO-1106.md`.
   A follow-up hub message fix added the required `question` field after the validator rejected the response.
+  Hub response commit was amended to `a49481d coord: announce Aegis TASK-1106 delivery` with same-paragraph
+  `Task-Id: none` and `Ops-Reason`. Hub gates passed after msgfix before the amend: encoding OK,
+  domain-neutrality OK, validator OK, and drift false at seq 4437.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-1207-nogo-chr-unicode-evasion.md` was processed.
   In Aegis, TASK-1207 fix-loop 1 commit `097d98b8 fix(TASK-1207): catch chr and unicode evasions` adds scanner
   coverage for concatenated `chr(N)+chr(N)+...` and `\u00NN` unicode-escape evasions, with negative/positive

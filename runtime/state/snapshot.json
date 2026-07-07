@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d9c8b24b2655db859fad940f8838bdf919f05617a065024b774dc9157a0cf775",
+  "canonical_hash": "457f56de5b1d9c742779c68e4825509ff97d0906120a2fc4907268ac1b49d119",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -583,6 +583,7 @@
       "CLAIM-20260707-Arquitecto-mbhyg-1204window": 1,
       "CLAIM-20260707-Arquitecto-mbhyg-b1of2": 1,
       "CLAIM-20260707-Arquitecto-mbhyg-b2of2": 1,
+      "CLAIM-20260707-Codex-TASK-1106-hub-memory-final": 1,
       "CLAIM-20260707-Codex-TASK-1106-hub-msgfix": 1,
       "CLAIM-20260707-Codex-TASK-1106-hub-response": 1,
       "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final": 1,
@@ -1556,7 +1557,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-1102": 14,
-      "TASK-1106": 2,
+      "TASK-1106": 3,
       "TASK-1203": 6,
       "TASK-1204": 6,
       "TASK-1206": 2,
@@ -1568,7 +1569,7 @@
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3766,
+    "events_applied": 3768,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2758,6 +2759,8 @@
       "codex:0175:req-done:REQ-E6B404D5": 1873,
       "codex:0175:req-done:REQ-EE0CA804": 1867,
       "codex:0175:req-done:REQ-FA303A81": 1870,
+      "codex:1106-hub-memory-final:claim": 4438,
+      "codex:1106-hub-memory-final:release": 4439,
       "codex:1106-hub-msgfix:claim": 4436,
       "codex:1106-hub-msgfix:release": 4437,
       "codex:1106-hub-response:claim": 4434,
@@ -5338,5 +5341,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4437
+  "up_to_seq": 4439
 }
