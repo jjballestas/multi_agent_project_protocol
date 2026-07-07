@@ -22,7 +22,7 @@ exacto de study-integrity (fixtures no debilitados):
 - `78dbd3d` (tests/staticContract.test.js, +2/-14) BORRA el fallback de full-clone y lo reemplaza por
   `t.skip(...); return null`. El "fast path" preexistente del que ahora dependes esta MUERTO: retorna
   null deterministicamente.
-- Evidencia: `npm run test:ci` -> exit 0, 39s, PERO `tests 134 · pass 112 · skipped 22`. Los 22 tests
+- Evidencia: `npm run test:ci` -> exit 0, 39s, PERO `tests 134 , pass 112 , skipped 22`. Los 22 tests
   dependientes del fixture imprimen "fast protocol fixture is unavailable; refusing slow full-repo clone"
   y hacen `if (!protocolRoot) return;` -> el server nunca arranca, ninguna asercion corre.
 - Causa raiz del fast-path muerto: `createFastProtocolFixture` -> `protocolFixtureHasNoDrift` corre
