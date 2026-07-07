@@ -14,7 +14,8 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
   `npm run test:ci` PASS 139/139 with 0 skipped. Aegis gates passed: encoding OK, domain-neutrality OK,
   validator OK, drift false at seq 3706. Hub response:
   `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-fixloop1-TASK-1109-in-review.md`;
-  consumed hub ACTIONs moved to `answered/`.
+  consumed hub ACTIONs moved to `answered/`. Hub commit: `f5c3bc4 coord: announce Aegis TASK-1109 delivery`;
+  hub gates passed before commit: encoding OK, domain-neutrality OK, validator OK, drift false at seq 4477.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md` was processed. TASK-1107 moved
   `review_approved -> done`; TASK-1108 moved `ready -> in_progress -> in_review`; Codex claims were released
   through Aegis seq 3686. Product commit in `D:/Agentes/Zeus/Zeus-protocol`: `7968a6a feat(TASK-1108): add
