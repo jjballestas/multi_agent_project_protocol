@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1207 fix-loop 1 Aegis redelivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1106 fix-loop 1 Aegis redelivery.
 
 ## Latest Session Note
 
+- Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-1106-nogo-serverdefaults-forge.md` was processed.
+  TASK-1106 fix-loop 1 product commit in `D:/Agentes/Zeus/Zeus-protocol`:
+  `8a4e9083 fix(TASK-1106): block docs mode payload defaults forge`. It removes the docs-mode
+  `payload.serverDefaults` side-channel, stops auto-confirming all checklist items from document parsing, ignores
+  document-authored `Approval: true`, and adds the missing negative forge test. Product gates passed:
+  `node --check src/intakeQuality.js src/docsQualityBinding.js tests/docsQualityBinding.test.js`,
+  `npm test -- tests/docsQualityBinding.test.js` PASS 6/6, and `npm test` PASS 130 total / 108 pass /
+  22 skipped. Aegis redelivery commits: `cc41a6d4 coord(TASK-1106): redeliver docs mode fixloop` and
+  `6a2b574a chore(TASK-1106): record fixloop memory`; handoff:
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1106-codex-to-arquitecto-2.md`. Aegis gates
+  passed: encoding OK, domain-neutrality OK, validator OK, and drift false at seq 3650. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review.md`; consumed ACTION
+  moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-1106-nogo-serverdefaults-forge.md`.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1207-GO-1106.md` was processed.
   In Aegis, TASK-1207 was flipped `review_approved -> done`; TASK-1106 was claimed, implemented, delivered
   to `in_review`, and claim `CLAIM-20260707-Codex-TASK-1106-docs-mode` was released. Product commit in

@@ -412,6 +412,23 @@
             "updated_at": "2026-07-07T00:50:42Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1106-fixloop1-hub-response",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Hub response for Aegis TASK-1106 fix-loop 1 redelivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1106-fixloop1-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-1106-nogo-serverdefaults-forge.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-1106-nogo-serverdefaults-forge.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T02:16:20Z",
+            "status": "released",
+            "task_id": "TASK-1106",
+            "updated_at": "2026-07-07T02:16:20Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1106-hub-memory-final",
             "expires_at": "2026-07-08T00:00:00Z",
             "notes": "Golden memory follow-up after hub TASK-1106 response commit.",
