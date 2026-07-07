@@ -127,12 +127,22 @@ Ver la receta base y los gotchas en `arquitecto-ledger-ops`.
   el submit_intent es atomico (validate se mantiene VERDE); deja que el peer commitee (su commit hornea tus
   archive-events en los state files compartidos) y luego TU commiteas los movimientos `open->archived` que el peer
   no stageo (si no, HEAD queda inconsistente para clon limpio: snapshot dice archivado pero los .md siguen en open/).
-- **CORRE LOS LOTES EN BACKGROUND** (`run_in_background`) o con timeout largo, **NUNCA en foreground** con el tool:
-  el submit_intent re-replaya el event log creciendo (~30-60s/lote) y el tool corta a 2min -> mata el lote a mitad
-  (half-apply). Lotes de ~6. Gatea `validate` VERDE despues de cada lote.
-- **RECUPERACION si un lote se corto:** `validate` VERDE => submit_intent revirtio o completo atomico (sin drift);
-  mira que MSG siguen en `open/` (los no-archivados) y commitea los movimientos+state de los lotes YA aplicados
-  como snapshot consistente; re-corre los faltantes en BACKGROUND. Nunca commitees un state a medio aplicar.
+- **LOTES PEQUENOS (<=3), timeout generoso, y VERIFICA EL ESTADO FISICO tras cualquier timeout (leccion
+  2026-07-07, reforzada -- mailbox_archive es TIMEOUT-PRONE aun con los peers idle):** el submit_intent re-replaya
+  el event log creciendo y bajo I/O variable timeoutea aun sin contencion de peer. Un lote de 6 timeoteo DOS veces
+  en una sesion; **lotes de <=3 completaron limpios.** Corre con timeout 100-150s (o `run_in_background`), NUNCA
+  foreground corto. El timeout NO significa fallo: los eventos suelen aplicar (revisa `tail events.jsonl` = los
+  `intent.applied` esperados) pero el EFECTO DE ARCHIVO (mover el .md) y/o el snapshot pueden quedar a medias.
+- **RECUPERACION del half-apply -- en instancia ENFORCE (materialize on) el fix es re-materializar, NO git checkout:**
+  1) mira que MSG siguen en `open/` (los no movidos); si el evento `mailbox_archive` aplico pero el .md sigue en
+  `open/`, **muevelo A MANO** (frontmatter `status: open`->`archived` + `mv open/ -> archived/`) -- reenviar el
+  intent falla ("message not found in open" porque el evento ya dice archivado). 2) Si `snapshot.up_to_seq` quedo
+  detras del head del log (`validate` rojo "snapshot mismatch"), **re-materializa Y regenera el snapshot**:
+  `materialize_from_event_log_if_enabled(Path('.'))` y luego `rebuild_snapshot(Path('.'))`+`write_snapshot(...)`
+  (re-materializar reconstruye los JSON pero NO actualiza snapshot.json). 3) Si el `claim release` final no aplico
+  (claim sigue activo), reenvia SOLO ese intent standalone. 4) `validate`+`scan_encoding` exit 0, y commitea los
+  moves+state como snapshot consistente. (En instancia SIN materialize, en cambio, usa git checkout con la guarda
+  de peer-lock de abajo -- son caminos distintos segun el modo de la instancia.)
 - **NUNCA `git checkout runtime/state/*` / `Area_comun/state/*` mientras un peer esta en EXEC (leccion 2026-07-03,
   colision real):** si un lote de higiene half-aplico (submit_intent cortado a 2min: events appendidos, snapshot
   detras, moves incompletos) y quieres revertir, VERIFICA PRIMERO que ningun peer tenga lock. Si Codex/Analista
