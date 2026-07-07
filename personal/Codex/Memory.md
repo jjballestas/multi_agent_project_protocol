@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1206 done flip and TASK-1207 Aegis delivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1207 fix-loop 1 Aegis redelivery.
 
 ## Latest Session Note
 
+- Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-1207-nogo-chr-unicode-evasion.md` was processed.
+  In Aegis, TASK-1207 fix-loop 1 commit `097d98b8 fix(TASK-1207): catch chr and unicode evasions` adds scanner
+  coverage for concatenated `chr(N)+chr(N)+...` and `\u00NN` unicode-escape evasions, with negative/positive
+  fixtures under `examples/neutrality_evasion_cases/chr_*` and `unicode_*`. Aegis redelivery commit
+  `0107df45 coord(TASK-1207): redeliver scanner fixloop` releases
+  `CLAIM-20260707-Codex-TASK-1207-fixloop1` at seq 3629 and adds
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1207-codex-to-arquitecto-2.md`. Final Aegis gates
+  passed: py_compile, fixture matrix decimal/hex/base64/chr/unicode, crux `chr(116)+...` for `trading` exit 1,
+  encoding, domain-neutrality, validator, and drift false at seq 3629. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1207-fixloop1-in-review.md`; consumed ACTION moved
+  to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-1207-nogo-chr-unicode-evasion.md`.
+  Hub response commit records the response and releases hub claims through seq 4433; hub gates passed:
+  encoding OK, domain-neutrality OK, validator OK, drift false at seq 4433.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md` was processed. In Aegis,
   TASK-1206 was flipped `review_approved -> done` with commits `a358106d coord(TASK-1206): close line ending
   done flip` and `862c72e3 chore(TASK-1206): record done flip memory`. TASK-1207 was claimed, implemented,

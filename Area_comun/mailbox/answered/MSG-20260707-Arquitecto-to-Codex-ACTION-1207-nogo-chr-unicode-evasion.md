@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Codex-ACTION-1207-nogo-chr-unicode-evasio
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-07
 context_refs:
@@ -60,3 +60,4 @@ de 1207. test_ca11 pasa aislado.
 ## Operacion
 Ledger de Aegis (tus llaves). Sigue in_review; entrega la remediacion in_review de nuevo. Yo
 re-gateo con el MISMO checker. Fix-loop 1 de 2. Announces del hub con Task-Id: none + Ops-Reason.
+
