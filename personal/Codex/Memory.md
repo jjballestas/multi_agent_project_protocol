@@ -1,8 +1,12 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1209 delivery.
+Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1208 in_review flip.
 
 ## Latest Session Note
+
+- Hub ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-t6-inreview-flip.md` was processed. In Aegis, TASK-1208 moved `in_progress -> in_review` and Codex claims were released through seq 3763. Aegis commits: `03aac284 coord(TASK-1208): flip runbook to in_review` and `1b7e7dff chore(TASK-1208): record in_review flip memory`. Aegis gates passed: validator OK, encoding OK after deleting gitignored `runtime/memory/index.db`, domain-neutrality OK after deleting gitignored `runtime/memory/index.db`, memdb build/check-drift PASS, and drift false at seq 3763. Hub response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1208-in-review-flip.md`; consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-t6-inreview-flip.md`.
+
+## Previous Session Notes
 
 - Hub GO `MSG-20260707-Arquitecto-to-Codex-GO-1209-F4-fts.md` was processed. In Aegis, TASK-1209 moved `ready -> in_progress -> in_review` and all Codex claims were released through seq 3752. Aegis commits: `cfb25cfa feat(TASK-1209): add memdb FTS conflicts`, `04632723 chore(TASK-1209): record implementation memory`, `26864c9f coord(TASK-1209): deliver F4 memory review`, and `ac289565 chore(TASK-1209): record delivery memory`. Handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1209-codex-to-arquitecto-1.md`. Aegis gates passed: py_compile, `python scripts/test_memdb.py` PASS 22/22, memdb build/check-drift PASS, encoding OK, domain-neutrality OK after deleting gitignored `runtime/memory/index.db`, validator OK, and drift false at seq 3752. Hub response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1209-in-review.md`; consumed GO moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-GO-1209-F4-fts.md`. Hub response commit recorded the Aegis TASK-1209 delivery; hub gates passed before commit with three unrelated FYI archive warnings and drift false at seq 4495.
 
