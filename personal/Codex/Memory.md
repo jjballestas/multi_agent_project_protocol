@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1208 done flip.
+
+## Latest Session Note
+
+- Hub ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1208.md` was processed. In Aegis, TASK-1208 moved `review_approved -> done` via runtime seq 3782-3784, and `CLAIM-20260707-Codex-TASK-1208-doneflip` was released. Aegis commits: `6e94f466 coord(TASK-1208): close runbook done flip` and `e77252e4 chore(TASK-1208): record done flip memory`. Aegis gates passed: validator OK, encoding OK, domain-neutrality OK, runtime drift false at seq 3784, and memdb build/check-drift PASS after rebuilding the gitignored DB; memory commit gates passed after deleting gitignored `runtime/memory/index.db`, with drift false at seq 3786. Hub response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1208-doneflip-done.md`; consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1208.md`.
+
+## Previous Session Notes
+
 Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1209 fix-loop 1 redelivery.
 
 ## Latest Session Note
