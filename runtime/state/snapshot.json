@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "92c94e3ab8a163e45f040730a74b1e6ad6d15ac568c7c36c1b28d2210b0c2da8",
+  "canonical_hash": "33d7e79406fe658e92823e610745777d112263f50db48fabe0560cc6ab3aea5b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -583,6 +583,7 @@
       "CLAIM-20260707-Arquitecto-mbhyg-1204window": 1,
       "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-memory-final": 1,
       "CLAIM-20260707-Codex-TASK-1203-doneflip-hub-response": 1,
+      "CLAIM-20260707-Codex-TASK-1204-doneflip-hub-response": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1531,7 +1532,7 @@
       "TASK-0255": 27,
       "TASK-1102": 14,
       "TASK-1203": 6,
-      "TASK-1204": 4,
+      "TASK-1204": 5,
       "TASK-EXTRACT-1F5C13A7B5": 6,
       "TASK-EXTRACT-DC0E283672": 4,
       "TRIAGE-REQS": 1,
@@ -1539,7 +1540,7 @@
       "protocol-prune": 4,
       "protocol-state": 1
     },
-    "events_applied": 3724,
+    "events_applied": 3726,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -1625,6 +1626,8 @@
       "TASK-0253-fnova01-retry-blocked-status": 4045,
       "TASK-0253-fnova01-retry-claim": 4044,
       "TASK-0253-fnova01-retry-claim-release": 4046,
+      "TASK-1204-doneflip-hub-response-claim-20260707": 4396,
+      "TASK-1204-doneflip-hub-response-release-20260707": 4397,
       "analista-task0203-claim-acquire-v2": 2311,
       "analista-task0203-claim-release": 2312,
       "analista:TASK-0226-remediation-review:claim-acquire-v2": 2728,
@@ -5267,5 +5270,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4395
+  "up_to_seq": 4397
 }

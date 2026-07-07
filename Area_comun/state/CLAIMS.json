@@ -400,6 +400,23 @@
             "updated_at": "2026-07-06T22:29:25Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1204-doneflip-hub-response",
+            "expires_at": "2026-07-07T23:59:00Z",
+            "notes": "Hub response and memory for Aegis TASK-1204 done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1204-doneflip-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T00:01:43Z",
+            "status": "released",
+            "task_id": "TASK-1204",
+            "updated_at": "2026-07-07T00:01:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1204-hub-memory-final",
             "expires_at": "2026-07-07T00:34:50Z",
             "notes": "Golden memory follow-up after hub TASK-1204 response commit.",

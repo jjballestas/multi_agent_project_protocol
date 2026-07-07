@@ -1,9 +1,17 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis delivery.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis done flip.
 
 ## Latest Session Note
 
+- TASK-1204 done-flip executed after Arquitecto ACTION
+  `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md`. In Aegis, commit
+  `eeb73c97 coord(TASK-1204): close stubs manifests done flip` moves TASK-1204 `review_approved -> done`
+  through runtime seq 3607 and releases `CLAIM-20260707-Codex-TASK-1204-doneflip` through seq 3608; commit
+  `3d24bed1 chore(TASK-1204): record done flip memory` records the Aegis golden memory update. Aegis gates
+  passed: validator OK, encoding OK, domain-neutrality exit 0, and drift false at `up_to_seq=3608`. Hub
+  response: `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1204-doneflip-done.md`; consumed
+  ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1204.md`.
 - TASK-1204 delivered in Aegis after GO
   `MSG-20260707-Arquitecto-to-Codex-GO-1204-stubs-manifests.md`. Aegis commits:
   `dae42180 feat(TASK-1204): add cold pack stubs and guards`, `336df749 chore(TASK-1204): record
