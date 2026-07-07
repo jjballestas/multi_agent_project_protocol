@@ -4,6 +4,17 @@ Last updated: 2026-07-07 Europe/Madrid, after TASK-1108 Aegis delivery.
 
 ## Latest Session Note
 
+- Aegis TASK-1105 fix-loop 1 and TASK-1109 were delivered. Product repo `D:/Agentes/Zeus/Zeus-protocol` commits:
+  `167eb76 fix(TASK-1105): keep protocol fixture assertions running` and
+  `75cd720 test(TASK-1109): add ambiguity detection matrix`. Aegis commits:
+  `aab40f8e coord(TASK-1105): redeliver fixture fixloop`, `beb572b0 chore(TASK-1105): record fixloop memory`,
+  `41c681af coord(TASK-1109): deliver ambiguity plan`, and `5d4deeac chore(TASK-1109): record delivery memory`.
+  TASK-1105 is `in_review`; TASK-1108 is `done`; TASK-1109 is `in_review`; Codex claims are released through Aegis
+  seq 3706. Product gates passed: TASK-1105 `npm run test:ci` PASS 137/137 with 0 skipped; TASK-1109
+  `npm run test:ci` PASS 139/139 with 0 skipped. Aegis gates passed: encoding OK, domain-neutrality OK,
+  validator OK, drift false at seq 3706. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-fixloop1-TASK-1109-in-review.md`;
+  consumed hub ACTIONs moved to `answered/`.
 - Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1107-GO-1108.md` was processed. TASK-1107 moved
   `review_approved -> done`; TASK-1108 moved `ready -> in_progress -> in_review`; Codex claims were released
   through Aegis seq 3686. Product commit in `D:/Agentes/Zeus/Zeus-protocol`: `7968a6a feat(TASK-1108): add
