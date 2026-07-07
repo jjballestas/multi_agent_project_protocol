@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Operador-FYI-avance-1001-t3-done-t4-go
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:

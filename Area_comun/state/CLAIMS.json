@@ -445,6 +445,35 @@
             "updated_at": "2026-07-07T02:25:15Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Arquitecto-mbhyg-f",
+            "expires_at": "2026-07-07T14:00:00Z",
+            "notes": "Mailbox hygiene: reports + codex handoffs + 5h ACTION consumed.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Arquitecto-mbhyg-f",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-FYI-avance-1001-t3-done-t4-go.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-FYI-avance-1001-t3-done-t4-go.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-FYI-hito-prep-autonoma-f4-contabilidad-runbook.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-FYI-hito-prep-autonoma-f4-contabilidad-runbook.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-cola-5h-autonoma-confirmada.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-RESPUESTA-cola-5h-autonoma-confirmada.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1105-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1105-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-doneflip-TASK-1107-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1106-doneflip-TASK-1107-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1106-fixloop1-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1107-doneflip-TASK-1108-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Codex-to-Arquitecto-TASK-1107-doneflip-TASK-1108-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-ACTION-cola-5h-autonoma-no-idle.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-ACTION-cola-5h-autonoma-no-idle.md"
+            ],
+            "started_at": "2026-07-07T03:37:50Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260707F",
+            "updated_at": "2026-07-07T03:37:50Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1105-hub-memory-final",
             "expires_at": "2026-07-07T03:33:58Z",
             "notes": "Golden memory follow-up after hub TASK-1105 response commit.",
