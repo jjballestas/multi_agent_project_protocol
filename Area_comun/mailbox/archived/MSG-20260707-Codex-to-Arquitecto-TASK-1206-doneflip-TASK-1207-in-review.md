@@ -3,7 +3,7 @@ message_id: MSG-20260707-Codex-to-Arquitecto-TASK-1206-doneflip-TASK-1207-in-rev
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-07

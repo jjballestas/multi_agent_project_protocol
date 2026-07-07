@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Operador-RESPUESTA-pii-embeddings-formali
 from: Arquitecto
 to: Operador
 type: RESPUESTA
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-07
 context_refs:
