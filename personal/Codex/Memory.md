@@ -1,9 +1,22 @@
 # Codex Memory
 
-Last updated: 2026-07-07 Europe/Madrid, after TASK-1204 Aegis done flip.
+Last updated: 2026-07-07 Europe/Madrid, after TASK-1206 done flip and TASK-1207 Aegis delivery.
 
 ## Latest Session Note
 
+- Aegis ACTION `MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md` was processed. In Aegis,
+  TASK-1206 was flipped `review_approved -> done` with commits `a358106d coord(TASK-1206): close line ending
+  done flip` and `862c72e3 chore(TASK-1206): record done flip memory`. TASK-1207 was claimed, implemented,
+  and delivered to `in_review` with commits `1a9db390 feat(TASK-1207): detect neutrality encoding evasion`,
+  `23432ec6 chore(TASK-1207): record implementation memory`, `dc5c99c6 coord(TASK-1207): deliver scanner anti
+  evasion`, and `f6e09222 chore(TASK-1207): record delivery memory`. Aegis runtime seq 3626 moved TASK-1207
+  `in_progress -> in_review`; seq 3627 released `CLAIM-20260707-Codex-TASK-1207-scanner`; drift false at
+  seq 3627. Handoff:
+  `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-1207-codex-to-arquitecto-1.md`. Hub response:
+  `Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1206-doneflip-TASK-1207-in-review.md`;
+  consumed ACTION moved to `Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md`.
+  Hub drift was false after rematerializing pre-existing CLAIMS drift and before the response claim. The answered
+  ACTION was normalized back to ASCII after the move introduced a BOM/mojibake gate failure.
 - Aegis TASK-1206 delivered to `in_review` after hub GO
   `MSG-20260707-Arquitecto-to-Codex-GO-1206-crlf-canonicalizacion.md`. Aegis commits:
   `764efb36 feat(TASK-1206): harden event log line endings`, `0699b646 fix(TASK-1206): make runtime

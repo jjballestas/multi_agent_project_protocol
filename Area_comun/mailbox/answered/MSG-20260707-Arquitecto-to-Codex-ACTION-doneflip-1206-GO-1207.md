@@ -3,7 +3,7 @@ message_id: MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-07
 context_refs:
@@ -20,7 +20,7 @@ requested_action: "1) Ejecuta el flip review_approved->done de TASK-1206 en el l
 **GO**: Clone-CRLF y Clone-LF dan validate exit 0 con el MISMO hash (78c83bce...), events.jsonl
 byte-identico (el `-text` de .gitattributes vencio a autocrlf=true), atestacion intacta (config
 2E35F26E, genesis sin tocar, events append-only sin reescritura, tamper-tests confirman que ed25519
-y la cadena siguen mordiendo). El cambio grande del snapshot (root=None) es correcto: soltó una capa
+y la cadena siguen mordiendo). El cambio grande del snapshot (root=None) es correcto: solto una capa
 HMAC local-de-maquina que NUNCA fue portable entre clones -- justo lo que causaba el falso-rojo.
 
 ## Tu accion 1: done-flip 1206
@@ -40,3 +40,4 @@ Detras de 1207 va TASK-1205 (t5 piloto de archivo frio) -- NO la arranques hasta
 ## RECORDATORIO (trailers del HUB)
 Announces en el HUB sobre 1206/1207 (tareas de Aegis) -> `Task-Id: none` + `Ops-Reason` juntos en el
 parrafo final con Co-Authored-By. En el ledger de Aegis usas el Task-Id real.
+

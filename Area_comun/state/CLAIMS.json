@@ -551,6 +551,38 @@
             "updated_at": "2026-07-07T00:24:21Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1207-hub-msgfix",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Fix ASCII encoding for answered consumed ACTION.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1207-hub-msgfix",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T01:00:10Z",
+            "status": "released",
+            "task_id": "TASK-1207",
+            "updated_at": "2026-07-07T01:00:10Z"
+        },
+        {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1207-hub-response",
+            "expires_at": "2026-07-08T00:00:00Z",
+            "notes": "Hub response for Aegis TASK-1206 done flip and TASK-1207 delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1207-hub-response",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md",
+                "Area_comun/mailbox/answered/MSG-20260707-Arquitecto-to-Codex-ACTION-doneflip-1206-GO-1207.md",
+                "Area_comun/mailbox/open/MSG-20260707-Codex-to-Arquitecto-TASK-1206-doneflip-TASK-1207-in-review.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T00:57:52Z",
+            "status": "released",
+            "task_id": "TASK-1207",
+            "updated_at": "2026-07-07T00:57:52Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
