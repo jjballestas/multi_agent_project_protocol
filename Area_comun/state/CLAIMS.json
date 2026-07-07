@@ -1025,6 +1025,20 @@
             "updated_at": "2026-07-07T10:22:35Z"
         },
         {
+            "claim_id": "CLAIM-20260707-Codex-TASK-1209-fixloop1-hub-memory-final",
+            "expires_at": "2026-07-08T23:59:00Z",
+            "notes": "Golden memory follow-up after hub TASK-1209 fix-loop response commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260707-Codex-TASK-1209-fixloop1-hub-memory-final",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-07T11:12:00Z",
+            "status": "released",
+            "task_id": "TASK-1209",
+            "updated_at": "2026-07-07T11:12:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260707-Codex-TASK-1209-fixloop1-hub-response",
             "expires_at": "2026-07-08T23:59:00Z",
             "notes": "Hub response for Aegis TASK-1209 fix-loop 1 redelivery.",
