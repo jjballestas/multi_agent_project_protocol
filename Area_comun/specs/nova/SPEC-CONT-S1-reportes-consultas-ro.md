@@ -15,9 +15,15 @@
   readonly, NO la conversacion del maker)** + adversarial informal en sesion separada.
 - arm / q4_membership / isolation: segun sorteo del sello si mide; RO -> criticidad de INTEGRIDAD baja, de
   CONFIDENCIALIDAD alta (aislamiento de tenant en lecturas, hallazgo #14). Si se mide como par, aislamiento CRITICO.
+- **base congelada de referencia:** sello `ACCOUNTING_BASE_SOLID_20260711`, source_bundle_sha256
+  `608b4370d5a6adde8111f85c9de828ade4eee7999a12187509bcb80dd8b1bef5` (ver SPEC-CONT-000). Al abrir el build, se
+  ancla en el ledger de la instancia (dual cross-atestacion, DECISION-0088).
 - **precondicion / preflight (F-NOVA-01, patron Presupuesto):** los 11 procs de reporte + `Get_Bank_Retention_
   Crossing_Report` EXISTEN y estan desplegados+verificados en las 3 BD; `GRANT EXECUTE` + `VIEW DEFINITION` +
-  `SELECT` sobre las vistas/objetos leidos concedidos al rol verifier; set REAL de THROW capturado (seccion D).
+  `SELECT` concedidos al rol **`accounting_sandbox_verifier`** en `DbsFinanciero_SANDBOX` (los 12 report procs de
+  S1 estan entre las 33 rutinas con EXECUTE); set REAL de THROW capturado (seccion D). El harness F-NOVA-01 usa ESE
+  rol (no un readonly generico). Flag menor abierto: `fn_Account_Balance_For_Period` (consulta de movimientos de
+  cuenta) no esta entre los 33 EXECUTE -> si se superficie como endpoint directo, el DBA concede su grant.
 - **F-NOVA-01 (set REAL, seccion D WS1, re-verificado 2026-07-10, identico en las 3 BD):**
   - `Get_Account_Monthly_Accumulated_Balance_Report` 52700-52707 · `Get_Auxiliary_Ledger_Report` 52800-52810 ·
     `Get_General_Ledger_Report` 52900-52908 · `Get_Daily_Book_Report` 53000-53005 · `Get_Balance_Annex_Report`

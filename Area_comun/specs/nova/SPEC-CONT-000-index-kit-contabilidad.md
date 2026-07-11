@@ -19,6 +19,41 @@
 - **Colocacion:** hub `Area_comun/specs/nova/` (junto a las SPEC-NOVA-P4-00x de Presupuesto; la gobernanza/SPECs
   viven en el hub, DECISION-0050 #1). El build de producto ira al repo de la instancia cuando abra.
 
+## Base congelada de referencia + verifier (input (b) RESUELTO, sello ACCOUNTING_BASE_SOLID_20260711)
+Base solida promovida por el DBA (2026-07-11), verificada independiente por el Asesor
+(`MSG-20260711-Operador-to-Arquitecto-FYI-base-contabilidad-promovida-verifier-listo`):
+- **source_bundle_sha256 = `608b4370d5a6adde8111f85c9de828ade4eee7999a12187509bcb80dd8b1bef5`** (sello
+  `ACCOUNTING_BASE_SOLID_20260711`): 51 archivos fuente, 174 objetos desplegados, 0 faltantes, 0 mismatch de
+  definicion cross-BD (DbsFinanciero / DbsFinanciero_SANDBOX / SNJDC). Alcance congelado: schema/015-028,
+  reports/*, load/*, vistas de soporte, scripts del verifier. **Cada SPEC-CONT ANCLA este sha256 como su base
+  congelada de referencia** (DoR). Al ABRIR el build en la instancia, este sha256 se ancla en el ledger de la
+  instancia (dual cross-atestacion, DECISION-0088).
+- **Verifier de evidencia F-NOVA-01 = rol `accounting_sandbox_verifier`** en `DbsFinanciero_SANDBOX` (SOLO
+  sandbox; SNJDC/prod siguen read-only). Superficie: **33 GRANT EXECUTE** (rutinas WS1 slices 1-6) + **23 GRANT
+  SELECT** (vw_*) + **VIEW DEFINITION** (rutinas/vistas/`Accounting.Voucher`, least-privilege: lee triggers sin
+  SELECT a tablas base). Guard fail-closed **THROW 54500** (`DB_NAME() NOT LIKE '%SANDBOX%'`) + **54501** si falta
+  superficie. El harness F-NOVA-01 de cada SPEC-CONT se cablea a ESTE rol (EXECUTE+SELECT+VIEW DEFINITION), NO a
+  un readonly generico; los negativos por THROW dependientes de datos los arma el harness dentro de su
+  transaccion con `ROLLBACK` (seed slate limpio: tenant ACCTVERIFY, fuente TST, vigencias 2024/2025, 0 vouchers).
+
+## Cross-check de cobertura de superficie (33 rutinas EXECUTE vs unidades SPEC-CONT)
+Las 33 rutinas con GRANT EXECUTE cubren 1:1 las unidades de S1-S6B (verificado 2026-07-11):
+- **S1 (12):** los 11 `Get_*_Report` + `Get_Bank_Retention_Crossing_Report`.
+- **S2 (4):** `Post_Voucher`, `Post_Voucher_Draft`, `Reverse_Voucher`, `Get_Next_Accounting_Source_Number` (los 12
+  triggers disparan via DML; VIEW DEFINITION concedido para leer su `OBJECT_DEFINITION` en F-NOVA-01).
+- **S3 (4):** `Validate_Period_Close`, `Close_Accounting_Period`, `Validate_Period_Open`, `Open_Accounting_Period`
+  (`trg_voucher__date_controls` dispara via DML).
+- **S4 (5):** `Create/Validate/Approve/Import_Opening_Balance_Draft` + `Convert_Auxiliary_To_Major`.
+- **S5 (3):** `Create_Chip_Report_Balance_Batch`, `Get_Chip_Reconciliation_Difference`, `Post_Chip_Adjustment_Voucher`.
+- **S6A (4):** `Import_Cgn_Chip_Valid_Account_Catalog`, `Create/Get/Confirm_Cgn_Chip_Quarterly_Report`.
+- **S6B (1):** `Close_Annual_Accounting_Period`.
+- **S6C:** FRONTERA del modulo fuente -> sus procs (`income_accrual`/`accounts_receivable_accrual`) NO son de
+  `Accounting` ni estan en el verifier; correcto (fuera de la superficie de Contabilidad).
+**Total 33/33, sin hueco para S1-S6B.** UNICO flag menor al DBA (no bloqueante): `fn_Account_Balance_For_Period`
+(funcion usada por la consulta de movimientos de cuenta de S1, `MacoCMdef`) NO esta entre los 33 GRANT EXECUTE; si
+el kit la superficie como endpoint directo, el DBA concede EXECUTE/SELECT sobre ella (o confirma que solo la
+consumen internamente los report procs ya concedidos). Reportado al operador.
+
 ## Slices (mapa R1-R8 del SDD dado por el operador; 6C es frontera del modulo fuente)
 
 | Slice | SPEC-CONT | Unidad | Objeto(s) NOVA principal(es) | THROW real (F-NOVA-01, seccion D WS1) | schema | Estado SPEC |
