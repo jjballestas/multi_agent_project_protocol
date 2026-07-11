@@ -40,6 +40,25 @@
             "updated_at": "2026-07-07T14:09:29Z"
         },
         {
+            "claim_id": "CLAIM-20260711-Arquitecto-hyg0707",
+            "expires_at": "2026-07-11T22:34:06Z",
+            "notes": "Hygiene: 3 consumed 2026-07-07 msgs (chain-1002 FYI, prep-cierre RESP, prep-post-chains ACTION) superseded.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260711-Arquitecto-hyg0707",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-FYI-chain-1002-COMPLETO.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-FYI-chain-1002-COMPLETO.md",
+                "Area_comun/mailbox/open/MSG-20260707-Arquitecto-to-Operador-RESP-prep-cierre-pausa-natural.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Arquitecto-to-Operador-RESP-prep-cierre-pausa-natural.md",
+                "Area_comun/mailbox/open/MSG-20260707-Operador-to-Arquitecto-ACTION-prep-post-chains-contabilidad-etapa2.md",
+                "Area_comun/mailbox/archived/MSG-20260707-Operador-to-Arquitecto-ACTION-prep-post-chains-contabilidad-etapa2.md"
+            ],
+            "started_at": "2026-07-11T16:34:06Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260711",
+            "updated_at": "2026-07-11T16:34:06Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
