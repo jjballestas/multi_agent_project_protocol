@@ -7,6 +7,46 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
 
+## Ultima actualizacion 2026-07-12 - TASK-9303 Aegis chain reanchor NO-GO
+- TASK-9303 review formal registrado por Analista en commit `b9c6d23`
+  (`review(TASK-9303): Analista blocks chain reanchor`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-TASK-9303-chain-reanchor-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-chain-reanchor-NOGO.md`.
+- Ancla canonica hub: instruccion
+  `Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-chain-reanchor.md`;
+  Aegis clean clone en commit `95717820b9390f4a73cb8072ac4fb570fcd7a68d`.
+- Resultado: CAMBIO-REQUERIDO / NO CERRABLE. Aegis chain_cases 14/14, validate/encoding/domain EXIT 0 y drift
+  false up_to_seq 3814. Sello viejo 672..3807 recomputado match
+  `32a769f371794a01598d4932e95f18af6f65c8db24487241b658f3d51cf570d7`. Bloqueo F-9303-01: `validate_chain`
+  acepta tamper de `chain.regenesis_boundary.payload` y del sello `config_epoch_history` (`boundary_id`,
+  `old_config_hash`, `sealed_segment.sha256`, `event_count`, `seq_range`) con `valid true`.
+- Hub gates: validate con secretos EXIT 0; validate secretless clean clone EXIT 0; scan_encoding EXIT 0;
+  scan_domain_neutrality EXIT 0; drift false up_to_seq 4576; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Fix-loop esperado: Codex debe endurecer `validate_chain` para verificar equivalencia completa frontera<->config
+  y recomputar/validar el sello historico; negativos permanentes para frontera y config; re-juicio Analista antes
+  de cierre, maximo 2 iteraciones antes de escalar.
+
+## Ultima actualizacion 2026-07-12 - Enfoque QA/checker workspace Notion OK/CERRABLE
+- Enfoque QA/checker para workspace Notion registrado por Analista en commit `cc13651`
+  (`review(notion): Analista QA enfoque`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-enfoque-notion-qa-checker-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-enfoque-notion-QA.md`.
+- Ancla protocolo revisada `6ba22cdc3c24e99a0f7dca0aeb834e8cc8ea5c07`; instruccion canonica
+  `MSG-20260712-Arquitecto-to-Analista-REQUEST-enfoque-notion.md`. Resultado: OK/CERRABLE como consenso de
+  diseno, no como implementacion. Notion solo read-model del ledger; F-NOVA-01 exige cadena relacional
+  SDD->objeto BD->caso de prueba->evidencia; todo campo gobernado requiere evento fuente con seq/actor/commit/hash.
+- Gates: validate vivo EXIT 0; validate sin secretos en clon limpio EXIT 0; scan_domain_neutrality EXIT 0;
+  scan_encoding EXIT 0; drift 0 `up_to_seq=4572`; `protocol.config.json` sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Residual declarado: Nova-Budget clean clone raiz `npm test` EXIT `-4058` por ausencia de `package.json`; no bloquea
+  este REQUEST de diseno, pero no puede usarse como gate de cierre de producto.
+- Incidencia propia: el commit `cc13651` llevo `Task-Id` y `Ops-Reason` separados por blank line; el gate lo marco
+  rojo post-commit. No reescribir historia si ya aparece en `origin/main`; remediation en commit `4a0e057`: avanzar
+  `COMMIT_TRAILERS.start_commit` a `cc13651` y reforzar la leccion de trailers contiguos. En el siguiente commit
+  gobernado usar `git commit -m subject -m "Task-Id: none` + linea inmediata `Ops-Reason: ..."` o un archivo de
+  mensaje, sin `-m` separado para cada trailer.
+
 ## Ultima actualizacion 2026-07-07 - Hallazgos #11/#12/#13 quality-data baseline CONFIRMADOS
 - Hallazgos #11/#12/#13 QA baseline confirmados y registrados por Analista en commit `c523746`
   (`review(hallazgos): Analista confirms quality baseline 11-13`). Artefacto:
