@@ -11,7 +11,36 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-12 (NOCHE) (LEER PRIMERO; supersede 12-jul-manana)
+## >> ESTADO ACTUAL 2026-07-13 (LEER PRIMERO; supersede todo lo de abajo)
+**Foco: la recta de medicion de Contabilidad queda GATED SOLO por el build-open (post-30-jul). Todo lo adelantable ESTA adelantado.**
+
+- **A2-NOMINAL CERRADO Y ATESTADO.** Gate 2-clones nominal (TASK-9390 en Aegis) corrido en vivo: jheredia firmo
+  build/done [ed25519 jheredia:v1] en la maquina de Julian, Analista ratifico [analista:v1] en Aegis-cloneB
+  (maquina/llave SEPARADA), prueba negativa fallo como debia. **Cross-atestacion Entrada 3 anclada** por el
+  Arquitecto (hub e22e9f3; aegis_commit d153357a, head_seq 3881, sha256 events.jsonl e8f1b08f, config-epoch
+  77242D63 epoca 2). **jheredia:v1 OPERATIVO.** Hub 2E35F26E/1.14.0 INTACTO.
+- **PRE-REGISTRO N=6 = SEAL-READY** (`personal/asesor/DRAFT-PREREGISTRO-...md`, commit 23b8fe5). Prereqs s.9 cumplidos
+  (B done, gate nominal, cross-atest, jball epoca 2). **s.11 = ceremonia de sellado** (congelar+sha256+anclar via
+  submit_intent+verificacion independiente+regla dura). UNICO prereq restante = **cableado de F3.3 al build-open**;
+  ahi se ejecuta el sello y arrancan las 6 unidades medidas (R2-c/R3-b/R4-b/R5-c/R0-fuentes/R4-c).
+- **WORKSPACE NOTION = COMPLETO + PROJECTOR-READY.** NOVA (Modulos/Opciones/Tareas[+8 Budget]/Specs SDD/Objetos BD/
+  Objetos Legacy/Casos de Prueba/Artefactos/Decisiones dominio/Menus) + METODOLOGIA (Agentes/Unidades Medidas/
+  Decisiones metod/TFM/Norma). Readiness HECHA: cadena F-NOVA-01 RELACIONAL bidireccional (Modulos=hub, rollups
+  listos) + IDs canonicos (module_code/option_id/object_id/test_id/evidence_id/legacy_object_id) + Objetos-BD
+  enriquecido + is_governed/synced_seq + separacion governed/notion_native. IDs en `[[notion-workspace-nova]]`.
+- **PROYECTOR = RUTEADO -> TASK-9310** (Aegis, proposed/backlog, owner Codex maker / Analista checker FORMAL,
+  integridad ALTA, contra SPEC-NOTION-PROJECTOR). El Arquitecto lo AGENDO al build-open (no compite con Sprint 1;
+  su contenido son las 6 unidades medidas). El Asesor mantiene el workspace projector-ready. FALTA (lo crea el
+  BUILD): metadata de gobernanza completa (source_event_seq/hash/commit/actor/projector_version).
+- **Manual de Julian v2** (`D:/Agentes/Ingenas/MANUAL-...html`): 5 trampas de PowerShell + receta verificada
+  (`personal/asesor/COMANDOS-julian-gate-nominal-7b.md`). **Skill `asesor-guarda-estado` creada** (espejo de la del Arquitecto).
+- **NADA en open/ espera MI respuesta** (los del Arquitecto son FYI: cross-atest anclada + TASK-9310 registrado).
+  **Fix del cron de Codex: AUTORIZADO** (ruteado dbe7abe). El Arquitecto tambien hizo su checkpoint (e0a2475).
+- **SIGUIENTE ACCION:** cuando el operador abra el build (post-30-jul): (1) coordinar el cableado de F3.3 en Aegis;
+  (2) ejecutar la ceremonia de sellado del pre-registro (s.11); (3) arrancar las 6 unidades medidas; (4) el Arquitecto
+  promueve TASK-9310 a ready+GO (build del proyector). Mientras: mantener el workspace projector-ready + monitor armado.
+
+## >> ESTADO ACTUAL 2026-07-12 (NOCHE) (historico; ver bloque 13-jul arriba)
 **Foco actual: (A) recta de medicion de Contabilidad + (B) construccion del workspace NOTION para control del proyecto.**
 
 > **ACTUALIZACION 2026-07-12 (tarde-noche) -- supersede lo de abajo en lo que toca:**
