@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a51ab37d9c7036bac8dc8aa90afd5cf621c00d38a0275942d8a8550ac10f87d6",
+  "canonical_hash": "4b550f1397239ea9babb5cd059ccebafaf767992aed23e3e915bcf36f51b631a",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -622,6 +622,7 @@
       "CLAIM-20260712-Arquitecto-hyg-e6": 1,
       "CLAIM-20260712-Arquitecto-hyg-e7": 1,
       "CLAIM-20260712-Arquitecto-hyg-e8": 1,
+      "CLAIM-20260712-Codex-TASK-9304-doneflip-hub-announce": 1,
       "CLAIM-20260712-Codex-hub-TASK9303-blocked-msg": 1,
       "CLAIM-20260712-Codex-hub-TASK9303-doneflip-msg": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -642,7 +643,7 @@
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
       "COORD-20260620-VALIDATOR-ANOMALY": 1,
-      "COORD-TASK-9304": 4,
+      "COORD-TASK-9304": 5,
       "DECISION-0039": 2,
       "DECISION-0045": 1,
       "DECISION-0046": 1,
@@ -1690,7 +1691,7 @@
       "protocol-prune": 6,
       "protocol-state": 1
     },
-    "events_applied": 3956,
+    "events_applied": 3958,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2938,6 +2939,8 @@
       "codex:hub:task-1206-response:release": 4401,
       "codex:hub:task9303-blocked-msg-claim-acquire-20260712": 4573,
       "codex:hub:task9303-blocked-msg-claim-release-20260712": 4574,
+      "codex:hub:task9304:doneflip-announce-claim": 4628,
+      "codex:hub:task9304:doneflip-announce-release": 4629,
       "codex:reconcile-c1edd835:claim": 1909,
       "codex:reconcile-c1edd835:done": 1910,
       "codex:reconcile-c1edd835:release": 1911,
@@ -5650,5 +5653,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4627
+  "up_to_seq": 4629
 }
