@@ -11,7 +11,47 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-11 (LEER PRIMERO; supersede 07-jul)
+## >> ESTADO ACTUAL 2026-07-12 (LEER PRIMERO; supersede 11-jul)
+**Pipeline vivo: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html`. Onboarding de Julian casi cerrado; el foco pasa a la RECTA DE MEDICION de Contabilidad (pre-registro + jball:v1 + gate nominal tras B).**
+
+- **ONBOARDING DE JULIAN -- casi cerrado, todo lo del operador HECHO:**
+  - BD RESTAURADA en su server de desarrollo (`WIN-UUTF2NRPI8V\INGENAS`, SQL Server 17): DbsFinanciero_SANDBOX
+    con rol `accounting_sandbox_verifier` + 358 objetos Accounting. (El `.bak` ya no es pendiente.)
+  - BUNDLE de firmante entregado en `D:/Agentes/Zeus/NOVA/NOVA-Aegis/secrets/`: `codex-ed25519-private.pem` (A1)
+    + los 4 `eventauth-*.key`. **maker!=checker verificado:** NO estan las ed25519 de analista/arquitecto.
+  - Override A1 de Julian VALIDADO 5/5 por el Arquitecto (solo-Codex, sin event_auth por HMAC pineado, anchor por
+    operacion). Runtime local de Julian VERDE. Falta el smoke firmado + el gate 2-clones coordinado.
+- **BUG DE OVERRIDE cazado y corregido (mio):** mi plantilla incluia `anchor_enabled:false`, clave NO soportada
+  (validate la rechaza; eventlog.py:263 solo permite `actor_auth_enforce`/`actor_auth_config`/`event_auth`).
+  Corregido en el override de Julian y en cloneB. **Doc defect ruteado:** runbook s.8.4.2 ("anchor deshabilitado
+  por override") es imposible -> es canonico-solo por OPERACION. (EVIDENCIA: el validate cazo mi error de autoria.)
+- **CLON CHECKER (Aegis-cloneB) RE-PROVISIONADO:** apuntaba por error a `Zeus-Aegis` (fork product-front) y estaba
+  stale -> BORRADO + re-clonado fresco desde NOVA-Aegis (HEAD 23dd83a3) + override Analista-only + 4 HMAC.
+  `validate` = OK. Listo como el lado checker del gate 2-clones. (El canonico `Aegis` esta en f4d84bdd; hazle pull.)
+- **B (TASK-9303) PROMOVIDA a ready + GO ruteado a Codex** (Aegis cb289f7b; hub GO aac879e). Codex la construye
+  desde el clon Aegis (mecanismo s.6). **PENDIENTE OPERADOR: reactivar el cron de Codex.** Al aterrizar B: A2
+  nominal (jheredia:v1) + corregir runbook s.8.4 + ROTAR la llave de Codex (exposicion transitoria en server Julian).
+- **INSTRUMENTACION DE MEDICION de Contabilidad DISENADA** (Arquitecto, PREP hub b68b706): F3.3 + Q1-Q5 capturados
+  en el ledger de AEGIS, doble-anclados al hub (cross-atest events.jsonl + sha256 del artefacto de metricas), sin
+  tocar el config pineado. Frontera confirmada.
+- **PRE-REGISTRO opcion A CONFIRMADO + REDACTADO** (Asesor, `personal/asesor/DRAFT-PREREGISTRO-contabilidad-
+  employee-run.md`, 3af0dd5): H-TRANSFER falsable, poder efectivo DECLARADO small-n (confirmatorio de direccion/
+  patron, no de magnitud), poblacion medida por criterio (unidades mutadoras de Julian; RO/frontera fuera),
+  Q1-Q5 identicos a Nova-Budget, convencion de atribucion, criterio de exito/refutacion. **FALTA (operador):**
+  completar s.3 (N + metodo de seleccion) + s.4 (Q2-Q5 textual del sello) + alta jball:v1 + SELLARLO antes de la
+  1a unidad medida.
+- **jball:v1 (identidad del operador) RUTEADA** (6b86bc2): darla de alta en el MISMO config-epoch que B (junto a
+  jheredia:v1), capability implementer -> atribucion limpia (John dirige agentes + revisa + corrige a mano la
+  MAYORIA; su trabajo se firma como John, no Codex). El operador genera su par ed25519 + manda pubkey. maker!=checker
+  intacto (unidades de John gateadas por Analista).
+- **DONDE TRABAJA EL OPERADOR (aclarado):** AHORA en el HUB (coordinacion/estudio). `Aegis-cloneB` = solo para
+  el lado checker del gate 2-clones (momento puntual). Un clon Aegis maker = solo cuando abra el build (post-30-jul).
+- **PENDIENTE DEL DBA (no bloquea, read-only):** `fn_Account_Balance_For_Period` fuera de los 33 grants -> diagnostico
+  read-only (interno-solo vs endpoint); prompt entregado al operador. NO tocar el script sellado (rompe 608b4370).
+- **Mailbox ruteados hoy (12-jul):** correccion override (cdfeb26), alta jball:v1 (6b86bc2). Del 11-jul: GO A2+kit,
+  FYI base, decision A1+B, FYI harness, validar override, reactivar Codex B, instrumentacion. **Monitor: re-armar.**
+
+## >> ESTADO ACTUAL 2026-07-11 (historico; ver bloque 12-jul arriba)
 **Pipeline vivo: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html` (actualizado 11-jul).**
 
 - **CONTABILIDAD: AMBOS inputs del operador RESUELTOS -> el build queda gated SOLO por Sprint 1 (post-30-jul).**

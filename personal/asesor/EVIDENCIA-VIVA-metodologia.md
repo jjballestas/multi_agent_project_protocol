@@ -267,3 +267,13 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   asesore la decision A1-ahora+encolar-B con guardrail duro (B antes de la 1a unidad gobernada de Julian) para no
   contaminar la atribucion employee-run; redacte el manual de onboarding + el override de firma-minima de Julian.
   Traza: mailbox 9d10d86 / ea9f896 / 62c5af8 / bc4927b; TASK-9303 (B) en el ledger de Aegis.
+- **2026-07-12 (Asesor):** refuerza A16 -- al provisionar un clon checker fresco, el `validate` cazo un error de
+  MI autoria (el override que arme llevaba `anchor_enabled`, clave no soportada; eventlog.py:263). El gate formal
+  atrapo lo que mi diseno informal dejo pasar = la tesis en vivo aplicada al PROPIO asesor, no solo al maker.
+  Corregido en el override de Julian y de cloneB; doc defect ruteado (runbook s.8.4.2 "anchor por override" es
+  imposible). Ademas, study-integrity: asesore la opcion A (pre-registro employee-run) sobre la B (exploratoria)
+  porque la delimitacion YA sellada de Nova-Budget promete "replica employee-run PRE-REGISTRADA" -> B la debilitaria;
+  y exigi declarar el poder efectivo small-n POR ADELANTADO (confirmatorio de direccion, no de magnitud), misma
+  disciplina que Q4-subpotenciado. Redactado el DRAFT-PREREGISTRO (3af0dd5). Cerre el hueco de atribucion: jball:v1
+  para el operador (ruteado 6b86bc2) para no confundir humano-vs-IA en el ledger. Traza: cdfeb26, 3af0dd5, 6b86bc2;
+  PREP instrumentacion b68b706 (Arquitecto).

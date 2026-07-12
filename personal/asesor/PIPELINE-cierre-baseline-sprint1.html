@@ -55,7 +55,7 @@
   <h1>Pipeline del Asesor &mdash; Cierre ventana baseline &rarr; Sprint 1</h1>
   <div class="sub">Tracker de coordinacion (Vision Nova). Complementa el panel HTML del operador
     (lo mantiene el Arquitecto). Fuente de fechas: SELLO-ETAPA-1 (s.3/s.4/s.10/s.11.1).
-    &middot; Ultima actualizacion: <b>2026-07-11 ~19:00</b> (local, UTC+2).</div>
+    &middot; Ultima actualizacion: <b>2026-07-12 ~08:00</b> (local, UTC+2).</div>
   <div class="legend">
     <span class="pill p-done">DONE</span> hecho/verificado
     <span class="pill p-wip">WIP</span> en curso
@@ -155,12 +155,15 @@
     <tr><td>3. Adjudicar BR-C4 (timing) &mdash; efecto: pool Q4 n=10 -&gt; n=7 si no cierra</td><td><span class="pill p-done">CERRADO (b): Q4 n=10</span> DBA aplico+verifico (36/36 separacion); Arq verifico independiente + registro enmienda s.27 (81ee104); Assert_Permission horneado en P3.x</td></tr>
     <tr><td>4. Remoto GitHub privado de Aegis</td><td><span class="pill p-done">DONE</span> repo + deploy key provistos; leak-check Asesor limpio; ruteado al Arquitecto reconciliar ramas</td></tr>
   </table>
-  <div class="note" style="margin-top:12px">Pendientes NUEVOS de Contabilidad (11-jul; ninguno frena el resto):</div>
+  <div class="note" style="margin-top:12px">Pendientes del operador -- Contabilidad (12-jul):</div>
   <table>
     <tr><th>Item</th><th class="st">Estado</th></tr>
-    <tr><td>Distribuir bundle de firmante de Julian (SOLO codex-ed25519-private.pem + 4 HMAC + override llave-minima; DECISION-0057)</td><td><span class="pill p-attn">TU ACCION</span> borrador del override hecho; validalo con el Arquitecto</td></tr>
-    <tr><td>DBA genera el .bak de DbsFinanciero_SANDBOX (para el servidor de Julian)</td><td><span class="pill p-todo">TODO</span> NO existe aun; comando en Anexo A.1 del manual</td></tr>
-    <tr><td>Reactivar Codex para promover TASK-9303 (B: re-anclaje de cadena, A2 nominal limpia)</td><td><span class="pill p-todo">TODO</span> guardrail: B antes de la 1a unidad gobernada de Julian</td></tr>
+    <tr><td>Bundle de firmante de Julian + BD restaurada en su server</td><td><span class="pill p-done">DONE</span> bundle entregado (maker!=checker verif) + BD restaurada (rol verifier + 358 objetos); override VALIDADO 5/5</td></tr>
+    <tr><td>Reactivar el cron de Codex (para que B / TASK-9303 ejecute)</td><td><span class="pill p-attn">TU ACCION</span> B ya GO'd; falta que corra el cron</td></tr>
+    <tr><td>Completar + SELLAR el pre-registro employee-run (s.3 N+seleccion, s.4 Q2-Q5, sellar antes de la 1a unidad medida)</td><td><span class="pill p-attn">TU DECISION</span> opcion A confirmada; DRAFT redactado</td></tr>
+    <tr><td>Generar par ed25519 de jball:v1 + mandar pubkey (alta junto con B)</td><td><span class="pill p-todo">TODO</span> ruteado al Arquitecto</td></tr>
+    <tr><td>Rotar la llave de Codex TRAS B (exposicion transitoria en server de Julian)</td><td><span class="pill p-todo">TODO</span> post-B</td></tr>
+    <tr><td>DBA: diagnostico read-only de fn_Account_Balance_For_Period (NO tocar lo sellado)</td><td><span class="pill p-todo">TODO</span> prompt entregado; no bloquea</td></tr>
   </table>
 </section>
 
@@ -178,10 +181,12 @@
     <tr><td class="k">7.4</td><td>Peones/tokens = contraste PRE-REGISTRADO de Etapa 2 sobre Contabilidad; triggers por <span class="hi">COMPLETITUD certificada</span> (no fecha); memoria-hibrida como tratamiento</td><td><span class="pill p-seal">SELLADO</span> diseno Etapa 2, NO Sprint 1</td></tr>
     <tr><td class="k">7.5</td><td>Declaracion de trabajo paralelo en el reporte Etapa 1 (confound <span class="hi">arm-ORTOGONAL</span>, de fondo, no oculto)</td><td><span class="pill p-todo">TODO</span> blindaje de honestidad</td></tr>
     <tr><td class="k">7.7</td><td>Mecanismo Codex-&gt;Aegis: senal por mailbox del HUB + atestacion nace en el ledger de AEGIS (sin recablear cron; probado con TASK-1102). Restricciones (a) atestacion en Aegis / (b) Sprint 1 prioridad dura -- ambas horneadas</td><td><span class="pill p-done">DONE</span> ADJUDICADO+implementado (s.6 runbook Aegis)</td></tr>
-    <tr><td class="k">7.8</td><td>Onboarding empleado remoto Julian Heredia (id jheredia, maker Contabilidad; segundo humano = variable de estudio s.4b)</td><td><span class="pill p-wip">WIP</span> input (a) RESUELTO: invitacion aceptada + pubkey recibida. Re-genesis A2 BLOQUEADA (chain.genesis no re-anclable, seq-2175) -&gt; decision <b>A1-ahora</b> (firma interina bajo Codex) + <b>encolar-B</b> (TASK-9303 en Aegis; guardrail: B antes de la 1a unidad gobernada). Runtime local de Julian VERDE (validate OK). Manual de onboarding creado. <span class="pill p-attn">TU ACCION</span> distribuir bundle de firmante (Codex priv + 4 HMAC + override; borrador hecho)</td></tr>
+    <tr><td class="k">7.8</td><td>Onboarding empleado remoto Julian Heredia (id jheredia, maker Contabilidad; segundo humano = variable de estudio s.4b)</td><td><span class="pill p-wip">WIP</span> input (a) RESUELTO: invitacion aceptada + pubkey recibida. Re-genesis A2 BLOQUEADA (chain.genesis no re-anclable, seq-2175) -&gt; decision <b>A1-ahora</b> (firma interina bajo Codex) + <b>encolar-B</b> (TASK-9303 en Aegis; guardrail: B antes de la 1a unidad gobernada). Runtime local de Julian VERDE. <b>BD restaurada en su server</b> (rol verifier + 358 objetos). <b>Bundle entregado</b> (maker!=checker verificado). <b>Override A1 VALIDADO 5/5</b> por el Arquitecto. Manual + seccion de comandos (submit_intent) creados. B GO'd a Codex. <span class="pill p-attn">TU ACCION</span> reactivar cron de Codex; luego smoke firmado de Julian + gate 2-clones coordinado</td></tr>
     <tr><td class="k">7.9</td><td>CORRECCION repo: el origin de Aegis apuntaba al fork de Hermes (Zeus-Aegis) por error. Repo correcto = NOVA-Aegis</td><td><span class="pill p-done">DONE</span> re-apuntado a NOVA-Aegis (HEAD 75017e1f, nada perdido, validate verde), runbook+guia con URL correcta, aegis/main del fork borrado por operador. Sin re-genesis, hub intacto</td></tr>
     <tr><td class="k">7.10</td><td>2 hallazgos de gate-integrity (fix-forward, no bloquean 1204): evasion del scanner de neutralidad por encoding (test_ca11) + CRLF/LF no reproducible en clon limpio</td><td><span class="pill p-attn">ATENCION</span> ruteados afinamientos: (1) guard SISTEMICO anti-evasion del scanner; (2) CRLF/LF = PREREQUISITO del gate 2-clones (no backlog) -- clon Windows de Julian fallaria por hash. EVIDENCIA A13/A14</td></tr>
-    <tr><td class="k">7.11</td><td>Gate 2-clones: harness NO portable (runbook s.5.3 sobre-declara `distributed_e2e_task_cycle.py` como gate remoto; es simulador local con paths del hub hardcoded)</td><td><span class="pill p-attn">ATENCION</span> Julian lo topo en su maquina real (WinError 267). Ruteado al Arquitecto: corregir s.5.3 + parametrizar harness o gate por ciclo core coordinado. EVIDENCIA A16</td></tr>
+    <tr><td class="k">7.11</td><td>Gate 2-clones: harness NO portable (runbook s.5.3 = simulador local, no gate remoto). Bug de override anchor_enabled (no soportado) cazado por validate</td><td><span class="pill p-done">RESUELTO</span> Julian lo topo (WinError 267); Arquitecto corrigio s.5.3 (Aegis 23dd83a3) + definio gate real = ciclo core coordinado. Override corregido (Julian+cloneB); cloneB re-clonado a NOVA-Aegis + valida OK (checker listo). EVIDENCIA A16</td></tr>
+    <tr><td class="k">7.12</td><td>Medicion de Contabilidad employee-run (transferibilidad): instrumentacion + pre-registro</td><td><span class="pill p-wip">WIP</span> instrumentacion DISENADA (Arquitecto, F3.3+Q1-Q5 en Aegis, doble ancla al hub). Pre-registro <b>opcion A</b> confirmada + REDACTADO (DRAFT-PREREGISTRO, small-n declarado honesto, H-TRANSFER falsable). <span class="pill p-attn">TU DECISION</span> completar s.3/s.4 + alta jball:v1 + SELLAR antes de la 1a unidad medida</td></tr>
+    <tr><td class="k">7.13</td><td>Identidad del operador jball:v1 (John dirige agentes + revisa + corrige a mano la mayoria)</td><td><span class="pill p-wip">WIP</span> ruteada -- alta en el mismo config-epoch que B (junto a jheredia:v1), capability implementer. Atribucion limpia humano-vs-IA. Operador genera par ed25519 + manda pubkey</td></tr>
   </table>
   <div class="foot">Refinamientos del Asesor (arm-ortogonalidad del confound, formalizar complemento 0088, cablear
     cross-atestacion dual, sellar trigger-por-completitud) &mdash; entregados al Arquitecto por el operador
