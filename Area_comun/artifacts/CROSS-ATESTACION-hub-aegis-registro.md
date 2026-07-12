@@ -84,3 +84,29 @@
 - sha256_events_jsonl: e9d8c1f84c48e4b270a1c25d38c73d13e6881f9dabb49c10c44af39bdfc62ac2
 - sha256_head_line: 8818097b8d183460727d0e0f3b7b8cd57a54a9b9b3eee49ea2b677821c2c2897
 - event_count: 2824 (seq 672..3495)
+
+### Entrada 3 - Gate 2-clones NOMINAL de jheredia VERDE (TASK-9390) - cierre del A2-nominal (jheredia:v1 + jball:v1 operativos)
+- fecha_utc: 2026-07-12T21:54Z (hora local 23:54, UTC+2)
+- disparador: gate 2-clones NOMINAL del A2-nominal (TASK-9390), tras registrar los DOS firmantes NUEVOS en el
+  config-epoch de Aegis (jheredia:v1 en epoca 1 = TASK-9303/frontera; jball:v1 en epoca 2 = TASK-9304). El ciclo se
+  repartio entre DOS maquinas: maker jheredia (maquina de Julian, firma su ed25519 jheredia:v1) build->in_review;
+  checker Analista (Aegis-cloneB, maquina/llave SEPARADA, firma analista:v1) in_review->review_approved; jheredia
+  cierra ->done. Es la acceptance 7b jheredia-live diferida (la privada de jheredia NUNCA salio de su maquina).
+- prueba negativa: intento de firma como Analista en la maquina de Julian FALLO ("actor_auth private signing key
+  missing for actor: Analista") sin escribir estado -- separacion maker/checker por POSESION de llave, en vivo.
+- verificacion de firmas: eventos del gate seq 3872..3881 con actor_auth ed25519 correcto por maquina (jheredia:v1
+  el maker en Julian, analista:v1 el checker en cloneB) + event_auth HMAC de instancia (jheredia designo
+  runtime-hmac:v1 en su override -- no hay eventauth-jheredia.key). validate exit 0 en AMBOS clones; drift 0.
+- integridad de la cadena endurecida 2x en el hilo: F-9303-01 (sello de frontera recomputado) + F-9304-01 (sello
+  pre_t0 recomputado), ambos gateados por el Analista.
+- aegis_commit: d153357aa5057fd3bb4bc571df3dfb907e520157 (rama main de git@github.com:jjballestas/NOVA-Aegis.git;
+  NOTA: el repo Aegis migro de Zeus-Aegis a NOVA-Aegis entre la Entrada 2 y esta)
+- head_seq: 3881
+- head_prev_hash: f8d34f06fbefa1cfef14e298c89da53bb4adbd4a00e0784fc0f720ec9e3b2ea3
+- sha256_events_jsonl: e8f1b08f93cc2046260ff46a667d4544391f0cb0a195daefb9ed7bb8c022ecad
+- sha256_head_line: f1a60f9661003f747ade8d6aed40e75ae05c32695dc8ddceaf6e1f73382ab4de
+- event_count: 3210 (seq 672..3881; config-epoch actual sha8 77242D63, epoca 2 con jheredia:v1 + jball:v1)
+- nota: con este gate jheredia:v1 queda OPERATIVO (firma real verificada en vivo). El hub (2E35F26E / 1.14.0) NO se
+  toco en ningun momento. HALLAZGO incorporado (runbook del gate): stagear TAMBIEN el Area_comun/tasks/<task>.md en
+  cada flip (el gate dejo index=done / file=ready porque el runbook solo staged Area_comun/state/; reconciliado en
+  d153357a). Habilita las 6 unidades medidas + sello del pre-registro N=6 (coordinacion operador+Asesor).
