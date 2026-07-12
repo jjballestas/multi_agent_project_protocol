@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "21d7b05cb7442b91ed280d099a282da53c3339a0f9469afb75bf4c5e00cc75bf",
+  "canonical_hash": "0832616a368e886b88424bdafd2ba20e4a8751760d86baea28c3fe347a1e508c",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -613,6 +613,7 @@
       "CLAIM-20260712-Arquitecto-hyg-b2": 1,
       "CLAIM-20260712-Arquitecto-hyg-b3": 1,
       "CLAIM-20260712-Arquitecto-hyg-b4": 1,
+      "CLAIM-20260712-Codex-hub-TASK9303-blocked-msg": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1416,6 +1417,7 @@
       "OPS-HIGIENE-MAILBOX-20260704c": 2,
       "OPS-HIGIENE-MAILBOX-20260704d": 2,
       "OPS-HIGIENE-MAILBOX-20260704e": 2,
+      "OPS-HUB-TASK9303-BLOCKED-ANNOUNCE": 1,
       "OPS-MAILBOX-HYGIENE-20260630": 2,
       "OPS-MAILBOX-HYGIENE-20260702": 28,
       "OPS-MAILBOX-HYGIENE-20260703": 24,
@@ -1650,7 +1652,7 @@
       "protocol-prune": 5,
       "protocol-state": 1
     },
-    "events_applied": 3901,
+    "events_applied": 3903,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2895,6 +2897,8 @@
       "codex:hub:task-1206-memory-final:release": 4403,
       "codex:hub:task-1206-response:claim": 4400,
       "codex:hub:task-1206-response:release": 4401,
+      "codex:hub:task9303-blocked-msg-claim-acquire-20260712": 4573,
+      "codex:hub:task9303-blocked-msg-claim-release-20260712": 4574,
       "codex:reconcile-c1edd835:claim": 1909,
       "codex:reconcile-c1edd835:done": 1910,
       "codex:reconcile-c1edd835:release": 1911,
@@ -5555,5 +5559,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4572
+  "up_to_seq": 4574
 }

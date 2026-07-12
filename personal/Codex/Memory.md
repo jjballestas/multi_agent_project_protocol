@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 blocker announce.
+
+## Latest Session Note
+
+- Hub GO `MSG-20260712-Arquitecto-to-Codex-GO-TASK-9303-chain-reanchor.md` was processed. In Aegis, TASK-9303 was claimed, implemented, re-anchored for `jheredia:v1`, then moved `in_progress -> blocked` because `submit_intent --actor-id jheredia` cannot sign without the private key for `jheredia:v1`; `jball:v1` public key is still pending out-of-band. Aegis commits: `274006d7 feat(TASK-9303): support config epoch reanchor`, `e3df31bd coord(TASK-9303): apply jheredia config epoch boundary`, `e4a24c6e coord(TASK-9303): block on jheredia signing key`, and memory commits through `560fd4e4`. Aegis handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-9303-codex-to-arquitecto-blocked-1.md`; gates passed before blocker commit: chain cases 12/12, py_compile, validator, encoding, neutrality, drift false at seq 3810. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-blocked.md`; hub commit: `20070a0 coord: announce Aegis TASK-9303 blocker`; hub gates passed with two unrelated mailbox archive warnings and drift false at seq 4574.
+
+## Previous Session Notes
+
 Last updated: 2026-07-07 Europe/Madrid, after Aegis TASK-1209 done flip.
 
 ## Latest Session Note
