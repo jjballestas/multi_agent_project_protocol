@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "92d235d11a6283a4e2c14932cc64c83a9256cd19d2e820ed853238666e4fa3b6",
+  "canonical_hash": "23bb44ba1129fed5e675e1f71236d76afd017c8f91c2bb13d29d641810b9bb96",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -614,6 +614,7 @@
       "CLAIM-20260712-Arquitecto-hyg-b3": 1,
       "CLAIM-20260712-Arquitecto-hyg-b4": 1,
       "CLAIM-20260712-Codex-hub-TASK9303-blocked-msg": 1,
+      "CLAIM-20260712-Codex-hub-TASK9303-doneflip-msg": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1418,6 +1419,7 @@
       "OPS-HIGIENE-MAILBOX-20260704d": 2,
       "OPS-HIGIENE-MAILBOX-20260704e": 2,
       "OPS-HUB-TASK9303-BLOCKED-ANNOUNCE": 1,
+      "OPS-HUB-TASK9303-DONEFLIP-ANNOUNCE": 1,
       "OPS-HUB-TASK9303-F9303-01-IN-REVIEW-ANNOUNCE": 2,
       "OPS-HUB-TASK9303-RESCOPE-IN-REVIEW-ANNOUNCE": 2,
       "OPS-MAILBOX-HYGIENE-20260630": 2,
@@ -1654,7 +1656,7 @@
       "protocol-prune": 5,
       "protocol-state": 1
     },
-    "events_applied": 3907,
+    "events_applied": 3909,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2708,6 +2710,7 @@
       "arquitecto:upsert-0156:claim-acquire": 1201,
       "arquitecto:upsert-0156:claim-release": 1203,
       "arquitecto:upsert-0156:ready": 1202,
+      "claim-20260712-codex-hub-task9303-doneflip-msg": 4579,
       "claim-release-Codex-TASK-1203-hub-fixloop-response-20260707": 4377,
       "codex-carril-a-monitor-acquire-2026-06-19T15:30:53Z": 685,
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
@@ -5545,6 +5548,7 @@
       "prune-state:2026-07-07T14:09:29Z:claim-acquire": 4536,
       "prune-state:2026-07-07T14:09:29Z:claim-release": 4538,
       "prune-state:2026-07-07T14:09:29Z:protocol-prune": 4537,
+      "release-20260712-codex-hub-task9303-doneflip-msg": 4580,
       "release-done-flip-manual-1": 4230,
       "release-done-flip-manual-2": 4231,
       "release-impl-normalized-92fddd97a46f4193939955b1f22e2076": 3953,
@@ -5565,5 +5569,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4578
+  "up_to_seq": 4580
 }
