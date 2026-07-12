@@ -1,6 +1,6 @@
 {
  "enabled": true,
- "start_commit": "36178ba",
+ "start_commit": "cc13651",
  "enforcement": "post_start_governed_commits_require_task_id_trailer",
  "activated_by": "Arquitecto",
  "activated_at": "2026-07-03",
