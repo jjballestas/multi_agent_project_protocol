@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 F-9303-01 remediation announce.
+
+## Latest Session Note
+
+- Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-remediar-F-9303-01.md` was processed. In Aegis, TASK-9303 F-9303-01 was remediated and redelivered to `in_review`; claim `CLAIM-20260712-Codex-TASK-9303-F-9303-01` released at seq 3818. Aegis commits: `9fb0f12d fix(TASK-9303): protect regenesis boundary seal`, `60c72186 chore(TASK-9303): record boundary seal remediation memory`, `6bd06608 coord(TASK-9303): redeliver boundary seal remediation`, and `65b83c52 chore(TASK-9303): record boundary seal redelivery memory`. Handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-9303-codex-to-arquitecto-3.md`. Aegis gates passed: chain cases 26/26 including payload/config tamper negatives for boundary_id, old_config_hash, sealed_segment sha/count/range, and boundary_seq; py_compile; encoding; neutrality; validator; drift false at seq 3818. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-F9303-01-in-review.md`; hub commit `f0411e7 coord: announce Aegis TASK-9303 F9303 remediation`; hub gates passed with five unrelated mailbox archive warnings and drift false at seq 4578.
+
+## Previous Session Notes
+
 Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 crit7 rescope delivery announce.
 
 ## Latest Session Note
