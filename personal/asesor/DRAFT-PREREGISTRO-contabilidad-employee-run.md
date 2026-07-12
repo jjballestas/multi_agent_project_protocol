@@ -20,7 +20,8 @@ EMPLEADO REAL DISTINTO (Julian, no auto-dogfood), el MISMO PATRON cualitativo de
   tests-verdes del maker no habrian cazado;
 - (H2) la atribucion nominal por-humano funciona (el trabajo del empleado se firma con SU llave `jheredia:v1`,
   distinguible de los agentes y del operador);
-- (H3) el costo/esfuerzo (Q1-Q5) cae en la MISMA DIRECCION esperada que en Nova-Budget.
+- (H3) el perfil de costo/esfuerzo (M-Q1, descriptivo) cae en el MISMO orden de magnitud que el brazo GOBERNADO
+  de Nova-Budget (no un contraste marginal; ver s.4).
 **H0 (nula):** el patron NO se reproduce (el gate no caza nada nuevo / la atribucion se confunde / las metricas
 van en direccion contraria a lo esperado).
 
@@ -64,18 +65,38 @@ efecto. Razon declarada por adelantado (misma disciplina que Q4-subpotenciado de
   independencia (deliberado). Los 2 R4 (importar + aprobar) dan dos operaciones de un mismo slice (variacion util).
 - **Poder:** N=6 = small-n confirmatorio de direccion/patron (s.2), no de magnitud.
 
-## 4. Metricas Q1-Q5 y direccion esperada (definicion IDENTICA a Nova-Budget)
-Para que la comparacion de transferibilidad sea valida, Q1-Q5 usan la MISMA definicion del sello Nova-Budget
-(SPEC-NOVA-F3.3), calculadas sobre los eventos F3.3 del ledger de AEGIS:
-- **Q1 (costo atribuido):** tokens/tiempo por unidad, separando `tokens_adversarial_informal` de
-  `tokens_checker_formal`. Direccion esperada: mismo orden de magnitud relativo que Nova-Budget (degradacion de
-  cubetas a total-marginal aceptada, igual que en el piloto GOAL-P1).
-- **Q2..Q5:** [copiar textual las definiciones y direccion esperada del sello Nova-Budget al sellar -- NO
-  redefinir aqui; la validez de la comparacion depende de que sean identicas].
-- **defect.reported:** conteo y traza de defectos reales cazados por el gate por unidad. Direccion esperada:
-  > 0 en promedio (H1) -- el gate caza lo que el verde del maker no.
-- **manual.intervention:** intervenciones humanas (correcciones a mano) por unidad, atribuidas al humano que las
-  hizo. Es senal de primera clase, no ruido.
+## 4. Metricas de la replica (mapeo con Nova-Budget: VERBATIM donde aplica, N/A honesto donde no)
+> AVISO de study-integrity: la replica employee-run NO reproduce el diseno completo del sello Nova-Budget. El sello
+> define Q1-Q4 (Q3 descriptivo, Q4 causal); Q3 y Q4 se apoyan en contrastes INTERNOS que Contabilidad NO tiene
+> (Q4 = ligero-vs-completo; Q3 = pares PAR-D). Se mide el PATRON de transferibilidad, tomando las definiciones de
+> Nova-Budget SOLO donde son comparables. Todo se calcula sobre los eventos F3.3 del ledger de AEGIS.
+
+**APLICAN (definicion identica al sello Nova-Budget s.7 / SPEC-NOVA-F3.3):**
+- **M-Q2 (calidad/defectos) -- METRICA CENTRAL, replica el hallazgo Nova-Budget.** Verbatim del sello s.7:
+  "defectos post-entrega clase (b) con PARIDAD DE DETECTOR (unica serie confirmatoria limpia) + FUGA DE
+  OBSERVACIONES (emitidas vs registradas-con-dueno). Plan B si defectos_post~0 (efecto techo): hallazgos
+  pre-integracion por severidad, como metrica DISTINTA." Sobre las unidades de Julian: el checker FORMAL (Analista)
+  caza defectos reales que los tests-verdes del maker no. DIRECCION esperada: el gate caza (>0), replicando el
+  hallazgo central de Nova-Budget ("el checker formal atrapa lo que el gate informal dejo pasar").
+- **M-Q1 (costo) -- DESCRIPTIVO, no marginal.** Cubetas identicas al sello s.8: "4 CUBETAS de tokens: dev /
+  adversarial_informal / checker_formal / coordinacion_gobierno; regimen vs arranque separados; degradacion ex-ante
+  a tokens_total_atribuibles si el desglose por rol es incapturable". PERO Contabilidad es TODO gobernado -> NO hay
+  "costo MARGINAL del paquete de gobierno" (eso exige el contraste ligero-vs-completo, ausente aqui). Se reporta el
+  PERFIL de costo absoluto por unidad y se compara DIRECCIONALMENTE con el brazo GOBERNADO de Nova-Budget (mismo
+  orden de magnitud). NO es la Q1-marginal del sello.
+
+**PROPIAS de la transferibilidad (no son Q de Nova-Budget):**
+- **M-ATRIB (atribucion, H2):** cada unidad medida se firma con `jheredia:v1`, distinguible de los agentes y del
+  operador (`jball:v1`). DIRECCION: 0 unidades medidas mal-atribuidas.
+- **M-MANUAL (intervencion manual):** `manual.intervention` por unidad (correcciones humanas), atribuidas al
+  humano que las hizo. Descriptivo; senal de primera clase, no ruido.
+
+**NO APLICAN (declarado por adelantado, NO es un hueco):**
+- **Q3 (par-a-par, descriptivo):** Contabilidad no tiene estructura de pares PAR-D -> N/A.
+- **Q4 (causal, ligero-vs-completo):** es el contraste INTERNO de Nova-Budget; Contabilidad es 100% gobernado
+  employee-run -> N/A. La replica NO afirma nada causal ligero-vs-completo; afirma TRANSFERIBILIDAD (el patron se
+  reproduce con empleado + dominio reales). Coherente con la delimitacion del sello Nova-Budget s.7: "el veredicto
+  de compra se DIFIERE a una replica employee-run pre-registrada en Nova Accounting" = ESTE documento.
 
 ## 5. Convencion de atribucion (identidades) -- integridad del ledger
 El ledger de Aegis debe distinguir sin ambiguedad quien hizo que. Identidades:
@@ -99,14 +120,15 @@ El ledger de Aegis debe distinguir sin ambiguedad quien hizo que. Identidades:
 ## 7. Criterio de exito / refutacion (pre-fijado)
 - **CONFIRMA H-TRANSFER si:** (H1) el gate caza >=1 defecto real que el verde del maker no habria cazado, en la
   mayoria de las unidades medidas, con traza; Y (H2) la atribucion nominal es limpia (0 unidades medidas firmadas
-  por una identidad equivocada; John=jball, Julian=jheredia, checker=analista); Y (H3) Q1-Q5 en la direccion
-  esperada (sin exigir potencia de magnitud).
-- **REFUTA / patron NO transfiere si:** el gate no caza nada nuevo en las unidades medidas, O la atribucion se
-  confunde (trabajo humano firmado como agente), O Q1-Q5 van en direccion contraria. Se REPORTA honestamente
-  (un no-transfiere pre-registrado es un resultado valido, no un fracaso a esconder).
+  por una identidad equivocada; John=jball, Julian=jheredia, checker=analista); Y (H3) M-Q1/M-Q2 en la direccion
+  esperada -- M-Q2 caza defectos, M-Q1 en el mismo orden de magnitud que el gobernado Nova-Budget (sin exigir
+  potencia de magnitud).
+- **REFUTA / patron NO transfiere si:** el gate no caza nada nuevo en las unidades medidas (M-Q2=0), O la
+  atribucion se confunde (trabajo humano firmado como agente), O el perfil de costo M-Q1 se dispara fuera de orden.
+  Se REPORTA honestamente (un no-transfiere pre-registrado es un resultado valido, no un fracaso a esconder).
 
 ## 8. Como se ancla y sella (sin tocar el hub)
-- Captura F3.3 + Q1-Q5 en el ledger de AEGIS (firmados por el actor real). Doble ancla al hub: (a) cross-atestacion
+- Captura F3.3 + las metricas de la replica (s.4) en el ledger de AEGIS (firmados por el actor real). Doble ancla al hub: (a) cross-atestacion
   del `events.jsonl` de Aegis por gate (DECISION-0088 p.5 / 0093); (b) sha256 del artefacto de study_metrics por
   unidad, via intent del hub. El config pineado del hub NO se toca; anclaje por Entrada/intent, no re-genesis.
 - Este pre-registro se SELLA (fecha + sha256) ANTES de la 1a unidad medida, como seccion hermana del Sello Etapa 2.
