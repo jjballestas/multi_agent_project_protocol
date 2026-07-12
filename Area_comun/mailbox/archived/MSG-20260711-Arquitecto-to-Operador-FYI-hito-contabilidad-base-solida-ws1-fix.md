@@ -3,7 +3,7 @@ message_id: MSG-20260711-Arquitecto-to-Operador-FYI-hito-contabilidad-base-solid
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-11

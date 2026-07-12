@@ -59,6 +59,42 @@
             "updated_at": "2026-07-11T16:34:06Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b1a",
+            "expires_at": "2026-07-12T11:27:05Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b1a",
+                "Area_comun/mailbox/open/MSG-20260711-Arquitecto-to-Operador-FYI-hito-contabilidad-base-solida-ws1-fix.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Arquitecto-to-Operador-FYI-hito-contabilidad-base-solida-ws1-fix.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-GO-regenesis-A2-julian-y-speckit-contabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-GO-regenesis-A2-julian-y-speckit-contabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260711-Arquitecto-to-Operador-BLOCKER-regenesis-A2-chain-reanchor.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Arquitecto-to-Operador-BLOCKER-regenesis-A2-chain-reanchor.md"
+            ],
+            "started_at": "2026-07-12T05:27:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T05:27:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b1b",
+            "expires_at": "2026-07-12T11:27:05Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b1b",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-FYI-base-contabilidad-promovida-verifier-listo.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-FYI-base-contabilidad-promovida-verifier-listo.md",
+                "Area_comun/mailbox/open/MSG-20260711-Arquitecto-to-Operador-RESP-base-anclada-cobertura-verifier.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Arquitecto-to-Operador-RESP-base-anclada-cobertura-verifier.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-DECISION-A1-ahora-encolar-B-regenesis.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-DECISION-A1-ahora-encolar-B-regenesis.md"
+            ],
+            "started_at": "2026-07-12T05:27:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T05:27:05Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
