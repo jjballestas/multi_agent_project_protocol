@@ -64,8 +64,8 @@ consumen internamente los report procs ya concedidos). Reportado al operador.
 | S4 | SPEC-CONT-S4 | Saldos iniciales de vigencia | `Create/Validate/Approve/Import_Opening_Balance_Draft`, `Convert_Auxiliary_To_Major` | 52420-21, 52430-37, 52440-43, 52450-52; conv 52308-313; terceros 52300-321 | 022,021 | ESCRITA |
 | S5 | SPEC-CONT-S5 | CHIP contingencia | `Create_Chip_Report_Balance_Batch`, `Get_Chip_Reconciliation_Difference`, `Post_Chip_Adjustment_Voucher` | 53900-910, 53920-923, 53940-953 | 026 | ESCRITA |
 | S6A | SPEC-CONT-S6A | Informe trimestral CGN/CHIP | `Import_Cgn_Chip_Valid_Account_Catalog`, `Create/Get/Confirm_Cgn_Chip_Quarterly_Report` | 54400-413, 54420-441, 54450-451, 54452-457 (P05) | 027 | ESCRITA |
-| S6B | SPEC-CONT-S6B | Cierre anual | `Close_Annual_Accounting_Period` (annual_close via Post_Voucher + saldos iniciales sig. vigencia + P07) | 54460-487 (54480-487 reserva legal privada opcional) | 028 | PEND |
-| S6C | SPEC-CONT-S6C | Causacion ingresos/CxC (FRONTERA modulo fuente) | `income_accrual` / `accounts_receivable_accrual` | (build del modulo fuente, NO Contabilidad) | -- | PEND (spec-frontera) |
+| S6B | SPEC-CONT-S6B | Cierre anual | `Close_Annual_Accounting_Period` (annual_close via Post_Voucher + saldos iniciales sig. vigencia + P07) | 54460-487 (54480-487 reserva legal privada opcional) | 028 | ESCRITA |
+| S6C | SPEC-CONT-S6C | Causacion ingresos/CxC (FRONTERA modulo fuente) | `income_accrual` / `accounts_receivable_accrual` | (build del modulo fuente, NO Contabilidad) | -- | ESCRITA (spec-frontera) |
 
 ## Preambulo compartido (aplica a toda SPEC-CONT; cada slice lo particulariza)
 - **Superficie-sobre-proc:** cada unidad es superficie C#/API(+UI) sobre un proc de hardening; C# NO reimplementa
@@ -120,6 +120,10 @@ NO como bypass, NO reabre el sello ni el baseline.
 - ESCRITAS: **S1** (reportes RO), **S2** (comprobante manual, integrity escotilla + 52252), **S3** (cierre/apertura
   mensual P03-P07, efecto 52512 + invariante escotilla annual_close), **S4** (saldos iniciales de vigencia:
   draft/validate/import/approve + convert auxiliar-a-mayor), **S5** (CHIP contingencia: batch/diff/adjustment),
-  **S6A** (informe trimestral CGN/CHIP: catalogo/report/export al centavo/confirm+P05). PEND: S6B, S6C.
+  **S6A** (informe trimestral CGN/CHIP: catalogo/report/export al centavo/confirm+P05), **S6B** (cierre anual:
+  annual_close atomico + saldos iniciales sig. vigencia + P07 + reserva legal privada + invariante escotilla), **S6C**
+  (FRONTERA causacion ingresos/CxC: contrato Post_Voucher, una-via fuente->Accounting, sin build del modulo fuente).
+  **Kit COMPLETO 8/8** (2026-07-13). S6B/S6C escritas por el Arquitecto contra el SDD R7/R8; el maker RE-CONFIRMA los
+  THROW/reglas contra `OBJECT_DEFINITION` al abrir el build (S6C es contrato de frontera, sin harness SQL propio).
 - Se entregan **por slice** (DIRECTIVA operador). Ninguna registrada como tarea de build (PREP). Cuando abra el
   build gobernado, cada SPEC-CONT-Sx se registra como tarea de superficie en el ledger de la instancia (no el hub).
