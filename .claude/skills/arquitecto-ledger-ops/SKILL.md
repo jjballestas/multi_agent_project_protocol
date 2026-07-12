@@ -96,6 +96,22 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
   (fuera del config pineado). Solo tras relanzar los harnesses de peers con prompts que emiten trailers
   (F-2 anti-DoS) y verificar 1 commit de peer con trailer.
 
+### 2d. Intake DoR, claim de higiene, y validacion de override (2026-07-12, fallos reales)
+- **`task_upsert` de REGISTRO admite intake PARCIAL; promover `proposed->ready` EXIGE el intake DoR COMPLETO**
+  (8 campos: `type`, `goal`, `acceptance`, `verification_cmd`, `scope_routes`, `out_of_scope`, `risk`, `estimate`
+  -- validador `scripts/validate_collaboration_state.py:460`, `submit_intent.py:255`). Si registras una tarea con
+  intake parcial y luego la promueves, falla "task ... intake field invalid or empty: <campo>". Completa el intake
+  en el `.md` ANTES de promover (el gate lee el `.md`, no el index).
+- **El claim de `mailbox_archive`/higiene EXIGE `task_id`** (no es task-less): usa un id de ops como
+  `OPS-MAILBOX-HYGIENE-<fecha>` (convencion vista en los archives previos). Sin `task_id` -> "claim acquire
+  requires task_id".
+- **Validar un OVERRIDE (`event-state.runtime.json`): chequea la GUARDA DE CLAVES PERMITIDAS**, no solo la
+  resolucion de rutas. `event_state` del override solo admite `actor_auth_enforce` / `actor_auth_config` /
+  `event_auth` (`runtime/eventlog.py:263`); CUALQUIER otra clave (p.ej. `anchor_enabled`) = "unsupported
+  event_state keys" -> validate RECHAZA. El "anchor canonico-solo" es OPERACIONAL (solo el clon canonico corre el
+  anchor), NO una clave del override. Un override "estructuralmente ok" con una clave extra FALLA validate --
+  corre `validate` en un clon fresco antes de declararlo valido.
+
 ## 3. Recuperacion de drift (apply a medias)
 Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
 `python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`
