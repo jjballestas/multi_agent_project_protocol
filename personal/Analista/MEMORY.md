@@ -7,6 +7,29 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
 
+## Ultima actualizacion 2026-07-12 - TASK-9303 F9303-01 re-juicio OK/CERRABLE
+- TASK-9303 F-9303-01 re-juicio registrado por Analista en commit `a1c3644`
+  (`review(TASK-9303): Analista OK boundary seal regate`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-TASK-9303-F9303-01-rejuicio-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-F9303-01-rejuicio-OK.md`.
+- Ancla canonica hub: instruccion
+  `Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-F9303-01-rejuicio.md`;
+  Aegis clean clone en commit `65b83c5202554610d52e68e627d241fe1a6695ed`.
+- Resultado: OK/CERRABLE para F-9303-01. `python examples/chain_cases/run_tests.py` en clean clone Aegis
+  EXIT 0, 26/26. Probe propia de 16 mutaciones evento/config (`boundary_id`, hashes, `event_type`,
+  `boundary_seq`, `sealed_segment.sha256/event_count/seq_range`) confirmo 16/16 fallan cerrado. Sello 672..3807
+  recomputado desde event-log: 3136 lineas, sha256
+  `32a769f371794a01598d4932e95f18af6f65c8db24487241b658f3d51cf570d7`, match con config.
+- Gates: Aegis validate/encoding/domain EXIT 0, drift false `up_to_seq=3818`, chain valid `checked_events=3146`;
+  hub validate con secretos EXIT 0, hub clean clone sin secretos validate EXIT 0, domain/encoding EXIT 0,
+  drift false `up_to_seq=4578`, chain valid `checked_events=3906`. Aegis `protocol.config.json`
+  byte-identico entre `9fb0f12d`, `65b83c52` y working tree, sha256
+  `3E93CABD81B890FA98431EDB2F17A05946DB69CC36246F94905C497F22D634D6`; hub config sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Residuales declarados: `event_auth.signature` HMAC mutation fuera de alcance; 7b `jheredia-live` diferido al
+  A2-nominal por instruccion canonica; no ejecutar Nova-Budget `npm test` cuando el REVIEW canonico diga
+  "SIN producto Nova-Budget en alcance".
+
 ## Ultima actualizacion 2026-07-12 - TASK-9303 Aegis chain reanchor NO-GO
 - TASK-9303 review formal registrado por Analista en commit `b9c6d23`
   (`review(TASK-9303): Analista blocks chain reanchor`). Artefacto:
