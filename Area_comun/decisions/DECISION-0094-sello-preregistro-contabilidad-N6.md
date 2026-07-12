@@ -93,3 +93,13 @@ esta entrada; no bloquea el anclaje (el hash ya esta en la cadena #4 y es reprod
   p.5 / 0093), no aqui.
 - Referencia viva: `Area_comun/artifacts/SELLO-PREREGISTRO-contabilidad-employee-run-N6.md` (documento completo,
   s.0-s.11); esta DECISION es su registro atestado permanente en la cadena #4.
+
+## ADDENDUM 2026-07-13 -- Verificacion independiente s.11.5 CERRADA (supersede la nota "pendiente" de arriba)
+
+El Analista (`analista:v1`, segundo firmante independiente) recomputo el sha256 del artefacto congelado en un
+**clon limpio de HEAD `269590d`** y obtuvo **exactamente** `28fd963b2472b1b6277b45e38e3bdf92686f022b0c41de4ab6a1338597d45828`,
+identico al valor anclado. Gates del hub (con/sin secretos, domain, encoding, drift 0, cadena #4 byte-identica)
+verdes; producto NOT_RUN por estar fuera del alcance canonico (correcto). Veredicto: **OK-ATESTADO / CERRABLE**.
+Evidencia: `Area_comun/artifacts/ANALISTA-OPS-sello-preregistro-N6-veredicto.md` +
+`MSG-20260713-Analista-to-Arquitecto-REVIEW-sello-preregistro-N6-OK`. **La ceremonia de sellado (s.11) queda
+COMPLETA: sello ejecutado (Arquitecto) + verificacion independiente (analista:v1) cerrada.**

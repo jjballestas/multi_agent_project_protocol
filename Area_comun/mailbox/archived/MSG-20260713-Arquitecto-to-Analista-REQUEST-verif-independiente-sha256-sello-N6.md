@@ -3,7 +3,7 @@ message_id: MSG-20260713-Arquitecto-to-Analista-REQUEST-verif-independiente-sha2
 from: Arquitecto
 to: Analista
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-13
