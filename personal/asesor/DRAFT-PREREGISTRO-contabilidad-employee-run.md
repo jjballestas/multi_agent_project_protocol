@@ -33,15 +33,29 @@ efecto. Razon declarada por adelantado (misma disciplina que Q4-subpotenciado de
   pretende medir magnitud de efecto con intervalos de confianza estrechos.
 - Cualquier lectura de "tamano del efecto" seria descriptiva, no inferencial. Se declara AQUI, no al reportar.
 
-## 3. Poblacion medida (que unidades entran) -- criterio, no cherry-pick
-- **DENTRO:** las unidades GOBERNADAS de Contabilidad construidas por Julian como maker (`jheredia:v1`), de tipo
-  MUTADOR (comprobante/cierre/apertura/saldos/CHIP/CGN-CHIP/cierre anual -- slices S2..S6B), con gate adversarial
-  del Analista.
-- **FUERA:** las unidades de solo-lectura y de frontera del modulo fuente (S1 reportes RO, S6C causacion de
-  ingresos/CxC) -- no son mutadoras del dominio contable; quedan como contexto, no como confirmatorio.
-- **Seleccion:** la lista concreta de unidades employee-run de Julian se FIJA por un metodo pre-registrado
-  (sorteo/asignacion documentada por el operador+Arquitecto) ANTES de que Julian toque la 1a unidad medida, y se
-  SELLA aqui como anexo. No se elige mirando resultados. Minimo declarado: [N>=__ unidades] (completar al sellar).
+## 3. Poblacion medida (que unidades entran) -- FIJADA (anexo del sello)
+- **DENTRO:** unidades GOBERNADAS MUTADORAS de Contabilidad construidas por Julian como maker (`jheredia:v1`),
+  con gate adversarial del Analista.
+- **FUERA:** RO (R1 reportes) y frontera del modulo fuente (R8 causacion ingresos/CxC, ademas CONTEMPLADO, no
+  construible). R0 (maestros/parametrizacion) queda FUERA de la muestra por baja independencia (lo consume todo
+  el modulo) aunque sea mutador.
+- **MUESTRA SELECCIONADA (N=4), fijada por el OPERADOR el 2026-07-12 ANTES de construir; criterio = mezcla de
+  dificultad + independencia alta/media (no bloquea el resto del modulo):**
+  1. **R2-c** -- Reverso de comprobante manual (`Reverse_Voucher` / `Voucher_Relation` / `vw_Voucher_Adjustment_Map`;
+     crea `manual_accounting_reversal`, invierte D/C, relacion `reverses`; bloquea reverso de source!=accounting /
+     no-manual / is_system_generated). Dificultad M-A.
+  2. **R3-b** -- Cerrar periodo mensual (`Close_Accounting_Period` + P03/P04 + audit; NO puede activar la escotilla
+     `annual_close`). Dificultad Alta.
+  3. **R4-b** -- Importar saldos iniciales por CSV (`Import_Opening_Balance_Draft_From_File_Stage`, schema/022
+     MIGRADO, staging + validacion tipada por fila). Dificultad M-A.
+  4. **R5-c** -- Postear ajuste CHIP post-P05 (`Post_Chip_Adjustment_Voucher`, tipo `chip_adjustment`, cuadre D=C,
+     fecha > P05). Dificultad Alta.
+- **RESERVA:** estas 4 quedan "no construir hasta medicion"; el resto del modulo (R0, R1, R2-a/b/d, R3-a/c,
+  R4-a/c, R5-a/b, R6, R7) avanza a velocidad de producto. La seleccion NO se re-elige mirando resultados; se SELLA
+  como anexo (fecha + sha256).
+- **Poder:** N=4 = small-n confirmatorio de direccion/patron (s.2), no de magnitud. Nota: N=4 esta en el extremo
+  bajo; una 5a unidad rica en defectos (p.ej. R2-b publicar, THROW 52200-52252) reforzaria H1 sin cambiar el
+  diseno -- opcional, decision del operador.
 
 ## 4. Metricas Q1-Q5 y direccion esperada (definicion IDENTICA a Nova-Budget)
 Para que la comparacion de transferibilidad sea valida, Q1-Q5 usan la MISMA definicion del sello Nova-Budget
