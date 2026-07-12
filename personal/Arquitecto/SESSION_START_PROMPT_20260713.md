@@ -48,11 +48,18 @@ La sesion anterior COMPLETO el onboarding nominal de Julian como firmante ed2551
 - Areas `personal/jheredia/` + `personal/jball/` creadas (Aegis). pubkeys en `personal/Arquitecto/A2-nominal-pubkeys.md`
   (jheredia 7p0Hgpg9..., jball pSGHuZPb...).
 
-**Ademas quedaron:** kit SPEC-CONT **6/8** (S1-S6A en hub `Area_comun/specs/nova/`; PEND S6B cierre anual [leer SDD
-`accounting_module_requirements.html`] + S6C spec-frontera). **SPEC-NOTION-PROJECTOR** ESCRITA (`Area_comun/specs/
-SPEC-NOTION-PROJECTOR.md`, GO operador): se cabla cuando el operador construya el workspace Notion (Notion =
-read-model auditado del ledger, nunca fuente). **Codex cron prompt** corregido (announces del hub sobre tareas de
-Aegis emiten Task-Id: none + Ops-Reason).
+**Ademas quedaron (3 GOs del operador ejecutados post-checkpoint):**
+- **kit SPEC-CONT COMPLETO 8/8** (S1-S6C en hub `Area_comun/specs/nova/`; S6B cierre anual + S6C spec-frontera
+  causacion ingresos escritas; index actualizado). Nada proactivo pendiente del kit.
+- **SELLO PRE-REGISTRO N=6 = SELLADO + s.11.5 CERRADA.** DECISION-0094 anclada (hub #4 seq 4659); artefacto congelado
+  `Area_comun/artifacts/SELLO-PREREGISTRO-contabilidad-employee-run-N6.md` **sha256 28fd963b...5828** (pre-datacion
+  del diseno ANTES de medir; anclaje por intent decision, SIN re-genesis, config pineado + dataset N=500 INTACTOS).
+  Verif independiente cerrada: Analista OK-ATESTADO (recompute en clon limpio = match; addendum en DECISION-0094,
+  commit 6582325). **NO editar el artefacto sellado** (romperia su sha256); las notas post-sello van en DECISION-0094.
+- **PROYECTOR NOTION = TASK-9310 REGISTRADO** en Aegis (proposed/BACKLOG, owner Codex, checker Analista FORMAL,
+  integridad ALTA) contra `Area_comun/specs/SPEC-NOTION-PROJECTOR.md` (hub). AGENDADO al build-open post-30-jul: se
+  promueve a ready+GO cuando abra la ventana. Workspace Notion projector-ready (IDs de bases en el .md de TASK-9310).
+- **Codex cron prompt** corregido (announces del hub sobre tareas de Aegis emiten Task-Id: none + Ops-Reason).
 
 ## SIGUIENTE ACCION AL RETOMAR
 1. Higiene minima: archivar el `CONFIRMA-gate-verde` consumido (open/=2 -> queda 1: mi RESP-cross-atestacion, rr
@@ -102,10 +109,12 @@ Aegis emiten Task-Id: none + Ops-Reason).
   (hora local). Arquitecto NO-IDLE pero SIN cola gobernada urgente ahora (A2-nominal cerrado).
 - **open/ = 2:** vivo = `RESP-cross-atestacion-anclada-jheredia-operativo` (rr operador); consumido = `CONFIRMA-gate-
   nominal-verde` (archivar).
-- PENDIENTES: (1) operador confirma jheredia operativo + coordina sello pre-registro N=6 / 6 unidades medidas;
-  (2) kit SPEC-CONT S6B/S6C (proactivo); (3) SPEC-NOTION-PROJECTOR se cabla cuando el operador construya el workspace.
+- PENDIENTES (TODO espera al operador / build-open post-30-jul; NADA proactivo abierto): (1) promover TASK-9310
+  (proyector Notion) a ready+GO cuando abra la ventana; (2) las 6 unidades medidas de Contabilidad (pre-registro N=6
+  ya sellado) con jheredia:v1 + jball:v1 firmando + instrumentacion F3.3; (3) SPEC-NOTION-PROJECTOR se cabla cuando
+  el workspace este construido. El sello N=6 + s.11.5 + kit 8/8 + A2-nominal estan CERRADOS.
 
 ## SIGUIENTE ACCION
-Arranca (lease + memoria + ledger-ops + git ff hub+Aegis + **los 3 watchdogs**). Archiva el CONFIRMA consumido.
-Confirma que leiste el estado. NO hay tarea gobernada en vuelo -- espera el GO del operador para el pre-registro /
-6 unidades medidas, o avanza la cola proactiva (S6B/S6C) si lo pide. Sigue el LOOP.
+Arranca (lease + memoria + ledger-ops + git ff hub+Aegis + **los 3 watchdogs**). Confirma que leiste el estado.
+NO hay tarea gobernada en vuelo NI cola proactiva abierta (kit 8/8 escrito, sello N=6 cerrado, A2-nominal cerrado).
+Espera el GO del operador para el build-open (promover TASK-9310 + 6 unidades medidas post-30-jul). Sigue el LOOP.
