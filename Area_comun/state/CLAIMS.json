@@ -165,6 +165,20 @@
             "updated_at": "2026-07-12T15:21:39Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Codex-hub-TASK9303-F9303-01-in-review-msg",
+            "expires_at": "2026-07-13T23:59:59Z",
+            "notes": "Announce Aegis TASK-9303 F-9303-01 remediation redelivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Codex-hub-TASK9303-F9303-01-in-review-msg",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-F9303-01-in-review.md"
+            ],
+            "started_at": "2026-07-12T16:53:28Z",
+            "status": "released",
+            "task_id": "OPS-HUB-TASK9303-F9303-01-IN-REVIEW-ANNOUNCE",
+            "updated_at": "2026-07-12T16:53:28Z"
+        },
+        {
             "claim_id": "CLAIM-20260712-Codex-hub-TASK9303-blocked-msg",
             "expires_at": "2026-07-13T23:59:59Z",
             "notes": "Announce Aegis TASK-9303 blocked on jheredia private signing key.",
