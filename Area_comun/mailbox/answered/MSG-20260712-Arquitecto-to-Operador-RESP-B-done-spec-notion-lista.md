@@ -3,7 +3,7 @@ message_id: MSG-20260712-Arquitecto-to-Operador-RESP-B-done-spec-notion-lista
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: answered
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-12
