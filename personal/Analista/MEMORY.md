@@ -7,6 +7,31 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
 
+## Ultima actualizacion 2026-07-12 - TASK-9304 jball reanchor NO-GO
+- TASK-9304 review formal registrado por Analista en commit `d0f7974`
+  (`review(TASK-9304): Analista blocks jball reanchor`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-TASK-9304-jball-reanchor-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9304-jball-reanchor-NOGO.md`.
+- Ancla canonica hub: instruccion
+  `Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9304-jball-reanchor.md`;
+  Aegis clean clone en commit `00ccb55b9d02e676c9cf31218f4ae1edc25c3ee1`.
+- Resultado: CAMBIO-REQUERIDO / NO CERRABLE. Aegis pasa `python examples/chain_cases/run_tests.py`
+  39/39, validate/encoding/domain EXIT 0, drift false `up_to_seq=3841`, chain valid `checked_events=3169`.
+  Epoca 1 `[672,3807]` y epoca 2 `[3809,3836]` sellos recomputados match; F-9303-01 de epoca 2 falla cerrado
+  para tamper payload/config-history; `jball:v1` registrado con pubkey
+  `pSGHuZPbQQF4aJn4dBhyRSiCUn1DKrMwhAUjjLVyWd0=` e implementer.
+- Bloqueo F-9304-01: TASK-9304 AC5 promete que tamper en cualquier epoca, incluido `pre_t0`, hace fallar
+  `validate_chain`. Probe propia en copia limpia agrego `tamper` a
+  `pre_t0_ledger_seal/events-pre-t0-000001-000671.jsonl`; `python scripts/validate_collaboration_state.py`
+  siguio EXIT 0 y `validate_chain` devolvio `valid=true`. Fix-loop: hard-gatear
+  `pre_t0_provenance.sealed_export` o corregir canonicamente el AC para excluir pre-T0 del contrato
+  `validate_chain`; re-juicio Analista antes de cierre, maximo 2 iteraciones.
+- Hub gates: validate con secretos EXIT 0; hub clean clone sin secretos validate EXIT 0; encoding/domain EXIT 0;
+  drift false `up_to_seq=4625`; chain valid `checked_events=3953`; hub config sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`, `protocol_version=1.14.0`.
+- Nota: el commit del veredicto uso `Task-Id: none` + `Ops-Reason` porque TASK-9304 vive en Aegis y el gate de
+  trailers del hub rechaza Task-Id no existente en el TASK_INDEX local.
+
 ## Ultima actualizacion 2026-07-12 - TASK-9303 F9303-01 re-juicio OK/CERRABLE
 - TASK-9303 F-9303-01 re-juicio registrado por Analista en commit `a1c3644`
   (`review(TASK-9303): Analista OK boundary seal regate`). Artefacto:
