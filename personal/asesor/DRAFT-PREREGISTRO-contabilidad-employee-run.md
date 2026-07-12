@@ -145,8 +145,10 @@ El ledger de Aegis debe distinguir sin ambiguedad quien hizo que. Identidades:
 8. Calendario Sprint 1 post-30-jul. [Linea roja.]
 
 ## 10. Que falta para sellar (accion operador + Asesor)
-- Completar s.3 (N minimo + metodo de seleccion de unidades) y s.4 (copiar Q2-Q5 textual del sello Nova-Budget).
-- Dar de alta `jball:v1` (rutear al Arquitecto; puede ir en la misma re-genesis de B).
-- El operador SELLA (fecha + sha256) antes de la 1a unidad medida.
+- [HECHO 2026-07-12] s.3 (muestra N=6 fijada: R2-c/R3-b/R4-b/R5-c/R0-fuentes/R4-c) + s.4 (metricas de la replica,
+  mapeo honesto: M-Q1/M-Q2 aplican, Q3/Q4 N/A, M-ATRIB/M-MANUAL propias).
+- [RUTEADO 2026-07-12, 6b86bc2; ACEPTADO por el Arquitecto e7cbbc2] alta de `jball:v1` en el config-epoch de B.
+- PENDIENTE para sellar: B (`jheredia:v1`) DONE + instrumentacion F3.3 cableada en Aegis.
+- El operador SELLA (fecha + sha256) antes de la 1a unidad medida. Copiar aqui Q2 verbatim ya HECHO en s.4.
 
 -- Preparado por el Asesor para el operador (John). Sellado: pendiente del operador.
