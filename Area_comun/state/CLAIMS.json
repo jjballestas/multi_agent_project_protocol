@@ -176,6 +176,21 @@
             "updated_at": "2026-07-12T18:54:58Z"
         },
         {
+            "claim_id": "CLAIM-20260713-Arquitecto-decision-0094",
+            "expires_at": "2026-07-13T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0094-sello-preregistro-contabilidad-N6.md",
+                "Area_comun/artifacts/SELLO-PREREGISTRO-contabilidad-employee-run-N6.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260713-Arquitecto-decision-0094"
+            ],
+            "started_at": "2026-07-12T22:36:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-12T22:36:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260713-Arquitecto-hyg-a1",
             "expires_at": "2026-07-13T23:59:59Z",
             "owner": "Arquitecto",
