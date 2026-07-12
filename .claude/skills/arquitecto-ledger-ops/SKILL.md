@@ -112,6 +112,35 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
   anchor), NO una clave del override. Un override "estructuralmente ok" con una clave extra FALLA validate --
   corre `validate` en un clon fresco antes de declararlo valido.
 
+### 2e. Intents, claims, firmantes y gates (2026-07-12/13, A2-nominal, fallos reales verificados en codigo)
+- **El campo de input del intent es `type` (o el tipo-como-CLAVE `{"claim":{...}}`), NUNCA `kind`.** `parse_intent`
+  (`submit_intent.py:373/381`) solo acepta `type` o el tipo-como-clave; `{"kind":"claim",...}` -> keys=[] -> FALLA
+  "intent must declare exactly one of". (El nombre interno es `kind`, pero eso es POST-normalizacion, no el input.)
+- **Claim ACQUIRE anidado + SCOPE; claim RELEASE PLANO.** Acquire: `{"type":"claim","op":"acquire","claim":{...,
+  "scope":[...]}}` con los 4 fragmentos (TASK_INDEX#id + PROJECT_STATE#active_tasks/id + el `.md` + CLAIMS.json#claim_id).
+  Sin scope -> el `task_status` posterior FALLA "write outside active claim scope" (required_scopes:849 exige que el
+  claim cubra esas rutas). RELEASE: `{"type":"claim","op":"release","claim_id":"X"}` PLANO -- un `claim` anidado en el
+  RELEASE lo trata como upsert y NO libera (`protocol_replay.py:806-811`), el claim queda activo.
+- **`task_upsert` EXIGE capability `orchestrator`** (`submit_intent.py:959`): solo el Arquitecto. jheredia/Codex/
+  Analista (implementer/reviewer) NO pueden registrar tareas -> el setup de un gate/tarea desechable lo hace el
+  Arquitecto; el maker solo claima + flipea. `task_status` a in_review/done = implementer; a review_approved =
+  reviewer; a ready/in_progress = owner(implementer/orchestrator).
+- **Firmante NO-en-`config.event_auth.keys` DEBE designar su HMAC en el override.** `sign_event` (`eventlog.py:642`)
+  LANZA "event auth signing key missing for actor: X" si no resuelve HMAC. El config solo trae Codex/Arquitecto/
+  runtime; ningun agente tiene `auth` block en agent_registry. Un firmante nuevo (jheredia/jball) usa el HMAC de
+  INSTANCIA en su override: `"event_auth":{"keys":{"<actor>":{"key_id":"runtime-hmac:v1","secret_file":"secrets/
+  eventauth-runtime.key"}}}`. Su ed25519 (actor_auth) es la atribucion por-humano; el HMAC es capa de instancia.
+  La privada ed25519 del empleado JAMAS va a la maquina de build (rompe la atribucion employee-run).
+- **En un flip de `task_status`, stagea TAMBIEN el `Area_comun/tasks/<task>.md`** (submit_intent reescribe el status
+  del `.md`; si el commit solo stagea `Area_comun/state/`, el `.md` commiteado queda con el status viejo -> en clon
+  limpio `status mismatch index vs file` -> validate rojo). Paso en el gate nominal; se reconcilia editando el `.md`
+  al estado autoritativo del index. Y SIEMPRE incluye los `.slim.json` en el pathspec del commit de estado.
+- **Al gatear un re-anclaje/sello (o revisarlo), el sello se RE-VERIFICA RECOMPUTANDO, no se confia el declarado.**
+  Dos hallazgos reales del Analista: F-9303-01 (el payload del `chain.regenesis_boundary` + `config_epoch_history`
+  no se recomputaba -> tamper invisible) y F-9304-01 (el sello `pre_t0_provenance.sealed_export` no se recomputaba).
+  Fix: `validate_chain` recomputa el sha256 del segmento/export contra las lineas reales y FALLA CERRADO on drift +
+  negativo permanente. Verifica el fix TU MISMO (tamperea en un clon limpio -> validate exit!=0) antes de re-rutear.
+
 ## 3. Recuperacion de drift (apply a medias)
 Si un apply falla a mitad (p.ej. error en el `.md`) la slim puede quedar desincronizada:
 `python -c "from pathlib import Path; from runtime.protocol_replay import materialize_from_event_log_if_enabled; materialize_from_event_log_if_enabled(Path('.'))"`
