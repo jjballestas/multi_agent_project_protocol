@@ -5,7 +5,31 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-06 (TASK-0246 informe/SPEC P4-006 NO-GO registrado; colision de escritura activa).
+> Ultima actualizacion: 2026-07-12 (TASK-9304 F-9304-01 re-juicio OK/CERRABLE registrado).
+
+## Ultima actualizacion 2026-07-12 - TASK-9304 F-9304-01 re-juicio OK/CERRABLE
+- TASK-9304 F-9304-01 re-juicio registrado por Analista en commit `155897b`
+  (`review(TASK-9304): Analista OK F9304 rejuicio`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-TASK-9304-F9304-01-rejuicio-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9304-F9304-01-rejuicio-OK.md`.
+- Ancla canonica hub: instruccion
+  `Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9304-F9304-01-rejuicio.md`;
+  Aegis clean clone en commit `8159716cfaa0b3720de889841b14b82844730799`; fix citado `7f80e481`.
+- Resultado: OK/CERRABLE. `python examples/chain_cases/run_tests.py` EXIT 0, 40/40; Aegis
+  validate/domain/encoding EXIT 0; drift false `up_to_seq=3856`; `validate_chain` baseline `valid=true`.
+  Repro propia de F-9304-01: append `tamper` al export pre-T0 -> `validate_collaboration_state.py` EXIT 1
+  y `validate_chain` `valid=false`, razon `pre_t0 sealed export hash mismatch`.
+- No regresion F-9303-01: probe propio sobre `config_epoch_history[1].boundary_id` y boundary payload
+  `sealed_segment.event_count` sigue fallando cerrado. `protocol.config.json` Aegis byte-identico entre
+  `00ccb55b`, `7f80e481` y `8159716c`, sha256
+  `77242D63090144C8818426927CC8AF149F4FE36C7637AE1B84387674D4BDD283`.
+- Hub gates: validate con secretos EXIT 0; hub clean clone sin secretos validate EXIT 0; domain/encoding EXIT 0;
+  drift false `up_to_seq=4627`; chain valid `checked_events=3955`; hub config sha256
+  `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Residuales: `jball-live` sigue diferido a la maquina de John; ataque coordinado export pre-T0 +
+  `protocol.config.json` actualizado valida verde en probe aislada, por lo que el cierre depende de #4
+  byte-identica/anclada; Nova-Budget root `npm test` limpio EXIT `-4058` por ausencia de `package.json`, fuera
+  del alcance canonico de este REVIEW.
 
 ## Ultima actualizacion 2026-07-12 - TASK-9304 jball reanchor NO-GO
 - TASK-9304 review formal registrado por Analista en commit `d0f7974`
