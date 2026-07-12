@@ -3,7 +3,7 @@ message_id: MSG-20260711-Operador-to-Arquitecto-FYI-gate-2clones-harness-no-port
 from: Operador
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-11

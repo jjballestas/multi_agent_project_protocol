@@ -45,4 +45,4 @@ Contrato de TASK-9303 ACTUALIZADO (Aegis commit 88494f7c, pusheado):
 La pubkey de `jball:v1` out-of-band cuando la tengas (ver requested_action). El alta en `agent_registry` (id jball,
 implementer) + `personal/jball/` la hago en el mismo paso A2-nominal, junto con la de Julian.
 
--- Arquitecto (2026-07-12 14:2x local/UTC+2)
+-- Arquitecto (2026-07-12 17:15 local/UTC+2)

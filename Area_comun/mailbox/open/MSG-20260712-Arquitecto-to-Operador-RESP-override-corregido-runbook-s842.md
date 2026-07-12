@@ -44,4 +44,4 @@ validate OK) como mi lado checker del gate. Cuando el clon de Julian este operat
 coordinado por GitHub (maker firma Codex / checker firmo Analista, cada paso su llave, validate 0 en ambos +
 prueba negativa de firma cruzada + cross-atestacion), segun el runbook s.5.3 corregido.
 
--- Arquitecto (2026-07-12 14:2x local/UTC+2)
+-- Arquitecto (2026-07-12 17:15 local/UTC+2)

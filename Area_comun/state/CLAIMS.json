@@ -59,6 +59,24 @@
             "updated_at": "2026-07-11T16:34:06Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b1",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260711-Arquitecto-to-Operador-RESP-A1-ejecutada-B-encolada.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Arquitecto-to-Operador-RESP-A1-ejecutada-B-encolada.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-ACTION-instrumentacion-medicion-contabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-ACTION-instrumentacion-medicion-contabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-ACTION-reactivar-codex-promover-B-TASK9303.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-ACTION-reactivar-codex-promover-B-TASK9303.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b1"
+            ],
+            "started_at": "2026-07-12T15:15:03Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T15:15:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260712-Arquitecto-hyg-b1a",
             "expires_at": "2026-07-12T11:27:05Z",
             "owner": "Arquitecto",
@@ -93,6 +111,58 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260712",
             "updated_at": "2026-07-12T05:27:05Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b2",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-ACTION-validar-override-julian-A1.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-ACTION-validar-override-julian-A1.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-DECISION-A1-ahora-encolar-B-regenesis.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-DECISION-A1-ahora-encolar-B-regenesis.md",
+                "Area_comun/mailbox/open/MSG-20260711-Operador-to-Arquitecto-FYI-gate-2clones-harness-no-portable-runbook-s5.md",
+                "Area_comun/mailbox/archived/MSG-20260711-Operador-to-Arquitecto-FYI-gate-2clones-harness-no-portable-runbook-s5.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b2"
+            ],
+            "started_at": "2026-07-12T15:19:18Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T15:19:18Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b3",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-instrumentacion-medicion.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-instrumentacion-medicion.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-override-julian-A1-valido.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-override-julian-A1-valido.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-runbook-s5-corregido-gate-definido.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-runbook-s5-corregido-gate-definido.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b3"
+            ],
+            "started_at": "2026-07-12T15:20:21Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T15:20:21Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-b4",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-ACTION-alta-jball-v1-con-B-regenesis.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-ACTION-alta-jball-v1-con-B-regenesis.md",
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-FYI-correccion-override-anchor-runbook-s842.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-FYI-correccion-override-anchor-runbook-s842.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-b4"
+            ],
+            "started_at": "2026-07-12T15:21:39Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T15:21:39Z"
         },
         {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
