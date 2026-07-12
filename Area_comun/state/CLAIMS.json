@@ -40,6 +40,22 @@
             "updated_at": "2026-07-12T18:00:45Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Codex-TASK-9304-F9304-hub-announce",
+            "expires_at": "2026-07-13T23:59:59Z",
+            "notes": "Hub announce for Aegis TASK-9304 F-9304-01 remediation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Codex-TASK-9304-F9304-hub-announce",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9304-F9304-in-review.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-12T19:22:33Z",
+            "status": "released",
+            "task_id": "COORD-TASK-9304",
+            "updated_at": "2026-07-12T19:22:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260712-Codex-TASK-9304-hub-announce",
             "expires_at": "2026-07-13T23:59:59Z",
             "notes": "Hub announce for Aegis TASK-9304 delivery.",
