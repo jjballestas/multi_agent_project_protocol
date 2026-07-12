@@ -14,6 +14,27 @@
 ## >> ESTADO ACTUAL 2026-07-12 (NOCHE) (LEER PRIMERO; supersede 12-jul-manana)
 **Foco actual: (A) recta de medicion de Contabilidad + (B) construccion del workspace NOTION para control del proyecto.**
 
+> **ACTUALIZACION 2026-07-12 (tarde-noche) -- supersede lo de abajo en lo que toca:**
+> - **A2-NOMINAL CERRADO, VERDE.** Gate 2-clones nominal corrido EN VIVO (TASK-9390 en Aegis): jheredia (maquina de
+>   Julian) firmo build->in_review [ed25519 jheredia:v1], Analista (Aegis-cloneB, maquina/llave SEPARADA) ratifico
+>   review_approved [ed25519 analista:v1], jheredia cerro done; PRUEBA NEGATIVA fallo como debia (jheredia no puede
+>   firmar como Analista); validate exit 0 en ambos clones, drift 0 (HEAD Aegis 4054e3ae). **maker!=checker por
+>   posesion de llave demostrado en vivo.** Config-side previo: epoca 2 de Aegis con jheredia:v1 + jball:v1 (TASK-9303
+>   frontera + TASK-9304 pre_t0, chain_cases 40/40; hub 2E35F26E/1.14.0 INTACTO). **jheredia:v1 OPERATIVO** (pendiente
+>   SOLO que el Arquitecto ancle la cross-atestacion en el hub; confirmacion ruteada 9592cfe). Al anclarla -> arrancan
+>   las 6 unidades medidas + sello del pre-registro N=6.
+> - **APRENDIZAJE DURO del gate (para replicar):** submit_intent en PowerShell exige intent POR ARCHIVO (--intent),
+>   campo `type` (no kind), --timestamp UTC obligatorio, override de jheredia CON event_auth->runtime-hmac:v1
+>   (secrets/eventauth-runtime.key), claim ANIDADO con scope de 4 fragmentos (TASK_INDEX/PROJECT_STATE/.md/CLAIMS#id),
+>   git identity + stagear Area_comun/state + runtime/state/{events.jsonl,snapshot.json}. Todo en la receta verificada
+>   `personal/asesor/COMANDOS-julian-gate-nominal-7b.md` + horneado en el manual de Julian v2.
+> - **WORKSPACE NOTION = BACKBONE COMPLETO.** NOVA: Modulos/Opciones/Tareas(+8 Budget congeladas)/Specs SDD(25)/
+>   Objetos BD/Objetos Legacy/Casos de Prueba/Artefactos/Decisiones de dominio -- todo con vista Por Modulo. METODOLOGIA:
+>   Agentes/Unidades Medidas(6)/Decisiones de metodologia/TFM/Norma. IDs en memoria [[notion-workspace-nova]]. Falta solo
+>   cablear el proyector (SPEC-NOTION-PROJECTOR) que llena task_id/Staleness/M-Q1/M-Q2/rollups.
+> - **Manual de Julian v2** (D:/Agentes/Ingenas/MANUAL-onboarding-julian-contabilidad-aegis.html): 5 trampas PowerShell
+>   + receta verificada + jheredia operativo + gate marcado hecho. **Fix del cron de Codex: AUTORIZADO** (ruteado dbe7abe).
+
 - **B (TASK-9303 en Aegis) = DONE.** El re-anclaje de cadena (config-epoch para jheredia:v1) esta construido y
   gateado adversarialmente. El Analista cazo un bug CRITICO real **F-9303-01** (`validate_chain` aceptaba tamper del
   sello de frontera: sealed_segment sha256/event_count/seq_range, boundary_id, old_config_hash = el registro que
