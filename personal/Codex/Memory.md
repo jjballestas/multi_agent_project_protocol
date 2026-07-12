@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 done flip announce.
+
+## Latest Session Note
+
+- Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-done-flip.md` was processed. In Aegis, TASK-9303 moved `review_approved -> done` via runtime seq 3822-3830; claims were released and the initial malformed shell-quoted doneflip claim row was normalized before final validation. Aegis commits: `6aa6139a coord(TASK-9303): close chain reanchor done flip` and `8f933ce2 chore(TASK-9303): record done flip memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Aegis gates passed: encoding, neutrality, validator, py_compile for runtime chain modules, and drift false at seq 3830. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-doneflip-done.md`; hub commit `bdfe2db coord: announce Aegis TASK-9303 done flip`; hub gates passed with five unrelated mailbox archive warnings and drift false at seq 4580. A2-nominal 7b (`jheredia:v1` live and `jball:v1` config epoch registration) remains separate and was not executed.
+
+## Previous Session Notes
+
 Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 F-9303-01 remediation announce.
 
 ## Latest Session Note
