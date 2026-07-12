@@ -1,8 +1,12 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 done flip announce.
+Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9304 delivery announce.
 
 ## Latest Session Note
+
+- Hub GO `MSG-20260712-Arquitecto-to-Codex-GO-TASK-9304-jball-reanchor.md` was processed. In Aegis, TASK-9304 moved `ready -> in_progress -> in_review`, jball:v1 was registered in config epoch 2 at boundary `config-epoch-003809-003836-to-003837` seq 3837, and Codex claims were released through seq 3841. Aegis commits: `6809db11 feat(TASK-9304): add jball config epoch reanchor`, `45bc21c3 chore(TASK-9304): record jball reanchor memory`, `19877314 coord(TASK-9304): deliver jball reanchor review`, and `00ccb55b chore(TASK-9304): record delivery memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-9304-codex-to-arquitecto-1.md`. Aegis gates passed: chain cases 39/39 including second-epoch F-9303-01 negatives, validator OK, encoding OK, neutrality OK, py_compile OK, drift false at seq 3841. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9304-in-review-hub.md`; hub commit `45dfbad coord: announce Aegis TASK-9304 delivery`; hub gates passed: validator OK, encoding OK, neutrality OK, drift false at seq 4625.
+
+## Previous Session Notes
 
 - Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-done-flip.md` was processed. In Aegis, TASK-9303 moved `review_approved -> done` via runtime seq 3822-3830; claims were released and the initial malformed shell-quoted doneflip claim row was normalized before final validation. Aegis commits: `6aa6139a coord(TASK-9303): close chain reanchor done flip` and `8f933ce2 chore(TASK-9303): record done flip memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Aegis gates passed: encoding, neutrality, validator, py_compile for runtime chain modules, and drift false at seq 3830. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-doneflip-done.md`; hub commit `bdfe2db coord: announce Aegis TASK-9303 done flip`; hub gates passed with five unrelated mailbox archive warnings and drift false at seq 4580. A2-nominal 7b (`jheredia:v1` live and `jball:v1` config epoch registration) remains separate and was not executed.
 
