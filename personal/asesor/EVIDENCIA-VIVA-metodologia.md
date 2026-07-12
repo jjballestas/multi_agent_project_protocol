@@ -217,6 +217,23 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
 - **Caveat:** producto Aegis, paralelo, cualitativo -- pero es la evidencia mas fuerte de la tesis hasta ahora.
   Traza: TASK-1209 F4 GO, FYI chain-1002-COMPLETO (027993a).
 
+### A16. Un empleado real en su PROPIA maquina cazo un defecto de portabilidad que el gate local enmascaraba
+- **Fenomeno:** el runbook s.5.3 declara el gate e2e de 2 clones como `distributed_e2e_task_cycle.py --remote
+  <url-github>`. Ese script es en realidad un SIMULADOR LOCAL de una sola maquina: `--remote` es una ruta bare
+  LOCAL (default `D:/Agentes/Zeus/remotes/...`) y la linea 102 hardcodea `D:/Agentes/multi_agent_project_protocol/
+  secrets` (ruta del hub de John). Probado SOLO en la maquina de John (TASK-9302), pasaba verde.
+- **Como se cazo:** Julian (empleado remoto) monto su clon en su servidor Windows y corrio el comando TEXTUAL
+  del runbook -> `WinError 267` al primer intento. El defecto solo era visible ejecutando en una maquina
+  GENUINAMENTE distinta a la del autor. (Su runtime local si valido: submit_intent + validate = OK.)
+- **Por que importa:** es transferibilidad/employee-run en vivo. El primer contacto de una segunda maquina real
+  surfaceo una SOBRE-DECLARACION de tooling que el gate local (misma maquina) enmascaraba -- el mismo patron que
+  A14 (CRLF/LF: pasa en repo caliente, falla en clon limpio). La doc "sobre-declara la herramienta"; solo la
+  ejecucion en el otro entorno la falsa. Refuerza que el gate de 2 clones REAL (cross-maquina) NO es redundante
+  con el local ya corrido.
+- **Disposicion:** ruteado al Arquitecto (dueno del harness/runbook): corregir s.5.3 + parametrizar el harness
+  (`--secret-root` + remoto real) o definir el gate por ciclo core coordinado. Manual de Julian corregido para
+  no correr el script. Traza: FYI harness-no-portable (bc4927b); script lineas 17/81/102.
+
 ---
 ## Bitacora de sesiones (append)
 - **2026-07-05/06 (Asesor):** creado con A1-A6, del ciclo P4.1/P4.2/PAR-2 (dev medido baseline). Fuente:
@@ -244,3 +261,9 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   Annul_Commitment, commit 9bd3587), patron de auth real que hereda el resto del brazo gobernado. Traza: la
   gobernanza prefiere el gap declarado + fix-forward antes que alterar post-hoc lo medido. Es la misma
   disciplina de pre-registro de A5 aplicada a un gap tecnico, no solo al sorteo.
+- **2026-07-11 (Asesor):** +A16 (Julian, en su maquina real, cazo la no-portabilidad del harness/runbook s.5.3).
+  Ademas, sin nueva entrada formal: verifique INDEPENDIENTE byte a byte la base Contabilidad promovida por el DBA
+  (sello ACCOUNTING_BASE_SOLID_20260711, sha256 608b4370, 174 objetos, 0 mismatch cross-BD, rol verifier + seed);
+  asesore la decision A1-ahora+encolar-B con guardrail duro (B antes de la 1a unidad gobernada de Julian) para no
+  contaminar la atribucion employee-run; redacte el manual de onboarding + el override de firma-minima de Julian.
+  Traza: mailbox 9d10d86 / ea9f896 / 62c5af8 / bc4927b; TASK-9303 (B) en el ledger de Aegis.

@@ -11,7 +11,49 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-07 (LEER PRIMERO; supersede lo de abajo)
+## >> ESTADO ACTUAL 2026-07-11 (LEER PRIMERO; supersede 07-jul)
+**Pipeline vivo: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html` (actualizado 11-jul).**
+
+- **CONTABILIDAD: AMBOS inputs del operador RESUELTOS -> el build queda gated SOLO por Sprint 1 (post-30-jul).**
+  - **(b) BASE PROMOVIDA (DBA):** sello `ACCOUNTING_BASE_SOLID_20260711`, source_bundle_sha256
+    `608b4370d5a6adde8111f85c9de828ade4eee7999a12187509bcb80dd8b1bef5`, 51 files / 174 objetos / 0 faltantes /
+    0 mismatch cross-BD (DbsFinanciero/SANDBOX/SNJDC). Rol `accounting_sandbox_verifier` en SANDBOX (33 EXECUTE
+    + 23 SELECT + VIEW DEFINITION, guard THROW 54500 fail-closed, seed determinista ACCTVERIFY, reset
+    idempotente). VERIFICADO INDEPENDIENTE por el Asesor (artefactos + sha256 + conteos cuadran byte a byte).
+  - **(a) JULIAN onboardeado:** invitacion aceptada + pubkey `jheredia:v1` recibida/persistida por el Arquitecto.
+- **RE-GENESIS A2 BLOQUEADA (hallazgo tecnico) -> DECISION operador: A1-AHORA + ENCOLAR-B.** El procedimiento del
+  runbook (pubkey al config + regenesis.py) NO da estado valido: cambiar el config rompe el prev_hash del
+  `chain.genesis` (seq 672) y la cascada; regenesis.py no re-ancla; no hay tooling (problema de seq-2175). El
+  Arquitecto revirtio limpio (validate 0, b22e49bc, config intacto). Decision: **A1** = Julian firma interino
+  bajo identidad **Codex** via override runtime (sin tocar config); **B** = TASK-9303 en el ledger de Aegis
+  (proposed, owner Codex, spec SPEC-AEGIS-chain-reanchor-config-epoch: sello seq 672..N patron pre_t0 +
+  chain.genesis nuevo con jheredia:v1 + validador multi-epoca). **GUARDRAIL DURO:** B antes de la 1a unidad de
+  build GOBERNADA de Julian; su trabajo study-relevant nace bajo jheredia:v1 tras B. Codex parado (operador
+  reactiva). Correccion runbook s.8.4 diferida a B.
+- **JULIAN runtime local VERDE:** monto su clon en `D:/Agentes/Zeus/NOVA/NOVA-Aegis` (Windows Server, user
+  Administrador); `submit_intent --help` OK + `validate_collaboration_state.py` = "OK". Es TODO lo solitario.
+  **PENDIENTE OPERADOR (DECISION-0057):** distribuir su bundle de firmante out-of-band: SOLO
+  `codex-ed25519-private.pem` (de `D:/Agentes/protocol-secrets/`) + los 4 `secrets/eventauth-*.key` (HMAC de
+  instancia, van todos, no dan firma) + override `event-state.runtime.json` (llave minima = solo Codex, anchor
+  deshabilitado). BORRADOR del override hecho (en mi respuesta al operador; el Arquitecto lo valida). NUNCA las
+  ed25519 de analista/arquitecto (rompe maker!=checker). Rotar la llave de Codex tras B (exposicion transitoria).
+- **KIT SPEC-CONT (Orden 2, PREP escribir-no-construir): 2/8.** Indice + S1 (reportes RO) + S2 (comprobante manual,
+  escotilla de integridad + THROW 52252 preservados); base 608b4370 anclada; cobertura 33/33 confirmada. Faltan
+  S3-S6C (el Arquitecto continua por slice). Colocacion gobernada: a su criterio de frontera.
+- **MANUAL de onboarding de Julian creado** (`D:/Agentes/Ingenas/MANUAL-onboarding-julian-contabilidad-aegis.html`,
+  borrador del Asesor): novato, Windows Server, maker-only (Arquitecto+Analista centrales), SIN Docker (SQL Server
+  nativo = prod-like), backup de `DbsFinanciero_SANDBOX`. Colocacion gobernada en Aegis: pendiente del Arquitecto.
+- **DEFECTO CAZADO (EVIDENCIA A16):** el runbook s.5.3 sobre-declara `distributed_e2e_task_cycle.py --remote
+  <url-github>` como gate real; es un SIMULADOR LOCAL de una maquina (--remote = ruta bare local; linea 102
+  hardcodea el secrets del hub de John). Julian lo topo en su maquina real (WinError 267). Ruteado al Arquitecto
+  (su carril: corregir runbook + parametrizar harness o gate por ciclo core coordinado). Manual de Julian corregido.
+- **PENDIENTES OPERADOR:** (1) distribuir bundle de Julian (arriba); (2) DBA generar el `.bak` (NO existe aun --
+  solo el sello/manifest; comando en Anexo A.1 del manual); (3) reactivar Codex para B; (4) validar el override
+  con el Arquitecto. Diferidos: .NET 10 SDK winget id, metodo de acceso GitHub de Julian, alcance del backup.
+- **Mailbox ruteados hoy (Operador->Arquitecto):** GO A2+kit (9d10d86), FYI base promovida (ea9f896), decision
+  A1+B (62c5af8), FYI harness no-portable (bc4927b). **Monitor: re-armar.**
+
+## >> ESTADO ACTUAL 2026-07-07 (historico; ver bloque 11-jul arriba)
 **Pipeline vivo VISUAL: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html` (CARGARLO al arrancar; es el tablero).**
 
 - **ESTUDIO MEDIDO (baseline): CONGELADO y verde.** 6/6 unidades done (GOAL-P1, P2.1, P2.2, P4.1, PAR-1=P4.2,
