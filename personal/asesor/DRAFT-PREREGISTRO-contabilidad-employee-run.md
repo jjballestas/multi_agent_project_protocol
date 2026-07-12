@@ -39,8 +39,8 @@ efecto. Razon declarada por adelantado (misma disciplina que Q4-subpotenciado de
 - **FUERA:** RO (R1 reportes) y frontera del modulo fuente (R8 causacion ingresos/CxC, ademas CONTEMPLADO, no
   construible). R0 (maestros/parametrizacion) queda FUERA de la muestra por baja independencia (lo consume todo
   el modulo) aunque sea mutador.
-- **MUESTRA SELECCIONADA (N=4), fijada por el OPERADOR el 2026-07-12 ANTES de construir; criterio = mezcla de
-  dificultad + independencia alta/media (no bloquea el resto del modulo):**
+- **MUESTRA SELECCIONADA (N=6), fijada por el OPERADOR el 2026-07-12 ANTES de construir; criterio = mezcla de
+  dificultad (facil a alta) + independencia alta/media (no bloquea el resto del modulo):**
   1. **R2-c** -- Reverso de comprobante manual (`Reverse_Voucher` / `Voucher_Relation` / `vw_Voucher_Adjustment_Map`;
      crea `manual_accounting_reversal`, invierte D/C, relacion `reverses`; bloquea reverso de source!=accounting /
      no-manual / is_system_generated). Dificultad M-A.
@@ -50,12 +50,19 @@ efecto. Razon declarada por adelantado (misma disciplina que Q4-subpotenciado de
      MIGRADO, staging + validacion tipada por fila). Dificultad M-A.
   4. **R5-c** -- Postear ajuste CHIP post-P05 (`Post_Chip_Adjustment_Voucher`, tipo `chip_adjustment`, cuadre D=C,
      fecha > P05). Dificultad Alta.
-- **RESERVA:** estas 4 quedan "no construir hasta medicion"; el resto del modulo (R0, R1, R2-a/b/d, R3-a/c,
-  R4-a/c, R5-a/b, R6, R7) avanza a velocidad de producto. La seleccion NO se re-elige mirando resultados; se SELLA
-  como anexo (fecha + sha256).
-- **Poder:** N=4 = small-n confirmatorio de direccion/patron (s.2), no de magnitud. Nota: N=4 esta en el extremo
-  bajo; una 5a unidad rica en defectos (p.ej. R2-b publicar, THROW 52200-52252) reforzaria H1 sin cambiar el
-  diseno -- opcional, decision del operador.
+  5. **R0-fuentes** -- CRUD de fuentes contables (`Accounting_Source` / `Accounting_Source_Numbering` / vistas /
+     `Get_Next_Accounting_Source_Number`; crear/mantener/inactivar fuente + numeracion por vigencia; negativos:
+     fuente duplicada/inactiva, numeracion faltante, concurrencia de consecutivos). Dificultad BAJA (maestro/CRUD)
+     -- aporta el extremo FACIL del rango.
+  6. **R4-c** -- Aprobar borrador de saldos iniciales (`Approve_Opening_Balance_Draft` -> materializa
+     `Account_Opening_Balance` por cuenta-tercero-vigencia; bloquea re-aprobaciones/duplicados). Dificultad M.
+- **RESERVA:** estas 6 quedan "no construir hasta medicion"; el resto del modulo (R0 salvo fuentes, R1, R2-a/b/d,
+  R3-a/c, R4-a, R5-a/b, R6, R7) avanza a velocidad de producto. La fuente-CRUD reserva SOLO la superficie admin de
+  crear fuentes; el resto del modulo usa las fuentes ya migradas + `Get_Next_...` (proc existente), asi que no se
+  bloquea. La seleccion NO se re-elige mirando resultados; se SELLA como anexo (fecha + sha256).
+- **Cobertura:** 5 slices (R0/R2/R3/R4x2/R5); rango de dificultad FACIL->ALTA cubierto; R6/R7 fuera por baja
+  independencia (deliberado). Los 2 R4 (importar + aprobar) dan dos operaciones de un mismo slice (variacion util).
+- **Poder:** N=6 = small-n confirmatorio de direccion/patron (s.2), no de magnitud.
 
 ## 4. Metricas Q1-Q5 y direccion esperada (definicion IDENTICA a Nova-Budget)
 Para que la comparacion de transferibilidad sea valida, Q1-Q5 usan la MISMA definicion del sello Nova-Budget
