@@ -3,7 +3,7 @@ message_id: MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9304-F9304-01-rejuic
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-12

@@ -3,7 +3,7 @@ message_id: MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9304-remediar-F-9304-01
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-12
