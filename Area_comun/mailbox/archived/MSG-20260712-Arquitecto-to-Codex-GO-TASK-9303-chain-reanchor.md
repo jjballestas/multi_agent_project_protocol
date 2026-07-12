@@ -3,7 +3,7 @@ message_id: MSG-20260712-Arquitecto-to-Codex-GO-TASK-9303-chain-reanchor
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-12

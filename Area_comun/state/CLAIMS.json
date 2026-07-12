@@ -165,6 +165,150 @@
             "updated_at": "2026-07-12T15:21:39Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-c1",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-F9303-01-rejuicio-OK.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-F9303-01-rejuicio-OK.md",
+                "Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-chain-reanchor-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Analista-to-Arquitecto-REVIEW-TASK-9303-chain-reanchor-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260712-Analista-to-Arquitecto-REVIEW-enfoque-notion-QA.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Analista-to-Arquitecto-REVIEW-enfoque-notion-QA.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-c1"
+            ],
+            "started_at": "2026-07-12T17:34:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:34:17Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-c2",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-FYI-trailer-blankline-cc13651.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Analista-FYI-trailer-blankline-cc13651.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REQUEST-enfoque-notion.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Analista-REQUEST-enfoque-notion.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-F9303-01-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-F9303-01-rejuicio.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-c2"
+            ],
+            "started_at": "2026-07-12T17:37:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:37:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-c3",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-chain-reanchor.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Analista-REVIEW-TASK-9303-chain-reanchor.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-done-flip.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-done-flip.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-remediar-F-9303-01.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-remediar-F-9303-01.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-c3"
+            ],
+            "started_at": "2026-07-12T17:40:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:40:12Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-d4",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-rescope-crit7-resume.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-rescope-crit7-resume.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Codex-GO-TASK-9303-chain-reanchor.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Codex-GO-TASK-9303-chain-reanchor.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-B-blocker-convergencia-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-B-blocker-convergencia-in-review.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-d4"
+            ],
+            "started_at": "2026-07-12T17:44:47Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:44:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-d5",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-consenso-notion-3firmantes.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-consenso-notion-3firmantes.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-enfoque-workspace-notion.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-enfoque-workspace-notion.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-jball-v1-en-config-epoch-B.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-jball-v1-en-config-epoch-B.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-d5"
+            ],
+            "started_at": "2026-07-12T17:47:41Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:47:41Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-e6",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-override-corregido-runbook-s842.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-override-corregido-runbook-s842.md",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-F9303-01-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Codex-to-Arquitecto-TASK-9303-F9303-01-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Codex-to-Arquitecto-TASK-9303-blocked.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-e6"
+            ],
+            "started_at": "2026-07-12T17:50:58Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:50:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-e7",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-doneflip-done.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Codex-to-Arquitecto-TASK-9303-doneflip-done.md",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-rescope-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Codex-to-Arquitecto-TASK-9303-rescope-in-review.md",
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-ACTION-B-blocker-jheredia-e2e-es-de-Julian.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-ACTION-B-blocker-jheredia-e2e-es-de-Julian.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-e7"
+            ],
+            "started_at": "2026-07-12T17:53:56Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:53:56Z"
+        },
+        {
+            "claim_id": "CLAIM-20260712-Arquitecto-hyg-e8",
+            "expires_at": "2026-07-12T23:59:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-ACTION-GO-spec-notion-projector.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-ACTION-GO-spec-notion-projector.md",
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-ACTION-enfoque-workspace-notion-control-proyecto.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-ACTION-enfoque-workspace-notion-control-proyecto.md",
+                "Area_comun/mailbox/open/MSG-20260712-Operador-to-Arquitecto-FYI-jball-v1-pubkey-para-A2-nominal.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Operador-to-Arquitecto-FYI-jball-v1-pubkey-para-A2-nominal.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Arquitecto-hyg-e8"
+            ],
+            "started_at": "2026-07-12T17:56:34Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260712",
+            "updated_at": "2026-07-12T17:56:34Z"
+        },
+        {
             "claim_id": "CLAIM-20260712-Codex-hub-TASK9303-F9303-01-in-review-msg",
             "expires_at": "2026-07-13T23:59:59Z",
             "notes": "Announce Aegis TASK-9303 F-9303-01 remediation redelivery.",

@@ -3,7 +3,7 @@ message_id: MSG-20260712-Arquitecto-to-Analista-REQUEST-enfoque-notion
 from: Arquitecto
 to: Analista
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-12

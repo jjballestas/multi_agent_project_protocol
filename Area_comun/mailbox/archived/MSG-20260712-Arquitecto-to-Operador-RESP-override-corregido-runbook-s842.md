@@ -3,7 +3,7 @@ message_id: MSG-20260712-Arquitecto-to-Operador-RESP-override-corregido-runbook-
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-12
 context_refs:

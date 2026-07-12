@@ -3,7 +3,7 @@ message_id: MSG-20260712-Operador-to-Arquitecto-FYI-jball-v1-pubkey-para-A2-nomi
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-12

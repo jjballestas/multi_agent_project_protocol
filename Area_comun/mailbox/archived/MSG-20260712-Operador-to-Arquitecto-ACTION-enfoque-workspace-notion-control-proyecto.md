@@ -3,7 +3,7 @@ message_id: MSG-20260712-Operador-to-Arquitecto-ACTION-enfoque-workspace-notion-
 from: Operador
 to: Arquitecto
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-12
