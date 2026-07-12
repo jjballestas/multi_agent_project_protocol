@@ -11,7 +11,53 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-12 (LEER PRIMERO; supersede 11-jul)
+## >> ESTADO ACTUAL 2026-07-12 (NOCHE) (LEER PRIMERO; supersede 12-jul-manana)
+**Foco actual: (A) recta de medicion de Contabilidad + (B) construccion del workspace NOTION para control del proyecto.**
+
+- **B (TASK-9303 en Aegis) = DONE.** El re-anclaje de cadena (config-epoch para jheredia:v1) esta construido y
+  gateado adversarialmente. El Analista cazo un bug CRITICO real **F-9303-01** (`validate_chain` aceptaba tamper del
+  sello de frontera: sealed_segment sha256/event_count/seq_range, boundary_id, old_config_hash = el registro que
+  declara la historia sellada era modificable sin detectarse). Codex remedio (validate_chain falla cerrado + recomputa
+  el sello contra las lineas reales 672..N; chain_cases 26/26). B done-flip. GUARDRAIL CUMPLIDO: NUNCA se provisiono
+  la privada de jheredia a la maquina de build; hub intacto (2E35F26E/1.14.0).
+- **A2-NOMINAL de B = SEPARADO y PENDIENTE (sin mas codigo).** El Arquitecto registra jheredia:v1 + jball:v1 en el
+  config-epoch (una re-genesis; ambas pubkeys ya en su mano, `personal/Arquitecto/A2-nominal-pubkeys.md`) + Julian
+  corre la e2e 7b jheredia-live + el gate 2-clones NOMINAL en su maquina. **PENDIENTE OPERADOR: decidir CUANDO se
+  ejecuta** (pasos de Julian: pull nuevo config-epoch -> override Codex->jheredia -> validate -> gate; ver detalle en
+  bloque manana). Al cerrar A2-nominal -> jheredia:v1 operativo -> las 6 unidades medidas se pueden construir bajo medicion.
+- **PRE-REGISTRO (opcion A) = REDACTADO COMPLETO** (`personal/asesor/DRAFT-PREREGISTRO-contabilidad-employee-run.md`).
+  Debate resuelto: (1) **TFM = SI** (operador quiere las mediciones). (2) **Plan de medicion DESACOPLADO**: el producto
+  NOVA NO se congela; se RESERVA una muestra pequena de unidades de Julian y se mide temprano (frontload) -- el enemigo
+  no es la fecha 30-jul, es el DRENAJE (no se mide retroactivo; reservar unas pocas). (3) **Muestra N=6 FIJADA** (s.3):
+  R2-c/R3-b/R4-b/R5-c/R0-fuentes/R4-c (mutadoras de Julian, mezcla dificultad facil->alta). (4) **s.4 mapeo HONESTO**:
+  M-Q2 (defectos, VERBATIM del sello Nova-Budget) + M-Q1 (costo DESCRIPTIVO no marginal) APLICAN; **Q3/Q4 = N/A** (Q4
+  ligero-vs-completo y Q3 pares PAR-D son contrastes INTERNOS que Contabilidad NO tiene); M-ATRIB/M-MANUAL propias.
+  SELLA tras A2-nominal (jheredia operativo) + instrumentacion F3.3 cableada. CORRECCION del operador confirmada en el
+  sello: N=500 auto-dogfood = **Zeus-Protocol** (NO Nova-Budget). Escalera de transferibilidad: Zeus-Protocol(N=500 auto)
+  -> Nova-Budget(dominio real, equipo) -> Contabilidad-Julian(dominio+empleado reales).
+- **jball:v1 (identidad del operador) DADA + pubkey ENVIADA:** `pSGHuZPbQQF4aJn4dBhyRSiCUn1DKrMwhAUjjLVyWd0=` (ed25519,
+  capability implementer). El Arquitecto la tiene para el A2-nominal. Razon: John dirige agentes + revisa + corrige a
+  mano la MAYORIA; su trabajo se firma como jball, no Codex. maker!=checker (sus unidades las gatea el Analista).
+- **WORKSPACE NOTION = CONSTRUIDO (andamiaje + primeras DBs).** El operador quiere Notion para control (planeacion/
+  visibilidad HUMANA: "que me toca" + "como avanza"). Consenso de los 3 firmantes: **Notion = read-model AUDITADO del
+  ledger #4, NUNCA fuente**; sync una-via ledger->Notion via proyector; campos de gobernanza (seq/hash/actor/commit/
+  staleness); **SPEC-NOTION-PROJECTOR ESCRITA** por el Arquitecto (`Area_comun/specs/SPEC-NOTION-PROJECTOR.md`, con los
+  5 tests + 2-workspaces + dimension estudio). El proyector se cablea CUANDO el workspace este construido.
+  **IDs de Notion (workspace del operador, john.ballestas@gmail.com):** ver memoria `notion-workspace-nova.md`.
+  Construido hoy: espacios **NOVA** + **METODOLOGIA** (paginas raiz); DBs en NOVA: **Modulos**(8), **Opciones/Casos de
+  Uso**(25 = R0-R8 Contabilidad, con estado de migracion del DBA + tipo objeto + relaciones a Modulo y Tareas),
+  **Tareas**(6 reservadas sembradas; kanban "Mis tareas" + "Reservadas para medicion" + "Por modulo"). Jerarquia
+  Modulos<-Opciones<-Tareas relacionada. Insight de diseno: el Estado de tarea cruza 2 zonas (Planeacion nativa Notion
+  Backlog..Listo <-submit_intent firmado-> Ejecucion espejo del ledger En-desarrollo..Hecho).
+- **kit SPEC-CONT: 6/8** (S1-S6A; el Arquitecto sigue con S6B cierre anual + S6C frontera).
+- **PENDIENTE OPERADOR (4):** (1) decidir CUANDO el A2-nominal de B; (2) autorizar FIX DURABLE del prompt del cron de
+  Codex (sus announces del hub sobre tareas de Aegis salen sin `Task-Id: none` -> gate rojo, grandfather manual 3x hoy);
+  (3) invitar a Julian a Notion (para "Mis tareas = Yo" con persona) o usar filtro por `Ejecutor`; (4) seguir el build
+  de Notion (siguiente DB sugerida: Specs SDD, o poblar METODOLOGIA con Unidades Medidas + Agentes).
+- **Yo (Asesor) tengo el conector MCP de Notion vivo** (puedo search/fetch/create/create-database/create-view). Retomo
+  el build de Notion directamente. Monitor: re-armar.
+
+## >> ESTADO ACTUAL 2026-07-12 (MANANA) (historico; ver bloque NOCHE arriba)
 **Pipeline vivo: `personal/asesor/PIPELINE-cierre-baseline-sprint1.html`. Onboarding de Julian casi cerrado; el foco pasa a la RECTA DE MEDICION de Contabilidad (pre-registro + jball:v1 + gate nominal tras B).**
 
 - **ONBOARDING DE JULIAN -- casi cerrado, todo lo del operador HECHO:**
