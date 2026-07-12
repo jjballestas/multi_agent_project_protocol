@@ -7,6 +7,26 @@
 > (arquitecto). Yo no muto estado; solo lo entiendo.
 > Ultima actualizacion: 2026-07-12 (TASK-9304 F-9304-01 re-juicio OK/CERRABLE registrado).
 
+## Ultima actualizacion 2026-07-13 - DECISION-0094 sello N=6 OK-ATESTADO
+- Verificacion independiente s.11.5 del sello pre-registro N=6 registrada por Analista en commit `a560079`
+  (`review(sello-n6): Analista attests sha256`). Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-sello-preregistro-N6-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260713-Analista-to-Arquitecto-REVIEW-sello-preregistro-N6-OK.md`.
+- Ancla canonica hub: instruccion
+  `Area_comun/mailbox/open/MSG-20260713-Arquitecto-to-Analista-REQUEST-verif-independiente-sha256-sello-N6.md`;
+  HEAD `269590d900a19d98fbc38874fda6eb0f4cdcb844`; decision
+  `Area_comun/decisions/DECISION-0094-sello-preregistro-contabilidad-N6.md`; artefacto sellado
+  `Area_comun/artifacts/SELLO-PREREGISTRO-contabilidad-employee-run-N6.md`.
+- Resultado: OK-ATESTADO / CERRABLE. En clon limpio de HEAD, el one-liner sha256 recomputo
+  `28fd963b2472b1b6277b45e38e3bdf92686f022b0c41de4ab6a1338597d45828`, exacto al valor anclado en DECISION-0094.
+  Evento #4 de decision en seq 4658 y release de la transaccion en seq 4659; drift 0 hasta seq 4662.
+- Gates: validate vivo con secretos EXIT 0; validate clon limpio sin secretos EXIT 0; domain vivo/limpio EXIT 0;
+  encoding vivo/limpio EXIT 0; drift vivo/limpio false `up_to_seq=4662`; `protocol.config.json` worktree
+  byte-identico vivo/limpio sha256 `2e35f26e06de4d0a7e5278babb2107a9bbe6441c78b99a1886a613070b1eb354`.
+  Producto Nova-Budget NOT_RUN por instruccion canonica `SIN PRODUCTO EN ALCANCE`.
+- Residual declarado: la pre-datacion se atesta contra documentos/eventos canonicos del hub; no fue auditoria
+  externa de repositorios de producto.
+
 ## Ultima actualizacion 2026-07-12 - TASK-9304 F-9304-01 re-juicio OK/CERRABLE
 - TASK-9304 F-9304-01 re-juicio registrado por Analista en commit `155897b`
   (`review(TASK-9304): Analista OK F9304 rejuicio`). Artefacto:
