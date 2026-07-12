@@ -179,6 +179,20 @@
             "updated_at": "2026-07-12T15:57:08Z"
         },
         {
+            "claim_id": "CLAIM-20260712-Codex-hub-TASK9303-rescope-in-review-msg",
+            "expires_at": "2026-07-13T23:59:59Z",
+            "notes": "Announce Aegis TASK-9303 crit7 rescope delivered to in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260712-Codex-hub-TASK9303-rescope-in-review-msg",
+                "Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-rescope-in-review.md"
+            ],
+            "started_at": "2026-07-12T16:30:09Z",
+            "status": "released",
+            "task_id": "OPS-HUB-TASK9303-RESCOPE-IN-REVIEW-ANNOUNCE",
+            "updated_at": "2026-07-12T16:30:09Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
