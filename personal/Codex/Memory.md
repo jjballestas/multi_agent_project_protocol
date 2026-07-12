@@ -1,5 +1,13 @@
 ﻿# Codex Memory
 
+Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 crit7 rescope delivery announce.
+
+## Latest Session Note
+
+- Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9303-rescope-crit7-resume.md` was processed. In Aegis, TASK-9303 was resumed from `blocked`, crit.7 was split into 7a/7b without provisioning `jheredia:v1` private key on the build machine, and TASK-9303 was delivered to `in_review` at runtime seq 3813-3814 with claims released. Aegis commits: `b48019c2 coord(TASK-9303): deliver crit7 rescope` and `95717820 chore(TASK-9303): record crit7 rescope memory`. Handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-9303-codex-to-arquitecto-2.md`. Aegis gates passed: chain cases 14/14 including throwaway signer positive/negative, py_compile, encoding, neutrality, validator, and drift false at seq 3814. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9303-rescope-in-review.md`; hub commit `16f3795 coord: announce Aegis TASK-9303 rescope`; hub gates passed with four unrelated mailbox archive warnings and drift false at seq 4576. `7b` jheredia-live and `jball:v1` remain A2-nominal/out-of-band follow-ups, not blockers for B.
+
+## Previous Session Notes
+
 Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9303 blocker announce.
 
 ## Latest Session Note
