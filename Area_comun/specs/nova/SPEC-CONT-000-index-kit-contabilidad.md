@@ -61,7 +61,7 @@ consumen internamente los report procs ya concedidos). Reportado al operador.
 | S1 | SPEC-CONT-S1 | Reportes y consultas RO | 11 `Get_*_Report` + `Get_Bank_Retention_Crossing_Report` | 52700-707, 52800-810, 52900-908, 53000-005, 53100-110, 53200-206, 53300-306, 53400-406, 53500-506, 53600-607, 53700-708; 51000-004 (modelado) | reports/025-035, reports/020 | ESCRITA |
 | S2 | SPEC-CONT-S2 | Comprobante manual + correcciones | `Post_Voucher`/`Post_Voucher_Draft` (12 triggers), `Reverse_Voucher`, `Get_Next_Accounting_Source_Number` | Post_Voucher 52230-247,52252; Draft 52250-251; trg_validate 52200-204; Reverse 52600-607; terceros 52300-321; fuente 52100-102 | 015,024,010,021 | ESCRITA |
 | S3 | SPEC-CONT-S3 | Cierre/apertura mensual (P03-P07) | `Validate/Close/Open_Accounting_Period`, `trg_voucher__date_controls` | 53800-804, 53820-826, 53840-844, 53860-867; date controls 52510-514 | 025,023 | ESCRITA |
-| S4 | SPEC-CONT-S4 | Saldos iniciales de vigencia | `Create/Validate/Approve/Import_Opening_Balance_Draft`, `Convert_Auxiliary_To_Major` | 52400-452 (52420-21, 52430-37, 52440-43, 52450-52); 52300-313 | 022,021 | PEND |
+| S4 | SPEC-CONT-S4 | Saldos iniciales de vigencia | `Create/Validate/Approve/Import_Opening_Balance_Draft`, `Convert_Auxiliary_To_Major` | 52420-21, 52430-37, 52440-43, 52450-52; conv 52308-313; terceros 52300-321 | 022,021 | ESCRITA |
 | S5 | SPEC-CONT-S5 | CHIP contingencia | `Create_Chip_Report_Balance_Batch`, `Get_Chip_Reconciliation_Difference`, `Post_Chip_Adjustment_Voucher` | 53900-910, 53920-923, 53940-953 | 026 | PEND |
 | S6A | SPEC-CONT-S6A | Informe trimestral CGN/CHIP | `Import_Cgn_Chip_Valid_Account_Catalog`, `Create/Get/Confirm_Cgn_Chip_Quarterly_Report` | 54400-413, 54420-441, 54450-451, 54452-457 (P05) | 027 | PEND |
 | S6B | SPEC-CONT-S6B | Cierre anual | `Close_Annual_Accounting_Period` (annual_close via Post_Voucher + saldos iniciales sig. vigencia + P07) | 54460-487 (54480-487 reserva legal privada opcional) | 028 | PEND |
@@ -118,6 +118,7 @@ NO como bypass, NO reabre el sello ni el baseline.
 
 ## Estado del kit
 - ESCRITAS: **S1** (reportes RO), **S2** (comprobante manual, integrity escotilla + 52252), **S3** (cierre/apertura
-  mensual P03-P07, efecto 52512 + invariante escotilla annual_close). PEND: S4, S5, S6A, S6B, S6C.
+  mensual P03-P07, efecto 52512 + invariante escotilla annual_close), **S4** (saldos iniciales de vigencia:
+  draft/validate/import/approve + convert auxiliar-a-mayor). PEND: S5, S6A, S6B, S6C.
 - Se entregan **por slice** (DIRECTIVA operador). Ninguna registrada como tarea de build (PREP). Cuando abra el
   build gobernado, cada SPEC-CONT-Sx se registra como tarea de superficie en el ledger de la instancia (no el hub).
