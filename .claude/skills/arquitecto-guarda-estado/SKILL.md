@@ -50,7 +50,7 @@ que exijan coordinacion. El checkpoint es del agente, no es gobernanza. La memor
   ROL / COLD-START / FONDO INTOCABLE / QUE ESTOY HACIENDO / COMO LO HAGO (loop) / LECCIONES CLAVE / CANAL DE
   ORDENES + PENDIENTES / SIGUIENTE ACCION.
 - **El COLD-START DEBE incluir, como PASO OBLIGATORIO NO-SALTABLE, armar los 3 watchdogs/monitores**
-  (entregas con self-filter que ignora `Co-Authored-By: Claude (Opus|Fable)` -- AMBOS modelos; exec-health;
+  (entregas con self-filter que ignora `Co-Authored-By: Claude (Opus|Fable|Sonnet)` -- LOS 3 modelos; exec-health;
   higiene). Es directiva permanente del operador: "asegurate que se carguen los watchdogs en la proxima sesion".
   Redactalo con la frase "si no los armas, no has completado el arranque".
 - Captura el COMO (no solo el QUE): gate-por-exit-code antes de commit, ASCII puro en Area_comun, ventana
@@ -86,7 +86,7 @@ operador(John)=aprueba. actor_id ledger="Arquitecto". DECISION-0038 narracion mi
 LEE Y EJECUTA el cold-start completo de personal/Arquitecto/SESSION_START_PROMPT_<YYYYMMDD>.md:
 (0) lease instancia-unica; (1) memory/MEMORY.md + memory/project-state-snapshot.md (bloque TOPE);
 (2) skill arquitecto-ledger-ops antes del ledger; (3) git fetch + merge --ff-only origin/main;
-(4) ARMA LOS 3 WATCHDOGS OBLIGATORIOS (entregas self-filter Opus|Fable + exec-health + higiene) -- si no los
+(4) ARMA LOS 3 WATCHDOGS OBLIGATORIOS (entregas self-filter Opus|Fable|Sonnet + exec-health + higiene) -- si no los
 armas, no completaste el arranque.
 FONDO INTOCABLE: dataset N=500, protocol.config.json byte-identico 2E35F26E, epoch 1.14.0.
 Confirma que leiste el estado y sigue el LOOP.
