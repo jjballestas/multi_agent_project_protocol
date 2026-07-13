@@ -21,6 +21,16 @@ Este skill es el **checklist activo** de esas reglas. Si algo entra en conflicto
 Antes de la primera escritura: lee `personal/Arquitecto/STARTUP_PROMPT.md` + `MEMORY.md`, mira
 `git log --oneline -8` + `git status`, y `CLAIMS.json`. Escritor unico VIVO: **editar
 `Area_comun/state/*.json` a mano = drift HARD-FAIL**. TODA transicion via `submit_intent --actor-id Arquitecto`.
+- **CLEAN-CLONE VALIDATE si `git status` muestra mods SIN COMMITEAR en rutas gobernadas (mailbox/state):** el
+  `validate` LOCAL corre sobre el working tree (que YA tiene el fix) -> verde, pero HEAD puede estar ROJO para un
+  peer que clona -> su gate ABORTA y bloquea (silent). NO descartes esas mods como "benignas, no mias, las dejo"
+  sin verificar. Corre un clean-clone validate a ruta CORTA (`git clone -c core.longpaths=true <repo> /d/ccv;
+  cd /d/ccv; git checkout origin/main; python scripts/validate_collaboration_state.py`) -- NO al scratchpad largo
+  (MAX_PATH no materializa MSG-*.md de nombre largo -> FileNotFound FALSO, no un fallo real). Si HEAD sale rojo por
+  un fix correcto sin commitear (p.ej. `status: open` en un archivo que vive en `answered/` -> "Mailbox status/
+  folder mismatch"), COMMITEA el fix con pathspec explicito (aunque la mod sea de otra sesion); deja NO-commiteado
+  solo lo que de verdad no va al repo (`.claude/settings.json` con path de sesion stale). Caso real 13-jul: HEAD
+  rojo TODA la sesion por un status open->answered sin commitear -> bloqueo el gate del Analista 15min.
 
 ## 1. Mensajes de mailbox (GO / REVIEW / cualquier MSG-*.md)
 ANTES de escribir el archivo en `Area_comun/mailbox/open/`:

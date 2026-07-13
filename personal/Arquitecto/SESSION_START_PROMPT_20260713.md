@@ -61,13 +61,14 @@ La sesion anterior COMPLETO el onboarding nominal de Julian como firmante ed2551
   promueve a ready+GO cuando abra la ventana. Workspace Notion projector-ready (IDs de bases en el .md de TASK-9310).
 - **Codex cron prompt** corregido (announces del hub sobre tareas de Aegis emiten Task-Id: none + Ops-Reason).
 
-## SIGUIENTE ACCION AL RETOMAR
-1. Higiene minima: archivar el `CONFIRMA-gate-verde` consumido (open/=2 -> queda 1: mi RESP-cross-atestacion, rr
-   operador). No urgente.
-2. **Espera del operador:** confirmar jheredia:v1 operativo + coordinar el **sello del pre-registro N=6** y el
-   arranque de las **6 unidades medidas** de Contabilidad (post-30-jul / apertura del build; jheredia empleado +
-   jball operador firman; instrumentacion F3.3). NO arranca sin GO.
-3. Cola proactiva (sin GO, si el operador pide avanzar): SPEC-CONT S6B (leer SDD) / S6C.
+## SIGUIENTE ACCION AL RETOMAR (actualizado cierre ~01:58, 3 GOs + s.11.5 CERRADOS)
+1. TODO cerrado (kit 8/8, sello N=6 + s.11.5, TASK-9310 registrada, A2-nominal). **NO hay cola proactiva ni tarea
+   gobernada en vuelo.** Higiene: open/ solo tiene RESP-outgoing mios (bajo prioridad; ver CANAL).
+2. **CRONS DE PEERS APAGADOS** (operador ordeno "mata los crons de analista y de codex" al cierre; Codex+Analista
+   stand-down, locks limpios). El operador los REACTIVA cuando abra el build. NO rutees a un peer sin verificar
+   liveness + relanzar primero (regla de oro, arquitecto-cron-lifecycle s.1d).
+3. **Espera del operador / build-open post-30-jul:** promover TASK-9310 (proyector) a ready+GO + arrancar las 6
+   unidades medidas de Contabilidad (jheredia:v1 + jball:v1 firman; instrumentacion F3.3 cableada). NO arranca sin GO.
 
 ## COMO LO HAGO (loop semi-auto)
 - **GATES por EXIT-CODE antes de commit:** validate + scan_encoding (+ neutralidad) = 0. Push separado. Stage
@@ -103,12 +104,22 @@ La sesion anterior COMPLETO el onboarding nominal de Julian como firmante ed2551
 - **El operador rutea por el Asesor** (a veces via `personal/asesor/*.md` que te apunta con "tienes mensaje");
   self-filtrado en los watchdogs, NO dual-Arquitecto. El Asesor puede preparar drafts que el Arquitecto RATIFICA/
   CORRIGE (verifica contra el codigo, no asumas).
+- **CLEAN-CLONE VALIDATE AL COLD-START (mi miss del 13-jul, [[lesson-clean-clone-validate-at-coldstart]]):** si al
+  arrancar `git status` muestra mods SIN COMMITEAR en rutas gobernadas (mailbox/state), NO las descartes como
+  "benignas" sin verificar HEAD en CLON LIMPIO. El validate LOCAL corre sobre el tree (que ya tiene el fix) -> verde,
+  pero HEAD puede estar ROJO para un peer que clona. Caso: `answered/MSG-...RATIFICA` con `status: open` sin
+  commitear el fix a `answered` -> HEAD rojo TODA la sesion, bloqueo el gate del Analista 15min. FIX: clean-clone
+  valida a ruta CORTA (`/d/ccv`, NO el scratchpad largo -> MAX_PATH da FileNotFound falso) y commitea el fix con
+  pathspec (aunque la mod sea de otra sesion); deja NO-commiteado solo lo que de verdad no va al repo (settings.json
+  con path de sesion stale).
 
 ## CANAL DE ORDENES + PENDIENTES
 - Ordenes = MSG firmado Operador (via Asesor) o `personal/asesor/*.md`; ejecutar DIRECTO. Reportar por MAILBOX + chat
   (hora local). Arquitecto NO-IDLE pero SIN cola gobernada urgente ahora (A2-nominal cerrado).
-- **open/ = 2:** vivo = `RESP-cross-atestacion-anclada-jheredia-operativo` (rr operador); consumido = `CONFIRMA-gate-
-  nominal-verde` (archivar).
+- **open/ = 4, todos RESP-outgoing mios (baja prioridad, nada entrante pendiente):** `RESP-cross-atestacion...`
+  (rr operador, antiguo), `RESP-3GOs-sello-N6-specs-proyector` (FYI operador), `RESP-proyector-notion-registrado-
+  TASK-9310` (del operador), `RESP-OK-ATESTADO-consumido-s115-cerrada` (FYI Analista, terminal). Archivables en la
+  proxima ventana; ninguno bloquea.
 - PENDIENTES (TODO espera al operador / build-open post-30-jul; NADA proactivo abierto): (1) promover TASK-9310
   (proyector Notion) a ready+GO cuando abra la ventana; (2) las 6 unidades medidas de Contabilidad (pre-registro N=6
   ya sellado) con jheredia:v1 + jball:v1 firmando + instrumentacion F3.3; (3) SPEC-NOTION-PROJECTOR se cabla cuando
