@@ -108,6 +108,8 @@ def load_state(root: Path) -> dict[str, Any]:
 def normalize_agent(agent: dict[str, Any]) -> dict[str, Any]:
     return {
         "id": str(agent.get("id") or ""),
+        "role": agent.get("role"),
+        "tier": agent.get("tier"),
         "capabilities": sorted({str(cap) for cap in agent.get("capabilities") or [] if str(cap)}),
         "adapter": agent.get("adapter", "llm"),
         "enabled": agent.get("enabled") is not False,
