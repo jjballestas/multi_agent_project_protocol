@@ -18,10 +18,12 @@ diseno/dominio o cuando el CLASIFICADOR bloquee (NUNCA rodees el bloqueo: paras 
    otra sesion viva: NO coordines, consulta. Vencido/ausente: escribe TU lease (Write tool; si "not read", Read
    primero). Borralo al cerrar.
 1. `memory/MEMORY.md` + `memory/project-state-snapshot.md` (bloque TOPE = **ACCION INMEDIATA AL RETOMAR**).
-2. Dispara skill **arquitecto-ledger-ops** ANTES de tocar el ledger (hub o Aegis).
-3. `git fetch` + `git merge --ff-only origin/main` en HUB **y en Aegis** (`D:/Agentes/Zeus/NOVA/Aegis`). Arbol
-   COMPARTIDO: el operador rutea por el Asesor (commits `jjballestas`, a veces + `Co-Authored-By Claude`); NO es
-   dual-Arquitecto. Tambien commitea en el arbol la sesion Asesor.
+2. Dispara skill **arquitecto-ledger-ops** ANTES de tocar el ledger del **HUB** (yo NO escribo el ledger de Aegis
+   -- lo gobierna su propio Arquitecto; ver FRONTERA en COMO LO HAGO).
+3. `git fetch` + `git merge --ff-only origin/main` en HUB **y en Aegis** (`D:/Agentes/Zeus/NOVA/Aegis`) -- Aegis
+   **SOLO PARA LEER** (cross-atestacion en el hub), NUNCA para escribir su ledger. Arbol COMPARTIDO: el operador
+   rutea por el Asesor (commits `jjballestas`, a veces + `Co-Authored-By Claude`); NO es dual-Arquitecto. Tambien
+   commitea en el arbol la sesion Asesor.
 4. **>>> ARMA LOS 3 WATCHDOGS - PASO OBLIGATORIO NO-SALTABLE <<<** (comandos exactos en **arquitecto-monitor-
    coordina**): (a) **entregas** (HEAD local + MSG `*-to-Arquitecto` nuevos; self-filter que ignora
    `Co-Authored-By: Claude (Opus|Fable|Sonnet)` LOS 3 + `Co-Authored-By: asesor` / `^checkpoint\(asesor\)`; cubre
@@ -75,11 +77,17 @@ La sesion anterior COMPLETO el onboarding nominal de Julian como firmante ed2551
   EXPLICITO por path (NUNCA `git add -A`). ASCII PURO en Area_comun (hub Y Aegis). Trailers `Task-Id`/`Ops-Reason`
   en el parrafo FINAL junto a `Co-Authored-By` SIN blank line (coordinacion = `Task-Id: none` + `Ops-Reason` <=120
   chars). Announces de Aegis en el HUB = `Task-Id: none` (Task-Id de Aegis rompe el gate del hub).
-- **Ledger de Aegis:** submit_intent igual que el hub. task_upsert EXIGE `orchestrator` (solo Arquitecto). task_status
-  in_review->review_approved = checker (Arquitecto, con claim propio); ->done = implementer (Codex/jheredia).
+- **>>> FRONTERA hub<->Aegis (DECISION operador 2026-07-13, modelo de DOS TRIOS) <<<:** Aegis es una INSTANCIA con
+  su PROPIO trio (Arquitecto/Codex/Analista, llaves de instancia) que gobierna el desarrollo de NOVA. **YO
+  (Arquitecto del HUB) NO escribo el ledger de Aegis** -- ni `task_upsert`, ni `task_status`, ni `claim`, ni ningun
+  `submit_intent` sobre Aegis. Solo **LEO** Aegis (git fetch) para anclar la **cross-atestacion en el HUB** (leo su
+  commit/head_seq/sha256 y registro la Entrada en el hub; DECISION-0088/0093). Escribir el ledger de Aegis lo hace
+  su propio Arquitecto. Dos Arquitectos en repos DISTINTOS = sin colision (particion por repo, llaves por instancia).
+  Lo de abajo (recetas submit_intent) aplica **solo al ledger del HUB**.
+- **Ledger del HUB (submit_intent):** task_upsert EXIGE `orchestrator` (solo Arquitecto). task_status
+  in_review->review_approved = checker (Arquitecto, con claim propio); ->done = implementer (Codex).
   **INCLUYE SIEMPRE los `.slim.json`** en el pathspec del commit de estado (si no, HEAD inconsistente en clon limpio
-  -> el peer ve drift). En un flip de task_status, stagea TAMBIEN el `Area_comun/tasks/<task>.md` (el gate nominal
-  dejo index=done/file=ready por omitirlo).
+  -> el peer ve drift). En un flip de task_status, stagea TAMBIEN el `Area_comun/tasks/<task>.md`.
 - **submit_intent input usa `type` (o el tipo-como-clave), NUNCA `kind`.** Claim ACQUIRE va ANIDADO bajo `claim` con
   `scope` explicito (los 4 fragmentos, incl. su fila `CLAIMS.json#<claim_id>`); claim RELEASE va PLANO
   `{type:claim,op:release,claim_id:X}` (un claim anidado en el release lo trata como upsert y NO libera).
