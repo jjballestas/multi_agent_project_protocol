@@ -3,6 +3,13 @@
 > Verificado en codigo por el Arquitecto (MSG RATIFICA, ce4ac46) + revalidado por el parser real por el Asesor.
 > Tarea = TASK-9390 (ya registrada = ready por el Arquitecto; jheredia NO puede task_upsert). Reparto:
 > Julian = maker (jheredia:v1) | Aegis-cloneB (John) = checker (Analista). Helper = `Enviar` (NO `Si`: choca con Set-Item).
+>
+> **NOTA NOVA (2026-07-13, correccion):** esta receta documenta el gate A2-nominal sobre la instancia VIEJA **Aegis**
+> (hecho, historico). Para **NOVA** (modelo 2.A, instancia actual): el clon esta en `D:/Agentes/NOVA-Suite/NOVA` con la
+> gobernanza bajo `Aegis/`; el `secret_root` es `protocol-secrets/` (NO `secrets/`); y el `event_auth` de jheredia usa
+> **`key_id: codex-hmac:v1`, `secret_file: protocol-secrets/codex-eventauth.key`** (Julian opera bajo la autenticacion
+> de runtime de Codex). En NOVA NO existe `runtime-hmac:v1` / `secrets/eventauth-runtime.key` (eso era de Aegis). Los
+> comandos de abajo conservan rutas/valores de Aegis por fidelidad historica; para NOVA, sustituye segun esta nota.
 
 ## SETUP DE SESION (Julian, una vez)
 ```powershell
