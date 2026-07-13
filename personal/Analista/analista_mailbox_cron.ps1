@@ -368,7 +368,7 @@ $messageRelative
 Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-0056):
 1. Ancla SIEMPRE en canonico (el commit de producto y el HEAD del protocolo que cita la instruccion), NO en
    working tree.
-2. CLON LIMPIO: clona el repo de producto (D:/Agentes/Zeus/NOVA-Suite/NOVA) a un tmp, checkout del commit citado,
+2. CLON LIMPIO: clona el repo de producto (D:/Agentes/NOVA-Suite/NOVA) a un tmp, checkout del commit citado,
    y corre npm test AHI (NO in-place; leccion CRLF). Gatea por EXIT.
 3. PRUEBA POR COMPORTAMIENTO cada vector/AC que la instruccion pide refutar: no confies en el nombre del test;
    ejercita TODA la familia que el AC promete (no solo el ejemplo). Extrae la funcion/guard y corre tus propios
