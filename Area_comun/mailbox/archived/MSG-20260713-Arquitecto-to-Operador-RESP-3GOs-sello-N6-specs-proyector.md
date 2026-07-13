@@ -3,7 +3,7 @@ message_id: MSG-20260713-Arquitecto-to-Operador-RESP-3GOs-sello-N6-specs-proyect
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-13
 context_refs:

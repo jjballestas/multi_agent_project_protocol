@@ -3,7 +3,7 @@ message_id: MSG-20260713-Arquitecto-to-Operador-FYI-cross-atestacion-nova-A2-cer
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-13
 context_refs:
