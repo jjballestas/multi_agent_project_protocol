@@ -3,7 +3,7 @@ message_id: MSG-20260713-Arquitecto-to-Analista-RESP-OK-ATESTADO-consumido-s115-
 from: Arquitecto
 to: Analista
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-13
 context_refs:
