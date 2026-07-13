@@ -62,7 +62,7 @@ def generate(target: Path, tier: str | None = None) -> None:
         "--analyst",
         "Analyst",
         "--human-owner",
-        "Steward",
+        "Human",
         "--phase-id",
         "P2",
         "--phase-name",

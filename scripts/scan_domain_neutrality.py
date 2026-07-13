@@ -81,12 +81,15 @@ def configured_identity_terms(config: dict) -> list[str]:
     for agent in registry.get("agents") or []:
         if isinstance(agent, dict):
             value = str(agent.get("id") or "").strip()
-            if len(value) >= 3:
+            # Exempt generic identity words (agent/human/owner/...) as agent ids too,
+            # consistent with the agent_roles handling below -- an agent legitimately named
+            # "Human"/"Owner"/"Agent" must not false-flag where those words appear in neutral code.
+            if len(value) >= 3 and value.casefold() not in GENERIC_IDENTITY_TOKENS:
                 terms.add(value)
     roles = config.get("agent_roles") if isinstance(config.get("agent_roles"), dict) else {}
     for value in roles.values():
         text = str(value or "").strip()
-        if len(text) >= 3:
+        if len(text) >= 3 and text.casefold() not in GENERIC_IDENTITY_TOKENS:
             terms.add(text)
         for token in re.split(r"\s+", text):
             clean = token.strip()

@@ -76,7 +76,9 @@ function Get-ConfiguredIdentityTerms {
     if ($Config.agent_registry -and $Config.agent_registry.agents) {
         foreach ($agent in @($Config.agent_registry.agents)) {
             $value = ([string]$agent.id).Trim()
-            if ($value.Length -ge 3) {
+            # Exempt generic identity words (agent/human/owner/...) as agent ids too,
+            # consistent with the agent_roles handling below.
+            if ($value.Length -ge 3 -and -not ($GenericIdentityTokens -contains $value.ToLowerInvariant())) {
                 [void]$terms.Add($value)
             }
         }
@@ -84,7 +86,7 @@ function Get-ConfiguredIdentityTerms {
     if ($Config.agent_roles) {
         foreach ($property in $Config.agent_roles.PSObject.Properties) {
             $text = ([string]$property.Value).Trim()
-            if ($text.Length -ge 3) {
+            if ($text.Length -ge 3 -and -not ($GenericIdentityTokens -contains $text.ToLowerInvariant())) {
                 [void]$terms.Add($text)
             }
             foreach ($token in ($text -split "\s+")) {
