@@ -277,3 +277,14 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   disciplina que Q4-subpotenciado. Redactado el DRAFT-PREREGISTRO (3af0dd5). Cerre el hueco de atribucion: jball:v1
   para el operador (ruteado 6b86bc2) para no confundir humano-vs-IA en el ledger. Traza: cdfeb26, 3af0dd5, 6b86bc2;
   PREP instrumentacion b68b706 (Arquitecto).
+- **2026-07-13 (Asesor):** +A17 -- cierre de la ceremonia de PRE-REGISTRO N=6 con verificacion independiente por
+  segundo firmante de llave separada. El diseno (H-TRANSFER, muestra N=6, metricas, criterio exito/refutacion) quedo
+  CONGELADO Y ANCLADO (#4 seq 4659, sha256 28fd963b) ANTES de construir/medir cualquier unidad (build-open post-30-jul;
+  CERO unidades existen -> imposibilidad ESTRUCTURAL de HARKing, no solo promesa). s.11.5: el Analista (analista:v1,
+  LLAVE SEPARADA de la del sellador) recomputo el sha256 en un CLON LIMPIO de HEAD y obtuvo el valor EXACTO (match);
+  producto NOT_RUN (respeto "sin producto en alcance"). ADDENDUM en DECISION-0094 (86e5ce5, 6582325). Traza: la
+  independencia maker!=checker aplicada al SELLO mismo (no solo a las unidades), por posesion de llave. Ademas,
+  disciplina anti-discrecion en Notion: al poblar el workspace NO invente la taxonomia de menus (no existe menu en el
+  SDD) -> la funde en el unico agrupador canonico que el dato YA carga (slice R0-R8 = unidad SPEC-CONT); y NO resolvi
+  en silencio la relacion Agentes<->Tareas porque CONTRADICE la doctrina documentada (puente = task_id, no
+  cross-espacio) -> escalada al operador. Misma disciplina de "sorteo sin discrecion" aplicada a la estructura. Traza: 05cfda2.

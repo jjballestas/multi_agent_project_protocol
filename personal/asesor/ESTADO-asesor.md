@@ -12,16 +12,17 @@
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
 ## >> ESTADO ACTUAL 2026-07-13 (LEER PRIMERO; supersede todo lo de abajo)
-**Foco: la recta de medicion de Contabilidad queda GATED SOLO por el build-open (post-30-jul). El pre-registro N=6 ya esta SELLADO (diseno pre-datado). El foco vivo del Asesor = POBLAR el workspace Notion.**
+**Foco: la recta de medicion de Contabilidad queda GATED SOLO por el build-open (post-30-jul). Pre-registro N=6 SELLADO + ceremonia s.11 COMPLETA (verif independiente cerrada). Notion Contabilidad POBLADO. Agentes STOPPED (pausa natural).**
 
 - **PRE-REGISTRO N=6 = SELLADO Y ANCLADO (DECISION-0094, 13-jul ~00:38 local).** El Arquitecto congelo el diseno
   (hipotesis H-TRANSFER, muestra N=6, metricas, criterio exito/refutacion) ANTES de construir/medir ninguna unidad
   (build-open post-30-jul; ninguna existe -> cero HARKing). Artefacto
   `Area_comun/artifacts/SELLO-PREREGISTRO-contabilidad-employee-run-N6.md` (17189 bytes, ASCII),
   **sha256 = 28fd963b2472b1b6277b45e38e3bdf92686f022b0c41de4ab6a1338597d45828**, anclado via intent `decision`
-  (cadena #4 seq 4659, commit 86e5ce5). SIN re-genesis: hub 2E35F26E/1.14.0 + dataset N=500 INTACTOS. **UNICO cabo
-  abierto = verificacion independiente del sha256 (s.11.5), ruteada al Analista** (segundo firmante analista:v1,
-  recompute en clon limpio); NO bloquea el anclaje. El cableado F3.3 + las 6 unidades medidas
+  (cadena #4 seq 4659, commit 86e5ce5). SIN re-genesis: hub 2E35F26E/1.14.0 + dataset N=500 INTACTOS. **VERIFICACION
+  INDEPENDIENTE s.11.5 CERRADA (OK-ATESTADO):** el Analista (analista:v1, LLAVE SEPARADA) recomputo el sha256 en clon
+  limpio de HEAD -> match exacto; ADDENDUM en DECISION-0094 (commit 6582325), REQUEST/REVIEW archivados. **Ceremonia
+  s.11 COMPLETA** (sello + verif independiente por segundo firmante con llave separada). El cableado F3.3 + las 6 unidades medidas
   (R2-c/R3-b/R4-b/R5-c/R0-fuentes/R4-c) siguen gated post-30-jul (prereq de la 1a unidad MEDIDA, no del sello del DISENO).
 - **A2-NOMINAL CERRADO Y ATESTADO.** Gate 2-clones nominal (TASK-9390 en Aegis) corrido en vivo: jheredia firmo
   build/done [ed25519 jheredia:v1] en la maquina de Julian, Analista ratifico [analista:v1] en Aegis-cloneB
@@ -31,26 +32,27 @@
 - **KIT SPEC-CONT COMPLETO 8/8** (commit 3ba9e2d): S1-S6A + S6B (cierre anual, Close_Annual_Accounting_Period,
   annual_close atomico + reserva legal privada) + S6C (spec-FRONTERA causacion ingresos/CxC, contrato una-via
   fuente->Accounting via Post_Voucher, sin harness SQL propio). Diseno/PREP: NO se construye antes del 30-jul.
-- **WORKSPACE NOTION = BACKBONE COMPLETO, POBLACION PENDIENTE (foco vivo del Asesor).** Estructura projector-ready
-  (cadena F-NOVA-01 relacional bidireccional, IDs canonicos, is_governed/synced_seq, separacion governed/notion_native).
-  PENDIENTE DE POBLAR (no crear mas estructura): (1) **Menus** creada pero VACIA (0 filas); (2) las **25 Opciones**
-  sin `option_id` y sin relacion a Menu; (3) pagina raiz NOVA dice "Bases de datos planeadas" con checks sin marcar
-  aunque varias bases ya existen (actualizar); (4) DB **Agentes** existe bajo METODOLOGIA pero no enlazada desde raiz
-  NOVA ni relacionada desde Tareas; (5) `Artefactos y Evidencias.Fecha` es texto, no propiedad fecha; (6) luego llaves
-  gobernadas (task_id/object_id/test_id/evidence_id) segun aplique. (Notion bloqueo recuentos SQL por limite del plan
-  gratuito -> recontar por lotes.) IDs canonicos en memoria `[[notion-workspace-nova]]` (rehidratar via notion-search
-  si falta el archivo).
+- **WORKSPACE NOTION = BACKBONE COMPLETO + CONTABILIDAD POBLADA (2026-07-13, Asesor).** HECHO: (1) **9 Menus**
+  (menu_id MENU-CONT-R0..R8; menu = slice funcional del SDD/SPEC-CONT, NO taxonomia inventada -- no existe menu en el
+  SDD); (2) las **25 Opciones** con `option_id` (extraido del titulo: R0-cuentas/tercero/estructura/usos/fuentes,
+  R1-reportes, R2-a..d, R3-a..c, R4-a..c, R5-a..c, R6-a..d, R7-a, R8) + Menu vinculado por slice; (3) raiz NOVA
+  actualizada (checks marcados + link a METODOLOGIA + nota de poblacion); (4) `Artefactos.Fecha` text->date; (5) fila
+  proyector TASK-9310 en Tareas. **PENDIENTE decision operador:** (a) relacion **Agentes<->Tareas CONTRADICE la
+  doctrina de la raiz** ("puente = task_id, no relacion cross-espacio") -> NO resuelta en silencio, escalada (Tareas ya
+  liga agentes via el select Ejecutor; anadi link nav a METODOLOGIA); (b) llaves gobernadas restantes
+  (object_id/test_id/evidence_id) las llena el proyector. SQL query_data_sources = plan gratuito AGOTADO (usar
+  notion-search; create/update SI funcionan). IDs canonicos en memoria `[[notion-workspace-nova]]` (rehidratada 13-jul).
 - **PROYECTOR = RUTEADO -> TASK-9310** (Aegis, proposed/backlog, owner Codex maker / Analista checker FORMAL,
   integridad ALTA, contra SPEC-NOTION-PROJECTOR). El Arquitecto lo AGENDO al build-open (no compite con Sprint 1).
   **Trazado en la base Tareas de Notion:** fila proyector (Backlog, Ejecutor Codex, task_id TASK-9310). FALTA (lo crea
   el BUILD): metadata de gobernanza completa (source_event_seq/hash/commit/actor/projector_version).
 - **Manual de Julian v2** (`D:/Agentes/Ingenas/MANUAL-...html`): 5 trampas de PowerShell + receta verificada
   (`personal/asesor/COMANDOS-julian-gate-nominal-7b.md`). **Skill `asesor-guarda-estado` viva** (espejo de la del Arquitecto).
-- **open/:** NADA espera MI respuesta. FYIs del Arquitecto (RESP-3GOs, RESP-proyector, cross-atest). REQUEST
-  verif-sha256 -> Analista (no yo). Candidato a higiene del Arquitecto: `RESP-cross-atestacion` (12-jul,
-  requires_response Operador ya satisfecho de hecho -> A2-nominal cerrado). Fix del cron de Codex: AUTORIZADO (dbe7abe).
-- **SIGUIENTE ACCION:** (a) **POBLAR Notion** (Menus + vincular 25 opciones + option_id + actualizar raiz + Agentes +
-  Fecha-como-fecha); (b) esperar OK-ATESTADO del Analista (s.11.5); (c) al build-open (post-30-jul): cablear F3.3 +
+- **open/:** NADA espera MI respuesta. REQUEST verif-sha256 CONSUMIDO+archivado (Analista OK-ATESTADO). Fix del cron
+  de Codex: AUTORIZADO (dbe7abe). **Crons apagados / agentes STOPPED** (Arquitecto checkpoint 682f722, pausa natural;
+  el operador reactiva al abrir el build).
+- **SIGUIENTE ACCION:** Contabilidad en Notion POBLADO + s.11.5 cerrada. Solo queda: (a) decision operador sobre la
+  relacion Agentes<->Tareas (doctrina) + llaves gobernadas via proyector; (b) al build-open (post-30-jul): cablear F3.3 +
   arrancar las 6 unidades medidas + el Arquitecto promueve TASK-9310 a ready+GO. Mientras: monitor armado + EVIDENCIA-VIVA.
 
 ## >> ESTADO ACTUAL 2026-07-12 (NOCHE) (historico; ver bloque 13-jul arriba)
