@@ -349,7 +349,7 @@ Lee AGENTS.md, personal/Codex/STARTUP_PROMPT.md y personal/Codex/Memory.md antes
 Regla primordial: no narrar proceso. Solo emitir cierre, bloqueo concreto, fallo/riesgo accionable, decision requerida o resultado de coordinacion.
 
 Arranque obligatorio:
-1. Revisar git status --short en d:/Agentes/multi_agent_project_protocol y D:/Agentes/Zeus/NOVA/Nova-Budget; no tocar cambios ajenos.
+1. Revisar git status --short en d:/Agentes/multi_agent_project_protocol y D:/Agentes/Zeus/NOVA-Suite/NOVA; no tocar cambios ajenos.
 2. Revisar Area_comun/mailbox/open/.
 3. Revisar Area_comun/state/TASK_INDEX.json y Area_comun/state/CLAIMS.json.
 4. Validar drift antes de cualquier ledger action.
@@ -359,7 +359,7 @@ $messageRelative
 
 Modo ejecutor obligatorio:
 1. Si el mensaje sigue abierto, esta dirigido a Codex y contiene una accion ejecutable (requested_action, GO, QUESTION, HANDOFF, DECISION ejecutable o requires_response:true), resolverlo en esta sesion.
-2. Si hay GO a Codex asociado a una tarea owner=Codex status=ready y Codex no tiene otra tarea in_progress activa, tomar UNA tarea: claim file-scoped via runtime/submit_intent.py, task_status ready->in_progress via submit_intent e implementar el codigo requerido en D:/Agentes/Zeus/NOVA/Nova-Budget.
+2. Si hay GO a Codex asociado a una tarea owner=Codex status=ready y Codex no tiene otra tarea in_progress activa, tomar UNA tarea: claim file-scoped via runtime/submit_intent.py, task_status ready->in_progress via submit_intent e implementar el codigo requerido en D:/Agentes/Zeus/NOVA-Suite/NOVA.
 3. Si Codex ya tiene claim in_progress, continuar esa implementacion hasta entregar; no quedarse en lectura, resumen ni ACTION_REQUIRED.
 4. Ejecutar gates aplicables del producto (node --check, npm test, smoke cuando exista) y del protocolo (validate, drift, #4 byte-identica cuando aplique).
 5. Entregar como implementer: commit explicito, handoff autocontenido en Area_comun/handoffs/, mensaje Codex->Arquitecto en Area_comun/mailbox/open/, task_status in_progress->in_review y release de claim via submit_intent. No auto-cerrar a done: maker!=checker. Todo commit que toque rutas gobernadas debe emitir trailers finales: Task-Id: <TASK-XXXX> y, si corrige un hallazgo, Fixes-Task: <TASK-XXXX>. Si el commit es solo coordinacion sin tarea, O un ANNOUNCE en el HUB sobre una tarea de OTRA instancia (p.ej. Aegis, cuyo Task-Id NO existe en el TASK_INDEX del hub), emitir Task-Id: none Y Ops-Reason: <motivo> JUNTOS en el bloque final de trailers (AMBOS, nunca solo uno; sin blank line entre ellos ni con Co-Authored-By; Ops-Reason <=120 chars). Un announce del hub sobre una tarea de Aegis con Task-Id: TASK-XXXX de Aegis, o con solo Ops-Reason, rompe el gate de trailers del hub.

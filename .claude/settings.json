@@ -56,11 +56,16 @@
       "Bash(powershell -NoProfile -File scripts\\new_instance.ps1:*)",
       "Bash(taskkill:*)",
       "Bash(powershell -NoProfile -File personal/*.ps1:*)",
-      "Bash(powershell -NoProfile -File personal/*/*.ps1:*)"
-    ],
-    "ask": [
-      "Bash(git reset:*)",
-      "Bash(git rebase:*)"
+      "Bash(powershell -NoProfile -File personal/*/*.ps1:*)",
+      "Read(//c/m9/**)",
+      "mcp__claude_ai_Gmail__search_threads",
+      "Read(//d/Agentes/Zeus/NOVA-Suite/Aegis/runtime/**)",
+      "Read(//d/Agentes/Zeus/NOVA-Suite/Aegis/**)",
+      "Read(//d/Agentes/Ingenas/dictionary/**)",
+      "Read(//d/Agentes/Zeus/NOVA-Suite/Aegis/Area_comun/protocol/**)",
+      "Edit(/.claude/skills/arquitecto-ledger-ops/**)",
+      "Read(//d/Agentes/Zeus/NOVA-Suite/Aegis/Area_comun/specs/**)",
+      "Read(//d/Agentes/Zeus/NOVA-Suite/Aegis/Area_comun/tasks/**)"
     ],
     "deny": [
       "Read(./.env)",
@@ -72,6 +77,17 @@
       "Read(./**/credentials*.json)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)"
+    ],
+    "ask": [
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)"
+    ],
+    "additionalDirectories": [
+      "D:\\Agentes\\Zeus\\NOVA-Suite\\Aegis",
+      "D:\\Agentes\\Zeus\\NOVA-Suite\\Aegis\\Area_comun\\onboarding",
+      "D:\\Agentes\\Zeus\\NOVA-Suite\\Aegis\\Area_comun\\specs",
+      "D:\\Agentes\\Zeus\\NOVA-Suite\\Aegis\\Area_comun\\tasks",
+      "D:\\Agentes\\Zeus\\NOVA-Suite\\Aegis\\Area_comun\\protocol"
     ]
   }
 }
