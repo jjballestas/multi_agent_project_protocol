@@ -3,7 +3,7 @@ message_id: MSG-20260713-Operador-to-Arquitecto-DIRECTIVA-recable-crons-nova-pat
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-13
