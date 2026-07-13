@@ -101,7 +101,9 @@ def test_keygen(repo: Path, work: Path) -> None:
 
 def test_attested_instance(repo: Path, work: Path) -> None:
     target = work / "instance"
+    gov = target / "Aegis"  # attested tier is encapsulated (model 2.A)
     clone = work / "clone"
+    clone_gov = clone / "Aegis"
     roster = work / "roster.json"
     prepare_empty(work)
     write_json(
@@ -133,6 +135,8 @@ def test_attested_instance(repo: Path, work: Path) -> None:
             "agent-a",
             "--implementer",
             "agent-b",
+            "--analyst",
+            "agent-c",
             "--human-owner",
             "operator",
             "--phase-id",
@@ -149,7 +153,7 @@ def test_attested_instance(repo: Path, work: Path) -> None:
         cwd=repo,
     )
     assert_ok(result, "attested new_instance")
-    config = json.loads((target / "protocol.config.json").read_text(encoding="utf-8"))
+    config = json.loads((gov / "protocol.config.json").read_text(encoding="utf-8"))
     agents = {agent["id"]: agent for agent in config["agent_registry"]["agents"]}
     if agents["agent-worker"]["tier"] != "worker":
         raise AssertionError("worker tier missing")
@@ -157,22 +161,22 @@ def test_attested_instance(repo: Path, work: Path) -> None:
         raise AssertionError("worker unexpectedly has public signing key")
     if len(config["event_state"]["signature_config"]["public_keys"]) != 3:
         raise AssertionError("expected three signer public keys")
-    if json.loads((target / "event-state.runtime.json").read_text(encoding="utf-8"))["event_state"][
+    if json.loads((gov / "event-state.runtime.json").read_text(encoding="utf-8"))["event_state"][
         "actor_auth_enforce"
     ]:
         raise AssertionError("actor_auth_enforce must end off by default")
     assert_ok(
-        run([sys.executable, str(repo / "scripts" / "validate_collaboration_state.py"), "--root", str(target)], cwd=repo),
+        run([sys.executable, str(repo / "scripts" / "validate_collaboration_state.py"), "--root", str(gov)], cwd=repo),
         "generated instance validate",
     )
     shutil.copytree(target, clone, ignore=shutil.ignore_patterns("protocol-secrets", ".git"))
     assert_ok(
-        run([sys.executable, str(clone / "scripts" / "validate_collaboration_state.py"), "--root", str(clone)], cwd=clone),
+        run([sys.executable, str(clone_gov / "scripts" / "validate_collaboration_state.py"), "--root", str(clone_gov)], cwd=clone_gov),
         "clone without secrets validate",
     )
-    override = json.loads((target / "event-state.runtime.json").read_text(encoding="utf-8"))
+    override = json.loads((gov / "event-state.runtime.json").read_text(encoding="utf-8"))
     override["event_state"]["actor_auth_enforce"] = True
-    write_json(target / "event-state.runtime.json", override)
+    write_json(gov / "event-state.runtime.json", override)
     negative = {
         "claim": {
             "op": "acquire",
@@ -194,9 +198,9 @@ def test_attested_instance(repo: Path, work: Path) -> None:
     worker_result = run(
         [
             sys.executable,
-            str(target / "runtime" / "submit_intent.py"),
+            str(gov / "runtime" / "submit_intent.py"),
             "--root",
-            str(target),
+            str(gov),
             "--actor-id",
             "agent-worker",
             "--timestamp",
@@ -208,12 +212,12 @@ def test_attested_instance(repo: Path, work: Path) -> None:
             "--output",
             "-",
         ],
-        cwd=target,
+        cwd=gov,
     )
     assert_fails(worker_result, "worker keyless submit")
-    events_path = target / "runtime" / "state" / "events.jsonl"
+    events_path = gov / "runtime" / "state" / "events.jsonl"
     events_before = events_path.read_bytes()
-    override = json.loads((target / "event-state.runtime.json").read_text(encoding="utf-8"))
+    override = json.loads((gov / "event-state.runtime.json").read_text(encoding="utf-8"))
     override["event_state"]["actor_auth_config"]["keyids"]["agent-worker"] = "agent-a:v1"
     override["event_state"]["actor_auth_config"]["private_key_files"]["agent-worker"] = override["event_state"][
         "actor_auth_config"
@@ -221,13 +225,13 @@ def test_attested_instance(repo: Path, work: Path) -> None:
     override["event_state"]["event_auth"]["keys"]["agent-worker"] = override["event_state"]["event_auth"]["keys"][
         "agent-a"
     ]
-    write_json(target / "event-state.runtime.json", override)
+    write_json(gov / "event-state.runtime.json", override)
     cross_bound = run(
         [
             sys.executable,
-            str(target / "runtime" / "submit_intent.py"),
+            str(gov / "runtime" / "submit_intent.py"),
             "--root",
-            str(target),
+            str(gov),
             "--actor-id",
             "agent-worker",
             "--timestamp",
@@ -239,7 +243,7 @@ def test_attested_instance(repo: Path, work: Path) -> None:
             "--output",
             "-",
         ],
-        cwd=target,
+        cwd=gov,
     )
     assert_fails(cross_bound, "worker cross-bound signer submit")
     if events_path.read_bytes() != events_before:

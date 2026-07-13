@@ -765,8 +765,14 @@ def validate_adoption_tier(
     if tier != "runtime":
         return
     for relative in RUNTIME_TIER_REQUIRED_PATHS:
-        if not (root / relative).exists():
-            validation.fail(f"Runtime adoption tier missing required path: {relative}")
+        if (root / relative).exists():
+            continue
+        # Encapsulated instance (model 2.A): the CI workflow lives at the repo
+        # root (GitHub only runs .github/ at the repo root), one level above the
+        # instance root. Accept it there for the workflow path.
+        if relative == ".github/workflows/validate.yml" and (root.resolve().parent / relative).exists():
+            continue
+        validation.fail(f"Runtime adoption tier missing required path: {relative}")
 
 
 def validate_event_state_config(config: dict[str, Any] | None, validation: Validation) -> None:

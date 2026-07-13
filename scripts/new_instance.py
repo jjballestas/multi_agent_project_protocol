@@ -20,6 +20,40 @@ from typing import Any
 
 PLACEHOLDER_RE = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
 
+# Encapsulated instance layout (model 2.A): for the attested tier the governance
+# instance (methodology "Aegis") lives in a constant subfolder of the product repo,
+# so a product keeps a single git and its root stays product-only. The folder name
+# is constant across products (new_instance.py / CI / harness always target it) while
+# the instance identity (agent_registry / config) carries the product-specific name.
+GOVERNANCE_DIR_DEFAULT = "Aegis"
+
+GOVERNANCE_CLAUDE_MD = """# CLAUDE.md - Governance layer (Aegis)
+
+> This folder is the **governance / methodology layer** ("Aegis") for the product in the
+> parent repository. It is intentionally isolated from the product's own `.claude` and
+> `CLAUDE.md`: Claude Code roots at the working directory, so launch governance sessions
+> with the working directory set to THIS folder to load only the governance configuration
+> (settings, hooks, skills). Product-dev sessions run from the repo root and never load
+> this folder's config.
+>
+> The source of truth for the governance contract is AGENTS.md in this folder.
+
+@AGENTS.md
+"""
+
+# Neutral, read-only governance starter permissions. The one-time Claude Code "trust"
+# dialog per folder still applies before these take effect; the instance customizes.
+GOVERNANCE_CLAUDE_SETTINGS = {
+    "permissions": {
+        "allow": [
+            "Bash(python scripts/validate_collaboration_state.py:*)",
+            "Bash(python scripts/scan_encoding.py:*)",
+            "Bash(python scripts/scan_domain_neutrality.py:*)",
+        ],
+        "deny": [],
+    }
+}
+
 CANONICAL_TEMPLATE_FILES = {
     "AGENTS.template.md": "AGENTS.md",
     "protocol.config.template.json": "protocol.config.json",
@@ -163,6 +197,15 @@ def parse_args() -> argparse.Namespace:
             "\"llm_preset\":\"default\"}]}"
         ),
     )
+    parser.add_argument(
+        "--governance-dir",
+        default=GOVERNANCE_DIR_DEFAULT,
+        help=(
+            "For the attested tier, encapsulate the governance instance in this constant "
+            "subfolder of the product repo (default: Aegis) so the product keeps a single "
+            "git with a product-only root. Pass '.' to keep the legacy root layout."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -282,16 +325,92 @@ def copy_gate_scripts(source: Path, target: Path) -> None:
         shutil.copy2(source_file, target_scripts / filename)
 
 
-def write_runtime_ci_workflow(target: Path) -> None:
+def write_runtime_ci_workflow(target: Path, working_dir: str | None = None) -> None:
+    workflow = RUNTIME_TIER_WORKFLOW
+    if working_dir:
+        # Encapsulated instance: the governance gates live in the subfolder; run all
+        # steps from there. The CI file itself must stay at the repo root (.github/).
+        anchor = "    runs-on: ubuntu-latest\n"
+        defaults_block = (
+            anchor
+            + f'    # Governance (methodology "Aegis") is encapsulated in {working_dir}/.\n'
+            + "    defaults:\n      run:\n"
+            + f"        working-directory: {working_dir}\n"
+        )
+        workflow = workflow.replace(anchor, defaults_block, 1)
     workflow_path = target / ".github" / "workflows" / "validate.yml"
     workflow_path.parent.mkdir(parents=True, exist_ok=True)
-    workflow_path.write_text(RUNTIME_TIER_WORKFLOW, encoding="utf-8")
+    workflow_path.write_text(workflow, encoding="utf-8")
 
 
-def copy_runtime_tier_files(source: Path, target: Path) -> None:
-    copy_runtime_dir(source, target)
-    copy_gate_scripts(source, target)
-    write_runtime_ci_workflow(target)
+def copy_runtime_tier_files(source: Path, repo_root: Path, gov: Path, *, working_dir: str | None = None) -> None:
+    copy_runtime_dir(source, gov)
+    copy_gate_scripts(source, gov)
+    write_runtime_ci_workflow(repo_root, working_dir)
+
+
+def write_root_gitattributes(target: Path, governance_dir: str) -> None:
+    """Scope LF byte-stability to the encapsulated governance subtree at the repo root."""
+    block = [
+        "",
+        "# --- governance protocol (LF byte-stable, platform-independent) ---",
+        f'# The governance instance (methodology "Aegis") is encapsulated in {governance_dir}/.',
+        f"{governance_dir}/protocol.config.json text eol=lf",
+        f"{governance_dir}/event-state.runtime.json text eol=lf",
+        f"{governance_dir}/AGENTS.md text eol=lf",
+        f"{governance_dir}/Area_comun/** text eol=lf",
+        f"{governance_dir}/runtime/** text eol=lf",
+        f"{governance_dir}/scripts/** text eol=lf",
+        f"{governance_dir}/skills/** text eol=lf",
+        "",
+    ]
+    path = target / ".gitattributes"
+    prefix = ""
+    if path.exists():
+        existing = path.read_text(encoding="utf-8-sig").rstrip()
+        if existing:
+            prefix = existing + "\n"
+    path.write_text(prefix + "\n".join(block).lstrip("\n"), encoding="utf-8")
+
+
+def reset_commit_trailers(gov: Path) -> None:
+    """A fresh instance must not inherit the hub's LIVE commit-trailer gate state (its
+    enabled flag + hub-specific start_commit + rationale). Reset to a neutral disabled
+    gate so the instance is born validatable; it activates its own gate once its harness
+    emits trailers (mirrors the "COMMIT_TRAILERS off baseline" practice for real instances)."""
+    path = gov / "Area_comun" / "protocol" / "COMMIT_TRAILERS.json"
+    if not path.exists():
+        return
+    path.write_text(
+        json.dumps(
+            {
+                "enabled": False,
+                "start_commit": "",
+                "enforcement": "post_start_governed_commits_require_task_id_trailer",
+                "rationale": "Disabled at instantiation; activate after the instance harness emits trailers.",
+            },
+            indent=2,
+            ensure_ascii=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
+def scaffold_governance_claude(gov: Path) -> None:
+    """Governance-scoped .claude (settings) + CLAUDE.md, isolated from the product root.
+
+    Claude Code roots at the working directory: a governance session launched with cwd
+    set to gov loads only gov/.claude and gov/CLAUDE.md; a product-dev session at the
+    repo root never loads them (they are below its root). Bidirectional isolation.
+    """
+    claude_dir = gov / ".claude"
+    claude_dir.mkdir(parents=True, exist_ok=True)
+    (claude_dir / "settings.json").write_text(
+        json.dumps(GOVERNANCE_CLAUDE_SETTINGS, indent=2, ensure_ascii=True) + "\n",
+        encoding="utf-8",
+    )
+    (gov / "CLAUDE.md").write_text(GOVERNANCE_CLAUDE_MD, encoding="utf-8")
 
 
 def ensure_protocol_secrets_gitignored(target: Path) -> None:
@@ -515,19 +634,21 @@ def run_regenesis_for_attested_instance(target: Path, signer_id: str) -> None:
         raise RuntimeError(result.stderr.strip() or "attested instance regenesis failed")
 
 
-def configure_attested_instance(source: Path, target: Path, args: argparse.Namespace) -> None:
-    copy_runtime_tier_files(source, target)
-    ensure_protocol_secrets_gitignored(target)
+def configure_attested_instance(
+    source: Path, repo_root: Path, gov: Path, args: argparse.Namespace, *, working_dir: str | None = None
+) -> None:
+    copy_runtime_tier_files(source, repo_root, gov, working_dir=working_dir)
+    ensure_protocol_secrets_gitignored(repo_root)
     roster = load_roster(args)
     signer_ids = [agent["id"] for agent in roster if agent["tier"] == "signer"]
     if not signer_ids:
         raise ValueError("attested tier requires at least one signer")
-    signers = {agent_id: run_keygen(target, source, agent_id) for agent_id in signer_ids}
-    apply_attested_config(target, roster, signers)
-    create_roster_personal_areas(target, roster)
-    write_attested_override(target, signers, actor_auth_enforce=True)
-    run_regenesis_for_attested_instance(target, signer_ids[0])
-    write_attested_override(target, signers, actor_auth_enforce=False)
+    signers = {agent_id: run_keygen(gov, source, agent_id) for agent_id in signer_ids}
+    apply_attested_config(gov, roster, signers)
+    create_roster_personal_areas(gov, roster)
+    write_attested_override(gov, signers, actor_auth_enforce=True)
+    run_regenesis_for_attested_instance(gov, signer_ids[0])
+    write_attested_override(gov, signers, actor_auth_enforce=False)
 
 
 def render_text(text: str, replacements: dict[str, str], source_path: Path) -> str:
@@ -653,15 +774,29 @@ def main() -> int:
 
     try:
         ensure_target(target, args.force)
+        # Encapsulation (model 2.A) applies to the attested tier: governance content goes
+        # into target/<governance_dir>/ so the product keeps one git with a product-only
+        # root. Other tiers keep the legacy root layout (gov == target).
+        governance_dir = (args.governance_dir or "").strip()
+        encapsulate = args.tier == "attested" and governance_dir not in ("", ".")
+        gov = (target / governance_dir) if encapsulate else target
+        if encapsulate:
+            gov.mkdir(parents=True, exist_ok=True)
         replacements = build_replacements(args, source)
-        copy_support_dirs(source, target)
-        render_templates(source, target, replacements)
-        render_remaining_files(target, replacements)
-        create_personal_areas(target, args)
+        copy_support_dirs(source, gov)
+        reset_commit_trailers(gov)
+        render_templates(source, gov, replacements)
+        render_remaining_files(gov, replacements)
+        create_personal_areas(gov, args)
         if args.tier == "runtime":
-            copy_runtime_tier_files(source, target)
+            copy_runtime_tier_files(source, target, gov)
         elif args.tier == "attested":
-            configure_attested_instance(source, target, args)
+            configure_attested_instance(
+                source, target, gov, args, working_dir=(governance_dir if encapsulate else None)
+            )
+        if encapsulate:
+            write_root_gitattributes(target, governance_dir)
+            scaffold_governance_claude(gov)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(

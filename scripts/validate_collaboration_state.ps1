@@ -598,9 +598,18 @@ function Validate-AdoptionTier {
     }
     foreach ($relative in $script:RuntimeTierRequiredPaths) {
         $requiredPath = Join-Path $Root $relative
-        if (-not (Test-Path -LiteralPath $requiredPath)) {
-            Fail "Runtime adoption tier missing required path: $relative"
+        if (Test-Path -LiteralPath $requiredPath) {
+            continue
         }
+        # Encapsulated instance (model 2.A): the CI workflow lives at the repo
+        # root (GitHub only runs .github/ at the repo root), one level above the
+        # instance root. Accept it there for the workflow path.
+        $parentRoot = Split-Path -Parent (Resolve-Path -LiteralPath $Root)
+        $parentPath = Join-Path $parentRoot $relative
+        if ($relative -eq ".github/workflows/validate.yml" -and (Test-Path -LiteralPath $parentPath)) {
+            continue
+        }
+        Fail "Runtime adoption tier missing required path: $relative"
     }
 }
 

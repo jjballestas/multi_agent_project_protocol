@@ -55,3 +55,34 @@
   NOVA/protocol-secrets/ (gitignored + .git/info/exclude local); jheredia/jball privadas en SUS
   maquinas. NOVA en 2.A es la demostracion viva de adoptabilidad (gobierno como subcarpeta del repo
   de producto; el rigor #4 + cross-atestacion + maker!=checker NO necesita repo separado).
+
+### Entrada 1 - Encapsulacion del gobierno bajo Aegis/ + ERRATUM del config-epoch sha8 de la Entrada 0
+- fecha_utc: 2026-07-13T15:20Z (hora local 17:20, UTC+2)
+- disparador: encapsulacion de la instancia de gobierno (DIRECTIVA operador). El gobierno se movio a
+  una SUBCARPETA constante `Aegis/` del repo de producto (git mv puro: Area_comun/ runtime/ scripts/
+  skills/ personal/ AGENTS.md protocol.config.json event-state.runtime.json -> Aegis/...), dejando la
+  raiz del repo SOLO producto (NOVA.sln, src/, apps/, tests/, docs/). El CI (`.github/workflows/
+  validate.yml`) queda en la raiz del repo (requisito de GitHub) con `defaults.run.working-directory:
+  Aegis`; el tooling se auto-localiza a Aegis/ (root = parents[1] de la ruta del script). Se anadio
+  `Aegis/.claude/` + `Aegis/CLAUDE.md` (config de gobernanza aislada: Claude Code enraiza en el CWD).
+- nova_commit: 5518b5a10ab4d8123b9cfd38d2f8e8e695133673 (rama main)
+- head_seq: 4  (SIN CAMBIOS respecto a Entrada 0 -- el move NO toca el ledger)
+- head_prev_hash: 4728a8f14aec4e7fee7401e15d7c8e776a4a750d93a1eafbfa0e67bdd57da142
+- sha256_events_jsonl (blob git, ruta nueva Aegis/runtime/state/events.jsonl): 4f69a3dc9d76e7dc9d25a41002284ae52a3a0a48c87c6065918741669fd50a39 (IDENTICO a Entrada 0 -- el move preserva bytes)
+- sha256_head_line: d2c1a06b8e4069870fcaaf59916061d1415d057c8ce03b7651aa6a644d526f16
+- config-epoch sha8 (blob git, LF, ruta nueva Aegis/protocol.config.json): **C2DE91F9**
+- config canonical_hash (JSON parseado, LE-independiente; lo que liga el genesis): C157FE00 (SIN CAMBIOS)
+- event_count: 4 (seq 1..4; genesis fresco intacto -- NO hay re-genesis: el genesis liga
+  canonical_hash del CONTENIDO del config, no su ruta, asi que mover el archivo no altera el sello).
+- verificacion (re-computada por el Arquitecto sobre el clon limpio en 5518b5a):
+  validate_collaboration_state.py exit 0 (`--root Aegis` Y estilo-CI `cd Aegis && --root .`);
+  scan_encoding.py exit 0; scan_domain_neutrality.py exit 0. El hub (2E35F26E / 1.14.0, dataset N=500,
+  sello N=6) NO se toco.
+- **ERRATUM de la Entrada 0 (anomalia DECISION-0018, corregida append-only, NO se edita la Entrada 0):**
+  la Entrada 0 registro `config-epoch sha8 5679362F`. Ese valor se computo sobre el working copy del
+  clon nova-a2, que tenia CRLF (core.autocrlf=true sobrescribio el eol=lf) -> NO es reproducible desde
+  un clon limpio. El valor REPRODUCIBLE (blob git, LF) del config en 5ca2e5c es **C2DE91F9** (identico
+  al de 5518b5a, el move no cambia el contenido). El `canonical_hash` (C157FE00, lo que liga el genesis)
+  es IDENTICO en ambos casos, asi que el sello/genesis NUNCA estuvo afectado -- solo el hash de bytes
+  crudos registrado en Entrada 0. LECCION: los hashes crudos de una atestacion se computan sobre el
+  BLOB de git (`git show <commit>:<path>`), nunca sobre el working copy (que puede tener CRLF).
