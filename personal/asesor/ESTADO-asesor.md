@@ -28,12 +28,16 @@
   corrido en vivo (jheredia firmo build/done [jheredia:v1] maquina Julian; Analista ratifico [analista:v1] clon
   SEPARADO; prueba negativa fallo) demostro maker!=checker POR POSESION DE LLAVE. Luego el operador reorganizo a
   **modelo DOS TRIOS (2.A):** NOVA es instancia INDEPENDIENTE con su propio trio + **genesis FRESCO** (repo NOVA.git,
-  config-epoch sha8 **5679362F**, cadena seq 1..4, 5 firmantes ed25519: arquitecto/codex/analista:v1 + jheredia:v1 +
-  jball:v1). **Cross-atestacion NOVA Entrada 0 anclada** (hub f23ec3e; nova_commit 5ca2e5c, head_seq 4, sha256
-  events.jsonl 4f69a3dc; validate/scan/neutralidad 0). **A2-nominal NOVA CERRADO.** El hub-Arquitecto SOLO LEE NOVA
+  carpeta `D:/Agentes/NOVA-Suite/NOVA`; gobernanza ENCAPSULADA en el subfolder constante `Aegis/`; config-epoch
+  reproducible git-blob **C2DE91F9**, canonical del genesis **C157FE00**, cadena seq 1..4, 5 firmantes ed25519:
+  arquitecto/codex/analista:v1 + jheredia:v1 + jball:v1). **Cross-atest NOVA anclada:** Entrada 0 (hub f23ec3e) +
+  Entrada 1 tras encapsular (nova_commit 5518b5a, events.jsonl 4f69a3dc, sello byte-preservado SIN re-genesis).
+  **ERRATUM (integridad):** la Entrada 0 registro `5679362F` = artefacto CRLF del working copy; el reproducible
+  desde clon limpio es `C2DE91F9`; **el sello NUNCA estuvo afectado** (el genesis liga el canonical C157FE00).
+  Leccion: hashear el BLOB de git, no el working copy. **A2-nominal NOVA CERRADO.** El hub-Arquitecto SOLO LEE NOVA
   para atestar (no escribe su ledger). SUPERSEDE la epoca-2 Aegis 77242D63 (Entrada 3). **jheredia:v1 OPERATIVO.**
   Nota integridad (Asesor): maker!=checker se preserva bajo el genesis fresco porque registra las MISMAS llaves ya
-  demostradas en vivo, y se re-demuestra live con la 1a unidad medida bajo 5679362F (post-30-jul) -> sin hueco.
+  demostradas en vivo, y se re-demuestra live con la 1a unidad medida bajo NOVA 2.A (post-30-jul) -> sin hueco.
   PENDIENTE GO operador: sellar la topologia 2.A como DECISION (enmienda DECISION-0050).
 - **KIT SPEC-CONT COMPLETO 8/8** (commit 3ba9e2d): S1-S6A + S6B (cierre anual, Close_Annual_Accounting_Period,
   annual_close atomico + reserva legal privada) + S6C (spec-FRONTERA causacion ingresos/CxC, contrato una-via
