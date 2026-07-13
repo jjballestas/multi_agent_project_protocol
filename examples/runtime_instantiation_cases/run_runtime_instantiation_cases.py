@@ -28,6 +28,7 @@ GATE_SCRIPTS = {
     "measure_context_cost.py",
     "prune_state.py",
     "prune_state.ps1",
+    "keygen_agent.py",
 }
 
 
@@ -58,8 +59,10 @@ def generate(target: Path, tier: str | None = None) -> None:
         "Claude",
         "--implementer",
         "Codex",
+        "--analyst",
+        "Analyst",
         "--human-owner",
-        "Human",
+        "Steward",
         "--phase-id",
         "P2",
         "--phase-name",

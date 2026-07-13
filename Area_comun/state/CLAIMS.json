@@ -191,6 +191,21 @@
             "updated_at": "2026-07-12T22:36:00Z"
         },
         {
+            "claim_id": "CLAIM-20260713-Arquitecto-decision-0095",
+            "expires_at": "2026-07-14T00:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0095-enmienda-0050-instancia-gobierno-encapsulada-2a.md",
+                "Area_comun/decisions/DECISION-0050-convencion-repos-gobernanza-producto.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260713-Arquitecto-decision-0095"
+            ],
+            "started_at": "2026-07-13T15:37:00Z",
+            "status": "released",
+            "task_id": "none",
+            "updated_at": "2026-07-13T15:37:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260713-Arquitecto-hyg-a1",
             "expires_at": "2026-07-13T23:59:59Z",
             "owner": "Arquitecto",

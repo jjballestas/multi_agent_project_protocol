@@ -7,11 +7,17 @@ date: 2026-06-20
 deciders: [operador humano, Arquitecto]
 supersedes: []
 superseded_by: []
-relates_to: [DECISION-0049, DECISION-0035, DECISION-0047]
+amended_by: [DECISION-0095]
+relates_to: [DECISION-0049, DECISION-0035, DECISION-0047, DECISION-0095]
 phase: P2
 ---
 
 # DECISION-0050 - Convencion de repos y operacion
+
+> ENMENDADA por DECISION-0095 (2026-07-13): el punto 1 se REFINA -- lo que debe vivir SIEMPRE en el hub es
+> el ANCLA de cross-atestacion; los EVENTOS de gobierno de un producto SI pueden vivir dentro del repo de
+> producto, encapsulados en la carpeta constante `Aegis/` (modelo 2.A, un-repo), cross-atestados al hub.
+> El resto de esta decision sigue vigente.
 
 > ACCEPTED por el operador (2026-06-20). Convencion de METODOLOGIA, neutral (cero dominio). Patron repetible
 > para todos los proyectos-producto. NO toca el config pinned (#4 epoca 1.14.0; AGENTS.md no esta pinned por
