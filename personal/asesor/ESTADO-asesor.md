@@ -24,11 +24,17 @@
   limpio de HEAD -> match exacto; ADDENDUM en DECISION-0094 (commit 6582325), REQUEST/REVIEW archivados. **Ceremonia
   s.11 COMPLETA** (sello + verif independiente por segundo firmante con llave separada). El cableado F3.3 + las 6 unidades medidas
   (R2-c/R3-b/R4-b/R5-c/R0-fuentes/R4-c) siguen gated post-30-jul (prereq de la 1a unidad MEDIDA, no del sello del DISENO).
-- **A2-NOMINAL CERRADO Y ATESTADO.** Gate 2-clones nominal (TASK-9390 en Aegis) corrido en vivo: jheredia firmo
-  build/done [ed25519 jheredia:v1] en la maquina de Julian, Analista ratifico [analista:v1] en Aegis-cloneB
-  (maquina/llave SEPARADA), prueba negativa fallo como debia. **Cross-atestacion Entrada 3 anclada** por el
-  Arquitecto (hub e22e9f3; aegis_commit d153357a, head_seq 3881, sha256 events.jsonl e8f1b08f, config-epoch
-  77242D63 epoca 2). **jheredia:v1 OPERATIVO.**
+- **A2-NOMINAL CERRADO + INSTANCIA RE-NACIDA COMO NOVA (modelo 2.A, 2026-07-13 tarde).** Gate 2-clones nominal
+  corrido en vivo (jheredia firmo build/done [jheredia:v1] maquina Julian; Analista ratifico [analista:v1] clon
+  SEPARADO; prueba negativa fallo) demostro maker!=checker POR POSESION DE LLAVE. Luego el operador reorganizo a
+  **modelo DOS TRIOS (2.A):** NOVA es instancia INDEPENDIENTE con su propio trio + **genesis FRESCO** (repo NOVA.git,
+  config-epoch sha8 **5679362F**, cadena seq 1..4, 5 firmantes ed25519: arquitecto/codex/analista:v1 + jheredia:v1 +
+  jball:v1). **Cross-atestacion NOVA Entrada 0 anclada** (hub f23ec3e; nova_commit 5ca2e5c, head_seq 4, sha256
+  events.jsonl 4f69a3dc; validate/scan/neutralidad 0). **A2-nominal NOVA CERRADO.** El hub-Arquitecto SOLO LEE NOVA
+  para atestar (no escribe su ledger). SUPERSEDE la epoca-2 Aegis 77242D63 (Entrada 3). **jheredia:v1 OPERATIVO.**
+  Nota integridad (Asesor): maker!=checker se preserva bajo el genesis fresco porque registra las MISMAS llaves ya
+  demostradas en vivo, y se re-demuestra live con la 1a unidad medida bajo 5679362F (post-30-jul) -> sin hueco.
+  PENDIENTE GO operador: sellar la topologia 2.A como DECISION (enmienda DECISION-0050).
 - **KIT SPEC-CONT COMPLETO 8/8** (commit 3ba9e2d): S1-S6A + S6B (cierre anual, Close_Annual_Accounting_Period,
   annual_close atomico + reserva legal privada) + S6C (spec-FRONTERA causacion ingresos/CxC, contrato una-via
   fuente->Accounting via Post_Voucher, sin harness SQL propio). Diseno/PREP: NO se construye antes del 30-jul.
