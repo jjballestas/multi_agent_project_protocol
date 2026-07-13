@@ -38,7 +38,8 @@
   para atestar (no escribe su ledger). SUPERSEDE la epoca-2 Aegis 77242D63 (Entrada 3). **jheredia:v1 OPERATIVO.**
   Nota integridad (Asesor): maker!=checker se preserva bajo el genesis fresco porque registra las MISMAS llaves ya
   demostradas en vivo, y se re-demuestra live con la 1a unidad medida bajo NOVA 2.A (post-30-jul) -> sin hueco.
-  PENDIENTE GO operador: sellar la topologia 2.A como DECISION (enmienda DECISION-0050).
+  Topologia 2.A SELLADA como **DECISION-0095** (enmienda DECISION-0050, gobernanza encapsulada bajo Aegis/; fondo hub
+  intacto). Crons Codex/Analista recableados a `D:/Agentes/NOVA-Suite/NOVA` (mi DIRECTIVA DECISION-0018 -> fix 3699714).
 - **KIT SPEC-CONT COMPLETO 8/8** (commit 3ba9e2d): S1-S6A + S6B (cierre anual, Close_Annual_Accounting_Period,
   annual_close atomico + reserva legal privada) + S6C (spec-FRONTERA causacion ingresos/CxC, contrato una-via
   fuente->Accounting via Post_Voucher, sin harness SQL propio). Diseno/PREP: NO se construye antes del 30-jul.
