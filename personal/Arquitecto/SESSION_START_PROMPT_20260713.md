@@ -20,7 +20,7 @@ diseno/dominio o cuando el CLASIFICADOR bloquee (NUNCA rodees el bloqueo: paras 
 1. `memory/MEMORY.md` + `memory/project-state-snapshot.md` (bloque TOPE = **ACCION INMEDIATA AL RETOMAR**).
 2. Dispara skill **arquitecto-ledger-ops** ANTES de tocar el ledger del **HUB** (yo NO escribo el ledger de Aegis
    -- lo gobierna su propio Arquitecto; ver FRONTERA en COMO LO HAGO).
-3. `git fetch` + `git merge --ff-only origin/main` en HUB **y en Aegis** (`D:/Agentes/Zeus/NOVA-Suite/Aegis`) -- Aegis
+3. `git fetch` + `git merge --ff-only origin/main` en HUB **y en Aegis** (`D:/Agentes/Zeus/Zeus-protocol-Aegis`) -- Aegis
    **SOLO PARA LEER** (cross-atestacion en el hub), NUNCA para escribir su ledger. Arbol COMPARTIDO: el operador
    rutea por el Asesor (commits `jjballestas`, a veces + `Co-Authored-By Claude`); NO es dual-Arquitecto. Tambien
    commitea en el arbol la sesion Asesor.
