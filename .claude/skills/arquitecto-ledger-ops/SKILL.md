@@ -31,6 +31,20 @@ Antes de la primera escritura: lee `personal/Arquitecto/STARTUP_PROMPT.md` + `ME
   folder mismatch"), COMMITEA el fix con pathspec explicito (aunque la mod sea de otra sesion); deja NO-commiteado
   solo lo que de verdad no va al repo (`.claude/settings.json` con path de sesion stale). Caso real 13-jul: HEAD
   rojo TODA la sesion por un status open->answered sin commitear -> bloqueo el gate del Analista 15min.
+- **`regenesis.py` APPENDEA un `protocol.genesis`, NO reemplaza (13-jul, cazado):** correrlo sobre un log que ya
+  tiene genesis deja DOS eventos `protocol.genesis` -> `validate` falla `chain.genesis_missing`. Para cambiar el
+  genesis de una instancia FRESCA (p.ej. anadir firmantes a `event_state.signature_config.public_keys` + agent_registry):
+  edita el config, **VACIA `runtime/state/events.jsonl` (`: > ...`, con respaldo), y corre regenesis 1 sola vez** con
+  el config nuevo (el Arquitecto firma; `--timestamp 1970-01-01T00:00:00Z` por convencion de boundary). El genesis
+  liga `canonical_hash(config)` = JSON PARSEADO (independiente de line-endings), asi que CRLF no lo rompe; aun asi,
+  para instanciar en un repo de producto (modelo 2.A) anade `.gitattributes` `eol=lf` SCOPED al gobierno
+  (`Area_comun/** runtime/** scripts/** protocol.config.json ...`), NO al `src/` del producto.
+- **Instancia como SUBCARPETA del repo de producto (modelo 2.A, 1-repo):** `new_instance.py --tier attested` a un
+  TEMP (genera trio + genesis), luego COPIA `Area_comun/ runtime/ scripts/ skills/ AGENTS.md protocol.config.json
+  event-state.runtime.json` al clon del producto; `.github/workflows/validate.yml` (nombre EXACTO, el runtime tier
+  lo exige); COMMIT_TRAILERS off (heredaba el `start_commit` del hub); NO ignores `runtime/state/` (es el LEDGER,
+  va tracked). Push a main via clone-inject-push (no toca la copia de trabajo del operador). Llaves privadas ->
+  `protocol-secrets/` (gitignored + `.git/info/exclude` LOCAL para protegerlas en TODAS las ramas del clon de trabajo).
 
 ## 1. Mensajes de mailbox (GO / REVIEW / cualquier MSG-*.md)
 ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
