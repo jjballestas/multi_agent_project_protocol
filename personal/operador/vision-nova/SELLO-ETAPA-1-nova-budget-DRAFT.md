@@ -778,3 +778,34 @@ hub: su trio ejecuto, el hub solo lee y registra):
   smoke del DBA) queda vigente.
 - **Efecto:** n=10 CONFIRMADO (sin cambio vs s.27); el sello Etapa 2 puede citar TASK-9392 como la
   evidencia GOBERNADA Y FIRMADA de la condicion s.3, ademas de la verificacion directa de s.27.
+
+## 29. ENMIENDA FECHADA 2026-07-14T20:30+02:00 (Arquitecto) - HARDENING 15-jul (PAR-2 / Annul_*): checkpoint CUMPLIDO EN PLAZO con clase de evidencia DECLARADA HONESTA -- [DRAFT PARA FIRMA DEL OPERADOR]
+
+**No reabre el sello; registra el checkpoint de hardening del calendario (deadline <=15-jul) con el
+estado REAL verificado por lectura read-only del hub sobre la instancia NOVA (dos-trios,
+DECISION-0095), distinguiendo lo que tiene verificacion de tercero de lo que solo tiene
+auto-verificacion del entregador.** Draft para firma: NO surte efecto de pool hasta la firma; la
+decision PAR-2 dentro/fuera del pool es del Operador y NO se toma aqui.
+
+- **LO ENTREGADO (en plazo, adelantado al 14-jul):** los tres procs `Budget.Annul_*`
+  (Availability_Certificate / Commitment / Obligation) EXISTEN en `DbsFinanciero_SANDBOX` y estan
+  guardados con `Security.Assert_Permission` (matriz por-operacion, THROW 50320-50324). El guard de
+  permisos sobre los 9 procs (incluidos los 3 Annul_*) tiene verificacion INDEPENDIENTE FIRMADA via
+  TASK-9392 (maker jheredia:v1 + checker analista:v1, smoke 30/0 + control negativo, s.28).
+- **CLASE DE EVIDENCIA de la entrega PAR-2 como tal (declaracion honesta):** el soporte es (a) el
+  commit NOVA `a2333dc` ("TASK-0254/P4.2") que es SOLO DOCUMENTACION (`docs/budget-parity-harness.md`,
+  +28 lineas; cero .cs/.sql/tests) y (b) el FYI del Arquitecto de NOVA con verificacion EN VIVO hecha
+  por EL PROPIO entregador (maker-side). **TASK-0254 NO existe como tarea gobernada** (sin fila en el
+  TASK_INDEX de NOVA, sin DoD, sin checker). => El checkpoint de calendario se registra CUMPLIDO;
+  la entrega PAR-2 NO alcanza hoy el estandar maker!=checker de s.28.
+- **CABLEADO C# REAL al 14-jul:** `Annul_Availability_Certificate` (CDP-annul) = SI, vertical completa
+  y testeada (endpoints annul-preview/annul en `NOVA.Api/Program.cs:268,288`, gateway
+  `SqlAvailabilityCertificateAnnulmentGateway`, tests unit + integration). `Annul_Commitment` y
+  `Annul_Obligation` = NO cableados (cero referencias en `src/`/`apps/`; solo procs de sandbox), tal
+  como el propio FYI declaro en su caveat.
+- **INCONSISTENCIA MENOR detectada (a resolver antes de citar):** `docs/budget-parity-harness.md:78`
+  (commit a2333dc) habla de un smoke de 36 casos; la unica evidencia con tercero (TASK-9392) reporta
+  cases=30. El unico numero citable con firma es 30. Se senala al Arquitecto de NOVA (DECISION-0018).
+- **EFECTO (al firmar):** el checkpoint hardening-15-jul queda CERRADO EN PLAZO para el calendario del
+  sello; los items dependientes de hardening NO entran al pool Q4 por esta enmienda (la regla exige
+  decision explicita del Operador, servida por RESP aparte); n=10 NO cambia (no dependia de PAR-2).

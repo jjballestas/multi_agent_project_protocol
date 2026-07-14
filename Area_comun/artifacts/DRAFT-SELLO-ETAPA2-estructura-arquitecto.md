@@ -112,10 +112,17 @@
 > maker jheredia:v1 + checker one-shot analista:v1, smoke 30 casos 0 fallos + control negativo, drift 0;
 > commits NOVA 8fd7e75..b984cd4). Hallazgo MENOR de s.27 (identidad cross-doc viva) sigue abierto, no
 > bloquea (estructura 1:1 lo cubre). P3.2/P3.3/P3.4 CONSERVAN elegibilidad Q4.
-> (b) **Hardening 15-jul (PAR-2/Annul_*) = SI, entregado ADELANTADO** (FYI de la instancia NOVA
-> 2026-07-14: PAR-2 parity preflighted + los tres Budget.Annul_* existentes y guardados con
-> Assert_Permission, verificado en vivo contra el sandbox; caveat declarado: procs viven en la BD, solo
-> CDP-annul cableado en C#; commit de consolidacion a2333dc/TASK-0254).
+> (b) **Hardening 15-jul (PAR-2/Annul_*) = checkpoint CUMPLIDO EN PLAZO, con clase de evidencia
+> PRECISADA (2026-07-14 ~20:30, investigacion read-only del hub; enmienda s.29 DRAFT en el doc del
+> sello E1):** los tres Budget.Annul_* existen en sandbox y su guard Assert_Permission tiene
+> verificacion INDEPENDIENTE FIRMADA via TASK-9392 (s.28). PERO la entrega PAR-2 como tal se apoya en
+> un commit SOLO-DOCS (a2333dc, +28 lineas en docs/budget-parity-harness.md, cero codigo/tests) y en
+> verificacion EN VIVO del PROPIO entregador; TASK-0254 NO es tarea gobernada (sin fila en el
+> TASK_INDEX de NOVA, sin checker). Cableado C# real: CDP-annul SI (vertical completa + tests);
+> Annul_Commitment y Annul_Obligation NO (cero referencias en src/apps; solo procs de sandbox).
+> Inconsistencia menor senalada: docs de a2333dc dicen smoke de 36 casos vs 30 firmados en TASK-9392
+> (solo 30 es citable). PAR-2 dentro/fuera del pool = decision del Operador SERVIDA por RESP
+> (n=10 NO depende de PAR-2).
 > **=> El UNICO bloqueo restante del sello E2 es s.1 (reconciliacion 26-29-jul).**
 - Marco REDACTABLE: pool Q4 nominal n>=10 (Etapa 1 s.5). Composicion por ESTIMATE: estrato M (n=6): NB-P2-3,
   NB-P3-2, NB-P3-3, NB-P3-4, NB-P4-4, NB-P6-3; estrato S (n=4): NB-BRC3-1..4 (cluster Get_*_List). P3.1 NO

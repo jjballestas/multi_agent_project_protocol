@@ -3,7 +3,7 @@ message_id: MSG-20260714-Operador-to-Arquitecto-DIRECTIVA-confirmacion-hardening
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-14
