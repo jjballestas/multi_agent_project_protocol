@@ -7,8 +7,9 @@
 > **NOTA NOVA (2026-07-13, correccion):** esta receta documenta el gate A2-nominal sobre la instancia VIEJA **Aegis**
 > (hecho, historico). Para **NOVA** (modelo 2.A, instancia actual): el clon esta en `D:/Agentes/NOVA-Suite/NOVA` con la
 > gobernanza bajo `Aegis/`; el `secret_root` es `protocol-secrets/` (NO `secrets/`); y el `event_auth` de jheredia usa
-> **`key_id: codex-hmac:v1`, `secret_file: protocol-secrets/codex-eventauth.key`** (Julian opera bajo la autenticacion
-> de runtime de Codex). En NOVA NO existe `runtime-hmac:v1` / `secrets/eventauth-runtime.key` (eso era de Aegis). Los
+> su **HMAC PROPIO** (onboarding NOVA completo): **`key_id: jheredia-hmac:v1`, `secret_file:
+> protocol-secrets/jheredia-eventauth.key`** (verificado en el config vivo de NOVA + confirmado por el operador).
+> En NOVA NO existe `runtime-hmac:v1` / `secrets/eventauth-runtime.key` (eso era de Aegis). Los
 > comandos de abajo conservan rutas/valores de Aegis por fidelidad historica; para NOVA, sustituye segun esta nota.
 
 ## SETUP DE SESION (Julian, una vez)
