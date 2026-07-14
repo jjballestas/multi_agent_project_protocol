@@ -40,6 +40,20 @@
             "updated_at": "2026-07-13T23:19:55Z"
         },
         {
+            "claim_id": "CLAIM-20260714-Arquitecto-dec0096",
+            "expires_at": "2026-07-14T04:46:52Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0096-instancias-born-operational-capa-operacional-export.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260714-Arquitecto-dec0096"
+            ],
+            "started_at": "2026-07-14T00:46:52Z",
+            "status": "released",
+            "task_id": "OPS-ARSENAL-INSTANCIACION-20260714",
+            "updated_at": "2026-07-14T00:46:52Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

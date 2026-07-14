@@ -13,6 +13,29 @@ for what counts as MAJOR / MINOR / PATCH here.
 > version it follows via `protocol_version` in its `protocol.config.json`. The protocol is **not**
 > pushed automatically to instances; an instance adopts a new version through a decision of its own.
 
+## [1.19.0] - 2026-07-14
+> Note: capabilities shipped; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
+> DECISION-0047) -- no config change, no re-genesis. Everything shipped lives **outside** `protocol.config.json`.
+
+### Added
+- **Operational layer shipped with instances -- born-operational (DECISION-0096).** New `scripts/harness/`
+  with a single generic peer runner `peer_mailbox_cron.ps1` (parameterized -PeerId/-CoordinatorId/
+  -AcceptedTypes/-PromptFile/-Root/-AgentExe/-AgentArgs; unifies the hub's per-peer mirror crons and keeps
+  their hardened mechanics: single-instance guard, exec-lease with heartbeat, tree-kill deny-list, stale-lock
+  self-heal, seen signatures, exact-token STOP_JOB, per-exec deadline, STDIN prompt contract) + neutral role
+  prompt templates (`prompts/implementer.prompt.md`, `prompts/reviewer.prompt.md`, runtime tokens `@@...@@`;
+  `{{...}}` stays reserved for the instancing renderer) + `README.md` (launch, stop protocols, and the
+  born-at-first-run `.protocol-tmp/` contract). `new_instance.py` ships the harness to the **runtime** and
+  **attested** tiers (`copy_peer_harness`).
+- **Methodology skills masters shipped to the governance `.claude` (DECISION-0096, closes the DECISION-0061
+  wiring gap).** Neutralized masters under `scripts/instance_assets/claude-skills/` (cron lifecycle, state
+  checkpoint, monitor+watchdogs, mailbox hygiene); `scaffold_governance_claude` copies them into
+  `<gov>/.claude/skills/` for encapsulated attested instances, so coordinators inherit the operational
+  procedures without hand-copying from the hub.
+- **Instancing test coverage:** `test_attested_instancing.py` gains `assert_operational_layer` (runner +
+  prompts with intact runtime tokens and no renderer-placeholder leaks + dynamic masters<->instance skills
+  parity, no hardcoded agent names); `runtime_instantiation_cases` stays green (5 + ps1 parity).
+
 ## [1.18.0] - 2026-07-03
 > Note: release line only; the live instance `protocol_version` stays **1.14.0** under #4 (epoch versioning,
 > DECISION-0047) -- `protocol.config.json` byte-identical, no re-genesis. F1 doctrine core of the Vision Nova

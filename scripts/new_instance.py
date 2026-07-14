@@ -63,6 +63,12 @@ CANONICAL_TEMPLATE_FILES = {
     "Area_comun/state/CLAIMS.template.json": "Area_comun/state/CLAIMS.json",
 }
 
+# Operational layer shipped with instances (DECISION-0096): the generic peer runner +
+# neutral role prompts, and the methodology skills masters for the governance .claude.
+# Runtime tokens inside these files use @@...@@ (never {{...}}: reserved by the renderer).
+HARNESS_SOURCE_DIR = "scripts/harness"
+CLAUDE_SKILLS_SOURCE_DIR = "scripts/instance_assets/claude-skills"
+
 GATE_SCRIPT_FILES = [
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
@@ -325,6 +331,23 @@ def copy_gate_scripts(source: Path, target: Path) -> None:
         shutil.copy2(source_file, target_scripts / filename)
 
 
+def copy_peer_harness(source: Path, target: Path) -> None:
+    """Ship the operational layer: the generic peer runner + neutral role prompts.
+
+    Instances must be born OPERATIONAL, not only validatable: without the harness every
+    adopter had to hand-copy the hub's per-peer cron scripts (instancing gap, DECISION-0096).
+    Runtime state (.protocol-tmp/) is intentionally NOT shipped -- the runner creates it on
+    first run.
+    """
+    source_dir = source / HARNESS_SOURCE_DIR
+    if not source_dir.exists():
+        raise FileNotFoundError(f"Missing harness directory: {source_dir}")
+    target_dir = target / HARNESS_SOURCE_DIR
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    shutil.copytree(source_dir, target_dir)
+
+
 def write_runtime_ci_workflow(target: Path, working_dir: str | None = None) -> None:
     workflow = RUNTIME_TIER_WORKFLOW
     if working_dir:
@@ -346,6 +369,7 @@ def write_runtime_ci_workflow(target: Path, working_dir: str | None = None) -> N
 def copy_runtime_tier_files(source: Path, repo_root: Path, gov: Path, *, working_dir: str | None = None) -> None:
     copy_runtime_dir(source, gov)
     copy_gate_scripts(source, gov)
+    copy_peer_harness(source, gov)
     write_runtime_ci_workflow(repo_root, working_dir)
 
 
@@ -397,12 +421,17 @@ def reset_commit_trailers(gov: Path) -> None:
     )
 
 
-def scaffold_governance_claude(gov: Path) -> None:
-    """Governance-scoped .claude (settings) + CLAUDE.md, isolated from the product root.
+def scaffold_governance_claude(source: Path, gov: Path) -> None:
+    """Governance-scoped .claude (settings + methodology skills) + CLAUDE.md.
 
     Claude Code roots at the working directory: a governance session launched with cwd
     set to gov loads only gov/.claude and gov/CLAUDE.md; a product-dev session at the
     repo root never loads them (they are below its root). Bidirectional isolation.
+
+    Ships the neutralized methodology skills masters (DECISION-0096, closing the
+    DECISION-0061 wiring gap) so the instance coordinator inherits the operational
+    procedures (monitor/watchdogs, cron lifecycle, mailbox hygiene, state checkpoint)
+    without hand-copying them from the hub.
     """
     claude_dir = gov / ".claude"
     claude_dir.mkdir(parents=True, exist_ok=True)
@@ -411,6 +440,15 @@ def scaffold_governance_claude(gov: Path) -> None:
         encoding="utf-8",
     )
     (gov / "CLAUDE.md").write_text(GOVERNANCE_CLAUDE_MD, encoding="utf-8")
+    skills_source = source / CLAUDE_SKILLS_SOURCE_DIR
+    if not skills_source.exists():
+        raise FileNotFoundError(f"Missing claude skills masters: {skills_source}")
+    skills_target = claude_dir / "skills"
+    for skill_dir in sorted(p for p in skills_source.iterdir() if p.is_dir()):
+        destination = skills_target / skill_dir.name
+        if destination.exists():
+            shutil.rmtree(destination)
+        shutil.copytree(skill_dir, destination)
 
 
 def ensure_protocol_secrets_gitignored(target: Path) -> None:
@@ -796,7 +834,7 @@ def main() -> int:
             )
         if encapsulate:
             write_root_gitattributes(target, governance_dir)
-            scaffold_governance_claude(gov)
+            scaffold_governance_claude(source, gov)
         unresolved = find_unresolved_placeholders(target)
         if unresolved:
             raise ValueError(

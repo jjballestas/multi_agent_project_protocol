@@ -99,6 +99,39 @@ def test_keygen(repo: Path, work: Path) -> None:
         raise AssertionError("keygen external secret-dir wrote outside protocol-secrets")
 
 
+def assert_operational_layer(repo: Path, gov: Path) -> None:
+    """DECISION-0096: instances are born OPERATIONAL, not only validatable.
+
+    The generic peer runner + neutral role prompts and the methodology skills masters
+    must ship with the instance (the historical gap forced hand-copying them per adopter).
+    """
+    runner = gov / "scripts" / "harness" / "peer_mailbox_cron.ps1"
+    if not runner.exists():
+        raise AssertionError("operational layer missing: scripts/harness/peer_mailbox_cron.ps1")
+    if not (gov / "scripts" / "harness" / "README.md").exists():
+        raise AssertionError("operational layer missing: scripts/harness/README.md")
+    for prompt_name in ("implementer.prompt.md", "reviewer.prompt.md"):
+        prompt = gov / "scripts" / "harness" / "prompts" / prompt_name
+        if not prompt.exists():
+            raise AssertionError(f"operational layer missing: prompts/{prompt_name}")
+        text = prompt.read_text(encoding="utf-8")
+        if "@@MESSAGE_PATH@@" not in text:
+            raise AssertionError(f"prompt template lost runtime token: {prompt_name}")
+        if "{{" in text:
+            raise AssertionError(f"prompt template leaks renderer placeholder syntax: {prompt_name}")
+    masters_dir = repo / "scripts" / "instance_assets" / "claude-skills"
+    master_names = sorted(p.name for p in masters_dir.iterdir() if p.is_dir())
+    if not master_names:
+        raise AssertionError("no methodology skills masters found in the source repo")
+    shipped_dir = gov / ".claude" / "skills"
+    shipped_names = sorted(p.name for p in shipped_dir.iterdir() if p.is_dir()) if shipped_dir.exists() else []
+    if shipped_names != master_names:
+        raise AssertionError(f"instance skills {shipped_names} != masters {master_names}")
+    for name in master_names:
+        if not (shipped_dir / name / "SKILL.md").exists():
+            raise AssertionError(f"methodology skill shipped without SKILL.md: {name}")
+
+
 def test_attested_instance(repo: Path, work: Path) -> None:
     target = work / "instance"
     gov = target / "Aegis"  # attested tier is encapsulated (model 2.A)
@@ -165,6 +198,7 @@ def test_attested_instance(repo: Path, work: Path) -> None:
         "actor_auth_enforce"
     ]:
         raise AssertionError("actor_auth_enforce must end off by default")
+    assert_operational_layer(repo, gov)
     assert_ok(
         run([sys.executable, str(repo / "scripts" / "validate_collaboration_state.py"), "--root", str(gov)], cwd=repo),
         "generated instance validate",
