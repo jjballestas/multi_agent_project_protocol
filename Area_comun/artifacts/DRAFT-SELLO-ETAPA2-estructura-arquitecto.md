@@ -77,8 +77,15 @@
   muerto endogeno de las ventanas por-fecha de Etapa 1.)
 - **Tratamiento declarado (simetria):** la memoria hibrida forma parte del tratamiento de AMBOS brazos si su
   DECISION esta aprobada antes del sello E2; si no llega, corre sin ella EN AMBOS (nunca un brazo con
-  memoria y otro sin). Poblacion (unidades de Contabilidad) `[BLOQUEADO: analisis de migracion, espera base
-  DBA]`.
+  memoria y otro sin). [ACTUALIZACION 2026-07-14: la DIRECTIVA del probe (answered/MSG-20260714-...-probe-
+  memoria-hibrida) confirma que la memoria NO entra al tratamiento de E2: el probe corre AISLADO en
+  Nova-Payroll, fuera de las instancias medidas -> ambos brazos SIN memoria, como preve esta regla.]
+  Poblacion (unidades de Contabilidad): **DESBLOQUEADA 2026-07-14** -- corpus enumerable ENTREGADO por la
+  instancia NOVA (commit NOVA `35a1b4e`, `docs/design-source-contabilidad/corpus-contabilidad-enumerable.md`,
+  derivado del WS1 del hito 11-jul): **35 unidades CONT-U01..U35**, cada una con id estable + objeto
+  Accounting.* + slice + form legacy + alcance 1-frase + verificacion de paridad FALSABLE (set real de THROW
+  contra OBJECT_DEFINITION identico en 3 BD + negativo alcanzable + smoke con ROLLBACK, patron F-NOVA-01) +
+  ancla de falsabilidad por unidad. `[LLENAR-AL-SELLAR-E2]` la seleccion final de poblacion del brazo B.
 - Traza: TASK-0231 (F6.1) queda `proposed` en el hub, re-alcanzada a este contraste; no se activa antes del
   sello E2 (DIRECTIVA 30a4252 s.4). Diseno/pre-registro = capa ESTUDIO -> HUB; ejecucion brazo B sobre
   Contabilidad -> Aegis.
@@ -90,10 +97,18 @@
   mitad de ventana (a mitad seria enmienda).
 - Plantilla por participante (llenar al sellar): `{id, identidad_firmante (propia|bajo-identidad-existente,
   ver bifurcacion runbook s.8.4), maquina/huso, reparto maker!=checker (separado FISICAMENTE por posesion de
-  llave)}`. Participantes conocidos hoy: Arquitecto, Codex, Analista; `[LLENAR-AL-SELLAR-E2]` Julian (DBA/
-  empleado remoto) + cualquier maker/checker adicional -- BLOQUEADO por onboarding de Julian.
+  llave)}`. Participantes conocidos hoy: Arquitecto, Codex, Analista; Julian (DBA/empleado remoto):
+  **DESBLOQUEADO 2026-07-14** -- onboarding COMPLETO y gate nominal 2-clones CERRADO con su firma
+  (jheredia:v1 maker + done-flip; analista:v1 checker one-shot; cross-atest Entrada 2 del hub, commit
+  `ffd2faa`; privada solo en su maquina). `[LLENAR-AL-SELLAR-E2]` maker/checker por unidad + cualquier
+  participante adicional.
 
-## 6. Condiciones de pertenencia del pool -- [BLOQUEADO: DEC dominio P3.x + hardening 15-jul]
+## 6. Condiciones de pertenencia del pool -- [BLOQUEADO: entrega BR-C4 <=29-jul + hardening 15-jul]
+> [ACTUALIZACION 2026-07-14: el paquete "DEC dominio P3.x" quedo resuelto el 6-jul (BR-C4 = opcion b del
+> Operador). Lo pendiente NO es una decision: es la ENTREGA VERIFICADA del sembrado BR-C4 por el DBA
+> (deadline duro <=29-jul; auto-fallback pre-declarado a n=7 si no llega). EN VUELO: la instancia NOVA
+> registro TASK-9392 (BR-C4 gobernado, ready + GO al maker jheredia, commit NOVA `8fd7e75`) el 14-jul;
+> incluye el harness de verificacion. El status del hardening 15-jul (PAR-2/Annul_*) se reporta manana.]
 - Marco REDACTABLE: pool Q4 nominal n>=10 (Etapa 1 s.5). Composicion por ESTIMATE: estrato M (n=6): NB-P2-3,
   NB-P3-2, NB-P3-3, NB-P3-4, NB-P4-4, NB-P6-3; estrato S (n=4): NB-BRC3-1..4 (cluster Get_*_List). P3.1 NO
   pertenece (pattern-setter, excluida del contraste central).
