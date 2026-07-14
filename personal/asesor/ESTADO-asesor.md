@@ -56,8 +56,8 @@
     implementar la **Fase A SOLO en Nova-Payroll** (repo NOVA-Suite/Nova-Payroll; trio Arquitecto/Codex/Analista +
     jball + jheredia firmante desde el genesis; PII de nomina fuera del store; OFF estructural+vinculante en
     hub/medidas; firewall anti-HARKing). **Nova-Payroll NACIDA local** (97b2eeb; genesis 0e01cb3 verificado
-    clean-clone; aislada, fondo hub intacto). **PENDIENTE OPERADOR: autorizar el REMOTO GitHub de Nova-Payroll**
-    (crear repo + push; acto del operador). La **Fase A build** queda gated por su GO especifico + sello E2 ("Contabilidad gana").
+    clean-clone; aislada, fondo hub intacto). **Nova-Payroll remoto = queda LOCAL hasta un GO** (decision del operador,
+    133f5c1; no se crea repo GitHub aun). La **Fase A build** queda gated por su GO especifico + sello E2 ("Contabilidad gana").
 - **NOTION:** Contabilidad POBLADA (9 menus + 25 opciones option_id/menu + raiz + Fecha->date + fila proyector
   TASK-9310). Creada DB **"Tareas de metodologia"** en METODOLOGIA (ds 61f88150-e0be-497b-8d8d-acb4e4ae31c2) con
   **6 tareas del probe** (Gate-1/nacer-instancia/Fase-A/slice/pre-registro/Fase-B), zona Planeacion, is_governed NO.
@@ -68,8 +68,8 @@
   y para profesionalizar a quien construye con IA sin serlo".
 - **open/:** nada espera MI respuesta. Vivo: mi GO Gate-1 (b699996, espera draft del Arquitecto). Stale candidato a
   higiene del Arquitecto: RESP-cross-atestacion 12-jul.
-- **NUEVO 14-jul tarde:** **DECISION-0098 (scratch root unico) PENDIENTE FIRMA del operador** (carril Arquitecto:
-  cableado template/new_instance/validador host-independiente). **Nueva DIRECTIVA/skill `notion-spec-mirror`**
+- **NUEVO 14-jul tarde:** **DECISION-0098 (scratch root unico) SELLADA** (firma operador, tx seq 4691-4693, cableado
+  ACTIVO; template/new_instance/validador host-independiente). TASK-SANDBOX movido a personal/operador (opcion b). **Nueva DIRECTIVA/skill `notion-spec-mirror`**
   (operador 14-jul): espejar SPEC/DONE -> Notion con los PASOS DENTRO de la pagina, post-commit, upsert idempotente
   por spec_id/task_id (Notion = read-model, nunca fuente). El Arquitecto poblo la DB "Tareas de metodologia"
   (14 tareas con pasos + seccion "Ruta de convergencia"). Boundary reforzado (skill Arquitecto + safety): **el Asesor
