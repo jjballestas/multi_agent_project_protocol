@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0098
 title: "Scratch root unico por proyecto (D:/Aegis_Scratch/<proyecto>/<proposito>/) -- prohibido el scratch ad-hoc en la raiz del disco; declarado al nacer la instancia"
-status: proposed-pending-operator-signature
+status: accepted
 date: 2026-07-14
-deciders: [operador humano (FIRMA PENDIENTE; regla ordenada por DIRECTIVA 2026-07-14), Arquitecto (redacta)]
+deciders: [operador humano (FIRMADA 2026-07-14 via MSG-20260714-Operador-to-Arquitecto-FIRMA-decision-0098-scratch-root), Arquitecto (redacta)]
 supersedes: []
 superseded_by: []
 relates_to: [DECISION-0096, DECISION-0057, DECISION-0050, DECISION-0095]
@@ -14,10 +14,12 @@ derives_from:
 
 # DECISION-0098 - Scratch root unico por proyecto (regla de metodologia)
 
-> **DRAFT PARA FIRMA DEL OPERADOR** (la regla en si ya fue decidida por el operador en la
-> DIRECTIVA del 2026-07-14; este documento la formaliza como DECISION exportable). NO toca #4:
-> config hub 2E35F26E / epoch 1.14.0 / dataset N=500 / sellos intactos (la politica vive fuera
-> del config pineado; el cableado de config aplica a instancias NUEVAS via template).
+> **FIRMADA por el operador el 2026-07-14** (FIRMA: MSG-20260714-Operador-to-Arquitecto-FIRMA-
+> decision-0098-scratch-root; 6 clausulas aceptadas sin cambios; ordenamiento inicial RATIFICADO;
+> residuales en residue/ SIN reap hasta decision aparte del operador). Sellada via submit_intent
+> por el Arquitecto; cableado ACTIVO. NO toca #4: config hub 2E35F26E / epoch 1.14.0 / dataset
+> N=500 / sellos intactos (la politica vive fuera del config pineado; el cableado de config
+> aplica a instancias NUEVAS via template).
 
 ## Contexto
 
@@ -85,5 +87,5 @@ CORTA a la vez, con adopcion publica futura en mente.
 
 ## Estado
 
-`proposed-pending-operator-signature`. Al firmar: submit_intent `decision` (patron 0095/0096) +
-cableado activo en template/new_instance/validador.
+`accepted` (firmada 2026-07-14; sellada via submit_intent patron 0095/0096; cableado activo en
+template/new_instance/validador desde hub `f3012cc`).

@@ -3,7 +3,7 @@ message_id: MSG-20260714-Operador-to-Arquitecto-RESP-nova-payroll-remoto-local-p
 from: Operador
 to: Arquitecto
 type: RESP
-status: open
+status: answered
 requires_response: false
 created_at: 2026-07-14
 context_refs:

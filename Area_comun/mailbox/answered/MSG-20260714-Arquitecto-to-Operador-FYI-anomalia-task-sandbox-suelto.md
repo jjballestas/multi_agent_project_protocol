@@ -3,7 +3,7 @@ message_id: MSG-20260714-Arquitecto-to-Operador-FYI-anomalia-task-sandbox-suelto
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: answered
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-14
