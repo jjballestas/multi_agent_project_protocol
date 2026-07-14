@@ -3,7 +3,7 @@ message_id: MSG-20260714-Arquitecto-to-Operador-RESP-confirmacion-hardening-par2
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: answered
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-14

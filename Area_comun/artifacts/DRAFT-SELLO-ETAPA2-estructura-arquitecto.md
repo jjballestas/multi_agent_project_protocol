@@ -121,8 +121,11 @@
 > TASK_INDEX de NOVA, sin checker). Cableado C# real: CDP-annul SI (vertical completa + tests);
 > Annul_Commitment y Annul_Obligation NO (cero referencias en src/apps; solo procs de sandbox).
 > Inconsistencia menor senalada: docs de a2333dc dicen smoke de 36 casos vs 30 firmados en TASK-9392
-> (solo 30 es citable). PAR-2 dentro/fuera del pool = decision del Operador SERVIDA por RESP
-> (n=10 NO depende de PAR-2).
+> (solo 30 es citable; anomalia DECISION-0018 al Arquitecto de NOVA). **RESUELTO 2026-07-14 ~20:55:
+> s.29 FIRMADA por el Operador + decision PAR-2 = FUERA del pool Q4** ("entregado, fuera del
+> contraste"; n=10 INTACTO; sin re-verificacion gobernada, sin enmienda de pool, sin cableado de
+> Annul_Commitment; RP/OBL-annul se cablean despues fuera del estudio). Este punto (b) queda CERRADO
+> para el sello E2: ya no hay items de hardening candidatos al pool.
 > **=> El UNICO bloqueo restante del sello E2 es s.1 (reconciliacion 26-29-jul).**
 - Marco REDACTABLE: pool Q4 nominal n>=10 (Etapa 1 s.5). Composicion por ESTIMATE: estrato M (n=6): NB-P2-3,
   NB-P3-2, NB-P3-3, NB-P3-4, NB-P4-4, NB-P6-3; estrato S (n=4): NB-BRC3-1..4 (cluster Get_*_List). P3.1 NO
