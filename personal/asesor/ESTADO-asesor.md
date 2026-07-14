@@ -55,8 +55,9 @@
     Gate-1 SELLADO: `DECISION-0097` accepted** (sello b13e090, tx seq 4688-4690 drift 0; fondo INTACTO). Autoriza
     implementar la **Fase A SOLO en Nova-Payroll** (repo NOVA-Suite/Nova-Payroll; trio Arquitecto/Codex/Analista +
     jball + jheredia firmante desde el genesis; PII de nomina fuera del store; OFF estructural+vinculante en
-    hub/medidas; firewall anti-HARKing). **SIGUIENTE (Arquitecto):** ceremonia de nacimiento de Nova-Payroll
-    (papel/ceremonia, no compite con E2); la Fase A build queda gated por su GO especifico + sello E2 ("Contabilidad gana").
+    hub/medidas; firewall anti-HARKing). **Nova-Payroll NACIDA local** (97b2eeb; genesis 0e01cb3 verificado
+    clean-clone; aislada, fondo hub intacto). **PENDIENTE OPERADOR: autorizar el REMOTO GitHub de Nova-Payroll**
+    (crear repo + push; acto del operador). La **Fase A build** queda gated por su GO especifico + sello E2 ("Contabilidad gana").
 - **NOTION:** Contabilidad POBLADA (9 menus + 25 opciones option_id/menu + raiz + Fecha->date + fila proyector
   TASK-9310). Creada DB **"Tareas de metodologia"** en METODOLOGIA (ds 61f88150-e0be-497b-8d8d-acb4e4ae31c2) con
   **6 tareas del probe** (Gate-1/nacer-instancia/Fase-A/slice/pre-registro/Fase-B), zona Planeacion, is_governed NO.
