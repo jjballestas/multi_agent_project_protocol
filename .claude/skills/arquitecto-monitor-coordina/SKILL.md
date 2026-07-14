@@ -134,6 +134,37 @@ mecanicos lo respaldan. **Exportabilidad:** estos watchdogs deben poder EXPORTAR
 capa neutral `skills/` (DECISION-0061, exportable via new_instance) o al agent-runbook del TASK_TEMPLATE de instancia.
 Ver [[watchdogs-al-iniciar-sesion]].
 
+## 1e. PUNTO CIEGO del self-filter: mensajes del Operador commiteados por el ASESOR (leccion 2026-07-14)
+El Asesor rutea GOs/DIRECTIVAs del Operador commiteando el MSG al arbol -- y sus commits pueden llevar
+`Co-Authored-By: Claude <modelo>` (la sesion asesor corre en Claude). El SELF-FILTER del monitor de commits
+los descarta como "propios", y aunque el chequeo NEW-DELIVERY por nombre de archivo los cubre, la
+notificacion puede quedar detras de turnos largos. Caso real: un GO rr (respuesta a 3 inputs) estuvo ~1h en
+el arbol sin procesarse; se descubrio por una via lateral. REGLA DURA: el **auto-poll al inicio de CADA
+turno** (`git log --oneline -3` + `ls Area_comun/mailbox/open/ | grep to-Arquitecto`) se ejecuta SIEMPRE,
+aunque el mensaje del operador parezca puro debate/consulta/Notion -- la respuesta que esperas puede estar
+YA en el arbol.
+
+## 1f. Watch read-only de OTRA instancia (dos-trios, DECISION-0095)
+Cuando hay trabajo de otra instancia en vuelo que el hub debe cosechar (un gate por cerrar, un encargo con
+deadline), arma un monitor persistente ADICIONAL read-only sobre SU `origin/main`. NO reemplaza a los 3
+obligatorios del hub; es el ojo dos-trios: no operas su ledger, pero te enteras en <2min de cada avance
+(registro, entrega del maker, veredicto del checker, done-flip) y cosechas (cross-atest, enmiendas) sin
+pedir reportes:
+```bash
+cd /d/Agentes/<ruta-instancia>
+base=$(git rev-parse origin/main 2>/dev/null)
+while true; do
+  git fetch origin --quiet 2>/dev/null || true
+  cur=$(git rev-parse origin/main 2>/dev/null)
+  if [ "$cur" != "$base" ]; then
+    echo "=== <INSTANCIA> origin/main AVANZO $(date '+%H:%M:%S') ==="
+    git log --oneline ${base}..${cur} 2>/dev/null
+    base=$cur
+  fi
+  sleep 120
+done
+```
+
 ## 2. Reglas de reaccion (que hacer con cada senal de peer)
 En cada wake: `git fetch` + `git merge --ff-only origin/main` (los peers commitean al arbol compartido; tu HEAD
 local puede ir detras de origin). Luego, segun la senal:

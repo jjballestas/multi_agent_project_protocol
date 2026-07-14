@@ -129,6 +129,11 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
 - **El claim de `mailbox_archive`/higiene EXIGE `task_id`** (no es task-less): usa un id de ops como
   `OPS-MAILBOX-HYGIENE-<fecha>` (convencion vista en los archives previos). Sin `task_id` -> "claim acquire
   requires task_id".
+- **El intent `mailbox_archive` EXIGE `author` y `relayed_by`** (accountability; `endorsement` default
+  "none"; campos permitidos SOLO message_id/author/relayed_by/endorsement/idempotency_key --
+  `submit_intent.py:600-609`). Para archivar tus outgoing: `"author":"Arquitecto","relayed_by":"Arquitecto"`.
+  El `message_id` va SIN `.md`. El scope del claim del lote cubre open/ + archived/ de cada MSG +
+  CLAIMS#self; lotes <=3 por el timeout-proneness (s.6).
 - **Validar un OVERRIDE (`event-state.runtime.json`): chequea la GUARDA DE CLAVES PERMITIDAS**, no solo la
   resolucion de rutas. `event_state` del override solo admite `actor_auth_enforce` / `actor_auth_config` /
   `event_auth` (`runtime/eventlog.py:263`); CUALQUIER otra clave (p.ej. `anchor_enabled`) = "unsupported
