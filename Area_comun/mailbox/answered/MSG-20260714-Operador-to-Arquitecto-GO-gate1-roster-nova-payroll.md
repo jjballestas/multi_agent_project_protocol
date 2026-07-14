@@ -3,7 +3,7 @@ message_id: MSG-20260714-Operador-to-Arquitecto-GO-gate1-roster-nova-payroll
 from: Operador
 to: Arquitecto
 type: RESP
-status: open
+status: answered
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-14
