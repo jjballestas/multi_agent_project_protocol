@@ -11,7 +11,64 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-13 (LEER PRIMERO; supersede todo lo de abajo)
+## >> ESTADO ACTUAL 2026-07-14 (LEER PRIMERO; supersede todo lo de abajo)
+**Foco: la recta de medicion de Contabilidad sigue gated post-30-jul (E2: corpus <=25-jul, BR-C4 <=29-jul). Sesion 14-jul = onboarding Julian a NOVA COMPLETO + reorg 2.A cerrado + DEBATE memoria (Engram/gentle-ai) + coordinacion del PROBE de memoria hibrida sobre Nova-Payroll. HEAD=origin b699996, fondo 2E35F26E/1.14.0 INTACTO.**
+
+- **INSTANCIA re-nacida como NOVA 2.A (dos-trios) + A2-nominal RE-DEMOSTRADO EN VIVO.** NOVA es instancia
+  INDEPENDIENTE (genesis fresco, config-epoch **git-blob C2DE91F9**, canonical genesis **C157FE00**; el `5679362F`
+  de Entrada 0 fue artefacto CRLF -> ERRATUM append-only; leccion: hashear el BLOB de git, no el working copy).
+  Gobernanza ENCAPSULADA en subfolder `Aegis/` (retrofit sin re-genesis; NOVA HEAD 5518b5a). Cross-atest Entradas
+  0/1/2 en el hub. **Gate 2-clones nominal NOVA (TASK-9391) cerro VERDE**: maker!=checker demostrado bajo el genesis
+  REAL, 3 firmantes ed25519 en maquinas separadas (jheredia maker / Analista checker / jheredia done). Frontera:
+  el hub-Arquitecto SOLO LEE NOVA para atestar; el trio de NOVA escribe su ledger.
+- **DECISION-0095** (topologia 2.A sellada, enmienda 0050) + **DECISION-0096 / release v1.19.0** (instancias
+  born-operational). El **epoch pineado 1.14.0 sigue intacto** (release != epoch, dos ejes por diseno).
+- **JULIAN (jheredia) ONBOARDED A NOVA COMPLETO + OPERATIVO como firmante:** deploy key en NOVA.git + ed25519
+  `jheredia:v1` + **HMAC PROPIO `jheredia-hmac:v1` / `protocol-secrets/jheredia-eventauth.key`** (verificado en el
+  config vivo de NOVA). OJO: el `codex-hmac:v1` que se dijo antes era el plan A1 pre-onboarding, SUPERADO -> jheredia
+  tiene HMAC propio. Manual + receta corregidos a jheredia-hmac.
+- **PRE-REGISTRO N=6 SELLADO + s.11.5 CERRADA** (historico, sigue vigente): DECISION-0094, sha256 28fd963b, cadena #4
+  seq 4659; Analista OK-ATESTADO (ADDENDUM, commit 6582325). Ceremonia s.11 completa. Kit SPEC-CONT 8/8.
+- **DEBATE metodologia vs Engram/gentle-ai (para debatir; conclusiones):** objetivo = **evidencia citable** (ancla =
+  Contabilidad). Engram = motor de memoria (SQLite/FTS, MCP/HTTP/TUI, agent-agnostic, ~4.6k stars, bus-factor-1);
+  gentle-ai = "ecosystem configurator" que su propio doc declara **NO ser** gobernanza/atestacion. Estamos por delante
+  en gobernanza/atestacion/maker!=checker/pre-registro; FLACOS en memoria-enviada. PERO ya hay
+  **`SPEC-MEMORIA-HIBRIDA v0.2.0`** (commit 9376bb4, adversarialmente revisada; 3 planos hot/cold/DB-SQLite; importador
+  round-trip = "el gap que mato a Engram"; REVIVE de peon employee-ready). Ruta unica memoria = DECISION-0081
+  (Engram CERRADO; DECISION-0071 superseded). `engram_*` en runtime = 0 hits (specified-no-merged).
+- **>> COORDINACION VIVA -- PROBE de memoria hibrida (mi carril como asesor):** el operador quiere saber **si la
+  memoria hibrida aporta valor a la metodologia** (para DECIDIR adoptarla). Diseno acordado (debate 14-jul):
+  - **Probe de VALOR ahora** = Fase A de la SPEC (round-trip verde, cold-start recall, **REVIVE demostrable**,
+    drift 0) + observacion cualitativa. Objetivo = decision del operador, **NO evidencia** -> **firewall duro del
+    corpus citable** (probe disfrazado de resultado = HARKing). Un go/no-go se decide por DEMOSTRACION, no estadistica.
+  - **Vehiculo = `Nova-Payroll`** (modulo Nomina), instancia born-operational PROPIA (base+store propios), **NO
+    cableada** a Budget/Contabilidad medidos. **Slice ACOTADO** (nucleo de liquidacion: empleados/contratos/conceptos +
+    cabecera DbsNom002t/detalle 007t/bases 028t + FindBaseTra + %concepto + consecutivo + control periodo + reporte RO).
+    Nomina es **greenfield** (sin SDD/base/procs; solo legacy VB6 + 42 tablas). PII de nomina fuera del store (firewall).
+  - **Secuencia:** Gate-1 (DECISION que autoriza implementar, scope AISLADO a Nova-Payroll, OFF estructural en
+    hub/medidas) -> nacer Nova-Payroll -> PREP slice -> Fase A build+probe. **Timing:** papel/ceremonia AHORA;
+    Fase A build TRAS el sello E2 salvo ventana ociosa, freno "Contabilidad gana". Post-30 y SOLO si el probe da
+    indicios: medicion RIGUROSA (pre-registro del Asesor O folded en metricas Q1-Q5).
+  - **Estado de ruteo:** DIRECTIVA marco (9b02e23) -> Arquitecto CONFIRMO con 4 precisiones (RESP 64d5c5e: Gate-1
+    ACTIVA citando 0081 no re-supersede / OFF estructural / un DDL master via export born-operational / build tras E2).
+    **GO Gate-1 + roster RUTEADOS (b699996):** repo `D:/Agentes/NOVA-Suite/Nova-Payroll`; trio Arquitecto/Codex/
+    Analista + jball; **Julian firmante DESDE EL NACIMIENTO**. **EN VUELO: el Arquitecto entrega el DRAFT del Gate-1
+    para la firma del operador** (mi GO b699996 requires_response Arquitecto).
+- **NOTION:** Contabilidad POBLADA (9 menus + 25 opciones option_id/menu + raiz + Fecha->date + fila proyector
+  TASK-9310). Creada DB **"Tareas de metodologia"** en METODOLOGIA (ds 61f88150-e0be-497b-8d8d-acb4e4ae31c2) con
+  **6 tareas del probe** (Gate-1/nacer-instancia/Fase-A/slice/pre-registro/Fase-B), zona Planeacion, is_governed NO.
+  IDs canonicos en memoria `[[notion-workspace-nova]]`.
+- **Manual de Julian** (`D:/Agentes/Ingenas/MANUAL-onboarding-julian-contabilidad-aegis.html`, mi area, sin commit):
+  esta sesion += recuadro HMAC (2 capas ed25519/HMAC), seccion vibecoding, anatomia SPEC (T-001), instalar OpenSSL
+  (4.9), generar llave git ssh-keygen (5.1), HMAC->jheredia-hmac, frase-mision "Para desarrolladores profesionales --
+  y para profesionalizar a quien construye con IA sin serlo".
+- **open/:** nada espera MI respuesta. Vivo: mi GO Gate-1 (b699996, espera draft del Arquitecto). Stale candidato a
+  higiene del Arquitecto: RESP-cross-atestacion 12-jul.
+- **SIGUIENTE ACCION:** cuando el Arquitecto entregue el draft del Gate-1 -> traerlo al operador para su FIRMA.
+  Mantener projector-ready + monitor armado + EVIDENCIA-VIVA. El probe (papel/ceremonia) puede arrancar; el build
+  espera E2. La recta de Contabilidad medida sigue gated post-30-jul.
+
+## >> ESTADO ACTUAL 2026-07-13 (historico; ver bloque 14-jul arriba)
 **Foco: la recta de medicion de Contabilidad queda GATED SOLO por el build-open (post-30-jul). Pre-registro N=6 SELLADO + ceremonia s.11 COMPLETA (verif independiente cerrada). Notion Contabilidad POBLADO. Agentes STOPPED (pausa natural).**
 
 - **PRE-REGISTRO N=6 = SELLADO Y ANCLADO (DECISION-0094, 13-jul ~00:38 local).** El Arquitecto congelo el diseno
