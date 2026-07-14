@@ -39,6 +39,20 @@ Antes de la primera escritura: lee `personal/Arquitecto/STARTUP_PROMPT.md` + `ME
   liga `canonical_hash(config)` = JSON PARSEADO (independiente de line-endings), asi que CRLF no lo rompe; aun asi,
   para instanciar en un repo de producto (modelo 2.A) anade `.gitattributes` `eol=lf` SCOPED al gobierno
   (`Area_comun/** runtime/** scripts/** protocol.config.json ...`), NO al `src/` del producto.
+- **`new_instance.py --force` hace RMTREE del target COMPLETO (2026-07-14, real):** si hiciste `git init`
+  antes de instanciar, el `--force` BORRA ese `.git`. Orden correcto: instanciar PRIMERO, `git init` DESPUES.
+- **Nacimiento born-operational con FIRMANTES HUMANOS desde el genesis (patron Nova-Payroll, 2026-07-14):**
+  el roster los declara `tier: signer` -> `run_keygen` les genera privadas ed25519 EN ESTA MAQUINA (violaria
+  "privada del humano solo en SU maquina"). Cirugia post-instanciacion OBLIGATORIA: (1) reemplazar sus
+  entradas en `event_state.signature_config.public_keys` por las pubkeys REALES (fuente: config de otra
+  instancia donde ya firman, p.ej. NOVA); (2) BORRAR sus `<humano>-ed25519-private.pem` generadas (las
+  eventauth HMAC SI se quedan: son capa de instancia); (3) quitar sus entradas de
+  `actor_auth_config.private_key_files` del override local (firma solo el trio local); (4) VACIAR
+  `runtime/state/events.jsonl` y correr `regenesis.py` UNA sola vez con el config FINAL (el genesis liga
+  canonical_hash del config; un genesis emitido con pubkeys provisionales queda invalido). Verificar en
+  clon limpio y anclar la Entrada de cross-atest con hashes por BLOB de git. OJO: un `--amend` posterior
+  cambia el commit-hash citable -- reportar SIEMPRE el hash final (`git rev-parse HEAD`), no el del primer
+  commit (caso real: 0e01cb3 pre-amend vs 95af2a4 final).
 - **Instancia como SUBCARPETA del repo de producto (modelo 2.A, 1-repo):** `new_instance.py --tier attested` a un
   TEMP (genera trio + genesis), luego COPIA `Area_comun/ runtime/ scripts/ skills/ AGENTS.md protocol.config.json
   event-state.runtime.json` al clon del producto; `.github/workflows/validate.yml` (nombre EXACTO, el runtime tier
@@ -111,6 +125,10 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
 - Si el subject empieza con `fix(`/`revert(`/`hotfix(` (FIX_SUBJECT_PATTERN), EXIGE ADEMAS
   `Fixes-Task: TASK-XXXX` -> si no, "is fix/revert/hotfix without exact Fixes-Task trailer". Para evitarlo
   en commits que no corrigen una tarea, usa subject `chore(`/`coord(`/`tasks(` en vez de `fix(`.
+- **`Ops-Reason` tiene tope de 120 CARACTERES** (OPS_REASON_TRAILER_PATTERN `^Ops-Reason: .{1,120}$`); una
+  linea mas larga hace que el gate reporte "uses Task-Id: none without Ops-Reason" (mensaje enganoso: el
+  trailer EXISTE pero no matchea el patron). Fix: acorta el Ops-Reason; si el commit NO esta pusheado,
+  `--amend` del mensaje es seguro (2026-07-14, real). OJO: el amend arrastra lo STAGED -- verifica el index.
 - **GATEA EL PUSH en validate POST-commit** (no solo pre-commit): un commit con trailer malo se crea igual;
   corre `validate` DESPUES del commit y antes del push. Si sale rojo, el commit ya existe -> corrige en un
   commit nuevo (o, si es teething del gate recien activado, avanza `start_commit` de COMMIT_TRAILERS.json
