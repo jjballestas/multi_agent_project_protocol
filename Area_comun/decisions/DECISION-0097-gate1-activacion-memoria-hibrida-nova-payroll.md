@@ -1,9 +1,9 @@
 ---
 decision_id: DECISION-0097
 title: "Gate-1: activacion SCOPEADA de la memoria hibrida -- implementar REQ v0.3.0 / SPEC v0.2.0 SOLO en la instancia aislada Nova-Payroll (probe de valor, no evidencia)"
-status: proposed-pending-operator-signature
+status: accepted
 date: 2026-07-14
-deciders: [operador humano (FIRMA PENDIENTE), Arquitecto (redacta por GO b699996)]
+deciders: [operador humano (FIRMADA 2026-07-14 via MSG-20260714-Operador-to-Arquitecto-FIRMA-decision-0097-gate1, commit 8e669fc), Arquitecto (redacta por GO b699996)]
 supersedes: []
 superseded_by: []
 relates_to: [DECISION-0081, DECISION-0095, DECISION-0096, DECISION-0026, DECISION-0040]
@@ -12,15 +12,18 @@ derives_from:
   - "personal/operador/requerimientos-futuros/memoria-hibrida-db-archivo-frio/REQ-MEMORIA-HIBRIDA-DB-ARCHIVO-FRIO.md (v0.3.0)"
   - "Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md (v0.2.0, commit 9376bb4)"
   - "Area_comun/mailbox/answered/MSG-20260714-Operador-to-Arquitecto-DIRECTIVA-coordina-probe-memoria-hibrida.md"
-  - "Area_comun/mailbox/open/MSG-20260714-Operador-to-Arquitecto-GO-gate1-roster-nova-payroll.md (GO b699996)"
+  - "Area_comun/mailbox/answered/MSG-20260714-Operador-to-Arquitecto-GO-gate1-roster-nova-payroll.md (GO b699996)"
+  - "Area_comun/mailbox/open/MSG-20260714-Operador-to-Arquitecto-FIRMA-decision-0097-gate1.md (FIRMA 8e669fc)"
 ---
 
 # DECISION-0097 - Gate-1: activacion scopeada de la memoria hibrida (probe Nova-Payroll)
 
-> **DRAFT PARA FIRMA DEL OPERADOR** (GO de redaccion: hub b699996; marco: DIRECTIVA del probe,
-> hub 9b02e23). Esta DECISION se sella via submit_intent SOLO tras la firma escrita del operador;
-> hasta entonces no autoriza nada. NO toca #4: config hub 2E35F26E / epoch 1.14.0 / dataset N=500 /
-> sellos intactos (la DECISION vive fuera del config pineado, patron 0095/0096).
+> **FIRMADA por el operador el 2026-07-14** (FIRMA: MSG-20260714-Operador-to-Arquitecto-FIRMA-
+> decision-0097-gate1, commit 8e669fc; las 7 clausulas aceptadas sin cambios; efecto autorizado:
+> sellado + ceremonia de nacimiento de Nova-Payroll; Fase A pendiente de su GO especifico).
+> Sellada via submit_intent (intent decision) por el Arquitecto. NO toca #4: config hub 2E35F26E /
+> epoch 1.14.0 / dataset N=500 / sellos intactos (la DECISION vive fuera del config pineado,
+> patron 0095/0096).
 
 ## Contexto
 

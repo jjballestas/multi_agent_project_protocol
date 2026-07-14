@@ -54,6 +54,20 @@
             "updated_at": "2026-07-14T00:46:52Z"
         },
         {
+            "claim_id": "CLAIM-20260714-Arquitecto-seal-0097",
+            "expires_at": "2026-07-14T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0097-gate1-activacion-memoria-hibrida-nova-payroll.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260714-Arquitecto-seal-0097"
+            ],
+            "started_at": "2026-07-14T15:33:26Z",
+            "status": "released",
+            "task_id": "OPS-DECISION-0097-SEAL",
+            "updated_at": "2026-07-14T15:33:26Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
