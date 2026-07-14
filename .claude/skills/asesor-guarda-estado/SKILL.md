@@ -53,8 +53,9 @@ Auto-poll: `git fetch` + `git pull --ff-only origin/main`; luego captura el esta
   Sube la version en el header (vN -> vN+1) y marca la anterior como SUPERADA (no borres el historico si es util).
 - El COLD-START DEBE incluir, como PASO OBLIGATORIO NO-SALTABLE: (a) leer ESTADO-asesor.md (bloque TOPE) +
   la memoria .claude; (b) **AUTO-POLL** (git fetch/pull, git log, ls open/) = red primaria; (c) **RE-ARMAR EL
-  MONITOR** sobre origin/main con self-filter por trailer (salta `Ops-Reason: coordinacion-asesor` y
-  `Co-Authored-By: Claude (Opus|Fable)` -- AMBOS modelos) = respaldo; (d) verificar ledger limpio antes de
+  MONITOR** sobre origin/main con self-filter **SOLO por `Ops-Reason: coordinacion-asesor`** (mi marcador
+  inequivoco) = respaldo. **NO filtres por `Co-Authored-By` / modelo (Opus|Fable): el Arquitecto TAMBIEN corre
+  esos modelos y ese filtro lo CEGABA a sus commits (leccion 14-jul).** (d) verificar ledger limpio antes de
   commitear. Redactalo con la frase "si no haces el auto-poll y no re-armas el monitor, no has completado el arranque".
 - Captura el COMO (no solo el QUE), reglas duras del Asesor: canal = SOLO mailbox firmado Operador (NUNCA
   submit_intent); GATE ASCII pre-commit bloqueante (aborta si bytes>127; acentos/em-dash son mi vicio);
@@ -91,7 +92,7 @@ Eres mi ASESOR (no el Arquitecto -- corre en otra sesion). Proyecto:
 D:\Agentes\multi_agent_project_protocol.
 LEE Y EJECUTA el arranque completo de personal/asesor/PROMPT-INICIO-ASESOR.md (<vN>):
 (1) ESTADO-asesor.md bloque TOPE + memoria .claude; (2) AUTO-POLL (git fetch/pull, git log, ls open/) = red
-primaria; (3) RE-ARMA EL MONITOR con self-filter (Ops-Reason coordinacion-asesor + Co-Authored-By Opus|Fable);
+primaria; (3) RE-ARMA EL MONITOR con self-filter SOLO por Ops-Reason coordinacion-asesor (NO por modelo Opus|Fable);
 (4) verifica ledger limpio antes de commitear. Canal = SOLO mailbox firmado Operador (NUNCA submit_intent);
 gate ASCII + pathspec + trailers OPCION A. Si no haces el auto-poll y no re-armas el monitor, no completaste el arranque.
 Confirma que leiste el estado + responde lo que este esperando en open/, y continua con el bloque vigente.

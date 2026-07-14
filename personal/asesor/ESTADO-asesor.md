@@ -2,7 +2,7 @@
 
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
-> Ultima actualizacion: 2026-07-04 ~14:00Z (CIERRE DE SESION). **SELLO ETAPA 1 EJECUTADO Y ATESTADO**
+> Ultima actualizacion: 2026-07-14 ~23:09 local Madrid (CIERRE DE SESION; ver bloque TOP 15-jul arriba). Lo de abajo es historia. **SELLO ETAPA 1 EJECUTADO Y ATESTADO**
 > (DECISION-0091, #4 seq 3831; corpus congelado + schema v1.0 + sorteo pre-registrado corrido con semilla NIST
 > pulso 1844242 -- VERIFICADO independiente por el Asesor byte a byte: 2 completo / 8 ligero). Se construyo
 > Nova-Budget de cero: GOAL-P1 (done+medido+atestado sha256 d2a13216) + skill codegen-triage (viva) + 14 SPECs
@@ -11,7 +11,56 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-14 (LEER PRIMERO; supersede todo lo de abajo)
+## >> ESTADO ACTUAL 2026-07-15 (LEER PRIMERO; supersede TODO lo de abajo, incl. el bloque 14-jul)
+**Foco proxima sesion: DESARROLLAR LA MEMORIA HIBRIDA (Fase A sobre Nova-Payroll) -- directiva del operador al cierre del 14-jul ("manana vamos a desarrollar la memoria hibrida"). Dia 14-jul CERRADO end-to-end: DECISION-0097 (Gate-1) + DECISION-0098 (scratch-root) SELLADAS; Nova-Payroll NACIDA (local) + anclada Entrada 0; hardening 15-jul/PAR-2 cerrado (s.29 firmada, PAR-2 FUERA); skill notion-spec-mirror viva + retroactiva a Contabilidad. HEAD=origin 2d1ff24. FONDO 2E35F26E / epoch 1.14.0 / N=500 INTACTO. (Cierre ~23:09 local Madrid UTC+2.)**
+
+- **>> DIRECTIVA PROXIMA SESION -- MEMORIA HIBRIDA (el bloque de trabajo).** El operador quiere DESARROLLAR la
+  memoria hibrida = Fase A de `Area_comun/specs/SPEC-MEMORIA-HIBRIDA.md` (v0.2.0) sobre **Nova-Payroll**. CONTEXTO
+  DURO antes de arrancar:
+  - **DECISION-0097 (SELLADA)** AUTORIZA implementar REQ v0.3.0 / SPEC v0.2.0 **SOLO en Nova-Payroll**, alcance
+    **Fase A** (F1 indexador read-only + round-trip + drift + revive_pack s.5.5; F2 minimo si el probe lo pide;
+    **F3+ NO** -- exigen su propia DECISION).
+  - **Clausula 4 "Contabilidad gana":** el BUILD de Fase A arranca TRAS el sello E2 **o con ventana ociosa
+    DECLARADA por el operador**, y necesita su **GO especifico de Fase A**. => AL ARRANCAR: confirmar con el
+    operador si declara ventana ociosa / da el GO de Fase A (el operador ya dijo "manana desarrollamos", pero el
+    GO formal de Fase A conviene explicito para no romper el freno).
+  - **Firewall anti-HARKing (cl.3):** el probe es SOPORTE A DECISION del operador, **NO evidencia**; nada entra al
+    corpus citable. El go/no-go se decide por **DEMOSTRACION** (round-trip verde + cold-start recall + **REVIVE
+    demostrable** + drift 0), no por estadistica. Medicion rigurosa/citable exigiria pre-registro previo (Fase B).
+  - **Un solo DDL master** (SPEC s.3) via export born-operational (DECISION-0096); port del `memdb.py` (hallazgo
+    M6). PROHIBIDO tercer esquema. **PII de nomina JAMAS al store** (frontera dura ya en el AGENTS de Nova-Payroll).
+- **Nova-Payroll (el vehiculo, YA EXISTE):** repo **LOCAL** en `D:/Agentes/NOVA-Suite/Nova-Payroll`. Genesis
+  `0e01cb3`; Entrada 0 anclada en el hub (commit `262a541`); **`payroll_commit 95af2a4` LOCAL-ONLY por tu orden**;
+  config-epoch git-blob **4229BDBC** / canonical **0345B5D9**; 5 firmantes con pubkeys reales (Julian firmante
+  desde el genesis); `scratch_root` declarado. **Remoto GitHub = NO crear/pushear hasta GO explicito (post-E2).**
+- **DECISION-0098 (scratch-root, SELLADA):** regla todos-los-proyectos `D:/Aegis_Scratch/<proyecto>/<proposito>/`
+  (`~/Aegis_Scratch` POSIX); campo OPCIONAL `scratch_root` (configs pineados EXENTOS, sin re-genesis); cableado
+  ACTIVO (template/new_instance/validador py+ps1/gitignore). Raiz del disco LIMPIA; 3 dirs `nova-*` reapeados; 2
+  residuales en `D:/Aegis_Scratch/NOVA-Suite/residue/` (`nova-9310-tx.json`, `nova-a2-events.bak`; reap final tuyo,
+  por ahora NO reap). Anomalia `TASK-SANDBOX` movida a `personal/operador/` (opcion b).
+- **Sello E2:** `s.6` (pool **n=10 CONFIRMADO sin PAR-2**) CERRADO + **hardening/s.29 CERRADO** (checkpoint 15-jul
+  cumplido EN PLAZO, evidencia declarada honesta; **PAR-2 = FUERA del pool**). Numero smoke **citable = 30** (no 36;
+  la anomalia 36-vs-30 es DECISION-0018 para el Arquitecto de NOVA). **UNICO bloqueo restante de E2 = `s.1`
+  reconciliacion 26-29-jul.** Contabilidad MEDIDA sigue gated post-30-jul (ruta critica real).
+- **Skill `notion-spec-mirror`** (la creo el Arquitecto sobre mi DIRECTIVA): viva + master exportable + aplicada
+  RETROACTIVO a las 9 SPEC-CONT. Espeja SPEC/DONE -> Notion con pasos-dentro; Notion = read-model del ledger,
+  disparo post-commit. IDs Notion en memoria `[[notion-workspace-nova]]`.
+- **Manual de Julian** (`D:/Agentes/Ingenas/MANUAL-onboarding-julian-contabilidad-aegis.html`, mi area, SIN commit):
+  **v4**. Esta sesion += seccion **2-B "Nuestros artefactos frente al spec-driven (SDD / Spec Kit)"** (referencia
+  SDD/Spec Kit como metodologia CONOCIDA, SIN la palabra "tutorial" -- correccion del operador; 2 tarjetas + mapeo +
+  capa de gobernanza) + diagrama "vista de pajaro" convertido de ASCII-consola a **HTML grafico** (3 nodos push/pull)
+  + caja repo-org en PRESENTE (sin "antes/ahora"). (Los otros `<pre>` son comandos reales, se quedan.) Preview:
+  `python -m http.server 8791` en `D:/Agentes/Ingenas` (matar si sigue vivo).
+- **>> FIX del MONITOR (COMO durable, importante):** el self-filter del monitor **NO debe incluir**
+  `Co-Authored-By: Opus|Fable` -- el **Arquitecto TAMBIEN corre Opus/Fable** y ese filtro lo **CEGABA** a sus
+  commits. El monitor correcto filtra **SOLO `Ops-Reason: coordinacion-asesor`** (mi marcador inequivoco). YA
+  corregido en el PROMPT v11 y en la skill `asesor-guarda-estado`.
+- **open/:** 5 RESP del Arquitecto->Operador (0098-sellada, s29-sellada, skill-notion, cross-atest 12-jul,
+  secuencia-probe); **NINGUNO espera MI respuesta** (FYI/cierres que el Arquitecto archivara).
+- **SIGUIENTE ACCION:** arrancar el desarrollo de la memoria hibrida -- confirmar con el operador ventana ociosa /
+  GO de Fase A (freno "Contabilidad gana") + recordar el firewall anti-HARKing; el vehiculo Nova-Payroll YA existe.
+
+## >> ESTADO ACTUAL 2026-07-14 (historico; ver bloque 15-jul arriba)
 **Foco: la recta de medicion de Contabilidad sigue gated post-30-jul (E2: corpus <=25-jul, BR-C4 <=29-jul). Sesion 14-jul = onboarding Julian a NOVA COMPLETO + reorg 2.A cerrado + DEBATE memoria (Engram/gentle-ai) + coordinacion del PROBE de memoria hibrida sobre Nova-Payroll. HEAD=origin b699996, fondo 2E35F26E/1.14.0 INTACTO.**
 
 - **INSTANCIA re-nacida como NOVA 2.A (dos-trios) + A2-nominal RE-DEMOSTRADO EN VIVO.** NOVA es instancia
