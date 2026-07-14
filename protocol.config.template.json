@@ -4,6 +4,7 @@
   "runtime_version": "{{PROTOCOL_VERSION}}",
   "project_name": "{{PROJECT_NAME}}",
   "adoption_tier": "{{ADOPTION_TIER}}",
+  "scratch_root": "{{SCRATCH_ROOT}}",
   "source_of_truth": "AGENTS.md",
   "agent_roles": {
     "architect": "{{AGENT_ARCHITECT}}",

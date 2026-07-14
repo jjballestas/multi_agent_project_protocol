@@ -577,6 +577,47 @@ function Test-ProtocolVersionSatisfies {
     return @{ Satisfies = $true; Parseable = $true }
 }
 
+function Validate-ScratchRoot {
+    param(
+        [string]$Root,
+        [object]$Config
+    )
+    # Scratch-root policy (DECISION-0098): if the config declares a scratch_root, it must be
+    # an absolute path OUTSIDE the instance tree. Absent or empty field = policy not adopted:
+    # no-op. Absoluteness is host-independent (drive-rooted X:/, separator-rooted / or \, or
+    # home-anchored ~); the inside-tree check only runs when the path is resolvable with the
+    # host's own path semantics (parity with validate_scratch_root in the .py validator).
+    if (-not $Config -or -not ($Config.PSObject.Properties.Name -contains "scratch_root")) {
+        return
+    }
+    $scratch = $Config.scratch_root
+    if (-not $scratch -or -not ($scratch -is [string])) {
+        return
+    }
+    $value = [string]$scratch
+    $isAbsolute = ($value -match '^[A-Za-z]:[\\/]') -or $value.StartsWith("/") -or $value.StartsWith("\") -or $value.StartsWith("~")
+    if (-not $isAbsolute) {
+        Fail "scratch_root must be an absolute path outside the instance tree, got: $scratch"
+        return
+    }
+    $expanded = $value
+    if ($value -eq "~" -or $value.StartsWith("~/") -or $value.StartsWith("~\")) {
+        $suffix = $value.Substring(1).TrimStart("/", "\")
+        $expanded = if ($suffix) { Join-Path $HOME $suffix } else { $HOME }
+    }
+    if (-not [System.IO.Path]::IsPathRooted($expanded)) {
+        return
+    }
+    $resolvedRootPath = [System.IO.Path]::GetFullPath($Root)
+    $resolvedScratch = [System.IO.Path]::GetFullPath($expanded)
+    $comparison = if ($env:OS -eq "Windows_NT") { [System.StringComparison]::OrdinalIgnoreCase } else { [System.StringComparison]::Ordinal }
+    $rootPrefix = $resolvedRootPath.TrimEnd([char]'\', [char]'/') + [System.IO.Path]::DirectorySeparatorChar
+    if ($resolvedScratch.TrimEnd([char]'\', [char]'/').Equals($resolvedRootPath.TrimEnd([char]'\', [char]'/'), $comparison) -or
+        $resolvedScratch.StartsWith($rootPrefix, $comparison)) {
+        Fail "scratch_root must live OUTSIDE the instance tree (scratch never enters the attested tree): $scratch is inside $Root"
+    }
+}
+
 function Validate-AdoptionTier {
     param(
         [string]$Root,
@@ -1033,6 +1074,7 @@ if ($state -and $config -and $config.state_invariants) {
     }
 }
 
+Validate-ScratchRoot -Root $resolvedRoot -Config $config
 Validate-AdoptionTier -Root $resolvedRoot -Config $config
 $eventStateConfigError = Get-EventStateConfigError -Config $config
 if ($eventStateConfigError) {

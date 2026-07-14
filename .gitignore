@@ -17,6 +17,10 @@ runtime/state/.ledger.lock
 secrets/
 .protocol-secrets/
 
+# Scratch-root policy (DECISION-0098): scratch lives OUTSIDE the tree under
+# <drive>/Aegis_Scratch/<project>/<purpose>/; this guard catches accidental in-tree creation.
+Aegis_Scratch/
+
 # Connector / operator credentials -- NEVER commit secrets (hard boundary, AGENTS.md s4)
 *.env
 personal/operador/*.env

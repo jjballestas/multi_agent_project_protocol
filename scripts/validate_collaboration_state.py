@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -1273,6 +1274,53 @@ def validate_protocol_state_drift(
             validation.warn(f"Runtime protocol state drift detected (warning-only B.1): {paths}")
 
 
+def scratch_root_is_absolute(value: str) -> bool:
+    """Host-independent absoluteness: a config may declare a Windows drive path while the
+    validator runs on POSIX CI (and vice versa). Accepted absolute shapes: drive-rooted
+    (X:/ or X:\\), separator-rooted (/ or \\), or home-anchored (~). Drive-relative paths
+    (X:foo) are NOT absolute."""
+    return bool(re.match(r"^[A-Za-z]:[/\\]", value)) or value.startswith(("/", "\\", "~"))
+
+
+def validate_scratch_root(
+    root: Path,
+    config: dict[str, Any] | None,
+    validation: Validation,
+) -> None:
+    """Scratch-root policy (DECISION-0098): if the config declares a scratch_root, it must
+    be an absolute path OUTSIDE the instance tree (scratch never enters the attested tree).
+    Absent or empty field means the policy is not adopted by this (e.g. pinned legacy)
+    config: no-op. Absoluteness is host-independent; the inside-tree check only runs when
+    the path is resolvable with the host's own path semantics (a foreign-platform absolute
+    path cannot be inside this host's tree)."""
+    scratch = (config or {}).get("scratch_root")
+    if not scratch or not isinstance(scratch, str):
+        return
+    if not scratch_root_is_absolute(scratch):
+        validation.fail(
+            f"scratch_root must be an absolute path outside the instance tree, got: {scratch}"
+        )
+        return
+    expanded = scratch
+    if scratch == "~" or scratch.startswith(("~/", "~\\")):
+        try:
+            expanded = str(Path(scratch).expanduser())
+        except (RuntimeError, OSError):
+            return
+    if not Path(expanded).is_absolute():
+        return
+    resolved = Path(os.path.abspath(expanded))
+    root_resolved = Path(os.path.abspath(str(root)))
+    try:
+        resolved.relative_to(root_resolved)
+    except ValueError:
+        return
+    validation.fail(
+        f"scratch_root must live OUTSIDE the instance tree (scratch never enters the "
+        f"attested tree): {scratch} is inside {root}"
+    )
+
+
 def validate(root: Path, config_path: Path | None = None) -> Validation:
     validation = Validation()
     root = root.resolve()
@@ -1310,6 +1358,7 @@ def validate(root: Path, config_path: Path | None = None) -> Validation:
     )
 
     validate_state_invariants(state if isinstance(state, dict) else None, config, validation)
+    validate_scratch_root(root, config, validation)
     validate_adoption_tier(root, config, validation)
     validate_event_state_config(config, validation)
     validate_event_auth_no_live_literal_secret(config, validation)

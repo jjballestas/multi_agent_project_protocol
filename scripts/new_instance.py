@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -201,6 +202,17 @@ def parse_args() -> argparse.Namespace:
             "JSON file for attested tier. Shape: "
             "{\"agents\":[{\"id\":\"agent-a\",\"role\":\"architect\",\"tier\":\"signer\","
             "\"llm_preset\":\"default\"}]}"
+        ),
+    )
+    parser.add_argument(
+        "--scratch-root",
+        default=None,
+        help=(
+            "Single scratch root the instance declares at birth for ALL its temporary work "
+            "(validation clones, staging, independent crons). Must live OUTSIDE the instance "
+            "tree, under the per-disk umbrella (default: <target drive>/Aegis_Scratch/"
+            "<project_name>/ on Windows, ~/Aegis_Scratch/<project_name>/ elsewhere). "
+            "Ad-hoc work dirs at the disk root are forbidden by policy."
         ),
     )
     parser.add_argument(
@@ -456,7 +468,7 @@ def ensure_protocol_secrets_gitignored(target: Path) -> None:
     lines = []
     if gitignore.exists():
         lines = gitignore.read_text(encoding="utf-8-sig").splitlines()
-    required = ["protocol-secrets/", ".protocol-secrets/"]
+    required = ["protocol-secrets/", ".protocol-secrets/", "Aegis_Scratch/", ".protocol-tmp/"]
     changed = False
     for item in required:
         if item not in lines:
@@ -739,6 +751,34 @@ def find_unresolved_placeholders(target: Path) -> list[str]:
     return unresolved
 
 
+def resolve_scratch_root(args: argparse.Namespace) -> str:
+    """Scratch-root policy (DECISION-0098): one scratch root per project, declared at birth,
+    outside the tree. Default umbrella: <drive of target>/Aegis_Scratch/<project_name>/ on
+    Windows, ~/Aegis_Scratch/<project_name>/ elsewhere. Forward slashes for cross-platform
+    configs. A user-provided value is validated at birth (born validatable): it must be
+    absolute (host-independent shapes: X:/, / or \\, ~) and must not point inside the target.
+    """
+    if args.scratch_root:
+        value = str(args.scratch_root).replace("\\", "/")
+        if not (re.match(r"^[A-Za-z]:/", value) or value.startswith(("/", "~"))):
+            raise ValueError(
+                f"--scratch-root must be an absolute path outside the instance tree, got: {value}"
+            )
+        try:
+            target_abs = Path(args.target).resolve()
+            Path(value).expanduser().resolve().relative_to(target_abs)
+        except (ValueError, RuntimeError, OSError):
+            return value
+        raise ValueError(
+            f"--scratch-root must live OUTSIDE the instance tree, got: {value} inside {args.target}"
+        )
+    project = args.project_name
+    if os.name == "nt":
+        drive = Path(args.target).resolve().drive or "C:"
+        return f"{drive}/Aegis_Scratch/{project}/"
+    return f"~/Aegis_Scratch/{project}/"
+
+
 def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]:
     today = date.today().isoformat()
     protocol_version = args.protocol_version or discover_protocol_version(source)
@@ -753,6 +793,7 @@ def build_replacements(args: argparse.Namespace, source: Path) -> dict[str, str]
     return {
         "PROJECT_NAME": args.project_name,
         "ADOPTION_TIER": args.tier,
+        "SCRATCH_ROOT": resolve_scratch_root(args),
         "PROJECT_GOAL": args.project_goal,
         "PROJECT_DESCRIPTION": args.project_description,
         "PHASE_ID": args.phase_id,
@@ -826,6 +867,7 @@ def main() -> int:
         render_templates(source, gov, replacements)
         render_remaining_files(gov, replacements)
         create_personal_areas(gov, args)
+        ensure_protocol_secrets_gitignored(target)
         if args.tier == "runtime":
             copy_runtime_tier_files(source, target, gov)
         elif args.tier == "attested":
