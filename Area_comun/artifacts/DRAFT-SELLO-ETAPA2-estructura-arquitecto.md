@@ -103,12 +103,20 @@
   `ffd2faa`; privada solo en su maquina). `[LLENAR-AL-SELLAR-E2]` maker/checker por unidad + cualquier
   participante adicional.
 
-## 6. Condiciones de pertenencia del pool -- [BLOQUEADO: entrega BR-C4 <=29-jul + hardening 15-jul]
-> [ACTUALIZACION 2026-07-14: el paquete "DEC dominio P3.x" quedo resuelto el 6-jul (BR-C4 = opcion b del
-> Operador). Lo pendiente NO es una decision: es la ENTREGA VERIFICADA del sembrado BR-C4 por el DBA
-> (deadline duro <=29-jul; auto-fallback pre-declarado a n=7 si no llega). EN VUELO: la instancia NOVA
-> registro TASK-9392 (BR-C4 gobernado, ready + GO al maker jheredia, commit NOVA `8fd7e75`) el 14-jul;
-> incluye el harness de verificacion. El status del hardening 15-jul (PAR-2/Annul_*) se reporta manana.]
+## 6. Condiciones de pertenencia del pool -- **DESBLOQUEADO 2026-07-14 (n=10 CONFIRMADO)**
+> [ACTUALIZACION 2026-07-14 ~14:20: las DOS condiciones de esta seccion estan CUMPLIDAS.]
+> (a) **BR-C4 = ENTREGADA Y DOBLEMENTE VERIFICADA -> n=10 CONFIRMADO.** Cadena completa: paquete P3.x
+> resuelto por el Operador el 6-jul (opcion b) -> sembrado del DBA + verificacion EN VIVO del Arquitecto
+> (enmienda s.27 del sello E1, 2026-07-06: 6/6 guardas, THROW 50320-50324, matriz 9x9 1:1 por celda) ->
+> re-verificacion GOBERNADA Y FIRMADA en la instancia NOVA (enmienda s.28, 2026-07-14: TASK-9392 done,
+> maker jheredia:v1 + checker one-shot analista:v1, smoke 30 casos 0 fallos + control negativo, drift 0;
+> commits NOVA 8fd7e75..b984cd4). Hallazgo MENOR de s.27 (identidad cross-doc viva) sigue abierto, no
+> bloquea (estructura 1:1 lo cubre). P3.2/P3.3/P3.4 CONSERVAN elegibilidad Q4.
+> (b) **Hardening 15-jul (PAR-2/Annul_*) = SI, entregado ADELANTADO** (FYI de la instancia NOVA
+> 2026-07-14: PAR-2 parity preflighted + los tres Budget.Annul_* existentes y guardados con
+> Assert_Permission, verificado en vivo contra el sandbox; caveat declarado: procs viven en la BD, solo
+> CDP-annul cableado en C#; commit de consolidacion a2333dc/TASK-0254).
+> **=> El UNICO bloqueo restante del sello E2 es s.1 (reconciliacion 26-29-jul).**
 - Marco REDACTABLE: pool Q4 nominal n>=10 (Etapa 1 s.5). Composicion por ESTIMATE: estrato M (n=6): NB-P2-3,
   NB-P3-2, NB-P3-3, NB-P3-4, NB-P4-4, NB-P6-3; estrato S (n=4): NB-BRC3-1..4 (cluster Get_*_List). P3.1 NO
   pertenece (pattern-setter, excluida del contraste central).

@@ -751,3 +751,30 @@ dev gobernado no crea los procs).
 ---
 
 Firmado (pre-registro): asesor del Operador. Atesta: Arquitecto (sha256 via intent del hub).
+
+---
+
+## 28. ENMIENDA FECHADA 2026-07-14T12:20Z (Arquitecto) - BR-C4 RE-VERIFICADA GOBERNADA en la instancia NOVA (TASK-9392): replica independiente FIRMADA de s.27
+
+**No reabre el sello; ELEVA la clase de evidencia de s.27.** La confirmacion n=10 de s.27 (2026-07-06,
+verificacion en vivo del Arquitecto como `nova_budget_verifier`) queda ahora respaldada por un ciclo
+GOBERNADO COMPLETO con firmas en el ledger de la instancia NOVA (frontera dos-trios, DECISION-0095 del
+hub: su trio ejecuto, el hub solo lee y registra):
+
+- **TASK-9392** (BR-C4 gobernado) en el ledger de NOVA: registro+GO (`8fd7e75`) -> maker jheredia
+  ATESTA el hardening (`af53c76`; firma jheredia:v1 verificada por el checker, test de tamper de 1 byte
+  -> invalid_signature) -> REVIEW independiente one-shot del Analista (`ab64a5d`, review_approved seq 55,
+  analista:v1 + analista-hmac:v1) -> done-flip del implementer (`b984cd4`) -> reporte y archivo
+  (`75c64d3`). drift.has_drift=false, replay_hash==hot_hash.
+- **Evidencia del checker (independiente de s.27, MISMOS hallazgos estructurales):** 9 permisos + 9
+  roles 1-a-1 + 9 procs con `Security.Assert_Permission`; SESSION_CONTEXT + THROW **50320-50324**
+  (== set de s.27); smoke de separacion `tests/db-verification/br_c4_separation_smoke.py`:
+  **RESULT PASS exit 0, cases=30, failures=0**, por-identidad (cada identidad PASA solo su operacion
+  concedida, THROW 50324 en las otras dos) + control negativo (identidad sin acceso bloqueada en las 3).
+- **Continuidad del hallazgo MENOR de s.27 (sin cambio, no bloquea):** el smoke gobernado prueba la
+  separacion POR OPERACION dentro de cada documento con identidades vivas + la estructura 1:1 por celda;
+  la separacion ENTRE documentos con identidad viva (p.ej. approver de CDP bloqueado en OBL.approve)
+  sigue demostrada solo ESTRUCTURALMENTE. La recomendacion de s.27 (1 identidad cross-doc en el proximo
+  smoke del DBA) queda vigente.
+- **Efecto:** n=10 CONFIRMADO (sin cambio vs s.27); el sello Etapa 2 puede citar TASK-9392 como la
+  evidencia GOBERNADA Y FIRMADA de la condicion s.3, ademas de la verificacion directa de s.27.
