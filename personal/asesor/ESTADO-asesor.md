@@ -51,9 +51,12 @@
     indicios: medicion RIGUROSA (pre-registro del Asesor O folded en metricas Q1-Q5).
   - **Estado de ruteo:** DIRECTIVA marco (9b02e23) -> Arquitecto CONFIRMO con 4 precisiones (RESP 64d5c5e: Gate-1
     ACTIVA citando 0081 no re-supersede / OFF estructural / un DDL master via export born-operational / build tras E2).
-    **GO Gate-1 + roster RUTEADOS (b699996):** repo `D:/Agentes/NOVA-Suite/Nova-Payroll`; trio Arquitecto/Codex/
-    Analista + jball; **Julian firmante DESDE EL NACIMIENTO**. **EN VUELO: el Arquitecto entrega el DRAFT del Gate-1
-    para la firma del operador** (mi GO b699996 requires_response Arquitecto).
+    **GO Gate-1 + roster ruteados (b699996)** -> Arquitecto entrego el draft -> **operador FIRMO (8e669fc) ->
+    Gate-1 SELLADO: `DECISION-0097` accepted** (sello b13e090, tx seq 4688-4690 drift 0; fondo INTACTO). Autoriza
+    implementar la **Fase A SOLO en Nova-Payroll** (repo NOVA-Suite/Nova-Payroll; trio Arquitecto/Codex/Analista +
+    jball + jheredia firmante desde el genesis; PII de nomina fuera del store; OFF estructural+vinculante en
+    hub/medidas; firewall anti-HARKing). **SIGUIENTE (Arquitecto):** ceremonia de nacimiento de Nova-Payroll
+    (papel/ceremonia, no compite con E2); la Fase A build queda gated por su GO especifico + sello E2 ("Contabilidad gana").
 - **NOTION:** Contabilidad POBLADA (9 menus + 25 opciones option_id/menu + raiz + Fecha->date + fila proyector
   TASK-9310). Creada DB **"Tareas de metodologia"** en METODOLOGIA (ds 61f88150-e0be-497b-8d8d-acb4e4ae31c2) con
   **6 tareas del probe** (Gate-1/nacer-instancia/Fase-A/slice/pre-registro/Fase-B), zona Planeacion, is_governed NO.
@@ -64,9 +67,14 @@
   y para profesionalizar a quien construye con IA sin serlo".
 - **open/:** nada espera MI respuesta. Vivo: mi GO Gate-1 (b699996, espera draft del Arquitecto). Stale candidato a
   higiene del Arquitecto: RESP-cross-atestacion 12-jul.
-- **SIGUIENTE ACCION:** cuando el Arquitecto entregue el draft del Gate-1 -> traerlo al operador para su FIRMA.
-  Mantener projector-ready + monitor armado + EVIDENCIA-VIVA. El probe (papel/ceremonia) puede arrancar; el build
-  espera E2. La recta de Contabilidad medida sigue gated post-30-jul.
+- **NUEVO 14-jul tarde:** **DECISION-0098 (scratch root unico) PENDIENTE FIRMA del operador** (carril Arquitecto:
+  cableado template/new_instance/validador host-independiente). **Nueva DIRECTIVA/skill `notion-spec-mirror`**
+  (operador 14-jul): espejar SPEC/DONE -> Notion con los PASOS DENTRO de la pagina, post-commit, upsert idempotente
+  por spec_id/task_id (Notion = read-model, nunca fuente). El Arquitecto poblo la DB "Tareas de metodologia"
+  (14 tareas con pasos + seccion "Ruta de convergencia"). Boundary reforzado (skill Arquitecto + safety): **el Asesor
+  NO firma DECISIONes por el operador** -- la firma es acto humano genuino; yo solo RELEVO.
+- **SIGUIENTE ACCION:** vigilar la ceremonia de nacimiento de Nova-Payroll (Arquitecto) + el GO de la Fase A (tras E2).
+  Mantener projector-ready + monitor armado + EVIDENCIA-VIVA + espejo notion-spec-mirror. Contabilidad medida gated post-30-jul.
 
 ## >> ESTADO ACTUAL 2026-07-13 (historico; ver bloque 14-jul arriba)
 **Foco: la recta de medicion de Contabilidad queda GATED SOLO por el build-open (post-30-jul). Pre-registro N=6 SELLADO + ceremonia s.11 COMPLETA (verif independiente cerrada). Notion Contabilidad POBLADO. Agentes STOPPED (pausa natural).**

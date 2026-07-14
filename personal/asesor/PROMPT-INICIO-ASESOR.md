@@ -4,8 +4,9 @@
 > + **HMAC PROPIO jheredia-hmac:v1**, NO codex); **reorg 2.A cerrado** (NOVA instancia dos-trios, genesis fresco
 > config-epoch **C2DE91F9**, gobernanza encapsulada bajo `Aegis/`, A2-nominal RE-DEMOSTRADO en vivo TASK-9391);
 > **DECISION-0095/0096 + v1.19.0** (epoch pineado 1.14.0 intacto); **DEBATE memoria vs Engram/gentle-ai** ->
-> **PROBE de memoria hibrida coordinado** sobre Nova-Payroll. **EN VUELO: el Arquitecto entrega el DRAFT del Gate-1
-> para la firma del operador** (mi GO b699996). (v9 y anteriores en git.)
+> **PROBE de memoria hibrida coordinado** sobre Nova-Payroll -> **Gate-1 SELLADO (DECISION-0097, firma operador
+> 8e669fc)**; SIGUIENTE = ceremonia de nacimiento de Nova-Payroll (Arquitecto) + GO de Fase A tras E2. DECISION-0098
+> (scratch root) PENDIENTE FIRMA. Nueva skill `notion-spec-mirror`. (v9 y anteriores en git.)
 
 ## AL ARRANCAR, LEE EN ESTE ORDEN (paso obligatorio no-saltable)
 1. **personal/asesor/ESTADO-asesor.md** -> bloque ">> ESTADO ACTUAL 2026-07-14" (tu fuente de verdad canonica).
@@ -46,10 +47,10 @@
   preguntar: preparo el siguiente entregable. Guardrails: estudio medido + genesis del hub NO se tocan.
 
 ## BLOQUE DE TRABAJO VIGENTE (2026-07-14)
-1. **Probe de memoria hibrida (coordinacion viva, mi carril):** ver ESTADO bloque 14-jul. **EN VUELO: espero el
-   DRAFT del Gate-1** que el Arquitecto entrega para la firma del operador (mi GO b699996 requires_response Arquitecto).
-   Cuando llegue -> traerlo al operador para su FIRMA. Recordar: probe = soporte a decision, NO evidencia (firewall);
-   Nova-Payroll aislado; slice acotado de Nomina; Fase A build TRAS sello E2 salvo idle ("Contabilidad gana").
+1. **Probe de memoria hibrida (coordinacion viva, mi carril):** ver ESTADO bloque 14-jul. **Gate-1 SELLADO**
+   (DECISION-0097 accepted, firma operador 8e669fc). SIGUIENTE = vigilar la ceremonia de nacimiento de Nova-Payroll
+   (Arquitecto) + el GO de la Fase A (tras sello E2, "Contabilidad gana"). Recordar: probe = soporte a decision, NO
+   evidencia (firewall); Nova-Payroll aislado; slice acotado de Nomina. **NO firmo DECISIONes por el operador** (relevo su firma genuina).
 2. **Contabilidad medida:** gated post-30-jul; E2 en curso (corpus <=25-jul, BR-C4 <=29-jul; n=10 confirmado, s.6 desbloqueado).
    Carril del Arquitecto; yo vigilo integridad del estudio.
 3. **Mantenimiento:** workspace Notion projector-ready + monitor armado + EVIDENCIA-VIVA + manual de Julian al dia.
