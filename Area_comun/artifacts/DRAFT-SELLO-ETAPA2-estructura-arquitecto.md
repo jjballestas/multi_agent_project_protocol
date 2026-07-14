@@ -124,6 +124,16 @@
   P3.2/P3.3/P3.4 esta CERRADA al 29-jul (si no, CAEN del pool y n baja -- subpotenciacion previsible ya
   declarada en s.2); items dependientes de hardening (PAR-2/Annul_*) entran SOLO por enmienda fechada con
   entrega comprometida (registrar si el hardening del 15-jul entrego los procs).
+- **PRE-CHEQUEO 2026-07-14 ~19:45 (informativo, NO sustituye el chequeo del corte): VERDE.** (1) Scan de
+  marcadores abiertos en SPEC-NOVA-P3-002/003/004 con word-boundary = 0 coincidencias (el patron SIN
+  boundary da 3 falsos positivos por la palabra "independientemente" -- documentado para que el chequeo
+  del corte no se asuste con ellos); (2) TASK-9392 (BR-C4) = `done` en el TASK_INDEX de NOVA (lectura
+  read-only, origin fdeb99d). **Comando PRE-DECLARADO para el chequeo VINCULANTE al corte (29-jul),
+  mismo criterio, ejecutar y pegar salida aqui:**
+  `grep -rniE "\b(PENDIENTE|TBD|por resolver|decidir)\b" Area_comun/specs/nova/SPEC-NOVA-P3-002* Area_comun/specs/nova/SPEC-NOVA-P3-003* Area_comun/specs/nova/SPEC-NOVA-P3-004*`
+  (esperado: 0 lineas) + status de TASK-9392 en el TASK_INDEX de NOVA (esperado: `done`). Un verde hoy
+  NO liga el 29: la asercion del sello se fecha AL CORTE (disciplina de pre-registro); este pre-chequeo
+  solo mecaniza el paso (2 min) y registra la linea-base.
 
 ## 7. Anexo de riesgos (REDACTABLE -- de la NOTA-DISENO)
 1. Confusion arranque/regimen (peones agregan overhead propio) -> separar con cubetas Q1; degradacion
