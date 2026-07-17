@@ -2,10 +2,10 @@
 spec_id: SPEC-MEMORIA-HIBRIDA
 title: "Memoria hibrida: repo caliente + archivo frio verificable + DB derivada reconstruible (implementacion del REQ v0.3.0)"
 status: draft-reviewed-informal
-version: 0.2.0
-date: 2026-07-14
+version: 0.2.1
+date: 2026-07-17
 author: Arquitecto
-review: "adversarial informal (subagent anti-rubber-stamp) 2026-07-14: 2 BLOCKER + 7 MAJOR + 5 MINOR, TODOS reales e INCORPORADOS en esta version (registro en s.15); review FORMAL del Analista pendiente de reactivacion de su harness"
+review: "adversarial informal (subagent anti-rubber-stamp) 2026-07-14: 2 BLOCKER + 7 MAJOR + 5 MINOR, TODOS reales e INCORPORADOS en esta version (registro en s.15); review FORMAL del Analista pendiente de reactivacion de su harness. v0.2.1 (2026-07-17): provision F1 del adversarial extracted-vs-inferred (veredicto Analista 476ceac, aceptado por Operador en GO Fase A): contrato de mapeo frontmatter->edge_type (s.5.1b) + invariante I9 F1-no-infiere (s.4) + DoD F1 (s.13); patron epistemico DIFERIDO-LIMPIO a F4"
 derives_from: "personal/operador/requerimientos-futuros/memoria-hibrida-db-archivo-frio/REQ-MEMORIA-HIBRIDA-DB-ARCHIVO-FRIO.md (v0.3.0, RUTA UNICA por DECISION-0081)"
 linked_decisions: [DECISION-0081, DECISION-0026, DECISION-0016, DECISION-0020, DECISION-0022, DECISION-0040, DECISION-0061, DECISION-0096]
 authority: "SPEC de diseno (papel). NO autoriza mover historia canonica ni activar el archivado: eso exige la DECISION de activacion que el REQ s.0.4 requiere. El build no arranca antes del cierre de la ventana medida (compromiso audit-first) salvo GO explicito del operador por fase."
@@ -356,6 +356,15 @@ CREATE TABLE task_context_cache (
 - **I8 - Hashes por BLOB de git.** Todo sha256 de atestacion/manifest se computa sobre
   `git show <commit>:<path>`, nunca working copy (leccion CRLF, cross-atest Entrada 1).
   Etiqueta: DISCIPLINARIO (regla de implementacion) + test golden con CRLF plantado.
+- **I9 - F1 no infiere (provision del adversarial extracted-vs-inferred, 2026-07-17).** TODA arista
+  que el indexador F1 escribe en `artifact_edges` deriva 1:1 de una clave de frontmatter allowlisted
+  (s.7) segun la tabla de mapeo de s.5.1b -- el indexador F1 NO computa aristas por heuristica
+  (relatedness, cercania, texto del cuerpo). Los edge_type sin clave productora en la tabla son
+  enums RESERVADOS que F1 no produce. Si al implementar F1 algun edge_type resultara requerir
+  heuristica, se DETIENE y se re-evalua el patron epistemico diferido a F4 (etiquetado
+  EXTRACTED-vs-INFERRED + procedencia fail-closed) ANTES de producirlo. Etiqueta:
+  ESTRUCTURAL-PENDIENTE-IMPL+TESTS (tests: fixture sin claves de relacion -> 0 aristas; cada arista
+  producida trazable a su clave fuente; enum reservado producido -> fallo del test).
 
 ## 5. Flujos
 
@@ -368,6 +377,26 @@ CREATE TABLE task_context_cache (
 3. Acople con DECISION-0026 (commit-then-memory): el paso de memoria del agente NO cambia (sigue
    escribiendo su markdown en `personal/<id>/`); el indexador lo recoge en la proxima pasada.
    La DB nunca es el lugar donde el agente "escribe memoria": es donde se INDEXA.
+
+### 5.1b Contrato de mapeo frontmatter -> edge_type (provision F1; nota gobernada 2026-07-17)
+
+Tabla v1 del contrato (cada arista F1 nace EXACTAMENTE de una de estas claves allowlisted de s.7;
+invariante I9). `from` = el artefacto cuyo frontmatter contiene la clave, salvo normalizacion
+declarada:
+
+| Clave frontmatter (s.7) | edge_type | Nota |
+|---|---|---|
+| `relates_to` | `mentions` | referencia declarada generica |
+| `linked_decisions` | `decision_for` | from=artefacto, to=decision |
+| `supersedes` | `supersedes` | from=el que supersede |
+| `superseded_by` | `supersedes` | NORMALIZADA: from=to declarado (el superseder), to=el declarante; dedup con la anterior por PK |
+| `file` (en tasks del indice) | `implements` | from=task, to=artefacto entregable |
+
+Edge_type RESERVADOS SIN productor en F1 (el enum del DDL los admite; el indexador F1 NO los
+escribe): `contradicts`, `reviews`, `depends_on`, `handoff_for`, `mailbox_for`, `spec_for`.
+Se activan en fases posteriores, cada uno con su clave/mecanismo productor declarado en su fase
+(p.ej. `contradicts` = F4 con el patron epistemico diferido). Cambiar esta tabla = edicion
+gobernada de esta SPEC, nunca decision del implementador.
 
 ### 5.2 Lectura / cold-start
 1. El agente arranca leyendo el plano hot (s.2.1) - identico a hoy.
@@ -582,7 +611,7 @@ DECISION dejando edge `supersedes` como rastro (arbitraje explicito).
 | Fase | Tarea(s) | Owner/Checker | DoD resumido | Ventana |
 |---|---|---|---|---|
 | F0 discovery | inventario por tipo/estado/tamano + baseline del HOT MAP s.2.1 (herramienta desechable en area personal, s.11-AC10) + borrador de MEMORY_HOT_COLD_RULES.json | Arquitecto / Analista read-only | inventario commiteado + baseline atestado | YA (read-only puro) |
-| F1 DB read-only | PORT/SUPERSEDE del memdb.py de Zeus-protocol-Aegis (M6: diff DDL + plan de migracion) -> `scripts/memory/{build_memory_db,query_memory_db,dump_memory_db,check_memory_db_drift}.py` + `.gitignore` += runtime/memory/ + exclusion en scan_encoding (M5) + modo hot-map del medidor (M3) + tests s.10 (round-trip, I2, I6, PII NEG) | Codex / Analista | tests verdes en clon limpio; I1/I2/I3/I6 pasan a ESTRUCTURAL | post-ventana o instancia, GO operador |
+| F1 DB read-only | PORT/SUPERSEDE del memdb.py de Zeus-protocol-Aegis (M6: diff DDL + plan de migracion) -> `scripts/memory/{build_memory_db,query_memory_db,dump_memory_db,check_memory_db_drift}.py` + `.gitignore` += runtime/memory/ + exclusion en scan_encoding (M5) + modo hot-map del medidor (M3) + tests s.10 (round-trip, I2, I6, PII NEG) + **contrato de mapeo s.5.1b implementado tal cual + declaracion cero-inferencias I9 con sus tests** | Codex / Analista | tests verdes en clon limpio; I1/I2/I3/I6/I9 pasan a ESTRUCTURAL; ninguna arista fuera de la tabla s.5.1b | post-ventana o instancia, GO operador |
 | F2 stubs+manifests | formato stub/manifest + goldens + `--propose-cold` dry-run | Codex / Analista | goldens estables; dry-run correcto sobre fixture | idem |
 | F3 frio real (piloto) | DECISION de activacion (REQ s.0.4, anexa MEMORY_HOT_COLD_RULES.json) + lote piloto tasks done antiguas CON stub-espejo obligatorio para todo lo referenciado por el indice (regla anti-B1 s.5.3) + rehidratacion + medicion AC10 | Arquitecto decide, Codex ejecuta / Analista | piloto archivado+rehidratado verde; `validate` canonico VERDE en clon limpio; AC10 medido | post-30-jul |
 | F4 busqueda avanzada | FTS5 contenido public_ok + conflictos (s.12) + evaluacion embeddings (RFC PII) | Codex / Analista | FTS util; reporte conflictos corre | post-F3 |
