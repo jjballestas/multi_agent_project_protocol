@@ -5,7 +5,27 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-12 (TASK-9304 F-9304-01 re-juicio OK/CERRABLE registrado).
+> Ultima actualizacion: 2026-07-17 (refutacion patron EXTRACTED-vs-INFERRED registrada).
+
+## Ultima actualizacion 2026-07-17 - patron EXTRACTED-vs-INFERRED: DIFERIR-LIMPIO
+- Revision adversarial docs-only registrada y pusheada por Analista en commit `476ceac`
+  (`review(ops): Analista final refuta reserva epistemica`). Ancla canonica: instruccion y SPEC en
+  `cae10ad95d194d263ad5eff88f5d16fc714ae28c`. Artefacto:
+  `Area_comun/artifacts/ANALISTA-OPS-patron-extracted-inferred-aristas-veredicto.md`; MSG rr a Arquitecto:
+  `Area_comun/mailbox/open/MSG-20260717-Analista-to-Arquitecto-REVIEW-patron-extracted-inferred-aristas.md`.
+- Veredicto: REFUTA la recomendacion del Arquitecto de diferir a F4 con dos columnas reservadas en DDL v1.
+  Posicion final DIFERIR-LIMPIO: la DB es cache reconstruible; el default `extracted` falsea procedencia ante
+  omisiones; la PK actual colisiona aristas extracted/inferred del mismo triple; F1 no define el mapeo completo
+  key->edge_type; F4 debe disenar procedencia, evidencia, algoritmo/version/config y score de una vez.
+- `mentions` no demuestra inferencia en F1: la SPEC enumera el edge_type pero no define su fuente. El claim
+  "todo extracted F1-F3" es compatible con la intencion de la SPEC, no una garantia hasta precisar el mapeo.
+  El descarte definitivo de confianza continua tambien se refuta: F4 puede elegir score determinista, confianza
+  calibrada o tiers; el round-trip requiere semantica y serializacion canonica.
+- Alcance sin producto y sin `npm test` por orden expresa. Gates: validate vivo con secretos EXIT 0; clon limpio
+  `cae10ad` sin secretos EXIT 0; encoding/domain EXIT 0; drift false `up_to_seq=4693`; `protocol.config.json`
+  byte-identico SHA-256 `2E35F26E06DE4D0A7E5278BABB2107A9BBE6441C78B99A1886A613070B1EB354`.
+- Colision observada: Arquitecto commiteo el borrador en `ceda165` mientras Analista aun completaba tabla/gates.
+  El follow-up `476ceac` deja la revision final con autor Analista y pide al Arquitecto archivar el hilo resuelto.
 
 ## Ultima actualizacion 2026-07-13 - DECISION-0094 sello N=6 OK-ATESTADO
 - Verificacion independiente s.11.5 del sello pre-registro N=6 registrada por Analista en commit `a560079`
