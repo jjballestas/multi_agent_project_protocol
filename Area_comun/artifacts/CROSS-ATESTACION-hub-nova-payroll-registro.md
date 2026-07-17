@@ -47,3 +47,38 @@
   en 95af2a4): validate_collaboration_state.py exit 0; scan_encoding.py exit 0; genesis unico
   con los 5 firmantes; sin secretos/pycache/override en el arbol commiteado. El hub (2E35F26E /
   1.14.0, dataset N=500, sellos E1/N=6) NO se toco.
+
+## Entrada 1 - 2026-07-17: FASE A / F1 COMPLETA (U1-U4 done) + DEMO REVIVE EXITOSA
+
+- registrado_por: Arquitecto (hub), lectura dos-trios read-only (DECISION-0095; carril
+  automatizado autorizado por GO del operador b27cd80)
+- payroll_commit (rama main, LOCAL-only por orden): bb21d1bdf6797c331b3739c87ea96d650439c289
+- event_count: 137 (seq 1 genesis .. seq 137; drift 0 verificado en cada cierre)
+- sha256_events_jsonl (blob git en payroll_commit): d15a0e99e8a0fe6e423d470ca66db912ae72dac752bddf9a1e1a6098630f3d81
+- F1 ENTREGADA por carril automatizado (Codex maker / checker adversarial / Arquitecto ratifica),
+  4 unidades done el mismo dia:
+  - TASK-0001 U1 indexador read-only + DDL v1 (ciclo: NO-GO 3 BLOCKERs conductuales ->
+    remediacion -> re-judgement GO del Analista formal).
+  - TASK-0002 U2 incremental + rebuild + round-trip AC5 (ciclo: NO-GO AC5-vacuo -> incremental
+    real -> re-judgement GO del Analista formal).
+  - TASK-0003 U3 drift --fast/--full + query/retrieve (GO de checker informal-sustituto en
+    modelo fuerte, checker_formal=0 DECLARADO: CLI del formal bloqueado 2x por clasificador del
+    proveedor; 1 hallazgo MEDIO diferido a F2 con criterio correctivo).
+  - TASK-0004 U4 revive_pack atestado (GO de checker informal-sustituto, checker_formal=0;
+    atestacion verificada por recompute de blobs; 3 hallazgos LOW/ENV a backlog).
+- DEMO REVIVE (criterio 6d del GO): EXITO end-to-end. Muerte real del peon (stop-marker) ->
+  TASK-0005 real pendiente -> pack atestado (sha256
+  9866792ad844228de488f5a57af266f985807a57d0fb653921aa11fe10647557 al commit 23259a8) -> worker
+  de contexto CERO revivio SOLO con el pack, verifico el pack contra el ledger vivo, y continuo
+  la tarea correctamente hasta in_review (seq 129-137, gates 0/0/0, clean-clone verde).
+  Atestacion completa: Aegis/Area_comun/artifacts/DEMO-REVIVE-F1-atestacion.md (sha256 blob
+  f32f3f505d40451843ae53f4117a17563b488064e0a324b1aa63f89bd91c47a8).
+- Runbook AC15-F1: Aegis/Area_comun/reports/F1-RUNBOOK-memoria.md (sha256 blob
+  b8671f86ee9bdcb5b0e6154b2792c15a00dd68b2205b5ca85c62aea73f80ad3d), TASK-0005 in_review
+  (cadena normal de review en curso; la demo no la cierra).
+- Guardrails verificados en todo el ciclo: PII de nomina 0 ocurrencias en DB/packs (probes NEG
+  en cada unidad); DECISION-0081 intacta (cero dependencias externas); patron epistemico
+  DIFERIDO-LIMPIO a F4 (ninguna arista inferida en F1, invariante I9 con tests); DECISION-0099
+  cumplida (checkers siempre en modelo fuerte, sustituciones declaradas).
+- El hub NO se toco: config 2E35F26E / epoch 1.14.0 / dataset N=500 intactos. Fase A =
+  demostracion NO citable (anti-HARKing, DECISION-0097).
