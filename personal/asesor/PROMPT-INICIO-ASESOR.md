@@ -1,3 +1,19 @@
+# Prompt de inicio - sesion ASESOR (Vision Nova) - v12 (2026-07-18)
+
+> **v12 SUPERSEDE v11.** LEE PRIMERO el bloque TOP ">> ESTADO ACTUAL 2026-07-18" de ESTADO-asesor.md
+> (tu fuente canonica). Cambios grandes 17-18 jul: **MEMORIA HIBRIDA Fase A COMPLETA (5/5) y ADOPTADA
+> -> DECISION-0100/0101 + 0099 SELLADAS (active)**; DEMO REVIVE exitosa 3x; 3 guias HTML humanas en
+> D:/Agentes/Ingenas/ + HUMAN_GUIDE del hub regenerado; Notion Fase A -> Hecho. **>> FOCO / EN VUELO:
+> PROBE DE COSTE DEL PEON (demo privada, no citable).** TASK-0006 dio delegar=2x (arm A 84121 / arm B
+> 169881), pero el operador reencuadro: pudo ser artefacto del modo B0 (spec fresca); la spec
+> Arquitecto->Codex ya es SUNK (anti-vibecoding). **SIGUIENTE ACCION:** el Arquitecto toma las
+> directivas (open/ 5f8d88e + d44586c) -> re-run T1 en B1-EXTRACTIVO (ver si el 2x colapsa hacia
+> 84121) + folding eje MODO-DELEGACION (B0/B1/B2) + metrica added-spec-tokens en el piloto (escalera
+> T1-T4 gate duro + eje escala + baseline HW: RTX 5060 8GB, Ollama 0.32). Con resultados el operador
+> decide direccion; si da relevancia -> estudio SELLADO Fase B multi-maquina (publico). HEAD hub
+> d44586c; fondo 2E35F26E/1.14.0/N=500 intacto; cron Codex vivo; monitor cron 0449579e. LECCION:
+> Ops-Reason <=120 (medir SEPARADO, ABORTAR si >120); FIRMA-msg exige campo question. (v11 abajo, historico.)
+
 # Prompt de inicio - sesion ASESOR (Vision Nova) - v11 (2026-07-15)
 
 > v11 SUPERSEDE v10. Cambios grandes al cierre del 14-jul: **DECISION-0097 (Gate-1 memoria hibrida) + DECISION-0098

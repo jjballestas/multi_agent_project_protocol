@@ -11,7 +11,65 @@
 > routado (NO stand-down): F3.3 instrumentacion (Codex) + F3.2 diseno (yo) + dev medido P2.1/P2.2 (3-25 jul) +
 > PAR-2 condicional. >> BLOQUE DE TRABAJO DE LA PROXIMA SESION: ver seccion ">> PROXIMA SESION - BLOQUE DE TRABAJO".
 
-## >> ESTADO ACTUAL 2026-07-15 (LEER PRIMERO; supersede TODO lo de abajo, incl. el bloque 14-jul)
+## >> ESTADO ACTUAL 2026-07-18 (LEER PRIMERO; supersede TODO lo de abajo, incl. 15-jul)
+**Sesion 17-18 jul: MEMORIA HIBRIDA ADOPTADA end-to-end + probe de coste del peon EN VUELO. HEAD hub d44586c; fondo 2E35F26E / epoch 1.14.0 / N=500 drift 0 INTACTO. DECISION-0099/0100/0101 SELLADAS (active).**
+
+- **MEMORIA HIBRIDA: Fase A COMPLETA (5/5) y ADOPTADA (DECISION-0100 active).** Construida por carril
+  AUTOMATIZADO (Codex maker / Analista checker en Nova-Payroll) en un dia: U1 DDL+indexador, U2
+  round-trip AC5, U3 drift+query, U4 revive_pack, U5 runbook. El gate adversarial cazo bugs REALES
+  (fuga PII IBAN/salario via type-regex, test AC5 vacuo, sink --db, hash working-tree). DEMO REVIVE
+  exitosa end-to-end, OPERO 3x (peon muere -> worker de contexto CERO revive SOLO con su pack
+  atestado -> verifica vs ledger vivo, no repite, reclama con llaves de instancia, entrega gates
+  0/0/0; cross-atest Entrada 1). Adopcion POR DEMOSTRACION (NO citable, firewall 0097). Promocion al
+  master hub via export 0096 AGENDADA a Fase 3+ POST-ventana-medida (no toca scripts/ del hub en la ventana).
+- **DECISIONES nuevas SELLADAS (active):** 0099 (roster: peon = ejecutor de codigo SUBORDINADO al
+  maker que lo gobierna con intake explicito; NUNCA checker/orquestador/firmante; corregida por
+  precision del operador). 0100 (adopcion memoria hibrida). 0101 (checker formal migra a
+  Claude/Anthropic CLI; maker!=checker por CAPACIDAD+LLAVE+PROVEEDOR; re-juicios formales diferidos
+  U3/U4 -que cerraron checker_formal=0 por el classifier cyber de OpenAI- se re-ejecutan en el nuevo proveedor).
+- **DOCS entregados (D:/Agentes/Ingenas/, HTML humanos cruzados):** GUIA-METODOLOGIA-completa.html +
+  GUIA-que-se-ha-medido-metodologia.html (escalera Zeus N=500 -> Nova-Budget -> Contabilidad, Q1-Q5,
+  sellos 0091/0094, citable-vs-demo) + manual de Julian (con back-links). HUMAN_GUIDE.html del hub
+  REGENERADO neutral por el Arquitecto (auto-gen gated; los ricos son curados aparte). Notion:
+  pagina "Fase A" -> Estado Hecho con el cierre.
+- **>> EN VUELO (critico) -- PROBE DE COSTE DEL PEON (demo PRIVADA, NO citable):** pregunta = los
+  peones locales reducen los tokens frontier del maker? TASK-0006 (10 tests NEG PII, instrumento
+  Codex CLI ambos brazos): arm A maker-solo=84121 / arm B maker-delega-a-qwen2.5-coder:7b=169881 ->
+  DELTA +102% (delegar COSTO 2x; umbral >=25% ahorro NO cumplido). El PEON rindio EXCELENTE (10/10
+  byte-for-byte, 20s, 0 correcciones); el coste fue la CEREMONIA de delegacion (spec+review), que a
+  escala pequena no amortiza.
+- **>> DEBATE que REENCUADRO el probe (aporte del operador, clave):** el 2x pudo ser ARTEFACTO de
+  medir el modo mas caro (B0 = Codex escribe spec FRESCA). La regla anti-vibecoding ya paga la spec
+  Arquitecto->Codex = coste SUNK. Nuevo eje MODO DE DELEGACION: B0 (fresca, lo medido) / B1
+  (EXTRACTIVA: Codex reenvia {patron + contrato I/O + criterio de aceptacion} de la intake SIN spec
+  nueva; regla dura EXTRAER-NO-GENERAR) / B1-literal (verbatim, control) / B2 (triage+B1). Metrica
+  nueva CLAVE: added-spec-tokens (~0 => intake ya peon-ready => tesis confirmada). Registrar coste
+  SUNK Arquitecto->Codex.
+- **PILOTO PRIVADO montado (directivas 5f8d88e + d44586c en open/, ESPERAN al Arquitecto):** escalera
+  T1-T4 con gate DURO por celda (T4 = logica dura AUTO-VERIFICABLE, NO diseno abierto) + eje ESCALA
+  (lote pequeno vs grande 50-100) + eje MODO-DELEGACION (B0/B1/B2). Grid lean ~18 celdas, 1 corrida,
+  {qwen2.5-coder:3b, deepseek-coder:6.7b, qwen2.5-coder:7b}+Codex. Metricas: wall-clock warm +
+  iteraciones-hasta-verde + delta tokens frontier + added-spec-tokens + pass/fail. Baseline HW
+  medido: Intel Core 7 250H 14c/20t, 63.7GB RAM, RTX 5060 Laptop 8GB VRAM (coder-peones caben ->
+  GPU-acelerados), Ollama 0.32.0.
+- **>> SIGUIENTE ACCION:** el Arquitecto TOMA las 2 directivas -> (1) re-run del T1 en B1-EXTRACTIVO
+  (misma tarea TASK-0006) para ver si el 2x colapsa hacia arm A=84121; (2) folding B0/B1/B2 en el
+  piloto; ejecuta el grid TRAS cerrar TASK-0006. Con los resultados el OPERADOR decide direccion.
+  TASK-0006 sigue in_review (demo, resultado YA en mano; el Analista no lo ratifico formal --
+  secundario). CONDICIONAL FUTURO: si el piloto da relevancia -> estudio SELLADO pre-registrado
+  (Fase B) en varias maquinas del operador -> publico/citable. FIREWALL: el piloto informa la
+  DECISION de correr el sellado, NO su diseno confirmatorio (evita HARKing).
+- **INFRA:** cron Codex vivo (instancia pid 49220 / hub pid 42800; el classifier del harness lo
+  bloqueaba en "modo auto" -> el operador lo desactivo/relanzo). Monitor de coordinacion = cron de
+  SESION 0449579e cada 10 min (sondeo por TIEMPO). Objetivo permanente del monitor CUMPLIDO (Fase A
+  adoptada); ahora vigila el probe.
+- **LECCION DURA reincidente del Asesor (COMO):** Ops-Reason del trailer <=120 chars -- MEDIR en paso
+  SEPARADO con perl y ABORTAR el commit si >120 (me mordio 3x: b27cd80 139c, 96e5401 122c; ambos
+  grandfathered avanzando start_commit en Area_comun/protocol/COMMIT_TRAILERS.json). El gate
+  endurecido ya BLOQUEA (mostrar el numero NO basta). Mensaje tipo FIRMA exige campo `question` en el
+  frontmatter (validate rojo sin el).
+
+## >> ESTADO ACTUAL 2026-07-15 (historico; ver bloque 18-jul arriba)
 **Foco proxima sesion: DESARROLLAR LA MEMORIA HIBRIDA (Fase A sobre Nova-Payroll) -- directiva del operador al cierre del 14-jul ("manana vamos a desarrollar la memoria hibrida"). Dia 14-jul CERRADO end-to-end: DECISION-0097 (Gate-1) + DECISION-0098 (scratch-root) SELLADAS; Nova-Payroll NACIDA (local) + anclada Entrada 0; hardening 15-jul/PAR-2 cerrado (s.29 firmada, PAR-2 FUERA); skill notion-spec-mirror viva + retroactiva a Contabilidad. HEAD=origin 2d1ff24. FONDO 2E35F26E / epoch 1.14.0 / N=500 INTACTO. (Cierre ~23:09 local Madrid UTC+2.)**
 
 - **>> DIRECTIVA PROXIMA SESION -- MEMORIA HIBRIDA (el bloque de trabajo).** El operador quiere DESARROLLAR la
