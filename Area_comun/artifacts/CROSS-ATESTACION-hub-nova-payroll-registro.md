@@ -82,3 +82,18 @@
   cumplida (checkers siempre en modelo fuerte, sustituciones declaradas).
 - El hub NO se toco: config 2E35F26E / epoch 1.14.0 / dataset N=500 intactos. Fase A =
   demostracion NO citable (anti-HARKing, DECISION-0097).
+
+### Adendum a la Entrada 1 - 2026-07-17 (cierre TOTAL de la Fase A)
+
+- TASK-0005 (runbook AC15-F1) cerro su ciclo adversarial COMPLETO con el checker FORMAL:
+  CHANGE-REQUIRED falsable (redireccion PS 5.1 transcodifica a UTF-16LE; hash de handoff
+  inexistente) -> remediacion del maker REVIVIDO (2da operacion del pack) con prueba
+  sha256(recuperado)==sha256(blob) -> re-judgement formal GO -> ratificacion -> done-flip por
+  el maker revivido (3ra operacion del pack).
+- Estado final: TASK-0001..0005 = done (5/5); ledger tip seq 167, drift 0, cero claims;
+  payroll_commit 4d64118f (sha256 events.jsonl blob:
+  97581e8bdd5c28584086b89c2a4030a633a36c97f332744ae9d6b07c61ab27d4).
+- El mecanismo REVIVE opero TRES veces con packs distintos (continuar tarea nueva / remediar
+  con prueba dura / cerrar ledger): robustez demostrada, no caso unico.
+- Decision de adopcion del operador RECIBIDA (draft DECISION-0100 en firma); checker formal
+  migrara de proveedor (draft DECISION-0101 en firma).
