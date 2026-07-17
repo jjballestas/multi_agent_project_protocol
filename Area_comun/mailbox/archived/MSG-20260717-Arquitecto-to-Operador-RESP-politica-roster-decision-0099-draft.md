@@ -3,7 +3,7 @@ message_id: MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-00
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-17

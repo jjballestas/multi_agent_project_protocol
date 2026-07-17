@@ -150,6 +150,30 @@
             "updated_at": "2026-07-17T12:10:15Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717C",
+            "expires_at": "2026-07-17T15:55:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-nogo-remediacion-ruteada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-nogo-remediacion-ruteada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-done-u2-lanzada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-done-u2-lanzada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-0099-draft.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-0099-draft.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-politica-roster-peones-solo-codigo-nunca-checker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-politica-roster-peones-solo-codigo-nunca-checker.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-FIRMA-decision-0099-politica-roster.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-FIRMA-decision-0099-politica-roster.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-correccion-pre-sello-0099-peon-subordinado-al-maker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-correccion-pre-sello-0099-peon-subordinado-al-maker.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717C"
+            ],
+            "started_at": "2026-07-17T14:55:59Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717C",
+            "updated_at": "2026-07-17T14:55:59Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

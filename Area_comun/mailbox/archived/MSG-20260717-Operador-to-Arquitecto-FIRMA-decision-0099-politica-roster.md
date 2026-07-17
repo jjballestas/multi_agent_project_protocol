@@ -3,7 +3,7 @@ message_id: MSG-20260717-Operador-to-Arquitecto-FIRMA-decision-0099-politica-ros
 from: Operador
 to: Arquitecto
 type: FIRMA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-17
