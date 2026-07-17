@@ -61,6 +61,12 @@
             "title": "[VISION-NOVA][F6.1] Fase peones bajo DECISION-0078 ajustada (peon -> gate -> critico -> firmante; sandbox piloto-peones intacto) [re-alcance: pivote Vision Nova, DECISION-0083]"
         },
         {
+            "id": "TASK-0256",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -194,6 +194,21 @@
             "started_at": "2026-06-13T00:00:00Z",
             "status": "released",
             "task_id": "TASK-0106"
+        },
+        {
+            "claim_id": "CLAIM-TASK-0256-arquitecto-registro",
+            "expires_at": "2026-07-17T14:38:28Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0256",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0256",
+                "Area_comun/tasks/TASK-0256-espejo-decision-0099-export-born-operational.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0256-arquitecto-registro"
+            ],
+            "started_at": "2026-07-17T13:38:28Z",
+            "status": "released",
+            "task_id": "TASK-0256",
+            "updated_at": "2026-07-17T13:38:28Z"
         }
     ],
     "schema_version": "1.0",
