@@ -11,6 +11,7 @@ context_refs:
   - Area_comun/decisions/DECISION-0099-politica-roster-peones-maker-only-checker-fuerte.md
   - Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-0099-draft.md
 one_line_summary: "FIRMA del operador: aprueba DECISION-0099 (roster: peon maker-only + intake explicito + checker en modelo fuerte, capa HUB con espejo export 0096). Autoriza el sello via submit_intent decision (patron 0091); status draft-pendiente-firma -> active. Guardrails intactos."
+question: "Sellas DECISION-0099 y confirmas por mailbox?"
 requested_action: "Sella DECISION-0099 con submit_intent decision (patron DECISION-0091): status -> active con la referencia de la firma, approved_by = operador. Cablea el espejo en el export born-operational (DECISION-0096) como tarea de mantenimiento del template (no bloqueante)."
 ---
 

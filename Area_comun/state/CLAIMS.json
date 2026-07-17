@@ -82,6 +82,20 @@
             "updated_at": "2026-07-14T16:27:35Z"
         },
         {
+            "claim_id": "CLAIM-DECISION-0099-sello",
+            "expires_at": "2026-07-17T14:04:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0099-politica-roster-peones-maker-only-checker-fuerte.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-DECISION-0099-sello"
+            ],
+            "started_at": "2026-07-17T13:04:02Z",
+            "status": "released",
+            "task_id": "DECISION-0099",
+            "updated_at": "2026-07-17T13:04:02Z"
+        },
+        {
             "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717",
             "expires_at": "2026-07-17T02:46:36Z",
             "owner": "Arquitecto",
