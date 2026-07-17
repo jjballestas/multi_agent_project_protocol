@@ -1,12 +1,12 @@
 ---
 nombre: multi_agent_project_protocol
 estado: activo
-protocol_version: 1.1.0
-runtime_version: 0.11.0
+protocol_version: 1.14.0
+runtime_version: 0.12.0
 adoption_tier: runtime
 perfiles: [ninguno]
 idioma: es
-actualizado: 2026-06-10
+actualizado: 2026-07-17
 ---
 
 # Guia humana operativa - multi_agent_project_protocol
@@ -19,7 +19,7 @@ actualizado: 2026-06-10
 > que roles hay y como retomar el contexto.
 
 - **Instancia:** multi_agent_project_protocol  ·  **Estado:** activo  ·  **Tier:** runtime
-- **Protocol version:** 1.1.0  ·  **Runtime version:** 0.11.0  ·  **Perfiles:** ninguno (instancia core)
+- **Protocol version:** 1.14.0 (epoch PINEADO; la linea de releases va aparte y su ultima es v1.19.0)  ·  **Runtime version:** 0.12.0  ·  **Perfiles:** ninguno (instancia core)
 - **Fuente de verdad:** este `.md`. El `.html` es un artefacto generado (no editar a mano).
 
 ## 1. Identidad de la instancia
@@ -225,8 +225,14 @@ releases), **agente operativo/implementador** (ejecuta el trabajo), **agente rev
 del trabajo, no del nombre del participante.
 
 [INSTANCIA] Configurados aqui: un agente arquitecto con capabilities de arquitecto/orquestador/qa/revisor;
-un agente implementador con capabilities de implementador/ingeniero de pruebas; y un operador humano. Las
-transiciones se autorizan por capability segun el contenido del trabajo, no por el nombre del participante.
+un agente implementador (maker) con capabilities de implementador/ingeniero de pruebas; un agente revisor
+adversarial (checker) que permanece SIEMPRE en un modelo fuerte; y un operador humano. Politica de roster
+vigente: los agentes-peon (modelos debiles, p.ej. locales) son ejecutores de codigo SUBORDINADOS al maker
+-- el maker les asigna sub-tareas con especificacion detallada y responde por el resultado ante el revisor;
+un peon nunca ocupa rol de revisor, orquestador ni firmante. El metodo tambien soporta instancias nacidas
+operativas (born-operational) con su propio trio de agentes y gobernanza encapsulada, coordinadas por
+lectura cruzada sin escribir el ledger ajeno. Las transiciones se autorizan por capability segun el
+contenido del trabajo, no por el nombre del participante.
 
 ## 19. Seguridad y datos sensibles
 <!-- origen: CORE+INSTANCIA | tier: todos | campo: obligatorio -->
@@ -255,3 +261,4 @@ autocontenido; nadie asume el contexto de otro.
 | Fecha | Cambio |
 |---|---|
 | 2026-06-10 | Guia dogfooding creada para la instancia viva (tier runtime, protocol 1.1.0) via el generador |
+| 2026-07-17 | Actualizada al estado real: epoch 1.14.0 (pineado; releases aparte, ultima v1.19.0), runtime 0.12.0. Novedades de metodo: capa operacional exportable e instancias born-operational con trio propio; politica de roster peon-subordinado-al-maker con revisor siempre en modelo fuerte; capacidad de memoria persistente (repositorio caliente + indice derivado reconstruible + packs de revive con atestacion por fuente) ADOPTADA por demostracion, con su promocion al master planificada para una fase posterior a la ventana de medicion. |
