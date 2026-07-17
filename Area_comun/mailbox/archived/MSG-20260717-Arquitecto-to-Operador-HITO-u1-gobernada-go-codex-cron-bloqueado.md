@@ -3,7 +3,7 @@ message_id: MSG-20260717-Arquitecto-to-Operador-HITO-u1-gobernada-go-codex-cron-
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-17

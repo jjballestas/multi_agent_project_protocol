@@ -3,7 +3,7 @@ message_id: MSG-20260717-Operador-to-Arquitecto-RESP-decision-a-operador-lanza-c
 from: Operador
 to: Arquitecto
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-17
 context_refs:
