@@ -281,6 +281,56 @@
             "updated_at": "2026-07-17T22:32:38Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-1",
+            "expires_at": "2026-07-18T00:42:12Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-1",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-task-0006-done-piloto-confirmado-t1b1-lanzado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-task-0006-done-piloto-confirmado-t1b1-lanzado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-b1-rerun-no-colapsa-sube.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-b1-rerun-no-colapsa-sube.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-vivo-t1-b0reuse-3b-brillante.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-vivo-t1-b0reuse-3b-brillante.md"
+            ],
+            "started_at": "2026-07-17T23:42:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:42:12Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-2",
+            "expires_at": "2026-07-18T00:44:42Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-2",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-benchmark-peones-privado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-benchmark-peones-privado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-eje-modo-delegacion-B0B1B2.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-eje-modo-delegacion-B0B1B2.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-nudge-senal-vida-grid-b0reuse.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-nudge-senal-vida-grid-b0reuse.md"
+            ],
+            "started_at": "2026-07-17T23:44:42Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:44:42Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-3",
+            "expires_at": "2026-07-18T00:47:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-3",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix.md"
+            ],
+            "started_at": "2026-07-17T23:47:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:47:17Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix
 from: Operador
 to: Arquitecto
 type: ACK
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:
