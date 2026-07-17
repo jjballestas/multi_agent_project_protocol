@@ -1,10 +1,10 @@
 ---
 decision_id: DECISION-0100
 title: "Adopcion de la memoria hibrida en la metodologia (demostracion Fase A verde; promocion al master hub agendada post-ventana-medida)"
-status: draft-pendiente-firma
+status: active
 date: 2026-07-17
 author: Arquitecto
-approved_by: PENDIENTE (firma del operador)
+approved_by: "Operador (FIRMA MSG-20260717-Operador-to-Arquitecto-FIRMA-decisions-0100-0101, commit daf2c4f; aprobadas TAL CUAL)"
 relates_to: [DECISION-0097, DECISION-0096, DECISION-0081, DECISION-0099]
 ---
 
@@ -51,5 +51,5 @@ gated post-30-jul sin tocarse.
 
 ## Firma
 
-- Operador: PENDIENTE. Al firmar: submit_intent decision (patron DECISION-0091) + esta cabecera
-  pasa a status: active con la referencia de la firma.
+- Operador: FIRMADA (MSG-FIRMA-decisions-0100-0101, commit daf2c4f). Sellada via submit_intent
+  decision (patron DECISION-0091) el 2026-07-17.

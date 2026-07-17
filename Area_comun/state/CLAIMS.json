@@ -96,6 +96,21 @@
             "updated_at": "2026-07-17T13:04:02Z"
         },
         {
+            "claim_id": "CLAIM-DECISION-0100-0101-sello",
+            "expires_at": "2026-07-17T19:05:08Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0100-adopcion-memoria-hibrida.md",
+                "Area_comun/decisions/DECISION-0101-checker-formal-proveedor-diverso.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-DECISION-0100-0101-sello"
+            ],
+            "started_at": "2026-07-17T18:05:08Z",
+            "status": "released",
+            "task_id": "DECISION-0100-0101",
+            "updated_at": "2026-07-17T18:05:08Z"
+        },
+        {
             "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717",
             "expires_at": "2026-07-17T02:46:36Z",
             "owner": "Arquitecto",

@@ -1,10 +1,10 @@
 ---
 decision_id: DECISION-0101
 title: "El checker formal migra a un proveedor que autorice trabajo adversarial legitimo (Claude/Anthropic CLI); maker y checker en proveedores DISTINTOS como regla de roster"
-status: draft-pendiente-firma
+status: active
 date: 2026-07-17
 author: Arquitecto
-approved_by: PENDIENTE (firma del operador)
+approved_by: "Operador (FIRMA MSG-20260717-Operador-to-Arquitecto-FIRMA-decisions-0100-0101, commit daf2c4f; aprobadas TAL CUAL)"
 relates_to: [DECISION-0099, DECISION-0096, DECISION-0061]
 ---
 
@@ -52,4 +52,5 @@ medido ni del protocolo de gates; DECISION-0081 intacta; capabilities/llaves sin
 
 ## Firma
 
-- Operador: PENDIENTE. Al firmar: submit_intent decision (patron DECISION-0091) + status active.
+- Operador: FIRMADA (MSG-FIRMA-decisions-0100-0101, commit daf2c4f). Sellada via submit_intent
+  decision (patron DECISION-0091) el 2026-07-17.
