@@ -288,3 +288,36 @@ proceso informal habria publicado -- y aprendio de cada fallo para no repetirlo.
   SDD) -> la funde en el unico agrupador canonico que el dato YA carga (slice R0-R8 = unidad SPEC-CONT); y NO resolvi
   en silencio la relacion Agentes<->Tareas porque CONTRADICE la doctrina documentada (puente = task_id, no
   cross-espacio) -> escalada al operador. Misma disciplina de "sorteo sin discrecion" aplicada a la estructura. Traza: 05cfda2.
+- **2026-07-17 (Asesor, Fase A memoria hibrida):** +A18 -- F1 completa 4/4 en un dia por CARRIL AUTOMATIZADO
+  (Codex maker / Analista checker) en Nova-Payroll, con el adversarial cazando defectos REALES que los tests del
+  PROPIO maker no cubrian, y la DEMO REVIVE (criterio 6d de la SPEC) exitosa end-to-end. Evidencia por unidad:
+  (U1) el checker rompio 3 blockers conductuales: `--db` aceptaba cualquier ruta -> un fixture sobrescribio
+  PROJECT_STATE.json; `type` validado por REGEX no enum -> salario+IBAN+nombre de empleado plantados en `type`
+  llegaron a summary/search_terms/frontmatter_json = ROTURA de la frontera dura PII de nomina; hash del working-tree
+  atribuido a HEAD (viola I8). Remediacion + re-judgement INDEPENDIENTE en CLON LIMPIO: payload salario+IBAN+nombre
+  plantado en las 20 claves allowlisted = CERO hits publicos; dirty-tree + golden CRLF byte-exactos. La frontera PII
+  no se DECLARO, se ROMPIO / arreglo / re-verifico adversarialmente -- el guardrail como algo que un adversarial
+  tiene que romper para probar, no un rotulo. (U2) AC5-vacuo: el round-trip pasaba trivial sin incremento real, el
+  checker lo cazo y exigio incremental real (falsabilidad: verde que no probaba nada, detectado; hermano del caso
+  THROW-incompletos A8). (U4) DEMO REVIVE: peon Codex MUERTO de verdad (stop-marker), tarea real pendiente
+  (TASK-0005) registrada tras la muerte, worker de CONTEXTO CERO revivio SOLO con su pack atestado (sha 9866792a,
+  anclado a commit 23259a8), VERIFICO el pack contra el ledger vivo antes de actuar (detecto trabajo ya hecho y NO
+  lo repitio), autoridad = LLAVES DE INSTANCIA no el pack, entrego a in_review con gates 0/0/0, clon limpio verde,
+  drift 0 (seq 129-137). Pack SUFICIENTE y SEGURO -> los peones REVIVEN con procedencia firmada. Es el angulo
+  employee-ready que ningun motor externo (Engram) tiene. Cross-atest Entrada 1 en el hub con hashes por blob.
+  Traza: b27cd80 (GO Fase A), 24df44a (SPEC v0.2.1), HITOs U1-U4, 95266d0 (Entrada 1 + demo revive).
+- **2026-07-17 (Asesor, teething honesto + caveats de fase):** el mismo dia expuso fricciones REALES declaradas sin
+  maquillar. (1) El clasificador cyber del proveedor del CLI del checker flageo los PROPIOS probes adversariales del
+  checker (fixtures IBAN + traversal) como riesgo, 3 episodios recurrentes -> 2 unidades (U3/U4) cerradas por checker
+  INFORMAL en modelo fuerte con `checker_formal=0` DECLARADO (cumple 0099 r3). Yo marque la degradacion de atestacion
+  formal y recomende re-juicio FORMAL de U4 (revive_pack, la unidad mas decisiva) al desbloquear -- no dejar que la
+  evidencia corona descanse solo en verificacion informal. El operador resolvio con opcion estructural (c): mover el
+  checker formal a proveedor que autoriza trabajo de seguridad (Claude/Anthropic) -> DIVERSIDAD de proveedor
+  maker!=checker = refuerzo epistemico, no parche (maker y checker dejan de compartir modos de fallo del
+  safety-classifier). (2) Firewall anti-HARKing intacto: la demo es N=1 = EXISTENCE PROOF (el revive PUEDE, atestado),
+  NO medida de fiabilidad; la adopcion es de la CAPACIDAD validada-en-principio, cobertura/fiabilidad = Fase B con
+  pre-registro previo. (3) Fondo hub 2E35F26E / epoch 1.14.0 / N=500 INTACTO -- Fase A corrio sin tocar el hub, la
+  aislacion de scope de DECISION-0097 aguanto. (4) Self-leccion: mi propio monitor tenia un bug de self-filter -- el
+  marcador `coordinacion-asesor` es COMPARTIDO (lo llevan las DIRECTIVAS del operador ruteadas via asesor), y me
+  OCULTO el GO de Fase A (b27cd80); corregido para no ocultar nunca rutas de gobierno. La tesis en vivo aplicada al
+  propio asesor, no solo al maker. Traza: FYI clasificador recurrente, DIRECTIVA opcion (c), memoria monitor-self-filter.
