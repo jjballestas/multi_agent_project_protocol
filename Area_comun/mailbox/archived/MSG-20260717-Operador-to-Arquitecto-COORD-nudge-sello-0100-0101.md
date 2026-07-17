@@ -3,7 +3,7 @@ message_id: MSG-20260717-Operador-to-Arquitecto-COORD-nudge-sello-0100-0101
 from: Operador
 to: Arquitecto
 type: COORD
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-17
