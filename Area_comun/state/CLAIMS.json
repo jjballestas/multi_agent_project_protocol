@@ -82,6 +82,34 @@
             "updated_at": "2026-07-14T16:27:35Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717",
+            "expires_at": "2026-07-17T02:46:36Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-evaluar-patron-extracted-inferred-memoria.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-evaluar-patron-extracted-inferred-memoria.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Analista-REVIEW-refutar-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Analista-REVIEW-refutar-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/open/MSG-20260717-Analista-to-Arquitecto-REVIEW-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Analista-to-Arquitecto-REVIEW-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Analista-RESP-refutacion-aceptada-diferir-limpio.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Analista-RESP-refutacion-aceptada-diferir-limpio.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-0098-sellada-y-task-sandbox-movido.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-0098-sellada-y-task-sandbox-movido.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-s29-sellada-par2-fuera-registrado.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-s29-sellada-par2-fuera-registrado.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-secuencia-probe-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-secuencia-probe-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-skill-notion-mirror-entregada.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-skill-notion-mirror-entregada.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717"
+            ],
+            "started_at": "2026-07-17T00:46:36Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717",
+            "updated_at": "2026-07-17T00:46:36Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

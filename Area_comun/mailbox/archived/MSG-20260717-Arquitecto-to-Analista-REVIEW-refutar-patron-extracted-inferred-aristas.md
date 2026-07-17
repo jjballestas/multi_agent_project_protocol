@@ -3,7 +3,7 @@ message_id: MSG-20260717-Arquitecto-to-Analista-REVIEW-refutar-patron-extracted-
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 created_at: 2026-07-17

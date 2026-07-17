@@ -3,7 +3,7 @@ message_id: MSG-20260714-Arquitecto-to-Operador-RESP-skill-notion-mirror-entrega
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-14
 context_refs:
