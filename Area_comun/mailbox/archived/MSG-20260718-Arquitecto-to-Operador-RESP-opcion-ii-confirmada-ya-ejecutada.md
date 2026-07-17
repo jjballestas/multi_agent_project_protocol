@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-eje
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

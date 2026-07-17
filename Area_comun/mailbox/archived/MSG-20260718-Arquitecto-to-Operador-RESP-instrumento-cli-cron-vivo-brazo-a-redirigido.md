@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-RESP-instrumento-cli-cron-vivo-b
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

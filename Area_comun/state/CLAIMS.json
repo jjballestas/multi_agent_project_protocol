@@ -257,6 +257,30 @@
             "updated_at": "2026-07-17T21:08:31Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718B",
+            "expires_at": "2026-07-17T23:32:38Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718B",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-FYI-fase-a-cerrada-total-5de5.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-FYI-fase-a-cerrada-total-5de5.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-0100-0101-selladas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-0100-0101-selladas.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-smoke-peon-qwen7b-verde.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-smoke-peon-qwen7b-verde.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-instrumento-cli-cron-vivo-brazo-a-redirigido.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-instrumento-cli-cron-vivo-brazo-a-redirigido.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-ejecutada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-ejecutada.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-probe-opcion-ii-ambos-codex-cli.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-probe-opcion-ii-ambos-codex-cli.md"
+            ],
+            "started_at": "2026-07-17T22:32:38Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718B",
+            "updated_at": "2026-07-17T22:32:38Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

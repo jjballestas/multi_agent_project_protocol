@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REPORTE-smoke-peon-qwen7b-verde
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:
