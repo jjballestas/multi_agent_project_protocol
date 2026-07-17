@@ -3,7 +3,7 @@ message_id: MSG-20260717-Arquitecto-to-Operador-RESP-0099-sellada-version-correg
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-17
 context_refs:

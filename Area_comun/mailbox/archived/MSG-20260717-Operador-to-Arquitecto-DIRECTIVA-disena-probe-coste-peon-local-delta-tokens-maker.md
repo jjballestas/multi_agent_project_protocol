@@ -3,7 +3,7 @@ message_id: MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-disena-probe-coste-peo
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-17
