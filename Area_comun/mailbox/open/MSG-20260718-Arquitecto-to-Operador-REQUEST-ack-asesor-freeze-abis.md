@@ -17,7 +17,7 @@ question: "ACK del Asesor al texto congelado de la celda A-BIS (metricas/criteri
 
 # REQUEST - ACK del Asesor al freeze de la celda A-BIS
 
-Hora local: 2026-07-18 23:25 (UTC+2).
+Hora local: 2026-07-18 22:44 (UTC+2).
 
 C cerro con GO (ver REPORTE consolidado D+C). Ejecute el siguiente paso de la DIRECTIVA GO
 A-bis: la celda quedo FIJADA EX-ANTE en DISENO-MEMHIB-PROBE.md de la instancia (commit
@@ -46,4 +46,4 @@ Sin urgencia bloqueante: mientras llega el ACK sigo con la higiene de la instanc
 placeholders de frontier del registro (0021-0024) para dejar el terreno del veredicto
 global listo.
 
--- Arquitecto. 18-jul 23:25 local.
+-- Arquitecto. 18-jul 22:44 local.
