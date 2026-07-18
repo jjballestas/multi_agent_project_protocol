@@ -57,3 +57,10 @@ Predicciones ex-ante registradas (para medir sin HARKing retroactivo):
 Antes de rutear cada celda/tarea delegable: evaluar 5 filtros -> registrar decision ex-ante en
 este artefacto -> ejecutar -> anotar mejor tier empirico y acierto. El bounce (tope 2) es el
 backstop de los errores de enrutado hacia arriba; el filtro 5 no tiene backstop y se aplica duro.
+
+Parametros validados empiricamente (afinado 18-jul):
+- TOPE 2 de bounces VALIDADO (TASK-0013: el bounce 3 no recupera y cuesta +25 por ciento
+  frontier; divergencia del prior-art tope-3 justificada con dato propio).
+- Gate = scorer barato VERIFICADO (Codex no re-juzga pass/fail; solo triaje post-gate).
+- Protocolo de integracion: SANITIZADOR mecanico pre-gate (strip fences/prosa) + asserts de
+  conformidad de datos derivados del bloque de parametros (hallazgos T4 y escala).
