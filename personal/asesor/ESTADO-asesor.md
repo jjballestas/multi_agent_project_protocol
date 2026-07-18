@@ -68,6 +68,13 @@
   grandfathered avanzando start_commit en Area_comun/protocol/COMMIT_TRAILERS.json). El gate
   endurecido ya BLOQUEA (mostrar el numero NO basta). Mensaje tipo FIRMA exige campo `question` en el
   frontmatter (validate rojo sin el).
+- **LECCION frontmatter (2026-07-18, senalada por el Arquitecto):** CUALQUIER mensaje mio con
+  `requires_response: true` DEBE llevar `question:` Y `requested_action:` en el frontmatter (no solo
+  tipo FIRMA) -- sin ellos el validate del hub se pone ROJO por frontmatter incompleto mientras el
+  mensaje este en `open/`. Mi DIRECTIVA prep-N=6 lo rompio; el Arquitecto lo resolvio respondiendo+
+  archivando (status:archived lo saca del check) y me lo senalo; ACK e94db68. REGLA: si necesita
+  respuesta -> requires_response:true CON question+requested_action+response_owner; si no ->
+  requires_response:false SIN question.
 
 ## >> ESTADO ACTUAL 2026-07-15 (historico; ver bloque 18-jul arriba)
 **Foco proxima sesion: DESARROLLAR LA MEMORIA HIBRIDA (Fase A sobre Nova-Payroll) -- directiva del operador al cierre del 14-jul ("manana vamos a desarrollar la memoria hibrida"). Dia 14-jul CERRADO end-to-end: DECISION-0097 (Gate-1) + DECISION-0098 (scratch-root) SELLADAS; Nova-Payroll NACIDA (local) + anclada Entrada 0; hardening 15-jul/PAR-2 cerrado (s.29 firmada, PAR-2 FUERA); skill notion-spec-mirror viva + retroactiva a Contabilidad. HEAD=origin 2d1ff24. FONDO 2E35F26E / epoch 1.14.0 / N=500 INTACTO. (Cierre ~23:09 local Madrid UTC+2.)**
