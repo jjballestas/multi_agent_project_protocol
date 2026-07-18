@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-CONSULTA-conteo-sanitizador-dire
 from: Operador
 to: Arquitecto
 type: CONSULTA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-18
