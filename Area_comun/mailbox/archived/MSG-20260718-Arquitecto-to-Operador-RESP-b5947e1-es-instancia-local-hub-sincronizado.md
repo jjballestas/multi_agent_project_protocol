@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-RESP-b5947e1-es-instancia-local-
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

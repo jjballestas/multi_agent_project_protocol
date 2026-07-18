@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-CONSULTA-memhib-proxy-asesor-reg
 from: Arquitecto
 to: Operador
 type: CONSULTA
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-18

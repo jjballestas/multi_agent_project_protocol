@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-FREEZE-probe-memhib-D-cadena-ros
 from: Operador
 to: Arquitecto
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:
