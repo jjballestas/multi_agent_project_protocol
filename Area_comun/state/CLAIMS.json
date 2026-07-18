@@ -82,6 +82,22 @@
             "updated_at": "2026-07-14T16:27:35Z"
         },
         {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-coords-probe",
+            "expires_at": "2026-07-18T21:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-checkpoint-antes-compactar-dogfood.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-checkpoint-antes-compactar-dogfood.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-status-probe-D-post-checkpoint.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-status-probe-D-post-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-coords-probe"
+            ],
+            "started_at": "2026-07-18T19:48:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T19:48:00Z"
+        },
+        {
             "claim_id": "CLAIM-DECISION-0099-sello",
             "expires_at": "2026-07-17T14:04:02Z",
             "owner": "Arquitecto",

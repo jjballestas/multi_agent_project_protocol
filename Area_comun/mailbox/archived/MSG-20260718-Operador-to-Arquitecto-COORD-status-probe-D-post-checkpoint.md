@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-COORD-status-probe-D-post-checkp
 from: Operador
 to: Arquitecto
 type: COORD
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 created_at: 2026-07-18
