@@ -116,10 +116,12 @@ Delegar a peon SOLO si (rubric v0.2, los 5 filtros + estas condiciones economica
 
 ## 8. Variante QC-barato (post-piloto, 18-jul; MEDIDO -- v1.1)
 
-> ESTADO: RECOMENDACION tecnica avalada por el Asesor (ACK 18-jul), NO adoptada. La
-> adopcion formal en el flujo NOVA es decision SOBERANA del operador (la delegacion al
-> Asesor cubria el diseno de la corrida, no la adopcion). Si el operador firma la
-> adopcion, este estado pasa a ADOPTADO.
+> ESTADO: NO ADOPTADO por DECISION del operador (18-jul; relay del Asesor, DECISION
+> formal redactada para firma). La serie cerro convergente: los peones no ahorran tokens
+> ni dan capacidad neta bajo este protocolo. CONDICION DE REAPERTURA: revisar y REPLICAR
+> un metodo de la literatura que ahorre SIN sacrificar calidad (los conocidos ceden ~5pct
+> de calidad; no aceptable). Las recomendaciones operativas de s.8-s.10 quedan como
+> "SI algun dia se usan peones", no como practica adoptada.
 
 La celda "sanitizador" que la s.7 dejo como skip declarado SE MIDIO despues por DIRECTIVA
 del operador (variante QC-barato, 3 condiciones + celda marginal; TASK-0015/0016/0017;
@@ -163,6 +165,9 @@ de evidencia que el resto del manual.
 
 ## 9. El 4to brazo y el PORQUE unificador (18-jul; MEDIDO + clausura aritmetica -- v1.2)
 
+> ESTADO: NO ADOPTADO (decision del operador 18-jul; ver banner de s.8). Contenido
+> valido como evidencia medida y como guia condicional "si se usan peones".
+
 Ultimo experimento de la serie: probar si el premium de delegar se INVIERTE cuando la
 GENERACION frontier domina el coste (unidad pesada: motor de nomina sintetico, 50
 funciones/250 asserts, gate objetivo duro, setup sellado limpio por el 0101 con 250/250
@@ -198,6 +203,9 @@ qwen-7b a escala ~50 funciones/una unidad (para dimensionar unidades de peon en 
 Todo NO citable (demo privada; 1 corrida por celda, hardware unico).
 
 ## 10. Techo de ENTREGA del 7b, MEDIDO (rectificacion del operador, 18-jul -- v1.3)
+
+> ESTADO: NO ADOPTADO (decision del operador 18-jul; ver banner de s.8). Contenido
+> valido como evidencia medida y como guia condicional "si se usan peones".
 
 El diferido de s.9 se midio por directiva (TASK-0020: pipeline delegado completo sobre la
 misma spec/gate sellados; proposito redefinido a entrega, coste solo contexto).
