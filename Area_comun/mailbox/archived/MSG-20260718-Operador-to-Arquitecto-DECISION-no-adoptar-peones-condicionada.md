@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condi
 from: Operador
 to: Arquitecto
 type: DECISION
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

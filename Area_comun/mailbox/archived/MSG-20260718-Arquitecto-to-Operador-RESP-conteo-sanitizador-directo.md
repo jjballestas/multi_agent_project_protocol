@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-RESP-conteo-sanitizador-directo
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

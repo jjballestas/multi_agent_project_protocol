@@ -525,6 +525,28 @@
             "updated_at": "2026-07-18T12:44:41Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718h",
+            "expires_at": "2026-07-18T19:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718h",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-delegado-medir-techo-entrega-7b.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-delegado-medir-techo-entrega-7b.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-probe-privado-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-probe-privado-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condicionada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condicionada.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-CIERRE-4tobrazo-sintesis-serie.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-CIERRE-4tobrazo-sintesis-serie.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-conteo-sanitizador-directo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-conteo-sanitizador-directo.md"
+            ],
+            "started_at": "2026-07-18T13:53:13Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718h",
+            "updated_at": "2026-07-18T13:53:13Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
