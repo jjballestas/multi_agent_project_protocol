@@ -1,6 +1,6 @@
-# MANUAL DE OPERACION: delegacion a peones locales (draft; sintesis del piloto 18-jul)
+# MANUAL DE OPERACION: delegacion a peones locales (v1.0; sintesis del piloto 18-jul)
 
-Estado: DRAFT pre-cierre de T4 (slot 7b-T4 pendiente). Fuente: piloto privado del grid
+Estado: v1.0 FINAL (piloto completo: grid 17 celdas + afinado + confirmatorio lote-100). Fuente: piloto privado del grid
 (TASK-0006..0012, instancia Nova-Payroll). TODO NUMERO ES INDICATIVO (1 corrida por celda,
 demo NO citable, anti-HARKing); las extrapolaciones van marcadas. Proposito: manual operativo
 para delegar peones en el desarrollo NOVA (directiva del operador 85dabfc). Instrumento
@@ -30,9 +30,15 @@ maker: Codex CLI; maquina: Core 7 250H / 64GB / RTX 5060 8GB / Ollama 0.32.0 (pe
 ## 2. Los cuatro hallazgos (MEDIDO salvo donde se marca)
 1. **La spec calibrada es la condicion de rendimiento del peon** (B1 la quito y el peon
    colapso 0/10; B0/B0-reuse la dan y el peon rinde 10/10 en T1).
-2. **La amortizacion es real y tiene dos palancas**: reuso de spec (gap +102 -> +24 en lote
-   10) y escala (gap +24 -> +8.4 en lote 50). Marginales: delegado ~956/u vs directo ~1180/u
-   -> **break-even EXTRAPOLADO ~99 unidades/exec** (2 puntos, proxy 3b: INDICATIVO).
+2. **La amortizacion es real pero NO cruza (MEDIDO con 3 puntos por brazo)**: el gap cae
+   +102 (spec fresca, lote 10) -> +24 (spec sunk, lote 10) -> +8.4 (lote 50) -> +7.1 (lote
+   100) y ahi CONVERGE: ambas curvas se aplanan (directo 84121/131340/129921; delegado
+   104108/142341/139195) porque el envelope del exec domina y el maker frontier escribe o
+   revisa 100 unidades casi al precio de 50. **La extrapolacion break-even ~99u quedo
+   REFUTADA por el punto confirmatorio: no hay cruce; el premium delegado converge a
+   ~+7 por ciento (~9k tokens) constante.** El caso de negocio de delegar es DESCARGA y
+   paralelismo del maker (y wall-clock local barato), no ahorro neto de frontier, bajo este
+   protocolo e instrumento.
 3. **QC-bounce con triaje funciona**: en zona apta, bounces de ~20-40tk sustituyen
    correcciones caras (escala: 5/5 con el mismo feedback); en zona techo, el triaje detecta
    el techo cuando el bounce 2 reintroduce defectos (T3 qwen) y la correccion directa cierra.
@@ -50,9 +56,11 @@ Delegar a peon SOLO si (rubric v0.2, los 5 filtros + estas condiciones economica
   bounces).
 - Peon elegido por FIT de familia: patron puro/formato -> qwen (3b basta); logica compuesta
   -> deepseek 6.7b. (INDICATIVO: 1 corrida por celda.)
-- Economia: con lote < ~100u el objetivo es DESCARGA del maker (coste neutro o leve
-  sobrecoste frontier); con lote >= ~100u/exec ademas AHORRA frontier (EXTRAPOLADO ~99u,
-  pendiente confirmacion lote-100 PARQUEADA por el operador).
+- Economia (MEDIDA a 3 puntos): delegar cuesta un premium frontier pequeno y ~constante
+  (~+7 por ciento a escala) que NO desaparece con el lote; lo que compra es DESCARGA del
+  maker + paralelismo + ejecucion local barata. Delegar por capacidad, no por ahorro de
+  tokens. (Si el coste del envelope del exec bajara, el premium relativo subiria: revisar
+  si cambia el instrumento.)
 - Filtro 5 SIEMPRE duro: PII real / ledger / genesis / seguridad / codigo soberano NUNCA al
   peon, aunque pudiera.
 
@@ -92,12 +100,16 @@ Delegar a peon SOLO si (rubric v0.2, los 5 filtros + estas condiciones economica
   (coste ~0). Con el, el peon habria pasado T4 en llamada 1 y parte de T3; ademas evitaria
   parte de los bounces de formato que el cap3 no recupera. AL PROTOCOLO del manual.
 
-## 7. Pendientes declarados
-- Lote-100 confirmatorio: GO del operador (decision 2, cambia el parqueo); EN EJECUCION
-  (TASK-0014, ambos brazos, protocolo identico a 10/50). El break-even con 3 puntos sustituye
-  la extrapolacion de 2 en la seccion 2 al cerrar.
-- B2 triage: SKIP DECLARADO confirmado por el operador (decision 1).
-- Celda opcional sanitizador: decision del Arquitecto POST-brazos del lote-100 (etiquetada
-  aparte, fuera de la comparabilidad del confirmatorio).
-- Todo numero: 1 corrida, hardware unico, no citable; un estudio sellado multi-maquina
-  pre-registrado seria el 3er brazo (decision futura del operador).
+## 7. Cierre y decisiones declaradas
+- Lote-100 confirmatorio: EJECUTADO (TASK-0014; veredicto NO-CRUCE incorporado en s.2/s.3).
+  Tabla lote 100: directo 129921 (1299/u) vs delegado 139195 (1392/u); QC-bounce 5/5
+  deslices de naming recuperados con 1 bounce de 22tk c/u, 0 techo, 0 correcciones.
+- B2 triage: SKIP DECLARADO confirmado por el operador.
+- Celda opcional sanitizador: SKIP DECLARADO por el Arquitecto tras el confirmatorio: con
+  NO-CRUCE establecido y los deslices de formato recuperados por bounces de ~22tk, medirla
+  no cambiaria ninguna decision de enrutado; el sanitizador queda como RECOMENDACION de
+  protocolo (s.6) sin celda propia.
+- Todo numero: 1 corrida por celda, hardware unico, demo privada NO citable; un estudio
+  sellado multi-maquina pre-registrado seria el 3er brazo (decision futura del operador).
+- Piloto cerrado en canonico: TASK-0006..0014 done (9 tareas, 19 celdas + afinado,
+  ~2.6M tokens frontier de medicion + ceremonia).
