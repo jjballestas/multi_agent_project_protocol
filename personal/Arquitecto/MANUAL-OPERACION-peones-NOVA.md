@@ -1,4 +1,4 @@
-# MANUAL DE OPERACION: delegacion a peones locales (v1.1; sintesis del piloto + variante QC-barato, 18-jul)
+# MANUAL DE OPERACION: delegacion a peones locales (v1.2; piloto + QC-barato + 4to brazo estructural, 18-jul)
 
 Estado: v1.0 FINAL (piloto completo: grid 17 celdas + afinado + confirmatorio lote-100). Fuente: piloto privado del grid
 (TASK-0006..0012, instancia Nova-Payroll). TODO NUMERO ES INDICATIVO (1 corrida por celda,
@@ -160,3 +160,39 @@ frontier; abaratando la verificacion podria cruzar a negativo. Resultado:
 
 Todo NO citable (demo privada, 1 corrida por celda, hardware unico); mismas condiciones
 de evidencia que el resto del manual.
+
+## 9. El 4to brazo y el PORQUE unificador (18-jul; MEDIDO + clausura aritmetica -- v1.2)
+
+Ultimo experimento de la serie: probar si el premium de delegar se INVIERTE cuando la
+GENERACION frontier domina el coste (unidad pesada: motor de nomina sintetico, 50
+funciones/250 asserts, gate objetivo duro, setup sellado limpio por el 0101 con 250/250
+casos recomputados independientemente).
+
+- Brazo DIRECTO medido: 137042 tokens frontier, gate 250/250 a la PRIMERA iteracion.
+  La garantia de regimen pre-registrada (>=440k) FALLO por un orden de magnitud: la
+  fraccion de generacion quedo en ~1.4-20 pct del exec (segun anclaje del envelope,
+  ambos pre-declarados). Generar el motor completo le costo al frontier ~2k-27k tokens
+  marginales sobre el envelope.
+- Brazo delegado NO CORRIDO por decision registrada (Asesor, opcion A): el cruce quedo
+  ARITMETICAMENTE DESCARTADO (el delegado tambien paga el envelope; su suelo ~135k ~ el
+  directo 137k). No se reproduce lo determinado.
+
+**VEREDICTO ESTRUCTURAL (la explicacion de toda la serie):** dentro de la CLASE DELEGABLE
+(mecanicamente especificable + gate objetivo duro -- los filtros 1 y 2 del rubric), la
+generacion frontier es INTRINSECAMENTE BARATA: la spec peon-ready es la parte cara, y una
+vez existe, el frontier rellena patron+tabla a ~coste de lectura (escala sublinealmente:
+50u costo ~lo mismo que 100 tests de juguete). El regimen dominado-por-generacion NO
+EXISTE dentro de la clase delegable, y el premium de delegar no se invierte alli. Las
+tareas caras de generar (logica compuesta profunda, diseno abierto) estan FUERA de la
+clase delegable (techo de fit, s.4) y escalan al frontier de todos modos.
+
+**UNIFICACION de la serie completa** (piloto NO-CRUCE +7pct -> QC-barato +4pct ->
+4to brazo estructural): *los peones no reducen tokens frontier porque lo delegable es
+barato de generar y lo caro no es delegable.* El valor de delegar es CAPACIDAD (descarga,
+paralelismo, ejecucion local, atribucion) -- nunca ahorro neto de tokens. El envelope
+frontier (spec una vez + orquestacion + sello) es el suelo de coste de CUALQUIER brazo,
+y la generacion -- lo unico descargable -- nunca es la parte dominante dentro de la clase.
+
+DIFERIDO declarado (pregunta abierta barata, no descartada): el techo de ENTREGA del
+qwen-7b a escala ~50 funciones/una unidad (para dimensionar unidades de peon en NOVA).
+Todo NO citable (demo privada; 1 corrida por celda, hardware unico).
