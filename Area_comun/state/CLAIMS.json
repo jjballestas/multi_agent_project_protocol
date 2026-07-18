@@ -475,6 +475,42 @@
             "updated_at": "2026-07-18T11:24:48Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718f-1",
+            "expires_at": "2026-07-18T16:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718f-1",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-4to-brazo-unidad-pesada-generacion.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-4to-brazo-unidad-pesada-generacion.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-4tobrazo-diseno-avalado-guarda-proxy.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-4tobrazo-diseno-avalado-guarda-proxy.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-4tobrazo-cierra-veredicto-estructural.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-4tobrazo-cierra-veredicto-estructural.md"
+            ],
+            "started_at": "2026-07-18T12:31:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718f-1",
+            "updated_at": "2026-07-18T12:31:05Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718f-2",
+            "expires_at": "2026-07-18T16:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718f-2",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-4tobrazo-arranque-diseno-exante.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-4tobrazo-arranque-diseno-exante.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-4tobrazo-regimen-falla-decision.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-4tobrazo-regimen-falla-decision.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-4tobrazo-proveniencia-proxy-anclada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-4tobrazo-proveniencia-proxy-anclada.md"
+            ],
+            "started_at": "2026-07-18T12:31:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718f-2",
+            "updated_at": "2026-07-18T12:31:05Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
