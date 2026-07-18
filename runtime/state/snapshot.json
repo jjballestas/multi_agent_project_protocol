@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4c7f06ce8c6e9841e0e54b8d8542c683a31dd0938395997ffba7da78170dd89d",
+  "canonical_hash": "528bd424e37e81db3ca3f65592a5ac4241d2428029b08456c800e1576a0284bb",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -675,6 +675,7 @@
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718c-1": 1,
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718c-2": 1,
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718d": 1,
+      "CLAIM-OPS-MAILBOX-HYGIENE-20260718e": 1,
       "CLAIM-TASK-0256-arquitecto-registro": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -1570,6 +1571,7 @@
       "MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-ejecutada": 1,
       "MSG-20260718-Arquitecto-to-Operador-RESP-task-0006-done-piloto-confirmado-t1b1-lanzado": 1,
       "MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix": 1,
+      "MSG-20260718-Operador-to-Arquitecto-ACK-leccion-requires-response-question": 1,
       "MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-cierre-adopcion-al-operador": 1,
       "MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-diseno-endorsado-baseline-reuse": 1,
       "MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia": 1,
@@ -1637,6 +1639,7 @@
       "OPS-MAILBOX-HYGIENE-20260718c-1": 1,
       "OPS-MAILBOX-HYGIENE-20260718c-2": 1,
       "OPS-MAILBOX-HYGIENE-20260718d": 1,
+      "OPS-MAILBOX-HYGIENE-20260718e": 1,
       "OPS-MBHYG": 34,
       "OPS-MEDICION-H1-H3-20260630": 2,
       "OPS-UNJAM-CODEX-20260701": 2,
@@ -1853,7 +1856,7 @@
       "protocol-prune": 7,
       "protocol-state": 1
     },
-    "events_applied": 4139,
+    "events_applied": 4142,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3851,6 +3854,7 @@
       "intent:Arquitecto:claim:3dd7963c7f842ac52d5601a6a360680149d4f7c0bc56b0fe7ae1bfd86dcafdae": 4681,
       "intent:Arquitecto:claim:3e5d10059eafa1bdce30cf9b3f90dcb97392f7eb4acb5b7b9898f53a5ae8a605": 3426,
       "intent:Arquitecto:claim:3efbf1330c58f25d19dd451970bd5be538887fc7f4b1ef3861646336f4455921": 3090,
+      "intent:Arquitecto:claim:40e08a385264f517ef2756a172af5220e4918778b96e60db1fac97c2f40afda4": 4811,
       "intent:Arquitecto:claim:42323f09f49d50ce7dbd3fc8e982e3d837ace2884400af3060643e24673051c6": 2749,
       "intent:Arquitecto:claim:42d14b9355f3f5c55fcad2295ccc67a42a554d1af6eab6ed8f3be12f340c306b": 3191,
       "intent:Arquitecto:claim:42d97643b888fa5ec5a5b77c839cb165adea41db685466c45c7552a3faa2156a": 4771,
@@ -4201,6 +4205,7 @@
       "intent:Arquitecto:claim:f485a47869111f8aded315e575b7084894aa013736a0cdccfbee307329e20791": 3684,
       "intent:Arquitecto:claim:f57109c7a51925826969de1602cd339a20e4d62299eb2b1d1a94dfe7ca69e304": 3335,
       "intent:Arquitecto:claim:f62c6db68c76a97c2419f9c72bc2b4b072b4bf729e3e89d808ce27d16454ca22": 3775,
+      "intent:Arquitecto:claim:f69b7208a0147e94090a6f2daa16ce43c17472ec2410d96652ac0c6f0381dc9d": 4813,
       "intent:Arquitecto:claim:f753cb69338dd6015788484f8ff7490b599cc650bc9fe9f170a587bc0936b7cf": 2845,
       "intent:Arquitecto:claim:f87d580333cbbe9d7eab2009fcb5bc2484fdff9ba7fd6b510c053e7493e4d326": 2775,
       "intent:Arquitecto:claim:f88fad436e7a072379480841415328717f99751642c765ebba548ae00ac6e015": 4737,
@@ -4471,6 +4476,7 @@
       "intent:Arquitecto:mailbox_archive:5776c75d7b815b530d768193c8cc0f0d3fbc37e4261d13042102e68ee131edfd": 2831,
       "intent:Arquitecto:mailbox_archive:57e1c34c63c3463157827db3cf908de39a6cc3b36c24533087904068c8615b83": 4764,
       "intent:Arquitecto:mailbox_archive:58db4bfec274e8ad802eddc1cfb4999bbd22d0cabeaf6f52328a97903d1219fb": 3366,
+      "intent:Arquitecto:mailbox_archive:59a4fc984843dce3d9566071f78a835201333e99348f0bd085b86ae86a609bb0": 4812,
       "intent:Arquitecto:mailbox_archive:59f14acec2aa53e932760d7710d1b256a2348ee425feaef052bd9ee2d4232de2": 2771,
       "intent:Arquitecto:mailbox_archive:5a12902f59b69110bf5a5261c7829e1a2d50c2eb79558c31c37fa6afd9b8f4c8": 4612,
       "intent:Arquitecto:mailbox_archive:5a37d87430d31723a430b1c87e2babb86df25123a0c8c487da13c9bc9101b4a2": 3768,
@@ -5996,5 +6002,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4810
+  "up_to_seq": 4813
 }
