@@ -331,6 +331,56 @@
             "updated_at": "2026-07-17T23:47:17Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-1",
+            "expires_at": "2026-07-18T03:02:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-1",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-b0reuse-quita-b1literal-sigue-grid.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-b0reuse-quita-b1literal-sigue-grid.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t1-b0reuse-cerrado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t1-b0reuse-cerrado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t2-cerrado-topologia-adoptada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t2-cerrado-topologia-adoptada.md"
+            ],
+            "started_at": "2026-07-18T02:02:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:02:17Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-2",
+            "expires_at": "2026-07-18T03:04:46Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-2",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-topologia-autor-arquitecto-qc-codex-bounce.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-topologia-autor-arquitecto-qc-codex-bounce.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-rubric-enrutado-peon-vs-codex.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-rubric-enrutado-peon-vs-codex.md"
+            ],
+            "started_at": "2026-07-18T02:04:46Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:04:46Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-3",
+            "expires_at": "2026-07-18T03:07:07Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-3",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-escala-breakeven-99u.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-escala-breakeven-99u.md"
+            ],
+            "started_at": "2026-07-18T02:07:07Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:07:07Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
