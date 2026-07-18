@@ -1,4 +1,4 @@
-# MANUAL DE OPERACION: delegacion a peones locales (v1.0; sintesis del piloto 18-jul)
+# MANUAL DE OPERACION: delegacion a peones locales (v1.1; sintesis del piloto + variante QC-barato, 18-jul)
 
 Estado: v1.0 FINAL (piloto completo: grid 17 celdas + afinado + confirmatorio lote-100). Fuente: piloto privado del grid
 (TASK-0006..0012, instancia Nova-Payroll). TODO NUMERO ES INDICATIVO (1 corrida por celda,
@@ -113,3 +113,45 @@ Delegar a peon SOLO si (rubric v0.2, los 5 filtros + estas condiciones economica
   sellado multi-maquina pre-registrado seria el 3er brazo (decision futura del operador).
 - Piloto cerrado en canonico: TASK-0006..0014 done (9 tareas, 19 celdas + afinado,
   ~2.6M tokens frontier de medicion + ceremonia).
+
+## 8. Variante QC-barato (post-piloto, 18-jul; MEDIDO -- v1.1)
+
+La celda "sanitizador" que la s.7 dejo como skip declarado SE MIDIO despues por DIRECTIVA
+del operador (variante QC-barato, 3 condiciones + celda marginal; TASK-0015/0016/0017;
+registro y sellos en la instancia Nova-Payroll). Hipotesis: el premium +7 pct era el QC
+frontier; abaratando la verificacion podria cruzar a negativo. Resultado:
+
+| condicion | frontier | vs directo 129921 |
+|---|---:|---:|
+| delegado sin sanitizador (referencia TASK-0014) | 139195 | +7.1 pct |
+| delegado + sanitizador, steady-state (marginal, la MEDIDA) | 135171 | +4.0 pct |
+| delegado + sanitizador + checker local deepseek (bruto c/setup) | 160535 | no comparable (confound declarado) |
+
+1. **NO HAY CRUCE ni con QC abaratado.** El premium remanente +4.0 pct es el envelope
+   frontier de orquestacion. Se confirma: delegar compra CAPACIDAD, no ahorro neto.
+2. **SANITIZADOR MECANICO: SIEMPRE.** Determinista, 0 LLM, solo formato/entrega (fences,
+   prosa, rename derivado del bloque de datos). Recorta el premium -3.1 puntos (robusto a
+   una corrida con mas friccion del peon), elimina la clase entera de deslices de
+   formato/naming (90-210 renames por corrida de 100u) y su setup es one-time amortizable
+   (~6k chars de script AST). CAVEAT vigilado: la rama sin-fence puede truncar codigo si
+   hay sentencias top-level tras las funciones (latente, no ejercido; la telemetria
+   prose_stripped lo delata) -- endurecer antes de uso intensivo.
+3. **CHECKER LOCAL LLM: NO** (en familias de conformidad de datos). deepseek-6.7b como
+   pre-filtro: 0 true-positives; sus GO no predicen el gate (13/18 fallaron despues); sus
+   NO-GO fueron espurios; el unico chequeo mecanico util (nombres) ya lo resuelve el
+   sanitizador. Anadio 12 bounces de ruido y la convergencia la sostuvo la ESCALACION
+   frontier (50 pct de bloques). El QC frontier va solo donde el gate falla (escalacion),
+   que es el diseno que la condicion termino ejerciendo de facto.
+4. **ECONOMIA DE BOUNCES (hallazgo del sello 0101):** con decode determinista, el bounce 2
+   sobre prompt identico devuelve respuesta BYTE-IDENTICA: no aporta. Tope efectivo
+   recomendado: 1 bounce + triaje, correccion directa al segundo fallo. (Refina el tope-2
+   de s.6: el tope-2 sigue siendo el techo validado; el segundo intento solo tiene sentido
+   si el bounce cambia el prompt.)
+5. Disciplina que este tramo re-valido: pre-registro ex-ante + contabilidad simetrica
+   pre-sello + confounds DECLARADOS (nunca particion post-hoc) + celda marginal para el
+   steady-state; el sello independiente cazo ademas un lote de datos declarado "nuevo" que
+   no lo era (enmienda declarativa registrada; fix de proceso: chequeo automatico de
+   no-solape antes de declarar novedad de datos).
+
+Todo NO citable (demo privada, 1 corrida por celda, hardware unico); mismas condiciones
+de evidencia que el resto del manual.
