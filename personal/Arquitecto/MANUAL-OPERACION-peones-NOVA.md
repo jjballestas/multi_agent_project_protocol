@@ -116,6 +116,11 @@ Delegar a peon SOLO si (rubric v0.2, los 5 filtros + estas condiciones economica
 
 ## 8. Variante QC-barato (post-piloto, 18-jul; MEDIDO -- v1.1)
 
+> ESTADO: RECOMENDACION tecnica avalada por el Asesor (ACK 18-jul), NO adoptada. La
+> adopcion formal en el flujo NOVA es decision SOBERANA del operador (la delegacion al
+> Asesor cubria el diseno de la corrida, no la adopcion). Si el operador firma la
+> adopcion, este estado pasa a ADOPTADO.
+
 La celda "sanitizador" que la s.7 dejo como skip declarado SE MIDIO despues por DIRECTIVA
 del operador (variante QC-barato, 3 condiciones + celda marginal; TASK-0015/0016/0017;
 registro y sellos en la instancia Nova-Payroll). Hipotesis: el premium +7 pct era el QC
