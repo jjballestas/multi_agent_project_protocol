@@ -32,7 +32,7 @@ Demo del piloto NO citable; el rubric en si es operativa del carril.
 | T1-B1 (sin spec calibrada) | extraccion cruda | 0/10, 3 llamadas, maker reescribio | (anti-dato) | la spec calibrada ES la condicion; sin ella no hay enrutado a peon valido |
 | T2 (parser refs, 18 asserts, variacion) | variacion media | NINGUNO 1a-verde; 1 correccion real c/u; 3b-reuse 104432 vs baseline 105539 | FRONTERA (bounce-apta) | filtro 1 refinado: a mas variacion/edges, peon degrada a borrador |
 | Escala lote 50 | patron puro x volumen | 5 bounces DESLIZ (peon preferia el ejemplo de la spec a las filas de parametros; 1 feedback de 22tk corrigio los 5), 0 techo, 0 correcciones, 50/50 | PEON via BOUNCE | breakeven ~99 u/exec (marginal 956 vs 1180); leccion de spec: parametros ANTES del ejemplo |
-| T3 (contrato existente) | juicio moderado | PENDIENTE | prediccion: Codex (falla filtro 1) -- se prueba igual para calibrar | - |
+| T3 (contrato existente, gate 29 asserts) | juicio moderado | qwen 7b/3b: 2 bounces, 2o reintrodujo defecto -> TECHO estrecho + 1 correccion minima; deepseek 6.7b: PASS con 1 bounce, 0 correcciones | FRONTERA-ALTA, techo POR FIT modelo-familia | el techo no es uniforme por tamano; enrutar PEON POR FAMILIA (deepseek para logica compuesta, qwen para patron puro); spec parametros-antes-del-ejemplo elimino el fallo catastrofico |
 | T4 (logica dura) | ceiling | PENDIENTE | prediccion: Codex (falla filtro 1) | - |
 
 ## Tasa de acierto de enrutado (mi discernicion, medida)
@@ -44,7 +44,8 @@ Por celda: tier ELEGIDO ex-ante vs mejor tier EMPIRICO ex-post (peon-solo / boun
 | T1 reuse 3b/6.7b | peon | peon-solo | SI |
 | T2 delegadas x3 | peon | bounce (borrador+correccion) | PARCIAL (acierto de tier, sub-estado no previsto ex-ante; el rubric v0.2 ya lo presupuesta) |
 | Escala lote 50 delegado | peon bounce-apta | bounce (5 desliz, 0 correcciones) | PARCIAL: bounce-apta SI y mejor de lo previsto; "per-unit cae bajo directo" NO se cumplio a lote 50 (solo el MARGINAL cayo: 956 vs 1180; cruce a ~99u) |
-| T3 / T4 / B2 | (registrar ex-ante ANTES del exec; T3/T4 ya predichos arriba) | - | - |
+| T3 delegadas x3 | Codex (prediccion: peon no pasa ni con bounce x2) | qwen: techo estrecho (prediccion OK en direccion); deepseek: bounce PASS (prediccion FALLADA) | PARCIAL: el filtro 1 necesita la dimension FIT modelo-familia, no solo dificultad |
+| T4 / B2 | (registrar ex-ante ANTES del exec; T4 ya predicho arriba) | - | - |
 
 Predicciones ex-ante registradas (para medir sin HARKing retroactivo):
 - Escala lote 50 delegado: bounce-apta con <=1 correccion por bloque; per-unit delegado CAE
