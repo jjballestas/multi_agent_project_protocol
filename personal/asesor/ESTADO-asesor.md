@@ -75,6 +75,14 @@
   archivando (status:archived lo saca del check) y me lo senalo; ACK e94db68. REGLA: si necesita
   respuesta -> requires_response:true CON question+requested_action+response_owner; si no ->
   requires_response:false SIN question.
+- **LECCION topologia de repos (2026-07-18):** la INSTANCIA Nova-Payroll (D:/Agentes/NOVA-Suite/
+  Nova-Payroll) es repo LOCAL-ONLY SIN REMOTO por diseno (orden del operador desde el nacimiento).
+  Sus commits (b5947e1, 633e598, 1c9be6e, ...) NUNCA se pushean y son invisibles en origin POR
+  DISENO -- NO es un push atascado. El Arquitecto reporta el estado de la instancia por mailbox /
+  git log en esa ruta. La regla de push-inmediato aplica al HUB (multi_agent_project_protocol) y a
+  NOVA (que si tiene remoto), NO a la instancia. ANTES de diagnosticar "commit sin pushear",
+  distinguir HUB vs INSTANCIA (me mordio: mande un COORD-nudge de push sobre un commit de instancia,
+  retirado). Los commits de instancia se citan como "instancia <sha> (local-only)".
 
 ## >> ESTADO ACTUAL 2026-07-15 (historico; ver bloque 18-jul arriba)
 **Foco proxima sesion: DESARROLLAR LA MEMORIA HIBRIDA (Fase A sobre Nova-Payroll) -- directiva del operador al cierre del 14-jul ("manana vamos a desarrollar la memoria hibrida"). Dia 14-jul CERRADO end-to-end: DECISION-0097 (Gate-1) + DECISION-0098 (scratch-root) SELLADAS; Nova-Payroll NACIDA (local) + anclada Entrada 0; hardening 15-jul/PAR-2 cerrado (s.29 firmada, PAR-2 FUERA); skill notion-spec-mirror viva + retroactiva a Contabilidad. HEAD=origin 2d1ff24. FONDO 2E35F26E / epoch 1.14.0 / N=500 INTACTO. (Cierre ~23:09 local Madrid UTC+2.)**
