@@ -547,6 +547,20 @@
             "updated_at": "2026-07-18T13:53:13Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718i",
+            "expires_at": "2026-07-18T20:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718i",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-push-b5947e1-invisible.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-push-b5947e1-invisible.md"
+            ],
+            "started_at": "2026-07-18T14:17:48Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718i",
+            "updated_at": "2026-07-18T14:17:48Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1b257884bfbb7443563fee6b788226b6a417f037c4c9ca716501818eac49db9f",
+  "canonical_hash": "85bfb529e95e372888c8a25188b78033c6cd39740f3334e497230f06f23e1cfb",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -680,6 +680,7 @@
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718f-2": 1,
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718g": 1,
       "CLAIM-OPS-MAILBOX-HYGIENE-20260718h": 1,
+      "CLAIM-OPS-MAILBOX-HYGIENE-20260718i": 1,
       "CLAIM-TASK-0256-arquitecto-registro": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -1588,6 +1589,7 @@
       "MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia": 1,
       "MSG-20260718-Operador-to-Arquitecto-COORD-liveness-lote100": 1,
       "MSG-20260718-Operador-to-Arquitecto-COORD-nudge-senal-vida-grid-b0reuse": 1,
+      "MSG-20260718-Operador-to-Arquitecto-COORD-push-b5947e1-invisible": 1,
       "MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condicionada": 1,
       "MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-4to-brazo-unidad-pesada-generacion": 1,
       "MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-b0reuse-quita-b1literal-sigue-grid": 1,
@@ -1660,6 +1662,7 @@
       "OPS-MAILBOX-HYGIENE-20260718f-2": 1,
       "OPS-MAILBOX-HYGIENE-20260718g": 1,
       "OPS-MAILBOX-HYGIENE-20260718h": 1,
+      "OPS-MAILBOX-HYGIENE-20260718i": 1,
       "OPS-MBHYG": 34,
       "OPS-MEDICION-H1-H3-20260630": 2,
       "OPS-UNJAM-CODEX-20260701": 2,
@@ -1876,7 +1879,7 @@
       "protocol-prune": 7,
       "protocol-state": 1
     },
-    "events_applied": 4162,
+    "events_applied": 4165,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3981,6 +3984,7 @@
       "intent:Arquitecto:claim:72b1ee9e9364c5f40f671365f0f8b15a1cf342e00619f2268c44d65c1763384a": 2746,
       "intent:Arquitecto:claim:739cb103e918b6bd3338f1636c652d19195231fd831e8e8e0609b8c0753f19e0": 4824,
       "intent:Arquitecto:claim:73d2385255e0af9eec13be2239a05a0fad29680109326629a31a0eadf455cd7d": 3522,
+      "intent:Arquitecto:claim:73dc91db3cfa39bd58319b66f179d0e1fdb5d85c5146a0860de84b40b8a1fd43": 4836,
       "intent:Arquitecto:claim:741301b0dffab694dfce1ce083c2595094af1b3d677450de17659082d88754de": 3419,
       "intent:Arquitecto:claim:749f6845a85ee2de37fe26bca7c423b1d903801e71a980143105b2bd2c057494": 3819,
       "intent:Arquitecto:claim:75ef2078392c3e713bffdc86aa673749797ec875631b46130de79871bd05534f": 4716,
@@ -4056,6 +4060,7 @@
       "intent:Arquitecto:claim:91ab822215959edb06b708b95a36fa98fd440d305dcfec9c16370e242a6bb880": 4591,
       "intent:Arquitecto:claim:91b681c33536c3ac1f7181e3253f40272f4b5f894b48bca2f6bcf27cc742f3d8": 3939,
       "intent:Arquitecto:claim:9300b18d87bd1778782885764eb4c861e0f1980a48f6e315710fc0a5724613a0": 4645,
+      "intent:Arquitecto:claim:937b1b4a5690bf5fe5876165d10eec282f4c7ed3d7f73f646a397ac3a2b9490b": 4834,
       "intent:Arquitecto:claim:949c4fd56f70f9cdf5f0540720e6853b9b8f4d03420901deb737ca276d4a104c": 4818,
       "intent:Arquitecto:claim:96845c1348d662e914af1b9941580f594c53c6911ace3b40d5300a771b5799dc": 4585,
       "intent:Arquitecto:claim:9697124973200dbc226c5ee699b67a53f506855a2ff9628746e1b6c8a4062590": 3829,
@@ -4360,6 +4365,7 @@
       "intent:Arquitecto:mailbox_archive:1d71f250bc34eb68d5bc1a88107b9c5d541cb23bee08c307e5649f9aa688855b": 4390,
       "intent:Arquitecto:mailbox_archive:1d874b36a8bf2c472b697afd011eb24cebd8b2153e303f798edbb10a9cfe8d02": 3888,
       "intent:Arquitecto:mailbox_archive:1dbe9f269c142289fe55d1fe0458105b260c7d3295fbed7b450d4337c862514c": 3517,
+      "intent:Arquitecto:mailbox_archive:1dd12b8d99684b5be29c341eb10361ec6ece1ddf0747c0090c16f48173d37694": 4835,
       "intent:Arquitecto:mailbox_archive:1e3d6b29d0dd99ec60a242beab69ddba4581a822cbda2113ba2ec96ccfc6ea7f": 2745,
       "intent:Arquitecto:mailbox_archive:1eaabd605c93f4c410a0aa39b225b6a4b16a772536035e83f3381876e79f4c73": 3163,
       "intent:Arquitecto:mailbox_archive:1f2b2b871d7d4c9c91552b5fd04b788a0ba7ee4e2b5648be3bffe3d6259d21b5": 4469,
@@ -6042,5 +6048,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4833
+  "up_to_seq": 4836
 }
