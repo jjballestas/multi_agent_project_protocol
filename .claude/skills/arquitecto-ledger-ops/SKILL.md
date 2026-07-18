@@ -75,6 +75,20 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   mencionar STOP_JOB tumbaban el cron. Si algun cron corre un harness pre-0236, vuelve a aplicar la regla vieja.)
 - **GATEA TU PROPIO MENSAJE** antes de seguir: `python scripts/validate_collaboration_state.py` exit 0
   Y `python scripts/scan_encoding.py` exit 0. `scan_encoding` cubre `open/` Y `archived/`.
+- **`requires_response: true` exige `requested_action` Y `question` (2026-07-18, 3 casos):** el chequeo
+  compact pide question; el clasico pide requested_action; pon AMBOS. Y el parser escanea el ARCHIVO
+  COMPLETO, no solo el frontmatter: la bandera `requires_response` escrita LITERAL en el CUERPO de un
+  mensaje tambien dispara el chequeo -> parafrasea ("la bandera de respuesta"), jamas la escribas literal.
+  Mensaje AJENO roto en open/ (frontmatter incompleto del peer): se arregla RESPONDIENDOLO + `mailbox_archive`
+  en el mismo commit (el archive lo saca del check); JAMAS editar el mensaje del peer.
+- **Invariante handoff-release (2026-07-18):** una tarea `in_review` NO admite claim activo del owner
+  -> para remediar trabajo rechazado, el REVIEWER la devuelve `in_review->in_progress` PRIMERO (rechazo
+  formal con tx propia) y recien entonces el maker reclama.
+- **Prohibiciones por celda vs COLD-START del cron (2026-07-18, contamino una medicion):** el prompt fijo
+  del cron de Codex VUELCA `personal/Codex/` completo al contexto ANTES de leer el mensaje con la
+  prohibicion "no leas X". Si una celda exige que el exec NO vea un archivo, CUARENTENA previa en un exec
+  ANTERIOR (git mv fuera del alcance del cold-start) + restaurar despues. Las declaraciones de fuentes de
+  un exec se verifican contra su err.log, nunca se aceptan de la intencion.
 
 ## 2. submit_intent — recetas que funcionan a la primera
 - **Claim acquire: SIEMPRE anidado** bajo la clave `claim`, nunca plano (plano se materializa perdiendo
