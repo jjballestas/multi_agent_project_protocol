@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REPORTE-t4-grid-completo-techo-d
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

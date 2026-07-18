@@ -3,7 +3,7 @@ message_id: MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-b2-skip-lote100-GO-med
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:

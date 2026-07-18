@@ -381,6 +381,32 @@
             "updated_at": "2026-07-18T02:07:07Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718b",
+            "expires_at": "2026-07-18T07:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718b",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-lote100.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-lote100.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-afinado-postT4-bouncecap-gatescorer.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-afinado-postT4-bouncecap-gatescorer.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-b2-skip-lote100-GO-medir.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-b2-skip-lote100-GO-medir.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-secuencia-techo-luego-lote100-envelope-nova.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-secuencia-techo-luego-lote100-envelope-nova.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-t3-techo-por-fit-modelo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-t3-techo-por-fit-modelo.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-t4-grid-completo-techo-de-entrega.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-t4-grid-completo-techo-de-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-piloto-cerrado-manual-nova-v1.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-piloto-cerrado-manual-nova-v1.md"
+            ],
+            "started_at": "2026-07-18T04:28:51Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718b",
+            "updated_at": "2026-07-18T04:28:51Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
