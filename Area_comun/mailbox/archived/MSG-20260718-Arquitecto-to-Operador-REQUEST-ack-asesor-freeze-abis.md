@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REQUEST-ack-asesor-freeze-abis
 from: Arquitecto
 to: Operador
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-18

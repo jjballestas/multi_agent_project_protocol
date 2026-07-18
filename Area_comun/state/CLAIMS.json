@@ -82,6 +82,20 @@
             "updated_at": "2026-07-14T16:27:35Z"
         },
         {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-addendum-abis",
+            "expires_at": "2026-07-18T23:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ADDENDUM-Abis-contexto-rico-regimen2-sin-ab.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ADDENDUM-Abis-contexto-rico-regimen2-sin-ab.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-addendum-abis"
+            ],
+            "started_at": "2026-07-18T21:27:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T21:27:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260718-Arquitecto-hygiene-coords-probe",
             "expires_at": "2026-07-18T21:30:00Z",
             "owner": "Arquitecto",
@@ -96,6 +110,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260718",
             "updated_at": "2026-07-18T19:48:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-req-ack-abis",
+            "expires_at": "2026-07-18T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REQUEST-ack-asesor-freeze-abis.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REQUEST-ack-asesor-freeze-abis.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-freeze-celda-abis.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-freeze-celda-abis.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-req-ack-abis"
+            ],
+            "started_at": "2026-07-18T21:30:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T21:30:00Z"
         },
         {
             "claim_id": "CLAIM-DECISION-0099-sello",
