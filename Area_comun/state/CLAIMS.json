@@ -585,6 +585,24 @@
             "updated_at": "2026-07-18T14:53:50Z"
         },
         {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718k",
+            "expires_at": "2026-07-19T02:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718k",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-metrica-B-bis-queries-selladas.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-metrica-B-bis-queries-selladas.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-b-dualidad.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-b-dualidad.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-a-refuta.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-a-refuta.md"
+            ],
+            "started_at": "2026-07-18T17:47:41Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718k",
+            "updated_at": "2026-07-18T17:47:41Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
             "expires_at": "2026-06-14",
             "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
