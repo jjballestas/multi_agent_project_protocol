@@ -1,4 +1,4 @@
-# MANUAL DE OPERACION: delegacion a peones locales (v1.2; piloto + QC-barato + 4to brazo estructural, 18-jul)
+# MANUAL DE OPERACION: delegacion a peones locales (v1.3; serie completa: piloto + QC-barato + estructural + techo de entrega, 18-jul)
 
 Estado: v1.0 FINAL (piloto completo: grid 17 celdas + afinado + confirmatorio lote-100). Fuente: piloto privado del grid
 (TASK-0006..0012, instancia Nova-Payroll). TODO NUMERO ES INDICATIVO (1 corrida por celda,
@@ -196,3 +196,40 @@ y la generacion -- lo unico descargable -- nunca es la parte dominante dentro de
 DIFERIDO declarado (pregunta abierta barata, no descartada): el techo de ENTREGA del
 qwen-7b a escala ~50 funciones/una unidad (para dimensionar unidades de peon en NOVA).
 Todo NO citable (demo privada; 1 corrida por celda, hardware unico).
+
+## 10. Techo de ENTREGA del 7b, MEDIDO (rectificacion del operador, 18-jul -- v1.3)
+
+El diferido de s.9 se midio por directiva (TASK-0020: pipeline delegado completo sobre la
+misma spec/gate sellados; proposito redefinido a entrega, coste solo contexto).
+
+- **La entrega estructural NO es el techo**: a bloques de 5 funciones por llamada, el 7b
+  entrego 10/10 bloques completos, 50/50 funciones, 0 truncamientos (done_reason=stop en
+  las 15 llamadas), 0 omisiones. El volumen del bloque no rompio nada.
+- **EL TECHO REAL ES DE REPARACION (hallazgo del sello 0101, no declarado por el maker):**
+  en 4 de los 5 bounces el peon devolvio codigo BYTE-IDENTICO al inicial PESE a llevar el
+  feedback del gate en el prompt. El 7b no consume feedback correctivo en este envelope.
+  Solo 1/5 (redondeo_bancario, desliz de formato) reparo de verdad.
+- Causas raiz de las 4 familias escaladas (ninguna por volumen/contexto): disciplina de
+  tipos float/round->float (3/5: "1000.0 != 1000"), off-by-one de indexacion (1),
+  malinterpretacion de la forma del dato (1).
+- Fraccion de calidad del modulo final: peon 30/50 funciones; maker 20/50 (reemplazo por
+  bloque familiar, byte-identico a su brazo directo).
+- Coste (CONTEXTO, el cruce sigue cerrado): 195603 vs directo 137042 (~+43 pct): las
+  escalaciones con correccion son caras; coherente con el veredicto estructural s.9.
+
+**REGLAS OPERATIVAS que salen de esta medicion (dimensionamiento para NOVA):**
+1. Unidades de peon de hasta 5 funciones/bloque: entrega estructural fiable en el 7b
+   (con sanitizador). No hay evidencia de techo de volumen en este rango.
+2. **El bounce solo paga en deslices de FORMATO.** Para fallos de LOGICA/TIPOS, el 7b
+   re-emite lo mismo: triaje directo a correccion del maker SIN quemar el bounce
+   (refina el tope-1 de s.8: bounce solo si el triaje clasifica desliz-de-formato).
+3. Deteccion mecanica de bounce-noop: comparar hash de la respuesta del bounce vs la
+   inicial; si coinciden, registrar bounce-noop y escalar sin re-gate (ahorra 1 ciclo).
+4. Spec para peones con aritmetica: declarar EXPLICITO "enteros, sin float, sin round()"
+   con un ejemplo negativo (la clase de fallo dominante fue round()->float).
+5. Gap de spec detectado por divergencia entre brazos (deduccion_tabla subdeterminada:
+   floor vs round-nearest, ambos pasan el gate): los contratos de division DEBEN declarar
+   el modo de redondeo; el sello por diff-entre-brazos caza estas subdeterminaciones.
+
+Todo NO citable (demo privada, 1 corrida). Con esto la serie queda cerrada DEL TODO:
+economia (s.9, estructural) + dimensionamiento (s.10, medido).
