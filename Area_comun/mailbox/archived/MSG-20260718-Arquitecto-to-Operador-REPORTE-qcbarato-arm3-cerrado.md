@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REPORTE-qcbarato-arm3-cerrado
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 created_at: 2026-07-18

@@ -3,7 +3,7 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-qcbarato-tabla-y-d
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-18
 context_refs:
