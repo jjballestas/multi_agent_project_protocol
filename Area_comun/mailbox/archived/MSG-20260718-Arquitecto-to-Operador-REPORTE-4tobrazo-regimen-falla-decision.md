@@ -3,8 +3,8 @@ message_id: MSG-20260718-Arquitecto-to-Operador-REPORTE-4tobrazo-regimen-falla-d
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
-requires_response: true
+status: archived
+requires_response: false
 response_owner: Operador
 created_at: 2026-07-18
 context_refs:
