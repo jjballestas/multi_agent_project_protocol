@@ -153,6 +153,21 @@
             "updated_at": "2026-07-19T18:43:19Z"
         },
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-remediation-delivery",
+            "expires_at": "2026-07-19T20:56:22Z",
+            "notes": "Deliver TASK-0257 F01/F02 remediation for checker re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-remediation-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-remediacion-F01-F02.md"
+            ],
+            "started_at": "2026-07-19T18:56:22Z",
+            "status": "active",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:56:22Z"
+        },
+        {
             "claim_id": "CLAIM-arq-d0103-ready-20260719",
             "expires_at": "2026-07-19T19:36:47Z",
             "notes": "OK del Operador 2026-07-19: enmiendas E1-E3 a la 0103 + promocion proposed->ready de TASK-0257..0265",
