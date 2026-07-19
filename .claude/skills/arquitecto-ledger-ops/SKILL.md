@@ -89,6 +89,18 @@ ANTES de escribir el archivo en `Area_comun/mailbox/open/`:
   prohibicion "no leas X". Si una celda exige que el exec NO vea un archivo, CUARENTENA previa en un exec
   ANTERIOR (git mv fuera del alcance del cold-start) + restaurar despues. Las declaraciones de fuentes de
   un exec se verifican contra su err.log, nunca se aceptan de la intencion.
+- **El volcado del cold-start contamina TAMBIEN con artefactos PERMITIDOS (2026-07-19, hallazgo H1 del
+  sello 0101):** el dump recursivo puede meter al contexto el artefacto-fuente INTEGRO antes del mensaje;
+  el exec queda correcto pero la MEDICION (tokens/mecanismo) deja de ser homogenea entre brazos. Para
+  mediciones comparables: cuarentena fisica de TODO lo que no deba pesar en el exec (permitido o no), y
+  los archivos con RESPUESTAS/CLAVES previas (resultado master, sets) se tratan como vectores: cada brazo
+  materializa en ARCHIVO PROPIO con prohibicion de abrir los previos; consolidacion solo al cierre.
+- **Reglas de normalizacion de grading: TODAS ex-ante en el set sellado** (palabra==cifra, decimales
+  numericos, items de 2 campos exigen ambos). Anadir una regla en el momento de calificar = hallazgo del
+  sello (paso: q14/q16 T1 A-bis).
+- **Estampa de hora en MSG/artefactos: SIEMPRE del reloj (`date +%H:%M`), JAMAS estimada.** Reincidencia
+  2x (hub 05c51a2; instancia 21e6f27): escribir la hora "esperada" adelanta el reloj y obliga a un chore
+  de correccion. Tomar la hora en el MISMO paso en que se escribe el archivo.
 
 ## 2. submit_intent — recetas que funcionan a la primera
 - **Claim acquire: SIEMPRE anidado** bajo la clave `claim`, nunca plano (plano se materializa perdiendo
@@ -196,6 +208,10 @@ Con el gate activo, TODO commit que toque rutas gobernadas (Area_comun/**, runti
   del `.md`; si el commit solo stagea `Area_comun/state/`, el `.md` commiteado queda con el status viejo -> en clon
   limpio `status mismatch index vs file` -> validate rojo). Paso en el gate nominal; se reconcilia editando el `.md`
   al estado autoritativo del index. Y SIEMPRE incluye los `.slim.json` en el pathspec del commit de estado.
+  **OJO (2026-07-19): los `.slim.json` son del HUB; la instancia Nova-Payroll NO los tiene** -- ahi se
+  stagean solo los 3 state json + el `.md` + events.jsonl + snapshot.json. Y `git add` con varias rutas
+  FALLA ENTERO si UNA no existe (el archivo nuevo queda sin stagear y el commit por pathspec revienta con
+  "did not match any file(s) known to git") -> en cross-repo, add por partes o verifica las rutas antes.
 - **Al gatear un re-anclaje/sello (o revisarlo), el sello se RE-VERIFICA RECOMPUTANDO, no se confia el declarado.**
   Dos hallazgos reales del Analista: F-9303-01 (el payload del `chain.regenesis_boundary` + `config_epoch_history`
   no se recomputaba -> tamper invisible) y F-9304-01 (el sello `pre_t0_provenance.sealed_export` no se recomputaba).
