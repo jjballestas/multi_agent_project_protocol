@@ -1,8 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
 
 ## Latest Session Note
+
+- TASK-0267 implementation commit `b583090` replaces the global-cleanliness
+  mutex with exact index materialization, adds real `git commit` regressions for
+  staged invalid state, unstaged peer/validator isolation and R100 judgment-code
+  rename, mirrors hook v2 into generated runtime instances, and pins hook SHA-256
+  `6871e582122702cd8d31ff4c2ad6f8af21db87948482810d961942560055304e` in
+  hub/export CI. Hook cold/hot measured 53.251s/51.487s on this Windows workspace,
+  above the ~10s reference; direct validator measured 15.044s and temporary
+  snapshot validation about 52s. Declare this cost exception in review.
 
 - TASK-0257 was moved `in_progress -> blocked` in runtime transaction seq
   4977-4979 after the third NO-GO exhausted the 2/2 fix-loop limit. The minimal
