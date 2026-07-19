@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Operador-REPORTE-memhib-abis-y-veredicto-
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-19
 context_refs:

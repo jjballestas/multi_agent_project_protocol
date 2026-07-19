@@ -27996,6 +27996,692 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260714",
             "updated_at": "2026-07-13T23:18:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260713-231955-prune-arquitecto",
+            "expires_at": "2026-07-13",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-13T23:19:55Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-13T23:19:55Z"
+        },
+        {
+            "claim_id": "CLAIM-20260714-Arquitecto-dec0096",
+            "expires_at": "2026-07-14T04:46:52Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0096-instancias-born-operational-capa-operacional-export.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260714-Arquitecto-dec0096"
+            ],
+            "started_at": "2026-07-14T00:46:52Z",
+            "status": "released",
+            "task_id": "OPS-ARSENAL-INSTANCIACION-20260714",
+            "updated_at": "2026-07-14T00:46:52Z"
+        },
+        {
+            "claim_id": "CLAIM-20260714-Arquitecto-seal-0097",
+            "expires_at": "2026-07-14T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0097-gate1-activacion-memoria-hibrida-nova-payroll.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260714-Arquitecto-seal-0097"
+            ],
+            "started_at": "2026-07-14T15:33:26Z",
+            "status": "released",
+            "task_id": "OPS-DECISION-0097-SEAL",
+            "updated_at": "2026-07-14T15:33:26Z"
+        },
+        {
+            "claim_id": "CLAIM-20260714-Arquitecto-seal-0098",
+            "expires_at": "2026-07-14T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0098-scratch-root-unico-por-proyecto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260714-Arquitecto-seal-0098"
+            ],
+            "started_at": "2026-07-14T16:27:35Z",
+            "status": "released",
+            "task_id": "OPS-DECISION-0098-SEAL",
+            "updated_at": "2026-07-14T16:27:35Z"
+        },
+        {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-addendum-abis",
+            "expires_at": "2026-07-18T23:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ADDENDUM-Abis-contexto-rico-regimen2-sin-ab.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ADDENDUM-Abis-contexto-rico-regimen2-sin-ab.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-addendum-abis"
+            ],
+            "started_at": "2026-07-18T21:27:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T21:27:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-coords-probe",
+            "expires_at": "2026-07-18T21:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-checkpoint-antes-compactar-dogfood.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-checkpoint-antes-compactar-dogfood.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-status-probe-D-post-checkpoint.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-status-probe-D-post-checkpoint.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-coords-probe"
+            ],
+            "started_at": "2026-07-18T19:48:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T19:48:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260718-Arquitecto-hygiene-req-ack-abis",
+            "expires_at": "2026-07-18T23:59:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REQUEST-ack-asesor-freeze-abis.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REQUEST-ack-asesor-freeze-abis.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-freeze-celda-abis.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-freeze-celda-abis.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260718-Arquitecto-hygiene-req-ack-abis"
+            ],
+            "started_at": "2026-07-18T21:30:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718",
+            "updated_at": "2026-07-18T21:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Arquitecto-OPS-HYG-A",
+            "expires_at": "2026-07-19T06:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Arquitecto-OPS-HYG-A",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-Abis-coldstart-contexto-costo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-Abis-coldstart-contexto-costo.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-cross-atestacion-anclada-jheredia-operativo.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-cross-atestacion-anclada-jheredia-operativo.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-status-probe-dogfood-coldstart.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-status-probe-dogfood-coldstart.md"
+            ],
+            "started_at": "2026-07-19T01:17:23Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260719",
+            "updated_at": "2026-07-19T01:17:23Z"
+        },
+        {
+            "claim_id": "CLAIM-DECISION-0099-sello",
+            "expires_at": "2026-07-17T14:04:02Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0099-politica-roster-peones-maker-only-checker-fuerte.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-DECISION-0099-sello"
+            ],
+            "started_at": "2026-07-17T13:04:02Z",
+            "status": "released",
+            "task_id": "DECISION-0099",
+            "updated_at": "2026-07-17T13:04:02Z"
+        },
+        {
+            "claim_id": "CLAIM-DECISION-0100-0101-sello",
+            "expires_at": "2026-07-17T19:05:08Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/decisions/DECISION-0100-adopcion-memoria-hibrida.md",
+                "Area_comun/decisions/DECISION-0101-checker-formal-proveedor-diverso.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-DECISION-0100-0101-sello"
+            ],
+            "started_at": "2026-07-17T18:05:08Z",
+            "status": "released",
+            "task_id": "DECISION-0100-0101",
+            "updated_at": "2026-07-17T18:05:08Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717",
+            "expires_at": "2026-07-17T02:46:36Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-evaluar-patron-extracted-inferred-memoria.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-evaluar-patron-extracted-inferred-memoria.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Analista-REVIEW-refutar-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Analista-REVIEW-refutar-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/open/MSG-20260717-Analista-to-Arquitecto-REVIEW-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Analista-to-Arquitecto-REVIEW-patron-extracted-inferred-aristas.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Analista-RESP-refutacion-aceptada-diferir-limpio.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Analista-RESP-refutacion-aceptada-diferir-limpio.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-0098-sellada-y-task-sandbox-movido.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-0098-sellada-y-task-sandbox-movido.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-s29-sellada-par2-fuera-registrado.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-s29-sellada-par2-fuera-registrado.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-secuencia-probe-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-secuencia-probe-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260714-Arquitecto-to-Operador-RESP-skill-notion-mirror-entregada.md",
+                "Area_comun/mailbox/archived/MSG-20260714-Arquitecto-to-Operador-RESP-skill-notion-mirror-entregada.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717"
+            ],
+            "started_at": "2026-07-17T00:46:36Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717",
+            "updated_at": "2026-07-17T00:46:36Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717B",
+            "expires_at": "2026-07-17T14:10:15Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-patron-extracted-inferred-recomendacion.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-patron-extracted-inferred-recomendacion.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-GO-fase-a-memoria-hibrida-carril-automatizado.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-GO-fase-a-memoria-hibrida-carril-automatizado.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-RESP-ack-plan-f1-y-anomalia-trailer.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-RESP-ack-plan-f1-y-anomalia-trailer.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-go-fase-a-plan-f1-y-receta-monitor.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-go-fase-a-plan-f1-y-receta-monitor.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-gobernada-go-codex-cron-bloqueado.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-gobernada-go-codex-cron-bloqueado.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-RESP-decision-a-operador-lanza-cron-codex.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-RESP-decision-a-operador-lanza-cron-codex.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-in-review.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-in-review.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717B"
+            ],
+            "started_at": "2026-07-17T12:10:15Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717B",
+            "updated_at": "2026-07-17T12:10:15Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717C",
+            "expires_at": "2026-07-17T15:55:59Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-nogo-remediacion-ruteada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-nogo-remediacion-ruteada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u1-done-u2-lanzada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u1-done-u2-lanzada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-0099-draft.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-politica-roster-decision-0099-draft.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-politica-roster-peones-solo-codigo-nunca-checker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-politica-roster-peones-solo-codigo-nunca-checker.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-FIRMA-decision-0099-politica-roster.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-FIRMA-decision-0099-politica-roster.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-correccion-pre-sello-0099-peon-subordinado-al-maker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-correccion-pre-sello-0099-peon-subordinado-al-maker.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717C"
+            ],
+            "started_at": "2026-07-17T14:55:59Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717C",
+            "updated_at": "2026-07-17T14:55:59Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717D",
+            "expires_at": "2026-07-17T18:17:28Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-COORD-nudge-u4-review-atascada-capacidad-proveedor.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-COORD-nudge-u4-review-atascada-capacidad-proveedor.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u2-done-u3-lanzada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u2-done-u3-lanzada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-u3-done-u4-lanzada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-u3-done-u4-lanzada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-FYI-clasificador-proveedor-recurrente-fallback-checker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-FYI-clasificador-proveedor-recurrente-fallback-checker.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DECISION-adopta-memoria-hibrida-follow-through.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DECISION-adopta-memoria-hibrida-follow-through.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-decision-c-mover-checker-formal-otro-proveedor.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-decision-c-mover-checker-formal-otro-proveedor.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-disena-probe-coste-peon-local-delta-tokens-maker.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-disena-probe-coste-peon-local-delta-tokens-maker.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-0099-sellada-version-corregida.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-0099-sellada-version-corregida.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717D"
+            ],
+            "started_at": "2026-07-17T17:17:28Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717D",
+            "updated_at": "2026-07-17T17:17:28Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260717E",
+            "expires_at": "2026-07-17T19:39:28Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-COORD-nudge-sello-0100-0101.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-COORD-nudge-sello-0100-0101.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-FIRMA-decisions-0100-0101.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-FIRMA-decisions-0100-0101.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260717E"
+            ],
+            "started_at": "2026-07-17T19:09:28Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260717E",
+            "updated_at": "2026-07-17T19:09:28Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718A",
+            "expires_at": "2026-07-17T22:08:31Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-GO-probe-coste-peon-qwen7b.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-GO-probe-coste-peon-qwen7b.md",
+                "Area_comun/mailbox/open/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-regenera-human-guide-desactualizada.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Operador-to-Arquitecto-DIRECTIVA-regenera-human-guide-desactualizada.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-human-guide-regenerada-verde.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-human-guide-regenerada-verde.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-drafts-0100-0101-y-diseno-probe.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-drafts-0100-0101-y-diseno-probe.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-HITO-f1-completa-demo-revive-exitosa.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-HITO-f1-completa-demo-revive-exitosa.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-instrumento-codex-cli-relanza-cron.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-instrumento-codex-cli-relanza-cron.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718A"
+            ],
+            "started_at": "2026-07-17T21:08:31Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718A",
+            "updated_at": "2026-07-17T21:08:31Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718B",
+            "expires_at": "2026-07-17T23:32:38Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718B",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-FYI-fase-a-cerrada-total-5de5.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-FYI-fase-a-cerrada-total-5de5.md",
+                "Area_comun/mailbox/open/MSG-20260717-Arquitecto-to-Operador-RESP-0100-0101-selladas.md",
+                "Area_comun/mailbox/archived/MSG-20260717-Arquitecto-to-Operador-RESP-0100-0101-selladas.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-smoke-peon-qwen7b-verde.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-smoke-peon-qwen7b-verde.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-instrumento-cli-cron-vivo-brazo-a-redirigido.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-instrumento-cli-cron-vivo-brazo-a-redirigido.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-ejecutada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-opcion-ii-confirmada-ya-ejecutada.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-probe-opcion-ii-ambos-codex-cli.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-probe-opcion-ii-ambos-codex-cli.md"
+            ],
+            "started_at": "2026-07-17T22:32:38Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718B",
+            "updated_at": "2026-07-17T22:32:38Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-1",
+            "expires_at": "2026-07-18T00:42:12Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-1",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-task-0006-done-piloto-confirmado-t1b1-lanzado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-task-0006-done-piloto-confirmado-t1b1-lanzado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-b1-rerun-no-colapsa-sube.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-b1-rerun-no-colapsa-sube.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-vivo-t1-b0reuse-3b-brillante.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-vivo-t1-b0reuse-3b-brillante.md"
+            ],
+            "started_at": "2026-07-17T23:42:12Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:42:12Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-2",
+            "expires_at": "2026-07-18T00:44:42Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-2",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-benchmark-peones-privado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-benchmark-peones-privado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-eje-modo-delegacion-B0B1B2.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-piloto-eje-modo-delegacion-B0B1B2.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-nudge-senal-vida-grid-b0reuse.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-nudge-senal-vida-grid-b0reuse.md"
+            ],
+            "started_at": "2026-07-17T23:44:42Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:44:42Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718C-3",
+            "expires_at": "2026-07-18T00:47:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718C-3",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-anomalia-0018-opsreason-fix.md"
+            ],
+            "started_at": "2026-07-17T23:47:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718C",
+            "updated_at": "2026-07-17T23:47:17Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-1",
+            "expires_at": "2026-07-18T03:02:17Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-1",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-b0reuse-quita-b1literal-sigue-grid.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-b0reuse-quita-b1literal-sigue-grid.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t1-b0reuse-cerrado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t1-b0reuse-cerrado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t2-cerrado-topologia-adoptada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-tramo-t2-cerrado-topologia-adoptada.md"
+            ],
+            "started_at": "2026-07-18T02:02:17Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:02:17Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-2",
+            "expires_at": "2026-07-18T03:04:46Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-2",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-topologia-autor-arquitecto-qc-codex-bounce.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-topologia-autor-arquitecto-qc-codex-bounce.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-ack-topologia.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-rubric-enrutado-peon-vs-codex.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-rubric-enrutado-peon-vs-codex.md"
+            ],
+            "started_at": "2026-07-18T02:04:46Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:04:46Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718D-3",
+            "expires_at": "2026-07-18T03:07:07Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718D-3",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-escala-breakeven-99u.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-escala-breakeven-99u.md"
+            ],
+            "started_at": "2026-07-18T02:07:07Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718D",
+            "updated_at": "2026-07-18T02:07:07Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718b",
+            "expires_at": "2026-07-18T07:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718b",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-lote100.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-liveness-lote100.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-afinado-postT4-bouncecap-gatescorer.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-afinado-postT4-bouncecap-gatescorer.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-b2-skip-lote100-GO-medir.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-b2-skip-lote100-GO-medir.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-secuencia-techo-luego-lote100-envelope-nova.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-secuencia-techo-luego-lote100-envelope-nova.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-t3-techo-por-fit-modelo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-t3-techo-por-fit-modelo.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-t4-grid-completo-techo-de-entrega.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-t4-grid-completo-techo-de-entrega.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-piloto-cerrado-manual-nova-v1.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-piloto-cerrado-manual-nova-v1.md"
+            ],
+            "started_at": "2026-07-18T04:28:51Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718b",
+            "updated_at": "2026-07-18T04:28:51Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718c-1",
+            "expires_at": "2026-07-18T10:40:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718c-1",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-variante-QC-barato-3-condiciones.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-variante-QC-barato-3-condiciones.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-diseno-endorsado-baseline-reuse.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-diseno-endorsado-baseline-reuse.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-qcbarato-arm3-GO-marginal-confirma-arm2.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-qcbarato-arm3-GO-marginal-confirma-arm2.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-cierre-adopcion-al-operador.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-qcbarato-cierre-adopcion-al-operador.md"
+            ],
+            "started_at": "2026-07-18T08:40:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718c-1",
+            "updated_at": "2026-07-18T08:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718c-2",
+            "expires_at": "2026-07-18T10:40:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718c-2",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-qcbarato-arranque-diseno-exante.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-qcbarato-arranque-diseno-exante.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-qcbarato-arm3-cerrado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-qcbarato-arm3-cerrado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-qcbarato-arm2-cerrado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-qcbarato-arm2-cerrado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-qcbarato-tabla-y-decisiones.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-FINAL-qcbarato-tabla-y-decisiones.md"
+            ],
+            "started_at": "2026-07-18T08:40:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718c-2",
+            "updated_at": "2026-07-18T08:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718d",
+            "expires_at": "2026-07-18T13:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718d",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-prep-via2-N6-tareas-gobernadas-f33-runbook.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-prep-via2-N6-tareas-gobernadas-f33-runbook.md"
+            ],
+            "started_at": "2026-07-18T10:50:56Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718d",
+            "updated_at": "2026-07-18T10:50:56Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718e",
+            "expires_at": "2026-07-18T14:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718e",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-leccion-requires-response-question.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-leccion-requires-response-question.md"
+            ],
+            "started_at": "2026-07-18T11:24:48Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718e",
+            "updated_at": "2026-07-18T11:24:48Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718f-1",
+            "expires_at": "2026-07-18T16:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718f-1",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-4to-brazo-unidad-pesada-generacion.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-4to-brazo-unidad-pesada-generacion.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-ACK-4tobrazo-diseno-avalado-guarda-proxy.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-ACK-4tobrazo-diseno-avalado-guarda-proxy.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-4tobrazo-cierra-veredicto-estructural.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-4tobrazo-cierra-veredicto-estructural.md"
+            ],
+            "started_at": "2026-07-18T12:31:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718f-1",
+            "updated_at": "2026-07-18T12:31:05Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718f-2",
+            "expires_at": "2026-07-18T16:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718f-2",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-4tobrazo-arranque-diseno-exante.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-4tobrazo-arranque-diseno-exante.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-4tobrazo-regimen-falla-decision.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-4tobrazo-regimen-falla-decision.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-4tobrazo-proveniencia-proxy-anclada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-4tobrazo-proveniencia-proxy-anclada.md"
+            ],
+            "started_at": "2026-07-18T12:31:05Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718f-2",
+            "updated_at": "2026-07-18T12:31:05Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718g",
+            "expires_at": "2026-07-18T17:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718g",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-CONSULTA-conteo-sanitizador-directo-frontier.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-CONSULTA-conteo-sanitizador-directo-frontier.md"
+            ],
+            "started_at": "2026-07-18T12:44:41Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718g",
+            "updated_at": "2026-07-18T12:44:41Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718h",
+            "expires_at": "2026-07-18T19:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718h",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-delegado-medir-techo-entrega-7b.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-delegado-medir-techo-entrega-7b.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-probe-privado-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-probe-privado-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condicionada.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DECISION-no-adoptar-peones-condicionada.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-CIERRE-4tobrazo-sintesis-serie.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-CIERRE-4tobrazo-sintesis-serie.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-conteo-sanitizador-directo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-conteo-sanitizador-directo.md"
+            ],
+            "started_at": "2026-07-18T13:53:13Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718h",
+            "updated_at": "2026-07-18T13:53:13Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718i",
+            "expires_at": "2026-07-18T20:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718i",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-COORD-push-b5947e1-invisible.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-COORD-push-b5947e1-invisible.md"
+            ],
+            "started_at": "2026-07-18T14:17:48Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718i",
+            "updated_at": "2026-07-18T14:17:48Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718j",
+            "expires_at": "2026-07-18T21:30:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718j",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-FYI-memhib-probe-preregistro-pide-freeze.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-FYI-memhib-probe-preregistro-pide-freeze.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-FREEZE-probe-memhib-D-cadena-roster.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-FREEZE-probe-memhib-D-cadena-roster.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-blocker-store-enmienda-exante-mapea-canonico.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-blocker-store-enmienda-exante-mapea-canonico.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-CONSULTA-memhib-proxy-asesor-registrado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-CONSULTA-memhib-proxy-asesor-registrado.md",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-proxy-jball-nodo-asesor-B-D.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-proxy-jball-nodo-asesor-B-D.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-b5947e1-es-instancia-local-hub-sincronizado.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-b5947e1-es-instancia-local-hub-sincronizado.md"
+            ],
+            "started_at": "2026-07-18T14:53:50Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718j",
+            "updated_at": "2026-07-18T14:53:50Z"
+        },
+        {
+            "claim_id": "CLAIM-OPS-MAILBOX-HYGIENE-20260718k",
+            "expires_at": "2026-07-19T02:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-OPS-MAILBOX-HYGIENE-20260718k",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-RESP-metrica-B-bis-queries-selladas.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-RESP-metrica-B-bis-queries-selladas.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-b-dualidad.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-b-dualidad.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-a-refuta.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-REPORTE-memhib-metrica-a-refuta.md"
+            ],
+            "started_at": "2026-07-18T17:47:41Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260718k",
+            "updated_at": "2026-07-18T17:47:41Z"
+        },
+        {
+            "claim_id": "CLAIM-TASK-0104-claude-analisis-sota",
+            "expires_at": "2026-06-14",
+            "notes": "Registro retroactivo del analisis de sesion 2026-06-12 como TASK-0104 tipo analysis. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/artifacts/ANALISIS-sota-viabilidad-doctoral-20260612.md",
+                "Area_comun/tasks/TASK-0104-claude-analisis-sota-viabilidad-doctoral.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0104",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0104",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-12T23:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0104"
+        },
+        {
+            "claim_id": "CLAIM-TASK-0105-claude-registro",
+            "expires_at": "2026-06-15",
+            "notes": "Registro de TASK-0105 (implementacion slim-views, owner Codex) bajo DECISION-0030 / SPEC-0077. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/tasks/TASK-0105-codex-slim-views.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0105",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0105",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-13T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0105"
+        },
+        {
+            "claim_id": "CLAIM-TASK-0106-claude-registro",
+            "expires_at": "2026-06-15",
+            "notes": "Registro de TASK-0106 (compaction + sub-agentes, owner Codex) bajo DECISION-0030 / SPEC-0078. Preparado por la sesion Cowork; ejecutado desde VS Code por lock de archivos concurrente.",
+            "owner": "Claude",
+            "scope": [
+                "Area_comun/tasks/TASK-0106-codex-compaction-subagentes.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0106",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0106",
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-06-13T00:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0106"
         }
     ]
 }
