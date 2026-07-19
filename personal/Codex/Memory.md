@@ -8,7 +8,9 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
   makes pre-commit run the collaboration validator against an unambiguous staged
   governed snapshot while preserving prune/guide checks, documents bypass and
   30-second reversible disarm, and makes every generated tier ship the hook,
-  validator gates, and neutral runtime imports. Delivery coordination remains.
+  validator gates, and neutral runtime imports. Commit `3378526` adds the
+  self-contained handoff, E3 disarm runbook, and governed handoff claim.
+  Delivery coordination remains.
 
 ## Previous Session Notes
 
