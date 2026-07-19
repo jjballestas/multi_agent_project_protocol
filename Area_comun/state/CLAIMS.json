@@ -55,6 +55,20 @@
             "updated_at": "2026-07-17T13:38:28Z"
         },
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-delivery-message",
+            "expires_at": "2026-07-19T19:06:35Z",
+            "notes": "Publish TASK-0257 delivery message after ledger-backed in_review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-delivery-message",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-harness.md"
+            ],
+            "started_at": "2026-07-19T18:06:35Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:06:35Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0257-Codex-handoff",
             "expires_at": "2026-07-19T19:01:22Z",
             "notes": "Govern TASK-0257 handoff artifact.",
@@ -64,7 +78,7 @@
                 "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md"
             ],
             "started_at": "2026-07-19T18:01:22Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0257",
             "updated_at": "2026-07-19T18:01:22Z"
         },
@@ -84,7 +98,7 @@
                 "Area_comun/protocol/"
             ],
             "started_at": "2026-07-19T17:50:02Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0257",
             "updated_at": "2026-07-19T17:50:02Z"
         },
