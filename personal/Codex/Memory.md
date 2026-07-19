@@ -4,6 +4,11 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
 
 ## Latest Session Note
 
+- TASK-0257 remediation commit `33af66b` closes F-0257-01/F-0257-02: the
+  pre-commit hook now includes all local judgment code in index/worktree
+  equivalence, uses a non-disableable staged-route bounded mode, and ships the
+  permanent `scripts/test_precommit_hook.py` bypass regression.
+
 - Hub TASK-0257 implementation commit `acfe91d` arms `core.hooksPath=.githooks`,
   makes pre-commit run the collaboration validator against an unambiguous staged
   governed snapshot while preserving prune/guide checks, documents bypass and
