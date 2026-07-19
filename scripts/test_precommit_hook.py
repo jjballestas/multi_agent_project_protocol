@@ -43,6 +43,13 @@ def main() -> int:
 
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "stage governed state")
+        negative = run(["sh", ".githooks/pre-commit"], root)
+        if negative.returncode == 0 or "collaboration state in staged snapshot is invalid" not in negative.stderr:
+            raise AssertionError(
+                "invalid staged collaboration state was not rejected\n"
+                f"stdout:\n{negative.stdout}\nstderr:\n{negative.stderr}"
+            )
+
         validator = root / "scripts" / "validate_collaboration_state.py"
         validator.write_text("raise SystemExit(0)\n", encoding="utf-8")
         bypass = run(["sh", ".githooks/pre-commit"], root)
