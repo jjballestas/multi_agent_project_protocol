@@ -30,7 +30,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
         },
         {
@@ -38,7 +38,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
         },
         {
@@ -46,7 +46,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C3] Validacion condicional en turn_validate: obstacles obligatorio si hubo friccion (gate_green false / attempt>1 / revert)"
         },
         {
@@ -54,7 +54,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator"
         },
         {
@@ -62,7 +62,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C3/C4] validate_mailbox exige obstacles + contador de friccion en mensajes type REPORTE (carril sesion), con grandfathering del historico"
         },
         {
@@ -70,7 +70,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C2/C4] Plantillas de mailbox: REPORTE de entrega con bloque obstacles + friction_count, y reporte de ASIGNACION (unidad, agente, por que)"
         },
         {
@@ -78,7 +78,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C3-bis] Mecanismo de oferta de mejora: recurrence_risk high o root_cause repetido -> propuesta redactada al humano + registro durable de aceptar/rechazar/parquear"
         },
         {
@@ -86,7 +86,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][C1] Regla de arranque documentada: ningun conjunto de unidades gobernadas se ejecuta sin plan aprobado por el humano"
         },
         {
@@ -94,7 +94,7 @@
             "owner": "Analista",
             "phase": "P2",
             "priority": "normal",
-            "status": "proposed",
+            "status": "ready",
             "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
         }
     ],

@@ -2,7 +2,7 @@
 task_id: TASK-0264
 title: "[DECISION-0103][C1] Regla de arranque documentada: ningun conjunto de unidades gobernadas se ejecuta sin plan aprobado por el humano"
 type: doc
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: normal

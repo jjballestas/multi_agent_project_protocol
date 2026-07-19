@@ -2,7 +2,7 @@
 task_id: TASK-0265
 title: "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
 type: doc
-status: proposed
+status: ready
 owner: Analista
 phase: P2
 priority: normal
@@ -39,4 +39,6 @@ intake:
 
 Origen: DECISION-0103 unidad 9 de la tabla (gate). Va ULTIMA, cuando 0257..0264 esten
 in_review. El Analista es checker-only (no maker); sus mensajes de mailbox seran
-file-scoped. Depende del OK del plan.
+file-scoped. OK del plan recibido 2026-07-19. Nota (enmienda E2): TASK-0257 tiene
+ademas un gate propio inmediato al aterrizar; este gate final barre el conjunto
+igualmente, incluida 0257 en su version final.

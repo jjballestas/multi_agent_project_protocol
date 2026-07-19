@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Operador-PLAN-0103-tabla-9-unidades
 from: Arquitecto
 to: Operador
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 requested_action: "Revisar la tabla del plan DECISION-0103 (9 unidades registradas, TASK-0257..0265) y dar OK explicito de arranque, o correcciones. Ninguna unidad arranca sin ese OK (gate manual de turno 0). Pronunciarse tambien sobre la nota de diseno N1 (carve-out de remediacion)."

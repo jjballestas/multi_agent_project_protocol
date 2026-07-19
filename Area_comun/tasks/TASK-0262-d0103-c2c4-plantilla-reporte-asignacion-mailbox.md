@@ -2,7 +2,7 @@
 task_id: TASK-0262
 title: "[DECISION-0103][C2/C4] Plantillas de mailbox: REPORTE de entrega con bloque obstacles + friction_count, y reporte de ASIGNACION (unidad, agente, por que)"
 type: doc
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: normal

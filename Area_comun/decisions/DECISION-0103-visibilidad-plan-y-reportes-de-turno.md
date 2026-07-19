@@ -213,6 +213,31 @@ clausula 1 (el gate de plan aun no existe). Sustituto para esa primera vez: el p
 presenta a mano y el Operador lo aprueba por mailbox firmado antes del turno 1. A partir
 de la segunda vez, el gate es del sistema, no de la buena voluntad de quien presenta.
 
+## Enmiendas (2026-07-19, firma del Operador en orden directa al Arquitecto, con el OK de arranque del plan)
+
+### E1 - Carve-out de remediacion en C1 (resuelve la nota de diseno N1)
+
+Una unidad de remediacion nacida de un rechazo del checker queda cubierta por la
+aprobacion original del plan SOLO si conserva el MISMO acceptance, el MISMO scope_routes
+y el MISMO risk que la unidad padre, y referencia el id de la unidad padre. Si el risk
+sube, se re-aprueba. Racional del Operador: C3 ya da la visibilidad (un rechazo del
+checker es friccion, luego obstacles[] es obligatorio y se ve en el reporte de entrega);
+el gate de turno 0 no es necesario para enterarse.
+
+### E2 - Gate propio inmediato para la unidad de harness
+
+TASK-0257 se revisa EN CUANTO ATERRIZA, con gate propio (checker de proveedor diverso),
+ANTES de arrancar TASK-0258. Motivo: es la unidad de mayor radio de explosion (toca el
+pre-commit de todos los agentes); no se construyen ocho unidades encima de un harness
+sin revisar.
+
+### E3 - Procedimiento de desarme del hook
+
+TASK-0257 entrega ademas el procedimiento de DESARME: el comando exacto para desconectar
+el hook en 30 segundos si bloquea al equipo, documentado en la propia tarea. No debilita
+C5: el enforcement duro sigue en CI (el workflow corre validate en cada push y PR, hub e
+instancia, desde clon limpio). Es la salida de emergencia.
+
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
 - Ejecucion por el flujo gobernado NORMAL (cron/sesion + submit_intent), NO por el

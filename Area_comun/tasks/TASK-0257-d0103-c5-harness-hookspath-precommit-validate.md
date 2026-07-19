@@ -2,7 +2,7 @@
 task_id: TASK-0257
 title: "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
 type: infra
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high
@@ -22,6 +22,7 @@ intake:
     - Coste medido y declarado en el handoff (segundos por commit en este repo); si excede un umbral razonable (~10s) se implementa modo acotado a rutas tocadas -- NUNCA se desactiva (C5.3).
     - Limite honesto documentado; el bypass local de hooks existe en git, por eso el enforcement duro sigue siendo CI + clean-clone + gates de cron; el hook es la primera linea, no la unica.
     - Export born-operational, la instancia generada por new_instance nace con .githooks/pre-commit equivalente + instruccion de cableado en su arranque; demostrado generando una instancia de prueba en directorio temporal.
+    - Procedimiento de DESARME documentado en esta tarea y en el handoff (enmienda E3 de la 0103), el comando exacto para desconectar el hook en 30 segundos si bloquea al equipo, con la aclaracion de que no debilita C5 porque el enforcement duro sigue en CI (validate en cada push/PR desde clon limpio).
   verification_cmd:
     - git config core.hooksPath
     - python scripts/validate_collaboration_state.py
@@ -54,5 +55,9 @@ solo-personal/ con estado compartido en rojo de un peer a medio entregar). Mitig
 medir el coste, modo acotado a rutas tocadas si hace falta, y documentar el
 comportamiento esperado en ese caso en el propio hook.
 
-NO arranca hasta el OK explicito del Operador sobre la tabla del plan (gate manual de
-turno 0, paradoja de arranque declarada en la 0103).
+OK de arranque del Operador RECIBIDO el 2026-07-19 (gate manual de turno 0 cumplido),
+con dos enmiendas que aplican a esta unidad y estan selladas en la 0103: E2 (esta unidad
+se revisa EN CUANTO ATERRIZA, con gate propio del checker de proveedor diverso, ANTES de
+arrancar TASK-0258) y E3 (el acceptance incluye el procedimiento de desarme del hook).
+El cambio de acceptance viene de la propia orden de aprobacion del Operador, no es una
+ampliacion silenciosa.

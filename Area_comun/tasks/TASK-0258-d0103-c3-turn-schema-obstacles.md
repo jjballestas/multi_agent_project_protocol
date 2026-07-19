@@ -2,7 +2,7 @@
 task_id: TASK-0258
 title: "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
 type: feature
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: normal
@@ -40,5 +40,6 @@ intake:
 
 # TASK-0258 - [DECISION-0103][C3] obstacles[] en turn_schema
 
-Origen: DECISION-0103 clausula 3, unidad 2 de la tabla. Depende del OK del plan (gate
-manual de turno 0). Orden: despues de TASK-0257 (harness primero).
+Origen: DECISION-0103 clausula 3, unidad 2 de la tabla. OK del plan recibido
+2026-07-19. Orden (enmienda E2 de la 0103): esta unidad arranca SOLO despues de que
+TASK-0257 pase su gate propio de revision (no basta con que 0257 este entregada).

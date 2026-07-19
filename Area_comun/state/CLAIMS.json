@@ -55,6 +55,47 @@
             "updated_at": "2026-07-17T13:38:28Z"
         },
         {
+            "claim_id": "CLAIM-arq-d0103-ready-20260719",
+            "expires_at": "2026-07-19T19:36:47Z",
+            "notes": "OK del Operador 2026-07-19: enmiendas E1-E3 a la 0103 + promocion proposed->ready de TASK-0257..0265",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0103-visibilidad-plan-y-reportes-de-turno.md",
+                "Area_comun/state/PROJECT_STATE.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-d0103-ready-20260719",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
+                "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+                "Area_comun/tasks/TASK-0260-d0103-c1-vista-plan-gate-aprobacion-turno0.md",
+                "Area_comun/tasks/TASK-0261-d0103-c3c4-validate-mailbox-reporte-obstacles.md",
+                "Area_comun/tasks/TASK-0262-d0103-c2c4-plantilla-reporte-asignacion-mailbox.md",
+                "Area_comun/tasks/TASK-0263-d0103-c3bis-oferta-de-mejora.md",
+                "Area_comun/tasks/TASK-0264-d0103-c1-regla-arranque-plan-aprobado.md",
+                "Area_comun/tasks/TASK-0265-d0103-gate-revision-adversarial-conjunto.md"
+            ],
+            "started_at": "2026-07-19T17:36:47Z",
+            "status": "released",
+            "task_id": "OPS-D0103-READY-20260719",
+            "updated_at": "2026-07-19T17:36:47Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-mailbox-go0257-20260719",
+            "expires_at": "2026-07-19T18:43:30Z",
+            "notes": "GO TASK-0257 a Codex + archivo del PLAN-0103 respondido (OK del Operador registrado como enmiendas E1-E3 en la decision)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-mailbox-go0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-PLAN-0103-tabla-9-unidades.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-PLAN-0103-tabla-9-unidades.md"
+            ],
+            "started_at": "2026-07-19T17:43:30Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-D0103-GO-20260719",
+            "updated_at": "2026-07-19T17:43:30Z"
+        },
+        {
             "claim_id": "CLAIM-arq-prune-fix-20260719",
             "expires_at": "2026-07-19T18:18:00Z",
             "notes": "Poda de 2 claims liberados con claim_id en minusculas (selector invalido para el validador; submit lo acepto)",
