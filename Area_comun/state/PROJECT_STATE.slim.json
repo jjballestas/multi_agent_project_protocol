@@ -71,6 +71,12 @@
             "owner": "Analista",
             "status": "ready",
             "title": "[DECISION-0103][gate] Revision adversarial del conjunto TASK-0257..0264 por el checker formal de proveedor diverso (DECISION-0101)"
+        },
+        {
+            "id": "TASK-0266",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
         }
     ],
     "next_actions": [

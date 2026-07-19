@@ -209,6 +209,23 @@
             "updated_at": "2026-07-19T17:36:47Z"
         },
         {
+            "claim_id": "CLAIM-arq-e4e5-0266-20260719",
+            "expires_at": "2026-07-19T20:05:42Z",
+            "notes": "Enmiendas E4/E5 selladas + registro TASK-0266 (unidad hermana de 0257, ruteo delegado por el Operador) + promocion a ready",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0266",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0266",
+                "Area_comun/tasks/TASK-0266-d0103-e4e5-propagacion-harness-adoptable.md",
+                "Area_comun/decisions/DECISION-0103-visibilidad-plan-y-reportes-de-turno.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-e4e5-0266-20260719"
+            ],
+            "started_at": "2026-07-19T19:05:42Z",
+            "status": "released",
+            "task_id": "TASK-0266",
+            "updated_at": "2026-07-19T19:05:42Z"
+        },
+        {
             "claim_id": "CLAIM-arq-mailbox-go0257-20260719",
             "expires_at": "2026-07-19T18:43:30Z",
             "notes": "GO TASK-0257 a Codex + archivo del PLAN-0103 respondido (OK del Operador registrado como enmiendas E1-E3 en la decision)",

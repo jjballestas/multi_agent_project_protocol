@@ -238,6 +238,29 @@ el hook en 30 segundos si bloquea al equipo, documentado en la propia tarea. No 
 C5: el enforcement duro sigue en CI (el workflow corre validate en cada push y PR, hub e
 instancia, desde clon limpio). Es la salida de emergencia.
 
+### E4 - Conjunto adoptable (2026-07-19, firma Operador via MSG-20260719-Operador-to-Arquitecto-ENMIENDA-E4-E5-adoptable-githooks)
+
+`.githooks/**` entra al conjunto adoptable de `upgrade_instance.py` (via
+`DEFAULT_ADOPTABLE_GLOBS` o via `upgrade.adoptable_globs` en `protocol.config.json`, lo
+que resulte mas limpio). Motivo: sin esto, C5 seria la UNICA clausula de la 0103 que no
+viaja a instancias EXISTENTES (NOVA incluida); el resto viaja solo por los globs ya
+presentes (scripts/*.py, runtime/**, el workflow de CI). Verificacion: upgrade_instance
+contra una instancia real reporta el delta de `.githooks/` como adoptable.
+
+### E5 - Cableado en la instanciacion (misma firma que E4)
+
+`new_instance.py` cablea `core.hooksPath` al instanciar. Copiar `.githooks/` sin
+configurar el path deja el hook igual de muerto que estaba en el hub: es el mismo error
+que motivo la propia C5, un nivel mas arriba. Verificacion: instancia nueva en sandbox
+con `git config core.hooksPath` devolviendo la ruta sin paso manual y prueba negativa
+abortando el commit.
+
+Ruteo de E4/E5 (delegado por el Operador al Arquitecto, preferencia declarada por unidad
+hermana): **unidad hermana TASK-0266**, para no cargar el fix-loop de TASK-0257 (tope 2
+iteraciones) con alcance ajeno a sus defectos; ademas, plegarlas cambiaria el acceptance
+de 0257 a mitad de fix-loop, rompiendo la cobertura del carve-out E1 (exige MISMO
+acceptance) y forzando re-aprobacion.
+
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
 - Ejecucion por el flujo gobernado NORMAL (cron/sesion + submit_intent), NO por el
