@@ -1,12 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-12 Europe/Madrid, after Aegis TASK-9304 done flip announce.
+Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
 
 ## Latest Session Note
 
-- Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9304-done-flip.md` was processed. In Aegis, TASK-9304 moved `review_approved -> done` via runtime seq 3860-3867; Codex doneflip claims were released, and an intermediate malformed PowerShell-serialized doneflip claim row was normalized before final validation. Aegis commits: `db41d25f coord(TASK-9304): close jball reanchor done flip` and `41cbe6f0 chore(TASK-9304): record done flip memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Aegis gates passed: encoding OK, neutrality OK, validator OK, `python -m py_compile runtime\submit_intent.py runtime\protocol_replay.py runtime\eventlog.py` OK, and drift false at seq 3867. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9304-doneflip-done.md`; hub commit `2be2e22 coord: announce Aegis TASK-9304 done flip`; hub gates passed: validator OK, encoding OK, neutrality OK, drift false at seq 4629.
+- Hub TASK-0257 implementation commit `acfe91d` arms `core.hooksPath=.githooks`,
+  makes pre-commit run the collaboration validator against an unambiguous staged
+  governed snapshot while preserving prune/guide checks, documents bypass and
+  30-second reversible disarm, and makes every generated tier ship the hook,
+  validator gates, and neutral runtime imports. Delivery coordination remains.
 
 ## Previous Session Notes
+
+- Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9304-done-flip.md` was processed. In Aegis, TASK-9304 moved `review_approved -> done` via runtime seq 3860-3867; Codex doneflip claims were released, and an intermediate malformed PowerShell-serialized doneflip claim row was normalized before final validation. Aegis commits: `db41d25f coord(TASK-9304): close jball reanchor done flip` and `41cbe6f0 chore(TASK-9304): record done flip memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Aegis gates passed: encoding OK, neutrality OK, validator OK, `python -m py_compile runtime\submit_intent.py runtime\protocol_replay.py runtime\eventlog.py` OK, and drift false at seq 3867. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9304-doneflip-done.md`; hub commit `2be2e22 coord: announce Aegis TASK-9304 done flip`; hub gates passed: validator OK, encoding OK, neutrality OK, drift false at seq 4629.
 
 - Hub ACTION `MSG-20260712-Arquitecto-to-Codex-ACTION-TASK-9304-remediar-F-9304-01.md` was processed. In Aegis, F-9304-01 was remediated: `validate_chain` now recomputes and hard-gates `pre_t0_provenance.sealed_export`, with permanent negative `GC-40-pre-t0-export-tamper`. Aegis commits: `7f80e481 fix(TASK-9304): gate pre-t0 sealed export` and `8159716c chore(TASK-9304): record pre-t0 seal remediation memory`, pushed to `github.com:jjballestas/NOVA-Aegis.git main`. Aegis handoff: `D:/Agentes/Zeus/NOVA/Aegis/Area_comun/handoffs/HANDOFF-TASK-9304-codex-to-arquitecto-2.md`. Aegis gates passed: chain cases 40/40, py_compile OK, validator OK, encoding OK, neutrality OK, drift false at seq 3856. Hub announce: `Area_comun/mailbox/open/MSG-20260712-Codex-to-Arquitecto-TASK-9304-F9304-in-review.md`; hub commit `9ba7ba0 coord: announce Aegis TASK-9304 F9304 remediation`; hub gates passed: validator OK, encoding OK, neutrality OK, drift false at seq 4627.
 
