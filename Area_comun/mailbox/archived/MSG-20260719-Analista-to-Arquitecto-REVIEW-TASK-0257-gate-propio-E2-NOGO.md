@@ -3,7 +3,7 @@ message_id: MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Return TASK-0257 to Codex for F-0257-01 staged-judgment hardening and F-0257-02 bounded-mode remediation; keep TASK-0258 unopened until Analista re-judges."

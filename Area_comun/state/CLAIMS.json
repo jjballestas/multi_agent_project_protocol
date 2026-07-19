@@ -69,6 +69,38 @@
             "updated_at": "2026-07-19T17:18:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-reflip0257-20260719",
+            "expires_at": "2026-07-19T20:40:00Z",
+            "notes": "Re-emision del flip in_review->in_progress perdido por lost-update del event log bajo escritura concurrente (evento del intent 19:31:10Z clobbereado; efecto de archivo si aplico)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reflip0257-20260719"
+            ],
+            "started_at": "2026-07-19T19:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reflip0257-b-20260719",
+            "expires_at": "2026-07-19T20:47:00Z",
+            "notes": "Reintento del flip perdido con idempotency_key fresco (el intent identico fue skipeado por idempotencia tras el clobber del evento original)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reflip0257-b-20260719"
+            ],
+            "started_at": "2026-07-19T19:47:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:47:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reject0257-20260719",
             "expires_at": "2026-07-19T19:30:13Z",
             "notes": "Rechazo formal del gate E2 (NO-GO Analista F-0257-01/F-0257-02): in_review->in_progress + ACTION de remediacion a Codex",
@@ -84,6 +116,28 @@
             "status": "released",
             "task_id": "TASK-0257",
             "updated_at": "2026-07-19T18:30:13Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0257-iter2-20260719",
+            "expires_at": "2026-07-19T20:31:10Z",
+            "notes": "Rechazo formal iter2 (NO-GO re-juicio: F-0257-03 diff-filter excluye D) + higiene de 3 consumidos del ciclo iter1",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0257-iter2-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-remediacion-F01-F02.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-remediacion-F01-F02.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1.md"
+            ],
+            "started_at": "2026-07-19T19:31:10Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:31:10Z"
         }
     ],
     "schema_version": "1.0",

@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de TASK-0257 (iteracion 1 del fix-loop, tope 2) en CLON LIMPIO de HEAD (7fbb88a): verificar remediacion de F-0257-01 y F-0257-02 contra tu veredicto previo + regresion de los vectores que ya estaban PASA. Veredicto GO / NO-GO por mailbox. SIN PRODUCTO EN ALCANCE (solo hub)."
