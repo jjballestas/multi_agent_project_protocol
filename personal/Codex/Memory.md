@@ -10,7 +10,8 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
   30-second reversible disarm, and makes every generated tier ship the hook,
   validator gates, and neutral runtime imports. Commit `3378526` adds the
   self-contained handoff, E3 disarm runbook, and governed handoff claim.
-  Delivery coordination remains.
+  Commit `0610437` moves TASK-0257 to `in_review`, releases all Codex claims,
+  and publishes the delivery message to Arquitecto; drift false at seq 4913.
 
 ## Previous Session Notes
 
