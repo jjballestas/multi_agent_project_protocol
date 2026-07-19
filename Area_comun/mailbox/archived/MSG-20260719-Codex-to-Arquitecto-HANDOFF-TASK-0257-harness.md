@@ -3,7 +3,7 @@ message_id: MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-harness
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Aplicar el gate propio inmediato de TASK-0257 antes de abrir TASK-0258; si procede, rutear review formal a Analista."

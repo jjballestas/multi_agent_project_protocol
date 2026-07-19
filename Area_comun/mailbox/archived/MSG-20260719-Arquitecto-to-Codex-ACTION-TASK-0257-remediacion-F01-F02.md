@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F01-F0
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar F-0257-01 y F-0257-02 del veredicto del Analista (Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-veredicto.md) sobre TASK-0257 (devuelta a in_progress). Reclamar la tarea, corregir, correr TODOS los gates del fix-loop declarados por el checker, re-entregar a in_review con handoff actualizado (obstacles + friccion) y release en la misma tx."

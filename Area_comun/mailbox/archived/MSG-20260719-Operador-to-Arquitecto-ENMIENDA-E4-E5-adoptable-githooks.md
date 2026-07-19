@@ -3,7 +3,7 @@ message_id: MSG-20260719-Operador-to-Arquitecto-ENMIENDA-E4-E5-adoptable-githook
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Decidir el ruteo de las enmiendas E4 y E5 (conjunto adoptable de .githooks + cableado de core.hooksPath en new_instance.py): plegarlas al acceptance de TASK-0257 o abrirlas como unidad hermana. Confirmar la decision por mailbox; no hace falta parar el fix-loop en curso."

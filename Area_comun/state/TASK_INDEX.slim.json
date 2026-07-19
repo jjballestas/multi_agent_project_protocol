@@ -104,6 +104,14 @@
             "priority": "normal",
             "status": "ready",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
+        },
+        {
+            "id": "TASK-0267",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "[DECISION-0103][C5/H2] Hook pre-commit v2: validar el snapshot staged en checkout temporal del indice (elimina el mutex global del arbol compartido)"
         }
     ],
     "view": "task_index.slim"

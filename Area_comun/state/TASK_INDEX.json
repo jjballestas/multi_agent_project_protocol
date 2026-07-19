@@ -377,6 +377,18 @@
             "type": "infra"
         },
         {
+            "created_at": "2026-07-19",
+            "file": "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+            "id": "TASK-0267",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[DECISION-0103][C5/H2] Hook pre-commit v2: validar el snapshot staged en checkout temporal del indice (elimina el mutex global del arbol compartido)",
+            "type": "infra"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",

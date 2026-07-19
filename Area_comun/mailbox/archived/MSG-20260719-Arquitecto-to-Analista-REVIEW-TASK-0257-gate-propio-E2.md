@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-gate-propio-E2
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0257 (gate propio inmediato, enmienda E2 de DECISION-0103) en CLON LIMPIO de HEAD (59607c0). Veredicto GO / NO-GO con hallazgos file:line + repro por mailbox. SIN PRODUCTO EN ALCANCE: no correr npm test de Nova-Budget ni de ningun repo de producto; el alcance es solo el hub (hook, validador, new_instance, docs)."
