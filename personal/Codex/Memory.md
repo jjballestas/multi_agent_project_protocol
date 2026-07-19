@@ -8,7 +8,10 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
   pre-commit hook now includes all local judgment code in index/worktree
   equivalence, uses a non-disableable staged-route bounded mode, and ships the
   permanent `scripts/test_precommit_hook.py` bypass regression. Commit `5e5b2d5`
-  adds the explicit staged-invalid negative to that permanent suite.
+  adds the explicit staged-invalid negative to that permanent suite. Delivery
+  commit `5c09e7d` records the updated handoff and Arquitecto message. Runtime
+  transaction seq 4927-4930 moved TASK-0257 to `in_review` and released all
+  three Codex remediation claims.
 
 - Hub TASK-0257 implementation commit `acfe91d` arms `core.hooksPath=.githooks`,
   makes pre-commit run the collaboration validator against an unambiguous staged
