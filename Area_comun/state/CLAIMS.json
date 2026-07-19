@@ -128,6 +128,24 @@
             "updated_at": "2026-07-18T21:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260719-Arquitecto-OPS-HYG-A",
+            "expires_at": "2026-07-19T06:00:00Z",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Arquitecto-OPS-HYG-A",
+                "Area_comun/mailbox/open/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-Abis-coldstart-contexto-costo.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Operador-to-Arquitecto-DIRECTIVA-GO-Abis-coldstart-contexto-costo.md",
+                "Area_comun/mailbox/open/MSG-20260712-Arquitecto-to-Operador-RESP-cross-atestacion-anclada-jheredia-operativo.md",
+                "Area_comun/mailbox/archived/MSG-20260712-Arquitecto-to-Operador-RESP-cross-atestacion-anclada-jheredia-operativo.md",
+                "Area_comun/mailbox/open/MSG-20260718-Arquitecto-to-Operador-RESP-status-probe-dogfood-coldstart.md",
+                "Area_comun/mailbox/archived/MSG-20260718-Arquitecto-to-Operador-RESP-status-probe-dogfood-coldstart.md"
+            ],
+            "started_at": "2026-07-19T01:17:23Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260719",
+            "updated_at": "2026-07-19T01:17:23Z"
+        },
+        {
             "claim_id": "CLAIM-DECISION-0099-sello",
             "expires_at": "2026-07-17T14:04:02Z",
             "owner": "Arquitecto",
