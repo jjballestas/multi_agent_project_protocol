@@ -28940,6 +28940,260 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-REJUICIO-20260719",
             "updated_at": "2026-07-19T19:10:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-192206-prune-arquitecto",
+            "expires_at": "2026-07-19",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-19T19:22:06Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-19T19:22:06Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-delivery",
+            "expires_at": "2026-07-19T21:57:04Z",
+            "notes": "Deliver TASK-0257 F-0257-03 remediation to in_review with updated handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md"
+            ],
+            "started_at": "2026-07-19T19:57:04Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:57:04Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-iter2",
+            "expires_at": "2026-07-19T21:51:35Z",
+            "notes": "Remediate F-0257-03 deletion bypass and permanent A/M/D/R route-family regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-iter2",
+                ".githooks/pre-commit",
+                "scripts/test_precommit_hook.py"
+            ],
+            "started_at": "2026-07-19T19:51:34Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:51:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-message",
+            "expires_at": "2026-07-19T21:58:45Z",
+            "notes": "Publish TASK-0257 F-0257-03 final fix-loop handoff to Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-message",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T19:58:45Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:58:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-msgfix",
+            "expires_at": "2026-07-19T20:33:03Z",
+            "notes": "Add validator-required question to compact requires_response handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-msgfix",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T20:03:03Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T20:03:03Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719T203416Z-Codex-TASK-0257-blocked-flip",
+            "expires_at": "2026-07-19T21:34:16Z",
+            "notes": "Minimal state flip after fix-loop limit exhausted; operator decision pending.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719T203416Z-Codex-TASK-0257-blocked-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md"
+            ],
+            "started_at": "2026-07-19T20:34:16Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T20:34:16Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267",
+            "expires_at": "2026-07-20T03:25:26Z",
+            "notes": "Implement hook v2 index materialization, real commit regressions, export mirror, CI hash, and delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267",
+                "Area_comun/state/TASK_INDEX.json#TASK-0267",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0267",
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "scripts/test_precommit_hook.py",
+                ".github/workflows/validate.yml",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0267-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267.md"
+            ],
+            "started_at": "2026-07-19T23:25:26Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-19T23:25:26Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-b3-archivo-20260720",
+            "expires_at": "2026-07-20T00:26:00Z",
+            "notes": "Higiene final ciclo O1: la RESP del Operador (ejecutada) y el REPORTE iter1 (superado) a archived",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-b3-archivo-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-REPORTE-fixloop-0257-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-REPORTE-fixloop-0257-iter1.md"
+            ],
+            "started_at": "2026-07-19T23:26:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-19T23:26:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-escalada0257-20260719",
+            "expires_at": "2026-07-19T21:26:30Z",
+            "notes": "Stop del fix-loop (tope 2/2): rechazo formal + blocked + escalada al Operador + archivo del NOGO final respondido",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-escalada0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO.md"
+            ],
+            "started_at": "2026-07-19T20:26:30Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T20:26:30Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hygiene-o1-20260720",
+            "expires_at": "2026-07-20T00:16:00Z",
+            "notes": "Higiene post-decision O1: 6 consumidos del ciclo de escalada a archived (2 lotes de 3)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-o1-20260720",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-flip-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-flip-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-RESP-enmienda-E4-E5-unidad-hermana.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-RESP-enmienda-E4-E5-unidad-hermana.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-RESP-hallazgos-H1-0266-H2-0267.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-RESP-hallazgos-H1-0266-H2-0267.md"
+            ],
+            "started_at": "2026-07-19T23:16:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-19T23:16:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-mailbox-rejfinal-20260719",
+            "expires_at": "2026-07-19T21:09:00Z",
+            "notes": "Re-juicio final iter2 al Analista + higiene de 3 consumidos del ciclo iter2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-mailbox-rejfinal-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F03-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F03-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T20:09:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-REJFINAL-20260719",
+            "updated_at": "2026-07-19T20:09:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-mailbox-rev0257-20260719",
+            "expires_at": "2026-07-19T19:11:16Z",
+            "notes": "Ruteo REVIEW gate propio E2 de TASK-0257 al Analista + archivo del GO consumido",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-mailbox-rev0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-gate-propio-E2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath.md"
+            ],
+            "started_at": "2026-07-19T18:11:16Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-REV0257-20260719",
+            "updated_at": "2026-07-19T18:11:16Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-o1-ejecucion-20260720",
+            "expires_at": "2026-07-20T00:13:33Z",
+            "notes": "Ejecucion O1 del Operador: residuales declarados en 0257 + acceptance de 0267 ampliado (transferencia F-0257-04, CI existencia+SHA plegada, limite C1 declarado)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-o1-ejecucion-20260720"
+            ],
+            "started_at": "2026-07-19T23:13:33Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-19T23:13:33Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-prune-fix-20260719",
+            "expires_at": "2026-07-19T18:18:00Z",
+            "notes": "Poda de 2 claims liberados con claim_id en minusculas (selector invalido para el validador; submit lo acepto)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-19T17:18:00Z",
+            "status": "released",
+            "task_id": "OPS-PRUNE-FIX-20260719",
+            "updated_at": "2026-07-19T17:18:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reflip0257-20260719",
+            "expires_at": "2026-07-19T20:40:00Z",
+            "notes": "Re-emision del flip in_review->in_progress perdido por lost-update del event log bajo escritura concurrente (evento del intent 19:31:10Z clobbereado; efecto de archivo si aplico)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reflip0257-20260719"
+            ],
+            "started_at": "2026-07-19T19:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:40:00Z"
         }
     ]
 }
