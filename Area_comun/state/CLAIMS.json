@@ -40,6 +40,21 @@
             "updated_at": "2026-07-19T17:13:58Z"
         },
         {
+            "claim_id": "CLAIM-20260719-Analista-TASK-0257-gate-E2",
+            "expires_at": "2026-07-19T19:27:02Z",
+            "notes": "Revision adversarial E2 de TASK-0257",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Analista-TASK-0257-gate-E2",
+                "Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md"
+            ],
+            "started_at": "2026-07-19T18:27:02Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:27:02Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0256-arquitecto-registro",
             "expires_at": "2026-07-17T14:38:28Z",
             "owner": "Arquitecto",
@@ -171,6 +186,23 @@
             "status": "released",
             "task_id": "OPS-PRUNE-FIX-20260719",
             "updated_at": "2026-07-19T17:18:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0257-20260719",
+            "expires_at": "2026-07-19T19:30:13Z",
+            "notes": "Rechazo formal del gate E2 (NO-GO Analista F-0257-01/F-0257-02): in_review->in_progress + ACTION de remediacion a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F01-F02.md"
+            ],
+            "started_at": "2026-07-19T18:30:13Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:30:13Z"
         }
     ],
     "schema_version": "1.0",
