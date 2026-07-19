@@ -1,5 +1,21 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-TASK-0257-Codex-remediation-F01-F02",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-remediation-F01-F02",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "scripts/test_attested_instancing.py",
+                "scripts/test_precommit_hook.py",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md"
+            ],
+            "task_id": "TASK-0257"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

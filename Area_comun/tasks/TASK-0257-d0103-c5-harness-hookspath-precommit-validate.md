@@ -72,3 +72,16 @@ git config --unset core.hooksPath
 
 Rearmarlo con `git config core.hooksPath .githooks`. Este desarme es reversible y
 no debilita C5: CI, clean-clone y los gates de cron siguen ejecutando el validador.
+
+## Modo acotado
+
+El hook siempre ejecuta el control de poda. El validador completo se selecciona
+por rutas staged cuando el commit toca datos colaborativos o cualquiera de los
+ejecutables locales que participan en el juicio (`runtime/`, `scripts/` y
+`.githooks/` incluidos). El gate de la guia se selecciona solo cuando cambian su
+fuente, salida o generador. La seleccion por rutas nunca desactiva el hook.
+
+Cuando aplica el validador completo, el hook exige equivalencia index/worktree
+tambien para todo el codigo local del juicio. La regresion permanente
+`python scripts/test_precommit_hook.py` verifica que una mutacion unstaged del
+validador no pueda convertir en verde un estado gobernado roto staged.

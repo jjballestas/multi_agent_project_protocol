@@ -8,32 +8,58 @@ if [ "$status" -ne 0 ]; then
   exit "$status"
 fi
 
-# The validator reads files rather than Git blobs. To validate the staged
-# collaboration snapshot without a costly full-repository export, reject only
-# unstaged/untracked changes in routes the validator governs, then validate the
-# working tree (which is byte-identical to the index for those routes). Dirty
-# product/personal routes remain allowed and cannot create collaboration-state
-# false failures. Stage or stash a governed dirty route before committing.
-governed_routes="Area_comun runtime/state protocol.config.json protocol.config.template.json AGENTS.md AGENTS.template.md"
-if ! git diff --quiet -- $governed_routes; then
-  echo "unstaged changes in governed routes; stage or stash them so the staged snapshot is unambiguous" >&2
-  exit 1
-fi
-for path in $(git ls-files --others --exclude-standard -- $governed_routes); do
-  echo "untracked governed path blocks snapshot validation: $path" >&2
-  exit 1
+# Bounded mode: the full validator is mandatory when the staged snapshot touches
+# collaboration data or any executable used by that judgment. Commits outside
+# those routes still run this hook and the prune check, but avoid the expensive
+# full-state replay. This is route selection, not an off switch.
+staged_paths=$(git diff --cached --name-only --diff-filter=ACMR)
+needs_collaboration_validation=0
+for path in $staged_paths; do
+  case "$path" in
+    Area_comun/*|runtime/*|scripts/*|.githooks/*|protocol.config.json|protocol.config.template.json|AGENTS.md|AGENTS.template.md)
+      needs_collaboration_validation=1
+      break
+      ;;
+  esac
 done
-python scripts/validate_collaboration_state.py --root .
-status=$?
-if [ "$status" -ne 0 ]; then
-  echo "collaboration state in staged snapshot is invalid; commit rejected" >&2
-  exit "$status"
+
+if [ "$needs_collaboration_validation" -eq 1 ]; then
+  # The validator reads files rather than Git blobs. Its executable and imported
+  # local dependencies are therefore part of the judged snapshot too. Requiring
+  # index/worktree equality for all scripts/runtime/hook bytes closes false-green
+  # bypasses caused by an unstaged validator mutation.
+  judgment_routes="Area_comun runtime scripts .githooks protocol.config.json protocol.config.template.json AGENTS.md AGENTS.template.md"
+  if ! git diff --quiet -- $judgment_routes; then
+    echo "unstaged changes in governed or validation-code routes; stage or stash them so the staged snapshot is unambiguous" >&2
+    exit 1
+  fi
+  for path in $(git ls-files --others --exclude-standard -- $judgment_routes); do
+    echo "untracked governed or validation-code path blocks snapshot validation: $path" >&2
+    exit 1
+  done
+  python scripts/validate_collaboration_state.py --root .
+  status=$?
+  if [ "$status" -ne 0 ]; then
+    echo "collaboration state in staged snapshot is invalid; commit rejected" >&2
+    exit "$status"
+  fi
 fi
 
-python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
-status=$?
-if [ "$status" -ne 0 ]; then
-  echo "human guide template drift; run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template" >&2
-  exit "$status"
+needs_guide_validation=0
+for path in $staged_paths; do
+  case "$path" in
+    Area_comun/protocol/HUMAN_GUIDE.template.md|Area_comun/protocol/HUMAN_GUIDE.template.html|scripts/generate_human_guide.py)
+      needs_guide_validation=1
+      break
+      ;;
+  esac
+done
+if [ "$needs_guide_validation" -eq 1 ]; then
+  python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
+  status=$?
+  if [ "$status" -ne 0 ]; then
+    echo "human guide template drift; run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template" >&2
+    exit "$status"
+  fi
 fi
 exit 0

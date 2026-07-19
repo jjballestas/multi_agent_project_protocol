@@ -133,6 +133,26 @@
             "updated_at": "2026-07-19T17:50:02Z"
         },
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-remediation-F01-F02",
+            "expires_at": "2026-07-19T20:43:19Z",
+            "notes": "Remediate F-0257-01 staged validator bypass and F-0257-02 bounded hook mode.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-remediation-F01-F02",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "scripts/test_attested_instancing.py",
+                "scripts/test_precommit_hook.py",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md"
+            ],
+            "started_at": "2026-07-19T18:43:19Z",
+            "status": "active",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:43:19Z"
+        },
+        {
             "claim_id": "CLAIM-arq-d0103-ready-20260719",
             "expires_at": "2026-07-19T19:36:47Z",
             "notes": "OK del Operador 2026-07-19: enmiendas E1-E3 a la 0103 + promocion proposed->ready de TASK-0257..0265",

@@ -400,6 +400,15 @@ rechaza el commit si `validate_collaboration_state.py` falla. El hook es una
 primera linea de defensa: `git commit --no-verify` existe, por lo que el enforcement
 duro sigue siendo CI y los gates desde un clon limpio.
 
+El hook usa un modo acotado no desactivable: siempre ejecuta el control de poda;
+ejecuta el validador completo cuando el staged snapshot toca `Area_comun/`,
+`runtime/`, `scripts/`, `.githooks/`, las configuraciones del protocolo o
+`AGENTS*`; y ejecuta el gate de la guia cuando toca su fuente, salida o generador.
+Para que el juicio corresponda a los bytes staged, cualquier cambio unstaged o
+untracked en rutas gobernadas o en el codigo local del juicio bloquea el commit.
+Los commits que solo tocan rutas ajenas al protocolo evitan el replay completo,
+pero el hook y su gate acotado siguen activos.
+
 Desarme reversible en menos de 30 segundos si el hook bloquea al equipo:
 
 ```powershell
