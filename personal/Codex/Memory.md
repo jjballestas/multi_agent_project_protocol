@@ -9,6 +9,9 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
   negatives for the validator, a runtime judgment dependency, governed state,
   and the hook itself. Core regression, attested golden, coordination/runtime
   exports, validator, encoding, neutrality, drift, and pinned config gates pass.
+  Delivery commit `0cdb02d` moves TASK-0257 to `in_review`, releases all four
+  F03 claims, updates the self-contained handoff, and opens the final re-judgment
+  request to Arquitecto. Drift was false at seq 4967.
 
 - TASK-0257 remediation commit `33af66b` closes F-0257-01/F-0257-02: the
   pre-commit hook now includes all local judgment code in index/worktree
