@@ -61,3 +61,14 @@ se revisa EN CUANTO ATERRIZA, con gate propio del checker de proveedor diverso, 
 arrancar TASK-0258) y E3 (el acceptance incluye el procedimiento de desarme del hook).
 El cambio de acceptance viene de la propia orden de aprobacion del Operador, no es una
 ampliacion silenciosa.
+
+## Desarme operativo (E3)
+
+Si el hook bloquea al equipo, desconectarlo localmente en menos de 30 segundos:
+
+```text
+git config --unset core.hooksPath
+```
+
+Rearmarlo con `git config core.hooksPath .githooks`. Este desarme es reversible y
+no debilita C5: CI, clean-clone y los gates de cron siguen ejecutando el validador.

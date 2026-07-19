@@ -55,6 +55,20 @@
             "updated_at": "2026-07-17T13:38:28Z"
         },
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-handoff",
+            "expires_at": "2026-07-19T19:01:22Z",
+            "notes": "Govern TASK-0257 handoff artifact.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-handoff",
+                "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md"
+            ],
+            "started_at": "2026-07-19T18:01:22Z",
+            "status": "active",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T18:01:22Z"
+        },
+        {
             "claim_id": "CLAIM-TASK-0257-Codex-implementation",
             "expires_at": "2026-07-19T19:50:02Z",
             "notes": "Implement TASK-0257 harness and born-operational export.",

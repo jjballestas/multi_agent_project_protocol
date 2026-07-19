@@ -1,6 +1,15 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-handoff",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-handoff",
+                "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md"
+            ],
+            "task_id": "TASK-0257"
+        },
+        {
             "claim_id": "CLAIM-TASK-0257-Codex-implementation",
             "owner": "Codex",
             "scope": [
