@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "8598aaf925a9ffb0c95ad8c7aa1361713010ec557c33d8633941c6aa7decfb51",
+  "canonical_hash": "d668b97e6d57884128e912b65fe5167fbeac5f29e6d5e645d9decfd61c8f2b30",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1959,7 +1959,7 @@
       "TASK-0264": 2,
       "TASK-0265": 2,
       "TASK-0266": 3,
-      "TASK-0267": 4,
+      "TASK-0267": 6,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -1982,7 +1982,7 @@
       "protocol-prune": 10,
       "protocol-state": 1
     },
-    "events_applied": 4322,
+    "events_applied": 4324,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6303,10 +6303,12 @@
       "task-0253-fnova-bomfix-release": 4054,
       "task-0253-producthash-fix-claim": 4055,
       "task-0253-producthash-fix-release": 4056,
-      "task-0255-final-in-review-2026-07-05T22:02:38Z": 4215
+      "task-0255-final-in-review-2026-07-05T22:02:38Z": 4215,
+      "task0267-claim-9dba5607-bb74-42e7-b8ec-c5d1112de0b8": 4994,
+      "task0267-start-e28800ce-e496-4023-8052-757de5464c49": 4995
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4993
+  "up_to_seq": 4995
 }

@@ -27,26 +27,34 @@ for path in $staged_paths; do
 done
 
 if [ "$needs_collaboration_validation" -eq 1 ]; then
-  # The validator reads files rather than Git blobs. Its executable and imported
-  # local dependencies are therefore part of the judged snapshot too. Requiring
-  # index/worktree equality for all scripts/runtime/hook bytes closes false-green
-  # bypasses caused by an unstaged validator mutation.
-  judgment_routes="Area_comun runtime scripts .githooks protocol.config.json protocol.config.template.json AGENTS.md AGENTS.template.md"
-  if ! git diff --quiet -- $judgment_routes; then
-    echo "unstaged changes in governed or validation-code routes; stage or stash them so the staged snapshot is unambiguous" >&2
+  # Materialize exactly the index. The validator and every local dependency are
+  # loaded from this snapshot, so unstaged/untracked peer work cannot change the
+  # verdict or serialize commits in a shared worktree. The temporary checkout is
+  # removed on success, rejection, or interruption.
+  snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
+  cleanup_snapshot() {
+    rm -rf -- "$snapshot_root"
+  }
+  trap cleanup_snapshot EXIT HUP INT TERM
+  if ! git checkout-index --all --force --prefix="$snapshot_root/"; then
+    echo "could not materialize staged snapshot; commit rejected" >&2
     exit 1
   fi
-  for path in $(git ls-files --others --exclude-standard -- $judgment_routes); do
-    echo "untracked governed or validation-code path blocks snapshot validation: $path" >&2
-    exit 1
-  done
-  python scripts/validate_collaboration_state.py --root .
+  git_dir=$(git rev-parse --absolute-git-dir) || exit 1
+  printf 'gitdir: %s\n' "$git_dir" > "$snapshot_root/.git"
+  (
+    cd "$snapshot_root" || exit 1
+    python scripts/validate_collaboration_state.py --root .
+  )
   status=$?
   if [ "$status" -ne 0 ]; then
     echo "collaboration state in staged snapshot is invalid; commit rejected" >&2
     exit "$status"
   fi
 fi
+
+# Structural limit: deleting this hook locally prevents it from running. Local
+# self-deletion is therefore detected only by review; CI pins existence + SHA-256.
 
 needs_guide_validation=0
 for path in $staged_paths; do

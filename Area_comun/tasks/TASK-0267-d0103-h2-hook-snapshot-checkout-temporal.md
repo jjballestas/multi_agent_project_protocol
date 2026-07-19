@@ -2,7 +2,7 @@
 task_id: TASK-0267
 title: "[DECISION-0103][C5/H2] Hook pre-commit v2: validar el snapshot staged en checkout temporal del indice (elimina el mutex global del arbol compartido)"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

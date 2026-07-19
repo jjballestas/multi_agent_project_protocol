@@ -116,6 +116,29 @@
             "updated_at": "2026-07-19T20:34:16Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267",
+            "expires_at": "2026-07-20T03:25:26Z",
+            "notes": "Implement hook v2 index materialization, real commit regressions, export mirror, CI hash, and delivery.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267",
+                "Area_comun/state/TASK_INDEX.json#TASK-0267",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0267",
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "scripts/test_precommit_hook.py",
+                ".github/workflows/validate.yml",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0267-Codex-to-Arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267.md"
+            ],
+            "started_at": "2026-07-19T23:25:26Z",
+            "status": "active",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-19T23:25:26Z"
+        },
+        {
             "claim_id": "CLAIM-arq-b3-archivo-20260720",
             "expires_at": "2026-07-20T00:26:00Z",
             "notes": "Higiene final ciclo O1: la RESP del Operador (ejecutada) y el REPORTE iter1 (superado) a archived",

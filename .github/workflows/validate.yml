@@ -11,6 +11,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify pinned pre-commit hook
+        shell: bash
+        run: |
+          test -f .githooks/pre-commit
+          echo "6871e582122702cd8d31ff4c2ad6f8af21db87948482810d961942560055304e  .githooks/pre-commit" | sha256sum --check --strict
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
