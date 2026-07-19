@@ -40,6 +40,23 @@
             "updated_at": "2026-07-19T19:22:06Z"
         },
         {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-delivery",
+            "expires_at": "2026-07-19T21:57:04Z",
+            "notes": "Deliver TASK-0257 F-0257-03 remediation to in_review with updated handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md"
+            ],
+            "started_at": "2026-07-19T19:57:04Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:57:04Z"
+        },
+        {
             "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-iter2",
             "expires_at": "2026-07-19T21:51:35Z",
             "notes": "Remediate F-0257-03 deletion bypass and permanent A/M/D/R route-family regressions.",
@@ -50,9 +67,37 @@
                 "scripts/test_precommit_hook.py"
             ],
             "started_at": "2026-07-19T19:51:34Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0257",
             "updated_at": "2026-07-19T19:51:34Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-message",
+            "expires_at": "2026-07-19T21:58:45Z",
+            "notes": "Publish TASK-0257 F-0257-03 final fix-loop handoff to Arquitecto.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-message",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T19:58:45Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:58:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-msgfix",
+            "expires_at": "2026-07-19T20:33:03Z",
+            "notes": "Add validator-required question to compact requires_response handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-msgfix",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T20:03:03Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T20:03:03Z"
         },
         {
             "claim_id": "CLAIM-arq-mailbox-rev0257-20260719",

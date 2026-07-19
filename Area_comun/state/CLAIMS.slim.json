@@ -1,16 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-iter2",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-iter2",
-                ".githooks/pre-commit",
-                "scripts/test_precommit_hook.py"
-            ],
-            "task_id": "TASK-0257"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

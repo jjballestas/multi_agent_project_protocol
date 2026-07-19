@@ -4,6 +4,12 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
 
 ## Latest Session Note
 
+- TASK-0257 F-0257-03 remediation commit `e2cadd8` adds staged deletion and
+  type-change selection to `.githooks/pre-commit` and permanent deletion
+  negatives for the validator, a runtime judgment dependency, governed state,
+  and the hook itself. Core regression, attested golden, coordination/runtime
+  exports, validator, encoding, neutrality, drift, and pinned config gates pass.
+
 - TASK-0257 remediation commit `33af66b` closes F-0257-01/F-0257-02: the
   pre-commit hook now includes all local judgment code in index/worktree
   equivalence, uses a non-disableable staged-route bounded mode, and ships the
