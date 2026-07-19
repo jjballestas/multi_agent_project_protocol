@@ -116,6 +116,23 @@
             "updated_at": "2026-07-19T20:34:16Z"
         },
         {
+            "claim_id": "CLAIM-arq-b3-archivo-20260720",
+            "expires_at": "2026-07-20T00:26:00Z",
+            "notes": "Higiene final ciclo O1: la RESP del Operador (ejecutada) y el REPORTE iter1 (superado) a archived",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-b3-archivo-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-REPORTE-fixloop-0257-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-REPORTE-fixloop-0257-iter1.md"
+            ],
+            "started_at": "2026-07-19T23:26:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-19T23:26:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-escalada0257-20260719",
             "expires_at": "2026-07-19T21:26:30Z",
             "notes": "Stop del fix-loop (tope 2/2): rechazo formal + blocked + escalada al Operador + archivo del NOGO final respondido",

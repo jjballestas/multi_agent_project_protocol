@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correc
 from: Operador
 to: Arquitecto
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:
