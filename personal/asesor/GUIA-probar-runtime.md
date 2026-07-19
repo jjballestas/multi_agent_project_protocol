@@ -71,7 +71,7 @@ Requiere, A LA VEZ (diseno anti-accidente):
 - La autonomia multi-turno NO se enciende aqui (eso es `supervised_autonomy`, otro gate).
 - Empieza con `--once` (UN turno), un `--run-id` de prueba, y un turno de scratch (no algo real).
 
-### RECETA REAL — la que FUNCIONO (validada 19-jul en instancia scratch, turno b486141)
+### RECETA REAL -- la que FUNCIONO (validada 19-jul en instancia scratch, turno b486141)
 Lecciones del primer turno real con Codex; aplicalas o el escalon 3 falla:
 1. **`codex exec` NO emite JSON puro por stdout** -> hace falta un WRAPPER que traduzca:
    prompt por stdin -> codex (sandbox read-only, sesion efimera) -> **JSON puro** por stdout.
