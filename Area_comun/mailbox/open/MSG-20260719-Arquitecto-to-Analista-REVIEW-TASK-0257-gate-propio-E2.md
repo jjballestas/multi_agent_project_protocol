@@ -54,7 +54,8 @@ testear Nova-Budget/Zeus u otro repo de producto).
   su forma te sirve de referencia de lo que TASK-0261/0262 formalizaran.
 - Hallazgo menor ya detectado (ponderalo tu): el artefacto
   Area_comun/handoffs/HANDOFF-TASK-0257-Codex-to-Arquitecto.md contiene un caracter
-  no-ASCII ("inequívoco") y scan_encoding NO cubre handoffs/ (solo mailbox). Posible
+  no-ASCII (la palabra inequivoco con i acentuada, linea 17) y scan_encoding NO cubre
+  handoffs/ (solo mailbox). Posible
   hueco de alcance del scan a registrar como hallazgo, no bloquea gates actuales.
 - Gates del hub en HEAD: validate 0, scan_encoding 0, neutralidad 0, prune 0.
 
