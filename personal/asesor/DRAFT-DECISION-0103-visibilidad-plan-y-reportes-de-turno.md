@@ -96,16 +96,69 @@ Proposito declarado: los obstaculos son la materia prima para crear skills y end
 protocolo. Un obstaculo con `recurrence_risk: high` es un candidato explicito a skill o a
 regla nueva.
 
+### Clausula 3-bis - OFERTA DE MEJORA (no automatismo)
+
+Registrar el obstaculo no basta: el reporte debe **cerrar el bucle de aprendizaje**.
+
+- Cuando un obstaculo tenga `recurrence_risk: high`, o cuando el mismo `root_cause`
+  aparezca en dos o mas entregas, el reporte **OFRECE al humano** crear/actualizar la
+  skill o la regla, **con la propuesta ya redactada** (borrador del cambio concreto, no
+  un "convendria mejorar esto").
+- **Ofrece, no crea.** La creacion de skills y de reglas es decision humana; ningun
+  agente modifica el protocolo ni una skill por su cuenta a partir de un obstaculo.
+- El humano puede aceptar, rechazar o parquear; el rechazo tambien queda registrado
+  (evita que la misma propuesta se re-ofrezca en bucle en cada entrega).
+
+Racional: el valor no esta en tener la lista de obstaculos, esta en que la lista
+**produzca cambios**. Sin esta clausula, `obstacles[]` es un archivo que nadie relee.
+
 ### Clausula 4 - DOS CARRILES (o cubre solo una fraccion)
 
 La mayor parte del trabajo NO pasa por el runtime: Arquitecto, Codex por cron y Analista
-trabajan en sesion. Por tanto las clausulas 2 y 3 se implementan en **ambos** portadores,
-con el MISMO bloque `obstacles`:
+trabajan en sesion. Por tanto las clausulas 2, 3 y 3-bis se implementan en **ambos**
+portadores, con el MISMO bloque `obstacles`:
 
 - carril runtime: campo en `runtime/turn_schema.json` (+ validacion en `turn_validate`);
 - carril sesion: mensaje `type: REPORTE` por mailbox, con el bloque en el cuerpo.
 
-### Clausula 5 - ALCANCE
+**Ambos carriles son exigibles por validador** (verificado 19-jul): `validate_mailbox`
+(`scripts/validate_collaboration_state.py:1041`) ya falla en ROJO por estructura de
+frontmatter -- coherencia status/carpeta, `response_owner`, `requested_action`, `question`.
+Exigir `obstacles` alli es del mismo tipo de regla, no es cuestion de disciplina.
+
+Limite honesto -- **presencia vs veracidad**: el validador puede forzar que el bloque
+EXISTA y este bien formado (duro, automatico, ambos carriles); no puede saber si un
+agente que peleo lo REPORTO. La diferencia entre carriles es el sensor de friccion:
+
+- runtime: la friccion es mecanicamente detectable (`gate_green: false`, `attempt > 1`,
+  revert) -> el validador puede cruzar "gate rojo + obstacles vacio = FAIL".
+- sesion: **no existe sensor de friccion**. Por eso esta decision obliga al REPORTE de
+  sesion a declarar un contador minimo de friccion (reintentos / rechazos de gate /
+  correcciones del checker) que haga cruzable la misma regla. Sin ese contador, la
+  completitud del carril sesion queda expuesta y se declara como tal.
+
+### Clausula 5 - ARMAR EL HARNESS (una regla que hay que acordarse de correr no es una regla)
+
+Hallazgo del 19-jul que motiva esta clausula: **el harness existe pero no esta armado**.
+`git config core.hooksPath` esta VACIO, `.git/hooks/` no tiene ningun hook activo (solo
+`.sample`), y `.githooks/pre-commit` -- aunque se cableara -- **no invoca
+`validate_collaboration_state`** (0 hits): solo corre `prune_state --check` y el drift de
+la guia HTML. Hoy el validador se ejecuta porque los agentes lo invocan a mano o porque lo
+llama el cron.
+
+Por tanto:
+
+1. `core.hooksPath` se cablea a `.githooks/` (hub y export born-operational, mas
+   instruccion de cableado en el arranque de cada instancia y cada clone nuevo).
+2. `.githooks/pre-commit` invoca `validate_collaboration_state` y **falla el commit** si
+   el estado colaborativo esta en rojo.
+3. Se declara y se mide el coste: si el validador completo hace el pre-commit demasiado
+   lento, se corre en modo acotado a las rutas tocadas -- pero **no se desactiva**.
+
+Racional: las clausulas 1-4 no valen nada si dependen de que alguien se acuerde de correr
+el validador. Una regla no exigible es una sugerencia.
+
+### Clausula 6 - ALCANCE
 
 Capa HUB (metodologia), con espejo en el export born-operational (DECISION-0096): toda
 instancia presente y futura, incluida cualquier instancia de terceros (p.ej. Julian).
@@ -124,14 +177,21 @@ instancia presente y futura, incluida cualquier instancia de terceros (p.ej. Jul
 
 ## Implementacion (trabajo gobernado tras la firma; NO del Asesor)
 
-| # | unidad | carril | capability |
-|---|---|---|---|
-| 1 | anadir bloque `obstacles[]` a `runtime/turn_schema.json` | runtime | implementer |
-| 2 | validacion condicional (obligatorio si gate rojo / attempt>1 / revert) en `turn_validate` | runtime | implementer |
-| 3 | vista de plan (`--plan-all` o render de TASK_INDEX) + gate de aprobacion turno 0 | runtime | implementer |
-| 4 | plantilla de REPORTE de mailbox con bloque `obstacles` | sesion | (doc) |
-| 5 | regla de arranque del Asesor: nunca ejecutar sin plan aprobado | doc | (doc) |
-| 6 | revision adversarial de 1-3 por checker de proveedor diverso | gate | reviewer |
+| # | unidad | clausula | carril | capability |
+|---|---|---|---|---|
+| 1 | cablear `core.hooksPath` a `.githooks/` + `pre-commit` invoca `validate_collaboration_state` y falla en rojo | C5 | harness | implementer |
+| 2 | anadir bloque `obstacles[]` a `runtime/turn_schema.json` | C3 | runtime | implementer |
+| 3 | validacion condicional en `turn_validate` (obligatorio si `gate_green:false` / `attempt>1` / revert) | C3 | runtime | implementer |
+| 4 | vista de plan (`--plan-all` o render de TASK_INDEX) + gate de aprobacion turno 0 | C1 | runtime | implementer |
+| 5 | `validate_mailbox`: exigir `obstacles` + contador de friccion en `type: REPORTE` | C3/C4 | sesion | implementer |
+| 6 | plantilla de REPORTE de mailbox con bloque `obstacles` + reporte de asignacion | C2/C4 | sesion | (doc) |
+| 7 | mecanismo de oferta de mejora (deteccion `recurrence_risk: high` o `root_cause` repetido -> propuesta redactada al humano; registro de rechazos) | C3-bis | ambos | implementer |
+| 8 | regla de arranque del Asesor: nunca ejecutar sin plan aprobado | C1 | doc | (doc) |
+| 9 | revision adversarial del conjunto por checker de proveedor diverso | gate | gate | reviewer |
+
+**Orden sugerido: la unidad 1 va PRIMERA.** Armar el harness antes de escribir reglas
+nuevas garantiza que las reglas nuevas nazcan ya exigidas, y ademas la propia
+implementacion de 2-9 queda validada por el hook desde el primer commit.
 
 Nota de secuencia: esta decision deberia ir ANTES del pipeline maker->checker multi-turno.
 Multi-turno sin reporte de entrega es exactamente la ceguera que motiva esta decision,
