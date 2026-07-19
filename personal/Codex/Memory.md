@@ -4,6 +4,11 @@ Last updated: 2026-07-19 Europe/Madrid, during TASK-0257 delivery.
 
 ## Latest Session Note
 
+- TASK-0257 was moved `in_progress -> blocked` in runtime transaction seq
+  4977-4979 after the third NO-GO exhausted the 2/2 fix-loop limit. The minimal
+  claim was acquired and released in the same transaction. Coordination commit
+  `7e8112b` records the flip; operator decision remains pending.
+
 - TASK-0257 F-0257-03 remediation commit `e2cadd8` adds staged deletion and
   type-change selection to `.githooks/pre-commit` and permanent deletion
   negatives for the validator, a runtime judgment dependency, governed state,
