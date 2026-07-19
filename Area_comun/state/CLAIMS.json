@@ -144,6 +144,22 @@
             "updated_at": "2026-07-19T17:43:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-mailbox-rev0257-20260719",
+            "expires_at": "2026-07-19T19:11:16Z",
+            "notes": "Ruteo REVIEW gate propio E2 de TASK-0257 al Analista + archivo del GO consumido",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-mailbox-rev0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-gate-propio-E2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath.md"
+            ],
+            "started_at": "2026-07-19T18:11:16Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-REV0257-20260719",
+            "updated_at": "2026-07-19T18:11:16Z"
+        },
+        {
             "claim_id": "CLAIM-arq-prune-fix-20260719",
             "expires_at": "2026-07-19T18:18:00Z",
             "notes": "Poda de 2 claims liberados con claim_id en minusculas (selector invalido para el validador; submit lo acepto)",

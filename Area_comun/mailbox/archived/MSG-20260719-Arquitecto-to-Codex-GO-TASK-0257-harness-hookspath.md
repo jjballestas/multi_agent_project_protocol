@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Codex-GO-TASK-0257-harness-hookspath
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0257 segun su intake completo (Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md), incluyendo el acceptance de desarme (E3). Al aceptar, confirmar ETA por mailbox. Entregar a in_review con handoff autocontenido + release del claim en la misma transaccion."
