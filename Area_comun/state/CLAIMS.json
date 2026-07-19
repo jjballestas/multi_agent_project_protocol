@@ -100,6 +100,26 @@
             "updated_at": "2026-07-19T20:03:03Z"
         },
         {
+            "claim_id": "CLAIM-arq-mailbox-rejfinal-20260719",
+            "expires_at": "2026-07-19T21:09:00Z",
+            "notes": "Re-juicio final iter2 al Analista + higiene de 3 consumidos del ciclo iter2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-mailbox-rejfinal-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F03-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F03-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2.md"
+            ],
+            "started_at": "2026-07-19T20:09:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-REJFINAL-20260719",
+            "updated_at": "2026-07-19T20:09:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-mailbox-rev0257-20260719",
             "expires_at": "2026-07-19T19:11:16Z",
             "notes": "Ruteo REVIEW gate propio E2 de TASK-0257 al Analista + archivo del GO consumido",

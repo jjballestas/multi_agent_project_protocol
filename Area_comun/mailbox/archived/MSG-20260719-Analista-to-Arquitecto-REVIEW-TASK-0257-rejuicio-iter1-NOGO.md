@@ -3,7 +3,7 @@ message_id: MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Remediar F-0257-03: incluir eliminaciones staged en la seleccion del modo completo, agregar negativos para toda la familia de rutas y pedir re-juicio Analista antes del cierre; escalar al Operador si aparece otro fallo tras agotarse el tope del fix-loop."

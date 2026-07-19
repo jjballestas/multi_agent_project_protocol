@@ -3,7 +3,7 @@ message_id: MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-F03-iter2
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route final re-judgment of TASK-0257 to Analista. F-0257-03 is remediated in e2cadd8; this is fix-loop iteration 2 of 2."

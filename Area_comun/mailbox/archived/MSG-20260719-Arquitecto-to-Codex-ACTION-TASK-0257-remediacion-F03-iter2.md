@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-remediacion-F03-it
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar F-0257-03 (veredicto Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-rejuicio-iter1-veredicto.md) sobre TASK-0257, devuelta a in_progress: el diff-filter del hook excluye las eliminaciones (D), asi que git rm de una ruta gobernada o del codigo del juicio termina con hook exit 0. Reclamar, corregir, negativos para TODA la familia de rutas, gates del fix-loop completos, re-entrega a in_review + handoff + release en la misma tx. ITERACION 2 DE 2: es la ultima antes de escalar al Operador."
