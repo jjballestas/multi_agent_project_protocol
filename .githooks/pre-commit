@@ -12,7 +12,10 @@ fi
 # collaboration data or any executable used by that judgment. Commits outside
 # those routes still run this hook and the prune check, but avoid the expensive
 # full-state replay. This is route selection, not an off switch.
-staged_paths=$(git diff --cached --name-only --diff-filter=ACMR)
+# Include every content-bearing change kind. In particular, D is mandatory:
+# deleting governed state or judgment code must select the full validator too.
+# T is explicit as a path type change can make a judged file unusable.
+staged_paths=$(git diff --cached --name-only --diff-filter=ACMRTD)
 needs_collaboration_validation=0
 for path in $staged_paths; do
   case "$path" in

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7ad4ddbb964cc0562e9c322e6ba422d34d1d36a5926e4f2bcd37c0f35f71d3f3",
+  "canonical_hash": "04ee4bc13b03c4136b062b309ab3445d363b94ec7821419f7fbaaaab2dfcae59",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1925,7 +1925,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-0256": 2,
-      "TASK-0257": 24,
+      "TASK-0257": 25,
       "TASK-0258": 2,
       "TASK-0259": 2,
       "TASK-0260": 2,
@@ -1958,7 +1958,7 @@
       "protocol-prune": 10,
       "protocol-state": 1
     },
-    "events_applied": 4287,
+    "events_applied": 4288,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3014,6 +3014,7 @@
       "arquitecto:upsert-0156:ready": 1202,
       "claim-20260712-codex-hub-task9303-doneflip-msg": 4579,
       "claim-release-Codex-TASK-1203-hub-fixloop-response-20260707": 4377,
+      "codex-0257-f03-acquire-2026-07-19T19:51:34Z": 4959,
       "codex-carril-a-monitor-acquire-2026-06-19T15:30:53Z": 685,
       "codex-carril-a-monitor-acquire-2026-06-19T15:33:55Z": 687,
       "codex-carril-a-monitor-release-2026-06-19T15:30:53Z": 686,
@@ -6249,5 +6250,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4958
+  "up_to_seq": 4959
 }

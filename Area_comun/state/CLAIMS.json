@@ -40,6 +40,21 @@
             "updated_at": "2026-07-19T19:22:06Z"
         },
         {
+            "claim_id": "CLAIM-20260719-Codex-TASK-0257-F03-iter2",
+            "expires_at": "2026-07-19T21:51:35Z",
+            "notes": "Remediate F-0257-03 deletion bypass and permanent A/M/D/R route-family regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260719-Codex-TASK-0257-F03-iter2",
+                ".githooks/pre-commit",
+                "scripts/test_precommit_hook.py"
+            ],
+            "started_at": "2026-07-19T19:51:34Z",
+            "status": "active",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:51:34Z"
+        },
+        {
             "claim_id": "CLAIM-arq-mailbox-rev0257-20260719",
             "expires_at": "2026-07-19T19:11:16Z",
             "notes": "Ruteo REVIEW gate propio E2 de TASK-0257 al Analista + archivo del GO consumido",
