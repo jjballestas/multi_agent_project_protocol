@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "527620d7fb6b937fc66753149479e7b10105c2bb8c8402193904d7bd71f3103b",
+  "canonical_hash": "925f89c7955726b6e09bb30df0167807093475ca4137f7f329aeaa4f05c3872c",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1906,7 +1906,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-0256": 2,
-      "TASK-0257": 14,
+      "TASK-0257": 16,
       "TASK-0258": 2,
       "TASK-0259": 2,
       "TASK-0260": 2,
@@ -1937,7 +1937,7 @@
       "protocol-prune": 9,
       "protocol-state": 1
     },
-    "events_applied": 4250,
+    "events_applied": 4252,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3765,6 +3765,7 @@
       "intent:Analista:claim:04328a7f27457480731174306db3db268d30d51b33d0e0753ceabaf1b40d66f9": 2516,
       "intent:Analista:claim:10a4f9b8c9a0ce8ff1add6b3cfa124c84920e6b44215b08032f80c4c80a470e1": 3274,
       "intent:Analista:claim:1724c23ea1dc5660abb1ec55d6248237b952466fe1bb833ec9136561392d7003": 2416,
+      "intent:Analista:claim:1c1996c548ea9b942c79719a74bf6f103ac76e6ec0e08fae2d7c11fa93eba92b": 4923,
       "intent:Analista:claim:1ffc5f8bd43ec27e9da3d680d3fc7b1c9647818f2467a147f818f869b47f7c65": 2413,
       "intent:Analista:claim:2619167c4dc76c1ab936ce7573db411f9db81dfbce8a1a3551ef2f3156c49297": 3317,
       "intent:Analista:claim:26cf5fdd8d5a9d8a9d5eb8e8a79aaf0f3a2f6127e42b363af06ada4de740fab6": 3155,
@@ -3804,6 +3805,7 @@
       "intent:Analista:claim:b3eee295023441c828dbd4a6bcbcae4f51e6a9ec9237e3cd95b13c0a43b0ab4b": 2428,
       "intent:Analista:claim:bca3e1c75d9486791f22a6e7558d43279a7a4d4466d836e9ded1e61c0b4e9d38": 3347,
       "intent:Analista:claim:c543e18e804a7cd8d56bdeed49e13df79ef55d9015bb7b6b5a4aaf1a7213c111": 4917,
+      "intent:Analista:claim:c672c984e7dc2c8cf2af299d8e6561f595feeeabcc15c555d5b1921e6fcfab42": 4922,
       "intent:Analista:claim:c7389ac75212aa0e387181fe1ed3106687ebed05135ebb497ceb15e432b0c972": 2430,
       "intent:Analista:claim:ca43200e7687f49f697973bf3e277f3b88175adf2246706bc7a0f5d17007abb9": 2443,
       "intent:Analista:claim:d4e0c6d3415405fbc3fb6c58214b9291ef562c04d97a56e0f27c2cceeef523af": 3605,
@@ -6191,5 +6193,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4921
+  "up_to_seq": 4923
 }

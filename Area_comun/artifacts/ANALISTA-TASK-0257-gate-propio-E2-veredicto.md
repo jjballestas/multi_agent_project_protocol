@@ -89,6 +89,10 @@ positivo/negativo/bypass-unstaged, export de tres tiers, validate con/sin secret
 drift 0, domain, encoding y config #4 byte-identica, y pedir re-juicio Analista
 antes del commit de cierre. Maximo 2 iteraciones antes de escalar al operador.
 
+Nota de autoria canonica: el commit concurrente del Arquitecto materializo este
+archivo durante el ruteo del NO-GO; la presente revision final queda confirmada y
+commiteada por Analista sin alterar el juicio ni ampliar el alcance.
+
 task_id: TASK-0257
 status: CAMBIO-REQUERIDO
 executive_summary: El hook base funciona, pero puede juzgar estado staged con validator unstaged y excede el umbral completo sin modo acotado.

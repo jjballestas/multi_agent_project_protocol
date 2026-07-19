@@ -26,3 +26,5 @@ of 11.531 s and 12.944 s above the task threshold, without bounded mode.
 See the artifact for the vector table, exact repro, gates and residuals. Expected
 fix-loop: remediation, all affected gates, and Analista re-judgment before closure;
 maximum 2 iterations before operator escalation.
+
+verdict_owner: Analista; this final authorship note does not change the NO-GO.
