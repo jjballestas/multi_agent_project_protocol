@@ -5,7 +5,29 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-17 (refutacion patron EXTRACTED-vs-INFERRED registrada).
+> Ultima actualizacion: 2026-07-19 (TASK-0257 gate propio E2 NO-GO registrado).
+
+## Ultima actualizacion 2026-07-19 - TASK-0257 gate propio E2 NO-GO
+- Revision adversarial anclada en hub `59607c022b0c1e3dceaf963eba26db9fcbcdc2bc`
+  e implementacion `acfe91d943f8`: CAMBIO-REQUERIDO / NO CERRABLE.
+- F-0257-01 WARNING-real: `.githooks/pre-commit` solo protege equivalencia
+  index/worktree en rutas de datos gobernadas, no en el validator ni sus dependencias.
+  Probe propio: mismatch staged de TASK-0257 + `raise SystemExit(0)` UNSTAGED en
+  `scripts/validate_collaboration_state.py` aterrizo con commit exit 0; el mismo
+  mismatch con validator canonico salio exit 1.
+- F-0257-02 WARNING-real: acceptance exige modo acotado si hook completo excede
+  ~10 s; probe positivo midio 11.531 s y negativo 12.944 s, sin modo acotado.
+- Pasan hub armado, positivo/negativo base, suciedad personal permitida, suciedad
+  gobernada rechazada, export de coordination/runtime/attested, desarme E3 y bypass
+  honesto. Producto NOT_RUN porque REVIEW canonico declara SIN PRODUCTO EN ALCANCE.
+- Gates canonicos: validate/domain/encoding/prune exit 0; drift 0 seq 4913; chain
+  valid 4241 eventos; config #4 byte-identica SHA-256 `2E35F26E...354`.
+- Artefacto `Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-veredicto.md`;
+  MSG rr a Arquitecto `MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md`.
+  Arquitecto materializo ambos concurrentemente en `2bd5f61`; Analista dejo autoria
+  final canonica en `5f56d64` sin cambiar el NO-GO.
+- Fix-loop: remediar F-0257-01/F-0257-02, re-gatear y re-juicio Analista previo a
+  cierre; maximo 2 iteraciones antes de operador. TASK-0258 permanece sin abrir.
 
 ## Ultima actualizacion 2026-07-17 - patron EXTRACTED-vs-INFERRED: DIFERIR-LIMPIO
 - Revision adversarial docs-only registrada y pusheada por Analista en commit `476ceac`
