@@ -3,7 +3,7 @@ message_id: MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Escalar TASK-0257 al Operador con el historial completo: la iteracion 2 de 2 termina NO-GO por borrado real del propio hook y rename R100 desde scripts hacia fuera. No abrir otro fix-loop sin directiva explicita del Operador."

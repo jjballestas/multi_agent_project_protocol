@@ -100,6 +100,26 @@
             "updated_at": "2026-07-19T20:03:03Z"
         },
         {
+            "claim_id": "CLAIM-arq-escalada0257-20260719",
+            "expires_at": "2026-07-19T21:26:30Z",
+            "notes": "Stop del fix-loop (tope 2/2): rechazo formal + blocked + escalada al Operador + archivo del NOGO final respondido",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-escalada0257-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO.md"
+            ],
+            "started_at": "2026-07-19T20:26:30Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T20:26:30Z"
+        },
+        {
             "claim_id": "CLAIM-arq-mailbox-rejfinal-20260719",
             "expires_at": "2026-07-19T21:09:00Z",
             "notes": "Re-juicio final iter2 al Analista + higiene de 3 consumidos del ciclo iter2",

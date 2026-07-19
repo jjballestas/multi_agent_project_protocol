@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1581404aa3bc8f81f9d643877659d0f8fbedb6e6d9ba15dece700110dd1b49ba",
+  "canonical_hash": "efda12b3c7b0997d1a07cb19ae9b461edb9cee58afd648f697768d95825e8dc7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -699,6 +699,7 @@
       "CLAIM-TASK-0257-Codex-remediation-status": 1,
       "CLAIM-arq-d0103-ready-20260719": 1,
       "CLAIM-arq-e4e5-0266-20260719": 1,
+      "CLAIM-arq-escalada0257-20260719": 1,
       "CLAIM-arq-h1h2-0267-20260719": 1,
       "CLAIM-arq-mailbox-go0257-20260719": 1,
       "CLAIM-arq-mailbox-rejfinal-20260719": 1,
@@ -1659,6 +1660,7 @@
       "MSG-20260718-Operador-to-Arquitecto-RESP-proxy-jball-nodo-asesor-B-D": 1,
       "MSG-20260718-Operador-to-Arquitecto-RESP-qcbarato-arm3-GO-marginal-confirma-arm2": 1,
       "MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO": 1,
+      "MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO": 1,
       "MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO": 1,
       "MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-gate-propio-E2": 1,
       "MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1": 1,
@@ -1934,7 +1936,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-0256": 2,
-      "TASK-0257": 29,
+      "TASK-0257": 31,
       "TASK-0258": 2,
       "TASK-0259": 2,
       "TASK-0260": 2,
@@ -1967,7 +1969,7 @@
       "protocol-prune": 10,
       "protocol-state": 1
     },
-    "events_applied": 4301,
+    "events_applied": 4305,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4027,6 +4029,7 @@
       "intent:Arquitecto:claim:4eb3ad69bbe96dd4628eb43222310eddc51ed5f1c6fae72062f41cc988a26323": 2627,
       "intent:Arquitecto:claim:4f0755ae3e049842de4b358e8f195a39e949ee4baa7cc149d0a21f8d425a6a32": 4299,
       "intent:Arquitecto:claim:4f4178724834ca550ef01d9c4586d0fea0e09df7738391cc24aad1b75897e574": 3091,
+      "intent:Arquitecto:claim:4f980195794933274b5d69092476a5980290b76ccdce84c64fad1ace781bf830": 4973,
       "intent:Arquitecto:claim:5009de5e894244240c5f4fbae3277ac657776a015441865debd479b9ecd2aa4f": 2815,
       "intent:Arquitecto:claim:502212124e9d76a0a30723445ae542ae6c535fc0bf09ab3cdd53da2d87226354": 4694,
       "intent:Arquitecto:claim:502979836698aeb79841d8a1088d2124b948ede8f6a1472aa1a380bca083a6f6": 3072,
@@ -4225,6 +4228,7 @@
       "intent:Arquitecto:claim:a78947198ba88d3dc5216cc42ce1a6df5d08da2e94bbeffbd8a3a350fc507f9d": 2633,
       "intent:Arquitecto:claim:a81415b50ac4de1ad1e901134affbe487aad6f9c7febc9d6e6f39b2741c61258": 4135,
       "intent:Arquitecto:claim:a83784396fa6582dae8aa94bdfaf6103ecd9a2152b616fd567285ebdc20c3566": 3233,
+      "intent:Arquitecto:claim:aa6e19a650d4bcd2b30b516f3542426f4a8edac0586e083590ef9f7dcf0f431c": 4976,
       "intent:Arquitecto:claim:aab49c52262e725259cd66103283133b9ebca6bb61ecc365b4821583d892e46f": 4773,
       "intent:Arquitecto:claim:aae1aa47370d19ee26611e3a5c1bbcb4cfd00adf655dffd6dbc47d2e6f9a3abf": 2652,
       "intent:Arquitecto:claim:ac03aeec68466e2c27554085bf4bdee046ecaf9112a9600293d7b284702699be": 4704,
@@ -4544,6 +4548,7 @@
       "intent:Arquitecto:mailbox_archive:275c4d57544f1f8c8934b3087eda0a231471a944fd63722f3b3c8a64a7d8bf95": 4408,
       "intent:Arquitecto:mailbox_archive:27d785e21c75acf9228f7941a4aaf2ec9c9f175a7a55d3538673f641d04e43e4": 4646,
       "intent:Arquitecto:mailbox_archive:28347f3fb1ff9793b0bb6eac9c30aa4683f1260de1782cd6ea9712e38aeed8aa": 3620,
+      "intent:Arquitecto:mailbox_archive:284aed85173b0b7ce4fc080312306485252e8c59438da666f53b289607dc41aa": 4975,
       "intent:Arquitecto:mailbox_archive:2924e5da7ad054496de215889b1c95945a53471a6a694396d090aefc06c2186a": 4006,
       "intent:Arquitecto:mailbox_archive:2a2703df3eb02f89461b91fc1aa541f5e8c07725132bd7365721480c6e0ec892": 4369,
       "intent:Arquitecto:mailbox_archive:2a7569d2f21452334fd5698ab70e95a5155bbc26eca8bbc75d5c37bfd9f06f9f": 4010,
@@ -6251,6 +6256,7 @@
       "prune-state:2026-07-19T19:22:06Z:claim-release": 4948,
       "prune-state:2026-07-19T19:22:06Z:protocol-prune": 4947,
       "reflip-0257-iter2-fresh-19T1947": 4957,
+      "reject-0257-final-20260719T2026": 4974,
       "release-20260712-codex-hub-task9303-doneflip-msg": 4580,
       "release-done-flip-manual-1": 4230,
       "release-done-flip-manual-2": 4231,
@@ -6272,5 +6278,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 4972
+  "up_to_seq": 4976
 }
