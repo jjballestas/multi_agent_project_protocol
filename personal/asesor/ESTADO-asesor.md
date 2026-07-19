@@ -1,5 +1,84 @@
 # ESTADO del Asesor - fuente de verdad canonica (leer al arrancar)
 
+## >> BLOQUE TOP 2026-07-19 (~11:00 local) - LO VIGENTE. Todo lo de abajo es historia.
+
+### QUE SE CERRO (2 investigaciones completas, ambas privadas NO citables)
+1. **ECONOMIA DE PEONES: CERRADA, NO ADOPTADA.** 4 estudios convergentes (piloto +7.1pct ->
+   QC-barato +4.0pct -> 4to brazo estructural -> analisis de capacidad). VEREDICTO: los peones NO
+   reducen tokens frontier **porque lo delegable es barato de generar y lo caro no es delegable**;
+   y tampoco dan capacidad neta (el frontier paraleliza igual al mismo coste; la GPU unica
+   serializa). Recs: sanitizador SI (es del CANAL chat-API, 0 en frontier file-edit), checker LLM
+   local NO, tope 1 bounce. DECISION del operador: NO adoptar, condicionada a replicar un metodo
+   quality-preserving. DRAFT-DECISION-0102 redactada, **pendiente de su FIRMA**. Manual NOVA v1.3
+   s.8-s.10 marcadas NO ADOPTADO. Reporte: personal/asesor/REPORTE-FINAL-economia-peones-NOVA.md.
+2. **PROBE DE MEMORIA HIBRIDA: CERRADO (6 celdas).** VEREDICTO: demuestra **CAPACIDAD-CON-
+   INTEGRIDAD, no eficiencia**. B plomeria VERIFICADA / B-bis flujo discriminante VERIFICADO
+   (ranking bm25 no-informativo, el store da candidacy no relevancia) / A REFUTA -34.3pct / D
+   CAPACIDAD 100 con contrafactual 0/30 + ahorro refutado -105.66pct / C REVIVE 80/80 tras
+   remediacion gobernada / A-bis capacidad EXITO x2 (CON 20/20 vs cold-puro 0/20) + compartir en
+   AMBOS sentidos + **AHORRO INCONCLUSO** (trials split T1 -18.7 / T2 +2.8; mi guarda N=2 lo
+   declaro inconcluso en vez de promediar un numero falso). DIFERENCIADOR CON DATO: la atestacion
+   cazo la contaminacion del propio harness DOS veces (NO-GO de C + H1 de A-bis) -- lo que Engram
+   no puede. DOGFOOD x3 en vivo (Arquitecto sobrevivio 2 muertes de sesion, Asesor VS Code 1).
+   Log: personal/asesor/LOG-DECISIONES-memhib-probe.md (7 decisiones delegadas).
+
+### QUE SE VALIDO (hito nuevo, 19-jul): EL RUNTIME FUNCIONA END-TO-END
+Escalera 0-3 completada en instancia scratch aislada `D:/Agentes/runtime-test-instance` (copia de
+examples/full_runtime_instance + git propio). Escalon 1 replay (commit cc2662c), escalon 2 recorded
+(3860786), **escalon 3 TURNO REAL con Codex (b486141)**: router enruta -> prompt con spec_id ->
+stdin a Codex -> validacion schema+write-allowlist+anti-carrera -> gate -> **el runtime commitea el
+turno**. 0 reverts, gates 100pct verdes. **La vision end-state del operador (Asesor -> runtime ->
+maker gateado y atestado por turno) queda VALIDADA.** El router impone maker!=checker por
+capability, no por confianza.
+LECCIONES CRITICAS (en personal/asesor/GUIA-probar-runtime.md, corregida y pusheada):
+- **DOS VERSIONES del runtime**: el HUB es la NUEVA y mas ESTRICTA (exige `--allow-real-invoker`
+  Y el bloque `real_invoker.enabled:true` con activation_decision+approved_by+approved_at, y
+  soporta `--llm-preset`); `examples/full_runtime_instance` es VIEJA (solo el flag, solo
+  `--llm-command`). **REGLA: verificar contra el codigo de TU instancia, no contra el doc.**
+- `codex exec` NO emite JSON puro -> hace falta el wrapper `scripts/codex_turn_invoker.py`
+  (creado en la instancia scratch, REUTILIZABLE y portable al hub).
+- Ensayar SIEMPRE fuera del runtime primero. Claim activo cubriendo changed_paths. Handoff-release
+  en la misma tx. Timeout duro 120s del SubprocessInvoker.
+
+### PENDIENTES SOBERANOS DEL OPERADOR (nada bloqueado por mi)
+1. **Firmar DRAFT-DECISION-0102** (no-adopcion de peones).
+2. **Fase B de memoria** (estudio sellado citable): el pre-registro es MIO e independiente
+   (firewall intacto; el probe privado NO restringe su diseno). Su decision de hacerlo o no.
+3. **GO build N=6 + confirmar jheredia:v1** (prep 100pct lista: TASK-9401..9406 READY+reservadas,
+   F3.3 verde, runbook Julian; independiente del sello E2, solo la linea roja post-30-jul).
+4. **Promocion de la memoria hibrida al master del hub**: HOY una instancia nueva NO nace con
+   memoria (las 6 piezas viven solo en Nova-Payroll). Esta AGENDADA a Fase 3+ post-ventana-medida
+   (DECISION-0100/0096). Adelantarla = decision suya nueva. Interim: port manual (runbook U5).
+5. **Roster NOVA** (Disenador/DBA como checkers-only; frontend medido vs scaffolding): draft
+   pendiente de su OK. Analisis hecho: los especialistas valen donde NO hay gate duro (reverso
+   del hallazgo QC-barato).
+
+### PARQUEADOS (con recordatorio o nota)
+- **5to brazo** (peon local 14b/32b): DRAFT-5to-brazo-peon-mayor-14b-32b.md + **tarea agendada
+  durable para el 10-ago-2026 09:07** (`recordatorio-5to-brazo-peon-14b-32b`). Prediccion: llega a
+  ~empate, no cruza.
+- **Cadencia de actualizacion de la memoria** (cada cuanto flushea el estado): overhead vs
+  estado-en-riesgo. Nota en LOG-DECISIONES-memhib-probe.md. No abrir sin su orden.
+- **Job-lifecycle resumible atestado** (lo bueno de codex-plugin-cc sin ceder gobernanza): draft
+  ofrecido, NO autorizado aun.
+
+### CODEX-PLUGIN-CC (revisado 19-jul, openai/codex-plugin-cc)
+Es Codex dentro de Claude Code (in-process, misma maquina, auth compartida, SIN atestacion).
+CONCLUSION: **tu runtime es su equivalente ATESTADO y superior** -- convergieron en tu nucleo
+(delegar + review adversarial + gate). ADOPTAR de el solo la ERGONOMIA (job lifecycle
+status/result/cancel resumible, verbos tipados review/adversarial-review/rescue, baja friccion);
+NO adoptar el colapso de atestacion ni los hilos persistentes opacos.
+
+### SIGUIENTE PASO SUGERIDO (su eleccion)
+(1) Pipeline maker->checker multi-turno en la scratch (valida maker!=checker AUTOMATIZADO, el
+unico trozo del flujo que aun no corrio solo); (2) llevar el flujo al hub real; (3) aplicarlo a
+una feature REAL de NOVA no-reservada. Mi voto: (1) y luego (3).
+OJO al pedir features de Contabilidad: R0-fuentes/R2-c/R3-b/R4-b/R4-c/R5-c estan RESERVADAS para
+la medicion N=6 -- construirlas ahora contamina el pre-registro. El Asesor debe cazarlo en intake.
+
+---
+
+
 > Reemplaza al snapshot compartido de .claude (memory/project-state-snapshot.md), DEPRECADO para
 > el Asesor. El Asesor mantiene SU estado aqui. Historial completo en git.
 > Ultima actualizacion: 2026-07-14 ~23:09 local Madrid (CIERRE DE SESION; ver bloque TOP 15-jul arriba). Lo de abajo es historia. **SELLO ETAPA 1 EJECUTADO Y ATESTADO**
