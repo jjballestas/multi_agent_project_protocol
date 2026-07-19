@@ -62,6 +62,24 @@ arrancar TASK-0258) y E3 (el acceptance incluye el procedimiento de desarme del 
 El cambio de acceptance viene de la propia orden de aprobacion del Operador, no es una
 ampliacion silenciosa.
 
+## Cierre en curso: blocked con residuales declarados (decision O1 del Operador, 2026-07-20)
+
+El fix-loop agoto su tope (2 iteraciones, 3 veredictos NO-GO del gate E2 con 5+3
+hallazgos reales; ver los 3 artefactos ANALISTA-TASK-0257-*). Lo ENTREGADO Y VERIFICADO:
+hub armado (hooksPath), juicio staged sin bypass unstaged (F-0257-01 cerrado), borrados
+de validador/runtime/estado cubiertos (selector ACMRTD), modo acotado (~0.38s), export a
+3 tiers con hash identico, desarme E3, bypass honesto documentado. RESIDUALES DECLARADOS
+por decision del Operador (MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-
+con-correcciones):
+- RESIDUAL ESTRUCTURAL (no remediable en el hook): el borrado del PROPIO hook -- un
+  hook borrado no se ejecuta; ninguna logica interna lo alcanza. Deteccion SOLO en capa
+  CI (paso de existencia+SHA-256, plegado al acceptance de TASK-0267) y en revision de
+  diffs. El hook es la primera linea; el CI es el enforcement duro (C5 en su sitio).
+- TRANSFERIDO a TASK-0267: los escapes con hook en ejecucion (rename R100 de rutas de
+  juicio; arnes de negativos falso-pasa), que la materializacion del indice cubre.
+El cierre final de esta tarea (blocked -> in_review -> done) llega tras el aterrizaje
+de TASK-0267 y su re-juicio conjunto.
+
 ## Desarme operativo (E3)
 
 Si el hook bloquea al equipo, desconectarlo localmente en menos de 30 segundos:

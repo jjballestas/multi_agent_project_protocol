@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-flip-blocked
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: false
 requested_action: "SOLO UN FLIP DE ESTADO, sin ningun otro trabajo: task_status TASK-0257 in_progress -> blocked via submit_intent (con idempotency_key fresco), claim propio minimo (prefijo CLAIM- mayusculas) adquirido y liberado en la misma tx, commit con trailers y push. Motivo del blocked: tope del fix-loop agotado (3er NO-GO), escalada al Operador en curso (MSG-...-ESCALADA-0257-tope-agotado-decision). NO remediar nada de TASK-0257: el fix-loop esta DETENIDO por regla del checker hasta directiva explicita del Operador."
 created_at: 2026-07-19

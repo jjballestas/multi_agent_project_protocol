@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decis
 from: Arquitecto
 to: Operador
 type: QUESTION
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 requested_action: "Decidir el cierre del fix-loop de TASK-0257 (tope 2/2 agotado, 3er NO-GO): O1 recomendada = 0257 queda blocked, el residuo F-0257-04 se transfiere al acceptance de TASK-0267 (hook v2 por materializacion) y autorizas GO de 0267 YA; O2 = autorizar iteracion 3 excepcional del parche actual; O3 = otra cosa que dispongas. Responder por mailbox."

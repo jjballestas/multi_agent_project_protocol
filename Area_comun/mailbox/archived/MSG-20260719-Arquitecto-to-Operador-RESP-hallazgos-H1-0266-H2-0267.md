@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Operador-RESP-hallazgos-H1-0266-H2-0267
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-19
 context_refs:

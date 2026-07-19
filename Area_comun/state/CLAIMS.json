@@ -136,6 +136,31 @@
             "updated_at": "2026-07-19T20:26:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-hygiene-o1-20260720",
+            "expires_at": "2026-07-20T00:16:00Z",
+            "notes": "Higiene post-decision O1: 6 consumidos del ciclo de escalada a archived (2 lotes de 3)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hygiene-o1-20260720",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-flip-blocked.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Codex-ACTION-TASK-0257-flip-blocked.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmado.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-ESCALADA-0257-tope-agotado-decision.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-RESP-enmienda-E4-E5-unidad-hermana.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-RESP-enmienda-E4-E5-unidad-hermana.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-RESP-hallazgos-H1-0266-H2-0267.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-RESP-hallazgos-H1-0266-H2-0267.md"
+            ],
+            "started_at": "2026-07-19T23:16:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-19T23:16:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-mailbox-rejfinal-20260719",
             "expires_at": "2026-07-19T21:09:00Z",
             "notes": "Re-juicio final iter2 al Analista + higiene de 3 consumidos del ciclo iter2",
@@ -170,6 +195,21 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-REV0257-20260719",
             "updated_at": "2026-07-19T18:11:16Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-o1-ejecucion-20260720",
+            "expires_at": "2026-07-20T00:13:33Z",
+            "notes": "Ejecucion O1 del Operador: residuales declarados en 0257 + acceptance de 0267 ampliado (transferencia F-0257-04, CI existencia+SHA plegada, limite C1 declarado)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-o1-ejecucion-20260720"
+            ],
+            "started_at": "2026-07-19T23:13:33Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-19T23:13:33Z"
         },
         {
             "claim_id": "CLAIM-arq-prune-fix-20260719",

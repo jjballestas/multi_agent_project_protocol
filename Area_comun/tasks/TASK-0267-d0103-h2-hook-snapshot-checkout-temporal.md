@@ -22,6 +22,10 @@ intake:
     - La limpieza temporal es robusta (el checkout/worktree se elimina siempre, incluso en fallo; sin residuos en .git/worktrees).
     - Si la materializacion resulta inviable por coste, fallback documentado y aprobado en el propio handoff, acotar la exigencia de limpieza SOLO a las rutas del validador (scripts/, runtime/, .githooks/), nunca a todo Area_comun/; el racional y la perdida de correccion quedan declarados.
     - Espejo en el export born-operational (la instancia nueva nace con el hook v2) y compatibilidad con lo que TASK-0266 propaga.
+    - TRANSFERIDO del cierre de TASK-0257 (decision O1 del Operador 2026-07-20), los escapes con hook EN EJECUCION quedan cubiertos por la materializacion, en particular el rename R100 de una ruta gobernada o del codigo del juicio (el juicio corre sobre el estado materializado completo, no sobre un diff de nombres), con negativo permanente del caso rename.
+    - El arnes de negativos se corrige para invocar el flujo REAL de git commit (el actual invoca el hook con sh y confunde archivo-inexistente con rechazo, falso-pasa cazado por el checker).
+    - C2 del Operador (plegada aqui por acoplamiento de hash), paso de CI en .github/workflows/validate.yml que verifica que .githooks/pre-commit EXISTE en el clon y que su SHA-256 coincide con el pineado; el hash esperado se actualiza en esta MISMA entrega al del hook v2 final. Racional del plegado: una unidad separada pinnearia un hash obsoleto o esperaria a esta de todos modos.
+    - LIMITE DECLARADO (correccion C1 del Operador, residual estructural de 0257), esta unidad NO cubre el borrado del PROPIO hook en LOCAL -- un hook borrado no se ejecuta y ninguna logica interna lo alcanza; su deteccion vive SOLO en la capa CI (el paso de existencia+hash) y en la revision de diffs. Queda declarado en el handoff y en la doc del hook.
   verification_cmd:
     - Prueba de concurrencia en sandbox, unstaged ajeno en Area_comun/ + commit propio -> exit 0; estado staged roto -> exit 1; mutacion unstaged del validador -> veredicto NO cambia
     - Medicion de coste del hook completo (frio/caliente) declarada en el handoff
@@ -31,6 +35,8 @@ intake:
   scope_routes:
     - .githooks/pre-commit
     - scripts/new_instance.py
+    - scripts/test_precommit_hook.py
+    - .github/workflows/validate.yml
     - examples/
   out_of_scope:
     - runtime/vcs.py y el no-verify del runtime - FUERA (es H1, plegado en TASK-0266).
@@ -50,8 +56,10 @@ resuelto por el Arquitecto como UNIDAD NUEVA para mantener puro el fix-loop de 0
 nombraba como via preferente; la equivalencia de limpieza fue el atajo que creo el
 mutex. PRIORIDAD ALTA por urgencia operativa: mientras el hook actual siga armado, la
 coordinacion de todos los agentes depende de que ningun otro tenga trabajo en vuelo.
-Secuencia: arranca en cuanto el gate E2 de 0257 quede GO (comparte .githooks/pre-commit
-con su scope; no puede solaparse con el fix-loop activo). Valvula interina si el mutex
-vuelve a morder ANTES de esta unidad: desarme E3 temporal (git config --unset
-core.hooksPath) declarado por mailbox y re-arme inmediato tras el commit bloqueado --
-es exactamente el caso de emergencia que E3 contempla.
+SECUENCIA ACTUALIZADA (decision O1 del Operador 2026-07-20): el fix-loop de 0257 agoto
+su tope (3er NO-GO) y 0257 quedo blocked con residuales declarados; esta unidad recibe
+GO INMEDIATO con la transferencia de arriba. El cierre final de 0257 llega tras el
+aterrizaje de esta unidad y su re-juicio. Valvula interina si el mutex vuelve a morder
+ANTES de esta unidad: desarme E3 temporal (git config --unset core.hooksPath) declarado
+por mailbox y re-arme inmediato tras el commit bloqueado -- es exactamente el caso de
+emergencia que E3 contempla.

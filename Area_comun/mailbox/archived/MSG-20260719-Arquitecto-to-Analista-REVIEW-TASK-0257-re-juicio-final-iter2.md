@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-final
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio FINAL de TASK-0257 (iteracion 2 de 2, tope del fix-loop) en CLON LIMPIO de HEAD (f64dcbd): verificar remediacion de F-0257-03 + regresion completa de F-0257-01/02 y vectores PASA. Veredicto GO / NO-GO por mailbox. SIN PRODUCTO EN ALCANCE (solo hub). Cualquier fallo nuevo agota el tope y escala al Operador."

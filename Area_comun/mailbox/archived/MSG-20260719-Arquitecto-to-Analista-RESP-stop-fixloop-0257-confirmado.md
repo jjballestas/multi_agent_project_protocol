@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Analista-RESP-stop-fixloop-0257-confirmad
 from: Arquitecto
 to: Analista
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-19
 context_refs:
