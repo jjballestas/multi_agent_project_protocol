@@ -385,6 +385,30 @@ funcionar:
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_collaboration_state.ps1
 ```
 
+## 8.1 Activar el hook de validacion local
+
+Cada clon debe cablear una vez el hook versionado (Git no versiona la configuracion
+local):
+
+```powershell
+git config core.hooksPath .githooks
+```
+
+Compruebalo con `git config core.hooksPath`; debe devolver `.githooks`. El
+`pre-commit` valida el snapshot staged, conserva los gates locales existentes y
+rechaza el commit si `validate_collaboration_state.py` falla. El hook es una
+primera linea de defensa: `git commit --no-verify` existe, por lo que el enforcement
+duro sigue siendo CI y los gates desde un clon limpio.
+
+Desarme reversible en menos de 30 segundos si el hook bloquea al equipo:
+
+```powershell
+git config --unset core.hooksPath
+```
+
+Para rearmarlo, ejecuta de nuevo `git config core.hooksPath .githooks`. El desarme
+local no debilita el enforcement duro de CI.
+
 ## 9. Validar una instancia minima de ejemplo
 
 Desde la raiz de esta plantilla:

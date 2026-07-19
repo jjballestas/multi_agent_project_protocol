@@ -80,10 +80,12 @@ GATE_SCRIPT_FILES = [
     "measure_context_cost.py",
     "prune_state.py",
     "prune_state.ps1",
+    "generate_human_guide.py",
     "keygen_agent.py",
 ]
 
 COPIED_DIRS = [
+    ".githooks",
     "Area_comun/protocol",
     "Area_comun/mailbox/open",
     "Area_comun/mailbox/answered",
@@ -867,6 +869,11 @@ def main() -> int:
         render_templates(source, gov, replacements)
         render_remaining_files(gov, replacements)
         create_personal_areas(gov, args)
+        # Every tier ships the local hook, so every tier also needs its gate scripts.
+        copy_gate_scripts(source, gov)
+        # The Python validator imports the neutral runtime replay/event modules even
+        # when event state is disabled, so coordination instances need the library.
+        copy_runtime_dir(source, gov)
         ensure_protocol_secrets_gitignored(target)
         if args.tier == "runtime":
             copy_runtime_tier_files(source, target, gov)
@@ -888,6 +895,7 @@ def main() -> int:
 
     print(f"OK: created protocol instance at {target}")
     print(f"Protocol version: {replacements['PROTOCOL_VERSION']}")
+    print("Enable the validation hook in this clone: git config core.hooksPath .githooks")
     return 0
 
 

@@ -21,7 +21,7 @@
         {
             "id": "TASK-0257",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
         },
         {

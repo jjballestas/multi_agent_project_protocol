@@ -1,5 +1,21 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-TASK-0257-Codex-implementation",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/"
+            ],
+            "task_id": "TASK-0257"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

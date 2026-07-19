@@ -55,6 +55,26 @@
             "updated_at": "2026-07-17T13:38:28Z"
         },
         {
+            "claim_id": "CLAIM-TASK-0257-Codex-implementation",
+            "expires_at": "2026-07-19T19:50:02Z",
+            "notes": "Implement TASK-0257 harness and born-operational export.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-TASK-0257-Codex-implementation",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                ".githooks/pre-commit",
+                "scripts/new_instance.py",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/"
+            ],
+            "started_at": "2026-07-19T17:50:02Z",
+            "status": "active",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T17:50:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-d0103-ready-20260719",
             "expires_at": "2026-07-19T19:36:47Z",
             "notes": "OK del Operador 2026-07-19: enmiendas E1-E3 a la 0103 + promocion proposed->ready de TASK-0257..0265",

@@ -1,10 +1,35 @@
 #!/usr/bin/env sh
+set -u
+
 python scripts/prune_state.py --check
 status=$?
 if [ "$status" -ne 0 ]; then
   echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
   exit "$status"
 fi
+
+# The validator reads files rather than Git blobs. To validate the staged
+# collaboration snapshot without a costly full-repository export, reject only
+# unstaged/untracked changes in routes the validator governs, then validate the
+# working tree (which is byte-identical to the index for those routes). Dirty
+# product/personal routes remain allowed and cannot create collaboration-state
+# false failures. Stage or stash a governed dirty route before committing.
+governed_routes="Area_comun runtime/state protocol.config.json protocol.config.template.json AGENTS.md AGENTS.template.md"
+if ! git diff --quiet -- $governed_routes; then
+  echo "unstaged changes in governed routes; stage or stash them so the staged snapshot is unambiguous" >&2
+  exit 1
+fi
+for path in $(git ls-files --others --exclude-standard -- $governed_routes); do
+  echo "untracked governed path blocks snapshot validation: $path" >&2
+  exit 1
+done
+python scripts/validate_collaboration_state.py --root .
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "collaboration state in staged snapshot is invalid; commit rejected" >&2
+  exit "$status"
+fi
+
 python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
 status=$?
 if [ "$status" -ne 0 ]; then
