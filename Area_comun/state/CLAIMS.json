@@ -240,6 +240,20 @@
             "updated_at": "2026-07-20T23:39:40Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3-memory",
+            "expires_at": "2026-07-21T00:05:39Z",
+            "notes": "Persist TASK-0280 iteration 3 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-iter3-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T23:45:39Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T23:45:39Z"
+        },
+        {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3-msgfix",
             "expires_at": "2026-07-21T00:12:41Z",
             "notes": "Add required compact-mailbox question field after validator gate.",
