@@ -162,9 +162,28 @@
                 "scripts/test_anthropic_checker_harness.py"
             ],
             "started_at": "2026-07-20T02:05:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0271",
             "updated_at": "2026-07-20T02:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-delivery",
+            "expires_at": "2026-07-20T10:35:00Z",
+            "notes": "Atomic TASK-0271 in_review delivery and release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0271-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0271-migracion-checker.md"
+            ],
+            "started_at": "2026-07-20T02:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T02:35:00Z"
         },
         {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271-memory",
@@ -176,7 +195,7 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-20T02:25:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0271",
             "updated_at": "2026-07-20T02:25:00Z"
         },
@@ -290,6 +309,22 @@
             "status": "released",
             "task_id": "TASK-0267",
             "updated_at": "2026-07-20T02:00:03Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0271-20260720",
+            "expires_at": "2026-07-20T03:15:00Z",
+            "notes": "Ratificacion 0271 (reviewer Arquitecto): diff verificado (provider param + rollback + STOP_JOB exacto), CLI real exit 0; cutover supervisado a continuacion",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0271-20260720"
+            ],
+            "started_at": "2026-07-20T02:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T02:15:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reflip0257-b-20260719",

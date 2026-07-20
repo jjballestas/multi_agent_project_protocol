@@ -432,7 +432,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Arquitecto",
-            "status": "in_progress",
+            "status": "review_approved",
             "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo",
             "type": "infra"
         },

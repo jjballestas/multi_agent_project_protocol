@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "868585110212dd8fc958e39f8992c0f33ad699f03511cc141bc5475f32aaf2eb",
+  "canonical_hash": "97780e69fabd4231637e61655b2c6b865044d064e289076dedea43f90a7f9876",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -659,6 +659,9 @@
       "CLAIM-20260720-Codex-TASK-0267-F01-F02-status": 1,
       "CLAIM-20260720-Codex-TASK-0270": 1,
       "CLAIM-20260720-Codex-TASK-0270-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0271": 1,
+      "CLAIM-20260720-Codex-TASK-0271-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0271-memory": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -722,6 +725,7 @@
       "CLAIM-arq-o1-ejecucion-20260720": 1,
       "CLAIM-arq-prune-fix-20260719": 1,
       "CLAIM-arq-ratifica0267-20260720": 1,
+      "CLAIM-arq-ratifica0271-20260720": 1,
       "CLAIM-arq-reflip0257-20260719": 1,
       "CLAIM-arq-reflip0257-b-20260719": 1,
       "CLAIM-arq-reject0257-20260719": 1,
@@ -1986,7 +1990,7 @@
       "TASK-0268": 3,
       "TASK-0269": 3,
       "TASK-0270": 7,
-      "TASK-0271": 5,
+      "TASK-0271": 9,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2009,7 +2013,7 @@
       "protocol-prune": 11,
       "protocol-state": 1
     },
-    "events_applied": 4379,
+    "events_applied": 4387,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3690,7 +3694,12 @@
       "codex:task0270:main-claim-release:20260720T0425Z": 5037,
       "codex:task0270:ready-to-in-progress:20260720T0340Z": 5034,
       "codex:task0271:claim:20260720T020500Z": 5044,
+      "codex:task0271:delivery-claim:20260720T023500Z": 5051,
+      "codex:task0271:delivery-release:20260720T023500Z": 5055,
+      "codex:task0271:in-progress-to-in-review:20260720T023500Z": 5052,
+      "codex:task0271:main-release:20260720T023500Z": 5053,
       "codex:task0271:memory-claim:20260720T022500Z": 5047,
+      "codex:task0271:memory-release:20260720T023500Z": 5054,
       "codex:task0271:ready-to-in-progress:20260720T020500Z": 5045,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -4040,6 +4049,7 @@
       "intent:Arquitecto:claim:37eb3624fb8246a45d760ad8169d8d1ccb5627b95e82cb86be9d2ac3553293f4": 4796,
       "intent:Arquitecto:claim:3945d1ba6a65fa1690d91578b89051cdaf6bf2565cf6537495ac54c457636b05": 4114,
       "intent:Arquitecto:claim:39acb7d4134ed93193ad55f3d1faf99044dbda7236cb8a8cf4f490581e520bec": 4741,
+      "intent:Arquitecto:claim:39ed568b296e3b936e940a1d399763425e752a352a5369328ef7a36eb9ed5905": 5056,
       "intent:Arquitecto:claim:39fb588b68ba847d50de8ecbec50d2511f284d0a2915eb3ed91730810b1e1204": 2667,
       "intent:Arquitecto:claim:3a81e9b2bd26ba0947a659ea071dd6f7f37b3e19d3d0dd5494086776c7976ef2": 2983,
       "intent:Arquitecto:claim:3b37baeee1d87629eefc78da0c70adbe45ac7036508d48e9602fde9d3ba1afca": 4241,
@@ -4429,6 +4439,7 @@
       "intent:Arquitecto:claim:e0f6737f79551c6bb7a526ae7b34aa48a25eae1634232a2d77180c695fd442f3": 4654,
       "intent:Arquitecto:claim:e14c8b602a2486568f54fef9e58223455753011eeb0e6652dcc931923a436216": 5021,
       "intent:Arquitecto:claim:e1dd0bd2ee1cae43b884dc73d11de8b9b48ccd3b1f5c7c2e547225e507886a65": 2982,
+      "intent:Arquitecto:claim:e2a790b5e040e04edc85a0d64e1efdcbdf96568bcd4f2e5b057678daa8bf304d": 5058,
       "intent:Arquitecto:claim:e3cf8c498003f7c3b5b24a722fbd9671ca36a0dc2271f333c79c350ab0f20d08": 3244,
       "intent:Arquitecto:claim:e486c6d2980e52e465e94681b7957a545c881a469cb2a490384cdc393649d1a3": 3068,
       "intent:Arquitecto:claim:e52065078584ecead2741eecb5cb1472f987f1c601d3b3323cb34b413f09c306": 4327,
@@ -6355,6 +6366,7 @@
       "prune-state:2026-07-19T23:50:54Z:claim-release": 5000,
       "prune-state:2026-07-19T23:50:54Z:protocol-prune": 4999,
       "ratifica-0267-informal-20260720T0200": 5049,
+      "ratifica-0271-20260720T0215": 5057,
       "ready-TASK-0268-e6-20260720": 5003,
       "ready-TASK-0269-e6-20260720": 5005,
       "ready-TASK-0270-20260720": 5009,
@@ -6392,5 +6404,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5050
+  "up_to_seq": 5058
 }
