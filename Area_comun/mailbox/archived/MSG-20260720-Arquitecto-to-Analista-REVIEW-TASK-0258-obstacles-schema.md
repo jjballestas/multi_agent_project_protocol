@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-obstacles-schem
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0258 (bloque obstacles[] en runtime/turn_schema.json) en CLON LIMPIO de HEAD: campo opcional con required [what, root_cause, resolution, recurrence_risk] y enum [low, medium, high], additionalProperties false en el item, SemVer minor del schema (contrato TASK-0053), suites runtime_turn_cases verdes (poblado valido / vacio valido / item malformado invalido), y forma CANONICA identica a la que 0261/0262 replicaran. Veredicto GO/NO-GO por mailbox. SIN PRODUCTO EN ALCANCE."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio del diseno v0.2 (personal/asesor/DISENO-medicion-grafo-memoria-hibrida-v0.2.md, iteracion 1 de 2 del fix-loop de diseno) contra TU veredicto (ANALISTA-OPS-diseno-grafo-memoria-hibrida-veredicto.md): verificar que v0.2 cierra brazo B, adopta el manifest literal N=78 con hash, grading/umbrales ex-ante, matriz R5 ampliada y firewall PII de TODAS las superficies. Trabajo de LECTURA. Veredicto por mailbox. La EJECUCION sigue retenida hasta el cierre de la tanda 0103."

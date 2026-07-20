@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibr
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "REVISION ADVERSARIAL DE DISENO (trabajo de LECTURA, no toca el harness ni el hub): atacar personal/asesor/DISENO-medicion-grafo-memoria-hibrida-v0.1.md como atacas el codigo, con los 5 puntos de apriete del Operador + fijar tamano/seleccion exacta del corpus + sellar el set de verificacion EX-ANTE + estudiar el repo externo github.com/DeusData/codebase-memory-mcp con las advertencias del encargo. Veredicto por mailbox del hub. SIN PRODUCTO EN ALCANCE. La EJECUCION del experimento NO arranca con tu veredicto: queda retenida hasta el cierre de la tanda 0103."

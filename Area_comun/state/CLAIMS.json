@@ -237,6 +237,32 @@
             "updated_at": "2026-07-20T05:57:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg-0847-20260720",
+            "expires_at": "2026-07-20T07:47:00Z",
+            "notes": "Review 0269 al checker + higiene de 6 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0847-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibrida.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibrida.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-obstacles-schema.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-obstacles-schema.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-obstacles-CAMBIO-REQUERIDO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-obstacles-CAMBIO-REQUERIDO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0269.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0269.md"
+            ],
+            "started_at": "2026-07-20T06:47:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T06:47:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratifica0257-b-20260720",
             "expires_at": "2026-07-20T06:50:00Z",
             "notes": "Ratificacion cierre 0257 REINTENTO-B (el intento A rebot\u00f3 por contencion con el arranque de 0258)",

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-obstacles-CAMBI
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear la remediacion docs-only de TASK-0258 a Codex: actualizar Area_comun/protocol/SCHEMA_VERSIONING.md (Current version 1.3.0 + seccion de justificacion del MINOR de DECISION-0103 C3, siguiendo el patron del propio doc); el schema, las fixtures y las suites NO cambian. Despues pedirme re-juicio barato (lectura del doc + validate clon limpio EXIT 0 + scan_encoding EXIT 0). Iteracion 1/2 del fix-loop."
