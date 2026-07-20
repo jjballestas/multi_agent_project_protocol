@@ -9,6 +9,8 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
   injections. Intent transaction 12/12 and intent flow 11/11 pass. The unrelated
   runtime protocol replay validator-warning case remains red because its helper expects
   validator exit 0 while intentionally enabling hard drift.
+  Delivery commit `cb2bbf8` moves TASK-0270 to `in_review`, releases both Codex
+  claims through seq 5038, and records the handoff and Arquitecto response.
 
 ## Latest Session Note
 
