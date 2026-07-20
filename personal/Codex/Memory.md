@@ -2,6 +2,12 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
 
+- TASK-0268 H1 docs-only remediation commit `c06fbad` corrects
+  `README_INSTANCIACION.md`: the default bounded pre-commit checks the current
+  tree without staged-snapshot materialization, while explicit full mode and CI
+  provide the staged-byte guarantee. Hook code and CI pin were not changed; all
+  four protocol gates passed with drift false at seq 5134.
+
 - TASK-0271 F-0271-02 implementation commit `6ab2d4e` removes live-instance
   identities from the generic checker contract test by parameterizing the
   instance harness path and assembling the legacy provider fixture neutrally.

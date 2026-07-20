@@ -63,6 +63,20 @@
             "updated_at": "2026-07-20T04:30:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1-memory",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Persist TASK-0268 H1 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02",
             "expires_at": "2026-07-20T11:55:00Z",
             "notes": "Remediate F-0271-02 neutrality and perform ratified TASK-0270 done flip.",
