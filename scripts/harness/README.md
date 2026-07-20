@@ -122,8 +122,12 @@ preserve old behavior:
   an ENCLOSING instance's config -- check that line on first launch.
 - Every agent exec ends with exactly one structured line: `OUTCOME: confirmed`,
   `OUTCOME: transient`, or `OUTCOME: definitive`. Exact token equality is authoritative,
-  then process exit code, then evidence attributable to the invoked peer. Free-text regexes
-  are legacy fallback only and never override a token, non-zero exit, or own evidence.
+  and the token must be the last non-empty transcript line. Earlier quoted/example tokens
+  do not count. Precedence is terminal token, process exit code, then peer evidence from a
+  signed `runtime/state/events.jsonl` event whose `actor` equals the invoked peer and whose
+  `seq` is newer than the pre-exec ledger sequence. Git author names are never attribution
+  evidence. If no such event exists, this layer does not confirm. Free-text regexes are
+  legacy fallback only and never override a token, non-zero exit, or signed own evidence.
 - `seen.json` is written only after confirmed work or a definitive, principled negative.
   Transient and unconfirmed aborts stay
   unseen and use `retry.json`: three attempts by default, 30-second backoff, then a
@@ -131,6 +135,9 @@ preserve old behavior:
   the retry budget.
 - Transient rollback snapshots the pre-exec index and worktree separately, including
   renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.
+  Both snapshot commands must succeed before the agent starts. Rollback rechecks HEAD
+  immediately before and after `reset --hard`; movement defers restoration instead of
+  applying stale patches.
 - Retryable causes are temporary coordination conditions: red pre-gate, another owner's
   active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
   left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,

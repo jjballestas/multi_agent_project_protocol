@@ -22,9 +22,11 @@ def main() -> int:
     sandbox = Path(tempfile.mkdtemp(prefix="mailbox-retry-"))
     try:
         (sandbox / "Area_comun/mailbox/open").mkdir(parents=True)
+        (sandbox / "runtime/state").mkdir(parents=True)
         (sandbox / "scripts/harness/prompts").mkdir(parents=True)
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
+        (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
@@ -44,9 +46,8 @@ def main() -> int:
             "if($count -eq 1){\n"
             "  Set-Content -Path (Join-Path $root 'peer.txt') -Value peer -Encoding ASCII\n"
             "  git add peer.txt\n"
-            "  git -c user.name=OtherPeer -c user.email=peer@example.invalid commit -m 'peer concurrent commit' | Out-Null\n"
-            "  Write-Output 'transient withdrawal quoting NO-GO from the intake'\n"
-            "  Write-Output 'OUTCOME: transient'\n"
+            "  git commit -m 'uniform-author concurrent commit' | Out-Null\n"
+            "  Write-Output 'no work was applied'\n"
             "  exit 0\n"
             "}\n"
             "if($count -eq 2){\n"
@@ -61,15 +62,16 @@ def main() -> int:
             "$response=Join-Path $root 'Area_comun/mailbox/open/MSG-response.md'\n"
             "Set-Content -Path $response -Value 'response confirmed' -Encoding ASCII\n"
             "git add $response; git commit -m 'test confirmed response' | Out-Null\n"
-            "Write-Output 'status: in_review; obstacle claim ajeno active claim was resolved'\n"
-            "Write-Output 'OUTCOME: confirmed'\n",
+            "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"}}'\n"
+            "Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
+            "Write-Output 'status: in_review'\n",
             encoding="ascii",
         )
         fake = sandbox / "fake-agent.cmd"
         fake.write_text("@powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"%~dp0fake-agent-core.ps1\"\n", encoding="ascii")
         run("git", "init", cwd=sandbox)
         run("git", "config", "user.email", "retry@example.invalid", cwd=sandbox)
-        run("git", "config", "user.name", "Retry Test", cwd=sandbox)
+        run("git", "config", "user.name", "TestPeer", cwd=sandbox)
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
@@ -98,10 +100,11 @@ def main() -> int:
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
         assert predirty_status.startswith(" M "), f"pre-dirty index/worktree state was not restored: {predirty_status!r}"
-        assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=1" in log
+        assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
+        assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "outcome=confirmed" in log
         assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 3
-        print("mailbox retry cases: PASS (transient abort -> rollback -> automatic confirmed retry)")
+        print("mailbox retry cases: PASS (uniform author rejected -> rollback -> signed-ledger confirmation)")
         return 0
     finally:
         shutil.rmtree(sandbox, ignore_errors=True)

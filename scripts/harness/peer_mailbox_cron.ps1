@@ -427,15 +427,32 @@ function Write-RetryState {
 }
 
 function Get-OwnEvidence {
-    param([string]$HeadBefore)
-    $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
-    if ($headAfter -and $headAfter -ne $HeadBefore) {
-        foreach ($commit in @(& git -C $Root rev-list "$HeadBefore..$headAfter" 2>$null)) {
-            $author = (& git -C $Root show -s --format=%an $commit 2>$null | Select-Object -First 1)
-            if ($author -and $author.Trim() -ieq $PeerId) { return $true }
-        }
+    param([long]$LedgerSeqBefore)
+    $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
+    if (-not (Test-Path -LiteralPath $eventsPath)) { return $false }
+    foreach ($line in @(Get-Content -LiteralPath $eventsPath -Encoding UTF8)) {
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try { $event = $line | ConvertFrom-Json } catch { continue }
+        if ([long]$event.seq -le $LedgerSeqBefore) { continue }
+        if ([string]$event.actor -cne $PeerId) { continue }
+        if ([string]$event.actor_auth.method -cne "ed25519") { continue }
+        if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.keyid)) { continue }
+        if ([string]::IsNullOrWhiteSpace([string]$event.actor_auth.sig)) { continue }
+        return $true
     }
     return $false
+}
+
+function Get-LedgerSequence {
+    $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
+    if (-not (Test-Path -LiteralPath $eventsPath)) { return [long]0 }
+    $lastSeq = [long]0
+    foreach ($line in @(Get-Content -LiteralPath $eventsPath -Encoding UTF8)) {
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try { $event = $line | ConvertFrom-Json } catch { continue }
+        if ([long]$event.seq -gt $lastSeq) { $lastSeq = [long]$event.seq }
+    }
+    return $lastSeq
 }
 
 function Get-StagedResidueState {
@@ -461,15 +478,20 @@ function Restore-TransientExecResidue {
         $full = Join-Path $Root $path
         if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
     }
+    $headBeforeReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    if ($headBeforeReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_before_reset"; return }
     & git -C $Root reset --hard $HeadBefore 2>$null | Out-Null
+    if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=reset_failed"; return }
+    $headAfterReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    if ($headAfterReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_after_reset"; return }
     if ((Test-Path $IndexPatch) -and (Get-Item $IndexPatch).Length -gt 0) { & git -C $Root apply --index --binary $IndexPatch 2>$null }
     if ((Test-Path $WorktreePatch) -and (Get-Item $WorktreePatch).Length -gt 0) { & git -C $Root apply --binary $WorktreePatch 2>$null }
 }
 
 function Get-ExecOutcomeClass {
     param([int]$ExitCode, [string]$Output, [bool]$OwnEvidence)
-    $tokens = @([regex]::Matches($Output, '(?m)^OUTCOME: (confirmed|transient|definitive)\r?$') | ForEach-Object { $_.Groups[1].Value })
-    if ($tokens.Count -gt 0) { return $tokens[-1] }
+    $lastLine = @($Output -split "\r?\n" | Where-Object { $_ -notmatch '^\s*$' } | Select-Object -Last 1)
+    if ($lastLine.Count -eq 1 -and $lastLine[0] -cmatch '^OUTCOME: (confirmed|transient|definitive)$') { return $Matches[1] }
     if ($ExitCode -ne 0) { return "transient" }
     if ($OwnEvidence) { return "confirmed" }
     if ($Output -match '(?im)(NO-GO|change_required|negativa principiada|rechazo por alcance|out.of.scope|fuera de alcance)') {
@@ -586,10 +608,21 @@ function Invoke-PeerForMessage {
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
     $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    $ledgerSeqBefore = Get-LedgerSequence
     $indexPatch = Join-Path $RunsDir "$stamp-$safeName.before-index.patch"
     $worktreePatch = Join-Path $RunsDir "$stamp-$safeName.before-worktree.patch"
     & git -C $Root diff --cached --binary --output=$indexPatch
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "RETRY_DEFER reason=index_snapshot_failed message=$($Message.Name)"
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        return
+    }
     & git -C $Root diff --binary --output=$worktreePatch
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "RETRY_DEFER reason=worktree_snapshot_failed message=$($Message.Name)"
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        return
+    }
     $untrackedBeforeRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
     $untrackedBefore = @($untrackedBeforeRaw -split [char]0 | Where-Object { $_ })
 
@@ -618,7 +651,7 @@ function Invoke-PeerForMessage {
         $output = ""
         if (Test-Path -LiteralPath $stdoutPath) { $output += Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
         if (Test-Path -LiteralPath $stderrPath) { $output += "`n" + (Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8) }
-        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -OwnEvidence (Get-OwnEvidence -HeadBefore $headBefore)
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -OwnEvidence (Get-OwnEvidence -LedgerSeqBefore $ledgerSeqBefore)
         Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
         $signature = Get-MessageSignature -Message $Message
         if ($outcome -in @("confirmed", "definitive")) {
