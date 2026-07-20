@@ -182,6 +182,26 @@
             "updated_at": "2026-07-20T12:39:40Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2",
+            "expires_at": "2026-07-20T21:44:03Z",
+            "notes": "TASK-0272 remediation iteration 2: signed-ledger evidence attribution, terminal token, snapshot hardening, uniform-author tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:44:03Z",
+            "status": "active",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:44:03Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",
             "expires_at": "2026-07-20T19:15:00Z",
             "notes": "Adapt permanent harness contract tests to thin live wrappers over the born-operational generic runner.",
@@ -254,9 +274,23 @@
                 "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
             ],
             "started_at": "2026-07-20T13:39:19Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0273",
             "updated_at": "2026-07-20T13:39:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-done-md-repair",
+            "expires_at": "2026-07-20T21:42:29Z",
+            "notes": "Repair task markdown status after interrupted materialization following authoritative done event.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-done-md-repair",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
+            ],
+            "started_at": "2026-07-20T13:42:29Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T13:42:29Z"
         },
         {
             "claim_id": "CLAIM-20260720-Codex-TASK-0273-final-memory",
