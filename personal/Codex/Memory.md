@@ -2,6 +2,16 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
 
+- TASK-0268 implementation commit `b37e638` makes every local commit run the
+  bounded prune/guide checks by default, enables the unchanged staged-snapshot
+  full validator only through `HOOK_FULL=1` or `git config hook.full true`,
+  documents the CI/pre-push cost split, updates the born-operational copy and CI
+  hook pin to SHA-256
+  `4dae776c797d4db68a2b1a217cbe1686dbe7d96f07e693ef69a6ac2baf1c3bc5`,
+  and adds permanent bounded/full regressions. Measured local default was 0.449s
+  and explicit full mode 59.891s. Root neutrality remains red only on the
+  pre-existing TASK-0271 harness identity fixtures.
+
 - TASK-0271 implementation commit `6c8a0d8` migrates the live Analista harness
   default and the born-operational generic reviewer path to Anthropic Claude Code
   print mode over STDIN, retains an explicit legacy Codex rollback provider, and
@@ -3557,3 +3567,8 @@ python -c "from pathlib import Path; from runtime.protocol_replay import protoco
 
 If a Windows sandbox tempfile test fails with `WinError 5` / `PermissionError`, remember the known inherited-ACL
 issue. Re-run only the necessary evidence path and record the caveat.
+# 2026-07-20 - TASK-0271 F-0271-01
+
+- Commit `d92e42e` makes the Anthropic checker invoker Windows-safe: `.ps1` shims run through `powershell.exe`, `.cmd`/`.bat` through `cmd.exe`, and native applications directly.
+- The generic born-operational harness and live Analista mirror share the fix; legacy Codex uses the same dispatch.
+- Real generic-harness exec against `C:/Users/johnb/AppData/Roaming/npm/claude.ps1` exited 0 and emitted `HARNESS_WINDOWS_SHIM_OK` with redirected STDIN/stdout/stderr.
