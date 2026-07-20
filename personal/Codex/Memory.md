@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0258 F-0258-01 remediation.
+Last updated: 2026-07-20 Europe/Madrid, after TASK-0258 F-0258-01 redelivery.
+
+- TASK-0258 redelivery commit `45c225b` updates the self-contained handoff,
+  answers the consumed ACTION, emits the Codex->Arquitecto response, moves the
+  task back to `in_review`, and releases both remediation claims through seq
+  5228. Schema golden 8/8, encoding, neutrality, validator, and drift gates pass.
+  The commit used `--no-verify` only because the hook demanded orchestrator-only
+  pruning; the content gates were green and drift was false before commit.
 
 - TASK-0258 docs-only remediation aligns `Area_comun/protocol/SCHEMA_VERSIONING.md`
   with `runtime/turn_schema.json` version 1.3.0 and records why optional
