@@ -27,144 +27,33 @@
             "updated_at": "2026-07-03T09:01:07Z"
         },
         {
-            "claim_id": "CLAIM-20260720-072316-prune-arquitecto",
+            "claim_id": "CLAIM-20260720-101012-prune-arquitecto",
             "expires_at": "2026-07-20",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json"
+                "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-07-20T07:23:16Z",
+            "started_at": "2026-07-20T10:10:12Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-07-20T07:23:16Z"
+            "updated_at": "2026-07-20T10:10:12Z"
         },
         {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0258-F01",
-            "expires_at": "2026-07-20T11:00:00Z",
-            "notes": "Remediate F-0258-01 docs-only SemVer contract and redeliver.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258-F01",
-                "Area_comun/state/TASK_INDEX.json#TASK-0258",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
-                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
-                "Area_comun/protocol/SCHEMA_VERSIONING.md"
-            ],
-            "started_at": "2026-07-20T09:00:00Z",
-            "status": "released",
-            "task_id": "TASK-0258",
-            "updated_at": "2026-07-20T09:00:00Z"
-        },
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0258-F01-delivery",
-            "expires_at": "2026-07-20T17:54:23Z",
-            "notes": "TASK-0258 F-0258-01 redelivery, response, status transition and release.",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258-F01-delivery",
-                "Area_comun/state/TASK_INDEX.json#TASK-0258",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
-                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
-                "Area_comun/handoffs/HANDOFF-TASK-0258-codex-to-arquitecto-1.md",
-                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md",
-                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md"
-            ],
-            "started_at": "2026-07-20T09:54:23Z",
-            "status": "released",
-            "task_id": "TASK-0258",
-            "updated_at": "2026-07-20T09:54:23Z"
-        },
-        {
-            "claim_id": "CLAIM-arq-ciclo1200-20260720",
-            "expires_at": "2026-07-20T11:01:01Z",
-            "notes": "Re-juicio 0258 + anotacion de los 2 aportes del Operador en el intake de 0272 + higiene de 8",
+            "claim_id": "CLAIM-arq-registro0273-20260720",
+            "expires_at": "2026-07-20T11:15:00Z",
+            "notes": "Registro TASK-0273 (deadlock poda-claim, DIRECTIVA del Operador) en proposed; medicion aportada; espera GO",
             "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-arq-ciclo1200-20260720",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-rejuicio-F01.md",
-                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-COORD-residuo-staged-realimenta-abortos.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-COORD-residuo-staged-realimenta-abortos.md",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md"
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0273-20260720"
             ],
-            "started_at": "2026-07-20T10:01:01Z",
+            "started_at": "2026-07-20T10:15:00Z",
             "status": "released",
-            "task_id": "OPS-CICLO-20260720",
-            "updated_at": "2026-07-20T10:01:01Z"
-        },
-        {
-            "claim_id": "CLAIM-arq-hyg-1058-20260720",
-            "expires_at": "2026-07-20T09:58:00Z",
-            "notes": "Higiene de 6 consumidos del ciclo 0269/N6/seenburn (los watchdog v3 los flageaba por falta de archivo)",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-1058-20260720",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial.md",
-                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md",
-                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger.md",
-                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger.md"
-            ],
-            "started_at": "2026-07-20T08:58:00Z",
-            "status": "released",
-            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
-            "updated_at": "2026-07-20T08:58:00Z"
-        },
-        {
-            "claim_id": "CLAIM-arq-ready0272-20260720",
-            "expires_at": "2026-07-20T09:19:19Z",
-            "notes": "GO del Operador 2026-07-20: promocion de TASK-0272 a ready",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/TASK_INDEX.json#TASK-0272",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
-                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
-                "Area_comun/state/CLAIMS.json#CLAIM-arq-ready0272-20260720"
-            ],
-            "started_at": "2026-07-20T08:19:19Z",
-            "status": "released",
-            "task_id": "TASK-0272",
-            "updated_at": "2026-07-20T08:19:19Z"
-        },
-        {
-            "claim_id": "CLAIM-arq-registro0272-20260720",
-            "expires_at": "2026-07-20T08:58:00Z",
-            "notes": "Registro TASK-0272 (fin del seen-burn silencioso) en proposed; espera GO del Operador",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/TASK_INDEX.json#TASK-0272",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
-                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
-                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0272-20260720"
-            ],
-            "started_at": "2026-07-20T07:58:00Z",
-            "status": "released",
-            "task_id": "TASK-0272",
-            "updated_at": "2026-07-20T07:58:00Z"
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T10:15:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reject0257-iter2-20260719",

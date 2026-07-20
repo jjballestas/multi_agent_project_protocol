@@ -104,6 +104,14 @@
             "priority": "high",
             "status": "ready",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
+        },
+        {
+            "id": "TASK-0273",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "proposed",
+            "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar"
         }
     ],
     "view": "task_index.slim"
