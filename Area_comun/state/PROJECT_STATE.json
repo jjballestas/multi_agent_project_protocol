@@ -129,13 +129,13 @@
         {
             "id": "TASK-0267",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[DECISION-0103][C5/H2] Hook pre-commit v2: validar el snapshot staged en checkout temporal del indice (elimina el mutex global del arbol compartido)"
         },
         {
             "id": "TASK-0268",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_review",
             "title": "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo"
         },
         {
@@ -153,7 +153,7 @@
         {
             "id": "TASK-0271",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "in_review",
             "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo"
         },
         {
