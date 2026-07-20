@@ -410,6 +410,20 @@
             "updated_at": "2026-07-20T15:20:50Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-final-memory",
+            "expires_at": "2026-07-20T15:53:58Z",
+            "notes": "Persist TASK-0278 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:23:58Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:23:58Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0278-memory",
             "expires_at": "2026-07-20T15:47:56Z",
             "notes": "Persist TASK-0278 implementation commit in Codex golden memory.",

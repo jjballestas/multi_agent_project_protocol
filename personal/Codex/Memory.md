@@ -10,6 +10,10 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0278 implementation.
   both supported invoker diagnostic shapes, and prompt/response lexical false positives.
 - The orphan TASK-0272 memory claim was the validator's only error; Codex released it
   through runtime seq 5369 and the validator returned green before TASK-0278 began.
+- Delivery commit `724feca` moves TASK-0278 to `in_review`, releases both work claims,
+  opens the self-contained response to Arquitecto, and records the review handoff for
+  Analista. All retry, Anthropic, lease, validator, encoding, neutrality, and drift gates
+  passed; Codex did not review or ratify the implementation.
 
 Previous update: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 2.
 
