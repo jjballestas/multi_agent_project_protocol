@@ -2927,3 +2927,73 @@ TECNICAS REUSABLES CONFIRMADAS:
   del fixture, no senal. Leer SIEMPRE el mensaje, no solo el exit code, en fixtures sinteticos.
 Scripts en el scratchpad: `falsify_0280.py` (vectores N1 movimiento gobernado staged, N2 cola
 desgarrada, con contraste padre) y `falsify_0277.py` / `falsify_0277b.py` (P1-P5, P1b-P3b, P2c-P2d).
+
+## 2026-07-20 22:05 -- TASK-0280 iteracion 2 de 2: NO-GO (commit 91b585c, pusheado)
+
+Encargo `MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-iter2-final`. Veredicto en
+`Area_comun/artifacts/Analista-TASK-0280-iter2-preservacion-eventos-verdict.md`. Ancla: codigo
+juzgado `9c6f546`, padre `8de3d8b`, HEAD `ba73fba`; clones limpios `D:/ccvB` y `D:/ccvBp`. Los
+seis gates EXIT 0 en clon limpio. Tope agotado -> escala al Operador.
+
+**CERRADOS de verdad (contra el padre).** F-0280R1-01: `task_upsert` firmado que crea
+`Area_comun/tasks/TASK-9002-new.md` sobrevive en el hijo y se destruia en el padre.
+F-0280R1-02: cola desgarrada -> `ROLLBACK_DEFER reason=ledger_torn_tail`, cola intacta, **exec 2
+ocurre** (bucle vivo), sin `LOOP_ERROR`; el padre daba `EXEC_FAIL` + `LOOP_ERROR` x2 y exec 2
+nunca. Cola rota vs log legitimo mas corto: mismo `seq` y mismo `hash`, los separa el flag
+`torn_tail`. Primitiva unica intacta y `prune_state.py` compatible con la firma de 3-tupla.
+
+**F-0280R2-01 (BLOQUEANTE, regresion).** `scripts/ledger_head.py::event_managed_paths_after`
+enumera ocho ficheros de estado y NO incluye `Area_comun/state/TASK_INDEX_ARCHIVE.json` ni
+`CLAIMS_ARCHIVE.json`, y no tiene rama para `protocol_prune` (su payload no lleva `task_id` ni
+`message_id`, solo `transitions.protocol_prune.task_ids`/`claim_ids`). Pero
+`prune_state.py::apply_prune_via_submit_intent` escribe esos espejos A PROPOSITO antes de llamar
+a `submit_intents`, porque la puerta de drift post-apply los exige (comentario en
+`prune_state.py:555-560`). Diferencial: padre = fila EN el espejo; hijo = `{"tasks":[]}` en
+caliente Y en el espejo -> la fila no existe en ningun sitio, con `ROLLBACK_LEDGER_PRESERVED`.
+Invisible porque `materialize_protocol_state` no materializa los espejos -> nunca hay drift.
+Atenuante declarado: `protocol_prune` exige capability `orchestrator`, que hoy solo tiene el
+Arquitecto (Codex y Analista no) -- pero `mailbox_archive` exige la misma y fue el vector con el
+que bloquee la iteracion 1.
+
+**F-0280R2-02 (MAJOR, regresion).** `_events` parsea TODAS las lineas y relanza; el padre solo
+parseaba la ultima, asi que le era invisible una linea ilegible a media cola. Medido por el
+bucle: hijo = `EXEC_FAIL` + `LOOP_ERROR` x2 sin rollback, residuo sobrevive; padre = rollback OK
++ `ROLLBACK_LEDGER_DRIFT`. En aislado: `ledger_head.py --root <log corrupto a media cola>` da
+EXIT 1 en el hijo y EXIT 0 en el padre. `submit_intent` trunca la cola desgarrada antes de anexar
+(`runtime/eventlog.py::truncate_torn_jsonl_tail`) pero RECHAZA la corrupcion a media cola con
+`EventLogIntegrityError` -> estado terminal para escritor y ahora tambien para lector.
+
+**F-0280R2-03 (major, NO regresion).** `decision` firmada sobrevive; su
+`Area_comun/decisions/DECISION-*.md` se destruye, con `PRESERVED`. `Area_comun/decisions/` no
+esta en los cuatro prefijos del rollback. Cae en R4.
+**F-0280R2-04 (menor).** `run_torn_tail_case` extrae `Get-LedgerHead` y
+`Restore-TransientExecResidue` del `.ps1` con regex y las corre en aislado: no prueba que el
+bucle sobreviva ni que el mensaje siga procesable, y no habria cazado la corrupcion a media cola.
+Residuales nuevos: R5 (el residuo sobrevive por diseno a cada defer y se acumula si la causa es
+persistente) y R6 (tarea que solo vive en el espejo no resuelve a ninguna ruta).
+
+TECNICAS REUSABLES CONFIRMADAS (3 de 3 iteraciones):
+- **El contraste diferencial contra el padre volvio a cazar el bloqueante.** Tres de tres.
+- **Cuando un fix pasa de un filtro ancho a una LISTA EXACTA, auditar la lista contra la fuente
+  de verdad del runtime, no contra el ejemplo del hallazgo.** Metodo que funciono: enumerar
+  `Area_comun/state/` y `runtime/state/` en disco y cruzarlos contra `materialize_to_disk`
+  (6 ficheros) y `submit_intent::files_for_backup` (tarea + ambos lados del mailbox). Lo que
+  sobra en el `ls` y falta en la lista ES el agujero. Aparecieron los dos `*_ARCHIVE.json`.
+- **Enumerar las OCHO `kind`s de `INTENT_TYPES` y preguntar por cada una "que fichero escribe".**
+  `protocol_prune` -> espejos; `decision` -> DECISION-*.md; ninguna de las dos tiene rama en la
+  derivacion. Las kinds que el maker probo (`mailbox_archive`, `task_upsert`) son las dos que si
+  funcionan.
+- **Probar por el BUCLE REAL, no por sondas de funciones extraidas.** El maker probo la cola
+  desgarrada con una sonda; yo por el runner completo, y ahi se ve lo que la sonda no ve
+  (exec 2 ocurre / no ocurre, residuo, `LOOP_ERROR`).
+- Cambio de aridad de una funcion compartida (`event_log_head` de 2-tupla a 3-tupla): grepear
+  TODOS los callers antes de nada. Aqui estaban bien (comparacion de tuplas).
+- El sandbox del maker no tiene `Area_comun/state/TASK_INDEX.json`, asi que su suite NUNCA
+  ejercita la rama de derivacion por fichero de tarea. Mi arnes si lo pone.
+Script en el scratchpad: `bench_0280_iter2.py` (vectores VA_prune, VB_decision, VC_taskupsert,
+VD_torntail, VE_midcorrupt; parametrizado por clon, corre el runner real, imprime observacion
+JSON y NO afirma -- el juicio es mio).
+
+NOTA DE HIGIENE: el hook de commit avisa `PRUNE DUE: released_ratio 90.0 >= 90`. No es mio
+(exige `orchestrator`), pero lo hace mas urgente: la proxima poda es justo la transaccion que
+F-0280R2-01 puede dejar sin traza si la interrumpen.
