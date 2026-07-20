@@ -2,7 +2,7 @@
 task_id: TASK-0270
 title: "[LEDGER] Endurecimiento del event log: verificacion post-write del evento propio + coherencia idempotencia-vs-estado (cierra el evento-perdido silencioso y el skip mudo)"
 type: infra
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: high

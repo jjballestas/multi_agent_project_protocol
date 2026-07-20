@@ -90,6 +90,48 @@
             "updated_at": "2026-07-20T01:19:58Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0270",
+            "expires_at": "2026-07-20T09:40:00Z",
+            "notes": "TASK-0270 implementation: post-write verification, idempotency/state coherence, full-cycle append locking, and concurrency regressions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0270",
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "runtime/submit_intent.py",
+                "runtime/eventlog.py",
+                "runtime/protocol_replay.py",
+                "examples/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-20T01:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0270",
+            "updated_at": "2026-07-20T01:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0270-delivery",
+            "expires_at": "2026-07-20T04:25:00Z",
+            "notes": "Atomic TASK-0270 delivery, in_review flip, handoff registration, and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0270-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0270-Codex-to-Analista.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0270.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-20T02:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0270",
+            "updated_at": "2026-07-20T02:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0270-0271-registro-20260720",
             "expires_at": "2026-07-20T02:05:00Z",
             "notes": "Registro TASK-0270 (endurecimientos ledger a+b, oferta aceptada) + TASK-0271 (migracion checker, DECISION-0101) a ready; GO del Operador 2026-07-20",

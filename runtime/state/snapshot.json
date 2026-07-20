@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ab0fc86f58a08ac0d4be893636907156a7f71bd032319e218eb8f1410aecca89",
+  "canonical_hash": "567ab09a60aaa021ee5a1bfe48e105285f6fb6f86b7d555cc75a24723cdcbe84",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -657,6 +657,8 @@
       "CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1": 1,
       "CLAIM-20260720-Codex-TASK-0267-F01-F02-status": 1,
+      "CLAIM-20260720-Codex-TASK-0270": 1,
+      "CLAIM-20260720-Codex-TASK-0270-delivery": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1977,7 +1979,7 @@
       "TASK-0267": 14,
       "TASK-0268": 3,
       "TASK-0269": 3,
-      "TASK-0270": 3,
+      "TASK-0270": 7,
       "TASK-0271": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2001,7 +2003,7 @@
       "protocol-prune": 11,
       "protocol-state": 1
     },
-    "events_applied": 4361,
+    "events_applied": 4367,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3675,6 +3677,12 @@
       "codex:task0257:release-fix:2026-07-19T19:01:31Z": 4928,
       "codex:task0257:release-status:2026-07-19T19:01:31Z": 4930,
       "codex:task0257:to-inreview:2026-07-19T19:01:31Z": 4927,
+      "codex:task0270:claim-acquire:20260720T0340Z": 5033,
+      "codex:task0270:delivery-claim-acquire:20260720T0425Z": 5035,
+      "codex:task0270:delivery-claim-release:20260720T0425Z": 5038,
+      "codex:task0270:in-progress-to-in-review:20260720T0425Z": 5036,
+      "codex:task0270:main-claim-release:20260720T0425Z": 5037,
+      "codex:task0270:ready-to-in-progress:20260720T0340Z": 5034,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -6366,5 +6374,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5032
+  "up_to_seq": 5038
 }

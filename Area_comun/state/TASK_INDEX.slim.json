@@ -134,7 +134,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "ready",
+            "status": "in_review",
             "title": "[LEDGER] Endurecimiento del event log: verificacion post-write del evento propio + coherencia idempotencia-vs-estado (cierra el evento-perdido silencioso y el skip mudo)"
         },
         {

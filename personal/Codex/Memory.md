@@ -2,6 +2,14 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
 
+- TASK-0270 implementation commit `a989475` adds exact durable post-write verification
+  for single and transactional intents, reports when an idempotent retry reconciles
+  divergent materialized state, preserves the existing full-cycle ledger lock, and
+  extends the real two-process transaction suite with lost-event and divergent-state
+  injections. Intent transaction 12/12 and intent flow 11/11 pass. The unrelated
+  runtime protocol replay validator-warning case remains red because its helper expects
+  validator exit 0 while intentionally enabling hard drift.
+
 ## Latest Session Note
 
 - TASK-0267 fix-loop 1 implementation commit `b1d6877` closes F-0267-01/F-0267-02:
