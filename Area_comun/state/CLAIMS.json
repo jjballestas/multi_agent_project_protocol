@@ -341,6 +341,20 @@
             "updated_at": "2026-07-20T02:56:45.3722358Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-fix1-postmemory",
+            "expires_at": "2026-07-20T04:04:02.5155897Z",
+            "notes": "Golden memory after TASK-0271 remediation delivery commit c3a14a3.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-fix1-postmemory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T03:04:02.5075816Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T03:04:02.5075816Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271-memory",
             "expires_at": "2026-07-20T10:25:00Z",
             "notes": "Record golden memory after TASK-0271 implementation commit.",

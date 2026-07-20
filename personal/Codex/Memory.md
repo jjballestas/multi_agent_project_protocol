@@ -3572,3 +3572,4 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Commit `d92e42e` makes the Anthropic checker invoker Windows-safe: `.ps1` shims run through `powershell.exe`, `.cmd`/`.bat` through `cmd.exe`, and native applications directly.
 - The generic born-operational harness and live Analista mirror share the fix; legacy Codex uses the same dispatch.
 - Real generic-harness exec against `C:/Users/johnb/AppData/Roaming/npm/claude.ps1` exited 0 and emitted `HARNESS_WINDOWS_SHIM_OK` with redirected STDIN/stdout/stderr.
+- Delivery commit `c3a14a3` records the self-contained handoff, mailbox response, `in_review` transition, and released remediation claims; Arquitecto must clear seen and re-run the retained live review.
