@@ -2832,3 +2832,36 @@
   el autor git contradice al actor firmado (`7337b30`/`6e3bcc5` git-author Analista, eventos 5411-5412
   Codex y 5413-5415 Arquitecto; `5b76643` al reves) -> levantado por DECISION-0018.
   Bucle declarado: iteracion 2 de maximo 2, re-juicio mio ANTES del commit de cierre, luego escalada.
+
+## 2026-07-20 (tarde-noche) -- TASK-0280 rollback vs ledger append-only: NO-GO iter1
+Commit juzgado `2b37294` (padre `7de9403`), HEAD `ef679c9`; veredicto en
+`Area_comun/artifacts/Analista-TASK-0280-rollback-ledger-verdict.md`, commit `26dd716`.
+Gates verdes en clon limpio (`D:/ccv0280`): validate, scan_encoding, scan_domain_neutrality y
+`examples/mailbox_retry_cases/run_mailbox_retry_cases.py`, todos EXIT 0. La suite del maker pasa
+porque no prueba el caso que rompe.
+FALLA BLOQUEANTE **F-0280-01**: `Invoke-PreExecPatch` aplica SIEMPRE `--exclude` sobre
+`runtime/state/*`, `Area_comun/state/*`, `Area_comun/tasks/*`, `Area_comun/mailbox/*`, pero el parche
+compensatorio solo se aplica `if ($ledgerAdvanced)`. Exec transitorio SIN evento -> el trabajo
+pre-exec sin commitear en esas cuatro rutas se DESTRUYE en silencio (ni PRESERVED ni DRIFT ni DEFER).
+**F-0280-02**: `git diff --binary HEAD -- <4 rutas>` incluye las altas staged del exec, asi que el
+parche de preservacion RESUCITA residuo no-ledger (`?? Area_comun/tasks/TASK-residue.md`).
+PASA: V2 evento+derivado sobreviven una sola vez con `ROLLBACK_LEDGER_PRESERVED`; V3
+`ROLLBACK_LEDGER_DRIFT reason=derived_state_mismatch` se emite y no hay PRESERVED falso; parser de
+outcome de 0278 sin regresion.
+TECNICA REUSABLE (la que cazo esto): **contraste diferencial entre el commit juzgado y su PADRE con
+el MISMO arnes**. Dos clones limpios (`D:/ccv0280` y `D:/ccv0280p`), un sandbox git calcado del
+`run_mailbox_retry_cases.py` del maker pero con testigos pre-dirty **en las rutas gobernadas** ademas
+del testigo neutral de raiz que usa el maker. Si el padre restaura y el hijo no, la regresion queda
+probada sin discusion. Script en el scratchpad (`falsify_0280.py`, vectores V1-V4 + V1 contra padre).
+LECCION GENERAL: cuando un fix EXCLUYE rutas de una restauracion y las compensa en otra rama
+condicional, atacar siempre la rama donde la compensacion NO corre. Y desconfiar de un testigo
+pre-dirty unico en la raiz: si el fix opera por prefijos, el testigo debe estar DENTRO de cada prefijo.
+RESIDUALES declarados: R1 ventana snapshot->reset, un append concurrente se pierde y es INDETECTABLE
+(replay compara events.jsonl y derivado restaurados del mismo snapshot -> coherentes -> PRESERVED
+verde); fix barato = re-leer `Get-LedgerSequence` antes del reset y tras el apply, defer si se movio.
+R2 `ROLLBACK_LEDGER_DRIFT` es solo log en `.protocol-tmp/` gitignorado, no llega al mailbox y no
+detiene el bucle; la rama `ledger_restore_failed` ocurre DESPUES del reset (eventos ya perdidos).
+R3 la idempotencia del reintento no esta testeada y el prompt del reintento no lleva senal de lo
+preservado. R4 el untracked destruido NO queda cubierto por 0280 y sigue siendo TASK-0275 (solo se
+respeta `if ($ledgerAdvanced -and Test-LedgerManagedPath)`).
+Bucle declarado: iteracion 1 de maximo 2, re-juicio mio ANTES del commit de cierre, luego escalada.
