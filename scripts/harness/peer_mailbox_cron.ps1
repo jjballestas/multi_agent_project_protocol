@@ -473,13 +473,13 @@ function Test-LedgerManagedPath {
 }
 
 function Invoke-PreExecPatch {
-    param([string]$PatchPath, [bool]$Index, [bool]$ExcludeLedgerPaths)
+    param([string]$PatchPath, [bool]$Index, [string[]]$ExcludePaths = @())
     if (-not (Test-Path $PatchPath) -or (Get-Item $PatchPath).Length -eq 0) { return }
     $args = @("-C", $Root, "apply")
     if ($Index) { $args += "--index" }
     $args += "--binary"
-    if ($ExcludeLedgerPaths) {
-        $args += @("--exclude=runtime/state/*", "--exclude=Area_comun/state/*", "--exclude=Area_comun/tasks/*", "--exclude=Area_comun/mailbox/*")
+    foreach ($path in $ExcludePaths) {
+        $args += "--exclude=$path"
     }
     $args += $PatchPath
     & git @args 2>$null
@@ -496,16 +496,25 @@ function Restore-TransientExecResidue {
     $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfter -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed"; return }
     $ledgerHeadAfter = Get-LedgerHead
+    if ([bool]$ledgerHeadAfter.torn_tail) { Write-Log "ROLLBACK_DEFER reason=ledger_torn_tail"; return }
     $ledgerAdvanced = ([long]$ledgerHeadAfter.seq -ne [long]$LedgerHeadBefore.seq) -or ([string]$ledgerHeadAfter.hash -cne [string]$LedgerHeadBefore.hash)
     $ledgerPatch = Join-Path $RunsDir ("ledger-preserve-{0}.patch" -f ([guid]::NewGuid().ToString("N")))
+    $managedPaths = @()
     if ($ledgerAdvanced) {
-        & git -C $Root diff --binary --diff-filter=M --output=$ledgerPatch HEAD -- runtime/state Area_comun/state Area_comun/tasks Area_comun/mailbox
+        $helper = Join-Path $Root "scripts\ledger_head.py"
+        $managedRaw = & python $helper --root $Root --paths-after ([long]$LedgerHeadBefore.seq) 2>$null
+        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_paths_failed"; return }
+        $managedPaths = @($managedRaw | ConvertFrom-Json)
+        $diffArgs = @("-C", $Root, "diff", "--binary", "--output=$ledgerPatch", "HEAD", "--") + $managedPaths
+        & git @diffArgs
         if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_snapshot_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
     }
+    $managedPathSet = @{}
+    foreach ($path in @($managedPaths)) { $managedPathSet[$path.Replace("\", "/")] = $true }
     $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
     $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
     foreach ($path in @($createdRaw -split [char]0 | Where-Object { $_ -and -not $beforeUntracked.ContainsKey($_) })) {
-        if ($ledgerAdvanced -and (Test-LedgerManagedPath -Path $path)) { continue }
+        if ($ledgerAdvanced -and $managedPathSet.ContainsKey($path.Replace("\", "/"))) { continue }
         $full = Join-Path $Root $path
         if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
     }
@@ -520,8 +529,9 @@ function Restore-TransientExecResidue {
     if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=reset_failed"; return }
     $headAfterReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfterReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_after_reset"; return }
-    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true -ExcludeLedgerPaths $ledgerAdvanced
-    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false -ExcludeLedgerPaths $ledgerAdvanced
+    $ledgerPathsToExclude = if ($ledgerAdvanced) { $managedPaths } else { @() }
+    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true -ExcludePaths $ledgerPathsToExclude
+    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false -ExcludePaths $ledgerPathsToExclude
     if ($ledgerAdvanced -and (Test-Path $ledgerPatch) -and (Get-Item $ledgerPatch).Length -gt 0) {
         & git -C $Root apply --binary $ledgerPatch 2>$null
         if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_restore_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }

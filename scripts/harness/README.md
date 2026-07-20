@@ -140,9 +140,12 @@ preserve old behavior:
   applying stale patches. Ledger advancement is decided only by the shared exact event-log
   head primitive (`seq` plus last-line SHA-256), checked before the exec, before reset, and
   after restoration. If the signed ledger advances during an exec that later returns
-  transient, rollback preserves tracked modifications under `runtime/state/` and governed
-  materialized routes without resurrecting staged additions,
-  reports `ROLLBACK_LEDGER_PRESERVED`, and checks replay drift before scheduling the retry.
+  transient, rollback derives the exact affected paths from the applied event window and
+  preserves their modifications, including mailbox additions/deletions, without masking
+  unrelated pre-dirty governed paths. A torn final event-log line defers rollback with
+  `ROLLBACK_DEFER reason=ledger_torn_tail` instead of entering a repeated exception loop.
+  Successful preservation reports `ROLLBACK_LEDGER_PRESERVED` and checks replay drift
+  before scheduling the retry.
   A mismatch reports `ROLLBACK_LEDGER_DRIFT` instead of continuing silently. When no event
   was applied, the original full worktree rollback remains unchanged.
 - Retryable causes are temporary coordination conditions: red pre-gate, another owner's

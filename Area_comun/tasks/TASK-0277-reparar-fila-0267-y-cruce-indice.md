@@ -2,7 +2,7 @@
 task_id: TASK-0277
 title: "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva"
 type: infra
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

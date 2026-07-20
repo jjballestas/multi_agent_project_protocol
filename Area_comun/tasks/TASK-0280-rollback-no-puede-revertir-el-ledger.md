@@ -63,6 +63,12 @@ cabeza del event log. El rollback solo excluye rutas gobernadas cuando esa cabez
 preserva cambios trackeados sin resucitar altas staged, y contrasta otra vez la cabeza
 antes del reset y despues de restaurar.
 
+Remediacion iteracion 2: las rutas preservadas se derivan de los eventos aplicados en la
+ventana, no del tipo de cambio que informa git. Esto conserva tambien movimientos
+firmados de mailbox (baja en `open/` y alta en `archived/`). La primitiva de cabeza tolera
+una ultima linea desgarrada y el harness emite `ROLLBACK_DEFER reason=ledger_torn_tail`
+sin mutar la cola. Ambos casos tienen negativos permanentes en el sandbox de reintentos.
+
 Relacion con lo demas: el rollback de TASK-0272 sigue siendo correcto para lo que se
 diseno, deshacer el residuo staged de un exec abortado. El error es de alcance, no de
 concepto. El ledger firmado no es residuo: es la unica cosa del arbol que no se puede

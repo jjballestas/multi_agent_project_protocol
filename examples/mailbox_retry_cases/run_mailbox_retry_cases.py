@@ -80,6 +80,30 @@ def run_outcome_parser_cases(sandbox: Path) -> None:
         assert actual[case["name"]] == case["expected"], (case["name"], actual[case["name"]])
 
 
+def run_torn_tail_case(sandbox: Path) -> None:
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    head_fn = re.search(r"(?ms)^function Get-LedgerHead \{.*?^\}", runner_text)
+    restore_fn = re.search(r"(?ms)^function Restore-TransientExecResidue \{.*?^\}", runner_text)
+    if not head_fn or not restore_fn:
+        raise AssertionError("rollback helper functions not found")
+    events = sandbox / "runtime/state/events.jsonl"
+    events.write_bytes(b'{"seq":1}\n{"seq":')
+    probe = sandbox / "torn-tail-probe.ps1"
+    probe.write_text(
+        "$Root=(Get-Location).Path\n$RunsDir=$Root\n$log=@()\n"
+        "function Write-Log { param([string]$Message) $script:log += $Message }\n"
+        + head_fn.group(0) + "\n" + restore_fn.group(0) + "\n"
+        "$before=[pscustomobject]@{seq=1;hash='before';torn_tail=$false}\n"
+        "$head=git rev-parse HEAD\n"
+        "Restore-TransientExecResidue -HeadBefore $head -IndexPatch '' -WorktreePatch '' -UntrackedBefore @() -LedgerHeadBefore $before\n"
+        "$log | ConvertTo-Json -Compress\n",
+        encoding="ascii",
+    )
+    output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout
+    assert "ROLLBACK_DEFER reason=ledger_torn_tail" in output, output
+    assert events.read_bytes().endswith(b'{"seq":'), "torn-tail deferral mutated the queue"
+
+
 def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True)
 
@@ -94,7 +118,7 @@ def main() -> int:
             "def protocol_state_drift(root: Path):\n"
             "    lines = [line for line in (root / 'runtime/state/events.jsonl').read_text().splitlines() if line.strip()]\n"
             "    event_seq = json.loads(lines[-1])['seq'] if lines else 0\n"
-            "    derived_seq = json.loads((root / 'Area_comun/state/derived.json').read_text())['seq']\n"
+            "    derived_seq = json.loads((root / 'Area_comun/state/CLAIMS.json').read_text())['seq']\n"
             "    return {'has_drift': event_seq != derived_seq}\n",
             encoding="ascii",
         )
@@ -104,7 +128,7 @@ def main() -> int:
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "Area_comun/state").mkdir(parents=True)
-        (sandbox / "Area_comun/state/derived.json").write_text('{"seq":0}\n', encoding="ascii")
+        (sandbox / "Area_comun/state/CLAIMS.json").write_text('{"seq":0}\n', encoding="ascii")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         (sandbox / "Area_comun/tasks").mkdir(parents=True)
@@ -115,6 +139,8 @@ def main() -> int:
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
+        governed_message = sandbox / "Area_comun/mailbox/open/MSG-gov.md"
+        governed_message.write_text("governed-message\n", encoding="ascii")
         predirty_message = sandbox / "Area_comun/mailbox/archived/MSG-predirty.md"
         predirty_message.parent.mkdir(parents=True)
         predirty_message.write_text("baseline-msg\n", encoding="ascii")
@@ -145,9 +171,13 @@ def main() -> int:
             "if($count -eq 3){\n"
             "  Set-Content -Path (Join-Path $root 'Area_comun/tasks/TASK-residue.md') -Value residue -Encoding ASCII\n"
             "  git add Area_comun/tasks/TASK-residue.md\n"
-            "  $event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"}}'\n"
+            "  $source=Join-Path $root 'Area_comun/mailbox/open/MSG-gov.md'\n"
+            "  $target=Join-Path $root 'Area_comun/mailbox/archived/MSG-gov.md'\n"
+            "  Move-Item -LiteralPath $source -Destination $target\n"
+            "  git add -- Area_comun/mailbox/open/MSG-gov.md Area_comun/mailbox/archived/MSG-gov.md\n"
+            "  $event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"mailbox_archive\",\"message_id\":\"MSG-gov\",\"transitions\":{\"mailbox_archive\":{\"message_id\":\"MSG-gov\",\"from\":\"open\",\"to\":\"archived\"}}}}'\n"
             "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
-            "  Set-Content -Path (Join-Path $root 'Area_comun/state/derived.json') -Value '{\"seq\":1}' -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":1}' -Encoding ASCII\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -167,11 +197,13 @@ def main() -> int:
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         run_outcome_parser_cases(sandbox)
+        run_torn_tail_case(sandbox)
+        (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {
             "Area_comun/tasks/TASK-fixture.md": "peer-task-edit\n",
             "Area_comun/mailbox/archived/MSG-predirty.md": "peer-msg-edit\n",
-            "Area_comun/state/derived.json": '{"seq":0,"peer":"edit"}\n',
+            "Area_comun/state/CLAIMS.json": '{"seq":0,"peer":"edit"}\n',
             "runtime/state/events.jsonl": "",
         }
         for relative, content in governed_predirty.items():
@@ -202,11 +234,13 @@ def main() -> int:
         retry = json.loads(retry_path.read_text(encoding="utf-8"))
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
-        assert not (sandbox / "residue.txt").exists(), "aborted exec residue survived rollback"
+        assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived rollback; log={log}"
         assert not (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "governed non-ledger residue survived rollback"
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
-        assert len(events) == 1 and json.loads(events[0])["seq"] == 1, "applied ledger event did not survive exactly once"
-        assert json.loads((sandbox / "Area_comun/state/derived.json").read_text(encoding="ascii"))["seq"] == 1
+        assert len(events) == 1 and json.loads(events[0])["seq"] == 1, f"applied ledger event did not survive exactly once: {events!r}; log={log}"
+        assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 1
+        assert not governed_message.exists(), "signed mailbox archive deletion was rolled back"
+        assert (sandbox / "Area_comun/mailbox/archived/MSG-gov.md").exists(), "signed mailbox archive addition was rolled back"
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
         assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == "peer-task-edit\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
