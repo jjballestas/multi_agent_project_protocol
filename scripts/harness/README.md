@@ -139,15 +139,14 @@ preserve old behavior:
   immediately before and after `reset --hard`; movement defers restoration instead of
   applying stale patches. Ledger advancement is decided only by the shared exact event-log
   head primitive (`seq` plus last-line SHA-256), checked before the exec, before reset, and
-  after restoration. If the signed ledger advances during an exec that later returns
-  transient, rollback derives the exact affected paths from the applied event window and
-  preserves their modifications, including mailbox additions/deletions, without masking
-  unrelated pre-dirty governed paths. A torn final event-log line defers rollback with
-  `ROLLBACK_DEFER reason=ledger_torn_tail` instead of entering a repeated exception loop.
-  Successful preservation reports `ROLLBACK_LEDGER_PRESERVED` and checks replay drift
-  before scheduling the retry.
-  A mismatch reports `ROLLBACK_LEDGER_DRIFT` instead of continuing silently. When no event
-  was applied, the original full worktree rollback remains unchanged.
+  after restoration. Rollback is conservative by default: it runs only while the ledger is
+  readable and unchanged, when residue is provably local to the exec. Any signed event,
+  torn tail, unreadable line at any position, or other uncertainty defers mutation and leaves
+  the tree recoverable. It never decides safety from route, event-kind, or change-name lists.
+  `ROLLBACK_LEDGER_PRESERVED` requires a second head read, replay-drift check, and on-disk
+  fingerprint comparison for every dirty path. A failed proof reports
+  `ROLLBACK_LEDGER_DRIFT`; an unreadable ledger reports `ROLLBACK_DEFER` while the retry loop
+  remains alive.
 - Retryable causes are temporary coordination conditions: red pre-gate, another owner's
   active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
   left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,

@@ -93,7 +93,7 @@ def run_torn_tail_case(sandbox: Path) -> None:
         "$Root=(Get-Location).Path\n$RunsDir=$Root\n$log=@()\n"
         "function Write-Log { param([string]$Message) $script:log += $Message }\n"
         + head_fn.group(0) + "\n" + restore_fn.group(0) + "\n"
-        "$before=[pscustomobject]@{seq=1;hash='before';torn_tail=$false}\n"
+        "$before=[pscustomobject]@{readable=$true;seq=1;hash='before';torn_tail=$false}\n"
         "$head=git rev-parse HEAD\n"
         "Restore-TransientExecResidue -HeadBefore $head -IndexPatch '' -WorktreePatch '' -UntrackedBefore @() -LedgerHeadBefore $before\n"
         "$log | ConvertTo-Json -Compress\n",
@@ -132,6 +132,7 @@ def main() -> int:
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         (sandbox / "Area_comun/tasks").mkdir(parents=True)
+        (sandbox / "Area_comun/decisions").mkdir(parents=True)
         (sandbox / "Area_comun/tasks/TASK-fixture.md").write_text("baseline-task\n", encoding="ascii")
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
         message.write_text(
@@ -175,10 +176,26 @@ def main() -> int:
             "  $target=Join-Path $root 'Area_comun/mailbox/archived/MSG-gov.md'\n"
             "  Move-Item -LiteralPath $source -Destination $target\n"
             "  git add -- Area_comun/mailbox/open/MSG-gov.md Area_comun/mailbox/archived/MSG-gov.md\n"
-            "  $event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"mailbox_archive\",\"message_id\":\"MSG-gov\",\"transitions\":{\"mailbox_archive\":{\"message_id\":\"MSG-gov\",\"from\":\"open\",\"to\":\"archived\"}}}}'\n"
-            "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
-            "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":1}' -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/state/TASK_INDEX_ARCHIVE.json') -Value '{\"tasks\":[{\"id\":\"TASK-pruned\"}]}' -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/decisions/DECISION-test.md') -Value 'signed decision' -Encoding ASCII\n"
+            "  git add Area_comun/state/TASK_INDEX_ARCHIVE.json Area_comun/decisions/DECISION-test.md\n"
+            "  $events=@(\n"
+            "    '{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"mailbox_archive\",\"message_id\":\"MSG-gov\",\"transitions\":{\"mailbox_archive\":{\"message_id\":\"MSG-gov\",\"from\":\"open\",\"to\":\"archived\"}}}}',\n"
+            "    '{\"seq\":2,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"protocol_prune\",\"transitions\":{\"protocol_prune\":{\"task_ids\":[\"TASK-pruned\"]}}}}',\n"
+            "    '{\"seq\":3,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"},\"payload\":{\"intent_type\":\"decision\",\"decision_id\":\"DECISION-test\"}}'\n"
+            "  )\n"
+            "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $events -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/state/CLAIMS.json') -Value '{\"seq\":3}' -Encoding ASCII\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
+            "  Write-Output 'OUTCOME: transient'\n"
+            "  exit 0\n"
+            "}\n"
+            "if($count -eq 4){\n"
+            "  Set-Content -Path (Join-Path $root 'ambiguous-residue.txt') -Value residue -Encoding ASCII\n"
+            "  git add ambiguous-residue.txt\n"
+            "  $eventPath=Join-Path $root 'runtime/state/events.jsonl'\n"
+            "  $lines=@(Get-Content -LiteralPath $eventPath)\n"
+            "  Set-Content -LiteralPath $eventPath -Value @($lines[0],'{not-json',$lines[1],$lines[2]) -Encoding ASCII\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
             "}\n"
@@ -213,8 +230,8 @@ def main() -> int:
                 "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
                 "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
                 "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
-                "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
-                "-MaxTransientRetries", "4", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+                "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",
+                "-MaxTransientRetries", "5", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
                 cwd=sandbox,
             )
         except subprocess.TimeoutExpired as exc:
@@ -235,12 +252,15 @@ def main() -> int:
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
         assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived rollback; log={log}"
-        assert not (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "governed non-ledger residue survived rollback"
+        assert (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "ambiguous residue beside signed events was destroyed"
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
-        assert len(events) == 1 and json.loads(events[0])["seq"] == 1, f"applied ledger event did not survive exactly once: {events!r}; log={log}"
-        assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 1
+        assert events[1] == "{not-json" and json.loads(events[-1])["seq"] == 3, f"ambiguous ledger was changed: {events!r}; log={log}"
+        assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 3
         assert not governed_message.exists(), "signed mailbox archive deletion was rolled back"
         assert (sandbox / "Area_comun/mailbox/archived/MSG-gov.md").exists(), "signed mailbox archive addition was rolled back"
+        assert (sandbox / "Area_comun/state/TASK_INDEX_ARCHIVE.json").exists(), "signed prune archive was destroyed"
+        assert (sandbox / "Area_comun/decisions/DECISION-test.md").exists(), "signed decision document was destroyed"
+        assert (sandbox / "ambiguous-residue.txt").exists(), "mid-log ambiguity was rolled back"
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
         assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == "peer-task-edit\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
@@ -248,11 +268,14 @@ def main() -> int:
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "RETRY_SCHEDULED attempt=3" in log
-        assert "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=1" in log
+        assert "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=3 proof=disk" in log
+        assert ("ROLLBACK_DEFER reason=ledger_unreadable_after_exec" in log or
+                "ROLLBACK_DEFER reason=rollback_probe_failed" in log)
+        assert "LOOP_ERROR" not in log
         assert "ROLLBACK_LEDGER_DRIFT" not in log
         assert "outcome=confirmed" in log
-        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 4
-        print("mailbox retry cases: PASS (uniform author rejected -> rollback -> signed-ledger confirmation)")
+        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 5
+        print("mailbox retry cases: PASS (proof-only rollback -> conservative signed/ambiguous preservation)")
         return 0
     finally:
         shutil.rmtree(sandbox, ignore_errors=True)

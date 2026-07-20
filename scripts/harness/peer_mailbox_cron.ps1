@@ -445,9 +445,38 @@ function Get-OwnEvidence {
 
 function Get-LedgerHead {
     $helper = Join-Path $Root "scripts\ledger_head.py"
-    $raw = & python $helper --root $Root 2>$null
-    if ($LASTEXITCODE -ne 0) { throw "cannot read event-log head" }
-    return ($raw | ConvertFrom-Json)
+    $previousErrorAction = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try { $raw = & python $helper --root $Root 2>$null; $exitCode = $LASTEXITCODE }
+    finally { $ErrorActionPreference = $previousErrorAction }
+    if ($exitCode -ne 0) { return [pscustomobject]@{ readable = $false; seq = 0; hash = ""; torn_tail = $false } }
+    try {
+        $head = $raw | ConvertFrom-Json
+        $head | Add-Member -NotePropertyName readable -NotePropertyValue $true
+        return $head
+    } catch {
+        return [pscustomobject]@{ readable = $false; seq = 0; hash = ""; torn_tail = $false }
+    }
+}
+
+function Get-WorktreeDiskProof {
+    $raw = @(& git -C $Root status --porcelain=v1 -z --untracked-files=all 2>$null) -join ""
+    if ($LASTEXITCODE -ne 0) { return $null }
+    $rows = @()
+    foreach ($entry in @($raw -split [char]0 | Where-Object { $_ })) {
+        if ($entry.Length -lt 4) { return $null }
+        $path = $entry.Substring(3).Replace("\", "/")
+        if ($path -match ' -> ') { $path = ($path -split ' -> ', 2)[1] }
+        $full = Join-Path $Root $path
+        if (Test-Path -LiteralPath $full -PathType Leaf) {
+            $item = Get-Item -LiteralPath $full
+            $hash = (Get-FileHash -LiteralPath $full -Algorithm SHA256).Hash.ToLowerInvariant()
+            $rows += [ordered]@{ path = $path; exists = $true; length = [long]$item.Length; sha256 = $hash }
+        } else {
+            $rows += [ordered]@{ path = $path; exists = $false; length = 0; sha256 = "" }
+        }
+    }
+    return (($rows | Sort-Object { $_.path } | ConvertTo-Json -Compress -Depth 4))
 }
 
 function Get-StagedResidueState {
@@ -493,34 +522,45 @@ function Test-LedgerDerivedState {
 
 function Restore-TransientExecResidue {
     param([string]$HeadBefore, [string]$IndexPatch, [string]$WorktreePatch, [string[]]$UntrackedBefore, [object]$LedgerHeadBefore)
+    trap {
+        Write-Log "ROLLBACK_DEFER reason=rollback_probe_failed"
+        return
+    }
     $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfter -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed"; return }
+    if (-not [bool]$LedgerHeadBefore.readable) { Write-Log "ROLLBACK_DEFER reason=ledger_unreadable_before_exec"; return }
     $ledgerHeadAfter = Get-LedgerHead
+    if (-not [bool]$ledgerHeadAfter.readable) { Write-Log "ROLLBACK_DEFER reason=ledger_unreadable_after_exec"; return }
     if ([bool]$ledgerHeadAfter.torn_tail) { Write-Log "ROLLBACK_DEFER reason=ledger_torn_tail"; return }
     $ledgerAdvanced = ([long]$ledgerHeadAfter.seq -ne [long]$LedgerHeadBefore.seq) -or ([string]$ledgerHeadAfter.hash -cne [string]$LedgerHeadBefore.hash)
-    $ledgerPatch = Join-Path $RunsDir ("ledger-preserve-{0}.patch" -f ([guid]::NewGuid().ToString("N")))
-    $managedPaths = @()
     if ($ledgerAdvanced) {
-        $helper = Join-Path $Root "scripts\ledger_head.py"
-        $managedRaw = & python $helper --root $Root --paths-after ([long]$LedgerHeadBefore.seq) 2>$null
-        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_paths_failed"; return }
-        $managedPaths = @($managedRaw | ConvertFrom-Json)
-        $diffArgs = @("-C", $Root, "diff", "--binary", "--output=$ledgerPatch", "HEAD", "--") + $managedPaths
-        & git @diffArgs
-        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_snapshot_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
+        # An applied signed event makes ownership ambiguous. Preserve the complete
+        # post-exec tree; never infer safe rollback from event kinds or path lists.
+        $proofBefore = Get-WorktreeDiskProof
+        if ($null -eq $proofBefore) { Write-Log "ROLLBACK_DEFER reason=disk_proof_failed"; return }
+        $ledgerHeadVerified = Get-LedgerHead
+        $proofAfter = Get-WorktreeDiskProof
+        if (-not [bool]$ledgerHeadVerified.readable -or
+            [long]$ledgerHeadVerified.seq -ne [long]$ledgerHeadAfter.seq -or
+            [string]$ledgerHeadVerified.hash -cne [string]$ledgerHeadAfter.hash -or
+            $null -eq $proofAfter -or $proofAfter -cne $proofBefore) {
+            Write-Log "ROLLBACK_LEDGER_DRIFT reason=disk_verification_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"
+            return
+        }
+        if (-not (Test-LedgerDerivedState)) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=derived_state_mismatch seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
+        Write-Log "ROLLBACK_LEDGER_PRESERVED seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq) proof=disk"
+        return
     }
-    $managedPathSet = @{}
-    foreach ($path in @($managedPaths)) { $managedPathSet[$path.Replace("\", "/")] = $true }
     $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
     $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
     foreach ($path in @($createdRaw -split [char]0 | Where-Object { $_ -and -not $beforeUntracked.ContainsKey($_) })) {
-        if ($ledgerAdvanced -and $managedPathSet.ContainsKey($path.Replace("\", "/"))) { continue }
         $full = Join-Path $Root $path
         if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
     }
     $headBeforeReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headBeforeReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_before_reset"; return }
     $ledgerHeadBeforeReset = Get-LedgerHead
+    if (-not [bool]$ledgerHeadBeforeReset.readable) { Write-Log "ROLLBACK_DEFER reason=ledger_unreadable_before_reset"; return }
     if ([long]$ledgerHeadBeforeReset.seq -ne [long]$ledgerHeadAfter.seq -or [string]$ledgerHeadBeforeReset.hash -cne [string]$ledgerHeadAfter.hash) {
         Write-Log "ROLLBACK_DEFER reason=ledger_head_changed_before_reset"
         return
@@ -529,20 +569,8 @@ function Restore-TransientExecResidue {
     if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=reset_failed"; return }
     $headAfterReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfterReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_after_reset"; return }
-    $ledgerPathsToExclude = if ($ledgerAdvanced) { $managedPaths } else { @() }
-    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true -ExcludePaths $ledgerPathsToExclude
-    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false -ExcludePaths $ledgerPathsToExclude
-    if ($ledgerAdvanced -and (Test-Path $ledgerPatch) -and (Get-Item $ledgerPatch).Length -gt 0) {
-        & git -C $Root apply --binary $ledgerPatch 2>$null
-        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_restore_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
-    }
-    if ($ledgerAdvanced) {
-        $ledgerHeadRestored = Get-LedgerHead
-        if ([long]$ledgerHeadRestored.seq -ne [long]$ledgerHeadAfter.seq -or [string]$ledgerHeadRestored.hash -cne [string]$ledgerHeadAfter.hash) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_head_mismatch"; return }
-        if (-not (Test-LedgerDerivedState)) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=derived_state_mismatch seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
-        Write-Log "ROLLBACK_LEDGER_PRESERVED seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"
-    }
-    Remove-Item -LiteralPath $ledgerPatch -Force -ErrorAction SilentlyContinue
+    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true
+    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false
 }
 
 function Get-ExecOutcomeClass {
