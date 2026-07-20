@@ -36,9 +36,27 @@ Dos consecuencias reales, ambas observadas en julio de 2026:
 
 Regla que resume el hueco: **una regla que no viaja no es del protocolo, es de este repo.**
 
-## Decision - requisitos ACUMULATIVOS de promocion
+## Decision
 
-Ninguno es opcional. Sin los seis, no sube.
+### R0 - LA FIRMA DEL OPERADOR ES LA UNICA QUE PROMUEVE (clausula rectora)
+
+Los requisitos R1-R6 son **condicion NECESARIA y NUNCA SUFICIENTE**. Cumplirlos todos
+**no promueve nada**: solo hace la pieza ELEGIBLE. La promocion ocurre unicamente cuando
+el Operador la firma, y **puede negarla sin causa tecnica** -- por oportunidad, por
+secuencia, por riesgo de dominio, o porque no le convence.
+
+Formulacion operativa: **R1-R6 son un FILTRO, no un DISPARADOR.** Ningun agente,
+mecanismo, script ni gate promueve una pieza por el hecho de que el checklist salga
+verde. Un checklist completo es una PROPUESTA de promocion, no una promocion.
+
+Corolario contra el efecto perverso: nadie puede argumentar "cumple los seis, luego
+sube". Si esa frase llegara a tener fuerza, el checklist habria dejado de ser un filtro
+para convertirse en un automatismo con pasos intermedios -- exactamente lo que esta
+clausula prohibe.
+
+### Requisitos ACUMULATIVOS de ELEGIBILIDAD
+
+Ninguno es opcional. Sin los seis, la pieza no es siquiera elegible.
 
 ### R1 - ADOPTADA por decision firmada en la instancia
 
@@ -112,8 +130,9 @@ para que las instancias vean el delta y `upgrade_instance.py` tenga contra que c
 
 ## Lo que esta decision NO hace
 
-- **No automatiza la promocion.** Sigue siendo decision soberana del Operador; esto fija
-  los REQUISITOS, no un mecanismo automatico.
+- **No automatiza la promocion** (ver R0, que es la clausula rectora). Esto fija los
+  requisitos de ELEGIBILIDAD, no un mecanismo que promueva solo. Checklist verde =
+  propuesta; firma del Operador = promocion.
 - **No obliga a promover.** Una pieza puede quedarse en su instancia para siempre; esta
   decision solo dice que si sube, sube completa.
 - **No es retroactiva por si sola.** Lo ya promovido no se re-audita salvo orden expresa.
@@ -125,5 +144,8 @@ descompone naturalmente en las unidades que exigen R3 (generalizacion de dominio
 reglas de PII de nomina fuera), R4 (globs + `new_instance` + delta de `upgrade_instance`)
 y R5 (los tres costes medidos). R1 y R2 ya los cumple: DECISION-0100 firmada y probe de
 6 celdas con lo demostrado y lo NO demostrado por escrito.
+
+Al completarse R1-R6, la memoria hibrida quedara ELEGIBLE. Nada mas. Subira el dia que el
+Operador lo firme, y no antes -- aunque el checklist lleve semanas en verde.
 
 -- Asesor, 20-jul-2026. Pendiente de firma del Operador.
