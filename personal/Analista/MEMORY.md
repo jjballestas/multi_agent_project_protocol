@@ -5,7 +5,43 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0267 hook v2 NO-GO, fix-loop 1/2).
+> Ultima actualizacion: 2026-07-20 (TASK-0268 reparto E6-A CAMBIO-REQUERIDO docs-only, fix-loop 1/2).
+
+## Ultima actualizacion 2026-07-20 - TASK-0268 reparto E6-A CAMBIO-REQUERIDO (docs-only)
+- Revision adversarial anclada en hub `f2d07a3` (clon limpio /d/ccv0268 + sondeos en
+  /d/ccv0268b), implementacion `b37e638`: CAMBIO-REQUERIDO acotado a docs.
+- FUNCIONAL TODO PASA: default acotado en commit gobernado real 0.455/0.482/0.483 s
+  (<~2 s del AC; handoff 0.449 s reproducido); poda rota bloquea; drift de guia staged
+  bloquea; staged gobernado ROTO aceptado por default en 0.494 s (no invoca validador) y
+  RECHAZADO bajo flag con mecanica v2 intacta (HOOK_FULL=1 exit 1 29.3 s; git config
+  hook.full true exit 1 32.4 s; env gana sobre config false). CI: diff solo linea pin,
+  pin 4dae776c == sha256 real. Suite exit 0. Espejo born-operational: hook byte-identico
+  en tiers coordination y runtime; runtime emite CI con pin nuevo.
+- H1 (bloqueante, falsable): README_INSTANCIACION dice "para todo commit materializa el
+  snapshot staged" y el default NO materializa (inspecciona el arbol; el hook mismo lo
+  declara). Refutado en ambas direcciones (staged roto aceptado 0.5 s; prune roto solo-
+  en-arbol rechazado). Remediacion docs-only 1-2 frases; hook y pin no cambian.
+- Residuales R1-R5: arranque frio 22.5 s ambiental; via git-config sin caso de suite;
+  dependencia de arbol en acotado (declarada); HOOK_FULL solo "1"; auto-borrado del
+  validador solo lo caza CI. Neutralidad roja en ancla = fixture preexistente 0271
+  (0 hits en rutas 0268; verde a 45eb10f).
+- Gates: validate con/sin secretos exit 0 (drift 0 en ancla); encoding 0; config #4
+  2E35F26E byte-identica; events.jsonl del ancla integro (delta posterior = chain
+  creciendo por 0271, no drift).
+- LECCION propia: bug en mi sonda (dict de env en el parametro posicional equivocado ->
+  HOOK_FULL nunca llego al hook y "full" parecio no ejecutar); verificar SIEMPRE que el
+  flag llego (timing 0.4 s vs 30 s delato el error). Sin esa segunda mirada habria
+  reportado un falso CRITICAL.
+- ANOMALIA DECISION-0018 senalada por FYI: commit 51dd52e del Arquitecto (coord 0271,
+  sin pathspec) arrastro mi MSG de veredicto staged en el arbol compartido; contenido
+  correcto en canonico, solo atribucion cruzada. Esperar ventana segura NO protege del
+  peer que commitea pelado: minimizar la ventana add->commit y re-verificar que "1 file
+  changed" cuadre con lo stageado.
+- Veredicto: artefacto en fa43bfc; MSG rr (dentro de 51dd52e) =
+  `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-veredicto.md`; artefacto =
+  `Area_comun/artifacts/ANALISTA-TASK-0268-reparto-acotado-veredicto.md`.
+- Fix-loop declarado: Codex corrige README -> re-juicio (lectura + encoding + validate
+  clon limpio); iteracion 1/2, maximo 2 antes de Operador.
 
 ## Ultima actualizacion 2026-07-20 - TASK-0267 hook v2 NO-GO
 - Revision adversarial anclada en hub
