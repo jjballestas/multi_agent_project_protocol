@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0267 to Analista for maker-checker review. Decide explicitly whether the measured hook cost exception is acceptable or requires a separate validator-performance unit."

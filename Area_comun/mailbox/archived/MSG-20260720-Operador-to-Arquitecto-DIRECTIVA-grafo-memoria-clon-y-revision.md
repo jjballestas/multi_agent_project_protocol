@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-grafo-memoria-clon-y-r
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear al Analista la REVISION ADVERSARIAL del diseno de medicion del Asesor (personal/asesor/DISENO-medicion-grafo-memoria-hibrida-v0.1.md), incluyendo el estudio del repositorio externo github.com/DeusData/codebase-memory-mcp como insumo. La revision puede adelantarse si el Analista queda libre antes del cierre de la tanda 0103; la EJECUCION del experimento NO arranca hasta ese cierre. Confirmar ruteo y calendario por mailbox."
