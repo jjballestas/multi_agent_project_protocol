@@ -2,7 +2,7 @@
 task_id: TASK-0273
 title: "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar"
 type: infra
-status: proposed
+status: ready
 owner: Codex
 phase: P2
 priority: high

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-po
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 requested_action: "Decidir el GO de TASK-0273 con la medicion ya en mano: prune_state --apply tarda 86.7-89.1 s INCLUSO SIN poda vencida (vs --check 0.31-0.61 s). El dato refuerza tu reparto y anade una pieza al acceptance (camino no-op barato). Nada arranca sin tu GO."

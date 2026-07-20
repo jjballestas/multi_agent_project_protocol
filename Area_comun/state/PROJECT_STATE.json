@@ -135,7 +135,7 @@
         {
             "id": "TASK-0273",
             "owner": "Codex",
-            "status": "proposed",
+            "status": "ready",
             "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar"
         },
         {

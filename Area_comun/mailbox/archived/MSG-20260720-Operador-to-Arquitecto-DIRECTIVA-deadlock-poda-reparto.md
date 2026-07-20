@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-deadlock-poda-reparto
 from: Operador
 to: Arquitecto
 type: DIRECTIVA
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Registrar una unidad nueva con intake DoR completo para resolver el deadlock poda-vs-claim con el reparto decidido: (1) el gate de poda AVISA y no bloquea en local, (2) la poda se ejecuta COORDINADA en el checkpoint de higiene del Arquitecto, (3) el CI la exige antes de integrar. Medir y reportar ademas el tiempo real de prune_state --apply, que hoy no tenemos. No arrancar sin GO."

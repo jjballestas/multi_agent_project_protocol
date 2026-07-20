@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entreg
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Confirmar si el build-open de Contabilidad puede adelantarse para que Julian (jheredia) construya las 6 unidades MEDIDAS del N=6 en cuanto este disponible, sin esperar al 30-jul: estado real de los entregables previos (corpus E2 <=25-jul, BR-C4 <=29-jul), si dependen de Julian o se desplazan, y que haria falta operativamente para abrir manana. Responder por mailbox; NO arrancar nada sin mi GO."

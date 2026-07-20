@@ -27,33 +27,47 @@
             "updated_at": "2026-07-03T09:01:07Z"
         },
         {
-            "claim_id": "CLAIM-20260720-101012-prune-arquitecto",
+            "claim_id": "CLAIM-20260720-104138-prune-arquitecto",
             "expires_at": "2026-07-20",
             "notes": "Maintenance prune via submit_intent under event_state.enforce.",
             "owner": "Arquitecto",
             "scope": [
                 "Area_comun/state/CLAIMS.json"
             ],
-            "started_at": "2026-07-20T10:10:12Z",
+            "started_at": "2026-07-20T10:41:38Z",
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
-            "updated_at": "2026-07-20T10:10:12Z"
+            "updated_at": "2026-07-20T10:41:38Z"
         },
         {
-            "claim_id": "CLAIM-arq-registro0273-20260720",
-            "expires_at": "2026-07-20T11:15:00Z",
-            "notes": "Registro TASK-0273 (deadlock poda-claim, DIRECTIVA del Operador) en proposed; medicion aportada; espera GO",
+            "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
+            "expires_at": "2026-07-20T11:45:00Z",
+            "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",
             "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/TASK_INDEX.json#TASK-0273",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
-                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
-                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0273-20260720"
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-checkpoint-hyg-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-causa-raiz-seenburn-archive.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-causa-raiz-seenburn-archive.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-realimentacion-confirmada.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-realimentacion-confirmada.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-seenburn-confirmado-regla-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-seenburn-confirmado-regla-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-deadlock-poda-reparto.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-deadlock-poda-reparto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md"
             ],
-            "started_at": "2026-07-20T10:15:00Z",
+            "started_at": "2026-07-20T10:45:00Z",
             "status": "released",
-            "task_id": "TASK-0273",
-            "updated_at": "2026-07-20T10:15:00Z"
+            "task_id": "OPS-CHECKPOINT-HYGIENE-20260720",
+            "updated_at": "2026-07-20T10:45:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reject0257-iter2-20260719",

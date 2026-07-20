@@ -29931,6 +29931,51 @@
             "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
             "updated_at": "2026-07-20T10:08:30Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-101012-prune-arquitecto",
+            "expires_at": "2026-07-20",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-20T10:10:12Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-20T10:10:12Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ready0273-20260720",
+            "expires_at": "2026-07-20T11:38:02Z",
+            "notes": "GO del Operador 2026-07-20: promocion de TASK-0273 a ready",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ready0273-20260720"
+            ],
+            "started_at": "2026-07-20T10:38:02Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T10:38:02Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-registro0273-20260720",
+            "expires_at": "2026-07-20T11:15:00Z",
+            "notes": "Registro TASK-0273 (deadlock poda-claim, DIRECTIVA del Operador) en proposed; medicion aportada; espera GO",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-registro0273-20260720"
+            ],
+            "started_at": "2026-07-20T10:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T10:15:00Z"
         }
     ]
 }

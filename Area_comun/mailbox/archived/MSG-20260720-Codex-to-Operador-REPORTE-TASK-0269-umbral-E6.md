@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6
 from: Codex
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:
