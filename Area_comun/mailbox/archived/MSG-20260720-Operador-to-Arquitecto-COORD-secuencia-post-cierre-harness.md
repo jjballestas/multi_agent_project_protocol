@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-COORD-secuencia-post-cierre-harn
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Confirmar la secuencia post-cierre del harness: si arranca TASK-0258 (bloque obstacles del turn_schema) o primero TASK-0269 (materializacion parcial + medicion para la re-decision del umbral de 15s). Y hacer higiene del canal: 4 mensajes REVIEW de 0267/0268 siguen en open/ con sus unidades ya aprobadas."

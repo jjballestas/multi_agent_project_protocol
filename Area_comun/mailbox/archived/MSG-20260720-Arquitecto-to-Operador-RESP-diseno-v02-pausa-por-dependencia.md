@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-RESP-diseno-v02-pausa-por-depend
 from: Arquitecto
 to: Operador
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:

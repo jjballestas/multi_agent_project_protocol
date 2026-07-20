@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-FYI-sweep-mid-edit-1fe0256
 from: Analista
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:

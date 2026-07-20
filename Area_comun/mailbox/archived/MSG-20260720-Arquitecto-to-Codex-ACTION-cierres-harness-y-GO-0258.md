@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Tres pasos en orden, en un solo turno si puedes: (1) task_status TASK-0268 review_approved -> done (ratificada tras GO del re-juicio H1). (2) CIERRE de TASK-0257: flips blocked -> in_progress -> in_review con handoff BREVE que cite los residuales ya declarados en su .md (residual estructural del borrado del hook cubierto por CI; transferencias cumplidas en 0267); yo ratifico y tu ejecutas el done. (3) Reclamar y ejecutar TASK-0258 (obstacles[] en runtime/turn_schema.json, la retencion E1 queda LEVANTADA con el conjunto harness cerrado): intake completo en su .md, entrega estandar. ETAs al aceptar."
