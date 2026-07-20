@@ -120,9 +120,25 @@ preserve old behavior:
 - **Verify the resolved root:** the startup log line prints `root=...`. If you copied the
   harness into a tree without its own `protocol.config.json`, the upward walk can anchor to
   an ENCLOSING instance's config -- check that line on first launch.
-- A failed exec marks the message as seen (inherited design: no retry storms). To re-trigger
-  a message, edit it (the signature is name|length|mtime) or remove its entry from
-  `seen.json`.
+- `seen.json` is written only after confirmed work (exit 0 plus a repository evidence
+  change) or a definitive, principled negative. Transient and unconfirmed aborts stay
+  unseen and use `retry.json`: three attempts by default, 30-second backoff, then a
+  `RETRY_EXHAUSTED ... signal=watchdog` log record. A changed message signature resets
+  the retry budget.
+- Retryable causes are temporary coordination conditions: red pre-gate, another owner's
+  active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
+  left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,
+  explicit scope rejection, and out-of-scope refusal. These are consumed once and never
+  retried automatically.
+- Before a transient return, the runner unstages and restores only paths that were absent
+  from the pre-exec status snapshot. Pre-existing user or peer changes are preserved.
+  Staged files newer than `-AbortedResidueMinutes` are treated as live work and defer the
+  exec; an older immobile staged set is reported as aborted residue. Commits, process
+  existence, and CPU are not used as the live-vs-aborted discriminator.
+- The hook/prune peer-gate deadlock has two coordinated exits: release the blocking peer
+  claim, or make exactly one `--no-verify` commit after running the underlying validator,
+  encoding, neutrality, and drift gates manually and recording that evidence. Never turn
+  the bypass into a persistent config change.
 
 ## Platform note
 

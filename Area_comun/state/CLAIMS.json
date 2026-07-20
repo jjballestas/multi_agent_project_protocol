@@ -40,6 +40,43 @@
             "updated_at": "2026-07-20T10:41:38Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272",
+            "expires_at": "2026-07-20T18:45:00Z",
+            "notes": "Eliminate silent seen-burn with confirmed execution, bounded transient retry, exhaustion signal, tests and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T10:45:00Z",
+            "status": "active",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T10:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",
+            "expires_at": "2026-07-20T19:15:00Z",
+            "notes": "Adapt permanent harness contract tests to thin live wrappers over the born-operational generic runner.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-tests",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py"
+            ],
+            "started_at": "2026-07-20T11:15:00Z",
+            "status": "active",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T11:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
             "expires_at": "2026-07-20T11:45:00Z",
             "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",

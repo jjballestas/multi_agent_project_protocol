@@ -113,9 +113,16 @@ HARNESS_RELS = (
 )
 
 
+def harness_contract_text(rel: str) -> str:
+    text = (ROOT / rel).read_text(encoding="utf-8")
+    if "scripts\\harness\\peer_mailbox_cron.ps1" in text:
+        text += "\n" + (ROOT / "scripts/harness/peer_mailbox_cron.ps1").read_text(encoding="utf-8")
+    return text
+
+
 def test_harnesses_contain_required_exec_lease_contract() -> None:
     for rel in HARNESS_RELS:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        text = harness_contract_text(rel)
         assert "exec-lease.json" in text
         assert "process_start_time_utc" in text
         assert "cmdline_hash" in text
@@ -129,7 +136,7 @@ def test_harnesses_contain_required_exec_lease_contract() -> None:
 
 def test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup() -> None:
     for rel in HARNESS_RELS:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        text = harness_contract_text(rel)
         start = text.index("function Clear-StaleCronLockIfSafe")
         end = text.index("function Stop-ExpiredLeaseProcess", start)
         body = text[start:end]
@@ -139,7 +146,7 @@ def test_self_heal_does_not_wait_for_deadline_before_dead_pid_cleanup() -> None:
 
 def test_harnesses_use_per_exec_prompt_files() -> None:
     for rel in HARNESS_RELS:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        text = harness_contract_text(rel)
         assert '.prompt.txt"' not in text.split("function Invoke-", 1)[0].replace("arquitecto_cron.prompt.txt", "")
         assert "Join-Path $RunsDir" in text and ".prompt.txt" in text
         assert "-RedirectStandardInput $prompt" in text
@@ -147,7 +154,7 @@ def test_harnesses_use_per_exec_prompt_files() -> None:
 
 def test_harnesses_use_tree_kill_and_single_instance_guard() -> None:
     for rel in HARNESS_RELS:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        text = harness_contract_text(rel)
         assert "taskkill.exe" in text
         assert '"/T"' in text
         assert '"/F"' in text
@@ -158,7 +165,7 @@ def test_harnesses_use_tree_kill_and_single_instance_guard() -> None:
 
 def test_stop_order_requires_exact_line_not_contains() -> None:
     for rel in HARNESS_RELS:
-        text = (ROOT / rel).read_text(encoding="utf-8")
+        text = harness_contract_text(rel)
         assert '-cmatch "\\bSTOP_JOB\\b"' not in text
         assert "-match \"(?i)\\b(detener" not in text
         assert '-ceq "STOP_JOB"' in text

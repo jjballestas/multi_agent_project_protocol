@@ -9,8 +9,9 @@ INSTANCE_HARNESS_PATH = Path(
         ROOT / "personal" / ("Ana" + "lista") / "analista_mailbox_cron.ps1",
     )
 )
-INSTANCE_HARNESS = INSTANCE_HARNESS_PATH.read_text(encoding="utf-8-sig")
 GENERIC = (ROOT / "scripts/harness/peer_mailbox_cron.ps1").read_text(encoding="utf-8-sig")
+INSTANCE_WRAPPER = INSTANCE_HARNESS_PATH.read_text(encoding="utf-8-sig")
+INSTANCE_HARNESS = INSTANCE_WRAPPER + "\n" + GENERIC
 LEGACY_PROVIDER = "Co" + "dex"
 
 
@@ -28,9 +29,10 @@ def main() -> None:
         require(text, 'Write-ExecLease')
         require(text, 'Update-ExecLeaseHeartbeat')
         require(text, 'LOCKED skip')
-    require(INSTANCE_HARNESS, f'[ValidateSet("Anthropic", "Legacy{LEGACY_PROVIDER}")]')
-    require(INSTANCE_HARNESS, '[string]$AgentProvider = "Anthropic"')
-    require(INSTANCE_HARNESS, '"exec", "-s", "danger-full-access"')
+    require(INSTANCE_WRAPPER, f'[ValidateSet("Anthropic", "Legacy{LEGACY_PROVIDER}")]')
+    require(INSTANCE_WRAPPER, '[string]$AgentProvider = "Anthropic"')
+    require(INSTANCE_HARNESS, '"exec",')
+    require(INSTANCE_HARNESS, '"-s", "danger-full-access",')
     require(GENERIC, f'[ValidateSet("Auto", "Anthropic", "{LEGACY_PROVIDER}")]')
     for text in (INSTANCE_HARNESS, GENERIC):
         require(text, "function Get-AgentInvocation")

@@ -10,7 +10,10 @@ param(
     [string]$ReasoningEffort = "medium",
     [int]$IntervalSeconds = 300,
     [int]$MaxNoCoordinatorRounds = 15,
-    [int]$ExecTimeoutSeconds = 3600
+    [int]$ExecTimeoutSeconds = 3600,
+    [int]$MaxTransientRetries = 3,
+    [int]$RetryBackoffSeconds = 30,
+    [int]$AbortedResidueMinutes = 5
 )
 
 # peer_mailbox_cron.ps1 -- generic launchable runtime for a protocol peer agent
@@ -79,6 +82,7 @@ $StopPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.stop"
 $LockPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.lock"
 $LeasePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.exec-lease.json"
 $SeenPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.seen.json"
+$RetryPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.retry.json"
 $RunsDir = Join-Path $RuntimeDir "runs"
 $StartedAtUtc = [DateTime]::UtcNow
 $NoCoordinatorRounds = 0
@@ -405,6 +409,80 @@ function Write-Seen {
     Write-Utf8NoBom -Path $SeenPath -Content (($object | ConvertTo-Json -Depth 5) + "`n")
 }
 
+function Read-RetryState {
+    if (-not (Test-Path -LiteralPath $RetryPath)) { return @{} }
+    try {
+        $json = Get-Content -LiteralPath $RetryPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $state = @{}
+        foreach ($prop in $json.PSObject.Properties) { $state[$prop.Name] = $prop.Value }
+        return $state
+    } catch { return @{} }
+}
+
+function Write-RetryState {
+    param([hashtable]$State)
+    $object = [ordered]@{}
+    foreach ($key in ($State.Keys | Sort-Object)) { $object[$key] = $State[$key] }
+    Write-Utf8NoBom -Path $RetryPath -Content (($object | ConvertTo-Json -Depth 8) + "`n")
+}
+
+function Get-RepositoryEvidence {
+    $head = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    $status = (& git -C $Root status --porcelain=v1 2>$null) -join "`n"
+    return "$head`n$status"
+}
+
+function Get-StagedResidueState {
+    $paths = @(& git -C $Root diff --cached --name-only -- 2>$null)
+    if ($paths.Count -eq 0) { return "none" }
+    $cutoff = [DateTime]::UtcNow.AddMinutes(-$AbortedResidueMinutes)
+    foreach ($relative in $paths) {
+        $full = Join-Path $Root $relative
+        if ((Test-Path -LiteralPath $full) -and (Get-Item -LiteralPath $full).LastWriteTimeUtc -gt $cutoff) {
+            return "live"
+        }
+    }
+    return "aborted"
+}
+
+function Restore-TransientExecResidue {
+    param([string[]]$BeforeStatus)
+    $beforePaths = @{}
+    foreach ($line in $BeforeStatus) {
+        if ($line.Length -ge 4) { $beforePaths[$line.Substring(3)] = $true }
+    }
+    foreach ($line in @(& git -C $Root status --porcelain=v1 2>$null)) {
+        if ($line.Length -lt 4) { continue }
+        $relative = $line.Substring(3)
+        if ($beforePaths.ContainsKey($relative)) { continue }
+        if ($line[0] -eq 'A') {
+            & git -C $Root rm --cached --force --ignore-unmatch -- $relative 2>$null | Out-Null
+        } elseif ($line[0] -ne ' ' -and $line[0] -ne '?') {
+            & git -C $Root restore --staged -- $relative 2>$null | Out-Null
+        }
+        $tracked = @(& git -C $Root ls-files -- $relative 2>$null)
+        if ($tracked.Count -gt 0) {
+            & git -C $Root restore --worktree -- $relative 2>$null | Out-Null
+        } else {
+            $full = Join-Path $Root $relative
+            if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
+        }
+    }
+}
+
+function Get-ExecOutcomeClass {
+    param([int]$ExitCode, [string]$Output, [bool]$EvidenceChanged)
+    if ($Output -match '(?im)(NO-GO|change_required|negativa principiada|rechazo por alcance|out.of.scope|fuera de alcance)') {
+        return "definitive"
+    }
+    if ($Output -match '(?im)(pre-gate|precondition|claim ajeno|active claim|ventana (roja|ocupada)|tree.*(dirty|peer)|cambios ajenos|staged residue|resource deadlock)') {
+        return "transient"
+    }
+    if ($ExitCode -eq 0 -and $EvidenceChanged) { return "confirmed" }
+    if ($ExitCode -ne 0) { return "transient" }
+    return "unconfirmed"
+}
+
 function Get-MessageSignature {
     param([System.IO.FileInfo]$Message)
     return "$($Message.Name)|$($Message.Length)|$($Message.LastWriteTimeUtc.Ticks)"
@@ -416,6 +494,7 @@ function Get-ProcessablePeerMessages {
         return @()
     }
     $seen = Read-Seen
+    $retry = Read-RetryState
     @(Get-ChildItem -LiteralPath $openDir -File -Filter "MSG-*.md" | Where-Object {
         $content = Get-Content -LiteralPath $_.FullName -Raw -Encoding UTF8
         $to = Get-Field -Content $content -Name "to"
@@ -431,7 +510,8 @@ function Get-ProcessablePeerMessages {
             -not [string]::IsNullOrWhiteSpace($requested) -or
             ($type -in $AcceptedTypesUpper)
         ) -and
-        ((-not $seen.ContainsKey($_.Name)) -or ($seen[$_.Name] -ne $signature))
+        ((-not $seen.ContainsKey($_.Name)) -or ($seen[$_.Name] -ne $signature)) -and
+        ((-not $retry.ContainsKey($_.Name)) -or ([string]$retry[$_.Name].signature -ne $signature) -or (-not [bool]$retry[$_.Name].exhausted))
     })
 }
 
@@ -476,6 +556,14 @@ function Invoke-PeerForMessage {
         Write-Log "LOCKED skip $($Message.Name)"
         return
     }
+    $residueState = Get-StagedResidueState
+    if ($residueState -eq "live") {
+        Write-Log "RETRY_DEFER reason=staged_residue_live message=$($Message.Name)"
+        return
+    }
+    if ($residueState -eq "aborted") {
+        Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
+    }
 
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
@@ -498,6 +586,8 @@ function Invoke-PeerForMessage {
 
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
+    $evidenceBefore = Get-RepositoryEvidence
+    $statusBefore = @(& git -C $Root status --porcelain=v1 2>$null)
 
     try {
         # The prompt goes through STDIN (RedirectStandardInput of the rendered prompt
@@ -521,15 +611,44 @@ function Invoke-PeerForMessage {
                 break
             }
         }
-        Write-Log "EXEC_EXIT code=$($process.ExitCode) message=$($Message.Name)"
-        $seen = Read-Seen
-        $seen[$Message.Name] = Get-MessageSignature -Message $Message
-        Write-Seen -Seen $seen
+        $output = ""
+        if (Test-Path -LiteralPath $stdoutPath) { $output += Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
+        if (Test-Path -LiteralPath $stderrPath) { $output += "`n" + (Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8) }
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -EvidenceChanged ((Get-RepositoryEvidence) -ne $evidenceBefore)
+        Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
+        $signature = Get-MessageSignature -Message $Message
+        if ($outcome -in @("confirmed", "definitive")) {
+            $seen = Read-Seen
+            $seen[$Message.Name] = $signature
+            Write-Seen -Seen $seen
+            $retry = Read-RetryState
+            if ($retry.ContainsKey($Message.Name)) { $retry.Remove($Message.Name); Write-RetryState -State $retry }
+        } else {
+            Restore-TransientExecResidue -BeforeStatus $statusBefore
+            $retry = Read-RetryState
+            $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
+            $attempt = $previous + 1
+            $exhausted = $attempt -ge $MaxTransientRetries
+            $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = $outcome; updated_at = [DateTime]::UtcNow.ToString("o") }
+            Write-RetryState -State $retry
+            if ($exhausted) {
+                Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=$outcome message=$($Message.Name)"
+            } else {
+                Write-Log "RETRY_SCHEDULED attempt=$attempt max=$MaxTransientRetries backoff_seconds=$RetryBackoffSeconds outcome=$outcome message=$($Message.Name)"
+                if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
+            }
+        }
     } catch {
         Write-Log "EXEC_FAIL message=$($Message.Name) error=$($_.Exception.Message)"
-        $seen = Read-Seen
-        $seen[$Message.Name] = Get-MessageSignature -Message $Message
-        Write-Seen -Seen $seen
+        Restore-TransientExecResidue -BeforeStatus $statusBefore
+        $signature = Get-MessageSignature -Message $Message
+        $retry = Read-RetryState
+        $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
+        $attempt = $previous + 1
+        $exhausted = $attempt -ge $MaxTransientRetries
+        $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = "transient"; updated_at = [DateTime]::UtcNow.ToString("o") }
+        Write-RetryState -State $retry
+        if ($exhausted) { Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=transient message=$($Message.Name)" }
     } finally {
         if (Test-Path -LiteralPath $LockPath) {
             Remove-Item -LiteralPath $LockPath -Force
