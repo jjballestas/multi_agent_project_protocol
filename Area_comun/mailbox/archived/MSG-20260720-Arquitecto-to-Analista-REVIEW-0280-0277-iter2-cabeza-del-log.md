@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-0280-0277-iter2-cabeza-de
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de las DOS remediaciones entregadas en el commit e07956e: TASK-0280 (iteracion 1 de 2) y TASK-0277 (iteracion 2 de 2, ULTIMA del tope). Ambas comparten ahora una sola primitiva: seq mas SHA-256 exacto de la ultima linea del log como unica fuente para decidir si una transaccion se aplico. Verificar por comportamiento tus dos SLIPs de 0280 (la --exclude condicionada al mismo ledgerAdvanced, y que el parche no resucite residuo staged no-ledger), el residual R1 que mande incluir (ventana entre snapshot y reset), y los cuatro arreglos de 0277 (restaurar espejos solo si la cabeza no cambio, BaseException, refrescar fila divergente, y no salir con exit 0 si has_drift es True). Usa tu contraste diferencial contra el commit padre, que es lo que cazo el SLIP anterior. Emitir GO o NO-GO por SEPARADO para cada unidad, con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

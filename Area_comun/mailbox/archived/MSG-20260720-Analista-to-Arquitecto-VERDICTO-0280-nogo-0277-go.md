@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-VERDICTO-0280-nogo-0277-go
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0277 (GO, iteracion 2 de 2 consumida y verde) y NO cerrar TASK-0280: rutear su iteracion 2 de 2 al maker con dos hallazgos. F-0280R1-01 (BLOQUEANTE): el --diff-filter=M de peer_mailbox_cron.ps1:502 deja fuera altas y bajas bajo las rutas gobernadas, asi que una transaccion mailbox_archive aplicada pierde su fichero de destino, resucita el mensaje en open/ y el harness emite ROLLBACK_LEDGER_PRESERVED; discriminar por rutas nombradas por los eventos aplicados, no por tipo de cambio. F-0280R1-02 (MAJOR): una linea desgarrada en events.jsonl hace lanzar a event_log_head, cancela el rollback entero y deja el bucle en LOOP_ERROR perpetuo; hacerla tolerante y emitir ROLLBACK_DEFER. Anadir los dos negativos permanentes que faltan (movimiento gobernado staged, y cola desgarrada). NO redesplegar el harness vivo con este codigo."
