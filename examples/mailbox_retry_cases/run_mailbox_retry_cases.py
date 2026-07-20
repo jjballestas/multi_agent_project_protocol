@@ -88,10 +88,21 @@ def main() -> int:
     try:
         (sandbox / "Area_comun/mailbox/open").mkdir(parents=True)
         (sandbox / "runtime/state").mkdir(parents=True)
+        (sandbox / "runtime/protocol_replay.py").write_text(
+            "import json\nfrom pathlib import Path\n"
+            "def protocol_state_drift(root: Path):\n"
+            "    lines = [line for line in (root / 'runtime/state/events.jsonl').read_text().splitlines() if line.strip()]\n"
+            "    event_seq = json.loads(lines[-1])['seq'] if lines else 0\n"
+            "    derived_seq = json.loads((root / 'Area_comun/state/derived.json').read_text())['seq']\n"
+            "    return {'has_drift': event_seq != derived_seq}\n",
+            encoding="ascii",
+        )
         (sandbox / "scripts/harness/prompts").mkdir(parents=True)
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+        (sandbox / "Area_comun/state").mkdir(parents=True)
+        (sandbox / "Area_comun/state/derived.json").write_text('{"seq":0}\n', encoding="ascii")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
@@ -124,12 +135,21 @@ def main() -> int:
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
             "}\n"
+            "if($count -eq 3){\n"
+            "  Set-Content -Path (Join-Path $root 'ledger-residue.txt') -Value residue -Encoding ASCII\n"
+            "  git add ledger-residue.txt\n"
+            "  $event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"}}'\n"
+            "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/state/derived.json') -Value '{\"seq\":1}' -Encoding ASCII\n"
+            "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
+            "  Write-Output 'OUTCOME: transient'\n"
+            "  exit 0\n"
+            "}\n"
             "$response=Join-Path $root 'Area_comun/mailbox/open/MSG-response.md'\n"
             "Set-Content -Path $response -Value 'response confirmed' -Encoding ASCII\n"
             "git add $response; git commit -m 'test confirmed response' | Out-Null\n"
-            "$event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"}}'\n"
-            "Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
-            "Write-Output 'status: in_review'\n",
+            "Write-Output 'status: in_review'\n"
+            "Write-Output 'OUTCOME: confirmed'\n",
             encoding="ascii",
         )
         fake = sandbox / "fake-agent.cmd"
@@ -146,7 +166,7 @@ def main() -> int:
             "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
             "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
             "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
-            "-MaxTransientRetries", "3", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+            "-MaxTransientRetries", "4", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
             cwd=sandbox,
         )
         runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
@@ -163,13 +183,20 @@ def main() -> int:
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
         assert not (sandbox / "residue.txt").exists(), "aborted exec residue survived rollback"
+        assert not (sandbox / "ledger-residue.txt").exists(), "non-ledger residue survived ledger-preserving rollback"
+        events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
+        assert len(events) == 1 and json.loads(events[0])["seq"] == 1, "applied ledger event did not survive exactly once"
+        assert json.loads((sandbox / "Area_comun/state/derived.json").read_text(encoding="ascii"))["seq"] == 1
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
         assert predirty_status.startswith(" M "), f"pre-dirty index/worktree state was not restored: {predirty_status!r}"
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
+        assert "RETRY_SCHEDULED attempt=3" in log
+        assert "ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=1" in log
+        assert "ROLLBACK_LEDGER_DRIFT" not in log
         assert "outcome=confirmed" in log
-        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 3
+        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 4
         print("mailbox retry cases: PASS (uniform author rejected -> rollback -> signed-ledger confirmation)")
         return 0
     finally:

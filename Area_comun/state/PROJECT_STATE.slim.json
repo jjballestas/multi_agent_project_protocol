@@ -99,7 +99,7 @@
         {
             "id": "TASK-0280",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
         }
     ],

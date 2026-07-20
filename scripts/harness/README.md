@@ -137,7 +137,11 @@ preserve old behavior:
   renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.
   Both snapshot commands must succeed before the agent starts. Rollback rechecks HEAD
   immediately before and after `reset --hard`; movement defers restoration instead of
-  applying stale patches.
+  applying stale patches. If the signed ledger advances during an exec that later returns
+  transient, rollback preserves `runtime/state/` and its governed materialized state,
+  reports `ROLLBACK_LEDGER_PRESERVED`, and checks replay drift before scheduling the retry.
+  A mismatch reports `ROLLBACK_LEDGER_DRIFT` instead of continuing silently. When no event
+  was applied, the original full worktree rollback remains unchanged.
 - Retryable causes are temporary coordination conditions: red pre-gate, another owner's
   active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
   left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,

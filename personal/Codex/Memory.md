@@ -1,6 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0277 implementation.
+Last updated: 2026-07-20 Europe/Madrid, after TASK-0277 remediation commit `7337b30`.
+
+- Delivery commit `6e3bcc5` moves TASK-0277 to `in_review`, releases both
+  remediation claims at signed seq 5409-5412, and leaves the self-contained
+  handoff `MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277-remediacion-iter1`.
+
+- Commit `7337b30` unblocks governed prune apply by pre-staging the exact hot rows
+  in both archive mirrors before `submit_intents` runs its post-apply drift gate;
+  mirror bytes are restored if the governed transaction fails. The permanent
+  enforced-runtime regression executes real `--apply`, then requires drift false
+  and `--check` green. The validator now documents why selector syntax is enforced
+  only for active claims. TASK-0278 was also flipped `review_approved -> done` at
+  signed ledger seq 5405-5407.
 
 - Commit `a899041` repairs archive traceability: TASK-0267 is reconstructed from
   signed event history, all signed prune omissions are restored, 17 legacy task
@@ -12,7 +24,7 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0277 implementation.
   released-claim ratio is 93.02%; only Arquitecto can execute the governed prune.
 - Delivery transition seq 5382-5385 moves TASK-0277 to `in_review`, releases
   both Codex claims, and publishes the self-contained handoff and Arquitecto
-  response. Codex did not review or ratify the implementation.
+  response in commit `5414838`. Codex did not review or ratify the implementation.
 
 - Commit `ef0b645` isolates the agent response (stdout) from invoker diagnostics
   (stderr) before outcome classification, so Codex token-count epilogues, checker
