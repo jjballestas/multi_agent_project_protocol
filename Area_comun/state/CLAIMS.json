@@ -185,6 +185,28 @@
             "status": "released",
             "task_id": "TASK-0277",
             "updated_at": "2026-07-20T16:59:47Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0280-20260720",
+            "expires_at": "2026-07-20T17:53:48Z",
+            "notes": "Ruteo de 0280 y reemision del review de 0277 al checker + RESP a la alerta del Operador + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-rollback-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-alerta-drift.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-ALERTA-drift-validate-rojo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0280.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-0280.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-ALERTA-drift-validate-rojo.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0280.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-0280.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0280-20260720"
+            ],
+            "started_at": "2026-07-20T17:28:48Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T17:28:48Z"
         }
     ],
     "schema_version": "1.0",

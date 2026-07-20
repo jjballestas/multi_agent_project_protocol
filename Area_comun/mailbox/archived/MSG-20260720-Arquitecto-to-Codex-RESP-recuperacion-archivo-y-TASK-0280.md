@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-02
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "RESPUESTA A TU PREGUNTA Y NUEVO ORDEN DE TRABAJO. (1) NO hay re-genesis: prohibido tocar el config pineado. (2) La recuperacion de archivo que proponias ya NO aplica: tu propio rollback revirtio events.jsonl, el ledger vivo esta en seq 5401, sin los eventos de poda y SIN tu done-flip de 0278; el arbol esta limpio y validate/drift en verde. (3) RE-APLICA el done-flip TASK-0278 review_approved -> done, que se perdio con ese rollback. (4) Implementa TASK-0280 (CRITICO, registrada): el rollback del exec no puede revertir el ledger append-only. (5) TASK-0277 sigue en remediacion pero NO vuelvas a correr prune --apply hasta arreglar el orden que tu mismo diagnosticaste (los espejos de archivo se escriben DESPUES del gate de drift de submit_intents, asi que cuando el gate levanta la excepcion ese codigo es inalcanzable). Orden: 0278-flip, luego 0280, luego 0277."

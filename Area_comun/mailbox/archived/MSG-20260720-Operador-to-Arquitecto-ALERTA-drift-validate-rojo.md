@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-ALERTA-drift-validate-rojo
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Confirmar si el drift de CLAIMS.slim.json esta cubierto por la recuperacion en curso de TASK-0280 o es un frente aparte. validate esta en ROJO ahora mismo con el arbol LIMPIO, asi que no es transitorio: cualquier commit posterior se apila sobre estado inconsistente y el CI fallara en la integracion."
