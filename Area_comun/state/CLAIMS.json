@@ -42,6 +42,27 @@
             "updated_at": "2026-07-20T03:13:14Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Remediate TASK-0268 H1 docs-only and redeliver for re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0268",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0268",
+                "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0268.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md",
+                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md"
+            ],
+            "started_at": "2026-07-20T04:30:00Z",
+            "status": "active",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02",
             "expires_at": "2026-07-20T11:55:00Z",
             "notes": "Remediate F-0271-02 neutrality and perform ratified TASK-0270 done flip.",

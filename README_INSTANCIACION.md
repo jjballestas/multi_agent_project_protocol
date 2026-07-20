@@ -395,9 +395,10 @@ git config core.hooksPath .githooks
 ```
 
 Compruebalo con `git config core.hooksPath`; debe devolver `.githooks`. El
-`pre-commit` es la primera linea rapida: para todo commit materializa el snapshot
-staged, ejecuta `prune_state.py --check` y comprueba el drift de la guia cuando
-corresponde. El validador completo queda reservado en local para un gate explicito:
+`pre-commit` es la primera linea rapida: para todo commit ejecuta sobre el arbol
+actual los chequeos baratos `prune_state.py --check` y drift de la guia cuando
+corresponde, sin materializar el snapshot staged. El validador completo y la garantia
+de juicio sobre los bytes staged quedan reservados en local para un gate explicito:
 
 ```powershell
 $env:HOOK_FULL = "1"; git commit
