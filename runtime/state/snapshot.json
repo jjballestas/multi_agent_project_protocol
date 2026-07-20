@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "b9435a6d5a204acdaa5c346728fc30c819130db9c2d0c7dc420e0cc291da5c4d",
+  "canonical_hash": "fa3db4d459f0282b3b8a95f044f9b1c0dfce3db5e1abefb9424e7753768437ff",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -658,6 +658,8 @@
       "CLAIM-20260720-043235-prune-arquitecto": 1,
       "CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW": 1,
       "CLAIM-20260720-Codex-TASK-0257-close": 1,
+      "CLAIM-20260720-Codex-TASK-0257-done": 1,
+      "CLAIM-20260720-Codex-TASK-0257-final-memory": 1,
       "CLAIM-20260720-Codex-TASK-0258": 1,
       "CLAIM-20260720-Codex-TASK-0258-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery": 1,
@@ -2032,7 +2034,7 @@
       "TASK-0254": 32,
       "TASK-0255": 27,
       "TASK-0256": 2,
-      "TASK-0257": 38,
+      "TASK-0257": 41,
       "TASK-0258": 6,
       "TASK-0259": 2,
       "TASK-0260": 2,
@@ -2069,7 +2071,7 @@
       "protocol-prune": 13,
       "protocol-state": 1
     },
-    "events_applied": 4506,
+    "events_applied": 4511,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3742,6 +3744,11 @@
       "codex:task0257:blocked-to-in-progress:20260720T065000Z": 5166,
       "codex:task0257:close-claim:20260720T065000Z": 5165,
       "codex:task0257:close-release:20260720T065500Z": 5168,
+      "codex:task0257:done-claim:20260720T072000Z": 5178,
+      "codex:task0257:done-release:20260720T072000Z": 5180,
+      "codex:task0257:done:20260720T072000Z": 5179,
+      "codex:task0257:final-memory-claim:20260720T072500Z": 5181,
+      "codex:task0257:final-memory-release:20260720T072500Z": 5182,
       "codex:task0257:in-progress-to-in-review:20260720T065500Z": 5167,
       "codex:task0257:release-delivery:2026-07-19T19:01:31Z": 4929,
       "codex:task0257:release-fix:2026-07-19T19:01:31Z": 4928,
@@ -6579,5 +6586,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5177
+  "up_to_seq": 5182
 }

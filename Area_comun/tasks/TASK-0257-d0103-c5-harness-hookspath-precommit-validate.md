@@ -2,7 +2,7 @@
 task_id: TASK-0257
 title: "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
 type: infra
-status: in_review
+status: done
 owner: Codex
 phase: P2
 priority: high

@@ -4,7 +4,13 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 i
 
 - TASK-0258 implementation commit `9be450d` bumps `runtime/turn_schema.json`
   from 1.2.0 to 1.3.0 with optional canonical `obstacles[]`; populated, empty,
-  and malformed golden cases pass in the eight-case schema suite.
+  and malformed golden cases pass in the eight-case schema suite. Delivery commit
+  `34d5dff` records the handoff and response, moves the task to `in_review`, and
+  releases its claims through seq 5177.
+
+- TASK-0257 ceremonial closure commit `aadc062` cites the accepted O1 residuals;
+  Arquitecto ratified it in `dab0fa6`, and the final Codex implementer transition
+  moved it from `review_approved` to `done` through seq 5180.
 
 - TASK-0268 final implementer flip commit `08950e8` moves the Arquitecto-ratified
   bounded hook cost split from `review_approved` to `done`; drift stayed false at

@@ -60,6 +60,37 @@
             "updated_at": "2026-07-20T06:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0257-done",
+            "expires_at": "2026-07-20T15:20:00Z",
+            "notes": "Implementer done flip after Arquitecto ratified ceremonial harness closure.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0257-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T07:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-20T07:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0257-final-memory",
+            "expires_at": "2026-07-20T15:25:00Z",
+            "notes": "Golden-memory update after TASK-0258 delivery and TASK-0257 done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0257-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T07:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-20T07:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0258",
             "expires_at": "2026-07-20T15:00:00Z",
             "notes": "Implement canonical optional obstacles array in turn schema and contract cases.",
