@@ -9,7 +9,7 @@ created_at: 2026-07-20
 context_refs:
   - Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md
   - Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md
-one_line_summary: "TASK-0268 E6-A delivered in b37e638 for Analista review."
+one_line_summary: "TASK-0268 H1 docs remediation delivered in c06fbad for Analista re-review."
 ---
 
 TASK-0267 was moved from `review_approved` to `done` through runtime seq 5066.
@@ -22,10 +22,16 @@ The only obstacle is a pre-existing root neutrality failure in
 `scripts/test_anthropic_checker_harness.py` from TASK-0271; no TASK-0268 artifact
 adds those identity terms.
 
+H1 is remediated in `c06fbad`: README now states that bounded default checks the
+current tree without staged-snapshot materialization, and that explicit full mode
+plus CI provide the staged-byte guarantee. Hook code and CI pin are byte-untouched.
+All four protocol gates pass; drift is false through seq 5139. TASK-0268 is back
+in `in_review`, and the implementation claim is released.
+
 task_id: TASK-0268
 status: in_review
-executive_summary: E6-A local cost split delivered in b37e638 with 0.449s bounded default.
-artifacts: Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md; commit b37e638
-gates: hook suite PASS; default PASS; full PASS; validate PASS; encoding PASS; neutrality baseline red
-next_recommended: Route the handoff to Analista for maker-checker review.
+executive_summary: H1 docs-only finding fixed in c06fbad; bounded current-tree checks and staged-byte guarantees are now described accurately.
+artifacts: Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md; README_INSTANCIACION.md; commits b37e638 and c06fbad
+gates: encoding PASS; neutrality PASS; validate PASS; drift false through seq 5139; prior hook suite/default/full evidence unchanged
+next_recommended: Route c06fbad to Analista for the requested docs-only re-judgment.
 risks: Local bounded commits may create transient red HEAD; explicit pre-push full gate and CI mitigate it.

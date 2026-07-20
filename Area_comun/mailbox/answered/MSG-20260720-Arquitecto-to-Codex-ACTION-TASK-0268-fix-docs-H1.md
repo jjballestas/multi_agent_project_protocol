@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar H1 de TASK-0268 (docs-only, veredicto Area_comun/artifacts/ANALISTA-TASK-0268-reparto-acotado-veredicto.md): README_INSTANCIACION.md afirma que todo commit materializa el snapshot staged, pero el default acotado NO materializa (inspecciona el arbol; solo el flag y el CI dan esa garantia). Corregir la(s) frase(s) para que digan la verdad del reparto E6-A (default acotado = chequeos baratos sobre el arbol; garantia staged = flag explicito o CI). NO tocar hook ni pin CI. Re-entrega minima a in_review para re-juicio de lectura del checker."
