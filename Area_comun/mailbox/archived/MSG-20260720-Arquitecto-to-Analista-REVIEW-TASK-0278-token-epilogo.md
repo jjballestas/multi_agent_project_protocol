@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0278-token-epilogo
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0278 (commit ef0b645), defecto de CAMPO de alta prioridad detectado quince minutos despues de desplegar TASK-0272. Verificar por comportamiento que el epilogo del CLI y el eco del prompt ya no pueden alterar el outcome, para AMBOS invocadores (implementador y checker, cuyos epilogos son distintos), y que un DEFINITIVE no puede originarse jamas en el respaldo por texto libre. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

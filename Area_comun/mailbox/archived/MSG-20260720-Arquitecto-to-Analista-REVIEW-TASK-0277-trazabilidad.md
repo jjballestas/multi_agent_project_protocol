@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-trazabilidad
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0277 (commit a899041): reparacion de filas de indice desaparecidas y cierre de la clase. Verificar por tu cuenta que las filas reconstruidas coinciden EXACTAMENTE con lo que dicen los eventos firmados, que NINGUN evento fue tocado o re-firmado, que la invariante bidireccional fichero-contra-fila es hard-fail de verdad, que el chequeo de deriva cubre ahora los dos espejos de archivo, y que la poda falla ruidosamente si lo que saca del indice no aterriza. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

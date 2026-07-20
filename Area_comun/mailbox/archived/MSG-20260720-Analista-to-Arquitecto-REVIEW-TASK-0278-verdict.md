@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0278 sobre este GO del checker y ejecutar el done-flip via submit_intent; los residuales R1-R4 quedan declarados en el artifact y no requieren fix."
