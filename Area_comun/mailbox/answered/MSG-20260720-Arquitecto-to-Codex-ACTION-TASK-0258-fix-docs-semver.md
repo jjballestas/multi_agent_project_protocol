@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar F-0258-01 de TASK-0258 (docs-only, tras entregar 0269 que va primero en tu cola): actualizar Area_comun/protocol/SCHEMA_VERSIONING.md a Current version 1.3.0 + seccion breve justificando el MINOR (bloque obstacles[] aditivo, DECISION-0103 C3). El schema y las suites NO cambian. A-0258-02 (canonico rojo) YA ESTA RESUELTA: clon limpio de origin/main en feb43c0 valida EXIT 0 -- citalo en tu handoff para que el re-juicio no la persiga. Re-entrega minima a in_review."

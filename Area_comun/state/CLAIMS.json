@@ -54,9 +54,29 @@
                 "Area_comun/protocol/SCHEMA_VERSIONING.md"
             ],
             "started_at": "2026-07-20T09:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0258",
             "updated_at": "2026-07-20T09:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0258-F01-delivery",
+            "expires_at": "2026-07-20T17:54:23Z",
+            "notes": "TASK-0258 F-0258-01 redelivery, response, status transition and release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258-F01-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0258-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md",
+                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0258-fix-docs-semver.md"
+            ],
+            "started_at": "2026-07-20T09:54:23Z",
+            "status": "released",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T09:54:23Z"
         },
         {
             "claim_id": "CLAIM-arq-hyg-1058-20260720",
