@@ -175,6 +175,12 @@
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
+            "id": "TASK-0280",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "64de67c9195c7223630d7b54351679e6085bfa0a06d32b901340268bb6321608",
+  "canonical_hash": "1adf501c0597d86c043fa9d2b8ee659dcb286025364a2626b84ecd7fa1861323",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -763,6 +763,7 @@
       "CLAIM-TASK-0257-Codex-remediation-delivery": 1,
       "CLAIM-TASK-0257-Codex-remediation-status": 1,
       "CLAIM-arq-0270-0271-registro-20260720": 1,
+      "CLAIM-arq-alta0280-20260720": 1,
       "CLAIM-arq-b3-archivo-20260720": 1,
       "CLAIM-arq-campo0278-20260720": 1,
       "CLAIM-arq-checkpoint-hyg-20260720": 1,
@@ -2174,6 +2175,7 @@
       "TASK-0277": 9,
       "TASK-0278": 12,
       "TASK-0279": 1,
+      "TASK-0280": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2196,7 +2198,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4730,
+    "events_applied": 4733,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2358,6 +2360,9 @@
       "arq:0277:upsert:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5348,
       "arq:0278:upsert:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5363,
       "arq:0279:upsert:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5364,
+      "arq:alta0280:acquire:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5402,
+      "arq:alta0280:release:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5404,
+      "arq:alta0280:upsert:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5403,
       "arq:arch-go-0194": 2232,
       "arq:arch-rv-0194": 2233,
       "arq:campo0278:acquire:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5362,
@@ -6930,5 +6935,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5401
+  "up_to_seq": 5404
 }

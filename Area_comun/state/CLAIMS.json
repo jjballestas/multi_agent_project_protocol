@@ -482,6 +482,23 @@
             "updated_at": "2026-07-20T15:17:56Z"
         },
         {
+            "claim_id": "CLAIM-arq-alta0280-20260720",
+            "expires_at": "2026-07-20T17:06:31Z",
+            "notes": "Alta de TASK-0280 (el rollback no puede revertir el ledger) + respuesta a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-0280.md",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-alta0280-20260720"
+            ],
+            "started_at": "2026-07-20T16:36:31Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T16:36:31Z"
+        },
+        {
             "claim_id": "CLAIM-arq-campo0278-20260720",
             "expires_at": "2026-07-20T15:42:10Z",
             "notes": "Alta de TASK-0278 (defecto de campo del token) y TASK-0279 (gate de trailers al pre-commit) + liberacion de claim huerfana de Codex + avance de baseline",
