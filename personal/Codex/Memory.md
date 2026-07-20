@@ -2,7 +2,7 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0277 implementation.
 
-- Commit `2f660f7` repairs archive traceability: TASK-0267 is reconstructed from
+- Commit `a899041` repairs archive traceability: TASK-0267 is reconstructed from
   signed event history, all signed prune omissions are restored, 17 legacy task
   rows predating the signed window are recovered from committed index history,
   task files and index rows are now bidirectionally checked, archive loss is
@@ -10,6 +10,9 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0277 implementation.
 - Permanent replay/validator/prune negatives pass; validator, encoding,
   neutrality, and drift are green. The live prune threshold is due because the
   released-claim ratio is 93.02%; only Arquitecto can execute the governed prune.
+- Delivery transition seq 5382-5385 moves TASK-0277 to `in_review`, releases
+  both Codex claims, and publishes the self-contained handoff and Arquitecto
+  response. Codex did not review or ratify the implementation.
 
 - Commit `ef0b645` isolates the agent response (stdout) from invoker diagnostics
   (stderr) before outcome classification, so Codex token-count epilogues, checker
