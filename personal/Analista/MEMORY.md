@@ -5,7 +5,40 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (0258 re-juicio GO en 305efd1 + 0272 NO-GO seenburn en 8cb4b45; pendiente REVIEW TASK-0273 deadlock-poda en open/).
+> Ultima actualizacion: 2026-07-20 (TASK-0273 deadlock-poda GO en b43c6c6; antes 0258 GO 305efd1 + 0272 NO-GO 8cb4b45; cola limpia salvo remediacion 0272 iter1 en vuelo de Codex).
+
+## Ultima actualizacion 2026-07-20 (2) - TASK-0273 deadlock poda-vs-claim GO/CERRABLE
+- Veredicto GO en `b43c6c6` (artefacto ANALISTA-TASK-0273-deadlock-poda-veredicto.md + MSG
+  GO rr=true). Ancla: clon limpio D:/ccv0273 en 18e7cfd; implementacion 3062214 (=51deaf1).
+  Durante la pasada el Arquitecto commiteo d96ea57 (coord 0272 NO-GO + ACTION iter1 +
+  higiene de 8) EN EL ARBOL LOCAL COMPARTIDO: sus mods de arranque (state + archived)
+  aterrizaron ahi; mi commit quedo encima fast-forward; invariancia de rutas juzgadas
+  18e7cfd..d96ea57 = diff VACIO. Leccion repetida: fetch + merge-base ANTES de push.
+- Bateria propia 9/9 PASA (sandbox espejo del fixture de test_precommit_hook.py con hook
+  real): S3 ataque central poda-vencida + estado invalido staged en FULL -> aborta identico
+  con WARNING presente; S5 vencida + guia-drift (bounded) aborta; S7 vencida + borrado
+  staged de prune_state.py aborta (judgment file); S8 vencida + borrado workflow CI aborta.
+  El aviso NO enmascara ningun juicio. Camino GENUINO extra con fixture real de examples:
+  check EXIT 1 -> CI sim EXIT 1 accionable -> apply real archiva respetando claim activo +
+  in_progress -> check EXIT 0 -> noop 0.077s.
+- Medicion clave (la que pedia el REVIEW): --apply no-op 0.293s/0.281s vs --check 0.377s
+  (viva, enabled, no vencida; antes 87-89s, ~300x), no_op:true transaction:null, CERO bytes
+  de ledger (sha256 antes/despues 5 archivos + porcelain vacio). El early-return de
+  apply_prune evalua assess() ANTES del gate de enforcement -> tampoco abre claim/intent en
+  runtime-authoritative.
+- Espejo born-operational: hook byte-identico sha256 739d9ead...704e en runtime Y attested;
+  pin CI actualizado y coincide con el archivo (un pin viejo = CI rojo); attested encapsula
+  con defaults.run.working-directory hacia governance-dir (rutas resuelven); skill
+  mailbox-hygiene con "Poda coordinada en el checkpoint" solo viaja en tier ATTESTED via
+  scaffold_governance_claude (runtime sin governance-dir NO lleva claude-skills).
+- Residuales: R1 crash de prune en local ya no aborta (CI fail-closed lo caza); R2
+  disparador NUEVO next_actions>8 (clave ya en config pineado) endurece CI - vigilar
+  cadencia de condensacion; R3 due-path sin clave mode (cosmetico); R4 assert de coste noop
+  del maker solo cubre DISABLED (yo cubri enabled en vivo); R5 runtime_instantiation_cases
+  2 casos rojos (coordination_default_and_flag + runtime_tier_scaffolds_motor_gates_ci_off)
+  PRE-EXISTENTES verificados identicos en 3062214~1 - pide unidad de mantenimiento.
+- Gates: clon validate/encoding/domain/drift EXIT 0; vivo validate EXIT 0; config #4
+  byte-identica 2E35F26E...354; suites maker prune/runtime-prune/hook/attested EXIT 0.
 
 ## Ultima actualizacion 2026-07-20 - TASK-0272 seenburn NO-GO + TASK-0258 re-juicio GO
 - DOS veredictos en una pasada (orden de cola del Arquitecto: 0258 primero). Ancla comun:
