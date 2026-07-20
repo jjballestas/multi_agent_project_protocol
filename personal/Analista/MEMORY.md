@@ -2783,3 +2783,22 @@
   y recomputar sobre los out.log/err.log ORIGINALES de .protocol-tmp, no el fixture reducido. NOTA: hook
   de commit aviso PRUNE DUE (released_ratio 95.56>=90) diferido al checkpoint del Arquitecto (yo no
   ejecuto prune, muta estado gobernado).
+
+- HEARTBEAT 2026-07-20 18:45 (HEAD 273b533): sin instruccion REVIEW pendiente. Los dos mensajes
+  abiertos hacia mi (`MSG-...-DECISION-0277-condicion-y-poda`, `MSG-...-DECISION-cierre-0272-residuales`)
+  son type DECISION, requires_response false, requested_action "Ninguna accion inmediata". No-op
+  principiado: no implemento, no muto estado, no cierro. validate exit 0 sobre el arbol (mods de
+  Codex en curso, no las toco). Tres cosas registradas para el proximo turno:
+  (1) F1 de 0277: la relajacion del validador se declara EN EL CODIGO de `validate_claims` con
+  comentario del motivo, ademas de la tarea, el handoff y la nota de cierre; la nota sola no basta.
+  (2) CORRECCION del Arquitecto a su propia guarda: "mantenimiento debido" solo es no-regresion para
+  `prune_state.py --check`; `--apply` SI es gate de la unidad y hoy esta ROJO
+  (`IntentApplyError: protocol state drift remains after submit_intents`, TASK_INDEX_ARCHIVE.json y
+  CLAIMS_ARCHIVE.json hot != replay; revierte limpio). 0277 vuelve a in_progress; en el RE-JUICIO de
+  0277 debo correr `python scripts/prune_state.py --root . --apply` en el clon limpio y gatear por
+  exit code, no solo `--check`.
+  (3) RELOJ: mis dos veredictos de hoy fecharon 18:25 y 20:15 diciendo UTC+2 cuando el sistema marcaba
+  16:25 y 18:15. Estaba sumando dos horas a una hora que YA es local. Regla: tomar `date` del sistema
+  en el mismo turno y citarla verbatim, sin convertir. El Operador ya senalo este desfase antes.
+  Residuales R1 (fila extra no nombrada por eventos) y R2 (git-author unico en arbol compartido)
+  aceptados por el Arquitecto como no bloqueantes; R1 va al carril de endurecimiento con 0274-0276 y 0279.
