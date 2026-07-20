@@ -5,7 +5,67 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (4) (TASK-0272 remediacion iter2 OK/CERRABLE en a5e1acd; antes iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1, 0272 iter0 NO-GO 8cb4b45).
+> Ultima actualizacion: 2026-07-20 (6) (TASK-0277 OK-CLOSABLE con condicion F1; antes cierre 0272 ratificado, iter2 OK/CERRABLE a5e1acd, iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1).
+
+## Ultima actualizacion 2026-07-20 (6) - TASK-0277 veredicto OK-CLOSABLE (1 condicion, 2 residuales)
+- Review adversarial de a899041 / HEAD 5414838 en CLON LIMPIO D:/ccv0277. Todos los gates
+  exit 0; protocol_state_drift() has_drift=false up_to_seq 5385 (sin citar --check-drift,
+  TASK-0274 abierta). Artifact: Area_comun/artifacts/Analista-TASK-0277-trazabilidad-verdict.md.
+- Fidelidad verificada por recomputo PROPIO desde el log crudo: 0267 campo a campo (cadena
+  status completa hasta done seq 5066); 6/32 claims muestreadas iguales. Semantica release
+  del engine = SOLO flip de status (protocol_replay.py:821-826), sin released_at/updated_at.
+  Recuento independiente: 202 tasks / 1381 claims nombradas por podas, cero ausentes;
+  archivo 298/1620. Historia intacta: events.jsonl +4/-0 en todo el rango (gobernanza 0277).
+- **F1 (condicion de cierre): relajacion NO declarada y PORTANTE en validate_claims** --
+  a899041 mueve la validacion de selectores de scope bajo status==active; el validador
+  PRE-fix da exit 1 sobre el estado nuevo por las 2 claims restauradas en minusculas
+  (claim-arq-d0103-registro / claim-arq-mailbox-hygiene). Tecnica de deteccion REUTILIZABLE:
+  correr el validador del commit padre contra el estado nuevo (git show parent:script >
+  scripts/_old.py; OJO: colocarlo EN scripts/, en la raiz el root-detection apunta a D:\).
+- **R1: prune_archive_drift es proyeccion SUBSET sobre ids nombrados por eventos** -- filas
+  no-nombradas (17 legacy) invisibles al drift POR DISENO; su status queda anclado por el
+  cruce fila-vs-fichero (tamper status -> rojo) pero priority/owner/etc NO (lo probe: exit 0).
+  Unidad fabricada completa (id nuevo + fichero + fila) pasa todos los gates. Endurecimiento
+  propuesto: allowlist de las 17. PARA MIS GATES FUTUROS: drift verde en archivos != archivo
+  fiel para filas no respaldadas por eventos.
+- Matriz de ataque que aguanto: borrar fila task/claim archivada -> validate 1 + drift true
+  (doble via, agujero original cerrado); tamper fila nombrada -> ambos rojos; fila sin
+  fichero -> rojo; duplicado hot/archive -> rojo; fichero sin fila -> rojo (chequeo nuevo);
+  verify_archived_entries revienta en missing Y changed (unit directo).
+- R2 (DECISION-0018, preexistente): TODOS los commits recientes del arbol compartido van
+  git-autorados "Analista <analista@local>" (config local compartida), incluidos los de
+  Codex/Arquitecto; la atribucion real vive solo en el event log firmado. Reportado al
+  Arquitecto en el MSG del veredicto.
+- Contexto commit: arbol con lote de higiene del Arquitecto SIN commitear (rojo local por
+  drift CLAIMS.slim.json; canonico verde) y PARKED ~9min -> ventana segura, commit por
+  pathspec explicito solo de mis rutas. QUEDA PENDIENTE en open/ el REVIEW de TASK-0278
+  (token-epilogo) para el proximo disparo; NO procesado en esta ejecucion.
+
+## Ultima actualizacion 2026-07-20 (5) - DECISION cierre 0272 consumida (no-op, sin respuesta requerida)
+- MSG-20260720-Arquitecto-to-Analista-DECISION-cierre-0272-residuales (rr=false, sin
+  pregunta) CONSUMIDO informativamente; si sigue en open/ en el proximo disparo, NO
+  reprocesar. El Arquitecto RATIFICA el cierre de 0272 con F-0272R2-01 como residual
+  declarado (razones: doble incumplimiento del propio exec + traza firmada atribuible +
+  burn de campo era PRE-claim y E01 lo cierra). Done-flip ruteado a Codex
+  (MSG-...-Arquitecto-to-Codex-ACTION-doneflip-0272).
+- Los 4 residuales F-0272R2-01..04 van a **TASK-0276** (ready, owner Codex, reviewer YO):
+  filtro de evidencia por applied:true + intent_type en {task_status,task_upsert,decision}
+  o payload.commit; keyid coherente con actor (cierra V10/V18); exit-gate del ls-files
+  pre-exec (F-03, alimenta cuarentena 0275); log APPLY_FAIL (F-04); espejo born-operational.
+  Verifique el archivo: acceptance cubre los 4 + negativo/positivo permanentes; out_of_scope
+  prohibe reabrir 0272 y tocar la frontera token>exit>evidencia>regex. Mi futuro re-juicio
+  de 0276 debe re-correr la clase E04 (puro claim sin token NO consume) en sandbox autor
+  uniforme.
+- **TASK-0277** (proposed, espera Operador, toca Area_comun/state/): agujero de
+  trazabilidad hallado por el Arquitecto -- TASK-0267 podada del indice caliente (seq 5093)
+  sin aterrizar su fila en el archivo. PARA MIS GATES: el chequeo de drift NO cubre los
+  archivos de poda y el validador NO cruza ficheros de tareas contra filas del indice; un
+  "validate EXIT 0 + drift 0" NO garantiza indice-archivo completo. Considerar cruce manual
+  tasks/ vs TASK_INDEX(+ARCHIVE) en juicios futuros que dependan de historia podada.
+- Estado al consumir: tree con entrega in-flight del Arquitecto (0276/0277 + DECISION
+  untracked, state M), validate vivo EXIT 0; no-op sin commit (heartbeat), sin escritura
+  gobernada mia. Mi observacion del rojo transitorio de la pasada iter2 quedo confirmada
+  por el Arquitecto (su cola de eventos, aterrizada en 6ebf591).
 
 ## Ultima actualizacion 2026-07-20 (4) - TASK-0272 remediacion iter2 OK/CERRABLE (fix-loop consumido)
 - Re-juicio de la iteracion 2 (implementacion 02cee08, ultima del tope): veredicto
