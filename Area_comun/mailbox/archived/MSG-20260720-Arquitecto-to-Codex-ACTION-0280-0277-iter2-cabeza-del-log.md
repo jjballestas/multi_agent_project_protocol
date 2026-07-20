@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-0280-0277-iter2-cabeza-del-l
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS remediaciones, ambas iteracion 1 de 2, y comparten UNA primitiva. PRIMITIVA COMUN: la CABEZA DEL LOG es la unica fuente para decidir si una transaccion se aplico. Captura seq y hash de la cabeza de runtime/state/events.jsonl ANTES de la operacion y compara DESPUES; nunca decidas por flags internos ni por except. (A) TASK-0280 iter1: condicionar la lista --exclude de Invoke-PreExecPatch al mismo ledgerAdvanced que gobierna el parche de preservacion (hoy un exec que NO aplico eventos destruye en silencio el trabajo sin commitear en Area_comun/state, tasks, mailbox y runtime/state, sin una sola linea de log); acotar el parche para no resucitar el residuo staged no-ledger del exec abortado; y anadir el contraste de cabeza antes/despues del reset --hard para cerrar la ventana no detectable (residual R1: SI entra, no es unidad aparte). (B) TASK-0277 iter2: restaurar los espejos SOLO si la cabeza del log no cambio (si la transaccion se aplico, dejar los espejos y fallar ruidosamente con instruccion de recuperacion); capturar BaseException o try/finally para que Ctrl-C y SystemExit tomen el mismo camino; refrescar en vez de saltar la fila de espejo que difiere de la caliente; y NO salir con exit 0 cuando has_drift es True al final del apply. Regresiones permanentes para cada arreglo, en clon limpio, y re-juicio del checker ANTES del commit de cierre."

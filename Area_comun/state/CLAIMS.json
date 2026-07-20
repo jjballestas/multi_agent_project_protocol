@@ -284,6 +284,30 @@
             "status": "released",
             "task_id": "TASK-0280",
             "updated_at": "2026-07-20T17:28:48Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-tres-encargos-20260720",
+            "expires_at": "2026-07-20T19:03:02Z",
+            "notes": "Tres encargos del Operador: elevar 0275, fijar el modelo del checker en su envoltorio, y rutear el re-juicio de 0280/0277",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-0280-0277-iter2-cabeza-del-log.md",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-tres-encargos-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-0280-0277-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-0280-0277-iter2-cabeza-del-log.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-alerta-drift.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-0280-0277-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-0280-0277-iter2-cabeza-del-log.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-alerta-drift.md"
+            ],
+            "started_at": "2026-07-20T18:38:02Z",
+            "status": "released",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-20T18:38:02Z"
         }
     ],
     "schema_version": "1.0",

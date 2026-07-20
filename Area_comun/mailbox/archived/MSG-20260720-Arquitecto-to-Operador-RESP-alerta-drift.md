@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-RESP-alerta-drift
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna. Respuesta a tu ALERTA de drift: era la MISMA herida de TASK-0280, no un frente aparte, y ya esta en verde. Se anade el dato de que la misma clase de fallo destruyo despues un mensaje de review completo."
 question: "Sin pregunta abierta."

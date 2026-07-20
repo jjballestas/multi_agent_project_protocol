@@ -5,7 +5,7 @@ type: infra
 status: ready
 owner: Codex
 phase: P2
-priority: medium
+priority: high
 created_at: 2026-07-20
 reviewer: Analista
 project: multi_agent_project_protocol
@@ -38,7 +38,7 @@ intake:
     - "Intentar ATRIBUIR autoria de ficheros untracked en un arbol unico - FUERA, no hay canal fiable, la cuarentena no necesita saber de quien es."
     - "protocol.config.json pineado y dataset N=500 - FUERA (fondo intocable)."
     - "Unidades RESERVADAS del preregistro N=6 - FUERA."
-  risk: low
+  risk: medium
   estimate: S
 ---
 
@@ -54,3 +54,12 @@ Razon de fondo, es la misma clase de dano que acabamos de cerrar en la iteracion
 rollback que destruye contenido que no era suyo. Alli era contenido staged de un peer,
 aqui es un fichero sin trackear. La diferencia es que este ni siquiera tiene copia en git.
 El coste de la mitigacion es mover en vez de borrar, y una linea de log.
+
+## ELEVADA A PRIORIDAD ALTA (2026-07-20 20:45)
+
+Cuando el checker levanto este residual, el Arquitecto lo difirio de la iteracion 2 de
+TASK-0272 por respetar el candado E1. La decision de procedimiento sigue siendo correcta;
+el juicio de riesgo NO lo era. Cuatro horas despues, el rollback de un exec ajeno borro del
+arbol un mensaje de REVIEW completo, escrito y sin commitear, y hubo que reemitirlo. La
+perdida silenciosa de ficheros sin trackear dejo de ser teorica: se come artefactos
+gobernados en la ventana normal de trabajo. Riesgo subido a medium y prioridad a high.
