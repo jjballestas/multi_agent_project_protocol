@@ -45,7 +45,9 @@ def main() -> int:
         shutil.copy2(source / ".githooks" / "pre-commit", root / ".githooks" / "pre-commit")
         (root / "scripts" / "prune_state.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
         (root / "scripts" / "validate_collaboration_state.py").write_text(
-            "import json, pathlib\n"
+            "import json, pathlib, sys\n"
+            "sys.path.insert(0, str(pathlib.Path.cwd()))\n"
+            "import runtime.protocol_replay\n"
             "state=json.loads((pathlib.Path('Area_comun/state/TASK_INDEX.json')).read_text())\n"
             "raise SystemExit(1 if state.get('broken') else 0)\n",
             encoding="utf-8",
@@ -81,22 +83,43 @@ def main() -> int:
         require(commit(root, "unstaged validator isolation"), 0, "unstaged validator does not alter verdict")
         require(run(["git", "restore", "scripts/validate_collaboration_state.py"], root), 0, "restore validator")
 
+        # Prune is judgment code too: an unstaged mutation must not affect a
+        # clean staged commit because prune runs from the index materialization.
+        prune = root / "scripts" / "prune_state.py"
+        prune.write_text("raise SystemExit(23)\n", encoding="utf-8")
+        marker.write_text("prune isolation\n", encoding="utf-8")
+        require(run(["git", "add", "AGENTS.md"], root), 0, "stage prune-isolation change")
+        require(commit(root, "unstaged prune isolation"), 0, "unstaged prune does not alter verdict")
+        require(run(["git", "restore", "scripts/prune_state.py"], root), 0, "restore prune")
+
         state.write_text('{"peer_unstaged": true}\n', encoding="utf-8")
         marker.write_text("second staged clean change\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage concurrent own change")
         require(commit(root, "concurrent peer work"), 0, "unstaged peer governed work does not block")
         require(run(["git", "restore", str(state.relative_to(root))], root), 0, "restore peer work")
 
-        require(
-            run(["git", "mv", "scripts/validate_collaboration_state.py", "scripts/validator_renamed.py"], root),
-            0,
-            "stage R100 validator rename",
-        )
-        require_rejected(commit(root, "negative R100 judgment rename"), "staged R100 judgment rename")
-        require(run(["git", "restore", "--staged", "scripts/validate_collaboration_state.py", "scripts/validator_renamed.py"], root), 0, "unstage rename")
-        require(run(["git", "restore", "scripts/validate_collaboration_state.py"], root), 0, "restore renamed validator")
-        if (root / "scripts" / "validator_renamed.py").exists():
-            (root / "scripts" / "validator_renamed.py").unlink()
+        rename_cases = [
+            ("scripts/validate_collaboration_state.py", "scripts/validator_renamed.py", "internal validator"),
+            ("scripts/validate_collaboration_state.py", "docs/validator_renamed.py", "outbound validator"),
+            ("runtime/protocol_replay.py", "docs/protocol_replay.py", "outbound runtime dependency"),
+            ("Area_comun/state/TASK_INDEX.json", "docs/TASK_INDEX.json", "outbound governed state"),
+            (".githooks/pre-commit", "docs/pre-commit", "outbound hook"),
+        ]
+        for source_path, destination_path, label in rename_cases:
+            (root / destination_path).parent.mkdir(parents=True, exist_ok=True)
+            require(run(["git", "mv", source_path, destination_path], root), 0, f"stage {label} R100 rename")
+            # Preserve the worktree hook for the self-rename case; the index still
+            # contains the R100 source->destination pair under judgment.
+            if source_path == ".githooks/pre-commit":
+                hook_at_head = run(["git", "show", f"HEAD:{source_path}"], root)
+                require(hook_at_head, 0, "read executing hook from HEAD")
+                (root / source_path).write_text(hook_at_head.stdout, encoding="utf-8", newline="\n")
+            require_rejected(commit(root, f"negative R100 {label}"), f"staged R100 {label} rename")
+            require(run(["git", "restore", "--staged", source_path, destination_path], root), 0, f"unstage {label} rename")
+            require(run(["git", "restore", source_path], root), 0, f"restore {label} source")
+            destination = root / destination_path
+            if destination.exists():
+                destination.unlink()
 
         before = set((root / ".git" / "worktrees").iterdir()) if (root / ".git" / "worktrees").exists() else set()
         state.write_text('{"broken": true}\n', encoding="utf-8")

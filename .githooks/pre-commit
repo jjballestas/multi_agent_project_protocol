@@ -1,13 +1,6 @@
 #!/usr/bin/env sh
 set -u
 
-python scripts/prune_state.py --check
-status=$?
-if [ "$status" -ne 0 ]; then
-  echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
-  exit "$status"
-fi
-
 # Bounded mode: the full validator is mandatory when the staged snapshot touches
 # collaboration data or any executable used by that judgment. Commits outside
 # those routes still run this hook and the prune check, but avoid the expensive
@@ -15,7 +8,12 @@ fi
 # Include every content-bearing change kind. In particular, D is mandatory:
 # deleting governed state or judgment code must select the full validator too.
 # T is explicit as a path type change can make a judged file unusable.
-staged_paths=$(git diff --cached --name-only --diff-filter=ACMRTD)
+# --name-only drops the source of a rename. Expand name-status instead so an
+# R100 from a governed route to an ungoverned route cannot evade selection.
+staged_paths=$(git diff --cached --name-status --diff-filter=ACMRTD | awk '
+  $1 ~ /^[RC][0-9]+$/ { print $2; print $3; next }
+  { print $2 }
+')
 needs_collaboration_validation=0
 for path in $staged_paths; do
   case "$path" in
@@ -26,22 +24,39 @@ for path in $staged_paths; do
   esac
 done
 
+# Materialize exactly the index before any judgment. Prune and validation must
+# never load unstaged worktree code. Cleanup runs on success, rejection, or signal.
+snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
+cleanup_snapshot() {
+  rm -rf -- "$snapshot_root"
+}
+trap cleanup_snapshot EXIT HUP INT TERM
+if ! git checkout-index --all --force --prefix="$snapshot_root/"; then
+  echo "could not materialize staged snapshot; commit rejected" >&2
+  exit 1
+fi
+git_dir=$(git rev-parse --absolute-git-dir) || exit 1
+printf 'gitdir: %s\n' "$git_dir" > "$snapshot_root/.git"
+
+(
+  cd "$snapshot_root" || exit 1
+  python scripts/prune_state.py --check
+)
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
+  exit "$status"
+fi
+
 if [ "$needs_collaboration_validation" -eq 1 ]; then
-  # Materialize exactly the index. The validator and every local dependency are
-  # loaded from this snapshot, so unstaged/untracked peer work cannot change the
-  # verdict or serialize commits in a shared worktree. The temporary checkout is
-  # removed on success, rejection, or interruption.
-  snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
-  cleanup_snapshot() {
-    rm -rf -- "$snapshot_root"
-  }
-  trap cleanup_snapshot EXIT HUP INT TERM
-  if ! git checkout-index --all --force --prefix="$snapshot_root/"; then
-    echo "could not materialize staged snapshot; commit rejected" >&2
-    exit 1
-  fi
-  git_dir=$(git rev-parse --absolute-git-dir) || exit 1
-  printf 'gitdir: %s\n' "$git_dir" > "$snapshot_root/.git"
+  # These are part of the local judgment boundary. Their staged removal or
+  # rename must reject even when the old hook is still executing from worktree.
+  for required in .githooks/pre-commit scripts/prune_state.py scripts/validate_collaboration_state.py runtime/protocol_replay.py; do
+    if [ ! -f "$snapshot_root/$required" ]; then
+      echo "required judgment file missing from staged snapshot: $required" >&2
+      exit 1
+    fi
+  done
   (
     cd "$snapshot_root" || exit 1
     python scripts/validate_collaboration_state.py --root .

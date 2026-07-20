@@ -1,5 +1,18 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1",
+                ".githooks/pre-commit",
+                "scripts/test_precommit_hook.py",
+                "scripts/new_instance.py",
+                ".github/workflows/validate.yml"
+            ],
+            "task_id": "TASK-0267"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

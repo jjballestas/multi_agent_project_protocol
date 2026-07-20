@@ -40,6 +40,23 @@
             "updated_at": "2026-07-19T23:50:54Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1",
+            "expires_at": "2026-07-20T03:10:02Z",
+            "notes": "Remediate F-0267-01 rename origins and F-0267-02 prune from staged snapshot.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1",
+                ".githooks/pre-commit",
+                "scripts/test_precommit_hook.py",
+                "scripts/new_instance.py",
+                ".github/workflows/validate.yml"
+            ],
+            "started_at": "2026-07-20T01:10:02Z",
+            "status": "active",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-20T01:10:02Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0270-0271-registro-20260720",
             "expires_at": "2026-07-20T02:05:00Z",
             "notes": "Registro TASK-0270 (endurecimientos ledger a+b, oferta aceptada) + TASK-0271 (migracion checker, DECISION-0101) a ready; GO del Operador 2026-07-20",
