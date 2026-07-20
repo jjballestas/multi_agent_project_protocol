@@ -261,6 +261,26 @@ iteraciones) con alcance ajeno a sus defectos; ademas, plegarlas cambiaria el ac
 de 0257 a mitad de fix-loop, rompiendo la cobertura del carve-out E1 (exige MISMO
 acceptance) y forzando re-aprobacion.
 
+### E6 - Reparto de coste del harness (2026-07-20, firma del Operador en orden directa: "acepto tu recomendacion / GO A / luego GO C")
+
+El enforcement de C5 se reparte por capas segun coste medido (serie v1 11.5->42.9s; v2
+por materializacion 51.5-53.3s; suelo del validador ~12.5s):
+
+- **A (inmediato)**: en LOCAL el hook corre el modo ACOTADO por defecto (~0.4s) para
+  todo commit, incluido el gobernado; el modo COMPLETO local queda disponible solo bajo
+  flag explicito (p.ej. pre-push voluntario). El CI conserva la validacion COMPLETA
+  desde clon limpio en cada push/PR (ya existente) + el paso de existencia/SHA del hook
+  (E4' de la C2 de O1). El CI es el enforcement duro; el hook es la primera linea. El
+  riesgo asumido y declarado: ventanas de HEAD rojo transitorio hasta que el CI las
+  caza, mitigadas por la disciplina de gates pre-push de los harnesses.
+- **C (siguiente)**: unidad de optimizacion que materializa SOLO las rutas que el
+  validador lee (no el arbol entero) y mide; si el completo v2 baja a un coste que no
+  duele (~15s o menos), el Operador re-decide si reactivar el completo-local con esa
+  cifra en la mano. B (completo local a 51s) queda descartado a ese precio.
+
+Implementacion: TASK-0268 (A) y TASK-0269 (C), secuenciadas tras el veredicto de
+TASK-0267 (comparten .githooks/pre-commit).
+
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
 - Ejecucion por el flujo gobernado NORMAL (cron/sesion + submit_intent), NO por el
