@@ -5,7 +5,76 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-19 (TASK-0257 gate propio E2 NO-GO registrado).
+> Ultima actualizacion: 2026-07-20 (TASK-0267 hook v2 NO-GO, fix-loop 1/2).
+
+## Ultima actualizacion 2026-07-20 - TASK-0267 hook v2 NO-GO
+- Revision adversarial anclada en hub
+  `7c98fd47044b394c8d879ed19c2578431c23e4a7`, implementacion `b583090`:
+  CAMBIO-REQUERIDO / NO CERRABLE.
+- F-0267-01 CRITICAL: el selector `git diff --cached --name-only` pierde el
+  origen gobernado de un rename R100 hacia fuera. Probes por commit real de
+  validator `scripts/ -> docs/` y estado `Area_comun/state/ -> docs/` terminaron
+  EXIT 0. El negativo permanente solo renombra dentro de `scripts/`.
+- F-0267-02 WARNING-real: `prune_state.py --check` sigue ejecutandose desde el
+  worktree antes del snapshot; mutarlo solo en unstaged a EXIT 23 cambia el
+  veredicto de un commit limpio.
+- Pasan suite permanente, deletes validator/runtime/state, staged invalido,
+  aislamiento del validator, peer unstaged en Area_comun, cleanup, arming,
+  export default/coordination/runtime y pin CI. Suite agregada de instanciacion
+  sigue EXIT 1 en dos asserts ya declarados por el maker.
+- Medicion propia: frio 45.756 s, caliente 46.555 s, ambos EXIT 0; se reporta
+  como riesgo y no como veto por reserva del Operador.
+- Gates: validate con/sin secretos, domain y encoding EXIT 0; drift 0 seq
+  5000/5012; chain valida; config #4 byte-identica SHA-256 `2E35F26E...354`.
+- Veredicto commiteado y pusheado en `42eab07`; artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0267-hook-v2-veredicto.md`; MSG rr a
+  Arquitecto
+  `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0267-hook-v2-NOGO.md`.
+- Fix-loop: remediar familia R100-out y prune live, negativos permanentes,
+  re-gates y re-juicio Analista; iteracion 1/2, maximo 2 antes de Operador.
+
+## Ultima actualizacion 2026-07-19 - TASK-0257 re-juicio final iteracion 2 NO-GO
+- Revision adversarial anclada en hub `f64dcbdf9080ce87d4722c50662bb375d9d3c57a`,
+  remediacion `e2cadd8`: CAMBIO-REQUERIDO / NO CERRABLE / ESCALAR AL OPERADOR.
+- ACMRTD cierra delete de validator/runtime/state y T; F-0257-01/02 pasan. Dos
+  bloqueantes: borrar `.githooks/pre-commit` seguido de commit real termina exit 0,
+  y R100 del validator desde `scripts/` a `docs/` termina commit exit 0 porque
+  `--name-only` pierde el origen gobernado.
+- La regresion permanente da falso verde para delete del hook: ejecuta con `sh`
+  el path ya borrado y trata ese fallo de invocacion como rechazo del commit.
+- Gates: suite 0; delete validator/runtime/state 1 esperado; delete hook 0
+  inesperado; rename-out 0 inesperado; T 1 esperado; exports 3 tiers 0; validate
+  con/sin secretos, domain y encoding 0; drift 0 seq 4967/4972; config #4 intacta.
+- Veredicto commiteado por Analista en `0b52864`; artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-rejuicio-final-iter2-veredicto.md`;
+  MSG rr a Arquitecto
+  `MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-final-iter2-NOGO.md`.
+- Tope 2/2 agotado: no abrir otra remediacion o re-juicio sin directiva explicita;
+  Arquitecto debe escalar el historial completo al Operador.
+
+## Ultima actualizacion 2026-07-19 - TASK-0257 re-juicio iteracion 1 NO-GO
+- Revision adversarial anclada en hub `7fbb88acb94613502de115f4ceb7d6c72bfec9fb`,
+  remediaciones `33af66b` y `5e5b2d5`: CAMBIO-REQUERIDO / NO CERRABLE.
+- F-0257-01 pasa para modificaciones: estado gobernado roto staged + validator con
+  `raise SystemExit(0)` unstaged termina hook exit 1. F-0257-02 pasa: gobernado
+  exit 0 en 29.532 s; modo acotado no gobernado exit 0 en 0.401 s.
+- F-0257-03 WARNING-real nuevo: `git diff --cached --name-only --diff-filter=ACMR`
+  excluye eliminaciones. Probe propio en clon limpio: `git rm
+  scripts/validate_collaboration_state.py` + hook termina exit 0 con diff staged
+  `D`; el validator eliminado no se ejecuta.
+- Suite permanente exit 0. Export coordination/runtime/attested: new_instance y
+  validate exit 0; hook SHA-256 comun
+  `E803C867977977E5AC04445AE1CE5B440DE7B0B2669FC44358E3F6439717062C`.
+- Gates canonicos: validate sin secretos/domain/encoding exit 0; vivo con secretos
+  validate exit 0; drift 0 seq 4934; chain valid 4262 eventos; config #4
+  byte-identica SHA-256 `2E35F26E...354`. Producto NOT_RUN por alcance canonico.
+- Veredicto commiteado por Analista en `774f858`; artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0257-gate-propio-E2-rejuicio-iter1-veredicto.md`;
+  MSG rr a Arquitecto
+  `MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-rejuicio-iter1-NOGO.md`.
+- Fix-loop: remediar eliminaciones staged en toda la familia de rutas, agregar
+  negativos permanentes y pedir re-juicio Analista antes de cierre. Al agotarse
+  el tope de 2 iteraciones, un fallo adicional se escala al Operador.
 
 ## Ultima actualizacion 2026-07-19 - TASK-0257 gate propio E2 NO-GO
 - Revision adversarial anclada en hub `59607c022b0c1e3dceaf963eba26db9fcbcdc2bc`
@@ -2312,3 +2381,24 @@
   Residual: working tree local estaba rojo por cambios ajenos/claim activa y snapshot mismatch no canonicos;
   por eso la evidencia se tomo de clean clone de origin/main.
 
+- TASK-0270 (2026-07-20): GO/OK-CERRABLE, veredicto commiteado y pusheado en `1cb7b0e`
+  (`review(TASK-0270): veredicto GO del Analista`). Ancla protocolo origin/main `b37e638` (implementacion
+  `a989475`); producto N/A (REVIEW declara SIN PRODUCTO EN ALCANCE). Artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0270-ledger-postwrite-idempotencia-veredicto.md`; MSG rr a Arquitecto
+  `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO.md`. Clon limpio `D:/ccv/t0270`
+  (b37e638) + clon pre `D:/ccv/t0270pre` (a989475~1) para preexistencia. Suites: intent_tx 12/12,
+  intent_flow 11/11, concurrency exit 0; replay exit 1 por caso PREEXISTENTE (identico en a989475~1).
+  Sondeo propio 11/11 (driver D:/ccv/probe0270.py): post-write caza evento perdido inyectado nombrandolo
+  (suelto y --intents, rollback completo); dedup repara estado divergente en task_status/claim/mailbox
+  (reconciled=true, drift 0); replay del incidente 19-jul (flip borrado + retry byte-identico del lote)
+  -> "partial transaction idempotency state exists", CLI exit 1, jamas mudo. Residuales: R1 flag
+  reconciled subreporta en task_upsert/decision (sin fuga, materialize+drift reparan); R2 post-write
+  compara identidad no bytes (prev_hash lo caza aguas abajo); R3 kill post-append -> replay (maker,
+  honesto); R4 caso replay preexistente. Gates: validate con/sin secretos 0, drift 0, chain valida 4391
+  eventos, #4 sha256 `2E35F26E...` epoch 1.14.0, encoding 0. ANOMALIA DECISION-0018 reportada:
+  scan_domain_neutrality ROJO en HEAD por `scripts/test_anthropic_checker_harness.py` (6c8a0d8,
+  TASK-0271 ya ratificada); biseccion: verde en a989475~1. Remediacion ruteada al Arquitecto (yo no me
+  auto-asigno el fix de mi propio harness). Primer turno end-to-end del harness migrado (Anthropic):
+  sondeo de tamper completo sin kills del clasificador (evidencia viva 0271). Leccion tecnica: los
+  secretos eventauth son `secrets/eventauth-*.key` relativos al root (copiarlos al clon para el run
+  con-secretos); validate_chain(events, config) exige lista de eventos, no root.
