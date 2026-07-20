@@ -2761,3 +2761,25 @@
   sondeo de tamper completo sin kills del clasificador (evidencia viva 0271). Leccion tecnica: los
   secretos eventauth son `secrets/eventauth-*.key` relativos al root (copiarlos al clon para el run
   con-secretos); validate_chain(events, config) exige lista de eventos, no root.
+
+- TASK-0278 (2026-07-20): GO/OK-CLOSABLE sin condiciones, veredicto commiteado y pusheado en `8f43a1c`
+  (`review(TASK-0278): GO OK-CLOSABLE, sin condiciones, residuales R1-R4 declarados`). Ancla: implementacion
+  Codex `ef0b645` (ancestro de origin/main, HEAD `11a003a`); SIN PRODUCTO EN ALCANCE. Clean clone `D:/ccv0278`.
+  Artefacto `Area_comun/artifacts/Analista-TASK-0278-token-epilogo-verdict.md`; MSG rr
+  `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict.md`. Defecto de campo: epilogo del CLI
+  (`tokens used`+conteo) tras la respuesta rompia terminal-only, y el regex de respaldo leia el eco del
+  prompt (out_of_scope/FUERA de alcance) -> dos execs reales marcados definitive siendo transient. Fix
+  verificado: separacion ESTRUCTURAL de flujos (RedirectStandardOutput/Error en Start-Process); clasifica
+  SOLO stdout; rama definitive de texto libre ELIMINADA (unico productor de definitive = token terminal
+  exacto, linea 496); exit!=0 transient; evidencia ed25519 propia confirmed; texto libre solo
+  transient/unconfirmed (no consumen: rollback + retry acotado + RETRY_EXHAUSTED watchdog). Probe propio
+  19 payloads exit 0 (transcripts REALES verbatim de ambos invocadores + hostiles): codex CLI manda eco
+  de prompt y epilogo a stderr; claude CLI stdout=respuesta y stderr VACIO. Gates clean clone todos 0;
+  drift false up_to_seq=5393. Residuales: R1 frontera de confianza = binario del CLI escribiendo token
+  exacto forjado como ultima linea de stdout (contaminacion menor degrada a unconfirmed, fail-safe);
+  R2 lexicon transient sobre stdout puede etiquetar transient vs unconfirmed (ambos no-consumidores);
+  R3 -InvokerDiagnostics aceptado y sin uso decisional (by design); R4 mecanismo distinto al del
+  acceptance pero mas fuerte. Tecnica reusable: extraer Get-ExecOutcomeClass verbatim del clon con regex
+  y recomputar sobre los out.log/err.log ORIGINALES de .protocol-tmp, no el fixture reducido. NOTA: hook
+  de commit aviso PRUNE DUE (released_ratio 95.56>=90) diferido al checkpoint del Arquitecto (yo no
+  ejecuto prune, muta estado gobernado).
