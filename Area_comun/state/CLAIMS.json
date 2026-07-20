@@ -155,6 +155,20 @@
             "updated_at": "2026-07-20T12:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-final-memory",
+            "expires_at": "2026-07-20T12:40:00Z",
+            "notes": "Persist TASK-0273 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:10:00Z",
+            "status": "active",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T12:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
             "expires_at": "2026-07-20T11:45:00Z",
             "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",
