@@ -1,22 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0277-remediation-1",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277-remediation-1",
-                "Area_comun/state/TASK_INDEX.json#TASK-0277",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
-                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
-                "scripts/prune_state.py",
-                "scripts/validate_collaboration_state.py",
-                "runtime/protocol_replay.py",
-                "examples/prune_state_cases/run_prune_state_cases.py",
-                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py"
-            ],
-            "task_id": "TASK-0277"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
