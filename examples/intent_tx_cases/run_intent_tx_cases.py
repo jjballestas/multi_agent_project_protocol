@@ -18,7 +18,8 @@ sys.path.insert(0, str(ROOT))
 from runtime.eventlog import compute_event_prev_hash, read_jsonl_torn_safe  # noqa: E402
 from runtime.protocol_replay import protocol_state_drift, validate_chain, write_genesis_reference  # noqa: E402
 from runtime.regenesis import regenesis  # noqa: E402
-from runtime.submit_intent import IntentError, submit_intent, submit_intents  # noqa: E402
+from runtime.submit_intent import IntentApplyError, IntentError, submit_intent, submit_intents, verify_appended_events  # noqa: E402
+from runtime.eventlog import EventWriter  # noqa: E402
 
 
 TASK_ID = "TASK-9400"
@@ -340,6 +341,44 @@ def case_transaction_idempotent_retry_does_not_duplicate() -> None:
         assert [event["seq"] for event in first["events"]] == [event["seq"] for event in second["events"]]
 
 
+def case_idempotent_retry_repairs_divergent_materialized_state() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-idempotent-divergent-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        task_index = read_json(root / "Area_comun/state/TASK_INDEX.json")
+        next(item for item in task_index["tasks"] if item["id"] == TASK_ID)["status"] = "in_progress"
+        write_json(root / "Area_comun/state/TASK_INDEX.json", task_index)
+        result = submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        assert result["deduped"] is True
+        assert result["idempotency_reconciled"] is True
+        repaired = read_json(root / "Area_comun/state/TASK_INDEX.json")
+        assert next(item for item in repaired["tasks"] if item["id"] == TASK_ID)["status"] == "done"
+        assert protocol_state_drift(root)["has_drift"] is False
+
+
+def case_postwrite_verification_detects_injected_lost_event() -> None:
+    with tempfile.TemporaryDirectory(prefix="intent-tx-postwrite-lost-") as temp:
+        root = Path(temp)
+        build_fixture(root)
+        result = submit_intents(root, "Codex", tx_intents(), timestamp=TIMESTAMP, commit=COMMIT)
+        events = read_jsonl_torn_safe(root / "runtime/state/events.jsonl")
+        lost = result["events"][1]
+        kept = [event for event in events if int(event["seq"]) != int(lost["seq"])]
+        (root / "runtime/state/events.jsonl").write_text(
+            "".join(json.dumps(event, sort_keys=True, separators=(",", ":")) + "\n" for event in kept),
+            encoding="utf-8",
+            newline="\n",
+        )
+        try:
+            verify_appended_events(EventWriter(root), result["events"])
+        except IntentApplyError as exc:
+            assert "own event missing" in str(exc)
+            assert f"seq={lost['seq']}" in str(exc)
+        else:
+            raise AssertionError("post-write verification accepted an injected lost event")
+
+
 def case_claim_rows_allow_distinct_and_reject_same() -> None:
     with tempfile.TemporaryDirectory(prefix="intent-claim-rows-") as temp:
         root = Path(temp)
@@ -575,6 +614,8 @@ def main() -> int:
         case_transaction_rolls_back_on_materialization_failure,
         case_regenesis_clears_drift_and_allows_submit_intent,
         case_transaction_idempotent_retry_does_not_duplicate,
+        case_idempotent_retry_repairs_divergent_materialized_state,
+        case_postwrite_verification_detects_injected_lost_event,
         case_claim_rows_allow_distinct_and_reject_same,
         case_concurrent_submit_intents_keep_linear_chain,
         case_torn_jsonl_tail_is_repaired_before_append,

@@ -1113,6 +1113,43 @@ def existing_idempotent_event(writer: EventWriter, key: str) -> dict[str, Any] |
     return None
 
 
+def verify_appended_events(writer: EventWriter, expected: list[dict[str, Any]]) -> None:
+    """Prove that this writer's exact events remain in the durable log."""
+    by_seq = {int(event.get("seq") or 0): event for event in writer.events()}
+    missing: list[str] = []
+    for event in expected:
+        seq = int(event.get("seq") or 0)
+        actual = by_seq.get(seq)
+        if (
+            actual is None
+            or actual.get("idempotency_key") != event.get("idempotency_key")
+            or actual.get("aggregate_id") != event.get("aggregate_id")
+        ):
+            missing.append(
+                f"seq={seq},aggregate={event.get('aggregate_id')},idempotency={event.get('idempotency_key')}"
+            )
+    if missing:
+        raise IntentApplyError("post-write event verification failed; own event missing: " + "; ".join(missing))
+
+
+def idempotent_state_is_coherent(root: Path, normalized: dict[str, Any]) -> bool:
+    """Check externally materialized state before accepting an idempotent retry."""
+    state = load_state(root)
+    kind = normalized["kind"]
+    if kind == "task_status":
+        task = tasks_by_id(state).get(normalized["task_id"])
+        return isinstance(task, dict) and task.get("status") == normalized["to"]
+    if kind == "claim":
+        claims = state.get("claims") if isinstance(state.get("claims"), list) else []
+        claim = next((item for item in claims if item.get("claim_id") == normalized["claim_id"]), None)
+        expected = {"acquire": "active", "release": "released", "block": "blocked"}[normalized["op"]]
+        return isinstance(claim, dict) and claim.get("status") == expected
+    if kind == "mailbox_archive":
+        open_relative, archived_relative = mailbox_archive_paths(normalized["message_id"])
+        return not (root / open_relative).exists() and (root / archived_relative).exists()
+    return True
+
+
 def protocol_file_paths() -> list[str]:
     return [path.as_posix() for path in PROTOCOL_STATE_PATHS.values()]
 
@@ -1252,6 +1289,7 @@ def submit_intent(
         writer = EventWriter(root)
         existing = existing_idempotent_event(writer, key)
         if existing is not None:
+            coherent_before = idempotent_state_is_coherent(root, normalized)
             state_before = load_state(root)
             file_backup = snapshot_files(root, [*protocol_file_paths(), *files_for_backup(normalized, state_before)])
             runtime_backup = snapshot_runtime_state(root)
@@ -1266,6 +1304,7 @@ def submit_intent(
                 return {
                     "applied": True,
                     "deduped": True,
+                    "idempotency_reconciled": not coherent_before,
                     "event": existing,
                     "genesis_event": None,
                     "intent": normalized,
@@ -1308,6 +1347,7 @@ def submit_intent(
                 payload=payload,
                 ts=timestamp,
             )
+            verify_appended_events(writer, [event])
             snapshot = current_protocol_snapshot(root)
             materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
             task_files_updated = apply_file_side_effects(root, normalized, state_before)
@@ -1379,6 +1419,7 @@ def submit_intents(
             file_backup = snapshot_files(root, [*protocol_file_paths(), *side_effect_paths])
             runtime_backup = snapshot_runtime_state(root)
             try:
+                coherent_before = [idempotent_state_is_coherent(root, item) for item in normalized_intents]
                 materialization = materialize_to_disk(root, current_protocol_snapshot(root), fail_after_writes=fail_after_writes)
                 task_files_updated: list[str] = []
                 for normalized in normalized_intents:
@@ -1391,6 +1432,7 @@ def submit_intents(
                 return {
                     "applied": True,
                     "deduped": True,
+                    "idempotency_reconciled": not all(coherent_before),
                     "transaction": {
                         "idempotency_key": tx_key,
                         "intent_count": len(normalized_intents),
@@ -1450,6 +1492,8 @@ def submit_intents(
                         ts=timestamp,
                     )
                 )
+
+            verify_appended_events(writer, events)
 
             snapshot = current_protocol_snapshot(root)
             materialization = materialize_to_disk(root, snapshot, fail_after_writes=fail_after_writes)
