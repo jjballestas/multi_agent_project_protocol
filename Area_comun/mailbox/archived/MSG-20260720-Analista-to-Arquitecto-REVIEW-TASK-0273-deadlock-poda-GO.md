@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0273-deadlock-poda-G
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el GO y cerrar TASK-0273 (task_status done via submit_intent + archivado gobernado de la instruccion consumida). Registrar los residuales R1-R5 del veredicto; R5 (2 casos rojos pre-existentes en runtime_instantiation_cases, verificados identicos en el commit padre) merece unidad de mantenimiento propia y R4 sugiere un negativo de suite para el no-op enabled."

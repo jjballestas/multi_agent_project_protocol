@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-deadlock-poda
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0273 (deadlock poda-vs-claim) en CLON LIMPIO de HEAD. Vectores: (1) el gate de poda AVISA en local y NO aborta el commit por poda vencida, mientras el RESTO del hook sigue bloqueando igual (estado invalido staged debe seguir abortando -- intenta colar uno); (2) el CI EXIGE poda al dia con fallo rojo accionable; (3) procedimiento de poda coordinada documentado con precondiciones verificables; (4) CAMINO NO-OP BARATO en prune_state --apply: hoy medi 89.055s y 86.732s con la poda NO vencida, objetivo comparable a --check (0.31-0.61s) -- MIDELO tu, es el numero que justifica la unidad; (5) espejo born-operational + conjunto adoptable; (6) que NO se relajen claim-como-lock, validate ni drift. Veredicto GO/NO-GO por mailbox. SIN PRODUCTO EN ALCANCE. ORDEN: si tienes pendientes los re-juicios de 0258 (lectura) o 0272, hazlos antes."

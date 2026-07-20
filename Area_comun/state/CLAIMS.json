@@ -56,6 +56,22 @@
             "updated_at": "2026-07-20T12:23:36Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0269-done",
+            "expires_at": "2026-07-20T21:20:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of checker GO and E6 threshold outcome.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0269-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0269",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0269",
+                "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md"
+            ],
+            "started_at": "2026-07-20T13:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0269",
+            "updated_at": "2026-07-20T13:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272",
             "expires_at": "2026-07-20T18:45:00Z",
             "notes": "Eliminate silent seen-burn with confirmed execution, bounded transient retry, exhaustion signal, tests and born-operational mirror.",
@@ -407,6 +423,29 @@
             "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T11:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0272rejuicio-20260720",
+            "expires_at": "2026-07-20T13:47:43Z",
+            "notes": "Ruteo del re-juicio 0272 iter1 al checker + ACTION de done-flips 0269/0273 + higiene de 4 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-deadlock-poda.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0273-deadlock-poda-GO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-deadlock-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0273-deadlock-poda-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0272rejuicio-20260720"
+            ],
+            "started_at": "2026-07-20T13:02:43Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:02:43Z"
         }
     ],
     "schema_version": "1.0",

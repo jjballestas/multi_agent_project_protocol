@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0258 review_approved -> done (GO del re-juicio ratificado). (B) Remediar TASK-0272 (devuelta a in_progress, iteracion 1 de 2) con los 4 puntos del veredicto (Area_comun/artifacts/ANALISTA-TASK-0272-seenburn-retry-veredicto.md) y la DECISION DE FRONTERA que tomo el Arquitecto: el outcome del exec se determina por CONTRATO POR TOKEN EXACTO (patron STOP_JOB de 0236, igualdad exacta) + EXIT CODE + EVIDENCIA VERIFICABLE de autoria propia; el regex sobre texto libre queda SOLO como fallback y NUNCA puede sobreescribir un token o una evidencia. Entregar in_review + handoff + release."

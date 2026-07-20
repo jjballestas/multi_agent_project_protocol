@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "db90aacf6dac75afac6e34c99eb64512b27ee8cf1a08cbea928f3e88834c3b80",
+  "canonical_hash": "c06ac40b89bfa4224b4e500ac83faea42b15e0a5170a3b5429e9c5d067192780",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -679,6 +679,7 @@
       "CLAIM-20260720-Codex-TASK-0268-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0268-done": 1,
       "CLAIM-20260720-Codex-TASK-0268-memory": 1,
+      "CLAIM-20260720-Codex-TASK-0269-done": 1,
       "CLAIM-20260720-Codex-TASK-0270": 1,
       "CLAIM-20260720-Codex-TASK-0270-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0271": 1,
@@ -797,6 +798,7 @@
       "CLAIM-arq-reject0258-20260720": 1,
       "CLAIM-arq-reject0267-iter1-20260720": 1,
       "CLAIM-arq-reject0272-20260720": 1,
+      "CLAIM-arq-rutear0272rejuicio-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1781,6 +1783,7 @@
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-seenburn-NOGO": 1,
+      "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0273-deadlock-poda-GO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibrida-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO": 1,
       "MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano": 1,
@@ -1794,10 +1797,12 @@
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-seenburn": 1,
+      "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-deadlock-poda": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibrida": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-fix-invoker-windows": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02": 1,
+      "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a": 1,
@@ -1824,6 +1829,7 @@
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271-fix1": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272": 1,
+      "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6": 1,
@@ -2114,10 +2120,10 @@
       "TASK-0266": 3,
       "TASK-0267": 20,
       "TASK-0268": 23,
-      "TASK-0269": 11,
+      "TASK-0269": 13,
       "TASK-0270": 10,
       "TASK-0271": 25,
-      "TASK-0272": 16,
+      "TASK-0272": 17,
       "TASK-0273": 11,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2141,7 +2147,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4637,
+    "events_applied": 4646,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2414,6 +2420,12 @@
       "arq:promo0127:acq": 744,
       "arq:promo0127:rel": 746,
       "arq:promo0127:upsert": 745,
+      "arq:rutear0272:acquire:589dd028-d30f-4cb3-b836-3205c429db0a": 5309,
+      "arq:rutear0272:arch1:589dd028-d30f-4cb3-b836-3205c429db0a": 5310,
+      "arq:rutear0272:arch2:589dd028-d30f-4cb3-b836-3205c429db0a": 5311,
+      "arq:rutear0272:arch3:589dd028-d30f-4cb3-b836-3205c429db0a": 5312,
+      "arq:rutear0272:arch4:589dd028-d30f-4cb3-b836-3205c429db0a": 5313,
+      "arq:rutear0272:release:589dd028-d30f-4cb3-b836-3205c429db0a": 5314,
       "arq:task0196:done": 2243,
       "arq:task0197:acq": 2245,
       "arq:task0197:done": 2261,
@@ -3862,6 +3874,9 @@
       "codex:task0268:start:2026-07-20T02:26:56Z": 5070,
       "codex:task0269:claim:20260720T061000Z:a1": 5193,
       "codex:task0269:delivery-claim:20260720T070500Z:c3": 5198,
+      "codex:task0269:done-claim:20260720T132000Z": 5315,
+      "codex:task0269:done-release:20260720T132000Z": 5317,
+      "codex:task0269:done:20260720T132000Z": 5316,
       "codex:task0269:in-progress-to-in-review:20260720T071000Z:d4": 5199,
       "codex:task0269:ready-to-in-progress:20260720T061300Z:b2": 5194,
       "codex:task0269:release-delivery:20260720T071000Z:d4": 5201,
@@ -6782,5 +6797,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5308
+  "up_to_seq": 5317
 }
