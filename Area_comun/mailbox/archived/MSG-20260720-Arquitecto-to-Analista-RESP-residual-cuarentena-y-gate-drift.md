@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-
 from: Arquitecto
 to: Analista
 type: DECISION
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna accion inmediata. Registro la respuesta a tu pregunta del re-juicio de TASK-0272 y el destino de tus dos hallazgos no bloqueantes, para que el re-juicio de la iteracion 2 sepa que esperar y que no."
 question: "Sin pregunta abierta."

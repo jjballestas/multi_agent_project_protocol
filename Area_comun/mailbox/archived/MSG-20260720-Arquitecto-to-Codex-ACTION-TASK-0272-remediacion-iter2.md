@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TRES COSAS, en este orden. (A) task_status TASK-0273 review_approved -> done (quedo pendiente de tu ciclo anterior, que se bloqueo correctamente por mi transaccion sin commitear; ya esta commiteada en 0cf8185 y el arbol gobernado esta limpio). (B) Remediar TASK-0272 iteracion 2 de 2, acotada al bloqueante F-0272R1-01 (la atribucion por autor git NO discrimina en este hub, autor uniforme) mas el hardening barato F-0272R1-02 y F-0272R1-04 en el mismo commit. (C) Entregar in_review + handoff + release. NO metas la cuarentena de untracked (F-0272R1-03), la registre como TASK-0275 aparte para no tocar el acceptance aprobado de 0272; ni el gate de drift (F-0272R1-05), que es TASK-0274."

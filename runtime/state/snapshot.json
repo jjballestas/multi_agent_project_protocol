@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "0ee0c0a47cd6c857b900248cc63326fdf5df518ffe45973921b9f90ecdcf5ad9",
+  "canonical_hash": "54263954a354b7406a93ca5d19333cb169520c7b2ddcbb95e4e08340c54f4936",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -805,6 +805,7 @@
       "CLAIM-arq-reject0272-20260720": 1,
       "CLAIM-arq-rutear0272iter2-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
+      "CLAIM-arq-rutear0272rejuicio2-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1794,6 +1795,7 @@
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibrida-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO": 1,
       "MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano": 1,
+      "MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift": 1,
       "MSG-20260720-Arquitecto-to-Analista-RESP-sweep-corregido": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-obstacles-schema": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-rejuicio-F01": 1,
@@ -1811,6 +1813,7 @@
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-fix-invoker-windows": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1": 1,
+      "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion": 1,
@@ -1839,6 +1842,7 @@
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271-fix1": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1": 1,
+      "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6": 1,
@@ -2132,7 +2136,7 @@
       "TASK-0269": 13,
       "TASK-0270": 10,
       "TASK-0271": 25,
-      "TASK-0272": 23,
+      "TASK-0272": 24,
       "TASK-0273": 14,
       "TASK-0274": 1,
       "TASK-0275": 1,
@@ -2158,7 +2162,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4666,
+    "events_applied": 4671,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2309,6 +2313,11 @@
       "arq:0272iter2:arch3:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5324,
       "arq:0272iter2:release:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5325,
       "arq:0272iter2:status:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5319,
+      "arq:0272rej2:acquire:3b599b13-6250-4be5-af29-aac1bbfe7198": 5338,
+      "arq:0272rej2:arch1:3b599b13-6250-4be5-af29-aac1bbfe7198": 5339,
+      "arq:0272rej2:arch2:3b599b13-6250-4be5-af29-aac1bbfe7198": 5340,
+      "arq:0272rej2:arch3:3b599b13-6250-4be5-af29-aac1bbfe7198": 5341,
+      "arq:0272rej2:release:3b599b13-6250-4be5-af29-aac1bbfe7198": 5342,
       "arq:0274:upsert:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5320,
       "arq:0275:upsert:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5321,
       "arq:arch-go-0194": 2232,
@@ -6828,5 +6837,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5337
+  "up_to_seq": 5342
 }

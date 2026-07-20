@@ -559,6 +559,26 @@
             "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T13:02:43Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0272rejuicio2-20260720",
+            "expires_at": "2026-07-20T14:48:35Z",
+            "notes": "Ruteo del re-juicio de la iteracion 2 de 0272 al checker + higiene de 3 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0272rejuicio2-20260720"
+            ],
+            "started_at": "2026-07-20T14:03:35Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:03:35Z"
         }
     ],
     "schema_version": "1.0",

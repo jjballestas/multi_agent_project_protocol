@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:
