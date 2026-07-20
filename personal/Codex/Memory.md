@@ -8,7 +8,9 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 implementation.
   transient/unconfirmed aborts use bounded persistent retry with watchdog-visible
   exhaustion, restore only exec-created residue, and distinguish live from aborted
   staged residue by file age. The born-operational retry E2E and permanent Anthropic/
-  exec-lease contracts pass. Delivery ledger/handoff remains pending in this turn.
+  exec-lease contracts pass. Delivery commit `881feab` records the self-contained
+  handoff/response, moves TASK-0272 to `in_review`, and releases all Codex claims
+  through runtime seq 5271; validator, encoding, neutrality, and drift are green.
 
 Previous update: 2026-07-20 Europe/Madrid, after TASK-0258 F-0258-01 redelivery.
 
