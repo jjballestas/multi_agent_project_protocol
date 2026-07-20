@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 implementation.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0273 delivery.
+
+- TASK-0273 implementation commit `3062214` removes the prune-vs-claim deadlock: overdue
+  pruning is an actionable local-hook warning, CI remains the hard integration boundary,
+  the Architect checkpoint procedure is documented and mirrored into born-operational
+  assets, and `prune_state --apply` exits read-only when maintenance is not due.
+- Real live no-op evidence: `--check` 0.316s versus `--apply` 0.341s, `mode=noop`,
+  `transaction=null`, drift false at seq 5273. Targeted prune, runtime-prune, and
+  pre-commit suites pass; protocol validate, encoding, neutrality, and drift are green.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0272 implementation.
 
 - TASK-0272 implementation commit `9ad8c89` eliminates silent seen-burn in the
   generic peer harness and both live peer entrypoints. Seen is now written only
