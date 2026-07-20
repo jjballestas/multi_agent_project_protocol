@@ -247,6 +247,25 @@
             "updated_at": "2026-07-20T20:59:28Z"
         },
         {
+            "claim_id": "CLAIM-arq-iter3-0280-20260721",
+            "expires_at": "2026-07-20T23:41:44Z",
+            "notes": "Iteracion 3 de 0280 con acceptance enmendado y firmado por el Operador (rollback conservador por defecto)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador.md",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-iter3-0280-20260721",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-ESCALADA-TASK-0280-tope-agotado.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-ESCALADA-TASK-0280-tope-agotado.md"
+            ],
+            "started_at": "2026-07-20T23:21:44Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T23:21:44Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear-iter2-20260720",
             "expires_at": "2026-07-20T18:31:29Z",
             "notes": "Ruteo de las dos remediaciones (0280 iter1 y 0277 iter2) con primitiva comun de cabeza del log + higiene de 4",

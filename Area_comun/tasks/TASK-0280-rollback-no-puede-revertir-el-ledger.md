@@ -2,7 +2,7 @@
 task_id: TASK-0280
 title: "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
 type: fix
-status: in_review
+status: in_progress
 owner: Codex
 phase: P2
 priority: high
@@ -20,7 +20,8 @@ intake:
     - "Si el exec aplico eventos y despues aborta, el harness lo DECLARA en su senal (los eventos aplicados quedan y se reportan), en vez de dejar al agente afirmando trabajo que ya no existe."
     - "Ningun camino del rollback puede dejar el ledger y el estado derivado en desacuerdo: si tras el rollback el estado derivado ya no corresponde al log, el harness lo detecta y lo senala en vez de continuar en silencio."
     - "Negativo permanente: exec que aplica una transaccion de ledger y despues aborta por precondicion; el evento sobrevive, el reporte lo refleja y el mensaje sigue siendo reintentable sin duplicar el trabajo ya aplicado."
-    - "Negativo permanente del caso inverso: un exec que NO aplico nada mantiene el rollback completo del worktree tal y como lo dejo TASK-0272."
+    - "ENMENDADA (firmada por el Operador 2026-07-21 00:25, sustituye a la original de esta linea) Negativo permanente del caso inverso: un exec que NO aplico ningun evento revierte su propio residuo, pero ante cualquier ambiguedad -- evento que nombra ficheros, linea ilegible en cualquier posicion, transaccion que crea o borra -- NO revierte: deja el residuo, lo declara en el log y lo deja recuperable."
+    - "ANADIDA (firmada por el Operador 2026-07-21 00:25) El harness no puede emitir ROLLBACK_LEDGER_PRESERVED sin verificar contra disco que lo preservado existe; un exito no verificado es un fallo."
     - "Espejo en el harness generico del export born-operational."
   verification_cmd:
     - "Runner de la suite del reintento (examples/, patron run_*.py) en verde con los negativos nuevos"
@@ -73,3 +74,32 @@ Relacion con lo demas: el rollback de TASK-0272 sigue siendo correcto para lo qu
 diseno, deshacer el residuo staged de un exec abortado. El error es de alcance, no de
 concepto. El ledger firmado no es residuo: es la unica cosa del arbol que no se puede
 deshacer restaurando un fichero.
+
+## ENMIENDA FIRMADA -- iteracion 3 con acceptance cambiado (2026-07-21 00:25)
+
+El tope de dos iteraciones se agoto con NO-GO. El patron del fallo, y no el caso concreto,
+es lo que se escalo: tres versiones cerrando los casos que el veredicto anterior ENUMERO y
+abriendo los adyacentes que nadie enumero -- rutas, luego tipo de cambio, luego nombre de
+evento. Una cuarta ronda del mismo enfoque compraba el siguiente caso adyacente, no la
+garantia.
+
+**El Operador firma el cambio de enfoque a ROLLBACK CONSERVADOR POR DEFECTO.** Ante
+cualquier ambiguedad el rollback no revierte: deja el residuo, lo declara y lo deja
+recuperable. El principio que lo sostiene: **perder trabajo es peor que dejar basura**, y el
+20-jul hubo evidencia de los dos danos -- la basura siempre fue reparable, la perdida no.
+
+Que cambia respecto a la aprobacion original, para que quede explicito:
+
+- **Acceptance**: la linea del caso inverso prometia rollback COMPLETO del worktree cuando
+  el exec no aplico eventos, tal y como lo dejo TASK-0272. Bajo esta enmienda esa promesa se
+  invierte para el caso ambiguo. Se anade ademas la prohibicion de emitir PRESERVED sin
+  verificar contra disco.
+- **scope_routes**: sin cambios.
+- **risk**: sigue high; lo que sube es el RESIDUO ACEPTADO, que es decision de politica.
+- **Coste conocido y aceptado**: el arbol puede quedar sucio en rutas gobernadas, que es la
+  precondicion que DECISION-0020 pide evitar. Queda acotado porque el aborto ya reintenta y
+  senala (TASK-0272 y TASK-0278, desplegadas), y quedara recuperable cuando cierre TASK-0275
+  (cuarentena en vez de borrado).
+
+Unidad padre de la iteracion: esta misma, TASK-0280. Tope reiniciado por cambio de enfoque
+firmado, no por indulgencia con el enfoque anterior.

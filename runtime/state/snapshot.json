@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "cefeea4385dd802e947f9bf1c839988e2ff34eff3d54d00d986bdb28f975150e",
+  "canonical_hash": "79e22c2310a4d39853dba56b685f3a9603fff3c57a8c36032240503667446ca3",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -803,6 +803,7 @@
       "CLAIM-arq-hyg-coldstart-20260720": 1,
       "CLAIM-arq-hyg-rejuicio67-20260720": 1,
       "CLAIM-arq-hygiene-o1-20260720": 1,
+      "CLAIM-arq-iter3-0280-20260721": 1,
       "CLAIM-arq-mailbox-go0257-20260719": 1,
       "CLAIM-arq-mailbox-rejfinal-20260719": 1,
       "CLAIM-arq-mailbox-rejuicio-20260719": 1,
@@ -1882,6 +1883,7 @@
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice": 1,
       "MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-0280": 1,
       "MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones": 1,
+      "MSG-20260720-Arquitecto-to-Operador-ESCALADA-TASK-0280-tope-agotado": 1,
       "MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103": 1,
       "MSG-20260720-Arquitecto-to-Operador-REPORTE-evaluacion-coste-hook": 1,
       "MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda": 1,
@@ -2215,7 +2217,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 19,
+      "TASK-0280": 21,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2238,7 +2240,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4806,
+    "events_applied": 4810,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2534,6 +2536,10 @@
       "arq:hygb4:07": 2588,
       "arq:hygb4:claim": 2580,
       "arq:hygb4:rel": 2589,
+      "arq:it3:acquire:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5478,
+      "arq:it3:arch1:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5480,
+      "arq:it3:release:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5481,
+      "arq:it3:st:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5479,
       "arq:promo-0166:acq": 1553,
       "arq:promo-0166:rel": 1555,
       "arq:promo-0166:upsert": 1554,
@@ -7048,5 +7054,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5477
+  "up_to_seq": 5481
 }

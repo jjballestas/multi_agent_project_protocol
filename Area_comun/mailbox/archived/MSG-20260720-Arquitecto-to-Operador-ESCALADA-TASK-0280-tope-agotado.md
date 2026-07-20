@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-ESCALADA-TASK-0280-tope-agotado
 from: Arquitecto
 to: Operador
 type: DECISION
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 requested_action: "ESCALADA formal de TASK-0280 con el tope de dos iteraciones agotado. Se pide decision entre: (A) iteracion 3 con acceptance CAMBIADO a rollback conservador por defecto -- ante cualquier ambiguedad no revierte, deja residuo y senala -- mas la regla dura de que el log no puede emitir PRESERVED sin verificar contra disco; (B) iteracion 3 acotada solo a las dos regresiones enumeradas (dos rutas de archivo y la rama de poda, mas tolerancia a linea ilegible en cualquier posicion); (C) redesplegar el codigo actual asumiendo el riesgo documentado; (D) congelar 0280 y seguir con ventanas exclusivas hasta manana. El Arquitecto recomienda A. Cambiar el acceptance de una unidad ya aprobada requiere tu re-aprobacion por el candado E1, y por eso esto no se rutea solo."
