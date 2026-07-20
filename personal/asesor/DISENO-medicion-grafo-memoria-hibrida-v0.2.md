@@ -229,11 +229,40 @@ copyright/licencia y revisar terceros por archivo.
 - No mide el cruce decision<->codigo. Es producto, se demuestra con un caso, va despues.
 - No evalua adoptar `codebase-memory-mcp` como herramienta para los agentes.
 
-## 13. Bloqueantes antes de ejecutar (checklist)
+## 13. PASO PREPARATORIO DESCUBIERTO - reconstruccion del store (confusor nuevo)
 
-1. `queries.jsonl` con los 78 items y su SHA-256 registrado aqui.
-2. Confirmacion del manifest por un checker distinto.
-3. Formula literal del score de B y marcadores lexicos congelados en el manifest.
-4. Cierre de la tanda DECISION-0103.
+Hallazgo del Asesor al preparar el clon (20-jul, ~03:50), **no listado ni en v0.1 ni en
+el veredicto**:
+
+El store NO viaja en el clon. Vive en `runtime/memory/`, que esta **gitignored**, porque
+es un indice **DERIVADO**: `build_memory_db.py` lo reconstruye desde canon
+(`--rebuild` "deletes it and reconstructs the derived partition from canon").
+
+Consecuencia buena: el clon **puede** regenerarlo, no hay que copiar nada.
+
+Consecuencia a controlar -- **confusor C9, nuevo**: el store reconstruido en el clon
+podria no ser equivalente al que uso B-bis. Si no lo es, el brazo A **no es comparable**
+con el baseline de B-bis y las 26 queries de Q1 pierden su ancla. Un resultado favorable
+a B podria deberse a que A esta corriendo sobre un store distinto.
+
+**Control obligatorio antes de sellar el manifest:**
+
+1. `build_memory_db.py --rebuild` en el clon.
+2. `check_memory_db_drift.py` -> **drift 0** contra el canon del clon.
+3. **Verificacion de equivalencia con el store de B-bis**: recuento de entradas y shas de
+   canon coincidentes con los declarados en `HARNESS-MEMHIB-BBIS.md` /
+   `RESULTADO-MEMHIB-BBIS.md`. Si NO coinciden, Q1 pierde su condicion de baseline
+   reutilizado y hay que declararlo -- no se sigue como si nada.
+
+Este paso NO se ejecuta hasta el cierre de la tanda DECISION-0103 (orden del Operador de
+no dejar trabajo a medias), y por tanto el manifest literal tampoco puede sellarse antes.
+
+## 14. Bloqueantes antes de ejecutar (checklist)
+
+1. Reconstruccion del store + drift 0 + equivalencia con B-bis (seccion 13).
+2. `queries.jsonl` con los 78 items y su SHA-256 registrado aqui.
+3. Confirmacion del manifest por un checker distinto.
+4. Formula literal del score de B y marcadores lexicos congelados en el manifest.
+5. Cierre de la tanda DECISION-0103.
 
 -- Asesor, 20-jul-2026. v0.2, pendiente de re-juicio (iteracion 1/2).
