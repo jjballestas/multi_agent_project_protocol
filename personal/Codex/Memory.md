@@ -1,6 +1,17 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 2.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0278 implementation.
+
+- Commit `ef0b645` isolates the agent response (stdout) from invoker diagnostics
+  (stderr) before outcome classification, so Codex token-count epilogues, checker
+  diagnostics, and echoed prompt vocabulary cannot override an exact terminal token.
+- Free text can still classify a retryable transient, but can never produce a
+  definitive outcome; permanent regressions cover both real field transcript endings,
+  both supported invoker diagnostic shapes, and prompt/response lexical false positives.
+- The orphan TASK-0272 memory claim was the validator's only error; Codex released it
+  through runtime seq 5369 and the validator returned green before TASK-0278 began.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 2.
 
 - Commit `455313d` applies the ratified TASK-0273 implementer-only done flip, repairs
   its task-markdown status after an interrupted materialization, and records the active

@@ -391,6 +391,20 @@
             "updated_at": "2026-07-20T15:13:45Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-memory",
+            "expires_at": "2026-07-20T15:47:56Z",
+            "notes": "Persist TASK-0278 implementation commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:17:56Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:17:56Z"
+        },
+        {
             "claim_id": "CLAIM-arq-campo0278-20260720",
             "expires_at": "2026-07-20T15:42:10Z",
             "notes": "Alta de TASK-0278 (defecto de campo del token) y TASK-0279 (gate de trailers al pre-commit) + liberacion de claim huerfana de Codex + avance de baseline",
