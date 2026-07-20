@@ -245,6 +245,22 @@
             "updated_at": "2026-07-20T11:46:51Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratifica0273-20260720",
+            "expires_at": "2026-07-20T13:16:00Z",
+            "notes": "Ratificacion 0273 (GO: 9/9 ataques contenidos, no-op 0.29s vs 87s, CI rojo accionable)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0273-20260720"
+            ],
+            "started_at": "2026-07-20T12:16:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T12:16:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reject0257-iter2-20260719",
             "expires_at": "2026-07-19T20:31:10Z",
             "notes": "Rechazo formal iter2 (NO-GO re-juicio: F-0257-03 diff-filter excluye D) + higiene de 3 consumidos del ciclo iter1",
