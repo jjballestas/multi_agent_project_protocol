@@ -7,11 +7,17 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
+import os
 from pathlib import Path
 
 
-def run(args: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(args, cwd=cwd, text=True, capture_output=True, check=False)
+def run(
+    args: list[str], cwd: Path, *, env: dict[str, str] | None = None
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        args, cwd=cwd, text=True, capture_output=True, check=False, env=env
+    )
 
 
 def require(result: subprocess.CompletedProcess[str], expected: int, label: str) -> None:
@@ -30,8 +36,14 @@ def require_rejected(result: subprocess.CompletedProcess[str], label: str) -> No
         )
 
 
-def commit(root: Path, message: str) -> subprocess.CompletedProcess[str]:
-    return run(["git", "commit", "-qm", message], root)
+def commit(
+    root: Path, message: str, *, full: bool = False
+) -> subprocess.CompletedProcess[str]:
+    env = None
+    if full:
+        env = os.environ.copy()
+        env["HOOK_FULL"] = "1"
+    return run(["git", "commit", "-qm", message], root, env=env)
 
 
 def main() -> int:
@@ -65,7 +77,17 @@ def main() -> int:
 
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "stage governed state")
-        negative = commit(root, "negative staged state")
+        started = time.perf_counter()
+        bounded = commit(root, "bounded default")
+        elapsed = time.perf_counter() - started
+        require(bounded, 0, "bounded default accepts without full validator")
+        if elapsed >= 2.0:
+            raise AssertionError(f"bounded default took {elapsed:.3f}s, expected <2s")
+        require(run(["git", "reset", "--hard", "HEAD^"], root), 0, "reset bounded fixture")
+
+        state.write_text('{"broken": true}\n', encoding="utf-8")
+        require(run(["git", "add", str(state.relative_to(root))], root), 0, "restage governed state")
+        negative = commit(root, "negative staged state", full=True)
         if negative.returncode == 0 or "collaboration state in staged snapshot is invalid" not in negative.stderr:
             raise AssertionError(
                 "invalid staged collaboration state was not rejected\n"
@@ -80,7 +102,7 @@ def main() -> int:
         marker = root / "AGENTS.md"
         marker.write_text("staged clean change\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage own governed change")
-        require(commit(root, "unstaged validator isolation"), 0, "unstaged validator does not alter verdict")
+        require(commit(root, "unstaged validator isolation", full=True), 0, "unstaged validator does not alter verdict")
         require(run(["git", "restore", "scripts/validate_collaboration_state.py"], root), 0, "restore validator")
 
         # Prune is judgment code too: an unstaged mutation must not affect a
@@ -89,7 +111,11 @@ def main() -> int:
         prune.write_text("raise SystemExit(23)\n", encoding="utf-8")
         marker.write_text("prune isolation\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage prune-isolation change")
-        require(commit(root, "unstaged prune isolation"), 0, "unstaged prune does not alter verdict")
+        require(
+            commit(root, "unstaged prune isolation", full=True),
+            0,
+            "full mode isolates unstaged prune from staged judgment",
+        )
         require(run(["git", "restore", "scripts/prune_state.py"], root), 0, "restore prune")
 
         state.write_text('{"peer_unstaged": true}\n', encoding="utf-8")
@@ -114,7 +140,7 @@ def main() -> int:
                 hook_at_head = run(["git", "show", f"HEAD:{source_path}"], root)
                 require(hook_at_head, 0, "read executing hook from HEAD")
                 (root / source_path).write_text(hook_at_head.stdout, encoding="utf-8", newline="\n")
-            require_rejected(commit(root, f"negative R100 {label}"), f"staged R100 {label} rename")
+            require_rejected(commit(root, f"negative R100 {label}", full=True), f"staged R100 {label} rename")
             require(run(["git", "restore", "--staged", source_path, destination_path], root), 0, f"unstage {label} rename")
             require(run(["git", "restore", source_path], root), 0, f"restore {label} source")
             destination = root / destination_path
@@ -124,11 +150,14 @@ def main() -> int:
         before = set((root / ".git" / "worktrees").iterdir()) if (root / ".git" / "worktrees").exists() else set()
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "stage cleanup failure")
-        require_rejected(commit(root, "negative cleanup"), "invalid snapshot cleanup")
+        require_rejected(commit(root, "negative cleanup", full=True), "invalid snapshot cleanup")
         after = set((root / ".git" / "worktrees").iterdir()) if (root / ".git" / "worktrees").exists() else set()
         if before != after:
             raise AssertionError("temporary materialization left .git/worktrees residue")
-    print("OK: real-commit index snapshot, concurrency, R100, rejection, and cleanup regressions.")
+    print(
+        "OK: bounded default <2s; explicit full-mode snapshot, concurrency, "
+        "R100, rejection, and cleanup regressions."
+    )
     return 0
 
 

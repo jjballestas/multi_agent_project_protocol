@@ -395,19 +395,23 @@ git config core.hooksPath .githooks
 ```
 
 Compruebalo con `git config core.hooksPath`; debe devolver `.githooks`. El
-`pre-commit` valida el snapshot staged, conserva los gates locales existentes y
-rechaza el commit si `validate_collaboration_state.py` falla. El hook es una
-primera linea de defensa: `git commit --no-verify` existe, por lo que el enforcement
-duro sigue siendo CI y los gates desde un clon limpio.
+`pre-commit` es la primera linea rapida: para todo commit materializa el snapshot
+staged, ejecuta `prune_state.py --check` y comprueba el drift de la guia cuando
+corresponde. El validador completo queda reservado en local para un gate explicito:
 
-El hook usa un modo acotado no desactivable: siempre ejecuta el control de poda;
-ejecuta el validador completo cuando el staged snapshot toca `Area_comun/`,
-`runtime/`, `scripts/`, `.githooks/`, las configuraciones del protocolo o
-`AGENTS*`; y ejecuta el gate de la guia cuando toca su fuente, salida o generador.
-Para que el juicio corresponda a los bytes staged, cualquier cambio unstaged o
-untracked en rutas gobernadas o en el codigo local del juicio bloquea el commit.
-Los commits que solo tocan rutas ajenas al protocolo evitan el replay completo,
-pero el hook y su gate acotado siguen activos.
+```powershell
+$env:HOOK_FULL = "1"; git commit
+# Alternativa persistente por clon:
+git config hook.full true
+```
+
+Quita la variable o usa `git config --unset hook.full` para volver al modo acotado.
+El modo completo conserva la mecanica de materializacion y juicio sobre los bytes
+staged. Antes de `push`, ejecuta voluntariamente un commit/gate con modo completo.
+El reparto acepta el riesgo de un HEAD local transitoriamente rojo para mantener
+barato el ciclo de todos los commits; el gate completo pre-push y la validacion
+desde clon limpio en CI lo mitigan. CI sigue siendo el enforcement duro y conserva
+la validacion completa, ademas de verificar la existencia y SHA-256 del hook.
 
 Desarme reversible en menos de 30 segundos si el hook bloquea al equipo:
 
