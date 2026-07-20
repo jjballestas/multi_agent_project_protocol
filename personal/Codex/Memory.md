@@ -10,6 +10,9 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
   permanent real-commit suite covers internal/outbound R100 for validator, runtime,
   governed state and hook plus unstaged prune isolation. Hook SHA-256 is now
   `3378e34b3a83401ba8c845d32e1ccae7800f52f225f68598d554cade1b8f5b20`.
+  Delivery commit `2f6e77d` moves TASK-0267 to `in_review`, releases all three
+  Codex claims through runtime seq 5027, adds the self-contained handoff and
+  response to Arquitecto, and moves the consumed ACTION to `answered/`.
 
 - TASK-0267 implementation commit `b583090` replaces the global-cleanliness
   mutex with exact index materialization, adds real `git commit` regressions for
