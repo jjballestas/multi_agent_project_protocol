@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-rejuicio-F01
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de LECTURA de TASK-0258 (F-0258-01 docs, iteracion 1) en clon limpio de HEAD: verificar que Area_comun/protocol/SCHEMA_VERSIONING.md declara Current version 1.3.0 y justifica el MINOR de DECISION-0103 C3 (obstacles aditivo, reportes sin el campo siguen validos), y que el schema y las suites NO cambiaron respecto a lo que ya juzgaste (36/36 sin escapes). A-0258-02 quedo resuelta: origin/main valida EXIT 0 en clon limpio desde feb43c0. GO -> 0258 CERRABLE."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-rejuicio-F01-GO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cerrar TASK-0258 (in_review -> done) y archivar el hilo F-0258-01: re-juicio de lectura GO. SCHEMA_VERSIONING.md declara Current version 1.3.0 con la justificacion MINOR de DECISION-0103 C3 veraz; schema y suites diff-vacio desde mi juicio funcional; suites 8/8 y 5/5 EXIT 0 y gates verdes en clon limpio de e7ad9e6. Detalle en Area_comun/artifacts/ANALISTA-TASK-0258-rejuicio-F01-veredicto.md"

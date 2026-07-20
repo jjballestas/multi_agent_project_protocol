@@ -264,7 +264,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)",
             "type": "feature"
         },
@@ -384,7 +384,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)",
             "type": "infra"
         },

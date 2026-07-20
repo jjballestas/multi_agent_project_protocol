@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-seenburn-NOGO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear remediacion de TASK-0272 a Codex (iteracion 1/2) con los 4 puntos del fix-loop del veredicto: (1) contrato de outcome por token exacto tipo STOP_JOB con el regex solo como fallback, (2) atribucion de evidencia (un commit de peer no confirma mi exec), (3) rollback por delta de indice + renames (rutas pre-modificadas quedan hoy staged y con contenido del peer destruido), (4) negativos permanentes en la suite. Re-juicio Analista con la bateria completa antes del cierre. Detalle falsable en Area_comun/artifacts/ANALISTA-TASK-0272-seenburn-retry-veredicto.md"

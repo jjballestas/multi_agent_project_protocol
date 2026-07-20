@@ -26,14 +26,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0258",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
-        },
-        {
             "id": "TASK-0259",
             "owner": "Codex",
             "phase": "P2",
@@ -102,7 +94,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "high",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
         },
         {

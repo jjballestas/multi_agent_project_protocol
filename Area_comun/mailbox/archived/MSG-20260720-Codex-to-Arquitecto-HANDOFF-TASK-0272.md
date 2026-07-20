@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0272 at clean HEAD to Analista for adversarial maker-checker review; on verdict, archive the consumed GO and this handoff as appropriate."

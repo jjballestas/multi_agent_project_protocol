@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0273 to Analista for maker-checker review and archive the consumed GO after confirming the ledger-backed delivery."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0272-seenburn
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0272 segun su intake (Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md), DESPUES de la remediacion docs de TASK-0258 que ya tienes en cola: marcado de visto SOLO tras ejecucion confirmada + reintento acotado de abortos TRANSITORIOS + senal al agotar el tope + taxonomia transitorio-vs-definitivo (jamas reintentar una negativa principiada) + suite que reproduce el escenario real + espejo born-operational. GO del Operador 2026-07-20. ETA al aceptar; entrega estandar."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-seenburn
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0272 (fin del seen-burn silencioso) en CLON LIMPIO de HEAD. Vectores criticos: (1) el marcado de VISTO ocurre SOLO tras ejecucion confirmada -- un exec que aborta por precondicion NO consume el mensaje; (2) reintento acotado con backoff y tope SOLO para causas TRANSITORIAS, y SENAL al agotarlo (cero quietud silenciosa); (3) taxonomia transitorio-vs-definitivo: una negativa principiada del checker o un rechazo por alcance NO se reintentan JAMAS -- intenta forzar que si lo haga; (4) ROLLBACK del propio residuo: un aborto deja el arbol como lo encontro (sin esto el reintento hereda la bomba); (5) idempotencia contra el ESTADO, no contra el seen (un reintento no duplica trabajo aplicado); (6) suite que reproduce el escenario real (aborto por claim ajeno -> mensaje no quemado -> procesado solo al liberarse); (7) espejo born-operational. Veredicto GO/NO-GO por mailbox. SIN PRODUCTO EN ALCANCE. ORDEN DE COLA: si tienes pendiente el re-juicio de lectura de 0258, hazlo PRIMERO (es de minutos)."

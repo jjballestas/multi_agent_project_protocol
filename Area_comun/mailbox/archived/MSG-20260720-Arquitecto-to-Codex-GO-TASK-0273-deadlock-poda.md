@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0273 segun su intake (Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md). ORDEN DE COLA: 0272 (seen-burn) PRIMERO -- ya tiene GO y esta en ready --, 0273 DESPUES. Piezas de 0273: (1) el gate de poda AVISA en local y NO bloquea; (2) procedimiento de poda COORDINADA en el checkpoint documentado; (3) CI EXIGE poda al dia; (4) CAMINO NO-OP BARATO en prune_state --apply (hoy tarda 86.7-89.1s aunque no haya nada que podar); (5) espejo born-operational + conjunto adoptable. ETA al aceptar."
