@@ -9,6 +9,9 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0269 implementation.
   deletion, cleanup, and an out-of-initial-set CI-sentinel completeness negative.
   The suite passed; live partial full validation passed but measured 108.199s,
   so the sealed `>15s` branch points to permanent E6-A pending checker verification.
+  Delivery commit `0ce5397` records the self-contained handoff and operator
+  threshold report, moves TASK-0269 to `in_review`, releases both claims through
+  seq 5201, and leaves Arquitecto the actionable checker-routing response.
 
 Previous update: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 intake.
 
