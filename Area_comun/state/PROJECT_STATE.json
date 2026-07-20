@@ -141,13 +141,13 @@
         {
             "id": "TASK-0270",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[LEDGER] Endurecimiento del event log: verificacion post-write del evento propio + coherencia idempotencia-vs-estado (cierra el evento-perdido silencioso y el skip mudo)"
         },
         {
             "id": "TASK-0271",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo"
         },
         {

@@ -42,6 +42,26 @@
             "updated_at": "2026-07-20T03:13:14Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02",
+            "expires_at": "2026-07-20T11:55:00Z",
+            "notes": "Remediate F-0271-02 neutrality and perform ratified TASK-0270 done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "scripts/test_anthropic_checker_harness.py"
+            ],
+            "started_at": "2026-07-20T03:55:00Z",
+            "status": "active",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T03:55:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hyg-0545-20260720",
             "expires_at": "2026-07-20T04:45:00Z",
             "notes": "Higiene: 3 consumidos (review 0270 con veredicto entregado, 2 REQUESTs respondidos) para bajar cold-start",
