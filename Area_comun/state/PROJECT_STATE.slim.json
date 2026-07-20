@@ -89,12 +89,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
-        },
-        {
-            "id": "TASK-0271",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo"
         }
     ],
     "next_actions": [

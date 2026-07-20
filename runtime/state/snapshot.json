@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "31a1a52ed76f2e50fd1b1c696b5072101862e0ef1a56f8430776d94673c43bb4",
+  "canonical_hash": "373ae7c2bb770d676165b9ac7bb5df79b71c9cb7dbedfa09ea0652030db255c2",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -670,8 +670,10 @@
       "CLAIM-20260720-Codex-TASK-0271": 1,
       "CLAIM-20260720-Codex-TASK-0271-F02": 1,
       "CLAIM-20260720-Codex-TASK-0271-F02-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0271-F02-final-memory": 1,
       "CLAIM-20260720-Codex-TASK-0271-F02-memory": 1,
       "CLAIM-20260720-Codex-TASK-0271-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0271-done": 1,
       "CLAIM-20260720-Codex-TASK-0271-fix1": 1,
       "CLAIM-20260720-Codex-TASK-0271-fix1-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0271-fix1-memory": 1,
@@ -745,6 +747,7 @@
       "CLAIM-arq-ratifica0267-20260720": 1,
       "CLAIM-arq-ratifica0270-20260720": 1,
       "CLAIM-arq-ratifica0271-20260720": 1,
+      "CLAIM-arq-ratifica0271b-20260720": 1,
       "CLAIM-arq-reflip0257-20260719": 1,
       "CLAIM-arq-reflip0257-b-20260719": 1,
       "CLAIM-arq-reject0257-20260719": 1,
@@ -2021,7 +2024,7 @@
       "TASK-0268": 9,
       "TASK-0269": 3,
       "TASK-0270": 10,
-      "TASK-0271": 20,
+      "TASK-0271": 25,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2044,7 +2047,7 @@
       "protocol-prune": 12,
       "protocol-state": 1
     },
-    "events_applied": 4448,
+    "events_applied": 4456,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3745,9 +3748,14 @@
       "codex:task0271:claim:20260720T020500Z": 5044,
       "codex:task0271:delivery-claim:20260720T023500Z": 5051,
       "codex:task0271:delivery-release:20260720T023500Z": 5055,
+      "codex:task0271:done-claim:20260720T041500Z": 5124,
+      "codex:task0271:done-release:20260720T041500Z": 5127,
+      "codex:task0271:done:20260720T041500Z": 5125,
       "codex:task0271:f02-claim:20260720T035500Z": 5111,
       "codex:task0271:f02-delivery-claim:20260720T040500Z": 5115,
       "codex:task0271:f02-delivery-release:20260720T040500Z": 5119,
+      "codex:task0271:f02-final-memory-claim:20260720T041000Z": 5120,
+      "codex:task0271:f02-final-memory-release:20260720T041500Z": 5126,
       "codex:task0271:f02-in-progress:20260720T035500Z": 5112,
       "codex:task0271:f02-in-review:20260720T040500Z": 5116,
       "codex:task0271:f02-main-release:20260720T040500Z": 5117,
@@ -4044,6 +4052,7 @@
       "intent:Arquitecto:claim:1b4fe4c09bddbcf10431ce9088664293bac14fa520a494ef5f835d74ca5ea4ad": 5039,
       "intent:Arquitecto:claim:1b60aa3c7a2a9e7e521448c8b7118cf5fe665836912f79dab7f81cad4295f060": 3044,
       "intent:Arquitecto:claim:1b8915e22caee5f1cd6e98e90d7a80e5ac5fa97f2c15ef251c846b158918d753": 4615,
+      "intent:Arquitecto:claim:1c79811364b33efcc623e7f01f10c09f7204e88f947f74a902c50492a2cc7fab": 5121,
       "intent:Arquitecto:claim:1c90dce8189d8d6c31130fd4ba19ae688686d35d0d3bee6a9dcba0817fe7ffbb": 3869,
       "intent:Arquitecto:claim:1cd8e8f933c26f0d038e36073f0da2e3450f9849863b7039255cbf1aea030c32": 3336,
       "intent:Arquitecto:claim:1df834cf5df0fd0c6087da628f0bf9abd0dca9e47d5273c2b9590a71eaf28a35": 4238,
@@ -4174,6 +4183,7 @@
       "intent:Arquitecto:claim:51de6b086f8bc78a6a27266ed018ce9953ad987847ff5a5519dbefe36707424f": 4980,
       "intent:Arquitecto:claim:526e2f4ea46e26c22e380d5f479c37fe35dab743a949b9de7be84b9c86573c60": 3783,
       "intent:Arquitecto:claim:54250f1b7cc0d3e14b4510d9c8ca35ff58c4d0454d599d3ae2369ac6f097c3e1": 2997,
+      "intent:Arquitecto:claim:549c864794c8eb3854c1320741705475b9609d87f56b46a9dd110ccf00331f63": 5123,
       "intent:Arquitecto:claim:54ba08bb145de8bf78587fde9412821a6f87f2bff1910e5a016c23dae3d44c12": 3260,
       "intent:Arquitecto:claim:54c719b01a5d2dca288e9bf5ac875085f45c8a4c217775d7776f7043e3c01c2b": 4263,
       "intent:Arquitecto:claim:55170b9173eee8f9715fb823a82902bf93368cd63af8fbd8a8f4aa6be35ea8e2": 3830,
@@ -6458,6 +6468,7 @@
       "ratifica-0267-informal-20260720T0200": 5049,
       "ratifica-0270-20260720T0340": 5104,
       "ratifica-0271-20260720T0215": 5057,
+      "ratifica-0271b-20260720T0355": 5122,
       "ready-TASK-0268-e6-20260720": 5003,
       "ready-TASK-0269-e6-20260720": 5005,
       "ready-TASK-0270-20260720": 5009,
@@ -6496,5 +6507,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5119
+  "up_to_seq": 5127
 }

@@ -80,6 +80,20 @@
             "updated_at": "2026-07-20T04:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-final-memory",
+            "expires_at": "2026-07-20T12:10:00Z",
+            "notes": "Persist TASK-0271 F02 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-memory",
             "expires_at": "2026-07-20T12:00:00Z",
             "notes": "Persist TASK-0271 F02 implementation commit context.",
@@ -92,6 +106,22 @@
             "status": "released",
             "task_id": "TASK-0271",
             "updated_at": "2026-07-20T04:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-done",
+            "expires_at": "2026-07-20T12:15:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of F-0271-02.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md"
+            ],
+            "started_at": "2026-07-20T04:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:15:00Z"
         },
         {
             "claim_id": "CLAIM-arq-hyg-0545-20260720",
@@ -152,6 +182,22 @@
             "status": "released",
             "task_id": "TASK-0270",
             "updated_at": "2026-07-20T03:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0271b-20260720",
+            "expires_at": "2026-07-20T04:55:00Z",
+            "notes": "Re-ratificacion 0271 tras F01 (invoker, verificado con 3 turnos reales) y F02 (neutralidad, scan verde); evidencia end-to-end completa",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0271b-20260720"
+            ],
+            "started_at": "2026-07-20T03:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T03:55:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reject0257-20260719",

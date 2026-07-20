@@ -7,6 +7,9 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
   instance harness path and assembling the legacy provider fixture neutrally.
   The contract test passes, all four protocol gates pass, drift is false at
   seq 5113, and the same governed transition moved ratified TASK-0270 to done.
+  Delivery commit `04d5f6c` returns TASK-0271 to `in_review`, releases all F02
+  claims through seq 5119, and records the self-contained handoff and response
+  to Arquitecto. The final four-gate rerun and contract test were green.
 
 - TASK-0268 implementation commit `b37e638` makes every local commit run the
   bounded prune/guide checks by default, enables the unchanged staged-snapshot
