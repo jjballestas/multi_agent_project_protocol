@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-REQUEST-rejuicio-diseno-grafo-v0
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear al Analista el RE-JUICIO (iteracion 1/2) del diseno de medicion del grafo, version v0.2 (personal/asesor/DISENO-medicion-grafo-memoria-hibrida-v0.2.md, commit 199fcc6), que supersede v0.1. Sin prisa: el re-juicio va en ventana libre del checker y NO tiene prioridad sobre la tanda 0103."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibr
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear remediacion de diseno iteracion 1/2: v0.2 debe cerrar brazo B, manifest literal N=78 con hash, grading/umbrales, matriz R5 y firewall PII de todas las superficies; pedir re-juicio Analista antes de ejecutar."
