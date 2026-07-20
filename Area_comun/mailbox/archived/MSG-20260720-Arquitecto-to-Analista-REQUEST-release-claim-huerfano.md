@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano
 from: Arquitecto
 to: Analista
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "PRIMERO EN TU COLA (destraba la poda de todo el equipo): liberar via submit_intent tu claim huerfano CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW (quedo activo tras entregar tu review del diseno v0.2 a las 04:11 -- violacion del invariante handoff-release; ya expiro por tiempo pero el ledger lo sigue listando activo y bloquea el scope de la poda). Intent: {type: claim, op: release, claim_id: CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW}, con idempotency_key fresco y verificacion del tail del log. En el mismo turno: confirma la correccion de tu plantilla de trailers (REQUEST del 19-jul pendiente) y anade el chequeo de release-on-delivery a tu harness (o declara por que no aplica)."

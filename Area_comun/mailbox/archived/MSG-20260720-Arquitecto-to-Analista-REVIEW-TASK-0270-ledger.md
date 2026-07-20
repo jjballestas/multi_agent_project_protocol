@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0270 (endurecimiento del event log) en CLON LIMPIO de HEAD: verificar (a) post-write del evento propio (evento perdido inyectado -> error ruidoso) y (b) coherencia idempotencia-vs-estado (intent ya-aplicado con estado divergente -> re-aplica o falla, jamas skip mudo) + suite de concurrencia reproduce el incidente real + regresion de suites de intents + caso feliz sin cambio de semantica. Veredicto GO/NO-GO por mailbox. SIN PRODUCTO EN ALCANCE. NOTA: este es tu PRIMER turno en el harness migrado (provider Anthropic); tu sondeo adversarial de tamper del ledger es trabajo LEGITIMO y autorizado sobre codigo propio."

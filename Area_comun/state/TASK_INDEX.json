@@ -408,7 +408,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[LEDGER] Endurecimiento del event log: verificacion post-write del evento propio + coherencia idempotencia-vs-estado (cierra el evento-perdido silencioso y el skip mudo)",
             "type": "infra"
         },

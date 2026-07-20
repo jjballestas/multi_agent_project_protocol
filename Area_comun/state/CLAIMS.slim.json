@@ -1,16 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-031314-prune-arquitecto",
-            "owner": "Arquitecto",
-            "scope": [
-                "Area_comun/state/CLAIMS.json",
-                "Area_comun/state/TASK_INDEX.json",
-                "Area_comun/state/PROJECT_STATE.json"
-            ],
-            "task_id": "MAINTENANCE-PRUNE"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

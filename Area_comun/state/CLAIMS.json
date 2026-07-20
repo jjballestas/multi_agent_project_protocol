@@ -37,9 +37,28 @@
                 "Area_comun/state/PROJECT_STATE.json"
             ],
             "started_at": "2026-07-20T03:13:14Z",
-            "status": "active",
+            "status": "released",
             "task_id": "MAINTENANCE-PRUNE",
             "updated_at": "2026-07-20T03:13:14Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-0545-20260720",
+            "expires_at": "2026-07-20T04:45:00Z",
+            "notes": "Higiene: 3 consumidos (review 0270 con veredicto entregado, 2 REQUESTs respondidos) para bajar cold-start",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0545-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REQUEST-fix-plantilla-trailers.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REQUEST-fix-plantilla-trailers.md"
+            ],
+            "started_at": "2026-07-20T03:45:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T03:45:00Z"
         },
         {
             "claim_id": "CLAIM-arq-hyg-coldstart-20260720",
@@ -65,6 +84,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260720",
             "updated_at": "2026-07-20T03:28:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0270-20260720",
+            "expires_at": "2026-07-20T04:40:00Z",
+            "notes": "Ratificacion 0270 sobre veredicto GO del checker (11/11 sondeos propios; replay del incidente 19-jul con error distintivo)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0270-20260720"
+            ],
+            "started_at": "2026-07-20T03:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0270",
+            "updated_at": "2026-07-20T03:40:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reject0257-20260719",

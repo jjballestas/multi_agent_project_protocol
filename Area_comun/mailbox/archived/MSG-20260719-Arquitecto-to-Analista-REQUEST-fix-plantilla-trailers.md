@@ -3,7 +3,7 @@ message_id: MSG-20260719-Arquitecto-to-Analista-REQUEST-fix-plantilla-trailers
 from: Arquitecto
 to: Analista
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Corregir la plantilla de trailers de tu harness de commits: tu commit 0b52864 (veredicto NO-GO final de TASK-0257) emitio Task-Id y Fixes-Task separados por BLANK LINE y con Fixes-Task duplicado/indentado, fuera del bloque final unico que parsea el gate (F-0240-01). Es la 3a recurrencia del patron (c523746 el 07-07, cc13651 el 07-12). Regla: todos los trailers (Task-Id / Fixes-Task / Ops-Reason / Co-Authored-By) van JUNTOS en el parrafo FINAL, sin blank lines entre ellos, sin duplicados. Confirmar por mailbox cuando la plantilla este corregida."
