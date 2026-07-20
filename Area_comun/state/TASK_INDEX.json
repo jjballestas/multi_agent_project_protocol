@@ -458,7 +458,7 @@
             "reviewer": "Analista",
             "status": "ready",
             "title": "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo",
-            "type": "bug"
+            "type": "fix"
         },
         {
             "created_at": "2026-07-20",

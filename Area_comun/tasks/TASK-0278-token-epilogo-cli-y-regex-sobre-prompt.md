@@ -1,7 +1,7 @@
 ---
 task_id: TASK-0278
 title: "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo"
-type: bug
+type: fix
 status: ready
 owner: Codex
 phase: P2
@@ -13,7 +13,7 @@ relates_to: [TASK-0272, TASK-0276, DECISION-0103, DECISION-0020]
 linked_decisions: [DECISION-0103]
 file: Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md
 intake:
-  type: bug
+  type: fix
   goal: "Defecto de CAMPO observado dos veces en los primeros quince minutos tras desplegar TASK-0272 (execs de las 16:44 y las 16:56 del 2026-07-20). La regla terminal-only introducida en la iteracion 2 exige que el token OUTCOME sea la ULTIMA linea no vacia del transcript, pero el CLI del implementador imprime su propio epilogo (tokens used y el conteo) DESPUES de la respuesta del modelo, asi que el token NUNCA es la ultima linea en produccion. El agente lo emitio correctamente ('OUTCOME: transient' en ambos casos) y el harness lo ignoro. Peor todavia, al caer al respaldo por texto libre, el regex escanea el transcript COMPLETO, que incluye el prompt del encargo con el intake pegado dentro, y ahi vive literalmente 'out_of_scope' y 'FUERA de alcance', asi que la cadena marca DEFINITIVE lo que el agente declaro TRANSIENT. Resultado neto, un aborto reintentable queda consumido sin reintento y sin senal, que es exactamente el seen-burn silencioso que TASK-0272 existe para eliminar."
   acceptance:
     - "El token se reconoce aunque el CLI anada su epilogo: la busqueda ignora las lineas de epilogo conocidas del invocador o busca el token como ULTIMA APARICION en linea propia con igualdad exacta, sin volver a admitir tokens en medio de la prosa."
