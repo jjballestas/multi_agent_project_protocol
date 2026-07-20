@@ -2,7 +2,7 @@
 task_id: TASK-0269
 title: "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
 type: infra
-status: ready
+status: in_review
 owner: Codex
 phase: P2
 priority: normal

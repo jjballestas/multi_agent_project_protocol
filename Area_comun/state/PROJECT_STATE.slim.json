@@ -75,7 +75,7 @@
         {
             "id": "TASK-0269",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
         }
     ],

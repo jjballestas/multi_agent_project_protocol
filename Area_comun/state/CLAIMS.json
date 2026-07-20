@@ -159,9 +159,29 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-20T06:10:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0269",
             "updated_at": "2026-07-20T06:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0269-DELIVERY",
+            "expires_at": "2026-07-20T15:05:00Z",
+            "notes": "Publish TASK-0269 handoff, threshold report, mailbox response, and governed in-review transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0269-DELIVERY",
+                "Area_comun/state/TASK_INDEX.json#TASK-0269",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0269",
+                "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0269-materializacion-parcial.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0269.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T07:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0269",
+            "updated_at": "2026-07-20T07:05:00Z"
         },
         {
             "claim_id": "CLAIM-arq-hyg-0730-20260720",
