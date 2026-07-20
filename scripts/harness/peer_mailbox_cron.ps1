@@ -426,10 +426,16 @@ function Write-RetryState {
     Write-Utf8NoBom -Path $RetryPath -Content (($object | ConvertTo-Json -Depth 8) + "`n")
 }
 
-function Get-RepositoryEvidence {
-    $head = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
-    $status = (& git -C $Root status --porcelain=v1 2>$null) -join "`n"
-    return "$head`n$status"
+function Get-OwnEvidence {
+    param([string]$HeadBefore)
+    $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    if ($headAfter -and $headAfter -ne $HeadBefore) {
+        foreach ($commit in @(& git -C $Root rev-list "$HeadBefore..$headAfter" 2>$null)) {
+            $author = (& git -C $Root show -s --format=%an $commit 2>$null | Select-Object -First 1)
+            if ($author -and $author.Trim() -ieq $PeerId) { return $true }
+        }
+    }
+    return $false
 }
 
 function Get-StagedResidueState {
@@ -446,40 +452,32 @@ function Get-StagedResidueState {
 }
 
 function Restore-TransientExecResidue {
-    param([string[]]$BeforeStatus)
-    $beforePaths = @{}
-    foreach ($line in $BeforeStatus) {
-        if ($line.Length -ge 4) { $beforePaths[$line.Substring(3)] = $true }
+    param([string]$HeadBefore, [string]$IndexPatch, [string]$WorktreePatch, [string[]]$UntrackedBefore)
+    $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    if ($headAfter -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed"; return }
+    $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
+    $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
+    foreach ($path in @($createdRaw -split [char]0 | Where-Object { $_ -and -not $beforeUntracked.ContainsKey($_) })) {
+        $full = Join-Path $Root $path
+        if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
     }
-    foreach ($line in @(& git -C $Root status --porcelain=v1 2>$null)) {
-        if ($line.Length -lt 4) { continue }
-        $relative = $line.Substring(3)
-        if ($beforePaths.ContainsKey($relative)) { continue }
-        if ($line[0] -eq 'A') {
-            & git -C $Root rm --cached --force --ignore-unmatch -- $relative 2>$null | Out-Null
-        } elseif ($line[0] -ne ' ' -and $line[0] -ne '?') {
-            & git -C $Root restore --staged -- $relative 2>$null | Out-Null
-        }
-        $tracked = @(& git -C $Root ls-files -- $relative 2>$null)
-        if ($tracked.Count -gt 0) {
-            & git -C $Root restore --worktree -- $relative 2>$null | Out-Null
-        } else {
-            $full = Join-Path $Root $relative
-            if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
-        }
-    }
+    & git -C $Root reset --hard $HeadBefore 2>$null | Out-Null
+    if ((Test-Path $IndexPatch) -and (Get-Item $IndexPatch).Length -gt 0) { & git -C $Root apply --index --binary $IndexPatch 2>$null }
+    if ((Test-Path $WorktreePatch) -and (Get-Item $WorktreePatch).Length -gt 0) { & git -C $Root apply --binary $WorktreePatch 2>$null }
 }
 
 function Get-ExecOutcomeClass {
-    param([int]$ExitCode, [string]$Output, [bool]$EvidenceChanged)
+    param([int]$ExitCode, [string]$Output, [bool]$OwnEvidence)
+    $tokens = @([regex]::Matches($Output, '(?m)^OUTCOME: (confirmed|transient|definitive)\r?$') | ForEach-Object { $_.Groups[1].Value })
+    if ($tokens.Count -gt 0) { return $tokens[-1] }
+    if ($ExitCode -ne 0) { return "transient" }
+    if ($OwnEvidence) { return "confirmed" }
     if ($Output -match '(?im)(NO-GO|change_required|negativa principiada|rechazo por alcance|out.of.scope|fuera de alcance)') {
         return "definitive"
     }
     if ($Output -match '(?im)(pre-gate|precondition|claim ajeno|active claim|ventana (roja|ocupada)|tree.*(dirty|peer)|cambios ajenos|staged residue|resource deadlock)') {
         return "transient"
     }
-    if ($ExitCode -eq 0 -and $EvidenceChanged) { return "confirmed" }
-    if ($ExitCode -ne 0) { return "transient" }
     return "unconfirmed"
 }
 
@@ -583,11 +581,17 @@ function Invoke-PeerForMessage {
     $prompt = $prompt.Replace("@@ROOT@@", $Root.Replace("\", "/"))
     $prompt = $prompt.Replace("@@PEER_ID@@", $PeerId)
     $prompt = $prompt.Replace("@@COORDINATOR_ID@@", $CoordinatorId)
+    $prompt += "`n`nEnd the final response with exactly one structured outcome line: OUTCOME: confirmed, OUTCOME: transient, or OUTCOME: definitive. This exact token is authoritative; prose is not.`n"
 
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
-    $evidenceBefore = Get-RepositoryEvidence
-    $statusBefore = @(& git -C $Root status --porcelain=v1 2>$null)
+    $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
+    $indexPatch = Join-Path $RunsDir "$stamp-$safeName.before-index.patch"
+    $worktreePatch = Join-Path $RunsDir "$stamp-$safeName.before-worktree.patch"
+    & git -C $Root diff --cached --binary --output=$indexPatch
+    & git -C $Root diff --binary --output=$worktreePatch
+    $untrackedBeforeRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
+    $untrackedBefore = @($untrackedBeforeRaw -split [char]0 | Where-Object { $_ })
 
     try {
         # The prompt goes through STDIN (RedirectStandardInput of the rendered prompt
@@ -614,7 +618,7 @@ function Invoke-PeerForMessage {
         $output = ""
         if (Test-Path -LiteralPath $stdoutPath) { $output += Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
         if (Test-Path -LiteralPath $stderrPath) { $output += "`n" + (Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8) }
-        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -EvidenceChanged ((Get-RepositoryEvidence) -ne $evidenceBefore)
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -OwnEvidence (Get-OwnEvidence -HeadBefore $headBefore)
         Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
         $signature = Get-MessageSignature -Message $Message
         if ($outcome -in @("confirmed", "definitive")) {
@@ -624,7 +628,7 @@ function Invoke-PeerForMessage {
             $retry = Read-RetryState
             if ($retry.ContainsKey($Message.Name)) { $retry.Remove($Message.Name); Write-RetryState -State $retry }
         } else {
-            Restore-TransientExecResidue -BeforeStatus $statusBefore
+            Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore
             $retry = Read-RetryState
             $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
             $attempt = $previous + 1
@@ -640,7 +644,7 @@ function Invoke-PeerForMessage {
         }
     } catch {
         Write-Log "EXEC_FAIL message=$($Message.Name) error=$($_.Exception.Message)"
-        Restore-TransientExecResidue -BeforeStatus $statusBefore
+        Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore
         $signature = Get-MessageSignature -Message $Message
         $retry = Read-RetryState
         $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }

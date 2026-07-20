@@ -26,6 +26,7 @@ def main() -> int:
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+        (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
         message.write_text(
             "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
@@ -41,15 +42,27 @@ def main() -> int:
             "$count=if(Test-Path $countPath){[int](Get-Content $countPath)}else{0}\n"
             "$count++; Set-Content -Path $countPath -Value $count -Encoding ASCII\n"
             "if($count -eq 1){\n"
+            "  Set-Content -Path (Join-Path $root 'peer.txt') -Value peer -Encoding ASCII\n"
+            "  git add peer.txt\n"
+            "  git -c user.name=OtherPeer -c user.email=peer@example.invalid commit -m 'peer concurrent commit' | Out-Null\n"
+            "  Write-Output 'transient withdrawal quoting NO-GO from the intake'\n"
+            "  Write-Output 'OUTCOME: transient'\n"
+            "  exit 0\n"
+            "}\n"
+            "if($count -eq 2){\n"
             "  Set-Content -Path (Join-Path $root 'residue.txt') -Value residue -Encoding ASCII\n"
             "  git add residue.txt\n"
+            "  Set-Content -Path (Join-Path $root 'predirty.txt') -Value exec-content -Encoding ASCII\n"
+            "  git add predirty.txt\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
+            "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
             "}\n"
             "$response=Join-Path $root 'Area_comun/mailbox/open/MSG-response.md'\n"
             "Set-Content -Path $response -Value 'response confirmed' -Encoding ASCII\n"
             "git add $response; git commit -m 'test confirmed response' | Out-Null\n"
-            "Write-Output 'status: in_review'\n",
+            "Write-Output 'status: in_review; obstacle claim ajeno active claim was resolved'\n"
+            "Write-Output 'OUTCOME: confirmed'\n",
             encoding="ascii",
         )
         fake = sandbox / "fake-agent.cmd"
@@ -59,11 +72,12 @@ def main() -> int:
         run("git", "config", "user.name", "Retry Test", cwd=sandbox)
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
+        (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         result = run(
             "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
             "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
             "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
-            "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
+            "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
             "-MaxTransientRetries", "3", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
             cwd=sandbox,
         )
@@ -81,9 +95,12 @@ def main() -> int:
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
         assert not (sandbox / "residue.txt").exists(), "aborted exec residue survived rollback"
+        assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
+        predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
+        assert predirty_status.startswith(" M "), f"pre-dirty index/worktree state was not restored: {predirty_status!r}"
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=confirmed" in log
-        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 2
+        assert int((sandbox / ".protocol-tmp/fake-count.txt").read_text()) == 3
         print("mailbox retry cases: PASS (transient abort -> rollback -> automatic confirmed retry)")
         return 0
     finally:

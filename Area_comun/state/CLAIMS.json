@@ -40,6 +40,22 @@
             "updated_at": "2026-07-20T10:41:38Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0258-done",
+            "expires_at": "2026-07-20T14:23:36Z",
+            "notes": "Operator-ratified maker done flip after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md"
+            ],
+            "started_at": "2026-07-20T12:23:36Z",
+            "status": "released",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T12:23:36Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272",
             "expires_at": "2026-07-20T18:45:00Z",
             "notes": "Eliminate silent seen-burn with confirmed execution, bounded transient retry, exhaustion signal, tests and born-operational mirror.",
@@ -92,6 +108,30 @@
             "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T11:22:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-1",
+            "expires_at": "2026-07-20T16:25:57Z",
+            "notes": "Remediate TASK-0272 findings with exact outcome token, own evidence attribution, index-safe rollback, and permanent negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:25:57Z",
+            "status": "active",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T12:25:57Z"
         },
         {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",

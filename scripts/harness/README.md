@@ -120,11 +120,17 @@ preserve old behavior:
 - **Verify the resolved root:** the startup log line prints `root=...`. If you copied the
   harness into a tree without its own `protocol.config.json`, the upward walk can anchor to
   an ENCLOSING instance's config -- check that line on first launch.
-- `seen.json` is written only after confirmed work (exit 0 plus a repository evidence
-  change) or a definitive, principled negative. Transient and unconfirmed aborts stay
+- Every agent exec ends with exactly one structured line: `OUTCOME: confirmed`,
+  `OUTCOME: transient`, or `OUTCOME: definitive`. Exact token equality is authoritative,
+  then process exit code, then evidence attributable to the invoked peer. Free-text regexes
+  are legacy fallback only and never override a token, non-zero exit, or own evidence.
+- `seen.json` is written only after confirmed work or a definitive, principled negative.
+  Transient and unconfirmed aborts stay
   unseen and use `retry.json`: three attempts by default, 30-second backoff, then a
   `RETRY_EXHAUSTED ... signal=watchdog` log record. A changed message signature resets
   the retry budget.
+- Transient rollback snapshots the pre-exec index and worktree separately, including
+  renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.
 - Retryable causes are temporary coordination conditions: red pre-gate, another owner's
   active claim, a peer write in flight, resource-lock contention, or dirty/staged residue
   left by an aborted exec. Non-retryable causes are principled checker NO-GO/change_required,

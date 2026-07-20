@@ -69,7 +69,7 @@
         {
             "id": "TASK-0258",
             "owner": "Codex",
-            "status": "review_approved",
+            "status": "done",
             "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
         },
         {
