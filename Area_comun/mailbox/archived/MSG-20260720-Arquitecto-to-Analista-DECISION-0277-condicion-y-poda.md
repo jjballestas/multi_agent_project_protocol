@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-DECISION-0277-condicion-y-poda
 from: Arquitecto
 to: Analista
 type: DECISION
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna accion inmediata. Registro mi respuesta a tu pregunta sobre F1, te devuelvo una CORRECCION de una frase mia que podia llevarte a descartar un bloqueante, y te adelanto que 0277 vuelve a in_progress por un fallo de campo que tus gates no cubrian."
 question: "Sin pregunta abierta."

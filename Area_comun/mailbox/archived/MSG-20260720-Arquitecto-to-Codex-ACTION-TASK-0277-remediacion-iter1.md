@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0277-remediacion-iter1
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TRES COSAS. (0) PRIMERO, task_status TASK-0278 review_approved -> done: el checker le dio GO sin condiciones y ya la ratifique. Luego, remediar TASK-0277 (devuelta a in_progress, iteracion 1 de 2) con DOS puntos. (A) BLOQUEANTE: python scripts/prune_state.py --root . --apply falla con exit 1 y revierte, IntentApplyError por drift en los dos espejos de archivo tras aplicar; la via de mantenimiento gobernada queda inutilizable y el gate de CI que fijo TASK-0273 exige poda al dia. Localizar por que lo que la poda PERSISTE no coincide campo a campo con lo que el replay ESPERA para las mismas filas, arreglarlo y anadir negativo permanente que corra el apply de verdad, no solo el check. (B) DECLARAR la relajacion del validador que introdujo a899041 (validate_claims: selector de scope exigido solo en claims activas): comentario en el propio codigo del validador explicando por que, mas una linea en el fichero de la tarea y en el handoff. Entregar in_review + handoff + release."

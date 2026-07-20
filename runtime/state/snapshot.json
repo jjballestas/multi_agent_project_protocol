@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c8c9456197581b3b751ea206d972845e831d6f738e56f4a0f96b8c4625d9e580",
+  "canonical_hash": "7601f218ce8f7823a00f5f5ced30fb1f7d9a06ef23ce39b7ca5abf59ed30ed4f",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -826,6 +826,7 @@
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio2-20260720": 1,
       "CLAIM-arq-rutear0277-0278-20260720": 1,
+      "CLAIM-arq-rutear0277rej-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1817,6 +1818,8 @@
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibrida-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO": 1,
+      "MSG-20260720-Arquitecto-to-Analista-DECISION-0277-condicion-y-poda": 1,
+      "MSG-20260720-Arquitecto-to-Analista-DECISION-cierre-0272-residuales": 1,
       "MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano": 1,
       "MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift": 1,
       "MSG-20260720-Arquitecto-to-Analista-RESP-sweep-corregido": 1,
@@ -1840,6 +1843,7 @@
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2": 1,
+      "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0277-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273": 1,
@@ -1877,6 +1881,7 @@
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277": 1,
+      "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277-remediacion-iter1": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0278": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272": 1,
@@ -2176,7 +2181,7 @@
       "TASK-0274": 1,
       "TASK-0275": 1,
       "TASK-0276": 1,
-      "TASK-0277": 12,
+      "TASK-0277": 13,
       "TASK-0278": 14,
       "TASK-0279": 1,
       "TASK-0280": 2,
@@ -2202,7 +2207,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4744,
+    "events_applied": 4750,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2521,6 +2526,12 @@
       "arq:rem77:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5396,
       "arq:reporte0103:acquire:eeb4aadc-b420-425b-b541-c82c0c372533": 5343,
       "arq:reporte0103:release:eeb4aadc-b420-425b-b541-c82c0c372533": 5344,
+      "arq:rut0277rej:acquire:76c2172a-262b-4033-bb98-56a4a8e66b48": 5416,
+      "arq:rut0277rej:arch1:76c2172a-262b-4033-bb98-56a4a8e66b48": 5417,
+      "arq:rut0277rej:arch2:76c2172a-262b-4033-bb98-56a4a8e66b48": 5418,
+      "arq:rut0277rej:arch3:76c2172a-262b-4033-bb98-56a4a8e66b48": 5419,
+      "arq:rut0277rej:arch4:76c2172a-262b-4033-bb98-56a4a8e66b48": 5420,
+      "arq:rut0277rej:release:76c2172a-262b-4033-bb98-56a4a8e66b48": 5421,
       "arq:rutear0272:acquire:589dd028-d30f-4cb3-b836-3205c429db0a": 5309,
       "arq:rutear0272:arch1:589dd028-d30f-4cb3-b836-3205c429db0a": 5310,
       "arq:rutear0272:arch2:589dd028-d30f-4cb3-b836-3205c429db0a": 5311,
@@ -6950,5 +6961,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5415
+  "up_to_seq": 5421
 }

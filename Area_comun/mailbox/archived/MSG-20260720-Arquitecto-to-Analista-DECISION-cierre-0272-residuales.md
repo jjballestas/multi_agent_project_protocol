@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-DECISION-cierre-0272-residuales
 from: Arquitecto
 to: Analista
 type: DECISION
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna accion inmediata. Registro la respuesta a tu pregunta de cierre de TASK-0272 y el destino de los cuatro residuales de la iteracion 2."
 question: "Sin pregunta abierta."
