@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7385a450b22d0695e46b2351cc43ea9bd1e5d9bad82f8be6a5f29f60f00e8271",
+  "canonical_hash": "8e926fb2e321e092d13f6d47a9f9e734a708ecc7da01c5a2831700784d0db8b7",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -729,6 +729,9 @@
       "CLAIM-20260720-Codex-TASK-0280-final-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0280-final-memory": 1,
       "CLAIM-20260720-Codex-TASK-0280-iter2-final": 1,
+      "CLAIM-20260721-Codex-TASK-0280-iter3": 1,
+      "CLAIM-20260721-Codex-TASK-0280-iter3-delivery": 1,
+      "CLAIM-20260721-Codex-TASK-0280-iter3-msgfix": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2217,7 +2220,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 22,
+      "TASK-0280": 25,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2240,7 +2243,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4811,
+    "events_applied": 4817,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4192,6 +4195,12 @@
       "codex:task0280:iter2-final:claim:20260720:a1": 5464,
       "codex:task0280:iter2-in-review:20260720T184500Z:a1": 5445,
       "codex:task0280:iter3:claim:20260720T232622Z": 5482,
+      "codex:task0280:iter3:delivery-claim:20260720T233940Z": 5483,
+      "codex:task0280:iter3:in-review:20260720T234032Z": 5484,
+      "codex:task0280:iter3:msgfix-claim:20260720T234241Z": 5487,
+      "codex:task0280:iter3:msgfix-release:20260720T234347Z": 5488,
+      "codex:task0280:iter3:release-delivery:20260720T234032Z": 5486,
+      "codex:task0280:iter3:release-main:20260720T234032Z": 5485,
       "codex:task0280:ready-to-in-progress:20260720T170832Z:a1": 5423,
       "codex:task0280:release-delivery:20260720T171431Z:a1": 5427,
       "codex:task0280:release-main:20260720T171431Z:a1": 5426,
@@ -7055,5 +7064,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5482
+  "up_to_seq": 5488
 }

@@ -216,9 +216,42 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-20T23:26:22Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0280",
             "updated_at": "2026-07-20T23:26:22Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3-delivery",
+            "expires_at": "2026-07-21T00:39:40Z",
+            "notes": "TASK-0280 iteration 3 delivery, review handoff, status transition and claim releases.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-iter3-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-iter3",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0280-iter3-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3.md"
+            ],
+            "started_at": "2026-07-20T23:39:40Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T23:39:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3-msgfix",
+            "expires_at": "2026-07-21T00:12:41Z",
+            "notes": "Add required compact-mailbox question field after validator gate.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-iter3-msgfix",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3.md"
+            ],
+            "started_at": "2026-07-20T23:42:41Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T23:42:41Z"
         },
         {
             "claim_id": "CLAIM-arq-cierre0277-iter2-0280-20260720",
