@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, after TASK-0258 F-0258-01 redelivery.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 implementation.
+
+- TASK-0272 implementation commit `9ad8c89` eliminates silent seen-burn in the
+  generic peer harness and both live peer entrypoints. Seen is now written only
+  after confirmed repository evidence or a definitive principled negative;
+  transient/unconfirmed aborts use bounded persistent retry with watchdog-visible
+  exhaustion, restore only exec-created residue, and distinguish live from aborted
+  staged residue by file age. The born-operational retry E2E and permanent Anthropic/
+  exec-lease contracts pass. Delivery ledger/handoff remains pending in this turn.
+
+Previous update: 2026-07-20 Europe/Madrid, after TASK-0258 F-0258-01 redelivery.
 
 - TASK-0258 redelivery commit `45c225b` updates the self-contained handoff,
   answers the consumed ACTION, emits the Codex->Arquitecto response, moves the
