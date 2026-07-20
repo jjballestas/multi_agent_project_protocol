@@ -5,7 +5,48 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0268 re-juicio H1 GO -> ratificada en 1fe0256; fix-loop cerrado 1/2).
+> Ultima actualizacion: 2026-07-20 (TASK-0258 obstacles[] CAMBIO-REQUERIDO docs-only en 0676697; fix-loop 1/2 abierto).
+
+## Ultima actualizacion 2026-07-20 - TASK-0258 obstacles[] CAMBIO-REQUERIDO (docs-only)
+- Revision adversarial de TASK-0258 (bloque obstacles[] en runtime/turn_schema.json,
+  DECISION-0103 C3 carril runtime). Ancla funcional origin/main `9ce238b`, implementacion
+  `9be450d`, entrega `34d5dff`, clon limpio /d/ccv0258 + clon contraste pre-0258 /d/ccv0258p.
+  HEAD avanzo a `feb43c0` durante la pasada; invariancia verificada con diff VACIO sobre
+  turn_schema/fixtures/SCHEMA_VERSIONING/task.md y gates re-corridos en feb43c0.
+- FUNCIONAL TODO PASA: suites 8/8 + semantic 5/5 EXIT 0; 36 payloads propios via
+  Draft7Validator (mismo consumidor que turn_validate.py:277) sin un solo escape (missing
+  required x4, additionalProperties item y raiz, familia enum completa con case/espacios/
+  null/int, tipos, no-array, item mixto); e2e validate_turn 3/3 (poblado valido, malformado
+  rechazado, vacio valido); 22 suites consumidoras EXIT 0; bump 1.2.0->1.3.0 = MINOR
+  correcto; forma canonica == DECISION-0103 c.3, TASK-0261 se ancla textual a la de 0258.
+- BLOQUEA solo F-0258-01 (WARNING-real, docs-only): SCHEMA_VERSIONING.md linea 9 sigue
+  `Current version: 1.2.0` con schema 1.3.0 y sin seccion de justificacion del MINOR
+  (patron del doc: 1.1.0 Capa A, 1.2.0 Fase 5.2). Precedente 0268-H1 aplicado.
+- A-0258-02 (DECISION-0018, ajena a la unidad, RESUELTA en pasada): canonico ROJO en clon
+  limpio de 9ce238b por drift B.3 de los 3 slims -- divergencia de push (local aa98267 con
+  rematerializacion vs 9ce238b publicado sin ella, mismo mensaje/timestamp). El Arquitecto
+  reconcilio en a6e540f; feb43c0 verde. LECCION: ante commits gemelos local/remoto con mismo
+  mensaje, diff de TREES (los slims delataron el clobber); el vivo verde miente sobre el
+  canonico (leccion clean-clone confirmada otra vez).
+- Residuales: R1 minLength 1 mas estricto que el AC (0261/0262 deben replicarlo o los
+  carriles divergen); R2 examples/full_runtime_instance/runtime/turn_schema.json pineado en
+  1.2.0 SIN obstacles (rechaza reportes con obstacles; new_instance copia runtime/ canonico
+  asi que el camino normal no muerde); R3 4 suites rojas preexistentes (instantiation, loop,
+  protocol_materialize, supervised_autonomy) invariantes pre/post; R4 instruccion REVIEW
+  llego sin commitear (luego en 6950a48); R5 mismatch 0257 transitorio ya inexistente.
+- Gates: validate vivo con secretos EXIT 0; clon feb43c0 sin secretos EXIT 0 (9ce238b fue
+  EXIT 1 por A-0258-02); domain/encoding EXIT 0; config #4 byte-identica 2E35F26E...354 en
+  vivo y ambos clones.
+- Veredicto commiteado y pusheado por mi en `0676697` (pathspec explicito, 2 files, hook de
+  Codex in-flight paso limpio); artefacto
+  `Area_comun/artifacts/ANALISTA-TASK-0258-obstacles-schema-veredicto.md`; MSG rr a
+  Arquitecto
+  `Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-obstacles-CAMBIO-REQUERIDO.md`.
+- Fix-loop declarado: Codex actualiza SCHEMA_VERSIONING.md (Current version 1.3.0 +
+  justificacion DECISION-0103 C3) -> re-juicio barato (lectura doc + validate clon limpio
+  EXIT 0 + encoding EXIT 0; SIN re-probes funcionales). Iteracion 1/2, maximo 2 antes de
+  Operador. Codex tenia claim activo TASK-0269 (hook precommit) durante mi entrega; mis
+  rutas sin claim ajeno.
 
 ## Ultima actualizacion 2026-07-20 - TASK-0268 re-juicio H1: GO (CERRABLE), ratificada
 - Re-juicio de lectura anclado en ab5a017, clon limpio /d/ccv0268h1. W1-W6 PASAN:
