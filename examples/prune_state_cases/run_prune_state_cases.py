@@ -15,7 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "prune_state.py"
 sys.path.insert(0, str(ROOT))
-from scripts.prune_state import verify_archived_entries
+import scripts.prune_state as prune_state
+from scripts.prune_state import archive_removed_entries, apply_prune_via_submit_intent, verify_archived_entries
 from runtime.protocol_replay import protocol_state_drift
 from runtime.regenesis import regenesis
 
@@ -223,6 +224,107 @@ def case_enforced_apply_prestages_archive_rows() -> None:
         assert run(fixture, "--check").returncode == 0
 
 
+def enforced_fixture(fixture: Path) -> None:
+    build_fixture(fixture)
+    config_path = fixture / "protocol.config.json"
+    config = load(config_path)
+    config.update(
+        {
+            "adoption_tier": "runtime",
+            "event_auth": {"enabled": False},
+            "event_state": {"enabled": True, "materialize": True, "enforce": True, "authoritative": True},
+            "agent_registry": {
+                "enabled": True,
+                "agents": [{"id": "Codex", "enabled": True, "capabilities": ["implementer", "orchestrator"]}],
+            },
+        }
+    )
+    write_json(config_path, config)
+    regenesis(fixture, actor_id="Codex", timestamp="2026-07-20T18:30:00Z", commit="fixture")
+
+
+def case_prune_failure_paths_follow_event_log_head() -> None:
+    cfg = {
+        "recent_done_tasks": 1,
+        "recent_released_claims": 2,
+        "recent_next_actions": 0,
+    }
+    original_submit = prune_state.submit_intents
+    try:
+        with tempfile.TemporaryDirectory(prefix="prune-pre-failure-") as temp:
+            fixture = Path(temp)
+            enforced_fixture(fixture)
+            task_archive = fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json"
+            before = task_archive.read_bytes()
+
+            def interrupt_before(*args, **kwargs):
+                raise KeyboardInterrupt("fixture interrupt")
+
+            prune_state.submit_intents = interrupt_before
+            try:
+                apply_prune_via_submit_intent(
+                    fixture, cfg, actor_id="Codex", timestamp="2026-07-20T18:31:00Z", commit="fixture"
+                )
+            except KeyboardInterrupt:
+                pass
+            else:
+                raise AssertionError("KeyboardInterrupt was not propagated")
+            assert task_archive.read_bytes() == before
+
+        with tempfile.TemporaryDirectory(prefix="prune-post-failure-") as temp:
+            fixture = Path(temp)
+            enforced_fixture(fixture)
+
+            def fail_after_apply(*args, **kwargs):
+                original_submit(*args, **kwargs)
+                raise RuntimeError("post-apply fixture failure")
+
+            prune_state.submit_intents = fail_after_apply
+            try:
+                apply_prune_via_submit_intent(
+                    fixture, cfg, actor_id="Codex", timestamp="2026-07-20T18:32:00Z", commit="fixture"
+                )
+            except RuntimeError as exc:
+                assert "event log advanced" in str(exc)
+            else:
+                raise AssertionError("post-apply failure was not reported")
+            assert load(fixture / "Area_comun/state/TASK_INDEX_ARCHIVE.json")["tasks"]
+            assert protocol_state_drift(fixture)["has_drift"] is False
+    finally:
+        prune_state.submit_intents = original_submit
+
+
+def case_archive_refreshes_stale_row_and_drift_fails() -> None:
+    with tempfile.TemporaryDirectory(prefix="prune-refresh-") as temp:
+        fixture = Path(temp)
+        archive = fixture / "TASK_INDEX_ARCHIVE.json"
+        write_json(archive, {"tasks": [task("TASK-9000", "in_progress")]})
+        expected = task("TASK-9000", "done")
+        assert archive_removed_entries(archive, [expected], ["TASK-9000"], "tasks", "id", "Codex") == 1
+        assert load(archive)["tasks"] == [expected]
+
+    with tempfile.TemporaryDirectory(prefix="prune-drift-exit-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture, done_count=0, released_count=0)
+        original_drift = prune_state.protocol_state_drift
+        prune_state.protocol_state_drift = lambda root: {"has_drift": True, "up_to_seq": 1}
+        try:
+            try:
+                apply_prune_via_submit_intent(
+                    fixture,
+                    {"recent_done_tasks": 10, "recent_released_claims": 10, "recent_next_actions": 0},
+                    actor_id="Codex",
+                    timestamp="2026-07-20T18:33:00Z",
+                    commit="fixture",
+                )
+            except RuntimeError as exc:
+                assert "left protocol state drift" in str(exc)
+            else:
+                raise AssertionError("drifted apply returned success")
+        finally:
+            prune_state.protocol_state_drift = original_drift
+
+
 def main() -> int:
     cases = [
         case_due_and_apply,
@@ -230,10 +332,12 @@ def main() -> int:
         case_ps1_parity_if_available,
         case_missing_archive_row_fails_loudly,
         case_enforced_apply_prestages_archive_rows,
+        case_prune_failure_paths_follow_event_log_head,
+        case_archive_refreshes_stale_row_and_drift_fails,
     ]
     for case in cases:
         case()
-    print("OK: prune_state cases passed (5, including enforced real-apply regression).")
+    print("OK: prune_state cases passed (7, including event-head failure regressions).")
     return 0
 
 

@@ -125,7 +125,7 @@ preserve old behavior:
   and the token must be the last non-empty transcript line. Earlier quoted/example tokens
   do not count. Precedence is terminal token, process exit code, then peer evidence from a
   signed `runtime/state/events.jsonl` event whose `actor` equals the invoked peer and whose
-  `seq` is newer than the pre-exec ledger sequence. Git author names are never attribution
+  `seq` is newer than the pre-exec ledger head. Git author names are never attribution
   evidence. If no such event exists, this layer does not confirm. Free-text regexes are
   legacy fallback only and never override a token, non-zero exit, or signed own evidence.
 - `seen.json` is written only after confirmed work or a definitive, principled negative.
@@ -137,8 +137,11 @@ preserve old behavior:
   renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.
   Both snapshot commands must succeed before the agent starts. Rollback rechecks HEAD
   immediately before and after `reset --hard`; movement defers restoration instead of
-  applying stale patches. If the signed ledger advances during an exec that later returns
-  transient, rollback preserves `runtime/state/` and its governed materialized state,
+  applying stale patches. Ledger advancement is decided only by the shared exact event-log
+  head primitive (`seq` plus last-line SHA-256), checked before the exec, before reset, and
+  after restoration. If the signed ledger advances during an exec that later returns
+  transient, rollback preserves tracked modifications under `runtime/state/` and governed
+  materialized routes without resurrecting staged additions,
   reports `ROLLBACK_LEDGER_PRESERVED`, and checks replay drift before scheduling the retry.
   A mismatch reports `ROLLBACK_LEDGER_DRIFT` instead of continuing silently. When no event
   was applied, the original full worktree rollback remains unchanged.

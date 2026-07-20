@@ -25,6 +25,11 @@ except ImportError:  # pragma: no cover
     from .measure_context_cost import measure
 
 try:
+    from ledger_head import event_log_head
+except ImportError:  # pragma: no cover
+    from .ledger_head import event_log_head
+
+try:
     from runtime.protocol_replay import protocol_state_enforcement_enabled, protocol_state_drift
     from runtime.submit_intent import submit_intents
 except ImportError:  # pragma: no cover
@@ -100,13 +105,21 @@ def archive_removed_entries(
     if not to_archive:
         return 0
     archive_doc = read_json(archive_path)
-    existing_ids = {str(entry.get(id_field)) for entry in archive_doc.get(field, []) if isinstance(entry, dict)}
+    archive_rows = archive_doc.setdefault(field, [])
+    existing_positions = {
+        str(entry.get(id_field)): index
+        for index, entry in enumerate(archive_rows)
+        if isinstance(entry, dict)
+    }
     archived_count = 0
     for entry in to_archive:
         entry_id = str(entry.get(id_field) or "")
-        if entry_id and entry_id not in existing_ids:
-            archive_doc.setdefault(field, []).append(entry)
-            existing_ids.add(entry_id)
+        if entry_id and entry_id not in existing_positions:
+            archive_rows.append(entry)
+            existing_positions[entry_id] = len(archive_rows) - 1
+            archived_count += 1
+        elif entry_id and archive_rows[existing_positions[entry_id]] != entry:
+            archive_rows[existing_positions[entry_id]] = entry
             archived_count += 1
     if archived_count:
         archive_doc["updated_by"] = actor
@@ -553,6 +566,7 @@ def apply_prune_via_submit_intent(
             path: path.read_bytes() if path.exists() else None
             for path in archive_paths
         }
+        ledger_head_before = event_log_head(root)
         try:
             archive_removed_entries(
                 state_dir / "TASK_INDEX_ARCHIVE.json",
@@ -582,16 +596,27 @@ def apply_prune_via_submit_intent(
             )
             if submit_result is None or not submit_result.get("applied"):
                 raise RuntimeError("governed prune transaction was not applied")
-        except Exception:
-            for path, content in archive_backups.items():
-                if content is None:
-                    path.unlink(missing_ok=True)
-                else:
-                    path.write_bytes(content)
+        except BaseException as exc:
+            ledger_head_after = event_log_head(root)
+            if ledger_head_after == ledger_head_before:
+                for path, content in archive_backups.items():
+                    if content is None:
+                        path.unlink(missing_ok=True)
+                    else:
+                        path.write_bytes(content)
+            else:
+                raise RuntimeError(
+                    "governed prune failed after the event log advanced; archive mirrors were retained. "
+                    "Run protocol drift validation and recover from the signed log before retrying."
+                ) from exc
             raise
 
     after = measure(root)["cold_start"]["total_tokens"]
     drift = protocol_state_drift(root)
+    if drift.get("has_drift"):
+        raise RuntimeError(
+            "governed prune left protocol state drift; recover from the signed event log before retrying"
+        )
     return {
         "mode": "submit_intent",
         "actor_id": actor,

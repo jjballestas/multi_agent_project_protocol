@@ -62,6 +62,32 @@
             "updated_at": "2026-07-20T17:08:32Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0280-0277-iter2",
+            "expires_at": "2026-07-21T02:20:00Z",
+            "notes": "Implement shared event-log head primitive and second remediation for TASK-0280 and TASK-0277.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0280-0277-iter2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "scripts/ledger_head.py",
+                "scripts/prune_state.py",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T18:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T18:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0280-delivery",
             "expires_at": "2026-07-20T18:14:31Z",
             "notes": "Deliver TASK-0280 implementation and TASK-0278 ledger confirmation to independent review routing.",

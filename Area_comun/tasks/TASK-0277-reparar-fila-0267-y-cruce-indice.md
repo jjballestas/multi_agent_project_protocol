@@ -61,3 +61,8 @@ que llegue en frio.
 Remediacion iteracion 1: la validacion de selectores de scope se limita deliberadamente
 a claims activas; las filas historicas released/blocked conservan fidelidad al evento
 firmado aunque su scope sea anterior al contrato de selectores.
+
+Remediacion iteracion 2: el pre-stage de espejos usa la cabeza exacta del event log para
+decidir el rollback. Interrupciones antes del evento restauran; fallos despues del evento
+retienen espejos y fallan con recuperacion explicita. Las filas stale se refrescan y drift
+final nunca devuelve verde.

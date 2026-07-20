@@ -58,6 +58,11 @@ Secuencia real del 2026-07-20:
 Nadie mintio y sin embargo el reporte era falso. Esa es la gravedad: no es perdida de
 trabajo, es **atestacion sin respaldo**, producida por el propio mecanismo de seguridad.
 
+Remediacion iteracion 1: una unica primitiva compartida captura `seq` y SHA-256 de la
+cabeza del event log. El rollback solo excluye rutas gobernadas cuando esa cabeza avanzo,
+preserva cambios trackeados sin resucitar altas staged, y contrasta otra vez la cabeza
+antes del reset y despues de restaurar.
+
 Relacion con lo demas: el rollback de TASK-0272 sigue siendo correcto para lo que se
 diseno, deshacer el residuo staged de un exec abortado. El error es de alcance, no de
 concepto. El ledger firmado no es residuo: es la unica cosa del arbol que no se puede

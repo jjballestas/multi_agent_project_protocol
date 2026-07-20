@@ -443,16 +443,11 @@ function Get-OwnEvidence {
     return $false
 }
 
-function Get-LedgerSequence {
-    $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
-    if (-not (Test-Path -LiteralPath $eventsPath)) { return [long]0 }
-    $lastSeq = [long]0
-    foreach ($line in @(Get-Content -LiteralPath $eventsPath -Encoding UTF8)) {
-        if ([string]::IsNullOrWhiteSpace($line)) { continue }
-        try { $event = $line | ConvertFrom-Json } catch { continue }
-        if ([long]$event.seq -gt $lastSeq) { $lastSeq = [long]$event.seq }
-    }
-    return $lastSeq
+function Get-LedgerHead {
+    $helper = Join-Path $Root "scripts\ledger_head.py"
+    $raw = & python $helper --root $Root 2>$null
+    if ($LASTEXITCODE -ne 0) { throw "cannot read event-log head" }
+    return ($raw | ConvertFrom-Json)
 }
 
 function Get-StagedResidueState {
@@ -478,11 +473,15 @@ function Test-LedgerManagedPath {
 }
 
 function Invoke-PreExecPatch {
-    param([string]$PatchPath, [bool]$Index)
+    param([string]$PatchPath, [bool]$Index, [bool]$ExcludeLedgerPaths)
     if (-not (Test-Path $PatchPath) -or (Get-Item $PatchPath).Length -eq 0) { return }
     $args = @("-C", $Root, "apply")
     if ($Index) { $args += "--index" }
-    $args += @("--binary", "--exclude=runtime/state/*", "--exclude=Area_comun/state/*", "--exclude=Area_comun/tasks/*", "--exclude=Area_comun/mailbox/*", $PatchPath)
+    $args += "--binary"
+    if ($ExcludeLedgerPaths) {
+        $args += @("--exclude=runtime/state/*", "--exclude=Area_comun/state/*", "--exclude=Area_comun/tasks/*", "--exclude=Area_comun/mailbox/*")
+    }
+    $args += $PatchPath
     & git @args 2>$null
 }
 
@@ -493,15 +492,15 @@ function Test-LedgerDerivedState {
 }
 
 function Restore-TransientExecResidue {
-    param([string]$HeadBefore, [string]$IndexPatch, [string]$WorktreePatch, [string[]]$UntrackedBefore, [long]$LedgerSeqBefore)
+    param([string]$HeadBefore, [string]$IndexPatch, [string]$WorktreePatch, [string[]]$UntrackedBefore, [object]$LedgerHeadBefore)
     $headAfter = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfter -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed"; return }
-    $ledgerSeqAfter = Get-LedgerSequence
-    $ledgerAdvanced = $ledgerSeqAfter -gt $LedgerSeqBefore
+    $ledgerHeadAfter = Get-LedgerHead
+    $ledgerAdvanced = ([long]$ledgerHeadAfter.seq -ne [long]$LedgerHeadBefore.seq) -or ([string]$ledgerHeadAfter.hash -cne [string]$LedgerHeadBefore.hash)
     $ledgerPatch = Join-Path $RunsDir ("ledger-preserve-{0}.patch" -f ([guid]::NewGuid().ToString("N")))
     if ($ledgerAdvanced) {
-        & git -C $Root diff --binary --output=$ledgerPatch HEAD -- runtime/state Area_comun/state Area_comun/tasks Area_comun/mailbox
-        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_snapshot_failed seq_before=$LedgerSeqBefore seq_after=$ledgerSeqAfter"; return }
+        & git -C $Root diff --binary --diff-filter=M --output=$ledgerPatch HEAD -- runtime/state Area_comun/state Area_comun/tasks Area_comun/mailbox
+        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=ledger_snapshot_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
     }
     $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
     $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
@@ -512,19 +511,26 @@ function Restore-TransientExecResidue {
     }
     $headBeforeReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headBeforeReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_before_reset"; return }
+    $ledgerHeadBeforeReset = Get-LedgerHead
+    if ([long]$ledgerHeadBeforeReset.seq -ne [long]$ledgerHeadAfter.seq -or [string]$ledgerHeadBeforeReset.hash -cne [string]$ledgerHeadAfter.hash) {
+        Write-Log "ROLLBACK_DEFER reason=ledger_head_changed_before_reset"
+        return
+    }
     & git -C $Root reset --hard $HeadBefore 2>$null | Out-Null
     if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=reset_failed"; return }
     $headAfterReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     if ($headAfterReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_after_reset"; return }
-    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true
-    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false
+    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true -ExcludeLedgerPaths $ledgerAdvanced
+    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false -ExcludeLedgerPaths $ledgerAdvanced
     if ($ledgerAdvanced -and (Test-Path $ledgerPatch) -and (Get-Item $ledgerPatch).Length -gt 0) {
         & git -C $Root apply --binary $ledgerPatch 2>$null
-        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_restore_failed seq_before=$LedgerSeqBefore seq_after=$ledgerSeqAfter"; return }
+        if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_restore_failed seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
     }
     if ($ledgerAdvanced) {
-        if (-not (Test-LedgerDerivedState)) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=derived_state_mismatch seq_before=$LedgerSeqBefore seq_after=$ledgerSeqAfter"; return }
-        Write-Log "ROLLBACK_LEDGER_PRESERVED seq_before=$LedgerSeqBefore seq_after=$ledgerSeqAfter"
+        $ledgerHeadRestored = Get-LedgerHead
+        if ([long]$ledgerHeadRestored.seq -ne [long]$ledgerHeadAfter.seq -or [string]$ledgerHeadRestored.hash -cne [string]$ledgerHeadAfter.hash) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=ledger_head_mismatch"; return }
+        if (-not (Test-LedgerDerivedState)) { Write-Log "ROLLBACK_LEDGER_DRIFT reason=derived_state_mismatch seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"; return }
+        Write-Log "ROLLBACK_LEDGER_PRESERVED seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq)"
     }
     Remove-Item -LiteralPath $ledgerPatch -Force -ErrorAction SilentlyContinue
 }
@@ -649,7 +655,7 @@ function Invoke-PeerForMessage {
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
     $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
-    $ledgerSeqBefore = Get-LedgerSequence
+    $ledgerHeadBefore = Get-LedgerHead
     $indexPatch = Join-Path $RunsDir "$stamp-$safeName.before-index.patch"
     $worktreePatch = Join-Path $RunsDir "$stamp-$safeName.before-worktree.patch"
     & git -C $Root diff --cached --binary --output=$indexPatch
@@ -693,7 +699,7 @@ function Invoke-PeerForMessage {
         if (Test-Path -LiteralPath $stdoutPath) { $agentResponse = Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
         $invokerDiagnostics = ""
         if (Test-Path -LiteralPath $stderrPath) { $invokerDiagnostics = Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8 }
-        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -AgentResponse $agentResponse -InvokerDiagnostics $invokerDiagnostics -OwnEvidence (Get-OwnEvidence -LedgerSeqBefore $ledgerSeqBefore)
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -AgentResponse $agentResponse -InvokerDiagnostics $invokerDiagnostics -OwnEvidence (Get-OwnEvidence -LedgerSeqBefore ([long]$ledgerHeadBefore.seq))
         Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
         $signature = Get-MessageSignature -Message $Message
         if ($outcome -in @("confirmed", "definitive")) {
@@ -703,7 +709,7 @@ function Invoke-PeerForMessage {
             $retry = Read-RetryState
             if ($retry.ContainsKey($Message.Name)) { $retry.Remove($Message.Name); Write-RetryState -State $retry }
         } else {
-            Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerSeqBefore $ledgerSeqBefore
+            Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore
             $retry = Read-RetryState
             $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
             $attempt = $previous + 1
@@ -719,7 +725,7 @@ function Invoke-PeerForMessage {
         }
     } catch {
         Write-Log "EXEC_FAIL message=$($Message.Name) error=$($_.Exception.Message)"
-        Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerSeqBefore $ledgerSeqBefore
+        Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore
         $signature = Get-MessageSignature -Message $Message
         $retry = Read-RetryState
         $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }

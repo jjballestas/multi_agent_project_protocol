@@ -13,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
+LEDGER_HEAD = ROOT / "scripts" / "ledger_head.py"
 
 
 def run_outcome_parser_cases(sandbox: Path) -> None:
@@ -79,7 +80,7 @@ def run_outcome_parser_cases(sandbox: Path) -> None:
         assert actual[case["name"]] == case["expected"], (case["name"], actual[case["name"]])
 
 
-def run(*args: str, cwd: Path, timeout: int = 60) -> subprocess.CompletedProcess[str]:
+def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True)
 
 
@@ -99,18 +100,24 @@ def main() -> int:
         )
         (sandbox / "scripts/harness/prompts").mkdir(parents=True)
         shutil.copy2(RUNNER, sandbox / "scripts/harness/peer_mailbox_cron.ps1")
+        shutil.copy2(LEDGER_HEAD, sandbox / "scripts/ledger_head.py")
         (sandbox / "protocol.config.json").write_text("{}\n", encoding="utf-8")
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "Area_comun/state").mkdir(parents=True)
         (sandbox / "Area_comun/state/derived.json").write_text('{"seq":0}\n', encoding="ascii")
         (sandbox / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
         (sandbox / "predirty.txt").write_text("baseline\n", encoding="ascii")
+        (sandbox / "Area_comun/tasks").mkdir(parents=True)
+        (sandbox / "Area_comun/tasks/TASK-fixture.md").write_text("baseline-task\n", encoding="ascii")
         message = sandbox / "Area_comun/mailbox/open/MSG-retry.md"
         message.write_text(
             "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
             "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
             encoding="ascii",
         )
+        predirty_message = sandbox / "Area_comun/mailbox/archived/MSG-predirty.md"
+        predirty_message.parent.mkdir(parents=True)
+        predirty_message.write_text("baseline-msg\n", encoding="ascii")
         prompt = sandbox / "scripts/harness/prompts/test.prompt.md"
         prompt.write_text("Process @@MESSAGE_PATH@@ under @@ROOT@@.\n", encoding="ascii")
         fake_core = sandbox / "fake-agent-core.ps1"
@@ -136,8 +143,8 @@ def main() -> int:
             "  exit 0\n"
             "}\n"
             "if($count -eq 3){\n"
-            "  Set-Content -Path (Join-Path $root 'ledger-residue.txt') -Value residue -Encoding ASCII\n"
-            "  git add ledger-residue.txt\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/tasks/TASK-residue.md') -Value residue -Encoding ASCII\n"
+            "  git add Area_comun/tasks/TASK-residue.md\n"
             "  $event='{\"seq\":1,\"actor\":\"TestPeer\",\"actor_auth\":{\"method\":\"ed25519\",\"keyid\":\"testpeer:v1\",\"sig\":\"fixture-signature\"}}'\n"
             "  Add-Content -Path (Join-Path $root 'runtime/state/events.jsonl') -Value $event -Encoding ASCII\n"
             "  Set-Content -Path (Join-Path $root 'Area_comun/state/derived.json') -Value '{\"seq\":1}' -Encoding ASCII\n"
@@ -161,14 +168,27 @@ def main() -> int:
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         run_outcome_parser_cases(sandbox)
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
-        result = run(
-            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
-            "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
-            "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
-            "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
-            "-MaxTransientRetries", "4", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
-            cwd=sandbox,
-        )
+        governed_predirty = {
+            "Area_comun/tasks/TASK-fixture.md": "peer-task-edit\n",
+            "Area_comun/mailbox/archived/MSG-predirty.md": "peer-msg-edit\n",
+            "Area_comun/state/derived.json": '{"seq":0,"peer":"edit"}\n',
+            "runtime/state/events.jsonl": "",
+        }
+        for relative, content in governed_predirty.items():
+            (sandbox / relative).write_text(content, encoding="ascii")
+        try:
+            result = run(
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+                "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+                "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+                "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
+                "-MaxTransientRetries", "4", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+                cwd=sandbox,
+            )
+        except subprocess.TimeoutExpired as exc:
+            log_path = sandbox / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log"
+            details = log_path.read_text(encoding="utf-8") if log_path.exists() else "log missing"
+            raise AssertionError(f"runner timed out:\n{details}") from exc
         runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
         if not (runtime / "testpeer_mailbox_cron.seen.json").exists():
             log_path = runtime / "testpeer_mailbox_cron.log"
@@ -183,11 +203,12 @@ def main() -> int:
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
         assert not (sandbox / "residue.txt").exists(), "aborted exec residue survived rollback"
-        assert not (sandbox / "ledger-residue.txt").exists(), "non-ledger residue survived ledger-preserving rollback"
+        assert not (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "governed non-ledger residue survived rollback"
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
         assert len(events) == 1 and json.loads(events[0])["seq"] == 1, "applied ledger event did not survive exactly once"
         assert json.loads((sandbox / "Area_comun/state/derived.json").read_text(encoding="ascii"))["seq"] == 1
         assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
+        assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == "peer-task-edit\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
         assert predirty_status.startswith(" M "), f"pre-dirty index/worktree state was not restored: {predirty_status!r}"
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
