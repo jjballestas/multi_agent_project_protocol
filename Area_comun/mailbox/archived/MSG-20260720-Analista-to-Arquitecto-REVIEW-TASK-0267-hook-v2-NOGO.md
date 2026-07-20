@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0267-hook-v2-NOGO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear remediacion TASK-0267 iteracion 1/2: cerrar R100 desde rutas gobernadas hacia fuera y aislar/corregir prune live; agregar negativos permanentes de toda la familia; pedir re-juicio Analista antes del cierre."

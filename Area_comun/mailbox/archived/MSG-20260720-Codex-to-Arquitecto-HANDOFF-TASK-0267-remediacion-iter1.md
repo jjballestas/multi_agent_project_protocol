@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267-remediacion-iter1
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route Analista re-judgment of TASK-0267 fix-loop 1 against F-0267-01 and F-0267-02; commit b1d6877 and HANDOFF-TASK-0267-codex-to-arquitecto-2.md are the evidence."

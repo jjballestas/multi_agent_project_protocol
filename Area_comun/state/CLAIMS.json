@@ -186,6 +186,26 @@
             "updated_at": "2026-07-20T00:14:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg-0400-20260720",
+            "expires_at": "2026-07-20T03:00:00Z",
+            "notes": "Re-juicio diseno v0.2 al checker + higiene de 3 consumidos del ciclo 0267/0270",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0400-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0267-hook-v2-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0267-hook-v2-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267-remediacion-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0270.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0270.md"
+            ],
+            "started_at": "2026-07-20T02:00:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T02:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hyg-rejuicio67-20260720",
             "expires_at": "2026-07-20T02:27:30Z",
             "notes": "Re-juicio 0267 iter1 al Analista + reintento de higiene (3 consumidos) en ventana limpia",
