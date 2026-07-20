@@ -1,14 +1,19 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278",
             "owner": "Codex",
             "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-done-response-memory",
-                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
-                "personal/Codex/Memory.md"
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
             ],
-            "task_id": "TASK-0272"
+            "task_id": "TASK-0278"
         }
     ],
     "schema_version": "1.0",

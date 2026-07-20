@@ -138,7 +138,7 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-20T14:41:43Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T14:41:43Z"
         },
@@ -369,6 +369,26 @@
             "status": "released",
             "task_id": "TASK-0273",
             "updated_at": "2026-07-20T12:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278",
+            "expires_at": "2026-07-20T17:13:45Z",
+            "notes": "Implement TASK-0278 outcome parsing field defect and permanent regression coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
+            ],
+            "started_at": "2026-07-20T15:13:45Z",
+            "status": "active",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:13:45Z"
         },
         {
             "claim_id": "CLAIM-arq-campo0278-20260720",

@@ -489,15 +489,15 @@ function Restore-TransientExecResidue {
 }
 
 function Get-ExecOutcomeClass {
-    param([int]$ExitCode, [string]$Output, [bool]$OwnEvidence)
-    $lastLine = @($Output -split "\r?\n" | Where-Object { $_ -notmatch '^\s*$' } | Select-Object -Last 1)
+    param([int]$ExitCode, [string]$AgentResponse, [string]$InvokerDiagnostics = "", [bool]$OwnEvidence)
+    # Only stdout is the agent response. Invoker diagnostics/epilogues and echoed prompts
+    # live on stderr for the supported CLIs and must never influence message consumption.
+    $lastLine = @($AgentResponse -split "\r?\n" | Where-Object { $_ -notmatch '^\s*$' } | Select-Object -Last 1)
     if ($lastLine.Count -eq 1 -and $lastLine[0] -cmatch '^OUTCOME: (confirmed|transient|definitive)$') { return $Matches[1] }
     if ($ExitCode -ne 0) { return "transient" }
     if ($OwnEvidence) { return "confirmed" }
-    if ($Output -match '(?im)(NO-GO|change_required|negativa principiada|rechazo por alcance|out.of.scope|fuera de alcance)') {
-        return "definitive"
-    }
-    if ($Output -match '(?im)(pre-gate|precondition|claim ajeno|active claim|ventana (roja|ocupada)|tree.*(dirty|peer)|cambios ajenos|staged residue|resource deadlock)') {
+    # Free text can request a retry, but can never consume a message definitively.
+    if ($AgentResponse -match '(?im)(pre-gate|precondition|claim ajeno|active claim|ventana (roja|ocupada)|tree.*(dirty|peer)|cambios ajenos|staged residue|resource deadlock)') {
         return "transient"
     }
     return "unconfirmed"
@@ -648,10 +648,11 @@ function Invoke-PeerForMessage {
                 break
             }
         }
-        $output = ""
-        if (Test-Path -LiteralPath $stdoutPath) { $output += Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
-        if (Test-Path -LiteralPath $stderrPath) { $output += "`n" + (Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8) }
-        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -Output $output -OwnEvidence (Get-OwnEvidence -LedgerSeqBefore $ledgerSeqBefore)
+        $agentResponse = ""
+        if (Test-Path -LiteralPath $stdoutPath) { $agentResponse = Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
+        $invokerDiagnostics = ""
+        if (Test-Path -LiteralPath $stderrPath) { $invokerDiagnostics = Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8 }
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -AgentResponse $agentResponse -InvokerDiagnostics $invokerDiagnostics -OwnEvidence (Get-OwnEvidence -LedgerSeqBefore $ledgerSeqBefore)
         Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
         $signature = Get-MessageSignature -Message $Message
         if ($outcome -in @("confirmed", "definitive")) {

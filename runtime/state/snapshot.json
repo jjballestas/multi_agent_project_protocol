@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ecfd374f1a9a3b1c2ce89fdaef3e9a1eb101bf3940c839e0e78c977a57034bcc",
+  "canonical_hash": "67ebdd61f29826baf68256a80a691b43b6132a5bbd80a18d76b08ea3e0263da6",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -697,6 +697,7 @@
       "CLAIM-20260720-Codex-TASK-0272": 1,
       "CLAIM-20260720-Codex-TASK-0272-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0272-done-iter2b": 1,
+      "CLAIM-20260720-Codex-TASK-0272-done-response-memory": 1,
       "CLAIM-20260720-Codex-TASK-0272-msgfix": 1,
       "CLAIM-20260720-Codex-TASK-0272-remediation-1": 1,
       "CLAIM-20260720-Codex-TASK-0272-remediation-1-delivery": 1,
@@ -2153,7 +2154,7 @@
       "TASK-0275": 1,
       "TASK-0276": 1,
       "TASK-0277": 3,
-      "TASK-0278": 4,
+      "TASK-0278": 6,
       "TASK-0279": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2177,7 +2178,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4697,
+    "events_applied": 4700,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3487,6 +3488,7 @@
       "codex:reconcile-c1edd835:done": 1910,
       "codex:reconcile-c1edd835:release": 1911,
       "codex:release-0253-answer-status-fix-20260705T0847": 4040,
+      "codex:release-orphan-0272:2026-07-20T15:12:06Z": 5369,
       "codex:task-0141:claim-acquire": 956,
       "codex:task-0141:claim-release": 959,
       "codex:task-0141:status-in-progress": 957,
@@ -4021,6 +4023,8 @@
       "codex:task0273:implementation-release:20260720T120500Z:a1": 5276,
       "codex:task0273:in-progress-to-in-review:20260720T120500Z:a1": 5275,
       "codex:task0273:ready-to-in-progress:20260720T115000Z:a1": 5273,
+      "codex:task0278:claim:2026-07-20T15:13:45Z": 5370,
+      "codex:task0278:start:2026-07-20T15:14:36Z": 5371,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
       "eventlog-chain:genesis:v1": 672,
@@ -6878,5 +6882,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5368
+  "up_to_seq": 5371
 }

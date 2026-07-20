@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -12,6 +13,70 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNNER = ROOT / "scripts" / "harness" / "peer_mailbox_cron.ps1"
+
+
+def run_outcome_parser_cases(sandbox: Path) -> None:
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    match = re.search(
+        r"(?ms)^function Get-ExecOutcomeClass \{.*?^\}\r?\n\r?\nfunction Get-MessageSignature",
+        runner_text,
+    )
+    if not match:
+        raise AssertionError("Get-ExecOutcomeClass function not found")
+    function_text = match.group(0).rsplit("\nfunction Get-MessageSignature", 1)[0]
+    probe = sandbox / "outcome-parser-probe.ps1"
+    # The first two response/diagnostic pairs are reduced verbatim from the real
+    # 2026-07-20 Codex field transcripts. The diagnostics contain the CLI epilogue
+    # and echoed prompt vocabulary that previously forced a false definitive.
+    cases = [
+        {
+            "name": "real_doneflip_codex_epilogue",
+            "response": "Further ledger action is blocked because the mandatory preflight validator fails.\n\nOUTCOME: transient\n",
+            "diagnostic": "prompt intake: out_of_scope FUERA de alcance\nOUTCOME: transient\ntokens used\n34.968\n",
+            "expected": "transient",
+        },
+        {
+            "name": "real_task0277_codex_epilogue",
+            "response": "status: blocked\nrisks: Starting now would violate the mandatory cold-start gate.\n\nOUTCOME: transient\n",
+            "diagnostic": "prompt intake: out_of_scope FUERA de alcance\nOUTCOME: transient\ntokens used\n42.041\n",
+            "expected": "transient",
+        },
+        {
+            "name": "checker_diagnostic_epilogue_ignored",
+            "response": "Review could not start.\nOUTCOME: transient\n",
+            "diagnostic": "Total cost: 0.42 USD\nTurns: 3\nOUTCOME: definitive\n",
+            "expected": "transient",
+        },
+        {
+            "name": "prompt_lexicon_cannot_make_definitive",
+            "response": "No structured outcome was emitted.\n",
+            "diagnostic": "NO-GO change_required out_of_scope FUERA de alcance\nOUTCOME: definitive\n",
+            "expected": "unconfirmed",
+        },
+        {
+            "name": "response_free_text_cannot_make_definitive",
+            "response": "NO-GO because this is out_of_scope and fuera de alcance.\n",
+            "diagnostic": "",
+            "expected": "unconfirmed",
+        },
+    ]
+    rendered = [function_text, "$ErrorActionPreference = 'Stop'", "$results = @()"]
+    for case in cases:
+        response = case["response"].replace("'", "''")
+        diagnostic = case["diagnostic"].replace("'", "''")
+        rendered.append(f"$response = @'\n{response}'@")
+        rendered.append(f"$diagnostic = @'\n{diagnostic}'@")
+        rendered.append(
+            "$results += [pscustomobject]@{ name = '"
+            + case["name"]
+            + "'; outcome = (Get-ExecOutcomeClass -ExitCode 0 -AgentResponse $response -InvokerDiagnostics $diagnostic -OwnEvidence $false) }"
+        )
+    rendered.append("$results | ConvertTo-Json -Compress")
+    probe.write_text("\n".join(rendered) + "\n", encoding="utf-8")
+    parsed = json.loads(run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout)
+    actual = {item["name"]: item["outcome"] for item in parsed}
+    for case in cases:
+        assert actual[case["name"]] == case["expected"], (case["name"], actual[case["name"]])
 
 
 def run(*args: str, cwd: Path, timeout: int = 60) -> subprocess.CompletedProcess[str]:
@@ -74,6 +139,7 @@ def main() -> int:
         run("git", "config", "user.name", "TestPeer", cwd=sandbox)
         run("git", "add", ".", cwd=sandbox)
         run("git", "commit", "-m", "fixture", cwd=sandbox)
+        run_outcome_parser_cases(sandbox)
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         result = run(
             "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
