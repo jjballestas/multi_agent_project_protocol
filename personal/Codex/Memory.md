@@ -1,6 +1,18 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0273 delivery.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 1.
+
+- Commit `2c3b17b` makes the exact `OUTCOME:` token authoritative over free-text,
+  treats non-zero exit as transient before fallback regex, and only accepts commits
+  authored by the invoked peer as confirmation evidence.
+- Transient rollback snapshots/restores staged and unstaged binary diffs separately,
+  preserving pre-dirty tracked content and index state; concurrent HEAD movement defers
+  rollback instead of overwriting the peer commit.
+- The retry E2E permanently covers peer commit movement, echoed NO-GO prose, confirmed
+  delivery narrating a transient obstacle, and a pre-dirty path staged by an abort.
+- The same governed transaction applied the ratified TASK-0258 review_approved -> done flip.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0273 delivery.
 
 - TASK-0273 implementation commit `3062214` removes the prune-vs-claim deadlock: overdue
   pruning is an actionable local-hook warning, CI remains the hard integration boundary,
