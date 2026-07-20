@@ -5,7 +5,39 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0258 obstacles[] CAMBIO-REQUERIDO docs-only en 0676697; fix-loop 1/2 abierto).
+> Ultima actualizacion: 2026-07-20 (TASK-0269 GO materializacion parcial + cifra E6 en 5c2642a; 0258 fix-loop 1/2 sigue abierto).
+
+## Ultima actualizacion 2026-07-20 - TASK-0269 materializacion parcial GO + cifra E6
+- Revision adversarial de TASK-0269 (E6-C, materializacion parcial de rutas del validador
+  en .githooks/pre-commit). Ancla: 07fad8a/3ec6a70/0ce5397, HEAD 1757c8f, clon limpio
+  D:/ccv0269; invariancia verificada a c0096f3 (Arquitecto commiteo la instruccion +
+  higiene DURANTE mi pasada; diff vacio en rutas juzgadas). GO/CERRABLE en `5c2642a`.
+- PARIDAD TODO PASA: suite maker EXIT 0 + 5 probes propios en el repo REAL partial-vs-total
+  (accept valido, TASK_INDEX roto, delete centinela validate.yml con validador REAL, R100
+  validator-out, delete CLAUDE.md no-leida): verdicts identicos, misma razon; cero escapes.
+- INVENTARIO cierra: read-set derivado por mi del codigo (validador + prune + eventlog/
+  protocol_replay + RUNTIME_TIER_REQUIRED_PATHS); git del validador es solo-historia;
+  event-state.runtime.json/secretos untracked = ausentes de ambos snapshots; barrido de
+  deliverables reviewed hot(25)+archive(278) -> cero fuera del inventario.
+- LA CIFRA (gobierna criterio ex-ante E6): caliente quieta 70.7/71.6 s, frio 99.7 s, piso
+  observado 43.0 s (2.9x umbral). Desglose: materializar 1.9 s (3571 files; total 2.3 s/
+  4382), prune 0.6 s, validador directo 35.4 s -> domina validador+entorno (Defender sobre
+  archivos recien materializados; firmas ledger; rev-list de trailers), NO la materializacion.
+  Rama unica: > 15 s -> E6-A PERMANENTE, hibrido no autorizado. Maker 108.2 s bajo carga
+  confirmado en rama, corregido en magnitud.
+- Residuales: R1 deliverable fuera de inventario = falso rechazo futuro (fail-closed, hoy 0
+  casos); R2 /tmp/protocol-index.0BANIM residuo del maker ante kill duro (trap no sobrevive
+  SIGKILL; 12 corridas propias sin residuo nuevo); R3 varianza ambiental 43-108 s sin efecto
+  en la rama; R4 instruccion llego untracked, aterrizo en c0096f3 (rojos transitorios del
+  vivo a mitad de ventana = entrega in-flight del peer, no anomalia).
+- Gates: clon 1757c8f validate sin secretos/encoding/domain EXIT 0; drift false
+  up_to_seq=5201 hot==replay; config #4 byte-identica 2E35F26E...354; vivo post-c0096f3
+  validate/encoding/domain EXIT 0; suite hook EXIT 0.
+- Artefacto `Area_comun/artifacts/ANALISTA-TASK-0269-materializacion-parcial-veredicto.md`;
+  MSG rr `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO.md`.
+  LECCION metodologica: medir la cifra ANTES de correr la bateria de probes (la bateria
+  contamina el caliente; mis corridas quietas 70.7/71.6 quedaron como la cifra oficial y las
+  de la bateria 43-56 s como piso/banda de varianza).
 
 ## Ultima actualizacion 2026-07-20 - TASK-0258 obstacles[] CAMBIO-REQUERIDO (docs-only)
 - Revision adversarial de TASK-0258 (bloque obstacles[] en runtime/turn_schema.json,
