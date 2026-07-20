@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a9df66cfbe3aeb2992b3ed8ae7eb4b57ad30426f672dadf8f075ada9c05c8b3b",
+  "canonical_hash": "6ae56f8309503ec777c6d1f17c6d52210a8e66ea4ef3d551302e1926edca1b20",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -1714,6 +1714,7 @@
       "OPS-DECISION-0097-SEAL": 1,
       "OPS-DECISION-0098-SEAL": 1,
       "OPS-GATES-PUSH-20260629": 2,
+      "OPS-GRAFO-MEMHIB-DISENO": 1,
       "OPS-HIGIENE": 1,
       "OPS-HIGIENE-MAILBOX-20260704": 2,
       "OPS-HIGIENE-MAILBOX-20260704b": 2,
@@ -1984,7 +1985,7 @@
       "TASK-0268": 3,
       "TASK-0269": 3,
       "TASK-0270": 7,
-      "TASK-0271": 4,
+      "TASK-0271": 5,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2007,7 +2008,7 @@
       "protocol-prune": 11,
       "protocol-state": 1
     },
-    "events_applied": 4374,
+    "events_applied": 4376,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3688,6 +3689,7 @@
       "codex:task0270:main-claim-release:20260720T0425Z": 5037,
       "codex:task0270:ready-to-in-progress:20260720T0340Z": 5034,
       "codex:task0271:claim:20260720T020500Z": 5044,
+      "codex:task0271:memory-claim:20260720T022500Z": 5047,
       "codex:task0271:ready-to-in-progress:20260720T020500Z": 5045,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -3885,6 +3887,7 @@
       "intent:Analista:claim:77a11d155b7d2ecb69f38fdce571a73fa41d06dcdaffb82f7e27ff172d37eb7a": 2517,
       "intent:Analista:claim:808b86df27db4a96b4f46095faf2d470c68ad1adcc7a184d4d11f0513bc4bc64": 2405,
       "intent:Analista:claim:879475fb096ae6c4a8f2683c802c61ac8180ac0244daed185b9fbf91eec952bc": 2418,
+      "intent:Analista:claim:88460b97fbe3eaa2992491c6ff2180d37984810e1b320915ffe92f41764c4750": 5046,
       "intent:Analista:claim:95ed47dc27813254bd3b21373b75f42d65235e9cd3b5e5ed1eb1550ec6c93fcb": 2429,
       "intent:Analista:claim:97c1f7d330a051ef29e91384dc341f7a276d4f885740065cd9ae5e4d79e5cebc": 2415,
       "intent:Analista:claim:993cfabf377b06b5a7fc514a4c69780f804dfda9bbf1b07d0e06ced967f62b7b": 2446,
@@ -6385,5 +6388,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5045
+  "up_to_seq": 5047
 }

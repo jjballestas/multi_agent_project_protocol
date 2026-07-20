@@ -40,6 +40,21 @@
             "updated_at": "2026-07-19T23:50:54Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
+            "expires_at": "2026-07-20T02:59:21Z",
+            "notes": "Re-juicio adversarial diseno grafo v0.2 iteracion 1/2",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
+                "Area_comun/artifacts/ANALISTA-OPS-diseno-grafo-memoria-hibrida-v02-rejuicio-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO.md"
+            ],
+            "started_at": "2026-07-20T01:59:21Z",
+            "status": "active",
+            "task_id": "OPS-GRAFO-MEMHIB-DISENO",
+            "updated_at": "2026-07-20T01:59:21Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery",
             "expires_at": "2026-07-20T03:17:55Z",
             "notes": "Deliver TASK-0267 fix-loop 1, respond to ACTION, and release all claims.",
@@ -150,6 +165,20 @@
             "status": "active",
             "task_id": "TASK-0271",
             "updated_at": "2026-07-20T02:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-memory",
+            "expires_at": "2026-07-20T10:25:00Z",
+            "notes": "Record golden memory after TASK-0271 implementation commit.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T02:25:00Z",
+            "status": "active",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T02:25:00Z"
         },
         {
             "claim_id": "CLAIM-arq-0270-0271-registro-20260720",

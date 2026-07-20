@@ -1,6 +1,16 @@
 {
     "claims": [
         {
+            "claim_id": "CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
+            "owner": "Analista",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
+                "Area_comun/artifacts/ANALISTA-OPS-diseno-grafo-memoria-hibrida-v02-rejuicio-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO.md"
+            ],
+            "task_id": "OPS-GRAFO-MEMHIB-DISENO"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0271",
             "owner": "Codex",
             "scope": [
@@ -12,6 +22,15 @@
                 "scripts/harness/peer_mailbox_cron.ps1",
                 "scripts/harness/README.md",
                 "scripts/test_anthropic_checker_harness.py"
+            ],
+            "task_id": "TASK-0271"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-memory",
+                "personal/Codex/Memory.md"
             ],
             "task_id": "TASK-0271"
         }

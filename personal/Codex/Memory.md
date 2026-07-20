@@ -2,6 +2,13 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
 
+- TASK-0271 implementation commit `6c8a0d8` migrates the live Analista harness
+  default and the born-operational generic reviewer path to Anthropic Claude Code
+  print mode over STDIN, retains an explicit legacy Codex rollback provider, and
+  preserves seen/STOP_JOB/lock/lease semantics. The real controlled Claude CLI
+  probe exited 0 in 18.658s with the required seven-field envelope; permanent
+  contract and exec-lease suites pass. Live cron cutover remains Arquitecto-owned.
+
 - TASK-0270 implementation commit `a989475` adds exact durable post-write verification
   for single and transactional intents, reports when an idempotent retry reconciles
   divergent materialized state, preserves the existing full-cycle ledger lock, and
