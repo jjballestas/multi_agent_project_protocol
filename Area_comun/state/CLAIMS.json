@@ -275,6 +275,23 @@
             "updated_at": "2026-07-20T01:27:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratifica0267-20260720",
+            "expires_at": "2026-07-20T03:00:03Z",
+            "notes": "Ratificacion de 0267 sobre veredicto GO del checker informal (checker_formal=0, flags del clasificador 2x en el formal)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0267",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0267",
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                "Area_comun/artifacts/ARQUITECTO-TASK-0267-rejuicio-informal-veredicto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0267-20260720"
+            ],
+            "started_at": "2026-07-20T02:00:03Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-20T02:00:03Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reflip0257-b-20260719",
             "expires_at": "2026-07-19T20:47:00Z",
             "notes": "Reintento del flip perdido con idempotency_key fresco (el intent identico fue skipeado por idempotencia tras el clobber del evento original)",
