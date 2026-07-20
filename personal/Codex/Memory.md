@@ -2,6 +2,10 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 intake.
 
+- TASK-0258 implementation commit `9be450d` bumps `runtime/turn_schema.json`
+  from 1.2.0 to 1.3.0 with optional canonical `obstacles[]`; populated, empty,
+  and malformed golden cases pass in the eight-case schema suite.
+
 - TASK-0268 final implementer flip commit `08950e8` moves the Arquitecto-ratified
   bounded hook cost split from `review_approved` to `done`; drift stayed false at
   seq 5164.
