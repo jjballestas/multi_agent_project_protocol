@@ -2,12 +2,14 @@
 
 Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 2.
 
-- Commit `3ac6bcc` applies the ratified TASK-0273 implementer-only done flip, repairs
+- Commit `455313d` applies the ratified TASK-0273 implementer-only done flip, repairs
   its task-markdown status after an interrupted materialization, and records the active
   TASK-0272 remediation-2 claim through runtime seq 5331.
 - TASK-0272 iteration 2 replaces git-author attribution with signed ledger-window
   evidence, makes only the last non-empty transcript line eligible as OUTCOME token,
   and hardens pre-exec snapshots plus rollback HEAD rechecks.
+- Commit `02cee08` implements that remediation and its permanent uniform-author E2E;
+  targeted retry, Anthropic wrapper, and exec-lease suites pass.
 
 - Commit `2c3b17b` makes the exact `OUTCOME:` token authoritative over free-text,
   treats non-zero exit as transient before fallback regex, and only accepts commits

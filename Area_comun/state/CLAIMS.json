@@ -197,9 +197,28 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-20T13:44:03Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T13:44:03Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2-delivery",
+            "expires_at": "2026-07-20T21:53:23Z",
+            "notes": "TASK-0272 remediation-2 handoff, response, in-review transition, and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0272-codex-to-arquitecto-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:53:23Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:53:23Z"
         },
         {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",

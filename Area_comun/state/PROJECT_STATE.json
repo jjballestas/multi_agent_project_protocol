@@ -129,7 +129,7 @@
         {
             "id": "TASK-0272",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
         },
         {
