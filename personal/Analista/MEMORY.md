@@ -5,7 +5,49 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0273 deadlock-poda GO en b43c6c6; antes 0258 GO 305efd1 + 0272 NO-GO 8cb4b45; cola limpia salvo remediacion 0272 iter1 en vuelo de Codex).
+> Ultima actualizacion: 2026-07-20 (3) (TASK-0272 remediacion iter1 NO-GO acotado en 417bd01; antes 0273 GO b43c6c6, 0258 GO 305efd1, 0272 iter0 NO-GO 8cb4b45).
+
+## Ultima actualizacion 2026-07-20 (3) - TASK-0272 remediacion iter1 NO-GO acotado
+- Re-juicio de la remediacion 2c3b17b (frontera token>exit>evidencia>regex). Veredicto
+  CAMBIO-REQUERIDO con BLOQUEANTE UNICO en `417bd01`; artefacto
+  ANALISTA-TASK-0272-remediacion-iter1-veredicto.md + MSG rr NOGO. Ancla: clon limpio
+  D:/ccv0272r1 en 2c3b17b; invariancia de rutas juzgadas verificada hasta mi commit
+  (0cf8185 del Arquitecto aterrizo durante la pasada; diff vacio en harness/suite).
+- CERRADO probado (bateria propia 21 unit + 10 E2E, sandboxes D:/sb0272r1): rollback
+  BYTE-IGUAL de pre-sucios worktree+staged+renames (E3, status identico); ROLLBACK_DEFER
+  con HEAD movido preserva commit del peer (E4); token exacto robusto (punto/espacio/
+  case/indent/prefijo lo invalidan; tokens[-1] gana en enumeracion+veredicto final);
+  entrega narrando obstaculo + token confirmed consumida 1x (E6); keyword fallback (E7);
+  tope 3 + RETRY_EXHAUSTED signal=watchdog + exclusion (E8); defer residuo vivo (E10).
+- BLOQUEANTE F-0272R1-01 (WARNING-real): Get-OwnEvidence atribuye por %an y el hub
+  commitea TODO con autor uniforme 'Analista|analista@local' (300 commits verificados;
+  el propio coord 0cf8185 del Arquitecto lo confirma). Cron Analista: commit ajeno
+  durante exec + token ausente + exit 0 -> confirmed -> seen QUEMADO sin senal (E1
+  repro determinista). Cron Codex: capa 3 inerte. La suite del maker usa autores
+  DISTINTOS -> verde enganoso. Fix pedido: atribucion por eventos firmados del ledger o
+  capa 3 nunca-confirma + negativo de suite con autor uniforme. Iteracion 2 de 2 (fallo
+  nuevo posterior escala a Operador). Leccion 0268 reconfirmada: JAMAS atribuir por
+  autor git en este arbol.
+- Hallazgos no bloqueantes: F-02 token line-scoped imitable en fence/enumeracion (A1
+  confirmed, A2 definitive burn; 0 carriers tracked hoy; hardening = ultima linea);
+  F-03 escrituras de peer DURANTE la ventana del exec destruidas (E5: untracked borrado
+  sin log + tracked barrido por reset --hard; PRE-EXISTENTE iter0, cuarentena
+  recomendada; pregunte al Arquitecto si se difiere como residual); F-04 snapshots sin
+  verificar exit + TOCTOU rev-parse->reset; F-05 gate documentado
+  `runtime/protocol_replay.py --check-drift` es VACUO (sin __main__; --bogus-flag exit
+  0) -- drift real via protocol_state_drift(): clon False/5302, vivo False/5317;
+  RETRACTO parcial: mi iter0 cito el comando vacuo como gate.
+- Residual estructural dimensionado: clase {token ausente + exit 0} cae al regex viejo
+  (X1 eco NO-GO quema via fallback; X2 narracion fuerza retry acotado; E9 negativa
+  libre 3x + senal). Es diseno DECIDIDO de la frontera (regex fallback conservado).
+- Gates: clon 2c3b17b validate/encoding/domain EXIT 0 + suites retry/anthropic/lease
+  EXIT 0; vivo validate/encoding/domain EXIT 0; config #4 byte-identica 2E35F26E...354.
+  Commit propio con pathspec 2 files + trailers en bloque unico; push fast-forward
+  limpio sobre 0cf8185. Hook aviso PRUNE DUE 91.67 (poda = checkpoint del Arquitecto,
+  no mia).
+- Bateria reutilizable: probe_0272_iter1.py (scratchpad de sesion) extrae el
+  clasificador VERBATIM por regex del runner del clon (no copia a mano) + 10 sandboxes
+  E2E con agente falso por contador; patron replicable para el re-juicio iter2.
 
 ## Ultima actualizacion 2026-07-20 (2) - TASK-0273 deadlock poda-vs-claim GO/CERRABLE
 - Veredicto GO en `b43c6c6` (artefacto ANALISTA-TASK-0273-deadlock-poda-veredicto.md + MSG
