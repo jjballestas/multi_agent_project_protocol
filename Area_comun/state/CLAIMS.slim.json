@@ -1,5 +1,17 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-done-iter2",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-done-iter2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
+            ],
+            "task_id": "TASK-0273"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-ite
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0272 remediacion iteracion 1 (commit 2c3b17b). Verificar que los CINCO vectores de tu veredicto quedan cerrados por la frontera decidida (token exacto > exit code > evidencia de autoria propia > regex solo fallback) y volver a intentar romperla. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: no corras gates de Nova-Budget ni de ningun repo de producto; el alcance es este hub."

@@ -129,7 +129,7 @@
         {
             "id": "TASK-0272",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
         },
         {
@@ -137,6 +137,18 @@
             "owner": "Codex",
             "status": "review_approved",
             "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar"
+        },
+        {
+            "id": "TASK-0274",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
+        },
+        {
+            "id": "TASK-0275",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

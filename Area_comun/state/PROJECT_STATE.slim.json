@@ -69,8 +69,20 @@
         {
             "id": "TASK-0272",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
+        },
+        {
+            "id": "TASK-0274",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
+        },
+        {
+            "id": "TASK-0275",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana"
         }
     ],
     "next_actions": [

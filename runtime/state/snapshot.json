@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "c06ac40b89bfa4224b4e500ac83faea42b15e0a5170a3b5429e9c5d067192780",
+  "canonical_hash": "7b582a0dcb39505f00171e5942b1eb1a5c8473d3831d19578ac94736dcc60bdd",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -798,6 +798,7 @@
       "CLAIM-arq-reject0258-20260720": 1,
       "CLAIM-arq-reject0267-iter1-20260720": 1,
       "CLAIM-arq-reject0272-20260720": 1,
+      "CLAIM-arq-rutear0272iter2-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -1782,6 +1783,7 @@
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-veredicto": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion-parcial-GO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO": 1,
+      "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter1-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-seenburn-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0273-deadlock-poda-GO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibrida-NOGO": 1,
@@ -1796,6 +1798,7 @@
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-reparto": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion-parcial": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger": 1,
+      "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-seenburn": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-deadlock-poda": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibrida": 1,
@@ -1804,6 +1807,7 @@
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258": 1,
+      "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial": 1,
@@ -2123,8 +2127,10 @@
       "TASK-0269": 13,
       "TASK-0270": 10,
       "TASK-0271": 25,
-      "TASK-0272": 17,
+      "TASK-0272": 19,
       "TASK-0273": 11,
+      "TASK-0274": 1,
+      "TASK-0275": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2147,7 +2153,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4646,
+    "events_applied": 4654,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2292,6 +2298,14 @@
       "arq:0204-0205:rel": 2330,
       "arq:0205cr:acq": 2341,
       "arq:0205cr:rel": 2343,
+      "arq:0272iter2:acquire:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5318,
+      "arq:0272iter2:arch1:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5322,
+      "arq:0272iter2:arch2:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5323,
+      "arq:0272iter2:arch3:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5324,
+      "arq:0272iter2:release:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5325,
+      "arq:0272iter2:status:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5319,
+      "arq:0274:upsert:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5320,
+      "arq:0275:upsert:ec4d5c8f-814e-4d0f-a0dc-b188f6920952": 5321,
       "arq:arch-go-0194": 2232,
       "arq:arch-rv-0194": 2233,
       "arq:close-0117-flip4:acq": 674,
@@ -6797,5 +6811,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5317
+  "up_to_seq": 5325
 }

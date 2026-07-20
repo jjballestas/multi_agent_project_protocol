@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-ite
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear a Codex la remediacion iteracion 2 (ultima del tope) acotada a F-0272R1-01: sustituir la atribucion por autor git de Get-OwnEvidence (el hub tiene autor UNIFORME 'Analista' en los 300 commits recientes; un commit ajeno durante un exec del cron Analista + token ausente = confirmed falso + seen quemado sin senal, repro E2E determinista E1) por el canal firmado del ledger o degradar capa 3 a nunca-confirmar; anadir negativo de suite con autor uniforme. Recomendado mismo commit: anclar token a ultima linea (F-02) y verificar exit de snapshots + log de rutas del rollback (F-04). Re-juicio Analista con E1/E2/E3 + bateria unit antes del cierre."

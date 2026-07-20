@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Aplicar dos task_status via runtime/submit_intent.py: TASK-0269 review_approved -> done y TASK-0273 review_approved -> done. Ambas tienen GO del checker ratificado por el Arquitecto. Un solo ciclo, idempotency_key fresco, verificar el tail del log tras cada paso, commit con trailers Task-Id por paso y pathspec por lista explicita."

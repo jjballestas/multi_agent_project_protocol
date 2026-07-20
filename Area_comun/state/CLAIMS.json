@@ -243,6 +243,22 @@
             "updated_at": "2026-07-20T12:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-done-iter2",
+            "expires_at": "2026-07-20T21:39:19Z",
+            "notes": "Implementer done flip after ratified checker GO.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-done-iter2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
+            ],
+            "started_at": "2026-07-20T13:39:19Z",
+            "status": "active",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T13:39:19Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0273-final-memory",
             "expires_at": "2026-07-20T12:40:00Z",
             "notes": "Persist TASK-0273 delivery commit in Codex golden memory.",
@@ -423,6 +439,36 @@
             "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T11:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0272iter2-20260720",
+            "expires_at": "2026-07-20T14:19:14Z",
+            "notes": "Ruteo iteracion 2 de 0272 + registro de TASK-0274/0275 + higiene de 3 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift.md",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0272iter2-20260720",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273.md"
+            ],
+            "started_at": "2026-07-20T13:34:14Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:34:14Z"
         },
         {
             "claim_id": "CLAIM-arq-rutear0272rejuicio-20260720",

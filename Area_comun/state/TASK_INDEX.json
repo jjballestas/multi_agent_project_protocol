@@ -384,7 +384,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)",
             "type": "infra"
         },
@@ -398,6 +398,30 @@
             "reviewer": "Analista",
             "status": "review_approved",
             "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+            "id": "TASK-0274",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+            "id": "TASK-0275",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana",
             "type": "infra"
         },
         {
