@@ -1,33 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0272",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272",
-                "Area_comun/state/TASK_INDEX.json#TASK-0272",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
-                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "scripts/harness/README.md",
-                "personal/Codex/codex_mailbox_cron.ps1",
-                "personal/Analista/analista_mailbox_cron.ps1",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0272"
-        },
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-tests",
-                "scripts/test_anthropic_checker_harness.py",
-                "scripts/test_exec_lease_harness.py"
-            ],
-            "task_id": "TASK-0272"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

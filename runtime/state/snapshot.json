@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "01771fab0953456c55c13d06ebc4d45f41d22bf4f4c209d39ad97af91ba0d71f",
+  "canonical_hash": "3b066c84ec45c25c74fdedcb6ba9e109d5cfe53cdf5f6f1155650de77a7d3471",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -692,6 +692,10 @@
       "CLAIM-20260720-Codex-TASK-0271-fix1-memory": 1,
       "CLAIM-20260720-Codex-TASK-0271-fix1-postmemory": 1,
       "CLAIM-20260720-Codex-TASK-0271-memory": 1,
+      "CLAIM-20260720-Codex-TASK-0272": 1,
+      "CLAIM-20260720-Codex-TASK-0272-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0272-msgfix": 1,
+      "CLAIM-20260720-Codex-TASK-0272-tests": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2094,7 +2098,7 @@
       "TASK-0269": 11,
       "TASK-0270": 10,
       "TASK-0271": 25,
-      "TASK-0272": 7,
+      "TASK-0272": 10,
       "TASK-0273": 4,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2118,7 +2122,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4593,
+    "events_applied": 4600,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -3875,7 +3879,14 @@
       "codex:task0271:memory-release:20260720T023500Z": 5054,
       "codex:task0271:ready-to-in-progress:20260720T020500Z": 5045,
       "codex:task0272:claim:20260720T104500Z:a1": 5262,
+      "codex:task0272:delivery-claim:20260720T112000Z:a1": 5265,
+      "codex:task0272:in-progress-to-in-review:20260720T112000Z:a1": 5266,
+      "codex:task0272:msgfix-claim:20260720T112200Z:a1": 5270,
+      "codex:task0272:msgfix-release:20260720T112300Z:a1": 5271,
       "codex:task0272:ready-to-in-progress:20260720T104500Z:a1": 5263,
+      "codex:task0272:release-delivery:20260720T112000Z:a1": 5269,
+      "codex:task0272:release-main:20260720T112000Z:a1": 5267,
+      "codex:task0272:release-tests:20260720T112000Z:a1": 5268,
       "codex:task0272:tests-claim:20260720T111500Z:a1": 5264,
       "codex:validator-anomaly-etapa6:claim": 772,
       "codex:validator-anomaly-etapa6:release": 773,
@@ -6715,5 +6726,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5264
+  "up_to_seq": 5271
 }
