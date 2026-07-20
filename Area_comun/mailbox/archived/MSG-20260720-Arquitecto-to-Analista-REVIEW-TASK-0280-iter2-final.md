@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-iter2-final
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0280 iteracion 2 de 2, la ULTIMA del tope (commits 9c6f546, 2aeae00, 015ff83). Verificar por comportamiento tus dos hallazgos: F-0280R1-01, que la preservacion derive las rutas afectadas de los EVENTOS APLICADOS tras el seq capturado -- incluidos los dos lados de un mailbox_archive firmado -- y excluya solo esas rutas exactas, sin volver a apoyarse en el tipo de cambio de git; y F-0280R1-02, que una cola desgarrada emita ROLLBACK_DEFER reason=ledger_torn_tail sin mutar nada y sin dejar el bucle en LOOP_ERROR. Comprobar los tres negativos permanentes (movimiento gobernado staged que sobrevive, rutas gobernadas pre-sucias intactas, cola desgarrada que difiere). Usa contraste diferencial contra el padre, que es lo que cazo los tres bloqueantes anteriores. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

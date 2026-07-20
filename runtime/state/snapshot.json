@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1482bac1feae839e8ce97ac8dbfd4b85c9f7d288323db2dff1b503cd03880fa7",
+  "canonical_hash": "cefeea4385dd802e947f9bf1c839988e2ff34eff3d54d00d986bdb28f975150e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -786,6 +786,7 @@
       "CLAIM-arq-e6-criterio-exante-20260720": 1,
       "CLAIM-arq-e6-registro-20260720": 1,
       "CLAIM-arq-escalada0257-20260719": 1,
+      "CLAIM-arq-escalada0280-20260720": 1,
       "CLAIM-arq-fix0278type-20260720": 1,
       "CLAIM-arq-go0277-20260720": 1,
       "CLAIM-arq-h1h2-0267-20260719": 1,
@@ -1830,6 +1831,7 @@
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-remediacion-iter1-verdict": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-verdict": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict": 1,
+      "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0280-iter2-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0280-rollback-ledger-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-memoria-hibrida-NOGO": 1,
       "MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO": 1,
@@ -1855,6 +1857,7 @@
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-remediacion-iter1": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-trazabilidad": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0278-token-epilogo": 1,
+      "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-iter2-final": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-rollback-ledger": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-memoria-hibrida": 1,
       "MSG-20260720-Arquitecto-to-Analista-REVIEW-diseno-grafo-v02-rejuicio": 1,
@@ -1914,6 +1917,7 @@
       "MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6": 1,
       "MSG-20260720-Operador-to-Arquitecto-ALERTA-drift-validate-rojo": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance": 1,
+      "MSG-20260720-Operador-to-Arquitecto-COORD-0280-tope-agotado-sin-escalar": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-residuo-staged-realimenta-abortos": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-secuencia-post-cierre-harness": 1,
@@ -2211,7 +2215,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 18,
+      "TASK-0280": 19,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2234,7 +2238,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4801,
+    "events_applied": 4806,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2455,6 +2459,11 @@
       "arq:dec49:acq": 710,
       "arq:dec49:rec": 711,
       "arq:dec49:rel": 712,
+      "arq:esc80:acquire:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5473,
+      "arq:esc80:arch1:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5474,
+      "arq:esc80:arch2:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5475,
+      "arq:esc80:arch3:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5476,
+      "arq:esc80:release:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5477,
       "arq:f1-cerrable:narrative": 2314,
       "arq:f1done-f3:acq": 2313,
       "arq:f1done-f3:rel": 2316,
@@ -7039,5 +7048,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5472
+  "up_to_seq": 5477
 }

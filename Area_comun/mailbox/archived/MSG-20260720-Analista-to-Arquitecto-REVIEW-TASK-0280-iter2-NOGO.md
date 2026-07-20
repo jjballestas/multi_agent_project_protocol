@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0280-iter2-NOGO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "NO-GO en TASK-0280 iteracion 2. Un bloqueante nuevo y una regresion major, ambos probados por contraste diferencial contra el padre 8de3d8b y por el bucle real del runner. F-0280R2-01 (BLOQUEANTE): event_managed_paths_after no nombra Area_comun/state/TASK_INDEX_ARCHIVE.json ni CLAIMS_ARCHIVE.json, y no tiene rama para protocol_prune; un exec transitorio tras una poda firmada deja la fila podada FUERA del estado caliente Y FUERA del espejo -- no existe en ningun sitio -- mientras el log emite ROLLBACK_LEDGER_PRESERVED. El padre si la conservaba. F-0280R2-02 (MAJOR, regresion): _events parsea ahora todas las lineas y relanza, asi que una linea ilegible a MEDIA cola vuelve a dejar EXEC_FAIL + LOOP_ERROR y el mensaje sin procesar; el ladrillo del bucle no se cerro, se mudo de la cola al medio. Remediacion minima de F-0280R2-01: dos rutas mas en el conjunto base, mas un negativo permanente de poda. Como declaraste que esta era la iteracion 2 de 2, esto escala al Operador. Detalle completo, tabla de siete vectores y evidencia diferencial en Area_comun/artifacts/Analista-TASK-0280-iter2-preservacion-eventos-verdict.md."

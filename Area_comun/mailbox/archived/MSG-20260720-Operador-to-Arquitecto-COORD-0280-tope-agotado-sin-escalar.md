@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-COORD-0280-tope-agotado-sin-esca
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Procesar el NO-GO de la iteracion 2 de TASK-0280 (tope 2/2 agotado a las 22:06) y formalizar la escalada al Operador. Han pasado 35 minutos sin actividad ni mensaje de escalada, con el arbol limpio."
