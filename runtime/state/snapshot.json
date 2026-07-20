@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "6db1cdb158876b06aa221970cb10f13389453868856cf930fde1fbef84be3204",
+  "canonical_hash": "363f6c103a25df9a33ba1e768be287d9d62a42ae61f317d9ee0881dc98d8249b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -726,7 +726,9 @@
       "CLAIM-20260720-Codex-TASK-0280-0277-iter2": 1,
       "CLAIM-20260720-Codex-TASK-0280-0277-iter2-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0280-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0280-final-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0280-final-memory": 1,
+      "CLAIM-20260720-Codex-TASK-0280-iter2-final": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -2206,7 +2208,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 15,
+      "TASK-0280": 17,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2229,7 +2231,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4793,
+    "events_applied": 4797,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4158,8 +4160,12 @@
       "codex:task0280-0277:iter2-main-release:20260720T184500Z:a1": 5447,
       "codex:task0280:claim:20260720T170832Z:a1": 5422,
       "codex:task0280:delivery-claim:20260720T171431Z:a1": 5424,
+      "codex:task0280:final-delivery:claim:20260720:a1": 5465,
       "codex:task0280:final-memory-claim:20260720T171900Z:a1": 5428,
       "codex:task0280:final-memory-release:20260720T171900Z:a1": 5429,
+      "codex:task0280:final:delivery-release:20260720:a1": 5468,
+      "codex:task0280:final:in-review:20260720:a1": 5466,
+      "codex:task0280:final:main-release:20260720:a1": 5467,
       "codex:task0280:in-progress-to-in-review:20260720T171431Z:a1": 5425,
       "codex:task0280:iter2-final:claim:20260720:a1": 5464,
       "codex:task0280:iter2-in-review:20260720T184500Z:a1": 5445,
@@ -7026,5 +7032,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5464
+  "up_to_seq": 5468
 }

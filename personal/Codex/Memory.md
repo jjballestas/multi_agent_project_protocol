@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, after TASK-0280 implementation commit `2b37294`.
+Last updated: 2026-07-20 Europe/Madrid, after TASK-0280 final-remediation commit `9c6f546`.
+
+- TASK-0277 is `done` at signed events 5461-5463 after ratified independent GO.
+  TASK-0280 final remediation commit `9c6f546` derives rollback preservation from
+  paths named by applied events (including staged mailbox moves), preserves unrelated
+  pre-dirty governed paths, tolerates a torn final event-log line, and emits
+  `ROLLBACK_DEFER reason=ledger_torn_tail`. Permanent sandbox negatives cover both
+  staged mailbox movement and the torn queue. The live harness was not redeployed.
 
 - TASK-0280 commit `2b37294` makes transient exec rollback preserve signed ledger
   advances plus governed materialized state, verifies replay drift, and emits
@@ -3731,4 +3738,4 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Real generic-harness exec against `C:/Users/johnb/AppData/Roaming/npm/claude.ps1` exited 0 and emitted `HARNESS_WINDOWS_SHIM_OK` with redirected STDIN/stdout/stderr.
 - Delivery commit `c3a14a3` records the self-contained handoff, mailbox response, `in_review` transition, and released remediation claims; Arquitecto must clear seen and re-run the retained live review.
 - 2026-07-20 TASK-0280/TASK-0277 remediation iteration 2 implementation commit `e07956e`: added shared `scripts/ledger_head.py` (`seq` + SHA-256 of exact final event line) and made both transient harness rollback and governed prune recovery decide exclusively from that head. Harness exclusions are conditional on ledger advancement, preservation excludes staged additions, and head is contrasted before reset and after restore. Prune now catches `BaseException`, restores mirrors only when the head is unchanged, retains mirrors and fails loudly after an applied transaction, refreshes stale archive rows, and rejects final drift. Permanent mailbox/prune regressions pass; protocol gates and drift were green at seq 5443 before commit. TASK-0277 and TASK-0280 remain `in_progress` pending clean-clone evidence and independent re-judgement; active claim `CLAIM-20260720-Codex-TASK-0280-0277-iter2` covers delivery.
-- 2026-07-20 TASK-0280/TASK-0277 iteration-2 delivery: clean clone `C:/Users/johnb/AppData/Local/Temp/codex-clean-6abdb480ba504384bdb1940ab093e224` at `e07956e` passed mailbox retry, prune regressions (7), collaboration validator, encoding and neutrality. Runtime transaction seq 5445-5448 moved both tasks `in_progress -> in_review` and released both Codex claims. Handoff `HANDOFF-TASK-0280-TASK-0277-iter2-codex-to-arquitecto.md` and mailbox response request independent Analista re-judgement; no self-review and no done promotion.
+- 2026-07-20 TASK-0280/TASK-0277 iteration-2 delivery commit `caf83a9`: clean clone `C:/Users/johnb/AppData/Local/Temp/codex-clean-6abdb480ba504384bdb1940ab093e224` at implementation commit `e07956e` passed mailbox retry, prune regressions (7), collaboration validator, encoding and neutrality. Runtime transaction seq 5445-5448 moved both tasks `in_progress -> in_review` and released both Codex claims. Handoff `HANDOFF-TASK-0280-TASK-0277-iter2-codex-to-arquitecto.md` and mailbox response request independent Analista re-judgement; no self-review and no done promotion.
