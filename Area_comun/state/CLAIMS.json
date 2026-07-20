@@ -81,6 +81,20 @@
             "updated_at": "2026-07-20T17:14:31Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0280-final-memory",
+            "expires_at": "2026-07-20T17:49:00Z",
+            "notes": "Persist TASK-0280 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0280-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T17:19:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T17:19:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0272rejuicio-20260720",
             "expires_at": "2026-07-20T13:47:43Z",
             "notes": "Ruteo del re-juicio 0272 iter1 al checker + ACTION de done-flips 0269/0273 + higiene de 4 consumidos",

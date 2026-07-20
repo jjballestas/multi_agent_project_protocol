@@ -8,7 +8,7 @@ Last updated: 2026-07-20 Europe/Madrid, after TASK-0280 implementation commit `2
   regression covers both no-event full rollback and applied-event survival with
   retry without duplicate work. Delivery events 5424-5427 move TASK-0280 to
   `in_review`, release both maker claims, and publish the self-contained Arquitecto
-  handoff. Independent review remains with Analista.
+  handoff in delivery commit `0397865`. Independent review remains with Analista.
 
 - Delivery commit `6e3bcc5` moves TASK-0277 to `in_review`, releases both
   remediation claims at signed seq 5409-5412, and leaves the self-contained
