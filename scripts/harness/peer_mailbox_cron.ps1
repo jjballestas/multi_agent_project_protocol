@@ -368,6 +368,18 @@ function Get-AgentArguments {
     )
 }
 
+function Get-AgentInvocation {
+    param([string]$AgentPath, [string[]]$Arguments)
+    $extension = [IO.Path]::GetExtension($AgentPath).ToLowerInvariant()
+    if ($extension -eq ".ps1") {
+        return @{ FilePath = (Get-Command powershell.exe -ErrorAction Stop).Source; Arguments = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $AgentPath) + $Arguments }
+    }
+    if ($extension -in @(".cmd", ".bat")) {
+        return @{ FilePath = (Get-Command cmd.exe -ErrorAction Stop).Source; Arguments = @("/d", "/s", "/c", $AgentPath) + $Arguments }
+    }
+    return @{ FilePath = $AgentPath; Arguments = $Arguments }
+}
+
 function Read-Seen {
     if (-not (Test-Path -LiteralPath $SeenPath)) {
         return @{}
@@ -468,6 +480,8 @@ function Invoke-PeerForMessage {
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
     $execArgs = Get-AgentArguments
+    $invocation = Get-AgentInvocation -AgentPath $agentPath -Arguments $execArgs
+    $execArgs = @($invocation.Arguments)
     $stamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
     $safeName = [IO.Path]::GetFileNameWithoutExtension($Message.Name)
     $stdoutPath = Join-Path $RunsDir "$stamp-$safeName.out.log"
@@ -491,7 +505,7 @@ function Invoke-PeerForMessage {
         # argument into loose tokens (PS 5.1) and CLIs may misread the second word as a
         # subcommand. The reference agent (codex exec) reads the prompt from stdin via '-'.
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
-        $process = Start-Process -FilePath $agentPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $invocation.FilePath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         $null = $process.Handle  # cache the handle or ExitCode reads null when the exec finishes before the first WaitForExit
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"

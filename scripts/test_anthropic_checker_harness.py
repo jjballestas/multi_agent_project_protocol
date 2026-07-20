@@ -24,6 +24,12 @@ def main() -> None:
     require(ANALISTA, '[string]$AgentProvider = "Anthropic"')
     require(ANALISTA, '"exec", "-s", "danger-full-access"')
     require(GENERIC, '[ValidateSet("Auto", "Anthropic", "Codex")]')
+    for text in (ANALISTA, GENERIC):
+        require(text, "function Get-AgentInvocation")
+        require(text, '$extension -eq ".ps1"')
+        require(text, '$extension -in @(".cmd", ".bat")')
+        require(text, "Get-AgentInvocation -AgentPath $agentPath -Arguments $execArgs")
+        require(text, "Start-Process -FilePath $invocation.FilePath")
     print("anthropic checker harness contract: PASS")
 
 

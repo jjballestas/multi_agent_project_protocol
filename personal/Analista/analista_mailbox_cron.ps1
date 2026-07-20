@@ -263,6 +263,18 @@ function Get-AgentArguments {
     )
 }
 
+function Get-AgentInvocation {
+    param([string]$AgentPath, [string[]]$Arguments)
+    $extension = [IO.Path]::GetExtension($AgentPath).ToLowerInvariant()
+    if ($extension -eq ".ps1") {
+        return @{ FilePath = (Get-Command powershell.exe -ErrorAction Stop).Source; Arguments = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $AgentPath) + $Arguments }
+    }
+    if ($extension -in @(".cmd", ".bat")) {
+        return @{ FilePath = (Get-Command cmd.exe -ErrorAction Stop).Source; Arguments = @("/d", "/s", "/c", $AgentPath) + $Arguments }
+    }
+    return @{ FilePath = $AgentPath; Arguments = $Arguments }
+}
+
 function Read-Seen {
     if (-not (Test-Path -LiteralPath $SeenPath)) {
         return @{}
@@ -425,8 +437,10 @@ Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-005
         # El prompt se pasa por STDIN (RedirectStandardInput del archivo del prompt), NO como argumento:
         # Start-Process -ArgumentList parte un argumento multi-palabra en tokens sueltos (PS 5.1).
         $execArgs = Get-AgentArguments
+        $invocation = Get-AgentInvocation -AgentPath $agentPath -Arguments $execArgs
+        $execArgs = @($invocation.Arguments)
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
-        $process = Start-Process -FilePath $agentPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $invocation.FilePath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
         Write-Log "EXEC_START pid=$($process.Id) message=$($Message.Name)"
         while (-not $process.WaitForExit(1000)) {
