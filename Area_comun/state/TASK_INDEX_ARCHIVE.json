@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-05",
-    "updated_by": "Arquitecto",
+    "updated_by": "Codex",
     "archive_policy": "Done tasks moved from TASK_INDEX.json by TASK-0024; no data deleted.",
     "legend": {
         "status": [
@@ -6702,6 +6702,690 @@
             "status": "done",
             "title": "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-19",
+            "file": "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+            "id": "TASK-0267",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][C5/H2] Hook pre-commit v2: validar el snapshot staged en checkout temporal del indice (elimina el mutex global del arbol compartido)",
+            "type": "infra"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "Area_comun/protocol/HUMAN_GUIDE.template.html",
+                "scripts/generate_human_guide.py",
+                "examples/human_guide_instance/HUMAN_GUIDE.example.md",
+                "HUMAN_GUIDE.md",
+                "README_INSTANCIACION.md"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0037-claude-guia-humana-operativa.md",
+            "id": "TASK-0037",
+            "linked_decisions": [
+                "DECISION-0004",
+                "DECISION-0019",
+                "DECISION-0001",
+                "DECISION-0020",
+                "DECISION-0006"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0004",
+                "TASK-0013",
+                "SPEC-0072"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "scripts/generate_human_guide.py",
+                "examples/human_guide_cases/",
+                "protocol.config.json",
+                "README_INSTANCIACION.md",
+                ".github/workflows/validate.yml"
+            ],
+            "review": "READY (Claude 2026-06-10, formalizada bajo SDD/SPEC-0072 por GO del operador). Aditivo MINOR off-by-default. Arquitecto: plantilla 21 secciones + neutrality globs + README; Implementador (Codex, tarea separada): generador + golden + CI/githook. Fuente de verdad = .md; HTML = artefacto generado. Las 3 preguntas resueltas (SPEC sec.13). enforce/authoritative intactos; SA.4/Capa C OFF.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+            "status": "done",
+            "title": "Guia humana operativa neutral (21 secciones, SPEC-0072) + generador HTML determinista (.md fuente unica, HTML artefacto generado --check): plantilla master en Area_comun/protocol/, guia dogfooding en RAIZ, ejemplo en examples/; aditivo MINOR off-by-default, neutral. Arquitecto plantilla+README; Codex generador+golden+CI.",
+            "type": "documentation",
+            "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "Area_comun/protocol/RELEASE_ENGINEERING.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0081-codex-to-claude-1.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0081-in-review.md"
+            ],
+            "depends_on": [
+                "TASK-0071",
+                "TASK-0073",
+                "TASK-0074",
+                "TASK-0075"
+            ],
+            "file": "Area_comun/tasks/TASK-0081-codex-faseF7.5-docs-release.md",
+            "id": "TASK-0081",
+            "linked_decisions": [
+                "DECISION-0001",
+                "DECISION-0019",
+                "DECISION-0023"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0064"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/PACKAGE_VERSIONING.md",
+                "README_INSTANCIACION.md",
+                "scripts/generate_sbom.py",
+                "scripts/sign_release.py",
+                "scripts/verify_release.py"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Lei RELEASE_ENGINEERING.md: comandos exactos vs la CLI real (generate_sbom/manifest --commit --timestamp --output; generate_provenance --manifest --builder-id --commit --process --timestamp + --verify; sign_release --manifest --backend --key --key-id; verify_release --manifest [--signature --backend --pubkey]); principios determinismo/neutralidad/sin-secretos/off-by-default correctos; nota DECISION-0023 (backend real del emisor, claves NUNCA commiteadas, fixture solo golden); SIN claves reales (solo placeholders). Corri yo: neutralidad limpia (cubre protocol/*.md), encoding limpio, validador valid. Enlaces desde README_INSTANCIACION + PACKAGE_VERSIONING. CIERRA F7.5 -> >>> FASE 7 COMPLETA (F7.1 SBOM, F7.2 manifiesto+verify, F7.3 provenance, F7.4 firma, F7.5 docs). <<<",
+            "sdd_required": false,
+            "spec_id": "Area_comun/specs/SPEC-0057-fase7-release-engineering.md",
+            "status": "done",
+            "title": "Fase 7.5 (SPEC-0057): docs de la cadena de release (SBOM -> manifiesto -> provenance -> firma) + guia de generar/verificar + nota de backend real de firma sin secretos (DECISION-0023; claves del emisor, fixture solo en golden) + enlaces desde README_INSTANCIACION. Cierra Fase 7. Neutral, ASCII, sin secretos. Quinta y ultima rebanada de Fase 7.",
+            "type": "documentation",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "Area_comun/protocol/SUPERVISED_AUTONOMY.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0082-codex-to-claude-1.md",
+                "Area_comun/mailbox/archived/MSG-20260608-Codex-to-Claude-task0082-in-review.md"
+            ],
+            "depends_on": [
+                "TASK-0078",
+                "TASK-0079",
+                "TASK-0080"
+            ],
+            "file": "Area_comun/tasks/TASK-0082-codex-autonomia-SA5-docs.md",
+            "id": "TASK-0082",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "README_INSTANCIACION.md",
+                "runtime/supervised_autonomy.py",
+                "runtime/orchestrator.py",
+                "protocol.config.json"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: neutralidad exit 0, encoding OK, validador valid (drift benigno esperado), prune OK. SUPERVISED_AUTONOMY.md documenta config runtime.supervised_autonomy off-by-default + caps + --allow-supervised-autonomy, tabla de paradas duras (max_turns_reached/paused via runtime/state/PAUSE/wallclock_exhausted/human_checkpoint por K y por fix-cycles), *.runreport.md y frontera SA.4 (invoker real --once intacto, gateado por GO + rollback). Enlaces desde N_AGENT_RUNTIME y README_INSTANCIACION. Neutral, ASCII, sin secretos. CIERRA SA.5 -> autonomia supervisada documental SA.1-SA.5 completa.",
+            "sdd_required": false,
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "status": "done",
+            "title": "Autonomia supervisada SA.5 (SPEC-0064): docs del sobre de supervision (SA.1-SA.3) - configuracion runtime.supervised_autonomy (off-by-default, registro+caps) + paradas duras (max_turns, centinela runtime/state/PAUSE, reloj wall_clock_ms, checkpoint humano K-turnos/fix-cycles) + runreport + nota de SA.4 (invoker real) gateado; enlaces desde N_AGENT_RUNTIME/README. Neutral, sin secretos. Ultima rebanada documental de la autonomia supervisada.",
+            "type": "documentation",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/team_bridge.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "examples/team_bridge_cases/",
+                ".github/workflows/validate.yml",
+                "Area_comun/handoffs/HANDOFF-TASK-0083-codex-to-claude-1.md"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0083-codex-team-bridge-capas-AB.md",
+            "id": "TASK-0083",
+            "linked_decisions": [
+                "DECISION-0025",
+                "DECISION-0022",
+                "DECISION-0018",
+                "DECISION-0017"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/team_bridge.py",
+                "protocol.config.json",
+                "protocol.config.template.json",
+                "scripts/scan_domain_neutrality.py",
+                "examples/team_bridge_cases/"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Corri yo: golden team_bridge_cases 7/7, validador valid (drift benigno esperado), neutralidad exit 0, encoding OK. team_bridge.py Capas A+B (gate enforcement exit 2 en TaskCompleted/TeammateIdle + audit append-only ASCII fail-soft), off-by-default (team_bridge_activation_error bloquea hasta enabled+registro), alta en scan_globs, golden en CI. SIN Capa C / SIN submit_intent / SIN activar el bridge; config enabled:false,layers:[] en instancia y template. Cierra DECISION-0025 (alcance A+B). Capa C diferida a precondiciones DECISION-0022.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0065-team-bridge-capas-AB.md",
+            "status": "done",
+            "title": "Bridge Agent Teams -> protocolo, Capas A+B (DECISION-0025/SPEC-0065): runtime/team_bridge.py (gate enforcement exit 2 + audit append-only a team_audit.jsonl) + bloque runtime.team_bridge off-by-default en template e instancia + alta en scan_globs + golden team_bridge_cases. Capa C (submit_intent) DIFERIDA a precondiciones DECISION-0022. Off => byte-equivalente.",
+            "type": "integration",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/state/events.jsonl",
+                "personal/Codex/STARTUP_PROMPT.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0084-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0076",
+                "TASK-0077"
+            ],
+            "file": "Area_comun/tasks/TASK-0084-codex-cutover-submit-intent-vivo.md",
+            "id": "TASK-0084",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0020"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/ledger_ops.py",
+                "runtime/submit_intent.py",
+                "runtime/state/events.jsonl",
+                "personal/Codex/STARTUP_PROMPT.md"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Codex adopto submit_intent EN VIVO para su ciclo: event log seq 5->9, intent.applied actor=Codex (seq6 claim acquire + seq7 ready->in_progress = auto-claim; seq8 in_progress->in_review + seq9 claim release = handoff-release); drift 0 tras cada transaccion; CERO edicion manual de *.json. Runbook de Codex actualizado a submit_intent/ledger_ops por defecto. Deliverables corregidos por Claude via submit_intent task_upsert (Codex no tiene capability orchestrator; hizo lo correcto al no editar a mano). >>> Precondicion del flip enforce CUMPLIDA por ambos lazos en sombra (Claude seq3-5, Codex seq6-9, drift 0). enforce/authoritative siguen OFF; el flip espera GO del operador. <<< Pendiente Codex: golden de regresion cross-FS (fast-follow).",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0063-cutover-submit-intent-codex-loop.md",
+            "status": "done",
+            "title": "Cutover EN VIVO: el lazo de Codex adopta submit_intent --intents (auto-claim + handoff-release de ESTE task via ledger_ops, ensayo en sombra con drift 0, sin edicion manual de *.json) + runbook a submit_intent por defecto. Precondicion del flip enforce, DESACOPLADA del bridge Agent Teams.",
+            "type": "migration",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/submit_intent.py",
+                "scripts/prune_state.py",
+                "protocol.config.json",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0085-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0084"
+            ],
+            "file": "Area_comun/tasks/TASK-0085-codex-next-actions-intent-y-prune-submit-intent.md",
+            "id": "TASK-0085",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0017",
+                "DECISION-0014",
+                "DECISION-0026"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0065",
+                "TASK-0038"
+            ],
+            "relevant_files": [
+                "runtime/submit_intent.py",
+                "runtime/ledger_ops.py",
+                "scripts/prune_state.py",
+                "protocol.config.json",
+                "examples/"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08). Verificado SUSTANTIVAMENTE bajo enforce: (1) intent project_narrative actualiza next_actions EN VIVO con drift 0 (lo emiti en este mismo cierre); (2) intent protocol_prune + prune_state.py --apply reencauzado por submit_intent corrieron EN VIVO con drift 0 (event log seq 27-30/36-38/42/47, actor=architect; retira solo entradas terminales: task done / claim released, verificado en codigo); (3) goldens verdes corridos por mi: intent_flow 11 (incluye case_project_narrative + case_protocol_prune con assert drift 0 = replay-identidad), runtime_prune, replay 6, intent_tx 6, materialize 6, cross_fs 2, prune_state 3, enforce 7, cutover 4; (4) validador valid bajo enforce, neutralidad exit 0, encoding limpio. maintenance.enabled=true SOLO en instancia viva; template intacto. Capability: project_narrative/protocol_prune requieren orchestrator (prune corre como architect bajo enforce). Anomalia menor de Codex (evidencia up_to_seq=38 vs estado vivo) ACKNOWLEDGED: benigna, drift 0 vigente, use el event log como autoritativo. CIERRA el gap de next_actions/prune bajo enforce.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0066-next-actions-intent-y-prune-submit-intent.md",
+            "status": "done",
+            "title": "Intent propio de next_actions/narrativa en submit_intent + prune via submit_intent (descongela el prune bajo enforce; re-habilita maintenance.enabled SOLO en instancia viva, template intacto). Cierra el GAP congelado al encender enforce. Verificacion EN VIVO drift 0 + golden replay-identidad.",
+            "type": "implementation",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/protocol_replay.py",
+                "scripts/validate_collaboration_state.py",
+                "runtime/submit_intent.py",
+                "examples/",
+                "Area_comun/handoffs/HANDOFF-TASK-0086-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0085"
+            ],
+            "file": "Area_comun/tasks/TASK-0086-codex-guard-authoritative-requiere-enforce.md",
+            "id": "TASK-0086",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0069",
+                "SPEC-0066"
+            ],
+            "relevant_files": [
+                "runtime/protocol_replay.py",
+                "scripts/validate_collaboration_state.py",
+                "runtime/submit_intent.py",
+                "runtime/apply.py",
+                "examples/"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Verificado: event_state_config_error RECHAZA in vivo authoritative-sin-enforce y enforce-sin-materialize (mensajes accionables), acepta cadenas coherentes (all true / all false / enabled+materialize+enforce) y coordination-tier no-aplica; config vivo (todos true) PASA. Cableado que MUERDE: validador py+ps hard-fail, submit_intent + apply raise antes de aplicar (golden cubre los 3). BONUS: Codex corrigio una anomalia real -- apply_gate_and_commit ahora chequea drift ANTES de materializar (materialize=true ya no puede tapar divergencia previa). Goldens verdes corridos por mi: enforce 9, materialize 6, intent_flow 11, intent_tx 6, replay 6, genesis_ref 9, apply 4, prune, cross_fs 2, cutover 4; validador valid, neutralidad 0, encoding limpio. Template intacto. Mata el false-secure del flip authoritative.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0067-guard-authoritative-requiere-enforce.md",
+            "status": "done",
+            "title": "Guard: event_state.authoritative=true REQUIERE enforce=true (mata el false-secure) - event_state_config_error cableado en validador (hard-fail) + submit_intent/apply (raise) + golden; via maquinaria existente; template intacto.",
+            "type": "security",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "Area_comun/decisions/DECISION-0028-enforce-mecanismo-authoritative-marcador.md",
+                "AGENTS.md",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "CHANGELOG.md"
+            ],
+            "depends_on": [
+                "TASK-0086"
+            ],
+            "file": "Area_comun/tasks/TASK-0087-authoritative-teeth-vs-documentar-enforce.md",
+            "id": "TASK-0087",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0028"
+            ],
+            "owner": "Claude",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0085",
+                "SPEC-0067"
+            ],
+            "relevant_files": [
+                "AGENTS.md",
+                "Area_comun/protocol/N_AGENT_RUNTIME.md",
+                "runtime/protocol_replay.py"
+            ],
+            "review": "DONE (postura B, operador + arquitecto, 2026-06-10). Resuelto por DECISION-0028: enforce ES el mecanismo de escritor-unico (gate B.3); authoritative es el marcador declarativo del modo (DECISION-0022), sin callers de comportamiento; NO se cablean teeth propias (no hay invariante que enforce no cubra); el guard de TASK-0086 mata el false-secure (authoritative sin enforce). Docs actualizados (AGENTS.md s7, TASK_PROTOCOL.md, N_AGENT_RUNTIME.md, AGENTS.template.md) + CHANGELOG v1.1.0 (resolved). Neutral; defaults del template intactos. Deliverables apuntan a los artefactos reales producidos. Cierra el ultimo bloqueante de ADOPCION. enforce/authoritative intactos; SA.4/Capa C OFF.",
+            "sdd_required": false,
+            "spec_id": "none",
+            "status": "done",
+            "title": "Follow-up authoritative: decidir teeth propias (defense-in-depth) vs documentar ENFORCE como el mecanismo de escritor-unico (authoritative=marcador). Resolver con una DECISION. BLOQUEANTE PARA ADOPCION, NO para SA.4.",
+            "type": "analysis",
+            "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "examples/supervised_autonomy_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0088-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0080"
+            ],
+            "file": "Area_comun/tasks/TASK-0088-codex-sa4-lock-lift-invoker-real-multiturno.md",
+            "id": "TASK-0088",
+            "linked_decisions": [
+                "DECISION-0024",
+                "DECISION-0021",
+                "DECISION-0022"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0078",
+                "TASK-0079",
+                "TASK-0086"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/supervised_autonomy.py",
+                "examples/supervised_autonomy_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. SA.4 PASO 1 (lock-lift OFF-BY-DEFAULT). Verificado: subprocess_multiturn_allowed exige allow_real_invoker AND allow_supervised_autonomy AND supervised_autonomy_activation_error None AND real_invoker_activation_error None (orchestrator.py:357-362); OFF-BY-DEFAULT confirmado en vivo (registro vacio -> allowed=False -> rechazo 'subprocess llm invoker requires --once' intacto, byte-equivalente); --once subprocess intacto. ENSAYO DE ROLLBACK del lock-lift (in-process, sin tocar registro vivo): registro-off->cerrojo en pie; poblado sintetico->se levanta; despoblar->restaurado; replay==hot, drift 0. Goldens verdes corridos por mi: supervised_autonomy 9 (nuevo caso lock-lift con subprocess fake determinista), runtime_loop 8, real_adapter 4, enforce 9, intent_flow 11, replay 6, cutover 4, cross_fs 2; validador valid, neutralidad 0, encoding limpio. NO se poblo el registro vivo NI se corrio el piloto (eso es el micro-GO posterior). Bonus: Codex corrigio fixture runtime_loop (copia runtime .py para prune hooks). Template intacto.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0064-autonomia-supervisada.md",
+            "status": "done",
+            "title": "SA.4 paso 1 (SPEC-0064 sec.4): lock-lift del invoker real multi-turno OFF-BY-DEFAULT - condicionar orchestrator.py:340 (permitir subprocess multi-turno solo con supervised_autonomy+real_invoker registrados + flags; sobre acota); registro vacio=byte-equivalente; golden determinista de paridad. NO poblar registro NI correr piloto (micro-GO posterior).",
+            "type": "implementation",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/",
+                "protocol.config.json",
+                "Area_comun/handoffs/HANDOFF-TASK-0089-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0088"
+            ],
+            "file": "Area_comun/tasks/TASK-0089-codex-llm-turn-wrapper-vendor-neutral.md",
+            "id": "TASK-0089",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0021",
+                "DECISION-0024"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0021",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/llm_turn_wrapper.py",
+                "runtime/adapters/llm_adapter.py",
+                "runtime/turn_schema.json",
+                "protocol.config.json",
+                "examples/llm_turn_wrapper_cases/"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-08) bajo enforce+authoritative. Wrapper runtime/llm_turn_wrapper.py verificado end-to-end por mi: happy-path (report valido en ```json fences -> emite SOLO JSON limpio compacto + exit 0); extraccion tolerante a fences/prosa (acepta objeto o {report:{...}}); validacion contra turn_schema.json (rechazo task_id invalido y campos faltantes con mensaje accionable); timeout (sleep>timeout -> 'backend timed out', exit 1, NUNCA cuelga; default 100s, rechaza >=120); backend-fail -> exit 1 limpio. Golden examples/llm_turn_wrapper_cases 8/8 (py) + .ps1 + en CI. Vendor-neutral (backend por --backend/env, no hardcodea vendor; preset claude -> 'python runtime/llm_turn_wrapper.py --backend \"claude -p\"'). Gates verdes (validador valid, neutralidad 0, encoding limpio). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false); NO se re-armo ni corrio piloto. Template intacto. SIGUIENTE: SMOKE REAL (1 invocacion claude -p via wrapper) antes de re-armar + piloto.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+            "status": "done",
+            "title": "Wrapper fino vendor-neutral para el invoker real (off-pilot, SPEC-0068): runtime/llm_turn_wrapper.py stdin->backend no interactivo (claude -p)->extrae+valida turn-report JSON (tolerante fences/prosa)->emite limpio o falla limpio (timeout<120s, nunca cuelga); golden determinista backend fake; preset claude->wrapper; vendor-neutral. NO re-armar SA.4 ni correr piloto.",
+            "type": "implementation",
+            "updated_at": "2026-06-08"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/",
+                "Area_comun/handoffs/HANDOFF-TASK-0090-codex-to-claude-1.md"
+            ],
+            "depends_on": [
+                "TASK-0089"
+            ],
+            "file": "Area_comun/tasks/TASK-0090-codex-wrapper-backend-resolution-crossplatform.md",
+            "id": "TASK-0090",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "DECISION-0006",
+                "SPEC-0068"
+            ],
+            "relevant_files": [
+                "runtime/llm_turn_wrapper.py",
+                "examples/llm_turn_wrapper_cases/"
+            ],
+            "review": "ACEPTADA por Claude con RATIFICACION ADVERSARIAL (2026-06-09) bajo enforce+authoritative. resolve_backend_command resuelve command[0] via shutil.which (usa ruta resuelta o deja command tal cual). Verificado por mi: bare 'claude -p' AHORA RESUELVE y corre (paso de WinError 2 a ejecutar el CLI); comando inexistente -> fallo limpio (WinError 2 capturado). Golden llm_turn_wrapper_cases 10/10 (sube de 8: resoluble-via-PATHEXT OK + inexistente fail-limpio). RE-SMOKE END-TO-END limpio: wrapper con backend BARE 'claude -p' (forma del preset) + prompt no-op -> turn-report schema-valido JSON limpio exit0 (real claude). SA.4 sigue DE-ARMADO (real_invoker/supervised_autonomy enabled=false). Gates verdes. Template/preset/flags intactos. El path del piloto (orquestador->preset->wrapper->claude) queda PROBADO.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0068-llm-turn-wrapper-vendor-neutral.md",
+            "status": "done",
+            "title": "Wrapper invoker: resolucion cross-platform del backend via shutil.which (off-pilot, SPEC-0068) - hoy subprocess.run(['claude',...]) da WinError 2 con el shim npm claude.CMD; resolver command[0] antes de subprocess.run + golden (resoluble-solo-PATHEXT OK / inexistente fail-limpio). NO re-armar SA.4 ni piloto.",
+            "type": "implementation",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "examples/neutrality_scan_cases/README.md"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0091-pilot-sa4-nota-neutralidad-readme.md",
+            "id": "TASK-0091",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0024"
+            ],
+            "original_author": "Codex",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0088",
+                "DECISION-0027"
+            ],
+            "relevant_files": [
+                "examples/neutrality_scan_cases/README.md"
+            ],
+            "review": "(PILOTO SA.4 RE-FIRE) Objetivo del re-pilot bajo el sobre (DECISION-0027), GO operador 2026-06-09 tras smoke real limpio. Codex (invoker real) edita SOLO prosa en examples/neutrality_scan_cases/README.md; caps 2/1/180000, checkpoint tras turno 1.",
+            "sdd_required": false,
+            "spec_id": "none",
+            "status": "done",
+            "title": "(PILOTO SA.4) Nota aclaratoria corta (1-2 frases) al final de examples/neutrality_scan_cases/README.md sobre que cubre el escaneo de neutralidad y como leer un caso que falla. Solo prosa, 1 archivo; sin fixtures/configs/codigo/goldens. Tarea-objetivo del primer piloto del invoker real bajo el sobre (DECISION-0027).",
+            "type": "documentation",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/llm_turn_wrapper.py",
+                "protocol.config.json"
+            ],
+            "depends_on": [
+                "TASK-0090"
+            ],
+            "file": "Area_comun/tasks/TASK-0092-codex-invoker-implementer-turno-completo.md",
+            "id": "TASK-0092",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0021",
+                "DECISION-0024"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0088",
+                "TASK-0089",
+                "TASK-0091",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/adapters/llm_adapter.py",
+                "runtime/llm_turn_wrapper.py",
+                "runtime/turn_schema.json",
+                "protocol.config.json",
+                "examples/"
+            ],
+            "review": "EJECUTADA POR CLAUDE (Codex agente down; operador autorizo 'ejecuta tu la tarea') y auto-ratificada con verificacion real, 2026-06-09. Integrado el invoker codex implementer: preset codex -> wrapper -> 'codex exec -s workspace-write -c approval_policy=never -c model_reasoning_effort=low --skip-git-repo-check' (sin --output-schema, que erroraba; el wrapper extrae el turn-report del stdout de codex y valida contra turn_schema). build_prompt endurecido para conducir EDICION real + turn-report completo (agent ruteado, changed_paths, commit_message, transitions task_status from=status to=in_review). HALLAZGOS por smoke real: (a) auth de codex caduco -> el operador re-login; (b) -o/stdout dan el turn-report limpio; (c) codex con reasoning xhigh tarda >115s -> model_reasoning_effort=low lo baja a ~44s (dentro del cap 120s). SMOKE REAL DE TURNO COMPLETO LIMPIO (off-pilot, fixture aislado -C/--root): codex EDITO el README + emitio un turn-report schema-valido que el wrapper acepto; agent=Codex (implementer) casa la capability del gate. Goldens verdes corridos por mi: llm_adapter 6, supervised_autonomy 9, real_adapter 4, runtime_loop 8, wrapper 10, intent_flow 11; validador/neutralidad/encoding verdes. SA.4 sigue DE-ARMADO; template no tocado salvo el preset codex (instancia viva). LISTO para re-armar + re-disparar el piloto (con TASK-0091 blocked->ready).",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0069-codex-implementer-invoker-turno-completo.md",
+            "status": "done",
+            "title": "Codex como invoker implementer real (codex exec) + contrato de turno completo (off-pilot, SPEC-0069): preset codex->wrapper->codex exec (-s workspace-write --output-schema turn_schema -c approval_policy=never) + build_prompt endurecido (claim->edit->report con agent/changed_paths/commit_message/transitions) + golden recorded (completo aceptado/incompleto rechazado). NO re-armar SA.4 ni piloto.",
+            "type": "implementation",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/orchestrator.py",
+                "runtime/adapters/llm_adapter.py",
+                "examples/"
+            ],
+            "depends_on": [
+                "TASK-0092"
+            ],
+            "file": "Area_comun/tasks/TASK-0093-codex-claim-acquire-orchestrator-gap8.md",
+            "id": "TASK-0093",
+            "linked_decisions": [
+                "DECISION-0027",
+                "DECISION-0022",
+                "DECISION-0020"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0091",
+                "TASK-0088",
+                "SPEC-0064"
+            ],
+            "relevant_files": [
+                "runtime/orchestrator.py",
+                "runtime/submit_intent.py",
+                "runtime/turn_validate.py",
+                "runtime/adapters/llm_adapter.py",
+                "examples/"
+            ],
+            "review": "READY (encolada por Claude 2026-06-09 via submit_intent bajo enforce+authoritative). OFF-PILOT. Cierra el gap-8 del orquestador hallado en el 2do piloto (codex invoker): el paso claim es NO-OP -> turno rechazado por no-active-claim. Opcion 1 (operador): el orquestador adquiere el claim del owner ruteado (actor_id=owner). SA.4 DE-ARMADO; el re-fire es paso posterior con GO separado.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0070-claim-acquire-orchestrator-gap8.md",
+            "status": "done",
+            "title": "El orquestador adquiere el claim del owner ruteado en el paso claim (orchestrator.py:482, hoy NO-OP) via submit_intent (actor_id=owner) ANTES de run_turn -> cierra el gap-8 no-active-claim del 2do piloto (opcion 1, SPEC-0070). Idempotente con pre-claim (byte-equivalente); conflicto con otro agente rechaza; reconciliacion sin doble-acquire; release/handoff por outcome terminal; golden recorded. OFF-PILOT: NO re-armar SA.4 ni piloto.",
+            "type": "implementation"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "runtime/temp_paths.py",
+                "examples/runtime_protocol_materialize_cases/",
+                "Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md",
+                "Area_comun/handoffs/"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0094-codex-formalizar-hardening-tempfile-acl.md",
+            "id": "TASK-0094",
+            "linked_decisions": [
+                "DECISION-0022",
+                "DECISION-0020",
+                "DECISION-0007",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "relates_to": [
+                "TASK-0093",
+                "SPEC-0070",
+                "MAINTENANCE-CODEX-SANDBOX-20260609"
+            ],
+            "relevant_files": [
+                "runtime/temp_paths.py",
+                "runtime/apply.py",
+                "runtime/protocol_replay.py",
+                "runtime/submit_intent.py",
+                "AGENTS.md"
+            ],
+            "review": "READY+GO (Claude 2026-06-09 via submit_intent). Postura ACL RATIFICADA por el operador = B: revertir AGENTS.md s7 + runbook en Area_comun/protocol/RUNBOOK-windows-sandbox-temp-acl.md (sin DECISION, sin edicion de contrato). Codex commitea su hardening untracked bajo flujo (helper + cableado + golden byte-equivalente + drift0 + cross-platform + handoff), commiteando SOLO sus rutas (sin arrastrar la entrega v2 de TASK-0093). Arranca cuando el operador lo empuje (push-driven).",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0071-tempfile-acl-hardening-writepath.md",
+            "status": "done",
+            "title": "Formalizar bajo flujo el hardening tempfile/ACL del write-path (runtime/temp_paths.py + cableado apply/protocol_replay/submit_intent) que Codex implemento untracked durante la re-entrega de TASK-0093; toca el write-path bajo enforce -> SPEC-0071 + DoD + handoff. Postura regla ACL RATIFICADA = B (runbook en Area_comun/protocol/ + revertir AGENTS.md s7). OFF-PILOT, SA.4 de-armado.",
+            "type": "implementation",
+            "updated_at": "2026-06-09"
+        },
+        {
+            "blocked_by_questions": [],
+            "created_at": "2026-06-10",
+            "deliverables": [
+                "runtime/temp_paths.py",
+                "scripts/clean_workspace_temp.py",
+                "examples/"
+            ],
+            "depends_on": [],
+            "file": "Area_comun/tasks/TASK-0097-codex-temp-dir-cleanup-robusto.md",
+            "id": "TASK-0097",
+            "linked_decisions": [
+                "DECISION-0023",
+                "DECISION-0006",
+                "DECISION-0020"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0094",
+                "TASK-0095",
+                "TASK-0096",
+                "SPEC-0074"
+            ],
+            "relevant_files": [
+                "runtime/temp_paths.py",
+                "scripts/clean_workspace_temp.py",
+                ".gitignore",
+                "examples/"
+            ],
+            "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0074, GO del operador). Cleanup robusto de temp dirs repo-local: parent unico gitignoreado .protocol-tmp/ + rmtree robusto Windows + harness root_temp_dir + golden cero-restos. Write-path byte-equivalente (mismo canonical_hash). Desbloquea el blocker de Codex (proposed sin spec). OFF-PILOT; SA.4 DE-ARMADO; enforce/authoritative intactos.",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0074-temp-dir-cleanup-robusto.md",
+            "status": "done",
+            "title": "Cleanup robusto de temp dirs repo-local: consolidar bajo un parent unico gitignoreado (.protocol-tmp/) + rmtree robusto en Windows + harness con root_temp_dir + golden cero-restos. Arregla la fuga que dejaba decenas de .protocol-materialize-*/.runtime-real-* en la raiz tras correr goldens. OFF-PILOT.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
+        },
+        {
+            "blocked_by_questions": [],
+            "deliverables": [
+                "scripts/generate_human_guide.py",
+                "scripts/generate_human_guide.ps1",
+                "examples/human_guide_cases/",
+                ".github/workflows/validate.yml"
+            ],
+            "depends_on": [
+                "TASK-0037"
+            ],
+            "file": "Area_comun/tasks/TASK-0098-codex-generador-human-guide-html.md",
+            "id": "TASK-0098",
+            "linked_decisions": [
+                "DECISION-0004",
+                "DECISION-0019",
+                "DECISION-0001",
+                "DECISION-0006"
+            ],
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "relates_to": [
+                "TASK-0037",
+                "SPEC-0072"
+            ],
+            "relevant_files": [
+                "scripts/generate_human_guide.py",
+                "Area_comun/protocol/HUMAN_GUIDE.template.md",
+                "examples/human_guide_cases/",
+                ".github/workflows/validate.yml",
+                ".githooks/pre-commit"
+            ],
+            "review": "READY+GO (Claude 2026-06-10, bajo SPEC-0072). Implementador: generador determinista .md->.html + --check (drift + validacion de esquema) + golden + CI/githook, sobre la plantilla de 21 secciones del arquitecto. Aditivo MINOR off-by-default. NO cambiar el esquema ni la neutralidad. Arranca cuando el operador lo empuje (push-driven).",
+            "sdd_required": true,
+            "spec_id": "Area_comun/specs/SPEC-0072-guia-humana-operativa-generador-html.md",
+            "status": "done",
+            "title": "Generador determinista de la guia humana operativa (.md->.html, SPEC-0072): scripts/generate_human_guide.py + .ps1 (stdlib-only, byte-identico, --check drift + validacion de esquema integrada, tier-aware) + golden examples/human_guide_cases/ + cableado CI/githook. HTML autocontenido sin JS/CDN, banner GENERADO-NO EDITAR. OFF-PILOT, neutral.",
+            "type": "implementation",
+            "updated_at": "2026-06-10"
         }
     ]
 }

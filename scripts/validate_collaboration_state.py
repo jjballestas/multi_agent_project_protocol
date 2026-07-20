@@ -926,6 +926,7 @@ def validate_adopted_profiles(
 def validate_tasks(root: Path, index: dict[str, Any] | None, validation: Validation) -> None:
     if not index:
         return
+    indexed_files: set[str] = set()
     for task in as_list(index.get("tasks")):
         if not isinstance(task, dict):
             validation.fail("Task entry must be an object")
@@ -935,6 +936,8 @@ def validate_tasks(root: Path, index: dict[str, Any] | None, validation: Validat
         if not task_file:
             validation.fail(f"Task {task_id} has no file/task_file field")
             continue
+        normalized_task_file = Path(str(task_file)).as_posix()
+        indexed_files.add(normalized_task_file)
         task_path = root / str(task_file)
         if not task_path.exists():
             validation.fail(f"Task {task_id} references missing task file: {task_file}")
@@ -954,6 +957,16 @@ def validate_tasks(root: Path, index: dict[str, Any] | None, validation: Validat
                 deliverable_path = root / str(deliverable)
                 if not deliverable_path.exists():
                     validation.fail(f"Task {task_id} deliverable missing: {deliverable}")
+
+    task_dir = root / "Area_comun" / "tasks"
+    if task_dir.exists():
+        disk_files = {
+            path.relative_to(root).as_posix()
+            for path in task_dir.glob("TASK-*.md")
+            if path.is_file()
+        }
+        for task_file in sorted(disk_files - indexed_files):
+            validation.fail(f"Task file has no hot or archived index row: {task_file}")
 
 
 def validate_sdd(
@@ -1126,8 +1139,8 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
             validation.fail(f"Claim {claim_id} has invalid status '{claim.get('status')}'")
         for scope in as_list(claim.get("scope")):
             if scope:
-                validate_claim_scope_selector(str(scope), validation, claim_id)
                 if claim.get("status") == "active":
+                    validate_claim_scope_selector(str(scope), validation, claim_id)
                     error = mailbox_claim_scope_error(str(scope))
                     if error:
                         validation.fail(f"Claim {claim_id} {error}")

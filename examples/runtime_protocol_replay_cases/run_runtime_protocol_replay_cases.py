@@ -44,7 +44,7 @@ def event(seq: int, event_type: str, payload: dict[str, Any], *, aggregate_id: s
         "aggregate_id": aggregate_id,
         "aggregate_version": seq,
         "actor": "Codex",
-        "actor_auth": {"method": "not_enforced_phaseB1"},
+        "actor_auth": {"method": "not_enforced_phase2"},
         "idempotency_key": f"fixture:{seq}",
         "fencing_token": seq,
         "payload": payload,
@@ -111,6 +111,8 @@ def build_fixture(root: Path, *, event_state_enabled: bool, hot_status: str = "r
     write_json(root / "Area_comun/state/TASK_INDEX.json", docs["task_index"])
     write_json(root / "Area_comun/state/PROJECT_STATE.json", docs["project_state"])
     write_json(root / "Area_comun/state/CLAIMS.json", docs["claims"])
+    write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", {"schema_version": "1.0", "tasks": []})
+    write_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json", {"schema_version": "1.0", "claims": []})
     write(root / "Area_comun/tasks" / f"{TASK_ID}.md", f"---\nid: {TASK_ID}\nstatus: {hot_status}\n---\n")
     write(root / "Area_comun/reports/HUMAN_REPORT_TEMPLATE.md", "# Human report\n")
     for folder in ("open", "answered", "archived"):
@@ -175,6 +177,37 @@ def case_drift_detected_and_absent() -> None:
         assert any(entry["path"] == "Area_comun/state/TASK_INDEX.json" for entry in drift["entries"])
 
 
+def case_pruned_archive_loss_is_drift() -> None:
+    with root_temp_dir(ROOT, ".protocol-replay-archive-drift-") as root:
+        build_fixture(root, event_state_enabled=True, hot_status="ready")
+        events = [
+            event(1, "protocol.genesis", {"state": hot_docs("done")}),
+            event(2, "intent.applied", {"transitions": {"protocol_prune": {"task_ids": [TASK_ID]}}}),
+        ]
+        seed_events(root, events)
+        write_json(root / "Area_comun/state/TASK_INDEX.json", {"schema_version": "1.0", "tasks": []})
+        drift = protocol_state_drift(root)
+        assert any(entry["path"] == "Area_comun/state/TASK_INDEX_ARCHIVE.json" for entry in drift["entries"]), drift
+        write_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json", hot_docs("done")["task_index"])
+        repaired = protocol_state_drift(root)
+        assert not any(entry["path"] == "Area_comun/state/TASK_INDEX_ARCHIVE.json" for entry in repaired["entries"]), repaired
+
+
+def case_validator_cross_checks_task_files_and_rows() -> None:
+    with root_temp_dir(ROOT, ".protocol-replay-task-cross-") as root:
+        build_fixture(root, event_state_enabled=False, hot_status="ready")
+        orphan = root / "Area_comun/tasks/TASK-9998.md"
+        write(orphan, "---\nid: TASK-9998\nstatus: ready\n---\n")
+        result = run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], check=False)
+        assert result.returncode == 1 and "Task file has no hot or archived index row" in result.stdout, result.stdout
+        orphan.unlink()
+        docs = hot_docs("ready")
+        docs["task_index"]["tasks"][0]["file"] = "Area_comun/tasks/TASK-missing.md"
+        write_json(root / "Area_comun/state/TASK_INDEX.json", docs["task_index"])
+        result = run([sys.executable, str(ROOT / "scripts/validate_collaboration_state.py"), "--root", str(root)], check=False)
+        assert result.returncode == 1 and "references missing task file" in result.stdout, result.stdout
+
+
 def validator_stdout(root: Path, *, powershell: bool = False) -> str:
     if powershell:
         shell = shutil.which("pwsh") or shutil.which("powershell")
@@ -237,6 +270,8 @@ def main() -> int:
         case_materialize_is_idempotent_and_canonical,
         case_genesis_round_trip_matches_hot_state,
         case_drift_detected_and_absent,
+        case_pruned_archive_loss_is_drift,
+        case_validator_cross_checks_task_files_and_rows,
         case_validator_gate_off_is_silent_and_gate_on_warns,
         case_replay_has_no_side_effects,
     ]

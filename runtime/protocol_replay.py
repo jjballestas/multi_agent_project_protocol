@@ -54,6 +54,10 @@ SLIM_VIEW_PATHS = {
     "project_state_slim": Path("Area_comun/state/PROJECT_STATE.slim.json"),
     "claims_slim": Path("Area_comun/state/CLAIMS.slim.json"),
 }
+PRUNE_ARCHIVE_PATHS = {
+    "task_index": Path("Area_comun/state/TASK_INDEX_ARCHIVE.json"),
+    "claims": Path("Area_comun/state/CLAIMS_ARCHIVE.json"),
+}
 HOT_TASK_STATUSES = {
     "proposed",
     "ready",
@@ -1108,6 +1112,47 @@ def drift_entries(hot: dict[str, Any], materialized: dict[str, Any]) -> list[dic
     return entries
 
 
+def expected_prune_archives(root: Path, events: list[dict[str, Any]]) -> dict[str, Any]:
+    """Derive every row named by a prune event from the signed pre-prune state."""
+    task_rows: dict[str, dict[str, Any]] = {}
+    claim_rows: dict[str, dict[str, Any]] = {}
+    ordered = sorted(events, key=lambda item: int(item.get("seq") or 0))
+    for index, event in enumerate(ordered):
+        if event.get("applied", True) is False or event.get("type") != "intent.applied":
+            continue
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        transitions = payload.get("transitions") if isinstance(payload.get("transitions"), dict) else {}
+        prune = transitions.get("protocol_prune")
+        if not isinstance(prune, dict):
+            continue
+        before = replay_protocol_state(ordered[:index], root=root)
+        state = before.get("state") if isinstance(before.get("state"), dict) else {}
+        tasks = state.get("task_index", {}).get("tasks", [])
+        claims = state.get("claims", {}).get("claims", [])
+        wanted_tasks = {str(item) for item in prune.get("task_ids") or []}
+        wanted_claims = {str(item) for item in prune.get("claim_ids") or []}
+        task_rows.update({str(row.get("id")): deepcopy(row) for row in tasks if isinstance(row, dict) and str(row.get("id")) in wanted_tasks})
+        claim_rows.update({str(row.get("claim_id")): deepcopy(row) for row in claims if isinstance(row, dict) and str(row.get("claim_id")) in wanted_claims})
+    return {
+        PRUNE_ARCHIVE_PATHS["task_index"].as_posix(): {"tasks": [task_rows[key] for key in sorted(task_rows)]},
+        PRUNE_ARCHIVE_PATHS["claims"].as_posix(): {"claims": [claim_rows[key] for key in sorted(claim_rows)]},
+    }
+
+
+def prune_archive_drift(root: Path, events: list[dict[str, Any]]) -> list[dict[str, str]]:
+    entries: list[dict[str, str]] = []
+    for relative, expected_doc in expected_prune_archives(root, events).items():
+        field = "tasks" if "TASK_INDEX" in relative else "claims"
+        key = "id" if field == "tasks" else "claim_id"
+        actual_doc = read_json(root / relative) if (root / relative).exists() else {}
+        actual_by_id = {str(row.get(key)): row for row in actual_doc.get(field, []) if isinstance(row, dict)}
+        expected_by_id = {str(row.get(key)): row for row in expected_doc[field]}
+        projected = {item_id: actual_by_id.get(item_id) for item_id in sorted(expected_by_id)}
+        if projected != expected_by_id:
+            entries.append({"path": relative, "hot_hash": canonical_hash(projected), "replay_hash": canonical_hash(expected_by_id)})
+    return entries
+
+
 def slim_view_drift(root: Path) -> dict[str, Any]:
     root = root.resolve()
     config = read_protocol_config(root)
@@ -1139,10 +1184,12 @@ def protocol_state_drift(root: Path) -> dict[str, Any]:
     root = root.resolve()
     config = read_protocol_config(root)
     hot_snapshot = build_genesis_snapshot(root)
-    replay_snapshot = current_protocol_snapshot(root)
+    events = all_events(root)
+    replay_snapshot = replay_protocol_state(events, root=root)
     hot = materialize_protocol_state(hot_snapshot)
     materialized = materialize_protocol_state(replay_snapshot)
     entries = drift_entries(hot, materialized)
+    entries.extend(prune_archive_drift(root, events))
     if slim_views_enabled(config):
         entries.extend(slim_view_drift(root).get("entries") or [])
     return {

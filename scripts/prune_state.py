@@ -114,6 +114,16 @@ def archive_removed_entries(
     return archived_count
 
 
+def verify_archived_entries(archive_path: Path, expected_entries: list[Any], ids: list[str], field: str, id_field: str) -> None:
+    """Fail if any row removed from hot state is absent or changed in its archive."""
+    expected = {str(row.get(id_field)): row for row in expected_entries if isinstance(row, dict) and str(row.get(id_field)) in set(ids)}
+    archived = read_json(archive_path)
+    actual = {str(row.get(id_field)): row for row in archived.get(field, []) if isinstance(row, dict)}
+    missing = sorted(item_id for item_id, row in expected.items() if actual.get(item_id) != row)
+    if missing:
+        raise RuntimeError(f"prune archive verification failed for {archive_path.name}: {', '.join(missing)}")
+
+
 def maintenance_config(root: Path) -> dict[str, Any]:
     config = read_json(root / "protocol.config.json")
     maintenance = dict(DEFAULT_CONFIG)
@@ -384,6 +394,8 @@ def apply_prune_direct(root: Path, cfg: dict[str, Any]) -> dict[str, Any]:
     write_json(task_archive_path, task_archive)
     write_json(claims_hot_path, claims_hot)
     write_json(claims_archive_path, claims_archive)
+    verify_archived_entries(task_archive_path, task_hot.get("tasks", []) + task_archive.get("tasks", []), [str(row.get("id")) for row in task_archive.get("tasks", [])], "tasks", "id")
+    verify_archived_entries(claims_archive_path, claims_hot.get("claims", []) + claims_archive.get("claims", []), [str(row.get("claim_id")) for row in claims_archive.get("claims", [])], "claims", "claim_id")
     project_removed, next_actions_condensed = prune_project_state(
         root,
         int(cfg["recent_done_tasks"]),
@@ -544,6 +556,7 @@ def apply_prune_via_submit_intent(
                 "id",
                 actor,
             )
+            verify_archived_entries(state_dir / "TASK_INDEX_ARCHIVE.json", task_hot.get("tasks") or [], task_ids, "tasks", "id")
             archive_removed_entries(
                 state_dir / "CLAIMS_ARCHIVE.json",
                 claims_hot.get("claims") or [],
@@ -552,6 +565,7 @@ def apply_prune_via_submit_intent(
                 "claim_id",
                 actor,
             )
+            verify_archived_entries(state_dir / "CLAIMS_ARCHIVE.json", claims_hot.get("claims") or [], claim_ids, "claims", "claim_id")
 
     after = measure(root)["cold_start"]["total_tokens"]
     drift = protocol_state_drift(root)

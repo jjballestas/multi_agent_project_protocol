@@ -8,11 +8,14 @@ import shutil
 import subprocess
 import tempfile
 import time
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "prune_state.py"
+sys.path.insert(0, str(ROOT))
+from scripts.prune_state import verify_archived_entries
 
 
 def write_json(path: Path, payload: dict) -> None:
@@ -147,11 +150,23 @@ def case_ps1_parity_if_available() -> None:
         assert result.returncode == 1, result.stdout + result.stderr
 
 
+def case_missing_archive_row_fails_loudly() -> None:
+    with tempfile.TemporaryDirectory(prefix="prune-archive-negative-") as temp:
+        archive = Path(temp) / "TASK_INDEX_ARCHIVE.json"
+        write_json(archive, {"tasks": []})
+        try:
+            verify_archived_entries(archive, [task("TASK-9000", "done")], ["TASK-9000"], "tasks", "id")
+        except RuntimeError as exc:
+            assert "TASK-9000" in str(exc)
+        else:
+            raise AssertionError("missing archived row did not fail")
+
+
 def main() -> int:
-    cases = [case_due_and_apply, case_not_due_when_disabled, case_ps1_parity_if_available]
+    cases = [case_due_and_apply, case_not_due_when_disabled, case_ps1_parity_if_available, case_missing_archive_row_fails_loudly]
     for case in cases:
         case()
-    print("OK: prune_state cases passed (3, including cheap disabled no-op apply).")
+    print("OK: prune_state cases passed (4, including archive verification negative).")
     return 0
 
 
