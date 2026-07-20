@@ -6,6 +6,7 @@ param(
     [string]$Root = "",
     [string]$AgentExe = "",
     [string[]]$AgentArgs = @(),
+    [ValidateSet("Auto", "Anthropic", "Codex")][string]$AgentProvider = "Auto",
     [string]$ReasoningEffort = "medium",
     [int]$IntervalSeconds = 300,
     [int]$MaxNoCoordinatorRounds = 15,
@@ -305,10 +306,12 @@ function Get-AgentExecutable {
         }
         throw "agent executable not found (or not a file): $AgentExe"
     }
-    # Fallback discovery targets the OpenAI Codex CLI (the reference agent of the shipped
-    # harness). Instances using another CLI pass -AgentExe (+ -AgentArgs) explicitly.
-    $cmd = Get-Command codex -ErrorAction SilentlyContinue
+    $commandName = if ($AgentProvider -eq "Anthropic") { "claude" } else { "codex" }
+    $cmd = Get-Command $commandName -ErrorAction SilentlyContinue
     if ($cmd -and $cmd.Source -and (Test-Path -LiteralPath $cmd.Source)) {
+        if ($AgentProvider -eq "Anthropic") {
+            return (Resolve-Path -LiteralPath $cmd.Source).Path
+        }
         $content = Get-Content -LiteralPath $cmd.Source -Raw -ErrorAction SilentlyContinue
         $match = [regex]::Match($content, '"([^"]*codex\.exe)"')
         if ($match.Success -and (Test-Path -LiteralPath $match.Groups[1].Value)) {
@@ -343,12 +346,15 @@ function Get-AgentExecutable {
     if ($extensionCandidate) {
         return $extensionCandidate.FullName
     }
-    throw "agent executable not found (no -AgentExe given and codex.exe not discovered)"
+    throw "agent executable not found (provider=$AgentProvider; no usable -AgentExe)"
 }
 
 function Get-AgentArguments {
     if ($AgentArgs.Count -gt 0) {
         return $AgentArgs
+    }
+    if ($AgentProvider -eq "Anthropic") {
+        return @("-p", "--permission-mode", "bypassPermissions", "--output-format", "text")
     }
     # Default arguments for the reference agent (codex CLI): read the prompt from STDIN
     # ('-'). Any replacement CLI must honor the same STDIN contract.

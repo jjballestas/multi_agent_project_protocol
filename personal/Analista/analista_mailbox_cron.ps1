@@ -2,6 +2,7 @@ param(
     [int]$IntervalSeconds = 300,
     [int]$MaxNoArquitectoRounds = 15,
     [string]$AgentExe = "",
+    [ValidateSet("Anthropic", "LegacyCodex")][string]$AgentProvider = "Anthropic",
     [string]$ReasoningEffort = "medium",
     [int]$ExecTimeoutSeconds = 3600
 )
@@ -212,19 +213,26 @@ function Get-AgentExecutable {
     if ($AgentExe -and (Test-Path -LiteralPath $AgentExe)) {
         return (Resolve-Path -LiteralPath $AgentExe).Path
     }
-    $cmd = Get-Command codex -ErrorAction SilentlyContinue
+    $commandName = if ($AgentProvider -eq "Anthropic") { "claude" } else { "codex" }
+    $cmd = Get-Command $commandName -ErrorAction SilentlyContinue
     if ($cmd -and $cmd.Source -and (Test-Path -LiteralPath $cmd.Source)) {
+        if ($AgentProvider -eq "Anthropic") {
+            return (Resolve-Path -LiteralPath $cmd.Source).Path
+        }
         $content = Get-Content -LiteralPath $cmd.Source -Raw -ErrorAction SilentlyContinue
         $match = [regex]::Match($content, '"([^"]*codex\.exe)"')
         if ($match.Success -and (Test-Path -LiteralPath $match.Groups[1].Value)) {
             return $match.Groups[1].Value
         }
     }
-    $whereResults = @(& where.exe codex 2>$null)
+    $whereResults = @(& where.exe $commandName 2>$null)
     foreach ($candidatePath in $whereResults) {
         if ($candidatePath -and (Test-Path -LiteralPath $candidatePath) -and $candidatePath.EndsWith(".exe")) {
             return (Resolve-Path -LiteralPath $candidatePath).Path
         }
+    }
+    if ($AgentProvider -eq "Anthropic") {
+        throw "agent executable (claude) not found; authenticate the Anthropic CLI locally and retry"
     }
     $base = Join-Path $env:LOCALAPPDATA "OpenAI\Codex\bin"
     $candidate = Get-ChildItem -Path $base -Recurse -Filter codex.exe -ErrorAction SilentlyContinue |
@@ -240,7 +248,19 @@ function Get-AgentExecutable {
     if ($extensionCandidate) {
         return $extensionCandidate.FullName
     }
-    throw "agent executable (codex.exe) not found"
+    throw "agent executable (legacy codex.exe) not found"
+}
+
+function Get-AgentArguments {
+    if ($AgentProvider -eq "Anthropic") {
+        # Claude Code reads the rendered turn from STDIN in print mode. Authentication is
+        # local CLI state/environment only; no credential is accepted by this harness.
+        return @("-p", "--permission-mode", "bypassPermissions", "--output-format", "text")
+    }
+    return @(
+        "exec", "-s", "danger-full-access", "-c", "approval_policy=never",
+        "-c", "model_reasoning_effort=$ReasoningEffort", "--skip-git-repo-check", "-"
+    )
 }
 
 function Read-Seen {
@@ -403,16 +423,8 @@ Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-005
 
     try {
         # El prompt se pasa por STDIN (RedirectStandardInput del archivo del prompt), NO como argumento:
-        # Start-Process -ArgumentList parte un argumento multi-palabra en tokens sueltos (PS 5.1) y codex
-        # interpreta la 2da palabra como subcomando. codex exec lee el prompt de stdin con '-'.
-        $execArgs = @(
-            "exec",
-            "-s", "danger-full-access",
-            "-c", "approval_policy=never",
-            "-c", "model_reasoning_effort=$ReasoningEffort",
-            "--skip-git-repo-check",
-            "-"
-        )
+        # Start-Process -ArgumentList parte un argumento multi-palabra en tokens sueltos (PS 5.1).
+        $execArgs = Get-AgentArguments
         $deadlineUtc = [DateTime]::UtcNow.AddSeconds($ExecTimeoutSeconds)
         $process = Start-Process -FilePath $agentPath -ArgumentList $execArgs -WorkingDirectory $Root -WindowStyle Hidden -PassThru -RedirectStandardInput $promptPath -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         Write-ExecLease -Process $process -MessageName $Message.Name -Arguments $execArgs -DeadlineUtc $deadlineUtc
@@ -459,7 +471,7 @@ Write-CronPid
 if (Test-Path -LiteralPath $StopPath) {
     Remove-Item -LiteralPath $StopPath -Force
 }
-Write-Log "Analista mailbox cron started. interval_seconds=$IntervalSeconds max_no_arquitecto_rounds=$MaxNoArquitectoRounds effort=$ReasoningEffort"
+Write-Log "Analista mailbox cron started. provider=$AgentProvider interval_seconds=$IntervalSeconds max_no_arquitecto_rounds=$MaxNoArquitectoRounds effort=$ReasoningEffort"
 
 while ($true) {
     if (Test-Path -LiteralPath $StopPath) {
