@@ -46,6 +46,24 @@ def commit(
     return run(["git", "commit", "-qm", message], root, env=env)
 
 
+def hook_verdict(root: Path, mode: str) -> subprocess.CompletedProcess[str]:
+    env = os.environ.copy()
+    env["HOOK_FULL"] = "1"
+    env["HOOK_SNAPSHOT_MODE"] = mode
+    return run(["sh", ".githooks/pre-commit"], root, env=env)
+
+
+def require_identical_snapshot_verdict(root: Path, label: str) -> None:
+    partial = hook_verdict(root, "partial")
+    total = hook_verdict(root, "total")
+    if (partial.returncode == 0) != (total.returncode == 0):
+        raise AssertionError(
+            f"{label}: partial/total verdict mismatch: "
+            f"partial={partial.returncode}, total={total.returncode}\n"
+            f"partial stderr:\n{partial.stderr}\ntotal stderr:\n{total.stderr}"
+        )
+
+
 def main() -> int:
     source = Path(__file__).resolve().parents[1]
     with tempfile.TemporaryDirectory(prefix="protocol-precommit-") as tmp:
@@ -53,6 +71,7 @@ def main() -> int:
         (root / ".githooks").mkdir(parents=True)
         (root / "scripts").mkdir()
         (root / "runtime").mkdir()
+        (root / ".github" / "workflows").mkdir(parents=True)
         (root / "Area_comun" / "state").mkdir(parents=True)
         shutil.copy2(source / ".githooks" / "pre-commit", root / ".githooks" / "pre-commit")
         (root / "scripts" / "prune_state.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
@@ -61,11 +80,13 @@ def main() -> int:
             "sys.path.insert(0, str(pathlib.Path.cwd()))\n"
             "import runtime.protocol_replay\n"
             "state=json.loads((pathlib.Path('Area_comun/state/TASK_INDEX.json')).read_text())\n"
-            "raise SystemExit(1 if state.get('broken') else 0)\n",
+            "sentinel=pathlib.Path('.github/workflows/validate.yml')\n"
+            "raise SystemExit(1 if state.get('broken') or not sentinel.is_file() else 0)\n",
             encoding="utf-8",
         )
         (root / "scripts" / "generate_human_guide.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
         (root / "runtime" / "protocol_replay.py").write_text("# judgment dependency\n", encoding="utf-8")
+        (root / ".github" / "workflows" / "validate.yml").write_text("name: validate\n", encoding="utf-8")
         state = root / "Area_comun" / "state" / "TASK_INDEX.json"
         state.write_text("{}\n", encoding="utf-8")
         require(run(["git", "init", "-q"], root), 0, "git init")
@@ -87,6 +108,7 @@ def main() -> int:
 
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "restage governed state")
+        require_identical_snapshot_verdict(root, "negative staged state")
         negative = commit(root, "negative staged state", full=True)
         if negative.returncode == 0 or "collaboration state in staged snapshot is invalid" not in negative.stderr:
             raise AssertionError(
@@ -102,6 +124,7 @@ def main() -> int:
         marker = root / "AGENTS.md"
         marker.write_text("staged clean change\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage own governed change")
+        require_identical_snapshot_verdict(root, "unstaged validator isolation")
         require(commit(root, "unstaged validator isolation", full=True), 0, "unstaged validator does not alter verdict")
         require(run(["git", "restore", "scripts/validate_collaboration_state.py"], root), 0, "restore validator")
 
@@ -111,6 +134,7 @@ def main() -> int:
         prune.write_text("raise SystemExit(23)\n", encoding="utf-8")
         marker.write_text("prune isolation\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage prune-isolation change")
+        require_identical_snapshot_verdict(root, "unstaged prune isolation")
         require(
             commit(root, "unstaged prune isolation", full=True),
             0,
@@ -121,6 +145,7 @@ def main() -> int:
         state.write_text('{"peer_unstaged": true}\n', encoding="utf-8")
         marker.write_text("second staged clean change\n", encoding="utf-8")
         require(run(["git", "add", "AGENTS.md"], root), 0, "stage concurrent own change")
+        require_identical_snapshot_verdict(root, "concurrent peer work")
         require(commit(root, "concurrent peer work"), 0, "unstaged peer governed work does not block")
         require(run(["git", "restore", str(state.relative_to(root))], root), 0, "restore peer work")
 
@@ -140,6 +165,7 @@ def main() -> int:
                 hook_at_head = run(["git", "show", f"HEAD:{source_path}"], root)
                 require(hook_at_head, 0, "read executing hook from HEAD")
                 (root / source_path).write_text(hook_at_head.stdout, encoding="utf-8", newline="\n")
+            require_identical_snapshot_verdict(root, f"staged R100 {label} rename")
             require_rejected(commit(root, f"negative R100 {label}", full=True), f"staged R100 {label} rename")
             require(run(["git", "restore", "--staged", source_path, destination_path], root), 0, f"unstage {label} rename")
             require(run(["git", "restore", source_path], root), 0, f"restore {label} source")
@@ -150,10 +176,23 @@ def main() -> int:
         before = set((root / ".git" / "worktrees").iterdir()) if (root / ".git" / "worktrees").exists() else set()
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "stage cleanup failure")
+        require_identical_snapshot_verdict(root, "negative cleanup")
         require_rejected(commit(root, "negative cleanup", full=True), "invalid snapshot cleanup")
         after = set((root / ".git" / "worktrees").iterdir()) if (root / ".git" / "worktrees").exists() else set()
         if before != after:
             raise AssertionError("temporary materialization left .git/worktrees residue")
+        require(run(["git", "restore", "--staged", str(state.relative_to(root))], root), 0, "unstage cleanup state")
+        require(run(["git", "restore", str(state.relative_to(root))], root), 0, "restore cleanup state")
+
+        # Completeness negative outside the original broad data/runtime set.
+        # The real validator reads this runtime-tier sentinel explicitly.
+        sentinel = ".github/workflows/validate.yml"
+        require(run(["git", "rm", "-q", sentinel], root), 0, "stage completeness sentinel deletion")
+        require_identical_snapshot_verdict(root, "completeness sentinel deletion")
+        require_rejected(
+            commit(root, "negative inventory completeness", full=True),
+            "completeness sentinel deletion",
+        )
     print(
         "OK: bounded default <2s; explicit full-mode snapshot, concurrency, "
         "R100, rejection, and cleanup regressions."

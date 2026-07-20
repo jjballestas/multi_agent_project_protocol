@@ -49,14 +49,39 @@ if [ "$full_validation" -eq 0 ]; then
   exit 0
 fi
 
-# Materialize exactly the index before any judgment. Prune and validation must
-# never load unstaged worktree code. Cleanup runs on success, rejection, or signal.
+# Materialize exactly the index bytes needed by the validator before judgment.
+# Inventory derived from scripts/validate_collaboration_state.py and its runtime
+# imports: collaboration data, runtime state, validator/prune scripts, profiles,
+# examples, live config, and the runtime-tier CI sentinel. The total mode is a
+# regression oracle; normal full mode uses the partial inventory.
 snapshot_root=$(mktemp -d "${TMPDIR:-/tmp}/protocol-index.XXXXXX") || exit 1
 cleanup_snapshot() {
   rm -rf -- "$snapshot_root"
 }
 trap cleanup_snapshot EXIT HUP INT TERM
-if ! git checkout-index --all --force --prefix="$snapshot_root/"; then
+snapshot_inventory='Area_comun
+runtime
+scripts
+profiles
+examples
+protocol.config.json
+protocol.config.template.json
+AGENTS.md
+AGENTS.template.md
+CHANGELOG.md
+README.md
+README_INSTANCIACION.md
+.gitattributes
+.githooks/pre-commit
+.github/workflows/validate.yml'
+if [ "${HOOK_SNAPSHOT_MODE:-partial}" = "total" ]; then
+  git ls-files -z | git checkout-index --stdin -z --force --prefix="$snapshot_root/"
+else
+  # Deliberate word splitting: every inventory entry is a pathspec without spaces.
+  git ls-files -z -- $snapshot_inventory | git checkout-index --stdin -z --force --prefix="$snapshot_root/"
+fi
+status=$?
+if [ "$status" -ne 0 ]; then
   echo "could not materialize staged snapshot; commit rejected" >&2
   exit 1
 fi
