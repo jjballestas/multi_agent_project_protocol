@@ -1,0 +1,14 @@
+{
+  "turn_id": "RUN-obstacle-malformed",
+  "task_id": "TASK-0258",
+  "agent": "Codex",
+  "outcome": "blocked",
+  "summary": "Malformed obstacle must fail schema validation.",
+  "changed_paths": [],
+  "obstacles": [{
+    "what": "Missing resolution and invalid recurrence risk.",
+    "root_cause": "Negative contract fixture.",
+    "recurrence_risk": "unknown"
+  }],
+  "commit_message": "test(TASK-0258): reject malformed obstacle"
+}

@@ -1,0 +1,10 @@
+{
+  "turn_id": "RUN-obstacles-empty",
+  "task_id": "TASK-0258",
+  "agent": "Codex",
+  "outcome": "ok",
+  "summary": "Turn completed without obstacles.",
+  "changed_paths": [],
+  "obstacles": [],
+  "commit_message": "test(TASK-0258): cover empty obstacles"
+}

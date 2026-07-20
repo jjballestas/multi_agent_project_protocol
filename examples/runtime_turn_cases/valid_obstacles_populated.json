@@ -1,0 +1,15 @@
+{
+  "turn_id": "RUN-obstacles-populated",
+  "task_id": "TASK-0258",
+  "agent": "Codex",
+  "outcome": "in_review",
+  "summary": "Canonical obstacles contract implemented.",
+  "changed_paths": ["runtime/turn_schema.json"],
+  "obstacles": [{
+    "what": "A contract case initially lacked a canonical obstacle shape.",
+    "root_cause": "The prior schema had no obstacles property.",
+    "resolution": "Added the strict four-field item contract.",
+    "recurrence_risk": "low"
+  }],
+  "commit_message": "feat(TASK-0258): add obstacles contract"
+}

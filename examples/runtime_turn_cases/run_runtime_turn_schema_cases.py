@@ -14,9 +14,12 @@ ROOT = Path(__file__).resolve().parents[2]
 EXPECTED = {
     "valid_in_review.json": True,
     "valid_human_required.json": True,
+    "valid_obstacles_populated.json": True,
+    "valid_obstacles_empty.json": True,
     "invalid_missing_required.json": False,
     "invalid_human_gate.json": False,
     "invalid_empty_agent.json": False,
+    "invalid_obstacle_malformed.json": False,
 }
 
 

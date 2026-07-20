@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://multi-agent-protocol/runtime/turn_schema.json",
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "title": "Turn report",
   "description": "Contrato estricto que un agente devuelve al terminar UN turno. El orquestador lo valida, comprueba que changed_paths esta dentro del claim, aplica las transiciones, corre el gate (validador + scan de neutralidad) y, si verde, hace 1 commit; si rojo, git revert + blocked + escala. Ver SPEC-0026 y DECISION-0009.",
   "type": "object",
@@ -37,6 +37,21 @@
       "type": "array",
       "items": { "type": "string" },
       "description": "Rutas escritas en el turno. INVARIANTE: cada ruta debe estar cubierta por el scope del claim activo del agente (write-allowlist). El orquestador rechaza si no."
+    },
+    "obstacles": {
+      "type": "array",
+      "description": "Obstaculos encontrados durante el turno, su causa, resolucion y riesgo de recurrencia.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["what", "root_cause", "resolution", "recurrence_risk"],
+        "properties": {
+          "what": { "type": "string", "minLength": 1 },
+          "root_cause": { "type": "string", "minLength": 1 },
+          "resolution": { "type": "string", "minLength": 1 },
+          "recurrence_risk": { "type": "string", "enum": ["low", "medium", "high"] }
+        }
+      }
     },
     "tools": {
       "type": "array",

@@ -2,7 +2,7 @@
 task_id: TASK-0258
 title: "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
 type: feature
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal
