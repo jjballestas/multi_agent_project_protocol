@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:

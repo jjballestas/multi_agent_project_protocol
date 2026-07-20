@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0270 (veredicto GO adjunto) y rutear al owner de TASK-0271 la remediacion de la anomalia DECISION-0018: scan_domain_neutrality ROJO en HEAD por scripts/test_anthropic_checker_harness.py (introducido en 6c8a0d8), verificado por biseccion en clones limpios."
