@@ -1,20 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0258",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258",
-                "Area_comun/state/TASK_INDEX.json#TASK-0258",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
-                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
-                "runtime/turn_schema.json",
-                "examples/runtime_turn_cases/",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0258"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
