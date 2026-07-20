@@ -9,6 +9,8 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0273 delivery.
 - Real live no-op evidence: `--check` 0.316s versus `--apply` 0.341s, `mode=noop`,
   `transaction=null`, drift false at seq 5273. Targeted prune, runtime-prune, and
   pre-commit suites pass; protocol validate, encoding, neutrality, and drift are green.
+- Delivery commit `67ac1e8` records the self-contained handoff/response, moves TASK-0273
+  to `in_review`, and releases the implementation and delivery claims through seq 5277.
 
 Previous update: 2026-07-20 Europe/Madrid, during TASK-0272 implementation.
 

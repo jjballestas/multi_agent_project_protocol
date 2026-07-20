@@ -1,15 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0273-final-memory",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-final-memory",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0273"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
