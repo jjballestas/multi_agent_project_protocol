@@ -76,6 +76,21 @@
             "updated_at": "2026-07-20T01:05:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-e6-criterio-exante-20260720",
+            "expires_at": "2026-07-20T02:20:00Z",
+            "notes": "Sella criterio ex-ante de la re-decision E6 (umbral 15s, ambito hibrido estado/ledger) por orden del Operador",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/decisions/DECISION-0103-visibilidad-plan-y-reportes-de-turno.md",
+                "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-e6-criterio-exante-20260720"
+            ],
+            "started_at": "2026-07-20T01:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0269",
+            "updated_at": "2026-07-20T01:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-e6-registro-20260720",
             "expires_at": "2026-07-20T01:14:30Z",
             "notes": "Enmienda E6 sellada (GO A / luego GO C del Operador) + registro TASK-0268/0269 a ready",

@@ -19,7 +19,7 @@ intake:
     - Inventario verificable de las rutas que el validador lee (derivado del codigo, no supuesto) documentado en el handoff; la materializacion parcial las cubre TODAS (si falta una, el juicio mentiria, asi que se anade un negativo que rompa una ruta fuera del inventario inicial para probar la completitud).
     - El modo completo (bajo flag, reparto E6-A) usa la materializacion parcial y su veredicto es IDENTICO al de la materializacion total en toda la suite (positivos, negativos, borrados, rename, concurrencia) -- cero perdida de correccion.
     - Coste medido frio/caliente declarado en el handoff, junto al desglose (materializar vs validar); objetivo de referencia ~15s o menos, sin ser criterio de fallo (la cifra que salga es el entregable).
-    - REPORTE final al Operador con la cifra y la recomendacion argumentada de mantener el reparto E6-A o reactivar completo-local (la unidad OFRECE, el Operador decide).
+    - REPORTE final al Operador con la cifra contrastada contra el CRITERIO EX-ANTE sellado en E6 el 2026-07-20 (caliente <= 15s -> se reactiva el completo-local SOLO para commits que tocan Area_comun/state/** y runtime/state/**, reparto hibrido PRE-AUTORIZADO como ajuste menor; > 15s -> E6-A permanente). La decision se ejecuta contra el umbral sin re-litigarse; la cifra que decide es la CALIENTE verificada por el checker en el re-juicio.
     - Limpieza robusta del temporal intacta; espejo born-operational; neutralidad, validate y encoding verdes.
   verification_cmd:
     - Suite del hook completa en verde con materializacion parcial (veredictos identicos a la total)

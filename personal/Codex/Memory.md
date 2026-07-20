@@ -4,6 +4,13 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
 
 ## Latest Session Note
 
+- TASK-0267 fix-loop 1 implementation commit `b1d6877` closes F-0267-01/F-0267-02:
+  staged route selection expands both R/C rename endpoints, required judgment files
+  must remain in the staged snapshot, prune executes from that snapshot, and the
+  permanent real-commit suite covers internal/outbound R100 for validator, runtime,
+  governed state and hook plus unstaged prune isolation. Hook SHA-256 is now
+  `3378e34b3a83401ba8c845d32e1ccae7800f52f225f68598d554cade1b8f5b20`.
+
 - TASK-0267 implementation commit `b583090` replaces the global-cleanliness
   mutex with exact index materialization, adds real `git commit` regressions for
   staged invalid state, unstaged peer/validator isolation and R100 judgment-code

@@ -281,6 +281,24 @@ por materializacion 51.5-53.3s; suelo del validador ~12.5s):
 Implementacion: TASK-0268 (A) y TASK-0269 (C), secuenciadas tras el veredicto de
 TASK-0267 (comparten .githooks/pre-commit).
 
+**Criterio EX-ANTE de la re-decision post-C (2026-07-20, firma del Operador en orden
+directa: "si sellalo asi"; fijado ANTES de conocer la cifra de C, misma disciplina de
+umbrales pre-declarados que este protocolo exige a sus mediciones):**
+
+- Si el modo completo con materializacion parcial (TASK-0269) mide **<= 15s**: se
+  REACTIVA el completo-local SOLO para commits que tocan estado/ledger
+  (Area_comun/state/**, runtime/state/**), manteniendo el acotado para el resto
+  (mailbox y demas rutas gobernadas de alta frecuencia). Reparto HIBRIDO: la garantia
+  "nunca se commitea estado roto" donde mas importa, sin gravar cada mensaje. Esta
+  reactivacion queda PRE-AUTORIZADA: se ejecuta como ajuste menor del hook contra este
+  criterio, sin nuevo gate del Operador.
+- Si mide **> 15s**: E6-A queda permanente (acotado local; completo en CI y bajo flag
+  voluntario); C se paga igual abaratando el flag y potencialmente el CI.
+- La cifra que decide es la del handoff de TASK-0269 verificada por el checker en su
+  re-juicio (frio y caliente; decide la CALIENTE por ser la del flujo real). Contexto
+  del dato al sellar: v2 actual 45.8-53.3s (maker y checker); suelo del validador
+  ~12.5s. La decision se ejecuta contra el umbral SIN re-litigarse.
+
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
 - Ejecucion por el flujo gobernado NORMAL (cron/sesion + submit_intent), NO por el
