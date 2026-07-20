@@ -5,7 +5,51 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (3) (TASK-0272 remediacion iter1 NO-GO acotado en 417bd01; antes 0273 GO b43c6c6, 0258 GO 305efd1, 0272 iter0 NO-GO 8cb4b45).
+> Ultima actualizacion: 2026-07-20 (4) (TASK-0272 remediacion iter2 OK/CERRABLE en a5e1acd; antes iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1, 0272 iter0 NO-GO 8cb4b45).
+
+## Ultima actualizacion 2026-07-20 (4) - TASK-0272 remediacion iter2 OK/CERRABLE (fix-loop consumido)
+- Re-juicio de la iteracion 2 (implementacion 02cee08, ultima del tope): veredicto
+  **OK/CERRABLE con residuales declarados** en `a5e1acd` (artefacto
+  ANALISTA-TASK-0272-remediacion-iter2-veredicto.md + MSG GO rr). Ancla: clon limpio
+  D:/ccv0272r2 checkout bab3eba; rutas juzgadas invariantes 02cee08..299c3da (el HEAD
+  avanzo 2 veces durante la pasada: 6ebf591 aterrizo instruccion + cola eventos
+  5333-5342, 299c3da reporte al Operador; diff vacio en harness/suite).
+- CERRADO F-0272R1-01 por comportamiento: bateria propia 41 unit (Get-OwnEvidence +
+  Get-ExecOutcomeClass extraidas VERBATIM por regex) + 23 asserts E2E en 11 sandboxes
+  AUTOR UNIFORME (D:/sb0272r2, runner real, fake agent por contador, shims de git en
+  PATH para forzar exit 7/9 selectivo). Commit concurrente sin evento propio ->
+  unconfirmed -> RETRY_EXHAUSTED signal=watchdog (E01); evento propio ed25519 en ventana
+  -> confirmed 1x (E02); ajeno no confirma (E03); auth vacia/case/old-seq fail-closed
+  (V02-V09/V15-V16); not_enforced_phase2 -> capa nunca-confirma (V06). Token
+  terminal-only: cola de texto lo invalida sin consumir (E09a/T04); vacio/truncado ->
+  retry senalado. Snapshots rojos -> agente NI ARRANCA (E05/E06 con shim); reset fallido
+  / HEAD movido -> defer sin restauracion parcial (E07/E01); pre-sucios BYTE-IGUAL +
+  porcelain identico + rename revertido (E08).
+- ESCAPE nuevo declarado NO bloqueante F-0272R2-01 (WARNING-real acotado): evento propio
+  de PURO claim o exception.recorded en ventana + token ausente + exit 0 -> confirmed ->
+  burn (E04 repro determinista; la evidencia PISA la narracion transitoria). No bloquea:
+  subconjunto de la clase residual decidida {token ausente + exit 0}; exige doble
+  incumplimiento del propio exec; 0 ocurrencias en campo (las 3 reales eran PRE-claim,
+  cerradas); deja traza firmada atribuible. Hardening barato recomendado: evidencia solo
+  applied:true con intent_type en {task_status,task_upsert,decision} o payload.commit.
+  Teoricos: V10 applied:false (stale fencing, solo via runtime/apply.py, no en flujo
+  mailbox) y V18 keyid AJENO pasan el chequeo de PRESENCIA (no criptografico; la propia
+  suite del maker usa sig fixture); F-03 ls-files pre-exec sin exit-gate (borraria
+  untracked pre-existentes si fallara, alimenta 0275); F-04 git apply sin exit (log
+  APPLY_FAIL). Residuales: R-B token gana a exit!=0 (T15); R-C stderr ruidoso pierde el
+  token sistematicamente (degrada, no quema); TOCTOU ms reset; R-F peer-writes en
+  ventana = TASK-0275; drift CLI = TASK-0274.
+- Gates: clon bab3eba validate/encoding/domain EXIT 0 + drift False/5337; vivo EXIT 0 +
+  drift False/5344; config #4 byte-identica 2E35F26E...354; suites maker
+  retry/anthropic/lease EXIT 0. El vivo arranco ROJO (cola de eventos de Codex 5333-5337
+  sin commitear, snapshot atras) y verdeo cuando el Arquitecto la aterrizo en 6ebf591:
+  rojo transitorio de entrega in-flight, documentado en el veredicto, sin FYI extra.
+- Fix-loop 2/2 CONSUMIDO sin fallo nuevo bloqueante -> sin escalada al Operador;
+  next_recommended = Arquitecto ratifica done + registra follow-ups baratos junto a
+  0274/0275. Hook aviso PRUNE DUE 93.75 (poda = checkpoint del Arquitecto, no mia).
+- Patron reutilizable consolidado: shim git.cmd en PATH con findstr selectivo por
+  subcomando (exit 7/9) para probar caminos de fallo del harness por comportamiento;
+  probes en scratchpad probe_0272_iter2_unit.py / probe_0272_iter2_e2e.py.
 
 ## Ultima actualizacion 2026-07-20 (3) - TASK-0272 remediacion iter1 NO-GO acotado
 - Re-juicio de la remediacion 2c3b17b (frontera token>exit>evidencia>regex). Veredicto
