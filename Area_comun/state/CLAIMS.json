@@ -40,6 +40,23 @@
             "updated_at": "2026-07-19T23:50:54Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery",
+            "expires_at": "2026-07-20T03:17:55Z",
+            "notes": "Deliver TASK-0267 fix-loop 1, respond to ACTION, and release all claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0267-codex-to-arquitecto-2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0267-remediacion-F01-F02-iter1.md",
+                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0267-remediacion-F01-F02-iter1.md"
+            ],
+            "started_at": "2026-07-20T01:17:55Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-20T01:17:55Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1",
             "expires_at": "2026-07-20T03:10:02Z",
             "notes": "Remediate F-0267-01 rename origins and F-0267-02 prune from staged snapshot.",
@@ -52,9 +69,25 @@
                 ".github/workflows/validate.yml"
             ],
             "started_at": "2026-07-20T01:10:02Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0267",
             "updated_at": "2026-07-20T01:10:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0267-F01-F02-status",
+            "expires_at": "2026-07-20T03:19:58Z",
+            "notes": "Authorize TASK-0267 in_progress to in_review delivery transition.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0267-F01-F02-status",
+                "Area_comun/state/TASK_INDEX.json#TASK-0267",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0267",
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md"
+            ],
+            "started_at": "2026-07-20T01:19:58Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-20T01:19:58Z"
         },
         {
             "claim_id": "CLAIM-arq-0270-0271-registro-20260720",

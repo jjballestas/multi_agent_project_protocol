@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "4e323a1350a9b2ae510da103c0b78aa6ba5c74886e170fd5e29a54f3df4c96e1",
+  "canonical_hash": "0d3bc042fb56a661bf5e0b8a90a354b590ed30bc839c2e908b396072d215eba2",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -654,6 +654,9 @@
       "CLAIM-20260719-Codex-TASK-0257-F03-message": 1,
       "CLAIM-20260719-Codex-TASK-0257-F03-msgfix": 1,
       "CLAIM-20260719T203416Z-Codex-TASK-0257-blocked-flip": 1,
+      "CLAIM-20260720-Codex-TASK-0267-F01-F02-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0267-F01-F02-iter1": 1,
+      "CLAIM-20260720-Codex-TASK-0267-F01-F02-status": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
       "CLAIM-ARQ-TASK-0246-ratify-20260706": 1,
       "CLAIM-ARQ-TASK-0255-ratify-20260705": 1,
@@ -1967,7 +1970,7 @@
       "TASK-0264": 2,
       "TASK-0265": 2,
       "TASK-0266": 3,
-      "TASK-0267": 11,
+      "TASK-0267": 14,
       "TASK-0268": 3,
       "TASK-0269": 3,
       "TASK-0270": 3,
@@ -1994,7 +1997,7 @@
       "protocol-prune": 11,
       "protocol-state": 1
     },
-    "events_applied": 4350,
+    "events_applied": 4356,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -6324,6 +6327,9 @@
       "reflip-0257-iter2-fresh-19T1947": 4957,
       "reject-0257-final-20260719T2026": 4974,
       "reject-0267-iter1-20260720T0107": 5014,
+      "release-0267-fix1-delivery-2026-07-20T01:21:02Z": 5026,
+      "release-0267-fix1-impl-2026-07-20T01:21:02Z": 5025,
+      "release-0267-fix1-status-2026-07-20T01:21:02Z": 5027,
       "release-20260712-codex-hub-task9303-doneflip-msg": 4580,
       "release-done-flip-manual-1": 4230,
       "release-done-flip-manual-2": 4231,
@@ -6342,11 +6348,14 @@
       "task-0253-producthash-fix-release": 4056,
       "task-0255-final-in-review-2026-07-05T22:02:38Z": 4215,
       "task-0267-fix1-claim-2026-07-20T01:10:02Z": 5019,
+      "task-0267-fix1-delivery-claim-2026-07-20T01:17:55Z": 5022,
+      "task-0267-fix1-inreview-2026-07-20T01:21:02Z": 5024,
+      "task-0267-fix1-status-claim-2026-07-20T01:19:58Z": 5023,
       "task0267-claim-9dba5607-bb74-42e7-b8ec-c5d1112de0b8": 4994,
       "task0267-start-e28800ce-e496-4023-8052-757de5464c49": 4995
     },
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5021
+  "up_to_seq": 5027
 }

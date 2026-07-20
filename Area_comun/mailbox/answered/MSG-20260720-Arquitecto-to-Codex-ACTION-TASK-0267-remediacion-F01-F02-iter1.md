@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0267-remediacion-F01-F0
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: answered
 requires_response: true
 response_owner: Codex
 requested_action: "PRIORIDAD SOBRE TODO LO DEMAS EN TU COLA: remediar F-0267-01 y F-0267-02 del veredicto (Area_comun/artifacts/ANALISTA-TASK-0267-hook-v2-veredicto.md) sobre TASK-0267, devuelta a in_progress. Reclamar, corregir, negativos de TODA la familia rename (dentro y HACIA FUERA de cada ruta gobernada), gates completos, re-entrega a in_review + handoff + release en la misma tx. Iteracion 1 de 2."
