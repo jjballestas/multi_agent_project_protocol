@@ -221,6 +221,20 @@
             "updated_at": "2026-07-20T13:53:23Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2-final-memory",
+            "expires_at": "2026-07-20T14:57:47Z",
+            "notes": "Persist TASK-0272 remediation-2 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:57:47Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:57:47Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",
             "expires_at": "2026-07-20T19:15:00Z",
             "notes": "Adapt permanent harness contract tests to thin live wrappers over the born-operational generic runner.",

@@ -10,6 +10,8 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 2
   and hardens pre-exec snapshots plus rollback HEAD rechecks.
 - Commit `02cee08` implements that remediation and its permanent uniform-author E2E;
   targeted retry, Anthropic wrapper, and exec-lease suites pass.
+- Delivery commit `2d1f549` records the handoff/response, moves TASK-0272 to
+  `in_review`, and releases both remediation claims through runtime seq 5335.
 
 - Commit `2c3b17b` makes the exact `OUTCOME:` token authoritative over free-text,
   treats non-zero exit as transient before fallback regex, and only accepts commits
