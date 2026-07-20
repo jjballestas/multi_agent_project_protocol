@@ -144,6 +144,26 @@
             "updated_at": "2026-07-20T00:14:30Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg-rejuicio67-20260720",
+            "expires_at": "2026-07-20T02:27:30Z",
+            "notes": "Re-juicio 0267 iter1 al Analista + reintento de higiene (3 consumidos) en ventana limpia",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-rejuicio67-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-re-juicio-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-hook-v2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-hook-v2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-REPORTE-evaluacion-coste-hook.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-REPORTE-evaluacion-coste-hook.md"
+            ],
+            "started_at": "2026-07-20T01:27:30Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T01:27:30Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reflip0257-b-20260719",
             "expires_at": "2026-07-19T20:47:00Z",
             "notes": "Reintento del flip perdido con idempotency_key fresco (el intent identico fue skipeado por idempotencia tras el clobber del evento original)",

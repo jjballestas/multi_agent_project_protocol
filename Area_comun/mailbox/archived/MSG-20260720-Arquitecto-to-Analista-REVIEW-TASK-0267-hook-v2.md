@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-hook-v2
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0267 (hook v2 por materializacion del indice) en CLON LIMPIO de HEAD (7c98fd4), contra su acceptance ampliado post-O1. Veredicto GO / NO-GO por mailbox. SIN PRODUCTO EN ALCANCE (solo hub). El COSTE medido (51.5-53.3s) NO es criterio de NO-GO unilateral: esa decision la reservo el Operador; reporta tu propia medicion y pondera solo la CORRECCION."

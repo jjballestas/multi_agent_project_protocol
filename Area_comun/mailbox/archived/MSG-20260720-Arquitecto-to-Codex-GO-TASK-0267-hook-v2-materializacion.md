@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacio
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0267 segun su intake AMPLIADO (Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md, version post-O1): hook v2 por materializacion del indice + transferencia de 0257 (rename R100 + arnes de negativos via git commit real) + paso de CI existencia+SHA-256 del hook con el hash del v2 final + limite C1 declarado. Confirmar ETA al aceptar; entregar a in_review + handoff con obstacles + release en la misma tx."
