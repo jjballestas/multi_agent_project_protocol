@@ -258,18 +258,6 @@
         },
         {
             "created_at": "2026-07-19",
-            "file": "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
-            "id": "TASK-0258",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)",
-            "type": "feature"
-        },
-        {
-            "created_at": "2026-07-19",
             "file": "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
             "id": "TASK-0259",
             "owner": "Codex",
@@ -366,42 +354,6 @@
         },
         {
             "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md",
-            "id": "TASK-0269",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
-            "id": "TASK-0272",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
-            "id": "TASK-0273",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
             "file": "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
             "id": "TASK-0274",
             "owner": "Codex",
@@ -447,18 +399,6 @@
             "status": "in_review",
             "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva",
             "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
-            "id": "TASK-0278",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo",
-            "type": "fix"
         },
         {
             "created_at": "2026-07-20",

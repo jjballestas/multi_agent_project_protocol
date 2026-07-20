@@ -67,12 +67,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0258",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
-        },
-        {
             "id": "TASK-0259",
             "owner": "Codex",
             "status": "ready",
@@ -121,24 +115,6 @@
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
         },
         {
-            "id": "TASK-0269",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
-        },
-        {
-            "id": "TASK-0272",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
-        },
-        {
-            "id": "TASK-0273",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HIGIENE] Deshacer el deadlock poda-vs-claim: el gate de poda AVISA en local (no bloquea), la poda corre COORDINADA en el checkpoint del Arquitecto, y el CI la exige antes de integrar"
-        },
-        {
             "id": "TASK-0274",
             "owner": "Codex",
             "status": "ready",
@@ -161,12 +137,6 @@
             "owner": "Codex",
             "status": "in_review",
             "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva"
-        },
-        {
-            "id": "TASK-0278",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo"
         },
         {
             "id": "TASK-0279",

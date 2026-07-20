@@ -1,7 +1,7 @@
 {
     "schema_version": "1.0",
     "updated_at": "2026-06-07",
-    "updated_by": "Codex",
+    "updated_by": "Arquitecto",
     "archive_policy": "Released claims moved from CLAIMS.json by TASK-0024; no data deleted.",
     "claims": [
         {
@@ -30549,6 +30549,861 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260719",
             "updated_at": "2026-07-19T17:08:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-104138-prune-arquitecto",
+            "expires_at": "2026-07-20",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json"
+            ],
+            "started_at": "2026-07-20T10:41:38Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-20T10:41:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0258-done",
+            "expires_at": "2026-07-20T14:23:36Z",
+            "notes": "Operator-ratified maker done flip after independent review approval.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md"
+            ],
+            "started_at": "2026-07-20T12:23:36Z",
+            "status": "released",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T12:23:36Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0269-done",
+            "expires_at": "2026-07-20T21:20:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of checker GO and E6 threshold outcome.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0269-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0269",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0269",
+                "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md"
+            ],
+            "started_at": "2026-07-20T13:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0269",
+            "updated_at": "2026-07-20T13:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272",
+            "expires_at": "2026-07-20T18:45:00Z",
+            "notes": "Eliminate silent seen-burn with confirmed execution, bounded transient retry, exhaustion signal, tests and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T10:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T10:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-delivery",
+            "expires_at": "2026-07-20T19:20:00Z",
+            "notes": "TASK-0272 self-contained handoff, response, in-review transition and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0272-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272.md"
+            ],
+            "started_at": "2026-07-20T11:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T11:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-done-iter2b",
+            "expires_at": "2026-07-20T22:38:02Z",
+            "notes": "Implementer done flip after ratified checker GO iteration 2.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-done-iter2b",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md"
+            ],
+            "started_at": "2026-07-20T14:38:02Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:38:02Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+            "expires_at": "2026-07-20T16:41:43Z",
+            "notes": "Record done-flip response and golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T14:41:43Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:41:43Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-msgfix",
+            "expires_at": "2026-07-20T12:22:00Z",
+            "notes": "Add validator-required question to TASK-0272 compact response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-msgfix",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272.md"
+            ],
+            "started_at": "2026-07-20T11:22:00Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T11:22:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-1",
+            "expires_at": "2026-07-20T16:25:57Z",
+            "notes": "Remediate TASK-0272 findings with exact outcome token, own evidence attribution, index-safe rollback, and permanent negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:25:57Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T12:25:57Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-1-delivery",
+            "expires_at": "2026-07-20T14:35:15Z",
+            "notes": "Deliver TASK-0272 remediation iteration 1 for independent re-judgment.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0272-codex-to-arquitecto-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1.md"
+            ],
+            "started_at": "2026-07-20T12:35:15Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T12:35:15Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-1-final-memory",
+            "expires_at": "2026-07-20T13:39:40Z",
+            "notes": "Persist TASK-0272 remediation delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-1-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:39:40Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T12:39:40Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2",
+            "expires_at": "2026-07-20T21:44:03Z",
+            "notes": "TASK-0272 remediation iteration 2: signed-ledger evidence attribution, terminal token, snapshot hardening, uniform-author tests.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:44:03Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:44:03Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2-delivery",
+            "expires_at": "2026-07-20T21:53:23Z",
+            "notes": "TASK-0272 remediation-2 handoff, response, in-review transition, and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0272-codex-to-arquitecto-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:53:23Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:53:23Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-remediation-2-final-memory",
+            "expires_at": "2026-07-20T14:57:47Z",
+            "notes": "Persist TASK-0272 remediation-2 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-remediation-2-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T13:57:47Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:57:47Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-tests",
+            "expires_at": "2026-07-20T19:15:00Z",
+            "notes": "Adapt permanent harness contract tests to thin live wrappers over the born-operational generic runner.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-tests",
+                "scripts/test_anthropic_checker_harness.py",
+                "scripts/test_exec_lease_harness.py"
+            ],
+            "started_at": "2026-07-20T11:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T11:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273",
+            "expires_at": "2026-07-20T19:50:00Z",
+            "notes": "Remove prune-vs-claim deadlock with local warning, coordinated checkpoint, CI enforcement, cheap no-op apply, tests and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                ".githooks/pre-commit",
+                "scripts/prune_state.py",
+                ".github/workflows/validate.yml",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "scripts/new_instance.py",
+                "scripts/instance_assets/claude-skills/mailbox-hygiene/SKILL.md",
+                "scripts/test_precommit_hook.py",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/runtime_prune_cases/run_runtime_prune_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T11:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T11:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-delivery",
+            "expires_at": "2026-07-20T20:05:00Z",
+            "notes": "TASK-0273 self-contained handoff, response, in-review transition and claim release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0273-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T12:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-done-iter2",
+            "expires_at": "2026-07-20T21:39:19Z",
+            "notes": "Implementer done flip after ratified checker GO.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-done-iter2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
+            ],
+            "started_at": "2026-07-20T13:39:19Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T13:39:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-done-md-repair",
+            "expires_at": "2026-07-20T21:42:29Z",
+            "notes": "Repair task markdown status after interrupted materialization following authoritative done event.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-done-md-repair",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md"
+            ],
+            "started_at": "2026-07-20T13:42:29Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T13:42:29Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273-final-memory",
+            "expires_at": "2026-07-20T12:40:00Z",
+            "notes": "Persist TASK-0273 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T12:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T12:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0277",
+            "expires_at": "2026-07-20T23:05:00Z",
+            "notes": "Repair TASK-0267 archive traceability and close validator, drift and prune archive guarantees with permanent negatives.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/TASK_INDEX_ARCHIVE.json",
+                "Area_comun/state/CLAIMS_ARCHIVE.json",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "scripts/validate_collaboration_state.py",
+                "scripts/prune_state.py",
+                "runtime/protocol_replay.py",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/runtime_prune_cases/run_runtime_prune_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T15:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0277-delivery",
+            "expires_at": "2026-07-20T23:45:00Z",
+            "notes": "TASK-0277 self-contained handoff, response, in-review transition and claim releases.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0277-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T15:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0277-remediation-1",
+            "expires_at": "2026-07-21T00:42:00Z",
+            "notes": "TASK-0277 remediation iteration 1: repair governed prune apply/archive replay parity and declare archived-claim selector exception.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "scripts/prune_state.py",
+                "scripts/validate_collaboration_state.py",
+                "runtime/protocol_replay.py",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py"
+            ],
+            "started_at": "2026-07-20T16:42:00Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T16:42:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0277-remediation-1-delivery",
+            "expires_at": "2026-07-21T00:58:00Z",
+            "notes": "TASK-0277 remediation iteration 1 delivery and review handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277-remediation-1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277-remediacion-iter1.md"
+            ],
+            "started_at": "2026-07-20T16:58:00Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T16:58:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278",
+            "expires_at": "2026-07-20T17:13:45Z",
+            "notes": "Implement TASK-0278 outcome parsing field defect and permanent regression coverage.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "personal/Codex/codex_mailbox_cron.ps1",
+                "personal/Analista/analista_mailbox_cron.ps1",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py"
+            ],
+            "started_at": "2026-07-20T15:13:45Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:13:45Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-delivery",
+            "expires_at": "2026-07-20T16:20:50Z",
+            "notes": "Deliver TASK-0278 to in_review with handoff and response.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0278-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0278.md"
+            ],
+            "started_at": "2026-07-20T15:20:50Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:20:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-done",
+            "expires_at": "2026-07-21T00:35:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of checker GO without conditions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md"
+            ],
+            "started_at": "2026-07-20T16:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T16:35:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-final-memory",
+            "expires_at": "2026-07-20T15:53:58Z",
+            "notes": "Persist TASK-0278 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:23:58Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:23:58Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-memory",
+            "expires_at": "2026-07-20T15:47:56Z",
+            "notes": "Persist TASK-0278 implementation commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T15:17:56Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:17:56Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-alta0280-20260720",
+            "expires_at": "2026-07-20T17:06:31Z",
+            "notes": "Alta de TASK-0280 (el rollback no puede revertir el ledger) + respuesta a Codex",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-RESP-recuperacion-archivo-y-TASK-0280.md",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-alta0280-20260720"
+            ],
+            "started_at": "2026-07-20T16:36:31Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T16:36:31Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-campo0278-20260720",
+            "expires_at": "2026-07-20T15:42:10Z",
+            "notes": "Alta de TASK-0278 (defecto de campo del token) y TASK-0279 (gate de trailers al pre-commit) + liberacion de claim huerfana de Codex + avance de baseline",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                "Area_comun/protocol/COMMIT_TRAILERS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-campo0278-20260720"
+            ],
+            "started_at": "2026-07-20T15:02:10Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:02:10Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
+            "expires_at": "2026-07-20T11:45:00Z",
+            "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-checkpoint-hyg-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-causa-raiz-seenburn-archive.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-causa-raiz-seenburn-archive.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-realimentacion-confirmada.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-realimentacion-confirmada.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-seenburn-confirmado-regla-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-seenburn-confirmado-regla-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0258-F01.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-deadlock-poda-reparto.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-deadlock-poda-reparto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos.md"
+            ],
+            "started_at": "2026-07-20T10:45:00Z",
+            "status": "released",
+            "task_id": "OPS-CHECKPOINT-HYGIENE-20260720",
+            "updated_at": "2026-07-20T10:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-fix0278type-20260720",
+            "expires_at": "2026-07-20T15:28:08Z",
+            "notes": "Correccion del intake.type de 0278 (bug no esta en el rango, va fix)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-fix0278type-20260720"
+            ],
+            "started_at": "2026-07-20T15:08:08Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:08:08Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-go0277-20260720",
+            "expires_at": "2026-07-20T15:34:21Z",
+            "notes": "GO del Operador a 0277 + registro de sus tres decisiones + higiene de 4 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones.md",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0277-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-ventana-N6-adelantable.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-ventana-N6-adelantable.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md"
+            ],
+            "started_at": "2026-07-20T14:54:21Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T14:54:21Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-1355-20260720",
+            "expires_at": "2026-07-20T12:55:00Z",
+            "notes": "Checkpoint de higiene: 8 consumidos del ciclo 0258/0272/0273",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-1355-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-rejuicio-F01.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0258-rejuicio-F01.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-rejuicio-F01-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0258-rejuicio-F01-GO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-seenburn.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-seenburn.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-seenburn-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-seenburn-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0272-seenburn.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0272-seenburn.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda.md"
+            ],
+            "started_at": "2026-07-20T11:55:00Z",
+            "status": "released",
+            "task_id": "OPS-CHECKPOINT-HYGIENE-20260720",
+            "updated_at": "2026-07-20T11:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0258-20260720",
+            "expires_at": "2026-07-20T12:46:51Z",
+            "notes": "Ratificacion 0258 tras GO del re-juicio de lectura F-0258-01",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0258-20260720"
+            ],
+            "started_at": "2026-07-20T11:46:51Z",
+            "status": "released",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T11:46:51Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0272-20260720",
+            "expires_at": "2026-07-20T15:15:07Z",
+            "notes": "Ratificacion de 0272 sobre GO iter2 + alta de TASK-0276/0277 + higiene de 2 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-DECISION-cierre-0272-residuales.md",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter2-GO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter2-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter2.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0272-20260720"
+            ],
+            "started_at": "2026-07-20T14:30:07Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:30:07Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0273-20260720",
+            "expires_at": "2026-07-20T13:16:00Z",
+            "notes": "Ratificacion 0273 (GO: 9/9 ataques contenidos, no-op 0.29s vs 87s, CI rojo accionable)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0273-20260720"
+            ],
+            "started_at": "2026-07-20T12:16:00Z",
+            "status": "released",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T12:16:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0278-remedia0277-20260720",
+            "expires_at": "2026-07-20T16:58:09Z",
+            "notes": "Ratificacion de 0278 (GO sin condiciones) + devolucion de 0277 a remediacion por poda bloqueada + higiene de 4",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0277-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-DECISION-0277-condicion-y-poda.md",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0278-remedia0277-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-trazabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0278-token-epilogo.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0278-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-trazabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0278-token-epilogo.md"
+            ],
+            "started_at": "2026-07-20T16:18:09Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T16:18:09Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0257-iter2-20260719",
+            "expires_at": "2026-07-19T20:31:10Z",
+            "notes": "Rechazo formal iter2 (NO-GO re-juicio: F-0257-03 diff-filter excluye D) + higiene de 3 consumidos del ciclo iter1",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0257-iter2-20260719",
+                "Area_comun/mailbox/open/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Analista-to-Arquitecto-REVIEW-TASK-0257-gate-propio-E2-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-remediacion-F01-F02.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Codex-to-Arquitecto-HANDOFF-TASK-0257-remediacion-F01-F02.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REVIEW-TASK-0257-re-juicio-iter1.md"
+            ],
+            "started_at": "2026-07-19T19:31:10Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-19T19:31:10Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0258-20260720",
+            "expires_at": "2026-07-20T07:45:00Z",
+            "notes": "Rechazo formal 0258 iter1 (F-0258-01 docs-only; A-0258-02 ya resuelta con clon limpio verde en feb43c0)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0258-20260720"
+            ],
+            "started_at": "2026-07-20T06:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T06:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0267-iter1-20260720",
+            "expires_at": "2026-07-20T02:07:00Z",
+            "notes": "Rechazo formal iter1 de 0267 (NO-GO: F-0267-01 R100 hacia fuera + F-0267-02 prune desde worktree) + higiene de 3 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0267",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0267",
+                "Area_comun/tasks/TASK-0267-d0103-h2-hook-snapshot-checkout-temporal.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0267-iter1-20260720",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Operador-REPORTE-iter2-y-hallazgo-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Operador-REPORTE-iter2-y-hallazgo-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0267.md",
+                "Area_comun/mailbox/open/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-grafo-memoria-clon-y-revision.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Operador-to-Arquitecto-DIRECTIVA-grafo-memoria-clon-y-revision.md"
+            ],
+            "started_at": "2026-07-20T01:07:00Z",
+            "status": "released",
+            "task_id": "TASK-0267",
+            "updated_at": "2026-07-20T01:07:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reject0272-20260720",
+            "expires_at": "2026-07-20T12:50:00Z",
+            "notes": "Rechazo formal 0272 iter1: 5 hallazgos del checker, causa raiz regex-sobre-texto-libre; decision de frontera = contrato por token",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reject0272-20260720"
+            ],
+            "started_at": "2026-07-20T11:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T11:50:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-reporte0103-20260720",
+            "expires_at": "2026-07-20T14:47:31Z",
+            "notes": "Reporte de estado de la tanda 0103 al Operador",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reporte0103-20260720"
+            ],
+            "started_at": "2026-07-20T14:17:31Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:17:31Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0272iter2-20260720",
+            "expires_at": "2026-07-20T14:19:14Z",
+            "notes": "Ruteo iteracion 2 de 0272 + registro de TASK-0274/0275 + higiene de 3 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-RESP-residual-cuarentena-y-gate-drift.md",
+                "Area_comun/tasks/TASK-0274-gate-drift-cli-real.md",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0274",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0272iter2-20260720",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0274",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter1-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter1-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273.md"
+            ],
+            "started_at": "2026-07-20T13:34:14Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T13:34:14Z"
         }
     ]
 }
