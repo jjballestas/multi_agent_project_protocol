@@ -128,6 +128,21 @@
             "updated_at": "2026-07-20T14:38:02Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+            "expires_at": "2026-07-20T16:41:43Z",
+            "notes": "Record done-flip response and golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T14:41:43Z",
+            "status": "active",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:41:43Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0272-msgfix",
             "expires_at": "2026-07-20T12:22:00Z",
             "notes": "Add validator-required question to TASK-0272 compact response.",
@@ -356,6 +371,26 @@
             "updated_at": "2026-07-20T12:10:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-campo0278-20260720",
+            "expires_at": "2026-07-20T15:42:10Z",
+            "notes": "Alta de TASK-0278 (defecto de campo del token) y TASK-0279 (gate de trailers al pre-commit) + liberacion de claim huerfana de Codex + avance de baseline",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                "Area_comun/protocol/COMMIT_TRAILERS.json",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-campo0278-20260720"
+            ],
+            "started_at": "2026-07-20T15:02:10Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:02:10Z"
+        },
+        {
             "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
             "expires_at": "2026-07-20T11:45:00Z",
             "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",
@@ -384,6 +419,30 @@
             "status": "released",
             "task_id": "OPS-CHECKPOINT-HYGIENE-20260720",
             "updated_at": "2026-07-20T10:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-go0277-20260720",
+            "expires_at": "2026-07-20T15:34:21Z",
+            "notes": "GO del Operador a 0277 + registro de sus tres decisiones + higiene de 4 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones.md",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-go0277-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-ventana-N6-adelantable.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-RESP-ventana-N6-adelantable.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md"
+            ],
+            "started_at": "2026-07-20T14:54:21Z",
+            "status": "released",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T14:54:21Z"
         },
         {
             "claim_id": "CLAIM-arq-hyg-1355-20260720",

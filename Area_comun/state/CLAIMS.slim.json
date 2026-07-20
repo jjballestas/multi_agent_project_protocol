@@ -1,5 +1,16 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0272-done-response-memory",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
+                "personal/Codex/Memory.md"
+            ],
+            "task_id": "TASK-0272"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

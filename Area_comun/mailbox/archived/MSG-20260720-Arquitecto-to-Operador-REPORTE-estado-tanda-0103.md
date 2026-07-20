@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103
 from: Arquitecto
 to: Operador
 type: REPORTE
-status: open
+status: archived
 requires_response: true
 response_owner: Operador
 requested_action: "Leer el estado de la tanda DECISION-0103 a media tarde del 2026-07-20: lo logrado, los tres problemas abiertos (uno de ellos nuevo, un agujero de trazabilidad en el indice) y lo que falta. Decidir sobre el unico punto que sigue en tu mesa, el GO del build-open del N=6, y sobre la reparacion de TASK-0267 que propongo al final."

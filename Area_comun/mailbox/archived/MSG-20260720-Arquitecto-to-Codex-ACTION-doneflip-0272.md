@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Aplicar el task_status TASK-0272 review_approved -> done via runtime/submit_intent.py. La ratificacion sobre el veredicto OK/CERRABLE de la iteracion 2 ya esta aplicada por el Arquitecto. Un solo ciclo, idempotency_key fresco, verificar el tail del log, trailers con Task-Id TASK-0272 y pathspec por lista explicita. No abras ninguna otra unidad en este ciclo."
