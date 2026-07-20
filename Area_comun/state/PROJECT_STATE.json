@@ -147,7 +147,7 @@
         {
             "id": "TASK-0271",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo"
         },
         {

@@ -51,3 +51,20 @@ artifacts: 6c8a0d8; personal/Analista/analista_mailbox_cron.ps1; scripts/harness
 gates: real Claude CLI exit 0; contract PASS; exec-lease 9/9; parser PASS; protocol gates PASS
 next_recommended: Arquitecto reviews and, only after ratification, operates the supervised live cutover.
 risks: Real sandbox proves provider invocation and envelope output; first live mailbox review remains an operator-supervised post-cutover check.
+
+## F-0271-02 remediation
+
+Implementation commit `6ab2d4e93d94352504ac6ac144413019a92ea23d` removes
+the live-instance identities from `scripts/test_anthropic_checker_harness.py`.
+The instance harness route is now overrideable through
+`CHECKER_INSTANCE_HARNESS`, and the default path/provider fixture is assembled
+without embedding instance agent identities in the generic script. TASK-0270
+was also moved from `review_approved` to `done` under the ratified verdict.
+
+task_id: TASK-0271
+status: in_review
+executive_summary: F-0271-02 remediated; the generic checker contract test is domain-neutral and TASK-0270 is done.
+artifacts: 6ab2d4e; scripts/test_anthropic_checker_harness.py; this handoff
+gates: validate PASS; encoding PASS; neutrality PASS; prune PASS; contract PASS; drift false at seq 5113 before memory/delivery events
+next_recommended: Arquitecto re-judges F-0271-02 and ratifies TASK-0271 if the finding is closed.
+risks: No live cron cutover was performed; that operation remains Arquitecto-owned.

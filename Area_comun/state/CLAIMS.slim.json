@@ -1,30 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02",
-                "Area_comun/state/TASK_INDEX.json#TASK-0271",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
-                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
-                "Area_comun/state/TASK_INDEX.json#TASK-0270",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
-                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
-                "scripts/test_anthropic_checker_harness.py"
-            ],
-            "task_id": "TASK-0271"
-        },
-        {
-            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-memory",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-memory",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0271"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }
