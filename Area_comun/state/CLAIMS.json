@@ -508,6 +508,20 @@
             "updated_at": "2026-07-20T11:50:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-reporte0103-20260720",
+            "expires_at": "2026-07-20T14:47:31Z",
+            "notes": "Reporte de estado de la tanda 0103 al Operador",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-reporte0103-20260720"
+            ],
+            "started_at": "2026-07-20T14:17:31Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:17:31Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0272iter2-20260720",
             "expires_at": "2026-07-20T14:19:14Z",
             "notes": "Ruteo iteracion 2 de 0272 + registro de TASK-0274/0275 + higiene de 3 consumidos",
