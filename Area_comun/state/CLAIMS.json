@@ -40,6 +40,25 @@
             "updated_at": "2026-07-19T23:50:54Z"
         },
         {
+            "claim_id": "CLAIM-arq-0270-0271-registro-20260720",
+            "expires_at": "2026-07-20T02:05:00Z",
+            "notes": "Registro TASK-0270 (endurecimientos ledger a+b, oferta aceptada) + TASK-0271 (migracion checker, DECISION-0101) a ready; GO del Operador 2026-07-20",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-0270-0271-registro-20260720",
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md"
+            ],
+            "started_at": "2026-07-20T01:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0270",
+            "updated_at": "2026-07-20T01:05:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-e6-registro-20260720",
             "expires_at": "2026-07-20T01:14:30Z",
             "notes": "Enmienda E6 sellada (GO A / luego GO C del Operador) + registro TASK-0268/0269 a ready",
