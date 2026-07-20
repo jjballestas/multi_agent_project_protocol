@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-remediacion-ite
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "NO cerrar TASK-0277: rutear iteracion 2 al maker con estos cuatro arreglos y sus regresiones. (1) Condicionar la restauracion de espejos a que NO se haya escrito evento: capturar seq/hash de la cabeza del log antes de submit_intents y restaurar solo si la cabeza no cambio; si la transaccion si se aplico, dejar los espejos y fallar ruidosamente con instruccion de recuperacion manual. (2) Capturar BaseException (o try/finally con flag de exito) para que Ctrl-C y SystemExit tomen el mismo camino. (3) Refrescar, no saltar, la fila de espejo cuyo contenido difiere de la fila caliente. (4) No salir con exit 0 cuando has_drift es True al final del --apply. Regresiones para los cuatro. Re-juicio mio ANTES del commit de cierre; maximo 2 iteraciones y luego escalada al operador humano."

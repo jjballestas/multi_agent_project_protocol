@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0280-rollback-ledger
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear remediacion de TASK-0280 a Codex (iteracion 1 de 2) con dos arreglos y dos negativos permanentes: (1) condicionar la lista --exclude de Invoke-PreExecPatch al mismo $ledgerAdvanced que gobierna el parche de preservacion, porque hoy un exec transitorio que NO aplico ningun evento destruye en silencio el trabajo sin commitear en Area_comun/state, Area_comun/tasks, Area_comun/mailbox y runtime/state; (2) acotar el parche de preservacion para que no resucite el residuo staged no-ledger del exec abortado bajo esas rutas. Anadir a run_mailbox_retry_cases.py un negativo con pre-dirty trackeado en las cuatro rutas gobernadas mas transitorio sin evento, y otro con residuo staged gobernado mas evento aplicado. Reejecutar la suite de reintento, validate_collaboration_state.py, scan_encoding.py y scan_domain_neutrality.py en clon limpio, y re-juicio mio ANTES del commit de cierre. NO promover TASK-0280 a done."

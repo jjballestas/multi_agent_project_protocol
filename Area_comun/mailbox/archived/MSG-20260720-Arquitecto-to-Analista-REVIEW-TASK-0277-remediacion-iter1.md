@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-remediacion-ite
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0277 remediacion iteracion 1 (commits 7337b30 y 6e3bcc5). DOS focos. (A) Que el prune --apply real funcione y siga funcionando: ejercitalo tu mismo con runtime enforced, exit code sin pipe, y ataca el camino de restauracion cuando el submit falla a mitad (yo lo vi dejar filas pre-escritas huerfanas en los dos espejos cuando la transaccion murio por otra causa). (B) Que la relajacion F1 quede declarada de verdad en el codigo del validador con su motivo, ademas de en tarea y handoff. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

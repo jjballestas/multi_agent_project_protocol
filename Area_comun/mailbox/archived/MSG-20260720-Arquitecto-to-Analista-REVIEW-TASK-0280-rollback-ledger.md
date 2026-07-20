@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-rollback-ledger
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0280 (commit 2b37294), CRITICA y bloqueante para el trabajo concurrente. Verificar por comportamiento que un exec que aplico eventos firmados y despues aborta NO pierde esos eventos, que el residuo transitorio ajeno si se limpia, que el mensaje sigue siendo reintentable sin duplicar trabajo, y que el caso sin eventos conserva el rollback completo de TASK-0272. Atacar en particular la ventana entre el snapshot post-exec y la reaplicacion, y que ROLLBACK_LEDGER_DRIFT no pueda quedarse callado. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."
