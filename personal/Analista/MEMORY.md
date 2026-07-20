@@ -2802,3 +2802,33 @@
   en el mismo turno y citarla verbatim, sin convertir. El Operador ya senalo este desfase antes.
   Residuales R1 (fila extra no nombrada por eventos) y R2 (git-author unico en arbol compartido)
   aceptados por el Arquitecto como no bloqueantes; R1 va al carril de endurecimiento con 0274-0276 y 0279.
+
+- TASK-0277 REMEDIACION iter1 (2026-07-20 19:43, HEAD `5e581c4`): **CHANGE-REQUIRED / NO-GO**, veredicto
+  commiteado y pusheado en `c4ec3e4`. Ancla: fix `7337b30`, entrega `6e3bcc5`. Clean clone `D:/ccv0277`.
+  Artefacto `Area_comun/artifacts/Analista-TASK-0277-remediacion-iter1-verdict.md`; MSG rr
+  `MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0277-remediacion-iter1-verdict.md`.
+  PASA: `--apply` real bajo enforce exit 0 + drift False + `--check` 0; fallo ANTES del evento restaura
+  los dos espejos byte a byte; F1 declarada EN CODIGO (`validate_collaboration_state.py:1142-1144`) y
+  probada por comportamiento (active falla, released/blocked pasan; runtime y validador solo tratan
+  `active` como viva); sin regresion (207 task ids / 1426 claim ids nombrados por eventos, cero ausentes,
+  interseccion caliente/archivo vacia, drift False seq 5434, replay 8/8).
+  FALLA: **F-0277R1-01** el rollback de espejos se dispara con CUALQUIER excepcion de `submit_intents`,
+  incluida una POSTERIOR a que la transaccion se aplico -> borra filas que el evento firmado exige,
+  drift True, y re-ejecutar `--apply` sale **exit 0** sin repararlo (verde sobre arbol con drift).
+  **F-0277R1-02** `except Exception` no cubre `BaseException` (Ctrl-C/SystemExit/kill) -> filas
+  pre-escritas sin evento; visibles solo mientras la gemela siga en caliente (`Duplicate task/claim
+  across hot/archive`); una huerfana sin gemela es INVISIBLE (validate 0, drift False, probado en el
+  repo real con `CLAIM-FABRICATED-NO-EVENT`). **F-0277R1-03** `archive_removed_entries` deduplica por id
+  y nunca refresca, `verify_archived_entries` compara contenido -> fila obsoleta + mutacion gobernada
+  posterior = poda bloqueada PERMANENTEMENTE (`prune archive verification failed`).
+  TECNICA REUSABLE (la que caza esta clase de defecto): **inyeccion de fallos monkeypatcheando
+  `scripts.prune_state.submit_intents` en proceso** sobre el fixture del propio maker (build_fixture +
+  regenesis + enforce), con cuatro modos: `pre` (lanza antes del evento), `notapplied` (devuelve
+  applied=False), `post` (llama al real, deja que aplique, y LUEGO lanza), `kbint` (KeyboardInterrupt).
+  El modo `post` es el que revela rollbacks destructivos; probar causalidad reponiendo los bytes exactos
+  y viendo volver drift a False. Scripts en el scratchpad de la sesion (`fi_prune*.py`).
+  RESIDUALES: R1 el camino de rollback no tiene test (por eso llego a entrega); R2 el fixture enforced
+  corre sin `event_auth` ni firmas de agente; R3 la exencion F1 tambien cubre `blocked`; R4 transversal:
+  el autor git contradice al actor firmado (`7337b30`/`6e3bcc5` git-author Analista, eventos 5411-5412
+  Codex y 5413-5415 Arquitecto; `5b76643` al reves) -> levantado por DECISION-0018.
+  Bucle declarado: iteracion 2 de maximo 2, re-juicio mio ANTES del commit de cierre, luego escalada.
