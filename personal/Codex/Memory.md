@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 intake.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0269 implementation.
+
+- TASK-0269 implementation commit `07fad8a` replaces full index checkout in
+  explicit full-hook mode with a validator-derived partial inventory and retains
+  `HOOK_SNAPSHOT_MODE=total` as the regression oracle. The hook contract suite
+  compares partial/total verdicts across positive, negative, concurrency, rename,
+  deletion, cleanup, and an out-of-initial-set CI-sentinel completeness negative.
+  The suite passed; live partial full validation passed but measured 108.199s,
+  so the sealed `>15s` branch points to permanent E6-A pending checker verification.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 intake.
 
 - TASK-0258 implementation commit `9be450d` bumps `runtime/turn_schema.json`
   from 1.2.0 to 1.3.0 with optional canonical `obstacles[]`; populated, empty,
