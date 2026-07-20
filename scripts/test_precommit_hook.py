@@ -96,6 +96,17 @@ def main() -> int:
         require(run(["git", "add", "."], root), 0, "initial add")
         require(run(["git", "commit", "--no-verify", "-qm", "fixture"], root), 0, "fixture commit")
 
+        prune = root / "scripts" / "prune_state.py"
+        prune.write_text("raise SystemExit(1)\n", encoding="utf-8")
+        require(run(["git", "add", "scripts/prune_state.py"], root), 0, "stage overdue prune fixture")
+        warning_commit = commit(root, "overdue prune warns locally")
+        require(warning_commit, 0, "overdue prune warning does not reject local commit")
+        if "WARNING: protocol state pruning is due" not in warning_commit.stderr:
+            raise AssertionError("overdue prune did not emit the actionable local warning")
+        prune.write_text("raise SystemExit(0)\n", encoding="utf-8")
+        require(run(["git", "add", "scripts/prune_state.py"], root), 0, "stage restored prune fixture")
+        require(commit(root, "restore prune fixture"), 0, "restore prune fixture commit")
+
         state.write_text('{"broken": true}\n', encoding="utf-8")
         require(run(["git", "add", str(state.relative_to(root))], root), 0, "stage governed state")
         started = time.perf_counter()

@@ -109,6 +109,33 @@
             "updated_at": "2026-07-20T11:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0273",
+            "expires_at": "2026-07-20T19:50:00Z",
+            "notes": "Remove prune-vs-claim deadlock with local warning, coordinated checkpoint, CI enforcement, cheap no-op apply, tests and born-operational mirror.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0273",
+                "Area_comun/state/TASK_INDEX.json#TASK-0273",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0273",
+                "Area_comun/tasks/TASK-0273-deadlock-poda-claim-reparto.md",
+                ".githooks/pre-commit",
+                "scripts/prune_state.py",
+                ".github/workflows/validate.yml",
+                "Area_comun/protocol/TASK_PROTOCOL.md",
+                "scripts/new_instance.py",
+                "scripts/instance_assets/claude-skills/mailbox-hygiene/SKILL.md",
+                "scripts/test_precommit_hook.py",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/runtime_prune_cases/run_runtime_prune_cases.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T11:50:00Z",
+            "status": "active",
+            "task_id": "TASK-0273",
+            "updated_at": "2026-07-20T11:50:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-checkpoint-hyg-20260720",
             "expires_at": "2026-07-20T11:45:00Z",
             "notes": "Checkpoint de higiene coordinado (DIRECTIVA 0273): 8 consumidos a archived para bajar cold_start_tokens",

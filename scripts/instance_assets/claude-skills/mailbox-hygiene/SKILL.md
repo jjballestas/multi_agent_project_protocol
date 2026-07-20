@@ -178,6 +178,16 @@ dir-claiman el mailbox, **no** archivan (no tienen orchestrator), **no** arregla
 - Commit con **stage explicito por path** (nunca `git add -A`); push si verde.
 - Actualiza memoria (DECISION-0026). Los mensajes de FYI de cierre van **despues** del archivado, no antes.
 
+### Poda coordinada en el checkpoint
+
+La poda es mantenimiento y el hook local solo avisa; CI exige `prune_state.py --check` verde antes
+de integrar. El Arquitecto ejecuta `--apply` unicamente en este checkpoint, despues de verificar en
+pasos separados: arbol gobernado limpio, cero claims activos de peers y ningun exec-lock. Si alguna
+precondicion falla, difiere la poda. La barrera explicita a peers es excepcional, no el flujo normal.
+Si `--check` esta verde, no hace falta aplicar; `--apply` tiene camino no-op barato y no abre claim ni
+transaccion. Si esta vencida, aplica con identidad Arquitecto, gatea validate/encoding/neutrality/drift,
+commitea rutas explicitas y solo entonces reanuda peers. Claim-as-lock y drift siguen intactos.
+
 ## Checklist de una linea
 **Antes de CADA reporte (mismo gate que el commit, no un paso aparte): pasada de higiene (clasifico open/ +
 archivo consumidos, o declaro los pendientes) + `prune_state.py --check` (si PRUNE DUE, aplico en el mismo

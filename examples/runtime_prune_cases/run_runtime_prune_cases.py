@@ -313,8 +313,8 @@ def case_enforced_prune_uses_submit_intent_and_stays_drift_free() -> None:
         assert len(next_actions) == 3, next_actions
         assert next_actions[0].startswith(SENTINEL), next_actions
         assert "3 next_actions" in next_actions[0], next_actions
-        assert load_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json")["tasks"] == []
-        assert load_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json")["claims"] == []
+        assert len(load_json(root / "Area_comun/state/TASK_INDEX_ARCHIVE.json")["tasks"]) == 4
+        assert len(load_json(root / "Area_comun/state/CLAIMS_ARCHIVE.json")["claims"]) == 5
 
 
 def main() -> int:

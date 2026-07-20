@@ -131,6 +131,14 @@ def assess(root: Path) -> Assessment:
     released_ratio = float(claim_weight["released_percent"])
     done_count = int(task_weight["done"])
     released_count = int(claim_weight["released"])
+    project = read_json(root / "Area_comun/state/PROJECT_STATE.json")
+    next_actions = project.get("next_actions") if isinstance(project.get("next_actions"), list) else []
+    regular_next_actions = [
+        entry
+        for entry in next_actions
+        if isinstance(entry, str) and NEXT_ACTIONS_SENTINEL_MARK not in entry
+    ]
+    keep_next_actions = int(cfg.get("recent_next_actions", 0))
     reasons: list[str] = []
     if cfg.get("enabled") is False:
         return Assessment(False, ["maintenance disabled"], cold_tokens)
@@ -140,6 +148,8 @@ def assess(root: Path) -> Assessment:
         reasons.append(f"done_ratio {done_ratio} >= {cfg['done_ratio_hard']}")
     if released_count > int(cfg["recent_released_claims"]) and released_ratio >= float(cfg["released_ratio_hard"]):
         reasons.append(f"released_ratio {released_ratio} >= {cfg['released_ratio_hard']}")
+    if keep_next_actions > 0 and len(regular_next_actions) > keep_next_actions:
+        reasons.append(f"next_actions {len(regular_next_actions)} > {keep_next_actions}")
     return Assessment(bool(reasons), reasons, cold_tokens)
 
 
@@ -317,6 +327,22 @@ def apply_prune(
     timestamp: str | None = None,
     commit: str | None = None,
 ) -> dict[str, Any]:
+    assessment = assess(root)
+    if not assessment.due:
+        return {
+            "mode": "noop",
+            "no_op": True,
+            "reasons": assessment.reasons,
+            "tasks_archived": 0,
+            "claims_archived": 0,
+            "project_state_done_removed": 0,
+            "next_actions_condensed": 0,
+            "mailbox_archived": 0,
+            "before_tokens": assessment.before_tokens,
+            "after_tokens": assessment.before_tokens,
+            "recovered_tokens": 0,
+            "transaction": None,
+        }
     cfg = maintenance_config(root)
     config = read_json(root / "protocol.config.json")
     if protocol_state_enforcement_enabled(config):

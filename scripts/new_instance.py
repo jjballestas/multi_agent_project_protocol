@@ -116,7 +116,7 @@ jobs:
         shell: bash
         run: |
           test -f .githooks/pre-commit
-          echo "4dae776c797d4db68a2b1a217cbe1686dbe7d96f07e693ef69a6ac2baf1c3bc5  .githooks/pre-commit" | sha256sum --check --strict
+          echo "739d9eadf7c8c2b692cc8a87a4938729ba1ad9ff6063b14f2846ba01a210704e  .githooks/pre-commit" | sha256sum --check --strict
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -141,7 +141,12 @@ jobs:
         run: ./scripts/scan_encoding.ps1 -Root .
 
       - name: Check systematic state pruning
-        run: python scripts/prune_state.py --root . --check
+        shell: bash
+        run: |
+          if ! python scripts/prune_state.py --root . --check; then
+            echo "ERROR: protocol state pruning is overdue. Run the coordinated Architect checkpoint and commit its governed result before integration." >&2
+            exit 1
+          fi
 
       - name: Scan domain neutrality
         run: python scripts/scan_domain_neutrality.py --root .

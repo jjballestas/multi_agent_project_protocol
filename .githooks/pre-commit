@@ -29,8 +29,9 @@ if [ "$full_validation" -eq 0 ]; then
   python scripts/prune_state.py --check
   status=$?
   if [ "$status" -ne 0 ]; then
-    echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
-    exit "$status"
+    echo "WARNING: protocol state pruning is due; local commit continues." >&2
+    echo "At the next coordinated Architect checkpoint, run: python scripts/prune_state.py --root . --apply" >&2
+    echo "CI remains the hard enforcement boundary for overdue pruning." >&2
   fi
 
   for path in $staged_paths; do
@@ -94,8 +95,9 @@ printf 'gitdir: %s\n' "$git_dir" > "$snapshot_root/.git"
 )
 status=$?
 if [ "$status" -ne 0 ]; then
-  echo "poda due; run: python scripts/prune_state.py --apply && git add Area_comun/state Area_comun/mailbox" >&2
-  exit "$status"
+  echo "WARNING: protocol state pruning is due; local commit continues." >&2
+  echo "At the next coordinated Architect checkpoint, run: python scripts/prune_state.py --root . --apply" >&2
+  echo "CI remains the hard enforcement boundary for overdue pruning." >&2
 fi
 
 if [ "$full_validation" -eq 1 ]; then

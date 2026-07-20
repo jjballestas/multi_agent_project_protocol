@@ -7,6 +7,7 @@ import json
 import shutil
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 
@@ -118,7 +119,17 @@ def case_not_due_when_disabled() -> None:
     with tempfile.TemporaryDirectory(prefix="prune-disabled-") as temp:
         fixture = Path(temp)
         build_fixture(fixture, disabled=True)
+        check_started = time.perf_counter()
         assert run(fixture, "--check").returncode == 0
+        check_elapsed = time.perf_counter() - check_started
+        before = load(fixture / "Area_comun/state/TASK_INDEX.json")
+        apply_started = time.perf_counter()
+        applied = run(fixture, "--apply")
+        apply_elapsed = time.perf_counter() - apply_started
+        assert applied.returncode == 0, applied.stdout + applied.stderr
+        assert json.loads(applied.stdout)["no_op"] is True
+        assert load(fixture / "Area_comun/state/TASK_INDEX.json") == before
+        assert apply_elapsed < max(check_elapsed * 3, 1.0), (check_elapsed, apply_elapsed)
 
 
 def case_ps1_parity_if_available() -> None:
@@ -140,7 +151,7 @@ def main() -> int:
     cases = [case_due_and_apply, case_not_due_when_disabled, case_ps1_parity_if_available]
     for case in cases:
         case()
-    print("OK: prune_state cases passed (3).")
+    print("OK: prune_state cases passed (3, including cheap disabled no-op apply).")
     return 0
 
 

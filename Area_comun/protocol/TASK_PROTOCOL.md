@@ -307,6 +307,29 @@ that route is not covered by another owner's active claim.
 If an agent discovers unclaimed work in a shared route, it must not overwrite it. It opens one
 mailbox message with one concrete ownership question, then waits or works outside that route.
 
+## Coordinated Pruning Checkpoint
+
+Systematic state pruning is maintenance, not collaboration-state validity. A local pre-commit
+hook may warn that pruning is due, but it must not reject a commit for that reason; validation,
+drift, claim-scope, and other judgment failures remain blocking. CI runs
+`python scripts/prune_state.py --root . --check` as the hard integration boundary.
+
+Only the Architect runs `--apply`, inside the existing hygiene checkpoint:
+
+1. Verify the governed worktree is clean and there are zero active peer claims. Check these as
+   separate read-only steps before the apply.
+2. If either precondition fails, defer pruning. An explicit peer barrier is exceptional and is
+   used only when the normal idle checkpoint cannot be obtained.
+3. Run `--check`. If pruning is not due, stop; `--apply` also has a cheap read-only no-op path and
+   must not open a claim or submit a transaction.
+4. If due, run `--apply` through the configured Architect identity. In runtime-authoritative mode
+   the script acquires and releases its maintenance claim through `submit_intent`; never edit hot
+   state manually.
+5. Verify validation, encoding, domain neutrality, and drift, then commit the exact governed paths
+   before peers resume. CI must be green before integration.
+
+The checkpoint does not relax claim-as-lock or permit pruning through live peer scopes.
+
 ## Blocking Work
 
 If a task cannot proceed:
