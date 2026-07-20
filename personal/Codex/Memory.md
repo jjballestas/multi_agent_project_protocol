@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0269 implementation.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0258 F-0258-01 remediation.
+
+- TASK-0258 docs-only remediation aligns `Area_comun/protocol/SCHEMA_VERSIONING.md`
+  with `runtime/turn_schema.json` version 1.3.0 and records why optional
+  `obstacles[]` is a MINOR-compatible addition. The eight schema golden cases and
+  all four protocol gates passed; the implementation/schema remained unchanged.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0269 implementation.
 
 - TASK-0269 implementation commit `07fad8a` replaces full index checkout in
   explicit full-hook mode with a validator-derived partial inventory and retains

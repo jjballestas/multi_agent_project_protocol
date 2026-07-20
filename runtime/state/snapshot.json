@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "3ad3abf98d6c32e40edc8e426aa9fabce3e43586c458938f4e294642a85edd17",
+  "canonical_hash": "ba271663818a2d96e7de4a1c0aaaf8113455302aaac864e23eacf33b729869fe",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -748,6 +748,7 @@
       "CLAIM-arq-hyg-0730-20260720": 1,
       "CLAIM-arq-hyg-0757-20260720": 1,
       "CLAIM-arq-hyg-0847-20260720": 1,
+      "CLAIM-arq-hyg-1058-20260720": 1,
       "CLAIM-arq-hyg-coldstart-20260720": 1,
       "CLAIM-arq-hyg-rejuicio67-20260720": 1,
       "CLAIM-arq-hygiene-o1-20260720": 1,
@@ -1852,7 +1853,7 @@
       "OPS-MAILBOX-HYGIENE-20260718j": 1,
       "OPS-MAILBOX-HYGIENE-20260718k": 1,
       "OPS-MAILBOX-HYGIENE-20260719": 2,
-      "OPS-MAILBOX-HYGIENE-20260720": 12,
+      "OPS-MAILBOX-HYGIENE-20260720": 13,
       "OPS-MAILBOX-REJFINAL-20260719": 1,
       "OPS-MAILBOX-REJUICIO-20260719": 1,
       "OPS-MAILBOX-REV0257-20260719": 1,
@@ -2054,7 +2055,7 @@
       "TASK-0255": 27,
       "TASK-0256": 2,
       "TASK-0257": 41,
-      "TASK-0258": 8,
+      "TASK-0258": 9,
       "TASK-0259": 2,
       "TASK-0260": 2,
       "TASK-0261": 2,
@@ -2091,7 +2092,7 @@
       "protocol-prune": 14,
       "protocol-state": 1
     },
-    "events_applied": 4550,
+    "events_applied": 4553,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4069,6 +4070,7 @@
       "intent:Arquitecto:claim:016bb05af5f836b7dca3208e9364f7c2307ccbb6ace308e69afc55ac9b7d558b": 5110,
       "intent:Arquitecto:claim:018d1c8a2019d546b80b07d3efec95e2e8073359cf4de4b516166558a75674fe": 4606,
       "intent:Arquitecto:claim:02725fe21b52ce0efedebd7a756a8721cb8762cf952eae0e059470e33d37ce35": 3232,
+      "intent:Arquitecto:claim:027487387c48113afd960e56f2738210e22dd2f717a4f7d04d978e9146343349": 5222,
       "intent:Arquitecto:claim:02b7345355818da8bf1c284cdb25fd6bd4a7bf88e5a6edbb39cf53feef30d2f1": 2826,
       "intent:Arquitecto:claim:03240ada90dde7852aa3e4447a3c427a4d2bd6ff5a8f532ef387e77a0e5a020f": 4718,
       "intent:Arquitecto:claim:03c943d64a65a7df2466b242306d18c91e68acb94ed6809163fd7411cedf984e": 4688,
@@ -4337,6 +4339,7 @@
       "intent:Arquitecto:claim:73dc91db3cfa39bd58319b66f179d0e1fdb5d85c5146a0860de84b40b8a1fd43": 4836,
       "intent:Arquitecto:claim:741301b0dffab694dfce1ce083c2595094af1b3d677450de17659082d88754de": 3419,
       "intent:Arquitecto:claim:749f6845a85ee2de37fe26bca7c423b1d903801e71a980143105b2bd2c057494": 3819,
+      "intent:Arquitecto:claim:751ea3d660557847957a382e072f4582cd02b88ed58d619df554e21a8fa6aadc": 5224,
       "intent:Arquitecto:claim:75ef2078392c3e713bffdc86aa673749797ec875631b46130de79871bd05534f": 4716,
       "intent:Arquitecto:claim:76aa4ac4c18b42d93c001136dae320dda6dc5c47df4c27dec3554571e71ae835": 4783,
       "intent:Arquitecto:claim:77309bb94d68456c67c81d94987d981301629e4f8a8e9a1d4c5ee6b379806c4a": 3164,
@@ -6629,6 +6632,7 @@
       "task-0267-fix1-delivery-claim-2026-07-20T01:17:55Z": 5022,
       "task-0267-fix1-inreview-2026-07-20T01:21:02Z": 5024,
       "task-0267-fix1-status-claim-2026-07-20T01:19:58Z": 5023,
+      "task0258-f01-claim-20260720-0900": 5223,
       "task0267-claim-9dba5607-bb74-42e7-b8ec-c5d1112de0b8": 4994,
       "task0267-start-e28800ce-e496-4023-8052-757de5464c49": 4995,
       "task0268-h1-claim-20260720-0430": 5133,
@@ -6645,5 +6649,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5221
+  "up_to_seq": 5224
 }

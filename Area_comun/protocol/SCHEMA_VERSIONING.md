@@ -6,7 +6,7 @@ The runtime turn schema is the contract for a single agent turn report. Its expl
 `schema_version` field is the SemVer version of that contract, independent from the repository
 release version.
 
-Current version: `1.2.0`.
+Current version: `1.3.0`.
 
 ## Consumers
 
@@ -67,3 +67,10 @@ action-gate validation. Existing turn reports remain valid when these fields are
 semantic checks are activated only when a report declares tools/actions or when a configured
 `tool_policy` must evaluate a declared tool. This is a `MINOR` schema change, so the runtime turn
 schema is now `1.2.0`.
+
+## DECISION-0103 C3 Justification
+
+TASK-0258 adds the optional top-level `obstacles` array. Each item records `what`,
+`root_cause`, `resolution` and `recurrence_risk`; reports that omit `obstacles` remain valid.
+Because this additive field accepts new payloads without invalidating existing producers, the
+change is `MINOR` and the runtime turn schema is now `1.3.0`.
