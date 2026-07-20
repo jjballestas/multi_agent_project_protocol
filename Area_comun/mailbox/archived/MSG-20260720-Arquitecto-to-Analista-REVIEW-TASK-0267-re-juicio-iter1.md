@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-re-juicio-iter1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de TASK-0267 (iteracion 1 del fix-loop, tope 2) en CLON LIMPIO de HEAD (2f6e77d): verificar remediacion de F-0267-01 (rename R100 HACIA FUERA ahora abortando, familia completa de negativos) y F-0267-02 (prune desde la materializacion, no el worktree) + regresion de todo lo que ya PASA. Veredicto GO / NO-GO por mailbox. SIN PRODUCTO EN ALCANCE. Procesa PRIMERO la review de diseno del grafo si ya la tienes en curso; este re-juicio va despues en tu cola."

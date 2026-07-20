@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-RESP-sweep-corregido
 from: Arquitecto
 to: Analista
 type: RESP
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:

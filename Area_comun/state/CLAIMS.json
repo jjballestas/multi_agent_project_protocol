@@ -42,6 +42,32 @@
             "updated_at": "2026-07-20T04:32:35Z"
         },
         {
+            "claim_id": "CLAIM-arq-hyg-0730-20260720",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "RESP secuencia al Operador + higiene de 6 consumidos (4 senalados por el + 2 mas)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0730-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-RESP-secuencia-y-destrabe.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-re-juicio-iter1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0267-re-juicio-iter1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-reparto.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-reparto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-rejuicio-H1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-rejuicio-H1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-RESP-sweep-corregido.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-RESP-sweep-corregido.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0270-ledger-endurecimiento.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0270-ledger-endurecimiento.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02.md"
+            ],
+            "started_at": "2026-07-20T05:30:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T05:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-reject0257-20260719",
             "expires_at": "2026-07-19T19:30:13Z",
             "notes": "Rechazo formal del gate E2 (NO-GO Analista F-0257-01/F-0257-02): in_review->in_progress + ACTION de remediacion a Codex",

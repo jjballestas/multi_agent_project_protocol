@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-neutralidad-F02
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar F-0271-02 (anomalia DECISION-0018 reportada por el checker, verificada por biseccion): scan_domain_neutrality ROJO en HEAD por scripts/test_anthropic_checker_harness.py lineas 24-27 (nombres de agentes de instancia hardcodeados en script generico, introducido en 6c8a0d8). Parametrizar los nombres (fixture/variable neutral) o mover el caso a examples/ de instancia. Ademas: task_status TASK-0270 review_approved -> done y TASK-0271 (tras este fix) in_progress ya esta -- entrega el fix + flip 0271 a in_review + release. Gates COMPLETOS (los 4: validate, encoding, NEUTRALIDAD, prune) por exit code real antes del push."

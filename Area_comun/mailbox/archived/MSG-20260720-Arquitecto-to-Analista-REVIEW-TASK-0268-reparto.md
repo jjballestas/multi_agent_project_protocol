@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-reparto
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0268 (reparto E6-A del hook) en CLON LIMPIO de HEAD: default acotado <~2s en TODO commit local (incluido gobernado), modo completo SOLO bajo flag explicito y con la mecanica v2 intacta, CI sin cambios (validate completo + pin existencia/SHA actualizado al hook nuevo), suite ajustada al reparto, espejo born-operational, docs del reparto con el riesgo declarado. Veredicto GO/NO-GO por mailbox. SIN PRODUCTO EN ALCANCE. ORDEN DE TU COLA: primero la review de TASK-0270 (des-seen hecha), luego esta."

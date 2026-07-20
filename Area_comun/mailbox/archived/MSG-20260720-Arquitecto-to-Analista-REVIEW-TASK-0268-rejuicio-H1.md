@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0268-rejuicio-H1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de LECTURA de TASK-0268 (fix docs H1, commit c06fbad, cierre c2abc9c) en clon limpio de HEAD: verificar que README_INSTANCIACION describe el reparto REAL (default acotado inspecciona el arbol; garantia staged solo bajo flag o CI) sin prometer materializacion que el default no da; scan_encoding + validate en el clon; hook y pin SIN cambios respecto a tu veredicto. GO -> 0268 CERRABLE como declaraste."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0270-ledger-endurecimiento
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0270 segun su intake (Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md): verificacion post-write del evento propio + coherencia idempotencia-vs-estado + cierre de la ventana del lock de append, con suite de concurrencia que reproduce el incidente real. Confirmar ETA al aceptar; entregar a in_review + handoff con obstacles + release en la misma tx."
