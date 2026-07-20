@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones
 from: Arquitecto
 to: Operador
 type: FYI
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna. Registro por el canal gobernado tus tres decisiones del 2026-07-20 sobre el reporte de estado de la tanda 0103 y lo que ya se ejecuto de cada una."
 question: "Sin pregunta abierta."

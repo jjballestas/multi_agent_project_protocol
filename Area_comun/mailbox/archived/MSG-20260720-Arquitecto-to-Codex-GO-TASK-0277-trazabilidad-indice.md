@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0277 (promovida a ready con aprobacion del Operador). Reparar la fila desaparecida de TASK-0267 reconstruyendola desde el event log y aplicandola por la via gobernada, y cerrar la clase: cruce de ficheros de Area_comun/tasks/ contra las filas de indice en el validador, cobertura de los archivos de poda en el chequeo de deriva, y verificacion en la propia poda de que lo que saca del indice caliente ESTA en el archivo. Barrido del historico completo con numeros. Entregar in_review + handoff + release."

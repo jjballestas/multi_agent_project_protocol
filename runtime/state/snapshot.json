@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "25726e6be08a916261958ff6cae5ec7aa76f1f9f025633801c8bc5a3bdd35efd",
+  "canonical_hash": "ec63f98c7443581681b2fdc18706b3a97b99d1596a1b85a6d1395c633232c568",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -819,6 +819,7 @@
       "CLAIM-arq-rutear0272iter2-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio2-20260720": 1,
+      "CLAIM-arq-rutear0277-0278-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
       "COORD-20260619-CARRIL-A-MONITOR": 2,
@@ -1832,6 +1833,7 @@
       "MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272": 1,
       "MSG-20260720-Arquitecto-to-Codex-ACTION-doneflips-0269-0273": 1,
+      "MSG-20260720-Arquitecto-to-Codex-ACTION-liberar-claim-huerfana-y-TASK-0278": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0267-hook-v2-materializacion": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcial": 1,
@@ -1839,6 +1841,8 @@
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0271-migracion-checker": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0272-seenburn": 1,
       "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0273-deadlock-poda": 1,
+      "MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice": 1,
+      "MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones": 1,
       "MSG-20260720-Arquitecto-to-Operador-REPORTE-estado-tanda-0103": 1,
       "MSG-20260720-Arquitecto-to-Operador-REPORTE-evaluacion-coste-hook": 1,
       "MSG-20260720-Arquitecto-to-Operador-RESP-0273-registrada-medicion-poda": 1,
@@ -1862,7 +1866,10 @@
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-1": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0272-remediation-2": 1,
       "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0273": 1,
+      "MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277": 1,
       "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02": 1,
+      "MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0278": 1,
+      "MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272": 1,
       "MSG-20260720-Codex-to-Operador-REPORTE-TASK-0269-umbral-E6": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avance": 1,
       "MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-recoger": 1,
@@ -2160,7 +2167,7 @@
       "TASK-0275": 1,
       "TASK-0276": 1,
       "TASK-0277": 7,
-      "TASK-0278": 10,
+      "TASK-0278": 11,
       "TASK-0279": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2184,7 +2191,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4714,
+    "events_applied": 4722,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2498,6 +2505,14 @@
       "arq:rutear0272:arch3:589dd028-d30f-4cb3-b836-3205c429db0a": 5312,
       "arq:rutear0272:arch4:589dd028-d30f-4cb3-b836-3205c429db0a": 5313,
       "arq:rutear0272:release:589dd028-d30f-4cb3-b836-3205c429db0a": 5314,
+      "arq:rutear7778:acquire:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5386,
+      "arq:rutear7778:arch1:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5387,
+      "arq:rutear7778:arch2:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5388,
+      "arq:rutear7778:arch3:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5389,
+      "arq:rutear7778:arch4:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5390,
+      "arq:rutear7778:arch5:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5391,
+      "arq:rutear7778:arch6:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5392,
+      "arq:rutear7778:release:d5d49c12-f250-4c32-9d0d-70963cbe64d7": 5393,
       "arq:task0196:done": 2243,
       "arq:task0197:acq": 2245,
       "arq:task0197:done": 2261,
@@ -6902,5 +6917,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5385
+  "up_to_seq": 5393
 }

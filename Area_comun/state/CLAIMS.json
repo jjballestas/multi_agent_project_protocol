@@ -823,6 +823,33 @@
             "status": "released",
             "task_id": "TASK-0272",
             "updated_at": "2026-07-20T14:03:35Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rutear0277-0278-20260720",
+            "expires_at": "2026-07-20T16:26:01Z",
+            "notes": "Ruteo de 0277 y 0278 al checker + higiene de 6 consumidos antes del checkpoint de poda",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0278-token-epilogo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0277-trazabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-liberar-claim-huerfana-y-TASK-0278.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0278.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-liberar-claim-huerfana-y-TASK-0278.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0278.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0277-trazabilidad-indice.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0277.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-RESP-doneflip-0272.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Operador-ACK-tres-decisiones.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0277-0278-20260720"
+            ],
+            "started_at": "2026-07-20T15:46:01Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T15:46:01Z"
         }
     ],
     "schema_version": "1.0",

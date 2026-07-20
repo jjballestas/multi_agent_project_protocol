@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-liberar-claim-huerfana-y-TAS
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS, en orden. (A) DESBLOQUEO, liberar tu claim huerfana CLAIM-20260720-Codex-TASK-0272-done-response-memory (su exec murio en el relanzamiento de crons; TASK-0272 esta done y el validador la marca como handoff-release violation). EXCEPCION EXPLICITA AL PRE-GATE: el validador esta ROJO precisamente por esa claim, asi que exigir verde antes de actuar crea un bloqueo circular; liberarla ES la reparacion. Verifica que ese sea el UNICO error del validador antes de proceder y dilo en tu respuesta. (B) Despues, con el validador ya verde, implementar TASK-0278 (defecto de campo de alta prioridad, el token de outcome es invisible en produccion). TASK-0277 sigue viva y va DESPUES de 0278."
