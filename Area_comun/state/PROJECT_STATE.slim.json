@@ -19,15 +19,9 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0257",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
-        },
-        {
             "id": "TASK-0258",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
         },
         {

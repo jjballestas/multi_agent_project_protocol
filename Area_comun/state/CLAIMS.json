@@ -60,6 +60,25 @@
             "updated_at": "2026-07-20T06:50:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0258",
+            "expires_at": "2026-07-20T15:00:00Z",
+            "notes": "Implement canonical optional obstacles array in turn schema and contract cases.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0258",
+                "Area_comun/state/TASK_INDEX.json#TASK-0258",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0258",
+                "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
+                "runtime/turn_schema.json",
+                "examples/runtime_turn_cases/",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T07:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0258",
+            "updated_at": "2026-07-20T07:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0268-done",
             "expires_at": "2026-07-20T14:45:00Z",
             "notes": "Implementer done flip after Arquitecto ratification of H1 re-review.",
@@ -100,6 +119,22 @@
             "status": "released",
             "task_id": "OPS-MAILBOX-HYGIENE-20260720",
             "updated_at": "2026-07-20T05:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0257-b-20260720",
+            "expires_at": "2026-07-20T06:50:00Z",
+            "notes": "Ratificacion cierre 0257 REINTENTO-B (el intento A rebot\u00f3 por contencion con el arranque de 0258)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0257",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0257",
+                "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0257-b-20260720"
+            ],
+            "started_at": "2026-07-20T05:50:00Z",
+            "status": "released",
+            "task_id": "TASK-0257",
+            "updated_at": "2026-07-20T05:50:00Z"
         },
         {
             "claim_id": "CLAIM-arq-reject0257-20260719",
