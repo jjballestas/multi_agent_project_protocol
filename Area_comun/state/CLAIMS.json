@@ -42,6 +42,22 @@
             "updated_at": "2026-07-20T04:32:35Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-done",
+            "expires_at": "2026-07-20T14:45:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of H1 re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0268",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0268",
+                "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md"
+            ],
+            "started_at": "2026-07-20T06:45:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T06:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hyg-0730-20260720",
             "expires_at": "2026-07-20T06:30:00Z",
             "notes": "RESP secuencia al Operador + higiene de 6 consumidos (4 senalados por el + 2 mas)",

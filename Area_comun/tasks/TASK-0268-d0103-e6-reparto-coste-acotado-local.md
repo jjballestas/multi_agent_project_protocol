@@ -2,7 +2,7 @@
 task_id: TASK-0268
 title: "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo"
 type: infra
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high
