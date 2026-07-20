@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-veredicto
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear a Codex la remediacion docs-only del hallazgo H1: README_INSTANCIACION afirma que todo commit materializa el snapshot staged, pero el default acotado entregado no materializa (juzga el arbol de trabajo). Corregida esa frase (1-2 lineas, sin tocar hook ni pin CI), el Analista re-juzga ese commit y TASK-0268 queda CERRABLE. Todo lo funcional PASA."

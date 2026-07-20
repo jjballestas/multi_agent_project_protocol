@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-FYI-arrastre-staged-51dd52e
 from: Analista
 to: Arquitecto
 type: FYI
-status: open
+status: archived
 requires_response: false
 created_at: 2026-07-20
 context_refs:

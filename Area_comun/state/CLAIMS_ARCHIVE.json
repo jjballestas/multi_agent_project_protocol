@@ -29194,6 +29194,304 @@
             "status": "released",
             "task_id": "TASK-0257",
             "updated_at": "2026-07-19T19:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-031314-prune-arquitecto",
+            "expires_at": "2026-07-20",
+            "notes": "Maintenance prune via submit_intent under event_state.enforce.",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
+            ],
+            "started_at": "2026-07-20T03:13:14Z",
+            "status": "released",
+            "task_id": "MAINTENANCE-PRUNE",
+            "updated_at": "2026-07-20T03:13:14Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Remediate TASK-0268 H1 docs-only and redeliver for re-review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0268",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0268",
+                "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md",
+                "README_INSTANCIACION.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0268.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md",
+                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md"
+            ],
+            "started_at": "2026-07-20T04:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1-delivery",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Deliver TASK-0268 H1 remediation and return to review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0268",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0268",
+                "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0268-Codex-to-Analista.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0268.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md",
+                "Area_comun/mailbox/answered/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md"
+            ],
+            "started_at": "2026-07-20T04:20:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1-final-memory",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Persist TASK-0268 H1 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0268-H1-memory",
+            "expires_at": "2026-07-20T06:30:00Z",
+            "notes": "Persist TASK-0268 H1 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0268-H1-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02",
+            "expires_at": "2026-07-20T11:55:00Z",
+            "notes": "Remediate F-0271-02 neutrality and perform ratified TASK-0270 done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "scripts/test_anthropic_checker_harness.py"
+            ],
+            "started_at": "2026-07-20T03:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T03:55:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-delivery",
+            "expires_at": "2026-07-20T12:05:00Z",
+            "notes": "Deliver F-0271-02 remediation and return TASK-0271 to review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0271-codex-to-arquitecto-1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02.md"
+            ],
+            "started_at": "2026-07-20T04:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-final-memory",
+            "expires_at": "2026-07-20T12:10:00Z",
+            "notes": "Persist TASK-0271 F02 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-final-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:10:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:10:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-memory",
+            "expires_at": "2026-07-20T12:00:00Z",
+            "notes": "Persist TASK-0271 F02 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:00:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-done",
+            "expires_at": "2026-07-20T12:15:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of F-0271-02.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md"
+            ],
+            "started_at": "2026-07-20T04:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:15:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-0545-20260720",
+            "expires_at": "2026-07-20T04:45:00Z",
+            "notes": "Higiene: 3 consumidos (review 0270 con veredicto entregado, 2 REQUESTs respondidos) para bajar cold-start",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0545-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0270-ledger.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REQUEST-release-claim-huerfano.md",
+                "Area_comun/mailbox/open/MSG-20260719-Arquitecto-to-Analista-REQUEST-fix-plantilla-trailers.md",
+                "Area_comun/mailbox/archived/MSG-20260719-Arquitecto-to-Analista-REQUEST-fix-plantilla-trailers.md"
+            ],
+            "started_at": "2026-07-20T03:45:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T03:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-0607-20260720",
+            "expires_at": "2026-07-20T05:07:00Z",
+            "notes": "ACTION H1 docs de 0268 + higiene de 3 consumidos del ciclo 0270/0271",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0607-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0268-fix-docs-H1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271-fix1.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271-fix1.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-RESP-TASK-0271-neutralidad-F02.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0270-veredicto-GO.md"
+            ],
+            "started_at": "2026-07-20T04:07:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T04:07:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-0634-20260720",
+            "expires_at": "2026-07-20T05:34:00Z",
+            "notes": "Higiene: veredictos de 0268 ratificados + FYI de arrastre leido y persistido en memoria",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-0634-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-cierres-harness-y-GO-0258.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-veredicto.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-veredicto.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-rejuicio-H1-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-rejuicio-H1-GO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-FYI-arrastre-staged-51dd52e.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-FYI-arrastre-staged-51dd52e.md"
+            ],
+            "started_at": "2026-07-20T04:34:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T04:34:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-hyg-coldstart-20260720",
+            "expires_at": "2026-07-20T04:28:00Z",
+            "notes": "Higiene de 6 consumidos para bajar cold_start_tokens (prune-due bloqueaba el hook); lotes de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-hyg-coldstart-20260720",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0271-migracion-checker.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0271-migracion-checker.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-RESP-claim-huerfano-liberado.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-RESP-claim-huerfano-liberado.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-fix-invoker-windows.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-fix-invoker-windows.md"
+            ],
+            "started_at": "2026-07-20T03:28:00Z",
+            "status": "released",
+            "task_id": "OPS-MAILBOX-HYGIENE-20260720",
+            "updated_at": "2026-07-20T03:28:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0268-20260720",
+            "expires_at": "2026-07-20T05:30:00Z",
+            "notes": "Ratificacion 0268 tras GO del re-juicio H1 (funcional PASA + docs veraces)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0268",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0268",
+                "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0268-20260720"
+            ],
+            "started_at": "2026-07-20T04:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0268",
+            "updated_at": "2026-07-20T04:30:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0270-20260720",
+            "expires_at": "2026-07-20T04:40:00Z",
+            "notes": "Ratificacion 0270 sobre veredicto GO del checker (11/11 sondeos propios; replay del incidente 19-jul con error distintivo)",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0270",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0270",
+                "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0270-20260720"
+            ],
+            "started_at": "2026-07-20T03:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0270",
+            "updated_at": "2026-07-20T03:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-ratifica0271b-20260720",
+            "expires_at": "2026-07-20T04:55:00Z",
+            "notes": "Re-ratificacion 0271 tras F01 (invoker, verificado con 3 turnos reales) y F02 (neutralidad, scan verde); evidencia end-to-end completa",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/state/TASK_INDEX.json#TASK-0271",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0271",
+                "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0271b-20260720"
+            ],
+            "started_at": "2026-07-20T03:55:00Z",
+            "status": "released",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T03:55:00Z"
         }
     ]
 }

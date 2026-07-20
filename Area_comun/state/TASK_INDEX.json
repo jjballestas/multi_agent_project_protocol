@@ -384,7 +384,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo",
             "type": "infra"
         },
@@ -398,30 +398,6 @@
             "reviewer": "Analista",
             "status": "ready",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0270-ledger-postwrite-idempotencia-coherencia.md",
-            "id": "TASK-0270",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[LEDGER] Endurecimiento del event log: verificacion post-write del evento propio + coherencia idempotencia-vs-estado (cierra el evento-perdido silencioso y el skip mudo)",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md",
-            "id": "TASK-0271",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Arquitecto",
-            "status": "done",
-            "title": "[DECISION-0101] Migracion del harness del checker formal al CLI de Anthropic (Claude): implementa la decision firmada; elimina los flags del clasificador sobre trabajo adversarial legitimo",
             "type": "infra"
         },
         {

@@ -6,7 +6,10 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
   `README_INSTANCIACION.md`: the default bounded pre-commit checks the current
   tree without staged-snapshot materialization, while explicit full mode and CI
   provide the staged-byte guarantee. Hook code and CI pin were not changed; all
-  four protocol gates passed with drift false at seq 5134.
+  four protocol gates passed with drift false at seq 5134. Delivery commit
+  `c2abc9c` updates the handoff/response, moves the consumed ACTION to answered,
+  returns TASK-0268 to `in_review`, and releases implementation/delivery claims
+  through seq 5140.
 
 - TASK-0271 F-0271-02 implementation commit `6ab2d4e` removes live-instance
   identities from the generic checker contract test by parameterizing the
