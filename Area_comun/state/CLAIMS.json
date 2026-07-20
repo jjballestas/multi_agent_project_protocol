@@ -366,6 +366,24 @@
             "updated_at": "2026-07-20T17:28:48Z"
         },
         {
+            "claim_id": "CLAIM-arq-rutear0280final-20260720",
+            "expires_at": "2026-07-20T20:06:07Z",
+            "notes": "Ruteo del re-juicio final de 0280 al checker + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0280-iter2-final.md",
+                "Area_comun/mailbox/open/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0280-final.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-0277-doneflip-y-0280-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0280-final.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Codex-ACTION-0277-doneflip-y-0280-iter2.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0280final-20260720"
+            ],
+            "started_at": "2026-07-20T19:46:07Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-20T19:46:07Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tres-encargos-20260720",
             "expires_at": "2026-07-20T19:03:02Z",
             "notes": "Tres encargos del Operador: elevar 0275, fijar el modelo del checker en su envoltorio, y rutear el re-juicio de 0280/0277",

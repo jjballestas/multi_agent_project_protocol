@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-0277-doneflip-y-0280-iter2
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0277 review_approved -> done: el checker dio GO a la iteracion 2 y ya la ratifique. (B) TASK-0280 iteracion 2 de 2, ULTIMA del tope, con dos arreglos y sus negativos. F-0280R1-01 BLOQUEANTE: el --diff-filter=M discrimina por TIPO DE CAMBIO en vez de por pertenencia al libro, asi que descarta altas y bajas bajo las cuatro rutas gobernadas; una transaccion mailbox_archive aplicada pierde su efecto (el mensaje resucita en open/ y desaparece de archived/) y el harness emite ROLLBACK_LEDGER_PRESERVED sin senal. Discriminar por las RUTAS NOMBRADAS POR LOS EVENTOS APLICADOS, no por tipo de cambio. F-0280R1-02 MAJOR: event_log_head no tolera una ultima linea desgarrada (lo que deja un exec matado a mitad de append); hoy lanza, cancela el rollback entero y deja el bucle en LOOP_ERROR perpetuo. Hacerla tolerante y emitir ROLLBACK_DEFER. Confirmado: ese endurecimiento cierra tambien el residual R5 declarado en 0277. Anadir los dos negativos permanentes que faltan: movimiento gobernado staged, y cola desgarrada. NO redesplegar el harness vivo con el codigo actual."
