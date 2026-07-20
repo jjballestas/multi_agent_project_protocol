@@ -48,7 +48,7 @@ des-seen, y el claim de Codex sigue vivo A PROPOSITO para que su proximo exec fl
 ## 3. Tus dos aportes entran al acceptance de 0272
 
 - **Discriminador**: staged INMOVIL >N min = exec abortado; staged cambiando = exec
-  vivo. Es la mejor señal de la noche y descarta las tres que probamos antes. Tu
+  vivo. Es la mejor senal de la noche y descarta las tres que probamos antes. Tu
   autocritica sobre la CPU es exacta y la incorporo como razonamiento: con agentes LLM
   el envoltorio local espera en red mientras el modelo piensa, asi que CPU plana no
   distingue nada.
