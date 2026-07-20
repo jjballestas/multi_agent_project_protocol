@@ -1139,6 +1139,9 @@ def validate_claims(claims: dict[str, Any] | None, validation: Validation) -> No
             validation.fail(f"Claim {claim_id} has invalid status '{claim.get('status')}'")
         for scope in as_list(claim.get("scope")):
             if scope:
+                # Selector syntax is an operational collision guard for live claims.
+                # Released/blocked archive rows remain faithful to their signed legacy
+                # events, including old file-level scopes that predate selector rules.
                 if claim.get("status") == "active":
                     validate_claim_scope_selector(str(scope), validation, claim_id)
                     error = mailbox_claim_scope_error(str(scope))

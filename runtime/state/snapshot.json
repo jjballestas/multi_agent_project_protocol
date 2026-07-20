@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1adf501c0597d86c043fa9d2b8ee659dcb286025364a2626b84ecd7fa1861323",
+  "canonical_hash": "6585aab0a78bfed3eedc60fcb02589958631db988fe94ce05f05b0bfd285c119",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -715,6 +715,7 @@
       "CLAIM-20260720-Codex-TASK-0277-delivery": 1,
       "CLAIM-20260720-Codex-TASK-0278": 1,
       "CLAIM-20260720-Codex-TASK-0278-delivery": 1,
+      "CLAIM-20260720-Codex-TASK-0278-done": 1,
       "CLAIM-20260720-Codex-TASK-0278-final-memory": 1,
       "CLAIM-20260720-Codex-TASK-0278-memory": 1,
       "CLAIM-ARQ-DECISION-0092-20260706": 1,
@@ -2172,8 +2173,8 @@
       "TASK-0274": 1,
       "TASK-0275": 1,
       "TASK-0276": 1,
-      "TASK-0277": 9,
-      "TASK-0278": 12,
+      "TASK-0277": 10,
+      "TASK-0278": 14,
       "TASK-0279": 1,
       "TASK-0280": 2,
       "TASK-1102": 14,
@@ -2198,7 +2199,7 @@
       "protocol-prune": 17,
       "protocol-state": 1
     },
-    "events_applied": 4733,
+    "events_applied": 4737,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4068,9 +4069,13 @@
       "codex:task0277:implementation-release:20260720T154500Z:a1": 5384,
       "codex:task0277:in-progress-to-in-review:20260720T154500Z:a1": 5383,
       "codex:task0277:ready-to-in-progress:20260720T150500Z:a1": 5381,
+      "codex:task0277:remediation-1-claim:20260720T164200Z": 5408,
       "codex:task0278:claim:2026-07-20T15:13:45Z": 5370,
       "codex:task0278:delivery-claim:2026-07-20T15:20:50Z": 5374,
       "codex:task0278:delivery-release:2026-07-20T15:21:42Z": 5377,
+      "codex:task0278:done-claim:20260720T163500Z": 5405,
+      "codex:task0278:done-release:20260720T163500Z": 5407,
+      "codex:task0278:done:20260720T163500Z": 5406,
       "codex:task0278:final-memory-claim:2026-07-20T15:23:58Z": 5378,
       "codex:task0278:final-memory-release:2026-07-20T15:25:00Z": 5379,
       "codex:task0278:impl-release:2026-07-20T15:21:42Z": 5376,
@@ -6935,5 +6940,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5404
+  "up_to_seq": 5408
 }

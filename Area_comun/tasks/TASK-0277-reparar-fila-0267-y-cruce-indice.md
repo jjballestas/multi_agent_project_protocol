@@ -57,3 +57,7 @@ literalmente invisible para el unico mecanismo que deberia verla.
 Encaja en la tanda 0103 por la misma razon que TASK-0274: la clausula C3 pide que lo que
 se reporta como hecho sea verificable, y una unidad sin fila no es verificable por nadie
 que llegue en frio.
+
+Remediacion iteracion 1: la validacion de selectores de scope se limita deliberadamente
+a claims activas; las filas historicas released/blocked conservan fidelidad al evento
+firmado aunque su scope sea anterior al contrato de selectores.

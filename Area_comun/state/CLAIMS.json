@@ -415,6 +415,27 @@
             "updated_at": "2026-07-20T15:45:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0277-remediation-1",
+            "expires_at": "2026-07-21T00:42:00Z",
+            "notes": "TASK-0277 remediation iteration 1: repair governed prune apply/archive replay parity and declare archived-claim selector exception.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0277-remediation-1",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "scripts/prune_state.py",
+                "scripts/validate_collaboration_state.py",
+                "runtime/protocol_replay.py",
+                "examples/prune_state_cases/run_prune_state_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py"
+            ],
+            "started_at": "2026-07-20T16:42:00Z",
+            "status": "active",
+            "task_id": "TASK-0277",
+            "updated_at": "2026-07-20T16:42:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260720-Codex-TASK-0278",
             "expires_at": "2026-07-20T17:13:45Z",
             "notes": "Implement TASK-0278 outcome parsing field defect and permanent regression coverage.",
@@ -452,6 +473,22 @@
             "status": "released",
             "task_id": "TASK-0278",
             "updated_at": "2026-07-20T15:20:50Z"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0278-done",
+            "expires_at": "2026-07-21T00:35:00Z",
+            "notes": "Implementer done flip after Arquitecto ratification of checker GO without conditions.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0278-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0278",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0278",
+                "Area_comun/tasks/TASK-0278-token-epilogo-cli-y-regex-sobre-prompt.md"
+            ],
+            "started_at": "2026-07-20T16:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0278",
+            "updated_at": "2026-07-20T16:35:00Z"
         },
         {
             "claim_id": "CLAIM-20260720-Codex-TASK-0278-final-memory",

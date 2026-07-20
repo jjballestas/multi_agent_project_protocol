@@ -539,15 +539,21 @@ def apply_prune_via_submit_intent(
             *intents,
             claim_release_intent(claim_id, ts),
         ]
-        submit_result = submit_intents(
-            root,
-            actor,
-            transaction,
-            timestamp=ts,
-            commit=commit_ref,
-            transaction_key=f"prune-state:{ts}:tx",
-        )
-        if submit_result is not None and submit_result.get("applied"):
+        # Archive mirrors must contain the exact pre-prune rows before submit_intents
+        # runs its post-apply drift gate. The new prune event makes those rows expected
+        # during that gate; persisting them afterwards creates a circular dependency and
+        # rolls the governed transaction back. Extra mirror rows are ignored until their
+        # signed prune event exists, so pre-staging is drift-safe. Restore both mirrors if
+        # the governed transaction fails, preserving all-or-nothing behavior.
+        archive_paths = [
+            state_dir / "TASK_INDEX_ARCHIVE.json",
+            state_dir / "CLAIMS_ARCHIVE.json",
+        ]
+        archive_backups = {
+            path: path.read_bytes() if path.exists() else None
+            for path in archive_paths
+        }
+        try:
             archive_removed_entries(
                 state_dir / "TASK_INDEX_ARCHIVE.json",
                 task_hot.get("tasks") or [],
@@ -566,6 +572,23 @@ def apply_prune_via_submit_intent(
                 actor,
             )
             verify_archived_entries(state_dir / "CLAIMS_ARCHIVE.json", claims_hot.get("claims") or [], claim_ids, "claims", "claim_id")
+            submit_result = submit_intents(
+                root,
+                actor,
+                transaction,
+                timestamp=ts,
+                commit=commit_ref,
+                transaction_key=f"prune-state:{ts}:tx",
+            )
+            if submit_result is None or not submit_result.get("applied"):
+                raise RuntimeError("governed prune transaction was not applied")
+        except Exception:
+            for path, content in archive_backups.items():
+                if content is None:
+                    path.unlink(missing_ok=True)
+                else:
+                    path.write_bytes(content)
+            raise
 
     after = measure(root)["cold_start"]["total_tokens"]
     drift = protocol_state_drift(root)

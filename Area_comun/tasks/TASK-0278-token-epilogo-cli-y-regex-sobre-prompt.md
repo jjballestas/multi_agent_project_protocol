@@ -2,7 +2,7 @@
 task_id: TASK-0278
 title: "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo"
 type: fix
-status: review_approved
+status: done
 owner: Codex
 phase: P2
 priority: high

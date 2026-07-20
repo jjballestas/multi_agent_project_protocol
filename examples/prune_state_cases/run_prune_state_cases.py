@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "prune_state.py"
 sys.path.insert(0, str(ROOT))
 from scripts.prune_state import verify_archived_entries
+from runtime.protocol_replay import protocol_state_drift
+from runtime.regenesis import regenesis
 
 
 def write_json(path: Path, payload: dict) -> None:
@@ -162,11 +164,76 @@ def case_missing_archive_row_fails_loudly() -> None:
             raise AssertionError("missing archived row did not fail")
 
 
+def case_enforced_apply_prestages_archive_rows() -> None:
+    """The real --apply path must pass its own post-submit archive drift gate."""
+    with tempfile.TemporaryDirectory(prefix="prune-enforced-apply-") as temp:
+        fixture = Path(temp)
+        build_fixture(fixture)
+        config_path = fixture / "protocol.config.json"
+        config = load(config_path)
+        config.update(
+            {
+                "adoption_tier": "runtime",
+                "event_auth": {"enabled": False},
+                "event_state": {
+                    "enabled": True,
+                    "materialize": True,
+                    "enforce": True,
+                    "authoritative": True,
+                },
+                "agent_registry": {
+                    "enabled": True,
+                    "agents": [
+                        {
+                            "id": "Codex",
+                            "enabled": True,
+                            "capabilities": ["implementer", "orchestrator"],
+                        }
+                    ],
+                },
+            }
+        )
+        write_json(config_path, config)
+        regenesis(
+            fixture,
+            actor_id="Codex",
+            timestamp="2026-07-20T16:50:00Z",
+            commit="fixture",
+        )
+        applied = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--root",
+                str(fixture),
+                "--apply",
+                "--actor-id",
+                "Codex",
+                "--timestamp",
+                "2026-07-20T16:51:00Z",
+                "--commit",
+                "fixture",
+            ],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert applied.returncode == 0, applied.stdout + applied.stderr
+        assert protocol_state_drift(fixture)["has_drift"] is False
+        assert run(fixture, "--check").returncode == 0
+
+
 def main() -> int:
-    cases = [case_due_and_apply, case_not_due_when_disabled, case_ps1_parity_if_available, case_missing_archive_row_fails_loudly]
+    cases = [
+        case_due_and_apply,
+        case_not_due_when_disabled,
+        case_ps1_parity_if_available,
+        case_missing_archive_row_fails_loudly,
+        case_enforced_apply_prestages_archive_rows,
+    ]
     for case in cases:
         case()
-    print("OK: prune_state cases passed (4, including archive verification negative).")
+    print("OK: prune_state cases passed (5, including enforced real-apply regression).")
     return 0
 
 
