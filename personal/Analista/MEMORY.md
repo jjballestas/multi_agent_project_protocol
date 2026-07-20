@@ -2865,3 +2865,65 @@ R3 la idempotencia del reintento no esta testeada y el prompt del reintento no l
 preservado. R4 el untracked destruido NO queda cubierto por 0280 y sigue siendo TASK-0275 (solo se
 respeta `if ($ledgerAdvanced -and Test-LedgerManagedPath)`).
 Bucle declarado: iteracion 1 de maximo 2, re-juicio mio ANTES del commit de cierre, luego escalada.
+
+## 2026-07-20 20:55 -- Re-juicio iteracion 2 (commit e07956e): 0277 GO, 0280 NO-GO
+
+Encargo `MSG-20260720-Arquitecto-to-Analista-REVIEW-0280-0277-iter2-cabeza-del-log`. Veredictos
+en `Area_comun/artifacts/Analista-TASK-0277-iter2-cabeza-log-verdict.md` y
+`Analista-TASK-0280-iter1-cabeza-log-verdict.md`, commit `9703fbe` (pusheado). Ancla: juzgado
+`e07956e`, padre `31e7bc7`, HEAD `b54ef43`; clones limpios `D:/ccvA` y `D:/ccvAp`. Los seis gates
+en clon limpio, EXIT 0 (incluidas las suites de 7 y 8 casos).
+
+PRIMITIVA COMPARTIDA: `scripts/ledger_head.py::event_log_head` = (seq, sha256 de la ultima linea).
+Unica implementacion; `prune_state.py` la importa y `peer_mailbox_cron.ps1` la invoca por
+subproceso (`Get-LedgerHead`). Verificado: no hay copias divergiendo.
+
+**TASK-0277 GO.** Mis tres hallazgos de iteracion 1 cerrados y probados contra el padre:
+F-0277R1-01 (padre borraba los espejos de una transaccion YA aplicada, drift True; ahora los
+retiene 4/7 con drift False y `RuntimeError` "event log advanced"), F-0277R1-02 (`except
+BaseException` + comparacion de cabeza; probe las CUATRO combinaciones excepcion/Ctrl-C x
+antes/despues, no solo las dos del maker), F-0277R1-03 (`archive_removed_entries` refresca la
+fila divergente en vez de saltarla: reproduje la cadena completa con mutacion gobernada real via
+`submit_intents` con claim+task_upsert+release; el padre se bloquea con `prune archive
+verification failed`, el hijo completa la poda). Cuarto arreglo: `if drift.has_drift: raise`
+antes del return, `main()` no captura -> `--apply` sale 1 sin JSON de exito (verificado
+end-to-end). Residuales: R5 cola desgarrada dentro del manejador de fallo (JSONDecodeError
+sepulta la excepcion original y NO restaura espejos), R6 fila huerfana sin gemela caliente sigue
+invisible, R7 traceback en vez de diagnostico.
+
+**TASK-0280 NO-GO (iteracion 1 de 2).** Mis dos SLIPs y R1 SI estan cerrados con negativos
+permanentes. El bloqueante nuevo lo introduce la propia remediacion del SLIP 2:
+**F-0280R1-01** -- `git diff --binary --diff-filter=M` (`peer_mailbox_cron.ps1:502`) discrimina por
+TIPO DE CAMBIO, no por pertenencia al libro: tira todas las altas y todas las bajas bajo las cuatro
+rutas gobernadas, incluidas las que produce una transaccion firmada. `mailbox_archive` es
+exactamente una baja en `open/` y un alta en `archived/` (`runtime/apply.py:472-477`,
+`submit_intent.py:91`). Contraste diferencial:
+`padre: open ausente / archived PRESENTE` vs `e07956e: open PRESENTE / archived AUSENTE`,
+y AMBOS emiten `ROLLBACK_LEDGER_PRESERVED seq_before=0 seq_after=1`. Silencioso porque
+`materialize_protocol_state` (`protocol_replay.py:597-604`) solo materializa TASK_INDEX,
+PROJECT_STATE y CLAIMS: **el mailbox nunca produce drift**.
+**F-0280R1-02** (major, regresion) -- `event_log_head` hace `json.loads` de la ultima linea sin
+tolerancia; una linea desgarrada (kill a mitad de append) hace lanzar a `Get-LedgerHead`, el
+rollback NO se ejecuta (el residuo sobrevive) y el bucle entra en `LOOP_ERROR` perpetuo porque
+la linea 658 tambien lanza antes de invocar al agente. El padre, con su lector tolerante, si
+hacia rollback y se recuperaba. Asimetria clave: `Get-OwnEvidence` (linea 435) SI tolera lineas
+ilegibles; el lector tolerante es el que no decide nada.
+
+TECNICAS REUSABLES CONFIRMADAS:
+- El contraste diferencial contra el padre volvio a cazar el bloqueante (2 de 2 iteraciones).
+- **El testigo tiene que vivir donde vive el riesgo, Y TENER LA FORMA DEL RIESGO.** Iteracion 1:
+  el testigo estaba en la raiz y el riesgo por prefijos. Iteracion 2: los testigos ya estan en los
+  prefijos correctos pero todos son MODIFICACIONES, y el defecto vive en las ALTAS y las BAJAS.
+  Cuando un fix filtra por una propiedad (`--diff-filter=M`), atacar el complemento de esa propiedad.
+- Inyeccion de fallos con monkeypatch de `scripts.prune_state.submit_intents` sobre
+  `enforced_fixture` real: cubre pre/post-apply x Exception/KeyboardInterrupt en minutos.
+- Para mutar estado caliente bajo enforce hay que ir por `submit_intents` con claim que cubra
+  TRES rutas: `Area_comun/state/TASK_INDEX.json#<id>`,
+  `Area_comun/state/PROJECT_STATE.json#active_tasks/<id>` y `Area_comun/tasks/<id>.md`.
+  Editar el JSON caliente a mano da `protocol state drift exists before submit_intent`.
+- Forma del intent: `{"task_upsert": {"task": {...}, "idempotency_key": "..."}}`, NO
+  `{"kind": ..., "payload": ...}`.
+- El fixture `enforced_fixture` da `validate` exit 1 por rutas de tier runtime ausentes: es ruido
+  del fixture, no senal. Leer SIEMPRE el mensaje, no solo el exit code, en fixtures sinteticos.
+Scripts en el scratchpad: `falsify_0280.py` (vectores N1 movimiento gobernado staged, N2 cola
+desgarrada, con contraste padre) y `falsify_0277.py` / `falsify_0277b.py` (P1-P5, P1b-P3b, P2c-P2d).
