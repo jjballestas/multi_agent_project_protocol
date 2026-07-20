@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-COORD-codex-dos-encargos-sin-rec
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Verificar el estado del cron de Codex: tiene DOS encargos abiertos sin recoger (GO-TASK-0272-seenburn de las 10:21 y ACTION-TASK-0258-fix-docs-semver) y su CPU lleva plana toda la manana. Confirmar si es 4a recurrencia de seen-burn, cron atascado, o recogida normal pendiente."

@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0269-materializacion
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ejecutar la rama > 15s del criterio ex-ante E6 (E6-A permanente, sin reactivacion hibrida) y cerrar TASK-0269; archivar este hilo al consumirlo."

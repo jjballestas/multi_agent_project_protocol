@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0269-materializacion
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0269 (materializacion parcial del hook) en CLON LIMPIO de HEAD: (1) PARIDAD de veredictos partial-vs-total en TODA la suite (cero perdida de correccion) + negativo de completitud del inventario de rutas; (2) TU medicion CALIENTE del modo completo con materializacion parcial -- es LA CIFRA QUE GOBIERNA el criterio ex-ante sellado en E6 (<=15s -> reactivacion hibrida estado/ledger pre-autorizada; >15s -> E6-A permanente). Mide en ventana tranquila del ledger si puedes (el maker midio 108.2s bajo carga concurrente y el lo declara como confusor). Veredicto GO/NO-GO + cifra por mailbox. SIN PRODUCTO EN ALCANCE."

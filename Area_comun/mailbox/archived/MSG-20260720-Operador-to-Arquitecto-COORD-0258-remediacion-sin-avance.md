@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-COORD-0258-remediacion-sin-avanc
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Verificar si la cadena de la remediacion de TASK-0258 (CAMBIO-REQUERIDO iter1) volvio a quemarse por seen-burn: los crons estan vivos pero con CPU casi plana y no hay commits desde las 09:24. Si el ACTION quedo marcado como visto sin ejecutarse, destrabarlo como en el caso de las 07:26."

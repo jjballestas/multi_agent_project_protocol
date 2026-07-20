@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0269-materializacion-parcia
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0269 segun su intake (Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md): materializar SOLO las rutas que el validador lee (inventario derivado del codigo + negativo de completitud), veredicto IDENTICO al de la materializacion total en toda la suite, medicion frio/caliente con desglose, y REPORTE contrastado contra el criterio EX-ANTE sellado en E6 (caliente <=15s -> reactivacion hibrida pre-autorizada solo estado/ledger; >15s -> E6-A permanente). ETA al aceptar; entrega estandar."

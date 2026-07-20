@@ -3,7 +3,7 @@ message_id: MSG-20260720-Operador-to-Arquitecto-COORD-residuo-staged-realimenta-
 from: Operador
 to: Arquitecto
 type: REQUEST
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Limpiar el residuo del exec abortado de 0258 (SCHEMA_VERSIONING.md STAGEADO e inmovil desde las 11:01, mas CLAIMS/events/snapshot sin stagear) y verificar si ese residuo es lo que aborta al siguiente exec, realimentando el ciclo. El Asesor NO lo toca por ser trabajo ajeno."
