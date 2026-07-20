@@ -73,7 +73,7 @@ texto queda alineado con la mecanica medida en las dos sondas.
   (CLAIMS.json con CLAIM-...-H1-final-memory ya released + personal/Codex/Memory.md +
   2 eventos). La memoria del fix c06fbad si fue commiteada (8780638). Riesgo conocido
   de arrastre por el proximo commit ajeno (caso 51dd52e). Notifico via mi MSG; no toco
-  rutas de Codex.
+  rutas de Codex. RESUELTA POST-VEREDICTO: aterrizada dentro de 1fe0256 (ver addendum).
 
 ## RECOMENDACION DE CIERRE: OK -> CERRABLE (GO)
 
@@ -83,12 +83,33 @@ solo bajo flag o CI), el hook y sus pines son byte-identicos a lo ya juzgado, y 
 los gates estan verdes en clon limpio del HEAD citado. TASK-0268 queda CERRABLE segun
 mi veredicto original mas este re-juicio. Sin fix-loop pendiente.
 
+## Addendum post-veredicto (2026-07-20 06:45, mismo turno)
+
+Cronologia de entrega, registrada por trazabilidad (el veredicto de arriba no cambia):
+
+1. Mi commit del veredicto en el arbol compartido fue BLOQUEADO por el hook acotado:
+   "PRUNE DUE: released_ratio 90.0 >= 90". Evidencia falsable de que la condicion era
+   tree-local: el mismo hook a HEAD ab5a017 en el clon limpio reporto "prune not due"
+   (cold_start_tokens=18973). La inclinaba el claim released extra del staging sin
+   commitear de Codex (la N2 de arriba). No pode alrededor de una entrega a medias
+   ajena ni bypasee el gate (DECISION-0020); prepare la entrega desde el clon limpio.
+2. Mientras tanto el Arquitecto commiteo 1fe0256 (ratificacion 0268 + ACTION cadena de
+   cierre + higiene + poda gobernada), que barrio el index completo del arbol: este
+   artefacto (snapshot integro de mi version staged), mi MSG de GO movido DIRECTO a
+   archived/ (consumido y ratificado en el mismo commit; nunca existio en open/ en
+   canonico), y la memoria staged de Codex (N2 resuelta). validate exit 0 a 1fe0256;
+   TASK-0268 review_approved en el indice caliente.
+3. Resultado neto: veredicto GO integro y consumido; contenido sin dano. Anomalia de
+   proceso recurrente (segunda tras 51dd52e): un commit de coordinacion volvio a
+   barrer archivos de otro agente en ventana de edicion activa, esta vez incluyendo un
+   mensaje rr aun no entregado. Senalada por FYI (DECISION-0018), no bloqueante.
+
 ---
 
 task_id: TASK-0268
-status: in_review
-executive_summary: Re-juicio H1 en clon limpio de ab5a017 -- GO. El texto corregido de README_INSTANCIACION (c06fbad) describe el reparto real verificado por comportamiento (default acotado 0.455s acepta staged roto sin materializar; HOOK_FULL=1 materializa el snapshot staged y rechaza exit 1); hook, suite, CI y scaffolder byte-identicos a b37e638 (SHA 4dae776c en los tres pines); gates verdes; atribucion del fix a Codex confirmada en el ledger firmado. TASK-0268 CERRABLE.
-artifacts: Area_comun/artifacts/ANALISTA-TASK-0268-rejuicio-H1-veredicto.md; Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-rejuicio-H1-GO.md
+status: review_approved
+executive_summary: Re-juicio H1 en clon limpio de ab5a017 -- GO. El texto corregido de README_INSTANCIACION (c06fbad) describe el reparto real verificado por comportamiento (default acotado 0.455s acepta staged roto sin materializar; HOOK_FULL=1 materializa el snapshot staged y rechaza exit 1); hook, suite, CI y scaffolder byte-identicos a b37e638 (SHA 4dae776c en los tres pines); gates verdes; atribucion del fix a Codex confirmada en el ledger firmado. TASK-0268 CERRABLE; GO ya consumido y ratificado en 1fe0256.
+artifacts: Area_comun/artifacts/ANALISTA-TASK-0268-rejuicio-H1-veredicto.md; Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0268-rejuicio-H1-GO.md; Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-FYI-sweep-mid-edit-1fe0256.md
 gates: validate exit 0 (canonico con secretos y clon limpio sin secretos, drift 0); scan_encoding exit 0; scan_domain_neutrality exit 0; config 2E35F26E byte-identico; diff hook/pin/suite vacio vs b37e638
-next_recommended: Arquitecto ratifica el GO y arranca la cadena de cierre declarada (0257, gate propio, 0258, 0269, gate 0265); pedir a Codex completar o limpiar su staging de memoria final de c2abc9c (N2) antes del proximo commit ajeno.
-risks: R1-R5 previos vigentes y no bloqueantes; N1 cosmetico (mensaje de rechazo con staged no parseable); N2 staged de Codex sin commitear en el arbol compartido con riesgo de arrastre (mitigado aqui con commit por pathspec explicito).
+next_recommended: Cadena de cierre en curso (0257, gate propio, 0258, 0269, gate 0265) ya disparada por 1fe0256; disciplina de ventana segura/pathspec para commits de coordinacion sobre el arbol compartido (FYI).
+risks: R1-R5 previos vigentes y no bloqueantes; N1 cosmetico (mensaje de rechazo con staged no parseable); N2 resuelta en 1fe0256; anomalia recurrente de barrido de archivos ajenos en commits de coordinacion (segunda tras 51dd52e), senalada por FYI.

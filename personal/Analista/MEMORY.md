@@ -5,7 +5,39 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0268 reparto E6-A CAMBIO-REQUERIDO docs-only, fix-loop 1/2).
+> Ultima actualizacion: 2026-07-20 (TASK-0268 re-juicio H1 GO -> ratificada en 1fe0256; fix-loop cerrado 1/2).
+
+## Ultima actualizacion 2026-07-20 - TASK-0268 re-juicio H1: GO (CERRABLE), ratificada
+- Re-juicio de lectura anclado en ab5a017, clon limpio /d/ccv0268h1. W1-W6 PASAN:
+  README_INSTANCIACION corregido en c06fbad dice la verdad del reparto E6-A (default
+  acotado juzga el arbol sin materializar; garantia staged solo bajo flag o CI).
+  Re-probado por comportamiento a HEAD: staged roto aceptado por default en 0.455 s;
+  HOOK_FULL=1 materializo (checkout-index a tmp) y rechazo exit 1.
+- Invariancia probada con diff VACIO b37e638..ab5a017 sobre hook/suite/validate.yml/
+  new_instance.py; SHA 4dae776c identico en hook y ambos pines. Gates clon: validate 0
+  (drift 0), encoding 0, neutralidad 0, config 2E35F26E byte-identica.
+- Atribucion del fix confirmada en ledger firmado (seq 5133-5140 Codex); el author de
+  git es uniforme "Analista <analista@local>" en el arbol compartido: NUNCA usar el
+  author de git para atribuir, solo los eventos firmados.
+- ENTREGA ACCIDENTADA (leccion doble): (1) mi commit fue bloqueado por el hook acotado
+  "PRUNE DUE released_ratio 90" -- condicion TREE-LOCAL creada por staging sin
+  commitear de Codex (memoria final de c2abc9c); diagnostico falsable = correr el hook
+  a HEAD en clon limpio ("prune not due"). NO pode alrededor de entrega ajena a medias
+  ni bypasee el gate; prepare entrega desde clon. (2) Antes de poder entregar, el
+  Arquitecto commiteo 1fe0256 barriendo el index COMPLETO: mi artefacto (snapshot
+  pre-edicion, integro), mi MSG GO rr=true movido DIRECTO a archived/ (nunca paso por
+  open/ en canonico) y la memoria de Codex; ratifico 0268 (review_approved) en el
+  mismo commit. Segunda recurrencia del arrastre (tras 51dd52e), ahora sobre archivo
+  en edicion activa: un Edit mio fallo "File does not exist" porque el peer MOVIO el
+  archivo entre mis dos edits. FYI DECISION-0018 emitido
+  (MSG-...-FYI-sweep-mid-edit-1fe0256); addendum de cronologia en el artefacto.
+- LECCION operativa: en este arbol compartido la ventana escribir->stagear->commitear
+  debe ser MINIMA y verificarse despues (diff tree vs HEAD) que la version aterrizada
+  es integra; un "File does not exist" subito en ruta compartida = peer activo AHORA,
+  parar y re-leer git status antes de seguir.
+- Artefacto: ANALISTA-TASK-0268-rejuicio-H1-veredicto.md (con addendum, commit propio
+  post-1fe0256); GO consumido en archived/. Cadena de cierre disparada por el
+  Arquitecto (0257, 0258, 0269, gate 0265) -- yo sigo checker-only.
 
 ## Ultima actualizacion 2026-07-20 - TASK-0268 reparto E6-A CAMBIO-REQUERIDO (docs-only)
 - Revision adversarial anclada en hub `f2d07a3` (clon limpio /d/ccv0268 + sondeos en
