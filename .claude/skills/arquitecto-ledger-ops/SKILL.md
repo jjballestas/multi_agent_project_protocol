@@ -235,8 +235,17 @@ re-materializa el estado desde los eventos (NO toca genesis). Verifica drift 0 a
 ## 4. Pedir review / cerrar (maker != checker)
 - **COMMITEA el saneamiento ANTES de pedir review.** El peer valida con **clean clone de HEAD**; si tus
   correcciones estan solo en el working tree, HEAD sale rojo y el peer bloquea (con razon).
-- Stage EXPLICITO por path (nunca `git add -A`: barre `personal/`). Snapshot consistente, gates verdes por
-  **exit code** (no por grep: `grep ERROR` da exit 0 al matchear y NO frena).
+- Stage EXPLICITO por path (nunca `git add -A`: barre `personal/`). **PROHIBIDO TAMBIEN `git add -A --
+  <dir>` sobre rutas COMPARTIDAS (mailbox/, state/): barre archivos que un peer deposito o edita ENTRE tu
+  ls y tu add** -- 2 recurrencias reales el 2026-07-20 (51dd52e arrastro un veredicto staged ajeno; 1fe0256
+  commiteo un artefacto A MEDIO EDITAR del checker y archivo un GO VIVO no entregado). Patron obligatorio:
+  stagear por LISTA EXPLICITA derivada del scope del claim (los pares open/+archived/ de CADA message_id
+  archivado + tus MSGs nuevos + los state files), y `git commit -- <esa misma lista>`. Si un archivo ajeno
+  aparece staged o modificado al preparar el commit: NO commitearlo; esperar a que su autor aterrice
+  (DECISION-0020) o declararlo explicitamente en el mensaje del commit si es inevitable.
+  Snapshot consistente, gates verdes por
+  **exit code** (no por grep: `grep ERROR` da exit 0 al matchear y NO frena; y `cmd | tail; echo $?` devuelve
+  el exit del TAIL -- 2 falsos verdes reales el 19/20-jul: correr el gate SIN pipe y leer $? directo).
 - Verifica el arbol commiteado: `git ls-tree HEAD <ruta>`, `git show HEAD:<msg>` tiene `response_owner`, etc.
 - Cierre en dos partes: Codex `in_progress->in_review`; Arquitecto ratifica `in_review->review_approved` (checker).
   **El flip final `review_approved->done` exige capability `implementer` -> lo hace CODEX, NO el Arquitecto**
