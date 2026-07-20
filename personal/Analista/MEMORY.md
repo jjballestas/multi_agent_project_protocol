@@ -5,7 +5,46 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (TASK-0269 GO materializacion parcial + cifra E6 en 5c2642a; 0258 fix-loop 1/2 sigue abierto).
+> Ultima actualizacion: 2026-07-20 (0258 re-juicio GO en 305efd1 + 0272 NO-GO seenburn en 8cb4b45; pendiente REVIEW TASK-0273 deadlock-poda en open/).
+
+## Ultima actualizacion 2026-07-20 - TASK-0272 seenburn NO-GO + TASK-0258 re-juicio GO
+- DOS veredictos en una pasada (orden de cola del Arquitecto: 0258 primero). Ancla comun:
+  clon limpio D:/ccv0272 en e7ad9e6; HEAD avanzo DOS veces durante la pasada (0273 aterrizo
+  3062214/67ac1e8/22a0a2a + memoria maker f46437f); invariancia de rutas juzgadas verificada
+  por diff (solo new_instance.py cambio, pin CI hook de 0273, fuera de alcance juzgado).
+- TASK-0258 re-juicio F-0258-01 GO/CERRABLE en `305efd1`: SCHEMA_VERSIONING.md linea 9
+  `Current version: 1.3.0` + seccion DECISION-0103 C3 con MINOR veraz; diff VACIO
+  feb43c0..HEAD en schema/validate/suites; suites 8/8 + 5/5 EXIT 0 en clon. Runners reales:
+  run_runtime_turn_schema_cases.py / run_runtime_turn_semantic_cases.py (no run_turn_cases).
+- TASK-0272 (fin seen-burn silencioso) CAMBIO-REQUERIDO/NO-GO en `8cb4b45`. Bateria propia:
+  sandboxes git efimeros + runner REAL scripts/harness/peer_mailbox_cron.ps1 + fake agent
+  scripteado (probe_0272.py en scratchpad de sesion; escenarios S2-S10 documentados en el
+  artefacto). 3 PASA (S2 keyword-definitivo consume 1x; S8 tope 3 + RETRY_EXHAUSTED
+  signal=watchdog + exclusion; S10 defer residuo vivo sin quemar) / 6 SLIPS deterministas:
+  S5 commit de PEER durante exec -> abort no-op = confirmed = SEEN QUEMADO SIN SENAL (el bug
+  resucitado; evidencia = HEAD+status global no atribuible); S4 eco "NO-GO" en transcript ->
+  definitive quema retirada DECISION-0020; S9 entrega CONFIRMADA narrando "claim ajeno
+  activo" (vocabulario obstacles[] de 0258!) -> transient 3x -> RETRY_EXHAUSTED falso, seen
+  jamas; S6 ruta PRE-modificada staged por el exec -> rollback la salta: queda "M " staged
+  con contenido del exec y el contenido del peer DESTRUIDO (clase dominante 11:03, state
+  files casi siempre pre-sucios); S3 negativa principiada fraseada libre ("no asumo: soy
+  checker") -> unconfirmed -> 3 reintentos (AC dice JAMAS); S7 rename staged sobrevive
+  (porcelain "old -> new" una-ruta). Causa raiz: regex texto libre > exit+evidencia.
+- Fix-loop declarado (iter 1/2): (1) contrato outcome por TOKEN exacto tipo STOP_JOB, regex
+  solo fallback; (2) atribucion de evidencia; (3) rollback por delta de INDICE + renames;
+  (4) negativos permanentes S2/S4/S5/S6/S9. Re-juicio = re-correr bateria completa.
+- Espejo born-operational verificado: export runtime-tier shippea runner byte-identico
+  sha256 21afee4c...; tier coordination NO shippea harness (diseno pre-0272, residual R1).
+  Wrappers codex/analista_mailbox_cron.ps1 = thin con paridad de params retry.
+- Gates: clon validate/encoding/domain/drift EXIT 0; vivo validate EXIT 0; config #4
+  byte-identica 2E35F26E...354; suites maker retry/anthropic/lease EXIT 0.
+- LECCION operativa: el arbol paso de sucio (ledger peer in-flight) a limpio y de vuelta a
+  sucio DURANTE la ventana de entrega; commit con pathspec explicito de MIS 4 rutas salio
+  limpio ("2 files changed" cuadro ambas veces) sin esperar quietud total -- esperar quietud
+  absoluta en este arbol es inalcanzable en horas activas; gatear por claims=0 en MIS rutas
+  + pathspec + verificacion post-commit del stat.
+- PENDIENTE al cierre de sesion: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0273-
+  deadlock-poda.md sigue en open/ sin procesar (llego durante esta pasada; siguiente disparo).
 
 ## Ultima actualizacion 2026-07-20 - TASK-0269 materializacion parcial GO + cifra E6
 - Revision adversarial de TASK-0269 (E6-C, materializacion parcial de rutas del validador
