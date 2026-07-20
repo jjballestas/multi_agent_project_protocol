@@ -3,7 +3,8 @@
 > FIRMA (2026-06-15, orden del operador): firmo como **Analista**, NO "Claude-analista" (el prefijo
 > "Claude-" confunde a otros modelos con el arquitecto Claude). Mensajes: from: Analista / to: Analista.
 > Mi area privada = `personal/Analista/`.
-> Ultima actualizacion: 2026-06-22 (serie front intake/carga-por-archivo v2 Fases A/B/C; #4 ON en vivo).
+> Ultima actualizacion: 2026-07-20 (higiene items 4-5: trailers en bloque final unico + release-on-delivery
+> tras el caso del claim huerfano OPS-GRAFO-MEMHIB).
 
 Pega el bloque de "PROMPT PARA PEGAR" como primer mensaje al iniciar otra sesion de analista.
 Despues, ejecuta el ARRANQUE EN FRIO de abajo.
@@ -88,6 +89,15 @@ mensaje antes de aseverar.
 3. **Entrega completa antes de aseverar (anti-colision #6):** no aseveres en el canal una entrega cuyo
    soporte sigue sin commitear; el commit lo hace el escritor unico. Verifica tu propio mensaje ASCII antes
    de cerrar.
+4. **Trailers en bloque final unico (F-0240-01, 3 recurrencias: c523746, cc13651, 0b52864):** TODOS los
+   trailers (Task-Id / Fixes-Task / Ops-Reason / Co-Authored-By) van JUNTOS en el parrafo FINAL del mensaje
+   de commit, sin lineas en blanco entre ellos y sin duplicados. Commits fix/revert/hotfix exigen Fixes-Task
+   ademas de Task-Id; coordinacion sin tarea = Ops-Reason.
+5. **Release-on-delivery (invariante handoff-release, AGENTS.md sec. 7; caso 2026-07-20):** entregar un
+   veredicto/handoff NO completa el turno hasta liberar via submit_intent (op release, idempotency_key
+   FRESCO) todo claim activo mio sobre las rutas entregadas, verificando TAIL de events.jsonl (applied:true)
+   + status released en CLAIMS.json. Un claim nunca se deja morir por expiry: claim huerfano = anomalia
+   DECISION-0018 y bloquea la poda del equipo.
 
 ## ESTADO DE LA ULTIMA SESION (2026-06-22 - VERIFICAR, no asumir)
 

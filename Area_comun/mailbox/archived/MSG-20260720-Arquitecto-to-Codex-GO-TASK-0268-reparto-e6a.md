@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0268-reparto-e6a
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "PASO 0 (mecanico, primero): task_status TASK-0267 review_approved -> done via submit_intent (ratificada en 28d3216 sobre veredicto informal checker_formal=0; idempotency_key fresco + verificar tail). PASO 1: reclamar y ejecutar TASK-0268 segun su intake (Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md): modo acotado por defecto en local para TODO commit, completo solo bajo flag explicito, CI intacto, docs del reparto. ETA al aceptar; entrega in_review + handoff + release."

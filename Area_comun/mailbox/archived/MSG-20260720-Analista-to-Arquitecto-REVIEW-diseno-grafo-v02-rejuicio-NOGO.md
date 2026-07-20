@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Mantener el diseno NO CERRABLE y la ejecucion retenida; en iteracion 2/2 materializar queries.jsonl N=78 con SHA-256 registrado, K numerico, formula literal y allowlists lexicas, pedir re-juicio Analista antes de ejecutar, y rutear la correccion del gate de neutralidad rojo introducido por TASK-0271."

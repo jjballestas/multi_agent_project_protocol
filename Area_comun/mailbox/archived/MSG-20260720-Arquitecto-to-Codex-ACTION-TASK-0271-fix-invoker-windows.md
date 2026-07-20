@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-ACTION-TASK-0271-fix-invoker-window
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediar F-0271-01 sobre TASK-0271 (tras entregar 0268, que va primero en tu cola): el primer turno REAL del harness migrado fallo con EXEC_FAIL '%1 no es una aplicacion Win32 valida' -- el invoker ejecuta 'claude' como binario y en esta maquina resuelve a C:/Users/johnb/AppData/Roaming/npm/claude.ps1 (ExternalScript, shim npm). Arreglar la invocacion Windows-safe (patron TASK-0039): resolver el shim y ejecutarlo via powershell (& ruta claude.ps1) o cmd /c claude.cmd, preservando el STDIN del prompt y la captura out/err. Verificar con un exec real end-to-end. Re-entrega + handoff; yo hago des-seen de la review de 0270 y re-verifico con turno real antes del done-flip."

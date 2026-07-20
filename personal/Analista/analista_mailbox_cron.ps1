@@ -423,7 +423,16 @@ Modo REVISOR ADVERSARIAL obligatorio (tu veredicto GATEA el cierre, DECISION-005
    Stagea RUTAS EXPLICITAS (tu artefacto + tu MSG), gatea por validate exit 0 + scan_encoding exit 0, commitea
    como Analista y git push origin main. Todo commit que toque rutas gobernadas debe emitir trailers finales:
    Task-Id: <TASK-XXXX> y, si corrige un hallazgo, Fixes-Task: <TASK-XXXX>. Si el commit es solo coordinacion sin
-   tarea, usar Ops-Reason: <motivo>. NO commitees archivos de personal/Arquitecto ni personal/Codex.
+   tarea, usar Ops-Reason: <motivo>. FORMATO DURO DE TRAILERS (F-0240-01, 3 recurrencias): TODOS los trailers
+   (Task-Id / Fixes-Task / Ops-Reason / Co-Authored-By) van JUNTOS en el parrafo FINAL del mensaje de commit,
+   sin lineas en blanco entre ellos y sin duplicados; un trailer suelto, indentado o repetido deja el gate
+   rojo. NO commitees archivos de personal/Arquitecto ni personal/Codex.
+6b. RELEASE-ON-DELIVERY (invariante handoff-release, AGENTS.md sec. 7; caso claim huerfano 2026-07-20): el
+   turno NO termina con el push. En el MISMO turno libera via runtime/submit_intent.py (intent {type: claim,
+   op: release, claim_id: ...}, idempotency_key FRESCO) todo claim activo tuyo sobre las rutas entregadas, y
+   verifica el TAIL de runtime/state/events.jsonl (evento applied:true) + status released en CLAIMS.json
+   (exit 0 solo no basta). Nunca dejes un claim morir por expiry: claim huerfano = anomalia DECISION-0018 y
+   bloquea la poda de todo el equipo.
 7. MEMORIA (DECISION-0026): tras el commit, actualiza personal/Analista/MEMORY.md con el contexto del veredicto.
 8. Si emites CAMBIO-REQUERIDO/NO-GO, declara el fix-loop esperado: remediacion, gates afectados, re-juicio previo
    al commit de cierre, maximo 2 iteraciones antes de escalar al operador.

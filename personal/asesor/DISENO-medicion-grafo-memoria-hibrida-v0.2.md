@@ -68,8 +68,48 @@ residual, no se anade.
 - **Tie-break COMUN a ambos brazos** (corrige "baseline de empate"): `entry_id`
   canonico ascendente. Se reporta ademas el **expected rank dentro de empates**, para
   que no se confunda "desempatar mejor" con "valorar mejor".
-- Algoritmo de score de B: bm25 base + bonificacion por conectividad a los top-N de bm25,
-  con formula literal en el manifest antes de construir.
+- **Algoritmo de score de B - FORMULA LITERAL** (cerrada aqui, no diferida; hallazgo del
+  re-juicio: "congelar en el manifest" no congela nada mientras el manifest no exista):
+
+  ```
+  score_B(e) = score_bm25(e) + BONUS * conectada(e)
+
+  conectada(e) = 1 si existe arista (de cualquiera de los 5 tipos, en cualquier
+                 direccion, a <= 2 saltos) entre e y alguna entrada del TOP10 de bm25;
+                 0 en caso contrario.
+
+  BONUS = percentil 75 de la dispersion de score_bm25 dentro del TOP10 de la MISMA
+          consulta, calculado sobre el brazo A.
+  ```
+
+  Racional de `BONUS`: una constante absoluta seria un parametro afinable (tuning
+  leakage) y ademas no comparable entre consultas con rangos de score distintos.
+  Derivarlo de la dispersion del propio brazo A lo hace **auto-escalado y no elegible**:
+  no hay ningun numero que yo pueda mover para que B gane. Efecto por construccion:
+  la bonificacion basta para reordenar dentro de un empate o cuasi-empate -- que es
+  exactamente el defecto medido en B-bis -- y no para saltarse una diferencia real
+  de relevancia lexica.
+
+  `TOP10` y el percentil 75 quedan CONGELADOS aqui. Si el resultado dependiera de
+  cambiarlos, eso es un hallazgo a declarar, no un parametro a ajustar.
+
+- **Marcadores lexicos - ALLOWLIST CERRADA** (no ampliable tras ver resultados):
+
+  | arista | marcadores (case-insensitive, tras normalizacion NFKC) |
+  |---|---|
+  | `CORRIGE` | `corrige`, `correccion`, `rectifica`, `enmienda`, `subsana`, `NO-GO`, `CAMBIO-REQUERIDO` |
+  | `SUPERSEDE` | `supersede`, `sustituye a`, `reemplaza a`, `deja sin efecto`, `v0.N supersede` |
+
+  Reglas de aplicacion: el marcador debe aparecer **en la misma entrada que contiene la
+  referencia explicita** al target; un marcador sin referencia NO crea arista, y una
+  referencia sin marcador crea `REFERENCIA`, no `CORRIGE`/`SUPERSEDE`. Si un marcador
+  necesario falta, se declara como **residual de cobertura** y NO se anade.
+
+- **K**: valor literal pendiente del unico dato que no existe todavia (tamano real del
+  store tras el rebuild de la seccion 13). Se fija en el manifest **antes** de construir
+  el grafo y **sin haber visto ninguna metrica**, como `K = min(20, ceil(0.02 * N_entradas))`
+  -- regla cerrada aqui, cuyo unico input es el recuento de entradas. No es un parametro
+  elegible: dado el store, K queda determinado.
 
 ### 2.4 Cuarentena del builder (corrige "query/answer leakage")
 

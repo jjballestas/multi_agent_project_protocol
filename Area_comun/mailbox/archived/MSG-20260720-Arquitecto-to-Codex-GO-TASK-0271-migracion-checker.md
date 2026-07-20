@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Codex-GO-TASK-0271-migracion-checker
 from: Arquitecto
 to: Codex
 type: GO
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reclamar y ejecutar TASK-0271 segun su intake (Area_comun/tasks/TASK-0271-migracion-checker-anthropic-cli.md): migrar el harness del Analista al CLI de Anthropic conservando INTACTO el contrato del protocolo (envelope, seen, STOP_JOB igualdad exacta, locks/leases), con rollback ensayado y verificacion end-to-end. El TRIGGER pre-declarado se cumplio: el clasificador de OpenAI mato el re-juicio de 0267 por SEGUNDA vez (2 kills en el exec de las 03:31). ETA al aceptar; entrega a in_review + handoff + release en la misma tx. NO ejecutes el cutover en vivo: el relanzamiento del cron lo opera el Arquitecto tras la ratificacion."

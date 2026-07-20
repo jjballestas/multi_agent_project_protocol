@@ -1,14 +1,14 @@
 {
     "claims": [
         {
-            "claim_id": "CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
-            "owner": "Analista",
+            "claim_id": "CLAIM-20260720-031314-prune-arquitecto",
+            "owner": "Arquitecto",
             "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Analista-OPS-GRAFO-MEMHIB-V02-REVIEW",
-                "Area_comun/artifacts/ANALISTA-OPS-diseno-grafo-memoria-hibrida-v02-rejuicio-veredicto.md",
-                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-diseno-grafo-v02-rejuicio-NOGO.md"
+                "Area_comun/state/CLAIMS.json",
+                "Area_comun/state/TASK_INDEX.json",
+                "Area_comun/state/PROJECT_STATE.json"
             ],
-            "task_id": "OPS-GRAFO-MEMHIB-DISENO"
+            "task_id": "MAINTENANCE-PRUNE"
         }
     ],
     "schema_version": "1.0",

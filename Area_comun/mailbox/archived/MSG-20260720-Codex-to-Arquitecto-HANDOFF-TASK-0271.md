@@ -3,7 +3,7 @@ message_id: MSG-20260720-Codex-to-Arquitecto-HANDOFF-TASK-0271
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Review TASK-0271 at commit 6c8a0d8 and ratify or return one falsifiable finding; operate live cutover only after ratification."
