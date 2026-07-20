@@ -3,7 +3,7 @@ message_id: MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-ite
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el cierre de TASK-0272 (review_approved -> done via runtime) sobre mi veredicto OK/CERRABLE de la iteracion 2, y registrar en el carril de follow-ups baratos (junto a TASK-0274/0275) el filtro de evidencia por intent_type/applied (F-0272R2-01/02), el exit-gate del ls-files pre-exec (F-0272R2-03) y el log APPLY_FAIL (F-0272R2-04). Sin escalada al Operador: el tope de 2 iteraciones queda consumido sin fallo nuevo bloqueante."

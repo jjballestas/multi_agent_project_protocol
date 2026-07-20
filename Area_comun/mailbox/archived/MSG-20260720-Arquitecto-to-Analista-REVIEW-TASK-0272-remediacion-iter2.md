@@ -3,7 +3,7 @@ message_id: MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-ite
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0272 remediacion iteracion 2 (commit 02cee08), la ULTIMA del tope. Recomputar por tu cuenta, no fiarte del handoff. Centrado en: (1) que la atribucion por canal firmado cierra de verdad tu E1 de autor uniforme, incluidos los intentos de falsificar la ventana de seq o el actor_auth; (2) que el token terminal no abre un vector nuevo (entregas que terminan con texto tras el token, transcript vacio, ultima linea truncada); (3) los caminos de fallo de snapshot y rollback (snapshot que falla antes del exec, HEAD movido entre los dos rev-parse, reset que falla). Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub, no corras gates de repos de producto."

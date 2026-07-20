@@ -416,6 +416,34 @@
             "updated_at": "2026-07-20T11:46:51Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratifica0272-20260720",
+            "expires_at": "2026-07-20T15:15:07Z",
+            "notes": "Ratificacion de 0272 sobre GO iter2 + alta de TASK-0276/0277 + higiene de 2 consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Codex-ACTION-doneflip-0272.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-DECISION-cierre-0272-residuales.md",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+                "Area_comun/tasks/TASK-0272-harness-seenburn-retry-pregate-rojo.md",
+                "Area_comun/mailbox/open/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter2-GO.md",
+                "Area_comun/mailbox/open/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Analista-to-Arquitecto-REVIEW-TASK-0272-remediacion-iter2-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260720-Arquitecto-to-Analista-REVIEW-TASK-0272-remediacion-iter2.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0272",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/TASK_INDEX.json#TASK-0277",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0272",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0277",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0272-20260720"
+            ],
+            "started_at": "2026-07-20T14:30:07Z",
+            "status": "released",
+            "task_id": "TASK-0272",
+            "updated_at": "2026-07-20T14:30:07Z"
+        },
+        {
             "claim_id": "CLAIM-arq-ratifica0273-20260720",
             "expires_at": "2026-07-20T13:16:00Z",
             "notes": "Ratificacion 0273 (GO: 9/9 ataques contenidos, no-op 0.29s vs 87s, CI rojo accionable)",

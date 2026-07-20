@@ -384,7 +384,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)",
             "type": "infra"
         },
@@ -422,6 +422,30 @@
             "reviewer": "Analista",
             "status": "ready",
             "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+            "id": "TASK-0276",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+            "id": "TASK-0277",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "proposed",
+            "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva",
             "type": "infra"
         },
         {

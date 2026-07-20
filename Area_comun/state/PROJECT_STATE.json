@@ -129,7 +129,7 @@
         {
             "id": "TASK-0272",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS] Eliminar el seen-burn silencioso: marcar visto SOLO tras ejecucion confirmada, con reintento automatico cuando el aborto fue por pre-gate rojo (ventana ocupada)"
         },
         {
@@ -149,6 +149,18 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana"
+        },
+        {
+            "id": "TASK-0276",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
+        },
+        {
+            "id": "TASK-0277",
+            "owner": "Codex",
+            "status": "proposed",
+            "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",
