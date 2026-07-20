@@ -1,6 +1,12 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0257 closure and TASK-0258 intake.
+
+- TASK-0268 final implementer flip commit `08950e8` moves the Arquitecto-ratified
+  bounded hook cost split from `review_approved` to `done`; drift stayed false at
+  seq 5164.
+
+Previous update: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
 
 - TASK-0268 H1 docs-only remediation commit `c06fbad` corrects
   `README_INSTANCIACION.md`: the default bounded pre-commit checks the current
