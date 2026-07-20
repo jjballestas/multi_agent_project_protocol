@@ -299,6 +299,19 @@ umbrales pre-declarados que este protocolo exige a sus mediciones):**
   del dato al sellar: v2 actual 45.8-53.3s (maker y checker); suelo del validador
   ~12.5s. La decision se ejecuta contra el umbral SIN re-litigarse.
 
+**RESUELTO (2026-07-20, TASK-0269 con GO del checker): rama > 15s -> E6-A PERMANENTE.**
+Cifra caliente del checker en clon limpio y ventana quieta: **70.7s** (par 70.7/71.6);
+frio 99.7s; **piso observado entre corridas validas 43.0s = 2.9x el umbral**. Desglose:
+materializar 1.9s, prune 0.6s, el resto validador+entorno -- es decir, la materializacion
+NO era el coste dominante y optimizarla no acerca a 15s. La medicion del maker (108.2s)
+queda corregida a 43-72s en condiciones controladas SIN cambiar la rama: en toda
+condicion observada la cifra supera el umbral. En consecuencia: **el reparto E6-A queda
+permanente** (acotado local por defecto ~0.5s, completo bajo flag explicito, CI como
+enforcement completo) y la reactivacion hibrida estado/ledger NO se autoriza. Paridad
+partial-vs-total verificada intacta (suite + 5 probes reales del checker, inventario
+cerrado contra el read-set real), asi que la optimizacion se conserva por correccion y
+por abaratar el flag y el CI, no por reabrir el reparto.
+
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
 - Ejecucion por el flujo gobernado NORMAL (cron/sesion + submit_intent), NO por el

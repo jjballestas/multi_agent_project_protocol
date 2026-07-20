@@ -67,12 +67,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0257",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)"
-        },
-        {
             "id": "TASK-0258",
             "owner": "Codex",
             "status": "in_progress",
@@ -127,15 +121,9 @@
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
         },
         {
-            "id": "TASK-0268",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo"
-        },
-        {
             "id": "TASK-0269",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
         },
         {

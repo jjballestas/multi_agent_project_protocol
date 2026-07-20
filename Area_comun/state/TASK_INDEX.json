@@ -258,18 +258,6 @@
         },
         {
             "created_at": "2026-07-19",
-            "file": "Area_comun/tasks/TASK-0257-d0103-c5-harness-hookspath-precommit-validate.md",
-            "id": "TASK-0257",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][C5] Armar el harness: core.hooksPath -> .githooks/ + pre-commit invoca validate_collaboration_state y falla en rojo (hub + export born-operational)",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-19",
             "file": "Area_comun/tasks/TASK-0258-d0103-c3-turn-schema-obstacles.md",
             "id": "TASK-0258",
             "owner": "Codex",
@@ -378,25 +366,13 @@
         },
         {
             "created_at": "2026-07-20",
-            "file": "Area_comun/tasks/TASK-0268-d0103-e6-reparto-coste-acotado-local.md",
-            "id": "TASK-0268",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][E6-A] Reparto de coste del hook: modo acotado por defecto en local (todo commit), completo solo bajo flag explicito; CI como enforcement completo",
-            "type": "infra"
-        },
-        {
-            "created_at": "2026-07-20",
             "file": "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md",
             "id": "TASK-0269",
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local",
             "type": "infra"
         },
