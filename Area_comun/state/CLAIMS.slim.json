@@ -14,6 +14,15 @@
                 "scripts/test_anthropic_checker_harness.py"
             ],
             "task_id": "TASK-0271"
+        },
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-memory",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "task_id": "TASK-0271"
         }
     ],
     "schema_version": "1.0",

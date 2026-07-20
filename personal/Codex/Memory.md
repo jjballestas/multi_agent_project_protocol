@@ -1,6 +1,12 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, during TASK-0267 delivery.
+Last updated: 2026-07-20 Europe/Madrid, during TASK-0271 F02 remediation.
+
+- TASK-0271 F-0271-02 implementation commit `6ab2d4e` removes live-instance
+  identities from the generic checker contract test by parameterizing the
+  instance harness path and assembling the legacy provider fixture neutrally.
+  The contract test passes, all four protocol gates pass, drift is false at
+  seq 5113, and the same governed transition moved ratified TASK-0270 to done.
 
 - TASK-0268 implementation commit `b37e638` makes every local commit run the
   bounded prune/guide checks by default, enables the unchanged staged-snapshot

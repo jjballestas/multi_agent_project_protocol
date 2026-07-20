@@ -62,6 +62,20 @@
             "updated_at": "2026-07-20T03:55:00Z"
         },
         {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0271-F02-memory",
+            "expires_at": "2026-07-20T12:00:00Z",
+            "notes": "Persist TASK-0271 F02 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0271-F02-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-20T04:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0271",
+            "updated_at": "2026-07-20T04:00:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-hyg-0545-20260720",
             "expires_at": "2026-07-20T04:45:00Z",
             "notes": "Higiene: 3 consumidos (review 0270 con veredicto entregado, 2 REQUESTs respondidos) para bajar cold-start",
