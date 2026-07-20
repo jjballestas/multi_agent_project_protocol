@@ -1,5 +1,21 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260720-Codex-TASK-0269",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260720-Codex-TASK-0269",
+                "Area_comun/state/TASK_INDEX.json#TASK-0269",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0269",
+                "Area_comun/tasks/TASK-0269-d0103-e6-materializacion-parcial-rutas-validador.md",
+                ".githooks/pre-commit",
+                "scripts/test_precommit_hook.py",
+                "examples/",
+                "personal/Codex/Memory.md"
+            ],
+            "task_id": "TASK-0269"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

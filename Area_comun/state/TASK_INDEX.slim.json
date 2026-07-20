@@ -30,7 +30,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[DECISION-0103][C3] Bloque obstacles[] en runtime/turn_schema.json (what / root_cause / resolution / recurrence_risk)"
         },
         {
@@ -102,7 +102,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "normal",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[DECISION-0103][E6-C] Optimizacion del hook v2: materializar SOLO las rutas que el validador lee y medir; insumo para re-decidir el completo-local"
         }
     ],
