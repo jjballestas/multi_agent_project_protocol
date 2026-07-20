@@ -11,6 +11,8 @@ Last updated: 2026-07-20 Europe/Madrid, during TASK-0272 remediation iteration 1
 - The retry E2E permanently covers peer commit movement, echoed NO-GO prose, confirmed
   delivery narrating a transient obstacle, and a pre-dirty path staged by an abort.
 - The same governed transaction applied the ratified TASK-0258 review_approved -> done flip.
+- Delivery commit `2d514b7` records the self-contained handoff/response, moves TASK-0272
+  back to `in_review`, and releases both remediation claims through seq 5306.
 
 Previous update: 2026-07-20 Europe/Madrid, during TASK-0273 delivery.
 
