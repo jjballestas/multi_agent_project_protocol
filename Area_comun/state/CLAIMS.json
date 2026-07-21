@@ -322,6 +322,26 @@
             "updated_at": "2026-07-21T01:54:34Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0281",
+            "expires_at": "2026-07-21T11:15:00Z",
+            "notes": "Harden the real mailbox loop against orphan locks, unbounded defers, fragile ledger baselines, and unstaged residue.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0281",
+                "Area_comun/state/TASK_INDEX.json#TASK-0281",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0281",
+                "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T03:15:00Z",
+            "status": "active",
+            "task_id": "TASK-0281",
+            "updated_at": "2026-07-21T03:15:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0280-it4-20260721",
             "expires_at": "2026-07-21T01:42:11Z",
             "notes": "Remediacion acotada de 0280 (cabeza ilegible envenena la evidencia propia) + higiene de 2",

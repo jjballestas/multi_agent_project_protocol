@@ -120,6 +120,8 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
         encoding="ascii",
     )
     runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    runtime.mkdir(parents=True)
+    (runtime / "testpeer_mailbox_cron.lock").write_text("orphan\n", encoding="ascii")
     command = [
         "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
         "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
@@ -134,7 +136,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     while time.monotonic() < deadline:
         if log_path.exists():
             log = log_path.read_text(encoding="utf-8")
-            if "RETRY_DEFER reason=ledger_unreadable_before_exec" in log:
+            if "RETRY_EXHAUSTED attempts=5 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log:
                 break
         time.sleep(0.1)
     else:
@@ -149,8 +151,60 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
     assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
     assert "outcome=confirmed" not in log, log
+    assert "RETRY_EXHAUSTED attempts=5 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log, log
+    assert "SELF_HEAL_ORPHAN_LOCK owner=TestPeer reason=missing_lease" in log, log
+    assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
     shutil.rmtree(sandbox / ".protocol-tmp")
     shutil.copy2(LEDGER_HEAD, helper)
+
+
+def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
+    """Fresh unstaged residue must defer visibly and exhaust without invoking the peer."""
+    residue = sandbox / "unstaged-residue.txt"
+    residue.write_text("dirty\n", encoding="ascii")
+    command = [
+        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+        "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+        "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
+        "-MaxTransientRetries", "3", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "60",
+    ]
+    result = run(*command, cwd=sandbox, timeout=20)
+    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    log = (runtime / "testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+    assert "reason=worktree_residue_live" in log, log
+    assert "RETRY_EXHAUSTED attempts=3 signal=watchdog outcome=deferred reason=worktree_residue_live" in log, log
+    assert not (sandbox / ".protocol-tmp/fake-count.txt").exists(), result.stdout + result.stderr
+    assert residue.exists(), "residue pre-gate mutated the dirty file"
+    shutil.rmtree(sandbox / ".protocol-tmp")
+    residue.unlink()
+
+
+def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
+    """Historical own evidence before the byte baseline cannot confirm a new exec."""
+    events = sandbox / "runtime/state/events.jsonl"
+    events.write_text(
+        '{"seq":99,"actor":"TestPeer","actor_auth":{"method":"ed25519","keyid":"testpeer:v1","sig":"old"}}\n'
+        '{"seq":1,"actor":"Other","actor_auth":{"method":"ed25519","keyid":"other:v1","sig":"tail"}}\n',
+        encoding="ascii",
+    )
+    fake = sandbox / "fake-noop.cmd"
+    fake.write_text("@echo no new evidence\r\n", encoding="ascii")
+    command = [
+        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+        "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+        "-MaxNoCoordinatorRounds", "3", "-ExecTimeoutSeconds", "20",
+        "-MaxTransientRetries", "1", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+    ]
+    run(*command, cwd=sandbox, timeout=20)
+    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    log = (runtime / "testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+    assert "outcome=unconfirmed" in log, log
+    assert "outcome=confirmed" not in log, log
+    assert "RETRY_EXHAUSTED attempts=1 signal=watchdog outcome=unconfirmed" in log, log
+    shutil.rmtree(sandbox / ".protocol-tmp")
+    fake.unlink()
 
 
 def main() -> int:
@@ -265,6 +319,8 @@ def main() -> int:
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)
+        run_unstaged_residue_case(sandbox, prompt, fake)
+        run_disordered_ledger_case(sandbox, prompt)
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {
