@@ -83,6 +83,7 @@ $LockPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.lock"
 $LeasePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.exec-lease.json"
 $SeenPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.seen.json"
 $RetryPath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.retry.json"
+$ResiduePath = Join-Path $RuntimeDir "${PeerLower}_mailbox_cron.residue-first-seen.json"
 $RunsDir = Join-Path $RuntimeDir "runs"
 $StartedAtUtc = [DateTime]::UtcNow
 $NoCoordinatorRounds = 0
@@ -514,9 +515,18 @@ function Get-GitStatusPorcelainUtf8 {
     $process.StartInfo = $start
     try {
         if (-not $process.Start()) { return [pscustomobject]@{ ok = $false; raw = "" } }
-        $raw = $process.StandardOutput.ReadToEnd()
-        $null = $process.StandardError.ReadToEnd()
-        $process.WaitForExit()
+        # Drain both pipes concurrently. Sequential ReadToEnd deadlocks when either
+        # redirected pipe fills before the other one is drained.
+        $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+        $stderrTask = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit(10000)) {
+            try { $process.Kill() } catch {}
+            return [pscustomobject]@{ ok = $false; raw = ""; reason = "timeout" }
+        }
+        if (-not [System.Threading.Tasks.Task]::WaitAll(@($stdoutTask, $stderrTask), 10000)) {
+            return [pscustomobject]@{ ok = $false; raw = ""; reason = "drain_timeout" }
+        }
+        $raw = $stdoutTask.Result
         return [pscustomobject]@{ ok = ($process.ExitCode -eq 0); raw = $raw }
     } catch {
         return [pscustomobject]@{ ok = $false; raw = "" }
@@ -550,23 +560,79 @@ function Get-StagedResidueState {
     $statusResult = Get-GitStatusPorcelainUtf8
     if (-not $statusResult.ok) { return "unknown" }
     $statusRaw = [string]$statusResult.raw
-    if ([string]::IsNullOrEmpty($statusRaw)) { return "none" }
+    if ([string]::IsNullOrEmpty($statusRaw)) {
+        if (Test-Path -LiteralPath $ResiduePath) { Remove-Item -LiteralPath $ResiduePath -Force -ErrorAction SilentlyContinue }
+        return "none"
+    }
     $status = @($statusRaw -split [char]0 | Where-Object { $_ })
     $cutoff = [DateTime]::UtcNow.AddMinutes(-$AbortedResidueMinutes)
+    $firstSeen = @{}
+    if (Test-Path -LiteralPath $ResiduePath) {
+        try {
+            $stored = Get-Content -LiteralPath $ResiduePath -Raw -Encoding UTF8 | ConvertFrom-Json
+            foreach ($property in $stored.PSObject.Properties) { $firstSeen[$property.Name] = [string]$property.Value }
+        } catch { return "unknown" }
+    }
+    $nextSeen = @{}
     for ($index = 0; $index -lt $status.Count; $index++) {
         $row = $status[$index]
         if ($row.Length -lt 4) { return "unknown" }
         $relative = $row.Substring(3)
         $full = Join-Path $Root $relative
-        if (-not (Test-Path -LiteralPath $full)) {
-            return "live"
+        $now = [DateTime]::UtcNow
+        $observed = $now
+        if ($firstSeen.ContainsKey($relative)) {
+            try { $observed = [DateTime]::Parse($firstSeen[$relative]).ToUniversalTime() } catch { return "unknown" }
+        } elseif (Test-Path -LiteralPath $full) {
+            $observed = (Get-Item -LiteralPath $full).LastWriteTimeUtc
         }
-        if ((Get-Item -LiteralPath $full).LastWriteTimeUtc -gt $cutoff) {
+        $nextSeen[$relative] = $observed.ToString("o")
+        if ($observed -gt $cutoff) {
+            Write-Utf8NoBom -Path $ResiduePath -Content (($nextSeen | ConvertTo-Json -Depth 4) + "`n")
             return "live"
         }
         if ($row.Substring(0, 2) -match '[RC]') { $index++ }
     }
+    Write-Utf8NoBom -Path $ResiduePath -Content (($nextSeen | ConvertTo-Json -Depth 4) + "`n")
     return "aborted"
+}
+
+function Read-JsonWithDeadline {
+    param([string]$Path, [int]$TimeoutMilliseconds = 2000)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return [pscustomobject]@{ ok = $true; value = $null }
+    }
+    $deadline = [DateTime]::UtcNow.AddMilliseconds($TimeoutMilliseconds)
+    do {
+        try {
+            $raw = [IO.File]::ReadAllText($Path, [Text.Encoding]::UTF8)
+            return [pscustomobject]@{ ok = $true; value = ($raw | ConvertFrom-Json) }
+        } catch {
+            Start-Sleep -Milliseconds 25
+        }
+    } while ([DateTime]::UtcNow -lt $deadline)
+    return [pscustomobject]@{ ok = $false; value = $null }
+}
+
+function Get-AdditionalWorkSignal {
+    # Claims and live peer leases reinforce a defer. Their absence is never used
+    # as permission to override the dirty-tree veto.
+    $claimsResult = Read-JsonWithDeadline -Path (Join-Path $Root "Area_comun\state\CLAIMS.json")
+    if (-not $claimsResult.ok) { return "claims_unreadable" }
+    $now = [DateTime]::UtcNow
+    foreach ($claim in @($claimsResult.value.claims)) {
+        if ([string]$claim.owner -eq $PeerId -or [string]$claim.status -eq "released") { continue }
+        try { $expires = [DateTime]::Parse([string]$claim.expires_at).ToUniversalTime() } catch { continue }
+        if ($expires -gt $now) { return "active_external_claim" }
+    }
+    $tmpRoot = Join-Path $Root ".protocol-tmp"
+    foreach ($leaseFile in @(Get-ChildItem -LiteralPath $tmpRoot -Recurse -File -Filter "*.exec-lease.json" -ErrorAction SilentlyContinue)) {
+        if ($leaseFile.FullName -eq $LeasePath) { continue }
+        $leaseResult = Read-JsonWithDeadline -Path $leaseFile.FullName
+        if (-not $leaseResult.ok) { return "peer_lease_unreadable" }
+        if (Test-LeaseProcessMatches -Lease $leaseResult.value) { return "active_peer_lease" }
+    }
+    return "none"
 }
 
 function Register-PreExecDefer {
@@ -576,10 +642,12 @@ function Register-PreExecDefer {
     $same = $retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)
     $attempts = if ($same -and $null -ne $retry[$Message.Name].attempts) { [int]$retry[$Message.Name].attempts } else { 0 }
     $defers = if ($same -and $null -ne $retry[$Message.Name].defers) { [int]$retry[$Message.Name].defers + 1 } else { 1 }
-    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = $defers; exhausted = $false; outcome = $Outcome; reason = $Reason; updated_at = [DateTime]::UtcNow.ToString("o") }
+    $terminal = ($defers -ge $MaxTransientRetries)
+    $effectiveOutcome = if ($terminal) { "defer_terminal" } else { $Outcome }
+    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = $defers; exhausted = $terminal; outcome = $effectiveOutcome; reason = $Reason; updated_at = [DateTime]::UtcNow.ToString("o") }
     Write-RetryState -State $retry
     if ($defers -ge $MaxTransientRetries) {
-        Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts signal=watchdog outcome=$Outcome reason=$Reason message=$($Message.Name)"
+        Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts signal=watchdog outcome=defer_terminal reason=$Reason message=$($Message.Name)"
     } else {
         Write-Log "RETRY_DEFER defer=$defers max=$MaxTransientRetries reason=$Reason message=$($Message.Name)"
         if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
@@ -711,7 +779,7 @@ function Get-ProcessablePeerMessages {
             ($type -in $AcceptedTypesUpper)
         ) -and
         ((-not $seen.ContainsKey($_.Name)) -or ($seen[$_.Name] -ne $signature)) -and
-        ((-not $retry.ContainsKey($_.Name)) -or ([string]$retry[$_.Name].signature -ne $signature) -or (-not [bool]$retry[$_.Name].exhausted) -or ([string]$retry[$_.Name].outcome -eq "deferred"))
+        ((-not $retry.ContainsKey($_.Name)) -or ([string]$retry[$_.Name].signature -ne $signature) -or (-not [bool]$retry[$_.Name].exhausted))
     })
 }
 
@@ -756,6 +824,25 @@ function Invoke-PeerForMessage {
         Write-Log "LOCKED skip $($Message.Name)"
         return
     }
+    # Pre-gate before taking the exec lock. A failed/slow probe retains the launch
+    # and cannot strand a lock owned by no process.
+    $residueState = Get-StagedResidueState
+    if ($residueState -eq "unknown") {
+        Register-PreExecDefer -Message $Message -Reason "residue_probe_failed"
+        return
+    }
+    if ($residueState -eq "live") {
+        Register-PreExecDefer -Message $Message -Reason "worktree_residue_live"
+        return
+    }
+    if ($residueState -eq "aborted") {
+        Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
+    }
+    $additionalSignal = Get-AdditionalWorkSignal
+    if ($additionalSignal -ne "none") {
+        Register-PreExecDefer -Message $Message -Reason $additionalSignal
+        return
+    }
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
     $execArgs = Get-AgentArguments
@@ -783,18 +870,6 @@ function Invoke-PeerForMessage {
     $untrackedBefore = @()
     try {
         Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
-        $residueState = Get-StagedResidueState
-        if ($residueState -eq "unknown") {
-            Register-PreExecDefer -Message $Message -Reason "residue_probe_failed"
-            return
-        }
-        if ($residueState -eq "live") {
-            Register-PreExecDefer -Message $Message -Reason "worktree_residue_live"
-            return
-        }
-        if ($residueState -eq "aborted") {
-            Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
-        }
         $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
         $ledgerHeadBefore = Get-LedgerHead
         if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_before_exec"; return }

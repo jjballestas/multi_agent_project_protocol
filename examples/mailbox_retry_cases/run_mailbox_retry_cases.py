@@ -149,6 +149,40 @@ def run_nondestructive_rollback_contract() -> None:
     assert not survivors, f"rollback contract failed to kill declared mutants: {survivors}"
 
 
+def run_pregate_contract_mutants() -> None:
+    """Kill the declared TASK-0284 pre-gate regressions at their control points."""
+    text = RUNNER.read_text(encoding="utf-8-sig")
+
+    def contract(candidate: str) -> bool:
+        prelock = candidate.find("$residueState = Get-StagedResidueState")
+        lock_write = candidate.find("Write-Utf8NoBom -Path $LockPath")
+        return all(
+            (
+                candidate.count("ReadToEndAsync()") >= 2,
+                "WaitForExit(10000)" in candidate,
+                "Task]::WaitAll" in candidate,
+                "$ResiduePath" in candidate,
+                "$firstSeen.ContainsKey($relative)" in candidate,
+                "outcome=defer_terminal" in candidate,
+                "exhausted = $terminal" in candidate,
+                "Read-JsonWithDeadline" in candidate,
+                "$expires -gt $now" in candidate,
+                prelock >= 0 and lock_write > prelock,
+            )
+        )
+
+    assert contract(text), "TASK-0284 pre-gate contract is incomplete"
+    mutants = {
+        "sequential_pipe_drain": text.replace("$process.StandardOutput.ReadToEndAsync()", "$process.StandardOutput.ReadToEnd()", 1),
+        "deleted_first_seen_removed": text.replace("$firstSeen.ContainsKey($relative)", "$false", 1),
+        "terminal_defer_removed": text.replace("exhausted = $terminal", "exhausted = $false", 1),
+        "claims_expiry_removed": text.replace("$expires -gt $now", "$true", 1),
+        "dirty_forensics_removed": text.replace("$residueState = Get-StagedResidueState", "# dirty-tree veto removed", 1),
+    }
+    survivors = [name for name, mutant in mutants.items() if contract(mutant)]
+    assert not survivors, f"pre-gate contract failed to kill declared mutants: {survivors}"
+
+
 def run_pure_append_evidence_cases(sandbox: Path) -> None:
     """Only a byte-identical prefix plus an appended own event may prove work."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
@@ -185,7 +219,7 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
 
 
 def run_nul_residue_path_cases(sandbox: Path) -> None:
-    """NUL-delimited porcelain must preserve spaces and non-ASCII path bytes."""
+    """A stale non-ASCII residue must age; a console-codepage mutant must not."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
     residue_helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)
@@ -196,6 +230,9 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
     helper_text = git_helper.group(0) + "\n" + residue_helper.group(0)
     probe.write_text(
         "$Root=(Get-Location).Path\n$AbortedResidueMinutes=60\n"
+        "$ResiduePath=Join-Path $Root '.protocol-tmp/residue-first-seen.json'\n"
+        "New-Item -ItemType Directory -Force -Path (Split-Path -Parent $ResiduePath)|Out-Null\n"
+        "function Write-Utf8NoBom { param([string]$Path,[string]$Content) [IO.File]::WriteAllText($Path,$Content,(New-Object Text.UTF8Encoding($false))) }\n"
         + helper_text
         + "\nGet-StagedResidueState\n",
         encoding="ascii",
@@ -208,7 +245,15 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
             path.unlink()
 
         target = paths[-1]
+        (sandbox / ".protocol-tmp/residue-first-seen.json").unlink(missing_ok=True)
         target.write_text("dirty\n", encoding="ascii")
+        stale = time.time() - 7200
+        target.touch()
+        import os
+        os.utime(target, (stale, stale))
+        output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout.strip()
+        assert output == "aborted", f"stale UTF-8 residue did not age: {output!r}"
+        (sandbox / ".protocol-tmp/residue-first-seen.json").unlink(missing_ok=True)
         decoding_mutant = probe.with_name("decoding-mutant.ps1")
         decoding_mutant.write_text(
             probe.read_text(encoding="ascii").replace(
@@ -218,18 +263,7 @@ def run_nul_residue_path_cases(sandbox: Path) -> None:
             encoding="ascii",
         )
         mutant_output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(decoding_mutant), cwd=sandbox).stdout.strip()
-        assert mutant_output == "live", "fail-safe unresolved-path rule did not contain the decoding mutant"
-
-        unsafe_mutant = probe.with_name("unsafe-mutant.ps1")
-        unsafe_mutant.write_text(
-            decoding_mutant.read_text(encoding="ascii").replace(
-                'if (-not (Test-Path -LiteralPath $full)) {\n            return "live"\n        }',
-                'if (-not (Test-Path -LiteralPath $full)) { continue }',
-            ),
-            encoding="ascii",
-        )
-        killed = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(unsafe_mutant), cwd=sandbox).stdout.strip()
-        assert killed == "aborted", f"residue control failed to kill unsafe decoding mutant: {killed!r}"
+        assert mutant_output == "live", "stale-path case failed to kill the console-codepage mutant"
         target.unlink()
     finally:
         shutil.rmtree(probe.parent, ignore_errors=True)
@@ -266,7 +300,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     while time.monotonic() < deadline:
         if log_path.exists():
             log = log_path.read_text(encoding="utf-8")
-            if "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log:
+            if "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=defer_terminal reason=ledger_unreadable_before_exec" in log:
                 break
         time.sleep(0.1)
     else:
@@ -281,7 +315,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
     assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
     assert "outcome=confirmed" not in log, log
-    assert "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log, log
+    assert "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=defer_terminal reason=ledger_unreadable_before_exec" in log, log
     assert "SELF_HEAL_ORPHAN_LOCK owner=TestPeer reason=missing_lease" in log, log
     assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
     shutil.rmtree(sandbox / ".protocol-tmp")
@@ -290,7 +324,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
 
 
 def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
-    """Environmental defers signal but consume no attempts and recover when clean."""
+    """Environmental defers escape to a terminal state at the configured bound."""
     residue = sandbox / "unstaged-residue.txt"
     residue.write_text("dirty\n", encoding="ascii")
     runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
@@ -311,7 +345,7 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     while time.monotonic() < deadline:
         if log_path.exists():
             log = log_path.read_text(encoding="utf-8")
-            if "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog outcome=deferred reason=worktree_residue_live" in log:
+            if "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog outcome=defer_terminal reason=worktree_residue_live" in log:
                 break
         time.sleep(0.1)
     else:
@@ -319,7 +353,8 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
         stdout, stderr = process.communicate()
         raise AssertionError(f"residue watchdog signal missing:\n{log}\n{stdout}\n{stderr}")
     retry = json.loads((runtime / "testpeer_mailbox_cron.retry.json").read_text(encoding="utf-8"))
-    assert retry["MSG-retry.md"]["attempts"] == 0 and not retry["MSG-retry.md"]["exhausted"], retry
+    assert retry["MSG-retry.md"]["attempts"] == 0 and retry["MSG-retry.md"]["exhausted"], retry
+    assert retry["MSG-retry.md"]["outcome"] == "defer_terminal", retry
     residue.unlink()
     remaining = run("git", "status", "--porcelain=v1", "--untracked-files=all", cwd=sandbox).stdout
     assert remaining == "", f"fixture did not become clean after environmental veto: {remaining!r}"
@@ -327,9 +362,10 @@ def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     assert process.returncode == 0, stdout + stderr
     log = (runtime / "testpeer_mailbox_cron.log").read_text(encoding="utf-8")
     assert "reason=worktree_residue_live" in log, log
-    assert "outcome=definitive" in log, log
-    seen = json.loads((runtime / "testpeer_mailbox_cron.seen.json").read_text(encoding="utf-8"))
-    assert "MSG-retry.md" in seen, "message did not recover after the environmental veto cleared"
+    assert "outcome=definitive" not in log, log
+    seen_path = runtime / "testpeer_mailbox_cron.seen.json"
+    seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
+    assert "MSG-retry.md" not in seen, "terminally deferred message was re-executed"
     shutil.rmtree(sandbox / ".protocol-tmp")
 
 
@@ -475,6 +511,7 @@ def main() -> int:
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
         run_nondestructive_rollback_contract()
+        run_pregate_contract_mutants()
         run_pure_append_evidence_cases(sandbox)
         run_nul_residue_path_cases(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)
