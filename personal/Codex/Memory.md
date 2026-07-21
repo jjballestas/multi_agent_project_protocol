@@ -2,6 +2,13 @@
 
 Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
 
+- TASK-0280 F-0280R4-02 implementation commit `32cea00` restores the permanent
+  negative's falsifiability. The test now snapshots ambiguous `events.jsonl` after
+  the rollback decision and before its repair barrier. The normal suite exits 0;
+  a control mutant that empties the ledger in the same rollback branch exits 1
+  with `after_rollback=['']`. No torn-tail guard was added and the live harness
+  was not redeployed. Delivery to independent review remains pending.
+
 - TASK-0281 implementation commit `8ea4874` hardens the generic mailbox loop without
   redeploying either live peer wrapper. A missing-lease lock self-heals, every pre-exec
   defer consumes the bounded retry budget and emits watchdog exhaustion, signed own
