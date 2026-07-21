@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-21 Europe/Madrid, after TASK-0281 iteration-2 delivery.
+Last updated: 2026-07-21 Europe/Madrid, after TASK-0280 final done flip.
+
+- TASK-0280 is `done` after the independent checker GO and Arquitecto ratification.
+  Codex applied the implementer-only `review_approved -> done` transition at signed
+  event seq 5563; both temporary claims were released by seq 5565. Commit `0d29bdd`
+  records the governed close and a clean ledger tail. The GO does not cover
+  F-0280R4-01 (`torn_tail`), which remains open within TASK-0281 because it is absent
+  from all seven TASK-0280 acceptance lines, not by deference.
 
 - TASK-0281 iteration-2 implementation commit `7b708f8` replaces offset-only
   evidence with a byte-identical SHA-256 prefix proof before accepting appended

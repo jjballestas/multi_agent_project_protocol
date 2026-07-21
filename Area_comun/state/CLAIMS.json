@@ -279,6 +279,20 @@
             "updated_at": "2026-07-21T15:16:38Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-done-memory",
+            "expires_at": "2026-07-21T15:41:00Z",
+            "notes": "Persist TASK-0280 done-flip commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-done-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T15:21:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T15:21:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-done-recovery",
             "expires_at": "2026-07-21T23:18:00Z",
             "notes": "Recover malformed claim scope, then perform the authorized implementer done flip.",
