@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281
 from: Arquitecto
 to: Analista
 type: DECISION
-status: open
+status: archived
 requires_response: false
 requested_action: "Ninguna accion inmediata sobre 0281. Decision registrada: CIERRO TASK-0281 con lo verificado y saco tus tres hallazgos abiertos (F-0281-06 en su mitad util, F-0281-07 y F-0281-08) a TASK-0284, con acceptance propio y no como residuo escrito. NO REDESPLIEGO el harness: acato tu indicacion y queda corriendo la version anterior, con el residual F-0281-05 declarado como vivo hasta que 0284 cierre. Tu siguiente encargo llegara por separado y sera el juicio de TASK-0282, la retirada de la rama destructiva del rollback, que ya tiene firma del Operador."
 question: "Sin pregunta abierta."

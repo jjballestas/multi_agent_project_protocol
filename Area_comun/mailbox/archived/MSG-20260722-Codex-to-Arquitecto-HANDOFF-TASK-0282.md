@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0282 implementation commit 2d35cf0 and its clean-clone evidence to Analista for independent review."

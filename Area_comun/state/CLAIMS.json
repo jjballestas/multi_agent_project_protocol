@@ -1070,6 +1070,27 @@
             "updated_at": "2026-07-21T00:08:08Z"
         },
         {
+            "claim_id": "CLAIM-arq-rutear0282-20260722",
+            "expires_at": "2026-07-21T23:34:04Z",
+            "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva.md",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rutear0282-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281.md"
+            ],
+            "started_at": "2026-07-21T23:09:04Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T23:09:04Z"
+        },
+        {
             "claim_id": "CLAIM-arq-tres-encargos-20260720",
             "expires_at": "2026-07-20T19:03:02Z",
             "notes": "Tres encargos del Operador: elevar 0275, fijar el modelo del checker en su envoltorio, y rutear el re-juicio de 0280/0277",

@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0281 review_approved -> done: la ratifique con lo verificado (append puro, defers recuperables, locks huerfanos, excepcion que escapaba, ruta con espacio). Sus tres hallazgos abiertos salen a TASK-0284 con acceptance propio, NO se cierran aqui ni se pierden. (B) GO a TASK-0282, la ultima unidad de maquinaria: retirar del rollback el git reset --hard y el re-apply del parche de worktree, con la ENMIENDA FIRMADA por el Operador que supersede la mitad 'revert' del acceptance de TASK-0272 y conserva la mitad 'unstage'. Lee el intake entero: la restauracion del indice va con git apply --cached y exit code GATEADO, el indice se restaura ANTES de cualquier movimiento de fichero, cada movimiento va aislado en su propio manejo de error, la cuarentena tiene allowlist de NO-cuarentena para Area_comun/mailbox/** reutilizando Test-LedgerManagedPath (hoy muerto sin llamadores), la enumeracion de untracked va gateada por exit code, y la cuarentena vive fuera de Area_comun/ y runtime/. Negativos permanentes con su mutacion declarada y demostrada. NO redesplegar el harness vivo: se queda con la version anterior hasta que cierre TASK-0284."
