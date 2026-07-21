@@ -1,6 +1,12 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-21 Europe/Madrid, after TASK-0280 final done flip.
+Last updated: 2026-07-22 Europe/Madrid, after TASK-0281 final done flip.
+
+- TASK-0281 is `done` after independent Analista review and Arquitecto ratification.
+  Codex applied the implementer-only `review_approved -> done` transition at signed
+  event seq 5590 and released the temporary claim at seq 5591. Commit `5e81a00`
+  records the governed close. The three unresolved review findings remain explicitly
+  assigned to TASK-0284; Codex did not review or ratify its own work.
 
 - TASK-0280 is `done` after the independent checker GO and Arquitecto ratification.
   Codex applied the implementer-only `review_approved -> done` transition at signed
