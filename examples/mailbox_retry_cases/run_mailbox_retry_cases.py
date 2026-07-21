@@ -97,7 +97,7 @@ def run_torn_tail_case(sandbox: Path) -> None:
         + head_fn.group(0) + "\n" + restore_fn.group(0) + "\n"
         "$before=[pscustomobject]@{readable=$true;seq=1;hash='before';torn_tail=$false}\n"
         "$head=git rev-parse HEAD\n"
-        "Restore-TransientExecResidue -HeadBefore $head -IndexPatch '' -WorktreePatch '' -UntrackedBefore @() -LedgerHeadBefore $before\n"
+        "Restore-TransientExecResidue -HeadBefore $head -IndexPatch '' -UntrackedBefore @() -LedgerHeadBefore $before\n"
         "$log | ConvertTo-Json -Compress\n",
         encoding="ascii",
     )
@@ -105,6 +105,48 @@ def run_torn_tail_case(sandbox: Path) -> None:
     assert "ROLLBACK_DEFER reason=ledger_torn_tail" in output, output
     assert events.read_bytes().endswith(b'{"seq":'), "torn-tail deferral mutated the queue"
     probe.unlink()
+
+
+def run_nondestructive_rollback_contract() -> None:
+    """Kill declared rollback-policy mutants before exercising the real loop."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    restore = re.search(r"(?ms)^function Restore-TransientExecResidue \{.*?^\}", runner_text)
+    if not restore:
+        raise AssertionError("Restore-TransientExecResidue function not found")
+    body = restore.group(0)
+
+    def contract(text: str) -> bool:
+        index_reset = text.find("read-tree $HeadBefore")
+        index_apply = text.find("Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true")
+        enumeration = text.find("ls-files --others --exclude-standard -z")
+        first_move = text.find("Move-Item -LiteralPath")
+        return all(
+            (
+                "reset --hard" not in text,
+                "WorktreePatch" not in text,
+                index_reset >= 0,
+                index_apply > index_reset,
+                "reason=index_restore_failed" in text,
+                enumeration > index_apply,
+                "reason=untracked_enumeration_failed" in text,
+                first_move > enumeration,
+                "Test-LedgerManagedPath -Path $path" in text,
+                ".protocol-tmp\\rollback-quarantine" in text,
+                "Move-Item -LiteralPath $full -Destination $destination -ErrorAction Stop" in text,
+                "reason=quarantine_move_failed" in text,
+            )
+        )
+
+    assert contract(body), "non-destructive rollback contract is incomplete"
+    mutants = {
+        "destructive_reset": body + "\n# reset --hard",
+        "worktree_reapply": body + "\n# WorktreePatch",
+        "mailbox_allowlist_removed": body.replace("if (Test-LedgerManagedPath -Path $path) { continue }", ""),
+        "index_exit_gate_removed": body.replace('if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=index_restore_failed"; return }', ""),
+        "untracked_exit_gate_removed": body.replace('if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=untracked_enumeration_failed"; return }', ""),
+    }
+    survivors = [name for name, mutant in mutants.items() if contract(mutant)]
+    assert not survivors, f"rollback contract failed to kill declared mutants: {survivors}"
 
 
 def run_pure_append_evidence_cases(sandbox: Path) -> None:
@@ -375,6 +417,7 @@ def main() -> int:
             "  git add residue.txt\n"
             "  Set-Content -Path (Join-Path $root 'predirty.txt') -Value exec-content -Encoding ASCII\n"
             "  git add predirty.txt\n"
+            "  Set-Content -Path (Join-Path $root 'Area_comun/mailbox/open/MSG-window.md') -Value incoming -Encoding ASCII\n"
             "  Write-Output 'status: blocked claim ajeno active claim pre-gate rojo'\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -431,6 +474,7 @@ def main() -> int:
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
+        run_nondestructive_rollback_contract()
         run_pure_append_evidence_cases(sandbox)
         run_nul_residue_path_cases(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)
@@ -472,8 +516,15 @@ def main() -> int:
         retry = json.loads(retry_path.read_text(encoding="utf-8"))
         assert message.name in seen, "confirmed second exec was not marked seen"
         assert message.name not in retry, "retry state was not cleared after confirmation"
-        assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived rollback; log={log}"
+        assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived outside quarantine; log={log}"
+        quarantined = list((sandbox / ".protocol-tmp/rollback-quarantine").glob("*/residue.txt"))
+        assert len(quarantined) == 1 and quarantined[0].read_text(encoding="ascii").strip() == "residue", (
+            f"aborted exec residue was not preserved in quarantine; found={quarantined!r}; log={log}"
+        )
         assert (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "ambiguous residue beside signed events was destroyed"
+        assert (sandbox / "Area_comun/mailbox/open/MSG-window.md").read_text(encoding="ascii").strip() == "incoming", (
+            "mailbox message deposited during the exec window was quarantined"
+        )
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
         ambiguous_fixture = (sandbox / ".protocol-tmp/ambiguous-events-fixture.txt").read_text(encoding="ascii").splitlines()
         assert ambiguous_fixture[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_fixture!r}"
@@ -489,10 +540,10 @@ def main() -> int:
         assert (sandbox / "Area_comun/state/TASK_INDEX_ARCHIVE.json").exists(), "signed prune archive was destroyed"
         assert (sandbox / "Area_comun/decisions/DECISION-test.md").exists(), "signed decision document was destroyed"
         assert (sandbox / "ambiguous-residue.txt").exists(), "mid-log ambiguity was rolled back"
-        assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "peer-content\n"
+        assert (sandbox / "predirty.txt").read_text(encoding="ascii") == "exec-content\n", "worktree content was rewritten"
         assert (sandbox / "Area_comun/tasks/TASK-fixture.md").read_text(encoding="ascii") == "peer-task-edit\n"
         predirty_status = run("git", "status", "--porcelain", "--", "predirty.txt", cwd=sandbox).stdout
-        assert predirty_status.startswith(" M "), f"pre-dirty index/worktree state was not restored: {predirty_status!r}"
+        assert predirty_status.startswith(" M "), f"pre-exec index state was not restored: {predirty_status!r}"
         assert "outcome=unconfirmed" in log and "RETRY_SCHEDULED attempt=1" in log
         assert "outcome=transient" in log and "RETRY_SCHEDULED attempt=2" in log
         assert "RETRY_SCHEDULED attempt=3" in log

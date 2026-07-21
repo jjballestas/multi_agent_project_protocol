@@ -93,7 +93,7 @@
         {
             "id": "TASK-0282",
             "owner": "Codex",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca"
         },
         {

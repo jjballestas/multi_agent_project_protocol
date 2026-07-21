@@ -144,13 +144,16 @@ preserve old behavior:
   unstaged residue therefore defers with a retry signal. The probe runs inside the lock's
   cleanup path. A lock without an exec lease is
   self-healed as orphaned; the complete lock-held setup is covered by one cleanup path.
-- Transient rollback snapshots the pre-exec index and worktree separately, including
-  renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.
-  Both snapshot commands must succeed before the agent starts. Rollback rechecks HEAD
-  immediately before and after `reset --hard`; movement defers restoration instead of
-  applying stale patches. Ledger advancement is decided only by the shared exact event-log
-  head primitive (`seq` plus last-line SHA-256), checked before the exec, before reset, and
-  after restoration. Rollback is conservative by default: it runs only while the ledger is
+- Transient rollback snapshots the pre-exec index and restores only that index while HEAD
+  is stable: it unstages to the captured HEAD, then gates `git apply --cached` by exit code.
+  It never runs `git reset --hard` and never snapshots or re-applies a worktree patch, so
+  concurrent tracked content remains byte-for-byte untouched. Newly created untracked files
+  are moved, never deleted, into `.protocol-tmp/rollback-quarantine/`; every move has isolated
+  error handling. `Area_comun/mailbox/**` and the other ledger-managed routes recognized by
+  `Test-LedgerManagedPath` are never quarantined. Untracked enumeration is exit-code gated
+  before any move. Ledger advancement is decided only by the shared exact event-log head
+  primitive (`seq` plus last-line SHA-256), checked before the exec and before restoration.
+  Rollback is conservative by default: it runs only while the ledger is
   readable and unchanged, when residue is provably local to the exec. Any signed event,
   torn tail, unreadable line at any position, or other uncertainty defers mutation and leaves
   the tree recoverable. It never decides safety from route, event-kind, or change-name lists.

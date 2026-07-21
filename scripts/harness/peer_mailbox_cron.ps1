@@ -599,7 +599,7 @@ function Invoke-PreExecPatch {
     param([string]$PatchPath, [bool]$Index, [string[]]$ExcludePaths = @())
     if (-not (Test-Path $PatchPath) -or (Get-Item $PatchPath).Length -eq 0) { return }
     $args = @("-C", $Root, "apply")
-    if ($Index) { $args += "--index" }
+    if ($Index) { $args += "--cached" }
     $args += "--binary"
     foreach ($path in $ExcludePaths) {
         $args += "--exclude=$path"
@@ -615,7 +615,7 @@ function Test-LedgerDerivedState {
 }
 
 function Restore-TransientExecResidue {
-    param([string]$HeadBefore, [string]$IndexPatch, [string]$WorktreePatch, [string[]]$UntrackedBefore, [object]$LedgerHeadBefore)
+    param([string]$HeadBefore, [string]$IndexPatch, [string[]]$UntrackedBefore, [object]$LedgerHeadBefore)
     trap {
         Write-Log "ROLLBACK_DEFER reason=rollback_probe_failed"
         return
@@ -645,26 +645,27 @@ function Restore-TransientExecResidue {
         Write-Log "ROLLBACK_LEDGER_PRESERVED seq_before=$($LedgerHeadBefore.seq) seq_after=$($ledgerHeadAfter.seq) proof=disk"
         return
     }
+    # Restore only the pre-exec index before any filesystem movement. The shared
+    # worktree is never reset or re-applied.
+    & git -C $Root read-tree $HeadBefore 2>$null
+    if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=index_unstage_failed"; return }
+    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true
+    if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=index_restore_failed"; return }
     $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
     $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
+    if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=untracked_enumeration_failed"; return }
+    $quarantineRoot = Join-Path $Root ".protocol-tmp\rollback-quarantine\$([DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfffffffZ'))"
     foreach ($path in @($createdRaw -split [char]0 | Where-Object { $_ -and -not $beforeUntracked.ContainsKey($_) })) {
+        if (Test-LedgerManagedPath -Path $path) { continue }
         $full = Join-Path $Root $path
-        if (Test-Path -LiteralPath $full -PathType Leaf) { Remove-Item -LiteralPath $full -Force }
+        if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { continue }
+        try {
+            $destination = Join-Path $quarantineRoot $path
+            $parent = Split-Path -Parent $destination
+            New-Item -ItemType Directory -Path $parent -Force | Out-Null
+            Move-Item -LiteralPath $full -Destination $destination -ErrorAction Stop
+        } catch { Write-Log "ROLLBACK_DEFER reason=quarantine_move_failed path=$path" }
     }
-    $headBeforeReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
-    if ($headBeforeReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_before_reset"; return }
-    $ledgerHeadBeforeReset = Get-LedgerHead
-    if (-not [bool]$ledgerHeadBeforeReset.readable) { Write-Log "ROLLBACK_DEFER reason=ledger_unreadable_before_reset"; return }
-    if ([long]$ledgerHeadBeforeReset.seq -ne [long]$ledgerHeadAfter.seq -or [string]$ledgerHeadBeforeReset.hash -cne [string]$ledgerHeadAfter.hash) {
-        Write-Log "ROLLBACK_DEFER reason=ledger_head_changed_before_reset"
-        return
-    }
-    & git -C $Root reset --hard $HeadBefore 2>$null | Out-Null
-    if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=reset_failed"; return }
-    $headAfterReset = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
-    if ($headAfterReset -ne $HeadBefore) { Write-Log "ROLLBACK_DEFER reason=head_changed_after_reset"; return }
-    Invoke-PreExecPatch -PatchPath $IndexPatch -Index $true
-    Invoke-PreExecPatch -PatchPath $WorktreePatch -Index $false
 }
 
 function Get-ExecOutcomeClass {
@@ -777,7 +778,6 @@ function Invoke-PeerForMessage {
 
     Write-Utf8NoBom -Path $promptPath -Content $prompt
     $indexPatch = Join-Path $RunsDir "$stamp-$safeName.before-index.patch"
-    $worktreePatch = Join-Path $RunsDir "$stamp-$safeName.before-worktree.patch"
     $ledgerHeadBefore = $null
     $headBefore = ""
     $untrackedBefore = @()
@@ -804,9 +804,8 @@ function Invoke-PeerForMessage {
         if (-not $ledgerPrefixSha256Before) { Register-PreExecDefer -Message $Message -Reason "ledger_prefix_snapshot_failed"; return }
         & git -C $Root diff --cached --binary --output=$indexPatch
         if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "index_snapshot_failed"; return }
-        & git -C $Root diff --binary --output=$worktreePatch
-        if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "worktree_snapshot_failed"; return }
         $untrackedBeforeRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
+        if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "untracked_snapshot_failed"; return }
         $untrackedBefore = @($untrackedBeforeRaw -split [char]0 | Where-Object { $_ })
         # The prompt goes through STDIN (RedirectStandardInput of the rendered prompt
         # file), NOT as an argument: Start-Process -ArgumentList splits a multi-word
@@ -843,7 +842,7 @@ function Invoke-PeerForMessage {
             $retry = Read-RetryState
             if ($retry.ContainsKey($Message.Name)) { $retry.Remove($Message.Name); Write-RetryState -State $retry }
         } else {
-            Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore
+            Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore
             $retry = Read-RetryState
             $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
             $attempt = $previous + 1
@@ -859,7 +858,7 @@ function Invoke-PeerForMessage {
         }
     } catch {
         Write-Log "EXEC_FAIL message=$($Message.Name) error=$($_.Exception.Message)"
-        if ($ledgerHeadBefore -and $headBefore) { Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -WorktreePatch $worktreePatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore }
+        if ($ledgerHeadBefore -and $headBefore) { Restore-TransientExecResidue -HeadBefore $headBefore -IndexPatch $indexPatch -UntrackedBefore $untrackedBefore -LedgerHeadBefore $ledgerHeadBefore }
         $signature = Get-MessageSignature -Message $Message
         $retry = Read-RetryState
         $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
