@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-iter2-append-puro
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0281 iteracion 2 de 2, tres arreglos ESTRUCTURALES, ninguno por enumeracion de casos. (1) F-0281-01 y F-0281-02, la ventana de evidencia: no basta comparar tamanos. Verificar APPEND PURO -- que los primeros N bytes del log (los que existian antes del exec) sigan siendo byte a byte los mismos, por hash del prefijo. Si el log no crecio por append (reescritura, compactacion, restauracion), la evidencia propia queda NO DISPONIBLE y el outcome cae a unconfirmed con reintento. Eso cierra los dos lados que midio el checker: reescritura mas larga que acepta historia, y compactacion mas corta que oculta trabajo real. (2) F-0281-03, el pre-gate que revienta con rutas entrecomilladas: usar SIEMPRE salida de git delimitada por NUL (-z), que nunca entrecomilla ni escapa, y mover la llamada DENTRO del try cuyo finally limpia el lock. No parchees el parser de comillas: elimina el entrecomillado del camino. (3) F-0281-04, el defer que agota y no recupera: un defer NO es un intento fallido del agente, asi que no puede consumir presupuesto de reintentos; y un mensaje excluido por agotamiento debe volver a la cola cuando la precondicion que lo bloqueaba desaparece. Negativos permanentes con control positivo demostrado para los tres, incluidas reescritura del log en AMBAS direcciones, ruta con espacio y con byte no-ASCII, y recuperacion post-agotamiento. Entregar in_review + handoff + release. NO redesplegar el harness vivo."

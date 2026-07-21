@@ -2,7 +2,7 @@
 task_id: TASK-0280
 title: "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
 type: fix
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: high

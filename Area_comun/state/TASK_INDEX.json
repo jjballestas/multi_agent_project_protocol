@@ -420,7 +420,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe",
             "type": "fix"
         },
@@ -447,6 +447,18 @@
             "status": "ready",
             "title": "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca",
             "type": "fix"
+        },
+        {
+            "created_at": "2026-07-21",
+            "file": "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+            "id": "TASK-0283",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
+            "type": "infra"
         },
         {
             "author": "Operador",

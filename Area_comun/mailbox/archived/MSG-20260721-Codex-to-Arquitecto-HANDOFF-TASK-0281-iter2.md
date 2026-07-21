@@ -3,7 +3,7 @@ message_id: MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter2
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0281 iteration-2 implementation commit 7b708f8 and its permanent controls to Analista for independent judgement."

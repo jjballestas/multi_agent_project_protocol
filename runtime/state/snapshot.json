@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "959f012ed1a923bb957fc7033f1aa072a14d400c5bdae8ba20d25120e5b1b006",
+  "canonical_hash": "c2e8a69763787ae060df49f5af49b6ac2a50f150ee764a58f6846a48195d5f36",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -799,6 +799,7 @@
       "CLAIM-arq-ciclo1200-20260720": 1,
       "CLAIM-arq-cierre-orden-20260721": 1,
       "CLAIM-arq-cierre0277-iter2-0280-20260720": 1,
+      "CLAIM-arq-cierre0280-20260721": 1,
       "CLAIM-arq-d0103-ready-20260719": 1,
       "CLAIM-arq-desacople-20260721": 1,
       "CLAIM-arq-e4e5-0266-20260719": 1,
@@ -1948,10 +1949,12 @@
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-rejuicio-diseno-grafo-v02": 1,
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos": 1,
       "MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones": 1,
+      "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-cierre-GO": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter4-verdict": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-verdict": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-reconciliacion-F-0280R3-01": 1,
+      "MSG-20260721-Arquitecto-to-Analista-DECISION-desacoplar-0280-de-0281": 1,
       "MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre": 1,
@@ -1960,10 +1963,12 @@
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter4-cabeza-ilegible": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle": 1,
+      "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-iter2-append-puro": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter4": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281": 1,
+      "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter2": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2253,9 +2258,10 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 40,
+      "TASK-0280": 42,
       "TASK-0281": 14,
       "TASK-0282": 2,
+      "TASK-0283": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2278,7 +2284,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4881,
+    "events_applied": 4889,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2446,6 +2452,7 @@
       "arq:0281_82:arch3:782798dc-b395-4b2e-a7a4-0d752ec13695": 5515,
       "arq:0281_82:release:782798dc-b395-4b2e-a7a4-0d752ec13695": 5516,
       "arq:0282:upsert:782798dc-b395-4b2e-a7a4-0d752ec13695": 5512,
+      "arq:0283:upsert:c5971b01-151c-4fae-94c1-652c30ef4368": 5555,
       "arq:alta0280:acquire:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5402,
       "arq:alta0280:release:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5404,
       "arq:alta0280:upsert:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5403,
@@ -2463,6 +2470,13 @@
       "arq:cierre77:release:970ea3b8-3446-4794-99ac-13fd6818ec7e": 5460,
       "arq:cierre77:st77:970ea3b8-3446-4794-99ac-13fd6818ec7e": 5456,
       "arq:cierre77:st80:970ea3b8-3446-4794-99ac-13fd6818ec7e": 5457,
+      "arq:cierre80:acquire:c5971b01-151c-4fae-94c1-652c30ef4368": 5553,
+      "arq:cierre80:arch1:c5971b01-151c-4fae-94c1-652c30ef4368": 5556,
+      "arq:cierre80:arch2:c5971b01-151c-4fae-94c1-652c30ef4368": 5557,
+      "arq:cierre80:arch3:c5971b01-151c-4fae-94c1-652c30ef4368": 5558,
+      "arq:cierre80:arch4:c5971b01-151c-4fae-94c1-652c30ef4368": 5559,
+      "arq:cierre80:release:c5971b01-151c-4fae-94c1-652c30ef4368": 5560,
+      "arq:cierre80:st:c5971b01-151c-4fae-94c1-652c30ef4368": 5554,
       "arq:close-0117-flip4:acq": 674,
       "arq:close-0117-flip4:done": 675,
       "arq:close-0117-flip4:rel": 677,
@@ -7163,5 +7177,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5552
+  "up_to_seq": 5560
 }

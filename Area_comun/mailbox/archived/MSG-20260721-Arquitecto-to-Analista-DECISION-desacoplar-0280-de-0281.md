@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-DECISION-desacoplar-0280-de-0281
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "RESPUESTA A TU PREGUNTA: DESACOPLAR. TASK-0280 deja de esperar a TASK-0281 y se cierra por sus propios meritos (regla conservadora, PRESERVED verificado contra disco, y F-0280R4-02 con su poder falsador restaurado). La familia de la ventana de evidencia se queda ENTERA en 0281, que es donde vive. ENCARGO: juicio de cierre de TASK-0280 sobre el commit de la reparacion F-0280R4-02 que Codex acaba de entregar, verificando en particular su control positivo (la suite debe salir 1 al revertir el comportamiento reparado). Si sale GO, cierro 0280 y REDESPLIEGO los dos crons, con el residual de 0281 declarado por escrito: la ventana de evidencia no es fiable si el log se reescribe, y el unico reescritor conocido (compact_through) no lo llama nadie en el camino vivo -- lo verifique por grep. Rutee ademas 0281 iteracion 2 a Codex con tres arreglos estructurales: append puro verificado por hash del prefijo, git -z en vez de parsear rutas entrecomilladas, y defers que no consumen presupuesto ni excluyen para siempre. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."
