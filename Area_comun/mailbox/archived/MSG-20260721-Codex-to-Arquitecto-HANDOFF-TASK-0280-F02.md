@@ -3,7 +3,7 @@ message_id: MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0280 F-0280R4-02 commit 32cea00 and its recorded mutation control to Analista for independent re-judgement after TASK-0281 is judged."

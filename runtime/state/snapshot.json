@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "f45d744f4b7ac63178a24f8e70856d8aecffb46aedfd34f927fe6244006c9137",
+  "canonical_hash": "faaf4089c3567698d1e9c27e51ad304fd28833a20806399917ee9988f68f754e",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -797,6 +797,7 @@
       "CLAIM-arq-cierre-orden-20260721": 1,
       "CLAIM-arq-cierre0277-iter2-0280-20260720": 1,
       "CLAIM-arq-d0103-ready-20260719": 1,
+      "CLAIM-arq-desacople-20260721": 1,
       "CLAIM-arq-e4e5-0266-20260719": 1,
       "CLAIM-arq-e6-criterio-exante-20260720": 1,
       "CLAIM-arq-e6-registro-20260720": 1,
@@ -1946,13 +1947,17 @@
       "MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter4-verdict": 1,
+      "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-verdict": 1,
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-reconciliacion-F-0280R3-01": 1,
       "MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre": 1,
+      "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre": 1,
+      "MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter4-cabeza-ilegible": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle": 1,
+      "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter4": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281": 1,
@@ -2246,7 +2251,7 @@
       "TASK-0278": 14,
       "TASK-0279": 1,
       "TASK-0280": 40,
-      "TASK-0281": 8,
+      "TASK-0281": 10,
       "TASK-0282": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
@@ -2270,7 +2275,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4867,
+    "events_applied": 4874,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2501,6 +2506,13 @@
       "arq:dec49:acq": 710,
       "arq:dec49:rec": 711,
       "arq:dec49:rel": 712,
+      "arq:desac:acquire:64442eec-98eb-471a-914c-be4e4a60fa02": 5539,
+      "arq:desac:arch1:64442eec-98eb-471a-914c-be4e4a60fa02": 5541,
+      "arq:desac:arch2:64442eec-98eb-471a-914c-be4e4a60fa02": 5542,
+      "arq:desac:arch3:64442eec-98eb-471a-914c-be4e4a60fa02": 5543,
+      "arq:desac:arch4:64442eec-98eb-471a-914c-be4e4a60fa02": 5544,
+      "arq:desac:release:64442eec-98eb-471a-914c-be4e4a60fa02": 5545,
+      "arq:desac:st81:64442eec-98eb-471a-914c-be4e4a60fa02": 5540,
       "arq:esc80:acquire:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5473,
       "arq:esc80:arch1:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5474,
       "arq:esc80:arch2:9cbed839-8280-4627-bad4-5c9b9f7a4897": 5475,
@@ -7141,5 +7153,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5538
+  "up_to_seq": 5545
 }

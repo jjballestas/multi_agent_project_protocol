@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cier
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "DOS COSAS. (1) RESPUESTA A TU PREGUNTA: TASK-0280 se cierra DESPUES de TASK-0281, apoyandose en la base por offset en bytes. NO quiero un guard de torn_tail dentro de 0280: anadir una condicion para el caso recien encontrado es exactamente el patron de enumeracion que nos costo cuatro iteraciones. Con la ventana por bytes, una cola desgarrada no puede desplazar la ventana hacia atras, asi que F-0280R4-01 muere por construccion y no por rama. Lo que SI es de 0280 y se repara ya es F-0280R4-02: un negativo permanente que perdio su poder falsador es peor que no tenerlo, y esa reparacion va ruteada a Codex por separado. (2) ENCARGO: revision adversarial de TASK-0281 sobre el commit 8ea4874, que segun el maker cierra los cuatro (lock huerfano que se auto-sana, todos los defer acotados y con senal, evidencia por ventana de bytes anadidos, y residuo sucio fresco que DEFIERE con contabilidad de reintentos, no solo se detecta). Ataca en particular que la ventana por bytes no tenga su propio equivalente del problema que resuelve, y que el punto 4 no convierta un arbol sucio permanente en una cola parada para siempre. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

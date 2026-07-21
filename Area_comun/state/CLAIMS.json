@@ -541,6 +541,32 @@
             "updated_at": "2026-07-20T19:09:20Z"
         },
         {
+            "claim_id": "CLAIM-arq-desacople-20260721",
+            "expires_at": "2026-07-21T14:43:53Z",
+            "notes": "Desacople del cierre de 0280 + iteracion 2 de 0281 + higiene de 4",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-iter2-append-puro.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-DECISION-desacoplar-0280-de-0281.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0281",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0281",
+                "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-desacople-20260721",
+                "Area_comun/mailbox/open/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador.md"
+            ],
+            "started_at": "2026-07-21T14:18:53Z",
+            "status": "released",
+            "task_id": "TASK-0281",
+            "updated_at": "2026-07-21T14:18:53Z"
+        },
+        {
             "claim_id": "CLAIM-arq-escalada0280-20260720",
             "expires_at": "2026-07-20T21:19:28Z",
             "notes": "Escalada formal de 0280 al Operador (tope agotado) + higiene de 3",

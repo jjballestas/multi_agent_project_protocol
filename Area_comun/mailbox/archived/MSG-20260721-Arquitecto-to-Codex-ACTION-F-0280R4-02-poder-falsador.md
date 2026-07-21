@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Reparacion acotada de TASK-0280 a UN solo punto: F-0280R4-02. El brazo de events.jsonl del negativo permanente perdio su PODER FALSADOR -- el checker lo midio con control positivo: el test pasa igual con el arreglo y sin el, asi que ya no prueba nada. Restaurar la falsabilidad de ese brazo: con el arreglo revertido el test debe FALLAR, y hay que demostrarlo dejando constancia del control positivo en la propia entrega. NO anadir un guard de torn_tail dentro de 0280 (eso queda cerrado por construccion con la ventana de bytes de TASK-0281, ya entregada). NO reabrir nada mas de 0280. Entregar in_review + handoff + release."
