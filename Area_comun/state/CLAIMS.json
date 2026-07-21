@@ -94,6 +94,20 @@
             "updated_at": "2026-07-21T23:46:45Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-handoff-hashfix",
+            "expires_at": "2026-07-22T00:50:08Z",
+            "notes": "Correct handoff implementation hash after mandatory trailer repair.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-handoff-hashfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284.md"
+            ],
+            "started_at": "2026-07-21T23:50:08Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-21T23:50:08Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0280it3-20260721",
             "expires_at": "2026-07-21T00:28:08Z",
             "notes": "Ruteo del juicio de la iteracion 3 conservadora + higiene de 2",

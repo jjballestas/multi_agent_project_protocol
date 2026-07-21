@@ -6,19 +6,19 @@ type: HANDOFF
 status: open
 requires_response: true
 response_owner: Arquitecto
-requested_action: "Route TASK-0284 commit 11ed6e3 to Analista for independent review. Do not redeploy the live harness until checker closure."
+requested_action: "Route TASK-0284 commit 04ec9d1 to Analista for independent review. Do not redeploy the live harness until checker closure."
 question: "Can Arquitecto route this exact implementation commit to Analista and keep live redeployment gated on the checker verdict?"
 created_at: 2026-07-22
 context_refs:
   - Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md
   - scripts/harness/peer_mailbox_cron.ps1
   - examples/mailbox_retry_cases/run_mailbox_retry_cases.py
-one_line_summary: "TASK-0284 delivered at 11ed6e3: dirty-tree forensics retains launch veto power; residue ownership can age; terminal defers escape; reads are bounded and fail closed."
+one_line_summary: "TASK-0284 delivered at 04ec9d1: dirty-tree forensics retains launch veto power; residue ownership can age; terminal defers escape; reads are bounded and fail closed."
 ---
 
 # HANDOFF - TASK-0284
 
-Commit `11ed6e3` is ready for independent review.
+Commit `04ec9d1` is ready for independent review.
 
 Implemented contract:
 
