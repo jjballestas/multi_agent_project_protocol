@@ -3182,3 +3182,70 @@ BYTES (`LedgerBytesBefore`) y anade `Register-RetryDefer` + `SELF_HEAL_ORPHAN_LO
 estructuralmente F-0280R4-01 y F-0280R4-03, pero NO lo he juzgado: requiere banco propio sobre su
 commit. Ojo especifico: con base por bytes, un truncado del log (longitud menor) o una reescritura
 del mismo tamano dejan de ser detectables por longitud.
+
+## 2026-07-21 (2) - TASK-0281 sobre 8ea4874: NO-GO. Cuatro deslices, dos bloqueantes.
+
+Encargo: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre. Clon limpio
+`D:/ccv0281` sobre `8ea4874`. Gates: validate / encoding / neutralidad / drift 0 / suite
+`run_mailbox_retry_cases.py` -> los cinco exit 0. Commit del veredicto: `57f6250` (empujado).
+Artifact: `Area_comun/artifacts/Analista-TASK-0281-bucle-liveness-verdict.md`.
+
+Veredicto: puntos 1 (lock huerfano) y 2 (defer con tope y senal) CERRADOS. Puntos 3 (ventana
+por bytes) y 4 (residuo) NO.
+
+- **F-0281-01 (bloqueante).** La ventana por bytes asume append-only ESTRICTO. Con el log
+  reescrito y mas largo que la base, la ventana `[base, fin)` cubre historia: probe con el
+  runner completo, agente que no hace nada y no emite token -> `outcome=confirmed` + `seen`.
+  Incumple el acceptance verbatim (dice "o reescrita"). No hipotetico:
+  `runtime/eventlog.py:1131` (`compact_through`) reescribe `events.jsonl` en sitio.
+- **F-0281-02.** Compactacion que encoge -> `currentLength -le base` -> oculta trabajo propio
+  REAL. Falla de los DOS lados segun la reescritura acabe mas larga o mas corta.
+- **F-0281-03 (bloqueante).** `Get-StagedResidueState` LANZA con rutas que git entrecomilla
+  (espacio o byte no-ASCII): `Test-Path` con comillas -> "Caracteres no validos". La llamada
+  esta en la linea 696, FUERA del `try` que abre en la 735, asi que la excepcion cae en el
+  `catch` del bucle -> `LOOP_ERROR` indefinido, sin `retry.json`, sin `RETRY_EXHAUSTED`, sin
+  invocar al agente. Es el defecto (2) reintroducido por la puerta del arreglo del (4).
+- **F-0281-04 (bloqueante).** El defer agota y senaliza pero NO recupera: veto ambiental
+  (peer ocupado 3 rondas) consume el mismo presupuesto que un intento real sin que el agente
+  corra ni una vez; despues el mensaje queda excluido de la cola PARA SIEMPRE aunque el arbol
+  se limpie, con `Heartbeat processable_messages=0`.
+
+**LECCION #1 -- UNA BASE POSICIONAL HEREDA EL PROBLEMA QUE VIENE A RESOLVER.** Cambiar de
+`seq` a bytes mata el camino concreto (`torn_tail` no puede acortar el fichero) pero no la
+FAMILIA: cualquier ancla que dependa de la POSICION en un fichero cae en cuanto el fichero se
+reescribe. La pregunta correcta ante una base nueva no es "cierra el caso que me dieron" sino
+**"que supuesto sostiene la base, y quien en el repo lo rompe"**. Buscar el rompedor con grep
+en el propio codigo (`write_text` sobre el log) convirtio una objecion teorica en una cita.
+
+**LECCION #2 -- MEDIR EL ARREGLO DE UN DEFECTO CONTRA EL ACCEPTANCE DE LOS OTROS.** F-0281-03
+no aparece atacando el punto 4: aparece preguntando "que le hace el punto 4 al punto 2". En
+una tarea que cierra N defectos de la misma familia, el vector mas productivo es el
+CRUZADO: el arreglo de (4) reabrio (2). La suite del maker nunca lo veria porque cada
+negativo prueba su propio punto.
+
+**LECCION #3 -- BUSCAR LA EXPOSICION REAL EN EL PROPIO REPO, NO ARGUMENTAR PROBABILIDAD.**
+"Rutas con espacio" suena a caso de laboratorio hasta que `git ls-files | grep ' '` devuelve
+`examples/full_runtime_instance/personal/operador humano/.gitkeep` -- una area de participante
+SHIPPEADA, justo donde DECISION-0016 manda escribir. Un unico grep convierte "podria pasar"
+en "pasa aqui". Hacerlo SIEMPRE antes de graduar la severidad.
+
+**LECCION #4 -- "AGOTA Y SENALIZA" NO ES "SE RECUPERA".** El maker cumplio la letra del
+acceptance y aun asi creo perdida de mensajes. Al medir un presupuesto de reintentos hay que
+correr la SEGUNDA fase: quitar la causa y ver si el sistema vuelve. Y ojo con el reporte que
+se auto-declara sano: `processable_messages=0` con un mensaje vivo sin responder en `open/`
+es un reporte FALSO, del mismo genero que un tablero desactualizado.
+
+**LECCION #5 -- CONTAMINACION DE LA PROPIA SONDA.** Mi primer probe D escribia `p.ps1` DENTRO
+del sandbox bajo prueba, asi que `git status` lo veia fresco y TODOS los casos daban "live":
+un falso PASS y un falso SLIP a la vez. La sonda que se mide a si misma no mide nada. Los
+probes van FUERA del arbol observado, siempre. Lo cazo un resultado incoherente (un caso que
+"pasaba" y otro que devolvia cadena vacia), no una revision del codigo del probe.
+
+Ventana: Codex tenia entrega en vuelo de F-0280R4-02 (claim activa sobre `CLAIMS.json#...` y
+`personal/Codex/Memory.md`); espere a su commit de memoria (`98f3d53`, cierre DECISION-0026) y
+comitee con `git add` + `git commit -- <pathspec>` de mis dos archivos. **PRUNE DUE
+released_ratio 95.0 >= 90** senalado al Arquitecto; no lo toco.
+
+Bucle declarado: remediacion de Codex acotada a los tres puntos del apartado 6 del artifact,
+re-juicio mio ANTES del commit de cierre, **maximo 2 iteraciones** y a la tercera escalo al
+operador.
