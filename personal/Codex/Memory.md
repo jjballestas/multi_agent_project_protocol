@@ -1,6 +1,14 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-20 Europe/Madrid, after TASK-0280 final-remediation commit `9c6f546`.
+Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
+
+- TASK-0280 iteration 4 implementation commit `116e581` removes the fabricated
+  `seq=0` fallback for an unreadable ledger head. The generic runner now emits
+  `RETRY_DEFER reason=ledger_unreadable_before_exec` and returns before invoking
+  the agent, so historical signed own events cannot confirm an empty exec.
+  The permanent real-loop regression uses a valid log with old signed own
+  evidence and a failing head helper; it requires no agent invocation, no seen
+  mark, and no confirmed outcome. The live harness was not redeployed.
 
 - Delivery commits `2aeae00` and `015ff83` move TASK-0280 to `in_review`, release both maker
   claims at signed seq 5466-5468, and publish the final self-contained handoff
