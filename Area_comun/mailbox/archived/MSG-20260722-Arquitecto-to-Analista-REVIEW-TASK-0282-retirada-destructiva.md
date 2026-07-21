@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destru
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0282 sobre el commit 2d35cf0 (HEAD 4932dce): la retirada de la rama destructiva del rollback, con enmienda FIRMADA por el Operador que supersede la mitad 'revert' del acceptance de TASK-0272 y conserva la mitad 'unstage'. El maker retiro git reset --hard y el re-apply del parche de worktree, restaura el indice con git apply --cached, protege mailbox con Test-LedgerManagedPath, gatea la enumeracion de untracked y mueve cada fichero aislado a cuarentena bajo .protocol-tmp. Verificar POR COMPORTAMIENTO las seis condiciones del intake, y sobre todo: que un exec abortado con trabajo concurrente de OTRO actor en el arbol lo deja INTACTO byte a byte; que un mensaje de mailbox/open depositado durante la ventana NUNCA se pone en cuarentena; que un fallo de la enumeracion de untracked no barre el arbol; que el indice se restaura ANTES de cualquier movimiento y con exit code gateado; y que la cuarentena vive fuera de Area_comun/ y runtime/. Usa contraste diferencial contra el padre. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

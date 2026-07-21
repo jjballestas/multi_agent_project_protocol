@@ -122,14 +122,6 @@
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {
-            "id": "TASK-0282",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "high",
-            "status": "in_review",
-            "title": "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca"
-        },
-        {
             "id": "TASK-0283",
             "owner": "Codex",
             "phase": "P2",

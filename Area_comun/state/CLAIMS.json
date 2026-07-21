@@ -892,6 +892,27 @@
             "updated_at": "2026-07-20T23:21:44Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratifica0282-20260722",
+            "expires_at": "2026-07-22T00:00:34Z",
+            "notes": "Ratificacion de 0282 (GO) + done-flip y GO 0284 a Codex + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0282",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0282",
+                "Area_comun/tasks/TASK-0282-retirar-rama-destructiva-rollback.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0282-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0282-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0282-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva.md"
+            ],
+            "started_at": "2026-07-21T23:35:34Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T23:35:34Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear-iter2-20260720",
             "expires_at": "2026-07-20T18:31:29Z",
             "notes": "Ruteo de las dos remediaciones (0280 iter1 y 0277 iter2) con primitiva comun de cabeza del log + higiene de 4",
