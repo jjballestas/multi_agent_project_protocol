@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "d9829193715816f63b77871cd92a99fcfd38a7275bb76c83a19c2aa6fb07c608",
+  "canonical_hash": "2eadf247ecc6ec1716397e989cf239c1dd13c023aa30039fd84d899bc8dd106a",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -876,6 +876,7 @@
       "CLAIM-arq-rutear0280final-20260720": 1,
       "CLAIM-arq-rutear0280it3-20260721": 1,
       "CLAIM-arq-rutear0282-20260722": 1,
+      "CLAIM-arq-rutear0284-20260722": 1,
       "CLAIM-arq-tres-encargos-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -1994,7 +1995,9 @@
       "MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2288,7 +2291,7 @@
       "TASK-0281": 24,
       "TASK-0282": 12,
       "TASK-0283": 1,
-      "TASK-0284": 9,
+      "TASK-0284": 10,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2311,7 +2314,7 @@
       "protocol-prune": 19,
       "protocol-state": 1
     },
-    "events_applied": 4950,
+    "events_applied": 4954,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2688,6 +2691,10 @@
       "arq:r0282:arch2:3acef538-8eb0-439d-939c-ebe8bdbababf": 5600,
       "arq:r0282:arch3:3acef538-8eb0-439d-939c-ebe8bdbababf": 5601,
       "arq:r0282:release:3acef538-8eb0-439d-939c-ebe8bdbababf": 5602,
+      "arq:r0284:acquire:56c4c309-9eed-46cd-87a1-5214613b2ed1": 5622,
+      "arq:r0284:arch1:56c4c309-9eed-46cd-87a1-5214613b2ed1": 5623,
+      "arq:r0284:arch2:56c4c309-9eed-46cd-87a1-5214613b2ed1": 5624,
+      "arq:r0284:release:56c4c309-9eed-46cd-87a1-5214613b2ed1": 5625,
       "arq:rat78:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5395,
       "arq:rat78rem77:acquire:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5394,
       "arq:rat78rem77:arch1:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5397,
@@ -7265,5 +7272,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5621
+  "up_to_seq": 5625
 }

@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS, en orden. (A) task_status TASK-0282 review_approved -> done via runtime/submit_intent.py: el checker dio GO/OK-CLOSABLE sobre 2d35cf0 y ya lo ratifique a review_approved. (B) GO a TASK-0284, AHORA PRIORITARIA sobre cualquier otra cosa: el harness vivo se acaba de redesplegar con el codigo que incluye 0282, y ese codigo arrastra los defectos de pre-gate de 0281-iter3 que 0284 arregla. El mas urgente es F-0281-07: la regla 'ruta que no resuelve implica live' es ABSORBENTE porque un borrado no tiene mtime, asi que un archivado de mailbox o una poda dejados sin commitear en la ventana pueden JAMEAR el pre-gate del peer. Lee el acceptance REESCRITO de 0284 (fue corregido por una segunda mirada adversarial): la forense de arbol-sucio NO se jubila, retiene el arranque; separar arbol-roto-ahora (bloquea) de de-quien-es-el-residuo (envejece); el lease y las claims solo refuerzan un defer, nunca autorizan un arranque; borrado con valvula de vejez real (first-seen persistido); defers que ESCAPAN, no solo loguean; lecturas fail-closed con timeout; y negativo anti-regresion de TASK-0272 (exec matado, arbol roto, sin lock -> la forense retiene). Entregar in_review + handoff + release. NO redesplegar el harness vivo (lo hago yo cuando el checker cierre 0284)."
