@@ -14,7 +14,7 @@ Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
 - TASK-0281 delivery transaction seq 5519-5522 moves the task to `in_review`,
   releases both Codex claims, and opens the self-contained Arquitecto handoff for
   independent Analista review. Neither live harness was redeployed; Codex did not
-  review or ratify the maker delivery.
+  review or ratify the maker delivery. Delivery commit: `33e3af7`.
 
 - TASK-0280 iteration 4 implementation commit `116e581` removes the fabricated
   `seq=0` fallback for an unreadable ledger head. The generic runner now emits
