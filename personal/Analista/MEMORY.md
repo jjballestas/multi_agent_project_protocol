@@ -5,7 +5,58 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-20 (6) (TASK-0277 OK-CLOSABLE con condicion F1; antes cierre 0272 ratificado, iter2 OK/CERRABLE a5e1acd, iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1).
+> Ultima actualizacion: 2026-07-22 (1) (TASK-0281 iter3 NO-GO sobre 8c70dbb: dos regresiones nuevas del lado de la PARADA; antes TASK-0277 OK-CLOSABLE con condicion F1; antes cierre 0272 ratificado, iter2 OK/CERRABLE a5e1acd, iter1 NO-GO 417bd01, 0273 GO b43c6c6, 0258 GO 305efd1).
+
+## Ultima actualizacion 2026-07-22 (1) - TASK-0281 iter3 NO-GO sobre 8c70dbb (dos paradas nuevas)
+
+- Review adversarial de `8c70dbb` (HEAD `fa98595`) en CLON LIMPIO `D:/ccv0281c`, con contraste
+  contra el PADRE `7b708f8` en `D:/ccv0281p` y mutantes en `D:/ccv0281m` / `D:/ccv0281f`.
+  Cuatro gates exit 0 sobre el commit juzgado; drift 0 (up_to_seq 5582). Veredicto NO-GO +
+  NO REDESPLEGAR. Artifact: `Area_comun/artifacts/Analista-TASK-0281-iter3-utf8-ambiguity-verdict.md`.
+  Commit `a63485c`. Escalado al operador por tercera vez (tope de 2 iteraciones agotado en iter2).
+- **Lo que el maker SI cerro**: el decodificador UTF-8 estricto en el proceso hijo funciona
+  (no-ASCII fresco -> `live`; no-ASCII RANCIO -> `aborted`), y el probe de la suite salio del
+  sandbox (murio la auto-contaminacion E1/E6 de iter2).
+- **F-0281-07 (bloqueante, regresion nueva): la regla de "lado seguro" es ABSORBENTE.**
+  `if (-not (Test-Path $full)) { return "live" }` -- la unica valvula de salida del `live` es que
+  el mtime envejezca, y una ruta BORRADA no tiene mtime. Cualquier borrado (indexado o no) deja
+  el pre-gate en `live` para siempre. Runner completo con `-AbortedResidueMinutes 0` (el ajuste
+  MAS permisivo): `EXEC_START=0, attempts=0, defers=5, exhausted=false`, mensaje nunca consumido.
+  El padre `7b708f8` con el mismo fixture da `EXEC_START=1`.
+- **F-0281-08 (bloqueante, regresion nueva): deadlock de tuberias.** El lector nuevo hace
+  `StandardOutput.ReadToEnd()` y DESPUES `StandardError.ReadToEnd()`, sin timeout ni en la lectura
+  ni en `WaitForExit()`. Con 32664 bytes de stderr y stdout vacio (git exit 0) el lector de
+  `8c70dbb` se cuelga >60 s; el del padre termina. Cuelga en la linea 786, DENTRO del `try` que en
+  la 785 ya escribio `$LockPath` -> cron parado CON el lock tomado, sin log ni defer.
+- **F-0281-06 sigue abierto en su mitad util**: revirtiendo ENTERO el decodificador a cp850 en el
+  runner real, `run_mailbox_retry_cases.py` sigue en **exit 0**. Revirtiendo solo el fail-safe, da
+  exit 1. La asercion no-ASCII es sobre fichero FRESCO y `live` es tambien lo que devuelve el
+  fail-safe: los dos mundos dan la misma respuesta.
+
+### Tecnicas nuevas (REUTILIZABLES)
+
+1. **Ablacion por mitades sobre el fichero REAL, corriendo la suite entera.** Un mutante COMBINADO
+   solo prueba que la conjuncion hace falta. Para saber si cada mitad esta cubierta hay que
+   revertir UNA sola cosa a la vez en un clon separado y mirar el exit code de la suite. Asi cace
+   que se puede borrar el arreglo que da titulo al commit y el gate sigue verde.
+2. **El caso RANCIO es el negativo no vacuo.** Cuando el fix y el fail-safe devuelven el MISMO
+   valor en el caso fresco, la asercion no distingue nada. El caso envejecido rompe el empate:
+   `aborted` solo es alcanzable si la ruta se resolvio de verdad.
+3. **Contraste sistematico contra el COMMIT PADRE, mismo script y mismo fixture.** Es lo que
+   convierte "esto se comporta mal" en "esta iteracion lo rompio". Clonar el padre a `D:/ccv...p`
+   y parametrizar el ROOT del probe.
+4. **Buscar estados ABSORBENTES.** Ante cualquier regla nueva de "ante la duda, lado seguro",
+   preguntar SIEMPRE: cual es la unica salida de ese estado, y existe algun estado del sistema en
+   el que esa salida sea inalcanzable? (aqui: salida = envejecer el mtime; estado sin mtime = ruta
+   borrada). El operador y el Arquitecto valoran esta pregunta mas que el fail-open.
+5. **Ejecutar el gate con el knob MAS permisivo** (`-AbortedResidueMinutes 0`). Si aun asi bloquea,
+   no queda excusa de configuracion.
+6. **Deadlock de dos tuberias**: ante cualquier `ProcessStartInfo` con las dos redirecciones,
+   probar un caso que inunde stderr (aqui: 120 directorios con ruta >260 y sin `core.longpaths`,
+   git avisa uno por directorio). Medir con `Start-Job` + `Wait-Job -Timeout`, nunca en foreground.
+7. **Residuo real invisible (R6)**: ruta demasiado larga -> git avisa por stderr, sale **exit 0** y
+   NO la enumera; el pre-gate devuelve `none` y arranca. Un exit 0 de git no significa "he visto
+   todo el arbol".
 
 ## Ultima actualizacion 2026-07-20 (6) - TASK-0277 veredicto OK-CLOSABLE (1 condicion, 2 residuales)
 - Review adversarial de a899041 / HEAD 5414838 en CLON LIMPIO D:/ccv0277. Todos los gates
