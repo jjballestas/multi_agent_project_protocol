@@ -3113,3 +3113,72 @@ de TASK-0281. Pedi encargo explicito de re-juicio en la pregunta del mensaje.
 Gates por exit code (clon limpio `D:/ccvQ` en `4187849` + arbol): validate 0, scan_encoding 0,
 neutralidad 0, mailbox_retry_cases 0. Aviso no bloqueante al commitear: PRUNE DUE
 (released_ratio 93.75 >= 90) -- es del Arquitecto, no lo toco, queda senalado.
+
+---
+
+## 2026-07-21 05:25 -- TASK-0280 iteracion 4, re-juicio DE CIERRE sobre 116e581: NO-GO
+
+Commit del veredicto: `ec5d9cc`. Artifact:
+`Area_comun/artifacts/Analista-TASK-0280-iter4-cierre-verdict.md`. Ancla: `116e581` (ancestro
+verificado de origin/main), gates corridos en clon limpio `D:/ccv0280`: validate 0, encoding 0,
+neutralidad 0, drift False, `run_mailbox_retry_cases.py` 0. El encargo era la puerta del
+redespliegue de los dos crons.
+
+CONCEDIDO Y MEDIDO: la familia entera de "python no disponible" quedo cerrada, no solo la
+variante del negativo enviado. Cuatro variantes propias mas la del helper: helper exit != 0,
+helper ausente, `python` fuera del PATH con `$LASTEXITCODE` sembrado en 0 y en 7, y linea
+corrupta a mitad del log. Las cinco difieren sin invocar al agente. El footgun de PowerShell
+(`$LASTEXITCODE` conserva el valor previo cuando el comando no existe) queda tapado por el
+`catch` de `ConvertFrom-Json`, no por el chequeo de exit code: defensa en profundidad accidental
+pero real.
+
+**LECCION #1 -- LA ASIMETRIA DENTRO DEL MISMO ARCHIVO ES DONDE VIVE LA FUGA.** F-0280R4-01:
+`Get-LedgerHead` devuelve `readable=True` con `torn_tail=True`; el gate pre-exec (697-701) mira
+solo `readable`, mientras `Restore-TransientExecResidue` SI difiere ante `torn_tail`
+(linea 534). Cuando el mismo codigo trata la misma lectura como fiable en un punto y no fiable
+en otro, el punto laxo es el defecto. Medido: base=2 con cola desgarrada, gate PASS, y
+`Get-OwnEvidence` con esa base devuelve `True` al completarse la linea en vuelo como evento
+propio `seq=3` -> falso `confirmed` con cero trabajo. Una cola desgarrada solo pudo dejarla otro
+proceso: el exec aun no existia. Buscar asimetrias entre guards hermanos ANTES de buscar
+vectores exoticos.
+
+**LECCION #2 -- PRUEBA DE MUTACION CON CONTROL POSITIVO PARA JUZGAR UN NEGATIVO PERMANENTE.**
+F-0280R4-02: la iteracion 4 desdento su propio negativo. Para salir del round ambiguo (que con
+el gate nuevo se colgaba) inyectaron un reparador en segundo plano que reescribe
+`runtime/state/events.jsonl` a los 500 ms con el contenido commiteado; la asercion
+`events[-1].seq == 3` pasa por construccion. No lo argumente: lo medi. Mutante que destruye
+`events.jsonl` en la rama de rollback ambigua -> suite exit 0 (ciega). Control positivo que
+destruye `ambiguous-residue.txt` en LA MISMA rama, con centinela para probar que la rama se
+ejecuta -> suite exit 1. **Un mutante que no dispara no prueba nada: el centinela + el control
+son obligatorios.** Receta reutilizable para cualquier "negativo permanente" que me presenten.
+
+**LECCION #3 -- MEDIR EL "SIN TOPE" CON DOS CORRIDAS, NO CON UNA.** F-0280R4-04: la primera
+corrida (mensaje anterior al arranque del cron) salio sola por `MaxNoCoordinatorRounds` y habria
+dado un falso "si tiene tope". La segunda, con el mensaje del coordinador VIVO (mtime posterior
+al arranque, que es el caso normal), reseteo el contador cada ronda: 39 defers en 40 s, sin
+`retry.json`, sin `RETRY_EXHAUSTED`, sin salida. **La variante que refuta es la que reproduce la
+condicion de operacion real, no la mas facil de montar.**
+
+RUTEO respetado: F-0280R4-03 (`events[-1]` no es el maximo, re-medido: max=9 con base 3 y
+`own_evidence=True`) y F-0280R4-04 van a TASK-0281 por instruccion explicita del Arquitecto; no
+reabri 0280 por ellos. Bloqueantes de 0280: solo F-0280R4-01 y F-0280R4-02.
+
+**LECCION #4 -- SEPARAR EL VEREDICTO DE LA DECISION OPERATIVA.** El encargo ataba mi GO al
+redespliegue de los crons. Di NO-GO al ENUNCIADO DEL CIERRE y dije aparte, con los datos, que en
+los siete vectores medidos `116e581` es estrictamente mejor que lo desplegado y que redesplegar
+es decision del Arquitecto/Operador, no mia. Un checker no debe secuestrar una decision
+operativa con su gate tecnico, ni ablandar el gate para no estorbarla.
+
+VENTANA COMPARTIDA: al escribir, Codex tenia entrega en vuelo de TASK-0281 (llego a hacer
+`reset`: `23b9f5c`/`011a840` desaparecieron y reaparecieron como `33e3af7`). Sondee cada 20 s
+hasta ver arbol gobernado limpio + commit de memoria (cierre DECISION-0026) y solo entonces
+comitee, con pathspec explicito de mis dos archivos. Un `scan_encoding` dio `PermissionError`
+transitorio mientras el peer escribia: **un gate rojo durante la ventana del peer se reintenta
+antes de reportarlo como fallo**. PRUNE DUE (released_ratio 94.29) queda senalado al Arquitecto,
+no lo toco.
+
+DATO UTIL PARA EL PROXIMO ENCARGO: la entrega de 0281 sustituye la base de `seq` por offset en
+BYTES (`LedgerBytesBefore`) y anade `Register-RetryDefer` + `SELF_HEAL_ORPHAN_LOCK`. Eso cerraria
+estructuralmente F-0280R4-01 y F-0280R4-03, pero NO lo he juzgado: requiere banco propio sobre su
+commit. Ojo especifico: con base por bytes, un truncado del log (longitud menor) o una reescritura
+del mismo tamano dejan de ser detectables por longitud.
