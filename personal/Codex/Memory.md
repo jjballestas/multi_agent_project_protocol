@@ -9,6 +9,10 @@ Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
   The permanent real-loop regression uses a valid log with old signed own
   evidence and a failing head helper; it requires no agent invocation, no seen
   mark, and no confirmed outcome. The live harness was not redeployed.
+- Delivery commit `d17b156` moves TASK-0280 to `in_review`, releases both
+  iteration-4 maker claims through signed seq 5502-5504, and publishes the
+  self-contained handoff to Arquitecto. Independent re-judgement belongs to
+  Analista; Codex did not review or ratify this delivery.
 
 - Delivery commits `2aeae00` and `015ff83` move TASK-0280 to `in_review`, release both maker
   claims at signed seq 5466-5468, and publish the final self-contained handoff

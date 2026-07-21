@@ -308,6 +308,20 @@
             "updated_at": "2026-07-21T01:45:55Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter4-memory",
+            "expires_at": "2026-07-21T02:14:34Z",
+            "notes": "Persist TASK-0280 iteration 4 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-iter4-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T01:54:34Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T01:54:34Z"
+        },
+        {
             "claim_id": "CLAIM-arq-0280-it4-20260721",
             "expires_at": "2026-07-21T01:42:11Z",
             "notes": "Remediacion acotada de 0280 (cabeza ilegible envenena la evidencia propia) + higiene de 2",
