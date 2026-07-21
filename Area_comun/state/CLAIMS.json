@@ -442,9 +442,29 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-21T14:26:44Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0281",
             "updated_at": "2026-07-21T14:26:44Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0281-iter2-delivery",
+            "expires_at": "2026-07-21T15:37:28Z",
+            "notes": "Deliver TASK-0281 iteration 2 for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0281-iter2-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0281-iter2",
+                "Area_comun/state/TASK_INDEX.json#TASK-0281",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0281",
+                "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0281-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter2.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T14:37:28Z",
+            "status": "released",
+            "task_id": "TASK-0281",
+            "updated_at": "2026-07-21T14:37:28Z"
         },
         {
             "claim_id": "CLAIM-arq-0280-it4-20260721",

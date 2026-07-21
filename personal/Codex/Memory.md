@@ -2,6 +2,16 @@
 
 Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
 
+- TASK-0281 iteration-2 implementation commit `7b708f8` replaces offset-only
+  evidence with a byte-identical SHA-256 prefix proof before accepting appended
+  signed events. Rewrites that grow and compact/restored logs that shrink now make
+  evidence unavailable. The residue pre-gate uses NUL-delimited porcelain inside
+  the lock cleanup path, and environmental defers keep a separate watchdog count,
+  consume zero agent attempts, remain eligible, and recover when the veto clears.
+  Permanent controls cover pure append versus both rewrite directions (including a
+  killed length-only mutant), paths with spaces and non-ASCII bytes, and recovery
+  after the watchdog threshold. The live harness was not redeployed.
+
 - TASK-0280 F-0280R4-02 implementation commit `32cea00` restores the permanent
   negative's falsifiability. The test now snapshots ambiguous `events.jsonl` after
   the rollback decision and before its repair barrier. The normal suite exits 0;

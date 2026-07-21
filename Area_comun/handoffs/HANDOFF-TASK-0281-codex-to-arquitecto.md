@@ -5,52 +5,49 @@ from: Codex
 to: Arquitecto
 status: ready_for_review
 created_at: 2026-07-21
-implementation_commit: 8ea4874
+implementation_commit: 7b708f8
+iteration: 2
 ---
 
-# TASK-0281 handoff
+# TASK-0281 iteration 2 handoff
 
 ## Result
 
-The generic peer mailbox runner closes all four liveness and visibility defects:
+The generic born-operational peer runner implements all requested structural repairs:
 
-- a lock with no lease self-heals, and the complete lock-held setup now shares the
-  exec cleanup path;
-- every pre-exec defer consumes the bounded retry budget and emits
-  `RETRY_EXHAUSTED ... signal=watchdog` at the limit;
-- signed own evidence is inspected only in bytes appended after the pre-exec
-  event-log length, independent of sequence ordering;
-- the residue pre-gate uses full `git status --porcelain`, covering unstaged
-  worktree modifications as well as the index. Fresh dirty residue defers with a
-  retry signal and is never merely observed.
+- own evidence requires the pre-exec event-log prefix to retain the same SHA-256;
+  any rewrite, compaction, restoration, or reordering makes evidence unavailable;
+- the residue gate always reads NUL-delimited porcelain, so spaces and non-ASCII
+  path bytes are never quote-parsed, and the probe is inside the lock cleanup path;
+- pre-exec defers have a separate watchdog counter, consume zero agent attempts,
+  never set the message as exhausted, and remain eligible after the veto clears.
 
-## Permanent real-loop regressions
+The previous orphan-lock and bounded watchdog behavior remains intact. The live
+Codex and Analista harnesses were not redeployed.
+
+## Permanent controls
 
 `examples/mailbox_retry_cases/run_mailbox_retry_cases.py` proves:
 
-- a pre-existing lock without a lease is healed, a failing head helper cannot
-  retain the replacement lock, and the queue continues until bounded exhaustion;
-- repeated unreadable-head defers exhaust with a watchdog-visible signal and zero
-  agent invocations;
-- a disordered log with historical signed own evidence cannot confirm a new exec;
-- a fresh unstaged file defers, exhausts visibly, remains untouched, and prevents
-  agent invocation.
+- a real pure append with a new signed own event is accepted;
+- a longer rewrite containing historical own evidence and a shorter rewrite are
+  rejected; the length-only control mutant is demonstrably green for the longer
+  rewrite and therefore killed by the repaired assertion;
+- fresh paths containing a space and a non-ASCII byte both return `live` without
+  `LOOP_ERROR`;
+- three environmental defers emit the watchdog signal with `attempts=0` and
+  `exhausted=false`, then the unchanged message runs and is consumed when the
+  dirty precondition disappears.
 
-Existing signed-event preservation, ambiguous ledger, torn-tail, pre-dirty,
-eventual confirmation, outcome parsing, and lease contracts remain green.
+## Verification by exit code
 
-## Verification
+- `python examples/mailbox_retry_cases/run_mailbox_retry_cases.py` -> 0
+- `python scripts/test_anthropic_checker_harness.py` -> 0
+- `python scripts/test_exec_lease_harness.py` -> 0
+- `python scripts/validate_collaboration_state.py` -> 0
+- `python scripts/scan_encoding.py` -> 0
+- `python scripts/scan_domain_neutrality.py` -> 0
+- runtime drift -> false at seq 5546
 
-- `python examples/mailbox_retry_cases/run_mailbox_retry_cases.py` -> exit 0
-- `python scripts/test_anthropic_checker_harness.py` -> exit 0
-- `python scripts/test_exec_lease_harness.py` -> exit 0
-- `python scripts/test_attested_instancing.py` -> exit 0
-- `python scripts/validate_collaboration_state.py` -> exit 0
-- `python scripts/scan_encoding.py` -> exit 0
-- `python scripts/scan_domain_neutrality.py` -> exit 0
-
-## Scope and deployment
-
-Changed only the born-operational generic runner, its permanent regression, its
-README, and governed coordination state. The live Codex and Analista harnesses
-were not redeployed. Codex did not review or ratify this maker delivery.
+Codex is maker only and did not review or ratify this delivery. Route commit
+`7b708f8` to Analista for independent iteration-2 judgement.
