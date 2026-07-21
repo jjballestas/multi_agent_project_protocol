@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-iter3-decodificaci
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0281 iteracion 3, ACOTADA A DOS PUNTOS, autorizada por el Operador pese al tope agotado porque el defecto esta VIVO en el harness ya desplegado. F-0281-05: la salida de git -z se decodifica con Console.OutputEncoding (cp850 en esta maquina) en vez de UTF-8, asi que una ruta con byte no-ASCII llega mal decodificada, Test-Path falla, y el pre-gate devuelve 'aborted' en lugar de 'live': el agente arranca ENCIMA de la entrega viva de un peer y el mensaje se consume, registrado como staged_residue_aborted, que se lee como seguro. Arreglo: decodificar la salida de git como UTF-8 de forma explicita e independiente de la consola (no cambiar la consola global; leer bytes y decodificar, o fijar la codificacion de lectura del proceso), y NUNCA inferir 'aborted' de un Test-Path fallido -- si una ruta reportada por git no se puede resolver, eso es AMBIGUEDAD y va al lado seguro: live/defer con senal, no arranque. F-0281-06: el control permanente que declaraba cerrado ese punto no puede fallar, porque escribe su propio probe .ps1 dentro del sandbox y ese fichero es ya residuo fresco; aislado devuelve 'live' sin que exista el fichero objetivo. Reparar el control para que mida lo que dice medir y demostrar su poder falsador con la mutacion que lo mata. Entregar in_review + handoff + release."

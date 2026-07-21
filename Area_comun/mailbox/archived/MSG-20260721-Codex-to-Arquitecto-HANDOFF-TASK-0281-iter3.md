@@ -3,7 +3,7 @@ message_id: MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter3
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0281 iteration 3 commit 8c70dbb and its permanent falsifiable control to Analista for independent judgement. Do not redeploy the live harness before checker closure."
