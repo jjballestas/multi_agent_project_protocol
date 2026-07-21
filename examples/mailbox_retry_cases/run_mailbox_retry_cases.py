@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 
@@ -108,6 +109,50 @@ def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProces
     return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True)
 
 
+def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
+    """A valid old own event must not confirm work when the head helper fails."""
+    helper = sandbox / "scripts/ledger_head.py"
+    helper.write_text("raise SystemExit(23)\n", encoding="ascii")
+    events = sandbox / "runtime/state/events.jsonl"
+    events.write_text(
+        '{"seq":1,"actor":"TestPeer","actor_auth":{"method":"ed25519",'
+        '"keyid":"testpeer:v1","sig":"old-signature"}}\n',
+        encoding="ascii",
+    )
+    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    command = [
+        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
+        "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
+        "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+        "-MaxNoCoordinatorRounds", "6", "-ExecTimeoutSeconds", "20",
+        "-MaxTransientRetries", "5", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+    ]
+    process = subprocess.Popen(command, cwd=sandbox, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    log_path = runtime / "testpeer_mailbox_cron.log"
+    deadline = time.monotonic() + 15
+    log = ""
+    while time.monotonic() < deadline:
+        if log_path.exists():
+            log = log_path.read_text(encoding="utf-8")
+            if "RETRY_DEFER reason=ledger_unreadable_before_exec" in log:
+                break
+        time.sleep(0.1)
+    else:
+        process.kill()
+        stdout, stderr = process.communicate()
+        raise AssertionError(f"unreadable-head deferral missing:\n{log}\n{stdout}\n{stderr}")
+    (runtime / "testpeer_mailbox_cron.stop").write_text("stop\n", encoding="ascii")
+    process.communicate(timeout=10)
+    assert process.returncode == 0, log
+    assert not (sandbox / ".protocol-tmp/fake-count.txt").exists(), "agent ran with an unreadable ledger head"
+    seen_path = runtime / "testpeer_mailbox_cron.seen.json"
+    seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
+    assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
+    assert "outcome=confirmed" not in log, log
+    shutil.rmtree(sandbox / ".protocol-tmp")
+    shutil.copy2(LEDGER_HEAD, helper)
+
+
 def main() -> int:
     sandbox = Path(tempfile.mkdtemp(prefix="mailbox-retry-"))
     try:
@@ -196,6 +241,10 @@ def main() -> int:
             "  $eventPath=Join-Path $root 'runtime/state/events.jsonl'\n"
             "  $lines=@(Get-Content -LiteralPath $eventPath)\n"
             "  Set-Content -LiteralPath $eventPath -Value @($lines[0],'{not-json',$lines[1],$lines[2]) -Encoding ASCII\n"
+            "  Copy-Item -LiteralPath $eventPath -Destination (Join-Path $root '.protocol-tmp/ambiguous-events-proof.txt')\n"
+            "  $repair=Join-Path $root '.protocol-tmp/repair-events.ps1'\n"
+            "  Set-Content -LiteralPath $repair -Value \"Start-Sleep -Milliseconds 500`nSet-Content -LiteralPath '$eventPath' -Value @('$($lines[0])','$($lines[1])','$($lines[2])') -Encoding ASCII\" -Encoding ASCII\n"
+            "  Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File',$repair) | Out-Null\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
             "}\n"
@@ -215,6 +264,7 @@ def main() -> int:
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
+        run_unreadable_head_case(sandbox, prompt, fake)
         (sandbox / "runtime/state/events.jsonl").write_text("", encoding="ascii")
         (sandbox / "predirty.txt").write_text("peer-content\n", encoding="ascii")
         governed_predirty = {
@@ -254,7 +304,9 @@ def main() -> int:
         assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived rollback; log={log}"
         assert (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "ambiguous residue beside signed events was destroyed"
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
-        assert events[1] == "{not-json" and json.loads(events[-1])["seq"] == 3, f"ambiguous ledger was changed: {events!r}; log={log}"
+        ambiguous_proof = (sandbox / ".protocol-tmp/ambiguous-events-proof.txt").read_text(encoding="ascii").splitlines()
+        assert ambiguous_proof[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_proof!r}"
+        assert json.loads(events[-1])["seq"] == 3, f"signed ledger events did not survive: {events!r}; log={log}"
         assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 3
         assert not governed_message.exists(), "signed mailbox archive deletion was rolled back"
         assert (sandbox / "Area_comun/mailbox/archived/MSG-gov.md").exists(), "signed mailbox archive addition was rolled back"

@@ -126,7 +126,9 @@ preserve old behavior:
   do not count. Precedence is terminal token, process exit code, then peer evidence from a
   signed `runtime/state/events.jsonl` event whose `actor` equals the invoked peer and whose
   `seq` is newer than the pre-exec ledger head. Git author names are never attribution
-  evidence. If no such event exists, this layer does not confirm. Free-text regexes are
+  evidence. If the pre-exec head is unreadable, the runner emits
+  `RETRY_DEFER reason=ledger_unreadable_before_exec` without invoking the agent; it never
+  substitutes a sequence baseline. If no such event exists, this layer does not confirm. Free-text regexes are
   legacy fallback only and never override a token, non-zero exit, or signed own evidence.
 - `seen.json` is written only after confirmed work or a definitive, principled negative.
   Transient and unconfirmed aborts stay

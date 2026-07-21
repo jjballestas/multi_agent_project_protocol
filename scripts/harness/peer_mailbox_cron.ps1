@@ -449,7 +449,7 @@ function Get-LedgerHead {
     $ErrorActionPreference = "Continue"
     try { $raw = & python $helper --root $Root 2>$null; $exitCode = $LASTEXITCODE }
     finally { $ErrorActionPreference = $previousErrorAction }
-    if ($exitCode -ne 0) { return [pscustomobject]@{ readable = $false; seq = 0; hash = ""; torn_tail = $false } }
+    if ($exitCode -ne 0) { return [pscustomobject]@{ readable = $false; seq = $null; hash = ""; torn_tail = $false } }
     try {
         $head = $raw | ConvertFrom-Json
         $head | Add-Member -NotePropertyName readable -NotePropertyValue $true
@@ -694,6 +694,11 @@ function Invoke-PeerForMessage {
     Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
     $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
     $ledgerHeadBefore = Get-LedgerHead
+    if (-not [bool]$ledgerHeadBefore.readable) {
+        Write-Log "RETRY_DEFER reason=ledger_unreadable_before_exec message=$($Message.Name)"
+        Remove-Item -LiteralPath $LockPath -Force -ErrorAction SilentlyContinue
+        return
+    }
     $indexPatch = Join-Path $RunsDir "$stamp-$safeName.before-index.patch"
     $worktreePatch = Join-Path $RunsDir "$stamp-$safeName.before-worktree.patch"
     & git -C $Root diff --cached --binary --output=$indexPatch
