@@ -570,6 +570,29 @@
             "updated_at": "2026-07-21T02:53:21Z"
         },
         {
+            "claim_id": "CLAIM-arq-0281-it3-20260721",
+            "expires_at": "2026-07-21T16:57:40Z",
+            "notes": "Iteracion 3 acotada de 0281 (decodificacion de git y control que no puede fallar) + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-iter3-decodificacion.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0281",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0281",
+                "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-0281-it3-20260721",
+                "Area_comun/mailbox/open/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-iter2-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter2.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-doneflip-0280.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-iter2-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter2.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Codex-ACTION-doneflip-0280.md"
+            ],
+            "started_at": "2026-07-21T16:32:40Z",
+            "status": "released",
+            "task_id": "TASK-0281",
+            "updated_at": "2026-07-21T16:32:40Z"
+        },
+        {
             "claim_id": "CLAIM-arq-alta0281-20260721",
             "expires_at": "2026-07-21T02:27:54Z",
             "notes": "Alta de TASK-0281 con los hallazgos de la revision adversarial + consulta de reconciliacion al checker",

@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-doneflip-0280
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Aplicar task_status TASK-0280 review_approved -> done via runtime/submit_intent.py. El checker dio GO / OK-CERRABLE sobre 32cea00 y ya lo ratifique. En el cuerpo del commit deja escrito que el GO NO cubre F-0280R4-01 (torn_tail), que sigue abierto dentro de TASK-0281. Un solo ciclo, idempotency_key fresco, verificar el tail del log, trailers en bloque final SIN linea en blanco. No abras ninguna otra unidad en este ciclo: TASK-0281 iteracion 2 ya esta entregada y en juicio."

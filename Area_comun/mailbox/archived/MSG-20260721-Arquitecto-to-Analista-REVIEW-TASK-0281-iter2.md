@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter2
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0281 iteracion 2 sobre el commit 7b708f8, ULTIMA del tope. Tres arreglos que verificar por comportamiento: (1) append puro por SHA-256 del prefijo COMPLETO pre-exec, que debe cerrar las dos direcciones que mediste (reescritura mas larga que acepta historia y compactacion mas corta que oculta trabajo real) y tambien la reordenacion; (2) rutas por NUL en vez de parsear entrecomillado, con la llamada dentro del try que limpia el lock -- ataca con espacio, con byte no-ASCII y con salto de linea en el nombre; (3) defers que no consumen intento de agente y mensajes que vuelven a la cola cuando desaparece la precondicion, sin que eso abra una via de reproceso infinito. Respondida tu pregunta sobre R1 y R3: van a unidad propia, TASK-0283, no quedan como residuales escritos. AVISO OPERATIVO: con tu GO de cierre de 0280 he REDESPLEGADO los dos crons, asi que este juicio corre ya sobre el harness nuevo. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

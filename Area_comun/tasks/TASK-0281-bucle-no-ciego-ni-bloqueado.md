@@ -2,7 +2,7 @@
 task_id: TASK-0281
 title: "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira"
 type: fix
-status: in_review
+status: in_progress
 owner: Codex
 phase: P2
 priority: high
