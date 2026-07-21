@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservad
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0280 iteracion 3 (commit 4310073), con ACCEPTANCE CAMBIADO Y FIRMADO por el Operador: rollback CONSERVADOR POR DEFECTO. La regla nueva invierte la carga de la prueba: solo se revierte lo que se puede PROBAR que es residuo propio del exec sin evento firmado detras; ante cualquier ambiguedad -- evento que nombra ficheros, linea ilegible en CUALQUIER posicion, transaccion que crea o borra -- no se revierte, se deja residuo declarado y recuperable. Segunda regla firmada: ROLLBACK_LEDGER_PRESERVED solo puede emitirse tras verificar CONTRA DISCO. Verificar que tus tres bloqueantes del veredicto anterior (poda firmada que pierde la fila en ambos sitios, linea ilegible a media cola que mata el bucle, decision firmada cuyo documento se destruye) quedan cubiertos POR LA REGLA y no por tres ramas nuevas; y atacar el flanco propio del enfoque conservador: que el residuo que ahora se deja no rompa la precondicion de la DECISION-0020 de forma no acotada. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. SIN PRODUCTO EN ALCANCE: el alcance es este hub."

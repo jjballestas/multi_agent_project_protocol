@@ -268,6 +268,27 @@
             "updated_at": "2026-07-20T23:42:41Z"
         },
         {
+            "claim_id": "CLAIM-arq-0280-it4-20260721",
+            "expires_at": "2026-07-21T01:42:11Z",
+            "notes": "Remediacion acotada de 0280 (cabeza ilegible envenena la evidencia propia) + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter4-cabeza-ilegible.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-0280-it4-20260721",
+                "Area_comun/mailbox/open/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador.md",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md"
+            ],
+            "started_at": "2026-07-21T01:22:11Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T01:22:11Z"
+        },
+        {
             "claim_id": "CLAIM-arq-cierre0277-iter2-0280-20260720",
             "expires_at": "2026-07-20T19:34:20Z",
             "notes": "Ratificacion de 0277 (GO iter2) + devolucion de 0280 a su ultima iteracion + higiene de 2",

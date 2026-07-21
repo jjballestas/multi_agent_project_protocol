@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7bf02b4660e461a94ac85a7a8ad948ee1584d43d7294720a89c70a179a200091",
+  "canonical_hash": "ea69991463a88bf72a7464155e4121adc738239ba46990f3f3d9c05e3b081690",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -779,6 +779,7 @@
       "CLAIM-TASK-0257-Codex-remediation-delivery": 1,
       "CLAIM-TASK-0257-Codex-remediation-status": 1,
       "CLAIM-arq-0270-0271-registro-20260720": 1,
+      "CLAIM-arq-0280-it4-20260721": 1,
       "CLAIM-arq-alta0280-20260720": 1,
       "CLAIM-arq-b3-archivo-20260720": 1,
       "CLAIM-arq-campo0278-20260720": 1,
@@ -1933,6 +1934,8 @@
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-rejuicio-diseno-grafo-v02": 1,
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos": 1,
       "MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones": 1,
+      "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO": 1,
+      "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
@@ -2224,7 +2227,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 27,
+      "TASK-0280": 29,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2247,7 +2250,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4823,
+    "events_applied": 4828,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2547,6 +2550,11 @@
       "arq:it3:arch1:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5480,
       "arq:it3:release:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5481,
       "arq:it3:st:9d26ac33-9c1b-4be3-a26c-fb92b164742d": 5479,
+      "arq:it4:acquire:19fb7750-e062-49c7-9d2b-cf1a7ba24e3e": 5495,
+      "arq:it4:arch1:19fb7750-e062-49c7-9d2b-cf1a7ba24e3e": 5497,
+      "arq:it4:arch2:19fb7750-e062-49c7-9d2b-cf1a7ba24e3e": 5498,
+      "arq:it4:release:19fb7750-e062-49c7-9d2b-cf1a7ba24e3e": 5499,
+      "arq:it4:st:19fb7750-e062-49c7-9d2b-cf1a7ba24e3e": 5496,
       "arq:promo-0166:acq": 1553,
       "arq:promo-0166:rel": 1555,
       "arq:promo-0166:upsert": 1554,
@@ -7074,5 +7082,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5494
+  "up_to_seq": 5499
 }
