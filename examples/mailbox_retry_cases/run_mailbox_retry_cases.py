@@ -79,6 +79,7 @@ def run_outcome_parser_cases(sandbox: Path) -> None:
     actual = {item["name"]: item["outcome"] for item in parsed}
     for case in cases:
         assert actual[case["name"]] == case["expected"], (case["name"], actual[case["name"]])
+    probe.unlink()
 
 
 def run_torn_tail_case(sandbox: Path) -> None:
@@ -103,6 +104,64 @@ def run_torn_tail_case(sandbox: Path) -> None:
     output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout
     assert "ROLLBACK_DEFER reason=ledger_torn_tail" in output, output
     assert events.read_bytes().endswith(b'{"seq":'), "torn-tail deferral mutated the queue"
+    probe.unlink()
+
+
+def run_pure_append_evidence_cases(sandbox: Path) -> None:
+    """Only a byte-identical prefix plus an appended own event may prove work."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    helpers = re.search(
+        r"(?ms)^function Get-FilePrefixSha256 \{.*?^\}\r?\n\r?\nfunction Get-OwnEvidence \{.*?^\}",
+        runner_text,
+    )
+    if not helpers:
+        raise AssertionError("pure-append evidence helpers not found")
+    events = sandbox / "runtime/state/events.jsonl"
+    old = b'{"seq":1,"actor":"Other"}\n'
+    own = b'{"seq":2,"actor":"TestPeer","actor_auth":{"method":"ed25519","keyid":"test:v1","sig":"new"}}\n'
+    events.write_bytes(old)
+    probe = sandbox / "pure-append-probe.ps1"
+    probe.write_text(
+        "$Root=(Get-Location).Path\n$PeerId='TestPeer'\nfunction Write-Log { param([string]$Message) }\n"
+        + helpers.group(0)
+        + "\n$path=Join-Path $Root 'runtime/state/events.jsonl'\n"
+        + "$before=(Get-Item -LiteralPath $path).Length\n$hash=Get-FilePrefixSha256 -Path $path -Length $before\n"
+        + f"[IO.File]::AppendAllText($path, '{own.decode('ascii').strip()}'+[Environment]::NewLine, [Text.Encoding]::ASCII)\n"
+        + "$append=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash\n"
+        + f"[IO.File]::WriteAllText($path, '{own.decode('ascii').strip()}'+[Environment]::NewLine+'{own.decode('ascii').strip()}'+[Environment]::NewLine, [Text.Encoding]::ASCII)\n"
+        + "$rewriteGrow=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash\n"
+        + "$mutantRewriteGrow=((Get-Item -LiteralPath $path).Length -gt $before)\n"
+        + "[IO.File]::WriteAllText($path, '{}'+[Environment]::NewLine, [Text.Encoding]::ASCII)\n"
+        + "$rewriteShrink=Get-OwnEvidence -LedgerBytesBefore $before -LedgerPrefixSha256Before $hash\n"
+        + "[pscustomobject]@{append=$append;rewrite_grow=$rewriteGrow;rewrite_shrink=$rewriteShrink;mutant_rewrite_grow=$mutantRewriteGrow}|ConvertTo-Json -Compress\n",
+        encoding="ascii",
+    )
+    result = json.loads(run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout)
+    assert result == {"append": True, "rewrite_grow": False, "rewrite_shrink": False, "mutant_rewrite_grow": True}, result
+    events.write_text("", encoding="ascii")
+    probe.unlink()
+
+
+def run_nul_residue_path_cases(sandbox: Path) -> None:
+    """NUL-delimited porcelain must preserve spaces and non-ASCII path bytes."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)
+    if not helper:
+        raise AssertionError("residue helper not found")
+    paths = [sandbox / "fresh residue.txt", sandbox / "residuo-anadido-\u00f1.txt"]
+    probe = sandbox / "nul-residue-probe.ps1"
+    probe.write_text(
+        "$Root=(Get-Location).Path\n$AbortedResidueMinutes=60\n"
+        + helper.group(0)
+        + "\nGet-StagedResidueState\n",
+        encoding="ascii",
+    )
+    for path in paths:
+        path.write_text("dirty\n", encoding="ascii")
+        output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout.strip()
+        assert output == "live", (path.name, output)
+        path.unlink()
+    probe.unlink()
 
 
 def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess[str]:
@@ -136,7 +195,7 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     while time.monotonic() < deadline:
         if log_path.exists():
             log = log_path.read_text(encoding="utf-8")
-            if "RETRY_EXHAUSTED attempts=5 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log:
+            if "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log:
                 break
         time.sleep(0.1)
     else:
@@ -151,33 +210,56 @@ def run_unreadable_head_case(sandbox: Path, prompt: Path, fake: Path) -> None:
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
     assert "MSG-retry.md" not in seen, "old own evidence consumed the message"
     assert "outcome=confirmed" not in log, log
-    assert "RETRY_EXHAUSTED attempts=5 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log, log
+    assert "RETRY_EXHAUSTED defers=5 attempts=0 signal=watchdog outcome=deferred reason=ledger_unreadable_before_exec" in log, log
     assert "SELF_HEAL_ORPHAN_LOCK owner=TestPeer reason=missing_lease" in log, log
     assert not (runtime / "testpeer_mailbox_cron.lock").exists(), "head failure left an orphan lock"
     shutil.rmtree(sandbox / ".protocol-tmp")
     shutil.copy2(LEDGER_HEAD, helper)
+    events.write_text("", encoding="ascii")
 
 
 def run_unstaged_residue_case(sandbox: Path, prompt: Path, fake: Path) -> None:
-    """Fresh unstaged residue must defer visibly and exhaust without invoking the peer."""
+    """Environmental defers signal but consume no attempts and recover when clean."""
     residue = sandbox / "unstaged-residue.txt"
     residue.write_text("dirty\n", encoding="ascii")
+    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    runtime.mkdir(parents=True, exist_ok=True)
+    recovery_fake = runtime / "fake-recovery.cmd"
+    recovery_fake.write_text("@echo OUTCOME: definitive\r\n", encoding="ascii")
     command = [
         "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(RUNNER),
         "-PeerId", "TestPeer", "-Root", str(sandbox), "-PromptFile", str(prompt),
-        "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
-        "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "20",
+        "-AgentExe", str(recovery_fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+        "-MaxNoCoordinatorRounds", "8", "-ExecTimeoutSeconds", "20",
         "-MaxTransientRetries", "3", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "60",
     ]
-    result = run(*command, cwd=sandbox, timeout=20)
-    runtime = sandbox / ".protocol-tmp/testpeer_mailbox_cron"
+    process = subprocess.Popen(command, cwd=sandbox, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    log_path = runtime / "testpeer_mailbox_cron.log"
+    deadline = time.monotonic() + 12
+    log = ""
+    while time.monotonic() < deadline:
+        if log_path.exists():
+            log = log_path.read_text(encoding="utf-8")
+            if "RETRY_EXHAUSTED defers=3 attempts=0 signal=watchdog outcome=deferred reason=worktree_residue_live" in log:
+                break
+        time.sleep(0.1)
+    else:
+        process.kill()
+        stdout, stderr = process.communicate()
+        raise AssertionError(f"residue watchdog signal missing:\n{log}\n{stdout}\n{stderr}")
+    retry = json.loads((runtime / "testpeer_mailbox_cron.retry.json").read_text(encoding="utf-8"))
+    assert retry["MSG-retry.md"]["attempts"] == 0 and not retry["MSG-retry.md"]["exhausted"], retry
+    residue.unlink()
+    remaining = run("git", "status", "--porcelain=v1", "--untracked-files=all", cwd=sandbox).stdout
+    assert remaining == "", f"fixture did not become clean after environmental veto: {remaining!r}"
+    stdout, stderr = process.communicate(timeout=15)
+    assert process.returncode == 0, stdout + stderr
     log = (runtime / "testpeer_mailbox_cron.log").read_text(encoding="utf-8")
     assert "reason=worktree_residue_live" in log, log
-    assert "RETRY_EXHAUSTED attempts=3 signal=watchdog outcome=deferred reason=worktree_residue_live" in log, log
-    assert not (sandbox / ".protocol-tmp/fake-count.txt").exists(), result.stdout + result.stderr
-    assert residue.exists(), "residue pre-gate mutated the dirty file"
+    assert "outcome=definitive" in log, log
+    seen = json.loads((runtime / "testpeer_mailbox_cron.seen.json").read_text(encoding="utf-8"))
+    assert "MSG-retry.md" in seen, "message did not recover after the environmental veto cleared"
     shutil.rmtree(sandbox / ".protocol-tmp")
-    residue.unlink()
 
 
 def run_disordered_ledger_case(sandbox: Path, prompt: Path) -> None:
@@ -320,6 +402,8 @@ def main() -> int:
         run("git", "commit", "-m", "fixture", cwd=sandbox)
         run_outcome_parser_cases(sandbox)
         run_torn_tail_case(sandbox)
+        run_pure_append_evidence_cases(sandbox)
+        run_nul_residue_path_cases(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)
         run_unstaged_residue_case(sandbox, prompt, fake)
         run_disordered_ledger_case(sandbox, prompt)

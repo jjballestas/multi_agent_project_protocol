@@ -125,8 +125,10 @@ preserve old behavior:
   and the token must be the last non-empty transcript line. Earlier quoted/example tokens
   do not count. Precedence is terminal token, process exit code, then peer evidence from a
   signed `runtime/state/events.jsonl` event whose `actor` equals the invoked peer and whose
-  bytes were appended after the pre-exec file-length baseline. The evidence window never
-  depends on sequence ordering. Git author names are never attribution evidence. If the
+  bytes were appended after the pre-exec file-length baseline. The pre-exec prefix is
+  SHA-256 checked byte for byte before reading that tail; a rewrite, compaction, restoration,
+  or reordering makes evidence unavailable instead of shifting the window. The evidence
+  window never depends on sequence ordering. Git author names are never attribution evidence. If the
   pre-exec head is unreadable, the runner defers without invoking the agent; it never
   substitutes a sequence baseline. If no such event exists, this layer does not confirm. Free-text regexes are
   legacy fallback only and never override a token, non-zero exit, or signed own evidence.
@@ -135,9 +137,12 @@ preserve old behavior:
   unseen and use `retry.json`: three attempts by default, 30-second backoff, then a
   `RETRY_EXHAUSTED ... signal=watchdog` log record. A changed message signature resets
   the retry budget. Pre-exec defers (ledger, snapshots, residue probe, or fresh index/worktree
-  residue) consume the same bounded budget and emit the same watchdog-visible exhaustion.
-- The pre-exec residue gate uses full `git status --porcelain`, not only the index. Fresh
-  unstaged residue therefore defers with a retry signal. A lock without an exec lease is
+  residue) have their own counter and watchdog signal but consume no agent-attempt budget;
+  they remain eligible and resume automatically when the environmental veto clears.
+- The pre-exec residue gate uses full NUL-delimited `git status --porcelain -z`, not only the
+  index. Paths with spaces or non-ASCII bytes are never quoted or escape-parsed. Fresh
+  unstaged residue therefore defers with a retry signal. The probe runs inside the lock's
+  cleanup path. A lock without an exec lease is
   self-healed as orphaned; the complete lock-held setup is covered by one cleanup path.
 - Transient rollback snapshots the pre-exec index and worktree separately, including
   renames and pre-dirty tracked paths, and restores that exact state while HEAD is stable.

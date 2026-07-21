@@ -428,12 +428,42 @@ function Write-RetryState {
     Write-Utf8NoBom -Path $RetryPath -Content (($object | ConvertTo-Json -Depth 8) + "`n")
 }
 
+function Get-FilePrefixSha256 {
+    param([string]$Path, [long]$Length)
+    if ($Length -lt 0) { return $null }
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    $stream = $null
+    try {
+        $stream = [System.IO.File]::Open($Path, 'Open', 'Read', 'ReadWrite')
+        if ($stream.Length -lt $Length) { return $null }
+        $buffer = New-Object byte[] 65536
+        $remaining = $Length
+        while ($remaining -gt 0) {
+            $wanted = [int][Math]::Min([long]$buffer.Length, $remaining)
+            $read = $stream.Read($buffer, 0, $wanted)
+            if ($read -le 0) { return $null }
+            [void]$sha.TransformBlock($buffer, 0, $read, $null, 0)
+            $remaining -= $read
+        }
+        [void]$sha.TransformFinalBlock((New-Object byte[] 0), 0, 0)
+        return ([BitConverter]::ToString($sha.Hash).Replace('-', '').ToLowerInvariant())
+    } finally {
+        if ($stream) { $stream.Dispose() }
+        $sha.Dispose()
+    }
+}
+
 function Get-OwnEvidence {
-    param([long]$LedgerBytesBefore)
+    param([long]$LedgerBytesBefore, [string]$LedgerPrefixSha256Before)
     $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
     if (-not (Test-Path -LiteralPath $eventsPath)) { return $false }
     $currentLength = (Get-Item -LiteralPath $eventsPath).Length
     if ($currentLength -le $LedgerBytesBefore) { return $false }
+    $prefixNow = Get-FilePrefixSha256 -Path $eventsPath -Length $LedgerBytesBefore
+    if (-not $prefixNow -or $prefixNow -cne $LedgerPrefixSha256Before) {
+        Write-Log "EVIDENCE_UNAVAILABLE reason=ledger_not_pure_append"
+        return $false
+    }
     $stream = [System.IO.File]::Open($eventsPath, 'Open', 'Read', 'ReadWrite')
     try {
         [void]$stream.Seek($LedgerBytesBefore, 'Begin')
@@ -491,35 +521,37 @@ function Get-WorktreeDiskProof {
 }
 
 function Get-StagedResidueState {
-    $status = @(& git -C $Root status --porcelain=v1 --untracked-files=all 2>$null)
+    $statusRaw = @(& git -C $Root status --porcelain=v1 -z --untracked-files=all 2>$null) -join ""
     if ($LASTEXITCODE -ne 0) { return "unknown" }
-    if ($status.Count -eq 0) { return "none" }
+    if ([string]::IsNullOrEmpty($statusRaw)) { return "none" }
+    $status = @($statusRaw -split [char]0 | Where-Object { $_ })
     $cutoff = [DateTime]::UtcNow.AddMinutes(-$AbortedResidueMinutes)
-    foreach ($row in $status) {
+    for ($index = 0; $index -lt $status.Count; $index++) {
+        $row = $status[$index]
         if ($row.Length -lt 4) { return "unknown" }
         $relative = $row.Substring(3)
-        if ($relative -match ' -> ') { $relative = ($relative -split ' -> ', 2)[1] }
         $full = Join-Path $Root $relative
         if ((Test-Path -LiteralPath $full) -and (Get-Item -LiteralPath $full).LastWriteTimeUtc -gt $cutoff) {
             return "live"
         }
+        if ($row.Substring(0, 2) -match '[RC]') { $index++ }
     }
     return "aborted"
 }
 
-function Register-RetryDefer {
+function Register-PreExecDefer {
     param([System.IO.FileInfo]$Message, [string]$Reason, [string]$Outcome = "deferred")
     $signature = Get-MessageSignature -Message $Message
     $retry = Read-RetryState
-    $previous = if ($retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)) { [int]$retry[$Message.Name].attempts } else { 0 }
-    $attempt = $previous + 1
-    $exhausted = $attempt -ge $MaxTransientRetries
-    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempt; exhausted = $exhausted; outcome = $Outcome; reason = $Reason; updated_at = [DateTime]::UtcNow.ToString("o") }
+    $same = $retry.ContainsKey($Message.Name) -and ([string]$retry[$Message.Name].signature -eq $signature)
+    $attempts = if ($same -and $null -ne $retry[$Message.Name].attempts) { [int]$retry[$Message.Name].attempts } else { 0 }
+    $defers = if ($same -and $null -ne $retry[$Message.Name].defers) { [int]$retry[$Message.Name].defers + 1 } else { 1 }
+    $retry[$Message.Name] = [ordered]@{ signature = $signature; attempts = $attempts; defers = $defers; exhausted = $false; outcome = $Outcome; reason = $Reason; updated_at = [DateTime]::UtcNow.ToString("o") }
     Write-RetryState -State $retry
-    if ($exhausted) {
-        Write-Log "RETRY_EXHAUSTED attempts=$attempt signal=watchdog outcome=$Outcome reason=$Reason message=$($Message.Name)"
+    if ($defers -ge $MaxTransientRetries) {
+        Write-Log "RETRY_EXHAUSTED defers=$defers attempts=$attempts signal=watchdog outcome=$Outcome reason=$Reason message=$($Message.Name)"
     } else {
-        Write-Log "RETRY_DEFER attempt=$attempt max=$MaxTransientRetries reason=$Reason message=$($Message.Name)"
+        Write-Log "RETRY_DEFER defer=$defers max=$MaxTransientRetries reason=$Reason message=$($Message.Name)"
         if ($RetryBackoffSeconds -gt 0) { Start-Sleep -Seconds $RetryBackoffSeconds }
     }
 }
@@ -648,7 +680,7 @@ function Get-ProcessablePeerMessages {
             ($type -in $AcceptedTypesUpper)
         ) -and
         ((-not $seen.ContainsKey($_.Name)) -or ($seen[$_.Name] -ne $signature)) -and
-        ((-not $retry.ContainsKey($_.Name)) -or ([string]$retry[$_.Name].signature -ne $signature) -or (-not [bool]$retry[$_.Name].exhausted))
+        ((-not $retry.ContainsKey($_.Name)) -or ([string]$retry[$_.Name].signature -ne $signature) -or (-not [bool]$retry[$_.Name].exhausted) -or ([string]$retry[$_.Name].outcome -eq "deferred"))
     })
 }
 
@@ -693,19 +725,6 @@ function Invoke-PeerForMessage {
         Write-Log "LOCKED skip $($Message.Name)"
         return
     }
-    $residueState = Get-StagedResidueState
-    if ($residueState -eq "unknown") {
-        Register-RetryDefer -Message $Message -Reason "residue_probe_failed"
-        return
-    }
-    if ($residueState -eq "live") {
-        Register-RetryDefer -Message $Message -Reason "worktree_residue_live"
-        return
-    }
-    if ($residueState -eq "aborted") {
-        Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
-    }
-
     New-Item -ItemType Directory -Force -Path $RunsDir | Out-Null
     $agentPath = $ResolvedAgentPath
     $execArgs = Get-AgentArguments
@@ -734,15 +753,29 @@ function Invoke-PeerForMessage {
     $untrackedBefore = @()
     try {
         Write-Utf8NoBom -Path $LockPath -Content "$stamp $($Message.Name)`n"
+        $residueState = Get-StagedResidueState
+        if ($residueState -eq "unknown") {
+            Register-PreExecDefer -Message $Message -Reason "residue_probe_failed"
+            return
+        }
+        if ($residueState -eq "live") {
+            Register-PreExecDefer -Message $Message -Reason "worktree_residue_live"
+            return
+        }
+        if ($residueState -eq "aborted") {
+            Write-Log "RETRY_TRANSIENT reason=staged_residue_aborted age_minutes=$AbortedResidueMinutes message=$($Message.Name)"
+        }
         $headBefore = (& git -C $Root rev-parse HEAD 2>$null | Select-Object -First 1)
         $ledgerHeadBefore = Get-LedgerHead
-        if (-not [bool]$ledgerHeadBefore.readable) { Register-RetryDefer -Message $Message -Reason "ledger_unreadable_before_exec"; return }
+        if (-not [bool]$ledgerHeadBefore.readable) { Register-PreExecDefer -Message $Message -Reason "ledger_unreadable_before_exec"; return }
         $eventsPath = Join-Path $Root "runtime\state\events.jsonl"
         $ledgerBytesBefore = if (Test-Path -LiteralPath $eventsPath) { [long](Get-Item -LiteralPath $eventsPath).Length } else { 0 }
+        $ledgerPrefixSha256Before = if (Test-Path -LiteralPath $eventsPath) { Get-FilePrefixSha256 -Path $eventsPath -Length $ledgerBytesBefore } else { "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" }
+        if (-not $ledgerPrefixSha256Before) { Register-PreExecDefer -Message $Message -Reason "ledger_prefix_snapshot_failed"; return }
         & git -C $Root diff --cached --binary --output=$indexPatch
-        if ($LASTEXITCODE -ne 0) { Register-RetryDefer -Message $Message -Reason "index_snapshot_failed"; return }
+        if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "index_snapshot_failed"; return }
         & git -C $Root diff --binary --output=$worktreePatch
-        if ($LASTEXITCODE -ne 0) { Register-RetryDefer -Message $Message -Reason "worktree_snapshot_failed"; return }
+        if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason "worktree_snapshot_failed"; return }
         $untrackedBeforeRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
         $untrackedBefore = @($untrackedBeforeRaw -split [char]0 | Where-Object { $_ })
         # The prompt goes through STDIN (RedirectStandardInput of the rendered prompt
@@ -770,7 +803,7 @@ function Invoke-PeerForMessage {
         if (Test-Path -LiteralPath $stdoutPath) { $agentResponse = Get-Content -LiteralPath $stdoutPath -Raw -Encoding UTF8 }
         $invokerDiagnostics = ""
         if (Test-Path -LiteralPath $stderrPath) { $invokerDiagnostics = Get-Content -LiteralPath $stderrPath -Raw -Encoding UTF8 }
-        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -AgentResponse $agentResponse -InvokerDiagnostics $invokerDiagnostics -OwnEvidence (Get-OwnEvidence -LedgerBytesBefore $ledgerBytesBefore)
+        $outcome = Get-ExecOutcomeClass -ExitCode $process.ExitCode -AgentResponse $agentResponse -InvokerDiagnostics $invokerDiagnostics -OwnEvidence (Get-OwnEvidence -LedgerBytesBefore $ledgerBytesBefore -LedgerPrefixSha256Before $ledgerPrefixSha256Before)
         Write-Log "EXEC_EXIT code=$($process.ExitCode) outcome=$outcome message=$($Message.Name)"
         $signature = Get-MessageSignature -Message $Message
         if ($outcome -in @("confirmed", "definitive")) {
