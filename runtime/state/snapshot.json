@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "47d9264c67654ef5d032652130b6a605afb819e0b60effef91ab5b8153a7aa44",
+  "canonical_hash": "275b32f002f3a927b4824b37ae0901e62a14370bb1d4c2a5117a5e32370c7d12",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -784,6 +784,7 @@
       "CLAIM-arq-0270-0271-registro-20260720": 1,
       "CLAIM-arq-0280-it4-20260721": 1,
       "CLAIM-arq-alta0280-20260720": 1,
+      "CLAIM-arq-alta0281-20260721": 1,
       "CLAIM-arq-b3-archivo-20260720": 1,
       "CLAIM-arq-campo0278-20260720": 1,
       "CLAIM-arq-checkpoint-hyg-20260720": 1,
@@ -1940,6 +1941,7 @@
       "MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
+      "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter4-cabeza-ilegible": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
@@ -2231,6 +2233,7 @@
       "TASK-0278": 14,
       "TASK-0279": 1,
       "TASK-0280": 33,
+      "TASK-0281": 2,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2253,7 +2256,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4835,
+    "events_applied": 4839,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2418,6 +2421,10 @@
       "arq:alta0280:acquire:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5402,
       "arq:alta0280:release:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5404,
       "arq:alta0280:upsert:55e84cd9-fb6b-4150-aa25-c0a3600f1ea2": 5403,
+      "arq:alta81:acquire:18f540fc-06bd-497e-8041-8b320e481070": 5507,
+      "arq:alta81:arch1:18f540fc-06bd-497e-8041-8b320e481070": 5509,
+      "arq:alta81:release:18f540fc-06bd-497e-8041-8b320e481070": 5510,
+      "arq:alta81:upsert:18f540fc-06bd-497e-8041-8b320e481070": 5508,
       "arq:arch-go-0194": 2232,
       "arq:arch-rv-0194": 2233,
       "arq:campo0278:acquire:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5362,
@@ -7092,5 +7099,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5506
+  "up_to_seq": 5510
 }

@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter4-cabeza-ilegi
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0280, remediacion acotada a UN bloqueante (iteracion 2 de 2 del enfoque conservador firmado). F-0280R3-01: Get-LedgerHead dejo de lanzar y ahora devuelve un seq=0 FABRICADO ante cualquier fallo de lectura; el bucle usa ese 0 como linea base de Get-OwnEvidence, que recorre TODO el log historico, encuentra un evento firmado propio de una ventana anterior, y Get-ExecOutcomeClass lo convierte en outcome=confirmed: el mensaje se marca en seen.json y sale de la cola PARA SIEMPRE, con cero trabajo aplicado y sin senal. No hace falta corromper el log: basta con que scripts/ledger_head.py salga distinto de cero por cualquier motivo (PATH, antivirus, IO). Arreglo: aplicar la MISMA regla conservadora al camino del exec -- si la cabeza no es legible, NO invocar al agente y registrar RETRY_DEFER -- o pasar un centinela explicito que fuerce OwnEvidence a falso. Nunca fabricar un 0. Negativo permanente por el bucle real con el log VALIDO y el helper fallando. NO tocar lo que ya quedo cerrado ni redesplegar el harness vivo."

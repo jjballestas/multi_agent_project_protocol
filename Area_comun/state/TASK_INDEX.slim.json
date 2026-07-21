@@ -128,6 +128,14 @@
             "priority": "high",
             "status": "in_review",
             "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
+        },
+        {
+            "id": "TASK-0281",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "status": "ready",
+            "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira"
         }
     ],
     "view": "task_index.slim"

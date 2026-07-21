@@ -425,6 +425,18 @@
             "type": "fix"
         },
         {
+            "created_at": "2026-07-21",
+            "file": "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+            "id": "TASK-0281",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira",
+            "type": "fix"
+        },
+        {
             "author": "Operador",
             "closure_criterion": "All viable candidates are available for human review outside the ledger, or the extractor records a no-candidate/failed state.",
             "endorsement": "none",
