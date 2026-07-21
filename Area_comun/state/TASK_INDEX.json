@@ -432,7 +432,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga",
             "type": "fix"
         },
