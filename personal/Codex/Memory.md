@@ -3823,3 +3823,7 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Dirty-tree forensics remains a pre-lock launch veto. Deleted residues use persisted per-path first-seen timestamps; terminal defers set `exhausted=true` and leave the executable queue; git stdout/stderr drain concurrently under timeouts; claims ignore released/expired rows and live external claims/leases only reinforce deferral.
 - `examples/mailbox_retry_cases/run_mailbox_retry_cases.py` covers stale non-ASCII residue aging, terminal defer escape, and declared control-point mutants. Full retry suite, canonical validator, encoding scan, and neutrality scan exited 0.
 - Live harness was not redeployed, per Arquitecto instruction. Next coordination action: move TASK-0284 to `in_review`, release its claim, and send the self-contained handoff to Arquitecto.
+## 2026-07-22 - TASK-0284 delivery correction
+
+- Commit `942419d` records the Codex-signed, claim-scoped handoff hash correction after the trailer gate replaced implementation commit `11ed6e3` with canonical commit `04ec9d1`.
+- TASK-0284 is `in_review`; both implementation and handoff correction claims are released. The open handoff requests Arquitecto route `04ec9d1` to Analista and keep live redeployment gated.
