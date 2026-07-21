@@ -133,28 +133,10 @@
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code"
         },
         {
-            "id": "TASK-0277",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva"
-        },
-        {
             "id": "TASK-0279",
             "owner": "Codex",
             "status": "ready",
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
-        },
-        {
-            "id": "TASK-0280",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe"
-        },
-        {
-            "id": "TASK-0281",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira"
         },
         {
             "id": "TASK-0282",

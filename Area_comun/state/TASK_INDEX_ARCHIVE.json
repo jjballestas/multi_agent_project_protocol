@@ -7446,6 +7446,42 @@
             "status": "done",
             "title": "[HARNESS][CAMPO] El token de outcome es invisible en produccion: el epilogo del CLI va DESPUES de la ultima linea, y el regex de respaldo lee el prompt del propio encargo",
             "type": "fix"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0277-reparar-fila-0267-y-cruce-indice.md",
+            "id": "TASK-0277",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[TRAZABILIDAD] Reparar la fila desaparecida de TASK-0267 y cerrar la clase: cruce de ficheros de tareas contra el indice, y cobertura de los archivos de poda en el chequeo de deriva",
+            "type": "infra"
+        },
+        {
+            "created_at": "2026-07-20",
+            "file": "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+            "id": "TASK-0280",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[HARNESS][CRITICO] El rollback del exec revierte el LEDGER: transacciones ya aplicadas desaparecen y el agente reporta trabajo que no existe",
+            "type": "fix"
+        },
+        {
+            "created_at": "2026-07-21",
+            "file": "Area_comun/tasks/TASK-0281-bucle-no-ciego-ni-bloqueado.md",
+            "id": "TASK-0281",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira",
+            "type": "fix"
         }
     ]
 }
