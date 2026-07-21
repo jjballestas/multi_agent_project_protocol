@@ -3249,3 +3249,76 @@ released_ratio 95.0 >= 90** senalado al Arquitecto; no lo toco.
 Bucle declarado: remediacion de Codex acotada a los tres puntos del apartado 6 del artifact,
 re-juicio mio ANTES del commit de cierre, **maximo 2 iteraciones** y a la tercera escalo al
 operador.
+
+---
+
+## 2026-07-21 16:37 -- TASK-0280 F-0280R4-02: GO al cierre (commit c7d8b8e)
+
+Encargo: MSG DECISION del Arquitecto desacoplando 0280 de 0281. Pregunta literal: el
+control positivo del maker prueba que el brazo puede fallar, o solo que falla ante SU
+mutacion? Anclaje: HEAD canonico `39aa3dc`, commit juzgado `32cea00` (byte-identicos en
+los dos ficheros bajo revision). Clon limpio `D:/ccv0280`. Veredicto **GO / OK-CERRABLE**;
+artifact `Area_comun/artifacts/Analista-TASK-0280-F02-cierre-verdict.md`.
+
+**LECCION #1 -- NO REPRODUCIR EL CONTROL DEL MAKER: ESCRIBIR EL PROPIO BANCO.** Para
+refutar "control positivo a medida" no sirve re-correr su mutante. Escribi NUEVE mias
+sobre la rama exacta (`peer_mailbox_cron.ps1:565`) variando DOS ejes a la vez:
+*ordenamiento* (antes del defer / despues / en la ventana ciega tras la captura del
+checker) y *forma del dano* (vaciado / append / borrado del fichero / eliminacion de la
+rama entera). 8 muertos de 9. Un banco de un solo eje habria confirmado al maker sin
+probar nada. Driver reutilizable: python que aplica el mutante, corre la suite, mide exit
+code y revierte con `git checkout --` entre mutantes.
+
+**LECCION #2 -- PREGUNTAR SIEMPRE *QUIEN* MATA AL MUTANTE, NO SOLO SI MUERE.** El hallazgo
+util del dia (R1) no salio del marcador 8/9 sino de leer el MENSAJE de cada fallo: M6 y M8
+pasaron la asercion NUEVA y murieron en la VIEJA (`events[-1].seq==3`). O sea el poder
+falsador lo sostiene un PAR de aserciones con fronteras distintas (nueva = `fixture ->
+defer`; vieja = lo posterior al defer), y el maker no lo declara. Quien relaje la vieja
+creyendo que la nueva la subsume desdienta el brazo otra vez. Un mutante que muere "por
+otro sitio" es informacion, no ruido.
+
+**LECCION #3 -- UN SUPERVIVIENTE PUEDE SER CORRECTO.** M9 (destruir y reescribir
+byte-identico) sobrevive y NO es un escape: el criterio exige preservar CONTENIDO, y lo
+preserva. Registrar como residual (la barrera es un muestreo de dos puntos de contenido,
+no una invariante de "no se escribe"), nunca como SLIP. Inflar un superviviente correcto a
+defecto quema credibilidad para el hallazgo que si importa.
+
+**LECCION #4 -- REVISAR LOS SIETE CRITERIOS, NO SOLO EL REPARADO.** Estaba firmando un
+CIERRE, no una remediacion. Repase las 7 lineas de acceptance incluida la que nadie mira
+(espejo born-operational): `new_instance.py --tier runtime` a sandbox -> exit 0, validate
+de la instancia nueva exit 0, `peer_mailbox_cron.ps1` byte-identico sha256 `3215b0b2...`.
+De paso salio R5: `examples/` NO se exporta, asi que la instancia hija hereda la garantia
+SIN heredar el negativo que la protege (preexistente, declarado, no bloqueante).
+
+**LECCION #5 -- EL DOD MANDA SOBRE MI PROPIO VEREDICTO ANTERIOR.** Mi iter4 declaro
+F-0280R4-01 (`torn_tail`) BLOQUEANTE y condiciono el cierre a secuenciarlo tras 0281. El
+Arquitecto desacoplo. Antes de aceptar o rechazar fui a las SIETE lineas de acceptance de
+TASK-0280: `torn_tail` no esta en ninguna -- entro como defecto del gate adyacente que el
+maker introdujo remediando. Acepto el desacople por esa razon concreta, NO por deferencia,
+y dejo escrito en el artifact que el GO no firma esa garantia. Regla: cuando el arquitecto
+mueve una frontera, se verifica contra el DoD escrito, no contra lo que yo dije antes.
+
+**LECCION #6 -- MI PROPIO COMMIT DEJO EL ESTADO CANONICO ROJO (reincidencia F-0240-01).**
+`57f6250` (veredicto 0281) llevaba `Ops-Reason` separado de `Co-Authored-By` por LINEA EN
+BLANCO -> el parser solo lee el ULTIMO parrafo, asi que el Task-Id quedo invisible ->
+`validate` ROJO en `c4ce07a` y otro avance de linea base a costa del Arquitecto. Es mi 4a-5a
+recurrencia segun su bitacora. **REGLA DURA: trailers en UN SOLO parrafo final, sin lineas
+en blanco entre ellos, Co-Authored-By INCLUIDO en ese mismo bloque.** Verificar SIEMPRE con
+`git log -1 --format=%B | cat -A` tras commitear. Lo reporte sobre mi mismo (DECISION-0018)
+y pedi que TASK-0279 (chequeo de trailers en pre-commit que ABORTA) deje de estar en ready.
+
+**LECCION #7 -- EL VALIDATE PUEDE MENTIR EN LOS DOS SENTIDOS BAJO ARBOL COMPARTIDO.** Al
+arrancar, el arbol caliente daba drift en `CLAIMS.json` (el Arquitecto escribia) y minutos
+despues drift False; `scan_encoding` dio exit 1 una vez y exit 0 dos veces seguidas (Codex
+escribiendo). Un gate rojo transitorio en arbol compartido NO es un veredicto: repetirlo y
+confirmarlo en CLON LIMPIO antes de reportarlo. El unico rojo real era el mio (trailers).
+
+Ventana: Codex con claim activa `CLAIM-20260721-Codex-TASK-0281-iter2` sobre los DOS
+ficheros que juzgue -- por eso todo el juicio salio del clon limpio, cero lecturas del
+arbol caliente. Commit con `git add` + `git commit -- <pathspec explicito>` de mis dos
+archivos; su entrega de iter2 quedo fuera. Push llevo tambien su commit `b59726b` (arbol
+compartido); `c7d8b8e` es ancestro de `origin/main` y origin/main valida verde en clon
+limpio. **PRUNE DUE released_ratio 95.35 >= 90** re-senalado al Arquitecto; no lo toco.
+
+Sin bucle de correccion: GO, no CHANGE-REQUIRED. Seis residuales declarados (R1 el que
+importa); si el Arquitecto quiere R1/R3 como unidad, es trabajo nuevo.
