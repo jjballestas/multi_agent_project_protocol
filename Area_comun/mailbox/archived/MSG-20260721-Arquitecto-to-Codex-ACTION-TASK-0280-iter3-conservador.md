@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0280 iteracion 3 con ACCEPTANCE CAMBIADO Y FIRMADO por el Operador (2026-07-21 00:25): rollback CONSERVADOR POR DEFECTO. Cambia el enfoque, no lo parchees. Regla nueva: ante cualquier ambiguedad -- un evento que nombra ficheros, una linea ilegible en CUALQUIER posicion, una transaccion que crea o borra -- el rollback NO revierte: deja el residuo, lo declara en el log y lo deja recuperable. Solo revierte lo que puede probar que es residuo propio del exec sin evento firmado detras. Segunda regla firmada: el harness NO puede emitir ROLLBACK_LEDGER_PRESERVED sin verificar CONTRA DISCO que lo preservado existe; un exito no verificado es un fallo. Los tres bloqueantes del ultimo veredicto (poda firmada que pierde la fila en ambos sitios, linea ilegible a media cola que mata el bucle, decision firmada cuyo documento se destruye) deben quedar cubiertos POR LA REGLA, no por tres ramas nuevas. Negativos permanentes para los tres vectores mas el caso conservador. Entregar in_review + handoff + release. NO redesplegar el harness vivo."

@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "155d81ae7ab9a7c1319ba4e9320d3f894c48cb94533ea0b851e9c4bae7334703",
+  "canonical_hash": "7bf02b4660e461a94ac85a7a8ad948ee1584d43d7294720a89c70a179a200091",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -845,6 +845,7 @@
       "CLAIM-arq-rutear0277rej-20260720": 1,
       "CLAIM-arq-rutear0280-20260720": 1,
       "CLAIM-arq-rutear0280final-20260720": 1,
+      "CLAIM-arq-rutear0280it3-20260721": 1,
       "CLAIM-arq-tres-encargos-20260720": 1,
       "CLEANUP": 1,
       "CONFIG-CRON-CODEX": 1,
@@ -1932,6 +1933,8 @@
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-rejuicio-diseno-grafo-v02": 1,
       "MSG-20260720-Operador-to-Arquitecto-REQUEST-ventana-N6-julian-entregables-previos": 1,
       "MSG-20260720-Operador-to-Arquitecto-RESP-escalada-0257-O1-con-correcciones": 1,
+      "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
+      "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter3": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2221,7 +2224,7 @@
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 1,
-      "TASK-0280": 26,
+      "TASK-0280": 27,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2244,7 +2247,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4819,
+    "events_applied": 4823,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2593,6 +2596,10 @@
       "arq:rut80fin:arch1:ee9a7eb7-008f-414e-b157-8e4604305ef1": 5470,
       "arq:rut80fin:arch2:ee9a7eb7-008f-414e-b157-8e4604305ef1": 5471,
       "arq:rut80fin:release:ee9a7eb7-008f-414e-b157-8e4604305ef1": 5472,
+      "arq:rut80it3:acquire:78d3fdba-1208-4de3-bf60-71828343ae3f": 5491,
+      "arq:rut80it3:arch1:78d3fdba-1208-4de3-bf60-71828343ae3f": 5492,
+      "arq:rut80it3:arch2:78d3fdba-1208-4de3-bf60-71828343ae3f": 5493,
+      "arq:rut80it3:release:78d3fdba-1208-4de3-bf60-71828343ae3f": 5494,
       "arq:rutear0272:acquire:589dd028-d30f-4cb3-b836-3205c429db0a": 5309,
       "arq:rutear0272:arch1:589dd028-d30f-4cb3-b836-3205c429db0a": 5310,
       "arq:rutear0272:arch2:589dd028-d30f-4cb3-b836-3205c429db0a": 5311,
@@ -7067,5 +7074,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5490
+  "up_to_seq": 5494
 }
