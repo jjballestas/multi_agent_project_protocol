@@ -2,7 +2,7 @@
 
 Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
 
-- TASK-0281 implementation commit `23b9f5c` hardens the generic mailbox loop without
+- TASK-0281 implementation commit `8ea4874` hardens the generic mailbox loop without
   redeploying either live peer wrapper. A missing-lease lock self-heals, every pre-exec
   defer consumes the bounded retry budget and emits watchdog exhaustion, signed own
   evidence is limited to bytes appended after the pre-exec log length, and the residue
@@ -10,7 +10,11 @@ Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
   covers orphan-lock recovery with a failing head helper, bounded unreadable-head defer,
   disordered historical signed evidence, and fresh unstaged residue that defers visibly.
   Mailbox retry, Anthropic harness, exec-lease, attested instancing, validator, encoding,
-  and neutrality gates pass. TASK-0281 remains `in_progress` pending delivery transition.
+  and neutrality gates passed at the implementation checkpoint.
+- TASK-0281 delivery transaction seq 5519-5522 moves the task to `in_review`,
+  releases both Codex claims, and opens the self-contained Arquitecto handoff for
+  independent Analista review. Neither live harness was redeployed; Codex did not
+  review or ratify the maker delivery.
 
 - TASK-0280 iteration 4 implementation commit `116e581` removes the fabricated
   `seq=0` fallback for an unreadable ledger head. The generic runner now emits
