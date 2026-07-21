@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260722-Codex-TASK-0282",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0282",
-                "Area_comun/state/TASK_INDEX.json#TASK-0282",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0282",
-                "Area_comun/tasks/TASK-0282-retirar-rama-destructiva-rollback.md",
-                "scripts/harness/peer_mailbox_cron.ps1",
-                "scripts/harness/README.md",
-                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
-                "personal/Codex/Memory.md"
-            ],
-            "task_id": "TASK-0282"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

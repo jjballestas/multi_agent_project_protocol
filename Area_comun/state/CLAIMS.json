@@ -595,9 +595,24 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-21T23:00:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0282",
             "updated_at": "2026-07-21T23:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0282-delivery",
+            "expires_at": "2026-07-22T01:02:47Z",
+            "notes": "TASK-0282 delivery artifacts and independent-review request.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0282-delivery",
+                "Area_comun/handoffs/HANDOFF-TASK-0282-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282.md"
+            ],
+            "started_at": "2026-07-21T23:02:47Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T23:02:47Z"
         },
         {
             "claim_id": "CLAIM-arq-0280-it4-20260721",

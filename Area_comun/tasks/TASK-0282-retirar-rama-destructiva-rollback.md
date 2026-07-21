@@ -2,7 +2,7 @@
 task_id: TASK-0282
 title: "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca"
 type: fix
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: high
