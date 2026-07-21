@@ -3817,3 +3817,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Commit `abdd158` records the Codex-signed `review_approved -> done` flip after independent checker GO and Arquitecto ratification.
 - Runtime-authoritative transaction acquired and released `CLAIM-20260722-Codex-TASK-0282-done-flip`; canonical validation, encoding, and domain-neutrality gates exited 0.
 - TASK-0284 is the active priority from `MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284.md`; do not redeploy the live harness.
+## 2026-07-22 - TASK-0284 implementation
+
+- Commit `11ed6e3` starts TASK-0284 and implements the conservative bounded pre-gate in `scripts/harness/peer_mailbox_cron.ps1`.
+- Dirty-tree forensics remains a pre-lock launch veto. Deleted residues use persisted per-path first-seen timestamps; terminal defers set `exhausted=true` and leave the executable queue; git stdout/stderr drain concurrently under timeouts; claims ignore released/expired rows and live external claims/leases only reinforce deferral.
+- `examples/mailbox_retry_cases/run_mailbox_retry_cases.py` covers stale non-ASCII residue aging, terminal defer escape, and declared control-point mutants. Full retry suite, canonical validator, encoding scan, and neutrality scan exited 0.
+- Live harness was not redeployed, per Arquitecto instruction. Next coordination action: move TASK-0284 to `in_review`, release its claim, and send the self-contained handoff to Arquitecto.
