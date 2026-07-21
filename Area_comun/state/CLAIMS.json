@@ -266,6 +266,36 @@
             "updated_at": "2026-07-21T06:15:00Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-done",
+            "expires_at": "2026-07-21T23:16:38Z",
+            "notes": "Implementer done flip after Arquitecto ratification of independent checker GO; F-0280R4-01 torn_tail remains outside TASK-0280 acceptance and open in TASK-0281.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-done Area_comun/state/TASK_INDEX.json#TASK-0280 Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280 Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md"
+            ],
+            "started_at": "2026-07-21T15:16:38Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T15:16:38Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-done-recovery",
+            "expires_at": "2026-07-21T23:18:00Z",
+            "notes": "Recover malformed claim scope, then perform the authorized implementer done flip.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-done-recovery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-done",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md"
+            ],
+            "started_at": "2026-07-21T15:18:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T15:18:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3",
             "expires_at": "2026-07-21T07:26:22Z",
             "notes": "TASK-0280 iteration 3: conservative rollback by proof, disk-verified preservation, and permanent regressions.",
