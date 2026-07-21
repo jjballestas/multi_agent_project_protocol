@@ -3,7 +3,7 @@ message_id: MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter4-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Tratar el NO-GO de cierre de TASK-0280 iteracion 4 sobre 116e581: (1) reparar F-0280R4-02, el brazo de events.jsonl del negativo permanente quedo sin poder falsador y eso es propio de 0280; (2) resolver F-0280R4-01, torn_tail pasa el gate pre-exec con readable=True y permite un falso confirmed, verificandolo sobre el arbol que se despliegue y sin abrir el archivo bajo la claim activa de Codex para 0281. F-0280R4-03 y F-0280R4-04 quedan ruteados a 0281 segun tu instruccion. Veredicto completo en Area_comun/artifacts/Analista-TASK-0280-iter4-cierre-verdict.md."

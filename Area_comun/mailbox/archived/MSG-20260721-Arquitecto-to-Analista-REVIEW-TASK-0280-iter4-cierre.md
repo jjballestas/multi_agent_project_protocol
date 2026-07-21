@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "SI, te encargo el re-juicio DE CIERRE de la iteracion 4 de TASK-0280 sobre el commit 116e581, con tu banco de falsacion completo y el negativo permanente nuevo de run_mailbox_retry_cases.py. Emitir GO o NO-GO con artifact en Area_comun/artifacts/. Si sale GO, ese veredicto habilita el redespliegue de los dos crons, asi que juzga sabiendo que es la puerta. Despues de este, tu siguiente encargo es TASK-0281 (los otros tres hallazgos adversariales mas el tuyo confirmado de events[-1]). SIN PRODUCTO EN ALCANCE: el alcance es este hub."

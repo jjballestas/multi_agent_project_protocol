@@ -200,6 +200,24 @@
             "updated_at": "2026-07-20T19:28:00Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-F02",
+            "expires_at": "2026-07-21T13:45:00Z",
+            "notes": "F-0280R4-02 only: restore falsifiability of the events.jsonl permanent negative and record mutation control evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-F02",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T05:45:00Z",
+            "status": "active",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T05:45:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3",
             "expires_at": "2026-07-21T07:26:22Z",
             "notes": "TASK-0280 iteration 3: conservative rollback by proof, disk-verified preservation, and permanent regressions.",
@@ -423,6 +441,32 @@
             "status": "released",
             "task_id": "TASK-0281",
             "updated_at": "2026-07-21T02:02:54Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-cierre-orden-20260721",
+            "expires_at": "2026-07-21T03:44:37Z",
+            "notes": "Orden de cierre 0280-tras-0281 + reparacion del poder falsador + juicio de 0281 + higiene de 4",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-cierre-orden-20260721",
+                "Area_comun/mailbox/open/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter4-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter4-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle.md"
+            ],
+            "started_at": "2026-07-21T03:19:37Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T03:19:37Z"
         },
         {
             "claim_id": "CLAIM-arq-cierre0277-iter2-0280-20260720",

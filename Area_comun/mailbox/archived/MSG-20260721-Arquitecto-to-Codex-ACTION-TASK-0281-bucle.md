@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0281, cuatro defectos del bucle encontrados por una revision adversarial independiente. (1) LOCK HUERFANO: el lock se escribe antes de un tramo que corre fuera del try cuyo finally lo borra; si el helper de cabeza no arranca, la excepcion escapa, el lock queda sin lease y Clear-StaleCronLockIfSafe no lo sana porque justamente no hay lease -- el cron entra en LOCKED skip permanente. Cubrir todo el tramo y tratar el lock sin lease ni proceso vivo como huerfano. (2) DEFER SIN TOPE NI SENAL: el camino ledger_unreadable_before_exec no toca el estado de reintentos; una causa permanente difiere la cola entera para siempre sin RETRY_EXHAUSTED. Todo defer necesita tope y senal. (3) LINEA BASE FRAGIL: event_log_head devuelve el seq de la ULTIMA LINEA, no el maximo; con cola desordenada la evidencia propia acepta trabajo historico. La linea base pasa a ser tamano en bytes o numero de lineas del log pre-exec. (4) RESIDUO SUCIO INVISIBLE: Get-StagedResidueState mira solo el indice; un exec matado deja modificados sin stagear que ningun pre-gate ve. Pasar a git status --porcelain con defer y senal. Negativos permanentes por el bucle real para los cuatro. Entregar in_review + handoff + release. NO redesplegar el harness vivo."
