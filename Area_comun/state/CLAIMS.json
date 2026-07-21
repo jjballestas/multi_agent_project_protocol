@@ -238,6 +238,20 @@
             "updated_at": "2026-07-21T06:05:00Z"
         },
         {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-F02-memory",
+            "expires_at": "2026-07-21T06:55:00Z",
+            "notes": "Persist TASK-0280 F02 delivery commit in Codex golden memory.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-F02-memory",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T06:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T06:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-F02-msgfix",
             "expires_at": "2026-07-21T06:45:00Z",
             "notes": "Add the required compact-message question field, rerun gates, and release.",

@@ -7,7 +7,10 @@ Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
   the rollback decision and before its repair barrier. The normal suite exits 0;
   a control mutant that empties the ledger in the same rollback branch exits 1
   with `after_rollback=['']`. No torn-tail guard was added and the live harness
-  was not redeployed. Delivery to independent review remains pending.
+  was not redeployed. Delivery commit `323ac9f` moves TASK-0280 to `in_review`,
+  releases all maker/delivery/msgfix claims through seq 5536, and opens the
+  self-contained Arquitecto handoff for independent Analista re-judgement after
+  TASK-0281. Codex did not review or ratify the result.
 
 - TASK-0281 implementation commit `8ea4874` hardens the generic mailbox loop without
   redeploying either live peer wrapper. A missing-lease lock self-heals, every pre-exec
