@@ -3322,3 +3322,65 @@ limpio. **PRUNE DUE released_ratio 95.35 >= 90** re-senalado al Arquitecto; no l
 
 Sin bucle de correccion: GO, no CHANGE-REQUIRED. Seis residuales declarados (R1 el que
 importa); si el Arquitecto quiere R1/R3 como unidad, es trabajo nuevo.
+
+---
+
+## 2026-07-21 17:34 -- TASK-0281 iteracion 2 (commit 7b708f8): NO-GO ACOTADO + escalado del tope
+
+Veredicto en `Area_comun/artifacts/Analista-TASK-0281-iter2-append-defers-verdict.md`,
+mensaje `MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0281-iter2-verdict.md`,
+commit `4d4fd81` (pusheado; validate 0 y scan_encoding 0 tras el push).
+Clon limpio `D:/ccv0281b` sobre `7b708f8`; los 4 gates verdes ALLI.
+
+**LECCION #8 -- UN TEST PUEDE PROBAR SU PROPIA CONTAMINACION.** El negativo permanente que
+declaraba cerrado el vector no-ASCII (`run_nul_residue_path_cases`) escribe su propio
+`nul-residue-probe.ps1` DENTRO del sandbox que evalua: ese fichero ya es residuo fresco no
+rastreado, asi que `Get-StagedResidueState` devuelve `live` **aunque el fichero objetivo no
+exista**. Lo demostre con el experimento de vacuidad (probe fresco, SIN objetivo -> `live`) y
+con la descontaminacion (probe envejecido con `os.utime` -> el espacio sale `live`, el
+no-ASCII sale `aborted`). **TECNICA REUTILIZABLE: ante un negativo que pasa, ejecutarlo SIN
+la condicion que dice detectar; si sigue verde, no prueba nada.** Segundo contaminante en el
+mismo sandbox: el caso anterior deja `runtime/state/events.jsonl` recien escrito.
+
+**LECCION #9 -- POWERSHELL MAL-DECODIFICA LAS RUTAS QUE GIT EMITE EN UTF-8.**
+`[Console]::OutputEncoding` es cp850 (ibm850) en esta maquina: `git status --porcelain -z`
+emite el nombre en UTF-8 y PowerShell lo reconstruye mal, `Test-Path` da False y el residuo
+se vuelve invisible. `-z` mata el entrecomillado (el espacio SI quedo arreglado) pero no la
+decodificacion. Instrumentar siempre imprimiendo `[Console]::OutputEncoding`, el nombre en
+disco, el nombre que decodifica git y los CODIGOS de caracter -- ahi se ve el mojibake.
+Afecta tambien a `Get-WorktreeDiskProof` y a la limpieza de no-rastreados del rollback.
+
+**LECCION #10 -- LA DIRECCION DEL DANO ES PARTE DEL VEREDICTO.** El mismo vector paso de
+fallar CERRADO y ruidoso (LOOP_ERROR, 12 rondas de atasco en iter1) a fallar ABIERTO y
+callado (el runner pisa la entrega viva del peer y lo registra como `staged_residue_aborted`,
+que se lee como seguro). Un arreglo que cambia de direccion el fallo NO cierra el vector, y
+el silencio lo empeora. Medirlo SIEMPRE sobre el runner completo, no solo con la funcion
+extraida: la funcion daba `aborted` (ambiguo), el runner dio `EXEC_START=1` + mensaje
+consumido (inequivoco).
+
+**LECCION #11 -- PROBAR EL REVES (falso rechazo), no solo el escape.** El Arquitecto lo pidio
+explicitamente y valio: contraste del hash por bloques de PowerShell contra `hashlib` sobre el
+`events.jsonl` VIVO (6.857.842 bytes) en 8 longitudes incluidas las fronteras 65535/65536/65537
+-> MATCH byte a byte en 4 ms. Sin eso, "no encontre falso rechazo" seria una opinion.
+
+**GOTCHA DE HERRAMIENTA:** una funcion PowerShell llamada `Git` se auto-invoca (PowerShell es
+case-insensitive y las funciones ganan a los ejecutables) -> recursion infinita y el probe
+cuelga sin salida. Nombrarla `RunGit` e invocar `git.exe`. Y `Push-Location` no basta para
+los comandos nativos: usar `git.exe -C <dir>` explicito.
+
+**VECTOR VACIO:** salto de linea en nombre de fichero NO es alcanzable en Windows (Win32
+rechaza chars < 32, tambien por `\?\`). Documentarlo como muerto por plataforma, no por el
+arreglo; re-abrirlo si el runner se porta a POSIX (alli `-join ""` perderia el salto).
+
+Cerrados y bien probados en esta iteracion: punto 1 (append puro por hash: 13 vectores) y
+punto 3 (defers con `EXEC_START=0`, `attempts=0`, recuperacion al limpiarse el arbol, y
+agotamiento post-exec que SIGUE excluyendo -> no hay reproceso infinito). Del punto 2 quedaron
+cerrados el espacio y la excepcion contenida en el `try` (`.git` roto -> 3 `EXEC_FAIL`, cero
+`LOOP_ERROR`, ni lock ni lease huerfanos).
+
+Trailers en UN SOLO parrafo (leccion #6 aplicada, sin reincidencia). **PRUNE DUE
+released_ratio 95.83 >= 90** sigue pendiente del Arquitecto; no lo toco.
+
+**Tope de 2 iteraciones AGOTADO -> escale la decision al operador humano.** Si el Arquitecto
+cierra 0281 igualmente, exigi que F-0281-05 y F-0281-06 salgan con ACCEPTANCE PROPIO (TASK-0283
+o unidad nueva), nunca como residuo suelto.
