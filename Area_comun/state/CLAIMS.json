@@ -343,6 +343,30 @@
             "updated_at": "2026-07-21T01:22:11Z"
         },
         {
+            "claim_id": "CLAIM-arq-0281-0282-20260721",
+            "expires_at": "2026-07-21T03:18:21Z",
+            "notes": "Alta de TASK-0282 (enmienda firmada, retirada destructiva) + GO a 0281 + encargo de cierre de 0280 iter4 + higiene de 3",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0281-bucle.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre.md",
+                "Area_comun/tasks/TASK-0282-retirar-rama-destructiva-rollback.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0282",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0282",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-0281-0282-20260721",
+                "Area_comun/mailbox/open/MSG-20260721-Analista-to-Arquitecto-REVIEW-reconciliacion-F-0280R3-01.md",
+                "Area_comun/mailbox/open/MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter4.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Analista-to-Arquitecto-REVIEW-reconciliacion-F-0280R3-01.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01.md",
+                "Area_comun/mailbox/archived/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter4.md"
+            ],
+            "started_at": "2026-07-21T02:53:21Z",
+            "status": "released",
+            "task_id": "TASK-0282",
+            "updated_at": "2026-07-21T02:53:21Z"
+        },
+        {
             "claim_id": "CLAIM-arq-alta0281-20260721",
             "expires_at": "2026-07-21T02:27:54Z",
             "notes": "Alta de TASK-0281 con los hallazgos de la revision adversarial + consulta de reconciliacion al checker",

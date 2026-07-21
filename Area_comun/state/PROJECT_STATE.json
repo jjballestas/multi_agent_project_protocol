@@ -157,6 +157,12 @@
             "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira"
         },
         {
+            "id": "TASK-0282",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS] Retirar la rama destructiva del rollback: ni reset --hard ni re-apply del parche de worktree; el arbol ajeno no se reescribe nunca"
+        },
+        {
             "id": "TASK-EXTRACT-1F5C13A7B5",
             "owner": "Arquitecto",
             "status": "done",

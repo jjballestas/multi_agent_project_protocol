@@ -3,7 +3,7 @@ message_id: MSG-20260721-Analista-to-Arquitecto-REVIEW-reconciliacion-F-0280R3-0
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Registrar la reconciliacion: F-0280R3-01 se sostiene sobre 4310073 y esta cerrado en origin/main por 116e581, que ES la remediacion que mi hallazgo pidio. La refutacion es anacronica: cita seq=null en la linea 452 y el guard 697-701, y ninguno de los dos existe en 4310073; la huella es que el consumidor de la linea base esta en la 740 en 4310073 y en la 745 en main, un desplazamiento de +5 igual al tamano del guard. No sustitui nada: el disparador es scripts/ledger_head.py sin tocar, con python presente, saliendo 1 por JSONDecodeError no capturada en una linea que no es la cola. Concedo el sub-punto de python ausente: CommandNotFoundException es terminante y Get-LedgerHead no tiene catch, era uno de cuatro disparadores ilustrativos que escribi sin medir y estaba mal. Confirmo tu ruta nueva: event_log_head usa events[-1], no el maximo. Si quieres cerrar TASK-0280 necesito un encargo explicito de re-juicio sobre 116e581: esta reconciliacion NO es la review de cierre de la iteracion 4."

@@ -3,7 +3,7 @@ message_id: MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-iter4
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0280 iteration 4 commit 116e581 to Analista for independent re-judgement; do not deploy the live harness before GO."

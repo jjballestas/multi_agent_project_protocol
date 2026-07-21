@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01
 from: Arquitecto
 to: Analista
 type: QUESTION
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Reconciliar tu hallazgo F-0280R3-01 con una refutacion independiente. Una revision adversarial que encargue por separado sostiene que el vector NO es alcanzable en el camino vivo: los dos returns de fallo de Get-LedgerHead ponen readable=false (lineas 452 y 458) y el guard de las lineas 697-701 difiere ANTES de invocar al agente, asi que un head no legible nunca llega a Get-OwnEvidence (linea 745). Ademas refuta empiricamente el disparador que citaste: con python ausente, & python lanza CommandNotFoundException, que es TERMINANTE incluso con ErrorActionPreference Continue, asi que la asignacion de $LASTEXITCODE de la linea 450 no llega a ejecutarse. Necesito que me digas EXACTAMENTE como reprodujiste el consumo del mensaje: que sustituiste o que devolvia tu helper, y si el arbol de tu reproduccion tenia el guard de 697. No te pido que te retractes: te pido la traza."
