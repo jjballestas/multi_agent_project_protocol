@@ -500,9 +500,35 @@ function Get-LedgerHead {
     }
 }
 
+function Get-GitStatusPorcelainUtf8 {
+    $start = New-Object System.Diagnostics.ProcessStartInfo
+    $start.FileName = "git"
+    $start.WorkingDirectory = $Root
+    $start.Arguments = "status --porcelain=v1 -z --untracked-files=all"
+    $start.UseShellExecute = $false
+    $start.CreateNoWindow = $true
+    $start.RedirectStandardOutput = $true
+    $start.RedirectStandardError = $true
+    $start.StandardOutputEncoding = New-Object System.Text.UTF8Encoding($false, $true)
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $start
+    try {
+        if (-not $process.Start()) { return [pscustomobject]@{ ok = $false; raw = "" } }
+        $raw = $process.StandardOutput.ReadToEnd()
+        $null = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        return [pscustomobject]@{ ok = ($process.ExitCode -eq 0); raw = $raw }
+    } catch {
+        return [pscustomobject]@{ ok = $false; raw = "" }
+    } finally {
+        $process.Dispose()
+    }
+}
+
 function Get-WorktreeDiskProof {
-    $raw = @(& git -C $Root status --porcelain=v1 -z --untracked-files=all 2>$null) -join ""
-    if ($LASTEXITCODE -ne 0) { return $null }
+    $statusResult = Get-GitStatusPorcelainUtf8
+    if (-not $statusResult.ok) { return $null }
+    $raw = [string]$statusResult.raw
     $rows = @()
     foreach ($entry in @($raw -split [char]0 | Where-Object { $_ })) {
         if ($entry.Length -lt 4) { return $null }
@@ -521,8 +547,9 @@ function Get-WorktreeDiskProof {
 }
 
 function Get-StagedResidueState {
-    $statusRaw = @(& git -C $Root status --porcelain=v1 -z --untracked-files=all 2>$null) -join ""
-    if ($LASTEXITCODE -ne 0) { return "unknown" }
+    $statusResult = Get-GitStatusPorcelainUtf8
+    if (-not $statusResult.ok) { return "unknown" }
+    $statusRaw = [string]$statusResult.raw
     if ([string]::IsNullOrEmpty($statusRaw)) { return "none" }
     $status = @($statusRaw -split [char]0 | Where-Object { $_ })
     $cutoff = [DateTime]::UtcNow.AddMinutes(-$AbortedResidueMinutes)
@@ -531,7 +558,10 @@ function Get-StagedResidueState {
         if ($row.Length -lt 4) { return "unknown" }
         $relative = $row.Substring(3)
         $full = Join-Path $Root $relative
-        if ((Test-Path -LiteralPath $full) -and (Get-Item -LiteralPath $full).LastWriteTimeUtc -gt $cutoff) {
+        if (-not (Test-Path -LiteralPath $full)) {
+            return "live"
+        }
+        if ((Get-Item -LiteralPath $full).LastWriteTimeUtc -gt $cutoff) {
             return "live"
         }
         if ($row.Substring(0, 2) -match '[RC]') { $index++ }

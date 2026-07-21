@@ -145,23 +145,52 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
 def run_nul_residue_path_cases(sandbox: Path) -> None:
     """NUL-delimited porcelain must preserve spaces and non-ASCII path bytes."""
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
-    helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)
-    if not helper:
+    git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
+    residue_helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)
+    if not git_helper or not residue_helper:
         raise AssertionError("residue helper not found")
     paths = [sandbox / "fresh residue.txt", sandbox / "residuo-anadido-\u00f1.txt"]
-    probe = sandbox / "nul-residue-probe.ps1"
+    probe = Path(tempfile.mkdtemp(prefix="task0281-residue-probe-")) / "nul-residue-probe.ps1"
+    helper_text = git_helper.group(0) + "\n" + residue_helper.group(0)
     probe.write_text(
         "$Root=(Get-Location).Path\n$AbortedResidueMinutes=60\n"
-        + helper.group(0)
+        + helper_text
         + "\nGet-StagedResidueState\n",
         encoding="ascii",
     )
-    for path in paths:
-        path.write_text("dirty\n", encoding="ascii")
-        output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout.strip()
-        assert output == "live", (path.name, output)
-        path.unlink()
-    probe.unlink()
+    try:
+        for path in paths:
+            path.write_text("dirty\n", encoding="ascii")
+            output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(probe), cwd=sandbox).stdout.strip()
+            assert output == "live", (path.name, output)
+            path.unlink()
+
+        target = paths[-1]
+        target.write_text("dirty\n", encoding="ascii")
+        decoding_mutant = probe.with_name("decoding-mutant.ps1")
+        decoding_mutant.write_text(
+            probe.read_text(encoding="ascii").replace(
+                "New-Object System.Text.UTF8Encoding($false, $true)",
+                "[Text.Encoding]::GetEncoding(850)",
+            ),
+            encoding="ascii",
+        )
+        mutant_output = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(decoding_mutant), cwd=sandbox).stdout.strip()
+        assert mutant_output == "live", "fail-safe unresolved-path rule did not contain the decoding mutant"
+
+        unsafe_mutant = probe.with_name("unsafe-mutant.ps1")
+        unsafe_mutant.write_text(
+            decoding_mutant.read_text(encoding="ascii").replace(
+                'if (-not (Test-Path -LiteralPath $full)) {\n            return "live"\n        }',
+                'if (-not (Test-Path -LiteralPath $full)) { continue }',
+            ),
+            encoding="ascii",
+        )
+        killed = run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(unsafe_mutant), cwd=sandbox).stdout.strip()
+        assert killed == "aborted", f"residue control failed to kill unsafe decoding mutant: {killed!r}"
+        target.unlink()
+    finally:
+        shutil.rmtree(probe.parent, ignore_errors=True)
 
 
 def run(*args: str, cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess[str]:
