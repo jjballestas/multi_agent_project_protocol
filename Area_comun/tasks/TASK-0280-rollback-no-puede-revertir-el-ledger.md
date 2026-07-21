@@ -103,3 +103,15 @@ Que cambia respecto a la aprobacion original, para que quede explicito:
 
 Unidad padre de la iteracion: esta misma, TASK-0280. Tope reiniciado por cambio de enfoque
 firmado, no por indulgencia con el enfoque anterior.
+
+## Reparacion F-0280R4-02 -- poder falsador del negativo (2026-07-21)
+
+El brazo ambiguo de `events.jsonl` captura ahora el contenido inmediatamente despues
+de que el rollback emite su decision y antes de que el reparador habilite la siguiente
+vuelta. La barrera distingue preservacion real de destruccion seguida de reparacion.
+
+Control positivo ejecutado sobre un mutante que vacia `events.jsonl` en la rama
+`ledger_unreadable_after_exec`: la suite sale 1 en la nueva asercion, con
+`after_rollback=['']` frente al fixture ambiguo completo. Sobre el runner reparado la
+misma suite sale 0. No se anadio ningun guard de `torn_tail` y no se redesplego el
+harness vivo.

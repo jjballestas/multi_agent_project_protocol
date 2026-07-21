@@ -295,9 +295,11 @@ def main() -> int:
             "  $eventPath=Join-Path $root 'runtime/state/events.jsonl'\n"
             "  $lines=@(Get-Content -LiteralPath $eventPath)\n"
             "  Set-Content -LiteralPath $eventPath -Value @($lines[0],'{not-json',$lines[1],$lines[2]) -Encoding ASCII\n"
-            "  Copy-Item -LiteralPath $eventPath -Destination (Join-Path $root '.protocol-tmp/ambiguous-events-proof.txt')\n"
+            "  Copy-Item -LiteralPath $eventPath -Destination (Join-Path $root '.protocol-tmp/ambiguous-events-fixture.txt')\n"
             "  $repair=Join-Path $root '.protocol-tmp/repair-events.ps1'\n"
-            "  Set-Content -LiteralPath $repair -Value \"Start-Sleep -Milliseconds 500`nSet-Content -LiteralPath '$eventPath' -Value @('$($lines[0])','$($lines[1])','$($lines[2])') -Encoding ASCII\" -Encoding ASCII\n"
+            "  $logPath=Join-Path $root '.protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log'\n"
+            "  $proofPath=Join-Path $root '.protocol-tmp/ambiguous-events-after-rollback.txt'\n"
+            "  Set-Content -LiteralPath $repair -Value \"`$deadline=(Get-Date).AddSeconds(10)`nwhile((Get-Date) -lt `$deadline){if((Test-Path -LiteralPath '$logPath') -and (Select-String -LiteralPath '$logPath' -SimpleMatch 'ROLLBACK_DEFER reason=ledger_unreadable_after_exec' -Quiet)){Copy-Item -LiteralPath '$eventPath' -Destination '$proofPath' -Force; Set-Content -LiteralPath '$eventPath' -Value @('$($lines[0])','$($lines[1])','$($lines[2])') -Encoding ASCII; exit 0}; Start-Sleep -Milliseconds 25}`nexit 23\" -Encoding ASCII\n"
             "  Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @('-NoProfile','-ExecutionPolicy','Bypass','-File',$repair) | Out-Null\n"
             "  Write-Output 'OUTCOME: transient'\n"
             "  exit 0\n"
@@ -360,8 +362,13 @@ def main() -> int:
         assert not (sandbox / "residue.txt").exists(), f"aborted exec residue survived rollback; log={log}"
         assert (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "ambiguous residue beside signed events was destroyed"
         events = (sandbox / "runtime/state/events.jsonl").read_text(encoding="ascii").splitlines()
-        ambiguous_proof = (sandbox / ".protocol-tmp/ambiguous-events-proof.txt").read_text(encoding="ascii").splitlines()
-        assert ambiguous_proof[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_proof!r}"
+        ambiguous_fixture = (sandbox / ".protocol-tmp/ambiguous-events-fixture.txt").read_text(encoding="ascii").splitlines()
+        assert ambiguous_fixture[1] == "{not-json", f"ambiguous ledger fixture was not produced: {ambiguous_fixture!r}"
+        ambiguous_after_rollback = (sandbox / ".protocol-tmp/ambiguous-events-after-rollback.txt").read_text(encoding="ascii").splitlines()
+        assert ambiguous_after_rollback == ambiguous_fixture, (
+            "ambiguous ledger changed before the repair barrier: "
+            f"fixture={ambiguous_fixture!r}; after_rollback={ambiguous_after_rollback!r}; log={log}"
+        )
         assert json.loads(events[-1])["seq"] == 3, f"signed ledger events did not survive: {events!r}; log={log}"
         assert json.loads((sandbox / "Area_comun/state/CLAIMS.json").read_text(encoding="ascii"))["seq"] == 3
         assert not governed_message.exists(), "signed mailbox archive deletion was rolled back"
