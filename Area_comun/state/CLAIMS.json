@@ -213,9 +213,43 @@
                 "personal/Codex/Memory.md"
             ],
             "started_at": "2026-07-21T05:45:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0280",
             "updated_at": "2026-07-21T05:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-F02-delivery",
+            "expires_at": "2026-07-21T07:05:00Z",
+            "notes": "Deliver F-0280R4-02 with mutation-control evidence for independent review.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-F02-delivery",
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-F02",
+                "Area_comun/state/TASK_INDEX.json#TASK-0280",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0280",
+                "Area_comun/tasks/TASK-0280-rollback-no-puede-revertir-el-ledger.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0280-F02-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02.md",
+                "personal/Codex/Memory.md"
+            ],
+            "started_at": "2026-07-21T06:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T06:05:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260721-Codex-TASK-0280-F02-msgfix",
+            "expires_at": "2026-07-21T06:45:00Z",
+            "notes": "Add the required compact-message question field, rerun gates, and release.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260721-Codex-TASK-0280-F02-msgfix",
+                "Area_comun/mailbox/open/MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0280-F02.md"
+            ],
+            "started_at": "2026-07-21T06:15:00Z",
+            "status": "released",
+            "task_id": "TASK-0280",
+            "updated_at": "2026-07-21T06:15:00Z"
         },
         {
             "claim_id": "CLAIM-20260721-Codex-TASK-0280-iter3",
