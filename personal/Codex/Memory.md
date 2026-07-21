@@ -1,6 +1,6 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
+Last updated: 2026-07-21 Europe/Madrid, after TASK-0281 iteration-2 delivery.
 
 - TASK-0281 iteration-2 implementation commit `7b708f8` replaces offset-only
   evidence with a byte-identical SHA-256 prefix proof before accepting appended
@@ -11,6 +11,9 @@ Last updated: 2026-07-21 Europe/Madrid, during TASK-0280 iteration 4.
   Permanent controls cover pure append versus both rewrite directions (including a
   killed length-only mutant), paths with spaces and non-ASCII bytes, and recovery
   after the watchdog threshold. The live harness was not redeployed.
+- Delivery commit `b59726b` records the self-contained handoff, moves TASK-0281
+  to `in_review`, and releases both maker claims through signed seq 5550. Review
+  belongs to Analista; Codex did not review or ratify the result.
 
 - TASK-0280 F-0280R4-02 implementation commit `32cea00` restores the permanent
   negative's falsifiability. The test now snapshots ambiguous `events.jsonl` after
