@@ -3055,3 +3055,61 @@ Scripts en el scratchpad: `bench_v1.py` (cabeza ilegible), `bench_v1b.py` (helpe
 
 Observacion DECISION-0018 senalada: `CLAIM-20260721-Codex-TASK-0280-iter3` sigue activa con la
 tarea en `in_review`.
+
+## 2026-07-21 04:12 -- RECONCILIACION F-0280R3-01 (commit 3b47b3a)
+
+Encargo: `MSG-20260721-Arquitecto-to-Analista-QUESTION-reconciliar-F-0280R3-01`. El Arquitecto
+encargo una revision adversarial independiente que declaro mi bloqueante F-0280R3-01 **no
+alcanzable**, citando el guard de las lineas 697-701 y `seq=$null` en la 452.
+
+VEREDICTO: **OK-CLOSABLE**, sin contradiccion real. Las dos revisiones tienen razon sobre
+**arboles distintos**. F-0280R3-01 se sostiene sobre `4310073` (el commit que juzgue) y esta
+cerrado en `origin/main` por `116e581`, que ES la remediacion que mi hallazgo pidio y que es
+**hijo directo** de `4310073`. La refutacion leyo el arbol ya arreglado.
+
+LECCION #1, LA GRANDE -- **EL ANACRONISMO DE ANCLA**. Una revision que no declara su commit
+puede refutar a otra correcta simplemente por leer el arbol posterior al arreglo. Como se caza,
+y es barato: **los numeros de linea son una huella datable**. El consumidor de la linea base
+(`Get-OwnEvidence -LedgerSeqBefore ([long]$ledgerHeadBefore.seq)`) esta en la **740** en
+`4310073` y en la **745** en `main`: +5, exactamente el tamano del guard 697-701 que la
+refutacion citaba. Cuando alguien cite lineas de un fichero, VERIFICAR contra que commit
+resuelven ANTES de discutir el fondo. Y en mis propios veredictos, la tabla de ancla canonica
+en primera posicion no es ceremonia: es lo que hace la refutacion falsable.
+
+LECCION #2 -- **NO ESCRIBIR DISPARADORES SIN MEDIRLOS**. Concedi un sub-punto: enumere "python
+no resuelto en el PATH" como disparador ilustrativo y es FALSO. Medido en PS 5.1.26100.8875:
+`& binario-ausente` lanza `CommandNotFoundException`, terminante aun con `ErrorActionPreference`
+en `Continue`, y `Get-LedgerHead` tiene `try/finally` **sin `catch`**, asi que se propaga y
+`$LASTEXITCODE` nunca se asigna. El vector MEDIDO nunca lo uso, asi que el hallazgo no dependia
+de el, pero en un veredicto bloqueante la seccion de alcanzabilidad se mide o no se escribe.
+
+EL DISPARADOR REAL, para no volver a dudarlo: `scripts/ledger_head.py` **sin tocar**, con python
+presente, sale **1** por `JSONDecodeError` NO capturada cuando una linea que **no es la cola** del
+`events.jsonl` no parsea (`_events` solo tolera el `torn_tail` de la ultima linea). No hace falta
+ningun helper falso. Cadena medida con las funciones extraidas verbatim de `4310073`:
+`readable=False` pero `seq=0` (Int32 real, cero fabricado) -> `[long]0` -> `Get-OwnEvidence` acepta
+un evento firmado propio historico -> linea 583 `if ($OwnEvidence) { return "confirmed" }` ->
+`seen.json`. Control C9 (mismo vector, actor ajeno) -> `False`. 
+
+LECCION #3 -- **BUSCAR LA FUGA NUEVA Y REFUTARLA YO MISMO**. Hipotetice que el guard solo cubria
+el lado *Before* y que una cabeza ilegible DESPUES del exec daria `[long]$null = 0` (medido: el
+centinela `$null` NO se autoprotege) inflando `$ledgerAdvanced`. **Refutada por la linea 533**
+(`ledger_unreadable_after_exec`). Reportar la refutacion propia con la misma fuerza que el
+hallazgo es lo que hace que el hallazgo pese.
+
+RESIDUAL R-1 vivo: la rama `catch` (linea 458) sigue devolviendo `seq = 0` literal mientras la 452
+devuelve `$null`. Inconsistente, y como `[long]$null` es `0` igualmente, **el guard es la unica
+defensa real**. Cualquier consumidor futuro de `.seq` que olvide `readable` reabre la clase.
+
+CONFIRMADA la ruta que encontro la revision adversarial: `event_log_head` devuelve
+`int(events[-1]["seq"])`, ultima linea en orden de fichero, **no el maximo**. Con cola desordenada
+reproduce el mismo desenlace por otra puerta y CON el guard puesto (ahi `readable` es `$true`).
+Registrada en TASK-0281.
+
+ALCANCE DECLARADO, importante: esto NO es la review de cierre de la iteracion 4. No corri el banco
+de falsacion contra `116e581`, ni juzgue su negativo permanente nuevo, ni los otros tres hallazgos
+de TASK-0281. Pedi encargo explicito de re-juicio en la pregunta del mensaje.
+
+Gates por exit code (clon limpio `D:/ccvQ` en `4187849` + arbol): validate 0, scan_encoding 0,
+neutralidad 0, mailbox_retry_cases 0. Aviso no bloqueante al commitear: PRUNE DUE
+(released_ratio 93.75 >= 90) -- es del Arquitecto, no lo toco, queda senalado.
