@@ -2997,3 +2997,61 @@ JSON y NO afirma -- el juicio es mio).
 NOTA DE HIGIENE: el hook de commit avisa `PRUNE DUE: released_ratio 90.0 >= 90`. No es mio
 (exige `orchestrator`), pero lo hace mas urgente: la proxima poda es justo la transaccion que
 F-0280R2-01 puede dejar sin traza si la interrumpen.
+
+---
+
+## 2026-07-21 -- TASK-0280 iteracion 3 (rollback conservador por defecto): NO-GO
+
+Ancla: hijo `4310073`, padre `2185081`, HEAD `1582cc8`. Clones limpios `D:/ccvC` / `D:/ccvCp`.
+Mi veredicto: `Area_comun/artifacts/Analista-TASK-0280-iter3-rollback-conservador-verdict.md`
+(commit `b2ba2aa`, pusheado). Mensaje: `MSG-20260721-Analista-to-Arquitecto-REVIEW-TASK-0280-iter3-NOGO`.
+
+El Operador firmo el 2026-07-21 00:25 el CAMBIO DE ENFOQUE (no otra ronda del mismo): rollback
+CONSERVADOR POR DEFECTO, y `ROLLBACK_LEDGER_PRESERVED` solo tras prueba contra disco. La regla
+funciona: el cuerpo del caso firmado es `if ($ledgerAdvanced) { probar disco; return }`, cero
+mutacion, sin listas de rutas ni `kind`s. `event_managed_paths_after` quedo SIN LLAMADORES (esa
+es la confirmacion estructural de que la enumeracion se abandono; `scripts/ledger_head.py` ni se
+toco en el commit).
+
+Cerrados y verificados por MI arnes (bucle real, contraste diferencial):
+- F-0280R2-01 (poda firmada perdia la fila en los dos sitios): la fila sobrevive en
+  `TASK_INDEX_ARCHIVE.json`; el padre la perdia.
+- F-0280R2-03 (documento de `decision` firmada destruido): sobrevive; el padre lo destruia.
+- F-0280R2-02 (linea ilegible a media cola ladrillaba el bucle): difiere con motivo, sin
+  `LOOP_ERROR`, el exec siguiente ocurre.
+- Pre-sucios ajenos intactos; `Get-ExecOutcomeClass` byte a byte identica al padre.
+
+BLOQUEANTE NUEVO F-0280R3-01 (regresion de este commit, y NO esta en el rollback):
+`Get-LedgerHead` dejo de lanzar -- correcto -- pero devuelve `seq=0` FABRICADO ante cualquier
+fallo. Ese cero es la linea base de `Get-OwnEvidence`, que entonces recorre TODO el log y
+encuentra un evento firmado propio de una ventana anterior; `Get-ExecOutcomeClass` emite
+`confirmed` para un exec que salio 0 sin token `OUTCOME:`; el mensaje se marca en `seen.json` y
+sale de la cola para siempre, sin trabajo aplicado y sin senal de error. El padre fallaba
+ruidoso y SIN consumir. No requiere corrupcion: basta un exit != 0 de `python
+scripts/ledger_head.py` (PATH, antivirus, IO), y los dos peones vivos tienen miles de eventos
+firmados propios, asi que la evidencia propia con base 0 es SIEMPRE verdadera.
+
+LECCION METODOLOGICA (la que quiero recordar): cuando un arreglo sustituye una EXCEPCION por un
+VALOR POR DEFECTO, hay que grepear a quien viaja ese valor. Aqui el `0` era seguro para el
+rollback (todas las ramas lo tratan como "no legible") y venenoso para el clasificador de
+resultado, que solo veia el `seq`. La regla conservadora se aplico al rollback pero NO al exec:
+el arnes sigue invocando al agente con la cabeza del log ilegible.
+
+TECNICAS QUE FUNCIONARON (repetir):
+- El CONTROL que aisla la causa: mismo vector, cambiando UNA sola cosa (el actor del evento
+  antiguo) -> `confirmed`/consumido vs `unconfirmed`/reintentado. Sin ese control, el hallazgo
+  seria una hipotesis.
+- La VARIANTE que amplia la alcanzabilidad: repetir el vector con el log VALIDO y solo el helper
+  fallando (stub que sale 1). Convierte "corrupcion rara" en "cualquier fallo de entorno".
+- Verificar semantica de PowerShell por experimento y no por memoria: `trap { ...; return }` SI
+  corta la funcion (lo probe con error aritmetico y con `throw` anidado). Sin eso habria
+  reportado un falso positivo.
+- `AbortedResidueMinutes` (5 por defecto) es lo que ACOTA el residuo conservado: con 0 el ciclo
+  siguiente ejecuta; con 5 sale `RETRY_DEFER reason=staged_residue_live` hasta que envejece la
+  mtime. La suite del maker corre con 0, asi que su verde NO demuestra la cota real.
+
+Scripts en el scratchpad: `bench_v1.py` (cabeza ilegible), `bench_v1b.py` (helper que falla),
+`bench_v1_control.py` (otro actor), `bench_v2.py` (tres efectos firmados + regresion + cota).
+
+Observacion DECISION-0018 senalada: `CLAIM-20260721-Codex-TASK-0280-iter3` sigue activa con la
+tarea en `in_review`.
