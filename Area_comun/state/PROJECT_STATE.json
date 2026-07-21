@@ -153,7 +153,7 @@
         {
             "id": "TASK-0281",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira"
         },
         {
@@ -167,6 +167,12 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
+        },
+        {
+            "id": "TASK-0284",
+            "owner": "Codex",
+            "status": "ready",
+            "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga"
         },
         {
             "id": "TASK-EXTRACT-1F5C13A7B5",

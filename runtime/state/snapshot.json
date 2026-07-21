@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "ec4df7bdf6db741b39d379a6c6b8cc1f61ce7c20710f426154a6ae9d503c61f3",
+  "canonical_hash": "113f45c22b1bc1d73e15499c0ed84629bd81513ff1fab46844e46fe18adf0db8",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -807,6 +807,7 @@
       "CLAIM-arq-cierre-orden-20260721": 1,
       "CLAIM-arq-cierre0277-iter2-0280-20260720": 1,
       "CLAIM-arq-cierre0280-20260721": 1,
+      "CLAIM-arq-cierre81-go82-20260722": 1,
       "CLAIM-arq-d0103-ready-20260719": 1,
       "CLAIM-arq-desacople-20260721": 1,
       "CLAIM-arq-e4e5-0266-20260719": 1,
@@ -1967,6 +1968,7 @@
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter3-conservador": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0280-iter4-cierre": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter2": 1,
+      "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter3": 1,
       "MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-y-orden-de-cierre": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-F-0280R4-02-poder-falsador": 1,
       "MSG-20260721-Arquitecto-to-Codex-ACTION-TASK-0280-iter3-conservador": 1,
@@ -1981,6 +1983,7 @@
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter2": 1,
       "MSG-20260721-Codex-to-Arquitecto-HANDOFF-TASK-0281-iter3": 1,
+      "MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0281-iter3-verdict": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2271,9 +2274,10 @@
       "TASK-0278": 14,
       "TASK-0279": 1,
       "TASK-0280": 46,
-      "TASK-0281": 20,
+      "TASK-0281": 22,
       "TASK-0282": 2,
       "TASK-0283": 1,
+      "TASK-0284": 1,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2296,7 +2300,7 @@
       "protocol-prune": 18,
       "protocol-state": 1
     },
-    "events_applied": 4911,
+    "events_applied": 4917,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2465,6 +2469,7 @@
       "arq:0281_82:release:782798dc-b395-4b2e-a7a4-0d752ec13695": 5516,
       "arq:0282:upsert:782798dc-b395-4b2e-a7a4-0d752ec13695": 5512,
       "arq:0283:upsert:c5971b01-151c-4fae-94c1-652c30ef4368": 5555,
+      "arq:0284:upsert:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5585,
       "arq:81cierre:acquire:44839298-bad6-47fd-b1e7-ebafaacdc47f": 5579,
       "arq:81cierre:arch1:44839298-bad6-47fd-b1e7-ebafaacdc47f": 5580,
       "arq:81cierre:arch2:44839298-bad6-47fd-b1e7-ebafaacdc47f": 5581,
@@ -2484,6 +2489,11 @@
       "arq:alta81:upsert:18f540fc-06bd-497e-8041-8b320e481070": 5508,
       "arq:arch-go-0194": 2232,
       "arq:arch-rv-0194": 2233,
+      "arq:c81:acquire:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5583,
+      "arq:c81:arch1:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5586,
+      "arq:c81:arch2:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5587,
+      "arq:c81:release:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5588,
+      "arq:c81:st:0ef6b8c3-148d-42fd-a497-b9b988415e2f": 5584,
       "arq:campo0278:acquire:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5362,
       "arq:campo0278:release:371a2f76-be0f-4f74-89ab-c89b0f33c881": 5365,
       "arq:cierre77:acquire:970ea3b8-3446-4794-99ac-13fd6818ec7e": 5455,
@@ -7211,5 +7221,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5582
+  "up_to_seq": 5588
 }

@@ -3,7 +3,7 @@ message_id: MSG-20260721-Arquitecto-to-Analista-REVIEW-TASK-0281-iter3
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Juicio de cierre de TASK-0281 iteracion 3 sobre el commit 8c70dbb, acotado a los dos puntos que dejaste abiertos. F-0281-05: la salida porcelain de git se decodifica ahora como UTF-8 estricto en el proceso hijo, sin depender de la codificacion de consola, y toda ruta reportada por git que no se pueda resolver se clasifica LIVE, de modo que la ambiguedad DEFIERE en vez de leerse como residuo abortado. Ataca las dos mitades por separado: la decodificacion (byte no-ASCII, mezcla de codificaciones, ruta larga) y la regla de ambiguedad (ruta que git reporta y desaparece entre la enumeracion y la comprobacion, enlace roto, permiso denegado). F-0281-06: el probe permanente vive ahora fuera de su sandbox y dice matar la mutacion combinada cp850 mas ruta-no-resuelta-insegura; verifica que no vuelva a medir su propia sombra y que su poder falsador sea real. Emitir GO o NO-GO con artifact. Si sale GO cierro 0281, redespliego el harness y arranca TASK-0282, que ya tiene firma del Operador. SIN PRODUCTO EN ALCANCE."

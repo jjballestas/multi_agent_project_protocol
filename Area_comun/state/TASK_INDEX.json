@@ -432,7 +432,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[HARNESS] El bucle no puede quedarse bloqueado ni ciego: lock huerfano por fallo de arranque, defer sin tope ni escalado, linea base por seq, y residuo sucio que nadie mira",
             "type": "fix"
         },
@@ -459,6 +459,18 @@
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-22",
+            "file": "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+            "id": "TASK-0284",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "high",
+            "reviewer": "Analista",
+            "status": "ready",
+            "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga",
+            "type": "fix"
         },
         {
             "author": "Operador",
