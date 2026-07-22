@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0274-y-GO-0283
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0274 review_approved -> done: el checker dio GO/OK-CLOSABLE (MutC deja la suite roja, canonica 9/9, produccion byte-identica) y ya lo ratifique. (B) GO a TASK-0283, la siguiente de higiene, que es la generalizacion de lo que acabamos de vivir en 0274 y 0284: cada negativo permanente de la suite declara EXPLICITAMENTE que mutacion del codigo lo debe matar, junto al propio test; y existe una comprobacion que aplica esas mutaciones declaradas y exige que el test correspondiente se ponga ROJO -- si una mutacion declarada ya no mata su test, la comprobacion falla. Inventario de los negativos existentes: cuales tienen su mutacion declarada y cuales no, con numeros. Cuando el poder falsador dependa de mas de una asercion, dejar escrita la frontera de cada una (residual R1 de 0280). Espejo born-operational. Sin herramienta externa de mutation testing -- basta declarar y ejercitar las mutaciones que ya elegimos a mano. Entregar in_review + handoff + release."

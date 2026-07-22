@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route independent review of TASK-0283 at commit 62a4480. Verify the 14/14 declared mutation inventory, the relaxed-boundary negative control, both live runners, and the born-operational export."
