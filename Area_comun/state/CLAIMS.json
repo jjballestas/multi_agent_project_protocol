@@ -527,6 +527,22 @@
             "updated_at": "2026-07-22T14:20:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-final-memory",
+            "expires_at": "2026-07-22T15:30:00Z",
+            "notes": "Persist TASK-0283 iteration 4 delivery commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4-final-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:30:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:30:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-memory",
             "expires_at": "2026-07-22T15:10:00Z",
             "notes": "Persist TASK-0283 iteration 4 implementation commit context.",
@@ -698,6 +714,24 @@
             "status": "released",
             "task_id": "TASK-0283",
             "updated_at": "2026-07-22T13:15:06Z"
+        },
+        {
+            "claim_id": "CLAIM-arq-rejit4-0283-20260722",
+            "expires_at": "2026-07-22T14:05:13Z",
+            "notes": "Re-juicio de cierre de 0283 iter4 (ast.walk) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter4-cierre.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rejit4-0283-20260722"
+            ],
+            "started_at": "2026-07-22T13:45:13Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:45:13Z"
         },
         {
             "claim_id": "CLAIM-arq-rem0274-20260722",

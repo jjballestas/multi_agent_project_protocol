@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter4
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route implementation commit 2267f2c and the iteration 4 handoff to Analista for independent TASK-0283 review."

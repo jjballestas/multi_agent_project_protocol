@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter4-astwalk
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0283 iteracion 4, ACOTADA y CONVERGENTE. El checker confirmo el caso C cerrado (fichero en subdir raro / nombre no estandar visible), pero encontro que el descubridor AST mira solo tree.body (nivel superior), asi que un negativo marcado como METODO DE CLASE o FUNCION ANIDADA es invisible (15/15/0 exit 0). El fix NO es manejar metodos como caso especial -- es recorrer el AST COMPLETO con ast.walk, de modo que una definicion marcada a CUALQUIER nivel de anidamiento se descubra. Despues de un recorrido completo no queda nivel donde esconderse; lo que quede (p.ej. tests generados dinamicamente en runtime) cae bajo el limite ya documentado de indecidibilidad, no es un hueco de recorrido. Self-test: un negativo marcado como metodo de clase debe entrar en el inventario (missing>0 si no tiene contrato), rojo con la mutacion que lo evade. Regresion: A3 (marker load-bearing) y A4 (degradacion de contrato) siguen con dientes. Entregar in_review + handoff + release, con handoff bien formado (question no vacio)."
