@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion de TASK-0283, maximo 2 iteraciones. El checker confirmo que el guardian caza la DEGRADACION de un contrato declarado (relajar una asercion -> rojo, con dientes) pero NO la ENTRADA de un negativo sin declarar: inyecto un test-sombra sin contrato y el inventario siguio 14/14 verde, porque missing=0 se calcula declarados-contra-declarados, sin denominador independiente. Viola el acceptance #3. Fix: dar al inventario un DENOMINADOR INDEPENDIENTE -- enumerar el universo de negativos permanentes por una convencion COMPROBABLE (un patron de nombre/decorador/marcador que un negativo permanente deba llevar), y calcular missing = existentes - declarados, con la comprobacion en ROJO si missing > 0. Anadir el self-test del propio guardian: un negativo permanente NUEVO sin contrato declarado debe poner check_falsification_contracts.py en ROJO. Espejo new_instance.py y CI. Cada aporte con su control positivo demostrado. Entregar in_review + handoff + release."

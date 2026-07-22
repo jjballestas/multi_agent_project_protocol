@@ -487,6 +487,24 @@
             "updated_at": "2026-07-22T11:32:16Z"
         },
         {
+            "claim_id": "CLAIM-arq-rej0283-20260722",
+            "expires_at": "2026-07-22T13:04:23Z",
+            "notes": "Re-juicio del denominador de 0283 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-denominador-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rej0283-20260722"
+            ],
+            "started_at": "2026-07-22T12:44:23Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:44:23Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0274-20260722",
             "expires_at": "2026-07-22T11:41:02Z",
             "notes": "Remediacion test-only de 0274 (negativo del flag) + higiene 2",
