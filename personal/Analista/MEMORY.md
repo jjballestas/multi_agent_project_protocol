@@ -5,7 +5,44 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-22 (2) (TASK-0284 banco RE-JUICIO GO/OK-CLOSABLE sobre 947c6f5, commit d1910a3: los tres negativos nuevos son de bucle real y cada uno se pone rojo por conducta al mutarlo; cierra la maquinaria de integridad; antes TASK-0281 iter3 NO-GO sobre 8c70dbb).
+> Ultima actualizacion: 2026-07-22 (3) (TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+
+## Ultima actualizacion 2026-07-22 (3) - TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0279-commit-msg`. El gate de trailers
+  paso del validador post-hoc (que solo enrojece al peer siguiente) a `.githooks/commit-msg`, que
+  recibe el mensaje finalizado y aborta antes de crear el commit. Checker nuevo:
+  `scripts/check_commit_trailers.py`; suite `scripts/test_commit_msg_hook.py`.
+- Codigo bajo prueba IDENTICO byte-a-byte de `15fe9c8` (feat, entrega `56f9750`) hasta HEAD
+  `77a15b1`; `56f9750..HEAD` solo mailbox+ledger. Clon limpio `D:/ccv`, checkout 77a15b1.
+- **La propiedad que importa (no "un checker mas"):** el gate debe rechazar EXACTAMENTE lo que
+  `validate_commit_trailers` (en validate_collaboration_state.py) rechazaria, para abortar en el
+  commit lo que si no enrojece al peer. Diferencial linea a linea: mismo GOVERNED, mismos regex,
+  misma logica de bloque final + known=INDEX+ARCHIVE. Busque el sentido PELIGROSO (gate mas laxo
+  -> pasa el commit pero enrojece al validador): **NO EXISTE**. Las 3 divergencias son gate-mas-
+  ESTRICTO (clave con-letra-inicial, un-solo Ops-Reason/Task-Id, linea de espacios) -> a lo sumo
+  falso positivo patologico que `git commit -m` no dispara. La promesa central se sostiene.
+- **Veredicto: GO / OK-CLOSABLE** (`Analista-TASK-0279-commit-msg-verdict.md`, commit `7908874`,
+  pusheado, canonical verde). Por comportamiento con commits reales:
+  - Cuatro clases abortan: blank-line en bloque final, Ops-Reason 121>120 (frontera 120 ACEPTA),
+    ausencia de Task-Id y Task-Id:none sin Ops-Reason, fix/revert/hotfix x tres separadores sin
+    Fixes-Task (9/9). Commit valido pasa.
+  - Podada REAL: TASK-0001 (solo en TASK_INDEX_ARCHIVE) ACEPTA; TASK-9999 RECHAZA.
+  - Mutacion DOBLE (criterio 3): al desactivar cada guarda su negativo se voltea a aceptado
+    (guarda load-bearing) Y la suite entregada pasa de exit 0 a exit 1 (AssertionError) por cada
+    mutante. No es verde vacio.
+  - Alcance: solo Area_comun/runtime/scripts/protocol.config.json; personal/examples/.githooks
+    pasan sin trailer (coincide con GOVERNED_TRAILER_PATHS del validador). Coste ~0.054s/llamada.
+  - Escape E3 `git config --unset core.hooksPath` (rearm `... core.hooksPath .githooks`) operativo.
+- **Deuda de fixture PREEXISTENTE confirmada, NO contra 0279:** el runner
+  `run_runtime_instantiation_cases.py` falla en HEAD (ledger_head en prune_state escafoldado +
+  case_coordination); corri el runner en el padre `6197e10` (sin codigo 0279) y falla en los
+  MISMOS dos casos. 0279 solo agrega 2 entradas a GATE_SCRIPTS sin regresionar. Ofreci registrarla
+  como unidad propia si el Arquitecto quiere (fix import ledger_head).
+- DOGFOOD: mi propio commit de veredicto (7908874) toca Area_comun/ (gobernada) y paso el gate que
+  revisaba -- Task-Id + Co-Authored-By en un solo bloque final sin blank line (el F-0240-01 que me
+  ha mordido 4x). El gate acepto el trailer bien formado. Confirmacion viva.
+- Gates: validate/encoding/neutrality exit 0, drift 0 (protocol_replay exit 0).
 
 ## Ultima actualizacion 2026-07-22 (2) - TASK-0284 banco RE-JUICIO GO/OK-CLOSABLE sobre 947c6f5
 
