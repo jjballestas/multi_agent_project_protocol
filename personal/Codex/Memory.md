@@ -2,6 +2,15 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
 
+- TASK-0283 iteration 4 implementation commit `2267f2c` replaces shallow
+  `tree.body` discovery with complete `ast.walk` traversal for both marked
+  negatives and their exercised functions. The guardian proves a marked class
+  method is inventoried as missing, then mutates the checker back to the shallow
+  walk and requires that same method to become invisible. A3 marker removal and
+  A4 boundary degradation remain load-bearing. Inventory is 15/15/0; guardian,
+  both live runners, runtime instantiation, validation, encoding, and neutrality
+  gates passed. Runtime-generated tests remain the explicit static-analysis limit.
+
 - TASK-0283 implementation commit `62a4480` adds machine-readable falsification
   contracts beside 14 permanent negatives, a repository inventory/checker, and a
   negative control proving that removing a declared assertion boundary makes the checker

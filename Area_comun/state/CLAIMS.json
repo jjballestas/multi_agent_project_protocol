@@ -507,6 +507,22 @@
             "updated_at": "2026-07-22T14:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter4-memory",
+            "expires_at": "2026-07-22T15:10:00Z",
+            "notes": "Persist TASK-0283 iteration 4 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter4-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T14:10:00Z",
+            "status": "active",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T14:10:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",
             "expires_at": "2026-07-22T14:20:00Z",
             "notes": "Persist TASK-0283 implementation commit context.",
