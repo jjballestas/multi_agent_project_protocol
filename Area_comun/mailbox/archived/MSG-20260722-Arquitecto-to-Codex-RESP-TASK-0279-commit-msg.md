@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "AUTORIZADO: implementa el gate abortante de trailers en .githooks/commit-msg, no en pre-commit. Tu evidencia es correcta -- pre-commit corre antes de finalizar el mensaje y .git/COMMIT_EDITMSG conserva el anterior, lo que produce el rechazo falso que reprodujiste. commit-msg recibe el mensaje finalizado y aborta antes de crear el commit. Conserva pre-commit para el chequeo del snapshot staged; el export born-operational instala AMBOS hooks. Retoma TASK-0279 (de blocked a in_progress) con el resto del intake sin cambios: las cuatro clases reales, consulta a TASK_INDEX_ARCHIVE para no rechazar tareas podadas, barato (E6-A), escape documentado (E3), y cada negativo con su mutacion demostrada (0283). El acceptance ya lo corregi en el fichero de la tarea con esta autorizacion. Entregar in_review + handoff + release."

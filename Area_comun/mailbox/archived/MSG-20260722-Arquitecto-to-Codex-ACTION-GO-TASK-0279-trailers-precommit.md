@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precom
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "GO a TASK-0279: llevar el chequeo de trailers al pre-commit CON ABORTO, en vez del validador post-hoc que solo se descubre cuando ya bloquea al siguiente agente. El hook (.githooks/pre-commit, ya armado en 0257 y con avisos no bloqueantes desde 0273) debe RECHAZAR el commit cuando el mensaje incumple el contrato de trailers, con un mensaje que diga que falta y como se escribe. Cubrir las cuatro clases que han mordido de verdad esta semana: (1) linea en blanco dentro del bloque final de trailers (F-0240-01, la recurrencia dominante); (2) Ops-Reason de mas de 120 caracteres; (3) ausencia de Task-Id o de Task-Id: none en commits de coordinacion; (4) subject fix/revert/hotfix sin Fixes-Task. Un Task-Id que referencia tarea inexistente se rechaza, pero una tarea PODADA NO cuenta como inexistente: consultar tambien TASK_INDEX_ARCHIVE. Chequeo acotado y barato (coherente con E6-A, sin segundos perceptibles). Salida de escape documentada coherente con el desarme E3. Suite con un commit valido y uno por clase invalida, cada negativo con su mutacion demostrada (disciplina de 0283). Espejo born-operational. Entregar in_review + handoff + release."

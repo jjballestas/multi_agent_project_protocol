@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "2b7a12bef0db00a0e48ec5494aea8547c9abb915dc970a3e25c05a829a5767f5",
+  "canonical_hash": "ee21bdbf591189919c6746b766394cfc66dbf7b3045afefc79b457a63c7eb447",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -873,6 +873,7 @@
       "CLAIM-arq-reject0272-20260720": 1,
       "CLAIM-arq-reporte0103-20260720": 1,
       "CLAIM-arq-resp0279-20260722": 1,
+      "CLAIM-arq-rev0279-20260722": 1,
       "CLAIM-arq-rutear-iter2-20260720": 1,
       "CLAIM-arq-rutear0272iter2-20260720": 1,
       "CLAIM-arq-rutear0272rejuicio-20260720": 1,
@@ -2005,10 +2006,13 @@
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284": 1,
+      "MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco": 1,
@@ -2301,7 +2305,7 @@
       "TASK-0276": 1,
       "TASK-0277": 19,
       "TASK-0278": 14,
-      "TASK-0279": 17,
+      "TASK-0279": 18,
       "TASK-0280": 46,
       "TASK-0281": 24,
       "TASK-0282": 12,
@@ -2329,7 +2333,7 @@
       "protocol-prune": 20,
       "protocol-state": 1
     },
-    "events_applied": 5003,
+    "events_applied": 5008,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2752,6 +2756,11 @@
       "arq:resp0279:acquire:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5664,
       "arq:resp0279:arch:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5665,
       "arq:resp0279:release:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5666,
+      "arq:rev0279:acquire:1a64803e-4bd9-4a0f-9772-b1e17313ddd2": 5675,
+      "arq:rev0279:arch1:1a64803e-4bd9-4a0f-9772-b1e17313ddd2": 5676,
+      "arq:rev0279:arch2:1a64803e-4bd9-4a0f-9772-b1e17313ddd2": 5677,
+      "arq:rev0279:arch3:1a64803e-4bd9-4a0f-9772-b1e17313ddd2": 5678,
+      "arq:rev0279:release:1a64803e-4bd9-4a0f-9772-b1e17313ddd2": 5679,
       "arq:rut0277rej:acquire:76c2172a-262b-4033-bb98-56a4a8e66b48": 5416,
       "arq:rut0277rej:arch1:76c2172a-262b-4033-bb98-56a4a8e66b48": 5417,
       "arq:rut0277rej:arch2:76c2172a-262b-4033-bb98-56a4a8e66b48": 5418,
@@ -7336,5 +7345,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5674
+  "up_to_seq": 5679
 }
