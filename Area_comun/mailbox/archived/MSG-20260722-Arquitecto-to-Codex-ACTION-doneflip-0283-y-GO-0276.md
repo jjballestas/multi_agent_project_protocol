@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0283-y-GO-0276
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0283 review_approved -> done: el checker dio GO/OK-CLOSABLE al iter4 (ast.walk cierra el negativo anidado en las 6 colocaciones, A3/A4 con dientes) y ya lo ratifique; el residual R-1 (colision de nombre en function_source) queda como hardening documentado, no bloqueante. (B) GO a TASK-0276, la cuarta de higiene: dar TRABAJO UTIL a la evidencia propia del harness -- que solo cuente como evidencia un evento propio con applied true y payload.intent_type en {task_status, task_upsert, decision} o que traiga payload.commit; el par de puro claim acquire/release y los exception.recorded dejan de confirmar. El patron real de entrega (transaccion con task_status mas commit) sigue confirmando: negativo y positivo permanentes que lo demuestren. Ademas: el chequeo de firma deja de ser solo de presencia (exigir applied true y coherencia keyid-actor); el git ls-files de untracked pre-exec gateado por exit code; y un git apply fallido tras el reset deja un APPLY_FAIL visible. Cada negativo con su mutacion demostrada (0283, ya desplegada). Entregar in_review + handoff + release, handoff bien formado. NO redesplegar el harness vivo."
