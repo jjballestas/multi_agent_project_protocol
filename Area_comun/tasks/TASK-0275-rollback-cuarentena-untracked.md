@@ -2,7 +2,7 @@
 task_id: TASK-0275
 title: "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: high
