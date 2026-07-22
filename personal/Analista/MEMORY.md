@@ -3669,3 +3669,41 @@ released_ratio 95.83 >= 90** sigue pendiente del Arquitecto; no lo toco.
 **Tope de 2 iteraciones AGOTADO -> escale la decision al operador humano.** Si el Arquitecto
 cierra 0281 igualmente, exigi que F-0281-05 y F-0281-06 salgan con ACCEPTANCE PROPIO (TASK-0283
 o unidad nueva), nunca como residuo suelto.
+
+---
+
+## 2026-07-22 - TASK-0276 (evidencia util) VEREDICTO: NO-GO / CHANGE-REQUIRED (commit 2b54caa)
+
+Juzgue el fix `18ce287` que cerraba mi residual F-0272R2-01 (E04: un exec de puro claim
+acquire/release quema el mensaje sin trabajo util). El fix filtra la evidencia propia por
+`applied:true` + coherencia keyid-actor + `intent_type in {task_status,task_upsert,decision}`
+**O** `payload.commit`. **BLOQUEE por la rama `-or $hasCommit`.**
+
+**HALLAZGO CLAVE (falsable, ganado por leer el ledger, no por confiar en los nombres de test):**
+`payload.commit` NO es senal de trabajo util. `runtime/submit_intent.py::event_payload_for`
+(lineas 645-646) estampa el `--commit` del llamante en el payload de TODO intent, ANTES de
+ramificar por tipo -> tambien claim y exception. En el ledger vivo del clon: **1894 de 2022
+eventos ed25519 de claim llevan payload.commit**, incluidos 25+ acquire/release standalone
+(p.ej. `analista-task-0194-review-claim` / `-release`). Asi que un claim puro con etiqueta
+--commit (el patron REAL dominante) confirma via la rama commit -> E04 NO cerrado.
+
+**Probe propio** (extraje Get-OwnEvidence del runner del clon, imite la forma del evento REAL):
+pure_claim_no_commit->False (modelo del maker), pero pure_claim_acquire_label->True,
+pure_claim_release_label->True, exception_with_commit->True (FUGAS). V2/V3/V4 pasan
+(real_delivery_status->True, applied_false->False, foreign_key->False).
+
+**Disciplina 0283 con dientes:** M1-M5 (revertir cada correccion en el runner del clon)
+enrojecen la suite (exit 1). El problema NO era falta de dientes -> era que la ESPEC del
+positivo "commit" en run_useful_own_evidence_cases es la incorrecta (afirma que claim+commit
+DEBE confirmar), asi que el filo E04 se cuela dentro de la propia suite.
+
+**LECCION METODOLOGICA:** cuando un fix usa un campo del payload como proxy de una propiedad
+semantica ("commit => entrega"), VERIFICAR el proxy contra el ledger real antes de aprobar.
+El maker modelo "pure claim" = claim sin commit; el ledger dice que los claims reales SI
+llevan commit. El ejemplo del test mintio por omision; el conteo del ledger lo caza.
+
+**Remediacion pedida a Codex (via Arquitecto, response_owner Arquitecto):** eliminar la rama
+`-or $hasCommit` (la entrega real ya confirma via task_status sin commit, probado) o gatearla
+para excluir claim/exception; anadir PERMANENT_NEGATIVE (claim+commit -> NO confirma); corregir
+el caso "commit". Re-juicio mio en clon limpio antes del GO, **max 2 iteraciones antes de
+escalar al humano**. Trailers Task-Id en un solo parrafo (sin reincidencia).
