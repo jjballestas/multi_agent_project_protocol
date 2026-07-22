@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -217,15 +218,44 @@ def validate_review_qa_semantics(report: dict[str, Any], state: dict[str, Any]) 
 
 def is_delivery_turn(report: dict[str, Any]) -> bool:
     """Return whether this report delivers completed work for review or closure."""
-    return report.get("outcome") in {"in_review", "done"}
+    task_status = (report.get("transitions") or {}).get("task_status") or {}
+    return task_status.get("to") in {"in_review", "done"}
+
+
+def friction_sensors(report: dict[str, Any]) -> list[str]:
+    """Return objective friction signals carried by a turn or runtime result."""
+    sensors: list[str] = []
+    gate = report.get("gate") or {}
+    if report.get("gate_green") is False or gate.get("green") is False:
+        sensors.append("gate_green:false")
+
+    attempt = report.get("attempt")
+    if not isinstance(attempt, int):
+        attempt_id = str(report.get("attempt_id") or "")
+        numeric_parts = [int(part) for part in re.findall(r"\d+", attempt_id)]
+        attempt = numeric_parts[-1] if numeric_parts else 1
+    if attempt > 1:
+        sensors.append("attempt>1")
+
+    transitions = report.get("transitions") or {}
+    actions = report.get("actions") or []
+    action_text = " ".join(str(action.get("summary") or "") for action in actions if isinstance(action, dict))
+    if (
+        report.get("reverted") is True
+        or transitions.get("revert") is True
+        or re.search(r"\b(revert(?:ed)?|rollback)\b", action_text, re.IGNORECASE)
+    ):
+        sensors.append("revert")
+    return sensors
 
 
 def validate_delivery_obstacles(report: dict[str, Any]) -> list[str]:
-    """Require a non-empty obstacle account on delivery turns only."""
-    if is_delivery_turn(report) and not report.get("obstacles"):
-        return [
-            "semantic: delivery turn is missing non-empty obstacles; report what was encountered and resolved"
-        ]
+    """Require obstacle consideration on delivery and narration only on friction."""
+    if is_delivery_turn(report) and "obstacles" not in report:
+        return ["semantic: delivery turn is missing the obstacles block; use [] when there was no friction"]
+    sensors = friction_sensors(report)
+    if sensors and not report.get("obstacles"):
+        return [f"semantic: objective friction ({', '.join(sensors)}) requires non-empty obstacles"]
     return []
 
 
