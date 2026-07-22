@@ -88,6 +88,14 @@
             "priority": "normal",
             "status": "ready",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
+        },
+        {
+            "id": "TASK-0286",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "status": "ready",
+            "title": "[DECISION-0103][C3/E7] Enforcement post-gate de gate-red -> obstacles no vacio (capa apply/run-log)"
         }
     ],
     "view": "task_index.slim"

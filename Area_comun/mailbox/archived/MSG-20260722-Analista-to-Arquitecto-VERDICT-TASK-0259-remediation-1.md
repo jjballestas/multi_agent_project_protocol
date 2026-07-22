@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-1
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0259 remediation iteration 2 to Codex: the friction sensor's gate-red path is inert on real turn reports. is_delivery_turn (predicate) and the anti-theater control PASS; the gate-red friction sensor reads schema-illegal fields (gate_green, gate.green, reverted, transitions.revert) that turn_schema.json rejects with additionalProperties:false, and validate_turn runs BEFORE the gate, so a honest schema-valid red-gate turn with obstacles [] passes clean (errors=[]). Money-shot #2 is green in the suite only because it feeds an out-of-schema field to the unit function, bypassing the schema gate."

@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio adversarial de TASK-0259 remediacion iter 1 de 2 (impl c725e9b, deliver 435ab5b). Tu NO-GO previo probo dos cosas y refine el acceptance hacia el modelo pleno de C3; verifica que la remediacion las cierra AMBAS. (1) PREDICADO: is_delivery_turn debe leer la senal autoritativa transitions.task_status.to in {in_review, done}, NO report.outcome. Construye el vector que antes pasaba -- una entrega real in_progress->in_review con outcome=ok/divergente y SIN obstacles -- y confirma que AHORA enrojece (antes daba errors=[]). (2) SENSOR DE FRICCION: cualquier turno con friccion OBJETIVA (gate_green:false, attempt>1/reintento, revert) exige obstacles NO VACIO; empty ahi -> RECHAZADO. Construye un turno de NO-entrega con gate rojo y obstacles [] y confirma que enrojece. (3) ANTI-TEATRO: una entrega SIN friccion objetiva con obstacles [] debe ACEPTARSE (lista vacia = 'no hubo friccion', legitimo por C3); confirma que NO enrojece -- que no reintrodujimos el teatro que tu NO-GO ataco. (4) NEGATIVOS PERMANENTES: cada uno de los tres declara su mutacion (0283) y enrojece al revertir su arreglo; corre check_falsification_contracts.py --inventory + el test. Corre el gate real del predicado (no solo lectura). Veredicto GO/NO-GO con el vector exacto que probaste para cada uno."

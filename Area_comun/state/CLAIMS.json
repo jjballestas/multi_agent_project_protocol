@@ -139,6 +139,28 @@
             "updated_at": "2026-07-22T16:13:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-iter2-0259-e7-20260722",
+            "expires_at": "2026-07-22T18:20:01Z",
+            "notes": "E7 split de capa C3 + registro unidad hermana TASK-0286 + ruteo iter2 de 0259 + archivo de REVIEW/VERDICT consumidos",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-iter2-transiciones-autoritativas.md",
+                "Area_comun/tasks/TASK-0286-d0103-c3-post-gate-gatered-obstacles.md",
+                "Area_comun/decisions/DECISION-0103-visibilidad-plan-y-reportes-de-turno.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0286",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0286",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-iter2-0259-e7-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-1.md",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-1.md"
+            ],
+            "started_at": "2026-07-22T18:00:01Z",
+            "status": "released",
+            "task_id": "TASK-0286",
+            "updated_at": "2026-07-22T18:00:01Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0259-20260722",
             "expires_at": "2026-07-22T17:01:46Z",
             "notes": "Remediacion de 0259 (predicado + friccion, C3 pleno) + higiene 2",

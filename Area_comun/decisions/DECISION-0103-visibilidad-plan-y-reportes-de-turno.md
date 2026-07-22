@@ -98,7 +98,9 @@ leerlo en dos semanas):
 - **Lista vacia es respuesta legitima.** No se fuerza prosa donde no hubo friccion.
 - **Pero NO puede ir vacia si el turno tuvo friccion**, y la friccion es mecanicamente
   detectable: `gate_green: false`, `attempt > 1` / bounce, o revert. En esos casos el
-  agente no puede escaparse con silencio.
+  agente no puede escaparse con silencio. (El reparto de capa de estos sensores en el carril
+  runtime lo fija **E7**: `gate_green` es post-gate -> TASK-0286; las transiciones autoritativas
+  y `revert` son pre-gate -> TASK-0259.)
 - Estructurado, no prosa libre: el objetivo es que sea **consultable**, no legible una vez.
 
 Proposito declarado: los obstaculos son la materia prima para crear skills y endurecer el
@@ -140,7 +142,10 @@ EXISTA y este bien formado (duro, automatico, ambos carriles); no puede saber si
 agente que peleo lo REPORTO. La diferencia entre carriles es el sensor de friccion:
 
 - runtime: la friccion es mecanicamente detectable (`gate_green: false`, `attempt > 1`,
-  revert) -> el validador puede cruzar "gate rojo + obstacles vacio = FAIL".
+  revert) -> el validador puede cruzar "gate rojo + obstacles vacio = FAIL". (Capa corregida por
+  **E7**: el cruce objetivo `gate_green:false` es post-gate (TASK-0286); a validate-time solo son
+  derivables las transiciones autoritativas y `revert` (TASK-0259). `attempt_id` es idempotency
+  id, no contador de reintento.)
 - sesion: **no existe sensor de friccion**. Por eso esta decision obliga al REPORTE de
   sesion a declarar un contador minimo de friccion (reintentos / rechazos de gate /
   correcciones del checker) que haga cruzable la misma regla. Sin ese contador, la
@@ -190,7 +195,8 @@ instancia presente y futura, incluida cualquier instancia de terceros (p.ej. Jul
 |---|---|---|---|---|---|
 | 1 | cablear `core.hooksPath` a `.githooks/` + `pre-commit` invoca `validate_collaboration_state` y falla en rojo | C5 | harness | implementer | TASK-0257 |
 | 2 | anadir bloque `obstacles[]` a `runtime/turn_schema.json` | C3 | runtime | implementer | TASK-0258 |
-| 3 | validacion condicional en `turn_validate` (obligatorio si `gate_green:false` / `attempt>1` / revert) | C3 | runtime | implementer | TASK-0259 |
+| 3 | validacion condicional en `turn_validate` por friccion AUTO-DECLARABLE autoritativa (transiciones blocked/qa_failed/rework + revert best-effort; `gate_green` es post-gate, ver E7) | C3 | runtime | implementer | TASK-0259 |
+| 3b | enforcement post-gate de `gate_green:false` -> obstacles no vacio, sobre el run-log (capa apply); mitad OBJETIVA de C3 runtime que turn_validate no puede hostear (E7) | C3 | runtime | implementer | TASK-0286 |
 | 4 | vista de plan (`--plan-all` o render de TASK_INDEX) + gate de aprobacion turno 0 | C1 | runtime | implementer | TASK-0260 |
 | 5 | `validate_mailbox`: exigir `obstacles` + contador de friccion en `type: REPORTE` | C3/C4 | sesion | implementer | TASK-0261 |
 | 6 | plantilla de REPORTE de mailbox con bloque `obstacles` + reporte de asignacion | C2/C4 | sesion | (doc) | TASK-0262 |
@@ -311,6 +317,36 @@ enforcement completo) y la reactivacion hibrida estado/ledger NO se autoriza. Pa
 partial-vs-total verificada intacta (suite + 5 probes reales del checker, inventario
 cerrado contra el read-set real), asi que la optimizacion se conserva por correccion y
 por abaratar el flag y el CI, no por reabrir el reparto.
+
+### E7 - Split de capa del sensor de friccion runtime de C3 (2026-07-22, firma del Operador: "Enmienda de capa + cerrar 0259 acotado")
+
+Origen: el re-juicio del checker sobre TASK-0259 iter1 (artifact
+`Analista-TASK-0259-remediation-iter1-verdict`) probo en codigo un error de asignacion de capa
+en C3. C3 (linea 100) y C4 (lineas 142-143) nombran `gate_green: false` como friccion detectable
+por `turn_validate`. Verificado: `validate_turn` corre PRE-gate (orchestrator.py:947), el gate
+corre despues (`apply_gate_and_commit` en :1018) y `gate_green` se escribe al run-log (:1026); el
+turn_schema (TASK-0258) es `additionalProperties: false`, asi que `gate_green` no es siquiera un
+campo legal del reporte de turno. Conclusion: **el gate-red objetivo es INOBSERVABLE a
+turn-validate-time**. La regla C3 no cambia; se reparte en las dos capas correctas:
+
+- **turn_validate (pre-gate) -> TASK-0259.** La friccion exigible aqui es la AUTO-DECLARABLE y
+  autoritativa in-schema: `transitions.task_status.to in {blocked, qa_failed, changes_requested,
+  architect_review}` y `transitions.review_qa.event in {reject_review, fail_qa, assign_fix}` /
+  `checks_failed` no vacio -- donde **declaracion == efecto** (el agente no obtiene el efecto sin
+  declarar la transicion, y el orchestrator cruza `from==current` y `reviewer!=author`), por lo
+  que no es gameable. `revert` se mantiene como proxy best-effort DECLARADO sobre
+  `actions[].summary`. **NO se usa `outcome`**: es auto-declarado y reproduciria la grieta que la
+  propia remediacion cerro (predicado autoritativo, no relabel-able).
+- **post-gate / run-log -> TASK-0286 (unidad hermana nueva).** El gate-red OBJETIVO
+  (`gate_green: false`) se enforcea donde `gate_green` existe: la entrada del run-log despues de
+  que el gate corre. Ahi "gate rojo + obstacles vacio = FAIL" es cruzable de verdad.
+
+Limite honesto: `turn_validate` cubre la friccion que el agente declara; solo el chequeo
+post-gate cubre la friccion que el sistema mide. Juntas cubren C3 runtime entero. El
+enforcement por el ENTRYPOINT REAL (no alimentar un campo fuera-de-schema a una funcion unit) es
+parte del acceptance de ambas unidades: la trampa unit-vs-behavior fue justamente lo que hundio
+0259 iter1. Esta enmienda NO reabre el carve-out E1 de 0259 (su scope y risk se mantienen); el
+trabajo objetivo nuevo es TASK-0286, no una ampliacion de 0259.
 
 ## Nota de ejecucion de esta primera tanda (orden del Operador, 2026-07-19)
 
