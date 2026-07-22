@@ -2,7 +2,7 @@
 task_id: TASK-0259
 title: "[DECISION-0103][C3] Validacion condicional en turn_validate: obstacles obligatorio si hubo friccion (gate_green false / attempt>1 / revert)"
 type: feature
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
