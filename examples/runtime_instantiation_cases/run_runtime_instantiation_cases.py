@@ -19,6 +19,7 @@ SCAN_ENCODING = ROOT / "scripts" / "scan_encoding.py"
 SCAN_NEUTRALITY = ROOT / "scripts" / "scan_domain_neutrality.py"
 
 GATE_SCRIPTS = {
+    "check_commit_trailers.py",
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
     "scan_encoding.py",
@@ -26,6 +27,7 @@ GATE_SCRIPTS = {
     "scan_domain_neutrality.py",
     "scan_domain_neutrality.ps1",
     "measure_context_cost.py",
+    "generate_human_guide.py",
     "prune_state.py",
     "prune_state.ps1",
     "keygen_agent.py",

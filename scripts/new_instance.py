@@ -71,6 +71,7 @@ HARNESS_SOURCE_DIR = "scripts/harness"
 CLAUDE_SKILLS_SOURCE_DIR = "scripts/instance_assets/claude-skills"
 
 GATE_SCRIPT_FILES = [
+    "check_commit_trailers.py",
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
     "scan_encoding.py",

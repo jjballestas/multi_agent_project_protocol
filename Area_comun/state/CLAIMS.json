@@ -79,6 +79,28 @@
             "updated_at": "2026-07-22T10:25:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-resume",
+            "expires_at": "2026-07-22T22:09:33Z",
+            "notes": "Resume TASK-0279 with the authorized commit-msg trailer gate and born-operational export.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                ".githooks/",
+                "scripts/",
+                "examples/runtime_instantiation_cases/",
+                "Area_comun/protocol/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T10:09:33Z",
+            "status": "active",
+            "task_id": "TASK-0279",
+            "updated_at": "2026-07-22T10:09:33Z"
+        },
+        {
             "claim_id": "CLAIM-arq-resp0279-20260722",
             "expires_at": "2026-07-22T10:24:37Z",
             "notes": "RESP autorizando commit-msg para 0279 + correccion de acceptance + higiene",

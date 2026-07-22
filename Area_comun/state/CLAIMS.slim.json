@@ -1,5 +1,23 @@
 {
-    "claims": [],
+    "claims": [
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0279-resume",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0279-resume",
+                "Area_comun/state/TASK_INDEX.json#TASK-0279",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0279",
+                "Area_comun/tasks/TASK-0279-trailers-gate-precommit-aborta.md",
+                ".githooks/",
+                "scripts/",
+                "examples/runtime_instantiation_cases/",
+                "Area_comun/protocol/",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "task_id": "TASK-0279"
+        }
+    ],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

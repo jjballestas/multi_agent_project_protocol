@@ -2,7 +2,7 @@
 task_id: TASK-0279
 title: "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
 type: infra
-status: blocked
+status: in_progress
 owner: Codex
 phase: P2
 priority: high
@@ -59,3 +59,14 @@ igual a apagar la alarma.
 
 El pre-commit ya existe (TASK-0257) y ya sabe emitir avisos no bloqueantes (TASK-0273).
 Falta ponerle el unico chequeo que se puede corregir en el instante en que se comete.
+
+## Implementacion maker (2026-07-22)
+
+- `.githooks/commit-msg` ejecuta el gate abortante contra el mensaje finalizado; el
+  `pre-commit` conserva sin cambios su juicio del snapshot staged.
+- El gate solo actua cuando el indice toca rutas gobernadas, consulta el indice caliente
+  y `TASK_INDEX_ARCHIVE.json`, y explica la reparacion exacta para cada rechazo.
+- La suite de commits reales demuestra un valido y mutaciones independientes para blank
+  line, Ops-Reason >120, Task-Id ausente, fix sin Fixes-Task y tarea desconocida.
+- El export born-operational copia ambos hooks y el nuevo checker. El desarme E3 sigue
+  siendo `git config --unset core.hooksPath`; rearmado: `git config core.hooksPath .githooks`.

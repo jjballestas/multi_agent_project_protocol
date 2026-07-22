@@ -335,6 +335,12 @@ def validate_commit_trailers(
         validation.fail(f"commit_trailers could not scan git history from {start_commit}: {exc}")
         return
     known_tasks = task_ids(index)
+    archive_path = root / "Area_comun" / "state" / "TASK_INDEX_ARCHIVE.json"
+    if archive_path.exists():
+        archive_validation = Validation()
+        archive = read_json_file(archive_path, archive_validation)
+        if isinstance(archive, dict):
+            known_tasks.update(task_ids(archive))
     for commit in commits:
         if not touches_governed_path(root, commit):
             continue
