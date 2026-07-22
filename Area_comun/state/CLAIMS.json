@@ -231,9 +231,29 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T19:45:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0260",
             "updated_at": "2026-07-22T19:45:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0260-delivery",
+            "expires_at": "2026-07-22T21:05:00Z",
+            "notes": "Deliver TASK-0260 for independent review with scratch-only gate evidence.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0260-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0260",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0260",
+                "Area_comun/tasks/TASK-0260-d0103-c1-vista-plan-gate-aprobacion-turno0.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0260-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0260.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T20:05:00Z",
+            "status": "released",
+            "task_id": "TASK-0260",
+            "updated_at": "2026-07-22T20:05:00Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0285-done-flip",

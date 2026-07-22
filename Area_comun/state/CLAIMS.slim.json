@@ -1,21 +1,5 @@
 {
-    "claims": [
-        {
-            "claim_id": "CLAIM-20260722-Codex-TASK-0260",
-            "owner": "Codex",
-            "scope": [
-                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0260",
-                "Area_comun/state/TASK_INDEX.json#TASK-0260",
-                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0260",
-                "Area_comun/tasks/TASK-0260-d0103-c1-vista-plan-gate-aprobacion-turno0.md",
-                "runtime/orchestrator.py",
-                "examples/runtime_plan_approval_cases/run_runtime_plan_approval_cases.py",
-                "runtime/state/events.jsonl",
-                "runtime/state/snapshot.json"
-            ],
-            "task_id": "TASK-0260"
-        }
-    ],
+    "claims": [],
     "schema_version": "1.0",
     "view": "claims.slim"
 }

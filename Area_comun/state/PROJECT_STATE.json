@@ -75,7 +75,7 @@
         {
             "id": "TASK-0260",
             "owner": "Codex",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator"
         },
         {

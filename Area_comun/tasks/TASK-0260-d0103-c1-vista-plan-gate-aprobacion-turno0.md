@@ -2,7 +2,7 @@
 task_id: TASK-0260
 title: "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator"
 type: feature
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: normal
