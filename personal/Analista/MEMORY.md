@@ -5,7 +5,41 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-22 (5) (TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+> Ultima actualizacion: 2026-07-22 (6) (TASK-0283 el guardian del guardian NO-GO/CHANGE-REQUIRED, veredicto commit 4925de5: el checker de falsabilidad es un validador de DECLARACION por subcadena -- tiene dientes contra la DEGRADACION de un contrato declarado -Q1a borrar frontera real / Q4 relajar una de dos ambos rojos- pero NO contra la ENTRADA de un negativo no declarado -inyecte un test-sombra sin contrato y el inventario siguio 14/14 verde-; `missing=0` es literal sin denominador independiente; choca con acceptance #3 y la pregunta del REVIEW; remediacion = denominador independiente + self-test negativo-no-declarado->ROJO; re-juicio mio, max 2 iter; prune vencido senalado no corrido). Antes (5) TASK-0274 RE-JUICIO del negativo del flag GO/OK-CLOSABLE sobre entrega 0831701 / fix de test 77afe05, veredicto commit 0c9f089: la remediacion TEST-ONLY anadio en case_cli_is_a_real_aborting_gate la corrida AISLADA que pedi -- `--check-drift --root <root> --bogus-flag` con assert !=0 -- y en clon limpio MutC (parse_known_args) AHORA deja la suite ROJA en ese caso (error = salida CLEAN de la combinacion aislada), la canonica pasa 9/9, produccion byte-identica d7bd4d3 (los 6/6 vectores siguen vigentes), MutA/MutB siguen rojos; los TRES negativos del gate tienen dientes; pregunta de gating del Arquitecto = SI; ruteado GO, cierre (done-flip + release) es del orquestador. Antes (4) TASK-0274 CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+
+## Ultima actualizacion 2026-07-22 (6) - TASK-0283 el guardian del guardian: NO-GO (CHANGE-REQUIRED)
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad`. Unidad = mecanizar
+  lo que cace a mano en 0284/0274: cada negativo permanente declara la mutacion que lo mata y una
+  comprobacion (`check_falsification_contracts.py --inventory` + `test_falsification_contracts.py`)
+  la exige. Maker reporto 14/14. Ancla commit `7afb122`, HEAD `aeadb07`.
+- **Estructura real:** el checker es un validador de DECLARACION por SUBCADENA: itera
+  `FALSIFICATION_CONTRACTS` y verifica que la `mutation` y cada `boundary` aparezcan textualmente
+  en la funcion `exercised_by`. NO corre las mutaciones. El que SI aplica mutaciones y exige rojo
+  es el RUNNER (run_mailbox_retry_cases.py: bloques `survivors=[...]; assert not survivors`).
+- **Verificado por comportamiento en clon limpio `/d/ccv0283` (checkout 7afb122), mis propios blancos:**
+  - Q1a PASS: borre frontera REAL `assert mutant_output == "live"` (retry-utf8-residue-path) -> checker
+    exit 1 "assertion boundary not found". Tiene dientes contra degradacion de contrato declarado.
+  - Q4 PASS: borre UNA de dos fronteras de protocol-replay-drift-exit (R1 de 0280) -> exit 1. Detecta.
+  - **Q3 BLOQUEANTE:** inyecte un negativo permanente NUEVO real (`run_shadow_negative_no_contract`,
+    `assert "reset --hard" not in ...`) SIN contrato -> inventario siguio VERDE 14/14 `missing=0`.
+    El test-sombra se cuela. El checker no tiene NINGUNA via de codigo para enumerar negativos que
+    existen; solo valida los declarados. Choca con acceptance #3 ("cuales tienen ... y **cuales no**")
+    y con la pregunta literal del REVIEW.
+  - Q2 (raiz mecanica): `missing=0` es LITERAL en el print; `permanent_negatives==declared==len(contracts)`
+    por construccion -> `missing` no puede ser !=0 jamas. El "14/14" es auto-satisfecho.
+  - R-Q1b (residual menor): substring, no liveness. Relajacion que conserva la cadena declarada pero
+    la vuelve vacua (`assert True or (...)`) -> exit 0, no la caza el inventario. Diferible si cierra Q3.
+- **Veredicto: CHANGE-REQUIRED (NO-GO).** Artifact `Area_comun/artifacts/Analista-TASK-0283-falsabilidad-verdict.md`,
+  msg `MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad.md`, commit **4925de5**
+  (push aeadb07..4925de5). Remediacion pedida: denominador INDEPENDIENTE (enumerar universo de
+  negativos por convencion comprobable, `missing = existentes - declarados`, rojo si >0) + self-test
+  con caso negativo-no-declarado->ROJO + espejo new_instance.py + CI. Re-juicio mio antes del cierre;
+  max 2 iteraciones. NO cierro (checker); done-flip/release es del orquestador. NOTA: prune vencido
+  (released_ratio 93.33>=90) -- lo senalo al Arquitecto, no lo corro yo.
+- LECCION: un guardian de falsabilidad puede tener dientes en UNA direccion (degradacion de lo
+  declarado) y ninguno en la otra (entrada de lo no declarado). El "N/N" sin denominador
+  independiente es la misma sombra una capa mas arriba. Probar SIEMPRE el ingreso, no solo la erosion.
 
 ## Ultima actualizacion 2026-07-22 (5) - TASK-0274 RE-JUICIO del negativo del flag: GO (OK-CLOSABLE)
 
