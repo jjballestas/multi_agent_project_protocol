@@ -228,6 +228,19 @@ three observed failures (HALLAZGOS):
 
 This complements DECISION-0018 (handoff-release atomicity) and the claim discipline (DECISION-0007/0011).
 
+### Governed delivery reports in mailbox (DECISION-0103 C3/C4)
+
+Starting on 2026-07-22, a mailbox message with `type: REPORTE` that references a governed
+`TASK-XXXX` delivery declares `friction_count` as a non-negative integer and `obstacles` as
+either `[]` or a list of objects containing exactly `what`, `root_cause`, `resolution`, and
+`recurrence_risk` (`low`, `medium`, or `high`). A positive counter with an empty list is
+invalid; zero with an empty list is legitimate. `report_schema_version: "1.0"` opts a message
+into the same rule independently of its date. Earlier unmarked messages are grandfathered.
+
+This session-layer control proves presence, shape, and internal consistency only. The agent
+declares the counter; the validator does not claim to measure whether it is truthful. Automatic
+session-friction sensors are outside this contract.
+
 ### Runtime-authoritative state
 
 In runtime-tier instances that explicitly enable

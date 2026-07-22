@@ -74,6 +74,10 @@ LIGHTWEIGHT_SDD_FIELDS = [
 PROFILE_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 SEMVER_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+MAILBOX_REPORT_ADOPTION_DATE = "2026-07-22"
+MAILBOX_REPORT_SCHEMA_VERSION = "1.0"
+OBSTACLE_FIELDS = {"what", "root_cause", "resolution", "recurrence_risk"}
+OBSTACLE_RISKS = {"low", "medium", "high"}
 TASK_ROW_SELECTOR_PATTERN = re.compile(r"^(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)$")
 PROJECT_STATE_SELECTOR_PATTERN = re.compile(
     r"^(active_tasks/(TASK-(\d{4}|EXTRACT-[0-9A-Fa-f]+)|REQ-[0-9A-Fa-f]+)|[A-Za-z_][A-Za-z0-9_]*)$"
@@ -556,6 +560,78 @@ def get_markdown_field(content: str, field: str) -> str | None:
     if not match:
         return None
     return match.group(1).strip().strip("\"'")
+
+
+def parse_mailbox_obstacles(content: str) -> tuple[list[dict[str, str]] | None, str | None]:
+    match = re.search(r"^obstacles[ \t]*:[ \t]*(.*?)[ \t]*$", content, flags=re.MULTILINE)
+    if not match:
+        return None, "missing obstacles block; use obstacles: [] when there was no friction"
+    inline = match.group(1).strip()
+    if inline:
+        if inline == "[]":
+            return [], None
+        return None, "obstacles must be [] or a YAML-style list of structured entries"
+
+    tail = content[match.end() :].splitlines()
+    items: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+    for line in tail:
+        if not line.strip():
+            continue
+        item_start = re.match(r"^-\s+([a-z_]+)\s*:\s*(.*)$", line)
+        field_line = re.match(r"^\s{2,}([a-z_]+)\s*:\s*(.*)$", line)
+        continuation = re.match(r"^\s{2,}(.+)$", line)
+        if item_start:
+            if current is not None:
+                items.append(current)
+            current = {item_start.group(1): item_start.group(2).strip()}
+        elif field_line and current is not None:
+            current[field_line.group(1)] = field_line.group(2).strip()
+        elif continuation and current is not None and current:
+            last_field = next(reversed(current))
+            current[last_field] = f"{current[last_field]} {continuation.group(1).strip()}".strip()
+        else:
+            break
+    if current is not None:
+        items.append(current)
+    if not items:
+        return [], None
+    for index, item in enumerate(items, start=1):
+        if set(item) != OBSTACLE_FIELDS:
+            return None, f"obstacles item {index} must contain exactly {sorted(OBSTACLE_FIELDS)}"
+        empty = sorted(field for field, value in item.items() if not value)
+        if empty:
+            return None, f"obstacles item {index} has empty fields: {empty}"
+        if item["recurrence_risk"].lower() not in OBSTACLE_RISKS:
+            return None, f"obstacles item {index} recurrence_risk must be low, medium, or high"
+    return items, None
+
+
+def validate_governed_mailbox_report(content: str, relative: str, validation: Validation) -> None:
+    if (get_markdown_field(content, "type") or "").upper() != "REPORTE":
+        return
+    if not re.search(r"\bTASK-\d{4}\b", content):
+        return
+    message_date = get_markdown_field(content, "date") or get_markdown_field(content, "created_at")
+    schema_version = get_markdown_field(content, "report_schema_version")
+    adopted = schema_version == MAILBOX_REPORT_SCHEMA_VERSION or (
+        bool(message_date and DATE_PATTERN.match(message_date))
+        and str(message_date) >= MAILBOX_REPORT_ADOPTION_DATE
+    )
+    if not adopted:
+        return
+    friction_raw = get_markdown_field(content, "friction_count")
+    if friction_raw is None or not re.fullmatch(r"\d+", friction_raw):
+        validation.fail(f"Governed REPORTE {relative} requires friction_count as a non-negative integer")
+        return
+    obstacles, error = parse_mailbox_obstacles(content)
+    if error:
+        validation.fail(f"Governed REPORTE {relative} has invalid obstacles: {error}")
+        return
+    if int(friction_raw) > 0 and not obstacles:
+        validation.fail(
+            f"Governed REPORTE {relative} declares friction_count > 0 but obstacles is empty"
+        )
 
 
 def is_false_value(value: str | None) -> bool:
@@ -1072,6 +1148,7 @@ def validate_mailbox(root: Path, validation: Validation) -> None:
             content = message_path.read_text(encoding="utf-8-sig")
             message_status = (get_markdown_field(content, "status") or "").lower()
             relative = message_path.relative_to(root).as_posix()
+            validate_governed_mailbox_report(content, relative, validation)
             if message_status != state:
                 validation.fail(
                     "Mailbox status/folder mismatch: "
