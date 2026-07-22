@@ -575,21 +575,34 @@ def parse_mailbox_obstacles(content: str) -> tuple[list[dict[str, str]] | None, 
     tail = content[match.end() :].splitlines()
     items: list[dict[str, str]] = []
     current: dict[str, str] | None = None
+    item_indent: int | None = None
     for line in tail:
         if not line.strip():
             continue
-        item_start = re.match(r"^-\s+([a-z_]+)\s*:\s*(.*)$", line)
-        field_line = re.match(r"^\s{2,}([a-z_]+)\s*:\s*(.*)$", line)
-        continuation = re.match(r"^\s{2,}(.+)$", line)
-        if item_start:
+        item_start = re.match(r"^([ \t]*)-\s+([a-z_]+)\s*:\s*(.*)$", line)
+        field_line = re.match(r"^([ \t]+)([a-z_]+)\s*:\s*(.*)$", line)
+        continuation = re.match(r"^([ \t]+)(.+)$", line)
+        if item_start and (item_indent is None or len(item_start.group(1)) == item_indent):
             if current is not None:
                 items.append(current)
-            current = {item_start.group(1): item_start.group(2).strip()}
-        elif field_line and current is not None:
-            current[field_line.group(1)] = field_line.group(2).strip()
-        elif continuation and current is not None and current:
+            item_indent = len(item_start.group(1))
+            current = {item_start.group(2): item_start.group(3).strip()}
+        elif (
+            field_line
+            and current is not None
+            and item_indent is not None
+            and len(field_line.group(1)) > item_indent
+        ):
+            current[field_line.group(2)] = field_line.group(3).strip()
+        elif (
+            continuation
+            and current is not None
+            and current
+            and item_indent is not None
+            and len(continuation.group(1)) > item_indent
+        ):
             last_field = next(reversed(current))
-            current[last_field] = f"{current[last_field]} {continuation.group(1).strip()}".strip()
+            current[last_field] = f"{current[last_field]} {continuation.group(2).strip()}".strip()
         else:
             break
     if current is not None:

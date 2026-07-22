@@ -2,7 +2,7 @@
 task_id: TASK-0261
 title: "[DECISION-0103][C3/C4] validate_mailbox exige obstacles + contador de friccion en mensajes type REPORTE (carril sesion), con grandfathering del historico"
 type: feature
-status: in_review
+status: in_progress
 owner: Codex
 phase: P2
 priority: normal

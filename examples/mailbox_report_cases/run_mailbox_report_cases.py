@@ -14,7 +14,13 @@ VALIDATOR = ROOT / "scripts" / "validate_collaboration_state.py"
 MINIMAL = ROOT / "examples" / "minimal_instance"
 
 
-def report(*, date: str, friction: str | None, obstacles: str | None) -> str:
+def report(
+    *,
+    date: str,
+    friction: str | None,
+    obstacles: str | None,
+    placement: str = "body",
+) -> str:
     fields = [
         "---",
         "type: REPORTE",
@@ -25,8 +31,10 @@ def report(*, date: str, friction: str | None, obstacles: str | None) -> str:
     ]
     if friction is not None:
         fields.append(f"friction_count: {friction}")
+    if obstacles is not None and placement == "frontmatter":
+        fields.append(f"obstacles: {obstacles}")
     fields.extend(["---", "", "Governed TASK-0261 delivery."])
-    if obstacles is not None:
+    if obstacles is not None and placement == "body":
         fields.extend(["", f"obstacles: {obstacles}"])
     return "\n".join(fields) + "\n"
 
@@ -35,6 +43,14 @@ NONEMPTY = """\n- what: A retry was required.
   root_cause: The first input was incomplete.
   resolution: The input was corrected and rerun.
   recurrence_risk: low"""
+
+INDENTED_NONEMPTY = """\n  - what: A retry was required.
+    root_cause: The first input was incomplete.
+    resolution: The input was corrected and rerun.
+    recurrence_risk: low"""
+
+INDENTED_MALFORMED = """\n  - what: A retry was required.
+    root_cause: The first input was incomplete."""
 
 
 def run_case(name: str, content: str, expected: int, needle: str | None = None) -> None:
@@ -82,7 +98,50 @@ def main() -> int:
         1,
         "must contain exactly",
     )
-    print("OK: governed mailbox report cases passed (7).")
+    for placement in ("frontmatter", "body"):
+        run_case(
+            f"{placement}-indented-zero-empty",
+            report(date="2026-07-22", friction="0", obstacles="[]", placement=placement),
+            0,
+        )
+        run_case(
+            f"{placement}-indented-zero-nonempty",
+            report(
+                date="2026-07-22",
+                friction="0",
+                obstacles=INDENTED_NONEMPTY,
+                placement=placement,
+            ),
+            0,
+        )
+        run_case(
+            f"{placement}-indented-positive-nonempty",
+            report(
+                date="2026-07-22",
+                friction="2",
+                obstacles=INDENTED_NONEMPTY,
+                placement=placement,
+            ),
+            0,
+        )
+        run_case(
+            f"{placement}-indented-positive-empty",
+            report(date="2026-07-22", friction="2", obstacles="[]", placement=placement),
+            1,
+            "friction_count > 0 but obstacles is empty",
+        )
+        run_case(
+            f"{placement}-indented-malformed",
+            report(
+                date="2026-07-22",
+                friction="0",
+                obstacles=INDENTED_MALFORMED,
+                placement=placement,
+            ),
+            1,
+            "must contain exactly",
+        )
+    print("OK: governed mailbox report cases passed (17).")
     return 0
 
 
