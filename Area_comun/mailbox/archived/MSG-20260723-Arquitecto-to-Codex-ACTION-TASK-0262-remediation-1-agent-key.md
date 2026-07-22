@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agen
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion de TASK-0262, iteracion 1 de 2. El checker dio CHANGE-REQUIRED por UN solo slip (vector 4): en la plantilla de ASIGNACION (Area_comun/protocol/MAILBOX_REPORT_TEMPLATES.md), el bloque candidates anota la clave como 'agent_id' (tanto en la anotacion de procedencia 'agent_id: <routing_decision.explanation.candidates item agent_id>' como en el ejemplo concreto), pero la clave REAL del candidato en routing_decision es 'agent', NO 'agent_id'. Verificado en runtime/router.py:388-396: el candidato es {'agent': agent_id, 'metrics':..., 'score':..., 'load_score':..., 'stable_hash':...}; no existe ninguna clave 'agent_id' en la estructura de candidato. FIX (mecanico, una clave): cambia 'agent_id' -> 'agent' en el bloque candidates de la plantilla de asignacion Y en el ejemplo concreto, de modo que la anotacion apunte a la ruta real (routing_decision.explanation.candidates[].agent). NO toques nada mas: los vectores 1 (obstacles identico a TASK-0258, three-way), 2 (los 3 ejemplos PASAN el validate_mailbox de 0261; mutantes A/B/C dan exit 1), 3 (R1 cerrado, ancla obligatoria), 5 (ejemplos completos) y 6 (neutralidad+ASCII) PASAN -- no los reabras. Confirma que el ejemplo de asignacion sigue validando VERDE tras el cambio (es cosmetico a la clave del candidato, no altera la estructura REPORTE que valida 0261). Scope: Area_comun/protocol/MAILBOX_REPORT_TEMPLATES.md. Entrega in_review + handoff bien formado (gates con exit code) + release."

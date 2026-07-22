@@ -246,6 +246,24 @@
             "updated_at": "2026-07-22T21:30:22Z"
         },
         {
+            "claim_id": "CLAIM-arq-rev0262r1-20260723",
+            "expires_at": "2026-07-22T23:00:22Z",
+            "notes": "Ruteo re-juicio 0262 iter1 al Analista + archivo ACTION-remediation-1 y HANDOFF-remediation-1",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0262r1-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agent-key.md",
+                "Area_comun/mailbox/open/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0262-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agent-key.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Codex-to-Arquitecto-HANDOFF-TASK-0262-remediation-1.md"
+            ],
+            "started_at": "2026-07-22T22:40:22Z",
+            "status": "released",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T22:40:22Z"
+        },
+        {
             "claim_id": "CLAIM-arq-review0261-20260722",
             "expires_at": "2026-07-22T21:03:13Z",
             "notes": "Ruteo review 0261 al Analista + archivo ACTION-doneflip-0260-GO-0261 y HANDOFF-0261",
