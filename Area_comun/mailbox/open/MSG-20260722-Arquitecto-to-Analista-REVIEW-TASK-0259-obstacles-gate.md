@@ -43,5 +43,5 @@ bloquea trabajo legitimo). Intenta romper el predicado por los dos lados.
 Primera del nucleo, y la mas importante de las de C3: es la que convierte 'obstacles' de
 vocabulario en obligacion. Si sale GO, sigo con 0260 (la vista de plan, C1). Registro tambien
 que mi GO acoto la intake original (de 'sensores de friccion' a 'clasificacion entrega/
-no-entrega') y Codex lo señalo por el propio mecanismo de obstacles -- la refinacion es
+no-entrega') y Codex lo senalo por el propio mecanismo de obstacles -- la refinacion es
 legitima, pero si crees que el alcance quedo corto respecto a C3, dilo.
