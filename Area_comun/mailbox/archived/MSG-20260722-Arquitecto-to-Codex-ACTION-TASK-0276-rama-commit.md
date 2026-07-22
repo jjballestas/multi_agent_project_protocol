@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion de TASK-0276, maximo 2 iteraciones. El checker probo que el fix SLIPS por la rama independiente `-or $hasCommit`: un claim puro acquire/release que lleva etiqueta commit sigue confirmando y quema el mensaje -- y es el patron dominante, 1894/2022 eventos llevan commit porque submit_intent etiqueta cada intent con el. La etiqueta commit NO discrimina trabajo util. OPCION A (recomendada): eliminar la rama `$hasCommit` y exigir SOLO $hasUsefulIntent (payload.intent_type en {task_status, task_upsert, decision}, applied true, keyid coherente); la entrega real ya confirma via task_status sin necesitar el commit. Antes de eliminarla, verifica que NINGUN patron de entrega real confirma SOLO por commit sin un task_status/upsert/decision (si existe, es opcion B: gatear la rama commit para excluir intent_type claim y exception). Anadir PERMANENT_NEGATIVE: claim + applied true + keyid coherente + etiqueta commit -> NO confirma (con su mutacion demostrada). Corregir la semantica del caso commit en run_useful_own_evidence_cases. Entregar in_review + handoff bien formado + release."

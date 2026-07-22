@@ -130,6 +130,24 @@
             "updated_at": "2026-07-22T14:09:24Z"
         },
         {
+            "claim_id": "CLAIM-arq-rej0276-20260722",
+            "expires_at": "2026-07-22T15:11:50Z",
+            "notes": "Re-juicio de 0276 + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-rejuicio.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0276-remediation1.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0276-rama-commit.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rej0276-20260722"
+            ],
+            "started_at": "2026-07-22T14:51:50Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T14:51:50Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0276-20260722",
             "expires_at": "2026-07-22T15:00:52Z",
             "notes": "Remediacion de 0276 (rama commit no discrimina) + higiene 2",
