@@ -173,14 +173,155 @@ def run_pregate_contract_mutants() -> None:
 
     assert contract(text), "TASK-0284 pre-gate contract is incomplete"
     mutants = {
-        "sequential_pipe_drain": text.replace("$process.StandardOutput.ReadToEndAsync()", "$process.StandardOutput.ReadToEnd()", 1),
-        "deleted_first_seen_removed": text.replace("$firstSeen.ContainsKey($relative)", "$false", 1),
         "terminal_defer_removed": text.replace("exhausted = $terminal", "exhausted = $false", 1),
-        "claims_expiry_removed": text.replace("$expires -gt $now", "$true", 1),
         "dirty_forensics_removed": text.replace("$residueState = Get-StagedResidueState", "# dirty-tree veto removed", 1),
     }
     survivors = [name for name, mutant in mutants.items() if contract(mutant)]
     assert not survivors, f"pre-gate contract failed to kill declared mutants: {survivors}"
+
+
+def run_deleted_residue_real_loop_case() -> None:
+    """A real deleted path ages into EXEC_START; removing first-seen persistence blocks it."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+
+    def exercise(candidate: str, expect_exec: bool) -> None:
+        fixture = Path(tempfile.mkdtemp(prefix="task0284-deleted-loop-"))
+        try:
+            (fixture / "Area_comun/mailbox/open").mkdir(parents=True)
+            (fixture / "Area_comun/state").mkdir(parents=True)
+            (fixture / "runtime/state").mkdir(parents=True)
+            (fixture / "scripts/harness/prompts").mkdir(parents=True)
+            (fixture / "scripts/harness/peer_mailbox_cron.ps1").write_text(candidate, encoding="utf-8")
+            shutil.copy2(LEDGER_HEAD, fixture / "scripts/ledger_head.py")
+            (fixture / "runtime/protocol_replay.py").write_text(
+                "def protocol_state_drift(root): return {'has_drift': False}\n", encoding="ascii"
+            )
+            (fixture / "runtime/state/events.jsonl").write_text("", encoding="ascii")
+            (fixture / "Area_comun/state/CLAIMS.json").write_text('{"claims":[]}\n', encoding="ascii")
+            (fixture / "protocol.config.json").write_text("{}\n", encoding="ascii")
+            (fixture / ".gitignore").write_text(".protocol-tmp/\n", encoding="ascii")
+            tracked = fixture / "deleted-residue.txt"
+            tracked.write_text("tracked\n", encoding="ascii")
+            message = fixture / "Area_comun/mailbox/open/MSG-delete.md"
+            message.write_text(
+                "---\nfrom: Arquitecto\nto: TestPeer\ntype: ACTION\nstatus: open\n"
+                "requires_response: true\nresponse_owner: TestPeer\nrequested_action: test\n---\n",
+                encoding="ascii",
+            )
+            prompt = fixture / "scripts/harness/prompts/test.prompt.md"
+            prompt.write_text("Process @@MESSAGE_PATH@@ under @@ROOT@@.\n", encoding="ascii")
+            fake = fixture / "fake-agent.cmd"
+            fake.write_text("@echo OUTCOME: definitive\r\n", encoding="ascii")
+            run("git", "init", cwd=fixture)
+            run("git", "config", "user.email", "retry@example.invalid", cwd=fixture)
+            run("git", "config", "user.name", "TestPeer", cwd=fixture)
+            run("git", "add", ".", cwd=fixture)
+            run("git", "commit", "-m", "fixture", cwd=fixture)
+            tracked.unlink()
+            command = [
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                str(fixture / "scripts/harness/peer_mailbox_cron.ps1"),
+                "-PeerId", "TestPeer", "-Root", str(fixture), "-PromptFile", str(prompt),
+                "-AgentExe", str(fake), "-AgentProvider", "Codex", "-IntervalSeconds", "1",
+                "-MaxNoCoordinatorRounds", "5", "-ExecTimeoutSeconds", "10",
+                "-MaxTransientRetries", "2", "-RetryBackoffSeconds", "0", "-AbortedResidueMinutes", "0",
+            ]
+            run(*command, cwd=fixture, timeout=20)
+            log = (fixture / ".protocol-tmp/testpeer_mailbox_cron/testpeer_mailbox_cron.log").read_text(encoding="utf-8")
+            assert ("EXEC_START " in log) is expect_exec, log
+            if not expect_exec:
+                assert "outcome=defer_terminal reason=worktree_residue_live" in log, log
+        finally:
+            shutil.rmtree(fixture, ignore_errors=True)
+
+    exercise(runner_text, expect_exec=True)
+    mutant = runner_text.replace("$firstSeen.ContainsKey($relative)", "$false", 1)
+    assert mutant != runner_text, "first-seen mutant was not applied"
+    exercise(mutant, expect_exec=False)
+
+
+def run_large_stderr_drain_case(sandbox: Path) -> None:
+    """>64 KB stderr drains under the deadline; the sequential mutant deadlocks and leaves its lock."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
+    if not git_helper:
+        raise AssertionError("git status helper not found")
+    fixture = Path(tempfile.mkdtemp(prefix="task0284-stderr-"))
+    try:
+        fake_git = fixture / "git.exe"
+        source = fixture / "fake-git.cs"
+        source.write_text(
+            "using System; class FakeGit { static void Main() { Console.Error.Write(new string('E', 131072)); } }\n",
+            encoding="ascii",
+        )
+        run(
+            r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe",
+            "/nologo", "/out:" + str(fake_git), str(source), cwd=fixture,
+        )
+
+        def make_probe(name: str, helper: str) -> Path:
+            probe = fixture / name
+            probe.write_text(
+                "$Root=(Get-Location).Path\n"
+                "$env:PATH='" + str(fixture).replace("'", "''") + ";'+$env:PATH\n"
+                "$lock=Join-Path $Root 'drain-test.lock'\n"
+                "Set-Content -LiteralPath $lock -Value locked -Encoding ASCII\n"
+                "try {\n" + helper + "\n$result=Get-GitStatusPorcelainUtf8\n"
+                "if(-not $result.ok){throw 'git helper failed'}\n"
+                "} finally { Remove-Item -LiteralPath $lock -Force -ErrorAction SilentlyContinue }\n",
+                encoding="ascii",
+            )
+            return probe
+
+        good = make_probe("concurrent.ps1", git_helper.group(0))
+        run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(good), cwd=fixture, timeout=15)
+        assert not (fixture / "drain-test.lock").exists(), "concurrent drain left an orphan lock"
+        sequential_text = git_helper.group(0).replace(
+            "$stdoutTask = $process.StandardOutput.ReadToEndAsync()\n        $stderrTask = $process.StandardError.ReadToEndAsync()",
+            "$stdout = $process.StandardOutput.ReadToEnd()\n        $stderr = $process.StandardError.ReadToEnd()",
+            1,
+        ).replace("$raw = $stdoutTask.Result", "$raw = $stdout", 1)
+        sequential = make_probe("sequential.ps1", sequential_text)
+        try:
+            run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(sequential), cwd=fixture, timeout=3)
+        except subprocess.TimeoutExpired:
+            pass
+        else:
+            raise AssertionError("sequential pipe-drain control did not hang on >64 KB stderr")
+        assert (fixture / "drain-test.lock").exists(), "sequential hang did not demonstrate orphan-lock risk"
+    finally:
+        shutil.rmtree(fixture, ignore_errors=True)
+
+
+def run_expired_claim_behavior_case(sandbox: Path) -> None:
+    """An expired claim is inactive, and removing the expiry predicate changes behavior."""
+    runner_text = RUNNER.read_text(encoding="utf-8-sig")
+    read_json = re.search(r"(?ms)^function Read-JsonWithDeadline \{.*?^\}", runner_text)
+    signal = re.search(r"(?ms)^function Get-AdditionalWorkSignal \{.*?^\}", runner_text)
+    if not read_json or not signal:
+        raise AssertionError("claim signal helpers not found")
+    claims = sandbox / "Area_comun/state/CLAIMS.json"
+    original_claims = claims.read_bytes()
+    claims.write_text(
+        '{"claims":[{"owner":"Other","status":"active","expires_at":"2000-01-01T00:00:00Z"}]}\n',
+        encoding="ascii",
+    )
+
+    def probe(helper: str) -> str:
+        path = sandbox / "claim-expiry-probe.ps1"
+        path.write_text(
+            "$Root=(Get-Location).Path\n$PeerId='TestPeer'\n$LeasePath=''\n"
+            "function Test-LeaseProcessMatches { param($Lease) return $false }\n"
+            + read_json.group(0) + "\n" + helper + "\nGet-AdditionalWorkSignal\n",
+            encoding="ascii",
+        )
+        return run("powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(path), cwd=sandbox).stdout.strip()
+
+    assert probe(signal.group(0)) == "none", "expired claim counted as active"
+    mutant = signal.group(0).replace("$expires -gt $now", "$true", 1)
+    assert probe(mutant) == "active_external_claim", "expiry-filter mutant was not killed"
+    (sandbox / "claim-expiry-probe.ps1").unlink(missing_ok=True)
+    claims.write_bytes(original_claims)
 
 
 def run_pure_append_evidence_cases(sandbox: Path) -> None:
@@ -512,6 +653,9 @@ def main() -> int:
         run_torn_tail_case(sandbox)
         run_nondestructive_rollback_contract()
         run_pregate_contract_mutants()
+        run_deleted_residue_real_loop_case()
+        run_large_stderr_drain_case(sandbox)
+        run_expired_claim_behavior_case(sandbox)
         run_pure_append_evidence_cases(sandbox)
         run_nul_residue_path_cases(sandbox)
         run_unreadable_head_case(sandbox, prompt, fake)

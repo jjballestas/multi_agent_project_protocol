@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "5bdc8108bba07f77900da27a4ce6093d5ec7dabd32a1c2b8e7c01a324c8dba72",
+  "canonical_hash": "c0767249d1929b10bc07458f946df588aa650ce979596d2f4caa6e6ac3ff5a01",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2294,7 +2294,7 @@
       "TASK-0281": 24,
       "TASK-0282": 12,
       "TASK-0283": 1,
-      "TASK-0284": 12,
+      "TASK-0284": 13,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2317,7 +2317,7 @@
       "protocol-prune": 19,
       "protocol-state": 1
     },
-    "events_applied": 4959,
+    "events_applied": 4960,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4408,6 +4408,7 @@
       "codex:task0282:review-approved-to-done": 5612,
       "codex:task0282:start:20260721T230001Z:a1": 5593,
       "codex:task0282:work-release:20260722:a1": 5596,
+      "codex:task0284:banco:claim-acquire": 5631,
       "codex:task0284:delivery:handoff-claim-acquire": 5616,
       "codex:task0284:delivery:handoff-claim-release": 5619,
       "codex:task0284:delivery:task-claim-release": 5618,
@@ -7280,5 +7281,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5630
+  "up_to_seq": 5631
 }
