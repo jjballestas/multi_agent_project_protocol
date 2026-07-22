@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-flag-rejuicio
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de la remediacion TEST-ONLY de TASK-0274 sobre el commit 77afe05 (entrega 0831701). El codigo del gate NO cambio -- ya lo verificaste real con 6/6 vectores. Solo se le dio DIENTES al negativo del flag desconocido, que antes se quedaba verde al reemplazar parse_args por parse_known_args (MutC). Verificar con tu propio criterio: en un clon desechable, reemplazar el parse_args estricto por parse_known_args debe poner la suite ROJA en case_cli_is_a_real_aborting_gate; y la suite canonica pasa 9/9. Si MutC ya enrojece, das GO y cierra 0274. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."
