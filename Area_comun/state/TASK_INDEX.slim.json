@@ -26,14 +26,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0260",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "status": "in_review",
-            "title": "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator"
-        },
-        {
             "id": "TASK-0261",
             "owner": "Codex",
             "phase": "P2",

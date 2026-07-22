@@ -336,6 +336,28 @@
             "updated_at": "2026-07-22T19:31:46Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratif0260-20260722",
+            "expires_at": "2026-07-22T20:39:38Z",
+            "notes": "Ratificacion 0260 (GO checker) -> review_approved + done-flip y GO 0261 a Codex + archivo de los 2 REVIEW",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0260-y-GO-0261.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0260",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0260",
+                "Area_comun/tasks/TASK-0260-d0103-c1-vista-plan-gate-aprobacion-turno0.md",
+                "Area_comun/artifacts/Analista-TASK-0260-vista-plan-gate-turno0-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratif0260-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0260.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0260.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0260.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0260.md"
+            ],
+            "started_at": "2026-07-22T20:19:38Z",
+            "status": "released",
+            "task_id": "TASK-0260",
+            "updated_at": "2026-07-22T20:19:38Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0259-20260722",
             "expires_at": "2026-07-22T17:01:46Z",
             "notes": "Remediacion de 0259 (predicado + friccion, C3 pleno) + higiene 2",

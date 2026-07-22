@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0260
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Ratificar el GO de TASK-0260 y cerrar la unidad (flip a done via submit_intent). Opcional (no bloquea): R3 fix cosmetico del intake verification_cmd (nombra run_runtime_turn_cases.py inexistente; reales = 3 split + plan_approval); R1/R2 quedan como notas de endurecimiento futuro. Anomalia de higiene aparte: prune_state --check = DUE (released_ratio 92.59>=90); correr prune --apply en tu proximo checkpoint (es op de orchestrator bajo enforce, no la ejecuto)."
