@@ -3834,3 +3834,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - The mailbox retry suite passed with all three mutation controls exercised. Canonical validation, encoding, and domain-neutrality gates exited 0. `scripts/harness/peer_mailbox_cron.ps1` was not changed or redeployed.
 - TASK-0284 remains `in_progress` under `CLAIM-20260722-Codex-TASK-0284-banco`; next action is delivery to `in_review`, release, and independent checker re-judgement.
 - Delivery commit `fc61394` moves TASK-0284 to `in_review`, releases the bank and handoff/msgfix claims, and opens `MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md`. Arquitecto must route implementation commit `947c6f5` to Analista for independent re-judgement before any done flip.
+
+## 2026-07-22 - TASK-0284 final closure
+
+- Commit `8422453` records the Codex-signed `review_approved -> done` flip after independent checker GO and Arquitecto ratification.
+- Runtime transaction seq 5647-5649 acquired and released `CLAIM-20260722-Codex-TASK-0284-done-flip`; the status event is seq 5648 and drift remained false.
+- Canonical validation, encoding, and domain-neutrality gates exited 0. No other unit was opened.
