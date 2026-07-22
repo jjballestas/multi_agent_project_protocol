@@ -2,6 +2,16 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 
+## 2026-07-22 - TASK-0259 remediation iteration 1
+
+- Commit `c725e9b` remediates the independent NO-GO: delivery detection now reads
+  `transitions.task_status.to`, clean deliveries require the `obstacles` block but accept
+  `[]`, and objective gate/retry/revert friction requires a non-empty structured account.
+- The permanent runner proves the divergent-outcome delivery escape through full
+  `validate_turn`, covers the three friction signals and the clean-delivery anti-theater
+  control, and kills both delivery-sensor and friction-sensor mutants. Delivery back to
+  `in_review` and independent re-review are still pending.
+
 ## 2026-07-22 - TASK-0285 close and TASK-0259 implementation
 
 - Commit `fc98db7` applies the Codex-signed TASK-0285 `review_approved -> done` flip
