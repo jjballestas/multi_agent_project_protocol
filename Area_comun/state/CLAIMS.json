@@ -42,6 +42,24 @@
             "updated_at": "2026-07-22T20:36:53Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0261-done-flip",
+            "expires_at": "2026-07-23T02:52:33Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0261-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0261",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0261",
+                "Area_comun/tasks/TASK-0261-d0103-c3c4-validate-mailbox-reporte-obstacles.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T21:52:33Z",
+            "status": "released",
+            "task_id": "TASK-0261",
+            "updated_at": "2026-07-22T21:52:33Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0261-remediation-1",
             "expires_at": "2026-07-22T23:18:30Z",
             "notes": "Remediation iteration 1: support indented obstacle list items in frontmatter and body with behavioral coverage.",
@@ -74,6 +92,25 @@
             "status": "released",
             "task_id": "TASK-0261",
             "updated_at": "2026-07-22T21:25:31Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0262",
+            "expires_at": "2026-07-23T02:52:33Z",
+            "notes": "Draft canonical session-lane assignment and delivery mailbox report templates.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0262",
+                "Area_comun/state/TASK_INDEX.json#TASK-0262",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0262",
+                "Area_comun/tasks/TASK-0262-d0103-c2c4-plantilla-reporte-asignacion-mailbox.md",
+                "Area_comun/protocol/MAILBOX_REPORT_TEMPLATES.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T21:52:33Z",
+            "status": "active",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T21:52:33Z"
         },
         {
             "claim_id": "CLAIM-arq-ratif0261-20260722",
