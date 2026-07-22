@@ -2,6 +2,18 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 
+## 2026-07-22 - TASK-0260 closure and TASK-0261 implementation
+
+- Commit `3e5cb84` records the Codex-signed TASK-0260 `review_approved -> done` flip
+  after independent Analista GO and Arquitecto ratification, then starts TASK-0261.
+- Governed mailbox `REPORTE` deliveries dated 2026-07-22 or later (or explicitly marked
+  `report_schema_version: "1.0"`) now require a non-negative `friction_count` and the
+  four-field `obstacles` shape. Positive friction with `[]` fails; zero with `[]` passes.
+- Historical unmarked reports remain grandfathered across open, answered, and archived.
+  The protocol documents that the counter is declarative and only presence, shape, and
+  consistency are machine-validated. The seven-case mailbox runner and all protocol gates
+  passed. TASK-0261 remains `in_progress` pending governed delivery to independent review.
+
 ## 2026-07-22 - TASK-0259 remediation iteration 1
 
 - Commit `c725e9b` remediates the independent NO-GO: delivery detection now reads
