@@ -85,6 +85,13 @@ def load_config(root: Path) -> dict:
     return json.loads((root / "protocol.config.json").read_text(encoding="utf-8-sig"))
 
 
+def assert_generated_tier(root: Path, requested_tier: str) -> None:
+    actual_tier = load_config(root).get("adoption_tier")
+    assert actual_tier == requested_tier, (
+        f"generated tier mismatch: requested={requested_tier!r}, actual={actual_tier!r}"
+    )
+
+
 def validate_with_repo_tools(root: Path) -> None:
     assert_ok(run([sys.executable, str(VALIDATOR), "--root", str(root)]))
     assert_ok(run([sys.executable, str(SCAN_ENCODING), "--root", str(root)]))
@@ -122,8 +129,7 @@ def case_coordination_default_and_flag() -> None:
         generate(default_root)
         generate(explicit_root, "coordination")
         for root in (default_root, explicit_root):
-            config = load_config(root)
-            assert config["adoption_tier"] == "coordination"
+            assert_generated_tier(root, "coordination")
             assert (root / "runtime" / "protocol_replay.py").exists()
             assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
             assert not (root / ".github" / "workflows" / "validate.yml").exists()
@@ -136,8 +142,8 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
     with tempfile.TemporaryDirectory(prefix="tier-runtime-") as temp:
         root = Path(temp) / "runtime"
         generate(root, "runtime")
+        assert_generated_tier(root, "runtime")
         config = load_config(root)
-        assert config["adoption_tier"] == "runtime"
         assert config["runtime"]["enabled"] is False
         assert config["tool_policy"]["enabled"] is False
         assert config["event_auth"]["enabled"] is False
@@ -146,6 +152,34 @@ def case_runtime_tier_scaffolds_motor_gates_ci_off() -> None:
         assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
         validate_with_repo_tools(root)
         validate_with_instance_tools(root)
+
+
+def case_missing_exported_ledger_head_is_detected() -> None:
+    with tempfile.TemporaryDirectory(prefix="tier-ledger-head-negative-") as temp:
+        root = Path(temp) / "runtime"
+        generate(root, "runtime")
+        ledger_head = root / "scripts" / "ledger_head.py"
+        assert ledger_head.exists(), "generated instance did not export scripts/ledger_head.py"
+        ledger_head.unlink()
+        result = run(
+            [sys.executable, str(root / "scripts" / "prune_state.py"), "--root", str(root), "--check"]
+        )
+        assert result.returncode != 0, "prune_state stayed green without exported ledger_head.py"
+
+
+def case_declared_tier_mismatch_is_detected() -> None:
+    with tempfile.TemporaryDirectory(prefix="tier-declaration-negative-") as temp:
+        root = Path(temp) / "runtime"
+        generate(root, "runtime")
+        config_path = root / "protocol.config.json"
+        config = load_config(root)
+        config["adoption_tier"] = "coordination"
+        config_path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+        try:
+            assert_generated_tier(root, "runtime")
+        except AssertionError:
+            return
+        raise AssertionError("runner accepted a generated tier that differs from the requested tier")
 
 
 def case_runtime_excludes_execution_artifacts() -> None:
@@ -186,6 +220,8 @@ def main() -> int:
     cases = [
         case_coordination_default_and_flag,
         case_runtime_tier_scaffolds_motor_gates_ci_off,
+        case_missing_exported_ledger_head_is_detected,
+        case_declared_tier_mismatch_is_detected,
         case_runtime_excludes_execution_artifacts,
         case_minimal_instance_stays_coordination,
         case_generation_is_deterministic_per_tier,
@@ -200,7 +236,7 @@ def main() -> int:
     if failures:
         print(json.dumps({"status": "FAILED", "failures": failures}, indent=2))
         return 1
-    print("OK: runtime instantiation cases passed (5 + ps1 parity when available).")
+    print("OK: runtime instantiation cases passed (7 + ps1 parity when available).")
     return 0
 
 
