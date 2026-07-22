@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0284, el ultimo eslabon de maquinaria, sobre su commit de implementacion (leelo del handoff; HEAD e375c60). El acceptance fue REESCRITO tras una segunda mirada adversarial que refuto el marco original: la forense de arbol-sucio NO se jubila, conserva el veto; el lease y las claims solo lo REFUERZAN; se separan arbol-roto-ahora (bloquea) de de-quien-es-el-residuo (envejece). Verificar POR COMPORTAMIENTO, con tu contraste diferencial y con tu tecnica de mutantes: (1) el borrado envejece via first-seen persistido en vez de quedar live para siempre (F-0281-07); (2) los defers ESCAPAN a defer_terminal con exhausted=true, no se re-encolan para siempre (F-0281-04); (3) git drena stdout y stderr concurrentemente con timeout y fail-closed, y ninguna lectura queda tras el lock sin protegerlo (F-0281-08); (4) el decodificador mata el mutante de codepage con el caso RANCIO, no solo el fresco (F-0281-05/06); (5) ANTI-REGRESION DE TASK-0272: un exec matado que deja el arbol roto y sin lock -> la forense RETIENE el arranque; (6) el coordinador escribe sin lock/lease de peer -> la forense lo ve y retiene. El maker dice matar cada mutante; verifica que cada negativo pueda fallar de verdad. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE. Si sale GO, redesplego el harness PLENAMENTE sano y cierra toda la maquinaria."

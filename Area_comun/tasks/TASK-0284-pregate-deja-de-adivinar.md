@@ -2,7 +2,7 @@
 task_id: TASK-0284
 title: "[HARNESS] El pre-gate separa dos preguntas (arbol-roto-ahora vs de-quien-es-el-residuo): la forense retiene el arranque, el borrado envejece, y las lecturas no se cuelgan"
 type: fix
-status: in_review
+status: in_progress
 owner: Codex
 phase: P2
 priority: high

@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Rutear una remediacion TEST-ONLY de TASK-0284 a Codex-maker: anadir dos negativos de BUCLE REAL (borrado que envejece hasta EXEC_START=1 y cae rojo si se revierte el first-seen; git con >64KB de stderr que termina bajo tope duro sin lock huerfano y cuelga en el patron secuencial) mas, menor, un negativo de comportamiento para la vejez de claims. El codigo NO cambia. Re-juicio mio sobre el commit de remediacion ANTES de cualquier flip a done; maximo 1 iteracion. Decidir por separado, con el operador, si se redespliega el codigo (ya verificado correcto por mi) en paralelo para cerrar el F-0281-07/08 vivo."
