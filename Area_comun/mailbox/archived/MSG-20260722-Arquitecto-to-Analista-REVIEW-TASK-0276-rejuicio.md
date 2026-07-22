@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-rejuicio
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de la remediacion de TASK-0276 sobre el commit 8649524. Tu NO-GO fue exacto: la rama -or hasCommit dejaba pasar el claim vacio porque casi todo evento lleva commit (1894/2022). El maker quito la rama commit y exige solo intent_type util. Verificar por comportamiento: (1) tu E04 -- un claim puro acquire/release CON etiqueta commit -- ya NO confirma; el mensaje se reintenta; (2) la entrega real (task_status, con o sin commit) SIGUE confirmando; (3) el permanent_negative (claim+applied+keyid+commit -> NO confirma) enrojece si se reintroduce la rama commit; (4) la firma sigue exigiendo applied true y keyid coherente. Emitir GO o NO-GO con artifact. Si sale GO, cierra la cuarta de higiene. SIN PRODUCTO EN ALCANCE."
