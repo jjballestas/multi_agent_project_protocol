@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "1447885487857fd2805b207e00b66eaff4901792ff7ab83002dafd90a43e6eae",
+  "canonical_hash": "d9d29562cf4276cdc6fa6c2be6a53b0a4b7acbf73b15e90e55168ecab0829e2d",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -2356,8 +2356,8 @@
       "TASK-0272": 30,
       "TASK-0273": 14,
       "TASK-0274": 25,
-      "TASK-0275": 3,
-      "TASK-0276": 18,
+      "TASK-0275": 5,
+      "TASK-0276": 21,
       "TASK-0277": 19,
       "TASK-0278": 14,
       "TASK-0279": 23,
@@ -2389,7 +2389,7 @@
       "protocol-prune": 21,
       "protocol-state": 1
     },
-    "events_applied": 5161,
+    "events_applied": 5166,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -4509,9 +4509,13 @@
       "codex:task0274:memory-release:20260722T111000Z": 5695,
       "codex:task0274:ready-to-in-progress:20260722T105500Z": 5690,
       "codex:task0274:start:claim-acquire:20260722T105500Z": 5689,
+      "codex:task0275:ready-to-in-progress:20260722T152500Z": 5837,
+      "codex:task0275:start:claim-acquire:20260722T152500Z": 5836,
       "codex:task0276:delivery:handoff-claim-acquire": 5806,
       "codex:task0276:delivery:handoff-claim-release": 5809,
       "codex:task0276:delivery:task-claim-release": 5808,
+      "codex:task0276:done-flip:claim-acquire:20260722T152500Z": 5833,
+      "codex:task0276:done-flip:claim-release:20260722T152500Z": 5835,
       "codex:task0276:in-progress-to-in-review": 5807,
       "codex:task0276:ready-to-in-progress": 5805,
       "codex:task0276:remediation1:claim-acquire": 5819,
@@ -4519,6 +4523,7 @@
       "codex:task0276:remediation1:handoff-acquire": 5820,
       "codex:task0276:remediation1:handoff-release": 5823,
       "codex:task0276:remediation1:in-review": 5821,
+      "codex:task0276:review-approved-to-done:20260722T152500Z": 5834,
       "codex:task0276:start:claim-acquire": 5804,
       "codex:task0277:claim:20260720T150500Z:a1": 5380,
       "codex:task0277:delivery-claim:20260720T154500Z:a1": 5382,
@@ -7554,5 +7559,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5832
+  "up_to_seq": 5837
 }

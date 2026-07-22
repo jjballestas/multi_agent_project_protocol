@@ -42,6 +42,27 @@
             "updated_at": "2026-07-22T14:07:28Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0275",
+            "expires_at": "2026-07-23T03:25:00Z",
+            "notes": "Implement TASK-0275 residual: successful quarantine path logging, retention policy, and mutation-proved permanent negative.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0275",
+                "Area_comun/state/TASK_INDEX.json#TASK-0275",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0275",
+                "Area_comun/tasks/TASK-0275-rollback-cuarentena-untracked.md",
+                "scripts/harness/peer_mailbox_cron.ps1",
+                "scripts/harness/README.md",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T15:25:00Z",
+            "status": "active",
+            "task_id": "TASK-0275",
+            "updated_at": "2026-07-22T15:25:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0276",
             "expires_at": "2026-07-23T02:09:24Z",
             "notes": "Implement TASK-0276 useful-work evidence filtering, signature coherence, git exit gates, and permanent mutation-proved negatives.",
@@ -60,6 +81,24 @@
             "status": "released",
             "task_id": "TASK-0276",
             "updated_at": "2026-07-22T14:09:24Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0276-done-flip",
+            "expires_at": "2026-07-22T16:25:00Z",
+            "notes": "Implementer done-flip after independent checker GO and architect ratification.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0276-done-flip",
+                "Area_comun/state/TASK_INDEX.json#TASK-0276",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0276",
+                "Area_comun/tasks/TASK-0276-evidencia-util-filtro-intent.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T15:25:00Z",
+            "status": "released",
+            "task_id": "TASK-0276",
+            "updated_at": "2026-07-22T15:25:00Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0276-handoff",

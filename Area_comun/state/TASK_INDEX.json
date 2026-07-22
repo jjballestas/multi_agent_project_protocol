@@ -360,7 +360,7 @@
             "phase": "P2",
             "priority": "high",
             "reviewer": "Analista",
-            "status": "ready",
+            "status": "in_progress",
             "title": "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana",
             "type": "infra"
         },
@@ -372,7 +372,7 @@
             "phase": "P2",
             "priority": "medium",
             "reviewer": "Analista",
-            "status": "review_approved",
+            "status": "done",
             "title": "[HARNESS] Evidencia propia con TRABAJO UTIL: filtrar por intent_type y applied, exigir keyid coherente, y gatear los dos caminos de git que quedaron sin exit-code",
             "type": "infra"
         },

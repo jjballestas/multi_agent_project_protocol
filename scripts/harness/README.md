@@ -149,7 +149,11 @@ preserve old behavior:
   It never runs `git reset --hard` and never snapshots or re-applies a worktree patch, so
   concurrent tracked content remains byte-for-byte untouched. Newly created untracked files
   are moved, never deleted, into `.protocol-tmp/rollback-quarantine/`; every move has isolated
-  error handling. `Area_comun/mailbox/**` and the other ledger-managed routes recognized by
+  error handling and emits `ROLLBACK_QUARANTINED path=<original> quarantine_path=<stored>`
+  after success. The quarantine is retained for 30 days. Only the human operator or Arquitecto
+  may remove an entry, during an explicit maintenance checkpoint and only after confirming that
+  its contents have been recovered or are no longer needed; the peer loop never deletes it.
+  `Area_comun/mailbox/**` and the other ledger-managed routes recognized by
   `Test-LedgerManagedPath` are never quarantined. Untracked enumeration is exit-code gated
   before any move. Ledger advancement is decided only by the shared exact event-log head
   primitive (`seq` plus last-line SHA-256), checked before the exec and before restoration.

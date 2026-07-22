@@ -51,6 +51,13 @@ FALSIFICATION_CONTRACTS = (
         "exercised_by": "run_nondestructive_rollback_contract",
     },
     {
+        "id": "retry-quarantine-success-log",
+        "negative": "an aborted exec preserves untracked residue and logs both recovery paths",
+        "mutation": "body.replace('Write-Log \"ROLLBACK_QUARANTINED path=$path quarantine_path=$quarantineRelative\"', \"\", 1)",
+        "boundaries": ('"ROLLBACK_QUARANTINED path=$path quarantine_path=$quarantineRelative" in text', "assert not survivors"),
+        "exercised_by": "run_nondestructive_rollback_contract",
+    },
+    {
         "id": "retry-terminal-defer",
         "negative": "an exhausted defer is terminal",
         "mutation": 'text.replace("exhausted = $terminal", "exhausted = $false", 1)',
@@ -88,22 +95,22 @@ FALSIFICATION_CONTRACTS = (
     {
         "id": "retry-useful-own-evidence",
         "negative": "pure claims, including claims carrying commit metadata, do not confirm",
-        "mutation": 'body.replace("if (-not $hasUsefulIntent) { continue }", "$hasCommit = -not [string]::IsNullOrWhiteSpace([string]$event.payload.commit)\\n        if (-not ($hasUsefulIntent -or $hasCommit)) { continue }", 1)',
-        "boundaries": ('"pure_claim": False', '"task_status": True'),
+        "mutation": "commit_proxy_mutant = body.replace(",
+        "boundaries": ('assert mutant_result["claim_with_commit"] is True', 'assert mutant_result["task_status"] is True'),
         "exercised_by": "run_useful_own_evidence_cases",
     },
     {
         "id": "retry-preexec-untracked-exit-gate",
         "negative": "pre-exec untracked enumeration failure defers launch",
-        "mutation": 'text.replace("if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason \\"untracked_snapshot_failed\\"; return }", "", 1)',
-        "boundaries": ('"untracked_snapshot_failed" in candidate', 'assert not survivors'),
+        "mutation": "text.replace('if ($LASTEXITCODE -ne 0) { Register-PreExecDefer -Message $Message -Reason \"untracked_snapshot_failed\"; return }', \"\", 1)",
+        "boundaries": ('\'Reason "untracked_snapshot_failed"\' in candidate', 'assert not survivors'),
         "exercised_by": "run_git_gate_contract_mutants",
     },
     {
         "id": "retry-apply-fail-visible",
         "negative": "failed index reapply emits APPLY_FAIL",
-        "mutation": 'text.replace("Write-Log \\"APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE\\"", "", 1)',
-        "boundaries": ('"APPLY_FAIL" in apply_body', 'assert not survivors'),
+        "mutation": "apply_body.replace('Write-Log \"APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE\"', \"\", 1)",
+        "boundaries": ('\'Write-Log "APPLY_FAIL index=$Index patch=$PatchPath exit=$LASTEXITCODE"\' in candidate_apply', 'assert not survivors'),
         "exercised_by": "run_git_gate_contract_mutants",
     },
     {
@@ -217,7 +224,7 @@ def run_torn_tail_case(sandbox: Path) -> None:
 
 def run_nondestructive_rollback_contract() -> None:
     """Kill declared rollback-policy mutants before exercising the real loop.
-    PERMANENT_NEGATIVE: retry-destructive-reset, retry-worktree-reapply, retry-mailbox-allowlist, retry-index-exit-gate, retry-untracked-exit-gate
+    PERMANENT_NEGATIVE: retry-destructive-reset, retry-worktree-reapply, retry-mailbox-allowlist, retry-index-exit-gate, retry-untracked-exit-gate, retry-quarantine-success-log
     """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     restore = re.search(r"(?ms)^function Restore-TransientExecResidue \{.*?^\}", runner_text)
@@ -243,6 +250,7 @@ def run_nondestructive_rollback_contract() -> None:
                 "Test-LedgerManagedPath -Path $path" in text,
                 ".protocol-tmp\\rollback-quarantine" in text,
                 "Move-Item -LiteralPath $full -Destination $destination -ErrorAction Stop" in text,
+                "ROLLBACK_QUARANTINED path=$path quarantine_path=$quarantineRelative" in text,
                 "reason=quarantine_move_failed" in text,
             )
         )
@@ -254,6 +262,7 @@ def run_nondestructive_rollback_contract() -> None:
         "mailbox_allowlist_removed": body.replace("if (Test-LedgerManagedPath -Path $path) { continue }", ""),
         "index_exit_gate_removed": body.replace('if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=index_restore_failed"; return }', ""),
         "untracked_exit_gate_removed": body.replace('if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=untracked_enumeration_failed"; return }', ""),
+        "quarantine_success_log_removed": body.replace('Write-Log "ROLLBACK_QUARANTINED path=$path quarantine_path=$quarantineRelative"', "", 1),
     }
     survivors = [name for name, mutant in mutants.items() if contract(mutant)]
     assert not survivors, f"rollback contract failed to kill declared mutants: {survivors}"
@@ -955,6 +964,10 @@ def main() -> int:
         quarantined = list((sandbox / ".protocol-tmp/rollback-quarantine").glob("*/residue.txt"))
         assert len(quarantined) == 1 and quarantined[0].read_text(encoding="ascii").strip() == "residue", (
             f"aborted exec residue was not preserved in quarantine; found={quarantined!r}; log={log}"
+        )
+        quarantine_relative = quarantined[0].relative_to(sandbox).as_posix()
+        assert f"ROLLBACK_QUARANTINED path=residue.txt quarantine_path={quarantine_relative}" in log, (
+            f"successful quarantine did not log both recovery paths; log={log}"
         )
         assert (sandbox / "Area_comun/tasks/TASK-residue.md").exists(), "ambiguous residue beside signed events was destroyed"
         assert (sandbox / "Area_comun/mailbox/open/MSG-window.md").read_text(encoding="ascii").strip() == "incoming", (

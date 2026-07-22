@@ -730,7 +730,8 @@ function Restore-TransientExecResidue {
     $beforeUntracked = @{}; foreach ($path in $UntrackedBefore) { $beforeUntracked[$path] = $true }
     $createdRaw = @(& git -C $Root ls-files --others --exclude-standard -z 2>$null) -join ""
     if ($LASTEXITCODE -ne 0) { Write-Log "ROLLBACK_DEFER reason=untracked_enumeration_failed"; return }
-    $quarantineRoot = Join-Path $Root ".protocol-tmp\rollback-quarantine\$([DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfffffffZ'))"
+    $quarantineId = [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssfffffffZ')
+    $quarantineRoot = Join-Path $Root ".protocol-tmp\rollback-quarantine\$quarantineId"
     foreach ($path in @($createdRaw -split [char]0 | Where-Object { $_ -and -not $beforeUntracked.ContainsKey($_) })) {
         if (Test-LedgerManagedPath -Path $path) { continue }
         $full = Join-Path $Root $path
@@ -740,6 +741,8 @@ function Restore-TransientExecResidue {
             $parent = Split-Path -Parent $destination
             New-Item -ItemType Directory -Path $parent -Force | Out-Null
             Move-Item -LiteralPath $full -Destination $destination -ErrorAction Stop
+            $quarantineRelative = ".protocol-tmp/rollback-quarantine/$quarantineId/$($path.Replace('\', '/'))"
+            Write-Log "ROLLBACK_QUARANTINED path=$path quarantine_path=$quarantineRelative"
         } catch { Write-Log "ROLLBACK_DEFER reason=quarantine_move_failed path=$path" }
     }
 }

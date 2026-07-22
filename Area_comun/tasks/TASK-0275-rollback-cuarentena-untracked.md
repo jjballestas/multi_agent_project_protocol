@@ -2,7 +2,7 @@
 task_id: TASK-0275
 title: "[HARNESS] Cuarentena en vez de borrado: el rollback de un exec abortado no puede destruir en silencio lo que un peer escribio durante la ventana"
 type: infra
-status: ready
+status: in_progress
 owner: Codex
 phase: P2
 priority: high
@@ -54,6 +54,14 @@ Razon de fondo, es la misma clase de dano que acabamos de cerrar en la iteracion
 rollback que destruye contenido que no era suyo. Alli era contenido staged de un peer,
 aqui es un fichero sin trackear. La diferencia es que este ni siquiera tiene copia en git.
 El coste de la mitigacion es mover en vez de borrar, y una linea de log.
+
+## Alcance reducido ratificado (2026-07-22)
+
+TASK-0282 ya entrego y desplego el movimiento recuperable con allowlist gobernada. Esta
+unidad conserva solo el residual: log de ruta original y ruta de cuarentena tras cada move
+exitoso, politica de retencion de 30 dias bajo limpieza manual de operador o Arquitecto en
+un checkpoint explicito, y negativo permanente con mutacion demostrada. El loop nunca
+elimina automaticamente la cuarentena. No se redespliega el harness vivo en esta tarea.
 
 ## ELEVADA A PRIORIDAD ALTA (2026-07-20 20:45)
 
