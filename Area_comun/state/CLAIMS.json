@@ -94,9 +94,37 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T00:32:33Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0284",
             "updated_at": "2026-07-22T00:32:33Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-banco-handoff",
+            "expires_at": "2026-07-22T01:39:19Z",
+            "notes": "Publish TASK-0284 behavioral test-bank remediation handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-banco-handoff",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md"
+            ],
+            "started_at": "2026-07-22T00:39:19Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:39:19Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0284-banco-msgfix",
+            "expires_at": "2026-07-22T01:41:48Z",
+            "notes": "Add validator-required question to TASK-0284 bank handoff.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0284-banco-msgfix",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco.md"
+            ],
+            "started_at": "2026-07-22T00:41:48Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T00:41:48Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0284-handoff",
