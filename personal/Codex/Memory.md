@@ -3996,3 +3996,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Behavior tests exercise every surviving sensor through `validate_turn` with schema-valid reports and mutation controls; `TASK-0259-codex-0042` remains a clean first attempt. Gate-red is post-gate and belongs to TASK-0286 under DECISION-0103 E7.
 - TASK-0259 is `in_progress` under `CLAIM-20260722-Codex-TASK-0259-remediation-2`; next action is commit the memory checkpoint, then deliver to `in_review`, release the claim, and send an ASCII handoff for independent review.
 - Delivery commit `d185c1d` moves TASK-0259 to `in_review`, releases both iteration-2 claims, and opens `MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-2.md`. Arquitecto must route implementation commit `03f9b9a` to Analista; Codex has not self-reviewed or ratified it.
+
+## 2026-07-22 - TASK-0259 remediation iteration 3
+
+- Commit `7c7bc1c` mechanically re-synchronizes the falsification guardian: the permanent-negative marker names the five split friction contracts plus the retained delivery contract, and every mutation/boundary declaration now matches literal executable text in `main()`.
+- `runtime/turn_validate.py` was not touched. All eight requested gates exited 0, including the falsification inventory and mutation guardian.
+- TASK-0259 is `in_progress` under `CLAIM-20260722-Codex-TASK-0259-remediation-3`; next action is delivery to `in_review`, claim release, and a complete ASCII handoff requesting independent review.
