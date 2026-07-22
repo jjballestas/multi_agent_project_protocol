@@ -2,6 +2,23 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 
+## 2026-07-22 - TASK-0261 remediation iteration 1
+
+- Commit `f1d9c30` makes `parse_mailbox_obstacles` accept YAML list markers at any
+  indentation while requiring fields and continuations to be deeper than the item.
+- The mailbox report runner now exercises all four friction/obstacle quadrants in
+  both frontmatter and body with indented lists, plus malformed indented controls;
+  all 17 behavioral cases pass.
+- TASK-0261 is `in_progress` under
+  `CLAIM-20260722-Codex-TASK-0261-remediation-1`. Canonical validation, encoding,
+  neutrality, diff, and drift gates passed before the implementation commit. Next
+  action is governed delivery to `in_review`, claim release, and an ASCII handoff
+  requesting independent re-review.
+- Runtime delivery was recorded in commit `0c301d5`: TASK-0261 is `in_review`, both
+  remediation claims are released, and drift is false at seq 5979. Commit `2ccd822`
+  publishes the self-contained handoff to Arquitecto, requesting independent Analista
+  re-review of implementation commit `f1d9c30`. Codex did not self-review or ratify.
+
 ## 2026-07-22 - TASK-0260 closure and TASK-0261 implementation
 
 - Commit `3e5cb84` records the Codex-signed TASK-0260 `review_approved -> done` flip
