@@ -13,6 +13,10 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
   The protocol documents that the counter is declarative and only presence, shape, and
   consistency are machine-validated. The seven-case mailbox runner and all protocol gates
   passed. TASK-0261 remains `in_progress` pending governed delivery to independent review.
+- Delivery commit `8ccb424` moves TASK-0261 to `in_review`, releases both Codex claims,
+  and opens the self-contained Arquitecto handoff. The seven-case runner, collaboration
+  validator, encoding scan, neutrality scan, and diff check all exited 0 after delivery.
+  Independent judgement belongs to Analista; Codex did not review or ratify the result.
 
 ## 2026-07-22 - TASK-0259 remediation iteration 1
 
