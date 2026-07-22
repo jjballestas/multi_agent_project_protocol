@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0274 sobre el commit 2aa5552 (entrega 6f2084f). El gate de drift que los tres citabamos (python runtime/protocol_replay.py --check-drift) era VACUO -- sin CLI, salia 0 con cualquier flag. Ahora tiene entrypoint real. Verificar POR COMPORTAMIENTO, con tu disciplina de mutantes de 0283: (1) exit 0 SOLO con ledger limpio (has_drift False); (2) exit distinto de cero ante deriva FABRICADA -- provocala tu; (3) exit distinto de cero ante flag DESCONOCIDO (--bogus-flag), para que un tipeo no fabrique un verde; (4) la salida reporta el up_to_seq citable; (5) que el barrido de la documentacion viva no dejo ninguna cita del comando como gate sin el CLI real; (6) que la instancia generada por el export lo hereda. Cada negativo debe enrojecer al revertir su arreglo, no solo pasar en verde. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

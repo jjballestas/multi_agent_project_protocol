@@ -117,7 +117,7 @@
         {
             "id": "TASK-0274",
             "owner": "Codex",
-            "status": "in_review",
+            "status": "in_progress",
             "title": "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
         },
         {
