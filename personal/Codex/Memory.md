@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 implementation.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 remediation.
+
+- TASK-0276 remediation commit `6eb57c9` removes `payload.commit` as an own-evidence
+  discriminator. Only applied, coherently signed task_status/task_upsert/decision events
+  confirm useful work. The permanent behavioral negative proves a pure claim carrying
+  commit metadata remains false and that reintroducing the commit-proxy branch makes it
+  true, while task_status remains a positive. The full mailbox retry suite and protocol
+  gates passed; delivery to in_review and independent Analista re-review remain pending.
 
 - TASK-0276 implementation commit `18ce287` makes own-evidence confirmation require
   an applied event, an Ed25519 keyid whose prefix matches the actor, and useful work:
