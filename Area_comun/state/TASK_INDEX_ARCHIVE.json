@@ -7566,6 +7566,42 @@
             "status": "done",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola",
             "type": "infra"
+        },
+        {
+            "created_at": "2026-07-19",
+            "file": "Area_comun/tasks/TASK-0259-d0103-c3-turn-validate-obstacles-condicional.md",
+            "id": "TASK-0259",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][C3] Validacion condicional en turn_validate: obstacles obligatorio si hubo friccion (gate_green false / attempt>1 / revert)",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-19",
+            "file": "Area_comun/tasks/TASK-0260-d0103-c1-vista-plan-gate-aprobacion-turno0.md",
+            "id": "TASK-0260",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "normal",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator",
+            "type": "feature"
+        },
+        {
+            "created_at": "2026-07-22",
+            "file": "Area_comun/tasks/TASK-0285-instanciacion-runner-ledger-head.md",
+            "id": "TASK-0285",
+            "owner": "Codex",
+            "phase": "P2",
+            "priority": "medium",
+            "reviewer": "Analista",
+            "status": "done",
+            "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo",
+            "type": "fix"
         }
     ]
 }

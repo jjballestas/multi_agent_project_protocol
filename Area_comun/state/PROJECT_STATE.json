@@ -67,18 +67,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0259",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C3] Validacion condicional en turn_validate: obstacles obligatorio si hubo friccion (gate_green false / attempt>1 / revert)"
-        },
-        {
-            "id": "TASK-0260",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[DECISION-0103][C1] Vista de plan del conjunto (--plan-all / render de TASK_INDEX) + gate de aprobacion de turno 0 en el orchestrator"
-        },
-        {
             "id": "TASK-0261",
             "owner": "Codex",
             "status": "in_review",
@@ -113,12 +101,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[DECISION-0103][C5/E4-E5] Propagacion del harness: .githooks/** adoptable en upgrade_instance + cableado core.hooksPath en new_instance"
-        },
-        {
-            "id": "TASK-0285",
-            "owner": "Codex",
-            "status": "done",
-            "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo"
         },
         {
             "id": "TASK-0286",
