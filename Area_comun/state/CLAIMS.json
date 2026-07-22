@@ -290,9 +290,28 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T20:25:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0261",
             "updated_at": "2026-07-22T20:25:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0261-delivery",
+            "expires_at": "2026-07-22T21:31:00Z",
+            "notes": "Publish the self-contained TASK-0261 handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0261-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0261",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0261",
+                "Area_comun/tasks/TASK-0261-d0103-c3c4-validate-mailbox-reporte-obstacles.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0261.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T20:31:00Z",
+            "status": "released",
+            "task_id": "TASK-0261",
+            "updated_at": "2026-07-22T20:31:00Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0285-done-flip",
