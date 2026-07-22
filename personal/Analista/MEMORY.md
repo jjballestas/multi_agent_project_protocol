@@ -3745,3 +3745,43 @@ trailers Task-Id/Ops-Reason/Co-Authored-By, push OK a origin/main. Fix loop cerr
 ledger real) fue la que forzo el fix correcto -- el maker paso de "commit => entrega" a
 "solo intent_type util => entrega". El re-juicio por comportamiento + la mutacion de fuente
 en clon limpio es lo que da el GO defendible.
+
+---
+
+## TASK-0275 (residual de cuarentena) - GO / OK-CLOSABLE (2026-07-22 17:39)
+
+REVIEW del Arquitecto: residual REDUCIDO de la cuarentena (el mecanismo mover-en-vez-de-borrar
+ya se entrego en TASK-0282). Commit citado 81fe270; HEAD canonico c6b1af5. Verifique que runner
++ harness + README son BYTE-IDENTICOS entre ambos (sha256 del runner igual, diff vacio), asi que
+corri comportamiento contra codigo == citado y protocolo contra HEAD. Clon limpio D:/ccv-0275.
+
+Tres puntos, todos PASS por comportamiento:
+1. Log EN EXITO: peer_mailbox_cron.ps1:745 emite `ROLLBACK_QUARANTINED path=$path
+   quarantine_path=$quarantineRelative` DENTRO del foreach tras Move-Item exitoso (por fichero,
+   no solo el primero). E2E run_mailbox_retry_cases.py:938-971 reproduce residue.txt (untracked
+   de peer nacido en la ventana, count==2), aborta, exige el log + el fichero en
+   .protocol-tmp/rollback-quarantine/<id>/. Familia completa: mailbox de la ventana NO se pone
+   en cuarentena (allowlist Test-LedgerManagedPath).
+2. Retencion: README:149-155 = 30d, limpieza manual operador/Arquitecto, loop nunca auto-borra.
+   grep confirma NINGUN camino borra la cuarentena. AbortedResidueMinutes es cutoff del residuo
+   staged, NO GC de cuarentena. Coincide con acceptance reducida (task 62-64).
+3. Negativo permanente: DOS mutaciones mias en clon limpio. A) borrar el log -> ROJO en contrato
+   estatico (run_nondestructive_rollback_contract linea 258). B) dejar el string EXACTO pero
+   guardarlo con `if($false){...}` -> contrato estatico PASA pero E2E ROJO en linea 969
+   ("successful quarantine did not log both recovery paths"). Prueba que el E2E es el diente real,
+   no una prueba por-nombre/por-presencia-de-string.
+
+**LECCION reutilizable:** cuando un contrato de mutacion es SOLO string-presence, la mutacion B
+(mantener el string y neutralizar el comportamiento con if($false)/guard) distingue si el E2E
+mide comportamiento o solo mide su propia sombra. Aqui las DOS capas cazan la regresion -> GO
+defendible. (Contrasta con 0284, donde 2 de 5 negativos SOLO median su sombra -> CHANGE-REQUIRED.)
+
+Residual declarado R1 (no bloqueante): la retencion es documental/gobernanza, NO maquinal; la
+cuarentena crece sin cota hasta limpieza humana -- exactamente lo ratificado (el loop no debe
+auto-borrar para no re-introducir destruccion silenciosa).
+
+Gates: validate/encoding/neutrality exit 0, arbol tracked del clon limpio == HEAD (drift limpio),
+suite del reintento PASS. Artifact Analista-TASK-0275-cuarentena-residual-verdict.md + msg
+MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0275-verdict.md (requires_response, owner
+Arquitecto). Commit 059c1d4 pathspec explicito + trailers, push OK. El flip a done es del
+Arquitecto (yo checker-only). Sigue 0285 (runner instanciacion) y luego el nucleo 0103.
