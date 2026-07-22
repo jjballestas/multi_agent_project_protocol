@@ -1,6 +1,13 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0274 implementation.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0274 flag remediation.
+
+- TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
+  `--check-drift --bogus-flag` to the permanent replay suite without changing production
+  code. The canonical suite remains green (9/9); in a disposable clone, replacing strict
+  `parse_args` with `parse_known_args` makes `case_cli_is_a_real_aborting_gate` fail and
+  the suite exit 1. TASK-0274 remains `in_progress` until the remediation handoff returns
+  it to independent review and releases the maker claims.
 
 - TASK-0274 implementation commit `2aa5552` gives
   `runtime/protocol_replay.py --check-drift` a real CLI: clean state exits 0,
@@ -10,7 +17,9 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0274 implementation.
   handoff template, and remote onboarding runbook state the exit-code contract;
   runtime-tier instancing copies the complete runtime directory and inherits it.
   TASK-0279 was also flipped to `done` after independent GO and Arquitecto
-  ratification. TASK-0274 awaits delivery to independent Analista review.
+  ratification. Delivery commit `6f2084f` moves TASK-0274 to `in_review`, releases
+  all maker claims through signed seq 5696, and opens the self-contained handoff
+  for independent Analista review. Codex did not review or ratify the work.
 
 - TASK-0279 implementation commit `15fe9c8` adds the aborting `commit-msg` trailer
   gate while leaving the staged-snapshot `pre-commit` unchanged. The bounded checker
