@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion TEST-ONLY de TASK-0274, maximo 2 iteraciones. El CODIGO del gate esta bien -- el checker verifico 6/6 vectores con dientes. El bloqueo es que el negativo permanente del FLAG DESCONOCIDO no puede fallar: al revertir la estrictez de argparse (MutC), la suite se queda VERDE, asi que ese test mide su propia sombra, el mismo anti-patron que esta unidad erradica. Fix: en el caso case_cli_is_a_real_aborting_gate anadir una corrida que AISLE el rechazo del flag desconocido -- ejecutar `python runtime/protocol_replay.py --check-drift --bogus-flag` (o el mal-escrito --check-drfit) y `assert returncode != 0` -- de modo que la suite quede ROJA si se reemplaza parse_args estricto por parse_known_args. No toques el codigo del gate. Cada aporte con su control positivo demostrado (0283). Entregar in_review + handoff + release."

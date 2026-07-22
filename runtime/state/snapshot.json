@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "a8d812546abad7638c110111aaadb51701f93b917b625b8bb5a3bc4f901a5b66",
+  "canonical_hash": "8323d10456962258124543c66c084f8c4234decc04da90b69c6a6288256e6e9b",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -866,6 +866,7 @@
       "CLAIM-arq-reflip0257-b-20260719": 1,
       "CLAIM-arq-registro0272-20260720": 1,
       "CLAIM-arq-registro0273-20260720": 1,
+      "CLAIM-arq-rej0274-20260722": 1,
       "CLAIM-arq-rejbanco0284-20260722": 1,
       "CLAIM-arq-reject0257-20260719": 1,
       "CLAIM-arq-reject0257-iter2-20260719": 1,
@@ -2014,6 +2015,7 @@
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0279-y-GO-0274": 1,
@@ -2021,6 +2023,7 @@
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284": 1,
       "MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0279": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
@@ -2309,7 +2312,7 @@
       "TASK-0271": 25,
       "TASK-0272": 30,
       "TASK-0273": 14,
-      "TASK-0274": 21,
+      "TASK-0274": 22,
       "TASK-0275": 3,
       "TASK-0276": 1,
       "TASK-0277": 19,
@@ -2343,7 +2346,7 @@
       "protocol-prune": 20,
       "protocol-state": 1
     },
-    "events_applied": 5043,
+    "events_applied": 5047,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2762,6 +2765,10 @@
       "arq:ratifica0272:arch2:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5350,
       "arq:ratifica0272:release:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5351,
       "arq:ratifica0272:status:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5346,
+      "arq:rej0274:acquire:c820c822-d20b-4062-82ff-dda641021269": 5715,
+      "arq:rej0274:arch1:c820c822-d20b-4062-82ff-dda641021269": 5716,
+      "arq:rej0274:arch2:c820c822-d20b-4062-82ff-dda641021269": 5717,
+      "arq:rej0274:release:c820c822-d20b-4062-82ff-dda641021269": 5718,
       "arq:rejb0284:acquire:dc3661bc-daef-4f14-86ab-badaf19cb762": 5638,
       "arq:rejb0284:arch1:dc3661bc-daef-4f14-86ab-badaf19cb762": 5639,
       "arq:rejb0284:arch2:dc3661bc-daef-4f14-86ab-badaf19cb762": 5640,
@@ -7390,5 +7397,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5714
+  "up_to_seq": 5718
 }
