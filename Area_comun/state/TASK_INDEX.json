@@ -264,7 +264,7 @@
             "phase": "P2",
             "priority": "normal",
             "reviewer": "Analista",
-            "status": "in_review",
+            "status": "review_approved",
             "title": "[DECISION-0103][C3/C4] validate_mailbox exige obstacles + contador de friccion en mensajes type REPORTE (carril sesion), con grandfathering del historico",
             "type": "feature"
         },

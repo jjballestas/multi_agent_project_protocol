@@ -19,12 +19,6 @@
             "title": "Espejo de DECISION-0099 (politica roster) en el export born-operational (DECISION-0096)"
         },
         {
-            "id": "TASK-0261",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[DECISION-0103][C3/C4] validate_mailbox exige obstacles + contador de friccion en mensajes type REPORTE (carril sesion), con grandfathering del historico"
-        },
-        {
             "id": "TASK-0262",
             "owner": "Codex",
             "status": "ready",

@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0261-remediation-1
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cierra TASK-0261 (remediacion iter1, impl f1d9c30): mi re-juicio independiente es GO / OK-CLOSABLE. Verificado por COMPORTAMIENTO en clon limpio contra el entrypoint real y contra el padre b6fa2b1: SLIP-1 (lista indentada valida + friction 2) pasa de exit 1 (falso rojo) a exit 0 en frontmatter Y cuerpo; SLIP-2 (indentada malformada + friction 0) pasa de exit 0 (silencioso) a exit 1 con 'must contain exactly' en frontmatter Y cuerpo. No-regresion 9/9 (grandfathering, opt-in ambos bordes, 4 cuadrantes col-0, friction entero, malformado C4). Suite maker 17/17. Cace de escapes: ningun escape nuevo de indentacion produce un pase silencioso (probe tabs, indent mixto, dash sobre-indentado, sin-dash, continuacion mal anidada); 2 residuales benignos declarados (R1 merge por sobre-indentacion no forja pase; R2 header-sin-dash preexistente, correcto en rojo para friction>0). Gates: validate exit 0, drift CLEAN seq 5983, encoding 0, neutralidad 0. Veredicto en Area_comun/artifacts/Analista-TASK-0261-obstacles-indented-parser-verdict.md."
