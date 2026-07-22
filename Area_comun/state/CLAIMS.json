@@ -419,6 +419,27 @@
             "updated_at": "2026-07-22T11:21:02Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0283-20260722",
+            "expires_at": "2026-07-22T12:43:44Z",
+            "notes": "Remediacion de 0283 (denominador independiente) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0283-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad.md"
+            ],
+            "started_at": "2026-07-22T12:23:44Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:23:44Z"
+        },
+        {
             "claim_id": "CLAIM-arq-resp0279-20260722",
             "expires_at": "2026-07-22T10:24:37Z",
             "notes": "RESP autorizando commit-msg para 0279 + correccion de acceptance + higiene",

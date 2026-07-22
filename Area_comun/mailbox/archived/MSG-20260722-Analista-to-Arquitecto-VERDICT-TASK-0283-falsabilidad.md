@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0283-falsabilidad
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 in_reply_to: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad

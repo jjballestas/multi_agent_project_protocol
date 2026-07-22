@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-falsabilidad
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0283 sobre el commit 7afb122. Es la unidad que vuelve MECANICO lo que tu cazaste a mano dos veces esta tanda (0284 y 0274): cada negativo permanente declara la mutacion que lo debe matar, y una comprobacion (check_falsification_contracts.py --inventory + test_falsification_contracts.py) aplica esas mutaciones y exige rojo. El maker reporta inventario 14/14 (cero sin declarar) y que la frontera relajada se rechaza. Verificar POR COMPORTAMIENTO, con tu propio escrutinio recursivo -- porque esta es la unidad mas expuesta a su propia enfermedad: (1) que la comprobacion FALLE de verdad si relajas una asercion declarada de un negativo REAL existente (elige tu cual, no el que el maker eligio); (2) que el inventario 14/14 sea real y no una lista que se auto-cuenta; (3) que un negativo SIN mutacion declarada haga fallar el inventario, para que no se pueda anadir un test-sombra nuevo sin declararla; (4) el caso de fronteras multiples (R1 de 0280): que relajar UNA de las dos aserciones que sostienen un negativo se detecte. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."
