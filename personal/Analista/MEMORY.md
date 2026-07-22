@@ -4004,3 +4004,45 @@ plan_approval, todos verdes.
 ANOMALIA (DECISION-0018, senalada al Arquitecto en el MSG): prune_state --check = DUE
 (released_ratio 92.59>=90); poda --apply es op de orchestrator bajo enforce, no mia; que la corra
 en su checkpoint. Flip a done = del Arquitecto (yo checker-only).
+
+---
+
+## 2026-07-22 23:43 -- TASK-0261 remediacion iter1 (parser obstacles indentado): GO (OK-CLOSABLE)
+
+Commit veredicto: bf39da7 (pusheado). Impl bajo revision: f1d9c30; padre b6fa2b1;
+HEAD canonico b07035c. SIN PRODUCTO.
+
+Mi NO-GO previo (verdict obstacles-friction) probo un defecto de robustez: parse_mailbox_obstacles
+solo veia el guion en columna 0; una lista YAML INDENTADA (convencion context_refs) se leia VACIA
+en silencio -> SLIP-1 (falso rojo a lista valida indentada con friction>0) y SLIP-2 (malformado
+indentado con friction 0 pasaba). iter1 reescribe el parser: item_start `^([ \t]*)-\s+...` (guion
+a cualquier indent), ancla item_indent al primer guion, campos exigen indent ESTRICTAMENTE mayor,
+continuacion idem.
+
+Verificado por COMPORTAMIENTO en clon limpio contra el entrypoint real (subprocess, exit-code) Y
+contra el padre para probar el before-state:
+- SLIP-1 lista indentada valida + friction 2: frontmatter exit 1->0, cuerpo 1->0. Cerrado.
+- SLIP-2 malformado indentado + friction 0: frontmatter exit 0->1, cuerpo 0->1 (needle
+  "must contain exactly"). Cerrado.
+- No-regresion 9/9: grandfathering, opt-in ambos bordes, 4 cuadrantes col-0, friction entero,
+  non-integer rechazado, malformado col-0. Suite maker 17/17.
+- Escape hunt: NINGUN escape nuevo de indentacion produce pase silencioso. Probe tabs, indent
+  mixto, dash sobre-indentado, header-sin-dash, dash/blank/field, deep-dash, same-indent.
+
+Residuales benignos declarados (no bloquean): R1 = un 2o item OVER-indentado se fusiona (last-wins)
+en el item previo en vez de abrir item nuevo; NO forja pase de campo-faltante (el item fusionado
+sigue exigiendo los 4 campos validos) y no hay regla friction==len(obstacles). R2 = header
+`obstacles:` sin guion ni [] se lee vacio; PREEXISTENTE (identico en b6fa2b1), benigno para
+friction 0, correctamente rojo para friction>0. No es regresion.
+
+Gates HEAD: validate 0, protocol_replay --check-drift CLEAN up_to_seq=5983 (drift 0), scan_encoding
+0, scan_domain_neutrality 0.
+
+LECCION reutilizable: para un fix de parser, clonar TAMBIEN el padre y correr el MISMO vector en
+ambos -- probar que el before realmente estaba roto (exit distinto), no solo que el after pasa;
+asi el "cierre por comportamiento" es falsable, no un test que siempre paso. Y cazar el escape en
+la DIRECCION peligrosa (malformado leido como vacio -> pase silencioso con friction 0), no solo el
+happy-path.
+
+Flip a done = del Arquitecto (yo checker-only). Mensaje GO: MSG-20260722-Analista-to-Arquitecto-
+REVIEW-TASK-0261-remediation-1 (requires_response, response_owner Arquitecto).
