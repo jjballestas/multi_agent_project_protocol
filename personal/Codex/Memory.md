@@ -3827,3 +3827,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 
 - Commit `942419d` records the Codex-signed, claim-scoped handoff hash correction after the trailer gate replaced implementation commit `11ed6e3` with canonical commit `04ec9d1`.
 - TASK-0284 is `in_review`; both implementation and handoff correction claims are released. The open handoff requests Arquitecto route `04ec9d1` to Analista and keep live redeployment gated.
+
+## 2026-07-22 - TASK-0284 test-bank remediation
+
+- Commit `947c6f5` changes only `examples/mailbox_retry_cases/run_mailbox_retry_cases.py` plus the Codex claim ledger. It replaces three string-contract mutants with behavioral controls: a real deleted tracked path reaches `EXEC_START` after first-seen aging and the first-seen mutant terminally defers; a fake git emits 128 KiB stderr and concurrent drain finishes without an orphan lock while sequential drain hangs and leaves the lock; an expired claim reads inactive while the expiry-filter mutant reads active.
+- The mailbox retry suite passed with all three mutation controls exercised. Canonical validation, encoding, and domain-neutrality gates exited 0. `scripts/harness/peer_mailbox_cron.ps1` was not changed or redeployed.
+- TASK-0284 remains `in_progress` under `CLAIM-20260722-Codex-TASK-0284-banco`; next action is delivery to `in_review`, release, and independent checker re-judgement.
