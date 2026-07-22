@@ -3989,3 +3989,9 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - The freshly exported positive cases pass their instance-local `prune_state.py --check` and all gates. `scripts/new_instance.py` already exported `ledger_head.py` in the born-operational gate inventory, so no exporter production-code change was required.
 - Next action: deliver TASK-0285 to `in_review`, release the claim, and send a self-contained handoff for independent Analista review. Do not redeploy the live harness.
 - Delivery commit `23e4179` moves TASK-0285 to `in_review`, releases implementation, delivery, and mailbox-fix claims, and opens `MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0285.md`. Arquitecto must route implementation commit `c18a503` to Analista; Codex has not self-reviewed or ratified it.
+
+## 2026-07-22 - TASK-0259 remediation iteration 2
+
+- Commit `03f9b9a` replaces unreachable gate/result and attempt-id friction inference with schema-valid authoritative transitions: friction statuses, review/QA events, and failed checks. The action-summary revert signal remains explicitly best-effort.
+- Behavior tests exercise every surviving sensor through `validate_turn` with schema-valid reports and mutation controls; `TASK-0259-codex-0042` remains a clean first attempt. Gate-red is post-gate and belongs to TASK-0286 under DECISION-0103 E7.
+- TASK-0259 is `in_progress` under `CLAIM-20260722-Codex-TASK-0259-remediation-2`; next action is commit the memory checkpoint, then deliver to `in_review`, release the claim, and send an ASCII handoff for independent review.
