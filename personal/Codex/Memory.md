@@ -2,6 +2,19 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 remediation.
 
+- TASK-0276 is `done` after independent Analista GO and Arquitecto ratification; Codex
+  applied the implementer-only flip in signed transaction seq 5837-5841. TASK-0275
+  implementation commit `81fe270` adds `ROLLBACK_QUARANTINED` success evidence with
+  original and stored paths, declares 30-day operator/Arquitecto checkpoint retention,
+  and adds a real-loop permanent negative whose logging mutant is killed. The generic
+  harness is changed but the live harness was not redeployed. TASK-0275 remains
+  `in_progress` pending its governed delivery transaction and review handoff.
+- TASK-0275 delivery commit `829d190` moves the task to `in_review`, releases both
+  maker claims through signed seq 5845-5847, answers the Arquitecto ACTION, and opens
+  `MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0275` for independent Analista review.
+  Validator, encoding, neutrality, mailbox retry E2E, falsification guardian, and
+  born-operational instancing tests passed. Codex did not self-review or ratify.
+
 - TASK-0276 remediation commit `6eb57c9` removes `payload.commit` as an own-evidence
   discriminator. Only applied, coherently signed task_status/task_upsert/decision events
   confirm useful work. The permanent behavioral negative proves a pure claim carrying
@@ -3942,3 +3955,10 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - Commit `825ac90` records TASK-0279 as `blocked`, releases both Codex claims, and asks Arquitecto one concrete question in `MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase.md`.
 - A real commit fixture proved `.githooks/pre-commit` sees stale `.git/COMMIT_EDITMSG`; Git does not provide the finalized pending message to that phase. The reliable abort point is `.githooks/commit-msg`, which receives the finalized message path and rejects before commit creation.
 - No hook implementation remains in the worktree. Resume only if Arquitecto authorizes `commit-msg` as the trailer gate; then restore TASK-0279 to `in_progress`, claim `.githooks/commit-msg` plus the helper/tests/export routes, and implement the born-operational mirror.
+
+## 2026-07-22 - TASK-0275 closure and TASK-0285 implementation
+
+- Commit `c18a503` records the Codex-signed TASK-0275 `review_approved -> done` flip and starts TASK-0285 under `CLAIM-20260722-Codex-TASK-0285`.
+- The runtime instantiation runner now asserts the requested tier for coordination and runtime exports. Permanent behavioral negatives delete exported `scripts/ledger_head.py` and mutate the generated tier declaration; both make the runner reject the fixture.
+- The freshly exported positive cases pass their instance-local `prune_state.py --check` and all gates. `scripts/new_instance.py` already exported `ledger_head.py` in the born-operational gate inventory, so no exporter production-code change was required.
+- Next action: deliver TASK-0285 to `in_review`, release the claim, and send a self-contained handoff for independent Analista review. Do not redeploy the live harness.
