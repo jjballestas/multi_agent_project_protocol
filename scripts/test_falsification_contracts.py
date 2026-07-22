@@ -30,7 +30,8 @@ def main() -> int:
         runner.write_text(
             "FALSIFICATION_CONTRACTS = ({'id':'NEG-1','negative':'n','mutation':'MUTATE',"
             "'boundaries':('ASSERT_OLD','ASSERT_NEW'),'exercised_by':'case_negative'},)\n"
-            "def case_negative():\n    candidate = 'MUTATE'\n    assert 'ASSERT_OLD'\n    assert 'ASSERT_NEW'\n",
+            "def case_negative():\n    '''PERMANENT_NEGATIVE: NEG-1'''\n"
+            "    candidate = 'MUTATE'\n    assert 'ASSERT_OLD'\n    assert 'ASSERT_NEW'\n",
             encoding="ascii",
         )
         valid = run(fixture)
@@ -39,7 +40,13 @@ def main() -> int:
         relaxed = run(fixture)
         assert relaxed.returncode != 0, relaxed.stdout + relaxed.stderr
         assert "assertion boundary not found" in relaxed.stdout, relaxed.stdout
-    print("OK: falsification contracts reject a relaxed declared assertion boundary")
+        with runner.open("a", encoding="ascii") as stream:
+            stream.write("\ndef shadow_negative():\n    '''PERMANENT_NEGATIVE: NEG-SHADOW'''\n    assert False\n")
+        undeclared = run(fixture)
+        assert undeclared.returncode != 0, undeclared.stdout + undeclared.stderr
+        assert "permanent_negatives=2 declared=1 missing=1" in undeclared.stdout, undeclared.stdout
+        assert "NEG-SHADOW" in undeclared.stdout, undeclared.stdout
+    print("OK: falsification contracts reject relaxed boundaries and undeclared permanent negatives")
     return 0
 
 

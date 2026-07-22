@@ -195,7 +195,9 @@ def run_torn_tail_case(sandbox: Path) -> None:
 
 
 def run_nondestructive_rollback_contract() -> None:
-    """Kill declared rollback-policy mutants before exercising the real loop."""
+    """Kill declared rollback-policy mutants before exercising the real loop.
+    PERMANENT_NEGATIVE: retry-destructive-reset, retry-worktree-reapply, retry-mailbox-allowlist, retry-index-exit-gate, retry-untracked-exit-gate
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     restore = re.search(r"(?ms)^function Restore-TransientExecResidue \{.*?^\}", runner_text)
     if not restore:
@@ -237,7 +239,9 @@ def run_nondestructive_rollback_contract() -> None:
 
 
 def run_pregate_contract_mutants() -> None:
-    """Kill the declared TASK-0284 pre-gate regressions at their control points."""
+    """Kill the declared TASK-0284 pre-gate regressions at their control points.
+    PERMANENT_NEGATIVE: retry-terminal-defer, retry-dirty-forensics
+    """
     text = RUNNER.read_text(encoding="utf-8-sig")
 
     def contract(candidate: str) -> bool:
@@ -268,7 +272,9 @@ def run_pregate_contract_mutants() -> None:
 
 
 def run_deleted_residue_real_loop_case() -> None:
-    """A real deleted path ages into EXEC_START; removing first-seen persistence blocks it."""
+    """A real deleted path ages into EXEC_START; removing first-seen persistence blocks it.
+    PERMANENT_NEGATIVE: retry-deleted-first-seen
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
 
     def exercise(candidate: str, expect_exec: bool) -> None:
@@ -328,7 +334,9 @@ def run_deleted_residue_real_loop_case() -> None:
 
 
 def run_large_stderr_drain_case(sandbox: Path) -> None:
-    """>64 KB stderr drains under the deadline; the sequential mutant deadlocks and leaves its lock."""
+    """>64 KB stderr drains under the deadline; the sequential mutant deadlocks and leaves its lock.
+    PERMANENT_NEGATIVE: retry-large-stderr-drain
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
     if not git_helper:
@@ -381,7 +389,9 @@ def run_large_stderr_drain_case(sandbox: Path) -> None:
 
 
 def run_expired_claim_behavior_case(sandbox: Path) -> None:
-    """An expired claim is inactive, and removing the expiry predicate changes behavior."""
+    """An expired claim is inactive, and removing the expiry predicate changes behavior.
+    PERMANENT_NEGATIVE: retry-expired-claim
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     read_json = re.search(r"(?ms)^function Read-JsonWithDeadline \{.*?^\}", runner_text)
     signal = re.search(r"(?ms)^function Get-AdditionalWorkSignal \{.*?^\}", runner_text)
@@ -412,7 +422,9 @@ def run_expired_claim_behavior_case(sandbox: Path) -> None:
 
 
 def run_pure_append_evidence_cases(sandbox: Path) -> None:
-    """Only a byte-identical prefix plus an appended own event may prove work."""
+    """Only a byte-identical prefix plus an appended own event may prove work.
+    PERMANENT_NEGATIVE: retry-pure-append-evidence
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     helpers = re.search(
         r"(?ms)^function Get-FilePrefixSha256 \{.*?^\}\r?\n\r?\nfunction Get-OwnEvidence \{.*?^\}",
@@ -447,7 +459,9 @@ def run_pure_append_evidence_cases(sandbox: Path) -> None:
 
 
 def run_nul_residue_path_cases(sandbox: Path) -> None:
-    """A stale non-ASCII residue must age; a console-codepage mutant must not."""
+    """A stale non-ASCII residue must age; a console-codepage mutant must not.
+    PERMANENT_NEGATIVE: retry-utf8-residue-path
+    """
     runner_text = RUNNER.read_text(encoding="utf-8-sig")
     git_helper = re.search(r"(?ms)^function Get-GitStatusPorcelainUtf8 \{.*?^\}", runner_text)
     residue_helper = re.search(r"(?ms)^function Get-StagedResidueState \{.*?^\}", runner_text)

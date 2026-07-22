@@ -73,6 +73,7 @@ CLAUDE_SKILLS_SOURCE_DIR = "scripts/instance_assets/claude-skills"
 GATE_SCRIPT_FILES = [
     "check_falsification_contracts.py",
     "falsification_contracts.py",
+    "test_falsification_contracts.py",
     "ledger_head.py",
     "check_commit_trailers.py",
     "validate_collaboration_state.py",
@@ -135,6 +136,9 @@ jobs:
 
       - name: Validate declared falsification contracts
         run: python scripts/check_falsification_contracts.py --root .
+
+      - name: Test falsification-contract guardian
+        run: python scripts/test_falsification_contracts.py
 
       - name: Validate protocol state with PowerShell
         shell: pwsh

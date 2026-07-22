@@ -319,6 +319,46 @@
             "updated_at": "2026-07-22T12:35:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator",
+            "expires_at": "2026-07-22T17:00:00Z",
+            "notes": "Add an independently discoverable negative-test denominator and guardian self-test for TASK-0283 remediation.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "scripts/check_falsification_contracts.py",
+                "scripts/test_falsification_contracts.py",
+                "scripts/new_instance.py",
+                "examples/runtime_instantiation_cases/run_runtime_instantiation_cases.py",
+                ".github/workflows/validate.yml",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:00:00Z",
+            "status": "active",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:00:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-denominator-runners",
+            "expires_at": "2026-07-22T17:00:00Z",
+            "notes": "Mark the independently discoverable permanent-negative universe in existing runner files.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-denominator-runners",
+                "examples/mailbox_retry_cases/run_mailbox_retry_cases.py",
+                "examples/runtime_protocol_replay_cases/run_runtime_protocol_replay_cases.py",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:35:00Z",
+            "status": "active",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:35:00Z"
+        },
+        {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",
             "expires_at": "2026-07-22T14:20:00Z",
             "notes": "Persist TASK-0283 implementation commit context.",

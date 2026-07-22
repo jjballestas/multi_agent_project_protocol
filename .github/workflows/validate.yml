@@ -39,6 +39,11 @@ jobs:
         shell: pwsh
         run: ./scripts/validate_collaboration_state.ps1 -Root examples/minimal_instance
 
+      - name: Validate falsification contracts and guardian controls
+        run: |
+          python scripts/check_falsification_contracts.py --root . --inventory
+          python scripts/test_falsification_contracts.py
+
       - name: Check human guide template HTML
         run: python scripts/generate_human_guide.py --root . --in Area_comun/protocol/HUMAN_GUIDE.template.md --out Area_comun/protocol/HUMAN_GUIDE.template.html --kind template --check
 

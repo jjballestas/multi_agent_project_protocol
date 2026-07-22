@@ -22,6 +22,7 @@ GATE_SCRIPTS = {
     "check_commit_trailers.py",
     "check_falsification_contracts.py",
     "falsification_contracts.py",
+    "test_falsification_contracts.py",
     "ledger_head.py",
     "validate_collaboration_state.py",
     "validate_collaboration_state.ps1",
@@ -123,9 +124,11 @@ def case_coordination_default_and_flag() -> None:
         for root in (default_root, explicit_root):
             config = load_config(root)
             assert config["adoption_tier"] == "coordination"
-            assert not (root / "runtime").exists()
-            assert not (root / "scripts").exists()
+            assert (root / "runtime" / "protocol_replay.py").exists()
+            assert {path.name for path in (root / "scripts").iterdir() if path.is_file()} == GATE_SCRIPTS
+            assert not (root / ".github" / "workflows" / "validate.yml").exists()
             validate_with_repo_tools(root)
+            validate_with_instance_tools(root)
         assert file_snapshot(default_root) == file_snapshot(explicit_root)
 
 

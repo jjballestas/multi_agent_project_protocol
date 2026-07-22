@@ -196,6 +196,7 @@ def case_drift_detected_and_absent() -> None:
 
 
 def case_cli_is_a_real_aborting_gate() -> None:
+    """PERMANENT_NEGATIVE: protocol-replay-drift-exit, protocol-replay-unknown-flag"""
     with root_temp_dir(ROOT, ".protocol-replay-cli-") as root:
         build_fixture(root, event_state_enabled=True, hot_status="ready")
         command = [sys.executable, str(ROOT / "runtime/protocol_replay.py"), "--check-drift", "--root", str(root)]
