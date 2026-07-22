@@ -95,12 +95,6 @@
             "owner": "Codex",
             "status": "ready",
             "title": "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
-        },
-        {
-            "id": "TASK-0284",
-            "owner": "Codex",
-            "status": "in_review",
-            "title": "[HARNESS] El pre-gate deja de adivinar por forense del arbol: senal autoritativa de quien trabaja, borrado que puede envejecer, y lectura de git que no se cuelga"
         }
     ],
     "next_actions": [

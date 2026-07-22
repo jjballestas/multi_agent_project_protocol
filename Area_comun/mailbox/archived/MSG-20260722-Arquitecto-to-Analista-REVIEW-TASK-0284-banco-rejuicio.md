@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de la remediacion TEST-ONLY de TASK-0284 sobre el commit 947c6f5 (HEAD 7cad6f4). El codigo del harness NO cambio -- ya lo certificaste correcto por comportamiento y ya esta desplegado en vivo. Solo se sustituyeron los dos negativos que median su propia sombra por bucle real, mas uno de vejez de claims, cada uno con su control positivo declarado: (1) borrado que envejece hasta EXEC_START=1 y cae rojo si se revierte el first-seen; (2) git con mas de 64KB de stderr que termina bajo tope duro y cuelga si se reemplaza el drenaje concurrente por el secuencial; (3) claim externa vencida devuelve none, y active_external_claim si se reemplaza el predicado de expiracion por true. Verificar que cada control positivo REALMENTE enrojece al aplicar la mutacion que declara (tu escrutinio de 0283), no que solo pase en verde. Si sale GO, flipeo 0284 a done y con eso cierra TODA la maquinaria de integridad. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."

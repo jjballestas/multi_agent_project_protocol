@@ -176,6 +176,27 @@
             "updated_at": "2026-07-22T00:26:34Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratifica0284-20260722",
+            "expires_at": "2026-07-22T05:42:49Z",
+            "notes": "Ratificacion del banco de 0284 (GO) + done-flip a Codex + higiene de 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0284",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0284",
+                "Area_comun/tasks/TASK-0284-pregate-deja-de-adivinar.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratifica0284-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-banco-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-banco-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-banco-rejuicio.md"
+            ],
+            "started_at": "2026-07-22T05:17:49Z",
+            "status": "released",
+            "task_id": "TASK-0284",
+            "updated_at": "2026-07-22T05:17:49Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rejbanco0284-20260722",
             "expires_at": "2026-07-22T02:21:31Z",
             "notes": "Re-juicio del banco de 0284 al checker + higiene de 2",

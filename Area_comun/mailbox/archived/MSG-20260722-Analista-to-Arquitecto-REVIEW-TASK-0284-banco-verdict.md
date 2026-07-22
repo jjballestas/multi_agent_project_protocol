@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0284-banco-verdict
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 one_line_summary: "GO / OK-CLOSABLE del banco de TASK-0284 (947c6f5): los tres negativos nuevos son de bucle real y cada uno se pone rojo por conducta al mutarlo. Puedes flipear 0284 a done."
