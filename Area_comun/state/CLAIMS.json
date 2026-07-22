@@ -172,6 +172,24 @@
             "updated_at": "2026-07-22T21:10:34Z"
         },
         {
+            "claim_id": "CLAIM-arq-rem0262-20260723",
+            "expires_at": "2026-07-22T22:43:46Z",
+            "notes": "Ruteo remediacion 0262 iter1 (clave agent) a Codex + archivo verdict/review",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-TASK-0262-remediation-1-agent-key.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rem0262-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0262-verdict.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0262.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0262-verdict.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0262.md"
+            ],
+            "started_at": "2026-07-22T22:23:46Z",
+            "status": "released",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T22:23:46Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rev0261r1-20260722",
             "expires_at": "2026-07-22T21:50:22Z",
             "notes": "Ruteo re-juicio 0261 iter1 al Analista + archivo ACTION-remediation-1 y HANDOFF-remediation-1",
