@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0283-iter4-cierre
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de cierre de TASK-0283 iteracion 4 sobre el commit 2267f2c. El descubridor paso de tree.body (nivel superior) a ast.walk (recorrido COMPLETO): un negativo marcado como metodo de clase o funcion anidada ahora entra en el inventario (15 declarados / 0 missing), y revertir a tree.body lo vuelve invisible (control positivo con dientes). Verificar por comportamiento: (1) el recorrido ast.walk NO deja ningun nivel de anidamiento fuera -- intenta TU un negativo marcado en un metodo, en una funcion anidada, en una clase dentro de funcion, y exige que el inventario lo vea; si encuentras un nivel que se escape, es bloqueante; (2) que lo que un recorrido COMPLETO del fuente no puede ver (test generado en runtime) este declarado como el limite de indecidibilidad, no como un hueco; (3) regresion A3 (marker load-bearing) y A4 (degradacion de contrato). Emitir GO o NO-GO con artifact. Si sale GO, cierra la tercera de higiene -- llevamos cuatro iteraciones y cada NO-GO tuyo cerro un hueco real; este deberia ser el convergente. SIN PRODUCTO EN ALCANCE."

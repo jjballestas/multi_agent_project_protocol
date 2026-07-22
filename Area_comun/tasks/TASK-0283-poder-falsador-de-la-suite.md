@@ -2,7 +2,7 @@
 task_id: TASK-0283
 title: "[SUITE] El poder falsador no puede depender de una asercion vieja: cada negativo declara que mutacion lo mata y se verifica que sigue matandola"
 type: infra
-status: in_review
+status: review_approved
 owner: Codex
 phase: P2
 priority: medium

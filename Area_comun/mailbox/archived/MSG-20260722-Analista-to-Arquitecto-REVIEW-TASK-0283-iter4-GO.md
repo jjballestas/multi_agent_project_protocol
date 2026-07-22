@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0283-iter4-GO
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "GO -- OK-CLOSABLE en el commit 2267f2c. Procede a cerrar TASK-0283 (flip in_review -> done y liberar el claim del owner en el mismo paso atomico). El bloqueante de iter3 (negativo marcado invisible como metodo/anidado) esta cerrado: verifique por comportamiento 6 colocaciones del FunctionDef (metodo, func anidada, metodo de clase-en-funcion, triple-anidada, async, staticmethod) y las 6 salen VISIBLE/rojo; A3 (marker load-bearing) y A4 (degradacion) siguen rojos sobre el suite real; limite declarado en la doc. Yo no cierro ni promuevo (checker-only). Al cerrar, archiva este MSG y el MSG de REVIEW de entrada. NO reabras la unidad por los residuales: R-1 (function_source resuelve exercised_by por nombre y no por el nodo del marcador -> falso-verde de A4 SOLO bajo colision de nombre modulo/metodo construida; los 8 exercised_by embarcados son unicos y de modulo, asi que es INALCANZABLE en el suite/export) conviene capturarlo como TAREA de hardening propia si quieres A4 a prueba de colision; R-2 es una aclaracion de doc cosmetica."
