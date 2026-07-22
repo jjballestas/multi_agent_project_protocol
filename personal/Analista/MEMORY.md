@@ -5,7 +5,41 @@
 > Runbook privado de la voz analista. Conciso: rol + estado de la ultima sesion + lecciones.
 > El detalle tecnico profundo (escritor unico, flags, capabilities) vive en `personal/Arquitecto/MEMORY.md`
 > (arquitecto). Yo no muto estado; solo lo entiendo.
-> Ultima actualizacion: 2026-07-22 (3) (TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+> Ultima actualizacion: 2026-07-22 (4) (TASK-0274 gate de drift CLI CHANGE-REQUIRED sobre 6f2084f, veredicto commit 4ce8b2e: el gate es REAL en produccion -- 6/6 vectores PASS y MutA/MutB con dientes -- PERO el negativo PERMANENTE del flag desconocido esta confundido y NO enrojece bajo parse_known_args (MutC queda verde), el mismo anti-patron que la unidad erradica una capa abajo; fix de una linea de test, re-juicio con MutC como criterio de dientes; antes (3) TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8, veredicto commit 7908874: el gate ABORTA las cuatro clases con commits reales, respeta la tarea podada real, cada negativo enrojece al mutar su guarda, y es espejo fiel -- mas estricto -- del validador post-hoc; deuda del runner de instanciacion PREEXISTENTE confirmada; antes TASK-0284 banco RE-JUICIO GO sobre 947c6f5).
+
+## Ultima actualizacion 2026-07-22 (4) - TASK-0274 gate de drift CLI CHANGE-REQUIRED sobre 6f2084f
+
+- Encargo `MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0274-drift-cli`. El comando que los
+  tres citabamos como gate de deriva (`python runtime/protocol_replay.py --check-drift`) era
+  VACUO: sin entrypoint CLI, salia 0 con cualquier flag (hallazgo F-0272R1-05). Esta unidad le
+  puso un `main()`/argparse real sobre `protocol_state_drift()`.
+- Codigo bajo prueba: blob de `runtime/protocol_replay.py` byte-identico en 2aa5552/6f2084f/04ea079
+  (d7bd4d3), suite identica en 2aa5552/04ea079 (329ce79). Clon limpio `D:/ccv0274`, checkout 6f2084f.
+- **6/6 vectores PASS por comportamiento** (probados por payload en clon limpio): V1 limpio exit 0
+  (verdict=CLEAN up_to_seq=5696) / deriva exit 1; `_drift_exit_code` fail-closed (`1 if has_drift is
+  not False else 0`, None->1). V2 deriva fabricada (status mutado en hot TASK_INDEX) exit 1
+  verdict=DRIFT + path, restaurar exit 0. V3 --bogus-flag exit 2, --check-drift --bogus-flag exit 2,
+  --check-drfit exit 2, sin flag exit 2. V4 up_to_seq impreso. V5 README/HANDOFF_TEMPLATE/RUNBOOK con
+  contrato exit-code (historicos = registros). V6 instancia runtime generada hereda el CLI real
+  (--bogus-flag exit 2, __main__ real). Puertas: suite 9/9, validate/encoding/neutralidad exit 0.
+- **Disciplina de mutantes = el nucleo del veredicto.** MutA (`_drift_exit_code`->return 0) y MutB
+  (veredicto invertido): suite ROJA -> negativos de deriva/veredicto CON dientes. **MutC
+  (`parse_args`->`parse_known_args`): suite VERDE** -> el negativo del flag desconocido NO enrojece.
+- **Bloqueante F-0274-01 (unico):** la asercion del flag desconocido corre `--bogus-flag` SIN
+  `--check-drift`; bajo parse_known_args el flag se ignora y falta el requerido -> parser.error exit 2
+  -> la asercion `!= 0` pasa igual. Confunde "flag requerido ausente" con "flag desconocido
+  rechazado" y NO puede fallar si se afloja la estrictez. Es el anti-patron de 0274 (test que no
+  puede fallar) una capa abajo. Aclaracion: reventar el fix COMPLETO (borrar main()) SI enrojece;
+  el hueco es especifico del aflojamiento con el guardia de flag-requerido intacto.
+- **Veredicto: CHANGE-REQUIRED** (`Analista-TASK-0274-drift-cli-verdict.md`, commit `4ce8b2e`,
+  pusheado, canonical verde 4ce8b2e). Fix esperado: anadir a `case_cli_is_a_real_aborting_gate` una
+  corrida que AISLE el rechazo (`--check-drift --bogus-flag` o `--check-drfit`, assert !=0). Re-juicio
+  con MutC como criterio de dientes; maximo 2 iteraciones antes de escalar al operador.
+- Residuales: R1 el lambda `inverted` inline del test es decorativo (verifica un lambda local, no
+  produccion); R2 `--root` default cwd; R3 coordination-tier computa drift real, no es falso verde.
+- Leccion transversal: en un gate cuyo test tambien tiene negativos, correr el mutante que afloja
+  CADA guarda por separado; un negativo puede pasar por el motivo EQUIVOCADO (confound de argparse
+  required-flag vs unknown-flag).
 
 ## Ultima actualizacion 2026-07-22 (3) - TASK-0279 gate de trailers en commit-msg GO/OK-CLOSABLE sobre 15fe9c8
 
