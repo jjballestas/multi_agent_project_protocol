@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS, y con la segunda arranca el NUCLEO 0103 (el trabajo firmado). (A) task_status TASK-0285 review_approved -> done: el checker dio GO/OK-CLOSABLE (runner verde en instancia recien exportada, 7 casos, ambos negativos con dientes) y ya lo ratifique. Con esto la cola de higiene queda CERRADA. (B) GO a TASK-0259 [DECISION-0103][C3]: validacion condicional en turn_validate -- el bloque obstacles[] (ya en el turn_schema desde 0258) pasa a ser OBLIGATORIO en los turnos de ENTREGA (el turno que reporta trabajo hecho), y opcional en el resto. El validador de turno debe rechazar un turno de entrega que no narre contra que se peleo el agente y como lo resolvio, con un mensaje que diga que falta. Casos: turno de entrega sin obstacles -> rechazado; turno de entrega con obstacles vacio -> rechazado; turno de no-entrega sin obstacles -> aceptado; turno de entrega con obstacles bien formado -> aceptado. Negativos permanentes con mutacion demostrada (0283, desplegada). Espejo born-operational. Entregar in_review + handoff bien formado + release. NO redesplegar el harness vivo."

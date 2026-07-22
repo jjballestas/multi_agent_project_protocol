@@ -100,6 +100,24 @@
             "updated_at": "2026-07-22T16:13:00Z"
         },
         {
+            "claim_id": "CLAIM-arq-rev0259-20260722",
+            "expires_at": "2026-07-22T16:40:06Z",
+            "notes": "Ruteo del juicio de 0259 al checker (primera del nucleo) + higiene 2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-obstacles-gate.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-rev0259-20260722"
+            ],
+            "started_at": "2026-07-22T16:20:06Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T16:20:06Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rutear0282-20260722",
             "expires_at": "2026-07-21T23:34:04Z",
             "notes": "Ruteo del juicio de 0282 al checker + correccion de acceptance de 0284 (adversarial) + higiene de 3",

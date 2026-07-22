@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "59635a5614f707c2008a58d0665d9111b5f6fa076aa0071d1e5d8acd1e1c91e9",
+  "canonical_hash": "858ef8933aab8364dbb77dcc5e666fe18ffb2191ecb5982135ba656c22fd38ed",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -894,6 +894,7 @@
       "CLAIM-arq-rem0283-20260722": 1,
       "CLAIM-arq-reporte0103-20260720": 1,
       "CLAIM-arq-resp0279-20260722": 1,
+      "CLAIM-arq-rev0259-20260722": 1,
       "CLAIM-arq-rev0274-20260722": 1,
       "CLAIM-arq-rev0275-20260722": 1,
       "CLAIM-arq-rev0276-20260722": 1,
@@ -2069,7 +2070,9 @@
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0283-y-GO-0276": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0285-y-GO-0259": 1,
       "MSG-20260722-Arquitecto-to-Codex-RESP-TASK-0279-commit-msg": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0274-flag-remediation": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0275": 1,
@@ -2353,7 +2356,7 @@
       "TASK-0256": 2,
       "TASK-0257": 41,
       "TASK-0258": 15,
-      "TASK-0259": 8,
+      "TASK-0259": 9,
       "TASK-0260": 2,
       "TASK-0261": 2,
       "TASK-0262": 2,
@@ -2402,7 +2405,7 @@
       "protocol-prune": 22,
       "protocol-state": 1
     },
-    "events_applied": 5211,
+    "events_applied": 5215,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2901,6 +2904,10 @@
       "arq:resp0279:acquire:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5664,
       "arq:resp0279:arch:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5665,
       "arq:resp0279:release:ae25c3b2-16e0-4c8a-9ebf-9757dc281255": 5666,
+      "arq:rev0259:acquire:4c74d6b0-93ca-4c52-8f6f-5fca84a279db": 5883,
+      "arq:rev0259:arch1:4c74d6b0-93ca-4c52-8f6f-5fca84a279db": 5884,
+      "arq:rev0259:arch2:4c74d6b0-93ca-4c52-8f6f-5fca84a279db": 5885,
+      "arq:rev0259:release:4c74d6b0-93ca-4c52-8f6f-5fca84a279db": 5886,
       "arq:rev0274:acquire:e390feab-3ca9-48a2-b642-f41b57e01282": 5697,
       "arq:rev0274:arch1:e390feab-3ca9-48a2-b642-f41b57e01282": 5698,
       "arq:rev0274:arch2:e390feab-3ca9-48a2-b642-f41b57e01282": 5699,
@@ -7617,5 +7624,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5882
+  "up_to_seq": 5886
 }
