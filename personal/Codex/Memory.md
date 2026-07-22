@@ -4003,3 +4003,20 @@ issue. Re-run only the necessary evidence path and record the caveat.
 - `runtime/turn_validate.py` was not touched. All eight requested gates exited 0, including the falsification inventory and mutation guardian.
 - TASK-0259 is `in_progress` under `CLAIM-20260722-Codex-TASK-0259-remediation-3`; next action is delivery to `in_review`, claim release, and a complete ASCII handoff requesting independent review.
 - Delivery commit `03f5bf9` moves TASK-0259 to `in_review`, releases both iteration-3 claims, and opens `MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0259-remediation-3.md`. Arquitecto must route implementation commit `7c7bc1c` to Analista for independent re-review; Codex has not self-reviewed or ratified it.
+- 2026-07-22 TASK-0260 implementation commit `b7d29c1`: TASK-0259 was flipped from
+  `review_approved` to `done`; TASK-0260 entered `in_progress`. `runtime/orchestrator.py`
+  now exposes scratch-safe `--plan-all` / `--plan-decision` pure projections from
+  TASK_INDEX plus task intake, with separate full render and C1-material approval hashes.
+  `run_loop` enforces an authenticated human `plan.approved` event when
+  `runtime.plan_approval.enabled=true`; material changes are exactly unit id/addition,
+  acceptance, or risk, and this does not enable supervised autonomy. Scratch-only runner
+  `examples/runtime_plan_approval_cases/run_runtime_plan_approval_cases.py` proves refusal,
+  approval, projection fidelity, material invalidation, nonmaterial stability, and CLI use.
+  Pre-commit gates passed: three runtime turn runners, plan approval runner, collaboration
+  validator, encoding scan, neutrality scan, and diff check.
+- 2026-07-22 TASK-0260 delivery commit `5cfeb47`: task is `in_review`, both Codex
+  claims are released, and Arquitecto has the self-contained handoff/message for independent
+  Analista review. All declared runtime, plan-gate, collaboration, encoding, neutrality, and
+  diff gates exited 0 after delivery. The commit hook reported pruning due
+  (`released_ratio 92.31 >= 90`); pruning is an Arquitecto coordinated checkpoint action and
+  was not performed by Codex.
