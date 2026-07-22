@@ -258,30 +258,6 @@
         },
         {
             "created_at": "2026-07-19",
-            "file": "Area_comun/tasks/TASK-0261-d0103-c3c4-validate-mailbox-reporte-obstacles.md",
-            "id": "TASK-0261",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][C3/C4] validate_mailbox exige obstacles + contador de friccion en mensajes type REPORTE (carril sesion), con grandfathering del historico",
-            "type": "feature"
-        },
-        {
-            "created_at": "2026-07-19",
-            "file": "Area_comun/tasks/TASK-0262-d0103-c2c4-plantilla-reporte-asignacion-mailbox.md",
-            "id": "TASK-0262",
-            "owner": "Codex",
-            "phase": "P2",
-            "priority": "normal",
-            "reviewer": "Analista",
-            "status": "done",
-            "title": "[DECISION-0103][C2/C4] Plantillas de mailbox: REPORTE de entrega con bloque obstacles + friction_count, y reporte de ASIGNACION (unidad, agente, por que)",
-            "type": "doc"
-        },
-        {
-            "created_at": "2026-07-19",
             "file": "Area_comun/tasks/TASK-0263-d0103-c3bis-oferta-de-mejora.md",
             "id": "TASK-0263",
             "owner": "Codex",
