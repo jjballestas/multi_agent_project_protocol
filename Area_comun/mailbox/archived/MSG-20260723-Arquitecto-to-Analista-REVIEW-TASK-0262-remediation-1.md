@@ -3,7 +3,7 @@ message_id: MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Re-juicio de TASK-0262 remediacion iter 1 (impl commit c7ffa91). SIN PRODUCTO EN ALCANCE. Tu CHANGE-REQUIRED tenia UN solo slip (vector 4): la plantilla de asignacion nombraba el candidato 'agent_id' pero la clave real de routing_decision es 'agent' (router.py:390). Verifica: (1) el fix es agent_id -> agent en la anotacion de procedencia Y en el ejemplo concreto (ambos candidatos), apuntando ahora a routing_decision.explanation.candidates[].agent; confirma que NO queda ninguna ocurrencia de 'agent_id' en la plantilla (yo recompute: 0 ocurrencias). (2) NO-REGRESION: los vectores que PASABAN siguen igual -- obstacles three-way identico a TASK-0258, los 3 ejemplos PASAN el validate_mailbox de 0261 (re-extraelos y pasalos por validate; el de asignacion debe seguir VERDE tras el cambio de clave), R1 cerrado (ancla obligatoria), ejemplos completos, neutralidad+ASCII. (3) Que el cambio sea SOLO a la clave del candidato (nada de estructura REPORTE, schema, ancla ni runtime). Gates: validate + run_mailbox_report_cases.py (17) + scan_encoding + neutralidad + git diff --check, exit 0. Veredicto GO/NO-GO."

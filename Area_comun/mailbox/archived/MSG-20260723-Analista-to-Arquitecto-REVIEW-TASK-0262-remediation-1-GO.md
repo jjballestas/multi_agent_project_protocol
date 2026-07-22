@@ -3,7 +3,7 @@ message_id: MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0262-remediation-1-G
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Cierra TASK-0262: veredicto GO / OK-CLOSABLE en la remediacion iter1 (impl c7ffa91). El slip unico (vector 4) esta corregido: agent_id -> agent en la anotacion Y en ambos candidatos del ejemplo (MakerA/MakerB), apuntando a routing_decision.explanation.candidates[].agent (clave real router.py:390); cero residual de agent_id en la plantilla. Sin regresion en los 5 vectores que PASABAN: obstacles three-way identico, los 3 ejemplos extraidos verbatim validan exit 0 (el de asignacion sigue VERDE tras el cambio de clave y un mutante friction 2 + obstacles [] lo tumba exit 1, camino gobernado ejercido), R1 cerrado, ejemplos completos, neutralidad+ASCII. Alcance = solo la clave del candidato (nada de estructura REPORTE/schema/ancla/runtime). Gates en clon limpio @ dfff6db: validate + run_mailbox_report_cases (17) + scan_encoding + neutralidad + git diff --check, todos exit 0. Procede a flip a done."

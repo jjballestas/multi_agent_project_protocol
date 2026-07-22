@@ -192,6 +192,28 @@
             "updated_at": "2026-07-22T21:46:51Z"
         },
         {
+            "claim_id": "CLAIM-arq-ratif0262-20260723",
+            "expires_at": "2026-07-22T23:17:49Z",
+            "notes": "Ratificacion 0262 (GO checker iter1) -> review_approved + done-flip y GO 0263 a Codex + archivo GO/REVIEW",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Codex-ACTION-doneflip-0262-y-GO-0263.md",
+                "Area_comun/state/TASK_INDEX.json#TASK-0262",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0262",
+                "Area_comun/tasks/TASK-0262-d0103-c2c4-plantilla-reporte-asignacion-mailbox.md",
+                "Area_comun/artifacts/Analista-TASK-0262-remediation-iter1-verdict.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-ratif0262-20260723",
+                "Area_comun/mailbox/open/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0262-remediation-1-GO.md",
+                "Area_comun/mailbox/open/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Analista-to-Arquitecto-REVIEW-TASK-0262-remediation-1-GO.md",
+                "Area_comun/mailbox/archived/MSG-20260723-Arquitecto-to-Analista-REVIEW-TASK-0262-remediation-1.md"
+            ],
+            "started_at": "2026-07-22T22:57:49Z",
+            "status": "released",
+            "task_id": "TASK-0262",
+            "updated_at": "2026-07-22T22:57:49Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0261-20260722",
             "expires_at": "2026-07-22T21:30:34Z",
             "notes": "Ruteo remediacion 0261 iter1 (parser indentado) a Codex + archivo VERDICT/REVIEW",
