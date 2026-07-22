@@ -2,7 +2,7 @@
 task_id: TASK-0274
 title: "[HIGIENE-GATE] El gate de drift declarado es VACUO: dar entrypoint CLI real a protocol_replay.py y corregir toda la documentacion que lo cita como prueba"
 type: infra
-status: in_progress
+status: in_review
 owner: Codex
 phase: P2
 priority: high

@@ -1,6 +1,16 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0279 delivery.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0274 implementation.
+
+- TASK-0274 implementation commit `2aa5552` gives
+  `runtime/protocol_replay.py --check-drift` a real CLI: clean state exits 0,
+  drift exits 1, unknown or missing flags exit 2, and stdout reports `verdict`
+  plus `up_to_seq`. The permanent replay suite covers clean, fabricated drift,
+  unknown flags, and an inverted-verdict mutation control. Runtime README,
+  handoff template, and remote onboarding runbook state the exit-code contract;
+  runtime-tier instancing copies the complete runtime directory and inherits it.
+  TASK-0279 was also flipped to `done` after independent GO and Arquitecto
+  ratification. TASK-0274 awaits delivery to independent Analista review.
 
 - TASK-0279 implementation commit `15fe9c8` adds the aborting `commit-msg` trailer
   gate while leaving the staged-snapshot `pre-commit` unchanged. The bounded checker
@@ -9,6 +19,8 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0279 delivery.
   explicit mutation controls; the born-operational export contains both hooks and the
   checker. Validator, encoding, neutrality, and targeted tests are green. Independent
   review remains with Analista; Codex has not reviewed or ratified the implementation.
+  Delivery commit `56f9750` moves TASK-0279 to `in_review`, releases all Codex claims
+  through signed seq 5674, and opens the self-contained Arquitecto handoff.
 
 - TASK-0281 is `done` after independent Analista review and Arquitecto ratification.
   Codex applied the implementer-only `review_approved -> done` transition at signed
