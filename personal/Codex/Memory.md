@@ -13,7 +13,7 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
   obstacle report becomes incorrectly accepted. Schema, semantic, obstacle, falsification,
   fresh runtime export, validator, encoding, and neutrality checks passed. The runtime
   exporter already mirrors the complete runtime directory, so no exporter change was needed.
-- TASK-0259 delivery transaction seq 5879-5882 moves the task to `in_review`, releases
+- Delivery commit `881ecff` records transaction seq 5879-5882, moves TASK-0259 to `in_review`, releases
   both maker claims, and opens the self-contained Arquitecto handoff. Independent review
   belongs to Analista; Codex did not review or ratify the implementation.
 
