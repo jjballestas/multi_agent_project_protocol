@@ -8,6 +8,7 @@ and executes deterministic replay turns in M1.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -16,8 +17,8 @@ from typing import Any
 
 try:
     from .budget import Budget, budget_settings, responsible
-    from .context import active_claims, load_state
-    from .eventlog import utc_now
+    from .context import active_claims, load_state, parse_frontmatter
+    from .eventlog import read_jsonl_torn_safe, utc_now, verify_actor_auth, verify_event_auth
     from .metrics import summarize
     from .router import select_next
     from .adapters.base import ContextPack
@@ -39,12 +40,12 @@ try:
         supervised_autonomy_payload,
         write_run_report,
     )
-    from .submit_intent import IntentError, submit_intent
+    from .submit_intent import IntentError, parse_frontmatter_mapping, submit_intent
     from .turn_validate import validate_turn
     from .vcs import VcsError, commit_turn, discard_worktree_changes
 except ImportError:  # pragma: no cover - direct script execution
-    from context import active_claims, load_state
-    from eventlog import utc_now
+    from context import active_claims, load_state, parse_frontmatter
+    from eventlog import read_jsonl_torn_safe, utc_now, verify_actor_auth, verify_event_auth
     from router import select_next
     from adapters.base import ContextPack
     from adapters.llm_adapter import (
@@ -63,7 +64,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from metrics import summarize
     from runlog import turn_entry
     from supervised_autonomy import fix_cycle_checkpoint_reason, pause_sentinel_path, supervised_autonomy_activation_error, supervised_autonomy_payload, write_run_report
-    from submit_intent import IntentError, submit_intent
+    from submit_intent import IntentError, parse_frontmatter_mapping, submit_intent
     from vcs import VcsError, commit_turn, discard_worktree_changes
 
 
@@ -173,6 +174,89 @@ def runtime_enabled(root: Path) -> bool:
     config = read_json(root / "protocol.config.json")
     runtime = config.get("runtime") or {}
     return runtime.get("enabled") is True
+
+
+PLAN_FIELDS = ("id", "goal", "acceptance", "verification_cmd", "required_capability", "risk", "estimate")
+PLAN_MATERIAL_FIELDS = ("id", "acceptance", "risk")
+
+
+def plan_approval_config(config: dict[str, Any] | None) -> dict[str, Any]:
+    value = runtime_config(config).get("plan_approval")
+    return value if isinstance(value, dict) else {}
+
+
+def _task_file(root: Path, task: dict[str, Any]) -> Path | None:
+    relative = str(task.get("file") or "").strip()
+    if relative:
+        path = root / relative
+        return path if path.is_file() else None
+    task_id = str(task.get("id") or "")
+    matches = sorted((root / "Area_comun" / "tasks").glob(f"{task_id}-*.md"))
+    return matches[0] if len(matches) == 1 else None
+
+
+def render_plan(root: Path, *, decision_id: str | None = None) -> dict[str, Any]:
+    """Project the governed task index and task intake without filling missing values."""
+    state = load_state(root)
+    units: list[dict[str, Any]] = []
+    for task in state.get("task_index", {}).get("tasks") or []:
+        path = _task_file(root, task)
+        metadata = parse_frontmatter(path) if path else {}
+        linked = task.get("linked_decisions") or metadata.get("linked_decisions") or []
+        if decision_id and decision_id not in {str(item) for item in linked}:
+            continue
+        intake = parse_frontmatter_mapping(path, "intake") if path else None
+        intake = intake if isinstance(intake, dict) else {}
+        units.append(
+            {
+                "id": task.get("id"),
+                "goal": intake.get("goal"),
+                "acceptance": intake.get("acceptance"),
+                "verification_cmd": intake.get("verification_cmd"),
+                "required_capability": task.get("required_capability", metadata.get("required_capability")),
+                "risk": intake.get("risk"),
+                "estimate": intake.get("estimate"),
+            }
+        )
+    units.sort(key=lambda item: str(item.get("id") or ""))
+    material = [{key: unit.get(key) for key in PLAN_MATERIAL_FIELDS} for unit in units]
+    encoded = json.dumps(units, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    material_encoded = json.dumps(material, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return {
+        "decision_id": decision_id,
+        "fields": list(PLAN_FIELDS),
+        "units": units,
+        "render_hash": hashlib.sha256(encoded).hexdigest(),
+        "approval_hash": hashlib.sha256(material_encoded).hexdigest(),
+        "material_fields": list(PLAN_MATERIAL_FIELDS),
+    }
+
+
+def plan_approval_error(root: Path, config: dict[str, Any], plan: dict[str, Any]) -> str | None:
+    """Require an authenticated human plan.approved event for the current material plan."""
+    approval = plan_approval_config(config)
+    if approval.get("enabled") is not True:
+        return None
+    expected = str(plan.get("approval_hash") or "")
+    registry = load_state(root).get("agent_registry") or {}
+    human_actors = {
+        str(agent.get("id"))
+        for agent in registry.get("agents") or []
+        if "human_owner" in {str(cap) for cap in agent.get("capabilities") or []}
+    }
+    for event in reversed(read_jsonl_torn_safe(root / "runtime" / "state" / "events.jsonl")):
+        payload = event.get("payload") if isinstance(event.get("payload"), dict) else {}
+        if event.get("type") != "plan.approved" or payload.get("approval_hash") != expected:
+            continue
+        if str(event.get("actor") or "") not in human_actors:
+            continue
+        if verify_event_auth(event, config, root=root).get("valid") is not True:
+            continue
+        if (config.get("event_state") or {}).get("agent_signatures_enabled") is True:
+            if verify_actor_auth(event, config, root).get("valid") is not True:
+                continue
+        return None
+    return f"turn-zero plan approval required for approval_hash={expected}; material fields are id, acceptance, risk"
 
 
 def task_for_unit(state: dict[str, Any], unit: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -737,6 +821,19 @@ def run_loop(
     if not runtime_enabled(root):
         return {"ok": False, "reason": "runtime.enabled is false; --run is disabled"}
     config = read_json(root / "protocol.config.json")
+    approval_config = plan_approval_config(config)
+    current_plan = render_plan(root, decision_id=str(approval_config.get("decision_id") or "") or None)
+    approval_error = plan_approval_error(root, config, current_plan)
+    if approval_error:
+        return {
+            "ok": False,
+            "reason": approval_error,
+            "plan_approval": {
+                "approval_hash": current_plan["approval_hash"],
+                "render_hash": current_plan["render_hash"],
+                "material_fields": current_plan["material_fields"],
+            },
+        }
     supervision: dict[str, Any] | None = None
     subprocess_multiturn = adapter_name == "llm" and llm_invoker == "subprocess" and not once
     if allow_supervised_autonomy and not subprocess_multiturn:
@@ -1111,6 +1208,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Protocol runtime orchestrator.")
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument("--plan", action="store_true", help="Dry-run: print next action without mutating state")
+    parser.add_argument("--plan-all", action="store_true", help="Render the governed unit set as a pure task-index/intake projection")
+    parser.add_argument("--plan-decision", help="With --plan-all, include only tasks linked to this decision id")
     parser.add_argument("--run", action="store_true", help="Execute deterministic runtime turns")
     parser.add_argument("--once", action="store_true", help="Execute exactly one turn")
     parser.add_argument("--max-iter", type=int, default=None, help="Maximum turns to execute")
@@ -1126,16 +1225,20 @@ def main() -> int:
     parser.add_argument("--clock-fixed", type=int, default=0, help="Deterministic duration_ms value for tests")
     args = parser.parse_args()
 
-    if args.plan and args.run:
-        parser.error("choose either --plan or --run")
-    if not args.plan and not args.run:
-        parser.error("choose --plan or --run")
+    modes = sum(bool(value) for value in (args.plan, args.plan_all, args.run))
+    if modes != 1:
+        parser.error("choose exactly one of --plan, --plan-all, or --run")
+    if args.plan_decision and not args.plan_all:
+        parser.error("--plan-decision requires --plan-all")
 
     root = Path(args.root).resolve()
 
     if args.plan:
         result = select_next(load_state(root))
         print(json.dumps({"dry_run": True, "next": result}, indent=2, ensure_ascii=False))
+        return 0
+    if args.plan_all:
+        print(json.dumps(render_plan(root, decision_id=args.plan_decision), indent=2, ensure_ascii=False))
         return 0
 
     if args.adapter == "replay" and not args.replay_report:
