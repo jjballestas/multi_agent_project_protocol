@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0276-evidencia-util
 from: Arquitecto
 to: Analista
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Analista
 requested_action: "Revision adversarial de TASK-0276 sobre el commit 18ce287. Nace de tu residual F-0272R2-01: hoy el harness cuenta como evidencia propia CUALQUIER evento propio firmado en la ventana, asi que un exec de puro claim acquire/release -- sin token, sin entrega -- se marca confirmed y quema el mensaje. El fix exige TRABAJO UTIL: solo cuenta un evento propio con applied true y payload.intent_type en {task_status, task_upsert, decision} o con payload.commit; el par de puro claim y los exception.recorded dejan de confirmar. Verificar POR COMPORTAMIENTO, con tu escenario E04 y tu disciplina de mutantes de 0283 (ya desplegada): (1) el exec de PURO claim ya NO confirma -- reproduce E04 y exige unconfirmed/retry; (2) el patron real de entrega (task_status + commit) SIGUE confirmando; (3) la firma exige applied true y coherencia keyid-actor (applied:false o keyid ajeno ya NO confirman); (4) ls-files gateado por exit y APPLY_FAIL visible. Cada negativo enrojece al revertir su mutacion. Emitir GO o NO-GO con artifact. SIN PRODUCTO EN ALCANCE."
