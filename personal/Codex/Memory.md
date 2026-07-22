@@ -7,7 +7,10 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0276 remediation.
   confirm useful work. The permanent behavioral negative proves a pure claim carrying
   commit metadata remains false and that reintroducing the commit-proxy branch makes it
   true, while task_status remains a positive. The full mailbox retry suite and protocol
-  gates passed; delivery to in_review and independent Analista re-review remain pending.
+  gates passed. Delivery commit `8649524` moves TASK-0276 to `in_review`, releases both
+  remediation claims through signed seq 5823, and opens the self-contained handoff to
+  Arquitecto. Independent Analista re-review remains pending; the live harness was not
+  redeployed.
 
 - TASK-0276 implementation commit `18ce287` makes own-evidence confirmation require
   an applied event, an Ed25519 keyid whose prefix matches the actor, and useful work:
