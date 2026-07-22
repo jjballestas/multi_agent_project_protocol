@@ -94,7 +94,7 @@
             "owner": "Codex",
             "phase": "P2",
             "priority": "medium",
-            "status": "in_progress",
+            "status": "in_review",
             "title": "[EXPORT] El runner de instanciacion completa nace rojo: el prune_state generado no exporta ledger_head, y la asercion de coordination-default choca con el config runtime-tier vivo"
         }
     ],
