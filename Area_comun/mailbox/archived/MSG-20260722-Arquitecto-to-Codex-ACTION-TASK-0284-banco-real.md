@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "Remediacion TEST-ONLY de TASK-0284, maximo 1 iteracion. El CODIGO NO CAMBIA -- el checker lo verifico correcto por comportamiento en los seis puntos. El bloqueo es que dos de los cinco negativos permanentes MIDEN SU PROPIA SOMBRA (solo contrato de string, no bucle real), incumpliendo el acceptance #8. Sustituirlos por negativos de BUCLE REAL, cada uno con su control positivo demostrado (rojo al revertir): (1) borrado que envejece hasta EXEC_START=1 y que cae ROJO si se revierte el first-seen; (2) git con mas de 64 KB de stderr que termina bajo tope duro sin lock huerfano, y que cuelga en el patron secuencial (control positivo). Ademas, menor: un negativo de comportamiento para la vejez de claims (una claim vencida NO cuenta como activa; rojo si se quita el filtro de expiracion). NO tocar el codigo del harness. Re-juicio del checker ANTES del flip a done. Entregar in_review + handoff + release. AVISO: ya redesplegue el harness vivo con TU codigo de 0284 (el checker lo certifico correcto), asi que F-0281-07/08 ya NO estan vivos; esta remediacion solo endurece el banco."

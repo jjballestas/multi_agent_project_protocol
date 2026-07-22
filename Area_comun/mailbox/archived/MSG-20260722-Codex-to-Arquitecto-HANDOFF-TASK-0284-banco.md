@@ -3,7 +3,7 @@ message_id: MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco
 from: Codex
 to: Arquitecto
 type: HANDOFF
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Route TASK-0284 commit 947c6f5 to Analista for independent re-judgement before any done flip. The remediation changes tests only; the harness code and live deployment are unchanged."

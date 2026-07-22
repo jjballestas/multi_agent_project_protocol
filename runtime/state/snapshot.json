@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "12b2e2bc3a8d1271c3a4d264ea294a80958f7af326b50c253314a98f4fbf25af",
+  "canonical_hash": "8c0b0026e41916dc184412cff43ff71bc452f8de3495541ade58d4fd1369afc8",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -861,6 +861,7 @@
       "CLAIM-arq-reflip0257-b-20260719": 1,
       "CLAIM-arq-registro0272-20260720": 1,
       "CLAIM-arq-registro0273-20260720": 1,
+      "CLAIM-arq-rejbanco0284-20260722": 1,
       "CLAIM-arq-reject0257-20260719": 1,
       "CLAIM-arq-reject0257-iter2-20260719": 1,
       "CLAIM-arq-reject0258-20260720": 1,
@@ -1997,10 +1998,12 @@
       "MSG-20260722-Arquitecto-to-Analista-DECISION-cierre-0281": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0282-retirada-destructiva": 1,
       "MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0284-pregate": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco": 1,
       "OPS-ARSENAL-INSTANCIACION-20260714": 1,
       "OPS-CHECKPOINT-HYGIENE-20260720": 2,
       "OPS-CICLO-20260720": 1,
@@ -2294,7 +2297,7 @@
       "TASK-0281": 24,
       "TASK-0282": 12,
       "TASK-0283": 1,
-      "TASK-0284": 19,
+      "TASK-0284": 20,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2317,7 +2320,7 @@
       "protocol-prune": 19,
       "protocol-state": 1
     },
-    "events_applied": 4966,
+    "events_applied": 4970,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2720,6 +2723,10 @@
       "arq:ratifica0272:arch2:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5350,
       "arq:ratifica0272:release:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5351,
       "arq:ratifica0272:status:1f94a3d2-2bce-4012-92c1-f141ff3db420": 5346,
+      "arq:rejb0284:acquire:dc3661bc-daef-4f14-86ab-badaf19cb762": 5638,
+      "arq:rejb0284:arch1:dc3661bc-daef-4f14-86ab-badaf19cb762": 5639,
+      "arq:rejb0284:arch2:dc3661bc-daef-4f14-86ab-badaf19cb762": 5640,
+      "arq:rejb0284:release:dc3661bc-daef-4f14-86ab-badaf19cb762": 5641,
       "arq:rem77:1ec5db61-fd35-404f-a180-fd95b6f655b8": 5396,
       "arq:reporte0103:acquire:eeb4aadc-b420-425b-b541-c82c0c372533": 5343,
       "arq:reporte0103:release:eeb4aadc-b420-425b-b541-c82c0c372533": 5344,
@@ -7287,5 +7294,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5637
+  "up_to_seq": 5641
 }
