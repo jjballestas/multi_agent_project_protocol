@@ -29,6 +29,9 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
   defects and not mechanically inferable. Inventory is 15 declared / 0 missing; guardian,
   runtime instantiation, validation, encoding, and neutrality gates passed. TASK-0283
   remains `in_progress` until the delivery transaction and independent review handoff.
+  Delivery commit `a8c6dc0` moves TASK-0283 to `in_review`, releases all maker claims
+  through signed seq 5768, and opens the self-contained iteration 3 handoff with a
+  non-empty question for Arquitecto to route to Analista. Codex did not self-review.
 
 - TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
   `--check-drift --bogus-flag` to the permanent replay suite without changing production
