@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "e477ed2a1a089c703d9f0f71fb7153cba4e188d393f3b8c5f361398bd55aa4dc",
+  "canonical_hash": "442aadd3cc4c62b7d25acbc6a11982720aaf2d82775ca975735227963d8e5669",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -835,6 +835,7 @@
       "CLAIM-arq-hyg-1355-20260720": 1,
       "CLAIM-arq-hyg-coldstart-20260720": 1,
       "CLAIM-arq-hyg-rejuicio67-20260720": 1,
+      "CLAIM-arq-hyg0834-20260722": 1,
       "CLAIM-arq-hygiene-o1-20260720": 1,
       "CLAIM-arq-iter3-0280-20260721": 1,
       "CLAIM-arq-mailbox-go0257-20260719": 1,
@@ -2004,6 +2005,7 @@
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0282-y-GO-0284": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco": 1,
@@ -2300,7 +2302,7 @@
       "TASK-0281": 24,
       "TASK-0282": 12,
       "TASK-0283": 1,
-      "TASK-0284": 25,
+      "TASK-0284": 26,
       "TASK-1102": 14,
       "TASK-1105": 6,
       "TASK-1106": 7,
@@ -2323,7 +2325,7 @@
       "protocol-prune": 19,
       "protocol-state": 1
     },
-    "events_applied": 4978,
+    "events_applied": 4981,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2607,6 +2609,9 @@
       "arq:go0277:arch3:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5360,
       "arq:go0277:release:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5361,
       "arq:go0277:status:cdf5efbd-16cb-42e3-9b86-a7e872c94ef0": 5357,
+      "arq:hyg0834:acquire:c7ea1fbf-2051-4ac4-9c7a-56394de40f80": 5650,
+      "arq:hyg0834:arch:c7ea1fbf-2051-4ac4-9c7a-56394de40f80": 5651,
+      "arq:hyg0834:release:c7ea1fbf-2051-4ac4-9c7a-56394de40f80": 5652,
       "arq:hygb0:00": 2533,
       "arq:hygb0:01": 2534,
       "arq:hygb0:02": 2535,
@@ -7305,5 +7310,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5649
+  "up_to_seq": 5652
 }

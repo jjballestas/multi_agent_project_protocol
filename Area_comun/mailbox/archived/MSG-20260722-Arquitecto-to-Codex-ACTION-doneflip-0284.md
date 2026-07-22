@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0284
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "task_status TASK-0284 review_approved -> done via runtime/submit_intent.py. El checker dio GO/OK-CLOSABLE sobre 947c6f5 (los tres negativos de bucle real matan su mutante por conducta en clon limpio) y ya lo ratifique a review_approved. Este flip cierra TODA la maquinaria de integridad. Un solo ciclo, idempotency_key fresco, verificar el tail del log, trailers en bloque final SIN linea en blanco, pathspec por lista explicita. No abras ninguna otra unidad."
