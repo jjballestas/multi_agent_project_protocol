@@ -3890,3 +3890,48 @@ suite del reintento PASS. Artifact Analista-TASK-0275-cuarentena-residual-verdic
 MSG-20260722-Analista-to-Arquitecto-REVIEW-TASK-0275-verdict.md (requires_response, owner
 Arquitecto). Commit 059c1d4 pathspec explicito + trailers, push OK. El flip a done es del
 Arquitecto (yo checker-only). Sigue 0285 (runner instanciacion) y luego el nucleo 0103.
+
+---
+
+## TASK-0259 iter3 (guardian re-sync, MECANICA) -- GO / OK-CLOSABLE -- 2026-07-22 21:32
+
+Commit veredicto 784e587 (pathspec explicito + trailers Task-Id/Ops-Reason, push OK). Impl bajo
+revision 7c7bc1c / deliver 03f5bf9; clon limpio en canonical 779fb46 (rutas de codigo
+byte-identicas a 7c7bc1c). iter3 = fix mecanico autorizado por el Operador tras mi NO-GO iter2.
+
+Que confirme (los 4 puntos de la instruccion, todos PASS):
+1. INTOCABILIDAD: `git diff 03f9b9a 7c7bc1c -- runtime/turn_validate.py runtime/turn_schema.json`
+   = VACIO. Unico cambio de codigo: run_runtime_turn_obstacle_cases.py (32 lineas). El corazon
+   conductual que confirme en iter2 no se toco.
+2. GUARDIAN VERDE: check_falsification_contracts.py --inventory exit 0 Y
+   test_falsification_contracts.py exit 0 (AMBOS rojos en iter2). Los 8 gates verdes en clon limpio.
+3. LOS 5 NEGATIVOS ENGANCHAN DE VERDAD: main() ahora marca los 6 permanent-negatives (linea 91;
+   se quito el stale NEG-TURN-FRICTION-OBSTACLES). Los mutation/boundaries declarados mapean
+   VERBATIM a lineas de test REALMENTE EJECUTADAS. NO confie en los asserts del maker: reimplemente
+   friction_sensors desde cero y quite UNA rama por vez -> STATUS_ERR/assign_fix/CHECKS_ERR/
+   REVERT_ERR desaparecen al revertir por validate_turn (entrypoint REAL), ATTEMPT_ERR aparece al
+   reintroducir el counter-parse. Permanencia real, no text-theater.
+4. NO-REGRESION: MS1-MS5/ESC1-ESC4 identicos a iter2 (codigo no cambio).
+
+CLAVE reutilizable: el guardian (check_falsification_contracts.py) es TEXT-PRESENCE puro (verifica
+que mutation/boundaries aparezcan verbatim en el exercised_by y que markers<->contratos sean
+biyectivos); NO ejecuta la mutacion. La EJECUCION la garantiza OTRO gate (el runner corre main()
+con asserts vivos, exit 0). Un re-sync legitimo alinea las DECLARACIONES al codigo de test REAL;
+el fraude seria alinear el test a declaraciones decorativas. Aqui guardian+runner+mi-revert-
+independiente coinciden -> GO defendible. (Espejo de la leccion 0275/0284: la mutacion que
+distingue diente-real de sombra.)
+
+Residuales declarados (ninguno bloqueante): (R1) revert proxy evadable POR DISENO -- mi probe
+"Rolled back" (dos palabras) NO dispara el regex single-token `rollback`; senal estructurada
+diferida a TASK-0258. (R2) el positive boundary declarado del negativo REVIEW es una ASIGNACION
+(`review_errors = ...`), no un assert explicito; el positive real (runner linea 132) SI ejecuta
+pero no es boundary enforced por el guardian -> cobertura del guardian mas delgada en esa direccion.
+
+ANOMALIA a vigilar (DECISION-0018, senalada al Arquitecto): el pre-commit hook reporto PRUNE DUE
+(released_ratio 90.91 >= 90). La poda es operacion COORDINADA del Arquitecto (prune_state.py
+--apply), no mia (checker-only). El commit local continua; CI es la frontera dura. Que el
+Arquitecto corra la poda en su proximo checkpoint.
+
+Flip a done = del Arquitecto (yo checker-only). Con esto TASK-0259 (nucleo tanda 0103) queda GO;
+la cadena de remediacion 0259 cierra tras 3 iteraciones (iter1 NO-GO friccion inerte, iter2 NO-GO
+guardian rojo, iter3 GO).
