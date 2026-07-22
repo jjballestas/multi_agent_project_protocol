@@ -427,9 +427,45 @@
                 "runtime/state/snapshot.json"
             ],
             "started_at": "2026-07-22T13:20:00Z",
-            "status": "active",
+            "status": "released",
             "task_id": "TASK-0283",
             "updated_at": "2026-07-22T13:20:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3-delivery",
+            "expires_at": "2026-07-22T15:40:00Z",
+            "notes": "Publish TASK-0283 iteration 3 handoff and release all maker claims.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3-delivery",
+                "Area_comun/state/TASK_INDEX.json#TASK-0283",
+                "Area_comun/state/PROJECT_STATE.json#active_tasks/TASK-0283",
+                "Area_comun/tasks/TASK-0283-poder-falsador-de-la-suite.md",
+                "Area_comun/handoffs/HANDOFF-TASK-0283-iter3-codex-to-arquitecto.md",
+                "Area_comun/mailbox/open/MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter3.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:40:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:40:00Z"
+        },
+        {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-iter3-memory",
+            "expires_at": "2026-07-22T14:35:00Z",
+            "notes": "Persist TASK-0283 iteration 3 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-iter3-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T13:35:00Z",
+            "status": "released",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T13:35:00Z"
         },
         {
             "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",

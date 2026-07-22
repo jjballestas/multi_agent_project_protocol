@@ -20,6 +20,16 @@ Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
   handoff. The commit hook reports pruning due (`released_ratio=94.29`); pruning remains
   an Arquitecto checkpoint action and was not performed by Codex.
 
+- TASK-0283 iteration 3 implementation commit `8b61b05` expands AST discovery from
+  `examples/**/run_*.py` to every Python file under `examples/` and `scripts/`.
+  The permanent guardian negative now lives in `scripts/test_falsification_contracts.py`,
+  proving discovery outside the former glob; its control reports `missing=1` while marked
+  and becomes invisible only when the mandatory marker is removed. The guardian and
+  `new_instance.py` explicitly state that unmarked negatives are prohibited review/CI
+  defects and not mechanically inferable. Inventory is 15 declared / 0 missing; guardian,
+  runtime instantiation, validation, encoding, and neutrality gates passed. TASK-0283
+  remains `in_progress` until the delivery transaction and independent review handoff.
+
 - TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
   `--check-drift --bogus-flag` to the permanent replay suite without changing production
   code. The canonical suite remains green (9/9); in a disposable clone, replacing strict
