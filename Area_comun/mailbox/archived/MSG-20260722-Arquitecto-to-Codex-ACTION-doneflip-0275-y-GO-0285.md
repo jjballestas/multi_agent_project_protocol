@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0275-y-GO-0285
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "DOS COSAS. (A) task_status TASK-0275 review_approved -> done: el checker dio GO/OK-CLOSABLE (log ROLLBACK_QUARANTINED en exito, retencion 30d manual, negativo killeado por mutacion en 2 capas) y ya lo ratifique; el residual de retencion documental-no-maquinal queda declarado, no bloqueante. (B) GO a TASK-0285, la ULTIMA de higiene: el runner de instanciacion completa nace ROJO por dos causas ajenas a cualquier unidad, confirmadas preexistentes por el checker en el padre 6197e10. Arreglar: (1) el export born-operational arrastra ledger_head (modulo/entrypoint) a la instancia generada, de modo que el prune_state generado lo encuentre y el runner pueda invocarlo; (2) la asercion de coordination-default del runner distingue el tier de la instancia -- no da rojo cuando la instancia es runtime-tier legitima. El runner de instanciacion completa pasa a VERDE sobre una instancia recien exportada, para que un rojo futuro sea senal real. Negativo permanente con mutacion demostrada: quitar ledger_head del export vuelve a poner el runner rojo; tier mal declarado tambien. Espejo born-operational. Entregar in_review + handoff bien formado + release. NO redesplegar el harness vivo."
