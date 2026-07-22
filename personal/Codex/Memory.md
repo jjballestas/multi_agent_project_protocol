@@ -2,6 +2,54 @@
 
 Last updated: 2026-07-22 Europe/Madrid, during TASK-0259 implementation.
 
+## 2026-07-23 - TASK-0262 closure and TASK-0263 implementation
+
+- Commit `f97e0e1` records the Codex-signed TASK-0262 `review_approved -> done`
+  flip after independent Analista GO and Arquitecto ratification, then starts TASK-0263.
+- `runtime/improvement_offers.py` deterministically unifies runtime JSON/JSONL and
+  mailbox REPORTE obstacles. Root-cause identity is documented NFKC + case-fold +
+  trim + whitespace-collapse equality; candidates are high risk or the same key in
+  two distinct deliveries.
+- Offers contain concrete proposed rule/regression text and evidence citations. The
+  durable registry suppresses accepted proposals and suppresses rejected/parked ones
+  unless the evidence set changes and `--new-evidence` explicitly names the proposal.
+- The module has no auto-application route: acceptance points only to the normal human
+  acceptance -> DECISION -> governed task flow. The six-case runner covers both lanes,
+  all five acceptance cases, explicit-new-evidence behavior, and zero apply routes.
+- Implementation gates passed: new runner, py_compile, canonical validator, encoding,
+  domain neutrality, and diff check. TASK-0263 remains in progress until delivery.
+
+## 2026-07-23 - TASK-0262 remediation iteration 1
+
+- Commit `c7ffa91` makes the checker-requested mechanical correction only:
+  `agent_id` is now `agent` in the assignment template candidate annotation and
+  both concrete candidate entries, matching `routing_decision.explanation.candidates[].agent`.
+- The 17-case governed mailbox report runner, collaboration validator, encoding scan,
+  domain-neutrality scan, and diff check all exited 0. TASK-0262 remains `in_progress`
+  under `CLAIM-20260723-Codex-TASK-0262-remediation-1` pending governed delivery.
+- Delivery commit `5ff67e8` returns TASK-0262 to `in_review`, releases both maker
+  claims, and opens the self-contained Arquitecto handoff for independent Analista
+  re-review. The same five gates exited 0 after delivery; Codex did not self-review.
+
+## 2026-07-22 - TASK-0261 closure and TASK-0262 implementation
+
+- Commit `5a7db87` applies the Codex-signed TASK-0261 `review_approved -> done` flip
+  after independent Analista GO and Arquitecto ratification, then starts TASK-0262.
+- `Area_comun/protocol/MAILBOX_REPORT_TEMPLATES.md` adds canonical session-lane
+  assignment and delivery REPORTE templates. Both carry the exact four-field TASK-0258
+  obstacle shape and enum plus `friction_count`; the mandatory
+  `report_schema_version: "1.0"` anchor closes the R1 grandfathering escape by construction.
+- The assignment example renders only existing `routing_decision` evidence, including
+  required capability, eligible candidates, selected agent, load score, stable hash, policy,
+  and filtered candidates. Complete delivery examples cover populated and empty obstacles.
+- TASK-0262 is `in_progress` under `CLAIM-20260722-Codex-TASK-0262`. Validator, encoding,
+  neutrality, and diff gates passed before the implementation commit. Next action is governed
+  delivery to `in_review`, claim release, and a self-contained review handoff to Arquitecto.
+- Delivery commit `63c6ba3` moves TASK-0262 to `in_review`, releases both Codex claims,
+  and publishes the ASCII handoff to Arquitecto. All required gates exited 0 after the
+  delivery transaction. Independent judgment belongs to Analista; Codex did not review or
+  ratify the implementation.
+
 ## 2026-07-22 - TASK-0261 remediation iteration 1
 
 - Commit `f1d9c30` makes `parse_mailbox_obstacles` accept YAML list markers at any
