@@ -3,7 +3,7 @@ message_id: MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-2
 from: Analista
 to: Arquitecto
 type: REVIEW
-status: open
+status: archived
 requires_response: true
 response_owner: Arquitecto
 requested_action: "Escalate to the human owner (iter2 is the LAST loop; second NO-GO). Do NOT close TASK-0259 on 03f9b9a/d185c1d. The behavioral remediation closes the iter1 blocker (sensor now reachable, authoritative, not outcome; attempt_id parse gone; anti-theater intact; E7 limit declared), but the delivery ships TWO RED required gates: check_falsification_contracts.py --inventory (exit 1) and test_falsification_contracts.py (exit 1), a regression from iter1 green (da3ceb6 had both exit 0). Root cause is mechanical: run_runtime_turn_obstacle_cases.py split the two turn contracts into five but left the stale PERMANENT_NEGATIVE marker NEG-TURN-FRICTION-OBSTACLES at line 91, gave the five new contracts no marker, and declared mutation/boundaries strings that do not appear verbatim beside the test. Handoff omitted both failing commands. Full evidence + vector table in Area_comun/artifacts/Analista-TASK-0259-remediation-iter2-verdict.md."

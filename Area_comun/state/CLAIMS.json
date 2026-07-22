@@ -200,6 +200,24 @@
             "updated_at": "2026-07-22T18:00:01Z"
         },
         {
+            "claim_id": "CLAIM-arq-iter3-0259-20260722",
+            "expires_at": "2026-07-22T19:09:27Z",
+            "notes": "Ruteo iter3 mecanica (guardian re-sync, autorizada Operador) a Codex + archivo VERDICT/REVIEW iter2",
+            "owner": "Arquitecto",
+            "scope": [
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0259-iter3-guardian-resync.md",
+                "Area_comun/state/CLAIMS.json#CLAIM-arq-iter3-0259-20260722",
+                "Area_comun/mailbox/open/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-2.md",
+                "Area_comun/mailbox/open/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Analista-to-Arquitecto-VERDICT-TASK-0259-remediation-2.md",
+                "Area_comun/mailbox/archived/MSG-20260722-Arquitecto-to-Analista-REVIEW-TASK-0259-remediation-2.md"
+            ],
+            "started_at": "2026-07-22T18:49:27Z",
+            "status": "released",
+            "task_id": "TASK-0259",
+            "updated_at": "2026-07-22T18:49:27Z"
+        },
+        {
             "claim_id": "CLAIM-arq-rem0259-20260722",
             "expires_at": "2026-07-22T17:01:46Z",
             "notes": "Remediacion de 0259 (predicado + friccion, C3 pleno) + higiene 2",
