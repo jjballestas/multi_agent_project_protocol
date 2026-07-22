@@ -87,7 +87,7 @@
         {
             "id": "TASK-0279",
             "owner": "Codex",
-            "status": "ready",
+            "status": "blocked",
             "title": "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
         },
         {

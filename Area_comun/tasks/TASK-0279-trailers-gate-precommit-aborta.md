@@ -2,7 +2,7 @@
 task_id: TASK-0279
 title: "[GATE] Los trailers se validan DEMASIADO TARDE: chequeo en el pre-commit que ABORTA, en vez de un validador post-hoc que solo se descubre cuando ya bloquea al peer"
 type: infra
-status: ready
+status: blocked
 owner: Codex
 phase: P2
 priority: high
