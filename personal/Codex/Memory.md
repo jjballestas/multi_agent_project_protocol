@@ -1,13 +1,21 @@
 ﻿# Codex Memory
 
-Last updated: 2026-07-22 Europe/Madrid, during TASK-0274 flag remediation.
+Last updated: 2026-07-22 Europe/Madrid, during TASK-0283 implementation.
+
+- TASK-0283 implementation commit `62a4480` adds machine-readable falsification
+  contracts beside 14 permanent negatives, a repository inventory/checker, and a
+  negative control proving that removing a declared assertion boundary makes the checker
+  fail. The two live runners pass, inventory reports 14 declared / 0 missing, and the
+  checker plus dependency are shipped by `new_instance.py`; TASK-0274 was also flipped
+  from `review_approved` to `done` by signed Codex events 5725 after independent GO.
 
 - TASK-0274 remediation commit `77afe05` adds an isolated clean-ledger invocation of
   `--check-drift --bogus-flag` to the permanent replay suite without changing production
   code. The canonical suite remains green (9/9); in a disposable clone, replacing strict
   `parse_args` with `parse_known_args` makes `case_cli_is_a_real_aborting_gate` fail and
-  the suite exit 1. TASK-0274 remains `in_progress` until the remediation handoff returns
-  it to independent review and releases the maker claims.
+  the suite exit 1. Delivery commit `0831701` returns TASK-0274 to `in_review`, releases
+  all Codex claims through signed seq 5714, and opens the self-contained handoff for
+  independent Analista re-judgement. Codex did not review or ratify the remediation.
 
 - TASK-0274 implementation commit `2aa5552` gives
   `runtime/protocol_replay.py --check-drift` a real CLI: clean state exits 0,

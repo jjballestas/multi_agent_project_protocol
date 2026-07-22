@@ -303,6 +303,22 @@
             "updated_at": "2026-07-22T12:00:00Z"
         },
         {
+            "claim_id": "CLAIM-20260722-Codex-TASK-0283-memory",
+            "expires_at": "2026-07-22T14:20:00Z",
+            "notes": "Persist TASK-0283 implementation commit context.",
+            "owner": "Codex",
+            "scope": [
+                "Area_comun/state/CLAIMS.json#CLAIM-20260722-Codex-TASK-0283-memory",
+                "personal/Codex/Memory.md",
+                "runtime/state/events.jsonl",
+                "runtime/state/snapshot.json"
+            ],
+            "started_at": "2026-07-22T12:20:00Z",
+            "status": "active",
+            "task_id": "TASK-0283",
+            "updated_at": "2026-07-22T12:20:00Z"
+        },
+        {
             "claim_id": "CLAIM-arq-cierre0274-20260722",
             "expires_at": "2026-07-22T12:05:24Z",
             "notes": "Ratificacion 0274 + done-flip y GO 0283 a Codex + higiene 2",
