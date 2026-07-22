@@ -1,5 +1,5 @@
 {
-  "canonical_hash": "7d9431eaaee27b1d851e527a8249efba4583a1516f31a43930e43a9b4d735dc2",
+  "canonical_hash": "51d289441083a3118fa25145167fc6c9167459f7f7505ce02fbbbd1e21380556",
   "state": {
     "aggregate_versions": {
       "BACKLOG-RECONCILE": 1,
@@ -879,6 +879,7 @@
       "CLAIM-arq-reject0258-20260720": 1,
       "CLAIM-arq-reject0267-iter1-20260720": 1,
       "CLAIM-arq-reject0272-20260720": 1,
+      "CLAIM-arq-rejit3-0283-20260722": 1,
       "CLAIM-arq-rem0274-20260722": 1,
       "CLAIM-arq-rem0283-20260722": 1,
       "CLAIM-arq-reporte0103-20260720": 1,
@@ -2031,6 +2032,7 @@
       "MSG-20260722-Arquitecto-to-Codex-ACTION-GO-TASK-0279-trailers-precommit": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0274-negativo-flag": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-denominador": 1,
+      "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter3-glob-convencion": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0284-banco-real": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-cierre-0281-y-GO-0282": 1,
       "MSG-20260722-Arquitecto-to-Codex-ACTION-doneflip-0274-y-GO-0283": 1,
@@ -2044,6 +2046,7 @@
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0282": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-denominator": 1,
+      "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0283-iter3": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284": 1,
       "MSG-20260722-Codex-to-Arquitecto-HANDOFF-TASK-0284-banco": 1,
       "MSG-20260722-Codex-to-Arquitecto-QUESTION-TASK-0279-hook-phase": 1,
@@ -2339,7 +2342,7 @@
       "TASK-0280": 46,
       "TASK-0281": 24,
       "TASK-0282": 12,
-      "TASK-0283": 30,
+      "TASK-0283": 33,
       "TASK-0284": 26,
       "TASK-0285": 1,
       "TASK-1102": 14,
@@ -2364,7 +2367,7 @@
       "protocol-prune": 20,
       "protocol-state": 1
     },
-    "events_applied": 5097,
+    "events_applied": 5103,
     "fencing_tokens": {},
     "idempotency_keys": {
       "CLAIM-20260705-Codex-TASK-0252-remediation-1-delivery-release-2026-07-05T00:19:56.605Z": 3992,
@@ -2805,6 +2808,10 @@
       "arq:rejd0283:arch1:119b7f5f-c9f8-4295-8c91-63abed3bb097": 5754,
       "arq:rejd0283:arch2:119b7f5f-c9f8-4295-8c91-63abed3bb097": 5755,
       "arq:rejd0283:release:119b7f5f-c9f8-4295-8c91-63abed3bb097": 5756,
+      "arq:rejit3:acquire:ca22784b-a312-4298-a502-0f8166b58f5b": 5771,
+      "arq:rejit3:arch1:ca22784b-a312-4298-a502-0f8166b58f5b": 5772,
+      "arq:rejit3:arch2:ca22784b-a312-4298-a502-0f8166b58f5b": 5773,
+      "arq:rejit3:release:ca22784b-a312-4298-a502-0f8166b58f5b": 5774,
       "arq:rem0274:acquire:af7e32cf-3bba-4ed2-8a2e-1a2c17e15e16": 5701,
       "arq:rem0274:arch1:af7e32cf-3bba-4ed2-8a2e-1a2c17e15e16": 5703,
       "arq:rem0274:arch2:af7e32cf-3bba-4ed2-8a2e-1a2c17e15e16": 5704,
@@ -6781,6 +6788,7 @@
       "intent:Codex:claim:8920e79553426dbdd606ae0c715acffb5238ca81e2f91cbb3d8d63334b536c4c": 2358,
       "intent:Codex:claim:892441bb69aa6a7642cb745f371bc8a92b019d4542a7c84b141dd0a76a862e4c": 4126,
       "intent:Codex:claim:895a336642d3095ff901d877b222aa0b23d862f21ec7ed745beb285b79833d78": 3952,
+      "intent:Codex:claim:897e66251f1e23a21f036689833ade0de6216634a01601360b060554f44d1681": 5769,
       "intent:Codex:claim:8a29dedaf941589daeeacdd1efd0799af74e70653d685534cf3cc6fae4b08672": 4428,
       "intent:Codex:claim:8a4aad92e43cafbded3444f7c25964c8e18307d2f6a8eb5be5143c6d55dbfdbf": 3855,
       "intent:Codex:claim:8a71ac7fd31b1c71ec15e0e321c4f7d901577bafc606cb176f6960862a9ed082": 3951,
@@ -7040,6 +7048,7 @@
       "intent:Codex:claim:ee92966b8065c18b873d132df0111f7e38728f3ee5785be5aecc10d3228274b7": 3794,
       "intent:Codex:claim:eefe68f2c2f83f5774b5f25392378a8aa6dedaa4a3b5bdc23e480a29d6f71333": 3911,
       "intent:Codex:claim:ef2eadfac86217bd83dae64caded7bf891902795ab109cc9557d28a93d0bfa8b": 3153,
+      "intent:Codex:claim:ef419f894d78a2ee2f4617f77c719a92a9333909b082111c6d47c47e0cd6acd6": 5770,
       "intent:Codex:claim:ef45e571bd1989488cad031ee5445553cd28e17d19f02ec568bd9a7dbccf2e99": 2812,
       "intent:Codex:claim:ef5d895aacc9d22109ddd0a41dfa99918ebdecce0c2f04d9a0a5d07c3983c4ae": 2377,
       "intent:Codex:claim:efa1e5b07541d87e678bb80efd70f663b8552a93f4438bf3a7dbd8bb8a149787": 2875,
@@ -7465,5 +7474,5 @@
     "leases": {},
     "rejections": []
   },
-  "up_to_seq": 5768
+  "up_to_seq": 5774
 }

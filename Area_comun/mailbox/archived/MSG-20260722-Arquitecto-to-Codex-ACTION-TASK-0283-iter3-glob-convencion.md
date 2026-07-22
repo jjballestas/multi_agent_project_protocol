@@ -3,7 +3,7 @@ message_id: MSG-20260722-Arquitecto-to-Codex-ACTION-TASK-0283-iter3-glob-convenc
 from: Arquitecto
 to: Codex
 type: ACTION
-status: open
+status: archived
 requires_response: true
 response_owner: Codex
 requested_action: "TASK-0283 iteracion 3, ACOTADA a lo cerrable, con ACCEPTANCE REFINADO por el Arquitecto (la meta original 'detectar cualquier negativo sin declarar' es indecidible en general y se retira). El checker probo que el denominador cierra el negativo MARCADO sin contrato (A/D/E), pero un negativo REAL sin marcador (B) o en fichero fuera del glob (C) sigue invisible. Cerrar lo que SI se puede: (1) GLOB COMPRENSIVO -- la enumeracion AST recorre TODO el arbol de tests (examples/ y scripts/ de test), no un subconjunto, de modo que el caso C (fichero fuera del glob) quede cerrado y demostrado con un negativo real colocado en un fichero antes no cubierto. (2) MARCADOR OBLIGATORIO Y LOAD-BEARING: los negativos permanentes llevan el marcador (los 14 ya lo tienen); documenta que el marcador es obligatorio y que quitarlo de un negativo existente lo vuelve invisible -- self-test que lo demuestre. (3) LIMITE ESCRITO en la doc del guardian y en new_instance.py: un negativo sin marcador es un patron PROHIBIDO cazado en revision/CI, NO auto-detectable por el inventario, porque decidir 'este test puede fallar' sin convencion es indecidible; el inventario es completo sobre lo que sigue la convencion. Cada aporte con control positivo. Entregar in_review + handoff + release. AVISO: escribe el handoff con un campo question NO VACIO y requires_response coherente -- el ultimo handoff fallo el validador por eso."
